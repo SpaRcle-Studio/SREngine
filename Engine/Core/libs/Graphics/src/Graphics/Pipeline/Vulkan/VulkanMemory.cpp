@@ -114,14 +114,12 @@ bool Framework::Graphics::VulkanTools::MemoryManager::ReAllocateFBO(
             return false;
         }
 
-        m_textures[oldColorAttachments[i]]->Destroy();
-        m_textures[oldColorAttachments[i]]->Free();
+        delete m_textures[oldColorAttachments[i]];
         m_textures[oldColorAttachments[i]] = textures[i];
     }
 
     if (depthBuffer.has_value()) {
-        m_textures[depthBuffer.value()]->Destroy();
-        m_textures[depthBuffer.value()]->Free();
+        delete m_textures[depthBuffer.value()];
         m_textures[depthBuffer.value()] = m_FBOs[FBO]->AllocateDepthTextureReference();
     }
 
@@ -227,13 +225,20 @@ int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateDescriptorSet(u
 }
 
 int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateVBO(uint32_t buffSize, void *data) {
+    VkBufferUsageFlags bufferUsageFlagBits = VK_BUFFER_USAGE_VERTEX_BUFFER_BIT;
+
+    if (m_kernel->GetDevice()->IsRayTracingSupported()) {
+        bufferUsageFlagBits |= VK_BUFFER_USAGE_ACCELERATION_STRUCTURE_BUILD_INPUT_READ_ONLY_BIT_KHR;
+    }
+
     for (uint32_t i = 0; i < m_countVBO.first; ++i) {
         if (m_VBOs[i] == nullptr) {
             m_VBOs[i] = EvoVulkan::Types::VmaBuffer::Create(
                     m_kernel->GetAllocator(),
-                    VK_BUFFER_USAGE_VERTEX_BUFFER_BIT,
+                    bufferUsageFlagBits,
                     VMA_MEMORY_USAGE_CPU_TO_GPU,
-                    buffSize, data);
+                    buffSize, data
+            );
 
             ++m_countVBO.second;
 
@@ -247,13 +252,20 @@ int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateVBO(uint32_t bu
 }
 
 int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateIBO(uint32_t buffSize, void *data)  {
+    VkBufferUsageFlags bufferUsageFlagBits = VK_BUFFER_USAGE_INDEX_BUFFER_BIT;
+
+    if (m_kernel->GetDevice()->IsRayTracingSupported()) {
+        bufferUsageFlagBits |= VK_BUFFER_USAGE_ACCELERATION_STRUCTURE_BUILD_INPUT_READ_ONLY_BIT_KHR;
+    }
+
     for (uint32_t i = 0; i < m_countIBO.first; ++i) {
         if (m_IBOs[i] == nullptr) {
             m_IBOs[i] = EvoVulkan::Types::VmaBuffer::Create(
                     m_kernel->GetAllocator(),
-                    VK_BUFFER_USAGE_INDEX_BUFFER_BIT,
+                    bufferUsageFlagBits,
                     VMA_MEMORY_USAGE_CPU_TO_GPU,
-                    buffSize, data);
+                    buffSize, data
+            );
 
             ++m_countIBO.second;
 

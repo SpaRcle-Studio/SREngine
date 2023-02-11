@@ -27,6 +27,14 @@ public:
     virtual void Update(float_t dt) { }
     virtual void Close() { }
 
+    virtual void OnCollisionEnter(const CollisionData& data) { }
+    virtual void OnCollisionStay(const CollisionData& data) { }
+    virtual void OnCollisionExit(const CollisionData& data) { }
+
+    virtual void OnTriggerEnter(const CollisionData& data) { }
+    virtual void OnTriggerStay(const CollisionData& data) { }
+    virtual void OnTriggerExit(const CollisionData& data) { }
+
     bool HasProperty(const std::string& id) {
         return m_properties.count(id) == 1;
     }
@@ -52,37 +60,43 @@ public:
 
 protected:
     template<typename T> bool AddProperty(const std::string& id, T* ref) {
-        if (m_properties.count(id) == 1) {
-            std::cerr << "Behaviour::AddProperty() : property already registered!\n\tId: " << id << '\n';
-            return false;
-        }
+        g_codegen_properties_registations.emplace_back([this, ref, id]() {
+            if (m_properties.count(id) == 1) {
+            #ifdef EVK_DEBUG
+                std::cerr << "Behaviour::AddProperty() : property already registered!\n\tId: " << id << '\n';
+            #endif
+                return;
+            }
 
-        m_properties.insert(std::make_pair(
-            id,
-            std::make_pair(
-                [pProperty = ref]() -> Any
-                {
-                    return Any(*pProperty);
-                }, /// getter
-                [id, pProperty = ref](const Any& val)
-                {
-                    try
+            m_properties.insert(std::make_pair(
+                id,
+                std::make_pair(
+                    [pProperty = ref]() -> Any
                     {
-                        *pProperty = std::any_cast<T>(val);
-                    }
-                    catch(const std::bad_any_cast& e)
+                        return Any(*pProperty);
+                    }, /// getter
+                    [id, pProperty = ref](const Any& val)
                     {
-                        std::cerr << "Behaviour::AddProperty() : failed to cast std::any!"
-                                     "\n\tException: " << e.what() <<
-                                     "\n\tType: " << typeid(T).name() <<
-                                     "\n\tAny: " << val.type().name() <<
-                                     "\n\tId: " << id << "\n";
-                    }
-                } /// setter
-            )
-        ));
+                        try
+                        {
+                            *pProperty = std::any_cast<T>(val);
+                        }
+                        catch(const std::bad_any_cast& e)
+                        {
+                        #ifdef EVK_DEBUG
+                            std::cerr << "Behaviour::AddProperty() : failed to cast std::any!"
+                                         "\n\tException: " << e.what() <<
+                                         "\n\tType: " << typeid(T).name() <<
+                                         "\n\tAny: " << val.type().name() <<
+                                         "\n\tId: " << id << "\n";
+                        #endif
+                        }
+                    } /// setter
+                )
+            ));
 
-        m_propertyIds.emplace_back(id);
+            m_propertyIds.emplace_back(id);
+        });
 
         return true;
     }
@@ -91,6 +105,7 @@ protected:
     GameObjectPtr gameObject;
     ScenePtr scene;
     Transform* transform = nullptr;
+    const float fixedDeltaTime = 1.f/60.f;
 
 private:
     std::unordered_map<std::string, Property> m_properties;

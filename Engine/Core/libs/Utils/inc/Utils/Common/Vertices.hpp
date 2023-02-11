@@ -38,10 +38,10 @@ namespace SR_UTILS_NS {
         Vec3 normal;
         Vec3 tangent;
         Vec3 bitangent;
-        uint8_t weightsNum;
+        uint8_t weightsNum = 0;
         struct {
-            uint32_t boneId;
-            float weight;
+            uint32_t boneId = 0;
+            float weight = 0.f;
         } weights[SR_MAX_BONES_ON_VERTEX];
     };
 

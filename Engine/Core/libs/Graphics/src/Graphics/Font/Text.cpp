@@ -3,15 +3,17 @@
 //
 
 #include <Utils/ECS/Transform.h>
+#include <Utils/ECS/ComponentManager.h>
 
 #include <Graphics/Font/Text.h>
 #include <Graphics/Font/TextBuilder.h>
 
 namespace SR_GTYPES_NS {
+    SR_REGISTER_COMPONENT(Text);
+
     Text::Text()
         : Super(MeshType::Static)
     {
-        Component::InitComponent<Text>();
         SetMaterial(Material::Load("Engine/Materials/text.mat"));
         SetFont(Font::Load("Engine/Fonts/TsunagiGothic.ttf"));
         //SetFont(Font::Load("Engine/Fonts/seguiemj.ttf"));

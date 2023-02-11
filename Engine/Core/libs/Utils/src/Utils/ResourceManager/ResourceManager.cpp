@@ -133,22 +133,29 @@ namespace SR_UTILS_NS {
 
         auto resourceIt = m_destroyed.begin();
         for (; resourceIt != m_destroyed.end(); ) {
-            auto resource = *resourceIt;
+            auto pResource = *resourceIt;
 
-            const bool usageNow = resource->GetCountUses() > 0 || !resource->IsDestroyed();
+            /// ресурс был оживлен
+            if (!pResource->IsDestroyed()) {
+                m_destroyed.erase(resourceIt);
+                resourceIt = m_destroyed.begin();
+                continue;
+            }
+
+            const bool usageNow = pResource->GetCountUses() > 0 || !pResource->IsDestroyed();
 
             if (usageNow) {
-                resource->m_lifetime = ResourceLifeTime;
+                pResource->m_lifetime = ResourceLifeTime;
             }
-            else if (IsLastResource(resource)) {
-                resource->m_lifetime -= double_t(m_deltaTime) / (double_t)CLOCKS_PER_SEC;
+            else if (IsLastResource(pResource)) {
+                pResource->m_lifetime -= double_t(m_deltaTime) / (double_t)CLOCKS_PER_SEC;
             }
             else {
                 /// нам не нужно ждать завершения времени жизни ресурса, у которого еще есть копии
-                resource->m_lifetime = 0.f;
+                pResource->m_lifetime = 0.f;
             }
 
-            const bool resourceAlive = !resource->IsForce() && resource->IsAlive() && !m_force;
+            const bool resourceAlive = !pResource->IsForce() && pResource->IsAlive() && !m_force;
 
             if (usageNow || resourceAlive) {
                 ++resourceIt;
@@ -156,10 +163,10 @@ namespace SR_UTILS_NS {
             }
 
             if (Debug::Instance().GetLevel() >= Debug::Level::Medium) {
-                SR_LOG("ResourceManager::GC() : free \"" + std::string(resource->GetResourceId()) + "\" resource");
+                SR_LOG("ResourceManager::GC() : free \"" + std::string(pResource->GetResourceId()) + "\" resource");
             }
 
-            Remove(resource);
+            Remove(pResource);
 
             {
                 /// так как некоторые ресурсы рекурсивно уничтожают дочерныие ресурсы при вызове деструктора, например материал,
@@ -167,7 +174,7 @@ namespace SR_UTILS_NS {
                 /// инвалидируется, и здесь может потенциально случиться краш, поэтому этот порядок нужно строго союлюдать
 
                 m_destroyed.erase(resourceIt);
-                delete resource;
+                delete pResource;
                 resourceIt = m_destroyed.begin();
             }
         }
@@ -245,6 +252,8 @@ namespace SR_UTILS_NS {
         auto&& [name, resourcesGroup] = *m_resources.find(hashTypeName);
 
         if (auto&& pResource = resourcesGroup.Find(SR_HASH_STR(id))) {
+            /// раз ресурс ищем, значит он все еще может быть нужен.
+            pResource->UpdateResourceLifeTime();
             return pResource;
         }
 
@@ -352,6 +361,12 @@ namespace SR_UTILS_NS {
     const std::string& ResourceManager::GetResourceId(ResourceManager::Hash hashId) const {
         SR_SCOPED_LOCK
 
+        /// пустая строка
+        if (hashId == 0) {
+            static SR_UTILS_NS::Path emptyPath;
+            return emptyPath;
+        }
+
         auto&& pIt = m_hashIds.find(hashId);
 
         if (pIt == m_hashIds.end()) {
@@ -377,8 +392,14 @@ namespace SR_UTILS_NS {
         return hash;
     }
 
-    const Path &ResourceManager::GetResourcePath(ResourceManager::Hash hashPath) const {
+    const Path& ResourceManager::GetResourcePath(ResourceManager::Hash hashPath) const {
         SR_SCOPED_LOCK
+
+        /// пустая строка
+        if (hashPath == 0) {
+            static SR_UTILS_NS::Path emptyPath;
+            return emptyPath;
+        }
 
         auto&& pIt = m_hashPaths.find(hashPath);
 

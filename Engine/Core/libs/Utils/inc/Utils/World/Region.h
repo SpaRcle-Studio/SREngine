@@ -64,7 +64,7 @@ namespace SR_WORLD_NS {
         SR_NODISCARD bool IsChunkLoaded(const SR_MATH_NS::IVector3& chunk) const;
         SR_NODISCARD ScenePtr GetScene() const;
 
-        SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save() const;
+        SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save(SR_HTYPES_NS::DataStorage* pContext) const;
 
     private:
         void SetDebugLoaded(BoolExt enabled);

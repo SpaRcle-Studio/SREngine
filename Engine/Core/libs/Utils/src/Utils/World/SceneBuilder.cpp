@@ -3,6 +3,10 @@
 //
 
 #include <Utils/World/SceneBuilder.h>
+#include <Utils/World/Scene.h>
+#include <Utils/ECS/GameObject.h>
+#include <Utils/ECS/Component.h>
+#include <Utils/Types/Function.h>
 
 namespace SR_WORLD_NS {
     SceneBuilder::SceneBuilder(Scene *pScene)
@@ -11,34 +15,30 @@ namespace SR_WORLD_NS {
     { }
 
     void SceneBuilder::Build(bool isPaused) {
-        auto&& root = m_scene->GetRootGameObjects();
-        const uint64_t rootHash = Initialize(isPaused);
+        Initialize(isPaused);
 
-        /** WARNING: если произойдет коллизия хешей при уничтожении коренного объекта, то будет краш!
-        TODO: возможно на будущее стоит вычислять более точный хеш, с учетом порядка компонентов во всем дереве.
-         С другой стороны, дерево так и так перестроится правильным образом при изменении порядка компонентов.
-        */
-        if (rootHash == m_rootHash) {
-            for (auto&& gameObject : root) {
-                if (!gameObject->IsDirty()) {
-                    continue;
-                }
+        if (!m_dirty) {
+            return;
+        }
 
-                SetDirty();
-                break;
+        const size_t capacity = m_updatableComponents.capacity();
+        m_updatableComponents.clear();
+        m_updatableComponents.reserve(capacity);
+
+        for (auto&& pComponent : m_scene->GetComponents()) {
+            if (isPaused && !pComponent->ExecuteInEditMode()) {
+                continue;
+            }
+
+            if (pComponent->IsCanUpdate()) {
+                m_updatableComponents.emplace_back(pComponent);
             }
         }
-        else {
-            SetDirty();
-            m_rootHash = rootHash;
-        }
 
-        if (m_dirty) {
-            const size_t capacity = m_updatableComponents.capacity();
-            m_updatableComponents.clear();
-            m_updatableComponents.reserve(capacity);
+        SR_HTYPES_NS::Function<void(const SR_UTILS_NS::GameObject::Ptr& ptr)> function;
 
-            for (auto&& pComponent : m_scene->GetComponents()) {
+        function = [&](const SR_UTILS_NS::GameObject::Ptr& ptr) {
+            for (auto&& pComponent : ptr->GetComponents()) {
                 if (isPaused && !pComponent->ExecuteInEditMode()) {
                     continue;
                 }
@@ -48,31 +48,21 @@ namespace SR_WORLD_NS {
                 }
             }
 
-            SR_HTYPES_NS::Function<void(const SR_UTILS_NS::GameObject::Ptr& ptr)> function;
-
-            function = [&](const SR_UTILS_NS::GameObject::Ptr& ptr) {
-                for (auto&& pComponent : ptr->GetComponents()) {
-                    if (isPaused && !pComponent->ExecuteInEditMode()) {
-                        continue;
-                    }
-
-                    if (pComponent->IsCanUpdate()) {
-                        m_updatableComponents.emplace_back(pComponent);
-                    }
-                }
-
-                for (auto&& children : ptr->GetChildrenRef()) {
-                    function(children);
-                }
-            };
-
-            for (auto&& gameObject : root) {
-                function(gameObject);
-                gameObject->SetDirty(false);
+            for (auto&& children : ptr->GetChildrenRef()) {
+                function(children);
             }
+        };
 
-            m_dirty = false;
+        auto&& root = m_scene->GetRootGameObjects();
+
+        for (auto&& gameObject : root) {
+            function(gameObject);
+            gameObject->SetDirty(false);
         }
+
+        m_scene->SetDirty(false);
+
+        m_dirty = false;
     }
 
     void SceneBuilder::Update(float_t dt) {
@@ -91,18 +81,18 @@ namespace SR_WORLD_NS {
         m_dirty = true;
     }
 
-    uint64_t SceneBuilder::Initialize(bool isPaused) {
+    void SceneBuilder::Initialize(bool isPaused) {
         auto&& root = m_scene->GetRootGameObjects();
+
+        m_dirty |= m_scene->IsDirty();
 
         m_scene->PostLoad();
         m_scene->Awake(isPaused);
         m_scene->CheckActivity();
         m_scene->Start();
 
-        uint64_t rootHash = 0;
-
         for (auto&& gameObject : root) {
-            rootHash = SR_UTILS_NS::HashCombine(gameObject.GetRawPtr(), rootHash);
+            m_dirty |= gameObject->IsDirty();
             gameObject->PostLoad();
         }
 
@@ -117,7 +107,5 @@ namespace SR_WORLD_NS {
         for (auto&& gameObject : root) {
             gameObject->Start();
         }
-
-        return rootHash;
     }
 }

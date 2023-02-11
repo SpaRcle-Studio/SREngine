@@ -34,18 +34,21 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD int32_t GetIBO();
         SR_NODISCARD int32_t GetVirtualUBO();
 
+        SR_NODISCARD bool IsAllowedToRevive() const override { return true; }
+
         void FreeVideoMemory() override;
         void Draw();
 
+        void SetShader(Shader *shader);
+
     protected:
-        void OnResourceUpdated(IResource* pResource, int32_t depth) override;
+        void OnResourceUpdated(SR_UTILS_NS::ResourceContainer* pContainer, int32_t depth) override;
         uint64_t GetFileHash() const override { return 0; }
 
     private:
         bool Calculate();
         void DrawOpenGL();
         void DrawVulkan();
-        void SetShader(Shader *shader);
 
     private:
         Shader*                 m_shader         = nullptr;

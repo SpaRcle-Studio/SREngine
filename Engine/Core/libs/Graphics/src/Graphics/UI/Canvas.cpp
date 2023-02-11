@@ -4,17 +4,18 @@
 
 #include <Utils/ECS/Transform3D.h>
 #include <Utils/ECS/Transform2D.h>
+#include <Utils/ECS/ComponentManager.h>
 
 #include <Graphics/UI/Canvas.h>
 #include <Graphics/Render/RenderContext.h>
 #include <Graphics/Render/RenderScene.h>
 
 namespace SR_GRAPH_NS::UI {
+    SR_REGISTER_COMPONENT(Canvas);
+
     Canvas::Canvas()
         : SR_UTILS_NS::Component()
-    {
-        Component::InitComponent<Canvas>();
-    }
+    { }
 
     void Canvas::OnAttached() {
         m_renderScene = GetScene()->Do<RenderScenePtr>([](SR_WORLD_NS::Scene* pScene) {

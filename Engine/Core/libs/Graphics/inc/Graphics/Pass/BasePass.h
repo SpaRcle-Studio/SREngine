@@ -8,6 +8,7 @@
 #include <Utils/Common/NonCopyable.h>
 #include <Utils/Math/Vector2.h>
 #include <Utils/Types/Function.h>
+#include <Utils/Types/Time.h>
 #include <Utils/Xml.h>
 
 #include <Graphics/Memory/UBOManager.h>
@@ -27,7 +28,8 @@ namespace SR_GRAPH_NS {
     typedef std::map<std::string, SR_HTYPES_NS::Function<BasePass*(RenderTechnique*, const SR_XML_NS::Node&, BasePass*)>> RenderPassMap;
     RenderPassMap& GetRenderPassMap();
 
-    class BasePass : public SR_UTILS_NS::NonCopyable {
+    class BasePass : public SR_UTILS_NS::ResourceContainer {
+        using Super = SR_UTILS_NS::ResourceContainer;
         using CameraPtr = Types::Camera*;
         using Context = RenderContext*;
         using PipelinePtr = Environment*;
@@ -63,12 +65,15 @@ namespace SR_GRAPH_NS {
         virtual void SR_FASTCALL OnMeshAdded(SR_GTYPES_NS::Mesh* pMesh, bool transparent) { }
         virtual void SR_FASTCALL OnMeshRemoved(SR_GTYPES_NS::Mesh* pMesh, bool transparent) { }
 
+        void SetName(const std::string& name);
+
         SR_NODISCARD RenderScenePtr GetRenderScene() const;
         SR_NODISCARD Context GetContext() const { return m_context; }
         SR_NODISCARD PipelinePtr GetPipeline() const { return m_pipeline; }
         SR_NODISCARD RenderTechnique* GetTechnique() const { return m_technique; }
         SR_NODISCARD bool IsInit() const { return m_isInit; }
         SR_NODISCARD std::string_view GetName() const;
+        SR_NODISCARD uint64_t GetHashName() const noexcept { return m_hashName; }
         SR_NODISCARD BasePass* GetParentPass() const { return m_parentPass; }
 
     protected:
@@ -76,10 +81,12 @@ namespace SR_GRAPH_NS {
         Context m_context;
         PipelinePtr m_pipeline;
         Memory::UBOManager& m_uboManager;
-        std::string m_name;
         BasePass* m_parentPass;
 
     private:
+        std::string m_name;
+        uint64_t m_hashName = 0;
+
         RenderTechnique* m_technique;
         bool m_isInit;
 

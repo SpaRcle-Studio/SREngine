@@ -219,12 +219,12 @@ namespace SR_GRAPH_NS::Types {
         return m_material ? m_material->GetShader() : nullptr;
     }
 
-    void Mesh::OnResourceUpdated(IResource *pResource, int32_t depth) {
-        if (dynamic_cast<Material*>(pResource) == m_material && m_material) {
+    void Mesh::OnResourceUpdated(SR_UTILS_NS::ResourceContainer* pContainer, int32_t depth) {
+        if (dynamic_cast<Material*>(pContainer) == m_material && m_material) {
             m_dirtyMaterial = true;
         }
 
-        IResource::OnResourceUpdated(pResource, depth);
+        IResource::OnResourceUpdated(pContainer, depth);
     }
 
     void Mesh::UseMaterial() {

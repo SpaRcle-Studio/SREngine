@@ -8,6 +8,7 @@
 #include <Utils/Common/StringUtils.h>
 #include <Utils/Common/Hashes.h>
 #include <Utils/Common/Enumerations.h>
+#include <Utils/Xml.h>
 
 namespace SR_GTYPES_NS {
     class Texture;
@@ -32,11 +33,18 @@ namespace SR_GRAPH_NS {
 
     SR_ENUM_NS_CLASS(ShaderVarType,
           Unknown,
+          Bool,
           Int,
           Float,
           Vec2,
           Vec3,
           Vec4,
+          IVec2,
+          IVec3,
+          IVec4,
+          BVec2,
+          BVec3,
+          BVec4,
           Mat2,
           Mat3,
           Mat4,
@@ -59,7 +67,7 @@ namespace SR_GRAPH_NS {
 
     typedef std::vector<MaterialProperty> MaterialProperties;
     typedef std::list<std::pair<std::string, ShaderVarType>> ShaderProperties;
-    typedef std::map<uint64_t, std::pair<ShaderVarType, uint32_t>> ShaderSamplers;
+    typedef std::map<uint64_t, uint32_t> ShaderSamplers;
 
     SR_NODISCARD MaterialProperties LoadMaterialProperties(const SR_XML_NS::Node& propertiesNode);
     std::list<SR_GTYPES_NS::Texture*> GetTexturesFromMatProperties(const MaterialProperties& properties);
@@ -179,8 +187,7 @@ namespace std {
 
             for (auto&& [key, val] : value) {
                 res = SR_UTILS_NS::HashCombine(key, res);
-                res = SR_UTILS_NS::HashCombine(val.first, res);
-                res = SR_UTILS_NS::HashCombine(val.second, res);
+                res = SR_UTILS_NS::HashCombine(val, res);
             }
 
             return res;

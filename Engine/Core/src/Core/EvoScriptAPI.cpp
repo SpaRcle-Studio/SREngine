@@ -315,6 +315,8 @@ namespace Framework {
         ESRegisterMethod(EvoScript::Public, generator, Transform, GlobalRotate, void, ESArg1(const FVector3& eulers), ESArg1(eulers))
         ESRegisterMethod(EvoScript::Public, generator, Transform, Translate, void, ESArg1(const FVector3& translation), ESArg1(translation))
         ESRegisterMethod(EvoScript::Public, generator, Transform, SetTranslation, void, ESArg1(const FVector3& translation), ESArg1(translation))
+
+        ESRegisterMethodArg0(EvoScript::Public, generator, Transform, GetTranslation, FVector3)
     }
 
     void API::RegisterInput(EvoScript::AddressTableGen *generator) {

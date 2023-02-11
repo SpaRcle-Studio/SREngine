@@ -22,6 +22,6 @@
 #define SR_RAD(x) x * SR_PI / 180.0
 #define SR_DEG(x) x / SR_PI * 180.0
 
-typedef double Unit;
+typedef float Unit;
 
 #endif //EVOSCRIPTLIB_COREMATH_H

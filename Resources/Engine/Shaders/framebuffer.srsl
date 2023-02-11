@@ -1,18 +1,21 @@
 ShaderType PostProcessing;
 
 PolygonMode Fill;
-CullMode Front;
+CullMode Back;
 DepthCompare LessOrEqual;
 PrimitiveTopology TriangleList;
 BlendEnabled false;
 DepthWrite false;
 DepthTest false;
 
+[[uniform], [public]] sampler2D image;
+[[shared]] vec2 uv;
+
 void fragment() {
-    COLOR_INDEX_0 = texture(COLOR_ATTACHMENT_0, UV);
+    COLOR_INDEX_0 = texture(image, uv);
 }
 
 void vertex() {
-    UV = vec2((VERTEX_INDEX << 1) & 2, VERTEX_INDEX & 2);
-    VERTEX = vec3(UV * 2.0 - 1.0, 0.0);
+    uv = vec2((VERTEX_INDEX << 1) & 2, VERTEX_INDEX & 2);
+    OUT_POSITION = vec4(uv * 2.0 - 1.0, 0.0, 1.0);
 }

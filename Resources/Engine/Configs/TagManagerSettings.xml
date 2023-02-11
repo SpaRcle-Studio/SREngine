@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<Settings>
+    <Tags>
+        <Untagged/>
+        <Ground/>
+        <Floor/>
+        <Wall/>
+        <Stone/>
+        <Water/>
+    </Tags>
+</Settings>

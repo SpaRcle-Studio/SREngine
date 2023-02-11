@@ -14,6 +14,7 @@
 #include <Utils/Types/SafePtrLockGuard.h>
 #include <Utils/Types/RawMesh.h>
 #include <Utils/ECS/Prefab.h>
+#include <Utils/ECS/Migration.h>
 
 #include <Graphics/Pipeline/Environment.h>
 #include <Graphics/GUI/WidgetManager.h>
@@ -45,10 +46,7 @@ namespace SR_CORE_NS {
         SR_INFO("Engine::Create() : register all resources...");
 
         RegisterResources();
-
-        SR_INFO("Engine::Create() : register all components...");
-
-        RegisterComponents();
+        RegisterMigrators();
 
         SR_INFO("Engine::Create() : create main window...");
 
@@ -61,6 +59,13 @@ namespace SR_CORE_NS {
             SR_ERROR("Engine::Create() : failed to initialize render!");
             return false;
         }
+
+        SR_UTILS_NS::ComponentManager::Instance().SetContextInitializer([](auto&& context) {
+            context.SetValue(Engine::Instance().GetWindow());
+
+            context.template SetPointer<SR_PHYSICS_NS::LibraryImpl>("2DPLib", SR_PHYSICS_NS::PhysicsLibrary::Instance().GetActiveLibrary(SR_UTILS_NS::Measurement::Space2D));
+            context.template SetPointer<SR_PHYSICS_NS::LibraryImpl>("3DPLib", SR_PHYSICS_NS::PhysicsLibrary::Instance().GetActiveLibrary(SR_UTILS_NS::Measurement::Space3D));
+        });
 
         RegisterLibraries();
 
@@ -456,9 +461,12 @@ namespace SR_CORE_NS {
             m_scene.Unlock();
         }
 
-        if (m_renderScene.RecursiveLockIfValid()) {
+        if (m_renderContext.LockIfValid()) {
             m_renderContext->Update();
+            m_renderContext.Unlock();
+        }
 
+        if (m_renderScene.RecursiveLockIfValid()) {
             if (auto&& pWin = GetWindow()->GetImplementation<SR_GRAPH_NS::BasicWindowImpl>()) {
                 const bool isOverlay = m_renderScene->IsOverlayEnabled();
                 const bool isMaximized = pWin->IsMaximized();
@@ -620,59 +628,8 @@ namespace SR_CORE_NS {
 
         resourcesManager.RegisterType<SR_AUDIO_NS::Sound>();
         resourcesManager.RegisterType<SR_AUDIO_NS::RawSound>();
-    }
 
-    void Engine::RegisterComponents() {
-        SR_UTILS_NS::ComponentManager::Instance().SetContextInitializer([](auto&& context) {
-            context.SetValue(Engine::Instance().GetWindow());
-
-            context.template SetPointer<SR_PHYSICS_NS::LibraryImpl>("2DPLib", SR_PHYSICS_NS::PhysicsLibrary::Instance().GetActiveLibrary(SR_UTILS_NS::Measurement::Space2D));
-            context.template SetPointer<SR_PHYSICS_NS::LibraryImpl>("3DPLib", SR_PHYSICS_NS::PhysicsLibrary::Instance().GetActiveLibrary(SR_UTILS_NS::Measurement::Space3D));
-        });
-
-        SR_UTILS_NS::ComponentManager::Instance().RegisterComponent<SR_GTYPES_NS::ProceduralMesh>([]() {
-            return new SR_GTYPES_NS::ProceduralMesh();
-        });
-        SR_UTILS_NS::ComponentManager::Instance().RegisterComponent<SR_PTYPES_NS::Rigidbody3D>([]() {
-            auto&& pLibrary = SR_PHYSICS_NS::PhysicsLibrary::Instance().GetActiveLibrary(SR_UTILS_NS::Measurement::Space3D);
-
-            if (auto&& pRigidbody = pLibrary->CreateRigidbody3D()) {
-                pRigidbody->SetType(pLibrary->GetDefaultShape());
-                return pRigidbody;
-            }
-
-            return (SR_PTYPES_NS::Rigidbody3D*)nullptr;
-        });
-        SR_UTILS_NS::ComponentManager::Instance().RegisterComponent<SR_GTYPES_NS::Mesh3D>([]() {
-            return new SR_GTYPES_NS::Mesh3D();
-        });
-        SR_UTILS_NS::ComponentManager::Instance().RegisterComponent<SR_GTYPES_NS::SkinnedMesh>([]() {
-            return new SR_GTYPES_NS::SkinnedMesh();
-        });
-        SR_UTILS_NS::ComponentManager::Instance().RegisterComponent<SR_GRAPH_UI_NS::Sprite2D>([]() {
-            return new SR_GRAPH_UI_NS::Sprite2D();
-        });
-        SR_UTILS_NS::ComponentManager::Instance().RegisterComponent<SR_GTYPES_NS::Camera>([]() {
-            return new SR_GTYPES_NS::Camera();
-        });
-        /*SR_UTILS_NS::ComponentManager::Instance().RegisterComponent<SR_ANIMATIONS_NS::Bone>([]() {
-            return new SR_ANIMATIONS_NS::Bone();
-        });*/ ///TODO: Разобраться с регистрацией компонента Bone()
-        SR_UTILS_NS::ComponentManager::Instance().RegisterComponent<SR_SCRIPTING_NS::Behaviour>([]() {
-            return SR_SCRIPTING_NS::Behaviour::CreateEmpty();
-        });
-        SR_UTILS_NS::ComponentManager::Instance().RegisterComponent<SR_GRAPH_UI_NS::Canvas>([]() {
-            return new SR_GRAPH_UI_NS::Canvas();
-        });
-        SR_UTILS_NS::ComponentManager::Instance().RegisterComponent<SR_GRAPH_UI_NS::Anchor>([]() {
-            return new SR_GRAPH_UI_NS::Anchor();
-        });
-        SR_UTILS_NS::ComponentManager::Instance().RegisterComponent<SR_GTYPES_NS::Text>([]() {
-            return new SR_GTYPES_NS::Text();
-        });
-        SR_UTILS_NS::ComponentManager::Instance().RegisterComponent<SR_CORE_UI_NS::Button>([]() {
-            return new SR_CORE_UI_NS::Button();
-        });
+        resourcesManager.RegisterType<SR_ANIMATIONS_NS::AnimationClip>();
     }
 
     void Engine::FlushScene() {
@@ -691,30 +648,32 @@ namespace SR_CORE_NS {
             return;
         }
 
-        if (m_scene) {
-            m_scene->Save();
-            if (!DeInitializeScene(m_scene, this)) {
-                SR_ERROR("Engine::FlushScene() : failed to de initialize scene!");
-            }
-        }
-
         auto&& newScene = m_sceneQueue.Pop(ScenePtr());
-
         if (newScene && !SR_CORE_NS::InitializeScene(newScene, this)) {
             SR_ERROR("Engine::FlushScene() : failed to initialize scene!");
         }
 
-        m_scene = newScene;
+        if (m_scene.RecursiveLockIfValid()) {
+            if (m_editor) {
+                m_editor->SetScene(SR_WORLD_NS::Scene::Ptr());
+            }
+
+            m_scene->Save();
+            if (!DeInitializeScene(m_scene, this)) {
+                SR_ERROR("Engine::FlushScene() : failed to de initialize scene!");
+            }
+            m_scene.Unlock();
+        }
 
         if (m_editor) {
-            m_editor->GetWidget<Hierarchy>()->SetScene(m_scene);
-            m_editor->GetWidget<Inspector>()->SetScene(m_scene);
-            m_editor->GetWidget<WorldEdit>()->SetScene(m_scene);
-
-            if (auto&& pViewer = m_editor->GetWidget<SceneViewer>()) {
-                pViewer->SetScene(m_scene);
-            }
+            m_editor->SetScene(newScene);
         }
+
+        if (m_cmdManager) {
+            m_cmdManager->Clear();
+        }
+
+        m_scene = newScene;
 
         m_renderScene = m_scene ? m_scene->GetDataStorage().GetValue<RenderScenePtr>() : RenderScenePtr();
         m_physicsScene = m_scene ? m_scene->GetDataStorage().GetValue<PhysicsScenePtr>() : PhysicsScenePtr();
@@ -725,5 +684,44 @@ namespace SR_CORE_NS {
         }
 
         m_sceneQueue.Unlock();
+    }
+
+    void Engine::RegisterMigrators() {
+        static const auto GAME_OBJECT_HASH_NAME = SR_HASH_STR("GameObject");
+        SR_UTILS_NS::Migration::Instance().RegisterMigrator(GAME_OBJECT_HASH_NAME, 1004, 1005, [](SR_HTYPES_NS::Marshal& marshal) -> bool {
+            SR_HTYPES_NS::Marshal migrated;
+
+            uint64_t position = marshal.GetPosition();
+
+            migrated.Stream::Write(marshal.Stream::View(), marshal.GetPosition());
+
+            migrated.Write(marshal.Read<bool>());
+            auto name = marshal.Read<std::string>();
+            migrated.Write(name);
+            migrated.Write(marshal.Read<uint64_t>());
+
+            auto&& measurement = static_cast<SR_UTILS_NS::Measurement>(marshal.Read<int8_t>());
+
+            migrated.Write<uint8_t>(static_cast<uint8_t>(measurement));
+
+            switch (measurement) {
+                case SR_UTILS_NS::Measurement::Space2D:
+                case SR_UTILS_NS::Measurement::Space3D:
+                    migrated.Write<SR_MATH_NS::FVector3>(marshal.Read<SR_MATH_NS::Vector3<double>>(SR_MATH_NS::Vector3<double>(0.0)).Cast<SR_MATH_NS::Unit>(), SR_MATH_NS::FVector3(0.f));
+                    migrated.Write<SR_MATH_NS::FVector3>(marshal.Read<SR_MATH_NS::Vector3<double>>(SR_MATH_NS::Vector3<double>(0.0)).Cast<SR_MATH_NS::Unit>(), SR_MATH_NS::FVector3(0.f));
+                    migrated.Write<SR_MATH_NS::FVector3>(marshal.Read<SR_MATH_NS::Vector3<double>>(SR_MATH_NS::Vector3<double>(1.0)).Cast<SR_MATH_NS::Unit>(), SR_MATH_NS::FVector3(1.f));
+                    migrated.Write<SR_MATH_NS::FVector3>(marshal.Read<SR_MATH_NS::Vector3<double>>(SR_MATH_NS::Vector3<double>(1.0)).Cast<SR_MATH_NS::Unit>(), SR_MATH_NS::FVector3(1.f));
+                    SR_FALLTHROUGH;
+                default:
+                    break;
+            }
+
+            migrated.Stream::Write(marshal.Stream::View() + marshal.GetPosition(), marshal.Size() - marshal.GetPosition());
+
+            marshal.SetData(migrated.Stream::View(), migrated.Size());
+            marshal.SetPosition(position);
+
+            return true;
+        });
     }
 }

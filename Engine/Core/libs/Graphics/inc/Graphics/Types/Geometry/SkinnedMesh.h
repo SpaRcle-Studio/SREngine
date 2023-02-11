@@ -7,7 +7,6 @@
 
 #include <Graphics/Types/Geometry/MeshComponent.h>
 #include <Graphics/Animations/Skeleton.h>
-#include <Graphics/Animations/AnimationClip.h>
 
 namespace SR_GRAPH_NS::Memory {
     class MeshAllocator;
@@ -16,8 +15,9 @@ namespace SR_GRAPH_NS::Memory {
 namespace SR_GTYPES_NS {
     class SkinnedMesh final : public MeshComponent {
         friend class Mesh;
-        SR_ENTITY_SET_VERSION(1001);
         using Super = MeshComponent;
+        SR_ENTITY_SET_VERSION(1001);
+        SR_INITIALIZE_COMPONENT(SkinnedMesh);
     public:
         SkinnedMesh();
 
@@ -32,13 +32,21 @@ namespace SR_GTYPES_NS {
 
         static Component* LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage);
 
+        void Update(float dt) override;
         void UseMaterial() override;
         void UseModelMatrix() override;
 
+        SR_NODISCARD bool IsSkeletonUsable() const;
         SR_NODISCARD bool IsCanCalculate() const override;
         SR_NODISCARD uint32_t GetMeshId() const { return m_meshId; }
 
+        SR_NODISCARD bool ExecuteInEditMode() const override { return true; }
+        SR_NODISCARD SR_FORCE_INLINE bool IsCanUpdate() const noexcept override { return true; }
+
     private:
+        void FindSkeleton(SR_UTILS_NS::GameObject::Ptr gameObject);
+        void PopulateSkeletonMatrices();
+
         void SetRawMesh(SR_HTYPES_NS::RawMesh* raw);
 
         bool Calculate() override;
@@ -49,18 +57,23 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD std::vector<uint32_t> GetIndices() const override;
 
     protected:
-        bool Reload() override;
         bool Load() override;
         bool Unload() override;
 
     private:
-
         SR_HTYPES_NS::RawMesh* m_rawMesh = nullptr;
+
         /// определяет порядок меша в файле, если их там несколько
         int32_t m_meshId = SR_UINT32_MAX;
-        SR_ANIMATIONS_NS::Skeleton m_skeleton;
-        SR_ANIMATIONS_NS::AnimationClip* m_currentClip = nullptr;
+        SR_ANIMATIONS_NS::Skeleton* m_skeleton = nullptr;
 
+        bool m_isOffsetsInitialized = false;
+        bool m_isSkeletonDeleted = false;
+
+        std::vector<uint64_t> m_bonesIds;
+
+        std::vector<SR_MATH_NS::Matrix4x4> m_skeletonMatrices;
+        std::vector<SR_MATH_NS::Matrix4x4> m_skeletonOffsets;
     };
 }
 

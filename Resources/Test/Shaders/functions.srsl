@@ -1,0 +1,58 @@
+uuu.yyy;
+a[434][6] = !p * 134 + 45;
+a[434][6] = ++(kernel * 134 + 45);
+a[434][6] == b * 134 + 45;
+bb[434][6].aboba(2, 4, 5);
+
+a[6] = 2;
+a[6 + 3] = 2;
+a[6 + 3].f;
+a[2][6 + 3].f;
+a[2].f;
+a = 2;
+
+void call1() {
+    a = +j;
+    a = 1;
+    b[2][4][g] = u[y];
+    void();
+}
+
+void call2() {
+    call2(call1());
+    call2(call1());
+    call2(call1(), min(), max());
+    vec4();
+}
+
+void call4() {
+    call2();
+    call2();
+}
+
+call(1, 4, 7 * 324, a + b);
+call2();
+int a = call3(call4(23, 56 == 4), 4, 5);
+
+void function([[decorator(23)]] int a, vec3 gfeg = 45, bool d) {
+
+}
+
+[[decorator(23)]] int a = 4456 * 346;
+
+[[numThreads(2, 4, 8)]] void compute() {
+}
+
+void function(int[2][345][676767] a = 234 * 2345, int b, int c) {
+    int a = 0;
+    int a = 0;
+    int a = 0;
+    void function2() {
+        int b = 0;
+        int b = 0;
+        int b = 0;
+    }
+    float d = 1;
+    float d = 1;
+    float d = 1;
+}

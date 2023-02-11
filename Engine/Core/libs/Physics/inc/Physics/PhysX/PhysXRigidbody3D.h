@@ -21,6 +21,9 @@ namespace SR_PTYPES_NS {
         void UpdateInertia() override;
         bool InitBody() override;
 
+        void AddLocalVelocity(const SR_MATH_NS::FVector3& velocity) override;
+        void AddGlobalVelocity(const SR_MATH_NS::FVector3& velocity) override;
+
         bool UpdateMatrix(bool force) override;
         bool UpdateShapeInternal() override;
 

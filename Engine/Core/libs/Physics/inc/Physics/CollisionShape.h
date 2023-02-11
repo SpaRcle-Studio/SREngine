@@ -17,6 +17,7 @@ namespace SR_PHYSICS_NS {
 }
 
 namespace SR_PTYPES_NS {
+    class Rigidbody;
     class CollisionShape : public SR_UTILS_NS::NonCopyable {
         friend class SR_PHYSICS_NS::PhysicsScene;
     public:
@@ -32,12 +33,16 @@ namespace SR_PTYPES_NS {
         virtual bool UpdateShape() { return false; }
         virtual bool UpdateMatrix() { return false; }
 
+        void UpdateDebugShape();
+        void RemoveDebugShape();
+
         void SetType(ShapeType type);
 
         void SetHeight(float_t height);
         void SetRadius(float_t radius);
         void SetSize(const SR_MATH_NS::FVector3& size);
         void SetScale(const SR_MATH_NS::FVector3& scale);
+        void SetRigidbody(Rigidbody* pRigidbody) { m_rigidbody = pRigidbody; };
 
         SR_NODISCARD virtual SR_MATH_NS::FVector3 CalculateLocalInertia(float_t mass) const;
 
@@ -45,6 +50,7 @@ namespace SR_PTYPES_NS {
         SR_NODISCARD float_t GetRadius() const;
         SR_NODISCARD SR_MATH_NS::FVector3 GetSize() const;
         SR_NODISCARD SR_MATH_NS::FVector3 GetScale() const;
+        SR_NODISCARD Rigidbody* GetRigidbody() const;
 
         SR_NODISCARD bool Valid() const noexcept;
         SR_NODISCARD ShapeType GetType() const noexcept;
@@ -62,12 +68,14 @@ namespace SR_PTYPES_NS {
 
     protected:
         LibraryPtr m_library = nullptr;
+        Rigidbody* m_rigidbody = nullptr;
 
         SR_MATH_NS::FVector3 m_scale;
         SR_MATH_NS::FVector3 m_bounds;
 
         ShapeType m_type = ShapeType::Unknown;
 
+        uint64_t m_debugId = SR_ID_INVALID;
     };
 }
 

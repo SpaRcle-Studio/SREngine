@@ -24,7 +24,7 @@ namespace SR_GRAPH_NS {
     class Environment;
 }
 
-namespace SR_GRAPH_NS::Types {
+namespace SR_GTYPES_NS {
     class Shader;
 
     class Shader : public SR_UTILS_NS::IResource, public Memory::IGraphicsResource {
@@ -52,7 +52,7 @@ namespace SR_GRAPH_NS::Types {
         SR_NODISCARD uint32_t GetSamplersCount() const;
         SR_NODISCARD ShaderProperties GetProperties();
         SR_NODISCARD bool IsBlendEnabled() const;
-        SR_NODISCARD SRSL::ShaderType GetType() const noexcept;
+        SR_NODISCARD SR_SRSL_NS::ShaderType GetType() const noexcept;
 
     public:
         template<typename T, bool shared = false> void SetValue(uint64_t hashId, const T& v) noexcept {
@@ -62,15 +62,22 @@ namespace SR_GRAPH_NS::Types {
 
             m_uniformBlock.SetField(hashId, &v);
         }
+        template<typename T, bool shared = false> void SetCustom(uint64_t hashId, const T *v) noexcept {
+            if (!IsLoaded()) {
+                return;
+            }
+
+            m_uniformBlock.SetField(hashId, v);
+        }
 
         void SR_FASTCALL SetBool(uint64_t hashId, const bool& v) noexcept;
         void SR_FASTCALL SetFloat(uint64_t hashId, const float& v) noexcept;
         void SR_FASTCALL SetInt(uint64_t hashId, const int& v) noexcept;
         void SR_FASTCALL SetMat4(uint64_t hashId, const glm::mat4& v) noexcept;
         void SR_FASTCALL SetMat4(uint64_t hashId, const SR_MATH_NS::Matrix4x4& v) noexcept;
-        void SR_FASTCALL SetVec4(uint64_t hashId, const glm::vec4& v) noexcept;
-        void SR_FASTCALL SetVec3(uint64_t hashId, const glm::vec3& v) noexcept;
-        void SR_FASTCALL SetVec2(uint64_t hashId, const glm::vec2& v) noexcept;
+        void SR_FASTCALL SetVec4(uint64_t hashId, const SR_MATH_NS::FVector4& v) noexcept;
+        void SR_FASTCALL SetVec3(uint64_t hashId, const SR_MATH_NS::FVector3& v) noexcept;
+        void SR_FASTCALL SetVec2(uint64_t hashId, const SR_MATH_NS::FVector2& v) noexcept;
         void SR_FASTCALL SetIVec2(uint64_t hashId, const glm::ivec2& v) noexcept;
         void SR_FASTCALL SetSampler2D(const std::string& name, Types::Texture* sampler) noexcept;
         void SR_FASTCALL SetSamplerCube(uint64_t hashId, int32_t sampler) noexcept;
@@ -100,7 +107,7 @@ namespace SR_GRAPH_NS::Types {
         ShaderSamplers         m_samplers             = ShaderSamplers();
         ShaderProperties       m_properties           = ShaderProperties();
 
-        SRSL::ShaderType       m_type                 = SRSL::ShaderType::Unknown;
+        SR_SRSL_NS::ShaderType m_type                 = SR_SRSL_NS::ShaderType::Unknown;
 
     };
 }

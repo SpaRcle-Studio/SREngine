@@ -98,6 +98,8 @@ namespace SR_HTYPES_NS {
     }
 
     void Thread::Factory::Remove(Thread* pThread) {
+        SR_SCOPED_LOCK
+
         SR_LOG("Thread::Free() : free \"" + ToString(pThread->GetId()) + "\" thread...");
 
         if (pThread == m_main) {
@@ -118,7 +120,7 @@ namespace SR_HTYPES_NS {
     }
 
     void Thread::Synchronize() {
-    #ifdef SR_DEBUG
+    #if defined(SR_DEBUG) && SR_THREAD_SAFE_CHECKS
         auto&& thread = Thread::Factory::Instance().GetThisThread();
 
         if (GetId() != thread->GetId()) {

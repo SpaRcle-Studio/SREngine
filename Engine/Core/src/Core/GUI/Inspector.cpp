@@ -21,6 +21,7 @@
 #include <Graphics/GUI/Utils.h>
 #include <Graphics/Font/Text.h>
 #include <Graphics/Types/Geometry/SkinnedMesh.h>
+#include <Graphics/Animations/Animator.h>
 
 namespace Framework::Core::GUI {
     Inspector::Inspector(Hierarchy* hierarchy)
@@ -59,11 +60,38 @@ namespace Framework::Core::GUI {
                 Engine::Instance().GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);;
             }
 
+            /// --------------------------------------------------------------------------------------------------------
+
             std::string gm_name = m_gameObject->GetName();
             if (ImGui::InputText("Name", &gm_name, ImGuiInputTextFlags_NoUndoRedo | ImGuiInputTextFlags_EnterReturnsTrue)) {
                 auto&& cmd = new Framework::Core::Commands::GameObjectRename(m_gameObject, gm_name);
                 Engine::Instance().GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
             }
+
+            /// --------------------------------------------------------------------------------------------------------
+
+            /// вызываем в потокобезопасном контексте, так как теги могут быть изменены извне
+            SR_UTILS_NS::TagManager::Instance().Do([&](auto&& pSettings) {
+                auto&& pTagManager = dynamic_cast<SR_UTILS_NS::TagManager*>(pSettings);
+                auto&& tags = pTagManager->GetTags();
+                auto&& tagIndex = static_cast<int>(pTagManager->GetTagIndex(m_gameObject->GetTag()));
+                auto&& pTags = const_cast<std::vector<std::string>*>(&tags);
+
+                if (ImGui::Combo("Tag", &tagIndex, [](void* vec, int idx, const char** out_text){
+                    auto&& vector = reinterpret_cast<std::vector<std::string>*>(vec);
+                    if (idx < 0 || idx >= vector->size())
+                        return false;
+
+                    *out_text = vector->at(idx).c_str();
+
+                    return true;
+                }, reinterpret_cast<void*>(pTags), tags.size())) {
+                    /// TODO: переделать на комманды
+                    m_gameObject->SetTag(pTagManager->GetTagByIndex(tagIndex));
+                }
+            });
+
+            /// --------------------------------------------------------------------------------------------------------
 
             ImGui::Text("Entity id: %llu", m_gameObject->GetEntityId());
 
@@ -161,6 +189,8 @@ namespace Framework::Core::GUI {
             copyPtrComponent = DrawComponent<SR_GRAPH_NS::UI::Canvas>(copyPtrComponent, "Canvas", index);
             copyPtrComponent = DrawComponent<SR_PTYPES_NS::Rigidbody3D>(copyPtrComponent, "Rigidbody3D", index);
             copyPtrComponent = DrawComponent<SR_GTYPES_NS::Text>(copyPtrComponent, "Text", index);
+            copyPtrComponent = DrawComponent<SR_ANIMATIONS_NS::Animator>(copyPtrComponent, "Animator", index);
+            copyPtrComponent = DrawComponent<SR_ANIMATIONS_NS::Skeleton>(copyPtrComponent, "Skeleton", index);
 
             if (copyPtrComponent != component && copyPtrComponent) {
                 SR_LOG("Inspector::DrawComponents() : component \"" + component->GetComponentName() + "\" has been replaced.");
@@ -282,4 +312,4 @@ namespace Framework::Core::GUI {
             }
         }
     }
-}
+}                                                                                      

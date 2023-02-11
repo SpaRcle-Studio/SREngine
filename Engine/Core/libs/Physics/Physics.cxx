@@ -26,6 +26,7 @@
     #include "src/Physics/PhysX/PhysXPhysicsWorld.cpp"
     #include "src/Physics/PhysX/PhysXRigidbody3D.cpp"
     #include "src/Physics/PhysX/PhysXCollisionShape.cpp"
+    #include "src/Physics/PhysX/PhysXSimulationCallback.cpp"
 #endif
 
 #ifdef SR_PHYSICS_USE_BOX2D

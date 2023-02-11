@@ -6,25 +6,38 @@
 
 namespace SR_UTILS_NS {
     IResource *ResourceType::Find(const ResourceType::ResourceId &id)  {
-        if (auto&& pIt = m_copies.find(id); pIt == m_copies.end()) {
+        auto&& pIt = m_copies.find(id);
+        if (pIt == m_copies.end()) {
             return nullptr;
         }
-        else {
-            if (pIt->second.empty()) {
-                return nullptr;
-            }
-            else {
-                for (auto&& pResource : pIt->second) {
-                    if (pResource->IsDestroyed()) {
-                        continue;
-                    }
 
-                    return pResource;
+        if (pIt->second.empty()) {
+            return nullptr;
+        }
+
+        for (auto&& pResource : pIt->second) {
+            const bool skip = pResource->Execute([pResource](){
+                if (!pResource->IsDestroyed()) {
+                    return false;
                 }
 
-                return nullptr;
+                if (pResource->IsAllowedToRevive()) {
+                    SR_LOG("ResourceType::Find() : revive resource \"" + pResource->GetResourceId() + "\"");
+                    pResource->ReviveResource();
+                    return false;
+                }
+
+                return true;
+            });
+
+            if (skip) {
+                continue;
             }
+
+            return pResource;
         }
+
+        return nullptr;
     }
 
     bool ResourceType::IsLast(const ResourceType::ResourceId &id) {

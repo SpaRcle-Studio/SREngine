@@ -228,6 +228,10 @@ namespace SR_MATH_NS {
             return v;
         }
 
+        SR_NODISCARD Vector3 Lerp(const Vector3& vector3, Unit t) const noexcept {
+            return (Vector3)(*this + (vector3 - *this) * t);
+        }
+
         SR_NODISCARD Vector3 Normalize() const {
             auto&& value = x * x + y * y + z * z;
 
@@ -380,8 +384,8 @@ namespace SR_MATH_NS {
         SR_FORCE_INLINE Vector3 operator-() const { return Vector3(-x, -y, -z); }
         SR_FORCE_INLINE Vector3 operator+() const { return *this; }
 
-        SR_FORCE_INLINE bool operator==(const Vector3 &p_v) const { return x == p_v.x && y == p_v.y && z == p_v.z; }
-        SR_FORCE_INLINE bool operator!=(const Vector3 &p_v) const { return x != p_v.x || y != p_v.y || z != p_v.z; }
+        SR_FORCE_INLINE bool operator==(const Vector3 &p_v) const { return SR_EQUALS(x, p_v.x) && SR_EQUALS(y, p_v.y) && SR_EQUALS(z, p_v.z); }
+        SR_FORCE_INLINE bool operator!=(const Vector3 &p_v) const { return !SR_EQUALS(x, p_v.x) || !SR_EQUALS(y, p_v.y) || !SR_EQUALS(z, p_v.z); }
 
         SR_FORCE_INLINE bool operator<=(const Vector3 &p_v) const { return x <= p_v.x && y <= p_v.y && z <= p_v.z; }
         SR_FORCE_INLINE bool operator>=(const Vector3 &p_v) const { return x >= p_v.x && y >= p_v.y && z >= p_v.z; }
@@ -390,7 +394,7 @@ namespace SR_MATH_NS {
 
     public:
         SR_NODISCARD glm::vec3 ToGLM() const noexcept {
-            return glm::vec3(x, y, z);
+            return *reinterpret_cast<glm::vec3*>((void*)this);
         }
         static Unit Magnitude(Vector3 vec) {
             return sqrt(SR_POW(vec.x) + SR_POW(vec.y) + SR_POW(vec.z));
@@ -457,8 +461,8 @@ namespace std {
         s^= h(v) + 0x9e3779b9 + (s<< 6) + (s>> 2);
     }
 
-    template<typename U> struct hash<Framework::Helper::Math::Vector3<U>> {
-        size_t operator()(Framework::Helper::Math::Vector3<U> const& vec) const {
+    template<typename U> struct hash<SR_MATH_NS::Vector3<U>> {
+        size_t operator()(SR_MATH_NS::Vector3<U> const& vec) const {
             std::size_t res = 0;
             hash_vector3_combine<U>(res, vec.x);
             hash_vector3_combine<U>(res, vec.y);

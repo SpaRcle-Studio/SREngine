@@ -132,6 +132,7 @@
 #define SR_NOOP (void)0
 
 #define SR_MAX_BONES_ON_VERTEX 8
+#define SR_HUMANOID_MAX_BONES 128
 
 #define SR_FAST_CONSTRUCTOR SR_FORCE_INLINE SR_CONSTEXPR
 
@@ -186,6 +187,7 @@
 #define SR_PLATFORM_NS Framework::Helper::Platform
 #define SR_MATH_NS Framework::Helper::Math
 #define SR_GRAPH_NS Framework::Graphics
+#define SR_SRSL_NS Framework::Graphics::SRSL2
 #define SR_GRAPH_UI_NS Framework::Graphics::UI
 #define SR_ANIMATIONS_NS Framework::Graphics::Animations
 #define SR_HTYPES_NS SR_UTILS_NS::Types
@@ -205,6 +207,8 @@
 #else
     #define SR_STATIC_ASSERT(msg) static_assert(false, msg);
 #endif
+
+#define SR_SUPPORT_PARALLEL
 
 #define SR_DLL_EXPORTS 1
 

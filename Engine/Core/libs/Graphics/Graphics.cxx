@@ -2,7 +2,9 @@
 
 #include "../Graphics/src/Graphics/Animations/Bone.cpp"
 #include "../Graphics/src/Graphics/Animations/AnimationClip.cpp"
-#include "../Graphics/src/Graphics/Animations/AnimationPose.cpp"
+#include "../Graphics/src/Graphics/Animations/AnimationKey.cpp"
+#include "../Graphics/src/Graphics/Animations/Animator.cpp"
+#include "../Graphics/src/Graphics/Animations/Skeleton.cpp"
 
 #include "../Graphics/src/Graphics/Pipeline/Vulkan/VulkanImGUI.cpp"
 #include "../Graphics/src/Graphics/Pipeline/Vulkan/VulkanMemory.cpp"
@@ -23,6 +25,9 @@
 #include "../Graphics/src/Graphics/GUI/Editor/Theme.cpp"
 #include "../Graphics/src/Graphics/GUI/WidgetManager.cpp"
 #include "../Graphics/src/Graphics/GUI/Widget.cpp"
+#include "../Graphics/src/Graphics/GUI/NodeWidget.cpp"
+#include "../Graphics/src/Graphics/GUI/ImNodeEditorUtils.cpp"
+#include "../Graphics/src/Graphics/GUI/NodeBuilder.cpp"
 
 #include "../Graphics/src/Graphics/Lighting/DirectionalLight.cpp"
 #include "../Graphics/src/Graphics/Lighting/Light.cpp"
@@ -47,6 +52,7 @@
 
 #include "../Graphics/src/Graphics/Pass/BasePass.cpp"
 #include "../Graphics/src/Graphics/Pass/SkyboxPass.cpp"
+#include "../Graphics/src/Graphics/Pass/IFramebufferPass.cpp"
 #include "../Graphics/src/Graphics/Pass/FramebufferPass.cpp"
 #include "../Graphics/src/Graphics/Pass/SwapchainPass.cpp"
 #include "../Graphics/src/Graphics/Pass/GroupPass.cpp"
@@ -57,6 +63,9 @@
 #include "../Graphics/src/Graphics/Pass/PostProcessPass.cpp"
 #include "../Graphics/src/Graphics/Pass/DebugPass.cpp"
 #include "../Graphics/src/Graphics/Pass/ColorBufferPass.cpp"
+#include "../Graphics/src/Graphics/Pass/DepthBufferPass.cpp"
+#include "../Graphics/src/Graphics/Pass/ShaderOverridePass.cpp"
+#include "../Graphics/src/Graphics/Pass/SSAOPass.cpp"
 
 #include "../Graphics/src/Graphics/Font/Font.cpp"
 #include "../Graphics/src/Graphics/Font/FontLoader.cpp"

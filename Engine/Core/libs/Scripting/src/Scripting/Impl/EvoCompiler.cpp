@@ -43,6 +43,8 @@ namespace SR_SCRIPTING_NS {
                 return false;
             }
 
+            SetCompilePDB(SR_UTILS_NS::Features::Instance().Enabled("CompilePDB", false));
+
             AddIncludePath(SR_UTILS_NS::ResourceManager::Instance().GetResPath());
             AddIncludePath(SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Scripts"));
 

@@ -1,60 +1,44 @@
 //
-// Created by Igor on 07/12/2022.
+// Created by Monika on 08.01.2023.
 //
 
 #ifndef SRENGINE_ANIMATIONCLIP_H
 #define SRENGINE_ANIMATIONCLIP_H
 
-#include <Graphics/Animations/Skeleton.h>
-#include <Graphics/Animations/AnimationPose.h>
+#include <Utils/ResourceManager/IResource.h>
+
+class aiAnimation;
 
 namespace SR_ANIMATIONS_NS {
-    class AnimationClip {
+    class AnimationChannel;
+
+    class AnimationClip : public SR_UTILS_NS::IResource {
+        using Super = SR_UTILS_NS::IResource;
     public:
-        AnimationClip(
-                const Skeleton* skeleton,
-                float duration,
-                float rate,
-                std::vector<BoneAnimationChannel> bonesAnimationChannels)
-                : m_skeleton(),
-                  m_bonesAnimationChannels(std::move(bonesAnimationChannels)),
-                  m_currentPose(skeleton, std::vector<BonePose>(skeleton->bones.size())),
-                  m_duration(duration),
-                  m_rate(rate)
-        {
-        }
+        AnimationClip();
+        ~AnimationClip() override;
 
-        [[nodiscard]] const AnimationPose& getCurrentPose() const;
+    public:
+        static std::vector<AnimationClip*> Load(const SR_UTILS_NS::Path& path);
+        static AnimationClip* Load(const SR_UTILS_NS::Path& path, uint32_t id);
 
-        void Load(SR_UTILS_NS::Path path);
-        void increaseCurrentTime(float delta);
+    public:
+        SR_NODISCARD const std::vector<AnimationChannel*>& GetChannels() const { return m_channels; }
+        SR_NODISCARD bool IsAllowedToRevive() const override { return true; }
 
-    private:
-        [[nodiscard]] BonePose getBoneLocalPose(uint8_t boneIndex, float time) const;
+        SR_NODISCARD SR_UTILS_NS::Path InitializeResourcePath() const override;
 
-        template<class T, class S>
-        [[nodiscard]] T getMixedAdjacentFrames(const std::vector<S>& frames, float time) const;
-
-        template<class T>
-        T getIdentity() const { assert(false); }
-
-        template<class T, class S>
-        T getKeyframeValue(const S& frame) const { assert(false); }
-
-        template<class T>
-        T getInterpolatedValue(const T& first, const T& second, float delta) const { assert(false); }
+    protected:
+        bool Unload() override;
+        bool Load() override;
 
     private:
-        const Skeleton m_skeleton;
-        std::vector<BoneAnimationChannel> m_bonesAnimationChannels;
+        void LoadChannels(aiAnimation* pAnimation);
 
-        mutable AnimationPose m_currentPose;
+    private:
+        std::vector<AnimationChannel*> m_channels;
 
-        double m_currentTime = 0.0f;
-        double m_duration = 0.0f;
-        double m_rate = 0.0f;
     };
-
 }
 
 #endif //SRENGINE_ANIMATIONCLIP_H

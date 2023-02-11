@@ -27,6 +27,7 @@ namespace SR_UTILS_NS {
         using DrawCubeCallback = SR_HTYPES_NS::Function<uint64_t(uint64_t id, const SR_MATH_NS::FVector3& pos, const SR_MATH_NS::Quaternion& rot, const SR_MATH_NS::FVector3& scale, const SR_MATH_NS::FColor& color, float_t time)>;
         using DrawPlaneCallback = DrawCubeCallback;
         using DrawSphereCallback = DrawCubeCallback;
+        using DrawCapsuleCallback = DrawCubeCallback;
 
         struct Callbacks {
             RemoveCallback removeCallback;
@@ -34,6 +35,7 @@ namespace SR_UTILS_NS {
             DrawCubeCallback drawCubeCallback;
             DrawPlaneCallback drawPlaneCallback;
             DrawSphereCallback drawSphereCallback;
+            DrawCapsuleCallback drawCapsuleCallback;
         };
 
         static constexpr float_t DEFAULT_DURATION = 10.f;
@@ -48,7 +50,10 @@ namespace SR_UTILS_NS {
                 const DrawLineCallback& lineCallback,
                 const DrawCubeCallback& cubeCallback,
                 const DrawPlaneCallback& drawPlaneCallback,
-                const DrawSphereCallback& drawSphereCallback);
+                const DrawSphereCallback& drawSphereCallback,
+                const DrawCapsuleCallback& drawCapsuleCallback);
+
+        void* GetUserIdentifier() const { return m_currentSwitcher; }
 
         void RemoveCallbacks(void* pUserIdentifier);
         void SwitchCallbacks(void* pUserIdentifier);
@@ -122,6 +127,25 @@ namespace SR_UTILS_NS {
         uint64_t DrawSphere(const SR_MATH_NS::FVector3& pos);
         uint64_t DrawSphere(uint64_t id);
         uint64_t DrawSphere();
+
+        uint64_t DrawCapsule(uint64_t id, const SR_MATH_NS::FVector3& pos, const SR_MATH_NS::Quaternion& rot, const SR_MATH_NS::FVector3& scale, const SR_MATH_NS::FColor& color, float_t time);
+        uint64_t DrawCapsule(uint64_t id, const SR_MATH_NS::FVector3& pos, const SR_MATH_NS::Quaternion& rot, const SR_MATH_NS::FVector3& scale, const SR_MATH_NS::FColor& color);
+        uint64_t DrawCapsule(uint64_t id, const SR_MATH_NS::FVector3& pos, const SR_MATH_NS::Quaternion& rot, const SR_MATH_NS::FVector3& scale);
+        uint64_t DrawCapsule(uint64_t id, const SR_MATH_NS::FVector3& pos, const SR_MATH_NS::Quaternion& rot);
+        uint64_t DrawCapsule(uint64_t id, const SR_MATH_NS::FVector3& pos, const SR_MATH_NS::FColor& color, float_t time);
+        uint64_t DrawCapsule(uint64_t id, const SR_MATH_NS::FVector3& pos, const SR_MATH_NS::FColor& color);
+        uint64_t DrawCapsule(uint64_t id, const SR_MATH_NS::FVector3& pos, float_t time);
+        uint64_t DrawCapsule(uint64_t id, const SR_MATH_NS::FVector3& pos);
+        uint64_t DrawCapsule(const SR_MATH_NS::FVector3& pos, const SR_MATH_NS::Quaternion& rot, const SR_MATH_NS::FVector3& scale, const SR_MATH_NS::FColor& color, float_t time);
+        uint64_t DrawCapsule(const SR_MATH_NS::FVector3& pos, const SR_MATH_NS::Quaternion& rot, const SR_MATH_NS::FVector3& scale, const SR_MATH_NS::FColor& color);
+        uint64_t DrawCapsule(const SR_MATH_NS::FVector3& pos, const SR_MATH_NS::Quaternion& rot, const SR_MATH_NS::FVector3& scale);
+        uint64_t DrawCapsule(const SR_MATH_NS::FVector3& pos, const SR_MATH_NS::Quaternion& rot);
+        uint64_t DrawCapsule(const SR_MATH_NS::FVector3& pos, const SR_MATH_NS::FColor& color, float_t time);
+        uint64_t DrawCapsule(const SR_MATH_NS::FVector3& pos, const SR_MATH_NS::FColor& color);
+        uint64_t DrawCapsule(const SR_MATH_NS::FVector3& pos, float_t time);
+        uint64_t DrawCapsule(const SR_MATH_NS::FVector3& pos);
+        uint64_t DrawCapsule(uint64_t id);
+        uint64_t DrawCapsule();
 
     private:
         void* m_currentSwitcher = nullptr;

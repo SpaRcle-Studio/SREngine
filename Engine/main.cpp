@@ -36,6 +36,10 @@
 #include <Graphics/UI/Canvas.h>
 #include <Graphics/UI/Anchor.h>
 #include <Graphics/UI/Sprite2D.h>
+#include <Graphics/SRSL/Lexer.h>
+#include <Graphics/SRSL/LexicalAnalyzer.h>
+#include <Graphics/SRSL/PseudoCodeGenerator.h>
+#include <Graphics/SRSL/Shader.h>
 
 #include <Graphics/Font/Text.h>
 #include <Graphics/Types/Texture.h>
@@ -143,6 +147,7 @@ int main(int argc, char **argv) {
     engine.Close();
 
     SR_CORE_NS::EditorSettings::DestroySettings();
+    SR_UTILS_NS::TagManager::DestroySettings();
 
     SR_PHYSICS_NS::PhysicsLibrary::DestroySingleton();
     SR_GRAPH_NS::Memory::CameraManager::DestroySingleton();

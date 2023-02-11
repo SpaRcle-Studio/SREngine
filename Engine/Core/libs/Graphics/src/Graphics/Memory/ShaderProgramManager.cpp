@@ -31,7 +31,7 @@ namespace SR_GRAPH_NS::Memory {
         }
 
         VirtualProgramInfo virtualProgramInfo;
-        virtualProgramInfo.m_createInfo = createInfo;
+        virtualProgramInfo.m_createInfo = SRShaderCreateInfo(createInfo);
 
         if (auto&& shaderProgramInfo = AllocateShaderProgram(createInfo); shaderProgramInfo.Valid()) {
             virtualProgramInfo.m_data[m_pipeline->GetCurrentFramebufferId()] = shaderProgramInfo;
@@ -73,7 +73,7 @@ namespace SR_GRAPH_NS::Memory {
         virtualProgramInfo.m_data.clear();
 
         /// обновляем данные
-        virtualProgramInfo.m_createInfo = createInfo;
+        virtualProgramInfo.m_createInfo = SRShaderCreateInfo(createInfo);
 
         if (auto&& shaderProgramInfo = AllocateShaderProgram(createInfo); shaderProgramInfo.Valid()) {
             virtualProgramInfo.m_data[m_pipeline->GetCurrentFramebufferId()] = shaderProgramInfo;

@@ -29,7 +29,7 @@ namespace SR_CORE_NS::GUI {
     public:
         void Update();
 
-        void SetScene(const SR_WORLD_NS::Scene::Ptr& scene);
+        void SetScene(const SR_WORLD_NS::Scene::Ptr& scene) override;
 
     protected:
         void Draw() override;

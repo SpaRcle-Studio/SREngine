@@ -13,6 +13,8 @@
 #include <Graphics/Render/RenderContext.h>
 #include <Graphics/Pipeline/Environment.h>
 #include <Graphics/Types/Shader.h>
+#include <Graphics/SRSL/Shader.h>
+#include <Graphics/SRSL/TypeInfo.h>
 
 namespace SR_GRAPH_NS::Types {
     Shader::Shader()
@@ -102,10 +104,10 @@ namespace SR_GRAPH_NS::Types {
 
     void Shader::FreeVideoMemory() {
         if (m_isInit) {
-            SR_SHADER("Shader::Free() : free \"" + m_shaderCreateInfo.path.ToString() + "\" shader free video memory...");
+            SR_SHADER("Shader::FreeVideoMemory() : free \"" + GetResourceId() + "\" video memory...");
 
             if (!Memory::ShaderProgramManager::Instance().FreeProgram(&m_shaderProgram)) {
-                SR_ERROR("Shader::Free() : failed to free shader program! \n\tPath: " + m_shaderCreateInfo.path.ToString());
+                SR_ERROR("Shader::Free() : failed to free shader program! \n\tPath: " + GetResourcePath().ToString());
             }
         }
     }
@@ -167,15 +169,15 @@ namespace SR_GRAPH_NS::Types {
     void Shader::SetFloat(uint64_t hashId, const float &v) noexcept { SetValue(hashId, v); }
     void Shader::SetInt(uint64_t hashId, const int &v) noexcept { SetValue(hashId, v); }
     void Shader::SetMat4(uint64_t hashId, const glm::mat4 &v) noexcept { SetValue(hashId, v); }
-    void Shader::SetMat4(uint64_t hashId, const SR_MATH_NS::Matrix4x4 &v) noexcept { SetValue(hashId, v); }
-    void Shader::SetVec3(uint64_t hashId, const glm::vec3 &v) noexcept { SetValue(hashId, v); }
-    void Shader::SetVec4(uint64_t hashId, const glm::vec4 &v) noexcept { SetValue(hashId, v); }
-    void Shader::SetVec2(uint64_t hashId, const glm::vec2 &v) noexcept { SetValue(hashId, v); }
+    void Shader::SetMat4(uint64_t hashId, const SR_MATH_NS::Matrix4x4& v) noexcept { SetValue(hashId, v); }
+    void Shader::SetVec3(uint64_t hashId, const SR_MATH_NS::FVector3& v) noexcept { SetValue(hashId, v); }
+    void Shader::SetVec4(uint64_t hashId, const SR_MATH_NS::FVector4& v) noexcept { SetValue(hashId, v); }
+    void Shader::SetVec2(uint64_t hashId, const SR_MATH_NS::FVector2& v) noexcept { SetValue(hashId, v); }
     void Shader::SetIVec2(uint64_t hashId, const glm::ivec2 &v) noexcept { SetValue(hashId, v); }
 
     void Shader::SetSampler(uint64_t hashId, int32_t sampler) noexcept {
         auto&& env = SR_GRAPH_NS::Environment::Get();
-        env->BindTexture(m_samplers.at(hashId).second, sampler);
+        env->BindTexture(m_samplers.at(hashId), sampler);
     }
 
     void Shader::SetSampler2D(uint64_t hashId, int32_t sampler) noexcept {
@@ -277,7 +279,7 @@ namespace SR_GRAPH_NS::Types {
             return;
         }
 
-        /// пока контекст ресурс жив, контекст будет существовать (если он зарегистрирован)
+        /// пока ресурс жив, контекст будет существовать (если ресурс зарегистрирован)
         pContext->Do([](RenderContext* ptr) {
             ptr->SetDirty();
         });
@@ -293,106 +295,41 @@ namespace SR_GRAPH_NS::Types {
             return false;
         }
 
-        auto &&unit = SRSL::SRSLLoader::Instance().Load(path);
-
-        if (!unit) {
-            SR_ERROR("Shader::Load() : failed to load SRSL shader! \n\tPath: " + path.ToString());
+        auto&& pShader = SR_SRSL_NS::SRSLShader::Load(path);
+        if (!pShader) {
+            SR_ERROR("Shader::Load() : failed to load srsl shader!\n\tPath: " + path.ToString());
             return false;
         }
 
-        m_shaderCreateInfo = std::move(unit->createInfo);
-        m_shaderCreateInfo.path = unit->path + "/shader";
-
-        switch ((m_type = unit->type)) {
-            case SRSL::ShaderType::Custom:
-            case SRSL::ShaderType::PostProcessing:
-                break;
-            case SRSL::ShaderType::Skinned:
-            {
-                UBOInfo uniforms = {};
-                for (const auto& [binding, size] : unit->GetUniformSizes()) {
-                    uniforms.emplace_back(std::pair(binding, size));
-                }
-
-                m_shaderCreateInfo.uniforms = std::move(uniforms);
-
-                auto&&[description, attrib] = Vertices::GetVertexInfo(Vertices::VertexType::SkinnedMeshVertex);
-                m_shaderCreateInfo.vertexDescriptions = std::move(description);
-                m_shaderCreateInfo.vertexAttributes = std::move(attrib);
-
-                break;
-            }
-            case SRSL::ShaderType::Spatial: {
-                UBOInfo uniforms = {};
-                for (const auto& [binding, size] : unit->GetUniformSizes()) {
-                    uniforms.emplace_back(std::pair(binding, size));
-                }
-
-                m_shaderCreateInfo.uniforms = std::move(uniforms);
-
-                SR_FALLTHROUGH;
-            }
-            case SRSL::ShaderType::SpatialCustom: {
-                auto&&[description, attrib] = Vertices::GetVertexInfo(Vertices::VertexType::StaticMeshVertex);
-                m_shaderCreateInfo.vertexDescriptions = std::move(description);
-                m_shaderCreateInfo.vertexAttributes = std::move(attrib);
-                break;
-            }
-            case SRSL::ShaderType::Simple:
-            case SRSL::ShaderType::TextUI:
-            case SRSL::ShaderType::Text:
-            case SRSL::ShaderType::Line:
-            case SRSL::ShaderType::Skybox: {
-                UBOInfo uniforms = { };
-                for (const auto& [binding, size] : unit->GetUniformSizes()) {
-                    uniforms.emplace_back(std::pair(binding, size));
-                }
-                m_shaderCreateInfo.uniforms = std::move(uniforms);
-
-                auto&&[description, attrib] = Vertices::GetVertexInfo(Vertices::VertexType::SimpleVertex);
-                m_shaderCreateInfo.vertexDescriptions = std::move(description);
-                m_shaderCreateInfo.vertexAttributes = std::move(attrib);
-
-                break;
-            }
-            case SRSL::ShaderType::Canvas: {
-                UBOInfo uniforms = { };
-                for (const auto&[binding, size] : unit->GetUniformSizes()) {
-                    uniforms.emplace_back(std::pair(binding, size));
-                }
-                m_shaderCreateInfo.uniforms = std::move(uniforms);
-
-                auto&&[description, attrib] = Vertices::GetVertexInfo(Vertices::VertexType::UIVertex);
-                m_shaderCreateInfo.vertexDescriptions = std::move(description);
-                m_shaderCreateInfo.vertexAttributes = std::move(attrib);
-
-                break;
-            }
-            case SRSL::ShaderType::Particles:
-            case SRSL::ShaderType::Unknown:
-            default:
-                SRHalt("Shader::Load() : unknown shader type!");
-                break;
+        if (!pShader->Export(SRSL2::ShaderLanguage::GLSL)) {
+            SR_ERROR("Shader::Load() : failed to export srsl shader!\n\tPath: " + path.ToString());
+            return false;
         }
 
-        for (auto&&[name, sampler] : unit->GetSamplers()) {
-            m_samplers[SR_RUNTIME_TIME_CRC32_STR(name.c_str())] = std::make_pair(
-                sampler.type,
-                sampler.binding
-            );
+        m_shaderCreateInfo = SRShaderCreateInfo(pShader->GetCreateInfo());
+        m_type = pShader->GetType();
 
-            if (sampler.show) {
-                m_properties.emplace_back(std::make_pair(name, sampler.type));
+        if (auto&& pBlock = pShader->FindUniformBlock("BLOCK")) {
+            for (auto&& field : pBlock->fields) {
+                m_uniformBlock.Append(SR_RUNTIME_TIME_CRC32_STR(field.name.c_str()), field.size, field.alignedSize, !field.isPublic);
+
+                const ShaderVarType varType = SR_SRSL_NS::SRSLTypeInfo::Instance().StringToType(field.type);
+
+                if (field.isPublic && varType != ShaderVarType::Unknown) {
+                    m_properties.emplace_back(std::make_pair(field.name, varType));
+                }
             }
+
+            m_uniformBlock.m_binding = pBlock->binding;
         }
 
-        auto&& uniformBlock = unit->GetUniformBlock();
-        for (auto&&[name, var] : uniformBlock) {
-            m_uniformBlock.Append(SR_RUNTIME_TIME_CRC32_STR(name.c_str()), var.type, !var.show);
-            m_uniformBlock.m_binding = var.binding;
+        for (auto&& [name, sampler] : pShader->GetSamplers()) {
+            m_samplers[SR_RUNTIME_TIME_CRC32_STR(name.c_str())] = sampler.binding;
 
-            if (var.show && !IsMatrixType(var.type)) {
-                m_properties.emplace_back(std::make_pair(name, var.type));
+            const ShaderVarType varType = SR_SRSL_NS::SRSLTypeInfo::Instance().StringToType(sampler.type);
+
+            if (sampler.isPublic && varType != ShaderVarType::Unknown) {
+                m_properties.emplace_back(std::make_pair(name, varType));
             }
         }
 
@@ -421,7 +358,7 @@ namespace SR_GRAPH_NS::Types {
         return m_shaderCreateInfo.blendEnabled;
     }
 
-    SRSL::ShaderType Shader::GetType() const noexcept {
+    SR_SRSL_NS::ShaderType Shader::GetType() const noexcept {
         return m_type;
     }
 }

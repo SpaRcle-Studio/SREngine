@@ -8,6 +8,7 @@
 #include <Core/Settings/EditorSettings.h>
 
 #include <Utils/Types/DataStorage.h>
+#include <Utils/Types/RawMesh.h>
 #include <Utils/ResourceManager/ResourceManager.h>
 #include <Utils/Common/AnyVisitor.h>
 #include <Utils/Locale/Encoding.h>
@@ -19,6 +20,8 @@
 #include <Physics/2D/Rigidbody2D.h>
 #include <Physics/3D/Rigidbody3D.h>
 
+#include <Graphics/Animations/Skeleton.h>
+#include <Graphics/Animations/Animator.h>
 #include <Graphics/Types/Geometry/Mesh3D.h>
 #include <Graphics/Types/Geometry/SkinnedMesh.h>
 #include <Graphics/Types/Geometry/ProceduralMesh.h>
@@ -31,6 +34,7 @@
 #include <Graphics/UI/Anchor.h>
 #include <Graphics/UI/Canvas.h>
 #include <Graphics/Font/Text.h>
+#include <assimp/include/assimp/scene.h>
 
 namespace SR_CORE_NS::GUI {
     void ComponentDrawer::DrawComponent(SR_PTYPES_NS::Rigidbody3D*& pComponent, EditorGUI* context, int32_t index) {
@@ -61,10 +65,7 @@ namespace SR_CORE_NS::GUI {
             pComponent->SetType(SR_UTILS_NS::EnumReflector::At<SR_PHYSICS_NS::ShapeType>(shape));
         }
 
-        /// auto&& size = pComponent->GetSize();
-        /// if (Graphics::GUI::DrawVec3Control("Size", size, 1.f, 70.f, 0.01f, index)) {
-        ///     pComponent->SetSize(size);
-        /// }
+        ComponentDrawer::DrawCollisionShape(pComponent->GetCollisionShape(), context, index);
 
         auto&& center = pComponent->GetCenter();
         if (Graphics::GUI::DrawVec3Control("Center", center, 0.f, 70.f, 0.01f, index)) {
@@ -95,6 +96,35 @@ namespace SR_CORE_NS::GUI {
         }
     }
 
+    void ComponentDrawer::DrawCollisionShape(SR_PTYPES_NS::CollisionShape* pCollisionShape, EditorGUI* context, int32_t index){
+        if (!pCollisionShape){
+            return;
+        }
+
+        const float_t lineHeight = GImGui->Font->FontSize + GImGui->Style.FramePadding.y * 2.0f;
+        const ImVec2 buttonSize = { lineHeight + 3.0f, lineHeight };
+
+        if (SR_PHYSICS_UTILS_NS::IsShapeHasSize(pCollisionShape->GetType())) {
+            auto&& size = pCollisionShape->GetSize();
+
+            if (Graphics::GUI::DrawVec3Control("Size", size, 0.f, 70.f, 0.1, index)) {
+                pCollisionShape->SetSize(size);
+            }
+        }
+
+        if (SR_PHYSICS_UTILS_NS::IsShapeHasHeight(pCollisionShape->GetType())) {
+            auto&& height = pCollisionShape->GetHeight();
+            if (Graphics::GUI::DrawValueControl<SR_MATH_NS::Unit>(
+                        "Height", height, 0.f, buttonSize,
+                        ImVec4{ 0.2f, 0.7f, 0.2f, 1.0f },
+                        ImVec4{ 0.3f, 0.8f, 0.3f, 1.0f },
+                        ImVec4{ 0.2f, 0.7f, 0.2f, 1.0f }, nullptr, true, 0.1f, index
+            )){
+                pCollisionShape->SetHeight(height);
+            }
+        }
+    }
+
     void ComponentDrawer::DrawComponent(Scripting::Behaviour *&pBehaviour, EditorGUI* context, int32_t index) {
         if (!pBehaviour) {
             return;
@@ -122,7 +152,7 @@ namespace SR_CORE_NS::GUI {
         {
             if (auto&& pDescriptor = context->GetIconDescriptor(EditorIcon::Reset)) {
                 if (GUISystem::Instance().ImageButton(SR_FORMAT("##BehResetBtn%i", index), pDescriptor, SR_MATH_NS::IVector2(25), 5)) {
-                    pBehaviour = Scripting::Behaviour::CreateEmpty();
+                    pBehaviour = new SR_SCRIPTING_NS::Behaviour();
                 }
             }
 
@@ -207,7 +237,7 @@ namespace SR_CORE_NS::GUI {
         if (auto&& pDescriptor = context->GetIconDescriptor(EditorIcon::Shapes)) {
             if (GUISystem::Instance().ImageButton(SR_FORMAT("##imgMeshBtn%i", index), pDescriptor, SR_MATH_NS::IVector2(50), 5)) {
                 auto&& resourcesFolder = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
-                auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesFolder, { { "Mesh", "obj,fbx,blend,stl,dae" } });
+                auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesFolder, { { "Mesh", "obj,pmx,fbx,blend,stl,dae" } });
 
                 if (path.Exists()) {
                     if (auto&& pMesh = SR_GTYPES_NS::Mesh::TryLoad(path, SR_GTYPES_NS::MeshType::Static, 0)) {
@@ -269,12 +299,15 @@ namespace SR_CORE_NS::GUI {
         if (!pComponent->IsCalculated())
             ImGui::TextColored(ImVec4(1, 1, 0, 1), "Mesh isn't calculated!");
 
+        if (!pComponent->IsSkeletonUsable())
+            ImGui::TextColored(ImVec4(1, 1, 0, 1), "No bones from skeleton to draw!");
+
         auto&& pMaterial = pComponent->GetMaterial();
 
         if (auto&& pDescriptor = context->GetIconDescriptor(EditorIcon::Shapes)) {
             if (GUISystem::Instance().ImageButton(SR_FORMAT("##imgMeshBtn%i", index), pDescriptor, SR_MATH_NS::IVector2(50), 5)) {
                 auto&& resourcesFolder = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
-                auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesFolder, { { "Mesh", "obj,fbx,blend,stl,dae" } });
+                auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesFolder, { { "Mesh", "obj,fbx,pmx,blend,stl,dae" } });
 
                 if (path.Exists()) {
                     if (auto&& pMesh = SR_GTYPES_NS::Mesh::TryLoad(path, SR_GTYPES_NS::MeshType::Skinned, 0)) {
@@ -510,6 +543,59 @@ namespace SR_CORE_NS::GUI {
         /// компилятор считает, что это недостижимый код (он ошибается)
         if (copy != pMaterial) {
             pComponent->SetMaterial(copy);
+        }
+    }
+
+    void ComponentDrawer::DrawComponent(SR_ANIMATIONS_NS::Animator *&pComponent, EditorGUI *context, int32_t index) {
+
+    }
+
+    void ComponentDrawer::DrawComponent(SR_ANIMATIONS_NS::Skeleton *&pComponent, EditorGUI *context, int32_t index) {
+        bool debug = pComponent->IsDebugEnabled();
+        if (Graphics::GUI::CheckBox("Debug", debug, index)) {
+            pComponent->SetDebugEnabled(debug);
+        }
+
+        if (Graphics::GUI::Button("Import", index)) {
+            auto&& resourcesFolder = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
+            auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesFolder, { { "Mesh with skeleton", "fbx,pmx,blend" } });
+
+            if (!path.Exists()) {
+                return;
+            }
+
+            auto&& pRawMesh = SR_HTYPES_NS::RawMesh::Load(path);
+            if (!pRawMesh) {
+                return;
+            }
+
+            pRawMesh->Execute([&]() -> bool {
+                return Importers::ImportSkeletonFromRawMesh(pRawMesh, pComponent);
+            });
+            pComponent->OnAttached();
+        }
+
+        const ImGuiTreeNodeFlags nodeFlagsWithChild = ImGuiTreeNodeFlags_DefaultOpen | ImGuiTreeNodeFlags_OpenOnArrow;
+        const ImGuiTreeNodeFlags nodeFlagsWithoutChild = ImGuiTreeNodeFlags_NoTreePushOnOpen | ImGuiTreeNodeFlags_Leaf;
+
+        const SR_HTYPES_NS::Function<void(SR_ANIMATIONS_NS::Bone*)> processBone = [&](SR_ANIMATIONS_NS::Bone* pBone) {
+            const ImGuiTreeNodeFlags flags = !pBone->bones.empty() ? nodeFlagsWithChild : nodeFlagsWithoutChild;
+
+            const bool isOpen = ImGui::TreeNodeEx((void*)(intptr_t)pBone, flags, "%s", pBone->name.c_str());
+
+            if (!isOpen || pBone->bones.empty()) {
+                return;
+            }
+
+            for (auto &&pSubBone : pBone->bones) {
+                processBone(pSubBone);
+            }
+
+            ImGui::TreePop();
+        };
+
+        if (pComponent->GetRootBone()) {
+            processBone(pComponent->GetRootBone());
         }
     }
 }

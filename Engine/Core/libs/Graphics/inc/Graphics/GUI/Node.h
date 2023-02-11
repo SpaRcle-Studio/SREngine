@@ -18,6 +18,10 @@ namespace SR_GRAPH_NS::GUI {
         Houdini
     );
 
+    enum class PinType : int32_t;
+
+    class NodeBuilder;
+
     class Pin;
     class Node;
     class Link;
@@ -33,28 +37,30 @@ namespace SR_GRAPH_NS::GUI {
         ~Node() override;
 
     public:
-        Node* AddInput(Pin* pin);
-        Node* AddOutput(Pin* pin);
+        Node& AddInput(Pin* pin);
+        Node& AddOutput(Pin* pin);
 
-        [[nodiscard]] Pin* GetInputPin(uint32_t index);
-        [[nodiscard]] Pin* GetOutputPin(uint32_t index);
+        Node& AddInput(const std::string& name, PinType type);
+        Node& AddOutput(const std::string& name, PinType type);
 
-        [[nodiscard]] uintptr_t GetId() const;
-        [[nodiscard]] bool Valid() const;
-        [[nodiscard]] std::string GetName() const;
+        SR_NODISCARD Pin* GetInputPin(uint32_t index);
+        SR_NODISCARD Pin* GetOutputPin(uint32_t index);
 
-        [[nodiscard]] Node* Copy() const;
+        SR_NODISCARD uintptr_t GetId() const;
+        SR_NODISCARD std::string GetName() const;
 
-        void Draw() const;
+        SR_NODISCARD Node* Copy() const;
+
+        void Draw(NodeBuilder* pBuilder, Pin* pNewLinkPin) const;
 
     private:
-        //ax::NodeEditor::NodeId m_id;
         std::string m_name;
         std::vector<Pin*> m_inputs;
         std::vector<Pin*> m_outputs;
         ImColor m_color;
         NodeType m_type;
         float_t m_maxOutputWidth;
+        bool m_hasOutputDelegates = false;
 
     };
 }

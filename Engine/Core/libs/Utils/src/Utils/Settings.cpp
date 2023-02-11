@@ -73,5 +73,10 @@ namespace SR_UTILS_NS {
 
         return std::move(SR_XML_NS::Document::Load(path));
     }
+
+    void Settings::Do(const SR_HTYPES_NS::Function<void(Settings*)> &fun) {
+        SR_LOCK_GUARD
+        fun(this);
+    }
 }
 

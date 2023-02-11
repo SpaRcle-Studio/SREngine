@@ -44,11 +44,13 @@ namespace SR_UTILS_NS {
         Path& operator=(const Path& path) = default;
 
     public:
-        bool Make(Type type = Type::Undefined) const;
+        SR_DEPRECATED bool Make(Type type = Type::Undefined) const;
+        bool Create() const;
 
         SR_NODISCARD bool Copy(const Path& destination) const;
 
         SR_NODISCARD std::string ToString() const;
+        SR_NODISCARD const std::string& ToStringRef() const;
         SR_NODISCARD std::string_view ToStringView() const;
         SR_NODISCARD std::wstring ToWinApiPath() const;
         SR_NODISCARD std::wstring ToUnicodeString() const;
@@ -63,7 +65,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD Path Concat(const Path& path) const;
         SR_NODISCARD Path ConcatExt(const std::string& ext) const;
         SR_NODISCARD Path RemoveSubPath(const Path& subPath) const;
-        SR_NODISCARD Path SelfRemoveSubPath(const Path& subPath);
+        SR_NODISCARD Path SelfRemoveSubPath(const Path& subPath) const;
 
         SR_NODISCARD bool Valid() const;
         SR_NODISCARD bool Empty() const;

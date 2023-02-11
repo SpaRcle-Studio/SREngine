@@ -1,122 +1,183 @@
 //
-// Created by Igor on 07/12/2022.
+// Created by Monika on 08.01.2023.
 //
 
-#include <Graphics/Animations/AnimationClip.h>
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
-#include <assimp/postprocess.h>
+
+#include <Graphics/Animations/AnimationClip.h>
+#include <Graphics/Animations/AnimationChannel.h>
+
+#include <Utils/Types/RawMesh.h>
 
 namespace SR_ANIMATIONS_NS {
-    const AnimationPose& AnimationClip::getCurrentPose() const {
-        m_currentPose.bonesLocalPoses[0] = getBoneLocalPose(0, m_currentTime);
+    AnimationClip::AnimationClip()
+        : Super(SR_COMPILE_TIME_CRC32_TYPE_NAME(AnimationClip), true /** auto remove */)
+    { }
 
-        auto bonesCount = static_cast<uint8_t>(m_skeleton.bones.size());
+    AnimationClip::~AnimationClip() {
+        for (auto&& pChannel : m_channels) {
+            delete pChannel;
+        }
+        m_channels.clear();
+    }
 
-        for (uint8_t boneIndex = 1; boneIndex < bonesCount; boneIndex++) {
-            m_currentPose.bonesLocalPoses[boneIndex] = getBoneLocalPose(boneIndex, m_currentTime);
+    AnimationClip* AnimationClip::Load(const SR_UTILS_NS::Path &rawPath, uint32_t index) {
+        SR_GLOBAL_LOCK
+
+        AnimationClip* pAnimationClip = nullptr;
+
+        SR_UTILS_NS::ResourceManager::Instance().Execute([&]() {
+            auto&& path = rawPath.SelfRemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetResPathRef());
+            auto&& resourceId = path.GetExtensionView() == "animation" ? path.ToString() : std::to_string(index) + "|" + path.ToString();
+
+            if (auto&& pResource = SR_UTILS_NS::ResourceManager::Instance().Find<AnimationClip>(path)) {
+                pAnimationClip = pResource;
+                return;
+            }
+
+            pAnimationClip = new AnimationClip();
+            pAnimationClip->SetId(resourceId, false /** auto register */);
+
+            if (!pAnimationClip->Reload()) {
+                SR_ERROR("AnimationClip::Load() : failed to load animation clip! \n\tPath: " + path.ToString());
+                delete pAnimationClip;
+                pAnimationClip = nullptr;
+                return;
+            }
+
+            /// отложенная ручная регистрация
+            SR_UTILS_NS::ResourceManager::Instance().RegisterResource(pAnimationClip);
+        });
+
+        return pAnimationClip;
+    }
+
+    std::vector<AnimationClip*> AnimationClip::Load(const SR_UTILS_NS::Path& rawPath) {
+        std::vector<AnimationClip*> animations;
+
+        auto&& pRawMesh = SR_HTYPES_NS::RawMesh::Load(rawPath, true);
+        if (!pRawMesh) {
+            return animations;
         }
 
-        return m_currentPose;
+        for (uint32_t i = 0; i < pRawMesh->GetAnimationsCount(); ++i) {
+            auto&& pAnimationClip = Load(rawPath, i);
+            animations.emplace_back(pAnimationClip);
+        }
+
+        if (animations.empty()) {
+            SR_ERROR("AnimationClip::Load() : failed to load animation clips! Path: " + rawPath.ToString());
+        }
+
+        return animations;
     }
 
-    void AnimationClip::Load(SR_UTILS_NS::Path path) {
-        Assimp::Importer* importer = new Assimp::Importer();
-        const aiScene* scene = importer->ReadFile(path.ToString(), aiProcess_Triangulate);
+    void AnimationClip::LoadChannels(aiAnimation *pAnimation) {
+        for (uint16_t channelIndex = 0; channelIndex < pAnimation->mNumChannels; ++channelIndex) {
+            auto&& pChannel = pAnimation->mChannels[channelIndex];
 
-        double duration = scene->mAnimations[0]->mDuration;
-        double rate = scene->mAnimations[0]->mTicksPerSecond;
-        std::vector<BoneAnimationChannel> bonesAnimationChannels;
+            /// --------------------------------------------------------------------------------------------------------
 
+            if (pChannel->mNumPositionKeys > 0) {
+                auto&& pTranslationChannel = new AnimationChannel();
 
-        delete scene;
-        delete importer;
-    }
+                pTranslationChannel->SetName(pChannel->mNodeName.C_Str());
 
-    void AnimationClip::increaseCurrentTime(float delta) {
-        m_currentTime += delta * m_rate;
+                for (uint16_t positionKeyIndex = 0; positionKeyIndex < pChannel->mNumPositionKeys; ++positionKeyIndex) {
+                    auto&& pPositionKey = pChannel->mPositionKeys[positionKeyIndex];
 
-        if (m_currentTime > m_duration) {
-            int overflowParts = static_cast<int>(m_currentTime / m_duration);
-            m_currentTime -= m_duration * static_cast<float>(overflowParts);
+                    pTranslationChannel->AddKey(pPositionKey.mTime / pAnimation->mTicksPerSecond, new TranslationKey(pTranslationChannel, SR_MATH_NS::FVector3(
+                            pPositionKey.mValue.x / 100.f,
+                            pPositionKey.mValue.y / 100.f,
+                            pPositionKey.mValue.z / 100.f
+                    )));
+                }
+
+                m_channels.emplace_back(pTranslationChannel);
+            }
+
+            /// --------------------------------------------------------------------------------------------------------
+
+            if (pChannel->mNumRotationKeys > 0) {
+                auto&& pRotationChannel = new AnimationChannel();
+
+                pRotationChannel->SetName(pChannel->mNodeName.C_Str());
+
+                for (uint16_t rotationKeyIndex = 0; rotationKeyIndex < pChannel->mNumRotationKeys; ++rotationKeyIndex) {
+                    auto&& pRotationKey = pChannel->mRotationKeys[rotationKeyIndex];
+
+                    auto&& q = SR_MATH_NS::Quaternion(
+                            pRotationKey.mValue.x,
+                            pRotationKey.mValue.y,
+                            pRotationKey.mValue.z,
+                            pRotationKey.mValue.w
+                    );
+
+                   pRotationChannel->AddKey(pRotationKey.mTime / pAnimation->mTicksPerSecond, new RotationKey(pRotationChannel, q));
+                }
+
+                m_channels.emplace_back(pRotationChannel);
+            }
+
+            /// --------------------------------------------------------------------------------------------------------
+
+            if (pChannel->mNumScalingKeys > 0) {
+                auto&& pScalingChannel = new AnimationChannel();
+
+                pScalingChannel->SetName(pChannel->mNodeName.C_Str());
+
+                for (uint16_t scalingKeyIndex = 0; scalingKeyIndex < pChannel->mNumScalingKeys; ++scalingKeyIndex) {
+                    auto&& pScalingKey = pChannel->mScalingKeys[scalingKeyIndex];
+
+                    pScalingChannel->AddKey(pScalingKey.mTime / pAnimation->mTicksPerSecond, new ScalingKey(pScalingChannel, SR_MATH_NS::FVector3(
+                            pScalingKey.mValue.x / 1.f,
+                            pScalingKey.mValue.y / 1.f,
+                            pScalingKey.mValue.z / 1.f
+                    )));
+                }
+
+                m_channels.emplace_back(pScalingChannel);
+            }
         }
     }
 
-    BonePose AnimationClip::getBoneLocalPose(uint8_t boneIndex, float time) const {
-        {
-            const std::vector<BoneAnimationPositionFrame>& positionFrames =
-                    m_bonesAnimationChannels[boneIndex].positionFrames;
-
-            auto position = getMixedAdjacentFrames<glm::vec3, BoneAnimationPositionFrame>(positionFrames, time);
-
-            const std::vector<BoneAnimationOrientationFrame>& orientationFrames =
-                    m_bonesAnimationChannels[boneIndex].orientationFrames;
-
-            auto orientation = getMixedAdjacentFrames<glm::quat, BoneAnimationOrientationFrame>(orientationFrames, time);
-
-            return BonePose(position, orientation, 0.0f); ///TODO: scale пока-что не используется, но должен передаваться, потому в будущем реализовать его передачу
+    bool AnimationClip::Unload() {
+        for (auto&& pChannel : m_channels) {
+            delete pChannel;
         }
+        m_channels.clear();
+
+        return Super::Unload();
     }
 
-    template<class T, class S>
-    T AnimationClip::getMixedAdjacentFrames(const std::vector<S>& frames, float time) const
-    {
-        S tempFrame;
-        tempFrame.time = time;
+    bool AnimationClip::Load() {
+        auto&& resourceManager = SR_UTILS_NS::ResourceManager::Instance();
 
-        auto frameIt = std::upper_bound(frames.begin(), frames.end(),
-                                        tempFrame, [](const S& a, const S& b) {
-                    return a.time < b.time;
-                });
+        auto&& resourceId = GetResourceId();
 
-        if (frameIt == frames.end()) {
-            return (frames.size() > 0) ? getKeyframeValue<T, S>(*std::prev(frames.end())) : getIdentity<T>();
+        if (SR_UTILS_NS::StringUtils::GetExtensionFromFilePath(resourceId) == "animation") {
+
         }
         else {
-            T next = getKeyframeValue<T, S>(*frameIt);
-            T prev = (frameIt == frames.begin()) ? getIdentity<T>() : getKeyframeValue<T, S>(*std::prev(frameIt));
+            auto&& [strIndex, rawPath] = SR_UTILS_NS::StringUtils::SplitTwo(resourceId, "|");
+            uint32_t index = SR_UTILS_NS::LexicalCast<uint32_t>(strIndex);
 
-            float currentFrameTime = frameIt->time;
-            float prevFrameTime = (frameIt == frames.begin()) ? 0 : std::prev(frameIt)->time;
+            auto&& pRawMesh = SR_HTYPES_NS::RawMesh::Load(rawPath, true);
+            if (!pRawMesh) {
+                return false;
+            }
 
-            float framesTimeDelta = currentFrameTime - prevFrameTime;
-
-            return getInterpolatedValue<T>(prev, next, (time - prevFrameTime) / framesTimeDelta);
+            LoadChannels(pRawMesh->GetAssimpScene()->mAnimations[index]);
         }
-    }
-    template<>
-    glm::vec3 AnimationClip::getIdentity() const
-    {
-        return glm::vec3(0.0f);
+
+        return Super::Load();
     }
 
-    template<>
-    glm::quat AnimationClip::getIdentity() const
-    {
-        return glm::identity<glm::quat>();
-    }
-
-    template<>
-    glm::vec3 AnimationClip::getKeyframeValue(const BoneAnimationPositionFrame& frame) const
-    {
-        return frame.position;
-    }
-
-    template<>
-    glm::quat AnimationClip::getKeyframeValue(const BoneAnimationOrientationFrame& frame) const
-    {
-        return frame.orientation;
-    }
-
-    template<>
-    glm::vec3 AnimationClip::getInterpolatedValue(const glm::vec3& first, const glm::vec3& second, float delta) const
-    {
-        return glm::mix(first, second, delta);
-    }
-
-    template<>
-    glm::quat AnimationClip::getInterpolatedValue(const glm::quat& first, const glm::quat& second, float delta) const
-    {
-        return glm::slerp(first, second, delta);
+    SR_UTILS_NS::Path AnimationClip::InitializeResourcePath() const {
+        return SR_UTILS_NS::Path(
+                std::move(SR_UTILS_NS::StringUtils::SubstringView(GetResourceId(), '|', 1)),
+                true /** fast */
+        );
     }
 }

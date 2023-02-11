@@ -16,6 +16,11 @@ namespace SR_UTILS_NS {
     }
 
     void** SingletonManager::GetSingleton(uint64_t id) noexcept {
-        return &m_singletons[id]; /// get or create
+        if (auto&& pIt = m_singletons.find(id); pIt != m_singletons.end()) {
+            return &pIt->second;
+        }
+
+        auto&& pIt = m_singletons.insert(std::make_pair(id, nullptr));
+        return &pIt.first->second;
     }
 }

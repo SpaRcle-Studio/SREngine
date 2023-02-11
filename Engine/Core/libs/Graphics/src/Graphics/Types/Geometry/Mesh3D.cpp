@@ -4,6 +4,7 @@
 
 #include <Utils/Types/RawMesh.h>
 #include <Utils/Types/DataStorage.h>
+#include <Utils/ECS/ComponentManager.h>
 
 #include <Graphics/Types/Geometry/Mesh3D.h>
 #include <Graphics/Types/Material.h>
@@ -12,12 +13,11 @@
 #include <Graphics/Types/Shader.h>
 
 namespace SR_GTYPES_NS {
+    SR_REGISTER_COMPONENT(Mesh3D);
+
     Mesh3D::Mesh3D()
         : Super(MeshType::Static)
-    {
-        /// override component
-        Component::InitComponent<Mesh3D>();
-    }
+    { }
 
     Mesh3D::~Mesh3D() {
         SetRawMesh(nullptr);
@@ -151,7 +151,7 @@ namespace SR_GTYPES_NS {
         auto &&pMesh = Mesh::Load(SR_UTILS_NS::Path(path, true), type, id);
 
         if (pMesh && material != "None") {
-            if (auto&& pMaterial = Types::Material::Load(SR_UTILS_NS::Path(material, true))) {
+            if (auto&& pMaterial = SR_GTYPES_NS::Material::Load(SR_UTILS_NS::Path(material, true))) {
                 pMesh->SetMaterial(pMaterial);
             }
             else

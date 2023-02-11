@@ -3,6 +3,7 @@
 //
 
 #include <Utils/ECS/ComponentManager.h>
+#include <Utils/ECS/Migration.h>
 
 namespace SR_UTILS_NS {
     Component* ComponentManager::CreateComponentOfName(const std::string &name) {
@@ -28,22 +29,26 @@ namespace SR_UTILS_NS {
     Component* ComponentManager::Load(SR_HTYPES_NS::Marshal& marshal) {
         SR_SCOPED_LOCK
 
-        m_lastComponent = marshal.Read<std::string>(); /// name
-        auto&& enabled = marshal.Read<bool>();         /// enabled
-        auto&& version = marshal.Read<uint16_t>();     /// version
+        m_lastComponent = marshal.Read<uint64_t>(); /// name
+        auto&& enabled = marshal.Read<bool>();      /// enabled
+        auto&& version = marshal.Read<uint16_t>();  /// version
 
-        auto&& uidIt = m_ids.find(m_lastComponent);
-        if (uidIt == std::end(m_ids)) {
-            SRAssert2(false, "Component \"" + m_lastComponent + "\" not found!");
-            return nullptr;
+        if (version != GetVersionById(m_lastComponent)) {
+            auto&& pMetadataIt = m_meta.find(m_lastComponent);
+            if (pMetadataIt == m_meta.end()) {
+                SRHalt("Unknown component!");
+                return nullptr;
+            }
+
+            SR_WARN("ComponentManager::Load() : \"" + pMetadataIt->second.name + "\" has different version! Try migrate...");
+
+            if (!Migration::Instance().Migrate(m_lastComponent, marshal, version)) {
+                SR_ERROR("ComponentManager::Load() : failed to migrate component!");
+                return nullptr;
+            }
         }
 
-        if (version != GetVersionById(uidIt->second)) {
-            SR_WARN("ComponentManager::Load() : \"" + m_lastComponent + "\" has different version!");
-            return nullptr;
-        }
-
-        if (auto&& pComponent = m_meta.at(uidIt->second).loader(marshal, &m_context)) {
+        if (auto&& pComponent = m_meta.at(m_lastComponent).loader(marshal, &m_context)) {
             pComponent->m_isEnabled = enabled;
             return pComponent;
         }
@@ -54,7 +59,7 @@ namespace SR_UTILS_NS {
     uint16_t ComponentManager::GetVersion(const Component *pComponent) const {
         SR_SCOPED_LOCK
 
-        return GetVersionById(pComponent->GetComponentId());
+        return GetVersionById(pComponent->GetComponentHashName());
     }
 
     uint16_t ComponentManager::GetVersionById(uint64_t id) const {
@@ -81,7 +86,13 @@ namespace SR_UTILS_NS {
 
     std::string ComponentManager::GetLastComponentName() const {
         SR_SCOPED_LOCK
-        return m_lastComponent;
+
+        auto&& pMetadataIt = m_meta.find(m_lastComponent);
+        if (pMetadataIt == m_meta.end()) {
+            return "\"Unknown component\"";
+        }
+
+        return pMetadataIt->second.name;
     }
 
     std::vector<SR_UTILS_NS::Component*> ComponentManager::LoadComponents(SR_HTYPES_NS::Marshal &marshal) {
@@ -119,7 +130,7 @@ namespace SR_UTILS_NS {
                         SRHalt("Something went wrong!");
                         return false;
                     }
-                    marshal.SkipBytes(lostBytes);
+                    marshal.Skip(lostBytes);
                 }
             }
 

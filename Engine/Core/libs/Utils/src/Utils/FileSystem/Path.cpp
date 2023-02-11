@@ -67,6 +67,10 @@ namespace SR_UTILS_NS {
         return m_path;
     }
 
+    const std::string& Path::ToStringRef() const {
+        return m_path;
+    }
+
     std::string_view Path::ToStringView() const {
         return m_path;
     }
@@ -210,6 +214,17 @@ namespace SR_UTILS_NS {
         return m_path + "." + ext;
     }
 
+    bool Path::Create() const {
+        if (m_path.empty())
+            return false;
+
+        if (m_ext.empty()) {
+            return FileSystem::CreatePath(m_path);
+        }
+
+        return FileSystem::CreatePath(m_path.substr(0, m_path.size() - (m_name.size() + m_ext.size() + 1)));
+    }
+
     bool Path::Make(Type type) const {
         if (m_path.empty())
             return false;
@@ -291,7 +306,7 @@ namespace SR_UTILS_NS {
         return StringUtils::Remove(m_path, index, subPath.m_path.size() + 1);
     }
 
-    Path Path::SelfRemoveSubPath(const Path &subPath) {
+    Path Path::SelfRemoveSubPath(const Path &subPath) const {
         auto&& index = m_path.find(subPath.m_path);
 
         if (index == std::string::npos) {

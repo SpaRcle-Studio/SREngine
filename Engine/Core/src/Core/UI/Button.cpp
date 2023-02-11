@@ -7,10 +7,7 @@
 namespace SR_CORE_UI_NS {
     Button::Button()
         : Super()
-    {
-        /// override component
-        Component::InitComponent<Button>();
-    }
+    { }
 
     SR_UTILS_NS::Component* Button::LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage) {
         return new Button();

@@ -1,0 +1,326 @@
+ShaderType PostProcessing;
+
+PolygonMode Fill;
+CullMode Back;
+DepthCompare LessOrEqual;
+PrimitiveTopology TriangleList;
+BlendEnabled false;
+DepthWrite false;
+DepthTest false;
+
+[[const]] float FOV = 1.0;
+[[const]] float EPSILON = 0.001;
+[[const]] float MAX_DIST = 500;
+[[const]] int MAX_STEPS = 256;
+
+// Maximum/minumum elements of a vector
+float vmax(vec2 v) {
+	return max(v.x, v.y);
+}
+
+float vmax(vec3 v) {
+	return max(max(v.x, v.y), v.z);
+}
+
+float vmax(vec4 v) {
+	return max(max(v.x, v.y), max(v.z, v.w));
+}
+
+float vmin(vec2 v) {
+	return min(v.x, v.y);
+}
+
+float vmin(vec3 v) {
+	return min(min(v.x, v.y), v.z);
+}
+
+float vmin(vec4 v) {
+	return min(min(v.x, v.y), min(v.z, v.w));
+}
+
+float fSphere(vec3 p, float r) {
+	return length(p) - r;
+}
+
+// Box: correct distance to corners
+float fBox(vec3 p, vec3 b) {
+	vec3 d = abs(p) - b;
+	return length(max(d, vec3(0))) + vmax(min(d, vec3(0)));
+}
+
+// Plane with normal n (n is normalized) at some distance from the origin
+float fPlane(vec3 p, vec3 n, float distanceFromOrigin) {
+	return dot(p, n) + distanceFromOrigin;
+}
+
+vec2 fOpUnionID(vec2 res1, vec2 res2) {
+    if (res1.x < res2.x) {
+        return res1;
+    }
+    return res2;
+}
+
+vec2 fOpDifferenceID(vec2 res1, vec2 res2) {
+    if (res1.x > -res2.x) {
+        return res1;
+    }
+    return vec2(-res2.x, res2.y);
+}
+
+// The "Chamfer" flavour makes a 45-degree chamfered edge (the diagonal of a square of size <r>):
+float fOpUnionChamfer(float a, float b, float r) {
+	return min(min(a, b), (a - r + b)*sqrt(0.5));
+}
+
+// Repeat space along one axis. Use like this to repeat along the x axis:
+// <float cell = pMod1(p.x,5);> - using the return value is optional.
+float pMod1(float p, float size) {
+	float halfsize = size*0.5;
+	float c = floor((p + halfsize)/size);
+	p = mod(p + halfsize, size) - halfsize;
+	return c;
+}
+
+// Shortcut for 45-degrees rotation
+void pR45(vec2 p) {
+	p = (p + vec2(p.y, -p.x))*sqrt(0.5);
+}
+
+float fOpDifferenceColumns(float a, float b, float r, float n) {
+	a = -a;
+	float m = min(a, b);
+	//avoid the expensive computation where not needed (produces discontinuity though)
+	if ((a < r) && (b < r)) {
+		vec2 p = vec2(a, b);
+		float columnradius = r*sqrt(2)/n/2.0;
+		columnradius = r*sqrt(2)/((n-1)*2+sqrt(2));
+
+		pR45(p);
+		p.y += columnradius;
+		p.x -= sqrt(2)/2*r;
+		p.x += -columnradius*sqrt(2)/2;
+
+		if (mod(n,2) == 1) {
+			p.y += columnradius;
+		}
+		pMod1(p.y,columnradius*2);
+
+		float result = -length(p) + columnradius;
+		result = max(result, p.x);
+		result = min(result, a);
+		return -min(result, b);
+	}
+	else {
+		return -m;
+	}
+}
+
+float fOpIntersectionColumns(float a, float b, float r, float n) {
+	return fOpDifferenceColumns(a,-b,r, n);
+}
+
+// The "Stairs" flavour produces n-1 steps of a staircase:
+// much less stupid version by paniq
+float fOpUnionStairs(float a, float b, float r, float n) {
+	float s = r/n;
+	float u = b-r;
+	return min(min(a,b), 0.5 * (u + a + abs ((mod (u - a + s, 2 * s)) - s)));
+}
+
+vec2 fOpDifferenceColumnsID(vec2 res1, vec2 res2, float r, float n) {
+    float dist = fOpDifferenceColumns(res1.x, res2.x, r, n);
+    if (res1.x > -res2.x) {
+        return vec2(dist, res1.y);
+    }
+    return vec2(dist, res2.y);
+}
+
+vec2 fOpUnionStairsID(vec2 res1, vec2 res2, float r, float n) {
+    float dist = fOpUnionStairs(res1.x, res2.x, r, n);
+    if (res1.x < res2.x) {
+        return vec2(dist, res1.y);
+    }
+    return vec2(dist, res2.y);
+}
+
+
+vec2 fOpUnionChamferID(vec2 res1, vec2 res2, float r) {
+    float dist = fOpUnionChamfer(res1.x, res2.x, r);
+    if (res1.x < res2.x) {
+        return vec2(dist, res1.y);
+    }
+    return vec2(dist, res2.y);
+}
+
+vec2 map(vec3 p) {
+    /// box
+    float boxDist = fBox(p + vec3(1.5, -0.5, 1.5), vec3(1));
+    float boxID = 3.0;
+    vec2 box = vec2(boxDist, boxID);
+    /// sphere
+    float planeDist = fPlane(p, vec3(0, 1, 0), 1.0);
+    float planeID = 2.0;
+    vec2 plane = vec2(planeDist, planeID);
+    /// sphere
+    float sphereDist = fSphere(p + vec3(0, -0.25, 0), 1.0);
+    float sphereID = 1.0;
+    vec2 sphere = vec2(sphereDist, sphereID);
+    /// result
+    vec2 res = vec2(0);
+    res = fOpUnionID(box, plane);
+    res = fOpUnionID(res, sphere);
+    return res;
+}
+
+vec2 rayMarch(vec3 ro, vec3 rd) {
+    vec2 hit;
+    vec2 object = vec2(0, 0);
+
+    for (int i = 0; i < MAX_STEPS; ++i) {
+        vec3 p = ro + object.x * rd;
+        hit = map(p);
+        object.x += hit.x;
+        object.y = hit.y;
+
+        if (abs(hit.x) < EPSILON || object.x > MAX_DIST) {
+            break;
+        }
+    }
+
+    return object;
+}
+
+vec3 getNormal(vec3 p) {
+    vec2 e = vec2(EPSILON, 0.0);
+    vec3 n = vec3(map(p).x) - vec3(map(p - e.xyy).x, map(p - e.yxy).x, map(p - e.yyx).x);
+    return normalize(n);
+}
+
+float getSoftShadow(vec3 p, vec3 lightPos) {
+    float res = 1.0;
+    float dist = 0.01;
+    float lightSize = 0.03;
+
+    for (int i = 0; i < MAX_STEPS; i++) {
+        float hit = map(p + lightPos * dist).x;
+        res = min(res, hit / (dist * lightSize));
+        dist += hit;
+        if (hit < 0.0001 || dist > 60.0) {
+            break;
+        }
+    }
+
+    return clamp(res, 0.0, 1.0);
+}
+
+float getAmbientOcclusion(vec3 p, vec3 normal) {
+    float occ = 0.0;
+    float weight = 1.0;
+    for (int i = 0; i < 8; i++) {
+        float len = 0.01 + 0.02 * float(i * i);
+        float dist = map(p + normal * len).x;
+        occ += (len - dist) * weight;
+        weight *= 0.85;
+    }
+    return 1.0 - clamp(0.6 * occ, 0.0, 1.0);
+}
+
+vec3 getMaterial(vec3 p, float id, vec3 normal) {
+    /// TODO: switch-statement
+    vec3 m;
+
+    if (id == 1) {
+        m = vec3(0.9, 0.0, 0.0);
+    }
+    else if (id == 2) {
+        m = vec3(0.2 + 0.4 * mod(floor(p.x) + floor(p.z), 2.0));
+    }
+    else if (id == 3) {
+        m = vec3(0.0, 0.9, 0.0);
+    }
+
+    return m;
+}
+
+vec3 getLight(vec3 p, vec3 rd, float id) {
+    vec3 lightPos = vec3(20.0, 55.0, -25.0);
+    vec3 L = normalize(lightPos - p);
+    vec3 N = getNormal(p);
+    vec3 V = -rd;
+    vec3 R = reflect(-L, N);
+
+    vec3 color = getMaterial(p, id, N);
+
+    vec3 specColor = vec3(0.6, 0.5, 0.4);
+    vec3 specular = 1.3 * specColor * pow(clamp(dot(R, V), 0.0, 1.0), 10.0);
+    vec3 diffuse = 0.9 * color * clamp(dot(L, N), 0.0, 1.0);
+    vec3 ambient = 0.05 * color;
+    vec3 fresnel = 0.15 * color * pow(1.0 + dot(rd, N), 3.0);
+
+    // shadows
+    float shadow = getSoftShadow(p + N * 0.02, normalize(lightPos));
+    // occ
+    float occ = getAmbientOcclusion(p, N);
+    // back
+    vec3 back = 0.05 * color * clamp(dot(N, -L), 0.0, 1.0);
+
+    return  (back + ambient + fresnel) * occ + (specular * occ + diffuse) * shadow;
+}
+
+mat3 getCam(vec3 ro, vec3 lookAt) {
+    vec3 camF = normalize(vec3(lookAt - ro));
+    vec3 camR = normalize(cross(vec3(0, 1, 0), camF));
+    vec3 camU = cross(camF, camR);
+    return mat3(camR, camU, camF);
+}
+
+vec3 render(vec2 uv) {
+    /// camera
+    vec3 ro = VIEW_POSITION;
+    vec3 lookAt = VIEW_POSITION + VIEW_DIRECTION;
+
+    vec3 rd = getCam(ro, lookAt) * normalize(vec3(uv, FOV));
+    vec3 col = vec3(0, 0, 0);
+
+    vec2 object = rayMarch(ro, rd);
+
+    vec3 background = vec3(0.5, 0.8, 0.9);
+
+    if (object.x < MAX_DIST) {
+        vec3 p = ro + object.x * rd;
+        col += getLight(p, rd, object.y);
+        // fog
+        col = mix(col, background, 1.0 - exp(-0.000008 * object.x * object.x * object.x));
+    }
+    else {
+        col += background - max(0.95 * rd.y, 0.0);
+    }
+
+    return col;
+}
+
+vec2 getUV(vec2 offset) {
+    vec2 uv = (2.0 * FRAG_COORD.xy - RESOLUTION.xy) / RESOLUTION.y;
+    uv = vec2(uv.x, -uv.y);
+    return uv;
+}
+
+vec3 renderAAx4() {
+    vec4 e = vec4(0.125, -0.125, 0.375, -0.375);
+    vec3 colAA = render(getUV(e.xz)) + render(getUV(e.yw)) + render(getUV(e.wx)) + render(getUV(e.zy));
+    return colAA / 4.0;
+}
+
+void fragment() {
+    vec3 color = renderAAx4();
+
+    /// gamma-correction
+    color = pow(color, vec3(0.4545));
+
+    COLOR_INDEX_0 = vec4(color, 1);
+}
+
+void vertex() {
+    vec2 uv_coord = vec2((VERTEX_INDEX << 1) & 2, VERTEX_INDEX & 2);
+    OUT_POSITION = vec4(uv_coord * 2.0 - 1.0, 0.0, 1.0);
+}

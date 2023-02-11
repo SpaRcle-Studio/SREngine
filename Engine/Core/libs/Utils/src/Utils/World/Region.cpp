@@ -11,6 +11,12 @@ namespace SR_WORLD_NS {
     const uint16_t Region::VERSION = 1000;
 
     void Region::Update(float_t dt) {
+        if (m_loadedChunks.empty()) {
+            return;
+        }
+
+        SR_HTYPES_NS::DataStorage* pContext = nullptr;
+
         for (auto&& pIt = m_loadedChunks.begin(); pIt != m_loadedChunks.end(); ) {
             const auto& pChunk = pIt->second;
 
@@ -20,7 +26,11 @@ namespace SR_WORLD_NS {
                 ++pIt;
             }
             else {
-                if (auto&& pMarshal = pChunk->Save(); pMarshal) {
+                if (!pContext) {
+                    pContext = SR_THIS_THREAD->GetContext();
+                }
+
+                if (auto&& pMarshal = pChunk->Save(pContext); pMarshal) {
                     if (pMarshal->Valid()) {
                         m_cached[pIt->first] = pMarshal;
                     }
@@ -60,12 +70,14 @@ namespace SR_WORLD_NS {
         if (pChunk && pChunk->GetState() == Chunk::LoadState::Unload) {
             if (auto pCacheIt = m_cached.find(position); pCacheIt != m_cached.end()) {
                 /// TODO: OPTIMIZE!!!!!!!!!!!!!!!!!!!
-                pChunk->Load(pCacheIt->second->Copy());
+                SR_HTYPES_NS::Marshal copy = pCacheIt->second->Copy();
+                pChunk->Load(&copy);
+
                 delete pCacheIt->second;
                 m_cached.erase(pCacheIt);
             }
             else {
-                pChunk->Load(SR_HTYPES_NS::Marshal());
+                pChunk->Load(nullptr);
             }
         }
 
@@ -94,9 +106,15 @@ namespace SR_WORLD_NS {
 
         SetDebugLoaded(BoolExt::False);
 
+        if (m_loadedChunks.empty()) {
+            return true;
+        }
+
+        auto&& pContext = SR_THIS_THREAD->GetContext();
+
         for (auto&& [position, pChunk] : m_loadedChunks) {
             if (!force) {
-                if (auto&& pMarshal = pChunk->Save(); pMarshal) {
+                if (auto&& pMarshal = pChunk->Save(pContext); pMarshal) {
                     if (pMarshal->Valid()) {
                         m_cached[position] = pMarshal;
                     }
@@ -175,15 +193,15 @@ namespace SR_WORLD_NS {
         Load();
     }
 
-    SR_HTYPES_NS::Marshal::Ptr Region::Save() const {
+    SR_HTYPES_NS::Marshal::Ptr Region::Save(SR_HTYPES_NS::DataStorage* pContext) const {
         auto&& pMarshal = new SR_HTYPES_NS::Marshal();
 
         std::list<SR_HTYPES_NS::Marshal::Ptr> available;
 
         for (const auto& [position, pChunk] : m_loadedChunks) {
-            if (auto&& pChunkMarshal = pChunk->Save(); pChunkMarshal) {
+            if (auto&& pChunkMarshal = pChunk->Save(pContext); pChunkMarshal) {
                 if (pChunkMarshal->Valid()) {
-                    SRAssert(pChunkMarshal->BytesCount() > 0);
+                    SRAssert(pChunkMarshal->Size() > 0);
                     available.emplace_back(pChunkMarshal);
                 }
                 else {
@@ -194,7 +212,7 @@ namespace SR_WORLD_NS {
 
         for (const auto& [position, pCache] : m_cached) {
             SRAssert(pCache->Valid());
-            SRAssert(pCache->BytesCount() > 0);
+            SRAssert(pCache->Size() > 0);
             available.emplace_back(pCache->CopyPtr());
         }
 
@@ -202,12 +220,12 @@ namespace SR_WORLD_NS {
         if (chunkCount == 0)
             return pMarshal;
 
-        pMarshal->Write(VERSION);
-        pMarshal->Write(chunkCount);
+        pMarshal->Write<uint16_t>(VERSION);
+        pMarshal->Write<uint64_t>(chunkCount);
 
         for (auto&& pChunkMarshal : available) {
-            SRAssert(pChunkMarshal->BytesCount() > 0);
-            pMarshal->Write(pChunkMarshal->BytesCount());
+            SRAssert(pChunkMarshal->Size() > 0);
+            pMarshal->Write<uint64_t>(pChunkMarshal->Size());
             pMarshal->Append(pChunkMarshal);
         }
 
@@ -229,7 +247,8 @@ namespace SR_WORLD_NS {
         if (path.Exists()) {
             auto &&marshal = SR_HTYPES_NS::Marshal::Load(path);
 
-            if (marshal.Read<uint16_t>() != VERSION) {
+            const uint16_t version = marshal.Read<uint16_t>();
+            if (version != VERSION) {
                 SR_ERROR("Region::Load() : version is different!");
                 return false;
             }

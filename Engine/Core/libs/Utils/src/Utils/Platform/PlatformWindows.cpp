@@ -325,7 +325,7 @@ namespace SR_UTILS_NS::Platform {
             return false;
         }
 
-        CreateFolder(to);
+        CreateFolder(to.ToStringRef());
 
         for (auto&& item : GetInDirectory(from, Path::Type::Undefined)) {
             if (Copy(item, to.Concat(item.GetBaseNameAndExt()))) {
@@ -364,11 +364,11 @@ namespace SR_UTILS_NS::Platform {
         return items;
     }
 
-    bool CreateFolder(const Path &path) {
+    bool CreateFolder(const std::string& path) {
 #ifdef SR_MINGW
-        return mkdir(path.CStr());
+        return mkdir(path.c_str());
 #else
-        return _mkdir(path.CStr());
+        return _mkdir(path.c_str());
 #endif
     }
 

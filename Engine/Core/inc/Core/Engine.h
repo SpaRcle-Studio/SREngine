@@ -85,7 +85,7 @@ namespace SR_CORE_NS {
 
     private:
         void RegisterResources();
-        void RegisterComponents();
+        void RegisterMigrators();
 
         bool CreateMainWindow();
         bool InitializeRender();

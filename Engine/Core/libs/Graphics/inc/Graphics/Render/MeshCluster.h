@@ -10,11 +10,11 @@
 #include <Utils/Types/Map.h>
 #include <Utils/Types/Function.h>
 
-namespace SR_GRAPH_NS {
-    namespace SRSL {
-        enum class ShaderType;
-    }
+namespace SR_SRSL_NS {
+    enum class ShaderType;
+}
 
+namespace SR_GRAPH_NS {
     namespace Types {
         class IndexedMesh;
         class Mesh;
@@ -64,7 +64,7 @@ namespace SR_GRAPH_NS {
         bool SR_FASTCALL Remove(Types::Mesh *mesh) noexcept;
         SR_NODISCARD bool SR_FASTCALL Empty() const noexcept;
 
-        SR_NODISCARD SRSL::ShaderType GetShaderType() const noexcept;
+        SR_NODISCARD SR_SRSL_NS::ShaderType GetShaderType() const noexcept;
 
     private:
         MeshGroups m_groups;

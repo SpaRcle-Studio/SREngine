@@ -16,27 +16,18 @@
 #include <Utils/Common/Hashes.h>
 
 namespace SR_UTILS_NS {
-    GameObject::GameObject(std::string name, Transform* pTransform, std::string tag)
+    GameObject::GameObject(std::string name, Transform* pTransform)
         : Super(this)
     {
         SetName(std::move(name));
-        m_tag = std::move(tag);
 
         SetTransform(pTransform);
 
         UpdateEntityPath();
     }
 
-    GameObject::GameObject(std::string name, Transform *pTransform)
-        : GameObject(std::move(name), pTransform, std::move(std::string()))
-    { }
-
-    GameObject::GameObject(std::string name, std::string tag)
-        : GameObject(std::move(name), new Transform3D(), std::move(tag))
-    { }
-
     GameObject::GameObject(std::string name)
-        : GameObject(std::move(name), std::move(std::string()))
+        : GameObject(std::move(name), new Transform3D())
     { }
 
     GameObject::~GameObject() {
@@ -120,28 +111,20 @@ namespace SR_UTILS_NS {
 
     void GameObject::SetName(std::string name) {
         m_name = std::move(name);
-        m_hashName = SR_UTILS_NS::HashCombine(m_name);
+        m_hashName = SR_HASH_STR(m_name);
 
         if (m_scene) {
             m_scene->OnChanged();
         }
     }
 
-    void GameObject::SetTag(const std::string &tag) {
-        m_tag = tag;
-
-        if (m_scene) {
-            m_scene->OnChanged();
-        }
+    void GameObject::SetIdInScene(uint64_t id) {
+        m_idInScene = id;
     }
 
-     void GameObject::SetIdInScene(uint64_t id) {
-         m_idInScene = id;
-     }
-
-     void GameObject::SetScene(ScenePtr pScene) {
-         m_scene = pScene;
-     }
+    void GameObject::SetScene(ScenePtr pScene) {
+        m_scene = pScene;
+    }
 
     bool GameObject::Contains(const GameObject::Ptr& gameObject) {
         for (auto&& children : m_children) {
@@ -244,7 +227,6 @@ namespace SR_UTILS_NS {
         }
     }
 
-
     void GameObject::Awake(bool isPaused) noexcept {
         /// Проверяем на IsEnabled а не на IsActive,
         /// так как если родитель не активен, то метод не вызвался бы.
@@ -340,7 +322,7 @@ namespace SR_UTILS_NS {
         pMarshal->Write(IsEnabled());
         pMarshal->Write(m_name);
 
-        pMarshal->Write(m_tag);
+        pMarshal->Write<uint64_t>(m_tag);
 
         pMarshal = m_transform->Save(pMarshal, flags);
 
@@ -400,6 +382,10 @@ namespace SR_UTILS_NS {
             m_transform->SetGameObject(this);
             SetDirty(true);
         }
+
+        for (auto&& pComponent : m_components) {
+            pComponent->OnTransformSet();
+        }
     }
 
     std::list<EntityBranch> GameObject::GetEntityBranches() const {
@@ -435,13 +421,14 @@ namespace SR_UTILS_NS {
     }
 
     bool GameObject::HasTag() const {
-        return m_tag != "Untagged";
+        return m_tag != 0;
     }
 
     void GameObject::OnAttached() {
-        if (auto&& parent = GetParentTransform()){
+        if (auto&& parent = GetParentTransform()) {
             m_transform->UpdateTree();
-        } else {
+        }
+        else {
             SR_WARN("GameObject::OnAttached() : GameObject doesn't have parent to get transform!");
         }
     }
@@ -473,15 +460,22 @@ namespace SR_UTILS_NS {
             auto&& entityId = marshal.Read<uint64_t>();
 
             auto&& version = marshal.Read<uint16_t>();
+
             if (version != SR_UTILS_NS::GameObject::VERSION) {
-                SRAssert2Once(false, "Version is different! Version: " + Helper::ToString(version));
-                return gameObject;
+                SR_WARN("GameObject::Load() : game object has different version! Try migrate...");
+
+                static const auto GAME_OBJECT_HASH_NAME = SR_HASH_STR("GameObject");
+
+                if (!Migration::Instance().Migrate(GAME_OBJECT_HASH_NAME, marshal, version)) {
+                    SR_ERROR("GameObject::Load() : failed to migrate game object!");
+                    return GameObject::Ptr();
+                }
             }
 
             auto&& enabled = marshal.Read<bool>();
             auto&& name = marshal.Read<std::string>();
 
-            auto&& tag = marshal.Read<std::string>();
+            auto&& tag = marshal.Read<uint64_t>();
 
             if (entityId == UINT64_MAX) {
                 gameObject = *(new GameObject(name));
@@ -511,7 +505,7 @@ namespace SR_UTILS_NS {
                     gameObject.Get()
             ));
 
-            gameObject->SetTag(tag);
+            gameObject->m_tag = tag;
 
             /// ----------------------
 
@@ -536,9 +530,11 @@ namespace SR_UTILS_NS {
     }
 
     GameObject::Ptr GameObject::Copy(const GameObject::ScenePtr &scene) const {
-        GameObject::Ptr gameObject = *(new GameObject(GetName(), GetTransform()->Copy(), GetTag()));
+        GameObject::Ptr gameObject = *(new GameObject(GetName(), GetTransform()->Copy()));
 
         gameObject->SetEnabled(IsEnabled());
+
+        gameObject->m_tag = m_tag;
 
         if (scene) {
             scene->RegisterGameObject(gameObject);
@@ -557,5 +553,23 @@ namespace SR_UTILS_NS {
         }
 
         return gameObject;
+    }
+
+    void GameObject::SetTag(const std::string& tag) {
+        m_tag = TagManager::Instance().HashTag(tag);
+    }
+
+    Tag GameObject::GetTag() const {
+        return m_tag;
+    }
+
+    GameObject::Ptr GameObject::Find(uint64_t hashName) const noexcept {
+        for (auto&& child : m_children) {
+            if (child->GetHashName() == hashName) {
+                return child;
+            }
+        }
+
+        return GameObject::Ptr();
     }
 }

@@ -59,22 +59,56 @@ SR_GTYPES_NS::Texture *Framework::Graphics::TextureLoader::GetDefaultTexture() n
     return nullptr;
 }
 
-bool Framework::Graphics::TextureLoader::LoadFromMemory(Types::Texture* texture, const std::string& data) {
+bool Framework::Graphics::TextureLoader::LoadFromMemory(Types::Texture* texture, const std::string& data, const Memory::TextureConfig &config) {
     if (!SRVerifyFalse(!texture)) {
         return false;
     }
 
     int width, height, numComponents;
 
+    int requireComponents = 0;
+
+    switch (config.m_format) {
+        case ColorFormat::RGBA8_UNORM:
+        case ColorFormat::BGRA8_UNORM:
+        case ColorFormat::RGBA8_SRGB:
+            requireComponents = 4;
+            break;
+        case ColorFormat::R8_UNORM:
+        case ColorFormat::R8_UINT:
+            requireComponents = 1;
+            break;
+        case ColorFormat::RG8_UNORM:
+            requireComponents = 2;
+            break;
+        case ColorFormat::RGB8_UNORM:
+            requireComponents = 3;
+            break;
+        case ColorFormat::RGBA16_UNORM:
+        case ColorFormat::RGB16_UNORM:
+        case ColorFormat::R16_UNORM:
+        case ColorFormat::R32_SFLOAT:
+        case ColorFormat::R64_SFLOAT:
+        case ColorFormat::R16_UINT:
+        case ColorFormat::R32_UINT:
+        case ColorFormat::R64_UINT:
+        case ColorFormat::Unknown:
+        default:
+            SR_ERROR("TextureLoader::LoadFromMemory() : unknown color format!\n\tColorFormat: " + SR_UTILS_NS::EnumReflector::ToString(config.m_format));
+            return false;
+    }
+
     unsigned char* imgData = stbi_load_from_memory(
             reinterpret_cast<const stbi_uc*>(data.c_str()),
-            data.size(), &width, &height, &numComponents, STBI_rgb_alpha
+            data.size(), &width, &height, &numComponents, requireComponents
     );
 
     if (!imgData) {
         std::string reason;
-        if (stbi_failure_reason())
+
+        if (stbi_failure_reason()) {
             reason = stbi_failure_reason();
+        }
 
         SR_ERROR("TextureLoader::LoadFromMemory() : can not load texture from memory!\n\tReason: " + reason);
 
@@ -84,7 +118,7 @@ bool Framework::Graphics::TextureLoader::LoadFromMemory(Types::Texture* texture,
     texture->m_height = height;
     texture->m_width  = width;
     texture->m_data   = imgData;
-    texture->m_config.m_alpha = (numComponents == 4) ? Helper::BoolExt::True : Helper::BoolExt::False;
+    texture->m_config.m_alpha = (numComponents == 4) ? SR_UTILS_NS::BoolExt::True : SR_UTILS_NS::BoolExt::False;
 
     return true;
 }

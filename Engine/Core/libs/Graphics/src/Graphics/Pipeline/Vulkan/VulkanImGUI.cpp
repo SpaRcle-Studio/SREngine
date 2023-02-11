@@ -21,7 +21,7 @@ int CreatePlatformSurface(ImGuiViewport* pv, ImU64 vk_inst, const void* vk_alloc
     memset(&sci, 0, sizeof(sci));
     sci.sType = VK_STRUCTURE_TYPE_WIN32_SURFACE_CREATE_INFO_KHR;
     sci.hinstance = GetModuleHandle(NULL);
-    sci.hwnd = static_cast<HWND>(pv->PlatformHandle);
+    sci.hwnd = static_cast<HWND>(pv->PlatformHandleRaw);
 
     VkResult err = vkCreateWin32SurfaceKHR(reinterpret_cast<VkInstance>(vk_inst), &sci, static_cast<const VkAllocationCallbacks *>(vk_allocators), (VkSurfaceKHR*)out_vk_surface);
     return (int)err;
@@ -29,6 +29,40 @@ int CreatePlatformSurface(ImGuiViewport* pv, ImU64 vk_inst, const void* vk_alloc
     SRHalt("Unsupported platform!");
     return -1;
 #endif
+}
+
+Framework::Graphics::VulkanTypes::VkImGUI::~VkImGUI() {
+    SR_INFO("VkImGUI::Destroy() : destroying vulkan imgui...");
+
+    if (m_pool) {
+        delete m_pool;
+        m_pool = nullptr;
+    }
+    else {
+        SR_ERROR("VkImGUI::Destroy() : descriptor pool is nullptr!");
+        return;
+    }
+
+    if (m_renderPass.IsReady()) {
+        DestroyRenderPass(m_device, &m_renderPass);
+    }
+    else {
+        SR_ERROR("VkImGUI::Destroy() : render pass isn't ready!");
+        return;
+    }
+
+    for (auto& cmdPool : m_cmdPools)
+        if (cmdPool != VK_NULL_HANDLE)
+            vkDestroyCommandPool(*m_device, cmdPool, nullptr);
+
+    for (auto& buffer : m_frameBuffs)
+        vkDestroyFramebuffer(*m_device, buffer, nullptr);
+    m_frameBuffs.clear();
+
+    m_swapchain = nullptr;
+    m_device = nullptr;
+
+    ImGui_ImplVulkan_Shutdown();
 }
 
 bool Framework::Graphics::VulkanTypes::VkImGUI::Init(EvoVulkan::Core::VulkanKernel* kernel) {
@@ -67,7 +101,7 @@ bool Framework::Graphics::VulkanTypes::VkImGUI::Init(EvoVulkan::Core::VulkanKern
             false /** depth buffer */
     );
 
-    if (!m_renderPass.Ready()) {
+    if (!m_renderPass.IsReady()) {
         SR_ERROR("VkImGUI::Init() : failed to create render pass!");
         return false;
     }
@@ -87,7 +121,7 @@ bool Framework::Graphics::VulkanTypes::VkImGUI::Init(EvoVulkan::Core::VulkanKern
             .PhysicalDevice = *kernel->GetDevice(),
             .Device         = *kernel->GetDevice(),
             .QueueFamily    = kernel->GetDevice()->GetQueues()->GetGraphicsIndex(),
-            .Queue          = kernel->GetDevice()->GetGraphicsQueue(),
+            .Queue          = kernel->GetDevice()->GetQueues()->GetGraphicsQueue(),
             .PipelineCache  = kernel->GetPipelineCache(),
             .DescriptorPool = *m_pool,
             .Subpass        = 0,
@@ -106,8 +140,7 @@ bool Framework::Graphics::VulkanTypes::VkImGUI::Init(EvoVulkan::Core::VulkanKern
         auto&& single = EvoVulkan::Types::CmdBuffer::BeginSingleTime(m_device, kernel->GetCmdPool());
         ImGui_ImplVulkan_CreateFontsTexture(*single);
         single->End();
-        single->Destroy();
-        single->Free();
+        delete single;
     }
 
     //! create vulkan command buffers
@@ -141,46 +174,6 @@ bool Framework::Graphics::VulkanTypes::VkImGUI::Init(EvoVulkan::Core::VulkanKern
     };
 
     return true;
-}
-
-bool Framework::Graphics::VulkanTypes::VkImGUI::Destroy() {
-    SR_INFO("VkImGUI::Destroy() : destroying vulkan imgui...");
-
-    if (m_pool) {
-        delete m_pool;
-        m_pool = nullptr;
-    }
-    else {
-        SR_ERROR("VkImGUI::Destroy() : descriptor pool is nullptr!");
-        return false;
-    }
-
-    if (m_renderPass.Ready()) {
-        DestroyRenderPass(m_device, &m_renderPass);
-    }
-    else {
-        SR_ERROR("VkImGUI::Destroy() : render pass isn't ready!");
-        return false;
-    }
-
-    for (auto& cmdPool : m_cmdPools)
-        if (cmdPool != VK_NULL_HANDLE)
-            vkDestroyCommandPool(*m_device, cmdPool, nullptr);
-
-    for (auto& buffer : m_frameBuffs)
-        vkDestroyFramebuffer(*m_device, buffer, nullptr);
-    m_frameBuffs.clear();
-
-    this->m_swapchain = nullptr;
-    this->m_device    = nullptr;
-
-    ImGui_ImplVulkan_Shutdown();
-
-    return true;
-}
-
-void Framework::Graphics::VulkanTypes::VkImGUI::Free() {
-    delete this;
 }
 
 bool Framework::Graphics::VulkanTypes::VkImGUI::ReSize(uint32_t width, uint32_t height) {
@@ -258,3 +251,4 @@ VkCommandBuffer Framework::Graphics::VulkanTypes::VkImGUI::Render(uint32_t frame
 
     return buffer;
 }
+

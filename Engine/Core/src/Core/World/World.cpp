@@ -5,6 +5,8 @@
 #include <Core/World/World.h>
 
 #include <Utils/Types/RawMesh.h>
+#include <Utils/ECS/GameObject.h>
+#include <Utils/World/Scene.h>
 
 #include <Graphics/Memory/CameraManager.h>
 #include <Graphics/Render/RenderScene.h>
@@ -15,15 +17,22 @@
 #include <assimp/scene.h>
 
 namespace SR_CORE_NS {
-    SR_UTILS_NS::GameObject::Ptr World::Instance(const SR_HTYPES_NS::RawMesh *rawMesh) {
+    SR_UTILS_NS::GameObject::Ptr World::Instance(const SR_HTYPES_NS::RawMesh* pRawMesh) {
         GameObjectPtr root;
 
-        const std::function<GameObjectPtr(aiNode*)> processNode = [&processNode, this, rawMesh](aiNode* node) -> GameObjectPtr {
+        const std::function<GameObjectPtr(aiNode*)> processNode = [&processNode, this, pRawMesh](aiNode* node) -> GameObjectPtr {
             GameObjectPtr ptr = Scene::Instance(node->mName.C_Str());
 
             for (uint32_t i = 0; i < node->mNumMeshes; ++i) {
-                if (auto&& mesh = SR_GTYPES_NS::Mesh::Load(rawMesh->GetResourceId(), SR_GTYPES_NS::MeshType::Static, node->mMeshes[i])) {
-                    ptr->LoadComponent(dynamic_cast<SR_UTILS_NS::Component *>(mesh));
+                const bool hasBones = pRawMesh->GetAssimpScene()->mMeshes[node->mMeshes[i]]->HasBones();
+                const SR_GTYPES_NS::MeshType meshType = hasBones ? SR_GTYPES_NS::MeshType::Skinned : SR_GTYPES_NS::MeshType::Static;
+
+                if (auto&& pMesh = SR_GTYPES_NS::Mesh::Load(pRawMesh->GetResourceId(), meshType, node->mMeshes[i])) {
+                    if (hasBones) {
+                        pMesh->SetMaterial(SR_GTYPES_NS::Material::Load("Engine/Materials/skinned.mat"));
+                    }
+
+                    ptr->LoadComponent(dynamic_cast<SR_UTILS_NS::Component *>(pMesh));
                     continue;
                 }
 
@@ -50,12 +59,12 @@ namespace SR_CORE_NS {
             return ptr;
         };
 
-        rawMesh->Access([&root, processNode](const aiScene* scene) -> bool {
-            SRVerifyFalse(!(root = processNode(scene->mRootNode)).Valid());
+        pRawMesh->Execute([&]() -> bool {
+            SRVerifyFalse(!(root = processNode(pRawMesh->GetAssimpScene()->mRootNode)).Valid());
             return true;
         });
 
-        root->SetName(SR_UTILS_NS::StringUtils::GetBetween(std::string(rawMesh->GetResourceId()), "/", "."));
+        root->SetName(SR_UTILS_NS::StringUtils::GetBetween(std::string(pRawMesh->GetResourceId()), "/", "."));
 
         return root;
     }

@@ -10,6 +10,8 @@
 #include <Utils/Common/Singleton.h>
 #include <Utils/Types/Function.h>
 
+#define SR_THREAD_SAFE_CHECKS 0
+
 namespace SR_HTYPES_NS {
     class DataStorage;
 
@@ -71,10 +73,10 @@ namespace SR_HTYPES_NS {
                 return false;
             }
 
-            m_thread = std::thread([&]() {
+            m_thread = std::thread([&, function = std::move(fn)]() {
                 m_id = SR_UTILS_NS::GetThreadId(m_thread);
                 Factory::Instance().m_threads.insert(std::make_pair(m_id, this));
-                fn();
+                function();
             });
 
             return true;
@@ -105,6 +107,7 @@ namespace SR_HTYPES_NS {
     };
 }
 
+/** Warning: этот метод очень медленный! */
 #define SR_THIS_THREAD (SR_HTYPES_NS::Thread::Factory::Instance().GetThisThread())
 
 #define SR_LOCK_GUARD std::lock_guard<std::recursive_mutex> codegen_lock(m_mutex);

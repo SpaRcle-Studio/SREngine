@@ -1,0 +1,55 @@
+ShaderType Spatial;
+
+PolygonMode Fill;
+CullMode Back;
+DepthCompare LessOrEqual;
+PrimitiveTopology TriangleList;
+BlendEnabled false;
+DepthWrite true;
+DepthTest true;
+
+uniform vec4 color;
+
+uniform sampler2D diffuseMap;
+uniform sampler2D normalMap;
+
+void fragment() {
+    vec3 T = normalize(vec3(MODEL_MATRIX * vec4(TANGENT, 0.0)));
+    vec3 N = normalize(vec3(MODEL_MATRIX * vec4(NORMAL, 0.0)));
+    // ре-ортогонализация T относительно N
+    T = normalize(T - dot(T, N) * N);
+    // получаем перпендикулярный вектор B через векторное умножение T и N
+    vec3 B = cross(N, T);
+
+    mat3 TBN = mat3(T, B, N);
+
+    vec3 normal = texture(normalMap, UV).rgb;
+    normal = normalize(normal * 2.0 - 1.0);
+
+    vec3 lightPos = vec3(0, 0, 100);
+    vec3 lightDir = TBN * normalize(lightPos - VERTEX);
+    vec3 viewDir  = TBN * normalize(VIEW_POSITION - VERTEX);
+
+    vec3 diffuse = texture(diffuseMap, UV).rgb * color.rgb;
+
+    /// -------------------------------
+
+    vec3 ambient = 0.4 * diffuse;
+    float sDotN = max(dot(lightDir, normal), 0.0);
+    diffuse = diffuse * sDotN;
+    vec3 spec = vec3(0.0);
+
+    if (sDotN > 0.0) {
+        vec3 halfwayDir = normalize(lightDir + viewDir);
+        float shininess = pow(max(dot(normal, halfwayDir), 0.0), 8.0);
+        spec = vec3(0.1) * shininess;
+    }
+
+    /// -------------------------------
+
+	COLOR = vec4(ambient + diffuse + spec, 1.0);
+}
+
+void vertex() {
+
+}

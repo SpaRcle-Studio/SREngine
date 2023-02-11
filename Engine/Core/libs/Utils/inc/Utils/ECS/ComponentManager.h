@@ -37,7 +37,7 @@ namespace SR_UTILS_NS {
 
         template<typename T> Component* CreateComponent() {
             SR_SCOPED_LOCK
-            return CreateComponentImpl(typeid(T).hash_code());
+            return CreateComponentImpl(T::COMPONENT_HASH_NAME);
         }
 
         std::unordered_map<std::string, size_t> GetComponentsNames() {
@@ -51,22 +51,20 @@ namespace SR_UTILS_NS {
         template<typename T> bool RegisterComponent(const Construction& constructor) {
             SR_SCOPED_LOCK
 
-            auto&& code = typeid(T).hash_code();
+            auto&& hashName = T::COMPONENT_HASH_NAME;
 
-            m_meta[code].loader = [](SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage) -> Component* {
+            m_meta[hashName].loader = [](SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage) -> Component* {
                 return T::LoadComponent(marshal, dataStorage);
             };
 
-            /// TODO: mingw and clang (Android) bad class name
-            auto&& name = StringUtils::BackRead(typeid(T).name(), ':');
+            m_meta[hashName].name = T::COMPONENT_NAME;
+            m_meta[hashName].constructor = constructor;
+            m_meta[hashName].version = T::VERSION;
 
-            m_meta[code].name = name;
-            m_meta[code].constructor = constructor;
-            m_meta[code].version = T::VERSION;
+            m_ids.insert(std::make_pair(T::COMPONENT_NAME, hashName));
 
-            m_ids.insert(std::make_pair(name, code));
-
-            SR_SYSTEM_LOG("ComponentManager::RegisterComponent() : register \"" + name + "\"...");
+            /// не логируем, так как вызывается до инициализации отладчика
+            /// SR_SYSTEM_LOG("ComponentManager::RegisterComponent() : register \"" + T::COMPONENT_NAME + "\"...");
 
             return true;
         }
@@ -91,9 +89,19 @@ namespace SR_UTILS_NS {
         std::unordered_map<std::string, size_t> m_ids;
 
         SR_HTYPES_NS::DataStorage m_context;
-        std::string m_lastComponent;
+        uint64_t m_lastComponent = 0;
 
     };
 }
+
+#define SR_REGISTER_COMPONENT_CUSTOM(name, constructor)                                                                                                         \
+    SR_INLINE_STATIC const bool SR_CODEGEN_REGISTER_COMPONENT_##name = SR_UTILS_NS::ComponentManager::Instance().RegisterComponent< name >([]() { /** NOLINT */ \
+         constructor                                                                                                                                            \
+    });                                                                                                                                                         \
+
+#define SR_REGISTER_COMPONENT(name)                                                                                                                             \
+    SR_INLINE_STATIC const bool SR_CODEGEN_REGISTER_COMPONENT_##name = SR_UTILS_NS::ComponentManager::Instance().RegisterComponent< name >([]() { /** NOLINT */ \
+         return new name ();                                                                                                                                    \
+    });                                                                                                                                                         \
 
 #endif //SRENGINE_COMPONENTMANAGER_H

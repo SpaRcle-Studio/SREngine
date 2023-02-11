@@ -40,6 +40,10 @@ else()
 	target_link_libraries(Utils nfd assimp)
 endif()
 
+if (MSVC)
+    target_compile_options(Utils PUBLIC /openmp)
+endif()
+
 target_include_directories(Utils PUBLIC ${CMAKE_CURRENT_BINARY_DIR}/include/icu)
 target_include_directories(Utils PUBLIC inc)
 target_include_directories(Utils PUBLIC libs)

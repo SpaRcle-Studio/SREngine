@@ -135,9 +135,8 @@ namespace SR_GRAPH_NS {
         /// Авось что-то изменилось, нужно попробовать еще раз сбилдить
         m_hasErrors = false;
 
-        if (m_renderScene.LockIfValid()) {
+        if (m_renderScene) {
             m_renderScene->SetDirty();
-            m_renderScene.Unlock();
         }
     }
 
@@ -259,15 +258,19 @@ namespace SR_GRAPH_NS {
         return m_passes.empty();
     }
 
-    BasePass* RenderTechnique::FindPass(const std::string &name) const {
+    BasePass* RenderTechnique::FindPass(const std::string& name) const {
+        return FindPass(SR_HASH_STR(name));
+    }
+
+    BasePass *RenderTechnique::FindPass(uint64_t hashName) const {
         for (auto&& pPass : m_passes) {
             if (auto&& pGroupPass = dynamic_cast<GroupPass*>(pPass)) {
-                if (auto&& pFoundPass = pGroupPass->FindPass(name)) {
+                if (auto&& pFoundPass = pGroupPass->FindPass(hashName)) {
                     return pFoundPass;
                 }
             }
 
-            if (pPass->GetName() != name) {
+            if (pPass->GetHashName() != hashName) {
                 continue;
             }
 

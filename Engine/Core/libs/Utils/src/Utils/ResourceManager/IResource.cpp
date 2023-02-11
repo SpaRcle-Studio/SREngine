@@ -7,23 +7,17 @@
 
 namespace SR_UTILS_NS {
     IResource::IResource(uint64_t hashName)
-        : m_resourceHashName(hashName)
+        : Super()
+        , m_resourceHashName(hashName)
         , m_lifetime(ResourceManager::ResourceLifeTime)
     { }
 
     IResource::IResource(uint64_t hashName, bool autoRemove)
-        : m_resourceHashName(hashName)
+        : Super()
+        , m_resourceHashName(hashName)
         , m_lifetime(ResourceManager::ResourceLifeTime)
         , m_autoRemove(autoRemove)
     { }
-
-    IResource::~IResource() {
-        SRAssert(m_dependencies.empty());
-
-        while (!m_parents.empty()) {
-            (*m_parents.begin())->RemoveDependency(this);
-        }
-    }
 
     bool IResource::Reload() {
         SR_LOCK_GUARD
@@ -105,7 +99,7 @@ namespace SR_UTILS_NS {
 
         /// тут нужно делать синхронно, иначе может произойти deadlock
         ResourceManager::Instance().Execute([this, &result]() {
-            SR_LOCK_GUARD
+            m_mutex.lock();
 
             if (m_countUses == 0) {
                 SRHalt("Count use points is zero!");
@@ -119,10 +113,12 @@ namespace SR_UTILS_NS {
                 if (IsRegistered()) {
                     Destroy();
                     result = RemoveUPResult::Destroy;
+                    m_mutex.unlock();
                     return;
                 }
                 else {
                     /// так и не зарегистрировали ресурс
+                    m_mutex.unlock();
                     delete this;
                     result = RemoveUPResult::Delete;
                     return;
@@ -130,6 +126,8 @@ namespace SR_UTILS_NS {
             }
 
             result = RemoveUPResult::Success;
+
+            m_mutex.unlock();
         });
 
         return result;
@@ -173,10 +171,11 @@ namespace SR_UTILS_NS {
     bool IResource::Destroy() {
         SR_LOCK_GUARD
 
-        ResourceManager::Instance().Destroy(this);
-
         SRAssert(!IsDestroyed());
         m_isDestroyed = true;
+
+        ResourceManager::Instance().Destroy(this);
+
         return true;
     }
 
@@ -217,61 +216,6 @@ namespace SR_UTILS_NS {
         m_resourceHash = hash;
     }
 
-    void IResource::AddDependency(IResource *pResource) {
-        std::lock_guard<std::recursive_mutex> lock(m_mutex);
-
-        pResource->AddUsePoint();
-
-        m_dependencies.insert(pResource);
-        pResource->m_parents.insert(this);
-    }
-
-    void IResource::RemoveDependency(IResource *pResource) {
-        std::lock_guard<std::recursive_mutex> lock(m_mutex);
-
-        if (!SRVerifyFalse(m_dependencies.count(pResource) == 0)) {
-            return;
-        }
-
-        if (!SRVerifyFalse(pResource->m_parents.count(this) == 0)) {
-            return;
-        }
-
-        m_dependencies.erase(pResource);
-        pResource->m_parents.erase(this);
-
-        pResource->RemoveUsePoint();
-    }
-
-    void IResource::UpdateResources(int32_t depth) {
-        std::lock_guard<std::recursive_mutex> lock(m_mutex);
-
-        /// вверх по иерархии
-        if (depth == 0 || depth > 0) {
-            for (auto &&pResource : m_parents) {
-                pResource->OnResourceUpdated(this, depth + 1);
-            }
-        }
-
-        /// вниз по иерархии
-        if (depth == 0 || depth < 0) {
-            for (auto &&pResource : m_dependencies) {
-                pResource->OnResourceUpdated(this, depth - 1);
-            }
-        }
-    }
-
-    void IResource::OnResourceUpdated(IResource *pResource, int32_t depth) {
-        SRAssert(depth != 0);
-
-        if (depth > 0) {
-            UpdateResources(depth + 1);
-        }
-        else {
-            UpdateResources(depth - 1);
-        }
-    }
-
     const std::string& IResource::GetResourceId() const {
         return SR_UTILS_NS::ResourceManager::Instance().GetResourceId(m_resourceHashId);
     }
@@ -288,8 +232,32 @@ namespace SR_UTILS_NS {
         return SR_UTILS_NS::ResourceManager::Instance().GetResPath();
     }
 
-    bool IResource::Execute(const SR_HTYPES_NS::Function<bool()>& fun) {
+    bool IResource::TryExecute(const SR_HTYPES_NS::Function<bool()>& fun, bool def) const {
+        if (m_mutex.try_lock()) {
+            const bool result = fun();
+            m_mutex.unlock();
+            return result;
+        }
+
+        return def;
+    }
+
+    bool IResource::Execute(const SR_HTYPES_NS::Function<bool()>& fun) const {
         SR_LOCK_GUARD
         return fun();
+    }
+
+    void IResource::ReviveResource() {
+        SR_LOCK_GUARD
+
+        SRAssert(m_isDestroyed && m_isRegistered);
+
+        m_isDestroyed = false;
+
+        UpdateResourceLifeTime();
+    }
+
+    void IResource::UpdateResourceLifeTime() {
+        m_lifetime = ResourceManager::ResourceLifeTime;
     }
 }

@@ -52,6 +52,60 @@ namespace SR_MATH_NS {
         { }
 
     public:
+        SR_NODISCARD Vector4 Normalize() const {
+            auto&& value = x * x + y * y + z * z + w * w;
+
+            if (value > 0) {
+                T len = static_cast<T>(std::sqrt(value));
+
+                Vector4 vec4 = *this;
+
+                if (len != static_cast<T>(0.)) {
+                    vec4.x /= len;
+                    vec4.y /= len;
+                    vec4.z /= len;
+                    vec4.w /= len;
+                }
+
+                return vec4;
+            }
+
+            return *this;
+        }
+
+        template<typename U> SR_FORCE_INLINE Vector4 &operator*=(U p_scalar) {
+            x *= p_scalar;
+            y *= p_scalar;
+            z *= p_scalar;
+            w *= p_scalar;
+            return *this;
+        }
+
+        template<typename U> SR_FORCE_INLINE Vector4 &operator*=(const Vector4<U> &p_v) {
+            x *= p_v.x;
+            y *= p_v.y;
+            z *= p_v.z;
+            w *= p_v.w;
+            return *this;
+        }
+        template<typename U> SR_FORCE_INLINE Vector4 &operator%=(const Vector4<U> &p_v) {
+            x %= p_v.x;
+            y %= p_v.y;
+            z %= p_v.z;
+            w %= p_v.w;
+            return *this;
+        }
+
+        template<typename U> SR_FORCE_INLINE Vector4 operator*(const Vector4<U> &p_v) const {
+            return Vector4(x * p_v.x, y * p_v.y, z * p_v.z, w * p_v.w);
+        }
+
+        template<typename U> SR_FORCE_INLINE Vector4 operator*(U p_scalar) const {
+            return Vector4(x * p_scalar, y * p_scalar, z * p_scalar, w * p_scalar);
+        }
+
+        SR_NODISCARD Vector3<T> XYZ() const noexcept { return Vector3<T>(x, y, z); }
+
         SR_NODISCARD glm::vec4 ToGLM() const { return { x, y, z, w }; }
 
         template<typename U> SR_NODISCARD Vector4<U> SR_FASTCALL Cast() const noexcept { return Vector4<U>(

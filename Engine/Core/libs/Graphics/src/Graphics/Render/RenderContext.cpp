@@ -28,13 +28,21 @@ namespace SR_GRAPH_NS {
 
         bool dirty = false;
 
-        {
-            dirty |= Update(m_techniques);
-            dirty |= Update(m_skyboxes);
-            dirty |= Update(m_framebuffers);
-            dirty |= Update(m_materials);
-            dirty |= Update(m_textures);
-            dirty |= Update(m_shaders);
+        m_updateState = static_cast<RCUpdateQueueState>(static_cast<uint8_t>(m_updateState) + 1);
+
+        switch (m_updateState) {
+            case RCUpdateQueueState::Framebuffers: dirty |= Update(m_framebuffers); break;
+            case RCUpdateQueueState::Shaders: dirty |= Update(m_shaders); break;
+            case RCUpdateQueueState::Textures: dirty |= Update(m_textures); break;
+            case RCUpdateQueueState::Techniques: dirty |= Update(m_techniques); break;
+            case RCUpdateQueueState::Materials: dirty |= Update(m_materials); break;
+            case RCUpdateQueueState::Skyboxes: dirty |= Update(m_skyboxes); break;
+            case RCUpdateQueueState::End:
+                m_updateState = RCUpdateQueueState::Begin;
+                break;
+            default:
+                SRHaltOnce0();
+                break;
         }
 
         for (auto pIt = std::begin(m_scenes); pIt != std::end(m_scenes); ) {

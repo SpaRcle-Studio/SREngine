@@ -6,19 +6,16 @@
 #define SRENGINE_FRAMEBUFFERPASS_H
 
 #include <Graphics/Pass/GroupPass.h>
+#include <Graphics/Pass/IFramebufferPass.h>
 
 namespace SR_GTYPES_NS {
     class Framebuffer;
 }
 
 namespace SR_GRAPH_NS {
-    class FramebufferPass : public GroupPass {
-        using ColorFormats = std::list<ColorFormat>;
-        using ClearColors = std::vector<SR_MATH_NS::FColor>;
-        using FramebufferPtr = SR_GTYPES_NS::Framebuffer*;
+    class FramebufferPass : public GroupPass, public IFramebufferPass {
     public:
-        explicit FramebufferPass(RenderTechnique* pTechnique, BasePass* pParent);
-        ~FramebufferPass() override;
+        FramebufferPass(RenderTechnique* pTechnique, BasePass* pParent);
 
     public:
         bool Load(const SR_XML_NS::Node& passNode) override;
@@ -30,28 +27,6 @@ namespace SR_GRAPH_NS {
         bool PostRender() override;
 
         void Update() override;
-
-        SR_NODISCARD FramebufferPtr GetFramebuffer() const;
-
-    private:
-        void LoadSettings(const SR_XML_NS::Node& settingsNode);
-
-    private:
-        bool m_dynamicResizing = false;
-        bool m_depthEnabled = true;
-
-        SR_MATH_NS::FVector2 m_preScale;
-        SR_MATH_NS::IVector2 m_size;
-
-        ColorFormats m_colorFormats;
-        ClearColors m_clearColors;
-
-        FramebufferPtr m_framebuffer = nullptr;
-
-        float_t m_depth = 1.f;
-        uint8_t m_samples = 0;
-        DepthFormat m_depthFormat = DepthFormat::Unknown;
-
 
     };
 }

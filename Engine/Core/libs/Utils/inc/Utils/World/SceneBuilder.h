@@ -28,7 +28,7 @@ namespace SR_WORLD_NS {
         void SetDirty();
 
     private:
-        uint64_t Initialize(bool isPaused);
+        void Initialize(bool isPaused);
 
     private:
         std::vector<SR_UTILS_NS::Component*> m_updatableComponents;

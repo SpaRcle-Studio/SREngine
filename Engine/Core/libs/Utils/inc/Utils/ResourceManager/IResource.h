@@ -10,13 +10,14 @@
 #include <Utils/Common/NonCopyable.h>
 #include <Utils/Common/Hashes.h>
 #include <Utils/Types/Function.h>
+#include <Utils/ResourceManager/ResourceContainer.h>
 
 namespace SR_UTILS_NS {
     class ResourceManager;
 
-    class SR_DLL_EXPORT IResource : public NonCopyable {
+    class SR_DLL_EXPORT IResource : public ResourceContainer {
         friend class ResourceManager;
-
+        using Super = ResourceContainer;
     public:
         enum class LoadState : uint8_t {
             Unknown, Loaded, Reloading, Loading, Unloading, Unloaded, Error
@@ -29,18 +30,20 @@ namespace SR_UTILS_NS {
     protected:
         explicit IResource(uint64_t hashName);
         IResource(uint64_t hashName, bool autoRemove);
-        ~IResource() override;
+        ~IResource() override = default;
 
     public:
         SR_NODISCARD virtual Path InitializeResourcePath() const;
 
-        bool Execute(const SR_HTYPES_NS::Function<bool()>& fun);
+        bool TryExecute(const SR_HTYPES_NS::Function<bool()>& fun, bool def) const;
+        bool Execute(const SR_HTYPES_NS::Function<bool()>& fun) const;
 
         SR_NODISCARD virtual uint64_t GetFileHash() const;
         SR_NODISCARD bool IsRegistered() const noexcept { return m_isRegistered; }
         SR_NODISCARD bool IsLoaded() const noexcept { return m_loadState == LoadState::Loaded; }
         SR_NODISCARD bool IsReadOnly() const { return m_readOnly; }
         SR_NODISCARD bool IsDestroyed() const noexcept;
+        SR_NODISCARD virtual bool IsAllowedToRevive() const { return false; }
         SR_NODISCARD bool IsForce() const { return m_force; }
         SR_NODISCARD bool IsAlive() const { return m_lifetime > 0; }
         SR_NODISCARD bool IsEnabledAutoRemove() const { return m_autoRemove; }
@@ -98,8 +101,7 @@ namespace SR_UTILS_NS {
             return false;
         }
 
-        void AddDependency(IResource* pResource);
-        void RemoveDependency(IResource* pResource);
+        void UpdateResourceLifeTime();
 
         /** Call only once | Register resource to destroy in resource manager */
         virtual bool Destroy();
@@ -112,16 +114,12 @@ namespace SR_UTILS_NS {
         void SetId(const std::string& id, bool autoRegister = true);
         void SetId(uint64_t hashId, bool autoRegister = true);
 
-    protected:
-        void UpdateResources(int32_t depth = 0);
-        virtual void OnResourceUpdated(IResource* pResource, int32_t depth);
+        virtual void ReviveResource();
 
     protected:
         const uint64_t m_resourceHashName = 0;
 
         std::atomic<LoadState> m_loadState = LoadState::Unknown;
-
-        mutable std::recursive_mutex m_mutex;
 
         /// не рекомендуется вручную обращаться к счетчику при наследовании
         std::atomic<uint16_t> m_countUses = 0;
@@ -143,8 +141,6 @@ namespace SR_UTILS_NS {
         /// \warning ReadOnly
         bool m_autoRemove = false;
 
-        std::unordered_set<IResource*> m_parents;
-        std::unordered_set<IResource*> m_dependencies;
 
     };
 }

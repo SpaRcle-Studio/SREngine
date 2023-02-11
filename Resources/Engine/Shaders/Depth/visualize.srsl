@@ -1,0 +1,28 @@
+ShaderType PostProcessing;
+
+PolygonMode Fill;
+CullMode Back;
+DepthCompare LessOrEqual;
+PrimitiveTopology TriangleList;
+BlendEnabled false;
+DepthWrite false;
+DepthTest false;
+
+[[uniform], [public]] sampler2D image;
+
+float LinearizeDepth() {
+    float n = 1.0; // camera z near
+    float f = 100.0; // camera z far
+    float z = texture(image, UV).x;
+    return (2.0 * n) / (f + n - z * (f - n));
+}
+
+void fragment() {
+    float d = LinearizeDepth();
+    COLOR = vec4(d, d, d, 1.0);
+}
+
+void vertex() {
+    UV = vec2((VERTEX_INDEX << 1) & 2, VERTEX_INDEX & 2);
+    VERTEX = vec3(UV * 2.0 - 1.0, 0.0);
+}

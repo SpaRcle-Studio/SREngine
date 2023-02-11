@@ -8,11 +8,12 @@ BlendEnabled false;
 DepthWrite true;
 DepthTest true;
 
-uniform vec4 color;
+[[uniform], [public]] vec4 color;
 
 void fragment() {
 	COLOR = color;
 }
 
 void vertex() {
+    OUT_POSITION = PROJECTION_MATRIX * VIEW_MATRIX * MODEL_MATRIX * vec4(VERTEX, 1.0);
 }

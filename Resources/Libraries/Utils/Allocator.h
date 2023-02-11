@@ -7,6 +7,8 @@
 
 #include <Libraries/MemoryAllocator.h>
 
+#pragma warning(disable: 4530)
+
 void* operator new(size_t sz) {
     return ESMemoryAlloc(sz);
 }
@@ -25,6 +27,7 @@ void operator delete[](void* ptr) {
 
 #include <iostream>
 #include <string>
+#include <list>
 #include <thread>
 #include <atomic>
 #include <unordered_set>
@@ -49,5 +52,9 @@ void operator delete[](void* ptr) {
 
 #define SR_NEW_SAFE_PTR() { }
 #define SR_DEL_SAFE_PTR() { }
+
+#ifdef DEBUG
+    #define EVK_DEBUG
+#endif
 
 #endif //SRENGINE_ALLOCATOR_H

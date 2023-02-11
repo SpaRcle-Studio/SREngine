@@ -1,30 +1,48 @@
 <?xml version="1.0"?>
 <Technique Name="Editor">
-    <ColorBufferPass>
-        <Settings Directional="false" DepthEnabled="true" SmoothSamples="1">
+    <ColorBufferPass Directional="false">
+        <FramebufferSettings DynamicResizing="true" DepthEnabled="true" SmoothSamples="1">
+            <Size X="0" Y="0"/>
             <PreScale X="0.85" Y="0.85"/>
-        </Settings>
+            <Depth Format="Auto" ClearValue="1.0"/>
+            <Layer Format="RGBA8_UNORM" R="0.0" G="0.0" B="0.0" A="1.0"/>
+        </FramebufferSettings>
+        <Shaders>
+            <Override Type="Canvas" Path="Engine/Shaders/ColorBuffer/canvas.srsl"/>
+            <Override Type="Spatial" Path="Engine/Shaders/ColorBuffer/spatial.srsl"/>
+            <Override Type="SpatialCustom" Path="Engine/Shaders/ColorBuffer/spatial.srsl"/>
+            <Override Type="Skybox" Path="Engine/Shaders/ColorBuffer/simple.srsl"/>
+            <Override Type="Simple" Path="Engine/Shaders/ColorBuffer/simple.srsl"/>
+            <Override Type="Skinned" Path="Engine/Shaders/ColorBuffer/skinned.srsl"/>
+        </Shaders>
     </ColorBufferPass>
-    <FramebufferPass Name="SceneViewFBO">
-        <Settings DynamicResizing="true" DepthEnabled="true" SmoothSamples="0">
+    <FramebufferPass Name="MainSceneFBO">
+        <FramebufferSettings DynamicResizing="true" DepthEnabled="true" SmoothSamples="0">
             <Size X="0" Y="0"/>
             <PreScale X="1.0" Y="1.0"/>
             <Depth Format="Auto" ClearValue="1.0"/>
             <Layer Format="RGBA8_UNORM" R="0.0" G="0.0" B="0.0" A="1.0"/>
-        </Settings>
+        </FramebufferSettings>
         <Passes>
             <OpaquePass/>
-            <SkyboxPass Path="Engine/Skyboxes/Sun.png"/>
+            <SkyboxPass Path="Engine/Skyboxes/Sun.png" Shader="Engine/Shaders/skybox.srsl"/>
             <TransparentPass/>
             <DebugPass/>
         </Passes>
     </FramebufferPass>
-    <!--<SwapchainPass>
-        <OpaquePass/>
-        <SkyboxPass Path="Engine/Skyboxes/Sea.jpg"/>
-        <TransparentPass/>
-    </SwapchainPass>
-    <PostProcessPass Shader="Engine/Shaders/postProcess.srsl">
-         <Property Id="scene" Type="Sampler2D" Attachment="SceneViewFBO" Layer=""
-    </PostProcessPass>-->
+    <FramebufferPass Name="SceneViewFBO">
+        <FramebufferSettings DynamicResizing="true" DepthEnabled="true" SmoothSamples="1">
+            <Size X="0" Y="0"/>
+            <PreScale X="1.0" Y="1.0"/>
+            <Depth Format="Auto" ClearValue="1.0"/>
+            <Layer Format="RGBA8_UNORM" R="0.0" G="0.0" B="0.0" A="1.0"/>
+        </FramebufferSettings>
+        <Passes>
+            <PostProcessPass Shader="Engine/Shaders/vignette.srsl">
+                <Attachments>
+                    <Attachment FBO="MainSceneFBO" Id="image" Index="0"/>
+                </Attachments>
+            </PostProcessPass>
+        </Passes>
+    </FramebufferPass>
 </Technique>

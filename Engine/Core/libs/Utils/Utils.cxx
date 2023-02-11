@@ -21,6 +21,8 @@
 #include "../Utils/src/Utils/ECS/TransformZero.cpp"
 #include "../Utils/src/Utils/ECS/EntityRef.cpp"
 #include "../Utils/src/Utils/ECS/Prefab.cpp"
+#include "../Utils/src/Utils/ECS/Migration.cpp"
+#include "../Utils/src/Utils/ECS/TagManager.cpp"
 
 #include "../Utils/src/Utils/Events/EventManager.cpp"
 #include "../Utils/src/Utils/Events/Event.cpp"
@@ -36,6 +38,7 @@
 #include "../Utils/src/Utils/Input/InputHandler.cpp"
 
 #include "../Utils/src/Utils/Math/Matrix3x3.cpp"
+#include "../Utils/src/Utils/Math/Matrix4x4.cpp"
 #include "../Utils/src/Utils/Math/Quaternion.cpp"
 #include "../Utils/src/Utils/Math/Vector3.cpp"
 #include "../Utils/src/Utils/Math/Vector6.cpp"
@@ -53,6 +56,7 @@
 #include "../Utils/src/Utils/ResourceManager/ResourceInfo.cpp"
 #include "../Utils/src/Utils/ResourceManager/ResourcesHolder.cpp"
 #include "../Utils/src/Utils/ResourceManager/ResourceManager.cpp"
+#include "../Utils/src/Utils/ResourceManager/ResourceContainer.cpp"
 
 #include "../Utils/src/Utils/CommandManager/ICommand.cpp"
 #include "../Utils/src/Utils/CommandManager/CmdManager.cpp"
@@ -67,6 +71,8 @@
 #include "../Utils/src/Utils/Types/SafeQueue.cpp"
 #include "../Utils/src/Utils/Types/RawMesh.cpp"
 #include "../Utils/src/Utils/Types/UnicodeString.cpp"
+#include "../Utils/src/Utils/Types/Stream.cpp"
+#include "../Utils/src/Utils/Types/Regex.cpp"
 
 #include "../Utils/src/Utils/Common/Stacktrace.cpp"
 #include "../Utils/src/Utils/Common/StringUtils.cpp"

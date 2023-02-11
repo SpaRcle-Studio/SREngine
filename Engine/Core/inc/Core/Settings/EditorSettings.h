@@ -36,6 +36,9 @@ namespace SR_CORE_NS {
 
     public:
         SR_NODISCARD Icons GetIcons() const;
+        SR_NODISCARD SR_UTILS_NS::Path GetRenderTechnique() const;
+        SR_NODISCARD SR_UTILS_NS::Path GetPrefabEditorRenderTechnique() const;
+
         SR_NODISCARD SR_UTILS_NS::Path InitializeResourcePath() const override;
 
     protected:
@@ -44,6 +47,8 @@ namespace SR_CORE_NS {
 
     private:
         Icons m_icons;
+        SR_UTILS_NS::Path m_renderTechnique;
+        SR_UTILS_NS::Path m_prefabEditorRenderTechnique;
 
     };
 }

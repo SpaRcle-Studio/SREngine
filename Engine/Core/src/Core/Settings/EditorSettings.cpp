@@ -11,6 +11,8 @@ namespace SR_CORE_NS {
 
     void EditorSettings::ClearSettings() {
         m_icons.clear();
+        m_renderTechnique = SR_UTILS_NS::Path();
+        m_prefabEditorRenderTechnique = SR_UTILS_NS::Path();
         Settings::ClearSettings();
     }
 
@@ -22,10 +24,22 @@ namespace SR_CORE_NS {
             }
         }
 
+        if (auto&& renderTechniqueXml = node.GetNode("RenderTechnique")) {
+            m_renderTechnique = renderTechniqueXml.GetAttribute<SR_UTILS_NS::Path>();
+        }
+
         return Settings::LoadSettings(node);
     }
 
     EditorSettings::Icons EditorSettings::GetIcons() const {
         return m_icons;
+    }
+
+    SR_UTILS_NS::Path EditorSettings::GetRenderTechnique() const {
+        return m_renderTechnique;
+    }
+
+    SR_UTILS_NS::Path EditorSettings::GetPrefabEditorRenderTechnique() const {
+        return m_prefabEditorRenderTechnique;
     }
 }

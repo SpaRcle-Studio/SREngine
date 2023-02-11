@@ -111,8 +111,9 @@ namespace SR_UTILS_NS {
     }
 
     bool FileSystem::CreatePath(std::string path, uint32_t offset) {
-        if (path.empty())
+        if (path.empty()) {
             return false;
+        }
 
         if (path.back() != '/')
             path.append("/");
@@ -120,9 +121,8 @@ namespace SR_UTILS_NS {
         auto pos = path.find('/', offset);
         if (pos != std::string::npos) {
             auto dir = path.substr(0, pos);
-
             SR_PLATFORM_NS::CreateFolder(dir);
-            CreatePath(path, pos + 1);
+            return CreatePath(std::move(path), pos + 1);
         }
 
         return true;
@@ -156,7 +156,7 @@ namespace SR_UTILS_NS {
         return newPath;
     }
 
-    bool FileSystem::WriteToFile(const std::string &path, const std::string &text) {
+    bool FileSystem::WriteToFile(const std::string& path, const std::string& text) {
         std::ofstream stream(path);
         if (!stream.is_open()) {
             return false;
@@ -223,5 +223,32 @@ namespace SR_UTILS_NS {
 
     std::shared_ptr<std::vector<uint8_t>> FileSystem::ReadFileAsBlob(const std::string &path) {
         return std::make_shared<std::vector<uint8_t>>(std::move(ReadFileAsVector(path)));
+    }
+
+    uint64_t FileSystem::ReadHashFromFile(const Path& path) {
+        std::ifstream file(path.ToString(), std::ios::binary);
+
+        if (!file.is_open()) {
+            return 0;
+        }
+
+        uint64_t hash = 0;
+        file.read((char*)&hash, sizeof(uint64_t));
+        file.close();
+
+        return hash;
+    }
+
+    void FileSystem::WriteHashToFile(const Path& path, uint64_t hash) {
+        path.Make(Path::Type::File);
+
+        std::ofstream file(path.ToString(), std::ios::binary);
+
+        if (!file.is_open()) {
+            return;
+        }
+
+        file.write((char*)&hash, sizeof(uint64_t));
+        file.close();
     }
 }

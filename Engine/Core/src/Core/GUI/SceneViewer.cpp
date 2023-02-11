@@ -25,7 +25,7 @@ namespace SR_CORE_NS::GUI {
         , m_guizmo(new Guizmo())
         , m_id(-1)
     {
-        m_updateNonHoveredSceneViewer = SR_UTILS_NS::Features::Instance().Enabled("UpdateNonHoveredSceneViewer", true);
+        LoadCameraSettings();
     }
 
     SceneViewer::~SceneViewer() {
@@ -37,6 +37,7 @@ namespace SR_CORE_NS::GUI {
         m_camera.AutoFree([this](SR_UTILS_NS::GameObject* camera) {
             m_translation = camera->GetTransform()->GetTranslation();
             m_rotation = camera->GetTransform()->GetRotation();
+            BackupCameraSettings();
             camera->Destroy();
         });
 
@@ -183,7 +184,7 @@ namespace SR_CORE_NS::GUI {
     }
 
     void SceneViewer::InitCamera() {
-        Helper::GameObject::Ptr camera;
+        SR_UTILS_NS::GameObject::Ptr camera;
 
         /// сцена может быть уже заблокирована до Engine::SetScene
         if (SR_UTILS_NS::Features::Instance().Enabled("EditorCamera", true) && m_scene.RecursiveLockIfValid()) {
@@ -191,13 +192,15 @@ namespace SR_CORE_NS::GUI {
             camera->SetFlags(SR_UTILS_NS::GAMEOBJECT_FLAG_NO_SAVE);
             m_scene.Unlock();
         }
-        else
+        else {
             return;
+        }
 
         const auto size = m_window->GetSize();
 
         auto&& pCamera = new EditorCamera(size.x, size.y);
-        pCamera->SetRenderTechnique("Editor/Configs/EditorRenderTechnique.xml");
+
+        pCamera->SetRenderTechnique(SR_CORE_NS::EditorSettings::Instance().GetRenderTechnique());
 
         camera->AddComponent(pCamera);
 
@@ -287,5 +290,39 @@ namespace SR_CORE_NS::GUI {
         }
 
         Super::OnMouseUp(data);
+    }
+
+    void SceneViewer::LoadCameraSettings() {
+        m_updateNonHoveredSceneViewer = SR_UTILS_NS::Features::Instance().Enabled("UpdateNonHoveredSceneViewer", true);
+
+        auto&& path = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat(CAMERA_XML);
+        if (!path.Exists()) {
+            return;
+        }
+
+        auto&& xmlDocument = SR_XML_NS::Document::Load(path);
+        if (!xmlDocument.Valid()) {
+            return;
+        }
+
+        auto&& settings = xmlDocument.Root().GetNode("Settings");
+        if (!settings) {
+            return;
+        }
+
+        m_translation = settings.GetNode("Translation").GetAttribute<SR_MATH_NS::FVector3>();
+        m_rotation = settings.GetNode("Rotation").GetAttribute<SR_MATH_NS::FVector3>();
+    }
+
+    void SceneViewer::BackupCameraSettings() {
+        auto&& xmlDocument = SR_XML_NS::Document::New();
+        auto&& settings = xmlDocument.Root().AppendNode("Settings");
+
+        settings.AppendNode("Translation").AppendAttribute<SR_MATH_NS::FVector3>(m_translation);
+        settings.AppendNode("Rotation").AppendAttribute<SR_MATH_NS::FVector3>(m_rotation);
+
+        if (!xmlDocument.Save(SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat(CAMERA_XML))) {
+            SR_ERROR("SceneViewer::BackupCameraSettings() : failed to save camera settings!");
+        }
     }
 }

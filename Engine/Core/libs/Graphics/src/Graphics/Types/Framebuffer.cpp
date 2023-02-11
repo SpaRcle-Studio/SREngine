@@ -112,12 +112,6 @@ namespace SR_GTYPES_NS {
     }
 
     bool Framebuffer::OnResize() {
-        if (m_colors.empty()) {
-            SR_ERROR("Framebuffer::OnResize() : colors count is not set!");
-            m_hasErrors = true;
-            return false;
-        }
-
         if (m_size.HasZero() || m_size.HasNegative()) {
             SR_ERROR("Framebuffer::OnResize() : incorrect FBO size!");
             m_hasErrors = true;
@@ -221,5 +215,13 @@ namespace SR_GTYPES_NS {
     void Framebuffer::SetSampleCount(uint8_t samples) {
         m_sampleCount = samples;
         m_dirty = true;
+    }
+
+    int32_t Framebuffer::GetDepthTexture() const {
+        if (!m_depthEnabled) {
+            return SR_ID_INVALID;
+        }
+
+        return m_depth.texture;
     }
 }

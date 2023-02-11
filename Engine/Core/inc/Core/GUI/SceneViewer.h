@@ -24,12 +24,13 @@ namespace SR_CORE_NS::GUI {
         using Super = Graphics::GUI::Widget;
         using GameObjectPtr = SR_UTILS_NS::GameObject::Ptr;
         using WindowPtr = SR_HTYPES_NS::SafePtr<SR_GRAPH_NS::Window>;
+        SR_INLINE_STATIC const std::string CAMERA_XML = "Editor/Camera.xml";
     public:
         explicit SceneViewer(const WindowPtr& window, Hierarchy* hierarchy);
         ~SceneViewer() override;
 
     public:
-        void SetScene(const SR_WORLD_NS::Scene::Ptr& scene);
+        void SetScene(const ScenePtr& scene) override;
         void Enable(bool value);
         void Update();
 
@@ -40,6 +41,9 @@ namespace SR_CORE_NS::GUI {
         void OnKeyPress(const SR_UTILS_NS::KeyboardInputData* data) override;
 
     private:
+        void LoadCameraSettings();
+        void BackupCameraSettings();
+
         void SetCameraActive(bool value);
         void OnClose() override;
         void OnOpen() override;

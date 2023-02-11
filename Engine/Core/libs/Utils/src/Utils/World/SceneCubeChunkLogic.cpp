@@ -205,6 +205,8 @@ namespace SR_WORLD_NS {
             }
         }
 
+        auto&& pContext = SR_THIS_THREAD->GetContext();
+
         for (auto&& pIt = m_regions.begin(); pIt != m_regions.end(); ) {
             const auto& pRegion = pIt->second;
 
@@ -215,7 +217,7 @@ namespace SR_WORLD_NS {
             }
             else {
                 pRegion->Unload();
-                SaveRegion(pRegion);
+                SaveRegion(pRegion, pContext);
                 delete pRegion;
                 pIt = m_regions.erase(pIt);
             }
@@ -292,7 +294,7 @@ namespace SR_WORLD_NS {
         }
     }
 
-    void SceneCubeChunkLogic::SaveRegion(Region* pRegion) const {
+    void SceneCubeChunkLogic::SaveRegion(Region* pRegion, SR_HTYPES_NS::DataStorage* pContext) const {
         SR_LOCK_GUARD
 
         auto&& regionsPath = GetRegionsPath();
@@ -300,7 +302,7 @@ namespace SR_WORLD_NS {
         regionsPath.Make(Path::Type::Folder);
 
         auto&& regPath = regionsPath.Concat(pRegion->GetPosition().ToString()).ConcatExt("dat");
-        if (auto&& pRegionMarshal = pRegion->Save(); pRegionMarshal) {
+        if (auto&& pRegionMarshal = pRegion->Save(pContext); pRegionMarshal) {
             if (pRegionMarshal->Valid()) {
                 pRegionMarshal->Save(regPath);
             }
@@ -325,8 +327,10 @@ namespace SR_WORLD_NS {
         UpdateContainers();
         UpdateScope(0.f);
 
+        auto&& pContext = SR_THIS_THREAD->GetContext();
+
         for (auto&& [position, pRegion] : m_regions) {
-            SaveRegion(pRegion);
+            SaveRegion(pRegion, pContext);
         }
 
         auto&& pSceneRootMarshal = m_scene->SaveComponents(nullptr, SAVABLE_FLAG_NONE);

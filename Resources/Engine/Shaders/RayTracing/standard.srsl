@@ -1,0 +1,35 @@
+ShaderType RayTrace;
+
+PolygonMode Fill;
+CullMode Back;
+DepthCompare LessOrEqual;
+PrimitiveTopology TriangleList;
+BlendEnabled true;
+DepthWrite false;
+DepthTest true;
+
+void ray_gen() {
+
+}
+
+void ray_intersection() {
+
+}
+
+void ray_hit_any() {
+
+}
+
+void ray_hit_closest() {
+
+}
+
+void ray_miss_primary() {
+
+}
+
+void ray_miss_secondary() {
+
+}
+
+

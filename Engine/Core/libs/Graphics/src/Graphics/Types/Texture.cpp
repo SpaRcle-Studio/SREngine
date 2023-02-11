@@ -42,6 +42,25 @@ namespace SR_GTYPES_NS {
         return texture;
     }
 
+    Texture *Texture::LoadRaw(const uint8_t* pData, uint64_t bytes, uint64_t h, uint64_t w, const Memory::TextureConfig &config) {
+        Texture* texture = new Texture();
+
+        texture->m_fromMemory = true;
+        texture->m_rawMemory = true;
+
+        texture->m_width = w;
+        texture->m_height = h;
+
+        texture->m_data = new uint8_t[bytes];
+        memcpy(texture->m_data, pData, bytes);
+
+        texture->m_config = config;
+
+        texture->SetId("RawTexture");
+
+        return texture;
+    }
+
     Texture* Texture::Load(const std::string& rawPath, const std::optional<Memory::TextureConfig>& config) {
         SR_GLOBAL_LOCK
 
@@ -99,16 +118,19 @@ namespace SR_GTYPES_NS {
 
         bool hasErrors = !IResource::Load();
 
-        SR_UTILS_NS::Path&& path = SR_UTILS_NS::Path(GetResourceId());
-        if (!path.IsAbs()) {
-            path = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat(path);
-        }
+        if (!IsCalculated()) {
+            SR_UTILS_NS::Path&& path = SR_UTILS_NS::Path(GetResourceId());
+            if (!path.IsAbs()) {
+                path = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat(path);
+            }
 
-        if (!TextureLoader::Load(this, path.ToString())) {
-            hasErrors |= true;
+            if (!TextureLoader::Load(this, path.ToString())) {
+                hasErrors |= true;
+            }
         }
-
-        m_isCalculated = false;
+        else {
+            SRHalt("Texture already calculated!");
+        }
 
         m_context.Do([](RenderContext* ptr) {
             ptr->SetDirty();
@@ -120,8 +142,13 @@ namespace SR_GTYPES_NS {
     bool Texture::Calculate() {
         SR_SCOPED_LOCK
 
-        if (m_isCalculated || !m_data) {
-            SR_ERROR("Texture::Calculate() : data is invalid or the texture is already calculated!");
+        if (m_isCalculated) {
+            SR_ERROR("Texture::Calculate() : texture is already calculated!");
+            return false;
+        }
+
+        if (!m_data) {
+            SR_ERROR("Texture::Calculate() : data is invalid!");
             return false;
         }
 
@@ -162,8 +189,8 @@ namespace SR_GTYPES_NS {
             if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::High) {
                 SR_LOG("Texture::Calculate() : texture \"" + std::string(GetResourceId()) + "\" has " + std::to_string(m_id) + " id.");
             }
-
-            FreeTextureData();
+            /// не освобождаем, может пригодиться
+            /// FreeTextureData();
         }
 
         m_isCalculated = true;
@@ -223,7 +250,7 @@ namespace SR_GTYPES_NS {
     Texture* Texture::LoadFromMemory(const std::string& data, const Memory::TextureConfig &config) {
         Texture* texture = new Texture();
 
-        if (!TextureLoader::LoadFromMemory(texture, data)) {
+        if (!TextureLoader::LoadFromMemory(texture, data, config)) {
             SRHalt("Texture::LoadFromMemory() : failed to load the texture!");
             delete texture;
             return nullptr;
@@ -261,35 +288,24 @@ namespace SR_GTYPES_NS {
         return IResource::GetFileHash();
     }
 
-    bool Texture::Reload() {
-        SR_SCOPED_LOCK
-
-        SR_LOG("Texture::Reload() : reloading \"" + std::string(GetResourceId()) + "\" the texture...");
-
-        m_loadState = LoadState::Reloading;
-
-        bool hasErrors = false;
-
-        hasErrors |= !Unload();
-        hasErrors |= !Load();
-
-        UpdateResources();
-
-        m_hasErrors = false;
-
-        return !hasErrors;
-    }
-
     void Texture::FreeTextureData() {
         if (!m_data) {
             return;
         }
 
         /// шрифт сам освободит свои данные
-        if (!m_isFont) {
+        if (!m_isFont && !m_rawMemory) {
             TextureLoader::Free(m_data);
+        }
+        else if (m_rawMemory) {
+            delete[] m_data;
         }
 
         m_data = nullptr;
+    }
+
+    SR_UTILS_NS::IResource::RemoveUPResult Texture::RemoveUsePoint() {
+        SRAssert2(!(IsCalculated() && GetCountUses() == 1), "Possible multi threading error!");
+        return IResource::RemoveUsePoint();
     }
 }

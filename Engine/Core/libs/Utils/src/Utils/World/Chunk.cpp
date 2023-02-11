@@ -110,16 +110,16 @@ namespace SR_WORLD_NS {
         return true;
     }
 
-    bool Chunk::Load(SR_HTYPES_NS::Marshal&& marshal) {
-        if (marshal.Valid()) {
-            if (m_position != marshal.Read<Math::IVector3>()) {
+    bool Chunk::Load(SR_HTYPES_NS::Marshal* pMarshal) {
+        if (pMarshal && pMarshal->Valid()) {
+            if (m_position != pMarshal->Read<Math::IVector3>()) {
                 SRAssert2(false, "Something went wrong...");
                 return false;
             }
 
-            const uint64_t count = marshal.Read<uint64_t>();
+            const uint64_t count = pMarshal->Read<uint64_t>();
             for (uint64_t i = 0; i < count; ++i) {
-                if (auto &&ptr = m_observer->m_scene->Instance(marshal)) {
+                if (auto &&ptr = m_observer->m_scene->Instance(*pMarshal)) {
                     auto&& pTransform = ptr->GetTransform();
 
                     if (pTransform->GetMeasurement() == SR_UTILS_NS::Measurement::Space2D) {
@@ -142,16 +142,20 @@ namespace SR_WORLD_NS {
 
     }
 
-    SR_HTYPES_NS::Marshal::Ptr Chunk::Save() const {
+    SR_HTYPES_NS::Marshal::Ptr Chunk::Save(SR_HTYPES_NS::DataStorage* pContext) const {
         /// scene is locked
-
-        std::list<SR_HTYPES_NS::Marshal::Ptr> marshaled;
 
         auto&& pLogic = m_observer->m_scene->GetLogic<SceneCubeChunkLogic>();
         auto&& gameObjects = pLogic->GetGameObjectsAtChunk(m_regionPosition, m_position);
 
+        if (gameObjects.empty()) {
+            return nullptr;
+        }
+
+        std::list<SR_HTYPES_NS::Marshal::Ptr> marshaled;
+
         /// сохраняем объекты относительно начала координат чанка
-        SR_THIS_THREAD->GetContext()->SetValue<SR_MATH_NS::FVector3>(-GetWorldPosition());
+        pContext->SetValue<SR_MATH_NS::FVector3>(-GetWorldPosition());
 
         for (auto&& gameObject : gameObjects) {
             if (gameObject.RecursiveLockIfValid()) {
@@ -168,12 +172,13 @@ namespace SR_WORLD_NS {
             }
         }
 
-        SR_THIS_THREAD->GetContext()->RemoveValue<SR_MATH_NS::FVector3>();
+        pContext->RemoveValue<SR_MATH_NS::FVector3>();
 
         auto&& pMarshal = new SR_HTYPES_NS::Marshal();
 
-        if (marshaled.empty())
+        if (marshaled.empty()) {
             return pMarshal;
+        }
 
         pMarshal->Write(m_position);
         pMarshal->Write(static_cast<uint64_t>(marshaled.size()));

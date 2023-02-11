@@ -5,8 +5,11 @@
 #include <Graphics/GUI/Node.h>
 #include <Graphics/GUI/NodeManager.h>
 #include <Graphics/GUI/Pin.h>
+#include <Graphics/GUI/NodeBuilder.h>
 
-namespace SR_GRAPH_NS {
+#include <imgui-node-editor/imgui_node_editor.h>
+
+namespace SR_GRAPH_NS::GUI {
     Node::Node()
         : Node(std::string(), NodeType::None, ImColor(255, 255, 255, 255))
     { }
@@ -27,126 +30,181 @@ namespace SR_GRAPH_NS {
         : m_name(name)
         , m_color(color)
         , m_type(type)
-    {
-        //m_id = NodeManager::Instance().AllocUniqueId(this);
-    }
+    { }
 
-    Node *Node::AddInput(Pin *pin) {
+    Node& Node::AddInput(Pin *pin) {
         pin->m_kind = PinKind::Input;
         pin->SetNode(this);
 
         m_inputs.emplace_back(pin);
 
-        return this;
+        return *this;
     }
 
-    Node* Node::AddOutput(Pin* pin) {
+    Node& Node::AddOutput(Pin* pin) {
         pin->m_kind = PinKind::Output;
         pin->SetNode(this);
 
         if (const auto pinWidth = pin->GetWidth(); pinWidth > m_maxOutputWidth)
             m_maxOutputWidth = pinWidth;
 
+        if (pin->GetType() == PinType::Delegate) {
+            m_hasOutputDelegates = true;
+        }
+
         m_outputs.emplace_back(pin);
 
-        return this;
+        return *this;
     }
 
-    void Node::Draw() const {
-        //ax::NodeEditor::PushStyleVar(ax::NodeEditor::StyleVar_NodePadding, ImVec4(8, 4, 8, 8));
+    void Node::Draw(NodeBuilder* pBuilder, Pin* pNewLinkPin) const {
+        pBuilder->Begin(const_cast<Node*>(this));
 
-        //ax::NodeEditor::BeginNode(m_id);
-       // ImGui::PushID(m_id.AsPointer());
+        const bool isSimple = m_type == NodeType::Simple;
 
-        if (m_type == NodeType::Blueprint) {
-            ImGui::Text("%s", m_name.c_str());
-        }
+        if (!isSimple) {
+            pBuilder->Header(m_color);
 
-       // auto HeaderMaxY = ImGui::GetItemRectMax().y;
+            ImGui::Spring(0);
+            ImGui::TextUnformatted(m_name.c_str());
+            ImGui::Spring(1);
+            ImGui::Dummy(ImVec2(0, 28));
 
-        ImGui::BeginGroup();
-        {
+            if (m_hasOutputDelegates) {
+                ImGui::BeginVertical("delegates", ImVec2(0, 28));
+                ImGui::Spring(1, 0);
 
-            for (const auto &pin : m_inputs)
-                pin->Draw();
+                for (auto&& pOutput : m_outputs) {
+                    if (pOutput->GetType() != PinType::Delegate)
+                        continue;
 
-            ImGui::EndGroup();
+                    auto alpha = ImGui::GetStyle().Alpha;
+                    if (pNewLinkPin && !CanCreateLink(pNewLinkPin, pOutput) && pOutput != pNewLinkPin)
+                        alpha = alpha * (48.0f / 255.0f);
 
-        }
+                    ax::NodeEditor::BeginPin(pOutput->GetId(), ax::NodeEditor::PinKind::Output);
+                    ax::NodeEditor::PinPivotAlignment(ImVec2(1.0f, 0.5f));
+                    ax::NodeEditor::PinPivotSize(ImVec2(0, 0));
 
-        ImGui::SameLine();
+                    ImGui::BeginHorizontal(pOutput->GetId());
+                    ImGui::PushStyleVar(ImGuiStyleVar_Alpha, alpha);
 
-        ImGui::BeginGroup();
-        {
-            if (m_type == NodeType::Simple) {
-                for (uint32_t i = 0; i < m_inputs.size() / 2; ++i)
-                    ImGui::Text(" ");
+                    if (!pOutput->m_name.empty()) {
+                        ImGui::TextUnformatted(pOutput->m_name.c_str());
+                        ImGui::Spring(0);
+                    }
 
-                ImGui::Text("\t%s\t", m_name.c_str());
+                    pOutput->DrawPinIcon(pOutput->IsLinked(), (int)(alpha * 255));
+
+                    ImGui::Spring(0, ImGui::GetStyle().ItemSpacing.x / 2);
+                    ImGui::EndHorizontal();
+                    ImGui::PopStyleVar();
+
+                    ax::NodeEditor::EndPin();
+                }
+
+                ImGui::Spring(1, 0);
+                ImGui::EndVertical();
+                ImGui::Spring(0, ImGui::GetStyle().ItemSpacing.x / 2);
             }
+            else {
+                ImGui::Spring(0);
+            }
+
+            pBuilder->EndHeader();
         }
-        ImGui::EndGroup();
 
-        ImGui::SameLine();
+        for (auto&& pInput : m_inputs) {
+            auto alpha = ImGui::GetStyle().Alpha;
 
-        ImGui::BeginGroup();
-        {
-            for (uint32_t i = 0; i < m_inputs.size() / 2; ++i)
-                ImGui::Text(" ");
+            if (pNewLinkPin && !CanCreateLink(pNewLinkPin, pInput) && pInput != pNewLinkPin)
+                alpha = alpha * (48.0f / 255.0f);
 
-            for (const auto &pin : m_outputs)
-                pin->Draw(m_maxOutputWidth);
-        }
-        ImGui::EndGroup();
+            pBuilder->Input(pInput);
 
-       // ax::NodeEditor::EndNode();
+            ImGui::PushStyleVar(ImGuiStyleVar_Alpha, alpha);
+            pInput->DrawPinIcon(pInput->IsLinked(), (int)(alpha * 255));
 
-        if (ImGui::IsItemVisible() && m_type == NodeType::Blueprint)
-        {
-         /*   const auto halfBorderWidth = ax::NodeEditor::GetStyle().NodeBorderWidth * 0.5f;
+            ImGui::Spring(0);
 
-            auto HeaderMin = ImGui::GetItemRectMin();
-            auto HeaderMax = ImVec2(ImGui::GetItemRectMax().x, HeaderMaxY + halfBorderWidth);
-
-            auto drawList = ax::NodeEditor::GetNodeBackgroundDrawList(m_id);
-
-            auto HeaderColor = IM_COL32(
-                    m_color.Value.x,
-                    m_color.Value.y,
-                    m_color.Value.z,
-                    m_color.Value.w);
-
-            auto alpha = static_cast<int>(255 * ImGui::GetStyle().Alpha);
-            auto headerColor = IM_COL32(0, 0, 0, alpha) | (HeaderColor & IM_COL32(255, 255, 255, 0));
-            if ((HeaderMax.x > HeaderMin.x) && (HeaderMax.y > HeaderMin.y))
+            if (!pInput->m_name.empty())
             {
-                drawList->AddRectFilled(HeaderMin,
-                                        HeaderMax,
-                                        headerColor, ax::NodeEditor::GetStyle().NodeRounding, 1 | 2);
+                ImGui::TextUnformatted(pInput->m_name.c_str());
+                ImGui::Spring(0);
+            }
 
-                auto headerSeparatorMin = ImVec2(HeaderMin.x, HeaderMax.y - 0.5);
-                auto headerSeparatorMax = ImVec2(HeaderMax.x, HeaderMax.y - 0.5);
+            if (pInput->GetType() == PinType::Bool)
+            {
+                ImGui::Button("Hello");
+                ImGui::Spring(0);
+            }
 
-                drawList->AddLine(
-                        headerSeparatorMin,
-                        headerSeparatorMax,
-                        ImColor(255, 255, 255, 96 * alpha / (3 * 255)), 2.0f);
-            }*/
+            ImGui::PopStyleVar();
+            pBuilder->EndInput();
         }
 
-      //  ax::NodeEditor::PopStyleVar();
-        ImGui::PopID();
+        if (isSimple) {
+            pBuilder->Middle();
+
+            ImGui::Spring(1, 0);
+            ImGui::TextUnformatted(m_name.c_str());
+            ImGui::Spring(1, 0);
+        }
+
+        for (auto&& pOutput : m_outputs)
+        {
+            if (!isSimple && pOutput->GetType() == PinType::Delegate)
+                continue;
+
+            auto alpha = ImGui::GetStyle().Alpha;
+
+            if (pNewLinkPin && !CanCreateLink(pNewLinkPin, pOutput) && pOutput != pNewLinkPin)
+                alpha = alpha * (48.0f / 255.0f);
+
+            ImGui::PushStyleVar(ImGuiStyleVar_Alpha, alpha);
+            pBuilder->Output(pOutput);
+
+            if (pOutput->GetType() == PinType::String) {
+                static char buffer[128] = "Edit Me\nMultiline!";
+                static bool wasActive = false;
+
+                ImGui::PushItemWidth(100.0f);
+                ImGui::InputText("##edit", buffer, 127);
+                ImGui::PopItemWidth();
+                if (ImGui::IsItemActive() && !wasActive)
+                {
+                    ax::NodeEditor::EnableShortcuts(false);
+                    wasActive = true;
+                }
+                else if (!ImGui::IsItemActive() && wasActive)
+                {
+                    ax::NodeEditor::EnableShortcuts(true);
+                    wasActive = false;
+                }
+                ImGui::Spring(0);
+            }
+            if (!pOutput->m_name.empty())
+            {
+                ImGui::Spring(0);
+                ImGui::TextUnformatted(pOutput->m_name.c_str());
+            }
+
+            ImGui::Spring(0);
+
+            pOutput->DrawPinIcon(pOutput->IsLinked(), (int)(alpha * 255));
+
+            ImGui::PopStyleVar();
+            pBuilder->EndOutput();
+        }
+
+        pBuilder->End();
     }
 
     uintptr_t Node::GetId() const {
-       // return m_id.Get();
-        return 0;
+        return reinterpret_cast<const uintptr_t>(this);
     }
 
     Node::~Node() {
-        //if (Valid())
-         //   NodeManager::Instance().FreeUniqueId(m_id.Get());
-
         for (auto& pin : m_inputs)
             delete pin;
 
@@ -173,11 +231,6 @@ namespace SR_GRAPH_NS {
         return m_outputs.at(index);
     }
 
-    bool Node::Valid() const {
-       // return m_id != ax::NodeEditor::NodeId::Invalid;
-        return false;
-    }
-
     Node* Node::Copy() const {
         auto node = new Node();
         node->m_name = m_name;
@@ -196,5 +249,13 @@ namespace SR_GRAPH_NS {
 
     std::string Node::GetName() const {
         return m_name;
+    }
+
+    Node &Node::AddInput(const std::string &name, PinType type) {
+        return AddInput(new Pin(name, type));
+    }
+
+    Node &Node::AddOutput(const std::string &name, PinType type) {
+        return AddOutput(new Pin(name, type));
     }
 }

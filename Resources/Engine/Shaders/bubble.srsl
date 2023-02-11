@@ -8,14 +8,14 @@ BlendEnabled true;
 DepthWrite false;
 DepthTest true;
 
-uniform sampler2D NoiseTex;
-uniform vec3 BubbleColor;
-uniform float NoiseSampleSize;
-uniform float AnimationSpeed;
-uniform float HeightMultiplier;
+[[uniform], [public]] sampler2D NoiseTex;
+[[uniform], [public]] vec3 BubbleColor;
+[[uniform], [public]] float NoiseSampleSize;
+[[uniform], [public]] float AnimationSpeed;
+[[uniform], [public]] float HeightMultiplier;
 
 float fresnel() {
-	vec3 view_direction_world = VIEW_DIRECTION;
+	vec3 view_direction_world = (VIEW_MATRIX * vec4(VIEW_DIRECTION, 0)).xyz;
 	vec3 normal_world = (VIEW_MATRIX * vec4(NORMAL, 0.0)).xyz;
 
 	float d = dot(view_direction_world, normal_world);
@@ -32,4 +32,5 @@ void fragment() {
 void vertex() {
 	float height = texture(NoiseTex, VERTEX.xz * NoiseSampleSize + vec2(TIME) * AnimationSpeed).r;
 	VERTEX += height * HeightMultiplier;
+    OUT_POSITION = PROJECTION_MATRIX * VIEW_MATRIX * MODEL_MATRIX * vec4(VERTEX, 1.0);
 }

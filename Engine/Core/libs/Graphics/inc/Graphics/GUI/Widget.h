@@ -30,8 +30,11 @@ namespace SR_GRAPH_NS::GUI {
 
     class Widget : public SR_UTILS_NS::NonCopyable, public SR_UTILS_NS::InputHandler {
         friend class WidgetManager;
+    public:
         using RenderScenePtr = SR_HTYPES_NS::SafePtr<RenderScene>;
         using ContextPtr = RenderContext*;
+        using ScenePtr = SR_HTYPES_NS::SafePtr<SR_WORLD_NS::Scene>;
+
     public:
         explicit Widget(std::string name, SR_MATH_NS::IVector2 size = SR_MATH_NS::IVector2MAX)
             : m_name(std::move(name))
@@ -59,6 +62,8 @@ namespace SR_GRAPH_NS::GUI {
 
         virtual void Open();
         virtual void Close();
+
+        virtual void SetScene(const ScenePtr& scene) { }
 
         void DrawAsSubWindow();
 

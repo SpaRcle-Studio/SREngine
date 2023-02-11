@@ -20,7 +20,11 @@ namespace SR_GRAPH_NS {
 namespace SR_GTYPES_NS {
     class Camera : public SR_UTILS_NS::Component {
         SR_ENTITY_SET_VERSION(1001);
-        using RenderTechniquePtr = std::variant<SR_UTILS_NS::Path, RenderTechnique*>;
+        SR_INITIALIZE_COMPONENT(Camera);
+        struct RenderTechniqueInfo {
+            SR_UTILS_NS::Path path;
+            RenderTechnique* pTechnique = nullptr;
+        };
         using RenderScenePtr = SR_HTYPES_NS::SafePtr<RenderScene>;
     public:
         explicit Camera(uint32_t width = 0, uint32_t height = 0);
@@ -34,7 +38,7 @@ namespace SR_GTYPES_NS {
         void OnAttached() override;
         void UpdateProjection(uint32_t w, uint32_t h);
 
-        Component* CopyComponent() const override;
+        SR_NODISCARD Component* CopyComponent() const override;
 
     public:
         SR_NODISCARD SR_FORCE_INLINE glm::vec3 GetRotation() const { return { m_pitch, m_yaw, m_roll }; }
@@ -45,7 +49,9 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD SR_FORCE_INLINE glm::mat4 GetProjection() const { return m_projection;                    }
         SR_NODISCARD SR_FORCE_INLINE const glm::mat4& GetProjectionRef() const noexcept { return m_projection;          }
         SR_NODISCARD SR_FORCE_INLINE SR_MATH_NS::UVector2 GetSize() const { return m_viewportSize;             }
+        SR_NODISCARD SR_FORCE_INLINE SR_MATH_NS::FVector3 GetViewPosition() const;
         SR_NODISCARD SR_FORCE_INLINE SR_MATH_NS::FVector3 GetPosition() const { return m_position; }
+        SR_NODISCARD SR_FORCE_INLINE const SR_MATH_NS::FVector3& GetPositionRef() const { return m_position; }
         SR_NODISCARD SR_FORCE_INLINE glm::vec3 GetGLPosition() const { return m_position.ToGLM();              }
         SR_NODISCARD SR_FORCE_INLINE float_t GetFar() const { return m_far;                                    }
         SR_NODISCARD SR_FORCE_INLINE float_t GetNear() const { return m_near;                                  }
@@ -101,7 +107,7 @@ namespace SR_GTYPES_NS {
         SR_MATH_NS::FVector3  m_position          = { 0, 0, 0 };
         SR_MATH_NS::UVector2  m_viewportSize      = { 0, 0 };
 
-        RenderTechniquePtr    m_renderTechnique   = { };
+        RenderTechniqueInfo   m_renderTechnique   = { };
 
     };
 }

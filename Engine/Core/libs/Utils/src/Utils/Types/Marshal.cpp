@@ -6,25 +6,30 @@
 #include <Utils/ResourceManager/ResourceManager.h>
 
 namespace SR_HTYPES_NS {
-    Marshal::Marshal(Marshal &&marshal) noexcept {
-#ifdef SR_MINGW
-        m_stream.swap(marshal.m_stream);
-#else
-        m_stream = SR_UTILS_NS::Exchange(marshal.m_stream, std::stringstream());
-#endif
-        m_size = std::exchange(marshal.m_size, {});
-        m_position = std::exchange(marshal.m_position, {});
+    Marshal::Marshal(std::ifstream& ifs)
+        : Super(ifs)
+    { }
+
+    Marshal::Marshal(const std::string& str)
+        : Super(str)
+    { }
+
+    Marshal::Marshal(const char *pData, uint64_t size)
+        : Super(pData, size)
+    { }
+
+    void Marshal::Append(Marshal&& marshal) {
+        if (marshal) {
+            Super::Write(marshal.Super::View(), marshal.Size());
+        }
     }
 
-    Marshal &Marshal::operator=(Marshal &&marshal) noexcept {
-#ifdef SR_MINGW
-        m_stream.swap(marshal.m_stream);
-#else
-        m_stream = SR_UTILS_NS::Exchange(marshal.m_stream, std::stringstream());
-#endif
-        m_size = std::exchange(marshal.m_size, {});
-        m_position = std::exchange(marshal.m_position, {});
-        return *this;
+    void Marshal::Append(Marshal::Ptr& pMarshal) {
+        if (pMarshal && *pMarshal) {
+            Super::Write(pMarshal->Super::View(), pMarshal->Size());
+        }
+
+        SR_SAFE_DELETE_PTR(pMarshal);
     }
 
     bool Marshal::Save(const Path &path) const {
@@ -38,9 +43,7 @@ namespace SR_HTYPES_NS {
             return false;
         }
 
-        /// copy buffer
-        file << m_stream.str();
-
+        file.write(Super::View(), Size());
         file.close();
 
         return true;
@@ -52,72 +55,62 @@ namespace SR_HTYPES_NS {
             return nullptr;
         }
 
-        Marshal::Ptr marshal = new Marshal();
+        auto&& pMarshal = new Marshal(file);
 
-        marshal->m_stream << file.rdbuf();
-        marshal->m_size = file.tellg();
+        if (!pMarshal->Valid()) {
+            delete pMarshal;
+            pMarshal = nullptr;
+        }
 
         file.close();
 
-        return marshal;
+        return pMarshal;
     }
 
     Marshal Marshal::Load(const Path &path) {
-        Marshal marshal;
-
         std::ifstream file(path.ToString(), std::ios::binary);
         if (!file.is_open()) {
-            return marshal;
+            return Marshal();
         }
 
-        marshal.m_stream << file.rdbuf();
-        marshal.m_size = file.tellg();
-
+        Marshal marshal(file);
         file.close();
 
         return marshal;
     }
 
     Marshal Marshal::Copy() const {
-        Marshal marshal;
-
-        /// copy buffer
-        marshal.m_stream << m_stream.str();
-        marshal.m_size = m_size;
-        marshal.m_position = 0;
-
-        return marshal;
+        return *this;
     }
 
     Marshal::Ptr Marshal::CopyPtr() const {
-        auto&& pMarshal = new Marshal();
-
-        /// copy buffer
-        pMarshal->m_stream << m_stream.str();
-        pMarshal->m_size = m_size;
-        pMarshal->m_position = 0;
-
-        return pMarshal;
+        return new Marshal(*this);
     }
 
-    std::string Marshal::ToString() const {
-        return m_stream.str();
+    Marshal Marshal::LoadFromMemory(const std::string& data) {
+        return Marshal(data);
     }
 
-    Marshal Marshal::LoadFromMemory(const std::string &data) {
-        Marshal marshal;
-
-        marshal.m_size = data.size();
-        marshal.m_stream = std::stringstream(data);
-
-        return marshal;
-    }
-
-    Marshal Marshal::LoadFromBase64(const std::string &base64) {
+    Marshal Marshal::LoadFromBase64(const std::string& base64) {
         return LoadFromMemory(SR_UTILS_NS::StringUtils::Base64Decode(base64));
     }
 
-    std::string Marshal::ToBase64() const {
-        return SR_UTILS_NS::StringUtils::Base64Encode(ToString());
+    Marshal Marshal::ReadBytes(uint64_t count) noexcept {
+        auto&& marshal = Marshal(Super::View(), count);
+        Skip(count);
+        return marshal;
+    }
+
+    Marshal::Ptr Marshal::ReadBytesPtr(uint64_t count) noexcept {
+        if (GetPosition() + count > GetCapacity()) {
+            SRHalt("Invalid range!");
+            return nullptr;
+        }
+
+        auto&& pMarshal = new Marshal(Super::View() + GetPosition(), count);
+
+        Skip(count);
+
+        return pMarshal;
     }
 }

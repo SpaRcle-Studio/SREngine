@@ -8,15 +8,37 @@
 #include <Utils/ECS/EntityRefUtils.h>
 
 namespace SR_UTILS_NS {
+    class GameObject;
+    class Component;
+
     class EntityRef {
     public:
-        SR_ENUM_CLASS_T(Mode, uint8_t, Absolute, Relative);
-    public:
         EntityRef();
+        explicit EntityRef(bool relative);
+
+        EntityRef(const EntityRef& other) noexcept;
         EntityRef(EntityRef&& other) noexcept;
 
+        EntityRef& operator=(const EntityRef& other);
+
+    public:
+        void AddPathItem(EntityRefUtils::Action action);
+        void AddPathItem(EntityRefUtils::Action action, const std::string& name);
+        void AddPathItem(EntityRefUtils::Action action, const std::string& name, uint16_t index);
+
+    public:
+        SR_NODISCARD GameObject* GetGameObject(GameObject* pFrom) const;
+
+        void SetRelative(bool relative);
+
     private:
-        Mode m_mode = Mode::Absolute;
+        void Update() const;
+
+    private:
+        SR_UTILS_NS::EntityRefUtils::RefPath m_path;
+        bool m_relative;
+        mutable EntityId m_fromEntityId;
+        mutable EntityId m_entityId;
 
     };
 }

@@ -24,7 +24,6 @@ namespace SR_PTYPES_NS {
 
     private:
         physx::PxShape* m_shape = nullptr;
-
     };
 }
 

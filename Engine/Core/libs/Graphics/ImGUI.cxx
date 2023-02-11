@@ -9,6 +9,10 @@
 #include <imgui/imgui_draw.cpp>
 #include <imgui/imgui_widgets.cpp>
 
+#ifdef IMGUI_HAS_STACK_LAYOUT
+    #include <imgui/imgui_stacklayout.cpp>
+#endif
+
 #include <imgui/misc/cpp/imgui_stdlib.cpp>
 
 #ifdef SR_WIN32
@@ -52,6 +56,7 @@
         #pragma clang diagnostic ignored "-Wunused-function"
     #endif
 
+    #include <imgui-node-editor/imgui_node_editor.h>
     #include <imgui-node-editor/imgui_node_editor_api.cpp>
     #include <imgui-node-editor/imgui_node_editor.cpp>
     #include <imgui-node-editor/imgui_canvas.cpp>

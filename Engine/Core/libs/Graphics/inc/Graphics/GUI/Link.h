@@ -19,16 +19,14 @@ namespace SR_GRAPH_NS::GUI {
         ~Link() override;
 
     public:
-        [[nodiscard]] uintptr_t GetId() const;
-        [[nodiscard]] bool Valid() const;
+        SR_NODISCARD uintptr_t GetId() const;
+        SR_NODISCARD bool IsLinked(Pin* pPin) const;
 
         void Draw() const;
 
     private:
-        //ax::NodeEditor::LinkId m_id;
-
-        Pin* m_startPin;
-        Pin* m_endPin;
+        Pin* m_startPin = nullptr;
+        Pin* m_endPin = nullptr;
 
         ImColor m_color;
 

@@ -34,7 +34,9 @@ namespace SR_PHYSICS_NS {
 
         physx::PxPhysics* m_physics = nullptr;
         physx::PxFoundation* m_foundation = nullptr;
+
         PhysXPvdConnection* m_pvd = nullptr;
+        physx::PxPvdTransport* m_pvdTransport = nullptr;
 
     };
 }

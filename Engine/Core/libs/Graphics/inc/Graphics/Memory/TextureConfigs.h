@@ -10,12 +10,14 @@
 
 namespace SR_GRAPH_NS::Memory {
     struct TextureConfig {
-        TextureConfig(ColorFormat format,
-                TextureFilter filter,
-                TextureCompression compression,
-                uint32_t mipLevels,
-                SR_UTILS_NS::BoolExt alpha,
-                bool cpuUsage)
+        TextureConfig(
+            ColorFormat format,
+            TextureFilter filter,
+            TextureCompression compression,
+            uint32_t mipLevels,
+            SR_UTILS_NS::BoolExt alpha,
+            bool cpuUsage
+        )
             : m_format(format)
             , m_filter(filter)
             , m_compression(compression)

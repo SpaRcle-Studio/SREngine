@@ -123,7 +123,7 @@ namespace SR_UTILS_NS {
     }
 
     bool CmdManager::Close() {
-        ClearHistory();
+        Clear();
         return true;
     }
 
@@ -161,7 +161,14 @@ namespace SR_UTILS_NS {
         return result;
     }
 
-    void CmdManager::ClearHistory() {
+    void CmdManager::Clear() {
+        SR_LOCK_GUARD
+
+        while (!m_commands.empty()) {
+            m_history.emplace_back(m_commands.front().m_cmd);
+            m_commands.pop();
+        }
+
         for (auto&& pCommand : m_history) {
             SR_SAFE_DELETE_PTR(pCommand)
         }

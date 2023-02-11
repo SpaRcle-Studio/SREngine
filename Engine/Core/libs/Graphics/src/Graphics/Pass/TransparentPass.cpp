@@ -52,7 +52,7 @@ namespace SR_GRAPH_NS {
         }
 
         auto&& transparent = GetRenderScene()->GetTransparent();
-        auto&& time = clock();
+        auto&& time = SR_HTYPES_NS::Time::Instance().FClock();
 
         for (auto const& [pShader, subCluster] : transparent) {
             if (!pShader || !pShader->Ready()) {
@@ -70,19 +70,20 @@ namespace SR_GRAPH_NS {
             pShader->SetFloat(SHADER_TIME, time);
 
             for (auto const& [key, meshGroup] : subCluster) {
-                for (const auto &mesh : meshGroup) {
-                    if (!mesh->IsMeshActive()) {
+                for (const auto& pMesh : meshGroup) {
+                    if (!pMesh->IsMeshActive()) {
                         continue;
                     }
 
-                    auto&& virtualUbo = mesh->GetVirtualUBO();
+                    auto&& virtualUbo = pMesh->GetVirtualUBO();
                     if (virtualUbo == SR_ID_INVALID) {
                         continue;
                     }
 
-                    mesh->UseMaterial();
+                    pMesh->UseMaterial();
 
-                    pShader->SetVec3(SHADER_VIEW_DIRECTION, m_camera->GetViewDirection(mesh->GetTranslation()));
+                    pShader->SetVec3(SHADER_VIEW_DIRECTION, m_camera->GetViewDirection());
+                    pShader->SetVec3(SHADER_VIEW_POSITION, m_camera->GetPositionRef());
 
                     if (m_uboManager.BindUBO(virtualUbo) == Memory::UBOManager::BindResult::Duplicated) {
                         SR_ERROR("TransparentPass::Update() : memory has been duplicated!");

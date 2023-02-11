@@ -21,10 +21,9 @@ namespace SR_GRAPH_NS {
                 std::bind(&DebugRenderer::DrawLine, this, _1, _2, _3, _4, _5),
                 std::bind(&DebugRenderer::DrawGeometry, this, "Engine/Models/cubeWireframe.obj", _1, _2, _3, _4, _5, _6),
                 std::bind(&DebugRenderer::DrawGeometry, this, "Engine/Models/planeWireframe.obj", _1, _2, _3, _4, _5, _6),
-                std::bind(&DebugRenderer::DrawGeometry, this, "Engine/Models/sphere_circle.obj", _1, _2, _3, _4, _5, _6)
+                std::bind(&DebugRenderer::DrawGeometry, this, "Engine/Models/sphere_circle.obj", _1, _2, _3, _4, _5, _6),
+                std::bind(&DebugRenderer::DrawGeometry, this, "Engine/Models/capsule_circle.obj", _1, _2, _3, _4, _5, _6)
         );
-
-        SR_UTILS_NS::DebugDraw::Instance().SwitchCallbacks(this);
     }
 
     DebugRenderer::~DebugRenderer() {
@@ -38,6 +37,8 @@ namespace SR_GRAPH_NS {
 
     void DebugRenderer::Prepare() {
         SR_LOCK_GUARD
+
+        SR_UTILS_NS::DebugDraw::Instance().SwitchCallbacks(this);
 
         auto&& timePoint = SR_HTYPES_NS::Time::Instance().Count();
 
@@ -75,6 +76,7 @@ namespace SR_GRAPH_NS {
     uint64_t DebugRenderer::DrawLine(uint64_t id, const SR_MATH_NS::FVector3 &start, const SR_MATH_NS::FVector3 &end, const SR_MATH_NS::FColor &color, float_t time) {
         SR_LOCK_GUARD
 
+    retry:
         if (id == SR_ID_INVALID) {
             auto&& pDebugLine = new SR_GTYPES_NS::DebugLine(start, end, color);
             pDebugLine->SetMaterial(SR_GTYPES_NS::Material::Load("Engine/Materials/Debug/line.mat"));
@@ -82,8 +84,8 @@ namespace SR_GRAPH_NS {
             return AddTimedObject(time, pDebugLine);
         }
         else if (id >= m_timedObjects.size()) {
-            SRHalt0();
-            return SR_ID_INVALID;
+            id = SR_ID_INVALID;
+            goto retry;
         }
         else {
             if (!m_timedObjects[id].pMesh) {
@@ -92,8 +94,12 @@ namespace SR_GRAPH_NS {
 
             auto&& pMesh = dynamic_cast<SR_GTYPES_NS::DebugLine*>(m_timedObjects[id].pMesh);
 
-            if (!pMesh) {
+            if (!pMesh && time > 0) {
                 SRHalt0();
+                return SR_ID_INVALID;
+            }
+
+            if (!pMesh) {
                 return SR_ID_INVALID;
             }
 
@@ -137,8 +143,12 @@ namespace SR_GRAPH_NS {
 
             auto&& pMesh = dynamic_cast<SR_GTYPES_NS::DebugWireframeMesh*>(m_timedObjects[id].pMesh);
 
-            if (!pMesh) {
+            if (!pMesh && time > 0) {
                 SRHalt0();
+                return SR_ID_INVALID;
+            }
+
+            if (!pMesh) {
                 return SR_ID_INVALID;
             }
 

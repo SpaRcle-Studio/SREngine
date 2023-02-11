@@ -15,7 +15,8 @@ namespace SR_GRAPH_NS {
     }
 
     BasePass::BasePass(RenderTechnique* pTechnique, BasePass* pParent)
-        : m_camera(nullptr)
+        : Super()
+        , m_camera(nullptr)
         , m_context(nullptr)
         , m_pipeline(Environment::Get())
         , m_uboManager(Memory::UBOManager::Instance())
@@ -26,7 +27,7 @@ namespace SR_GRAPH_NS {
 
     bool BasePass::Load(const SR_XML_NS::Node &passNode) {
         /// Некоторые проходы имеют свое уникальное имя, нужное для поиска.
-        m_name = passNode.TryGetAttribute("Name").ToString(passNode.Name());
+        SetName(passNode.TryGetAttribute("Name").ToString(passNode.Name()));
         return true;
     }
 
@@ -53,5 +54,10 @@ namespace SR_GRAPH_NS {
 
     std::string_view BasePass::GetName() const {
         return m_name;
+    }
+
+    void BasePass::SetName(const std::string& name) {
+        m_name = name;
+        m_hashName = SR_HASH_STR(name);
     }
 }

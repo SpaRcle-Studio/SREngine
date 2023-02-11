@@ -14,6 +14,7 @@ namespace SR_GTYPES_NS {
 
     class Text : public Mesh, public SR_UTILS_NS::Component {
         SR_ENTITY_SET_VERSION(1001);
+        SR_INITIALIZE_COMPONENT(Text);
         friend class Mesh;
         using Super = Mesh;
     public:

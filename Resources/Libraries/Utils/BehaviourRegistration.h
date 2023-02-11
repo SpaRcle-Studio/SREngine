@@ -17,6 +17,14 @@
     #define EXTERN extern "C" __declspec(dllexport)
 #endif
 
+struct CollisionData {
+    void* pHandler = nullptr;
+    FVector3 point;
+    FVector3 impulse;
+};
+
+class Behaviour;
+
 #define REGISTER_BEHAVIOUR_BASE(className)                                          \
     EXTERN void Awake() {                                                           \
         if (auto&& ptr = g_codegen_behaviour_ptr.ReinterpretCast<className*>()) {   \
@@ -65,6 +73,42 @@
             ptr->SetGameObject(gameObject);                                         \
         }                                                                           \
     }                                                                               \
+                                                                                    \
+    EXTERN void OnCollisionEnter(const CollisionData& data) {                       \
+        if (auto&& ptr = g_codegen_behaviour_ptr.ReinterpretCast<className*>()) {   \
+            ptr->OnCollisionEnter(data);                                            \
+        }                                                                           \
+    }                                                                               \
+                                                                                    \
+    EXTERN void OnCollisionStay(const CollisionData& data) {                        \
+        if (auto&& ptr = g_codegen_behaviour_ptr.ReinterpretCast<className*>()) {   \
+            ptr->OnCollisionStay(data);                                             \
+        }                                                                           \
+    }                                                                               \
+                                                                                    \
+    EXTERN void OnCollisionExit(const CollisionData& data) {                        \
+        if (auto&& ptr = g_codegen_behaviour_ptr.ReinterpretCast<className*>()) {   \
+            ptr->OnCollisionExit(data);                                             \
+        }                                                                           \
+    }                                                                               \
+                                                                                    \
+    EXTERN void OnTriggerEnter(const CollisionData& data) {                         \
+        if (auto&& ptr = g_codegen_behaviour_ptr.ReinterpretCast<className*>()) {   \
+            ptr->OnTriggerEnter(data);                                              \
+        }                                                                           \
+    }                                                                               \
+                                                                                    \
+    EXTERN void OnTriggerStay(const CollisionData& data) {                          \
+        if (auto&& ptr = g_codegen_behaviour_ptr.ReinterpretCast<className*>()) {   \
+            ptr->OnTriggerStay(data);                                               \
+        }                                                                           \
+    }                                                                               \
+                                                                                    \
+    EXTERN void OnTriggerExit(const CollisionData& data) {                          \
+        if (auto&& ptr = g_codegen_behaviour_ptr.ReinterpretCast<className*>()) {   \
+            ptr->OnTriggerExit(data);                                               \
+        }                                                                           \
+    }                                                                               \
 
 #define REGISTER_BEHAVIOUR_PROPERTIES(className)                                    \
     EXTERN std::any GetProperty(const std::string& id) {                            \
@@ -102,6 +146,7 @@
 
 #define REGISTER_BEHAVIOUR(className)                                               \
     SharedPtr<void> g_codegen_behaviour_ptr;                                        \
+    std::vector<std::function<void()>> g_codegen_properties_registations;           \
     EXTERN void InitBehaviour() {                                                   \
         g_codegen_behaviour_ptr = (void*)(new className());                         \
     }                                                                               \

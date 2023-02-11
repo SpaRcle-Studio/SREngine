@@ -1,0 +1,69 @@
+ShaderType PostProcessing;
+
+PolygonMode Fill;
+CullMode Back;
+DepthCompare LessOrEqual;
+PrimitiveTopology TriangleList;
+BlendEnabled false;
+DepthWrite false;
+DepthTest false;
+
+[[uniform]] sampler2D gPosition;
+[[uniform]] sampler2D gNormal;
+
+[[shared]] vec2 uv;
+
+[[const]] int kernelSize = 64;
+[[const]] float radius = 0.45;
+[[const]] float bias = 0.025;
+
+void fragment() {
+    vec4 worldPos = texture(gPosition, uv);
+    vec3 normal = texture(gNormal, uv).xyz;
+
+    if (worldPos.w <= 0.0 || normal == vec3(0)) {
+        COLOR_INDEX_0 = vec4(1.0);
+        return;
+    }
+
+    vec3 fragPos = (VIEW_MATRIX * worldPos).xyz;
+
+    normal = normalize((VIEW_MATRIX * vec4(normal, 0.0)).xyz);
+
+    ivec2 texDim = textureSize(SSAO_NOISE, 0);
+    vec2 noiseScale = vec2(RESOLUTION.x / texDim.x, RESOLUTION.y / texDim.y);
+
+    vec3 randomVec = normalize(texture(SSAO_NOISE, uv * noiseScale).xyz);
+    vec3 tangent = normalize(randomVec - normal * dot(randomVec, normal));
+    vec3 bitangent = cross(normal, tangent);
+
+    mat3 TBN = mat3(tangent, bitangent, normal);
+
+    float occlusion = 0.0;
+
+    for (int i = 0; i < kernelSize; ++i) {
+        vec3 samplePos = fragPos + TBN * SSAO_SAMPLES[i].xyz * radius;
+        vec4 screenSample = PROJECTION_MATRIX * vec4(samplePos, 1.0);
+        screenSample.xyz /= screenSample.w;
+        screenSample.xyz = screenSample.xyz * 0.5 + 0.5;
+
+        vec4 positionColor = texture(gPosition, screenSample.xy);
+
+        float sampleDepth = (VIEW_MATRIX * positionColor).z;
+
+        float rangeCheck = smoothstep(0.0, 1.0, radius / abs(fragPos.z - sampleDepth));
+
+        if (sampleDepth >= samplePos.z + bias) {
+            occlusion += rangeCheck;
+        }
+    }
+
+    occlusion = 1.0 - (occlusion / kernelSize);
+
+    COLOR_INDEX_0 = vec4(vec3(occlusion), 1.0);
+}
+
+void vertex() {
+    uv = vec2((VERTEX_INDEX << 1) & 2, VERTEX_INDEX & 2);
+    OUT_POSITION = vec4(uv * 2.0 - 1.0, 0.0, 1.0);
+}

@@ -74,12 +74,28 @@ namespace SR_MATH_NS {
             return Quaternion(glm::inverse(self));
         }
 
+        SR_NODISCARD Quaternion Slerp(const Quaternion& q, Unit t) const {
+            return Quaternion(glm::slerp(self, q.self, static_cast<float_t>(t)));
+        }
+
         SR_NODISCARD Quaternion Normalize() const {
             return Quaternion(glm::normalize(self));
         }
 
         SR_NODISCARD std::string ToString() const {
             return "(" + std::to_string(self.x) + ", " + std::to_string(self.y) + ", " + std::to_string(self.z) + ", " + std::to_string(self.w) + ")";
+        }
+
+        SR_FORCE_INLINE bool operator!=(const Quaternion& q) const noexcept {
+            return !(*this == q);
+        }
+
+        SR_FORCE_INLINE bool operator==(const Quaternion& q) const noexcept {
+            return
+                SR_EQUALS(x, q.x) &&
+                SR_EQUALS(y, q.y) &&
+                SR_EQUALS(z, q.z) &&
+                SR_EQUALS(w, q.w);
         }
 
         SR_FORCE_INLINE void operator+=(const Quaternion &p_q) {

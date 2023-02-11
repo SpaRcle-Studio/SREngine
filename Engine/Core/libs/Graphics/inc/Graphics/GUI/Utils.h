@@ -23,7 +23,7 @@ namespace SR_GRAPH_NS::GUI {
 
         ImGui::PushItemFlag(ImGuiItemFlags_Disabled, !active);
 
-        if (ImGui::DragFloat(SR_FORMAT_C("##%s%i", name.c_str(), index), &temp, drag, 0.0f, 0.0f, "%.2f")) {
+        if (ImGui::DragFloat(SR_FORMAT_C("##%s%i", name.c_str(), index), &temp, drag, 0.0f, 0.0f, "%.5f")) {
             value = temp;
             ImGui::PopItemFlag();
             return true;
@@ -521,6 +521,10 @@ namespace SR_GRAPH_NS::GUI {
             ImGui::PopStyleColor(1);
 
         return result;
+    }
+
+    static bool Button(const std::string& label, uint32_t index = 0) {
+        return Button(label, ImVec4(0, 0, 0, 0), ImVec4(0, 0, 0, 0), index);
     }
 }
 

@@ -6,6 +6,7 @@
 #define GAMEENGINE_ISHADERPROGRAM_H
 
 #include <Utils/FileSystem/FileSystem.h>
+#include <Utils/ResourceManager/ResourceManager.h>
 #include <Utils/Common/StringUtils.h>
 #include <Utils/Common/Hashes.h>
 #include <Utils/Common/Enumerations.h>
@@ -22,12 +23,18 @@ namespace SR_GRAPH_NS {
     static constexpr uint64_t SHADER_LINE_END_POINT = SR_COMPILE_TIME_CRC32_STR("LINE_END_POINT");
     static constexpr uint64_t SHADER_LINE_COLOR = SR_COMPILE_TIME_CRC32_STR("LINE_COLOR");
     static constexpr uint64_t SHADER_MODEL_MATRIX = SR_COMPILE_TIME_CRC32_STR("MODEL_MATRIX");
+    static constexpr uint64_t SHADER_SKELETON_MATRICES_128 = SR_COMPILE_TIME_CRC32_STR("SKELETON_MATRICES_128");
+    static constexpr uint64_t SHADER_SKELETON_MATRIX_OFFSETS_128 = SR_COMPILE_TIME_CRC32_STR("SKELETON_MATRIX_OFFSETS_128");
     static constexpr uint64_t SHADER_VIEW_MATRIX = SR_COMPILE_TIME_CRC32_STR("VIEW_MATRIX");
+    static constexpr uint64_t SHADER_SSAO_NOISE = SR_COMPILE_TIME_CRC32_STR("SSAO_NOISE");
+    static constexpr uint64_t SHADER_SSAO_SAMPLES = SR_COMPILE_TIME_CRC32_STR("SSAO_SAMPLES");
     static constexpr uint64_t SHADER_VIEW_NO_TRANSLATE_MATRIX = SR_COMPILE_TIME_CRC32_STR("VIEW_NO_TRANSLATE_MATRIX");
     static constexpr uint64_t SHADER_PROJECTION_MATRIX = SR_COMPILE_TIME_CRC32_STR("PROJECTION_MATRIX");
     static constexpr uint64_t SHADER_ORTHOGONAL_MATRIX = SR_COMPILE_TIME_CRC32_STR("ORTHOGONAL_MATRIX");
     static constexpr uint64_t SHADER_VIEW_DIRECTION = SR_COMPILE_TIME_CRC32_STR("VIEW_DIRECTION");
+    static constexpr uint64_t SHADER_VIEW_POSITION = SR_COMPILE_TIME_CRC32_STR("VIEW_POSITION");
     static constexpr uint64_t SHADER_TIME = SR_COMPILE_TIME_CRC32_STR("TIME");
+    static constexpr uint64_t SHADER_RESOLUTION = SR_COMPILE_TIME_CRC32_STR("RESOLUTION");
     static constexpr uint64_t SHADER_SKYBOX_DIFFUSE = SR_COMPILE_TIME_CRC32_STR("SKYBOX_DIFFUSE");
     static constexpr uint64_t SHADER_DEPTH_ATTACHMENT = SR_COMPILE_TIME_CRC32_STR("DEPTH_ATTACHMENT");
     static constexpr uint64_t SHADER_TEXT_ATLAS_TEXTURE = SR_COMPILE_TIME_CRC32_STR("TEXT_ATLAS_TEXTURE");
@@ -36,22 +43,11 @@ namespace SR_GRAPH_NS {
     static constexpr uint64_t SHADER_TEXT_RECT_WIDTH = SR_COMPILE_TIME_CRC32_STR("TEXT_RECT_WIDTH");
     static constexpr uint64_t SHADER_TEXT_RECT_HEIGHT = SR_COMPILE_TIME_CRC32_STR("TEXT_RECT_HEIGHT");
 
-    static constexpr std::array<uint64_t, 8> SHADER_COLOR_ATTACHMENTS = {
-            SR_COMPILE_TIME_CRC32_STR("COLOR_ATTACHMENT_0"),
-            SR_COMPILE_TIME_CRC32_STR("COLOR_ATTACHMENT_1"),
-            SR_COMPILE_TIME_CRC32_STR("COLOR_ATTACHMENT_2"),
-            SR_COMPILE_TIME_CRC32_STR("COLOR_ATTACHMENT_3"),
-            SR_COMPILE_TIME_CRC32_STR("COLOR_ATTACHMENT_4"),
-            SR_COMPILE_TIME_CRC32_STR("COLOR_ATTACHMENT_5"),
-            SR_COMPILE_TIME_CRC32_STR("COLOR_ATTACHMENT_6"),
-            SR_COMPILE_TIME_CRC32_STR("COLOR_ATTACHMENT_7")
-    };
-
     /**
        0 - binding
        1 - ubo size
     */
-    typedef std::vector<std::pair<uint32_t, uint64_t>> UBOInfo;
+    typedef std::vector<std::pair<uint64_t, uint64_t>> UBOInfo;
 
     typedef std::vector<std::pair<Vertices::Attribute, size_t>> VertexAttributes;
     typedef std::vector<SR_VERTEX_DESCRIPTION> VertexDescriptions;
@@ -59,7 +55,21 @@ namespace SR_GRAPH_NS {
     SR_DEPRECATED
     typedef std::variant<glm::mat4, glm::mat3, glm::mat2, float, int, glm::vec2, glm::vec3, glm::vec4, glm::ivec2, glm::ivec3, glm::ivec4> ShaderVariable;
 
-    SR_ENUM_NS_CLASS(ShaderStage, Unknown, Vertex, Fragment, Tesselation)
+    SR_ENUM_NS_CLASS(ShaderStage,
+        Unknown,
+        Vertex,
+        Fragment,
+        Geometry,
+        Tesselation,
+        Compute,
+        Raygen,
+        Intersection,
+        HitClosest,
+        HitAny,
+        MissPrimary,
+        MissSecondary
+    );
+
     SR_ENUM_NS_CLASS(LayoutBinding, Unknown = 0, Uniform = 1, Sampler2D = 2)
     SR_ENUM_NS_CLASS(PolygonMode, Unknown, Fill, Line, Point)
     SR_ENUM_NS_CLASS(CullMode, Unknown, None, Front, Back, FrontAndBack)
@@ -97,22 +107,10 @@ namespace SR_GRAPH_NS {
     struct SR_DLL_EXPORT SRShaderCreateInfo {
         SRShaderCreateInfo() = default;
 
-        SRShaderCreateInfo(const SRShaderCreateInfo& ref)
-            : path(ref.path)
-            , polygonMode(ref.polygonMode)
-            , cullMode(ref.cullMode)
-            , depthCompare(ref.depthCompare)
-            , primitiveTopology(ref.primitiveTopology)
-            , vertexAttributes(ref.vertexAttributes)
-            , vertexDescriptions(ref.vertexDescriptions)
-            , uniforms(ref.uniforms)
-            , blendEnabled(ref.blendEnabled)
-            , depthWrite(ref.depthWrite)
-            , depthTest(ref.depthTest)
-        { }
+        SRShaderCreateInfo(const SRShaderCreateInfo& ref) = default;
 
         SRShaderCreateInfo(SRShaderCreateInfo&& ref) noexcept {
-            path = std::exchange(ref.path, {});
+            stages = std::exchange(ref.stages, {});
             polygonMode = std::exchange(ref.polygonMode, {});
             cullMode = std::exchange(ref.cullMode, {});
             depthCompare = std::exchange(ref.depthCompare, {});
@@ -125,23 +123,10 @@ namespace SR_GRAPH_NS {
             depthTest = std::exchange(ref.depthTest, {});
         }
 
-        SRShaderCreateInfo& operator=(const SRShaderCreateInfo& ref) noexcept {
-            path = ref.path;
-            polygonMode = ref.polygonMode;
-            cullMode = ref.cullMode;
-            depthCompare = ref.depthCompare;
-            primitiveTopology = ref.primitiveTopology;
-            vertexAttributes = ref.vertexAttributes;
-            vertexDescriptions = ref.vertexDescriptions;
-            uniforms = ref.uniforms;
-            blendEnabled = ref.blendEnabled;
-            depthWrite = ref.depthWrite;
-            depthTest = ref.depthTest;
-            return *this;
-        }
+        SRShaderCreateInfo& operator=(const SRShaderCreateInfo& ref) noexcept = default;
 
         SRShaderCreateInfo& operator=(SRShaderCreateInfo&& ref) noexcept {
-            path = std::exchange(ref.path, {});
+            stages = std::exchange(ref.stages, {});
             polygonMode = std::exchange(ref.polygonMode, {});
             cullMode = std::exchange(ref.cullMode, {});
             depthCompare = std::exchange(ref.depthCompare, {});
@@ -164,7 +149,7 @@ namespace SR_GRAPH_NS {
         }
 
     public:
-        SR_UTILS_NS::Path path;
+        std::map<ShaderStage, SR_UTILS_NS::Path> stages;
 
         PolygonMode       polygonMode       = PolygonMode::Unknown;
         CullMode          cullMode          = CullMode::Unknown;
@@ -181,52 +166,54 @@ namespace SR_GRAPH_NS {
 
     };
 
+    static CullMode InverseCullMode(CullMode cullMode) {
+        switch (cullMode) {
+            case CullMode::Back:
+                return CullMode::Front;
+            case CullMode::Front:
+                return CullMode::Back;
+            default:
+                return cullMode;
+        }
+    }
+
     static LayoutBinding GetBindingType(const std::string& line) {
         //! first check sampler, after that check uniform
 
-        if (Helper::StringUtils::Contains(line, "sampler2D"))
+        if (SR_UTILS_NS::StringUtils::Contains(line, "sampler2D"))
             return LayoutBinding::Sampler2D;
 
-        if (Helper::StringUtils::Contains(line, "samplerCube"))
+        if (SR_UTILS_NS::StringUtils::Contains(line, "samplerCube"))
             return LayoutBinding::Sampler2D;
 
-        if (Helper::StringUtils::Contains(line, "uniform"))
+        if (SR_UTILS_NS::StringUtils::Contains(line, "uniform"))
             return LayoutBinding::Uniform;
 
         return LayoutBinding::Unknown;
     }
 
     struct SourceShader {
-        std::string m_name;
         std::string m_path;
         ShaderStage m_stage;
 
-        SourceShader(const std::string& name, const std::string& path, ShaderStage stage) {
-            m_name  = name;
+        SourceShader(const std::string& path, ShaderStage stage) {
             m_path  = path;
             m_stage = stage;
         }
     };
 
-    static std::vector<Uniform> AnalyseShader(const std::vector<SourceShader>& modules, bool* errors) {
-        if (!errors) {
-            SR_ERROR("Graphics::AnalyseShader() : errors flag pointer is nullptr! You are stupid!");
-            return { };
-        }
-        else
-            *errors = false;
-
+    static std::optional<std::vector<Uniform>> AnalyseShader(const std::vector<SourceShader>& modules) {
         uint32_t count = 0;
 
         auto uniforms = std::vector<Uniform>();
 
         std::vector<std::string> lines = { };
-        for (const auto& module : modules) {
-            lines = Helper::FileSystem::ReadAllLines(module.m_path);
+        for (auto&& module : modules) {
+            auto&& path = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Shaders").Concat(module.m_path);
+            lines = SR_UTILS_NS::FileSystem::ReadAllLines(path);
             if (lines.empty()) {
-                SR_ERROR("Graphics::AnalyseShader() : failed to read module! \n\tPath: " + module.m_path);
-                *errors = true;
-                return { };
+                SR_ERROR("Graphics::AnalyseShader() : failed to read module! \n\tPath: " + path.ToString());
+                return std::optional<std::vector<Uniform>>();
             }
 
             for (std::string line : lines) {
@@ -234,24 +221,22 @@ namespace SR_GRAPH_NS {
                     line.resize(pos);
                 }
 
-                if (Helper::StringUtils::Contains(line, "binding")) {
-                    int32_t index = Helper::StringUtils::IndexOf(line, '=');
+                if (SR_UTILS_NS::StringUtils::Contains(line, "binding")) {
+                    int32_t index = SR_UTILS_NS::StringUtils::IndexOf(line, '=');
 
-                    int32_t comment = Helper::StringUtils::IndexOf(line, '/');
+                    int32_t comment = SR_UTILS_NS::StringUtils::IndexOf(line, '/');
                     if (comment >= 0 && comment < index)
                         continue;
 
                     if (index <= 0) {
                         SRAssert2(false, "Graphics::AnalyseShader() : incorrect binding location!");
-                        *errors = true;
-                        return { };
+                        return std::optional<std::vector<Uniform>>();
                     }
 
-                    const auto&& location = Helper::StringUtils::ReadFrom(line, ')', index + 2);
+                    const auto&& location = SR_UTILS_NS::StringUtils::ReadFrom(line, ')', index + 2);
                     if (location.empty()) {
                         SR_ERROR("Graphics::AnalyseShader() : failed match location!");
-                        *errors = true;
-                        return { };
+                        return std::optional<std::vector<Uniform>>();
                     }
 
                     Uniform uniform {
@@ -271,8 +256,7 @@ namespace SR_GRAPH_NS {
         for (auto&& uniform : uniforms) {
             if (uniform.stage == ShaderStage::Unknown || uniform.type == LayoutBinding::Unknown) {
                 SR_ERROR("IShaderProgram::AnalyseShader() : incorrect uniforms!");
-                *errors = true;
-                return {};
+                return std::optional<std::vector<Uniform>>();
             }
         }
 

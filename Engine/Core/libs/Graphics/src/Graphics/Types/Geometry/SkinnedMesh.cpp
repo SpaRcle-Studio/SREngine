@@ -5,15 +5,14 @@
 #include <Graphics/Types/Geometry/SkinnedMesh.h>
 
 namespace SR_GTYPES_NS {
+    SR_REGISTER_COMPONENT(SkinnedMesh);
+
     SkinnedMesh::SkinnedMesh()
-            : Super(MeshType::Skinned)
-    {
-        Component::InitComponent<SkinnedMesh>();
-    }
+        : Super(MeshType::Skinned)
+    { }
 
     SkinnedMesh::~SkinnedMesh() {
         SetRawMesh(nullptr);
-        delete m_currentClip;
     }
 
     bool SkinnedMesh::Calculate()  {
@@ -73,7 +72,7 @@ namespace SR_GTYPES_NS {
     void SkinnedMesh::Draw() {
         auto&& pShader = GetRenderContext()->GetCurrentShader();
 
-        if (!pShader || !IsActive() || IsDestroyed())
+        if (!pShader || !IsActive() || IsDestroyed() || !IsSkeletonUsable())
             return;
 
         if ((!m_isCalculated && !Calculate()) || m_hasErrors)
@@ -169,11 +168,12 @@ namespace SR_GTYPES_NS {
                 return false;
             }
 
+            SetRawMesh(pRawMesh);
+
             m_countIndices = pRawMesh->GetIndicesCount(m_meshId);
             m_countVertices = pRawMesh->GetVerticesCount(m_meshId);
 
             SetGeometryName(pRawMesh->GetGeometryName(m_meshId));
-            SetRawMesh(pRawMesh);
 
             return true;
         }
@@ -201,23 +201,17 @@ namespace SR_GTYPES_NS {
         return m_rawMesh && m_meshId < m_rawMesh->GetMeshesCount() && Mesh::IsCanCalculate();
     }
 
-    bool SkinnedMesh::Reload() {
-        SR_LOG("SkinnedMesh::Reload() : reloading \"" + std::string(GetResourceId()) + "\" mesh...");
-
-        m_loadState = LoadState::Reloading;
-
-        Unload();
-
-        if (!Load()) {
+    bool SkinnedMesh::IsSkeletonUsable() const {
+        if (m_skeleton)
+            return m_skeleton->GetRootBone();
+        else
             return false;
-        }
-
-        m_loadState = LoadState::Loaded;
-
-        UpdateResources();
-
-        return true;
     }
+
+    void SkinnedMesh::Update(float dt) {
+        FindSkeleton(GetGameObject());
+        Super::Update(dt);
+    };
 
     void SkinnedMesh::UseMaterial() {
         Super::UseMaterial();
@@ -225,6 +219,78 @@ namespace SR_GTYPES_NS {
     }
 
     void SkinnedMesh::UseModelMatrix() {
+        PopulateSkeletonMatrices(); ///TODO:А не стоило бы изменить ColorBufferPass так, чтобы он вызывал не UseModelMatrix, а более обощённый метод?
+        GetRenderContext()->GetCurrentShader()->SetCustom(SHADER_SKELETON_MATRICES_128, m_skeletonMatrices.data());
+        GetRenderContext()->GetCurrentShader()->SetCustom(SHADER_SKELETON_MATRIX_OFFSETS_128, m_skeletonOffsets.data());
         GetRenderContext()->GetCurrentShader()->SetMat4(SHADER_MODEL_MATRIX, m_modelMatrix);
+    }
+
+    void SkinnedMesh::PopulateSkeletonMatrices() {
+        static SR_MATH_NS::Matrix4x4 identityMatrix = SR_MATH_NS::Matrix4x4().Identity();
+
+        auto&& bones = m_rawMesh->GetBones(m_meshId);
+
+        if (m_bonesIds.empty()) {
+            const uint64_t bonesCount = SR_MAX(SR_HUMANOID_MAX_BONES, bones.size());
+
+            m_bonesIds.resize(bonesCount);
+            m_skeletonOffsets.resize(bonesCount);
+            m_skeletonMatrices.resize(bonesCount);
+
+            for (uint64_t i = 0; i < m_bonesIds.size(); i++) {
+                m_skeletonMatrices[i] = identityMatrix;
+            }
+        }
+
+        if (!m_skeleton) {
+            if (!m_isSkeletonDeleted) {
+                m_isSkeletonDeleted = true;
+                m_renderScene->SetDirty();
+            }
+            return;
+        } else {
+            if (!m_skeleton->GetRootBone())
+                return;
+            if (m_isSkeletonDeleted) {
+                m_isSkeletonDeleted = false;
+                m_renderScene->SetDirty();
+            }
+        }
+
+        /*if (!IsSkeletonUsable()) {
+            for (uint64_t i = 0; i < m_bonesIds.size(); i++) {
+                m_skeletonMatrices[i] = identityMatrix;
+                m_skeletonOffsets[i] = identityMatrix;
+            }
+            m_isOffsetsInitialized = false;
+
+            return;
+        }*/
+
+        if (!m_isOffsetsInitialized) {
+            for (auto&& [hashName, boneId] : bones) {
+                m_skeletonOffsets[boneId] = m_rawMesh->GetBoneOffset(hashName);
+                m_bonesIds[boneId] = m_skeleton->GetBoneIndex(hashName);
+            }
+            m_isOffsetsInitialized = true;
+        }
+
+        if (m_skeleton)
+        for (uint64_t boneId = 0; boneId < m_bonesIds.size(); ++boneId) {
+            if (auto&& bone = m_skeleton->GetBoneByIndex(m_bonesIds[boneId])) {
+                m_skeletonMatrices[boneId] = bone->gameObject->GetTransform()->GetMatrix();
+            }
+            else {
+                m_skeletonMatrices[boneId] = identityMatrix;
+            }
+        }
+
+    }
+
+    void SkinnedMesh::FindSkeleton(SR_UTILS_NS::GameObject::Ptr gameObject) {
+        m_skeleton = dynamic_cast<Animations::Skeleton *>(gameObject->GetComponent("Skeleton"));
+        if (!m_skeleton && gameObject->GetParent()) {
+            FindSkeleton(gameObject->GetParent());
+        }
     }
 }

@@ -36,6 +36,10 @@ namespace SR_GRAPH_NS {
             m_skybox->AddUsePoint();
         }
 
+        if (m_skybox) {
+            m_skybox->SetShader(SR_GTYPES_NS::Shader::Load(passNode.GetAttribute("Shader").ToString()));
+        }
+
         return BasePass::Load(passNode);
     }
 
@@ -70,9 +74,6 @@ namespace SR_GRAPH_NS {
 
         pShader->SetMat4(SHADER_VIEW_NO_TRANSLATE_MATRIX, m_camera->GetViewRef());
         pShader->SetMat4(SHADER_PROJECTION_MATRIX, m_camera->GetProjectionRef());
-
-        /// TODO: вынести в глобальный счетчик, так как операция ресурсозатратная
-        pShader->SetFloat(SHADER_TIME, clock());
 
         auto&& virtualUbo = m_skybox->GetVirtualUBO();
         if (virtualUbo == SR_ID_INVALID) {

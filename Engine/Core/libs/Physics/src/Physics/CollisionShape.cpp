@@ -15,8 +15,46 @@ namespace SR_PTYPES_NS {
 
     CollisionShape::~CollisionShape() = default;
 
+    void CollisionShape::UpdateDebugShape() {
+        if (SR_PHYSICS_UTILS_NS::IsBox(GetType())) {
+            m_debugId = SR_UTILS_NS::DebugDraw::Instance().DrawCube(
+                    m_debugId,
+                    m_rigidbody->GetTranslation() + m_rigidbody->GetCenterDirection(),
+                    m_rigidbody->GetRotation(),
+                    m_rigidbody->GetScale() * GetSize(),
+                    SR_MATH_NS::FColor(0, 255, 200, 255),
+                    SR_FLOAT_MAX
+            );
+        }
+        else if (SR_PHYSICS_UTILS_NS::IsSphere(GetType())) {
+            m_debugId = SR_UTILS_NS::DebugDraw::Instance().DrawSphere(
+                    m_debugId,
+                    m_rigidbody->GetTranslation() + m_rigidbody->GetCenterDirection(),
+                    m_rigidbody->GetRotation(),
+                    (m_rigidbody->GetScale() * GetSize()).Max3(),
+                    SR_MATH_NS::FColor(0, 255, 200, 255),
+                    SR_FLOAT_MAX
+            );
+        }
+        else if (SR_PHYSICS_UTILS_NS::IsCapsule(GetType())) {
+            SR_MATH_NS::Unit width = (m_rigidbody->GetScale() * GetRadius()).ZeroAxis(SR_MATH_NS::AXIS_Y).Max();
+            SR_MATH_NS::FVector3 size = SR_MATH_NS::FVector3(width, GetHeight() * m_rigidbody->GetScale().y, width);
+            m_debugId = SR_UTILS_NS::DebugDraw::Instance().DrawCapsule(
+                    m_debugId,
+                    m_rigidbody->GetTranslation() + m_rigidbody->GetCenterDirection(),
+                    m_rigidbody->GetRotation(),
+                    size,
+                    SR_MATH_NS::FColor(0, 255, 200, 255),
+                    SR_FLOAT_MAX
+            );
+        }
+    }
+
+
+
     void CollisionShape::SetHeight(float_t height) {
         m_bounds.y = height;
+        UpdateDebugShape();
         UpdateMatrix();
     }
 
@@ -29,11 +67,13 @@ namespace SR_PTYPES_NS {
             m_bounds = SR_MATH_NS::FVector3(radius);
         }
 
+        UpdateDebugShape();
         UpdateMatrix();
     }
 
     void CollisionShape::SetSize(const SR_MATH_NS::FVector3& size) {
         m_bounds = SR_MATH_NS::FVector3(size.x, size.y, size.z);
+        UpdateDebugShape();
         UpdateMatrix();
     }
 
@@ -65,6 +105,10 @@ namespace SR_PTYPES_NS {
         return m_scale;
     }
 
+    Rigidbody * CollisionShape::GetRigidbody() const {
+        return m_rigidbody;
+    }
+
     ShapeType CollisionShape::GetType() const noexcept {
         return m_type;
     }
@@ -83,5 +127,12 @@ namespace SR_PTYPES_NS {
 
     void CollisionShape::SetType(ShapeType type) {
         m_type = type;
+    }
+
+    void CollisionShape::RemoveDebugShape() {
+        if (m_debugId != SR_ID_INVALID) {
+            SR_UTILS_NS::DebugDraw::Instance().Remove(m_debugId);
+            m_debugId = SR_ID_INVALID;
+        }
     }
 }

@@ -1,8 +1,100 @@
 <?xml version="1.0"?>
 <Technique Name="Main">
+    <!--<DepthBufferPass Name="DepthFBO" Directional="false">
+        <FramebufferSettings DynamicResizing="true" DepthEnabled="true" SmoothSamples="1">
+            <Size X="0" Y="0"/>
+            <PreScale X="1.0" Y="1.0"/>
+            <Depth Format="Auto" ClearValue="1.0"/>
+            <Layer Format="R16_UNORM" R="0.0" G="0.0" B="0.0" A="1.0"/>
+        </FramebufferSettings>
+        <Shaders>
+            <Override Type="Canvas" Path="Engine/Shaders/Depth/canvas.srsl"/>
+            <Override Type="Spatial" Path="Engine/Shaders/Depth/spatial.srsl"/>
+            <Override Type="SpatialCustom" Path="Engine/Shaders/Depth/spatial.srsl"/>
+            <Override Type="Skybox" Path="Engine/Shaders/Depth/simple.srsl"/>
+            <Override Type="Simple" Path="Engine/Shaders/Depth/simple.srsl"/>
+            <Override Type="Skinned" Path="Engine/Shaders/Depth/skinned.srsl"/>
+        </Shaders>
+    </DepthBufferPass>-->
+    <FramebufferPass Name="GBuffer">
+        <FramebufferSettings DynamicResizing="true" DepthEnabled="true" SmoothSamples="0">
+            <Size X="0" Y="0"/>
+            <PreScale X="1.0" Y="1.0"/>
+            <Depth Format="Auto" ClearValue="1.0"/>
+            <Layer Format="RGBA8_UNORM" R="0.0" G="0.0" B="0.0" A="1.0"/>
+            <Layer Format="RGBA16_SFLOAT" R="0.0" G="0.0" B="0.0" A="0.0"/>
+            <Layer Format="RGBA16_SFLOAT" R="0.0" G="0.0" B="0.0" A="0.0"/>
+        </FramebufferSettings>
+        <Passes>
+            <OpaquePass/>
+            <SkyboxPass Path="Engine/Skyboxes/Sun.png" Shader="Engine/Shaders/skybox.srsl"/>
+            <TransparentPass/>
+        </Passes>
+    </FramebufferPass>
+    <SSAOPass Name="SSAO" Shader="Engine/Shaders/SSAO/ssao.srsl">
+        <FramebufferSettings DynamicResizing="true" DepthEnabled="false" SmoothSamples="1">
+            <Size X="0" Y="0"/>
+            <PreScale X="1.0" Y="1.0"/>
+            <Depth Format="Auto" ClearValue="1.0"/>
+            <Layer Format="R8_UNORM" R="0.0" G="0.0" B="0.0" A="1.0"/>
+        </FramebufferSettings>
+        <Attachments>
+            <Attachment FBO="GBuffer" Id="gPosition" Index="1"/>
+            <Attachment FBO="GBuffer" Id="gNormal" Index="2"/>
+        </Attachments>
+    </SSAOPass>
+    <FramebufferPass Name="SSAOBlur">
+        <FramebufferSettings DynamicResizing="true" DepthEnabled="true" SmoothSamples="1">
+            <Size X="0" Y="0"/>
+            <PreScale X="0.75" Y="0.75"/>
+            <Depth Format="Auto" ClearValue="1.0"/>
+            <Layer Format="RGBA8_UNORM" R="0.0" G="0.0" B="0.0" A="1.0"/>
+        </FramebufferSettings>
+        <Passes>
+            <PostProcessPass Shader="Engine/Shaders/blur5x5.srsl">
+                <Attachments>
+                    <Attachment FBO="SSAO" Id="image" Index="0"/>
+                </Attachments>
+            </PostProcessPass>
+        </Passes>
+    </FramebufferPass>
+    <!--<FramebufferPass Name="MainSceneFBO">
+        <FramebufferSettings DynamicResizing="true" DepthEnabled="true" SmoothSamples="0">
+            <Size X="0" Y="0"/>
+            <PreScale X="1.0" Y="1.0"/>
+            <Depth Format="Auto" ClearValue="1.0"/>
+            <Layer Format="RGBA8_UNORM" R="0.0" G="0.0" B="0.0" A="1.0"/>
+        </FramebufferSettings>
+        <Passes>
+            <OpaquePass/>
+            <SkyboxPass Path="Engine/Skyboxes/Sun.png" Shader="Engine/Shaders/skybox.srsl"/>
+            <TransparentPass/>
+        </Passes>
+    </FramebufferPass>-->
     <SwapchainPass R="0.0" G="0.0" B="0.0" A="1.0" Depth="1.0">
-        <OpaquePass/>
-        <SkyboxPass Path="Engine/Skyboxes/Sun.png"/>
-        <TransparentPass/>
+        <PostProcessPass Shader="Engine/Shaders/SSAO/post_process.srsl">
+            <Attachments>
+                <Attachment FBO="SSAOBlur" Id="ssao" Index="0"/>
+                <Attachment FBO="GBuffer" Id="gAlbedo" Index="0"/>
+                <Attachment FBO="GBuffer" Id="gPosition" Index="1"/>
+                <Attachment FBO="GBuffer" Id="gNormal" Index="2"/>
+            </Attachments>
+        </PostProcessPass>
+        <!--<PostProcessPass Shader="Engine/Shaders/vignette.srsl">
+            <Attachments>
+                <Attachment FBO="MainSceneFBO" Id="image" Index="0"/>
+            </Attachments>
+        </PostProcessPass>
+        <PostProcessPass Shader="Samples/Shaders/depth-post-process.srsl">
+            <Attachments>
+                <Attachment FBO="MainSceneFBO" Id="image" Index="0"/>
+                <Attachment FBO="DepthFBO" Id="depth" Index="0"/>
+            </Attachments>
+        </PostProcessPass>
+        <PostProcessPass Shader="Engine/Shaders/Depth/visualize.srsl">
+            <Attachments>
+                <Attachment FBO="DepthFBO" Id="image" Index="0"/>
+            </Attachments>
+        </PostProcessPass>-->
     </SwapchainPass>
 </Technique>

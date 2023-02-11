@@ -33,9 +33,15 @@ namespace SR_GRAPH_NS::Memory {
         /// в котором он был инициализирован
         virtual void FreeVideoMemory() {
             m_isCalculated = false;
+            m_renderContext = nullptr;
+            m_pipeline = nullptr;
         }
 
         void SetRenderContext(const RenderContextPtr& renderContext);
+
+        SR_NODISCARD PipelinePtr GetPipeline() const noexcept {
+            return m_pipeline;
+        }
 
         SR_NODISCARD RenderContextPtr GetRenderContext() const noexcept {
             return m_renderContext;

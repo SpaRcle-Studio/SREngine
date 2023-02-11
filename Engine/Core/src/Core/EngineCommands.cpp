@@ -218,6 +218,7 @@ bool Framework::Core::Commands::GameObjectDelete::Redo() {
             m_reserved.Reserve();
             SR_SAFE_DELETE_PTR(m_backup);
             m_backup = ptr->Save(nullptr, SR_UTILS_NS::SAVABLE_FLAG_NONE);
+            m_backup->SetPosition(0);
             ptr->Destroy();
         });
 
@@ -337,6 +338,63 @@ Framework::Core::Commands::GameObjectPaste::GameObjectPaste(const SR_UTILS_NS::G
 Framework::Core::Commands::GameObjectPaste::~GameObjectPaste() {
     m_path.UnReserve();
     m_reserved.UnReserve();
+}
+
+//!-------------------------------------------------------
+
+bool Framework::Core::Commands::GameObjectMove::Redo() {
+    auto entity = SR_UTILS_NS::EntityManager::Instance().FindById(m_path.Last());
+    auto ptrRaw = dynamic_cast<SR_UTILS_NS::GameObject*>(entity);
+
+    if (!ptrRaw)
+        return false;
+
+    if (auto&& ptr = ptrRaw->GetThis()) {
+        auto parentEntity = SR_UTILS_NS::EntityManager::Instance().FindById(m_newDestinationPath.Last());
+        auto parentPtrRaw = dynamic_cast<SR_UTILS_NS::GameObject*>(parentEntity);
+        if (parentPtrRaw)
+            ptr->MoveToTree(parentPtrRaw->GetThis());
+        else
+            ptr->MoveToTree(SR_UTILS_NS::GameObject::Ptr());
+        return true;
+    }
+
+    return false;
+}
+
+bool Framework::Core::Commands::GameObjectMove::Undo() {
+    auto entity = SR_UTILS_NS::EntityManager::Instance().FindById(m_path.Last());
+    auto ptrRaw = dynamic_cast<SR_UTILS_NS::GameObject*>(entity);
+
+    if (!ptrRaw)
+        return false;
+
+    if (auto&& ptr = ptrRaw->GetThis()) {
+        auto parentEntity = SR_UTILS_NS::EntityManager::Instance().FindById(m_oldDestinationPath.Last());
+        auto parentPtrRaw = dynamic_cast<SR_UTILS_NS::GameObject*>(parentEntity);
+        if (parentPtrRaw)
+            ptr->MoveToTree(parentPtrRaw->GetThis());
+        else
+            ptr->MoveToTree(SR_UTILS_NS::GameObject::Ptr());
+        return true;
+    }
+    return false;
+}
+
+Framework::Core::Commands::GameObjectMove::GameObjectMove(const SR_UTILS_NS::GameObject::Ptr& ptr,
+                                                                    const SR_UTILS_NS::GameObject::Ptr& newDestination) {
+    m_path = ptr->GetEntityPath();
+    if (newDestination)
+        m_newDestinationPath = newDestination->GetEntityPath();
+    SR_UTILS_NS::GameObject::Ptr parentPtr = ptr->GetParent();
+    if (parentPtr)
+        m_oldDestinationPath = parentPtr->GetEntityPath();
+}
+
+Framework::Core::Commands::GameObjectMove::~GameObjectMove() {
+    m_path.UnReserve();
+    m_newDestinationPath.UnReserve();
+    m_oldDestinationPath.UnReserve();
 }
 
 //!-------------------------------------------------------

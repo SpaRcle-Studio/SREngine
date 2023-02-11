@@ -24,7 +24,7 @@ namespace SR_GRAPH_NS {
 
     public:
         static bool Load(Types::Texture* texture, std::string path);
-        static bool LoadFromMemory(Types::Texture* texture, const std::string& data);
+        static bool LoadFromMemory(Types::Texture* texture, const std::string& data, const Memory::TextureConfig &config);
         static bool Free(unsigned char* data);
 
     };

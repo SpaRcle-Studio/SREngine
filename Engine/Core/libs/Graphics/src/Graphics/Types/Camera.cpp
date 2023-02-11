@@ -12,11 +12,11 @@
 #include <Graphics/Window/Window.h>
 
 namespace SR_GTYPES_NS {
+    SR_REGISTER_COMPONENT(Camera);
+
     Camera::Camera(uint32_t width, uint32_t height)
         : m_viewportSize(SR_MATH_NS::UVector2(width, height))
     {
-        SR_UTILS_NS::Component::InitComponent<Camera>();
-
         if (width != 0 && height != 0) {
             UpdateProjection();
             UpdateView();
@@ -24,11 +24,10 @@ namespace SR_GTYPES_NS {
     }
 
     Camera::~Camera() {
-        std::visit([](RenderTechniquePtr&& arg) {
-            if (std::holds_alternative<RenderTechnique *>(arg)) {
-                std::get<RenderTechnique*>(arg)->RemoveUsePoint();
-            }
-        }, m_renderTechnique);
+        if (m_renderTechnique.pTechnique) {
+            m_renderTechnique.pTechnique->RemoveUsePoint();
+            m_renderTechnique.pTechnique = nullptr;
+        }
     }
 
     void Camera::OnAttached() {
@@ -94,31 +93,24 @@ namespace SR_GTYPES_NS {
     }
 
     RenderTechnique *Camera::GetRenderTechnique() {
-        return std::visit([this](RenderTechniquePtr&& arg) -> RenderTechnique* {
-            if (std::holds_alternative<RenderTechnique*>(arg)) {
-                return std::get<RenderTechnique*>(arg);
-            }
-            else {
-                auto&& path = std::get<SR_UTILS_NS::Path>(arg);
+        if (m_renderTechnique.pTechnique) {
+            return m_renderTechnique.pTechnique;
+        }
 
-                /// default technique
-                if (path.Empty()) {
-                    path = "Engine/Configs/MainRenderTechnique.xml";
-                }
+        /// default technique
+        if (m_renderTechnique.path.Empty()) {
+            m_renderTechnique.path = "Engine/Configs/MainRenderTechnique.xml";
+        }
 
-                if (auto&& pRenderTechnique = RenderTechnique::Load(path)) {
-                    pRenderTechnique->SetCamera(this);
-                    pRenderTechnique->SetRenderScene(GetRenderScene());
-                    pRenderTechnique->AddUsePoint();
+        if (auto&& pRenderTechnique = RenderTechnique::Load( m_renderTechnique.path)) {
+            pRenderTechnique->SetCamera(this);
+            pRenderTechnique->AddUsePoint();
+            pRenderTechnique->SetRenderScene(GetRenderScene());
 
-                    m_renderTechnique = pRenderTechnique;
+            return (m_renderTechnique.pTechnique = pRenderTechnique);
+        }
 
-                    return GetRenderTechnique();
-                }
-
-                return nullptr;
-            }
-        }, m_renderTechnique);
+        return nullptr;
     }
 
     Camera::RenderScenePtr Camera::TryGetRenderScene() const {
@@ -181,17 +173,9 @@ namespace SR_GTYPES_NS {
 
         //////////////////////////////////////////////////////////////////////////////////////////////
 
-        std::visit([this](RenderTechniquePtr&& arg) {
-            if (std::holds_alternative<RenderTechnique *>(arg)) {
-                auto&& pRenderTechnique = std::get<RenderTechnique *>(arg);
-
-                if (!pRenderTechnique) {
-                    return;
-                }
-
-                pRenderTechnique->OnResize(m_viewportSize);
-            }
-        }, m_renderTechnique);
+        if (m_renderTechnique.pTechnique) {
+            m_renderTechnique.pTechnique->OnResize(m_viewportSize);
+        }
     }
 
     void Camera::UpdateProjection(uint32_t w, uint32_t h) {
@@ -288,13 +272,12 @@ namespace SR_GTYPES_NS {
     }
 
     void Camera::SetRenderTechnique(const SR_UTILS_NS::Path& path) {
-        std::visit([](RenderTechniquePtr&& arg) {
-            if (std::holds_alternative<RenderTechnique *>(arg)) {
-                std::get<RenderTechnique*>(arg)->RemoveUsePoint();
-            }
-        }, m_renderTechnique);
+        if (m_renderTechnique.pTechnique) {
+            m_renderTechnique.pTechnique->RemoveUsePoint();
+            m_renderTechnique.pTechnique = nullptr;
+        }
 
-        m_renderTechnique = path;
+        m_renderTechnique.path = path;
     }
 
     void Camera::SetPriority(int32_t priority) {
@@ -310,11 +293,12 @@ namespace SR_GTYPES_NS {
     }
 
     glm::vec3 Camera::GetViewDirection() const {
-        return (SR_MATH_NS::Quaternion(SR_MATH_NS::FVector3(m_pitch, m_yaw, m_roll)) * SR_MATH_NS::FVector3(1, 0, 0)).ToGLM();
+        return (SR_MATH_NS::Quaternion(SR_MATH_NS::FVector3(m_pitch, m_yaw, m_roll)) * SR_MATH_NS::FVector3(0, 0, 1)).ToGLM();
     }
 
     glm::vec3 Camera::GetViewDirection(const SR_MATH_NS::FVector3 &pos) const noexcept {
-        return (SR_MATH_NS::Quaternion(SR_MATH_NS::FVector3(m_pitch, m_yaw, m_roll)) * m_position.Direction(pos)).ToGLM();
+        auto&& dir = m_position.Direction(pos);
+        return (SR_MATH_NS::Quaternion(SR_MATH_NS::FVector3(m_pitch, m_yaw, m_roll)) * SR_MATH_NS::FVector3(dir)).ToGLM();
     }
 
     SR_UTILS_NS::Component *Camera::CopyComponent() const {
@@ -326,19 +310,12 @@ namespace SR_GTYPES_NS {
         pCamera->m_near = m_near;
         pCamera->m_aspect = m_aspect;
         pCamera->m_FOV = m_FOV;
-
-        std::visit([pCamera](RenderTechniquePtr&& arg) {
-            if (std::holds_alternative<RenderTechnique *>(arg)) {
-                pCamera->SetRenderTechnique(std::get<RenderTechnique*>(arg)->GetResourcePath());
-            }
-            else if (std::holds_alternative<SR_UTILS_NS::Path>(arg)) {
-                pCamera->SetRenderTechnique(std::get<SR_UTILS_NS::Path>(arg));
-            }
-            else {
-                SRHalt0();
-            }
-        }, m_renderTechnique);
+        pCamera->m_renderTechnique.path = m_renderTechnique.path;
 
         return dynamic_cast<Component*>(pCamera);
+    }
+
+    SR_MATH_NS::FVector3 Camera::GetViewPosition() const {
+        return m_position;
     }
 }

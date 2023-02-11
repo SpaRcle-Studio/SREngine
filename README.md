@@ -1,6 +1,6 @@
 # SpaRcle Engine
 
-![image](https://user-images.githubusercontent.com/47291246/183247603-04a0e820-8b32-49f1-a728-cec67b53a5e7.png)
+![image](https://user-images.githubusercontent.com/47291246/216782896-990a3a54-820d-49ec-aca0-f1ef992170ca.png)
 
 ## Supported compilers
 - [x] MSVC (Stable)
@@ -41,51 +41,19 @@
   * [EvoScript](https://github.com/Monika0000/EvoScript)
   * [EvoVulkan](https://github.com/Monika0000/EvoVulkan)
   * Assimp
-
-## Exists systems
-  * Types
-      * Thread - обертка над стандартным классом, с некоторыми дополнениями
-      * SafePtr - универсальный умный указатель, обеспечивает сохранность данных в многопоточной среде
-      * Singleton
-  * Math
-      * Quaternion
-      * Vector4
-      * Vector3
-      * Vector2
-      * Matrix4x4
-  * Graphics
-      * Node editor
-      * Mesh-cluster
-      * GUI 
-      * Model loader
-      * Texturing
-        * Compressing BC1-BC7 (Only Vulkan)
-      * Shaders
-      * Materials
-  * Physics (Не начато)
-      * Rigidbody (Base component)
-  * Scripting (Полностью сделано через EvoScript)
-  * Audio (Не начато)
-  * World
-      * Scene 
-      * GameObject 
-         * Transform
-         * Hierarchy-transformation (80%)
-         * Components
-      * Chunk-System - чанковая система, которая разбивает мир на чанки и регионы, позволяя удаляться на огромные расстояния от центра мира без каких либо артефактов, производя для этого "сдвиги"
-  * Input system (Только стандартый ввод Windows)
-  * Memory management
-      * Dynamic resource reloading
-      * ResourceManager
-      * IResource - interface for control resource units
-  * Debug and logging
-  * Command Manager
- 
-## Editor
-  * ~~Grid (Only OpenGL)~~
-  * Manipulation tools
-  * Inspector 
-  * Hierarchy
-  * Asset explorer
-  * World edit
-  * ~~Visual Evo Script~~
+  * PhysX
+  * Box2D
+  
+  ## Features
+  * SpaRcle Shader Language (SRSL)
+  * Chunk system 
+  * Render passes
+  * Custom framebuffers
+  * C++ scripting system
+  * Animations 
+  * Physics
+  * Font renderer
+  * Vulkan pipeline
+  * Multi-cameras renderer 
+  * Geometry loader
+  * Texture loader
