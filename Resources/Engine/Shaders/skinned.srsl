@@ -17,6 +17,8 @@ void fragment() {
     vec3 norm = vec3(NORMAL.x + NORMAL.y + NORMAL.z) / 12.0; //TODO::Переписать под костевую анимацию, нужно пересчитать NORMAL
 
 	COLOR = vec4(diffuse_albedo + norm, 1.0);
+    COLOR_INDEX_1 = vec4(vec3(0), 0.0);
+    COLOR_INDEX_2 = vec4(vec3(0), 0.0);
 }
 
 void vertex() {
@@ -30,5 +32,6 @@ void vertex() {
     boneTransform     += (SKELETON_MATRICES_128[int(WEIGHT7[0])] * SKELETON_MATRIX_OFFSETS_128[int(WEIGHT7[0])]) * WEIGHT7[1];
 
     VERTEX = (boneTransform * vec4(VERTEX, 1.0)).xyz;
+
     OUT_POSITION = PROJECTION_MATRIX * VIEW_MATRIX * MODEL_MATRIX * vec4(VERTEX, 1.0);
 }
