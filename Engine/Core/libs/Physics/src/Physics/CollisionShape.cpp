@@ -16,6 +16,11 @@ namespace SR_PTYPES_NS {
     CollisionShape::~CollisionShape() = default;
 
     void CollisionShape::UpdateDebugShape() {
+        auto&& pRigidbody = GetRigidbody();
+        if (!pRigidbody || !pRigidbody->IsComponentLoaded()) {
+            return;
+        }
+
         if (SR_PHYSICS_UTILS_NS::IsBox(GetType())) {
             m_debugId = SR_UTILS_NS::DebugDraw::Instance().DrawCube(
                     m_debugId,

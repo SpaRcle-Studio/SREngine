@@ -57,7 +57,7 @@ namespace SR_UTILS_NS {
         virtual void OnTransformSet() { }
 
         /// Вызывается при загрузке компонента на игровой объект
-        virtual void OnLoaded() { }
+        virtual void OnLoaded() { m_isComponentLoaded = true; }
         /// Вызывается после добавления компонента к игровому объекту
         virtual void OnAttached() { }
         /// Вызывается кода компонент убирается с объекта, либо объект уничтожается
@@ -91,6 +91,9 @@ namespace SR_UTILS_NS {
         SR_NODISCARD virtual const std::string& GetComponentName() const = 0;
 
         /// Активен и компонент и его родительский объект
+        SR_NODISCARD SR_FORCE_INLINE virtual bool IsComponentLoaded() const noexcept { return m_isComponentLoaded; }
+
+        /// Активен и компонент и его родительский объект
         SR_NODISCARD SR_FORCE_INLINE virtual bool IsCanUpdate() const noexcept { return m_isStarted && m_isActive; }
         /// Активен и компонент и его родительский объект
         SR_NODISCARD SR_FORCE_INLINE virtual bool IsActive() const noexcept { return m_isActive; }
@@ -119,6 +122,7 @@ namespace SR_UTILS_NS {
         void SetParent(IComponentable* pParent);
 
     protected:
+        bool m_isComponentLoaded = false;
         bool m_isEnabled = true;
         bool m_isActive = false;
         bool m_isAwake = false;

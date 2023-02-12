@@ -40,6 +40,17 @@ namespace SR_CORE_NS::GUI {
     void ComponentDrawer::DrawComponent(SR_PTYPES_NS::Rigidbody3D*& pComponent, EditorGUI* context, int32_t index) {
         auto pCopy = dynamic_cast<SR_PTYPES_NS::Rigidbody*>(pComponent);
         DrawComponent(pCopy, context, index);
+
+        auto&& linearLock = pComponent->GetLinearLock();
+        if (SR_GRAPH_NS::GUI::DrawBVec3Control("Linear lock", linearLock, false, 70.f, ++index)) {
+            pComponent->SetLinearLock(linearLock);
+        }
+
+        auto&& angularLock = pComponent->GetAngularLock();
+        if (SR_GRAPH_NS::GUI::DrawBVec3Control("Angular lock", angularLock, false, 70.f, ++index)) {
+            pComponent->SetAngularLock(angularLock);
+        }
+
         if ((void*)pComponent != (void*)pCopy) {
             pComponent = dynamic_cast<SR_PTYPES_NS::Rigidbody3D*>(pCopy);
         }

@@ -33,5 +33,5 @@ void vertex() {
 
     VERTEX = (boneTransform * vec4(VERTEX, 1.0)).xyz;
 
-    OUT_POSITION = PROJECTION_MATRIX * VIEW_MATRIX * MODEL_MATRIX * vec4(VERTEX, 1.0);
+    OUT_POSITION = PROJECTION_MATRIX * VIEW_MATRIX * vec4(VERTEX, 1.0);
 }

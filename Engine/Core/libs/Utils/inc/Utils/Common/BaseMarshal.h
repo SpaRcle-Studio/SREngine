@@ -35,6 +35,11 @@ namespace SR_UTILS_NS {
                 stream.write((const char *) &value.y, sizeof(double));
                 stream.write((const char *) &value.z, sizeof(double));
             }
+            else if constexpr (std::is_same<T, SR_MATH_NS::Vector3<bool>>()) {
+                stream.write((const char *) &value.x, sizeof(bool));
+                stream.write((const char *) &value.y, sizeof(bool));
+                stream.write((const char *) &value.z, sizeof(bool));
+            }
             else if constexpr (std::is_same<T, SR_MATH_NS::FVector2>()) {
                 stream.write((const char *) &value.x, sizeof(SR_MATH_NS::Unit));
                 stream.write((const char *) &value.y, sizeof(SR_MATH_NS::Unit));
@@ -43,6 +48,11 @@ namespace SR_UTILS_NS {
                 stream.write((const char *) &value.x, sizeof(int32_t));
                 stream.write((const char *) &value.y, sizeof(int32_t));
                 stream.write((const char *) &value.z, sizeof(int32_t));
+            }
+            else if constexpr (std::is_same<T, SR_MATH_NS::BVector3>()) {
+                stream.write((const char *) &value.x, sizeof(bool));
+                stream.write((const char *) &value.y, sizeof(bool));
+                stream.write((const char *) &value.z, sizeof(bool));
             }
             else if constexpr (std::is_same<T, SR_MATH_NS::IVector2>()) {
                 stream.write((const char *) &value.x, sizeof(int32_t));
@@ -80,6 +90,11 @@ namespace SR_UTILS_NS {
                 stream.read((char*)&value.y, sizeof(double));
                 stream.read((char*)&value.z, sizeof(double));
             }
+            else if constexpr (std::is_same<T, SR_MATH_NS::Vector3<bool>>()) {
+                stream.read((char*)&value.x, sizeof(bool));
+                stream.read((char*)&value.y, sizeof(bool));
+                stream.read((char*)&value.z, sizeof(bool));
+            }
             else if constexpr (std::is_same<T, SR_MATH_NS::FVector2>()) {
                 stream.read((char*)&value.x, sizeof(SR_MATH_NS::Unit));
                 stream.read((char*)&value.y, sizeof(SR_MATH_NS::Unit));
@@ -88,6 +103,11 @@ namespace SR_UTILS_NS {
                 stream.read((char*)&value.x, sizeof(int32_t));
                 stream.read((char*)&value.y, sizeof(int32_t));
                 stream.read((char*)&value.z, sizeof(int32_t));
+            }
+            else if constexpr (std::is_same<T, SR_MATH_NS::BVector3>()) {
+                stream.read((char*)&value.x, sizeof(bool));
+                stream.read((char*)&value.y, sizeof(bool));
+                stream.read((char*)&value.z, sizeof(bool));
             }
             else if constexpr (std::is_same<T, SR_MATH_NS::IVector2>()) {
                 stream.read((char*)&value.x, sizeof(int32_t));

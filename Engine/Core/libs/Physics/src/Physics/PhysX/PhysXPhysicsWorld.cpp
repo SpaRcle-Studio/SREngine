@@ -228,12 +228,13 @@ namespace SR_PHYSICS_NS {
 
                 pTransform->SetTranslation(globalPose.p.x, globalPose.p.y, globalPose.p.z);
 
-                pTransform->SetRotation(SR_MATH_NS::Quaternion(
-                        globalPose.q.x,
-                        globalPose.q.y,
-                        globalPose.q.z,
-                        globalPose.q.w)
-                );
+                auto&& q = SR_MATH_NS::Quaternion(globalPose.q.x, globalPose.q.y, globalPose.q.z, globalPose.q.w);
+
+                if (pRigidbody->GetType() == ShapeType::Capsule3D) {
+                    q = q.RotateZ(-90);
+                }
+
+                pTransform->SetRotation(q);
 
                 pRigidbody->SetMatrixDirty(false);
             }

@@ -144,25 +144,29 @@ class Behaviour;
         return {};                                                                  \
     }                                                                               \
 
-#define REGISTER_BEHAVIOUR(className)                                               \
-    SharedPtr<void> g_codegen_behaviour_ptr;                                        \
-    std::vector<std::function<void()>> g_codegen_properties_registations;           \
-    EXTERN void InitBehaviour() {                                                   \
-        g_codegen_behaviour_ptr = (void*)(new className());                         \
-    }                                                                               \
-                                                                                    \
-    EXTERN void ReleaseBehaviour() {                                                \
-        g_codegen_behaviour_ptr.AutoFree([](void* ptr) {                            \
-            delete reinterpret_cast<className*>(ptr);                               \
-        });                                                                         \
-    }                                                                               \
-                                                                                    \
-    EXTERN SharedPtr<void> GetBehaviourPtr() {                                      \
-        return g_codegen_behaviour_ptr;                                             \
-    }                                                                               \
-                                                                                    \
-    REGISTER_BEHAVIOUR_BASE(className)                                              \
-    REGISTER_BEHAVIOUR_PROPERTIES(className)                                        \
+#define REGISTER_BEHAVIOUR(className)                                                                                   \
+    SharedPtr<void> g_codegen_behaviour_ptr;                                                                            \
+    std::vector<std::function<void()>>* g_codegen_properties_registations = nullptr;                                    \
+    EXTERN void InitBehaviour() {                                                                                       \
+        if (!g_codegen_properties_registations) {                                                                       \
+            g_codegen_properties_registations = new std::vector<std::function<void()>>();                               \
+        }                                                                                                               \
+        g_codegen_behaviour_ptr = (void*)(new className());                                                             \
+    }                                                                                                                   \
+                                                                                                                        \
+    EXTERN void ReleaseBehaviour() {                                                                                    \
+        g_codegen_behaviour_ptr.AutoFree([](void* ptr) {                                                                \
+            delete reinterpret_cast<className*>(ptr);                                                                   \
+        });                                                                                                             \
+        delete g_codegen_properties_registations;                                                                       \
+    }                                                                                                                   \
+                                                                                                                        \
+    EXTERN SharedPtr<void> GetBehaviourPtr() {                                                                          \
+        return g_codegen_behaviour_ptr;                                                                                 \
+    }                                                                                                                   \
+                                                                                                                        \
+    REGISTER_BEHAVIOUR_BASE(className)                                                                                  \
+    REGISTER_BEHAVIOUR_PROPERTIES(className)                                                                            \
 
 
 

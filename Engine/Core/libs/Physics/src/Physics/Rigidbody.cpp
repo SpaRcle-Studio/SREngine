@@ -102,9 +102,6 @@ namespace SR_PTYPES_NS {
         if (auto&& physicsScene = GetPhysicsScene()) {
             physicsScene->Remove(this);
         }
-        else {
-            SRHalt("Failed to get physics scene!");
-        }
 
         Super::OnDestroy();
         delete this;
@@ -116,7 +113,12 @@ namespace SR_PTYPES_NS {
 
     Rigidbody::PhysicsScenePtr Rigidbody::GetPhysicsScene() {
         if (!m_physicsScene.Valid()) {
-            m_physicsScene = GetScene()->Do<PhysicsScenePtr>([](SR_WORLD_NS::Scene* ptr) {
+            auto&& pScene = TryGetScene();
+            if (!pScene) {
+                return Rigidbody::PhysicsScenePtr();
+            }
+
+            m_physicsScene = pScene->Do<PhysicsScenePtr>([](SR_WORLD_NS::Scene* ptr) {
                 return ptr->GetDataStorage().GetValue<PhysicsScenePtr>();
             }, PhysicsScenePtr());
         }

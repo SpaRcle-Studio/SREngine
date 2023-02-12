@@ -84,6 +84,10 @@ namespace SR_MATH_NS {
             );
         }
 
+        SR_NODISCARD T X() const noexcept { return x; }
+        SR_NODISCARD T Y() const noexcept { return y; }
+        SR_NODISCARD T Z() const noexcept { return z; }
+
         SR_NODISCARD Vector2<T> XY() const { return Vector2<T>(x, y); }
         SR_NODISCARD Vector2<T> XZ() const { return Vector2<T>(x, z); }
         SR_NODISCARD Vector2<T> YZ() const { return Vector2<T>(y, z); }
@@ -446,6 +450,7 @@ namespace SR_MATH_NS {
     typedef Vector3<Unit> FVector3;
     typedef Vector3<int32_t> IVector3;
     typedef Vector3<uint32_t> UVector3;
+    typedef Vector3<bool> BVector3;
 
     inline static const FVector3 InfinityFV3 = FVector3 { UnitMAX, UnitMAX, UnitMAX };
     inline static const FVector3 CmpEpsilonFV3 = FVector3 {

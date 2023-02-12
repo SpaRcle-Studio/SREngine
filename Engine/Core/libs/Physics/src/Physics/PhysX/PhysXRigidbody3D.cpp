@@ -52,6 +52,8 @@ namespace SR_PTYPES_NS {
             m_rigidActor = pPhysics->createRigidDynamic(physx::PxTransform(physx::PxVec3(0.f, 0.f, 0.f)));
         }
 
+        UpdateLocks();
+
         if (!m_rigidActor) {
             SR_ERROR("PhysXRigidbody3D::InitBody() : failed to create rigid body!");
             return false;
@@ -87,8 +89,17 @@ namespace SR_PTYPES_NS {
 
         physx::PxTransform transform;
 
+        SR_MATH_NS::Quaternion q;
+
+        if (m_shape->GetType() == ShapeType::Capsule3D) {
+            q = m_rotation.RotateZ(90);
+        }
+        else {
+            q = m_rotation;
+        }
+
         transform.p = physx::PxVec3(translation.x, translation.y, translation.z);
-        transform.q = physx::PxQuat(m_rotation.X(), m_rotation.Y(), m_rotation.Z(), m_rotation.W());
+        transform.q = physx::PxQuat(q.X(), q.Y(), q.Z(), q.W());
 
         m_rigidActor->setGlobalPose(transform);
 
@@ -123,5 +134,34 @@ namespace SR_PTYPES_NS {
         }
 
         return true;
+    }
+
+    void PhysXRigidbody3D::SetLinearLock(const SR_MATH_NS::BVector3& lock) {
+        Super::SetLinearLock(lock);
+        UpdateLocks();
+    }
+    void PhysXRigidbody3D::SetAngularLock(const SR_MATH_NS::BVector3& lock) {
+        Super::SetAngularLock(lock);
+        UpdateLocks();
+    }
+
+    void PhysXRigidbody3D::UpdateLocks() {
+        if (!m_rigidActor) {
+            return;
+        }
+
+        if (auto&& pDynamic = m_rigidActor->is<physx::PxRigidDynamic>()) {
+            physx::PxRigidDynamicLockFlags flags = static_cast<physx::PxRigidDynamicLockFlags>(0);
+
+            if (m_linearLock.X()) { flags |= physx::PxRigidDynamicLockFlag::eLOCK_LINEAR_X; }
+            if (m_linearLock.Y()) { flags |= physx::PxRigidDynamicLockFlag::eLOCK_LINEAR_Y; }
+            if (m_linearLock.Z()) { flags |= physx::PxRigidDynamicLockFlag::eLOCK_LINEAR_Z; }
+
+            if (m_angularLock.X()) { flags |= physx::PxRigidDynamicLockFlag::eLOCK_ANGULAR_X; }
+            if (m_angularLock.Y()) { flags |= physx::PxRigidDynamicLockFlag::eLOCK_ANGULAR_Y; }
+            if (m_angularLock.Z()) { flags |= physx::PxRigidDynamicLockFlag::eLOCK_ANGULAR_Z; }
+
+            pDynamic->setRigidDynamicLockFlags(flags);
+        }
     }
 }

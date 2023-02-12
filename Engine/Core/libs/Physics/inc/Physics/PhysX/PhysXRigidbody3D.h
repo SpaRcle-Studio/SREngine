@@ -27,6 +27,12 @@ namespace SR_PTYPES_NS {
         bool UpdateMatrix(bool force) override;
         bool UpdateShapeInternal() override;
 
+        void SetLinearLock(const SR_MATH_NS::BVector3& lock) override;
+        void SetAngularLock(const SR_MATH_NS::BVector3& lock) override;
+
+    private:
+        void UpdateLocks();
+
     private:
         physx::PxRigidActor* m_rigidActor = nullptr;
 

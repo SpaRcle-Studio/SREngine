@@ -57,7 +57,34 @@ namespace SR_MATH_NS {
         return Vector3<Unit>(q * v.ToGLM());
     }
 
-    Quaternion Quaternion::FromEuler(const Vector3 <Unit> &euler) {
-        return euler.Radians().ToQuat();
-    }
+   Quaternion Quaternion::FromEuler(const Vector3 <Unit> &euler) {
+       return euler.Radians().ToQuat();
+   }
+
+   Quaternion Quaternion::RotateX(Unit angle) const {
+       if (angle == static_cast<Unit>(0)) {
+           return *this;
+       }
+
+       glm::quat q = glm::rotate(self, static_cast<float_t>(SR_RAD(angle)), glm::vec3(1, 0, 0));
+       return Quaternion(q);
+   }
+
+   Quaternion Quaternion::RotateY(Unit angle) const {
+       if (angle == static_cast<Unit>(0)) {
+           return *this;
+       }
+
+       glm::quat q = glm::rotate(self, static_cast<float_t>(SR_RAD(angle)), glm::vec3(0, 1, 0));
+       return Quaternion(q);
+   }
+
+   Quaternion Quaternion::RotateZ(Unit angle) const {
+       if (angle == static_cast<Unit>(0)) {
+           return *this;
+       }
+
+       glm::quat q = glm::rotate(self, static_cast<float_t>(SR_RAD(angle)), glm::vec3(0, 0, 1));
+       return Quaternion(q);
+   }
 }

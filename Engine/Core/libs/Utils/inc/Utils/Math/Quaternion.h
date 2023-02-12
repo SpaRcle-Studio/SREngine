@@ -33,6 +33,10 @@ namespace SR_MATH_NS {
         SR_NODISCARD Vector3<T> EulerAngle() const;
         SR_NODISCARD Quaternion Rotate(const Vector3<T>& v) const;
 
+        SR_NODISCARD Quaternion RotateX(Unit angle) const;
+        SR_NODISCARD Quaternion RotateY(Unit angle) const;
+        SR_NODISCARD Quaternion RotateZ(Unit angle) const;
+
         SR_NODISCARD T X() const noexcept { return static_cast<T>(self.x); }
         SR_NODISCARD T Y() const noexcept { return static_cast<T>(self.y); }
         SR_NODISCARD T Z() const noexcept { return static_cast<T>(self.z); }
