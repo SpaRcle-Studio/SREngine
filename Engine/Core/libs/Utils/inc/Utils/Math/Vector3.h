@@ -155,6 +155,24 @@ namespace SR_MATH_NS {
             return heading / distance;
         }
 
+        SR_NODISCARD bool IsEquals(const Vector3& value, Unit tolerance) const noexcept {
+            if (!SR_EQUALS_T(x, value.x, tolerance)) {
+                return false;
+            }
+
+            if (!SR_EQUALS_T(y, value.y, tolerance)) {
+                return false;
+            }
+
+            if (!SR_EQUALS_T(z, value.z, tolerance)) {
+                return false;
+            }
+
+            SR_NOOP;
+
+            return true;
+        }
+
         SR_NODISCARD Vector3 Limits(int lim) const {
             int xi = (int)x / lim;
             int yi = (int)y / lim;

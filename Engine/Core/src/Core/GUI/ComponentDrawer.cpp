@@ -101,10 +101,6 @@ namespace SR_CORE_NS::GUI {
                 pComponent->SetMass(mass);
             }
         }
-
-        if (ImGui::Button("Jump")) {
-            pComponent->AddGlobalVelocity(SR_MATH_NS::FVector3(0, 5, 0));
-        }
     }
 
     void ComponentDrawer::DrawCollisionShape(SR_PTYPES_NS::CollisionShape* pCollisionShape, EditorGUI* context, int32_t index){

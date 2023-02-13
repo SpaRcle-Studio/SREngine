@@ -20,9 +20,12 @@ namespace SR_PTYPES_NS {
     public:
         void UpdateInertia() override;
         bool InitBody() override;
+        void ClearForces() override;
 
-        void AddLocalVelocity(const SR_MATH_NS::FVector3& velocity) override;
-        void AddGlobalVelocity(const SR_MATH_NS::FVector3& velocity) override;
+        void AddLinearVelocity(const SR_MATH_NS::FVector3& velocity) override;
+        void AddAngularVelocity(const SR_MATH_NS::FVector3& velocity) override;
+
+        void Synchronize() override;
 
         bool UpdateMatrix(bool force) override;
         bool UpdateShapeInternal() override;

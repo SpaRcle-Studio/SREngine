@@ -37,6 +37,9 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD SR_MATH_NS::IVector2 GetScreenResolution() const override;
         SR_NODISCARD void* GetHandle() const override;
 
+        SR_NODISCARD SR_MATH_NS::IVector2 ClientToScreen(const SR_MATH_NS::IVector2& pos) const override;
+        SR_NODISCARD SR_MATH_NS::IVector2 ScreenToClient(const SR_MATH_NS::IVector2& pos) const override;
+
         SR_NODISCARD WindowType GetType() const override { return BasicWindowImpl::WindowType::Win32; }
 
         void SwapBuffers() const override;

@@ -220,24 +220,26 @@ namespace SR_PHYSICS_NS {
                 continue;
             }
 
-            if (pRigidbody->IsMatrixDirty()) {
-                pRigidbody->UpdateMatrix();
-            }
-            else if (auto&& pTransform = pRigidbody->GetTransform()) {
-                auto&& globalPose = pRigidActor->getGlobalPose();
+            pRigidbody->Synchronize();
 
-                pTransform->SetTranslation(globalPose.p.x, globalPose.p.y, globalPose.p.z);
+            //if (pRigidbody->IsMatrixDirty()) {
+            //    pRigidbody->UpdateMatrix();
+            //}
+            //else if (auto&& pTransform = pRigidbody->GetTransform()) {
+            //    auto&& globalPose = pRigidActor->getGlobalPose();
 
-                auto&& q = SR_MATH_NS::Quaternion(globalPose.q.x, globalPose.q.y, globalPose.q.z, globalPose.q.w);
+            //    pTransform->SetTranslation(globalPose.p.x, globalPose.p.y, globalPose.p.z);
 
-                if (pRigidbody->GetType() == ShapeType::Capsule3D) {
-                    q = q.RotateZ(-90);
-                }
+            //    auto&& q = SR_MATH_NS::Quaternion(globalPose.q.x, globalPose.q.y, globalPose.q.z, globalPose.q.w);
 
-                pTransform->SetRotation(q);
+            //    if (pRigidbody->GetType() == ShapeType::Capsule3D) {
+            //        q = q.RotateZ(-90);
+            //    }
 
-                pRigidbody->SetMatrixDirty(false);
-            }
+            //    pTransform->SetRotation(q);
+
+            //    pRigidbody->SetMatrixDirty(false);
+            //}
         }
 
         return true;

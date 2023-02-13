@@ -47,7 +47,7 @@ namespace SR_GRAPH_NS {
                 auto point = POINT { LOWORD(lParam), HIWORD(lParam) };
 
                 /// Convert screen coordinates into client
-                if (!ScreenToClient(m_hWnd, &point)) {
+                if (!::ScreenToClient(m_hWnd, &point)) {
                     return 0;
                 }
 
@@ -434,5 +434,17 @@ namespace SR_GRAPH_NS {
             m_isValid = false;
             m_hWnd = nullptr;
         }
+    }
+
+    SR_MATH_NS::IVector2 Win32Window::ScreenToClient(const SR_MATH_NS::IVector2& pos) const {
+        POINT pt = { static_cast<int32>(pos.x), static_cast<int32_t>(pos.y) };
+        ::ScreenToClient(m_hWnd, &pt);
+        return SR_MATH_NS::IVector2(pt.x, pt.y);
+    }
+
+    SR_MATH_NS::IVector2 Win32Window::ClientToScreen(const SR_MATH_NS::IVector2& pos) const {
+        POINT pt = { static_cast<int32>(pos.x), static_cast<int32_t>(pos.y) };
+        ::ClientToScreen(m_hWnd, &pt);
+        return SR_MATH_NS::IVector2(pt.x, pt.y);
     }
 }

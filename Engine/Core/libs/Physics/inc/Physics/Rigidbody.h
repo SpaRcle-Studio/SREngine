@@ -42,8 +42,11 @@ namespace SR_PTYPES_NS {
 
         virtual bool UpdateMatrix(bool force = false);
 
+        virtual void Synchronize() { }
+
         virtual bool UpdateShapeInternal() { return false; }
         virtual void UpdateInertia() { }
+        virtual void ClearForces() { }
 
         SR_NODISCARD virtual SR_UTILS_NS::Measurement GetMeasurement() const;
 
@@ -67,8 +70,8 @@ namespace SR_PTYPES_NS {
         void SetMatrixDirty(bool value) { m_isMatrixDirty = value; }
         void SetShapeDirty(bool value) { m_isShapeDirty = value; }
 
-        virtual void AddLocalVelocity(const SR_MATH_NS::FVector3& velocity) { }
-        virtual void AddGlobalVelocity(const SR_MATH_NS::FVector3& velocity) { }
+        virtual void AddLinearVelocity(const SR_MATH_NS::FVector3& velocity) { }
+        virtual void AddAngularVelocity(const SR_MATH_NS::FVector3& velocity) { }
         virtual void SetVelocity(const SR_MATH_NS::FVector3& velocity) { }
         virtual void SetIsTrigger(bool value);
         virtual void SetIsStatic(bool value);
@@ -106,7 +109,11 @@ namespace SR_PTYPES_NS {
         PhysicsScenePtr m_physicsScene;
 
         SR_MATH_NS::FVector3 m_translation;
+        SR_MATH_NS::FVector3 m_rigidbodyTranslation = SR_MATH_NS::InfinityFV3;
+
         SR_MATH_NS::Quaternion m_rotation;
+        SR_MATH_NS::Quaternion m_rigidbodyRotation = SR_MATH_NS::InfinityQuaternion;
+
         SR_MATH_NS::FVector3 m_scale;
 
         SR_MATH_NS::FVector3 m_center;

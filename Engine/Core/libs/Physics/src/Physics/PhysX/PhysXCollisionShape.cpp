@@ -25,7 +25,8 @@ namespace SR_PTYPES_NS {
         }
 
         /// TODO: physics materials
-        physx::PxMaterial* defaultMaterial = pPhysics->createMaterial(0.5f, 0.5f, 0.6f);
+        //physx::PxMaterial* defaultMaterial = pPhysics->createMaterial(0.5f, 0.5f, 0.6f);
+        physx::PxMaterial* defaultMaterial = pPhysics->createMaterial(1.0f, 1.0f, 0.0f);
 
         switch (m_type) {
             case ShapeType::Box3D: {

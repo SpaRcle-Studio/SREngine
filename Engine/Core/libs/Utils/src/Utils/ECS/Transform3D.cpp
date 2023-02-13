@@ -18,8 +18,11 @@ namespace SR_UTILS_NS {
     }
 
     void Transform3D::Rotate(const SR_MATH_NS::FVector3& eulers) {
-        SR_MATH_NS::Quaternion q = m_quaternion * eulers.Radians().ToQuat();
-        SetRotation(q.EulerAngle());
+        Rotate(eulers.Radians().ToQuat());
+    }
+
+    void Transform3D::Rotate(const SR_MATH_NS::Quaternion &q) {
+        SetRotation((m_quaternion * q).EulerAngle());
     }
 
     const SR_MATH_NS::Matrix4x4& Transform3D::GetMatrix() {

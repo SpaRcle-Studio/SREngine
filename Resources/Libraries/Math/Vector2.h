@@ -92,6 +92,20 @@ public:
         x = p_x;
         y = p_y;
     }
+
+    SR_NODISCARD bool IsEquals(const Vector2& value, Unit tolerance) const noexcept {
+        if (!SR_EQUALS_T(x, value.x, tolerance)) {
+            return false;
+        }
+
+        if (!SR_EQUALS_T(y, value.y, tolerance)) {
+            return false;
+        }
+
+        SR_NOOP;
+
+        return true;
+    }
 };
 
 typedef Vector2<Unit> FVector2;

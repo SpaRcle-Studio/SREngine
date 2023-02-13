@@ -19,9 +19,42 @@
     #define SR_NODISCARD [[nodiscard]]
 #endif
 
+#define SR_EPSILON 0.00001
+
 #define SR_RAD(x) x * SR_PI / 180.0
 #define SR_DEG(x) x / SR_PI * 180.0
 
+#define SR_ABS(x) (std::abs(x))
+#define SR_MAX(a, b) (a > b ? a : b)
+#define SR_MIN(a, b) (a < b ? a : b)
+#define SR_CLAMP(x, upper, lower) (SR_MIN(upper, SR_MAX(x, lower)))
+#define SR_NOOP (void)0
+
 typedef float Unit;
+
+static bool is_equal_approx(Unit a, Unit b) noexcept {
+    /// Check for exact equality first, required to handle "infinity" values.
+    if (a == b) {
+        return true;
+    }
+    /// Then check for approximate equality.
+    double tolerance = SR_EPSILON * abs(a);
+    if (tolerance < SR_EPSILON) {
+        tolerance = SR_EPSILON;
+    }
+    return abs(a - b) < tolerance;
+}
+
+static bool is_equal_approx(Unit a, Unit b, Unit tolerance) {
+    /// Check for exact equality first, required to handle "infinity" values.
+    if (a == b) {
+        return true;
+    }
+    /// Then check for approximate equality.
+    return abs(a - b) < tolerance;
+}
+
+#define SR_EQUALS(a, b) (is_equal_approx(a, b))
+#define SR_EQUALS_T(a, b, tolerance) (is_equal_approx(a, b, tolerance))
 
 #endif //EVOSCRIPTLIB_COREMATH_H

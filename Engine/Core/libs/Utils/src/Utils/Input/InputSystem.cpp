@@ -16,7 +16,7 @@ namespace SR_UTILS_NS {
         m_mouseScrollCurrent = glm::vec2(0, 0);
 
         m_mousePrev = m_mouse;
-        m_mouse = Helper::Platform::GetMousePos();
+        m_mouse = SR_PLATFORM_NS::GetMousePos();
 
         m_mouseDrag = m_mouse - m_mousePrev;
 
@@ -122,5 +122,9 @@ namespace SR_UTILS_NS {
     void Input::Reload() {
         m_init = false;
         Reset();
+    }
+
+    void Input::LockCursor(bool isLock) {
+        m_isLocked = isLock;
     }
 }

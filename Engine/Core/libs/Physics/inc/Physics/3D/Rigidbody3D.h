@@ -30,7 +30,7 @@ namespace SR_PTYPES_NS {
         virtual void SetLinearLock(const SR_MATH_NS::BVector3& lock) { m_linearLock = lock; }
         virtual void SetAngularLock(const SR_MATH_NS::BVector3& lock) { m_angularLock = lock; }
 
-        SR_UTILS_NS::Component* CopyComponent() const override;
+        SR_NODISCARD SR_UTILS_NS::Component* CopyComponent() const override;
 
     protected:
         SR_MATH_NS::BVector3 m_linearLock;

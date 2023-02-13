@@ -181,4 +181,16 @@ namespace SR_GRAPH_NS {
             callback(xOffset, yOffset);
         });
     }
+
+    SR_MATH_NS::IVector2 Window::ScreenToClient(const SR_MATH_NS::IVector2& pos) const {
+        return m_windowImpl->ScreenToClient(pos);
+    }
+
+    SR_MATH_NS::IVector2 Window::ClientToScreen(const SR_MATH_NS::IVector2& pos) const {
+        return m_windowImpl->ClientToScreen(pos);
+    }
+
+    SR_MATH_NS::IVector2 Window::GetPosition() const {
+        return m_windowImpl->GetPosition();
+    }
 }

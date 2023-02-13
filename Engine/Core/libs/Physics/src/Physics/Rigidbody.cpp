@@ -134,7 +134,7 @@ namespace SR_PTYPES_NS {
                     m_scale
             );
 
-            if (m_shape){
+            if (m_shape) {
                 m_shape->UpdateDebugShape();
             }
         }

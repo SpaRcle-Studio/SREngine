@@ -19,6 +19,7 @@ namespace SR_UTILS_NS {
         void Translate(const SR_MATH_NS::FVector3& translation) override;
         void Rotate(const SR_MATH_NS::FVector3& eulers) override;
         void Scale(const SR_MATH_NS::FVector3& scale) override;
+        void Rotate(const SR_MATH_NS::Quaternion& q) override;
 
         void RotateAround(const SR_MATH_NS::FVector3& point, const SR_MATH_NS::FVector3& eulers) override;
         void RotateAroundParent(const SR_MATH_NS::FVector3& eulers) override;

@@ -102,6 +102,11 @@ namespace SR_MATH_NS {
                 SR_EQUALS(w, q.w);
         }
 
+        SR_NODISCARD bool IsFinite() const noexcept {
+            /// если будет inf или nan, то вернет false
+            return std::isfinite(x) && std::isfinite(y) && std::isfinite(z) && std::isfinite(w);
+        }
+
         SR_FORCE_INLINE void operator+=(const Quaternion &p_q) {
             self += p_q.self;
         }
@@ -143,6 +148,8 @@ namespace SR_MATH_NS {
             return Quaternion(self * rhs.self);
         }
     };
+
+    inline static const Quaternion InfinityQuaternion = Quaternion { UnitMAX, UnitMAX, UnitMAX, UnitMAX };
 }
 
 #endif //GAMEENGINE_QUATERNION_H

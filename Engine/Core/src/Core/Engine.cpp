@@ -543,6 +543,12 @@ namespace SR_CORE_NS {
             ///В этом блоке находится обработка нажатия клавиш, которая не должна срабатывать, если окно не сфокусированно
             SR_UTILS_NS::Input::Instance().Check();
 
+            if (SR_UTILS_NS::Input::Instance().IsCursorLocked()) {
+                auto&& resolution = m_window->GetSize();
+                resolution /= 2;
+                SR_PLATFORM_NS::SetMousePos(m_window->GetPosition() + resolution.Cast<int32_t>());
+            }
+
             m_input->Check();
 
             bool lShiftPressed = SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::LShift);
@@ -558,6 +564,10 @@ namespace SR_CORE_NS {
 
             if (m_editor && SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::F1)) {
                 m_editor->SetDockingEnabled(!m_editor->IsDockingEnabled());
+            }
+
+            if (m_editor && SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::F9)) {
+                SR_UTILS_NS::Input::Instance().LockCursor(!SR_UTILS_NS::Input::Instance().IsCursorLocked());
             }
 
             if (m_editor && SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::F2)) {

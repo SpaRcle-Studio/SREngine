@@ -3,6 +3,7 @@
 //
 
 #include <Physics/PhysX/PhysXRigidbody3D.h>
+#include <Physics/PhysX/PhysXLibraryImpl.h>
 
 namespace SR_PTYPES_NS {
     PhysXRigidbody3D::PhysXRigidbody3D(Super::LibraryPtr pLibrary)
@@ -68,13 +69,13 @@ namespace SR_PTYPES_NS {
         return true;
     }
 
-    void PhysXRigidbody3D::AddLocalVelocity(const SR_MATH_NS::FVector3& velocity) {
+    void PhysXRigidbody3D::AddLinearVelocity(const SR_MATH_NS::FVector3& velocity) {
         if (auto&& pRigidBody = m_rigidActor->is<physx::PxRigidBody>()){
             pRigidBody->setLinearVelocity(pRigidBody->getLinearVelocity() + SR_PHYSICS_UTILS_NS::FV3ToPxV3(velocity));
         }
     }
 
-    void PhysXRigidbody3D::AddGlobalVelocity(const SR_MATH_NS::FVector3& velocity) {
+    void PhysXRigidbody3D::AddAngularVelocity(const SR_MATH_NS::FVector3& velocity) {
         if (auto&& pRigidBody = m_rigidActor->is<physx::PxRigidBody>()){
             pRigidBody->setAngularVelocity(pRigidBody->getAngularVelocity() + SR_PHYSICS_UTILS_NS::FV3ToPxV3(velocity));
         }
@@ -103,11 +104,7 @@ namespace SR_PTYPES_NS {
 
         m_rigidActor->setGlobalPose(transform);
 
-        if (auto&& pRigidBody = m_rigidActor->is<physx::PxRigidBody>(); pRigidBody && pRigidBody->getScene()) {
-            pRigidBody->clearForce();
-            pRigidBody->setLinearVelocity(physx::PxVec3(0, 0, 0));
-            pRigidBody->setAngularVelocity(physx::PxVec3(0, 0, 0));
-        }
+        //ClearForces();
 
         return true;
     }
@@ -163,5 +160,61 @@ namespace SR_PTYPES_NS {
 
             pDynamic->setRigidDynamicLockFlags(flags);
         }
+    }
+
+    void PhysXRigidbody3D::ClearForces() {
+        if (auto&& pRigidBody = m_rigidActor->is<physx::PxRigidBody>(); pRigidBody && pRigidBody->getScene()) {
+            pRigidBody->clearForce();
+            pRigidBody->setLinearVelocity(physx::PxVec3(0, 0, 0));
+            pRigidBody->setAngularVelocity(physx::PxVec3(0, 0, 0));
+        }
+        Rigidbody::ClearForces();
+    }
+
+    void PhysXRigidbody3D::Synchronize() {
+        auto&& pTransform = GetTransform();
+        if (!pTransform) {
+            return;
+        }
+
+        auto&& globalPose = m_rigidActor->getGlobalPose();
+
+        auto&& rigidbodyTranslation = SR_MATH_NS::FVector3(globalPose.p.x, globalPose.p.y, globalPose.p.z);
+        auto&& rigidbodyRotation = SR_MATH_NS::Quaternion(globalPose.q.x, globalPose.q.y, globalPose.q.z, globalPose.q.w);
+
+        if (GetType() == ShapeType::Capsule3D) {
+            rigidbodyRotation = rigidbodyRotation.RotateZ(-90);
+        }
+
+        /// ------------------------------------------------------------------------------------------------------------
+
+        SR_MATH_NS::FVector3 deltaTranslation(SR_MATH_NS::Unit(0));
+        SR_MATH_NS::Quaternion deltaQuaternion(SR_MATH_NS::Quaternion::Identity());
+
+        if (m_rigidbodyTranslation.IsFinite()) {
+            deltaTranslation = rigidbodyTranslation - m_rigidbodyTranslation;
+        }
+
+        if (m_rigidbodyRotation.IsFinite()) {
+            deltaQuaternion = rigidbodyRotation * m_rigidbodyRotation.Inverse();
+        }
+
+        if (!deltaTranslation.IsEquals(SR_MATH_NS::FVector3(SR_MATH_NS::Unit(0)), SR_MATH_NS::Unit(0.001))) {
+            pTransform->GlobalTranslate(deltaTranslation);
+        }
+
+       if (deltaQuaternion != SR_MATH_NS::Quaternion::Identity()) {
+           pTransform->SetRotation(rigidbodyRotation);
+           // TODO: maybe use? pTransform->Rotate(deltaQuaternion);
+       }
+
+        UpdateMatrix(true);
+
+        SetMatrixDirty(false);
+
+        m_rigidbodyTranslation = m_translation;
+        m_rigidbodyRotation = m_rotation;
+
+        Rigidbody::Synchronize();
     }
 }

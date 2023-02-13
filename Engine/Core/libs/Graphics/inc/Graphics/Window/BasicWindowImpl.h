@@ -56,6 +56,8 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD virtual bool IsFocused() const { return m_isFocused; };
         SR_NODISCARD virtual SR_MATH_NS::IVector2 GetPosition() const { return SR_MATH_NS::IVector2(); }
         SR_NODISCARD virtual SR_MATH_NS::IVector2 GetScreenResolution() const { return SR_MATH_NS::IVector2(); }
+        SR_NODISCARD virtual SR_MATH_NS::IVector2 ClientToScreen(const SR_MATH_NS::IVector2& pos) const { return SR_MATH_NS::IVector2(); }
+        SR_NODISCARD virtual SR_MATH_NS::IVector2 ScreenToClient(const SR_MATH_NS::IVector2& pos) const { return SR_MATH_NS::IVector2(); }
 
         virtual void Close() { }
 

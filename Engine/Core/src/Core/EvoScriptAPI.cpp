@@ -15,7 +15,7 @@
 #include <Graphics/Types/Geometry/ProceduralMesh.h>
 #include <Graphics/Render/PostProcessing.h>
 
-#include <Physics/Rigidbody.h>
+#include <Physics/3D/Rigidbody3D.h>
 
 namespace Framework {
     void API::RegisterEvoScriptClasses() {
@@ -261,7 +261,7 @@ namespace Framework {
     }
 
     void API::RegisterRigidbody(EvoScript::AddressTableGen *generator) {
-        generator->RegisterNewClass("Rigidbody", "Rigidbody",
+        generator->RegisterNewClass("Rigidbody3D", "Rigidbody3D",
                 { "Libraries/Math/Vector3.h", "Libraries/Math/Vector2.h", "Libraries/Component.h" }, {
                 { "Component", EvoScript::Public }
         });
@@ -269,9 +269,9 @@ namespace Framework {
         using namespace SR_MATH_NS;
         using namespace SR_PHYSICS_NS::Types;
 
-        ESRegisterMethod(EvoScript::Public, generator, Rigidbody, AddLocalVelocity, void, ESArg1(const FVector3& velocity), ESArg1(velocity))
-        ESRegisterMethod(EvoScript::Public, generator, Rigidbody, AddGlobalVelocity, void, ESArg1(const FVector3& velocity), ESArg1(velocity))
-        ESRegisterMethod(EvoScript::Public, generator, Rigidbody, SetVelocity, void, ESArg1(const FVector3& velocity), ESArg1(velocity))
+        ESRegisterMethod(EvoScript::Public, generator, Rigidbody3D, AddLinearVelocity, void, ESArg1(const FVector3& velocity), ESArg1(velocity))
+        ESRegisterMethod(EvoScript::Public, generator, Rigidbody3D, AddAngularVelocity, void, ESArg1(const FVector3& velocity), ESArg1(velocity))
+        ESRegisterMethod(EvoScript::Public, generator, Rigidbody3D, SetVelocity, void, ESArg1(const FVector3& velocity), ESArg1(velocity))
     }
 
     void API::RegisterRender(EvoScript::AddressTableGen *generator) {
@@ -315,6 +315,8 @@ namespace Framework {
         ESRegisterMethod(EvoScript::Public, generator, Transform, GlobalRotate, void, ESArg1(const FVector3& eulers), ESArg1(eulers))
         ESRegisterMethod(EvoScript::Public, generator, Transform, Translate, void, ESArg1(const FVector3& translation), ESArg1(translation))
         ESRegisterMethod(EvoScript::Public, generator, Transform, SetTranslation, void, ESArg1(const FVector3& translation), ESArg1(translation))
+        ESRegisterMethod(EvoScript::Public, generator, Transform, SetRotation, void, ESArg1(const FVector3& eulerAngles), ESArg1(eulerAngles))
+        ESRegisterMethodArg0(EvoScript::Public, generator, Transform, GetRotation, FVector3)
 
         ESRegisterMethodArg0(EvoScript::Public, generator, Transform, GetTranslation, FVector3)
     }
@@ -332,6 +334,10 @@ namespace Framework {
 
         ESRegisterCustomStaticMethod(EvoScript::Public, generator, Input, GetKey, bool, ESArg1(KeyCode key), {
             return SR_UTILS_NS::Input::Instance().GetKey(key);
+        });
+
+        ESRegisterCustomStaticMethod(EvoScript::Public, generator, Input, LockCursor, void, ESArg1(bool lock), {
+            SR_UTILS_NS::Input::Instance().LockCursor(lock);
         });
 
         ESRegisterCustomStaticMethod(EvoScript::Public, generator, Input, GetKeyDown, bool, ESArg1(KeyCode key), {
@@ -522,7 +528,7 @@ namespace Framework {
         using namespace SR_PHYSICS_NS::Types;
 
         ESRegisterDynamicCast(generator, ProceduralMesh, Component)
-        ESRegisterDynamicCast(generator, Rigidbody, Component)
+        ESRegisterDynamicCast(generator, Rigidbody3D, Component)
         ESRegisterDynamicCast(generator, Mesh, Component)
     }
 
