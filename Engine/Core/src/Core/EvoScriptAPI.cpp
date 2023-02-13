@@ -147,12 +147,13 @@ namespace Framework {
     void API::RegisterComponent(EvoScript::AddressTableGen *generator) {
         using namespace SR_UTILS_NS;
         using namespace SR_MATH_NS;
+        using namespace SR_HTYPES_NS;
 
         generator->RegisterNewClass("Component", "Component", { "Libraries/Math/Vector3.h", "string" });
         ESRegisterMethodArg0(EvoScript::Public, generator, Component, GetComponentName, std::string)
 
         ESRegisterMethodArg0(EvoScript::Public, generator, Component, BaseComponent, Component*)
-        //ESRegisterMethodArg0(EvoScript::Public, generator, Component, GetParent, GameObject*)
+        ESRegisterMethodArg0(EvoScript::Public, generator, Component, GetGameObject, SharedPtr<GameObject>)
         ESRegisterMethodArg0(EvoScript::Public, generator, Component, GetBarycenter, FVector3)
 
         ESRegisterMethodArg0(EvoScript::Public, generator, Component, IsActive, bool)
@@ -235,6 +236,7 @@ namespace Framework {
         ESRegisterMethod(EvoScript::Public, generator, GameObject, GetComponent, Component*, ESArg1(const std::string& name), ESArg1(name))
         ESRegisterMethod(EvoScript::Public, generator, GameObject, GetOrCreateComponent, Component*, ESArg1(const std::string& name), ESArg1(name))
         ESRegisterMethodArg0(EvoScript::Public, generator, GameObject, GetBarycenter, FVector3)
+        ESRegisterMethodArg0(EvoScript::Public, generator, GameObject, GetName, std::string)
         ESRegisterMethodArg0(EvoScript::Public, generator, GameObject, GetTransform, Transform*)
         ESRegisterCustomMethodArg0(EvoScript::Public, generator, GameObject, GetScene, SafePtr<Scene>, {
             return ptr->GetScene()->GetThis();
@@ -271,7 +273,15 @@ namespace Framework {
 
         ESRegisterMethod(EvoScript::Public, generator, Rigidbody3D, AddLinearVelocity, void, ESArg1(const FVector3& velocity), ESArg1(velocity))
         ESRegisterMethod(EvoScript::Public, generator, Rigidbody3D, AddAngularVelocity, void, ESArg1(const FVector3& velocity), ESArg1(velocity))
-        ESRegisterMethod(EvoScript::Public, generator, Rigidbody3D, SetVelocity, void, ESArg1(const FVector3& velocity), ESArg1(velocity))
+        ESRegisterMethod(EvoScript::Public, generator, Rigidbody3D, SetLinearVelocity, void, ESArg1(const FVector3& velocity), ESArg1(velocity))
+        ESRegisterMethod(EvoScript::Public, generator, Rigidbody3D, SetAngularVelocity, void, ESArg1(const FVector3& velocity), ESArg1(velocity))
+        ESRegisterMethodArg0(EvoScript::Public, generator, Rigidbody3D, GetLinearVelocity, FVector3)
+        ESRegisterMethodArg0(EvoScript::Public, generator, Rigidbody3D, GetAngularVelocity, FVector3)
+
+        generator->RegisterNewClass("Rigidbody", "Rigidbody",
+                { "Libraries/Math/Vector3.h", "Libraries/Math/Vector2.h", "Libraries/Component.h" }, {
+                { "Component", EvoScript::Public }
+        });
     }
 
     void API::RegisterRender(EvoScript::AddressTableGen *generator) {
@@ -529,6 +539,7 @@ namespace Framework {
 
         ESRegisterDynamicCast(generator, ProceduralMesh, Component)
         ESRegisterDynamicCast(generator, Rigidbody3D, Component)
+        ESRegisterDynamicCast(generator, Rigidbody, Component)
         ESRegisterDynamicCast(generator, Mesh, Component)
     }
 

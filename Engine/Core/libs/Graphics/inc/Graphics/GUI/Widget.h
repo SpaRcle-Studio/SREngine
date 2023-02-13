@@ -67,6 +67,8 @@ namespace SR_GRAPH_NS::GUI {
 
         void DrawAsSubWindow();
 
+        void SetManager(WidgetManager* pManager);
+
     protected:
         virtual void Draw() = 0;
         virtual void OnClose() { }
@@ -85,8 +87,6 @@ namespace SR_GRAPH_NS::GUI {
         void CheckHovered();
 
     private:
-        void SetManager(WidgetManager* manager);
-
         void InternalCheckFocused();
         void InternalCheckHovered();
         void DrawWindow();

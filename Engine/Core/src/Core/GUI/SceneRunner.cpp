@@ -7,7 +7,7 @@
 
 namespace SR_CORE_NS::GUI {
     SceneRunner::SceneRunner()
-        : SR_GRAPH_NS::GUI::Widget("Scene runner", SR_MATH_NS::IVector2(0, 50))
+        : SR_GRAPH_NS::GUI::Widget("Scene runner", SR_MATH_NS::IVector2(0, 60))
     { }
 
     void SceneRunner::SetScene(const SR_WORLD_NS::Scene::Ptr &scene) {
@@ -21,8 +21,6 @@ namespace SR_CORE_NS::GUI {
         auto&& font = SR_GRAPH_NS::Environment::Get()->GetIconFont();
         float_t scale = font->Scale;
         font->Scale /= 3;
-
-        const ImVec2 buttonSize = ImVec2(25, 25);
 
         bool locked = false;
 
@@ -42,29 +40,41 @@ namespace SR_CORE_NS::GUI {
 
             ImGui::Separator();
 
-            if (ImGui::Button(active ? SR_ICON_STOP : SR_ICON_PLAY, buttonSize) && locked) {
-                active = !active;
+            const EditorIcon playIcon = active ? EditorIcon::Stop : EditorIcon::Play;
+            if (auto&& pDescriptor = GetEditor()->GetIconDescriptor(playIcon)) {
+                if (GUISystem::Instance().ImageButton("##imgScenePlayBtn", pDescriptor, SR_MATH_NS::IVector2(32), 3) && locked) {
+                    active = !active;
 
-                if (active) {
-                    active = PlayScene();
-                }
-                else {
-                    paused = false;
-                    ReturnScene();
+                    if (active) {
+                        active = PlayScene();
+                    }
+                    else {
+                        paused = false;
+                        ReturnScene();
+                    }
                 }
             }
 
             ImGui::SameLine();
 
-            if (ImGui::Button(paused ? SR_ICON_PAUSE_CIRCLE : SR_ICON_PAUSE, buttonSize)) {
-                paused = !paused;
+            if (auto&& pDescriptor = GetEditor()->GetIconDescriptor(paused ? EditorIcon::Pause : EditorIcon::PauseActive)) {
+                if (GUISystem::Instance().ImageButton("##imgScenePauseBtn", pDescriptor, SR_MATH_NS::IVector2(32), 3)) {
+                    paused = !paused;
+                }
             }
 
             ImGui::SameLine();
 
-            if (ImGui::Button(SR_ICON_UNDO, buttonSize) && locked) {
-                m_scene->Reload();
+            if (auto&& pDescriptor = GetEditor()->GetIconDescriptor(EditorIcon::Game)) {
+                if (GUISystem::Instance().ImageButton("##imgSceneGameBtn", pDescriptor, SR_MATH_NS::IVector2(32), 3) && locked) {
+                    if (!active) {
+                        active = PlayScene();
+                    }
+
+                    Engine::Instance().SetGameMode(true);
+                }
             }
+
 
             ImGui::Separator();
 
@@ -124,5 +134,15 @@ namespace SR_CORE_NS::GUI {
 
         auto&& originalScene = SR_WORLD_NS::Scene::Load(m_scenePath);
         Engine::Instance().SetScene(originalScene);
+    }
+
+    EditorGUI *SceneRunner::GetEditor() const {
+        if (auto&& pEditor = dynamic_cast<EditorGUI*>(GetManager())) {
+            return pEditor;
+        }
+
+        SRHalt0();
+
+        return nullptr;
     }
 }

@@ -82,10 +82,10 @@
         </PostProcessPass>
         <!--<PostProcessPass Shader="Engine/Shaders/vignette.srsl">
             <Attachments>
-                <Attachment FBO="MainSceneFBO" Id="image" Index="0"/>
+                <Attachment FBO="GBuffer" Id="image" Index="0"/>
             </Attachments>
-        </PostProcessPass>
-        <PostProcessPass Shader="Samples/Shaders/depth-post-process.srsl">
+        </PostProcessPass>-->
+        <!--<PostProcessPass Shader="Samples/Shaders/depth-post-process.srsl">
             <Attachments>
                 <Attachment FBO="MainSceneFBO" Id="image" Index="0"/>
                 <Attachment FBO="DepthFBO" Id="depth" Index="0"/>

@@ -81,6 +81,34 @@ namespace SR_PTYPES_NS {
         }
     }
 
+    void PhysXRigidbody3D::SetLinearVelocity(const SR_MATH_NS::FVector3 &velocity) {
+        if (auto&& pRigidBody = m_rigidActor->is<physx::PxRigidBody>()){
+            pRigidBody->setLinearVelocity(SR_PHYSICS_UTILS_NS::FV3ToPxV3(velocity));
+        }
+    }
+
+    void PhysXRigidbody3D::SetAngularVelocity(const SR_MATH_NS::FVector3 &velocity) {
+        if (auto&& pRigidBody = m_rigidActor->is<physx::PxRigidBody>()){
+            pRigidBody->setAngularVelocity(SR_PHYSICS_UTILS_NS::FV3ToPxV3(velocity));
+        }
+    }
+
+    SR_MATH_NS::FVector3 PhysXRigidbody3D::GetLinearVelocity() const {
+        if (auto&& pRigidBody = m_rigidActor->is<physx::PxRigidBody>()){
+            return SR_PHYSICS_UTILS_NS::PxV3ToFV3(pRigidBody->getLinearVelocity());
+        }
+
+        return Super::GetLinearVelocity();
+    }
+
+    SR_MATH_NS::FVector3 PhysXRigidbody3D::GetAngularVelocity() const {
+        if (auto&& pRigidBody = m_rigidActor->is<physx::PxRigidBody>()){
+            return SR_PHYSICS_UTILS_NS::PxV3ToFV3(pRigidBody->getAngularVelocity());
+        }
+
+        return Super::GetAngularVelocity();
+    }
+
     bool PhysXRigidbody3D::UpdateMatrix(bool force) {
         if (!Super::UpdateMatrix(force)) {
             return false;
@@ -104,7 +132,7 @@ namespace SR_PTYPES_NS {
 
         m_rigidActor->setGlobalPose(transform);
 
-        //ClearForces();
+        // TODO: воостановить для редактора ClearForces();
 
         return true;
     }

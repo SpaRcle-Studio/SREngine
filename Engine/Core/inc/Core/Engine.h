@@ -66,6 +66,7 @@ namespace SR_CORE_NS {
         void SetActive(bool isActive);
         void SetPaused(bool isPaused);
         void SetSpeed(float_t speed);
+        void SetGameMode(bool enabled);
 
         SR_NODISCARD SR_INLINE ScenePtr GetScene() const { return m_scene; }
         SR_NODISCARD SR_INLINE RenderContextPtr GetRenderContext() const { return m_renderContext; }
@@ -73,6 +74,7 @@ namespace SR_CORE_NS {
         SR_NODISCARD SR_INLINE bool IsActive() const { return m_isActive; }
         SR_NODISCARD SR_INLINE bool IsRun() const { return m_isRun; }
         SR_NODISCARD SR_INLINE bool IsPaused() const { return m_isPaused; }
+        SR_NODISCARD SR_INLINE bool IsGameMode() const { return m_isGameMode; }
         SR_NODISCARD SR_INLINE Core::GUI::EditorGUI* GetEditor() const { return m_editor; }
         SR_NODISCARD SR_INLINE SR_UTILS_NS::CmdManager* GetCmdManager() const { return m_cmdManager; }
 
@@ -105,6 +107,7 @@ namespace SR_CORE_NS {
         std::atomic<bool> m_isInit = false;
         std::atomic<bool> m_isRun = false;
 
+        std::atomic<bool> m_isGameMode = false;
         std::atomic<bool> m_isActive = false;
         std::atomic<bool> m_isPaused = false;
 

@@ -29,7 +29,7 @@ namespace SR_PTYPES_NS {
 
         void AddLinearVelocity(const SR_MATH_NS::FVector3& velocity) override;
         void AddAngularVelocity(const SR_MATH_NS::FVector3& velocity) override;
-        void SetVelocity(const SR_MATH_NS::FVector3& velocity) override;
+        //void SetVelocity(const SR_MATH_NS::FVector3& velocity) override;
 
     private:
         btRigidBody* m_rigidbody = nullptr;

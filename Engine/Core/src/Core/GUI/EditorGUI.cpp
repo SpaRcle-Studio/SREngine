@@ -36,8 +36,9 @@ namespace SR_CORE_NS::GUI {
         AddWidget(new AnimatorEditor());
         AddWidget(new EngineStatistics());
 
-        for (auto& [id, widget] : m_widgets)
+        for (auto& [id, widget] : m_widgets) {
             Register(widget);
+        }
 
         GetWidget<FileBrowser>()->SetFolder(Helper::ResourceManager::Instance().GetResPath());
     }

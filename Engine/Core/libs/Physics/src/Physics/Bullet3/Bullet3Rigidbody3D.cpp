@@ -69,14 +69,14 @@ namespace SR_PTYPES_NS {
         }
     }
 
-    void Bullet3Rigidbody3D::SetVelocity(const SR_MATH_NS::FVector3& velocity) {
-        if (m_rigidbody) {
-            m_rigidbody->setLinearVelocity(SR_PHYSICS_UTILS_NS::FV3ToBtV3(velocity));
-        }
-        else {
-            SRHalt("m_rigidbody is nullptr!");
-        }
-    }
+    //void Bullet3Rigidbody3D::SetVelocity(const SR_MATH_NS::FVector3& velocity) {
+    //    if (m_rigidbody) {
+    //        m_rigidbody->setLinearVelocity(SR_PHYSICS_UTILS_NS::FV3ToBtV3(velocity));
+    //    }
+    //    else {
+    //        SRHalt("m_rigidbody is nullptr!");
+    //    }
+    //}
 
     bool Bullet3Rigidbody3D::UpdateMatrix(bool force) {
         if (!Super::UpdateMatrix(force)) {

@@ -70,9 +70,6 @@ namespace SR_PTYPES_NS {
         void SetMatrixDirty(bool value) { m_isMatrixDirty = value; }
         void SetShapeDirty(bool value) { m_isShapeDirty = value; }
 
-        virtual void AddLinearVelocity(const SR_MATH_NS::FVector3& velocity) { }
-        virtual void AddAngularVelocity(const SR_MATH_NS::FVector3& velocity) { }
-        virtual void SetVelocity(const SR_MATH_NS::FVector3& velocity) { }
         virtual void SetIsTrigger(bool value);
         virtual void SetIsStatic(bool value);
 

@@ -25,6 +25,12 @@ namespace SR_PTYPES_NS {
         void AddLinearVelocity(const SR_MATH_NS::FVector3& velocity) override;
         void AddAngularVelocity(const SR_MATH_NS::FVector3& velocity) override;
 
+        void SetLinearVelocity(const SR_MATH_NS::FVector3& velocity) override;
+        void SetAngularVelocity(const SR_MATH_NS::FVector3& velocity) override;
+
+        SR_NODISCARD SR_MATH_NS::FVector3 GetLinearVelocity() const override;
+        SR_NODISCARD SR_MATH_NS::FVector3 GetAngularVelocity() const override;
+
         void Synchronize() override;
 
         bool UpdateMatrix(bool force) override;

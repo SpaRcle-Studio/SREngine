@@ -27,8 +27,17 @@ namespace SR_PTYPES_NS {
         SR_NODISCARD SR_MATH_NS::BVector3 GetLinearLock() const noexcept { return m_linearLock; }
         SR_NODISCARD SR_MATH_NS::BVector3 GetAngularLock() const noexcept { return m_angularLock; }
 
+        SR_NODISCARD virtual SR_MATH_NS::FVector3 GetLinearVelocity() const { return SR_MATH_NS::FVector3(); }
+        SR_NODISCARD virtual SR_MATH_NS::FVector3 GetAngularVelocity() const { return SR_MATH_NS::FVector3(); }
+
         virtual void SetLinearLock(const SR_MATH_NS::BVector3& lock) { m_linearLock = lock; }
         virtual void SetAngularLock(const SR_MATH_NS::BVector3& lock) { m_angularLock = lock; }
+
+        virtual void AddLinearVelocity(const SR_MATH_NS::FVector3& velocity) { }
+        virtual void AddAngularVelocity(const SR_MATH_NS::FVector3& velocity) { }
+
+        virtual void SetLinearVelocity(const SR_MATH_NS::FVector3& velocity) { }
+        virtual void SetAngularVelocity(const SR_MATH_NS::FVector3& velocity) { }
 
         SR_NODISCARD SR_UTILS_NS::Component* CopyComponent() const override;
 

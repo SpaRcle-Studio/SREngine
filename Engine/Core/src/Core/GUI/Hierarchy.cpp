@@ -36,6 +36,7 @@ namespace SR_CORE_NS::GUI {
             m_tree.clear();
         }
 
+        m_sceneRunnerWidget->SetManager(GetManager());
         m_sceneRunnerWidget->DrawAsSubWindow();
 
         for (auto&& gameObject : m_tree) {
@@ -208,7 +209,7 @@ namespace SR_CORE_NS::GUI {
 
         if (open && hasChild) {
             if (root) {
-                root->ForEachChild([&](const Helper::GameObject::Ptr &child) {
+                root->ForEachChild([&](const SR_UTILS_NS::GameObject::Ptr &child) {
                     DrawChild(child);
                 });
             }

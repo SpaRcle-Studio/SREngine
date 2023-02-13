@@ -27,11 +27,13 @@ namespace SR_UTILS_NS {
 
         void Check();
         void Reload();
+        void ResetMouse();
 
         SR_NODISCARD SR_MATH_NS::FVector2 GetMouseDrag();
         SR_NODISCARD SR_MATH_NS::FVector2 GetMousePos() const { return m_mouse; }
         SR_NODISCARD SR_MATH_NS::FVector2 GetPrevMousePos() const { return m_mousePrev; }
         SR_NODISCARD bool IsCursorLocked() const { return m_isLocked; }
+        SR_NODISCARD bool IsMouseMoved() const;
 
         int32_t GetMouseWheel();
         int32_t DebugKey();

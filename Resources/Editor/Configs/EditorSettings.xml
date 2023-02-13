@@ -19,5 +19,10 @@
         <Pair First="XML" Second="Editor/Textures/xml.png"/>
         <Pair First="PNG" Second="Editor/Textures/png.png"/>
         <Pair First="DLL" Second="Editor/Textures/dll.png"/>
+        <Pair First="Game" Second="Editor/Textures/game.png"/>
+        <Pair First="Play" Second="Editor/Textures/play-colored.png"/>
+        <Pair First="Stop" Second="Editor/Textures/stop.png"/>
+        <Pair First="Pause" Second="Editor/Textures/pause-active.png"/>
+        <Pair First="PauseActive" Second="Editor/Textures/pause.png"/>
     </Icons>
 </Settings>

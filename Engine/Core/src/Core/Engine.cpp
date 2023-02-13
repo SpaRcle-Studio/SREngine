@@ -84,7 +84,8 @@ namespace SR_CORE_NS {
 
         m_input->Register(&Graphics::GUI::GlobalWidgetManager::Instance());
         m_input->Register(m_editor);
-        m_editor->Enable(Helper::Features::Instance().Enabled("EditorOnStartup", false));
+
+        SetGameMode(!SR_UTILS_NS::Features::Instance().Enabled("EditorOnStartup", false));
 
         if (!m_scene.Valid()) {
             auto&& scenePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Scenes/New-scene.scene");
@@ -539,21 +540,16 @@ namespace SR_CORE_NS {
     }
 
     void Engine::FixedUpdate() {
-        if (m_window->IsWindowFocus()) {
-            ///В этом блоке находится обработка нажатия клавиш, которая не должна срабатывать, если окно не сфокусированно
+        ///В этом блоке находится обработка нажатия клавиш, которая не должна срабатывать, если окно не сфокусированно
+        if (m_window->IsWindowFocus())
+        {
             SR_UTILS_NS::Input::Instance().Check();
-
-            if (SR_UTILS_NS::Input::Instance().IsCursorLocked()) {
-                auto&& resolution = m_window->GetSize();
-                resolution /= 2;
-                SR_PLATFORM_NS::SetMousePos(m_window->GetPosition() + resolution.Cast<int32_t>());
-            }
 
             m_input->Check();
 
             bool lShiftPressed = SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::LShift);
 
-            if (SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::Ctrl)) {
+            if (!IsGameMode() && SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::Ctrl)) {
                 if (SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::Z))
                     m_cmdManager->Cancel();
 
@@ -562,7 +558,7 @@ namespace SR_CORE_NS {
                         SR_WARN("Engine::Await() : failed to redo \"" + m_cmdManager->GetLastCmdName() + "\" command!");
             }
 
-            if (m_editor && SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::F1)) {
+            if (!IsGameMode() && m_editor && SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::F1)) {
                 m_editor->SetDockingEnabled(!m_editor->IsDockingEnabled());
             }
 
@@ -571,15 +567,19 @@ namespace SR_CORE_NS {
             }
 
             if (m_editor && SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::F2)) {
-                m_editor->Enable(!m_editor->Enabled());
-                m_renderScene.Do([](SR_GRAPH_NS::RenderScene *ptr) {
-                    ptr->SetOverlayEnabled(!ptr->IsOverlayEnabled());
-                });
+                SetGameMode(!IsGameMode());
             }
 
             if (SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::F3) && lShiftPressed) {
                 Reload();
                 return;
+            }
+
+            if (IsGameMode() && SR_UTILS_NS::Input::Instance().IsMouseMoved() && SR_UTILS_NS::Input::Instance().IsCursorLocked()) {
+                auto&& resolution = m_window->GetSize();
+                resolution /= 2;
+                SR_PLATFORM_NS::SetMousePos(m_window->GetPosition() + resolution.Cast<int32_t>());
+                SR_UTILS_NS::Input::Instance().ResetMouse();
             }
         }
 
@@ -732,6 +732,16 @@ namespace SR_CORE_NS {
             marshal.SetPosition(position);
 
             return true;
+        });
+    }
+
+    void Engine::SetGameMode(bool enabled) {
+        m_isGameMode = enabled;
+
+        m_editor->Enable(!m_isGameMode);
+
+        m_renderScene.Do([this](SR_GRAPH_NS::RenderScene *ptr) {
+            ptr->SetOverlayEnabled(!m_isGameMode);
         });
     }
 }

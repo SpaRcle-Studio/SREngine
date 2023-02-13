@@ -113,11 +113,11 @@ namespace SR_MATH_NS {
         }
 
         template<typename U> SR_FORCE_INLINE bool operator==(const Vector2<U> &p_v) const {
-            return x == p_v.x && y == p_v.y;
+            return SR_EQUALS(x, p_v.x) && SR_EQUALS(y, p_v.y);
         }
 
         template<typename U> SR_FORCE_INLINE bool operator!=(const Vector2<U> &p_v) const {
-            return x != p_v.x || y != p_v.y;
+            return !SR_EQUALS(x, p_v.x) || !SR_EQUALS(y, p_v.y);
         }
 
         template<typename U> SR_FORCE_INLINE Vector2 operator*(const Vector2<U> &p_v) const {
