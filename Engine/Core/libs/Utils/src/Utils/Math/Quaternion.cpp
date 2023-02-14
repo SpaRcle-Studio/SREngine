@@ -61,6 +61,18 @@ namespace SR_MATH_NS {
        return euler.Radians().ToQuat();
    }
 
+   Unit Quaternion::Pitch() const noexcept {
+       const Unit value_y = static_cast<Unit>(2) * (y * z + w * x);
+       const Unit value_x = w * w - x * x - y * y + z * z;
+
+       /// avoid atan2(0,0) - handle singularity - Matiis
+       if (Vector2<Unit>(value_x, value_y) == Vector2<Unit>(Unit(0), Unit(0))) {
+           return static_cast<Unit>(static_cast<Unit>(2) * atan2(x, w));
+       }
+
+       return static_cast<Unit>(atan2(value_y, value_x));
+    }
+
    Quaternion Quaternion::RotateX(Unit angle) const {
        if (angle == static_cast<Unit>(0)) {
            return *this;

@@ -86,6 +86,16 @@ namespace SR_MATH_NS {
             return Quaternion(glm::normalize(self));
         }
 
+        SR_NODISCARD Unit Roll() const noexcept {
+            return static_cast<Unit>(atan2(static_cast<Unit>(2) * (x * y + w * z), w * w + x * x - y * y - z * z));
+        }
+
+        SR_NODISCARD Unit Pitch() const noexcept;
+
+        SR_NODISCARD Unit Yaw() const noexcept {
+            return asin(SR_CLAMP(static_cast<Unit>(-2) * (x * z - w * y), static_cast<Unit>(1), static_cast<Unit>(-1)));
+        }
+
         SR_NODISCARD std::string ToString() const {
             return "(" + std::to_string(self.x) + ", " + std::to_string(self.y) + ", " + std::to_string(self.z) + ", " + std::to_string(self.w) + ")";
         }

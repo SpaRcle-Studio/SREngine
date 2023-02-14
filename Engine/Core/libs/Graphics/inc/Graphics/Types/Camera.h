@@ -41,27 +41,25 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD Component* CopyComponent() const override;
 
     public:
-        SR_NODISCARD SR_FORCE_INLINE glm::vec3 GetRotation() const { return { m_pitch, m_yaw, m_roll }; }
-        SR_NODISCARD SR_FORCE_INLINE const glm::mat4& GetViewRef() const noexcept { return m_viewMat; }
-        SR_NODISCARD SR_FORCE_INLINE const glm::mat4& GetOrthogonalRef() const noexcept { return m_orthogonal; }
-        SR_NODISCARD SR_FORCE_INLINE const glm::mat4& GetViewTranslateRef() const noexcept { return m_viewTranslateMat; }
-        SR_NODISCARD SR_FORCE_INLINE glm::mat4 GetViewTranslate() const { return m_viewTranslateMat; }
-        SR_NODISCARD SR_FORCE_INLINE glm::mat4 GetProjection() const { return m_projection;                    }
-        SR_NODISCARD SR_FORCE_INLINE const glm::mat4& GetProjectionRef() const noexcept { return m_projection;          }
-        SR_NODISCARD SR_FORCE_INLINE SR_MATH_NS::UVector2 GetSize() const { return m_viewportSize;             }
+        SR_NODISCARD SR_FORCE_INLINE const SR_MATH_NS::Matrix4x4& GetViewRef() const noexcept { return m_viewMat; }
+        SR_NODISCARD SR_FORCE_INLINE const SR_MATH_NS::Matrix4x4& GetOrthogonalRef() const noexcept { return m_orthogonal; }
+        SR_NODISCARD SR_FORCE_INLINE const SR_MATH_NS::Matrix4x4& GetViewTranslateRef() const noexcept { return m_viewTranslateMat; }
+        SR_NODISCARD SR_FORCE_INLINE SR_MATH_NS::Matrix4x4 GetViewTranslate() const { return m_viewTranslateMat; }
+        SR_NODISCARD SR_FORCE_INLINE SR_MATH_NS::Matrix4x4 GetProjection() const { return m_projection; }
+        SR_NODISCARD SR_FORCE_INLINE const SR_MATH_NS::Matrix4x4& GetProjectionRef() const noexcept { return m_projection; }
+        SR_NODISCARD SR_FORCE_INLINE SR_MATH_NS::UVector2 GetSize() const { return m_viewportSize; }
         SR_NODISCARD SR_FORCE_INLINE SR_MATH_NS::FVector3 GetViewPosition() const;
         SR_NODISCARD SR_FORCE_INLINE SR_MATH_NS::FVector3 GetPosition() const { return m_position; }
         SR_NODISCARD SR_FORCE_INLINE const SR_MATH_NS::FVector3& GetPositionRef() const { return m_position; }
-        SR_NODISCARD SR_FORCE_INLINE glm::vec3 GetGLPosition() const { return m_position.ToGLM();              }
-        SR_NODISCARD SR_FORCE_INLINE float_t GetFar() const { return m_far;                                    }
-        SR_NODISCARD SR_FORCE_INLINE float_t GetNear() const { return m_near;                                  }
-        SR_NODISCARD SR_FORCE_INLINE float_t GetFOV() const { return m_FOV;                                    }
+        SR_NODISCARD SR_FORCE_INLINE glm::vec3 GetGLPosition() const { return m_position.ToGLM(); }
+        SR_NODISCARD SR_FORCE_INLINE float_t GetFar() const { return m_far; }
+        SR_NODISCARD SR_FORCE_INLINE float_t GetNear() const { return m_near; }
+        SR_NODISCARD SR_FORCE_INLINE float_t GetFOV() const { return m_FOV; }
         SR_NODISCARD SR_FORCE_INLINE int32_t GetPriority() const { return m_priority; }
 
-        SR_NODISCARD glm::mat4 GetImGuizmoView() const noexcept;
-        SR_NODISCARD glm::mat4 GetImGuizmo2DView() const noexcept;
-        SR_NODISCARD glm::vec3 GetViewDirection() const;
-        SR_NODISCARD glm::vec3 GetViewDirection(const SR_MATH_NS::FVector3& pos) const noexcept;
+        SR_NODISCARD SR_MATH_NS::Matrix4x4 GetImGuizmoView() const noexcept;
+        SR_NODISCARD SR_MATH_NS::FVector3 GetViewDirection() const;
+        SR_NODISCARD SR_MATH_NS::FVector3 GetViewDirection(const SR_MATH_NS::FVector3& pos) const noexcept;
 
         SR_NODISCARD RenderTechnique* GetRenderTechnique();
         SR_NODISCARD RenderScenePtr GetRenderScene() const;
@@ -88,26 +86,24 @@ namespace SR_GTYPES_NS {
     private:
         /** >= 0 - одна главная камера, < 0 - закадровые камеры, которые рендерятся в RenderTexture.
          * Выбирается та камера, что ближе к нулю */
-        int32_t               m_priority          = 0;
+        int32_t m_priority = 0;
 
-        float_t               m_yaw               = 0;
-        float_t               m_pitch             = 0;
-        float_t               m_roll              = 0;
+        float_t m_far      = 2000.f;
+        float_t m_near     = 0.01f;
+        float_t m_aspect   = 1.f;
+        float_t m_FOV      = 60.f;
 
-        float_t               m_far               = 2000.f;
-        float_t               m_near              = 0.01f;
-        float_t               m_aspect            = 1.f;
-        float_t               m_FOV               = 60.f;
+        SR_MATH_NS::Matrix4x4 m_projection;
+        SR_MATH_NS::Matrix4x4 m_viewTranslateMat;
+        SR_MATH_NS::Matrix4x4 m_viewMat;
+        SR_MATH_NS::Matrix4x4 m_orthogonal;
 
-        glm::mat4	          m_projection        = glm::mat4(0);
-        glm::mat4	          m_viewTranslateMat  = glm::mat4(0);
-        glm::mat4	          m_viewMat           = glm::mat4(0);
-        glm::mat4	          m_orthogonal        = glm::mat4(0);
+        SR_MATH_NS::Quaternion m_rotation;
 
-        SR_MATH_NS::FVector3  m_position          = { 0, 0, 0 };
-        SR_MATH_NS::UVector2  m_viewportSize      = { 0, 0 };
+        SR_MATH_NS::FVector3  m_position;
+        SR_MATH_NS::UVector2  m_viewportSize;
 
-        RenderTechniqueInfo   m_renderTechnique   = { };
+        RenderTechniqueInfo m_renderTechnique = { };
 
     };
 }

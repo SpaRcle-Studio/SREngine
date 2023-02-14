@@ -73,6 +73,14 @@ namespace SR_MATH_NS {
             return *this;
         }
 
+        SR_FORCE_INLINE const T& operator[](int32_t axis) const {
+            return coord[axis];
+        }
+
+        SR_FORCE_INLINE T& operator[](int32_t axis) {
+            return coord[axis];
+        }
+
         template<typename U> SR_FORCE_INLINE Vector4 &operator*=(U p_scalar) {
             x *= p_scalar;
             y *= p_scalar;
