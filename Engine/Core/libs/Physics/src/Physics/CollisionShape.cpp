@@ -17,7 +17,7 @@ namespace SR_PTYPES_NS {
 
     void CollisionShape::UpdateDebugShape() {
         auto&& pRigidbody = GetRigidbody();
-        if (!pRigidbody || !pRigidbody->IsComponentLoaded()) {
+        if (!pRigidbody || !pRigidbody->IsAttached()) {
             return;
         }
 

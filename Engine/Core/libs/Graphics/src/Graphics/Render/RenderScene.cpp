@@ -404,4 +404,8 @@ namespace SR_GRAPH_NS {
     SR_MATH_NS::UVector2 RenderScene::GetSurfaceSize() const {
         return m_surfaceSize;
     }
+
+    DebugRenderer *RenderScene::GetDebugRenderer() const {
+        return m_debugRender;
+    }
 }

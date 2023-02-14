@@ -17,6 +17,7 @@ namespace SR_PTYPES_NS {
         , m_library(pLibrary)
         , m_shape(pLibrary->CreateCollisionShape())
         , m_isBodyDirty(true)
+        , m_scale(SR_MATH_NS::FVector3::One())
     {
         m_shape->SetRigidbody(this);
     }
@@ -109,6 +110,7 @@ namespace SR_PTYPES_NS {
 
     void Rigidbody::OnAttached() {
         Component::OnAttached();
+        GetCollisionShape()->UpdateDebugShape();
     }
 
     Rigidbody::PhysicsScenePtr Rigidbody::GetPhysicsScene() {
@@ -180,7 +182,7 @@ namespace SR_PTYPES_NS {
 
     SR_MATH_NS::FVector3 Rigidbody::GetCenterDirection() const noexcept {
         /// TODO: cache direction
-        return m_rotation * m_center;
+        return m_rotation * (m_scale * m_center);
     }
 
     ShapeType Rigidbody::GetType() const noexcept {

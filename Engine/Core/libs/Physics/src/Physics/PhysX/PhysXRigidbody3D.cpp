@@ -220,7 +220,7 @@ namespace SR_PTYPES_NS {
         SR_MATH_NS::Quaternion deltaQuaternion(SR_MATH_NS::Quaternion::Identity());
 
         if (m_rigidbodyTranslation.IsFinite()) {
-            deltaTranslation = rigidbodyTranslation - m_rigidbodyTranslation;
+            deltaTranslation = (rigidbodyTranslation - GetCenterDirection()) - m_rigidbodyTranslation;
         }
 
         if (m_rigidbodyRotation.IsFinite()) {

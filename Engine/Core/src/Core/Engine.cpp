@@ -15,11 +15,13 @@
 #include <Utils/Types/RawMesh.h>
 #include <Utils/ECS/Prefab.h>
 #include <Utils/ECS/Migration.h>
+#include <Utils/DebugDraw.h>
 
 #include <Graphics/Pipeline/Environment.h>
 #include <Graphics/GUI/WidgetManager.h>
 #include <Graphics/Render/Render.h>
 #include <Graphics/Render/RenderScene.h>
+#include <Graphics/Render/DebugRenderer.h>
 #include <Graphics/Render/RenderContext.h>
 #include <Graphics/Memory/CameraManager.h>
 #include <Graphics/Types/Shader.h>
@@ -428,6 +430,11 @@ namespace SR_CORE_NS {
         SR_HTYPES_NS::Time::Instance().Update();
 
         FlushScene();
+
+        if (m_renderScene.RecursiveLockIfValid()) {
+            SR_UTILS_NS::DebugDraw::Instance().SwitchCallbacks(m_renderScene->GetDebugRenderer());
+            m_renderScene.Unlock();
+        }
 
         if (m_scene.LockIfValid()) {
             const auto now = SR_HTYPES_NS::Time::Instance().Now();

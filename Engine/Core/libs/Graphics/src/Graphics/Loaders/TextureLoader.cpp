@@ -26,7 +26,8 @@ bool Framework::Graphics::TextureLoader::Load(Types::Texture* texture, std::stri
     unsigned char* imgData = stbi_load(path.c_str(), &width, &height, &numComponents, STBI_rgb_alpha);
 
     if (!imgData) {
-        SR_ERROR("TextureLoader::Load() : can not load \"" + path + "\" file!");
+        std::string reason = stbi_failure_reason() ? stbi_failure_reason() : std::string();
+        SR_ERROR("TextureLoader::Load() : can not load \"" + path + "\" file!\n\tReason: " + reason);
         return false;
     }
 
