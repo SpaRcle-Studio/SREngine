@@ -74,6 +74,10 @@ namespace SR_GRAPH_NS {
     }
 
     bool RenderScene::IsEmpty() const {
+        if (m_debugRender && !m_debugRender->IsEmpty()) {
+            return false;
+        }
+
         return
             m_transparent.Empty() &&
             m_opaque.Empty() &&

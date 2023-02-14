@@ -210,10 +210,10 @@ namespace SR_GRAPH_NS {
                 continue;
             }
 
-#ifdef SR_DEBUG
+        #ifdef SR_DEBUG
             SR_MAYBE_UNUSED const auto&& countUses = timed.pMesh->GetCountUses();
             SRAssert(countUses > 0 && !timed.pMesh->IsDestroyed());
-#endif
+        #endif
 
             if (!timed.registered) {
                 timed.pMesh->FreeVideoMemory();
@@ -221,7 +221,12 @@ namespace SR_GRAPH_NS {
 
             timed.pMesh->RemoveUsePoint();
             timed.pMesh = nullptr;
+
             m_emptyIds.emplace_back(i);
         }
+    }
+
+    bool DebugRenderer::IsEmpty() const {
+        return m_timedObjects.size() == m_emptyIds.size();
     }
 }

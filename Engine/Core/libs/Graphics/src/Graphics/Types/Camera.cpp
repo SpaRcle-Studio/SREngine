@@ -141,6 +141,7 @@ namespace SR_GTYPES_NS {
     void Camera::UpdateView() noexcept {
         m_viewMat = m_rotation.RotateX(SR_DEG(SR_PI)).Inverse().ToMat4x4();
         m_viewTranslateMat = m_viewMat.Translate(m_position.Inverse());
+        m_viewDirection = m_rotation * SR_MATH_NS::FVector3(0, 0, 1);
     }
 
     void Camera::UpdateProjection() {
@@ -244,9 +245,7 @@ namespace SR_GTYPES_NS {
             return;
         }
 
-        auto&& matrix = pTransform->GetMatrix();
-
-        matrix.Decompose(m_position, m_rotation);
+        pTransform->GetMatrix().Decompose(m_position, m_rotation);
 
         UpdateView();
 
@@ -274,8 +273,8 @@ namespace SR_GTYPES_NS {
         });
     }
 
-    SR_MATH_NS::FVector3 Camera::GetViewDirection() const {
-        return m_rotation * SR_MATH_NS::FVector3(0, 0, 1);
+    const SR_MATH_NS::FVector3& Camera::GetViewDirection() const {
+        return m_viewDirection;
     }
 
     SR_MATH_NS::FVector3 Camera::GetViewDirection(const SR_MATH_NS::FVector3& pos) const noexcept {

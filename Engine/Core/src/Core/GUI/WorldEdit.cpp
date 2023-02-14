@@ -17,24 +17,30 @@ namespace Framework::Core::GUI {
     void WorldEdit::Draw() {
         if (m_scene.TryRecursiveLockIfValid()) {
             auto&& pLogic = m_scene->GetLogic<SR_WORLD_NS::SceneCubeChunkLogic>();
+
+            if (!pLogic) {
+                m_scene.Unlock();
+                return;
+            }
+
             const auto&& observer = pLogic->GetObserver();
             const auto offset = observer->m_offset;
 
             ImGui::Separator();
             TextCenter("Current");
 
-            ImGui::InputFloat3("Chunk", &observer->m_chunk.ToGLM()[0], "%.3f", ImGuiInputTextFlags_ReadOnly);
-            ImGui::InputFloat3("Region", &observer->m_region.ToGLM()[0], "%.2f", ImGuiInputTextFlags_ReadOnly);
+            ImGui::InputInt3("Chunk", &observer->m_chunk[0], ImGuiInputTextFlags_ReadOnly);
+            ImGui::InputInt3("Region", &observer->m_region[0], ImGuiInputTextFlags_ReadOnly);
 
             ImGui::Separator();
             TextCenter("Offset");
 
-            auto chunkOffset = offset.m_chunk.ToGLM();
-            if (ImGui::InputFloat3("Chunk offset", &chunkOffset[0], "%.3f", ImGuiInputTextFlags_EnterReturnsTrue))
+            auto chunkOffset = offset.m_chunk;
+            if (ImGui::InputInt3("Chunk offset", &chunkOffset[0], ImGuiInputTextFlags_EnterReturnsTrue))
                 pLogic->SetWorldOffset(SR_WORLD_NS::Offset(offset.m_region, chunkOffset));
 
-            auto regionOffset = offset.m_region.ToGLM();
-            if (ImGui::InputFloat3("Region offset", &regionOffset[0], "%.3f", ImGuiInputTextFlags_EnterReturnsTrue))
+            auto regionOffset = offset.m_region;
+            if (ImGui::InputInt3("Region offset", &regionOffset[0], ImGuiInputTextFlags_EnterReturnsTrue))
                 pLogic->SetWorldOffset(SR_WORLD_NS::Offset(regionOffset, offset.m_chunk));
 
             auto scope = observer->GetScope();

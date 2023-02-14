@@ -58,7 +58,7 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD SR_FORCE_INLINE int32_t GetPriority() const { return m_priority; }
 
         SR_NODISCARD SR_MATH_NS::Matrix4x4 GetImGuizmoView() const noexcept;
-        SR_NODISCARD SR_MATH_NS::FVector3 GetViewDirection() const;
+        SR_NODISCARD const SR_MATH_NS::FVector3& GetViewDirection() const;
         SR_NODISCARD SR_MATH_NS::FVector3 GetViewDirection(const SR_MATH_NS::FVector3& pos) const noexcept;
 
         SR_NODISCARD RenderTechnique* GetRenderTechnique();
@@ -100,8 +100,9 @@ namespace SR_GTYPES_NS {
 
         SR_MATH_NS::Quaternion m_rotation;
 
-        SR_MATH_NS::FVector3  m_position;
-        SR_MATH_NS::UVector2  m_viewportSize;
+        SR_MATH_NS::FVector3 m_viewDirection;
+        SR_MATH_NS::FVector3 m_position;
+        SR_MATH_NS::UVector2 m_viewportSize;
 
         RenderTechniqueInfo m_renderTechnique = { };
 

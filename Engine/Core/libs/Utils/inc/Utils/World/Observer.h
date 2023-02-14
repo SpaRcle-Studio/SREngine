@@ -19,13 +19,13 @@ namespace SR_WORLD_NS {
     class Scene;
 
     struct SR_DLL_EXPORT Offset {
-        Offset(const Math::IVector3& region, const Math::IVector3& chunk)
+        Offset(const SR_MATH_NS::IVector3& region, const SR_MATH_NS::IVector3& chunk)
             : m_region(region)
             , m_chunk(chunk)
         { }
 
         Offset()
-            : Offset(Math::IVector3::Zero(), Math::IVector3::Zero())
+            : Offset(SR_MATH_NS::IVector3::Zero(), SR_MATH_NS::IVector3::Zero())
         { }
 
         SR_NODISCARD SR_MATH_NS::IVector3 GetRegion() const noexcept { return m_region; }

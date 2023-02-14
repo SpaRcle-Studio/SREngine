@@ -21,6 +21,8 @@ namespace SR_GRAPH_NS {
         void Prepare();
         void Clear();
 
+        SR_NODISCARD bool IsEmpty() const;
+
     private:
         void Remove(uint64_t id);
 

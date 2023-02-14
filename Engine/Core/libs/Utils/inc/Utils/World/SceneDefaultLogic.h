@@ -15,6 +15,8 @@ namespace SR_WORLD_NS {
         ~SceneDefaultLogic() override = default;
 
     public:
+        SR_NODISCARD bool IsDefault() const noexcept override { return true; }
+
         bool Reload() override;
         void Destroy() override;
         void Update(float_t dt) override;

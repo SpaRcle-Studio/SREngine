@@ -390,17 +390,27 @@ namespace SR_WORLD_NS {
 
         const World::Offset offset = m_observer->m_offset;
 
-        if (m_observer->m_target.RecursiveLockIfValid()) {
+        if (m_observer->m_target) {
             m_observer->m_targetPosition = m_observer->m_target->GetTransform()->GetTranslation().Singular(chunkSize.Cast<Math::Unit>());
-            m_observer->m_target.Unlock();
         }
 
         auto&& lastChunk = m_observer->m_lastChunk;
         auto&& lastRegion = m_observer->m_lastRegion;
 
-        auto&& chunk = AddOffset(SR_MATH_NS::IVector3(m_observer->m_targetPosition / chunkSize), -offset.m_chunk);
+        auto&& currentRegion = SR_MATH_NS::IVector3(m_observer->m_targetPosition / chunkSize);
 
-        if (lastChunk != chunk) {
+        if (currentRegion.x == 0) { currentRegion.x = -1; }
+        if (currentRegion.y == 0) { currentRegion.y = -1; }
+        if (currentRegion.z == 0) { currentRegion.z = -1; }
+
+        auto&& currentChunk = AddOffset(
+            currentRegion,
+            -offset.m_chunk
+        );
+
+        SRAssertOnce(!currentChunk.HasZero());
+
+        if (lastChunk != currentChunk) {
             if (m_regions.find(lastRegion) != m_regions.end()) {
                 auto&& pChunk = m_regions.at(lastRegion)->GetChunk(m_observer->m_chunk);
 
@@ -414,9 +424,9 @@ namespace SR_WORLD_NS {
                 m_currentChunk = nullptr;
             }
 
-            m_observer->SetChunk(chunk);
+            m_observer->SetChunk(currentChunk);
 
-            auto region = AddOffset(chunk.Singular(regSize2) / regSize, -offset.m_region);
+            auto region = AddOffset(currentChunk.Singular(regSize2) / regSize, -offset.m_region);
 
             if (auto regionDelta = (region - lastRegion); !regionDelta.Empty()) {
                 m_observer->MoveRegion(regionDelta);
@@ -440,7 +450,7 @@ namespace SR_WORLD_NS {
             }
 
             lastRegion = region;
-            lastChunk = chunk;
+            lastChunk = currentChunk;
         }
 
         if (m_updateContainer)

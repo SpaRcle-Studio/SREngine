@@ -3,12 +3,16 @@ project(SpaRcleEngine)
 
 add_subdirectory(Core)
 
-set(APP_ICON_RESOURCE_WINDOWS "${CMAKE_CURRENT_SOURCE_DIR}/appicon.rc")
+if (CMAKE_GENERATOR MATCHES "Visual Studio")
+    add_executable(SREngine main.cpp)
+else()
+    set(APP_ICON_RESOURCE_WINDOWS "${CMAKE_CURRENT_SOURCE_DIR}/appicon.rc")
 
-add_executable(SREngine
+    add_executable(SREngine
         main.cpp
         ${APP_ICON_RESOURCE_WINDOWS}
-)
+    )
+endif()
 
 add_custom_command(TARGET SREngine
         POST_BUILD

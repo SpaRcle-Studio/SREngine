@@ -31,6 +31,8 @@ namespace SR_WORLD_NS {
         static SceneLogic* CreateByExt(const ScenePtr& scene, const std::string& ext);
 
     public:
+        virtual SR_NODISCARD bool IsDefault() const noexcept { return false; }
+
         virtual void Update(float_t dt) { }
         virtual void Destroy() { }
 

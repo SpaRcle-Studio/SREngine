@@ -87,6 +87,7 @@
 #include "../Graphics/src/Graphics/Render/RenderManager.cpp"
 #include "../Graphics/src/Graphics/Render/RenderContext.cpp"
 #include "../Graphics/src/Graphics/Render/SortedMeshQueue.cpp"
+#include "../Graphics/src/Graphics/Render/OverlayRender.cpp"
 #include "../Graphics/src/Graphics/Render/DebugRenderer.cpp"
 #include "../Graphics/src/Graphics/Render/Implementations/VulkanRender.cpp"
 

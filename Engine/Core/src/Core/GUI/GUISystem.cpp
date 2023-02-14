@@ -614,7 +614,7 @@ bool GUISystem::BeginMenuBar() {
             if (auto&& scene = Engine::Instance().GetScene()) {
                 scene->Save();
             }
-            Engine::Instance().SetScene(SR_WORLD_NS::Scene::Ptr());
+            Engine::Instance().SetScene(SR_WORLD_NS::Scene::Empty());
         }
 
         ImGui::Separator();

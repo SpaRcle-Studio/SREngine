@@ -39,6 +39,7 @@ namespace SR_WORLD_NS {
         Scene();
 
     public:
+        static Scene::Ptr Empty();
         static Scene::Ptr New(const Path& path);
         static Scene::Ptr Load(const Path& path);
 

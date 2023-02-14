@@ -179,6 +179,7 @@ namespace SR_PTYPES_NS {
     }
 
     SR_MATH_NS::FVector3 Rigidbody::GetCenterDirection() const noexcept {
+        /// TODO: cache direction
         return m_rotation * m_center;
     }
 

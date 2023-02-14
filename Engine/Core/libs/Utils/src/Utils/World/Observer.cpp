@@ -23,6 +23,7 @@ namespace SR_WORLD_NS {
         : m_regionWidth(0)
         , m_shiftDistance(0)
         , m_scope(0)
+        , m_offset(Offset())
         , m_scene(scene)
     { }
 
@@ -41,6 +42,8 @@ namespace SR_WORLD_NS {
     }
 
     SR_MATH_NS::FVector3 AddOffset(const SR_MATH_NS::FVector3 &region, const SR_MATH_NS::IVector3 &offset) {
+        SRAssertOnce(!region.HasZero());
+
         auto result = region + offset;
 
         SR_WORLD_OFFSET(result.x, offset.x);
@@ -107,15 +110,20 @@ namespace SR_WORLD_NS {
     }
 
     Offset Observer::MathNeighbour(const SR_MATH_NS::IVector3 &offset) {
+        SRAssert1Once(!m_chunk.HasZero());
+
         Math::IVector3 region;
 
         SR_WORLD_REGION_NEIGHBOUR(m_chunk, region, m_regionWidth, offset, x);
         SR_WORLD_REGION_NEIGHBOUR(m_chunk, region, m_regionWidth, offset, y);
         SR_WORLD_REGION_NEIGHBOUR(m_chunk, region, m_regionWidth, offset, z);
 
+        region /= m_regionWidth;
+
         const auto chunk = AddOffset(m_chunk, offset);
+
         return Offset(
-                AddOffset(m_region, region / m_regionWidth),
+                AddOffset(m_region, region),
                 MakeChunk(chunk, m_regionWidth)
         );
     }

@@ -12,6 +12,7 @@
 
 #include <Utils/ECS/Component.h>
 #include <Utils/ECS/GameObject.h>
+#include <Utils/World/SceneDefaultLogic.h>
 
 namespace SR_WORLD_NS {
     Scene::Scene()
@@ -48,6 +49,23 @@ namespace SR_WORLD_NS {
 
     Scene::GameObjectPtr Scene::Instance(SR_HTYPES_NS::Marshal &marshal) {
         return GameObject::Load(marshal, this);
+    }
+
+    Scene::Ptr Scene::Empty() {
+        if (Debug::Instance().GetLevel() > Debug::Level::None) {
+            SR_LOG("Scene::Empty() : creating new empty scene...");
+        }
+
+        auto&& scene = SceneAllocator::Instance().Allocate();
+
+        if (!scene) {
+            SR_ERROR("Scene::New() : failed to allocate scene!");
+            return Scene::Ptr();
+        }
+
+        scene->m_logic = new SceneDefaultLogic(scene);
+
+        return scene;
     }
 
     Scene::Ptr Scene::New(const Path& path) {

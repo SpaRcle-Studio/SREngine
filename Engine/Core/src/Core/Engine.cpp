@@ -517,12 +517,11 @@ namespace SR_CORE_NS {
                 return ptr->GetFirstOffScreenCamera();
             }, nullptr);
 
-            if (!m_mainCamera) {
-                continue;
-            }
-
             if (m_worldTimer.Update() && m_scene.LockIfValid()) {
-                if (auto&& gameObject = dynamic_cast<SR_UTILS_NS::GameObject*>(m_mainCamera->GetParent())) {
+                if (!m_mainCamera) {
+                    SR_NOOP;
+                }
+                else if (auto&& gameObject = dynamic_cast<SR_UTILS_NS::GameObject*>(m_mainCamera->GetParent())) {
                     auto&& pLogic = m_scene->GetLogic<SR_WORLD_NS::SceneCubeChunkLogic>();
 
                     if (pLogic && gameObject->TryRecursiveLockIfValid()) {
@@ -566,7 +565,7 @@ namespace SR_CORE_NS {
                 SR_UTILS_NS::Input::Instance().LockCursor(!SR_UTILS_NS::Input::Instance().IsCursorLocked());
             }
 
-            if (m_editor && SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::F2)) {
+            if (m_editor && IsActive() && SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::F2)) {
                 SetGameMode(!IsGameMode());
             }
 
@@ -738,10 +737,10 @@ namespace SR_CORE_NS {
     void Engine::SetGameMode(bool enabled) {
         m_isGameMode = enabled;
 
-        m_editor->Enable(!m_isGameMode);
-
         m_renderScene.Do([this](SR_GRAPH_NS::RenderScene *ptr) {
             ptr->SetOverlayEnabled(!m_isGameMode);
         });
+
+        m_editor->Enable(!m_isGameMode);
     }
 }

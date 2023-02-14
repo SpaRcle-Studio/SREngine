@@ -147,6 +147,9 @@ namespace SR_GRAPH_NS::Memory {
     }
 
     UBOManager::BindResult UBOManager::BindUBO(VirtualUBO virtualUbo) noexcept {
+        auto&& pShader = m_pipeline->GetCurrentShader();
+
+	#ifdef SR_DEBUG
         if (virtualUbo == SR_ID_INVALID) {
             SRHalt("UBOManager::BindUBO() : invalid virtual ubo!");
             return BindResult::Failed;
@@ -157,12 +160,11 @@ namespace SR_GRAPH_NS::Memory {
             return BindResult::Failed;
         }
 
-        auto&& pShader = m_pipeline->GetCurrentShader();
-
         if (!pShader) {
             SRHaltOnce("Current shader is nullptr!");
             return BindResult::Failed;
         }
+	#endif
 
         auto&& info = m_virtualTable[virtualUbo];
         BindResult result = BindResult::Success;
