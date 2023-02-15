@@ -86,6 +86,7 @@ namespace SR_CORE_NS::GUI {
         SR_NODISCARD bool IsDockingEnabled() const { return m_useDocking; }
         SR_NODISCARD SR_GTYPES_NS::Texture* GetIcon(EditorIcon icon) const;
         SR_NODISCARD void* GetIconDescriptor(EditorIcon icon) const;
+        SR_NODISCARD const SR_UTILS_NS::Path GetScenePath() const { return m_scenePath; }
 
         void SetDockingEnabled(bool value) { m_useDocking = value; }
 
@@ -105,6 +106,8 @@ namespace SR_CORE_NS::GUI {
         void Load();
 
     private:
+        SR_UTILS_NS::Path    m_scenePath;
+
         RenderContextPtr m_context = { };
         WindowPtr m_window = { };
 

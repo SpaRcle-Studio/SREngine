@@ -14,6 +14,7 @@
 #include <Utils/ECS/GameObject.h>
 #include <Utils/World/SceneDefaultLogic.h>
 #include <Utils/World/SceneBuilder.h>
+#include <Utils/World/ScenePrefabLogic.h>
 
 namespace SR_WORLD_NS {
     Scene::Scene()
@@ -300,6 +301,10 @@ namespace SR_WORLD_NS {
 
     std::string Scene::GetName() const {
         return m_path.GetBaseName();
+    }
+
+    bool Scene::IsPrefab() const {
+        return dynamic_cast<ScenePrefabLogic*>(m_logic);
     }
 
     void Scene::RegisterGameObject(const Scene::GameObjectPtr &ptr) {

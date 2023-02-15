@@ -24,5 +24,6 @@
         <Pair First="Stop" Second="Editor/Textures/stop.png"/>
         <Pair First="Pause" Second="Editor/Textures/pause-active.png"/>
         <Pair First="PauseActive" Second="Editor/Textures/pause.png"/>
+        <Pair First="Back" Second="Editor/Textures/back.png"/>
     </Icons>
 </Settings>

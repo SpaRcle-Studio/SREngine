@@ -34,12 +34,21 @@ namespace SR_CORE_NS::GUI {
         bool active = m_isActive;
         bool paused = m_isPaused;
 
+        ImGui::PushFont(font);
+        ImGui::PushStyleVar(ImGuiStyleVar_FrameBorderSize, 0.0f);
+
+        ImGui::Separator();
+
+        if (m_scene->IsPrefab())
         {
-            ImGui::PushFont(font);
-            ImGui::PushStyleVar(ImGuiStyleVar_FrameBorderSize, 0.0f);
-
-            ImGui::Separator();
-
+            if (auto&& pDescriptor = GetEditor()->GetIconDescriptor(EditorIcon::Back)) {
+                if (GUISystem::Instance().ImageButton("##imgSceneBackBtn", pDescriptor, SR_MATH_NS::IVector2(32), 3)) {
+                    
+                }
+            }
+        }
+        else 
+        {
             const EditorIcon playIcon = active ? EditorIcon::Stop : EditorIcon::Play;
             if (auto&& pDescriptor = GetEditor()->GetIconDescriptor(playIcon)) {
                 if (GUISystem::Instance().ImageButton("##imgScenePlayBtn", pDescriptor, SR_MATH_NS::IVector2(32), 3) && locked) {
@@ -74,19 +83,18 @@ namespace SR_CORE_NS::GUI {
                     Engine::Instance().SetGameMode(true);
                 }
             }
-
-
-            ImGui::Separator();
-
-            ImGui::PopFont();
-            ImGui::PopStyleVar();
-
-            font->Scale = scale;
-
-            ImGui::Text("%s", m_isActive ? m_scenePath.CStr() : m_lastPath.CStr());
-
-            ImGui::Separator();
         }
+
+        ImGui::Separator();
+
+        ImGui::PopFont();
+        ImGui::PopStyleVar();
+
+        font->Scale = scale;
+
+        ImGui::Text("%s", m_isActive ? m_scenePath.CStr() : m_lastPath.CStr());
+
+        ImGui::Separator();
 
         if (locked) {
             engine.SetActive((m_isActive = active));

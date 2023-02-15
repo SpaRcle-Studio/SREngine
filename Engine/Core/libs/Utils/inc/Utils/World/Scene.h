@@ -58,6 +58,7 @@ namespace SR_WORLD_NS {
 
         SR_NODISCARD std::string GetName() const;
         SR_NODISCARD Path GetPath() const { return m_path; }
+        SR_NODISCARD bool IsPrefab() const;
         SR_NODISCARD SR_HTYPES_NS::DataStorage& GetDataStorage() { return m_dataStorage; }
         SR_NODISCARD const SR_HTYPES_NS::DataStorage& GetDataStorage() const { return m_dataStorage; }
         SR_NODISCARD SR_INLINE SceneBuilder* GetSceneBuilder() const { return m_sceneBuilder; }
@@ -87,7 +88,6 @@ namespace SR_WORLD_NS {
         SceneLogic* m_logic = nullptr;
         SceneBuilder* m_sceneBuilder = nullptr;
 
-        bool m_isPrefab = false;
         bool m_isDestroy = false;
 
         std::atomic<bool>  m_isHierarchyChanged = false;

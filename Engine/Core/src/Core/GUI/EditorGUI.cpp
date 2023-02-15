@@ -106,15 +106,31 @@ namespace SR_CORE_NS::GUI {
             return;
         }
 
-        const auto path = Helper::ResourceManager::Instance().GetCachePath().Concat("Editor/Configs/EditorWidgets.xml");
+        /// widgets
+        {
+            const auto path = Helper::ResourceManager::Instance().GetCachePath().Concat("Editor/Configs/EditorWidgets.xml");
 
-        auto document = Helper::Xml::Document::New();
-        auto widgets = document.Root().AppendChild("Widgets");
+            auto document = Helper::Xml::Document::New();
+            auto widgets = document.Root().AppendChild("Widgets");
 
-        for (auto&& [name, widget] : GetWidgets())
-            widgets.AppendChild("Widget").NAppendAttribute("Name", name).NAppendAttribute("Open", widget->IsOpen());
+            for (auto&& [name, widget] : GetWidgets())
+                widgets.AppendChild("Widget").NAppendAttribute("Name", name).NAppendAttribute("Open", widget->IsOpen());
 
-        document.Save(path.ToString());
+            document.Save(path.ToString());
+        }
+
+        /// scene 
+        if (!m_scenePath.Empty())
+        {
+            const auto path = Helper::ResourceManager::Instance().GetCachePath().Concat("Editor/Configs/Scene.xml");
+
+            auto document = Helper::Xml::Document::New();
+            auto sceneXml = document.Root().AppendChild("Scene");
+
+            sceneXml.AppendAttribute(m_scenePath);
+
+            document.Save(path.ToString());
+        }
     }
 
     void EditorGUI::Load() {

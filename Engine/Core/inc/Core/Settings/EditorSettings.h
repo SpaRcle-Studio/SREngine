@@ -13,6 +13,7 @@ namespace SR_CORE_NS {
           Unknown,
           Material,
           File,
+          Back,
           Play,
           Stop,
           PauseActive,
