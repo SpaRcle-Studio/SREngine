@@ -5,6 +5,8 @@
 #include <Utils/ECS/IComponentable.h>
 #include <Utils/ECS/Component.h>
 #include <Utils/ECS/GameObject.h>
+#include <Utils/World/Scene.h>
+#include <Utils/World/SceneBuilder.h>
 
 namespace SR_UTILS_NS {
     bool IComponentable::IsDirty() const noexcept {
@@ -117,17 +119,17 @@ namespace SR_UTILS_NS {
         return true;
     }
 
-    bool IComponentable::RemoveComponent(Component *component) {
+    bool IComponentable::RemoveComponent(Component *pComponent) {
         for (auto it = m_components.begin(); it != m_components.end(); ++it) {
-            if (*it != component) {
+            if (*it != pComponent) {
                 continue;
             }
 
-            if (component->GetParent() != this) {
+            if (pComponent->GetParent() != this) {
                 SRHalt("Game object not are children!");
             }
 
-            component->OnDestroy();
+            DestroyComponent(pComponent);
 
             m_components.erase(it);
 
@@ -136,7 +138,7 @@ namespace SR_UTILS_NS {
             return true;
         }
 
-        SR_ERROR("IComponentable::RemoveComponent() : component \"" + component->GetComponentName() + "\" not found!");
+        SR_ERROR("IComponentable::RemoveComponent() : component \"" + pComponent->GetComponentName() + "\" not found!");
 
         return false;
     }
@@ -144,7 +146,7 @@ namespace SR_UTILS_NS {
     bool IComponentable::ReplaceComponent(Component *source, Component *destination) {
         for (auto it = m_components.begin(); it != m_components.end(); ++it) {
             if (*it == source) {
-                source->OnDestroy();
+                DestroyComponent(source);
                 *it = destination;
 
                 destination->SetParent(this);
@@ -239,14 +241,22 @@ namespace SR_UTILS_NS {
 
     void IComponentable::DestroyComponents() {
         for (auto&& pComponent : m_components) {
-            pComponent->OnDestroy();
+            DestroyComponent(pComponent);
         }
 
         for (auto&& pComponent : m_loadedComponents) {
-            pComponent->OnDestroy();
+            DestroyComponent(pComponent);
         }
 
         m_loadedComponents.clear();
         m_components.clear();
+    }
+
+    void IComponentable::DestroyComponent(Component* pComponent) {
+        if (auto&& pScene = pComponent->TryGetScene()) {
+            pScene->GetSceneBuilder()->OnDestroyComponent();
+        }
+
+        pComponent->OnDestroy();
     }
 }

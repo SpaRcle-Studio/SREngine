@@ -56,7 +56,7 @@ public:
         }
 
         if (isGrounded && Input::GetKeyDown(KeyCode::Space)) {
-            velocity += FVector3(0, 5, 0);
+            velocity += FVector3(0, 15, 0);
             isMove = true;
         }
 

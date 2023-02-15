@@ -21,9 +21,9 @@ namespace SR_WORLD_NS {
             return;
         }
 
-        const size_t capacity = m_updatableComponents.capacity();
+        m_componentsCapacity = m_updatableComponents.capacity();
         m_updatableComponents.clear();
-        m_updatableComponents.reserve(capacity);
+        m_updatableComponents.reserve(m_componentsCapacity);
 
         for (auto&& pComponent : m_scene->GetComponents()) {
             if (isPaused && !pComponent->ExecuteInEditMode()) {
@@ -66,15 +66,41 @@ namespace SR_WORLD_NS {
     }
 
     void SceneBuilder::Update(float_t dt) {
-        for (auto&& pComponent : m_updatableComponents) {
-            pComponent->Update(dt);
+        auto&& pIt = m_updatableComponents.begin();
+
+    retry:
+        if (pIt == m_updatableComponents.end()) {
+            return;
         }
+
+        (*pIt)->Update(dt);
+
+        if (pIt == m_updatableComponents.end()) {
+            return;
+        }
+
+        ++pIt;
+
+        goto retry;
     }
 
     void SceneBuilder::FixedUpdate() {
-        for (auto&& pComponent : m_updatableComponents) {
-            pComponent->FixedUpdate();
+        auto&& pIt = m_updatableComponents.begin();
+
+    retry:
+        if (pIt == m_updatableComponents.end()) {
+            return;
         }
+
+        (*pIt)->FixedUpdate();
+
+        if (pIt == m_updatableComponents.end()) {
+            return;
+        }
+
+        ++pIt;
+
+        goto retry;
     }
 
     void SceneBuilder::SetDirty() {
@@ -107,5 +133,9 @@ namespace SR_WORLD_NS {
         for (auto&& gameObject : root) {
             gameObject->Start();
         }
+    }
+
+    void SceneBuilder::OnDestroyComponent() {
+        m_updatableComponents.clear();
     }
 }

@@ -25,6 +25,7 @@ namespace SR_HTYPES_NS {
 
 namespace SR_WORLD_NS {
     class SceneLogic;
+    class SceneBuilder;
 
     class SR_DLL_EXPORT Scene : public SR_HTYPES_NS::SafePtr<Scene>, public SR_UTILS_NS::IComponentable {
     public:
@@ -59,6 +60,7 @@ namespace SR_WORLD_NS {
         SR_NODISCARD Path GetPath() const { return m_path; }
         SR_NODISCARD SR_HTYPES_NS::DataStorage& GetDataStorage() { return m_dataStorage; }
         SR_NODISCARD const SR_HTYPES_NS::DataStorage& GetDataStorage() const { return m_dataStorage; }
+        SR_NODISCARD SR_INLINE SceneBuilder* GetSceneBuilder() const { return m_sceneBuilder; }
 
         GameObjects& GetRootGameObjects();
 
@@ -83,13 +85,12 @@ namespace SR_WORLD_NS {
 
     private:
         SceneLogic* m_logic = nullptr;
+        SceneBuilder* m_sceneBuilder = nullptr;
 
         bool m_isPrefab = false;
         bool m_isDestroy = false;
 
         std::atomic<bool>  m_isHierarchyChanged = false;
-
-        Path m_path;
 
         SR_HTYPES_NS::DataStorage m_dataStorage;
 
@@ -97,6 +98,8 @@ namespace SR_WORLD_NS {
 
         GameObjects m_gameObjects;
         GameObjects m_rootObjects;
+
+        Path m_path;
 
     };
 }

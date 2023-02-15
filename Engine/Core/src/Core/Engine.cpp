@@ -693,7 +693,8 @@ namespace SR_CORE_NS {
 
         m_renderScene = m_scene ? m_scene->GetDataStorage().GetValue<RenderScenePtr>() : RenderScenePtr();
         m_physicsScene = m_scene ? m_scene->GetDataStorage().GetValue<PhysicsScenePtr>() : PhysicsScenePtr();
-        m_sceneBuilder = m_scene ? m_scene->GetDataStorage().GetPointer<SR_WORLD_NS::SceneBuilder>() : nullptr;
+
+        m_sceneBuilder = m_scene ? m_scene->GetSceneBuilder() : nullptr;
 
         if (!m_sceneQueue.Empty()) {
             goto repeat;

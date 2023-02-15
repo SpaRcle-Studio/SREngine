@@ -17,7 +17,6 @@
 
 namespace SR_CORE_NS {
     static bool DeInitializeScene(SR_HTYPES_NS::SafePtr<SR_WORLD_NS::Scene>& scene, Engine* pEngine) {
-        auto&& sceneBuilder = scene->GetDataStorage().GetPointer<SR_WORLD_NS::SceneBuilder>();
         auto&& renderScene = scene->GetDataStorage().GetValue<SR_HTYPES_NS::SafePtr<SR_GRAPH_NS::RenderScene>>();
         auto&& physicsScene = scene->GetDataStorage().GetValue<SR_HTYPES_NS::SafePtr<SR_PHYSICS_NS::PhysicsScene>>();
 
@@ -31,8 +30,6 @@ namespace SR_CORE_NS {
             delete pScene;
         });
 
-        SR_SAFE_DELETE_PTR(sceneBuilder);
-
         physicsScene.AutoFree([](SR_PHYSICS_NS::PhysicsScene* pPhysicsScene) {
             delete pPhysicsScene;
         });
@@ -41,8 +38,6 @@ namespace SR_CORE_NS {
     }
 
     static bool InitializeScene(SR_HTYPES_NS::SafePtr<SR_WORLD_NS::Scene>& scene, Engine* pEngine) {
-        auto&& sceneBuilder = new SR_WORLD_NS::SceneBuilder(scene.Get());
-
         SR_HTYPES_NS::SafePtr<SR_GRAPH_NS::RenderScene> renderScene;
         SR_HTYPES_NS::SafePtr<SR_PHYSICS_NS::PhysicsScene> physicsScene;
 
@@ -75,7 +70,6 @@ namespace SR_CORE_NS {
             }
         }
 
-        scene->GetDataStorage().SetPointer(sceneBuilder);
         scene->GetDataStorage().SetValue(renderScene);
         scene->GetDataStorage().SetValue(physicsScene);
 

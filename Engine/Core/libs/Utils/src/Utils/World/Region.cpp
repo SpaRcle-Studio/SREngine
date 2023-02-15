@@ -319,6 +319,7 @@ namespace SR_WORLD_NS {
         }
         else if (m_debugLoadedId != SR_ID_INVALID) {
             SR_UTILS_NS::DebugDraw::Instance().DrawPlane(m_debugLoadedId);
+            m_debugLoadedId = SR_ID_INVALID;
         }
     }
 }

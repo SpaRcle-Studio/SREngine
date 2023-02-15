@@ -62,6 +62,9 @@ namespace SR_UTILS_NS {
         }
 
     protected:
+        void DestroyComponent(Component* pComponent);
+
+    protected:
         bool m_dirty = true;
 
         Components m_components = { };

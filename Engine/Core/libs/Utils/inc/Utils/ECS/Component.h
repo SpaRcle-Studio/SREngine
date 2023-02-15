@@ -84,6 +84,7 @@ namespace SR_UTILS_NS {
         void CheckActivity();
 
         void SetEnabled(bool value);
+        void SetComponentBuildId(uint64_t buildId) { m_componentBuildId = buildId; }
 
         SR_NODISCARD virtual Component* CopyComponent() const;
 
@@ -112,6 +113,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD ScenePtr TryGetScene() const;
         SR_NODISCARD GameObjectPtr GetRoot() const;
         SR_NODISCARD Transform* GetTransform() const noexcept;
+        SR_NODISCARD uint64_t GetComponentBuildId() const noexcept { return m_componentBuildId; }
 
         SR_NODISCARD std::string GetEntityInfo() const override;
 
@@ -128,6 +130,9 @@ namespace SR_UTILS_NS {
         bool m_isActive = false;
         bool m_isAwake = false;
         bool m_isStarted = false;
+
+        /// позиция компонента в списке обновляемых компонентов
+        uint64_t m_componentBuildId = SR_ID_INVALID;
 
         IComponentable* m_parent = nullptr;
 

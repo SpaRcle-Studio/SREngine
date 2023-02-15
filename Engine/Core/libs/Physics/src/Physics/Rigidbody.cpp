@@ -206,7 +206,7 @@ namespace SR_PTYPES_NS {
 
         SetShapeDirty(true);
 
-    #ifdef SR_DEBUG
+    /*#ifdef SR_DEBUG
         SRAssert(m_library);
 
         switch (GetMeasurement()) {
@@ -220,7 +220,7 @@ namespace SR_PTYPES_NS {
                 SRHalt("Unsupported measurement! Type: " + SR_UTILS_NS::EnumReflector::ToString(GetMeasurement()));
                 break;
         }
-    #endif
+    #endif*/
     }
 
     void Rigidbody::OnEnable() {

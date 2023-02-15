@@ -13,10 +13,12 @@
 #include <Utils/ECS/Component.h>
 #include <Utils/ECS/GameObject.h>
 #include <Utils/World/SceneDefaultLogic.h>
+#include <Utils/World/SceneBuilder.h>
 
 namespace SR_WORLD_NS {
     Scene::Scene()
         : Super(this)
+        , m_sceneBuilder(new SR_WORLD_NS::SceneBuilder(this))
     { }
 
     Scene::~Scene() {
@@ -25,6 +27,8 @@ namespace SR_WORLD_NS {
         if (Debug::Instance().GetLevel() >= Debug::Level::Low) {
             SR_LOG("Scene::~Scene() : free \"" + GetName() + "\" scene pointer...");
         }
+
+        SR_SAFE_DELETE_PTR(m_sceneBuilder);
     }
 
     GameObject::Ptr Scene::Instance(const std::string& name) {

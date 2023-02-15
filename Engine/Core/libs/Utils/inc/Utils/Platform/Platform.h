@@ -10,6 +10,7 @@
 #include <Utils/FileSystem/Path.h>
 
 namespace SR_UTILS_NS::Platform {
+    SR_DLL_EXPORT extern void InitSegmentationHandler();
     SR_DLL_EXPORT extern void SetInstance(void* pInstance);
     SR_DLL_EXPORT extern void* GetInstance();
 

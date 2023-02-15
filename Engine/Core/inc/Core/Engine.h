@@ -119,6 +119,7 @@ namespace SR_CORE_NS {
 
         SR_UTILS_NS::CmdManager* m_cmdManager  = nullptr;
         SR_UTILS_NS::InputDispatcher* m_input = nullptr;
+        SR_WORLD_NS::SceneBuilder* m_sceneBuilder = nullptr;
 
         SR_HTYPES_NS::Thread::Ptr m_worldThread = nullptr;
 
@@ -127,7 +128,6 @@ namespace SR_CORE_NS {
 
         RenderScenePtr m_renderScene;
         PhysicsScenePtr m_physicsScene;
-        SR_WORLD_NS::SceneBuilder* m_sceneBuilder = nullptr;
 
         Core::GUI::EditorGUI* m_editor = nullptr;
 
