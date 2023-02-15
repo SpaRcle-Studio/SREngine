@@ -11,9 +11,9 @@
 #include <assimp/include/assimp/cexport.h>
 
 namespace SR_HTYPES_NS {
-    SR_INLINE_STATIC int SR_RAW_MESH_ASSIMP_FLAGS = aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_JoinIdenticalVertices | aiProcess_GenUVCoords | aiProcess_TransformUVCoords | aiProcess_SortByPType | aiProcess_GlobalScale;
+    SR_INLINE_STATIC int SR_RAW_MESH_ASSIMP_FLAGS = aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_MakeLeftHanded | aiProcess_FlipWindingOrder | aiProcess_JoinIdenticalVertices | aiProcess_GenUVCoords | aiProcess_TransformUVCoords | aiProcess_SortByPType | aiProcess_GlobalScale;
     SR_INLINE_STATIC int SR_RAW_MESH_ASSIMP_CACHED_FLAGS = aiProcess_FlipUVs;
-    SR_INLINE_STATIC int SR_RAW_MESH_ASSIMP_ANIMATION_FLAGS = 0;
+    SR_INLINE_STATIC int SR_RAW_MESH_ASSIMP_ANIMATION_FLAGS = aiProcess_MakeLeftHanded | aiProcess_FlipWindingOrder;
 
     RawMesh::RawMesh()
         : IResource(SR_COMPILE_TIME_CRC32_TYPE_NAME(RawMesh), true /** auto remove */)
@@ -185,11 +185,24 @@ namespace SR_HTYPES_NS {
             SR_UTILS_NS::Vertex vertex = SR_UTILS_NS::Vertex();
             vertex.position = *reinterpret_cast<Vec3*>(&mesh->mVertices[i]);
             vertex.uv = hasUV ? (*reinterpret_cast<Vec2*>(&mesh->mTextureCoords[0][i])) : Vec2 { 0.f, 0.f };
+            //vertex.uv.x = -vertex.uv.x;
             vertex.normal = hasNormals ? (*reinterpret_cast<Vec3*>(&mesh->mNormals[i])) : Vec3 { 0.f, 0.f, 0.f };
             vertex.tangent = hasTangents ? (*reinterpret_cast<Vec3*>(&mesh->mTangents[i])) : Vec3 { 0.f, 0.f, 0.f };
             vertex.bitangent = hasTangents ? (*reinterpret_cast<Vec3*>(&mesh->mBitangents[i])) : Vec3 { 0.f, 0.f, 0.f };
+
+            /*vertex.position.x = -vertex.position.x;
+            vertex.normal.x = -vertex.normal.x;
+            vertex.tangent.x = -vertex.tangent.x;
+            vertex.bitangent.x = -vertex.bitangent.x;*/
+
             vertices.emplace_back(vertex);
         }
+
+        //std::reverse(vertices.begin(), vertices.end());
+
+        //for (uint32_t i = 0; i < vertices.size() / 3; i += 3) {
+        //    std::swap(vertices[i + 1], vertices[i + 2]);
+        //}
 
         if (hasBones) {
             auto&& bones = GetBones(id);

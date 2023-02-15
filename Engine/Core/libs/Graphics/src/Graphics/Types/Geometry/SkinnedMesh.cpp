@@ -277,7 +277,7 @@ namespace SR_GTYPES_NS {
 
         if (m_skeleton)
         for (uint64_t boneId = 0; boneId < m_bonesIds.size(); ++boneId) {
-            if (auto&& bone = m_skeleton->GetBoneByIndex(m_bonesIds[boneId])) {
+            if (auto&& bone = m_skeleton->GetBoneByIndex(m_bonesIds[boneId]); bone && bone->gameObject) {
                 m_skeletonMatrices[boneId] = bone->gameObject->GetTransform()->GetMatrix();
             }
             else {
