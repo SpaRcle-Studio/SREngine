@@ -31,6 +31,7 @@
 #include "../Utils/src/Utils/FileSystem/FileSystem.cpp"
 #include "../Utils/src/Utils/FileSystem/Path.cpp"
 #include "../Utils/src/Utils/FileSystem/FileDialog.cpp"
+#include "../Utils/src/Utils/FileSystem/AssimpCache.cpp"
 
 #include "../Utils/src/Utils/Input/InputSystem.cpp"
 #include "../Utils/src/Utils/Input/InputDispatcher.cpp"

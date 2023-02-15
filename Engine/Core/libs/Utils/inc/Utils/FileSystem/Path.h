@@ -24,7 +24,7 @@ namespace SR_UTILS_NS {
         Path(std::wstring path, bool fast = false);
 
         Path(Path&& path) noexcept
-            : m_path(std::exchange(path.m_path, {}))
+            : m_path(SR_UTILS_NS::Exchange(path.m_path, {}))
             , m_name(std::exchange(path.m_name, {}))
             , m_ext(std::exchange(path.m_ext, {}))
             , m_hash(std::exchange(path.m_hash, {}))

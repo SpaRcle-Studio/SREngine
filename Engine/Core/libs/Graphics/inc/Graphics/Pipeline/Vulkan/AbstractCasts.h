@@ -161,25 +161,17 @@ namespace Framework::Graphics::VulkanTools {
         }
     }
 
-    static SR_FORCE_INLINE std::set<VkDescriptorType> CastAbsDescriptorTypeToVk(const std::set<DescriptorType>& descriptorTypes) {
-        std::set<VkDescriptorType> vk = {};
-        for (const auto& type : descriptorTypes) {
-            switch (type) {
-                case DescriptorType::Uniform: {
-                    vk.insert(VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER);
-                    break;
-                }
-                case DescriptorType::CombinedImage: {
-                    vk.insert(VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER);
-                    break;
-                }
-                default: {
-                    SR_ERROR("VulkanTools::CastAbsDescriptorTypeToVk() : unknown type!");
-                    return {};
-                }
+    static SR_FORCE_INLINE std::vector<uint64_t> CastAbsDescriptorTypeToVk(std::vector<uint64_t> descriptorTypes) {
+        for (uint64_t& type : descriptorTypes) {
+            if (type == static_cast<uint64_t>(DescriptorType::Uniform)) {
+                type = static_cast<uint64_t>(VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER);
+            }
+            else if (type == static_cast<uint64_t>(DescriptorType::CombinedImage)) {
+                type = static_cast<uint64_t>(VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER);
             }
         }
-        return vk;
+
+        return std::move(descriptorTypes);
     }
 
     static SR_FORCE_INLINE VkFormat AbstractTextureFormatToVkFormat(const ColorFormat& format) {

@@ -318,11 +318,15 @@ namespace SR_WORLD_NS {
     }
 
     Path SceneCubeChunkLogic::GetRegionsPath() const {
+        /// TODO: cache path
         return m_scene->GetPath().Concat("regions");
     }
 
     bool SceneCubeChunkLogic::Save(const Path &path) {
         SR_LOCK_GUARD
+
+        auto&& currentChunk = CalculateCurrentChunk();
+        m_observer->SetChunk(currentChunk);
 
         UpdateContainers();
         UpdateScope(0.f);
@@ -388,7 +392,7 @@ namespace SR_WORLD_NS {
         const auto regSize = Math::IVector3(m_regionWidth);
         const auto regSize2 = Math::IVector3(m_regionWidth - 1);
 
-        const World::Offset offset = m_observer->m_offset;
+        const World::Offset& offset = m_observer->m_offset;
 
         if (m_observer->m_target) {
             m_observer->m_targetPosition = m_observer->m_target->GetTransform()->GetTranslation().Singular(chunkSize.Cast<Math::Unit>());
@@ -397,18 +401,7 @@ namespace SR_WORLD_NS {
         auto&& lastChunk = m_observer->m_lastChunk;
         auto&& lastRegion = m_observer->m_lastRegion;
 
-        auto&& currentRegion = SR_MATH_NS::IVector3(m_observer->m_targetPosition / chunkSize);
-
-        if (currentRegion.x == 0) { currentRegion.x = -1; }
-        if (currentRegion.y == 0) { currentRegion.y = -1; }
-        if (currentRegion.z == 0) { currentRegion.z = -1; }
-
-        auto&& currentChunk = AddOffset(
-            currentRegion,
-            -offset.m_chunk
-        );
-
-        SRAssertOnce(!currentChunk.HasZero());
+        auto&& currentChunk = CalculateCurrentChunk();
 
         if (lastChunk != currentChunk) {
             if (m_regions.find(lastRegion) != m_regions.end()) {
@@ -463,5 +456,25 @@ namespace SR_WORLD_NS {
         if (m_shiftEnabled) {
             CheckShift(m_observer->m_targetPosition.Cast<int>() / chunkSize);
         }
+    }
+
+    SR_MATH_NS::IVector3 SceneCubeChunkLogic::CalculateCurrentChunk() const {
+        const auto chunkSize = Math::IVector3(m_chunkSize.x, m_chunkSize.y, m_chunkSize.x);
+        const World::Offset& offset = m_observer->m_offset;
+
+        auto&& currentRegion = SR_MATH_NS::IVector3(m_observer->m_targetPosition / chunkSize);
+
+        if (currentRegion.x == 0) { currentRegion.x = -1; }
+        if (currentRegion.y == 0) { currentRegion.y = -1; }
+        if (currentRegion.z == 0) { currentRegion.z = -1; }
+
+        auto&& currentChunk = AddOffset(
+                currentRegion,
+                -offset.m_chunk
+        );
+
+        SRAssertOnce(!currentChunk.HasZero());
+
+        return currentChunk;
     }
 }

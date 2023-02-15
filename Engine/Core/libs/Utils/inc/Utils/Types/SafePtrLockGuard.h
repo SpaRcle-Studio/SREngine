@@ -61,6 +61,35 @@ namespace SR_HTYPES_NS {
         bool m_locked = false;
 
     };
+
+    /// -------------------------------------------------------
+
+    template<typename T> class SingletonRecursiveLockGuard : NonCopyable {
+    public:
+        explicit SingletonRecursiveLockGuard(const T& ptr)
+            : m_ptr(ptr)
+        {
+            if constexpr (std::is_pointer_v<T>) {
+                m_ptr->LockSingleton();
+            }
+            else {
+                m_ptr.LockSingleton();
+            }
+        }
+
+        ~SingletonRecursiveLockGuard() override {
+            if constexpr (std::is_pointer_v<T>) {
+                m_ptr->UnlockSingleton();
+            }
+            else {
+                m_ptr.UnlockSingleton();
+            }
+        }
+
+    private:
+        T m_ptr;
+
+    };
 }
 
 #endif //SRENGINE_SAFEPTRLOCKGUARD_H

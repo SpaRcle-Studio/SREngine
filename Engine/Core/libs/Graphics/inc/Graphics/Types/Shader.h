@@ -85,6 +85,9 @@ namespace SR_GTYPES_NS {
         void SR_FASTCALL SetSampler2D(uint64_t hashId, int32_t sampler) noexcept;
 
     protected:
+        bool IsAllowedToRevive() const override;
+        void ReviveResource() override;
+
         bool Load() override;
         bool Unload() override;
 

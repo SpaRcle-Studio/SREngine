@@ -111,7 +111,7 @@ namespace Framework::Graphics::VulkanTools {
         [[nodiscard]] bool FreeTexture(uint32_t ID);
 
     public:
-        [[nodiscard]] int32_t AllocateDescriptorSet(uint32_t shaderProgram, const std::set<VkDescriptorType>& types);
+        [[nodiscard]] int32_t AllocateDescriptorSet(uint32_t shaderProgram, const std::vector<uint64_t>& types);
 
         [[nodiscard]] int32_t AllocateShaderProgram(EvoVulkan::Types::RenderPass renderPass);
 
@@ -161,7 +161,7 @@ namespace Framework::Graphics::VulkanTools {
         std::pair<uint32_t, int32_t>              m_countUBO                = { 32768 * 2, 0 };
         std::pair<uint32_t, int32_t>              m_countVBO                = { 1000, 0 };
         std::pair<uint32_t, int32_t>              m_countIBO                = { 1000, 0 };
-        std::pair<uint32_t, int32_t>              m_countFBO                = { 15, 0 };
+        std::pair<uint32_t, int32_t>              m_countFBO                = { 75, 0 };
         std::pair<uint32_t, int32_t>              m_countShaderPrograms     = { 50, 0 };
         std::pair<uint32_t, int32_t>              m_countDescriptorSets     = { 32768 * 2, 0 };
         std::pair<uint32_t, int32_t>              m_countTextures           = { 1000, 0 };

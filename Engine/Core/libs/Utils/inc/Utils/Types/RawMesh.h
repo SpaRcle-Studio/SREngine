@@ -66,7 +66,8 @@ namespace SR_UTILS_NS::Types {
 
         bool m_asAnimation = false;
         const aiScene* m_scene = nullptr;
-        Assimp::Importer* m_importer;
+        bool m_fromCache = false;
+        Assimp::Importer* m_importer = nullptr;
 
     };
 }

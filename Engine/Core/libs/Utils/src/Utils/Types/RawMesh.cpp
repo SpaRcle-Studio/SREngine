@@ -23,6 +23,11 @@ namespace SR_HTYPES_NS {
 
     RawMesh::~RawMesh() {
         delete m_importer;
+
+        if (m_fromCache) {
+            delete m_scene;
+            m_scene = nullptr;
+        }
     }
 
     RawMesh *RawMesh::Load(const SR_UTILS_NS::Path &rawPath) {
@@ -70,6 +75,13 @@ namespace SR_HTYPES_NS {
             m_importer->FreeScene();
         }
 
+        if (m_fromCache) {
+            delete m_scene;
+            m_scene = nullptr;
+        }
+
+        m_fromCache = false;
+
         m_bones.clear();
         m_boneOffsets.clear();
 
@@ -92,10 +104,17 @@ namespace SR_HTYPES_NS {
 
         const uint64_t resourceHash = path.GetFileHash();
 
-        const bool supportFastLoad = SR_UTILS_NS::Features::Instance().Enabled("FastModelsLoad", false);
+        bool supportFastLoad = SR_UTILS_NS::Features::Instance().Enabled("FastModelsLoad", false);
 
+    retry:
         if (supportFastLoad && resourceHash == SR_UTILS_NS::FileSystem::ReadHashFromFile(hashFile)) {
-            m_scene = m_importer->ReadFile(binary.ToString(), m_asAnimation ? SR_RAW_MESH_ASSIMP_ANIMATION_FLAGS : SR_RAW_MESH_ASSIMP_CACHED_FLAGS);
+            if ((m_scene = SR_UTILS_NS::AssimpCache::Instance().Load(binary))) {
+                m_fromCache = true;
+            }
+            else {
+                supportFastLoad = false;
+                goto retry;
+            }
         }
         else {
             m_scene = m_importer->ReadFile(path.ToString(), m_asAnimation ? SR_RAW_MESH_ASSIMP_ANIMATION_FLAGS : SR_RAW_MESH_ASSIMP_FLAGS);
@@ -114,6 +133,7 @@ namespace SR_HTYPES_NS {
 
         if (m_scene) {
             CalculateBones();
+            SR_UTILS_NS::AssimpCache::Instance().Save(binary, m_scene);
         }
         else {
             SR_ERROR("RawMesh::Load() : failed to read file! \n\tPath: " + path.ToString() + "\n\tReason: " + m_importer->GetErrorString());

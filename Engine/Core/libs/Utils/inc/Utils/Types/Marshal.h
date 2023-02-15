@@ -42,6 +42,26 @@ namespace SR_HTYPES_NS {
         SR_NODISCARD Marshal ReadBytes(uint64_t count) noexcept;
         SR_NODISCARD Marshal::Ptr ReadBytesPtr(uint64_t count) noexcept;
 
+        void WriteBlock(void* pData, uint64_t size) {
+            Write<uint64_t>(size);
+
+            if (size == 0) {
+                return;
+            }
+
+            write(pData, size);
+        }
+
+        void ReadBlock(void* pDestination) {
+            const auto size = Read<uint64_t>();
+
+            if (size == 0) {
+                return;
+            }
+
+            read(pDestination, size);
+        }
+
         template<typename T> void Write(const T& value) {
             if constexpr (std::is_same_v<T, std::any>) {
                 MarshalUtils::SaveAny<std::any>(*this, value);

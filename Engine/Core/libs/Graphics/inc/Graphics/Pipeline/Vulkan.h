@@ -498,30 +498,27 @@ namespace SR_GRAPH_NS {
 
             return true;
         }
-        SR_FORCE_INLINE int32_t AllocDescriptorSet(const std::set<DescriptorType>& types) override {
+        SR_FORCE_INLINE int32_t AllocDescriptorSet(std::vector<uint64_t> types) override {
+            types = VulkanTools::CastAbsDescriptorTypeToVk(std::move(types));
+
+		#ifdef SR_DEBUG
             if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::Full) {
                 SR_GRAPH_LOG("Vulkan::AllocDescriptorSet() : allocate new descriptor set...");
             }
+		#endif
 
-            auto&& vkTypes = VulkanTools::CastAbsDescriptorTypeToVk(types);
-            if (vkTypes.size() != types.size()) {
-                SR_ERROR("Vulkan::AllocDescriptorSet() : failed to cast abstract descriptor types to vulkan descriptor types!");
+            if (m_currentShaderID < 0) {
+                SR_ERROR("Vulkan::AllocDescriptorSet() : shader program do not set!");
+                SRHaltOnce0();
                 return SR_ID_INVALID;
             }
-            else {
-                if (m_currentShaderID < 0) {
-                    SR_ERROR("Vulkan::AllocDescriptorSet() : shader program do not set!");
-                    SRHaltOnce0();
-                    return SR_ID_INVALID;
-                }
 
-                if (auto&& id = m_memory->AllocateDescriptorSet(m_currentShaderID, vkTypes); id >= 0) {
-                    return id;
-                }
-                else {
-                    SR_ERROR("Vulkan::AllocDescriptorSet() : failed to allocate descriptor set!");
-                    return SR_ID_INVALID;
-                }
+            if (auto&& id = m_memory->AllocateDescriptorSet(m_currentShaderID, types); id >= 0) {
+                return id;
+            }
+            else {
+                SR_ERROR("Vulkan::AllocDescriptorSet() : failed to allocate descriptor set!");
+                return SR_ID_INVALID;
             }
         }
         SR_FORCE_INLINE int32_t AllocDescriptorSetFromTexture(uint32_t textureID) override {
@@ -535,8 +532,11 @@ namespace SR_GRAPH_NS {
                 return -1;
             }
 
-            const std::set<DescriptorType> types = { DescriptorType::CombinedImage };
-            int32_t descriptorSetID = m_memory->AllocateDescriptorSet(m_currentShaderID, VulkanTools::CastAbsDescriptorTypeToVk(types));
+            const static std::vector<uint64_t> types = {
+                    static_cast<uint64_t>(VulkanTools::CastAbsDescriptorTypeToVk(DescriptorType::CombinedImage))
+            };
+
+            int32_t descriptorSetID = m_memory->AllocateDescriptorSet(m_currentShaderID, types);
             if (descriptorSetID < 0) {
                 SR_ERROR("Vulkan::AllocDescriptorSetFromTexture() : failed to allocate descriptor set!");
                 return -1;

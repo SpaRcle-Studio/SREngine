@@ -258,7 +258,7 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD virtual SR_FORCE_INLINE int32_t AllocateUBO(uint32_t uboSize) const { return SR_ID_INVALID; }
 
         virtual SR_FORCE_INLINE bool FreeDescriptorSet(int32_t* descriptorSet) { return false; }
-        virtual SR_FORCE_INLINE int32_t AllocDescriptorSet(const std::set<DescriptorType>& types) { return SR_ID_INVALID; }
+        virtual SR_FORCE_INLINE int32_t AllocDescriptorSet(std::vector<uint64_t> types) { return SR_ID_INVALID; }
         virtual SR_FORCE_INLINE int32_t AllocDescriptorSetFromTexture(uint32_t textureID) { return SR_ID_INVALID; }
         virtual SR_FORCE_INLINE void BindDescriptorSet(const uint32_t& descriptorSet) { m_currentDescriptorSetId = descriptorSet; }
         virtual SR_FORCE_INLINE void ResetDescriptorSet() { m_currentDescriptorSetId = SR_ID_INVALID; }

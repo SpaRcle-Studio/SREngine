@@ -38,6 +38,8 @@ namespace SR_WORLD_NS {
         SR_NODISCARD Path GetRegionsPath() const;
 
     private:
+        SR_NODISCARD SR_MATH_NS::IVector3 CalculateCurrentChunk() const;
+
         bool ReloadConfig();
 
         void CheckShift(const SR_MATH_NS::IVector3& chunk);

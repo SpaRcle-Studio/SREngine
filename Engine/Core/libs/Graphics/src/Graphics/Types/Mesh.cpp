@@ -51,6 +51,8 @@ namespace SR_GRAPH_NS::Types {
 
         static auto&& resourceManager = SR_UTILS_NS::ResourceManager::Instance();
 
+        SR_MAYBE_UNUSED SR_HTYPES_NS::SingletonRecursiveLockGuard lock(&resourceManager);
+
         auto&& path = rawPath.SelfRemoveSubPath(resourceManager.GetResPathRef());
         auto&& resourceId = SR_UTILS_NS::EnumReflector::ToString(type) + "-" + std::to_string(id) + "|" + path.ToString();
 
@@ -121,7 +123,7 @@ namespace SR_GRAPH_NS::Types {
             }
 
             /// отложенная ручная регистрация
-            SR_UTILS_NS::ResourceManager::Instance().RegisterResource(pMesh);
+            resourceManager.RegisterResource(pMesh);
         }
 
         pRawMesh->RemoveUsePoint();
@@ -152,7 +154,6 @@ namespace SR_GRAPH_NS::Types {
     SR_UTILS_NS::IResource *Mesh::CopyResource(IResource *destination) const {
         if (IsDestroyed()) {
             SRHalt("Mesh::CopyResource() : mesh is already destroyed!");
-            return nullptr;
         }
 
         Mesh *mesh = reinterpret_cast<Mesh *>(destination);

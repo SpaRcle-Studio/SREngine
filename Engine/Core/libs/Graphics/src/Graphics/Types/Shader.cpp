@@ -361,4 +361,14 @@ namespace SR_GRAPH_NS::Types {
     SR_SRSL_NS::ShaderType Shader::GetType() const noexcept {
         return m_type;
     }
+
+    bool Shader::IsAllowedToRevive() const {
+        return true;
+    }
+
+    void Shader::ReviveResource() {
+        m_isInit = false;
+        m_hasErrors = false;
+        IResource::ReviveResource();
+    }
 }

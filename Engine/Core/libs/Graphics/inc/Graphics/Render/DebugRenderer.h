@@ -17,6 +17,7 @@ namespace SR_GRAPH_NS {
         explicit DebugRenderer(RenderScene* pRenderScene);
         ~DebugRenderer() override;
 
+        void Init();
         void DeInit();
         void Prepare();
         void Clear();
@@ -45,6 +46,9 @@ namespace SR_GRAPH_NS {
             SR_GTYPES_NS::Mesh* pMesh;
             bool registered;
         };
+
+        SR_GTYPES_NS::Material* m_wireFrameMaterial = nullptr;
+        SR_GTYPES_NS::Material* m_lineMaterial = nullptr;
 
         std::vector<DebugTimedObject> m_timedObjects;
         std::list<uint64_t> m_emptyIds;

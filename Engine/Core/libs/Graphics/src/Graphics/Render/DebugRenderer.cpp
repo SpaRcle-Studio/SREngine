@@ -30,9 +30,31 @@ namespace SR_GRAPH_NS {
         SRAssert(m_timedObjects.size() == m_emptyIds.size());
     }
 
+    void DebugRenderer::Init() {
+        m_wireFrameMaterial = SR_GTYPES_NS::Material::Load("Engine/Materials/Debug/wireframe.mat");
+
+        if (m_wireFrameMaterial) {
+            m_wireFrameMaterial->AddUsePoint();
+        }
+
+        m_lineMaterial = SR_GTYPES_NS::Material::Load("Engine/Materials/Debug/line.mat");
+
+        if (m_lineMaterial) {
+            m_lineMaterial->AddUsePoint();
+        }
+    }
+
     void DebugRenderer::DeInit() {
         SR_LOCK_GUARD
         SR_UTILS_NS::DebugDraw::Instance().RemoveCallbacks(this);
+
+        if (m_wireFrameMaterial) {
+            m_wireFrameMaterial->RemoveUsePoint();
+        }
+
+        if (m_lineMaterial) {
+            m_lineMaterial->RemoveUsePoint();
+        }
     }
 
     void DebugRenderer::Prepare() {
@@ -79,7 +101,7 @@ namespace SR_GRAPH_NS {
     retry:
         if (id == SR_ID_INVALID) {
             auto&& pDebugLine = new SR_GTYPES_NS::DebugLine(start, end, color);
-            pDebugLine->SetMaterial(SR_GTYPES_NS::Material::Load("Engine/Materials/Debug/line.mat"));
+            pDebugLine->SetMaterial(m_lineMaterial);
             pDebugLine->AddUsePoint();
             return AddTimedObject(time, pDebugLine);
         }
@@ -118,12 +140,12 @@ namespace SR_GRAPH_NS {
 
         if (id == SR_ID_INVALID) {
             SR_GTYPES_NS::DebugWireframeMesh* pMesh = dynamic_cast<SR_GTYPES_NS::DebugWireframeMesh *>(
-                    SR_GTYPES_NS::Mesh::Load(path, SR_GTYPES_NS::MeshType::Wireframe, 0)
+                    SR_GTYPES_NS::Mesh::Load(SR_UTILS_NS::Path(path, true /** fast */), SR_GTYPES_NS::MeshType::Wireframe, 0)
             );
 
             if (pMesh) {
                 pMesh->SetColor(color);
-                pMesh->SetMaterial("Engine/Materials/Debug/wireframe.mat");
+                pMesh->SetMaterial(m_wireFrameMaterial);
                 pMesh->SetMatrix(SR_MATH_NS::Matrix4x4(pos, rot, scale));
                 pMesh->AddUsePoint();
 

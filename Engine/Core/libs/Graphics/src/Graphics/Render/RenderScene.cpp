@@ -21,7 +21,9 @@ namespace SR_GRAPH_NS {
         , m_context(pContext)
         , m_opaque(&m_transparent)
         , m_transparent(&m_opaque)
-    { }
+    {
+        m_debugRender->Init();
+    }
 
     RenderScene::~RenderScene() {
         if (m_debugRender) {
