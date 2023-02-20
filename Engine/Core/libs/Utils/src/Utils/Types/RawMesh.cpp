@@ -99,27 +99,28 @@ namespace SR_HTYPES_NS {
         }
 
         Path&& cache = ResourceManager::Instance().GetCachePath().Concat("Models").Concat(GetResourceId());
-        Path&& binary = cache.ConcatExt("assbin");
+        Path&& binary = cache.ConcatExt("cache");
         Path&& hashFile = cache.ConcatExt("hash");
 
         const uint64_t resourceHash = path.GetFileHash();
 
-        bool supportFastLoad = SR_UTILS_NS::Features::Instance().Enabled("FastModelsLoad", false);
+        const bool supportFastLoad = SR_UTILS_NS::Features::Instance().Enabled("FastModelsLoad", false);
+        bool needFastLoad = supportFastLoad;
 
     retry:
-        if (supportFastLoad && resourceHash == SR_UTILS_NS::FileSystem::ReadHashFromFile(hashFile)) {
+        if (needFastLoad && resourceHash == SR_UTILS_NS::FileSystem::ReadHashFromFile(hashFile)) {
             if ((m_scene = SR_UTILS_NS::AssimpCache::Instance().Load(binary))) {
                 m_fromCache = true;
             }
             else {
-                supportFastLoad = false;
+                needFastLoad = false;
                 goto retry;
             }
         }
         else {
             m_scene = m_importer->ReadFile(path.ToString(), m_asAnimation ? SR_RAW_MESH_ASSIMP_ANIMATION_FLAGS : SR_RAW_MESH_ASSIMP_FLAGS);
 
-            if (supportFastLoad) {
+            if (needFastLoad) {
                 SR_LOG("RawMesh::Load() : export model to cache... \n\tPath: " + binary.ToString());
 
                 Assimp::Exporter exporter;
@@ -131,9 +132,12 @@ namespace SR_HTYPES_NS {
             }
         }
 
+        if (m_scene && !m_fromCache && supportFastLoad) {
+            SR_UTILS_NS::AssimpCache::Instance().Save(binary, m_scene);
+        }
+
         if (m_scene) {
             CalculateBones();
-            SR_UTILS_NS::AssimpCache::Instance().Save(binary, m_scene);
         }
         else {
             SR_ERROR("RawMesh::Load() : failed to read file! \n\tPath: " + path.ToString() + "\n\tReason: " + m_importer->GetErrorString());
