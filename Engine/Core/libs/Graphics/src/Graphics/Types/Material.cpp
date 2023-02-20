@@ -61,8 +61,6 @@ namespace SR_GTYPES_NS {
     }
 
     Material* Material::Load(SR_UTILS_NS::Path rawPath) {
-        SR_GLOBAL_LOCK
-
         static auto&& resourceManager = SR_UTILS_NS::ResourceManager::Instance();
 
         Material* pMaterial = nullptr;

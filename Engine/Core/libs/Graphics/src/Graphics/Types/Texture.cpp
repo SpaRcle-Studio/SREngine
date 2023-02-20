@@ -62,37 +62,42 @@ namespace SR_GTYPES_NS {
     }
 
     Texture* Texture::Load(const std::string& rawPath, const std::optional<Memory::TextureConfig>& config) {
-        SR_GLOBAL_LOCK
+        static auto&& resourceManager = SR_UTILS_NS::ResourceManager::Instance();
 
-        SR_UTILS_NS::Path&& path = SR_UTILS_NS::Path(rawPath).RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetResPath());
+        Texture* pTexture = nullptr;
 
-        if (auto&& pResource = SR_UTILS_NS::ResourceManager::Instance().Find<Texture>(path)) {
-            if (config && pResource->m_config != config.value()) {
-                SR_WARN("Texture::Load() : copy values do not match load values.");
+        resourceManager.Execute([&]() {
+            SR_UTILS_NS::Path&& path = SR_UTILS_NS::Path(rawPath).RemoveSubPath(resourceManager.GetResPath());
+
+            if (pTexture = SR_UTILS_NS::ResourceManager::Instance().Find<Texture>(path)) {
+                if (config && pTexture->m_config != config.value()) {
+                    SR_WARN("Texture::Load() : copy values do not match load values.");
+                }
+
+                return;
             }
 
-            return pResource;
-        }
+            pTexture = new Texture();
 
-        auto&& pTexture = new Texture();
+            if (config) {
+                pTexture->SetConfig(config.value());
+            }
+            else {
+                pTexture->SetConfig(Memory::TextureConfig());
+            }
 
-        if (config) {
-            pTexture->SetConfig(config.value());
-        }
-        else {
-            pTexture->SetConfig(Memory::TextureConfig());
-        }
+            pTexture->SetId(path, false /** auto register */);
 
-        pTexture->SetId(path, false /** auto register */);
+            if (!pTexture->Load()) {
+                SR_ERROR("Texture::Load() : failed to load texture! \n\tPath: " + path.ToString());
+                delete pTexture;
+                pTexture = nullptr;
+                return;
+            }
 
-        if (!pTexture->Load()) {
-            SR_ERROR("Texture::Load() : failed to load texture! \n\tPath: " + path.ToString());
-            delete pTexture;
-            return nullptr;
-        }
-
-        /// отложенная ручная регистрация
-        SR_UTILS_NS::ResourceManager::Instance().RegisterResource(pTexture);
+            /// отложенная ручная регистрация
+            SR_UTILS_NS::ResourceManager::Instance().RegisterResource(pTexture);
+        });
 
         return pTexture;
     }
