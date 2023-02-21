@@ -28,7 +28,7 @@ namespace SR_HTYPES_NS {
 namespace SR_UTILS_NS {
     class AssimpCache final : public Singleton<AssimpCache> {
         friend class Singleton<AssimpCache>;
-        static const uint64_t VERSION = 1009;
+        static const uint64_t VERSION = 1010;
         static const uint8_t SR_ASSIMP_MAX_NUMBER_OF_COLOR_SETS;
         static const uint8_t SR_ASSIMP_MAX_NUMBER_OF_TEXTURECOORDS;
         using NodeIndex = uint64_t;
@@ -45,6 +45,9 @@ namespace SR_UTILS_NS {
 
         void SaveSkeletons(SR_HTYPES_NS::Marshal* pMarshal, const aiScene* pScene) const;
         void LoadSkeletons(SR_HTYPES_NS::Marshal* pMarshal, aiScene* pScene) const;
+
+        void SaveAnimations(SR_HTYPES_NS::Marshal* pMarshal, const aiScene* pScene) const;
+        void LoadAnimations(SR_HTYPES_NS::Marshal* pMarshal, aiScene* pScene) const;
 
         void SaveNode(SR_HTYPES_NS::Marshal* pMarshal, const aiNode* pNode) const;
         void LoadNode(SR_HTYPES_NS::Marshal* pMarshal, aiNode*& pNode) const;

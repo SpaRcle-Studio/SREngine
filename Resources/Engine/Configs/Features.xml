@@ -24,7 +24,7 @@
 
        <RayTracing Value="true"/>
 
-       <FastModelsLoad Value="false"/>
+       <FastModelsLoad Value="true"/>
 
        <Renderer Value="true"/>
        <Physics Value="true"/>

@@ -29,8 +29,8 @@ namespace SR_UTILS_NS {
         }
 
         SaveMeshes(&marshal, pScene);
-
         SaveSkeletons(&marshal, pScene);
+        SaveAnimations(&marshal, pScene);
 
         return marshal.Save(path);
     }
@@ -56,10 +56,208 @@ namespace SR_UTILS_NS {
         }
 
         LoadMeshes(&marshal, pScene);
-
         LoadSkeletons(&marshal, pScene);
+        LoadAnimations(&marshal, pScene);
 
         return pScene;
+    }
+
+    void AssimpCache::SaveAnimations(SR_HTYPES_NS::Marshal* pMarshal, const aiScene* pScene) const {
+        pMarshal->Write<uint64_t>(pScene->mNumAnimations);
+
+        for (uint64_t animationId = 0; animationId < pScene->mNumAnimations; ++animationId) {
+            auto&& pAnimation = pScene->mAnimations[animationId];
+
+            pMarshal->Write<std::string>(std::string(pAnimation->mName.C_Str()));
+            pMarshal->Write<double_t>(pAnimation->mDuration);
+            pMarshal->Write<double_t>(pAnimation->mTicksPerSecond);
+
+            pMarshal->Write<uint64_t>(pAnimation->mNumChannels);
+
+            for (uint64_t channelId = 0; channelId < pAnimation->mNumChannels; ++channelId) {
+                auto&& pChannel = pAnimation->mChannels[channelId];
+
+                pMarshal->Write<std::string>(std::string(pChannel->mNodeName.C_Str()));
+                pMarshal->Write<uint64_t>(pChannel->mPreState);
+                pMarshal->Write<uint64_t>(pChannel->mPostState);
+
+                pMarshal->Write<bool>(pChannel->mPositionKeys);
+                if (pChannel->mPositionKeys) {
+                    pMarshal->Write<uint64_t>(pChannel->mNumPositionKeys);
+                    pMarshal->WriteBlock((void*)pChannel->mPositionKeys, pChannel->mNumPositionKeys * sizeof(aiVectorKey));
+                }
+
+                pMarshal->Write<bool>(pChannel->mRotationKeys);
+                if (pChannel->mRotationKeys) {
+                    pMarshal->Write<uint64_t>(pChannel->mNumRotationKeys);
+                    pMarshal->WriteBlock((void*)pChannel->mRotationKeys, pChannel->mNumRotationKeys * sizeof(aiQuatKey));
+                }
+
+                pMarshal->Write<bool>(pChannel->mScalingKeys);
+                if (pChannel->mScalingKeys) {
+                    pMarshal->Write<uint64_t>(pChannel->mNumScalingKeys);
+                    pMarshal->WriteBlock((void*)pChannel->mScalingKeys, pChannel->mNumScalingKeys * sizeof(aiVectorKey));
+                }
+            }
+
+            pMarshal->Write<uint64_t>(pAnimation->mNumMeshChannels);
+
+            for (uint64_t meshChannelId = 0; meshChannelId < pAnimation->mNumMeshChannels; ++meshChannelId) {
+                auto&& pMeshChannel = pAnimation->mMeshChannels[meshChannelId];
+
+                pMarshal->Write<std::string>(std::string(pMeshChannel->mName.C_Str()));
+
+                pMarshal->Write<bool>(pMeshChannel->mKeys);
+                if (pMeshChannel->mKeys) {
+                    pMarshal->Write<uint64_t>(pMeshChannel->mNumKeys);
+                    pMarshal->WriteBlock((void*)pMeshChannel->mKeys, pMeshChannel->mNumKeys * sizeof(aiMeshKey));
+                }
+            }
+
+            pMarshal->Write<uint64_t>(pAnimation->mNumMorphMeshChannels);
+
+            for (uint64_t morphMeshChannelId = 0; morphMeshChannelId < pAnimation->mNumMorphMeshChannels; ++morphMeshChannelId) {
+                auto&& pMorphMeshChannel = pAnimation->mMorphMeshChannels[morphMeshChannelId];
+
+                pMarshal->Write<std::string>(std::string(pMorphMeshChannel->mName.C_Str()));
+
+                pMarshal->Write<uint64_t>(pMorphMeshChannel->mNumKeys);
+
+                for (uint64_t keyId = 0; keyId < pMorphMeshChannel->mNumKeys; ++keyId) {
+                    auto&& key = pMorphMeshChannel->mKeys[keyId];
+
+                    pMarshal->Write<double_t>(key.mTime);
+                    pMarshal->Write<uint64_t>(key.mNumValuesAndWeights);
+
+                    if (key.mNumValuesAndWeights > 0) {
+                        pMarshal->WriteBlock((void *) key.mValues, key.mNumValuesAndWeights * sizeof(uint32_t));
+                        pMarshal->WriteBlock((void *) key.mWeights, key.mNumValuesAndWeights * sizeof(double_t));
+                    }
+                }
+            }
+        }
+    }
+
+    void AssimpCache::LoadAnimations(SR_HTYPES_NS::Marshal* pMarshal, aiScene* pScene) const {
+        pScene->mNumAnimations = pMarshal->Read<uint64_t>();
+        if (pScene->mNumAnimations > 0) {
+            pScene->mAnimations = new aiAnimation*[pScene->mNumAnimations];
+        }
+        else {
+            pScene->mAnimations = nullptr;
+        }
+
+        for (uint64_t animationId = 0; animationId < pScene->mNumAnimations; ++animationId) {
+            auto&& pAnimation = pScene->mAnimations[animationId];
+            pAnimation = new aiAnimation();
+
+            pAnimation->mName = pMarshal->Read<std::string>();
+            pAnimation->mDuration = pMarshal->Read<double_t>();
+            pAnimation->mTicksPerSecond = pMarshal->Read<double_t>();
+
+            pAnimation->mNumChannels = pMarshal->Read<uint64_t>();
+            if (pAnimation->mNumChannels > 0) {
+                pAnimation->mChannels = new aiNodeAnim*[pAnimation->mNumChannels];
+            }
+            else {
+                pAnimation->mChannels = nullptr;
+            }
+
+            for (uint64_t channelId = 0; channelId < pAnimation->mNumChannels; ++channelId) {
+                auto&& pChannel = pAnimation->mChannels[channelId];
+                pChannel = new aiNodeAnim();
+
+                pChannel->mNodeName = pMarshal->Read<std::string>();
+                pChannel->mPreState = static_cast<aiAnimBehaviour>(pMarshal->Read<uint64_t>());
+                pChannel->mPostState = static_cast<aiAnimBehaviour>(pMarshal->Read<uint64_t>());
+
+                if (pMarshal->Read<bool>()) {
+                    pChannel->mNumPositionKeys = pMarshal->Read<uint64_t>();
+                    pChannel->mPositionKeys = new aiVectorKey[pChannel->mNumPositionKeys];
+                    pMarshal->ReadBlock((void*)pChannel->mPositionKeys);
+                }
+                else {
+                    pChannel->mPositionKeys = nullptr;
+                }
+
+                if (pMarshal->Read<bool>()) {
+                    pChannel->mNumRotationKeys = pMarshal->Read<uint64_t>();
+                    pChannel->mRotationKeys = new aiQuatKey[pChannel->mNumRotationKeys];
+                    pMarshal->ReadBlock((void*)pChannel->mRotationKeys);
+                }
+                else {
+                    pChannel->mRotationKeys = nullptr;
+                }
+
+                if (pMarshal->Read<bool>()) {
+                    pChannel->mNumScalingKeys = pMarshal->Read<uint64_t>();
+                    pChannel->mScalingKeys = new aiVectorKey[pChannel->mNumScalingKeys];
+                    pMarshal->ReadBlock((void*)pChannel->mScalingKeys);
+                }
+                else {
+                    pChannel->mScalingKeys = nullptr;
+                }
+            }
+
+            pAnimation->mNumMeshChannels = pMarshal->Read<uint64_t>();
+            if (pAnimation->mNumMeshChannels > 0) {
+                pAnimation->mMeshChannels = new aiMeshAnim*[pAnimation->mNumMeshChannels];
+            }
+            else {
+                pAnimation->mMeshChannels = nullptr;
+            }
+
+            for (uint64_t meshChannelId = 0; meshChannelId < pAnimation->mNumMeshChannels; ++meshChannelId) {
+                auto&& pMeshChannel = pAnimation->mMeshChannels[meshChannelId];
+                pMeshChannel = new aiMeshAnim();
+
+                pMeshChannel->mName = pMarshal->Read<std::string>();
+
+                if (pMarshal->Read<bool>()) {
+                    pMeshChannel->mNumKeys = pMarshal->Read<uint64_t>();
+                    pMeshChannel->mKeys = new aiMeshKey[pMeshChannel->mNumKeys];
+                    pMarshal->ReadBlock((void*)pMeshChannel->mKeys);
+                }
+                else {
+                    pMeshChannel->mKeys = nullptr;
+                }
+            }
+
+            pAnimation->mNumMorphMeshChannels = pMarshal->Read<uint64_t>();
+            if (pAnimation->mNumMorphMeshChannels > 0) {
+                pAnimation->mMorphMeshChannels = new aiMeshMorphAnim*[pAnimation->mNumMorphMeshChannels];
+            }
+            else {
+                pAnimation->mMorphMeshChannels = nullptr;
+            }
+
+            for (uint64_t morphMeshChannelId = 0; morphMeshChannelId < pAnimation->mNumMorphMeshChannels; ++morphMeshChannelId) {
+                auto&& pMorphMeshChannel = pAnimation->mMorphMeshChannels[morphMeshChannelId];
+                pMorphMeshChannel = new aiMeshMorphAnim();
+
+                pMorphMeshChannel->mName = pMarshal->Read<std::string>();
+
+                pMorphMeshChannel->mNumKeys = pMarshal->Read<uint64_t>();
+                if (pMorphMeshChannel->mNumKeys > 0) {
+                    pMorphMeshChannel->mKeys = new aiMeshMorphKey[pMorphMeshChannel->mNumKeys];
+                }
+                else {
+                    pMorphMeshChannel->mKeys = nullptr;
+                }
+
+                for (uint64_t keyId = 0; keyId < pMorphMeshChannel->mNumKeys; ++keyId) {
+                    auto&& key = pMorphMeshChannel->mKeys[keyId];
+
+                    key.mTime = pMarshal->Read<double_t>();
+                    key.mNumValuesAndWeights = pMarshal->Read<uint64_t>();
+
+                    if (key.mNumValuesAndWeights > 0) {
+                        pMarshal->ReadBlock((void*)key.mValues);
+                        pMarshal->ReadBlock((void*)key.mWeights);
+                    }
+                }
+            }
+        }
     }
 
     void AssimpCache::SaveSkeletons(SR_HTYPES_NS::Marshal* pMarshal, const aiScene* pScene) const {
