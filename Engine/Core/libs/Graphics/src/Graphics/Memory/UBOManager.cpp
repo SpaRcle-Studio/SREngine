@@ -224,8 +224,14 @@ namespace SR_GRAPH_NS::Memory {
     }
 
     UBOManager::VirtualUBO UBOManager::ReAllocateUBO(VirtualUBO virtualUbo, uint32_t uboSize, uint32_t samples) {
+        EVK_PUSH_LOG_LEVEL(EvoVulkan::Tools::LogLevel::ErrorsOnly);
+
         if (virtualUbo == SR_ID_INVALID) {
-            return AllocateUBO(uboSize, samples);
+            const auto&& virtualUBO = AllocateUBO(uboSize, samples);
+
+            EVK_POP_LOG_LEVEL();
+
+            return virtualUBO;
         }
 
         auto&& pShader = m_pipeline->GetCurrentShader();
@@ -233,6 +239,7 @@ namespace SR_GRAPH_NS::Memory {
 
         if (shaderProgram == SR_ID_INVALID) {
             SR_ERROR("UBOManager::ReAllocateUBO() : shader program do not set!");
+            EVK_POP_LOG_LEVEL();
             return virtualUbo;
         }
 
@@ -250,6 +257,8 @@ namespace SR_GRAPH_NS::Memory {
 
         if (!AllocMemory(&ubo, &descriptor, uboSize, samples, shaderProgram)) {
             SR_ERROR("UBOManager::ReAllocateUBO() : failed to allocate memory!");
+            EVK_POP_LOG_LEVEL();
+            return virtualUbo;
         }
 
         VirtualUBOInfo::ShaderInfo shaderInfo;
@@ -264,6 +273,8 @@ namespace SR_GRAPH_NS::Memory {
                 ubo,
                 shaderInfo
         });
+
+        EVK_POP_LOG_LEVEL();
 
         return virtualUbo;
     }

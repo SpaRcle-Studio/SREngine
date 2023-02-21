@@ -280,7 +280,9 @@ namespace SR_GTYPES_NS {
     }
 
     bool Material::Reload() {
-        SR_LOG("Material::Reload() : reloading \"" + std::string(GetResourceId()) + "\" material...");
+        if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::Medium) {
+            SR_LOG("Material::Reload() : reloading \"" + std::string(GetResourceId()) + "\" material...");
+        }
 
         m_loadState = LoadState::Reloading;
 

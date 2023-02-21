@@ -23,6 +23,7 @@
 #include <Graphics/Animations/Skeleton.h>
 #include <Graphics/Animations/Animator.h>
 #include <Graphics/Types/Geometry/Mesh3D.h>
+#include <Graphics/Types/Shader.h>
 #include <Graphics/Types/Geometry/SkinnedMesh.h>
 #include <Graphics/Types/Geometry/ProceduralMesh.h>
 #include <Graphics/GUI/Utils.h>
@@ -308,6 +309,9 @@ namespace SR_CORE_NS::GUI {
 
         if (!pComponent->IsSkeletonUsable())
             ImGui::TextColored(ImVec4(1, 1, 0, 1), "No bones from skeleton to draw!");
+
+        if (!pComponent->GetMaterial() || !pComponent->GetMaterial()->GetShader() || pComponent->GetMaterial()->GetShader()->GetType() != SR_SRSL_NS::ShaderType::Skinned)
+            ImGui::TextColored(ImVec4(1, 0, 0, 1), "Invalid material!");
 
         auto&& pMaterial = pComponent->GetMaterial();
 

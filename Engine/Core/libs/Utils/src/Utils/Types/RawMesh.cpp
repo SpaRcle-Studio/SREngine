@@ -211,6 +211,8 @@ namespace SR_HTYPES_NS {
         if (hasBones) {
             auto&& bones = GetBones(id);
 
+            bool hasWarn = false;
+
             for (uint32_t i = 0; i < mesh->mNumBones; i++) {
                 for (uint32_t j = 0; j < mesh->mBones[i]->mNumWeights; j++) {
                     auto&& vertex = vertices[mesh->mBones[i]->mWeights[j].mVertexId];
@@ -218,8 +220,11 @@ namespace SR_HTYPES_NS {
                     vertex.weightsNum++;
 
                     if (vertex.weightsNum > SR_MAX_BONES_ON_VERTEX) {
-                        SR_WARN(SR_FORMAT("RawMesh::GetVertices() : number of weights on vertex is already %i. Some weights will be omitted! VertexID = %i. weightsNum = %i",
-                                          SR_MAX_BONES_ON_VERTEX, mesh->mBones[i]->mWeights[j].mVertexId, vertex.weightsNum));
+                        if (!hasWarn) {
+                            SR_WARN(SR_FORMAT("RawMesh::GetVertices() : number of weights on vertex is already %i. Some weights will be omitted! VertexID = %i. weightsNum = %i",
+                                SR_MAX_BONES_ON_VERTEX, mesh->mBones[i]->mWeights[j].mVertexId, vertex.weightsNum));
+                            hasWarn = true;
+                        }
                         continue;
                     }
 
@@ -234,7 +239,7 @@ namespace SR_HTYPES_NS {
                 for (auto&& [boneId, weight] : vertex.weights) {
                     sum += weight;
                 }
-                SRAssert(SR_EQUALS(sum, 1.f));
+                SRAssertOnce(SR_EQUALS(sum, 1.f));
             }
         #endif
         }

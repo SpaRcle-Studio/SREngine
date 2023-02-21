@@ -172,7 +172,7 @@ namespace SR_GTYPES_NS {
             return false;
         }
 
-        if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::None) {
+        if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::High) {
             SR_LOG("Texture::Calculate() : calculating \"" + std::string(GetResourceId()) + "\" texture...");
         }
 
@@ -180,11 +180,15 @@ namespace SR_GTYPES_NS {
             SRVerifyFalse(!m_pipeline->FreeTexture(&m_id));
         }
 
+        EVK_PUSH_LOG_LEVEL(EvoVulkan::Tools::LogLevel::ErrorsOnly);
+
         // TODO: to refactoring
         m_id = m_pipeline->CalculateTexture(m_data,
                 m_config.m_format, m_width, m_height, m_config.m_filter,
                 m_config.m_compression, m_config.m_mipLevels,
                 m_config.m_alpha == SR_UTILS_NS::BoolExt::None, m_config.m_cpuUsage);
+
+        EVK_POP_LOG_LEVEL();
 
         if (m_id == SR_ID_INVALID) {
             SR_ERROR("Texture::Calculate() : failed to calculate the texture!");

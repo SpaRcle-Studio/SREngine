@@ -22,7 +22,9 @@ namespace SR_UTILS_NS {
                 }
 
                 if (pResource->IsAllowedToRevive()) {
-                    SR_LOG("ResourceType::Find() : revive resource \"" + pResource->GetResourceId() + "\"");
+                    if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::Medium) {
+                        SR_LOG("ResourceType::Find() : revive resource \"" + pResource->GetResourceId() + "\"");
+                    }
                     pResource->ReviveResource();
                     return false;
                 }

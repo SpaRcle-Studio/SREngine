@@ -13,6 +13,7 @@ namespace Assimp {
 
 class aiScene;
 class aiNode;
+class aiMesh;
 
 template<typename T> struct aiColor4t;
 typedef aiColor4t<float> aiColor4DFwd;
@@ -27,14 +28,24 @@ namespace SR_HTYPES_NS {
 namespace SR_UTILS_NS {
     class AssimpCache final : public Singleton<AssimpCache> {
         friend class Singleton<AssimpCache>;
-        static const uint64_t VERSION = 1004;
+        static const uint64_t VERSION = 1009;
         static const uint8_t SR_ASSIMP_MAX_NUMBER_OF_COLOR_SETS;
         static const uint8_t SR_ASSIMP_MAX_NUMBER_OF_TEXTURECOORDS;
+        using NodeIndex = uint64_t;
+        using MeshIndex = uint64_t;
+        using NodeMap = std::pair<std::vector<aiNode*>, std::unordered_map<aiNode*, NodeIndex>>;
+        using MeshMap = std::pair<std::vector<aiMesh*>, std::unordered_map<aiMesh*, MeshIndex>>;
     public:
         bool Save(const SR_UTILS_NS::Path& path, const aiScene* pScene) const;
         aiScene* Load(const SR_UTILS_NS::Path& path) const;
 
     private:
+        SR_NODISCARD NodeMap BuildNodeMap(const aiScene* pScene) const;
+        SR_NODISCARD MeshMap BuildMeshMap(const aiScene* pScene) const;
+
+        void SaveSkeletons(SR_HTYPES_NS::Marshal* pMarshal, const aiScene* pScene) const;
+        void LoadSkeletons(SR_HTYPES_NS::Marshal* pMarshal, aiScene* pScene) const;
+
         void SaveNode(SR_HTYPES_NS::Marshal* pMarshal, const aiNode* pNode) const;
         void LoadNode(SR_HTYPES_NS::Marshal* pMarshal, aiNode*& pNode) const;
 

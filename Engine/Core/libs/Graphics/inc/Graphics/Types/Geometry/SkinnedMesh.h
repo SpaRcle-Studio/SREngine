@@ -44,7 +44,7 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD SR_FORCE_INLINE bool IsCanUpdate() const noexcept override { return true; }
 
     private:
-        void FindSkeleton(SR_UTILS_NS::GameObject::Ptr gameObject);
+        SR_NODISCARD SR_ANIMATIONS_NS::Skeleton* FindSkeleton(SR_UTILS_NS::GameObject::Ptr gameObject) const;
         void PopulateSkeletonMatrices();
 
         void SetRawMesh(SR_HTYPES_NS::RawMesh* raw);
@@ -68,7 +68,6 @@ namespace SR_GTYPES_NS {
         SR_ANIMATIONS_NS::Skeleton* m_skeleton = nullptr;
 
         bool m_isOffsetsInitialized = false;
-        bool m_isSkeletonDeleted = false;
 
         std::vector<uint64_t> m_bonesIds;
 

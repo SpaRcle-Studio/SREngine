@@ -95,6 +95,8 @@ int main(int argc, char **argv) {
     Debug::Instance().Init(exe, true, Debug::Theme::Dark);
     Debug::Instance().SetLevel(Debug::Level::Low);
 
+    SR_PLATFORM_NS::InitSegmentationHandler();
+
     Thread::Factory::Instance().SetMainThread();
     SR_HTYPES_NS::Time::Instance().Update();
 

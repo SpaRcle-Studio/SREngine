@@ -91,7 +91,7 @@ namespace SR_GRAPH_NS::Memory {
     void ShaderUBOBlock::SetField(uint64_t hashId, const void *data) noexcept {
         SRAssert2(m_initialized, "Not initialized!");
 
-        if (!m_memory) {
+        if (!data || !m_memory) {
             return;
         }
 

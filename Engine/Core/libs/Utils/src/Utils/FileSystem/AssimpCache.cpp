@@ -23,12 +23,14 @@ namespace SR_UTILS_NS {
         marshal.Write<std::string>(std::string(pScene->mName.C_Str()));
         marshal.Write<uint64_t>(pScene->mFlags);
 
-        SaveMeshes(&marshal, pScene);
-
         marshal.Write<bool>(pScene->mRootNode); /// has root node
         if (pScene->mRootNode) {
             SaveNode(&marshal, pScene->mRootNode);
         }
+
+        SaveMeshes(&marshal, pScene);
+
+        SaveSkeletons(&marshal, pScene);
 
         return marshal.Save(path);
     }
@@ -49,16 +51,129 @@ namespace SR_UTILS_NS {
         pScene->mName = marshal.Read<std::string>();
         pScene->mFlags = marshal.Read<uint64_t>();
 
-        LoadMeshes(&marshal, pScene);
-
         if (marshal.Read<bool>()) { /// has root node
             LoadNode(&marshal, pScene->mRootNode);
         }
 
+        LoadMeshes(&marshal, pScene);
+
+        LoadSkeletons(&marshal, pScene);
+
         return pScene;
     }
 
+    void AssimpCache::SaveSkeletons(SR_HTYPES_NS::Marshal* pMarshal, const aiScene* pScene) const {
+        auto&& nodeMap = BuildNodeMap(pScene);
+        auto&& meshMap = BuildMeshMap(pScene);
+
+        pMarshal->Write<uint64_t>(pScene->mNumSkeletons);
+
+        if (pScene->mNumSkeletons == 0) {
+            return;
+        }
+
+        for (uint64_t skeletonId = 0; skeletonId < pScene->mNumSkeletons; ++skeletonId) {
+            auto&& pSkeleton = pScene->mSkeletons[skeletonId];
+
+            pMarshal->Write<std::string>(std::string(pSkeleton->mName.C_Str()));
+            pMarshal->Write<uint64_t>(pSkeleton->mNumBones);
+
+            for (uint64_t boneId = 0; boneId < pSkeleton->mNumBones; ++boneId) {
+                auto&& pBone = pSkeleton->mBones[boneId];
+
+                pMarshal->Write<bool>(pBone->mMeshId);
+                if (pBone->mMeshId) {
+                    pMarshal->Write<uint64_t>(meshMap.second.at(pBone->mMeshId));
+                }
+
+                pMarshal->Write<bool>(pBone->mArmature);
+                if (pBone->mArmature) {
+                    pMarshal->Write<uint64_t>(nodeMap.second.at(pBone->mArmature));
+                }
+
+                pMarshal->Write<bool>(pBone->mNode);
+                if (pBone->mNode) {
+                    pMarshal->Write<uint64_t>(nodeMap.second.at(pBone->mNode));
+                }
+
+                pMarshal->Write<uint64_t>(pBone->mParent);
+
+                pMarshal->Write<uint64_t>(pBone->mNumnWeights);
+                if (pBone->mNumnWeights > 0) {
+                    pMarshal->WriteBlock((void *) pBone->mWeights, pBone->mNumnWeights * sizeof(aiVertexWeight));
+                }
+
+                pMarshal->WriteBlock((void*)&pBone->mLocalMatrix, sizeof(aiMatrix4x4));
+                pMarshal->WriteBlock((void*)&pBone->mOffsetMatrix, sizeof(aiMatrix4x4));
+            }
+        }
+    }
+
+    void AssimpCache::LoadSkeletons(SR_HTYPES_NS::Marshal* pMarshal, aiScene* pScene) const {
+        auto&& nodeMap = BuildNodeMap(pScene);
+        auto&& meshMap = BuildMeshMap(pScene);
+
+        pScene->mNumSkeletons = pMarshal->Read<uint64_t>();
+        if (pScene->mNumSkeletons > 0) {
+            pScene->mSkeletons = new aiSkeleton*[pScene->mNumSkeletons];
+        }
+
+        for (uint64_t skeletonId = 0; skeletonId < pScene->mNumSkeletons; ++skeletonId) {
+            auto&& pSkeleton = pScene->mSkeletons[skeletonId];
+            pSkeleton = new aiSkeleton();
+
+            pSkeleton->mName = pMarshal->Read<std::string>();
+
+            pSkeleton->mNumBones = pMarshal->Read<uint64_t>();
+            if (pSkeleton->mNumBones > 0) {
+                pSkeleton->mBones = new aiSkeletonBone*[pSkeleton->mNumBones];
+            }
+
+            for (uint64_t boneId = 0; boneId < pSkeleton->mNumBones; ++boneId) {
+                auto&& pBone = pSkeleton->mBones[boneId];
+                pBone = new aiSkeletonBone();
+
+                if (pMarshal->Read<bool>()) {
+                    pBone->mMeshId = meshMap.first[pMarshal->Read<uint64_t>()];
+                }
+                else {
+                    pBone->mMeshId = nullptr;
+                }
+
+                if (pMarshal->Read<bool>()) {
+                    pBone->mArmature = nodeMap.first[pMarshal->Read<uint64_t>()];
+                }
+                else {
+                    pBone->mArmature = nullptr;
+                }
+
+                if (pMarshal->Read<bool>()) {
+                    pBone->mNode = nodeMap.first[pMarshal->Read<uint64_t>()];
+                }
+                else {
+                    pBone->mNode = nullptr;
+                }
+
+                pBone->mParent = pMarshal->Read<uint64_t>();
+
+                pBone->mNumnWeights = pMarshal->Read<uint64_t>();
+                if (pBone->mNumnWeights > 0) {
+                    pBone->mWeights = new aiVertexWeight[pBone->mNumnWeights];
+                    pMarshal->ReadBlock((void *) pBone->mWeights);
+                }
+                else {
+                    pBone->mWeights = nullptr;
+                }
+
+                pMarshal->ReadBlock((void*)&pBone->mLocalMatrix);
+                pMarshal->ReadBlock((void*)&pBone->mOffsetMatrix);
+            }
+        }
+    }
+
     void AssimpCache::LoadMeshes(SR_HTYPES_NS::Marshal* pMarshal, aiScene* pScene) const {
+        auto&& nodeMap = BuildNodeMap(pScene);
+
         pScene->mNumMeshes = pMarshal->Read<uint64_t>();
         pScene->mMeshes = new aiMesh*[pScene->mNumMeshes];
 
@@ -119,6 +234,45 @@ namespace SR_UTILS_NS {
 
             /// --------------------------------------------------------------------------------------------------------
 
+            pMesh->mNumBones = pMarshal->Read<uint64_t>();
+            if (pMesh->mNumBones > 0) {
+                pMesh->mBones = new aiBone*[pMesh->mNumBones];
+            }
+
+            for (uint64_t boneId = 0; boneId < pMesh->mNumBones; ++boneId) {
+                auto&& pBone = pMesh->mBones[boneId];
+                pBone = new aiBone();
+
+                pBone->mName = pMarshal->Read<std::string>();
+
+                if (pMarshal->Read<bool>()) {
+                    pBone->mArmature = nodeMap.first[pMarshal->Read<uint64_t>()];
+                }
+                else {
+                    pBone->mArmature = nullptr;
+                }
+
+                if (pMarshal->Read<bool>()) {
+                    pBone->mNode = nodeMap.first[pMarshal->Read<uint64_t>()];
+                }
+                else {
+                    pBone->mNode = nullptr;
+                }
+
+                pBone->mNumWeights = pMarshal->Read<uint64_t>();
+                if (pBone->mNumWeights > 0) {
+                    pBone->mWeights = new aiVertexWeight[pBone->mNumWeights];
+                    pMarshal->ReadBlock((void*)pBone->mWeights);
+                }
+                else {
+                    pBone->mWeights = nullptr;
+                }
+
+                pMarshal->ReadBlock((void*)&pBone->mOffsetMatrix);
+            }
+
+            /// --------------------------------------------------------------------------------------------------------
+
             pMesh->mNumAnimMeshes = pMarshal->Read<uint64_t>();
             if (pMesh->mNumAnimMeshes > 0) {
                 pMesh->mAnimMeshes = new aiAnimMesh*[pMesh->mNumAnimMeshes];
@@ -136,6 +290,8 @@ namespace SR_UTILS_NS {
     }
 
     void AssimpCache::SaveMeshes(SR_HTYPES_NS::Marshal* pMarshal, const aiScene* pScene) const {
+        auto&& nodeMap = BuildNodeMap(pScene);
+
         pMarshal->Write<uint64_t>(pScene->mNumMeshes);
 
         for (uint64_t meshId = 0; meshId < pScene->mNumMeshes; ++meshId) {
@@ -181,6 +337,34 @@ namespace SR_UTILS_NS {
 
             /// --------------------------------------------------------------------------------------------------------
 
+            pMarshal->Write<uint64_t>(pMesh->mNumBones);
+
+            for (uint64_t boneId = 0; boneId < pMesh->mNumBones; ++boneId) {
+                auto&& pBone = pMesh->mBones[boneId];
+
+                pMarshal->Write<std::string>(std::string(pBone->mName.C_Str()));
+
+                pMarshal->Write<bool>(pBone->mArmature);
+                if (pBone->mArmature) {
+                    pMarshal->Write<uint64_t>(nodeMap.second.at(pBone->mArmature));
+                }
+
+                pMarshal->Write<bool>(pBone->mNode);
+                if (pBone->mNode) {
+                    pMarshal->Write<uint64_t>(nodeMap.second.at(pBone->mNode));
+                }
+
+                pMarshal->Write<uint64_t>(pBone->mNumWeights);
+                SRAssertOnce(pBone->mNumWeights <= AI_MAX_BONE_WEIGHTS);
+                if (pBone->mNumWeights > 0) {
+                    pMarshal->WriteBlock((void *) pBone->mWeights, pBone->mNumWeights * sizeof(aiVertexWeight));
+                }
+
+                pMarshal->WriteBlock((void*)&pBone->mOffsetMatrix, sizeof(aiMatrix4x4));
+            }
+
+            /// --------------------------------------------------------------------------------------------------------
+
             pMarshal->Write<uint64_t>(pMesh->mNumAnimMeshes);
 
             for (uint64_t animatedMeshId = 0; animatedMeshId < pMesh->mNumAnimMeshes; ++animatedMeshId) {
@@ -222,12 +406,58 @@ namespace SR_UTILS_NS {
         pMarshal->WriteBlock((void*)&pNode->mTransformation, sizeof(aiMatrix4x4));
 
         pMarshal->Write<uint64_t>(pNode->mNumMeshes);
-        pMarshal->WriteBlock((void*)&pNode->mMeshes, pNode->mNumMeshes * sizeof(uint32_t));
+        pMarshal->WriteBlock((void*)pNode->mMeshes, pNode->mNumMeshes * sizeof(uint32_t));
 
         pMarshal->Write<uint64_t>(pNode->mNumChildren);
 
         for (uint64_t childId = 0; childId < pNode->mNumChildren; ++childId) {
             SaveNode(pMarshal, pNode->mChildren[childId]);
         }
+    }
+
+    AssimpCache::NodeMap AssimpCache::BuildNodeMap(const aiScene* pScene) const {
+        AssimpCache::NodeMap nodeMap;
+
+        if (!pScene->mRootNode) {
+            return std::move(nodeMap);
+        }
+
+        std::stack<uint64_t> stack;
+        aiNode* pCurrentNode = pScene->mRootNode;
+
+        uint64_t index = 0;
+        uint64_t childId = 0;
+
+        nodeMap.second[pCurrentNode] = index;
+        nodeMap.first.emplace_back(pCurrentNode);
+
+    retry:
+        if (pCurrentNode && childId < pCurrentNode->mNumChildren) {
+            pCurrentNode = pCurrentNode->mChildren[childId];
+            nodeMap.second[pCurrentNode] = ++index;
+            nodeMap.first.emplace_back(pCurrentNode);
+            stack.push(childId);
+            goto retry;
+        }
+
+        if (!stack.empty()) {
+            pCurrentNode = pCurrentNode->mParent;
+            childId = stack.top() + 1;
+            stack.pop();
+            goto retry;
+        }
+
+        return std::move(nodeMap);
+    }
+
+    AssimpCache::MeshMap AssimpCache::BuildMeshMap(const aiScene* pScene) const {
+        AssimpCache::MeshMap meshMap;
+
+        for (uint64_t i = 0; i < pScene->mNumMeshes; ++i) {
+            meshMap.second[pScene->mMeshes[i]] = i;
+            meshMap.first.emplace_back(pScene->mMeshes[i]);
+        }
+
+        return std::move(meshMap);
     }
 }

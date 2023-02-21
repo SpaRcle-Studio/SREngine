@@ -121,7 +121,9 @@ namespace SR_GRAPH_NS::Types {
             return pShader;
         }
 
-        SR_LOG("Shader::Load() : load \"" + path.ToString() + "\" shader...");
+        if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::Medium) {
+            SR_LOG("Shader::Load() : load \"" + path.ToString() + "\" shader...");
+        }
 
         if (!SRVerifyFalse2(path.Empty(), "Invalid shader path!")) {
             SR_WARN("Shader::Load() : failed to load shader!");

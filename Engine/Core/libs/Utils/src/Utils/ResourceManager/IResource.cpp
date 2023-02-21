@@ -22,7 +22,9 @@ namespace SR_UTILS_NS {
     bool IResource::Reload() {
         SR_LOCK_GUARD
 
-        SR_LOG("IResource::Reload() : reloading \"" + std::string(GetResourceId()) + "\" resource...");
+        if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::Medium) {
+            SR_LOG("IResource::Reload() : reloading \"" + std::string(GetResourceId()) + "\" resource...");
+        }
 
         m_loadState = LoadState::Reloading;
 

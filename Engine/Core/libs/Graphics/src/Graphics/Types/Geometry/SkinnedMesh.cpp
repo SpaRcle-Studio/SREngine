@@ -72,11 +72,19 @@ namespace SR_GTYPES_NS {
     void SkinnedMesh::Draw() {
         auto&& pShader = GetRenderContext()->GetCurrentShader();
 
-        if (!pShader || !IsActive() || IsDestroyed() || !IsSkeletonUsable())
+        if (!pShader || !IsActive() || IsDestroyed()) {
             return;
+        }
 
-        if ((!m_isCalculated && !Calculate()) || m_hasErrors)
+        if ((!m_isCalculated && !Calculate()) || m_hasErrors) {
             return;
+        }
+
+        m_skeleton = FindSkeleton(GetGameObject());
+
+        if (!IsSkeletonUsable()) {
+            return;
+        }
 
         if (m_dirtyMaterial)
         {
@@ -202,14 +210,21 @@ namespace SR_GTYPES_NS {
     }
 
     bool SkinnedMesh::IsSkeletonUsable() const {
-        if (m_skeleton)
+        if (m_skeleton) {
             return m_skeleton->GetRootBone();
-        else
-            return false;
+        }
+
+        return false;
     }
 
     void SkinnedMesh::Update(float dt) {
-        FindSkeleton(GetGameObject());
+        auto&& pNewSkeleton = FindSkeleton(GetGameObject());
+        if (m_skeleton != pNewSkeleton) {
+            m_renderScene->SetDirty();
+            m_bonesIds.clear();
+        }
+        m_skeleton = pNewSkeleton;
+
         Super::Update(dt);
     };
 
@@ -226,9 +241,19 @@ namespace SR_GTYPES_NS {
     }
 
     void SkinnedMesh::PopulateSkeletonMatrices() {
+        auto&& pNewSkeleton = FindSkeleton(GetGameObject());
+        if (m_skeleton != pNewSkeleton) {
+            m_renderScene->SetDirty();
+            return;
+        }
+
         static SR_MATH_NS::Matrix4x4 identityMatrix = SR_MATH_NS::Matrix4x4().Identity();
 
         auto&& bones = m_rawMesh->GetBones(m_meshId);
+
+        if (bones.empty()) {
+            return;
+        }
 
         if (m_bonesIds.empty()) {
             const uint64_t bonesCount = SR_MAX(SR_HUMANOID_MAX_BONES, bones.size());
@@ -237,35 +262,15 @@ namespace SR_GTYPES_NS {
             m_skeletonOffsets.resize(bonesCount);
             m_skeletonMatrices.resize(bonesCount);
 
-            for (uint64_t i = 0; i < m_bonesIds.size(); i++) {
-                m_skeletonMatrices[i] = identityMatrix;
-            }
-        }
-
-        if (!m_skeleton) {
-            if (!m_isSkeletonDeleted) {
-                m_isSkeletonDeleted = true;
-                m_renderScene->SetDirty();
-            }
-            return;
-        } else {
-            if (!m_skeleton->GetRootBone())
-                return;
-            if (m_isSkeletonDeleted) {
-                m_isSkeletonDeleted = false;
-                m_renderScene->SetDirty();
-            }
-        }
-
-        /*if (!IsSkeletonUsable()) {
-            for (uint64_t i = 0; i < m_bonesIds.size(); i++) {
+            for (uint64_t i = 0; i < bonesCount; i++) {
                 m_skeletonMatrices[i] = identityMatrix;
                 m_skeletonOffsets[i] = identityMatrix;
             }
-            m_isOffsetsInitialized = false;
+        }
 
+        if (m_skeleton && !m_skeleton->GetRootBone()) {
             return;
-        }*/
+        }
 
         if (!m_isOffsetsInitialized) {
             for (auto&& [hashName, boneId] : bones) {
@@ -275,8 +280,7 @@ namespace SR_GTYPES_NS {
             m_isOffsetsInitialized = true;
         }
 
-        if (m_skeleton)
-        for (uint64_t boneId = 0; boneId < m_bonesIds.size(); ++boneId) {
+        for (uint64_t boneId = 0; m_skeleton && boneId < m_bonesIds.size(); ++boneId) {
             if (auto&& bone = m_skeleton->GetBoneByIndex(m_bonesIds[boneId]); bone && bone->gameObject) {
                 m_skeletonMatrices[boneId] = bone->gameObject->GetTransform()->GetMatrix();
             }
@@ -284,13 +288,14 @@ namespace SR_GTYPES_NS {
                 m_skeletonMatrices[boneId] = identityMatrix;
             }
         }
-
     }
 
-    void SkinnedMesh::FindSkeleton(SR_UTILS_NS::GameObject::Ptr gameObject) {
-        m_skeleton = dynamic_cast<Animations::Skeleton *>(gameObject->GetComponent("Skeleton"));
-        if (!m_skeleton && gameObject->GetParent()) {
-            FindSkeleton(gameObject->GetParent());
+    SR_ANIMATIONS_NS::Skeleton* SkinnedMesh::FindSkeleton(SR_UTILS_NS::GameObject::Ptr gameObject) const {
+        /// TODO: переделать на какой-нибудь RefComponent
+        auto&& pSkeleton = dynamic_cast<SR_ANIMATIONS_NS::Skeleton*>(gameObject->GetComponent<SR_ANIMATIONS_NS::Skeleton>());
+        if (!pSkeleton && gameObject->GetParent()) {
+            return FindSkeleton(gameObject->GetParent());
         }
+        return pSkeleton;
     }
 }

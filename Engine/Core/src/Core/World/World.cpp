@@ -24,7 +24,8 @@ namespace SR_CORE_NS {
             GameObjectPtr ptr = Scene::Instance(node->mName.C_Str());
 
             for (uint32_t i = 0; i < node->mNumMeshes; ++i) {
-                const bool hasBones = pRawMesh->GetAssimpScene()->mMeshes[node->mMeshes[i]]->HasBones();
+                const uint64_t meshId = node->mMeshes[i];
+                const bool hasBones = pRawMesh->GetAssimpScene()->mMeshes[meshId]->HasBones();
                 const SR_GTYPES_NS::MeshType meshType = hasBones ? SR_GTYPES_NS::MeshType::Skinned : SR_GTYPES_NS::MeshType::Static;
 
                 if (auto&& pMesh = SR_GTYPES_NS::Mesh::Load(pRawMesh->GetResourceId(), meshType, node->mMeshes[i])) {
