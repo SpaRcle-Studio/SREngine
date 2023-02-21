@@ -2,6 +2,8 @@
 // Created by Monika on 24.11.2022.
 //
 
+#include <Utils/Common/Features.h>
+
 #include <Physics/PhysX/PhysXLibraryImpl.h>
 
 #include <Physics/PhysX/PhysXPhysicsWorld.h>
@@ -19,9 +21,11 @@ namespace SR_PHYSICS_NS {
             return false;
         }
 
-        m_pvd = PxCreatePvd(*m_foundation);
-        m_pvdTransport = physx::PxDefaultPvdSocketTransportCreate("127.0.0.1", 5425, 1000);
-        m_pvd->connect(*m_pvdTransport, physx::PxPvdInstrumentationFlag::eALL);
+        if (SR_UTILS_NS::Features::Instance().Enabled("PVD", false)) {
+            m_pvd = PxCreatePvd(*m_foundation);
+            m_pvdTransport = physx::PxDefaultPvdSocketTransportCreate("127.0.0.1", 5425, 1000);
+            m_pvd->connect(*m_pvdTransport, physx::PxPvdInstrumentationFlag::eALL);
+        }
 
         m_physics = PxCreatePhysics(SR_PHYSX_FOUNDATION_VERSION, *m_foundation, physx::PxTolerancesScale(), true, m_pvd);
         if (!m_physics) {
