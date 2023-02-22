@@ -14,9 +14,12 @@
 
 namespace SR_UTILS_NS {
     class ResourceManager;
+    class ResourceType;
+    class ResourceInfo;
 
     class SR_DLL_EXPORT IResource : public ResourceContainer {
         friend class ResourceManager;
+        friend class ResourceType;
         using Super = ResourceContainer;
     public:
         enum class LoadState : uint8_t {
@@ -48,7 +51,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD bool IsAlive() const { return m_lifetime > 0; }
         SR_NODISCARD bool IsEnabledAutoRemove() const { return m_autoRemove; }
         SR_NODISCARD uint16_t GetCountUses() const noexcept;
-        SR_NODISCARD float_t GetLifetime() const noexcept { return m_lifetime; }
+        SR_NODISCARD uint64_t GetLifetime() const noexcept { return m_lifetime; }
         SR_NODISCARD std::string_view GetResourceName() const;
         SR_NODISCARD uint64_t GetResourceHashName() const noexcept { return m_resourceHashName; }
         SR_NODISCARD const std::string& GetResourceId() const;
@@ -125,11 +128,13 @@ namespace SR_UTILS_NS {
         std::atomic<uint16_t> m_countUses = 0;
 
     private:
+        ResourceInfo* m_resourceInfo = nullptr;
+
         uint64_t m_resourceHashId = 0;
         uint64_t m_resourceHash = 0;
         uint64_t m_resourceHashPath = 0;
 
-        float_t m_lifetime = 0;
+        uint64_t m_lifetime = 0;
 
         /// Принудительно уничтожить ресурс
         std::atomic<bool> m_force = false;

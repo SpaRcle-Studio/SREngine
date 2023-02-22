@@ -52,7 +52,9 @@ namespace SR_GRAPH_NS::Memory {
     ShaderProgramManager::VirtualProgram ShaderProgramManager::ReAllocate(VirtualProgram program, const SRShaderCreateInfo& createInfo) {
         SR_LOCK_GUARD
 
-        SR_GRAPH_LOG("ShaderProgramManager::ReAllocate() : re-allocate shader program...");
+        if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::Medium) {
+            SR_GRAPH_LOG("ShaderProgramManager::ReAllocate() : re-allocate shader program...");
+        }
 
         if (program == SR_ID_INVALID) {
             return Allocate(createInfo);
@@ -66,6 +68,8 @@ namespace SR_GRAPH_NS::Memory {
 
         auto&& [_, virtualProgramInfo] = *pIt;
 
+        EVK_PUSH_LOG_LEVEL(EvoVulkan::Tools::LogLevel::ErrorsOnly);
+
         /// очишаем старые шейдерные программы
         for (auto&& [fbo /** unused */, shaderProgramInfo] : virtualProgramInfo.m_data) {
             m_pipeline->DeleteShader(shaderProgramInfo.id);
@@ -77,9 +81,11 @@ namespace SR_GRAPH_NS::Memory {
 
         if (auto&& shaderProgramInfo = AllocateShaderProgram(createInfo); shaderProgramInfo.Valid()) {
             virtualProgramInfo.m_data[m_pipeline->GetCurrentFramebufferId()] = shaderProgramInfo;
+            EVK_POP_LOG_LEVEL();
         }
         else {
             SR_ERROR("ShaderProgramManager::ReAllocate() : failed to allocate shader program!");
+            EVK_POP_LOG_LEVEL();
             return SR_ID_INVALID;
         }
 

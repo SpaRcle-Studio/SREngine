@@ -162,6 +162,8 @@ namespace SR_GRAPH_NS {
         bool Init(const WindowPtr& windowPtr, int swapInterval) override;
         bool PostInit() override;
 
+        void DeInitialize() override;
+
         bool InitGUI() override;
         bool StopGUI() override;
         void SetGUIEnabled(bool enabled) override {

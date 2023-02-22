@@ -90,16 +90,17 @@ namespace SR_UTILS_NS {
         pResource->OnResourceRegistered();
 
         auto&& path = pResource->GetResourceHashPath();
+        auto&& pIt = m_info.find(path);
 
-        if (auto&& pIt = m_info.find(path); pIt != m_info.end()) {
+    retry:
+        if (pIt != m_info.end()) {
             auto&& [_, info] = *pIt;
             info.m_loaded.insert(pResource);
+            pResource->m_resourceInfo = &info;
         }
         else {
-            (m_info[path] = ResourceInfo(
-                    pResource->GetFileHash(),
-                    pResource->GetResourceHash()
-            )).m_loaded.insert(pResource);
+            pIt = m_info.insert(std::make_pair(path, ResourceInfo(pResource->GetFileHash(), pResource->GetResourceHash()))).first;
+            goto retry;
         }
     }
 
@@ -127,5 +128,13 @@ namespace SR_UTILS_NS {
                 return true;
             });
         }
+    }
+
+    ResourceInfo *ResourceType::GetInfoByIndex(uint64_t index) {
+        if (index >= m_info.size()) {
+            return nullptr;
+        }
+
+        return &std::next(m_info.begin(), index)->second;
     }
 }

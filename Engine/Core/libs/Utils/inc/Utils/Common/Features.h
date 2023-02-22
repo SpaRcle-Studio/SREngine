@@ -31,7 +31,10 @@ namespace SR_UTILS_NS {
         ~Features() override = default;
 
     public:
-        bool Reload(const Path& path = Path());
+        bool Reload();
+
+        void SetPath(const SR_UTILS_NS::Path& path);
+
         SR_NODISCARD bool Enabled(const std::string& name) const;
         SR_NODISCARD bool Enabled(const std::string& name, bool def) const;
         SR_NODISCARD bool Enabled(const std::string& group, const std::string& name) const;

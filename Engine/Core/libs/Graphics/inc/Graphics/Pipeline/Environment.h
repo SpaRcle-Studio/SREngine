@@ -142,6 +142,9 @@ namespace SR_GRAPH_NS {
         virtual bool BeginDrawGUI() { return false; }
         virtual void EndDrawGUI()   { }
 
+        virtual void OnWindowClose() { }
+        virtual void DeInitialize() { }
+
         //[[nodiscard]] virtual int32_t GetImGuiTextureDescriptorFromTexture(uint32_t id) const { return -2; }
         SR_NODISCARD virtual InternalTexture GetTexture(uint32_t id) const { return {}; }
         SR_NODISCARD virtual void* TryGetDescriptorSetFromTexture(uint32_t id, bool imgui) const { return nullptr; }

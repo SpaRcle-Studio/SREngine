@@ -73,6 +73,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD bool IsLast(const ResourceId& id);
         SR_NODISCARD const CopiesMap& GetCopiesRef() const;
         SR_NODISCARD Info& GetInfo();
+        SR_NODISCARD ResourceInfo* GetInfoByIndex(uint64_t index);
         SR_NODISCARD std::string_view GetName() const { return m_name; }
 
         void Remove(IResource* pResource);

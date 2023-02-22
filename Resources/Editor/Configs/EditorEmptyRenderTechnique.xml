@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<Technique Name="Editor">
+    <FramebufferPass Name="SceneViewFBO">
+        <FramebufferSettings DynamicResizing="true" DepthEnabled="true" SmoothSamples="1">
+            <Size X="0" Y="0"/>
+            <PreScale X="1.0" Y="1.0"/>
+            <Depth Format="Auto" ClearValue="1.0"/>
+            <Layer Format="RGBA8_UNORM" R="0.0" G="0.0" B="0.0" A="1.0"/>
+        </FramebufferSettings>
+        <Passes>
+            <SkyboxPass Path="Engine/Skyboxes/Sun.png" Shader="Engine/Shaders/skybox.srsl"/>
+        </Passes>
+    </FramebufferPass>
+</Technique>

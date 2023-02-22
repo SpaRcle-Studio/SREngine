@@ -105,19 +105,23 @@ int main(int argc, char **argv) {
     if (auto&& folder = GetCmdOption(argv, argv + argc, "-resources"); folder.empty()) {
         resourcesManager.Init(Path(exe.ToString() + "/../../Resources"));
     }
-    else
+    else {
         resourcesManager.Init(folder);
+    }
 
-    Features::Instance().Reload(resourcesManager.GetResPath().Concat("Engine/Configs/Features.xml"));
+    Features::Instance().SetPath(resourcesManager.GetResPath().Concat("Engine/Configs/Features.xml"));
+    Features::Instance().Reload();
+
+    resourcesManager.Run();
 
     if (Features::Instance().Enabled("CrashHandler")) {
-#ifdef SR_WIN32
+    #ifdef SR_WIN32
         ShellExecute(nullptr, "open", (ResourceManager::Instance().GetResPath().Concat(
                 "Engine/Utilities/EngineCrashHandler.exe").CStr()),
                      ("--log log.txt --target " + SR_PLATFORM_NS::GetApplicationName().ToString() + " --out " + exe.ToString() + "\\").c_str(),
                      nullptr, SW_SHOWDEFAULT
         );
-#endif
+    #endif
     }
 
     {

@@ -8,14 +8,14 @@
 #include <Utils/Common/Hashes.h>
 
 namespace SR_UTILS_NS {
-    /// Seconds
-    const float_t ResourceManager::ResourceLifeTime = 30.f;
+    /// Milliseconds
+    const uint64_t ResourceManager::ResourceLifeTime = 30 * 1000;
 
-    bool ResourceManager::Init(const std::string& resourcesFolder) {
+    bool ResourceManager::Init(const SR_UTILS_NS::Path& resourcesFolder) {
     #ifdef SR_ANDROID
         SR_INFO("ResourceManager::Init() : initializing resource manager...");
     #else
-        SR_INFO("ResourceManager::Init() : initializing resource manager...\n\tResources folder: " + resourcesFolder);
+        SR_INFO("ResourceManager::Init() : initializing resource manager...\n\tResources folder: " + resourcesFolder.ToString());
     #endif
 
         m_folder = resourcesFolder;
@@ -23,8 +23,6 @@ namespace SR_UTILS_NS {
         m_resources.max_load_factor(0.9f);
 
         m_isInit = true;
-
-        m_thread = SR_HTYPES_NS::Thread::Factory::Instance().Create(std::thread(&ResourceManager::Thread, this));
 
         return true;
     }
@@ -35,6 +33,7 @@ namespace SR_UTILS_NS {
         PrintMemoryDump();
 
         m_isInit = false;
+        m_isRun = false;
 
         Synchronize(true);
 
@@ -74,12 +73,15 @@ namespace SR_UTILS_NS {
             ResourceType(name)
         ));
 
+        m_checkResourceGroupIt = m_resources.begin();
+
         return true;
     }
 
     void ResourceManager::Remove(IResource *pResource) {
         if (pResource->IsRegistered()) {
-            auto&& [name, resourcesGroup] = *m_resources.find(pResource->GetResourceHashName());
+            auto&& pGroupIt = m_resources.find(pResource->GetResourceHashName());
+            auto&& [name, resourcesGroup] = *pGroupIt;
             resourcesGroup.Remove(pResource);
         }
         else {
@@ -95,32 +97,36 @@ namespace SR_UTILS_NS {
     }
 
     void ResourceManager::Thread() {
+        const bool autoReloadSupport = Features::Instance().Enabled("AutoReloadResources", false);
+
         do {
+            SR_PLATFORM_NS::Sleep(25);
+
             auto time = clock();
-            m_deltaTime = time - m_lastTime;
+            m_deltaTime = static_cast<uint64_t>(time - m_lastTime); /// miliseconds
             m_lastTime = time;
 
-            /// даем возможность другим потокам отдать ресурсы на уничтожение,
-            /// чтобы сразу же не блокировать им эту возможность
-            if (m_force) {
-                SR_HTYPES_NS::Thread::Sleep(100);
+            m_hashCheckDt += m_deltaTime;
+            m_GCDt += m_deltaTime;
+
+            if (m_GCDt > (m_force ? 500 : 100) /** ms */) {
+                GC();
+                m_GCDt = 0;
             }
-            else {
-                SR_HTYPES_NS::Thread::Sleep(500);
-            }
 
-            SR_SCOPED_LOCK
-
-            GC();
-
-            if (Features::Instance().Enabled("AutoReloadResources", false)) {
+            if (autoReloadSupport && m_hashCheckDt > 25 /** ms */) {
                 CheckResourceHashes();
+                m_hashCheckDt = 0;
             }
         }
-        while(m_isInit);
+        while(m_isRun);
+
+        SR_INFO("ResourceManager::Thread() : exit from thread-function.");
     }
 
     void ResourceManager::GC() {
+        SR_SCOPED_LOCK
+
         if (m_destroyed.empty()) {
             return;
         }
@@ -148,11 +154,11 @@ namespace SR_UTILS_NS {
                 pResource->m_lifetime = ResourceLifeTime;
             }
             else if (IsLastResource(pResource)) {
-                pResource->m_lifetime -= double_t(m_deltaTime) / (double_t)CLOCKS_PER_SEC;
+                pResource->m_lifetime -= m_deltaTime;
             }
             else {
                 /// нам не нужно ждать завершения времени жизни ресурса, у которого еще есть копии
-                pResource->m_lifetime = 0.f;
+                pResource->m_lifetime = 0;
             }
 
             const bool resourceAlive = !pResource->IsForce() && pResource->IsAlive() && !m_force;
@@ -200,7 +206,9 @@ namespace SR_UTILS_NS {
         }
     #endif
 
-        auto&& [name, resourcesGroup] = *m_resources.find(pResource->GetResourceHashName());
+        auto&& pGroupIt = m_resources.find(pResource->GetResourceHashName());
+        auto&& [name, resourcesGroup] = *pGroupIt;
+
         resourcesGroup.Add(pResource);
     }
 
@@ -308,42 +316,58 @@ namespace SR_UTILS_NS {
     void ResourceManager::CheckResourceHashes() {
         SR_LOCK_GUARD
 
-        for (auto&& [_, type] : m_resources) {
-            for (auto&& [path, info] : type.GetInfo()) {
-                bool needReload = false;
+        if (m_resources.empty()) {
+            return;
+        }
 
-                for (auto&& pResource : info.m_loaded) {
-                    if (pResource->IsDestroyed()) {
-                        continue;
-                    }
+        if (m_checkResourceGroupIt == m_resources.end()) {
+            m_checkResourceGroupIt = m_resources.begin();
+            m_checkInfoIndex = 0;
+            return;
+        }
 
-                    auto&& fileHash = pResource->GetFileHash();
-                    if (fileHash != info.m_fileHash) {
-                        needReload = true;
-                        info.m_fileHash = fileHash;
-                    }
-                }
+        auto&& pResourceInfo = m_checkResourceGroupIt->second.GetInfoByIndex(m_checkInfoIndex);
+        if (!pResourceInfo) {
+            m_checkResourceGroupIt = std::next(m_checkResourceGroupIt);
+            m_checkInfoIndex = 0;
+            return;
+        }
 
-                if (!needReload) {
-                    continue;
-                }
+        bool needReload = false;
 
-                for (auto&& pResource : info.m_loaded) {
-                    if (pResource->IsDestroyed()) {
-                        continue;
-                    }
+        for (auto&& pResource : pResourceInfo->m_loaded) {
+            if (pResource->IsDestroyed()) {
+                continue;
+            }
 
-                    auto&& loadState = pResource->GetResourceLoadState();
-
-                    using LS = IResource::LoadState;
-                    if (loadState == LS::Reloading || loadState == LS::Loading || loadState == LS::Unloading) {
-                        continue;
-                    }
-
-                    pResource->Reload();
-                }
+            auto&& fileHash = pResource->GetFileHash();
+            if (fileHash != pResourceInfo->m_fileHash) {
+                needReload = true;
+                pResourceInfo->m_fileHash = fileHash;
             }
         }
+
+        if (!needReload) {
+            ++m_checkInfoIndex;
+            return;
+        }
+
+        for (auto&& pResource : pResourceInfo->m_loaded) {
+            if (pResource->IsDestroyed()) {
+                continue;
+            }
+
+            auto&& loadState = pResource->GetResourceLoadState();
+
+            using LS = IResource::LoadState;
+            if (loadState == LS::Reloading || loadState == LS::Loading || loadState == LS::Unloading) {
+                continue;
+            }
+
+            pResource->Reload();
+        }
+
+        ++m_checkInfoIndex;
     }
 
     std::string_view ResourceManager::GetTypeName(uint64_t hashName) const {
@@ -424,5 +448,18 @@ namespace SR_UTILS_NS {
         }
 
         return hash;
+    }
+
+    bool ResourceManager::Run() {
+        if (m_isRun) {
+            SRHalt("ResourceManager::Run() : is already ran!");
+            return false;
+        }
+
+        m_isRun = true;
+
+        m_thread = SR_HTYPES_NS::Thread::Factory::Instance().Create(std::thread(&ResourceManager::Thread, this));
+
+        return true;
     }
 }

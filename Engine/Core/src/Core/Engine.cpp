@@ -14,6 +14,7 @@
 #include <Utils/Types/SafePtrLockGuard.h>
 #include <Utils/Types/RawMesh.h>
 #include <Utils/ECS/Prefab.h>
+#include <Utils/ECS/ComponentManager.h>
 #include <Utils/ECS/Migration.h>
 #include <Utils/DebugDraw.h>
 
@@ -171,6 +172,11 @@ namespace SR_CORE_NS {
             });
 
             SynchronizeFreeResources();
+
+            if (m_pipeline) {
+                m_pipeline->DeInitialize();
+                m_pipeline = nullptr;
+            }
         });
 
         return true;

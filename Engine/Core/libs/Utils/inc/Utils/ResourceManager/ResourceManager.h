@@ -12,11 +12,11 @@
 #include <Utils/Common/Singleton.h>
 
 namespace SR_UTILS_NS {
-    class SR_DLL_EXPORT ResourceManager : public Singleton<ResourceManager> {
+    class SR_DLL_EXPORT ResourceManager final : public Singleton<ResourceManager> {
         friend class Singleton<ResourceManager>;
         using Hash = uint64_t;
     public:
-        static const float_t ResourceLifeTime;
+        static const uint64_t ResourceLifeTime;
 
     public:
         SR_NODISCARD bool IsLastResource(IResource* resource);
@@ -31,7 +31,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD const Path& GetResourcePath(Hash hashPath) const;
         SR_NODISCARD Hash RegisterResourcePath(const Path& path);
 
-        IResource* Find(uint64_t hashTypeName, const std::string& ID);
+        SR_NODISCARD IResource* Find(uint64_t hashTypeName, const std::string& ID);
 
         void Synchronize(bool force);
 
@@ -58,7 +58,8 @@ namespace SR_UTILS_NS {
 
     public:
         /** \brief Init resource manager */
-        bool Init(const std::string& resourcesFolder);
+        bool Init(const SR_UTILS_NS::Path& resourcesFolder);
+        bool Run();
 
         void OnSingletonDestroy() override;
 
@@ -82,12 +83,19 @@ namespace SR_UTILS_NS {
 
     private:
         std::atomic<bool> m_isInit = false;
+        std::atomic<bool> m_isRun = false;
         std::atomic<bool> m_force = false;
 
         Path m_folder;
         Types::Thread::Ptr m_thread = nullptr;
         uint64_t m_lastTime = 0;
         uint64_t m_deltaTime = 0;
+
+        uint64_t m_GCDt = 0;
+        uint64_t m_hashCheckDt = 0;
+
+        ResourcesTypes::iterator m_checkResourceGroupIt;
+        uint64_t m_checkInfoIndex = 0;
 
     };
 }

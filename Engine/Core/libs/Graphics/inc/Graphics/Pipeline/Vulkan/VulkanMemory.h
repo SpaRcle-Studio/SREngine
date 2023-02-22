@@ -162,7 +162,7 @@ namespace Framework::Graphics::VulkanTools {
         std::pair<uint32_t, int32_t>              m_countVBO                = { 1000, 0 };
         std::pair<uint32_t, int32_t>              m_countIBO                = { 1000, 0 };
         std::pair<uint32_t, int32_t>              m_countFBO                = { 75, 0 };
-        std::pair<uint32_t, int32_t>              m_countShaderPrograms     = { 50, 0 };
+        std::pair<uint32_t, int32_t>              m_countShaderPrograms     = { 1000, 0 };
         std::pair<uint32_t, int32_t>              m_countDescriptorSets     = { 32768 * 2, 0 };
         std::pair<uint32_t, int32_t>              m_countTextures           = { 1000, 0 };
 

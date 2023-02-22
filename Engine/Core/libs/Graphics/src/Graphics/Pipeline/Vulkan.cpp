@@ -48,7 +48,7 @@ namespace Framework::Graphics {
         EvoVulkan::Tools::VkFunctionsHolder::Instance().GraphCallback = [](const std::string &msg) { SR_VULKAN_MSG(SR_VRAM + msg); };
 
         EvoVulkan::Tools::VkFunctionsHolder::Instance().AssertCallback = [](const std::string &msg) {
-            SRAssert2(false, SR_VRAM + msg);
+            SRHalt(SR_VRAM + msg);
             return false;
         };
 
@@ -66,6 +66,19 @@ namespace Framework::Graphics {
 
         EvoVulkan::Tools::VkFunctionsHolder::Instance().Copy = [](const std::string& from, const std::string& to) -> bool {
             return SR_PLATFORM_NS::Copy(from, to);
+        };
+
+        EvoVulkan::Tools::VkFunctionsHolder::Instance().ReadHash = [](const std::string& path) -> uint64_t {
+            return SR_UTILS_NS::FileSystem::ReadHashFromFile(SR_UTILS_NS::Path(path, true));
+        };
+
+        EvoVulkan::Tools::VkFunctionsHolder::Instance().GetFileHash = [](const std::string& path) -> uint64_t {
+            return SR_UTILS_NS::FileSystem::GetFileHash(SR_UTILS_NS::Path(path, true));
+        };
+
+        EvoVulkan::Tools::VkFunctionsHolder::Instance().WriteHash = [](const std::string& path, uint64_t hash) -> bool {
+            SR_UTILS_NS::FileSystem::WriteHashToFile(SR_UTILS_NS::Path(path, false), hash);
+            return true;
         };
 
         m_imgui = new VulkanTypes::VkImGUI();
@@ -143,25 +156,22 @@ namespace Framework::Graphics {
         return Environment::OnResize(size);
     }
 
- //  bool Vulkan::CloseWindow() {
- //      SR_GRAPH_LOG("Vulkan::CloseWindow() : close window...");
+    void Vulkan::DeInitialize() {
+        SR_GRAPH_LOG("Vulkan::DeInitialize() : de-initialize pipeline...");
 
- //      SR_GRAPH_NS::Memory::MeshManager::Instance().PrintDump();
+        SR_GRAPH_NS::Memory::MeshManager::Instance().PrintDump();
 
- //      if (m_memory) {
- //          m_memory->Free();
- //          m_memory = nullptr;
- //      }
+        if (m_memory) {
+            m_memory->Free();
+            m_memory = nullptr;
+        }
 
- //      if (m_kernel) {
- //          if (!m_kernel->Destroy()) {
- //              SR_ERROR("Vulkan::CloseWindow() : failed to destroy Evo Vulkan kernel!");
- //              return false;
- //          }
- //      }
+        if (m_kernel && !m_kernel->Destroy()) {
+            SR_ERROR("Vulkan::DeInitialize() : failed to destroy Evo Vulkan kernel!");
+        }
 
- //      return true;
- //  }
+        Environment::DeInitialize();
+    }
 
     bool Vulkan::Init(const WindowPtr& window, int swapInterval) {
         SR_GRAPH_LOG("Vulkan::Init() : initializing vulkan...");
@@ -777,6 +787,8 @@ namespace Framework::Graphics {
     uint8_t Vulkan::GetSmoothSamplesCount() const {
         return m_kernel->GetDevice()->GetMSAASamplesCount();
     }
+
+
 
     //!-----------------------------------------------------------------------------------------------------------------
 
