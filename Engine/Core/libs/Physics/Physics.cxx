@@ -6,6 +6,7 @@
 
 #include "src/Physics/2D/Rigidbody2D.cpp"
 #include "src/Physics/3D/Rigidbody3D.cpp"
+#include "src/Physics/3D/Raycast3D.cpp"
 
 #include "src/Physics/Rigidbody.cpp"
 #include "src/Physics/CollisionShape.cpp"
@@ -25,6 +26,7 @@
     #include "src/Physics/PhysX/PhysXLibraryImpl.cpp"
     #include "src/Physics/PhysX/PhysXPhysicsWorld.cpp"
     #include "src/Physics/PhysX/PhysXRigidbody3D.cpp"
+    #include "src/Physics/PhysX/PhysXRaycast3DImpl.cpp"
     #include "src/Physics/PhysX/PhysXCollisionShape.cpp"
     #include "src/Physics/PhysX/PhysXSimulationCallback.cpp"
 #endif

@@ -9,6 +9,7 @@
 
 namespace SR_PHYSICS_NS {
     class LibraryImpl;
+    class Raycast3DImpl;
 
     class PhysicsWorld : public SR_UTILS_NS::NonCopyable {
     public:
@@ -18,7 +19,7 @@ namespace SR_PHYSICS_NS {
         using Space = SR_UTILS_NS::Measurement;
     public:
         explicit PhysicsWorld(LibraryPtr pLibrary, Space space);
-        ~PhysicsWorld() override = default;
+        ~PhysicsWorld() override;
 
     public:
         virtual bool StepSimulation(float_t step) { return false; }
@@ -29,9 +30,13 @@ namespace SR_PHYSICS_NS {
         virtual bool AddRigidbody(RigidbodyPtr pRigidbody) { return false; }
         virtual bool RemoveRigidbody(RigidbodyPtr pRigidbody) { return false; }
 
+        virtual void ForEachRigidbody3D(const SR_HTYPES_NS::Function<void(SR_PTYPES_NS::Rigidbody3D *)> &fun) { }
+
         bool ReAddRigidbody(RigidbodyPtr pRigidbody) {
             return RemoveRigidbody(pRigidbody) && AddRigidbody(pRigidbody);
         }
+
+        SR_NODISCARD Raycast3DImpl* GetRaycast3DImpl() const noexcept { return m_raycast3dImpl; }
 
         template<typename T> SR_NODISCARD T* GetLibrary() const {
             if (auto&& pLibrary = dynamic_cast<T*>(m_library)) {
@@ -46,6 +51,7 @@ namespace SR_PHYSICS_NS {
     protected:
         LibraryPtr m_library = nullptr;
         Space m_space = Space::Unknown;
+        Raycast3DImpl* m_raycast3dImpl = nullptr;
 
     };
 }

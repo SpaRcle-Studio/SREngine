@@ -39,6 +39,9 @@ namespace SR_PHYSICS_NS {
         void Remove(RigidbodyPtr pRigidbody);
         void Register(RigidbodyPtr pRigidbody);
 
+        SR_NODISCARD SR_PHYSICS_NS::PhysicsWorld* Get2DWorld() const noexcept { return m_2DWorld; }
+        SR_NODISCARD SR_PHYSICS_NS::PhysicsWorld* Get3DWorld() const noexcept { return m_3DWorld; }
+
         void ClearForces();
 
     private:

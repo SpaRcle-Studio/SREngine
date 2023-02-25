@@ -5,6 +5,7 @@
 #include <Physics/PhysX/PhysXPhysicsWorld.h>
 #include <Physics/PhysX/PhysXLibraryImpl.h>
 #include <Physics/PhysX/PhysXSimulationCallback.h>
+#include <Physics/PhysX/PhysXRaycast3DImpl.h>
 
 namespace SR_PHYSICS_NS {
     physx::PxFilterFlags contactReportFilterShader(physx::PxFilterObjectAttributes attributes0, physx::PxFilterData filterData0,
@@ -51,6 +52,8 @@ namespace SR_PHYSICS_NS {
 
     bool PhysXPhysicsWorld::Initialize() {
         auto&& pPhysics = GetLibrary<PhysXLibraryImpl>()->GetPxPhysics();
+
+        m_raycast3dImpl = new PhysXRaycast3DImpl(this);
 
         physx::PxSceneDesc sceneDesc(pPhysics->getTolerancesScale());
 
@@ -221,27 +224,36 @@ namespace SR_PHYSICS_NS {
             }
 
             pRigidbody->Synchronize();
-
-            //if (pRigidbody->IsMatrixDirty()) {
-            //    pRigidbody->UpdateMatrix();
-            //}
-            //else if (auto&& pTransform = pRigidbody->GetTransform()) {
-            //    auto&& globalPose = pRigidActor->getGlobalPose();
-
-            //    pTransform->SetTranslation(globalPose.p.x, globalPose.p.y, globalPose.p.z);
-
-            //    auto&& q = SR_MATH_NS::Quaternion(globalPose.q.x, globalPose.q.y, globalPose.q.z, globalPose.q.w);
-
-            //    if (pRigidbody->GetType() == ShapeType::Capsule3D) {
-            //        q = q.RotateZ(-90);
-            //    }
-
-            //    pTransform->SetRotation(q);
-
-            //    pRigidbody->SetMatrixDirty(false);
-            //}
         }
 
         return true;
+    }
+
+    void PhysXPhysicsWorld::ForEachRigidbody3D(const SR_HTYPES_NS::Function<void(SR_PTYPES_NS::Rigidbody3D *)> &fun) {
+        static const physx::PxActorTypeFlags flags =
+                physx::PxActorTypeFlag::Enum::eRIGID_DYNAMIC |
+                physx::PxActorTypeFlag::Enum::eRIGID_STATIC;
+
+        const uint32_t count = m_scene->getNbActors(flags);
+        if (count == 0) {
+            return;
+        }
+
+        if (m_actors.size() < count) {
+            m_actors.resize(count);
+        }
+
+        auto&& pActors = m_actors.data();
+        m_scene->getActors(flags, pActors, count);
+
+        for (uint32_t i = 0; i < count; ++i) {
+            auto&& pRigidActor = pActors[i]->is<physx::PxRigidActor>();
+            if (!SRVerifyFalse(!pRigidActor)) {
+                continue;
+            }
+
+            auto&& pRigidbody = dynamic_cast<SR_PTYPES_NS::Rigidbody3D*>((SR_PTYPES_NS::Rigidbody*)pRigidActor->userData);
+            fun(pRigidbody);
+        }
     }
 }

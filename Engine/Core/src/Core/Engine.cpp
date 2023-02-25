@@ -43,6 +43,7 @@
 #include <Physics/PhysicsLib.h>
 #include <Physics/PhysicsScene.h>
 #include <Physics/3D/Rigidbody3D.h>
+#include <Physics/3D/Raycast3D.h>
 
 namespace SR_CORE_NS {
     bool Engine::Create() {
@@ -440,6 +441,11 @@ namespace SR_CORE_NS {
         if (m_renderScene.RecursiveLockIfValid()) {
             SR_UTILS_NS::DebugDraw::Instance().SwitchCallbacks(m_renderScene->GetDebugRenderer());
             m_renderScene.Unlock();
+        }
+
+        if (m_physicsScene.LockIfValid()){
+            SR_PHYSICS_NS::Raycast3D::Instance().SwitchPhysics(m_physicsScene->Get3DWorld());
+            m_physicsScene.Unlock();
         }
 
         if (m_scene.LockIfValid()) {

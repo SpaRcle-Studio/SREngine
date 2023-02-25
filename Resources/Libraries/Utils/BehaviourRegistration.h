@@ -23,6 +23,13 @@ struct CollisionData {
     FVector3 impulse;
 };
 
+struct RaycastHit {
+    void* pHandler = nullptr;
+    FVector3 position;
+    FVector3 normal;
+    float_t distance;
+};
+
 class Behaviour;
 
 #define REGISTER_BEHAVIOUR_BASE(className)                                          \

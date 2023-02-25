@@ -16,6 +16,7 @@
 #include <Graphics/Render/PostProcessing.h>
 
 #include <Physics/3D/Rigidbody3D.h>
+#include <Physics/3D/Raycast3D.h>
 
 namespace Framework {
     void API::RegisterEvoScriptClasses() {
@@ -50,6 +51,7 @@ namespace Framework {
             RegisterISavable(generator);
             RegisterObserver(generator);
             RegisterMath(generator);
+            RegisterRaycast(generator);
 
             generator->Save(Helper::ResourceManager::Instance().GetCachePath().Concat("Scripts/Libraries/"));
         }
@@ -88,6 +90,18 @@ namespace Framework {
         //ESRegisterStaticMethod(EvoScript::Public, generator, Debug, Script, void, ESArg1(const std::string& msg), ESArg1(msg))
         //ESRegisterStaticMethod(EvoScript::Public, generator, Debug, ScriptError, void, ESArg1(const std::string& msg), ESArg1(msg))
         //ESRegisterStaticMethod(EvoScript::Public, generator, Debug, ScriptLog, void, ESArg1(const std::string& msg), ESArg1(msg))
+    }
+
+    void API::RegisterRaycast(EvoScript::AddressTableGen *generator){
+        using namespace SR_UTILS_NS;
+        using namespace SR_MATH_NS;
+        using namespace SR_PHYSICS_NS;
+
+        generator->RegisterNewClass("Raycast3D", "Raycast", {"string"});
+
+        ESRegisterCustomStaticMethod(EvoScript::Public, generator, Raycast3D, Cast, std::vector<RaycastHit>, ESArg4(const FVector3& origin, const FVector3& direction, float_t maxDistance, uint32_t maxHits), {
+            return Raycast3D::Instance().Cast(origin, direction, maxDistance, maxHits);
+        });
     }
 
     void API::RegisterEngine(EvoScript::AddressTableGen *generator) {
