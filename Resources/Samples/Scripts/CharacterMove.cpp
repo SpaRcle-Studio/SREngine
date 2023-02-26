@@ -10,6 +10,7 @@
 #include <Libraries/Rigidbody3D.h>
 #include <Libraries/Component.h>
 #include <Libraries/Rigidbody.h>
+#include <Libraries/Raycast.h>
 #include <Libraries/Input.h>
 #include <Libraries/Casts.h>
 
@@ -53,6 +54,17 @@ public:
         if (Input::GetKey(KeyCode::D)) {
             velocity += FVector3(speed, 0, 0);
             isMove = true;
+        }
+
+        if (Input::GetMouseDown(MouseCode::MouseLeft)){
+            auto&& rotate = transform->GetRotation().Radians();
+            auto&& q = Quaternion(rotate);
+
+            if (std::vector<RaycastHit> hits = Raycast3D::Cast(transform->GetTranslation(), (q * FVector3(0, 0, 1)), 100, 5); !hits.empty()) {
+                for (int i = 0; i < hits.size(); i++){
+                    std::cout << "Ray (" << i + 1 << ") hits something. Distance = "  << hits[i].distance << "\t Total hits = " << hits.size() << std::endl;
+                }
+            }
         }
 
         if (isGrounded && Input::GetKeyDown(KeyCode::Space)) {

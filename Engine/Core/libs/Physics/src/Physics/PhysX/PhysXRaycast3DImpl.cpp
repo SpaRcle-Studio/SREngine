@@ -3,8 +3,6 @@
 //
 
 #include <Physics/PhysX/PhysXRaycast3DImpl.h>
-#include <Utils/ECS/GameObject.h>
-#include <Physics/Physx/PhysXRigidbody3D.h>
 
 namespace SR_PHYSICS_NS {
     PhysXRaycast3DImpl::RaycastHits PhysXRaycast3DImpl::Cast(const SR_MATH_NS::FVector3 &origin, const SR_MATH_NS::FVector3 &direction, float_t maxDistance, uint32_t maxHits) {
@@ -16,12 +14,18 @@ namespace SR_PHYSICS_NS {
                 return;
             }
 
+            physx::PxTransform pose = ((physx::PxRigidActor*)pRigidbody->GetHandle())->getGlobalPose();
+
+            if (pose.p == SR_PHYSICS_UTILS_NS::FV3ToPxV3(origin)){
+                return;
+            }
+
             physx::PxRaycastHit pxHit;
             physx::PxU32 hitCount = physx::PxGeometryQuery::raycast(
                     SR_PHYSICS_UTILS_NS::FV3ToPxV3(origin),
                     SR_PHYSICS_UTILS_NS::FV3ToPxV3(direction),
                     ((physx::PxShape*)pRigidbody->GetCollisionShape()->GetHandle())->getGeometry().any(),
-                    physx::PxTransform(((physx::PxRigidActor*)pRigidbody->GetHandle())->getGlobalPose()),
+                    pose,
                     maxDistance,
                     physx::PxHitFlag::eDEFAULT,
                     1,
