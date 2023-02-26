@@ -58,6 +58,10 @@ public:
         }
     }
 
+    void SetScene(ScenePtr ptr) {
+        scene = ptr;
+    }
+
 protected:
     template<typename T> bool AddProperty(const std::string& id, T* ref) {
         g_codegen_properties_registations->emplace_back([this, ref, id]() {

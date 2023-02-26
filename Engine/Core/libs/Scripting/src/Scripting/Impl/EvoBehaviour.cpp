@@ -41,8 +41,6 @@ namespace SR_SCRIPTING_NS {
             m_initBehaviour();
         }
 
-        SetGameObject();
-
         SR_LOG("EvoBehaviour::Load() : behaviour successfully initialized!");
 
         return Behaviour::Load();
@@ -256,9 +254,17 @@ namespace SR_SCRIPTING_NS {
         }
 
         typedef void(*SetGameObjectFnPtr)(SR_UTILS_NS::GameObject::Ptr);
+        typedef void(*SetSceneFnPtr)(SR_WORLD_NS::Scene::Ptr);
 
-        if (auto&& setter = m_script->GetFunction<SetGameObjectFnPtr>("SetGameObject")) {
-            setter(GetGameObject());
+        if (auto&& gameObject = GetGameObject()) {
+            if (auto&& setter = m_script->GetFunction<SetGameObjectFnPtr>("SetGameObject")) {
+                setter(gameObject);
+            }
+        }
+        else if (auto&& pScene = GetScene()) {
+            if (auto&& setter = m_script->GetFunction<SetSceneFnPtr>("SetScene")) {
+                setter(pScene->GetThis());
+            }
         }
     }
 

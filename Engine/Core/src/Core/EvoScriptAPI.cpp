@@ -131,7 +131,11 @@ namespace Framework {
         using namespace SR_HTYPES_NS;
         using namespace SR_WORLD_NS;
 
+        generator->AddIncompleteType("Observer", "Scene");
+
         generator->RegisterNewClass("HierarchyElem", "Scene");
+
+        generator->RegisterNewClass("SceneLogic", "Scene");
 
         generator->RegisterNewClass(
                 "Scene", "Scene",
@@ -146,12 +150,16 @@ namespace Framework {
         ESRegisterMethod(EvoScript::Public, generator, Scene, FindByComponent,  SharedPtr<GameObject>, ESArg1(const std::string& name), ESArg1(name))
         ESRegisterMethod(EvoScript::Public, generator, Scene, Find, SharedPtr<GameObject>, ESArg1(const std::string& name), ESArg1(name))
         ESRegisterMethod(EvoScript::Public, generator, Scene, FindOrInstance, SharedPtr<GameObject>, ESArg1(const std::string& name), ESArg1(name))
+        ESRegisterMethodArg0(EvoScript::Public, generator, Scene, GetLogicBase, SceneLogic*)
+        ESRegisterStaticMethod(EvoScript::Public, generator, Scene, New, SafePtr<Scene>, ESArg1(const std::string& name), ESArg1(name))
 
         //ESRegisterMethodArg0(EvoScript::Public, generator, Scene, GetObserver, Observer*)
         //ESRegisterMethod(EvoScript::Public, generator, Scene, GetWorldPosition, FVector3, ESArg2(const IVector3& region, const IVector3& chunk), ESArg2(region, chunk))
         //ESRegisterMethod(EvoScript::Public, generator, Scene, IsChunkLoaded, bool, ESArg2(const IVector3& region, const IVector3& chunk), ESArg2(region, chunk))
 
-        ESRegisterStaticMethod(EvoScript::Public, generator, Scene, New, SafePtr<Scene>, ESArg1(const std::string& name), ESArg1(name))
+        generator->RegisterNewClass("SceneCubeChunkLogic", "Scene");
+
+        ESRegisterMethodArg0(EvoScript::Public, generator, SceneCubeChunkLogic, GetObserver, Observer*)
     }
 
     void API::RegisterUtils(EvoScript::AddressTableGen *generator) {
@@ -555,6 +563,7 @@ namespace Framework {
         ESRegisterDynamicCast(generator, Rigidbody3D, Component)
         ESRegisterDynamicCast(generator, Rigidbody, Component)
         ESRegisterDynamicCast(generator, Mesh, Component)
+        ESRegisterDynamicCast(generator, SceneLogic, SceneCubeChunkLogic)
     }
 
     void API::RegisterShader(EvoScript::AddressTableGen *generator) {

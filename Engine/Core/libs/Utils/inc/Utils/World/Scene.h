@@ -62,6 +62,7 @@ namespace SR_WORLD_NS {
         SR_NODISCARD SR_HTYPES_NS::DataStorage& GetDataStorage() { return m_dataStorage; }
         SR_NODISCARD const SR_HTYPES_NS::DataStorage& GetDataStorage() const { return m_dataStorage; }
         SR_NODISCARD SR_INLINE SceneBuilder* GetSceneBuilder() const { return m_sceneBuilder; }
+        SR_NODISCARD SR_INLINE SceneLogic* GetLogicBase() const { return m_logic; }
 
         GameObjects& GetRootGameObjects();
 

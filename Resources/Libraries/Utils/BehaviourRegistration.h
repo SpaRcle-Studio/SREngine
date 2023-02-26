@@ -81,6 +81,12 @@ class Behaviour;
         }                                                                           \
     }                                                                               \
                                                                                     \
+    EXTERN void SetScene(Behaviour::ScenePtr scene) {                               \
+        if (auto&& ptr = g_codegen_behaviour_ptr.ReinterpretCast<className*>()) {   \
+            ptr->SetScene(scene);                                                   \
+        }                                                                           \
+    }                                                                               \
+                                                                                    \
     EXTERN void OnCollisionEnter(const CollisionData& data) {                       \
         if (auto&& ptr = g_codegen_behaviour_ptr.ReinterpretCast<className*>()) {   \
             ptr->OnCollisionEnter(data);                                            \
