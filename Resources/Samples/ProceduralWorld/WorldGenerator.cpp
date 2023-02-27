@@ -117,14 +117,17 @@ public:
         std::string name = "Chunk(" + std::to_string(absChunk.x) + ", " + std::to_string(absChunk.y) + ", " + std::to_string(absChunk.z) + ")";
 
         if (auto&& chunkPtr = scene->Find(name); !chunkPtr) {
-            chunkPtr = scene->Instance(name);
+            chunkPtr = scene->InstanceFromFile("Samples/ProceduralWorld/Chunk.prefab");
+            chunkPtr->SetName(name);
+            chunkPtr->GetTransform()->SetTranslation(position);
 
-            chunkPtr->GetTransform()->SetTranslation(position + FVector3(1, 1, 1));
+            /*chunkPtr = scene->Instance(name);
+
 
             if (!chunkPtr->GetComponent("Mesh3D")) {
                 auto pCube = Mesh::Load("Engine/Models/cube.obj", MeshType::Static)[0];
                 chunkPtr->AddComponent(DynamicCastMeshToComponent(pCube));
-            }
+            }*/
         }
     }
 

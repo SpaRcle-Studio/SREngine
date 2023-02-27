@@ -572,4 +572,14 @@ namespace SR_UTILS_NS {
 
         return GameObject::Ptr();
     }
+
+    GameObject::Ptr GameObject::GetRoot() const noexcept {
+        /// TODO: optimize
+
+        if (m_parent) {
+            return m_parent->GetRoot();
+        }
+
+        return GetThis();
+    }
 }

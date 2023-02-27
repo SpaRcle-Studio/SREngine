@@ -23,7 +23,12 @@ namespace SR_PTYPES_NS {
     }
 
     Rigidbody::~Rigidbody() {
-        SR_SAFE_DELETE_PTR(m_shape);
+        /// SR_SAFE_DELETE_PTR(m_shape);
+        /// moved to parent class
+    }
+
+    std::string Rigidbody::GetEntityInfo() const {
+        return Super::GetEntityInfo() + " | " + SR_UTILS_NS::EnumReflector::ToString(m_shape->GetType());
     }
 
     Rigidbody::ComponentPtr Rigidbody::LoadComponent(SR_UTILS_NS::Measurement measurement, SR_HTYPES_NS::Marshal &marshal, const SR_HTYPES_NS::DataStorage *dataStorage) {
@@ -100,12 +105,18 @@ namespace SR_PTYPES_NS {
             m_shape->RemoveDebugShape();
         }
 
-        if (auto&& physicsScene = GetPhysicsScene()) {
+        auto&& physicsScene = GetPhysicsScene();
+        if (physicsScene) {
             physicsScene->Remove(this);
         }
 
+        m_parent = nullptr;
+
         Super::OnDestroy();
-        delete this;
+
+        if (!physicsScene) {
+            delete this;
+        }
     }
 
     void Rigidbody::OnAttached() {

@@ -8,6 +8,10 @@
 #include <Physics/PhysX/PhysXUtils.h>
 #include <Physics/PhysicsWorld.h>
 
+namespace SR_PTYPES_NS {
+    class Rigidbody;
+}
+
 namespace SR_PHYSICS_NS {
     class ContactReportCallback;
     class PhysXPhysicsWorld : public PhysicsWorld {
@@ -27,6 +31,8 @@ namespace SR_PHYSICS_NS {
         bool RemoveRigidbody(RigidbodyPtr pRigidbody) override;
 
         void ForEachRigidbody3D(const SR_HTYPES_NS::Function<void(SR_PTYPES_NS::Rigidbody3D *)> &fun) override;
+
+        void Flush() override;
 
     private:
         bool SynchronizeStatic();

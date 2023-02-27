@@ -27,6 +27,8 @@ namespace SR_PHYSICS_NS {
         virtual bool ClearForces() { return false; }
         virtual bool Synchronize() { return false; }
 
+        virtual void Flush() { }
+
         virtual bool AddRigidbody(RigidbodyPtr pRigidbody) { return false; }
         virtual bool RemoveRigidbody(RigidbodyPtr pRigidbody) { return false; }
 

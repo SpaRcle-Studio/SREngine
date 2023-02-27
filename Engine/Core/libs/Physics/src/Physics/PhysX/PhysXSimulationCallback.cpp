@@ -45,6 +45,11 @@ namespace SR_PHYSICS_NS {
             auto&& gameObject1 = rigidbody1->GetGameObject();
             auto&& gameObject2 = rigidbody2->GetGameObject();
 
+            if (!gameObject1 || !gameObject2) {
+                SRHalt0();
+                continue;
+            }
+
             data.point = SR_PHYSICS_UTILS_NS::PxV3ToFV3(point);
             data.impulse = SR_PHYSICS_UTILS_NS::PxV3ToFV3(impulse);
             data.pHandler = rigidbody2;
@@ -101,8 +106,9 @@ namespace SR_PHYSICS_NS {
         {
             // ignore pairs when shapes have been deleted
             if (pairs[i].flags & (physx::PxTriggerPairFlag::eREMOVED_SHAPE_TRIGGER |
-                                  physx::PxTriggerPairFlag::eREMOVED_SHAPE_OTHER))
+                                  physx::PxTriggerPairFlag::eREMOVED_SHAPE_OTHER)) {
                 continue;
+            }
 
             const physx::PxTriggerPair& tp = pairs[i];
 
@@ -116,6 +122,11 @@ namespace SR_PHYSICS_NS {
 
             auto&& triggerGameObject = triggerRigidBody->GetGameObject();
             auto&& gameObject = rigidbody->GetGameObject();
+
+            if (!triggerGameObject || !gameObject) {
+                SRHalt0();
+                continue;
+            }
 
             data.pHandler = rigidbody;
 

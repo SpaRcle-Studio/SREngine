@@ -51,7 +51,7 @@ namespace SR_HTYPES_NS {
 
         SR_NODISCARD SR_FORCE_INLINE T* Get() const noexcept { return m_ptr; }
         SR_NODISCARD SR_FORCE_INLINE void* GetRawPtr() const noexcept { return (void*)m_ptr; }
-        SR_NODISCARD SharedPtr<T> GetThis() {
+        SR_NODISCARD SharedPtr<T> GetThis() const {
             return SharedPtr<T>(*this);
         }
         SR_NODISCARD SR_FORCE_INLINE bool Valid() const noexcept { return m_data && m_data->m_valid; }

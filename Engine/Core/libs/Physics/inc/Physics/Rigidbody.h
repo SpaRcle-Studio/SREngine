@@ -44,6 +44,8 @@ namespace SR_PTYPES_NS {
 
         virtual void Synchronize() { }
 
+        virtual std::string GetEntityInfo() const override;
+
         virtual bool UpdateShapeInternal() { return false; }
         virtual void UpdateInertia() { }
         virtual void ClearForces() { }

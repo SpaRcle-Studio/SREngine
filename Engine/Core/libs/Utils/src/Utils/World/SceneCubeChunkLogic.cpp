@@ -395,7 +395,8 @@ namespace SR_WORLD_NS {
         const World::Offset& offset = m_observer->m_offset;
 
         if (m_observer->m_target) {
-            m_observer->m_targetPosition = m_observer->m_target->GetTransform()->GetTranslation().Singular(chunkSize.Cast<Math::Unit>());
+            auto&& pTransform = m_observer->m_target->GetRoot()->GetTransform();
+            m_observer->m_targetPosition = pTransform->GetTranslation().Singular(chunkSize.Cast<Math::Unit>());
         }
 
         auto&& lastChunk = m_observer->m_lastChunk;

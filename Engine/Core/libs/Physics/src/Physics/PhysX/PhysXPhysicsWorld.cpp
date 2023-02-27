@@ -147,6 +147,11 @@ namespace SR_PHYSICS_NS {
         return true;
     }
 
+    void PhysXPhysicsWorld::Flush() {
+        m_scene->flushSimulation();
+        PhysicsWorld::Flush();
+    }
+
     bool PhysXPhysicsWorld::SynchronizeStatic() {
         const uint32_t count = m_scene->getNbActors(physx::PxActorTypeFlag::Enum::eRIGID_STATIC);
         if (count == 0) {

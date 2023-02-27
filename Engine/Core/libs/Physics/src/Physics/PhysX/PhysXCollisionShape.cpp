@@ -11,6 +11,7 @@ namespace SR_PTYPES_NS {
 
     PhysXCollisionShape::~PhysXCollisionShape() {
         if (m_shape) {
+            m_shape->userData = nullptr;
             m_shape->release();
             m_shape = nullptr;
         }
