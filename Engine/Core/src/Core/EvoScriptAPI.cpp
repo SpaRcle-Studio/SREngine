@@ -144,7 +144,6 @@ namespace Framework {
         );
 
         ESRegisterMethodArg0(EvoScript::Public, generator, Scene, GetName, std::string)
-        //ESRegisterMethod(EvoScript::Public, generator, Scene, ScopeCheckFunction, bool, ESArg3(int32_t x, int32_t y, int32_t z), ESArg3(x, y, z))
         ESRegisterMethod(EvoScript::Public, generator, Scene, Instance, SharedPtr<GameObject>, ESArg1(const std::string& name), ESArg1(name))
         ESRegisterMethod(EvoScript::Public, generator, Scene, InstanceFromFile, SharedPtr<GameObject>, ESArg1(const std::string& name), ESArg1(name))
         ESRegisterMethod(EvoScript::Public, generator, Scene, FindByComponent,  SharedPtr<GameObject>, ESArg1(const std::string& name), ESArg1(name))
@@ -153,13 +152,12 @@ namespace Framework {
         ESRegisterMethodArg0(EvoScript::Public, generator, Scene, GetLogicBase, SceneLogic*)
         ESRegisterStaticMethod(EvoScript::Public, generator, Scene, New, SafePtr<Scene>, ESArg1(const std::string& name), ESArg1(name))
 
-        //ESRegisterMethodArg0(EvoScript::Public, generator, Scene, GetObserver, Observer*)
-        //ESRegisterMethod(EvoScript::Public, generator, Scene, GetWorldPosition, FVector3, ESArg2(const IVector3& region, const IVector3& chunk), ESArg2(region, chunk))
-        //ESRegisterMethod(EvoScript::Public, generator, Scene, IsChunkLoaded, bool, ESArg2(const IVector3& region, const IVector3& chunk), ESArg2(region, chunk))
-
         generator->RegisterNewClass("SceneCubeChunkLogic", "Scene");
 
         ESRegisterMethodArg0(EvoScript::Public, generator, SceneCubeChunkLogic, GetObserver, Observer*)
+        ESRegisterMethod(EvoScript::Public, generator, SceneCubeChunkLogic, GetWorldPosition, FVector3, ESArg2(const IVector3& region, const IVector3& chunk), ESArg2(region, chunk))
+        ESRegisterMethod(EvoScript::Public, generator, SceneCubeChunkLogic, IsChunkLoaded, bool, ESArg2(const IVector3& region, const IVector3& chunk), ESArg2(region, chunk))
+        ESRegisterMethod(EvoScript::Public, generator, SceneCubeChunkLogic, ScopeCheckFunction, bool, ESArg3(int32_t x, int32_t y, int32_t z), ESArg3(x, y, z))
     }
 
     void API::RegisterUtils(EvoScript::AddressTableGen *generator) {
@@ -587,6 +585,7 @@ namespace Framework {
         ESRegisterMethodArg0(EvoScript::Public, generator, Observer, GetChunkSize, IVector2)
         ESRegisterMethodArg0(EvoScript::Public, generator, Observer, GetRegionSize, int32_t)
         ESRegisterMethodArg0(EvoScript::Public, generator, Observer, GetScope, int32_t)
+        ESRegisterMethodArg0(EvoScript::Public, generator, Observer, HasTarget, bool)
         ESRegisterCustomMethod(EvoScript::Public, generator, Observer, MathNeighbour, ESMakePair(IVector3, IVector3), ESArg1(const IVector3& offset), {
             auto&& neighbourOffset = ptr->MathNeighbour(offset);
             return std::make_pair(neighbourOffset.GetRegion(), neighbourOffset.GetChunk());

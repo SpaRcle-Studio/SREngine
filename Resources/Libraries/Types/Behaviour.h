@@ -6,6 +6,7 @@
 #define EVOSCRIPTLIB_BEHAVIOUR_H
 
 #include <Libraries/Utils/BehaviourRegistration.h>
+#include <Libraries/Types/SafePointer.h>
 #include <Libraries/GameObject.h>
 #include <Libraries/Scene.h>
 
