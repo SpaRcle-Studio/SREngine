@@ -50,7 +50,8 @@ public:
         int x = 0;
     	int z = 0;
 
-        int size = m_scope * 2;
+        int scope = std::max(1, m_scope - 3);
+        int size = scope * 2 + 1;
 
         int boundary = size - 1;
         int sizeLeft = boundary;
@@ -62,10 +63,8 @@ public:
 
         for (int i = 1; i < size * size + 1; ++i)
         {
-            for (int y = -1; y <= 1; ++y) {
-                if (m_logic->ScopeCheckFunction(x - m_scope, y, z - m_scope)) {
-                    m_spiral.emplace(m_spiral.begin(), IVector3(x - m_scope, y, z - m_scope));
-                }
+            if (m_logic->ScopeCheckFunction(x - scope, 0, z - scope)) {
+                m_spiral.emplace(m_spiral.begin(), IVector3(x - scope, 0, z - scope));
             }
 
             switch (move) {
