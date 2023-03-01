@@ -21,6 +21,18 @@ namespace SR_UTILS_NS {
         SR_NODISCARD Transform* Copy() const override;
 
     };
+
+    class SR_DLL_EXPORT TransformHolder : public Transform {
+        friend class GameObject;
+    public:
+        ~TransformHolder() override = default;
+
+    public:
+        SR_NODISCARD Measurement GetMeasurement() const override { return Measurement::SpaceZero; }
+
+        SR_NODISCARD Transform* Copy() const override;
+
+    };
 }
 
 

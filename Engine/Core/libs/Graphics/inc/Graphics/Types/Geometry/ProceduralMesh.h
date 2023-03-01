@@ -29,6 +29,7 @@ namespace SR_GTYPES_NS {
         void SetVertices(const std::vector<Vertices::StaticMeshVertex>& vertices);
 
         void UseMaterial() override;
+        void UseModelMatrix() override;
 
         SR_NODISCARD bool IsCanCalculate() const override;
 

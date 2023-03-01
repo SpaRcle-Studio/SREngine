@@ -213,7 +213,7 @@ namespace SR_UTILS_NS {
     }
 
     void GameObject::CheckActivity() noexcept {
-        if (!m_dirty) {
+        if (!IsDirty()) {
             return;
         }
 
@@ -222,7 +222,7 @@ namespace SR_UTILS_NS {
         IComponentable::CheckActivity();
 
         for (auto&& child : m_children) {
-            child->m_dirty = true;
+            child->SetDirty(true);
             child->CheckActivity();
         }
     }
@@ -230,14 +230,14 @@ namespace SR_UTILS_NS {
     void GameObject::Awake(bool isPaused) noexcept {
         /// Проверяем на IsEnabled а не на IsActive,
         /// так как если родитель не активен, то метод не вызвался бы.
-        if (!m_dirty || !IsEnabled()) {
+        if (!IsDirty() || !IsEnabled()) {
             return;
         }
 
         IComponentable::Awake(isPaused);
 
         for (auto&& child : m_children) {
-            child->m_dirty = true;
+            child->SetDirty(true);
             child->Awake(isPaused);
         }
     }
@@ -245,14 +245,14 @@ namespace SR_UTILS_NS {
     void GameObject::Start() noexcept {
         /// Проверяем на IsEnabled а не на IsActive,
         /// так как если родитель не активен, то метод не вызвался бы.
-        if (!m_dirty || !IsEnabled()) {
+        if (!IsDirty() || !IsEnabled()) {
             return;
         }
 
         IComponentable::Start();
 
         for (auto&& child : m_children) {
-            child->m_dirty = true;
+            child->SetDirty(true);
             child->Start();
         }
     }
@@ -303,7 +303,7 @@ namespace SR_UTILS_NS {
         }
 
          for (auto&& child : m_children) {
-             child->m_dirty = true;
+             child->SetDirty(true);
              child->PostLoad();
          }
 
@@ -370,15 +370,25 @@ namespace SR_UTILS_NS {
         return true;
     }
 
-    void GameObject::SetTransform(Transform *transform) {
-        if (m_transform == transform || !transform) {
+    void GameObject::SetTransform(Transform* pTransform) {
+        if (!pTransform) {
+            SRHalt("pTransform is nullptr!");
+            return;
+        }
+
+        if (pTransform->GetMeasurement() == Measurement::Holder && GetParent()) {
+            SRHalt("Incorrect HOLDER transform usage!");
+            return;
+        }
+
+        if (m_transform == pTransform) {
             SR_WARN("GameObject::SetTransform() : invalid transform!");
         }
         else {
             if (m_transform) {
                 delete m_transform;
             }
-            m_transform = transform;
+            m_transform = pTransform;
             m_transform->SetGameObject(this);
             SetDirty(true);
         }
@@ -434,13 +444,16 @@ namespace SR_UTILS_NS {
     }
 
     void GameObject::SetDirty(bool dirty) {
-        if (m_dirty == dirty) {
+        if (IsDirty() == dirty) {
+            IComponentable::SetDirty(dirty);
             return;
         }
 
+        IComponentable::SetDirty(dirty);
+
         /// Грязный флаг передаем вверх, а чистый вниз.
         /// Это нужно для оптимизации
-        if ((m_dirty = dirty)) {
+        if (IsDirty()) {
             if (m_parent) {
                 m_parent->SetDirty(dirty);
             }
@@ -581,5 +594,9 @@ namespace SR_UTILS_NS {
         }
 
         return GetThis();
+    }
+
+    GameObject::Ptr GameObject::Find(const std::string &name) const noexcept {
+        return Find(SR_HASH_STR(name));
     }
 }

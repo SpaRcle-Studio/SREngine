@@ -36,6 +36,7 @@ namespace SR_WORLD_NS {
         SR_NODISCARD bool IsChunkLoaded(const SR_MATH_NS::IVector3& region, const SR_MATH_NS::IVector3& chunk) const;
         SR_NODISCARD bool ScopeCheckFunction(int32_t x, int32_t y, int32_t z) const;
         SR_NODISCARD Path GetRegionsPath() const;
+        SR_NODISCARD std::pair<SR_MATH_NS::IVector3, SR_MATH_NS::IVector3> GetRegionAndChunk(const SR_MATH_NS::FVector3& pos) const;
 
     private:
         SR_NODISCARD SR_MATH_NS::IVector3 CalculateCurrentChunk() const;

@@ -66,6 +66,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD GameObject::Ptr GetParent() const noexcept { return m_parent; }
         SR_NODISCARD GameObject::Ptr GetRoot() const noexcept;
         SR_NODISCARD GameObject::Ptr Find(uint64_t hashName) const noexcept;
+        SR_NODISCARD GameObject::Ptr Find(const std::string& name) const noexcept;
         SR_NODISCARD std::string GetName() const { return m_name; }
         SR_NODISCARD Tag GetTag() const;
         SR_NODISCARD bool HasTag() const;

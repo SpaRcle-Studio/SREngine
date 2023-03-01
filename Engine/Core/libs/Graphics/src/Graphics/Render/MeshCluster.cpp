@@ -72,6 +72,8 @@ namespace SR_GRAPH_NS {
     bool MeshCluster::Add(Types::Mesh* pMesh) noexcept {
         const auto&& pShader = pMesh->GetShader();
 
+        SRAssert(pMesh->GetPipeline());
+
         SRAssert(pShader);
 
         if (auto&& subClusterIt = m_subClusters.find(pShader); subClusterIt == m_subClusters.end()) {
@@ -138,6 +140,7 @@ namespace SR_GRAPH_NS {
                     if (pMesh->GetCountUses() == 1) {
                         if (pMesh->IsCalculated()) {
                             pMesh->FreeVideoMemory();
+                            pMesh->DeInitGraphicsResource();
                         }
 
                         pMesh->RemoveUsePoint();

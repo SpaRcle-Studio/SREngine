@@ -123,6 +123,9 @@ namespace SR_UTILS_NS {
         auto&& measurement = static_cast<Measurement>(marshal.Read<uint8_t>());
 
         switch (measurement) {
+            case Measurement::Holder:
+                transform = new TransformHolder();
+                break;
             case Measurement::SpaceZero:
                 transform = new TransformZero();
                 break;

@@ -10,7 +10,7 @@
 
 namespace SR_UTILS_NS {
     bool IComponentable::IsDirty() const noexcept {
-        return m_dirty;
+        return m_dirty > 0;
     }
 
     SR_HTYPES_NS::Marshal::Ptr IComponentable::SaveComponents(SR_HTYPES_NS::Marshal::Ptr pMarshal, SavableFlags flags) const {
@@ -167,7 +167,7 @@ namespace SR_UTILS_NS {
     }
 
     bool IComponentable::PostLoad() {
-        if (!m_dirty) {
+        if (!IsDirty()) {
             return false;
         }
 
@@ -190,11 +190,13 @@ namespace SR_UTILS_NS {
     }
 
     void IComponentable::Awake(bool isPaused) noexcept {
-        if (!m_dirty) {
+        if (!IsDirty()) {
             return;
         }
 
-        for (auto&& pComponent : m_components) {
+        for (uint32_t i = 0; i < m_components.size(); ++i) {
+            auto&& pComponent = m_components[i];
+
             if (isPaused && !pComponent->ExecuteInEditMode()) {
                 continue;
             }
@@ -208,11 +210,13 @@ namespace SR_UTILS_NS {
     }
 
     void IComponentable::Start() noexcept {
-        if (!m_dirty) {
+        if (!IsDirty()) {
             return;
         }
 
-        for (auto&& pComponent : m_components) {
+        for (uint32_t i = 0; i < m_components.size(); ++i) {
+            auto&& pComponent = m_components[i];
+
             if (!pComponent->IsAwake()) {
                 continue;
             }
@@ -226,11 +230,13 @@ namespace SR_UTILS_NS {
     }
 
     void IComponentable::CheckActivity() noexcept {
-        if (!m_dirty) {
+        if (!IsDirty()) {
             return;
         }
 
-        for (auto&& pComponent : m_components) {
+        for (uint32_t i = 0; i < m_components.size(); ++i) {
+            auto&& pComponent = m_components[i];
+
             if (!pComponent->IsAwake()) {
                 continue;
             }
@@ -240,7 +246,8 @@ namespace SR_UTILS_NS {
     }
 
     void IComponentable::DestroyComponents() {
-        for (auto&& pComponent : m_components) {
+        for (uint32_t i = 0; i < m_components.size(); ++i) {
+            auto&& pComponent = m_components[i];
             DestroyComponent(pComponent);
         }
 

@@ -155,6 +155,7 @@ namespace Framework {
         generator->RegisterNewClass("SceneCubeChunkLogic", "Scene");
 
         ESRegisterMethodArg0(EvoScript::Public, generator, SceneCubeChunkLogic, GetObserver, Observer*)
+        ESRegisterMethod(EvoScript::Public, generator, SceneCubeChunkLogic, GetRegionAndChunk, ESMakePair(IVector3, IVector3), ESArg1(const FVector3& position), ESArg1(position))
         ESRegisterMethod(EvoScript::Public, generator, SceneCubeChunkLogic, GetWorldPosition, FVector3, ESArg2(const IVector3& region, const IVector3& chunk), ESArg2(region, chunk))
         ESRegisterMethod(EvoScript::Public, generator, SceneCubeChunkLogic, IsChunkLoaded, bool, ESArg2(const IVector3& region, const IVector3& chunk), ESArg2(region, chunk))
         ESRegisterMethod(EvoScript::Public, generator, SceneCubeChunkLogic, ScopeCheckFunction, bool, ESArg3(int32_t x, int32_t y, int32_t z), ESArg3(x, y, z))
@@ -254,8 +255,10 @@ namespace Framework {
         ESRegisterMethod(EvoScript::Public, generator, GameObject, AddComponent, bool, ESArg1(Component* comp), ESArg1(comp))
         ESRegisterMethod(EvoScript::Public, generator, GameObject, AddChild, bool, ESArg1(const SharedPtr<GameObject>& child), ESArg1(child))
         ESRegisterMethod(EvoScript::Public, generator, GameObject, GetComponent, Component*, ESArg1(const std::string& name), ESArg1(name))
+        ESRegisterMethod(EvoScript::Public, generator, GameObject, Find, SharedPtr<GameObject>, ESArg1(const std::string& name), ESArg1(name))
         ESRegisterMethod(EvoScript::Public, generator, GameObject, SetName, void, ESArg1(const std::string& name), ESArg1(name))
         ESRegisterMethod(EvoScript::Public, generator, GameObject, GetOrCreateComponent, Component*, ESArg1(const std::string& name), ESArg1(name))
+        ESRegisterMethod(EvoScript::Public, generator, GameObject, SetTransform, void, ESArg1(Transform* pTransform), ESArg1(pTransform))
         ESRegisterMethodArg0(EvoScript::Public, generator, GameObject, GetBarycenter, FVector3)
         ESRegisterMethodArg0(EvoScript::Public, generator, GameObject, GetName, std::string)
         ESRegisterMethodArg0(EvoScript::Public, generator, GameObject, GetTransform, Transform*)
@@ -350,6 +353,22 @@ namespace Framework {
         ESRegisterMethodArg0(EvoScript::Public, generator, Transform, GetRotation, FVector3)
 
         ESRegisterMethodArg0(EvoScript::Public, generator, Transform, GetTranslation, FVector3)
+
+        ESRegisterCustomStaticMethodArg0(EvoScript::Public, generator, Transform, NewHolder, Transform*, {
+            return new TransformHolder();
+        });
+
+        ESRegisterCustomStaticMethodArg0(EvoScript::Public, generator, Transform, NewZero, Transform*, {
+            return new TransformZero();
+        });
+
+        ESRegisterCustomStaticMethodArg0(EvoScript::Public, generator, Transform, New2D, Transform*, {
+            return new Transform2D();
+        });
+
+        ESRegisterCustomStaticMethodArg0(EvoScript::Public, generator, Transform, New3D, Transform*, {
+            return new Transform3D();
+        });
     }
 
     void API::RegisterInput(EvoScript::AddressTableGen *generator) {

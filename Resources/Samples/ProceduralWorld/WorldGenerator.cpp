@@ -60,6 +60,7 @@ public:
         char move = 'r';
 
         m_spiral.clear();
+        m_spiral.reserve(size * size);
 
         for (int i = 1; i < size * size + 1; ++i)
         {
@@ -115,10 +116,17 @@ public:
 
         std::string name = "Chunk(" + std::to_string(absChunk.x) + ", " + std::to_string(absChunk.y) + ", " + std::to_string(absChunk.z) + ")";
 
+    	//GameObjectPtr chunkHolder = scene->Find("CHUNK_HODLER");
+       // if (!chunkHolder) {
+       //     chunkHolder = scene->Instance("CHUNK_HODLER");
+            //chunkHolder->SetTransform(Transform::NewZero());
+        //}
+
         if (auto&& chunkPtr = scene->Find(name); !chunkPtr) {
             chunkPtr = scene->InstanceFromFile("Samples/ProceduralWorld/Chunk.prefab");
             chunkPtr->SetName(name);
             chunkPtr->GetTransform()->SetTranslation(position);
+            //chunkHolder->AddChild(chunkPtr);
 
             /*chunkPtr = scene->Instance(name);
 

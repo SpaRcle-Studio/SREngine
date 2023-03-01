@@ -30,11 +30,14 @@ namespace SR_GRAPH_NS::Memory {
 
     public:
         /// данный метод можно вызывать только из контекста рендера,
-        /// в котором он был инициализирован
+        /// в котором он был инициализирован. Либо из кластера если это меш
+        virtual void DeInitGraphicsResource() {
+            m_pipeline = nullptr;
+            m_renderContext = nullptr;
+        }
+
         virtual void FreeVideoMemory() {
             m_isCalculated = false;
-            m_renderContext = nullptr;
-            m_pipeline = nullptr;
         }
 
         void SetRenderContext(const RenderContextPtr& renderContext);

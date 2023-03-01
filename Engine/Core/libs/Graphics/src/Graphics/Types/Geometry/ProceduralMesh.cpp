@@ -165,6 +165,11 @@ namespace SR_GTYPES_NS {
 
     void ProceduralMesh::UseMaterial() {
         Mesh::UseMaterial();
-        GetShader()->SetMat4(SHADER_MODEL_MATRIX, m_modelMatrix);
+        UseModelMatrix();
+    }
+
+    void ProceduralMesh::UseModelMatrix() {
+        Mesh::UseModelMatrix();
+        GetRenderContext()->GetCurrentShader()->SetMat4(SHADER_MODEL_MATRIX, m_modelMatrix);
     }
 }

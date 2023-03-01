@@ -95,6 +95,8 @@ namespace SR_WORLD_NS {
 
         constexpr float_t alpha = 3.f;
 
+        /// TODO: есть предположение, что криво вычисляется попадание в радиус, надо проверить
+
         return ((SR_POW(x) / alpha) + (SR_POW(y) / alpha) + SR_POW(z) <= SR_POW(m_observer->m_scope));
     }
 
@@ -322,6 +324,26 @@ namespace SR_WORLD_NS {
         return m_scene->GetPath().Concat("regions");
     }
 
+    std::pair<SR_MATH_NS::IVector3, SR_MATH_NS::IVector3> SceneCubeChunkLogic::GetRegionAndChunk(const SR_MATH_NS::FVector3& pos) const {
+        const auto chunkSize = Math::IVector3(m_chunkSize.x, m_chunkSize.y, m_chunkSize.x);
+        const World::Offset& offset = m_observer->m_offset;
+
+        auto&& currentRegion = SR_MATH_NS::IVector3(pos / chunkSize);
+
+        if (currentRegion.x == 0) { currentRegion.x = -1; }
+        if (currentRegion.y == 0) { currentRegion.y = -1; }
+        if (currentRegion.z == 0) { currentRegion.z = -1; }
+
+        auto&& currentChunk = AddOffset(
+                currentRegion,
+                -offset.m_chunk
+        );
+
+        SRAssertOnce(!currentChunk.HasZero());
+
+        return std::make_pair(currentRegion, currentChunk);
+    }
+
     bool SceneCubeChunkLogic::Save(const Path &path) {
         SR_LOCK_GUARD
 
@@ -460,22 +482,7 @@ namespace SR_WORLD_NS {
     }
 
     SR_MATH_NS::IVector3 SceneCubeChunkLogic::CalculateCurrentChunk() const {
-        const auto chunkSize = Math::IVector3(m_chunkSize.x, m_chunkSize.y, m_chunkSize.x);
-        const World::Offset& offset = m_observer->m_offset;
-
-        auto&& currentRegion = SR_MATH_NS::IVector3(m_observer->m_targetPosition / chunkSize);
-
-        if (currentRegion.x == 0) { currentRegion.x = -1; }
-        if (currentRegion.y == 0) { currentRegion.y = -1; }
-        if (currentRegion.z == 0) { currentRegion.z = -1; }
-
-        auto&& currentChunk = AddOffset(
-                currentRegion,
-                -offset.m_chunk
-        );
-
-        SRAssertOnce(!currentChunk.HasZero());
-
-        return currentChunk;
+        auto&& [region, chunk] = GetRegionAndChunk(m_observer->m_targetPosition);
+        return chunk;
     }
 }

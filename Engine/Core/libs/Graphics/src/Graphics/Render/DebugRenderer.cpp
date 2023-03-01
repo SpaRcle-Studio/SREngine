@@ -239,6 +239,7 @@ namespace SR_GRAPH_NS {
 
             if (!timed.registered) {
                 timed.pMesh->FreeVideoMemory();
+                timed.pMesh->DeInitGraphicsResource();
             }
 
             timed.pMesh->RemoveUsePoint();

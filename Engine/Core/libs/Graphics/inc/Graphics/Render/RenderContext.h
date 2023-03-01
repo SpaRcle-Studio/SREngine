@@ -146,6 +146,7 @@ namespace SR_GRAPH_NS {
                     /// Ресурс необязательно имеет видеопамять, а лишь содержит другие ресурсы, например материал.
                     if (auto&& pGraphicsResource = dynamic_cast<Memory::IGraphicsResource*>(pResource)) {
                         pGraphicsResource->FreeVideoMemory();
+                        pGraphicsResource->DeInitGraphicsResource();
                     }
 
                     pResource->RemoveUsePoint();

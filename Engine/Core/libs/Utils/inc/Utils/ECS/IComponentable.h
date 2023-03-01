@@ -36,7 +36,9 @@ namespace SR_UTILS_NS {
         virtual void Awake(bool isPaused) noexcept;
         virtual void Start() noexcept;
 
-        virtual void SetDirty(bool value) { m_dirty = value; };
+        virtual void SetDirty(bool dirty) {
+            m_dirty = SR_CLAMP(m_dirty + (dirty ? 1 : -1), 3, 0);
+        };
 
         virtual Component* GetOrCreateComponent(const std::string& name);
         virtual Component* GetComponent(const std::string& name);
@@ -65,10 +67,11 @@ namespace SR_UTILS_NS {
         void DestroyComponent(Component* pComponent);
 
     protected:
-        bool m_dirty = true;
-
         Components m_components = { };
         ComponentList m_loadedComponents = { };
+
+    private:
+        int8_t m_dirty = 1;
 
     };
 }

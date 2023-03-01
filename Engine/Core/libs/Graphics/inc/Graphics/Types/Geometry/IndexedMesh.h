@@ -53,6 +53,8 @@ namespace SR_GRAPH_NS::Types {
                 return false;
             }
 
+            SRAssert(m_pipeline);
+
             if (m_VBO = m_pipeline->CalculateVBO((void*)vertices.data(), type, m_countVertices); m_VBO == SR_ID_INVALID) {
                 SR_ERROR("VertexMesh::Calculate() : failed calculate VBO \"" + GetGeometryName() + "\" mesh!");
                 m_hasErrors = true;
