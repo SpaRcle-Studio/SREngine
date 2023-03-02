@@ -203,7 +203,7 @@ namespace SR_WORLD_NS {
     }
 
     bool Scene::SaveAt(const Path& path) {
-        SR_INFO(SR_FORMAT("Scene::SaveAt() : save scene...\n\tPath: %s", path.CStr()));
+        SR_INFO(SR_FORMAT("Scene::SaveAt() : saving scene...\n\tPath: %s", path.CStr()));
 
         if (m_path.GetExtensionView() != path.GetExtensionView()) {
             SR_ERROR("Scene::SaveAt() : different extensions!\n\tSave path: " + path.ToString() + "\n\tScene path: " + m_path.ToString());

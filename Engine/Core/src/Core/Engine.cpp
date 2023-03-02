@@ -91,7 +91,7 @@ namespace SR_CORE_NS {
 
         SetGameMode(!SR_UTILS_NS::Features::Instance().Enabled("EditorOnStartup", false));
 
-        if (!m_scene.Valid()) {
+        if (!m_scene.Valid() && !m_editor->LoadSceneFromCachedPath()) {
             auto&& scenePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Scenes/New-scene.scene");
 
             if (SR_PLATFORM_NS::IsExists(scenePath)) {

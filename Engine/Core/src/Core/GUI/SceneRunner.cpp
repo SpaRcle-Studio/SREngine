@@ -43,7 +43,7 @@ namespace SR_CORE_NS::GUI {
         {
             if (auto&& pDescriptor = GetEditor()->GetIconDescriptor(EditorIcon::Back)) {
                 if (GUISystem::Instance().ImageButton("##imgSceneBackBtn", pDescriptor, SR_MATH_NS::IVector2(32), 3)) {
-                    
+                    Engine::Instance().GetEditor()->LoadSceneFromCachedPath();
                 }
             }
         }
@@ -153,4 +153,5 @@ namespace SR_CORE_NS::GUI {
 
         return nullptr;
     }
+
 }

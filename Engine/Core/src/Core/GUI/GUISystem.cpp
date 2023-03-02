@@ -551,11 +551,19 @@ bool GUISystem::BeginMenuBar() {
     if (ImGui::BeginMenu("File")) {
         if (ImGui::MenuItem("New scene")) {
             Engine::Instance().SetScene(SR_WORLD_NS::Scene::New(GetNewScenePath()));
+            Engine::Instance().GetEditor()->CacheScenePath(Engine::Instance().GetScene()->GetPath());
         }
 
         ImGui::Separator();
 
         if (ImGui::MenuItem("New prefab")) {
+            if (auto&& scene = Engine::Instance().GetScene(); scene.RecursiveLockIfValid()) {
+                //TODO: проверку на то, что нынешний префаб не сохранён, чтобы не спамить ими
+                scene->Save();
+                Engine::Instance().GetEditor()->CacheScenePath(Engine::Instance().GetScene()->GetPath());
+                scene.Unlock();
+            }
+
             Engine::Instance().SetScene(SR_WORLD_NS::Scene::New(GetNewPrefabPath()));
         }
 
@@ -569,11 +577,13 @@ bool GUISystem::BeginMenuBar() {
 
                     if (auto &&scene = SR_WORLD_NS::Scene::Load(folder)) {
                         Engine::Instance().SetScene(scene);
+                        Engine::Instance().GetEditor()->CacheScenePath(folder);
                     }
                 }
                 else {
                     if (auto &&scene = SR_WORLD_NS::Scene::Load(path)) {
                         Engine::Instance().SetScene(scene);
+                        Engine::Instance().GetEditor()->CacheScenePath(path);
                     }
                 }
             }
@@ -602,6 +612,7 @@ bool GUISystem::BeginMenuBar() {
                     }
                 }
                 scene.Unlock();
+                Engine::Instance().GetEditor()->CacheScenePath(scene->GetPath());
             }
             else {
                 SR_WARN("GUISystem::BeginMenuBar() : scene is not valid!");
@@ -615,6 +626,7 @@ bool GUISystem::BeginMenuBar() {
                 scene->Save();
             }
             Engine::Instance().SetScene(SR_WORLD_NS::Scene::Empty());
+            Engine::Instance().GetEditor()->CacheScenePath("NONE");
         }
 
         ImGui::Separator();
