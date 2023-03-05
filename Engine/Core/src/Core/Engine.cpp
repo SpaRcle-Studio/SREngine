@@ -766,14 +766,14 @@ namespace SR_CORE_NS {
             /// --------------------
             migrated.Write<int32_t>(marshal.Read<int32_t>());
 
-            migrated.Write<SR_MATH_NS::Vector3<float_t>>(marshal.Read<SR_MATH_NS::Vector3<float_t>>(SR_MATH_NS::Vector3<float_t>(0.f)));
-            migrated.Write<SR_MATH_NS::Vector3<float_t>>(marshal.Read<SR_MATH_NS::Vector3<float_t>>(SR_MATH_NS::Vector3<float_t>(1.f)));
+            migrated.Write<SR_MATH_NS::Vector3<float_t>>(marshal.Read<SR_MATH_NS::Vector3<float_t>>(SR_MATH_NS::Vector3<float_t>(0.f)), SR_MATH_NS::Vector3<float_t>(0.f));
+            migrated.Write<SR_MATH_NS::Vector3<float_t>>(marshal.Read<SR_MATH_NS::Vector3<float_t>>(SR_MATH_NS::Vector3<float_t>(1.f)), SR_MATH_NS::Vector3<float_t>(1.f));
 
             migrated.Write<float_t>(marshal.Read<float_t>());
             migrated.Write<bool>(marshal.Read<bool>());
             migrated.Write<bool>(marshal.Read<bool>());
+            migrated.Write<std::string>("Engine/PhysicsMaterials/DefaultMaterial.physmat");
 
-            migrated.Write<std::string>("");
 
             migrated.Write<SR_MATH_NS::BVector3>(marshal.Read<SR_MATH_NS::BVector3>());
             migrated.Write<SR_MATH_NS::BVector3>(marshal.Read<SR_MATH_NS::BVector3>());

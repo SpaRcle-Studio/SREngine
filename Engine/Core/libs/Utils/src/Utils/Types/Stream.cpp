@@ -163,6 +163,7 @@ namespace SR_HTYPES_NS {
     }
 
     void Stream::SetData(const char* pData, uint64_t size) {
+        Reserve(size);
         m_size = m_capacity = size;
         memcpy(m_data, pData, m_capacity);
     }

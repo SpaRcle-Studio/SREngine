@@ -26,34 +26,38 @@ namespace SR_UTILS_NS {
         return m_meta.at(id).constructor();
     }
 
-    Component* ComponentManager::Load(SR_HTYPES_NS::Marshal& marshal) {
+    std::pair<Component*, ComponentLoadResult> ComponentManager::Load(SR_HTYPES_NS::Marshal& marshal) {
         SR_SCOPED_LOCK
+
+        ComponentLoadResult result = ComponentLoadResult::Success;
 
         m_lastComponent = marshal.Read<uint64_t>(); /// name
         auto&& enabled = marshal.Read<bool>();      /// enabled
         auto&& version = marshal.Read<uint16_t>();  /// version
 
         if (version != GetVersionById(m_lastComponent)) {
+            result = ComponentLoadResult::Migrated;
+
             auto&& pMetadataIt = m_meta.find(m_lastComponent);
             if (pMetadataIt == m_meta.end()) {
                 SRHalt("Unknown component!");
-                return nullptr;
+                return std::make_pair(nullptr, ComponentLoadResult::Error);
             }
 
             SR_WARN("ComponentManager::Load() : \"" + pMetadataIt->second.name + "\" has different version! Try migrate...");
 
             if (!Migration::Instance().Migrate(m_lastComponent, marshal, version)) {
                 SR_ERROR("ComponentManager::Load() : failed to migrate component!");
-                return nullptr;
+                return std::make_pair(nullptr, ComponentLoadResult::Error);
             }
         }
 
         if (auto&& pComponent = m_meta.at(m_lastComponent).loader(marshal, &m_context)) {
             pComponent->m_isEnabled = enabled;
-            return pComponent;
+            return std::make_pair(pComponent, result);
         }
 
-        return nullptr;
+        return std::make_pair(nullptr, ComponentLoadResult::Error);
     }
 
     uint16_t ComponentManager::GetVersion(const Component *pComponent) const {
@@ -114,7 +118,9 @@ namespace SR_UTILS_NS {
                 /// TODO: use entity id
                 SR_MAYBE_UNUSED auto&& compEntityId = marshal.Read<uint64_t>();
 
-                if (auto&& pComponent = Load(marshal)) {
+                auto&& [pComponent, loadResult] = Load(marshal);
+
+                if (pComponent) {
                     components.emplace_back(pComponent);
                 }
                 else {
@@ -124,12 +130,12 @@ namespace SR_UTILS_NS {
                 const uint64_t readBytes = marshal.GetPosition() - position;
                 const int64_t lostBytes = static_cast<int64_t>(bytesCount) - readBytes;
 
-                if (lostBytes < 0) {
+                if (lostBytes < 0 && loadResult != ComponentLoadResult::Migrated) {
                     SRHalt("ComponentManager::LoadComponents() : component is read incorrectly!");
                     return false;
                 }
 
-                if (lostBytes > 0) {
+                if (lostBytes > 0 && loadResult != ComponentLoadResult::Migrated) {
                     SR_WARN("ComponentManager::LoadComponents() : bytes were lost when loading the component!\n\tBytes count: " + std::to_string(lostBytes));
                     if (lostBytes >= UINT16_MAX) {
                         SRHalt("Something went wrong!");
