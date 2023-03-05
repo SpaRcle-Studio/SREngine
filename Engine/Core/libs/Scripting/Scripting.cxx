@@ -11,3 +11,4 @@
 #include "../Scripting/src/Scripting/Impl/EvoScriptImpl.cpp"
 #include "../Scripting/src/Scripting/Impl/EvoCompiler.cpp"
 #include "../Scripting/src/Scripting/Impl/EvoBehaviour.cpp"
+#include "../Scripting/src/Scripting/Impl/EvoScriptManager.cpp"
