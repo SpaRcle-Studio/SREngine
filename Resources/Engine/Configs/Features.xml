@@ -3,6 +3,7 @@
    <Common>
        <EvoCompiler Value="true"/>
        <CompilePDB Value="false"/>
+       <ScriptMultiInstance Value="true"/>
 
        <UpdateScripts Value="false"/>
        <UseEditorGUIScript Value="false"/>
