@@ -5,8 +5,44 @@
 #include <Scripting/Impl/EvoScriptManager.h>
 
 namespace SR_SCRIPTING_NS {
-    void EvoScriptManager::Update(float_t dt) {
+    void EvoScriptManager::Update(float_t dt, bool force) {
         SR_LOCK_GUARD
+
+        if (force) {
+            for (auto pIt = m_scripts.begin(); pIt != m_scripts.end(); ) {
+                auto&& pHolder = pIt->second;
+
+                if (!pHolder) {
+                    pIt = m_scripts.erase(pIt);
+                    continue;
+                }
+
+                auto&& pScript = pHolder->GetScript<EvoScript::Script>();
+                if (!pScript) {
+                    pIt = m_scripts.erase(pIt);
+                    continue;
+                }
+
+                ++pIt;
+            }
+            return;
+        }
+
+        if (!m_checkIterator.has_value()) {
+            m_checkIterator = m_scripts.begin();
+        }
+
+        if (m_checkIterator.value() == m_scripts.end()) {
+            m_checkIterator = m_scripts.begin();
+            return;
+        }
+
+        if (!m_checkIterator.value()->second.Valid()) {
+            m_checkIterator = m_scripts.erase(m_checkIterator.value());
+            return;
+        }
+
+        ++(m_checkIterator.value()); 
     }
 
     bool EvoScriptManager::ReloadScript(const SR_UTILS_NS::Path& localPath) {
