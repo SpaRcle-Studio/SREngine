@@ -25,6 +25,8 @@ namespace SR_PHYSICS_NS {
 }
 
 namespace SR_PTYPES_NS {
+    class PhysicsMaterial;
+
     class Rigidbody : public SR_UTILS_NS::Component {
         friend class SR_PHYSICS_NS::PhysicsScene;
     protected:
@@ -79,6 +81,8 @@ namespace SR_PTYPES_NS {
         virtual void SetType(ShapeType type);
         void SetMass(float_t mass);
 
+        void SetMaterial(PhysicsMaterial* pMaterial);
+
         virtual bool InitBody();
 
     protected:
@@ -114,6 +118,8 @@ namespace SR_PTYPES_NS {
         SR_MATH_NS::Quaternion m_rigidbodyRotation = SR_MATH_NS::InfinityQuaternion;
 
         SR_MATH_NS::FVector3 m_scale;
+
+        SR_PTYPES_NS::PhysicsMaterial* m_material = nullptr;
 
         SR_MATH_NS::FVector3 m_center;
 

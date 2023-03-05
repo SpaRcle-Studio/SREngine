@@ -122,7 +122,12 @@ namespace SR_UTILS_NS {
                 }
 
                 const uint64_t readBytes = marshal.GetPosition() - position;
-                const uint64_t lostBytes = static_cast<uint64_t>(bytesCount) - readBytes;
+                const int64_t lostBytes = static_cast<int64_t>(bytesCount) - readBytes;
+
+                if (lostBytes < 0) {
+                    SRHalt("ComponentManager::LoadComponents() : component is read incorrectly!");
+                    return false;
+                }
 
                 if (lostBytes > 0) {
                     SR_WARN("ComponentManager::LoadComponents() : bytes were lost when loading the component!\n\tBytes count: " + std::to_string(lostBytes));

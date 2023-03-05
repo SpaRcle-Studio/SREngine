@@ -10,6 +10,7 @@
 
 #include <Physics/LibraryImpl.h>
 #include <Physics/PhysicsScene.h>
+#include <Physics/PhysicsMaterial.h>
 
 namespace SR_PTYPES_NS {
     Rigidbody::Rigidbody(LibraryPtr pLibrary)
@@ -25,6 +26,8 @@ namespace SR_PTYPES_NS {
     Rigidbody::~Rigidbody() {
         /// SR_SAFE_DELETE_PTR(m_shape);
         /// moved to parent class
+
+        SetMaterial(nullptr);
     }
 
     std::string Rigidbody::GetEntityInfo() const {
@@ -40,6 +43,8 @@ namespace SR_PTYPES_NS {
         const auto&& mass = marshal.Read<float_t>();
         const auto&& isTrigger = marshal.Read<bool>();
         const auto&& isStatic = marshal.Read<bool>();
+
+        const auto&& material = marshal.Read<std::string>();
 
         static auto&& verifyType = [](LibraryImpl* pLibrary, ShapeType shapeType) -> ShapeType {
             if (!pLibrary->IsShapeSupported(shapeType)) {
@@ -75,6 +80,7 @@ namespace SR_PTYPES_NS {
             return nullptr;
         }
 
+        pComponent->SetMaterial(PhysicsMaterial::Load(material));
         pComponent->SetType(verifyType(pLibrary, type));
         pComponent->SetCenter(center);
         pComponent->GetCollisionShape()->SetSize(size);
@@ -90,12 +96,19 @@ namespace SR_PTYPES_NS {
 
         pMarshal->Write<int32_t>(static_cast<int32_t>(m_shape->GetType()));
 
-        pMarshal->Write(m_center, SR_MATH_NS::Vector3<float_t>(0.f));
-        pMarshal->Write(m_shape->GetSize(), SR_MATH_NS::Vector3<float_t>(1.f));
+        pMarshal->Write<SR_MATH_NS::Vector3<float_t>>(m_center, SR_MATH_NS::Vector3<float_t>(0.f));
+        pMarshal->Write<SR_MATH_NS::Vector3<float_t>>(m_shape->GetSize(), SR_MATH_NS::Vector3<float_t>(1.f));
 
-        pMarshal->Write(m_mass);
-        pMarshal->Write(IsTrigger());
-        pMarshal->Write(IsStatic());
+        pMarshal->Write<float_t>(m_mass);
+        pMarshal->Write<bool>(IsTrigger());
+        pMarshal->Write<bool>(IsStatic());
+
+        if (m_material) {
+            pMarshal->Write<std::string>(m_material->GetResourcePath().ToStringRef());
+        }
+        else {
+            pMarshal->Write<std::string>("");
+        }
 
         return pMarshal;
     }
@@ -313,5 +326,19 @@ namespace SR_PTYPES_NS {
         m_isBodyDirty = false;
 
         return true;
+    }
+
+    void Rigidbody::SetMaterial(PhysicsMaterial* pMaterial) {
+        if (pMaterial == m_material) {
+            return;
+        }
+
+        if (m_material) {
+            m_material->RemoveUsePoint();
+        }
+
+        if ((m_material = pMaterial)) {
+            m_material->AddUsePoint();
+        }
     }
 }

@@ -29,7 +29,9 @@
        <Renderer Value="true"/>
        <Physics Value="true"/>
 
-       <PVD Value="false"/>
+       <PVD Value="true"/>
+
+       <Vehicles Value="true"/>
 
        <LoadSkybox Value="false"/>
        <SkyboxCPUUsage Value="false"/>

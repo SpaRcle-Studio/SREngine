@@ -11,6 +11,7 @@ namespace SR_PTYPES_NS {
     class Rigidbody2D;
     class Rigidbody3D;
     class CollisionShape;
+    class PhysicsMaterialImpl;
 }
 
 namespace SR_PHYSICS_NS {
@@ -39,6 +40,12 @@ namespace SR_PHYSICS_NS {
 
         SR_NODISCARD virtual SR_PHYSICS_NS::PhysicsWorld* CreatePhysicsWorld(Space space) { return nullptr; }
 
+        SR_NODISCARD virtual SR_PTYPES_NS::PhysicsMaterialImpl* CreatePhysicsMaterial() { return nullptr; }
+
+        SR_NODISCARD bool IsVehicleSupported() const noexcept { return m_isVehicleSupported; }
+
+    private:
+        bool m_isVehicleSupported = false;
     };
 }
 

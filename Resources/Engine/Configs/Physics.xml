@@ -4,4 +4,8 @@
         <Space2D Library="PhysX"/>
         <Space3D Library="PhysX"/>
     </DefaultLibraries>
+
+    <SupportedLibraries>
+        <PhysX/>
+    </SupportedLibraries>
 </Physics>

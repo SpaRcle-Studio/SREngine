@@ -18,6 +18,7 @@ namespace SR_PHYSICS_NS {
         friend class SR_UTILS_NS::Singleton<PhysicsLibrary>;
         using Super = SR_UTILS_NS::Singleton<PhysicsLibrary>;
         using Space = SR_UTILS_NS::Measurement;
+        using LibraryTypes = std::vector<LibraryType>;
     public:
         PhysicsLibrary();
         ~PhysicsLibrary() override;
@@ -25,6 +26,7 @@ namespace SR_PHYSICS_NS {
     public:
         SR_NODISCARD LibraryImpl* GetLibrary(LibraryType type);
         SR_NODISCARD LibraryImpl* GetActiveLibrary(Space space);
+        SR_NODISCARD LibraryTypes GetSupportedLibraries() const;
 
     protected:
         void InitSingleton() override;
@@ -32,6 +34,7 @@ namespace SR_PHYSICS_NS {
     private:
         std::vector<LibraryImpl*> m_libraries;
         std::map<Space, LibraryType> m_activeLibs;
+        std::set<LibraryType> m_supportedLibs;
 
     };
 }

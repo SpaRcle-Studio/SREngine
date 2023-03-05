@@ -3,6 +3,7 @@
 //
 
 #include <Physics/LibraryImpl.h>
+#include <Utils/Common/Features.h>
 
 namespace SR_PHYSICS_NS {
     LibraryImpl::LibraryImpl()
@@ -10,7 +11,10 @@ namespace SR_PHYSICS_NS {
     { }
 
     bool LibraryImpl::Initialize() {
-        SRHalt("LibraryImpl::Initialize() : called initialization method in basic class!");
-        return false;
+        if (SR_UTILS_NS::Features::Instance().Enabled("Vehicles", true)) {
+            m_isVehicleSupported = true;
+        }
+
+        return true;
     }
 }

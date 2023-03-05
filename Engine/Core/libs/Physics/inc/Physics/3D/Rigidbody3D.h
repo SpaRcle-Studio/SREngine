@@ -10,7 +10,7 @@
 namespace SR_PTYPES_NS {
     class Rigidbody3D : public Rigidbody {
         using Super = Rigidbody;
-        SR_ENTITY_SET_VERSION(1004);
+        SR_ENTITY_SET_VERSION(1005);
         SR_INITIALIZE_COMPONENT(Rigidbody3D);
     public:
         explicit Rigidbody3D(LibraryPtr pLibrary);
