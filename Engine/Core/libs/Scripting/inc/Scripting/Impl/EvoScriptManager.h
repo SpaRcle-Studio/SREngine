@@ -13,14 +13,16 @@ namespace SR_SCRIPTING_NS {
     class EvoScriptManager : public SR_UTILS_NS::Singleton<EvoScriptManager> {
         friend class SR_UTILS_NS::Singleton<EvoScriptManager>;
         using ScriptPtr = ScriptHolder::Ptr;
+        using ScirptsMap = ska::flat_hash_map<std::string, ScriptPtr>;
     public:
         SR_NODISCARD ScriptPtr Load(const SR_UTILS_NS::Path& localPath);
         SR_NODISCARD bool ReloadScript(const SR_UTILS_NS::Path& localPath);
 
-        void Update(float_t dt);
+        void Update(float_t dt, bool force);
 
     private:
-        ska::flat_hash_map<std::string, ScriptPtr> m_scripts;
+        ScirptsMap m_scripts;
+        std::optional<ScirptsMap::iterator> m_checkIterator;
 
     };
 }
