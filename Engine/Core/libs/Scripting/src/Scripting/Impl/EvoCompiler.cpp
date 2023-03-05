@@ -44,6 +44,7 @@ namespace SR_SCRIPTING_NS {
             }
 
             SetCompilePDB(SR_UTILS_NS::Features::Instance().Enabled("CompilePDB", false));
+            SetMultiInstances(SR_UTILS_NS::Features::Instance().Enabled("ScriptMultiInstance", true));
 
             AddIncludePath(SR_UTILS_NS::ResourceManager::Instance().GetResPath());
             AddIncludePath(SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Scripts"));

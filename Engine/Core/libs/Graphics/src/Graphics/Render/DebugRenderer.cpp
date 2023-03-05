@@ -58,9 +58,10 @@ namespace SR_GRAPH_NS {
     }
 
     void DebugRenderer::Prepare() {
-        SR_LOCK_GUARD
-
+        /// меняем тут, иначе дедлок
         SR_UTILS_NS::DebugDraw::Instance().SwitchCallbacks(this);
+
+        SR_LOCK_GUARD
 
         auto&& timePoint = SR_HTYPES_NS::Time::Instance().Count();
 
