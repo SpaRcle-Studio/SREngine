@@ -41,7 +41,9 @@ namespace SR_SCRIPTING_NS {
             m_initBehaviour();
         }
 
-        SR_LOG("EvoBehaviour::Load() : behaviour successfully initialized!");
+        if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::High) {
+            SR_LOG("EvoBehaviour::Load() : behaviour successfully initialized!");
+        }
 
         return Behaviour::Load();
     }
