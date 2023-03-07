@@ -5,177 +5,95 @@
 #ifndef EVOSCRIPTLIB_BEHAVIOURREGISTRATION_H
 #define EVOSCRIPTLIB_BEHAVIOURREGISTRATION_H
 
-#include <Libraries/Utils/Allocator.h>
-#include <Libraries/Utils/NonCopyable.h>
-#include <Libraries/Types/SharedPtr.h>
+#include <Libraries/Utils/ModuleCore.h>
 
-#include <Libraries/GameObject.h>
+#define REGISTER_BEHAVIOUR_METHOD(className, methodName)                                                                \
+   EXTERN void methodName() {                                                                                           \
+        if (auto&& ptr = gBehaviourContext->pBehaviour.ReinterpretCast<className*>()) {                                 \
+            ptr->methodName();                                                                                          \
+        }                                                                                                               \
+    }                                                                                                                   \
 
-#pragma warning (disable: 4190)
+#define REGISTER_BEHAVIOUR_METHOD_ARGS(className, methodName, argA, argB)                                               \
+   EXTERN void methodName(argA) {                                                                                       \
+        if (auto&& ptr = gBehaviourContext->pBehaviour.ReinterpretCast<className*>()) {                                 \
+            ptr->methodName(argB);                                                                                      \
+        }                                                                                                               \
+    }                                                                                                                   \
 
-#ifndef EXTERN
-    #define EXTERN extern "C" __declspec(dllexport)
-#endif
+#define REGISTER_BEHAVIOUR_BASE(className)                                                                              \
+    REGISTER_BEHAVIOUR_METHOD(className, Awake)                                                                         \
+    REGISTER_BEHAVIOUR_METHOD(className, Start)                                                                         \
+    REGISTER_BEHAVIOUR_METHOD(className, OnEnable)                                                                      \
+    REGISTER_BEHAVIOUR_METHOD(className, OnDisable)                                                                     \
+    REGISTER_BEHAVIOUR_METHOD(className, FixedUpdate)                                                                   \
+    REGISTER_BEHAVIOUR_METHOD(className, Close)                                                                         \
+    REGISTER_BEHAVIOUR_METHOD_ARGS(className, Update, ESArg1(float_t dt), ESArg1(dt))                                   \
+    REGISTER_BEHAVIOUR_METHOD_ARGS(className, SetGameObject, ESArg1(Behaviour::GameObjectPtr gm), ESArg1(gm))           \
+    REGISTER_BEHAVIOUR_METHOD_ARGS(className, SetScene, ESArg1(Behaviour::ScenePtr scene), ESArg1(scene))               \
+    REGISTER_BEHAVIOUR_METHOD_ARGS(className, OnCollisionEnter, ESArg1(const CollisionData& data), ESArg1(data))        \
+    REGISTER_BEHAVIOUR_METHOD_ARGS(className, OnCollisionStay, ESArg1(const CollisionData& data), ESArg1(data))         \
+    REGISTER_BEHAVIOUR_METHOD_ARGS(className, OnCollisionExit, ESArg1(const CollisionData& data), ESArg1(data))         \
+    REGISTER_BEHAVIOUR_METHOD_ARGS(className, OnTriggerEnter, ESArg1(const CollisionData& data), ESArg1(data))          \
+    REGISTER_BEHAVIOUR_METHOD_ARGS(className, OnTriggerStay, ESArg1(const CollisionData& data), ESArg1(data))           \
+    REGISTER_BEHAVIOUR_METHOD_ARGS(className, OnTriggerExit, ESArg1(const CollisionData& data), ESArg1(data))           \
 
-struct CollisionData {
-    void* pHandler = nullptr;
-    FVector3 point;
-    FVector3 impulse;
-};
-
-struct RaycastHit {
-    void* pHandler = nullptr;
-    FVector3 position;
-    FVector3 normal;
-    float_t distance;
-};
-
-class Behaviour;
-
-#define REGISTER_BEHAVIOUR_BASE(className)                                          \
-    EXTERN void Awake() {                                                           \
-        if (auto&& ptr = g_codegen_behaviour_ptr.ReinterpretCast<className*>()) {   \
-            ptr->Awake();                                                           \
-        }                                                                           \
-    }                                                                               \
-                                                                                    \
-    EXTERN void Start() {                                                           \
-        if (auto&& ptr = g_codegen_behaviour_ptr.ReinterpretCast<className*>()) {   \
-            ptr->Start();                                                           \
-        }                                                                           \
-    }                                                                               \
-                                                                                    \
-    EXTERN void OnDisable() {                                                       \
-        if (auto&& ptr = g_codegen_behaviour_ptr.ReinterpretCast<className*>()) {   \
-            ptr->OnDisable();                                                       \
-        }                                                                           \
-    }                                                                               \
-                                                                                    \
-    EXTERN void OnEnable() {                                                        \
-        if (auto&& ptr = g_codegen_behaviour_ptr.ReinterpretCast<className*>()) {   \
-            ptr->OnEnable();                                                        \
-        }                                                                           \
-    }                                                                               \
-                                                                                    \
-    EXTERN void Update(float_t dt) {                                                \
-        if (auto&& ptr = g_codegen_behaviour_ptr.ReinterpretCast<className*>()) {   \
-            ptr->Update(dt);                                                        \
-        }                                                                           \
-    }                                                                               \
-                                                                                    \
-    EXTERN void FixedUpdate() {                                                     \
-        if (auto&& ptr = g_codegen_behaviour_ptr.ReinterpretCast<className*>()) {   \
-            ptr->FixedUpdate();                                                     \
-        }                                                                           \
-    }                                                                               \
-                                                                                    \
-    EXTERN void Close() {                                                           \
-        if (auto&& ptr = g_codegen_behaviour_ptr.ReinterpretCast<className*>()) {   \
-            ptr->Close();                                                           \
-        }                                                                           \
-    }                                                                               \
-                                                                                    \
-    EXTERN void SetGameObject(Behaviour::GameObjectPtr gameObject) {                \
-        if (auto&& ptr = g_codegen_behaviour_ptr.ReinterpretCast<className*>()) {   \
-            ptr->SetGameObject(gameObject);                                         \
-        }                                                                           \
-    }                                                                               \
-                                                                                    \
-    EXTERN void SetScene(Behaviour::ScenePtr scene) {                               \
-        if (auto&& ptr = g_codegen_behaviour_ptr.ReinterpretCast<className*>()) {   \
-            ptr->SetScene(scene);                                                   \
-        }                                                                           \
-    }                                                                               \
-                                                                                    \
-    EXTERN void OnCollisionEnter(const CollisionData& data) {                       \
-        if (auto&& ptr = g_codegen_behaviour_ptr.ReinterpretCast<className*>()) {   \
-            ptr->OnCollisionEnter(data);                                            \
-        }                                                                           \
-    }                                                                               \
-                                                                                    \
-    EXTERN void OnCollisionStay(const CollisionData& data) {                        \
-        if (auto&& ptr = g_codegen_behaviour_ptr.ReinterpretCast<className*>()) {   \
-            ptr->OnCollisionStay(data);                                             \
-        }                                                                           \
-    }                                                                               \
-                                                                                    \
-    EXTERN void OnCollisionExit(const CollisionData& data) {                        \
-        if (auto&& ptr = g_codegen_behaviour_ptr.ReinterpretCast<className*>()) {   \
-            ptr->OnCollisionExit(data);                                             \
-        }                                                                           \
-    }                                                                               \
-                                                                                    \
-    EXTERN void OnTriggerEnter(const CollisionData& data) {                         \
-        if (auto&& ptr = g_codegen_behaviour_ptr.ReinterpretCast<className*>()) {   \
-            ptr->OnTriggerEnter(data);                                              \
-        }                                                                           \
-    }                                                                               \
-                                                                                    \
-    EXTERN void OnTriggerStay(const CollisionData& data) {                          \
-        if (auto&& ptr = g_codegen_behaviour_ptr.ReinterpretCast<className*>()) {   \
-            ptr->OnTriggerStay(data);                                               \
-        }                                                                           \
-    }                                                                               \
-                                                                                    \
-    EXTERN void OnTriggerExit(const CollisionData& data) {                          \
-        if (auto&& ptr = g_codegen_behaviour_ptr.ReinterpretCast<className*>()) {   \
-            ptr->OnTriggerExit(data);                                               \
-        }                                                                           \
-    }                                                                               \
-
-#define REGISTER_BEHAVIOUR_PROPERTIES(className)                                    \
-    EXTERN std::any GetProperty(const std::string& id) {                            \
-        auto&& ptr = g_codegen_behaviour_ptr.ReinterpretCast<className*>();         \
-                                                                                    \
-        if (!ptr) {                                                                 \
-            return std::any();                                                      \
-        }                                                                           \
-                                                                                    \
-        if (!ptr->HasProperty(id)) {                                                \
-            return std::any();                                                      \
-        }                                                                           \
-        return ptr->GetProperty(id);                                                \
-    }                                                                               \
-                                                                                    \
-    EXTERN void SetProperty(const std::string& id, const std::any& val) {           \
-        auto&& ptr = g_codegen_behaviour_ptr.ReinterpretCast<className*>();         \
-                                                                                    \
-        if (!ptr) {                                                                 \
-            return;                                                                 \
-        }                                                                           \
-                                                                                    \
-        if (!ptr->HasProperty(id)) {                                                \
-            return;                                                                 \
-        }                                                                           \
-        return ptr->SetProperty(id, val);                                           \
-    }                                                                               \
-                                                                                    \
-    EXTERN std::vector<std::string> GetProperties() {                               \
-        if (auto&& ptr = g_codegen_behaviour_ptr.ReinterpretCast<className*>()) {   \
-            return ptr->GetProperties();                                            \
-        }                                                                           \
-        return {};                                                                  \
-    }                                                                               \
+#define REGISTER_BEHAVIOUR_PROPERTIES(className)                                                                        \
+    EXTERN std::any GetProperty(const std::string& id) {                                                                \
+        auto&& ptr = gBehaviourContext->pBehaviour.ReinterpretCast<className*>();                                       \
+                                                                                                                        \
+        if (!ptr) {                                                                                                     \
+            return std::any();                                                                                          \
+        }                                                                                                               \
+                                                                                                                        \
+        if (!ptr->HasProperty(id)) {                                                                                    \
+            return std::any();                                                                                          \
+        }                                                                                                               \
+        return ptr->GetProperty(id);                                                                                    \
+    }                                                                                                                   \
+                                                                                                                        \
+    EXTERN void SetProperty(const std::string& id, const std::any& val) {                                               \
+        auto&& ptr = gBehaviourContext->pBehaviour.ReinterpretCast<className*>();                                       \
+                                                                                                                        \
+        if (!ptr) {                                                                                                     \
+            return;                                                                                                     \
+        }                                                                                                               \
+                                                                                                                        \
+        if (!ptr->HasProperty(id)) {                                                                                    \
+            return;                                                                                                     \
+        }                                                                                                               \
+        return ptr->SetProperty(id, val);                                                                               \
+    }                                                                                                                   \
+                                                                                                                        \
+    EXTERN std::vector<std::string> GetProperties() {                                                                   \
+        if (auto&& ptr = gBehaviourContext->pBehaviour.ReinterpretCast<className*>()) {                                 \
+            return ptr->GetProperties();                                                                                \
+        }                                                                                                               \
+        return {};                                                                                                      \
+    }                                                                                                                   \
 
 #define REGISTER_BEHAVIOUR(className)                                                                                   \
-    SharedPtr<void> g_codegen_behaviour_ptr;                                                                            \
-    std::vector<std::function<void()>>* g_codegen_properties_registations = nullptr;                                    \
     EXTERN void InitBehaviour() {                                                                                       \
-        if (!g_codegen_properties_registations) {                                                                       \
-            g_codegen_properties_registations = new std::vector<std::function<void()>>();                               \
+        if (!gBehaviourContext) {                                                                                       \
+            gBehaviourContext = new BehaviourContext();                                                                 \
+            ++gBehavioursCount;                                                                                         \
+            gBehaviourContext->pBehaviour = new (void*)(new className());                                               \
         }                                                                                                               \
-        g_codegen_behaviour_ptr = (void*)(new className());                                                             \
     }                                                                                                                   \
                                                                                                                         \
     EXTERN void ReleaseBehaviour() {                                                                                    \
-        g_codegen_behaviour_ptr.AutoFree([](void* ptr) {                                                                \
-            delete reinterpret_cast<className*>(ptr);                                                                   \
-        });                                                                                                             \
-        delete g_codegen_properties_registations;                                                                       \
+        if (gBehaviourContext) {                                                                                        \
+            gBehaviourContext->pBehaviour.AutoFree([](void* ptr) {                                                      \
+				delete reinterpret_cast<className*>(ptr);                                                               \
+			});                                                                                                         \
+            --gBehavioursCount;                                                                                         \
+            delete gBehaviourContext;                                                                                   \
+            gBehaviourContext = nullptr;                                                                                \
+        }                                                                                                               \
     }                                                                                                                   \
                                                                                                                         \
     EXTERN SharedPtr<void> GetBehaviourPtr() {                                                                          \
-        return g_codegen_behaviour_ptr;                                                                                 \
+        return gBehaviourContext ? gBehaviourContext->pBehaviour : SharedPtr<void>(nullptr);                            \
     }                                                                                                                   \
                                                                                                                         \
     REGISTER_BEHAVIOUR_BASE(className)                                                                                  \

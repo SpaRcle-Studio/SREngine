@@ -6,6 +6,7 @@
 #define SRENGINE_EVOBEHAVIOUR_H
 
 #include <Scripting/Base/Behaviour.h>
+#include <Scripting/ScriptHolder.h>
 
 namespace SR_SCRIPTING_NS {
     typedef void(*CollisionFnPtr)(const SR_UTILS_NS::CollisionData& data);
@@ -55,7 +56,7 @@ namespace SR_SCRIPTING_NS {
         void PopStash(const SR_HTYPES_NS::DataStorage &data) override;
 
     private:
-        EvoScript::Script* m_script = nullptr;
+        ScriptHolder::Ptr m_script;
 
         EvoScript::Typedefs::AwakeFnPtr m_awake = nullptr;
         EvoScript::Typedefs::OnEnableFnPtr m_onEnable = nullptr;
