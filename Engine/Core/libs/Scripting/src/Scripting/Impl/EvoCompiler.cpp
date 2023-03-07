@@ -31,7 +31,7 @@ namespace SR_SCRIPTING_NS {
     bool EvoCompiler::Init() {
         SR_INFO("EvoCompiler::Init() : initialization of the compiler...");
 
-        auto&& configPath = Helper::ResourceManager::Instance().GetResPath().Concat("Engine/Configs/EvoScript.xml");
+        auto&& configPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Engine/Configs/EvoScript.xml");
 
         if (configPath.Exists()) {
             auto xml = SR_XML_NS::Document::Load(configPath);
@@ -44,7 +44,7 @@ namespace SR_SCRIPTING_NS {
             }
 
             SetCompilePDB(SR_UTILS_NS::Features::Instance().Enabled("CompilePDB", false));
-            SetMultiInstances(SR_UTILS_NS::Features::Instance().Enabled("ScriptMultiInstance", true));
+            SetMultiInstances(SR_UTILS_NS::Features::Instance().Enabled("ScriptMultiInstances", true));
 
             AddIncludePath(SR_UTILS_NS::ResourceManager::Instance().GetResPath());
             AddIncludePath(SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Scripts"));
@@ -61,8 +61,8 @@ namespace SR_SCRIPTING_NS {
         return false;
     }
 
-    std::string Framework::Scripting::EvoCompiler::GetGeneratorName(const Framework::Helper::Xml::Node &config) const {
-        if (!Helper::Features::Instance().Enabled("EvoCompiler", true)) {
+    std::string Framework::Scripting::EvoCompiler::GetGeneratorName(const SR_XML_NS::Node &config) const {
+        if (!SR_UTILS_NS::Features::Instance().Enabled("EvoCompiler", true)) {
             SR_INFO("EvoCompiler::GetGenerator() : cmake generator is disabled.");
             return "Disabled";
         }

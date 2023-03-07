@@ -3,6 +3,7 @@
 //
 
 #include <Scripting/Impl/EvoBehaviour.h>
+#include <Scripting/Impl/EvoScriptManager.h>
 
 namespace SR_SCRIPTING_NS {
     EvoBehaviour::~EvoBehaviour() {
@@ -19,20 +20,8 @@ namespace SR_SCRIPTING_NS {
 
         m_hasErrors = false;
 
-        auto&& path = GetResourcePath();
-
-        if (!path.empty()) {
-            auto&& compiler = GlobalEvoCompiler::Instance();
-
-            m_script = EvoScript::Script::Allocate(path.GetWithoutExtension(), compiler.GetGenerator()->GetAddresses());
-
-            auto&& fullPath = GetAssociatedPath().Concat(path).GetWithoutExtension();
-            if (!m_script || !m_script->Load(fullPath, compiler, true)) {
-                SR_ERROR("EvoBehaviour::Load() : failed to load script! \n\tPath: " + path.ToString());
-                SR_SAFE_DELETE_PTR(m_script);
-                m_hasErrors = true;
-                return false;
-            }
+        if (auto&& path = GetResourcePath(); !path.empty()) {
+            m_script = EvoScriptManager::Instance().Load(path);
         }
 
         InitHooks();
