@@ -24,6 +24,8 @@ namespace SR_PTYPES_NS {
     public:
         bool Init(PhysicsMaterial* pMaterial) override;
 
+        SR_NODISCARD physx::PxMaterial* GetHandle() const noexcept { return m_material; }
+
     private:
         physx::PxMaterial* m_material = nullptr;
     };

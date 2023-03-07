@@ -32,6 +32,20 @@ namespace SR_PTYPES_NS {
     public:
         SR_NODISCARD Super* CopyResource(Super* destination) const override;
 
+        template<typename T> SR_NODISCARD T* GetMaterialImpl(LibraryType type) const {
+            if (m_implementations.count(type) == 0) {
+                SRHalt("PhysicsMaterial::GetMaterialImpl() : library is not supported!");
+                return nullptr;
+            }
+
+            if (auto&& pImpl = dynamic_cast<T*>(m_implementations.at(type))) {
+                return pImpl;
+            }
+
+            SRHalt("PhysicsMaterial::GetMaterialImpl() : failed to cast pointers!");
+            return nullptr;
+        }
+
         SR_NODISCARD float_t GetDynamicFriction() const { return m_dynamicFriction; }
         SR_NODISCARD float_t GetStaticFriction() const { return m_staticFriction; }
         SR_NODISCARD float_t GetBounciness() const { return m_bounciness; }
