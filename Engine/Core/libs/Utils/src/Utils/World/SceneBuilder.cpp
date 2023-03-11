@@ -15,6 +15,8 @@ namespace SR_WORLD_NS {
     { }
 
     void SceneBuilder::Build(bool isPaused) {
+        SR_LOCK_GUARD
+
         Initialize(isPaused);
 
         if (!m_dirty) {
@@ -66,10 +68,12 @@ namespace SR_WORLD_NS {
     }
 
     void SceneBuilder::Update(float_t dt) {
+        SR_LOCK_GUARD
+
         auto&& pIt = m_updatableComponents.begin();
 
     retry:
-        if (pIt == m_updatableComponents.end()) {
+        if (m_dirty || pIt == m_updatableComponents.end()) {
             return;
         }
 
@@ -85,10 +89,12 @@ namespace SR_WORLD_NS {
     }
 
     void SceneBuilder::FixedUpdate() {
+        SR_LOCK_GUARD
+
         auto&& pIt = m_updatableComponents.begin();
 
     retry:
-        if (pIt == m_updatableComponents.end()) {
+        if (m_dirty || pIt == m_updatableComponents.end()) {
             return;
         }
 
@@ -136,6 +142,8 @@ namespace SR_WORLD_NS {
     }
 
     void SceneBuilder::OnDestroyComponent() {
-        m_updatableComponents.clear();
+        SetDirty();
+        /// синхронизируемся с потоком аптейда
+        SR_LOCK_GUARD
     }
 }

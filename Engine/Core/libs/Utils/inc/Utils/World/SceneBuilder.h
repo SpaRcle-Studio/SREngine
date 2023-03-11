@@ -33,6 +33,7 @@ namespace SR_WORLD_NS {
         void Initialize(bool isPaused);
 
     private:
+        std::recursive_mutex m_mutex;
         std::vector<SR_UTILS_NS::Component*> m_updatableComponents;
         bool m_dirty = false;
         uint64_t m_componentsCapacity = 0;
