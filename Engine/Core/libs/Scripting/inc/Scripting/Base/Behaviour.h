@@ -46,6 +46,10 @@ namespace SR_SCRIPTING_NS {
         virtual SR_HTYPES_NS::DataStorage Stash();
         virtual void ApplyStash(const SR_HTYPES_NS::DataStorage& data);
 
+        bool Load() override { return true; }
+        bool PostLoad() { return SR_UTILS_NS::IResource::Load(); }
+        bool Unload() override { return SR_UTILS_NS::IResource::Unload(); }
+
     protected:
         SR_NODISCARD SR_UTILS_NS::Path GetAssociatedPath() const override;
         SR_NODISCARD uint64_t GetFileHash() const override { return 0; };
@@ -54,8 +58,6 @@ namespace SR_SCRIPTING_NS {
         void OnAttached() override;
         void OnLoaded() override;
 
-        bool Load() override { return SR_UTILS_NS::IResource::Load(); }
-        bool Unload() override { return SR_UTILS_NS::IResource::Unload(); }
         bool Reload() override;
         void OnDestroy() override;
 

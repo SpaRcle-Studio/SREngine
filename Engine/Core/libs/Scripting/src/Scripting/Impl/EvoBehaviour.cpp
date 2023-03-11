@@ -3,7 +3,6 @@
 //
 
 #include <Scripting/Impl/EvoBehaviour.h>
-#include <Scripting/Impl/EvoScriptManager.h>
 
 namespace SR_SCRIPTING_NS {
     bool EvoBehaviour::Load() {
@@ -41,7 +40,7 @@ namespace SR_SCRIPTING_NS {
             SR_LOG("EvoBehaviour::Load() : behaviour successfully initialized!");
         }
 
-        return Behaviour::Load();
+        return Behaviour::Load() && Behaviour::PostLoad();
     }
 
     bool EvoBehaviour::Unload() {
@@ -56,6 +55,10 @@ namespace SR_SCRIPTING_NS {
         /// делаем такой маневр
         m_isStarted = false;
         m_isAwake = false;
+
+        if (auto&& pParent = GetParent()) {
+            pParent->SetDirty(true);
+        }
 
         return !hasErrors;
     }
@@ -186,72 +189,81 @@ namespace SR_SCRIPTING_NS {
     }
 
     void EvoBehaviour::Awake() {
-        auto&& lockGuard = EvoScriptManager::ScopeLockSingleton();
-        SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
-
-        SwitchContext();
-
-        if (m_awake) {
-            m_awake();
-        }
+        CallFunction(m_awake, false);
         Behaviour::Awake();
     }
 
     void EvoBehaviour::OnEnable() {
-        auto&& lockGuard = EvoScriptManager::ScopeLockSingleton();
-        SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
-
-        SwitchContext();
-
-        if (m_onEnable) {
-            m_onEnable();
-        }
+        CallFunction(m_onEnable, false);
         Behaviour::OnEnable();
     }
 
     void EvoBehaviour::OnDisable() {
-        auto&& lockGuard = EvoScriptManager::ScopeLockSingleton();
-        SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
-
-        SwitchContext();
-
-        if (m_onDisable) {
-            m_onDisable();
-        }
+        CallFunction(m_onDisable, false);
         Behaviour::OnDisable();
     }
 
     void EvoBehaviour::Start() {
-        auto&& lockGuard = EvoScriptManager::ScopeLockSingleton();
-        SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
-
-        SwitchContext();
-
-        if (m_start) {
-            m_start();
-        }
+        CallFunction(m_start, false);
         Behaviour::Start();
     }
 
     void EvoBehaviour::Update(float_t dt) {
-        auto&& lockGuard = EvoScriptManager::ScopeLockSingleton();
-        SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
-
-        SwitchContext();
-
-        if (m_update) {
-            m_update(dt);
-        }
+        CallFunction(m_update, false, dt);
         Behaviour::Update(dt);
     }
 
     void EvoBehaviour::OnAttached() {
-        auto&& lockGuard = EvoScriptManager::ScopeLockSingleton();
-        SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
-
-        SetGameObject();
-
+        SR_HTYPES_NS::Function<void()> fn = [this]() { SetGameObject(); };
+        CallFunction(fn, false);
         Behaviour::OnAttached();
+    }
+
+    void EvoBehaviour::FixedUpdate() {
+        CallFunction(m_fixedUpdate, false);
+        Behaviour::FixedUpdate();
+    }
+
+    void EvoBehaviour::OnCollisionEnter(const SR_UTILS_NS::CollisionData& data) {
+        CallFunction(m_collisionEnter, false, data);
+        Behaviour::OnCollisionEnter(data);
+    }
+
+    void EvoBehaviour::OnCollisionStay(const SR_UTILS_NS::CollisionData& data) {
+        CallFunction(m_collisionStay, false, data);
+        Behaviour::OnCollisionStay(data);
+    }
+
+    void EvoBehaviour::OnCollisionExit(const SR_UTILS_NS::CollisionData& data) {
+        CallFunction(m_collisionExit, false, data);
+        Behaviour::OnCollisionExit(data);
+    }
+
+    void EvoBehaviour::OnTriggerEnter(const SR_UTILS_NS::CollisionData& data) {
+        CallFunction(m_triggerEnter, false, data);
+        Behaviour::OnTriggerEnter(data);
+    }
+
+    void EvoBehaviour::OnTriggerStay(const SR_UTILS_NS::CollisionData& data) {
+        CallFunction(m_triggerStay, false, data);
+        Behaviour::OnTriggerStay(data);
+    }
+
+    void EvoBehaviour::OnTriggerExit(const SR_UTILS_NS::CollisionData& data) {
+        CallFunction(m_triggerExit, false, data);
+        Behaviour::OnTriggerExit(data);
+    }
+
+    void EvoBehaviour::OnTransformSet() {
+        SR_HTYPES_NS::Function<void()> fn = [this]() { SetGameObject(); };
+        CallFunction(fn, false);
+        Component::OnTransformSet();
+    }
+
+    void EvoBehaviour::OnDestroy() {
+        SR_HTYPES_NS::Function<void()> fn = [this]() { DestroyScript(); };
+        CallFunction(fn, false);
+        Behaviour::OnDestroy();
     }
 
     void EvoBehaviour::SetGameObject() {
@@ -276,92 +288,6 @@ namespace SR_SCRIPTING_NS {
         }
     }
 
-    void EvoBehaviour::FixedUpdate() {
-        SRAssert(!IsDestroyed());
-
-        auto&& lockGuard = EvoScriptManager::ScopeLockSingleton();
-        SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
-
-        SwitchContext();
-
-        if (m_fixedUpdate) {
-            m_fixedUpdate();
-        }
-        Behaviour::FixedUpdate();
-    }
-
-    void EvoBehaviour::OnCollisionEnter(const SR_UTILS_NS::CollisionData &data) {
-        auto&& lockGuard = EvoScriptManager::ScopeLockSingleton();
-        SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
-
-        SwitchContext();
-
-        if (m_collisionEnter) {
-            m_collisionEnter(data);
-        }
-        Behaviour::OnCollisionEnter(data);
-    }
-
-    void EvoBehaviour::OnCollisionStay(const SR_UTILS_NS::CollisionData &data) {
-        auto&& lockGuard = EvoScriptManager::ScopeLockSingleton();
-        SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
-
-        SwitchContext();
-
-        if (m_collisionStay) {
-            m_collisionStay(data);
-        }
-        Behaviour::OnCollisionStay(data);
-    }
-
-    void EvoBehaviour::OnCollisionExit(const SR_UTILS_NS::CollisionData &data) {
-        auto&& lockGuard = EvoScriptManager::ScopeLockSingleton();
-        SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
-
-        SwitchContext();
-
-        if (m_collisionExit) {
-            m_collisionExit(data);
-        }
-        Behaviour::OnCollisionExit(data);
-    }
-
-    void EvoBehaviour::OnTriggerEnter(const SR_UTILS_NS::CollisionData &data) {
-        auto&& lockGuard = EvoScriptManager::ScopeLockSingleton();
-        SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
-
-        SwitchContext();
-
-        if (m_triggerEnter) {
-            m_triggerEnter(data);
-        }
-        Behaviour::OnTriggerEnter(data);
-    }
-
-    void EvoBehaviour::OnTriggerStay(const SR_UTILS_NS::CollisionData &data) {
-        auto&& lockGuard = EvoScriptManager::ScopeLockSingleton();
-        SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
-
-        SwitchContext();
-
-        if (m_triggerStay) {
-            m_triggerStay(data);
-        }
-        Behaviour::OnTriggerStay(data);
-    }
-
-    void EvoBehaviour::OnTriggerExit(const SR_UTILS_NS::CollisionData &data) {
-        auto&& lockGuard = EvoScriptManager::ScopeLockSingleton();
-        SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
-
-        SwitchContext();
-
-        if (m_triggerExit) {
-            m_triggerExit(data);
-        }
-        Behaviour::OnTriggerExit(data);
-    }
-
     void EvoBehaviour::DestroyScript() {
         SwitchContext();
 
@@ -376,26 +302,9 @@ namespace SR_SCRIPTING_NS {
         m_script = ScriptHolder::Ptr();
     }
 
-    void EvoBehaviour::OnTransformSet() {
-        auto&& lockGuard = EvoScriptManager::ScopeLockSingleton();
-        SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
-
-        SetGameObject();
-        Component::OnTransformSet();
-    }
-
     void EvoBehaviour::SwitchContext() const {
         if (m_switchContext) {
             m_switchContext(m_behaviourContext);
         }
-    }
-
-    void EvoBehaviour::OnDestroy() {
-        auto&& lockGuard = EvoScriptManager::ScopeLockSingleton();
-        SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
-
-        DestroyScript();
-
-        Behaviour::OnDestroy();
     }
 }

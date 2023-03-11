@@ -17,6 +17,9 @@ namespace SR_UTILS_NS {
         SR_NODISCARD virtual bool IsResourceSuitableForReload(IResource* pResource) const;
         SR_NODISCARD virtual bool Reload(const SR_UTILS_NS::Path& path, ResourceInfo* pResourceInfo) = 0;
 
+    protected:
+        std::recursive_mutex m_mutex;
+
     };
 
     /** Обычная перезагрузка, перебором каждого ресурса и вызова ему Reload */
