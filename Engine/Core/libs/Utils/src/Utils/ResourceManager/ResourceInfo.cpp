@@ -146,7 +146,10 @@ namespace SR_UTILS_NS {
     }
 
     void ResourceType::SetReloader(IResourceReloader *pReloader) {
-        SR_SAFE_DELETE_PTR(m_reloader);
+        if (m_reloader) {
+            delete m_reloader;
+            m_reloader = nullptr;
+        }
         m_reloader = pReloader;
     }
 }

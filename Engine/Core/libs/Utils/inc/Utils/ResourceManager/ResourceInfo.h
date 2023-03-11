@@ -46,7 +46,7 @@ namespace SR_UTILS_NS {
             : m_name(std::move(name))
         { }
 
-        ~ResourceType();
+        ~ResourceType() override;
 
     public:
         SR_NODISCARD IResource* Find(const ResourceId& id);

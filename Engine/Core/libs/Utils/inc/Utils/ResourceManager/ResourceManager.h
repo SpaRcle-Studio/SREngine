@@ -53,7 +53,7 @@ namespace SR_UTILS_NS {
         }
 
         template<typename ResourceT, typename ReloaderT> bool RegisterReloader() {
-            return RegisterReloader(new ReloaderT, SR_COMPILE_TIME_CRC32_TYPE_NAME(ResourceT));
+            return RegisterReloader(new ReloaderT(), SR_COMPILE_TIME_CRC32_TYPE_NAME(ResourceT));
         }
 
         /** \warning Call only from IResource parents \brief Register resource in resource manager */
