@@ -7,6 +7,7 @@
 
 #include <Scripting/Base/Behaviour.h>
 #include <Scripting/ScriptHolder.h>
+#include <Scripting/Impl/EvoScriptManager.h>
 
 namespace SR_SCRIPTING_NS {
     typedef void(*CollisionFnPtr)(const SR_UTILS_NS::CollisionData& data);
@@ -41,6 +42,21 @@ namespace SR_SCRIPTING_NS {
         void OnAttached() override;
 
     private:
+        template<typename T, typename ...Args> void CallFunction(T function, bool ignoreLoadState, Args&&... args) {
+            if (!ignoreLoadState && GetResourceLoadState() != LoadState::Loaded) {
+                return;
+            }
+
+            SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
+            auto&& lockGuard = EvoScriptManager::ScopeLockSingleton();
+
+            SwitchContext();
+
+            if (function) {
+                function(std::forward<Args>(args)...);
+            }
+        }
+
         void InitHooks();
         void DeInitHooks();
         void SetGameObject();
