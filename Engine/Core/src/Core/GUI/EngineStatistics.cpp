@@ -62,11 +62,11 @@ namespace Framework::Core::GUI {
             };
 
             SR_UTILS_NS::ResourceManager::Instance().InspectResources([=](const auto &groups) {
-                for (const auto& [groupHashName, info] : groups) {
-                    if (ImGui::TreeNodeEx(info.GetName().data(), m_nodeFlagsWithChild)) {
+                for (const auto& [groupHashName, pResourceType] : groups) {
+                    if (ImGui::TreeNodeEx(pResourceType->GetName().data(), m_nodeFlagsWithChild)) {
                         uint32_t index = 0;
 
-                        for (const auto&[resourceName, pResources] : info.GetCopiesRef()) {
+                        for (const auto&[resourceName, pResources] : pResourceType->GetCopiesRef()) {
                             if (pResources.size() == 1) {
                                 drawResource(*pResources.begin(), index++);
                             }

@@ -78,6 +78,11 @@
             gBehaviourContext = new BehaviourContext();                                                                 \
             ++gBehavioursCount;                                                                                         \
             gBehaviourContext->pBehaviour = new className();                                                            \
+                                                                                                                        \
+            for (auto&& propertyReg : gBehaviourContext->propertiesRegistrations) {                                     \
+                propertyReg();                                                                                          \
+            }                                                                                                           \
+                                                                                                                        \
             return (void*)gBehaviourContext;                                                                            \
         }                                                                                                               \
                                                                                                                         \

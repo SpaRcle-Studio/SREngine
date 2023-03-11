@@ -43,11 +43,10 @@ namespace SR_SCRIPTING_NS {
         virtual std::any GetProperty(const std::string& id) const { return std::any(); }
         virtual void SetProperty(const std::string& id, const std::any& val) { }
 
-    protected:
         virtual SR_HTYPES_NS::DataStorage Stash();
         virtual void ApplyStash(const SR_HTYPES_NS::DataStorage& data);
-        virtual void PopStash(const SR_HTYPES_NS::DataStorage& data);
 
+    protected:
         SR_NODISCARD SR_UTILS_NS::Path GetAssociatedPath() const override;
         SR_NODISCARD uint64_t GetFileHash() const override { return 0; };
         SR_HTYPES_NS::Marshal::Ptr Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SR_UTILS_NS::SavableFlags flags) const override;

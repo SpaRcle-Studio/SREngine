@@ -35,6 +35,8 @@ namespace SR_SCRIPTING_NS {
             return false;
         }
 
+        SetGameObject();
+
         if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::High) {
             SR_LOG("EvoBehaviour::Load() : behaviour successfully initialized!");
         }
@@ -161,7 +163,12 @@ namespace SR_SCRIPTING_NS {
         }
 
         std::any copy1 = m_getProperty(id);
+
+        /// HACK: так как dll может выгрузиться, то RTTI типа в std::any станет невалидным,
+        /// и это значение превратится в замедленную бомбу, потому что любое обращение к переменной
+        /// вызовет краш. При перекопировании RTTI обновится на актуальный для самого приложения.
         std::any copy = copy1;
+
         return copy;
     }
 
@@ -248,7 +255,7 @@ namespace SR_SCRIPTING_NS {
     }
 
     void EvoBehaviour::SetGameObject() {
-        if (!m_script) {
+        if (!m_script || !GetParent()) {
             return;
         }
 
