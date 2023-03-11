@@ -362,10 +362,13 @@ namespace SR_UTILS_NS {
             return;
         }
 
-        auto&& pResourceReloader = m_defaultReloader;
+        IResourceReloader* pResourceReloader = nullptr;
 
         if (auto&& pGroupReloader = m_checkResourceGroupIt->second->GetReloader()) {
             pResourceReloader = pGroupReloader;
+        }
+        else {
+            pResourceReloader = m_defaultReloader;
         }
 
         auto&& path = GetResourcePath(hashPath);
