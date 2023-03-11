@@ -33,4 +33,5 @@
 
 #include "src/Core/Engine.cpp"
 #include "src/Core/EngineCommands.cpp"
-#include "src/Core/EvoScriptAPI.cpp" 
+#include "src/Core/EvoScriptAPI.cpp"
+#include "src/Core/EngineResources.cpp"

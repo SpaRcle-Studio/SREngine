@@ -13,9 +13,6 @@ namespace SR_SCRIPTING_NS {
 
     class EvoBehaviour : public SR_SCRIPTING_NS::Behaviour {
         using Properties = std::vector<std::string>;
-    private:
-        ~EvoBehaviour() override;
-
     public:
         Properties GetProperties() const override;
         std::any GetProperty(const std::string& id) const override;
@@ -28,6 +25,7 @@ namespace SR_SCRIPTING_NS {
         void Start() override;
         void Update(float_t dt) override;
         void FixedUpdate() override;
+        void OnDestroy() override;
 
         void OnCollisionEnter(const SR_UTILS_NS::CollisionData& data) override;
         void OnCollisionStay(const SR_UTILS_NS::CollisionData& data) override;
@@ -40,8 +38,6 @@ namespace SR_SCRIPTING_NS {
         bool Unload() override;
         SR_NODISCARD uint64_t GetFileHash() const override;
 
-        void OnDestroy() override;
-
         void OnAttached() override;
 
     private:
@@ -49,14 +45,17 @@ namespace SR_SCRIPTING_NS {
         void DeInitHooks();
         void SetGameObject();
         void DestroyScript();
+        void SwitchContext() const;
 
         void OnTransformSet() override;
 
-        SR_HTYPES_NS::DataStorage Stash() override;
-        void PopStash(const SR_HTYPES_NS::DataStorage &data) override;
+        template<typename T> T GetFunction(const char* name) const {
+            return m_script->GetScript<EvoScript::Script>()->GetFunction<T>(name);
+        }
 
     private:
         ScriptHolder::Ptr m_script;
+        void* m_behaviourContext = nullptr;
 
         EvoScript::Typedefs::AwakeFnPtr m_awake = nullptr;
         EvoScript::Typedefs::OnEnableFnPtr m_onEnable = nullptr;
@@ -74,6 +73,7 @@ namespace SR_SCRIPTING_NS {
 
         EvoScript::Typedefs::InitBehaviourFnPtr m_initBehaviour = nullptr;
         EvoScript::Typedefs::ReleaseBehaviourFnPtr m_releaseBehaviour = nullptr;
+        EvoScript::Typedefs::SwitchContextFnPtr m_switchContext = nullptr;
         EvoScript::Typedefs::GetPropertiesFnPtr m_getProperties = nullptr;
         EvoScript::Typedefs::GetPropertyFnPtr m_getProperty = nullptr;
         EvoScript::Typedefs::SetPropertyFnPtr m_setProperty = nullptr;

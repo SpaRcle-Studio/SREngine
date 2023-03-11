@@ -12,7 +12,6 @@
 #include <Utils/World/SceneBuilder.h>
 #include <Utils/Common/Features.h>
 #include <Utils/Types/SafePtrLockGuard.h>
-#include <Utils/Types/RawMesh.h>
 #include <Utils/ECS/Prefab.h>
 #include <Utils/ECS/ComponentManager.h>
 #include <Utils/ECS/Migration.h>
@@ -25,18 +24,12 @@
 #include <Graphics/Render/DebugRenderer.h>
 #include <Graphics/Render/RenderContext.h>
 #include <Graphics/Memory/CameraManager.h>
-#include <Graphics/Types/Shader.h>
 #include <Graphics/Types/Camera.h>
-#include <Graphics/Font/Font.h>
-#include <Graphics/Types/Skybox.h>
 #include <Graphics/Animations/Bone.h>
 #include <Graphics/Window/Window.h>
 #include <Graphics/UI/Sprite2D.h>
 #include <Graphics/Types/Geometry/SkinnedMesh.h>
 #include <Graphics/GUI/Editor/Theme.h>
-
-#include <Audio/RawSound.h>
-#include <Audio/Sound.h>
 
 #include <Physics/Rigidbody.h>
 #include <Physics/LibraryImpl.h>
@@ -46,11 +39,17 @@
 #include <Physics/3D/Raycast3D.h>
 #include <Physics/PhysicsMaterial.h>
 
+#include <Scripting/Impl/EvoScriptManager.h>
+
 namespace SR_CORE_NS {
     bool Engine::Create() {
         SR_INFO("Engine::Create() : register all resources...");
 
-        RegisterResources();
+        if (!Resources::RegisterResources()) {
+            SR_ERROR("Engine::Create() : failed to register engine resources!");
+            return false;
+        }
+
         RegisterMigrators();
 
         SR_INFO("Engine::Create() : create main window...");
@@ -426,6 +425,8 @@ namespace SR_CORE_NS {
             delete pWindow;
         });
 
+        SR_SCRIPTING_NS::EvoScriptManager::Instance().Update(0.f, true);
+
         return true;
     }
 
@@ -456,6 +457,8 @@ namespace SR_CORE_NS {
             m_timeStart = now;
 
             m_cmdManager->Update();
+
+            SR_SCRIPTING_NS::EvoScriptManager::Instance().Update(dt, false);
 
             Prepare();
 
@@ -636,31 +639,6 @@ namespace SR_CORE_NS {
         }
         m_isPaused = isPaused;
         m_sceneBuilder->SetDirty();
-    }
-
-    void Engine::RegisterResources() {
-        auto&& resourcesManager = SR_UTILS_NS::ResourceManager::Instance();
-
-        resourcesManager.RegisterType<SR_HTYPES_NS::RawMesh>();
-        resourcesManager.RegisterType<SR_UTILS_NS::Settings>();
-        resourcesManager.RegisterType<SR_UTILS_NS::Prefab>();
-
-        resourcesManager.RegisterType<SR_GTYPES_NS::Mesh>();
-        resourcesManager.RegisterType<SR_GTYPES_NS::Texture>();
-        resourcesManager.RegisterType<SR_GTYPES_NS::Material>();
-        resourcesManager.RegisterType<SR_GTYPES_NS::Shader>();
-        resourcesManager.RegisterType<SR_GTYPES_NS::Skybox>();
-        resourcesManager.RegisterType<SR_GTYPES_NS::Framebuffer>();
-        resourcesManager.RegisterType<SR_GTYPES_NS::Font>();
-
-        resourcesManager.RegisterType<SR_SCRIPTING_NS::Behaviour>();
-
-        resourcesManager.RegisterType<SR_PTYPES_NS::PhysicsMaterial>();
-
-        resourcesManager.RegisterType<SR_AUDIO_NS::Sound>();
-        resourcesManager.RegisterType<SR_AUDIO_NS::RawSound>();
-
-        resourcesManager.RegisterType<SR_ANIMATIONS_NS::AnimationClip>();
     }
 
     void Engine::FlushScene() {

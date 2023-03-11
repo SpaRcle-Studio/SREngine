@@ -26,7 +26,6 @@ namespace SR_CORE_NS::GUI {
 }
 
 namespace SR_CORE_NS::Commands {
-
     class ChangeHierarchySelected : public SR_UTILS_NS::ReversibleCommand {
     public:
         ChangeHierarchySelected() = default;

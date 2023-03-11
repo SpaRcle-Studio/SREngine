@@ -13,6 +13,7 @@
 #include <Libraries/Utils/Args.h>
 
 #include <Libraries/GameObject.h>
+#include <Libraries/Debug.h>
 
 #ifndef EXTERN
     #define EXTERN extern "C" __declspec(dllexport)

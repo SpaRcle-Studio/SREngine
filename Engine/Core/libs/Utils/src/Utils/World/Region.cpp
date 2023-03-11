@@ -85,7 +85,7 @@ namespace SR_WORLD_NS {
     }
 
     Region::~Region() {
-        SetDebugLoaded(BoolExt::False);
+       //C SetDebugLoaded(BoolExt::False);
 
         for (auto&& [position, chunk] : m_loadedChunks) {
             delete chunk;
@@ -104,7 +104,7 @@ namespace SR_WORLD_NS {
             SR_LOG("Region::Unload() : unloading region at " + m_position.ToString());
         }
 
-        SetDebugLoaded(BoolExt::False);
+        //SetDebugLoaded(BoolExt::False);
 
         if (m_loadedChunks.empty()) {
             return true;
@@ -180,7 +180,7 @@ namespace SR_WORLD_NS {
         for (auto&& [key, pChunk] : m_loadedChunks)
             pChunk->ApplyOffset();
 
-        SetDebugLoaded(BoolExt::None);
+        //SetDebugLoaded(BoolExt::None);
     }
 
     Chunk *Region::GetChunk(const SR_MATH_NS::FVector3 &position) {
@@ -239,7 +239,7 @@ namespace SR_WORLD_NS {
 
         SRAssert(!m_position.HasZero());
 
-        SetDebugLoaded(BoolExt::True);
+        //SetDebugLoaded(BoolExt::True);
 
         auto&& pLogic = m_observer->m_scene->GetLogic<SceneCubeChunkLogic>();
         const auto&& path = pLogic->GetRegionsPath().Concat(m_position.ToString()).ConcatExt("dat");
@@ -290,7 +290,7 @@ namespace SR_WORLD_NS {
         return false;
     }
 
-    void Region::SetDebugLoaded(BoolExt enabled) {
+    /*void Region::SetDebugLoaded(BoolExt enabled) {
         if (m_position.y != 1) {
             return;
         }
@@ -321,5 +321,5 @@ namespace SR_WORLD_NS {
             SR_UTILS_NS::DebugDraw::Instance().DrawPlane(m_debugLoadedId);
             m_debugLoadedId = SR_ID_INVALID;
         }
-    }
+    }*/
 }
