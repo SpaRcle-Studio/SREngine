@@ -115,7 +115,7 @@ namespace SR_UTILS_NS {
 
         void CheckActivity() noexcept override;
 
-        void SetDirty(bool value) override;
+        bool SetDirty(bool value) override;
         void OnMatrixDirty();
 
     private:

@@ -443,25 +443,34 @@ namespace SR_UTILS_NS {
         }
     }
 
-    void GameObject::SetDirty(bool dirty) {
+    bool GameObject::SetDirty(bool dirty) {
         if (IsDirty() == dirty) {
-            IComponentable::SetDirty(dirty);
-            return;
+            return IComponentable::SetDirty(dirty);
         }
 
-        IComponentable::SetDirty(dirty);
+        const bool isDirty = IComponentable::SetDirty(dirty);
 
         /// Грязный флаг передаем вверх, а чистый вниз.
         /// Это нужно для оптимизации
-        if (IsDirty()) {
+        if (dirty) {
             if (m_parent) {
                 m_parent->SetDirty(dirty);
             }
+
+            return isDirty;
         }
         else {
+            bool hasDirtyChild = false;
+
             for (auto&& children : m_children) {
-                children->SetDirty(dirty);
+                hasDirtyChild |= children->SetDirty(dirty);
             }
+
+            if (hasDirtyChild) {
+                return IComponentable::SetDirty(true);
+            }
+
+            return isDirty;
         }
     }
 
