@@ -29,7 +29,7 @@ namespace SR_GRAPH_NS::Types {
     }
 
     bool Shader::Init() {
-        if (m_isInit) {
+        if (m_isCalculated) {
             SRHalt("Double shader initialization!");
             return true;
         }
@@ -67,7 +67,7 @@ namespace SR_GRAPH_NS::Types {
             SetResourceHash(hash);
         }
 
-        m_isInit = true;
+        m_isCalculated = true;
 
         return true;
     }
@@ -77,10 +77,12 @@ namespace SR_GRAPH_NS::Types {
             return false;
         }
 
-        if (!m_isInit && !Init()) {
+        if (!m_isCalculated && !Init()) {
             SR_ERROR("Shader::Use() : failed to initialize shader!");
             return false;
         }
+
+        SRAssert(GetRenderContext());
 
         switch (Memory::ShaderProgramManager::Instance().BindProgram(m_shaderProgram)) {
             case Memory::ShaderProgramManager::BindResult::Success:
@@ -103,12 +105,14 @@ namespace SR_GRAPH_NS::Types {
     }
 
     void Shader::FreeVideoMemory() {
-        if (m_isInit) {
+        if (m_isCalculated) {
             SR_SHADER("Shader::FreeVideoMemory() : free \"" + GetResourceId() + "\" video memory...");
 
             if (!Memory::ShaderProgramManager::Instance().FreeProgram(&m_shaderProgram)) {
                 SR_ERROR("Shader::Free() : failed to free shader program! \n\tPath: " + GetResourcePath().ToString());
             }
+
+            m_isCalculated = false;
         }
     }
 
@@ -159,7 +163,7 @@ namespace SR_GRAPH_NS::Types {
             return false;
         }
 
-        if (!m_isInit && !Init()) {
+        if (!m_isCalculated && !Init()) {
             SR_ERROR("Shader::Use() : failed to initialize shader!");
             return false;
         }
@@ -220,7 +224,7 @@ namespace SR_GRAPH_NS::Types {
     }
 
     bool Shader::Ready() const {
-        return !m_hasErrors && m_isInit && m_shaderProgram != SR_ID_INVALID;
+        return !m_hasErrors && m_isCalculated && m_shaderProgram != SR_ID_INVALID;
     }
 
     uint64_t Shader::GetUBOBlockSize() const {
@@ -249,7 +253,7 @@ namespace SR_GRAPH_NS::Types {
     }
 
     bool Shader::Flush() const {
-        if (!m_isInit || m_hasErrors) {
+        if (!m_isCalculated || m_hasErrors) {
             return false;
         }
 
@@ -345,7 +349,7 @@ namespace SR_GRAPH_NS::Types {
 
         bool hasErrors = !IResource::Unload();
 
-        m_isInit = false;
+        m_isCalculated = false;
         m_hasErrors = false;
 
         m_uniformBlock.DeInit();
@@ -369,7 +373,7 @@ namespace SR_GRAPH_NS::Types {
     }
 
     void Shader::ReviveResource() {
-        m_isInit = false;
+        m_isCalculated = false;
         m_hasErrors = false;
         IResource::ReviveResource();
     }

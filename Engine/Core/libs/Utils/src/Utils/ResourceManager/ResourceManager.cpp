@@ -154,7 +154,7 @@ namespace SR_UTILS_NS {
                 pResource->m_lifetime = ResourceLifeTime;
             }
             else if (IsLastResource(pResource)) {
-                pResource->m_lifetime -= m_deltaTime;
+                pResource->m_lifetime -= m_GCDt;
             }
             else {
                 /// нам не нужно ждать завершения времени жизни ресурса, у которого еще есть копии
