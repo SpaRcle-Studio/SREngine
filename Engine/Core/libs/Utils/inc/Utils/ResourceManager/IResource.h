@@ -134,7 +134,7 @@ namespace SR_UTILS_NS {
         uint64_t m_resourceHash = 0;
         uint64_t m_resourceHashPath = 0;
 
-        uint64_t m_lifetime = 0;
+        int64_t m_lifetime = 0;
 
         /// Принудительно уничтожить ресурс
         std::atomic<bool> m_force = false;

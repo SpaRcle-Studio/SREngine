@@ -11,7 +11,7 @@ namespace SR_GTYPES_NS {
     ProceduralMesh::ProceduralMesh()
         : Super(MeshType::Procedural)
     {
-        SetId(SR_FORMAT("Procedural:%p", (void*)this));
+        SetId("ProceduralMesh");
     }
 
     SR_UTILS_NS::IResource* ProceduralMesh::CopyResource(IResource* destination) const {

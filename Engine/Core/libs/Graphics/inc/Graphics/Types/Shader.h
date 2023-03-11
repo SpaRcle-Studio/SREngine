@@ -100,7 +100,6 @@ namespace SR_GTYPES_NS {
         ShaderProgram          m_shaderProgram        = SR_ID_INVALID;
 
         std::atomic<bool>      m_hasErrors            = false;
-        std::atomic<bool>      m_isInit               = false;
 
         bool                   m_isRegistered         = false;
 
