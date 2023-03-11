@@ -20,6 +20,8 @@ namespace SR_SCRIPTING_NS {
 
         void Update(float_t dt, bool force);
 
+        void OnSingletonDestroy() override;
+
     private:
         ScirptsMap m_scripts;
         std::optional<ScirptsMap::iterator> m_checkIterator;

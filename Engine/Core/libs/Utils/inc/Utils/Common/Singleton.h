@@ -9,6 +9,8 @@
 #include <Utils/Common/Breakpoint.h>
 #include <Utils/Common/Stacktrace.h>
 
+#include <Utils/Types/SafePtrLockGuard.h>
+
 namespace SR_UTILS_NS {
     template<typename T> class Singleton;
 
@@ -29,6 +31,10 @@ namespace SR_UTILS_NS {
         ~Singleton() override = default;
 
     public:
+        SR_MAYBE_UNUSED static SR_HTYPES_NS::SingletonRecursiveLockGuard<Singleton<T>*> ScopeLockSingleton() {
+            return SR_HTYPES_NS::SingletonRecursiveLockGuard<Singleton<T>*>(&Instance());
+        }
+
         SR_MAYBE_UNUSED static bool IsSingletonInitialized() noexcept {
             return GetSingleton() != nullptr;
         }

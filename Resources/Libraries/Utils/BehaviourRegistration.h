@@ -73,12 +73,19 @@
     }                                                                                                                   \
 
 #define REGISTER_BEHAVIOUR(className)                                                                                   \
-    EXTERN void InitBehaviour() {                                                                                       \
+    EXTERN void* InitBehaviour() {                                                                                      \
         if (!gBehaviourContext) {                                                                                       \
             gBehaviourContext = new BehaviourContext();                                                                 \
             ++gBehavioursCount;                                                                                         \
-            gBehaviourContext->pBehaviour = new (void*)(new className());                                               \
+            gBehaviourContext->pBehaviour = new className();                                                            \
+            return (void*)gBehaviourContext;                                                                            \
         }                                                                                                               \
+                                                                                                                        \
+        return nullptr;                                                                                                 \
+    }                                                                                                                   \
+                                                                                                                        \
+    EXTERN void SwitchContext(void* pContext) {                                                                         \
+        gBehaviourContext = (BehaviourContext*)pContext;                                                                \
     }                                                                                                                   \
                                                                                                                         \
     EXTERN void ReleaseBehaviour() {                                                                                    \
@@ -86,9 +93,15 @@
             gBehaviourContext->pBehaviour.AutoFree([](void* ptr) {                                                      \
 				delete reinterpret_cast<className*>(ptr);                                                               \
 			});                                                                                                         \
-            --gBehavioursCount;                                                                                         \
+                                                                                                                        \
+            if (gBehaviourContext->pBehaviour.Valid()) {                                                                \
+                Debug::Halt("pBehaviour is valid!");                                                                    \
+            }                                                                                                           \
+                                                                                                                        \
             delete gBehaviourContext;                                                                                   \
             gBehaviourContext = nullptr;                                                                                \
+                                                                                                                        \
+            --gBehavioursCount;                                                                                         \
         }                                                                                                               \
     }                                                                                                                   \
                                                                                                                         \

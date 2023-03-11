@@ -86,8 +86,11 @@ namespace SR_SCRIPTING_NS {
     }
 
     void Behaviour::OnDestroy() {
-        RemoveUsePoint();
+        SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
+
         Component::OnDestroy();
+
+        RemoveUsePoint();
     }
 
     bool Behaviour::IsEmpty() const {
@@ -153,6 +156,7 @@ namespace SR_SCRIPTING_NS {
 
     void Behaviour::OnLoaded() {
         AddUsePoint();
+
         Component::OnLoaded();
     }
 

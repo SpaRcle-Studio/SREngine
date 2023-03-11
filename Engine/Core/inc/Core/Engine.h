@@ -19,6 +19,7 @@
 #include <Core/GUI/EditorGUI.h>
 #include <Core/EvoScriptAPI.h>
 #include <Core/EngineCommands.h>
+#include <Core/EngineResources.h>
 #include <Utils/Types/SafeQueue.h>
 
 namespace SR_PHYSICS_NS {
@@ -86,7 +87,6 @@ namespace SR_CORE_NS {
         bool Close();
 
     private:
-        void RegisterResources();
         void RegisterMigrators();
 
         bool CreateMainWindow();

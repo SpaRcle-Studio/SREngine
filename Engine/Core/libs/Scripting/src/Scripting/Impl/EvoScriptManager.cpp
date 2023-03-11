@@ -23,8 +23,22 @@ namespace SR_SCRIPTING_NS {
                     continue;
                 }
 
+                if (pHolder->GetUseCount() == 2) {
+                    pHolder->AutoFree([](auto&& pHolder) {
+                        delete pHolder->template GetScript<EvoScript::Script>();
+                        pHolder->SetScript(nullptr);
+                        delete pHolder;
+                    });
+                    pIt = m_scripts.erase(pIt);
+                    continue;
+                }
+
                 ++pIt;
             }
+            return;
+        }
+
+        if (m_scripts.empty()) {
             return;
         }
 
@@ -37,7 +51,12 @@ namespace SR_SCRIPTING_NS {
             return;
         }
 
-        if (!m_checkIterator.value()->second.Valid()) {
+        if (m_checkIterator.value()->second.GetUseCount() == 2) {
+            m_checkIterator.value()->second.AutoFree([](auto&& pHolder) {
+                delete pHolder->template GetScript<EvoScript::Script>();
+                pHolder->SetScript(nullptr);
+                delete pHolder;
+            });
             m_checkIterator = m_scripts.erase(m_checkIterator.value());
             return;
         }
@@ -50,12 +69,14 @@ namespace SR_SCRIPTING_NS {
 
         auto&& compiler = GlobalEvoCompiler::Instance();
 
+        m_checkIterator = std::nullopt;
+
         m_scripts[localPath.ToStringRef()].AutoFree([](ScriptHolder* pHolder) {
             delete pHolder->GetScript<EvoScript::Script>();
             pHolder->SetScript(nullptr);
         });
 
-        auto&& pEvoScript = EvoScript::Script::Allocate(localPath.GetWithoutExtension(), compiler.GetGenerator()->GetAddresses());
+        auto&& pEvoScript = EvoScript::Script::Allocate(localPath.GetWithoutExtension(), &compiler, compiler.GetGenerator()->GetAddresses());
         if (!pEvoScript) {
             SR_ERROR("EvoScriptManager::Load() : failed to allocate evo script!\n\tPath: " + localPath.ToStringRef());
             return true;
@@ -68,7 +89,7 @@ namespace SR_SCRIPTING_NS {
             return false;
         }
 
-        m_scripts[localPath.ToStringRef()] = ScriptHolder::Ptr(new ScriptHolder(pEvoScript));
+        m_scripts[localPath.ToStringRef()] = new ScriptHolder(pEvoScript);
 
         return true;
     }
@@ -86,5 +107,15 @@ namespace SR_SCRIPTING_NS {
         }
 
         return m_scripts.at(localPath.ToStringRef());
+    }
+
+    void EvoScriptManager::OnSingletonDestroy() {
+        SR_LOCK_GUARD
+
+        if (!m_scripts.empty()) {
+            SR_ERROR("EvoScriptManager::OnSingletonDestroy() : not all scripts were deleted!\n\tCount: " + std::to_string(m_scripts.size()));
+        }
+
+        Singleton::OnSingletonDestroy();
     }
 }

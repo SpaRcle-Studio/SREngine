@@ -82,6 +82,18 @@ namespace Framework {
             SR_UTILS_NS::Debug::Instance().Log(msg);
         });
 
+        ESRegisterCustomStaticMethod(EvoScript::Public, generator, Debug, Error, void, ESArg1(const std::string& msg), {
+            SR_UTILS_NS::Debug::Instance().Error(msg);
+        });
+
+        ESRegisterCustomStaticMethod(EvoScript::Public, generator, Debug, Warn, void, ESArg1(const std::string& msg), {
+            SR_UTILS_NS::Debug::Instance().Warn(msg);
+        });
+
+        ESRegisterCustomStaticMethod(EvoScript::Public, generator, Debug, Halt, void, ESArg1(const std::string& msg), {
+            SR_UTILS_NS::Debug::Instance().Assert(msg);
+        });
+
         //ESRegisterStaticMethod(EvoScript::Public, generator, Debug, Warn, void, ESArg1(const std::string& msg), ESArg1(msg))
         //ESRegisterStaticMethod(EvoScript::Public, generator, Debug, System, void, ESArg1(const std::string& msg), ESArg1(msg))
         //ESRegisterStaticMethod(EvoScript::Public, generator, Debug, Shader, void, ESArg1(const std::string& msg), ESArg1(msg))

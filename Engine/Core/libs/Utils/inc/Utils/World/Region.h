@@ -66,8 +66,8 @@ namespace SR_WORLD_NS {
 
         SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save(SR_HTYPES_NS::DataStorage* pContext) const;
 
-    private:
-        void SetDebugLoaded(BoolExt enabled);
+    //private:
+    //    void SetDebugLoaded(BoolExt enabled);
 
     public:
         typedef std::function<Region*(SRRegionAllocArgs)> Allocator;
@@ -80,7 +80,7 @@ namespace SR_WORLD_NS {
         static const uint16_t VERSION;
 
     protected:
-        uint64_t m_debugLoadedId = SR_ID_INVALID;
+        // uint64_t m_debugLoadedId = SR_ID_INVALID;
 
         Observer* m_observer = nullptr;
 

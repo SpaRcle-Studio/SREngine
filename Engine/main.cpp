@@ -36,9 +36,6 @@
 #include <Graphics/UI/Canvas.h>
 #include <Graphics/UI/Anchor.h>
 #include <Graphics/UI/Sprite2D.h>
-#include <Graphics/SRSL/Lexer.h>
-#include <Graphics/SRSL/LexicalAnalyzer.h>
-#include <Graphics/SRSL/PseudoCodeGenerator.h>
 #include <Graphics/SRSL/Shader.h>
 
 #include <Graphics/Font/Text.h>
@@ -66,6 +63,7 @@
 #include <Physics/PhysicsLib.h>
 
 #include <Scripting/Base/Behaviour.h>
+#include <Scripting/Impl/EvoScriptManager.h>
 
 using namespace Framework;
 
@@ -158,6 +156,7 @@ int main(int argc, char **argv) {
     SR_PHYSICS_NS::PhysicsLibrary::DestroySingleton();
     SR_GRAPH_NS::Memory::CameraManager::DestroySingleton();
     SR_SCRIPTING_NS::GlobalEvoCompiler::DestroySingleton();
+    SR_SCRIPTING_NS::EvoScriptManager::DestroySingleton();
     SR_UTILS_NS::EntityManager::DestroySingleton();
     SR_CORE_NS::Engine::DestroySingleton();
     SR_GRAPH_NS::GUI::NodeManager::DestroySingleton();

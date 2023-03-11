@@ -28,8 +28,8 @@ namespace SR_WORLD_NS {
     }
 
     Chunk::~Chunk() {
-        SetDebugActive(BoolExt::False);
-        SetDebugLoaded(BoolExt::False);
+        //SetDebugActive(BoolExt::False);
+        //SetDebugLoaded(BoolExt::False);
     }
 
     void Chunk::Update(float_t dt) {
@@ -56,7 +56,7 @@ namespace SR_WORLD_NS {
     bool Chunk::Unload() {
         m_loadState = LoadState::Unload;
 
-        SetDebugLoaded(BoolExt::False);
+        //SetDebugLoaded(BoolExt::False);
 
         auto&& pLogic = m_observer->m_scene->GetLogic<SceneCubeChunkLogic>();
         auto&& gameObjects = pLogic->GetGameObjectsAtChunk(m_regionPosition, m_position);
@@ -71,12 +71,12 @@ namespace SR_WORLD_NS {
     }
 
     void Chunk::OnExit() {
-        SetDebugActive(BoolExt::False);
+        //SetDebugActive(BoolExt::False);
         m_region->OnExit();
     }
 
     void Chunk::OnEnter() {
-        SetDebugActive(BoolExt::True);
+        //SetDebugActive(BoolExt::True);
         m_region->OnEnter();
     }
 
@@ -104,8 +104,8 @@ namespace SR_WORLD_NS {
     }
 
     bool Chunk::ApplyOffset() {
-        SetDebugLoaded(BoolExt::None);
-        SetDebugActive(BoolExt::None);
+        //SetDebugLoaded(BoolExt::None);
+        //SetDebugActive(BoolExt::None);
 
         return true;
     }
@@ -133,7 +133,7 @@ namespace SR_WORLD_NS {
 
         m_loadState = LoadState::Loaded;
         Access(0.f);
-        SetDebugLoaded(BoolExt::True);
+        //SetDebugLoaded(BoolExt::True);
 
         return true;
     }
@@ -210,7 +210,7 @@ namespace SR_WORLD_NS {
         return m_observer->m_scene;
     }
 
-    void Chunk::SetDebugActive(BoolExt enabled) {
+    /*void Chunk::SetDebugActive(BoolExt enabled) {
         if (!Features::Instance().Enabled("DebugChunks", false)) {
             enabled = BoolExt::False;
         }
@@ -252,5 +252,5 @@ namespace SR_WORLD_NS {
             SR_UTILS_NS::DebugDraw::Instance().DrawPlane(m_debugLoadedId);
             m_debugLoadedId = SR_ID_INVALID;
         }
-    }
+    }*/
 }
