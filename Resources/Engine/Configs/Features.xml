@@ -2,7 +2,7 @@
 <Features>
    <Common>
        <EvoCompiler Value="true"/>
-       <CompilePDB Value="true"/>
+       <CompilePDB Value="false"/>
        <ScriptMultiInstances Value="false"/>
 
        <UpdateScripts Value="false"/>

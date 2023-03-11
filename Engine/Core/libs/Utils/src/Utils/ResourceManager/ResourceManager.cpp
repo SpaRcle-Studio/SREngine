@@ -3,6 +3,7 @@
 //
 
 #include <Utils/ResourceManager/ResourceManager.h>
+#include <Utils/ResourceManager/IResourceReloader.h>
 #include <Utils/Common/Features.h>
 #include <Utils/Common/StringFormat.h>
 #include <Utils/Common/Hashes.h>
@@ -17,6 +18,8 @@ namespace SR_UTILS_NS {
     #else
         SR_INFO("ResourceManager::Init() : initializing resource manager...\n\tResources folder: " + resourcesFolder.ToString());
     #endif
+
+        m_defaultReloader = new DefaultResourceReloader();
 
         m_folder = resourcesFolder;
 
@@ -46,6 +49,13 @@ namespace SR_UTILS_NS {
         }
 
         PrintMemoryDump();
+
+        SR_SAFE_DELETE_PTR(m_defaultReloader);
+
+        for (auto&& [hashTypeName, pResourceType] : m_resources) {
+            delete pResourceType;
+        }
+        m_resources.clear();
     }
 
     bool ResourceManager::Destroy(IResource *resource) {
@@ -70,7 +80,7 @@ namespace SR_UTILS_NS {
 
         m_resources.insert(std::make_pair(
             hashTypeName,
-            ResourceType(name)
+            new ResourceType(name)
         ));
 
         m_checkResourceGroupIt = m_resources.begin();
@@ -82,7 +92,7 @@ namespace SR_UTILS_NS {
         if (pResource->IsRegistered()) {
             auto&& pGroupIt = m_resources.find(pResource->GetResourceHashName());
             auto&& [name, resourcesGroup] = *pGroupIt;
-            resourcesGroup.Remove(pResource);
+            resourcesGroup->Remove(pResource);
         }
         else {
            SRHalt("Resource ins't registered! "
@@ -93,7 +103,7 @@ namespace SR_UTILS_NS {
 
     bool ResourceManager::IsLastResource(IResource* pResource) {
         auto&& [name, resourcesGroup] = *m_resources.find(pResource->GetResourceHashName());
-        return resourcesGroup.IsLast(pResource->GetResourceHashId());
+        return resourcesGroup->IsLast(pResource->GetResourceHashId());
     }
 
     void ResourceManager::Thread() {
@@ -133,7 +143,7 @@ namespace SR_UTILS_NS {
 
         if (m_force) {
             for (auto&& [hashName, group] : m_resources) {
-                group.CollectUnused();
+                group->CollectUnused();
             }
         }
 
@@ -209,7 +219,7 @@ namespace SR_UTILS_NS {
         auto&& pGroupIt = m_resources.find(pResource->GetResourceHashName());
         auto&& [name, resourcesGroup] = *pGroupIt;
 
-        resourcesGroup.Add(pResource);
+        resourcesGroup->Add(pResource);
     }
 
     void ResourceManager::PrintMemoryDump() {
@@ -220,10 +230,10 @@ namespace SR_UTILS_NS {
         std::string dump = "\n================================ MEMORY DUMP ================================";
 
         for (const auto& [hashName, type] : m_resources) {
-            dump += "\n\t\"" + std::string(type.GetName()) + "\": " + std::to_string(type.m_copies.size());
+            dump += "\n\t\"" + std::string(type->GetName()) + "\": " + std::to_string(type->GetCopiesRef().size());
 
             uint32_t id = 0;
-            for (auto& pRes : type.m_resources) {
+            for (auto& pRes : type->m_resources) {
                 dump += SR_UTILS_NS::Format("\n\t\t%u: %s = %u", id++, pRes->GetResourceId().data(), pRes->GetCountUses());
                 ++count;
             }
@@ -259,7 +269,7 @@ namespace SR_UTILS_NS {
 
         auto&& [name, resourcesGroup] = *m_resources.find(hashTypeName);
 
-        if (auto&& pResource = resourcesGroup.Find(SR_HASH_STR(id))) {
+        if (auto&& pResource = resourcesGroup->Find(SR_HASH_STR(id))) {
             /// раз ресурс ищем, значит он все еще может быть нужен.
             pResource->UpdateResourceLifeTime();
             return pResource;
@@ -326,7 +336,7 @@ namespace SR_UTILS_NS {
             return;
         }
 
-        auto&& pResourceInfo = m_checkResourceGroupIt->second.GetInfoByIndex(m_checkInfoIndex);
+        auto&& [hashPath, pResourceInfo] = m_checkResourceGroupIt->second->GetInfoByIndex(m_checkInfoIndex);
         if (!pResourceInfo) {
             m_checkResourceGroupIt = std::next(m_checkResourceGroupIt);
             m_checkInfoIndex = 0;
@@ -352,19 +362,15 @@ namespace SR_UTILS_NS {
             return;
         }
 
-        for (auto&& pResource : pResourceInfo->m_loaded) {
-            if (pResource->IsDestroyed()) {
-                continue;
-            }
+        auto&& pResourceReloader = m_defaultReloader;
 
-            auto&& loadState = pResource->GetResourceLoadState();
+        if (auto&& pGroupReloader = m_checkResourceGroupIt->second->GetReloader()) {
+            pResourceReloader = pGroupReloader;
+        }
 
-            using LS = IResource::LoadState;
-            if (loadState == LS::Reloading || loadState == LS::Loading || loadState == LS::Unloading) {
-                continue;
-            }
-
-            pResource->Reload();
+        auto&& path = GetResourcePath(hashPath);
+        if (pResourceReloader && !pResourceReloader->Reload(path, pResourceInfo)) {
+            SR_ERROR("ResourceManager::CheckResourceHashes() : failed to reload resource!\n\tPath: " + path.ToStringRef());
         }
 
         ++m_checkInfoIndex;
@@ -374,7 +380,7 @@ namespace SR_UTILS_NS {
         SR_SCOPED_LOCK
 
         if (auto&& pIt = m_resources.find(hashName); pIt != m_resources.end()) {
-            return pIt->second.GetName();
+            return pIt->second->GetName();
         }
 
         SRHalt("ResourceManager::GetTypeName() : unknown hash name!");
@@ -461,5 +467,19 @@ namespace SR_UTILS_NS {
         m_thread = SR_HTYPES_NS::Thread::Factory::Instance().Create(std::thread(&ResourceManager::Thread, this));
 
         return true;
+    }
+
+    bool ResourceManager::RegisterReloader(IResourceReloader *pReloader, uint64_t hashTypeName) {
+        SR_SCOPED_LOCK
+
+        if (auto&& pIt = m_resources.find(hashTypeName); pIt != m_resources.end()) {
+            auto&& [_, resourceType] = *pIt;
+            resourceType->SetReloader(pReloader);
+            return true;
+        }
+
+        SRHalt("ResourceManager::RegisterReloader() : unknown hash name!");
+
+        return false;
     }
 }

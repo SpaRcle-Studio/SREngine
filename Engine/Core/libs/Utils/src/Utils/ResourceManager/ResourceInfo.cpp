@@ -3,9 +3,14 @@
 //
 
 #include <Utils/ResourceManager/ResourceInfo.h>
+#include <Utils/ResourceManager/IResourceReloader.h>
 
 namespace SR_UTILS_NS {
-    IResource *ResourceType::Find(const ResourceType::ResourceId &id)  {
+    ResourceType::~ResourceType() {
+        SetReloader(nullptr);
+    }
+
+    IResource* ResourceType::Find(const ResourceType::ResourceId &id)  {
         auto&& pIt = m_copies.find(id);
         if (pIt == m_copies.end()) {
             return nullptr;
@@ -130,11 +135,18 @@ namespace SR_UTILS_NS {
         }
     }
 
-    ResourceInfo *ResourceType::GetInfoByIndex(uint64_t index) {
+    std::pair<ResourceType::ResourcePath, ResourceInfo*> ResourceType::GetInfoByIndex(uint64_t index) {
         if (index >= m_info.size()) {
-            return nullptr;
+            return std::make_pair(0, nullptr);
         }
 
-        return &std::next(m_info.begin(), index)->second;
+        auto&& [hash, info] = *std::next(m_info.begin(), index);
+
+        return std::make_pair(hash, &info);
+    }
+
+    void ResourceType::SetReloader(IResourceReloader *pReloader) {
+        SR_SAFE_DELETE_PTR(m_reloader);
+        m_reloader = pReloader;
     }
 }

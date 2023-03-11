@@ -6,12 +6,14 @@
 #define HELPER_RESOURCEMANAGER_H
 
 #include <Utils/Debug.h>
-#include <Utils/ResourceManager/ResourceInfo.h>
 #include <Utils/Types/Thread.h>
-#include <Utils/ResourceManager/IResource.h>
 #include <Utils/Common/Singleton.h>
+#include <Utils/ResourceManager/IResource.h>
+#include <Utils/ResourceManager/ResourceInfo.h>
 
 namespace SR_UTILS_NS {
+    class IResourceReloader;
+
     class SR_DLL_EXPORT ResourceManager final : public Singleton<ResourceManager> {
         friend class Singleton<ResourceManager>;
         using Hash = uint64_t;
@@ -50,6 +52,10 @@ namespace SR_UTILS_NS {
             return RegisterType(typeid(T).name(), SR_COMPILE_TIME_CRC32_TYPE_NAME(T));
         }
 
+        template<typename ResourceT, typename ReloaderT> bool RegisterReloader() {
+            return RegisterReloader(new ReloaderT, SR_COMPILE_TIME_CRC32_TYPE_NAME(ResourceT));
+        }
+
         /** \warning Call only from IResource parents \brief Register resource in resource manager */
         void RegisterResource(IResource *resource);
 
@@ -67,6 +73,7 @@ namespace SR_UTILS_NS {
 
     private:
         bool RegisterType(const std::string& name, uint64_t hashTypeName);
+        bool RegisterReloader(IResourceReloader* pReloader, uint64_t hashTypeName);
 
         void Remove(IResource *resource);
         void GC();
@@ -80,6 +87,8 @@ namespace SR_UTILS_NS {
         /// никогда не очищаем и ничего не удаляем
         ska::flat_hash_map<Hash, std::string> m_hashIds;
         ska::flat_hash_map<Hash, Path> m_hashPaths;
+
+        IResourceReloader* m_defaultReloader = nullptr;
 
     private:
         std::atomic<bool> m_isInit = false;

@@ -109,12 +109,10 @@ namespace SR_SCRIPTING_NS {
         Unload();
 
         if (!Load()) {
-            PopStash(stash);
             return false;
         }
 
         ApplyStash(stash);
-        PopStash(stash);
 
         m_loadState = LoadState::Loaded;
 
@@ -148,10 +146,6 @@ namespace SR_SCRIPTING_NS {
         for (auto&& [propertyId, value] : data.GetValue<ValueProperties>()) {
             SetProperty(propertyId, value);
         }
-    }
-
-    void Behaviour::PopStash(const SR_HTYPES_NS::DataStorage& data) {
-        /** nothing */
     }
 
     void Behaviour::OnLoaded() {

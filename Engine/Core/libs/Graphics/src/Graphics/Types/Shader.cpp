@@ -374,6 +374,7 @@ namespace SR_GRAPH_NS::Types {
 
     void Shader::ReviveResource() {
         m_isCalculated = false;
+        m_isRegistered = false;
         m_hasErrors = false;
         IResource::ReviveResource();
     }

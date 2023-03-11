@@ -13,6 +13,9 @@
 #include <Audio/RawSound.h>
 #include <Audio/Sound.h>
 
+#include <Scripting/Base/Behaviour.h>
+#include <Scripting/Impl/EvoScriptResourceReloader.h>
+
 namespace SR_CORE_NS::Resources {
     bool RegisterResources() {
         auto&& resourcesManager = SR_UTILS_NS::ResourceManager::Instance();
@@ -37,6 +40,10 @@ namespace SR_CORE_NS::Resources {
         resourcesManager.RegisterType<SR_AUDIO_NS::RawSound>();
 
         resourcesManager.RegisterType<SR_ANIMATIONS_NS::AnimationClip>();
+
+        /// ------------------------------------------------------------------------------------------------------------
+
+        resourcesManager.RegisterReloader<SR_SCRIPTING_NS::Behaviour, SR_SCRIPTING_NS::EvoScriptResourceReloader>();
 
         return true;
     }
