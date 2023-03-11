@@ -36,8 +36,9 @@ namespace SR_UTILS_NS {
         virtual void Awake(bool isPaused) noexcept;
         virtual void Start() noexcept;
 
-        virtual void SetDirty(bool dirty) {
+        virtual bool SetDirty(bool dirty) {
             m_dirty = SR_CLAMP(m_dirty + (dirty ? 1 : -1), 3, 0);
+            return m_dirty > 0;
         };
 
         virtual Component* GetOrCreateComponent(const std::string& name);
