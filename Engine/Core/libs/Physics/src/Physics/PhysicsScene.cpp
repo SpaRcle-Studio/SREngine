@@ -138,7 +138,9 @@ namespace SR_PHYSICS_NS {
                 SRHalt("Unknown measurement of rigidbody!");
             }
 
-            delete pRigidbody;
+            if (!pRigidbody->GetParent()) {
+                delete pRigidbody;
+            }
         }
 
         m_rigidbodyToRemove.clear();

@@ -20,6 +20,9 @@ namespace SR_PTYPES_NS {
         bool UpdateShape() override;
         bool UpdateMatrix() override;
 
+        physx::PxConvexMesh* CreateConvexMesh(SR_HTYPES_NS::RawMesh* pRawMesh);
+        physx::PxTriangleMesh* CreateTriangleMesh(SR_HTYPES_NS::RawMesh* pRawMesh);
+
         SR_NODISCARD void* GetHandle() const noexcept override { return m_shape; }
 
     private:

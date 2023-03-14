@@ -16,8 +16,8 @@ namespace SR_PHYSICS_NS {
         const physx::PxU32 bufferSize = 64;
         physx::PxContactPairPoint contacts[bufferSize];
 
-        physx::PxVec3 point = physx::PxVec3(0);
-        physx::PxVec3 impulse  = physx::PxVec3(0);
+        auto point = physx::PxVec3(0);
+        auto impulse  = physx::PxVec3(0);
 
         for (physx::PxU32 i = 0; i < nbPairs; i++)
         {
@@ -34,8 +34,8 @@ namespace SR_PHYSICS_NS {
 
             const physx::PxContactPair& cp = pairs[i];
 
-            SR_PTYPES_NS::CollisionShape* shape1 = reinterpret_cast<SR_PTYPES_NS::CollisionShape*>(cp.shapes[0]->userData);
-            SR_PTYPES_NS::CollisionShape* shape2 = reinterpret_cast<SR_PTYPES_NS::CollisionShape*>(cp.shapes[1]->userData);
+            auto shape1 = reinterpret_cast<SR_PTYPES_NS::CollisionShape*>(cp.shapes[0]->userData);
+            auto shape2 = reinterpret_cast<SR_PTYPES_NS::CollisionShape*>(cp.shapes[1]->userData);
 
             SR_PTYPES_NS::Rigidbody* rigidbody1 = shape1->GetRigidbody();
             SR_PTYPES_NS::Rigidbody* rigidbody2 = shape2->GetRigidbody();
@@ -112,8 +112,8 @@ namespace SR_PHYSICS_NS {
 
             const physx::PxTriggerPair& tp = pairs[i];
 
-            SR_PTYPES_NS::CollisionShape* triggerShape = reinterpret_cast<SR_PTYPES_NS::CollisionShape*>(tp.triggerShape[0].userData);
-            SR_PTYPES_NS::CollisionShape* otherShape = reinterpret_cast<SR_PTYPES_NS::CollisionShape*>(tp.otherShape[0].userData);
+            auto triggerShape = reinterpret_cast<SR_PTYPES_NS::CollisionShape*>(tp.triggerShape[0].userData);
+            auto otherShape = reinterpret_cast<SR_PTYPES_NS::CollisionShape*>(tp.otherShape[0].userData);
 
             SR_PTYPES_NS::Rigidbody* triggerRigidBody = triggerShape->GetRigidbody();
             SR_PTYPES_NS::Rigidbody* rigidbody = otherShape->GetRigidbody();

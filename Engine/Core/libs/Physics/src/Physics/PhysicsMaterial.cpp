@@ -22,13 +22,13 @@ namespace SR_PTYPES_NS {
     }
 
     SR_UTILS_NS::IResource* PhysicsMaterial::CopyResource(Super *destination) const {
-        SRHalt("Material is not are copyable!");
+        SRHalt("Materials are not copyable!");
         return nullptr;
     }
 
     PhysicsMaterial* PhysicsMaterial::Load(SR_UTILS_NS::Path rawPath) {
         if (rawPath.Empty()) {
-            SR_ERROR("PhysicsMaterial::Load : Path is empty!");
+            SR_ERROR("PhysicsMaterial::Load : path is empty!");
             return nullptr;
         }
 

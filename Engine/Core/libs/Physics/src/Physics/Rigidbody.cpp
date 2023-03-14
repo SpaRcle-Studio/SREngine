@@ -7,6 +7,7 @@
 #include <Utils/ECS/Transform.h>
 #include <Utils/World/Scene.h>
 #include <Utils/DebugDraw.h>
+#include <Utils/Types/RawMesh.h>
 
 #include <Physics/LibraryImpl.h>
 #include <Physics/PhysicsScene.h>
@@ -24,10 +25,10 @@ namespace SR_PTYPES_NS {
     }
 
     Rigidbody::~Rigidbody() {
-        /// SR_SAFE_DELETE_PTR(m_shape);
-        /// moved to parent class
+        SR_SAFE_DELETE_PTR(m_shape);
 
         SetMaterial(nullptr);
+        SetRawMesh(nullptr);
     }
 
     std::string Rigidbody::GetEntityInfo() const {
@@ -257,6 +258,10 @@ namespace SR_PTYPES_NS {
             SRHalt("Failed to get physics scene!");
         }
 
+        if (m_shape){
+            m_shape->UpdateDebugShape();
+        }
+
         Super::OnEnable();
     }
 
@@ -337,6 +342,20 @@ namespace SR_PTYPES_NS {
 
         if ((m_material = pMaterial)) {
             m_material->AddUsePoint();
+        }
+    }
+
+    void Rigidbody::SetRawMesh(SR_HTYPES_NS::RawMesh* pRawMesh) {
+        if (pRawMesh == m_rawMesh) {
+            return;
+        }
+
+        if (m_rawMesh) {
+            m_rawMesh->RemoveUsePoint();
+        }
+
+        if ((m_rawMesh = pRawMesh)) {
+            m_rawMesh->AddUsePoint();
         }
     }
 }
