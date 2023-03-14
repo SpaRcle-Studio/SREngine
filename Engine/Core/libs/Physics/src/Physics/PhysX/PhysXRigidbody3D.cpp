@@ -11,8 +11,6 @@ namespace SR_PTYPES_NS {
     { }
 
     PhysXRigidbody3D::~PhysXRigidbody3D() {
-        SR_SAFE_DELETE_PTR(m_shape);
-
         if (m_rigidActor) {
             m_rigidActor->release();
             m_rigidActor = nullptr;

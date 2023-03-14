@@ -3,6 +3,8 @@
 //
 
 #include <Physics/PhysX/PhysXVehicle4W3D.h>
+#include <Physics/PhysX/PhysXMaterialImpl.h>
+#include <Physics/PhysicsMaterial.h>
 
 namespace SR_PTYPES_NS {
     PhysXVehicle4W3D::PhysXVehicle4W3D(Super::LibraryPtr pLibrary)
@@ -21,16 +23,7 @@ namespace SR_PTYPES_NS {
         }
     }
 
-
-    physx::PxVehicleWheelsSimData* PhysXVehicle4W3D::SetupWheelsSimulationData(
-            float_t wheelMass,
-            float_t wheelMOI,
-            float_t wheelRadius,
-            float_t wheelWidth,
-            const WheelCenterActorOffsets& wheelCenterActorOffsets,
-            const SR_MATH_NS::FVector3& chassisCMOffset,
-            float_t chassisMass
-    ) {
+    physx::PxVehicleWheelsSimData* PhysXVehicle4W3D::SetupWheelsSimulationData() {
         physx::PxVehicleWheelsSimData* wheelsSimData = physx::PxVehicleWheelsSimData::allocate(4);
 
         //Set up the wheels.
@@ -39,18 +32,18 @@ namespace SR_PTYPES_NS {
             //Set up the wheel data structures with mass, moi, radius, width.
             for (auto& wheel : wheels)
             {
-                wheel.mMass = wheelMass;
-                wheel.mMOI = wheelMOI;
-                wheel.mRadius = wheelRadius;
-                wheel.mWidth = wheelWidth;
+                wheel.mMass = GetWheelMass();
+                wheel.mMOI = GetWheelMOI();
+                wheel.mRadius = GetWheelRadius();
+                wheel.mWidth = GetWheelWidth();
             }
 
             //Enable the handbrake for the rear wheels only.
-            wheels[physx::PxVehicleDrive4WWheelOrder::eREAR_LEFT].mMaxHandBrakeTorque = 4000.0f;
-            wheels[physx::PxVehicleDrive4WWheelOrder::eREAR_RIGHT].mMaxHandBrakeTorque = 4000.0f;
+            wheels[physx::PxVehicleDrive4WWheelOrder::eREAR_LEFT].mMaxHandBrakeTorque = GetMaxHandBrakeTorque();
+            wheels[physx::PxVehicleDrive4WWheelOrder::eREAR_RIGHT].mMaxHandBrakeTorque = GetMaxHandBrakeTorque();
             //Enable steering for the front wheels only.
-            wheels[physx::PxVehicleDrive4WWheelOrder::eFRONT_LEFT].mMaxSteer = SR_PI * 0.3333f;
-            wheels[physx::PxVehicleDrive4WWheelOrder::eFRONT_RIGHT].mMaxSteer = SR_PI * 0.3333f;
+            wheels[physx::PxVehicleDrive4WWheelOrder::eFRONT_LEFT].mMaxSteer = SR_PI * GetMaxSteer();
+            wheels[physx::PxVehicleDrive4WWheelOrder::eFRONT_RIGHT].mMaxSteer = SR_PI * GetMaxSteer();
         }
 
         //Set up the tires.
@@ -59,15 +52,15 @@ namespace SR_PTYPES_NS {
             //Set up the tires.
             for (auto & tire : tires)
             {
-                tire.mType = 0; /// TODO: Заменить, когда будут материалы.
+                tire.mType = 0; /// TODO: Заменить.
             }
         }
 
         physx::PxVec3 pxWheelCenterActorOffsets[4];
-        physx::PxVec3 pxChassisCMOffset = SR_PHYSICS_UTILS_NS::FV3ToPxV3(chassisCMOffset);
+        physx::PxVec3 pxChassisCMOffset = SR_PHYSICS_UTILS_NS::FV3ToPxV3(GetChassisCMOffset());
 
         for (uint32_t i = 0; i < 4; i++) {
-            pxWheelCenterActorOffsets[i] = SR_PHYSICS_UTILS_NS::FV3ToPxV3(wheelCenterActorOffsets[i]);
+            pxWheelCenterActorOffsets[i] = SR_PHYSICS_UTILS_NS::FV3ToPxV3(GetWheelCAOffsets()[i]);
         }
 
         //Set up the suspensions
@@ -79,7 +72,7 @@ namespace SR_PTYPES_NS {
                     4,
                     &pxWheelCenterActorOffsets[0],
                     pxChassisCMOffset,
-                    chassisMass,
+                    GetChassisMass(),
                     1,
                     suspSprungMasses);
 
@@ -95,10 +88,10 @@ namespace SR_PTYPES_NS {
             }
 
             //Set the camber angles.
-            const float_t camberAngleAtRest=0.0;
-            const float_t camberAngleAtMaxDroop=0.01f;
-            const float_t camberAngleAtMaxCompression=-0.01f;
-            for (uint32_t i = 0; i < 4; i+=2)
+            const float_t camberAngleAtRest = 0.0f;
+            const float_t camberAngleAtMaxDroop = 0.01f;
+            const float_t camberAngleAtMaxCompression = -0.01f;
+            for (uint32_t i = 0; i < 4; i += 2)
             {
                 suspensions[i + 0].mCamberAtRest =  camberAngleAtRest;
                 suspensions[i + 1].mCamberAtRest =  -camberAngleAtRest;
@@ -140,7 +133,7 @@ namespace SR_PTYPES_NS {
         //Set up the filter data of the raycast that will be issued by each suspension.
         physx::PxFilterData qryFilterData;
         ///setupNonDrivableSurface(qryFilterData);
-        qryFilterData.word3 = 0;
+        qryFilterData.word3 = 0; //TODO: based.
 
         //Set the wheel, tire and suspension data.
         //Set the geometry data.
@@ -161,13 +154,7 @@ namespace SR_PTYPES_NS {
         return wheelsSimData;
     }
 
-    physx::PxVehicleDriveSimData4W* PhysXVehicle4W3D::SetupDriveSimData4W(
-            float_t peakTorque,
-            float_t maxOmega,
-            float_t switchTime,
-            float_t strength,
-            float_t accuracy
-    ) {
+    physx::PxVehicleDriveSimData4W* PhysXVehicle4W3D::SetupDriveSimData4W() {
         if (!m_wheelsSimData){
             SRHalt("m_wheelsSimData is nullptr!");
             return nullptr;
@@ -182,23 +169,23 @@ namespace SR_PTYPES_NS {
 
         //Engine
         physx::PxVehicleEngineData engine;
-        engine.mPeakTorque = 500.0f;
-        engine.mMaxOmega = 600.0f;//approx 6000 rpm
+        engine.mPeakTorque = GetPeakTorque();
+        engine.mMaxOmega = GetMaxOmega();
         driveSimData->setEngineData(engine);
 
         //Gears
         physx::PxVehicleGearsData gears;
-        gears.mSwitchTime = 0.5f;
+        gears.mSwitchTime = GetSwitchTime();
         driveSimData->setGearsData(gears);
 
         //Clutch
         physx::PxVehicleClutchData clutch;
-        clutch.mStrength = 10.0f;
+        clutch.mStrength = GetStrength();
         driveSimData->setClutchData(clutch);
 
         //Ackermann steer accuracy
         physx::PxVehicleAckermannGeometryData ackermann;
-        ackermann.mAccuracy = 1.0f;
+        ackermann.mAccuracy = GetAccuracy();
 
         ackermann.mAxleSeparation =
                 m_wheelsSimData->getWheelCentreOffset(physx::PxVehicleDrive4WWheelOrder::eFRONT_LEFT).z -

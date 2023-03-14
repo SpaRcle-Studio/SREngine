@@ -53,6 +53,7 @@
 #include <chrono>
 #include <random>
 #include <cstdint>
+#include <iomanip>
 
 #ifdef SR_SUPPORT_PARALLEL
     #include <omp.h>

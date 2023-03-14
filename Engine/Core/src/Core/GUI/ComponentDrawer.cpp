@@ -52,6 +52,35 @@ namespace SR_CORE_NS::GUI {
             pComponent->SetAngularLock(angularLock);
         }
 
+        const bool hasMesh =
+                pComponent->GetCollisionShape()->GetType() == SR_PHYSICS_NS::ShapeType::Convex3D ||
+                pComponent->GetCollisionShape()->GetType() == SR_PHYSICS_NS::ShapeType::TriangleMesh3D;
+
+        if (hasMesh) {
+            if (auto&& pDescriptor = context->GetIconDescriptor(EditorIcon::Shapes)) {
+                if (GUISystem::Instance().ImageButton(SR_FORMAT("##imgMeshBtn%i", index), pDescriptor, SR_MATH_NS::IVector2(50), 5)) {
+                    auto&& resourcesFolder = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
+                    auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesFolder, { { "Mesh", "obj,pmx,fbx,blend,stl,dae" } });
+
+                    if (path.Exists()) {
+                        if (auto&& pRawMesh = SR_HTYPES_NS::RawMesh::Load(path)){
+                            pComponent->SetRawMesh(pRawMesh);
+                            pComponent->SetShapeDirty(true);
+                        }
+                        else {
+                            SR_ERROR("ComponentDrawer::DrawComponent() : mesh is nullptr!");
+                        }
+                    }
+                }
+            }
+
+            int32_t meshId = pComponent->GetMeshId();
+            if (Graphics::GUI::InputInt("Id", meshId, 1, true, index) && meshId >= 0) {
+                pComponent->SetMeshId(meshId);
+                pComponent->SetShapeDirty(true);
+            }
+        }
+
         if ((void*)pComponent != (void*)pCopy) {
             pComponent = dynamic_cast<SR_PTYPES_NS::Rigidbody3D*>(pCopy);
         }

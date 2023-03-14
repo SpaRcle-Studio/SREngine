@@ -13,6 +13,10 @@
 #include <Utils/Types/SafePointer.h>
 #include <Utils/Math/Matrix4x4.h>
 
+namespace SR_HTYPES_NS {
+    class RawMesh;
+}
+
 namespace SR_PHYSICS_NS {
     class PhysicsScene;
     class LibraryImpl;
@@ -68,6 +72,8 @@ namespace SR_PTYPES_NS {
         SR_NODISCARD SR_MATH_NS::FVector3 GetTranslation() const noexcept { return m_translation; }
         SR_NODISCARD SR_MATH_NS::Quaternion GetRotation() const noexcept { return m_rotation; }
         SR_NODISCARD SR_MATH_NS::FVector3 GetScale() const noexcept { return m_scale; }
+        SR_NODISCARD SR_HTYPES_NS::RawMesh* GetRawMesh() const noexcept { return m_rawMesh; }
+        SR_NODISCARD int32_t GetMeshId() const noexcept { return m_meshId; }
 
         RBUpdShapeRes UpdateShape();
 
@@ -82,6 +88,8 @@ namespace SR_PTYPES_NS {
         void SetMass(float_t mass);
 
         void SetMaterial(PhysicsMaterial* pMaterial);
+        void SetRawMesh(SR_HTYPES_NS::RawMesh* pRawMesh);
+        void SetMeshId(int32_t id) { m_meshId = id; }
 
         virtual bool InitBody();
 
@@ -120,6 +128,9 @@ namespace SR_PTYPES_NS {
         SR_MATH_NS::FVector3 m_scale;
 
         SR_PTYPES_NS::PhysicsMaterial* m_material = nullptr;
+        SR_HTYPES_NS::RawMesh* m_rawMesh = nullptr;
+
+        int32_t m_meshId = 0;
 
         SR_MATH_NS::FVector3 m_center;
 

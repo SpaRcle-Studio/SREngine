@@ -2,6 +2,7 @@
 // Created by Nikita on 29.12.2020.
 // Looked by Drakeme on 26.06.2022.
 // Changed by Monika on 20.11.2022
+// Approved by innerviewer on 03.09.2023
 //
 
 #include <Utils/macros.h>
