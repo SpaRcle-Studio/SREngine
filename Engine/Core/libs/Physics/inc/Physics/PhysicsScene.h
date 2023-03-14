@@ -21,6 +21,7 @@ namespace SR_PHYSICS_NS {
 
     class PhysicsScene : public SR_HTYPES_NS::SafePtr<PhysicsScene> {
         friend class SR_HTYPES_NS::SafePtr<PhysicsScene>;
+    public:
         using Super = SR_HTYPES_NS::SafePtr<PhysicsScene>;
         using Ptr = Super;
         using RigidbodyPtr = SR_PTYPES_NS::Rigidbody*;

@@ -12,7 +12,7 @@ namespace SR_GTYPES_NS {
     SR_REGISTER_COMPONENT(Text);
 
     Text::Text()
-        : Super(MeshType::Static)
+        : Mesh(MeshType::Static)
     {
         SetMaterial(Material::Load("Engine/Materials/text.mat"));
         SetFont(Font::Load("Engine/Fonts/TsunagiGothic.ttf"));
@@ -221,9 +221,9 @@ namespace SR_GTYPES_NS {
     }
 
     void Text::OnDestroy() {
-        Component::OnDestroy();
+        RenderScene::Ptr renderScene = GetRenderScene();
 
-        auto&& renderScene = GetRenderScene();
+        Component::OnDestroy();
 
         /// после вызова данная сущность может быть уничтожена
         RemoveUsePoint();

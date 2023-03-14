@@ -98,7 +98,7 @@ public:
     }
 
     void Awake() override {
-        m_logic = DynamicCastSceneLogicToSceneCubeChunkLogic(scene->GetLogicBase());
+        m_logic = DynamicCastSceneLogicToSceneCubeChunkLogic(scene->GetLogicBase().Get());
         m_observer = m_logic->GetObserver();
         UpdateObserverPosition();
         ResetObserver();

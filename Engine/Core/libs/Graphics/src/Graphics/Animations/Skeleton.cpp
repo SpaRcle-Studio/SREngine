@@ -72,17 +72,7 @@ namespace SR_ANIMATIONS_NS {
     }
 
     void Skeleton::OnDestroy() {
-        /*if (auto&& pScene = TryGetScene()) {
-            auto&& renderScene = pScene->Do<RenderScenePtr>([](SR_WORLD_NS::Scene *ptr) {
-                return ptr->GetDataStorage().GetValue<RenderScenePtr>();
-            }, RenderScenePtr());
-            if (renderScene) {
-                renderScene->SetDirty();
-            }
-        }*/
-
         Super::OnDestroy();
-
         delete this;
     }
 

@@ -50,7 +50,7 @@ namespace SR_UTILS_NS {
         using GameObjectPtr = SR_HTYPES_NS::SharedPtr<GameObject>;
         using ComponentPtr = Component*;
     public:
-        ~Component() override = default;
+        ~Component() override;
 
     public:
         virtual void OnMatrixDirty() { }
@@ -61,7 +61,7 @@ namespace SR_UTILS_NS {
         /// Вызывается после добавления компонента к игровому объекту
         virtual void OnAttached() { m_isAttached = true; }
         /// Вызывается кода компонент убирается с объекта, либо объект уничтожается
-        virtual void OnDestroy() { }
+        virtual void OnDestroy() { SetParent(nullptr); }
 
         virtual void OnEnable() { m_isActive = true; }
         virtual void OnDisable() { m_isActive = false; }
@@ -120,7 +120,6 @@ namespace SR_UTILS_NS {
     protected:
         SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SavableFlags flags) const override;
 
-    private:
         void SetParent(IComponentable* pParent);
 
     protected:

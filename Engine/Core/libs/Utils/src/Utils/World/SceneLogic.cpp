@@ -10,21 +10,21 @@
 
 namespace SR_WORLD_NS {
     SceneLogic::SceneLogic(const SceneLogic::ScenePtr &scene)
-        : Super()
+        : SR_HTYPES_NS::SafePtr<SceneLogic>(this)
         , m_scene(scene)
     { }
 
-    SceneLogic* SceneLogic::CreateByExt(const SceneLogic::ScenePtr &scene, const std::string &ext) {
+    SceneLogic::Ptr SceneLogic::CreateByExt(const SceneLogic::ScenePtr &scene, const std::string &ext) {
         if (ext == "scene") {
-            return new SceneCubeChunkLogic(scene);
+            return (new SceneCubeChunkLogic(scene))->GetThis();
         }
 
         if (ext == SR_UTILS_NS::Prefab::EXTENSION) {
-            return new ScenePrefabLogic(scene);
+            return (new ScenePrefabLogic(scene))->GetThis();
         }
 
         SRHalt("SceneLogic::CreateByExt() : unknown extension! Create default...\n\tExtension: " + ext);
 
-        return new SceneDefaultLogic(scene);
+        return (new SceneDefaultLogic(scene))->GetThis();
     }
 }

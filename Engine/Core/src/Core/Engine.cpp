@@ -457,6 +457,8 @@ namespace SR_CORE_NS {
 
             m_cmdManager->Update();
 
+            m_scene->GetLogicBase()->PostLoad();
+
             SR_SCRIPTING_NS::EvoScriptManager::Instance().Update(dt, false);
 
             Prepare();
@@ -544,15 +546,13 @@ namespace SR_CORE_NS {
                     SR_NOOP;
                 }
                 else if (auto&& gameObject = dynamic_cast<SR_UTILS_NS::GameObject*>(m_mainCamera->GetParent())) {
-                    auto&& pLogic = m_scene->GetLogic<SR_WORLD_NS::SceneCubeChunkLogic>();
-
-                    if (pLogic && gameObject->TryRecursiveLockIfValid()) {
+                    auto&& pLogic = m_scene->GetLogicBase().DynamicCast<SR_WORLD_NS::SceneCubeChunkLogic*>();
+                    if (pLogic && gameObject) {
                         pLogic->SetObserver(gameObject->GetThis());
-                        gameObject->Unlock();
                     }
                 }
 
-                m_scene->Update(m_worldTimer.GetDeltaTime());
+                m_scene->GetLogicBase()->Update(m_worldTimer.GetDeltaTime());
                 m_scene.Unlock();
             }
         }

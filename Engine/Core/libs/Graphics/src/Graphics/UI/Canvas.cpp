@@ -32,7 +32,7 @@ namespace SR_GRAPH_NS::UI {
     }
 
     void Canvas::OnDestroy() {
-        Component::OnDestroy();
+        Super::OnDestroy();
         delete this;
     }
 

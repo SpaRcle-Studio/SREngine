@@ -18,9 +18,9 @@ namespace SR_GTYPES_NS {
     }
 
     void MeshComponent::OnDestroy() {
-        Component::OnDestroy();
+        RenderScene::Ptr renderScene = TryGetRenderScene();
 
-        auto&& renderScene = GetRenderScene();
+        Component::OnDestroy();
 
         /// после вызова данная сущность может быть уничтожена
         RemoveUsePoint();
@@ -31,14 +31,14 @@ namespace SR_GTYPES_NS {
     }
 
     void MeshComponent::OnEnable() {
-        if (auto&& renderScene = GetRenderScene()) {
+        if (auto&& renderScene = TryGetRenderScene()) {
             renderScene->SetDirty();
         }
         Component::OnEnable();
     }
 
     void MeshComponent::OnDisable() {
-        if (auto&& renderScene = GetRenderScene()) {
+        if (auto&& renderScene = TryGetRenderScene()) {
             renderScene->SetDirty();
         }
         Component::OnDisable();
@@ -48,7 +48,7 @@ namespace SR_GTYPES_NS {
         return true;
     }
 
-    Mesh::RenderScenePtr MeshComponent::GetRenderScene() {
+    Mesh::RenderScenePtr MeshComponent::TryGetRenderScene() {
         if (m_renderScene.Valid()) {
             return m_renderScene;
         }
@@ -63,6 +63,16 @@ namespace SR_GTYPES_NS {
         }, RenderScenePtr());
 
         return m_renderScene;
+    }
+
+    Mesh::RenderScenePtr MeshComponent::GetRenderScene() {
+        if (auto&& pRenderScene = TryGetRenderScene()) {
+            return pRenderScene;
+        }
+
+        SRHalt("Invalid render scene!");
+
+        return Mesh::RenderScenePtr();
     }
 
     SR_MATH_NS::FVector3 MeshComponent::GetBarycenter() const {

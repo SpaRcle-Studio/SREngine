@@ -104,7 +104,7 @@ namespace SR_CORE_NS::GUI {
             return;
         }
 
-        auto&& pLogic = m_scene->GetLogic<SR_WORLD_NS::SceneLogic>();
+        auto&& pLogic = m_scene->GetLogicBase();
 
         /// если сцена сломана, или это "пустышка", то не создаем камеру, т.к. рендерить нет смыла 
         if (!pLogic || pLogic->IsDefault()) {

@@ -3,6 +3,7 @@
 //
 
 #include <Core/GUI/WorldEdit.h>
+#include <Utils/World/Scene.h>
 #include <Utils/World/SceneCubeChunkLogic.h>
 
 namespace Framework::Core::GUI {
@@ -16,7 +17,7 @@ namespace Framework::Core::GUI {
 
     void WorldEdit::Draw() {
         if (m_scene.TryRecursiveLockIfValid()) {
-            auto&& pLogic = m_scene->GetLogic<SR_WORLD_NS::SceneCubeChunkLogic>();
+            auto&& pLogic = m_scene->GetLogicBase().DynamicCast<SR_WORLD_NS::SceneCubeChunkLogic*>();
 
             if (!pLogic) {
                 m_scene.Unlock();

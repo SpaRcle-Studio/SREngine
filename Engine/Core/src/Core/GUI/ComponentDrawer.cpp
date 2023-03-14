@@ -240,6 +240,9 @@ namespace SR_CORE_NS::GUI {
         if (!mesh3d->IsCalculated())
             ImGui::TextColored(ImVec4(1, 1, 0, 1), "Mesh isn't calculated!");
 
+        if (!mesh3d->GetRenderContext())
+            ImGui::TextColored(ImVec4(1, 1, 0, 1), "Mesh isn't registered!");
+
         auto&& pMaterial = mesh3d->GetMaterial();
 
         if (auto&& pDescriptor = context->GetIconDescriptor(EditorIcon::Shapes)) {
@@ -306,6 +309,9 @@ namespace SR_CORE_NS::GUI {
 
         if (!pComponent->IsCalculated())
             ImGui::TextColored(ImVec4(1, 1, 0, 1), "Mesh isn't calculated!");
+
+        if (!pComponent->GetRenderContext())
+            ImGui::TextColored(ImVec4(1, 1, 0, 1), "Mesh isn't registered!");
 
         if (!pComponent->IsSkeletonUsable())
             ImGui::TextColored(ImVec4(1, 1, 0, 1), "No bones from skeleton to draw!");
@@ -507,6 +513,9 @@ namespace SR_CORE_NS::GUI {
         if (!sprite->IsCalculated())
             ImGui::TextColored(ImVec4(1, 1, 0, 1), "Mesh isn't calculated!");
 
+        if (!sprite->GetRenderContext())
+            ImGui::TextColored(ImVec4(1, 1, 0, 1), "Mesh isn't registered!");
+
         ImGui::Separator();
 
         auto&& pMaterial = sprite->GetMaterial();
@@ -527,6 +536,9 @@ namespace SR_CORE_NS::GUI {
         if (!pComponent->IsCalculated())
             ImGui::TextColored(ImVec4(1, 1, 0, 1), "Mesh isn't calculated!");
 
+        if (!pComponent->GetRenderContext())
+            ImGui::TextColored(ImVec4(1, 1, 0, 1), "Mesh isn't registered!");
+
         Graphics::GUI::DrawValue("Vertices count", pComponent->GetVerticesCount(), index);
         Graphics::GUI::DrawValue("Indices count", pComponent->GetIndicesCount(), index);
     }
@@ -537,6 +549,9 @@ namespace SR_CORE_NS::GUI {
 
         if (!pComponent->IsCalculated())
             ImGui::TextColored(ImVec4(1, 1, 0, 1), "Mesh isn't calculated!");
+
+        if (!pComponent->GetRenderContext())
+            ImGui::TextColored(ImVec4(1, 1, 0, 1), "Mesh isn't registered!");
 
         auto&& text = SR_UTILS_NS::Locale::UtfToUtf<char, char32_t>(pComponent->GetText());
 
