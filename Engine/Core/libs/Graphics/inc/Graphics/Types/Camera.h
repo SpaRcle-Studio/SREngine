@@ -26,6 +26,7 @@ namespace SR_GTYPES_NS {
             RenderTechnique* pTechnique = nullptr;
         };
         using RenderScenePtr = SR_HTYPES_NS::SafePtr<RenderScene>;
+        using Super = SR_UTILS_NS::Component;
     public:
         explicit Camera(uint32_t width = 0, uint32_t height = 0);
         ~Camera() override;

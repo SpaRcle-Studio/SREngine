@@ -108,7 +108,7 @@ constexpr StaticMeshVertex CUBE_RIGHT_VERTICES[] = {
 class Chunk : public Behaviour { 
 public:
     void Awake() override {
-        m_logic = DynamicCastSceneLogicToSceneCubeChunkLogic(scene->GetLogicBase());
+        m_logic = DynamicCastSceneLogicToSceneCubeChunkLogic(scene->GetLogicBase().Get());
         m_observer = m_logic->GetObserver();
         auto&& [region, chunk] = m_logic->GetRegionAndChunk(transform->GetTranslation());
 

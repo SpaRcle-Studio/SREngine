@@ -56,6 +56,7 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD SR_UTILS_NS::Path InitializeResourcePath() const override;
 
     protected:
+        SR_NODISCARD RenderScenePtr TryGetRenderScene();
         SR_NODISCARD RenderScenePtr GetRenderScene();
 
     protected:

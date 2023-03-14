@@ -43,6 +43,7 @@ namespace SR_WORLD_NS {
     public:
         virtual void Update(float_t dt);
         virtual bool Load();
+        virtual bool PostLoad();
         virtual bool Unload(bool force = false);
         virtual void OnEnter();
         virtual void OnExit();

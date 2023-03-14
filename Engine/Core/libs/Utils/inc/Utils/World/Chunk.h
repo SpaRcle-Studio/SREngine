@@ -31,7 +31,7 @@ namespace SR_WORLD_NS {
         ~Chunk() override;
 
         enum class LoadState {
-            Loaded, Unload, Preload
+            PreLoaded, Loaded, Unload, Preload
         };
 
     public:
@@ -45,6 +45,7 @@ namespace SR_WORLD_NS {
     public:
         SR_NODISCARD LoadState GetState() const { return m_loadState; }
         SR_NODISCARD bool IsAlive() const { return m_lifetime > 0; }
+        SR_NODISCARD bool IsPreLoaded() const { return m_loadState == LoadState::PreLoaded; }
         SR_NODISCARD SR_MATH_NS::IVector3 GetPosition() const { return m_position; }
         SR_NODISCARD SR_MATH_NS::FVector3 GetWorldPosition(SR_MATH_NS::Axis center = SR_MATH_NS::AXIS_NONE) const;
         SR_NODISCARD ScenePtr GetScene() const;
@@ -59,7 +60,8 @@ namespace SR_WORLD_NS {
         virtual bool Access(float_t dt);
         virtual bool Belongs(const Math::FVector3& point);
         virtual bool Unload();
-        virtual bool Load(SR_HTYPES_NS::Marshal* pMarshal);
+        virtual bool PreLoad(SR_HTYPES_NS::Marshal* pMarshal);
+        virtual bool Load();
 
         virtual bool ApplyOffset();
 
@@ -81,6 +83,8 @@ namespace SR_WORLD_NS {
         SR_MATH_NS::IVector2 m_size;
         SR_MATH_NS::IVector3 m_regionPosition;
         SR_MATH_NS::IVector3 m_position;
+
+        std::list<SR_HTYPES_NS::SharedPtr<GameObject>> m_preloaded;
 
         //uint64_t m_debugLoadedId = SR_ID_INVALID;
         //uint64_t m_debugActiveId = SR_ID_INVALID;

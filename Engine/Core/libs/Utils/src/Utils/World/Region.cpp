@@ -71,13 +71,13 @@ namespace SR_WORLD_NS {
             if (auto pCacheIt = m_cached.find(position); pCacheIt != m_cached.end()) {
                 /// TODO: OPTIMIZE!!!!!!!!!!!!!!!!!!!
                 SR_HTYPES_NS::Marshal copy = pCacheIt->second->Copy();
-                pChunk->Load(&copy);
+                pChunk->PreLoad(&copy);
 
                 delete pCacheIt->second;
                 m_cached.erase(pCacheIt);
             }
             else {
-                pChunk->Load(nullptr);
+                pChunk->PreLoad(nullptr);
             }
         }
 
@@ -241,7 +241,7 @@ namespace SR_WORLD_NS {
 
         //SetDebugLoaded(BoolExt::True);
 
-        auto&& pLogic = m_observer->m_scene->GetLogic<SceneCubeChunkLogic>();
+        auto&& pLogic = m_observer->m_scene->GetLogicBase().DynamicCast<SceneCubeChunkLogic*>();
         const auto&& path = pLogic->GetRegionsPath().Concat(m_position.ToString()).ConcatExt("dat");
 
         if (path.Exists()) {
@@ -288,6 +288,16 @@ namespace SR_WORLD_NS {
         }
 
         return false;
+    }
+
+    bool Region::PostLoad() {
+        for (auto&& [pos, pChunk] : m_loadedChunks) {
+            if (pChunk->IsPreLoaded()) {
+                pChunk->Load();
+            }
+        }
+
+        return true;
     }
 
     /*void Region::SetDebugLoaded(BoolExt enabled) {

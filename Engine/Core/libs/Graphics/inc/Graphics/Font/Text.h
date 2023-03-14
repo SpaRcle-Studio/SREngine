@@ -16,7 +16,6 @@ namespace SR_GTYPES_NS {
         SR_ENTITY_SET_VERSION(1001);
         SR_INITIALIZE_COMPONENT(Text);
         friend class Mesh;
-        using Super = Mesh;
     public:
         typedef Vertices::SimpleVertex VertexType;
 

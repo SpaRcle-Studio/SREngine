@@ -20,6 +20,8 @@ namespace SR_WORLD_NS {
         void Destroy() override;
         void Update(float_t dt) override;
 
+        void PostLoad() override;
+
         bool Save(const Path& path) override;
         bool Load(const Path& path) override;
 
@@ -43,12 +45,17 @@ namespace SR_WORLD_NS {
 
         bool ReloadConfig();
 
+        void UpdateDebug();
+
         void CheckShift(const SR_MATH_NS::IVector3& chunk);
         void UpdateContainers();
         void UpdateScope(float_t dt);
         void SaveRegion(Region* pRegion, SR_HTYPES_NS::DataStorage* pContext) const;
 
     private:
+        std::list<int64_t> m_debugRegionIds;
+        std::list<int64_t> m_debugChunkIds;
+
         World::Tensor m_tensor;
 
         Regions m_regions;

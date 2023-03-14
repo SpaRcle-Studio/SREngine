@@ -10,6 +10,10 @@
 #include <Utils/World/Scene.h>
 
 namespace SR_UTILS_NS {
+    Component::~Component() {
+        SRAssert(!GetParent());
+    }
+
     SR_HTYPES_NS::Marshal::Ptr Component::Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SavableFlags flags) const {
         pMarshal = Entity::Save(pMarshal, flags);
 

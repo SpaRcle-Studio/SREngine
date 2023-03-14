@@ -80,7 +80,7 @@ namespace SR_GTYPES_NS {
             return;
         }
 
-        m_skeleton = FindSkeleton(GetGameObject());
+        m_skeleton = FindSkeleton();
 
         if (!IsSkeletonUsable()) {
             return;
@@ -218,7 +218,7 @@ namespace SR_GTYPES_NS {
     }
 
     void SkinnedMesh::Update(float dt) {
-        auto&& pNewSkeleton = FindSkeleton(GetGameObject());
+        auto&& pNewSkeleton = FindSkeleton();
         if (m_skeleton != pNewSkeleton) {
             m_renderScene->SetDirty();
             m_bonesIds.clear();
@@ -241,7 +241,7 @@ namespace SR_GTYPES_NS {
     }
 
     void SkinnedMesh::PopulateSkeletonMatrices() {
-        auto&& pNewSkeleton = FindSkeleton(GetGameObject());
+        auto&& pNewSkeleton = FindSkeleton();
         if (m_skeleton != pNewSkeleton) {
             m_renderScene->SetDirty();
             return;
@@ -290,11 +290,23 @@ namespace SR_GTYPES_NS {
         }
     }
 
-    SR_ANIMATIONS_NS::Skeleton* SkinnedMesh::FindSkeleton(SR_UTILS_NS::GameObject::Ptr gameObject) const {
+    SR_ANIMATIONS_NS::Skeleton *SkinnedMesh::FindSkeleton() const {
+        if (auto&& pSkeleton = FindSkeletonImpl(GetGameObject())) {
+            return pSkeleton;
+        }
+
+        if (auto&& pScene = GetScene()) {
+            return pScene->GetComponent<Animations::Skeleton>();
+        }
+
+        return nullptr;
+    }
+
+    SR_ANIMATIONS_NS::Skeleton* SkinnedMesh::FindSkeletonImpl(SR_UTILS_NS::GameObject::Ptr gameObject) const {
         /// TODO: переделать на какой-нибудь RefComponent
         auto&& pSkeleton = dynamic_cast<SR_ANIMATIONS_NS::Skeleton*>(gameObject->GetComponent<SR_ANIMATIONS_NS::Skeleton>());
         if (!pSkeleton && gameObject->GetParent()) {
-            return FindSkeleton(gameObject->GetParent());
+            return FindSkeletonImpl(gameObject->GetParent());
         }
         return pSkeleton;
     }

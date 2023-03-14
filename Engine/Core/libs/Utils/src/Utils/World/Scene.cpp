@@ -133,9 +133,10 @@ namespace SR_WORLD_NS {
 
         IComponentable::DestroyComponents();
 
-        m_logic->Destroy();
-
-        SR_SAFE_DELETE_PTR(m_logic);
+        m_logic.AutoFree([](auto&& pLogic) {
+            pLogic->Destroy();
+            delete pLogic;
+        });
 
         if (Debug::Instance().GetLevel() > Debug::Level::None) {
             SR_LOG("Scene::Destroy() : complete unloading!");
@@ -221,10 +222,6 @@ namespace SR_WORLD_NS {
         return true;
     }
 
-    void Scene::Update(float_t dt) {
-        m_logic->Update(dt);
-    }
-
     bool Scene::Remove(const GameObject::Ptr &gameObject) {
         const uint64_t idInScene = gameObject->GetIdInScene();
 
@@ -304,10 +301,12 @@ namespace SR_WORLD_NS {
     }
 
     bool Scene::IsPrefab() const {
-        return dynamic_cast<ScenePrefabLogic*>(m_logic);
+        return m_logic.DynamicCast<ScenePrefabLogic*>();
     }
 
     void Scene::RegisterGameObject(const Scene::GameObjectPtr &ptr) {
+        SRAssert(!ptr->GetScene());
+
         const uint64_t id = m_freeObjIndices.empty() ? m_gameObjects.size() : m_freeObjIndices.front();
 
         ptr->SetIdInScene(id);
@@ -324,5 +323,9 @@ namespace SR_WORLD_NS {
         m_isHierarchyChanged = true;
 
         SetDirty(true);
+
+        for (auto&& child : ptr->GetChildrenRef()) {
+            RegisterGameObject(child);
+        }
     }
 }

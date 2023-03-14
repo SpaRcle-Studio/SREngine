@@ -43,9 +43,11 @@ namespace SR_GTYPES_NS {
     }
 
     void Camera::OnDestroy() {
-        Component::OnDestroy();
+        RenderScene::Ptr renderScene = TryGetRenderScene();
 
-        if (auto&& renderScene = TryGetRenderScene(); renderScene.RecursiveLockIfValid()) {
+        Super::OnDestroy();
+
+        if (renderScene.RecursiveLockIfValid()) {
             renderScene->Remove(this);
             renderScene.Unlock();
         }

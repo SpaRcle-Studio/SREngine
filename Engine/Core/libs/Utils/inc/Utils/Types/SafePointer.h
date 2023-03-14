@@ -53,7 +53,7 @@ namespace SR_HTYPES_NS {
         void ReplaceAndLock(const SafePtr& ptr);
         void ReplaceAndCopyLock(const SafePtr& ptr);
 
-        template<typename U> U DynamicCast() {
+        template<typename U> U DynamicCast() const {
            return dynamic_cast<U>(m_ptr);
         }
 

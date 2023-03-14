@@ -118,16 +118,14 @@ namespace SR_PTYPES_NS {
             m_shape->RemoveDebugShape();
         }
 
-        auto&& physicsScene = GetPhysicsScene();
-        if (physicsScene) {
-            physicsScene->Remove(this);
-        }
-
-        m_parent = nullptr;
+        PhysicsScene::Ptr physicsScene = GetPhysicsScene();
 
         Super::OnDestroy();
 
-        if (!physicsScene) {
+        if (physicsScene) {
+            physicsScene->Remove(this);
+        }
+        else {
             delete this;
         }
     }

@@ -30,6 +30,7 @@ namespace SR_WORLD_NS {
     class SR_DLL_EXPORT Scene : public SR_HTYPES_NS::SafePtr<Scene>, public SR_UTILS_NS::IComponentable {
     public:
         using Ptr = SR_HTYPES_NS::SafePtr<Scene>;
+        using SceneLogicPtr = SR_HTYPES_NS::SafePtr<SceneLogic>;
         using Super = Ptr;
         using GameObjectPtr = SR_HTYPES_NS::SharedPtr<GameObject>;
         using GameObjects = std::vector<GameObjectPtr>;
@@ -47,13 +48,8 @@ namespace SR_WORLD_NS {
         bool Save();
         bool SaveAt(const Path& path);
         bool Destroy();
-        void Update(float_t dt);
 
     public:
-        template<typename T> SR_NODISCARD T* GetLogic() const {
-            return dynamic_cast<T*>(m_logic);
-        }
-
         void SetPath(const Path& path) { m_path = path; }
 
         SR_NODISCARD std::string GetName() const;
@@ -62,7 +58,7 @@ namespace SR_WORLD_NS {
         SR_NODISCARD SR_HTYPES_NS::DataStorage& GetDataStorage() { return m_dataStorage; }
         SR_NODISCARD const SR_HTYPES_NS::DataStorage& GetDataStorage() const { return m_dataStorage; }
         SR_NODISCARD SR_INLINE SceneBuilder* GetSceneBuilder() const { return m_sceneBuilder; }
-        SR_NODISCARD SR_INLINE SceneLogic* GetLogicBase() const { return m_logic; }
+        SR_NODISCARD SR_INLINE SceneLogicPtr GetLogicBase() const { return m_logic; }
 
         GameObjects& GetRootGameObjects();
 
@@ -86,7 +82,7 @@ namespace SR_WORLD_NS {
         bool Reload();
 
     private:
-        SceneLogic* m_logic = nullptr;
+        SceneLogicPtr m_logic;
         SceneBuilder* m_sceneBuilder = nullptr;
 
         bool m_isDestroy = false;

@@ -58,7 +58,10 @@ namespace SR_WORLD_NS {
 
         //SetDebugLoaded(BoolExt::False);
 
-        auto&& pLogic = m_observer->m_scene->GetLogic<SceneCubeChunkLogic>();
+        /*TODO: это потенциальное место для дедлоков, так как при уничтожении компоненты
+         * блокируют другие потоки. Придумать как исправить */
+
+        auto&& pLogic = m_observer->m_scene->GetLogicBase().DynamicCast<SceneCubeChunkLogic*>();
         auto&& gameObjects = pLogic->GetGameObjectsAtChunk(m_regionPosition, m_position);
 
         for (auto gameObject : gameObjects) {
@@ -66,6 +69,13 @@ namespace SR_WORLD_NS {
                 gm->Destroy();
             });
         }
+
+        for (auto gameObject : m_preloaded) {
+            gameObject.AutoFree([](auto gm) {
+                gm->Destroy();
+            });
+        }
+        m_preloaded.clear();
 
         return true;
     }
@@ -110,16 +120,16 @@ namespace SR_WORLD_NS {
         return true;
     }
 
-    bool Chunk::Load(SR_HTYPES_NS::Marshal* pMarshal) {
+    bool Chunk::PreLoad(SR_HTYPES_NS::Marshal* pMarshal) {
         if (pMarshal && pMarshal->Valid()) {
-            if (m_position != pMarshal->Read<Math::IVector3>()) {
+            if (m_position != pMarshal->Read<SR_MATH_NS::IVector3>()) {
                 SRAssert2(false, "Something went wrong...");
                 return false;
             }
 
             const uint64_t count = pMarshal->Read<uint64_t>();
             for (uint64_t i = 0; i < count; ++i) {
-                if (auto &&ptr = m_observer->m_scene->Instance(*pMarshal)) {
+                if (auto&& ptr = GameObject::Load(*pMarshal, nullptr)) {
                     auto&& pTransform = ptr->GetTransform();
 
                     if (pTransform->GetMeasurement() == SR_UTILS_NS::Measurement::Space2D) {
@@ -127,13 +137,31 @@ namespace SR_WORLD_NS {
                     }
 
                     pTransform->GlobalTranslate(GetWorldPosition());
+
+                    m_preloaded.emplace_back(ptr);
                 }
             }
         }
 
-        m_loadState = LoadState::Loaded;
+        m_loadState = LoadState::PreLoaded;
+
         Access(0.f);
+
         //SetDebugLoaded(BoolExt::True);
+
+        return true;
+    }
+
+    bool Chunk::Load() {
+        SRAssert(m_loadState == LoadState::PreLoaded);
+
+        for (auto&& gameObject : m_preloaded) {
+            m_observer->m_scene->RegisterGameObject(gameObject);
+        }
+
+        m_preloaded.clear();
+
+        m_loadState = LoadState::Loaded;
 
         return true;
     }
@@ -145,10 +173,10 @@ namespace SR_WORLD_NS {
     SR_HTYPES_NS::Marshal::Ptr Chunk::Save(SR_HTYPES_NS::DataStorage* pContext) const {
         /// scene is locked
 
-        auto&& pLogic = m_observer->m_scene->GetLogic<SceneCubeChunkLogic>();
+        auto&& pLogic = m_observer->m_scene->GetLogicBase().DynamicCast<SceneCubeChunkLogic*>();
         auto&& gameObjects = pLogic->GetGameObjectsAtChunk(m_regionPosition, m_position);
 
-        if (gameObjects.empty()) {
+        if (gameObjects.empty() && m_preloaded.empty()) {
             return nullptr;
         }
 
@@ -158,6 +186,21 @@ namespace SR_WORLD_NS {
         pContext->SetValue<SR_MATH_NS::FVector3>(-GetWorldPosition());
 
         for (auto&& gameObject : gameObjects) {
+            if (gameObject.RecursiveLockIfValid()) {
+                if (auto &&gameObjectMarshal = gameObject->Save(nullptr, SAVABLE_FLAG_ECS_NO_ID); gameObjectMarshal) {
+                    if (gameObjectMarshal->Valid()) {
+                        marshaled.emplace_back(gameObjectMarshal);
+                    }
+                    else {
+                        SR_SAFE_DELETE_PTR(gameObjectMarshal);
+                    }
+                }
+
+                gameObject.Unlock();
+            }
+        }
+
+        for (auto&& gameObject : m_preloaded) {
             if (gameObject.RecursiveLockIfValid()) {
                 if (auto &&gameObjectMarshal = gameObject->Save(nullptr, SAVABLE_FLAG_ECS_NO_ID); gameObjectMarshal) {
                     if (gameObjectMarshal->Valid()) {
