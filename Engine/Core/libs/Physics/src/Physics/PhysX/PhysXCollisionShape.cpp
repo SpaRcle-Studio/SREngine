@@ -46,8 +46,9 @@ namespace SR_PTYPES_NS {
                 SR_HTYPES_NS::RawMesh* rawMesh = GetRigidbody()->GetRawMesh();
 
                 if (!rawMesh) {
-                    SR_ERROR("PhysXCollisionShape::UpdateShape() : mesh is nullptr!");
-                    return false;
+                    SR_WARN("PhysXCollisionShape::UpdateShape() : mesh is not set!");
+                    m_shape = pPhysics->createShape(physx::PxBoxGeometry(SR_PHYSICS_UTILS_NS::FV3ToPxV3(GetSize())), *defaultMaterial, true);
+                    break;
                 }
 
                 physx::PxConvexMesh* convexMesh = CreateConvexMesh(rawMesh);
@@ -165,6 +166,8 @@ namespace SR_PTYPES_NS {
             convexMesh = pPhysics->createConvexMesh(id);
         }
 
+        cooking->release();
+
         return convexMesh;
     }
 
@@ -208,6 +211,8 @@ namespace SR_PTYPES_NS {
             physx::PxDefaultMemoryInputData id(writeBuffer.getData(), writeBuffer.getSize());
             triangleMesh = pPhysics->createTriangleMesh(id);
         }
+
+        cooking->release();
 
         return triangleMesh;
     }

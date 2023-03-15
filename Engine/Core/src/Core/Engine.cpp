@@ -295,11 +295,13 @@ namespace SR_CORE_NS {
 
                     const static auto iniPathEditor = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Editor/Configs/ImGuiEditor.config");
                     const static auto iniPathWidgets = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Editor/Configs/EditorWidgets.xml");
+
                     if (!iniPathEditor.Exists()) {
                         iniPathEditor.Make(SR_UTILS_NS::Path::Type::File);
-                        SR_UTILS_NS::Platform::Copy(SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Editor/Configs/ImGuiEditor.config"),iniPathEditor);
+                        SR_UTILS_NS::Platform::Copy(SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Editor/Configs/ImGuiEditor.config"), iniPathEditor);
                         SR_UTILS_NS::Platform::Copy(SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Editor/Configs/EditorWidgets.xml"), iniPathWidgets);
                     }
+
                     ImGui::GetIO().IniFilename = iniPathEditor.CStr();
 
                     m_window->GetImplementation<SR_GRAPH_NS::BasicWindowImpl>()->InitGUI();
