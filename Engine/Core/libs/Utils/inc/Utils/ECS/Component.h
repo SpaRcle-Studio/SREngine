@@ -109,6 +109,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD Component* BaseComponent() { return this; }
         SR_NODISCARD IComponentable* GetParent() const;
         SR_NODISCARD ScenePtr GetScene() const;
+        SR_NODISCARD bool HasScene() const { return TryGetScene(); }
         SR_NODISCARD GameObjectPtr GetGameObject() const;
         SR_NODISCARD ScenePtr TryGetScene() const;
         SR_NODISCARD GameObjectPtr GetRoot() const;

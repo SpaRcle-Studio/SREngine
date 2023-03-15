@@ -46,8 +46,6 @@ namespace SR_GTYPES_NS {
     }
 
     void RenderTexture::ClearSettings() {
-        SR_LOCK_GUARD
-
         Settings::ClearSettings();
 
         if (m_fbo) {
@@ -61,8 +59,6 @@ namespace SR_GTYPES_NS {
     }
 
     bool RenderTexture::LoadSettings(const SR_XML_NS::Node &node) {
-        SR_LOCK_GUARD
-
         //if (auto&& sizeNode = node.GetNode("Size")) {
         //    m_size = sizeNode.GetAttribute<SR_MATH_NS::UVector2>();
         //}

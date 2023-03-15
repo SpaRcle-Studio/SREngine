@@ -47,7 +47,6 @@ namespace SR_SCRIPTING_NS {
                 return;
             }
 
-            SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
             auto&& lockGuard = EvoScriptManager::ScopeLockSingleton();
 
             SwitchContext();

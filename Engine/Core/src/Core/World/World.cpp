@@ -33,7 +33,7 @@ namespace SR_CORE_NS {
                         pMesh->SetMaterial(SR_GTYPES_NS::Material::Load("Engine/Materials/skinned.mat"));
                     }
 
-                    ptr->LoadComponent(dynamic_cast<SR_UTILS_NS::Component *>(pMesh));
+                    ptr->AddComponent(dynamic_cast<SR_UTILS_NS::Component *>(pMesh));
                     continue;
                 }
 

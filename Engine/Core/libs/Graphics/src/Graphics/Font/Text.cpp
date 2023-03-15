@@ -82,8 +82,6 @@ namespace SR_GTYPES_NS {
     }
 
     bool Text::Calculate() {
-        SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
-
         if (m_isCalculated) {
             return true;
         }
@@ -101,8 +99,6 @@ namespace SR_GTYPES_NS {
     }
 
     void Text::FreeVideoMemory() {
-        SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
-
         if (m_id != SR_ID_INVALID) {
             SRVerifyFalse(!m_pipeline->FreeTexture(&m_id));
         }

@@ -29,7 +29,11 @@ namespace SR_GTYPES_NS {
     }
 
     bool IndexedMesh::Calculate() {
-        if (m_IBO = Memory::MeshManager::Instance().CopyIfExists<Vertices::VertexType::Unknown, Memory::MeshMemoryType::IBO>(GetResourceId()); m_IBO == SR_ID_INVALID) {
+        if (!IsUniqueMesh()) {
+            m_IBO = Memory::MeshManager::Instance().CopyIfExists<Vertices::VertexType::Unknown, Memory::MeshMemoryType::IBO>(GetResourceId());
+        }
+
+        if (m_IBO == SR_ID_INVALID) {
             auto&& indices = GetIndices();
 
             SRAssert(indices.size() == m_countIndices);
@@ -43,6 +47,9 @@ namespace SR_GTYPES_NS {
                 SR_ERROR("IndexedMesh::Calculate() : failed calculate IBO \"" + GetGeometryName() + "\" mesh!");
                 m_hasErrors = true;
                 return false;
+            }
+            else if (IsUniqueMesh()) {
+                return Mesh::Calculate();
             }
             else {
                 Memory::MeshManager::Instance().Register<Vertices::VertexType::Unknown, Memory::MeshMemoryType::IBO>(GetResourceId(), m_IBO);
@@ -59,15 +66,16 @@ namespace SR_GTYPES_NS {
 
         using namespace Memory;
 
-        auto &&manager = Memory::MeshManager::Instance();
+        auto&& manager = Memory::MeshManager::Instance();
 
-        if (manager.Free<Vertices::VertexType::Unknown, MeshMemoryType::IBO>(GetResourceId()) == MeshManager::FreeResult::Freed) {
-            if (!Environment::Get()->FreeIBO(&m_IBO)) {
-                SR_ERROR("IndexedMesh:FreeVideoMemory() : failed free IBO! Something went wrong...");
-                return false;
-            }
+        const bool isAllowFree = IsUniqueMesh() || manager.Free<Vertices::VertexType::Unknown, MeshMemoryType::IBO>(GetResourceId()) == MeshManager::FreeResult::Freed;
+
+        if (isAllowFree && !m_pipeline->FreeIBO(&m_IBO)) {
+            SR_ERROR("IndexedMesh:FreeVideoMemory() : failed free IBO! Something went wrong...");
+            return false;
         }
 
+        /// TODO: выглядит баго-опасно. Выяснить зачем так сделано. 
         m_IBO = SR_ID_INVALID;
         m_VBO = SR_ID_INVALID;
 

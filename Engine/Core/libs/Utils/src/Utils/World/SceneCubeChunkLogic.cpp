@@ -395,7 +395,7 @@ namespace SR_WORLD_NS {
             auto&& components = SR_UTILS_NS::ComponentManager::Instance().LoadComponents(*rootComponentsMarshal);
             delete rootComponentsMarshal;
             for (auto&& pComponent : components) {
-                m_scene->LoadComponent(pComponent);
+                m_scene->AddComponent(pComponent);
             }
         }
         else {

@@ -93,8 +93,6 @@ namespace SR_GTYPES_NS {
     }
 
     void SR_GTYPES_NS::Material::SetShader(Shader *shader) {
-        SR_LOCK_GUARD
-
         if (m_shader == shader) {
             return;
         }
@@ -117,8 +115,6 @@ namespace SR_GTYPES_NS {
         if (!SRVerifyFalse(!property)) {
             return;
         }
-
-        SR_SCOPED_LOCK
 
         if (auto&& oldTexture = std::get<Texture*>(property->data)) {
             if (oldTexture == pTexture) {

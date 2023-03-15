@@ -58,7 +58,7 @@ namespace SR_WORLD_NS {
 
         for (auto&& pComponent : pPrefab->GetData()->GetLoadedComponents()) {
             if (auto&& pCopy = pComponent->CopyComponent()) {
-                m_scene->LoadComponent(pCopy);
+                m_scene->AddComponent(pCopy);
             }
         }
 

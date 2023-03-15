@@ -16,8 +16,6 @@ namespace SR_GTYPES_NS {
     }
 
     bool SkinnedMesh::Calculate()  {
-        SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
-
         if (m_isCalculated)
             return true;
 
@@ -44,8 +42,6 @@ namespace SR_GTYPES_NS {
     }
 
     SR_UTILS_NS::IResource* SkinnedMesh::CopyResource(IResource* destination) const {
-        SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
-
         auto* pSkinnedMesh = dynamic_cast<SkinnedMesh *>(destination ? destination : new SkinnedMesh());
         pSkinnedMesh = dynamic_cast<SkinnedMesh *>(IndexedMesh::CopyResource(pSkinnedMesh));
 
@@ -56,8 +52,6 @@ namespace SR_GTYPES_NS {
     }
 
     void SkinnedMesh::FreeVideoMemory() {
-        SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
-
         if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::High) {
             SR_LOG("SkinnedMesh::FreeVideoMemory() : free \"" + m_geometryName + "\" mesh video memory...");
         }

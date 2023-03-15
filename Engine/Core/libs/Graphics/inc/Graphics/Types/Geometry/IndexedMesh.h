@@ -47,7 +47,11 @@ namespace SR_GRAPH_NS::Types {
     };
 
     template<Vertices::VertexType type, typename Vertex> bool IndexedMesh::CalculateVBO(const std::vector<Vertex>& vertices) {
-        if (m_VBO = Memory::MeshManager::Instance().CopyIfExists<type, Memory::MeshMemoryType::VBO>(GetResourceId()); m_VBO == SR_ID_INVALID) {
+        if (!IsUniqueMesh()) {
+            m_VBO = Memory::MeshManager::Instance().CopyIfExists<type, Memory::MeshMemoryType::VBO>(GetResourceId());
+        }
+
+        if (m_VBO == SR_ID_INVALID) {
             if (m_countVertices == 0 || !vertices.data()) {
                 SR_ERROR("VertexMesh::Calculate() : invalid vertices! \n\tResource id: " + std::string(GetResourceId()) + "\n\tGeometry name: " + GetGeometryName());
                 return false;
@@ -59,6 +63,9 @@ namespace SR_GRAPH_NS::Types {
                 SR_ERROR("VertexMesh::Calculate() : failed calculate VBO \"" + GetGeometryName() + "\" mesh!");
                 m_hasErrors = true;
                 return false;
+            }
+            else if (IsUniqueMesh()) {
+                return true;
             }
             else {
                 return Memory::MeshManager::Instance().Register<type, Memory::MeshMemoryType::VBO>(GetResourceId(), m_VBO);
@@ -75,11 +82,11 @@ namespace SR_GRAPH_NS::Types {
 
         using namespace Memory;
 
-        if (MeshManager::Instance().Free<type, MeshMemoryType::VBO>(GetResourceId()) == MeshManager::FreeResult::Freed) {
-            if (!m_pipeline->FreeVBO(&m_VBO)) {
-                SR_ERROR("VertexMesh:FreeVideoMemory() : failed free VBO! Something went wrong...");
-                return false;
-            }
+        const bool isAllowFree = IsUniqueMesh() || MeshManager::Instance().Free<type, MeshMemoryType::VBO>(GetResourceId()) == MeshManager::FreeResult::Freed;
+
+        if (isAllowFree && !m_pipeline->FreeVBO(&m_VBO)) {
+            SR_ERROR("VertexMesh:FreeVideoMemory() : failed free VBO! Something went wrong...");
+            return false;
         }
 
         return true;

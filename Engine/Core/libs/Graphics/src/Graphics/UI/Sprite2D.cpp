@@ -24,8 +24,6 @@ namespace SR_GRAPH_UI_NS {
     }
 
     SR_UTILS_NS::IResource* Sprite2D::CopyResource(SR_UTILS_NS::IResource *destination) const {
-        SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
-
         auto* sprite2D = dynamic_cast<Sprite2D *>(destination ? destination : new Sprite2D());
         sprite2D = dynamic_cast<Sprite2D *>(IndexedMesh::CopyResource(sprite2D));
 
@@ -51,8 +49,6 @@ namespace SR_GRAPH_UI_NS {
     }
 
     bool Sprite2D::Calculate() {
-        SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
-
         if (m_isCalculated)
             return true;
 
@@ -77,8 +73,6 @@ namespace SR_GRAPH_UI_NS {
     }
 
     void Sprite2D::FreeVideoMemory() {
-        SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
-
         if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::High) {
             SR_LOG("Sprite2D::FreeVideoMemory() : free \"" + m_geometryName + "\" mesh video memory...");
         }

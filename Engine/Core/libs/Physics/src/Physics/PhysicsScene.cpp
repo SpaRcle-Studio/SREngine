@@ -34,21 +34,30 @@ namespace SR_PHYSICS_NS {
                 SRHalt("Unknown measurement of rigidbody!");
             }
 
-            delete pRigidbody;
+            if (!pRigidbody->GetParent()) {
+                delete pRigidbody;
+            }
+            else {
+                SRHalt("Something went wrong...");
+            }
         };
 
+        std::set<RigidbodyPtr> rigidbodies;
+
         for (auto&& pRigidbody : m_rigidbodyToRegister) {
-            removeRigidbody(pRigidbody);
-            pRigidbody = nullptr;
+            rigidbodies.insert(pRigidbody);
         }
 
         for (auto&& pRigidbody : m_rigidbodyToRemove) {
-            removeRigidbody(pRigidbody);
-            pRigidbody = nullptr;
+            rigidbodies.insert(pRigidbody);
         }
 
         m_rigidbodyToRemove.clear();
         m_rigidbodyToRegister.clear();
+
+        for (auto&& pRigidbody : rigidbodies) {
+            removeRigidbody(pRigidbody);
+        }
 
         SR_SAFE_DELETE_PTR(m_2DWorld);
         SR_SAFE_DELETE_PTR(m_3DWorld);
@@ -138,7 +147,9 @@ namespace SR_PHYSICS_NS {
                 SRHalt("Unknown measurement of rigidbody!");
             }
 
-            delete pRigidbody;
+            if (!pRigidbody->GetParent()) {
+                delete pRigidbody;
+            }
         }
 
         m_rigidbodyToRemove.clear();

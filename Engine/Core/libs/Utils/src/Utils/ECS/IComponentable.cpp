@@ -9,6 +9,11 @@
 #include <Utils/World/SceneBuilder.h>
 
 namespace SR_UTILS_NS {
+    IComponentable::~IComponentable() {
+        SRAssert(m_components.empty());
+        SRAssert(m_loadedComponents.empty());
+    }
+
     bool IComponentable::IsDirty() const noexcept {
         return m_dirty > 0;
     }
@@ -35,22 +40,15 @@ namespace SR_UTILS_NS {
         return pMarshal;
     }
 
-    Component* IComponentable::GetComponent(const std::string &name) {
-        for (auto&& pComponent : m_components) {
-            /// TODO: переделать на хеши
-            if (pComponent->GetComponentName() == name) {
-                return pComponent;
-            }
-        }
-
-        return nullptr;
+    Component* IComponentable::GetComponent(const std::string& name) {
+        return GetComponent(SR_HASH_STR(name));
     }
 
-    bool IComponentable::ContainsComponent(const std::string &name) {
+    bool IComponentable::ContainsComponent(const std::string& name) {
         return GetComponent(name);
     }
 
-    Component* IComponentable::GetOrCreateComponent(const std::string &name) {
+    Component* IComponentable::GetOrCreateComponent(const std::string& name) {
         if (auto&& pComponent = GetComponent(name)) {
             return pComponent;
         }
@@ -87,7 +85,7 @@ namespace SR_UTILS_NS {
         }
     }
 
-    bool IComponentable::LoadComponent(Component *pComponent) {
+    bool IComponentable::AddComponent(Component* pComponent) {
         if (!pComponent) {
             SRHalt("pComponent is nullptr!");
             return false;
@@ -98,21 +96,7 @@ namespace SR_UTILS_NS {
         pComponent->OnLoaded();
 
         /// pComponent->OnAttached();
-        /// Здесь нельзя аттачить, иначе будет очень трудно отлавливаемый deadlock
-
-        SetDirty(true);
-
-        return true;
-    }
-
-    bool IComponentable::AddComponent(Component* pComponent) {
-        m_components.emplace_back(pComponent);
-
-        pComponent->SetParent(this);
-
-        pComponent->OnLoaded();
-        pComponent->OnAttached();
-        pComponent->OnMatrixDirty();
+        /// Здесь нельзя аттачить, иначе будет очень трудно отлавливаемый deadlock и много других проблем
 
         SetDirty(true);
 
@@ -120,50 +104,32 @@ namespace SR_UTILS_NS {
     }
 
     bool IComponentable::RemoveComponent(Component *pComponent) {
-        for (auto it = m_components.begin(); it != m_components.end(); ++it) {
-            if (*it != pComponent) {
-                continue;
+        auto&& pIt = std::find(m_components.begin(), m_components.end(), pComponent);
+
+        if (pIt == m_components.end()) {
+            auto&& pLoadedIt = std::find_if(m_loadedComponents.begin(), m_loadedComponents.end(), [&](auto&& pElement) {
+                return pComponent == pElement;
+            });
+
+            if (pLoadedIt == m_loadedComponents.end()) {
+                SR_ERROR("IComponentable::RemoveComponent() : component \"" + pComponent->GetComponentName() + "\" not found!");
+                return false;
             }
-
-            if (pComponent->GetParent() != this) {
-                SRHalt("Game object not are children!");
-            }
-
-            DestroyComponent(pComponent);
-
-            m_components.erase(it);
-
-            SetDirty(true);
-
-            return true;
-        }
-
-        SR_ERROR("IComponentable::RemoveComponent() : component \"" + pComponent->GetComponentName() + "\" not found!");
-
-        return false;
-    }
-
-    bool IComponentable::ReplaceComponent(Component *source, Component *destination) {
-        for (auto it = m_components.begin(); it != m_components.end(); ++it) {
-            if (*it == source) {
-                DestroyComponent(source);
-                *it = destination;
-
-                destination->SetParent(this);
-
-                destination->OnLoaded();
-                destination->OnAttached();
-                destination->OnMatrixDirty();
-
-                SetDirty(true);
-
-                return true;
+            else {
+                m_loadedComponents.erase(pLoadedIt);
             }
         }
+        else {
+            m_components.erase(pIt);
+        }
 
-        SR_ERROR("IComponentable::ReplaceComponent() : component \"" + source->GetComponentName() + "\" not found!");
+        if (pComponent->GetParent() != this) {
+            SRHalt("Game object not are children!");
+        }
 
-        return false;
+        DestroyComponent(pComponent);
+
+        return true;
     }
 
     bool IComponentable::PostLoad() {
@@ -172,6 +138,8 @@ namespace SR_UTILS_NS {
         }
 
         if (!m_loadedComponents.empty()) {
+            SRAssert2(GetScene(), "Missing scene!");
+
             m_components.reserve(m_loadedComponents.size());
 
             for (auto&& pLoadedCmp : m_loadedComponents) {
@@ -260,10 +228,17 @@ namespace SR_UTILS_NS {
     }
 
     void IComponentable::DestroyComponent(Component* pComponent) {
-        if (auto&& pScene = pComponent->TryGetScene()) {
-            pScene->GetSceneBuilder()->OnDestroyComponent();
+        if (auto&& pScene = GetScene()) {
+            pScene->Remove(pComponent);
         }
+        else {
+            pComponent->OnDestroy();
+        }
+        SetDirty(true);
+    }
 
-        pComponent->OnDestroy();
+    IComponentable::ScenePtr IComponentable::GetScene() const {
+        SRHalt("Not implemented!");
+        return nullptr;
     }
 }

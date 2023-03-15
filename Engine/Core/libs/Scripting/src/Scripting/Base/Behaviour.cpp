@@ -86,10 +86,7 @@ namespace SR_SCRIPTING_NS {
     }
 
     void Behaviour::OnDestroy() {
-        SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
-
         Component::OnDestroy();
-
         RemoveUsePoint();
     }
 

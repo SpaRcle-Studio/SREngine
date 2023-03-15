@@ -49,8 +49,6 @@ namespace SR_GTYPES_NS {
     }
 
     void ProceduralMesh::FreeVideoMemory() {
-        SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
-
         if (!FreeVBO<Vertices::VertexType::StaticMeshVertex>()) {
             SR_ERROR("ProceduralMesh::FreeVideoMemory() : failed to free VBO!");
         }
@@ -69,8 +67,6 @@ namespace SR_GTYPES_NS {
     }
 
     bool ProceduralMesh::Calculate()  {
-        SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
-
         if (m_isCalculated) {
             return true;
         }
@@ -158,7 +154,7 @@ namespace SR_GTYPES_NS {
         m_isCalculated = false;
         m_dirtyMaterial = true;
 
-        if (auto&& renderScene = GetRenderScene()) {
+        if (auto&& renderScene = TryGetRenderScene()) {
             renderScene->SetDirty();
         }
     }

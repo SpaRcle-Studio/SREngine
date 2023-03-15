@@ -20,9 +20,7 @@ namespace SR_UTILS_NS {
         : Super(this)
     {
         SetName(std::move(name));
-
         SetTransform(pTransform);
-
         UpdateEntityPath();
     }
 
@@ -31,42 +29,45 @@ namespace SR_UTILS_NS {
     { }
 
     GameObject::~GameObject() {
+        SRAssert(m_children.empty());
         delete m_transform;
     }
 
-    void GameObject::Destroy(GODestroyByBits by /** = DestroyByFlags::DestroyBy_Other */) {
-        if (m_isDestroy) {
-            SR_ERROR("GameObject::Destroy() : \"" + m_name + "\" game object already destroyed!");
+    void GameObject::Destroy() {
+        if (m_isDestroyed) {
+            SRHalt("GameObject::Destroy() : \"" + m_name + "\" game object already destroyed!");
             return;
         }
 
-        /// сцены может и не быть, к примеру, если это префаб
-        if (m_scene && m_scene->RecursiveLockIfValid()) {
-            const bool byParent = by & GAMEOBJECT_DESTROY_BY_GAMEOBJECT;
+        m_isDestroyed = true;
 
-            if (!byParent && m_parent.RecursiveLockIfValid()) {
-                GameObject::Ptr copy = m_parent;
-                copy->RemoveChild(*this);
-                copy.Unlock();
-            }
+        /// сцену не блокируем, предполагается, что и так в контексте заблокированной сцены работаем
 
+        if (m_scene) {
             m_scene->Remove(*this);
-
-            m_scene->Unlock();
+            for (auto&& child : GetChildrenRef()) {
+                child->Destroy();
+            }
+            RemoveAllChildren();
         }
-
-        IComponentable::DestroyComponents();
-
-        for (auto&& gameObject : m_children) {
-            gameObject.AutoFree([by](GameObject *gm) {
-                gm->Destroy(by | GAMEOBJECT_DESTROY_BY_GAMEOBJECT);
-            });
+        else {
+            for (auto&& child : GetChildrenRef()) {
+                child->Destroy();
+            }
+            m_children.clear();
+            DestroyComponents();
+            DestroyImpl();
         }
-        m_children.clear();
+    }
 
-        m_isDestroy = true;
+    void GameObject::DestroyImpl() {
+        GameObject::Ptr copy = GetThis();
 
-        delete this;
+        /// это должно быть единственное место,
+        /// где мы уничтожаем объект
+        copy.AutoFree([](GameObject* pGameObject) {
+            delete pGameObject;
+        });
     }
 
     void GameObject::OnMatrixDirty() {
@@ -125,6 +126,7 @@ namespace SR_UTILS_NS {
     }
 
     void GameObject::SetScene(ScenePtr pScene) {
+        SRAssert(!m_scene);
         m_scene = pScene;
     }
 
@@ -138,7 +140,7 @@ namespace SR_UTILS_NS {
         return false;
     }
 
-    bool GameObject::SetParent(const GameObject::Ptr &parent) {
+    bool GameObject::SetParent(const GameObject::Ptr& parent) {
         if (parent == m_parent) {
             SRHalt("GameObject::SetParent() : parent is already set!");
             return false;
@@ -175,6 +177,13 @@ namespace SR_UTILS_NS {
         }
 
         SRHalt(Format("GameObject %s is not child for %s!", ptr->GetName().c_str(), GetName().c_str()));
+    }
+
+    void GameObject::RemoveAllChildren() {
+        for (auto&& child : m_children) {
+            child->SetParent(GameObject::Ptr());
+        }
+        m_children.clear();
     }
 
     void GameObject::ForEachChild(const std::function<void(GameObject::Ptr &)> &fun) {
@@ -535,7 +544,7 @@ namespace SR_UTILS_NS {
 
             auto&& components = ComponentManager::Instance().LoadComponents(marshal);
             for (auto&& pComponent : components) {
-                gameObject->LoadComponent(pComponent);
+                gameObject->AddComponent(pComponent);
             }
         }
 
@@ -565,11 +574,11 @@ namespace SR_UTILS_NS {
         }
 
         for (auto&& pComponent : m_components) {
-            gameObject->LoadComponent(pComponent->CopyComponent());
+            gameObject->AddComponent(pComponent->CopyComponent());
         }
 
         for (auto&& pComponent : m_loadedComponents) {
-            gameObject->LoadComponent(pComponent->CopyComponent());
+            gameObject->AddComponent(pComponent->CopyComponent());
         }
 
         for (auto&& children : GetChildrenRef()) {

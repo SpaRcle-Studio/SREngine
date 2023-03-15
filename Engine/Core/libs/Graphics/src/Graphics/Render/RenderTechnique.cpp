@@ -21,8 +21,6 @@ namespace SR_GRAPH_NS {
     }
 
     RenderTechnique *RenderTechnique::Load(const SR_UTILS_NS::Path &rawPath) {
-        SR_GLOBAL_LOCK
-
         /// Данный ресурс может иметь копии
 
         auto&& path = SR_UTILS_NS::Path(rawPath).RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetResPath());
@@ -112,8 +110,6 @@ namespace SR_GRAPH_NS {
     }
 
     bool RenderTechnique::Load() {
-        SR_LOCK_GUARD
-
         SetDirty();
 
         m_loadState = LoadState::Loading;
@@ -122,8 +118,6 @@ namespace SR_GRAPH_NS {
     }
 
     bool RenderTechnique::Unload() {
-        SR_LOCK_GUARD
-
         m_loadState = LoadState::Unloading;
 
         return IResource::Unload();

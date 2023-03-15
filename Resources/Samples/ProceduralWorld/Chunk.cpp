@@ -111,7 +111,10 @@ public:
         m_logic = DynamicCastSceneLogicToSceneCubeChunkLogic(scene->GetLogicBase().Get());
         m_observer = m_logic->GetObserver();
         auto&& [region, chunk] = m_logic->GetRegionAndChunk(transform->GetTranslation());
-
+		
+		auto&& regionSize = m_observer->GetRegionSize();
+        m_chunk = SR_ABS_CHUNK_POSITION(region, chunk, regionSize);
+ 
         auto&& pComponent = gameObject->GetOrCreateComponent("ProceduralMesh");
         m_proceduralMesh = DynamicCastComponentToProceduralMesh(pComponent);
     }
@@ -132,6 +135,8 @@ public:
     }
 
     void GenerateVoxel() {
+        //Debug::Log(std::to_string(m_chunk.x) + ", " + std::to_string(m_chunk.y) + ", " + std::to_string(m_chunk.z));
+
         m_voxel.resize(sizeX * sizeY * sizeZ);
 
         for (int32_t x = 0; x < sizeX; ++x) {
@@ -202,8 +207,10 @@ public:
             }
         }
 
-        m_proceduralMesh->SetIndexedVertices(vertices.data(), vertices.size());
-        m_proceduralMesh->SetIndices(indices.data(), indices.size());
+		if (m_proceduralMesh) {
+			m_proceduralMesh->SetIndexedVertices(vertices.data(), vertices.size());
+			m_proceduralMesh->SetIndices(indices.data(), indices.size());
+		}
     }
 
     void Start() {
@@ -229,7 +236,6 @@ private:
     Observer* m_observer = nullptr;
     SceneCubeChunkLogic* m_logic = nullptr;
 
-    IVector3 m_region;
     IVector3 m_chunk;
 
 };

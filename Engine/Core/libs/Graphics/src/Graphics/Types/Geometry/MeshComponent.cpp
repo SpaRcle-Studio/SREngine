@@ -7,6 +7,7 @@
 namespace SR_GTYPES_NS {
     void MeshComponent::OnLoaded() {
         AddUsePoint();
+        Component::OnLoaded();
     }
 
     void MeshComponent::OnAttached() {
@@ -93,8 +94,6 @@ namespace SR_GTYPES_NS {
     }
 
     SR_UTILS_NS::IResource *MeshComponent::CopyResource(SR_UTILS_NS::IResource *destination) const {
-        SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
-
         auto* pCopy = dynamic_cast<MeshComponent*>(destination ? destination : nullptr);
         pCopy = dynamic_cast<MeshComponent*>(IndexedMesh::CopyResource(pCopy));
 

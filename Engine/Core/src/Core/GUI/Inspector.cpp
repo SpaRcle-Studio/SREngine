@@ -195,7 +195,8 @@ namespace Framework::Core::GUI {
             if (copyPtrComponent != component && copyPtrComponent) {
                 SR_LOG("Inspector::DrawComponents() : component \"" + component->GetComponentName() + "\" has been replaced.");
 
-                pIComponentable->ReplaceComponent(component, copyPtrComponent);
+                pIComponentable->RemoveComponent(component);
+                pIComponentable->AddComponent(copyPtrComponent);
 
                 return false;
             }

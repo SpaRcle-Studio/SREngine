@@ -67,8 +67,6 @@ namespace SR_HTYPES_NS {
     }
 
     bool RawMesh::Unload() {
-        SR_SCOPED_LOCK
-
         bool hasErrors = !IResource::Unload();
 
         if (m_importer) {
@@ -89,8 +87,6 @@ namespace SR_HTYPES_NS {
     }
 
     bool RawMesh::Load() {
-        SR_SCOPED_LOCK
-
         bool hasErrors = !IResource::Load();
 
         Path&& path = Path(GetResourceId());
@@ -148,8 +144,6 @@ namespace SR_HTYPES_NS {
     }
 
     uint32_t RawMesh::GetMeshesCount() const {
-        SR_LOCK_GUARD
-
         if (!m_scene) {
             SRHalt("RawMesh::GetMeshesCount() : assimp scene is invalid!");
             return 0;
@@ -159,8 +153,6 @@ namespace SR_HTYPES_NS {
     }
 
     std::string RawMesh::GetGeometryName(uint32_t id) const {
-        SR_LOCK_GUARD
-
         if (!m_scene || id >= m_scene->mNumMeshes) {
             SRAssert2(false, "Out of range or invalid scene!");
             return {};

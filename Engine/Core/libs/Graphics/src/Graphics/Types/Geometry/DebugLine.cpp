@@ -60,8 +60,6 @@ namespace SR_GTYPES_NS {
     }
 
     Helper::IResource *DebugLine::CopyResource(Helper::IResource *destination) const {
-        SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
-
         auto* pCopy = dynamic_cast<DebugLine *>(destination ? destination : new DebugLine());
         pCopy = dynamic_cast<DebugLine *>(Mesh::CopyResource(pCopy));
 

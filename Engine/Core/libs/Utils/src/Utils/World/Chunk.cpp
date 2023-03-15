@@ -28,6 +28,7 @@ namespace SR_WORLD_NS {
     }
 
     Chunk::~Chunk() {
+        SRAssert(m_preloaded.empty());
         //SetDebugActive(BoolExt::False);
         //SetDebugLoaded(BoolExt::False);
     }
@@ -65,15 +66,11 @@ namespace SR_WORLD_NS {
         auto&& gameObjects = pLogic->GetGameObjectsAtChunk(m_regionPosition, m_position);
 
         for (auto gameObject : gameObjects) {
-            gameObject.AutoFree([](auto gm) {
-                gm->Destroy();
-            });
+            gameObject->Destroy();
         }
 
         for (auto gameObject : m_preloaded) {
-            gameObject.AutoFree([](auto gm) {
-                gm->Destroy();
-            });
+            gameObject->Destroy();
         }
         m_preloaded.clear();
 

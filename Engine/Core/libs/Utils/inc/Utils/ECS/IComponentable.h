@@ -8,6 +8,10 @@
 #include <Utils/Types/Marshal.h>
 #include <Utils/ECS/ISavable.h>
 
+namespace SR_WORLD_NS {
+    class Scene;
+}
+
 namespace SR_UTILS_NS {
     class Component;
 
@@ -15,10 +19,11 @@ namespace SR_UTILS_NS {
     public:
         using Components = std::vector<Component*>;
         using ComponentList = std::list<Component*>;
+        using ScenePtr = SR_WORLD_NS::Scene*;
 
     protected:
-        virtual ~IComponentable() = default;
         IComponentable() = default;
+        virtual ~IComponentable();
 
     public:
         SR_NODISCARD SR_INLINE const Components& GetComponents() const noexcept { return m_components; }
@@ -43,18 +48,11 @@ namespace SR_UTILS_NS {
 
         virtual Component* GetOrCreateComponent(const std::string& name);
         virtual Component* GetComponent(const std::string& name);
-        virtual Component* GetComponent(size_t id);
+        virtual Component* GetComponent(size_t hashName);
 
-        /** Отличие от AddComponent в том, что используется только при загрузке объекта,
-        * не вызывая при этом OnAttached -> Awake -> OnEnable -> Start, а делая это отложенно */
-        virtual bool LoadComponent(Component* component);
-
-        /** Добавляет новый компонент на объект, вызывает у компонента
-         * последовательность Awake -> OnEnable -> Start */
         virtual bool AddComponent(Component* component);
 
         virtual bool RemoveComponent(Component* component);
-        virtual bool ReplaceComponent(Component* source, Component* destination);
         virtual bool ContainsComponent(const std::string& name);
         virtual void ForEachComponent(const std::function<bool(Component*)>& fun);
 
@@ -63,6 +61,8 @@ namespace SR_UTILS_NS {
         template<typename T> T* GetComponent() {
             return dynamic_cast<T*>(GetComponent(T::COMPONENT_HASH_NAME));
         }
+
+        SR_NODISCARD virtual ScenePtr GetScene() const;
 
     protected:
         void DestroyComponent(Component* pComponent);

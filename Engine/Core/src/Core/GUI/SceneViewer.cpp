@@ -35,12 +35,12 @@ namespace SR_CORE_NS::GUI {
     }
 
     void SceneViewer::SetCamera(const GameObjectPtr& camera) {
-        m_camera.AutoFree([this](SR_UTILS_NS::GameObject* camera) {
-            m_translation = camera->GetTransform()->GetTranslation();
-            m_rotation = camera->GetTransform()->GetRotation();
+        if (m_camera) {
+            m_translation = m_camera->GetTransform()->GetTranslation();
+            m_rotation = m_camera->GetTransform()->GetRotation();
             BackupCameraSettings();
-            camera->Destroy();
-        });
+            m_camera->Destroy();
+        }
 
         m_camera.Replace(camera);
     }

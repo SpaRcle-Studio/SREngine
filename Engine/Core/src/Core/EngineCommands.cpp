@@ -212,18 +212,16 @@ bool Framework::Core::Commands::GameObjectDelete::Redo() {
     if (m_scene.RecursiveLockIfValid()) {
         SR_HTYPES_NS::SafePtrLockGuard m_lock(m_scene->GetDataStorage().GetValue<SR_GRAPH_NS::RenderScene::Ptr>());
 
-        const bool result = ptr.AutoFree([this](SR_UTILS_NS::GameObject *ptr) {
-            /// резервируем все дерево сущностей, чтобы после отмены команды его можно было восстановить
+        /// резервируем все дерево сущностей, чтобы после отмены команды его можно было восстановить
 
-            m_reserved.Reserve();
-            SR_SAFE_DELETE_PTR(m_backup);
-            m_backup = ptr->Save(nullptr, SR_UTILS_NS::SAVABLE_FLAG_NONE);
-            m_backup->SetPosition(0);
-            ptr->Destroy();
-        });
+        m_reserved.Reserve();
+        SR_SAFE_DELETE_PTR(m_backup);
+        m_backup = ptr->Save(nullptr, SR_UTILS_NS::SAVABLE_FLAG_NONE);
+        m_backup->SetPosition(0);
+        ptr->Destroy();
 
         m_scene.Unlock();
-        return result;
+        return true;
     }
     else
         return false;
@@ -303,16 +301,14 @@ bool Framework::Core::Commands::GameObjectPaste::Undo() {
     if (m_scene.RecursiveLockIfValid()) {
         SR_HTYPES_NS::SafePtrLockGuard m_lock(m_scene->GetDataStorage().GetValue<SR_GRAPH_NS::RenderScene::Ptr>());
 
-        const bool result = ptr.AutoFree([this](SR_UTILS_NS::GameObject *ptr) {
-            /// резервируем все дерево сущностей, чтобы после отмены команды его можно было восстановить
-            m_reserved.Reserve();
-            SR_SAFE_DELETE_PTR(m_backup);
-            m_backup = ptr->Save(nullptr, SR_UTILS_NS::SAVABLE_FLAG_NONE);
-            ptr->Destroy();
-        });
+        /// резервируем все дерево сущностей, чтобы после отмены команды его можно было восстановить
+        m_reserved.Reserve();
+        SR_SAFE_DELETE_PTR(m_backup);
+        m_backup = ptr->Save(nullptr, SR_UTILS_NS::SAVABLE_FLAG_NONE);
+        ptr->Destroy();
 
         m_scene.Unlock();
-        return result;
+        return true;
     }
     else
         return false;

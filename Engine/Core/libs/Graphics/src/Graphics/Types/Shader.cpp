@@ -292,8 +292,6 @@ namespace SR_GRAPH_NS::Types {
     }
 
     bool Shader::Load() {
-        SR_LOCK_GUARD
-
         SR_UTILS_NS::Path&& path = SR_UTILS_NS::Path(GetResourceId());
 
         if (path.IsAbs()) {
@@ -345,8 +343,6 @@ namespace SR_GRAPH_NS::Types {
     }
 
     bool Shader::Unload() {
-        SR_LOCK_GUARD
-
         bool hasErrors = !IResource::Unload();
 
         m_isCalculated = false;

@@ -41,8 +41,6 @@ namespace SR_AUDIO_NS {
     }
 
     bool RawSound::Unload() {
-        SR_LOCK_GUARD
-
         if (m_dataProvider) {
             m_dataProvider.reset();
         }
@@ -51,8 +49,6 @@ namespace SR_AUDIO_NS {
     }
 
     bool RawSound::Load() {
-        SR_LOCK_GUARD
-
         bool hasErrors = !IResource::Load();
 
         SR_UTILS_NS::Path&& path = SR_UTILS_NS::Path(GetResourceId());
@@ -82,8 +78,6 @@ namespace SR_AUDIO_NS {
     }
 
     bool RawSound::Reload() {
-        SR_LOCK_GUARD
-
         SR_LOG("RawSound::Reload() : reloading \"" + std::string(GetResourceId()) + "\" audio...");
 
         m_loadState = LoadState::Reloading;

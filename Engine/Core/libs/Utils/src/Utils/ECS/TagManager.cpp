@@ -7,7 +7,7 @@
 
 namespace SR_UTILS_NS {
     TagManager::Hash TagManager::RegisterTag(const std::string &tag) {
-        SR_LOCK_GUARD_INHERIT(Settings);
+        SR_LOCK_GUARD
 
         if (UNTAGGED == tag) {
             return 0;
@@ -24,7 +24,7 @@ namespace SR_UTILS_NS {
     }
 
     const std::string& TagManager::GetTag(Tag tag) const {
-        SR_LOCK_GUARD_INHERIT(Settings);
+        SR_LOCK_GUARD
 
         if (tag == 0) {
             return UNTAGGED;
@@ -46,7 +46,7 @@ namespace SR_UTILS_NS {
     }
 
     void TagManager::ClearSettings() {
-        SR_LOCK_GUARD_INHERIT(Settings);
+        SR_LOCK_GUARD
 
         m_tagNames.clear();
         m_tags.clear();
@@ -56,7 +56,7 @@ namespace SR_UTILS_NS {
     }
 
     bool TagManager::LoadSettings(const Xml::Node &node) {
-        SR_LOCK_GUARD_INHERIT(Settings);
+        SR_LOCK_GUARD
 
         m_tags.emplace_back(UNTAGGED);
         m_indices[HashTag(UNTAGGED)] = m_indices.size();
@@ -71,6 +71,8 @@ namespace SR_UTILS_NS {
     }
 
     TagManager::Hash TagManager::HashTag(const std::string &tag) const {
+        SR_LOCK_GUARD
+
         if (tag == UNTAGGED) {
             return 0;
         }
@@ -79,7 +81,7 @@ namespace SR_UTILS_NS {
     }
 
     uint16_t TagManager::GetTagIndex(Tag tag) const {
-        SR_LOCK_GUARD_INHERIT(Settings);
+        SR_LOCK_GUARD
 
         if (tag == 0) {
             return 0;
@@ -96,7 +98,7 @@ namespace SR_UTILS_NS {
     }
 
     const std::string &TagManager::GetTagByIndex(uint16_t index) const {
-        SR_LOCK_GUARD_INHERIT(Settings);
+        SR_LOCK_GUARD
 
         if (index >= m_tags.size()) {
             SRHalt("TagManager::GetTagByIndex() : out of range!");

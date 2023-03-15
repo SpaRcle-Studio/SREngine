@@ -252,8 +252,6 @@ namespace SR_GTYPES_NS {
     }
 
     void Skybox::SetShader(Shader *shader) {
-        SR_SCOPED_LOCK
-
         if (m_shader == shader) {
             return;
         }

@@ -219,11 +219,9 @@ namespace SR_CORE_NS {
         /** Так как некоторые ресурсы, такие как материалы, имеют вложенные ресурсы,
          * то они могут ожидать пока графический поток уберет метку использования с них */
         while (!syncComplete) {
-            SR_UTILS_NS::ResourceManager::LockSingleton();
             m_renderContext.Do([](auto&& pContext) {
                 pContext->Update();
             });
-            SR_UTILS_NS::ResourceManager::UnlockSingleton();
         }
 
         SR_UTILS_NS::ResourceManager::Instance().Synchronize(true);
@@ -616,6 +614,7 @@ namespace SR_CORE_NS {
     }
 
     void Engine::Prepare() {
+        m_scene->Prepare();
         const bool isPaused = !m_isActive || m_isPaused;
         m_sceneBuilder->Build(isPaused);
     }

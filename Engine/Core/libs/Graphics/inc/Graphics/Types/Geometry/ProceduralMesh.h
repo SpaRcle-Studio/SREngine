@@ -31,6 +31,8 @@ namespace SR_GTYPES_NS {
         void UseMaterial() override;
         void UseModelMatrix() override;
 
+        SR_NODISCARD bool IsUniqueMesh() const override { return true; }
+
         SR_NODISCARD bool IsCanCalculate() const override;
 
     private:

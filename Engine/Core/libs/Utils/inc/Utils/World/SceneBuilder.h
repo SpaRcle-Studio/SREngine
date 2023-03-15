@@ -25,8 +25,6 @@ namespace SR_WORLD_NS {
         void Update(float_t dt);
         void FixedUpdate();
 
-        void OnDestroyComponent();
-
         void SetDirty();
 
     private:

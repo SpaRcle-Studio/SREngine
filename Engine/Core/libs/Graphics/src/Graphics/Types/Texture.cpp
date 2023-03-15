@@ -69,7 +69,7 @@ namespace SR_GTYPES_NS {
         resourceManager.Execute([&]() {
             SR_UTILS_NS::Path&& path = SR_UTILS_NS::Path(rawPath).RemoveSubPath(resourceManager.GetResPath());
 
-            if (pTexture = SR_UTILS_NS::ResourceManager::Instance().Find<Texture>(path)) {
+            if ((pTexture = SR_UTILS_NS::ResourceManager::Instance().Find<Texture>(path))) {
                 if (config && pTexture->m_config != config.value()) {
                     SR_WARN("Texture::Load() : copy values do not match load values.");
                 }
@@ -103,8 +103,6 @@ namespace SR_GTYPES_NS {
     }
 
     bool Texture::Unload() {
-        SR_SCOPED_LOCK
-
         bool hasErrors = !IResource::Unload();
 
         FreeTextureData();
@@ -119,8 +117,6 @@ namespace SR_GTYPES_NS {
     }
 
     bool Texture::Load() {
-        SR_SCOPED_LOCK
-
         bool hasErrors = !IResource::Load();
 
         if (!IsCalculated()) {
@@ -145,8 +141,6 @@ namespace SR_GTYPES_NS {
     }
 
     bool Texture::Calculate() {
-        SR_SCOPED_LOCK
-
         if (m_isCalculated) {
             SR_ERROR("Texture::Calculate() : texture is already calculated!");
             return false;
@@ -208,8 +202,6 @@ namespace SR_GTYPES_NS {
     }
 
     void Texture::FreeVideoMemory() {
-        SR_SCOPED_LOCK
-
         /// Просто игнорируем, текстура могла быть не использована
         if (!m_isCalculated) {
             return;
@@ -274,8 +266,6 @@ namespace SR_GTYPES_NS {
     }
 
     void* Texture::GetDescriptor() {
-        SR_SCOPED_LOCK
-
         auto&& textureId = GetId();
 
         if (textureId == SR_ID_INVALID) {

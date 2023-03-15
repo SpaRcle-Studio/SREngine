@@ -140,10 +140,4 @@ namespace SR_WORLD_NS {
             gameObject->Start();
         }
     }
-
-    void SceneBuilder::OnDestroyComponent() {
-        SetDirty();
-        /// синхронизируемся с потоком аптейда
-        SR_LOCK_GUARD
-    }
 }
