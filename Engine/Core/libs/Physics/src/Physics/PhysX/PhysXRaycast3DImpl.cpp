@@ -4,6 +4,8 @@
 
 #include <Physics/PhysX/PhysXRaycast3DImpl.h>
 
+#include <Utils/ECS/GameObject.h>
+
 namespace SR_PHYSICS_NS {
     PhysXRaycast3DImpl::RaycastHits PhysXRaycast3DImpl::Cast(const SR_MATH_NS::FVector3 &origin, const SR_MATH_NS::FVector3 &direction, float_t maxDistance, uint32_t maxHits) {
         RaycastHits hits;
@@ -20,11 +22,23 @@ namespace SR_PHYSICS_NS {
                 return;
             }
 
+            physx::PxShape* pShape = ((physx::PxShape*)pRigidbody->GetCollisionShape()->GetHandle());
+
+            if (!pShape) {
+                if (auto&& gameObject = pRigidbody->GetGameObject()) {
+                    SRHaltOnce("PhysXRaycast3DImpl::Cast() : " + gameObject->GetName() + " does not have a collision shape!");
+                }
+                else {
+                    SRHaltOnce("PhysXRaycast3DImpl::Cast() : rigidbody does not have a collision shape!");
+                }
+                return;
+            }
+
             physx::PxRaycastHit pxHit;
             physx::PxU32 hitCount = physx::PxGeometryQuery::raycast(
                     SR_PHYSICS_UTILS_NS::FV3ToPxV3(origin),
                     SR_PHYSICS_UTILS_NS::FV3ToPxV3(direction),
-                    ((physx::PxShape*)pRigidbody->GetCollisionShape()->GetHandle())->getGeometry().any(),
+                    pShape->getGeometry().any(),
                     pose,
                     maxDistance,
                     physx::PxHitFlag::eDEFAULT,
