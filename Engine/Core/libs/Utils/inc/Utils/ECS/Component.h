@@ -46,6 +46,7 @@ namespace SR_UTILS_NS {
         friend class IComponentable;
         friend class ComponentManager;
     public:
+        using Ptr = Component*;
         using ScenePtr = SR_WORLD_NS::Scene*;
         using GameObjectPtr = SR_HTYPES_NS::SharedPtr<GameObject>;
         using ComponentPtr = Component*;
@@ -86,7 +87,7 @@ namespace SR_UTILS_NS {
         void SetEnabled(bool value);
         void SetComponentBuildId(uint64_t buildId) { m_componentBuildId = buildId; }
 
-        SR_NODISCARD virtual Component* CopyComponent() const;
+        SR_NODISCARD virtual Component::Ptr CopyComponent() const;
 
         SR_NODISCARD virtual uint64_t GetComponentHashName() const = 0;
         SR_NODISCARD virtual const std::string& GetComponentName() const = 0;

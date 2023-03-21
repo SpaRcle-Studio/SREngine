@@ -9,7 +9,6 @@
 
 namespace SR_GTYPES_NS {
     class ProceduralMesh : public MeshComponent {
-        friend class Mesh;
         using Super = MeshComponent;
         SR_ENTITY_SET_VERSION(1000);
         SR_INITIALIZE_COMPONENT(ProceduralMesh);
@@ -20,8 +19,6 @@ namespace SR_GTYPES_NS {
         typedef Vertices::StaticMeshVertex VertexType;
 
     public:
-        IResource* CopyResource(IResource* destination) const override;
-
         static Component* LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage);
 
         void SetIndexedVertices(void* pData, uint64_t count);
@@ -34,6 +31,8 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD bool IsUniqueMesh() const override { return true; }
 
         SR_NODISCARD bool IsCanCalculate() const override;
+
+        SR_NODISCARD Component* CopyComponent() const override;
 
     private:
         bool Calculate() override;

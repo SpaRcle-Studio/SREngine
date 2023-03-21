@@ -26,7 +26,6 @@ namespace SR_GTYPES_NS {
     public:
         static Component* LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage);
 
-        SR_UTILS_NS::IResource* CopyResource(SR_UTILS_NS::IResource* destination) const override;
         SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SR_UTILS_NS::SavableFlags flags) const override;
 
         void UseMaterial() override;
@@ -48,6 +47,8 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD SR_FORCE_INLINE bool IsMeshActive() const noexcept override {
             return SR_UTILS_NS::Component::IsActive();
         }
+
+        SR_NODISCARD Component::Ptr CopyComponent() const override;
 
         const SR_MATH_NS::Matrix4x4& GetModelMatrix() const override {
             return m_modelMatrix;

@@ -19,7 +19,6 @@ namespace SR_GTYPES_NS {
 
     public:
         Component* CopyComponent() const override;
-        IResource* CopyResource(IResource* destination) const override;
 
         SR_MATH_NS::FVector3 GetBarycenter() const override;
 
@@ -29,6 +28,8 @@ namespace SR_GTYPES_NS {
         void OnMatrixDirty() override;
         void OnEnable() override;
         void OnDisable() override;
+
+        SR_HTYPES_NS::Marshal::Ptr Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SR_UTILS_NS::SavableFlags flags) const override;
 
         SR_NODISCARD bool ExecuteInEditMode() const override;
         SR_NODISCARD SR_FORCE_INLINE bool IsCanUpdate() const noexcept override { return false; }
@@ -52,8 +53,6 @@ namespace SR_GTYPES_NS {
         SR_MATH_NS::FVector3 GetTranslation() const override {
             return m_translation;
         }
-
-        SR_NODISCARD SR_UTILS_NS::Path InitializeResourcePath() const override;
 
     protected:
         SR_NODISCARD RenderScenePtr TryGetRenderScene();

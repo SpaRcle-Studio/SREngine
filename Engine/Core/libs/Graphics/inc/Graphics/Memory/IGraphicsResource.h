@@ -51,6 +51,7 @@ namespace SR_GRAPH_NS::Memory {
         }
 
         SR_NODISCARD SR_FORCE_INLINE bool IsCalculated() const noexcept { return m_isCalculated; }
+        SR_NODISCARD SR_FORCE_INLINE bool IsGraphicsResourceRegistered() const noexcept { return m_pipeline; }
 
     protected:
         std::atomic<bool> m_isCalculated = false;

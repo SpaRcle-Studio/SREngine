@@ -3,10 +3,18 @@
 //
 
 #include <Graphics/Types/Geometry/MeshComponent.h>
+#include <Graphics/Utils/MeshUtils.h>
 
 namespace SR_GTYPES_NS {
+    SR_HTYPES_NS::Marshal::Ptr MeshComponent::Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SR_UTILS_NS::SavableFlags flags) const {
+        pMarshal = Component::Save(pMarshal, flags);
+
+        pMarshal->Write(static_cast<int32_t>(GetMeshType()));
+
+        return pMarshal;
+    }
+
     void MeshComponent::OnLoaded() {
-        AddUsePoint();
         Component::OnLoaded();
     }
 
@@ -23,8 +31,7 @@ namespace SR_GTYPES_NS {
 
         Component::OnDestroy();
 
-        /// после вызова данная сущность может быть уничтожена
-        RemoveUsePoint();
+        MarkMeshDestroyed();
 
         if (renderScene) {
             renderScene->SetDirty();
@@ -93,24 +100,19 @@ namespace SR_GTYPES_NS {
         Component::OnMatrixDirty();
     }
 
-    SR_UTILS_NS::IResource *MeshComponent::CopyResource(SR_UTILS_NS::IResource *destination) const {
-        auto* pCopy = dynamic_cast<MeshComponent*>(destination ? destination : nullptr);
-        pCopy = dynamic_cast<MeshComponent*>(IndexedMesh::CopyResource(pCopy));
+    SR_UTILS_NS::Component::Ptr MeshComponent::CopyComponent() const {
+        auto&& pMesh = SR_GRAPH_NS::CreateMeshByType(GetMeshType());
+        if (!pMesh) {
+            return nullptr;
+        }
 
-        pCopy->m_geometryName = m_geometryName;
-        pCopy->m_barycenter = m_barycenter;
+        if (auto&& pMeshComponent = dynamic_cast<MeshComponent*>(pMesh)) {
+            pMeshComponent->SetMaterial(GetMaterial());
+            return pMeshComponent;
+        }
 
-        return IndexedMesh::CopyResource(destination);
-    }
+        SRHalt("Mesh is not a component! Memory leak...");
 
-    SR_UTILS_NS::Path MeshComponent::InitializeResourcePath() const {
-        return SR_UTILS_NS::Path(
-                std::move(SR_UTILS_NS::StringUtils::SubstringView(GetResourceId(), '|', 1)),
-                true /** fast */
-        );
-    }
-
-    SR_UTILS_NS::Component *MeshComponent::CopyComponent() const {
-        return dynamic_cast<Component*>(CopyResource(nullptr));
+        return nullptr;
     }
 }

@@ -15,25 +15,18 @@ namespace SR_GRAPH_UI_NS {
     SR_REGISTER_COMPONENT(Sprite2D);
 
     Sprite2D::Sprite2D()
-        : Super(Types::MeshType::Sprite2D)
-    {
-        m_countIndices = SPRITE_INDICES.size();
-        m_countVertices = SPRITE_VERTICES.size();
+        : Super(MeshType::Sprite2D)
+    {  }
 
-        SetId("Sprite2DFromMemory");
-    }
-
-    SR_UTILS_NS::IResource* Sprite2D::CopyResource(SR_UTILS_NS::IResource *destination) const {
-        auto* sprite2D = dynamic_cast<Sprite2D *>(destination ? destination : new Sprite2D());
-        sprite2D = dynamic_cast<Sprite2D *>(IndexedMesh::CopyResource(sprite2D));
-
-        return sprite2D;
+    const std::string& Sprite2D::GetMeshIdentifier() const {
+        static const std::string id = "Sprite2DFromMemory";
+        return id;
     }
 
     SR_UTILS_NS::Component* Sprite2D::LoadComponent(SR_HTYPES_NS::Marshal &marshal, const SR_HTYPES_NS::DataStorage *dataStorage) {
-        SR_MAYBE_UNUSED const auto &&type = static_cast<SR_GTYPES_NS::MeshType>(marshal.Read<int32_t>());
+        SR_MAYBE_UNUSED const auto&& type = static_cast<MeshType>(marshal.Read<int32_t>());
 
-        const auto &&material = marshal.Read<std::string>();
+        const auto&& material = marshal.Read<std::string>();
 
         auto&& pSprite = new Sprite2D();
 
@@ -41,33 +34,28 @@ namespace SR_GRAPH_UI_NS {
             if (auto&& pMaterial = SR_GTYPES_NS::Material::Load(material)) {
                 pSprite->SetMaterial(pMaterial);
             }
-            else
+            else {
                 SR_ERROR("Sprite2D::LoadComponent() : failed to load material! Name: " + material);
+            }
         }
 
         return pSprite;
     }
 
     bool Sprite2D::Calculate() {
-        if (m_isCalculated)
-            return true;
-
-        const bool iboOK = m_IBO != SR_ID_INVALID;
-        if (m_VBO != SR_ID_INVALID && iboOK && !m_hasErrors) {
-            m_isCalculated = true;
+        if (IsCalculated()) {
             return true;
         }
+
+        FreeVideoMemory();
 
         if (!IsCanCalculate()) {
             return false;
         }
 
-        if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::High) {
-            SR_LOG("Sprite2D::Calculate() : calculating \"" + m_geometryName + "\"...");
-        }
-
-        if (!CalculateVBO<Vertices::VertexType::UIVertex>(SPRITE_VERTICES))
+        if (!CalculateVBO<Vertices::VertexType::UIVertex, Vertices::UIVertex>([this]() { return SR_SPRITE_VERTICES; })) {
             return false;
+        }
 
         return IndexedMesh::Calculate();
     }
@@ -85,20 +73,22 @@ namespace SR_GRAPH_UI_NS {
     }
 
     void Sprite2D::Draw() {
-        if (!IsActive() || IsDestroyed())
+        if (!IsActive()) {
             return;
+        }
 
-        if ((!m_isCalculated && !Calculate()) || m_hasErrors)
+        if ((!IsCalculated() && !Calculate()) || m_hasErrors) {
             return;
+        }
 
-        auto&& shader = m_material->GetShader();
+        auto&& pShader = m_material->GetShader();
         auto&& uboManager = Memory::UBOManager::Instance();
 
         if (m_dirtyMaterial)
         {
             m_dirtyMaterial = false;
 
-            m_virtualUBO = uboManager.ReAllocateUBO(m_virtualUBO, shader->GetUBOBlockSize(), shader->GetSamplersCount());
+            m_virtualUBO = uboManager.ReAllocateUBO(m_virtualUBO, pShader->GetUBOBlockSize(), pShader->GetSamplersCount());
 
             if (m_virtualUBO != SR_ID_INVALID) {
                 uboManager.BindUBO(m_virtualUBO);
@@ -109,16 +99,16 @@ namespace SR_GRAPH_UI_NS {
                 return;
             }
 
-            shader->InitUBOBlock();
-            shader->Flush();
+            pShader->InitUBOBlock();
+            pShader->Flush();
 
             m_material->UseSamplers();
         }
 
         switch (uboManager.BindUBO(m_virtualUBO)) {
             case Memory::UBOManager::BindResult::Duplicated:
-                shader->InitUBOBlock();
-                shader->Flush();
+                pShader->InitUBOBlock();
+                pShader->Flush();
                 m_material->UseSamplers();
                 SR_FALLTHROUGH;
             case Memory::UBOManager::BindResult::Success:
@@ -133,15 +123,13 @@ namespace SR_GRAPH_UI_NS {
     SR_HTYPES_NS::Marshal::Ptr Sprite2D::Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SR_UTILS_NS::SavableFlags flags) const {
         pMarshal = Super::Save(pMarshal, flags);
 
-        pMarshal->Write(static_cast<int32_t>(m_type));
-
         pMarshal->Write(m_material ? m_material->GetResourceId() : "None");
 
         return pMarshal;
     }
 
     std::vector<uint32_t> Sprite2D::GetIndices() const {
-        return SPRITE_INDICES;
+        return SR_SPRITE_INDICES;
     }
 
     void Sprite2D::UseMaterial() {
@@ -152,5 +140,9 @@ namespace SR_GRAPH_UI_NS {
     void Sprite2D::UseModelMatrix() {
         GetRenderContext()->GetCurrentShader()->SetMat4(SHADER_MODEL_MATRIX, m_modelMatrix);
         Super::UseModelMatrix();
+    }
+
+    SR_UTILS_NS::Component::Ptr Sprite2D::CopyComponent() const {
+        return MeshComponent::CopyComponent();
     }
 }

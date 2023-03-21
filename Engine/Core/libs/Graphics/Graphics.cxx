@@ -110,6 +110,8 @@
 #include "../Graphics/src/Graphics/Types/Shader.cpp"
 #include "../Graphics/src/Graphics/Types/RenderTexture.cpp"
 
+#include "../Graphics/src/Graphics/Utils/MeshUtils.cpp"
+
 #include "../Graphics/src/Graphics/Window/Window.cpp"
 #include "../Graphics/src/Graphics/Window/BasicWindowImpl.cpp"
 

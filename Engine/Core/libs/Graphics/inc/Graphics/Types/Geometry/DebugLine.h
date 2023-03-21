@@ -29,11 +29,6 @@ namespace SR_GTYPES_NS {
 
         void Draw() override;
 
-        IResource* CopyResource(IResource* destination) const override;
-
-        bool Calculate() override;
-        void FreeVideoMemory() override;
-
         void UseMaterial() override;
 
     private:

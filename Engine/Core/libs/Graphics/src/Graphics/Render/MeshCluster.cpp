@@ -11,41 +11,12 @@ namespace SR_GRAPH_NS {
         m_subClusters.reserve(25);
     }
 
-    ShadedMeshSubCluster::ShadedMeshSubCluster(Types::Shader *pShader)
+    ShadedMeshSubCluster::ShadedMeshSubCluster(SR_GTYPES_NS::Shader *pShader)
         : Super()
         , m_shader(pShader)
     { }
 
-   bool ShadedMeshSubCluster::Remove(Types::Mesh *pMesh) noexcept {
-       const int32_t groupID = pMesh->GetVBO();
-
-       if (auto&& groupIt = m_groups.find(groupID); groupIt != m_groups.end()) {
-           MeshGroup& group = groupIt->second;
-
-           if (auto pIt = group.find(pMesh); pIt != group.end()) {
-               group.erase(pIt);
-
-               /// После вызова меш может быть уже не валиден
-               pMesh->RemoveUsePoint();
-
-               if (group.empty()) {
-                   m_groups.erase(groupIt);
-               }
-
-               return true;
-           }
-       }
-       else {
-           SR_ERROR("ShadedMeshSubCluster::Remove() : mesh group to remove mesh not found!");
-           return false;
-       }
-
-       SR_ERROR("ShadedMeshSubCluster::Remove() : mesh not found!");
-
-       return false;
-   }
-
-    bool ShadedMeshSubCluster::Add(Types::Mesh *pMesh) noexcept {
+    bool ShadedMeshSubCluster::Add(SR_GTYPES_NS::Mesh::Ptr pMesh) noexcept {
         const int32_t groupID = pMesh->GetVBO();
 
         if (auto&& pIt = m_groups.find(groupID); pIt == m_groups.end()) {
@@ -55,8 +26,6 @@ namespace SR_GRAPH_NS {
             SRHalt("ShadedMeshSubCluster::Add() : failed to add mesh to cluster!");
             return false;
         }
-
-        pMesh->AddUsePoint();
 
         return true;
     }
@@ -73,7 +42,6 @@ namespace SR_GRAPH_NS {
         const auto&& pShader = pMesh->GetShader();
 
         SRAssert(pMesh->GetPipeline());
-
         SRAssert(pShader);
 
         if (auto&& subClusterIt = m_subClusters.find(pShader); subClusterIt == m_subClusters.end()) {
@@ -97,26 +65,6 @@ namespace SR_GRAPH_NS {
         }
     }
 
-    bool MeshCluster::Remove(Types::Mesh *mesh) noexcept {
-        const auto&& pShader = mesh->GetShader();
-
-        SRAssert(pShader);
-
-        if (auto&& subCluster = m_subClusters.find(pShader); subCluster == m_subClusters.end()) {
-            SRHalt("MeshCluster::Remove() : sub cluster not found!");
-            return false;
-        }
-        else {
-            auto const result = subCluster->second.Remove(mesh);
-
-            if (subCluster->second.Empty()) {
-                m_subClusters.erase(subCluster);
-            }
-
-            return result;
-        }
-    }
-
     bool MeshCluster::Empty() const noexcept {
         return m_subClusters.empty();
     }
@@ -137,7 +85,7 @@ namespace SR_GRAPH_NS {
 
                     SRAssert2(pMaterial, "Mesh have not material!");
 
-                    if (pMesh->GetCountUses() == 1) {
+                    if (pMesh->IsMeshDestroyed()) {
                         static auto&& resourceManager = SR_UTILS_NS::ResourceManager::Instance();
                         SR_MAYBE_UNUSED SR_HTYPES_NS::SingletonRecursiveLockGuard lock(&resourceManager);
 
@@ -146,7 +94,7 @@ namespace SR_GRAPH_NS {
                             pMesh->DeInitGraphicsResource();
                         }
 
-                        pMesh->RemoveUsePoint();
+                        delete pMesh;
 
                         pMeshIt = group.erase(pMeshIt);
 
@@ -161,8 +109,6 @@ namespace SR_GRAPH_NS {
 
                     /// Если изменил свой кластер (прозрачность), то убираем его из текущего
                     if (ChangeCluster(pMesh)) {
-                        /// use-point от старого саб кластера
-                        pMesh->RemoveUsePoint();
                         pMeshIt = group.erase(pMeshIt);
                         dirty = true;
                     }
@@ -170,8 +116,6 @@ namespace SR_GRAPH_NS {
                     else if (pMesh->GetVBO() != vbo || pMaterial->GetShader() != pShader) {
                         pMeshIt = group.erase(pMeshIt);
                         Add(pMesh);
-                        /// use-point от старого саб кластера
-                        pMesh->RemoveUsePoint();
                         dirty = true;
                         goto repeat;
                     }

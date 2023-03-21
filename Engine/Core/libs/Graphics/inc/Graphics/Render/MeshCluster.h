@@ -61,7 +61,6 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD ConstIterator end() const { return m_groups.end(); }
 
         bool SR_FASTCALL Add(Types::Mesh *mesh) noexcept;
-        bool SR_FASTCALL Remove(Types::Mesh *mesh) noexcept;
         SR_NODISCARD bool SR_FASTCALL Empty() const noexcept;
 
         SR_NODISCARD SR_SRSL_NS::ShaderType GetShaderType() const noexcept;
@@ -95,7 +94,6 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD ConstIterator end() const { return m_subClusters.end(); }
 
         bool SR_FASTCALL Add(Types::Mesh *mesh) noexcept;
-        bool SR_FASTCALL Remove(Types::Mesh *mesh) noexcept;
         SR_NODISCARD bool SR_FASTCALL Empty() const noexcept;
 
         bool Update();
@@ -113,7 +111,7 @@ namespace SR_GRAPH_NS {
 
     class OpaqueMeshCluster : public MeshCluster {
     public:
-        OpaqueMeshCluster(TransparentMeshCluster* pTransparentCluster)
+        explicit OpaqueMeshCluster(TransparentMeshCluster* pTransparentCluster)
             : m_transparent(pTransparentCluster)
         { }
 
@@ -138,7 +136,7 @@ namespace SR_GRAPH_NS {
 
     class TransparentMeshCluster : public MeshCluster {
     public:
-        TransparentMeshCluster(OpaqueMeshCluster* pOpaqueCluster)
+        explicit TransparentMeshCluster(OpaqueMeshCluster* pOpaqueCluster)
             : m_opaque(pOpaqueCluster)
         { }
 

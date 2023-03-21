@@ -26,7 +26,7 @@ namespace SR_GRAPH_NS::Memory {
         return VideoResourcesIter();
     }
 
-    bool MeshManager::RegisterImpl(const std::string &resourceId, MeshMemoryType memType, uint32_t id) {
+    bool MeshManager::RegisterImpl(const std::string &resourceId, MeshMemoryType memType, uint32_t size, uint32_t id) {
     #ifndef SR_RELEASE
         if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::High) {
             SR_LOG("MeshManager::RegisterImpl() : register resource \"" + resourceId + "\"");
@@ -35,11 +35,11 @@ namespace SR_GRAPH_NS::Memory {
 
         switch (memType) {
             case MeshMemoryType::VBO: {
-                m_VBOs[resourceId] = MeshVidMemInfo(id, memType);
+                m_VBOs[resourceId] = MeshVidMemInfo(size, id, memType);
                 return true;
             }
             case MeshMemoryType::IBO:
-                m_IBOs[resourceId] = MeshVidMemInfo(id, memType);
+                m_IBOs[resourceId] = MeshVidMemInfo(size, id, memType);
                 return true;
             default:
                 SR_ERROR("MeshManager::RegisterImpl() : unknown type!");

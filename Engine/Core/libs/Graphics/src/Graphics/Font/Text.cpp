@@ -29,11 +29,11 @@ namespace SR_GTYPES_NS {
     void Text::Draw() {
         auto&& pShader = GetRenderContext()->GetCurrentShader();
 
-        if (!pShader || !IsActive() || IsDestroyed()) {
+        if (!pShader || !IsActive()) {
             return;
         }
 
-        if ((!m_isCalculated && !Calculate()) || m_hasErrors) {
+        if ((!IsCalculated() && !Calculate()) || m_hasErrors) {
             return;
         }
 
@@ -77,12 +77,8 @@ namespace SR_GTYPES_NS {
         }
     }
 
-    SR_UTILS_NS::IResource* Text::CopyResource(SR_UTILS_NS::IResource* destination) const{
-        return Mesh::CopyResource(destination);
-    }
-
     bool Text::Calculate() {
-        if (m_isCalculated) {
+        if (IsCalculated()) {
             return true;
         }
 
@@ -140,14 +136,14 @@ namespace SR_GTYPES_NS {
         return true;
     }
 
-    SR_UTILS_NS::Component* Text::LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage) {
-        SR_MAYBE_UNUSED const auto &&type = static_cast<MeshType>(marshal.Read<int32_t>());
+    SR_UTILS_NS::Component::Ptr Text::LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage) {
+        SR_MAYBE_UNUSED const auto&& type = static_cast<MeshType>(marshal.Read<int32_t>());
 
-        const auto &&material = marshal.Read<std::string>();
-        auto &&pMesh = new Text();
+        const auto&& material = marshal.Read<std::string>();
+        auto&& pMesh = new Text();
 
         if (pMesh && material != "None") {
-            if (auto&& pMaterial = Types::Material::Load(SR_UTILS_NS::Path(material, true))) {
+            if (auto&& pMaterial = SR_GTYPES_NS::Material::Load(SR_UTILS_NS::Path(material, true))) {
                 pMesh->SetMaterial(pMaterial);
             }
             else {
@@ -221,16 +217,13 @@ namespace SR_GTYPES_NS {
 
         Component::OnDestroy();
 
-        /// после вызова данная сущность может быть уничтожена
-        RemoveUsePoint();
-
         renderScene->SetDirty();
     }
 
     SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Text::Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SR_UTILS_NS::SavableFlags flags) const {
         pMarshal = Component::Save(pMarshal, flags);
 
-        pMarshal->Write(static_cast<int32_t>(m_type));
+        pMarshal->Write(static_cast<int32_t>(GetMeshType()));
         pMarshal->Write(m_material ? m_material->GetResourceId() : "None");
 
         return pMarshal;
@@ -247,11 +240,11 @@ namespace SR_GTYPES_NS {
         }
 
         if (m_font) {
-            RemoveDependency(m_font);
+            m_font->RemoveUsePoint();
         }
 
         if ((m_font = pFont)) {
-            AddDependency(m_font);
+            m_font->AddUsePoint();
         }
     }
 
@@ -287,7 +280,10 @@ namespace SR_GTYPES_NS {
     }
 
     void Text::OnLoaded() {
-        AddUsePoint();
         Component::OnLoaded();
+    }
+
+    SR_UTILS_NS::Component::Ptr Text::CopyComponent() const {
+        return Component::CopyComponent();
     }
 }

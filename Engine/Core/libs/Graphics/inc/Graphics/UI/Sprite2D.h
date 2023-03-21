@@ -8,13 +8,13 @@
 #include <Graphics/Types/Geometry/MeshComponent.h>
 
 namespace SR_GRAPH_UI_NS {
-    const std::vector<uint32_t> SPRITE_INDICES = { 0, 1, 2, 0, 2, 3 };
+    const std::vector<uint32_t> SR_SPRITE_INDICES = { 0, 1, 2, 0, 2, 3 }; /// NOLINT
 
-    const std::vector<Vertices::UIVertex> SPRITE_VERTICES = {
-            { { 1.000000, 1.000000, 0.000000 }, { 0.000000, 1.000000 } },
-            { { -1.000000, 1.000000, -0.000000 }, { 1.000000, 1.000000 } },
-            { { -1.000000, -1.000000, -0.000000 }, { 1.000000, 0.000000 } },
-            { { 1.000000, -1.000000, 0.000000 }, { 0.000000, 0.000000 } }
+    const std::vector<Vertices::UIVertex> SR_SPRITE_VERTICES = { /// NOLINT
+        { {  1.000000,  1.000000,  0.000000 }, { 0.000000, 1.000000 } },
+        { { -1.000000,  1.000000, -0.000000 }, { 1.000000, 1.000000 } },
+        { { -1.000000, -1.000000, -0.000000 }, { 1.000000, 0.000000 } },
+        { {  1.000000, -1.000000,  0.000000 }, { 0.000000, 0.000000 } }
     };
 
     class Sprite2D : public SR_GTYPES_NS::MeshComponent {
@@ -31,14 +31,15 @@ namespace SR_GRAPH_UI_NS {
         typedef Vertices::UIVertex VertexType;
 
     public:
-        IResource* CopyResource(IResource* destination) const override;
-
         void UseMaterial() override;
         void UseModelMatrix() override;
 
         static Component* LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage);
 
         SR_NODISCARD std::vector<uint32_t> GetIndices() const override;
+        SR_NODISCARD const std::string& GetMeshIdentifier() const override;
+
+        SR_NODISCARD Component::Ptr CopyComponent() const override;
 
     protected:
         bool Calculate() override;

@@ -59,6 +59,7 @@ namespace SR_UTILS_NS {
             (*singleton) = nullptr;
         }
 
+        /// TODO: это не потокобезопасно, нужно переделать
         SR_MAYBE_UNUSED static T& Instance() noexcept {
             auto&& singleton = GetSingleton();
 

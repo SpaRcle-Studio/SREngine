@@ -127,7 +127,7 @@ namespace SR_UTILS_NS {
         return "Component: " + GetComponentName();
     }
 
-    Component *Component::CopyComponent() const {
+    Component::Ptr Component::CopyComponent() const {
         SRHalt("Not implemented!");
         return nullptr;
     }

@@ -2,14 +2,14 @@
 // Created by Monika on 30.10.2021.
 //
 
-#ifndef GAMEENGINE_INDEXEDMESH_H
-#define GAMEENGINE_INDEXEDMESH_H
+#ifndef SRENGINE_GRAPHICS_INDEXEDMESH_H
+#define SRENGINE_GRAPHICS_INDEXEDMESH_H
 
 #include <Graphics/Memory/MeshManager.h>
 #include <Graphics/Types/Mesh.h>
 #include <Graphics/Pipeline/Environment.h>
 
-namespace SR_GRAPH_NS::Types {
+namespace SR_GTYPES_NS {
     class IndexedMesh : public Mesh {
     protected:
         ~IndexedMesh() override;
@@ -28,13 +28,14 @@ namespace SR_GRAPH_NS::Types {
         SR_NODISCARD uint32_t GetIndicesCount() const { return m_countIndices; }
         SR_NODISCARD uint32_t GetVerticesCount() const { return m_countVertices; }
 
-        IResource* CopyResource(IResource* destination) const override;
-
         bool Calculate() override;
+
+        bool CalculateIBO();
 
         void FreeVideoMemory() override;
 
         template<Vertices::VertexType type, typename Vertex> bool CalculateVBO(const std::vector<Vertex>& vertices);
+        template<Vertices::VertexType type, typename Vertex> bool CalculateVBO(const SR_HTYPES_NS::Function<std::vector<Vertex>()>& getter);
         template<Vertices::VertexType type> bool FreeVBO();
         bool FreeIBO();
 
@@ -46,30 +47,68 @@ namespace SR_GRAPH_NS::Types {
 
     };
 
-    template<Vertices::VertexType type, typename Vertex> bool IndexedMesh::CalculateVBO(const std::vector<Vertex>& vertices) {
+    /// ----------------------------------------------------------------------------------------------------------------
+
+    template<Vertices::VertexType type, typename Vertex> bool IndexedMesh::CalculateVBO(const SR_HTYPES_NS::Function<std::vector<Vertex>()>& getter) {
+        SRAssert(m_pipeline);
+        SRAssert(m_VBO == SR_ID_INVALID);
+
+        using namespace Memory;
+
         if (!IsUniqueMesh()) {
-            m_VBO = Memory::MeshManager::Instance().CopyIfExists<type, Memory::MeshMemoryType::VBO>(GetResourceId());
+            m_VBO = MeshManager::Instance().CopyIfExists<type, MeshMemoryType::VBO>(GetMeshIdentifier());
         }
 
         if (m_VBO == SR_ID_INVALID) {
-            if (m_countVertices == 0 || !vertices.data()) {
-                SR_ERROR("VertexMesh::Calculate() : invalid vertices! \n\tResource id: " + std::string(GetResourceId()) + "\n\tGeometry name: " + GetGeometryName());
+            auto&& vertices = getter();
+            return CalculateVBO<type>(vertices);
+        }
+
+        if (!IsUniqueMesh()) {
+            m_countVertices = MeshManager::Instance().Count<type, MeshMemoryType::VBO>(
+                GetMeshIdentifier()
+            );
+        }
+
+        return true;
+    }
+
+    template<Vertices::VertexType type, typename Vertex> bool IndexedMesh::CalculateVBO(const std::vector<Vertex>& vertices) {
+        SRAssert(m_pipeline);
+        SRAssert(m_VBO == SR_ID_INVALID);
+
+        using namespace Memory;
+
+        if (!IsUniqueMesh()) {
+            m_VBO = MeshManager::Instance().CopyIfExists<type, MeshMemoryType::VBO>(GetMeshIdentifier());
+        }
+
+        if (m_VBO == SR_ID_INVALID) {
+            if ((m_countVertices = vertices.size()) == 0) {
+                SR_ERROR("IndexedMesh::CalculateVBO() : invalid vertices! \n\tIdentifier: " + GetMeshIdentifier());
                 return false;
             }
 
-            SRAssert(m_pipeline);
-
             if (m_VBO = m_pipeline->CalculateVBO((void*)vertices.data(), type, m_countVertices); m_VBO == SR_ID_INVALID) {
-                SR_ERROR("VertexMesh::Calculate() : failed calculate VBO \"" + GetGeometryName() + "\" mesh!");
+                SR_ERROR("IndexedMesh::CalculateVBO() : failed calculate VBO \"" + GetGeometryName() + "\" mesh!");
                 m_hasErrors = true;
                 return false;
             }
             else if (IsUniqueMesh()) {
                 return true;
             }
-            else {
-                return Memory::MeshManager::Instance().Register<type, Memory::MeshMemoryType::VBO>(GetResourceId(), m_VBO);
-            }
+
+            return MeshManager::Instance().Register<type, MeshMemoryType::VBO>(
+                GetMeshIdentifier(),
+                m_countVertices,
+                m_VBO
+            );
+        }
+
+        if (!IsUniqueMesh()) {
+            m_countVertices = MeshManager::Instance().Size<type, MeshMemoryType::VBO>(
+                GetMeshIdentifier()
+            );
         }
 
         return true;
@@ -82,10 +121,10 @@ namespace SR_GRAPH_NS::Types {
 
         using namespace Memory;
 
-        const bool isAllowFree = IsUniqueMesh() || MeshManager::Instance().Free<type, MeshMemoryType::VBO>(GetResourceId()) == MeshManager::FreeResult::Freed;
+        const bool isAllowFree = IsUniqueMesh() || MeshManager::Instance().Free<type, MeshMemoryType::VBO>(GetMeshIdentifier()) == MeshManager::FreeResult::Freed;
 
         if (isAllowFree && !m_pipeline->FreeVBO(&m_VBO)) {
-            SR_ERROR("VertexMesh:FreeVideoMemory() : failed free VBO! Something went wrong...");
+            SR_ERROR("IndexedMesh::FreeVideoMemory() : failed free VBO! Something went wrong...");
             return false;
         }
 
@@ -93,4 +132,4 @@ namespace SR_GRAPH_NS::Types {
     }
 }
 
-#endif //GAMEENGINE_INDEXEDMESH_H
+#endif //SRENGINE_GRAPHICS_INDEXEDMESH_H

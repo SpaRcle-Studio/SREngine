@@ -10,15 +10,7 @@ namespace SR_GTYPES_NS {
 
     ProceduralMesh::ProceduralMesh()
         : Super(MeshType::Procedural)
-    {
-        SetId("ProceduralMesh");
-    }
-
-    SR_UTILS_NS::IResource* ProceduralMesh::CopyResource(IResource* destination) const {
-        /// TODO: fixme
-        SRHalt("The procedural meshes isn't are copyable!");
-        return nullptr;
-    }
+    { }
 
     SR_UTILS_NS::Component* ProceduralMesh::LoadComponent(SR_HTYPES_NS::Marshal &marshal, const SR_HTYPES_NS::DataStorage *dataStorage) {
         return nullptr;
@@ -57,9 +49,7 @@ namespace SR_GTYPES_NS {
     }
 
     SR_HTYPES_NS::Marshal::Ptr SR_GTYPES_NS::ProceduralMesh::Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SR_UTILS_NS::SavableFlags flags) const {
-        pMarshal = Component::Save(pMarshal, flags);
-
-        pMarshal->Write(static_cast<int32_t>(m_type));
+        pMarshal = MeshComponent::Save(pMarshal, flags);
 
         pMarshal->Write(m_material ? m_material->GetResourceId() : "None");
 
@@ -67,7 +57,7 @@ namespace SR_GTYPES_NS {
     }
 
     bool ProceduralMesh::Calculate()  {
-        if (m_isCalculated) {
+        if (IsCalculated()) {
             return true;
         }
 
@@ -89,11 +79,13 @@ namespace SR_GTYPES_NS {
     }
 
     void ProceduralMesh::Draw() {
-        if (!IsActive() || IsDestroyed())
+        if (!IsActive()) {
             return;
+        }
 
-        if ((!m_isCalculated && !Calculate()) || m_hasErrors)
+        if ((!m_isCalculated && !Calculate()) || m_hasErrors) {
             return;
+        }
 
         auto&& shader = m_material->GetShader();
         auto&& uboManager = Memory::UBOManager::Instance();
@@ -167,5 +159,15 @@ namespace SR_GTYPES_NS {
     void ProceduralMesh::UseModelMatrix() {
         Mesh::UseModelMatrix();
         GetRenderContext()->GetCurrentShader()->SetMat4(SHADER_MODEL_MATRIX, m_modelMatrix);
+    }
+
+    SR_UTILS_NS::Component* ProceduralMesh::CopyComponent() const {
+        if (auto&& pComponent = dynamic_cast<ProceduralMesh*>(MeshComponent::CopyComponent())) {
+            pComponent->SetIndexedVertices((void*)m_vertices.data(), m_vertices.size());
+            pComponent->SetIndices((void*)m_indices.data(), m_indices.size());
+            return pComponent;
+        }
+
+        return nullptr;
     }
 }
