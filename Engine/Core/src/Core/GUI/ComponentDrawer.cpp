@@ -233,17 +233,17 @@ namespace SR_CORE_NS::GUI {
         }
     }
 
-    void ComponentDrawer::DrawComponent(SR_GTYPES_NS::Mesh3D*& mesh3d, EditorGUI* context, int32_t index) {
-        if (!mesh3d->IsCanCalculate())
+    void ComponentDrawer::DrawComponent(SR_GTYPES_NS::Mesh3D*& pComponent, EditorGUI* context, int32_t index) {
+        if (!pComponent->IsCanCalculate())
             ImGui::TextColored(ImVec4(1, 0, 0, 1), "Invalid mesh!");
 
-        if (!mesh3d->IsCalculated())
+        if (!pComponent->IsCalculated())
             ImGui::TextColored(ImVec4(1, 1, 0, 1), "Mesh isn't calculated!");
 
-        if (!mesh3d->GetRenderContext())
+        if (!pComponent->GetRenderContext())
             ImGui::TextColored(ImVec4(1, 1, 0, 1), "Mesh isn't registered!");
 
-        auto&& pMaterial = mesh3d->GetMaterial();
+        auto&& pMaterial = pComponent->GetMaterial();
 
         if (auto&& pDescriptor = context->GetIconDescriptor(EditorIcon::Shapes)) {
             if (GUISystem::Instance().ImageButton(SR_FORMAT("##imgMeshBtn%i", index), pDescriptor, SR_MATH_NS::IVector2(50), 5)) {
@@ -256,7 +256,7 @@ namespace SR_CORE_NS::GUI {
                             pMesh->SetMaterial(pMaterial);
                         }
 
-                        mesh3d = dynamic_cast<SR_GTYPES_NS::Mesh3D *>(pMesh);
+                        pComponent = dynamic_cast<SR_GTYPES_NS::Mesh3D*>(pMesh);
 
                         return;
                     }
@@ -267,30 +267,18 @@ namespace SR_CORE_NS::GUI {
         ImGui::SameLine();
         ImGui::BeginGroup();
 
-        Graphics::GUI::DrawValue("Path", mesh3d->GetMeshIdentifier(), index);
-        Graphics::GUI::DrawValue("Name", mesh3d->GetGeometryName(), index);
+        Graphics::GUI::DrawValue("Path", pComponent->GetMeshIdentifier(), index);
+        Graphics::GUI::DrawValue("Name", pComponent->GetGeometryName(), index);
 
-        int32_t meshId = mesh3d->GetMeshId();
+        int32_t meshId = pComponent->GetMeshId();
         if (Graphics::GUI::InputInt("Id", meshId, 1, true, index) && meshId >= 0) {
-            auto&& path = mesh3d->GetMeshIdentifier();
-
-            if (auto&& pMesh = SR_GTYPES_NS::Mesh::TryLoad(path, SR_GRAPH_NS::MeshType::Static, meshId)) {
-                if (pMaterial) {
-                    pMesh->SetMaterial(pMaterial);
-                }
-
-                mesh3d = dynamic_cast<SR_GTYPES_NS::Mesh3D *>(pMesh);
-
-                ImGui::EndGroup();
-
-                return;
-            }
+            pComponent->SetMeshId(meshId);
         }
 
         ImGui::EndGroup();
 
-        Graphics::GUI::DrawValue("Vertices count", mesh3d->GetVerticesCount(), index);
-        Graphics::GUI::DrawValue("Indices count", mesh3d->GetIndicesCount(), index);
+        Graphics::GUI::DrawValue("Vertices count", pComponent->GetVerticesCount(), index);
+        Graphics::GUI::DrawValue("Indices count", pComponent->GetIndicesCount(), index);
 
         ImGui::Separator();
 
@@ -299,7 +287,7 @@ namespace SR_CORE_NS::GUI {
 
         /// компилятор считает, что это недостижимый код (он ошибается)
         if (copy != pMaterial) {
-            mesh3d->SetMaterial(copy);
+            pComponent->SetMaterial(copy);
         }
     }
 
@@ -348,19 +336,7 @@ namespace SR_CORE_NS::GUI {
 
         int32_t meshId = pComponent->GetMeshId();
         if (Graphics::GUI::InputInt("Id", meshId, 1, true, index) && meshId >= 0) {
-            auto&& path = pComponent->GetMeshIdentifier();
-
-            if (auto&& pMesh = SR_GTYPES_NS::Mesh::TryLoad(path, SR_GRAPH_NS::MeshType::Skinned, meshId)) {
-                if (pMaterial) {
-                    pMesh->SetMaterial(pMaterial);
-                }
-
-                pComponent = dynamic_cast<SR_GTYPES_NS::SkinnedMesh *>(pMesh);
-
-                ImGui::EndGroup();
-
-                return;
-            }
+           pComponent->SetMeshId(meshId);
         }
 
         ImGui::EndGroup();

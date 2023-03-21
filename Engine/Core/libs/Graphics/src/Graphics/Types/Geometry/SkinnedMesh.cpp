@@ -263,4 +263,12 @@ namespace SR_GTYPES_NS {
 
         return nullptr;
     }
+
+    std::string SkinnedMesh::GetMeshIdentifier() const {
+        if (auto&& pRawMesh = GetRawMesh()) {
+            return pRawMesh->GetResourceId() + "|" + std::to_string(GetMeshId());
+        }
+
+        return MeshComponent::GetMeshIdentifier();
+    }
 }

@@ -18,7 +18,7 @@ namespace SR_GRAPH_UI_NS {
         : Super(MeshType::Sprite2D)
     {  }
 
-    const std::string& Sprite2D::GetMeshIdentifier() const {
+    std::string Sprite2D::GetMeshIdentifier() const {
         static const std::string id = "Sprite2DFromMemory";
         return id;
     }

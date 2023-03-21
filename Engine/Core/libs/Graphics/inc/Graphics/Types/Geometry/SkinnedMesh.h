@@ -32,9 +32,9 @@ namespace SR_GTYPES_NS {
 
         SR_NODISCARD bool IsSkeletonUsable() const;
         SR_NODISCARD bool IsCanCalculate() const override;
-
         SR_NODISCARD bool ExecuteInEditMode() const override { return true; }
         SR_NODISCARD SR_FORCE_INLINE bool IsCanUpdate() const noexcept override { return true; }
+        SR_NODISCARD std::string GetMeshIdentifier() const override;
 
         SR_NODISCARD Component* CopyComponent() const override;
 

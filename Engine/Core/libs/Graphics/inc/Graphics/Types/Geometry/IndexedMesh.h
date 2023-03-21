@@ -128,6 +128,8 @@ namespace SR_GTYPES_NS {
             return false;
         }
 
+        m_VBO = SR_ID_INVALID;
+
         return true;
     }
 }

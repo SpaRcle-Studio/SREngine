@@ -110,4 +110,12 @@ namespace SR_GTYPES_NS {
     void DebugWireframeMesh::SetColor(const SR_MATH_NS::FVector4& color) {
         m_color = color;
     }
+
+    std::string DebugWireframeMesh::GetMeshIdentifier() const {
+        if (auto&& pRawMesh = GetRawMesh()) {
+            return pRawMesh->GetResourceId() + "|" + std::to_string(GetMeshId());
+        }
+
+        return Super::GetMeshIdentifier();
+    }
 }

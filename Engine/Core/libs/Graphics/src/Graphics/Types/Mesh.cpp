@@ -159,7 +159,7 @@ namespace SR_GRAPH_NS::Types {
         m_material->UseSamplers();
     }
 
-    const std::string& Mesh::GetMeshIdentifier() const {
+    std::string Mesh::GetMeshIdentifier() const {
         static const std::string empty;
         return empty;
     }

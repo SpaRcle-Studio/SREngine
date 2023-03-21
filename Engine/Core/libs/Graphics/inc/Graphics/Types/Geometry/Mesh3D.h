@@ -33,7 +33,7 @@ namespace SR_GTYPES_NS {
 
         SR_NODISCARD bool IsCanCalculate() const override;
         SR_NODISCARD std::vector<uint32_t> GetIndices() const override;
-        SR_NODISCARD const std::string& GetMeshIdentifier() const override;
+        SR_NODISCARD std::string GetMeshIdentifier() const override;
 
         SR_NODISCARD Component* CopyComponent() const override;
 

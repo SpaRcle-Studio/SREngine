@@ -168,9 +168,9 @@ namespace SR_GTYPES_NS {
         m_isCalculated = false;
     }
 
-    const std::string& Mesh3D::GetMeshIdentifier() const {
+    std::string Mesh3D::GetMeshIdentifier() const {
         if (auto&& pRawMesh = GetRawMesh()) {
-            return pRawMesh->GetResourceId();
+            return pRawMesh->GetResourceId() + "|" + std::to_string(GetMeshId());
         }
 
         return Super::GetMeshIdentifier();

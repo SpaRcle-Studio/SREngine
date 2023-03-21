@@ -37,7 +37,7 @@ namespace SR_GRAPH_UI_NS {
         static Component* LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage);
 
         SR_NODISCARD std::vector<uint32_t> GetIndices() const override;
-        SR_NODISCARD const std::string& GetMeshIdentifier() const override;
+        SR_NODISCARD std::string GetMeshIdentifier() const override;
 
         SR_NODISCARD Component::Ptr CopyComponent() const override;
 

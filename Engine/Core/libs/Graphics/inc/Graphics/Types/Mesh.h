@@ -62,7 +62,7 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD virtual const SR_MATH_NS::Matrix4x4& GetModelMatrix() const;
         SR_NODISCARD virtual std::vector<uint32_t> GetIndices() const { return { }; }
         SR_NODISCARD virtual std::string GetGeometryName() const { return std::string(); }
-        SR_NODISCARD virtual const std::string& GetMeshIdentifier() const;
+        SR_NODISCARD virtual std::string GetMeshIdentifier() const;
 
         SR_NODISCARD ShaderPtr GetShader() const;
         SR_NODISCARD MaterialPtr GetMaterial() const { return m_material; }

@@ -30,8 +30,8 @@ namespace SR_GTYPES_NS {
         void SetColor(const SR_MATH_NS::FVector4& color);
 
         SR_NODISCARD std::vector<uint32_t> GetIndices() const override;
+        SR_NODISCARD std::string GetMeshIdentifier() const override;
         SR_NODISCARD SR_FORCE_INLINE bool IsDebugMesh() const noexcept override { return true; }
-
         SR_NODISCARD const SR_MATH_NS::Matrix4x4& GetModelMatrix() const override;
 
         bool Calculate() override;
