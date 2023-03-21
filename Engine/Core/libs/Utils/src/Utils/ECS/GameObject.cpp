@@ -43,18 +43,20 @@ namespace SR_UTILS_NS {
 
         /// сцену не блокируем, предполагается, что и так в контексте заблокированной сцены работаем
 
+        if (auto&& pParent = GetParent()) {
+            pParent->RemoveChild(GetThis());
+        }
+
         if (m_scene) {
             m_scene->Remove(*this);
-            for (auto&& child : GetChildrenRef()) {
-                child->Destroy();
+            while (!m_children.empty()) {
+                (*m_children.begin())->Destroy();
             }
-            RemoveAllChildren();
         }
         else {
-            for (auto&& child : GetChildrenRef()) {
-                child->Destroy();
+            while (!m_children.empty()) {
+                (*m_children.begin())->Destroy();
             }
-            m_children.clear();
             DestroyComponents();
             DestroyImpl();
         }
@@ -309,11 +311,11 @@ namespace SR_UTILS_NS {
     }
 
      bool GameObject::PostLoad() {
-        if (!IComponentable::PostLoad()) {
-            return false;
-        }
+         if (!IComponentable::PostLoad()) {
+             return false;
+         }
 
-         for (auto&& child : m_children) {
+         for (auto &&child : m_children) {
              child->SetDirty(true);
              child->PostLoad();
          }
