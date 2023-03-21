@@ -70,6 +70,8 @@ namespace SR_UTILS_NS {
         /** Remove one point from count uses current resource */
         virtual RemoveUPResult RemoveUsePoint();
 
+        virtual void CheckResourceUsage();
+
         virtual void OnResourceRegistered() {
             SRAssert2(!IsRegistered(), "Resource already are registered!");
             m_isRegistered = true;
@@ -144,6 +146,7 @@ namespace SR_UTILS_NS {
 
         /// Автоматическое уничтожение ресурса по истечению use-point'ов
         /// \warning ReadOnly
+        /// TODO: избавиться от этого параметра, везде используется автоматическое управление
         bool m_autoRemove = false;
 
 

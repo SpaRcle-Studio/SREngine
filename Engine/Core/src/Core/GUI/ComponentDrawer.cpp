@@ -251,7 +251,7 @@ namespace SR_CORE_NS::GUI {
                 auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesFolder, { { "Mesh", "obj,pmx,fbx,blend,stl,dae" } });
 
                 if (path.Exists()) {
-                    if (auto&& pMesh = SR_GTYPES_NS::Mesh::TryLoad(path, SR_GTYPES_NS::MeshType::Static, 0)) {
+                    if (auto&& pMesh = SR_GTYPES_NS::Mesh::TryLoad(path, SR_GRAPH_NS::MeshType::Static, 0)) {
                         if (pMaterial) {
                             pMesh->SetMaterial(pMaterial);
                         }
@@ -267,14 +267,14 @@ namespace SR_CORE_NS::GUI {
         ImGui::SameLine();
         ImGui::BeginGroup();
 
-        Graphics::GUI::DrawValue("Path", mesh3d->GetResourcePath(), index);
+        Graphics::GUI::DrawValue("Path", mesh3d->GetMeshIdentifier(), index);
         Graphics::GUI::DrawValue("Name", mesh3d->GetGeometryName(), index);
 
         int32_t meshId = mesh3d->GetMeshId();
         if (Graphics::GUI::InputInt("Id", meshId, 1, true, index) && meshId >= 0) {
-            auto&& path = mesh3d->GetResourcePath();
+            auto&& path = mesh3d->GetMeshIdentifier();
 
-            if (auto&& pMesh = SR_GTYPES_NS::Mesh::TryLoad(path, SR_GTYPES_NS::MeshType::Static, meshId)) {
+            if (auto&& pMesh = SR_GTYPES_NS::Mesh::TryLoad(path, SR_GRAPH_NS::MeshType::Static, meshId)) {
                 if (pMaterial) {
                     pMesh->SetMaterial(pMaterial);
                 }
@@ -327,7 +327,7 @@ namespace SR_CORE_NS::GUI {
                 auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesFolder, { { "Mesh", "obj,fbx,pmx,blend,stl,dae" } });
 
                 if (path.Exists()) {
-                    if (auto&& pMesh = SR_GTYPES_NS::Mesh::TryLoad(path, SR_GTYPES_NS::MeshType::Skinned, 0)) {
+                    if (auto&& pMesh = SR_GTYPES_NS::Mesh::TryLoad(path, SR_GRAPH_NS::MeshType::Skinned, 0)) {
                         if (pMaterial) {
                             pMesh->SetMaterial(pMaterial);
                         }
@@ -343,14 +343,14 @@ namespace SR_CORE_NS::GUI {
         ImGui::SameLine();
         ImGui::BeginGroup();
 
-        Graphics::GUI::DrawValue("Path", pComponent->GetResourcePath(), index);
+        Graphics::GUI::DrawValue("Path", pComponent->GetMeshIdentifier(), index);
         Graphics::GUI::DrawValue("Name", pComponent->GetGeometryName(), index);
 
         int32_t meshId = pComponent->GetMeshId();
         if (Graphics::GUI::InputInt("Id", meshId, 1, true, index) && meshId >= 0) {
-            auto&& path = pComponent->GetResourcePath();
+            auto&& path = pComponent->GetMeshIdentifier();
 
-            if (auto&& pMesh = SR_GTYPES_NS::Mesh::TryLoad(path, SR_GTYPES_NS::MeshType::Skinned, meshId)) {
+            if (auto&& pMesh = SR_GTYPES_NS::Mesh::TryLoad(path, SR_GRAPH_NS::MeshType::Skinned, meshId)) {
                 if (pMaterial) {
                     pMesh->SetMaterial(pMaterial);
                 }

@@ -94,6 +94,22 @@ namespace SR_UTILS_NS {
         }
     }
 
+    void IResource::CheckResourceUsage() {
+        ResourceManager::Instance().Execute([this]() {
+            if (m_countUses == 0 && m_autoRemove && !IsDestroyed()) {
+                if (IsRegistered()) {
+                    Destroy();
+                    return;
+                }
+                else {
+                    /// так и не зарегистрировали ресурс
+                    delete this;
+                    return;
+                }
+            }
+        });
+    }
+
     IResource::RemoveUPResult IResource::RemoveUsePoint() {
         RemoveUPResult result;
 

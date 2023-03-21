@@ -213,6 +213,7 @@ namespace Framework {
         using namespace SR_MATH_NS;
         using namespace SR_UTILS_NS;
         using namespace SR_GTYPES_NS;
+        using namespace SR_GRAPH_NS;
 
         generator->AddIncompleteType("Mesh", "Mesh");
 
@@ -227,7 +228,7 @@ namespace Framework {
 
         generator->RegisterNewClass("Mesh", "Mesh", {
             "Libraries/ResourceManager.h", "Libraries/Component.h", "Libraries/Math/Vector3.h", "Libraries/Material.h"
-        }, { { "IResource", EvoScript::Public }, { "Component", EvoScript::Public } });
+        }, { { "Component", EvoScript::Public } });
 
         ESRegisterStaticMethod(EvoScript::Public, generator, Mesh, Load, std::vector<Mesh*>, ESArg2(const std::string& path, MeshType type), ESArg2(path, type))
 

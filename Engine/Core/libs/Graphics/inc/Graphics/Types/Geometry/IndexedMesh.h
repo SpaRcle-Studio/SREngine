@@ -65,7 +65,7 @@ namespace SR_GTYPES_NS {
         }
 
         if (!IsUniqueMesh()) {
-            m_countVertices = MeshManager::Instance().Count<type, MeshMemoryType::VBO>(
+            m_countVertices = MeshManager::Instance().Size<type, MeshMemoryType::VBO>(
                 GetMeshIdentifier()
             );
         }

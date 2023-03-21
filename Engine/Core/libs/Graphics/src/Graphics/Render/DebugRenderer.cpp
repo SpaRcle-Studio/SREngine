@@ -78,7 +78,7 @@ namespace SR_GRAPH_NS {
             }
 
             if (timed.endPoint <= timePoint) {
-                timed.pMesh->RemoveUsePoint();
+                timed.pMesh->MarkMeshDestroyed();
                 timed.pMesh = nullptr;
                 m_emptyIds.emplace_back(i);
             }
@@ -103,7 +103,6 @@ namespace SR_GRAPH_NS {
         if (id == SR_ID_INVALID) {
             auto&& pDebugLine = new SR_GTYPES_NS::DebugLine(start, end, color);
             pDebugLine->SetMaterial(m_lineMaterial);
-            pDebugLine->AddUsePoint();
             return AddTimedObject(time, pDebugLine);
         }
         else if (id >= m_timedObjects.size()) {
@@ -141,14 +140,13 @@ namespace SR_GRAPH_NS {
 
         if (id == SR_ID_INVALID) {
             SR_GTYPES_NS::DebugWireframeMesh* pMesh = dynamic_cast<SR_GTYPES_NS::DebugWireframeMesh *>(
-                    SR_GTYPES_NS::Mesh::Load(SR_UTILS_NS::Path(path, true /** fast */), SR_GTYPES_NS::MeshType::Wireframe, 0)
+                    SR_GTYPES_NS::Mesh::Load(SR_UTILS_NS::Path(path, true /** fast */), MeshType::Wireframe, 0)
             );
 
             if (pMesh) {
                 pMesh->SetColor(color);
                 pMesh->SetMaterial(m_wireFrameMaterial);
                 pMesh->SetMatrix(SR_MATH_NS::Matrix4x4(pos, rot, scale));
-                pMesh->AddUsePoint();
 
                 return AddTimedObject(time, pMesh);
             }
@@ -233,17 +231,12 @@ namespace SR_GRAPH_NS {
                 continue;
             }
 
-        #ifdef SR_DEBUG
-            SR_MAYBE_UNUSED const auto&& countUses = timed.pMesh->GetCountUses();
-            SRAssert(countUses > 0 && !timed.pMesh->IsDestroyed());
-        #endif
-
             if (!timed.registered) {
                 timed.pMesh->FreeVideoMemory();
                 timed.pMesh->DeInitGraphicsResource();
             }
 
-            timed.pMesh->RemoveUsePoint();
+            timed.pMesh->MarkMeshDestroyed();
             timed.pMesh = nullptr;
 
             m_emptyIds.emplace_back(i);

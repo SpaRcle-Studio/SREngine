@@ -26,26 +26,26 @@ namespace SR_CORE_NS {
         }, RenderScenePtr());
 
         if (value && !m_mesh && m_position.y == 1) {
-            if (auto&& pMesh = SR_GTYPES_NS::Mesh::Load("Engine/Models/planeWireframe.obj", SR_GTYPES_NS::MeshType::Wireframe, 0)) {
-                m_mesh = dynamic_cast<SR_GTYPES_NS::DebugWireframeMesh *>(pMesh);
-            }
-            else
-                return;
+            //if (auto&& pMesh = SR_GTYPES_NS::Mesh::Load("Engine/Models/planeWireframe.obj", SR_GTYPES_NS::MeshType::Wireframe, 0)) {
+            //    m_mesh = dynamic_cast<SR_GTYPES_NS::DebugWireframeMesh *>(pMesh);
+            //}
+            //else
+             //   return;
 
-            UpdateFacesPos();
+            //UpdateFacesPos();
 
-            m_mesh->AddUsePoint();
-            m_mesh->SetMaterial(Material::Load("Engine/Materials/Colors/red_wireframe.mat"));
+            //m_mesh->AddUsePoint();
+            //m_mesh->SetMaterial(Material::Load("Engine/Materials/Colors/red_wireframe.mat"));
 
             //renderScene.Do([this](SR_GRAPH_NS::RenderScene* ptr) {
             //    ptr->Register(m_mesh);
             //});
         }
 
-        if (!value && m_mesh) {
-            m_mesh->RemoveUsePoint();
-            m_mesh = nullptr;
-        }
+        //if (!value && m_mesh) {
+        //    m_mesh->RemoveUsePoint();
+        //    m_mesh = nullptr;
+        //}
     }
 
     bool VisualRegion::Unload(bool force) {

@@ -26,7 +26,7 @@ namespace SR_CORE_NS {
             for (uint32_t i = 0; i < node->mNumMeshes; ++i) {
                 const uint64_t meshId = node->mMeshes[i];
                 const bool hasBones = pRawMesh->GetAssimpScene()->mMeshes[meshId]->HasBones();
-                const SR_GTYPES_NS::MeshType meshType = hasBones ? SR_GTYPES_NS::MeshType::Skinned : SR_GTYPES_NS::MeshType::Static;
+                const SR_GRAPH_NS::MeshType meshType = hasBones ? SR_GRAPH_NS::MeshType::Skinned : SR_GRAPH_NS::MeshType::Static;
 
                 if (auto&& pMesh = SR_GTYPES_NS::Mesh::Load(pRawMesh->GetResourceId(), meshType, node->mMeshes[i])) {
                     if (hasBones) {

@@ -45,20 +45,24 @@ namespace SR_GRAPH_NS::Types {
         /// Проверяем существование меша
         SR_HTYPES_NS::RawMesh* pRawMesh = nullptr;
         if ((pRawMesh = SR_HTYPES_NS::RawMesh::Load(path))) {
-            pRawMesh->AddUsePoint();
             exists = id < pRawMesh->GetMeshesCount();
         }
         else {
             return nullptr;
         }
 
-        if (!exists) {
-            pRawMesh->RemoveUsePoint();
+        if (!exists || !(pMesh = CreateMeshByType(type))) {
+            pRawMesh->CheckResourceUsage();
             return nullptr;
         }
 
-        if (!(pMesh = CreateMeshByType(type, id))) {
-            pRawMesh->RemoveUsePoint();
+        if (auto&& pRawMeshHolder = dynamic_cast<SR_HTYPES_NS::IRawMeshHolder*>(pMesh)) {
+            pRawMeshHolder->SetRawMesh(pRawMesh);
+            pRawMeshHolder->SetMeshId(id);
+        }
+        else {
+            SRHalt("Mesh is not a raw mesh holder! Memory leak...");
+            pRawMesh->CheckResourceUsage();
             return nullptr;
         }
 
