@@ -24,7 +24,7 @@ namespace SR_WORLD_NS {
 namespace SR_UTILS_NS::Types {
     class SR_DLL_EXPORT RawMesh : public IResource {
         using ScenePtr = SR_HTYPES_NS::SafePtr<SR_WORLD_NS::Scene>;
-
+        using Ptr = RawMesh*;
     private:
         RawMesh();
         ~RawMesh() override;

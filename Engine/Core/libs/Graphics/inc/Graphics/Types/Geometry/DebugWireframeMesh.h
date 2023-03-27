@@ -35,7 +35,6 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD const SR_MATH_NS::Matrix4x4& GetModelMatrix() const override;
 
         bool Calculate() override;
-        void FreeVideoMemory() override;
 
         void UseMaterial() override;
 

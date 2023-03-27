@@ -25,8 +25,11 @@ namespace SR_HTYPES_NS {
         SR_NODISCARD bool IsValidMeshId() const noexcept;
         SR_NODISCARD std::vector<SR_UTILS_NS::Vertex> GetVertices() const noexcept;
 
-        virtual void SetRawMesh(RawMeshPtr pRawMesh);
-        virtual void SetMeshId(MeshIndex meshIndex);
+        virtual void OnRawMeshChanged() { }
+
+        void SetRawMesh(const SR_UTILS_NS::Path& path);
+        void SetRawMesh(RawMeshPtr pRawMesh);
+        void SetMeshId(MeshIndex meshIndex);
 
     private:
         RawMeshPtr m_rawMesh = nullptr;

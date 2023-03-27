@@ -44,8 +44,8 @@ namespace SR_GTYPES_NS {
 
         void PopulateSkeletonMatrices();
 
+        void OnRawMeshChanged() override;
         bool Calculate() override;
-        void FreeVideoMemory() override;
         void Draw() override;
 
         SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SR_UTILS_NS::SavableFlags flags) const override;

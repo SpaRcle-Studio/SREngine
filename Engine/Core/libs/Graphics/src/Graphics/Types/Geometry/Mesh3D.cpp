@@ -43,18 +43,6 @@ namespace SR_GTYPES_NS {
         return IndexedMesh::Calculate();
     }
 
-    void Mesh3D::FreeVideoMemory() {
-        if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::High) {
-            SR_LOG("Mesh3D::FreeVideoMemory() : free \"" + GetGeometryName() + "\" mesh video memory...");
-        }
-
-        if (!FreeVBO<Vertices::VertexType::StaticMeshVertex>()) {
-            SR_ERROR("Mesh3D::FreeVideoMemory() : failed to free VBO!");
-        }
-
-        IndexedMesh::FreeVideoMemory();
-    }
-
     void Mesh3D::Draw() {
         auto&& pShader = GetRenderContext()->GetCurrentShader();
 
@@ -157,12 +145,14 @@ namespace SR_GTYPES_NS {
         GetRenderContext()->GetCurrentShader()->SetMat4(SHADER_MODEL_MATRIX, m_modelMatrix);
     }
 
-    void Mesh3D::SetRawMesh(IRawMeshHolder::RawMeshPtr pRawMesh) {
-        IRawMeshHolder::SetRawMesh(pRawMesh);
+    void Mesh3D::OnRawMeshChanged() {
+        IRawMeshHolder::OnRawMeshChanged();
 
-        if (pRawMesh && IsValidMeshId()) {
-            SetGeometryName(pRawMesh->GetGeometryName(GetMeshId()));
+        if (GetRawMesh() && IsValidMeshId()) {
+            SetGeometryName(GetRawMesh()->GetGeometryName(GetMeshId()));
         }
+
+        MarkPipelineUnBuild();
 
         m_dirtyMaterial = true;
         m_isCalculated = false;

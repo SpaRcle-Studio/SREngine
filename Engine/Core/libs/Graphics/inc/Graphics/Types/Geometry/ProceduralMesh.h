@@ -36,7 +36,6 @@ namespace SR_GTYPES_NS {
 
     private:
         bool Calculate() override;
-        void FreeVideoMemory() override;
         void Draw() override;
         void SetDirtyMesh();
 

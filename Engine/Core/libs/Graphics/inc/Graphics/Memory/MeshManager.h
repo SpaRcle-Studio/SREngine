@@ -49,20 +49,24 @@ namespace SR_GRAPH_NS {
 
         class MeshManager : public SR_UTILS_NS::Singleton<MeshManager> {
             friend class SR_UTILS_NS::Singleton<MeshManager>;
+            using Hash = uint64_t;
+            using HashTable = std::vector<uint64_t>;
         public:
-            typedef std::unordered_map<std::string, MeshVidMemInfo> VideoResources;
-            typedef std::optional<std::unordered_map<std::string, MeshVidMemInfo>::iterator> VideoResourcesIter;
+            typedef std::unordered_map<Hash, MeshVidMemInfo> VideoResources;
+            typedef std::optional<VideoResources::iterator> VideoResourcesIter;
 
             enum class FreeResult {
                 Unknown, Freed, EndUse, NotFound, UnknownMem
             };
 
         private:
-            MeshManager() = default;
+            MeshManager();
             ~MeshManager() override = default;
 
         private:
-            VideoResourcesIter FindImpl(const std::string& identifier, MeshMemoryType memType);
+            VideoResourcesIter FindById(int32_t id, MeshMemoryType memType);
+            VideoResourcesIter FindImpl(Hash hash, MeshMemoryType memType);
+
             bool RegisterImpl(const std::string& identifier, MeshMemoryType memType, uint32_t size, uint32_t id);
             FreeResult FreeImpl(VideoResourcesIter iter, MeshMemoryType memType);
 
@@ -70,15 +74,21 @@ namespace SR_GRAPH_NS {
 
             template<Vertices::VertexType vertexType, MeshMemoryType memType> VideoResourcesIter Find(const std::string& identifier) {
                 if constexpr (memType == MeshMemoryType::VBO) {
-                    return this->FindImpl(identifier + SR_UTILS_NS::EnumReflector::ToString<Vertices::VertexType>(vertexType), memType);
+                    const Hash hash = SR_HASH_STR(identifier + SR_UTILS_NS::EnumReflector::ToString<Vertices::VertexType>(vertexType));
+                    return FindImpl(hash, memType);
                 }
-                else
-                    return this->FindImpl(identifier, memType);
+
+                if constexpr (memType == MeshMemoryType::IBO) {
+                    const Hash hash = SR_HASH_STR(identifier);
+                    return FindImpl(hash, memType);
+                }
+
+                SRHalt("Unknown memory type!");
+
+                return std::nullopt;
             }
 
         public:
-            void PrintDump();
-
             template<Vertices::VertexType vertexType, MeshMemoryType memType> bool Register(const std::string_view& identifier, uint32_t size, uint32_t id) {
                 return Register<vertexType, memType>(std::string(identifier), size, id);
             }
@@ -98,21 +108,16 @@ namespace SR_GRAPH_NS {
                     return RegisterImpl(identifier, memType, size, id);
             }
 
-            template<Vertices::VertexType vertexType, MeshMemoryType memType> FreeResult Free(const std::string_view& identifier) {
-                return Free<vertexType, memType>(std::string(identifier));
-            }
-
-            template<Vertices::VertexType vertexType, MeshMemoryType memType> FreeResult Free(const std::string& identifier) {
+            template<MeshMemoryType memType> FreeResult Free(int32_t id) {
                 SR_LOCK_GUARD
 
-                if (auto iter = Find<vertexType, memType>(identifier); !iter.has_value()) {
-                    SR_ERROR("MeshManager::Free() : memory isn't registered! "
-                                         "\n\tResource id: " + identifier);
-                    SRAssert(false);
+                if (auto iter = FindById(id, memType); !iter.has_value()) {
+                    SRHalt("Memory isn't registered!");
                     return FreeResult::NotFound;
                 }
-                else
-                    return this->FreeImpl(iter, memType);
+                else {
+                    return FreeImpl(iter, memType);
+                }
             }
 
             template<Vertices::VertexType vertexType, MeshMemoryType memType> int32_t CopyIfExists(const std::string& identifier) {
@@ -146,8 +151,11 @@ namespace SR_GRAPH_NS {
             }
 
         private:
-            VideoResources m_IBOs = {};
-            VideoResources m_VBOs = {};
+            VideoResources m_IBOs;
+            VideoResources m_VBOs;
+
+            HashTable m_IBOTable;
+            HashTable m_VBOTable;
 
         };
     }

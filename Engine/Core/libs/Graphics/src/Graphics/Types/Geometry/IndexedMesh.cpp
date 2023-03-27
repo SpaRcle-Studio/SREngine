@@ -68,9 +68,9 @@ namespace SR_GTYPES_NS {
 
         using namespace Memory;
 
-        auto&& manager = Memory::MeshManager::Instance();
+        auto&& manager = MeshManager::Instance();
 
-        const bool isAllowFree = IsUniqueMesh() || manager.Free<Vertices::VertexType::Unknown, MeshMemoryType::IBO>(GetMeshIdentifier()) == MeshManager::FreeResult::Freed;
+        const bool isAllowFree = IsUniqueMesh() || manager.Free<MeshMemoryType::IBO>(m_IBO) == MeshManager::FreeResult::Freed;
 
         if (isAllowFree && !m_pipeline->FreeIBO(&m_IBO)) {
             SR_ERROR("IndexedMesh:FreeVideoMemory() : failed free IBO! Something went wrong...");
@@ -82,8 +82,36 @@ namespace SR_GTYPES_NS {
         return true;
     }
 
+    bool IndexedMesh::FreeVBO() {
+        if (m_VBO == SR_ID_INVALID) {
+            return true;
+        }
+
+        using namespace Memory;
+
+        auto&& manager = MeshManager::Instance();
+
+        const bool isAllowFree = IsUniqueMesh() || manager.Free<MeshMemoryType::VBO>(m_VBO) == MeshManager::FreeResult::Freed;
+
+        if (isAllowFree && !m_pipeline->FreeVBO(&m_VBO)) {
+            SR_ERROR("IndexedMesh::FreeVideoMemory() : failed free VBO! Something went wrong...");
+            return false;
+        }
+
+        m_VBO = SR_ID_INVALID;
+
+        return true;
+    }
+
     void IndexedMesh::FreeVideoMemory() {
-        FreeIBO();
+        if (!FreeVBO()) {
+            SR_ERROR("IndexedMesh::FreeVideoMemory() : failed to free VBO!");
+        }
+
+        if (!FreeIBO()) {
+            SR_ERROR("IndexedMesh::FreeVideoMemory() : failed to free IBO!");
+        }
+
         Mesh::FreeVideoMemory();
     }
 

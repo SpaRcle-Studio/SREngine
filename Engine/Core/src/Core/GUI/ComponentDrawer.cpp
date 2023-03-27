@@ -251,15 +251,7 @@ namespace SR_CORE_NS::GUI {
                 auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesFolder, { { "Mesh", "obj,pmx,fbx,blend,stl,dae" } });
 
                 if (path.Exists()) {
-                    if (auto&& pMesh = SR_GTYPES_NS::Mesh::TryLoad(path, SR_GRAPH_NS::MeshType::Static, 0)) {
-                        if (pMaterial) {
-                            pMesh->SetMaterial(pMaterial);
-                        }
-
-                        pComponent = dynamic_cast<SR_GTYPES_NS::Mesh3D*>(pMesh);
-
-                        return;
-                    }
+                    pComponent->SetRawMesh(path);
                 }
             }
         }
@@ -315,15 +307,7 @@ namespace SR_CORE_NS::GUI {
                 auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesFolder, { { "Mesh", "obj,fbx,pmx,blend,stl,dae" } });
 
                 if (path.Exists()) {
-                    if (auto&& pMesh = SR_GTYPES_NS::Mesh::TryLoad(path, SR_GRAPH_NS::MeshType::Skinned, 0)) {
-                        if (pMaterial) {
-                            pMesh->SetMaterial(pMaterial);
-                        }
-
-                        pComponent = dynamic_cast<SR_GTYPES_NS::SkinnedMesh *>(pMesh);
-
-                        return;
-                    }
+                    pComponent->SetRawMesh(path);
                 }
             }
         }

@@ -39,18 +39,6 @@ namespace SR_GTYPES_NS {
         return IndexedMesh::Calculate();
     }
 
-    void SkinnedMesh::FreeVideoMemory() {
-        if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::High) {
-            SR_LOG("SkinnedMesh::FreeVideoMemory() : free \"" + m_geometryName + "\" mesh video memory...");
-        }
-
-        if (!FreeVBO<Vertices::VertexType::SkinnedMeshVertex>()) {
-            SR_ERROR("SkinnedMesh::FreeVideoMemory() : failed to free VBO!");
-        }
-
-        IndexedMesh::FreeVideoMemory();
-    }
-
     void SkinnedMesh::Draw() {
         auto&& pShader = GetRenderContext()->GetCurrentShader();
 
@@ -231,6 +219,19 @@ namespace SR_GTYPES_NS {
                 m_skeletonMatrices[boneId] = identityMatrix;
             }
         }
+    }
+
+    void SkinnedMesh::OnRawMeshChanged() {
+        IRawMeshHolder::OnRawMeshChanged();
+
+        if (GetRawMesh() && IsValidMeshId()) {
+            SetGeometryName(GetRawMesh()->GetGeometryName(GetMeshId()));
+        }
+
+        MarkPipelineUnBuild();
+
+        m_dirtyMaterial = true;
+        m_isCalculated = false;
     }
 
     SR_ANIMATIONS_NS::Skeleton* SkinnedMesh::FindSkeleton() const {

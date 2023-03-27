@@ -77,18 +77,6 @@ namespace SR_GTYPES_NS {
         return IndexedMesh::Calculate();
     }
 
-    void DebugWireframeMesh::FreeVideoMemory() {
-        if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::High) {
-            SR_LOG("DebugWireframeMesh::FreeVideoMemory() : free \"" + GetGeometryName() + "\" mesh video memory...");
-        }
-
-        if (!FreeVBO<Vertices::VertexType::SimpleVertex>()) {
-            SR_ERROR("DebugWireframeMesh::FreeVideoMemory() : failed to free VBO!");
-        }
-
-        IndexedMesh::FreeVideoMemory();
-    }
-
     std::vector<uint32_t> DebugWireframeMesh::GetIndices() const {
         return GetRawMesh()->GetIndices(GetMeshId());
     }

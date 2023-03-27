@@ -33,8 +33,6 @@ namespace SR_GRAPH_NS::Types {
     }
 
     Mesh::Ptr Mesh::TryLoad(const SR_UTILS_NS::Path& path, MeshType type, uint32_t id) {
-        SR_GLOBAL_LOCK
-
         static auto&& resourceManager = SR_UTILS_NS::ResourceManager::Instance();
 
         SR_MAYBE_UNUSED SR_HTYPES_NS::SingletonRecursiveLockGuard lock(&resourceManager);
@@ -123,9 +121,7 @@ namespace SR_GRAPH_NS::Types {
             m_material->AddUsePoint();
         }
 
-        if (m_isCalculated && m_pipeline) {
-            m_pipeline->SetBuildState(false);
-        }
+        MarkPipelineUnBuild();
     }
 
     Mesh::ShaderPtr Mesh::GetShader() const {

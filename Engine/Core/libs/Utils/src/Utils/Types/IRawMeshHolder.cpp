@@ -22,16 +22,31 @@ namespace SR_HTYPES_NS {
             m_rawMesh->AddUsePoint();
         }
 
-        SetMeshId(GetMeshId());
+        if (IsValidMeshId()) {
+            OnRawMeshChanged();
+        }
+        else {
+            SetMeshId(GetMeshId());
+        }
     }
 
     void IRawMeshHolder::SetMeshId(IRawMeshHolder::MeshIndex meshIndex) {
         if (!m_rawMesh) {
-            m_meshId = SR_ID_INVALID;
+            if (m_meshId != SR_ID_INVALID) {
+                m_meshId = SR_ID_INVALID;
+                OnRawMeshChanged();
+            }
             return;
         }
 
-        m_meshId = SR_CLAMP(m_meshId, m_rawMesh->GetMeshesCount(), 0);
+        auto&& count = static_cast<int32_t>(m_rawMesh->GetMeshesCount());
+
+        IRawMeshHolder::MeshIndex newIndex = SR_CLAMP(meshIndex, SR_MAX(count - 1, 0), 0);
+
+        if (m_meshId != newIndex) {
+            m_meshId = newIndex;
+            OnRawMeshChanged();
+        }
     }
 
     std::string IRawMeshHolder::GetMeshStringPath() const noexcept {
@@ -63,5 +78,11 @@ namespace SR_HTYPES_NS {
         }
 
         return defaultVertices;
+    }
+
+    void IRawMeshHolder::SetRawMesh(const SR_UTILS_NS::Path& path) {
+        SR_UTILS_NS::ResourceManager::Instance().Execute([&]() {
+            SetRawMesh(SR_HTYPES_NS::RawMesh::Load(path));
+        });
     }
 }

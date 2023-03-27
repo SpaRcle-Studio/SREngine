@@ -159,7 +159,7 @@ namespace Framework::Graphics {
     void Vulkan::DeInitialize() {
         SR_GRAPH_LOG("Vulkan::DeInitialize() : de-initialize pipeline...");
 
-        SR_GRAPH_NS::Memory::MeshManager::Instance().PrintDump();
+        /// SR_GRAPH_NS::Memory::MeshManager::Instance().PrintDump();
 
         if (m_memory) {
             m_memory->Free();

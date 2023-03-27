@@ -36,7 +36,8 @@ namespace SR_GTYPES_NS {
 
         template<Vertices::VertexType type, typename Vertex> bool CalculateVBO(const std::vector<Vertex>& vertices);
         template<Vertices::VertexType type, typename Vertex> bool CalculateVBO(const SR_HTYPES_NS::Function<std::vector<Vertex>()>& getter);
-        template<Vertices::VertexType type> bool FreeVBO();
+
+        bool FreeVBO();
         bool FreeIBO();
 
     protected:
@@ -110,25 +111,6 @@ namespace SR_GTYPES_NS {
                 GetMeshIdentifier()
             );
         }
-
-        return true;
-    }
-
-    template<Vertices::VertexType type> bool IndexedMesh::FreeVBO() {
-        if (m_VBO == SR_ID_INVALID) {
-            return true;
-        }
-
-        using namespace Memory;
-
-        const bool isAllowFree = IsUniqueMesh() || MeshManager::Instance().Free<type, MeshMemoryType::VBO>(GetMeshIdentifier()) == MeshManager::FreeResult::Freed;
-
-        if (isAllowFree && !m_pipeline->FreeVBO(&m_VBO)) {
-            SR_ERROR("IndexedMesh::FreeVideoMemory() : failed free VBO! Something went wrong...");
-            return false;
-        }
-
-        m_VBO = SR_ID_INVALID;
 
         return true;
     }

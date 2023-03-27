@@ -40,14 +40,6 @@ namespace SR_GTYPES_NS {
         m_countIndices = m_indices.size();
     }
 
-    void ProceduralMesh::FreeVideoMemory() {
-        if (!FreeVBO<Vertices::VertexType::StaticMeshVertex>()) {
-            SR_ERROR("ProceduralMesh::FreeVideoMemory() : failed to free VBO!");
-        }
-
-        IndexedMesh::FreeVideoMemory();
-    }
-
     SR_HTYPES_NS::Marshal::Ptr SR_GTYPES_NS::ProceduralMesh::Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SR_UTILS_NS::SavableFlags flags) const {
         pMarshal = MeshComponent::Save(pMarshal, flags);
 

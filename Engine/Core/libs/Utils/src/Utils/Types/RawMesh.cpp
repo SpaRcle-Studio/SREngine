@@ -30,14 +30,12 @@ namespace SR_HTYPES_NS {
         }
     }
 
-    RawMesh *RawMesh::Load(const SR_UTILS_NS::Path &rawPath) {
+    RawMesh::Ptr RawMesh::Load(const SR_UTILS_NS::Path &rawPath) {
         return Load(rawPath, false);
     }
 
-    RawMesh *RawMesh::Load(const SR_UTILS_NS::Path &rawPath, bool animation) {
-        SR_GLOBAL_LOCK
-
-        RawMesh* pRawMesh = nullptr;
+    RawMesh::Ptr RawMesh::Load(const SR_UTILS_NS::Path &rawPath, bool animation) {
+        RawMesh::Ptr pRawMesh = nullptr;
 
         ResourceManager::Instance().Execute([&]() {
             Path&& path = Path(rawPath).RemoveSubPath(ResourceManager::Instance().GetResPath());

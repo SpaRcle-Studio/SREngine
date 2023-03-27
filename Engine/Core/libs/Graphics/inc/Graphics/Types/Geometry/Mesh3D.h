@@ -29,7 +29,7 @@ namespace SR_GTYPES_NS {
         void UseMaterial() override;
         void UseModelMatrix() override;
 
-        void SetRawMesh(RawMeshPtr pRawMesh) override;
+        void OnRawMeshChanged() override;
 
         SR_NODISCARD bool IsCanCalculate() const override;
         SR_NODISCARD std::vector<uint32_t> GetIndices() const override;
@@ -39,7 +39,6 @@ namespace SR_GTYPES_NS {
 
     private:
         bool Calculate() override;
-        void FreeVideoMemory() override;
         void Draw() override;
 
     };

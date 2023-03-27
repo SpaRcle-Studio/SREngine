@@ -40,6 +40,8 @@ namespace SR_GRAPH_NS::Memory {
             m_isCalculated = false;
         }
 
+        void MarkPipelineUnBuild();
+
         void SetRenderContext(const RenderContextPtr& renderContext);
 
         SR_NODISCARD PipelinePtr GetPipeline() const noexcept {

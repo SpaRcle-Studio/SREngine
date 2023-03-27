@@ -60,18 +60,6 @@ namespace SR_GRAPH_UI_NS {
         return IndexedMesh::Calculate();
     }
 
-    void Sprite2D::FreeVideoMemory() {
-        if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::High) {
-            SR_LOG("Sprite2D::FreeVideoMemory() : free \"" + m_geometryName + "\" mesh video memory...");
-        }
-
-        if (!FreeVBO<Vertices::VertexType::UIVertex>()) {
-            SR_ERROR("Sprite2D::FreeVideoMemory() : failed to free VBO!");
-        }
-
-        IndexedMesh::FreeVideoMemory();
-    }
-
     void Sprite2D::Draw() {
         if (!IsActive()) {
             return;
