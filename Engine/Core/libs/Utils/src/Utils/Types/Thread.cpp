@@ -120,6 +120,8 @@ namespace SR_HTYPES_NS {
     }
 
     void Thread::Synchronize() {
+        SR_WRITE_LOCK
+
     #if defined(SR_DEBUG) && SR_THREAD_SAFE_CHECKS
         auto&& thread = Thread::Factory::Instance().GetThisThread();
 
@@ -136,10 +138,19 @@ namespace SR_HTYPES_NS {
     }
 
     bool Thread::Execute(const SR_HTYPES_NS::Function<bool()>& function) const {
-        SR_LOCK_GUARD
+        /// сначала дожидаемся предыдущей работы. Операция атомарная.
+        while (m_function) {
+            SR_NOOP;
+            continue;
+        }
 
-        m_function = &function;
+        /// синхронно записываем
+        {
+            SR_WRITE_LOCK
+            m_function = &function;
+        }
 
+        /// синхронно ждем выволнения работы. Операция атомарная.
         while (m_function) {
             SR_NOOP;
             continue;

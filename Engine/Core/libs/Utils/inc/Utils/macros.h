@@ -180,6 +180,11 @@
     #define SR_WIN32_BOOL false
 #endif
 
+#define SR_MACRO_CONCAT_UTIL(a, b) a ## b
+#define SR_MACRO_CONCAT(a, b) SR_MACRO_CONCAT_UTIL(a, b)
+
+#define SR_LINE __LINE__
+
 #define SR_XML_NS Framework::Helper::Xml
 #define SR_PHYSICS_NS Framework::Physics
 #define SR_PTYPES_NS SR_PHYSICS_NS::Types

@@ -12,6 +12,7 @@
 #include <regex>
 #include <stdexcept>
 #include <string_view>
+#include <shared_mutex>
 #include <cstdarg>
 #include <initializer_list>
 #include <codecvt>
