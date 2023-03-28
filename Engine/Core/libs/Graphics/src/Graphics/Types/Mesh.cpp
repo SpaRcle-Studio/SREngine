@@ -169,5 +169,26 @@ namespace SR_GRAPH_NS::Types {
             delete this;
         }
     }
+
+    void Mesh::OnResourceReloaded(SR_UTILS_NS::IResource* pResource) {
+        if (!m_material) {
+            return;
+        }
+
+        if (pResource == m_material) {
+            m_dirtyMaterial = true;
+            return;
+        }
+
+        if (m_material->GetShader() == pResource) {
+            m_dirtyMaterial = true;
+            return;
+        }
+
+        auto&& pTexture = dynamic_cast<SR_GTYPES_NS::Texture*>(pResource);
+        if (pTexture && m_material->ContainsTexture(pTexture)) {
+            m_dirtyMaterial = true;
+        }
+    }
 }
 

@@ -14,7 +14,7 @@ namespace SR_SCRIPTING_NS {
         SR_NODISCARD bool Reload(const SR_UTILS_NS::Path& path, SR_UTILS_NS::ResourceInfo* pResourceInfo) override;
 
     private:
-        SR_NODISCARD void FreeStashedProperties(const StashedProperties& properties);
+        void FreeStashedProperties(const StashedProperties& properties);
 
     };
 }

@@ -410,4 +410,12 @@ namespace SR_GRAPH_NS {
     DebugRenderer *RenderScene::GetDebugRenderer() const {
         return m_debugRender;
     }
+
+    void RenderScene::OnResourceReloaded(SR_UTILS_NS::IResource::Ptr pResource) {
+        m_debug.OnResourceReloaded(pResource);
+        m_opaque.OnResourceReloaded(pResource);
+        m_transparent.OnResourceReloaded(pResource);
+
+        SetDirty();
+    }
 }

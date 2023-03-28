@@ -27,6 +27,8 @@ namespace SR_UTILS_NS {
             : ResourceInfo(0, 0)
         { }
 
+        SR_NODISCARD IResource* GetResource() const;
+
         /// хэш файла ресурса
         uint64_t m_fileHash = 0;
         /// текущий хэш самого ресурса (параметры и тд)

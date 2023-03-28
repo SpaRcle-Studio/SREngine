@@ -107,8 +107,6 @@ namespace SR_UTILS_NS {
     }
 
     void ResourceManager::Thread() {
-        const bool autoReloadSupport = Features::Instance().Enabled("AutoReloadResources", false);
-
         do {
             SR_PLATFORM_NS::Sleep(25);
 
@@ -116,17 +114,14 @@ namespace SR_UTILS_NS {
             m_deltaTime = static_cast<uint64_t>(time - m_lastTime); /// miliseconds
             m_lastTime = time;
 
-            m_hashCheckDt += m_deltaTime;
             m_GCDt += m_deltaTime;
 
             if (m_GCDt > (m_force ? 500 : 100) /** ms */) {
+                /** если какой-то ресурс больше не используется, то уничтожаем его.
+                 * все происходящее в GC должно быть потоко-безопасным, то есть при освобождении
+                 * ресурсов не должны блокироваться другие потоки, иначе будут проблемы. */
                 GC();
                 m_GCDt = 0;
-            }
-
-            if (autoReloadSupport && m_hashCheckDt > 25 /** ms */) {
-                CheckResourceHashes();
-                m_hashCheckDt = 0;
             }
         }
         while(m_isRun);
@@ -484,5 +479,16 @@ namespace SR_UTILS_NS {
         SRHalt("ResourceManager::RegisterReloader() : unknown hash name!");
 
         return false;
+    }
+
+    void ResourceManager::ReloadResources(float_t dt) {
+        SR_SCOPED_LOCK
+
+        m_hashCheckDt += m_deltaTime;
+
+        if (m_hashCheckDt > 25 /** ms */) {
+            CheckResourceHashes();
+            m_hashCheckDt = 0;
+        }
     }
 }

@@ -30,6 +30,7 @@ namespace SR_GTYPES_NS {
         void UseModelMatrix() override;
 
         void OnRawMeshChanged() override;
+        void OnResourceReloaded(SR_UTILS_NS::IResource* pResource) override;
 
         SR_NODISCARD bool IsCanCalculate() const override;
         SR_NODISCARD std::vector<uint32_t> GetIndices() const override;

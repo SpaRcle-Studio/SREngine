@@ -29,6 +29,8 @@ namespace SR_GTYPES_NS {
         void SetMatrix(const SR_MATH_NS::Matrix4x4& matrix4X4);
         void SetColor(const SR_MATH_NS::FVector4& color);
 
+        void OnResourceReloaded(SR_UTILS_NS::IResource* pResource) override;
+
         SR_NODISCARD std::vector<uint32_t> GetIndices() const override;
         SR_NODISCARD std::string GetMeshIdentifier() const override;
         SR_NODISCARD SR_FORCE_INLINE bool IsDebugMesh() const noexcept override { return true; }

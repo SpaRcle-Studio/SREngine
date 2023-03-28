@@ -40,12 +40,14 @@ namespace SR_GTYPES_NS {
     public:
         Super* CopyResource(Super* destination) const override;
 
+        SR_NODISCARD bool ContainsTexture(SR_GTYPES_NS::Texture* pTexture) const;
         SR_NODISCARD bool IsTransparent() const;
         SR_NODISCARD Shader* GetShader() const { return m_shader; }
         SR_NODISCARD MaterialProperties& GetProperties() { return m_properties; }
         SR_NODISCARD MaterialProperty* GetProperty(const std::string& id);
         SR_NODISCARD MaterialProperty* GetProperty(uint64_t hashId);
         SR_NODISCARD SR_UTILS_NS::Path GetAssociatedPath() const override;
+
 
         void SetTexture(MaterialProperty* property, Texture* pTexture);
 

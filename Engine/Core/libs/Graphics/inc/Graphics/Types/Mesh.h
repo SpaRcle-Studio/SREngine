@@ -12,6 +12,10 @@
 #include <Graphics/Memory/IGraphicsResource.h>
 #include <Graphics/Memory/UBOManager.h>
 
+namespace SR_UTILS_NS {
+    class IResource;
+}
+
 namespace SR_HTYPES_NS {
     class RawMesh;
 }
@@ -69,6 +73,7 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD int32_t GetVirtualUBO() const { return m_virtualUBO; }
         SR_NODISCARD MeshType GetMeshType() const noexcept { return m_meshType; }
 
+        virtual void OnResourceReloaded(SR_UTILS_NS::IResource* pResource);
         virtual void SetGeometryName(const std::string& name) { }
         virtual void BindMesh() const;
 

@@ -35,3 +35,6 @@
 #include "src/Core/EngineCommands.cpp"
 #include "src/Core/EvoScriptAPI.cpp"
 #include "src/Core/EngineResources.cpp"
+#include "src/Core/EngineMigrators.cpp"
+
+#include "src/Core/Utils/GraphicsResourceReloader.cpp"

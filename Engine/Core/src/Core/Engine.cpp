@@ -3,6 +3,8 @@
 //
 
 #include <Core/Engine.h>
+#include <Core/EngineResources.h>
+#include <Core/EngineMigrators.h>
 #include <Core/GUI/EditorGUI.h>
 #include <Core/UI/Button.h>
 #include <Core/World/SceneInitializer.h>
@@ -11,10 +13,7 @@
 #include <Utils/World/Scene.h>
 #include <Utils/World/SceneBuilder.h>
 #include <Utils/Common/Features.h>
-#include <Utils/Types/SafePtrLockGuard.h>
-#include <Utils/ECS/Prefab.h>
 #include <Utils/ECS/ComponentManager.h>
-#include <Utils/ECS/Migration.h>
 #include <Utils/DebugDraw.h>
 
 #include <Graphics/Pipeline/Environment.h>
@@ -24,10 +23,7 @@
 #include <Graphics/Render/DebugRenderer.h>
 #include <Graphics/Render/RenderContext.h>
 #include <Graphics/Memory/CameraManager.h>
-#include <Graphics/Types/Camera.h>
-#include <Graphics/Animations/Bone.h>
 #include <Graphics/Window/Window.h>
-#include <Graphics/UI/Sprite2D.h>
 #include <Graphics/Types/Geometry/SkinnedMesh.h>
 #include <Graphics/GUI/Editor/Theme.h>
 
@@ -35,7 +31,6 @@
 #include <Physics/LibraryImpl.h>
 #include <Physics/PhysicsLib.h>
 #include <Physics/PhysicsScene.h>
-#include <Physics/3D/Rigidbody3D.h>
 #include <Physics/3D/Raycast3D.h>
 
 #include <Scripting/Impl/EvoScriptManager.h>
@@ -49,7 +44,10 @@ namespace SR_CORE_NS {
             return false;
         }
 
-        RegisterMigrators();
+        if (!RegisterMigrators()) {
+            SR_ERROR("Engine::Create() : failed to register engine migrators!");
+            return false;
+        }
 
         SR_INFO("Engine::Create() : create main window...");
 
@@ -70,7 +68,9 @@ namespace SR_CORE_NS {
             context.template SetPointer<SR_PHYSICS_NS::LibraryImpl>("3DPLib", SR_PHYSICS_NS::PhysicsLibrary::Instance().GetActiveLibrary(SR_UTILS_NS::Measurement::Space3D));
         });
 
-        RegisterLibraries();
+        SR_LOG("Engine::RegisterLibraries() : registering all libraries...");
+
+        API::RegisterEvoScriptClasses();
 
         m_cmdManager = new SR_UTILS_NS::CmdManager();
         m_input      = new SR_UTILS_NS::InputDispatcher();
@@ -90,6 +90,8 @@ namespace SR_CORE_NS {
 
         SetGameMode(!SR_UTILS_NS::Features::Instance().Enabled("EditorOnStartup", false));
 
+        m_autoReloadResources = SR_UTILS_NS::Features::Instance().Enabled("AutoReloadResources", false);
+
         if (!m_scene.Valid() && !m_editor->LoadSceneFromCachedPath()) {
             auto&& scenePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Scenes/New-scene.scene");
 
@@ -105,7 +107,7 @@ namespace SR_CORE_NS {
 
         FlushScene();
 
-        m_updateFrequency = (1.f / (60.f * m_speed)) * CLOCKS_PER_SEC;
+        m_updateFrequency = (1.f / (60.f * m_speed)) * SR_CLOCKS_PER_SEC;
         m_accumulator = m_updateFrequency;
         m_timeStart = Clock::now();
 
@@ -435,6 +437,15 @@ namespace SR_CORE_NS {
 
         SR_HTYPES_NS::Time::Instance().Update();
 
+        const auto now = SR_HTYPES_NS::Time::Instance().Now();
+        const auto deltaTime = now - m_timeStart;
+        const auto dt = static_cast<float_t>(deltaTime.count()) / SR_CLOCKS_PER_SEC / SR_CLOCKS_PER_SEC;
+        m_timeStart = now;
+
+        if (IsNeedReloadResources()) {
+            SR_UTILS_NS::ResourceManager::Instance().ReloadResources(dt);
+        }
+
         FlushScene();
 
         if (m_renderScene.RecursiveLockIfValid()) {
@@ -448,11 +459,6 @@ namespace SR_CORE_NS {
         }
 
         if (m_scene.LockIfValid()) {
-            const auto now = SR_HTYPES_NS::Time::Instance().Now();
-            const auto deltaTime = now - m_timeStart;
-            const auto dt = static_cast<float_t>(deltaTime.count()) / CLOCKS_PER_SEC / CLOCKS_PER_SEC;
-            m_timeStart = now;
-
             m_cmdManager->Update();
 
             m_scene->GetLogicBase()->PostLoad();
@@ -507,14 +513,6 @@ namespace SR_CORE_NS {
             /// В процессе отрисовки сцена могла быть заменена
             m_renderScene.TryUnlock();
         }
-    }
-
-    bool Engine::RegisterLibraries() {
-        SR_LOG("Engine::RegisterLibraries() : registering all libraries...");
-
-        API::RegisterEvoScriptClasses();
-
-        return true;
     }
 
     bool Engine::SetScene(const SR_HTYPES_NS::SafePtr<SR_WORLD_NS::Scene> &scene)  {
@@ -694,45 +692,6 @@ namespace SR_CORE_NS {
         m_sceneQueue.Unlock();
     }
 
-    void Engine::RegisterMigrators() {
-        static const auto GAME_OBJECT_HASH_NAME = SR_HASH_STR("GameObject");
-        SR_UTILS_NS::Migration::Instance().RegisterMigrator(GAME_OBJECT_HASH_NAME, 1004, 1005, [](SR_HTYPES_NS::Marshal& marshal) -> bool {
-            SR_HTYPES_NS::Marshal migrated;
-
-            uint64_t position = marshal.GetPosition();
-
-            migrated.Stream::Write(marshal.Stream::View(), marshal.GetPosition());
-
-            migrated.Write(marshal.Read<bool>());
-            auto name = marshal.Read<std::string>();
-            migrated.Write(name);
-            migrated.Write(marshal.Read<uint64_t>());
-
-            auto&& measurement = static_cast<SR_UTILS_NS::Measurement>(marshal.Read<int8_t>());
-
-            migrated.Write<uint8_t>(static_cast<uint8_t>(measurement));
-
-            switch (measurement) {
-                case SR_UTILS_NS::Measurement::Space2D:
-                case SR_UTILS_NS::Measurement::Space3D:
-                    migrated.Write<SR_MATH_NS::FVector3>(marshal.Read<SR_MATH_NS::Vector3<double>>(SR_MATH_NS::Vector3<double>(0.0)).Cast<SR_MATH_NS::Unit>(), SR_MATH_NS::FVector3(0.f));
-                    migrated.Write<SR_MATH_NS::FVector3>(marshal.Read<SR_MATH_NS::Vector3<double>>(SR_MATH_NS::Vector3<double>(0.0)).Cast<SR_MATH_NS::Unit>(), SR_MATH_NS::FVector3(0.f));
-                    migrated.Write<SR_MATH_NS::FVector3>(marshal.Read<SR_MATH_NS::Vector3<double>>(SR_MATH_NS::Vector3<double>(1.0)).Cast<SR_MATH_NS::Unit>(), SR_MATH_NS::FVector3(1.f));
-                    migrated.Write<SR_MATH_NS::FVector3>(marshal.Read<SR_MATH_NS::Vector3<double>>(SR_MATH_NS::Vector3<double>(1.0)).Cast<SR_MATH_NS::Unit>(), SR_MATH_NS::FVector3(1.f));
-                    SR_FALLTHROUGH;
-                default:
-                    break;
-            }
-
-            migrated.Stream::Write(marshal.Stream::View() + marshal.GetPosition(), marshal.Size() - marshal.GetPosition());
-
-            marshal.SetData(migrated.Stream::View(), migrated.Size());
-            marshal.SetPosition(position);
-
-            return true;
-        });
-    }
-
     void Engine::SetGameMode(bool enabled) {
         m_isGameMode = enabled;
 
@@ -741,5 +700,9 @@ namespace SR_CORE_NS {
         });
 
         m_editor->Enable(!m_isGameMode);
+    }
+
+    bool Engine::IsNeedReloadResources() {
+        return m_autoReloadResources && !IsGameMode();
     }
 }

@@ -330,4 +330,23 @@ namespace SR_GTYPES_NS {
 
         return m_shader->IsBlendEnabled();
     }
+
+    bool Material::ContainsTexture(SR_GTYPES_NS::Texture* pTexture) const {
+        if (!pTexture) {
+            return false;
+        }
+
+        for (auto&& property : m_properties) {
+            if (std::visit([pTexture](ShaderPropertyVariant&& arg) -> bool {
+                if (std::holds_alternative<SR_GTYPES_NS::Texture*>(arg)) {
+                    return std::get<SR_GTYPES_NS::Texture*>(arg) == pTexture;
+                }
+                return false;
+            }, property.data)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

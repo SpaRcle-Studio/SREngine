@@ -71,6 +71,7 @@ namespace SR_CORE_NS {
 
         SR_NODISCARD SR_INLINE ScenePtr GetScene() const { return m_scene; }
         SR_NODISCARD SR_INLINE RenderContextPtr GetRenderContext() const { return m_renderContext; }
+        SR_NODISCARD SR_INLINE RenderScenePtr GetRenderScene() const { return m_renderScene; }
         SR_NODISCARD SR_INLINE WindowPtr GetWindow() const { return m_window; }
         SR_NODISCARD SR_INLINE bool IsActive() const { return m_isActive; }
         SR_NODISCARD SR_INLINE bool IsRun() const { return m_isRun; }
@@ -87,9 +88,8 @@ namespace SR_CORE_NS {
         bool Close();
 
     private:
-        void RegisterMigrators();
-
         bool CreateMainWindow();
+        bool IsNeedReloadResources();
         bool InitializeRender();
         void SynchronizeFreeResources();
 
@@ -97,7 +97,6 @@ namespace SR_CORE_NS {
         void FixedUpdate();
         void Update(float_t dt);
         void DrawCallback();
-        bool RegisterLibraries();
         void WorldThread();
 
         void FlushScene();
@@ -110,6 +109,7 @@ namespace SR_CORE_NS {
         std::atomic<bool> m_isGameMode = false;
         std::atomic<bool> m_isActive = false;
         std::atomic<bool> m_isPaused = false;
+        std::atomic<bool> m_autoReloadResources = false;
 
         float_t m_speed = 1.f;
         float_t m_updateFrequency = 1.f;

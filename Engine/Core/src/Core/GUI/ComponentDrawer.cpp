@@ -259,7 +259,9 @@ namespace SR_CORE_NS::GUI {
         ImGui::SameLine();
         ImGui::BeginGroup();
 
-        Graphics::GUI::DrawValue("Path", pComponent->GetMeshIdentifier(), index);
+        if (auto&& pRawMesh = pComponent->GetRawMesh()) {
+            Graphics::GUI::DrawValue("Path", pRawMesh->GetResourcePath().c_str(), index);
+        }
         Graphics::GUI::DrawValue("Name", pComponent->GetGeometryName(), index);
 
         int32_t meshId = pComponent->GetMeshId();
@@ -315,7 +317,9 @@ namespace SR_CORE_NS::GUI {
         ImGui::SameLine();
         ImGui::BeginGroup();
 
-        Graphics::GUI::DrawValue("Path", pComponent->GetMeshIdentifier(), index);
+        if (auto&& pRawMesh = pComponent->GetRawMesh()) {
+            Graphics::GUI::DrawValue("Path", pRawMesh->GetResourcePath().c_str(), index);
+        }
         Graphics::GUI::DrawValue("Name", pComponent->GetGeometryName(), index);
 
         int32_t meshId = pComponent->GetMeshId();

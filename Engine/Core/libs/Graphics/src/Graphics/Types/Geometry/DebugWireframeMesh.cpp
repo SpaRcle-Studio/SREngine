@@ -85,6 +85,14 @@ namespace SR_GTYPES_NS {
         m_modelMatrix = matrix4X4;
     }
 
+    void DebugWireframeMesh::OnResourceReloaded(SR_UTILS_NS::IResource* pResource) {
+        if (GetRawMesh() == pResource) {
+            OnRawMeshChanged();
+            return;
+        }
+        Mesh::OnResourceReloaded(pResource);
+    }
+
     void DebugWireframeMesh::UseMaterial() {
         Mesh::UseMaterial();
         GetShader()->SetMat4(SHADER_MODEL_MATRIX, m_modelMatrix);
@@ -101,7 +109,7 @@ namespace SR_GTYPES_NS {
 
     std::string DebugWireframeMesh::GetMeshIdentifier() const {
         if (auto&& pRawMesh = GetRawMesh()) {
-            return pRawMesh->GetResourceId() + "|" + std::to_string(GetMeshId());
+            return SR_UTILS_NS::Format("%s|%i|%i", pRawMesh->GetResourceId().c_str(), GetMeshId(), pRawMesh->GetReloadCount());
         }
 
         return Super::GetMeshIdentifier();

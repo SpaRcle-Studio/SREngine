@@ -44,6 +44,7 @@ namespace SR_GTYPES_NS {
 
         void PopulateSkeletonMatrices();
 
+        void OnResourceReloaded(SR_UTILS_NS::IResource* pResource) override;
         void OnRawMeshChanged() override;
         bool Calculate() override;
         void Draw() override;

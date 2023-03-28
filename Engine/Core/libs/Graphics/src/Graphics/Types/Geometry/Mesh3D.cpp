@@ -160,7 +160,7 @@ namespace SR_GTYPES_NS {
 
     std::string Mesh3D::GetMeshIdentifier() const {
         if (auto&& pRawMesh = GetRawMesh()) {
-            return pRawMesh->GetResourceId() + "|" + std::to_string(GetMeshId());
+            return SR_UTILS_NS::Format("%s|%i|%i", pRawMesh->GetResourceId().c_str(), GetMeshId(), pRawMesh->GetReloadCount());
         }
 
         return Super::GetMeshIdentifier();
@@ -174,5 +174,13 @@ namespace SR_GTYPES_NS {
         }
 
         return nullptr;
+    }
+
+    void Mesh3D::OnResourceReloaded(SR_UTILS_NS::IResource* pResource) {
+        if (GetRawMesh() == pResource) {
+            OnRawMeshChanged();
+            return;
+        }
+        Mesh::OnResourceReloaded(pResource);
     }
 }

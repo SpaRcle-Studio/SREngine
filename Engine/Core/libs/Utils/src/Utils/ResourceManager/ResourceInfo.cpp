@@ -152,4 +152,13 @@ namespace SR_UTILS_NS {
         }
         m_reloader = pReloader;
     }
+
+    IResource::Ptr ResourceInfo::GetResource() const {
+        if (m_loaded.size() != 1) {
+            SRHalt("Incorrect function usage!");
+            return nullptr;
+        }
+
+        return *m_loaded.begin();
+    }
 }

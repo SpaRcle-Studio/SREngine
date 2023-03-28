@@ -171,6 +171,14 @@ namespace SR_GTYPES_NS {
         GetRenderContext()->GetCurrentShader()->SetMat4(SHADER_MODEL_MATRIX, m_modelMatrix);
     }
 
+    void SkinnedMesh::OnResourceReloaded(SR_UTILS_NS::IResource* pResource) {
+        if (GetRawMesh() == pResource) {
+            OnRawMeshChanged();
+            return;
+        }
+        Mesh::OnResourceReloaded(pResource);
+    }
+
     void SkinnedMesh::PopulateSkeletonMatrices() {
         auto&& pNewSkeleton = FindSkeleton();
         if (m_skeleton != pNewSkeleton) {
@@ -267,7 +275,7 @@ namespace SR_GTYPES_NS {
 
     std::string SkinnedMesh::GetMeshIdentifier() const {
         if (auto&& pRawMesh = GetRawMesh()) {
-            return pRawMesh->GetResourceId() + "|" + std::to_string(GetMeshId());
+            return SR_UTILS_NS::Format("%s|%i|%i", pRawMesh->GetResourceId().c_str(), GetMeshId(), pRawMesh->GetReloadCount());
         }
 
         return MeshComponent::GetMeshIdentifier();

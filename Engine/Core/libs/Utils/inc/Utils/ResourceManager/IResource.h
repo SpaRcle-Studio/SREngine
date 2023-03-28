@@ -22,6 +22,8 @@ namespace SR_UTILS_NS {
         friend class ResourceType;
         using Super = ResourceContainer;
     public:
+        using Ptr = IResource*;
+
         enum class LoadState : uint8_t {
             Unknown, Loaded, Reloading, Loading, Unloading, Unloaded, Error
         };
@@ -51,6 +53,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD bool IsAlive() const { return m_lifetime > 0; }
         SR_NODISCARD bool IsEnabledAutoRemove() const { return m_autoRemove; }
         SR_NODISCARD uint16_t GetCountUses() const noexcept;
+        SR_NODISCARD uint16_t GetReloadCount() const noexcept { return m_reloadCount; }
         SR_NODISCARD uint64_t GetLifetime() const noexcept { return m_lifetime; }
         SR_NODISCARD std::string_view GetResourceName() const;
         SR_NODISCARD uint64_t GetResourceHashName() const noexcept { return m_resourceHashName; }
@@ -121,6 +124,10 @@ namespace SR_UTILS_NS {
 
         virtual void ReviveResource();
 
+        template<typename T> bool IsResourceType() const noexcept {
+            return m_resourceHashName == SR_COMPILE_TIME_CRC32_TYPE_NAME(T);
+        }
+
     protected:
         const uint64_t m_resourceHashName = 0;
 
@@ -135,6 +142,8 @@ namespace SR_UTILS_NS {
         uint64_t m_resourceHashId = 0;
         uint64_t m_resourceHash = 0;
         uint64_t m_resourceHashPath = 0;
+
+        uint16_t m_reloadCount = 0;
 
         int64_t m_lifetime = 0;
 

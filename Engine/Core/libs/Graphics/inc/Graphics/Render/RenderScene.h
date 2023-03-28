@@ -52,6 +52,7 @@ namespace SR_GRAPH_NS {
         void Render() noexcept;
         void Synchronize();
 
+        void OnResourceReloaded(SR_UTILS_NS::IResource* pResource);
         void OnResize(const SR_MATH_NS::UVector2& size);
 
         /// Можно вызывать не синхронно

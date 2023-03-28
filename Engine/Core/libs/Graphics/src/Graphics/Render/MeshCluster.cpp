@@ -38,6 +38,14 @@ namespace SR_GRAPH_NS {
         return m_shader ? m_shader->GetType() : SR_SRSL_NS::ShaderType::Unknown;
     }
 
+    void ShadedMeshSubCluster::OnResourceReloaded(SR_UTILS_NS::IResource* pResource) {
+        for (auto&& [VBO, meshes] : m_groups) {
+            for (auto&& pMesh : meshes) {
+                pMesh->OnResourceReloaded(pResource);
+            }
+        }
+    }
+
     bool MeshCluster::Add(Types::Mesh* pMesh) noexcept {
         const auto&& pShader = pMesh->GetShader();
 
@@ -141,6 +149,12 @@ namespace SR_GRAPH_NS {
         }
 
         return dirty;
+    }
+
+    void MeshCluster::OnResourceReloaded(SR_UTILS_NS::IResource* pResource) {
+        for (auto&& [pShader, subCluster] : m_subClusters) {
+            subCluster.OnResourceReloaded(pResource);
+        }
     }
 
     bool OpaqueMeshCluster::ChangeCluster(MeshCluster::MeshPtr pMesh) {

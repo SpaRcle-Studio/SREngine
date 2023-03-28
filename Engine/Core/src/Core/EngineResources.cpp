@@ -3,6 +3,7 @@
 //
 
 #include <Core/EngineResources.h>
+#include <Core/Utils/GraphicsResourceReloader.h>
 
 #include <Utils/Types/RawMesh.h>
 
@@ -42,6 +43,11 @@ namespace SR_CORE_NS::Resources {
         /// ------------------------------------------------------------------------------------------------------------
 
         resourcesManager.RegisterReloader<SR_SCRIPTING_NS::Behaviour, SR_SCRIPTING_NS::EvoScriptResourceReloader>();
+
+        resourcesManager.RegisterReloader<SR_HTYPES_NS::RawMesh, SR_CORE_NS::GraphicsResourceReloader>();
+        resourcesManager.RegisterReloader<SR_GTYPES_NS::Texture, SR_CORE_NS::GraphicsResourceReloader>();
+        resourcesManager.RegisterReloader<SR_GTYPES_NS::Material, SR_CORE_NS::GraphicsResourceReloader>();
+        resourcesManager.RegisterReloader<SR_GTYPES_NS::Shader, SR_CORE_NS::GraphicsResourceReloader>();
 
         return true;
     }

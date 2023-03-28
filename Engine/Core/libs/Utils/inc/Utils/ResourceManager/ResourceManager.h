@@ -45,15 +45,15 @@ namespace SR_UTILS_NS {
         }
 
         template<typename T> T* Find(const Path& path) {
-            return dynamic_cast<T*>(Find(SR_COMPILE_TIME_CRC32_TYPE_NAME(T), path.ToString()));
+            return dynamic_cast<T*>(Find(SR_COMPILE_TIME_CRC32_TYPE_NAME(T), path.ToStringRef()));
         }
 
         template<typename T> bool RegisterType() {
             return RegisterType(typeid(T).name(), SR_COMPILE_TIME_CRC32_TYPE_NAME(T));
         }
 
-        template<typename ResourceT, typename ReloaderT> bool RegisterReloader() {
-            return RegisterReloader(new ReloaderT(), SR_COMPILE_TIME_CRC32_TYPE_NAME(ResourceT));
+        template<typename ResourceT, typename ReloaderT, typename ...Args> bool RegisterReloader(Args&&... args) {
+            return RegisterReloader(new ReloaderT(std::forward<Args>(args)...), SR_COMPILE_TIME_CRC32_TYPE_NAME(ResourceT));
         }
 
         /** \warning Call only from IResource parents \brief Register resource in resource manager */
@@ -63,11 +63,13 @@ namespace SR_UTILS_NS {
         bool Destroy(IResource *resource);
 
     public:
-        /** \brief Init resource manager */
         bool Init(const SR_UTILS_NS::Path& resourcesFolder);
         bool Run();
 
         void OnSingletonDestroy() override;
+
+        /// Проверить хэши ресурсов и перезагрузить их, если это требуется
+        void ReloadResources(float_t dt);
 
         void PrintMemoryDump();
 

@@ -38,6 +38,8 @@ namespace SR_UTILS_NS {
         UpdateResources();
         OnReloadDone();
 
+        ++m_reloadCount;
+
         return true;
     }
 
