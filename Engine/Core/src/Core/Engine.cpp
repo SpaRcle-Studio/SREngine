@@ -32,6 +32,7 @@
 #include <Physics/PhysicsLib.h>
 #include <Physics/PhysicsScene.h>
 #include <Physics/3D/Raycast3D.h>
+#include <Physics/PhysicsMaterial.h>
 
 #include <Scripting/Impl/EvoScriptManager.h>
 

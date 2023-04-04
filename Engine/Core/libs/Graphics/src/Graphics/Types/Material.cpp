@@ -56,7 +56,7 @@ namespace SR_GTYPES_NS {
     }
 
     SR_UTILS_NS::IResource* Material::CopyResource(SR_UTILS_NS::IResource* destination) const {
-        SRAssert2(false, "Material is not are copyable!");
+        SRHalt( "Material is not are copyable!");
         return nullptr;
     }
 

@@ -19,6 +19,13 @@ namespace SR_UTILS_NS {
     class Component;
     class GameObject;
 
+    SR_ENUM_NS_CLASS_T(ComponentLoadResult, uint8_t,
+        Success,
+        Migrated,
+        Error,
+        Fatal
+    );
+
     class SR_DLL_EXPORT ComponentManager : public Singleton<ComponentManager> {
         friend class Singleton<ComponentManager>;
         typedef SR_HTYPES_NS::Function<void(Component*)> Event;
@@ -74,7 +81,7 @@ namespace SR_UTILS_NS {
 
         void SetContextInitializer(const ContextInitializerFn& fn);
 
-        Component* Load(SR_HTYPES_NS::Marshal& marshal);
+        std::pair<Component*, ComponentLoadResult> Load(SR_HTYPES_NS::Marshal& marshal);
 
         SR_HTYPES_NS::DataStorage* GetContext() { return &m_context; }
         SR_NODISCARD std::string GetLastComponentName() const;

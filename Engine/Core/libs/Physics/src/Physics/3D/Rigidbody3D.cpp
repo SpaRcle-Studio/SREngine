@@ -31,6 +31,9 @@ namespace SR_PTYPES_NS {
             pRigidbody3D->SetLinearLock(marshal.Read<SR_MATH_NS::BVector3>());
             pRigidbody3D->SetAngularLock(marshal.Read<SR_MATH_NS::BVector3>());
         }
+        else {
+            SRHalt("Rigidbody3D::LoadComponent : unsolved situation.");
+        }
 
         return pComponent;
     }

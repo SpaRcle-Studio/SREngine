@@ -46,6 +46,37 @@ namespace SR_CORE_NS {
             return true;
         });
 
+        static const auto RIGID_BODY_3D_HASH_NAME = SR_HASH_STR("Rigidbody3D");
+        SR_UTILS_NS::Migration::Instance().RegisterMigrator(RIGID_BODY_3D_HASH_NAME, 1004, 1005, [](SR_HTYPES_NS::Marshal& marshal) -> bool {
+            SR_HTYPES_NS::Marshal migrated;
+
+            uint64_t position = marshal.GetPosition();
+
+            migrated.Stream::Write(marshal.Stream::View(), marshal.GetPosition());
+            /// --------------------
+            migrated.Write<int32_t>(marshal.Read<int32_t>());
+
+            migrated.Write<SR_MATH_NS::Vector3<float_t>>(marshal.Read<SR_MATH_NS::Vector3<float_t>>(SR_MATH_NS::Vector3<float_t>(0.f)), SR_MATH_NS::Vector3<float_t>(0.f));
+            migrated.Write<SR_MATH_NS::Vector3<float_t>>(marshal.Read<SR_MATH_NS::Vector3<float_t>>(SR_MATH_NS::Vector3<float_t>(1.f)), SR_MATH_NS::Vector3<float_t>(1.f));
+
+            migrated.Write<float_t>(marshal.Read<float_t>());
+            migrated.Write<bool>(marshal.Read<bool>());
+            migrated.Write<bool>(marshal.Read<bool>());
+            migrated.Write<std::string>("Engine/PhysicsMaterials/DefaultMaterial.physmat");
+
+
+            migrated.Write<SR_MATH_NS::BVector3>(marshal.Read<SR_MATH_NS::BVector3>());
+            migrated.Write<SR_MATH_NS::BVector3>(marshal.Read<SR_MATH_NS::BVector3>());
+
+            /// -------------------- меня наняли дублировать длинные строки потому что я люблю большие длинные прямые комментарии, состоящие исключительно из тире.
+            migrated.Stream::Write(marshal.Stream::View() + marshal.GetPosition(), marshal.Size() - marshal.GetPosition());
+
+            marshal.SetData(migrated.Stream::View(), migrated.Size());
+            marshal.SetPosition(position);
+
+            return true;
+        });
+
         return true;
     }
 }

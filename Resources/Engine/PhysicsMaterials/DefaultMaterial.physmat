@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<PhysicsMaterial>
+    <DynamicFriction Value="0.6"/>
+    <StaticFriction Value="0.6"/>
+
+    <Bounciness Value="0.25"/>
+
+    <FrictionCombine Value="Average"/>
+    <BounceCombine Value="Average"/>
+</PhysicsMaterial>

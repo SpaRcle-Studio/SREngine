@@ -40,6 +40,8 @@ namespace SR_CORE_NS::Resources {
 
         resourcesManager.RegisterType<SR_ANIMATIONS_NS::AnimationClip>();
 
+        resourcesManager.RegisterType<SR_PTYPES_NS::PhysicsMaterial>();
+
         /// ------------------------------------------------------------------------------------------------------------
 
         resourcesManager.RegisterReloader<SR_SCRIPTING_NS::Behaviour, SR_SCRIPTING_NS::EvoScriptResourceReloader>();

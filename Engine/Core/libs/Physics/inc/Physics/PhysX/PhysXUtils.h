@@ -32,6 +32,22 @@ namespace SR_PHYSICS_UTILS_NS {
         return SR_MATH_NS::FVector3(vector3.x, vector3.y, vector3.z);
     }
 
+    static physx::PxCombineMode::Enum CombineToPxCombine(const Combine mode){
+        switch (mode) {
+            case Combine::Minimum:
+                return physx::PxCombineMode::Enum::eMIN;
+            case Combine::Average:
+                return physx::PxCombineMode::Enum::eAVERAGE;
+            case Combine::Maximum:
+                return physx::PxCombineMode::Enum::eMAX;
+            case Combine::Multiply:
+                return physx::PxCombineMode::Enum::eMULTIPLY;
+            default:
+                SRHalt("CombineToPxCombine : Unsolved situation.");
+                return physx::PxCombineMode::Enum::eAVERAGE;
+        }
+    }
+
     PhysXPvdConnection* CreatePvdConnection(physx::PxFoundation* pFoundation, const std::string& ip, uint16_t port, uint32_t timeout) {
         auto&& pPvd = PxCreatePvd(*pFoundation);
         auto&& pTransport = physx::PxDefaultPvdSocketTransportCreate(ip.c_str(), port, timeout);

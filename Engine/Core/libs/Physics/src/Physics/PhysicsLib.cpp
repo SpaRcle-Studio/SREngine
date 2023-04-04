@@ -46,6 +46,13 @@ namespace SR_PHYSICS_NS {
             auto&& library = SR_UTILS_NS::EnumReflector::FromString<LibraryType>(node.GetAttribute("Library").ToString());
             m_activeLibs[space] = library;
         }
+
+        auto&& supportedLibraries = document.Root().GetNode("Physics").TryGetNode("SupportedLibraries");
+
+        for (auto&& node : supportedLibraries.TryGetNodes()) {
+            auto&& library = SR_UTILS_NS::EnumReflector::FromString<LibraryType>(node.Name());
+            m_supportedLibs.insert(library);
+        }
     }
 
     LibraryImpl *PhysicsLibrary::GetLibrary(LibraryType type) {
@@ -115,5 +122,27 @@ namespace SR_PHYSICS_NS {
         SRHalt("PhysicsLibrary::GetActiveLibrary() : unsupported measurement!");
 
         return nullptr;
+    }
+
+    PhysicsLibrary::LibraryTypes PhysicsLibrary::GetSupportedLibraries() const {
+        LibraryTypes types;
+
+    #ifdef SR_PHYSICS_USE_PHYSX
+        if (m_supportedLibs.count(LibraryType::PhysX)){
+            types.emplace_back(LibraryType::PhysX);
+        }
+    #endif
+    #ifdef SR_PHYSICS_USE_BULLET3
+        if (m_supportedLibs.count(LibraryType::Bullet3)){
+            types.emplace_back(LibraryType::Bullet3);
+        }
+    #endif
+    #ifdef SR_PHYSICS_USE_BOX2D
+        if (m_supportedLibs.count(LibraryType::Box2D)){
+            types.emplace_back(LibraryType::Box2D);
+        }
+    #endif
+
+        return types;
     }
 }
