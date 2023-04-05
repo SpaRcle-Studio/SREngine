@@ -64,7 +64,6 @@ namespace SR_CORE_NS {
             migrated.Write<bool>(marshal.Read<bool>());
             migrated.Write<std::string>("Engine/PhysicsMaterials/DefaultMaterial.physmat");
 
-
             migrated.Write<SR_MATH_NS::BVector3>(marshal.Read<SR_MATH_NS::BVector3>());
             migrated.Write<SR_MATH_NS::BVector3>(marshal.Read<SR_MATH_NS::BVector3>());
 

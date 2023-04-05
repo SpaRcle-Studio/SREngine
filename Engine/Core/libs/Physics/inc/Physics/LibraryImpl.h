@@ -12,6 +12,7 @@ namespace SR_PTYPES_NS {
     class Rigidbody3D;
     class CollisionShape;
     class PhysicsMaterialImpl;
+    class Vehicle4W3D;
 }
 
 namespace SR_PHYSICS_NS {
@@ -37,6 +38,8 @@ namespace SR_PHYSICS_NS {
 
         SR_NODISCARD virtual SR_PTYPES_NS::Rigidbody2D* CreateRigidbody2D() { return nullptr; }
         SR_NODISCARD virtual SR_PTYPES_NS::Rigidbody3D* CreateRigidbody3D() { return nullptr; }
+
+        SR_NODISCARD virtual SR_PTYPES_NS::Vehicle4W3D* CreateVehicle4W3D() { return nullptr; }
 
         SR_NODISCARD virtual SR_PHYSICS_NS::PhysicsWorld* CreatePhysicsWorld(Space space) { return nullptr; }
 

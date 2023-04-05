@@ -9,12 +9,12 @@ namespace SR_PTYPES_NS {
 
     }
 
-    Vehicle::ComponentPtr Vehicle::LoadComponent(SR_UTILS_NS::Measurement measurement, SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage) {
+    Vehicle::ComponentPtr Vehicle::LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage) {
         return nullptr;
     }
 
     SR_HTYPES_NS::Marshal::Ptr Vehicle::Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SR_UTILS_NS::SavableFlags flags) const {
-        return nullptr;
+        return Super::Save(pMarshal, flags);
     }
 
     SR_UTILS_NS::Measurement Vehicle::GetMeasurement() const {

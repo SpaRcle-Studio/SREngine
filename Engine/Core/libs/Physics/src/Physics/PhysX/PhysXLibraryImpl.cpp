@@ -10,6 +10,7 @@
 #include <Physics/PhysX/PhysXCollisionShape.h>
 #include <Physics/PhysX/PhysXRigidbody3D.h>
 #include <Physics/PhysX/PhysXMaterialImpl.h>
+#include <Physics/PhysX/PhysXVehicle4W3D.h>
 
 namespace SR_PHYSICS_NS {
     bool PhysXLibraryImpl::Initialize() {
@@ -105,5 +106,9 @@ namespace SR_PHYSICS_NS {
 
     SR_PTYPES_NS::PhysicsMaterialImpl* PhysXLibraryImpl::CreatePhysicsMaterial() {
         return new SR_PTYPES_NS::PhysXMaterialImpl(this);
+    }
+
+    SR_PTYPES_NS::Vehicle4W3D *PhysXLibraryImpl::CreateVehicle4W3D() {
+        return new SR_PTYPES_NS::PhysXVehicle4W3D(this);
     }
 }

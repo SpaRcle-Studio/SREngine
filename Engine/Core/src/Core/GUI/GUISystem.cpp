@@ -717,6 +717,12 @@ bool GUISystem::BeginMenuBar() {
 
         ImGui::Separator();
 
+        if (ImGui::MenuItem("Reset to default")) {
+
+        }
+
+        ImGui::Separator();
+
         if (ImGui::MenuItem("Close all")) {
             Engine::Instance().GetEditor()->CloseAllWidgets();
         }

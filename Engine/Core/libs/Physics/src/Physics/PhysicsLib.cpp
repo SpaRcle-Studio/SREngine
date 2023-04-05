@@ -53,6 +53,13 @@ namespace SR_PHYSICS_NS {
             auto&& library = SR_UTILS_NS::EnumReflector::FromString<LibraryType>(node.Name());
             m_supportedLibs.insert(library);
         }
+
+        const auto&& defaultMaterialPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Engine/PhysicsMaterials/DefaultMaterial.physmat");
+        m_defaultMaterial = SR_PTYPES_NS::PhysicsMaterial::Load(defaultMaterialPath);
+
+        if (m_defaultMaterial) {
+            m_defaultMaterial->AddUsePoint();
+        }
     }
 
     LibraryImpl *PhysicsLibrary::GetLibrary(LibraryType type) {
@@ -144,5 +151,16 @@ namespace SR_PHYSICS_NS {
     #endif
 
         return types;
+    }
+
+    void PhysicsLibrary::OnSingletonDestroy() {
+        if (m_defaultMaterial) {
+            m_defaultMaterial->RemoveUsePoint();
+            m_defaultMaterial = nullptr;
+        }
+
+        SR_UTILS_NS::ResourceManager::Instance().Synchronize(true);
+
+        Singleton::OnSingletonDestroy();
     }
 }

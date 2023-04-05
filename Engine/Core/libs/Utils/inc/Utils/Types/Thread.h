@@ -101,7 +101,7 @@ namespace SR_HTYPES_NS {
         DataStorage* m_context = nullptr;
 
         mutable std::shared_mutex m_mutex;
-        mutable std::atomic<const SR_HTYPES_NS::Function<bool()>*> m_function;
+        mutable std::atomic<const SR_HTYPES_NS::Function<bool()>*> m_function = nullptr;
         mutable std::atomic<bool> m_executeResult = false;
 
     };

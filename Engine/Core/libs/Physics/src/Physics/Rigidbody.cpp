@@ -81,7 +81,13 @@ namespace SR_PTYPES_NS {
             return nullptr;
         }
 
-        pComponent->SetMaterial(PhysicsMaterial::Load(material));
+        if (material.empty()) {
+            pComponent->SetMaterial(SR_PHYSICS_NS::PhysicsLibrary::Instance().GetDefaultMaterial());
+        }
+        else {
+            pComponent->SetMaterial(PhysicsMaterial::Load(material));
+        }
+
         pComponent->SetType(verifyType(pLibrary, type));
         pComponent->SetCenter(center);
         pComponent->GetCollisionShape()->SetSize(size);

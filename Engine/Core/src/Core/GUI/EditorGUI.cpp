@@ -284,6 +284,8 @@ namespace SR_CORE_NS::GUI {
 
         return Engine::Instance().SetScene(SR_WORLD_NS::Scene::Load(scenePath));
     }
+
+    void EditorGUI::ResetToDefault() {
+
+    }
 }
-
-

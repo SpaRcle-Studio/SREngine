@@ -96,6 +96,8 @@ namespace SR_CORE_NS::GUI {
         void CacheScenePath(const SR_UTILS_NS::Path& scenePath);
         bool LoadSceneFromCachedPath();
 
+        void ResetToDefault();
+
     private:
         void OnMouseMove(const SR_UTILS_NS::MouseInputData* data) override;
 
