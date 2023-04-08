@@ -21,6 +21,7 @@
 #include <Graphics/Window/Window.h>
 #include <Core/GUI/AnimatorEditor.h>
 #include <Utils/ECS/Prefab.h>
+#include <Utils/Platform/Platform.h>
 
 namespace SR_CORE_NS::GUI {
     EditorGUI::EditorGUI()
@@ -41,7 +42,7 @@ namespace SR_CORE_NS::GUI {
             Register(widget);
         }
 
-        GetWidget<FileBrowser>()->SetFolder(Helper::ResourceManager::Instance().GetResPath());
+        GetWidget<FileBrowser>()->SetFolder(SR_UTILS_NS::ResourceManager::Instance().GetResPath());
     }
 
     EditorGUI::~EditorGUI() {
@@ -109,9 +110,9 @@ namespace SR_CORE_NS::GUI {
 
         /// widgets
         {
-            const auto path = Helper::ResourceManager::Instance().GetCachePath().Concat("Editor/Configs/EditorWidgets.xml");
+            const auto path = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Editor/Configs/EditorWidgets.xml");
 
-            auto document = Helper::Xml::Document::New();
+            auto document = SR_XML_NS::Document::New();
             auto widgets = document.Root().AppendChild("Widgets");
 
             for (auto&& [name, widget] : GetWidgets())
@@ -140,30 +141,7 @@ namespace SR_CORE_NS::GUI {
 
         m_useDocking = SR_UTILS_NS::Features::Instance().Enabled("EditorWidgetsDocking", true);
 
-        const auto path = Helper::ResourceManager::Instance().GetCachePath().Concat("Editor/Configs/EditorWidgets.xml");
-
-        if (!path.Exists()) {
-            path.Make();
-            auto document = Helper::Xml::Document::New();
-            auto widgets = document.Root().AppendChild("Widgets");
-
-            for (auto&& [name, widget] : GetWidgets())
-                widgets.AppendChild("Widget").NAppendAttribute("Name", name).NAppendAttribute("Open", true);
-
-            document.Save(path.ToString());
-        }
-
-        auto document = Helper::Xml::Document::Load(path);
-        for (const auto& widget : document.Root().TryGetNode("Widgets").TryGetNodes()) {
-            const auto& name = widget.GetAttribute("Name").ToString();
-            if (auto&& pIt = GetWidgets().find(name); pIt != GetWidgets().end()) {
-                if (widget.GetAttribute("Open").ToBool()) {
-                    pIt->second->Open();
-                }
-                else
-                    pIt->second->Close();
-            }
-        }
+        ReloadWindows();
     }
 
     void EditorGUI::Enable(bool value) {
@@ -285,7 +263,51 @@ namespace SR_CORE_NS::GUI {
         return Engine::Instance().SetScene(SR_WORLD_NS::Scene::Load(scenePath));
     }
 
-    void EditorGUI::ResetToDefault() {
+    void EditorGUI::ReloadWindows() {
+        const auto path = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Editor/Configs/EditorWidgets.xml");
 
+        if (!path.Exists()) {
+            path.Create();
+            auto document = SR_XML_NS::Document::New();
+            auto widgets = document.Root().AppendChild("Widgets");
+
+            for (auto&& [name, widget] : GetWidgets())
+                widgets.AppendChild("Widget").NAppendAttribute("Name", name).NAppendAttribute("Open", true);
+
+            document.Save(path.ToString());
+        }
+
+        auto document = SR_XML_NS::Document::Load(path);
+        for (const auto& widget : document.Root().TryGetNode("Widgets").TryGetNodes()) {
+            const auto& name = widget.GetAttribute("Name").ToString();
+            if (auto&& pIt = GetWidgets().find(name); pIt != GetWidgets().end()) {
+                if (widget.GetAttribute("Open").ToBool()) {
+                    pIt->second->Open();
+                }
+                else
+                    pIt->second->Close();
+            }
+        }
+    }
+
+    void EditorGUI::ResetToDefault() {
+        if (!m_cachedScenePath.Valid() && !m_cachedScenePath.Exists()) {
+            /// SR_ERROR("EditorGUI::LoadSceneFromCachedPath : cached file of scene path wasn't found!");
+            /// это не ошибка, движок был запущен в первый раз
+            return;
+        }
+
+        const auto&& defaultConfigPath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Editor/Configs/ImGuiEditor.config");
+        const auto&& defaultWidgetsPath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Editor/Configs/EditorWidgets.xml");
+
+        SR_UTILS_NS::Platform::Copy(SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Editor/Configs/ImGuiEditor.config"),defaultConfigPath);
+        SR_UTILS_NS::Platform::Copy(SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Editor/Configs/EditorWidgets.xml"), defaultWidgetsPath);
+
+        ReloadWindows();
+
+        ImGuiContext& g = *GImGui;
+        if (g.IO.IniFilename)
+            ImGui::LoadIniSettingsFromDisk(g.IO.IniFilename);
+        g.SettingsLoaded = true;
     }
 }

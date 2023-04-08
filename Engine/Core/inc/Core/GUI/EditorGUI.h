@@ -96,6 +96,8 @@ namespace SR_CORE_NS::GUI {
         void CacheScenePath(const SR_UTILS_NS::Path& scenePath);
         bool LoadSceneFromCachedPath();
 
+        void ReloadWindows();
+
         void ResetToDefault();
 
     private:

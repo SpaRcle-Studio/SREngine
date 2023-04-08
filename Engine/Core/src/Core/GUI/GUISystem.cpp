@@ -718,7 +718,7 @@ bool GUISystem::BeginMenuBar() {
         ImGui::Separator();
 
         if (ImGui::MenuItem("Reset to default")) {
-
+            Engine::Instance().GetEditor()->ResetToDefault();
         }
 
         ImGui::Separator();
