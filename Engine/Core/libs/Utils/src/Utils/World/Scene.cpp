@@ -42,7 +42,7 @@ namespace SR_WORLD_NS {
             SR_LOG("Scene::Instance() : instance \"" + name + "\" game object at \"" + GetName() + "\" scene.");
         }
 
-        GameObject::Ptr gm = *(new GameObject(name));
+        GameObject::Ptr gm = new GameObject(name);
 
         RegisterGameObject(gm);
 
@@ -270,7 +270,9 @@ namespace SR_WORLD_NS {
             auto&& pPrefab = Prefab::Load(path);
 
             if (pPrefab) {
-                return pPrefab->GetData()->Copy(this);
+                auto&& instanced = pPrefab->GetData()->Copy(this);
+                pPrefab->CheckResourceUsage();
+                return instanced;
             }
 
             return GameObject::Ptr();

@@ -15,6 +15,7 @@
 #include "../Utils/src/Utils/ECS/GameObject.cpp"
 #include "../Utils/src/Utils/ECS/ISavable.cpp"
 #include "../Utils/src/Utils/ECS/Transform.cpp"
+#include "../Utils/src/Utils/ECS/Entity.cpp"
 #include "../Utils/src/Utils/ECS/EntityManager.cpp"
 #include "../Utils/src/Utils/ECS/Transform3D.cpp"
 #include "../Utils/src/Utils/ECS/Transform2D.cpp"

@@ -279,7 +279,9 @@ namespace SR_GRAPH_NS {
             if (pIt->isDestroyed) {
                 SR_LOG("RenderScene::SortCameras() : free camera...");
 
-                delete pIt->pCamera;
+                pIt->pCamera->AutoFree([](auto&& pData) {
+                    delete pData;
+                });
 
                 pIt = m_cameras.erase(pIt);
             }

@@ -32,7 +32,9 @@ namespace SR_ANIMATIONS_NS {
 
     void Animator::OnDestroy() {
         Super::OnDestroy();
-        delete this;
+        GetThis().AutoFree([](auto&& pData) {
+            delete pData;
+        });
     }
 
     void Animator::FixedUpdate() {

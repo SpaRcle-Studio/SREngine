@@ -114,7 +114,7 @@ namespace Framework::Core::GUI {
 
             DrawSwitchTransform();
 
-            DrawComponents(m_gameObject.DynamicCast<SR_UTILS_NS::IComponentable*>());
+            DrawComponents(dynamic_cast<SR_UTILS_NS::IComponentable*>(m_gameObject.Get()));
 
             m_gameObject.Unlock();
         }
@@ -126,7 +126,7 @@ namespace Framework::Core::GUI {
 
         ImGui::Separator();
 
-        DrawComponents(m_scene.DynamicCast<SR_UTILS_NS::IComponentable*>());
+        DrawComponents(dynamic_cast<SR_UTILS_NS::IComponentable*>(m_scene.Get()));
     }
 
     void Inspector::Update() {
