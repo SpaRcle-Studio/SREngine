@@ -61,8 +61,6 @@ namespace SR_SCRIPTING_NS {
         bool Reload() override;
         void OnDestroy() override;
 
-        void DeleteResource() override;
-
     protected:
         bool m_hasErrors = false;
 

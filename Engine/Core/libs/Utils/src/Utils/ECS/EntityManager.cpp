@@ -7,7 +7,102 @@
 #include <Utils/Common/VectorUtils.h>
 
 namespace SR_UTILS_NS {
-    EntityManager::EntityManager()
+    EntityBranch::EntityBranch(EntityId entityId, std::list<EntityBranch> branches)
+        : m_branches(std::move(branches))
+        , m_id(entityId)
+    { }
+
+    void EntityBranch::Reserve() const {
+        if (m_id != ENTITY_ID_MAX)
+            EntityManager::Instance().Reserve(m_id);
+
+        for (const auto& branch : m_branches)
+            branch.Reserve();
+    }
+
+    void EntityBranch::UnReserve() const {
+        if (m_id != ENTITY_ID_MAX)
+            EntityManager::Instance().TryUnReserve(m_id);
+
+        for (const auto& branch : m_branches)
+            branch.UnReserve();
+    }
+
+    void EntityBranch::Clear() {
+        m_id = ENTITY_ID_MAX;
+        m_branches.clear();
+    }
+
+    ///---------------------------------------------------------------------------------------------------------------------
+
+    EntityPath EntityPath::Concat(const EntityId &id) const {
+        auto path = m_path;
+        path.emplace_back(id);
+        return EntityPath(std::move(path));
+    }
+
+    EntityPath EntityPath::ConcatBack(const EntityId &id) const {
+        auto path = m_path;
+        path.emplace_front(id);
+        return EntityPath(std::move(path));
+    }
+
+    EntityPath& EntityPath::Concat(const EntityId &id) {
+        m_path.emplace_back(id);
+        return *this;
+    }
+
+    EntityPath& EntityPath::ConcatBack(const EntityId &id) {
+        m_path.emplace_front(id);
+        return *this;
+    }
+
+    EntityId EntityPath::Last() const {
+        if (m_path.empty())
+            return ENTITY_ID_MAX;
+        return m_path.back();
+    }
+
+    void EntityPath::Reserve() const {
+        for (EntityId id : m_path) {
+            if (id != ENTITY_ID_MAX)
+                EntityManager::Instance().Reserve(id);
+        }
+    }
+
+    void EntityPath::UnReserve() const {
+        for (EntityId id : m_path) {
+            if (id != ENTITY_ID_MAX)
+                EntityManager::Instance().TryUnReserve(id);
+        }
+    }
+
+    void EntityPath::Clear() {
+        for (EntityId& id : m_path) {
+            id = ENTITY_ID_MAX;
+        }
+        m_path.clear();
+    }
+
+    ///---------------------------------------------------------------------------------------------------------------------
+
+    Entity::Entity()
+        : m_entityId(ENTITY_ID_MAX)
+    {
+        m_entityId = EntityManager::Instance().Register(this);
+    }
+
+    Entity::~Entity() {
+        EntityManager::Instance().Unregister(m_entityId);
+    }
+
+    void Entity::SetEntityPath(const EntityPath &path) {
+        m_entityPath = path;
+    }
+
+    ///---------------------------------------------------------------------------------------------------------------------
+
+    Framework::Helper::EntityManager::EntityManager()
         : m_nextId(ENTITY_ID_MAX)
     { }
 
@@ -16,7 +111,8 @@ namespace SR_UTILS_NS {
 
     #ifdef SR_DEBUG
         if (m_reserved.count(id)) {
-            SRHalt("EntityManager::Reserve() : entity already reserved! Id: " + std::to_string(id));
+            SR_ERROR("EntityManager::Reserve() : entity already reserved! Id: " + std::to_string(id));
+            SRAssert(false);
             return false;
         }
     #endif
@@ -26,13 +122,14 @@ namespace SR_UTILS_NS {
         return true;
     }
 
-    Entity::Ptr EntityManager::GetReserved(const EntityId& id, const EntityAllocator& allocator) {
+    Entity* EntityManager::GetReserved(const EntityId& id, const EntityAllocator& allocator) {
         SR_SCOPED_LOCK
 
     #ifdef SR_DEBUG
         if (m_entities.count(id)) {
-            SRHalt("EntityManager::GetReserved() : entity is registered! Something went wrong... \n\tId: " + std::to_string(id));
-            return Entity::Ptr();
+            SR_ERROR("EntityManager::GetReserved() : entity is registered! Something went wrong... \n\tId: " + std::to_string(id));
+            SRAssert(false);
+            return nullptr;
         }
     #endif
 
@@ -41,16 +138,15 @@ namespace SR_UTILS_NS {
             return allocator();
         }
 
-        SRHalt("Entity id isn't reserved! \n\tId: " + std::to_string(id));
+        SRAssert2(false, "Entity id isn't reserved! \n\tId: " + std::to_string(id));
 
-        return Entity::Ptr();
+        return nullptr;
     }
 
-    EntityId EntityManager::Register(const Entity::Ptr& entity) {
-        SRAssert(entity);
 
+    EntityId EntityManager::Register(Entity* entity) {
         if (entity->GetEntityId() != ENTITY_ID_MAX) {
-            SRHalt("Double entity register!");
+            SRAssert2(false, "Double entity register!");
             return entity->GetEntityId();
         }
 
@@ -82,7 +178,7 @@ namespace SR_UTILS_NS {
         SR_SCOPED_LOCK
 
         if (m_entities.count(id) == 0) {
-            SRHalt0();
+            SRAssert(false);
             return;
         }
 
@@ -108,22 +204,20 @@ namespace SR_UTILS_NS {
         Singleton::OnSingletonDestroy();
     }
 
-    Entity::Ptr EntityManager::FindById(const EntityId &id) const {
+    Entity *EntityManager::FindById(const EntityId &id) const {
         SR_SCOPED_LOCK
 
-        if (!m_entities.count(id)) {
-            return Entity::Ptr();
-        }
+        if (!m_entities.count(id))
+            return nullptr;
 
         return m_entities.at(id);
     }
 
     bool EntityManager::UnReserve(const EntityId &id) {
-        if (TryUnReserve(id)) {
+        if (TryUnReserve(id))
             return true;
-        }
 
-        SRHalt("Entity isn't reserved! Id: " + std::to_string(id));
+        SRAssert2(false, "Entity isn't reserved! Id: " + std::to_string(id));
 
         return false;
     }
@@ -131,9 +225,8 @@ namespace SR_UTILS_NS {
     bool EntityManager::TryUnReserve(const EntityId &id) {
         SR_SCOPED_LOCK
 
-        if (m_reserved.count(id) == 0) {
+        if (m_reserved.count(id) == 0)
             return false;
-        }
 
         m_reserved.erase(id);
 

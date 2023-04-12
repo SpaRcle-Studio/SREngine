@@ -73,9 +73,7 @@ namespace SR_ANIMATIONS_NS {
 
     void Skeleton::OnDestroy() {
         Super::OnDestroy();
-        GetThis().AutoFree([](auto&& pData) {
-            delete pData;
-        });
+        delete this;
     }
 
     void Skeleton::OnLoaded() {

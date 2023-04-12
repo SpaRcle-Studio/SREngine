@@ -84,7 +84,7 @@ namespace SR_UTILS_NS {
 
     Component::GameObjectPtr Component::GetGameObject() const {
         if (auto&& pGameObject = dynamic_cast<SR_UTILS_NS::GameObject*>(m_parent)) {
-            return pGameObject->GetThis().DynamicCast<GameObject>();
+            return pGameObject->GetThis();
         }
 
         return GameObjectPtr();
@@ -101,7 +101,7 @@ namespace SR_UTILS_NS {
             return GameObjectPtr();
         }
 
-        GameObjectPtr root = pParent->GetThis().DynamicCast<GameObject>();
+        GameObjectPtr root = pParent->GetThis();
 
         while (root.Valid()) {
             if (auto&& parent = root->GetParent()) {

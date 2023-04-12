@@ -16,7 +16,9 @@
 #include <Utils/Common/Hashes.h>
 
 namespace SR_UTILS_NS {
-    GameObject::GameObject(std::string name, Transform* pTransform) {
+    GameObject::GameObject(std::string name, Transform* pTransform)
+        : Super(this)
+    {
         SetName(std::move(name));
         SetTransform(pTransform);
         UpdateEntityPath();
@@ -42,22 +44,18 @@ namespace SR_UTILS_NS {
         /// сцену не блокируем, предполагается, что и так в контексте заблокированной сцены работаем
 
         if (auto&& pParent = GetParent()) {
-            auto&& thisPtr = GetThis().DynamicCast<GameObject>();
-            pParent->RemoveChild(thisPtr);
+            pParent->RemoveChild(GetThis());
         }
 
         if (m_scene) {
-            m_scene->Remove(GetThis().DynamicCast<GameObject>());
+            m_scene->Remove(*this);
             while (!m_children.empty()) {
                 (*m_children.begin())->Destroy();
             }
         }
         else {
             while (!m_children.empty()) {
-                auto&& pChild = *m_children.begin();
-                pChild.AutoFree([](auto&& pData) {
-                    pData->Destroy();
-                });
+                (*m_children.begin())->Destroy();
             }
             DestroyComponents();
             DestroyImpl();
@@ -65,7 +63,7 @@ namespace SR_UTILS_NS {
     }
 
     void GameObject::DestroyImpl() {
-        GameObject::Ptr copy = GetThis().DynamicCast<GameObject>();
+        GameObject::Ptr copy = GetThis();
 
         /// это должно быть единственное место,
         /// где мы уничтожаем объект
@@ -98,7 +96,7 @@ namespace SR_UTILS_NS {
             return false;
         }
 
-        if (!child->SetParent(GetThis().DynamicCast<GameObject>())) {
+        if (!child->SetParent(*this)) {
             SR_WARN("GameObject::AddChild() : failed to set parent!");
             return false;
         }
@@ -367,7 +365,7 @@ namespace SR_UTILS_NS {
     }
 
     bool GameObject::UpdateEntityPath() {
-        GameObject::Ptr current = GetThis().DynamicCast<GameObject>();
+        GameObject::Ptr current = *this;
         EntityPath path;
 
         do {
@@ -427,13 +425,13 @@ namespace SR_UTILS_NS {
         if (m_parent) {
             GameObject::Ptr copy = m_parent;
             if (copy.RecursiveLockIfValid()) {
-                copy->RemoveChild(GetThis().DynamicCast<GameObject>());
+                copy->RemoveChild(*this);
                 copy->Unlock();
             }
         }
 
         if (destination.Valid()){
-            return destination->AddChild(GetThis().DynamicCast<GameObject>());
+            return destination->AddChild(*this);
         }
         else {
             if (GetParent()){
@@ -515,12 +513,12 @@ namespace SR_UTILS_NS {
             auto&& tag = marshal.Read<uint64_t>();
 
             if (entityId == UINT64_MAX) {
-                gameObject = new GameObject(name);
+                gameObject = *(new GameObject(name));
             }
             else {
-                SR_UTILS_NS::EntityManager::Instance().GetReserved(entityId, [&gameObject, name]() -> SR_UTILS_NS::Entity::Ptr {
-                    gameObject = new GameObject(name);
-                    return gameObject.DynamicCast<SR_UTILS_NS::Entity>();
+                SR_UTILS_NS::EntityManager::Instance().GetReserved(entityId, [&gameObject, name]() -> SR_UTILS_NS::Entity* {
+                    gameObject = *(new GameObject(name));
+                    return gameObject.DynamicCast<SR_UTILS_NS::Entity*>();
                 });
             }
 
@@ -567,7 +565,7 @@ namespace SR_UTILS_NS {
     }
 
     GameObject::Ptr GameObject::Copy(const GameObject::ScenePtr &scene) const {
-        GameObject::Ptr gameObject = new GameObject(GetName(), GetTransform()->Copy());
+        GameObject::Ptr gameObject = *(new GameObject(GetName(), GetTransform()->Copy()));
 
         gameObject->SetEnabled(IsEnabled());
 
@@ -617,7 +615,7 @@ namespace SR_UTILS_NS {
             return m_parent->GetRoot();
         }
 
-        return GetThis().DynamicCast<GameObject>();
+        return GetThis();
     }
 
     GameObject::Ptr GameObject::Find(const std::string &name) const noexcept {

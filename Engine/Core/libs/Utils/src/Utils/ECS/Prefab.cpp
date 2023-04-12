@@ -11,9 +11,10 @@ namespace SR_UTILS_NS {
     { }
 
     Prefab::~Prefab() {
-        m_data.AutoFree([](auto&& pData) {
-            pData->Destroy();
-        });
+        if (m_data) {
+            m_data->Destroy();
+            m_data = nullptr;
+        }
     }
 
     Prefab* Prefab::Load(const Path& rawPath) {
@@ -45,9 +46,9 @@ namespace SR_UTILS_NS {
     }
 
     bool Prefab::Unload() {
-        m_data.AutoFree([](auto&& pData) {
-            pData->Destroy();
-        });
+        if (m_data) {
+            m_data->Destroy();
+        }
 
         return IResource::Unload();
     }

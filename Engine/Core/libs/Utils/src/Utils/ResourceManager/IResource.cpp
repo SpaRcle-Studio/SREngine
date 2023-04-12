@@ -105,7 +105,7 @@ namespace SR_UTILS_NS {
                 }
                 else {
                     /// так и не зарегистрировали ресурс
-                    DeleteResource();
+                    delete this;
                     return;
                 }
             }

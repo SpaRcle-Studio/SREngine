@@ -22,21 +22,21 @@ namespace SR_UTILS_NS {
         EntityRef& operator=(const EntityRef& other);
 
     public:
-        SR_NODISCARD GameObject::Ptr GetGameObject(GameObject* pFrom) const;
-        SR_NODISCARD bool IsValid() const;
-        void SetRelative(bool relative);
-        void SetPathTo(Entity* pEntity, bool relative);
-
-    private:
         void AddPathItem(EntityRefUtils::Action action);
         void AddPathItem(EntityRefUtils::Action action, const std::string& name);
         void AddPathItem(EntityRefUtils::Action action, const std::string& name, uint16_t index);
 
+    public:
+        SR_NODISCARD GameObject* GetGameObject(GameObject* pFrom) const;
+
+        void SetRelative(bool relative);
+
+    private:
         void Update() const;
 
     private:
         SR_UTILS_NS::EntityRefUtils::RefPath m_path;
-        bool m_relative = false;
+        bool m_relative;
         mutable EntityId m_fromEntityId;
         mutable EntityId m_entityId;
 

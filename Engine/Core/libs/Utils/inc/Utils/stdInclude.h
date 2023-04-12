@@ -7,7 +7,6 @@
 
 #include <Utils/macros.h>
 
-#include <type_traits>
 #include <stdio.h>
 #include <iosfwd>
 #include <regex>

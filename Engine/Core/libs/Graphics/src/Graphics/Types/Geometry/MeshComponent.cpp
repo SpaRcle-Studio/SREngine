@@ -31,15 +31,7 @@ namespace SR_GTYPES_NS {
 
         Component::OnDestroy();
 
-        /// если ресурс уничтожится сразу, то обрабатывать это нужно в контексте SharedPtr
-        if (!IsGraphicsResourceRegistered()) {
-            GetThis().DynamicCast<MeshComponent>().AutoFree([](auto&& pData) {
-                pData->MarkMeshDestroyed();
-            });
-        }
-        else {
-            MarkMeshDestroyed();
-        }
+        MarkMeshDestroyed();
 
         if (renderScene) {
             renderScene->SetDirty();

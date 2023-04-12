@@ -35,9 +35,7 @@ namespace SR_PHYSICS_NS {
             }
 
             if (!pRigidbody->GetParent()) {
-                pRigidbody->AutoFree([](auto&& pData) {
-                    delete pData;
-                });
+                delete pRigidbody;
             }
             else {
                 SRHalt("Something went wrong...");
@@ -150,9 +148,7 @@ namespace SR_PHYSICS_NS {
             }
 
             if (!pRigidbody->GetParent()) {
-                pRigidbody->AutoFree([](auto&& pData) {
-                    delete pData;
-                });
+                delete pRigidbody;
             }
         }
 

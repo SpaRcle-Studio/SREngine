@@ -29,8 +29,8 @@ namespace SR_UTILS_NS {
         return nullptr;
     }
 
-    SR_NODISCARD GameObject::Ptr Transform::GetGameObject() const {
-        return m_gameObject->GetThis().DynamicCast<GameObject>();
+    SR_NODISCARD SR_HTYPES_NS::SharedPtr<GameObject> Transform::GetGameObject() const {
+        return m_gameObject->GetThis();
     }
 
     void Transform::GlobalTranslate(const Math::FVector3& translation) {

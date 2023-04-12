@@ -139,10 +139,4 @@ namespace SR_SCRIPTING_NS {
     SR_UTILS_NS::Component *Behaviour::CopyComponent() const {
         return Behaviour::Load(GetResourcePath());
     }
-
-    void Behaviour::DeleteResource() {
-        GetThis().AutoFree([](auto&& pData) {
-           delete pData;
-        });
-    }
 }

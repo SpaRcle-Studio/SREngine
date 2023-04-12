@@ -9,15 +9,10 @@
 #include <Utils/Types/Function.h>
 
 namespace SR_HTYPES_NS {
-    struct SharedPtrDynamicData {
-        uint32_t m_useCount {};
-        bool m_valid {};
-    };
-
     template<class T> class SR_DLL_EXPORT SharedPtr {
     public:
         SharedPtr() = default;
-        SharedPtr(const T* constPtr); /** NOLINT */
+        explicit SharedPtr(T *ptr);
         SharedPtr(SharedPtr const &ptr);
         SharedPtr(SharedPtr&& ptr) noexcept
             : m_ptr(std::exchange(ptr.m_ptr, { }))
@@ -26,10 +21,10 @@ namespace SR_HTYPES_NS {
         ~SharedPtr(); /// не должен быть виртуальным
 
     public:
-        SR_NODISCARD SR_FORCE_INLINE operator bool() const noexcept { return m_data && m_data->m_valid; } /** NOLINT */
-        SharedPtr<T>& operator=(const SharedPtr<T> &ptr);
-        SharedPtr<T>& operator=(T *ptr);
-        SharedPtr<T>& operator=(SharedPtr<T>&& ptr) noexcept {
+        SR_NODISCARD SR_FORCE_INLINE operator bool() const noexcept { return m_data && m_data->m_valid; }
+        SharedPtr<T> &operator=(const SharedPtr<T> &ptr);
+        SharedPtr<T> &operator=(T *ptr);
+        SharedPtr<T> & operator=(SharedPtr<T>&& ptr) noexcept {
             m_data = std::exchange(ptr.m_data, {});
             m_ptr = std::exchange(ptr.m_ptr, {});
             return *this;
@@ -41,11 +36,13 @@ namespace SR_HTYPES_NS {
         SR_NODISCARD SR_INLINE bool operator!=(const SharedPtr<T>& right) const noexcept {
             return m_ptr != right.m_ptr;
         }
-        template<typename U> SharedPtr<U> DynamicCast() {
+        template<typename U> U DynamicCast() {
             if constexpr (std::is_same_v<T, void>) {
-                return SharedPtr<U>();
+                return nullptr;
             }
-            return SharedPtr<U>(dynamic_cast<U*>(m_ptr));
+            else {
+                return dynamic_cast<U>(m_ptr);
+            }
         }
 
         template<typename U> U ReinterpretCast() {
@@ -53,10 +50,9 @@ namespace SR_HTYPES_NS {
         }
 
         SR_NODISCARD SR_FORCE_INLINE T* Get() const noexcept { return m_ptr; }
-        SR_NODISCARD SR_FORCE_INLINE SharedPtrDynamicData* GetPtrData() const noexcept { return m_data; }
         SR_NODISCARD SR_FORCE_INLINE void* GetRawPtr() const noexcept { return (void*)m_ptr; }
         SR_NODISCARD SharedPtr<T> GetThis() const {
-            return *this;
+            return SharedPtr<T>(*this);
         }
         SR_NODISCARD SR_FORCE_INLINE bool Valid() const noexcept { return m_data && m_data->m_valid; }
 
@@ -72,29 +68,18 @@ namespace SR_HTYPES_NS {
         bool FreeImpl(const SR_HTYPES_NS::Function<void(T *ptr)> &freeFun);
 
     private:
-        SharedPtrDynamicData* m_data = nullptr;
+        struct dynamic_data {
+            uint32_t m_useCount {};
+            bool m_valid {};
+        }* m_data = nullptr;
         T* m_ptr = nullptr;
-
     };
 
-    template<class T> SharedPtr<T>::SharedPtr(const T* constPtr) {
-        T* ptr = const_cast<T*>(constPtr);
-        bool needAlloc = true;
-
-        if constexpr (IsDerivedFrom<SharedPtr, T>::value) {
-            if ((m_data = ptr->GetPtrData())) {
-                ++(m_data->m_useCount);
-                needAlloc = false;
-                m_ptr = ptr;
-            }
-        }
-
-        if (needAlloc) {
-            m_data = new SharedPtrDynamicData{
-                1,     /// m_useCount
-                (bool)(m_ptr = ptr), /// m_valid
-            };
-        }
+    template<class T> SharedPtr<T>::SharedPtr(T *ptr) {
+        m_data = new dynamic_data {
+            1,                  /// m_useCount
+            (bool)(m_ptr = ptr) /// m_valid
+        };
     }
 
     template<class T> SharedPtr<T>::SharedPtr(const SharedPtr &ptr) {
@@ -156,7 +141,7 @@ namespace SR_HTYPES_NS {
             }
 
             if (!isInherit) {
-                m_data = new SharedPtrDynamicData{
+                m_data = new dynamic_data{
                         1,     /// m_useCount
                         false, /// m_valid
                 };
