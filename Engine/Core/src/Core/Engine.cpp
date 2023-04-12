@@ -249,7 +249,7 @@ namespace SR_CORE_NS {
 
             SR_GRAPH("Engine::InitializeRender() : pre-initializing...");
             if (!m_pipeline->PreInit(
-                    64,
+                    1,
                     "SpaRcle Engine", /// App name
                     "SREngine",       /// Engine name
                     SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Engine/Utilities/glslc.exe")))
