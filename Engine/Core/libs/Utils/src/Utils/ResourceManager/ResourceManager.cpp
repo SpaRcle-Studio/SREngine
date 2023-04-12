@@ -156,14 +156,14 @@ namespace SR_UTILS_NS {
             const bool usageNow = pResource->GetCountUses() > 0 || !pResource->IsDestroyed();
 
             if (usageNow) {
-                pResource->m_lifetime = ResourceLifeTime;
+                pResource->SetLifetime(ResourceLifeTime);
             }
             else if (IsLastResource(pResource)) {
-                pResource->m_lifetime -= m_GCDt;
+                pResource->SetLifetime(pResource->GetLifetime() - m_GCDt);
             }
             else {
                 /// нам не нужно ждать завершения времени жизни ресурса, у которого еще есть копии
-                pResource->m_lifetime = 0;
+                pResource->SetLifetime(0);
             }
 
             const bool resourceAlive = !pResource->IsForce() && pResource->IsAlive() && !m_force;
@@ -185,7 +185,7 @@ namespace SR_UTILS_NS {
                 /// инвалидируется, и здесь может потенциально случиться краш, поэтому этот порядок нужно строго союлюдать
 
                 m_destroyed.erase(resourceIt);
-                delete pResource;
+                pResource->DeleteResource();
                 resourceIt = m_destroyed.begin();
             }
         }

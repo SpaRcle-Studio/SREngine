@@ -547,7 +547,7 @@ namespace SR_CORE_NS {
                 else if (auto&& gameObject = dynamic_cast<SR_UTILS_NS::GameObject*>(m_mainCamera->GetParent())) {
                     auto&& pLogic = m_scene->GetLogicBase().DynamicCast<SR_WORLD_NS::SceneCubeChunkLogic*>();
                     if (pLogic && gameObject) {
-                        pLogic->SetObserver(gameObject->GetThis());
+                        pLogic->SetObserver(gameObject);
                     }
                 }
 

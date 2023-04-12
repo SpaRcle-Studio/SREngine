@@ -34,7 +34,7 @@ namespace SR_UTILS_NS {
         return *this;
     }
 
-    GameObject *EntityRef::GetGameObject(GameObject* pFrom) const {
+    GameObject::Ptr EntityRef::GetGameObject(GameObject* pFrom) const {
         auto&& entityManager = EntityManager::Instance();
 
         if (m_entityId != SR_ID_INVALID) {
@@ -45,22 +45,23 @@ namespace SR_UTILS_NS {
             }
         }
 
-        auto&& pGameObject = dynamic_cast<GameObject*>(entityManager.FindById(m_entityId));
+        auto&& pGameObject = entityManager.FindById(m_entityId).DynamicCast<GameObject>();
 
         if (!pGameObject) {
             Update();
-            return dynamic_cast<GameObject*>(entityManager.FindById(m_entityId));
+            return entityManager.FindById(m_entityId).DynamicCast<GameObject>();
         }
 
         return pGameObject;
     }
 
     void EntityRef::Update() const {
-        GameObject* pObject = nullptr;
+        GameObject::Ptr pObject = nullptr;
 
         if (m_relative) {
             auto&& entityManager = EntityManager::Instance();
-            pObject = dynamic_cast<GameObject*>(entityManager.FindById(m_fromEntityId));
+
+            pObject = entityManager.FindById(m_fromEntityId).DynamicCast<GameObject>();
             if (!pObject) {
                 return;
             }
@@ -72,11 +73,11 @@ namespace SR_UTILS_NS {
 
                 switch (pathItem.action) {
                     case EntityRefUtils::Action::Action_Parent:
-                        pObject = pObject->GetParent().Get();
+                        pObject = pObject->GetParent();
                         break;
                     case EntityRefUtils::Action::Action_Child: {
                         if (pathItem.index == static_cast<uint16_t>(SR_ID_INVALID)) {
-                            pObject = pObject->Find(pathItem.hashName).Get();
+                            pObject = pObject->Find(pathItem.hashName);
                         }
                         else {
                             SRHalt0();
@@ -114,5 +115,13 @@ namespace SR_UTILS_NS {
 
     void EntityRef::SetRelative(bool relative) {
         m_relative = relative;
+    }
+
+    void EntityRef::SetPathTo(Entity* pEntity, bool relative) {
+        
+    }
+
+    bool EntityRef::IsValid() const {
+        return false;
     }
 }
