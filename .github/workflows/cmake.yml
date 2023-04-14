@@ -13,7 +13,6 @@ on:
 
 env:
   BUILD_TYPE: Release
-  CC: msvc-14.24.28314
 
 jobs:    
   build:
@@ -32,6 +31,13 @@ jobs:
     - name: Git Submodule Update
       run: git submodule update --init --recursive   
         
+    - name : Setup CMake 
+      uses: jwlawson/actions-setup-cmake@v1.13
+      with:
+        cmake-version: '3.16.0'
+    - name: Use cmake
+      run: cmake --version
+      
     - name: Create Build Environment
       # Some projects don't allow in-source building, so create a separate build directory
       # We'll use this as our working directory for all subsequent commands
@@ -45,7 +51,7 @@ jobs:
       # Note the current convention is to use the -S and -B options here to specify source 
       # and build directories, but this is only available with CMake 3.13 and higher.  
       # The CMake binaries on the Github Actions machines are (as of this writing) 3.12
-      run: cmake $GITHUB_WORKSPACE -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON -DCMAKE_C_COMPILER=msvc-14.24.28314 -DCMAKE_CXX_COMPILER=msvc-14.24.28314 -DCMAKE_BUILD_TYPE=Release
+      run: cmake $GITHUB_WORKSPACE -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON -DCMAKE_C_COMPILER=msvc -DCMAKE_CXX_COMPILER=msvc -DCMAKE_BUILD_TYPE=Release
 
     - name: Build
       working-directory: ${{github.workspace}}/build
