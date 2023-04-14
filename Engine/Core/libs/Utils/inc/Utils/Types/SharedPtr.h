@@ -41,7 +41,7 @@ namespace SR_HTYPES_NS {
         SR_NODISCARD SR_INLINE bool operator!=(const SharedPtr<T>& right) const noexcept {
             return m_ptr != right.m_ptr;
         }
-        template<typename U> SharedPtr<U> DynamicCast() {
+        template<typename U> SharedPtr<U> DynamicCast() const {
             if constexpr (std::is_same_v<T, void>) {
                 return SharedPtr<U>();
             }
@@ -89,7 +89,7 @@ namespace SR_HTYPES_NS {
             }
         }
 
-        if (needAlloc) {
+        if (needAlloc && ptr) {
             m_data = new SharedPtrDynamicData{
                 1,     /// m_useCount
                 (bool)(m_ptr = ptr), /// m_valid
@@ -133,7 +133,7 @@ namespace SR_HTYPES_NS {
         return *this;
     }
 
-    template<class T> SharedPtr<T> &SharedPtr<T>::operator=(T *ptr) {
+    template<class T> SharedPtr<T>& SharedPtr<T>::operator=(T *ptr) {
         if (m_ptr != ptr) {
             if (m_data && m_data->m_useCount <= 1) {
                 SR_SAFE_PTR_ASSERT(!m_data->m_valid, "Ptr was not freed!");
@@ -143,22 +143,20 @@ namespace SR_HTYPES_NS {
                 --(m_data->m_useCount);
             }
 
-            bool isInherit = false;
+            bool needAlloc = true;
 
-            if constexpr (!std::is_same_v<T, void>) {
-                if (auto &&inherit = dynamic_cast<SharedPtr<T> *>(ptr)) {
-                    SR_SAFE_PTR_ASSERT(m_data, "Inherit ptr data invalid!");
-                    if ((m_data = inherit->m_data)) {
-                        ++(m_data->m_useCount);
-                    }
-                    isInherit = true;
+            if constexpr (IsDerivedFrom<SharedPtr, T>::value) {
+                if ((m_data = ptr->GetPtrData())) {
+                    ++(m_data->m_useCount);
+                    needAlloc = false;
+                    m_ptr = ptr;
                 }
             }
 
-            if (!isInherit) {
+            if (needAlloc && ptr) {
                 m_data = new SharedPtrDynamicData{
                         1,     /// m_useCount
-                        false, /// m_valid
+                        true, /// m_valid
                 };
             }
         }

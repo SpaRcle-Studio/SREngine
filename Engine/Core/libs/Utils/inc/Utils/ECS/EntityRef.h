@@ -11,10 +11,9 @@ namespace SR_UTILS_NS {
     class GameObject;
     class Component;
 
-    class EntityRef {
+    class EntityRef final {
     public:
-        EntityRef();
-        explicit EntityRef(bool relative);
+        explicit EntityRef(const EntityRefUtils::OwnerRef& owner);
 
         EntityRef(const EntityRef& other) noexcept;
         EntityRef(EntityRef&& other) noexcept;
@@ -22,23 +21,25 @@ namespace SR_UTILS_NS {
         EntityRef& operator=(const EntityRef& other);
 
     public:
-        SR_NODISCARD GameObject::Ptr GetGameObject(GameObject* pFrom) const;
+        SR_NODISCARD GameObject::Ptr GetGameObject() const;
         SR_NODISCARD bool IsValid() const;
+        SR_NODISCARD bool IsRelative() const { return m_relative; }
+
         void SetRelative(bool relative);
-        void SetPathTo(Entity* pEntity, bool relative);
+        void SetPathTo(Entity::Ptr pEntity);
+        void SetOwner(const EntityRefUtils::OwnerRef& owner);
 
     private:
-        void AddPathItem(EntityRefUtils::Action action);
-        void AddPathItem(EntityRefUtils::Action action, const std::string& name);
-        void AddPathItem(EntityRefUtils::Action action, const std::string& name, uint16_t index);
-
-        void Update() const;
+        void UpdateTarget() const;
+        void UpdatePath();
 
     private:
         SR_UTILS_NS::EntityRefUtils::RefPath m_path;
+
         bool m_relative = false;
-        mutable EntityId m_fromEntityId;
-        mutable EntityId m_entityId;
+
+        EntityRefUtils::OwnerRef m_owner;
+        mutable Entity::Ptr m_target;
 
     };
 }

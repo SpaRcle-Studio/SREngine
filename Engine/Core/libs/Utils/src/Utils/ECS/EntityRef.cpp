@@ -5,123 +5,74 @@
 #include <Utils/ECS/EntityRef.h>
 
 namespace SR_UTILS_NS {
-    EntityRef::EntityRef(bool relative)
-        : m_relative(relative)
-        , m_fromEntityId(SR_ID_INVALID)
-        , m_entityId(SR_ID_INVALID)
+    EntityRef::EntityRef(const EntityRefUtils::OwnerRef& owner)
+        : m_owner(owner)
     { }
 
-    EntityRef::EntityRef()
-        : EntityRef(true)
+    EntityRef::EntityRef(EntityRef&& other) noexcept
+        : m_path(SR_UTILS_NS::Exchange(other.m_path, { }))
+        , m_relative(SR_UTILS_NS::Exchange(other.m_relative, { }))
+        , m_owner(SR_UTILS_NS::Exchange(other.m_owner, { }))
+        , m_target(SR_UTILS_NS::Exchange(other.m_target, { }))
     { }
-
-    EntityRef::EntityRef(EntityRef&& other) noexcept {
-        /// TODO
-    }
 
     EntityRef::EntityRef(const EntityRef &other) noexcept
         : m_path(other.m_path)
         , m_relative(other.m_relative)
-        , m_fromEntityId(other.m_fromEntityId)
-        , m_entityId(other.m_entityId)
+        , m_owner(other.m_owner)
+        , m_target(other.m_target)
     { }
 
-    EntityRef &EntityRef::operator=(const EntityRef &other) {
+    EntityRef &EntityRef::operator=(const EntityRef& other) {
         m_path = other.m_path;
         m_relative = other.m_relative;
-        m_fromEntityId = other.m_fromEntityId;
-        m_entityId = other.m_entityId;
+        m_owner = other.m_owner;
+        m_target = other.m_target;
         return *this;
     }
 
-    GameObject::Ptr EntityRef::GetGameObject(GameObject* pFrom) const {
-        auto&& entityManager = EntityManager::Instance();
-
-        if (m_entityId != SR_ID_INVALID) {
-            const EntityId fromId = pFrom ? pFrom->GetEntityId() : SR_ID_INVALID;
-            if (m_fromEntityId != fromId) {
-                m_entityId = SR_ID_INVALID;
-                m_fromEntityId = fromId;
-            }
+    GameObject::Ptr EntityRef::GetGameObject() const {
+        if (!m_target) {
+            UpdateTarget();
         }
 
-        auto&& pGameObject = entityManager.FindById(m_entityId).DynamicCast<GameObject>();
-
-        if (!pGameObject) {
-            Update();
-            return entityManager.FindById(m_entityId).DynamicCast<GameObject>();
-        }
-
-        return pGameObject;
+        return m_target.DynamicCast<GameObject>();
     }
 
-    void EntityRef::Update() const {
-        GameObject::Ptr pObject = nullptr;
+    void EntityRef::UpdatePath() {
+        if (!EntityRefUtils::IsOwnerValid(m_owner)) {
+            SRHalt("Invalid owner!");
+            return;
+        }
 
-        if (m_relative) {
-            auto&& entityManager = EntityManager::Instance();
-
-            pObject = entityManager.FindById(m_fromEntityId).DynamicCast<GameObject>();
-            if (!pObject) {
-                return;
-            }
-
-            for (auto&& pathItem : m_path) {
-                if (!pObject) {
-                    return;
-                }
-
-                switch (pathItem.action) {
-                    case EntityRefUtils::Action::Action_Parent:
-                        pObject = pObject->GetParent();
-                        break;
-                    case EntityRefUtils::Action::Action_Child: {
-                        if (pathItem.index == static_cast<uint16_t>(SR_ID_INVALID)) {
-                            pObject = pObject->Find(pathItem.hashName);
-                        }
-                        else {
-                            SRHalt0();
-                        }
-
-                        break;
-                    }
-                    case EntityRefUtils::Action::Action_Component:
-                        break;
-                    case EntityRefUtils::Action::Action_GameObject:
-                        break;
-                }
-            }
+        if (IsRelative()) {
+            m_path = EntityRefUtils::CalculateRelativePath(m_owner, m_target);
+        }
+        else {
+            m_path = EntityRefUtils::CalculatePath(m_target);
         }
     }
 
-    void EntityRef::AddPathItem(EntityRefUtils::Action action, const std::string& name) {
-        AddPathItem(action, name, SR_ID_INVALID);
-    }
-
-    void EntityRef::AddPathItem(EntityRefUtils::Action action, const std::string &name, uint16_t index) {
-        EntityRefUtils::PathItem pathItem;
-
-        pathItem.action = action;
-        pathItem.index = index;
-        pathItem.hashName = SR_HASH_STR(name);
-
-        m_path.emplace_back(pathItem);
-    }
-
-    void EntityRef::AddPathItem(EntityRefUtils::Action action) {
-        static const std::string string;
-        AddPathItem(action, string, SR_ID_INVALID);
+    void EntityRef::UpdateTarget() const {
+        m_target = EntityRefUtils::GetEntity(m_owner, m_path);
     }
 
     void EntityRef::SetRelative(bool relative) {
         m_relative = relative;
+        UpdatePath();
     }
 
-    void EntityRef::SetPathTo(Entity* pEntity, bool relative) {
-        
+    void EntityRef::SetPathTo(Entity::Ptr pEntity) {
+        m_target = pEntity;
+        UpdatePath();
     }
 
     bool EntityRef::IsValid() const {
-        return false;
+        return m_target && EntityRefUtils::IsOwnerValid(m_owner);
+    }
+
+    void EntityRef::SetOwner(const EntityRefUtils::OwnerRef& owner) {
+        m_owner = owner;
+        UpdatePath();
     }
 }
