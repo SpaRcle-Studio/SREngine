@@ -5,6 +5,8 @@ if (CMAKE_SIZEOF_VOID_P EQUAL 4)
     message(FATAL_ERROR "SpaRcle Engine supports only x64 systems!")
 endif()
 
+message(${CMAKE_VERSION})
+
 set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -lpthread")
 set(CMAKE_CXX_STANDARD 20)
 
