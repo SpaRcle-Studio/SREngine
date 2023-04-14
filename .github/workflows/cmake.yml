@@ -14,30 +14,19 @@ on:
 env:
   BUILD_TYPE: Release
 
-jobs:
-  setup: 
-    name: Setting up the environment 
-    runs-on: windows-latest
-    
-    steps:
-      - name: Install Vulkan SDK
-        run: curl "https://sdk.lunarg.com/sdk/download/1.3.211.0/windows/VulkanSDK-1.3.211.0-Installer.exe" -OutFile "C:\VulkanSDK-1.3.211.0-Installer.exe"
-        shell: powershell
-      
-      - name: Setup Vulkan SDK
-        run: |
-          cd C:\
-          start VulkanSDK-1.3.211.0-Installer.exe --accept-licenses --default-answer --confirm-command install
-        shell: cmd
-    
-    
+jobs:    
   build:
-    name: CMake Build
-    needs: setup
+    name: Installing Vulkan SDK and CMake Build
     runs-on: windows-latest
 
     steps:
     - uses: actions/checkout@v3
+    
+    - name: setup-vk-sdk
+      uses: TWoolhouse/setup-vulkan-sdk@v1.1.0
+      with:
+        # SDK Version to install
+        version: 1.3.211.0
 
     - name: Configure CMake
       run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
