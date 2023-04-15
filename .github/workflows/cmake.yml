@@ -13,7 +13,7 @@ on:
 
 env:
   BUILD_TYPE: Release
-  COMPILER_PATH: '${{github.workspace}}/MSVC/19.24.28314/bin/Hostx64/x64/cl.exe'
+  COMPILER_PATH: 'C:/Microsoft Visual Studio/2019/Enterprise/VC/Tools/MSVC/19.24.28314/bin/Hostx64/x64/cl.exe'
 
 jobs:    
   build:
@@ -23,17 +23,30 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     
-    - name : Setup MSVC
-      uses: microsoft/setup-msbuild@v1.1
-      with:
-        vs-version: '16.4.0'
-        msbuild-architecture: x64
-        vswhere-path: '${{github.workspace}}/MSVC'
+    # - name : Setup MSVC
+    #   uses: microsoft/setup-msbuild@v1.1
+    #  with:
+      #  vs-version: '16.4.0'
+     #   msbuild-architecture: x64
+     #   vswhere-path: '${{github.workspace}}/MSVC'
         
-    - name : Check MSVC Version
-      run : |
-        cd '${{github.workspace}}/MSVC'
-        dir
+    - name : Install MSVC
+      run: curl "https://download.visualstudio.microsoft.com/download/pr/f6473c9f-a5f6-4249-af28-c2fd14b6a0fb/a75e5c5a84e004db8fe43e54584bd14add06f6c6eb480e9631a3668a30ff960e/vs_Enterprise.exe" -OutFile "C:\vs_Enterprise.exe"
+      shell: powershell
+      
+    - name: Setup MSVC
+      run: |
+          cd C:\
+          vs_Enterprise.exe --layout .\vs_Enterprise
+          cd C:\vs_Enterprise
+          vs_setup.exe --nocache --wait --noUpdateInstaller --noWeb --allWorkloads --includeRecommended --includeOptional --quiet --norestart
+          dir
+      shell: cmd
+      
+    #- name : Check MSVC Version
+     # run : |
+      #  cd '${{github.workspace}}/MSVC'
+       # dir
     
     - name: Setup Vulkan SDK
       uses: TWoolhouse/setup-vulkan-sdk@v1.1.0
