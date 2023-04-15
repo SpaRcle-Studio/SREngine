@@ -31,11 +31,18 @@ jobs:
     - name: Git Submodule Update
       run: git submodule update --init --recursive   
         
+    - name : Setup MSVC
+      uses: microsoft/setup-msbuild@v1.1
+      with:
+        vs-version: '16.4.2'
+        msbuild-architecture: x64
+    
     - name : Setup CMake 
       uses: jwlawson/actions-setup-cmake@v1.13
       with:
         cmake-version: '3.16.0'
-    - name: Use cmake
+        
+    - name: CMake --Version
       run: cmake --version
       
     - name: Create Build Environment
