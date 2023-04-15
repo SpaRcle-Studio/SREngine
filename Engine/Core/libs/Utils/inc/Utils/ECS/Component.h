@@ -59,7 +59,7 @@ namespace SR_UTILS_NS {
         /// Вызывается при загрузке компонента на игровой объект
         virtual void OnLoaded() { m_isComponentLoaded = true; }
         /// Вызывается после добавления компонента к игровому объекту
-        virtual void OnAttached() { m_isAttached = true; }
+        virtual void OnAttached() { m_isAttached = true; SRAssert(GetParent()); }
         /// Вызывается кода компонент убирается с объекта, либо объект уничтожается
         virtual void OnDestroy() { SetParent(nullptr); }
 

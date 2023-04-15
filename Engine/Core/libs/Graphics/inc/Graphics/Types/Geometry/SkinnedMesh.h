@@ -13,7 +13,7 @@
 
 namespace SR_GTYPES_NS {
     class SkinnedMesh final : public MeshComponent, public SR_HTYPES_NS::IRawMeshHolder {
-        SR_ENTITY_SET_VERSION(1001);
+        SR_ENTITY_SET_VERSION(1002);
         SR_INITIALIZE_COMPONENT(SkinnedMesh);
     public:
         SkinnedMesh();

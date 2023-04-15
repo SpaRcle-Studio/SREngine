@@ -43,6 +43,8 @@ namespace SR_UTILS_NS {
     void Component::CheckActivity() {
         auto&& pParent = dynamic_cast<SR_UTILS_NS::GameObject*>(m_parent);
 
+        SRAssert1Once(pParent);
+
         /// если родителя нет, или он отличается от ожидаемого, то будем считать что родитель активен
         const bool isActive = m_isEnabled && (!pParent || pParent->m_isActive);
         if (isActive == m_isActive) {
@@ -87,6 +89,8 @@ namespace SR_UTILS_NS {
             return pGameObject->GetThis().DynamicCast<GameObject>();
         }
 
+        SRHalt0();
+
         return GameObjectPtr();
     }
 
@@ -98,6 +102,7 @@ namespace SR_UTILS_NS {
         auto&& pParent = dynamic_cast<SR_UTILS_NS::GameObject*>(m_parent);
 
         if (!pParent) {
+            SRHalt0();
             return GameObjectPtr();
         }
 
@@ -119,6 +124,8 @@ namespace SR_UTILS_NS {
         if (auto&& pGameObject = dynamic_cast<SR_UTILS_NS::GameObject*>(m_parent)) {
             return pGameObject->GetTransform();
         }
+
+        SRHalt0();
 
         return nullptr;
     }

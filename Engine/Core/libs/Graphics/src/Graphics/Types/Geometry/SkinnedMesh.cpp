@@ -102,6 +102,8 @@ namespace SR_GTYPES_NS {
 
         pMarshal->Write<std::string>(m_material ? m_material->GetResourceId() : "None");
 
+        pMarshal = m_skeletonRef.Save(pMarshal);
+
         return pMarshal;
     }
 
@@ -117,7 +119,11 @@ namespace SR_GTYPES_NS {
             return nullptr;
         }
 
-        auto&& pMesh = Mesh::Load(SR_UTILS_NS::Path(path, true), type, id);
+        auto&& pMesh = dynamic_cast<SkinnedMesh*>(Mesh::Load(SR_UTILS_NS::Path(path, true), type, id));
+
+        if (pMesh) {
+            pMesh->GetSkeleton().Load(marshal);
+        }
 
         if (pMesh && material != "None") {
             if (auto&& pMaterial = SR_GTYPES_NS::Material::Load(SR_UTILS_NS::Path(material, true))) {
@@ -268,6 +274,7 @@ namespace SR_GTYPES_NS {
         if (auto&& pComponent = dynamic_cast<SkinnedMesh*>(MeshComponent::CopyComponent())) {
             pComponent->SetRawMesh(GetRawMesh());
             pComponent->SetMeshId(GetMeshId());
+            pComponent->m_skeletonRef = m_skeletonRef.Copy(pComponent);
             return pComponent;
         }
 

@@ -161,7 +161,9 @@ namespace SR_CORE_NS::GUI {
         const bool open = ImGui::TreeNodeEx((void*)(intptr_t)id, flags, "%s", name.c_str());
 
         for (auto&& gameObject : m_selected) {
-            ExpandPath(gameObject->GetParent());
+            if (gameObject) {
+                ExpandPath(gameObject->GetParent());
+            }
         }
 
         ContextMenu(root, id);

@@ -168,6 +168,8 @@ namespace Framework::Core::GUI {
         pIComponentable->ForEachComponent([&](SR_UTILS_NS::Component* component) -> bool {
             SR_UTILS_NS::Component* copyPtrComponent = component;
 
+            SRAssert1Once(copyPtrComponent->GetParent());
+
             if (ImGui::BeginPopupContextWindow("InspectorMenu")) {
                 if (ImGui::BeginMenu("Remove component")) {
                     if (ImGui::MenuItem(component->GetComponentName().c_str())) {

@@ -6,21 +6,28 @@
 #define SRENGINE_ENTITYREF_H
 
 #include <Utils/ECS/EntityRefUtils.h>
+#include <Utils/Types/Marshal.h>
 
 namespace SR_UTILS_NS {
     class GameObject;
     class Component;
 
-    class EntityRef final {
+    class EntityRef final : public SR_UTILS_NS::NonCopyable {
     public:
+        EntityRef() = default;
         explicit EntityRef(const EntityRefUtils::OwnerRef& owner);
 
-        EntityRef(const EntityRef& other) noexcept;
         EntityRef(EntityRef&& other) noexcept;
 
-        EntityRef& operator=(const EntityRef& other);
+        EntityRef& operator=(EntityRef&& other);
 
     public:
+        SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save(SR_HTYPES_NS::Marshal::Ptr pMarshal) const;
+        SR_NODISCARD EntityRef Copy(const EntityRefUtils::OwnerRef& owner) const;
+
+        void Save(SR_HTYPES_NS::Marshal& marshal) const;
+        void Load(SR_HTYPES_NS::Marshal& marshal);
+
         SR_NODISCARD GameObject::Ptr GetGameObject() const;
         SR_NODISCARD Component::Ptr GetComponent() const;
         SR_NODISCARD bool IsValid() const;
@@ -32,10 +39,10 @@ namespace SR_UTILS_NS {
 
     private:
         void UpdateTarget() const;
-        void UpdatePath();
+        void UpdatePath() const;
 
     private:
-        SR_UTILS_NS::EntityRefUtils::RefPath m_path;
+        mutable SR_UTILS_NS::EntityRefUtils::RefPath m_path;
 
         bool m_relative = false;
 

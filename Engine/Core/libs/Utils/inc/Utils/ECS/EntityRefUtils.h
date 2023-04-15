@@ -8,12 +8,14 @@
 #include <Utils/Common/Enumerations.h>
 #include <Utils/World/Scene.h>
 #include <Utils/ECS/Entity.h>
+#include <Utils/ECS/Component.h>
+#include <Utils/ECS/GameObject.h>
 
 namespace SR_UTILS_NS::EntityRefUtils {
     using OwnerRef = std::variant<Entity::Ptr, SR_WORLD_NS::Scene::Ptr>;
 
     SR_ENUM_NS_CLASS_T(Action, uint8_t,
-        Action_SceneRoot, Action_Parent, Action_Child, Action_Component, Action_GameObject
+        Action_Parent, Action_Child, Action_Component, Action_GameObject
     );
 
     struct PathItem {
@@ -31,6 +33,8 @@ namespace SR_UTILS_NS::EntityRefUtils {
 
     typedef std::vector<PathItem> RefPath;
 
+    SR_MAYBE_UNUSED static SR_WORLD_NS::Scene::Ptr GetSceneFromOwner(const OwnerRef& owner);
+
     SR_MAYBE_UNUSED static Entity::Ptr GetEntity(const OwnerRef& owner, const RefPath& path);
 
     SR_MAYBE_UNUSED static RefPath CalculatePath(const OwnerRef& from);
@@ -45,16 +49,30 @@ namespace SR_UTILS_NS::EntityRefUtils {
 
         for (const PathItem& item : path) {
             switch (item.action) {
-                case Action::Action_SceneRoot: {
-                    pEntity = nullptr;
-                    break;
-                }
                 case Action::Action_Parent: {
-                    if (auto&& pGameObject = pEntity.DynamicCast<GameObject>()) {
+                    GameObject::Ptr pGameObject = pEntity.DynamicCast<GameObject>();
+
+                    if (!pGameObject) {
+                        pGameObject = std::visit([](OwnerRef&& arg) -> GameObject::Ptr {
+                            if (std::holds_alternative<SR_UTILS_NS::Entity::Ptr>(arg)) {
+                                auto&& pEntity = std::get<SR_UTILS_NS::Entity::Ptr>(arg);
+
+                                if (auto&& pComponent = pEntity.DynamicCast<Component>()) {
+                                    return pComponent->GetGameObject();
+                                }
+
+                                return pEntity.DynamicCast<GameObject>();
+                            }
+                            SRHaltOnce0();
+                            return GameObject::Ptr();
+                        }, owner);
+                    }
+
+                    if (pGameObject) {
                         pEntity = pGameObject->GetParent().DynamicCast<Entity>();
                         break;
                     }
-                    SRHalt0();
+                    SRHaltOnce0();
                     return nullptr;
                 }
                 case Action::Action_GameObject: {
@@ -62,24 +80,60 @@ namespace SR_UTILS_NS::EntityRefUtils {
                         pEntity = pComponent->GetGameObject().DynamicCast<Entity>();
                         break;
                     }
-                    SRHalt0();
+                    SRHaltOnce0();
                     return nullptr;
                 }
                 case Action::Action_Child: {
-                    if (auto&& pGameObject = pEntity.DynamicCast<GameObject>()) {
-                        uint16_t index = item.index;
-                        for (auto&& pChild : pGameObject->GetChildrenRef()) {
-                            if (pChild->GetHashName() != item.hashName) {
-                                continue;
+                    const std::vector<SR_UTILS_NS::GameObject::Ptr>* tree = nullptr;
+
+                    if (!pEntity) {
+                        tree = std::visit([](OwnerRef&& arg) -> std::vector<SR_UTILS_NS::GameObject::Ptr>* {
+                            if (std::holds_alternative<SR_UTILS_NS::Entity::Ptr>(arg)) {
+                                if (auto&& gm = std::get<SR_UTILS_NS::Entity::Ptr>(arg).DynamicCast<GameObject>()) {
+                                    return &gm->GetChildrenRef();
+                                }
+                                else if (auto&& pComponent = std::get<SR_UTILS_NS::Entity::Ptr>(arg).DynamicCast<Component>()) {
+                                    return &pComponent->GetGameObject()->GetChildrenRef();
+                                }
+                                SRHaltOnce0();
+                                return { };
                             }
-                            if (index > 0) {
-                                --index;
-                                continue;
+                            else if (std::holds_alternative<SR_WORLD_NS::Scene::Ptr>(arg)) {
+                                return &std::get<SR_WORLD_NS::Scene::Ptr>(arg)->GetRootGameObjects();
                             }
-                            pEntity = pChild.DynamicCast<Entity>();
+                            else {
+                                SRHaltOnce0();
+                                return { };
+                            }
+                        }, owner);
+                    }
+                    else if (auto&& pGameObject = pEntity.DynamicCast<GameObject>()) {
+                        tree = &pGameObject->GetChildrenRef();
+                    }
+
+                    if (!tree) {
+                        SRHaltOnce0();
+                        return nullptr;
+                    }
+
+                    uint16_t index = item.index;
+                    bool found = false;
+                    for (auto&& pChild : *tree) {
+                        if (pChild->GetHashName() != item.hashName) {
+                            continue;
                         }
+                        if (index > 0) {
+                            --index;
+                            continue;
+                        }
+                        pEntity = pChild.DynamicCast<Entity>();
+                        found = true;
+                    }
+
+                    if (found) {
                         break;
                     }
+
                     return nullptr;
                 }
                 case Action::Action_Component: {
@@ -100,7 +154,7 @@ namespace SR_UTILS_NS::EntityRefUtils {
                     return nullptr;
                 }
                 default:
-                    SRHalt0();
+                    SRHaltOnce0();
                     break;
             }
         }
@@ -112,10 +166,6 @@ namespace SR_UTILS_NS::EntityRefUtils {
         RefPath refPath;
 
         if (from.index() == 1) {
-            PathItem item = {
-                .action = Action::Action_SceneRoot
-            };
-            refPath.emplace_back(item);
             return std::move(refPath);
         }
 
@@ -124,19 +174,10 @@ namespace SR_UTILS_NS::EntityRefUtils {
         while (pFromEntity) {
             /// ---------------------- [ Component ] ----------------------
             if (auto&& pComponent = pFromEntity.DynamicCast<Component>()) {
-                auto&& pParent = pComponent->GetParent();
-
-                if (dynamic_cast<SR_WORLD_NS::Scene*>(pParent)) {
-                    PathItem item = {
-                        .action = Action::Action_SceneRoot
-                    };
-                    refPath.emplace_back(item);
-                    break;
-                }
-                else if (auto&& pGameObject = dynamic_cast<GameObject*>(pParent)) {
+                if (auto&& pParent = pComponent->GetParent()) {
                     uint16_t componentIndex = 0;
 
-                    for (auto&& pComponentIteration : pGameObject->GetComponents()) {
+                    for (auto&& pComponentIteration : pParent->GetComponents()) {
                         if (pComponent == pComponentIteration) {
                             break;
                         }
@@ -152,7 +193,13 @@ namespace SR_UTILS_NS::EntityRefUtils {
                     };
 
                     refPath.emplace_back(item);
-                    pFromEntity = pGameObject;
+
+                    if (auto&& pGameObject = dynamic_cast<GameObject*>(pParent)) {
+                        pFromEntity = pGameObject;
+                    }
+                    else {
+                        pFromEntity = nullptr;
+                    }
                 }
                 else {
                     SRHalt0();
@@ -162,17 +209,11 @@ namespace SR_UTILS_NS::EntityRefUtils {
             else if (auto&& pGameObject = pFromEntity.DynamicCast<GameObject>()) {
                 auto&& pParent = pGameObject->GetParent();
 
-                if (!pParent) {
-                    PathItem item = {
-                        .action = Action::Action_SceneRoot
-                    };
-                    refPath.emplace_back(item);
-                    break;
-                }
+                auto&& tree = pParent ? pParent->GetChildrenRef() : pGameObject->GetScene()->GetRootGameObjects();
 
                 uint16_t objectIndex = 0;
 
-                for (auto&& pChild : pParent->GetChildrenRef()) {
+                for (auto&& pChild : tree) {
                     if (pChild == pGameObject) {
                         break;
                     }
@@ -220,7 +261,7 @@ namespace SR_UTILS_NS::EntityRefUtils {
             ++offset;
         }
 
-        for (int32_t i = fromPath.size() - 1; i >= offset; --i) {
+        for (int32_t i = fromPath.size() - 2; i >= offset; --i) {
             PathItem item = {
                 .action = Action::Action_Parent
             };
@@ -246,6 +287,28 @@ namespace SR_UTILS_NS::EntityRefUtils {
                 SRHalt0();
                 return false;
             }
+        }, owner);
+    }
+
+    SR_WORLD_NS::Scene::Ptr GetSceneFromOwner(const OwnerRef& owner) {
+        return std::visit([](OwnerRef&& arg) -> SR_WORLD_NS::Scene::Ptr {
+            if (std::holds_alternative<SR_UTILS_NS::Entity::Ptr>(arg)) {
+                SR_UTILS_NS::Entity::Ptr pEntity = std::get<SR_UTILS_NS::Entity::Ptr>(arg);
+
+                if (auto&& pComponent = pEntity.DynamicCast<Component>()) {
+                    return pComponent->GetGameObject()->GetScene()->GetThis();
+                }
+                else if (auto&& pGameObject = pEntity.DynamicCast<GameObject>()) {
+                    return pGameObject->GetScene()->GetThis();
+                }
+            }
+            else if (std::holds_alternative<SR_WORLD_NS::Scene::Ptr>(arg)) {
+                return std::get<SR_WORLD_NS::Scene::Ptr>(arg);
+            }
+
+            SRHalt0();
+
+            return SR_WORLD_NS::Scene::Ptr();
         }, owner);
     }
 }
