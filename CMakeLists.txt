@@ -12,6 +12,9 @@ set(CMAKE_CXX_STANDARD 20)
 
 # add_subdirectory(Engine)
 
+SET(CMAKE_EXE_LINKER_FLAGS_PROFILE "")
+SET(CMAKE_EXE_LINKER_FLAGS_CHECKED "")
+
 add_subdirectory(Engine/Core)
 
 add_executable(SREngine main.cpp)
