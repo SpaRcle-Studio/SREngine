@@ -13,6 +13,7 @@ on:
 
 env:
   BUILD_TYPE: Release
+  COMPILER_PATH: '${{github.workspace}}/MSVC/19.24.28314/bin/Hostx64/x64/cl.exe'
 
 jobs:    
   build:
@@ -34,8 +35,9 @@ jobs:
     - name : Setup MSVC
       uses: microsoft/setup-msbuild@v1.1
       with:
-        vs-version: '16.4.2'
+        vs-version: '16.4.0'
         msbuild-architecture: x64
+        vswhere-path: '${{github.workspace}}/MSVC'
     
     - name : Setup CMake 
       uses: jwlawson/actions-setup-cmake@v1.13
@@ -58,7 +60,9 @@ jobs:
       # Note the current convention is to use the -S and -B options here to specify source 
       # and build directories, but this is only available with CMake 3.13 and higher.  
       # The CMake binaries on the Github Actions machines are (as of this writing) 3.12
-      run: cmake $GITHUB_WORKSPACE -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON -DCMAKE_C_COMPILER=msvc -DCMAKE_CXX_COMPILER=msvc -DCMAKE_BUILD_TYPE=Release
+      run: cmake -D CMAKE_C_COMPILER=$COMPILER_PATH -D CMAKE_CXX_COMPILER $COMPILER_PATH $GITHUB_WORKSPACE
+        # cmake -G "MSVC" -D CMAKE_C_COMPILER=msvc -D CMAKE_CXX_COMPILER=msvc $GITHUB_WORKSPACE
+        # cmake $GITHUB_WORKSPACE -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON -DCMAKE_C_COMPILER=msvc -DCMAKE_CXX_COMPILER=msvc -DCMAKE_BUILD_TYPE=Release
 
     - name: Build
       working-directory: ${{github.workspace}}/build
