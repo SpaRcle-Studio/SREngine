@@ -36,6 +36,7 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD bool ExecuteInEditMode() const override { return true; }
         SR_NODISCARD SR_FORCE_INLINE bool IsCanUpdate() const noexcept override { return true; }
         SR_NODISCARD std::string GetMeshIdentifier() const override;
+        SR_NODISCARD SR_UTILS_NS::EntityRef& GetSkeleton() { return m_skeletonRef; }
 
         SR_NODISCARD Component* CopyComponent() const override;
 

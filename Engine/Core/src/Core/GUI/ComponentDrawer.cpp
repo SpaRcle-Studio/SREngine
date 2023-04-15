@@ -343,6 +343,15 @@ namespace SR_CORE_NS::GUI {
             }
         }
 
+        ImGui::Button(SR_FORMAT_C("Skeleton##SkeletonMeshBtn%i", index));
+
+        if (GUISystem::Instance().BeginDragDropTargetWindow("Hierarchy##Payload")) {
+            if (auto payload = ImGui::AcceptDragDropPayload("Hierarchy##Payload"); payload != NULL && payload->Data) {
+                std::list<SR_UTILS_NS::GameObject::Ptr> gameObjects = *(std::list<SR_UTILS_NS::GameObject::Ptr>*)(payload->Data);
+            }
+            ImGui::EndDragDropTarget();
+        }
+
         ImGui::SameLine();
         ImGui::BeginGroup();
 

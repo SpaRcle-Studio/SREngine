@@ -82,7 +82,7 @@ namespace SR_HTYPES_NS {
         bool needAlloc = true;
 
         if constexpr (IsDerivedFrom<SharedPtr, T>::value) {
-            if ((m_data = ptr->GetPtrData())) {
+            if (ptr && (m_data = ptr->GetPtrData())) {
                 ++(m_data->m_useCount);
                 needAlloc = false;
                 m_ptr = ptr;
@@ -146,7 +146,7 @@ namespace SR_HTYPES_NS {
             bool needAlloc = true;
 
             if constexpr (IsDerivedFrom<SharedPtr, T>::value) {
-                if ((m_data = ptr->GetPtrData())) {
+                if (ptr && (m_data = ptr->GetPtrData())) {
                     ++(m_data->m_useCount);
                     needAlloc = false;
                     m_ptr = ptr;
