@@ -20,6 +20,7 @@
 #include "src/Core/GUI/SceneRunner.cpp"
 #include "src/Core/GUI/Guizmo.cpp"
 #include "src/Core/GUI/AnimatorEditor.cpp"
+#include "src/Core/GUI/DragNDropHelper.cpp"
 
 #include "src/Core/Parsers/BlueprintParser.cpp"
 

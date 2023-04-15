@@ -349,7 +349,7 @@ namespace SR_CORE_NS::GUI {
         if (auto&& pRawMesh = pComponent->GetRawMesh()) {
             Graphics::GUI::DrawValue("Path", pRawMesh->GetResourcePath().c_str(), index);
         }
-        0x0000ffff0000ffff0000;
+
         Graphics::GUI::DrawValue("Name", pComponent->GetGeometryName(), index);
 
         int32_t meshId = pComponent->GetMeshId();
@@ -362,7 +362,7 @@ namespace SR_CORE_NS::GUI {
         Graphics::GUI::DrawValue("Vertices count", pComponent->GetVerticesCount(), index);
         Graphics::GUI::DrawValue("Indices count", pComponent->GetIndicesCount(), index);
 
-        SR_CORE_GUI_NS::DragDropTargetEntityRef(pComponent->GetSkeleton(), "Hierarchy##Payload", "Skeleton", index, 260.f);
+        SR_CORE_GUI_NS::DragDropTargetEntityRef(context, pComponent->GetSkeleton(), "Hierarchy##Payload", "Skeleton", index, 260.f);
 
         ImGui::Separator();
 

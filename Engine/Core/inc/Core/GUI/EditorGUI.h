@@ -34,7 +34,7 @@ namespace SR_CORE_NS {
     enum class EditorIcon : uint32_t;
 }
 
-namespace SR_CORE_NS::GUI {
+namespace SR_CORE_GUI_NS {
     class VisualScriptEditor;
     class Inspector;
     class WorldEdit;

@@ -160,6 +160,10 @@ namespace SR_CORE_NS::GUI {
         const uint64_t id = root->GetEntityId();
         const bool open = ImGui::TreeNodeEx((void*)(intptr_t)id, flags, "%s", name.c_str());
 
+        for (auto&& gameObject : m_selected) {
+            ExpandPath(gameObject->GetParent());
+        }
+
         ContextMenu(root, id);
 
         CheckSelected(root);
@@ -311,15 +315,7 @@ namespace SR_CORE_NS::GUI {
                 m_scene.Unlock();
             }
 
-            {
-                SR_LOCK_GUARD
-                m_selected = selected;
-#ifdef SR_DEBUG
-                for (auto&& ptr : m_selected) {
-                    SRAssert(ptr);
-                }
-#endif
-            }
+            SetSelectedImpl(selected);
         }
     }
 
@@ -391,6 +387,16 @@ namespace SR_CORE_NS::GUI {
             SRAssert(ptr);
         }
 #endif
+        m_needExpand = true;
     }
 
+    void Hierarchy::ExpandPath(const SR_UTILS_NS::GameObject::Ptr& gm) { /** NOLINT */
+        if (!gm) {
+            return;
+        }
+        const uint64_t id = gm->GetEntityId();
+        ImGuiWindow* window = ImGui::GetCurrentWindow();
+        ImGui::TreeNodeSetOpen(window->GetID((void*)(intptr_t)id), true);
+        ExpandPath(gm->GetParent());
+    }
 }
