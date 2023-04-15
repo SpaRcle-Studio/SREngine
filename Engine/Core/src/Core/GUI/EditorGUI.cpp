@@ -291,12 +291,6 @@ namespace SR_CORE_NS::GUI {
     }
 
     void EditorGUI::ResetToDefault() {
-        if (!m_cachedScenePath.Valid() && !m_cachedScenePath.Exists()) {
-            /// SR_ERROR("EditorGUI::LoadSceneFromCachedPath : cached file of scene path wasn't found!");
-            /// это не ошибка, движок был запущен в первый раз
-            return;
-        }
-
         const auto&& defaultConfigPath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Editor/Configs/ImGuiEditor.config");
         const auto&& defaultWidgetsPath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Editor/Configs/EditorWidgets.xml");
 
