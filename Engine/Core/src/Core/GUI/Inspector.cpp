@@ -270,7 +270,7 @@ namespace Framework::Core::GUI {
             transform->SetTranslation(translation);
         }
 
-        auto&& rotation = transform->GetRotation();
+        auto&& rotation = transform->GetRotation();  
         if (Graphics::GUI::DrawVec3Control("Rotation", rotation))
             transform->SetRotation(rotation);
 
