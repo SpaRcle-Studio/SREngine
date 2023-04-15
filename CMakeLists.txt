@@ -10,4 +10,6 @@ message(${CMAKE_VERSION})
 set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -lpthread")
 set(CMAKE_CXX_STANDARD 20)
 
-add_subdirectory(Engine)
+# add_subdirectory(Engine)
+
+add_executable(SREngine main.cpp)
