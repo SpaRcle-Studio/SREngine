@@ -362,7 +362,7 @@ namespace SR_CORE_NS::GUI {
         Graphics::GUI::DrawValue("Vertices count", pComponent->GetVerticesCount(), index);
         Graphics::GUI::DrawValue("Indices count", pComponent->GetIndicesCount(), index);
 
-        SR_CORE_GUI_NS::DragDropTargetEntityRef(context, pComponent->GetSkeleton(), "Hierarchy##Payload", "Skeleton", index, 260.f);
+        SR_CORE_GUI_NS::DragDropTargetEntityRef(context, pComponent->GetSkeleton(), "Skeleton", index, 260.f);
 
         ImGui::Separator();
 

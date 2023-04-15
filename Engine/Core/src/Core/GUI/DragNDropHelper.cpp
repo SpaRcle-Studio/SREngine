@@ -32,7 +32,7 @@ namespace SR_CORE_GUI_NS {
         return false;
     }
 
-    bool DragDropTargetEntityRef(EditorGUI* pContext, SR_UTILS_NS::EntityRef& entityRef, const char* payloadType, const char* id, int32_t index, float_t width) {
+    bool DragDropTargetEntityRef(EditorGUI* pContext, SR_UTILS_NS::EntityRef& entityRef, const char* id, int32_t index, float_t width) {
         std::string preview;
 
         if (auto&& pGameObject = entityRef.GetGameObject()) {
@@ -47,22 +47,31 @@ namespace SR_CORE_GUI_NS {
 
         bool changed = false;
 
-        if (ImGui::BeginChild(SR_FORMAT_C("%s-%s-%i", id, payloadType, index), ImVec2(width, 50), true)) {
+        if (ImGui::BeginChild(SR_FORMAT_C("%s-%i", id, index), ImVec2(width, 50), true)) {
             ImGui::Text("%s:", id);
 
             ImGui::SameLine();
 
-            if (ImGui::BeginChild(SR_FORMAT_C("%s-%s-%i-1", id, payloadType, index), ImVec2(200, 20), true)) {
+            if (ImGui::BeginChild(SR_FORMAT_C("%s-%i-1", id, index), ImVec2(200, 20), true)) {
                 ImGui::Text("%s", preview.c_str());
 
-                if (BeginDragDropTargetWindow(payloadType)) {
-                    if (auto&& payload = ImGui::AcceptDragDropPayload(payloadType); payload != nullptr && payload->Data) {
-                        std::list<SR_UTILS_NS::GameObject::Ptr> gameObjects = *(std::list<SR_UTILS_NS::GameObject::Ptr>*) (payload->Data);
+                if (ImGui::BeginDragDropTarget()) {
+                    if (auto&& payload = ImGui::AcceptDragDropPayload("Hierarchy##Payload"); payload != nullptr && payload->Data) {
+                        std::list<SR_UTILS_NS::GameObject::Ptr> gameObjects = *(std::list<SR_UTILS_NS::GameObject::Ptr>*)(payload->Data);
                         if (!gameObjects.empty()) {
                             entityRef.SetPathTo(gameObjects.front().DynamicCast<SR_UTILS_NS::Entity>());
                             changed = true;
                         }
                     }
+
+                    if (auto&& payload = ImGui::AcceptDragDropPayload("InspectorComponent##Payload"); payload != nullptr && payload->Data) {
+                        std::list<SR_UTILS_NS::Component::Ptr> components = *(std::list<SR_UTILS_NS::Component::Ptr>*)(payload->Data);
+                        if (!components.empty()) {
+                            entityRef.SetPathTo(components.front()->DynamicCast<SR_UTILS_NS::Entity>());
+                            changed = true;
+                        }
+                    }
+
                     ImGui::EndDragDropTarget();
                 }
 
@@ -86,7 +95,7 @@ namespace SR_CORE_GUI_NS {
             ImGui::SameLine();
 
             bool relative = entityRef.IsRelative();
-            if (ImGui::Checkbox(SR_FORMAT_C("Relative##%s-%s-%i", id, payloadType, index), &relative)) {
+            if (ImGui::Checkbox(SR_FORMAT_C("Relative##%s-%i", id, index), &relative)) {
                 entityRef.SetRelative(relative);
                 changed = true;
             }

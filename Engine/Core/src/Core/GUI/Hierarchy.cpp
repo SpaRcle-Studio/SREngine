@@ -199,6 +199,12 @@ namespace SR_CORE_NS::GUI {
         if (ImGui::BeginDragDropTarget()) {
             ImGui::Separator();
 
+            if (auto&& pPayload = ImGui::GetDragDropPayload(); pPayload && strcmp(pPayload->DataType, "InspectorComponent##Payload") == 0) {
+                if (m_selected.count(root) == 0) {
+                    SelectGameObject(root);
+                }
+            }
+
             if (auto payload = ImGui::AcceptDragDropPayload("Hierarchy##Payload"); payload != NULL && payload->Data) {
                 /*for (auto&& ptr : *(std::list<Helper::GameObject::Ptr>*)(payload->Data)) {
                     if (ptr.RecursiveLockIfValid()) {

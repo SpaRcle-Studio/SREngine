@@ -55,20 +55,33 @@ namespace SR_CORE_NS::GUI {
 
             ++index;
 
-            bool enabled = pComponent->IsEnabled();
-            if (ImGui::Checkbox(SR_UTILS_NS::Format("##%s-%i-checkbox", name.c_str(), index).c_str(), &enabled)) {
-                pComponent->SetEnabled(enabled);
+            if (ImGui::BeginChild(SR_FORMAT_C("cmp-%s-%i"))) {
+                bool enabled = pComponent->IsEnabled();
+                if (ImGui::Checkbox(SR_UTILS_NS::Format("##%s-%i-checkbox", name.c_str(), index).c_str(), &enabled)) {
+                    pComponent->SetEnabled(enabled);
+                }
+
+                ImGui::SameLine();
+
+                if (ImGui::CollapsingHeader(SR_UTILS_NS::Format("[%i] %s", index, pComponent->GetComponentName().c_str()).c_str())) {
+                    ComponentDrawer::DrawComponent(pComponent, context, index);
+                }
+
+                if (!ImGui::GetDragDropPayload() && ImGui::BeginDragDropSource(ImGuiDragDropFlags_SourceAllowNullID)) {
+                    m_pointersHolder = { component->DynamicCast<SR_UTILS_NS::Component>() };
+                    ImGui::SetDragDropPayload("InspectorComponent##Payload", &m_pointersHolder, sizeof(std::vector<SR_UTILS_NS::Component::Ptr>), ImGuiCond_Once);
+                    ImGui::Text("%s ->", pComponent->GetComponentName().c_str());
+                    ImGui::EndDragDropSource();
+                }
+
+                ImGui::EndChild();
             }
-
-            ImGui::SameLine();
-
-            if (ImGui::CollapsingHeader(SR_UTILS_NS::Format("[%i] %s", index, component->GetComponentName().c_str()).c_str()))
-                ComponentDrawer::DrawComponent(pComponent, context, index);
 
             return dynamic_cast<SR_UTILS_NS::Component*>(pComponent);
         }
 
     private:
+        std::list<SR_UTILS_NS::Component::Ptr> m_pointersHolder;
         SR_UTILS_NS::GameObject::Ptr m_gameObject;
         Hierarchy* m_hierarchy = nullptr;
         SR_WORLD_NS::Scene::Ptr m_scene;
