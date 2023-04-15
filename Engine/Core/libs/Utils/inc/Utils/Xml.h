@@ -189,8 +189,8 @@ namespace SR_UTILS_NS::Xml {
         }
 
         template<typename T> T GetAttribute() const {
-            if constexpr (std::is_same<T, Helper::Math::FColor>()) {
-                Helper::Math::FColor color;
+            if constexpr (std::is_same<T, SR_MATH_NS::FColor>()) {
+                SR_MATH_NS::FColor color;
 
                 color.r = GetAttribute("R").ToFloat();
                 color.g = GetAttribute("G").ToFloat();
@@ -199,8 +199,8 @@ namespace SR_UTILS_NS::Xml {
 
                 return color;
             }
-            if constexpr (std::is_same<T, Helper::Math::FVector4>()) {
-                Helper::Math::FVector4 vector4;
+            if constexpr (std::is_same<T, SR_MATH_NS::FVector4>()) {
+                SR_MATH_NS::FVector4 vector4;
 
                 vector4.x = GetAttribute("X").ToFloat();
                 vector4.y = GetAttribute("Y").ToFloat();
@@ -209,24 +209,32 @@ namespace SR_UTILS_NS::Xml {
 
                 return vector4;
             }
-            else if constexpr (std::is_same<T, Helper::Math::FVector2>()) {
-                Helper::Math::FVector2 vector2;
+            else if constexpr (std::is_same<T, SR_MATH_NS::FVector2>()) {
+                SR_MATH_NS::FVector2 vector2;
 
                 vector2.x = GetAttribute("X").ToFloat();
                 vector2.y = GetAttribute("Y").ToFloat();
 
                 return vector2;
             }
-            else if constexpr (std::is_same<T, Helper::Math::UVector2>()) {
-                Helper::Math::UVector2 vector2;
+            else if constexpr (std::is_same<T, SR_MATH_NS::UVector2>()) {
+                SR_MATH_NS::UVector2 vector2;
 
                 vector2.x = GetAttribute("X").ToUInt();
                 vector2.y = GetAttribute("Y").ToUInt();
 
                 return vector2;
             }
-            else if constexpr (std::is_same<T, Helper::Math::FVector3>()) {
-                Helper::Math::FVector3 vector3;
+            else if constexpr (std::is_same<T, SR_MATH_NS::IVector2>()) {
+                SR_MATH_NS::IVector2 vector2;
+
+                vector2.x = GetAttribute("X").ToInt();
+                vector2.y = GetAttribute("Y").ToInt();
+
+                return vector2;
+            }
+            else if constexpr (std::is_same<T, SR_MATH_NS::FVector3>()) {
+                SR_MATH_NS::FVector3 vector3;
 
                 vector3.x = GetAttribute("X").ToFloat();
                 vector3.y = GetAttribute("Y").ToFloat();
@@ -234,8 +242,8 @@ namespace SR_UTILS_NS::Xml {
 
                 return vector3;
             }
-            else if constexpr (std::is_same<T, Helper::Math::IVector3>()) {
-                Helper::Math::IVector3 vector3;
+            else if constexpr (std::is_same<T, SR_MATH_NS::IVector3>()) {
+                SR_MATH_NS::IVector3 vector3;
 
                 vector3.x = GetAttribute("X").ToInt();
                 vector3.y = GetAttribute("Y").ToInt();
@@ -243,8 +251,8 @@ namespace SR_UTILS_NS::Xml {
 
                 return vector3;
             }
-            else if constexpr (std::is_same<T, Helper::Math::UVector3>()) {
-                Helper::Math::UVector3 vector3;
+            else if constexpr (std::is_same<T, SR_MATH_NS::UVector3>()) {
+                SR_MATH_NS::UVector3 vector3;
 
                 vector3.x = GetAttribute("X").ToUInt();
                 vector3.y = GetAttribute("Y").ToUInt();
@@ -277,32 +285,41 @@ namespace SR_UTILS_NS::Xml {
 
             bool hasErrors = false;
 
-            if constexpr (std::is_same<T, Helper::Math::FColor>()) {
+            if constexpr (std::is_same<T, SR_MATH_NS::FColor>()) {
                 hasErrors |= AppendAttribute("R", value.r);
                 hasErrors |= AppendAttribute("G", value.g);
                 hasErrors |= AppendAttribute("B", value.b);
                 hasErrors |= AppendAttribute("A", value.a);
             }
-            if constexpr (std::is_same<T, Helper::Math::FVector4>()) {
+            if constexpr (std::is_same<T, SR_MATH_NS::FVector4>()) {
                 hasErrors |= AppendAttribute("X", value.x);
                 hasErrors |= AppendAttribute("Y", value.y);
                 hasErrors |= AppendAttribute("Z", value.z);
                 hasErrors |= AppendAttribute("W", value.w);
             }
-            else if constexpr (std::is_same<T, Helper::Math::FVector2>()) {
+            else if constexpr (std::is_same<T, SR_MATH_NS::FVector2>()) {
                 hasErrors |= AppendAttribute("X", value.x);
                 hasErrors |= AppendAttribute("Y", value.y);
             }
-            else if constexpr (std::is_same<T, Helper::Math::IVector2>()) {
+            else if constexpr (std::is_same<T, SR_MATH_NS::UVector2>()) {
                 hasErrors |= AppendAttribute("X", value.x);
                 hasErrors |= AppendAttribute("Y", value.y);
             }
-            else if constexpr (std::is_same<T, Helper::Math::FVector3>()) {
+            else if constexpr (std::is_same<T, SR_MATH_NS::IVector2>()) {
+                hasErrors |= AppendAttribute("X", value.x);
+                hasErrors |= AppendAttribute("Y", value.y);
+            }
+            else if constexpr (std::is_same<T, SR_MATH_NS::FVector3>()) {
                 hasErrors |= AppendAttribute("X", value.x);
                 hasErrors |= AppendAttribute("Y", value.y);
                 hasErrors |= AppendAttribute("Z", value.z);
             }
-            else if constexpr (std::is_same<T, Helper::Math::IVector3>()) {
+            else if constexpr (std::is_same<T, SR_MATH_NS::IVector3>()) {
+                hasErrors |= AppendAttribute("X", value.x);
+                hasErrors |= AppendAttribute("Y", value.y);
+                hasErrors |= AppendAttribute("Z", value.z);
+            }
+            else if constexpr (std::is_same<T, SR_MATH_NS::UVector3>()) {
                 hasErrors |= AppendAttribute("X", value.x);
                 hasErrors |= AppendAttribute("Y", value.y);
                 hasErrors |= AppendAttribute("Z", value.z);
@@ -471,9 +488,9 @@ namespace SR_UTILS_NS::Xml {
         [[nodiscard]] bool Valid() const { return m_valid; }
     };
 
-    template<bool NeedConvert> static Helper::Math::FColor NodeToColor(const Xml::Node& node) {
+    template<bool NeedConvert> static SR_MATH_NS::FColor NodeToColor(const Xml::Node& node) {
         if constexpr(NeedConvert) {
-            return Math::FColor(
+            return SR_MATH_NS::FColor(
                     node.TryGetAttribute("r").ToFloat(0.f) / 255.f,
                     node.TryGetAttribute("g").ToFloat(0.f) / 255.f,
                     node.TryGetAttribute("b").ToFloat(0.f) / 255.f,
@@ -481,7 +498,7 @@ namespace SR_UTILS_NS::Xml {
             );
         }
         else {
-            return Math::FColor(
+            return SR_MATH_NS::FColor(
                     node.TryGetAttribute("r").ToFloat(0.f),
                     node.TryGetAttribute("g").ToFloat(0.f),
                     node.TryGetAttribute("b").ToFloat(0.f),
@@ -490,7 +507,7 @@ namespace SR_UTILS_NS::Xml {
         }
     }
 
-    SR_MAYBE_UNUSED static void AppendColorNode(Xml::Node& node, const Math::FColor& color) {
+    SR_MAYBE_UNUSED static void AppendColorNode(Xml::Node& node, const SR_MATH_NS::FColor& color) {
         node.AppendChild("Color")
             .NAppendAttribute("r", color.r * 255.f)
             .NAppendAttribute("g", color.g * 255.f)

@@ -68,6 +68,8 @@ namespace SR_GRAPH_NS {
     private:
         std::atomic<WinAPI::StyleState> m_styleState;
 
+        SR_MATH_NS::IVector2 m_position;
+
         HWND      m_hWnd       = nullptr;
         HDC       m_hDC        = nullptr;
         HGLRC     m_hRC        = nullptr;

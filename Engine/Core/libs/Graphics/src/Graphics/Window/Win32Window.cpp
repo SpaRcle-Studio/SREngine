@@ -112,6 +112,11 @@ namespace SR_GRAPH_NS {
                 m_isFocused = false;
                 return DefWindowProc(hwnd, msg, wParam, lParam);
             }
+            case WM_MOVE: {
+                m_position.x = (int)(short) LOWORD(lParam);
+                m_position.y = (int)(short) HIWORD(lParam);
+                return DefWindowProc(hwnd, msg, wParam, lParam);
+            }
             case WM_SIZE: {
                 switch (wParam) {
                     case SIZE_MINIMIZED: m_state = WindowState::Collapsed; break;
@@ -180,7 +185,7 @@ namespace SR_GRAPH_NS {
     }
 
     SR_MATH_NS::IVector2 Win32Window::GetPosition() const {
-        HWND hWndParent = GetParent(m_hWnd);
+        /*HWND hWndParent = GetParent(m_hWnd);
         POINT p = {0};
 
         int32_t offsetY = m_headerEnabled ? (31) : 0;
@@ -188,7 +193,9 @@ namespace SR_GRAPH_NS {
 
         MapWindowPoints(m_hWnd, hWndParent, &p, 1);
 
-        return SR_MATH_NS::IVector2(p.x, p.y + offsetY);
+        return SR_MATH_NS::IVector2(p.x, p.y + offsetY);*/
+
+        return m_position;
     }
 
     void Win32Window::Move(int32_t x, int32_t y) {
@@ -253,7 +260,7 @@ namespace SR_GRAPH_NS {
         m_styleState = WinAPI::StyleState::Changed;
 
         Resize(m_size.x, m_size.y);
-        Centralize();
+        ///Centralize(); - Централизируем по надобности в Engine::CreateMainWindow().
 
         ShowWindow(m_hWnd, SW_SHOW);
     }
