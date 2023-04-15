@@ -6,6 +6,7 @@
 #define GAMEENGINE_SKINNEDMESH_H
 
 #include <Utils/Types/IRawMeshHolder.h>
+#include <Utils/ECS/EntityRef.h>
 
 #include <Graphics/Types/Geometry/MeshComponent.h>
 #include <Graphics/Animations/Skeleton.h>
@@ -54,6 +55,7 @@ namespace SR_GTYPES_NS {
 
     private:
         SR_ANIMATIONS_NS::Skeleton* m_skeleton = nullptr;
+        SR_UTILS_NS::EntityRef m_skeletonRef;
 
         bool m_isOffsetsInitialized = false;
 

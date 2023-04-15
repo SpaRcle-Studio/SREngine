@@ -77,7 +77,9 @@ namespace SR_PTYPES_NS {
 
         if (!pComponent->GetCollisionShape()) {
             SR_ERROR("Rigidbody::LoadComponent() : rigidbody have not collision shape!");
-            delete pComponent;
+            pComponent->AutoFree([](auto&& pData) {
+                delete pData;
+            });
             return nullptr;
         }
 
@@ -133,7 +135,9 @@ namespace SR_PTYPES_NS {
             physicsScene->Remove(this);
         }
         else {
-            delete this;
+           AutoFree([](auto&& pData) {
+               delete pData;
+           });
         }
     }
 

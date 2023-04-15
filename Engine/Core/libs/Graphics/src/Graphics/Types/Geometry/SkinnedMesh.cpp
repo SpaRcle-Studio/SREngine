@@ -9,6 +9,7 @@ namespace SR_GTYPES_NS {
 
     SkinnedMesh::SkinnedMesh()
         : MeshComponent(MeshType::Skinned)
+        , m_skeletonRef(GetThis())
     { }
 
     SkinnedMesh::~SkinnedMesh() {
