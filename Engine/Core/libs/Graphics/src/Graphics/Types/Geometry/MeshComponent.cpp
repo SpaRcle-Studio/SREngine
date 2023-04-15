@@ -108,7 +108,7 @@ namespace SR_GTYPES_NS {
         Component::OnMatrixDirty();
     }
 
-    SR_UTILS_NS::Component::Ptr MeshComponent::CopyComponent() const {
+    SR_UTILS_NS::Component* MeshComponent::CopyComponent() const {
         auto&& pMesh = SR_GRAPH_NS::CreateMeshByType(GetMeshType());
         if (!pMesh) {
             return nullptr;

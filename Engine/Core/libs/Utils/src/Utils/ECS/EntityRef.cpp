@@ -39,9 +39,22 @@ namespace SR_UTILS_NS {
         return m_target.DynamicCast<GameObject>();
     }
 
+    Component::Ptr EntityRef::GetComponent() const {
+        if (!m_target) {
+            UpdateTarget();
+        }
+
+        return m_target.DynamicCast<Component>();
+    }
+
     void EntityRef::UpdatePath() {
         if (!EntityRefUtils::IsOwnerValid(m_owner)) {
             SRHalt("Invalid owner!");
+            return;
+        }
+
+        if (!m_target) {
+            m_path.clear();
             return;
         }
 

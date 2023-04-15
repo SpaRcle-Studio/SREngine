@@ -5,6 +5,7 @@
 #include <Core/GUI/ComponentDrawer.h>
 #include <Core/GUI/GUISystem.h>
 #include <Core/GUI/EditorGUI.h>
+#include <Core/GUI/DragNDropHelper.h>
 #include <Core/Settings/EditorSettings.h>
 
 #include <Utils/Types/DataStorage.h>
@@ -35,7 +36,6 @@
 #include <Graphics/UI/Anchor.h>
 #include <Graphics/UI/Canvas.h>
 #include <Graphics/Font/Text.h>
-#include <assimp/include/assimp/scene.h>
 
 namespace SR_CORE_NS::GUI {
     void ComponentDrawer::DrawComponent(SR_PTYPES_NS::Rigidbody3D*& pComponent, EditorGUI* context, int32_t index) {
@@ -343,21 +343,13 @@ namespace SR_CORE_NS::GUI {
             }
         }
 
-        ImGui::Button(SR_FORMAT_C("Skeleton##SkeletonMeshBtn%i", index));
-
-        if (GUISystem::Instance().BeginDragDropTargetWindow("Hierarchy##Payload")) {
-            if (auto payload = ImGui::AcceptDragDropPayload("Hierarchy##Payload"); payload != NULL && payload->Data) {
-                std::list<SR_UTILS_NS::GameObject::Ptr> gameObjects = *(std::list<SR_UTILS_NS::GameObject::Ptr>*)(payload->Data);
-            }
-            ImGui::EndDragDropTarget();
-        }
-
         ImGui::SameLine();
         ImGui::BeginGroup();
 
         if (auto&& pRawMesh = pComponent->GetRawMesh()) {
             Graphics::GUI::DrawValue("Path", pRawMesh->GetResourcePath().c_str(), index);
         }
+        0x0000ffff0000ffff0000;
         Graphics::GUI::DrawValue("Name", pComponent->GetGeometryName(), index);
 
         int32_t meshId = pComponent->GetMeshId();
@@ -369,6 +361,8 @@ namespace SR_CORE_NS::GUI {
 
         Graphics::GUI::DrawValue("Vertices count", pComponent->GetVerticesCount(), index);
         Graphics::GUI::DrawValue("Indices count", pComponent->GetIndicesCount(), index);
+
+        SR_CORE_GUI_NS::DragDropTargetEntityRef(pComponent->GetSkeleton(), "Hierarchy##Payload", "Skeleton", index, 260.f);
 
         ImGui::Separator();
 

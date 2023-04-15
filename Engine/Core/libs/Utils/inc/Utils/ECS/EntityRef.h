@@ -22,6 +22,7 @@ namespace SR_UTILS_NS {
 
     public:
         SR_NODISCARD GameObject::Ptr GetGameObject() const;
+        SR_NODISCARD Component::Ptr GetComponent() const;
         SR_NODISCARD bool IsValid() const;
         SR_NODISCARD bool IsRelative() const { return m_relative; }
 

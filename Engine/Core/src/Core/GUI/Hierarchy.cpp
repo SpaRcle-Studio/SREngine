@@ -150,7 +150,7 @@ namespace SR_CORE_NS::GUI {
         }
     }
 
-    void Hierarchy::DrawChild(const Helper::GameObject::Ptr &root) {
+    void Hierarchy::DrawChild(const SR_UTILS_NS::GameObject::Ptr &root) {
         const auto& name = root->GetName();
         const bool hasChild = root->HasChildren();
 
@@ -167,11 +167,22 @@ namespace SR_CORE_NS::GUI {
         if (!ImGui::GetDragDropPayload() && ImGui::BeginDragDropSource()) {
             m_pointersHolder.clear();
 
-            for (const SR_UTILS_NS::GameObject::Ptr& ptr : m_selected) {
-                if (ptr.RecursiveLockIfValid()) {
-                    m_pointersHolder.emplace_back(ptr);
-                    ptr.Unlock();
+            bool useSelected = false;
+
+            for (auto&& ptr : m_selected) {
+                useSelected |= ptr == root;
+            }
+
+            if (useSelected) {
+                for (auto&& ptr : m_selected) {
+                    if (ptr.RecursiveLockIfValid()) {
+                        m_pointersHolder.emplace_back(ptr);
+                        ptr.Unlock();
+                    }
                 }
+            }
+            else {
+                m_pointersHolder.emplace_back(root);
             }
 
             ImGui::SetDragDropPayload("Hierarchy##Payload", &m_pointersHolder, sizeof(std::list<Helper::GameObject::Ptr>), ImGuiCond_Once);

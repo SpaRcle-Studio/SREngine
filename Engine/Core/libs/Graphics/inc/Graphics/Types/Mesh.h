@@ -7,6 +7,7 @@
 
 #include <Utils/Math/Matrix4x4.h>
 #include <Utils/Common/Enumerations.h>
+#include <Utils/Types/SafePointer.h>
 
 #include <Graphics/Utils/MeshTypes.h>
 #include <Graphics/Memory/IGraphicsResource.h>
