@@ -10,13 +10,9 @@ message(${CMAKE_VERSION})
 set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS}")
 set(CMAKE_CXX_STANDARD 20)
 
-# add_subdirectory(Engine)
-
 SET(CMAKE_SHARED_LINKER_FLAGS_CHECKED "")
 SET(CMAKE_SHARED_LINKER_FLAGS_PROFILE "")
 SET(CMAKE_EXE_LINKER_FLAGS_PROFILE "")
 SET(CMAKE_EXE_LINKER_FLAGS_CHECKED "")
 
-add_subdirectory(Engine/Core)
-
-add_executable(SREngine main.cpp)
+add_subdirectory(Engine)
