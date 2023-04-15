@@ -23,6 +23,18 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     
+    - name : Setup MSVC
+      uses: microsoft/setup-msbuild@v1.1
+      with:
+        vs-version: '16.4.0'
+        msbuild-architecture: x64
+        vswhere-path: '${{github.workspace}}/MSVC'
+        
+    - name : Check MSVC Version
+      run : |
+        cd '${{github.workspace}}/MSVC'
+        dir
+    
     - name: Setup Vulkan SDK
       uses: TWoolhouse/setup-vulkan-sdk@v1.1.0
       with:
@@ -32,13 +44,6 @@ jobs:
     - name: Git Submodule Update
       run: git submodule update --init --recursive   
         
-    - name : Setup MSVC
-      uses: microsoft/setup-msbuild@v1.1
-      with:
-        vs-version: '16.4.0'
-        msbuild-architecture: x64
-        vswhere-path: '${{github.workspace}}/MSVC'
-    
     - name : Setup CMake 
       uses: jwlawson/actions-setup-cmake@v1.13
       with:
