@@ -201,6 +201,7 @@
 #define SR_WORLD_NS Framework::Helper::World
 #define SR_CORE_NS Framework::Core
 #define SR_CORE_UI_NS Framework::Core::UI
+#define SR_CORE_GUI_NS Framework::Core::GUI
 #define SR_SCRIPTING_NS Framework::Scripting
 #define SR_AUDIO_NS Framework::Audio
 

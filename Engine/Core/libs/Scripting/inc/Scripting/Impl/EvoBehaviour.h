@@ -47,7 +47,7 @@ namespace SR_SCRIPTING_NS {
                 return;
             }
 
-            auto&& lockGuard = EvoScriptManager::ScopeLockSingleton();
+            SR_EVO_SCRIPT_MANAGER_LOCK_CONTEXT
 
             SwitchContext();
 

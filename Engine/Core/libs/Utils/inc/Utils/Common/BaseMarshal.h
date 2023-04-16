@@ -144,7 +144,25 @@ namespace SR_UTILS_NS {
         template<typename T> static void SR_FASTCALL SaveVector(SR_HTYPES_NS::Stream& stream, const std::vector<T>& vector) {
             const size_t size = vector.size();
             stream.write((const char*)&size, sizeof(size_t));
-            stream.write((const char*)vector.data(), size * sizeof(T));
+            if (size > 0) {
+                stream.write((const char *) vector.data(), size * sizeof(T));
+            }
+        }
+
+        template<typename Vector> static Vector SR_FASTCALL LoadVector(SR_HTYPES_NS::Stream& stream) {
+            Vector vector;
+
+            size_t size;
+            stream.read((char*)&size, sizeof(size_t));
+
+            using T = typename std::decay<decltype(*vector.begin())>::type;
+
+            if (size > 0) {
+                vector.resize(size);
+                stream.read((char*)&vector[0], size * sizeof(T));
+            }
+
+            return std::move(vector);
         }
 
         static std::string SR_FASTCALL LoadShortStr(SR_HTYPES_NS::Stream& stream) {

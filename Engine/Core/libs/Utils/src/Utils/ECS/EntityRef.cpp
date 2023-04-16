@@ -5,114 +5,114 @@
 #include <Utils/ECS/EntityRef.h>
 
 namespace SR_UTILS_NS {
-    EntityRef::EntityRef(bool relative)
-        : m_relative(relative)
-        , m_fromEntityId(SR_ID_INVALID)
-        , m_entityId(SR_ID_INVALID)
+    EntityRef::EntityRef(const EntityRefUtils::OwnerRef& owner)
+        : m_owner(owner)
     { }
 
-    EntityRef::EntityRef()
-        : EntityRef(true)
+    EntityRef::EntityRef(EntityRef&& other) noexcept
+        : m_path(SR_UTILS_NS::Exchange(other.m_path, { }))
+        , m_relative(SR_UTILS_NS::Exchange(other.m_relative, { }))
+        , m_owner(SR_UTILS_NS::Exchange(other.m_owner, { }))
+        , m_target(SR_UTILS_NS::Exchange(other.m_target, { }))
     { }
 
-    EntityRef::EntityRef(EntityRef&& other) noexcept {
-        /// TODO
-    }
-
-    EntityRef::EntityRef(const EntityRef &other) noexcept
-        : m_path(other.m_path)
-        , m_relative(other.m_relative)
-        , m_fromEntityId(other.m_fromEntityId)
-        , m_entityId(other.m_entityId)
-    { }
-
-    EntityRef &EntityRef::operator=(const EntityRef &other) {
-        m_path = other.m_path;
-        m_relative = other.m_relative;
-        m_fromEntityId = other.m_fromEntityId;
-        m_entityId = other.m_entityId;
+    EntityRef &EntityRef::operator=(EntityRef&& other) {
+        m_path = SR_UTILS_NS::Exchange(other.m_path, { });
+        m_relative = SR_UTILS_NS::Exchange(other.m_relative, { });
+        m_owner = SR_UTILS_NS::Exchange(other.m_owner, { });
+        m_target = SR_UTILS_NS::Exchange(other.m_target, { });
         return *this;
     }
 
-    GameObject *EntityRef::GetGameObject(GameObject* pFrom) const {
-        auto&& entityManager = EntityManager::Instance();
-
-        if (m_entityId != SR_ID_INVALID) {
-            const EntityId fromId = pFrom ? pFrom->GetEntityId() : SR_ID_INVALID;
-            if (m_fromEntityId != fromId) {
-                m_entityId = SR_ID_INVALID;
-                m_fromEntityId = fromId;
-            }
+    GameObject::Ptr EntityRef::GetGameObject() const {
+        if (!m_target) {
+            UpdateTarget();
         }
 
-        auto&& pGameObject = dynamic_cast<GameObject*>(entityManager.FindById(m_entityId));
-
-        if (!pGameObject) {
-            Update();
-            return dynamic_cast<GameObject*>(entityManager.FindById(m_entityId));
-        }
-
-        return pGameObject;
+        return m_target.DynamicCast<GameObject>();
     }
 
-    void EntityRef::Update() const {
-        GameObject* pObject = nullptr;
+    Component::Ptr EntityRef::GetComponent() const {
+        if (!m_target) {
+            UpdateTarget();
+        }
 
-        if (m_relative) {
-            auto&& entityManager = EntityManager::Instance();
-            pObject = dynamic_cast<GameObject*>(entityManager.FindById(m_fromEntityId));
-            if (!pObject) {
-                return;
-            }
+        return m_target.DynamicCast<Component>();
+    }
 
-            for (auto&& pathItem : m_path) {
-                if (!pObject) {
-                    return;
-                }
+    void EntityRef::UpdatePath() const {
+        if (!EntityRefUtils::IsOwnerValid(m_owner)) {
+            SRHalt("Invalid owner!");
+            return;
+        }
 
-                switch (pathItem.action) {
-                    case EntityRefUtils::Action::Action_Parent:
-                        pObject = pObject->GetParent().Get();
-                        break;
-                    case EntityRefUtils::Action::Action_Child: {
-                        if (pathItem.index == static_cast<uint16_t>(SR_ID_INVALID)) {
-                            pObject = pObject->Find(pathItem.hashName).Get();
-                        }
-                        else {
-                            SRHalt0();
-                        }
+        if (!m_target) {
+            return;
+        }
 
-                        break;
-                    }
-                    case EntityRefUtils::Action::Action_Component:
-                        break;
-                    case EntityRefUtils::Action::Action_GameObject:
-                        break;
-                }
-            }
+        if (IsRelative()) {
+            m_path = EntityRefUtils::CalculateRelativePath(m_owner, m_target);
+        }
+        else {
+            m_path = EntityRefUtils::CalculatePath(m_target);
         }
     }
 
-    void EntityRef::AddPathItem(EntityRefUtils::Action action, const std::string& name) {
-        AddPathItem(action, name, SR_ID_INVALID);
-    }
+    void EntityRef::UpdateTarget() const {
+        SRAssert(EntityRefUtils::IsOwnerValid(m_owner));
 
-    void EntityRef::AddPathItem(EntityRefUtils::Action action, const std::string &name, uint16_t index) {
-        EntityRefUtils::PathItem pathItem;
-
-        pathItem.action = action;
-        pathItem.index = index;
-        pathItem.hashName = SR_HASH_STR(name);
-
-        m_path.emplace_back(pathItem);
-    }
-
-    void EntityRef::AddPathItem(EntityRefUtils::Action action) {
-        static const std::string string;
-        AddPathItem(action, string, SR_ID_INVALID);
+        if (IsRelative()) {
+            m_target = EntityRefUtils::GetEntity(m_owner, m_path);
+        }
+        else {
+            auto&& pScene = EntityRefUtils::GetSceneFromOwner(m_owner);
+            m_target = EntityRefUtils::GetEntity(pScene, m_path);
+        }
     }
 
     void EntityRef::SetRelative(bool relative) {
         m_relative = relative;
+        UpdatePath();
+    }
+
+    void EntityRef::SetPathTo(Entity::Ptr pEntity) {
+        m_target = pEntity;
+        UpdatePath();
+    }
+
+    bool EntityRef::IsValid() const {
+        return m_target && EntityRefUtils::IsOwnerValid(m_owner);
+    }
+
+    void EntityRef::SetOwner(const EntityRefUtils::OwnerRef& owner) {
+        m_owner = owner;
+        UpdatePath();
+    }
+
+    SR_HTYPES_NS::Marshal::Ptr EntityRef::Save(SR_HTYPES_NS::Marshal::Ptr pMarshal) const {
+        if (!pMarshal) {
+            pMarshal = new SR_HTYPES_NS::Marshal();
+        }
+
+        Save(*pMarshal);
+
+        return pMarshal;
+    }
+
+    void EntityRef::Load(SR_HTYPES_NS::Marshal& marshal) {
+        m_relative = marshal.Read<bool>();
+        m_path = marshal.Read<EntityRefUtils::RefPath>();
+    }
+
+    void EntityRef::Save(SR_HTYPES_NS::Marshal& marshal) const {
+        marshal.Write<bool>(IsRelative());
+        marshal.Write<EntityRefUtils::RefPath>(m_path);
+    }
+
+    EntityRef EntityRef::Copy(const EntityRefUtils::OwnerRef& owner) const {
+        EntityRef ref(owner);
+        ref.m_relative = m_relative;
+        ref.m_path = m_path;
+        return ref;
     }
 }

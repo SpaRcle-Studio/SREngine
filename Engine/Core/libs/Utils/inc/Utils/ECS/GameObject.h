@@ -29,13 +29,12 @@ namespace SR_UTILS_NS {
     );
     typedef uint64_t GameObjectFlagBits;
 
-    class SR_DLL_EXPORT GameObject : public SR_HTYPES_NS::SharedPtr<GameObject>, public IComponentable, public Entity {
+    class SR_DLL_EXPORT GameObject : public IComponentable, public Entity {
         SR_ENTITY_SET_VERSION(1005);
         friend class Component;
     public:
         using Name = std::string;
         using Ptr = SR_HTYPES_NS::SharedPtr<GameObject>;
-        using Super = Ptr;
         using GameObjects = std::vector<GameObject::Ptr>;
         using ScenePtr = SR_WORLD_NS::Scene*;
         using IdGetterFn = SR_HTYPES_NS::Function<uint64_t(const GameObject::Ptr&)>;

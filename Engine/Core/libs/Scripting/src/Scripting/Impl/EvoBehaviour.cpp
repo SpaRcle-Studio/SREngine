@@ -6,7 +6,7 @@
 
 namespace SR_SCRIPTING_NS {
     bool EvoBehaviour::Load() {
-        auto&& lockGuard = EvoScriptManager::ScopeLockSingleton();
+        SR_EVO_SCRIPT_MANAGER_LOCK_CONTEXT
 
         if (m_script) {
             SR_ERROR("EvoBehaviour::Load() : script is already loaded!");
@@ -43,7 +43,7 @@ namespace SR_SCRIPTING_NS {
     }
 
     bool EvoBehaviour::Unload() {
-        auto&& lockGuard = EvoScriptManager::ScopeLockSingleton();
+        SR_EVO_SCRIPT_MANAGER_LOCK_CONTEXT
 
         bool hasErrors = !Behaviour::Unload();
 
@@ -135,7 +135,7 @@ namespace SR_SCRIPTING_NS {
     }
 
     EvoBehaviour::Properties EvoBehaviour::GetProperties() const {
-        auto&& lockGuard = EvoScriptManager::ScopeLockSingleton();
+        SR_EVO_SCRIPT_MANAGER_LOCK_CONTEXT
 
         if (m_hasErrors) {
             return EvoBehaviour::Properties();
@@ -152,7 +152,7 @@ namespace SR_SCRIPTING_NS {
     }
 
     std::any EvoBehaviour::GetProperty(const std::string &id) const {
-        auto&& lockGuard = EvoScriptManager::ScopeLockSingleton();
+        SR_EVO_SCRIPT_MANAGER_LOCK_CONTEXT
 
         SwitchContext();
 
@@ -172,7 +172,7 @@ namespace SR_SCRIPTING_NS {
     }
 
     void EvoBehaviour::SetProperty(const std::string &id, const std::any &val) {
-        auto&& lockGuard = EvoScriptManager::ScopeLockSingleton();
+        SR_EVO_SCRIPT_MANAGER_LOCK_CONTEXT
 
         SwitchContext();
 

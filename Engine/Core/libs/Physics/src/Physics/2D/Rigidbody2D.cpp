@@ -9,7 +9,7 @@ namespace SR_PTYPES_NS {
         : Super(pLibrary)
     { }
 
-    Rigidbody2D::ComponentPtr Rigidbody2D::LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage) {
+    SR_UTILS_NS::Component* Rigidbody2D::LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage) {
         return Super::LoadComponent(SR_UTILS_NS::Measurement::Space2D, marshal, dataStorage);
     }
 

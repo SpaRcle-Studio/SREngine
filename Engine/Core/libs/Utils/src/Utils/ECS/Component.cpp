@@ -41,6 +41,8 @@ namespace SR_UTILS_NS {
     }
 
     void Component::CheckActivity() {
+        SRAssert1Once(m_parent);
+
         auto&& pParent = dynamic_cast<SR_UTILS_NS::GameObject*>(m_parent);
 
         /// если родителя нет, или он отличается от ожидаемого, то будем считать что родитель активен
@@ -83,8 +85,10 @@ namespace SR_UTILS_NS {
     }
 
     Component::GameObjectPtr Component::GetGameObject() const {
+        SRAssert(m_parent);
+
         if (auto&& pGameObject = dynamic_cast<SR_UTILS_NS::GameObject*>(m_parent)) {
-            return pGameObject->GetThis();
+            return pGameObject->GetThis().DynamicCast<GameObject>();
         }
 
         return GameObjectPtr();
@@ -95,13 +99,15 @@ namespace SR_UTILS_NS {
     }
 
     GameObject::Ptr Component::GetRoot() const {
+        SRAssert(m_parent);
+
         auto&& pParent = dynamic_cast<SR_UTILS_NS::GameObject*>(m_parent);
 
         if (!pParent) {
             return GameObjectPtr();
         }
 
-        GameObjectPtr root = pParent->GetThis();
+        GameObjectPtr root = pParent->GetThis().DynamicCast<GameObject>();
 
         while (root.Valid()) {
             if (auto&& parent = root->GetParent()) {
@@ -116,6 +122,8 @@ namespace SR_UTILS_NS {
     }
 
     Transform *Component::GetTransform() const noexcept {
+        SRAssert(m_parent);
+
         if (auto&& pGameObject = dynamic_cast<SR_UTILS_NS::GameObject*>(m_parent)) {
             return pGameObject->GetTransform();
         }
@@ -127,7 +135,7 @@ namespace SR_UTILS_NS {
         return "Component: " + GetComponentName();
     }
 
-    Component::Ptr Component::CopyComponent() const {
+    Component* Component::CopyComponent() const {
         SRHalt("Not implemented!");
         return nullptr;
     }

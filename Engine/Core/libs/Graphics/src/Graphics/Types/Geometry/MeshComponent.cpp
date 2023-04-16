@@ -31,7 +31,15 @@ namespace SR_GTYPES_NS {
 
         Component::OnDestroy();
 
-        MarkMeshDestroyed();
+        /// если ресурс уничтожится сразу, то обрабатывать это нужно в контексте SharedPtr
+        if (!IsGraphicsResourceRegistered()) {
+            GetThis().DynamicCast<MeshComponent>().AutoFree([](auto&& pData) {
+                pData->MarkMeshDestroyed();
+            });
+        }
+        else {
+            MarkMeshDestroyed();
+        }
 
         if (renderScene) {
             renderScene->SetDirty();
@@ -100,7 +108,7 @@ namespace SR_GTYPES_NS {
         Component::OnMatrixDirty();
     }
 
-    SR_UTILS_NS::Component::Ptr MeshComponent::CopyComponent() const {
+    SR_UTILS_NS::Component* MeshComponent::CopyComponent() const {
         auto&& pMesh = SR_GRAPH_NS::CreateMeshByType(GetMeshType());
         if (!pMesh) {
             return nullptr;

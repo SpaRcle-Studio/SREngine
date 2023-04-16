@@ -47,7 +47,7 @@ namespace SR_UTILS_NS {
             return CreateComponentImpl(T::COMPONENT_HASH_NAME);
         }
 
-        std::unordered_map<std::string, size_t> GetComponentsNames() {
+        const std::unordered_map<std::string, size_t>& GetComponentsNames() const {
             SR_SCOPED_LOCK
             return m_ids;
         }

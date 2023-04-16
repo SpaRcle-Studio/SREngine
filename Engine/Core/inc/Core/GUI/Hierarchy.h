@@ -34,6 +34,7 @@ namespace SR_CORE_NS::GUI {
         void SetSelectedImpl(const std::set<SR_UTILS_NS::GameObject::Ptr>& changeSelected);
 
     private:
+        void ExpandPath(const SR_UTILS_NS::GameObject::Ptr& gm);
         void Draw() override;
         void CheckSelected(const SR_UTILS_NS::GameObject::Ptr& gm);
         void ContextMenu(const SR_UTILS_NS::GameObject::Ptr& gm, uint64_t id);
@@ -52,6 +53,8 @@ namespace SR_CORE_NS::GUI {
         SR_UTILS_NS::GameObject::GameObjects m_tree;
 
         std::atomic<bool> m_shiftPressed;
+
+        bool m_needExpand = false;
 
         SR_GRAPH_NS::GUI::Widget* m_sceneRunnerWidget = nullptr;
 

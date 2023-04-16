@@ -16,7 +16,7 @@ namespace SR_CORE_NS {
             uint64_t position = marshal.GetPosition();
 
             migrated.Stream::Write(marshal.Stream::View(), marshal.GetPosition());
-
+            /// --------------------------------------------------------------------------------------------------------
             migrated.Write(marshal.Read<bool>());
             auto name = marshal.Read<std::string>();
             migrated.Write(name);
@@ -38,6 +38,7 @@ namespace SR_CORE_NS {
                     break;
             }
 
+            /// -------------------- меня наняли дублировать длинные строки потому что я люблю большие длинные прямые комментарии, состоящие исключительно из тире.
             migrated.Stream::Write(marshal.Stream::View() + marshal.GetPosition(), marshal.Size() - marshal.GetPosition());
 
             marshal.SetData(migrated.Stream::View(), migrated.Size());
@@ -53,7 +54,7 @@ namespace SR_CORE_NS {
             uint64_t position = marshal.GetPosition();
 
             migrated.Stream::Write(marshal.Stream::View(), marshal.GetPosition());
-            /// --------------------
+            /// --------------------------------------------------------------------------------------------------------
             migrated.Write<int32_t>(marshal.Read<int32_t>());
 
             migrated.Write<SR_MATH_NS::Vector3<float_t>>(marshal.Read<SR_MATH_NS::Vector3<float_t>>(SR_MATH_NS::Vector3<float_t>(0.f)), SR_MATH_NS::Vector3<float_t>(0.f));
@@ -66,6 +67,33 @@ namespace SR_CORE_NS {
 
             migrated.Write<SR_MATH_NS::BVector3>(marshal.Read<SR_MATH_NS::BVector3>());
             migrated.Write<SR_MATH_NS::BVector3>(marshal.Read<SR_MATH_NS::BVector3>());
+
+            /// -------------------- меня наняли дублировать длинные строки потому что я люблю большие длинные прямые комментарии, состоящие исключительно из тире.
+            migrated.Stream::Write(marshal.Stream::View() + marshal.GetPosition(), marshal.Size() - marshal.GetPosition());
+
+            marshal.SetData(migrated.Stream::View(), migrated.Size());
+            marshal.SetPosition(position);
+
+            return true;
+        });
+
+        static const auto SKINNED_MESH_HASH_NAME = SR_HASH_STR("SkinnedMesh");
+        SR_UTILS_NS::Migration::Instance().RegisterMigrator(SKINNED_MESH_HASH_NAME, 1001, 1002, [](SR_HTYPES_NS::Marshal& marshal) -> bool {
+            SR_HTYPES_NS::Marshal migrated;
+
+            uint64_t position = marshal.GetPosition();
+
+            migrated.Stream::Write(marshal.Stream::View(), marshal.GetPosition());
+            /// --------------------------------------------------------------------------------------------------------
+
+            migrated.Write<int32_t>(marshal.Read<int32_t>()); /// mesh type
+            migrated.Write<std::string>(marshal.Read<std::string>()); /// path
+            migrated.Write<uint32_t>(marshal.Read<uint32_t>()); /// id
+
+            migrated.Write<std::string>(marshal.Read<std::string>()); /// material
+
+            SR_UTILS_NS::EntityRef ref;
+            ref.Save(migrated);
 
             /// -------------------- меня наняли дублировать длинные строки потому что я люблю большие длинные прямые комментарии, состоящие исключительно из тире.
             migrated.Stream::Write(marshal.Stream::View() + marshal.GetPosition(), marshal.Size() - marshal.GetPosition());

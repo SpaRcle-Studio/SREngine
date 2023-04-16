@@ -32,8 +32,6 @@ namespace SR_ANIMATIONS_NS {
             };
 
             processBone(nullptr);
-
-            pComponent->ReCalculateSkeleton();
         }
 
         return pComponent;
@@ -43,7 +41,6 @@ namespace SR_ANIMATIONS_NS {
         auto&& pComponent = new Skeleton();
 
         pComponent->m_rootBone = m_rootBone->CloneRoot();
-        pComponent->ReCalculateSkeleton();
 
         return pComponent;
     }
@@ -73,7 +70,9 @@ namespace SR_ANIMATIONS_NS {
 
     void Skeleton::OnDestroy() {
         Super::OnDestroy();
-        delete this;
+        GetThis().AutoFree([](auto&& pData) {
+            delete pData;
+        });
     }
 
     void Skeleton::OnLoaded() {
