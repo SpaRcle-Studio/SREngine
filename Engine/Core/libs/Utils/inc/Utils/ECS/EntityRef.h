@@ -19,6 +19,7 @@ namespace SR_UTILS_NS {
 
         EntityRef(EntityRef&& other) noexcept;
 
+        EntityRef& operator=(EntityRef& other);
         EntityRef& operator=(EntityRef&& other);
 
     public:
@@ -27,6 +28,13 @@ namespace SR_UTILS_NS {
 
         void Save(SR_HTYPES_NS::Marshal& marshal) const;
         void Load(SR_HTYPES_NS::Marshal& marshal);
+
+        template<typename T> SR_NODISCARD SR_HTYPES_NS::SharedPtr<T> GetComponent() const {
+            if (auto&& pComponent = GetComponent()) {
+                return pComponent.DynamicCast<T>();
+            }
+            return nullptr;
+        }
 
         SR_NODISCARD GameObject::Ptr GetGameObject() const;
         SR_NODISCARD Component::Ptr GetComponent() const;

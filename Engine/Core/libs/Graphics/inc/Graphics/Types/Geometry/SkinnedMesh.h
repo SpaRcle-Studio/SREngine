@@ -41,9 +41,6 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD Component* CopyComponent() const override;
 
     private:
-        SR_NODISCARD SR_ANIMATIONS_NS::Skeleton* FindSkeleton() const;
-        SR_NODISCARD SR_ANIMATIONS_NS::Skeleton* FindSkeletonImpl(SR_UTILS_NS::GameObject::Ptr gameObject) const;
-
         void PopulateSkeletonMatrices();
 
         void OnResourceReloaded(SR_UTILS_NS::IResource* pResource) override;
@@ -55,10 +52,10 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD std::vector<uint32_t> GetIndices() const override;
 
     private:
-        SR_ANIMATIONS_NS::Skeleton* m_skeleton = nullptr;
         SR_UTILS_NS::EntityRef m_skeletonRef;
 
         bool m_isOffsetsInitialized = false;
+        bool m_skeletonIsBroken = false;
 
         std::vector<uint64_t> m_bonesIds;
 

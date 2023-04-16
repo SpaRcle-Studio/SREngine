@@ -41,9 +41,9 @@ namespace SR_UTILS_NS {
     }
 
     void Component::CheckActivity() {
-        auto&& pParent = dynamic_cast<SR_UTILS_NS::GameObject*>(m_parent);
+        SRAssert1Once(m_parent);
 
-        SRAssert1Once(pParent);
+        auto&& pParent = dynamic_cast<SR_UTILS_NS::GameObject*>(m_parent);
 
         /// если родителя нет, или он отличается от ожидаемого, то будем считать что родитель активен
         const bool isActive = m_isEnabled && (!pParent || pParent->m_isActive);
@@ -85,11 +85,11 @@ namespace SR_UTILS_NS {
     }
 
     Component::GameObjectPtr Component::GetGameObject() const {
+        SRAssert(m_parent);
+
         if (auto&& pGameObject = dynamic_cast<SR_UTILS_NS::GameObject*>(m_parent)) {
             return pGameObject->GetThis().DynamicCast<GameObject>();
         }
-
-        SRHalt0();
 
         return GameObjectPtr();
     }
@@ -99,10 +99,11 @@ namespace SR_UTILS_NS {
     }
 
     GameObject::Ptr Component::GetRoot() const {
+        SRAssert(m_parent);
+
         auto&& pParent = dynamic_cast<SR_UTILS_NS::GameObject*>(m_parent);
 
         if (!pParent) {
-            SRHalt0();
             return GameObjectPtr();
         }
 
@@ -121,11 +122,11 @@ namespace SR_UTILS_NS {
     }
 
     Transform *Component::GetTransform() const noexcept {
+        SRAssert(m_parent);
+
         if (auto&& pGameObject = dynamic_cast<SR_UTILS_NS::GameObject*>(m_parent)) {
             return pGameObject->GetTransform();
         }
-
-        SRHalt0();
 
         return nullptr;
     }

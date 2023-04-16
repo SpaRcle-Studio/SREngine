@@ -30,8 +30,19 @@ namespace SR_HTYPES_NS {
         SharedPtr<T>& operator=(const SharedPtr<T> &ptr);
         SharedPtr<T>& operator=(T *ptr);
         SharedPtr<T>& operator=(SharedPtr<T>&& ptr) noexcept {
+            if (m_data) {
+                SRAssert(m_data->m_useCount > 0);
+                --m_data->m_useCount;
+            }
+
             m_data = std::exchange(ptr.m_data, {});
+
+            if (m_data) {
+                ++m_data->m_useCount;
+            }
+
             m_ptr = std::exchange(ptr.m_ptr, {});
+
             return *this;
         }
         SR_NODISCARD SR_FORCE_INLINE T *operator->() const noexcept { return m_ptr; }
@@ -142,6 +153,8 @@ namespace SR_HTYPES_NS {
             else if (m_data) {
                 --(m_data->m_useCount);
             }
+
+            m_data = nullptr;
 
             bool needAlloc = true;
 

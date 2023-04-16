@@ -51,8 +51,6 @@ namespace SR_GTYPES_NS {
             return;
         }
 
-        m_skeleton = FindSkeleton();
-
         if (!IsSkeletonUsable()) {
             return;
         }
@@ -146,20 +144,23 @@ namespace SR_GTYPES_NS {
     }
 
     bool SkinnedMesh::IsSkeletonUsable() const {
-        if (m_skeleton) {
-            return m_skeleton->GetRootBone();
-        }
-
-        return false;
+        return m_skeletonRef.GetComponent<SR_ANIMATIONS_NS::Skeleton>();
     }
 
     void SkinnedMesh::Update(float dt) {
-        auto&& pNewSkeleton = FindSkeleton();
-        if (m_skeleton != pNewSkeleton) {
-            m_renderScene->SetDirty();
-            m_bonesIds.clear();
+        const bool usable = IsSkeletonUsable();
+
+        if (m_skeletonIsBroken && !usable) {
+            return MeshComponent::Update(dt);
         }
-        m_skeleton = pNewSkeleton;
+
+        if (!m_skeletonIsBroken && usable) {
+            return MeshComponent::Update(dt);
+        }
+
+        m_skeletonIsBroken = !usable;
+        m_renderScene->SetDirty();
+        m_bonesIds.clear();
 
         MeshComponent::Update(dt);
     };
@@ -187,12 +188,6 @@ namespace SR_GTYPES_NS {
     }
 
     void SkinnedMesh::PopulateSkeletonMatrices() {
-        auto&& pNewSkeleton = FindSkeleton();
-        if (m_skeleton != pNewSkeleton) {
-            m_renderScene->SetDirty();
-            return;
-        }
-
         static SR_MATH_NS::Matrix4x4 identityMatrix = SR_MATH_NS::Matrix4x4().Identity();
 
         auto&& bones = GetRawMesh()->GetBones(GetMeshId());
@@ -214,20 +209,22 @@ namespace SR_GTYPES_NS {
             }
         }
 
-        if (m_skeleton && !m_skeleton->GetRootBone()) {
+        auto&& pSkeleton = m_skeletonRef.GetComponent<SR_ANIMATIONS_NS::Skeleton>();
+
+        if (!pSkeleton || !pSkeleton->GetRootBone()) {
             return;
         }
 
         if (!m_isOffsetsInitialized) {
             for (auto&& [hashName, boneId] : bones) {
                 m_skeletonOffsets[boneId] = GetRawMesh()->GetBoneOffset(hashName);
-                m_bonesIds[boneId] = m_skeleton->GetBoneIndex(hashName);
+                m_bonesIds[boneId] = pSkeleton->GetBoneIndex(hashName);
             }
             m_isOffsetsInitialized = true;
         }
 
-        for (uint64_t boneId = 0; m_skeleton && boneId < m_bonesIds.size(); ++boneId) {
-            if (auto&& bone = m_skeleton->GetBoneByIndex(m_bonesIds[boneId]); bone && bone->gameObject) {
+        for (uint64_t boneId = 0; boneId < m_bonesIds.size(); ++boneId) {
+            if (auto&& bone = pSkeleton->GetBoneByIndex(m_bonesIds[boneId]); bone && bone->gameObject) {
                 m_skeletonMatrices[boneId] = bone->gameObject->GetTransform()->GetMatrix();
             }
             else {
@@ -243,38 +240,19 @@ namespace SR_GTYPES_NS {
             SetGeometryName(GetRawMesh()->GetGeometryName(GetMeshId()));
         }
 
+        m_isOffsetsInitialized = false;
+
         MarkPipelineUnBuild();
 
         m_dirtyMaterial = true;
         m_isCalculated = false;
     }
 
-    SR_ANIMATIONS_NS::Skeleton* SkinnedMesh::FindSkeleton() const {
-        if (auto&& pSkeleton = FindSkeletonImpl(GetGameObject())) {
-            return pSkeleton;
-        }
-
-        if (auto&& pScene = GetScene()) {
-            return pScene->GetComponent<Animations::Skeleton>();
-        }
-
-        return nullptr;
-    }
-
-    SR_ANIMATIONS_NS::Skeleton* SkinnedMesh::FindSkeletonImpl(SR_UTILS_NS::GameObject::Ptr gameObject) const {
-        /// TODO: переделать на какой-нибудь RefComponent
-        auto&& pSkeleton = dynamic_cast<SR_ANIMATIONS_NS::Skeleton*>(gameObject->GetComponent<SR_ANIMATIONS_NS::Skeleton>());
-        if (!pSkeleton && gameObject->GetParent()) {
-            return FindSkeletonImpl(gameObject->GetParent());
-        }
-        return pSkeleton;
-    }
-
     SR_UTILS_NS::Component* SkinnedMesh::CopyComponent() const {
         if (auto&& pComponent = dynamic_cast<SkinnedMesh*>(MeshComponent::CopyComponent())) {
             pComponent->SetRawMesh(GetRawMesh());
             pComponent->SetMeshId(GetMeshId());
-            pComponent->m_skeletonRef = m_skeletonRef.Copy(pComponent);
+            pComponent->m_skeletonRef = m_skeletonRef.Copy(pComponent->GetThis());
             return pComponent;
         }
 

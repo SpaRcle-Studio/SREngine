@@ -53,6 +53,8 @@ namespace SR_CORE_NS::GUI {
                 return component;
             }
 
+            SRAssert1Once(component->Valid());
+
             ++index;
 
             if (ImGui::BeginChild(SR_FORMAT_C("cmp-%s-%i"))) {
@@ -72,6 +74,17 @@ namespace SR_CORE_NS::GUI {
                     ImGui::SetDragDropPayload("InspectorComponent##Payload", &m_pointersHolder, sizeof(std::vector<SR_UTILS_NS::Component::Ptr>), ImGuiCond_Once);
                     ImGui::Text("%s ->", pComponent->GetComponentName().c_str());
                     ImGui::EndDragDropSource();
+                }
+
+                if (ImGui::BeginPopupContextWindow("InspectorMenu")) {
+                    if (ImGui::BeginMenu("Remove component")) {
+                        if (ImGui::MenuItem(component->GetComponentName().c_str())) {
+                            component->GetParent()->RemoveComponent(component);
+                            pComponent = nullptr;
+                        }
+                        ImGui::EndMenu();
+                    }
+                    ImGui::EndPopup();
                 }
 
                 ImGui::EndChild();
