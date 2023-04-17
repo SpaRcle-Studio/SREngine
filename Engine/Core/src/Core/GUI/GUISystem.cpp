@@ -16,8 +16,11 @@
 #include <Utils/Platform/Platform.h>
 
 #include <Graphics/GUI/Editor/MessageBox.h>
+#include <Graphics/SRSL/Shader.h>
 
+/// TODO: перевести инклуд
 #include <imgui_internal.h> /// взято с #5539 https://github.com/ocornut/imgui/issues/5539
+
 #include <Core/GUI/AnimatorEditor.h>
 
 namespace Framework::Core {
@@ -627,6 +630,12 @@ bool GUISystem::BeginMenuBar() {
             }
             Engine::Instance().SetScene(SR_WORLD_NS::Scene::Empty());
             Engine::Instance().GetEditor()->CacheScenePath("NONE");
+        }
+
+        ImGui::Separator();
+
+        if (ImGui::MenuItem("Clear shaders cache")) {
+            SR_SRSL_NS::SRSLShader::ClearShadersCache();
         }
 
         ImGui::Separator();

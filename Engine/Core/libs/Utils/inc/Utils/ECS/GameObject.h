@@ -8,6 +8,7 @@
 #include <Utils/ECS/EntityManager.h>
 #include <Utils/ECS/IComponentable.h>
 #include <Utils/ECS/TagManager.h>
+#include <Utils/ECS/Prefab.h>
 
 #include <Utils/Math/Vector3.h>
 #include <Utils/Types/SafePointer.h>
@@ -132,6 +133,7 @@ namespace SR_UTILS_NS {
 
         ScenePtr m_scene = nullptr;
         Transform* m_transform  = nullptr;
+        Prefab* m_prefab = nullptr;
 
         Name m_name;
         Tag m_tag = 0;

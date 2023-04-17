@@ -50,6 +50,7 @@ namespace SR_SRSL_NS {
 
     public:
         SR_NODISCARD static SRSLShader::Ptr Load(SR_UTILS_NS::Path path);
+        static void ClearShadersCache();
 
     public:
         SR_NODISCARD std::string ToString(ShaderLanguage shaderLanguage) const;

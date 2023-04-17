@@ -52,7 +52,7 @@ namespace SR_UTILS_NS {
     private:
         mutable SR_UTILS_NS::EntityRefUtils::RefPath m_path;
 
-        bool m_relative = false;
+        bool m_relative = true;
 
         EntityRefUtils::OwnerRef m_owner;
         mutable Entity::Ptr m_target;

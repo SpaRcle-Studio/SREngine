@@ -25,11 +25,14 @@ namespace SR_CORE_NS {
 
             for (uint32_t i = 0; i < node->mNumMeshes; ++i) {
                 const uint64_t meshId = node->mMeshes[i];
-                const bool hasBones = pRawMesh->GetAssimpScene()->mMeshes[meshId]->HasBones();
-                const SR_GRAPH_NS::MeshType meshType = hasBones ? SR_GRAPH_NS::MeshType::Skinned : SR_GRAPH_NS::MeshType::Static;
+                const int64_t countBones = pRawMesh->GetAssimpScene()->mMeshes[meshId]->mNumBones;
+                const SR_GRAPH_NS::MeshType meshType = countBones > 0 ? SR_GRAPH_NS::MeshType::Skinned : SR_GRAPH_NS::MeshType::Static;
 
                 if (auto&& pMesh = SR_GTYPES_NS::Mesh::Load(pRawMesh->GetResourceId(), meshType, node->mMeshes[i])) {
-                    if (hasBones) {
+                    if (countBones > 128) {
+                        pMesh->SetMaterial(SR_GTYPES_NS::Material::Load("Engine/Materials/skinned-256.mat"));
+                    }
+                    else if (countBones > 0) {
                         pMesh->SetMaterial(SR_GTYPES_NS::Material::Load("Engine/Materials/skinned.mat"));
                     }
 

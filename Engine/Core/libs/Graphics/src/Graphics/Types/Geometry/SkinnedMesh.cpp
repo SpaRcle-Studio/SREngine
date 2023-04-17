@@ -174,8 +174,16 @@ namespace SR_GTYPES_NS {
         /// TODO: А не стоило бы изменить ColorBufferPass так, чтобы он вызывал не UseModelMatrix, а более обощённый метод?
         /// Нет, не стоило бы.
         PopulateSkeletonMatrices();
-        GetRenderContext()->GetCurrentShader()->SetCustom(SHADER_SKELETON_MATRICES_128, m_skeletonMatrices.data());
-        GetRenderContext()->GetCurrentShader()->SetCustom(SHADER_SKELETON_MATRIX_OFFSETS_128, m_skeletonOffsets.data());
+
+        if (m_bonesIds.size() > 128) {
+            GetRenderContext()->GetCurrentShader()->SetCustom(SHADER_SKELETON_MATRICES_256, m_skeletonMatrices.data());
+            GetRenderContext()->GetCurrentShader()->SetCustom(SHADER_SKELETON_MATRIX_OFFSETS_256, m_skeletonOffsets.data());
+        }
+        else {
+            GetRenderContext()->GetCurrentShader()->SetCustom(SHADER_SKELETON_MATRICES_128, m_skeletonMatrices.data());
+            GetRenderContext()->GetCurrentShader()->SetCustom(SHADER_SKELETON_MATRIX_OFFSETS_128, m_skeletonOffsets.data());
+        }
+
         GetRenderContext()->GetCurrentShader()->SetMat4(SHADER_MODEL_MATRIX, m_modelMatrix);
     }
 
