@@ -28,6 +28,10 @@ namespace SR_UTILS_NS {
 
     GameObject::~GameObject() {
         SRAssert(m_children.empty());
+        if (GetPrefab()) {
+            UnlinkPrefab();
+        }
+        SRAssert(!GetPrefab());
         delete m_transform;
     }
 
@@ -40,6 +44,10 @@ namespace SR_UTILS_NS {
         m_isDestroyed = true;
 
         /// сцену не блокируем, предполагается, что и так в контексте заблокированной сцены работаем
+
+        if (GetPrefab()) {
+            UnlinkPrefab();
+        }
 
         if (auto&& pParent = GetParent()) {
             auto&& thisPtr = GetThis().DynamicCast<GameObject>();
@@ -290,11 +298,11 @@ namespace SR_UTILS_NS {
         //    ///return barycenter + m_transform->m_globalPosition;
         //}
 
-        return Math::FVector3(Math::InfinityFV3);
+        return SR_MATH_NS::FVector3(SR_MATH_NS::InfinityFV3);
     }
 
-    Math::FVector3 GameObject::GetHierarchyBarycenter() {
-        auto barycenter = Math::FVector3((Math::Unit) 0);
+    SR_MATH_NS::FVector3 GameObject::GetHierarchyBarycenter() {
+        auto barycenter = SR_MATH_NS::FVector3((SR_MATH_NS::Unit) 0);
         uint32_t count = 0;
 
         if (auto self = GetBarycenter(); !self.IsInfinity()) {
@@ -309,7 +317,7 @@ namespace SR_UTILS_NS {
             }
         });
 
-        return count == 0 ? Math::InfinityFV3 : barycenter / count;
+        return count == 0 ? SR_MATH_NS::InfinityFV3 : barycenter / count;
     }
 
      bool GameObject::PostLoad() {
@@ -331,8 +339,20 @@ namespace SR_UTILS_NS {
         }
 
         pMarshal = Entity::Save(pMarshal, flags);
+        pMarshal->Write<uint16_t>(GetEntityVersion());
 
-        pMarshal->Write(VERSION);
+        if (auto&& pPrefab = GetPrefab(); pPrefab && IsPrefabOwner()) {
+            pMarshal->Write<bool>(true);
+            pMarshal->Write<std::string>(pPrefab->GetResourcePath().ToStringRef());
+            pMarshal->Write<std::string>(GetName());
+            pMarshal->Write<uint64_t>(GetTag());
+            pMarshal->Write<bool>(IsEnabled());
+            pMarshal = GetTransform()->Save(pMarshal, flags);
+            return pMarshal;
+        }
+        else {
+            pMarshal->Write<bool>(false);
+        }
 
         pMarshal->Write(IsEnabled());
         pMarshal->Write(m_name);
@@ -360,6 +380,7 @@ namespace SR_UTILS_NS {
             if (child->GetFlags() & GAMEOBJECT_FLAG_NO_SAVE) {
                 continue;
             }
+
             pMarshal = child->Save(pMarshal, flags);
         }
 
@@ -505,8 +526,38 @@ namespace SR_UTILS_NS {
 
                 if (!Migration::Instance().Migrate(GAME_OBJECT_HASH_NAME, marshal, version)) {
                     SR_ERROR("GameObject::Load() : failed to migrate game object!");
-                    return GameObject::Ptr();
+                    return gameObject;
                 }
+            }
+
+            if (marshal.Read<bool>()) { /// is prefab
+                auto&& prefabPath = marshal.Read<std::string>();
+                auto&& objectName = marshal.Read<std::string>();
+                auto&& tag = marshal.Read<uint64_t>();
+                auto&& isEnabled = marshal.Read<bool>();
+                auto&& pTransform = Transform::Load(marshal, nullptr);
+
+                if (!pTransform) {
+                    SRHalt("Failed to load transform!");
+                    return gameObject;
+                }
+
+                if (auto&& pPrefab = Prefab::Load(prefabPath)) {
+                    gameObject = pPrefab->Instance(scene);
+                    pPrefab->CheckResourceUsage();
+                }
+
+                if (!gameObject) {
+                    SR_LOG("GameObject::Load() : failed to load prefab!\n\tPath: " + prefabPath);
+                    delete pTransform;
+                    return gameObject;
+                }
+
+                gameObject->SetName(objectName);
+                gameObject->SetEnabled(isEnabled);
+                gameObject->m_tag = tag;
+                gameObject->SetTransform(pTransform);
+                return gameObject;
             }
 
             auto&& enabled = marshal.Read<bool>();
@@ -566,7 +617,7 @@ namespace SR_UTILS_NS {
         return "GameObject: " + GetName();
     }
 
-    GameObject::Ptr GameObject::Copy(const GameObject::ScenePtr &scene) const {
+    GameObject::Ptr GameObject::Copy(const GameObject::ScenePtr& scene) const {
         GameObject::Ptr gameObject = new GameObject(GetName(), GetTransform()->Copy());
 
         gameObject->SetEnabled(IsEnabled());
@@ -587,6 +638,10 @@ namespace SR_UTILS_NS {
 
         for (auto&& children : GetChildrenRef()) {
             gameObject->AddChild(children->Copy(scene));
+        }
+
+        if (IsPrefabOwner()) {
+            gameObject->SetPrefab(GetPrefab(), true);
         }
 
         return gameObject;
@@ -617,10 +672,54 @@ namespace SR_UTILS_NS {
             return m_parent->GetRoot();
         }
 
-        return GetThis().DynamicCast<GameObject>();
+        return DynamicCast<GameObject>();
     }
 
     GameObject::Ptr GameObject::Find(const std::string &name) const noexcept {
         return Find(SR_HASH_STR(name));
+    }
+
+    void GameObject::SetPrefab(Prefab* pPrefab, bool owner) {
+        SRAssert2(pPrefab, "Invalid prefab!");
+        SRAssert2(!GetPrefab() && !IsPrefabOwner(), "Prefab is already set!");
+
+        if (pPrefab && !GetPrefab()) {
+            m_prefab.first = pPrefab;
+            m_prefab.first->AddUsePoint();
+        }
+        else {
+            return;
+        }
+
+        m_prefab.second = owner;
+
+        for (auto&& child : m_children) {
+            /// наткнулись на другой префаб
+            if (child->IsPrefabOwner()) {
+                continue;
+            }
+
+            child->SetPrefab(pPrefab, false);
+        }
+    }
+
+    void GameObject::UnlinkPrefab() {
+        SRAssert2(GetPrefab(), "Is not a prefab!");
+
+        m_prefab.second = false;
+
+        if (m_prefab.first) {
+            m_prefab.first->RemoveUsePoint();
+            m_prefab.first = nullptr;
+        }
+
+        for (auto&& child : m_children) {
+            /// наткнулись на другой префаб или он не задан
+            if (IsPrefabOwner() || !GetPrefab()) {
+                continue;
+            }
+
+            child->UnlinkPrefab();
+        }
     }
 }

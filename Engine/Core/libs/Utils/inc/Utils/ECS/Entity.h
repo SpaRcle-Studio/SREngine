@@ -9,9 +9,10 @@
 #include <Utils/Common/Numeric.h>
 #include <Utils/Types/SharedPtr.h>
 
-#define SR_ENTITY_SET_VERSION(version)                     \
-    public:                                                \
-        SR_INLINE static const uint16_t VERSION = version; \
+#define SR_ENTITY_SET_VERSION(version)                                                       \
+    public:                                                                                  \
+        SR_INLINE static const uint16_t VERSION = version;                                   \
+        SR_NODISCARD uint16_t GetEntityVersion() const noexcept override { return VERSION; } \
 
 namespace SR_UTILS_NS {
     class Entity;
@@ -97,6 +98,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD EntityBranch GetEntityTree() const { return EntityBranch(m_entityId, GetEntityBranches()); }
 
         SR_NODISCARD virtual std::string GetEntityInfo() const { return "None"; }
+        SR_NODISCARD virtual uint16_t GetEntityVersion() const noexcept = 0;
 
     protected:
         void SetEntityPath(const EntityPath& path);

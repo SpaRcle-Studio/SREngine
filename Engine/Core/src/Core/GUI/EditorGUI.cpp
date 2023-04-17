@@ -26,6 +26,8 @@
 namespace SR_CORE_NS::GUI {
     EditorGUI::EditorGUI()
     {
+        m_cachedScenePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("/PreviousScenePath").ConcatExt("cache");
+
         m_window = Engine::Instance().GetWindow();
 
         AddWidget(new FileBrowser());
@@ -50,8 +52,6 @@ namespace SR_CORE_NS::GUI {
             pTexture->RemoveUsePoint();
         }
         m_icons.clear();
-
-        Save();
 
         m_isInit = false;
 
@@ -119,6 +119,10 @@ namespace SR_CORE_NS::GUI {
                 widgets.AppendChild("Widget").NAppendAttribute("Name", name).NAppendAttribute("Open", widget->IsOpen());
 
             document.Save(path.ToString());
+        }
+
+        if (auto&& pScene = Engine::Instance().GetScene()) {
+            CacheScenePath(pScene->GetPath());
         }
     }
 
@@ -218,11 +222,8 @@ namespace SR_CORE_NS::GUI {
     }
 
     void EditorGUI::CacheScenePath(const SR_UTILS_NS::Path& scenePath) {
-        auto&& pMarshal = new SR_HTYPES_NS::Marshal();
-
         if (scenePath.ToStringView() == "NONE") {
             SR_LOG("EditorGUI::LoadSceneFromCachedPath : scene path is \"NONE\". Caching this value.");
-            pMarshal->Write<std::string>("NONE");
             return;
         }
 
@@ -233,6 +234,8 @@ namespace SR_CORE_NS::GUI {
         if (scenePath.GetExtension() == SR_UTILS_NS::Prefab::EXTENSION) {
             return;
         }
+
+        auto&& pMarshal = new SR_HTYPES_NS::Marshal();
 
         pMarshal->Write<std::string>(scenePath.ToString());
         pMarshal->Save(m_cachedScenePath.ToString());
@@ -251,13 +254,18 @@ namespace SR_CORE_NS::GUI {
         SR_UTILS_NS::Path scenePath = marshal.Read<std::string>();
 
         if (scenePath.ToStringView() == "NONE") {
-            SR_LOG("EditorGUI::LoadSceneFromCachedPath : cached scene path is \"NONE\". No scene to load.");
+            SR_LOG("EditorGUI::LoadSceneFromCachedPath() : cached scene path is \"NONE\". No scene to load.");
             return false;
         }
 
         if (!scenePath.Valid() && !scenePath.Exists()) {
-            SR_ERROR("EditorGUI::LoadSceneFromCachedPath : cached path is not usable!");
-            return false;
+            SR_ERROR("EditorGUI::LoadSceneFromCachedPath() : cached path is not usable! \n\tPath: " + scenePath.ToStringRef() + "\n\tUse default scene.");
+            scenePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Scenes/New-scene.scene");
+        }
+
+        if (!scenePath.Exists()) {
+            SR_ERROR("EditorGUI::LoadSceneFromCachedPath() : default scene is not exists! \n\tCreate new by path: " + scenePath.ToStringRef());
+            return Engine::Instance().SetScene(SR_WORLD_NS::Scene::New(scenePath));
         }
 
         return Engine::Instance().SetScene(SR_WORLD_NS::Scene::Load(scenePath));

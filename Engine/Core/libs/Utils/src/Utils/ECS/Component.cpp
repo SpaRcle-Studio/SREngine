@@ -19,7 +19,7 @@ namespace SR_UTILS_NS {
 
         pMarshal->Write<uint64_t>(GetComponentHashName());
         pMarshal->Write(IsEnabled());
-        pMarshal->Write<uint16_t>(ComponentManager::Instance().GetVersion(this));
+        pMarshal->Write<uint16_t>(GetEntityVersion());
 
         return pMarshal;
     }

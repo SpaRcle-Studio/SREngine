@@ -31,7 +31,7 @@ namespace SR_UTILS_NS {
     typedef uint64_t GameObjectFlagBits;
 
     class SR_DLL_EXPORT GameObject : public IComponentable, public Entity {
-        SR_ENTITY_SET_VERSION(1005);
+        SR_ENTITY_SET_VERSION(1006);
         friend class Component;
     public:
         using Name = std::string;
@@ -52,6 +52,8 @@ namespace SR_UTILS_NS {
         SR_NODISCARD GameObject::Ptr Copy(const ScenePtr& scene) const;
 
         SR_NODISCARD ScenePtr GetScene() const override { return m_scene; }
+        SR_NODISCARD Prefab* GetPrefab() const noexcept { return m_prefab.first; }
+        SR_NODISCARD bool IsPrefabOwner() const noexcept { return m_prefab.second; }
         SR_NODISCARD Transform* GetParentTransform() const noexcept { return m_parent ? m_parent->m_transform : nullptr; }
         SR_NODISCARD Transform* GetTransform() const noexcept { return m_transform; }
         SR_NODISCARD GameObject::Ptr GetParent() const noexcept { return m_parent; }
@@ -81,6 +83,8 @@ namespace SR_UTILS_NS {
 
         void SetIdInScene(uint64_t id);
         void SetScene(ScenePtr pScene);
+        void SetPrefab(Prefab* pPrefab, bool owner);
+        void UnlinkPrefab();
 
         void ForEachChild(const std::function<void(GameObject::Ptr&)>& fun);
         void ForEachChild(const std::function<void(const GameObject::Ptr&)>& fun) const;
@@ -133,7 +137,7 @@ namespace SR_UTILS_NS {
 
         ScenePtr m_scene = nullptr;
         Transform* m_transform  = nullptr;
-        Prefab* m_prefab = nullptr;
+        std::pair<Prefab*, bool> m_prefab;
 
         Name m_name;
         Tag m_tag = 0;

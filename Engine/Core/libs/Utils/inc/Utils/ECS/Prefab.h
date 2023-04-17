@@ -12,12 +12,17 @@ namespace SR_HTYPES_NS {
     class Marshal;
 }
 
+namespace SR_WORLD_NS {
+    class Scene;
+}
+
 namespace SR_UTILS_NS {
     class GameObject;
 
     class SR_DLL_EXPORT Prefab : public IResource {
     public:
         using GameObjectPtr = SR_HTYPES_NS::SharedPtr<GameObject>;
+        using ScenePtr = SR_WORLD_NS::Scene*;
 
         static constexpr const char* EXTENSION = "prefab";
 
@@ -28,6 +33,7 @@ namespace SR_UTILS_NS {
     public:
         static Prefab *Load(const SR_UTILS_NS::Path& rawPath);
 
+        SR_NODISCARD GameObjectPtr Instance(const ScenePtr& scene) const;
         SR_NODISCARD const GameObjectPtr& GetData() const noexcept { return m_data; }
 
     protected:

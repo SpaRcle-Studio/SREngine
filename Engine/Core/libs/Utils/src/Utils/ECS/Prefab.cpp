@@ -72,6 +72,17 @@ namespace SR_UTILS_NS {
             return false;
         }
 
+
         return IResource::Load();
+    }
+
+    Prefab::GameObjectPtr Prefab::Instance(const Prefab::ScenePtr& scene) const {
+        if (m_data) {
+            auto&& instanced = m_data->Copy(scene);
+            instanced->SetPrefab(const_cast<Prefab*>(this), true);
+            return instanced;
+        }
+
+        return Prefab::GameObjectPtr();
     }
 }

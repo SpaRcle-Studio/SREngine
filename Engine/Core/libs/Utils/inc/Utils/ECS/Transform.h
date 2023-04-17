@@ -31,6 +31,8 @@ namespace SR_UTILS_NS {
         static Transform* Load(SR_HTYPES_NS::Marshal& marshal, GameObject* pGameObject);
 
     public:
+        SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SavableFlags flags) const override;
+
         void SetGameObject(GameObject *gameObject);
 
         virtual void Translate(const SR_MATH_NS::FVector3& translation) { }
@@ -83,8 +85,6 @@ namespace SR_UTILS_NS {
         SR_NODISCARD SR_HTYPES_NS::SharedPtr<GameObject> GetGameObject() const;
 
         SR_NODISCARD virtual Measurement GetMeasurement() const = 0;
-
-        SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SavableFlags flags) const override;
 
         virtual void UpdateTree();
 

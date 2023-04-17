@@ -422,6 +422,10 @@ namespace SR_CORE_NS {
 
         m_isRun = false;
 
+        if (m_editor) {
+            m_editor->Save();
+        }
+
         if (m_input) {
             m_input->UnregisterAll();
         }

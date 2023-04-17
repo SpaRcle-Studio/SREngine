@@ -86,12 +86,12 @@ namespace SR_CORE_GUI_NS {
         SR_NODISCARD bool IsDockingEnabled() const { return m_useDocking; }
         SR_NODISCARD SR_GTYPES_NS::Texture* GetIcon(EditorIcon icon) const;
         SR_NODISCARD void* GetIconDescriptor(EditorIcon icon) const;
-        //SR_NODISCARD const SR_UTILS_NS::Path GetScenePath() const { return m_scenePath; }
 
         void SetDockingEnabled(bool value) { m_useDocking = value; }
 
         void Draw() override;
         void Update();
+        void Save();
 
         void CacheScenePath(const SR_UTILS_NS::Path& scenePath);
         bool LoadSceneFromCachedPath();
@@ -109,11 +109,10 @@ namespace SR_CORE_GUI_NS {
 
     private:
         bool Init();
-        void Save();
         void Load();
 
     private:
-        SR_UTILS_NS::Path    m_cachedScenePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("/PreviousScenePath").ConcatExt("cache");
+        SR_UTILS_NS::Path m_cachedScenePath;
 
         RenderContextPtr m_context = { };
         WindowPtr m_window = { };

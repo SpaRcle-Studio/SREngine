@@ -270,7 +270,7 @@ namespace SR_WORLD_NS {
             auto&& pPrefab = Prefab::Load(path);
 
             if (pPrefab) {
-                auto&& instanced = pPrefab->GetData()->Copy(this);
+                auto&& instanced = pPrefab->Instance(this);
                 pPrefab->CheckResourceUsage();
                 return instanced;
             }
