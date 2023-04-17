@@ -8,6 +8,37 @@
 
 #include <Graphics/Pipeline/Vulkan/VulkanImGUI.h>
 
+extern LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+
+namespace SR_GRAPH_NS::WinAPI2 {
+    static int GetBorderHeight(HWND hWnd) {
+        RECT rcClient, rcWind;
+        GetClientRect(hWnd, &rcClient);
+        GetWindowRect(hWnd, &rcWind);
+        return ((rcWind.right - rcWind.left) - rcClient.right) / 2;
+    }
+
+    static LRESULT ImGui_WndProcHandler(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
+    {
+        if (ImGui::GetCurrentContext() == NULL)
+            return 0;
+
+        ImGuiIO& io = ImGui::GetIO();
+
+        switch (msg) {
+            case WM_CHAR:
+                wchar_t wch;
+                MultiByteToWideChar(CP_ACP, MB_PRECOMPOSED, (char *) &wParam, 1, &wch, 1);
+                io.AddInputCharacter(wch);
+                return 1;
+            default:
+                break;
+        }
+
+        return 0;
+    }
+}
+
 int CreatePlatformSurface(ImGuiViewport* pv, ImU64 vk_inst, const void* vk_allocators, ImU64* out_vk_surface) {
 #ifdef SR_WIN32
     VkWin32SurfaceCreateInfoKHR sci;
@@ -31,17 +62,41 @@ int CreatePlatformSurface(ImGuiViewport* pv, ImU64 vk_inst, const void* vk_alloc
 #endif
 }
 
-void NewWindowHook(ImGuiContext* context, ImGuiContextHook* hook)
-{
-    if (hook->Type == ImGuiContextHookType_NewFramePre)
-    {
-        // Check if a new window has been added
-        ImGuiWindow* newWindow = ImGui::GetCurrentWindowRead();
-        if (newWindow && newWindow->Appearing)
-        {
-            // Handle events for the new window here
-            std::cout << "NEW WINDOW\n";
+LRESULT CustomWindowProcPlatform(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)  {
+    if (!SR_GRAPH_NS::WinAPI2::ImGui_WndProcHandler(hwnd, msg, wParam, lParam)) {
+        if (ImGui_ImplWin32_WndProcHandler(hwnd, msg, wParam, lParam)) {
+            return true;
         }
+    }
+
+    switch (msg) {
+        case WM_CREATE: {
+            return DefWindowProc(hwnd, msg, wParam, lParam);
+        }
+        case WM_KILLFOCUS: {
+            SR_LOG("CustomWindowProcPlatform() : no way it works");
+            return DefWindowProc(hwnd, msg, wParam, lParam);
+        }
+        case WM_SETFOCUS: {
+            SR_LOG("CustomWindowProcPlatform() : aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+            return DefWindowProc(hwnd, msg, wParam, lParam);
+        }
+        default:
+            return DefWindowProc(hwnd, msg, wParam, lParam);
+    }
+}
+
+static void (*ImGui_Platform_CreateWindow)(ImGuiViewport* vp) = nullptr;
+
+void Replacement_Platform_CreateWindow(ImGuiViewport* vp)
+{
+    if (ImGui_Platform_CreateWindow != nullptr) {
+        ImGui_Platform_CreateWindow(vp);
+    }
+
+    if (vp->PlatformHandle != nullptr) {
+        // platform dependent manipulation of viewport window, f.e. in Win32:
+        SetWindowLongPtr((HWND)vp->PlatformHandle, GWLP_WNDPROC, (LONG_PTR)CustomWindowProcPlatform);
     }
 }
 
@@ -120,16 +175,12 @@ bool Framework::Graphics::VulkanTypes::VkImGUI::Init(EvoVulkan::Core::VulkanKern
         return false;
     }
 
-    ImGuiContext* context = ImGui::GetCurrentContext();
-    ImGuiContextHook hook = {};
-    hook.Type = ImGuiContextHookType_NewFramePre;
-    hook.Callback = NewWindowHook;
-    ImGui::AddContextHook(context, &hook);
-
     ImGuiPlatformIO& platform_io = ImGui::GetPlatformIO();
     ImGuiViewport* mainViewport = platform_io.Viewports.front();
     mainViewport->PlatformHandle = kernel->GetSurface()->GetHandle();
     platform_io.Platform_CreateVkSurface = CreatePlatformSurface;
+    ImGui_Platform_CreateWindow = platform_io.Platform_CreateWindow;
+    platform_io.Platform_CreateWindow = Replacement_Platform_CreateWindow;
 
     // Setup Platform/Renderer bindings
     uint32_t images = m_swapchain->GetCountImages();
