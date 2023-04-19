@@ -8,6 +8,8 @@
 
 #include <Graphics/Pipeline/Vulkan/VulkanImGUI.h>
 
+#include <Graphics/GUI/Widget.h>
+
 extern LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 namespace SR_GRAPH_NS::WinAPI2 {
@@ -73,12 +75,13 @@ LRESULT CustomWindowProcPlatform(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPar
         case WM_CREATE: {
             return DefWindowProc(hwnd, msg, wParam, lParam);
         }
-        case WM_KILLFOCUS: {
-            SR_LOG("CustomWindowProcPlatform() : no way it works");
-            return DefWindowProc(hwnd, msg, wParam, lParam);
-        }
-        case WM_SETFOCUS: {
-            SR_LOG("CustomWindowProcPlatform() : aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+        case WM_DESTROY:
+        case WM_CLOSE: {
+            auto&& viewport = ImGui::FindViewportByPlatformHandle(hwnd);
+            if (auto&& widget = SR_GRAPH_NS::GUI::ViewportsTableManager::Instance().GetWidgetByViewport(viewport)) {
+                widget->Close();
+            }
+
             return DefWindowProc(hwnd, msg, wParam, lParam);
         }
         default:

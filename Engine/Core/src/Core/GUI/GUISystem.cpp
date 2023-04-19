@@ -632,7 +632,7 @@ bool GUISystem::BeginMenuBar() {
         ImGui::Separator();
 
         if (ImGui::MenuItem("Exit")) {
-            SR_UTILS_NS::EventManager::Instance().Broadcast(SR_UTILS_NS::EventManager::Event::Exit);
+            SR_CORE_NS::Engine::Instance().GetWindow()->Close();
         }
 
         ImGui::EndMenu();

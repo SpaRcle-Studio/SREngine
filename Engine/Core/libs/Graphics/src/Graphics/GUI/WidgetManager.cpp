@@ -150,4 +150,17 @@ namespace SR_GRAPH_NS::GUI {
             pWidget->SetScene(scene);
         }
     }
+
+    Widget* ViewportsTableManager::GetWidgetByViewport(ImGuiViewport *viewport) const {
+        if (m_viewports.count(viewport) == 0) {
+            SRHalt("ViewportsTableManager::GetWidgetByViewport() : viewport does not match any widget.");
+            return nullptr;
+        }
+
+        return m_viewports.at(viewport);
+    }
+
+    void ViewportsTableManager::RegisterWidget(Widget* widget, ImGuiViewport* viewport) {
+        m_viewports[viewport] = widget;
+    }
 }

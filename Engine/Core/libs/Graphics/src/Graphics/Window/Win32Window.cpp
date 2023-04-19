@@ -176,9 +176,6 @@ namespace SR_GRAPH_NS {
                 m_isValid = false;
                 return DefWindowProc(hwnd, msg, wParam, lParam);
             }
-            case WM_PAINT: {
-                return DefWindowProc(hwnd, msg, wParam, lParam);
-            }
             default:
                 return DefWindowProc(hwnd, msg, wParam, lParam);
         }

@@ -20,10 +20,13 @@ namespace SR_GRAPH_NS {
     class RenderContext;
 }
 
+struct ImGuiViewport;
+
 namespace SR_GRAPH_NS::GUI {
     class Widget;
 
-    typedef std::unordered_map<std::string, Widget*> Widgets;
+    typedef ska::flat_hash_map<std::string, Widget*> Widgets;
+    typedef ska::flat_hash_map<ImGuiViewport*, Widget*> ViewportsTable;
 
     class WidgetManager : public SR_UTILS_NS::NonCopyable, public SR_UTILS_NS::InputHandler {
         using RenderScenePtr = SR_HTYPES_NS::SafePtr<RenderScene>;
@@ -41,7 +44,7 @@ namespace SR_GRAPH_NS::GUI {
         void SetRenderScene(const RenderScenePtr& renderScene);
 
     public:
-        Widgets& GetWidgets() { return m_widgets; }
+        SR_NODISCARD Widgets& GetWidgets() { return m_widgets; }
         SR_NODISCARD RenderScenePtr GetRenderScene() const;
         SR_NODISCARD ContextPtr GetContext() const;
 
@@ -70,6 +73,17 @@ namespace SR_GRAPH_NS::GUI {
         friend class SR_UTILS_NS::Singleton<GlobalWidgetManager>;
     public:
         ~GlobalWidgetManager() override = default;
+    };
+
+    class ViewportsTableManager : public SR_UTILS_NS::Singleton<ViewportsTableManager> {
+    public:
+        SR_NODISCARD ViewportsTable& GetViewportsTable() { return m_viewports; }
+        SR_NODISCARD Widget* GetWidgetByViewport(ImGuiViewport* viewport) const;
+
+        void RegisterWidget(Widget* widget, ImGuiViewport* viewport);
+
+    private:
+        ViewportsTable m_viewports;
     };
 }
 
