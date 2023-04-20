@@ -40,12 +40,11 @@ namespace SR_CORE_NS::GUI {
         m_sceneRunnerWidget->DrawAsSubWindow();
 
         for (auto&& gameObject : m_tree) {
-            if (!gameObject.RecursiveLockIfValid()) {
+            if (!gameObject.Valid()) {
                 continue;
             }
 
-            DrawChild(gameObject);
-            gameObject.Unlock();
+            DrawChild(gameObject, -1);
         }
 
         if (GUISystem::Instance().BeginDragDropTargetWindow("Hierarchy##Payload")) {
@@ -150,15 +149,27 @@ namespace SR_CORE_NS::GUI {
         }
     }
 
-    void Hierarchy::DrawChild(const SR_UTILS_NS::GameObject::Ptr &root) {
+    void Hierarchy::DrawChild(const SR_UTILS_NS::GameObject::Ptr& root, uint32_t prefabIndex) {
         const auto& name = root->GetName();
         const bool hasChild = root->HasChildren();
 
         const ImGuiTreeNodeFlags flags = (hasChild ? m_nodeFlagsWithChild : m_nodeFlagsWithoutChild) |
                 ((m_selected.count(root) == 1) ? ImGuiTreeNodeFlags_Selected : 0);
 
+        if (root->IsPrefabOwner()) {
+            ++prefabIndex;
+        }
+
+        if (root->GetPrefab()) {
+            ImGui::PushStyleColor(ImGuiCol_Text, prefabIndex % 2 == 0 ? SR_PREFAB_COLOR_FIRST : SR_PREFAB_COLOR_SECOND);
+        }
+
         const uint64_t id = root->GetEntityId();
         const bool open = ImGui::TreeNodeEx((void*)(intptr_t)id, flags, "%s", name.c_str());
+
+        if (root->GetPrefab()) {
+            ImGui::PopStyleColor();
+        }
 
         for (auto&& gameObject : m_selected) {
             if (gameObject) {
@@ -233,7 +244,7 @@ namespace SR_CORE_NS::GUI {
         if (open && hasChild) {
             if (root) {
                 root->ForEachChild([&](const SR_UTILS_NS::GameObject::Ptr &child) {
-                    DrawChild(child);
+                    DrawChild(child, prefabIndex);
                 });
             }
             ImGui::TreePop();

@@ -14,6 +14,9 @@
 
 namespace SR_CORE_NS::GUI {
     class Hierarchy : public SR_GRAPH_NS::GUI::Widget {
+        static constexpr ImVec4 SR_PREFAB_COLOR_FIRST = ImVec4(39.f / 255.f, 225 / 255.f, 193.f / 255.f, 1.f);
+        static constexpr ImVec4 SR_PREFAB_COLOR_SECOND = ImVec4(1.f, 140.f / 255.f, 0, 1.f);
+        static constexpr ImVec4 SR_PREFAB_COLOR_THIRD = ImVec4(170.f / 255.f, 106.f / 255.f, 215.f / 255.f, 1.f);
     public:
         Hierarchy();
         ~Hierarchy() override;
@@ -38,7 +41,7 @@ namespace SR_CORE_NS::GUI {
         void Draw() override;
         void CheckSelected(const SR_UTILS_NS::GameObject::Ptr& gm);
         void ContextMenu(const SR_UTILS_NS::GameObject::Ptr& gm, uint64_t id);
-        void DrawChild(const SR_UTILS_NS::GameObject::Ptr& root);
+        void DrawChild(const SR_UTILS_NS::GameObject::Ptr& root, uint32_t prefabIndex);
         void Copy() const;
         void Paste();
         void Delete();
