@@ -102,7 +102,7 @@ namespace SR_CORE_NS::GUI {
         }
     }
 
-    void Hierarchy::ContextMenu(const Helper::GameObject::Ptr &gm, uint64_t id) {
+    void Hierarchy::ContextMenu(const SR_UTILS_NS::GameObject::Ptr& gm, uint64_t id) {
         ImGui::PushID((void*)(intptr_t)id);
         if (ImGui::BeginPopupContextItem("HierarchyContextMenu")) {
             if (m_selected.count(gm) == 0) {

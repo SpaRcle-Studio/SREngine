@@ -112,7 +112,12 @@ namespace SR_HTYPES_NS {
             }
         }
         else {
-            m_scene = m_importer->ReadFile(path.ToString(), m_asAnimation ? SR_RAW_MESH_ASSIMP_ANIMATION_FLAGS : SR_RAW_MESH_ASSIMP_FLAGS);
+            m_scene = m_importer->ReadFile(path.ToStringRef(), m_asAnimation ? SR_RAW_MESH_ASSIMP_ANIMATION_FLAGS : SR_RAW_MESH_ASSIMP_FLAGS);
+
+            if (!m_scene) {
+                SR_ERROR("RawMesh::Load() : failed to load file!\n\tPath: " + path.ToStringRef() + "\n\tReason: " + std::string(m_importer->GetErrorString()));
+                return false;
+            }
 
             if (needFastLoad) {
                 SR_LOG("RawMesh::Load() : export model to cache... \n\tPath: " + binary.ToString());
@@ -224,12 +229,24 @@ namespace SR_HTYPES_NS {
             }
 
         #ifdef SR_DEBUG
-            for (auto&& vertex : vertices) {
-                float sum = 0.f;
-                for (auto&& [boneId, weight] : vertex.weights) {
-                    sum += weight;
+            static bool hasError = false;
+
+            if (!hasError) {
+                for (auto&& vertex : vertices) {
+                    float_t sum = 0.f;
+
+                    for (auto&&[boneId, weight] : vertex.weights) {
+                        sum += weight;
+                    }
+
+                    if (!SR_EQUALS(sum, 1.f)) {
+                        SR_WARN("RawMesh::GetVertices() : incorrect mesh weight!\n\tPath: " + GetResourcePath().ToStringRef() +
+                            "\n\tIndex: " + std::to_string(id) + "\n\tSum: " + std::to_string(sum)
+                        );
+                        hasError = true;
+                        break;
+                    }
                 }
-                SRAssertOnce(SR_EQUALS(sum, 1.f));
             }
         #endif
         }

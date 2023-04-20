@@ -40,7 +40,9 @@ namespace SR_ANIMATIONS_NS {
     SR_UTILS_NS::Component* Skeleton::CopyComponent() const {
         auto&& pComponent = new Skeleton();
 
-        pComponent->m_rootBone = m_rootBone->CloneRoot();
+        if (m_rootBone) {
+            pComponent->m_rootBone = m_rootBone->CloneRoot();
+        }
 
         return pComponent;
     }

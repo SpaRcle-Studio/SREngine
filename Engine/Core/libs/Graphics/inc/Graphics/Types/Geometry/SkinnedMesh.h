@@ -37,11 +37,12 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD SR_FORCE_INLINE bool IsCanUpdate() const noexcept override { return true; }
         SR_NODISCARD std::string GetMeshIdentifier() const override;
         SR_NODISCARD SR_UTILS_NS::EntityRef& GetSkeleton() { return m_skeletonRef; }
+        SR_NODISCARD uint32_t GetMaxBones() const;
 
         SR_NODISCARD Component* CopyComponent() const override;
 
     private:
-        void PopulateSkeletonMatrices();
+        bool PopulateSkeletonMatrices();
 
         void OnResourceReloaded(SR_UTILS_NS::IResource* pResource) override;
         void OnRawMeshChanged() override;

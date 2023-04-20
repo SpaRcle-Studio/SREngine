@@ -173,15 +173,28 @@ namespace SR_GTYPES_NS {
     void SkinnedMesh::UseModelMatrix() {
         /// TODO: А не стоило бы изменить ColorBufferPass так, чтобы он вызывал не UseModelMatrix, а более обощённый метод?
         /// Нет, не стоило бы.
-        PopulateSkeletonMatrices();
-
-        if (m_bonesIds.size() > 128) {
-            GetRenderContext()->GetCurrentShader()->SetCustom(SHADER_SKELETON_MATRICES_256, m_skeletonMatrices.data());
-            GetRenderContext()->GetCurrentShader()->SetCustom(SHADER_SKELETON_MATRIX_OFFSETS_256, m_skeletonOffsets.data());
+        if (!PopulateSkeletonMatrices()) {
+            return;
         }
-        else {
-            GetRenderContext()->GetCurrentShader()->SetCustom(SHADER_SKELETON_MATRICES_128, m_skeletonMatrices.data());
-            GetRenderContext()->GetCurrentShader()->SetCustom(SHADER_SKELETON_MATRIX_OFFSETS_128, m_skeletonOffsets.data());
+
+        switch (GetMaxBones()) {
+            case 128:
+                GetRenderContext()->GetCurrentShader()->SetCustom(SHADER_SKELETON_MATRICES_128, m_skeletonMatrices.data());
+                GetRenderContext()->GetCurrentShader()->SetCustom(SHADER_SKELETON_MATRIX_OFFSETS_128, m_skeletonOffsets.data());
+                break;
+            case 256:
+                GetRenderContext()->GetCurrentShader()->SetCustom(SHADER_SKELETON_MATRICES_256, m_skeletonMatrices.data());
+                GetRenderContext()->GetCurrentShader()->SetCustom(SHADER_SKELETON_MATRIX_OFFSETS_256, m_skeletonOffsets.data());
+                break;
+            case 384:
+                GetRenderContext()->GetCurrentShader()->SetCustom(SHADER_SKELETON_MATRICES_384, m_skeletonMatrices.data());
+                GetRenderContext()->GetCurrentShader()->SetCustom(SHADER_SKELETON_MATRIX_OFFSETS_384, m_skeletonOffsets.data());
+                break;
+            case 0:
+                break;
+            default:
+                SRHaltOnce0();
+                return;
         }
 
         GetRenderContext()->GetCurrentShader()->SetMat4(SHADER_MODEL_MATRIX, m_modelMatrix);
@@ -195,32 +208,32 @@ namespace SR_GTYPES_NS {
         Mesh::OnResourceReloaded(pResource);
     }
 
-    void SkinnedMesh::PopulateSkeletonMatrices() {
+    bool SkinnedMesh::PopulateSkeletonMatrices() {
         static SR_MATH_NS::Matrix4x4 identityMatrix = SR_MATH_NS::Matrix4x4().Identity();
 
         auto&& bones = GetRawMesh()->GetBones(GetMeshId());
 
         if (bones.empty()) {
-            return;
+            return false;
         }
 
         if (m_bonesIds.empty()) {
-            const uint64_t bonesCount = SR_MAX(SR_HUMANOID_MAX_BONES, bones.size());
+            const uint64_t bonesCount = SR_MAX(GetMaxBones(), bones.size());
 
             m_bonesIds.resize(bonesCount);
             m_skeletonOffsets.resize(bonesCount);
             m_skeletonMatrices.resize(bonesCount);
 
-            for (uint64_t i = 0; i < bonesCount; ++i) {
-                m_skeletonMatrices[i] = identityMatrix;
-                m_skeletonOffsets[i] = identityMatrix;
-            }
+            /// for (uint64_t i = 0; i < bonesCount; ++i) {
+            ///     m_skeletonMatrices[i] = identityMatrix;
+            ///     m_skeletonOffsets[i] = identityMatrix;
+            /// }
         }
 
         auto&& pSkeleton = m_skeletonRef.GetComponent<SR_ANIMATIONS_NS::Skeleton>();
 
         if (!pSkeleton || !pSkeleton->GetRootBone()) {
-            return;
+            return false;
         }
 
         if (!m_isOffsetsInitialized) {
@@ -239,6 +252,8 @@ namespace SR_GTYPES_NS {
                 m_skeletonMatrices[boneId] = identityMatrix;
             }
         }
+
+        return true;
     }
 
     void SkinnedMesh::OnRawMeshChanged() {
@@ -273,5 +288,23 @@ namespace SR_GTYPES_NS {
         }
 
         return MeshComponent::GetMeshIdentifier();
+    }
+
+    uint32_t SkinnedMesh::GetMaxBones() const {
+        if (!GetRawMesh()) {
+            return 0;
+        }
+
+        uint32_t bonesCount = GetRawMesh()->GetBones(GetMeshId()).size();
+
+        if (bonesCount > 256) {
+            return 384;
+        }
+        else if (bonesCount > SR_HUMANOID_MAX_BONES) {
+            return 256;
+        }
+        else {
+            return SR_HUMANOID_MAX_BONES;
+        }
     }
 }

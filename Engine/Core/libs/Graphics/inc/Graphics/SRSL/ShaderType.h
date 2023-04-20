@@ -54,6 +54,9 @@ namespace SR_SRSL_NS {
             { "SKELETON_MATRICES_256",          "mat4[256]"     },
             { "SKELETON_MATRIX_OFFSETS_256",    "mat4[256]"     },
 
+            { "SKELETON_MATRICES_384",          "mat4[384]"     },
+            { "SKELETON_MATRIX_OFFSETS_384",    "mat4[384]"     },
+
             { "HALF_SIZE_NEAR_PLANE",           "vec2"          },
             { "RESOLUTION",                     "vec2"          },
 
