@@ -223,6 +223,22 @@ namespace SR_UTILS_NS::EntityRefUtils {
         return owner.pScene || owner.pEntity;
     }
 
+    bool IsTargetInitialized(const OwnerRef& owner) {
+        if (owner.pScene) {
+            return true;
+        }
+
+        if (auto&& pComponent = owner.pEntity.DynamicCast<Component>()) {
+            return pComponent->HasGameObject();
+        }
+
+        if (auto&& pGameObject = owner.pEntity.DynamicCast<GameObject>()) {
+            return pGameObject->GetScene();
+        }
+
+        return false;
+    }
+
     SR_WORLD_NS::Scene::Ptr GetSceneFromOwner(const OwnerRef& owner) {
         if (owner.pEntity) {
             SR_UTILS_NS::Entity::Ptr pEntity = owner.pEntity;

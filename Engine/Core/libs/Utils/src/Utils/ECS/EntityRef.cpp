@@ -25,6 +25,10 @@ namespace SR_UTILS_NS {
     }
 
     GameObject::Ptr EntityRef::GetGameObject() const {
+        if (m_path.empty() && m_target) {
+            UpdatePath();
+        }
+
         if (!m_target) {
             UpdateTarget();
         }
@@ -33,6 +37,10 @@ namespace SR_UTILS_NS {
     }
 
     Component::Ptr EntityRef::GetComponent() const {
+        if (m_path.empty() && m_target) {
+            UpdatePath();
+        }
+
         if (!m_target) {
             UpdateTarget();
         }
@@ -41,6 +49,10 @@ namespace SR_UTILS_NS {
     }
 
     void EntityRef::UpdatePath() const {
+        if (!EntityRefUtils::IsTargetInitialized(m_target)) {
+            return;
+        }
+
         if (!EntityRefUtils::IsOwnerValid(m_owner)) {
             SRHalt("Invalid owner!");
             return;

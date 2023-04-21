@@ -6,6 +6,7 @@
 
 #include <Utils/Debug.h>
 #include <Utils/Types/RawMesh.h>
+#include <Utils/ECS/ComponentManager.h>
 
 #include <Graphics/Animations/Skeleton.h>
 
@@ -14,7 +15,7 @@
 #include <assimp/Importer.hpp>
 
 namespace SR_CORE_NS {
-    bool Importers::ImportSkeletonFromRawMesh(SR_HTYPES_NS::RawMesh* pRawMesh, SR_ANIMATIONS_NS::Skeleton* pSkeleton) {
+    bool Importers::ImportSkeletonFromRawMesh(const SR_HTYPES_NS::RawMesh* pRawMesh, SR_ANIMATIONS_NS::Skeleton* pSkeleton) {
         const aiScene* pScene = pRawMesh->GetAssimpScene();
 
         if (!pScene->mRootNode) {
@@ -31,6 +32,27 @@ namespace SR_CORE_NS {
 
         processNode(pScene->mRootNode, pSkeleton->GetRootBone());
 
+        /// если нет сцены, значит загружаем сырой компонент
+        if (!pSkeleton->HasScene()) {
+            return true;
+        }
+
         return pSkeleton->ReCalculateSkeleton();
+    }
+
+    SR_ANIMATIONS_NS::Skeleton* Importers::ImportSkeletonFromRawMesh(const SR_HTYPES_NS::RawMesh *pRawMesh) {
+        auto&& pSkeleton = SR_UTILS_NS::ComponentManager::Instance().CreateComponent<SR_ANIMATIONS_NS::Skeleton>();
+        if (!pSkeleton) {
+            SRHalt0();
+            return nullptr;
+        }
+
+        if (!ImportSkeletonFromRawMesh(pRawMesh, pSkeleton)) {
+            SRHalt("Importers::ImportSkeletonFromRawMesh() : failed to import skeleton!");
+            pSkeleton->OnDestroy();
+            return nullptr;
+        }
+
+        return pSkeleton;
     }
 }

@@ -17,7 +17,7 @@ namespace SR_ANIMATIONS_NS {
     public:
         static Component* LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage);
 
-~Skeleton() override;
+        ~Skeleton() override;
 
     public:
         SR_NODISCARD Component* CopyComponent() const override;

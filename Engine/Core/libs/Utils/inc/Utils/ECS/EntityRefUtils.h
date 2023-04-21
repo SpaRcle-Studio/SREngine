@@ -76,6 +76,7 @@ namespace SR_UTILS_NS::EntityRefUtils {
     SR_MAYBE_UNUSED RefPath CalculateRelativePath(const OwnerRef& from, const OwnerRef& target);
 
     SR_MAYBE_UNUSED bool IsOwnerValid(const OwnerRef& owner);
+    SR_MAYBE_UNUSED bool IsTargetInitialized(const OwnerRef& owner);
 }
 
 #endif //SRENGINE_ENTITYREFUTILS_H
