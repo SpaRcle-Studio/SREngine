@@ -227,6 +227,10 @@ namespace SR_CORE_NS::GUI {
             return;
         }
 
+        if (scenePath.Contains("Scenes/Runtime-scene.scene")) {
+            return;
+        }
+
         if (!scenePath.Valid() && !scenePath.Exists()) {
             SR_WARN("EditorGUI::LoadSceneFromCachedPath : scene path is not valid or does not exist! Caching is aborted.");
             return;

@@ -30,6 +30,13 @@ namespace SR_HTYPES_NS {
         }
     }
 
+    SR_UTILS_NS::Path RawMesh::InitializeResourcePath() const {
+        return SR_UTILS_NS::Path(
+                std::move(SR_UTILS_NS::StringUtils::SubstringView(GetResourceId(), '|', 1)),
+                true /** fast */
+        );
+    }
+
     RawMesh::Ptr RawMesh::Load(const SR_UTILS_NS::Path &rawPath) {
         return Load(rawPath, false);
     }
@@ -38,9 +45,13 @@ namespace SR_HTYPES_NS {
         RawMesh::Ptr pRawMesh = nullptr;
 
         ResourceManager::Instance().Execute([&]() {
-            Path&& path = Path(rawPath).RemoveSubPath(ResourceManager::Instance().GetResPath());
+            Path&& id = Path(rawPath).RemoveSubPath(ResourceManager::Instance().GetResPath());
 
-            if (auto&& pResource = ResourceManager::Instance().Find<RawMesh>(path)) {
+            if (animation) {
+                id = id.EmplaceFront("Animation|");
+            }
+
+            if (auto&& pResource = ResourceManager::Instance().Find<RawMesh>(id)) {
                 pRawMesh = pResource;
                 SRAssert(pRawMesh->m_asAnimation == animation);
                 return;
@@ -48,10 +59,10 @@ namespace SR_HTYPES_NS {
 
             pRawMesh = new RawMesh();
             pRawMesh->m_asAnimation = animation;
-            pRawMesh->SetId(path, false /** auto register */);
+            pRawMesh->SetId(id, false /** auto register */);
 
             if (!pRawMesh->Reload()) {
-                SR_ERROR("RawMesh::Load() : failed to load raw mesh! \n\tPath: " + path.ToString());
+                SR_ERROR("RawMesh::Load() : failed to load raw mesh! \n\tPath: " + rawPath.ToString());
                 delete pRawMesh;
                 pRawMesh = nullptr;
                 return;
@@ -87,12 +98,15 @@ namespace SR_HTYPES_NS {
     bool RawMesh::Load() {
         bool hasErrors = !IResource::Load();
 
-        Path&& path = Path(GetResourceId());
-        if (!path.IsAbs()) {
-            path = ResourceManager::Instance().GetResPath().Concat(path);
+        auto&& resPath = GetResourcePath();
+
+        Path&& path = ResourceManager::Instance().GetResPath().Concat(resPath);
+        Path&& cache = ResourceManager::Instance().GetCachePath().Concat("Models").Concat(resPath);
+
+        if (m_asAnimation) {
+            cache = cache.ConcatExt("animation");
         }
 
-        Path&& cache = ResourceManager::Instance().GetCachePath().Concat("Models").Concat(GetResourceId());
         Path&& binary = cache.ConcatExt("cache");
         Path&& hashFile = cache.ConcatExt("hash");
 

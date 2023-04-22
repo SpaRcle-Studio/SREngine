@@ -45,6 +45,7 @@ namespace SR_HTYPES_NS {
         SR_NODISCARD uint32_t GetVerticesCount(uint32_t id) const;
         SR_NODISCARD uint32_t GetIndicesCount(uint32_t id) const;
         SR_NODISCARD uint32_t GetAnimationsCount() const;
+        SR_UTILS_NS::Path InitializeResourcePath() const;
 
         SR_NODISCARD float_t GetScaleFactor() const;
         SR_NODISCARD SR_UTILS_NS::Path GetAssociatedPath() const override;

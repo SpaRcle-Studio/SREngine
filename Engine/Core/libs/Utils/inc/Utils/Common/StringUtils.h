@@ -147,8 +147,9 @@ namespace SR_UTILS_NS {
         }
 
         static std::string_view SubstringView(const std::string_view& source, char symbol, uint32_t offset = 0) {
-            if (auto&& pos = source.find(symbol); pos == std::string::npos)
+            if (auto&& pos = source.find(symbol); pos == std::string::npos) {
                 return source;
+            }
             else {
                 return source.substr(pos + offset, source.size() - 1);
             }

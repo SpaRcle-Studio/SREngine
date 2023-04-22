@@ -359,4 +359,12 @@ namespace SR_UTILS_NS {
         path.resize(path.size() - (m_ext.size() + 1));
         return path;
     }
+
+    bool Path::Contains(const std::string &str) const {
+        return m_path.find(str) != std::string::npos;
+    }
+
+    Path Path::EmplaceFront(const std::string &str) const {
+        return str + m_path;
+    }
 }

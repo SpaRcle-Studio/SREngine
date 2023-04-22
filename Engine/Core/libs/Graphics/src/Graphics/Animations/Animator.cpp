@@ -56,7 +56,7 @@ namespace SR_ANIMATIONS_NS {
     }
 
     void Animator::UpdateInternal(float_t dt) {
-        if (!m_gameObject) {
+        if (!m_gameObject || !m_animationClip) {
             return;
         }
 
@@ -79,8 +79,9 @@ namespace SR_ANIMATIONS_NS {
         //m_animationClip = AnimationClip::Load("Samples/Liza/Walking.fbx", 0);
 
         //m_animationClip = AnimationClip::Load("Samples/Liza/Standing Idle.fbx", 0);
-        m_animationClip = AnimationClip::Load("Samples/Liza/Dancing Twerk.fbx", 0);
+        //m_animationClip = AnimationClip::Load("Samples/Liza/Dancing Twerk.fbx", 0);
         //m_animationClip = AnimationClip::Load("Samples/Liza/Jump.fbx", 0);
+        m_animationClip = AnimationClip::Load("Samples/Tsumugi/Tsumugi.fbx", 1);
 
         if (!m_animationClip) {
             return;
