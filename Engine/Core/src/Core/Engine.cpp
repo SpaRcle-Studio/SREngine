@@ -738,6 +738,13 @@ namespace SR_CORE_NS {
     void Engine::SetGameMode(bool enabled) {
         m_isGameMode = enabled;
 
+        if (m_isGameMode) {
+            m_editor->HideAll();
+        }
+        else {
+            m_editor->ShowAll();
+        }
+
         m_renderScene.Do([this](SR_GRAPH_NS::RenderScene *ptr) {
             ptr->SetOverlayEnabled(!m_isGameMode);
         });

@@ -41,6 +41,9 @@ namespace SR_GRAPH_NS::GUI {
         bool Register(Widget* widget);
         bool Remove(Widget* widget);
 
+        void HideAll();
+        void ShowAll();
+
         void SetRenderScene(const RenderScenePtr& renderScene);
 
     public:

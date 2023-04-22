@@ -151,6 +151,18 @@ namespace SR_GRAPH_NS::GUI {
         }
     }
 
+    void WidgetManager::HideAll() {
+        for (auto&& widget : ViewportsTableManager::Instance().GetViewportsTable()) {
+            ShowWindow((HWND)widget.first->PlatformHandle, SW_HIDE);
+        }
+    }
+
+    void WidgetManager::ShowAll() {
+        for (auto&& widget : ViewportsTableManager::Instance().GetViewportsTable()) {
+            ShowWindow((HWND)widget.first->PlatformHandle, SW_SHOW);
+        }
+    }
+
     Widget* ViewportsTableManager::GetWidgetByViewport(ImGuiViewport *viewport) const {
         if (m_viewports.count(viewport) == 0) {
             SRHalt("ViewportsTableManager::GetWidgetByViewport() : viewport does not match any widget.");

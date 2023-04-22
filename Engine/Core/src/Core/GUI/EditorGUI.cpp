@@ -85,7 +85,7 @@ namespace SR_CORE_NS::GUI {
     void EditorGUI::Draw() {
         SR_LOCK_GUARD
 
-        if (m_hasErrors)
+        if (m_hasErrors || !m_enabled)
             return;
 
         if (!m_isInit) {
@@ -298,6 +298,7 @@ namespace SR_CORE_NS::GUI {
         SR_UTILS_NS::Platform::Copy(SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Editor/Configs/EditorWidgets.xml"), defaultWidgetsPath);
 
         ReloadWindows();
+        ShowAll();
 
         ImGuiContext& g = *GImGui;
         if (g.IO.IniFilename)
