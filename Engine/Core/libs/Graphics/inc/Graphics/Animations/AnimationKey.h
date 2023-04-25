@@ -6,6 +6,7 @@
 #define SRENGINE_ANIMATIONKEY_H
 
 #include <Graphics/Animations/Interpolation.h>
+#include <Graphics/Animations/AnimationPose.h>
 
 namespace SR_UTILS_NS {
     class GameObject;
@@ -39,7 +40,7 @@ namespace SR_ANIMATIONS_NS {
     /// Задача ключа обеспечить необходимый переход из предыдущего ключа в этот в зависимости от интервала времени.
     /// Интервал времени задается от 0.f до 1.f в зависимости от положения перехода в момент времени.
     /// Переход должен работать и в обратную сторону (от 1.f до 0.f)
-    class AnimationKey {
+    class AnimationKey : public SR_UTILS_NS::NonCopyable {
     public:
         explicit AnimationKey(AnimationChannel* pChannel)
             : m_channel(pChannel)
@@ -48,7 +49,7 @@ namespace SR_ANIMATIONS_NS {
         virtual ~AnimationKey() = default;
 
     public:
-        virtual void Update(double_t interval, AnimationKey* pPreviousKey, SR_UTILS_NS::GameObject* pRoot) = 0;
+        virtual void Update(double_t interval, float_t weight, AnimationKey* pPreviousKey, AnimationData* pData) = 0;
         virtual AnimationKey* Copy(AnimationChannel* pChannel) const noexcept = 0;
 
     protected:
@@ -67,7 +68,7 @@ namespace SR_ANIMATIONS_NS {
         { }
 
     public:
-        void Update(double_t progress, AnimationKey* pPreviousKey, SR_UTILS_NS::GameObject* pRoot) override;
+        void Update(double_t progress, float_t weight, AnimationKey* pPreviousKey, AnimationData* pData) override;
 
         SR_NODISCARD AnimationKey* Copy(AnimationChannel* pChannel) const noexcept override {
             return new TranslationKey(pChannel, m_translation);
@@ -89,7 +90,7 @@ namespace SR_ANIMATIONS_NS {
         { }
 
     public:
-        void Update(double_t progress, AnimationKey* pPreviousKey, SR_UTILS_NS::GameObject* pRoot) override;
+        void Update(double_t progress, float_t weight, AnimationKey* pPreviousKey, AnimationData* pData) override;
 
         SR_NODISCARD AnimationKey* Copy(AnimationChannel* pChannel) const noexcept override {
             return new RotationKey(pChannel, m_rotation);
@@ -111,7 +112,7 @@ namespace SR_ANIMATIONS_NS {
         { }
 
     public:
-        void Update(double_t progress, AnimationKey* pPreviousKey, SR_UTILS_NS::GameObject* pRoot) override;
+        void Update(double_t progress, float_t weight, AnimationKey* pPreviousKey, AnimationData* pData) override;
 
         SR_NODISCARD AnimationKey* Copy(AnimationChannel* pChannel) const noexcept override {
             return new ScalingKey(pChannel, m_scaling);

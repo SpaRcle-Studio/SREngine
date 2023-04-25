@@ -34,6 +34,8 @@ namespace SR_ANIMATIONS_NS {
         Bone* AddBone(Bone* pParent, const std::string& name, bool recalculate);
         SR_NODISCARD Bone* GetRootBone() const noexcept { return m_rootBone; }
 
+        SR_NODISCARD const std::vector<Bone*>& GetBones() const noexcept { return m_bonesByIndex; };
+        SR_NODISCARD Bone* TryGetBone(uint64_t hashName);
         SR_NODISCARD Bone* GetBone(uint64_t hashName);
         SR_NODISCARD Bone* GetBoneByIndex(uint64_t index);
         SR_NODISCARD uint64_t GetBoneIndex(uint64_t hashName);

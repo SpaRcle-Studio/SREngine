@@ -123,6 +123,9 @@ namespace SR_MATH_NS {
         SR_FORCE_INLINE void operator-=(const Quaternion &p_q) {
             self -= p_q.self;
         }
+        SR_FORCE_INLINE void operator*=(const Quaternion &p_q) {
+            self *= p_q.self;
+        }
         SR_FORCE_INLINE void operator*=(const double &s){
             self *= s;
         }

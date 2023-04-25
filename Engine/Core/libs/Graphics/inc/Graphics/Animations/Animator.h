@@ -8,6 +8,8 @@
 #include <Utils/ECS/Component.h>
 #include <Graphics/Animations/AnimationKey.h>
 #include <Graphics/Animations/Skeleton.h>
+#include <Graphics/Animations/AnimationGraph.h>
+#include <Graphics/Animations/AnimationStateMachine.h>
 
 namespace SR_ANIMATIONS_NS {
     class AnimationClip;
@@ -39,8 +41,13 @@ namespace SR_ANIMATIONS_NS {
         void UpdateInternal(float_t dt);
         uint32_t UpdateChannel(AnimationChannel* pChannel);
 
+    public:
+        float_t m_weight = 0.f;
+
     private:
         bool m_sync = false;
+
+        AnimationPose* m_pose = nullptr;
 
         std::map<AnimationChannel*, uint32_t> m_playState;
 

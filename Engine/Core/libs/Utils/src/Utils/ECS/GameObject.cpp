@@ -715,7 +715,7 @@ namespace SR_UTILS_NS {
 
         for (auto&& child : m_children) {
             /// наткнулись на другой префаб или он не задан
-            if (IsPrefabOwner() || !GetPrefab()) {
+            if (child->IsPrefabOwner() || !child->GetPrefab()) {
                 continue;
             }
 

@@ -166,6 +166,16 @@ namespace SR_ANIMATIONS_NS {
         return pBoneIt->second;
     }
 
+
+    Bone* Skeleton::TryGetBone(uint64_t hashName) {
+        auto&& pBoneIt = m_bonesByName.find(hashName);
+        if (pBoneIt == m_bonesByName.end()) {
+            return nullptr;
+        }
+
+        return pBoneIt->second;
+    }
+
     void Skeleton::OnAttached() {
         ReCalculateSkeleton();
 

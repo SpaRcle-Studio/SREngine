@@ -132,6 +132,14 @@ namespace SR_CORE_NS::GUI {
                 Delete();
             }
 
+            if (gm->GetPrefab()) {
+                ImGui::Separator();
+
+                if (ImGui::Selectable("Break link")) {
+                    gm->UnlinkPrefab();
+                }
+            }
+
             ImGui::Separator();
 
             if (ImGui::Selectable("Add children")) { ///TODO: ВСМЫСЛЕ children???? Можно добавлять несколько детей одной командой????
