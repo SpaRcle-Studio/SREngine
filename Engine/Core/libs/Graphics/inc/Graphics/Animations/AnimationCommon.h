@@ -10,6 +10,14 @@
 #include <Utils/Common/Enumerations.h>
 
 namespace SR_ANIMATIONS_NS {
+    static SR_MATH_NS::FVector3 AiV3ToFV3(const aiVector3D& v) {
+        return SR_MATH_NS::FVector3(v.x, v.y, v.z) / 100.f;
+    }
+
+    static SR_MATH_NS::Quaternion AiQToQ(const aiQuaternion& q) {
+        return SR_MATH_NS::Quaternion(q.x, q.y, q.z, q.w);
+    }
+
     SR_ENUM_NS_CLASS_T(AnimationGraphNodeType, uint8_t,
         None, Final, Mix, Clip, StateMachine
     );

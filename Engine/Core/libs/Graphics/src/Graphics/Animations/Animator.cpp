@@ -15,10 +15,8 @@ namespace SR_ANIMATIONS_NS {
             m_animationClip = nullptr;
         }
 
-        if (m_pose) {
-            delete m_pose;
-            m_pose = nullptr;
-        }
+        SR_SAFE_DELETE_PTR(m_workingPose);
+        SR_SAFE_DELETE_PTR(m_staticPose);
     }
 
     SR_UTILS_NS::Component* Animator::LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage) {
@@ -65,8 +63,16 @@ namespace SR_ANIMATIONS_NS {
             return;
         }
 
-        if (!m_pose) {
-            m_pose = new AnimationPose();
+        if (!m_workingPose) {
+            m_workingPose = new AnimationPose();
+            m_workingPose->Initialize(m_skeleton);
+        }
+
+        if (!m_staticPose) {
+            m_staticPose = new AnimationPose();
+            m_staticPose->Initialize(m_skeleton);
+            //m_staticPose->SetPose(m_animationClip);
+            m_staticPose->Update(m_skeleton, m_workingPose);
         }
 
         uint32_t maxKeyFrame = 0;
@@ -83,7 +89,7 @@ namespace SR_ANIMATIONS_NS {
             m_playState.clear();
         }
 
-        m_pose->Apply(m_skeleton, nullptr);
+        m_workingPose->Apply(m_skeleton, nullptr);
     }
 
     void Animator::OnAttached() {
@@ -116,9 +122,10 @@ namespace SR_ANIMATIONS_NS {
         auto&& keys = pChannel->GetKeys();
         auto&& keyIndex = m_playState[pChannel];
 
-        auto&& pData = m_pose->GetData(pChannel->GetGameObjectHashName());
+        auto&& pData = m_workingPose->GetData(pChannel->GetGameObjectHashName());
+        auto&& pStaticData = m_staticPose->GetData(pChannel->GetGameObjectHashName());
 
-        if (!pData) {
+        if (!pData || !pStaticData) {
             return keyIndex;
         }
 
@@ -131,10 +138,10 @@ namespace SR_ANIMATIONS_NS {
 
         if (m_time > time) {
             if (keyIndex == 0) {
-                pKey->Update(0.f, m_weight, nullptr, pData);
+                pKey->Update(0.f, m_weight, nullptr, pData, pStaticData);
             }
             else {
-                pKey->Update(1.f, m_weight, keys.at(keyIndex - 1).second, pData);
+                pKey->Update(1.f, m_weight, keys.at(keyIndex - 1).second, pData, pStaticData);
             }
 
             ++keyIndex;
@@ -143,7 +150,7 @@ namespace SR_ANIMATIONS_NS {
         }
 
         if (keyIndex == 0) {
-            pKey->Update(0.f, m_weight, nullptr, pData);
+            pKey->Update(0.f, m_weight, nullptr, pData, pStaticData);
         }
         else {
             auto&& [prevTime, prevKey] = keys.at(keyIndex - 1);
@@ -152,7 +159,7 @@ namespace SR_ANIMATIONS_NS {
             const double_t keyTime = time - prevTime;
             const double_t progress = currentTime / keyTime;
 
-            pKey->Update(progress, m_weight, prevKey, pData);
+            pKey->Update(progress, m_weight, prevKey, pData, pStaticData);
         }
 
         return keyIndex;

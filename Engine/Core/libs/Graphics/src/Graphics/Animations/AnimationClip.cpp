@@ -87,11 +87,15 @@ namespace SR_ANIMATIONS_NS {
                 for (uint16_t positionKeyIndex = 0; positionKeyIndex < pChannel->mNumPositionKeys; ++positionKeyIndex) {
                     auto&& pPositionKey = pChannel->mPositionKeys[positionKeyIndex];
 
-                    pTranslationChannel->AddKey(pPositionKey.mTime / pAnimation->mTicksPerSecond, new TranslationKey(pTranslationChannel, SR_MATH_NS::FVector3(
-                            pPositionKey.mValue.x / 100.f,
-                            pPositionKey.mValue.y / 100.f,
-                            pPositionKey.mValue.z / 100.f
-                    )));
+                    auto&& translation = AiV3ToFV3(pPositionKey.mValue);
+
+                    pTranslationChannel->AddKey(pPositionKey.mTime / pAnimation->mTicksPerSecond,
+                        new TranslationKey(
+                            pTranslationChannel,
+                            translation,
+                            translation - AiV3ToFV3(pChannel->mPositionKeys[0].mValue)
+                        )
+                    );
                 }
 
                 m_channels.emplace_back(pTranslationChannel);
@@ -107,14 +111,13 @@ namespace SR_ANIMATIONS_NS {
                 for (uint16_t rotationKeyIndex = 0; rotationKeyIndex < pChannel->mNumRotationKeys; ++rotationKeyIndex) {
                     auto&& pRotationKey = pChannel->mRotationKeys[rotationKeyIndex];
 
-                    auto&& q = SR_MATH_NS::Quaternion(
-                            pRotationKey.mValue.x,
-                            pRotationKey.mValue.y,
-                            pRotationKey.mValue.z,
-                            pRotationKey.mValue.w
-                    );
+                    auto&& q = AiQToQ(pRotationKey.mValue);
 
-                   pRotationChannel->AddKey(pRotationKey.mTime / pAnimation->mTicksPerSecond, new RotationKey(pRotationChannel, q));
+                    auto&& delta = q * AiQToQ(pChannel->mRotationKeys[0].mValue).Inverse();
+
+                    pRotationChannel->AddKey(pRotationKey.mTime / pAnimation->mTicksPerSecond,
+                        new RotationKey(pRotationChannel, q, delta)
+                    );
                 }
 
                 m_channels.emplace_back(pRotationChannel);

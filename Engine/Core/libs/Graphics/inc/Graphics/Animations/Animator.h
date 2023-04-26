@@ -42,12 +42,13 @@ namespace SR_ANIMATIONS_NS {
         uint32_t UpdateChannel(AnimationChannel* pChannel);
 
     public:
-        float_t m_weight = 0.f;
+        float_t m_weight = 1.f;
 
     private:
         bool m_sync = false;
 
-        AnimationPose* m_pose = nullptr;
+        AnimationPose* m_workingPose = nullptr;
+        AnimationPose* m_staticPose = nullptr;
 
         std::map<AnimationChannel*, uint32_t> m_playState;
 

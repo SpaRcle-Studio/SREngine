@@ -5,6 +5,7 @@
 #include "../Graphics/src/Graphics/Animations/AnimationKey.cpp"
 #include "../Graphics/src/Graphics/Animations/Animator.cpp"
 #include "../Graphics/src/Graphics/Animations/Skeleton.cpp"
+#include "../Graphics/src/Graphics/Animations/AnimationPose.cpp"
 
 #include "../Graphics/src/Graphics/Pipeline/Vulkan/VulkanImGUI.cpp"
 #include "../Graphics/src/Graphics/Pipeline/Vulkan/VulkanMemory.cpp"
