@@ -186,22 +186,19 @@ namespace SR_ANIMATIONS_NS {
             pStaticData->translation = pTransform->GetTranslation();
         }
         else {
-            auto&& translate = pTransform->GetTranslation();
+            auto&& delta = pTransform->GetTranslation() - pWorkingData->translation.value();
+            //auto&& delta2 = pStaticData->translation.value() - delta;
 
-            auto&& delta = translate - pWorkingData->translation.value();
-            auto&& delta2 = delta - (pStaticData->translation.value() - pWorkingData->translation.value());
-
-            if (!delta2.Empty()) {
-                //pStaticData->translation = translate;
-                //SRAssert(false);
+            if (!delta.Empty()) {
+                pStaticData->translation.value() += delta;
             }
-
-            //pStaticData->translation = pStaticData->translation.value() + (pTransform->GetTranslation() - pWorkingData->translation.value());
-            //pStaticData->translation = pWorkingData->translation.value();
         }
 
         if (!pStaticData->rotation.has_value() || !pWorkingData->rotation.has_value()) {
             pStaticData->rotation = pTransform->GetQuaternion();
+        }
+        else {
+
         }
     }
 

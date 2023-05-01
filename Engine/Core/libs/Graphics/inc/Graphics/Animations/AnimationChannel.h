@@ -11,6 +11,7 @@
 
 namespace SR_ANIMATIONS_NS {
     class AnimationKey;
+    class AnimationPose;
 
     class AnimationChannel final : public SR_UTILS_NS::NonCopyable {
         using Keys = std::vector<std::pair<double_t, AnimationKey*>>;
@@ -45,9 +46,15 @@ namespace SR_ANIMATIONS_NS {
             m_keys.emplace_back(std::make_pair(timePoint, pKey));
         }
 
+        uint32_t UpdateChannel(uint32_t keyIndex,
+                float_t time,
+                float_t weight,
+                const AnimationPose* pStaticPose,
+                AnimationPose* pWorkingPose) const;
+
     public:
         SR_NODISCARD const Keys& GetKeys() const { return m_keys; }
-        SR_NODISCARD uint64_t GetGameObjectHashName() const noexcept { return m_hashName; }
+        SR_NODISCARD SR_FORCE_INLINE uint64_t GetGameObjectHashName() const noexcept { return m_hashName; }
 
     private:
         uint64_t m_hashName = 0;

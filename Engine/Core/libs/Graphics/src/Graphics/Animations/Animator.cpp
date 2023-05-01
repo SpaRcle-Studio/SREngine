@@ -71,14 +71,22 @@ namespace SR_ANIMATIONS_NS {
         if (!m_staticPose) {
             m_staticPose = new AnimationPose();
             m_staticPose->Initialize(m_skeleton);
-            //m_staticPose->SetPose(m_animationClip);
+            m_staticPose->SetPose(m_animationClip);
+        }
+        else if (m_allowOverride) {
             m_staticPose->Update(m_skeleton, m_workingPose);
         }
 
         uint32_t maxKeyFrame = 0;
 
         for (auto&& pChannel : m_animationClip->GetChannels()) {
-            const uint32_t keyFrame = UpdateChannel(pChannel);
+            const uint32_t keyFrame = pChannel->UpdateChannel(
+                m_playState[pChannel],
+                m_time,
+                m_weight,
+                m_staticPose,
+                m_workingPose
+            );
             maxKeyFrame = SR_MAX(maxKeyFrame, keyFrame);
         }
 
@@ -116,52 +124,5 @@ namespace SR_ANIMATIONS_NS {
     void Animator::Start() {
         m_gameObject = GetGameObject().Get();
         Super::Start();
-    }
-
-    uint32_t Animator::UpdateChannel(AnimationChannel* pChannel) {
-        auto&& keys = pChannel->GetKeys();
-        auto&& keyIndex = m_playState[pChannel];
-
-        auto&& pData = m_workingPose->GetData(pChannel->GetGameObjectHashName());
-        auto&& pStaticData = m_staticPose->GetData(pChannel->GetGameObjectHashName());
-
-        if (!pData || !pStaticData) {
-            return keyIndex;
-        }
-
-    skipKey:
-        if (keyIndex == keys.size()) {
-            return keyIndex;
-        }
-
-        auto&& [time, pKey] = keys.at(keyIndex);
-
-        if (m_time > time) {
-            if (keyIndex == 0) {
-                pKey->Update(0.f, m_weight, nullptr, pData, pStaticData);
-            }
-            else {
-                pKey->Update(1.f, m_weight, keys.at(keyIndex - 1).second, pData, pStaticData);
-            }
-
-            ++keyIndex;
-
-            goto skipKey;
-        }
-
-        if (keyIndex == 0) {
-            pKey->Update(0.f, m_weight, nullptr, pData, pStaticData);
-        }
-        else {
-            auto&& [prevTime, prevKey] = keys.at(keyIndex - 1);
-
-            const double_t currentTime = m_time - prevTime;
-            const double_t keyTime = time - prevTime;
-            const double_t progress = currentTime / keyTime;
-
-            pKey->Update(progress, m_weight, prevKey, pData, pStaticData);
-        }
-
-        return keyIndex;
     }
 }

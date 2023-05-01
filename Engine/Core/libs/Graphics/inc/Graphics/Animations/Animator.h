@@ -39,13 +39,13 @@ namespace SR_ANIMATIONS_NS {
 
     private:
         void UpdateInternal(float_t dt);
-        uint32_t UpdateChannel(AnimationChannel* pChannel);
 
     public:
         float_t m_weight = 1.f;
 
     private:
         bool m_sync = false;
+        bool m_allowOverride = true;
 
         AnimationPose* m_workingPose = nullptr;
         AnimationPose* m_staticPose = nullptr;
