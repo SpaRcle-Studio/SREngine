@@ -274,6 +274,10 @@ namespace SR_MATH_NS {
             return *this;
         }
 
+        SR_NODISCARD T SquaredNorm() const noexcept {
+            return x * x + y * y + z * z;
+        }
+
         SR_NODISCARD Quaternion ToQuat() const;
 
         SR_FORCE_INLINE const T &operator[](int p_axis) const {

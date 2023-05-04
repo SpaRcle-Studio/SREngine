@@ -61,6 +61,8 @@ namespace SR_MATH_NS {
             self = q;
         }
 
+        Quaternion(const Vector3<Unit>& axis, Unit angle);
+
         constexpr explicit Quaternion(T x, T y, T z, T w)
             : x(x)
             , y(y)
@@ -79,8 +81,12 @@ namespace SR_MATH_NS {
         }
 
         SR_NODISCARD Quaternion Slerp(const Quaternion& q, Unit t) const {
+            SRAssertOnce(t >= 0.f || t <= 1.f);
             return Quaternion(glm::slerp(self, q.self, static_cast<float_t>(t)));
         }
+
+        SR_NODISCARD static Quaternion LookAt(const Vector3<Unit>& direction);
+        SR_NODISCARD static Quaternion LookAt(const Vector3<Unit>& direction, const Vector3<Unit>& up);
 
         SR_NODISCARD Quaternion Normalize() const {
             return Quaternion(glm::normalize(self));
@@ -91,6 +97,7 @@ namespace SR_MATH_NS {
         }
 
         SR_NODISCARD Unit Pitch() const noexcept;
+        SR_NODISCARD Unit SquaredNorm() const noexcept;
 
         SR_NODISCARD Unit Yaw() const noexcept {
             return asin(SR_CLAMP(static_cast<Unit>(-2) * (x * z - w * y), static_cast<Unit>(1), static_cast<Unit>(-1)));
@@ -115,6 +122,14 @@ namespace SR_MATH_NS {
         SR_NODISCARD bool IsFinite() const noexcept {
             /// если будет inf или nan, то вернет false
             return std::isfinite(x) && std::isfinite(y) && std::isfinite(z) && std::isfinite(w);
+        }
+
+        SR_NODISCARD bool IsIdentity() const noexcept {
+            return
+                SR_EQUALS(x, 1.f) &&
+                SR_EQUALS(y, 1.f) &&
+                SR_EQUALS(z, 1.f) &&
+                SR_EQUALS(w, 1.f);
         }
 
         SR_FORCE_INLINE void operator+=(const Quaternion &p_q) {

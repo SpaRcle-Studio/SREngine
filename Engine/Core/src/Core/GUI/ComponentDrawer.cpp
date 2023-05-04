@@ -12,6 +12,7 @@
 #include <Utils/Types/RawMesh.h>
 #include <Utils/ResourceManager/ResourceManager.h>
 #include <Utils/Common/AnyVisitor.h>
+#include <Utils/Game/LookAtComponent.h>
 #include <Utils/Locale/Encoding.h>
 #include <Utils/FileSystem/FileDialog.h>
 
@@ -618,6 +619,40 @@ namespace SR_CORE_NS::GUI {
 
         if (pComponent->GetRootBone()) {
             processBone(pComponent->GetRootBone());
+        }
+    }
+
+    void ComponentDrawer::DrawComponent(SR_UTILS_NS::LookAtComponent*& pComponent, EditorGUI* context, int32_t index) {
+        SR_CORE_GUI_NS::DragDropTargetEntityRef(context, pComponent->GetTarget(), "Target", index, 260.f);
+
+        static auto&& axises = SR_UTILS_NS::EnumReflector::GetNames<SR_UTILS_NS::LookAtAxis>();
+        auto axis = static_cast<int>(SR_UTILS_NS::EnumReflector::GetIndex(pComponent->GetAxis()));
+
+        if (ImGui::Combo(SR_FORMAT_C("Axis##lookAtCmp%i", index), &axis, [](void* vec, int idx, const char** out_text) {
+            auto&& vector = reinterpret_cast<std::vector<std::string>*>(vec);
+            if (idx < 0 || idx >= vector->size())
+                return false;
+
+            *out_text = vector->at(idx).c_str();
+
+            return true;
+        }, reinterpret_cast<void*>(&axises), axises.size())) {
+            pComponent->SetAxis(SR_UTILS_NS::EnumReflector::At<SR_UTILS_NS::LookAtAxis>(axis));
+        }
+
+        auto&& speed = pComponent->GetDelay();
+        if (ImGui::InputFloat("Delay", &speed, 1.0f)) {
+            pComponent->SetDelay(speed);
+        }
+
+        auto&& executeInEditMode = pComponent->ExecuteInEditMode();
+        if (ImGui::Checkbox("Editor mode", &executeInEditMode)) {
+            pComponent->SetExecuteInEditMode(executeInEditMode);
+        }
+
+        auto&& mirror = pComponent->GetMirror();
+        if (ImGui::Checkbox("Mirror", &mirror)) {
+            pComponent->SetMirror(mirror);
         }
     }
 }

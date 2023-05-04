@@ -10,8 +10,30 @@
 #include <Utils/Common/Enumerations.h>
 
 namespace SR_ANIMATIONS_NS {
-    static SR_MATH_NS::FVector3 AiV3ToFV3(const aiVector3D& v) {
-        return SR_MATH_NS::FVector3(v.x, v.y, v.z) / 100.f;
+    /// Это тип свойства которое изменяет AnimationKey
+    SR_ENUM_NS_CLASS_T(AnimationPropertyType, uint8_t,
+        Translation,
+        Rotation,
+        Scale,
+        Skew,
+
+        InstanceFromFile,
+
+        ComponentEnable,
+        ComponentProperty,
+        ComponentRemove,
+        ComponentAdd,
+
+        GameObjectAdd,
+        GameObjectRemove,
+        GameObjectMove,
+        GameObjectEnable,
+        GameObjectName,
+        GameObjectTag
+    );
+
+    static SR_MATH_NS::FVector3 AiV3ToFV3(const aiVector3D& v, float_t multiplier) {
+        return SR_MATH_NS::FVector3(v.x, v.y, v.z) * multiplier;
     }
 
     static SR_MATH_NS::Quaternion AiQToQ(const aiQuaternion& q) {

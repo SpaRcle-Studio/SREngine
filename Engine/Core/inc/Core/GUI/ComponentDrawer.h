@@ -37,6 +37,10 @@ namespace SR_CORE_NS::GUI {
     class EditorGUI;
 }
 
+namespace SR_UTILS_NS {
+    class LookAtComponent;
+}
+
 namespace SR_PTYPES_NS {
     class Rigidbody;
     class Rigidbody2D;
@@ -58,6 +62,7 @@ namespace SR_CORE_NS::GUI::ComponentDrawer {
     void DrawComponent(SR_PTYPES_NS::Rigidbody3D*& pComponent, EditorGUI* context, int32_t index);
     void DrawComponent(SR_ANIMATIONS_NS::Animator*& pComponent, EditorGUI* context, int32_t index);
     void DrawComponent(SR_ANIMATIONS_NS::Skeleton*& pComponent, EditorGUI* context, int32_t index);
+    void DrawComponent(SR_UTILS_NS::LookAtComponent*& pComponent, EditorGUI* context, int32_t index);
 
     void DrawComponent(SR_PTYPES_NS::Rigidbody*& pComponent, EditorGUI* context, int32_t index);
     void DrawCollisionShape(SR_PTYPES_NS::CollisionShape* pCollisionShape, EditorGUI* context, int32_t index);

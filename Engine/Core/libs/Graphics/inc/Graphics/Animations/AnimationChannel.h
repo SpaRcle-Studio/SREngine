@@ -9,6 +9,8 @@
 
 #include <Graphics/Animations/AnimationKey.h>
 
+struct aiNodeAnim;
+
 namespace SR_ANIMATIONS_NS {
     class AnimationKey;
     class AnimationPose;
@@ -16,13 +18,11 @@ namespace SR_ANIMATIONS_NS {
     class AnimationChannel final : public SR_UTILS_NS::NonCopyable {
         using Keys = std::vector<std::pair<double_t, AnimationKey*>>;
     public:
-        ~AnimationChannel() override {
-            for (auto&& [time, pKey] : m_keys) {
-                delete pKey;
-            }
-        }
+        ~AnimationChannel() override;
 
     public:
+        static void Load(aiNodeAnim* pChannel, double_t ticksPerSecond, std::vector<AnimationChannel*>& channels);
+
         SR_NODISCARD AnimationChannel* Copy() const noexcept {
             auto&& pChannel = new AnimationChannel();
 
@@ -35,16 +35,8 @@ namespace SR_ANIMATIONS_NS {
             return pChannel;
         }
 
-        void SetName(const std::string_view& name) {
-            m_hashName = SR_HASH_STR_VIEW(name);
-            if (m_hashName == 0) {
-                SRHalt0();
-            }
-        }
-
-        void AddKey(double_t timePoint, AnimationKey* pKey) {
-            m_keys.emplace_back(std::make_pair(timePoint, pKey));
-        }
+        void SetName(const std::string_view& name);
+        void AddKey(double_t timePoint, AnimationKey* pKey);
 
         uint32_t UpdateChannel(uint32_t keyIndex,
                 float_t time,

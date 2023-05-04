@@ -75,73 +75,11 @@ namespace SR_ANIMATIONS_NS {
 
     void AnimationClip::LoadChannels(aiAnimation *pAnimation) {
         for (uint16_t channelIndex = 0; channelIndex < pAnimation->mNumChannels; ++channelIndex) {
-            auto&& pChannel = pAnimation->mChannels[channelIndex];
-
-            /// --------------------------------------------------------------------------------------------------------
-
-            if (pChannel->mNumPositionKeys > 0) {
-                auto&& pTranslationChannel = new AnimationChannel();
-
-                pTranslationChannel->SetName(pChannel->mNodeName.C_Str());
-
-                for (uint16_t positionKeyIndex = 0; positionKeyIndex < pChannel->mNumPositionKeys; ++positionKeyIndex) {
-                    auto&& pPositionKey = pChannel->mPositionKeys[positionKeyIndex];
-
-                    auto&& translation = AiV3ToFV3(pPositionKey.mValue);
-
-                    pTranslationChannel->AddKey(pPositionKey.mTime / pAnimation->mTicksPerSecond,
-                        new TranslationKey(
-                            pTranslationChannel,
-                            translation,
-                            translation - AiV3ToFV3(pChannel->mPositionKeys[0].mValue)
-                        )
-                    );
-                }
-
-                m_channels.emplace_back(pTranslationChannel);
-            }
-
-            /// --------------------------------------------------------------------------------------------------------
-
-            if (pChannel->mNumRotationKeys > 0) {
-                auto&& pRotationChannel = new AnimationChannel();
-
-                pRotationChannel->SetName(pChannel->mNodeName.C_Str());
-
-                for (uint16_t rotationKeyIndex = 0; rotationKeyIndex < pChannel->mNumRotationKeys; ++rotationKeyIndex) {
-                    auto&& pRotationKey = pChannel->mRotationKeys[rotationKeyIndex];
-
-                    auto&& q = AiQToQ(pRotationKey.mValue);
-
-                    auto&& delta = q * AiQToQ(pChannel->mRotationKeys[0].mValue).Inverse();
-
-                    pRotationChannel->AddKey(pRotationKey.mTime / pAnimation->mTicksPerSecond,
-                        new RotationKey(pRotationChannel, q, delta)
-                    );
-                }
-
-                m_channels.emplace_back(pRotationChannel);
-            }
-
-            /// --------------------------------------------------------------------------------------------------------
-
-            if (pChannel->mNumScalingKeys > 0) {
-                auto&& pScalingChannel = new AnimationChannel();
-
-                pScalingChannel->SetName(pChannel->mNodeName.C_Str());
-
-                for (uint16_t scalingKeyIndex = 0; scalingKeyIndex < pChannel->mNumScalingKeys; ++scalingKeyIndex) {
-                    auto&& pScalingKey = pChannel->mScalingKeys[scalingKeyIndex];
-
-                    pScalingChannel->AddKey(pScalingKey.mTime / pAnimation->mTicksPerSecond, new ScalingKey(pScalingChannel, SR_MATH_NS::FVector3(
-                            pScalingKey.mValue.x / 1.f,
-                            pScalingKey.mValue.y / 1.f,
-                            pScalingKey.mValue.z / 1.f
-                    )));
-                }
-
-                m_channels.emplace_back(pScalingChannel);
-            }
+            AnimationChannel::Load(
+                pAnimation->mChannels[channelIndex],
+                pAnimation->mTicksPerSecond,
+                m_channels
+            );
         }
     }
 

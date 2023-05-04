@@ -188,6 +188,30 @@ namespace SR_UTILS_NS {
 
         return pTransform;
     }
+
+    void Transform3D::LookAt(const SR_MATH_NS::FVector3& position) {
+        LookAt(position, LookAtAxis::AxisZ);
+    }
+
+    void Transform3D::LookAt(const SR_MATH_NS::FVector3& position, LookAtAxis axis) {
+        /*SR_MATH_NS::FVector3 target;
+
+        switch (axis) {
+            case LookAtAxis::AxisX: target = Transform3D::RIGHT; break;
+            case LookAtAxis::AxisY: target = Transform3D::UP; break;
+            case LookAtAxis::AxisZ: target = Transform3D::FORWARD; break;
+            case LookAtAxis::InvAxisX: target = -Transform3D::RIGHT; break;
+            case LookAtAxis::InvAxisY: target = -Transform3D::UP; break;
+            case LookAtAxis::InvAxisZ: target = -Transform3D::FORWARD; break;
+            default:
+                SRHalt0();
+                break;
+        }*/
+
+        //auto&& source = GetMatrix().GetTranslate();
+
+        //SetRotation(m_quaternion.LookAt(source - position));
+    }
 }
 
 

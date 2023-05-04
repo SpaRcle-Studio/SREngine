@@ -19,21 +19,10 @@ namespace SR_ANIMATIONS_NS {
         }
 
         if (auto&& pKey = dynamic_cast<TranslationKey*>(pPreviousKey)) {
-            //pData->translation.value() = pData->translation.value()
-            //        .Lerp(pKey->m_translation
-            //        .Lerp(m_translation, progress), weight);
-
-            //pData->translation.value() = pData->translation.value().Lerp(pData->translation.value() + pKey->m_delta.Lerp(m_delta, progress), weight);
-            //pData->translation.value() = pData->translation.value().Lerp(pData->translation.value() + m_delta, progress);
-            //pData->translation.value() += m_delta.Lerp(SR_MATH_NS::FVector3::Zero(), 1.f - progress);
-            //pData->translation = pData->translation.value().Lerp(pStaticData->translation.value() + m_delta, progress * weight);
-
             auto&& newValue = (pKey->m_delta + pStaticData->translation.value()).Lerp(pStaticData->translation.value() + m_delta, progress);
             pData->translation = pData->translation->Lerp(newValue, weight);
         }
         else {
-            //pData->translation.value() = pData->translation.value().Lerp(m_translation, weight);
-            //pData->translation.value() = pData->translation.value().Lerp(pData->translation.value() + m_delta, weight);
             pData->translation = pData->translation.value().Lerp(pStaticData->translation.value() + m_delta, weight);
         }
     }
@@ -58,24 +47,10 @@ namespace SR_ANIMATIONS_NS {
         }
 
         if (auto&& pKey = dynamic_cast<RotationKey*>(pPreviousKey)) {
-            //pData->rotation.value() = pData->rotation.value()
-            //        .Slerp(pKey->m_rotation
-            //        .Slerp(m_rotation, progress), weight);
-
-            //auto&& delta = m_delta.Slerp(SR_MATH_NS::Quaternion::Identity(), 1.f - weight);
-            //pData->rotation.value() *= pKey->m_delta.Slerp(delta, progress);
-
-            //pData->rotation = pData->rotation.value().Slerp(pData->rotation.value() * m_delta, progress);
-            //pData->rotation = pData->rotation.value().Slerp(pData->rotation.value() * m_delta, progress);
-            //pData->rotation.value() *= m_delta.Slerp(SR_MATH_NS::Quaternion::Identity(), 1.f - progress);
-            //pData->rotation = pData->rotation.value().Slerp(pStaticData->rotation.value() * m_delta, progress * weight);
             auto&& newValue = (pKey->m_delta * pStaticData->rotation.value()).Slerp(m_delta * pStaticData->rotation.value(), progress);
             pData->rotation = pData->rotation->Slerp(newValue, weight);
         }
         else {
-            //pData->rotation.value() = pData->rotation.value().Slerp(m_rotation, weight);
-            //pData->rotation.value() *= m_delta.Slerp(SR_MATH_NS::Quaternion::Identity(), 1.f - weight);
-            //pData->rotation.value() *= m_delta;
             pData->rotation = pData->rotation.value().Slerp(pStaticData->rotation.value() * m_delta, weight);
         }
     }
@@ -96,12 +71,11 @@ namespace SR_ANIMATIONS_NS {
         }
 
         if (auto&& pKey = dynamic_cast<ScalingKey*>(pPreviousKey)) {
-            pData->scale.value() = pData->scale.value()
-                    .Lerp(pKey->m_scaling
-                    .Lerp(m_scaling, progress), weight);
+            auto&& newValue = (pKey->m_delta * pStaticData->scale.value()).Lerp(pStaticData->scale.value() * m_delta, progress);
+            pData->scale = pData->scale->Lerp(newValue, weight);
         }
         else {
-            pData->scale.value() = pData->scale.value().Lerp(m_scaling, weight);
+            pData->scale = pData->scale.value().Lerp(pStaticData->scale.value() * m_delta, weight);
         }
     }
 
