@@ -22,6 +22,7 @@ namespace SR_UTILS_NS {
         pComponent->SetExecuteInEditMode(marshal.Read<bool>());
         pComponent->SetMirror(marshal.Read<bool>());
         pComponent->SetDelay(marshal.Read<float_t>());
+        pComponent->SetOffset(marshal.Read<SR_MATH_NS::FVector3>());
 
         return pComponent;
     }
@@ -34,6 +35,7 @@ namespace SR_UTILS_NS {
         pComponent->m_editMode = m_editMode;
         pComponent->m_mirror = m_mirror;
         pComponent->m_delay = m_delay;
+        pComponent->m_offset = m_offset;
 
         return pComponent;
     }
@@ -52,7 +54,7 @@ namespace SR_UTILS_NS {
         }
 
         if (auto&& pTransform = GetTransform()) {
-            auto&& sourceTranslate = pTransform->GetMatrix().GetTranslate();
+            auto&& sourceTranslate = pTransform->GetMatrix().GetTranslate() + m_offset;
             auto&& destinationTranslate = pTargetTransform->GetMatrix().GetTranslate();
 
             SR_MATH_NS::FVector3 direction;
@@ -71,19 +73,7 @@ namespace SR_UTILS_NS {
 
             m_direction = direction;
 
-            SR_MATH_NS::FVector3 up;
-
-            switch (m_axis) {
-                case LookAtAxis::AxisX: up = Transform3D::RIGHT; break;
-                case LookAtAxis::AxisY: up = Transform3D::UP; break;
-                case LookAtAxis::AxisZ: up = Transform3D::FORWARD; break;
-                case LookAtAxis::InvAxisX: up = -Transform3D::RIGHT; break;
-                case LookAtAxis::InvAxisY: up = -Transform3D::UP; break;
-                case LookAtAxis::InvAxisZ: up = -Transform3D::FORWARD; break;
-                default:
-                    SRHalt0();
-                    break;
-            }
+            const SR_MATH_NS::FVector3 up = GetUp();
 
             SR_MATH_NS::Quaternion q = SR_MATH_NS::Quaternion::LookAt(m_direction.Normalize(), up);
 
@@ -108,6 +98,7 @@ namespace SR_UTILS_NS {
         pMarshal->Write<bool>(m_editMode);
         pMarshal->Write<bool>(m_mirror);
         pMarshal->Write<float_t>(m_delay);
+        pMarshal->Write<SR_MATH_NS::FVector3>(m_offset);
 
         return pMarshal;
     }
@@ -136,5 +127,28 @@ namespace SR_UTILS_NS {
     void LookAtComponent::SetMirror(bool mirror) {
         m_mirror = mirror;
         m_reached = false;
+    }
+
+    void LookAtComponent::SetOffset(const SR_MATH_NS::FVector3& offset) {
+        m_offset = offset;
+        m_reached = false;
+    }
+
+    SR_MATH_NS::FVector3 LookAtComponent::GetUp() const noexcept {
+        switch (m_axis) {
+            case LookAtAxis::AxisX: return Transform3D::RIGHT;
+            case LookAtAxis::AxisY: return Transform3D::UP;
+            case LookAtAxis::AxisZ: return Transform3D::FORWARD;
+            case LookAtAxis::InvAxisX: return -Transform3D::RIGHT;
+            case LookAtAxis::InvAxisY: return -Transform3D::UP;
+            case LookAtAxis::InvAxisZ: return -Transform3D::FORWARD;
+            default:
+                SRHalt0();
+                return SR_MATH_NS::FVector3();
+        }
+    }
+
+    SR_MATH_NS::IVector3 LookAtComponent::GetAngle() const {
+        return GetUp().Angle(GetDirection()).Cast<int32_t>();
     }
 }

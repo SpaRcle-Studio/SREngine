@@ -140,8 +140,8 @@ namespace SR_UTILS_NS {
         return true;
     }
 
-    bool IComponentable::PostLoad() {
-        if (!IsDirty()) {
+    bool IComponentable::PostLoad(bool force) {
+        if (!force && !IsDirty()) {
             return false;
         }
 
@@ -165,8 +165,8 @@ namespace SR_UTILS_NS {
         return true;
     }
 
-    void IComponentable::Awake(bool isPaused) noexcept {
-        if (!IsDirty()) {
+    void IComponentable::Awake(bool force, bool isPaused) noexcept {
+        if (!force && !IsDirty()) {
             return;
         }
 
@@ -185,8 +185,8 @@ namespace SR_UTILS_NS {
         }
     }
 
-    void IComponentable::Start() noexcept {
-        if (!IsDirty()) {
+    void IComponentable::Start(bool force) noexcept {
+        if (!force && !IsDirty()) {
             return;
         }
 
@@ -205,8 +205,8 @@ namespace SR_UTILS_NS {
         }
     }
 
-    void IComponentable::CheckActivity() noexcept {
-        if (!IsDirty()) {
+    void IComponentable::CheckActivity(bool force) noexcept {
+        if (!force && !IsDirty()) {
             return;
         }
 

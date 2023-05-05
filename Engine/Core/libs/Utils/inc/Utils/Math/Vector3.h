@@ -135,6 +135,17 @@ namespace SR_MATH_NS {
             return { static_cast<T>(SR_DEG(x)), static_cast<T>(SR_DEG(y)), static_cast<T>(SR_DEG(z)) };
         }
 
+        SR_NODISCARD Vector3 Angle(const Vector3& vector3) {
+            Vector3 angle;
+
+            angle.x = (T)(std::atan2(vector3.y, vector3.z) - atan2(y, z));
+            angle.y = (T)(std::atan2(vector3.x, vector3.z) - atan2(x, z));
+            angle.z = (T)(std::atan2(vector3.y, vector3.x) - atan2(y, x));
+
+            Vector3 degrees = Vector3(T(180)) * angle / SR_PI;
+            return (Vector3(T(360)) + degrees.Round()) % Vector3(T(360));
+        }
+
         SR_NODISCARD std::string ToString() const {
             return "(" + std::to_string(x) + ", " + std::to_string(y) + ", " + std::to_string(z) + ")";
         }
@@ -309,6 +320,10 @@ namespace SR_MATH_NS {
 
         SR_NODISCARD Vector3 Cos() const {
             return Vector3(static_cast<T>(cos(x)), static_cast<T>(cos(y)), static_cast<T>(cos(z)));
+        }
+
+        SR_NODISCARD Vector3 Round() const {
+            return Vector3(static_cast<T>(std::round(x)), static_cast<T>(std::round(y)), static_cast<T>(std::round(z)));
         }
 
         SR_NODISCARD Vector3 FixEulerAngles() const {

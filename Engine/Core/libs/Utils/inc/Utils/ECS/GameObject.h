@@ -103,12 +103,12 @@ namespace SR_UTILS_NS {
         void RemoveChild(const GameObject::Ptr& child);
 
         /// Вызывает OnAttached у компонентов загруженных через LoadComponent
-        bool PostLoad() override;
+        bool PostLoad(bool force) override;
 
-        void Awake(bool isPaused) noexcept override;
-        void Start() noexcept override;
+        void Awake(bool force, bool isPaused) noexcept override;
+        void Start(bool force) noexcept override;
 
-        void CheckActivity() noexcept override;
+        void CheckActivity(bool force) noexcept override;
 
         bool SetDirty(bool value) override;
         void OnMatrixDirty();

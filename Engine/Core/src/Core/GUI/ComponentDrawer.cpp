@@ -623,6 +623,9 @@ namespace SR_CORE_NS::GUI {
     }
 
     void ComponentDrawer::DrawComponent(SR_UTILS_NS::LookAtComponent*& pComponent, EditorGUI* context, int32_t index) {
+        auto&& angle = pComponent->GetAngle();
+        Graphics::GUI::DrawIVec3Control("Angle", angle, 0, 70, 0, index, false);
+
         SR_CORE_GUI_NS::DragDropTargetEntityRef(context, pComponent->GetTarget(), "Target", index, 260.f);
 
         static auto&& axises = SR_UTILS_NS::EnumReflector::GetNames<SR_UTILS_NS::LookAtAxis>();
@@ -638,6 +641,11 @@ namespace SR_CORE_NS::GUI {
             return true;
         }, reinterpret_cast<void*>(&axises), axises.size())) {
             pComponent->SetAxis(SR_UTILS_NS::EnumReflector::At<SR_UTILS_NS::LookAtAxis>(axis));
+        }
+
+        auto&& offset = pComponent->GetOffset();
+        if (Graphics::GUI::DrawVec3Control("Offset", offset, 0.f, 70.f, 0.01f, index)) {
+            pComponent->SetOffset(offset);
         }
 
         auto&& speed = pComponent->GetDelay();
