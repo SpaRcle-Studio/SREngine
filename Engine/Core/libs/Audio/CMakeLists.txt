@@ -9,6 +9,7 @@ add_definitions(
 )
 
 set(ALSOFT_INSTALL_EXAMPLES OFF CACHE INTERNAL "" FORCE)
+set(ALSOFT_INSTALL_UTILS OFF CACHE INTERNAL "" FORCE)
 
 add_subdirectory(libs/OpenAL)
 add_subdirectory(libs/libmodplug)
