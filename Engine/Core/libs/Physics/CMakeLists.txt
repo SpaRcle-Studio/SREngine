@@ -47,6 +47,7 @@ if (SR_PHYSICS_USE_BULLET3)
     list(APPEND SR_PHYSICS_LINK_LIBRARIES BulletDynamics)
     list(APPEND SR_PHYSICS_LINK_LIBRARIES BulletCollision)
     list(APPEND SR_PHYSICS_LINK_LIBRARIES LinearMath)
+    list(APPEND SR_PHYSICS_LINK_LIBRARIES HACD)
 
     if(MSVC)
         target_compile_options(BulletCollision PUBLIC "/wd4828;")
