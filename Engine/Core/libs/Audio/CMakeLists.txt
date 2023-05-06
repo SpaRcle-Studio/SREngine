@@ -36,11 +36,13 @@ else()
     add_library(Audio::lib ALIAS Audio)
 endif()
 
-if (ANDROID_NDK)
-    target_link_libraries(Audio modplug OpenAL)
-else()
-    target_link_libraries(Audio modplug)
-endif()
+#if (ANDROID_NDK)
+#    target_link_libraries(Audio modplug OpenAL)
+#else()
+#    target_link_libraries(Audio modplug)
+#endif()
+
+target_link_libraries(Audio modplug OpenAL)
 
 target_include_directories(Audio PUBLIC inc)
 target_include_directories(Audio PUBLIC libs)
