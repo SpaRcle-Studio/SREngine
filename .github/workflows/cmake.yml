@@ -53,13 +53,13 @@ jobs:
       # and build directories, but this is only available with CMake 3.13 and higher.  
       # The CMake binaries on the Github Actions machines are (as of this writing) 3.12
       # run: cmake $GITHUB_WORKSPACE -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON -DCMAKE_BUILD_TYPE=Release -DCMAKE_GENERATOR_PLATFORM=WIN64
-      run: cmake -G "Visual Studio 16 2019" ../
+      run: cmake -G "Visual Studio 16 2019" ../ -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON
 
     - name: Building
       working-directory: ${{github.workspace}}/build
       shell: bash
       # Execute the build.  You can specify a specific target with "--target <NAME>"
-      run: cmake --debug-output --trace --trace-expand --build . --config $BUILD_TYPE
+      run: cmake --build . --config $BUILD_TYPE
       
     - name: Testing
       working-directory: ${{github.workspace}}/build
