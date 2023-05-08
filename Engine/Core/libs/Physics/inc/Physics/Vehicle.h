@@ -6,6 +6,7 @@
 #define SRENGINE_VEHICLE_H
 
 #include <Physics/PhysicsLib.h>
+#include <Physics/VehicleInternalData.h>
 
 #include <Utils/ECS/Component.h>
 #include <Utils/Common/Measurement.h>
@@ -28,9 +29,14 @@ namespace SR_PTYPES_NS {
 
         SR_NODISCARD virtual SR_UTILS_NS::Measurement GetMeasurement() const;
 
+        SR_NODISCARD VehicleInternalData& GetVehicleData() { return m_internalData; }
+
         SR_NODISCARD virtual void* GetHandle() const noexcept = 0;
 
         virtual bool InitVehicle();
+
+    private:
+        VehicleInternalData m_internalData;
     };
 }
 

@@ -25,6 +25,12 @@
 #define SR_ENUM_NS_CLASS_T(enumName, type, ...) \
       SR_ENUM_DETAIL_MAKE(enum class, namespace, enumName, type, __VA_ARGS__ )
 
+/// Declare an enumeration inside a namespace
+#define SR_ENUM_NS_STRUCT_T(enumName, type, ...)                                \
+      struct enumName {                                                         \
+            SR_ENUM_DETAIL_MAKE(enum, class, SR_MACRO_CONCAT(enumName, T), type, __VA_ARGS__ )  \
+      };
+
 /// ---------------------------------------[Для объявления внутри классов]----------------------------------------------
 
 #define SR_ENUM_CLASS(enumName, ...) SR_ENUM_CLASS_T(enumName, int32_t, __VA_ARGS__)
