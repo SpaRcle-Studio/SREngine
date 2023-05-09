@@ -35,7 +35,9 @@ namespace SR_UTILS_NS {
         auto&& enabled = marshal.Read<bool>();      /// enabled
         auto&& version = marshal.Read<uint16_t>();  /// version
 
-        if (version != GetVersionById(m_lastComponent)) {
+        const uint16_t newVersion = GetVersionById(m_lastComponent);
+
+        if (version != newVersion) {
             result = ComponentLoadResult::Migrated;
 
             auto&& pMetadataIt = m_meta.find(m_lastComponent);
@@ -44,7 +46,9 @@ namespace SR_UTILS_NS {
                 return std::make_pair(nullptr, ComponentLoadResult::Error);
             }
 
-            SR_WARN("ComponentManager::Load() : \"" + pMetadataIt->second.name + "\" has different version! Try migrate...");
+            SR_INFO("ComponentManager::Load() : \"" + pMetadataIt->second.name + "\" has different version! " +
+                 "Trying to migrate from " + SR_UTILS_NS::ToString(version) + " to " + SR_UTILS_NS::ToString(newVersion) + "..."
+            );
 
             if (!Migration::Instance().Migrate(m_lastComponent, marshal, version)) {
                 SR_ERROR("ComponentManager::Load() : failed to migrate component!");

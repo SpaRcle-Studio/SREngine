@@ -516,11 +516,14 @@ namespace SR_UTILS_NS {
         /// для экономии памяти стека при рекурсивном создании объектов, кладем все переменные в эту область видимости.
         {
             auto&& entityId = marshal.Read<uint64_t>();
-
             auto&& version = marshal.Read<uint16_t>();
 
-            if (version != SR_UTILS_NS::GameObject::VERSION) {
-                SR_WARN("GameObject::Load() : game object has different version! Try migrate...");
+            const uint16_t newVersion = SR_UTILS_NS::GameObject::VERSION;
+
+            if (version != newVersion) {
+                SR_INFO("GameObject::Load() : game object has different version! Trying to migrate from " +
+                        SR_UTILS_NS::ToString(version) + " to " + SR_UTILS_NS::ToString(newVersion) + "..."
+                );
 
                 static const auto GAME_OBJECT_HASH_NAME = SR_HASH_STR("GameObject");
 
