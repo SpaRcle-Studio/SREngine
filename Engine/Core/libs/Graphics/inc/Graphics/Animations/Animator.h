@@ -45,14 +45,13 @@ namespace SR_ANIMATIONS_NS {
 
     private:
         bool m_sync = false;
-        bool m_allowOverride = false;
+        bool m_allowOverride = true;
 
         AnimationPose* m_workingPose = nullptr;
         AnimationPose* m_staticPose = nullptr;
 
         AnimationGraph* m_graph = nullptr;
 
-        SR_UTILS_NS::GameObject* m_gameObject = nullptr;
         Skeleton* m_skeleton = nullptr;
 
     };

@@ -56,7 +56,7 @@ namespace SR_ANIMATIONS_NS {
         m_isInitialized = true;
     }
 
-    void AnimationPose::Apply(Skeleton *pSkeleton, AnimationPose* pStaticPose) {
+    void AnimationPose::Apply(Skeleton *pSkeleton) {
         if (!m_isInitialized) {
             Initialize(pSkeleton);
         }
@@ -67,45 +67,7 @@ namespace SR_ANIMATIONS_NS {
                 continue;
             }
 
-            AnimationData* pStaticData = pStaticPose ? pStaticPose->GetData(boneHashName) : nullptr;
-
-            if (pStaticData) {
-                Apply(pWorkingData, pStaticData, pBone->gameObject);
-            }
-            else {
-                Apply(pWorkingData, pBone->gameObject);
-            }
-        }
-    }
-
-    void AnimationPose::Apply(const AnimationData* pWorkingData, const AnimationData* pStaticData, const SR_UTILS_NS::GameObject::Ptr& pGameObject) {
-        auto&& pTransform = pGameObject->GetTransform();
-
-        /// --------------------------------------------[ TRANSLATION ]-------------------------------------------------
-
-        if (pWorkingData->translation.has_value() && pStaticData->translation.has_value()) {
-            pTransform->SetTranslation(pStaticData->translation.value() + pWorkingData->translation.value());
-        }
-        else if (pStaticData->translation.has_value()) {
-            pTransform->SetTranslation(pStaticData->translation.value());
-        }
-
-        /// ---------------------------------------------[ ROTATION ]----------------------------------------------------
-
-        if (pWorkingData->rotation.has_value() && pStaticData->rotation.has_value()) {
-            pTransform->SetRotation(pStaticData->rotation.value() * pWorkingData->rotation.value());
-        }
-        else if (pStaticData->rotation.has_value()) {
-            pTransform->SetRotation(pStaticData->rotation.value());
-        }
-
-        /// -----------------------------------------------[ SCALE ]----------------------------------------------------=
-
-        if (pWorkingData->scale.has_value() && pStaticData->scale.has_value()) {
-            pTransform->SetScale(pStaticData->scale.value() * pWorkingData->scale.value());
-        }
-        else if (pStaticData->scale.has_value()) {
-            pTransform->SetScale(pStaticData->scale.value());
+            Apply(pWorkingData, pBone->gameObject);
         }
     }
 

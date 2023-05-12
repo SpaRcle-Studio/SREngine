@@ -25,13 +25,12 @@ namespace SR_ANIMATIONS_NS {
 
         void Reset();
         void Initialize(Skeleton* pSkeleton);
-        void Apply(Skeleton* pSkeleton, AnimationPose* pStaticPose);
+        void Apply(Skeleton* pSkeleton);
         void Update(Skeleton* pSkeleton, AnimationPose* pWorkingPose);
         void SetPose(AnimationClip* pClip);
 
     private:
         static void Apply(const AnimationData* pWorkingData, const SR_UTILS_NS::GameObject::Ptr& pGameObject);
-        static void Apply(const AnimationData* pWorkingData, const AnimationData* pStaticData, const SR_UTILS_NS::GameObject::Ptr& pGameObject);
         static void Update(AnimationData* pStaticData, const AnimationData* pWorkingData, const SR_UTILS_NS::GameObject::Ptr& pGameObject);
 
     private:

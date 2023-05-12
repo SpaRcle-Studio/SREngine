@@ -50,7 +50,7 @@ namespace SR_UTILS_NS {
     }
 
     void Transform3D::SetTranslation(const SR_MATH_NS::FVector3& translation) {
-        SR_MATH_NS::FVector3 delta = translation - m_translation;
+        const SR_MATH_NS::FVector3 delta = translation - m_translation;
 
         if (delta.Empty()) {
             return;
@@ -58,39 +58,49 @@ namespace SR_UTILS_NS {
 
         m_translation = translation;
 
+    #ifdef SR_DEBUG
         if (!m_translation.IsFinite()) {
             SRHaltOnce("Translation is broke!");
             m_translation = SR_MATH_NS::FVector3::Zero();
         }
+    #endif
 
         UpdateTree();
     }
 
     void Transform3D::SetRotation(const SR_MATH_NS::FVector3& euler) {
+    #ifdef SR_DEBUG
         if (!euler.IsFinite()) {
             SRHaltOnce("Rotation is broke!");
             m_rotation = SR_MATH_NS::FVector3::Zero();
             m_quaternion = SR_MATH_NS::Quaternion::Identity();
         }
         else {
+    #endif
             m_rotation = euler.Limits(360);
             m_quaternion = euler.Radians().ToQuat();
+    #ifdef SR_DEBUG
         }
+    #endif
 
         UpdateTree();
     }
 
 
     void Transform3D::SetRotation(const SR_MATH_NS::Quaternion& quaternion) {
+    #ifdef SR_DEBUG
         if (!quaternion.IsFinite()) {
             SRHaltOnce("Rotation is broke!");
             m_rotation = SR_MATH_NS::FVector3::Zero();
             m_quaternion = SR_MATH_NS::Quaternion::Identity();
         }
         else {
+    #endif
             m_rotation = quaternion.EulerAngle();
             m_quaternion = quaternion;
+    #ifdef SR_DEBUG
         }
+    #endif
 
         UpdateTree();
     }

@@ -10,12 +10,12 @@
 
 namespace SR_ANIMATIONS_NS {
     void TranslationKey::Update(double_t progress, float_t weight, AnimationKey* pPreviousKey, AnimationData* pData, AnimationData* pStaticData) {
-        if (!pData->translation.has_value()) {
-            pData->translation = SR_MATH_NS::FVector3::Zero();
-        }
-
         if (!pStaticData->translation.has_value()) {
             return;
+        }
+
+        if (!pData->translation.has_value()) {
+            pData->translation = SR_MATH_NS::FVector3::Zero();
         }
 
         if (auto&& pKey = dynamic_cast<TranslationKey*>(pPreviousKey)) {
@@ -38,12 +38,12 @@ namespace SR_ANIMATIONS_NS {
     /// ----------------------------------------------------------------------------------------------------------------
 
     void RotationKey::Update(double_t progress, float_t weight, AnimationKey* pPreviousKey, AnimationData* pData, AnimationData* pStaticData) {
-        if (!pData->rotation.has_value()) {
-            pData->rotation = SR_MATH_NS::Quaternion::Identity();
-        }
-
         if (!pStaticData->rotation.has_value()) {
             return;
+        }
+
+        if (!pData->rotation.has_value()) {
+            pData->rotation = SR_MATH_NS::Quaternion::Identity();
         }
 
         if (auto&& pKey = dynamic_cast<RotationKey*>(pPreviousKey)) {
@@ -66,6 +66,10 @@ namespace SR_ANIMATIONS_NS {
     /// ----------------------------------------------------------------------------------------------------------------
 
     void ScalingKey::Update(double_t progress, float_t weight, AnimationKey* pPreviousKey, AnimationData* pData, AnimationData* pStaticData) {
+        if (!pStaticData->scale.has_value()) {
+            return;
+        }
+
         if (!pData->scale.has_value()) {
             pData->scale = SR_MATH_NS::FVector3::One();
         }

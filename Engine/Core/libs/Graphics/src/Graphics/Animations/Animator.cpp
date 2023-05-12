@@ -55,7 +55,7 @@ namespace SR_ANIMATIONS_NS {
     }
 
     void Animator::UpdateInternal(float_t dt) {
-        if (!m_gameObject || !m_skeleton) {
+        if (!GetGameObject() || !m_skeleton) {
             return;
         }
 
@@ -84,7 +84,7 @@ namespace SR_ANIMATIONS_NS {
             m_graph->Update(context);
         }
 
-        m_workingPose->Apply(m_skeleton, nullptr);
+        m_workingPose->Apply(m_skeleton);
     }
 
     void Animator::OnAttached() {
@@ -104,13 +104,14 @@ namespace SR_ANIMATIONS_NS {
         pStateMachine->GetEntryPoint()->AddTransition(pSetPoseState);
         pSetPoseState->AddTransition(pClipState);
 
+        //pStateMachine->GetEntryPoint()->AddTransition(pClipState);
+
         m_graph->GetFinal()->AddInput(pStateMachineNode, 0, 0);
 
         Super::OnAttached();
     }
 
     void Animator::Start() {
-        m_gameObject = GetGameObject().Get();
         Super::Start();
     }
 }
