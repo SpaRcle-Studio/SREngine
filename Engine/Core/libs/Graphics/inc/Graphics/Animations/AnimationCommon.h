@@ -6,6 +6,7 @@
 #define SRENGINE_ANIMATIONCOMMON_H
 
 #include <Utils/Types/Map.h>
+#include <Utils/Types/Time.h>
 #include <Utils/Common/NonCopyable.h>
 #include <Utils/Common/Enumerations.h>
 
@@ -48,8 +49,49 @@ namespace SR_ANIMATIONS_NS {
         None, Graph, Entry
     );
 
+    struct AnimationLink {
+    public:
+        AnimationLink(uint16_t targetNodeIndex, uint16_t targetPinIndex)
+            : m_targetNodeIndex(targetNodeIndex)
+            , m_targetPinIndex(targetPinIndex)
+        { }
+
+    public:
+        uint16_t m_targetNodeIndex = 0;
+        uint16_t m_targetPinIndex = 0;
+
+    };
+
+    SR_ENUM_NS_CLASS_T(AnimationStateConditionOperationType, uint8_t,
+        Equals, Less, More, NotEquals
+    );
+
+    class IAnimationDataSet;
+    class AnimationGraphNode;
+    class AnimationState;
+    class AnimationStateMachine;
+    class AnimationPose;
+
+    struct UpdateContext {
+        AnimationPose* pWorkingPose = nullptr;
+        AnimationPose* pStaticPose = nullptr;
+        float_t dt = 0.f;
+        float_t weight = 1.f;
+        SR_HTYPES_NS::Time::Point now;
+
+    };
+
+    struct StateConditionContext {
+        AnimationStateMachine* pMachine = nullptr;
+        AnimationState* pState = nullptr;
+    };
+
     class IAnimationDataSet {
     protected:
+        explicit IAnimationDataSet(IAnimationDataSet* pParent)
+            : m_parent(pParent)
+        { }
+
         virtual ~IAnimationDataSet() = default;
 
     protected:

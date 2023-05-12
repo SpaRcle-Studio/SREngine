@@ -10,11 +10,7 @@ namespace SR_ANIMATIONS_NS {
     SR_REGISTER_COMPONENT(Animator);
 
     Animator::~Animator() {
-        if (m_animationClip) {
-            m_animationClip->RemoveUsePoint();
-            m_animationClip = nullptr;
-        }
-
+        SR_SAFE_DELETE_PTR(m_graph);
         SR_SAFE_DELETE_PTR(m_workingPose);
         SR_SAFE_DELETE_PTR(m_staticPose);
     }
@@ -59,7 +55,7 @@ namespace SR_ANIMATIONS_NS {
     }
 
     void Animator::UpdateInternal(float_t dt) {
-        if (!m_gameObject || !m_animationClip || !m_skeleton) {
+        if (!m_gameObject || !m_skeleton) {
             return;
         }
 
@@ -71,52 +67,44 @@ namespace SR_ANIMATIONS_NS {
         if (!m_staticPose) {
             m_staticPose = new AnimationPose();
             m_staticPose->Initialize(m_skeleton);
-            m_staticPose->SetPose(m_animationClip);
         }
         else if (m_allowOverride) {
             m_staticPose->Update(m_skeleton, m_workingPose);
         }
 
-        uint32_t maxKeyFrame = 0;
+        if (m_graph) {
+            UpdateContext context;
 
-        for (auto&& pChannel : m_animationClip->GetChannels()) {
-            const uint32_t keyFrame = pChannel->UpdateChannel(
-                m_playState[pChannel],
-                m_time,
-                m_weight,
-                m_staticPose,
-                m_workingPose
-            );
-            maxKeyFrame = SR_MAX(maxKeyFrame, keyFrame);
-        }
+            context.pStaticPose = m_staticPose;
+            context.pWorkingPose = m_workingPose;
+            context.now = SR_HTYPES_NS::Time::Instance().Now();
+            context.weight = 1.f;
+            context.dt = dt;
 
-        m_time += dt;
-
-        if (maxKeyFrame == m_maxKeyFrame) {
-            m_time = 0.f;
-            m_playState.clear();
+            m_graph->Update(context);
         }
 
         m_workingPose->Apply(m_skeleton, nullptr);
     }
 
     void Animator::OnAttached() {
-        //m_animationClip = AnimationClip::Load("Samples/Liza/Walking.fbx", 0);
+        m_graph = new AnimationGraph(nullptr);
 
-        //m_animationClip = AnimationClip::Load("Samples/Liza/Standing Idle.fbx", 0);
-        //m_animationClip = AnimationClip::Load("Samples/Liza/Dancing Twerk.fbx", 0);
-        //m_animationClip = AnimationClip::Load("Samples/Liza/Jump.fbx", 0);
-        m_animationClip = AnimationClip::Load("Samples/Tsumugi/Tsumugi.fbx", 2);
+        auto&& pAnimationClip = AnimationClip::Load("Samples/Tsumugi/Tsumugi.fbx", 2);
 
-        if (!m_animationClip) {
-            return;
-        }
+        auto&& pStateMachineNode = m_graph->AddNode<AnimationGraphNodeStateMachine>();
+        auto&& pStateMachine = pStateMachineNode->GetMachine();
 
-        m_animationClip->AddUsePoint();
+        auto&& pSetPoseState = pStateMachine->AddState<AnimationSetPoseState>(pAnimationClip);
+        pSetPoseState->SetClip(pAnimationClip);
 
-        for (auto&& pChannel : m_animationClip->GetChannels()) {
-            m_maxKeyFrame = SR_MAX(m_maxKeyFrame, pChannel->GetKeys().size());
-        }
+        auto&& pClipState = pStateMachine->AddState<AnimationClipState>(pAnimationClip);
+        pClipState->SetClip(pAnimationClip);
+
+        pStateMachine->GetEntryPoint()->AddTransition(pSetPoseState);
+        pSetPoseState->AddTransition(pClipState);
+
+        m_graph->GetFinal()->AddInput(pStateMachineNode, 0, 0);
 
         Super::OnAttached();
     }

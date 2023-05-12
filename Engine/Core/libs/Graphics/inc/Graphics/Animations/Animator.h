@@ -45,20 +45,15 @@ namespace SR_ANIMATIONS_NS {
 
     private:
         bool m_sync = false;
-        bool m_allowOverride = true;
+        bool m_allowOverride = false;
 
         AnimationPose* m_workingPose = nullptr;
         AnimationPose* m_staticPose = nullptr;
 
-        std::map<AnimationChannel*, uint32_t> m_playState;
+        AnimationGraph* m_graph = nullptr;
 
         SR_UTILS_NS::GameObject* m_gameObject = nullptr;
         Skeleton* m_skeleton = nullptr;
-
-        uint32_t m_maxKeyFrame = 0;
-        float_t m_time = 0.f;
-
-        AnimationClip* m_animationClip = nullptr;
 
     };
 }

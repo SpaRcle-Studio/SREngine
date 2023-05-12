@@ -81,7 +81,7 @@ namespace SR_ANIMATIONS_NS {
     void AnimationPose::Apply(const AnimationData* pWorkingData, const AnimationData* pStaticData, const SR_UTILS_NS::GameObject::Ptr& pGameObject) {
         auto&& pTransform = pGameObject->GetTransform();
 
-        /// ------------------------------------------------------------------------------------------------------------
+        /// --------------------------------------------[ TRANSLATION ]-------------------------------------------------
 
         if (pWorkingData->translation.has_value() && pStaticData->translation.has_value()) {
             pTransform->SetTranslation(pStaticData->translation.value() + pWorkingData->translation.value());
@@ -90,7 +90,7 @@ namespace SR_ANIMATIONS_NS {
             pTransform->SetTranslation(pStaticData->translation.value());
         }
 
-        /// ------------------------------------------------------------------------------------------------------------
+        /// ---------------------------------------------[ ROTATION ]----------------------------------------------------
 
         if (pWorkingData->rotation.has_value() && pStaticData->rotation.has_value()) {
             pTransform->SetRotation(pStaticData->rotation.value() * pWorkingData->rotation.value());
@@ -99,12 +99,12 @@ namespace SR_ANIMATIONS_NS {
             pTransform->SetRotation(pStaticData->rotation.value());
         }
 
-        /// ------------------------------------------------------------------------------------------------------------
+        /// -----------------------------------------------[ SCALE ]----------------------------------------------------=
 
         if (pWorkingData->scale.has_value() && pStaticData->scale.has_value()) {
             pTransform->SetScale(pStaticData->scale.value() * pWorkingData->scale.value());
         }
-        else {
+        else if (pStaticData->scale.has_value()) {
             pTransform->SetScale(pStaticData->scale.value());
         }
     }

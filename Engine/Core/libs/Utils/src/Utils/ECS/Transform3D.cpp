@@ -58,20 +58,39 @@ namespace SR_UTILS_NS {
 
         m_translation = translation;
 
+        if (!m_translation.IsFinite()) {
+            SRHaltOnce("Translation is broke!");
+            m_translation = SR_MATH_NS::FVector3::Zero();
+        }
+
         UpdateTree();
     }
 
     void Transform3D::SetRotation(const SR_MATH_NS::FVector3& euler) {
-        m_rotation = euler.Limits(360);
-        m_quaternion = euler.Radians().ToQuat();
+        if (!euler.IsFinite()) {
+            SRHaltOnce("Rotation is broke!");
+            m_rotation = SR_MATH_NS::FVector3::Zero();
+            m_quaternion = SR_MATH_NS::Quaternion::Identity();
+        }
+        else {
+            m_rotation = euler.Limits(360);
+            m_quaternion = euler.Radians().ToQuat();
+        }
 
         UpdateTree();
     }
 
 
-    void Transform3D::SetRotation(const SR_MATH_NS::Quaternion &quaternion) {
-        m_rotation = quaternion.EulerAngle();
-        m_quaternion = quaternion;
+    void Transform3D::SetRotation(const SR_MATH_NS::Quaternion& quaternion) {
+        if (!quaternion.IsFinite()) {
+            SRHaltOnce("Rotation is broke!");
+            m_rotation = SR_MATH_NS::FVector3::Zero();
+            m_quaternion = SR_MATH_NS::Quaternion::Identity();
+        }
+        else {
+            m_rotation = quaternion.EulerAngle();
+            m_quaternion = quaternion;
+        }
 
         UpdateTree();
     }

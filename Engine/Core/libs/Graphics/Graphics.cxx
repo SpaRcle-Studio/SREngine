@@ -7,6 +7,12 @@
 #include "../Graphics/src/Graphics/Animations/Skeleton.cpp"
 #include "../Graphics/src/Graphics/Animations/AnimationPose.cpp"
 #include "../Graphics/src/Graphics/Animations/AnimationChannel.cpp"
+#include "../Graphics/src/Graphics/Animations/AnimationGraph.cpp"
+#include "../Graphics/src/Graphics/Animations/AnimationGraphNode.cpp"
+#include "../Graphics/src/Graphics/Animations/AnimationStateCondition.cpp"
+#include "../Graphics/src/Graphics/Animations/AnimationStateTransition.cpp"
+#include "../Graphics/src/Graphics/Animations/AnimationStateMachine.cpp"
+#include "../Graphics/src/Graphics/Animations/AnimationState.cpp"
 
 #include "../Graphics/src/Graphics/Pipeline/Vulkan/VulkanImGUI.cpp"
 #include "../Graphics/src/Graphics/Pipeline/Vulkan/VulkanMemory.cpp"
