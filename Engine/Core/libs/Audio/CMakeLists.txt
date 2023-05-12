@@ -9,6 +9,11 @@ add_definitions(
 )
 
 set(ALSOFT_INSTALL_EXAMPLES OFF CACHE INTERNAL "" FORCE)
+set(ALSOFT_BUILD_IMPORT_LIB OFF CACHE INTERNAL "" FORCE)
+set(ALSOFT_UTILS OFF CACHE INTERNAL "" FORCE)
+set(ALSOFT_EXAMPLES OFF CACHE INTERNAL "" FORCE)
+
+set(LIBTYPE STATIC)
 
 add_subdirectory(libs/OpenAL)
 add_subdirectory(libs/libmodplug)
@@ -33,7 +38,7 @@ endif()
 if (ANDROID_NDK)
     target_link_libraries(Audio modplug OpenAL)
 else()
-    target_link_libraries(Audio modplug)
+    target_link_libraries(Audio modplug OpenAL)
 endif()
 
 target_include_directories(Audio PUBLIC inc)

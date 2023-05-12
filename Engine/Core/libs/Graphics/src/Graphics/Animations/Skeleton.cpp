@@ -159,8 +159,29 @@ namespace SR_ANIMATIONS_NS {
             return nullptr;
         }
 
+        //if (pBoneIt->second->name != "Armature") {
+        //    return nullptr;
+        //}
+
         if (!pBoneIt->second->gameObject && !pBoneIt->second->hasError && !pBoneIt->second->Initialize()) {
             SR_WARN("Skeleton::GetBone() : failed to find bone game object!\n\tName: " + pBoneIt->second->name);
+        }
+
+        return pBoneIt->second;
+    }
+
+    Bone* Skeleton::TryGetBone(uint64_t hashName) {
+        auto&& pBoneIt = m_bonesByName.find(hashName);
+        if (pBoneIt == m_bonesByName.end()) {
+            return nullptr;
+        }
+
+        //if (pBoneIt->second->name != "Armature") {
+        //    return nullptr;
+        //}
+
+        if (!pBoneIt->second->gameObject && !pBoneIt->second->hasError) {
+            pBoneIt->second->Initialize();
         }
 
         return pBoneIt->second;

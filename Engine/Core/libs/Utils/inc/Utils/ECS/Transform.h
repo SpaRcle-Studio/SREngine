@@ -21,6 +21,16 @@
 namespace SR_UTILS_NS {
     class GameObject;
 
+    /// Ось, которая будет разворачиваться в сторону цели
+    SR_ENUM_NS_CLASS_T(LookAtAxis, uint8_t,
+        AxisX,
+        AxisY,
+        AxisZ,
+        InvAxisX,
+        InvAxisY,
+        InvAxisZ
+    );
+
     class SR_DLL_EXPORT Transform : public ISavable {
         friend class GameObject;
     public:
@@ -67,6 +77,9 @@ namespace SR_UTILS_NS {
         virtual void SetScale(SR_MATH_NS::Unit x, SR_MATH_NS::Unit y, SR_MATH_NS::Unit z);
         virtual void SetSkew(const SR_MATH_NS::FVector3& skew) { }
         virtual void SetSkew(SR_MATH_NS::Unit x, SR_MATH_NS::Unit y, SR_MATH_NS::Unit z);
+
+        virtual void LookAt(const SR_MATH_NS::FVector3& position) { }
+        virtual void LookAt(const SR_MATH_NS::FVector3& position, LookAtAxis axis) { }
 
         SR_NODISCARD virtual const SR_MATH_NS::Matrix4x4& GetMatrix();
 

@@ -23,18 +23,26 @@ namespace SR_UTILS_NS {
             pMarshal = new SR_HTYPES_NS::Marshal();
         }
 
-        pMarshal->Write(static_cast<uint16_t>(m_components.size() + m_loadedComponents.size()));
+        std::vector<SR_HTYPES_NS::Marshal::Ptr> components;
+        components.reserve(m_components.size() + m_loadedComponents.size());
 
         for (auto&& pComponent : m_components) {
-            auto&& marshalComponent = pComponent->Save(nullptr, flags);
-            pMarshal->Write<uint32_t>(marshalComponent->Size());
-            pMarshal->Append(marshalComponent);
+            if (auto&& pMarshalComponent = pComponent->Save(nullptr, flags)) {
+                components.emplace_back(pMarshalComponent);
+            }
         }
 
         for (auto&& pComponent : m_loadedComponents) {
-            auto&& marshalComponent = pComponent->Save(nullptr, flags);
-            pMarshal->Write<uint32_t>(marshalComponent->Size());
-            pMarshal->Append(marshalComponent);
+            if (auto&& pMarshalComponent = pComponent->Save(nullptr, flags)) {
+                components.emplace_back(pMarshalComponent);
+            }
+        }
+
+        pMarshal->Write(static_cast<uint16_t>(components.size()));
+
+        for (auto&& pMarshalComponent : components) {
+            pMarshal->Write<uint32_t>(pMarshalComponent->Size());
+            pMarshal->Append(pMarshalComponent);
         }
 
         return pMarshal;
@@ -132,8 +140,8 @@ namespace SR_UTILS_NS {
         return true;
     }
 
-    bool IComponentable::PostLoad() {
-        if (!IsDirty()) {
+    bool IComponentable::PostLoad(bool force) {
+        if (!force && !IsDirty()) {
             return false;
         }
 
@@ -157,8 +165,8 @@ namespace SR_UTILS_NS {
         return true;
     }
 
-    void IComponentable::Awake(bool isPaused) noexcept {
-        if (!IsDirty()) {
+    void IComponentable::Awake(bool force, bool isPaused) noexcept {
+        if (!force && !IsDirty()) {
             return;
         }
 
@@ -177,8 +185,8 @@ namespace SR_UTILS_NS {
         }
     }
 
-    void IComponentable::Start() noexcept {
-        if (!IsDirty()) {
+    void IComponentable::Start(bool force) noexcept {
+        if (!force && !IsDirty()) {
             return;
         }
 
@@ -197,8 +205,8 @@ namespace SR_UTILS_NS {
         }
     }
 
-    void IComponentable::CheckActivity() noexcept {
-        if (!IsDirty()) {
+    void IComponentable::CheckActivity(bool force) noexcept {
+        if (!force && !IsDirty()) {
             return;
         }
 

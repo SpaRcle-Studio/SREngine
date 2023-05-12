@@ -389,7 +389,8 @@ namespace SR_GRAPH_NS::GUI {
             float_t resetValue = 0.0f,
             float_t columnWidth = 70.0f,
             float_t drag = 0.1,
-            uint32_t index = 0)
+            uint32_t index = 0,
+            bool active = true)
     {
         bool result = false;
 
@@ -413,7 +414,7 @@ namespace SR_GRAPH_NS::GUI {
         result |= DrawValueControl<SR_MATH_NS::Unit>("X", values.x, resetValue, buttonSize,
                 ImVec4{ 0.8f, 0.1f, 0.15f, 1.0f },
                 ImVec4{ 0.9f, 0.2f, 0.2f, 1.0f  },
-                ImVec4{ 0.8f, 0.1f, 0.15f, 1.0f }, nullptr, true, drag, index);
+                ImVec4{ 0.8f, 0.1f, 0.15f, 1.0f }, nullptr, active, drag, index);
 
         ImGui::PopItemWidth();
         ImGui::SameLine();
@@ -421,7 +422,7 @@ namespace SR_GRAPH_NS::GUI {
         result |= DrawValueControl<SR_MATH_NS::Unit>("Y", values.y, resetValue, buttonSize,
                ImVec4{ 0.2f, 0.7f, 0.2f, 1.0f },
                ImVec4{ 0.3f, 0.8f, 0.3f, 1.0f },
-               ImVec4{ 0.2f, 0.7f, 0.2f, 1.0f }, nullptr, true, drag, index);
+               ImVec4{ 0.2f, 0.7f, 0.2f, 1.0f }, nullptr, active, drag, index);
 
         ImGui::PopItemWidth();
         ImGui::SameLine();
@@ -429,7 +430,7 @@ namespace SR_GRAPH_NS::GUI {
         result |= DrawValueControl<SR_MATH_NS::Unit>("Z", values.z, resetValue, buttonSize,
                ImVec4{ 0.1f, 0.25f, 0.8f, 1.0f },
                ImVec4{ 0.2f, 0.35f, 0.9f, 1.0f },
-               ImVec4{ 0.1f, 0.25f, 0.8f, 1.0f }, nullptr, true, drag, index);
+               ImVec4{ 0.1f, 0.25f, 0.8f, 1.0f }, nullptr, active, drag, index);
 
         ImGui::PopItemWidth();
         ImGui::PopStyleVar();
@@ -504,7 +505,8 @@ namespace SR_GRAPH_NS::GUI {
             int32_t resetValue = 0,
             float_t columnWidth = 70.0f,
             int32_t drag = 1,
-            uint32_t index = 0)
+            uint32_t index = 0,
+            bool active = true)
     {
         bool result = false;
 
@@ -528,7 +530,7 @@ namespace SR_GRAPH_NS::GUI {
         result |= DrawValueControl<int32_t>("X", values.x, resetValue, buttonSize,
                 ImVec4{ 0.8f, 0.1f, 0.15f, 1.0f },
                 ImVec4{ 0.9f, 0.2f, 0.2f, 1.0f  },
-                ImVec4{ 0.8f, 0.1f, 0.15f, 1.0f }, nullptr, true, drag, index);
+                ImVec4{ 0.8f, 0.1f, 0.15f, 1.0f }, nullptr, active, drag, index);
 
         ImGui::PopItemWidth();
         ImGui::SameLine();
@@ -536,7 +538,7 @@ namespace SR_GRAPH_NS::GUI {
         result |= DrawValueControl<int32_t>("Y", values.y, resetValue, buttonSize,
                ImVec4{ 0.2f, 0.7f, 0.2f, 1.0f },
                ImVec4{ 0.3f, 0.8f, 0.3f, 1.0f },
-               ImVec4{ 0.2f, 0.7f, 0.2f, 1.0f }, nullptr, true, drag, index);
+               ImVec4{ 0.2f, 0.7f, 0.2f, 1.0f }, nullptr, active, drag, index);
 
         ImGui::PopItemWidth();
         ImGui::SameLine();
@@ -544,7 +546,7 @@ namespace SR_GRAPH_NS::GUI {
         result |= DrawValueControl<int32_t>("Z", values.z, resetValue, buttonSize,
                ImVec4{ 0.1f, 0.25f, 0.8f, 1.0f },
                ImVec4{ 0.2f, 0.35f, 0.9f, 1.0f },
-               ImVec4{ 0.1f, 0.25f, 0.8f, 1.0f }, nullptr, true, drag, index);
+               ImVec4{ 0.1f, 0.25f, 0.8f, 1.0f }, nullptr, active, drag, index);
 
         ImGui::PopItemWidth();
         ImGui::PopStyleVar();

@@ -34,12 +34,12 @@ namespace SR_UTILS_NS {
         SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr SaveComponents(SR_HTYPES_NS::Marshal::Ptr pMarshal, SavableFlags flags) const;
 
         /// Вызывает OnAttached у компонентов загруженных через LoadComponent
-        virtual bool PostLoad();
+        virtual bool PostLoad(bool force);
 
-        virtual void CheckActivity() noexcept;
+        virtual void CheckActivity(bool force) noexcept;
 
-        virtual void Awake(bool isPaused) noexcept;
-        virtual void Start() noexcept;
+        virtual void Awake(bool force, bool isPaused) noexcept;
+        virtual void Start(bool force) noexcept;
 
         virtual bool SetDirty(bool dirty) {
             m_dirty = SR_CLAMP(m_dirty + (dirty ? 1 : -1), 3, 0);

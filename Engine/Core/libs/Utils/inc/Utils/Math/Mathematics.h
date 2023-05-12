@@ -31,6 +31,10 @@
 
 #define CMP_EPSILON 0.00001
 #define CMP_BIG_EPSILON 0.001
+
+#define SR_EPSILON 0.00001
+#define SR_BIG_EPSILON 0.001
+
 #define CMP_EPSILON2 (CMP_EPSILON * CMP_EPSILON)
 #define UNIT_EPSILON 0.00001
 
@@ -58,6 +62,12 @@
 #define SR_FLOAT_MAX FLT_MAX
 
 #define SR_EARTH_GRAVITY 9.81
+
+#define SR_SQRT(x) std::sqrt(x)
+#define SR_SIN(x) std::sin(x)
+#define SR_COS(x) std::cos(x)
+#define SR_ARC_SIN(x) std::asin(x)
+#define SR_ARC_COS(x) std::acos(x)
 
 #define SR_ABS(x) (std::abs(x))
 #define SR_MAX(a, b) (a > b ? a : b)

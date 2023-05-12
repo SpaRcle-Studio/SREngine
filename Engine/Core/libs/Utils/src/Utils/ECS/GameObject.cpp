@@ -235,48 +235,52 @@ namespace SR_UTILS_NS {
         return IsEnabled();
     }
 
-    void GameObject::CheckActivity() noexcept {
-        if (!IsDirty()) {
+    void GameObject::CheckActivity(bool force) noexcept {
+        if (!force && !IsDirty()) {
             return;
         }
 
+        const bool isActivePrev = m_isActive;
         m_isActive = IsEnabled() && (!m_parent || m_parent->m_isActive);
 
-        IComponentable::CheckActivity();
-
-        for (auto&& child : m_children) {
-            child->SetDirty(true);
-            child->CheckActivity();
-        }
-    }
-
-    void GameObject::Awake(bool isPaused) noexcept {
-        /// Проверяем на IsEnabled а не на IsActive,
-        /// так как если родитель не активен, то метод не вызвался бы.
-        if (!IsDirty() || !IsEnabled()) {
+        /// нет смысла продолжать цепочку, все и так выключено
+        if (!m_isActive && m_isActive == isActivePrev) {
             return;
         }
 
-        IComponentable::Awake(isPaused);
+        /// обновляем компоненты
+        IComponentable::CheckActivity(force);
 
         for (auto&& child : m_children) {
-            child->SetDirty(true);
-            child->Awake(isPaused);
+            child->CheckActivity(true);
         }
     }
 
-    void GameObject::Start() noexcept {
+    void GameObject::Awake(bool force, bool isPaused) noexcept {
         /// Проверяем на IsEnabled а не на IsActive,
         /// так как если родитель не активен, то метод не вызвался бы.
-        if (!IsDirty() || !IsEnabled()) {
+        if ((!force && !IsDirty()) || !IsEnabled()) {
             return;
         }
 
-        IComponentable::Start();
+        IComponentable::Awake(force, isPaused);
 
         for (auto&& child : m_children) {
-            child->SetDirty(true);
-            child->Start();
+            child->Awake(true, isPaused);
+        }
+    }
+
+    void GameObject::Start(bool force) noexcept {
+        /// Проверяем на IsEnabled а не на IsActive,
+        /// так как если родитель не активен, то метод не вызвался бы.
+        if ((!force && !IsDirty()) || !IsEnabled()) {
+            return;
+        }
+
+        IComponentable::Start(force);
+
+        for (auto&& child : m_children) {
+            child->Start(true);
         }
     }
 
@@ -320,14 +324,13 @@ namespace SR_UTILS_NS {
         return count == 0 ? SR_MATH_NS::InfinityFV3 : barycenter / count;
     }
 
-     bool GameObject::PostLoad() {
-         if (!IComponentable::PostLoad()) {
+     bool GameObject::PostLoad(bool force) {
+         if (!IComponentable::PostLoad(force)) {
              return false;
          }
 
-         for (auto &&child : m_children) {
-             child->SetDirty(true);
-             child->PostLoad();
+         for (auto&& child : m_children) {
+             child->PostLoad(true);
          }
 
          return true;
@@ -503,7 +506,7 @@ namespace SR_UTILS_NS {
             }
 
             if (hasDirtyChild) {
-                return IComponentable::SetDirty(true);
+                return isDirty || IComponentable::SetDirty(true);
             }
 
             return isDirty;
@@ -718,7 +721,7 @@ namespace SR_UTILS_NS {
 
         for (auto&& child : m_children) {
             /// наткнулись на другой префаб или он не задан
-            if (IsPrefabOwner() || !GetPrefab()) {
+            if (child->IsPrefabOwner() || !child->GetPrefab()) {
                 continue;
             }
 

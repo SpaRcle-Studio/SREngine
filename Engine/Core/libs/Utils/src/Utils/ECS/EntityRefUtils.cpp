@@ -37,7 +37,7 @@ namespace SR_UTILS_NS::EntityRefUtils {
                                 tree = &gm->GetChildrenRef();
                             }
                             else if (auto&& pComponent = owner.pEntity.DynamicCast<Component>()) {
-                                tree = &pComponent->GetGameObject()->GetChildrenRef();
+                                tree = &pComponent->GetScene()->GetRootGameObjects();
                             }
                         }
                         else if (owner.pScene) {
@@ -195,7 +195,7 @@ namespace SR_UTILS_NS::EntityRefUtils {
          *      path: ../../../G/C/file.txt
         */
 
-        int32_t minSize = SR_MIN(fromPath.size(), targetPath.size());
+        const int32_t minSize = SR_MIN(fromPath.size(), targetPath.size());
         int32_t offset = 0;
 
         for (int32_t i = 0; i < minSize; ++i) {
@@ -205,6 +205,7 @@ namespace SR_UTILS_NS::EntityRefUtils {
             ++offset;
         }
 
+        /// Вычитаем 2, так как один это конец массива, а второй это компонент
         for (int32_t i = fromPath.size() - 2; i >= offset; --i) {
             PathItem item = {
                     .action = Action::Action_Parent

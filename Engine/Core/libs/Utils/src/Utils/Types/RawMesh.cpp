@@ -91,6 +91,7 @@ namespace SR_HTYPES_NS {
 
         m_bones.clear();
         m_boneOffsets.clear();
+        m_animations.clear();
 
         return !hasErrors;
     }
@@ -151,6 +152,7 @@ namespace SR_HTYPES_NS {
 
         if (m_scene) {
             CalculateBones();
+            CalculateAnimations();
         }
         else {
             SR_ERROR("RawMesh::Load() : failed to read file! \n\tPath: " + path.ToString() + "\n\tReason: " + m_importer->GetErrorString());
@@ -402,6 +404,17 @@ namespace SR_HTYPES_NS {
 
                 m_boneOffsets.insert(std::make_pair(hashName, std::move(matrix4X4)));
             }
+        }
+    }
+
+    void RawMesh::CalculateAnimations() {
+        if (!m_asAnimation || !m_scene) {
+            return;
+        }
+
+        for (uint32_t i = 0; i < m_scene->mNumAnimations; ++i) {
+            auto&& pAnimation = m_scene->mAnimations[i];
+            m_animations[SR_HASH_STR(pAnimation->mName.C_Str())] = pAnimation;
         }
     }
 }

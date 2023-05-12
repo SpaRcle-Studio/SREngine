@@ -10,10 +10,9 @@ namespace SR_ANIMATIONS_NS {
     SR_REGISTER_COMPONENT(Animator);
 
     Animator::~Animator() {
-        if (m_animationClip) {
-            m_animationClip->RemoveUsePoint();
-            m_animationClip = nullptr;
-        }
+        SR_SAFE_DELETE_PTR(m_graph);
+        SR_SAFE_DELETE_PTR(m_workingPose);
+        SR_SAFE_DELETE_PTR(m_staticPose);
     }
 
     SR_UTILS_NS::Component* Animator::LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage) {
@@ -56,42 +55,56 @@ namespace SR_ANIMATIONS_NS {
     }
 
     void Animator::UpdateInternal(float_t dt) {
-        if (!m_gameObject || !m_animationClip) {
+        if (!m_gameObject || !m_skeleton) {
             return;
         }
 
-        uint32_t maxKeyFrame = 0;
-
-        for (auto&& pChannel : m_animationClip->GetChannels()) {
-            const uint32_t keyFrame = UpdateChannel(pChannel);
-            maxKeyFrame = SR_MAX(maxKeyFrame, keyFrame);
+        if (!m_workingPose) {
+            m_workingPose = new AnimationPose();
+            m_workingPose->Initialize(m_skeleton);
         }
 
-        m_time += dt;
-
-        if (maxKeyFrame == m_maxKeyFrame) {
-            m_time = 0.f;
-            m_playState.clear();
+        if (!m_staticPose) {
+            m_staticPose = new AnimationPose();
+            m_staticPose->Initialize(m_skeleton);
         }
+        else if (m_allowOverride) {
+            m_staticPose->Update(m_skeleton, m_workingPose);
+        }
+
+        if (m_graph) {
+            UpdateContext context;
+
+            context.pStaticPose = m_staticPose;
+            context.pWorkingPose = m_workingPose;
+            context.now = SR_HTYPES_NS::Time::Instance().Now();
+            context.weight = 1.f;
+            context.dt = dt;
+
+            m_graph->Update(context);
+        }
+
+        m_workingPose->Apply(m_skeleton, nullptr);
     }
 
     void Animator::OnAttached() {
-        //m_animationClip = AnimationClip::Load("Samples/Liza/Walking.fbx", 0);
+        m_graph = new AnimationGraph(nullptr);
 
-        //m_animationClip = AnimationClip::Load("Samples/Liza/Standing Idle.fbx", 0);
-        //m_animationClip = AnimationClip::Load("Samples/Liza/Dancing Twerk.fbx", 0);
-        //m_animationClip = AnimationClip::Load("Samples/Liza/Jump.fbx", 0);
-        m_animationClip = AnimationClip::Load("Samples/Tsumugi/Tsumugi.fbx", 0);
+        auto&& pAnimationClip = AnimationClip::Load("Samples/Tsumugi/Tsumugi.fbx", 2);
 
-        if (!m_animationClip) {
-            return;
-        }
+        auto&& pStateMachineNode = m_graph->AddNode<AnimationGraphNodeStateMachine>();
+        auto&& pStateMachine = pStateMachineNode->GetMachine();
 
-        m_animationClip->AddUsePoint();
+        auto&& pSetPoseState = pStateMachine->AddState<AnimationSetPoseState>(pAnimationClip);
+        pSetPoseState->SetClip(pAnimationClip);
 
-        for (auto&& pChannel : m_animationClip->GetChannels()) {
-            m_maxKeyFrame = SR_MAX(m_maxKeyFrame, pChannel->GetKeys().size());
-        }
+        auto&& pClipState = pStateMachine->AddState<AnimationClipState>(pAnimationClip);
+        pClipState->SetClip(pAnimationClip);
+
+        pStateMachine->GetEntryPoint()->AddTransition(pSetPoseState);
+        pSetPoseState->AddTransition(pClipState);
+
+        m_graph->GetFinal()->AddInput(pStateMachineNode, 0, 0);
 
         Super::OnAttached();
     }
@@ -99,58 +112,5 @@ namespace SR_ANIMATIONS_NS {
     void Animator::Start() {
         m_gameObject = GetGameObject().Get();
         Super::Start();
-    }
-
-    uint32_t Animator::UpdateChannel(AnimationChannel* pChannel) {
-        auto&& keys = pChannel->GetKeys();
-        auto&& keyIndex = m_playState[pChannel];
-
-        SR_UTILS_NS::GameObject* pTarget = m_gameObject;
-
-        if (m_skeleton) {
-            auto&& pBone = m_skeleton->GetBone(pChannel->GetGameObjectHashName());
-            if (pBone && pBone->gameObject) {
-                pTarget = pBone->gameObject.Get();
-            }
-        }
-
-        if (!pTarget) {
-            return keyIndex;
-        }
-
-    skipKey:
-        if (keyIndex == keys.size()) {
-            return keyIndex;
-        }
-
-        auto&& [time, pKey] = keys.at(keyIndex);
-
-        if (m_time > time) {
-            if (keyIndex == 0) {
-                pKey->Update(0.f, nullptr, pTarget);
-            }
-            else {
-                pKey->Update(1.f, keys.at(keyIndex - 1).second, pTarget);
-            }
-
-            ++keyIndex;
-
-            goto skipKey;
-        }
-
-        if (keyIndex == 0) {
-            pKey->Update(0.f, nullptr, pTarget);
-        }
-        else {
-            auto&& [prevTime, prevKey] = keys.at(keyIndex - 1);
-
-            const double_t currentTime = m_time - prevTime;
-            const double_t keyTime = time - prevTime;
-            const double_t progress = currentTime / keyTime;
-
-            pKey->Update(progress, prevKey, pTarget);
-        }
-
-        return keyIndex;
     }
 }

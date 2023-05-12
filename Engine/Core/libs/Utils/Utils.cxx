@@ -98,3 +98,5 @@
 #include "../Utils/src/Utils/World/SceneDefaultLogic.cpp"
 #include "../Utils/src/Utils/World/SceneCubeChunkLogic.cpp"
 #include "../Utils/src/Utils/World/ScenePrefabLogic.cpp"
+
+#include "../Utils/src/Utils/Game/LookAtComponent.cpp"

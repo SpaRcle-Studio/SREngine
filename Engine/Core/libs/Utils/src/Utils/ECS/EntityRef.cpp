@@ -88,8 +88,25 @@ namespace SR_UTILS_NS {
     }
 
     void EntityRef::SetPathTo(Entity::Ptr pEntity) {
-        m_target = pEntity;
-        UpdatePath();
+        if (!EntityRefUtils::IsOwnerValid(m_owner)) {
+            SRHalt("Invalid owner!");
+            return;
+        }
+
+        if (!pEntity) {
+            m_target = pEntity;
+            m_path.clear();
+            return;
+        }
+
+        if (IsRelative()) {
+            m_path = EntityRefUtils::CalculateRelativePath(m_owner, pEntity);
+        }
+        else {
+            m_path = EntityRefUtils::CalculatePath(pEntity);
+        }
+
+        UpdateTarget();
     }
 
     bool EntityRef::IsValid() const {
@@ -117,6 +134,7 @@ namespace SR_UTILS_NS {
     }
 
     void EntityRef::Save(SR_HTYPES_NS::Marshal& marshal) const {
+        UpdatePath();
         marshal.Write<bool>(IsRelative());
         marshal.Write<EntityRefUtils::RefPath>(m_path);
     }
