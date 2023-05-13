@@ -115,6 +115,7 @@ namespace SR_UTILS_NS::Platform {
         //free(symbol);
 
         std::cerr << "Application crashed!\n" << SR_UTILS_NS::GetStacktrace() << std::endl;
+        Breakpoint();
         exit(1);
     }
 

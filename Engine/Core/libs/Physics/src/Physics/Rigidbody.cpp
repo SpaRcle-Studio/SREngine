@@ -35,7 +35,7 @@ namespace SR_PTYPES_NS {
         return Super::GetEntityInfo() + " | " + SR_UTILS_NS::EnumReflector::ToString(m_shape->GetType());
     }
 
-    Rigidbody::ComponentPtr Rigidbody::LoadComponent(SR_UTILS_NS::Measurement measurement, SR_HTYPES_NS::Marshal &marshal, const SR_HTYPES_NS::DataStorage *dataStorage) {
+    SR_UTILS_NS::Component* Rigidbody::LoadComponent(SR_UTILS_NS::Measurement measurement, SR_HTYPES_NS::Marshal &marshal, const SR_HTYPES_NS::DataStorage *dataStorage) {
         const auto&& type = static_cast<ShapeType>(marshal.Read<int32_t>());
 
         const auto&& center = marshal.Read<SR_MATH_NS::Vector3<float_t>>(SR_MATH_NS::Vector3<float_t>(0.f));
@@ -77,7 +77,9 @@ namespace SR_PTYPES_NS {
 
         if (!pComponent->GetCollisionShape()) {
             SR_ERROR("Rigidbody::LoadComponent() : rigidbody have not collision shape!");
-            delete pComponent;
+            pComponent->AutoFree([](auto&& pData) {
+                delete pData;
+            });
             return nullptr;
         }
 
@@ -133,7 +135,9 @@ namespace SR_PTYPES_NS {
             physicsScene->Remove(this);
         }
         else {
-            delete this;
+           AutoFree([](auto&& pData) {
+               delete pData;
+           });
         }
     }
 

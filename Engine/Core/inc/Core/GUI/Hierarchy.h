@@ -14,6 +14,8 @@
 
 namespace SR_CORE_NS::GUI {
     class Hierarchy : public SR_GRAPH_NS::GUI::Widget {
+        static constexpr ImVec4 SR_PREFAB_COLOR_FIRST = ImVec4(39.f / 255.f, 225 / 255.f, 193.f / 255.f, 1.f);
+        static constexpr ImVec4 SR_PREFAB_COLOR_SECOND = ImVec4(1.f, 140.f / 255.f, 0, 1.f);
     public:
         Hierarchy();
         ~Hierarchy() override;
@@ -34,10 +36,11 @@ namespace SR_CORE_NS::GUI {
         void SetSelectedImpl(const std::set<SR_UTILS_NS::GameObject::Ptr>& changeSelected);
 
     private:
+        void ExpandPath(const SR_UTILS_NS::GameObject::Ptr& gm);
         void Draw() override;
         void CheckSelected(const SR_UTILS_NS::GameObject::Ptr& gm);
         void ContextMenu(const SR_UTILS_NS::GameObject::Ptr& gm, uint64_t id);
-        void DrawChild(const SR_UTILS_NS::GameObject::Ptr& root);
+        void DrawChild(const SR_UTILS_NS::GameObject::Ptr& root, uint32_t prefabIndex);
         void Copy() const;
         void Paste();
         void Delete();
@@ -52,6 +55,8 @@ namespace SR_CORE_NS::GUI {
         SR_UTILS_NS::GameObject::GameObjects m_tree;
 
         std::atomic<bool> m_shiftPressed;
+
+        bool m_needExpand = false;
 
         SR_GRAPH_NS::GUI::Widget* m_sceneRunnerWidget = nullptr;
 

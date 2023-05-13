@@ -13,8 +13,9 @@ namespace SR_UTILS_NS {
     }
 
     void Transform::SetGameObject(GameObject *gameObject) {
-        m_gameObject = gameObject;
-        UpdateTree();
+        if ((m_gameObject = gameObject)) {
+            UpdateTree();
+        }
     }
 
     Transform* Transform::GetParentTransform() const {
@@ -29,8 +30,8 @@ namespace SR_UTILS_NS {
         return nullptr;
     }
 
-    SR_NODISCARD SR_HTYPES_NS::SharedPtr<GameObject> Transform::GetGameObject() const {
-        return m_gameObject->GetThis();
+    SR_NODISCARD GameObject::Ptr Transform::GetGameObject() const {
+        return m_gameObject->GetThis().DynamicCast<GameObject>();
     }
 
     void Transform::GlobalTranslate(const Math::FVector3& translation) {
@@ -112,46 +113,53 @@ namespace SR_UTILS_NS {
                 break;
             case Measurement::Space1D:
                 break;
+            case Measurement::Holder:
+                break;
+            case Measurement::Unknown:
+                break;
+            default:
+                SRHalt0();
+                break;
         }
 
         return pMarshal;
     }
 
     Transform *Transform::Load(SR_HTYPES_NS::Marshal &marshal, GameObject* pGameObject) {
-        Transform* transform = nullptr;
+        Transform* pTransform = nullptr;
 
         auto&& measurement = static_cast<Measurement>(marshal.Read<uint8_t>());
 
         switch (measurement) {
             case Measurement::Holder:
-                transform = new TransformHolder();
+                pTransform = new TransformHolder();
                 break;
             case Measurement::SpaceZero:
-                transform = new TransformZero();
+                pTransform = new TransformZero();
                 break;
             case Measurement::Space2D:
-                transform = new Transform2D();
+                pTransform = new Transform2D();
                 break;
             case Measurement::Space3D:
-                transform = new Transform3D();
+                pTransform = new Transform3D();
                 break;
             case Measurement::Space4D:
             default:
-                SRHalt0();
+                SRHalt(SR_UTILS_NS::Format("Unknown measurement \"%i\"!", static_cast<int32_t>(measurement)));
                 return nullptr;
         }
 
-        transform->SetGameObject(pGameObject);
+        pTransform->SetGameObject(pGameObject);
 
         switch (measurement) {
             case Measurement::SpaceZero:
                 break;
             case Measurement::Space2D:
             case Measurement::Space3D:
-                transform->SetTranslation(marshal.Read<Math::FVector3>(Math::FVector3(0.f)));
-                transform->SetRotation(marshal.Read<Math::FVector3>(Math::FVector3(0.f)));
-                transform->SetScale(marshal.Read<Math::FVector3>(Math::FVector3(1.f)));
-                transform->SetSkew(marshal.Read<Math::FVector3>(Math::FVector3(1.f)));
+                pTransform->SetTranslation(marshal.Read<Math::FVector3>(Math::FVector3(0.f)));
+                pTransform->SetRotation(marshal.Read<Math::FVector3>(Math::FVector3(0.f)));
+                pTransform->SetScale(marshal.Read<Math::FVector3>(Math::FVector3(1.f)));
+                pTransform->SetSkew(marshal.Read<Math::FVector3>(Math::FVector3(1.f)));
                 break;
             case Measurement::Space4D:
             default:
@@ -159,7 +167,7 @@ namespace SR_UTILS_NS {
                 return nullptr;
         }
 
-        return transform;
+        return pTransform;
     }
 
     SR_MATH_NS::FVector2 Transform::GetTranslation2D() const {
@@ -177,6 +185,10 @@ namespace SR_UTILS_NS {
 
     void Transform::UpdateTree() {
         m_dirtyMatrix = true;
+
+        if (!m_gameObject) {
+            return;
+        }
 
         m_gameObject->OnMatrixDirty();
 

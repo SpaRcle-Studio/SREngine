@@ -46,10 +46,9 @@ namespace SR_UTILS_NS {
         friend class IComponentable;
         friend class ComponentManager;
     public:
-        using Ptr = Component*;
+        using Ptr = SR_HTYPES_NS::SharedPtr<Component>;
         using ScenePtr = SR_WORLD_NS::Scene*;
         using GameObjectPtr = SR_HTYPES_NS::SharedPtr<GameObject>;
-        using ComponentPtr = Component*;
     public:
         ~Component() override;
 
@@ -60,7 +59,7 @@ namespace SR_UTILS_NS {
         /// Вызывается при загрузке компонента на игровой объект
         virtual void OnLoaded() { m_isComponentLoaded = true; }
         /// Вызывается после добавления компонента к игровому объекту
-        virtual void OnAttached() { m_isAttached = true; }
+        virtual void OnAttached() { m_isAttached = true; SRAssert(GetParent()); }
         /// Вызывается кода компонент убирается с объекта, либо объект уничтожается
         virtual void OnDestroy() { SetParent(nullptr); }
 
@@ -87,7 +86,7 @@ namespace SR_UTILS_NS {
         void SetEnabled(bool value);
         void SetComponentBuildId(uint64_t buildId) { m_componentBuildId = buildId; }
 
-        SR_NODISCARD virtual Component::Ptr CopyComponent() const;
+        SR_NODISCARD virtual Component* CopyComponent() const;
 
         SR_NODISCARD virtual uint64_t GetComponentHashName() const = 0;
         SR_NODISCARD virtual const std::string& GetComponentName() const = 0;
@@ -112,6 +111,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD ScenePtr GetScene() const;
         SR_NODISCARD bool HasScene() const { return TryGetScene(); }
         SR_NODISCARD GameObjectPtr GetGameObject() const;
+        SR_NODISCARD bool HasGameObject() const { return m_parent; }
         SR_NODISCARD ScenePtr TryGetScene() const;
         SR_NODISCARD GameObjectPtr GetRoot() const;
         SR_NODISCARD Transform* GetTransform() const noexcept;

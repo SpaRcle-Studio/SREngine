@@ -14,7 +14,8 @@ namespace SR_ANIMATIONS_NS {
 }
 
 namespace SR_CORE_NS::Importers {
-    bool ImportSkeletonFromRawMesh(SR_HTYPES_NS::RawMesh* pRawMesh, SR_ANIMATIONS_NS::Skeleton* pSkeleton);
+    bool ImportSkeletonFromRawMesh(const SR_HTYPES_NS::RawMesh* pRawMesh, SR_ANIMATIONS_NS::Skeleton* pSkeleton);
+    SR_ANIMATIONS_NS::Skeleton* ImportSkeletonFromRawMesh(const SR_HTYPES_NS::RawMesh* pRawMesh);
 }
 
 #endif //SRENGINE_IMPORTERS_H

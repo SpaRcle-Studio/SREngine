@@ -9,6 +9,17 @@
 #include <Utils/Common/AnyVisitor.h>
 
 namespace SR_UTILS_NS {
+    template<template<class> class T, class U>
+    struct IsDerivedFrom {
+    private:
+        template<class V> static decltype(static_cast<const T<V>&>(std::declval<U>()), std::true_type{}) test(const T<V>&);
+        static std::false_type test(...);
+
+    public:
+        static constexpr bool value = decltype(IsDerivedFrom::test(std::declval<U>()))::value;
+
+    };
+
     SR_ENUM_NS_CLASS_T(StandardType, uint16_t,
         Unknown,
         Bool,

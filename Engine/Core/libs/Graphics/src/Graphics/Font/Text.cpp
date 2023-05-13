@@ -136,7 +136,7 @@ namespace SR_GTYPES_NS {
         return true;
     }
 
-    SR_UTILS_NS::Component::Ptr Text::LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage) {
+    SR_UTILS_NS::Component* Text::LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage) {
         SR_MAYBE_UNUSED const auto&& type = static_cast<MeshType>(marshal.Read<int32_t>());
 
         const auto&& material = marshal.Read<std::string>();
@@ -283,7 +283,7 @@ namespace SR_GTYPES_NS {
         Component::OnLoaded();
     }
 
-    SR_UTILS_NS::Component::Ptr Text::CopyComponent() const {
+    SR_UTILS_NS::Component* Text::CopyComponent() const {
         return Component::CopyComponent();
     }
 }

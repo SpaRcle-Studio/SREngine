@@ -96,19 +96,18 @@ namespace SR_HTYPES_NS {
         }
 
         template<typename T> T Read() {
-            T value;
-
             if constexpr (std::is_same_v<T, std::any>) {
-                value = MarshalUtils::LoadAny<std::any>(*this);
+                return MarshalUtils::LoadAny<std::any>(*this);
             }
             else if constexpr (Math::IsString<T>()) {
-                value = MarshalUtils::LoadShortStr(*this);
+                return MarshalUtils::LoadShortStr(*this);
+            }
+            else if constexpr (IsSTLVector<T>()) {
+                return MarshalUtils::LoadVector<T>(*this);
             }
             else {
-                value = MarshalUtils::LoadValue<T>(*this);
+                return MarshalUtils::LoadValue<T>(*this);
             }
-
-            return value;
         }
 
         template<typename T> T Read(const T& def) {

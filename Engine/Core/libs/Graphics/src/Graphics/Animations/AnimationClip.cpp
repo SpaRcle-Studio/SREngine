@@ -168,6 +168,11 @@ namespace SR_ANIMATIONS_NS {
                 return false;
             }
 
+            if (index >= pRawMesh->GetAssimpScene()->mNumAnimations) {
+                SR_ERROR("AnimationClip::Load() : wrong animation index!");
+                return false;
+            }
+
             LoadChannels(pRawMesh->GetAssimpScene()->mAnimations[index]);
         }
 

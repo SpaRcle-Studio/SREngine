@@ -18,7 +18,6 @@ namespace SR_UTILS_NS {
     class ResourceInfo;
 
     class SR_DLL_EXPORT IResource : public ResourceContainer {
-        friend class ResourceManager;
         friend class ResourceType;
         using Super = ResourceContainer;
     public:
@@ -82,6 +81,11 @@ namespace SR_UTILS_NS {
 
         virtual void OnReloadDone() { }
 
+        /** Вызывается только из ResourceManager и IResource, удаляет экземпляр класса,
+         * или не удаляет, но это уже не его проблема, а того, как он переопределен.
+         * Задача данного метода - сделать финальное оповещение что ресурс не нужен и не отслеживается более. */
+        virtual void DeleteResource() { delete this; }
+
         virtual bool Reload();
 
         virtual bool Unload() {
@@ -118,6 +122,7 @@ namespace SR_UTILS_NS {
         void SetReadOnly(bool value) { m_readOnly = value; }
         void SetAutoRemoveEnabled(bool enabled) { m_autoRemove = enabled; }
         void SetResourceHash(uint64_t hash);
+        void SetLifetime(int64_t lifeTime) { m_lifetime = lifeTime; }
 
         void SetId(const std::string& id, bool autoRegister = true);
         void SetId(uint64_t hashId, bool autoRegister = true);

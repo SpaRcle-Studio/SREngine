@@ -52,7 +52,9 @@ namespace SR_GTYPES_NS {
             renderScene.Unlock();
         }
         else {
-            delete this;
+            GetThis().AutoFree([](auto&& pData) {
+                delete pData;
+            });
         }
     }
 

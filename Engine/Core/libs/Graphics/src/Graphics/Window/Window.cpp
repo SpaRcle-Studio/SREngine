@@ -193,4 +193,18 @@ namespace SR_GRAPH_NS {
     SR_MATH_NS::IVector2 Window::GetPosition() const {
         return m_windowImpl->GetPosition();
     }
+
+    bool Window::IsMaximized() const {
+        if (!m_windowImpl) {
+            return false;
+        }
+
+        if (m_windowImpl->GetState() == WindowState::Maximized) {
+            return true;
+        }
+
+        SR_NOOP;
+
+        return false;
+    }
 }

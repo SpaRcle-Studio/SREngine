@@ -102,7 +102,14 @@ namespace SR_GRAPH_NS {
                             pMesh->DeInitGraphicsResource();
                         }
 
-                        delete pMesh;
+                        if (auto&& pComponentMesh = dynamic_cast<SR_GTYPES_NS::MeshComponent*>(pMesh)) {
+                            pComponentMesh->AutoFree([](auto&& pData) {
+                                delete pData;
+                            });
+                        }
+                        else {
+                            delete pMesh;
+                        }
 
                         pMeshIt = group.erase(pMeshIt);
 

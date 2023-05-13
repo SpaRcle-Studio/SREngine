@@ -5,6 +5,7 @@
 #include <Core/GUI/ComponentDrawer.h>
 #include <Core/GUI/GUISystem.h>
 #include <Core/GUI/EditorGUI.h>
+#include <Core/GUI/DragNDropHelper.h>
 #include <Core/Settings/EditorSettings.h>
 
 #include <Utils/Types/DataStorage.h>
@@ -35,7 +36,6 @@
 #include <Graphics/UI/Anchor.h>
 #include <Graphics/UI/Canvas.h>
 #include <Graphics/Font/Text.h>
-#include <assimp/include/assimp/scene.h>
 
 namespace SR_CORE_NS::GUI {
     void ComponentDrawer::DrawComponent(SR_PTYPES_NS::Rigidbody3D*& pComponent, EditorGUI* context, int32_t index) {
@@ -349,6 +349,7 @@ namespace SR_CORE_NS::GUI {
         if (auto&& pRawMesh = pComponent->GetRawMesh()) {
             Graphics::GUI::DrawValue("Path", pRawMesh->GetResourcePath().c_str(), index);
         }
+
         Graphics::GUI::DrawValue("Name", pComponent->GetGeometryName(), index);
 
         int32_t meshId = pComponent->GetMeshId();
@@ -360,6 +361,8 @@ namespace SR_CORE_NS::GUI {
 
         Graphics::GUI::DrawValue("Vertices count", pComponent->GetVerticesCount(), index);
         Graphics::GUI::DrawValue("Indices count", pComponent->GetIndicesCount(), index);
+
+        SR_CORE_GUI_NS::DragDropTargetEntityRef(context, pComponent->GetSkeleton(), "Skeleton", index, 260.f);
 
         ImGui::Separator();
 

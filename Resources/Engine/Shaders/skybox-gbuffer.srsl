@@ -1,0 +1,17 @@
+ShaderType Skybox;
+
+PolygonMode Fill;
+CullMode Back;
+DepthCompare LessOrEqual;
+PrimitiveTopology TriangleList;
+BlendEnabled false;
+DepthWrite true;
+DepthTest true;
+
+void fragment() {
+	COLOR_INDEX_4 = texture(SKYBOX_DIFFUSE, VERTEX);
+}
+
+void vertex() {
+    OUT_POSITION = (PROJECTION_MATRIX * VIEW_NO_TRANSLATE_MATRIX * vec4(VERTEX, 1.0)).xyww;
+}

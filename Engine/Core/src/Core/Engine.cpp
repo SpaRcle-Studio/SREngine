@@ -120,17 +120,37 @@ namespace SR_CORE_NS {
     bool Engine::CreateMainWindow() {
         SR_LOG("Engine::CreateMainWindow() : try found screen resolution...");
 
-        auto&& resolutions = SR_PLATFORM_NS::GetScreenResolutions();
+        SR_MATH_NS::UVector2 resolution;
+        SR_MATH_NS::IVector2 position;
+        bool isMaximized = true;
 
-        if (resolutions.empty()) {
-            SR_ERROR("Engine::CreateMainWindow() : not found supported resolutions!");
-            return false;
+        auto&& cachePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath();
+        auto&& windowSettingsPath = cachePath.Concat("WindowSettings.xml");
+
+        const bool windowSettingsExist = windowSettingsPath.Exists();
+
+        if (windowSettingsExist) {
+            auto&& windowSettings = SR_XML_NS::Document::Load(windowSettingsPath);
+
+            auto&& rootNode = windowSettings.Root().TryGetNode("Settings");
+
+            resolution = rootNode.TryGetNode("Size").GetAttribute<SR_MATH_NS::UVector2>();
+            position = rootNode.TryGetNode("Position").GetAttribute<SR_MATH_NS::IVector2>();
+            isMaximized = rootNode.GetAttribute("IsMaximized").ToBool();
         }
         else {
-            SR_LOG("Engine::CreateMainWindow() : found " + std::to_string(resolutions.size()) + " resolutions");
-        }
+            auto&& resolutions = SR_PLATFORM_NS::GetScreenResolutions();
 
-        auto&& resolution = resolutions[SR_MAX(static_cast<uint32_t>(resolutions.size() / 2), 0)];
+            if (resolutions.empty()) {
+                SR_ERROR("Engine::CreateMainWindow() : not found supported resolutions!");
+                return false;
+            }
+            else {
+                SR_LOG("Engine::CreateMainWindow() : found " + std::to_string(resolutions.size()) + " resolutions");
+            }
+
+            resolution = resolutions[SR_MAX(static_cast<uint32_t>(resolutions.size() / 2), 0)];
+        }
 
         m_window = new SR_GRAPH_NS::Window();
         if (!m_window->Initialize("SpaRcle Engine", resolution)) {
@@ -139,8 +159,16 @@ namespace SR_CORE_NS {
         }
 
         if (auto&& pWin = m_window->GetImplementation<SR_GRAPH_NS::BasicWindowImpl>()) {
-            pWin->Centralize();
-            pWin->Maximize();
+            if (windowSettingsExist) {
+                pWin->Move(position.x, position.y);
+            }
+            else {
+                pWin->Centralize();
+            }
+
+            if (isMaximized) {
+                pWin->Maximize();
+            }
         }
 
         SR_LOG("Engine::CreateMainWindow() : initializing window callbacks...");
@@ -394,6 +422,10 @@ namespace SR_CORE_NS {
 
         m_isRun = false;
 
+        if (m_editor) {
+            m_editor->Save();
+        }
+
         if (m_input) {
             m_input->UnregisterAll();
         }
@@ -421,6 +453,18 @@ namespace SR_CORE_NS {
             m_worldThread->Free();
             m_worldThread = nullptr;
         }
+
+        auto&& cachePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath();
+        auto&& windowSettingsPath = cachePath.Concat("WindowSettings.xml");
+
+        auto&& windowSettings = SR_XML_NS::Document::New();
+        auto&& rootNode = windowSettings.Root().AppendNode("Settings");
+
+        rootNode.AppendNode("Size").AppendAttribute(m_window->GetSize());
+        rootNode.AppendNode("Position").AppendAttribute(m_window->GetPosition());
+        rootNode.AppendAttribute("IsMaximized", m_window->IsMaximized());
+
+        windowSettings.Save(windowSettingsPath);
 
         m_window.AutoFree([](auto&& pWindow) {
             pWindow->Close();
@@ -547,7 +591,7 @@ namespace SR_CORE_NS {
                 else if (auto&& gameObject = dynamic_cast<SR_UTILS_NS::GameObject*>(m_mainCamera->GetParent())) {
                     auto&& pLogic = m_scene->GetLogicBase().DynamicCast<SR_WORLD_NS::SceneCubeChunkLogic*>();
                     if (pLogic && gameObject) {
-                        pLogic->SetObserver(gameObject->GetThis());
+                        pLogic->SetObserver(gameObject);
                     }
                 }
 

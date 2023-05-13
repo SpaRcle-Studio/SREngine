@@ -52,6 +52,7 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD bool IsValid() const;
         SR_NODISCARD WindowHandle GetHandle() const;
         SR_NODISCARD bool IsFullScreen() const;
+        SR_NODISCARD bool IsMaximized() const;
 
         SR_NODISCARD SR_MATH_NS::IVector2 ScreenToClient(const SR_MATH_NS::IVector2& pos) const;
         SR_NODISCARD SR_MATH_NS::IVector2 ClientToScreen(const SR_MATH_NS::IVector2& pos) const;

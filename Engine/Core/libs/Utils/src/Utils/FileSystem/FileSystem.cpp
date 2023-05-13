@@ -188,9 +188,10 @@ namespace SR_UTILS_NS {
     }
 
     uint64_t FileSystem::GetFileHash(const std::string &path) {
-        const std::string& file = ReadBinaryAsString(path);
+        const std::string& file = ReadBinaryAsString(path, false);
 
         if (file.empty()) {
+            SR_WARN("FileSystem::GetFileHash() : failed to read file!\n\tPath: " + path);
             return SR_UINT64_MAX;
         }
 

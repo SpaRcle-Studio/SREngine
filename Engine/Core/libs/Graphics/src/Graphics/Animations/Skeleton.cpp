@@ -32,8 +32,6 @@ namespace SR_ANIMATIONS_NS {
             };
 
             processBone(nullptr);
-
-            pComponent->ReCalculateSkeleton();
         }
 
         return pComponent;
@@ -42,8 +40,9 @@ namespace SR_ANIMATIONS_NS {
     SR_UTILS_NS::Component* Skeleton::CopyComponent() const {
         auto&& pComponent = new Skeleton();
 
-        pComponent->m_rootBone = m_rootBone->CloneRoot();
-        pComponent->ReCalculateSkeleton();
+        if (m_rootBone) {
+            pComponent->m_rootBone = m_rootBone->CloneRoot();
+        }
 
         return pComponent;
     }
@@ -73,7 +72,9 @@ namespace SR_ANIMATIONS_NS {
 
     void Skeleton::OnDestroy() {
         Super::OnDestroy();
-        delete this;
+        GetThis().AutoFree([](auto&& pData) {
+            delete pData;
+        });
     }
 
     void Skeleton::OnLoaded() {
@@ -231,10 +232,13 @@ namespace SR_ANIMATIONS_NS {
                 continue;
             }
 
+            auto&& fromPos = fromGameObject->gameObject->GetTransform()->GetMatrix().GetTranslate();
+            auto&& toPos = toGameObject->gameObject->GetTransform()->GetMatrix().GetTranslate();
+
             debugId = SR_UTILS_NS::DebugDraw::Instance().DrawLine(
                     debugId,
-                    fromGameObject->gameObject->GetTransform()->GetMatrix().GetTranslate(),
-                    toGameObject->gameObject->GetTransform()->GetMatrix().GetTranslate(),
+                    fromPos,
+                    toPos,
                     SR_MATH_NS::FColor(38, 37, 45, 255)
             );
         }

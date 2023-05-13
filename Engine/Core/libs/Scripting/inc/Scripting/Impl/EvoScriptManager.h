@@ -10,6 +10,13 @@
 #include <Scripting/ScriptHolder.h>
 
 namespace SR_SCRIPTING_NS {
+    #define SR_EVO_SCRIPT_MANAGER_LOCK_CONTEXT                               \
+        auto&& mutex_1 = SR_UTILS_NS::ResourceManager::GetMutex();           \
+        auto&& mutex_2 = SR_SCRIPTING_NS::EvoScriptManager::GetMutex();      \
+        std::lock(mutex_1, mutex_2);                                         \
+        std::lock_guard<std::recursive_mutex> lk1(mutex_1, std::adopt_lock); \
+        std::lock_guard<std::recursive_mutex> lk2(mutex_2, std::adopt_lock); \
+
     class EvoScriptManager : public SR_UTILS_NS::Singleton<EvoScriptManager> {
         friend class SR_UTILS_NS::Singleton<EvoScriptManager>;
         using ScriptPtr = ScriptHolder::Ptr;

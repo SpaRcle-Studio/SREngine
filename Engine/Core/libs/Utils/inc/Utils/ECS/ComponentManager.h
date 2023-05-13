@@ -42,12 +42,25 @@ namespace SR_UTILS_NS {
     public:
         Component* CreateComponentOfName(const std::string& name);
 
-        template<typename T> Component* CreateComponent() {
+        template<typename T> T* CreateComponent() {
             SR_SCOPED_LOCK
-            return CreateComponentImpl(T::COMPONENT_HASH_NAME);
+            auto&& pComponent = CreateComponentImpl(T::COMPONENT_HASH_NAME);
+            if (!pComponent) {
+                return nullptr;
+            }
+
+            if (auto&& pImpl = dynamic_cast<T*>(pComponent)) {
+                return pImpl;
+            }
+
+            pComponent->OnDestroy();
+
+            SRHalt0();
+
+            return nullptr;
         }
 
-        std::unordered_map<std::string, size_t> GetComponentsNames() {
+        const std::unordered_map<std::string, size_t>& GetComponentsNames() const {
             SR_SCOPED_LOCK
             return m_ids;
         }

@@ -114,7 +114,7 @@ namespace Framework::Core::GUI {
 
             DrawSwitchTransform();
 
-            DrawComponents(m_gameObject.DynamicCast<SR_UTILS_NS::IComponentable*>());
+            DrawComponents(dynamic_cast<SR_UTILS_NS::IComponentable*>(m_gameObject.Get()));
 
             m_gameObject.Unlock();
         }
@@ -126,7 +126,7 @@ namespace Framework::Core::GUI {
 
         ImGui::Separator();
 
-        DrawComponents(m_scene.DynamicCast<SR_UTILS_NS::IComponentable*>());
+        DrawComponents(dynamic_cast<SR_UTILS_NS::IComponentable*>(m_scene.Get()));
     }
 
     void Inspector::Update() {
@@ -151,33 +151,33 @@ namespace Framework::Core::GUI {
     }
 
     void Inspector::DrawComponents(SR_UTILS_NS::IComponentable* pIComponentable) {
-        if (ImGui::BeginPopupContextWindow("InspectorMenu")) {
-            if (ImGui::BeginMenu("Add component")) {
-                for (const auto& [name, id] : SR_UTILS_NS::ComponentManager::Instance().GetComponentsNames()) {
-                    if (ImGui::MenuItem(name.c_str())) {
-                        pIComponentable->AddComponent(SR_UTILS_NS::ComponentManager::Instance().CreateComponentOfName(name));
-                        break;
-                    }
+        ImGui::Separator();
+
+        ImGuiStyle& style = ImGui::GetStyle();
+
+        float_t button_sz = ImGui::GetFrameHeight();
+        float_t spacing = style.ItemInnerSpacing.x;
+        float_t width = (ImGui::GetWindowWidth() - 70.f) - spacing * 2.0f - button_sz * 2.0f;
+
+        ImGui::PushItemWidth(width);
+        if (ImGui::BeginCombo("Add component", nullptr, ImGuiComboFlags_NoArrowButton)) {
+            for (const auto&[name, id] : SR_UTILS_NS::ComponentManager::Instance().GetComponentsNames()) {
+                if (ImGui::Selectable(name.c_str(), false)) {
+                    auto &&pNewComponent = SR_UTILS_NS::ComponentManager::Instance().CreateComponentOfName(name);
+                    pIComponentable->AddComponent(pNewComponent);
                 }
-                ImGui::EndMenu();
             }
-            ImGui::EndPopup();
+            ImGui::EndCombo();
         }
+        ImGui::PopItemWidth();
+
+        ImGui::Separator();
 
         uint32_t index = 0;
         pIComponentable->ForEachComponent([&](SR_UTILS_NS::Component* component) -> bool {
             SR_UTILS_NS::Component* copyPtrComponent = component;
 
-            if (ImGui::BeginPopupContextWindow("InspectorMenu")) {
-                if (ImGui::BeginMenu("Remove component")) {
-                    if (ImGui::MenuItem(component->GetComponentName().c_str())) {
-                        pIComponentable->RemoveComponent(component);
-                        goto exit;
-                    }
-                    ImGui::EndMenu();
-                }
-                ImGui::EndPopup();
-            }
+            SRAssert1Once(copyPtrComponent->GetParent());
 
             copyPtrComponent = DrawComponent<SR_SCRIPTING_NS::Behaviour>(copyPtrComponent, "Behaviour", index);
             copyPtrComponent = DrawComponent<SR_GTYPES_NS::Camera>(copyPtrComponent, "Camera", index);
@@ -202,12 +202,6 @@ namespace Framework::Core::GUI {
             }
 
             return true;
-
-        exit:
-            ImGui::EndMenu();
-            ImGui::EndPopup();
-
-            return false;
         });
     }
 
@@ -268,7 +262,7 @@ namespace Framework::Core::GUI {
             transform->SetTranslation(translation);
         }
 
-        auto&& rotation = transform->GetRotation();
+        auto&& rotation = transform->GetRotation();  
         if (Graphics::GUI::DrawVec3Control("Rotation", rotation))
             transform->SetRotation(rotation);
 
@@ -313,4 +307,4 @@ namespace Framework::Core::GUI {
             }
         }
     }
-}                                                                                      
+}

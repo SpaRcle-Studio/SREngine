@@ -9,6 +9,8 @@
 #include <Graphics/SRSL/AssignExpander.h>
 #include <Graphics/SRSL/TypeInfo.h>
 
+#include <Utils/Platform/Platform.h>
+
 namespace SR_SRSL_NS {
     SRSLShader::SRSLShader(SR_UTILS_NS::Path path)
         : Super()
@@ -17,9 +19,15 @@ namespace SR_SRSL_NS {
 
     SRSLShader::Ptr SRSLShader::Load(SR_UTILS_NS::Path path) {
         auto&& absPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat(path);
+
+        if (!absPath.Exists()) {
+            SR_ERROR("SRSLShader::Load() : file not exists!\n\tPath: " + path.ToString());
+            return nullptr;
+        }
+
         auto&& cachedPath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Shaders").Concat(path);
 
-        auto&& pShader = SRSLShader::Ptr(new SRSLShader(std::move(path)));
+        auto&& pShader = SRSLShader::Ptr(new SRSLShader(path));
 
         auto&& lexems = SR_SRSL_NS::SRSLLexer::Instance().Parse(absPath);
         if (lexems.empty()) {
@@ -435,5 +443,16 @@ namespace SR_SRSL_NS {
         }
 
         return nullptr;
+    }
+
+    void SRSLShader::ClearShadersCache() {
+        auto&& cachedPath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Shaders");
+        if (cachedPath.Exists(SR_UTILS_NS::Path::Type::Folder)) {
+            SR_PLATFORM_NS::Delete(cachedPath);
+            SR_LOG("SRSLShader::ClearShadersCache() : cache was cleared.");
+        }
+        else {
+            SR_WARN("SRSLShader::ClearShadersCache() : cache is already clean!");
+        }
     }
 }

@@ -39,7 +39,7 @@ namespace SR_GRAPH_UI_NS {
         SR_NODISCARD std::vector<uint32_t> GetIndices() const override;
         SR_NODISCARD std::string GetMeshIdentifier() const override;
 
-        SR_NODISCARD Component::Ptr CopyComponent() const override;
+        SR_NODISCARD Component* CopyComponent() const override;
 
     protected:
         bool Calculate() override;
