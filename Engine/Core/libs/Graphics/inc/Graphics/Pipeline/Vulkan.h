@@ -253,7 +253,7 @@ namespace SR_GRAPH_NS {
 
             vkBeginCommandBuffer(m_currentCmd, &m_cmdBufInfo);
 
-            //SR_TRACY_VK_FRAME_ZONE_N(m_currentCmd, "Main frame");
+            SR_TRACY_VK_FRAME_ZONE_N(m_currentCmd, "Main frame");
 
             vkCmdBeginRenderPass(m_currentCmd, &m_renderPassBI, VK_SUBPASS_CONTENTS_INLINE);
 
