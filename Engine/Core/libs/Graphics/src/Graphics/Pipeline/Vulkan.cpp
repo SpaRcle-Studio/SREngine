@@ -136,6 +136,12 @@ namespace Framework::Graphics {
             return false;
         }
 
+    #ifdef SR_TRACY_ENABLE
+        SR_UTILS_NS::TracyContextManager::Instance().VulkanDestroy = [](void* pContext) {
+            TracyVkDestroy((tracy::VkCtx*)pContext);
+        };
+    #endif
+
         return true;
     }
 
@@ -160,6 +166,8 @@ namespace Framework::Graphics {
         SR_GRAPH_LOG("Vulkan::DeInitialize() : de-initialize pipeline...");
 
         /// SR_GRAPH_NS::Memory::MeshManager::Instance().PrintDump();
+
+        SR_TRACY_DESTROY(SR_UTILS_NS::TracyType::Vulkan);
 
         if (m_memory) {
             m_memory->Free();
@@ -265,6 +273,13 @@ namespace Framework::Graphics {
             SR_ERROR("Vulkan::PostInit() : failed to post-initialize Evo Vulkan kernel!");
             return false;
         }
+
+    #ifdef SR_TRACY_ENABLE
+        if (auto&& pSingleTimeCmd = m_kernel->CreateCmd()) {
+            SR_TRACY_VK_CREATE(*pSingleTimeCmd, m_kernel, "EvoVulkan");
+            delete pSingleTimeCmd;
+        }
+    #endif
 
         return true;
     }

@@ -29,7 +29,8 @@
 #define SR_ENUM_NS_STRUCT_T(enumName, type, ...)                                \
       struct enumName {                                                         \
             SR_ENUM_DETAIL_MAKE(enum, class, SR_MACRO_CONCAT(enumName, T), type, __VA_ARGS__ )  \
-      };
+      };                                                                                        \
+      typedef type SR_MACRO_CONCAT(enumName, Flag);                                             \
 
 /// ---------------------------------------[Для объявления внутри классов]----------------------------------------------
 

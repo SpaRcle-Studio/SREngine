@@ -98,3 +98,9 @@
 #include "../Utils/src/Utils/World/SceneDefaultLogic.cpp"
 #include "../Utils/src/Utils/World/SceneCubeChunkLogic.cpp"
 #include "../Utils/src/Utils/World/ScenePrefabLogic.cpp"
+
+#include "../Utils/src/Utils/Game/LookAtComponent.cpp"
+
+#ifdef SR_TRACY_ENABLE
+    #include "../Utils/src/Utils/Profile/TracyContext.cpp"
+#endif
