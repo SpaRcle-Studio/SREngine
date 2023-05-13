@@ -123,6 +123,10 @@
 #include "../Graphics/src/Graphics/Window/Window.cpp"
 #include "../Graphics/src/Graphics/Window/BasicWindowImpl.cpp"
 
+#if defined(SR_TRACY_ENABLE) && defined(SR_USE_VULKAN)
+    #include "../Graphics/src/Graphics/Pipeline/Vulkan/VulkanTracy.cpp"
+#endif
+
 #if defined(SR_WIN32)
     #include "../Graphics/src/Graphics/Window/Win32Window.cpp"
 #endif

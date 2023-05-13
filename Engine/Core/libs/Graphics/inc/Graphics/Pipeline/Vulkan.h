@@ -14,6 +14,7 @@
 #include <Graphics/Pipeline/Vulkan/VulkanMemory.h>
 #include <Graphics/Pipeline/Vulkan/AbstractCasts.h>
 #include <Graphics/Pipeline/Vulkan/VulkanImGUI.h>
+#include <Graphics/Pipeline/Vulkan/VulkanTracy.h>
 
 #include <EvoVulkan/VulkanKernel.h>
 #include <EvoVulkan/Tools/VulkanInsert.h>
@@ -251,12 +252,18 @@ namespace SR_GRAPH_NS {
             }
 
             vkBeginCommandBuffer(m_currentCmd, &m_cmdBufInfo);
+
+            //SR_TRACY_VK_FRAME_ZONE_N(m_currentCmd, "Main frame");
+
             vkCmdBeginRenderPass(m_currentCmd, &m_renderPassBI, VK_SUBPASS_CONTENTS_INLINE);
 
             return true;
         }
         SR_FORCE_INLINE void EndRender() override {
             vkCmdEndRenderPass(m_currentCmd);
+
+            //SR_TRACY_VK_COLLECT(m_currentCmd);
+
             vkEndCommandBuffer(m_currentCmd);
         }
 

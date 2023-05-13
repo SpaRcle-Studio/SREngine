@@ -26,6 +26,7 @@
 #include <Graphics/Window/Window.h>
 #include <Graphics/Types/Geometry/SkinnedMesh.h>
 #include <Graphics/GUI/Editor/Theme.h>
+#include <Graphics/Pipeline/Vulkan/VulkanTracy.h>
 
 #include <Physics/Rigidbody.h>
 #include <Physics/LibraryImpl.h>

@@ -47,4 +47,4 @@ target_include_directories(Audio PUBLIC libs/OpenAL/include)
 target_include_directories(Audio PUBLIC libs/libmodplug/src)
 target_include_directories(Audio PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/../Utils/include)
 target_include_directories(Audio PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../Utils/libs)
-
+target_include_directories(Audio PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/../Utils/include/tracy/tracy)

@@ -100,3 +100,7 @@
 #include "../Utils/src/Utils/World/ScenePrefabLogic.cpp"
 
 #include "../Utils/src/Utils/Game/LookAtComponent.cpp"
+
+#ifdef SR_TRACY_ENABLE
+    #include "../Utils/src/Utils/Profile/TracyContext.cpp"
+#endif
