@@ -10,6 +10,7 @@ add_definitions(
     -DSR_SUPPORT_PARALLEL
     -DSR_DLL_EXPORTS=1
     -DSR_CXX_20
+    -DBUILD_SHARED_LIBS=OFF
 )
 
 if (SR_TRACY_ENABLE)
