@@ -11,6 +11,8 @@ endif()
 set(FT_CONFIG_OPTION_USE_ZLIdB OFF)
 set(FT_DISABLE_HARFBUZZ ON)
 
+message("$ENV{VULKAN_SDK}")
+
 find_package(Vulkan REQUIRED)
 
 add_subdirectory(libs/EvoVulkan/Core)

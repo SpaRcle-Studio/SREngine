@@ -1,5 +1,11 @@
-cmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 3.16...3.16.2)
 project(SREngine)
+
+if (CMAKE_SIZEOF_VOID_P EQUAL 4)
+    message(FATAL_ERROR "SpaRcle Engine supports only x64 systems!")
+endif()
+
+message(${CMAKE_VERSION})
 
 set(CMAKE_CXX_STANDARD 20)
 
@@ -14,5 +20,12 @@ set(SR_ICU ON)
 
 set(EVO_VULKAN_STATIC_LIBRARY ON)
 set(EVO_SCRIPT_STATIC_LIBRARY ON)
+
+set(CMAKE_BUILD_PARALLEL_LEVEL 0)
+
+SET(CMAKE_SHARED_LINKER_FLAGS_CHECKED "")
+SET(CMAKE_SHARED_LINKER_FLAGS_PROFILE "")
+SET(CMAKE_EXE_LINKER_FLAGS_PROFILE "")
+SET(CMAKE_EXE_LINKER_FLAGS_CHECKED "")
 
 add_subdirectory(Engine)

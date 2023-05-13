@@ -31,6 +31,20 @@ int CreatePlatformSurface(ImGuiViewport* pv, ImU64 vk_inst, const void* vk_alloc
 #endif
 }
 
+void NewWindowHook(ImGuiContext* context, ImGuiContextHook* hook)
+{
+    if (hook->Type == ImGuiContextHookType_NewFramePre)
+    {
+        // Check if a new window has been added
+        ImGuiWindow* newWindow = ImGui::GetCurrentWindowRead();
+        if (newWindow && newWindow->Appearing)
+        {
+            // Handle events for the new window here
+            std::cout << "NEW WINDOW\n";
+        }
+    }
+}
+
 Framework::Graphics::VulkanTypes::VkImGUI::~VkImGUI() {
     SR_INFO("VkImGUI::Destroy() : destroying vulkan imgui...");
 
@@ -106,12 +120,16 @@ bool Framework::Graphics::VulkanTypes::VkImGUI::Init(EvoVulkan::Core::VulkanKern
         return false;
     }
 
-    //ImGuiPlatformIO& platform_io = ImGui::GetPlatformIO();
+    ImGuiContext* context = ImGui::GetCurrentContext();
+    ImGuiContextHook hook = {};
+    hook.Type = ImGuiContextHookType_NewFramePre;
+    hook.Callback = NewWindowHook;
+    ImGui::AddContextHook(context, &hook);
 
-    //ImGuiViewport* mainViewport = platform_io.MainViewport;
-    //mainViewport->PlatformHandle = kernel->GetSurface()->GetHandle();
-
-    //platform_io.Platform_CreateVkSurface = CreatePlatformSurface;
+    ImGuiPlatformIO& platform_io = ImGui::GetPlatformIO();
+    ImGuiViewport* mainViewport = platform_io.Viewports.front();
+    mainViewport->PlatformHandle = kernel->GetSurface()->GetHandle();
+    platform_io.Platform_CreateVkSurface = CreatePlatformSurface;
 
     // Setup Platform/Renderer bindings
     uint32_t images = m_swapchain->GetCountImages();

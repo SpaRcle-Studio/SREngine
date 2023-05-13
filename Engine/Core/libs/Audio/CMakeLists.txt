@@ -6,10 +6,14 @@ set(CMAKE_CXX_STANDARD 20)
 add_definitions(
     -DMODPLUG_STATIC
     -DFLAC__NO_DLL
+    -DAL_LIBTYPE_STATIC
 )
+
+set(LIBTYPE STATIC)
 
 set(ALSOFT_INSTALL_EXAMPLES OFF CACHE INTERNAL "" FORCE)
 set(ALSOFT_BUILD_IMPORT_LIB OFF CACHE INTERNAL "" FORCE)
+set(ALSOFT_INSTALL_UTILS OFF CACHE INTERNAL "" FORCE)
 set(ALSOFT_UTILS OFF CACHE INTERNAL "" FORCE)
 set(ALSOFT_EXAMPLES OFF CACHE INTERNAL "" FORCE)
 
@@ -40,6 +44,8 @@ if (ANDROID_NDK)
 else()
     target_link_libraries(Audio modplug OpenAL)
 endif()
+
+target_link_libraries(Audio modplug OpenAL)
 
 target_include_directories(Audio PUBLIC inc)
 target_include_directories(Audio PUBLIC libs)
