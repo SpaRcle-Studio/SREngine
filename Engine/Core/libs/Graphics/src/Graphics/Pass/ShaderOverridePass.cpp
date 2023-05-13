@@ -116,15 +116,32 @@ namespace SR_GRAPH_NS {
             SR_MAYBE_UNUSED bool hasDrawData = DrawCluster(&pRenderScene->GetOpaque());
             hasDrawData |= DrawCluster(&pRenderScene->GetTransparent());
         }
-        else if (m_framebuffer->Bind() && m_framebuffer->BeginRender(SR_MATH_NS::FColor(0.0), 1.f)) {
-            DrawCluster(&pRenderScene->GetOpaque());
-            DrawCluster(&pRenderScene->GetTransparent());
-            m_framebuffer->EndRender();
+        else {
+            RenderInternal(pRenderScene);
         }
 
         m_uboManager.SetIdentifier(pIdentifier);
 
         return IsDirectional();
+    }
+
+    void ShaderOverridePass::RenderInternal(const RenderScenePtr& pRenderScene) {
+        if (!m_framebuffer->Bind()) {
+            return;
+        }
+
+        GetPipeline()->ResetCmdBuffer();
+
+        m_framebuffer->BeginCmdBuffer(SR_MATH_NS::FColor(0.0), 1.f);
+        {
+            m_framebuffer->BeginRender();
+
+            DrawCluster(&pRenderScene->GetOpaque());
+            DrawCluster(&pRenderScene->GetTransparent());
+
+            m_framebuffer->EndRender();
+        }
+        m_framebuffer->EndCmdBuffer();
     }
 
     void ShaderOverridePass::Update() {

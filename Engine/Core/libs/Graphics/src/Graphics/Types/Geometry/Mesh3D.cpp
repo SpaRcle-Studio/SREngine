@@ -20,6 +20,8 @@ namespace SR_GTYPES_NS {
     { }
 
     bool Mesh3D::Calculate()  {
+        SR_TRACY_ZONE;
+
         if (IsCalculated()) {
             return true;
         }
@@ -44,6 +46,8 @@ namespace SR_GTYPES_NS {
     }
 
     void Mesh3D::Draw() {
+        SR_TRACY_ZONE;
+
         auto&& pShader = GetRenderContext()->GetCurrentShader();
 
         if (!pShader || !IsActive()) {

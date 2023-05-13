@@ -29,6 +29,8 @@ namespace SR_GRAPH_NS::Types {
     }
 
     bool Shader::Init() {
+        SR_TRACY_ZONE;
+
         if (m_isCalculated) {
             SRHalt("Double shader initialization!");
             return true;
@@ -73,6 +75,8 @@ namespace SR_GRAPH_NS::Types {
     }
 
     bool Shader::Use() noexcept {
+        SR_TRACY_ZONE;
+
         if (m_hasErrors) {
             return false;
         }
@@ -117,6 +121,8 @@ namespace SR_GRAPH_NS::Types {
     }
 
     Shader* Shader::Load(const SR_UTILS_NS::Path &rawPath) {
+        SR_TRACY_ZONE;
+
         auto&& resourceManager = SR_UTILS_NS::ResourceManager::Instance();
 
         SR_UTILS_NS::Path&& path = SR_UTILS_NS::Path(rawPath).RemoveSubPath(resourceManager.GetResPath());
@@ -253,6 +259,8 @@ namespace SR_GRAPH_NS::Types {
     }
 
     bool Shader::Flush() const {
+        SR_TRACY_ZONE;
+
         if (!m_isCalculated || m_hasErrors) {
             return false;
         }
@@ -292,6 +300,8 @@ namespace SR_GRAPH_NS::Types {
     }
 
     bool Shader::Load() {
+        SR_TRACY_ZONE;
+
         SR_UTILS_NS::Path&& path = SR_UTILS_NS::Path(GetResourceId());
 
         if (path.IsAbs()) {

@@ -21,6 +21,8 @@ namespace SR_GRAPH_NS {
     { }
 
     void RenderContext::Update() noexcept {
+        SR_TRACY_ZONE;
+
         /**
          * Все ресурсы при завершении работы рендера должны остаться только с одним use-point'ом.
          * В противном случае память никогда не освободится.
@@ -77,6 +79,8 @@ namespace SR_GRAPH_NS {
     }
 
     bool RenderContext::Init() {
+        SR_TRACY_ZONE;
+
         m_pipeline = Environment::Get();
         m_pipelineType = m_pipeline->GetType();
 
@@ -254,6 +258,8 @@ namespace SR_GRAPH_NS {
     }
 
     void RenderContext::OnResize(const SR_MATH_NS::UVector2 &size) {
+        SR_TRACY_ZONE;
+
         for (auto pIt = std::begin(m_scenes); pIt != std::end(m_scenes); ++pIt) {
             auto&&[pScene, pRenderScene] = *pIt;
 

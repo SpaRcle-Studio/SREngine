@@ -188,12 +188,15 @@ namespace SR_WORLD_NS {
     }
 
     void Region::Reload() {
+        SR_TRACY_ZONE;
         SR_LOG("Region::Reload() : reloading region at " + m_position.ToString());
         Unload(true /** force */);
         Load();
     }
 
     SR_HTYPES_NS::Marshal::Ptr Region::Save(SR_HTYPES_NS::DataStorage* pContext) const {
+        SR_TRACY_ZONE;
+
         auto&& pMarshal = new SR_HTYPES_NS::Marshal();
 
         std::list<SR_HTYPES_NS::Marshal::Ptr> available;
@@ -233,6 +236,8 @@ namespace SR_WORLD_NS {
     }
 
     bool Region::Load() {
+        SR_TRACY_ZONE;
+
         if (SR_UTILS_NS::Debug::Instance().GetLevel() >= Debug::Level::Full) {
             SR_LOG("Region::Load() : loading region at " + m_position.ToString());
         }
@@ -291,6 +296,8 @@ namespace SR_WORLD_NS {
     }
 
     bool Region::PostLoad() {
+        SR_TRACY_ZONE;
+
         for (auto&& [pos, pChunk] : m_loadedChunks) {
             if (pChunk->IsPreLoaded()) {
                 pChunk->Load();

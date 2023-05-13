@@ -29,6 +29,7 @@ namespace SR_GRAPH_NS {
     RenderPassMap& GetRenderPassMap();
 
     class BasePass : public SR_UTILS_NS::ResourceContainer {
+    public:
         using Super = SR_UTILS_NS::ResourceContainer;
         using CameraPtr = Types::Camera*;
         using Context = RenderContext*;

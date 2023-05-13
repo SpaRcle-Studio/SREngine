@@ -7,6 +7,7 @@
 #include <Utils/ECS/GameObject.h>
 #include <Utils/ECS/Component.h>
 #include <Utils/Types/Function.h>
+#include <Utils/Profile/TracyContext.h>
 
 namespace SR_WORLD_NS {
     SceneBuilder::SceneBuilder(Scene *pScene)
@@ -15,6 +16,7 @@ namespace SR_WORLD_NS {
     { }
 
     void SceneBuilder::Build(bool isPaused) {
+        SR_TRACY_ZONE;
         SR_LOCK_GUARD
 
         Initialize(isPaused);
@@ -74,6 +76,7 @@ namespace SR_WORLD_NS {
     }
 
     void SceneBuilder::Update(float_t dt) {
+        SR_TRACY_ZONE;
         SR_LOCK_GUARD
 
         auto&& pIt = m_updatableComponents.begin();
@@ -95,6 +98,7 @@ namespace SR_WORLD_NS {
     }
 
     void SceneBuilder::FixedUpdate() {
+        SR_TRACY_ZONE;
         SR_LOCK_GUARD
 
         auto&& pIt = m_updatableComponents.begin();
@@ -120,6 +124,8 @@ namespace SR_WORLD_NS {
     }
 
     void SceneBuilder::Initialize(bool isPaused) {
+        SR_TRACY_ZONE;
+
         auto&& root = m_scene->GetRootGameObjects();
 
         m_dirty |= m_scene->IsDirty();

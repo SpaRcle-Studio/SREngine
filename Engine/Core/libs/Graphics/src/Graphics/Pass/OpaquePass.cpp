@@ -21,6 +21,8 @@ namespace SR_GRAPH_NS {
     }
 
     bool OpaquePass::Render() {
+        SR_TRACY_ZONE;
+
         auto&& opaque = GetRenderScene()->GetOpaque();
 
         if (opaque.Empty()) {
@@ -47,6 +49,8 @@ namespace SR_GRAPH_NS {
     }
 
     void OpaquePass::Update() {
+        SR_TRACY_ZONE;
+
         if (!m_camera) {
             return;
         }

@@ -41,6 +41,8 @@ namespace SR_GRAPH_NS {
     }
 
     void RenderScene::Render() noexcept {
+        SR_TRACY_ZONE_N("Render scene");
+
         /// ImGui будет нарисован поверх независимо оторядка отрисовки.
         /// Однако, если его нарисовать в конце, то пользователь может
         /// изменить данные отрисовки сцены и сломать уже нарисованную сцену
@@ -92,6 +94,8 @@ namespace SR_GRAPH_NS {
     }
 
     void RenderScene::Build() {
+        SR_TRACY_ZONE_N("Build render");
+
         GetPipeline()->ClearFramebuffersQueue();
 
         m_hasDrawData = false;
@@ -106,10 +110,14 @@ namespace SR_GRAPH_NS {
     }
 
     void RenderScene::Update() noexcept {
+        SR_TRACY_ZONE_N("Update render");
+
         SR_RENDER_TECHNIQUES_CALL(Update)
     }
 
     void RenderScene::Submit() noexcept {
+        SR_TRACY_ZONE_N("Submit frame");
+
         if (!m_hasDrawData) {
             return;
         }
@@ -143,6 +151,8 @@ namespace SR_GRAPH_NS {
     }
 
     void RenderScene::Overlay() {
+        SR_TRACY_ZONE;
+
         GetPipeline()->SetGUIEnabled(m_bOverlay);
 
         if (!m_bOverlay) {
@@ -153,6 +163,8 @@ namespace SR_GRAPH_NS {
     }
 
     void RenderScene::Prepare() {
+        SR_TRACY_ZONE;
+
         if (m_debugRender) {
             m_debugRender->Prepare();
         }
@@ -322,6 +334,8 @@ namespace SR_GRAPH_NS {
     }
 
     void RenderScene::RenderBlackScreen() {
+        SR_TRACY_ZONE;
+
         auto&& pipeline = GetPipeline();
 
         pipeline->SetCurrentFramebuffer(nullptr);
@@ -332,12 +346,14 @@ namespace SR_GRAPH_NS {
             pipeline->BindFrameBuffer(0);
             pipeline->ClearBuffers(0.0f, 0.0f, 0.0f, 1.f, 1.f, 1);
 
-            pipeline->BeginRender();
+            pipeline->BeginCmdBuffer();
             {
+                pipeline->BeginRender();
                 pipeline->SetViewport();
                 pipeline->SetScissor();
+                pipeline->EndRender();
             }
-            pipeline->EndRender();
+            pipeline->EndCmdBuffer();
         }
     }
 

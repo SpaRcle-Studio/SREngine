@@ -483,6 +483,8 @@ namespace SR_CORE_NS {
             return;
         }
 
+        SR_TRACY_ZONE_N("Main frame");
+
         SR_HTYPES_NS::Time::Instance().Update();
 
         const auto now = SR_HTYPES_NS::Time::Instance().Now();
@@ -575,6 +577,8 @@ namespace SR_CORE_NS {
 
     void Engine::WorldThread() {
         while (m_isRun) {
+            SR_TRACY_ZONE_N("World");
+
             SR_HTYPES_NS::Thread::Sleep(250);
 
             m_mainCamera = m_renderScene.Do<CameraPtr>([](SR_GRAPH_NS::RenderScene* ptr) -> CameraPtr {
@@ -605,6 +609,8 @@ namespace SR_CORE_NS {
     }
 
     void Engine::FixedUpdate() {
+        SR_TRACY_ZONE;
+
         ///В этом блоке находится обработка нажатия клавиш, которая не должна срабатывать, если окно не сфокусированно
         if (m_window->IsWindowFocus())
         {
@@ -656,10 +662,12 @@ namespace SR_CORE_NS {
     }
 
     void Engine::Update(float_t dt) {
+        SR_TRACY_ZONE;
         m_sceneBuilder->Update(dt);
     }
 
     void Engine::Prepare() {
+        SR_TRACY_ZONE;
         m_scene->Prepare();
         const bool isPaused = !m_isActive || m_isPaused;
         m_sceneBuilder->Build(isPaused);
@@ -686,6 +694,8 @@ namespace SR_CORE_NS {
     }
 
     void Engine::FlushScene() {
+        SR_TRACY_ZONE;
+
         /// не блочим, иначе deadlock
         /// SR_LOCK_GUARD
 

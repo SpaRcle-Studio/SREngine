@@ -130,6 +130,7 @@ namespace SR_UTILS_NS {
     }
 
     void ResourceManager::GC() {
+        SR_TRACY_ZONE;
         SR_SCOPED_LOCK
 
         if (m_destroyed.empty()) {
@@ -253,6 +254,7 @@ namespace SR_UTILS_NS {
     }
 
     IResource *ResourceManager::Find(uint64_t hashTypeName, const std::string& id) {
+        SR_TRACY_ZONE;
         SR_SCOPED_LOCK
 
     #if defined(SR_DEBUG)
@@ -274,6 +276,8 @@ namespace SR_UTILS_NS {
     }
 
     void ResourceManager::Synchronize(bool force) {
+        SR_TRACY_ZONE;
+
         {
             SR_SCOPED_LOCK
             m_force = true;
@@ -319,6 +323,7 @@ namespace SR_UTILS_NS {
     }
 
     void ResourceManager::CheckResourceHashes() {
+        SR_TRACY_ZONE;
         SR_LOCK_GUARD
 
         if (m_resources.empty()) {
@@ -482,7 +487,8 @@ namespace SR_UTILS_NS {
     }
 
     void ResourceManager::ReloadResources(float_t dt) {
-        SR_SCOPED_LOCK
+        SR_TRACY_ZONE;
+        SR_SCOPED_LOCK;
 
         m_hashCheckDt += m_deltaTime;
 

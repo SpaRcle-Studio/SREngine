@@ -56,13 +56,21 @@ namespace SR_UTILS_NS {
 }
 #endif
 
-
 #ifdef SR_TRACY_ENABLE
+    #define SR_TRACY_ZONE ZoneScoped
+    #define SR_TRACY_ZONE_N(name) ZoneScopedN(name)
+    #define SR_TRACY_ZONE_S(name) ZoneTransientN(TracyConcat(__tracy_source_location, TracyLine), name, true)
+
     #define SR_TRACY_GET_CONTEXT(tracyType, pIdentifier) \
         SR_UTILS_NS::TracyContextManager::Instance().GetContext(tracyType, pIdentifier)
 
     #define SR_TRACY_DESTROY(tracyType) SR_UTILS_NS::TracyContextManager::Instance().Destroy(tracyType);
+
 #else
+    #define SR_TRACY_ZONE
+    #define SR_TRACY_ZONE_N(name)
+    #define SR_TRACY_ZONE_S(name)
+
     #define SR_TRACY_GET_CONTEXT(tracyType, pIdentifier)
     #define SR_TRACY_DESTROY(tracyType)
 #endif

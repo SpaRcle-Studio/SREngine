@@ -150,6 +150,8 @@ namespace SR_WORLD_NS {
     }
 
     bool Chunk::Load() {
+        SR_TRACY_ZONE;
+
         SRAssert(m_loadState == LoadState::PreLoaded);
 
         for (auto&& gameObject : m_preloaded) {
@@ -168,6 +170,8 @@ namespace SR_WORLD_NS {
     }
 
     SR_HTYPES_NS::Marshal::Ptr Chunk::Save(SR_HTYPES_NS::DataStorage* pContext) const {
+        SR_TRACY_ZONE;
+
         /// scene is locked
 
         auto&& pLogic = m_observer->m_scene->GetLogicBase().DynamicCast<SceneCubeChunkLogic*>();

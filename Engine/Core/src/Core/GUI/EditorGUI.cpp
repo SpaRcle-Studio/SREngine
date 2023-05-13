@@ -22,6 +22,7 @@
 #include <Core/GUI/AnimatorEditor.h>
 #include <Utils/ECS/Prefab.h>
 #include <Utils/Platform/Platform.h>
+#include <Utils/Profile/TracyContext.h>
 
 namespace SR_CORE_NS::GUI {
     EditorGUI::EditorGUI()
@@ -63,6 +64,8 @@ namespace SR_CORE_NS::GUI {
     }
 
     bool EditorGUI::Init() {
+        SR_TRACY_ZONE;
+
         if (m_isInit) {
             SR_ERROR("EditorGUI::Init() : editor gui is already initialized!");
             return false;
@@ -83,6 +86,7 @@ namespace SR_CORE_NS::GUI {
     }
 
     void EditorGUI::Draw() {
+        SR_TRACY_ZONE;
         SR_LOCK_GUARD
 
         if (m_hasErrors)
@@ -127,6 +131,8 @@ namespace SR_CORE_NS::GUI {
     }
 
     void EditorGUI::Load() {
+        SR_TRACY_ZONE;
+
         m_loaded = true;
 
         auto&& settings = EditorSettings::Instance();
@@ -158,6 +164,7 @@ namespace SR_CORE_NS::GUI {
     }
 
     void EditorGUI::Update() {
+        SR_TRACY_ZONE;
         SR_LOCK_GUARD
 
         if (Enabled()) {

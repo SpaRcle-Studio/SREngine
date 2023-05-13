@@ -17,6 +17,8 @@ namespace SR_GTYPES_NS {
     }
 
     bool SkinnedMesh::Calculate()  {
+        SR_TRACY_ZONE;
+
         if (IsCalculated()) {
             return true;
         }
@@ -41,6 +43,8 @@ namespace SR_GTYPES_NS {
     }
 
     void SkinnedMesh::Draw() {
+        SR_TRACY_ZONE;
+
         auto&& pShader = GetRenderContext()->GetCurrentShader();
 
         if (!pShader || !IsActive()) {
@@ -171,6 +175,8 @@ namespace SR_GTYPES_NS {
     }
 
     void SkinnedMesh::UseModelMatrix() {
+        SR_TRACY_ZONE;
+
         /// TODO: А не стоило бы изменить ColorBufferPass так, чтобы он вызывал не UseModelMatrix, а более обощённый метод?
         /// Нет, не стоило бы.
         if (!PopulateSkeletonMatrices()) {
@@ -209,6 +215,8 @@ namespace SR_GTYPES_NS {
     }
 
     bool SkinnedMesh::PopulateSkeletonMatrices() {
+        SR_TRACY_ZONE;
+
         static SR_MATH_NS::Matrix4x4 identityMatrix = SR_MATH_NS::Matrix4x4().Identity();
 
         auto&& bones = GetRawMesh()->GetBones(GetMeshId());

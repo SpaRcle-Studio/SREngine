@@ -14,11 +14,11 @@
     #define SR_TRACY_VK_CREATE(singleTimeCmd, pKernel, name)                                                            \
         auto&& pTracyVkCreateContext = SR_TRACY_GET_CONTEXT(SR_UTILS_NS::TracyType::Vulkan, (void*)nullptr);            \
         if (!pTracyVkCreateContext) {                                                                                   \
-            pTracyVkCreateContext = (void*)TracyVkContext(                                                    \
+            pTracyVkCreateContext = (void*)TracyVkContext(                                                              \
                 *pKernel->GetDevice(),                                                                                  \
                 *pKernel->GetDevice(),                                                                                  \
                 pKernel->GetDevice()->GetQueues()->GetGraphicsQueue(),                                                  \
-                singleTimeCmd                                                                                          \
+                singleTimeCmd                                                                                           \
             );                                                                                                          \
             TracyVkContextName(((tracy::VkCtx*)pTracyVkCreateContext), name, (uint16_t)strlen(name));                   \
         }                                                                                                               \
@@ -30,12 +30,12 @@
         }                                                                                                               \
                                                                                                                         \
         ZoneScoped;                                                                                                     \
-        TracyVkZone(((tracy::VkCtx*)pTracyVkFrameContext), cmd, name)                                                   \
+        TracyVkZone(((tracy::VkCtx*)pTracyVkFrameContext), (VkCommandBuffer)cmd, name)                                  \
 
     #define SR_TRACY_VK_COLLECT(cmd)                                                                                    \
         auto&& pTracyVkCollectContext = SR_TRACY_GET_CONTEXT(SR_UTILS_NS::TracyType::Vulkan, (void*)nullptr);           \
         if (pTracyVkCollectContext) {                                                                                   \
-            TracyVkCollect(((tracy::VkCtx*)pTracyVkCollectContext), cmd);                                               \
+            TracyVkCollect(((tracy::VkCtx*)pTracyVkCollectContext), (VkCommandBuffer)cmd);                              \
         }                                                                                                               \
 
 #else

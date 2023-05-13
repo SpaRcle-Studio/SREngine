@@ -1,4 +1,3 @@
-#include "..\..\..\inc\Utils\ECS\Transform.h"
 //
 // Created by Nikita on 27.11.2020.
 //
@@ -6,6 +5,7 @@
 #include <Utils/ECS/Transform.h>
 #include <Utils/ECS/Transform3D.h>
 #include <Utils/ECS/TransformZero.h>
+#include <Utils/Profile/TracyContext.h>
 
 namespace SR_UTILS_NS {
     Transform::~Transform() {
@@ -184,6 +184,8 @@ namespace SR_UTILS_NS {
     }
 
     void Transform::UpdateTree() {
+        SR_TRACY_ZONE;
+
         m_dirtyMatrix = true;
 
         if (!m_gameObject) {

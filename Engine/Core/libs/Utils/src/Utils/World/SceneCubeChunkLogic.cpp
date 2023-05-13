@@ -17,6 +17,8 @@ namespace SR_WORLD_NS {
     }
 
     bool SceneCubeChunkLogic::ReloadConfig() {
+        SR_TRACY_ZONE;
+
         /// TODO: возможно лучше сохранять в саму сцену?
 
         const std::string path = ResourceManager::Instance().GetResPath().Concat("Engine/Configs/World.xml");
@@ -47,6 +49,8 @@ namespace SR_WORLD_NS {
     }
 
     bool SceneCubeChunkLogic::ReloadChunks() {
+        SR_TRACY_ZONE;
+
         for (auto&& [position, pRegion] : m_regions) {
             pRegion->Reload();
         }
@@ -67,6 +71,8 @@ namespace SR_WORLD_NS {
     }
 
     bool SceneCubeChunkLogic::Reload() {
+        SR_TRACY_ZONE;
+
         if (!ReloadConfig()) {
             SR_ERROR("SceneCubeChunkLogic::Reload() : failed to reload config!");
             return false;
@@ -150,6 +156,7 @@ namespace SR_WORLD_NS {
     }
 
     void SceneCubeChunkLogic::SetWorldOffset(const Offset &offset) {
+        SR_TRACY_ZONE;
         SR_LOCK_GUARD
 
         const auto prevOffset = m_observer->m_offset;
@@ -180,6 +187,7 @@ namespace SR_WORLD_NS {
     }
 
     void SceneCubeChunkLogic::UpdateScope(float_t dt) {
+        SR_TRACY_ZONE;
         SR_LOCK_GUARD
 
         if (m_observer->m_region.HasZero()) {
@@ -239,6 +247,7 @@ namespace SR_WORLD_NS {
     }
 
     void SceneCubeChunkLogic::CheckShift(const SR_MATH_NS::IVector3 &chunk) {
+        SR_TRACY_ZONE;
         SR_LOCK_GUARD
 
         const auto shift = m_observer->m_shiftDistance;
@@ -273,6 +282,7 @@ namespace SR_WORLD_NS {
     }
 
     void SceneCubeChunkLogic::UpdateContainers() {
+        SR_TRACY_ZONE;
         SR_LOCK_GUARD
 
         const auto chunkSize = SR_MATH_NS::IVector3(m_chunkSize.x, m_chunkSize.y, m_chunkSize.x);
@@ -309,6 +319,7 @@ namespace SR_WORLD_NS {
     }
 
     void SceneCubeChunkLogic::SaveRegion(Region* pRegion, SR_HTYPES_NS::DataStorage* pContext) const {
+        SR_TRACY_ZONE;
         SR_LOCK_GUARD
 
         auto&& regionsPath = GetRegionsPath();
@@ -357,6 +368,7 @@ namespace SR_WORLD_NS {
     }
 
     bool SceneCubeChunkLogic::Save(const Path &path) {
+        SR_TRACY_ZONE;
         SR_LOCK_GUARD
 
         auto&& currentChunk = CalculateCurrentChunk();
@@ -387,6 +399,7 @@ namespace SR_WORLD_NS {
     }
 
     bool SceneCubeChunkLogic::Load(const Path &path) {
+        SR_TRACY_ZONE;
         SR_LOCK_GUARD
 
         auto&& componentsPath = m_scene->GetPath().Concat("data/components.bin");
@@ -407,6 +420,7 @@ namespace SR_WORLD_NS {
     }
 
     void SceneCubeChunkLogic::Destroy() {
+        SR_TRACY_ZONE;
         SR_LOCK_GUARD
 
         if (Debug::Instance().GetLevel() > Debug::Level::None) {
@@ -422,6 +436,7 @@ namespace SR_WORLD_NS {
     }
 
     void SceneCubeChunkLogic::Update(float_t dt) {
+        SR_TRACY_ZONE;
         SR_LOCK_GUARD
 
         const auto chunkSize = Math::IVector3(m_chunkSize.x, m_chunkSize.y, m_chunkSize.x);
@@ -546,6 +561,8 @@ namespace SR_WORLD_NS {
     }
 
     void SceneCubeChunkLogic::PostLoad() {
+        SR_TRACY_ZONE;
+
         for (auto&& [regionPos, pRegion] : m_regions) {
             pRegion->PostLoad();
         }

@@ -15,6 +15,7 @@ add_definitions(
 if (SR_TRACY_ENABLE)
     add_definitions(
         -DSR_TRACY_ENABLE
+        #-DTRACY_ON_DEMAND
         -DTRACY_ENABLE
     )
 endif()
