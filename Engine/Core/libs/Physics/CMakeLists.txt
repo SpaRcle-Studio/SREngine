@@ -8,10 +8,6 @@ add_definitions(
     -DFLAC__NO_DLL
 )
 
-set(SR_PHYSICS_USE_BULLET3 OFF)
-set(SR_PHYSICS_USE_PHYSX ON)
-set(SR_PHYSICS_USE_BOX2D ON)
-
 # ----------------------------------------------------------------------------------------------------------------------
 if (SR_PHYSICS_USE_BOX2D)
     add_compile_definitions(SR_PHYSICS_USE_BOX2D)
@@ -61,10 +57,10 @@ if (SR_PHYSICS_USE_PHYSX)
     set(PHYSX_INCLUDE_DIRS ${PHYSX_ROOT_DIR}/include/ ${PHYSX_ROOT_DIR}/../pxshared/include/)
     set(CMAKEMODULES_PATH ${PHYSX_ROOT_DIR}/../externals/cmakemodules)
 
-    if (ANDROID_NDK)
-        set(CMAKE_CONFIGURATION_TYPES "release")
-    else()
+    if (CMAKE_BUILD_TYPE STREQUAL "Debug")
         set(CMAKE_CONFIGURATION_TYPES "debug")
+    else()
+        set(CMAKE_CONFIGURATION_TYPES "release")
     endif()
 
     if (WIN32)
@@ -97,23 +93,25 @@ if (SR_PHYSICS_USE_PHYSX)
     set(PX_OUTPUT_LIB_DIR ${CMAKE_CURRENT_BINARY_DIR}/extern/physx)
     set(PX_OUTPUT_BIN_DIR ${CMAKE_CURRENT_BINARY_DIR}/extern/physx)
 
+    add_subdirectory(${PHYSX_ROOT_DIR}/compiler/public)
+
     set(PHYSX_LIBRARIES
-        PhysXExtensions
-        PhysX
-        PhysXPvdSDK
-        PhysXVehicle
-        PhysXCharacterKinematic
-        PhysXCooking
-        PhysXCommon
         PhysXFoundation
-        SimulationController
-        SceneQuery
         LowLevel
         LowLevelAABB
         LowLevelDynamics
+        PhysX
+        PhysXCharacterKinematic
+        PhysXCommon
+        PhysXCooking
+        PhysXExtensions
+        PhysXVehicle
+        SceneQuery
+        SimulationController
+        FastXml
+        PhysXPvdSDK
+        PhysXTask
     )
-
-    add_subdirectory(${PHYSX_ROOT_DIR}/compiler/public)
 
     if(MSVC)
         foreach(LIBRARY_ITERATE ${PHYSX_LIBRARIES})
