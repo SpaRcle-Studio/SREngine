@@ -39,6 +39,7 @@ namespace SR_GRAPH_NS::VulkanTypes {
 
         SR_NODISCARD VkCommandBuffer Render(uint32_t frame);
         SR_NODISCARD bool IsSurfaceDirty() const { return m_surfaceDirty; }
+        SR_NODISCARD bool IsUndockingActive() const;
 
     public:
         bool Init();

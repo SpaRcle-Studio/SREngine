@@ -655,11 +655,14 @@ namespace SR_GRAPH_NS {
     }
 
     bool Vulkan::IsMultiSamplingSupports() const {
-        ImGuiContext& g = *GImGui;
-        return g.Viewports.size() <= 1;
+        return !m_imgui || !m_imgui->IsUndockingActive();
     }
 
     void Vulkan::EndDrawGUI() {
+        if (!m_imgui) {
+            return;
+        }
+
         ImGui::Render();
 
         ImGuiIO &io = ImGui::GetIO();
@@ -669,6 +672,17 @@ namespace SR_GRAPH_NS {
         if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable) {
             ImGui::UpdatePlatformWindows();
             ImGui::RenderPlatformWindowsDefault();
+        }
+
+        const bool isUndockingActive = m_imgui->IsUndockingActive();
+
+        if (m_undocking != isUndockingActive) {
+            if ((m_undocking = isUndockingActive)) {
+                SR_INFO("Vulkan::EndDrawGUI() : undocking was activated!");
+            }
+            else {
+                SR_INFO("Vulkan::EndDrawGUI() : undocking was deactivated!");
+            }
         }
     }
 

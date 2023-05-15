@@ -117,6 +117,14 @@ namespace SR_GRAPH_NS::VulkanTypes {
 
         SR_SAFE_DELETE_PTR(m_pool);
 
+        for (auto&& cmdPool : m_cmdPools) {
+            if (cmdPool != VK_NULL_HANDLE) {
+                vkDestroyCommandPool(*m_device, cmdPool, nullptr);
+            }
+        }
+
+        m_cmdPools.clear();
+
         DeInitializeRenderer();
 
         m_swapchain = nullptr;
@@ -124,15 +132,13 @@ namespace SR_GRAPH_NS::VulkanTypes {
     }
 
     bool VkImGUI::ReInit() {
-        return false;
+        SR_INFO("VkImGUI::ReInit() : re-initialization vulkan ImGui...");
+        DeInitializeRenderer();
+        return InitializeRenderer();
     }
 
     void VkImGUI::DeInitializeRenderer() {
-        for (auto&& cmdPool : m_cmdPools) {
-            if (cmdPool != VK_NULL_HANDLE) {
-                vkDestroyCommandPool(*m_device, cmdPool, nullptr);
-            }
-        }
+        SR_INFO("VkImGUI::DeInitializeRenderer() : de-initialization vulkan ImGui renderer...");
 
         for (auto&& buffer : m_frameBuffs) {
             vkDestroyFramebuffer(*m_device, buffer, nullptr);
@@ -218,6 +224,8 @@ namespace SR_GRAPH_NS::VulkanTypes {
     }
 
     bool VkImGUI::InitializeRenderer() {
+        SR_INFO("VkImGUI::InitializeRenderer() : initialization vulkan ImGui renderer...");
+
         const VkSampleCountFlagBits countMSAASamples = EvoVulkan::Tools::Convert::IntToSampleCount(
             m_pipeline->GetSmoothSamplesCount()
         );
@@ -374,5 +382,13 @@ namespace SR_GRAPH_NS::VulkanTypes {
 
     void VkImGUI::SetSurfaceDirty() {
         m_surfaceDirty = true;
+    }
+
+    bool VkImGUI::IsUndockingActive() const {
+        if (ImGui::GetIO().ConfigFlags & ImGuiConfigFlags_ViewportsEnable) {
+            return GImGui->Viewports.size() > 1;
+        }
+
+        return false;
     }
 }

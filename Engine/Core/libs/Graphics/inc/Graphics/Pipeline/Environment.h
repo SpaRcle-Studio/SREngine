@@ -61,6 +61,7 @@ namespace SR_GRAPH_NS {
 
         bool              m_hasErrors              = false;
         bool              m_guiEnabled             = false;
+        bool              m_undocking              = false;
 
         int32_t           m_currentUBOid           = -1;
         int32_t           m_currentFBOid           = -1;
