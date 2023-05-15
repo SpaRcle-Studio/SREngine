@@ -57,7 +57,7 @@ namespace SR_GTYPES_NS {
         void SetDepthEnabled(bool depthEnabled);
         void SetSampleCount(uint8_t samples);
 
-        SR_NODISCARD uint8_t GetSamplesCount() const { return m_sampleCount; }
+        SR_NODISCARD uint8_t GetSamplesCount() const;
         SR_NODISCARD bool IsDepthEnabled() const { return m_depthEnabled; }
 
         SR_NODISCARD int32_t GetId();

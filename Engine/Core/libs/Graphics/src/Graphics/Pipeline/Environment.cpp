@@ -4,6 +4,7 @@
 
 #include <Utils/GUI.h>
 #include <Utils/ResourceManager/ResourceManager.h>
+#include <Utils/Common/Features.h>
 
 #include <Graphics/Pipeline/Environment.h>
 #include <Graphics/GUI/Icons.h>
@@ -37,7 +38,7 @@ bool SR_GRAPH_NS::Environment::PreInitGUI(const SR_UTILS_NS::Path &fontPath) {
             SR_ERROR("Environment::PreInitGUI() : file not found! \n\tPath: " + fontPath.ToString());
         }
 
-        const auto&& iconsFont = Helper::ResourceManager::Instance().GetResPath().Concat("Engine/Fonts/fa-solid-900.ttf");
+        const auto&& iconsFont = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Engine/Fonts/fa-solid-900.ttf");
 
         SR_GRAPH("Environment::InitGUI() : load icon font...\n\tPath: " + iconsFont.ToString());
         if (iconsFont.Exists()) {
@@ -58,7 +59,11 @@ bool SR_GRAPH_NS::Environment::PreInitGUI(const SR_UTILS_NS::Path &fontPath) {
         io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
         io.ConfigDockingWithShift       = true;
         io.ConfigWindowsResizeFromEdges = true;
-        // io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
+
+        if (SR_UTILS_NS::Features::Instance().Enabled("Undocking", false)) {
+            io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
+        }
+
         //io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
         //io.ConfigDockingWithShift = true;
         // Setup Dear ImGui style

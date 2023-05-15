@@ -237,4 +237,12 @@ namespace SR_GTYPES_NS {
 
         return m_depth.texture;
     }
+
+    uint8_t Framebuffer::GetSamplesCount() const {
+        if (m_pipeline->IsMultiSamplingSupports()) {
+            return m_sampleCount;
+        }
+
+        return 1;
+    }
 }

@@ -150,12 +150,13 @@ namespace SR_GRAPH_NS {
         bool m_enableValidationLayers = false;
 
     public:
-        [[nodiscard]] SR_FORCE_INLINE PipelineType GetType()       const override { return PipelineType::Vulkan; }
-        [[nodiscard]] SR_FORCE_INLINE uint8_t  GetCountBuildIter() const override { return m_kernel->GetCountBuildIterations(); }
-        [[nodiscard]] VulkanTypes::VkImGUI* GetVkImGUI() const { return m_imgui; }
-        [[nodiscard]] std::string GetPipeLineName()   const override { return "Vulkan";         }
-        [[nodiscard]] VulkanTools::MemoryManager* GetMemoryManager() const { return m_memory; }
-    public:
+        SR_NODISCARD SR_FORCE_INLINE PipelineType GetType()       const override { return PipelineType::Vulkan; }
+        SR_NODISCARD SR_FORCE_INLINE uint8_t  GetCountBuildIter() const override { return m_kernel->GetCountBuildIterations(); }
+        SR_NODISCARD VulkanTypes::VkImGUI* GetVkImGUI() const { return m_imgui; }
+        SR_NODISCARD std::string GetPipeLineName()   const override { return "Vulkan";         }
+        SR_NODISCARD VulkanTools::MemoryManager* GetMemoryManager() const { return m_memory; }
+        SR_NODISCARD EvoVulkan::Core::VulkanKernel* GetKernel() const { return m_kernel; }
+
         uint64_t GetVRAMUsage() override;
 
         bool OnResize(const SR_MATH_NS::UVector2& size) override;
@@ -171,6 +172,8 @@ namespace SR_GRAPH_NS {
 
         void DeInitialize() override;
 
+        bool IsMultiSamplingSupports() const override;
+
         bool InitGUI() override;
         bool StopGUI() override;
         void SetGUIEnabled(bool enabled) override {
@@ -185,7 +188,7 @@ namespace SR_GRAPH_NS {
         bool BeginDrawGUI() override;
         void EndDrawGUI() override;
 
-        Helper::Math::IVector2 GetScreenSize() const override;
+        SR_MATH_NS::IVector2 GetScreenSize() const override;
 
         SR_NODISCARD InternalTexture GetTexture(uint32_t id) const override;
 

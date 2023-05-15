@@ -18,7 +18,7 @@
     #include <vulkan/vulkan_android.h>
 #endif
 
-namespace Framework::Graphics {
+namespace SR_GRAPH_NS {
     const std::vector<const char *> Vulkan::m_deviceExtensions = {
             VK_KHR_SWAPCHAIN_EXTENSION_NAME,
             VK_EXT_LINE_RASTERIZATION_EXTENSION_NAME,
@@ -30,8 +30,8 @@ namespace Framework::Graphics {
 #define SR_VRAM ("{" + std::to_string(Environment::Get()->GetVRAMUsage() / 1024 / 1024) + "} ")
 
     void SRVulkan::SetGUIEnabled(bool enabled) {
-        if (auto&& vkImgui = dynamic_cast<Framework::Graphics::Vulkan*>(Environment::Get())->GetVkImGUI()) {
-            vkImgui->SetEnabled(enabled);
+        if (auto&& vkImgui = dynamic_cast<SR_GRAPH_NS::Vulkan*>(Environment::Get())->GetVkImGUI()) {
+            vkImgui->SetSurfaceDirty();
         }
         VulkanKernel::SetGUIEnabled(enabled);
     }
@@ -81,7 +81,7 @@ namespace Framework::Graphics {
             return true;
         };
 
-        m_imgui = new VulkanTypes::VkImGUI();
+        m_imgui = new VulkanTypes::VkImGUI(this);
 
         m_kernel = new SRVulkan();
 
@@ -620,7 +620,7 @@ namespace Framework::Graphics {
             return false;
         }
 
-        if (!m_imgui->Init(m_kernel)) {
+        if (!m_imgui->Init()) {
             SR_ERROR("Vulkan::Init() : failed to init imgui!");
             return false;
         }
@@ -652,6 +652,11 @@ namespace Framework::Graphics {
         ImGuizmo::Enable(true);
 
         return true;
+    }
+
+    bool Vulkan::IsMultiSamplingSupports() const {
+        ImGuiContext& g = *GImGui;
+        return g.Viewports.size() <= 1;
     }
 
     void Vulkan::EndDrawGUI() {
@@ -784,6 +789,10 @@ namespace Framework::Graphics {
     }
 
     uint8_t Vulkan::GetSmoothSamplesCount() const {
+        if (!IsMultiSamplingSupports()) {
+            return 1;
+        }
+
         return m_kernel->GetDevice()->GetMSAASamplesCount();
     }
 
