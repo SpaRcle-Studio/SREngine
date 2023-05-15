@@ -6,6 +6,7 @@
 #define SRENGINE_VEHICLE_H
 
 #include <Physics/PhysicsLib.h>
+#include <Physics/VehicleInternalData.h>
 
 #include <Utils/ECS/Component.h>
 #include <Utils/Common/Measurement.h>
@@ -22,15 +23,20 @@ namespace SR_PTYPES_NS {
         ~Vehicle() override = default;
 
     public:
-        static ComponentPtr LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage);
+        static Component* LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage);
 
         SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SR_UTILS_NS::SavableFlags flags) const override;
 
         SR_NODISCARD virtual SR_UTILS_NS::Measurement GetMeasurement() const;
 
+        SR_NODISCARD VehicleInternalData& GetVehicleData() { return m_internalData; }
+
         SR_NODISCARD virtual void* GetHandle() const noexcept = 0;
 
         virtual bool InitVehicle();
+
+    private:
+        VehicleInternalData m_internalData;
     };
 }
 

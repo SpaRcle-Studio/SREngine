@@ -21,6 +21,8 @@ namespace SR_GRAPH_NS {
     }
 
     RenderTechnique *RenderTechnique::Load(const SR_UTILS_NS::Path &rawPath) {
+        SR_TRACY_ZONE;
+
         /// Данный ресурс может иметь копии
 
         auto&& path = SR_UTILS_NS::Path(rawPath).RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetResPath());
@@ -42,6 +44,8 @@ namespace SR_GRAPH_NS {
     }
 
     bool RenderTechnique::Render() {
+        SR_TRACY_ZONE;
+
         if ((m_dirty && !Build()) || !m_camera || !m_camera->IsActive()) {
             return false;
         }
@@ -66,6 +70,8 @@ namespace SR_GRAPH_NS {
     }
 
     void RenderTechnique::Prepare() {
+        SR_TRACY_ZONE;
+
         if (m_dirty) {
             return;
         }
@@ -76,6 +82,8 @@ namespace SR_GRAPH_NS {
     }
 
     void RenderTechnique::Update() {
+        SR_TRACY_ZONE;
+
         if (m_dirty || !m_camera || !m_camera->IsActive()) {
             return;
         }
@@ -88,6 +96,8 @@ namespace SR_GRAPH_NS {
     }
 
     bool RenderTechnique::Overlay() {
+        SR_TRACY_ZONE;
+
         if (m_dirty) {
             return false;
         }
@@ -104,6 +114,8 @@ namespace SR_GRAPH_NS {
     }
 
     void RenderTechnique::OnResize(const SR_MATH_NS::UVector2 &size) {
+        SR_TRACY_ZONE;
+
         for (auto&& pass : m_passes) {
             pass->OnResize(size);
         }
@@ -139,6 +151,8 @@ namespace SR_GRAPH_NS {
     }
 
     bool RenderTechnique::Build() {
+        SR_TRACY_ZONE;
+
         /// Метод выполняется в графическом контексте
 
         if (m_hasErrors) {
@@ -188,6 +202,8 @@ namespace SR_GRAPH_NS {
     }
 
     bool RenderTechnique::LoadSettings(const SR_XML_NS::Node &node) {
+        SR_TRACY_ZONE;
+
         m_name = node.GetAttribute("Name").ToString();
 
         for (auto&& passNode : node.GetNodes()) {
@@ -203,6 +219,8 @@ namespace SR_GRAPH_NS {
     }
 
     void RenderTechnique::ClearSettings() {
+        SR_TRACY_ZONE;
+
         for (auto&& pPass : m_passes) {
             if (pPass->IsInit()) {
                 pPass->DeInit();

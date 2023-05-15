@@ -26,6 +26,7 @@
 #include <Graphics/Window/Window.h>
 #include <Graphics/Types/Geometry/SkinnedMesh.h>
 #include <Graphics/GUI/Editor/Theme.h>
+#include <Graphics/Pipeline/Vulkan/VulkanTracy.h>
 
 #include <Physics/Rigidbody.h>
 #include <Physics/LibraryImpl.h>
@@ -422,6 +423,10 @@ namespace SR_CORE_NS {
 
         m_isRun = false;
 
+        if (m_editor) {
+            m_editor->Save();
+        }
+
         if (m_input) {
             m_input->UnregisterAll();
         }
@@ -477,6 +482,8 @@ namespace SR_CORE_NS {
             m_accumulator = 0.f;
             return;
         }
+
+        SR_TRACY_ZONE_N("Main frame");
 
         SR_HTYPES_NS::Time::Instance().Update();
 
@@ -570,6 +577,8 @@ namespace SR_CORE_NS {
 
     void Engine::WorldThread() {
         while (m_isRun) {
+            SR_TRACY_ZONE_N("World");
+
             SR_HTYPES_NS::Thread::Sleep(250);
 
             m_mainCamera = m_renderScene.Do<CameraPtr>([](SR_GRAPH_NS::RenderScene* ptr) -> CameraPtr {
@@ -587,7 +596,7 @@ namespace SR_CORE_NS {
                 else if (auto&& gameObject = dynamic_cast<SR_UTILS_NS::GameObject*>(m_mainCamera->GetParent())) {
                     auto&& pLogic = m_scene->GetLogicBase().DynamicCast<SR_WORLD_NS::SceneCubeChunkLogic*>();
                     if (pLogic && gameObject) {
-                        pLogic->SetObserver(gameObject->GetThis());
+                        pLogic->SetObserver(gameObject);
                     }
                 }
 
@@ -600,6 +609,8 @@ namespace SR_CORE_NS {
     }
 
     void Engine::FixedUpdate() {
+        SR_TRACY_ZONE;
+
         ///В этом блоке находится обработка нажатия клавиш, которая не должна срабатывать, если окно не сфокусированно
         if (m_window->IsWindowFocus())
         {
@@ -651,10 +662,12 @@ namespace SR_CORE_NS {
     }
 
     void Engine::Update(float_t dt) {
+        SR_TRACY_ZONE;
         m_sceneBuilder->Update(dt);
     }
 
     void Engine::Prepare() {
+        SR_TRACY_ZONE;
         m_scene->Prepare();
         const bool isPaused = !m_isActive || m_isPaused;
         m_sceneBuilder->Build(isPaused);
@@ -681,6 +694,8 @@ namespace SR_CORE_NS {
     }
 
     void Engine::FlushScene() {
+        SR_TRACY_ZONE;
+
         /// не блочим, иначе deadlock
         /// SR_LOCK_GUARD
 

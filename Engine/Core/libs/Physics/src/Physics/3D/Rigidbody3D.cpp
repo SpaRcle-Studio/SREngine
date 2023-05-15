@@ -24,7 +24,7 @@ namespace SR_PTYPES_NS {
         : Super(pLibrary)
     { }
 
-    Rigidbody3D::ComponentPtr Rigidbody3D::LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage) {
+    SR_UTILS_NS::Component* Rigidbody3D::LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage) {
         auto&& pComponent = Super::LoadComponent(SR_UTILS_NS::Measurement::Space3D, marshal, dataStorage);
 
         if (auto&& pRigidbody3D = dynamic_cast<Rigidbody3D*>(pComponent)) {

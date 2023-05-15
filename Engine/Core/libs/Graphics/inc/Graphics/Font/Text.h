@@ -5,9 +5,10 @@
 #ifndef SRENGINE_TEXT_H
 #define SRENGINE_TEXT_H
 
+#include <Graphics/Types/Vertices.h>
 #include <Graphics/Types/Mesh.h>
-#include <Graphics/Types/Geometry/MeshComponent.h>
 #include <Utils/Types/UnicodeString.h>
+#include <Utils/ECS/Component.h>
 
 namespace SR_GTYPES_NS {
     class Font;
@@ -15,7 +16,6 @@ namespace SR_GTYPES_NS {
     class Text : public Mesh, public SR_UTILS_NS::Component {
         SR_ENTITY_SET_VERSION(1001);
         SR_INITIALIZE_COMPONENT(Text);
-        friend class Mesh;
     public:
         typedef Vertices::SimpleVertex VertexType;
 
@@ -48,7 +48,7 @@ namespace SR_GTYPES_NS {
             return SR_UTILS_NS::Component::IsActive();
         }
 
-        SR_NODISCARD Component::Ptr CopyComponent() const override;
+        SR_NODISCARD Component* CopyComponent() const override;
 
         const SR_MATH_NS::Matrix4x4& GetModelMatrix() const override {
             return m_modelMatrix;

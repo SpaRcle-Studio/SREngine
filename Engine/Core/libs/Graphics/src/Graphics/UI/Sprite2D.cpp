@@ -130,7 +130,7 @@ namespace SR_GRAPH_UI_NS {
         Super::UseModelMatrix();
     }
 
-    SR_UTILS_NS::Component::Ptr Sprite2D::CopyComponent() const {
+    SR_UTILS_NS::Component* Sprite2D::CopyComponent() const {
         return MeshComponent::CopyComponent();
     }
 }

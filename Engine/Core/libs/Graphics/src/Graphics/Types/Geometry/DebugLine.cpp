@@ -17,6 +17,8 @@ namespace SR_GTYPES_NS {
     { }
 
     void DebugLine::Draw() {
+        SR_TRACY_ZONE;
+
         if ((!IsCalculated() && !Calculate()) || m_hasErrors) {
             return;
         }
@@ -57,6 +59,8 @@ namespace SR_GTYPES_NS {
     }
 
     void DebugLine::UseMaterial() {
+        SR_TRACY_ZONE;
+
         if (auto&& pShader = GetShader()) {
             pShader->SetValue(SHADER_LINE_START_POINT, m_startPoint.Cast<float_t>());
             pShader->SetValue(SHADER_LINE_END_POINT, m_endPoint.Cast<float_t>());

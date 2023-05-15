@@ -23,6 +23,8 @@ namespace SR_GRAPH_NS {
     }
 
     bool SwapchainPass::Render() {
+        SR_TRACY_ZONE_N("Swapchain pass");
+
         auto&& pipeline = GetContext()->GetPipeline();
 
         pipeline->SetCurrentFramebuffer(nullptr);
@@ -33,14 +35,18 @@ namespace SR_GRAPH_NS {
             pipeline->BindFrameBuffer(0);
             pipeline->ClearBuffers(m_color.r, m_color.g, m_color.b, m_color.a, m_depth, 1);
 
-            pipeline->BeginRender();
+            pipeline->BeginCmdBuffer();
             {
+                pipeline->BeginRender();
+
                 pipeline->SetViewport();
                 pipeline->SetScissor();
 
                 GroupPass::Render();
+
+                pipeline->EndRender();
             }
-            pipeline->EndRender();
+            pipeline->EndCmdBuffer();
         }
 
         return true;

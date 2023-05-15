@@ -26,7 +26,7 @@ namespace SR_GRAPH_NS::GUI {
     class Node;
     class Link;
 
-    class Node : private SR_UTILS_NS::NonCopyable {
+    class Node : public SR_UTILS_NS::NonCopyable {
     public:
         Node();
         explicit Node(const std::string& name);

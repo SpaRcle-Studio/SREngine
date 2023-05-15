@@ -7,18 +7,12 @@ PrimitiveTopology TriangleList;
 BlendEnabled true;
 DepthWrite false;
 DepthTest true;
- 
+
 [[uniform], [public]] vec4 color;
 [[uniform], [public]] sampler2D diffuse;
 
 void fragment() {
 	COLOR = texture(diffuse, UV) * color;
-
-    if (COLOR.a == 0) {
-        discard;
-    }
-
-    COLOR.a = 0.75;
 }
 
 void vertex() {

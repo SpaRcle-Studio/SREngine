@@ -8,6 +8,8 @@
 #include <Utils/ECS/Component.h>
 #include <Graphics/Animations/AnimationKey.h>
 #include <Graphics/Animations/Skeleton.h>
+#include <Graphics/Animations/AnimationGraph.h>
+#include <Graphics/Animations/AnimationStateMachine.h>
 
 namespace SR_ANIMATIONS_NS {
     class AnimationClip;
@@ -37,20 +39,20 @@ namespace SR_ANIMATIONS_NS {
 
     private:
         void UpdateInternal(float_t dt);
-        uint32_t UpdateChannel(AnimationChannel* pChannel);
+
+    public:
+        float_t m_weight = 1.f;
 
     private:
         bool m_sync = false;
+        bool m_allowOverride = true;
 
-        std::map<AnimationChannel*, uint32_t> m_playState;
+        AnimationPose* m_workingPose = nullptr;
+        AnimationPose* m_staticPose = nullptr;
 
-        SR_UTILS_NS::GameObject* m_gameObject = nullptr;
+        AnimationGraph* m_graph = nullptr;
+
         Skeleton* m_skeleton = nullptr;
-
-        uint32_t m_maxKeyFrame = 0;
-        float_t m_time = 0.f;
-
-        AnimationClip* m_animationClip = nullptr;
 
     };
 }

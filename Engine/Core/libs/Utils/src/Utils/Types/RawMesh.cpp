@@ -30,6 +30,13 @@ namespace SR_HTYPES_NS {
         }
     }
 
+    SR_UTILS_NS::Path RawMesh::InitializeResourcePath() const {
+        return SR_UTILS_NS::Path(
+                std::move(SR_UTILS_NS::StringUtils::SubstringView(GetResourceId(), '|', 1)),
+                true /** fast */
+        );
+    }
+
     RawMesh::Ptr RawMesh::Load(const SR_UTILS_NS::Path &rawPath) {
         return Load(rawPath, false);
     }
@@ -38,9 +45,13 @@ namespace SR_HTYPES_NS {
         RawMesh::Ptr pRawMesh = nullptr;
 
         ResourceManager::Instance().Execute([&]() {
-            Path&& path = Path(rawPath).RemoveSubPath(ResourceManager::Instance().GetResPath());
+            Path&& id = Path(rawPath).RemoveSubPath(ResourceManager::Instance().GetResPath());
 
-            if (auto&& pResource = ResourceManager::Instance().Find<RawMesh>(path)) {
+            if (animation) {
+                id = id.EmplaceFront("Animation|");
+            }
+
+            if (auto&& pResource = ResourceManager::Instance().Find<RawMesh>(id)) {
                 pRawMesh = pResource;
                 SRAssert(pRawMesh->m_asAnimation == animation);
                 return;
@@ -48,10 +59,10 @@ namespace SR_HTYPES_NS {
 
             pRawMesh = new RawMesh();
             pRawMesh->m_asAnimation = animation;
-            pRawMesh->SetId(path, false /** auto register */);
+            pRawMesh->SetId(id, false /** auto register */);
 
             if (!pRawMesh->Reload()) {
-                SR_ERROR("RawMesh::Load() : failed to load raw mesh! \n\tPath: " + path.ToString());
+                SR_ERROR("RawMesh::Load() : failed to load raw mesh! \n\tPath: " + rawPath.ToString());
                 delete pRawMesh;
                 pRawMesh = nullptr;
                 return;
@@ -80,6 +91,7 @@ namespace SR_HTYPES_NS {
 
         m_bones.clear();
         m_boneOffsets.clear();
+        m_animations.clear();
 
         return !hasErrors;
     }
@@ -87,12 +99,15 @@ namespace SR_HTYPES_NS {
     bool RawMesh::Load() {
         bool hasErrors = !IResource::Load();
 
-        Path&& path = Path(GetResourceId());
-        if (!path.IsAbs()) {
-            path = ResourceManager::Instance().GetResPath().Concat(path);
+        auto&& resPath = GetResourcePath();
+
+        Path&& path = ResourceManager::Instance().GetResPath().Concat(resPath);
+        Path&& cache = ResourceManager::Instance().GetCachePath().Concat("Models").Concat(resPath);
+
+        if (m_asAnimation) {
+            cache = cache.ConcatExt("animation");
         }
 
-        Path&& cache = ResourceManager::Instance().GetCachePath().Concat("Models").Concat(GetResourceId());
         Path&& binary = cache.ConcatExt("cache");
         Path&& hashFile = cache.ConcatExt("hash");
 
@@ -112,7 +127,12 @@ namespace SR_HTYPES_NS {
             }
         }
         else {
-            m_scene = m_importer->ReadFile(path.ToString(), m_asAnimation ? SR_RAW_MESH_ASSIMP_ANIMATION_FLAGS : SR_RAW_MESH_ASSIMP_FLAGS);
+            m_scene = m_importer->ReadFile(path.ToStringRef(), m_asAnimation ? SR_RAW_MESH_ASSIMP_ANIMATION_FLAGS : SR_RAW_MESH_ASSIMP_FLAGS);
+
+            if (!m_scene) {
+                SR_ERROR("RawMesh::Load() : failed to load file!\n\tPath: " + path.ToStringRef() + "\n\tReason: " + std::string(m_importer->GetErrorString()));
+                return false;
+            }
 
             if (needFastLoad) {
                 SR_LOG("RawMesh::Load() : export model to cache... \n\tPath: " + binary.ToString());
@@ -132,6 +152,7 @@ namespace SR_HTYPES_NS {
 
         if (m_scene) {
             CalculateBones();
+            CalculateAnimations();
         }
         else {
             SR_ERROR("RawMesh::Load() : failed to read file! \n\tPath: " + path.ToString() + "\n\tReason: " + m_importer->GetErrorString());
@@ -224,12 +245,24 @@ namespace SR_HTYPES_NS {
             }
 
         #ifdef SR_DEBUG
-            for (auto&& vertex : vertices) {
-                float sum = 0.f;
-                for (auto&& [boneId, weight] : vertex.weights) {
-                    sum += weight;
+            static bool hasError = false;
+
+            if (!hasError) {
+                for (auto&& vertex : vertices) {
+                    float_t sum = 0.f;
+
+                    for (auto&&[boneId, weight] : vertex.weights) {
+                        sum += weight;
+                    }
+
+                    if (!SR_EQUALS(sum, 1.f)) {
+                        SR_WARN("RawMesh::GetVertices() : incorrect mesh weight!\n\tPath: " + GetResourcePath().ToStringRef() +
+                            "\n\tIndex: " + std::to_string(id) + "\n\tSum: " + std::to_string(sum)
+                        );
+                        hasError = true;
+                        break;
+                    }
                 }
-                SRAssertOnce(SR_EQUALS(sum, 1.f));
             }
         #endif
         }
@@ -371,6 +404,17 @@ namespace SR_HTYPES_NS {
 
                 m_boneOffsets.insert(std::make_pair(hashName, std::move(matrix4X4)));
             }
+        }
+    }
+
+    void RawMesh::CalculateAnimations() {
+        if (!m_asAnimation || !m_scene) {
+            return;
+        }
+
+        for (uint32_t i = 0; i < m_scene->mNumAnimations; ++i) {
+            auto&& pAnimation = m_scene->mAnimations[i];
+            m_animations[SR_HASH_STR(pAnimation->mName.C_Str())] = pAnimation;
         }
     }
 }

@@ -16,8 +16,6 @@
     #pragma warning(disable: 4828)
 #endif
 
-#define SR_CXX_20
-
 #ifdef ANDROID
     #define SR_ANDROID
 #endif
@@ -39,10 +37,6 @@
 
 #define TRUE 1
 #define FALSE 0
-
-#define SR_ICU
-
-#define SR_USE_IMGUI
 
 #ifdef _MSVC_LANG
     #define SR_MSVC
@@ -141,21 +135,6 @@
     #define SR_USE_GLFW3
 #endif
 
-#ifndef SR_USE_IMGUI
-    #define SR_USE_IMGUI
-    #define SR_USE_IMGUIZMO
-#endif
-
-#if defined(SR_USE_IMGUI) and not defined(SR_USE_IMGUIZMO)
-    #define SR_USE_IMGUIZMO
-#endif
-
-#if defined(SR_USE_IMGUI) and not defined(SR_USE_IMGUI_NODE_EDITOR)
-    #define SR_USE_IMGUI_NODE_EDITOR
-#endif
-
-#define SR_USE_VULKAN
-
 #ifdef SR_USE_VULKAN
     #define VK_PROTOTYPES
 #endif
@@ -201,6 +180,7 @@
 #define SR_WORLD_NS Framework::Helper::World
 #define SR_CORE_NS Framework::Core
 #define SR_CORE_UI_NS Framework::Core::UI
+#define SR_CORE_GUI_NS Framework::Core::GUI
 #define SR_SCRIPTING_NS Framework::Scripting
 #define SR_AUDIO_NS Framework::Audio
 
@@ -213,10 +193,6 @@
 #else
     #define SR_STATIC_ASSERT(msg) static_assert(false, msg);
 #endif
-
-#define SR_SUPPORT_PARALLEL
-
-#define SR_DLL_EXPORTS 1
 
 #ifndef SR_LINUX
     #if defined(SR_DLL_EXPORTS)

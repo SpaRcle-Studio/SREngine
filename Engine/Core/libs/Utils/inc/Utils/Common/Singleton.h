@@ -95,6 +95,10 @@ namespace SR_UTILS_NS {
             }
         }
 
+        SR_MAYBE_UNUSED static std::recursive_mutex& GetMutex() noexcept {
+            return Instance().m_mutex;
+        }
+
     protected:
         virtual void OnSingletonDestroy() { }
         virtual void InitSingleton() { }

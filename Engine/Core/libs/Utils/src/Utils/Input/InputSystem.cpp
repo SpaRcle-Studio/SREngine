@@ -4,9 +4,12 @@
 
 #include <Utils/Input/InputSystem.h>
 #include <Utils/Platform/Platform.h>
+#include <Utils/Profile/TracyContext.h>
 
 namespace SR_UTILS_NS {
     void Input::Check() {
+        SR_TRACY_ZONE;
+
         if (!m_init) {
             Reset();
             m_init = true;

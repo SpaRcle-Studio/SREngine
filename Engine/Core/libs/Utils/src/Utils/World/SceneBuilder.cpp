@@ -7,6 +7,7 @@
 #include <Utils/ECS/GameObject.h>
 #include <Utils/ECS/Component.h>
 #include <Utils/Types/Function.h>
+#include <Utils/Profile/TracyContext.h>
 
 namespace SR_WORLD_NS {
     SceneBuilder::SceneBuilder(Scene *pScene)
@@ -15,6 +16,7 @@ namespace SR_WORLD_NS {
     { }
 
     void SceneBuilder::Build(bool isPaused) {
+        SR_TRACY_ZONE;
         SR_LOCK_GUARD
 
         Initialize(isPaused);
@@ -22,6 +24,8 @@ namespace SR_WORLD_NS {
         if (!m_dirty) {
             return;
         }
+
+        m_lastBuildTimePoint = SR_HTYPES_NS::Time::Instance().Now();
 
         m_componentsCapacity = m_updatableComponents.capacity();
         m_updatableComponents.clear();
@@ -40,6 +44,10 @@ namespace SR_WORLD_NS {
         SR_HTYPES_NS::Function<void(const SR_UTILS_NS::GameObject::Ptr& ptr)> function;
 
         function = [&](const SR_UTILS_NS::GameObject::Ptr& ptr) {
+            if (!ptr->IsEnabled()) {
+                return;
+            }
+
             for (auto&& pComponent : ptr->GetComponents()) {
                 if (isPaused && !pComponent->ExecuteInEditMode()) {
                     continue;
@@ -68,6 +76,7 @@ namespace SR_WORLD_NS {
     }
 
     void SceneBuilder::Update(float_t dt) {
+        SR_TRACY_ZONE;
         SR_LOCK_GUARD
 
         auto&& pIt = m_updatableComponents.begin();
@@ -89,6 +98,7 @@ namespace SR_WORLD_NS {
     }
 
     void SceneBuilder::FixedUpdate() {
+        SR_TRACY_ZONE;
         SR_LOCK_GUARD
 
         auto&& pIt = m_updatableComponents.begin();
@@ -114,30 +124,32 @@ namespace SR_WORLD_NS {
     }
 
     void SceneBuilder::Initialize(bool isPaused) {
+        SR_TRACY_ZONE;
+
         auto&& root = m_scene->GetRootGameObjects();
 
         m_dirty |= m_scene->IsDirty();
 
-        m_scene->PostLoad();
-        m_scene->Awake(isPaused);
-        m_scene->CheckActivity();
-        m_scene->Start();
+        m_scene->PostLoad(false);
+        m_scene->Awake(false, isPaused);
+        m_scene->CheckActivity(false);
+        m_scene->Start(false);
 
         for (auto&& gameObject : root) {
             m_dirty |= gameObject->IsDirty();
-            gameObject->PostLoad();
+            gameObject->PostLoad(false);
         }
 
         for (auto&& gameObject : root) {
-            gameObject->Awake(isPaused);
+            gameObject->Awake(false, isPaused);
         }
 
         for (auto&& gameObject : root) {
-            gameObject->CheckActivity();
+            gameObject->CheckActivity(false);
         }
 
         for (auto&& gameObject : root) {
-            gameObject->Start();
+            gameObject->Start(false);
         }
     }
 }

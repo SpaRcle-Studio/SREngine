@@ -136,6 +136,12 @@ namespace Framework::Graphics {
             return false;
         }
 
+    #ifdef SR_TRACY_ENABLE
+        SR_UTILS_NS::TracyContextManager::Instance().VulkanDestroy = [](void* pContext) {
+            TracyVkDestroy((tracy::VkCtx*)pContext);
+        };
+    #endif
+
         return true;
     }
 
@@ -160,6 +166,8 @@ namespace Framework::Graphics {
         SR_GRAPH_LOG("Vulkan::DeInitialize() : de-initialize pipeline...");
 
         /// SR_GRAPH_NS::Memory::MeshManager::Instance().PrintDump();
+
+        SR_TRACY_DESTROY(SR_UTILS_NS::TracyType::Vulkan);
 
         if (m_memory) {
             m_memory->Free();
@@ -265,6 +273,13 @@ namespace Framework::Graphics {
             SR_ERROR("Vulkan::PostInit() : failed to post-initialize Evo Vulkan kernel!");
             return false;
         }
+
+    #ifdef SR_TRACY_ENABLE
+        if (auto&& pSingleTimeCmd = m_kernel->CreateCmd()) {
+            SR_TRACY_VK_CREATE(*pSingleTimeCmd, m_kernel, "EvoVulkan");
+            delete pSingleTimeCmd;
+        }
+    #endif
 
         return true;
     }
@@ -663,22 +678,6 @@ namespace Framework::Graphics {
         };
     }
 
-    /*int32_t Vulkan::GetImGuiTextureDescriptorFromTexture(uint32_t textureID) const {
-        auto descriptorSet = m_memory->AllocateDynamicTextureDescriptorSet(ImGui_ImplVulkan_GetDescriptorSetLayout(), textureID);
-        if (descriptorSet < 0) {
-            Helper::Debug::Error("Vulkan::GetImGuiTextureDescriptorFromTexture() : failed to allocate dynamic texture descriptor set!");
-            return -1;
-        }
-        else
-            return descriptorSet;
-    }
-
-    void *Vulkan::GetDescriptorSet(uint32_t id) const { return reinterpret_cast<void*>(m_memory->m_descriptorSets[id].m_self); }
-
-    void *Vulkan::GetDescriptorSetFromDTDSet(uint32_t id) const {
-        return reinterpret_cast<void*>(m_memory->GetDynamicTextureDescriptorSet(id));
-    }*/
-
     SR_MATH_NS::FColor Vulkan::GetPixelColor(uint64_t textureId, uint32_t x, uint32_t y) {
         if (textureId == SR_ID_INVALID || textureId >= m_memory->m_countTextures.first) {
             return SR_MATH_NS::FColor(0.f);
@@ -788,8 +787,6 @@ namespace Framework::Graphics {
         return m_kernel->GetDevice()->GetMSAASamplesCount();
     }
 
-
-
     //!-----------------------------------------------------------------------------------------------------------------
 
     bool SRVulkan::OnResize()  {
@@ -812,6 +809,8 @@ namespace Framework::Graphics {
     }
 
     EvoVulkan::Core::RenderResult SRVulkan::Render()  {
+        SR_TRACY_ZONE;
+
         if (PrepareFrame() == EvoVulkan::Core::FrameResult::OutOfDate) {
             VK_LOG("SRVulkan::Render() : out of date...");
             m_hasErrors |= !ResizeWindow();
@@ -898,5 +897,15 @@ namespace Framework::Graphics {
         return SR_UTILS_NS::Features::Instance().Enabled("RayTracing", false);
     #endif
 
+    }
+
+    EvoVulkan::Core::FrameResult SRVulkan::PrepareFrame() {
+        SR_TRACY_ZONE;
+        return VulkanKernel::PrepareFrame();
+    }
+
+    EvoVulkan::Core::FrameResult SRVulkan::SubmitFrame() {
+        SR_TRACY_ZONE;
+        return VulkanKernel::SubmitFrame();
     }
 }

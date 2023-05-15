@@ -7,6 +7,9 @@ set(ASSIMP_BUILD_TESTS OFF CACHE INTERNAL "" FORCE)
 set(ASSIMP_BUILD_ASSIMP_TOOLS OFF CACHE INTERNAL "" FORCE)
 set(ASSIMP_INSTALL OFF CACHE INTERNAL "" FORCE)
 set(ASSIMP_BUILD_ASSIMP_VIEW OFF CACHE INTERNAL "" FORCE)
+set(BUILD_SHARED_LIBS OFF CACHE INTERNAL "" FORCE)
+set(ASSIMP_WARNINGS_AS_ERRORS OFF CACHE INTERNAL "" FORCE)
+set(ASSIMP_BUILD_ZLIB ON CACHE INTERNAL "" FORCE)
 
 set(ICU_PREBUILT_VERSION "69.1")
 
@@ -20,6 +23,10 @@ endif()
 
 add_subdirectory(libs/glm)
 add_subdirectory(libs/assimp)
+
+if (SR_TRACY_ENABLE)
+    add_subdirectory(libs/tracy)
+endif()
 
 if (SR_UTILS_STATIC_LIBRARY)
     add_library(Utils STATIC ICU.cxx Utils.cxx)
@@ -40,11 +47,14 @@ else()
 	target_link_libraries(Utils nfd assimp)
 endif()
 
+if (SR_TRACY_ENABLE)
+    target_link_libraries(Utils tracy)
+endif()
+
 if (MSVC)
     target_compile_options(Utils PUBLIC /openmp)
 endif()
 
-target_include_directories(Utils PUBLIC ${CMAKE_CURRENT_BINARY_DIR}/include/icu)
 target_include_directories(Utils PUBLIC inc)
 target_include_directories(Utils PUBLIC libs)
 target_include_directories(Utils PUBLIC libs/assimp/include)
@@ -59,8 +69,25 @@ endforeach()
 
 # --------------------------------------------------------------------------------------
 
-list(APPEND SR_UTILS_ICU_ALL_HEADERS libs/icu)
+if (SR_ICU)
+    target_include_directories(Utils PUBLIC ${CMAKE_CURRENT_BINARY_DIR}/include/icu)
 
-foreach(SR_UTILS_ICU_HEADER ${SR_UTILS_ICU_ALL_HEADERS})
-    file(COPY ${SR_UTILS_ICU_HEADER} DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/include)
-endforeach()
+    list(APPEND SR_UTILS_ICU_ALL_HEADERS libs/icu)
+
+    foreach(SR_UTILS_ICU_HEADER ${SR_UTILS_ICU_ALL_HEADERS})
+        file(COPY ${SR_UTILS_ICU_HEADER} DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/include)
+    endforeach()
+endif()
+
+# --------------------------------------------------------------------------------------
+
+if (SR_TRACY_ENABLE)
+    target_include_directories(Utils PUBLIC ${CMAKE_CURRENT_BINARY_DIR}/include/tracy/tracy)
+    target_include_directories(Utils PUBLIC libs/tracy/tracy)
+
+    list(APPEND SR_UTILS_TRACY_ALL_HEADERS libs/tracy)
+
+    foreach(SR_UTILS_TRACY_HEADER ${SR_UTILS_TRACY_ALL_HEADERS})
+        file(COPY ${SR_UTILS_TRACY_HEADER} DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/include)
+    endforeach()
+endif()

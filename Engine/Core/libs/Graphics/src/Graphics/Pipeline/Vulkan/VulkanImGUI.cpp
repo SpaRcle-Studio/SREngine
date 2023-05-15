@@ -7,6 +7,7 @@
 #include <EvoVulkan/Types/DescriptorPool.h>
 
 #include <Graphics/Pipeline/Vulkan/VulkanImGUI.h>
+#include <Graphics/Pipeline/Vulkan/VulkanTracy.h>
 
 #include <Graphics/GUI/Widget.h>
 
@@ -305,20 +306,29 @@ bool Framework::Graphics::VulkanTypes::VkImGUI::ReSize(uint32_t width, uint32_t 
 }
 
 VkCommandBuffer Framework::Graphics::VulkanTypes::VkImGUI::Render(uint32_t frame) {
-    auto buffer = m_cmdBuffs[frame];
+    auto&& buffer = m_cmdBuffs[frame];
 
     vkResetCommandPool(*m_device, m_cmdPools[frame], 0);
-    vkBeginCommandBuffer(m_cmdBuffs[frame], &m_cmdBuffBI);
 
-    m_renderPassBI.framebuffer = m_frameBuffs[frame];
-    vkCmdBeginRenderPass(m_cmdBuffs[frame], &m_renderPassBI, VK_SUBPASS_CONTENTS_INLINE);
+    vkBeginCommandBuffer(buffer, &m_cmdBuffBI);
+    {
+        SR_TRACY_VK_FRAME_ZONE_N(buffer, "VkImGUI");
 
-    if (auto drawData = ImGui::GetDrawData())
-        ImGui_ImplVulkan_RenderDrawData(drawData, m_cmdBuffs[frame]);
-    else
-        VK_WARN("VkImGUI::Render() : imgui draw data is nullptr!");
+        m_renderPassBI.framebuffer = m_frameBuffs[frame];
+        vkCmdBeginRenderPass(m_cmdBuffs[frame], &m_renderPassBI, VK_SUBPASS_CONTENTS_INLINE);
 
-    vkCmdEndRenderPass(m_cmdBuffs[frame]);
+        if (auto&& drawData = ImGui::GetDrawData()) {
+            ImGui_ImplVulkan_RenderDrawData(drawData, m_cmdBuffs[frame]);
+        }
+        else {
+            VK_WARN("VkImGUI::Render() : imgui draw data is nullptr!");
+        }
+
+        vkCmdEndRenderPass(m_cmdBuffs[frame]);
+    }
+
+    SR_TRACY_VK_COLLECT(buffer);
+
     vkEndCommandBuffer(m_cmdBuffs[frame]);
 
     return buffer;

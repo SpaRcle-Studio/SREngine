@@ -5,6 +5,14 @@
 #include "../Graphics/src/Graphics/Animations/AnimationKey.cpp"
 #include "../Graphics/src/Graphics/Animations/Animator.cpp"
 #include "../Graphics/src/Graphics/Animations/Skeleton.cpp"
+#include "../Graphics/src/Graphics/Animations/AnimationPose.cpp"
+#include "../Graphics/src/Graphics/Animations/AnimationChannel.cpp"
+#include "../Graphics/src/Graphics/Animations/AnimationGraph.cpp"
+#include "../Graphics/src/Graphics/Animations/AnimationGraphNode.cpp"
+#include "../Graphics/src/Graphics/Animations/AnimationStateCondition.cpp"
+#include "../Graphics/src/Graphics/Animations/AnimationStateTransition.cpp"
+#include "../Graphics/src/Graphics/Animations/AnimationStateMachine.cpp"
+#include "../Graphics/src/Graphics/Animations/AnimationState.cpp"
 
 #include "../Graphics/src/Graphics/Pipeline/Vulkan/VulkanImGUI.cpp"
 #include "../Graphics/src/Graphics/Pipeline/Vulkan/VulkanMemory.cpp"
@@ -114,6 +122,10 @@
 
 #include "../Graphics/src/Graphics/Window/Window.cpp"
 #include "../Graphics/src/Graphics/Window/BasicWindowImpl.cpp"
+
+#if defined(SR_TRACY_ENABLE) && defined(SR_USE_VULKAN)
+    #include "../Graphics/src/Graphics/Pipeline/Vulkan/VulkanTracy.cpp"
+#endif
 
 #if defined(SR_WIN32)
     #include "../Graphics/src/Graphics/Window/Win32Window.cpp"

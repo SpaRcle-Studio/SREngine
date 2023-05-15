@@ -153,6 +153,8 @@ namespace SR_GTYPES_NS {
     }
 
     void Skybox::DrawVulkan() {
+        SR_TRACY_ZONE;
+
         auto&& uboManager = Memory::UBOManager::Instance();
 
         if (m_dirtyShader)
@@ -228,6 +230,8 @@ namespace SR_GTYPES_NS {
     }
 
     void Skybox::Draw() {
+        SR_TRACY_ZONE;
+
         if (!m_isCalculated && (m_hasErrors || !Calculate())) {
             return;
         }

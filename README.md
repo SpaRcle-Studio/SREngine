@@ -16,6 +16,10 @@
 - [ ] Redhat
 - [ ] Android
 
+## Branches 
+ * master - branch for releases
+ * dev - active development branch 
+
 ## Building
  1. Install Clion 2020.1 / Visual Studio 2019
  2. Install [Vulkan SDK/Runtime](https://vulkan.lunarg.com/sdk/home) 1.3.211.0

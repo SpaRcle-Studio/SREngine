@@ -141,22 +141,31 @@ namespace SR_GTYPES_NS {
         m_dirty = true;
     }
 
-    bool Framebuffer::BeginRender(const Framebuffer::ClearColors &clearColors, float_t depth) {
+    bool Framebuffer::BeginCmdBuffer(const Framebuffer::ClearColors &clearColors, float_t depth) {
         m_pipeline->ClearBuffers(clearColors, depth);
 
-        if (!m_pipeline->BeginRender()) {
+        if (!m_pipeline->BeginCmdBuffer()) {
             return false;
         }
 
-        m_pipeline->SetViewport(m_size.x, m_size.y);
-        m_pipeline->SetScissor(m_size.x, m_size.y);
+        SR_NOOP;
+
+        return true;
+    }
+
+    bool Framebuffer::BeginCmdBuffer() {
+        m_pipeline->ClearBuffers();
+
+        if (!m_pipeline->BeginCmdBuffer()) {
+            return false;
+        }
+
+        SR_NOOP;
 
         return true;
     }
 
     bool Framebuffer::BeginRender() {
-        m_pipeline->ClearBuffers();
-
         if (!m_pipeline->BeginRender()) {
             return false;
         }
@@ -169,6 +178,10 @@ namespace SR_GTYPES_NS {
 
     void Framebuffer::EndRender() {
         m_pipeline->EndRender();
+    }
+
+    void Framebuffer::EndCmdBuffer() {
+        m_pipeline->EndCmdBuffer();
     }
 
     int32_t Framebuffer::GetId() {
@@ -195,8 +208,8 @@ namespace SR_GTYPES_NS {
         return m_colors.at(layer).texture;
     }
 
-    bool Framebuffer::BeginRender(const SR_MATH_NS::FColor &clearColor, float_t depth) {
-        return BeginRender(Framebuffer::ClearColors{ clearColor }, depth);
+    bool Framebuffer::BeginCmdBuffer(const SR_MATH_NS::FColor &clearColor, float_t depth) {
+        return BeginCmdBuffer(Framebuffer::ClearColors{ clearColor }, depth);
     }
 
     uint32_t Framebuffer::GetWidth() const {

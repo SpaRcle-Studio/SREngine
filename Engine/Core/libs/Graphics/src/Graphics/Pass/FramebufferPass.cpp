@@ -33,9 +33,18 @@ namespace SR_GRAPH_NS {
             return false;
         }
 
-        if (m_framebuffer->Bind() && m_framebuffer->BeginRender(m_clearColors, m_depth)) {
+        if (!m_framebuffer->Bind()) {
+            return false;
+        }
+
+        if (!m_framebuffer->BeginCmdBuffer(m_clearColors, m_depth)) {
+            return false;
+        }
+
+        if (m_framebuffer->BeginRender()) {
             GroupPass::Render();
             m_framebuffer->EndRender();
+            m_framebuffer->EndCmdBuffer();
         }
 
         /// Независимо от того, отрисовали мы что-то в кадровый буффер или нет,

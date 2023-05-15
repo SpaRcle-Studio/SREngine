@@ -20,6 +20,8 @@ namespace SR_GTYPES_NS {
     { }
 
     bool Mesh3D::Calculate()  {
+        SR_TRACY_ZONE;
+
         if (IsCalculated()) {
             return true;
         }
@@ -44,6 +46,8 @@ namespace SR_GTYPES_NS {
     }
 
     void Mesh3D::Draw() {
+        SR_TRACY_ZONE;
+
         auto&& pShader = GetRenderContext()->GetCurrentShader();
 
         if (!pShader || !IsActive()) {
@@ -102,7 +106,7 @@ namespace SR_GTYPES_NS {
         return pMarshal;
     }
 
-    SR_UTILS_NS::Component::Ptr SR_GTYPES_NS::Mesh3D::LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage *dataStorage) {
+    SR_UTILS_NS::Component* SR_GTYPES_NS::Mesh3D::LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage *dataStorage) {
         const auto&& type = static_cast<MeshType>(marshal.Read<int32_t>());
 
         const auto&& path = marshal.Read<std::string>();
@@ -166,7 +170,7 @@ namespace SR_GTYPES_NS {
         return Super::GetMeshIdentifier();
     }
 
-    SR_UTILS_NS::Component::Ptr Mesh3D::CopyComponent() const {
+    SR_UTILS_NS::Component* Mesh3D::CopyComponent() const {
         if (auto&& pMesh = dynamic_cast<Mesh3D*>(MeshComponent::CopyComponent())) {
             pMesh->SetRawMesh(GetRawMesh());
             pMesh->SetMeshId(GetMeshId());

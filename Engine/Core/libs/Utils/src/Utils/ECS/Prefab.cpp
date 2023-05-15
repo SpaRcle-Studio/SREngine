@@ -11,10 +11,9 @@ namespace SR_UTILS_NS {
     { }
 
     Prefab::~Prefab() {
-        if (m_data) {
-            m_data->Destroy();
-            m_data = nullptr;
-        }
+        m_data.AutoFree([](auto&& pData) {
+            pData->Destroy();
+        });
     }
 
     Prefab* Prefab::Load(const Path& rawPath) {
@@ -46,9 +45,9 @@ namespace SR_UTILS_NS {
     }
 
     bool Prefab::Unload() {
-        if (m_data) {
-            m_data->Destroy();
-        }
+        m_data.AutoFree([](auto&& pData) {
+            pData->Destroy();
+        });
 
         return IResource::Unload();
     }
@@ -73,6 +72,17 @@ namespace SR_UTILS_NS {
             return false;
         }
 
+
         return IResource::Load();
+    }
+
+    Prefab::GameObjectPtr Prefab::Instance(const Prefab::ScenePtr& scene) const {
+        if (m_data) {
+            auto&& instanced = m_data->Copy(scene);
+            instanced->SetPrefab(const_cast<Prefab*>(this), true);
+            return instanced;
+        }
+
+        return Prefab::GameObjectPtr();
     }
 }

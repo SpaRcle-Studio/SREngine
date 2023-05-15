@@ -1,0 +1,30 @@
+ShaderType Skinned;
+
+PolygonMode Fill;
+CullMode Back;
+DepthCompare LessOrEqual;
+PrimitiveTopology TriangleList;
+BlendEnabled true;
+DepthWrite false;
+DepthTest true;
+ 
+[[uniform], [public]] vec4 color;
+[[uniform], [public]] sampler2D diffuse;
+
+void fragment() {
+	COLOR = texture(diffuse, UV) * color;
+}
+
+void vertex() {
+    mat4 boneTransform = (SKELETON_MATRICES_384[int(WEIGHT0[0])] * SKELETON_MATRIX_OFFSETS_384[int(WEIGHT0[0])]) * WEIGHT0[1];
+    boneTransform     += (SKELETON_MATRICES_384[int(WEIGHT1[0])] * SKELETON_MATRIX_OFFSETS_384[int(WEIGHT1[0])]) * WEIGHT1[1];
+    boneTransform     += (SKELETON_MATRICES_384[int(WEIGHT2[0])] * SKELETON_MATRIX_OFFSETS_384[int(WEIGHT2[0])]) * WEIGHT2[1];
+    boneTransform     += (SKELETON_MATRICES_384[int(WEIGHT3[0])] * SKELETON_MATRIX_OFFSETS_384[int(WEIGHT3[0])]) * WEIGHT3[1];
+    boneTransform     += (SKELETON_MATRICES_384[int(WEIGHT4[0])] * SKELETON_MATRIX_OFFSETS_384[int(WEIGHT4[0])]) * WEIGHT4[1];
+    boneTransform     += (SKELETON_MATRICES_384[int(WEIGHT5[0])] * SKELETON_MATRIX_OFFSETS_384[int(WEIGHT5[0])]) * WEIGHT5[1];
+    boneTransform     += (SKELETON_MATRICES_384[int(WEIGHT6[0])] * SKELETON_MATRIX_OFFSETS_384[int(WEIGHT6[0])]) * WEIGHT6[1];
+    boneTransform     += (SKELETON_MATRICES_384[int(WEIGHT7[0])] * SKELETON_MATRIX_OFFSETS_384[int(WEIGHT7[0])]) * WEIGHT7[1];
+
+    VERTEX = (boneTransform * vec4(VERTEX, 1.0)).xyz;
+    OUT_POSITION = PROJECTION_MATRIX * VIEW_MATRIX * vec4(VERTEX, 1.0);
+}

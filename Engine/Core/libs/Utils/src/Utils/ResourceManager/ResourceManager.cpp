@@ -130,6 +130,7 @@ namespace SR_UTILS_NS {
     }
 
     void ResourceManager::GC() {
+        SR_TRACY_ZONE;
         SR_SCOPED_LOCK
 
         if (m_destroyed.empty()) {
@@ -156,14 +157,14 @@ namespace SR_UTILS_NS {
             const bool usageNow = pResource->GetCountUses() > 0 || !pResource->IsDestroyed();
 
             if (usageNow) {
-                pResource->m_lifetime = ResourceLifeTime;
+                pResource->SetLifetime(ResourceLifeTime);
             }
             else if (IsLastResource(pResource)) {
-                pResource->m_lifetime -= m_GCDt;
+                pResource->SetLifetime(pResource->GetLifetime() - m_GCDt);
             }
             else {
                 /// нам не нужно ждать завершения времени жизни ресурса, у которого еще есть копии
-                pResource->m_lifetime = 0;
+                pResource->SetLifetime(0);
             }
 
             const bool resourceAlive = !pResource->IsForce() && pResource->IsAlive() && !m_force;
@@ -185,7 +186,7 @@ namespace SR_UTILS_NS {
                 /// инвалидируется, и здесь может потенциально случиться краш, поэтому этот порядок нужно строго союлюдать
 
                 m_destroyed.erase(resourceIt);
-                delete pResource;
+                pResource->DeleteResource();
                 resourceIt = m_destroyed.begin();
             }
         }
@@ -253,6 +254,7 @@ namespace SR_UTILS_NS {
     }
 
     IResource *ResourceManager::Find(uint64_t hashTypeName, const std::string& id) {
+        SR_TRACY_ZONE;
         SR_SCOPED_LOCK
 
     #if defined(SR_DEBUG)
@@ -274,6 +276,8 @@ namespace SR_UTILS_NS {
     }
 
     void ResourceManager::Synchronize(bool force) {
+        SR_TRACY_ZONE;
+
         {
             SR_SCOPED_LOCK
             m_force = true;
@@ -319,6 +323,7 @@ namespace SR_UTILS_NS {
     }
 
     void ResourceManager::CheckResourceHashes() {
+        SR_TRACY_ZONE;
         SR_LOCK_GUARD
 
         if (m_resources.empty()) {
@@ -482,7 +487,8 @@ namespace SR_UTILS_NS {
     }
 
     void ResourceManager::ReloadResources(float_t dt) {
-        SR_SCOPED_LOCK
+        SR_TRACY_ZONE;
+        SR_SCOPED_LOCK;
 
         m_hashCheckDt += m_deltaTime;
 

@@ -14,6 +14,7 @@
 #include <Graphics/Pipeline/Vulkan/VulkanMemory.h>
 #include <Graphics/Pipeline/Vulkan/AbstractCasts.h>
 #include <Graphics/Pipeline/Vulkan/VulkanImGUI.h>
+#include <Graphics/Pipeline/Vulkan/VulkanTracy.h>
 
 #include <EvoVulkan/VulkanKernel.h>
 #include <EvoVulkan/Tools/VulkanInsert.h>
@@ -80,7 +81,6 @@ namespace SR_GRAPH_NS {
 
     class SRVulkan : public EvoVulkan::Core::VulkanKernel {
     protected:
-        EvoVulkan::Core::RenderResult Render() override;
         ~SRVulkan() override = default;
 
     public:
@@ -103,8 +103,15 @@ namespace SR_GRAPH_NS {
         bool Destroy() override {
             return EvoVulkan::Core::VulkanKernel::Destroy();
         }
+
+    private:
+        EvoVulkan::Core::RenderResult Render() override;
+        EvoVulkan::Core::FrameResult PrepareFrame() override;
+        EvoVulkan::Core::FrameResult SubmitFrame() override;
+
     private:
         VkCommandBuffer m_submitCmdBuffs[2] = {0};
+
     };
 
     class Vulkan : public Environment {
@@ -244,20 +251,28 @@ namespace SR_GRAPH_NS {
         void SetViewport(int32_t width, int32_t height) override;
         void SetScissor(int32_t width, int32_t height) override;
 
+        SR_FORCE_INLINE bool BeginCmdBuffer() override {
+            vkBeginCommandBuffer(m_currentCmd, &m_cmdBufInfo);
+            return true;
+        }
+
         SR_FORCE_INLINE bool BeginRender() override {
             if (!m_renderPassBI.pClearValues) {
                 SRAssert2Once(false, "pClearValues is nullptr! Please, call ClearBuffers before BeginRender");
                 return false;
             }
 
-            vkBeginCommandBuffer(m_currentCmd, &m_cmdBufInfo);
             vkCmdBeginRenderPass(m_currentCmd, &m_renderPassBI, VK_SUBPASS_CONTENTS_INLINE);
 
             return true;
         }
+
+        SR_FORCE_INLINE void EndCmdBuffer() override {
+            vkEndCommandBuffer(m_currentCmd);
+        }
+
         SR_FORCE_INLINE void EndRender() override {
             vkCmdEndRenderPass(m_currentCmd);
-            vkEndCommandBuffer(m_currentCmd);
         }
 
         SR_FORCE_INLINE void ClearFramebuffersQueue() override {

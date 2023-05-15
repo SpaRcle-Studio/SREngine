@@ -129,6 +129,7 @@ namespace SR_GRAPH_NS::Types {
     }
 
     void Mesh::UseMaterial() {
+        SR_TRACY_ZONE;
         m_material->Use();
     }
 

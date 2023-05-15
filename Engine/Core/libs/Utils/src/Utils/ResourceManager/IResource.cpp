@@ -105,7 +105,7 @@ namespace SR_UTILS_NS {
                 }
                 else {
                     /// так и не зарегистрировали ресурс
-                    delete this;
+                    DeleteResource();
                     return;
                 }
             }
@@ -116,6 +116,7 @@ namespace SR_UTILS_NS {
         RemoveUPResult result;
 
         /// тут нужно делать синхронно, иначе может произойти deadlock
+        /// TODO: а вообще опасное место, нужно переделать
         ResourceManager::Instance().Execute([this, &result]() {
             if (m_countUses == 0) {
                 SRHalt("Count use points is zero!");

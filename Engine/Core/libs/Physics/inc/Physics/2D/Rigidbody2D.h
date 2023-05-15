@@ -15,7 +15,7 @@ namespace SR_PTYPES_NS {
         ~Rigidbody2D() override = default;
 
     public:
-        static ComponentPtr LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage);
+        static Component* LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage);
 
     public:
         SR_NODISCARD SR_UTILS_NS::Measurement GetMeasurement() const override;

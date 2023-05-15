@@ -31,6 +31,10 @@
 
 #define CMP_EPSILON 0.00001
 #define CMP_BIG_EPSILON 0.001
+
+#define SR_EPSILON 0.00001
+#define SR_BIG_EPSILON 0.001
+
 #define CMP_EPSILON2 (CMP_EPSILON * CMP_EPSILON)
 #define UNIT_EPSILON 0.00001
 
@@ -48,6 +52,8 @@
 #define SR_NAN NAN
 #define SR_INT16_MAX INT16_MAX
 #define SR_UINT16_MAX UINT16_MAX
+#define SR_UINT8_MAX UINT8_MAX
+#define SR_INT8_MAX INT8_MAX
 #define SR_INT32_MAX INT32_MAX
 #define SR_INT32_MIN INT32_MIN
 #define SR_UINT32_MAX UINT32_MAX
@@ -58,6 +64,12 @@
 #define SR_FLOAT_MAX FLT_MAX
 
 #define SR_EARTH_GRAVITY 9.81
+
+#define SR_SQRT(x) std::sqrt(x)
+#define SR_SIN(x) std::sin(x)
+#define SR_COS(x) std::cos(x)
+#define SR_ARC_SIN(x) std::asin(x)
+#define SR_ARC_COS(x) std::acos(x)
 
 #define SR_ABS(x) (std::abs(x))
 #define SR_MAX(a, b) (a > b ? a : b)

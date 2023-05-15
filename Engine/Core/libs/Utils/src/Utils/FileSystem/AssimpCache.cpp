@@ -381,7 +381,7 @@ namespace SR_UTILS_NS {
 
             pMesh->mPrimitiveTypes = pMarshal->Read<uint64_t>();
             pMesh->mMaterialIndex = pMarshal->Read<uint64_t>();
-            pMesh->mMethod = pMarshal->Read<uint64_t>();
+            pMesh->mMethod = static_cast<aiMorphingMethod>(pMarshal->Read<uint64_t>());
 
             pMarshal->ReadBlock(&pMesh->mAABB);
 

@@ -14,10 +14,14 @@
 #include <Utils/ECS/ComponentManager.h>
 #include <Utils/World/Chunk.h>
 #include <Utils/Platform/Platform.h>
+#include <Utils/World/SceneBuilder.h>
 
 #include <Graphics/GUI/Editor/MessageBox.h>
+#include <Graphics/SRSL/Shader.h>
 
+/// TODO: перенести инклуд
 #include <imgui_internal.h> /// взято с #5539 https://github.com/ocornut/imgui/issues/5539
+
 #include <Core/GUI/AnimatorEditor.h>
 
 namespace Framework::Core {
@@ -631,6 +635,12 @@ bool GUISystem::BeginMenuBar() {
 
         ImGui::Separator();
 
+        if (ImGui::MenuItem("Clear shaders cache")) {
+            SR_SRSL_NS::SRSLShader::ClearShadersCache();
+        }
+
+        ImGui::Separator();
+
         if (ImGui::MenuItem("Exit")) {
             SR_CORE_NS::Engine::Instance().GetWindow()->Close();
         }
@@ -736,9 +746,25 @@ bool GUISystem::BeginMenuBar() {
 
     ImGui::PopStyleVar();
 
-    auto &&io = ImGui::GetIO();
+    auto&& io = ImGui::GetIO();
 
-    ImGui::Text("|   FPS: %.2f (%.2gms)", io.Framerate, io.Framerate > 0.f ? 1000.0f / io.Framerate : 0.0f);
+    ImGui::PushItemWidth(115);
+
+    ImGui::LabelText("##FPSLable", "|   FPS: %.2f (%.2gms)", io.Framerate, io.Framerate > 0.f ? 1000.0f / io.Framerate : 0.0f);
+
+    ImGui::PopItemWidth();
+
+    auto&& pBuilder = Engine::Instance().GetSceneBuilder();
+    if (pBuilder) {
+        auto&& now = SR_HTYPES_NS::Time::Instance().Now();
+        auto&& time = now - pBuilder->GetLastBuildTime();
+
+        using ms = std::chrono::duration<double, std::milli>;
+
+        const float_t timeLeft = std::chrono::duration_cast<ms>(time).count() / (double_t) SR_CLOCKS_PER_SEC;
+
+        ImGui::Text("|   Last build: %.2f sec", timeLeft);
+    }
 
     return true;
 }

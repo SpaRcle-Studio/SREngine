@@ -15,6 +15,8 @@ namespace SR_GRAPH_NS {
     { }
 
     bool SSAOPass::Init() {
+        SR_TRACY_ZONE;
+
         m_kernel = CreateKernel();
 
         if ((m_noise = CreateNoise())) {
@@ -82,6 +84,8 @@ namespace SR_GRAPH_NS {
     }
 
     void SSAOPass::Update() {
+        SR_TRACY_ZONE_N("SSAO update");
+
         if (m_shader) {
             m_shader->SetCustom(SHADER_SSAO_SAMPLES, m_kernel.data());
         }
@@ -90,13 +94,24 @@ namespace SR_GRAPH_NS {
     }
 
     bool SSAOPass::Render() {
+        SR_TRACY_ZONE_N("SSAO render");
+
         if (!m_framebuffer) {
             return false;
         }
 
-        if (m_framebuffer->Bind() && m_framebuffer->BeginRender(m_clearColors, m_depth)) {
+        if (!m_framebuffer->Bind()) {
+            return false;
+        }
+
+        if (!m_framebuffer->BeginCmdBuffer(m_clearColors, m_depth)) {
+            return false;
+        }
+
+        if (m_framebuffer->BeginRender()) {
             PostProcessPass::Render();
             m_framebuffer->EndRender();
+            m_framebuffer->EndCmdBuffer();
         }
 
         /// Независимо от того, отрисовали мы что-то в кадровый буффер или нет,

@@ -3,6 +3,7 @@
 //
 
 #include <Utils/CommandManager/CmdManager.h>
+#include <Utils/Profile/TracyContext.h>
 #include <Utils/Debug.h>
 
 namespace SR_UTILS_NS {
@@ -15,6 +16,8 @@ namespace SR_UTILS_NS {
     }
 
     bool CmdManager::Execute(ReversibleCommand *cmd) {
+        SR_TRACY_ZONE;
+
         if (m_historyPC != UINT32_MAX) {
             /// если следущая команада будет перезаписывать историю,
             /// например когда мы отменили действия, и пытаемся сделать что-то другое,
@@ -43,6 +46,8 @@ namespace SR_UTILS_NS {
     }
 
     bool CmdManager::DoCmd(const Cmd& cmd) {
+        SR_TRACY_ZONE;
+
         switch (cmd.m_type) {
             case CmdType::Redo: {
                 if ((m_historyPC >= (m_history.size() - 1) && m_historyPC != UINT32_MAX) || m_history.empty()) {
@@ -80,6 +85,7 @@ namespace SR_UTILS_NS {
     }
 
     bool CmdManager::Execute(ReversibleCommand *cmd, SyncType sync) {
+        SR_TRACY_ZONE;
         SR_LOCK_GUARD
 
         if (m_historyPC != UINT32_MAX) {
@@ -114,6 +120,7 @@ namespace SR_UTILS_NS {
     }
 
     void CmdManager::Update() {
+        SR_TRACY_ZONE;
         SR_LOCK_GUARD
 
         while (!m_commands.empty()) {
@@ -128,6 +135,8 @@ namespace SR_UTILS_NS {
     }
 
     bool CmdManager::ExecuteImpl(ReversibleCommand *cmd, SyncType sync) {
+        SR_TRACY_ZONE;
+
         bool result = false;
 
         switch (sync) {

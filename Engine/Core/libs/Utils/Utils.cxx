@@ -15,11 +15,13 @@
 #include "../Utils/src/Utils/ECS/GameObject.cpp"
 #include "../Utils/src/Utils/ECS/ISavable.cpp"
 #include "../Utils/src/Utils/ECS/Transform.cpp"
+#include "../Utils/src/Utils/ECS/Entity.cpp"
 #include "../Utils/src/Utils/ECS/EntityManager.cpp"
 #include "../Utils/src/Utils/ECS/Transform3D.cpp"
 #include "../Utils/src/Utils/ECS/Transform2D.cpp"
 #include "../Utils/src/Utils/ECS/TransformZero.cpp"
 #include "../Utils/src/Utils/ECS/EntityRef.cpp"
+#include "../Utils/src/Utils/ECS/EntityRefUtils.cpp"
 #include "../Utils/src/Utils/ECS/Prefab.cpp"
 #include "../Utils/src/Utils/ECS/Migration.cpp"
 #include "../Utils/src/Utils/ECS/TagManager.cpp"
@@ -96,3 +98,9 @@
 #include "../Utils/src/Utils/World/SceneDefaultLogic.cpp"
 #include "../Utils/src/Utils/World/SceneCubeChunkLogic.cpp"
 #include "../Utils/src/Utils/World/ScenePrefabLogic.cpp"
+
+#include "../Utils/src/Utils/Game/LookAtComponent.cpp"
+
+#ifdef SR_TRACY_ENABLE
+    #include "../Utils/src/Utils/Profile/TracyContext.cpp"
+#endif

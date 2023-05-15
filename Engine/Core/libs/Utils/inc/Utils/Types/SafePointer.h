@@ -7,6 +7,7 @@
 
 #include <Utils/Common/StringFormat.h>
 #include <Utils/Types/Function.h>
+#include <Utils/Profile/TracyContext.h>
 
 #define SR_SAFE_PTR_FORWARD_DECLARATION(className) \
     namespace SR_HTYPES_NS { \
@@ -215,6 +216,8 @@ namespace SR_HTYPES_NS {
     }
 
     template<typename T> void SafePtr<T>::Lock() const {
+        SR_TRACY_ZONE;
+
         const std::thread::id this_id = std::this_thread::get_id();
 
         if(m_data->m_owner.load() == this_id) {
@@ -248,6 +251,8 @@ namespace SR_HTYPES_NS {
     }
 
     template<typename T> SR_NODISCARD bool SafePtr<T>::LockIfValid() const {
+        SR_TRACY_ZONE;
+
         Lock();
 
         if (m_data->m_valid)
@@ -259,6 +264,8 @@ namespace SR_HTYPES_NS {
     }
 
     template<typename T> void SafePtr<T>::RecursiveLock() const {
+        SR_TRACY_ZONE;
+
         const std::thread::id this_id = std::this_thread::get_id();
 
         if(m_data->m_owner.load() == this_id) {
@@ -277,6 +284,8 @@ namespace SR_HTYPES_NS {
     }
 
     template<typename T> SR_NODISCARD bool SafePtr<T>::RecursiveLockIfValid() const {
+        SR_TRACY_ZONE;
+
         RecursiveLock();
 
         if (m_data->m_valid)

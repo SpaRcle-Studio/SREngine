@@ -4,6 +4,7 @@
 
 #include <Utils/Input/InputDispatcher.h>
 #include <Utils/Input/InputHandler.h>
+#include <Utils/Profile/TracyContext.h>
 
 namespace SR_UTILS_NS {
     InputDispatcher::InputDispatcher()
@@ -19,11 +20,14 @@ namespace SR_UTILS_NS {
     }
 
     void InputDispatcher::Check() {
+        SR_TRACY_ZONE;
         CheckKeyboard();
         CheckMouse();
     }
 
     void InputDispatcher::CheckKeyboard() {
+        SR_TRACY_ZONE;
+
         auto&& input = Input::Instance();
 
         for (auto&& code : KeyCodes) {
@@ -46,6 +50,8 @@ namespace SR_UTILS_NS {
     }
 
     void InputDispatcher::CheckMouse() {
+        SR_TRACY_ZONE;
+
         auto&& input = Input::Instance();
 
         for (auto&& code : MouseCodes) {

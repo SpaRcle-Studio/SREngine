@@ -99,6 +99,7 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD int32_t GetCurrentShaderId() const noexcept { return m_currentShaderID; }
         SR_NODISCARD Types::Shader* GetCurrentShader() const noexcept { return m_currentShader; }
         SR_NODISCARD Types::Framebuffer* GetCurrentFramebuffer() const noexcept { return m_currentFramebuffer; }
+        SR_NODISCARD virtual void* GetCurrentCmd() const noexcept { return nullptr; }
         SR_NODISCARD int32_t GetCurrentFramebufferId() const noexcept { return m_currentFBOid; }
 
         virtual uint64_t GetVRAMUsage() { return 0; }
@@ -190,8 +191,12 @@ namespace SR_GRAPH_NS {
         /* Swap window color buffers */
         virtual SR_FORCE_INLINE void SwapBuffers() const { }
         virtual SR_FORCE_INLINE void DrawFrame() { }
+        virtual SR_FORCE_INLINE bool BeginCmdBuffer() { return false; }
         virtual SR_FORCE_INLINE bool BeginRender() { return false; }
         virtual SR_FORCE_INLINE void EndRender() { }
+        virtual SR_FORCE_INLINE void ResetCmdBuffer() { }
+        virtual SR_FORCE_INLINE void ResetCmdPool() { }
+        virtual SR_FORCE_INLINE void EndCmdBuffer() { }
 
         virtual glm::vec2 GetMousePos() { return glm::vec2(0); }
         virtual glm::vec4 GetTexturePixel(glm::vec2 uPos, uint32_t ID, glm::vec2 size) { return glm::vec4(0); }

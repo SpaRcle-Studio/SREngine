@@ -17,6 +17,8 @@ namespace SR_GRAPH_NS {
     }
 
     bool GroupPass::Load(const SR_XML_NS::Node &passNode) {
+        SR_TRACY_ZONE;
+
         for (auto&& subPassNode : passNode.TryGetNodes()) {
             if (auto&& pPass = SR_ALLOCATE_RENDER_PASS(GetTechnique(), subPassNode, this)) {
                 m_passes.emplace_back(pPass);
@@ -30,6 +32,8 @@ namespace SR_GRAPH_NS {
     }
 
     bool GroupPass::Init() {
+        SR_TRACY_ZONE;
+
         for (auto&& pPass : m_passes) {
             pPass->Init();
         }
@@ -38,6 +42,8 @@ namespace SR_GRAPH_NS {
     }
 
     void GroupPass::DeInit() {
+        SR_TRACY_ZONE;
+
         for (auto&& pPass : m_passes) {
             pPass->DeInit();
         }
@@ -46,6 +52,8 @@ namespace SR_GRAPH_NS {
     }
 
     void GroupPass::Prepare() {
+        SR_TRACY_ZONE;
+
         for (auto&& pPass : m_passes) {
             pPass->Prepare();
         }
@@ -54,6 +62,8 @@ namespace SR_GRAPH_NS {
     }
 
     bool GroupPass::PreRender() {
+        SR_TRACY_ZONE;
+
         bool hasDrawData = false;
         for (auto&& pPass : m_passes) {
             hasDrawData |= pPass->PreRender();
@@ -63,8 +73,11 @@ namespace SR_GRAPH_NS {
     }
 
     bool GroupPass::Render() {
+        SR_TRACY_ZONE;
+
         bool hasDrawData = false;
         for (auto&& pPass : m_passes) {
+            SR_TRACY_ZONE_S(pPass->GetName().data());
             hasDrawData |= pPass->Render();
         }
 
@@ -74,6 +87,7 @@ namespace SR_GRAPH_NS {
     bool GroupPass::PostRender() {
         bool hasDrawData = false;
         for (auto&& pPass : m_passes) {
+            SR_TRACY_ZONE_S(pPass->GetName().data());
             hasDrawData |= pPass->PostRender();
         }
 
@@ -82,6 +96,7 @@ namespace SR_GRAPH_NS {
 
     void GroupPass::Update() {
         for (auto&& pPass : m_passes) {
+            SR_TRACY_ZONE_S(pPass->GetName().data());
             pPass->Update();
         }
 
@@ -91,6 +106,7 @@ namespace SR_GRAPH_NS {
     bool GroupPass::Overlay() {
         bool hasDrawData = false;
         for (auto&& pPass : m_passes) {
+            SR_TRACY_ZONE_S(pPass->GetName().data());
             hasDrawData |= pPass->Overlay();
         }
 
@@ -99,6 +115,7 @@ namespace SR_GRAPH_NS {
 
     void GroupPass::OnResize(const SR_MATH_NS::UVector2 &size) {
         for (auto&& pPass : m_passes) {
+            SR_TRACY_ZONE_S(pPass->GetName().data());
             pPass->OnResize(size);
         }
 

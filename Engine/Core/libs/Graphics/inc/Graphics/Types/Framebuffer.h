@@ -22,6 +22,9 @@ namespace SR_GRAPH_NS::Types {
 namespace SR_GTYPES_NS {
     class RenderTexture;
 
+    /**
+     * \Usage Bing -> BeginRenderBuffer -> BeginRender -> EndRender -> EndRenderBuffer
+     * */
     class Framebuffer : public SR_UTILS_NS::IResource, public Memory::IGraphicsResource {
     public:
         using Ptr = Framebuffer*;
@@ -41,9 +44,13 @@ namespace SR_GTYPES_NS {
     public:
         bool Bind();
 
-        bool BeginRender(const ClearColors& clearColors, float_t depth);
-        bool BeginRender(const SR_MATH_NS::FColor& clearColor, float_t depth);
+        bool BeginCmdBuffer();
+        bool BeginCmdBuffer(const ClearColors& clearColors, float_t depth);
+        bool BeginCmdBuffer(const SR_MATH_NS::FColor& clearColor, float_t depth);
+
         bool BeginRender();
+
+        void EndCmdBuffer();
         void EndRender();
 
         void SetSize(const SR_MATH_NS::IVector2& size);

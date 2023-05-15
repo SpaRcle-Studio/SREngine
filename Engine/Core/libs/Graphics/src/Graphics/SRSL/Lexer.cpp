@@ -11,7 +11,13 @@ namespace SR_SRSL_NS {
     }
 
     SRSLLexer::Lexems SRSLLexer::Parse(const SR_UTILS_NS::Path& path) {
-        return ParseInternal(std::move(SR_UTILS_NS::FileSystem::ReadAllText(path.ToString())));
+        auto&& text = SR_UTILS_NS::FileSystem::ReadAllText(path.ToString());
+
+        if (text.empty()) {
+            SR_ERROR("SRSLLexer::Parse() : failed to read file!\n\tPath: " + path.ToStringRef());
+        }
+
+        return ParseInternal(std::move(text));
     }
 
     SRSLLexer::Lexems SRSLLexer::ParseString(std::string code) {
