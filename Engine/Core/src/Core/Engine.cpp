@@ -278,7 +278,7 @@ namespace SR_CORE_NS {
 
             SR_GRAPH("Engine::InitializeRender() : pre-initializing...");
             if (!m_pipeline->PreInit(
-                    1,
+                    64,
                     "SpaRcle Engine", /// App name
                     "SREngine",       /// Engine name
                     SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Engine/Utilities/glslc.exe")))
@@ -545,6 +545,7 @@ namespace SR_CORE_NS {
             m_renderContext.Unlock();
         }
 
+        /// TODO: если ни одно окно не сфокусировано -> не рендерить
         if (m_renderScene.RecursiveLockIfValid()) {
             if (auto&& pWin = GetWindow()->GetImplementation<SR_GRAPH_NS::BasicWindowImpl>()) {
                 const bool isOverlay = m_renderScene->IsOverlayEnabled();

@@ -43,6 +43,8 @@ namespace SR_GRAPH_NS {
     void RenderScene::Render() noexcept {
         SR_TRACY_ZONE_N("Render scene");
 
+        GetPipeline()->PrepareFrame();
+
         /// ImGui будет нарисован поверх независимо оторядка отрисовки.
         /// Однако, если его нарисовать в конце, то пользователь может
         /// изменить данные отрисовки сцены и сломать уже нарисованную сцену

@@ -48,6 +48,7 @@ namespace SR_GRAPH_NS::VulkanTypes {
     private:
         bool InitializeRenderer();
         void DeInitializeRenderer();
+        void DestroyBuffers();
 
     private:
         PipelinePtr m_pipeline = nullptr;

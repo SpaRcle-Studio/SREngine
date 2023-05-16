@@ -9,6 +9,7 @@
 #include <Graphics/Pipeline/Vulkan/AbstractCasts.h>
 #include <Graphics/Pipeline/Vulkan.h>
 #include <Graphics/Memory/MeshManager.h>
+#include <Graphics/Types/Framebuffer.h>
 
 #if defined(SR_WIN32)
     #include <vulkan/vulkan_win32.h>
@@ -42,6 +43,10 @@ namespace SR_GRAPH_NS {
             const std::string &engineName,
             const std::string &glslc)
     {
+        m_requiredSampleCount = smooth_samples;
+
+        SRAssert2(m_requiredSampleCount >= 1 && m_requiredSampleCount <= 64, "Sample count must be greater 0 and less 64!");
+
         EvoVulkan::Tools::VkFunctionsHolder::Instance().LogCallback = [](const std::string &msg) { SR_VULKAN_LOG(SR_VRAM + msg); };
         EvoVulkan::Tools::VkFunctionsHolder::Instance().WarnCallback = [](const std::string &msg) { SR_WARN(SR_VRAM + msg); };
         EvoVulkan::Tools::VkFunctionsHolder::Instance().ErrorCallback = [](const std::string &msg) { SR_VULKAN_ERROR(SR_VRAM + msg); };
@@ -102,7 +107,7 @@ namespace SR_GRAPH_NS {
         m_cmdBufInfo = EvoVulkan::Tools::Initializers::CommandBufferBeginInfo();
         m_renderPassBI = EvoVulkan::Tools::Insert::RenderPassBeginInfo(0, 0, VK_NULL_HANDLE, VK_NULL_HANDLE, nullptr, 0);
 
-        m_kernel->SetMultisampling(smooth_samples);
+        m_kernel->SetMultisampling(m_requiredSampleCount);
 
         /// TODO: вынести в конфиг
         m_kernel->SetSwapchainImagesCount(2);
@@ -250,6 +255,8 @@ namespace SR_GRAPH_NS {
             SR_ERROR("Vulkan::Init() : failed to create vulkan memory manager!");
             return false;
         }
+
+        m_supportedSampleCount = m_kernel->GetDevice()->GetMSAASamplesCount();
 
         return true;
     }
@@ -450,7 +457,10 @@ namespace SR_GRAPH_NS {
             return false;
         }
 
-        const VkSampleCountFlagBits sampleCount = m_currentVkFramebuffer ? m_currentVkFramebuffer->GetSampleCount() : m_kernel->GetDevice()->GetMSAASamples();
+        const uint8_t sampleCount = GetFramebufferSampleCount();
+
+        const VkSampleCountFlagBits vkSampleCount = EvoVulkan::Tools::Convert::IntToSampleCount(sampleCount);
+
         const bool depthEnabled = m_currentVkFramebuffer ? m_currentVkFramebuffer->IsDepthEnabled() : true;
 
         if (!m_memory->m_ShaderPrograms[*dynamicID]->Compile(
@@ -461,7 +471,7 @@ namespace SR_GRAPH_NS {
                 shaderCreateInfo.depthWrite,
                 shaderCreateInfo.depthTest,
                 VulkanTools::AbstractPrimitiveTopologyToVk(shaderCreateInfo.primitiveTopology),
-                sampleCount)
+                vkSampleCount)
         ) {
             SR_ERROR("Vulkan::LinkShader() : failed to compile Evo Vulkan shader!");
             delete dynamicID;
@@ -527,7 +537,7 @@ namespace SR_GRAPH_NS {
         return true;
     }
 
-    [[nodiscard]] bool Vulkan::FreeTextures(int32_t *IDs, uint32_t count) const {
+    bool Vulkan::FreeTextures(int32_t *IDs, uint32_t count) const {
         if (!IDs) {
             SR_ERROR("Vulkan::FreeTextures() : texture IDs is nullptr!");
             return false;
@@ -548,8 +558,8 @@ namespace SR_GRAPH_NS {
         return true;
     }
 
-    [[nodiscard]] bool Vulkan::FreeFBO(uint32_t FBO) const {
-        return this->m_memory->FreeFBO(FBO - 1);
+    bool Vulkan::FreeFBO(uint32_t FBO) const {
+        return m_memory->FreeFBO(FBO - 1);
     }
 
     int32_t Vulkan::CalculateTexture(
@@ -596,7 +606,7 @@ namespace SR_GRAPH_NS {
             }
         }
 
-        auto ID = this->m_memory->AllocateTexture(
+        auto ID = m_memory->AllocateTexture(
                 data, w, h, vkFormat,
                 VulkanTools::AbstractTextureFilterToVkFilter(filter),
                 compression, mipLevels, cpuUsage);
@@ -619,6 +629,8 @@ namespace SR_GRAPH_NS {
             SR_ERROR("Vulkan::InitGUI() : device is nullptr!");
             return false;
         }
+
+        UpdateMultiSampling();
 
         if (!m_imgui->Init()) {
             SR_ERROR("Vulkan::Init() : failed to init imgui!");
@@ -654,10 +666,6 @@ namespace SR_GRAPH_NS {
         return true;
     }
 
-    bool Vulkan::IsMultiSamplingSupports() const {
-        return !m_imgui || !m_imgui->IsUndockingActive();
-    }
-
     void Vulkan::EndDrawGUI() {
         if (!m_imgui) {
             return;
@@ -668,7 +676,7 @@ namespace SR_GRAPH_NS {
         ImGuiIO &io = ImGui::GetIO();
         (void) io;
 
-        // Update and Render additional Platform Windows
+        /// Update and Render additional Platform Windows
         if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable) {
             ImGui::UpdatePlatformWindows();
             ImGui::RenderPlatformWindowsDefault();
@@ -802,12 +810,110 @@ namespace SR_GRAPH_NS {
         return program;
     }
 
-    uint8_t Vulkan::GetSmoothSamplesCount() const {
-        if (!IsMultiSamplingSupports()) {
-            return 1;
+    void Vulkan::OnMultiSampleChanged() {
+        SR_INFO("Vulkan::OnMultiSampleChanged() : samples count was changed to " + SR_UTILS_NS::ToString(GetSamplesCount()));
+        m_kernel->SetMultisampling(GetSamplesCount());
+        SetBuildState(false);
+        Environment::OnMultiSampleChanged();
+    }
+
+    void Vulkan::PrepareFrame() {
+        Environment::PrepareFrame();
+
+        if (m_kernel->IsDirty()) {
+            m_kernel->ReCreate(EvoVulkan::Core::FrameResult::Dirty);
+        }
+    }
+
+    void Vulkan::UpdateMultiSampling() {
+        const bool isMultiSampleSupported = m_isMultisampleSupported;
+
+        m_isMultisampleSupported = true;
+
+        /// if (m_imgui && m_imgui->IsUndockingActive()) {
+        ///     m_isMultisampleSupported = false;
+        /// }
+
+        if (m_supportedSampleCount <= 1) {
+            m_isMultisampleSupported = false;
         }
 
-        return m_kernel->GetDevice()->GetMSAASamplesCount();
+        const bool multiSampleSupportsChanged = isMultiSampleSupported != m_isMultisampleSupported;
+
+        if (m_newSampleCount.has_value() || multiSampleSupportsChanged) {
+            if (multiSampleSupportsChanged) {
+                if (!IsMultiSamplingSupported()) {
+                    m_currentSampleCount = 1;
+                }
+                else if (m_newSampleCount.has_value()) {
+                    m_currentSampleCount = m_newSampleCount.value();
+                }
+                else {
+                    m_currentSampleCount = m_requiredSampleCount;
+                }
+            }
+            else if (m_newSampleCount.has_value()) {
+                m_currentSampleCount = m_newSampleCount.value();
+            }
+
+            m_currentSampleCount = SR_MIN(m_currentSampleCount, m_supportedSampleCount);
+
+            OnMultiSampleChanged();
+
+            m_newSampleCount = std::nullopt;
+        }
+    }
+
+    void Vulkan::ClearBuffers(const std::vector<Framework::Helper::Math::FColor> &colors, float_t depth) {
+        const uint8_t sampleCount = GetFramebufferSampleCount();
+
+        auto colorCount = static_cast<uint8_t>(colors.size());
+        colorCount *= sampleCount > 1 ? 2 : 1;
+
+        m_clearValues.resize(colorCount + 1);
+
+        for (uint8_t i = 0; i < colorCount; ++i) {
+            auto&& color = colors[i / (sampleCount > 1 ? 2 : 1)];
+
+            m_clearValues[i] = {
+                .color = { {
+                       static_cast<float>(color.r),
+                       static_cast<float>(color.g),
+                       static_cast<float>(color.b),
+                       static_cast<float>(color.a)
+                   }
+                }
+            };
+        }
+
+        m_clearValues[colorCount] = VkClearValue { .depthStencil = { depth, 0 } };
+
+        m_renderPassBI.clearValueCount = colorCount + 1;
+        m_renderPassBI.pClearValues  = m_clearValues.data();
+    }
+
+    void Vulkan::ClearBuffers(float r, float g, float b, float a, float depth, uint8_t colorCount) {
+        const uint8_t sampleCount = GetFramebufferSampleCount();
+
+        colorCount *= sampleCount > 1 ? 2 : 1;
+
+        m_clearValues.resize(colorCount + 1);
+
+        for (uint8_t i = 0; i < colorCount; ++i)
+            m_clearValues[i] = { .color = {{ r, g, b, a }} };
+
+        m_clearValues[colorCount] = VkClearValue { .depthStencil = { depth, 0 } };
+
+        m_renderPassBI.clearValueCount = colorCount + 1;
+        m_renderPassBI.pClearValues    = m_clearValues.data();
+    }
+
+    uint8_t Vulkan::GetFramebufferSampleCount() const {
+        if (m_currentFramebuffer) {
+            return m_currentFramebuffer->GetSamplesCount();
+        }
+
+        return GetSamplesCount();
     }
 
     //!-----------------------------------------------------------------------------------------------------------------
@@ -818,14 +924,8 @@ namespace SR_GRAPH_NS {
 
         Environment::Get()->SetBuildState(false);
 
-        uint32_t w = m_width;
-        uint32_t h = m_height;
-
-        /// TODO: это нужно?
-        // Environment::Get()->g_callback(Environment::WinEvents::Resize, Environment::Get()->GetBasicWindow(), &w, &h);
-
         if (m_GUIEnabled) {
-            dynamic_cast<Framework::Graphics::Vulkan *>(Environment::Get())->GetVkImGUI()->ReSize(w, h);
+            dynamic_cast<Framework::Graphics::Vulkan *>(Environment::Get())->GetVkImGUI()->ReSize(m_width, m_height);
         }
 
         return true;
@@ -836,7 +936,7 @@ namespace SR_GRAPH_NS {
 
         if (PrepareFrame() == EvoVulkan::Core::FrameResult::OutOfDate) {
             VK_LOG("SRVulkan::Render() : out of date...");
-            m_hasErrors |= !ResizeWindow();
+            m_hasErrors |= !ReCreate(EvoVulkan::Core::FrameResult::OutOfDate);
 
             if (m_hasErrors) {
                 return EvoVulkan::Core::RenderResult::Fatal;
@@ -894,7 +994,7 @@ namespace SR_GRAPH_NS {
                 return EvoVulkan::Core::RenderResult::Error;
 
             case EvoVulkan::Core::FrameResult::OutOfDate: {
-                m_hasErrors |= !ResizeWindow();
+                m_hasErrors |= !ReCreate(EvoVulkan::Core::FrameResult::OutOfDate);
 
                 if (m_hasErrors) {
                     return EvoVulkan::Core::RenderResult::Fatal;

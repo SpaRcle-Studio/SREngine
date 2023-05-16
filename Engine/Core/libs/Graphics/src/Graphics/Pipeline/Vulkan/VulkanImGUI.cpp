@@ -133,18 +133,21 @@ namespace SR_GRAPH_NS::VulkanTypes {
 
     bool VkImGUI::ReInit() {
         SR_INFO("VkImGUI::ReInit() : re-initialization vulkan ImGui...");
+
         DeInitializeRenderer();
-        return InitializeRenderer();
+
+        if (!InitializeRenderer()) {
+            SR_ERROR("VkImGUI::ReInit() : failed to initialize Vk ImGUI!");
+            return false;
+        }
+
+        return true;
     }
 
     void VkImGUI::DeInitializeRenderer() {
         SR_INFO("VkImGUI::DeInitializeRenderer() : de-initialization vulkan ImGui renderer...");
 
-        for (auto&& buffer : m_frameBuffs) {
-            vkDestroyFramebuffer(*m_device, buffer, nullptr);
-        }
-
-        m_frameBuffs.clear();
+        DestroyBuffers();
 
         if (m_renderPass.IsReady()) {
             DestroyRenderPass(m_device, &m_renderPass);
@@ -227,7 +230,7 @@ namespace SR_GRAPH_NS::VulkanTypes {
         SR_INFO("VkImGUI::InitializeRenderer() : initialization vulkan ImGui renderer...");
 
         const VkSampleCountFlagBits countMSAASamples = EvoVulkan::Tools::Convert::IntToSampleCount(
-            m_pipeline->GetSmoothSamplesCount()
+            1// m_pipeline->GetSamplesCount()
         );
 
         m_renderPass = EvoVulkan::Types::CreateRenderPass(
@@ -296,29 +299,21 @@ namespace SR_GRAPH_NS::VulkanTypes {
     bool VkImGUI::ReSize(uint32_t width, uint32_t height) {
         SR_GRAPH_LOG("VkImGUI::ReSize() : resize imgui vulkan frame buffers...\n\tWidth: " + std::to_string(width) + "\n\tHeight: " + std::to_string(height));
 
+        DestroyBuffers();
+
         if (!m_device || !m_swapchain) {
             SR_ERROR("VkImGUI::ReSize() : device or swapchain is nullptr!");
             return false;
         }
 
-        for (auto&& buffer : m_frameBuffs) {
-            vkDestroyFramebuffer(*m_device, buffer, nullptr);
-        }
-
-        m_frameBuffs.clear();
         m_frameBuffs.resize(m_swapchain->GetCountImages());
 
         auto&& fbInfo = EvoVulkan::Tools::Initializers::FrameBufferCI(m_renderPass, width, height);
-        auto&& attaches = std::vector<VkImageView>(m_device->MultisampleEnabled() ? 2 : 1);
+        auto&& attaches = std::vector<VkImageView>(1);
         fbInfo.attachmentCount = attaches.size();
 
         for (uint32_t i = 0; i < m_frameBuffs.size(); i++) {
-            if (m_device->MultisampleEnabled()) {
-                attaches[0] = m_multisample->GetResolve(0);
-                attaches[1] = m_swapchain->GetBuffers()[i].m_view;
-            }
-            else
-                attaches[0] = m_swapchain->GetBuffers()[i].m_view;
+            attaches[0] = m_swapchain->GetBuffers()[i].m_view;
 
             fbInfo.pAttachments = attaches.data();
             if (vkCreateFramebuffer(*m_device, &fbInfo, nullptr, &m_frameBuffs[i]) != VK_SUCCESS) {
@@ -329,12 +324,7 @@ namespace SR_GRAPH_NS::VulkanTypes {
 
         //!------------------
 
-        if (m_device->MultisampleEnabled()) {
-            m_clearValues = { { .color = { {0.0, 0.0, 0.0, 1.0} } }, { .color = { {0.0, 0.0, 0.0, 1.0} } } };
-        }
-        else {
-            m_clearValues = { { .color = { {0.0, 0.0, 0.0, 1.0} } } };
-        }
+        m_clearValues = { { .color = { {0.0, 0.0, 0.0, 1.0} } } };
 
         m_renderPassBI = {
             .sType = VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO,
@@ -390,5 +380,13 @@ namespace SR_GRAPH_NS::VulkanTypes {
         }
 
         return false;
+    }
+
+    void VkImGUI::DestroyBuffers() {
+        for (auto&& buffer : m_frameBuffs) {
+            vkDestroyFramebuffer(*m_device, buffer, nullptr);
+        }
+
+        m_frameBuffs.clear();
     }
 }

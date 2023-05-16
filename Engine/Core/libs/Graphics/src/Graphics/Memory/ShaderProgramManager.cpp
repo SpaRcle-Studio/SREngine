@@ -218,7 +218,7 @@ namespace SR_GRAPH_NS::Memory {
             shaderProgramInfo.depth = pFramebuffer->IsDepthEnabled();
         }
         else {
-            shaderProgramInfo.samples = m_pipeline->GetSmoothSamplesCount();
+            shaderProgramInfo.samples = m_pipeline->GetSamplesCount();
             shaderProgramInfo.depth = createInfo.blendEnabled;
         }
 

@@ -118,12 +118,27 @@ namespace SR_GTYPES_NS {
             return false;
         }
 
+        if (m_sampleCount == 0) {
+            m_currentSampleCount = m_pipeline->GetSamplesCount();
+        }
+        else {
+            m_currentSampleCount = m_sampleCount;
+        }
+
+        /// если устройство не поддерживает, то не будем пытаться использовать
+        if (!m_pipeline->IsMultiSamplingSupported()) {
+            m_currentSampleCount = 1;
+        }
+        else {
+            m_currentSampleCount = SR_MIN(m_currentSampleCount, m_pipeline->GetSupportedSamples());
+        }
+
         if (!m_pipeline->CreateFrameBuffer(
             m_size.ToGLM(),
             m_frameBuffer,
             m_depthEnabled ? &m_depth : nullptr,
             m_colors,
-            m_sampleCount)
+            m_currentSampleCount)
         ) {
             SR_ERROR("Framebuffer::OnResize() : failed to create frame buffer!");
             m_hasErrors = true;
@@ -138,7 +153,7 @@ namespace SR_GTYPES_NS {
 
     void Framebuffer::SetSize(const SR_MATH_NS::IVector2 &size) {
         m_size = size;
-        m_dirty = true;
+        SetDirty();
     }
 
     bool Framebuffer::BeginCmdBuffer(const Framebuffer::ClearColors &clearColors, float_t depth) {
@@ -239,10 +254,11 @@ namespace SR_GTYPES_NS {
     }
 
     uint8_t Framebuffer::GetSamplesCount() const {
-        if (m_pipeline->IsMultiSamplingSupports()) {
-            return m_sampleCount;
-        }
+        SRAssert(m_currentSampleCount >= 1 && m_currentSampleCount <= 64);
+        return m_currentSampleCount;
+    }
 
-        return 1;
+    void Framebuffer::SetDirty() {
+        m_dirty = true;
     }
 }

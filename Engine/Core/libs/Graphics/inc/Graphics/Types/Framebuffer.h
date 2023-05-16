@@ -53,6 +53,7 @@ namespace SR_GTYPES_NS {
         void EndCmdBuffer();
         void EndRender();
 
+        void SetDirty();
         void SetSize(const SR_MATH_NS::IVector2& size);
         void SetDepthEnabled(bool depthEnabled);
         void SetSampleCount(uint8_t samples);
@@ -75,19 +76,20 @@ namespace SR_GTYPES_NS {
         bool OnResize();
 
     private:
-        PipelinePtr             m_pipeline       = nullptr;
+        PipelinePtr m_pipeline = nullptr;
 
-        std::atomic<bool>       m_dirty          = false;
-        std::atomic<bool>       m_hasErrors      = false;
+        std::atomic<bool> m_dirty = false;
+        std::atomic<bool> m_hasErrors = false;
 
-        std::vector<ColorLayer> m_colors         = { };
-        DepthLayer              m_depth          = { };
-        int32_t                 m_frameBuffer    = SR_ID_INVALID;
+        std::vector<ColorLayer> m_colors = { };
+        DepthLayer m_depth = { };
+        int32_t m_frameBuffer = SR_ID_INVALID;
 
-        SR_MATH_NS::IVector2    m_size           = { };
+        SR_MATH_NS::IVector2 m_size = { };
 
-        uint8_t                 m_sampleCount    = 0;
-        bool                    m_depthEnabled   = true;
+        uint8_t m_sampleCount = 0;
+        uint8_t m_currentSampleCount = 0;
+        bool m_depthEnabled = true;
 
     };
 }

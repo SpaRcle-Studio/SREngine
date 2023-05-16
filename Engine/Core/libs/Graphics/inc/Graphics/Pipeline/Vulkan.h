@@ -87,6 +87,7 @@ namespace SR_GRAPH_NS {
         bool OnResize() override;
 
         SR_NODISCARD bool IsWindowValid() const override;
+        SR_NODISCARD bool IsRayTracingRequired() const noexcept override;
 
         bool BuildCmdBuffers() override {
             return true;
@@ -95,8 +96,6 @@ namespace SR_GRAPH_NS {
         bool OnComplete() override {
             return true;
         }
-
-        bool IsRayTracingRequired() const noexcept override;
 
         void SetGUIEnabled(bool enabled) override;
 
@@ -160,6 +159,8 @@ namespace SR_GRAPH_NS {
         uint64_t GetVRAMUsage() override;
 
         bool OnResize(const SR_MATH_NS::UVector2& size) override;
+        void UpdateMultiSampling() override;
+        void PrepareFrame() override;
 
         bool PreInit(
                 unsigned int smooth_samples,
@@ -171,8 +172,6 @@ namespace SR_GRAPH_NS {
         bool PostInit() override;
 
         void DeInitialize() override;
-
-        bool IsMultiSamplingSupports() const override;
 
         bool InitGUI() override;
         bool StopGUI() override;
@@ -235,9 +234,10 @@ namespace SR_GRAPH_NS {
         }
         //[[nodiscard]] void* GetDescriptorSetFromDTDSet(uint32_t id) const override;
 
-        void SetBuildState(const bool& isBuild) override {
-            if (isBuild)
-                this->m_kernel->SetFramebuffersQueue(m_framebuffersQueue);
+        void SetBuildState(bool isBuild) override {
+            if (isBuild) {
+                m_kernel->SetFramebuffersQueue(m_framebuffersQueue);
+            }
             m_needReBuild = !isBuild;
         }
 
@@ -258,6 +258,8 @@ namespace SR_GRAPH_NS {
             vkBeginCommandBuffer(m_currentCmd, &m_cmdBufInfo);
             return true;
         }
+
+        uint8_t GetFramebufferSampleCount() const override;
 
         SR_FORCE_INLINE bool BeginRender() override {
             if (!m_renderPassBI.pClearValues) {
@@ -298,46 +300,8 @@ namespace SR_GRAPH_NS {
             }
         }
 
-        SR_FORCE_INLINE void ClearBuffers(float r, float g, float b, float a, float depth, uint8_t colorCount) override {
-            const bool multisamplingEnabled = m_currentVkFramebuffer ? m_currentVkFramebuffer->IsMultisampleEnabled() : m_kernel->MultisamplingEnabled();
-            colorCount *= multisamplingEnabled ? 2 : 1;
-
-            this->m_clearValues.resize(colorCount + 1);
-
-            for (uint8_t i = 0; i < colorCount; ++i)
-                m_clearValues[i] = { .color = {{ r, g, b, a }} };
-
-            m_clearValues[colorCount] = VkClearValue { .depthStencil = { depth, 0 } };
-
-            m_renderPassBI.clearValueCount = colorCount + 1;
-            m_renderPassBI.pClearValues    = m_clearValues.data();
-        }
-
-        SR_FORCE_INLINE void ClearBuffers(const std::vector<SR_MATH_NS::FColor>& colors, float_t depth) override {
-            const bool multisamplingEnabled = m_currentVkFramebuffer ? m_currentVkFramebuffer->IsMultisampleEnabled() : m_kernel->MultisamplingEnabled();
-            uint8_t colorCount = static_cast<uint8_t>(colors.size());
-            colorCount *= multisamplingEnabled ? 2 : 1;
-
-            m_clearValues.resize(colorCount + 1);
-
-            for (uint8_t i = 0; i < colorCount; ++i) {
-                auto&& color = colors[i / (multisamplingEnabled ? 2 : 1)];
-
-                m_clearValues[i] = {
-                    .color = { {
-                        static_cast<float>(color.r),
-                        static_cast<float>(color.g),
-                        static_cast<float>(color.b),
-                        static_cast<float>(color.a)
-                    }
-                } };
-            }
-
-            m_clearValues[colorCount] = VkClearValue { .depthStencil = { depth, 0 } };
-
-            m_renderPassBI.clearValueCount = colorCount + 1;
-            m_renderPassBI.pClearValues    = m_clearValues.data();
-        }
+        void ClearBuffers(float r, float g, float b, float a, float depth, uint8_t colorCount) override;
+        void ClearBuffers(const std::vector<SR_MATH_NS::FColor>& colors, float_t depth) override;
 
         SR_FORCE_INLINE void DrawFrame() override {
             if (m_kernel->NextFrame() == EvoVulkan::Core::RenderResult::Fatal) {
@@ -371,8 +335,6 @@ namespace SR_GRAPH_NS {
             return true;
         }
 
-        SR_NODISCARD uint8_t GetSmoothSamplesCount() const override;
-
         bool CompileShader(
                 const std::map<ShaderStage, SR_UTILS_NS::Path>& stages,
                 int32_t FBO,
@@ -404,6 +366,8 @@ namespace SR_GRAPH_NS {
             m_currentShader->Bind(m_currentCmd);
         }
 
+        void OnMultiSampleChanged() override;
+
         bool CreateFrameBuffer(const SR_MATH_NS::IVector2& size, int32_t& FBO, DepthLayer* pDepth, std::vector<ColorLayer>& colors, uint8_t sampleCount) override;
 
         SR_FORCE_INLINE bool DeleteShader(SR_SHADER_PROGRAM shaderProgram) override {
@@ -420,7 +384,7 @@ namespace SR_GRAPH_NS {
             m_currentLayout   = VK_NULL_HANDLE;
         }
     public:
-        virtual SR_FORCE_INLINE void ResetDescriptorSet() {
+        SR_FORCE_INLINE void ResetDescriptorSet() override {
             Environment::ResetDescriptorSet();
             m_currentDesrSets = VK_NULL_HANDLE;
         }

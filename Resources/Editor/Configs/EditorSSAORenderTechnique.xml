@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <Technique Name="Editor">
     <ColorBufferPass Directional="false">
-        <FramebufferSettings DynamicResizing="true" DepthEnabled="true" SmoothSamples="1">
+        <FramebufferSettings DynamicResizing="true" DepthEnabled="true" SmoothSamples="0">
             <Size X="0" Y="0"/>
             <PreScale X="0.85" Y="0.85"/>
             <Depth Format="Auto" ClearValue="1.0"/>
@@ -17,7 +17,7 @@
         </Shaders>
     </ColorBufferPass>
     <FramebufferPass Name="GBuffer">
-        <FramebufferSettings DynamicResizing="true" DepthEnabled="true" SmoothSamples="1">
+        <FramebufferSettings DynamicResizing="true" DepthEnabled="true" SmoothSamples="0">
             <Size X="0" Y="0"/>
             <PreScale X="1.0" Y="1.0"/>
             <Depth Format="Auto" ClearValue="1.0"/>
@@ -33,7 +33,7 @@
         </Passes>
     </FramebufferPass>
     <SSAOPass Name="SSAO" Shader="Engine/Shaders/SSAO/ssao.srsl">
-        <FramebufferSettings DynamicResizing="true" DepthEnabled="false" SmoothSamples="1">
+        <FramebufferSettings DynamicResizing="true" DepthEnabled="false" SmoothSamples="0">
             <Size X="0" Y="0"/>
             <PreScale X="1.0" Y="1.0"/>
             <Depth Format="Auto" ClearValue="1.0"/>
@@ -45,7 +45,7 @@
         </Attachments>
     </SSAOPass>
     <FramebufferPass Name="SSAOBlur">
-        <FramebufferSettings DynamicResizing="true" DepthEnabled="true" SmoothSamples="1">
+        <FramebufferSettings DynamicResizing="true" DepthEnabled="true" SmoothSamples="0">
             <Size X="0" Y="0"/>
             <PreScale X="0.75" Y="0.75"/>
             <Depth Format="Auto" ClearValue="1.0"/>
@@ -60,7 +60,7 @@
         </Passes>
     </FramebufferPass>
     <FramebufferPass Name="SceneViewFBO">
-        <FramebufferSettings DynamicResizing="true" DepthEnabled="true" SmoothSamples="1">
+        <FramebufferSettings DynamicResizing="true" DepthEnabled="true" SmoothSamples="0">
             <Size X="0" Y="0"/>
             <PreScale X="1.0" Y="1.0"/>
             <Depth Format="Auto" ClearValue="1.0"/>
