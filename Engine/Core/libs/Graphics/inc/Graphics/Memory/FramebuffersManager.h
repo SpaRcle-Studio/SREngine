@@ -15,11 +15,13 @@ namespace SR_GRAPH_NS {
     class FramebuffersManager : public SR_UTILS_NS::Singleton<FramebuffersManager> {
         friend class SR_UTILS_NS::Singleton<FramebuffersManager>;
         using FramebufferPtr = SR_GTYPES_NS::Framebuffer*;
+        using PipelinePtr = Environment*;
     public:
         void Register(const FramebufferPtr& pFramebuffer);
         void UnRegister(const FramebufferPtr& pFramebuffer);
 
         void SetDirty();
+        void Update(PipelinePtr pPipeline);
 
     private:
         std::unordered_set<FramebufferPtr> m_framebuffers;

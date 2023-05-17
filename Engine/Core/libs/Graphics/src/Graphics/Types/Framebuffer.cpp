@@ -12,9 +12,12 @@ namespace SR_GTYPES_NS {
         , m_pipeline(Environment::Get())
     {
         SR_UTILS_NS::ResourceManager::Instance().RegisterResource(this);
+        SR_GRAPH_NS::FramebuffersManager::Instance().Register(this);
     }
 
     Framebuffer::~Framebuffer() {
+        SR_GRAPH_NS::FramebuffersManager::Instance().UnRegister(this);
+
         SRAssert(m_frameBuffer == SR_ID_INVALID);
 
     #ifdef SR_DEBUG
@@ -64,28 +67,17 @@ namespace SR_GTYPES_NS {
     }
 
     bool Framebuffer::Bind() {
-        if (m_hasErrors) {
+        if (m_hasErrors || m_dirty) {
             return false;
         }
 
-        if ((!IsCalculated() || m_dirty) && !Init()) {
+        if ((!IsCalculated()) && !Prepare()) {
             SR_ERROR("Framebuffer::Bind() : failed to initialize framebuffer!");
             return false;
         }
 
         m_pipeline->BindFrameBuffer(m_frameBuffer);
         m_pipeline->SetCurrentFramebuffer(this);
-
-        return true;
-    }
-
-    bool Framebuffer::Init() {
-        if (!OnResize()) {
-            SR_ERROR("Framebuffer::OnResize() : failed to resize frame buffer!");
-            return false;
-        }
-
-        m_isCalculated = true;
 
         return true;
     }
@@ -111,7 +103,7 @@ namespace SR_GTYPES_NS {
         IGraphicsResource::FreeVideoMemory();
     }
 
-    bool Framebuffer::OnResize() {
+    bool Framebuffer::Prepare() {
         if (m_size.HasZero() || m_size.HasNegative()) {
             SR_ERROR("Framebuffer::OnResize() : incorrect FBO size!");
             m_hasErrors = true;
@@ -147,6 +139,7 @@ namespace SR_GTYPES_NS {
 
         m_hasErrors = false;
         m_dirty = false;
+		m_isCalculated = true;
 
         return true;
     }
@@ -204,7 +197,7 @@ namespace SR_GTYPES_NS {
             return SR_ID_INVALID;
         }
 
-        if ((!IsCalculated() || m_dirty) && !Init()) {
+        if ((!IsCalculated()) && !Prepare()) {
             SR_ERROR("Framebuffer::GetId() : failed to initialize framebuffer!");
         }
 
@@ -216,7 +209,11 @@ namespace SR_GTYPES_NS {
     }
 
     int32_t Framebuffer::GetColorTexture(uint32_t layer) const {
-        if (layer >= m_colors.size() || m_hasErrors || m_dirty) {
+        if (m_dirty) {
+            return SR_ID_INVALID;
+        }
+
+        if (layer >= m_colors.size() || m_hasErrors) {
             return SR_ID_INVALID;
         }
 

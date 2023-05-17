@@ -110,12 +110,15 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD Types::Framebuffer* GetCurrentFramebuffer() const noexcept { return m_currentFramebuffer; }
         SR_NODISCARD virtual void* GetCurrentCmd() const noexcept { return nullptr; }
         SR_NODISCARD int32_t GetCurrentFramebufferId() const noexcept { return m_currentFBOid; }
+        SR_NODISCARD virtual void* GetCurrentRenderPassHandle() const { return nullptr; }
 
         virtual void OnMultiSampleChanged();
         virtual void UpdateMultiSampling() { }
         virtual void PrepareFrame() {
             UpdateMultiSampling();
         }
+
+        virtual void WaitIdle() { }
 
         virtual uint64_t GetVRAMUsage() { return 0; }
         virtual Helper::Math::IVector2 GetScreenSize() const { return {}; }

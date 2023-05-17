@@ -284,6 +284,8 @@ namespace SR_GRAPH_NS {
             m_framebuffersQueue.clear();
         }
 
+        SR_NODISCARD void* GetCurrentRenderPassHandle() const override;
+
         /** \Vulkan Clear next frame buffer usage */
         SR_FORCE_INLINE void ClearBuffers() override {
             if (m_currentFBOid < 0) {
@@ -348,6 +350,8 @@ namespace SR_GRAPH_NS {
                 const SRShaderCreateInfo& shaderCreateInfo) const override;
 
         int32_t AllocateShaderProgram(const SRShaderCreateInfo& createInfo, int32_t fbo) override;
+
+        void WaitIdle() override;
 
         SR_FORCE_INLINE void UseShader(SR_SHADER_PROGRAM shaderProgram) override {
             if (shaderProgram >= m_memory->m_countShaderPrograms.first) {

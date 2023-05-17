@@ -301,7 +301,8 @@ namespace SR_GRAPH_NS {
         if (FBO != 0) {
             if (auto fbo = m_memory->m_FBOs[FBO - 1]; fbo) {
                 renderPass = fbo->GetRenderPass();
-            } else {
+            }
+            else {
                 SR_ERROR("Vulkan::CompileShader() : invalid FBO! SOMETHING WENT WRONG! MEMORY MAY BE CORRUPTED!");
                 return false;
             }
@@ -914,6 +915,32 @@ namespace SR_GRAPH_NS {
         }
 
         return GetSamplesCount();
+    }
+
+    void* Vulkan::GetCurrentRenderPassHandle() const {
+        void* pHandle = m_kernel->GetRenderPass();
+
+        if (m_currentFramebuffer) {
+            auto&& FBO = m_currentFramebuffer->GetId();
+
+            if (FBO == SR_ID_INVALID) {
+                SR_ERROR("Vulkan::GetCurrentRenderPassHandle() : invalid FBO!");
+            }
+            else if (auto&& framebuffer = m_memory->m_FBOs[FBO - 1]; !framebuffer) {
+                SR_ERROR("Vulkan::GetCurrentRenderPassHandle() : frame buffer object don't exist!");
+            }
+            else {
+                pHandle = framebuffer->GetRenderPass();
+            }
+        }
+
+        return pHandle;
+    }
+
+    void Vulkan::WaitIdle() {
+        auto&& pDevice = m_kernel->GetDevice();
+        vkQueueWaitIdle(pDevice->GetQueues()->GetGraphicsQueue());
+        vkDeviceWaitIdle(*pDevice);
     }
 
     //!-----------------------------------------------------------------------------------------------------------------

@@ -42,7 +42,8 @@ namespace SR_GTYPES_NS {
         static Ptr Create(const std::list<ColorFormat>& colors, DepthFormat depth);
 
     public:
-        bool Bind();
+        SR_NODISCARD bool Prepare();
+        SR_NODISCARD bool Bind();
 
         bool BeginCmdBuffer();
         bool BeginCmdBuffer(const ClearColors& clearColors, float_t depth);
@@ -59,6 +60,7 @@ namespace SR_GTYPES_NS {
         void SetSampleCount(uint8_t samples);
 
         SR_NODISCARD uint8_t GetSamplesCount() const;
+        SR_NODISCARD bool IsDirty() const { return m_dirty; }
         SR_NODISCARD bool IsDepthEnabled() const { return m_depthEnabled; }
 
         SR_NODISCARD int32_t GetId();
@@ -70,10 +72,6 @@ namespace SR_GTYPES_NS {
 
         void FreeVideoMemory() override;
         uint64_t GetFileHash() const override;
-
-    private:
-        bool Init();
-        bool OnResize();
 
     private:
         PipelinePtr m_pipeline = nullptr;

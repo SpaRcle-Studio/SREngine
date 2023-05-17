@@ -8,7 +8,7 @@ namespace SR_GRAPH_NS {
     void FramebuffersManager::Register(const FramebufferPtr& pFramebuffer) {
         SR_LOCK_GUARD
 
-        if (m_framebuffers.count(pFramebuffer) == 0) {
+        if (m_framebuffers.count(pFramebuffer) == 1) {
             SRHalt("Double registration!");
             return;
         }
@@ -19,12 +19,28 @@ namespace SR_GRAPH_NS {
     void FramebuffersManager::UnRegister(const FramebufferPtr& pFramebuffer) {
         SR_LOCK_GUARD
 
-        if (m_framebuffers.count(pFramebuffer) == 1) {
+        if (m_framebuffers.count(pFramebuffer) == 0) {
             SRHalt("Framebuffer is not registered!");
             return;
         }
 
         m_framebuffers.erase(pFramebuffer);
+    }
+
+    void FramebuffersManager::Update(PipelinePtr pPipeline) {
+        SR_LOCK_GUARD
+
+        for (auto&& pFramebuffer : m_framebuffers) {
+            if (!pFramebuffer->IsDirty()) {
+                continue;
+            }
+
+            if (!pFramebuffer->Prepare()) {
+                SR_ERROR("FramebuffersManager::Update() : failed to initialize framebuffer!");
+            }
+
+            pPipeline->SetBuildState(false);
+        }
     }
 
     void FramebuffersManager::SetDirty() {
