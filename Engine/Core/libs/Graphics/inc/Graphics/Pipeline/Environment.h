@@ -104,12 +104,13 @@ namespace SR_GRAPH_NS {
         void SetSampleCount(uint8_t count) { m_newSampleCount = m_requiredSampleCount = count; }
         void SetCurrentShaderId(const int32_t& id)  { m_currentShaderID = id;           }
         void SetCurrentShader(Types::Shader* pShader)  { m_currentShader = pShader;           }
-        void SetCurrentFramebuffer(Types::Framebuffer* pFramebuffer)  { m_currentFramebuffer = pFramebuffer; }
+        void SetCurrentFramebuffer(Types::Framebuffer* pFramebuffer);
         SR_NODISCARD int32_t GetCurrentShaderId() const noexcept { return m_currentShaderID; }
         SR_NODISCARD Types::Shader* GetCurrentShader() const noexcept { return m_currentShader; }
         SR_NODISCARD Types::Framebuffer* GetCurrentFramebuffer() const noexcept { return m_currentFramebuffer; }
         SR_NODISCARD virtual void* GetCurrentCmd() const noexcept { return nullptr; }
         SR_NODISCARD int32_t GetCurrentFramebufferId() const noexcept { return m_currentFBOid; }
+        SR_NODISCARD virtual void* GetCurrentRenderPassHandle() const { return nullptr; }
 
         virtual void OnMultiSampleChanged();
         virtual void UpdateMultiSampling() { }

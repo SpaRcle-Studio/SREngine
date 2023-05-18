@@ -155,6 +155,7 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD std::string GetPipeLineName()   const override { return "Vulkan";         }
         SR_NODISCARD VulkanTools::MemoryManager* GetMemoryManager() const { return m_memory; }
         SR_NODISCARD EvoVulkan::Core::VulkanKernel* GetKernel() const { return m_kernel; }
+        SR_NODISCARD void* GetCurrentRenderPassHandle() const override;
 
         uint64_t GetVRAMUsage() override;
 

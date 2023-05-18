@@ -58,6 +58,8 @@ namespace SR_GRAPH_NS {
         virtual ~RenderContext() = default;
 
     public:
+        void UpdateFramebuffers();
+
         void Update() noexcept;
 
         bool Init();
@@ -111,8 +113,8 @@ namespace SR_GRAPH_NS {
     private:
         RCUpdateQueueState m_updateState = RCUpdateQueueState::Begin;
 
-        std::vector<Types::Framebuffer*> m_framebuffers;
-        std::vector<Types::Shader*> m_shaders;
+        std::vector<SR_GTYPES_NS::Framebuffer*> m_framebuffers;
+        std::vector<SR_GTYPES_NS::Shader*> m_shaders;
         std::vector<TexturePtr> m_textures;
         std::vector<RenderTechnique*> m_techniques;
         std::vector<MaterialPtr> m_materials;

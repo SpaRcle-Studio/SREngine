@@ -43,14 +43,14 @@ namespace SR_GRAPH_NS {
     void RenderScene::Render() noexcept {
         SR_TRACY_ZONE_N("Render scene");
 
-        GetPipeline()->PrepareFrame();
+        PrepareFrame();
 
         /// ImGui будет нарисован поверх независимо оторядка отрисовки.
         /// Однако, если его нарисовать в конце, то пользователь может
         /// изменить данные отрисовки сцены и сломать уже нарисованную сцену
         Overlay();
 
-        Prepare();
+        PrepareRender();
 
         if (IsDirty() || GetPipeline()->IsNeedReBuild()) {
             Build();
@@ -164,7 +164,15 @@ namespace SR_GRAPH_NS {
         SR_RENDER_TECHNIQUES_RETURN_CALL(Overlay)
     }
 
-    void RenderScene::Prepare() {
+    void RenderScene::PrepareFrame() {
+        if (auto&& pPipeline = GetPipeline()) {
+            pPipeline->PrepareFrame();
+        }
+
+        m_context->UpdateFramebuffers();
+    }
+
+    void RenderScene::PrepareRender() {
         SR_TRACY_ZONE;
 
         if (m_debugRender) {

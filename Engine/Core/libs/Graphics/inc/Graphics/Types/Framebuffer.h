@@ -42,6 +42,7 @@ namespace SR_GTYPES_NS {
         static Ptr Create(const std::list<ColorFormat>& colors, DepthFormat depth);
 
     public:
+        bool Update();
         bool Bind();
 
         bool BeginCmdBuffer();
@@ -60,6 +61,7 @@ namespace SR_GTYPES_NS {
 
         SR_NODISCARD uint8_t GetSamplesCount() const;
         SR_NODISCARD bool IsDepthEnabled() const { return m_depthEnabled; }
+        SR_NODISCARD bool IsDirty() const { return m_dirty; }
 
         SR_NODISCARD int32_t GetId();
         SR_NODISCARD int32_t GetColorTexture(uint32_t layer) const;
@@ -72,13 +74,9 @@ namespace SR_GTYPES_NS {
         uint64_t GetFileHash() const override;
 
     private:
-        bool Init();
-        bool OnResize();
-
-    private:
         PipelinePtr m_pipeline = nullptr;
 
-        std::atomic<bool> m_dirty = false;
+        std::atomic<bool> m_dirty = true;
         std::atomic<bool> m_hasErrors = false;
 
         std::vector<ColorLayer> m_colors = { };

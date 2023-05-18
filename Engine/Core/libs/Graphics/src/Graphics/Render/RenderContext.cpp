@@ -316,4 +316,14 @@ namespace SR_GRAPH_NS {
     RenderContext::WindowPtr RenderContext::GetWindow() const {
         return m_window;
     }
+
+    void RenderContext::UpdateFramebuffers() {
+        for (auto&& pFramebuffer : m_framebuffers) {
+            if (!pFramebuffer->IsDirty()) {
+                continue;
+            }
+
+            pFramebuffer->Update();
+        }
+    }
 }

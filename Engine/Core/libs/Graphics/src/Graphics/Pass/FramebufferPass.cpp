@@ -70,7 +70,7 @@ namespace SR_GRAPH_NS {
     }
 
     void FramebufferPass::Update() {
-        if (!m_framebuffer) {
+        if (!m_framebuffer || m_framebuffer->IsDirty()) {
             return;
         }
 

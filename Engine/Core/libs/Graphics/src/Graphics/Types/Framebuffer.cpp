@@ -12,9 +12,12 @@ namespace SR_GTYPES_NS {
         , m_pipeline(Environment::Get())
     {
         SR_UTILS_NS::ResourceManager::Instance().RegisterResource(this);
+        SR_GRAPH_NS::FramebuffersManager::Instance().Register(this);
     }
 
     Framebuffer::~Framebuffer() {
+        SR_GRAPH_NS::FramebuffersManager::Instance().UnRegister(this);
+
         SRAssert(m_frameBuffer == SR_ID_INVALID);
 
     #ifdef SR_DEBUG
@@ -64,11 +67,11 @@ namespace SR_GTYPES_NS {
     }
 
     bool Framebuffer::Bind() {
-        if (m_hasErrors) {
+        if (m_hasErrors || m_dirty) {
             return false;
         }
 
-        if ((!IsCalculated() || m_dirty) && !Init()) {
+        if (!IsCalculated() && !Update()) {
             SR_ERROR("Framebuffer::Bind() : failed to initialize framebuffer!");
             return false;
         }
@@ -79,13 +82,45 @@ namespace SR_GTYPES_NS {
         return true;
     }
 
-    bool Framebuffer::Init() {
-        if (!OnResize()) {
-            SR_ERROR("Framebuffer::OnResize() : failed to resize frame buffer!");
+    bool Framebuffer::Update() {
+        if (m_size.HasZero() || m_size.HasNegative()) {
+            SR_ERROR("Update::OnResize() : incorrect FBO size!");
+            m_hasErrors = true;
             return false;
         }
 
+        if (m_sampleCount == 0) {
+            m_currentSampleCount = m_pipeline->GetSamplesCount();
+        }
+        else {
+            m_currentSampleCount = m_sampleCount;
+        }
+
+        /// если устройство не поддерживает, то не будем пытаться использовать
+        if (!m_pipeline->IsMultiSamplingSupported()) {
+            m_currentSampleCount = 1;
+        }
+        else {
+            m_currentSampleCount = SR_MIN(m_currentSampleCount, m_pipeline->GetSupportedSamples());
+        }
+
+        if (!m_pipeline->CreateFrameBuffer(
+                m_size.ToGLM(),
+                m_frameBuffer,
+                m_depthEnabled ? &m_depth : nullptr,
+                m_colors,
+                m_currentSampleCount)
+        ) {
+            SR_ERROR("Framebuffer::Update() : failed to create frame buffer!");
+            m_hasErrors = true;
+            return false;
+        }
+
+        m_hasErrors = false;
+        m_dirty = false;
         m_isCalculated = true;
+
+        m_pipeline->SetBuildState(false);
 
         return true;
     }
@@ -109,46 +144,6 @@ namespace SR_GTYPES_NS {
         }
 
         IGraphicsResource::FreeVideoMemory();
-    }
-
-    bool Framebuffer::OnResize() {
-        if (m_size.HasZero() || m_size.HasNegative()) {
-            SR_ERROR("Framebuffer::OnResize() : incorrect FBO size!");
-            m_hasErrors = true;
-            return false;
-        }
-
-        if (m_sampleCount == 0) {
-            m_currentSampleCount = m_pipeline->GetSamplesCount();
-        }
-        else {
-            m_currentSampleCount = m_sampleCount;
-        }
-
-        /// если устройство не поддерживает, то не будем пытаться использовать
-        if (!m_pipeline->IsMultiSamplingSupported()) {
-            m_currentSampleCount = 1;
-        }
-        else {
-            m_currentSampleCount = SR_MIN(m_currentSampleCount, m_pipeline->GetSupportedSamples());
-        }
-
-        if (!m_pipeline->CreateFrameBuffer(
-            m_size.ToGLM(),
-            m_frameBuffer,
-            m_depthEnabled ? &m_depth : nullptr,
-            m_colors,
-            m_currentSampleCount)
-        ) {
-            SR_ERROR("Framebuffer::OnResize() : failed to create frame buffer!");
-            m_hasErrors = true;
-            return false;
-        }
-
-        m_hasErrors = false;
-        m_dirty = false;
-
-        return true;
     }
 
     void Framebuffer::SetSize(const SR_MATH_NS::IVector2 &size) {
@@ -204,7 +199,7 @@ namespace SR_GTYPES_NS {
             return SR_ID_INVALID;
         }
 
-        if ((!IsCalculated() || m_dirty) && !Init()) {
+        if ((!IsCalculated() || m_dirty) && !Update()) {
             SR_ERROR("Framebuffer::GetId() : failed to initialize framebuffer!");
         }
 

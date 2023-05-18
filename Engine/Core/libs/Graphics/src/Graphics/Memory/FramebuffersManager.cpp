@@ -8,7 +8,7 @@ namespace SR_GRAPH_NS {
     void FramebuffersManager::Register(const FramebufferPtr& pFramebuffer) {
         SR_LOCK_GUARD
 
-        if (m_framebuffers.count(pFramebuffer) == 0) {
+        if (m_framebuffers.count(pFramebuffer) == 1) {
             SRHalt("Double registration!");
             return;
         }
@@ -19,7 +19,7 @@ namespace SR_GRAPH_NS {
     void FramebuffersManager::UnRegister(const FramebufferPtr& pFramebuffer) {
         SR_LOCK_GUARD
 
-        if (m_framebuffers.count(pFramebuffer) == 1) {
+        if (m_framebuffers.count(pFramebuffer) == 0) {
             SRHalt("Framebuffer is not registered!");
             return;
         }

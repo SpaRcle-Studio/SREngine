@@ -916,6 +916,26 @@ namespace SR_GRAPH_NS {
         return GetSamplesCount();
     }
 
+    void* Vulkan::GetCurrentRenderPassHandle() const {
+        void* pHandle = m_kernel->GetRenderPass();
+
+        if (m_currentFramebuffer) {
+            auto&& FBO = m_currentFramebuffer->GetId();
+
+            if (FBO == SR_ID_INVALID) {
+                SR_ERROR("Vulkan::GetCurrentRenderPassHandle() : invalid FBO!");
+            }
+            else if (auto&& framebuffer = m_memory->m_FBOs[FBO - 1]; !framebuffer) {
+                SR_ERROR("Vulkan::GetCurrentRenderPassHandle() : frame buffer object don't exist!");
+            }
+            else {
+                pHandle = framebuffer->GetRenderPass();
+            }
+        }
+
+        return pHandle;
+    }
+
     //!-----------------------------------------------------------------------------------------------------------------
 
     bool SRVulkan::OnResize()  {

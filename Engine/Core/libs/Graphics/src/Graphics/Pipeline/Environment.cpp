@@ -10,6 +10,7 @@
 #include <Graphics/GUI/Icons.h>
 #include <Graphics/Pipeline/Vulkan.h>
 #include <Graphics/Memory/FramebuffersManager.h>
+#include <Graphics/Types/Framebuffer.h>
 
 bool SR_GRAPH_NS::Environment::PreInitGUI(const SR_UTILS_NS::Path &fontPath) {
     SR_GRAPH("Environment::InitGUI() : pre-initializing ImGUI library...");
@@ -92,4 +93,12 @@ Framework::Graphics::Environment *Framework::Graphics::Environment::Get() {
 uint8_t Framework::Graphics::Environment::GetSamplesCount() const {
     SRAssert(m_currentSampleCount >= 1 && m_currentSampleCount <= 64);
     return m_currentSampleCount;
+}
+
+void Framework::Graphics::Environment::SetCurrentFramebuffer(SR_GTYPES_NS::Framebuffer *pFramebuffer) {
+    m_currentFramebuffer = pFramebuffer;
+
+    if (m_currentFramebuffer) {
+        SRAssert(!m_currentFramebuffer->IsDirty());
+    }
 }
