@@ -34,7 +34,7 @@ namespace SR_GRAPH_NS::Memory {
         virtualProgramInfo.m_createInfo = SRShaderCreateInfo(createInfo);
 
         if (auto&& shaderProgramInfo = AllocateShaderProgram(createInfo); shaderProgramInfo.Valid()) {
-            virtualProgramInfo.m_data[m_pipeline->GetCurrentFramebufferId()] = shaderProgramInfo;
+            virtualProgramInfo.m_data[GetCurrentIdentifier()] = shaderProgramInfo;
         }
         else {
             SR_ERROR("ShaderProgramManager::Allocate() : failed to allocate shader program!");
@@ -42,8 +42,8 @@ namespace SR_GRAPH_NS::Memory {
         }
 
         m_virtualTable.insert(std::make_pair(
-                virtualProgram,
-                std::move(virtualProgramInfo)
+            virtualProgram,
+            std::move(virtualProgramInfo)
         ));
 
         return virtualProgram;
@@ -80,7 +80,7 @@ namespace SR_GRAPH_NS::Memory {
         virtualProgramInfo.m_createInfo = SRShaderCreateInfo(createInfo);
 
         if (auto&& shaderProgramInfo = AllocateShaderProgram(createInfo); shaderProgramInfo.Valid()) {
-            virtualProgramInfo.m_data[m_pipeline->GetCurrentFramebufferId()] = shaderProgramInfo;
+            virtualProgramInfo.m_data[GetCurrentIdentifier()] = shaderProgramInfo;
             EVK_POP_LOG_LEVEL();
         }
         else {
@@ -130,13 +130,13 @@ namespace SR_GRAPH_NS::Memory {
         BindResult result = BindResult::Success;
 
         auto&& [_, virtualProgramInfo] = *pIt;
-        auto&& framebufferId = m_pipeline->GetCurrentFramebufferId();
+        auto&& identifier = GetCurrentIdentifier();
     retry:
-        auto&& fboIt = virtualProgramInfo.m_data.find(framebufferId);
+        auto&& fboIt = virtualProgramInfo.m_data.find(identifier);
         if (fboIt == std::end(virtualProgramInfo.m_data))
         {
             if (auto&& shaderProgramInfo = AllocateShaderProgram(virtualProgramInfo.m_createInfo); shaderProgramInfo.Valid()) {
-                virtualProgramInfo.m_data[m_pipeline->GetCurrentFramebufferId()] = shaderProgramInfo;
+                virtualProgramInfo.m_data[identifier] = shaderProgramInfo;
                 result = BindResult::Duplicated;
                 goto retry;
             }
@@ -188,8 +188,8 @@ namespace SR_GRAPH_NS::Memory {
         }
 
         auto&& [_, info] = *pIt;
-        auto&& framebufferId = m_pipeline->GetCurrentFramebufferId();
-        auto&& fboIt = info.m_data.find(framebufferId);
+        auto&& identifier = GetCurrentIdentifier();
+        auto&& fboIt = info.m_data.find(identifier);
 
         if (fboIt == std::end(info.m_data))
         {
@@ -246,6 +246,10 @@ namespace SR_GRAPH_NS::Memory {
         }
 
         return true;
+    }
+
+    VirtualProgramInfo::Identifier ShaderProgramManager::GetCurrentIdentifier() const {
+        return reinterpret_cast<VirtualProgramInfo::Identifier>(m_pipeline->GetCurrentFramebuffer());
     }
 }
 
