@@ -47,6 +47,8 @@ namespace SR_GRAPH_NS {
             m_framebuffer->EndCmdBuffer();
         }
 
+        m_pipeline->SetCurrentFramebuffer(nullptr);
+
         /// Независимо от того, отрисовали мы что-то в кадровый буффер или нет,
         /// все равно возвращаем false (hasDrawData), так как технически, кадровый буффер
         /// не несет данных для рендера.
@@ -72,6 +74,10 @@ namespace SR_GRAPH_NS {
             return;
         }
 
+        m_pipeline->SetCurrentFramebuffer(m_framebuffer);
+
         GroupPass::Update();
+
+        m_pipeline->SetCurrentFramebuffer(nullptr);
     }
 }
