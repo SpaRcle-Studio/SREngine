@@ -2,6 +2,7 @@
 <Settings>
     <RenderTechnique Path="Editor/Configs/EditorSSAORenderTechnique.xml"/>
     <!--<RenderTechnique Path="Editor/Configs/EditorSimpleRenderTechnique.xml"/>-->
+    <!--<RenderTechnique Path="Editor/Configs/EditorVignetteRenderTechnique.xml"/>-->
     <!--<RenderTechnique Path="Editor/Configs/EditorSSAORenderTechnique.xml"/>-->
     <!--<RenderTechnique Path="Editor/Configs/EditorEmptySwapchainRenderTechnique.xml"/>-->
     <!--<RenderTechnique Path="Editor/Configs/EditorRenderTechnique.xml"/>-->

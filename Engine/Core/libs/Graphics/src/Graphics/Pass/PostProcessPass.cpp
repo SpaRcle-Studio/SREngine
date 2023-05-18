@@ -25,8 +25,18 @@ namespace SR_GRAPH_NS {
             return false;
         }
 
-        if (!m_shader->Use()) {
-            return false;
+        switch (m_shader->Use()) {
+            case ShaderBindResult::Failed:
+                return false;
+            case ShaderBindResult::Success:
+                break;
+            case ShaderBindResult::Duplicated:
+            case ShaderBindResult::ReAllocated:
+                m_dirtyShader = true;
+                break;
+            default:
+                SRHaltOnce0();
+                return false;
         }
 
         auto&& uboManager = Memory::UBOManager::Instance();

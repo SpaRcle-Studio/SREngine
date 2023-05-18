@@ -84,7 +84,11 @@ namespace SR_GRAPH_NS {
 
         for (auto&&[_, subCluster] : *pCluster) {
             auto&& pShader = GetShader(subCluster.GetShaderType());
-            if (!pShader || (pShader && !pShader->Use())) {
+            if (!pShader) {
+                continue;
+            }
+
+            if (pShader->Use() == ShaderBindResult::Failed) {
                 continue;
             }
 

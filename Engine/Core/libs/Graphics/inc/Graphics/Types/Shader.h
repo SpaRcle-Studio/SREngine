@@ -13,6 +13,7 @@
 #include <Graphics/Types/Uniforms.h>
 #include <Graphics/Memory/ShaderUBOBlock.h>
 #include <Graphics/Loaders/SRSL.h>
+#include <Graphics/Memory/ShaderProgramManager.h>
 
 namespace SR_GTYPES_NS {
     class Texture;
@@ -36,8 +37,9 @@ namespace SR_GTYPES_NS {
     public:
         static Shader* Load(const SR_UTILS_NS::Path& rawPath);
 
+        ShaderBindResult Use() noexcept;
+
         bool Init();
-        bool Use() noexcept;
         void UnUse() noexcept;
         bool InitUBOBlock();
         bool Flush() const;
@@ -52,6 +54,7 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD uint32_t GetSamplersCount() const;
         SR_NODISCARD ShaderProperties GetProperties();
         SR_NODISCARD bool IsBlendEnabled() const;
+        SR_NODISCARD bool IsAvailable() const;
         SR_NODISCARD SR_SRSL_NS::ShaderType GetType() const noexcept;
 
     public:
@@ -97,19 +100,21 @@ namespace SR_GTYPES_NS {
         void SetSampler(uint64_t hashId, int32_t sampler) noexcept;
 
     private:
-        ShaderProgram          m_shaderProgram        = SR_ID_INVALID;
+        Memory::ShaderProgramManager& m_manager;
 
-        std::atomic<bool>      m_hasErrors            = false;
+        ShaderProgram m_shaderProgram = SR_ID_INVALID;
 
-        bool                   m_isRegistered         = false;
+        std::atomic<bool> m_hasErrors = false;
 
-        SRShaderCreateInfo     m_shaderCreateInfo     = { };
+        bool m_isRegistered = false;
 
-        Memory::ShaderUBOBlock m_uniformBlock         = Memory::ShaderUBOBlock();
-        ShaderSamplers         m_samplers             = ShaderSamplers();
-        ShaderProperties       m_properties           = ShaderProperties();
+        SRShaderCreateInfo m_shaderCreateInfo = {};
 
-        SR_SRSL_NS::ShaderType m_type                 = SR_SRSL_NS::ShaderType::Unknown;
+        Memory::ShaderUBOBlock m_uniformBlock;
+        ShaderSamplers m_samplers;
+        ShaderProperties m_properties;
+
+        SR_SRSL_NS::ShaderType m_type = SR_SRSL_NS::ShaderType::Unknown;
 
     };
 }

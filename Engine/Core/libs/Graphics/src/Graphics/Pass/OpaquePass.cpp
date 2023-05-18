@@ -30,7 +30,11 @@ namespace SR_GRAPH_NS {
         }
 
         for (auto&& [shader, subCluster] : opaque) {
-            if (!shader || (shader && !shader->Use())) {
+            if (!shader) {
+                continue;
+            }
+
+            if (shader->Use() == ShaderBindResult::Failed) {
                 continue;
             }
 

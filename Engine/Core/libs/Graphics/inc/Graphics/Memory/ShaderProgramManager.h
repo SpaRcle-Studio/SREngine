@@ -58,11 +58,6 @@ namespace SR_GRAPH_NS::Memory {
         using PipelinePtr = Environment*;
         using VirtualProgram = int32_t;
         using ShaderProgram = int32_t;
-        enum class BindResult : uint8_t {
-            Success,
-            Duplicated,
-            Failed
-        };
     private:
         ShaderProgramManager();
         ~ShaderProgramManager() override;
@@ -73,14 +68,15 @@ namespace SR_GRAPH_NS::Memory {
 
         bool FreeProgram(VirtualProgram* program);
 
-        BindResult BindProgram(VirtualProgram virtualProgram) noexcept;
+        ShaderBindResult BindProgram(VirtualProgram virtualProgram) noexcept;
 
         SR_NODISCARD ShaderProgram GetProgram(VirtualProgram virtualProgram) const noexcept;
+        SR_NODISCARD ShaderProgram IsAvailable(VirtualProgram virtualProgram) const noexcept;
 
     private:
         SR_NODISCARD VirtualProgramInfo::Identifier GetCurrentIdentifier() const;
         SR_NODISCARD VirtualProgramInfo::ShaderProgramInfo AllocateShaderProgram(const SRShaderCreateInfo& createInfo) const;
-        SR_NODISCARD bool BindShaderProgram(VirtualProgramInfo::ShaderProgramInfo& shaderProgramInfo, const SRShaderCreateInfo& createInfo);
+        SR_NODISCARD ShaderBindResult BindShaderProgram(VirtualProgramInfo::ShaderProgramInfo& shaderProgramInfo, const SRShaderCreateInfo& createInfo);
         SR_NODISCARD VirtualProgram GenerateUnique() const;
 
     protected:

@@ -50,7 +50,11 @@ namespace SR_GRAPH_NS {
 
         auto&& shader = m_skybox->GetShader();
 
-        if (!shader || !shader->Use()) {
+        if (!shader) {
+            return false;
+        }
+
+        if (shader->Use() == ShaderBindResult::Failed) {
             return false;
         }
 

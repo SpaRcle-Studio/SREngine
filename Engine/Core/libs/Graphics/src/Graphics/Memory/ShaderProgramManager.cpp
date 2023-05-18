@@ -118,16 +118,16 @@ namespace SR_GRAPH_NS::Memory {
         return virtualProgram;
     }
 
-    ShaderProgramManager::BindResult ShaderProgramManager::BindProgram(VirtualProgram virtualProgram) noexcept {
+    ShaderBindResult ShaderProgramManager::BindProgram(VirtualProgram virtualProgram) noexcept {
         SR_LOCK_GUARD
 
         auto&& pIt = m_virtualTable.find(virtualProgram);
         if (pIt == std::end(m_virtualTable)) {
             SRHalt("ShaderProgramManager::BindProgram() : virtual program not found!");
-            return BindResult::Failed;
+            return ShaderBindResult::Failed;
         }
 
-        BindResult result = BindResult::Success;
+        ShaderBindResult result = ShaderBindResult::Success;
 
         auto&& [_, virtualProgramInfo] = *pIt;
         auto&& identifier = GetCurrentIdentifier();
@@ -137,21 +137,31 @@ namespace SR_GRAPH_NS::Memory {
         {
             if (auto&& shaderProgramInfo = AllocateShaderProgram(virtualProgramInfo.m_createInfo); shaderProgramInfo.Valid()) {
                 virtualProgramInfo.m_data[identifier] = shaderProgramInfo;
-                result = BindResult::Duplicated;
+                result = ShaderBindResult::Duplicated;
                 goto retry;
             }
             else {
                 SR_ERROR("ShaderProgramManager::BindProgram() : failed to allocate shader program!");
-                return BindResult::Failed;
+                return ShaderBindResult::Failed;
             }
         }
 
-        if (!BindShaderProgram(fboIt->second, virtualProgramInfo.m_createInfo)) {
+        SRAssert2(result != ShaderBindResult::Failed, "unexcepted result!");
+
+        auto&& bindResult = BindShaderProgram(fboIt->second, virtualProgramInfo.m_createInfo);
+
+        if (bindResult == ShaderBindResult::Failed) {
             SR_ERROR("ShaderProgramManager::BindProgram() : failed to bind shader program!");
-            return BindResult::Failed;
+            return ShaderBindResult::Failed;
         }
 
-        return result;
+        SRAssert2(bindResult != ShaderBindResult::Duplicated, "unexcepted duplication!");
+
+        if (result == ShaderBindResult::Duplicated) {
+            return result;
+        }
+
+        return bindResult;
     }
 
     bool ShaderProgramManager::FreeProgram(VirtualProgram *program) {
@@ -176,6 +186,21 @@ namespace SR_GRAPH_NS::Memory {
         *program = SR_ID_INVALID;
 
         return true;
+    }
+
+    ShaderProgramManager::ShaderProgram ShaderProgramManager::IsAvailable(ShaderProgramManager::VirtualProgram virtualProgram) const noexcept {
+        SR_LOCK_GUARD
+
+        auto&& pIt = m_virtualTable.find(virtualProgram);
+        if (pIt == std::end(m_virtualTable)) {
+            return false;
+        }
+
+        auto&& [_, info] = *pIt;
+        auto&& identifier = GetCurrentIdentifier();
+        auto&& fboIt = info.m_data.find(identifier);
+
+        return fboIt != std::end(info.m_data);
     }
 
     ShaderProgramManager::ShaderProgram ShaderProgramManager::GetProgram(VirtualProgram virtualProgram) const noexcept {
@@ -225,17 +250,27 @@ namespace SR_GRAPH_NS::Memory {
         return shaderProgramInfo;
     }
 
-    bool ShaderProgramManager::BindShaderProgram(VirtualProgramInfo::ShaderProgramInfo &shaderProgramInfo, const SRShaderCreateInfo& createInfo) {
-        if (auto&& pFramebuffer = m_pipeline->GetCurrentFramebuffer()) {
-            if (pFramebuffer->IsDepthEnabled() != shaderProgramInfo.depth || pFramebuffer->GetSamplesCount() != shaderProgramInfo.samples) {
+    ShaderBindResult ShaderProgramManager::BindShaderProgram(VirtualProgramInfo::ShaderProgramInfo &shaderProgramInfo, const SRShaderCreateInfo& createInfo) {
+        if (auto&& pFramebuffer = m_pipeline->GetCurrentFramebuffer())
+        {
+            if (pFramebuffer->IsDepthEnabled() != shaderProgramInfo.depth || pFramebuffer->GetSamplesCount() != shaderProgramInfo.samples)
+            {
                 SR_LOG("ShaderProgramManager::BindShaderProgram() : the frame buffer parameters have been changed, the shader has been recreated...");
+
                 m_pipeline->DeleteShader(shaderProgramInfo.id);
+
                 if ((shaderProgramInfo = AllocateShaderProgram(createInfo)).Valid()) {
-                    return BindShaderProgram(shaderProgramInfo, createInfo);
+                    if (BindShaderProgram(shaderProgramInfo, createInfo) == ShaderBindResult::Success) {
+                        return ShaderBindResult::ReAllocated;
+                    }
+                    else {
+                        SR_ERROR("ShaderProgramManager::BindShaderProgram() : unexcepted result!");
+                        return ShaderBindResult::Failed;
+                    }
                 }
                 else {
                     SR_ERROR("ShaderProgramManager::BindShaderProgram() : failed to allocate shader program!");
-                    return false;
+                    return ShaderBindResult::Failed;
                 }
             }
 
@@ -245,7 +280,7 @@ namespace SR_GRAPH_NS::Memory {
             m_pipeline->UseShader(static_cast<ShaderProgram>(shaderProgramInfo.id));
         }
 
-        return true;
+        return ShaderBindResult::Success;
     }
 
     VirtualProgramInfo::Identifier ShaderProgramManager::GetCurrentIdentifier() const {
