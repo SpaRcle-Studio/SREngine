@@ -93,7 +93,7 @@ namespace SR_GRAPH_NS {
         inline static std::function<void(WinEvents, void* win, void* arg1, void* arg2)> g_callback = std::function<void(WinEvents, void* win, void* arg1, void* arg2)>();
     public:
         void SetPreferredDevice(int32_t id) { m_preferredDevice = id; }
-        virtual void SetBuildState(bool isBuild) { }
+        virtual void SetBuildState(bool isBuild) { m_needReBuild = !isBuild; }
 
         SR_NODISCARD ImguiFont GetIconFont() const { return m_iconFont; }
         SR_NODISCARD GUIContext GetGUIContext() const { return m_guiContext; }

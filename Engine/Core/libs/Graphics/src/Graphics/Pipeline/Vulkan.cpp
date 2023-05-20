@@ -936,6 +936,45 @@ namespace SR_GRAPH_NS {
         return pHandle;
     }
 
+    void Vulkan::SetBuildState(bool isBuild) {
+        /// TODO: здесь нужна оптимизация цепочки кадровых буферов, так же исключить перестроение цепочки при отсутсвии изменений
+
+        if (!isBuild) {
+            return Environment::SetBuildState(isBuild);
+        }
+
+        m_kernel->ClearSubmitQueue();
+
+        VkSubmitInfo submitInfo = EvoVulkan::Tools::Initializers::SubmitInfo();
+        submitInfo.commandBufferCount   = 1;
+        submitInfo.waitSemaphoreCount   = 1;
+        submitInfo.signalSemaphoreCount = 1;
+        submitInfo.pWaitDstStageMask    = m_kernel->GetSubmitPipelineStages();
+
+        for (uint16_t i = 0; i < m_framebuffersQueue.size(); ++i) {
+            submitInfo.pCommandBuffers   = m_framebuffersQueue[i]->GetCmdRef();
+            submitInfo.pSignalSemaphores = m_framebuffersQueue[i]->GetSemaphoreRef();
+
+            if (i == 0) {
+                submitInfo.pWaitSemaphores = m_kernel->GetPresentCompleteSemaphore();
+            }
+            else {
+                submitInfo.pWaitSemaphores = m_framebuffersQueue[i - 1]->GetSemaphoreRef();
+            }
+
+            m_kernel->AddSubmitQueue(submitInfo);
+        }
+
+        // if (m_guiEnabled) {
+        //     m_kernel->AddSubmitQueue(GetVkImGUI()->GetSubmitInfo(
+        //         m_kernel->GetSubmitInfo().waitSemaphoreCount,
+        //         m_kernel->GetSubmitInfo().pWaitSemaphores
+        //     ));
+        // }
+
+        Environment::SetBuildState(isBuild);
+    }
+
     //!-----------------------------------------------------------------------------------------------------------------
 
     bool SRVulkan::OnResize()  {
@@ -945,7 +984,7 @@ namespace SR_GRAPH_NS {
         Environment::Get()->SetBuildState(false);
 
         if (m_GUIEnabled) {
-            dynamic_cast<Framework::Graphics::Vulkan *>(Environment::Get())->GetVkImGUI()->ReSize(m_width, m_height);
+            dynamic_cast<Framework::Graphics::Vulkan*>(Environment::Get())->GetVkImGUI()->ReSize(m_width, m_height);
         }
 
         return true;
@@ -967,14 +1006,19 @@ namespace SR_GRAPH_NS {
             return EvoVulkan::Core::RenderResult::Success;
         }
 
-        for (const auto& submitInfo : m_framebuffersQueue) {
+        for (const auto& submitInfo : m_submitQueue) {
             if (auto result = vkQueueSubmit(m_device->GetQueues()->GetGraphicsQueue(), 1, &submitInfo, VK_NULL_HANDLE); result != VK_SUCCESS) {
                 VK_ERROR("renderFunction() : failed to queue submit (frame buffer)! Reason: " + EvoVulkan::Tools::Convert::result_to_description(result));
+
+                if (result == VK_ERROR_DEVICE_LOST) {
+                    return EvoVulkan::Core::RenderResult::DeviceLost;
+                }
+
                 return EvoVulkan::Core::RenderResult::Error;
             }
         }
 
-        auto&& vkImgui = dynamic_cast<Framework::Graphics::Vulkan*>(Environment::Get())->GetVkImGUI();
+        auto&& vkImgui = dynamic_cast<SR_GRAPH_NS::Vulkan*>(Environment::Get())->GetVkImGUI();
 
         m_submitCmdBuffs[0] = m_drawCmdBuffs[m_currentBuffer];
         if (m_GUIEnabled && vkImgui && !vkImgui->IsSurfaceDirty()) {
@@ -984,13 +1028,6 @@ namespace SR_GRAPH_NS {
         else {
             m_submitInfo.commandBufferCount = 1;
         }
-
-        m_submitInfo.waitSemaphoreCount = 1;
-        if (m_waitSemaphore) {
-            m_submitInfo.pWaitSemaphores = &m_waitSemaphore;
-        }
-        else
-            m_submitInfo.pWaitSemaphores = &m_syncs.m_presentComplete;
 
         m_submitInfo.pCommandBuffers = m_submitCmdBuffs;
         m_submitInfo.pSignalSemaphores = &m_syncs.m_renderComplete;

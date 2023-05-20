@@ -19,6 +19,7 @@ namespace Framework::Core::GUI {
     private:
         void ResourcesPage();
         void ThreadsPage();
+        void WidgetsPage();
 
     private:
         const ImGuiTreeNodeFlags m_nodeFlagsWithChild = ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_OpenOnDoubleClick;

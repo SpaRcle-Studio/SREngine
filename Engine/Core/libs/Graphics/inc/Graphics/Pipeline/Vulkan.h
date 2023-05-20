@@ -9,6 +9,7 @@
 #include <Utils/ResourceManager/ResourceManager.h>
 #include <Utils/FileSystem/FileSystem.h>
 #include <Utils/Events/EventManager.h>
+#include <Utils/Platform/Platform.h>
 
 #include <Graphics/Pipeline/Environment.h>
 #include <Graphics/Pipeline/Vulkan/VulkanMemory.h>
@@ -235,12 +236,7 @@ namespace SR_GRAPH_NS {
         }
         //[[nodiscard]] void* GetDescriptorSetFromDTDSet(uint32_t id) const override;
 
-        void SetBuildState(bool isBuild) override {
-            if (isBuild) {
-                m_kernel->SetFramebuffersQueue(m_framebuffersQueue);
-            }
-            m_needReBuild = !isBuild;
-        }
+        void SetBuildState(bool isBuild) override;
 
         [[nodiscard]] SR_FORCE_INLINE bool IsGUISupport()       const override { return true; }
         [[nodiscard]] SR_FORCE_INLINE std::string GetVendor()   const override { return m_kernel->GetDevice()->GetName(); }
@@ -305,9 +301,21 @@ namespace SR_GRAPH_NS {
         void ClearBuffers(const std::vector<SR_MATH_NS::FColor>& colors, float_t depth) override;
 
         SR_FORCE_INLINE void DrawFrame() override {
-            if (m_kernel->NextFrame() == EvoVulkan::Core::RenderResult::Fatal) {
-                SR_UTILS_NS::EventManager::Instance().Broadcast(SR_UTILS_NS::EventManager::Event::FatalError);
-                m_hasErrors = true;
+            switch (m_kernel->NextFrame()) {
+                case EvoVulkan::Core::RenderResult::Fatal:
+                    SR_UTILS_NS::EventManager::Instance().Broadcast(SR_UTILS_NS::EventManager::Event::FatalError);
+                    m_hasErrors = true;
+                    break;
+                case EvoVulkan::Core::RenderResult::Error:
+                    SR_ERROR("Vulkan::DrawFrame() : ex error has been occurred!");
+                    m_hasErrors = true;
+                    break;
+                case EvoVulkan::Core::RenderResult::DeviceLost:
+                    SRHalt("Vulkan::DrawFrame() : device lost! Terminate...");
+                    SR_PLATFORM_NS::Terminate();
+                    break;
+                default:
+                    break;
             }
         }
 

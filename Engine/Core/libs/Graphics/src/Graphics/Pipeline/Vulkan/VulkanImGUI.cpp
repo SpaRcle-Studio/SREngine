@@ -82,7 +82,7 @@ LRESULT CustomWindowProcPlatform(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPar
         case WM_CLOSE: {
             auto&& viewport = ImGui::FindViewportByPlatformHandle(hwnd);
             if (auto&& widget = SR_GRAPH_NS::GUI::ViewportsTableManager::Instance().GetWidgetByViewport(viewport)) {
-                widget->Close();
+                //widget->Close();
             }
 
             return DefWindowProc(hwnd, msg, wParam, lParam);
@@ -124,6 +124,11 @@ namespace SR_GRAPH_NS::VulkanTypes {
         }
 
         m_cmdPools.clear();
+
+        if (m_semaphore != VK_NULL_HANDLE) {
+            vkDestroySemaphore(*m_device, m_semaphore, nullptr);
+            m_semaphore = VK_NULL_HANDLE;
+        }
 
         DeInitializeRenderer();
 
@@ -189,6 +194,12 @@ namespace SR_GRAPH_NS::VulkanTypes {
 
         //! create vulkan command buffers
         m_cmdBuffs.resize(m_swapchain->GetCountImages());
+
+        auto&& semaphoreCI = EvoVulkan::Tools::Initializers::SemaphoreCreateInfo();
+        if (vkCreateSemaphore(*m_device, &semaphoreCI, nullptr, &m_semaphore) != VK_SUCCESS) {
+            VK_ERROR("VkImGUI::Init() : failed to create vulkan semaphore!");
+            return false;
+        }
 
         for (auto&& m_cmdBuff : m_cmdBuffs) {
             if (auto&& pool = m_device->CreateCommandPool(VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT); pool != VK_NULL_HANDLE) {
@@ -388,5 +399,24 @@ namespace SR_GRAPH_NS::VulkanTypes {
         }
 
         m_frameBuffs.clear();
+    }
+
+    VkSubmitInfo VkImGUI::GetSubmitInfo(uint32_t countSemaphores, const VkSemaphore* waitSemaphores) const {
+        auto&& pKernel = dynamic_cast<Vulkan*>(m_pipeline)->GetKernel();
+
+        VkSubmitInfo submitInfo = EvoVulkan::Tools::Initializers::SubmitInfo();
+
+        submitInfo.pWaitDstStageMask = pKernel->GetSubmitPipelineStages();
+
+        submitInfo.commandBufferCount = m_cmdBuffs.size();
+        submitInfo.pCommandBuffers = m_cmdBuffs.data();
+
+        submitInfo.signalSemaphoreCount = 1;
+        submitInfo.pSignalSemaphores = GetSemaphoreRef();
+
+        submitInfo.waitSemaphoreCount = countSemaphores;
+        submitInfo.pWaitSemaphores = waitSemaphores;
+
+        return submitInfo;
     }
 }

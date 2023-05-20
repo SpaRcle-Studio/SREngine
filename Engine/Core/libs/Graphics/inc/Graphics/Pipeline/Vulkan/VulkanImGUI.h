@@ -40,6 +40,9 @@ namespace SR_GRAPH_NS::VulkanTypes {
         SR_NODISCARD VkCommandBuffer Render(uint32_t frame);
         SR_NODISCARD bool IsSurfaceDirty() const { return m_surfaceDirty; }
         SR_NODISCARD bool IsUndockingActive() const;
+        SR_NODISCARD SR_INLINE VkSemaphore GetSemaphore() const noexcept { return m_semaphore; }
+        SR_NODISCARD SR_INLINE const VkSemaphore* GetSemaphoreRef() const noexcept { return &m_semaphore; }
+        SR_NODISCARD VkSubmitInfo GetSubmitInfo(uint32_t countSemaphores, const VkSemaphore* waitSemaphores) const;
 
     public:
         bool Init();
@@ -52,6 +55,8 @@ namespace SR_GRAPH_NS::VulkanTypes {
 
     private:
         PipelinePtr m_pipeline = nullptr;
+
+        VkSemaphore m_semaphore = VK_NULL_HANDLE;
 
         bool m_surfaceDirty = true;
 
