@@ -51,6 +51,14 @@ namespace SR_MATH_NS {
             return RotationYawPitchRoll(eulers.Radians());
         }
 
+        static Matrix4x4 Ortho(Unit left, Unit right, Unit bottom, Unit top, Unit zNear, Unit zFar) {
+            return Matrix4x4(glm::ortho(left, right, bottom, top, zNear, zFar));
+        }
+
+        static Matrix4x4 LookAt(const SR_MATH_NS::FVector3& eye, const SR_MATH_NS::FVector3& center, const SR_MATH_NS::FVector3& up) {
+            return Matrix4x4(glm::lookAt(eye.ToGLM(), center.ToGLM(), up.ToGLM()));
+        }
+
         static Matrix4x4 FromEulers(const Quaternion& quaternion) {
             return Matrix4x4(0.f, quaternion, 1.f);
         }

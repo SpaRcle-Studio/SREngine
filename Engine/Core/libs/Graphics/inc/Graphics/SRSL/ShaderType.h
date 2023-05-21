@@ -47,6 +47,7 @@ namespace SR_SRSL_NS {
             { "PROJECTION_MATRIX",              "mat4"          },
             { "ORTHOGONAL_MATRIX",              "mat4"          },
             { "VIEW_NO_TRANSLATE_MATRIX",       "mat4"          },
+            { "LIGHT_SPACE_MATRIX",             "mat4"          },
 
             { "SKELETON_MATRICES_128",          "mat4[128]"     },
             { "SKELETON_MATRIX_OFFSETS_128",    "mat4[128]"     },

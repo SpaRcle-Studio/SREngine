@@ -74,6 +74,7 @@
 #include "../Graphics/src/Graphics/Pass/DepthBufferPass.cpp"
 #include "../Graphics/src/Graphics/Pass/ShaderOverridePass.cpp"
 #include "../Graphics/src/Graphics/Pass/SSAOPass.cpp"
+#include "../Graphics/src/Graphics/Pass/ShadowMapPass.cpp"
 
 #include "../Graphics/src/Graphics/Font/Font.cpp"
 #include "../Graphics/src/Graphics/Font/FontLoader.cpp"
