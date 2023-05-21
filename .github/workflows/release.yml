@@ -1,4 +1,4 @@
-name: SpaRcle Engine CI
+name: SpaRcle Engine CI Release
 
 on:
   push:
