@@ -474,7 +474,7 @@ namespace SR_GRAPH_NS {
         return SR_MATH_NS::IVector2(pt.x, pt.y);
     }
 
-    bool Win32Window::IsVisible() {
-        return IsWindowVisible(m_hWnd);
+    bool Win32Window::IsVisible() const {
+        return ::IsWindowVisible(m_hWnd);
     }
 }

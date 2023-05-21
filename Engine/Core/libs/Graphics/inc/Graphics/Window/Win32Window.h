@@ -41,6 +41,7 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD SR_MATH_NS::IVector2 ScreenToClient(const SR_MATH_NS::IVector2& pos) const override;
 
         SR_NODISCARD WindowType GetType() const override { return BasicWindowImpl::WindowType::Win32; }
+        SR_NODISCARD bool IsVisible() const override;
 
         void SwapBuffers() const override;
         void PollEvents() const override;
@@ -60,7 +61,6 @@ namespace SR_GRAPH_NS {
         void SetIcon(const std::string& path) override;
         void Move(int32_t x, int32_t y) override;
         void Resize(uint32_t w, uint32_t h) override;
-        bool IsVisible() override;
 
     private:
         LRESULT CALLBACK ReadWmdProcedure(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
