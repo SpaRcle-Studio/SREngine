@@ -60,6 +60,7 @@ namespace SR_GRAPH_NS {
         void SetIcon(const std::string& path) override;
         void Move(int32_t x, int32_t y) override;
         void Resize(uint32_t w, uint32_t h) override;
+        bool IsVisible() override;
 
     private:
         LRESULT CALLBACK ReadWmdProcedure(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);

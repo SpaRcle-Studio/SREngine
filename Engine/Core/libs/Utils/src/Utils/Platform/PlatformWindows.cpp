@@ -329,6 +329,8 @@ namespace SR_UTILS_NS::Platform {
     }
 
     void Terminate() {
+        SRHalt("[Stacktrace]");
+        SR_SYSTEM_LOG("Function \"Terminate\" has been called... >_<");
 #ifdef SR_ANDROID
 
 #endif

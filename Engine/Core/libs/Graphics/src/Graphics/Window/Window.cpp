@@ -75,7 +75,7 @@ namespace SR_GRAPH_NS {
         while (m_windowImpl->IsValid()) {
             auto t_start = std::chrono::high_resolution_clock::now();
 
-            m_windowImpl->PollEvents();
+            PollEvents();
 
             if (m_drawCallback) {
                 m_drawCallback();
@@ -206,5 +206,16 @@ namespace SR_GRAPH_NS {
         SR_NOOP;
 
         return false;
+    }
+
+    bool Window::IsVisible() const {
+        return m_windowImpl->IsVisible();
+    }
+
+    void Window::PollEvents() {
+        if (!m_windowImpl) {
+            return;
+        }
+        m_windowImpl->PollEvents();
     }
 }

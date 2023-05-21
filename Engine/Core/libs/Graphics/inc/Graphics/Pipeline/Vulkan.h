@@ -87,6 +87,8 @@ namespace SR_GRAPH_NS {
     public:
         bool OnResize() override;
 
+        void PollWindowEvents() override;
+
         SR_NODISCARD bool IsWindowValid() const override;
         SR_NODISCARD bool IsRayTracingRequired() const noexcept override;
 
@@ -311,7 +313,7 @@ namespace SR_GRAPH_NS {
                     m_hasErrors = true;
                     break;
                 case EvoVulkan::Core::RenderResult::DeviceLost:
-                    SRHalt("Vulkan::DrawFrame() : device lost! Terminate...");
+                    SR_ERROR("Vulkan::DrawFrame() : device lost! Terminate...");
                     SR_PLATFORM_NS::Terminate();
                     break;
                 default:

@@ -92,9 +92,16 @@ namespace SR_GRAPH_NS {
 
                 return DefWindowProc(hwnd, msg, wParam, lParam);
             }
+            case WM_CHANGEUISTATE: {
+                return DefWindowProc(hwnd, msg, wParam, lParam);
+            }
+            case WM_WINDOWPOSCHANGING: {
+                return DefWindowProc(hwnd, msg, wParam, lParam);
+            }
             case WM_WINDOWPOSCHANGED: {
-                DWORD styles = GetWindowLongPtr(hwnd,GWL_STYLE);
+                DWORD styles = GetWindowLongPtr(hwnd, GWL_STYLE);
                 m_maximize = styles & WS_MAXIMIZE;
+                m_collapsed = styles & WS_MINIMIZE;
 
                 return DefWindowProc(hwnd, msg, wParam, lParam);
             }
@@ -465,5 +472,9 @@ namespace SR_GRAPH_NS {
         POINT pt = { static_cast<int32>(pos.x), static_cast<int32_t>(pos.y) };
         ::ClientToScreen(m_hWnd, &pt);
         return SR_MATH_NS::IVector2(pt.x, pt.y);
+    }
+
+    bool Win32Window::IsVisible() {
+        return IsWindowVisible(m_hWnd);
     }
 }

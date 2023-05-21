@@ -965,13 +965,6 @@ namespace SR_GRAPH_NS {
             m_kernel->AddSubmitQueue(submitInfo);
         }
 
-        // if (m_guiEnabled) {
-        //     m_kernel->AddSubmitQueue(GetVkImGUI()->GetSubmitInfo(
-        //         m_kernel->GetSubmitInfo().waitSemaphoreCount,
-        //         m_kernel->GetSubmitInfo().pWaitSemaphores
-        //     ));
-        // }
-
         Environment::SetBuildState(isBuild);
     }
 
@@ -993,17 +986,30 @@ namespace SR_GRAPH_NS {
     EvoVulkan::Core::RenderResult SRVulkan::Render()  {
         SR_TRACY_ZONE;
 
-        if (PrepareFrame() == EvoVulkan::Core::FrameResult::OutOfDate) {
-            VK_LOG("SRVulkan::Render() : out of date...");
-            m_hasErrors |= !ReCreate(EvoVulkan::Core::FrameResult::OutOfDate);
-
-            if (m_hasErrors) {
-                return EvoVulkan::Core::RenderResult::Fatal;
-            }
-
-            VK_LOG("SRVulkan::Render() : window are successfully resized!");
-
+        if (!m_swapchain->SurfaceIsAvailable()) {
             return EvoVulkan::Core::RenderResult::Success;
+        }
+
+        auto&& prepareResult = PrepareFrame();
+        switch (prepareResult) {
+            case EvoVulkan::Core::FrameResult::OutOfDate:
+            case EvoVulkan::Core::FrameResult::Suboptimal: {
+                VK_LOG("SRVulkan::Render() : out of date...");
+                m_hasErrors |= !ReCreate(prepareResult);
+
+                if (m_hasErrors) {
+                    return EvoVulkan::Core::RenderResult::Fatal;
+                }
+
+                VK_LOG("SRVulkan::Render() : window are successfully resized!");
+
+                return EvoVulkan::Core::RenderResult::Success;
+            }
+            case EvoVulkan::Core::FrameResult::Success:
+                break;
+            default:
+                SRHalt("SRVulkan::Render() : unexcepted behaviour!");
+                return EvoVulkan::Core::RenderResult::Error;
         }
 
         for (const auto& submitInfo : m_submitQueue) {
@@ -1024,20 +1030,24 @@ namespace SR_GRAPH_NS {
         if (m_GUIEnabled && vkImgui && !vkImgui->IsSurfaceDirty()) {
             m_submitCmdBuffs[1] = vkImgui->Render(m_currentBuffer);
             m_submitInfo.commandBufferCount = 2;
-        } 
+
+            //AddSubmitQueue(vkImgui->GetSubmitInfo(
+            //     GetSubmitInfo().signalSemaphoreCount,
+            //     GetSubmitInfo().pSignalSemaphores
+            //));
+        }
         else {
             m_submitInfo.commandBufferCount = 1;
         }
 
         m_submitInfo.pCommandBuffers = m_submitCmdBuffs;
-        m_submitInfo.pSignalSemaphores = &m_syncs.m_renderComplete;
 
         /// Submit to queue
         if (auto result = vkQueueSubmit(m_device->GetQueues()->GetGraphicsQueue(), 1, &m_submitInfo, VK_NULL_HANDLE); result != VK_SUCCESS) {
             VK_ERROR("renderFunction() : failed to queue submit! Reason: " + EvoVulkan::Tools::Convert::result_to_description(result));
 
             if (result == VK_ERROR_DEVICE_LOST) {
-                SR_UTILS_NS::Debug::Instance().Terminate();
+                SR_PLATFORM_NS::Terminate();
             }
 
             return EvoVulkan::Core::RenderResult::Error;
@@ -1061,7 +1071,7 @@ namespace SR_GRAPH_NS {
                 }
             }
             case EvoVulkan::Core::FrameResult::DeviceLost:
-                SR_UTILS_NS::Debug::Instance().Terminate();
+                SR_PLATFORM_NS::Terminate();
 
             default: {
                 SRAssertOnce(false);
@@ -1087,5 +1097,16 @@ namespace SR_GRAPH_NS {
     EvoVulkan::Core::FrameResult SRVulkan::SubmitFrame() {
         SR_TRACY_ZONE;
         return VulkanKernel::SubmitFrame();
+    }
+
+    void SRVulkan::PollWindowEvents() {
+        auto&& pPipeline = dynamic_cast<SR_GRAPH_NS::Vulkan*>(Environment::Get());
+        if (!pPipeline) {
+            return; 
+        }
+
+        pPipeline->GetWindow().Do([](Window* pWindow) {
+            pWindow->PollEvents();
+        });
     }
 }

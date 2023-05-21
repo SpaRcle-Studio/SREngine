@@ -236,7 +236,7 @@ namespace SR_CORE_NS {
                 if (maxErrStep == syncStep) {
                     SR_ERROR("Engine::SynchronizeFreeResources() : [FATAL] resources can not be released!");
                     SR_UTILS_NS::ResourceManager::Instance().PrintMemoryDump();
-                    SR_UTILS_NS::Debug::Instance().Terminate();
+                    SR_PLATFORM_NS::Terminate();
                     break;
                 }
 
@@ -545,8 +545,7 @@ namespace SR_CORE_NS {
             m_renderContext.Unlock();
         }
 
-        /// TODO: если ни одно окно не сфокусировано -> не рендерить
-        if (m_renderScene.RecursiveLockIfValid()) {
+        if (m_window->IsVisible() && m_renderScene.RecursiveLockIfValid()) {
             if (auto&& pWin = GetWindow()->GetImplementation<SR_GRAPH_NS::BasicWindowImpl>()) {
                 const bool isOverlay = m_renderScene->IsOverlayEnabled();
                 const bool isMaximized = pWin->IsMaximized();
