@@ -6,35 +6,41 @@
 #define SRENGINE_SAFEQUEUE_H
 
 #include <Utils/Debug.h>
+#include <Utils/Types/Mutex.h>
 #include <Utils/Types/Thread.h>
 
 namespace SR_HTYPES_NS {
-    template <typename T> class SR_DLL_EXPORT SafeQueue {
-        using Mutex = std::recursive_mutex;
+    template <typename T> class SR_DLL_EXPORT SafeQueue : public SR_UTILS_NS::NonCopyable {
     public:
         SR_NODISCARD uint64_t Size() const noexcept;
         SR_NODISCARD bool Empty() const noexcept;
 
-        void Push(const T& value) noexcept;
-        SR_NODISCARD T Pop(const T& def) noexcept;
+        void Flush(const std::function<void(T&)>& callBack);
 
-        void Lock() const;
-        void Unlock() const;
+        void Push(const T& value) noexcept;
+
+        SR_NODISCARD std::shared_lock<std::shared_mutex> ReadLock() const { return std::shared_lock<std::shared_mutex>(m_accessMutex); }
+        SR_NODISCARD std::lock_guard<std::shared_mutex> WriteLock() const { return std::lock_guard<std::shared_mutex>(m_accessMutex); }
 
     private:
         std::queue<T> m_data;
-        mutable Mutex m_mutex;
+
+        /// защищает буфер m_data от порчи данных
+        mutable std::mutex m_dataMutex;
+        /// позволяет управляющей стороне синхронизироваться с очередью.
+        /// блокируется для записи только в точке синхронизации очереди.
+        mutable std::shared_mutex m_accessMutex;
 
     };
 
     template<typename T> void SafeQueue<T>::Push(const T &value) noexcept {
-        SR_SCOPED_LOCK
+        std::lock_guard lock(m_dataMutex);
 
         m_data.push(value);
     }
 
     template<typename T> uint64_t SafeQueue<T>::Size() const noexcept {
-        SR_SCOPED_LOCK
+        std::lock_guard lock(m_dataMutex);
 
         return m_data.size();
     }
@@ -43,24 +49,16 @@ namespace SR_HTYPES_NS {
         return Size() == 0;
     }
 
-    template<typename T> T SafeQueue<T>::Pop(const T &def) noexcept {
-        SR_SCOPED_LOCK
+    template<typename T> void SafeQueue<T>::Flush(const std::function<void(T&)>& callBack) {
+        std::lock(m_accessMutex, m_dataMutex);
 
-        if (Empty()) {
-            return def;
+        std::lock_guard lk1(m_accessMutex, std::adopt_lock);
+        std::lock_guard lk2(m_dataMutex, std::adopt_lock);
+
+        while (!m_data.empty()) {
+            callBack(m_data.front());
+            m_data.pop();
         }
-
-        T data = m_data.front();
-        m_data.pop();
-        return data;
-    }
-
-    template<typename T> void SafeQueue<T>::Lock() const {
-        m_mutex.lock();
-    }
-
-    template<typename T> void SafeQueue<T>::Unlock() const {
-        m_mutex.unlock();
     }
 }
 

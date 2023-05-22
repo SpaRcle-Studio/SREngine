@@ -81,6 +81,10 @@ namespace SR_GRAPH_NS {
     }
 
     void PostProcessPass::Update() {
+        if (m_virtualUBO == SR_ID_INVALID) {
+            return;
+        }
+
         m_pipeline->SetCurrentShader(m_shader);
 
         if (m_shader) {
@@ -96,10 +100,8 @@ namespace SR_GRAPH_NS {
             m_shader->SetMat4(SHADER_VIEW_NO_TRANSLATE_MATRIX, m_camera->GetViewRef());
         }
 
-        if (m_virtualUBO != SR_ID_INVALID) {
-            if (m_uboManager.BindUBO(m_virtualUBO) == Memory::UBOManager::BindResult::Duplicated) {
-                SR_ERROR("PostProcessPass::Update() : memory has been duplicated!");
-            }
+        if (m_uboManager.BindUBO(m_virtualUBO) == Memory::UBOManager::BindResult::Duplicated) {
+            SR_ERROR("PostProcessPass::Update() : memory has been duplicated!");
         }
 
         m_shader->Flush();

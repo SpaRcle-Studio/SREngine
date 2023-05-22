@@ -34,7 +34,9 @@ namespace SR_GRAPH_NS::VulkanTypes {
                 { VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT,       1000 }
         };
     public:
+        bool Init();
         bool ReSize(uint32_t width, uint32_t height);
+        bool ReCreate();
         void SetSurfaceDirty();
 
         SR_NODISCARD VkCommandBuffer Render(uint32_t frame);
@@ -43,10 +45,6 @@ namespace SR_GRAPH_NS::VulkanTypes {
         SR_NODISCARD SR_INLINE VkSemaphore GetSemaphore() const noexcept { return m_semaphore; }
         SR_NODISCARD SR_INLINE const VkSemaphore* GetSemaphoreRef() const noexcept { return &m_semaphore; }
         SR_NODISCARD VkSubmitInfo GetSubmitInfo(uint32_t countSemaphores, const VkSemaphore* waitSemaphores) const;
-
-    public:
-        bool Init();
-        bool ReInit();
 
     private:
         bool InitializeRenderer();
@@ -57,6 +55,8 @@ namespace SR_GRAPH_NS::VulkanTypes {
         PipelinePtr m_pipeline = nullptr;
 
         VkSemaphore m_semaphore = VK_NULL_HANDLE;
+
+        SR_MATH_NS::IVector2 m_surfaceSize;
 
         bool m_surfaceDirty = true;
 

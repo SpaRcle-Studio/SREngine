@@ -23,6 +23,7 @@ namespace SR_GRAPH_NS {
         void Clear();
 
         SR_NODISCARD bool IsEmpty() const;
+        SR_NODISCARD RenderScene* GetRenderScene() const noexcept { return m_renderScene; }
 
     private:
         void Remove(uint64_t id);

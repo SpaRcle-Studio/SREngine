@@ -114,6 +114,8 @@ namespace SR_GRAPH_NS {
             m_framebuffer->EndCmdBuffer();
         }
 
+        m_pipeline->SetCurrentFramebuffer(nullptr);
+
         /// Независимо от того, отрисовали мы что-то в кадровый буффер или нет,
         /// все равно возвращаем false (hasDrawData), так как технически, кадровый буффер
         /// не несет данных для рендера.

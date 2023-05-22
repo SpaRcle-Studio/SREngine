@@ -31,6 +31,7 @@
 #include "src/Core/World/VisualChunk.cpp"
 #include "src/Core/World/VisualRegion.cpp"
 #include "src/Core/World/World.cpp"
+#include "src/Core/World/EngineScene.cpp"
 
 #include "src/Core/Engine.cpp"
 #include "src/Core/EngineCommands.cpp"

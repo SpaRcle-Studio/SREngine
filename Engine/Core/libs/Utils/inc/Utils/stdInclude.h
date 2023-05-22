@@ -55,6 +55,7 @@
 #include <random>
 #include <cstdint>
 #include <iomanip>
+#include <condition_variable>
 
 #ifdef SR_SUPPORT_PARALLEL
     #include <omp.h>

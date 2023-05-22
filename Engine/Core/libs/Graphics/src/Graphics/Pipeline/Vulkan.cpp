@@ -823,6 +823,10 @@ namespace SR_GRAPH_NS {
         if (m_kernel->IsDirty()) {
             m_kernel->ReCreate(EvoVulkan::Core::FrameResult::Dirty);
         }
+
+        if (GetVkImGUI()->IsSurfaceDirty()) {
+            GetVkImGUI()->ReCreate();
+        }
     }
 
     void Vulkan::UpdateMultiSampling() {

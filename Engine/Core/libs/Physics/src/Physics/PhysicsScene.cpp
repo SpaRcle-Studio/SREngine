@@ -105,7 +105,7 @@ namespace SR_PHYSICS_NS {
             m_scene.Unlock();
         }
         else {
-            SR_ERROR("PhysicsScene::Init() : scene is invalid!");
+            SRHalt("PhysicsScene::Init() : scene is invalid!");
         }
 
         if (!CreateDynamicWorld()) {

@@ -7,7 +7,7 @@
 #include <Core/EngineMigrators.h>
 #include <Core/GUI/EditorGUI.h>
 #include <Core/UI/Button.h>
-#include <Core/World/SceneInitializer.h>
+#include <Core/World/EngineScene.h>
 
 #include <Utils/Events/EventManager.h>
 #include <Utils/World/Scene.h>
@@ -93,7 +93,7 @@ namespace SR_CORE_NS {
 
         m_autoReloadResources = SR_UTILS_NS::Features::Instance().Enabled("AutoReloadResources", false);
 
-        if (!m_scene.Valid() && !m_editor->LoadSceneFromCachedPath()) {
+        if (!m_engineScene && !m_editor->LoadSceneFromCachedPath()) {
             auto&& scenePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Scenes/New-scene.scene");
 
             if (SR_PLATFORM_NS::IsExists(scenePath)) {
@@ -108,8 +108,6 @@ namespace SR_CORE_NS {
 
         FlushScene();
 
-        m_updateFrequency = (1.f / (60.f * m_speed)) * SR_CLOCKS_PER_SEC;
-        m_accumulator = m_updateFrequency;
         m_timeStart = Clock::now();
 
         m_isCreate = true;
@@ -325,7 +323,7 @@ namespace SR_CORE_NS {
                     const static auto iniPathWidgets = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Editor/Configs/EditorWidgets.xml");
 
                     if (!iniPathEditor.Exists()) {
-                        iniPathEditor.Make(SR_UTILS_NS::Path::Type::File);
+                        iniPathEditor.Create();
                         SR_UTILS_NS::Platform::Copy(SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Editor/Configs/ImGuiEditor.config"), iniPathEditor);
                         SR_UTILS_NS::Platform::Copy(SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Editor/Configs/EditorWidgets.xml"), iniPathWidgets);
                     }
@@ -403,13 +401,17 @@ namespace SR_CORE_NS {
         SR_INFO("Engine::Await() : waiting for the engine to close...");
 
         while (m_isRun) {
-            SR_HTYPES_NS::Thread::Sleep(10);
+            SR_HTYPES_NS::Thread::Sleep(50);
+
+            FlushScene();
 
             if (!m_window || !m_window->IsValid()) {
                 SR_SYSTEM_LOG("Engine::Await() : window has been closed!");
                 break;
             }
         }
+
+        FlushScene();
 
         if (m_editor && m_editor->Enabled()) {
             m_editor->Enable(false);
@@ -431,12 +433,11 @@ namespace SR_CORE_NS {
         }
         SR_SAFE_DELETE_PTR(m_input);
 
-        FlushScene();
-
-        if (m_scene.Valid()) {
+        if (m_engineScene) {
             SetScene(ScenePtr());
-            FlushScene();
         }
+
+        FlushScene();
 
         SR_INFO("Engine::Close() : destroying the editor...");
         SR_SAFE_DELETE_PTR(m_editor);
@@ -478,7 +479,9 @@ namespace SR_CORE_NS {
 
     void Engine::DrawCallback() {
         if (!m_isRun || !m_window || m_window->IsWindowCollapsed()) {
-            m_accumulator = 0.f;
+            if (m_engineScene) {
+                m_engineScene->SkipDraw();
+            }
             return;
         }
 
@@ -495,72 +498,10 @@ namespace SR_CORE_NS {
             SR_UTILS_NS::ResourceManager::Instance().ReloadResources(dt);
         }
 
-        FlushScene();
+        auto&& readLock = m_sceneQueue.ReadLock();
 
-        if (m_renderScene.RecursiveLockIfValid()) {
-            SR_UTILS_NS::DebugDraw::Instance().SwitchCallbacks(m_renderScene->GetDebugRenderer());
-            m_renderScene.Unlock();
-        }
-
-        if (m_physicsScene.LockIfValid()){
-            SR_PHYSICS_NS::Raycast3D::Instance().SwitchPhysics(m_physicsScene->Get3DWorld());
-            m_physicsScene.Unlock();
-        }
-
-        if (m_scene.LockIfValid()) {
-            m_cmdManager->Update();
-
-            m_scene->GetLogicBase()->PostLoad();
-
-            SR_SCRIPTING_NS::EvoScriptManager::Instance().Update(dt, false);
-
-            Prepare();
-
-            Update(dt);
-
-            /// fixed update
-            if (m_accumulator >= m_updateFrequency)
-            {
-                while (m_accumulator >= m_updateFrequency)
-                {
-                    if (!IsPaused() && IsActive() && m_physicsScene.RecursiveLockIfValid()) {
-                        m_physicsScene->FixedUpdate();
-                        m_physicsScene.Unlock();
-                    }
-
-                    FixedUpdate();
-
-                    m_accumulator -= m_updateFrequency;
-                }
-            }
-
-            m_accumulator += dt;
-
-            m_scene.Unlock();
-        }
-
-        if (m_renderContext.LockIfValid()) {
-            m_renderContext->Update();
-            m_renderContext.Unlock();
-        }
-
-        if (m_window->IsVisible() && m_renderScene.RecursiveLockIfValid()) {
-            if (auto&& pWin = GetWindow()->GetImplementation<SR_GRAPH_NS::BasicWindowImpl>()) {
-                const bool isOverlay = m_renderScene->IsOverlayEnabled();
-                const bool isMaximized = pWin->IsMaximized();
-                const bool isHeaderEnabled = pWin->IsHeaderEnabled();
-
-                if (isHeaderEnabled != !isOverlay) {
-                    pWin->SetHeaderEnabled(!isOverlay);
-                    if (isMaximized) {
-                        pWin->Maximize();
-                    }
-                }
-            }
-
-            m_renderScene->Render();
-            /// В процессе отрисовки сцена могла быть заменена
-            m_renderScene.TryUnlock();
+        if (m_engineScene) {
+            m_engineScene->Draw(dt);
         }
     }
 
@@ -580,27 +521,31 @@ namespace SR_CORE_NS {
 
             SR_HTYPES_NS::Thread::Sleep(250);
 
-            m_mainCamera = m_renderScene.Do<CameraPtr>([](SR_GRAPH_NS::RenderScene* ptr) -> CameraPtr {
-                if (auto&& pCamera = ptr->GetMainCamera()) {
-                    return pCamera;
-                }
+            auto&& readLock = m_sceneQueue.ReadLock();
 
-                return ptr->GetFirstOffScreenCamera();
-            }, nullptr);
+            if (!m_engineScene) {
+                continue;
+            }
 
-            if (m_worldTimer.Update() && m_scene.LockIfValid()) {
-                if (!m_mainCamera) {
+            m_engineScene->UpdateMainCamera();
+
+            auto&& pScene = m_engineScene->pScene;
+
+            if (m_worldTimer.Update() && pScene.LockIfValid()) {
+                auto&& pMainCamera = m_engineScene->pMainCamera;
+
+                if (!pMainCamera) {
                     SR_NOOP;
                 }
-                else if (auto&& gameObject = dynamic_cast<SR_UTILS_NS::GameObject*>(m_mainCamera->GetParent())) {
-                    auto&& pLogic = m_scene->GetLogicBase().DynamicCast<SR_WORLD_NS::SceneCubeChunkLogic*>();
+                else if (auto&& gameObject = dynamic_cast<SR_UTILS_NS::GameObject*>(pMainCamera->GetParent())) {
+                    auto&& pLogic = pScene->GetLogicBase().DynamicCast<SR_WORLD_NS::SceneCubeChunkLogic*>();
                     if (pLogic && gameObject) {
                         pLogic->SetObserver(gameObject);
                     }
                 }
 
-                m_scene->GetLogicBase()->Update(m_worldTimer.GetDeltaTime());
-                m_scene.Unlock();
+                pScene->GetLogicBase()->Update(m_worldTimer.GetDeltaTime());
+                pScene.Unlock();
             }
         }
 
@@ -653,31 +598,21 @@ namespace SR_CORE_NS {
             }
         }
 
-        m_sceneBuilder->FixedUpdate();
-
         if (m_editor && m_window->IsWindowFocus()) {
             m_editor->Update();
         }
-    }
-
-    void Engine::Update(float_t dt) {
-        SR_TRACY_ZONE;
-        m_sceneBuilder->Update(dt);
-    }
-
-    void Engine::Prepare() {
-        SR_TRACY_ZONE;
-        m_scene->Prepare();
-        const bool isPaused = !m_isActive || m_isPaused;
-        m_sceneBuilder->Build(isPaused);
     }
 
     void Engine::SetActive(bool isActive) {
         if (m_isActive == isActive) {
             return;
         }
+
         m_isActive = isActive;
-        m_sceneBuilder->SetDirty();
+
+        if (m_engineScene) {
+            m_engineScene->SetActive(isActive);
+        }
     }
 
     void Engine::SetSpeed(float_t speed) {
@@ -688,65 +623,47 @@ namespace SR_CORE_NS {
         if (m_isPaused == isPaused) {
             return;
         }
+
         m_isPaused = isPaused;
-        m_sceneBuilder->SetDirty();
+
+        if (m_engineScene) {
+            m_engineScene->SetPaused(isPaused);
+        }
     }
 
     void Engine::FlushScene() {
         SR_TRACY_ZONE;
 
-        /// не блочим, иначе deadlock
-        /// SR_LOCK_GUARD
-
         if (m_sceneQueue.Empty()) {
             return;
         }
 
-        m_sceneQueue.Lock();
-
-    repeat:
-        if (m_sceneQueue.Empty()) {
-            m_sceneQueue.Unlock();
-            return;
-        }
-
-        auto&& newScene = m_sceneQueue.Pop(ScenePtr());
-        if (newScene && !SR_CORE_NS::InitializeScene(newScene, this)) {
-            SR_ERROR("Engine::FlushScene() : failed to initialize scene!");
-        }
-
-        if (m_scene.RecursiveLockIfValid()) {
-            if (m_editor) {
-                m_editor->SetScene(SR_WORLD_NS::Scene::Ptr());
+        m_sceneQueue.Flush([this](auto&& newScene) {
+            if (m_cmdManager) {
+                m_cmdManager->Clear();
             }
 
-            m_scene->Save();
-            if (!DeInitializeScene(m_scene, this)) {
-                SR_ERROR("Engine::FlushScene() : failed to de initialize scene!");
+            if (m_engineScene && m_engineScene->pScene.RecursiveLockIfValid()) {
+                m_engineScene->pScene->Save();
+                m_engineScene->pScene.Unlock();
             }
-            m_scene.Unlock();
+
+            SR_SAFE_DELETE_PTR(m_engineScene);
+
+            if (!newScene) {
+                return;
+            }
+
+            m_engineScene = new EngineScene(newScene, this);
+            if (!m_engineScene->Init()) {
+                SR_ERROR("Engine::FlushScene() : failed to initialize scene!");
+                SR_SAFE_DELETE_PTR(m_engineScene);
+            }
+        });
+
+        if (m_editor && m_engineScene) {
+            m_editor->SetScene(m_engineScene->pScene);
         }
-
-        if (m_editor) {
-            m_editor->SetScene(newScene);
-        }
-
-        if (m_cmdManager) {
-            m_cmdManager->Clear();
-        }
-
-        m_scene = newScene;
-
-        m_renderScene = m_scene ? m_scene->GetDataStorage().GetValue<RenderScenePtr>() : RenderScenePtr();
-        m_physicsScene = m_scene ? m_scene->GetDataStorage().GetValue<PhysicsScenePtr>() : PhysicsScenePtr();
-
-        m_sceneBuilder = m_scene ? m_scene->GetSceneBuilder() : nullptr;
-
-        if (!m_sceneQueue.Empty()) {
-            goto repeat;
-        }
-
-        m_sceneQueue.Unlock();
     }
 
     void Engine::SetGameMode(bool enabled) {
@@ -759,14 +676,26 @@ namespace SR_CORE_NS {
             m_editor->ShowAll();
         }
 
-        m_renderScene.Do([this](SR_GRAPH_NS::RenderScene *ptr) {
-            ptr->SetOverlayEnabled(!m_isGameMode);
-        });
+        if (m_engineScene) {
+            m_engineScene->SetGameMode(m_isGameMode);
+        }
 
         m_editor->Enable(!m_isGameMode);
     }
 
     bool Engine::IsNeedReloadResources() {
         return m_autoReloadResources && !IsGameMode();
+    }
+
+    Engine::ScenePtr Engine::GetScene() const {
+        return m_engineScene ? m_engineScene->pScene : ScenePtr();
+    }
+
+    SR_WORLD_NS::SceneBuilder* Engine::GetSceneBuilder() const {
+        return m_engineScene ? m_engineScene->pSceneBuilder : nullptr;
+    }
+
+    Engine::RenderScenePtr Engine::GetRenderScene() const {
+        return m_engineScene ? m_engineScene->pRenderScene : RenderScenePtr();
     }
 }

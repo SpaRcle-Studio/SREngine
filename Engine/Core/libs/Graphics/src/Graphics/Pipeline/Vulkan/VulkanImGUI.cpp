@@ -136,19 +136,6 @@ namespace SR_GRAPH_NS::VulkanTypes {
         m_device = nullptr;
     }
 
-    bool VkImGUI::ReInit() {
-        SR_INFO("VkImGUI::ReInit() : re-initialization vulkan ImGui...");
-
-        DeInitializeRenderer();
-
-        if (!InitializeRenderer()) {
-            SR_ERROR("VkImGUI::ReInit() : failed to initialize Vk ImGUI!");
-            return false;
-        }
-
-        return true;
-    }
-
     void VkImGUI::DeInitializeRenderer() {
         SR_INFO("VkImGUI::DeInitializeRenderer() : de-initialization vulkan ImGui renderer...");
 
@@ -307,19 +294,17 @@ namespace SR_GRAPH_NS::VulkanTypes {
         return true;
     }
 
-    bool VkImGUI::ReSize(uint32_t width, uint32_t height) {
-        SR_GRAPH_LOG("VkImGUI::ReSize() : resize imgui vulkan frame buffers...\n\tWidth: " + std::to_string(width) + "\n\tHeight: " + std::to_string(height));
-
+    bool VkImGUI::ReCreate() {
         DestroyBuffers();
 
         if (!m_device || !m_swapchain) {
-            SR_ERROR("VkImGUI::ReSize() : device or swapchain is nullptr!");
+            SR_ERROR("VkImGUI::ReCreate() : device or swapchain is nullptr!");
             return false;
         }
 
         m_frameBuffs.resize(m_swapchain->GetCountImages());
 
-        auto&& fbInfo = EvoVulkan::Tools::Initializers::FrameBufferCI(m_renderPass, width, height);
+        auto&& fbInfo = EvoVulkan::Tools::Initializers::FrameBufferCI(m_renderPass, m_surfaceSize.x, m_surfaceSize.y);
         auto&& attaches = std::vector<VkImageView>(1);
         fbInfo.attachmentCount = attaches.size();
 
@@ -328,7 +313,7 @@ namespace SR_GRAPH_NS::VulkanTypes {
 
             fbInfo.pAttachments = attaches.data();
             if (vkCreateFramebuffer(*m_device, &fbInfo, nullptr, &m_frameBuffs[i]) != VK_SUCCESS) {
-                SR_ERROR("VkImGUI::ReSize() : failed to create frame buffer!");
+                SR_ERROR("VkImGUI::ReCreate() : failed to create frame buffer!");
                 return false;
             }
         }
@@ -338,18 +323,26 @@ namespace SR_GRAPH_NS::VulkanTypes {
         m_clearValues = { { .color = { {0.0, 0.0, 0.0, 1.0} } } };
 
         m_renderPassBI = {
-            .sType = VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO,
-            .pNext = nullptr,
-            .renderPass = m_renderPass,
-            .framebuffer = VK_NULL_HANDLE,
-            .renderArea = { VkOffset2D(), { width, height } },
-            .clearValueCount = static_cast<uint32_t>(m_clearValues.size()),
-            .pClearValues = m_clearValues.data(),
+                .sType = VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO,
+                .pNext = nullptr,
+                .renderPass = m_renderPass,
+                .framebuffer = VK_NULL_HANDLE,
+                .renderArea = { VkOffset2D(), { static_cast<uint32_t>(m_surfaceSize.x), static_cast<uint32_t>(m_surfaceSize.y) } },
+                .clearValueCount = static_cast<uint32_t>(m_clearValues.size()),
+                .pClearValues = m_clearValues.data(),
         };
 
         m_surfaceDirty = false;
 
         return true;
+    }
+
+    bool VkImGUI::ReSize(uint32_t width, uint32_t height) {
+        SR_GRAPH_LOG("VkImGUI::ReSize() : resize imgui vulkan frame buffers...\n\tWidth: " + std::to_string(width) + "\n\tHeight: " + std::to_string(height));
+
+        m_surfaceSize = SR_MATH_NS::IVector2(width, height);
+
+        return ReCreate();
     }
 
     VkCommandBuffer VkImGUI::Render(uint32_t frame) {

@@ -67,9 +67,9 @@ namespace SR_UTILS_NS {
     #define SR_TRACY_DESTROY(tracyType) SR_UTILS_NS::TracyContextManager::Instance().Destroy(tracyType);
 
 #else
-    #define SR_TRACY_ZONE
-    #define SR_TRACY_ZONE_N(name)
-    #define SR_TRACY_ZONE_S(name)
+    #define SR_TRACY_ZONE SR_NOOP
+    #define SR_TRACY_ZONE_N(name) SR_NOOP
+    #define SR_TRACY_ZONE_S(name) SR_NOOP
 
     #define SR_TRACY_GET_CONTEXT(tracyType, pIdentifier)
     #define SR_TRACY_DESTROY(tracyType)

@@ -153,6 +153,12 @@ namespace SR_GRAPH_NS {
             return;
         }
 
+        if (!IsDirectional() && (!m_framebuffer || m_framebuffer->IsDirty())) {
+            return;
+        }
+
+        m_pipeline->SetCurrentFramebuffer(m_framebuffer);
+
         auto&& pRenderScene = GetRenderScene();
 
         auto&& pIdentifier = m_uboManager.GetIdentifier();
@@ -164,6 +170,8 @@ namespace SR_GRAPH_NS {
         m_uboManager.SetIdentifier(pIdentifier);
 
         Super::Update();
+
+        m_pipeline->SetCurrentFramebuffer(nullptr);
     }
 
     void ShaderOverridePass::UpdateCluster(MeshCluster* pCluster) {
