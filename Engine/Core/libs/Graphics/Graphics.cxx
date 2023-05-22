@@ -38,9 +38,10 @@
 #include "../Graphics/src/Graphics/GUI/NodeBuilder.cpp"
 
 #include "../Graphics/src/Graphics/Lighting/DirectionalLight.cpp"
-#include "../Graphics/src/Graphics/Lighting/Light.cpp"
+#include "../Graphics/src/Graphics/Lighting/ILightComponent.cpp"
 #include "../Graphics/src/Graphics/Lighting/PointLight.cpp"
 #include "../Graphics/src/Graphics/Lighting/Spotlight.cpp"
+#include "../Graphics/src/Graphics/Lighting/LightSystem.cpp"
 
 #include "../Graphics/src/Graphics/Loaders/FbxLoader.cpp"
 #include "../Graphics/src/Graphics/Loaders/ImageLoader.cpp"
@@ -84,6 +85,7 @@
 #include "../Graphics/src/Graphics/Types/Geometry/MeshComponent.cpp"
 #include "../Graphics/src/Graphics/Types/Geometry/SkinnedMesh.cpp"
 
+#include "../Graphics/src/Graphics/Types/IRenderComponent.cpp"
 #include "../Graphics/src/Graphics/Types/EditorGrid.cpp"
 #include "../Graphics/src/Graphics/Types/Framebuffer.cpp"
 #include "../Graphics/src/Graphics/Types/Material.cpp"

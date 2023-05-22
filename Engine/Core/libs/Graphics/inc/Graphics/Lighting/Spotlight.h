@@ -5,17 +5,14 @@
 #ifndef GAMEENGINE_SPOTLIGHT_H
 #define GAMEENGINE_SPOTLIGHT_H
 
-#include <Graphics/Lighting/Light.h>
+#include <Graphics/Lighting/ILightComponent.h>
 
-namespace Framework::Graphics {
-    class Render;
+namespace SR_GRAPH_NS {
+    class Spotlight : public ILightComponent {
+    protected:
+        float_t m_radius = 1.f;
+        float_t m_distance = 10.f;
 
-    class Spotlight : public Light {
-    public:
-        Spotlight(Render* render);
-    private:
-        float m_radius = 1.f;
-        float m_distance = 10.f;
     };
 }
 

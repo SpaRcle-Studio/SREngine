@@ -46,49 +46,8 @@ namespace SR_GTYPES_NS {
         }
     }
 
-    void MeshComponent::OnEnable() {
-        if (auto&& renderScene = TryGetRenderScene()) {
-            renderScene->SetDirty();
-        }
-        Component::OnEnable();
-    }
-
-    void MeshComponent::OnDisable() {
-        if (auto&& renderScene = TryGetRenderScene()) {
-            renderScene->SetDirty();
-        }
-        Component::OnDisable();
-    }
-
     bool MeshComponent::ExecuteInEditMode() const {
         return true;
-    }
-
-    Mesh::RenderScenePtr MeshComponent::TryGetRenderScene() {
-        if (m_renderScene.Valid()) {
-            return m_renderScene;
-        }
-
-        auto&& pScene = TryGetScene();
-        if (!pScene) {
-            return m_renderScene;
-        }
-
-        m_renderScene = pScene->Do<RenderScenePtr>([](SR_WORLD_NS::Scene* ptr) {
-            return ptr->GetDataStorage().GetValue<RenderScenePtr>();
-        }, RenderScenePtr());
-
-        return m_renderScene;
-    }
-
-    Mesh::RenderScenePtr MeshComponent::GetRenderScene() {
-        if (auto&& pRenderScene = TryGetRenderScene()) {
-            return pRenderScene;
-        }
-
-        SRHalt("Invalid render scene!");
-
-        return Mesh::RenderScenePtr();
     }
 
     SR_MATH_NS::FVector3 MeshComponent::GetBarycenter() const {

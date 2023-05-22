@@ -5,11 +5,11 @@
 #ifndef SRENGINE_MESHCOMPONENT_H
 #define SRENGINE_MESHCOMPONENT_H
 
-#include <Utils/ECS/Component.h>
 #include <Graphics/Types/Geometry/IndexedMesh.h>
+#include <Graphics/Types/IRenderComponent.h>
 
 namespace SR_GTYPES_NS {
-    class MeshComponent : public IndexedMesh, public SR_UTILS_NS::Component {
+    class MeshComponent : public IndexedMesh, public SR_GTYPES_NS::IRenderComponent {
     protected:
         ~MeshComponent() override = default;
 
@@ -26,8 +26,6 @@ namespace SR_GTYPES_NS {
         void OnAttached() override;
         void OnDestroy() override;
         void OnMatrixDirty() override;
-        void OnEnable() override;
-        void OnDisable() override;
 
         SR_HTYPES_NS::Marshal::Ptr Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SR_UTILS_NS::SavableFlags flags) const override;
 
@@ -55,12 +53,6 @@ namespace SR_GTYPES_NS {
         }
 
     protected:
-        SR_NODISCARD RenderScenePtr TryGetRenderScene();
-        SR_NODISCARD RenderScenePtr GetRenderScene();
-
-    protected:
-        RenderScenePtr m_renderScene;
-
         std::string m_geometryName;
 
         SR_MATH_NS::Matrix4x4 m_modelMatrix = SR_MATH_NS::Matrix4x4::Identity();
