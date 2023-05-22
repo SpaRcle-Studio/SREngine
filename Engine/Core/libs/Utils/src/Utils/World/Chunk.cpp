@@ -4,7 +4,9 @@
 
 #include <Utils/World/Chunk.h>
 #include <Utils/World/Region.h>
+#include <Utils/World/Scene.h>
 #include <Utils/ECS/GameObject.h>
+#include <Utils/ECS/Transform.h>
 #include <Utils/World/SceneCubeChunkLogic.h>
 
 namespace SR_WORLD_NS {

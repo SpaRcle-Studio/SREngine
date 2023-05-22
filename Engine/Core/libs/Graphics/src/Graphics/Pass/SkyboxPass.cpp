@@ -5,6 +5,7 @@
 #include <Graphics/Pass/SkyboxPass.h>
 #include <Graphics/Types/Skybox.h>
 #include <Graphics/Types/Shader.h>
+#include <Graphics/Types/Camera.h>
 #include <Graphics/Pipeline/IShaderProgram.h>
 
 namespace SR_GRAPH_NS {

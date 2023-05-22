@@ -8,7 +8,6 @@
 #include <Utils/Common/Vertices.hpp>
 
 #include <Graphics/Types/Skybox.h>
-#include <Graphics/Render/Render.h>
 #include <Graphics/Types/Vertices.h>
 #include <Graphics/Loaders/ObjLoader.h>
 
@@ -106,16 +105,7 @@ namespace SR_GTYPES_NS {
             return false;
         }
 
-        //for (auto&& img : m_data) {
-        //    if (!img) {
-        //        continue;
-        //    }
-        //
-        //    stbi_image_free(img);
-        //    img = nullptr;
-        //}
-
-        auto &&indexedVertices = Vertices::CastVertices<Vertices::SimpleVertex>(SR_UTILS_NS::SKYBOX_INDEXED_VERTICES);
+        auto&& indexedVertices = Vertices::CastVertices<Vertices::SimpleVertex>(SR_UTILS_NS::SKYBOX_INDEXED_VERTICES);
 
         if (m_pipeline->GetType() == PipelineType::Vulkan) {
             auto &&indices = SR_UTILS_NS::SKYBOX_INDICES;

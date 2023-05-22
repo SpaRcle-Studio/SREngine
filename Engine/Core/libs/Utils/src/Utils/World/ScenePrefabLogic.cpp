@@ -3,6 +3,7 @@
 //
 
 #include <Utils/World/ScenePrefabLogic.h>
+#include <Utils/ECS/Transform3D.h>
 
 namespace SR_WORLD_NS {
     ScenePrefabLogic::ScenePrefabLogic(const SceneLogic::ScenePtr& scene)

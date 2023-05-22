@@ -9,7 +9,6 @@
 #include <Utils/Common/Hashes.h>
 
 #include <Graphics/Types/Texture.h>
-#include <Graphics/Render/Render.h>
 #include <Graphics/Render/RenderContext.h>
 #include <Graphics/Pipeline/Environment.h>
 #include <Graphics/Types/Shader.h>

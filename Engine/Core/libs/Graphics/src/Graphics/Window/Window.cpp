@@ -9,7 +9,6 @@
 #include <Utils/ResourceManager/ResourceManager.h>
 
 #include <Graphics/Window/Window.h>
-#include <Graphics/Render/Render.h>
 #include <Graphics/Types/Camera.h>
 #include <Graphics/Types/Material.h>
 #include <Graphics/Types/Texture.h>

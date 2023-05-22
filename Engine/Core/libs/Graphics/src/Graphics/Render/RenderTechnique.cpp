@@ -5,6 +5,7 @@
 #include <Graphics/Render/RenderTechnique.h>
 #include <Graphics/Render/RenderScene.h>
 #include <Graphics/Render/RenderContext.h>
+#include <Graphics/Pass/GroupPass.h>
 
 namespace SR_GRAPH_NS {
     RenderTechnique::RenderTechnique()

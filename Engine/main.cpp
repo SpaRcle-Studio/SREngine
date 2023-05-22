@@ -53,7 +53,6 @@
 #include <Graphics/Memory/MeshAllocator.h>
 #include <Graphics/GUI/NodeManager.h>
 #include <Graphics/Types/Camera.h>
-#include <Graphics/Render/RenderManager.h>
 #include <Graphics/Memory/CameraManager.h>
 #include <Graphics/Types/Framebuffer.h>
 #include <Graphics/Types/RenderTexture.h>
@@ -66,56 +65,37 @@
 #include <Scripting/Base/Behaviour.h>
 #include <Scripting/Impl/EvoScriptManager.h>
 
-using namespace Framework;
-
-using namespace Framework::Core;
-
-using namespace Framework::Helper;
-using namespace Framework::Helper::Math;
-using namespace Framework::Helper::Types;
-using namespace Framework::Helper::World;
-
-using namespace Framework::Graphics;
-using namespace Framework::Graphics::UI;
-using namespace Framework::Graphics::Types;
-using namespace Framework::Graphics::Animations;
-
-using namespace Framework::Physics;
-using namespace Framework::Physics::Types;
-
-using namespace Framework::Scripting;
-
 int main(int argc, char **argv) {
     setlocale(LC_ALL, "rus");
     setlocale(LC_NUMERIC, "C");
     srand(time(NULL));
 
     auto&& exe = SR_PLATFORM_NS::GetApplicationPath().GetFolder();
-    Debug::Instance().Init(exe, true, Debug::Theme::Dark);
-    Debug::Instance().SetLevel(Debug::Level::Low);
+    SR_UTILS_NS::Debug::Instance().Init(exe, true, SR_UTILS_NS::Debug::Theme::Dark);
+    SR_UTILS_NS::Debug::Instance().SetLevel(SR_UTILS_NS::Debug::Level::Low);
 
     SR_PLATFORM_NS::InitSegmentationHandler();
 
-    Thread::Factory::Instance().SetMainThread();
+    SR_HTYPES_NS::Thread::Factory::Instance().SetMainThread();
     SR_HTYPES_NS::Time::Instance().Update();
 
-    auto&& resourcesManager = ResourceManager::Instance();
+    auto&& resourcesManager = SR_UTILS_NS::ResourceManager::Instance();
 
-    if (auto&& folder = GetCmdOption(argv, argv + argc, "-resources"); folder.empty()) {
-        resourcesManager.Init(Path(exe.ToString() + "/../../Resources"));
+    if (auto&& folder = SR_UTILS_NS::GetCmdOption(argv, argv + argc, "-resources"); folder.empty()) {
+        resourcesManager.Init(SR_UTILS_NS::Path(exe.ToString() + "/../../Resources"));
     }
     else {
         resourcesManager.Init(folder);
     }
 
-    Features::Instance().SetPath(resourcesManager.GetResPath().Concat("Engine/Configs/Features.xml"));
-    Features::Instance().Reload();
+    SR_UTILS_NS::Features::Instance().SetPath(resourcesManager.GetResPath().Concat("Engine/Configs/Features.xml"));
+    SR_UTILS_NS::Features::Instance().Reload();
 
     resourcesManager.Run();
 
-    if (Features::Instance().Enabled("CrashHandler")) {
+    if (SR_UTILS_NS::Features::Instance().Enabled("CrashHandler")) {
     #ifdef SR_WIN32
-        ShellExecute(nullptr, "open", (ResourceManager::Instance().GetResPath().Concat(
+        ShellExecute(nullptr, "open", (SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat(
                 "Engine/Utilities/EngineCrashHandler.exe").CStr()),
                      ("--log log.txt --target " + SR_PLATFORM_NS::GetApplicationName().ToString() + " --out " + exe.ToString() + "\\").c_str(),
                      nullptr, SW_SHOWDEFAULT
@@ -123,9 +103,9 @@ int main(int argc, char **argv) {
     #endif
     }
 
-    {
-        SceneAllocator::Instance().Init([]() -> Scene* { return new Core::World(); });
-    }
+    SR_WORLD_NS::SceneAllocator::Instance().Init([]() -> SR_WORLD_NS::Scene* {
+        return new SR_CORE_NS::World();
+    });
 
     auto&& engine = SR_CORE_NS::Engine::Instance();
 
@@ -162,15 +142,15 @@ int main(int argc, char **argv) {
     SR_CORE_NS::Engine::DestroySingleton();
     SR_GRAPH_NS::GUI::NodeManager::DestroySingleton();
     SR_UTILS_NS::TaskManager::DestroySingleton();
-    Memory::MeshManager::DestroySingleton();
+    SR_GRAPH_NS::Memory::MeshManager::DestroySingleton();
 
-    Debug::Instance().System("All systems were successfully closed!");
+    SR_UTILS_NS::Debug::Instance().System("All systems were successfully closed!");
 
-    ResourceManager::DestroySingleton();
+    SR_UTILS_NS::ResourceManager::DestroySingleton();
 
-    SR_SYSTEM_LOG("Thread count: " + ToString(Thread::Factory::Instance().GetThreadsCount()));
+    SR_SYSTEM_LOG("Thread count: " + SR_UTILS_NS::ToString(SR_HTYPES_NS::Thread::Factory::Instance().GetThreadsCount()));
 
-    Debug::DestroySingleton();
+    SR_UTILS_NS::Debug::DestroySingleton();
 
     return 0;
 }

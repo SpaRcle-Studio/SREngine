@@ -27,7 +27,7 @@ include(freetype.cmake)
 add_subdirectory(libs/cmp_core)
 
 if (SR_GRAPHICS_STATIC_LIBRARY)
-    add_library(Graphics STATIC Graphics.cxx ImGUI.cxx SRSL.cxx)
+    add_library(Graphics STATIC Graphics.cxx ImGUI.cxx SRSL.cxx Pass.cxx)
 
     if (CYGWIN)
         target_link_libraries(Graphics "$ENV{VULKAN_SDK}/Lib/vulkan-1.lib")

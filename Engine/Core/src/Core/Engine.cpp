@@ -18,7 +18,6 @@
 
 #include <Graphics/Pipeline/Environment.h>
 #include <Graphics/GUI/WidgetManager.h>
-#include <Graphics/Render/Render.h>
 #include <Graphics/Render/RenderScene.h>
 #include <Graphics/Render/DebugRenderer.h>
 #include <Graphics/Render/RenderContext.h>

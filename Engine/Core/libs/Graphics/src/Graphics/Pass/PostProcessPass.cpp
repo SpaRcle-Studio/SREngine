@@ -4,6 +4,7 @@
 
 #include <Graphics/Pass/PostProcessPass.h>
 #include <Graphics/Pass/FramebufferPass.h>
+#include <Graphics/Types/Texture.h>
 
 namespace SR_GRAPH_NS {
     SR_REGISTER_RENDER_PASS(PostProcessPass)

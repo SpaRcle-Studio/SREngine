@@ -7,7 +7,6 @@
 
 #include <Graphics/Types/Texture.h>
 #include <Graphics/Loaders/TextureLoader.h>
-#include <Graphics/Render/Render.h>
 #include <Graphics/Pipeline/Environment.h>
 #include <Graphics/Render/RenderContext.h>
 

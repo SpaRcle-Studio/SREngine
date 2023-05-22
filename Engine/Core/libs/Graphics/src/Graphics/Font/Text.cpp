@@ -7,6 +7,7 @@
 
 #include <Graphics/Font/Text.h>
 #include <Graphics/Font/TextBuilder.h>
+#include <Graphics/Types/Material.h>
 
 namespace SR_GTYPES_NS {
     SR_REGISTER_COMPONENT(Text);

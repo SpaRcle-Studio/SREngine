@@ -12,6 +12,8 @@
 #include <Graphics/Types/Texture.h>
 #include <Graphics/Types/RenderTexture.h>
 
+#include <Graphics/Pass/FramebufferPass.h>
+
 #include <Utils/Locale/Encoding.h>
 
 namespace SR_GRAPH_NS {

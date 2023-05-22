@@ -31,7 +31,6 @@
 #include <Graphics/GUI/Utils.h>
 #include <Graphics/Types/Texture.h>
 #include <Graphics/UI/Sprite2D.h>
-#include <Graphics/Render/Render.h>
 #include <Graphics/Types/Material.h>
 #include <Graphics/Types/Camera.h>
 #include <Graphics/UI/Anchor.h>

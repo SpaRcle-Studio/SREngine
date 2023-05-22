@@ -4,7 +4,6 @@
 
 #include <Utils/World/Region.h>
 
-#include <Graphics/Render/Render.h>
 #include <Graphics/Types/Geometry/DebugWireframeMesh.h>
 #include <Graphics/Render/RenderScene.h>
 

@@ -6,6 +6,7 @@
 #define SRENGINE_ASSIMPCACHE_H
 
 #include <Utils/Debug.h>
+#include <Utils/Types/Marshal.h>
 
 namespace Assimp {
     class Importer;
