@@ -17,6 +17,7 @@ namespace Framework::Core::GUI {
 
             ResourcesPage();
             ThreadsPage();
+            WidgetsPage();
 
             ImGui::EndTabBar();
         }
@@ -86,10 +87,37 @@ namespace Framework::Core::GUI {
 
     void EngineStatistics::ThreadsPage() {
         if (ImGui::BeginTabItem("Threads")) {
-            ImGui::Text("Thread 1");
-            ImGui::Text("Thread 2");
-            ImGui::Text("Thread 3");
-            ImGui::Text("Thread 4");
+            ImGui::EndTabItem();
+        }
+    }
+
+    void EngineStatistics::WidgetsPage() {
+        if (ImGui::BeginTabItem("Widgets")) {
+            if (ImGui::BeginTable("##WidgetsTable", 4))
+            {
+                for (auto&& [name, pWidget] : GetManager()->GetWidgets()) {
+                    ImGui::TableNextRow();
+
+                    ImGui::TableSetColumnIndex(0);
+                    ImGui::Text("%s", name.c_str());
+                    ImGui::Separator();
+
+                    ImGui::TableSetColumnIndex(1);
+                    ImGui::Text("%s", pWidget->IsOpen() ? "Opened" : "Closed");
+                    ImGui::Separator();
+
+                    ImGui::TableSetColumnIndex(2);
+                    ImGui::Text("%s", pWidget->IsFocused() ? "Focused" : "Unfocused");
+                    ImGui::Separator();
+
+                    ImGui::TableSetColumnIndex(3);
+                    ImGui::Text("%s", pWidget->IsHovered() ? "Hovered" : "Not hovered");
+                    ImGui::Separator();
+                }
+
+                ImGui::EndTable();
+            }
+
             ImGui::EndTabItem();
         }
     }

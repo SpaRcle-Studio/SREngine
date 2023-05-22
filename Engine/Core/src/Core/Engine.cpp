@@ -236,7 +236,7 @@ namespace SR_CORE_NS {
                 if (maxErrStep == syncStep) {
                     SR_ERROR("Engine::SynchronizeFreeResources() : [FATAL] resources can not be released!");
                     SR_UTILS_NS::ResourceManager::Instance().PrintMemoryDump();
-                    SR_UTILS_NS::Debug::Instance().Terminate();
+                    SR_PLATFORM_NS::Terminate();
                     break;
                 }
 
@@ -545,7 +545,7 @@ namespace SR_CORE_NS {
             m_renderContext.Unlock();
         }
 
-        if (m_renderScene.RecursiveLockIfValid()) {
+        if (m_window->IsVisible() && m_renderScene.RecursiveLockIfValid()) {
             if (auto&& pWin = GetWindow()->GetImplementation<SR_GRAPH_NS::BasicWindowImpl>()) {
                 const bool isOverlay = m_renderScene->IsOverlayEnabled();
                 const bool isMaximized = pWin->IsMaximized();
@@ -752,6 +752,13 @@ namespace SR_CORE_NS {
 
     void Engine::SetGameMode(bool enabled) {
         m_isGameMode = enabled;
+
+        if (m_isGameMode) {
+            m_editor->HideAll();
+        }
+        else {
+            m_editor->ShowAll();
+        }
 
         m_renderScene.Do([this](SR_GRAPH_NS::RenderScene *ptr) {
             ptr->SetOverlayEnabled(!m_isGameMode);

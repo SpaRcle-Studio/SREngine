@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<Technique Name="Editor">
+    <FramebufferPass Name="MainSceneFBO">
+        <FramebufferSettings DynamicResizing="true" DepthEnabled="true" SmoothSamples="0">
+            <Size X="0" Y="0"/>
+            <PreScale X="1.0" Y="1.0"/>
+            <Depth Format="Auto" ClearValue="1.0"/>
+            <Layer Format="RGBA8_UNORM" R="0.0" G="0.0" B="0.0" A="1.0"/>
+        </FramebufferSettings>
+        <Passes>
+            <OpaquePass/>
+            <SkyboxPass Path="Engine/Skyboxes/Sun.png" Shader="Engine/Shaders/skybox.srsl"/>
+            <TransparentPass/>
+            <DebugPass/>
+        </Passes>
+    </FramebufferPass>
+    <FramebufferPass Name="SceneViewFBO">
+        <FramebufferSettings DynamicResizing="true" DepthEnabled="true" SmoothSamples="0">
+            <Size X="0" Y="0"/>
+            <PreScale X="1.0" Y="1.0"/>
+            <Depth Format="Auto" ClearValue="1.0"/>
+            <Layer Format="RGBA8_UNORM" R="0.0" G="0.0" B="0.0" A="1.0"/>
+        </FramebufferSettings>
+        <Passes>
+            <PostProcessPass Shader="Engine/Shaders/vignette.srsl">
+                <Attachments>
+                    <Attachment FBO="MainSceneFBO" Id="image" Index="0"/>
+                </Attachments>
+            </PostProcessPass>
+        </Passes>
+    </FramebufferPass>
+</Technique>

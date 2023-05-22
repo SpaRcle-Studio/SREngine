@@ -91,8 +91,9 @@ namespace SR_GRAPH_NS {
         void SortCameras();
         void RenderBlackScreen();
 
+        void PrepareFrame();
         void Overlay();
-        void Prepare();
+        void PrepareRender();
         void Build();
         void Update() noexcept;
         void Submit() noexcept;

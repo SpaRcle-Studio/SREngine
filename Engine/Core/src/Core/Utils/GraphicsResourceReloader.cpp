@@ -16,6 +16,8 @@ namespace SR_CORE_NS {
             return true;
         }
 
+        SR_LOG("GraphicsResourceReloader::Reload() : reload resource \"" + path.ToStringRef() + "\"");
+
         if (!pResource->Reload()) {
             return false;
         }

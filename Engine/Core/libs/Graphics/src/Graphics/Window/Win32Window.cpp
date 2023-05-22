@@ -37,25 +37,6 @@ namespace SR_GRAPH_NS::WinAPI {
     }
 }
 
-LRESULT CALLBACK ChildWndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
-{
-    switch (message)
-    {
-        case WM_SIZE:
-            // Handle child window resize event
-            break;
-        case WM_CLOSE:
-            // Handle child window close event
-            break;
-        case WM_DESTROY:
-            // Handle child window destroy event
-            break;
-        default:
-            return DefWindowProc(hWnd, message, wParam, lParam);
-    }
-    return 0;
-}
-
 namespace SR_GRAPH_NS {
     LRESULT Win32Window::ReadWmdProcedure(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)  {
         switch (msg) {
@@ -111,9 +92,16 @@ namespace SR_GRAPH_NS {
 
                 return DefWindowProc(hwnd, msg, wParam, lParam);
             }
+            case WM_CHANGEUISTATE: {
+                return DefWindowProc(hwnd, msg, wParam, lParam);
+            }
+            case WM_WINDOWPOSCHANGING: {
+                return DefWindowProc(hwnd, msg, wParam, lParam);
+            }
             case WM_WINDOWPOSCHANGED: {
-                DWORD styles = GetWindowLongPtr(hwnd,GWL_STYLE);
+                DWORD styles = GetWindowLongPtr(hwnd, GWL_STYLE);
                 m_maximize = styles & WS_MAXIMIZE;
+                m_collapsed = styles & WS_MINIMIZE;
 
                 return DefWindowProc(hwnd, msg, wParam, lParam);
             }
@@ -193,9 +181,6 @@ namespace SR_GRAPH_NS {
             case WM_DESTROY: {
                 PostQuitMessage(0);
                 m_isValid = false;
-                return DefWindowProc(hwnd, msg, wParam, lParam);
-            }
-            case WM_PAINT: {
                 return DefWindowProc(hwnd, msg, wParam, lParam);
             }
             default:
@@ -321,36 +306,8 @@ namespace SR_GRAPH_NS {
                 return true;
             }
         }
-
         if (auto&& pWindow = reinterpret_cast<Win32Window*>(GetWindowLongPtr(hWnd, GWLP_USERDATA))) {
             return pWindow->ReadWmdProcedure(hWnd, message, wParam, lParam);
-        }
-
-        switch (message)
-        {
-            case WM_SIZE:
-                // Handle main window resize event
-                break;
-            case WM_CLOSE:
-                // Handle main window close event
-                break;
-            case WM_DESTROY:
-                // Handle main window destroy event
-                PostQuitMessage(0);
-                break;
-            case WM_CREATE:
-            {
-                HWND childWnd = (HWND)lParam;
-                // Set up event handlers for the new window
-                if (auto&& pWindow = reinterpret_cast<Win32Window*>(GetWindowLongPtr(hWnd, GWLP_USERDATA))) {
-                    if (pWindow->GetHWND() != hWnd) {
-                        SetWindowLongPtr(childWnd, GWLP_WNDPROC, (LONG_PTR)ChildWndProc);
-                    }
-                }
-                break;
-            }
-            default:
-                return DefWindowProc(hWnd, message, wParam, lParam);
         }
 
         /*if (auto&& pWindow = reinterpret_cast<Win32Window*>(GetWindowLongPtr(hWnd, GWLP_USERDATA))) {
@@ -450,13 +407,6 @@ namespace SR_GRAPH_NS {
         m_isValid = true;
         m_hDC = GetDC(m_hWnd);
 
-        auto targetProcessId = 0ul;
-        auto targetProcessThreadId = GetWindowThreadProcessId(m_hWnd, &targetProcessId);
-
-        /*if (auto&& pHook = SetWindowsHookExA(WH_SHELL, ShellProc, (HINSTANCE)SR_PLATFORM_NS::GetInstance() , targetProcessThreadId)) {
-
-        }*/
-
         return true;
     }
 
@@ -466,6 +416,18 @@ namespace SR_GRAPH_NS {
 
     void Win32Window::PollEvents() const {
         MSG msg = {};
+
+        if (ImGui::GetCurrentContext()) {
+            for (auto&& viewport : ImGui::GetPlatformIO().Viewports) {
+                while (::PeekMessage(&msg, (HWND)viewport->PlatformHandle, 0, 0, PM_NOREMOVE)) {
+                    if (!::GetMessage(&msg, (HWND)viewport->PlatformHandle, 0, 0))
+                        break;
+                    ::TranslateMessage(&msg);
+                    ::DispatchMessage(&msg);
+                }
+            }
+        }
+
         while (::PeekMessage(&msg, m_hWnd, 0, 0, PM_NOREMOVE)) {
             if (!::GetMessage(&msg, m_hWnd, 0, 0))
                 break;
@@ -510,5 +472,9 @@ namespace SR_GRAPH_NS {
         POINT pt = { static_cast<int32>(pos.x), static_cast<int32_t>(pos.y) };
         ::ClientToScreen(m_hWnd, &pt);
         return SR_MATH_NS::IVector2(pt.x, pt.y);
+    }
+
+    bool Win32Window::IsVisible() const {
+        return ::IsWindowVisible(m_hWnd);
     }
 }

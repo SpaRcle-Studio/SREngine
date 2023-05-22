@@ -89,7 +89,7 @@ namespace SR_CORE_NS::GUI {
         SR_TRACY_ZONE;
         SR_LOCK_GUARD
 
-        if (m_hasErrors)
+        if (m_hasErrors || !m_enabled)
             return;
 
         if (!m_isInit) {
@@ -310,12 +310,6 @@ namespace SR_CORE_NS::GUI {
     }
 
     void EditorGUI::ResetToDefault() {
-        if (!m_cachedScenePath.Valid() && !m_cachedScenePath.Exists()) {
-            /// SR_ERROR("EditorGUI::LoadSceneFromCachedPath : cached file of scene path wasn't found!");
-            /// это не ошибка, движок был запущен в первый раз
-            return;
-        }
-
         const auto&& defaultConfigPath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Editor/Configs/ImGuiEditor.config");
         const auto&& defaultWidgetsPath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Editor/Configs/EditorWidgets.xml");
 
@@ -323,6 +317,7 @@ namespace SR_CORE_NS::GUI {
         SR_UTILS_NS::Platform::Copy(SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Editor/Configs/EditorWidgets.xml"), defaultWidgetsPath);
 
         ReloadWindows();
+        ShowAll();
 
         ImGuiContext& g = *GImGui;
         if (g.IO.IniFilename)

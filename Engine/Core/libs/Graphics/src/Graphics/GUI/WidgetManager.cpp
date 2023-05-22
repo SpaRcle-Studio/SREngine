@@ -150,4 +150,28 @@ namespace SR_GRAPH_NS::GUI {
             pWidget->SetScene(scene);
         }
     }
+
+    void WidgetManager::HideAll() {
+        for (auto&& widget : ViewportsTableManager::Instance().GetViewportsTable()) {
+            ShowWindow((HWND)widget.first->PlatformHandle, SW_HIDE);
+        }
+    }
+
+    void WidgetManager::ShowAll() {
+        for (auto&& widget : ViewportsTableManager::Instance().GetViewportsTable()) {
+            ShowWindow((HWND)widget.first->PlatformHandle, SW_SHOW);
+        }
+    }
+
+    Widget* ViewportsTableManager::GetWidgetByViewport(ImGuiViewport *viewport) const {
+        if (m_viewports.count(viewport) == 0) {
+            return nullptr;
+        }
+
+        return m_viewports.at(viewport);
+    }
+
+    void ViewportsTableManager::RegisterWidget(Widget* widget, ImGuiViewport* viewport) {
+        m_viewports[viewport] = widget;
+    }
 }

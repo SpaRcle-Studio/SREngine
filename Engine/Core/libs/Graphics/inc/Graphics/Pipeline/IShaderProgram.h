@@ -19,6 +19,13 @@ namespace SR_GTYPES_NS {
 }
 
 namespace SR_GRAPH_NS {
+    SR_ENUM_NS_CLASS_T(ShaderBindResult, uint8_t,
+        Failed = 0,  /// false
+        Success = 1, /// true
+        Duplicated,
+        ReAllocated
+    );
+
     static constexpr uint64_t SHADER_LINE_START_POINT = SR_COMPILE_TIME_CRC32_STR("LINE_START_POINT");
     static constexpr uint64_t SHADER_LINE_END_POINT = SR_COMPILE_TIME_CRC32_STR("LINE_END_POINT");
     static constexpr uint64_t SHADER_LINE_COLOR = SR_COMPILE_TIME_CRC32_STR("LINE_COLOR");

@@ -13,8 +13,10 @@
 
 namespace SR_GRAPH_NS::VulkanTypes {
     class VkImGUI : public EvoVulkan::Types::IVkObject {
+        using PipelinePtr = Environment*;
+        using Super = EvoVulkan::Types::IVkObject;
     public:
-        VkImGUI() = default;
+        VkImGUI(const PipelinePtr& pPipeline);
         ~VkImGUI() override;
 
     private:
@@ -33,31 +35,42 @@ namespace SR_GRAPH_NS::VulkanTypes {
         };
     public:
         bool ReSize(uint32_t width, uint32_t height);
-        VkCommandBuffer Render(uint32_t frame);
+        void SetSurfaceDirty();
 
-        void SetEnabled(bool /* enabled */) {
-            m_surfaceDirty = true;
-        }
-
+        SR_NODISCARD VkCommandBuffer Render(uint32_t frame);
         SR_NODISCARD bool IsSurfaceDirty() const { return m_surfaceDirty; }
+        SR_NODISCARD bool IsUndockingActive() const;
+        SR_NODISCARD SR_INLINE VkSemaphore GetSemaphore() const noexcept { return m_semaphore; }
+        SR_NODISCARD SR_INLINE const VkSemaphore* GetSemaphoreRef() const noexcept { return &m_semaphore; }
+        SR_NODISCARD VkSubmitInfo GetSubmitInfo(uint32_t countSemaphores, const VkSemaphore* waitSemaphores) const;
 
     public:
-        bool Init(EvoVulkan::Core::VulkanKernel* kernel);
+        bool Init();
+        bool ReInit();
 
     private:
-        VkCommandBufferBeginInfo             m_cmdBuffBI = {};
-        VkRenderPassBeginInfo                m_renderPassBI = {};
-        std::vector<VkClearValue>            m_clearValues = {};
+        bool InitializeRenderer();
+        void DeInitializeRenderer();
+        void DestroyBuffers();
 
-        std::vector<VkFramebuffer>           m_frameBuffs = {};
-        std::vector<VkCommandPool>           m_cmdPools = {};
-        std::vector<VkCommandBuffer>         m_cmdBuffs = {};
+    private:
+        PipelinePtr m_pipeline = nullptr;
+
+        VkSemaphore m_semaphore = VK_NULL_HANDLE;
 
         bool m_surfaceDirty = true;
 
-        EvoVulkan::Types::DescriptorPool* m_pool = nullptr;
-        EvoVulkan::Types::RenderPass         m_renderPass = {};
+        VkCommandBufferBeginInfo m_cmdBuffBI;
+        VkRenderPassBeginInfo m_renderPassBI;
+        std::vector<VkClearValue> m_clearValues;
 
+        std::vector<VkFramebuffer> m_frameBuffs;
+        std::vector<VkCommandPool> m_cmdPools;
+        std::vector<VkCommandBuffer> m_cmdBuffs;
+
+        EvoVulkan::Types::RenderPass m_renderPass;
+
+        EvoVulkan::Types::DescriptorPool* m_pool = nullptr;
         EvoVulkan::Types::Device* m_device = nullptr;
         EvoVulkan::Types::Swapchain* m_swapchain = nullptr;
 

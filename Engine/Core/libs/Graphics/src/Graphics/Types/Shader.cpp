@@ -19,6 +19,7 @@
 namespace SR_GRAPH_NS::Types {
     Shader::Shader()
         : IResource(SR_COMPILE_TIME_CRC32_TYPE_NAME(Shader), true /** auto remove */)
+        , m_manager(Memory::ShaderProgramManager::Instance())
     { }
 
     Shader::~Shader() {
@@ -74,29 +75,32 @@ namespace SR_GRAPH_NS::Types {
         return true;
     }
 
-    bool Shader::Use() noexcept {
+    ShaderBindResult Shader::Use() noexcept {
         SR_TRACY_ZONE;
 
         if (m_hasErrors) {
-            return false;
+            return ShaderBindResult::Failed;
         }
 
         if (!m_isCalculated && !Init()) {
             SR_ERROR("Shader::Use() : failed to initialize shader!");
-            return false;
+            return ShaderBindResult::Failed;
         }
 
         SRAssert(GetRenderContext());
 
-        switch (Memory::ShaderProgramManager::Instance().BindProgram(m_shaderProgram)) {
-            case Memory::ShaderProgramManager::BindResult::Success:
-            case Memory::ShaderProgramManager::BindResult::Duplicated:
+        auto&& bindResult = Memory::ShaderProgramManager::Instance().BindProgram(m_shaderProgram);
+        switch (bindResult) {
+            case ShaderBindResult::Success:
+            case ShaderBindResult::Duplicated:
+            case ShaderBindResult::ReAllocated:
                 GetRenderContext()->SetCurrentShader(this);
-                return true;
-            case Memory::ShaderProgramManager::BindResult::Failed:
+                SR_FALLTHROUGH;
             default:
-                return false;
+                break;
         }
+
+        return bindResult;
     }
 
     void Shader::UnUse() noexcept {
@@ -383,5 +387,9 @@ namespace SR_GRAPH_NS::Types {
         m_isRegistered = false;
         m_hasErrors = false;
         IResource::ReviveResource();
+    }
+
+    bool Shader::IsAvailable() const {
+        return m_manager.IsAvailable(m_shaderProgram);
     }
 }
