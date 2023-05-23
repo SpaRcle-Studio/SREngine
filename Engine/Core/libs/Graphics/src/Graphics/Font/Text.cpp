@@ -70,7 +70,7 @@ namespace SR_GTYPES_NS {
                 UseSamplers();
                 SR_FALLTHROUGH;
             case Memory::UBOManager::BindResult::Success:
-                m_pipeline->DrawIndices(6);
+                m_pipeline->Draw(6);
                 break;
             case Memory::UBOManager::BindResult::Failed:
             default:

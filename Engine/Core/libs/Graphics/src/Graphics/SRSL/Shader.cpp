@@ -155,9 +155,10 @@ namespace SR_SRSL_NS {
             case ShaderType::Skybox:
             case ShaderType::Simple:
             case ShaderType::Line:
+                return Vertices::VertexType::SimpleVertex;
             case ShaderType::Text:
             case ShaderType::TextUI:
-                return Vertices::VertexType::SimpleVertex;
+                return Vertices::VertexType::None;
             case ShaderType::Custom:
             case ShaderType::Particles:
             case ShaderType::Compute:
