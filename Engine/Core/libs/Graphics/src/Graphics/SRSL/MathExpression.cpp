@@ -14,7 +14,8 @@ namespace SR_SRSL_NS {
             return std::make_pair(nullptr, SRSLResult(SRSLReturnCode::EmptyExpression));
         }
 
-        return std::make_pair(ParseBinaryExpression(0), std::move(m_result));
+        auto&& pExpr = ParseBinaryExpression(0);
+        return std::make_pair(pExpr, std::move(m_result));
     }
 
     SRSLExpr* SRSLMathExpression::ParseBinaryExpression(int32_t minPriority) {
@@ -182,6 +183,36 @@ namespace SR_SRSL_NS {
             return pExpr;
         }
 
+        /// parse list { ... }
+        if (token.size() == 1 && token == "{") {
+            auto&& pListExpr = new SRSLExpr(std::move(token));
+
+        labelNextArrayElem:
+            token = ParseToken();
+
+            if (token.empty()) {
+                m_result = SRSLResult(SRSLReturnCode::InvalidListEnd);
+                SR_SAFE_DELETE_PTR(pListExpr);
+                return nullptr;
+            }
+
+            if (token == ",") {
+                goto labelNextArrayElem;
+            }
+
+            if (token == "}") {
+                return pListExpr;
+            }
+
+            --m_currentLexem;
+
+            if (auto&& pListElemExpr = ParseBinaryExpression(0)) {
+                pListExpr->args.emplace_back(pListElemExpr);
+            }
+
+            goto labelNextArrayElem;
+        }
+
         if (!InBounds()) {
             return new SRSLExpr(std::move(token));
         }
@@ -322,6 +353,8 @@ namespace SR_SRSL_NS {
             case LexemKind::ClosingBracket:
             case LexemKind::OpeningSquareBracket:
             case LexemKind::ClosingSquareBracket:
+            case LexemKind::ClosingCurlyBracket:
+            case LexemKind::OpeningCurlyBracket:
             case LexemKind::Identifier:
             case LexemKind::Tilda:
             case LexemKind::Comma:

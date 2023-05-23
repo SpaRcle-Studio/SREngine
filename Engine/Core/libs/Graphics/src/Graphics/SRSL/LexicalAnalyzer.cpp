@@ -14,6 +14,10 @@ namespace SR_SRSL_NS {
 
         ProcessMain();
 
+        if (IsHasErrors()) {
+            return std::make_pair(nullptr, SR_UTILS_NS::Exchange(m_result, { }));
+        }
+
         if (m_lexicalTree.size() != 1) {
             return std::make_pair(nullptr, SR_SRSL_NS::SRSLResult(SRSLReturnCode::InvalidLexicalTree));
         }
@@ -322,6 +326,12 @@ namespace SR_SRSL_NS {
         switch (lexemKind)
         {
             case LexemKind::OpeningCurlyBracket:
+                if (auto&& pPrev = GetLexem(-1); pPrev->kind == LexemKind::Assign) {
+                    exprLexems.emplace_back(m_lexems[m_currentLexem]);
+                    ++m_currentLexem;
+                    ++deep;
+                    goto retry;
+                }
                 break;
             case LexemKind::OpeningBracket:
                 if (isFunctionName && deep == 0) {
@@ -368,6 +378,7 @@ namespace SR_SRSL_NS {
 
                 break;
             }
+            case LexemKind::ClosingCurlyBracket:
             case LexemKind::ClosingBracket:
             case LexemKind::ClosingSquareBracket:
                 allowIdentifier = false;
@@ -570,6 +581,11 @@ namespace SR_SRSL_NS {
                 ProcessExpression();
 
                 pVariable->pExpr = SR_UTILS_NS::Exchange(m_expr, nullptr);
+
+                if (IsHasErrors()) {
+                    SR_SAFE_DELETE_PTR(pVariable);
+                    return nullptr;
+                }
 
                 return std::move(pVariable);
             }
