@@ -218,6 +218,10 @@ namespace SR_HTYPES_NS {
     template<typename T> void SafePtr<T>::Lock() const {
         SR_TRACY_ZONE;
 
+        if (!m_data) {
+            return;
+        }
+
         const std::thread::id this_id = std::this_thread::get_id();
 
         if(m_data->m_owner.load() == this_id) {
@@ -234,6 +238,10 @@ namespace SR_HTYPES_NS {
     }
 
     template<typename T> void SafePtr<T>::Unlock() const {
+        if (!m_data) {
+            return;
+        }
+
         if(m_data->m_lockCount > 1) {
             /// recursive unlocking
             --(m_data->m_lockCount);
@@ -255,7 +263,7 @@ namespace SR_HTYPES_NS {
 
         Lock();
 
-        if (m_data->m_valid)
+        if (m_data && m_data->m_valid)
             return true;
 
         Unlock();

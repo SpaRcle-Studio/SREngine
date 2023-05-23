@@ -179,17 +179,19 @@ namespace SR_GRAPH_NS::Memory {
 
         Descriptor descriptor = SR_ID_INVALID;
         UBO ubo = SR_ID_INVALID;
+        bool isFound = false;
 
         for (auto&& data : info.m_data) {
             if (data.pIdentifier == (m_ignoreIdentifier ? nullptr : m_identifier) && data.shaderInfo.pShader == pShader) {
                 descriptor = data.descriptor;
                 ubo = data.ubo;
+                isFound = true;
                 break;
             }
         }
 
         /// если не нашли камеру, то дублируем память под новую камеру
-        if (descriptor == SR_ID_INVALID && ubo == SR_ID_INVALID)
+        if (!isFound)
         {
             VirtualUBOInfo::ShaderInfo shaderInfo;
             shaderInfo.pShader = pShader;
@@ -287,5 +289,9 @@ namespace SR_GRAPH_NS::Memory {
         if (*descriptor != SR_ID_INVALID && !m_pipeline->FreeDescriptorSet(descriptor)) {
             SR_ERROR("UBOManager::FreeMemory() : failed to free descriptor!");
         }
+    }
+
+    void VirtualUBOInfo::Data::Validate() {
+        SRAssert(ubo != SR_ID_INVALID || descriptor != SR_ID_INVALID || (shaderInfo.uboSize == 0 && shaderInfo.samples == 0));
     }
 }

@@ -54,7 +54,7 @@ namespace SR_GTYPES_NS {
             return;
         }
 
-        if ((!m_isCalculated && !Calculate()) || m_hasErrors) {
+        if ((!IsCalculated() && !Calculate()) || m_hasErrors) {
             return;
         }
 

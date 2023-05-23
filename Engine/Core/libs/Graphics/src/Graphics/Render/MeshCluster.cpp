@@ -113,6 +113,11 @@ namespace SR_GRAPH_NS {
                                 delete pData;
                             });
                         }
+                        else if (auto&& pTextComponent = dynamic_cast<SR_GTYPES_NS::Text*>(pMesh)) {
+                            pTextComponent->AutoFree([](auto&& pData) {
+                                delete pData;
+                            });
+                        }
                         else {
                             delete pMesh;
                         }

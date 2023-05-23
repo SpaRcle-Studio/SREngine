@@ -183,7 +183,12 @@ namespace SR_GTYPES_NS {
 
     Mesh::RenderScenePtr Text::GetRenderScene() {
         if (!m_renderScene.Valid()) {
-            m_renderScene = TryGetScene()->Do<RenderScenePtr>([](SR_WORLD_NS::Scene* ptr) {
+            auto&& pScene = TryGetScene();
+            if (!pScene) {
+                return m_renderScene;
+            }
+
+            m_renderScene = pScene->Do<RenderScenePtr>([](SR_WORLD_NS::Scene* ptr) {
                 return ptr->GetDataStorage().GetValue<RenderScenePtr>();
             }, RenderScenePtr());
         }
@@ -218,7 +223,19 @@ namespace SR_GTYPES_NS {
 
         Component::OnDestroy();
 
-        renderScene->SetDirty();
+        /// если ресурс уничтожится сразу, то обрабатывать это нужно в контексте SharedPtr
+        if (!IsGraphicsResourceRegistered()) {
+            GetThis().DynamicCast<Mesh>().AutoFree([](auto&& pData) {
+                pData->MarkMeshDestroyed();
+            });
+        }
+        else {
+            MarkMeshDestroyed();
+        }
+
+        if (renderScene) {
+            renderScene->SetDirty();
+        }
     }
 
     SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Text::Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SR_UTILS_NS::SavableFlags flags) const {
