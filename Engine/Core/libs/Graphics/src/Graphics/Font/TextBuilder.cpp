@@ -3,6 +3,7 @@
 //
 
 #include <Graphics/Font/TextBuilder.h>
+#include <Graphics/Font/Font.h>
 
 namespace SR_GRAPH_NS {
     TextBuilder::TextBuilder(TextBuilder::FontPtr pFont)
@@ -41,18 +42,18 @@ namespace SR_GRAPH_NS {
             }
         }
 
-        if (!ParseGlyph(text)) {
+        if (!ParseGlyphs(text)) {
             return false;
         }
 
         auto&& size = GetSize();
 
         m_textureData = new uint8_t[size];
-        memset(m_textureData, 255, size);
+        memset(m_textureData, m_debug * 127, size);
 
         for (auto&& pGlyph : m_glyphs) {
             auto&& pGlyphImage = GlyphImage::Create(pGlyph);
-            pGlyphImage->InsertTo(m_textureData, m_top, m_imageWidth, m_imageHeight);
+            pGlyphImage->InsertTo(m_textureData, m_top, m_imageWidth, m_debug);
         }
 
         return true;
@@ -80,7 +81,7 @@ namespace SR_GRAPH_NS {
 
     }
 
-    bool TextBuilder::ParseGlyph(const StringType& text) {
+    bool TextBuilder::ParseGlyphs(const StringType& text) {
         std::optional<uint32_t> prevCode;
 
         /// Позиция текущего символа в формате 26.6
@@ -89,10 +90,20 @@ namespace SR_GRAPH_NS {
         int32_t bottom = 0;
         int32_t left = 0;
 
+        uint32_t rowOffset = 0;
+
         for (auto&& code : text) {
             if (code == ' ') {
                 posX += m_space << 6;
                 prevCode = std::nullopt;
+                continue;
+            }
+
+            if (code == '\n') {
+                posX = 0;
+                prevCode = std::nullopt;
+                /// TODO: пока перенос строки сделан костыльно, нужно учитывать высоту предыдущей строки
+                rowOffset += m_valign;
                 continue;
             }
 
@@ -114,12 +125,16 @@ namespace SR_GRAPH_NS {
             posX += m_align << 6;
             posX += pGlyph->GetMetrics().advanceX >> 10;
 
+            pGlyph->GetMetrics().posY += rowOffset;
+
             /// Вычисляем самую верхнюю позицию
             m_top = SR_MIN(m_top, pGlyph->GetMetrics().posY);
             /// Вычисляем самую левую позицию
             left = SR_MIN(left, pGlyph->GetMetrics().posX);
             /// Вычисляем самую нижнюю позицию
             bottom = SR_MAX(bottom, pGlyph->GetMetrics().posY + pGlyph->GetMetrics().height);
+
+            m_imageWidth = SR_MAX(m_imageWidth, pGlyph->GetPosX() + pGlyph->GetWidth());
 
             m_glyphs.emplace_back(pGlyph);
         }
@@ -132,7 +147,6 @@ namespace SR_GRAPH_NS {
             return false;
         }
 
-        m_imageWidth = m_glyphs.back()->GetPosX() + m_glyphs.back()->GetWidth();
         m_imageHeight = bottom - m_top;
 
         return m_imageHeight * m_imageWidth > 0;
@@ -162,5 +176,9 @@ namespace SR_GRAPH_NS {
 
     ColorFormat TextBuilder::GetColorFormat() const noexcept {
         return ColorFormat::RGBA8_UNORM;
+    }
+
+    void TextBuilder::SetDebug(bool enabled) {
+        m_debug = enabled;
     }
 }

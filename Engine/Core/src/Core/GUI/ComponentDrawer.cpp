@@ -554,6 +554,11 @@ namespace SR_CORE_NS::GUI {
             pComponent->SetKerning(kerning);
         }
 
+        bool debug = pComponent->IsDebugEnabled();
+        if (ImGui::Checkbox(SR_FORMAT_C("Debug##textD%i", index), &debug)) {
+            pComponent->SetDebug(debug);
+        }
+
         auto&& text = SR_UTILS_NS::Locale::UtfToUtf<char, char32_t>(pComponent->GetText());
 
         if (ImGui::InputTextMultiline(SR_FORMAT_C("##textBox%i", index), &text, ImVec2(ImGui::GetWindowWidth() - 10, 100))) {

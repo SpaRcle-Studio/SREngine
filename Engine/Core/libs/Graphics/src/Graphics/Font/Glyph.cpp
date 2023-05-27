@@ -112,14 +112,16 @@ namespace SR_GRAPH_NS {
         return true;
     }
 
-    void GlyphImage::InsertTo(uint8_t* pTarget, int32_t top, uint32_t sizeX, uint32_t sizeY) {
+    void GlyphImage::InsertTo(uint8_t* pTarget, int32_t top, uint32_t sizeX, bool debug) {
         const uint32_t posX = m_glyph->GetPosX();
-        const uint32_t posY = m_glyph->GetPosY(); ///(sizeY - m_glyph->GetPosY()) - m_glyph->GetHeight();
+        const uint32_t posY = m_glyph->GetPosY();
         const uint32_t pixelSize = m_glyph->GetPixelSize();
+        const uint32_t width = m_glyph->GetWidth();
+        const uint32_t height = m_glyph->GetHeight();
 
-        for (uint32_t x = 0; x < m_glyph->GetWidth(); ++x) {
-            for (uint32_t y = 0; y < m_glyph->GetHeight(); ++y) {
-                const uint32_t src = x * pixelSize + y * m_glyph->GetWidth() * pixelSize;
+        for (uint32_t x = 0; x < width; ++x) {
+            for (uint32_t y = 0; y < height; ++y) {
+                const uint32_t src = x * pixelSize + y * width * pixelSize;
 
                 if (m_data[src + (pixelSize - 1)] == 0) {
                     continue;
@@ -130,9 +132,27 @@ namespace SR_GRAPH_NS {
 
                 const uint32_t dst = dstX * pixelSize + dstY * sizeX * pixelSize;
 
-                //const uint32_t dst = (x + posX) * pixelSize + (posY + y) * sizeX * pixelSize;
-
                 memcpy(pTarget + dst, m_data.get() + src, pixelSize);
+            }
+        }
+
+        if (debug) {
+            for (uint32_t x = 0; x < width; ++x) {
+                for (uint32_t y = 0; y < height; ++y) {
+                    if (x != 0 && y != 0 && x + 1 != width && y + 1 != height) {
+                        continue;
+                    }
+
+                    const int32_t dstY = posY + y - top;
+                    const int32_t dstX = posX + x;
+
+                    const uint32_t dst = dstX * pixelSize + dstY * sizeX * pixelSize;
+
+                    *(pTarget + dst + 0) = 255;
+                    *(pTarget + dst + 1) = 0;
+                    *(pTarget + dst + 2) = 0;
+                    *(pTarget + dst + 3) = 255;
+                }
             }
         }
     }

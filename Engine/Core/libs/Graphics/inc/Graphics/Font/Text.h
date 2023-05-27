@@ -44,6 +44,7 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD bool IsCanCalculate() const override;
         SR_NODISCARD SR_FORCE_INLINE bool IsCanUpdate() const noexcept override { return false; }
         SR_NODISCARD SR_FORCE_INLINE bool GetKerning() const noexcept { return m_kerning; }
+        SR_NODISCARD SR_FORCE_INLINE bool IsDebugEnabled() const noexcept { return m_debug; }
 
         SR_NODISCARD SR_FORCE_INLINE bool IsMeshActive() const noexcept override {
             return SR_UTILS_NS::Component::IsActive();
@@ -64,6 +65,7 @@ namespace SR_GTYPES_NS {
         void SetText(const std::u16string& text);
         void SetText(const std::u32string& text);
         void SetKerning(bool enabled);
+        void SetDebug(bool enabled);
 
         void Draw() override;
 
@@ -87,6 +89,7 @@ namespace SR_GTYPES_NS {
         uint32_t m_height = 0;
 
         bool m_kerning = true;
+        bool m_debug = false;
 
         SR_HTYPES_NS::UnicodeString m_text;
 

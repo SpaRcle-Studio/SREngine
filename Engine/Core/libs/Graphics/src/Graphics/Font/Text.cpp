@@ -25,10 +25,9 @@ namespace SR_GTYPES_NS {
         SetMaterial(Material::Load("Engine/Materials/text.mat"));
         SetFont(Font::Load("Engine/Fonts/TsunagiGothic.ttf"));
         //SetFont(Font::Load("Engine/Fonts/Metropolitan.ttf"));
-        //SetFont(Font::Load("Engine/Fonts/CheeseCake-KGYp.ttf"));
-        //SetFont(Font::Load("Engine/Fonts/seguiemj.ttf"));
-        //m_text = U"Heприветlloあにま😀 😬 😁 😂 😃 😄 😅 😆 😇 😉 😊 🙂 🙃 ☺️ \n😋 😌 👦🏻 👧🏻 👨🏻 👩🏻 👴🏻 👵🏻 👶🏻 👱🏻 👮🏻 👲🏻 👳🏻 👷🏻 👸🏻 💂🏻 🎅🏻 👼🏻 💆🏻 💇🏻\n🤣 🤠 🤡 🤥 🤤 🤢";
-        m_text = U"Hello.,_ World!";
+        SetFont(Font::Load("Engine/Fonts/seguiemj.ttf"));
+        m_text = U"Heприветlloあにま😀 😬 😁 😂 😃 😄 😅 😆 😇 😉 😊 🙂 🙃 ☺️ \n😋 😌 👦🏻 👧🏻 👨🏻 👩🏻 👴🏻 👵🏻 👶🏻 👱🏻 👮🏻 👲🏻 👳🏻 👷🏻 👸🏻 💂🏻 🎅🏻 👼🏻 💆🏻 💇🏻\n🤣 🤠 🤡 🤥 🤤 🤢";
+        //m_text = U"Hello.,_ World!";
         //m_text = U"Metropolitan";
         //m_text = U"_!";
         //m_text = U",";
@@ -129,7 +128,11 @@ namespace SR_GTYPES_NS {
 
         TextBuilder textBuilder(m_font);
         textBuilder.SetKerning(m_kerning);
-        textBuilder.Build(m_text);
+        textBuilder.SetDebug(m_debug);
+
+        if (!textBuilder.Build(m_text)) {
+            return false;
+        }
 
         m_width = textBuilder.GetWidth();
         m_height = textBuilder.GetHeight();
@@ -320,6 +323,14 @@ namespace SR_GTYPES_NS {
 
     void Text::SetKerning(bool enabled) {
         m_kerning = enabled;
+        m_isCalculated = false;
+        if (m_pipeline) {
+            m_pipeline->SetBuildState(false);
+        }
+    }
+
+    void Text::SetDebug(bool enabled) {
+        m_debug = enabled;
         m_isCalculated = false;
         if (m_pipeline) {
             m_pipeline->SetBuildState(false);

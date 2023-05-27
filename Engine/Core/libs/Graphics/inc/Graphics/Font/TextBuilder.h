@@ -18,9 +18,6 @@ namespace SR_GRAPH_NS {
         using Super = SR_UTILS_NS::NonCopyable;
         using FontPtr = SR_GTYPES_NS::Font*;
         using StringType = std::u32string;
-        struct Pixel {
-            uint8_t r, g, b, a;
-        };
     public:
         explicit TextBuilder(FontPtr pFont);
         ~TextBuilder() override;
@@ -36,11 +33,12 @@ namespace SR_GRAPH_NS {
 
         void SetFontSize(uint32_t size);
         void SetKerning(bool enabled);
+        void SetDebug(bool enabled);
 
     private:
         void Clear();
 
-        bool ParseGlyph(const StringType& text);
+        bool ParseGlyphs(const StringType& text);
 
         uint32_t PreProcess(const StringType& text, uint32_t iterator);
         void PreProcessImpl(const StringType& text, uint32_t begin, uint32_t end);
@@ -53,10 +51,11 @@ namespace SR_GRAPH_NS {
         std::vector<Glyph::Ptr> m_glyphs;
 
         bool m_kerning = false;
+        bool m_debug = false;
 
         uint32_t m_fontSize = 32;
         uint32_t m_align = 0;
-        uint32_t m_valign = -2;
+        uint32_t m_valign = 110;
         uint32_t m_space = 24;
 
         int32_t m_top = 0;
