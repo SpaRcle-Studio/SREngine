@@ -164,7 +164,7 @@ namespace SR_GTYPES_NS {
         m_orthogonal = SR_MATH_NS::Matrix4x4::Identity();
 
         m_orthogonal[0][0] = 1.f / m_aspect;
-        m_orthogonal[1][1] = 1.f;
+        m_orthogonal[1][1] = -1.f;
         m_orthogonal[2][2] = 1.f / (m_far - m_near);
         m_orthogonal[3][2] = m_near / (m_far - m_near);
 

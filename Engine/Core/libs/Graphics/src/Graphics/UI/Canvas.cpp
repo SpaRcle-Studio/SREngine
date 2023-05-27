@@ -33,7 +33,10 @@ namespace SR_GRAPH_NS::UI {
 
     void Canvas::OnDestroy() {
         Super::OnDestroy();
-        delete this;
+
+        GetThis().AutoFree([](auto&& pData) {
+            delete pData;
+        });
     }
 
     void Canvas::Update(float_t dt) {
