@@ -114,12 +114,15 @@ namespace SR_GRAPH_NS {
     bool TextBuilder::ParseGlyph(const StringType& text) {
         std::optional<uint32_t> prevCode;
 
+        /// Позиция текущего символа в формате 26.6
         int32_t posX = 0;
+
         int32_t bottom = 0;
+        int32_t left = 0;
 
         for (auto&& code : text) {
             if (code == ' ') {
-                posX += m_space;
+                posX += m_space << 6;
                 prevCode = std::nullopt;
                 continue;
             }
@@ -136,23 +139,24 @@ namespace SR_GRAPH_NS {
             }
             prevCode = code;
 
-            pGlyph->GetMetrics().posX = posX;
+            pGlyph->GetMetrics().posX = (posX >> 6) + pGlyph->GetMetrics().left;
             pGlyph->GetMetrics().posY = -pGlyph->GetMetrics().top;
 
-            ////// Вычисляем самую верхнюю позицию
+            posX += m_align << 6;
+            posX += pGlyph->GetMetrics().advanceX >> 10;
+
+            /// Вычисляем самую верхнюю позицию
             m_top = SR_MIN(m_top, pGlyph->GetMetrics().posY);
-
-            ///metrics.posX = posX + bitmap_glyph->left;
-            ///metrics.posY = -bitmap_glyph->top;
-            ///metrics.width = bitmap.width;
-            ///metrics.height = bitmap.rows;
-
-            ////// Вычисляем самую нижнюю позицию
+            /// Вычисляем самую левую позицию
+            left = SR_MIN(left, pGlyph->GetMetrics().posX);
+            /// Вычисляем самую нижнюю позицию
             bottom = SR_MAX(bottom, pGlyph->GetMetrics().posY + pGlyph->GetMetrics().height);
 
-            posX += m_align + pGlyph->GetWidth();
-
             m_glyphs.emplace_back(pGlyph);
+        }
+
+        for (auto&& pGlyph : m_glyphs) {
+            pGlyph->GetMetrics().posY -= left;
         }
 
         if (m_glyphs.empty()) {

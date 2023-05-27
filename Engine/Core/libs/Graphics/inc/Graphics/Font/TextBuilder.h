@@ -63,8 +63,6 @@ namespace SR_GRAPH_NS {
         uint32_t m_valign = -2;
         uint32_t m_space = 24;
 
-        uint32_t m_maxGlyphHeight = 0;
-
         int32_t m_top = 0;
 
         uint32_t m_imageHeight = 0;
