@@ -39,12 +39,8 @@ namespace SR_GRAPH_NS {
 
     private:
         void Clear();
-        bool Prepare(char32_t code);
 
         bool ParseGlyph(const StringType& text);
-
-        SR_NODISCARD Pixel** CreateImage(const StringType& text);
-        SR_NODISCARD Pixel** CreateImage();
 
         uint32_t PreProcess(const StringType& text, uint32_t iterator);
         void PreProcessImpl(const StringType& text, uint32_t begin, uint32_t end);
