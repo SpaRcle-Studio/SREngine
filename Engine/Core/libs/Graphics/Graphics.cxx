@@ -65,6 +65,8 @@
 #include "../Graphics/src/Graphics/Font/SDF.cpp"
 #include "../Graphics/src/Graphics/Font/Text.cpp"
 #include "../Graphics/src/Graphics/Font/TextBuilder.cpp"
+#include "../Graphics/src/Graphics/Font/Glyph.cpp"
+#include "../Graphics/src/Graphics/Font/FreeType.cpp"
 
 #include "../Graphics/src/Graphics/UI/Sprite2D.cpp"
 #include "../Graphics/src/Graphics/UI/Canvas.cpp"

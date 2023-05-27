@@ -16,6 +16,11 @@ namespace SR_MATH_NS {
                 T y;
             };
 
+            struct {
+                T top;
+                T bottom;
+            };
+
             T coord[2] = { 0 };
         };
 
@@ -70,6 +75,10 @@ namespace SR_MATH_NS {
 
         SR_NODISCARD Vector2 Abs() const {
             return Vector2(static_cast<T>(abs(x)), static_cast<T>(abs(y)));
+        }
+
+        SR_NODISCARD T Sum() const {
+            return x + y;
         }
 
         SR_NODISCARD Unit Aspect() const {

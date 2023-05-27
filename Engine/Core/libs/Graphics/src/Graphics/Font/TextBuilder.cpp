@@ -33,44 +33,58 @@ namespace SR_GRAPH_NS {
         m_font->SetPixelSizes(0, m_fontSize);
         m_font->SetCharSize(0, 16 * 64, 500, 500);
 
-        for (uint32_t i = 0; i < static_cast<uint32_t>(text.size()); ++i)
-        {
-            if (auto&& iterator = Parse(text, i); iterator != SR_ID_INVALID) {
+        /// препроцессор текста
+        for (uint32_t i = 0; i < static_cast<uint32_t>(text.size()); ++i) {
+            if (auto&& iterator = PreProcess(text, i); iterator != SR_ID_INVALID) {
                 text.erase(text.begin() + i, text.begin() + iterator);
                 continue;
             }
 
-            if (!Prepare(text[i])) {
-                SR_ERROR("TextBuilder::Build() : failed to prepare symbol!")
-                return false;
-            }
+            //if (!Prepare(text[i])) {
+            //    SR_ERROR("TextBuilder::Build() : failed to prepare symbol!")
+            //    return false;
+            //}
         }
 
-        auto&& pImage = CreateImage(text);
-
-        uint32_t size = m_imageWidth * m_imageHeight;
-
-        if (size == 0) {
-            SR_ERROR("TextBuilder::Build() : image size is zero!");
+        if (!ParseGlyph(text)) {
             return false;
         }
 
-        m_textureData = new uint8_t[size * 4];
-        memset(m_textureData, 255, size * 4 * sizeof(uint8_t));
+        auto&& size = GetSize();
 
-        for (uint32_t i = 0, y = 0; i < size; ++y) {
-            for (uint32_t x = 0; x < m_imageWidth; ++x, ++i) {
-                m_textureData[4 * i + 0] = pImage[y][x].r;
-                m_textureData[4 * i + 1] = pImage[y][x].g;
-                m_textureData[4 * i + 2] = pImage[y][x].b;
-                m_textureData[4 * i + 3] = pImage[y][x].a;
-            }
+        m_textureData = new uint8_t[size];
+        memset(m_textureData, 255, size);
+
+        for (auto&& pGlyph : m_glyphs) {
+            auto&& pGlyphImage = GlyphImage::Create(pGlyph);
+            pGlyphImage->InsertTo(m_textureData, m_top, m_imageWidth, m_imageHeight);
         }
 
-        for (uint32_t i = 0; i < m_imageHeight; ++i) {
-            delete pImage[i];
-        }
-        delete[] pImage;
+        /// auto&& pImage = CreateImage(text);
+///
+        /// uint32_t size = m_imageWidth * m_imageHeight;
+///
+        /// if (size == 0) {
+        ///     SR_ERROR("TextBuilder::Build() : image size is zero!");
+        ///     return false;
+        /// }
+///
+        /// m_textureData = new uint8_t[size * 4];
+        /// memset(m_textureData, 255, size * 4 * sizeof(uint8_t));
+///
+        /// for (uint32_t i = 0, y = 0; i < size; ++y) {
+        ///     for (uint32_t x = 0; x < m_imageWidth; ++x, ++i) {
+        ///         m_textureData[4 * i + 0] = pImage[y][x].r;
+        ///         m_textureData[4 * i + 1] = pImage[y][x].g;
+        ///         m_textureData[4 * i + 2] = pImage[y][x].b;
+        ///         m_textureData[4 * i + 3] = pImage[y][x].a;
+        ///     }
+        /// }
+///
+        /// for (uint32_t i = 0; i < m_imageHeight; ++i) {
+        ///     delete pImage[i];
+        /// }
+        /// delete[] pImage;
 
         return true;
     }
@@ -79,22 +93,76 @@ namespace SR_GRAPH_NS {
         m_fontSize = size;
     }
 
-    uint32_t TextBuilder::Parse(const TextBuilder::StringType& text, uint32_t iterator) {
+    uint32_t TextBuilder::PreProcess(const TextBuilder::StringType& text, uint32_t iterator) {
         if (!m_needParse) {
             return SR_ID_INVALID;
         }
 
         if (text[iterator] == '<') {
             const uint32_t pos = text.find('>', iterator);
-            ParseImpl(text, iterator, pos);
+            PreProcessImpl(text, iterator, pos);
             return pos;
         }
 
         return SR_ID_INVALID;
     }
 
-    void TextBuilder::ParseImpl(const TextBuilder::StringType &text, uint32_t begin, uint32_t end) {
+    void TextBuilder::PreProcessImpl(const TextBuilder::StringType &text, uint32_t begin, uint32_t end) {
 
+    }
+
+    bool TextBuilder::ParseGlyph(const StringType& text) {
+        std::optional<uint32_t> prevCode;
+
+        int32_t posX = 0;
+        int32_t bottom = 0;
+
+        for (auto&& code : text) {
+            if (code == ' ') {
+                posX += m_space;
+                prevCode = std::nullopt;
+                continue;
+            }
+
+            auto&& glyph = m_font->GetGlyph(code, m_renderMode);
+            if (!glyph) {
+                continue;
+            }
+
+            auto&& pGlyph = std::make_shared<Glyph>(glyph, m_renderMode);
+
+            if (m_kerning && prevCode.has_value()) {
+                posX += m_font->GetKerning(prevCode.value(), code);
+            }
+            prevCode = code;
+
+            pGlyph->GetMetrics().posX = posX;
+            pGlyph->GetMetrics().posY = -pGlyph->GetMetrics().top;
+
+            ////// Вычисляем самую верхнюю позицию
+            m_top = SR_MIN(m_top, pGlyph->GetMetrics().posY);
+
+            ///metrics.posX = posX + bitmap_glyph->left;
+            ///metrics.posY = -bitmap_glyph->top;
+            ///metrics.width = bitmap.width;
+            ///metrics.height = bitmap.rows;
+
+            ////// Вычисляем самую нижнюю позицию
+            bottom = SR_MAX(bottom, pGlyph->GetMetrics().posY + pGlyph->GetMetrics().height);
+
+            posX += m_align + pGlyph->GetWidth();
+
+            m_glyphs.emplace_back(pGlyph);
+        }
+
+        if (m_glyphs.empty()) {
+            return false;
+        }
+
+        m_imageWidth = m_glyphs.back()->GetPosX() + m_glyphs.back()->GetWidth();
+        m_imageHeight = bottom - m_top;
+
+        return m_imageHeight * m_imageWidth > 0;
     }
 
     bool TextBuilder::Prepare(char32_t code) {
@@ -128,8 +196,8 @@ namespace SR_GRAPH_NS {
 
         m_imageWidth += bitmap.width;
 
-        if (m_topRow < bitmap.rows) {
-            m_topRow = bitmap.rows;
+        if (m_top < bitmap.rows) {
+            m_top = bitmap.rows;
         }
 
         if (m_maxGlyphHeight < bitmap.rows + bitmap_glyph->top) {
@@ -161,9 +229,21 @@ namespace SR_GRAPH_NS {
         m_imageHeight = 0;
         m_imageWidth = 0;
 
-        m_topRow = 0;
+        m_top = 0;
 
         m_maxGlyphHeight = 0;
+
+        m_glyphs.clear();
+    }
+
+    TextBuilder::Pixel **TextBuilder::CreateImage() {
+        Pixel** pImage = new Pixel*[m_imageHeight];
+        for (uint32_t i = 0; i < m_imageHeight; ++i) {
+            pImage[i] = new Pixel[m_imageWidth];
+            memset(pImage[i], 0, m_imageWidth * sizeof(Pixel));
+        }
+
+        return pImage;
     }
 
     TextBuilder::Pixel** TextBuilder::CreateImage(const TextBuilder::StringType &text) {
@@ -187,7 +267,7 @@ namespace SR_GRAPH_NS {
 
             posY = bitmap_glyph->top;
             posY = bitmap.rows - posY;
-            topY = m_topRow - bitmap.rows;
+            topY = m_top - bitmap.rows;
 
             if (text[charIndex] == '\n') {
                 height += static_cast<int32_t>(m_maxGlyphHeight);
@@ -244,5 +324,17 @@ namespace SR_GRAPH_NS {
         width = maxWidth;
 
         return pImage;
+    }
+
+    uint32_t TextBuilder::GetSize() const noexcept {
+        return GetWidth() * GetHeight() * 4;
+    }
+
+    void TextBuilder::SetKerning(bool kerning) {
+        m_kerning = kerning;
+    }
+
+    ColorFormat TextBuilder::GetColorFormat() const noexcept {
+        return ColorFormat::RGBA8_UNORM;
     }
 }

@@ -314,6 +314,23 @@ namespace SR_GTYPES_NS {
         return true;
     }
 
+    FT_Pos Font::GetKerning(uint32_t leftCharCode, uint32_t rightCharCode) const {
+        if (!FT_HAS_KERNING(m_face)) {
+            return 0;
+        }
+
+        /// Получаем индекс левого символа
+        FT_UInt leftIndex = FT_Get_Char_Index(m_face, leftCharCode);
+        /// Получаем индекс правого символа
+        FT_UInt rightIndex = FT_Get_Char_Index(m_face, rightCharCode);
+        /// Здесь будет хранится кернинг в формате 26.6
+        FT_Vector delta;
+        /// Получаем кернинг для двух символов
+        FT_Get_Kerning(m_face, leftIndex, rightIndex, FT_KERNING_DEFAULT, &delta);
+
+        return delta.x;
+    }
+
     FT_Glyph Font::GetGlyph(char32_t code, FT_Render_Mode renderMode) const {
         if (HasColor()) {
             return GetGlyph(code, renderMode, FT_LOAD_RENDER, FT_LOAD_COLOR);

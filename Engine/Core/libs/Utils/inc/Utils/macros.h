@@ -93,6 +93,12 @@
         ptr = nullptr;          \
     }                           \
 
+#define SR_SAFE_DELETE_ARRAY_PTR(ptr) \
+    if (ptr) {                        \
+        delete[] ptr;                 \
+        ptr = nullptr;                \
+    }                                 \
+
 #define SR_COMBINE_HELPER(X, Y) X##Y
 #define SR_COMBINE(X, Y) SR_COMBINE_HELPER(X, Y)
 #define SR_FASTCALL_ATTRIBUTE __attribute__((fastcall))

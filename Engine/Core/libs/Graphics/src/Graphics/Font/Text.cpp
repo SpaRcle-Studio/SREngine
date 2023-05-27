@@ -6,8 +6,15 @@
 #include <Utils/ECS/ComponentManager.h>
 
 #include <Graphics/Font/Text.h>
+#include <Graphics/Font/Font.h>
 #include <Graphics/Font/TextBuilder.h>
 #include <Graphics/Types/Material.h>
+#include <Graphics/Types/Shader.h>
+#include <Graphics/Render/RenderContext.h>
+#include <Graphics/Render/RenderScene.h>
+#include <Graphics/Pipeline/Environment.h>
+
+#include <EvoVulkan/Tools/VulkanDebug.h>
 
 namespace SR_GTYPES_NS {
     SR_REGISTER_COMPONENT(Text);
@@ -17,9 +24,14 @@ namespace SR_GTYPES_NS {
     {
         SetMaterial(Material::Load("Engine/Materials/text.mat"));
         SetFont(Font::Load("Engine/Fonts/TsunagiGothic.ttf"));
+        //SetFont(Font::Load("Engine/Fonts/Metropolitan.ttf"));
+        //SetFont(Font::Load("Engine/Fonts/CheeseCake-KGYp.ttf"));
         //SetFont(Font::Load("Engine/Fonts/seguiemj.ttf"));
         //m_text = U"Heприветlloあにま😀 😬 😁 😂 😃 😄 😅 😆 😇 😉 😊 🙂 🙃 ☺️ \n😋 😌 👦🏻 👧🏻 👨🏻 👩🏻 👴🏻 👵🏻 👶🏻 👱🏻 👮🏻 👲🏻 👳🏻 👷🏻 👸🏻 💂🏻 🎅🏻 👼🏻 💆🏻 💇🏻\n🤣 🤠 🤡 🤥 🤤 🤢";
-        m_text = U"Hello, World!";
+        m_text = U"Hello.,_ World!";
+        //m_text = U"Metropolitan";
+        //m_text = U"_!";
+        //m_text = U",";
         //m_text = U"Hello!";
     }
 
@@ -116,15 +128,16 @@ namespace SR_GTYPES_NS {
         }
 
         TextBuilder textBuilder(m_font);
+        textBuilder.SetKerning(m_kerning);
         textBuilder.Build(m_text);
 
         m_width = textBuilder.GetWidth();
         m_height = textBuilder.GetHeight();
 
         m_id = m_pipeline->CalculateTexture(textBuilder.GetData(),
-                ColorFormat::RGBA8_SRGB, m_width, m_height, TextureFilter::NEAREST,
-                TextureCompression::None, 1,
-                true, false
+            textBuilder.GetColorFormat(), m_width, m_height, TextureFilter::NEAREST,
+            TextureCompression::None, 1,
+            true, false
         );
 
         EVK_POP_LOG_LEVEL();
@@ -303,5 +316,13 @@ namespace SR_GTYPES_NS {
 
     SR_UTILS_NS::Component* Text::CopyComponent() const {
         return Component::CopyComponent();
+    }
+
+    void Text::SetKerning(bool enabled) {
+        m_kerning = enabled;
+        m_isCalculated = false;
+        if (m_pipeline) {
+            m_pipeline->SetBuildState(false);
+        }
     }
 }

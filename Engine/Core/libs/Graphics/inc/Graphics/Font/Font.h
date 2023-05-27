@@ -37,6 +37,8 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD FT_Glyph GetGlyph(char32_t code, FT_Render_Mode renderMode, FT_Int32 charLoad, FT_Int32 glyphLoad) const;
         SR_NODISCARD FT_Glyph GetGlyph(char32_t code, FT_Render_Mode renderMode) const;
 
+        SR_NODISCARD FT_Pos GetKerning(uint32_t leftCharCode, uint32_t rightCharCode) const;
+
         SR_NODISCARD SR_UTILS_NS::Path GetAssociatedPath() const override;
 
         bool SetPixelSizes(uint32_t w, uint32_t h);
