@@ -36,6 +36,7 @@
 #include <Graphics/UI/Anchor.h>
 #include <Graphics/UI/Canvas.h>
 #include <Graphics/Font/Text.h>
+#include <Graphics/Font/Font.h>
 
 namespace SR_CORE_NS::GUI {
     void ComponentDrawer::DrawComponent(SR_PTYPES_NS::Rigidbody3D*& pComponent, EditorGUI* context, int32_t index) {
@@ -377,6 +378,8 @@ namespace SR_CORE_NS::GUI {
 
     void ComponentDrawer::DrawComponent(SR_GTYPES_NS::Material *&material, EditorGUI* context, int32_t index) {
         if (material) {
+            ImGui::Separator();
+
             const bool readOnly = material->IsReadOnly();
 
             Helper::GUI::DrawTextOnCenter(readOnly ? "Material (Read only)" : "Material");
@@ -549,6 +552,8 @@ namespace SR_CORE_NS::GUI {
         if (!pComponent->GetRenderContext())
             ImGui::TextColored(ImVec4(1, 1, 0, 1), "Mesh isn't registered!");
 
+        ImGui::Text("Atlas size: %ix%i", pComponent->GetAtlasWidth(), pComponent->GetAtlasHeight());
+
         bool kerning = pComponent->GetKerning();
         if (ImGui::Checkbox(SR_FORMAT_C("Kerning##textK%i", index), &kerning)) {
             pComponent->SetKerning(kerning);
@@ -565,7 +570,28 @@ namespace SR_CORE_NS::GUI {
             pComponent->SetText(text);
         }
 
-        ImGui::Text("Atlas size: %ix%i", pComponent->GetAtlasWidth(), pComponent->GetAtlasHeight());
+        auto&& charSize = pComponent->GetFontSize();
+        if (Graphics::GUI::DrawUVec2Control("Font size", charSize, 512, 70.f, 1, index)) {
+            pComponent->SetFontSize(charSize);
+        }
+
+        ImGui::Separator();
+
+        if (auto&& pFont = pComponent->GetFont()) {
+            SR_GRAPH_NS::GUI::DrawValue("Font", pFont->GetResourceId(), index);
+        }
+
+        if (auto&& pDescriptor = context->GetIconDescriptor(EditorIcon::Font)) {
+            if (GUISystem::Instance().ImageButton(SR_FORMAT("##imgFontBtn%i", index), pDescriptor, SR_MATH_NS::IVector2(50), 5)) {
+                auto&& resourcesFolder = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
+                auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesFolder, { { "Font", "ttf" } });
+
+                if (path.Exists()) {
+                    auto&& pFont = SR_GTYPES_NS::Font::Load(path);
+                    pComponent->SetFont(pFont);
+                }
+            }
+        }
 
         auto&& pMaterial = pComponent->GetMaterial();
 

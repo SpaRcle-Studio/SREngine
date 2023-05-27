@@ -29,7 +29,8 @@ namespace SR_CORE_NS {
           TXT,
           XML,
           PNG,
-          DLL
+          DLL,
+          Font
     );
 
     class EditorSettings : public SR_UTILS_NS::GlobalSettings<EditorSettings> {

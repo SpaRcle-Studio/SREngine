@@ -10,6 +10,7 @@
 #include <Utils/Math/Vector3.h>
 #include <Utils/Math/Vector4.h>
 #include <Utils/Common/TypeInfo.h>
+#include <Utils/Types/UnicodeString.h>
 
 namespace SR_UTILS_NS {
     namespace MarshalUtils {
@@ -57,6 +58,10 @@ namespace SR_UTILS_NS {
             else if constexpr (std::is_same<T, SR_MATH_NS::IVector2>()) {
                 stream.write((const char *) &value.x, sizeof(int32_t));
                 stream.write((const char *) &value.y, sizeof(int32_t));
+            }
+            else if constexpr (std::is_same<T, SR_MATH_NS::UVector2>()) {
+                stream.write((const char *) &value.x, sizeof(uint32_t));
+                stream.write((const char *) &value.y, sizeof(uint32_t));
             }
             else if constexpr (SR_MATH_NS::IsNumber<T>() || SR_MATH_NS::IsLogical<T>()) {
                 stream.write((const char *) &value, sizeof(T));
@@ -113,6 +118,10 @@ namespace SR_UTILS_NS {
                 stream.read((char*)&value.x, sizeof(int32_t));
                 stream.read((char*)&value.y, sizeof(int32_t));
             }
+            else if constexpr (std::is_same<T, SR_MATH_NS::UVector2>()) {
+                stream.read((char*)&value.x, sizeof(uint32_t));
+                stream.read((char*)&value.y, sizeof(uint32_t));
+            }
             else if constexpr (SR_MATH_NS::IsNumber<T>() || SR_MATH_NS::IsLogical<T>()) {
                 stream.read((char*)&value, sizeof(T));
             }
@@ -127,6 +136,12 @@ namespace SR_UTILS_NS {
             const int16_t size = str.size();
             stream.write((const char*)&size, sizeof(int16_t));
             stream.write((const char*)&str[0], size * sizeof(char));
+        }
+
+        SR_MAYBE_UNUSED static void SR_FASTCALL SaveUnicodeString(SR_HTYPES_NS::Stream& stream, const SR_HTYPES_NS::UnicodeString& str) {
+            const int16_t size = str.size();
+            stream.write((const char*)&size, sizeof(int16_t));
+            stream.write((const char*)&str[0], size * sizeof(SR_HTYPES_NS::UnicodeString::CharType));
         }
 
         SR_MAYBE_UNUSED static void SR_FASTCALL SaveString(SR_HTYPES_NS::Stream& stream, const std::string& str) {
@@ -171,10 +186,23 @@ namespace SR_UTILS_NS {
             stream.read((char*)&size, sizeof(uint16_t));
             SRAssert(size < SR_UINT16_MAX);
             if (size >= SR_UINT16_MAX) {
-                return std::string();
+                return str;
             }
             str.resize(size);
             stream.read((char*)&str[0], size * sizeof(char));
+            return str;
+        }
+
+        static SR_HTYPES_NS::UnicodeString SR_FASTCALL LoadUnicodeString(SR_HTYPES_NS::Stream& stream) {
+            SR_HTYPES_NS::UnicodeString str;
+            uint16_t size;
+            stream.read((char*)&size, sizeof(uint16_t));
+            SRAssert(size < SR_UINT16_MAX);
+            if (size >= SR_UINT16_MAX) {
+                return str;
+            }
+            str.resize(size);
+            stream.read((char*)&str[0], size * sizeof(SR_HTYPES_NS::UnicodeString::CharType));
             return str;
         }
 

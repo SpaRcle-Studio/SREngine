@@ -4,6 +4,7 @@
 
 #include <Utils/ECS/Transform.h>
 #include <Utils/ECS/ComponentManager.h>
+#include <Utils/Locale/Encoding.h>
 
 #include <Graphics/Font/Text.h>
 #include <Graphics/Font/Font.h>
@@ -21,18 +22,7 @@ namespace SR_GTYPES_NS {
 
     Text::Text()
         : Mesh(MeshType::Static)
-    {
-        SetMaterial(Material::Load("Engine/Materials/text.mat"));
-        SetFont(Font::Load("Engine/Fonts/TsunagiGothic.ttf"));
-        //SetFont(Font::Load("Engine/Fonts/Metropolitan.ttf"));
-        SetFont(Font::Load("Engine/Fonts/seguiemj.ttf"));
-        m_text = U"Heприветlloあにま😀 😬 😁 😂 😃 😄 😅 😆 😇 😉 😊 🙂 🙃 ☺️ \n😋 😌 👦🏻 👧🏻 👨🏻 👩🏻 👴🏻 👵🏻 👶🏻 👱🏻 👮🏻 👲🏻 👳🏻 👷🏻 👸🏻 💂🏻 🎅🏻 👼🏻 💆🏻 💇🏻\n🤣 🤠 🤡 🤥 🤤 🤢";
-        //m_text = U"Hello.,_ World!";
-        //m_text = U"Metropolitan";
-        //m_text = U"_!";
-        //m_text = U",";
-        //m_text = U"Hello!";
-    }
+    { }
 
     Text::~Text() {
         SetFont(nullptr);
@@ -129,6 +119,7 @@ namespace SR_GTYPES_NS {
         TextBuilder textBuilder(m_font);
         textBuilder.SetKerning(m_kerning);
         textBuilder.SetDebug(m_debug);
+        textBuilder.SetCharSize(m_fontSize);
 
         if (!textBuilder.Build(m_text)) {
             return false;
@@ -154,12 +145,18 @@ namespace SR_GTYPES_NS {
     }
 
     SR_UTILS_NS::Component* Text::LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage) {
-        SR_MAYBE_UNUSED const auto&& type = static_cast<MeshType>(marshal.Read<int32_t>());
-
-        const auto&& material = marshal.Read<std::string>();
         auto&& pMesh = new Text();
 
-        if (pMesh && material != "None") {
+        SR_MAYBE_UNUSED const auto&& type = static_cast<MeshType>(marshal.Read<int32_t>());
+
+        pMesh->m_fontSize = marshal.Read<SR_MATH_NS::UVector2>();
+        pMesh->m_localization = marshal.Read<bool>();
+        pMesh->m_preprocessor = marshal.Read<bool>();
+        pMesh->m_kerning = marshal.Read<bool>();
+        pMesh->m_debug = marshal.Read<bool>();
+
+        const auto&& material = marshal.Read<std::string>();
+        if (material != "None") {
             if (auto&& pMaterial = SR_GTYPES_NS::Material::Load(SR_UTILS_NS::Path(material, true))) {
                 pMesh->SetMaterial(pMaterial);
             }
@@ -167,6 +164,18 @@ namespace SR_GTYPES_NS {
                 SR_ERROR("Text::LoadComponent() : failed to load material! Name: " + material);
             }
         }
+
+        const auto&& font = marshal.Read<std::string>();
+        if (font != "None") {
+            if (auto&& pFont = SR_GTYPES_NS::Font::Load(SR_UTILS_NS::Path(font, true))) {
+                pMesh->SetFont(pFont);
+            }
+            else {
+                SR_ERROR("Text::LoadComponent() : failed to load font! Name: " + font);
+            }
+        }
+
+        pMesh->m_text = marshal.Read<SR_HTYPES_NS::UnicodeString>();
 
         return dynamic_cast<Component*>(pMesh);
     }
@@ -257,8 +266,15 @@ namespace SR_GTYPES_NS {
     SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Text::Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SR_UTILS_NS::SavableFlags flags) const {
         pMarshal = Component::Save(pMarshal, flags);
 
-        pMarshal->Write(static_cast<int32_t>(GetMeshType()));
-        pMarshal->Write(m_material ? m_material->GetResourceId() : "None");
+        pMarshal->Write<int32_t>(static_cast<int32_t>(GetMeshType()));
+        pMarshal->Write<SR_MATH_NS::UVector2>(m_fontSize);
+        pMarshal->Write<bool>(m_localization);
+        pMarshal->Write<bool>(m_preprocessor);
+        pMarshal->Write<bool>(m_kerning);
+        pMarshal->Write<bool>(m_debug);
+        pMarshal->Write<std::string>(m_material ? m_material->GetResourceId() : "None");
+        pMarshal->Write<std::string>(m_font ? m_font->GetResourceId() : "None");
+        pMarshal->Write<SR_HTYPES_NS::UnicodeString>(m_text);
 
         return pMarshal;
     }
@@ -280,12 +296,26 @@ namespace SR_GTYPES_NS {
         if ((m_font = pFont)) {
             m_font->AddUsePoint();
         }
+
+        m_isCalculated = false;
+
+        if (auto&& renderScene = GetRenderScene()) {
+            renderScene->SetDirty();
+        }
+    }
+
+    void Text::SetFontSize(const SR_MATH_NS::UVector2& size)
+    {
+        m_fontSize = size;
+        m_isCalculated = false;
+        if (auto&& renderScene = GetRenderScene()) {
+            renderScene->SetDirty();
+        }
     }
 
     void Text::SetText(const std::string &text) {
         m_text = SR_UTILS_NS::Locale::UtfToUtf<char32_t, char>(text);
         m_isCalculated = false;
-        m_dirtyMaterial = true;
         if (auto&& renderScene = GetRenderScene()) {
             renderScene->SetDirty();
         }
@@ -294,7 +324,6 @@ namespace SR_GTYPES_NS {
     void Text::SetText(const std::u16string &text) {
         m_text = SR_UTILS_NS::Locale::UtfToUtf<char32_t, char16_t>(text);
         m_isCalculated = false;
-        m_dirtyMaterial = true;
         if (auto&& renderScene = GetRenderScene()) {
             renderScene->SetDirty();
         }
@@ -303,14 +332,13 @@ namespace SR_GTYPES_NS {
     void Text::SetText(const std::u32string &text) {
         m_text = text;
         m_isCalculated = false;
-        m_dirtyMaterial = true;
         if (auto&& renderScene = GetRenderScene()) {
             renderScene->SetDirty();
         }
     }
 
     bool Text::IsCanCalculate() const {
-        return Mesh::IsCanCalculate() && !m_text.empty();
+        return Mesh::IsCanCalculate() && !m_text.empty() && m_font;
     }
 
     void Text::OnLoaded() {
@@ -318,22 +346,31 @@ namespace SR_GTYPES_NS {
     }
 
     SR_UTILS_NS::Component* Text::CopyComponent() const {
-        return Component::CopyComponent();
+        if (auto&& pComponent = dynamic_cast<Text*>(Component::CopyComponent())) {
+            pComponent->SetText(m_text);
+            pComponent->SetDebug(m_debug);
+            pComponent->SetFont(m_font);
+            pComponent->SetFontSize(m_fontSize);
+            pComponent->SetKerning(m_kerning);
+            return pComponent;
+        }
+
+        return nullptr;
     }
 
     void Text::SetKerning(bool enabled) {
         m_kerning = enabled;
         m_isCalculated = false;
-        if (m_pipeline) {
-            m_pipeline->SetBuildState(false);
+        if (auto&& renderScene = GetRenderScene()) {
+            renderScene->SetDirty();
         }
     }
 
     void Text::SetDebug(bool enabled) {
         m_debug = enabled;
         m_isCalculated = false;
-        if (m_pipeline) {
-            m_pipeline->SetBuildState(false);
+        if (auto&& renderScene = GetRenderScene()) {
+            renderScene->SetDirty();
         }
     }
 }

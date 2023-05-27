@@ -66,8 +66,11 @@ namespace SR_HTYPES_NS {
             if constexpr (std::is_same_v<T, std::any>) {
                 MarshalUtils::SaveAny<std::any>(*this, value);
             }
-            else if constexpr (Math::IsString<T>()) {
+            else if constexpr (SR_MATH_NS::IsString<T>()) {
                 MarshalUtils::SaveShortString(*this, value);
+            }
+            else if constexpr (std::is_same_v<T, SR_HTYPES_NS::UnicodeString>) {
+                MarshalUtils::SaveUnicodeString(*this, value);
             }
             else if constexpr (IsSTLVector<T>()) {
                 MarshalUtils::SaveVector(*this, value);
@@ -98,6 +101,9 @@ namespace SR_HTYPES_NS {
         template<typename T> T Read() {
             if constexpr (std::is_same_v<T, std::any>) {
                 return MarshalUtils::LoadAny<std::any>(*this);
+            }
+            else if constexpr (std::is_same_v<T, SR_HTYPES_NS::UnicodeString>) {
+                return MarshalUtils::LoadUnicodeString(*this);
             }
             else if constexpr (Math::IsString<T>()) {
                 return MarshalUtils::LoadShortStr(*this);

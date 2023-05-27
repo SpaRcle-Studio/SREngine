@@ -14,7 +14,7 @@ namespace SR_GTYPES_NS {
     class Font;
 
     class Text : public Mesh, public SR_UTILS_NS::Component {
-        SR_ENTITY_SET_VERSION(1001);
+        SR_ENTITY_SET_VERSION(1002);
         SR_INITIALIZE_COMPONENT(Text);
     public:
         typedef Vertices::SimpleVertex VertexType;
@@ -45,6 +45,10 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD SR_FORCE_INLINE bool IsCanUpdate() const noexcept override { return false; }
         SR_NODISCARD SR_FORCE_INLINE bool GetKerning() const noexcept { return m_kerning; }
         SR_NODISCARD SR_FORCE_INLINE bool IsDebugEnabled() const noexcept { return m_debug; }
+        SR_NODISCARD SR_FORCE_INLINE bool IsPreprocessorEnabled() const noexcept { return m_preprocessor; }
+        SR_NODISCARD SR_FORCE_INLINE bool IsLocalizationEnabled() const noexcept { return m_localization; }
+        SR_NODISCARD SR_FORCE_INLINE Font* GetFont() const noexcept { return m_font; }
+        SR_NODISCARD SR_FORCE_INLINE SR_MATH_NS::UVector2 GetFontSize() const noexcept { return m_fontSize; }
 
         SR_NODISCARD SR_FORCE_INLINE bool IsMeshActive() const noexcept override {
             return SR_UTILS_NS::Component::IsActive();
@@ -66,6 +70,8 @@ namespace SR_GTYPES_NS {
         void SetText(const std::u32string& text);
         void SetKerning(bool enabled);
         void SetDebug(bool enabled);
+        void SetFont(Font* pFont);
+        void SetFontSize(const SR_MATH_NS::UVector2& size);
 
         void Draw() override;
 
@@ -75,8 +81,6 @@ namespace SR_GTYPES_NS {
     private:
         SR_NODISCARD RenderScenePtr GetRenderScene();
         SR_NODISCARD bool BuildAtlas();
-
-        void SetFont(Font* pFont);
 
     private:
         RenderScenePtr m_renderScene;
@@ -88,8 +92,12 @@ namespace SR_GTYPES_NS {
         uint32_t m_width = 0;
         uint32_t m_height = 0;
 
+        SR_MATH_NS::UVector2 m_fontSize = SR_MATH_NS::UVector2(512, 512);
+
         bool m_kerning = true;
         bool m_debug = false;
+        bool m_preprocessor = false;
+        bool m_localization = false;
 
         SR_HTYPES_NS::UnicodeString m_text;
 

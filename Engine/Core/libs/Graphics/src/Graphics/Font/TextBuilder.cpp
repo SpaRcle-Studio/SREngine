@@ -31,8 +31,7 @@ namespace SR_GRAPH_NS {
             return false;
         }
 
-        m_font->SetPixelSizes(0, m_fontSize);
-        m_font->SetCharSize(0, 16 * 64, 500, 500);
+        m_font->SetCharSize(0, 16 * 64, m_charSize.x, m_charSize.y);
 
         /// препроцессор текста
         for (uint32_t i = 0; i < static_cast<uint32_t>(text.size()); ++i) {
@@ -47,16 +46,52 @@ namespace SR_GRAPH_NS {
         }
 
         auto&& size = GetSize();
+        if (size == 0) {
+            return false;
+        }
 
         m_textureData = new uint8_t[size];
-        memset(m_textureData, m_debug * 127, size);
+        memset(m_textureData, 0, size);
 
         for (auto&& pGlyph : m_glyphs) {
-            auto&& pGlyphImage = GlyphImage::Create(pGlyph);
-            pGlyphImage->InsertTo(m_textureData, m_top, m_imageWidth, m_debug);
+            auto&& pGlyphImage = GlyphImage::Create(pGlyph, false);
+            if (!pGlyphImage) {
+                continue;
+            }
+            pGlyphImage->InsertTo(m_textureData, m_top, m_imageWidth);
+        }
+
+        if (m_debug) {
+            for (auto&& pGlyph : m_glyphs) {
+                auto&& pGlyphImage = GlyphImage::Create(pGlyph, false);
+                if (!pGlyphImage) {
+                    continue;
+                }
+                pGlyphImage->Debug(m_textureData, m_top, m_imageWidth);
+            }
+
+            for (uint32_t x = 0; x < m_imageWidth; ++x) {
+                for (uint32_t y = 0; y < m_imageHeight; ++y) {
+                    if (x != 0 && y != 0 && x + 1 != m_imageWidth && y + 1 != m_imageHeight) {
+                        continue;
+                    }
+
+                    const uint32_t dst = x * 4 + y * m_imageWidth * 4;
+
+                    *(m_textureData + dst + 0) = 255;
+                    *(m_textureData + dst + 1) = 0;
+                    *(m_textureData + dst + 2) = 0;
+                    *(m_textureData + dst + 3) = 255;
+                }
+            }
         }
 
         return true;
+    }
+
+    void TextBuilder::SetCharSize(const SR_MATH_NS::UVector2& size)
+    {
+        m_charSize = size;
     }
 
     void TextBuilder::SetFontSize(uint32_t size) {
@@ -118,8 +153,14 @@ namespace SR_GRAPH_NS {
                 posX += m_font->GetKerning(prevCode.value(), code);
             }
             prevCode = code;
+            
+            if (posX == 0 && pGlyph->GetMetrics().left < 0) {
+                posX += -pGlyph->GetMetrics().left << 6;
+            }
+            else {
+                pGlyph->GetMetrics().posX = (posX >> 6) + pGlyph->GetMetrics().left;
+            }
 
-            pGlyph->GetMetrics().posX = (posX >> 6) + pGlyph->GetMetrics().left;
             pGlyph->GetMetrics().posY = -pGlyph->GetMetrics().top;
 
             posX += m_align << 6;
@@ -134,7 +175,7 @@ namespace SR_GRAPH_NS {
             /// Вычисляем самую нижнюю позицию
             bottom = SR_MAX(bottom, pGlyph->GetMetrics().posY + pGlyph->GetMetrics().height);
 
-            m_imageWidth = SR_MAX(m_imageWidth, pGlyph->GetPosX() + pGlyph->GetWidth());
+            m_imageWidth = SR_MAX(m_imageWidth, SR_ABS(pGlyph->GetPosX()) + pGlyph->GetWidth());
 
             m_glyphs.emplace_back(pGlyph);
         }

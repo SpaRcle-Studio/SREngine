@@ -3,6 +3,7 @@
 //
 
 #include <Utils/Types/UnicodeString.h>
+#include <Utils/Locale/Encoding.h>
 
 namespace SR_HTYPES_NS {
     UnicodeString::UnicodeString(const UnicodeString& other)
@@ -51,5 +52,9 @@ namespace SR_HTYPES_NS {
 
     const UnicodeString::CharType& UnicodeString::operator[](size_t position) const noexcept {
         return m_internal[position];
+    }
+
+    void UnicodeString::resize(size_t size) {
+        m_internal.resize(size);
     }
 }

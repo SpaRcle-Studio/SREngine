@@ -56,20 +56,22 @@ namespace SR_GRAPH_NS {
     public:
         using Ptr = std::shared_ptr<GlyphImage>;
 
-    private:
+    public:
         GlyphImage() = default;
+        ~GlyphImage() override;
 
     public:
-        SR_NODISCARD static GlyphImage::Ptr Create(const Glyph::Ptr& pGlyph);
-        SR_NODISCARD uint8_t* GetData() const { return m_data.get(); }
+        SR_NODISCARD static GlyphImage::Ptr Create(const Glyph::Ptr& pGlyph, bool needInit);
+        SR_NODISCARD uint8_t* GetData() const { return m_data; }
 
-        void InsertTo(uint8_t* pTarget, int32_t top, uint32_t sizeX, bool debug);
+        void InsertTo(uint8_t* pTarget, int32_t top, uint32_t sizeX);
+        void Debug(uint8_t* pTarget, int32_t top, uint32_t sizeX);
 
     private:
         SR_NODISCARD bool Init();
 
     private:
-        std::shared_ptr<uint8_t[]> m_data;
+        uint8_t* m_data = nullptr;
         Glyph::Ptr m_glyph;
 
     };

@@ -63,20 +63,29 @@ namespace SR_GRAPH_NS {
 
     /// ----------------------------------------------------------------------------------------------------------------
 
-    GlyphImage::Ptr GlyphImage::Create(const Glyph::Ptr& pGlyph) {
-        auto&& pGlyphImage = std::shared_ptr<GlyphImage>(new GlyphImage());
+    GlyphImage::Ptr GlyphImage::Create(const Glyph::Ptr& pGlyph, bool needInit) {
+        auto&& pGlyphImage = std::make_shared<GlyphImage>();
 
         pGlyphImage->m_glyph = pGlyph;
 
-        if (!pGlyphImage->Init()) {
+        if (needInit && !pGlyphImage->Init()) {
             return nullptr;
         }
 
         return pGlyphImage;
     }
 
+
+    GlyphImage::~GlyphImage() {
+        SR_SAFE_DELETE_ARRAY_PTR(m_data);
+    }
+
     bool GlyphImage::Init() {
-        m_data = std::shared_ptr<uint8_t[]>(new uint8_t[m_glyph->GetSize()]);
+        if (m_glyph->GetSize() == 0) {
+            return false;
+        }
+
+        m_data = new uint8_t[m_glyph->GetSize()];
 
         FT_BitmapGlyph bitmap_glyph = (FT_BitmapGlyph)m_glyph->GetGlyph();
         FT_Bitmap bitmap = bitmap_glyph->bitmap;
@@ -101,10 +110,10 @@ namespace SR_GRAPH_NS {
                 }
                 else {
                     const uint32_t src = x + y * bitmap.pitch;
-                    m_data[dst + 0] = 255 - pBuffer[src];
-                    m_data[dst + 1] = 255 - pBuffer[src];
-                    m_data[dst + 2] = 255 - pBuffer[src];
-                    m_data[dst + 3] =       pBuffer[src];
+                    m_data[dst + 0] = uint8_t(255 - pBuffer[src]);
+                    m_data[dst + 1] = uint8_t(255 - pBuffer[src]);
+                    m_data[dst + 2] = uint8_t(255 - pBuffer[src]);
+                    m_data[dst + 3] = uint8_t(      pBuffer[src]);
                 }
             }
         }
@@ -112,18 +121,75 @@ namespace SR_GRAPH_NS {
         return true;
     }
 
-    void GlyphImage::InsertTo(uint8_t* pTarget, int32_t top, uint32_t sizeX, bool debug) {
-        const uint32_t posX = m_glyph->GetPosX();
-        const uint32_t posY = m_glyph->GetPosY();
+    void GlyphImage::InsertTo(uint8_t* pTarget, int32_t top, uint32_t sizeX) {
+        const int32_t posX = m_glyph->GetPosX();
+        const int32_t posY = m_glyph->GetPosY();
+
+        const uint32_t pixelSize = m_glyph->GetPixelSize();
+        const uint32_t width = m_glyph->GetWidth();
+        const uint32_t height = m_glyph->GetHeight();
+
+        FT_BitmapGlyph bitmap_glyph = (FT_BitmapGlyph)m_glyph->GetGlyph();
+        FT_Bitmap bitmap = bitmap_glyph->bitmap;
+        uint8_t* pBuffer = bitmap.buffer;
+
+        for (uint32_t x = 0; x < width; ++x) {
+            for (uint32_t y = 0; y < height; ++y) {
+                uint32_t src = 0; 
+
+                if (bitmap.pixel_mode == FT_PIXEL_MODE_BGRA) {
+                    src = x * pixelSize + y * width * pixelSize;
+                    if (pBuffer[src + (pixelSize - 1)] == 0) {
+                        continue;
+                    }
+                }
+                else {
+                    src = x + y * width;
+                    if (pBuffer[src] == 0) {
+                        continue;
+                    }
+                }
+
+                const int32_t dstY = posY + y - top;
+                const int32_t dstX = posX + x;
+
+                const int32_t dst = dstX * pixelSize + dstY * sizeX * pixelSize;
+
+                if (dst < 0) {
+                    continue;
+                }
+
+                if (bitmap.pixel_mode == FT_PIXEL_MODE_BGRA) {
+                    *(pTarget + dst + 0) = *(pBuffer + src + 2);
+                    *(pTarget + dst + 1) = *(pBuffer + src + 1);
+                    *(pTarget + dst + 2) = *(pBuffer + src + 0);
+                    *(pTarget + dst + 3) = *(pBuffer + src + 3);
+                }
+                else {
+                    *(pTarget + dst + 0) = 0;
+                    *(pTarget + dst + 1) = 0;
+                    *(pTarget + dst + 2) = 0;
+
+                    const float a = *(pBuffer + src) / 255.0f;
+
+                    *(pTarget + dst + 3) = uint8_t(a * 255 + (1 - a) * *(pTarget + dst + 3));
+                }
+            }
+        }
+    }
+
+    void GlyphImage::Debug(uint8_t* pTarget, int32_t top, uint32_t sizeX)
+    {
+        const int32_t posX = m_glyph->GetPosX();
+        const int32_t posY = m_glyph->GetPosY();
+
         const uint32_t pixelSize = m_glyph->GetPixelSize();
         const uint32_t width = m_glyph->GetWidth();
         const uint32_t height = m_glyph->GetHeight();
 
         for (uint32_t x = 0; x < width; ++x) {
             for (uint32_t y = 0; y < height; ++y) {
-                const uint32_t src = x * pixelSize + y * width * pixelSize;
-
-                if (m_data[src + (pixelSize - 1)] == 0) {
+                if (x != 0 && y != 0 && x + 1 != width && y + 1 != height) {
                     continue;
                 }
 
@@ -132,27 +198,10 @@ namespace SR_GRAPH_NS {
 
                 const uint32_t dst = dstX * pixelSize + dstY * sizeX * pixelSize;
 
-                memcpy(pTarget + dst, m_data.get() + src, pixelSize);
-            }
-        }
-
-        if (debug) {
-            for (uint32_t x = 0; x < width; ++x) {
-                for (uint32_t y = 0; y < height; ++y) {
-                    if (x != 0 && y != 0 && x + 1 != width && y + 1 != height) {
-                        continue;
-                    }
-
-                    const int32_t dstY = posY + y - top;
-                    const int32_t dstX = posX + x;
-
-                    const uint32_t dst = dstX * pixelSize + dstY * sizeX * pixelSize;
-
-                    *(pTarget + dst + 0) = 255;
-                    *(pTarget + dst + 1) = 0;
-                    *(pTarget + dst + 2) = 0;
-                    *(pTarget + dst + 3) = 255;
-                }
+                *(pTarget + dst + 0) = 255;
+                *(pTarget + dst + 1) = 0;
+                *(pTarget + dst + 2) = 0;
+                *(pTarget + dst + 3) = 255;
             }
         }
     }

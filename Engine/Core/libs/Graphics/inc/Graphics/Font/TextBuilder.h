@@ -31,6 +31,7 @@ namespace SR_GRAPH_NS {
 
         bool Build(StringType text);
 
+        void SetCharSize(const SR_MATH_NS::UVector2& size);
         void SetFontSize(uint32_t size);
         void SetKerning(bool enabled);
         void SetDebug(bool enabled);
@@ -52,6 +53,8 @@ namespace SR_GRAPH_NS {
 
         bool m_kerning = false;
         bool m_debug = false;
+
+        SR_MATH_NS::UVector2 m_charSize = SR_MATH_NS::UVector2(512, 512);
 
         uint32_t m_fontSize = 32;
         uint32_t m_align = 0;
