@@ -17,7 +17,7 @@ namespace Framework::Core::GUI {
 
     void WorldEdit::Draw() {
         if (m_scene.TryRecursiveLockIfValid()) {
-            auto&& pLogic = m_scene->GetLogicBase().DynamicCast<SR_WORLD_NS::SceneCubeChunkLogic*>();
+            auto&& pLogic = m_scene->GetLogicBase().DynamicCast<SR_WORLD_NS::SceneCubeChunkLogic>();
 
             if (!pLogic) {
                 m_scene.Unlock();

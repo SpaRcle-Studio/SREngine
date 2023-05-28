@@ -78,7 +78,6 @@
 #include "../Graphics/src/Graphics/Render/RenderContext.cpp"
 #include "../Graphics/src/Graphics/Render/SortedMeshQueue.cpp"
 #include "../Graphics/src/Graphics/Render/DebugRenderer.cpp"
-#include "../Graphics/src/Graphics/Render/ChunkRenderer.cpp"
 
 #include "../Graphics/src/Graphics/Types/Geometry/DebugWireframeMesh.cpp"
 #include "../Graphics/src/Graphics/Types/Geometry/DebugLine.cpp"

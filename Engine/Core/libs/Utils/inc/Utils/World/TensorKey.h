@@ -52,7 +52,7 @@ namespace SR_WORLD_NS {
     class Chunk;
 
     typedef std::unordered_map<TensorKey, std::vector<SR_HTYPES_NS::SharedPtr<GameObject>>> Tensor;
-    typedef std::unordered_map<Math::IVector3, Region *> Regions;
+    typedef std::unordered_map<SR_MATH_NS::IVector3, Region*> Regions;
 }
 
 #endif //SRENGINE_TENSORKEY_H

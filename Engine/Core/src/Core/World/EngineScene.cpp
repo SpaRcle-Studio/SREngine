@@ -17,7 +17,7 @@ namespace SR_CORE_NS {
     EngineScene::~EngineScene() {
         pRenderScene.Do([this](SR_GRAPH_NS::RenderScene* pData) {
             pData->Remove(pEngine->GetEditor());
-            pData->Remove(&Graphics::GUI::GlobalWidgetManager::Instance());
+            pData->Remove(&SR_GRAPH_NS::GUI::GlobalWidgetManager::Instance());
         });
 
         pScene.AutoFree([](SR_WORLD_NS::Scene* pData) {
@@ -74,6 +74,8 @@ namespace SR_CORE_NS {
 
     void EngineScene::Draw(float_t dt) {
         SR_TRACY_ZONE;
+
+        DrawChunkDebug();
 
         if (pRenderScene.RecursiveLockIfValid()) {
             SR_UTILS_NS::DebugDraw::Instance().SwitchCallbacks(pRenderScene->GetDebugRenderer());
@@ -182,5 +184,27 @@ namespace SR_CORE_NS {
         pRenderScene.Do([gameMode](SR_GRAPH_NS::RenderScene *ptr) {
             ptr->SetOverlayEnabled(!gameMode);
         });
+    }
+
+    void EngineScene::DrawChunkDebug() {
+        SR_TRACY_ZONE;
+
+        if (auto&& pEditor = pEngine->GetEditor(); !pEditor || !pEditor->Enabled()) {
+            return;
+        }
+
+        if (!EditorSettings::Instance().IsNeedDebugChunks()) {
+            return;
+        }
+
+        if (!pScene.LockIfValid()) {
+            return;
+        }
+
+        if (auto&& pLogic = pScene->GetLogicBase().DynamicCast<SR_WORLD_NS::SceneCubeChunkLogic>()) {
+            pLogic->UpdateDebug();
+        }
+
+        pScene.Unlock();
     }
 }

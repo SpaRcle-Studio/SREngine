@@ -32,7 +32,6 @@ namespace SR_WORLD_NS {
 
     public:
         SR_NODISCARD virtual bool IsDefault() const noexcept { return false; }
-        SR_NODISCARD virtual bool IsDebugEnabled() const noexcept { return m_debugEnabled; }
 
         virtual void Update(float_t dt) { }
         virtual void Destroy() { }
@@ -40,13 +39,10 @@ namespace SR_WORLD_NS {
 
         virtual bool Reload() { return true; }
 
-        virtual void SetDebugEnabled(bool enabled) { m_debugEnabled = enabled; }
-
         virtual bool Load(const Path& path) { return false; }
         virtual bool Save(const Path& path) { return false; }
 
     protected:
-        bool m_debugEnabled = true;
         ScenePtr m_scene;
         mutable std::recursive_mutex m_mutex;
 

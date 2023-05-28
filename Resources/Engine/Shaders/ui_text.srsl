@@ -30,17 +30,16 @@ void vertex() {
     }
 
     vec2[6] text_uv = {
-        vec2(0.0, 0.0),
-        vec2(1.0, 1.0),
-        vec2(1.0, 0.0),
-
         vec2(0.0, 1.0),
+        vec2(1.0, 0.0),
         vec2(1.0, 1.0),
+
         vec2(0.0, 0.0),
+        vec2(1.0, 0.0),
+        vec2(0.0, 1.0),
     }
 
     uv = text_uv[VERTEX_INDEX];
-    uv = vec2(uv.x, 1.0 - uv.y);
 
     OUT_POSITION = ORTHOGONAL_MATRIX * MODEL_MATRIX * vec4(text_points[VERTEX_INDEX], 1.0);
 }

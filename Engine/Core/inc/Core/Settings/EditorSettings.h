@@ -45,6 +45,7 @@ namespace SR_CORE_NS {
         SR_NODISCARD Icons GetIcons() const;
         SR_NODISCARD SR_UTILS_NS::Path GetRenderTechnique() const;
         SR_NODISCARD SR_UTILS_NS::Path GetPrefabEditorRenderTechnique() const;
+        SR_NODISCARD bool IsNeedDebugChunks() const noexcept { return m_debugChunks; }
 
         SR_NODISCARD SR_UTILS_NS::Path InitializeResourcePath() const override;
 
@@ -54,8 +55,11 @@ namespace SR_CORE_NS {
 
     private:
         Icons m_icons;
+
         SR_UTILS_NS::Path m_renderTechnique;
         SR_UTILS_NS::Path m_prefabEditorRenderTechnique;
+
+        bool m_debugChunks = false;
 
     };
 }

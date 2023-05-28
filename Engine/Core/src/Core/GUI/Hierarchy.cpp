@@ -142,8 +142,8 @@ namespace SR_CORE_NS::GUI {
 
             ImGui::Separator();
 
-            if (ImGui::Selectable("Add children")) { ///TODO: ВСМЫСЛЕ children???? Можно добавлять несколько детей одной командой????
-
+            if (ImGui::Selectable("Add child")) {
+                gm->AddChild(gm->GetScene()->Instance("New GameObject"));
             }
 
             ImGui::EndPopup();

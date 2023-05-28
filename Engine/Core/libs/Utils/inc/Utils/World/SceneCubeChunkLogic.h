@@ -29,6 +29,7 @@ namespace SR_WORLD_NS {
         void SetObserver(const GameObjectPtr& target);
 
         bool ReloadChunks();
+        void UpdateDebug();
 
         SR_NODISCARD const GameObjects& GetGameObjectsAtChunk(const SR_MATH_NS::IVector3& region, const SR_MATH_NS::IVector3& chunk) const;
         SR_NODISCARD Chunk* GetCurrentChunk() const;
@@ -45,16 +46,15 @@ namespace SR_WORLD_NS {
 
         bool ReloadConfig();
 
-        void UpdateDebug();
-
         void CheckShift(const SR_MATH_NS::IVector3& chunk);
         void UpdateContainers();
         void UpdateScope(float_t dt);
         void SaveRegion(Region* pRegion, SR_HTYPES_NS::DataStorage* pContext) const;
 
     private:
-        std::list<int64_t> m_debugRegionIds;
-        std::list<int64_t> m_debugChunkIds;
+        std::list<int64_t> m_cubesIds;
+        std::list<int64_t> m_planesIds;
+        bool m_debugDirty = false;
 
         World::Tensor m_tensor;
 

@@ -132,6 +132,18 @@ namespace SR_GRAPH_NS {
     void Window::Close() {
         SR_GRAPH_LOG("Window::Close() : closing the window...");
 
+        auto&& cachePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath();
+        auto&& windowSettingsPath = cachePath.Concat("WindowSettings.xml");
+
+        auto&& windowSettings = SR_XML_NS::Document::New();
+        auto&& rootNode = windowSettings.Root().AppendNode("Settings");
+
+        rootNode.AppendNode("Size").AppendAttribute(GetSize());
+        rootNode.AppendNode("Position").AppendAttribute(GetPosition());
+        rootNode.AppendAttribute("IsMaximized", IsMaximized());
+
+        windowSettings.Save(windowSettingsPath);
+
         if (m_windowImpl && m_windowImpl->IsValid()) {
             m_windowImpl->Close();
         }

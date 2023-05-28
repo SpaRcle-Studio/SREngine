@@ -455,18 +455,6 @@ namespace SR_CORE_NS {
             m_worldThread = nullptr;
         }
 
-        auto&& cachePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath();
-        auto&& windowSettingsPath = cachePath.Concat("WindowSettings.xml");
-
-        auto&& windowSettings = SR_XML_NS::Document::New();
-        auto&& rootNode = windowSettings.Root().AppendNode("Settings");
-
-        rootNode.AppendNode("Size").AppendAttribute(m_window->GetSize());
-        rootNode.AppendNode("Position").AppendAttribute(m_window->GetPosition());
-        rootNode.AppendAttribute("IsMaximized", m_window->IsMaximized());
-
-        windowSettings.Save(windowSettingsPath);
-
         m_window.AutoFree([](auto&& pWindow) {
             pWindow->Close();
             delete pWindow;
@@ -517,9 +505,9 @@ namespace SR_CORE_NS {
 
     void Engine::WorldThread() {
         while (m_isRun) {
-            SR_TRACY_ZONE_N("World");
-
             SR_HTYPES_NS::Thread::Sleep(250);
+
+            SR_TRACY_ZONE_N("World");
 
             auto&& readLock = m_sceneQueue.ReadLock();
 
@@ -538,7 +526,7 @@ namespace SR_CORE_NS {
                     SR_NOOP;
                 }
                 else if (auto&& gameObject = dynamic_cast<SR_UTILS_NS::GameObject*>(pMainCamera->GetParent())) {
-                    auto&& pLogic = pScene->GetLogicBase().DynamicCast<SR_WORLD_NS::SceneCubeChunkLogic*>();
+                    auto&& pLogic = pScene->GetLogicBase().DynamicCast<SR_WORLD_NS::SceneCubeChunkLogic>();
                     if (pLogic && gameObject) {
                         pLogic->SetObserver(gameObject);
                     }

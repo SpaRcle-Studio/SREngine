@@ -31,8 +31,6 @@ namespace SR_WORLD_NS {
 
     Chunk::~Chunk() {
         SRAssert(m_preloaded.empty());
-        //SetDebugActive(BoolExt::False);
-        //SetDebugLoaded(BoolExt::False);
     }
 
     void Chunk::Update(float_t dt) {
@@ -59,12 +57,10 @@ namespace SR_WORLD_NS {
     bool Chunk::Unload() {
         m_loadState = LoadState::Unload;
 
-        //SetDebugLoaded(BoolExt::False);
-
         /*TODO: это потенциальное место для дедлоков, так как при уничтожении компоненты
          * блокируют другие потоки. Придумать как исправить */
 
-        auto&& pLogic = m_observer->m_scene->GetLogicBase().DynamicCast<SceneCubeChunkLogic*>();
+        auto&& pLogic = m_observer->m_scene->GetLogicBase().DynamicCast<SceneCubeChunkLogic>();
         auto&& gameObjects = pLogic->GetGameObjectsAtChunk(m_regionPosition, m_position);
 
         for (auto gameObject : gameObjects) {
@@ -80,12 +76,10 @@ namespace SR_WORLD_NS {
     }
 
     void Chunk::OnExit() {
-        //SetDebugActive(BoolExt::False);
         m_region->OnExit();
     }
 
     void Chunk::OnEnter() {
-        //SetDebugActive(BoolExt::True);
         m_region->OnEnter();
     }
 
@@ -93,9 +87,10 @@ namespace SR_WORLD_NS {
         g_allocator = allocator;
     }
 
-    Chunk *Chunk::Allocate(SRChunkAllocArgs) {
-        if (g_allocator)
+    Chunk* Chunk::Allocate(SRChunkAllocArgs) {
+        if (g_allocator) {
             return g_allocator(SRChunkAllocVArgs);
+        }
 
         return new Chunk(SRChunkAllocVArgs);
     }
@@ -113,9 +108,6 @@ namespace SR_WORLD_NS {
     }
 
     bool Chunk::ApplyOffset() {
-        //SetDebugLoaded(BoolExt::None);
-        //SetDebugActive(BoolExt::None);
-
         return true;
     }
 
@@ -146,8 +138,6 @@ namespace SR_WORLD_NS {
 
         Access(0.f);
 
-        //SetDebugLoaded(BoolExt::True);
-
         return true;
     }
 
@@ -176,7 +166,7 @@ namespace SR_WORLD_NS {
 
         /// scene is locked
 
-        auto&& pLogic = m_observer->m_scene->GetLogicBase().DynamicCast<SceneCubeChunkLogic*>();
+        auto&& pLogic = m_observer->m_scene->GetLogicBase().DynamicCast<SceneCubeChunkLogic>();
         auto&& gameObjects = pLogic->GetGameObjectsAtChunk(m_regionPosition, m_position);
 
         if (gameObjects.empty() && m_preloaded.empty()) {

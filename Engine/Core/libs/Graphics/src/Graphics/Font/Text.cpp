@@ -250,7 +250,7 @@ namespace SR_GTYPES_NS {
 
         /// если ресурс уничтожится сразу, то обрабатывать это нужно в контексте SharedPtr
         if (!IsGraphicsResourceRegistered()) {
-            GetThis().DynamicCast<Mesh>().AutoFree([](auto&& pData) {
+            GetThis().DynamicCast<Text>().AutoFree([](auto&& pData) {
                 pData->MarkMeshDestroyed();
             });
         }

@@ -41,6 +41,9 @@ namespace SR_CORE_NS {
         void SkipDraw();
         void SetSpeed(float_t speed);
 
+    private:
+        void DrawChunkDebug();
+
     public:
         ScenePtr pScene;
         RenderScenePtr pRenderScene;

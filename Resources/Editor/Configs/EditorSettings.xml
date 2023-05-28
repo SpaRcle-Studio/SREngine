@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <Settings>
     <RenderTechnique Path="Editor/Configs/EditorSSAORenderTechnique.xml"/>
+    <DebugChunks Bool="true" />
     <!--<RenderTechnique Path="Editor/Configs/EditorSimpleRenderTechnique.xml"/>-->
     <!--<RenderTechnique Path="Editor/Configs/EditorVignetteRenderTechnique.xml"/>-->
     <!--<RenderTechnique Path="Editor/Configs/EditorSSAORenderTechnique.xml"/>-->

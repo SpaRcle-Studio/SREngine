@@ -317,7 +317,7 @@ namespace SR_WORLD_NS {
     }
 
     bool Scene::IsPrefab() const {
-        return m_logic.DynamicCast<ScenePrefabLogic*>();
+        return m_logic.DynamicCast<ScenePrefabLogic>();
     }
 
     void Scene::RegisterGameObject(const Scene::GameObjectPtr& ptr) {

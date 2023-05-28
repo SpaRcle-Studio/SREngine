@@ -94,8 +94,6 @@ namespace SR_UTILS_NS {
             return false;
         }
 
-        SRAssert(!(GetScene() && !child->GetScene()));
-
         if (child->GetParent()) {
             SRHalt("Child has parent!");
             return false;

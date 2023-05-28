@@ -80,7 +80,7 @@ namespace SR_UTILS_NS {
 
             auto&& aspect = pParent->GetScale().XY().Aspect();
 
-            if (aspect < 1 && !(m_stretch & STRETCH_FLAGS_X)) {
+            if (aspect < 1 && !(m_stretch & STRETCH_FLAGS_V)) {
                 if (translation.y > 0) {
                     translation.y += (1.f - aspect) * scale.y;
                 }
@@ -90,7 +90,7 @@ namespace SR_UTILS_NS {
 
                 scale.y *= aspect;
             }
-            else if (aspect > 1 && !(m_stretch & STRETCH_FLAGS_Y)) {
+            else if (aspect > 1 && !(m_stretch & STRETCH_FLAGS_H)) {
                 scale.x *= 1.f / aspect;
 
                 if (translation.x > 0) {

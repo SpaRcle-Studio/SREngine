@@ -14,9 +14,9 @@ namespace SR_UTILS_NS {
     /// растяжение по ширине родительского элемента
     SR_ENUM_NS_T(StretchFlags_, uint32_t,
           STRETCH_FLAGS_NONE = 1 << 0,
-          STRETCH_FLAGS_X = 1 << 1,
-          STRETCH_FLAGS_Y = 1 << 2,
-          STRETCH_FLAGS_XY = STRETCH_FLAGS_X | STRETCH_FLAGS_Y
+          STRETCH_FLAGS_H = 1 << 1,
+          STRETCH_FLAGS_V = 1 << 2,
+          STRETCH_FLAGS_HV = STRETCH_FLAGS_H | STRETCH_FLAGS_V
     );
     typedef uint32_t StretchFlags;
 
