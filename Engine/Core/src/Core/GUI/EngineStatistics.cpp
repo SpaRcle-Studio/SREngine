@@ -121,4 +121,12 @@ namespace Framework::Core::GUI {
             ImGui::EndTabItem();
         }
     }
+
+    void EngineStatistics::VideoMemoryPage() {
+        if (ImGui::BeginTabItem("Video memory")) {
+            if (ImGui::BeginTable("##VideoMemoryPage", 5)) {
+
+            }
+        }
+    }
 }

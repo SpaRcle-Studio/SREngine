@@ -64,6 +64,44 @@ namespace SR_CORE_NS {
 
             return true;
         });
+        SR_UTILS_NS::Migration::Instance().RegisterMigrator(GAME_OBJECT_HASH_NAME, 1006, 1007, [](SR_HTYPES_NS::Marshal& marshal) -> bool {
+            SR_HTYPES_NS::Marshal migrated;
+
+            uint64_t position = marshal.GetPosition();
+
+            migrated.Stream::Write(marshal.Stream::View(), marshal.GetPosition());
+            /// --------------------------------------------------------------------------------------------------------
+
+            if (marshal.Read<bool>()) { /// is prefab
+                migrated.Write<bool>(true);
+            }
+            else {
+                migrated.Write<bool>(false);
+                migrated.Write(marshal.Read<bool>());
+                migrated.Write(marshal.Read<std::string>());
+                migrated.Write(marshal.Read<uint64_t>());
+
+                auto&& measurement = static_cast<SR_UTILS_NS::Measurement>(marshal.Read<int8_t>());
+
+                migrated.Write<uint8_t>(static_cast<uint8_t>(measurement));
+
+                if (measurement == SR_UTILS_NS::Measurement::Space2D) {
+                    migrated.Write<uint32_t>(SR_UTILS_NS::STRETCH_FLAGS_NONE);
+                    migrated.Write<SR_MATH_NS::FVector3>(marshal.Read<SR_MATH_NS::FVector3>(SR_MATH_NS::FVector3(0.0)), SR_MATH_NS::FVector3(0.f));
+                    migrated.Write<SR_MATH_NS::FVector3>(marshal.Read<SR_MATH_NS::FVector3>(SR_MATH_NS::FVector3(0.0)), SR_MATH_NS::FVector3(0.f));
+                    migrated.Write<SR_MATH_NS::FVector3>(marshal.Read<SR_MATH_NS::FVector3>(SR_MATH_NS::FVector3(1.0)), SR_MATH_NS::FVector3(1.f));
+                    migrated.Write<SR_MATH_NS::FVector3>(marshal.Read<SR_MATH_NS::FVector3>(SR_MATH_NS::FVector3(1.0)), SR_MATH_NS::FVector3(1.f));
+                }
+            }
+
+            /// -------------------- меня наняли дублировать длинные строки потому что я люблю большие длинные прямые комментарии, состоящие исключительно из тире.
+            migrated.Stream::Write(marshal.Stream::View() + marshal.GetPosition(), marshal.Size() - marshal.GetPosition());
+
+            marshal.SetData(migrated.Stream::View(), migrated.Size());
+            marshal.SetPosition(position);
+
+            return true;
+        });
 
         static const auto RIGID_BODY_3D_HASH_NAME = SR_HASH_STR("Rigidbody3D");
         SR_UTILS_NS::Migration::Instance().RegisterMigrator(RIGID_BODY_3D_HASH_NAME, 1004, 1005, [](SR_HTYPES_NS::Marshal& marshal) -> bool {

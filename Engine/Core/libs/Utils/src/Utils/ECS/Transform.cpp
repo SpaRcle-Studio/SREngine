@@ -89,12 +89,15 @@ namespace SR_UTILS_NS {
         switch (GetMeasurement()) {
             case Measurement::SpaceZero:
                 break;
-            case Measurement::Space2D:
+            case Measurement::Space2D: {
+                auto&& pTransform2D = dynamic_cast<const SR_UTILS_NS::Transform2D*>(this);
+                pMarshal->Write<uint32_t>(pTransform2D->GetStretch());
                 pMarshal->Write(GetTranslation(), SR_MATH_NS::FVector3(0.f));
                 pMarshal->Write(GetRotation(), SR_MATH_NS::FVector3(0.f));
                 pMarshal->Write(GetScale(), SR_MATH_NS::FVector3(1.f));
                 pMarshal->Write(GetSkew(), SR_MATH_NS::FVector3(1.f));
                 break;
+            }
             case Measurement::Space3D: {
                 if (!m_gameObject || m_gameObject->GetParent()) {
                     pMarshal->Write(GetTranslation(), SR_MATH_NS::FVector3(0.f));
@@ -154,12 +157,16 @@ namespace SR_UTILS_NS {
         switch (measurement) {
             case Measurement::SpaceZero:
                 break;
-            case Measurement::Space2D:
+            case Measurement::Space2D: {
+                auto&& pTransform2D = dynamic_cast<Transform2D*>(pTransform);
+                pTransform2D->SetStretch(static_cast<StretchFlags>(marshal.Read<uint32_t>()));
+                SR_FALLTHROUGH;
+            }
             case Measurement::Space3D:
-                pTransform->SetTranslation(marshal.Read<Math::FVector3>(Math::FVector3(0.f)));
-                pTransform->SetRotation(marshal.Read<Math::FVector3>(Math::FVector3(0.f)));
-                pTransform->SetScale(marshal.Read<Math::FVector3>(Math::FVector3(1.f)));
-                pTransform->SetSkew(marshal.Read<Math::FVector3>(Math::FVector3(1.f)));
+                pTransform->SetTranslation(marshal.Read<SR_MATH_NS::FVector3>(SR_MATH_NS::FVector3(0.f)));
+                pTransform->SetRotation(marshal.Read<SR_MATH_NS::FVector3>(SR_MATH_NS::FVector3(0.f)));
+                pTransform->SetScale(marshal.Read<SR_MATH_NS::FVector3>(SR_MATH_NS::FVector3(1.f)));
+                pTransform->SetSkew(marshal.Read<SR_MATH_NS::FVector3>(SR_MATH_NS::FVector3(1.f)));
                 break;
             case Measurement::Space4D:
             default:
