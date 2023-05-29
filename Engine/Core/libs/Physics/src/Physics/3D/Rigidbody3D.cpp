@@ -66,7 +66,7 @@ namespace SR_PTYPES_NS {
 
         pComponent->m_center = m_center;
 
-        pComponent->GetCollisionShape()->SetSize(GetCollisionShape()->GetSize());
+        pComponent->GetCollisionShape()->SetBounds(GetCollisionShape()->GetBounds());
 
         return dynamic_cast<Rigidbody3D*>(pComponent);
     }

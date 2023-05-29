@@ -41,6 +41,7 @@ namespace SR_PTYPES_NS {
         void SetHeight(float_t height);
         void SetRadius(float_t radius);
         void SetSize(const SR_MATH_NS::FVector3& size);
+        void SetBounds(const SR_MATH_NS::FVector3& bounds);
         void SetScale(const SR_MATH_NS::FVector3& scale);
         void SetRigidbody(Rigidbody* pRigidbody) { m_rigidbody = pRigidbody; };
 
@@ -50,6 +51,7 @@ namespace SR_PTYPES_NS {
         SR_NODISCARD float_t GetRadius() const;
         SR_NODISCARD SR_MATH_NS::FVector3 GetSize() const;
         SR_NODISCARD SR_MATH_NS::FVector3 GetScale() const;
+        SR_NODISCARD SR_MATH_NS::FVector3 GetBounds() const { return m_bounds; }
         SR_NODISCARD Rigidbody* GetRigidbody() const;
 
         SR_NODISCARD bool Valid() const noexcept;

@@ -177,6 +177,11 @@ namespace SR_PTYPES_NS {
             }
         }
 
+        if (!m_shape->GetHandle()) {
+            SRHalt("Internal shape is nullptr!");
+            return false;
+        }
+
         if (!m_rigidActor->attachShape(*(physx::PxShape*)m_shape->GetHandle())) {
             SRHalt("PhysXRigidbody3D::UpdateShapeInternal() : failed to attach shape!");
             return false;

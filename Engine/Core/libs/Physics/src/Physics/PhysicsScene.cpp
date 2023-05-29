@@ -196,10 +196,12 @@ namespace SR_PHYSICS_NS {
     }
 
     void PhysicsScene::Register(PhysicsScene::RigidbodyPtr pRigidbody) {
+        SRAssert(pRigidbody->IsComponentLoaded());
         m_rigidbodyToRegister.emplace_back(pRigidbody);
     }
 
     void PhysicsScene::Remove(PhysicsScene::RigidbodyPtr pRigidbody) {
+        SRAssert(pRigidbody->IsComponentLoaded());
         m_rigidbodyToRemove.emplace_back(pRigidbody);
     }
 

@@ -203,7 +203,7 @@ namespace SR_PTYPES_NS {
     void Rigidbody::SetCenter(const SR_MATH_NS::FVector3& center) {
         m_center = center;
         SetMatrixDirty(true);
-        if (m_shape){
+        if (m_shape) {
             m_shape->UpdateDebugShape();
         }
     }
@@ -231,29 +231,10 @@ namespace SR_PTYPES_NS {
 
         if (m_shape) {
             m_shape->RemoveDebugShape();
-        }
-
-        if (m_shape){
             m_shape->UpdateDebugShape();
         }
 
         SetShapeDirty(true);
-
-    /*#ifdef SR_DEBUG
-        SRAssert(m_library);
-
-        switch (GetMeasurement()) {
-            case SR_UTILS_NS::Measurement::Space2D:
-                SRAssert(SR_PHYSICS_UTILS_NS::Is2DShape(GetType()));
-                break;
-            case SR_UTILS_NS::Measurement::Space3D:
-                SRAssert(SR_PHYSICS_UTILS_NS::Is3DShape(GetType()));
-                break;
-            default:
-                SRHalt("Unsupported measurement! Type: " + SR_UTILS_NS::EnumReflector::ToString(GetMeasurement()));
-                break;
-        }
-    #endif*/
     }
 
     void Rigidbody::OnEnable() {

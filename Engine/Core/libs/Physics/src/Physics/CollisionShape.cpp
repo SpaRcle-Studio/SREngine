@@ -16,8 +16,8 @@ namespace SR_PTYPES_NS {
     CollisionShape::~CollisionShape() = default;
 
     void CollisionShape::UpdateDebugShape() {
-        auto&& pRigidbody = GetRigidbody();
-        if (!pRigidbody || !pRigidbody->IsAttached()) {
+        /**auto&& pRigidbody = GetRigidbody();
+        if (!pRigidbody || !pRigidbody->IsAttached() || !pRigidbody->IsActive()) {
             return;
         }
 
@@ -52,7 +52,7 @@ namespace SR_PTYPES_NS {
                     SR_MATH_NS::FColor(0, 255, 200, 255),
                     SR_FLOAT_MAX
             );
-        }
+        }*/
     }
 
 
@@ -135,9 +135,15 @@ namespace SR_PTYPES_NS {
     }
 
     void CollisionShape::RemoveDebugShape() {
-        if (m_debugId != SR_ID_INVALID) {
-            SR_UTILS_NS::DebugDraw::Instance().Remove(m_debugId);
-            m_debugId = SR_ID_INVALID;
-        }
+        // if (m_debugId != SR_ID_INVALID) {
+        //     SR_UTILS_NS::DebugDraw::Instance().Remove(m_debugId);
+        //     m_debugId = SR_ID_INVALID;
+        // }
+    }
+
+    void CollisionShape::SetBounds(const SR_MATH_NS::FVector3& bounds) {
+        m_bounds = bounds;
+        UpdateDebugShape();
+        UpdateMatrix();
     }
 }
