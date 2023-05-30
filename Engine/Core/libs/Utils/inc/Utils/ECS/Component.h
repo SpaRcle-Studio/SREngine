@@ -104,6 +104,11 @@ namespace SR_UTILS_NS {
         SR_NODISCARD SR_FORCE_INLINE virtual bool IsAwake() const noexcept { return m_isAwake; }
         SR_NODISCARD SR_FORCE_INLINE virtual bool IsStarted() const noexcept { return m_isStarted; }
 
+        /// Запущена ли сцена
+        SR_NODISCARD bool IsPlayingMode() const;
+        /// На паузе ли сцена (если запущена)
+        SR_NODISCARD bool IsPausedMode() const;
+
         SR_NODISCARD SR_FORCE_INLINE virtual bool ExecuteInEditMode() const { return false; }
         SR_NODISCARD virtual Math::FVector3 GetBarycenter() const { return SR_MATH_NS::InfinityFV3; }
         SR_NODISCARD Component* BaseComponent() { return this; }

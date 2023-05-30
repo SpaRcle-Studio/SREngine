@@ -35,11 +35,11 @@ namespace SR_PTYPES_NS {
         return Super::GetEntityInfo() + " | " + SR_UTILS_NS::EnumReflector::ToString(m_shape->GetType());
     }
 
-    SR_UTILS_NS::Component* Rigidbody::LoadComponent(SR_UTILS_NS::Measurement measurement, SR_HTYPES_NS::Marshal &marshal, const SR_HTYPES_NS::DataStorage *dataStorage) {
+    SR_UTILS_NS::Component* Rigidbody::LoadComponent(SR_UTILS_NS::Measurement measurement, SR_HTYPES_NS::Marshal &marshal, const SR_HTYPES_NS::DataStorage* pDataStorage) {
         const auto&& type = static_cast<ShapeType>(marshal.Read<int32_t>());
 
-        const auto&& center = marshal.Read<SR_MATH_NS::Vector3<float_t>>(SR_MATH_NS::Vector3<float_t>(0.f));
-        const auto&& size = marshal.Read<SR_MATH_NS::Vector3<float_t>>(SR_MATH_NS::Vector3<float_t>(1.f));
+        const auto&& center = marshal.Read<SR_MATH_NS::FVector3>(SR_MATH_NS::FVector3(0.f));
+        const auto&& size = marshal.Read<SR_MATH_NS::FVector3>(SR_MATH_NS::FVector3(1.f));
 
         const auto&& mass = marshal.Read<float_t>();
         const auto&& isTrigger = marshal.Read<bool>();
@@ -61,7 +61,7 @@ namespace SR_PTYPES_NS {
 
         switch (measurement) {
             case SR_UTILS_NS::Measurement::Space3D: {
-                pLibrary = dataStorage->GetPointer<LibraryImpl>("3DPLib");
+                pLibrary = pDataStorage->GetPointer<LibraryImpl>("3DPLib");
                 pComponent = pLibrary->CreateRigidbody3D();
                 break;
             }
@@ -105,8 +105,8 @@ namespace SR_PTYPES_NS {
 
         pMarshal->Write<int32_t>(static_cast<int32_t>(m_shape->GetType()));
 
-        pMarshal->Write<SR_MATH_NS::Vector3<float_t>>(m_center, SR_MATH_NS::Vector3<float_t>(0.f));
-        pMarshal->Write<SR_MATH_NS::Vector3<float_t>>(m_shape->GetSize(), SR_MATH_NS::Vector3<float_t>(1.f));
+        pMarshal->Write<SR_MATH_NS::FVector3>(m_center, SR_MATH_NS::FVector3(0.f));
+        pMarshal->Write<SR_MATH_NS::FVector3>(m_shape->GetSize(), SR_MATH_NS::FVector3(1.f));
 
         pMarshal->Write<float_t>(m_mass);
         pMarshal->Write<bool>(IsTrigger());
@@ -123,10 +123,9 @@ namespace SR_PTYPES_NS {
     }
 
     void Rigidbody::OnDestroy() {
-        if (m_shape) {
-            m_shape->RemoveDebugShape();
-        }
+        m_shape->RemoveDebugShape();
 
+        /// получаем указатель обязательно до OnDestroy
         PhysicsScene::Ptr physicsScene = GetPhysicsScene();
 
         Super::OnDestroy();
@@ -146,11 +145,12 @@ namespace SR_PTYPES_NS {
         GetCollisionShape()->UpdateDebugShape();
     }
 
-    Rigidbody::PhysicsScenePtr Rigidbody::GetPhysicsScene() {
+    const Rigidbody::PhysicsScenePtr& Rigidbody::GetPhysicsScene() const {
         if (!m_physicsScene.Valid()) {
             auto&& pScene = TryGetScene();
             if (!pScene) {
-                return Rigidbody::PhysicsScenePtr();
+                static Rigidbody::PhysicsScenePtr empty;
+                return empty;
             }
 
             m_physicsScene = pScene->Do<PhysicsScenePtr>([](SR_WORLD_NS::Scene* ptr) {
@@ -164,14 +164,12 @@ namespace SR_PTYPES_NS {
     void Rigidbody::OnMatrixDirty() {
         if (auto&& pTransform = GetTransform()) {
             pTransform->GetMatrix().Decompose(
-                    m_translation,
-                    m_rotation,
-                    m_scale
+                m_translation,
+                m_rotation,
+                m_scale
             );
 
-            if (m_shape) {
-                m_shape->UpdateDebugShape();
-            }
+            m_shape->UpdateDebugShape();
         }
 
         SetMatrixDirty(true);
@@ -180,7 +178,7 @@ namespace SR_PTYPES_NS {
     }
 
     bool Rigidbody::UpdateMatrix(bool force) {
-        if ((!force && !IsMatrixDirty()) || !m_shape) {
+        if ((!force && !IsMatrixDirty())) {
             return false;
         }
 
@@ -203,9 +201,7 @@ namespace SR_PTYPES_NS {
     void Rigidbody::SetCenter(const SR_MATH_NS::FVector3& center) {
         m_center = center;
         SetMatrixDirty(true);
-        if (m_shape) {
-            m_shape->UpdateDebugShape();
-        }
+        m_shape->UpdateDebugShape();
     }
 
     void Rigidbody::SetMass(float_t mass) {
@@ -229,11 +225,6 @@ namespace SR_PTYPES_NS {
 
         m_shape->SetType(type);
 
-        if (m_shape) {
-            m_shape->RemoveDebugShape();
-            m_shape->UpdateDebugShape();
-        }
-
         SetShapeDirty(true);
     }
 
@@ -249,9 +240,7 @@ namespace SR_PTYPES_NS {
             SRHalt("Failed to get physics scene!");
         }
 
-        if (m_shape){
-            m_shape->UpdateDebugShape();
-        }
+        m_shape->UpdateDebugShape();
 
         Super::OnEnable();
     }
@@ -264,9 +253,7 @@ namespace SR_PTYPES_NS {
             SRHalt("Failed to get physics scene!");
         }
 
-        if (m_shape) {
-            m_shape->RemoveDebugShape();
-        }
+        m_shape->RemoveDebugShape();
 
         Super::OnDisable();
     }
@@ -286,9 +273,11 @@ namespace SR_PTYPES_NS {
     }
 
     RBUpdShapeRes Rigidbody::UpdateShape() {
-        if (m_shape) {
-            m_shape->RemoveDebugShape();
+        if (!IsShapeDirty()) {
+            return RBUpdShapeRes::Nothing;
         }
+
+        m_shape->RemoveDebugShape();
 
         if (!m_shape->UpdateShape()) {
             SR_ERROR("Rigidbody::UpdateShape() : failed to update shape!");
@@ -300,9 +289,7 @@ namespace SR_PTYPES_NS {
             return RBUpdShapeRes::Error;
         }
 
-        if (m_shape){
-            m_shape->UpdateDebugShape();
-        }
+        m_shape->UpdateDebugShape();
 
         UpdateMatrix(true);
 
@@ -348,5 +335,18 @@ namespace SR_PTYPES_NS {
         if ((m_rawMesh = pRawMesh)) {
             m_rawMesh->AddUsePoint();
         }
+    }
+
+    bool Rigidbody::IsDebugEnabled() const noexcept {
+        if (auto&& pPhysicsScene = GetPhysicsScene()) {
+            return pPhysicsScene->IsDebugEnabled();
+        }
+
+        return false;
+    }
+
+    void Rigidbody::Update(float_t dt) {
+        m_shape->Update(dt);
+        Super::Update(dt);
     }
 }

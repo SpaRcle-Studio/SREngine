@@ -181,7 +181,7 @@ namespace SR_PHYSICS_NS {
                 continue;
             }
 
-            if (pRigidbody->IsShapeDirty() && pRigidbody->UpdateShape() == RBUpdShapeRes::Error) {
+            if (pRigidbody->UpdateShape() == RBUpdShapeRes::Error) {
                 SR_ERROR("PhysXPhysicsWorld::Synchronize() : failed to update shape!");
                 continue;
             }
@@ -223,7 +223,7 @@ namespace SR_PHYSICS_NS {
                 continue;
             }
 
-            if (pRigidbody->IsShapeDirty() && pRigidbody->UpdateShape() == RBUpdShapeRes::Error) {
+            if (pRigidbody->UpdateShape() == RBUpdShapeRes::Error) {
                 SR_ERROR("PhysXPhysicsWorld::Synchronize() : failed to update shape!");
                 continue;
             }

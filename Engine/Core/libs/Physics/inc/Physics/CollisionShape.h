@@ -30,6 +30,8 @@ namespace SR_PTYPES_NS {
         ~CollisionShape() override;
 
     public:
+        virtual void Update(float_t dt);
+
         virtual bool UpdateShape() { return false; }
         virtual bool UpdateMatrix() { return false; }
 

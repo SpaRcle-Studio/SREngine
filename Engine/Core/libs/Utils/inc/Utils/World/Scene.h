@@ -62,6 +62,11 @@ namespace SR_WORLD_NS {
         SR_NODISCARD SR_INLINE SceneBuilder* GetSceneBuilder() const { return m_sceneBuilder; }
         SR_NODISCARD SR_INLINE SceneLogicPtr GetLogicBase() const { return m_logic; }
 
+        /// Запущена ли сцена
+        SR_NODISCARD virtual bool IsPlayingMode() const { return false; }
+        /// На паузе ли сцена (если запущена)
+        SR_NODISCARD virtual bool IsPausedMode() const { return false; }
+
         GameObjects& GetRootGameObjects();
 
         GameObjectPtr FindByComponent(const std::string& name);

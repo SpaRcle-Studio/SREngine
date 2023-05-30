@@ -11,6 +11,8 @@
 
 namespace SR_UTILS_NS {
     Component::~Component() {
+        /// если срабатывает ассерт, значит, вероятнее всего, какой-то игровой объект до сих пор удерживает компонент,
+        /// а значит, будет падение.
         SRAssert(!GetParent());
     }
 
@@ -45,7 +47,8 @@ namespace SR_UTILS_NS {
 
         auto&& pParent = dynamic_cast<SR_UTILS_NS::GameObject*>(m_parent);
 
-        /// если родителя нет, или он отличается от ожидаемого, то будем считать что родитель активен
+        /// если родителя нет, или он отличается от ожидаемого, то будем считать, что родитель активен.
+        /// сцена выключенной (в понимании игровых объектов) быть не может.
         const bool isActive = m_isEnabled && (!pParent || pParent->m_isActive);
         if (isActive == m_isActive) {
             return;
@@ -64,7 +67,7 @@ namespace SR_UTILS_NS {
             return pScene;
         }
 
-        SRHalt("The component have not a valid parent!");
+        SRHalt("The component have not a valid scene!");
 
         return nullptr;
     }
@@ -73,6 +76,7 @@ namespace SR_UTILS_NS {
         /// Игровой объект или сцена никогда не уничтожится до того,
         /// как не установит "m_parent" в "nullptr"
 
+        /// наиболее часто ожидаемое поведение, это GameObject-родитель, поэтому проверяем его первым делом
         if (auto&& pGameObject = dynamic_cast<SR_UTILS_NS::GameObject*>(m_parent)) {
             return pGameObject->GetScene();
         }
@@ -121,7 +125,7 @@ namespace SR_UTILS_NS {
         return root;
     }
 
-    Transform *Component::GetTransform() const noexcept {
+    Transform* Component::GetTransform() const noexcept {
         SRAssert(m_parent);
 
         if (auto&& pGameObject = dynamic_cast<SR_UTILS_NS::GameObject*>(m_parent)) {
@@ -138,6 +142,22 @@ namespace SR_UTILS_NS {
     Component* Component::CopyComponent() const {
         SRHalt("Not implemented! [" + GetComponentName() + "]");
         return nullptr;
+    }
+
+    bool Component::IsPlayingMode() const {
+        if (auto&& pScene = TryGetScene()) {
+            return pScene->IsPlayingMode();
+        }
+
+        return false;
+    }
+
+    bool Component::IsPausedMode() const {
+        if (auto&& pScene = TryGetScene()) {
+            return pScene->IsPausedMode();
+        }
+
+        return false;
     }
 }
 

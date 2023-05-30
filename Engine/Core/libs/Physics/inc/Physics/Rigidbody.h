@@ -21,6 +21,7 @@ namespace SR_PHYSICS_NS {
     class PhysicsScene;
     class LibraryImpl;
 
+    /// Rigidbody Update Shape Result
     enum class RBUpdShapeRes : uint8_t {
         Updated = 0,
         Error = 1,
@@ -58,6 +59,7 @@ namespace SR_PTYPES_NS {
 
         SR_NODISCARD virtual SR_UTILS_NS::Measurement GetMeasurement() const;
 
+        SR_NODISCARD bool ExecuteInEditMode() const override { return true; }
         SR_NODISCARD ShapeType GetType() const noexcept;
         SR_NODISCARD CollisionShape* GetCollisionShape() const noexcept { return m_shape; }
         SR_NODISCARD SR_MATH_NS::FVector3 GetCenter() const noexcept;
@@ -74,8 +76,8 @@ namespace SR_PTYPES_NS {
         SR_NODISCARD SR_MATH_NS::FVector3 GetScale() const noexcept { return m_scale; }
         SR_NODISCARD SR_HTYPES_NS::RawMesh* GetRawMesh() const noexcept { return m_rawMesh; }
         SR_NODISCARD int32_t GetMeshId() const noexcept { return m_meshId; }
-
-        RBUpdShapeRes UpdateShape();
+        SR_NODISCARD bool IsDebugEnabled() const noexcept;
+        SR_NODISCARD RBUpdShapeRes UpdateShape();
 
         void SetMatrixDirty(bool value) { m_isMatrixDirty = value; }
         void SetShapeDirty(bool value) { m_isShapeDirty = value; }
@@ -94,6 +96,7 @@ namespace SR_PTYPES_NS {
         virtual bool InitBody();
 
     protected:
+        void Update(float_t dt) override;
         void OnEnable() override;
         void OnDisable() override;
         void OnAttached() override;
@@ -101,7 +104,7 @@ namespace SR_PTYPES_NS {
 
         void OnMatrixDirty() override;
 
-        PhysicsScenePtr GetPhysicsScene();
+        SR_NODISCARD const PhysicsScenePtr& GetPhysicsScene() const;
 
         template<typename T> SR_NODISCARD T* GetLibrary() const {
             if (auto&& pLibrary = dynamic_cast<T*>(m_library)) {
@@ -114,10 +117,11 @@ namespace SR_PTYPES_NS {
         }
 
     protected:
+        /// shape всегда присутствует, но у него может отличаться внутрення реализация
         CollisionShape::Ptr m_shape = nullptr;
         LibraryPtr m_library = nullptr;
 
-        PhysicsScenePtr m_physicsScene;
+        mutable PhysicsScenePtr m_physicsScene;
 
         SR_MATH_NS::FVector3 m_translation;
         SR_MATH_NS::FVector3 m_rigidbodyTranslation = SR_MATH_NS::InfinityFV3;

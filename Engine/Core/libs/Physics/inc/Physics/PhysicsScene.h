@@ -40,10 +40,11 @@ namespace SR_PHYSICS_NS {
         virtual void Remove(RigidbodyPtr pRigidbody);
         virtual void Register(RigidbodyPtr pRigidbody);
 
+        virtual void ClearForces();
+
         SR_NODISCARD SR_PHYSICS_NS::PhysicsWorld* Get2DWorld() const noexcept { return m_2DWorld; }
         SR_NODISCARD SR_PHYSICS_NS::PhysicsWorld* Get3DWorld() const noexcept { return m_3DWorld; }
-
-        virtual void ClearForces();
+        SR_NODISCARD bool IsDebugEnabled() const noexcept { return m_debugEnabled; };
 
     private:
         virtual bool Flush();
@@ -62,6 +63,7 @@ namespace SR_PHYSICS_NS {
         PhysicsWorldPtr m_3DWorld = nullptr;
 
         bool m_needClearForces = false;
+        bool m_debugEnabled = true;
 
     };
 }

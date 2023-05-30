@@ -63,7 +63,14 @@ namespace SR_PTYPES_NS {
         m_rigidActor->userData = (void*)dynamic_cast<Rigidbody*>(this);
 
         UpdateMatrix(true);
-        UpdateShape();
+        SetShapeDirty(true);
+
+        /// проверяем именно на Updated, так как остальные варианты тут недопустимы
+        if (UpdateShape() != RBUpdShapeRes::Updated) {
+            SR_ERROR("PhysXRigidbody3D::InitBody() : shape is not updated!");
+            return false;
+        }
+
         UpdateInertia();
 
         return true;
@@ -74,7 +81,7 @@ namespace SR_PTYPES_NS {
             return;
         }
 
-        if (auto&& pRigidBody = m_rigidActor->is<physx::PxRigidBody>()){
+        if (auto&& pRigidBody = m_rigidActor->is<physx::PxRigidBody>()) {
             pRigidBody->setLinearVelocity(pRigidBody->getLinearVelocity() + SR_PHYSICS_UTILS_NS::FV3ToPxV3(velocity));
         }
     }
@@ -84,7 +91,7 @@ namespace SR_PTYPES_NS {
             return;
         }
 
-        if (auto&& pRigidBody = m_rigidActor->is<physx::PxRigidBody>()){
+        if (auto&& pRigidBody = m_rigidActor->is<physx::PxRigidBody>()) {
             pRigidBody->setAngularVelocity(pRigidBody->getAngularVelocity() + SR_PHYSICS_UTILS_NS::FV3ToPxV3(velocity));
         }
     }
@@ -94,7 +101,7 @@ namespace SR_PTYPES_NS {
             return;
         }
 
-        if (auto&& pRigidBody = m_rigidActor->is<physx::PxRigidBody>()){
+        if (auto&& pRigidBody = m_rigidActor->is<physx::PxRigidBody>()) {
             pRigidBody->setLinearVelocity(SR_PHYSICS_UTILS_NS::FV3ToPxV3(velocity));
         }
     }
@@ -104,7 +111,7 @@ namespace SR_PTYPES_NS {
             return;
         }
 
-        if (auto&& pRigidBody = m_rigidActor->is<physx::PxRigidBody>()){
+        if (auto&& pRigidBody = m_rigidActor->is<physx::PxRigidBody>()) {
             pRigidBody->setAngularVelocity(SR_PHYSICS_UTILS_NS::FV3ToPxV3(velocity));
         }
     }
@@ -114,7 +121,7 @@ namespace SR_PTYPES_NS {
             return SR_MATH_NS::FVector3();
         }
 
-        if (auto&& pRigidBody = m_rigidActor->is<physx::PxRigidBody>()){
+        if (auto&& pRigidBody = m_rigidActor->is<physx::PxRigidBody>()) {
             return SR_PHYSICS_UTILS_NS::PxV3ToFV3(pRigidBody->getLinearVelocity());
         }
 
@@ -126,7 +133,7 @@ namespace SR_PTYPES_NS {
             return SR_MATH_NS::FVector3();
         }
 
-        if (auto&& pRigidBody = m_rigidActor->is<physx::PxRigidBody>()){
+        if (auto&& pRigidBody = m_rigidActor->is<physx::PxRigidBody>()) {
             return SR_PHYSICS_UTILS_NS::PxV3ToFV3(pRigidBody->getAngularVelocity());
         }
 
