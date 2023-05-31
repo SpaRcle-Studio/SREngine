@@ -92,7 +92,13 @@ namespace SR_HTYPES_NS {
             return main;
         }
 
-        SRHalt("Thread::Factory::GetThisThread() : unknown thread!");
+    #ifdef SR_DEBUG
+        SR_MAYBE_UNUSED std::string threads;
+        for (auto&& [id, pThread] : m_threads) {
+            threads.append("\tThread [" + id + "]\n");
+        }
+        SRHalt("Thread::Factory::GetThisThread() : unknown thread!\n" + threads);
+    #endif
 
         return nullptr;
     }

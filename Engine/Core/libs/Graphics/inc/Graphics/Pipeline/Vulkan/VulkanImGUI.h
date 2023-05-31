@@ -35,7 +35,6 @@ namespace SR_GRAPH_NS::VulkanTypes {
         };
     public:
         bool Init();
-        bool ReSize(uint32_t width, uint32_t height);
         bool ReCreate();
         void SetSurfaceDirty();
 
@@ -55,8 +54,6 @@ namespace SR_GRAPH_NS::VulkanTypes {
         PipelinePtr m_pipeline = nullptr;
 
         VkSemaphore m_semaphore = VK_NULL_HANDLE;
-
-        SR_MATH_NS::IVector2 m_surfaceSize;
 
         bool m_surfaceDirty = true;
         bool m_tracyEnabled = false;

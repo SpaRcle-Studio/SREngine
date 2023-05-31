@@ -212,8 +212,8 @@ namespace SR_GRAPH_NS::VulkanTypes {
             return false;
         }
 
-        if (!ReSize(m_swapchain->GetSurfaceWidth(), m_swapchain->GetSurfaceHeight())) {
-            SR_ERROR("VkImGUI::Init() : failed to resize frame buffers!");
+        if (!ReCreate()) {
+            SR_ERROR("VkImGUI::Init() : failed to re-create!");
             return false;
         }
 
@@ -305,9 +305,11 @@ namespace SR_GRAPH_NS::VulkanTypes {
             return false;
         }
 
+        auto&& surfaceSize = SR_MATH_NS::IVector2(m_swapchain->GetSurfaceWidth(), m_swapchain->GetSurfaceHeight());
+
         m_frameBuffs.resize(m_swapchain->GetCountImages());
 
-        auto&& fbInfo = EvoVulkan::Tools::Initializers::FrameBufferCI(m_renderPass, m_surfaceSize.x, m_surfaceSize.y);
+        auto&& fbInfo = EvoVulkan::Tools::Initializers::FrameBufferCI(m_renderPass, surfaceSize.x, surfaceSize.y);
         auto&& attaches = std::vector<VkImageView>(1);
         fbInfo.attachmentCount = attaches.size();
 
@@ -330,7 +332,7 @@ namespace SR_GRAPH_NS::VulkanTypes {
                 .pNext = nullptr,
                 .renderPass = m_renderPass,
                 .framebuffer = VK_NULL_HANDLE,
-                .renderArea = { VkOffset2D(), { static_cast<uint32_t>(m_surfaceSize.x), static_cast<uint32_t>(m_surfaceSize.y) } },
+                .renderArea = { VkOffset2D(), { static_cast<uint32_t>(surfaceSize.x), static_cast<uint32_t>(surfaceSize.y) } },
                 .clearValueCount = static_cast<uint32_t>(m_clearValues.size()),
                 .pClearValues = m_clearValues.data(),
         };
@@ -338,14 +340,6 @@ namespace SR_GRAPH_NS::VulkanTypes {
         m_surfaceDirty = false;
 
         return true;
-    }
-
-    bool VkImGUI::ReSize(uint32_t width, uint32_t height) {
-        SR_GRAPH_LOG("VkImGUI::ReSize() : resize imgui vulkan frame buffers...\n\tWidth: " + std::to_string(width) + "\n\tHeight: " + std::to_string(height));
-
-        m_surfaceSize = SR_MATH_NS::IVector2(width, height);
-
-        return ReCreate();
     }
 
     VkCommandBuffer VkImGUI::Render(uint32_t frame) {
@@ -370,7 +364,6 @@ namespace SR_GRAPH_NS::VulkanTypes {
 
                 vkCmdEndRenderPass(m_cmdBuffs[frame]);
             }
-
             SR_TRACY_VK_COLLECT(buffer);
         }
         else {

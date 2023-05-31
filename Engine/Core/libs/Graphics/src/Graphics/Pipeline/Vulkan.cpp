@@ -985,7 +985,7 @@ namespace SR_GRAPH_NS {
         Environment::Get()->SetBuildState(false);
 
         if (m_GUIEnabled) {
-            dynamic_cast<Framework::Graphics::Vulkan*>(Environment::Get())->GetVkImGUI()->ReSize(m_width, m_height);
+            dynamic_cast<SR_GRAPH_NS::Vulkan*>(Environment::Get())->GetVkImGUI()->ReCreate();
         }
 
         return true;

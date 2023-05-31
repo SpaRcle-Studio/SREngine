@@ -120,10 +120,6 @@ namespace SR_GRAPH_NS {
     void RenderScene::Submit() noexcept {
         SR_TRACY_ZONE_N("Submit frame");
 
-        if (!m_hasDrawData) {
-            return;
-        }
-
         GetPipeline()->DrawFrame();
     }
 
