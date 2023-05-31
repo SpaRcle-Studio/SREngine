@@ -67,11 +67,11 @@ namespace SR_GTYPES_NS {
     }
 
     bool Framebuffer::Bind() {
-        if (m_hasErrors || m_dirty) {
+        if (m_hasErrors) {
             return false;
         }
 
-        if (!IsCalculated() && !Update()) {
+        if ((!IsCalculated() || m_dirty) && !Update()) {
             SR_ERROR("Framebuffer::Bind() : failed to initialize framebuffer!");
             return false;
         }
@@ -84,7 +84,7 @@ namespace SR_GTYPES_NS {
 
     bool Framebuffer::Update() {
         if (m_size.HasZero() || m_size.HasNegative()) {
-            SR_ERROR("Update::OnResize() : incorrect FBO size!");
+            SR_ERROR("Framebuffer::Update() : incorrect framebuffer size!");
             m_hasErrors = true;
             return false;
         }
@@ -210,8 +210,12 @@ namespace SR_GTYPES_NS {
         return 0;
     }
 
-    int32_t Framebuffer::GetColorTexture(uint32_t layer) const {
-        if (layer >= m_colors.size() || m_hasErrors || m_dirty) {
+    int32_t Framebuffer::GetColorTexture(uint32_t layer) {
+        if ((!IsCalculated() || m_dirty) && !Update()) {
+            SR_ERROR("Framebuffer::GetColorTexture() : failed to initialize framebuffer!");
+        }
+
+        if (layer >= m_colors.size() || m_hasErrors) {
             return SR_ID_INVALID;
         }
 

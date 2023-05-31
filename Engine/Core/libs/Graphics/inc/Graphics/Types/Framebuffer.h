@@ -64,7 +64,7 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD bool IsDirty() const { return m_dirty; }
 
         SR_NODISCARD int32_t GetId();
-        SR_NODISCARD int32_t GetColorTexture(uint32_t layer) const;
+        SR_NODISCARD int32_t GetColorTexture(uint32_t layer);
         SR_NODISCARD int32_t GetDepthTexture() const;
 
         SR_NODISCARD uint32_t GetWidth() const;

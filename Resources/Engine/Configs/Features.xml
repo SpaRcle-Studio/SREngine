@@ -11,6 +11,8 @@
 
        <CrashHandler Value="false"/>
 
+       <Tracy Value="true"/>
+
        <DebugChunks Value="true"/>
        <DebugRegions Value="true"/>
        <ChunkSystem Value="true"/>

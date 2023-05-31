@@ -59,6 +59,7 @@ namespace SR_GRAPH_NS::VulkanTypes {
         SR_MATH_NS::IVector2 m_surfaceSize;
 
         bool m_surfaceDirty = true;
+        bool m_tracyEnabled = false;
 
         VkCommandBufferBeginInfo m_cmdBuffBI;
         VkRenderPassBeginInfo m_renderPassBI;

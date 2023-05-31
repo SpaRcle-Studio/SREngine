@@ -282,9 +282,12 @@ namespace SR_GRAPH_NS {
         }
 
     #ifdef SR_TRACY_ENABLE
-        if (auto&& pSingleTimeCmd = m_kernel->CreateCmd()) {
-            SR_TRACY_VK_CREATE(*pSingleTimeCmd, m_kernel, "EvoVulkan");
-            delete pSingleTimeCmd;
+        if (SR_UTILS_NS::Features::Instance().Enabled("Tracy", false)) {
+            if (auto &&pSingleTimeCmd = m_kernel->CreateCmd()) {
+                SR_GRAPH_LOG("Vulkan::PostInit() : initializing tracy...");
+                SR_TRACY_VK_CREATE(*pSingleTimeCmd, m_kernel, "EvoVulkan");
+                delete pSingleTimeCmd;
+            }
         }
     #endif
 
@@ -301,7 +304,8 @@ namespace SR_GRAPH_NS {
         if (FBO != 0) {
             if (auto fbo = m_memory->m_FBOs[FBO - 1]; fbo) {
                 renderPass = fbo->GetRenderPass();
-            } else {
+            }
+            else {
                 SR_ERROR("Vulkan::CompileShader() : invalid FBO! SOMETHING WENT WRONG! MEMORY MAY BE CORRUPTED!");
                 return false;
             }

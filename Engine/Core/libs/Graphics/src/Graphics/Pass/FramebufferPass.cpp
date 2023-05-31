@@ -30,14 +30,17 @@ namespace SR_GRAPH_NS {
 
     bool FramebufferPass::Render() {
         if (!m_framebuffer) {
+            m_isRendered = false;
             return false;
         }
 
         if (!m_framebuffer->Bind()) {
+            m_isRendered = false;
             return false;
         }
 
         if (!m_framebuffer->BeginCmdBuffer(m_clearColors, m_depth)) {
+            m_isRendered = false;
             return false;
         }
 
@@ -48,6 +51,8 @@ namespace SR_GRAPH_NS {
         }
 
         m_pipeline->SetCurrentFramebuffer(nullptr);
+
+        m_isRendered = true;
 
         /// Независимо от того, отрисовали мы что-то в кадровый буффер или нет,
         /// все равно возвращаем false (hasDrawData), так как технически, кадровый буффер
@@ -71,6 +76,10 @@ namespace SR_GRAPH_NS {
 
     void FramebufferPass::Update() {
         if (!m_framebuffer || m_framebuffer->IsDirty()) {
+            return;
+        }
+
+        if (!m_isRendered) {
             return;
         }
 

@@ -6,6 +6,7 @@
 #include <Graphics/Render/RenderScene.h>
 
 #include <Graphics/Window/Window.h>
+#include <Graphics/Memory/ShaderProgramManager.h>
 
 #include <Graphics/Types/Framebuffer.h>
 #include <Graphics/Types/Shader.h>
@@ -313,6 +314,7 @@ namespace SR_GRAPH_NS {
 
     void RenderContext::SetCurrentShader(RenderContext::ShaderPtr pShader) {
         m_pipeline->SetCurrentShader(pShader);
+        SRAssert2(!pShader || pShader->IsAvailable(), "The shader was not bound and not available!");
     }
 
     RenderContext::WindowPtr RenderContext::GetWindow() const {

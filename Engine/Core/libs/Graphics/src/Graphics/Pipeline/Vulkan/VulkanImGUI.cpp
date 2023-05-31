@@ -3,6 +3,7 @@
 //
 
 #include <Utils/GUI.h>
+#include <Utils/Common/Features.h>
 
 #include <EvoVulkan/Types/DescriptorPool.h>
 
@@ -160,6 +161,8 @@ namespace SR_GRAPH_NS::VulkanTypes {
         SR_INFO("VkImGUI::Init() : initializing vulkan imgui...");
 
         auto&& pKernel = dynamic_cast<Vulkan*>(m_pipeline)->GetKernel();
+
+        m_tracyEnabled = SR_UTILS_NS::Features::Instance().Enabled("Tracy", false);
 
         m_device      = pKernel->GetDevice();
         m_swapchain   = pKernel->GetSwapchain();
@@ -350,24 +353,42 @@ namespace SR_GRAPH_NS::VulkanTypes {
 
         vkResetCommandPool(*m_device, m_cmdPools[frame], 0);
 
-        vkBeginCommandBuffer(buffer, &m_cmdBuffBI);
-        {
-            SR_TRACY_VK_FRAME_ZONE_N(buffer, "VkImGUI");
+        if (m_tracyEnabled) {
+            vkBeginCommandBuffer(buffer, &m_cmdBuffBI);
+            {
+                SR_TRACY_VK_FRAME_ZONE_N(buffer, "VkImGUI");
 
-            m_renderPassBI.framebuffer = m_frameBuffs[frame];
-            vkCmdBeginRenderPass(m_cmdBuffs[frame], &m_renderPassBI, VK_SUBPASS_CONTENTS_INLINE);
+                m_renderPassBI.framebuffer = m_frameBuffs[frame];
+                vkCmdBeginRenderPass(m_cmdBuffs[frame], &m_renderPassBI, VK_SUBPASS_CONTENTS_INLINE);
 
-            if (auto&& drawData = ImGui::GetDrawData()) {
-                ImGui_ImplVulkan_RenderDrawData(drawData, m_cmdBuffs[frame]);
+                if (auto&& drawData = ImGui::GetDrawData()) {
+                    ImGui_ImplVulkan_RenderDrawData(drawData, m_cmdBuffs[frame]);
+                }
+                else {
+                    VK_WARN("VkImGUI::Render() : imgui draw data is nullptr!");
+                }
+
+                vkCmdEndRenderPass(m_cmdBuffs[frame]);
             }
-            else {
-                VK_WARN("VkImGUI::Render() : imgui draw data is nullptr!");
-            }
 
-            vkCmdEndRenderPass(m_cmdBuffs[frame]);
+            SR_TRACY_VK_COLLECT(buffer);
         }
+        else {
+            vkBeginCommandBuffer(buffer, &m_cmdBuffBI);
+            {
+                m_renderPassBI.framebuffer = m_frameBuffs[frame];
+                vkCmdBeginRenderPass(m_cmdBuffs[frame], &m_renderPassBI, VK_SUBPASS_CONTENTS_INLINE);
 
-        SR_TRACY_VK_COLLECT(buffer);
+                if (auto&& drawData = ImGui::GetDrawData()) {
+                    ImGui_ImplVulkan_RenderDrawData(drawData, m_cmdBuffs[frame]);
+                }
+                else {
+                    VK_WARN("VkImGUI::Render() : imgui draw data is nullptr!");
+                }
+
+                vkCmdEndRenderPass(m_cmdBuffs[frame]);
+            }
+        }
 
         vkEndCommandBuffer(m_cmdBuffs[frame]);
 
