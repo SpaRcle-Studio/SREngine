@@ -27,6 +27,8 @@ namespace SR_UTILS_NS {
 
     const SR_MATH_NS::Matrix4x4& Transform3D::GetMatrix() {
         if (IsDirty()) {
+            SR_TRACY_ZONE;
+
             UpdateMatrix();
 
             if (auto&& pTransform = m_gameObject->GetParentTransform()) {

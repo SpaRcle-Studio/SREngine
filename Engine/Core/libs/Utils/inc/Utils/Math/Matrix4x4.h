@@ -32,6 +32,7 @@ namespace SR_MATH_NS {
         explicit constexpr Matrix4x4(const glm::mat4& mat) noexcept;
         explicit Matrix4x4(glm::mat4&& mat) noexcept;
 
+        Matrix4x4(const FVector3& translate, const Quaternion& rotation) noexcept;
         Matrix4x4(const FVector3& translate, const Quaternion& rotation, const FVector3& scale) noexcept;
         Matrix4x4(const FVector3& translate, const Quaternion& rotation, const FVector3& scale, const FVector3& skew) noexcept;
 

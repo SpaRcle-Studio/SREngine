@@ -43,4 +43,11 @@ namespace SR_MATH_NS {
     Matrix4x4 Matrix4x4::operator*(const Matrix4x4& mat) const {
         return Matrix4x4(GLMMultiplyMat4x4(self, mat.self));
     }
+
+    Matrix4x4::Matrix4x4(const FVector3 &translate, const Quaternion &rotation) noexcept
+        : Matrix4x4()
+    {
+        GLMTranslateMat4x4(self, translate.ToGLM());
+        GLMRotateMat4x4(self, rotation.ToGLM());
+    }
 }
