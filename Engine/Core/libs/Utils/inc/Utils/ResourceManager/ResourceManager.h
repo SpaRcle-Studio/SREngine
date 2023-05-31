@@ -108,6 +108,8 @@ namespace SR_UTILS_NS {
         ResourcesTypes::iterator m_checkResourceGroupIt;
         uint64_t m_checkInfoIndex = 0;
 
+        std::vector<ResourceInfo::WeakPtr> m_dirtyResources;
+
     };
 }
 

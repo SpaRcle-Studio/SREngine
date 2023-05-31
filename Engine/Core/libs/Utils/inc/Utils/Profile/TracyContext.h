@@ -57,6 +57,7 @@ namespace SR_UTILS_NS {
 #endif
 
 #ifdef SR_TRACY_ENABLE
+    #define SR_TRACY_TEXT_N(name, text) ZoneText(text.c_str(), text.size())
     #define SR_TRACY_ZONE ZoneScoped
     #define SR_TRACY_ZONE_N(name) ZoneScopedN(name)
     #define SR_TRACY_ZONE_S(name) ZoneTransientN(TracyConcat(__tracy_source_location, TracyLine), name, true)
@@ -67,6 +68,7 @@ namespace SR_UTILS_NS {
     #define SR_TRACY_DESTROY(tracyType) SR_UTILS_NS::TracyContextManager::Instance().Destroy(tracyType);
 
 #else
+    #define SR_TRACY_TEXT_N(name, text)
     #define SR_TRACY_ZONE SR_NOOP
     #define SR_TRACY_ZONE_N(name) SR_NOOP
     #define SR_TRACY_ZONE_S(name) SR_NOOP

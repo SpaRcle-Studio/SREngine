@@ -57,7 +57,7 @@ namespace SR_UTILS_NS {
 
     void ResourceType::Remove(IResource *pResource) {
         const auto id = pResource->GetResourceHashId();
-        auto&& path = pResource->GetResourceHashPath();
+        auto&& hashPath = pResource->GetResourceHashPath();
 
         /// -------------------------------------------------------------
 
@@ -75,12 +75,12 @@ namespace SR_UTILS_NS {
 
         /// -------------------------------------------------------------
 
-        auto&& info = m_info.at(path);
+        auto&& pInfo = m_info.at(hashPath);
 
-        info.m_loaded.erase(pResource);
+        pInfo->m_loaded.erase(pResource);
 
-        if (info.m_loaded.empty()) {
-            m_info.erase(path);
+        if (pInfo->m_loaded.empty()) {
+            m_info.erase(hashPath);
         }
 
         /// -------------------------------------------------------------
@@ -99,12 +99,13 @@ namespace SR_UTILS_NS {
 
     retry:
         if (pIt != m_info.end()) {
-            auto&& [_, info] = *pIt;
-            info.m_loaded.insert(pResource);
-            pResource->m_resourceInfo = &info;
+            auto&& [_, pInfo] = *pIt;
+            pInfo->m_loaded.insert(pResource);
+            pResource->m_resourceInfo = pInfo.get();
         }
         else {
-            pIt = m_info.insert(std::make_pair(path, ResourceInfo(pResource->GetFileHash(), pResource->GetResourceHash()))).first;
+            auto&& pInfo = std::make_shared<ResourceInfo>(pResource->GetFileHash(), pResource->GetResourceHash(), this);
+            pIt = m_info.insert(std::make_pair(path, pInfo)).first;
             goto retry;
         }
     }
@@ -135,14 +136,14 @@ namespace SR_UTILS_NS {
         }
     }
 
-    std::pair<ResourceType::ResourcePath, ResourceInfo*> ResourceType::GetInfoByIndex(uint64_t index) {
+    std::pair<ResourceType::ResourcePath, ResourceInfo::HardPtr> ResourceType::GetInfoByIndex(uint64_t index) {
         if (index >= m_info.size()) {
             return std::make_pair(0, nullptr);
         }
 
         auto&& [hash, info] = *std::next(m_info.begin(), index);
 
-        return std::make_pair(hash, &info);
+        return std::make_pair(hash, info);
     }
 
     void ResourceType::SetReloader(IResourceReloader *pReloader) {
@@ -155,6 +156,15 @@ namespace SR_UTILS_NS {
 
     IResource::Ptr ResourceInfo::GetResource() const {
         if (m_loaded.size() != 1) {
+            SRHalt("Incorrect function usage!");
+            return nullptr;
+        }
+
+        return *m_loaded.begin();
+    }
+
+    IResource *ResourceInfo::GetFirstResource() const {
+        if (m_loaded.size() == 0) {
             SRHalt("Incorrect function usage!");
             return nullptr;
         }

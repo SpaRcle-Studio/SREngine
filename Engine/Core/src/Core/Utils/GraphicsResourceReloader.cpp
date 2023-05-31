@@ -7,6 +7,8 @@
 
 namespace SR_CORE_NS {
     bool GraphicsResourceReloader::Reload(const SR_UTILS_NS::Path& path, SR_UTILS_NS::ResourceInfo* pResourceInfo) {
+        SR_TRACY_ZONE;
+
         auto&& pResource = pResourceInfo->GetResource();
         if (!pResource) {
             return false;
@@ -28,6 +30,8 @@ namespace SR_CORE_NS {
     }
 
     void GraphicsResourceReloader::OnResourceReloaded(SR_UTILS_NS::IResource::Ptr pResource) {
+        SR_TRACY_ZONE;
+
         auto&& engine = Engine::Instance();
         auto&& renderScene = engine.GetRenderScene();
 

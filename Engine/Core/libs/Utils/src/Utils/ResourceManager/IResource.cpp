@@ -20,6 +20,8 @@ namespace SR_UTILS_NS {
     { }
 
     bool IResource::Reload() {
+        SR_TRACY_ZONE;
+
         if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::Medium) {
             SR_LOG("IResource::Reload() : reloading \"" + std::string(GetResourceId()) + "\" resource...");
         }
@@ -201,7 +203,11 @@ namespace SR_UTILS_NS {
     }
 
     uint64_t IResource::GetFileHash() const {
+        SR_TRACY_ZONE;
+
         auto&& path = Path(GetResourcePath());
+
+        SR_TRACY_TEXT_N("Path", path.ToStringRef());
 
         if (!path.IsAbs()) {
             path = GetAssociatedPath().Concat(path);

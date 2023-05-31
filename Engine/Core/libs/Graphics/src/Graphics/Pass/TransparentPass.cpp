@@ -56,7 +56,7 @@ namespace SR_GRAPH_NS {
         }
 
         auto&& transparent = GetRenderScene()->GetTransparent();
-        auto&& time = SR_HTYPES_NS::Time::Instance().FClock();
+        auto&& time = SR_HTYPES_NS::Time::Instance().Clock();
 
         for (auto const& [pShader, subCluster] : transparent) {
             if (!pShader || !pShader->Ready()) {

@@ -60,7 +60,7 @@ namespace SR_GRAPH_NS {
         }
 
         auto&& opaque = GetRenderScene()->GetOpaque();
-        auto&& time = SR_HTYPES_NS::Time::Instance().FClock();
+        auto&& time = SR_HTYPES_NS::Time::Instance().Clock();
 
         for (auto const& [pShader, subCluster] : opaque) {
             if (!pShader || !pShader->Ready()) {

@@ -110,11 +110,19 @@ namespace SR_UTILS_NS {
         do {
             SR_PLATFORM_NS::Sleep(25);
 
+            SR_TRACY_ZONE;
+
             auto time = clock();
             m_deltaTime = static_cast<uint64_t>(time - m_lastTime); /// miliseconds
             m_lastTime = time;
 
             m_GCDt += m_deltaTime;
+            m_hashCheckDt += m_deltaTime;
+
+            if (m_hashCheckDt > 25 /** ms */) {
+                CheckResourceHashes();
+                m_hashCheckDt = 0;
+            }
 
             if (m_GCDt > (m_force ? 500 : 100) /** ms */) {
                 /** если какой-то ресурс больше не используется, то уничтожаем его.
@@ -343,37 +351,14 @@ namespace SR_UTILS_NS {
             return;
         }
 
-        bool needReload = false;
-
-        for (auto&& pResource : pResourceInfo->m_loaded) {
-            if (pResource->IsDestroyed()) {
-                continue;
-            }
-
+        if (auto&& pResource = pResourceInfo->GetFirstResource()) {
             auto&& fileHash = pResource->GetFileHash();
             if (fileHash != pResourceInfo->m_fileHash) {
-                needReload = true;
+                /// если дважды положим один и тот же ресурс (слишком быстро перезагрузили), то будем считать,
+                /// что не повезло и перезагрузим дважды.
+                m_dirtyResources.emplace_back(pResourceInfo);
                 pResourceInfo->m_fileHash = fileHash;
             }
-        }
-
-        if (!needReload) {
-            ++m_checkInfoIndex;
-            return;
-        }
-
-        IResourceReloader* pResourceReloader = nullptr;
-
-        if (auto&& pGroupReloader = m_checkResourceGroupIt->second->GetReloader()) {
-            pResourceReloader = pGroupReloader;
-        }
-        else {
-            pResourceReloader = m_defaultReloader;
-        }
-
-        auto&& path = GetResourcePath(hashPath);
-        if (pResourceReloader && !pResourceReloader->Reload(path, pResourceInfo)) {
-            SR_ERROR("ResourceManager::CheckResourceHashes() : failed to reload resource!\n\tPath: " + path.ToStringRef());
         }
 
         ++m_checkInfoIndex;
@@ -426,6 +411,7 @@ namespace SR_UTILS_NS {
     }
 
     const Path& ResourceManager::GetResourcePath(ResourceManager::Hash hashPath) const {
+        SR_TRACY_ZONE;
         SR_SCOPED_LOCK
 
         /// пустая строка
@@ -488,13 +474,37 @@ namespace SR_UTILS_NS {
 
     void ResourceManager::ReloadResources(float_t dt) {
         SR_TRACY_ZONE;
+
+        /// не блокируем поток, иначе не будет смысла от разделения.
+        /// если прочитаем некорректные данные из empty, будем считать, что не повезло.
+        if (m_dirtyResources.empty()) {
+            return;
+        }
+
         SR_SCOPED_LOCK;
 
-        m_hashCheckDt += m_deltaTime;
+        for (auto&& pResourceInfo : m_dirtyResources) {
+            /// ресурс мог быть освобожден в GC
+            auto&& pHardPtr = pResourceInfo.lock();
+            if (!pHardPtr) {
+                continue;
+            }
 
-        if (m_hashCheckDt > 25 /** ms */) {
-            CheckResourceHashes();
-            m_hashCheckDt = 0;
+            IResourceReloader* pResourceReloader = nullptr;
+
+            if (auto&& pGroupReloader = m_checkResourceGroupIt->second->GetReloader()) {
+                pResourceReloader = pGroupReloader;
+            }
+            else {
+                pResourceReloader = m_defaultReloader;
+            }
+
+            auto&& path = GetResourcePath(pHardPtr->m_resourceHash);
+            if (pResourceReloader && !pResourceReloader->Reload(path, pHardPtr.get())) {
+                SR_ERROR("ResourceManager::ReloadResources() : failed to reload resource!\n\tPath: " + path.ToStringRef());
+            }
         }
+
+        m_dirtyResources.clear();
     }
 }

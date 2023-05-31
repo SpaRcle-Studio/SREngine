@@ -56,7 +56,6 @@ namespace SR_GRAPH_NS {
         }
 
         auto&& debug = GetRenderScene()->GetDebugCluster();
-        auto&& time = clock();
 
         for (auto const& [pShader, subCluster] : debug) {
             if (!pShader || !pShader->Ready()) {
@@ -71,7 +70,6 @@ namespace SR_GRAPH_NS {
             pShader->SetMat4(SHADER_VIEW_MATRIX, m_camera->GetViewTranslateRef());
             pShader->SetMat4(SHADER_PROJECTION_MATRIX, m_camera->GetProjectionRef());
             pShader->SetMat4(SHADER_ORTHOGONAL_MATRIX, m_camera->GetOrthogonalRef());
-            pShader->SetFloat(SHADER_TIME, time);
 
             for (auto const& [key, meshGroup] : subCluster) {
                 for (const auto &mesh : meshGroup) {

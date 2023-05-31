@@ -16,18 +16,22 @@ namespace SR_UTILS_NS {
 
     class ResourceManager;
     class IResourceReloader;
+    class ResourceType;
 
     struct SR_DLL_EXPORT ResourceInfo {
-        ResourceInfo(uint64_t fileHash, uint64_t resourceHash)
+        using HardPtr = std::shared_ptr<ResourceInfo>;
+        using WeakPtr = std::weak_ptr<ResourceInfo>;
+
+        ResourceInfo(uint64_t fileHash, uint64_t resourceHash, ResourceType* pResourceType)
             : m_fileHash(fileHash)
             , m_resourceHash(resourceHash)
-        { }
-
-        ResourceInfo()
-            : ResourceInfo(0, 0)
+            , m_resourceType(pResourceType)
         { }
 
         SR_NODISCARD IResource* GetResource() const;
+        SR_NODISCARD IResource* GetFirstResource() const;
+
+        ResourceType* m_resourceType = nullptr;
 
         /// хэш файла ресурса
         uint64_t m_fileHash = 0;
@@ -42,7 +46,7 @@ namespace SR_UTILS_NS {
         using ResourceId = uint64_t;
         using ResourcePath = uint64_t;
         using CopiesMap = std::unordered_map<ResourceId, std::unordered_set<IResource*>>;
-        using Info = std::unordered_map<ResourcePath, ResourceInfo>;
+        using Info = std::unordered_map<ResourcePath, ResourceInfo::HardPtr>;
     public:
         explicit ResourceType(std::string name)
             : m_name(std::move(name))
@@ -55,7 +59,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD bool IsLast(const ResourceId& id);
         SR_NODISCARD const CopiesMap& GetCopiesRef() const;
         SR_NODISCARD Info& GetInfo();
-        SR_NODISCARD std::pair<ResourcePath, ResourceInfo*> GetInfoByIndex(uint64_t index);
+        SR_NODISCARD std::pair<ResourcePath, ResourceInfo::HardPtr> GetInfoByIndex(uint64_t index);
         SR_NODISCARD IResourceReloader* GetReloader() const noexcept { return m_reloader; }
         SR_NODISCARD std::string_view GetName() const { return m_name; }
 

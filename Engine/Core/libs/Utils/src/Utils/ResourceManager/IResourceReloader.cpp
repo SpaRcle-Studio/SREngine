@@ -7,6 +7,8 @@
 
 namespace SR_UTILS_NS {
     bool DefaultResourceReloader::Reload(const SR_UTILS_NS::Path& /** path */, ResourceInfo* pResourceInfo) {
+        SR_TRACY_ZONE;
+
         for (auto&& pResource : pResourceInfo->m_loaded) {
             if (!IsResourceSuitableForReload(pResource)) {
                 continue;
@@ -19,6 +21,8 @@ namespace SR_UTILS_NS {
     }
 
     bool IResourceReloader::IsResourceSuitableForReload(IResource *pResource) const {
+        SR_TRACY_ZONE;
+
         if (pResource->IsDestroyed()) {
             return false;
         }
