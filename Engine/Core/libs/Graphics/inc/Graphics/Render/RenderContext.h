@@ -91,6 +91,7 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD FramebufferPtr FindFramebuffer(const std::string& name) const;
         SR_NODISCARD FramebufferPtr FindFramebuffer(const std::string& name, CameraPtr pCamera) const;
         SR_NODISCARD SR_MATH_NS::UVector2 GetWindowSize() const;
+        SR_NODISCARD const std::vector<SR_GTYPES_NS::Shader*>& GetShaders() const noexcept;
 
         void SetCurrentShader(ShaderPtr pShader);
 

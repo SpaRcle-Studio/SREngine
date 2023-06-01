@@ -18,6 +18,7 @@ namespace Framework::Core::GUI {
             ResourcesPage();
             ThreadsPage();
             WidgetsPage();
+            VideoMemoryPage();
 
             ImGui::EndTabBar();
         }
@@ -121,12 +122,27 @@ namespace Framework::Core::GUI {
             ImGui::EndTabItem();
         }
     }
-
+ 
     void EngineStatistics::VideoMemoryPage() {
         if (ImGui::BeginTabItem("Video memory")) {
-            if (ImGui::BeginTable("##VideoMemoryPage", 5)) {
+            auto&& pContext = GetContext();
+            auto&& shaders = pContext->GetShaders();
 
+            if (ImGui::CollapsingHeader("Shaders")) {
+                if (ImGui::BeginTable("##ShadersTable", 1)) {
+                    for (auto&& pShader : shaders) {
+                        ImGui::TableNextRow();
+
+                        ImGui::TableSetColumnIndex(0);
+                        ImGui::Text("%s", pShader->GetResourceId().c_str());
+                        ImGui::Separator();
+                    }
+
+                    ImGui::EndTable();
+                }
             }
+
+            ImGui::EndTabItem();
         }
     }
 }

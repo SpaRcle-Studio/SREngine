@@ -7,8 +7,8 @@
 
 #include <Graphics/GUI/Widget.h>
 
-namespace Framework::Core::GUI {
-    class EngineStatistics : public Graphics::GUI::Widget {
+namespace SR_CORE_NS::GUI {
+    class EngineStatistics : public SR_GRAPH_NS::GUI::Widget {
     public:
         EngineStatistics();
         ~EngineStatistics() override = default;

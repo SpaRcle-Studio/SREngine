@@ -339,6 +339,9 @@ namespace SR_GRAPH_NS {
         }
     }
 
+    const std::vector<SR_GTYPES_NS::Shader*>& RenderContext::GetShaders() const noexcept {
+        return m_shaders;
+    }
     void RenderContext::OnMultiSampleChanged() {
         SR_TRACY_ZONE;
 
