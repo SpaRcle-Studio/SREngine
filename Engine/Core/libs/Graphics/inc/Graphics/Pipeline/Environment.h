@@ -22,6 +22,8 @@ namespace SR_GTYPES_NS {
 }
 
 namespace SR_GRAPH_NS {
+    class RenderContext;
+
     struct ColorLayer {
         int32_t texture = SR_ID_INVALID;
         ColorFormat format = ColorFormat::Unknown;
@@ -46,6 +48,7 @@ namespace SR_GRAPH_NS {
     class Environment {
     public:
         using WindowPtr = SR_HTYPES_NS::SafePtr<Window>;
+        using RenderContextPtr = SR_HTYPES_NS::SafePtr<SR_GRAPH_NS::RenderContext>;
 
         enum class WinEvents{
             Close, Move, Resize, LeftClick, RightClick, Focus, Scroll
@@ -69,6 +72,8 @@ namespace SR_GRAPH_NS {
         int32_t           m_currentShaderID        = -1;
         int32_t           m_preferredDevice        = -1;
         int32_t           m_currentBuildIteration  = 0;
+
+        RenderContextPtr m_renderContext;
 
         std::optional<uint8_t> m_newSampleCount;
         uint8_t m_currentSampleCount = 0;
@@ -104,6 +109,7 @@ namespace SR_GRAPH_NS {
         void SetSampleCount(uint8_t count) { m_newSampleCount = m_requiredSampleCount = count; }
         void SetCurrentShaderId(const int32_t& id)  { m_currentShaderID = id;           }
         void SetCurrentShader(Types::Shader* pShader)  { m_currentShader = pShader;           }
+        void SetRenderContext(const RenderContextPtr& pRenderContext) { m_renderContext = pRenderContext; }
         void SetCurrentFramebuffer(Types::Framebuffer* pFramebuffer);
         SR_NODISCARD int32_t GetCurrentShaderId() const noexcept { return m_currentShaderID; }
         SR_NODISCARD Types::Shader* GetCurrentShader() const noexcept { return m_currentShader; }

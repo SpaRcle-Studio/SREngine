@@ -296,4 +296,10 @@ namespace SR_GRAPH_NS {
     std::string_view RenderTechnique::GetName() const {
         return m_name;
     }
+
+    void RenderTechnique::OnSamplesChanged() {
+        for (auto&& pPass : m_passes) {
+            pPass->OnSamplesChanged();
+        }
+    }
 }

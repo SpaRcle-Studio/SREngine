@@ -265,6 +265,8 @@ namespace SR_CORE_NS {
         m_renderContext = new SR_GRAPH_NS::RenderContext(m_window);
         m_pipeline = SR_GRAPH_NS::Environment::Get();
 
+        m_pipeline->SetRenderContext(m_renderContext);
+
         return m_window->GetThread()->Execute([this]() -> bool {
             if (!m_renderContext->Init()) {
                 SR_ERROR("Engine::InitializeRender() : failed to initialize the render context!");

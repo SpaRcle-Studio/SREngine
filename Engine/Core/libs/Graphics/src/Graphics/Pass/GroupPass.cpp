@@ -159,4 +159,11 @@ namespace SR_GRAPH_NS {
 
         return nullptr;
     }
+
+    void GroupPass::OnSamplesChanged() {
+        for (auto&& pPass : m_passes) {
+            pPass->OnSamplesChanged();
+        }
+        BasePass::OnSamplesChanged();
+    }
 }

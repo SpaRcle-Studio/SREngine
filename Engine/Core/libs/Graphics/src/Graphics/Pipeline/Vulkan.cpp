@@ -838,10 +838,6 @@ namespace SR_GRAPH_NS {
 
         m_isMultisampleSupported = true;
 
-        /// if (m_imgui && m_imgui->IsUndockingActive()) {
-        ///     m_isMultisampleSupported = false;
-        /// }
-
         if (m_supportedSampleCount <= 1) {
             m_isMultisampleSupported = false;
         }
@@ -849,6 +845,8 @@ namespace SR_GRAPH_NS {
         const bool multiSampleSupportsChanged = isMultiSampleSupported != m_isMultisampleSupported;
 
         if (m_newSampleCount.has_value() || multiSampleSupportsChanged) {
+            const uint8_t oldSampleCount = m_currentSampleCount;
+
             if (multiSampleSupportsChanged) {
                 if (!IsMultiSamplingSupported()) {
                     m_currentSampleCount = 1;
@@ -866,13 +864,15 @@ namespace SR_GRAPH_NS {
 
             m_currentSampleCount = SR_MIN(m_currentSampleCount, m_supportedSampleCount);
 
-            OnMultiSampleChanged();
+            if (oldSampleCount != m_currentSampleCount) {
+                OnMultiSampleChanged();
+            }
 
             m_newSampleCount = std::nullopt;
         }
     }
 
-    void Vulkan::ClearBuffers(const std::vector<Framework::Helper::Math::FColor> &colors, float_t depth) {
+    void Vulkan::ClearBuffers(const std::vector<SR_MATH_NS::FColor> &colors, float_t depth) {
         const uint8_t sampleCount = GetFramebufferSampleCount();
 
         auto colorCount = static_cast<uint8_t>(colors.size());

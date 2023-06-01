@@ -152,6 +152,8 @@ namespace SR_GRAPH_NS {
     }
 
     RenderContext::RenderScenePtr RenderContext::CreateScene(const SR_WORLD_NS::Scene::Ptr &scene) {
+        SR_TRACY_ZONE;
+
         RenderScenePtr pRenderScene;
 
         if (scene.RecursiveLockIfValid()) {
@@ -281,6 +283,8 @@ namespace SR_GRAPH_NS {
     }
 
     RenderContext::FramebufferPtr RenderContext::FindFramebuffer(const std::string &name, CameraPtr pCamera) const {
+        SR_TRACY_ZONE;
+
         for (auto&& pTechnique : m_techniques) {
             if (pTechnique->GetCamera() != pCamera) {
                 continue;
@@ -297,6 +301,8 @@ namespace SR_GRAPH_NS {
     }
 
     RenderContext::FramebufferPtr RenderContext::FindFramebuffer(const std::string &name) const {
+        SR_TRACY_ZONE;
+
         for (auto&& pTechnique : m_techniques) {
             auto&& pPass = pTechnique->FindPass(name);
 
@@ -322,12 +328,26 @@ namespace SR_GRAPH_NS {
     }
 
     void RenderContext::UpdateFramebuffers() {
+        SR_TRACY_ZONE;
+
         for (auto&& pFramebuffer : m_framebuffers) {
             if (!pFramebuffer->IsDirty()) {
                 continue;
             }
 
             pFramebuffer->Update();
+        }
+    }
+
+    void RenderContext::OnMultiSampleChanged() {
+        SR_TRACY_ZONE;
+
+        for (auto&& pFramebuffer : m_framebuffers) {
+            pFramebuffer->SetDirty();
+        }
+
+        for (auto&& pRenderTechnique : m_techniques) {
+            pRenderTechnique->OnSamplesChanged();
         }
     }
 }

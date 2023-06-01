@@ -208,4 +208,9 @@ namespace SR_GRAPH_NS {
         m_dirtyShader = true;
         Super::OnResize(size);
     }
+
+    void PostProcessPass::OnSamplesChanged() {
+        m_dirtyShader = true;
+        BasePass::OnSamplesChanged();
+    }
 }

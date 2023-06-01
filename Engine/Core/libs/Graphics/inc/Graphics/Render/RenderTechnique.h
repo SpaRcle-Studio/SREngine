@@ -43,6 +43,7 @@ namespace SR_GRAPH_NS {
         virtual void Update();
 
         virtual void OnResize(const SR_MATH_NS::UVector2& size);
+        virtual void OnSamplesChanged();
 
         void FreeVideoMemory() override;
 

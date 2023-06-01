@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <Technique Name="Editor">
     <ColorBufferPass Directional="false">
-        <FramebufferSettings DynamicResizing="true" DepthEnabled="true" SmoothSamples="0">
+        <FramebufferSettings DynamicResizing="true" DepthEnabled="true" SmoothSamples="1">
             <Size X="0" Y="0"/>
             <PreScale X="0.85" Y="0.85"/>
             <Depth Format="Auto" ClearValue="1.0"/>
@@ -33,7 +33,7 @@
         </Passes>
     </FramebufferPass>
     <SSAOPass Name="SSAO" Shader="Engine/Shaders/SSAO/ssao.srsl">
-        <FramebufferSettings DynamicResizing="true" DepthEnabled="false" SmoothSamples="0">
+        <FramebufferSettings DynamicResizing="true" DepthEnabled="false" SmoothSamples="1">
             <Size X="0" Y="0"/>
             <PreScale X="1.0" Y="1.0"/>
             <Depth Format="Auto" ClearValue="1.0"/>
@@ -45,7 +45,7 @@
         </Attachments>
     </SSAOPass>
     <FramebufferPass Name="SSAOBlur">
-        <FramebufferSettings DynamicResizing="true" DepthEnabled="true" SmoothSamples="0">
+        <FramebufferSettings DynamicResizing="true" DepthEnabled="true" SmoothSamples="1">
             <Size X="0" Y="0"/>
             <PreScale X="0.75" Y="0.75"/>
             <Depth Format="Auto" ClearValue="1.0"/>
@@ -67,11 +67,6 @@
             <Layer Format="RGBA8_UNORM" R="0.0" G="0.0" B="0.0" A="1.0"/>
         </FramebufferSettings>
         <Passes>
-            <!--<PostProcessPass Shader="Engine/Shaders/SSAO/display.srsl">
-                <Attachments>
-                    <Attachment FBO="SSAO" Id="image" Index="0"/>
-                </Attachments>
-            </PostProcessPass>-->
             <PostProcessPass Shader="Engine/Shaders/SSAO/post_process.srsl">
                 <Attachments>
                     <Attachment FBO="SSAOBlur" Id="ssao" Index="0"/>

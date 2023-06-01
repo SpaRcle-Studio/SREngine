@@ -12,12 +12,9 @@ namespace SR_GTYPES_NS {
         , m_pipeline(Environment::Get())
     {
         SR_UTILS_NS::ResourceManager::Instance().RegisterResource(this);
-        SR_GRAPH_NS::FramebuffersManager::Instance().Register(this);
     }
 
     Framebuffer::~Framebuffer() {
-        SR_GRAPH_NS::FramebuffersManager::Instance().UnRegister(this);
-
         SRAssert(m_frameBuffer == SR_ID_INVALID);
 
     #ifdef SR_DEBUG

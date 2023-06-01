@@ -68,6 +68,7 @@ namespace SR_GRAPH_NS {
         void SetDirty();
 
         void OnResize(const SR_MATH_NS::UVector2& size);
+        void OnMultiSampleChanged();
 
     public:
         RenderScenePtr CreateScene(const SR_WORLD_NS::Scene::Ptr& scene);

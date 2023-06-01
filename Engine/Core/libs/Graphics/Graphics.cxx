@@ -58,7 +58,6 @@
 #include "../Graphics/src/Graphics/Memory/ShaderUBOBlock.cpp"
 #include "../Graphics/src/Graphics/Memory/CameraManager.cpp"
 #include "../Graphics/src/Graphics/Memory/IGraphicsResource.cpp"
-#include "../Graphics/src/Graphics/Memory/FramebuffersManager.cpp"
 
 #include "../Graphics/src/Graphics/Font/Font.cpp"
 #include "../Graphics/src/Graphics/Font/FontLoader.cpp"

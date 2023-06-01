@@ -9,8 +9,8 @@
 #include <Graphics/Pipeline/Environment.h>
 #include <Graphics/GUI/Icons.h>
 #include <Graphics/Pipeline/Vulkan.h>
-#include <Graphics/Memory/FramebuffersManager.h>
 #include <Graphics/Types/Framebuffer.h>
+#include <Graphics/Render/RenderContext.h>
 
 bool SR_GRAPH_NS::Environment::PreInitGUI(const SR_UTILS_NS::Path &fontPath) {
     SR_GRAPH("Environment::InitGUI() : pre-initializing ImGUI library...");
@@ -75,8 +75,8 @@ bool SR_GRAPH_NS::Environment::PreInitGUI(const SR_UTILS_NS::Path &fontPath) {
     return true;
 }
 
-void Framework::Graphics::Environment::OnMultiSampleChanged() {
-    FramebuffersManager::Instance().SetDirty();
+void SR_GRAPH_NS::Environment::OnMultiSampleChanged() {
+    m_renderContext->OnMultiSampleChanged();
 }
 
 void Framework::Graphics::Environment::SetWinCallBack(const std::function<void(WinEvents, void * , void * , void * )>& callback) {
