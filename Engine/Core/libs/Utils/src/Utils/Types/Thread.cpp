@@ -10,6 +10,7 @@ namespace SR_HTYPES_NS {
     Thread::Thread(std::thread &&thread)
         : m_thread(std::exchange(thread, {}))
     {
+        m_isRan = true;
         m_id = SR_UTILS_NS::GetThreadId(m_thread);
         m_context = new DataStorage();
     }
@@ -43,6 +44,7 @@ namespace SR_HTYPES_NS {
 
     SR_NODISCARD Thread::Ptr Thread::Factory::CreateEmpty() {
         SR_SCOPED_LOCK
+        SR_LOG("Thread::Factory::CreateEmpty() : create empty thread...");
         return new Thread();
     }
 

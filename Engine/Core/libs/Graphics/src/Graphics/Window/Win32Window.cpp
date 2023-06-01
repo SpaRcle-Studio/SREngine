@@ -349,6 +349,8 @@ namespace SR_GRAPH_NS {
             const SR_MATH_NS::UVector2& size,
             bool fullscreen, bool resizable
     ) {
+        SR_LOG("Win32Window::Initialize() : create WinAPI window...");
+
         m_hInst = GetModuleHandleA(nullptr);
 
         m_size = size;

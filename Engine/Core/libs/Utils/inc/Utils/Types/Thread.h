@@ -10,7 +10,16 @@
 #include <Utils/Common/Singleton.h>
 #include <Utils/Types/Function.h>
 
-#define SR_THREAD_SAFE_CHECKS 0
+#define SR_THREAD_SAFE_CHECKS 1
+
+/** Warning: этот метод очень медленный! */
+#define SR_THIS_THREAD (SR_HTYPES_NS::Thread::Factory::Instance().GetThisThread())
+
+#define SR_LOCK_GUARD std::lock_guard<std::recursive_mutex> codegen_lock(m_mutex);
+#define SR_LOCK_GUARD_INHERIT(baseClass) std::lock_guard<std::recursive_mutex> codegen_lock(baseClass::m_mutex);
+#define SR_SCOPED_LOCK std::lock_guard<std::recursive_mutex> codegen_lock(m_mutex);
+#define SR_WRITE_LOCK std::lock_guard<std::shared_mutex> SR_MACRO_CONCAT(codegen_write_lock, SR_LINE)(m_mutex);
+#define SR_READ_LOCK std::shared_lock<std::shared_mutex> SR_MACRO_CONCAT(codegen_read_lock, SR_LINE)(m_mutex);
 
 namespace SR_HTYPES_NS {
     class DataStorage;
@@ -73,11 +82,21 @@ namespace SR_HTYPES_NS {
                 return false;
             }
 
-            m_thread = std::thread([&, function = std::move(fn)]() {
+            Factory::Instance().LockSingleton();
+
+            m_thread = std::thread([function = std::move(fn), this]() {
                 m_id = SR_UTILS_NS::GetThreadId(m_thread);
                 Factory::Instance().m_threads.insert(std::make_pair(m_id, this));
+                SR_LOG("Thread::Run() : run thread " + m_id);
+                while (!m_isRan) {
+                    SR_NOOP;
+                }
                 function();
             });
+
+            Factory::Instance().UnlockSingleton();
+
+            m_isRan = true;
 
             return true;
         }
@@ -100,20 +119,13 @@ namespace SR_HTYPES_NS {
         ThreadId m_id;
         DataStorage* m_context = nullptr;
 
+        std::atomic<bool> m_isRan = false;
+
         mutable std::shared_mutex m_mutex;
         mutable std::atomic<const SR_HTYPES_NS::Function<bool()>*> m_function = nullptr;
         mutable std::atomic<bool> m_executeResult = false;
 
     };
 }
-
-/** Warning: этот метод очень медленный! */
-#define SR_THIS_THREAD (SR_HTYPES_NS::Thread::Factory::Instance().GetThisThread())
-
-#define SR_LOCK_GUARD std::lock_guard<std::recursive_mutex> codegen_lock(m_mutex);
-#define SR_LOCK_GUARD_INHERIT(baseClass) std::lock_guard<std::recursive_mutex> codegen_lock(baseClass::m_mutex);
-#define SR_SCOPED_LOCK std::lock_guard<std::recursive_mutex> codegen_lock(m_mutex);
-#define SR_WRITE_LOCK std::lock_guard<std::shared_mutex> SR_MACRO_CONCAT(codegen_write_lock, SR_LINE)(m_mutex);
-#define SR_READ_LOCK std::shared_lock<std::shared_mutex> SR_MACRO_CONCAT(codegen_read_lock, SR_LINE)(m_mutex);
 
 #endif //GAMEENGINE_THREAD_H
