@@ -36,13 +36,12 @@ namespace SR_CORE_NS::GUI {
 
     void SceneViewer::SetCamera(const GameObjectPtr& camera) {
         if (m_camera) {
-            m_translation = m_camera->GetTransform()->GetTranslation();
-            m_rotation = m_camera->GetTransform()->GetRotation();
-            BackupCameraSettings();
             m_camera->Destroy();
         }
 
         m_camera.Replace(camera);
+
+        BackupCameraSettings();
     }
 
     void SceneViewer::Draw() {
@@ -51,6 +50,9 @@ namespace SR_CORE_NS::GUI {
         }
 
         if (m_camera.RecursiveLockIfValid()) {
+            m_translation = m_camera->GetTransform()->GetTranslation();
+            m_rotation = m_camera->GetTransform()->GetRotation();
+
             auto pCamera = m_camera->GetComponent<SR_GTYPES_NS::Camera>();
 
             if (auto&& pFramebuffer = GetContext()->FindFramebuffer("SceneViewFBO", pCamera)) {
