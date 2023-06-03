@@ -19,6 +19,11 @@ namespace SR_SCRIPTING_NS {
             m_script = EvoScriptManager::Instance().Load(path);
         }
 
+        if (!m_script) {
+            SR_ERROR("EvoBehaviour::Load() : failed to load script!");
+            return false;
+        }
+
         SRAssert(!m_behaviourContext);
 
         InitHooks();

@@ -101,6 +101,8 @@ namespace SR_SCRIPTING_NS {
             return m_scripts.at(localPath.ToStringRef());
         }
 
+        SR_LOG("EvoScriptManager::Load() : load \"" + localPath.ToStringRef() + "\" script");
+
         if (!ReloadScript(localPath)) {
             SR_ERROR("EvoScriptManager::Load() : failed to reload script!\n\tPath: " + localPath.ToStringRef());
             return EvoScriptManager::ScriptPtr();

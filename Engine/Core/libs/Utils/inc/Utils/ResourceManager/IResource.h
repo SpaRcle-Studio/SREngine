@@ -42,6 +42,9 @@ namespace SR_UTILS_NS {
         bool TryExecute(const SR_HTYPES_NS::Function<bool()>& fun, bool def) const;
         bool Execute(const SR_HTYPES_NS::Function<bool()>& fun) const;
 
+        /// является ли ресурс файловым
+        SR_NODISCARD virtual bool IsFileResource() const noexcept { return true; }
+
         SR_NODISCARD virtual uint64_t GetFileHash() const;
         SR_NODISCARD bool IsRegistered() const noexcept { return m_isRegistered; }
         SR_NODISCARD bool IsLoaded() const noexcept { return m_loadState == LoadState::Loaded; }

@@ -434,6 +434,10 @@ namespace SR_UTILS_NS {
     ResourceManager::Hash ResourceManager::RegisterResourcePath(const Path &path) {
         SR_SCOPED_LOCK
 
+        if (path.Empty()) {
+            SRHalt("ResourceManager::RegisterResourcePath() : empty path!");
+        }
+
         const ResourceManager::Hash hash = path.GetHash();
 
         auto&& pIt = m_hashPaths.find(hash);
@@ -499,7 +503,17 @@ namespace SR_UTILS_NS {
                 pResourceReloader = m_defaultReloader;
             }
 
-            auto&& path = GetResourcePath(pHardPtr->m_resourceHash);
+            auto&& path = GetResourcePath(pHardPtr->m_pathHash);
+
+            if (path.Empty()) {
+                SR_ERROR("ResourceManager::ReloadResources() : resource have empty path!\n\tResource name: " +
+                    pHardPtr->m_resourceType->GetName() + "\n\tHash name: " + std::to_string(pHardPtr->m_resourceHash) +
+                    "\n\tFile hash: " + std::to_string(pHardPtr->m_fileHash) +
+                    "\n\tPath hash: " + std::to_string(pHardPtr->m_pathHash)
+                );
+                continue;
+            }
+
             if (pResourceReloader && !pResourceReloader->Reload(path, pHardPtr.get())) {
                 SR_ERROR("ResourceManager::ReloadResources() : failed to reload resource!\n\tPath: " + path.ToStringRef());
             }

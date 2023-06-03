@@ -59,6 +59,7 @@ namespace SR_GTYPES_NS {
         void SetDepthEnabled(bool depthEnabled);
         void SetSampleCount(uint8_t samples);
 
+        SR_NODISCARD bool IsFileResource() const noexcept override { return false; }
         SR_NODISCARD uint8_t GetSamplesCount() const;
         SR_NODISCARD bool IsDepthEnabled() const { return m_depthEnabled; }
         SR_NODISCARD bool IsDirty() const { return m_dirty; }
