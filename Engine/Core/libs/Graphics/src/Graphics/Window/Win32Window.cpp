@@ -433,6 +433,11 @@ namespace SR_GRAPH_NS {
             ::TranslateMessage(&msg);
             ::DispatchMessage(&msg);
         }
+
+        while (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) {
+            TranslateMessage(&msg);
+            DispatchMessage(&msg);
+        }
     }
 
     void* Win32Window::GetHandle() const {
