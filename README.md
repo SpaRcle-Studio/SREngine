@@ -20,6 +20,7 @@
  * master - branch for releases
  * dev - active development branch 
  * features/* - branches for new features
+ * tmp/* - temporary branches for dangerous experiments
 
 ## Building
  1. Clone repo 
