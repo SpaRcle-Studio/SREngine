@@ -34,7 +34,7 @@ namespace SR_SCRIPTING_NS {
         }
 
         if (!m_behaviourContext) {
-            SR_ERROR("Failed to initialize behaviour context!");
+            SR_ERROR("EvoBehaviour::Load() : failed to initialize behaviour context!");
             return false;
         }
 
