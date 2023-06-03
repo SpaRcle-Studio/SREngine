@@ -1021,6 +1021,8 @@ namespace SR_GRAPH_NS {
         }
 
         for (const auto& submitInfo : m_submitQueue) {
+            SR_TRACY_ZONE_S("QueueSubmit");
+
             if (auto result = vkQueueSubmit(m_device->GetQueues()->GetGraphicsQueue(), 1, &submitInfo, VK_NULL_HANDLE); result != VK_SUCCESS) {
                 VK_ERROR("renderFunction() : failed to queue submit (frame buffer)! Reason: " + EvoVulkan::Tools::Convert::result_to_description(result));
 
@@ -1050,15 +1052,18 @@ namespace SR_GRAPH_NS {
 
         m_submitInfo.pCommandBuffers = m_submitCmdBuffs;
 
-        /// Submit to queue
-        if (auto result = vkQueueSubmit(m_device->GetQueues()->GetGraphicsQueue(), 1, &m_submitInfo, VK_NULL_HANDLE); result != VK_SUCCESS) {
-            VK_ERROR("renderFunction() : failed to queue submit! Reason: " + EvoVulkan::Tools::Convert::result_to_description(result));
+        {
+            SR_TRACY_ZONE_S("GraphicsQueueSubmit");
+            /// Submit to queue
+            if (auto result = vkQueueSubmit(m_device->GetQueues()->GetGraphicsQueue(), 1, &m_submitInfo, VK_NULL_HANDLE); result != VK_SUCCESS) {
+                VK_ERROR("renderFunction() : failed to queue submit! Reason: " + EvoVulkan::Tools::Convert::result_to_description(result));
 
-            if (result == VK_ERROR_DEVICE_LOST) {
-                SR_PLATFORM_NS::Terminate();
+                if (result == VK_ERROR_DEVICE_LOST) {
+                    SR_PLATFORM_NS::Terminate();
+                }
+
+                return EvoVulkan::Core::RenderResult::Error;
             }
-
-            return EvoVulkan::Core::RenderResult::Error;
         }
 
         switch (SubmitFrame()) {

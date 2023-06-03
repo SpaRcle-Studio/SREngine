@@ -741,6 +741,15 @@ bool GUISystem::BeginMenuBar() {
     }
 
     if (ImGui::BeginMenu("About")) {
+        ImGui::Separator();
+        ImGui::Text("*********************");
+        ImGui::Text("SpaRcle Engine v0.0.5");
+        ImGui::Text("*********************");
+        ImGui::Separator();
+        ImGui::Text("Authors: ");
+        ImGui::Text("   * Monika0000");
+        ImGui::Text("   * innerviewer");
+        ImGui::Separator();
         ImGui::EndMenu();
     }
 
