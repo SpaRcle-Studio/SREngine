@@ -12,20 +12,23 @@ namespace SR_HTYPES_NS {
     class SR_DLL_EXPORT Time : public Singleton<Time> {
         friend class Singleton<Time>;
     public:
-        using Clock = std::chrono::high_resolution_clock;
+        using ClockT = std::chrono::high_resolution_clock;
         using Point = std::chrono::time_point<std::chrono::steady_clock>;
 
     public:
         void Update() {
-            m_point = Clock::now();
+            m_point = ClockT::now();
+            m_clock = clock();
         }
 
         SR_NODISCARD Point Now() const noexcept { return m_point; }
         SR_NODISCARD uint64_t Count() const noexcept { return m_point.time_since_epoch().count(); }
         SR_NODISCARD float_t FClock() const noexcept { return static_cast<float_t>(Count()) / CLOCKS_PER_SEC / CLOCKS_PER_SEC; }
+        SR_NODISCARD clock_t Clock() const noexcept { return m_clock; }
 
     private:
         Point m_point;
+        clock_t m_clock = 0;
 
     };
 }

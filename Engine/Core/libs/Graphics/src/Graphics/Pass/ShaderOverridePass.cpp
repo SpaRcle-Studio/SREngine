@@ -84,7 +84,11 @@ namespace SR_GRAPH_NS {
 
         for (auto&&[_, subCluster] : *pCluster) {
             auto&& pShader = GetShader(subCluster.GetShaderType());
-            if (!pShader || (pShader && !pShader->Use())) {
+            if (!pShader) {
+                continue;
+            }
+
+            if (pShader->Use() == ShaderBindResult::Failed) {
                 continue;
             }
 
@@ -116,10 +120,8 @@ namespace SR_GRAPH_NS {
             SR_MAYBE_UNUSED bool hasDrawData = DrawCluster(&pRenderScene->GetOpaque());
             hasDrawData |= DrawCluster(&pRenderScene->GetTransparent());
         }
-        else if (m_framebuffer->Bind() && m_framebuffer->BeginRender(SR_MATH_NS::FColor(0.0), 1.f)) {
-            DrawCluster(&pRenderScene->GetOpaque());
-            DrawCluster(&pRenderScene->GetTransparent());
-            m_framebuffer->EndRender();
+        else {
+            RenderInternal(pRenderScene);
         }
 
         m_uboManager.SetIdentifier(pIdentifier);
@@ -127,10 +129,35 @@ namespace SR_GRAPH_NS {
         return IsDirectional();
     }
 
+    void ShaderOverridePass::RenderInternal(const RenderScenePtr& pRenderScene) {
+        if (!m_framebuffer->Bind()) {
+            return;
+        }
+
+        GetPipeline()->ResetCmdBuffer();
+
+        m_framebuffer->BeginCmdBuffer(SR_MATH_NS::FColor(0.0), 1.f);
+        {
+            m_framebuffer->BeginRender();
+
+            DrawCluster(&pRenderScene->GetOpaque());
+            DrawCluster(&pRenderScene->GetTransparent());
+
+            m_framebuffer->EndRender();
+        }
+        m_framebuffer->EndCmdBuffer();
+    }
+
     void ShaderOverridePass::Update() {
         if (!m_camera) {
             return;
         }
+
+        if (!IsDirectional() && (!m_framebuffer || m_framebuffer->IsDirty())) {
+            return;
+        }
+
+        m_pipeline->SetCurrentFramebuffer(m_framebuffer);
 
         auto&& pRenderScene = GetRenderScene();
 
@@ -143,6 +170,8 @@ namespace SR_GRAPH_NS {
         m_uboManager.SetIdentifier(pIdentifier);
 
         Super::Update();
+
+        m_pipeline->SetCurrentFramebuffer(nullptr);
     }
 
     void ShaderOverridePass::UpdateCluster(MeshCluster* pCluster) {

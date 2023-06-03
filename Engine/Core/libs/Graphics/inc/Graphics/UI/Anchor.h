@@ -13,6 +13,7 @@ namespace SR_GRAPH_NS::UI {
     class Anchor : public SR_UTILS_NS::Component {
         SR_ENTITY_SET_VERSION(1000);
         SR_INITIALIZE_COMPONENT(Anchor);
+        using Super = SR_UTILS_NS::Component;
     public:
         Anchor();
         ~Anchor() override = default;

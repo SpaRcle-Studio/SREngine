@@ -43,14 +43,18 @@ namespace SR_GTYPES_NS {
     }
 
     void Camera::OnDestroy() {
-        Component::OnDestroy();
+        RenderScene::Ptr renderScene = TryGetRenderScene();
 
-        if (auto&& renderScene = TryGetRenderScene(); renderScene.RecursiveLockIfValid()) {
+        Super::OnDestroy();
+
+        if (renderScene.RecursiveLockIfValid()) {
             renderScene->Remove(this);
             renderScene.Unlock();
         }
         else {
-            delete this;
+            GetThis().AutoFree([](auto&& pData) {
+                delete pData;
+            });
         }
     }
 
@@ -139,16 +143,9 @@ namespace SR_GTYPES_NS {
     }
 
     void Camera::UpdateView() noexcept {
-        glm::mat4 matrix(1.f);
-
-        /// Vulkan implementation
-        matrix = glm::rotate(matrix, -m_pitch + float_t(M_PI), { 1, 0, 0 });
-        matrix = glm::rotate(matrix, -m_yaw,  { 0, 1, 0 });
-        matrix = glm::rotate(matrix, -m_roll,  { 0, 0, 1 });
-
-        m_viewTranslateMat = glm::translate(matrix, -m_position.ToGLM());
-
-        m_viewMat = matrix;
+        m_viewMat = m_rotation.RotateX(SR_DEG(SR_PI)).Inverse().ToMat4x4();
+        m_viewTranslateMat = m_viewMat.Translate(m_position.Inverse());
+        m_viewDirection = m_rotation * SR_MATH_NS::FVector3(0, 0, 1);
     }
 
     void Camera::UpdateProjection() {
@@ -160,14 +157,14 @@ namespace SR_GTYPES_NS {
             m_aspect = static_cast<float_t>(m_viewportSize.x) / static_cast<float_t>(m_viewportSize.y);
         }
 
-        m_projection = glm::perspective(glm::radians(m_FOV), m_aspect, m_near, m_far);
+        m_projection = SR_MATH_NS::Matrix4x4::Perspective(SR_RAD(m_FOV), m_aspect, m_near, m_far);
 
         //////////////////////////////////////////////////////////////////////////////////////////////
 
-        m_orthogonal = glm::mat4(1);
+        m_orthogonal = SR_MATH_NS::Matrix4x4::Identity();
 
         m_orthogonal[0][0] = 1.f / m_aspect;
-        m_orthogonal[1][1] = 1.f;
+        m_orthogonal[1][1] = -1.f;
         m_orthogonal[2][2] = 1.f / (m_far - m_near);
         m_orthogonal[3][2] = m_near / (m_far - m_near);
 
@@ -188,22 +185,18 @@ namespace SR_GTYPES_NS {
         UpdateProjection();
     }
 
-    glm::mat4 Camera::GetImGuizmoView() const noexcept {
-        auto matrix = glm::rotate(glm::mat4(1), m_pitch, { 1, 0, 0 });
-        matrix = glm::rotate(matrix, m_yaw + (float)Deg180InRad, { 0, 1, 0 });
-        matrix = glm::rotate(matrix, m_roll, { 0, 0, 1 });
+    SR_MATH_NS::Matrix4x4 Camera::GetImGuizmoView() const noexcept {
+        /// TODO: optimize
 
-        return glm::translate(matrix, {
-                m_position.x,
-                -m_position.y,
-                -m_position.z
-        });
-    }
+        SR_MATH_NS::Matrix4x4 matrix = SR_MATH_NS::Matrix4x4::Identity();
 
-    glm::mat4 Camera::GetImGuizmo2DView() const noexcept {
-        auto matrix = glm::rotate(glm::mat4(1), m_pitch, { 1, 0, 0 });
-        matrix = glm::rotate(matrix, m_yaw + (float)Deg180InRad, { 0, 1, 0 });
-        matrix = glm::rotate(matrix, m_roll, { 0, 0, 1 });
+        SR_MATH_NS::FVector3 eulerAngles = m_rotation.EulerAngle();
+
+        matrix = matrix.RotateAxis(SR_MATH_NS::FVector3(1, 0, 0), eulerAngles.x);
+        matrix = matrix.RotateAxis(SR_MATH_NS::FVector3(0, 1, 0), eulerAngles.y + 180);
+        matrix = matrix.RotateAxis(SR_MATH_NS::FVector3(0, 0, 1), eulerAngles.z);
+
+        matrix = matrix.Translate(m_position.InverseAxis(SR_MATH_NS::AXIS_YZ));
 
         return matrix;
     }
@@ -256,15 +249,7 @@ namespace SR_GTYPES_NS {
             return;
         }
 
-        auto&& matrix = pTransform->GetMatrix();
-        auto&& rotate = matrix.GetQuat().EulerAngle();
-        auto&& translation = matrix.GetTranslate();
-
-        m_yaw   = float_t(rotate.y * SR_PI / 45.f / 4.f);
-        m_pitch = float_t(rotate.x * SR_PI / 45.f / 4.f);
-        m_roll  = float_t(rotate.z * SR_PI / 45.f / 4.f);
-
-        m_position = translation;
+        pTransform->GetMatrix().Decompose(m_position, m_rotation);
 
         UpdateView();
 
@@ -292,13 +277,13 @@ namespace SR_GTYPES_NS {
         });
     }
 
-    glm::vec3 Camera::GetViewDirection() const {
-        return (SR_MATH_NS::Quaternion(SR_MATH_NS::FVector3(m_pitch, m_yaw, m_roll)) * SR_MATH_NS::FVector3(0, 0, 1)).ToGLM();
+    const SR_MATH_NS::FVector3& Camera::GetViewDirection() const {
+        return m_viewDirection;
     }
 
-    glm::vec3 Camera::GetViewDirection(const SR_MATH_NS::FVector3 &pos) const noexcept {
+    SR_MATH_NS::FVector3 Camera::GetViewDirection(const SR_MATH_NS::FVector3& pos) const noexcept {
         auto&& dir = m_position.Direction(pos);
-        return (SR_MATH_NS::Quaternion(SR_MATH_NS::FVector3(m_pitch, m_yaw, m_roll)) * SR_MATH_NS::FVector3(dir)).ToGLM();
+        return m_rotation * SR_MATH_NS::FVector3(dir);
     }
 
     SR_UTILS_NS::Component *Camera::CopyComponent() const {

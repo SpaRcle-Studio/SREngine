@@ -20,6 +20,7 @@
 #include "src/Core/GUI/SceneRunner.cpp"
 #include "src/Core/GUI/Guizmo.cpp"
 #include "src/Core/GUI/AnimatorEditor.cpp"
+#include "src/Core/GUI/DragNDropHelper.cpp"
 
 #include "src/Core/Parsers/BlueprintParser.cpp"
 
@@ -30,7 +31,12 @@
 #include "src/Core/World/VisualChunk.cpp"
 #include "src/Core/World/VisualRegion.cpp"
 #include "src/Core/World/World.cpp"
+#include "src/Core/World/EngineScene.cpp"
 
 #include "src/Core/Engine.cpp"
 #include "src/Core/EngineCommands.cpp"
-#include "src/Core/EvoScriptAPI.cpp" 
+#include "src/Core/EvoScriptAPI.cpp"
+#include "src/Core/EngineResources.cpp"
+#include "src/Core/EngineMigrators.cpp"
+
+#include "src/Core/Utils/GraphicsResourceReloader.cpp"

@@ -4,6 +4,7 @@
 
 #include <Graphics/Pass/PostProcessPass.h>
 #include <Graphics/Pass/FramebufferPass.h>
+#include <Graphics/Types/Texture.h>
 
 namespace SR_GRAPH_NS {
     SR_REGISTER_RENDER_PASS(PostProcessPass)
@@ -25,8 +26,18 @@ namespace SR_GRAPH_NS {
             return false;
         }
 
-        if (!m_shader->Use()) {
-            return false;
+        switch (m_shader->Use()) {
+            case ShaderBindResult::Failed:
+                return false;
+            case ShaderBindResult::Success:
+                break;
+            case ShaderBindResult::Duplicated:
+            case ShaderBindResult::ReAllocated:
+                m_dirtyShader = true;
+                break;
+            default:
+                SRHaltOnce0();
+                return false;
         }
 
         auto&& uboManager = Memory::UBOManager::Instance();
@@ -70,6 +81,10 @@ namespace SR_GRAPH_NS {
     }
 
     void PostProcessPass::Update() {
+        if (m_virtualUBO == SR_ID_INVALID) {
+            return;
+        }
+
         m_pipeline->SetCurrentShader(m_shader);
 
         if (m_shader) {
@@ -85,10 +100,8 @@ namespace SR_GRAPH_NS {
             m_shader->SetMat4(SHADER_VIEW_NO_TRANSLATE_MATRIX, m_camera->GetViewRef());
         }
 
-        if (m_virtualUBO != SR_ID_INVALID) {
-            if (m_uboManager.BindUBO(m_virtualUBO) == Memory::UBOManager::BindResult::Duplicated) {
-                SR_ERROR("PostProcessPass::Update() : memory has been duplicated!");
-            }
+        if (m_uboManager.BindUBO(m_virtualUBO) == Memory::UBOManager::BindResult::Duplicated) {
+            SR_ERROR("PostProcessPass::Update() : memory has been duplicated!");
         }
 
         m_shader->Flush();
@@ -194,5 +207,10 @@ namespace SR_GRAPH_NS {
     void PostProcessPass::OnResize(const SR_MATH_NS::UVector2& size) {
         m_dirtyShader = true;
         Super::OnResize(size);
+    }
+
+    void PostProcessPass::OnSamplesChanged() {
+        m_dirtyShader = true;
+        BasePass::OnSamplesChanged();
     }
 }

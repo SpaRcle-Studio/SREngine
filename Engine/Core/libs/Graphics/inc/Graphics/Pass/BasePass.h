@@ -8,8 +8,10 @@
 #include <Utils/Common/NonCopyable.h>
 #include <Utils/Math/Vector2.h>
 #include <Utils/Types/Function.h>
+#include <Utils/Types/SafePointer.h>
 #include <Utils/Types/Time.h>
 #include <Utils/Xml.h>
+#include <Utils/ResourceManager/ResourceContainer.h>
 
 #include <Graphics/Memory/UBOManager.h>
 
@@ -21,6 +23,7 @@ namespace SR_GTYPES_NS {
 
 namespace SR_GRAPH_NS {
     class RenderScene;
+    class RenderContext;
     class RenderTechnique;
     class Environment;
     class BasePass;
@@ -29,6 +32,7 @@ namespace SR_GRAPH_NS {
     RenderPassMap& GetRenderPassMap();
 
     class BasePass : public SR_UTILS_NS::ResourceContainer {
+    public:
         using Super = SR_UTILS_NS::ResourceContainer;
         using CameraPtr = Types::Camera*;
         using Context = RenderContext*;
@@ -61,6 +65,7 @@ namespace SR_GRAPH_NS {
         virtual void Update() { }
 
         virtual void OnResize(const SR_MATH_NS::UVector2& size) { }
+        virtual void OnSamplesChanged() { }
 
         virtual void SR_FASTCALL OnMeshAdded(SR_GTYPES_NS::Mesh* pMesh, bool transparent) { }
         virtual void SR_FASTCALL OnMeshRemoved(SR_GTYPES_NS::Mesh* pMesh, bool transparent) { }
@@ -77,18 +82,18 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD BasePass* GetParentPass() const { return m_parentPass; }
 
     protected:
-        CameraPtr m_camera;
-        Context m_context;
-        PipelinePtr m_pipeline;
+        CameraPtr m_camera = nullptr;
+        Context m_context = nullptr;
+        PipelinePtr m_pipeline = nullptr;
         Memory::UBOManager& m_uboManager;
-        BasePass* m_parentPass;
+        BasePass* m_parentPass = nullptr;
 
     private:
         std::string m_name;
         uint64_t m_hashName = 0;
 
-        RenderTechnique* m_technique;
-        bool m_isInit;
+        RenderTechnique* m_technique = nullptr;
+        bool m_isInit = false;
 
     };
 }

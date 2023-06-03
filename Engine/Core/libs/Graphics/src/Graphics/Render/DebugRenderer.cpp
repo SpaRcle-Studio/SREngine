@@ -30,15 +30,38 @@ namespace SR_GRAPH_NS {
         SRAssert(m_timedObjects.size() == m_emptyIds.size());
     }
 
+    void DebugRenderer::Init() {
+        m_wireFrameMaterial = SR_GTYPES_NS::Material::Load("Engine/Materials/Debug/wireframe.mat");
+
+        if (m_wireFrameMaterial) {
+            m_wireFrameMaterial->AddUsePoint();
+        }
+
+        m_lineMaterial = SR_GTYPES_NS::Material::Load("Engine/Materials/Debug/line.mat");
+
+        if (m_lineMaterial) {
+            m_lineMaterial->AddUsePoint();
+        }
+    }
+
     void DebugRenderer::DeInit() {
         SR_LOCK_GUARD
         SR_UTILS_NS::DebugDraw::Instance().RemoveCallbacks(this);
+
+        if (m_wireFrameMaterial) {
+            m_wireFrameMaterial->RemoveUsePoint();
+        }
+
+        if (m_lineMaterial) {
+            m_lineMaterial->RemoveUsePoint();
+        }
     }
 
     void DebugRenderer::Prepare() {
-        SR_LOCK_GUARD
-
+        /// меняем тут, иначе дедлок
         SR_UTILS_NS::DebugDraw::Instance().SwitchCallbacks(this);
+
+        SR_LOCK_GUARD
 
         auto&& timePoint = SR_HTYPES_NS::Time::Instance().Count();
 
@@ -55,7 +78,7 @@ namespace SR_GRAPH_NS {
             }
 
             if (timed.endPoint <= timePoint) {
-                timed.pMesh->RemoveUsePoint();
+                timed.pMesh->MarkMeshDestroyed();
                 timed.pMesh = nullptr;
                 m_emptyIds.emplace_back(i);
             }
@@ -79,8 +102,7 @@ namespace SR_GRAPH_NS {
     retry:
         if (id == SR_ID_INVALID) {
             auto&& pDebugLine = new SR_GTYPES_NS::DebugLine(start, end, color);
-            pDebugLine->SetMaterial(SR_GTYPES_NS::Material::Load("Engine/Materials/Debug/line.mat"));
-            pDebugLine->AddUsePoint();
+            pDebugLine->SetMaterial(m_lineMaterial);
             return AddTimedObject(time, pDebugLine);
         }
         else if (id >= m_timedObjects.size()) {
@@ -118,14 +140,13 @@ namespace SR_GRAPH_NS {
 
         if (id == SR_ID_INVALID) {
             SR_GTYPES_NS::DebugWireframeMesh* pMesh = dynamic_cast<SR_GTYPES_NS::DebugWireframeMesh *>(
-                    SR_GTYPES_NS::Mesh::Load(path, SR_GTYPES_NS::MeshType::Wireframe, 0)
+                    SR_GTYPES_NS::Mesh::Load(SR_UTILS_NS::Path(path, true /** fast */), MeshType::Wireframe, 0)
             );
 
             if (pMesh) {
                 pMesh->SetColor(color);
-                pMesh->SetMaterial("Engine/Materials/Debug/wireframe.mat");
+                pMesh->SetMaterial(m_wireFrameMaterial);
                 pMesh->SetMatrix(SR_MATH_NS::Matrix4x4(pos, rot, scale));
-                pMesh->AddUsePoint();
 
                 return AddTimedObject(time, pMesh);
             }
@@ -210,18 +231,19 @@ namespace SR_GRAPH_NS {
                 continue;
             }
 
-#ifdef SR_DEBUG
-            SR_MAYBE_UNUSED const auto&& countUses = timed.pMesh->GetCountUses();
-            SRAssert(countUses > 0 && !timed.pMesh->IsDestroyed());
-#endif
-
             if (!timed.registered) {
                 timed.pMesh->FreeVideoMemory();
+                timed.pMesh->DeInitGraphicsResource();
             }
 
-            timed.pMesh->RemoveUsePoint();
+            timed.pMesh->MarkMeshDestroyed();
             timed.pMesh = nullptr;
+
             m_emptyIds.emplace_back(i);
         }
+    }
+
+    bool DebugRenderer::IsEmpty() const {
+        return m_timedObjects.size() == m_emptyIds.size();
     }
 }

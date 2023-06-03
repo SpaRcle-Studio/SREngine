@@ -10,6 +10,7 @@ namespace SR_HTYPES_NS {
     Thread::Thread(std::thread &&thread)
         : m_thread(std::exchange(thread, {}))
     {
+        m_isRan = true;
         m_id = SR_UTILS_NS::GetThreadId(m_thread);
         m_context = new DataStorage();
     }
@@ -43,6 +44,7 @@ namespace SR_HTYPES_NS {
 
     SR_NODISCARD Thread::Ptr Thread::Factory::CreateEmpty() {
         SR_SCOPED_LOCK
+        SR_LOG("Thread::Factory::CreateEmpty() : create empty thread...");
         return new Thread();
     }
 
@@ -92,7 +94,13 @@ namespace SR_HTYPES_NS {
             return main;
         }
 
-        SRHalt("Thread::Factory::GetThisThread() : unknown thread!");
+    #ifdef SR_DEBUG
+        SR_MAYBE_UNUSED std::string threads;
+        for (auto&& [id, pThread] : m_threads) {
+            threads.append("\tThread [" + id + "]\n");
+        }
+        SRHalt("Thread::Factory::GetThisThread() : unknown thread!\n" + threads);
+    #endif
 
         return nullptr;
     }
@@ -120,6 +128,8 @@ namespace SR_HTYPES_NS {
     }
 
     void Thread::Synchronize() {
+        SR_WRITE_LOCK
+
     #if defined(SR_DEBUG) && SR_THREAD_SAFE_CHECKS
         auto&& thread = Thread::Factory::Instance().GetThisThread();
 
@@ -136,10 +146,19 @@ namespace SR_HTYPES_NS {
     }
 
     bool Thread::Execute(const SR_HTYPES_NS::Function<bool()>& function) const {
-        SR_LOCK_GUARD
+        /// сначала дожидаемся предыдущей работы. Операция атомарная.
+        while (m_function) {
+            SR_NOOP;
+            continue;
+        }
 
-        m_function = &function;
+        /// синхронно записываем
+        {
+            SR_WRITE_LOCK
+            m_function = &function;
+        }
 
+        /// синхронно ждем выволнения работы. Операция атомарная.
         while (m_function) {
             SR_NOOP;
             continue;

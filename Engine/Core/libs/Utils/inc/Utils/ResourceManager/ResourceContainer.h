@@ -24,9 +24,6 @@ namespace SR_UTILS_NS {
         void UpdateResources(int32_t depth = 0);
         virtual void OnResourceUpdated(ResourceContainer* pContainer, int32_t depth);
 
-    protected:
-        mutable std::recursive_mutex m_mutex;
-
     private:
         std::unordered_set<ResourceContainer*> m_parents;
         std::unordered_set<ResourceContainer*> m_dependencies;

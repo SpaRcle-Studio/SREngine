@@ -4,7 +4,9 @@
 
 #include <Utils/World/Chunk.h>
 #include <Utils/World/Region.h>
+#include <Utils/World/Scene.h>
 #include <Utils/ECS/GameObject.h>
+#include <Utils/ECS/Transform.h>
 #include <Utils/World/SceneCubeChunkLogic.h>
 
 namespace SR_WORLD_NS {
@@ -28,8 +30,7 @@ namespace SR_WORLD_NS {
     }
 
     Chunk::~Chunk() {
-        SetDebugActive(BoolExt::False);
-        SetDebugLoaded(BoolExt::False);
+        SRAssert(m_preloaded.empty());
     }
 
     void Chunk::Update(float_t dt) {
@@ -56,27 +57,29 @@ namespace SR_WORLD_NS {
     bool Chunk::Unload() {
         m_loadState = LoadState::Unload;
 
-        SetDebugLoaded(BoolExt::False);
+        /*TODO: это потенциальное место для дедлоков, так как при уничтожении компоненты
+         * блокируют другие потоки. Придумать как исправить */
 
-        auto&& pLogic = m_observer->m_scene->GetLogic<SceneCubeChunkLogic>();
+        auto&& pLogic = m_observer->m_scene->GetLogicBase().DynamicCast<SceneCubeChunkLogic>();
         auto&& gameObjects = pLogic->GetGameObjectsAtChunk(m_regionPosition, m_position);
 
         for (auto gameObject : gameObjects) {
-            gameObject.AutoFree([](auto gm) {
-                gm->Destroy();
-            });
+            gameObject->Destroy();
         }
+
+        for (auto gameObject : m_preloaded) {
+            gameObject->Destroy();
+        }
+        m_preloaded.clear();
 
         return true;
     }
 
     void Chunk::OnExit() {
-        SetDebugActive(BoolExt::False);
         m_region->OnExit();
     }
 
     void Chunk::OnEnter() {
-        SetDebugActive(BoolExt::True);
         m_region->OnEnter();
     }
 
@@ -84,9 +87,10 @@ namespace SR_WORLD_NS {
         g_allocator = allocator;
     }
 
-    Chunk *Chunk::Allocate(SRChunkAllocArgs) {
-        if (g_allocator)
+    Chunk* Chunk::Allocate(SRChunkAllocArgs) {
+        if (g_allocator) {
             return g_allocator(SRChunkAllocVArgs);
+        }
 
         return new Chunk(SRChunkAllocVArgs);
     }
@@ -104,22 +108,19 @@ namespace SR_WORLD_NS {
     }
 
     bool Chunk::ApplyOffset() {
-        SetDebugLoaded(BoolExt::None);
-        SetDebugActive(BoolExt::None);
-
         return true;
     }
 
-    bool Chunk::Load(SR_HTYPES_NS::Marshal* pMarshal) {
+    bool Chunk::PreLoad(SR_HTYPES_NS::Marshal* pMarshal) {
         if (pMarshal && pMarshal->Valid()) {
-            if (m_position != pMarshal->Read<Math::IVector3>()) {
+            if (m_position != pMarshal->Read<SR_MATH_NS::IVector3>()) {
                 SRAssert2(false, "Something went wrong...");
                 return false;
             }
 
             const uint64_t count = pMarshal->Read<uint64_t>();
             for (uint64_t i = 0; i < count; ++i) {
-                if (auto &&ptr = m_observer->m_scene->Instance(*pMarshal)) {
+                if (auto&& ptr = GameObject::Load(*pMarshal, nullptr)) {
                     auto&& pTransform = ptr->GetTransform();
 
                     if (pTransform->GetMeasurement() == SR_UTILS_NS::Measurement::Space2D) {
@@ -127,13 +128,31 @@ namespace SR_WORLD_NS {
                     }
 
                     pTransform->GlobalTranslate(GetWorldPosition());
+
+                    m_preloaded.emplace_back(ptr);
                 }
             }
         }
 
-        m_loadState = LoadState::Loaded;
+        m_loadState = LoadState::PreLoaded;
+
         Access(0.f);
-        SetDebugLoaded(BoolExt::True);
+
+        return true;
+    }
+
+    bool Chunk::Load() {
+        SR_TRACY_ZONE;
+
+        SRAssert(m_loadState == LoadState::PreLoaded);
+
+        for (auto&& gameObject : m_preloaded) {
+            m_observer->m_scene->RegisterGameObject(gameObject);
+        }
+
+        m_preloaded.clear();
+
+        m_loadState = LoadState::Loaded;
 
         return true;
     }
@@ -143,12 +162,14 @@ namespace SR_WORLD_NS {
     }
 
     SR_HTYPES_NS::Marshal::Ptr Chunk::Save(SR_HTYPES_NS::DataStorage* pContext) const {
+        SR_TRACY_ZONE;
+
         /// scene is locked
 
-        auto&& pLogic = m_observer->m_scene->GetLogic<SceneCubeChunkLogic>();
+        auto&& pLogic = m_observer->m_scene->GetLogicBase().DynamicCast<SceneCubeChunkLogic>();
         auto&& gameObjects = pLogic->GetGameObjectsAtChunk(m_regionPosition, m_position);
 
-        if (gameObjects.empty()) {
+        if (gameObjects.empty() && m_preloaded.empty()) {
             return nullptr;
         }
 
@@ -158,6 +179,21 @@ namespace SR_WORLD_NS {
         pContext->SetValue<SR_MATH_NS::FVector3>(-GetWorldPosition());
 
         for (auto&& gameObject : gameObjects) {
+            if (gameObject.RecursiveLockIfValid()) {
+                if (auto &&gameObjectMarshal = gameObject->Save(nullptr, SAVABLE_FLAG_ECS_NO_ID); gameObjectMarshal) {
+                    if (gameObjectMarshal->Valid()) {
+                        marshaled.emplace_back(gameObjectMarshal);
+                    }
+                    else {
+                        SR_SAFE_DELETE_PTR(gameObjectMarshal);
+                    }
+                }
+
+                gameObject.Unlock();
+            }
+        }
+
+        for (auto&& gameObject : m_preloaded) {
             if (gameObject.RecursiveLockIfValid()) {
                 if (auto &&gameObjectMarshal = gameObject->Save(nullptr, SAVABLE_FLAG_ECS_NO_ID); gameObjectMarshal) {
                     if (gameObjectMarshal->Valid()) {
@@ -210,7 +246,7 @@ namespace SR_WORLD_NS {
         return m_observer->m_scene;
     }
 
-    void Chunk::SetDebugActive(BoolExt enabled) {
+    /*void Chunk::SetDebugActive(BoolExt enabled) {
         if (!Features::Instance().Enabled("DebugChunks", false)) {
             enabled = BoolExt::False;
         }
@@ -226,6 +262,7 @@ namespace SR_WORLD_NS {
         }
         else if (m_debugActiveId != SR_ID_INVALID) {
             SR_UTILS_NS::DebugDraw::Instance().DrawPlane(m_debugActiveId);
+            m_debugActiveId = SR_ID_INVALID;
         }
     }
 
@@ -249,6 +286,7 @@ namespace SR_WORLD_NS {
         }
         else if (m_debugLoadedId != SR_ID_INVALID) {
             SR_UTILS_NS::DebugDraw::Instance().DrawPlane(m_debugLoadedId);
+            m_debugLoadedId = SR_ID_INVALID;
         }
-    }
+    }*/
 }

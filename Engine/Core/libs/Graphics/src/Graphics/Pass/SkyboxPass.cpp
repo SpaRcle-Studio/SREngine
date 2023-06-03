@@ -5,6 +5,7 @@
 #include <Graphics/Pass/SkyboxPass.h>
 #include <Graphics/Types/Skybox.h>
 #include <Graphics/Types/Shader.h>
+#include <Graphics/Types/Camera.h>
 #include <Graphics/Pipeline/IShaderProgram.h>
 
 namespace SR_GRAPH_NS {
@@ -50,7 +51,11 @@ namespace SR_GRAPH_NS {
 
         auto&& shader = m_skybox->GetShader();
 
-        if (!shader || !shader->Use()) {
+        if (!shader) {
+            return false;
+        }
+
+        if (shader->Use() == ShaderBindResult::Failed) {
             return false;
         }
 

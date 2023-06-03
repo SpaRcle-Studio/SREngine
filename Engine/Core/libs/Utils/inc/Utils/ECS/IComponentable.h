@@ -8,6 +8,10 @@
 #include <Utils/Types/Marshal.h>
 #include <Utils/ECS/ISavable.h>
 
+namespace SR_WORLD_NS {
+    class Scene;
+}
+
 namespace SR_UTILS_NS {
     class Component;
 
@@ -15,10 +19,11 @@ namespace SR_UTILS_NS {
     public:
         using Components = std::vector<Component*>;
         using ComponentList = std::list<Component*>;
+        using ScenePtr = SR_WORLD_NS::Scene*;
 
     protected:
-        virtual ~IComponentable() = default;
         IComponentable() = default;
+        virtual ~IComponentable();
 
     public:
         SR_NODISCARD SR_INLINE const Components& GetComponents() const noexcept { return m_components; }
@@ -29,29 +34,25 @@ namespace SR_UTILS_NS {
         SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr SaveComponents(SR_HTYPES_NS::Marshal::Ptr pMarshal, SavableFlags flags) const;
 
         /// Вызывает OnAttached у компонентов загруженных через LoadComponent
-        virtual bool PostLoad();
+        virtual bool PostLoad(bool force);
 
-        virtual void CheckActivity() noexcept;
+        virtual void CheckActivity(bool force) noexcept;
 
-        virtual void Awake(bool isPaused) noexcept;
-        virtual void Start() noexcept;
+        virtual void Awake(bool force, bool isPaused) noexcept;
+        virtual void Start(bool force) noexcept;
 
-        virtual void SetDirty(bool value) { m_dirty = value; };
+        virtual bool SetDirty(bool dirty) {
+            m_dirty = SR_CLAMP(m_dirty + (dirty ? 1 : -1), 3, 0);
+            return m_dirty > 0;
+        };
 
         virtual Component* GetOrCreateComponent(const std::string& name);
         virtual Component* GetComponent(const std::string& name);
-        virtual Component* GetComponent(size_t id);
+        virtual Component* GetComponent(size_t hashName);
 
-        /** Отличие от AddComponent в том, что используется только при загрузке объекта,
-        * не вызывая при этом OnAttached -> Awake -> OnEnable -> Start, а делая это отложенно */
-        virtual bool LoadComponent(Component* component);
-
-        /** Добавляет новый компонент на объект, вызывает у компонента
-         * последовательность Awake -> OnEnable -> Start */
         virtual bool AddComponent(Component* component);
 
         virtual bool RemoveComponent(Component* component);
-        virtual bool ReplaceComponent(Component* source, Component* destination);
         virtual bool ContainsComponent(const std::string& name);
         virtual void ForEachComponent(const std::function<bool(Component*)>& fun);
 
@@ -61,11 +62,17 @@ namespace SR_UTILS_NS {
             return dynamic_cast<T*>(GetComponent(T::COMPONENT_HASH_NAME));
         }
 
-    protected:
-        bool m_dirty = true;
+        SR_NODISCARD virtual ScenePtr GetScene() const;
 
+    protected:
+        void DestroyComponent(Component* pComponent);
+
+    protected:
         Components m_components = { };
         ComponentList m_loadedComponents = { };
+
+    private:
+        int8_t m_dirty = 1;
 
     };
 }

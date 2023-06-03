@@ -5,6 +5,7 @@
 #include <Graphics/Render/RenderTechnique.h>
 #include <Graphics/Render/RenderScene.h>
 #include <Graphics/Render/RenderContext.h>
+#include <Graphics/Pass/GroupPass.h>
 
 namespace SR_GRAPH_NS {
     RenderTechnique::RenderTechnique()
@@ -21,7 +22,7 @@ namespace SR_GRAPH_NS {
     }
 
     RenderTechnique *RenderTechnique::Load(const SR_UTILS_NS::Path &rawPath) {
-        SR_GLOBAL_LOCK
+        SR_TRACY_ZONE;
 
         /// Данный ресурс может иметь копии
 
@@ -44,6 +45,8 @@ namespace SR_GRAPH_NS {
     }
 
     bool RenderTechnique::Render() {
+        SR_TRACY_ZONE;
+
         if ((m_dirty && !Build()) || !m_camera || !m_camera->IsActive()) {
             return false;
         }
@@ -68,6 +71,8 @@ namespace SR_GRAPH_NS {
     }
 
     void RenderTechnique::Prepare() {
+        SR_TRACY_ZONE;
+
         if (m_dirty) {
             return;
         }
@@ -78,6 +83,8 @@ namespace SR_GRAPH_NS {
     }
 
     void RenderTechnique::Update() {
+        SR_TRACY_ZONE;
+
         if (m_dirty || !m_camera || !m_camera->IsActive()) {
             return;
         }
@@ -90,6 +97,8 @@ namespace SR_GRAPH_NS {
     }
 
     bool RenderTechnique::Overlay() {
+        SR_TRACY_ZONE;
+
         if (m_dirty) {
             return false;
         }
@@ -106,14 +115,14 @@ namespace SR_GRAPH_NS {
     }
 
     void RenderTechnique::OnResize(const SR_MATH_NS::UVector2 &size) {
+        SR_TRACY_ZONE;
+
         for (auto&& pass : m_passes) {
             pass->OnResize(size);
         }
     }
 
     bool RenderTechnique::Load() {
-        SR_LOCK_GUARD
-
         SetDirty();
 
         m_loadState = LoadState::Loading;
@@ -122,8 +131,6 @@ namespace SR_GRAPH_NS {
     }
 
     bool RenderTechnique::Unload() {
-        SR_LOCK_GUARD
-
         m_loadState = LoadState::Unloading;
 
         return IResource::Unload();
@@ -145,6 +152,8 @@ namespace SR_GRAPH_NS {
     }
 
     bool RenderTechnique::Build() {
+        SR_TRACY_ZONE;
+
         /// Метод выполняется в графическом контексте
 
         if (m_hasErrors) {
@@ -194,6 +203,8 @@ namespace SR_GRAPH_NS {
     }
 
     bool RenderTechnique::LoadSettings(const SR_XML_NS::Node &node) {
+        SR_TRACY_ZONE;
+
         m_name = node.GetAttribute("Name").ToString();
 
         for (auto&& passNode : node.GetNodes()) {
@@ -209,6 +220,8 @@ namespace SR_GRAPH_NS {
     }
 
     void RenderTechnique::ClearSettings() {
+        SR_TRACY_ZONE;
+
         for (auto&& pPass : m_passes) {
             if (pPass->IsInit()) {
                 pPass->DeInit();
@@ -282,5 +295,11 @@ namespace SR_GRAPH_NS {
 
     std::string_view RenderTechnique::GetName() const {
         return m_name;
+    }
+
+    void RenderTechnique::OnSamplesChanged() {
+        for (auto&& pPass : m_passes) {
+            pPass->OnSamplesChanged();
+        }
     }
 }

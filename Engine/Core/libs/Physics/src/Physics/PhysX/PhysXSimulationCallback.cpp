@@ -16,8 +16,8 @@ namespace SR_PHYSICS_NS {
         const physx::PxU32 bufferSize = 64;
         physx::PxContactPairPoint contacts[bufferSize];
 
-        physx::PxVec3 point = physx::PxVec3(0);
-        physx::PxVec3 impulse  = physx::PxVec3(0);
+        auto point = physx::PxVec3(0);
+        auto impulse  = physx::PxVec3(0);
 
         for (physx::PxU32 i = 0; i < nbPairs; i++)
         {
@@ -34,8 +34,8 @@ namespace SR_PHYSICS_NS {
 
             const physx::PxContactPair& cp = pairs[i];
 
-            SR_PTYPES_NS::CollisionShape* shape1 = reinterpret_cast<SR_PTYPES_NS::CollisionShape*>(cp.shapes[0]->userData);
-            SR_PTYPES_NS::CollisionShape* shape2 = reinterpret_cast<SR_PTYPES_NS::CollisionShape*>(cp.shapes[1]->userData);
+            auto shape1 = reinterpret_cast<SR_PTYPES_NS::CollisionShape*>(cp.shapes[0]->userData);
+            auto shape2 = reinterpret_cast<SR_PTYPES_NS::CollisionShape*>(cp.shapes[1]->userData);
 
             SR_PTYPES_NS::Rigidbody* rigidbody1 = shape1->GetRigidbody();
             SR_PTYPES_NS::Rigidbody* rigidbody2 = shape2->GetRigidbody();
@@ -44,6 +44,11 @@ namespace SR_PHYSICS_NS {
 
             auto&& gameObject1 = rigidbody1->GetGameObject();
             auto&& gameObject2 = rigidbody2->GetGameObject();
+
+            if (!gameObject1 || !gameObject2) {
+                SRHalt0();
+                continue;
+            }
 
             data.point = SR_PHYSICS_UTILS_NS::PxV3ToFV3(point);
             data.impulse = SR_PHYSICS_UTILS_NS::PxV3ToFV3(impulse);
@@ -101,13 +106,14 @@ namespace SR_PHYSICS_NS {
         {
             // ignore pairs when shapes have been deleted
             if (pairs[i].flags & (physx::PxTriggerPairFlag::eREMOVED_SHAPE_TRIGGER |
-                                  physx::PxTriggerPairFlag::eREMOVED_SHAPE_OTHER))
+                                  physx::PxTriggerPairFlag::eREMOVED_SHAPE_OTHER)) {
                 continue;
+            }
 
             const physx::PxTriggerPair& tp = pairs[i];
 
-            SR_PTYPES_NS::CollisionShape* triggerShape = reinterpret_cast<SR_PTYPES_NS::CollisionShape*>(tp.triggerShape[0].userData);
-            SR_PTYPES_NS::CollisionShape* otherShape = reinterpret_cast<SR_PTYPES_NS::CollisionShape*>(tp.otherShape[0].userData);
+            auto triggerShape = reinterpret_cast<SR_PTYPES_NS::CollisionShape*>(tp.triggerShape[0].userData);
+            auto otherShape = reinterpret_cast<SR_PTYPES_NS::CollisionShape*>(tp.otherShape[0].userData);
 
             SR_PTYPES_NS::Rigidbody* triggerRigidBody = triggerShape->GetRigidbody();
             SR_PTYPES_NS::Rigidbody* rigidbody = otherShape->GetRigidbody();
@@ -116,6 +122,11 @@ namespace SR_PHYSICS_NS {
 
             auto&& triggerGameObject = triggerRigidBody->GetGameObject();
             auto&& gameObject = rigidbody->GetGameObject();
+
+            if (!triggerGameObject || !gameObject) {
+                SRHalt0();
+                continue;
+            }
 
             data.pHandler = rigidbody;
 

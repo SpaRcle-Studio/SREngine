@@ -21,6 +21,8 @@ namespace SR_GRAPH_NS {
     }
 
     bool OpaquePass::Render() {
+        SR_TRACY_ZONE;
+
         auto&& opaque = GetRenderScene()->GetOpaque();
 
         if (opaque.Empty()) {
@@ -28,7 +30,11 @@ namespace SR_GRAPH_NS {
         }
 
         for (auto&& [shader, subCluster] : opaque) {
-            if (!shader || (shader && !shader->Use())) {
+            if (!shader) {
+                continue;
+            }
+
+            if (shader->Use() == ShaderBindResult::Failed) {
                 continue;
             }
 
@@ -47,12 +53,14 @@ namespace SR_GRAPH_NS {
     }
 
     void OpaquePass::Update() {
+        SR_TRACY_ZONE;
+
         if (!m_camera) {
             return;
         }
 
         auto&& opaque = GetRenderScene()->GetOpaque();
-        auto&& time = SR_HTYPES_NS::Time::Instance().FClock();
+        auto&& time = SR_HTYPES_NS::Time::Instance().Clock();
 
         for (auto const& [pShader, subCluster] : opaque) {
             if (!pShader || !pShader->Ready()) {

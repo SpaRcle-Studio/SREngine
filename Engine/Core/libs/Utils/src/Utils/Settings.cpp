@@ -6,8 +6,6 @@
 
 namespace SR_UTILS_NS {
     bool Settings::Load() {
-        SR_LOCK_GUARD
-
         bool hasErrors = false;
 
         Path path = GetResourcePath();
@@ -33,16 +31,12 @@ namespace SR_UTILS_NS {
     }
 
     bool Settings::Unload() {
-        SR_LOCK_GUARD
-
         ClearSettings();
 
         return IResource::Unload();
     }
 
     bool Settings::Reload() {
-        SR_SCOPED_LOCK
-
         SR_LOG("Settings::Reload() : reloading \"" + std::string(GetResourceId()) + "\" settings...");
 
         m_loadState = LoadState::Reloading;
@@ -75,7 +69,6 @@ namespace SR_UTILS_NS {
     }
 
     void Settings::Do(const SR_HTYPES_NS::Function<void(Settings*)> &fun) {
-        SR_LOCK_GUARD
         fun(this);
     }
 }

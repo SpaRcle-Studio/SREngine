@@ -22,6 +22,8 @@ namespace SR_GTYPES_NS {
 }
 
 namespace SR_GRAPH_NS {
+    class RenderContext;
+
     struct ColorLayer {
         int32_t texture = SR_ID_INVALID;
         ColorFormat format = ColorFormat::Unknown;
@@ -46,6 +48,7 @@ namespace SR_GRAPH_NS {
     class Environment {
     public:
         using WindowPtr = SR_HTYPES_NS::SafePtr<Window>;
+        using RenderContextPtr = SR_HTYPES_NS::SafePtr<SR_GRAPH_NS::RenderContext>;
 
         enum class WinEvents{
             Close, Move, Resize, LeftClick, RightClick, Focus, Scroll
@@ -61,6 +64,7 @@ namespace SR_GRAPH_NS {
 
         bool              m_hasErrors              = false;
         bool              m_guiEnabled             = false;
+        bool              m_undocking              = false;
 
         int32_t           m_currentUBOid           = -1;
         int32_t           m_currentFBOid           = -1;
@@ -68,6 +72,15 @@ namespace SR_GRAPH_NS {
         int32_t           m_currentShaderID        = -1;
         int32_t           m_preferredDevice        = -1;
         int32_t           m_currentBuildIteration  = 0;
+
+        RenderContextPtr m_renderContext;
+
+        std::optional<uint8_t> m_newSampleCount;
+        uint8_t m_currentSampleCount = 0;
+        uint8_t m_requiredSampleCount = 0;
+        uint8_t m_supportedSampleCount = 0;
+
+        bool m_isMultisampleSupported = false;
 
         std::atomic<bool> m_needReBuild            = true;
 
@@ -85,7 +98,7 @@ namespace SR_GRAPH_NS {
         inline static std::function<void(WinEvents, void* win, void* arg1, void* arg2)> g_callback = std::function<void(WinEvents, void* win, void* arg1, void* arg2)>();
     public:
         void SetPreferredDevice(int32_t id) { m_preferredDevice = id; }
-        virtual void SetBuildState(const bool& isBuild) { }
+        virtual void SetBuildState(bool isBuild) { m_needReBuild = !isBuild; }
 
         SR_NODISCARD ImguiFont GetIconFont() const { return m_iconFont; }
         SR_NODISCARD GUIContext GetGUIContext() const { return m_guiContext; }
@@ -93,18 +106,30 @@ namespace SR_GRAPH_NS {
 
         /// \warning Could be the cause of a critical error
         void SetBuildIteration(const uint8_t& iter) { m_currentBuildIteration = iter;   }
+        void SetSampleCount(uint8_t count) { m_newSampleCount = m_requiredSampleCount = count; }
         void SetCurrentShaderId(const int32_t& id)  { m_currentShaderID = id;           }
         void SetCurrentShader(Types::Shader* pShader)  { m_currentShader = pShader;           }
-        void SetCurrentFramebuffer(Types::Framebuffer* pFramebuffer)  { m_currentFramebuffer = pFramebuffer; }
+        void SetRenderContext(const RenderContextPtr& pRenderContext) { m_renderContext = pRenderContext; }
+        void SetCurrentFramebuffer(Types::Framebuffer* pFramebuffer);
         SR_NODISCARD int32_t GetCurrentShaderId() const noexcept { return m_currentShaderID; }
         SR_NODISCARD Types::Shader* GetCurrentShader() const noexcept { return m_currentShader; }
         SR_NODISCARD Types::Framebuffer* GetCurrentFramebuffer() const noexcept { return m_currentFramebuffer; }
+        SR_NODISCARD virtual void* GetCurrentCmd() const noexcept { return nullptr; }
         SR_NODISCARD int32_t GetCurrentFramebufferId() const noexcept { return m_currentFBOid; }
+        SR_NODISCARD virtual void* GetCurrentRenderPassHandle() const { return nullptr; }
+
+        virtual void OnMultiSampleChanged();
+        virtual void UpdateMultiSampling() { }
+        virtual void PrepareFrame() {
+            UpdateMultiSampling();
+        }
 
         virtual uint64_t GetVRAMUsage() { return 0; }
         virtual Helper::Math::IVector2 GetScreenSize() const { return {}; }
 
-        SR_NODISCARD virtual uint8_t GetSmoothSamplesCount() const { return 0; }
+        SR_NODISCARD uint8_t GetSamplesCount() const;
+        SR_NODISCARD uint8_t GetSupportedSamples() const { return m_supportedSampleCount; }
+        SR_NODISCARD virtual uint8_t GetFramebufferSampleCount() const { return 0; }
         SR_NODISCARD SR_FORCE_INLINE uint32_t GetCurrentUBO()             const { return m_currentUBOid;           }
         SR_DEPRECATED SR_NODISCARD SR_FORCE_INLINE uint32_t GetCurrentFBO()             const { return m_currentFBOid;           }
         SR_NODISCARD SR_FORCE_INLINE uint32_t GetCurrentDescriptorSet()   const { return m_currentDescriptorSetId; }
@@ -141,6 +166,11 @@ namespace SR_GRAPH_NS {
         virtual bool StopGUI() { return false; }
         virtual bool BeginDrawGUI() { return false; }
         virtual void EndDrawGUI()   { }
+
+        virtual void OnWindowClose() { }
+        virtual void DeInitialize() { }
+
+        bool IsMultiSamplingSupported() const { return m_isMultisampleSupported; }
 
         //[[nodiscard]] virtual int32_t GetImGuiTextureDescriptorFromTexture(uint32_t id) const { return -2; }
         SR_NODISCARD virtual InternalTexture GetTexture(uint32_t id) const { return {}; }
@@ -187,8 +217,12 @@ namespace SR_GRAPH_NS {
         /* Swap window color buffers */
         virtual SR_FORCE_INLINE void SwapBuffers() const { }
         virtual SR_FORCE_INLINE void DrawFrame() { }
+        virtual SR_FORCE_INLINE bool BeginCmdBuffer() { return false; }
         virtual SR_FORCE_INLINE bool BeginRender() { return false; }
         virtual SR_FORCE_INLINE void EndRender() { }
+        virtual SR_FORCE_INLINE void ResetCmdBuffer() { }
+        virtual SR_FORCE_INLINE void ResetCmdPool() { }
+        virtual SR_FORCE_INLINE void EndCmdBuffer() { }
 
         virtual glm::vec2 GetMousePos() { return glm::vec2(0); }
         virtual glm::vec4 GetTexturePixel(glm::vec2 uPos, uint32_t ID, glm::vec2 size) { return glm::vec4(0); }
@@ -258,7 +292,7 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD virtual SR_FORCE_INLINE int32_t AllocateUBO(uint32_t uboSize) const { return SR_ID_INVALID; }
 
         virtual SR_FORCE_INLINE bool FreeDescriptorSet(int32_t* descriptorSet) { return false; }
-        virtual SR_FORCE_INLINE int32_t AllocDescriptorSet(const std::set<DescriptorType>& types) { return SR_ID_INVALID; }
+        virtual SR_FORCE_INLINE int32_t AllocDescriptorSet(std::vector<uint64_t> types) { return SR_ID_INVALID; }
         virtual SR_FORCE_INLINE int32_t AllocDescriptorSetFromTexture(uint32_t textureID) { return SR_ID_INVALID; }
         virtual SR_FORCE_INLINE void BindDescriptorSet(const uint32_t& descriptorSet) { m_currentDescriptorSetId = descriptorSet; }
         virtual SR_FORCE_INLINE void ResetDescriptorSet() { m_currentDescriptorSetId = SR_ID_INVALID; }

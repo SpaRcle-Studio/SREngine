@@ -13,6 +13,7 @@ namespace SR_CORE_NS {
         m_icons.clear();
         m_renderTechnique = SR_UTILS_NS::Path();
         m_prefabEditorRenderTechnique = SR_UTILS_NS::Path();
+        m_debugChunks = false;
         Settings::ClearSettings();
     }
 
@@ -26,6 +27,10 @@ namespace SR_CORE_NS {
 
         if (auto&& renderTechniqueXml = node.GetNode("RenderTechnique")) {
             m_renderTechnique = renderTechniqueXml.GetAttribute<SR_UTILS_NS::Path>();
+        }
+
+        if (auto&& debugChunksXml = node.GetNode("DebugChunks")) {
+            m_debugChunks = debugChunksXml.GetAttribute<bool>();
         }
 
         return Settings::LoadSettings(node);

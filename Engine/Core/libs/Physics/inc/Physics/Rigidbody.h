@@ -13,10 +13,15 @@
 #include <Utils/Types/SafePointer.h>
 #include <Utils/Math/Matrix4x4.h>
 
+namespace SR_HTYPES_NS {
+    class RawMesh;
+}
+
 namespace SR_PHYSICS_NS {
     class PhysicsScene;
     class LibraryImpl;
 
+    /// Rigidbody Update Shape Result
     enum class RBUpdShapeRes : uint8_t {
         Updated = 0,
         Error = 1,
@@ -25,6 +30,8 @@ namespace SR_PHYSICS_NS {
 }
 
 namespace SR_PTYPES_NS {
+    class PhysicsMaterial;
+
     class Rigidbody : public SR_UTILS_NS::Component {
         friend class SR_PHYSICS_NS::PhysicsScene;
     protected:
@@ -36,17 +43,23 @@ namespace SR_PTYPES_NS {
         ~Rigidbody() override;
 
     public:
-        static ComponentPtr LoadComponent(SR_UTILS_NS::Measurement measurement, SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage);
+        static Component* LoadComponent(SR_UTILS_NS::Measurement measurement, SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage);
 
         SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SR_UTILS_NS::SavableFlags flags) const override;
 
         virtual bool UpdateMatrix(bool force = false);
 
+        virtual void Synchronize() { }
+
+        virtual std::string GetEntityInfo() const override;
+
         virtual bool UpdateShapeInternal() { return false; }
         virtual void UpdateInertia() { }
+        virtual void ClearForces() { }
 
         SR_NODISCARD virtual SR_UTILS_NS::Measurement GetMeasurement() const;
 
+        SR_NODISCARD bool ExecuteInEditMode() const override { return true; }
         SR_NODISCARD ShapeType GetType() const noexcept;
         SR_NODISCARD CollisionShape* GetCollisionShape() const noexcept { return m_shape; }
         SR_NODISCARD SR_MATH_NS::FVector3 GetCenter() const noexcept;
@@ -61,15 +74,14 @@ namespace SR_PTYPES_NS {
         SR_NODISCARD SR_MATH_NS::FVector3 GetTranslation() const noexcept { return m_translation; }
         SR_NODISCARD SR_MATH_NS::Quaternion GetRotation() const noexcept { return m_rotation; }
         SR_NODISCARD SR_MATH_NS::FVector3 GetScale() const noexcept { return m_scale; }
-
-        RBUpdShapeRes UpdateShape();
+        SR_NODISCARD SR_HTYPES_NS::RawMesh* GetRawMesh() const noexcept { return m_rawMesh; }
+        SR_NODISCARD int32_t GetMeshId() const noexcept { return m_meshId; }
+        SR_NODISCARD bool IsDebugEnabled() const noexcept;
+        SR_NODISCARD RBUpdShapeRes UpdateShape();
 
         void SetMatrixDirty(bool value) { m_isMatrixDirty = value; }
         void SetShapeDirty(bool value) { m_isShapeDirty = value; }
 
-        virtual void AddLocalVelocity(const SR_MATH_NS::FVector3& velocity) { }
-        virtual void AddGlobalVelocity(const SR_MATH_NS::FVector3& velocity) { }
-        virtual void SetVelocity(const SR_MATH_NS::FVector3& velocity) { }
         virtual void SetIsTrigger(bool value);
         virtual void SetIsStatic(bool value);
 
@@ -77,9 +89,14 @@ namespace SR_PTYPES_NS {
         virtual void SetType(ShapeType type);
         void SetMass(float_t mass);
 
+        void SetMaterial(PhysicsMaterial* pMaterial);
+        void SetRawMesh(SR_HTYPES_NS::RawMesh* pRawMesh);
+        void SetMeshId(int32_t id) { m_meshId = id; }
+
         virtual bool InitBody();
 
     protected:
+        void Update(float_t dt) override;
         void OnEnable() override;
         void OnDisable() override;
         void OnAttached() override;
@@ -87,7 +104,7 @@ namespace SR_PTYPES_NS {
 
         void OnMatrixDirty() override;
 
-        PhysicsScenePtr GetPhysicsScene();
+        SR_NODISCARD const PhysicsScenePtr& GetPhysicsScene() const;
 
         template<typename T> SR_NODISCARD T* GetLibrary() const {
             if (auto&& pLibrary = dynamic_cast<T*>(m_library)) {
@@ -100,14 +117,24 @@ namespace SR_PTYPES_NS {
         }
 
     protected:
+        /// shape всегда присутствует, но у него может отличаться внутрення реализация
         CollisionShape::Ptr m_shape = nullptr;
         LibraryPtr m_library = nullptr;
 
-        PhysicsScenePtr m_physicsScene;
+        mutable PhysicsScenePtr m_physicsScene;
 
         SR_MATH_NS::FVector3 m_translation;
+        SR_MATH_NS::FVector3 m_rigidbodyTranslation = SR_MATH_NS::InfinityFV3;
+
         SR_MATH_NS::Quaternion m_rotation;
+        SR_MATH_NS::Quaternion m_rigidbodyRotation = SR_MATH_NS::InfinityQuaternion;
+
         SR_MATH_NS::FVector3 m_scale;
+
+        SR_PTYPES_NS::PhysicsMaterial* m_material = nullptr;
+        SR_HTYPES_NS::RawMesh* m_rawMesh = nullptr;
+
+        int32_t m_meshId = 0;
 
         SR_MATH_NS::FVector3 m_center;
 

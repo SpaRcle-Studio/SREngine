@@ -56,13 +56,11 @@ namespace SR_GTYPES_NS {
     }
 
     SR_UTILS_NS::IResource* Material::CopyResource(SR_UTILS_NS::IResource* destination) const {
-        SRAssert2(false, "Material is not are copyable!");
+        SRHalt( "Material is not are copyable!");
         return nullptr;
     }
 
     Material* Material::Load(SR_UTILS_NS::Path rawPath) {
-        SR_GLOBAL_LOCK
-
         static auto&& resourceManager = SR_UTILS_NS::ResourceManager::Instance();
 
         Material* pMaterial = nullptr;
@@ -95,8 +93,6 @@ namespace SR_GTYPES_NS {
     }
 
     void SR_GTYPES_NS::Material::SetShader(Shader *shader) {
-        SR_LOCK_GUARD
-
         if (m_shader == shader) {
             return;
         }
@@ -119,8 +115,6 @@ namespace SR_GTYPES_NS {
         if (!SRVerifyFalse(!property)) {
             return;
         }
-
-        SR_SCOPED_LOCK
 
         if (auto&& oldTexture = std::get<Texture*>(property->data)) {
             if (oldTexture == pTexture) {
@@ -282,7 +276,9 @@ namespace SR_GTYPES_NS {
     }
 
     bool Material::Reload() {
-        SR_LOG("Material::Reload() : reloading \"" + std::string(GetResourceId()) + "\" material...");
+        if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::Medium) {
+            SR_LOG("Material::Reload() : reloading \"" + std::string(GetResourceId()) + "\" material...");
+        }
 
         m_loadState = LoadState::Reloading;
 
@@ -333,5 +329,24 @@ namespace SR_GTYPES_NS {
         }
 
         return m_shader->IsBlendEnabled();
+    }
+
+    bool Material::ContainsTexture(SR_GTYPES_NS::Texture* pTexture) const {
+        if (!pTexture) {
+            return false;
+        }
+
+        for (auto&& property : m_properties) {
+            if (std::visit([pTexture](ShaderPropertyVariant&& arg) -> bool {
+                if (std::holds_alternative<SR_GTYPES_NS::Texture*>(arg)) {
+                    return std::get<SR_GTYPES_NS::Texture*>(arg) == pTexture;
+                }
+                return false;
+            }, property.data)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

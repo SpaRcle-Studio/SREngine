@@ -28,6 +28,9 @@ namespace SR_GRAPH_NS {
 
         void Update() override;
 
+    private:
+        bool m_isRendered = false;
+
     };
 }
 

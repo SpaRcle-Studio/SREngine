@@ -5,16 +5,13 @@
 #ifndef GAMEENGINE_POINTLIGHT_H
 #define GAMEENGINE_POINTLIGHT_H
 
-#include <Graphics/Lighting/Light.h>
+#include <Graphics/Lighting/ILightComponent.h>
 
-namespace Framework::Graphics {
-    class Render;
+namespace SR_GRAPH_NS {
+    class PointLight : public ILightComponent {
+    protected:
+        float_t m_radius = 1.f;
 
-    class PointLight : public Light {
-    public:
-        PointLight(Render* render);
-    private:
-        float m_radius = 1.f;
     };
 }
 

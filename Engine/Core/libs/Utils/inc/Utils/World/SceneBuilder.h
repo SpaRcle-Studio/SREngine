@@ -6,6 +6,7 @@
 #define SRENGINE_SCENEBUILDER_H
 
 #include <Utils/Common/NonCopyable.h>
+#include <Utils/Types/Time.h>
 
 namespace SR_UTILS_NS {
     class Component;
@@ -21,6 +22,8 @@ namespace SR_WORLD_NS {
         ~SceneBuilder() override = default;
 
     public:
+        SR_NODISCARD SR_HTYPES_NS::Time::Point GetLastBuildTime() const { return m_lastBuildTimePoint; }
+
         void Build(bool isPaused);
         void Update(float_t dt);
         void FixedUpdate();
@@ -31,9 +34,11 @@ namespace SR_WORLD_NS {
         void Initialize(bool isPaused);
 
     private:
+        SR_HTYPES_NS::Time::Point m_lastBuildTimePoint;
+        std::recursive_mutex m_mutex;
         std::vector<SR_UTILS_NS::Component*> m_updatableComponents;
         bool m_dirty = false;
-        uint64_t m_rootHash = 0;
+        uint64_t m_componentsCapacity = 0;
         Scene* m_scene = nullptr;
 
     };

@@ -6,6 +6,7 @@
 #define EVOSCRIPTLIB_BEHAVIOUR_H
 
 #include <Libraries/Utils/BehaviourRegistration.h>
+#include <Libraries/Types/SafePointer.h>
 #include <Libraries/GameObject.h>
 #include <Libraries/Scene.h>
 
@@ -58,9 +59,13 @@ public:
         }
     }
 
+    void SetScene(ScenePtr ptr) {
+        scene = ptr;
+    }
+
 protected:
     template<typename T> bool AddProperty(const std::string& id, T* ref) {
-        g_codegen_properties_registations.emplace_back([this, ref, id]() {
+        gBehaviourContext->propertiesRegistrations.emplace_back([this, ref, id]() {
             if (m_properties.count(id) == 1) {
             #ifdef EVK_DEBUG
                 std::cerr << "Behaviour::AddProperty() : property already registered!\n\tId: " << id << '\n';

@@ -12,4 +12,11 @@ namespace SR_PHYSICS_NS {
     {
         SRAssert(space != Space::Unknown);
     }
+
+    PhysicsWorld::~PhysicsWorld() {
+        if (m_raycast3dImpl){
+            delete m_raycast3dImpl;
+            m_raycast3dImpl = nullptr;
+        }
+    }
 }

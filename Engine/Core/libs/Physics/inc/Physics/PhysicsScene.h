@@ -21,6 +21,7 @@ namespace SR_PHYSICS_NS {
 
     class PhysicsScene : public SR_HTYPES_NS::SafePtr<PhysicsScene> {
         friend class SR_HTYPES_NS::SafePtr<PhysicsScene>;
+    public:
         using Super = SR_HTYPES_NS::SafePtr<PhysicsScene>;
         using Ptr = Super;
         using RigidbodyPtr = SR_PTYPES_NS::Rigidbody*;
@@ -30,21 +31,29 @@ namespace SR_PHYSICS_NS {
         using Space = SR_UTILS_NS::Measurement;
     public:
         explicit PhysicsScene(const ScenePtr& scene);
-        ~PhysicsScene();
+        virtual ~PhysicsScene();
 
     public:
-        void FixedUpdate();
-        bool Init();
+        virtual void FixedUpdate();
+        virtual bool Init();
 
-        void Remove(RigidbodyPtr pRigidbody);
-        void Register(RigidbodyPtr pRigidbody);
+        virtual void Remove(RigidbodyPtr pRigidbody);
+        virtual void Register(RigidbodyPtr pRigidbody);
 
-        void ClearForces();
+        virtual void ClearForces();
+
+        SR_NODISCARD SR_PHYSICS_NS::PhysicsWorld* Get2DWorld() const noexcept { return m_2DWorld; }
+        SR_NODISCARD SR_PHYSICS_NS::PhysicsWorld* Get3DWorld() const noexcept { return m_3DWorld; }
+        SR_NODISCARD bool IsDebugEnabled() const noexcept { return m_debugEnabled; };
 
     private:
-        bool CreateDynamicWorld();
+        virtual bool Flush();
+        virtual bool CreateDynamicWorld();
 
     private:
+        std::list<SR_PTYPES_NS::Rigidbody*> m_rigidbodyToRemove;
+        std::list<SR_PTYPES_NS::Rigidbody*> m_rigidbodyToRegister;
+
         ScenePtr m_scene;
 
         LibraryPtr m_library2D = nullptr;
@@ -54,6 +63,7 @@ namespace SR_PHYSICS_NS {
         PhysicsWorldPtr m_3DWorld = nullptr;
 
         bool m_needClearForces = false;
+        bool m_debugEnabled = true;
 
     };
 }

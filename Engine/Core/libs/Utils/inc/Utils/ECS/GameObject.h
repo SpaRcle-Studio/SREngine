@@ -8,6 +8,7 @@
 #include <Utils/ECS/EntityManager.h>
 #include <Utils/ECS/IComponentable.h>
 #include <Utils/ECS/TagManager.h>
+#include <Utils/ECS/Prefab.h>
 
 #include <Utils/Math/Vector3.h>
 #include <Utils/Types/SafePointer.h>
@@ -23,30 +24,20 @@ namespace SR_UTILS_NS {
     class Transform;
     class Component;
 
-    SR_ENUM_NS(GameObjectDestroyBy,
-        GAMEOBJECT_DESTROY_BY_UNKNOWN    = 1 << 0,
-        GAMEOBJECT_DESTROY_BY_SCENE      = 1 << 1,
-        GAMEOBJECT_DESTROY_BY_GAMEOBJECT = 1 << 2,
-        GAMEOBJECT_DESTROY_BY_OTHER      = 1 << 3,
-        GAMEOBJECT_DESTROY_BY_COMMAND    = 1 << 4
-    );
-    typedef uint64_t GODestroyByBits;
-
     SR_ENUM_NS(GameObjectFlags,
         GAMEOBJECT_FLAG_NONE    = 1 << 0,
         GAMEOBJECT_FLAG_NO_SAVE = 1 << 1
     );
     typedef uint64_t GameObjectFlagBits;
 
-    class SR_DLL_EXPORT GameObject : public SR_HTYPES_NS::SharedPtr<GameObject>, public IComponentable, public Entity {
-        SR_ENTITY_SET_VERSION(1005);
+    class SR_DLL_EXPORT GameObject : public IComponentable, public Entity {
+        SR_ENTITY_SET_VERSION(1007);
         friend class Component;
     public:
         using Name = std::string;
         using Ptr = SR_HTYPES_NS::SharedPtr<GameObject>;
-        using Super = Ptr;
         using GameObjects = std::vector<GameObject::Ptr>;
-        using ScenePtr = World::Scene*;
+        using ScenePtr = SR_WORLD_NS::Scene*;
         using IdGetterFn = SR_HTYPES_NS::Function<uint64_t(const GameObject::Ptr&)>;
 
     public:
@@ -60,11 +51,15 @@ namespace SR_UTILS_NS {
     public:
         SR_NODISCARD GameObject::Ptr Copy(const ScenePtr& scene) const;
 
-        SR_NODISCARD ScenePtr GetScene() const { return m_scene; }
+        SR_NODISCARD ScenePtr GetScene() const override { return m_scene; }
+        SR_NODISCARD Prefab* GetPrefab() const noexcept { return m_prefab.first; }
+        SR_NODISCARD bool IsPrefabOwner() const noexcept { return m_prefab.second; }
         SR_NODISCARD Transform* GetParentTransform() const noexcept { return m_parent ? m_parent->m_transform : nullptr; }
         SR_NODISCARD Transform* GetTransform() const noexcept { return m_transform; }
         SR_NODISCARD GameObject::Ptr GetParent() const noexcept { return m_parent; }
+        SR_NODISCARD GameObject::Ptr GetRoot() const noexcept;
         SR_NODISCARD GameObject::Ptr Find(uint64_t hashName) const noexcept;
+        SR_NODISCARD GameObject::Ptr Find(const std::string& name) const noexcept;
         SR_NODISCARD std::string GetName() const { return m_name; }
         SR_NODISCARD Tag GetTag() const;
         SR_NODISCARD bool HasTag() const;
@@ -88,16 +83,18 @@ namespace SR_UTILS_NS {
 
         void SetIdInScene(uint64_t id);
         void SetScene(ScenePtr pScene);
+        void SetPrefab(Prefab* pPrefab, bool owner);
+        void UnlinkPrefab();
 
         void ForEachChild(const std::function<void(GameObject::Ptr&)>& fun);
         void ForEachChild(const std::function<void(const GameObject::Ptr&)>& fun) const;
         bool SetParent(const GameObject::Ptr& parent);
+        void RemoveAllChildren();
         void SetName(std::string name);
         void SetTag(const std::string& tag);
 
         bool Contains(const GameObject::Ptr& child);
         void SetEnabled(bool value);
-        void Destroy(GODestroyByBits by = GAMEOBJECT_DESTROY_BY_OTHER);
         void SetTransform(Transform* transform);
         void SetFlags(GameObjectFlagBits flags) { m_flags = flags; }
 
@@ -106,15 +103,21 @@ namespace SR_UTILS_NS {
         void RemoveChild(const GameObject::Ptr& child);
 
         /// Вызывает OnAttached у компонентов загруженных через LoadComponent
-        bool PostLoad() override;
+        bool PostLoad(bool force) override;
 
-        void Awake(bool isPaused) noexcept override;
-        void Start() noexcept override;
+        void Awake(bool force, bool isPaused) noexcept override;
+        void Start(bool force) noexcept override;
 
-        void CheckActivity() noexcept override;
+        void CheckActivity(bool force) noexcept override;
 
-        void SetDirty(bool value) override;
+        bool SetDirty(bool value) override;
         void OnMatrixDirty();
+
+        /// ставит объект на очередь уничтожения, если есть сцена. Если сцены нет - сразу уничтожает
+        void Destroy();
+
+        /// освобождает память объекта
+        void DestroyImpl();
 
     private:
         void OnAttached();
@@ -124,7 +127,7 @@ namespace SR_UTILS_NS {
     private:
         bool m_isEnabled = true;
         bool m_isActive = false;
-        bool m_isDestroy = false;
+        bool m_isDestroyed = false;
 
         uint64_t m_hashName = 0;
         uint64_t m_idInScene = SR_ID_INVALID;
@@ -134,6 +137,7 @@ namespace SR_UTILS_NS {
 
         ScenePtr m_scene = nullptr;
         Transform* m_transform  = nullptr;
+        std::pair<Prefab*, bool> m_prefab;
 
         Name m_name;
         Tag m_tag = 0;

@@ -4,7 +4,6 @@
 
 #include <Utils/World/Region.h>
 
-#include <Graphics/Render/Render.h>
 #include <Graphics/Types/Geometry/DebugWireframeMesh.h>
 #include <Graphics/Render/RenderScene.h>
 
@@ -55,26 +54,26 @@ namespace SR_CORE_NS {
         }, RenderScenePtr());
 
         if (value && !m_stayMesh) {
-            if (auto&& pMesh = SR_GTYPES_NS::Mesh::Load("Engine/Models/cubeWireframe.obj", SR_GTYPES_NS::MeshType::Wireframe, 0)) {
-                m_stayMesh = dynamic_cast<SR_GTYPES_NS::DebugWireframeMesh *>(pMesh);
-            }
-            else
-                return;
+            //if (auto&& pMesh = SR_GTYPES_NS::Mesh::Load("Engine/Models/cubeWireframe.obj", SR_GTYPES_NS::MeshType::Wireframe, 0)) {
+            //    m_stayMesh = dynamic_cast<SR_GTYPES_NS::DebugWireframeMesh *>(pMesh);
+            //}
+            //else
+            //    return;
 
-            UpdateFacesPos();
+            //UpdateFacesPos();
 
-            m_stayMesh->AddUsePoint();
-            m_stayMesh->SetMaterial(SR_GTYPES_NS::Material::Load("Engine/Materials/Colors/green_wireframe.mat"));
+           //m_stayMesh->AddUsePoint();
+           //m_stayMesh->SetMaterial(SR_GTYPES_NS::Material::Load("Engine/Materials/Colors/green_wireframe.mat"));
 
            //renderScene.Do([this](SR_GRAPH_NS::RenderScene* ptr) {
            //    ptr->Register(m_stayMesh);
            //});
         }
 
-        if (!value && m_stayMesh) {
-            m_stayMesh->RemoveUsePoint();
-            m_stayMesh = nullptr;
-        }
+        //if (!value && m_stayMesh) {
+        //    m_stayMesh->RemoveUsePoint();
+        //    m_stayMesh = nullptr;
+        //}
     }
 
     void VisualChunk::SetLoadVisible(bool value) {
@@ -83,26 +82,26 @@ namespace SR_CORE_NS {
         }, RenderScenePtr());
 
         if (value && !m_loadMesh && m_position.y == 1 && m_regionPosition.y == 1) {
-            if (auto&& pMesh = SR_GTYPES_NS::Mesh::Load("Engine/Models/planeWireframe.obj", SR_GTYPES_NS::MeshType::Wireframe, 0)) {
-                m_loadMesh = dynamic_cast<SR_GTYPES_NS::DebugWireframeMesh *>(pMesh);
-            }
-            else
-                return;
+            //if (auto&& pMesh = SR_GTYPES_NS::Mesh::Load("Engine/Models/planeWireframe.obj", SR_GTYPES_NS::MeshType::Wireframe, 0)) {
+            //    m_loadMesh = dynamic_cast<SR_GTYPES_NS::DebugWireframeMesh *>(pMesh);
+            //}
+            //else
+            //    return;
 
-            UpdateLoadPos();
-
-            m_loadMesh->AddUsePoint();
-            m_loadMesh->SetMaterial(SR_GTYPES_NS::Material::Load("Engine/Materials/Colors/yellow_wireframe.mat"));
+            //UpdateLoadPos();
+//
+            //m_loadMesh->AddUsePoint();
+            //m_loadMesh->SetMaterial(SR_GTYPES_NS::Material::Load("Engine/Materials/Colors/yellow_wireframe.mat"));
 
             //renderScene.Do([this](SR_GRAPH_NS::RenderScene* ptr) {
             //    ptr->Register(m_loadMesh);
             //});
         }
 
-        if (!value && m_loadMesh) {
-            m_loadMesh->RemoveUsePoint();
-            m_loadMesh = nullptr;
-        }
+        //if (!value && m_loadMesh) {
+        //    m_loadMesh->RemoveUsePoint();
+        //    m_loadMesh = nullptr;
+        //}
     }
 
     void VisualChunk::OnExit() {

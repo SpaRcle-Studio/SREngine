@@ -19,72 +19,44 @@ namespace SR_GTYPES_NS {
         : Super(MeshType::Static)
     { }
 
-    Mesh3D::~Mesh3D() {
-        SetRawMesh(nullptr);
-    }
-
     bool Mesh3D::Calculate()  {
-        SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
+        SR_TRACY_ZONE;
 
-        if (m_isCalculated)
-            return true;
-
-        const bool iboOK = m_IBO != SR_ID_INVALID;
-        if (m_VBO != SR_ID_INVALID && iboOK && !m_hasErrors) {
-            m_isCalculated = true;
+        if (IsCalculated()) {
             return true;
         }
+
+        FreeVideoMemory();
 
         if (!IsCanCalculate()) {
             return false;
         }
 
         if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::High) {
-            SR_LOG("Mesh3D::Calculate() : calculating \"" + m_geometryName + "\"...");
+            SR_LOG("Mesh3D::Calculate() : calculating \"" + GetGeometryName() + "\"...");
         }
 
-        auto&& vertices = Vertices::CastVertices<Vertices::StaticMeshVertex>(m_rawMesh->GetVertices(m_meshId));
-
-        if (!CalculateVBO<Vertices::VertexType::StaticMeshVertex>(vertices))
+        if (!CalculateVBO<Vertices::VertexType::StaticMeshVertex, Vertices::StaticMeshVertex>([this]() {
+            return Vertices::CastVertices<Vertices::StaticMeshVertex>(GetVertices());
+        })) {
             return false;
+        }
 
         return IndexedMesh::Calculate();
     }
 
-    SR_UTILS_NS::IResource* Mesh3D::CopyResource(IResource* destination) const {
-        SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
-
-        auto* mesh3D = dynamic_cast<Mesh3D *>(destination ? destination : new Mesh3D());
-        mesh3D = dynamic_cast<Mesh3D *>(IndexedMesh::CopyResource(mesh3D));
-
-        mesh3D->SetRawMesh(m_rawMesh);
-        mesh3D->m_meshId = m_meshId;
-
-        return mesh3D;
-    }
-
-    void Mesh3D::FreeVideoMemory() {
-        SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
-
-        if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::High) {
-            SR_LOG("Mesh3D::FreeVideoMemory() : free \"" + m_geometryName + "\" mesh video memory...");
-        }
-
-        if (!FreeVBO<Vertices::VertexType::StaticMeshVertex>()) {
-            SR_ERROR("Mesh3D::FreeVideoMemory() : failed to free VBO!");
-        }
-
-        IndexedMesh::FreeVideoMemory();
-    }
-
     void Mesh3D::Draw() {
+        SR_TRACY_ZONE;
+
         auto&& pShader = GetRenderContext()->GetCurrentShader();
 
-        if (!pShader || !IsActive() || IsDestroyed())
+        if (!pShader || !IsActive()) {
             return;
+        }
 
-        if ((!m_isCalculated && !Calculate()) || m_hasErrors)
+        if ((!IsCalculated() && !Calculate()) || m_hasErrors) {
             return;
+        }
 
         if (m_dirtyMaterial)
         {
@@ -123,107 +95,49 @@ namespace SR_GTYPES_NS {
     }
 
     SR_HTYPES_NS::Marshal::Ptr SR_GTYPES_NS::Mesh3D::Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SR_UTILS_NS::SavableFlags flags) const {
-        pMarshal = Component::Save(pMarshal, flags);
-
-        pMarshal->Write(static_cast<int32_t>(m_type));
+        pMarshal = MeshComponent::Save(pMarshal, flags);
 
         /// TODO: use unicode
-        pMarshal->Write(GetResourcePath().ToString());
-        pMarshal->Write(m_meshId);
+        pMarshal->Write<std::string>(GetMeshStringPath());
+        pMarshal->Write<int32_t>(GetMeshId());
 
-        pMarshal->Write(m_material ? m_material->GetResourceId() : "None");
+        pMarshal->Write<std::string>(m_material ? m_material->GetResourceId() : "None");
 
         return pMarshal;
     }
 
-    SR_UTILS_NS::Component *SR_GTYPES_NS::Mesh3D::LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage *dataStorage) {
-        const auto &&type = static_cast<MeshType>(marshal.Read<int32_t>());
+    SR_UTILS_NS::Component* SR_GTYPES_NS::Mesh3D::LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage *dataStorage) {
+        const auto&& type = static_cast<MeshType>(marshal.Read<int32_t>());
 
-        const auto &&path = marshal.Read<std::string>();
-        const auto &&id = marshal.Read<uint32_t>();
+        const auto&& path = marshal.Read<std::string>();
+        const auto&& id = marshal.Read<uint32_t>();
 
-        const auto &&material = marshal.Read<std::string>();
+        const auto&& material = marshal.Read<std::string>();
 
         if (id < 0) {
             return nullptr;
         }
 
-        auto &&pMesh = Mesh::Load(SR_UTILS_NS::Path(path, true), type, id);
+        auto&& pMesh = Mesh::Load(SR_UTILS_NS::Path(path, true), type, id);
 
         if (pMesh && material != "None") {
             if (auto&& pMaterial = SR_GTYPES_NS::Material::Load(SR_UTILS_NS::Path(material, true))) {
                 pMesh->SetMaterial(pMaterial);
             }
-            else
+            else {
                 SR_ERROR("Mesh3D::LoadComponent() : failed to load material! Name: " + material);
+            }
         }
 
         return dynamic_cast<Component*>(pMesh);
     }
 
-    bool Mesh3D::Unload() {
-        SetRawMesh(nullptr);
-        return true;
-    }
-
-    bool Mesh3D::Load() {
-        if (auto&& pRawMesh = SR_HTYPES_NS::RawMesh::Load(GetResourcePath())) {
-            if (m_meshId >= pRawMesh->GetMeshesCount()) {
-                if (pRawMesh->GetCountUses() == 0) {
-                    SRHalt("Mesh3D::Load() : count uses is zero! Unresolved situation...");
-                    pRawMesh->Destroy();
-                }
-                return false;
-            }
-
-            m_countIndices = pRawMesh->GetIndicesCount(m_meshId);
-            m_countVertices = pRawMesh->GetVerticesCount(m_meshId);
-
-            SetGeometryName(pRawMesh->GetGeometryName(m_meshId));
-            SetRawMesh(pRawMesh);
-
-            return true;
-        }
-
-        return false;
-    }
-
-    void Mesh3D::SetRawMesh(SR_HTYPES_NS::RawMesh *pRaw) {
-        if (m_rawMesh) {
-            RemoveDependency(m_rawMesh);
-        }
-
-        if (pRaw) {
-            AddDependency(pRaw);
-        }
-
-        m_rawMesh = pRaw;
-    }
-
     std::vector<uint32_t> Mesh3D::GetIndices() const {
-        return m_rawMesh->GetIndices(m_meshId);
+        return GetRawMesh()->GetIndices(GetMeshId());
     }
 
     bool Mesh3D::IsCanCalculate() const {
-        return m_rawMesh && m_meshId < m_rawMesh->GetMeshesCount() && Mesh::IsCanCalculate();
-    }
-
-    bool Mesh3D::Reload() {
-        SR_LOG("Mesh3D::Reload() : reloading \"" + std::string(GetResourceId()) + "\" mesh...");
-
-        m_loadState = LoadState::Reloading;
-
-        Unload();
-
-        if (!Load()) {
-            return false;
-        }
-
-        m_loadState = LoadState::Loaded;
-
-        UpdateResources();
-
-        return true;
+        return IsValidMeshId() && Mesh::IsCanCalculate();
     }
 
     void Mesh3D::UseMaterial() {
@@ -233,5 +147,44 @@ namespace SR_GTYPES_NS {
 
     void Mesh3D::UseModelMatrix() {
         GetRenderContext()->GetCurrentShader()->SetMat4(SHADER_MODEL_MATRIX, m_modelMatrix);
+    }
+
+    void Mesh3D::OnRawMeshChanged() {
+        IRawMeshHolder::OnRawMeshChanged();
+
+        if (GetRawMesh() && IsValidMeshId()) {
+            SetGeometryName(GetRawMesh()->GetGeometryName(GetMeshId()));
+        }
+
+        MarkPipelineUnBuild();
+
+        m_dirtyMaterial = true;
+        m_isCalculated = false;
+    }
+
+    std::string Mesh3D::GetMeshIdentifier() const {
+        if (auto&& pRawMesh = GetRawMesh()) {
+            return SR_UTILS_NS::Format("%s|%i|%i", pRawMesh->GetResourceId().c_str(), GetMeshId(), pRawMesh->GetReloadCount());
+        }
+
+        return Super::GetMeshIdentifier();
+    }
+
+    SR_UTILS_NS::Component* Mesh3D::CopyComponent() const {
+        if (auto&& pMesh = dynamic_cast<Mesh3D*>(MeshComponent::CopyComponent())) {
+            pMesh->SetRawMesh(GetRawMesh());
+            pMesh->SetMeshId(GetMeshId());
+            return pMesh;
+        }
+
+        return nullptr;
+    }
+
+    void Mesh3D::OnResourceReloaded(SR_UTILS_NS::IResource* pResource) {
+        if (GetRawMesh() == pResource) {
+            OnRawMeshChanged();
+            return;
+        }
+        Mesh::OnResourceReloaded(pResource);
     }
 }

@@ -16,6 +16,14 @@ namespace SR_PTYPES_NS {
     CollisionShape::~CollisionShape() = default;
 
     void CollisionShape::UpdateDebugShape() {
+        if (!m_rigidbody->IsDebugEnabled()) {
+            return;
+        }
+
+        if (!m_rigidbody->IsAttached() || !m_rigidbody->IsActive()) {
+            return;
+        }
+
         if (SR_PHYSICS_UTILS_NS::IsBox(GetType())) {
             m_debugId = SR_UTILS_NS::DebugDraw::Instance().DrawCube(
                     m_debugId,
@@ -49,8 +57,6 @@ namespace SR_PTYPES_NS {
             );
         }
     }
-
-
 
     void CollisionShape::SetHeight(float_t height) {
         m_bounds.y = height;
@@ -105,7 +111,7 @@ namespace SR_PTYPES_NS {
         return m_scale;
     }
 
-    Rigidbody * CollisionShape::GetRigidbody() const {
+    Rigidbody* CollisionShape::GetRigidbody() const {
         return m_rigidbody;
     }
 
@@ -127,12 +133,31 @@ namespace SR_PTYPES_NS {
 
     void CollisionShape::SetType(ShapeType type) {
         m_type = type;
+        RemoveDebugShape();
+        UpdateDebugShape();
     }
 
     void CollisionShape::RemoveDebugShape() {
         if (m_debugId != SR_ID_INVALID) {
             SR_UTILS_NS::DebugDraw::Instance().Remove(m_debugId);
             m_debugId = SR_ID_INVALID;
+        }
+    }
+
+    void CollisionShape::SetBounds(const SR_MATH_NS::FVector3& bounds) {
+        m_bounds = bounds;
+        UpdateDebugShape();
+        UpdateMatrix();
+    }
+
+    void CollisionShape::Update(float_t dt) {
+        const bool isDebugEnabled = m_rigidbody->IsDebugEnabled();
+
+        if (isDebugEnabled && m_debugId == SR_ID_INVALID) {
+            UpdateDebugShape();
+        }
+        else if (!isDebugEnabled && m_debugId != SR_ID_INVALID) {
+            RemoveDebugShape();
         }
     }
 }

@@ -44,17 +44,20 @@ namespace SR_SRSL_NS {
         using Ptr = std::shared_ptr<SRSLShader>;
         using Super = SR_UTILS_NS::NonCopyable;
         using UniformBlocks = std::map<std::string, SRSLUniformBlock>;
+        uint64_t VERSION = 1000;
     private:
-        explicit SRSLShader(SR_UTILS_NS::Path path, SRSLAnalyzedTree::Ptr&& pAnalyzedTree);
+        explicit SRSLShader(SR_UTILS_NS::Path path);
 
     public:
         SR_NODISCARD static SRSLShader::Ptr Load(SR_UTILS_NS::Path path);
+        static void ClearShadersCache();
 
     public:
         SR_NODISCARD std::string ToString(ShaderLanguage shaderLanguage) const;
         SR_NODISCARD bool Export(ShaderLanguage shaderLanguage) const;
 
         SR_NODISCARD bool IsCacheActual() const;
+        SR_NODISCARD bool IsCacheActual(ShaderLanguage shaderLanguage) const;
 
         SR_NODISCARD const SRSLUniformBlock* FindUniformBlock(const std::string& name) const;
         SR_NODISCARD const SRSLUniformBlock::Field* FindField(const std::string& name) const;
@@ -70,6 +73,8 @@ namespace SR_SRSL_NS {
 
     private:
         SR_NODISCARD ISRSLCodeGenerator::SRSLCodeGenRes GenerateStages(ShaderLanguage shaderLanguage) const;
+
+        SR_NODISCARD bool SaveCache() const;
 
         bool Prepare();
         bool PrepareSettings();

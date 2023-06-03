@@ -3,9 +3,14 @@
 //
 
 #include <Utils/ResourceManager/ResourceInfo.h>
+#include <Utils/ResourceManager/IResourceReloader.h>
 
 namespace SR_UTILS_NS {
-    IResource *ResourceType::Find(const ResourceType::ResourceId &id)  {
+    ResourceType::~ResourceType() {
+        SetReloader(nullptr);
+    }
+
+    IResource* ResourceType::Find(const ResourceType::ResourceId &id)  {
         auto&& pIt = m_copies.find(id);
         if (pIt == m_copies.end()) {
             return nullptr;
@@ -22,7 +27,9 @@ namespace SR_UTILS_NS {
                 }
 
                 if (pResource->IsAllowedToRevive()) {
-                    SR_LOG("ResourceType::Find() : revive resource \"" + pResource->GetResourceId() + "\"");
+                    if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::Medium) {
+                        SR_LOG("ResourceType::Find() : revive resource \"" + pResource->GetResourceId() + "\"");
+                    }
                     pResource->ReviveResource();
                     return false;
                 }
@@ -50,7 +57,7 @@ namespace SR_UTILS_NS {
 
     void ResourceType::Remove(IResource *pResource) {
         const auto id = pResource->GetResourceHashId();
-        auto&& path = pResource->GetResourceHashPath();
+        auto&& hashPath = pResource->GetResourceHashPath();
 
         /// -------------------------------------------------------------
 
@@ -68,12 +75,12 @@ namespace SR_UTILS_NS {
 
         /// -------------------------------------------------------------
 
-        auto&& info = m_info.at(path);
+        auto&& pInfo = m_info.at(hashPath);
 
-        info.m_loaded.erase(pResource);
+        pInfo->m_loaded.erase(pResource);
 
-        if (info.m_loaded.empty()) {
-            m_info.erase(path);
+        if (pInfo->m_loaded.empty()) {
+            m_info.erase(hashPath);
         }
 
         /// -------------------------------------------------------------
@@ -88,16 +95,18 @@ namespace SR_UTILS_NS {
         pResource->OnResourceRegistered();
 
         auto&& path = pResource->GetResourceHashPath();
+        auto&& pIt = m_info.find(path);
 
-        if (auto&& pIt = m_info.find(path); pIt != m_info.end()) {
-            auto&& [_, info] = *pIt;
-            info.m_loaded.insert(pResource);
+    retry:
+        if (pIt != m_info.end()) {
+            auto&& [_, pInfo] = *pIt;
+            pInfo->m_loaded.insert(pResource);
+            pResource->m_resourceInfo = pInfo.get();
         }
         else {
-            (m_info[path] = ResourceInfo(
-                    pResource->GetFileHash(),
-                    pResource->GetResourceHash()
-            )).m_loaded.insert(pResource);
+            auto&& pInfo = std::make_shared<ResourceInfo>(pResource->GetFileHash(), pResource->GetResourceHash(), this);
+            pIt = m_info.insert(std::make_pair(path, pInfo)).first;
+            goto retry;
         }
     }
 
@@ -125,5 +134,41 @@ namespace SR_UTILS_NS {
                 return true;
             });
         }
+    }
+
+    std::pair<ResourceType::ResourcePath, ResourceInfo::HardPtr> ResourceType::GetInfoByIndex(uint64_t index) {
+        if (index >= m_info.size()) {
+            return std::make_pair(0, nullptr);
+        }
+
+        auto&& [hash, info] = *std::next(m_info.begin(), index);
+
+        return std::make_pair(hash, info);
+    }
+
+    void ResourceType::SetReloader(IResourceReloader *pReloader) {
+        if (m_reloader) {
+            delete m_reloader;
+            m_reloader = nullptr;
+        }
+        m_reloader = pReloader;
+    }
+
+    IResource::Ptr ResourceInfo::GetResource() const {
+        if (m_loaded.size() != 1) {
+            SRHalt("Incorrect function usage!");
+            return nullptr;
+        }
+
+        return *m_loaded.begin();
+    }
+
+    IResource *ResourceInfo::GetFirstResource() const {
+        if (m_loaded.size() == 0) {
+            SRHalt("Incorrect function usage!");
+            return nullptr;
+        }
+
+        return *m_loaded.begin();
     }
 }

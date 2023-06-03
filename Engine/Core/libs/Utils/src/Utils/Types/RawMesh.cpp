@@ -11,9 +11,9 @@
 #include <assimp/include/assimp/cexport.h>
 
 namespace SR_HTYPES_NS {
-    SR_INLINE_STATIC int SR_RAW_MESH_ASSIMP_FLAGS = aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_JoinIdenticalVertices | aiProcess_GenUVCoords | aiProcess_TransformUVCoords | aiProcess_SortByPType | aiProcess_GlobalScale;
+    SR_INLINE_STATIC int SR_RAW_MESH_ASSIMP_FLAGS = aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_MakeLeftHanded | aiProcess_FlipWindingOrder | aiProcess_JoinIdenticalVertices | aiProcess_GenUVCoords | aiProcess_TransformUVCoords | aiProcess_SortByPType | aiProcess_GlobalScale;
     SR_INLINE_STATIC int SR_RAW_MESH_ASSIMP_CACHED_FLAGS = aiProcess_FlipUVs;
-    SR_INLINE_STATIC int SR_RAW_MESH_ASSIMP_ANIMATION_FLAGS = 0;
+    SR_INLINE_STATIC int SR_RAW_MESH_ASSIMP_ANIMATION_FLAGS = aiProcess_MakeLeftHanded | aiProcess_FlipWindingOrder;
 
     RawMesh::RawMesh()
         : IResource(SR_COMPILE_TIME_CRC32_TYPE_NAME(RawMesh), true /** auto remove */)
@@ -23,21 +23,35 @@ namespace SR_HTYPES_NS {
 
     RawMesh::~RawMesh() {
         delete m_importer;
+
+        if (m_fromCache) {
+            delete m_scene;
+            m_scene = nullptr;
+        }
     }
 
-    RawMesh *RawMesh::Load(const SR_UTILS_NS::Path &rawPath) {
+    SR_UTILS_NS::Path RawMesh::InitializeResourcePath() const {
+        return SR_UTILS_NS::Path(
+                std::move(SR_UTILS_NS::StringUtils::SubstringView(GetResourceId(), '|', 1)),
+                true /** fast */
+        );
+    }
+
+    RawMesh::Ptr RawMesh::Load(const SR_UTILS_NS::Path &rawPath) {
         return Load(rawPath, false);
     }
 
-    RawMesh *RawMesh::Load(const SR_UTILS_NS::Path &rawPath, bool animation) {
-        SR_GLOBAL_LOCK
-
-        RawMesh* pRawMesh = nullptr;
+    RawMesh::Ptr RawMesh::Load(const SR_UTILS_NS::Path &rawPath, bool animation) {
+        RawMesh::Ptr pRawMesh = nullptr;
 
         ResourceManager::Instance().Execute([&]() {
-            Path&& path = Path(rawPath).RemoveSubPath(ResourceManager::Instance().GetResPath());
+            Path&& id = Path(rawPath).RemoveSubPath(ResourceManager::Instance().GetResPath());
 
-            if (auto&& pResource = ResourceManager::Instance().Find<RawMesh>(path)) {
+            if (animation) {
+                id = id.EmplaceFront("Animation|");
+            }
+
+            if (auto&& pResource = ResourceManager::Instance().Find<RawMesh>(id)) {
                 pRawMesh = pResource;
                 SRAssert(pRawMesh->m_asAnimation == animation);
                 return;
@@ -45,10 +59,10 @@ namespace SR_HTYPES_NS {
 
             pRawMesh = new RawMesh();
             pRawMesh->m_asAnimation = animation;
-            pRawMesh->SetId(path, false /** auto register */);
+            pRawMesh->SetId(id, false /** auto register */);
 
             if (!pRawMesh->Reload()) {
-                SR_ERROR("RawMesh::Load() : failed to load raw mesh! \n\tPath: " + path.ToString());
+                SR_ERROR("RawMesh::Load() : failed to load raw mesh! \n\tPath: " + rawPath.ToString());
                 delete pRawMesh;
                 pRawMesh = nullptr;
                 return;
@@ -62,45 +76,65 @@ namespace SR_HTYPES_NS {
     }
 
     bool RawMesh::Unload() {
-        SR_SCOPED_LOCK
-
         bool hasErrors = !IResource::Unload();
 
         if (m_importer) {
             m_importer->FreeScene();
         }
 
+        if (m_fromCache) {
+            delete m_scene;
+            m_scene = nullptr;
+        }
+
+        m_fromCache = false;
+
         m_bones.clear();
         m_boneOffsets.clear();
+        m_animations.clear();
 
         return !hasErrors;
     }
 
     bool RawMesh::Load() {
-        SR_SCOPED_LOCK
-
         bool hasErrors = !IResource::Load();
 
-        Path&& path = Path(GetResourceId());
-        if (!path.IsAbs()) {
-            path = ResourceManager::Instance().GetResPath().Concat(path);
+        auto&& resPath = GetResourcePath();
+
+        Path&& path = ResourceManager::Instance().GetResPath().Concat(resPath);
+        Path&& cache = ResourceManager::Instance().GetCachePath().Concat("Models").Concat(resPath);
+
+        if (m_asAnimation) {
+            cache = cache.ConcatExt("animation");
         }
 
-        Path&& cache = ResourceManager::Instance().GetCachePath().Concat("Models").Concat(GetResourceId());
-        Path&& binary = cache.ConcatExt("assbin");
+        Path&& binary = cache.ConcatExt("cache");
         Path&& hashFile = cache.ConcatExt("hash");
 
         const uint64_t resourceHash = path.GetFileHash();
 
         const bool supportFastLoad = SR_UTILS_NS::Features::Instance().Enabled("FastModelsLoad", false);
+        bool needFastLoad = supportFastLoad;
 
-        if (supportFastLoad && resourceHash == SR_UTILS_NS::FileSystem::ReadHashFromFile(hashFile)) {
-            m_scene = m_importer->ReadFile(binary.ToString(), m_asAnimation ? SR_RAW_MESH_ASSIMP_ANIMATION_FLAGS : SR_RAW_MESH_ASSIMP_CACHED_FLAGS);
+    retry:
+        if (needFastLoad && resourceHash == SR_UTILS_NS::FileSystem::ReadHashFromFile(hashFile)) {
+            if ((m_scene = SR_UTILS_NS::AssimpCache::Instance().Load(binary))) {
+                m_fromCache = true;
+            }
+            else {
+                needFastLoad = false;
+                goto retry;
+            }
         }
         else {
-            m_scene = m_importer->ReadFile(path.ToString(), m_asAnimation ? SR_RAW_MESH_ASSIMP_ANIMATION_FLAGS : SR_RAW_MESH_ASSIMP_FLAGS);
+            m_scene = m_importer->ReadFile(path.ToStringRef(), m_asAnimation ? SR_RAW_MESH_ASSIMP_ANIMATION_FLAGS : SR_RAW_MESH_ASSIMP_FLAGS);
 
-            if (supportFastLoad) {
+            if (!m_scene) {
+                SR_ERROR("RawMesh::Load() : failed to load file!\n\tPath: " + path.ToStringRef() + "\n\tReason: " + std::string(m_importer->GetErrorString()));
+                return false;
+            }
+
+            if (needFastLoad) {
                 SR_LOG("RawMesh::Load() : export model to cache... \n\tPath: " + binary.ToString());
 
                 Assimp::Exporter exporter;
@@ -112,8 +146,13 @@ namespace SR_HTYPES_NS {
             }
         }
 
+        if (m_scene && !m_fromCache && supportFastLoad) {
+            SR_UTILS_NS::AssimpCache::Instance().Save(binary, m_scene);
+        }
+
         if (m_scene) {
             CalculateBones();
+            CalculateAnimations();
         }
         else {
             SR_ERROR("RawMesh::Load() : failed to read file! \n\tPath: " + path.ToString() + "\n\tReason: " + m_importer->GetErrorString());
@@ -124,8 +163,6 @@ namespace SR_HTYPES_NS {
     }
 
     uint32_t RawMesh::GetMeshesCount() const {
-        SR_LOCK_GUARD
-
         if (!m_scene) {
             SRHalt("RawMesh::GetMeshesCount() : assimp scene is invalid!");
             return 0;
@@ -135,8 +172,6 @@ namespace SR_HTYPES_NS {
     }
 
     std::string RawMesh::GetGeometryName(uint32_t id) const {
-        SR_LOCK_GUARD
-
         if (!m_scene || id >= m_scene->mNumMeshes) {
             SRAssert2(false, "Out of range or invalid scene!");
             return {};
@@ -165,14 +200,29 @@ namespace SR_HTYPES_NS {
             SR_UTILS_NS::Vertex vertex = SR_UTILS_NS::Vertex();
             vertex.position = *reinterpret_cast<Vec3*>(&mesh->mVertices[i]);
             vertex.uv = hasUV ? (*reinterpret_cast<Vec2*>(&mesh->mTextureCoords[0][i])) : Vec2 { 0.f, 0.f };
+            //vertex.uv.x = -vertex.uv.x;
             vertex.normal = hasNormals ? (*reinterpret_cast<Vec3*>(&mesh->mNormals[i])) : Vec3 { 0.f, 0.f, 0.f };
             vertex.tangent = hasTangents ? (*reinterpret_cast<Vec3*>(&mesh->mTangents[i])) : Vec3 { 0.f, 0.f, 0.f };
             vertex.bitangent = hasTangents ? (*reinterpret_cast<Vec3*>(&mesh->mBitangents[i])) : Vec3 { 0.f, 0.f, 0.f };
+
+            /*vertex.position.x = -vertex.position.x;
+            vertex.normal.x = -vertex.normal.x;
+            vertex.tangent.x = -vertex.tangent.x;
+            vertex.bitangent.x = -vertex.bitangent.x;*/
+
             vertices.emplace_back(vertex);
         }
 
+        //std::reverse(vertices.begin(), vertices.end());
+
+        //for (uint32_t i = 0; i < vertices.size() / 3; i += 3) {
+        //    std::swap(vertices[i + 1], vertices[i + 2]);
+        //}
+
         if (hasBones) {
             auto&& bones = GetBones(id);
+
+            bool hasWarn = false;
 
             for (uint32_t i = 0; i < mesh->mNumBones; i++) {
                 for (uint32_t j = 0; j < mesh->mBones[i]->mNumWeights; j++) {
@@ -181,8 +231,11 @@ namespace SR_HTYPES_NS {
                     vertex.weightsNum++;
 
                     if (vertex.weightsNum > SR_MAX_BONES_ON_VERTEX) {
-                        SR_WARN(SR_FORMAT("RawMesh::GetVertices() : number of weights on vertex is already %i. Some weights will be omitted! VertexID = %i. weightsNum = %i",
-                                          SR_MAX_BONES_ON_VERTEX, mesh->mBones[i]->mWeights[j].mVertexId, vertex.weightsNum));
+                        if (!hasWarn) {
+                            SR_WARN(SR_FORMAT("RawMesh::GetVertices() : number of weights on vertex is already %i. Some weights will be omitted! VertexID = %i. weightsNum = %i",
+                                SR_MAX_BONES_ON_VERTEX, mesh->mBones[i]->mWeights[j].mVertexId, vertex.weightsNum));
+                            hasWarn = true;
+                        }
                         continue;
                     }
 
@@ -192,12 +245,24 @@ namespace SR_HTYPES_NS {
             }
 
         #ifdef SR_DEBUG
-            for (auto&& vertex : vertices) {
-                float sum = 0.f;
-                for (auto&& [boneId, weight] : vertex.weights) {
-                    sum += weight;
+            static bool hasError = false;
+
+            if (!hasError) {
+                for (auto&& vertex : vertices) {
+                    float_t sum = 0.f;
+
+                    for (auto&&[boneId, weight] : vertex.weights) {
+                        sum += weight;
+                    }
+
+                    if (!SR_EQUALS(sum, 1.f)) {
+                        SR_WARN("RawMesh::GetVertices() : incorrect mesh weight!\n\tPath: " + GetResourcePath().ToStringRef() +
+                            "\n\tIndex: " + std::to_string(id) + "\n\tSum: " + std::to_string(sum)
+                        );
+                        hasError = true;
+                        break;
+                    }
                 }
-                SRAssert(SR_EQUALS(sum, 1.f));
             }
         #endif
         }
@@ -339,6 +404,17 @@ namespace SR_HTYPES_NS {
 
                 m_boneOffsets.insert(std::make_pair(hashName, std::move(matrix4X4)));
             }
+        }
+    }
+
+    void RawMesh::CalculateAnimations() {
+        if (!m_asAnimation || !m_scene) {
+            return;
+        }
+
+        for (uint32_t i = 0; i < m_scene->mNumAnimations; ++i) {
+            auto&& pAnimation = m_scene->mAnimations[i];
+            m_animations[SR_HASH_STR(pAnimation->mName.C_Str())] = pAnimation;
         }
     }
 }

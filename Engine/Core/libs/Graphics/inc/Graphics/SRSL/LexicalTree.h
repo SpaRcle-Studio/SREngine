@@ -23,8 +23,13 @@ namespace SR_SRSL_NS {
         explicit SRSLExpr(std::string&& token)
             : token(SR_UTILS_NS::Exchange(token, { }))
         {
-            SRAssert(this->token != ")" && this->token != "(");
+            SRAssert(this->token != "(" && this->token != ")");
             SRAssert(this->token != "[" && this->token != "]");
+            SRAssert(this->token != "}");
+
+            if (this->token == "{") {
+                isList = true;
+            }
         }
 
         explicit SRSLExpr(std::string&& token, SRSLExpr* pAExpr)
@@ -77,6 +82,7 @@ namespace SR_SRSL_NS {
 
         bool isCall = false;       /// function(arg1, arg2, arg3)
         bool isArray = false;      /// variable[expression]
+        bool isList = false;       /// { expr1, expr2, expr3 }
 
     };
 

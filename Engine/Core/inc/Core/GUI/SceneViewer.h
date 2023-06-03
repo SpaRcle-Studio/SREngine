@@ -44,7 +44,6 @@ namespace SR_CORE_NS::GUI {
         void LoadCameraSettings();
         void BackupCameraSettings();
 
-        void SetCameraActive(bool value);
         void OnClose() override;
         void OnOpen() override;
         void Draw() override;
@@ -66,7 +65,6 @@ namespace SR_CORE_NS::GUI {
         GameObjectPtr m_camera;
         SR_WORLD_NS::Scene::Ptr m_scene;
         std::atomic<bool> m_enabled = false;
-        std::atomic<bool> m_cameraActive = false;
         SR_MATH_NS::FVector3 m_rotation;
         SR_MATH_NS::FVector3 m_translation;
         bool m_updateNonHoveredSceneViewer = false;

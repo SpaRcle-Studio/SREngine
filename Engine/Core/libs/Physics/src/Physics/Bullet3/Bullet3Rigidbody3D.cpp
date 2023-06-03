@@ -51,16 +51,7 @@ namespace SR_PTYPES_NS {
         return true;
     }
 
-    void Bullet3Rigidbody3D::AddLocalVelocity(const SR_MATH_NS::FVector3& velocity) {
-        if (m_rigidbody) {
-            m_rigidbody->setLinearVelocity(m_rigidbody->getLinearVelocity() + SR_PHYSICS_UTILS_NS::FV3ToBtV3(m_rotation * velocity));
-        }
-        else {
-            SRHalt("m_rigidbody is nullptr!");
-        }
-    }
-
-    void Bullet3Rigidbody3D::AddGlobalVelocity(const SR_MATH_NS::FVector3& velocity) {
+    void Bullet3Rigidbody3D::AddLinearVelocity(const SR_MATH_NS::FVector3& velocity) {
         if (m_rigidbody) {
             m_rigidbody->setLinearVelocity(m_rigidbody->getLinearVelocity() + SR_PHYSICS_UTILS_NS::FV3ToBtV3(velocity));
         }
@@ -69,14 +60,23 @@ namespace SR_PTYPES_NS {
         }
     }
 
-    void Bullet3Rigidbody3D::SetVelocity(const SR_MATH_NS::FVector3& velocity) {
+    void Bullet3Rigidbody3D::AddAngularVelocity(const SR_MATH_NS::FVector3& velocity) {
         if (m_rigidbody) {
-            m_rigidbody->setLinearVelocity(SR_PHYSICS_UTILS_NS::FV3ToBtV3(velocity));
+            m_rigidbody->setLinearVelocity(m_rigidbody->getLinearVelocity() + SR_PHYSICS_UTILS_NS::FV3ToBtV3(velocity));
         }
         else {
             SRHalt("m_rigidbody is nullptr!");
         }
     }
+
+    //void Bullet3Rigidbody3D::SetVelocity(const SR_MATH_NS::FVector3& velocity) {
+    //    if (m_rigidbody) {
+    //        m_rigidbody->setLinearVelocity(SR_PHYSICS_UTILS_NS::FV3ToBtV3(velocity));
+    //    }
+    //    else {
+    //        SRHalt("m_rigidbody is nullptr!");
+    //    }
+    //}
 
     bool Bullet3Rigidbody3D::UpdateMatrix(bool force) {
         if (!Super::UpdateMatrix(force)) {

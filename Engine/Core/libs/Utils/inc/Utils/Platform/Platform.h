@@ -10,6 +10,7 @@
 #include <Utils/FileSystem/Path.h>
 
 namespace SR_UTILS_NS::Platform {
+    SR_DLL_EXPORT extern void InitSegmentationHandler();
     SR_DLL_EXPORT extern void SetInstance(void* pInstance);
     SR_DLL_EXPORT extern void* GetInstance();
 
@@ -22,6 +23,7 @@ namespace SR_UTILS_NS::Platform {
     SR_DLL_EXPORT extern std::string GetClipboardText();
     SR_DLL_EXPORT extern void ClearClipboard();
     SR_DLL_EXPORT extern SR_MATH_NS::FVector2 GetMousePos();
+    SR_DLL_EXPORT extern void SetMousePos(const SR_MATH_NS::IVector2& pos);
     SR_DLL_EXPORT extern void Sleep(uint64_t milliseconds);
     SR_DLL_EXPORT extern uint64_t GetProcessUsedMemory();
     SR_DLL_EXPORT extern void SetThreadPriority(void* nativeHandle, ThreadPriority priority);

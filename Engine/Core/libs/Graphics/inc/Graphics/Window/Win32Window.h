@@ -37,7 +37,11 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD SR_MATH_NS::IVector2 GetScreenResolution() const override;
         SR_NODISCARD void* GetHandle() const override;
 
+        SR_NODISCARD SR_MATH_NS::IVector2 ClientToScreen(const SR_MATH_NS::IVector2& pos) const override;
+        SR_NODISCARD SR_MATH_NS::IVector2 ScreenToClient(const SR_MATH_NS::IVector2& pos) const override;
+
         SR_NODISCARD WindowType GetType() const override { return BasicWindowImpl::WindowType::Win32; }
+        SR_NODISCARD bool IsVisible() const override;
 
         void SwapBuffers() const override;
         void PollEvents() const override;
@@ -64,6 +68,8 @@ namespace SR_GRAPH_NS {
 
     private:
         std::atomic<WinAPI::StyleState> m_styleState;
+
+        SR_MATH_NS::IVector2 m_position;
 
         HWND      m_hWnd       = nullptr;
         HDC       m_hDC        = nullptr;

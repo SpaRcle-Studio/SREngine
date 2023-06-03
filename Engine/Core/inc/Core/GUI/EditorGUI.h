@@ -34,7 +34,7 @@ namespace SR_CORE_NS {
     enum class EditorIcon : uint32_t;
 }
 
-namespace SR_CORE_NS::GUI {
+namespace SR_CORE_GUI_NS {
     class VisualScriptEditor;
     class Inspector;
     class WorldEdit;
@@ -91,6 +91,14 @@ namespace SR_CORE_NS::GUI {
 
         void Draw() override;
         void Update();
+        void Save();
+
+        void CacheScenePath(const SR_UTILS_NS::Path& scenePath);
+        bool LoadSceneFromCachedPath();
+
+        void ReloadWindows();
+
+        void ResetToDefault();
 
     private:
         void OnMouseMove(const SR_UTILS_NS::MouseInputData* data) override;
@@ -101,10 +109,11 @@ namespace SR_CORE_NS::GUI {
 
     private:
         bool Init();
-        void Save();
         void Load();
 
     private:
+        SR_UTILS_NS::Path m_cachedScenePath;
+
         RenderContextPtr m_context = { };
         WindowPtr m_window = { };
 

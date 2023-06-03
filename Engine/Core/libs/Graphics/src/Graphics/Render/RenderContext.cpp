@@ -6,11 +6,14 @@
 #include <Graphics/Render/RenderScene.h>
 
 #include <Graphics/Window/Window.h>
+#include <Graphics/Memory/ShaderProgramManager.h>
 
 #include <Graphics/Types/Framebuffer.h>
 #include <Graphics/Types/Shader.h>
 #include <Graphics/Types/Texture.h>
 #include <Graphics/Types/RenderTexture.h>
+
+#include <Graphics/Pass/FramebufferPass.h>
 
 #include <Utils/Locale/Encoding.h>
 
@@ -21,6 +24,8 @@ namespace SR_GRAPH_NS {
     { }
 
     void RenderContext::Update() noexcept {
+        SR_TRACY_ZONE;
+
         /**
          * Все ресурсы при завершении работы рендера должны остаться только с одним use-point'ом.
          * В противном случае память никогда не освободится.
@@ -77,6 +82,8 @@ namespace SR_GRAPH_NS {
     }
 
     bool RenderContext::Init() {
+        SR_TRACY_ZONE;
+
         m_pipeline = Environment::Get();
         m_pipelineType = m_pipeline->GetType();
 
@@ -145,6 +152,8 @@ namespace SR_GRAPH_NS {
     }
 
     RenderContext::RenderScenePtr RenderContext::CreateScene(const SR_WORLD_NS::Scene::Ptr &scene) {
+        SR_TRACY_ZONE;
+
         RenderScenePtr pRenderScene;
 
         if (scene.RecursiveLockIfValid()) {
@@ -254,6 +263,8 @@ namespace SR_GRAPH_NS {
     }
 
     void RenderContext::OnResize(const SR_MATH_NS::UVector2 &size) {
+        SR_TRACY_ZONE;
+
         for (auto pIt = std::begin(m_scenes); pIt != std::end(m_scenes); ++pIt) {
             auto&&[pScene, pRenderScene] = *pIt;
 
@@ -272,6 +283,8 @@ namespace SR_GRAPH_NS {
     }
 
     RenderContext::FramebufferPtr RenderContext::FindFramebuffer(const std::string &name, CameraPtr pCamera) const {
+        SR_TRACY_ZONE;
+
         for (auto&& pTechnique : m_techniques) {
             if (pTechnique->GetCamera() != pCamera) {
                 continue;
@@ -288,6 +301,8 @@ namespace SR_GRAPH_NS {
     }
 
     RenderContext::FramebufferPtr RenderContext::FindFramebuffer(const std::string &name) const {
+        SR_TRACY_ZONE;
+
         for (auto&& pTechnique : m_techniques) {
             auto&& pPass = pTechnique->FindPass(name);
 
@@ -305,9 +320,37 @@ namespace SR_GRAPH_NS {
 
     void RenderContext::SetCurrentShader(RenderContext::ShaderPtr pShader) {
         m_pipeline->SetCurrentShader(pShader);
+        SRAssert2(!pShader || pShader->IsAvailable(), "The shader was not bound and not available!");
     }
 
     RenderContext::WindowPtr RenderContext::GetWindow() const {
         return m_window;
+    }
+
+    void RenderContext::UpdateFramebuffers() {
+        SR_TRACY_ZONE;
+
+        for (auto&& pFramebuffer : m_framebuffers) {
+            if (!pFramebuffer->IsDirty()) {
+                continue;
+            }
+
+            pFramebuffer->Update();
+        }
+    }
+
+    const std::vector<SR_GTYPES_NS::Shader*>& RenderContext::GetShaders() const noexcept {
+        return m_shaders;
+    }
+    void RenderContext::OnMultiSampleChanged() {
+        SR_TRACY_ZONE;
+
+        for (auto&& pFramebuffer : m_framebuffers) {
+            pFramebuffer->SetDirty();
+        }
+
+        for (auto&& pRenderTechnique : m_techniques) {
+            pRenderTechnique->OnSamplesChanged();
+        }
     }
 }

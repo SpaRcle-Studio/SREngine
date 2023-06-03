@@ -16,7 +16,7 @@ namespace SR_SCRIPTING_NS {
             return false;
         }
 
-        m_script = EvoScript::Script::Allocate(m_name, compiler->GetGenerator()->GetAddresses());
+        m_script = EvoScript::Script::Allocate(m_name, compiler, compiler->GetGenerator()->GetAddresses());
 
         const bool canCompile = SR_UTILS_NS::Features::Instance().Enabled("EvoCompiler");
         if (!m_script->Load(m_path, *compiler, canCompile)) {

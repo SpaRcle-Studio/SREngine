@@ -10,46 +10,55 @@ namespace SR_GTYPES_NS {
         SRAssert(m_IBO == SR_ID_INVALID && m_VBO == SR_ID_INVALID);
     }
 
-    SR_UTILS_NS::IResource *IndexedMesh::CopyResource(SR_UTILS_NS::IResource *destination) const {
-        if (!destination) {
-            SR_ERROR("IndexedMesh::CopyResource() : destination in nullptr!");
-            return nullptr;
+    bool IndexedMesh::Calculate() {
+        if (!CalculateIBO()) {
+            return false;
         }
 
-        auto indexed = dynamic_cast<IndexedMesh *>(destination);
-        if (!indexed) {
-            SR_ERROR("IndexedMesh::CopyResource() : bad cast!");
-            return nullptr;
-        }
-
-        indexed->m_countIndices = m_countIndices;
-        indexed->m_countVertices = m_countVertices;
-
-        return Mesh::CopyResource(indexed);
+        return Mesh::Calculate();
     }
 
-    bool IndexedMesh::Calculate() {
-        if (m_IBO = Memory::MeshManager::Instance().CopyIfExists<Vertices::VertexType::Unknown, Memory::MeshMemoryType::IBO>(GetResourceId()); m_IBO == SR_ID_INVALID) {
+    bool IndexedMesh::CalculateIBO() {
+        SRAssert(m_pipeline);
+        SRAssert(m_IBO == SR_ID_INVALID);
+
+        using namespace Memory;
+
+        if (!IsUniqueMesh()) {
+            m_IBO = MeshManager::Instance().CopyIfExists<Vertices::VertexType::Unknown, MeshMemoryType::IBO>(GetMeshIdentifier());
+        }
+
+        if (m_IBO == SR_ID_INVALID) {
             auto&& indices = GetIndices();
 
-            SRAssert(indices.size() == m_countIndices);
-
-            if (m_countIndices == 0 || indices.empty()) {
-                SR_ERROR("IndexedMesh::Calculate() : invalid indices! \n\tResource id: " + std::string(GetResourceId()) + "\n\tGeometry name: " + GetGeometryName());
+            if ((m_countIndices = indices.size()) == 0) {
+                SR_ERROR("IndexedMesh::CalculateIBO() : invalid indices! \n\tIdentifier: " + GetMeshIdentifier());
                 return false;
             }
 
             if (m_IBO = m_pipeline->CalculateIBO((void *) indices.data(), sizeof(uint32_t), m_countIndices, m_VBO); m_IBO == SR_ID_INVALID) {
-                SR_ERROR("IndexedMesh::Calculate() : failed calculate IBO \"" + GetGeometryName() + "\" mesh!");
+                SR_ERROR("IndexedMesh::CalculateIBO() : failed calculate IBO \"" + GetGeometryName() + "\" mesh!");
                 m_hasErrors = true;
                 return false;
             }
-            else {
-                Memory::MeshManager::Instance().Register<Vertices::VertexType::Unknown, Memory::MeshMemoryType::IBO>(GetResourceId(), m_IBO);
+            else if (IsUniqueMesh()) {
+                return Mesh::Calculate();
             }
+
+            return MeshManager::Instance().Register<Vertices::VertexType::Unknown, MeshMemoryType::IBO>(
+                GetMeshIdentifier(),
+                m_countIndices,
+                m_IBO
+            );
         }
 
-        return Mesh::Calculate();
+        if (!IsUniqueMesh()) {
+            m_countIndices = MeshManager::Instance().Size<Vertices::VertexType::Unknown, MeshMemoryType::IBO>(
+                GetMeshIdentifier()
+            );
+        }
+
+        return true;
     }
 
     bool IndexedMesh::FreeIBO() {
@@ -59,36 +68,65 @@ namespace SR_GTYPES_NS {
 
         using namespace Memory;
 
-        auto &&manager = Memory::MeshManager::Instance();
+        auto&& manager = MeshManager::Instance();
 
-        if (manager.Free<Vertices::VertexType::Unknown, MeshMemoryType::IBO>(GetResourceId()) == MeshManager::FreeResult::Freed) {
-            if (!Environment::Get()->FreeIBO(&m_IBO)) {
-                SR_ERROR("IndexedMesh:FreeVideoMemory() : failed free IBO! Something went wrong...");
-                return false;
-            }
+        const bool isAllowFree = IsUniqueMesh() || manager.Free<MeshMemoryType::IBO>(m_IBO) == MeshManager::FreeResult::Freed;
+
+        if (isAllowFree && !m_pipeline->FreeIBO(&m_IBO)) {
+            SR_ERROR("IndexedMesh:FreeVideoMemory() : failed free IBO! Something went wrong...");
+            return false;
         }
 
         m_IBO = SR_ID_INVALID;
+
+        return true;
+    }
+
+    bool IndexedMesh::FreeVBO() {
+        if (m_VBO == SR_ID_INVALID) {
+            return true;
+        }
+
+        using namespace Memory;
+
+        auto&& manager = MeshManager::Instance();
+
+        const bool isAllowFree = IsUniqueMesh() || manager.Free<MeshMemoryType::VBO>(m_VBO) == MeshManager::FreeResult::Freed;
+
+        if (isAllowFree && !m_pipeline->FreeVBO(&m_VBO)) {
+            SR_ERROR("IndexedMesh::FreeVideoMemory() : failed free VBO! Something went wrong...");
+            return false;
+        }
+
         m_VBO = SR_ID_INVALID;
 
         return true;
     }
 
     void IndexedMesh::FreeVideoMemory() {
-        FreeIBO();
+        if (!FreeVBO()) {
+            SR_ERROR("IndexedMesh::FreeVideoMemory() : failed to free VBO!");
+        }
+
+        if (!FreeIBO()) {
+            SR_ERROR("IndexedMesh::FreeVideoMemory() : failed to free IBO!");
+        }
+
         Mesh::FreeVideoMemory();
     }
 
     int32_t IndexedMesh::GetVBO() {
-        if (!m_isCalculated && !Calculate())
+        if (!IsCalculated() && !Calculate()) {
             return SR_ID_INVALID;
+        }
 
         return m_VBO;
     }
 
     int32_t IndexedMesh::GetIBO() {
-        if (!m_isCalculated && !Calculate())
+        if (!IsCalculated() && !Calculate()) {
             return SR_ID_INVALID;
+        }
 
         return m_IBO;
     }

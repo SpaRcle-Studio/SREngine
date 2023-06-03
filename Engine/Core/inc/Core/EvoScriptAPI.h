@@ -21,6 +21,7 @@ namespace Framework {
         static void RegisterEvoScriptClasses();
         static void Initialize();
         static void RegisterDebug(EvoScript::AddressTableGen* generator);
+        static void RegisterRaycast(EvoScript::AddressTableGen* generator);
         static void RegisterEngine(EvoScript::AddressTableGen* generator);
         static void RegisterScene(EvoScript::AddressTableGen* generator);
         static void RegisterComponent(EvoScript::AddressTableGen* generator);

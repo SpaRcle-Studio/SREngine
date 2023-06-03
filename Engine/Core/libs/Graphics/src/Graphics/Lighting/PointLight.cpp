@@ -4,6 +4,6 @@
 
 #include <Graphics/Lighting/PointLight.h>
 
-Framework::Graphics::PointLight::PointLight(Framework::Graphics::Render *render) : Light(render) {
+namespace SR_GRAPH_NS {
 
 }

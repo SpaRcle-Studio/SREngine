@@ -30,12 +30,17 @@ namespace SR_GRAPH_NS::Memory {
 
     public:
         /// данный метод можно вызывать только из контекста рендера,
-        /// в котором он был инициализирован
+        /// в котором он был инициализирован. Либо из кластера если это меш
+        virtual void DeInitGraphicsResource() {
+            m_pipeline = nullptr;
+            m_renderContext = nullptr;
+        }
+
         virtual void FreeVideoMemory() {
             m_isCalculated = false;
-            m_renderContext = nullptr;
-            m_pipeline = nullptr;
         }
+
+        void MarkPipelineUnBuild();
 
         void SetRenderContext(const RenderContextPtr& renderContext);
 
@@ -48,6 +53,7 @@ namespace SR_GRAPH_NS::Memory {
         }
 
         SR_NODISCARD SR_FORCE_INLINE bool IsCalculated() const noexcept { return m_isCalculated; }
+        SR_NODISCARD SR_FORCE_INLINE bool IsGraphicsResourceRegistered() const noexcept { return m_pipeline; }
 
     protected:
         std::atomic<bool> m_isCalculated = false;

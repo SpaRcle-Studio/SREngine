@@ -1,7 +1,12 @@
 <?xml version="1.0"?>
 <Settings>
     <RenderTechnique Path="Editor/Configs/EditorSSAORenderTechnique.xml"/>
+    <DebugChunks Bool="false" />
+    <!--<RenderTechnique Path="Editor/Configs/EditorSimpleRenderTechnique.xml"/>-->
+    <!--<RenderTechnique Path="Editor/Configs/EditorVignetteRenderTechnique.xml"/>-->
     <!--<RenderTechnique Path="Editor/Configs/EditorSSAORenderTechnique.xml"/>-->
+    <!--<RenderTechnique Path="Editor/Configs/EditorEmptySwapchainRenderTechnique.xml"/>-->
+    <!--<RenderTechnique Path="Editor/Configs/EditorRenderTechnique.xml"/>-->
     <!--<RenderTechnique Path="Editor/Configs/EditorRayMarchingRenderTechnique.xml"/>-->
     <!--<RenderTechnique Path="Editor/Configs/EditorRenderTechnique.xml"/>-->
     <Icons Type="Custom">
@@ -19,5 +24,12 @@
         <Pair First="XML" Second="Editor/Textures/xml.png"/>
         <Pair First="PNG" Second="Editor/Textures/png.png"/>
         <Pair First="DLL" Second="Editor/Textures/dll.png"/>
+        <Pair First="Game" Second="Editor/Textures/game.png"/>
+        <Pair First="Play" Second="Editor/Textures/play-colored.png"/>
+        <Pair First="Stop" Second="Editor/Textures/stop.png"/>
+        <Pair First="Pause" Second="Editor/Textures/pause-active.png"/>
+        <Pair First="PauseActive" Second="Editor/Textures/pause.png"/>
+        <Pair First="Back" Second="Editor/Textures/back.png"/>
+        <Pair First="Font" Second="Editor/Textures/font.png"/>
     </Icons>
 </Settings>

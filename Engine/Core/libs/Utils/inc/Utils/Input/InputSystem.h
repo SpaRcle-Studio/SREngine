@@ -27,10 +27,13 @@ namespace SR_UTILS_NS {
 
         void Check();
         void Reload();
+        void ResetMouse();
 
-        SR_MATH_NS::FVector2 GetMouseDrag();
-        SR_MATH_NS::FVector2 GetMousePos() const { return m_mouse; }
-        SR_MATH_NS::FVector2 GetPrevMousePos() const { return m_mousePrev; }
+        SR_NODISCARD SR_MATH_NS::FVector2 GetMouseDrag();
+        SR_NODISCARD SR_MATH_NS::FVector2 GetMousePos() const { return m_mouse; }
+        SR_NODISCARD SR_MATH_NS::FVector2 GetPrevMousePos() const { return m_mousePrev; }
+        SR_NODISCARD bool IsCursorLocked() const { return m_isLocked; }
+        SR_NODISCARD bool IsMouseMoved() const;
 
         int32_t GetMouseWheel();
         int32_t DebugKey();
@@ -43,6 +46,8 @@ namespace SR_UTILS_NS {
         bool GetKeyUp(KeyCode key);
         bool GetKey(KeyCode key);
 
+        void LockCursor(bool isLock);
+
     private:
         void Reset();
 
@@ -54,6 +59,7 @@ namespace SR_UTILS_NS {
         SR_MATH_NS::FVector2 m_mouseScrollCurrent;
 
         std::atomic<bool> m_init = false;
+        std::atomic<bool> m_isLocked = false;
 
         State m_keys[256] = { };
         uint8_t* m_arr = nullptr;

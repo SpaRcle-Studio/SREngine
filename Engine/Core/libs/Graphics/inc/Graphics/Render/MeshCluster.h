@@ -14,16 +14,16 @@ namespace SR_SRSL_NS {
     enum class ShaderType;
 }
 
-namespace SR_GRAPH_NS {
-    namespace Types {
-        class IndexedMesh;
-        class Mesh;
-        class Shader;
-    }
+namespace SR_GTYPES_NS {
+    class IndexedMesh;
+    class Mesh;
+    class Shader;
+}
 
+namespace SR_GRAPH_NS {
     typedef uint32_t ClusterVBOId;
 
-    typedef std::unordered_set<Types::Mesh*> MeshGroup;
+    typedef std::unordered_set<SR_GTYPES_NS::Mesh*> MeshGroup;
     typedef std::unordered_map<ClusterVBOId, MeshGroup> MeshGroups;
     typedef std::unordered_map<uint32_t, uint32_t> MeshGroupCounters;
 
@@ -35,7 +35,7 @@ namespace SR_GRAPH_NS {
 
     public:
         ShadedMeshSubCluster() = default;
-        explicit ShadedMeshSubCluster(Types::Shader* pShader);
+        explicit ShadedMeshSubCluster(SR_GTYPES_NS::Shader* pShader);
         ~ShadedMeshSubCluster() override = default;
 
         ShadedMeshSubCluster(ShadedMeshSubCluster&& ref) noexcept {
@@ -60,22 +60,23 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD ConstIterator begin() const { return m_groups.begin(); }
         SR_NODISCARD ConstIterator end() const { return m_groups.end(); }
 
-        bool SR_FASTCALL Add(Types::Mesh *mesh) noexcept;
-        bool SR_FASTCALL Remove(Types::Mesh *mesh) noexcept;
+        void OnResourceReloaded(SR_UTILS_NS::IResource* pResource);
+
+        bool SR_FASTCALL Add(SR_GTYPES_NS::Mesh *mesh) noexcept;
         SR_NODISCARD bool SR_FASTCALL Empty() const noexcept;
 
         SR_NODISCARD SR_SRSL_NS::ShaderType GetShaderType() const noexcept;
 
     private:
         MeshGroups m_groups;
-        Types::Shader* m_shader = nullptr;
+        SR_GTYPES_NS::Shader* m_shader = nullptr;
 
     };
 
     class MeshCluster : public SR_UTILS_NS::NonCopyable {
     public:
-        using Iterator = ska::flat_hash_map<Types::Shader*, ShadedMeshSubCluster>::iterator;
-        using ConstIterator = ska::flat_hash_map<Types::Shader*, ShadedMeshSubCluster>::const_iterator;
+        using Iterator = ska::flat_hash_map<SR_GTYPES_NS::Shader*, ShadedMeshSubCluster>::iterator;
+        using ConstIterator = ska::flat_hash_map<SR_GTYPES_NS::Shader*, ShadedMeshSubCluster>::const_iterator;
         using MeshPtr = SR_GTYPES_NS::Mesh*;
         using ClusterCallback = SR_HTYPES_NS::Function<void(MeshPtr)>;
 
@@ -88,14 +89,15 @@ namespace SR_GRAPH_NS {
             return m_subClusters.erase(iterator);
         }
 
+        void OnResourceReloaded(SR_UTILS_NS::IResource* pResource);
+
         SR_NODISCARD Iterator begin() { return m_subClusters.begin(); }
         SR_NODISCARD Iterator end() { return m_subClusters.end(); }
 
         SR_NODISCARD ConstIterator begin() const { return m_subClusters.begin(); }
         SR_NODISCARD ConstIterator end() const { return m_subClusters.end(); }
 
-        bool SR_FASTCALL Add(Types::Mesh *mesh) noexcept;
-        bool SR_FASTCALL Remove(Types::Mesh *mesh) noexcept;
+        bool SR_FASTCALL Add(SR_GTYPES_NS::Mesh *mesh) noexcept;
         SR_NODISCARD bool SR_FASTCALL Empty() const noexcept;
 
         bool Update();
@@ -104,7 +106,7 @@ namespace SR_GRAPH_NS {
         virtual bool SR_FASTCALL ChangeCluster(MeshPtr pMesh) = 0;
 
     protected:
-        ska::flat_hash_map<Types::Shader*, ShadedMeshSubCluster> m_subClusters;
+        ska::flat_hash_map<SR_GTYPES_NS::Shader*, ShadedMeshSubCluster> m_subClusters;
 
     };
 
@@ -113,7 +115,7 @@ namespace SR_GRAPH_NS {
 
     class OpaqueMeshCluster : public MeshCluster {
     public:
-        OpaqueMeshCluster(TransparentMeshCluster* pTransparentCluster)
+        explicit OpaqueMeshCluster(TransparentMeshCluster* pTransparentCluster)
             : m_transparent(pTransparentCluster)
         { }
 
@@ -138,7 +140,7 @@ namespace SR_GRAPH_NS {
 
     class TransparentMeshCluster : public MeshCluster {
     public:
-        TransparentMeshCluster(OpaqueMeshCluster* pOpaqueCluster)
+        explicit TransparentMeshCluster(OpaqueMeshCluster* pOpaqueCluster)
             : m_opaque(pOpaqueCluster)
         { }
 

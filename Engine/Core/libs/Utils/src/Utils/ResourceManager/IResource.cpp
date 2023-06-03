@@ -20,9 +20,11 @@ namespace SR_UTILS_NS {
     { }
 
     bool IResource::Reload() {
-        SR_LOCK_GUARD
+        SR_TRACY_ZONE;
 
-        SR_LOG("IResource::Reload() : reloading \"" + std::string(GetResourceId()) + "\" resource...");
+        if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::Medium) {
+            SR_LOG("IResource::Reload() : reloading \"" + std::string(GetResourceId()) + "\" resource...");
+        }
 
         m_loadState = LoadState::Reloading;
 
@@ -37,6 +39,8 @@ namespace SR_UTILS_NS {
 
         UpdateResources();
         OnReloadDone();
+
+        ++m_reloadCount;
 
         return true;
     }
@@ -94,13 +98,28 @@ namespace SR_UTILS_NS {
         }
     }
 
+    void IResource::CheckResourceUsage() {
+        ResourceManager::Instance().Execute([this]() {
+            if (m_countUses == 0 && m_autoRemove && !IsDestroyed()) {
+                if (IsRegistered()) {
+                    Destroy();
+                    return;
+                }
+                else {
+                    /// так и не зарегистрировали ресурс
+                    DeleteResource();
+                    return;
+                }
+            }
+        });
+    }
+
     IResource::RemoveUPResult IResource::RemoveUsePoint() {
         RemoveUPResult result;
 
         /// тут нужно делать синхронно, иначе может произойти deadlock
+        /// TODO: а вообще опасное место, нужно переделать
         ResourceManager::Instance().Execute([this, &result]() {
-            m_mutex.lock();
-
             if (m_countUses == 0) {
                 SRHalt("Count use points is zero!");
                 result = RemoveUPResult::Error;
@@ -113,12 +132,10 @@ namespace SR_UTILS_NS {
                 if (IsRegistered()) {
                     Destroy();
                     result = RemoveUPResult::Destroy;
-                    m_mutex.unlock();
                     return;
                 }
                 else {
                     /// так и не зарегистрировали ресурс
-                    m_mutex.unlock();
                     delete this;
                     result = RemoveUPResult::Delete;
                     return;
@@ -126,16 +143,12 @@ namespace SR_UTILS_NS {
             }
 
             result = RemoveUPResult::Success;
-
-            m_mutex.unlock();
         });
 
         return result;
     }
 
     void IResource::AddUsePoint() {
-        SR_LOCK_GUARD
-
         SRAssert(m_countUses != SR_UINT16_MAX);
 
         if (m_isRegistered && m_countUses == 0 && m_isDestroyed) {
@@ -153,9 +166,7 @@ namespace SR_UTILS_NS {
         return m_isDestroyed;
     }
 
-    IResource *IResource::CopyResource(IResource *destination) const {
-        SR_LOCK_GUARD
-
+    IResource* IResource::CopyResource(IResource *destination) const {
         destination->m_autoRemove = m_autoRemove;
         /// destination->m_lifetime = m_lifetime;
         destination->m_resourceHashPath = m_resourceHashPath;
@@ -169,8 +180,6 @@ namespace SR_UTILS_NS {
     }
 
     bool IResource::Destroy() {
-        SR_LOCK_GUARD
-
         SRAssert(!IsDestroyed());
         m_isDestroyed = true;
 
@@ -194,7 +203,11 @@ namespace SR_UTILS_NS {
     }
 
     uint64_t IResource::GetFileHash() const {
+        SR_TRACY_ZONE;
+
         auto&& path = Path(GetResourcePath());
+
+        SR_TRACY_TEXT_N("Path", path.ToStringRef());
 
         if (!path.IsAbs()) {
             path = GetAssociatedPath().Concat(path);
@@ -233,23 +246,22 @@ namespace SR_UTILS_NS {
     }
 
     bool IResource::TryExecute(const SR_HTYPES_NS::Function<bool()>& fun, bool def) const {
-        if (m_mutex.try_lock()) {
-            const bool result = fun();
-            m_mutex.unlock();
-            return result;
-        }
+        /// if (m_mutex.try_lock()) {
+        ///     const bool result = fun();
+        ///     m_mutex.unlock();
+        ///     return result;
+        /// }
 
-        return def;
+        /// return def;
+
+        return Execute(fun);
     }
 
     bool IResource::Execute(const SR_HTYPES_NS::Function<bool()>& fun) const {
-        SR_LOCK_GUARD
         return fun();
     }
 
     void IResource::ReviveResource() {
-        SR_LOCK_GUARD
-
         SRAssert(m_isDestroyed && m_isRegistered);
 
         m_isDestroyed = false;

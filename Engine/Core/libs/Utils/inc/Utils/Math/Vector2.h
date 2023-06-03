@@ -16,6 +16,11 @@ namespace SR_MATH_NS {
                 T y;
             };
 
+            struct {
+                T top;
+                T bottom;
+            };
+
             T coord[2] = { 0 };
         };
 
@@ -72,6 +77,10 @@ namespace SR_MATH_NS {
             return Vector2(static_cast<T>(abs(x)), static_cast<T>(abs(y)));
         }
 
+        SR_NODISCARD T Sum() const {
+            return x + y;
+        }
+
         SR_NODISCARD Unit Aspect() const {
             if (HasZero()) {
                 return static_cast<Unit>(0);
@@ -113,11 +122,11 @@ namespace SR_MATH_NS {
         }
 
         template<typename U> SR_FORCE_INLINE bool operator==(const Vector2<U> &p_v) const {
-            return x == p_v.x && y == p_v.y;
+            return SR_EQUALS(x, p_v.x) && SR_EQUALS(y, p_v.y);
         }
 
         template<typename U> SR_FORCE_INLINE bool operator!=(const Vector2<U> &p_v) const {
-            return x != p_v.x || y != p_v.y;
+            return !SR_EQUALS(x, p_v.x) || !SR_EQUALS(y, p_v.y);
         }
 
         template<typename U> SR_FORCE_INLINE Vector2 operator*(const Vector2<U> &p_v) const {

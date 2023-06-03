@@ -9,7 +9,6 @@
 #include <Utils/ECS/GameObject.h>
 
 #include <Graphics/Types/Mesh.h>
-#include <Graphics/Render/Render.h>
 
 namespace SR_ANIMATIONS_NS {
     struct Bone : public SR_UTILS_NS::NonCopyable {

@@ -85,8 +85,6 @@ namespace SR_AUDIO_NS {
     }
 
     bool Sound::Reload() {
-        SR_LOCK_GUARD
-
         SR_LOG("Sound::Reload() : reloading \"" + std::string(GetResourceId()) + "\" sound...");
 
         m_loadState = LoadState::Reloading;

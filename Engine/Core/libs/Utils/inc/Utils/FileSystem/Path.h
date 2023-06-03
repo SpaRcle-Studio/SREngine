@@ -24,7 +24,7 @@ namespace SR_UTILS_NS {
         Path(std::wstring path, bool fast = false);
 
         Path(Path&& path) noexcept
-            : m_path(std::exchange(path.m_path, {}))
+            : m_path(SR_UTILS_NS::Exchange(path.m_path, {}))
             , m_name(std::exchange(path.m_name, {}))
             , m_ext(std::exchange(path.m_ext, {}))
             , m_hash(std::exchange(path.m_hash, {}))
@@ -63,6 +63,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD Path GetPrevious() const;
         SR_NODISCARD Path GetFolder() const;
         SR_NODISCARD Path Concat(const Path& path) const;
+        SR_NODISCARD Path EmplaceFront(const std::string& str) const;
         SR_NODISCARD Path ConcatExt(const std::string& ext) const;
         SR_NODISCARD Path RemoveSubPath(const Path& subPath) const;
         SR_NODISCARD Path SelfRemoveSubPath(const Path& subPath) const;
@@ -71,6 +72,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD bool Empty() const;
         SR_NODISCARD bool empty() const { return Empty(); }
         SR_NODISCARD bool IsSubPath(const Path& subPath) const;
+        SR_NODISCARD bool Contains(const std::string& str) const;
         SR_NODISCARD bool IsHidden() const;
         SR_NODISCARD bool Exists() const;
         SR_NODISCARD bool Exists(Type type) const;

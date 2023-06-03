@@ -3,7 +3,7 @@
     <ColorBufferPass Directional="false">
         <FramebufferSettings DynamicResizing="true" DepthEnabled="true" SmoothSamples="1">
             <Size X="0" Y="0"/>
-            <PreScale X="0.85" Y="0.85"/>
+            <PreScale X="0.65" Y="0.65"/>
             <Depth Format="Auto" ClearValue="1.0"/>
             <Layer Format="RGBA8_UNORM" R="0.0" G="0.0" B="0.0" A="1.0"/>
         </FramebufferSettings>

@@ -36,17 +36,19 @@ namespace SR_UTILS_NS {
         return GetGroup(group).Enabled(name);
     }
 
-    bool Features::Reload(const Path &path) {
+    void Features::SetPath(const SR_UTILS_NS::Path& path) {
         SR_LOCK_GUARD
 
-        if (!path.Empty()) {
-            if (!path.Exists()) {
-                SR_ERROR("Features::Reload() : file not found! \n\tPath: " + path.ToString());
-                return false;
-            }
-
-            m_path = path;
+        if (path.Empty() || !path.Exists()) {
+            SR_ERROR("Features::Reload() : file not found! \n\tPath: " + path.ToString());
+            return;
         }
+
+        m_path = path;
+    }
+
+    bool Features::Reload() {
+        SR_LOCK_GUARD
 
         m_features.clear();
 

@@ -71,13 +71,13 @@ namespace SR_WORLD_NS {
             if (auto pCacheIt = m_cached.find(position); pCacheIt != m_cached.end()) {
                 /// TODO: OPTIMIZE!!!!!!!!!!!!!!!!!!!
                 SR_HTYPES_NS::Marshal copy = pCacheIt->second->Copy();
-                pChunk->Load(&copy);
+                pChunk->PreLoad(&copy);
 
                 delete pCacheIt->second;
                 m_cached.erase(pCacheIt);
             }
             else {
-                pChunk->Load(nullptr);
+                pChunk->PreLoad(nullptr);
             }
         }
 
@@ -85,8 +85,6 @@ namespace SR_WORLD_NS {
     }
 
     Region::~Region() {
-        SetDebugLoaded(BoolExt::False);
-
         for (auto&& [position, chunk] : m_loadedChunks) {
             delete chunk;
         }
@@ -103,8 +101,6 @@ namespace SR_WORLD_NS {
         if (SR_UTILS_NS::Debug::Instance().GetLevel() >= Debug::Level::Full) {
             SR_LOG("Region::Unload() : unloading region at " + m_position.ToString());
         }
-
-        SetDebugLoaded(BoolExt::False);
 
         if (m_loadedChunks.empty()) {
             return true;
@@ -146,7 +142,7 @@ namespace SR_WORLD_NS {
         g_allocator = allocator;
     }
 
-    Region *Region::Allocate(SRRegionAllocArgs) {
+    Region* Region::Allocate(SRRegionAllocArgs) {
         if (g_allocator)
             return g_allocator(SRRegionAllocVArgs);
 
@@ -177,23 +173,25 @@ namespace SR_WORLD_NS {
     }
 
     void Region::ApplyOffset() {
-        for (auto&& [key, pChunk] : m_loadedChunks)
+        for (auto&& [key, pChunk] : m_loadedChunks) {
             pChunk->ApplyOffset();
-
-        SetDebugLoaded(BoolExt::None);
+        }
     }
 
-    Chunk *Region::GetChunk(const SR_MATH_NS::FVector3 &position) {
+    Chunk* Region::GetChunk(const SR_MATH_NS::FVector3 &position) {
         return GetChunk(MakeChunk(m_observer->WorldPosToChunkPos(position), m_width));
     }
 
     void Region::Reload() {
+        SR_TRACY_ZONE;
         SR_LOG("Region::Reload() : reloading region at " + m_position.ToString());
         Unload(true /** force */);
         Load();
     }
 
     SR_HTYPES_NS::Marshal::Ptr Region::Save(SR_HTYPES_NS::DataStorage* pContext) const {
+        SR_TRACY_ZONE;
+
         auto&& pMarshal = new SR_HTYPES_NS::Marshal();
 
         std::list<SR_HTYPES_NS::Marshal::Ptr> available;
@@ -233,15 +231,15 @@ namespace SR_WORLD_NS {
     }
 
     bool Region::Load() {
+        SR_TRACY_ZONE;
+
         if (SR_UTILS_NS::Debug::Instance().GetLevel() >= Debug::Level::Full) {
             SR_LOG("Region::Load() : loading region at " + m_position.ToString());
         }
 
         SRAssert(!m_position.HasZero());
 
-        SetDebugLoaded(BoolExt::True);
-
-        auto&& pLogic = m_observer->m_scene->GetLogic<SceneCubeChunkLogic>();
+        auto&& pLogic = m_observer->m_scene->GetLogicBase().DynamicCast<SceneCubeChunkLogic>();
         const auto&& path = pLogic->GetRegionsPath().Concat(m_position.ToString()).ConcatExt("dat");
 
         if (path.Exists()) {
@@ -290,35 +288,15 @@ namespace SR_WORLD_NS {
         return false;
     }
 
-    void Region::SetDebugLoaded(BoolExt enabled) {
-        if (m_position.y != 1) {
-            return;
+    bool Region::PostLoad() {
+        SR_TRACY_ZONE;
+
+        for (auto&& [pos, pChunk] : m_loadedChunks) {
+            if (pChunk->IsPreLoaded()) {
+                pChunk->Load();
+            }
         }
 
-        if (!Features::Instance().Enabled("DebugRegions", false)) {
-            enabled = BoolExt::False;
-        }
-
-        if (enabled == BoolExt::True || (enabled == BoolExt::None && m_debugLoadedId != SR_ID_INVALID)) {
-            const auto size = SR_MATH_NS::FVector3(m_width) * m_chunkSize.x;
-            const SR_WORLD_NS::Offset offset = m_observer->m_offset;
-
-            auto fPos = SR_WORLD_NS::AddOffset(m_position.Cast<SR_MATH_NS::Unit>(), offset.m_region);
-            fPos = fPos * size + (size / 2);
-            fPos = fPos.DeSingular(size);
-
-            fPos += offset.m_chunk * m_chunkSize.x;
-
-            m_debugLoadedId = SR_UTILS_NS::DebugDraw::Instance().DrawPlane(
-                    SR_MATH_NS::FVector3(fPos.x, static_cast<SR_MATH_NS::Unit>(0.01), fPos.z),
-                    SR_MATH_NS::Quaternion::Identity(),
-                    SR_MATH_NS::FVector3(size.x / 2.f, 1.f, size.y / 2.f),
-                    SR_MATH_NS::FColor(255, 0, 0, 255),
-                    SR_FLOAT_MAX
-            );
-        }
-        else if (m_debugLoadedId != SR_ID_INVALID) {
-            SR_UTILS_NS::DebugDraw::Instance().DrawPlane(m_debugLoadedId);
-        }
+        return true;
     }
 }

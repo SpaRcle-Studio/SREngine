@@ -9,6 +9,7 @@
 #include <Graphics/Pipeline/Vulkan/AbstractCasts.h>
 #include <Graphics/Pipeline/Vulkan.h>
 #include <Graphics/Memory/MeshManager.h>
+#include <Graphics/Types/Framebuffer.h>
 
 #if defined(SR_WIN32)
     #include <vulkan/vulkan_win32.h>
@@ -18,7 +19,7 @@
     #include <vulkan/vulkan_android.h>
 #endif
 
-namespace Framework::Graphics {
+namespace SR_GRAPH_NS {
     const std::vector<const char *> Vulkan::m_deviceExtensions = {
             VK_KHR_SWAPCHAIN_EXTENSION_NAME,
             VK_EXT_LINE_RASTERIZATION_EXTENSION_NAME,
@@ -30,8 +31,8 @@ namespace Framework::Graphics {
 #define SR_VRAM ("{" + std::to_string(Environment::Get()->GetVRAMUsage() / 1024 / 1024) + "} ")
 
     void SRVulkan::SetGUIEnabled(bool enabled) {
-        if (auto&& vkImgui = dynamic_cast<Framework::Graphics::Vulkan*>(Environment::Get())->GetVkImGUI()) {
-            vkImgui->SetEnabled(enabled);
+        if (auto&& vkImgui = dynamic_cast<SR_GRAPH_NS::Vulkan*>(Environment::Get())->GetVkImGUI()) {
+            vkImgui->SetSurfaceDirty();
         }
         VulkanKernel::SetGUIEnabled(enabled);
     }
@@ -42,13 +43,17 @@ namespace Framework::Graphics {
             const std::string &engineName,
             const std::string &glslc)
     {
+        m_requiredSampleCount = smooth_samples;
+
+        SRAssert2(m_requiredSampleCount >= 1 && m_requiredSampleCount <= 64, "Sample count must be greater 0 and less 64!");
+
         EvoVulkan::Tools::VkFunctionsHolder::Instance().LogCallback = [](const std::string &msg) { SR_VULKAN_LOG(SR_VRAM + msg); };
         EvoVulkan::Tools::VkFunctionsHolder::Instance().WarnCallback = [](const std::string &msg) { SR_WARN(SR_VRAM + msg); };
         EvoVulkan::Tools::VkFunctionsHolder::Instance().ErrorCallback = [](const std::string &msg) { SR_VULKAN_ERROR(SR_VRAM + msg); };
         EvoVulkan::Tools::VkFunctionsHolder::Instance().GraphCallback = [](const std::string &msg) { SR_VULKAN_MSG(SR_VRAM + msg); };
 
         EvoVulkan::Tools::VkFunctionsHolder::Instance().AssertCallback = [](const std::string &msg) {
-            SRAssert2(false, SR_VRAM + msg);
+            SRHalt(SR_VRAM + msg);
             return false;
         };
 
@@ -68,7 +73,20 @@ namespace Framework::Graphics {
             return SR_PLATFORM_NS::Copy(from, to);
         };
 
-        m_imgui = new VulkanTypes::VkImGUI();
+        EvoVulkan::Tools::VkFunctionsHolder::Instance().ReadHash = [](const std::string& path) -> uint64_t {
+            return SR_UTILS_NS::FileSystem::ReadHashFromFile(SR_UTILS_NS::Path(path, true));
+        };
+
+        EvoVulkan::Tools::VkFunctionsHolder::Instance().GetFileHash = [](const std::string& path) -> uint64_t {
+            return SR_UTILS_NS::FileSystem::GetFileHash(SR_UTILS_NS::Path(path, true));
+        };
+
+        EvoVulkan::Tools::VkFunctionsHolder::Instance().WriteHash = [](const std::string& path, uint64_t hash) -> bool {
+            SR_UTILS_NS::FileSystem::WriteHashToFile(SR_UTILS_NS::Path(path, false), hash);
+            return true;
+        };
+
+        m_imgui = new VulkanTypes::VkImGUI(this);
 
         m_kernel = new SRVulkan();
 
@@ -89,7 +107,7 @@ namespace Framework::Graphics {
         m_cmdBufInfo = EvoVulkan::Tools::Initializers::CommandBufferBeginInfo();
         m_renderPassBI = EvoVulkan::Tools::Insert::RenderPassBeginInfo(0, 0, VK_NULL_HANDLE, VK_NULL_HANDLE, nullptr, 0);
 
-        m_kernel->SetMultisampling(smooth_samples);
+        m_kernel->SetMultisampling(m_requiredSampleCount);
 
         /// TODO: вынести в конфиг
         m_kernel->SetSwapchainImagesCount(2);
@@ -123,6 +141,12 @@ namespace Framework::Graphics {
             return false;
         }
 
+    #ifdef SR_TRACY_ENABLE
+        SR_UTILS_NS::TracyContextManager::Instance().VulkanDestroy = [](void* pContext) {
+            TracyVkDestroy((tracy::VkCtx*)pContext);
+        };
+    #endif
+
         return true;
     }
 
@@ -143,25 +167,24 @@ namespace Framework::Graphics {
         return Environment::OnResize(size);
     }
 
- //  bool Vulkan::CloseWindow() {
- //      SR_GRAPH_LOG("Vulkan::CloseWindow() : close window...");
+    void Vulkan::DeInitialize() {
+        SR_GRAPH_LOG("Vulkan::DeInitialize() : de-initialize pipeline...");
 
- //      SR_GRAPH_NS::Memory::MeshManager::Instance().PrintDump();
+        /// SR_GRAPH_NS::Memory::MeshManager::Instance().PrintDump();
 
- //      if (m_memory) {
- //          m_memory->Free();
- //          m_memory = nullptr;
- //      }
+        SR_TRACY_DESTROY(SR_UTILS_NS::TracyType::Vulkan);
 
- //      if (m_kernel) {
- //          if (!m_kernel->Destroy()) {
- //              SR_ERROR("Vulkan::CloseWindow() : failed to destroy Evo Vulkan kernel!");
- //              return false;
- //          }
- //      }
+        if (m_memory) {
+            m_memory->Free();
+            m_memory = nullptr;
+        }
 
- //      return true;
- //  }
+        if (m_kernel && !m_kernel->Destroy()) {
+            SR_ERROR("Vulkan::DeInitialize() : failed to destroy Evo Vulkan kernel!");
+        }
+
+        Environment::DeInitialize();
+    }
 
     bool Vulkan::Init(const WindowPtr& window, int swapInterval) {
         SR_GRAPH_LOG("Vulkan::Init() : initializing vulkan...");
@@ -233,6 +256,8 @@ namespace Framework::Graphics {
             return false;
         }
 
+        m_supportedSampleCount = m_kernel->GetDevice()->GetMSAASamplesCount();
+
         return true;
     }
 
@@ -256,6 +281,16 @@ namespace Framework::Graphics {
             return false;
         }
 
+    #ifdef SR_TRACY_ENABLE
+        if (SR_UTILS_NS::Features::Instance().Enabled("Tracy", false)) {
+            if (auto &&pSingleTimeCmd = m_kernel->CreateCmd()) {
+                SR_GRAPH_LOG("Vulkan::PostInit() : initializing tracy...");
+                SR_TRACY_VK_CREATE(*pSingleTimeCmd, m_kernel, "EvoVulkan");
+                delete pSingleTimeCmd;
+            }
+        }
+    #endif
+
         return true;
     }
 
@@ -269,7 +304,8 @@ namespace Framework::Graphics {
         if (FBO != 0) {
             if (auto fbo = m_memory->m_FBOs[FBO - 1]; fbo) {
                 renderPass = fbo->GetRenderPass();
-            } else {
+            }
+            else {
                 SR_ERROR("Vulkan::CompileShader() : invalid FBO! SOMETHING WENT WRONG! MEMORY MAY BE CORRUPTED!");
                 return false;
             }
@@ -425,7 +461,10 @@ namespace Framework::Graphics {
             return false;
         }
 
-        const VkSampleCountFlagBits sampleCount = m_currentVkFramebuffer ? m_currentVkFramebuffer->GetSampleCount() : m_kernel->GetDevice()->GetMSAASamples();
+        const uint8_t sampleCount = GetFramebufferSampleCount();
+
+        const VkSampleCountFlagBits vkSampleCount = EvoVulkan::Tools::Convert::IntToSampleCount(sampleCount);
+
         const bool depthEnabled = m_currentVkFramebuffer ? m_currentVkFramebuffer->IsDepthEnabled() : true;
 
         if (!m_memory->m_ShaderPrograms[*dynamicID]->Compile(
@@ -436,7 +475,7 @@ namespace Framework::Graphics {
                 shaderCreateInfo.depthWrite,
                 shaderCreateInfo.depthTest,
                 VulkanTools::AbstractPrimitiveTopologyToVk(shaderCreateInfo.primitiveTopology),
-                sampleCount)
+                vkSampleCount)
         ) {
             SR_ERROR("Vulkan::LinkShader() : failed to compile Evo Vulkan shader!");
             delete dynamicID;
@@ -502,7 +541,7 @@ namespace Framework::Graphics {
         return true;
     }
 
-    [[nodiscard]] bool Vulkan::FreeTextures(int32_t *IDs, uint32_t count) const {
+    bool Vulkan::FreeTextures(int32_t *IDs, uint32_t count) const {
         if (!IDs) {
             SR_ERROR("Vulkan::FreeTextures() : texture IDs is nullptr!");
             return false;
@@ -523,8 +562,8 @@ namespace Framework::Graphics {
         return true;
     }
 
-    [[nodiscard]] bool Vulkan::FreeFBO(uint32_t FBO) const {
-        return this->m_memory->FreeFBO(FBO - 1);
+    bool Vulkan::FreeFBO(uint32_t FBO) const {
+        return m_memory->FreeFBO(FBO - 1);
     }
 
     int32_t Vulkan::CalculateTexture(
@@ -571,7 +610,7 @@ namespace Framework::Graphics {
             }
         }
 
-        auto ID = this->m_memory->AllocateTexture(
+        auto ID = m_memory->AllocateTexture(
                 data, w, h, vkFormat,
                 VulkanTools::AbstractTextureFilterToVkFilter(filter),
                 compression, mipLevels, cpuUsage);
@@ -595,7 +634,9 @@ namespace Framework::Graphics {
             return false;
         }
 
-        if (!m_imgui->Init(m_kernel)) {
+        UpdateMultiSampling();
+
+        if (!m_imgui->Init()) {
             SR_ERROR("Vulkan::Init() : failed to init imgui!");
             return false;
         }
@@ -630,15 +671,30 @@ namespace Framework::Graphics {
     }
 
     void Vulkan::EndDrawGUI() {
+        if (!m_imgui) {
+            return;
+        }
+
         ImGui::Render();
 
         ImGuiIO &io = ImGui::GetIO();
         (void) io;
 
-        // Update and Render additional Platform Windows
+        /// Update and Render additional Platform Windows
         if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable) {
             ImGui::UpdatePlatformWindows();
             ImGui::RenderPlatformWindowsDefault();
+        }
+
+        const bool isUndockingActive = m_imgui->IsUndockingActive();
+
+        if (m_undocking != isUndockingActive) {
+            if ((m_undocking = isUndockingActive)) {
+                SR_INFO("Vulkan::EndDrawGUI() : undocking was activated!");
+            }
+            else {
+                SR_INFO("Vulkan::EndDrawGUI() : undocking was deactivated!");
+            }
         }
     }
 
@@ -652,22 +708,6 @@ namespace Framework::Graphics {
                 .m_height = texture->GetHeight()
         };
     }
-
-    /*int32_t Vulkan::GetImGuiTextureDescriptorFromTexture(uint32_t textureID) const {
-        auto descriptorSet = m_memory->AllocateDynamicTextureDescriptorSet(ImGui_ImplVulkan_GetDescriptorSetLayout(), textureID);
-        if (descriptorSet < 0) {
-            Helper::Debug::Error("Vulkan::GetImGuiTextureDescriptorFromTexture() : failed to allocate dynamic texture descriptor set!");
-            return -1;
-        }
-        else
-            return descriptorSet;
-    }
-
-    void *Vulkan::GetDescriptorSet(uint32_t id) const { return reinterpret_cast<void*>(m_memory->m_descriptorSets[id].m_self); }
-
-    void *Vulkan::GetDescriptorSetFromDTDSet(uint32_t id) const {
-        return reinterpret_cast<void*>(m_memory->GetDynamicTextureDescriptorSet(id));
-    }*/
 
     SR_MATH_NS::FColor Vulkan::GetPixelColor(uint64_t textureId, uint32_t x, uint32_t y) {
         if (textureId == SR_ID_INVALID || textureId >= m_memory->m_countTextures.first) {
@@ -774,8 +814,166 @@ namespace Framework::Graphics {
         return program;
     }
 
-    uint8_t Vulkan::GetSmoothSamplesCount() const {
-        return m_kernel->GetDevice()->GetMSAASamplesCount();
+    void Vulkan::OnMultiSampleChanged() {
+        SR_INFO("Vulkan::OnMultiSampleChanged() : samples count was changed to " + SR_UTILS_NS::ToString(GetSamplesCount()));
+        m_kernel->SetMultisampling(GetSamplesCount());
+        SetBuildState(false);
+        Environment::OnMultiSampleChanged();
+    }
+
+    void Vulkan::PrepareFrame() {
+        Environment::PrepareFrame();
+
+        if (m_kernel->IsDirty()) {
+            m_kernel->ReCreate(EvoVulkan::Core::FrameResult::Dirty);
+        }
+
+        if (GetVkImGUI()->IsSurfaceDirty()) {
+            GetVkImGUI()->ReCreate();
+        }
+    }
+
+    void Vulkan::UpdateMultiSampling() {
+        const bool isMultiSampleSupported = m_isMultisampleSupported;
+
+        m_isMultisampleSupported = true;
+
+        if (m_supportedSampleCount <= 1) {
+            m_isMultisampleSupported = false;
+        }
+
+        const bool multiSampleSupportsChanged = isMultiSampleSupported != m_isMultisampleSupported;
+
+        if (m_newSampleCount.has_value() || multiSampleSupportsChanged) {
+            const uint8_t oldSampleCount = m_currentSampleCount;
+
+            if (multiSampleSupportsChanged) {
+                if (!IsMultiSamplingSupported()) {
+                    m_currentSampleCount = 1;
+                }
+                else if (m_newSampleCount.has_value()) {
+                    m_currentSampleCount = m_newSampleCount.value();
+                }
+                else {
+                    m_currentSampleCount = m_requiredSampleCount;
+                }
+            }
+            else if (m_newSampleCount.has_value()) {
+                m_currentSampleCount = m_newSampleCount.value();
+            }
+
+            m_currentSampleCount = SR_MIN(m_currentSampleCount, m_supportedSampleCount);
+
+            if (oldSampleCount != m_currentSampleCount) {
+                OnMultiSampleChanged();
+            }
+
+            m_newSampleCount = std::nullopt;
+        }
+    }
+
+    void Vulkan::ClearBuffers(const std::vector<SR_MATH_NS::FColor> &colors, float_t depth) {
+        const uint8_t sampleCount = GetFramebufferSampleCount();
+
+        auto colorCount = static_cast<uint8_t>(colors.size());
+        colorCount *= sampleCount > 1 ? 2 : 1;
+
+        m_clearValues.resize(colorCount + 1);
+
+        for (uint8_t i = 0; i < colorCount; ++i) {
+            auto&& color = colors[i / (sampleCount > 1 ? 2 : 1)];
+
+            m_clearValues[i] = {
+                .color = { {
+                       static_cast<float>(color.r),
+                       static_cast<float>(color.g),
+                       static_cast<float>(color.b),
+                       static_cast<float>(color.a)
+                   }
+                }
+            };
+        }
+
+        m_clearValues[colorCount] = VkClearValue { .depthStencil = { depth, 0 } };
+
+        m_renderPassBI.clearValueCount = colorCount + 1;
+        m_renderPassBI.pClearValues  = m_clearValues.data();
+    }
+
+    void Vulkan::ClearBuffers(float r, float g, float b, float a, float depth, uint8_t colorCount) {
+        const uint8_t sampleCount = GetFramebufferSampleCount();
+
+        colorCount *= sampleCount > 1 ? 2 : 1;
+
+        m_clearValues.resize(colorCount + 1);
+
+        for (uint8_t i = 0; i < colorCount; ++i)
+            m_clearValues[i] = { .color = {{ r, g, b, a }} };
+
+        m_clearValues[colorCount] = VkClearValue { .depthStencil = { depth, 0 } };
+
+        m_renderPassBI.clearValueCount = colorCount + 1;
+        m_renderPassBI.pClearValues    = m_clearValues.data();
+    }
+
+    uint8_t Vulkan::GetFramebufferSampleCount() const {
+        if (m_currentFramebuffer) {
+            return m_currentFramebuffer->GetSamplesCount();
+        }
+
+        return GetSamplesCount();
+    }
+
+    void* Vulkan::GetCurrentRenderPassHandle() const {
+        void* pHandle = m_kernel->GetRenderPass();
+
+        if (m_currentFramebuffer) {
+            auto&& FBO = m_currentFramebuffer->GetId();
+
+            if (FBO == SR_ID_INVALID) {
+                SR_ERROR("Vulkan::GetCurrentRenderPassHandle() : invalid FBO!");
+            }
+            else if (auto&& framebuffer = m_memory->m_FBOs[FBO - 1]; !framebuffer) {
+                SR_ERROR("Vulkan::GetCurrentRenderPassHandle() : frame buffer object don't exist!");
+            }
+            else {
+                pHandle = framebuffer->GetRenderPass();
+            }
+        }
+
+        return pHandle;
+    }
+
+    void Vulkan::SetBuildState(bool isBuild) {
+        /// TODO: здесь нужна оптимизация цепочки кадровых буферов, так же исключить перестроение цепочки при отсутсвии изменений
+
+        if (!isBuild) {
+            return Environment::SetBuildState(isBuild);
+        }
+
+        m_kernel->ClearSubmitQueue();
+
+        VkSubmitInfo submitInfo = EvoVulkan::Tools::Initializers::SubmitInfo();
+        submitInfo.commandBufferCount   = 1;
+        submitInfo.waitSemaphoreCount   = 1;
+        submitInfo.signalSemaphoreCount = 1;
+        submitInfo.pWaitDstStageMask    = m_kernel->GetSubmitPipelineStages();
+
+        for (uint16_t i = 0; i < m_framebuffersQueue.size(); ++i) {
+            submitInfo.pCommandBuffers   = m_framebuffersQueue[i]->GetCmdRef();
+            submitInfo.pSignalSemaphores = m_framebuffersQueue[i]->GetSemaphoreRef();
+
+            if (i == 0) {
+                submitInfo.pWaitSemaphores = m_kernel->GetPresentCompleteSemaphore();
+            }
+            else {
+                submitInfo.pWaitSemaphores = m_framebuffersQueue[i - 1]->GetSemaphoreRef();
+            }
+
+            m_kernel->AddSubmitQueue(submitInfo);
+        }
+
+        Environment::SetBuildState(isBuild);
     }
 
     //!-----------------------------------------------------------------------------------------------------------------
@@ -786,70 +984,86 @@ namespace Framework::Graphics {
 
         Environment::Get()->SetBuildState(false);
 
-        uint32_t w = m_width;
-        uint32_t h = m_height;
-
-        /// TODO: это нужно?
-        // Environment::Get()->g_callback(Environment::WinEvents::Resize, Environment::Get()->GetBasicWindow(), &w, &h);
-
         if (m_GUIEnabled) {
-            dynamic_cast<Framework::Graphics::Vulkan *>(Environment::Get())->GetVkImGUI()->ReSize(w, h);
+            dynamic_cast<SR_GRAPH_NS::Vulkan*>(Environment::Get())->GetVkImGUI()->ReCreate();
         }
 
         return true;
     }
 
     EvoVulkan::Core::RenderResult SRVulkan::Render()  {
-        if (PrepareFrame() == EvoVulkan::Core::FrameResult::OutOfDate) {
-            VK_LOG("SRVulkan::Render() : out of date...");
-            m_hasErrors |= !ResizeWindow();
+        SR_TRACY_ZONE;
 
-            if (m_hasErrors) {
-                return EvoVulkan::Core::RenderResult::Fatal;
-            }
-
-            VK_LOG("SRVulkan::Render() : window are successfully resized!");
-
+        if (!m_swapchain->SurfaceIsAvailable()) {
             return EvoVulkan::Core::RenderResult::Success;
         }
 
-        for (const auto& submitInfo : m_framebuffersQueue) {
+        auto&& prepareResult = PrepareFrame();
+        switch (prepareResult) {
+            case EvoVulkan::Core::FrameResult::OutOfDate:
+            case EvoVulkan::Core::FrameResult::Suboptimal: {
+                VK_LOG("SRVulkan::Render() : out of date...");
+                m_hasErrors |= !ReCreate(prepareResult);
+
+                if (m_hasErrors) {
+                    return EvoVulkan::Core::RenderResult::Fatal;
+                }
+
+                VK_LOG("SRVulkan::Render() : window are successfully resized!");
+
+                return EvoVulkan::Core::RenderResult::Success;
+            }
+            case EvoVulkan::Core::FrameResult::Success:
+                break;
+            default:
+                SRHalt("SRVulkan::Render() : unexcepted behaviour!");
+                return EvoVulkan::Core::RenderResult::Error;
+        }
+
+        for (const auto& submitInfo : m_submitQueue) {
+            SR_TRACY_ZONE_S("QueueSubmit");
+
             if (auto result = vkQueueSubmit(m_device->GetQueues()->GetGraphicsQueue(), 1, &submitInfo, VK_NULL_HANDLE); result != VK_SUCCESS) {
                 VK_ERROR("renderFunction() : failed to queue submit (frame buffer)! Reason: " + EvoVulkan::Tools::Convert::result_to_description(result));
+
+                if (result == VK_ERROR_DEVICE_LOST) {
+                    return EvoVulkan::Core::RenderResult::DeviceLost;
+                }
+
                 return EvoVulkan::Core::RenderResult::Error;
             }
         }
 
-        auto&& vkImgui = dynamic_cast<Framework::Graphics::Vulkan*>(Environment::Get())->GetVkImGUI();
+        auto&& vkImgui = dynamic_cast<SR_GRAPH_NS::Vulkan*>(Environment::Get())->GetVkImGUI();
 
         m_submitCmdBuffs[0] = m_drawCmdBuffs[m_currentBuffer];
         if (m_GUIEnabled && vkImgui && !vkImgui->IsSurfaceDirty()) {
             m_submitCmdBuffs[1] = vkImgui->Render(m_currentBuffer);
             m_submitInfo.commandBufferCount = 2;
-        } 
+
+            //AddSubmitQueue(vkImgui->GetSubmitInfo(
+            //     GetSubmitInfo().signalSemaphoreCount,
+            //     GetSubmitInfo().pSignalSemaphores
+            //));
+        }
         else {
             m_submitInfo.commandBufferCount = 1;
         }
 
-        m_submitInfo.waitSemaphoreCount = 1;
-        if (m_waitSemaphore) {
-            m_submitInfo.pWaitSemaphores = &m_waitSemaphore;
-        }
-        else
-            m_submitInfo.pWaitSemaphores = &m_syncs.m_presentComplete;
-
         m_submitInfo.pCommandBuffers = m_submitCmdBuffs;
-        m_submitInfo.pSignalSemaphores = &m_syncs.m_renderComplete;
 
-        /// Submit to queue
-        if (auto result = vkQueueSubmit(m_device->GetQueues()->GetGraphicsQueue(), 1, &m_submitInfo, VK_NULL_HANDLE); result != VK_SUCCESS) {
-            VK_ERROR("renderFunction() : failed to queue submit! Reason: " + EvoVulkan::Tools::Convert::result_to_description(result));
+        {
+            SR_TRACY_ZONE_S("GraphicsQueueSubmit");
+            /// Submit to queue
+            if (auto result = vkQueueSubmit(m_device->GetQueues()->GetGraphicsQueue(), 1, &m_submitInfo, VK_NULL_HANDLE); result != VK_SUCCESS) {
+                VK_ERROR("renderFunction() : failed to queue submit! Reason: " + EvoVulkan::Tools::Convert::result_to_description(result));
 
-            if (result == VK_ERROR_DEVICE_LOST) {
-                SR_UTILS_NS::Debug::Instance().Terminate();
+                if (result == VK_ERROR_DEVICE_LOST) {
+                    SR_PLATFORM_NS::Terminate();
+                }
+
+                return EvoVulkan::Core::RenderResult::Error;
             }
-
-            return EvoVulkan::Core::RenderResult::Error;
         }
 
         switch (SubmitFrame()) {
@@ -860,7 +1074,7 @@ namespace Framework::Graphics {
                 return EvoVulkan::Core::RenderResult::Error;
 
             case EvoVulkan::Core::FrameResult::OutOfDate: {
-                m_hasErrors |= !ResizeWindow();
+                m_hasErrors |= !ReCreate(EvoVulkan::Core::FrameResult::OutOfDate);
 
                 if (m_hasErrors) {
                     return EvoVulkan::Core::RenderResult::Fatal;
@@ -870,7 +1084,7 @@ namespace Framework::Graphics {
                 }
             }
             case EvoVulkan::Core::FrameResult::DeviceLost:
-                SR_UTILS_NS::Debug::Instance().Terminate();
+                SR_PLATFORM_NS::Terminate();
 
             default: {
                 SRAssertOnce(false);
@@ -886,5 +1100,26 @@ namespace Framework::Graphics {
         return SR_UTILS_NS::Features::Instance().Enabled("RayTracing", false);
     #endif
 
+    }
+
+    EvoVulkan::Core::FrameResult SRVulkan::PrepareFrame() {
+        SR_TRACY_ZONE;
+        return VulkanKernel::PrepareFrame();
+    }
+
+    EvoVulkan::Core::FrameResult SRVulkan::SubmitFrame() {
+        SR_TRACY_ZONE;
+        return VulkanKernel::SubmitFrame();
+    }
+
+    void SRVulkan::PollWindowEvents() {
+        auto&& pPipeline = dynamic_cast<SR_GRAPH_NS::Vulkan*>(Environment::Get());
+        if (!pPipeline) {
+            return; 
+        }
+
+        pPipeline->GetWindow().Do([](Window* pWindow) {
+            pWindow->PollEvents();
+        });
     }
 }

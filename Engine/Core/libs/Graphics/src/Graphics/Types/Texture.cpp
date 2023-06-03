@@ -7,7 +7,6 @@
 
 #include <Graphics/Types/Texture.h>
 #include <Graphics/Loaders/TextureLoader.h>
-#include <Graphics/Render/Render.h>
 #include <Graphics/Pipeline/Environment.h>
 #include <Graphics/Render/RenderContext.h>
 
@@ -62,44 +61,47 @@ namespace SR_GTYPES_NS {
     }
 
     Texture* Texture::Load(const std::string& rawPath, const std::optional<Memory::TextureConfig>& config) {
-        SR_GLOBAL_LOCK
+        static auto&& resourceManager = SR_UTILS_NS::ResourceManager::Instance();
 
-        SR_UTILS_NS::Path&& path = SR_UTILS_NS::Path(rawPath).RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetResPath());
+        Texture* pTexture = nullptr;
 
-        if (auto&& pResource = SR_UTILS_NS::ResourceManager::Instance().Find<Texture>(path)) {
-            if (config && pResource->m_config != config.value()) {
-                SR_WARN("Texture::Load() : copy values do not match load values.");
+        resourceManager.Execute([&]() {
+            SR_UTILS_NS::Path&& path = SR_UTILS_NS::Path(rawPath).RemoveSubPath(resourceManager.GetResPath());
+
+            if ((pTexture = SR_UTILS_NS::ResourceManager::Instance().Find<Texture>(path))) {
+                if (config && pTexture->m_config != config.value()) {
+                    SR_WARN("Texture::Load() : copy values do not match load values.");
+                }
+
+                return;
             }
 
-            return pResource;
-        }
+            pTexture = new Texture();
 
-        auto&& pTexture = new Texture();
+            if (config) {
+                pTexture->SetConfig(config.value());
+            }
+            else {
+                pTexture->SetConfig(Memory::TextureConfig());
+            }
 
-        if (config) {
-            pTexture->SetConfig(config.value());
-        }
-        else {
-            pTexture->SetConfig(Memory::TextureConfig());
-        }
+            pTexture->SetId(path, false /** auto register */);
 
-        pTexture->SetId(path, false /** auto register */);
+            if (!pTexture->Load()) {
+                SR_ERROR("Texture::Load() : failed to load texture! \n\tPath: " + path.ToString());
+                delete pTexture;
+                pTexture = nullptr;
+                return;
+            }
 
-        if (!pTexture->Load()) {
-            SR_ERROR("Texture::Load() : failed to load texture! \n\tPath: " + path.ToString());
-            delete pTexture;
-            return nullptr;
-        }
-
-        /// отложенная ручная регистрация
-        SR_UTILS_NS::ResourceManager::Instance().RegisterResource(pTexture);
+            /// отложенная ручная регистрация
+            SR_UTILS_NS::ResourceManager::Instance().RegisterResource(pTexture);
+        });
 
         return pTexture;
     }
 
     bool Texture::Unload() {
-        SR_SCOPED_LOCK
-
         bool hasErrors = !IResource::Unload();
 
         FreeTextureData();
@@ -114,8 +116,6 @@ namespace SR_GTYPES_NS {
     }
 
     bool Texture::Load() {
-        SR_SCOPED_LOCK
-
         bool hasErrors = !IResource::Load();
 
         if (!IsCalculated()) {
@@ -140,8 +140,6 @@ namespace SR_GTYPES_NS {
     }
 
     bool Texture::Calculate() {
-        SR_SCOPED_LOCK
-
         if (m_isCalculated) {
             SR_ERROR("Texture::Calculate() : texture is already calculated!");
             return false;
@@ -167,7 +165,7 @@ namespace SR_GTYPES_NS {
             return false;
         }
 
-        if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::None) {
+        if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::High) {
             SR_LOG("Texture::Calculate() : calculating \"" + std::string(GetResourceId()) + "\" texture...");
         }
 
@@ -175,11 +173,15 @@ namespace SR_GTYPES_NS {
             SRVerifyFalse(!m_pipeline->FreeTexture(&m_id));
         }
 
+        EVK_PUSH_LOG_LEVEL(EvoVulkan::Tools::LogLevel::ErrorsOnly);
+
         // TODO: to refactoring
         m_id = m_pipeline->CalculateTexture(m_data,
                 m_config.m_format, m_width, m_height, m_config.m_filter,
                 m_config.m_compression, m_config.m_mipLevels,
                 m_config.m_alpha == SR_UTILS_NS::BoolExt::None, m_config.m_cpuUsage);
+
+        EVK_POP_LOG_LEVEL();
 
         if (m_id == SR_ID_INVALID) {
             SR_ERROR("Texture::Calculate() : failed to calculate the texture!");
@@ -199,8 +201,6 @@ namespace SR_GTYPES_NS {
     }
 
     void Texture::FreeVideoMemory() {
-        SR_SCOPED_LOCK
-
         /// Просто игнорируем, текстура могла быть не использована
         if (!m_isCalculated) {
             return;
@@ -265,8 +265,6 @@ namespace SR_GTYPES_NS {
     }
 
     void* Texture::GetDescriptor() {
-        SR_SCOPED_LOCK
-
         auto&& textureId = GetId();
 
         if (textureId == SR_ID_INVALID) {

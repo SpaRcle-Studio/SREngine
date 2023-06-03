@@ -391,6 +391,17 @@ namespace SR_SRSL_NS {
         else if (pExpr->isArray) {
             code += GenerateExpression(pExpr->args[0], 0) + "[" + GenerateExpression(pExpr->args[1], 0) + "]";
         }
+        else if (pExpr->isList) {
+            code += "{ ";
+            for (uint32_t i = 0; i < pExpr->args.size(); ++i) {
+                code += "\n" + GenerateExpression(pExpr->args.at(i), deep + 2);
+
+                if (i + 1 < pExpr->args.size()) {
+                    code += ",";
+                }
+            }
+            code += "\n" + GenerateTab(deep + 1) + "}";
+        }
         else if (pExpr->args.empty()) {
             code += pExpr->token;
         }

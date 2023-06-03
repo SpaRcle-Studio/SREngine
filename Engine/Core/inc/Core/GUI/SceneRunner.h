@@ -26,6 +26,8 @@ namespace SR_CORE_NS::GUI {
         bool PlayScene();
         void ReturnScene();
 
+        SR_NODISCARD EditorGUI* GetEditor() const;
+
     private:
         bool m_isActive = false;
         bool m_isPaused = false;

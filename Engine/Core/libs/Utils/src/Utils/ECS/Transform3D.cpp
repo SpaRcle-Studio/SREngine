@@ -18,12 +18,17 @@ namespace SR_UTILS_NS {
     }
 
     void Transform3D::Rotate(const SR_MATH_NS::FVector3& eulers) {
-        SR_MATH_NS::Quaternion q = m_quaternion * eulers.Radians().ToQuat();
-        SetRotation(q.EulerAngle());
+        Rotate(eulers.Radians().ToQuat());
+    }
+
+    void Transform3D::Rotate(const SR_MATH_NS::Quaternion &q) {
+        SetRotation((m_quaternion * q).EulerAngle());
     }
 
     const SR_MATH_NS::Matrix4x4& Transform3D::GetMatrix() {
         if (IsDirty()) {
+            SR_TRACY_ZONE;
+
             UpdateMatrix();
 
             if (auto&& pTransform = m_gameObject->GetParentTransform()) {
@@ -47,7 +52,7 @@ namespace SR_UTILS_NS {
     }
 
     void Transform3D::SetTranslation(const SR_MATH_NS::FVector3& translation) {
-        SR_MATH_NS::FVector3 delta = translation - m_translation;
+        const SR_MATH_NS::FVector3 delta = translation - m_translation;
 
         if (delta.Empty()) {
             return;
@@ -55,20 +60,49 @@ namespace SR_UTILS_NS {
 
         m_translation = translation;
 
+    #ifdef SR_DEBUG
+        if (!m_translation.IsFinite()) {
+            SRHaltOnce("Translation is broke!");
+            m_translation = SR_MATH_NS::FVector3::Zero();
+        }
+    #endif
+
         UpdateTree();
     }
 
     void Transform3D::SetRotation(const SR_MATH_NS::FVector3& euler) {
-        m_rotation = euler.Limits(360);
-        m_quaternion = euler.Radians().ToQuat();
+    #ifdef SR_DEBUG
+        if (!euler.IsFinite()) {
+            SRHaltOnce("Rotation is broke!");
+            m_rotation = SR_MATH_NS::FVector3::Zero();
+            m_quaternion = SR_MATH_NS::Quaternion::Identity();
+        }
+        else {
+    #endif
+            m_rotation = euler.Limits(360);
+            m_quaternion = euler.Radians().ToQuat();
+    #ifdef SR_DEBUG
+        }
+    #endif
 
         UpdateTree();
     }
 
 
-    void Transform3D::SetRotation(const SR_MATH_NS::Quaternion &quaternion) {
-        m_rotation = quaternion.EulerAngle();
-        m_quaternion = quaternion;
+    void Transform3D::SetRotation(const SR_MATH_NS::Quaternion& quaternion) {
+    #ifdef SR_DEBUG
+        if (!quaternion.IsFinite()) {
+            SRHaltOnce("Rotation is broke!");
+            m_rotation = SR_MATH_NS::FVector3::Zero();
+            m_quaternion = SR_MATH_NS::Quaternion::Identity();
+        }
+        else {
+    #endif
+            m_rotation = quaternion.EulerAngle();
+            m_quaternion = quaternion;
+    #ifdef SR_DEBUG
+        }
+    #endif
 
         UpdateTree();
     }
@@ -184,6 +218,30 @@ namespace SR_UTILS_NS {
         pTransform->m_skew = m_skew;
 
         return pTransform;
+    }
+
+    void Transform3D::LookAt(const SR_MATH_NS::FVector3& position) {
+        LookAt(position, LookAtAxis::AxisZ);
+    }
+
+    void Transform3D::LookAt(const SR_MATH_NS::FVector3& position, LookAtAxis axis) {
+        /*SR_MATH_NS::FVector3 target;
+
+        switch (axis) {
+            case LookAtAxis::AxisX: target = Transform3D::RIGHT; break;
+            case LookAtAxis::AxisY: target = Transform3D::UP; break;
+            case LookAtAxis::AxisZ: target = Transform3D::FORWARD; break;
+            case LookAtAxis::InvAxisX: target = -Transform3D::RIGHT; break;
+            case LookAtAxis::InvAxisY: target = -Transform3D::UP; break;
+            case LookAtAxis::InvAxisZ: target = -Transform3D::FORWARD; break;
+            default:
+                SRHalt0();
+                break;
+        }*/
+
+        //auto&& source = GetMatrix().GetTranslate();
+
+        //SetRotation(m_quaternion.LookAt(source - position));
     }
 }
 

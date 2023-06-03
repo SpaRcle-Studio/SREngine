@@ -2,6 +2,7 @@
 // Created by Nikita on 29.12.2020.
 // Looked by Drakeme on 26.06.2022.
 // Changed by Monika on 20.11.2022
+// Approved by innerviewer on 03.09.2023
 //
 
 #include <Utils/macros.h>
@@ -36,9 +37,6 @@
 #include <Graphics/UI/Canvas.h>
 #include <Graphics/UI/Anchor.h>
 #include <Graphics/UI/Sprite2D.h>
-#include <Graphics/SRSL/Lexer.h>
-#include <Graphics/SRSL/LexicalAnalyzer.h>
-#include <Graphics/SRSL/PseudoCodeGenerator.h>
 #include <Graphics/SRSL/Shader.h>
 
 #include <Graphics/Font/Text.h>
@@ -55,7 +53,6 @@
 #include <Graphics/Memory/MeshAllocator.h>
 #include <Graphics/GUI/NodeManager.h>
 #include <Graphics/Types/Camera.h>
-#include <Graphics/Render/RenderManager.h>
 #include <Graphics/Memory/CameraManager.h>
 #include <Graphics/Types/Framebuffer.h>
 #include <Graphics/Types/RenderTexture.h>
@@ -66,25 +63,7 @@
 #include <Physics/PhysicsLib.h>
 
 #include <Scripting/Base/Behaviour.h>
-
-using namespace Framework;
-
-using namespace Framework::Core;
-
-using namespace Framework::Helper;
-using namespace Framework::Helper::Math;
-using namespace Framework::Helper::Types;
-using namespace Framework::Helper::World;
-
-using namespace Framework::Graphics;
-using namespace Framework::Graphics::UI;
-using namespace Framework::Graphics::Types;
-using namespace Framework::Graphics::Animations;
-
-using namespace Framework::Physics;
-using namespace Framework::Physics::Types;
-
-using namespace Framework::Scripting;
+#include <Scripting/Impl/EvoScriptManager.h>
 
 int main(int argc, char **argv) {
     setlocale(LC_ALL, "rus");
@@ -92,35 +71,41 @@ int main(int argc, char **argv) {
     srand(time(NULL));
 
     auto&& exe = SR_PLATFORM_NS::GetApplicationPath().GetFolder();
-    Debug::Instance().Init(exe, true, Debug::Theme::Dark);
-    Debug::Instance().SetLevel(Debug::Level::Low);
+    SR_UTILS_NS::Debug::Instance().Init(exe, true, SR_UTILS_NS::Debug::Theme::Dark);
+    SR_UTILS_NS::Debug::Instance().SetLevel(SR_UTILS_NS::Debug::Level::Low);
 
-    Thread::Factory::Instance().SetMainThread();
+    SR_PLATFORM_NS::InitSegmentationHandler();
+
+    SR_HTYPES_NS::Thread::Factory::Instance().SetMainThread();
     SR_HTYPES_NS::Time::Instance().Update();
 
-    auto&& resourcesManager = ResourceManager::Instance();
+    auto&& resourcesManager = SR_UTILS_NS::ResourceManager::Instance();
 
-    if (auto&& folder = GetCmdOption(argv, argv + argc, "-resources"); folder.empty()) {
-        resourcesManager.Init(Path(exe.ToString() + "/../../Resources"));
+    if (auto&& folder = SR_UTILS_NS::GetCmdOption(argv, argv + argc, "-resources"); folder.empty()) {
+        resourcesManager.Init(SR_UTILS_NS::Path(exe.ToString() + "/../../Resources"));
     }
-    else
+    else {
         resourcesManager.Init(folder);
+    }
 
-    Features::Instance().Reload(resourcesManager.GetResPath().Concat("Engine/Configs/Features.xml"));
+    SR_UTILS_NS::Features::Instance().SetPath(resourcesManager.GetResPath().Concat("Engine/Configs/Features.xml"));
+    SR_UTILS_NS::Features::Instance().Reload();
 
-    if (Features::Instance().Enabled("CrashHandler")) {
-#ifdef SR_WIN32
-        ShellExecute(nullptr, "open", (ResourceManager::Instance().GetResPath().Concat(
+    resourcesManager.Run();
+
+    if (SR_UTILS_NS::Features::Instance().Enabled("CrashHandler")) {
+    #ifdef SR_WIN32
+        ShellExecute(nullptr, "open", (SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat(
                 "Engine/Utilities/EngineCrashHandler.exe").CStr()),
                      ("--log log.txt --target " + SR_PLATFORM_NS::GetApplicationName().ToString() + " --out " + exe.ToString() + "\\").c_str(),
                      nullptr, SW_SHOWDEFAULT
         );
-#endif
+    #endif
     }
 
-    {
-        SceneAllocator::Instance().Init([]() -> Scene* { return new Core::World(); });
-    }
+    SR_WORLD_NS::SceneAllocator::Instance().Init([]() -> SR_WORLD_NS::Scene* {
+        return new SR_CORE_NS::World();
+    });
 
     auto&& engine = SR_CORE_NS::Engine::Instance();
 
@@ -152,19 +137,20 @@ int main(int argc, char **argv) {
     SR_PHYSICS_NS::PhysicsLibrary::DestroySingleton();
     SR_GRAPH_NS::Memory::CameraManager::DestroySingleton();
     SR_SCRIPTING_NS::GlobalEvoCompiler::DestroySingleton();
+    SR_SCRIPTING_NS::EvoScriptManager::DestroySingleton();
     SR_UTILS_NS::EntityManager::DestroySingleton();
     SR_CORE_NS::Engine::DestroySingleton();
     SR_GRAPH_NS::GUI::NodeManager::DestroySingleton();
     SR_UTILS_NS::TaskManager::DestroySingleton();
-    Memory::MeshManager::DestroySingleton();
+    SR_GRAPH_NS::Memory::MeshManager::DestroySingleton();
 
-    Debug::Instance().System("All systems were successfully closed!");
+    SR_UTILS_NS::Debug::Instance().System("All systems were successfully closed!");
 
-    ResourceManager::DestroySingleton();
+    SR_UTILS_NS::ResourceManager::DestroySingleton();
 
-    SR_SYSTEM_LOG("Thread count: " + ToString(Thread::Factory::Instance().GetThreadsCount()));
+    SR_SYSTEM_LOG("Thread count: " + SR_UTILS_NS::ToString(SR_HTYPES_NS::Thread::Factory::Instance().GetThreadsCount()));
 
-    Debug::DestroySingleton();
+    SR_UTILS_NS::Debug::DestroySingleton();
 
     return 0;
 }

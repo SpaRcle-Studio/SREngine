@@ -7,16 +7,13 @@
 #include <Utils/ResourceManager/IResource.h>
 
 #include <Graphics/Types/Mesh.h>
-#include <Graphics/Types/Geometry/Mesh3D.h>
-#include <Graphics/Types/Geometry/DebugWireframeMesh.h>
-#include <Graphics/UI/Sprite2D.h>
 #include <Graphics/Render/RenderContext.h>
+#include <Graphics/Utils/MeshUtils.h>
 
 namespace SR_GRAPH_NS::Types {
     Mesh::Mesh(MeshType type)
-        : IResource(SR_COMPILE_TIME_CRC32_TYPE_NAME(Mesh), true /** auto remove */)
-        , m_uboManager(Memory::UBOManager::Instance())
-        , m_type(type)
+        : m_uboManager(Memory::UBOManager::Instance())
+        , m_meshType(type)
         , m_material(nullptr)
     { }
 
@@ -25,115 +22,56 @@ namespace SR_GRAPH_NS::Types {
         SRAssert(m_virtualUBO == SR_ID_INVALID);
     }
 
-    bool Mesh::Destroy() {
-        if (IsDestroyed()) {
-            SRHalt("The mesh already destroyed!");
-            return false;
+    Mesh::Ptr Mesh::Load(const SR_UTILS_NS::Path& path, MeshType type, uint32_t id) {
+        if (auto&& pMesh = TryLoad(std::move(path), type, id)) {
+            return pMesh;
         }
 
-        if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::High) {
-            SR_LOG("Mesh::Destroy() : destroy \"" + GetGeometryName() + "\" mesh...");
-        }
+        SR_ERROR("Mesh::Load() : failed to load mesh!\n\tPath: " + path.ToStringRef() + "\n\tId: " + std::to_string(id));
 
-        return IResource::Destroy();
+        return nullptr;
     }
 
-    Mesh *Mesh::Load(SR_UTILS_NS::Path path, MeshType type, uint32_t id) {
-        auto &&pMesh = TryLoad(std::move(path), type, id);
-
-        SRVerifyFalse2(!pMesh, "Mesh is not found! Id: " + SR_UTILS_NS::ToString(id));
-
-        return pMesh;
-    }
-
-    Mesh *Mesh::TryLoad(SR_UTILS_NS::Path rawPath, MeshType type, uint32_t id) {
-        SR_GLOBAL_LOCK
-
+    Mesh::Ptr Mesh::TryLoad(const SR_UTILS_NS::Path& path, MeshType type, uint32_t id) {
         static auto&& resourceManager = SR_UTILS_NS::ResourceManager::Instance();
 
-        auto&& path = rawPath.SelfRemoveSubPath(resourceManager.GetResPathRef());
-        auto&& resourceId = SR_UTILS_NS::EnumReflector::ToString(type) + "-" + std::to_string(id) + "|" + path.ToString();
+        SR_MAYBE_UNUSED SR_HTYPES_NS::SingletonRecursiveLockGuard lock(&resourceManager);
 
-        Mesh *pMesh = nullptr;
-
-        if ((pMesh = resourceManager.Find<Mesh>(resourceId))) {
-            if ((pMesh = dynamic_cast<Mesh *>(pMesh->CopyResource(nullptr)))) {
-                return pMesh;
-            }
-            else {
-                SRHalt("Mesh::TryLoad() : failed to copy mesh!");
-            }
-        }
-
+        Mesh::Ptr pMesh = nullptr;
         bool exists = false;
 
         /// Проверяем существование меша
         SR_HTYPES_NS::RawMesh* pRawMesh = nullptr;
         if ((pRawMesh = SR_HTYPES_NS::RawMesh::Load(path))) {
-            pRawMesh->AddUsePoint();
             exists = id < pRawMesh->GetMeshesCount();
         }
         else {
             return nullptr;
         }
 
-        if (!exists) {
-            pRawMesh->RemoveUsePoint();
+        if (!exists || !(pMesh = CreateMeshByType(type))) {
+            pRawMesh->CheckResourceUsage();
             return nullptr;
         }
 
-        switch (type) {
-            case MeshType::Static: {
-                auto&& pMesh3D = new Types::Mesh3D();
-                pMesh3D->m_meshId = id;
-                pMesh = pMesh3D;
-                break;
-            }
-            case MeshType::Wireframe: {
-                auto &&pWireframe = new Types::DebugWireframeMesh();
-                pWireframe->m_meshId = id;
-                pMesh = pWireframe;
-                break;
-            }
-            case MeshType::Sprite2D:
-                pMesh = new UI::Sprite2D();
-                break;
-            case MeshType::Skinned: {
-                auto&& pSkinnedMesh = new Types::SkinnedMesh();
-                pSkinnedMesh->m_meshId = id;
-                pMesh = pSkinnedMesh;
-                break;
-            }
-            case MeshType::Unknown:
-            default:
-                SRAssert(false);
-                pRawMesh->RemoveUsePoint();
-                return pMesh;
+        if (auto&& pRawMeshHolder = dynamic_cast<SR_HTYPES_NS::IRawMeshHolder*>(pMesh)) {
+            pRawMeshHolder->SetRawMesh(pRawMesh);
+            pRawMeshHolder->SetMeshId(id);
         }
-
-        if (pMesh) {
-            pMesh->SetId(resourceId, false /** auto register */);
-
-            if (!pMesh->Reload()) {
-                pRawMesh->RemoveUsePoint();
-                delete pMesh;
-                return nullptr;
-            }
-
-            /// отложенная ручная регистрация
-            SR_UTILS_NS::ResourceManager::Instance().RegisterResource(pMesh);
+        else {
+            SRHalt("Mesh is not a raw mesh holder! Memory leak...");
+            pRawMesh->CheckResourceUsage();
+            return nullptr;
         }
-
-        pRawMesh->RemoveUsePoint();
 
         return pMesh;
     }
 
-    std::vector<Mesh*> Mesh::Load(SR_UTILS_NS::Path path, MeshType type) {
-        std::vector<Mesh*> meshes;
+    std::vector<Mesh::Ptr> Mesh::Load(const SR_UTILS_NS::Path& path, MeshType type) {
+        std::vector<Mesh::Ptr> meshes;
 
         uint32_t id = 0;
-        while (auto &&pMesh = TryLoad(path, type, id)) {
+        while (auto&& pMesh = TryLoad(path, type, id)) {
             meshes.emplace_back(pMesh);
             ++id;
         }
@@ -149,38 +87,9 @@ namespace SR_GRAPH_NS::Types {
         return true;
     }
 
-    SR_UTILS_NS::IResource *Mesh::CopyResource(IResource *destination) const {
-        if (IsDestroyed()) {
-            SRHalt("Mesh::CopyResource() : mesh is already destroyed!");
-            return nullptr;
-        }
-
-        Mesh *mesh = reinterpret_cast<Mesh *>(destination);
-        if (!mesh) {
-            SRHalt("Mesh::CopyResource() : impossible to copy basic mesh!");
-            return nullptr;
-        }
-
-        if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::Full) {
-            SR_LOG("Mesh::CopyResource() : copy \"" + std::string(GetResourceId()) + "\" mesh...");
-        }
-
-        /** при копировании меш должен быть невычислен, иначе может получиться так,
-         * что мешь никогда не попадет в рендер и не очистит видео-память. */
-        mesh->m_isCalculated.store(false);
-
-        mesh->m_hasErrors.store(false);
-
-        mesh->SetMaterial(GetMaterial());
-
-        return SR_UTILS_NS::IResource::CopyResource(mesh);
-    }
-
     void Mesh::FreeVideoMemory() {
-        if (m_pipeline && m_pipeline->GetType() == PipelineType::Vulkan) {
-            if (m_virtualUBO != SR_ID_INVALID && !m_uboManager.FreeUBO(&m_virtualUBO)) {
-                SR_ERROR("Mesh::FreeVideoMemory() : failed to free virtual uniform buffer object!");
-            }
+        if (m_virtualUBO != SR_ID_INVALID && !m_uboManager.FreeUBO(&m_virtualUBO)) {
+            SR_ERROR("Mesh::FreeVideoMemory() : failed to free virtual uniform buffer object!");
         }
 
         IGraphicsResource::FreeVideoMemory();
@@ -188,6 +97,8 @@ namespace SR_GRAPH_NS::Types {
 
     bool Mesh::Calculate() {
         m_isCalculated = true;
+        /// чтобы в случае перезагрузки обновить все связанные данные
+        m_dirtyMaterial = true;
         return true;
     }
 
@@ -195,53 +106,44 @@ namespace SR_GRAPH_NS::Types {
         SetMaterial(Material::Load(path));
     }
 
-    void Mesh::SetMaterial(Material *material) {
-        if (material == m_material) {
+    void Mesh::SetMaterial(MaterialPtr pMaterial) {
+        if (pMaterial == m_material) {
             return;
         }
 
         m_dirtyMaterial = true;
 
         if (m_material) {
-            RemoveDependency(m_material);
+            m_material->RemoveUsePoint();
         }
 
-        if ((m_material = material)) {
-            AddDependency(m_material);
+        if ((m_material = pMaterial)) {
+            m_material->AddUsePoint();
         }
 
-        if (m_isCalculated && m_pipeline) {
-            m_pipeline->SetBuildState(false);
-        }
+        MarkPipelineUnBuild();
     }
 
-    Shader *Mesh::GetShader() const {
+    Mesh::ShaderPtr Mesh::GetShader() const {
         return m_material ? m_material->GetShader() : nullptr;
     }
 
-    void Mesh::OnResourceUpdated(SR_UTILS_NS::ResourceContainer* pContainer, int32_t depth) {
-        if (dynamic_cast<Material*>(pContainer) == m_material && m_material) {
-            m_dirtyMaterial = true;
-        }
-
-        IResource::OnResourceUpdated(pContainer, depth);
-    }
-
     void Mesh::UseMaterial() {
+        SR_TRACY_ZONE;
         m_material->Use();
     }
 
     void Mesh::BindMesh() const {
-        if (auto&& vbo = GetVBO(); vbo != SR_ID_INVALID) {
-            m_pipeline->BindVBO(vbo);
+        if (auto&& VBO = GetVBO(); VBO != SR_ID_INVALID) {
+            m_pipeline->BindVBO(VBO);
         }
 
-        if (auto&& ibo = GetIBO(); ibo != SR_ID_INVALID) {
-            m_pipeline->BindIBO(ibo);
+        if (auto&& IBO = GetIBO(); IBO != SR_ID_INVALID) {
+            m_pipeline->BindIBO(IBO);
         }
     }
 
-    const SR_MATH_NS::Matrix4x4 &Mesh::GetModelMatrix() const {
+    const SR_MATH_NS::Matrix4x4& Mesh::GetModelMatrix() const {
         static SR_MATH_NS::Matrix4x4 matrix4X4 = SR_MATH_NS::Matrix4x4::Identity();
         return matrix4X4;
     }
@@ -252,6 +154,42 @@ namespace SR_GRAPH_NS::Types {
         }
 
         m_material->UseSamplers();
+    }
+
+    std::string Mesh::GetMeshIdentifier() const {
+        static const std::string empty;
+        return empty;
+    }
+
+    void Mesh::MarkMeshDestroyed() {
+        SRAssert(!m_isMeshDestroyed);
+
+        m_isMeshDestroyed = true;
+
+        if (!IsGraphicsResourceRegistered()) {
+            delete this;
+        }
+    }
+
+    void Mesh::OnResourceReloaded(SR_UTILS_NS::IResource* pResource) {
+        if (!m_material) {
+            return;
+        }
+
+        if (pResource == m_material) {
+            m_dirtyMaterial = true;
+            return;
+        }
+
+        if (m_material->GetShader() == pResource) {
+            m_dirtyMaterial = true;
+            return;
+        }
+
+        auto&& pTexture = dynamic_cast<SR_GTYPES_NS::Texture*>(pResource);
+        if (pTexture && m_material->ContainsTexture(pTexture)) {
+            m_dirtyMaterial = true;
+        }
     }
 }
 

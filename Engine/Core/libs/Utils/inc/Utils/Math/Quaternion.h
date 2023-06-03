@@ -33,6 +33,10 @@ namespace SR_MATH_NS {
         SR_NODISCARD Vector3<T> EulerAngle() const;
         SR_NODISCARD Quaternion Rotate(const Vector3<T>& v) const;
 
+        SR_NODISCARD Quaternion RotateX(Unit angle) const;
+        SR_NODISCARD Quaternion RotateY(Unit angle) const;
+        SR_NODISCARD Quaternion RotateZ(Unit angle) const;
+
         SR_NODISCARD T X() const noexcept { return static_cast<T>(self.x); }
         SR_NODISCARD T Y() const noexcept { return static_cast<T>(self.y); }
         SR_NODISCARD T Z() const noexcept { return static_cast<T>(self.z); }
@@ -57,6 +61,8 @@ namespace SR_MATH_NS {
             self = q;
         }
 
+        Quaternion(const Vector3<Unit>& axis, Unit angle);
+
         constexpr explicit Quaternion(T x, T y, T z, T w)
             : x(x)
             , y(y)
@@ -75,11 +81,26 @@ namespace SR_MATH_NS {
         }
 
         SR_NODISCARD Quaternion Slerp(const Quaternion& q, Unit t) const {
+            SRAssertOnce(t >= 0.f || t <= 1.f);
             return Quaternion(glm::slerp(self, q.self, static_cast<float_t>(t)));
         }
 
+        SR_NODISCARD static Quaternion LookAt(const Vector3<Unit>& direction);
+        SR_NODISCARD static Quaternion LookAt(const Vector3<Unit>& direction, const Vector3<Unit>& up);
+
         SR_NODISCARD Quaternion Normalize() const {
             return Quaternion(glm::normalize(self));
+        }
+
+        SR_NODISCARD Unit Roll() const noexcept {
+            return static_cast<Unit>(atan2(static_cast<Unit>(2) * (x * y + w * z), w * w + x * x - y * y - z * z));
+        }
+
+        SR_NODISCARD Unit Pitch() const noexcept;
+        SR_NODISCARD Unit SquaredNorm() const noexcept;
+
+        SR_NODISCARD Unit Yaw() const noexcept {
+            return asin(SR_CLAMP(static_cast<Unit>(-2) * (x * z - w * y), static_cast<Unit>(1), static_cast<Unit>(-1)));
         }
 
         SR_NODISCARD std::string ToString() const {
@@ -98,11 +119,27 @@ namespace SR_MATH_NS {
                 SR_EQUALS(w, q.w);
         }
 
+        SR_NODISCARD bool IsFinite() const noexcept {
+            /// если будет inf или nan, то вернет false
+            return std::isfinite(x) && std::isfinite(y) && std::isfinite(z) && std::isfinite(w);
+        }
+
+        SR_NODISCARD bool IsIdentity() const noexcept {
+            return
+                SR_EQUALS(x, 1.f) &&
+                SR_EQUALS(y, 1.f) &&
+                SR_EQUALS(z, 1.f) &&
+                SR_EQUALS(w, 1.f);
+        }
+
         SR_FORCE_INLINE void operator+=(const Quaternion &p_q) {
             self += p_q.self;
         }
         SR_FORCE_INLINE void operator-=(const Quaternion &p_q) {
             self -= p_q.self;
+        }
+        SR_FORCE_INLINE void operator*=(const Quaternion &p_q) {
+            self *= p_q.self;
         }
         SR_FORCE_INLINE void operator*=(const double &s){
             self *= s;
@@ -139,6 +176,8 @@ namespace SR_MATH_NS {
             return Quaternion(self * rhs.self);
         }
     };
+
+    inline static const Quaternion InfinityQuaternion = Quaternion { UnitMAX, UnitMAX, UnitMAX, UnitMAX };
 }
 
 #endif //GAMEENGINE_QUATERNION_H

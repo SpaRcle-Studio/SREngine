@@ -15,8 +15,6 @@ namespace SR_UTILS_NS {
     }
 
     void ResourceContainer::AddDependency(ResourceContainer* pContainer) {
-        SR_LOCK_GUARD
-
         if (auto&& pResource = dynamic_cast<IResource*>(pContainer)) {
             pResource->AddUsePoint();
         }
@@ -26,8 +24,6 @@ namespace SR_UTILS_NS {
     }
 
     void ResourceContainer::RemoveDependency(ResourceContainer* pContainer) {
-        SR_LOCK_GUARD
-
         if (!SRVerifyFalse(m_dependencies.count(pContainer) == 0)) {
             return;
         }
@@ -45,8 +41,6 @@ namespace SR_UTILS_NS {
     }
 
     void ResourceContainer::UpdateResources(int32_t depth) {
-        SR_LOCK_GUARD
-
         /// вверх по иерархии
         if (depth == 0 || depth > 0) {
             for (auto &&pResource : m_parents) {

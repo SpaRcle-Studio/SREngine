@@ -12,18 +12,29 @@
 
 #include <Utils/ECS/Component.h>
 #include <Utils/ECS/GameObject.h>
+#include <Utils/World/SceneDefaultLogic.h>
+#include <Utils/World/SceneBuilder.h>
+#include <Utils/World/ScenePrefabLogic.h>
 
 namespace SR_WORLD_NS {
     Scene::Scene()
         : Super(this)
+        , m_sceneBuilder(new SR_WORLD_NS::SceneBuilder(this))
     { }
 
     Scene::~Scene() {
-        SRAssert(m_isDestroy);
+        SRAssert(m_isDestroyed);
 
         if (Debug::Instance().GetLevel() >= Debug::Level::Low) {
             SR_LOG("Scene::~Scene() : free \"" + GetName() + "\" scene pointer...");
         }
+
+        SRAssert(m_newQueue.empty());
+        SRAssert(m_deleteQueue.empty());
+        SRAssert(m_destroyedComponents.empty());
+        SRAssert(m_freeObjIndices.size() == m_gameObjects.size());
+
+        SR_SAFE_DELETE_PTR(m_sceneBuilder);
     }
 
     GameObject::Ptr Scene::Instance(const std::string& name) {
@@ -31,7 +42,7 @@ namespace SR_WORLD_NS {
             SR_LOG("Scene::Instance() : instance \"" + name + "\" game object at \"" + GetName() + "\" scene.");
         }
 
-        GameObject::Ptr gm = *(new GameObject(name));
+        GameObject::Ptr gm = new GameObject(name);
 
         RegisterGameObject(gm);
 
@@ -48,6 +59,23 @@ namespace SR_WORLD_NS {
 
     Scene::GameObjectPtr Scene::Instance(SR_HTYPES_NS::Marshal &marshal) {
         return GameObject::Load(marshal, this);
+    }
+
+    Scene::Ptr Scene::Empty() {
+        if (Debug::Instance().GetLevel() > Debug::Level::None) {
+            SR_LOG("Scene::Empty() : creating new empty scene...");
+        }
+
+        auto&& scene = SceneAllocator::Instance().Allocate();
+
+        if (!scene) {
+            SR_ERROR("Scene::New() : failed to allocate scene!");
+            return Scene::Ptr();
+        }
+
+        scene->m_logic = new SceneDefaultLogic(scene);
+
+        return scene;
     }
 
     Scene::Ptr Scene::New(const Path& path) {
@@ -103,36 +131,38 @@ namespace SR_WORLD_NS {
     }
 
     bool Scene::Destroy() {
-        if (m_isDestroy) {
+        if (m_isDestroyed) {
             SR_ERROR("Scene::Destroy() : scene \"" + GetName() + "\" already destroyed!");
             return false;
         }
 
+        m_isPreDestroyed = true;
+
         IComponentable::DestroyComponents();
 
-        m_logic->Destroy();
-
-        SR_SAFE_DELETE_PTR(m_logic);
+        m_logic.AutoFree([](auto&& pLogic) {
+            pLogic->Destroy();
+            delete pLogic;
+        });
 
         if (Debug::Instance().GetLevel() > Debug::Level::None) {
+            const uint64_t count = m_gameObjects.size() - m_freeObjIndices.size();
             SR_LOG("Scene::Destroy() : complete unloading!");
-            SR_LOG("Scene::Destroy() : destroying \"" + GetName() + "\" scene contains "+ std::to_string(m_gameObjects.size()) +" game objects...");
+            SR_LOG("Scene::Destroy() : destroying \"" + GetName() + "\" scene contains "+ std::to_string(count) +" game objects...");
         }
 
         for (auto gameObject : GetRootGameObjects()) {
-            gameObject.AutoFree([](GameObject* gm) {
-                gm->Destroy(GAMEOBJECT_DESTROY_BY_SCENE);
-            });
+            gameObject->Destroy();
         }
+
+        Prepare();
 
         if (m_gameObjects.size() != m_freeObjIndices.size()) {
-            SR_WARN(Format("Scene::Destroy() : after destroying the root objects, "
+            SRHalt(SR_UTILS_NS::Format("Scene::Destroy() : after destroying the root objects, "
                                        "there are %i objects left!", m_gameObjects.size() - m_freeObjIndices.size()));
-            m_gameObjects.clear();
         }
-        m_freeObjIndices.clear();
 
-        m_isDestroy = true;
+        m_isDestroyed = true;
         m_isHierarchyChanged = true;
 
         if (Debug::Instance().GetLevel() > Debug::Level::None) {
@@ -151,7 +181,11 @@ namespace SR_WORLD_NS {
         m_rootObjects.reserve(m_gameObjects.size() / 2);
 
         for (auto&& gameObject : m_gameObjects) {
-            if (gameObject && !gameObject->GetParent().Valid()) {
+            if (!gameObject) {
+                continue;
+            }
+
+            if (!gameObject->GetParent()) {
                 m_rootObjects.emplace_back(gameObject);
             }
         }
@@ -180,7 +214,7 @@ namespace SR_WORLD_NS {
     }
 
     bool Scene::SaveAt(const Path& path) {
-        SR_INFO(SR_FORMAT("Scene::SaveAt() : save scene...\n\tPath: %s", path.CStr()));
+        SR_INFO(SR_FORMAT("Scene::SaveAt() : saving scene...\n\tPath: %s", path.CStr()));
 
         if (m_path.GetExtensionView() != path.GetExtensionView()) {
             SR_ERROR("Scene::SaveAt() : different extensions!\n\tSave path: " + path.ToString() + "\n\tScene path: " + m_path.ToString());
@@ -198,20 +232,20 @@ namespace SR_WORLD_NS {
         return true;
     }
 
-    void Scene::Update(float_t dt) {
-        m_logic->Update(dt);
-    }
+    bool Scene::Remove(const GameObject::Ptr& gameObject) {
+        SRAssert(!m_isDestroyed);
 
-    bool Scene::Remove(const GameObject::Ptr &gameObject) {
+        m_deleteQueue.emplace_back(gameObject);
+
         const uint64_t idInScene = gameObject->GetIdInScene();
 
         if (idInScene >= m_gameObjects.size()) {
-            SRHalt("Scene::Remove() : invalid game object id!");
+            SRHalt("Scene::Prepare() : invalid game object id!");
             return false;
         }
 
         if (m_gameObjects.at(idInScene) != gameObject) {
-            SRHalt("Scene::Remove() : game objects do not match!");
+            SRHalt("Scene::Prepare() : game objects do not match!");
             return false;
         }
 
@@ -236,7 +270,9 @@ namespace SR_WORLD_NS {
             auto&& pPrefab = Prefab::Load(path);
 
             if (pPrefab) {
-                return pPrefab->GetData()->Copy(this);
+                auto&& instanced = pPrefab->Instance(this);
+                pPrefab->CheckResourceUsage();
+                return instanced;
             }
 
             return GameObject::Ptr();
@@ -280,22 +316,75 @@ namespace SR_WORLD_NS {
         return m_path.GetBaseName();
     }
 
-    void Scene::RegisterGameObject(const Scene::GameObjectPtr &ptr) {
-        const uint64_t id = m_freeObjIndices.empty() ? m_gameObjects.size() : m_freeObjIndices.front();
+    bool Scene::IsPrefab() const {
+        return m_logic.DynamicCast<ScenePrefabLogic>();
+    }
 
-        ptr->SetIdInScene(id);
-        ptr->SetScene(this);
+    void Scene::RegisterGameObject(const Scene::GameObjectPtr& ptr) {
+        SRAssert(!m_isPreDestroyed);
+        SRAssert(!ptr->GetScene());
 
-        if (m_freeObjIndices.empty()) {
-            m_gameObjects.emplace_back(ptr);
+        m_newQueue.emplace_back(ptr);
+
+        for (auto&& child : ptr->GetChildrenRef()) {
+            RegisterGameObject(child);
         }
-        else {
-            m_gameObjects[m_freeObjIndices.front()] = ptr;
-            m_freeObjIndices.erase(m_freeObjIndices.begin());
-        }
-
-        m_isHierarchyChanged = true;
 
         SetDirty(true);
+        OnChanged();
+    }
+
+    void Scene::Prepare() {
+        if (!m_deleteQueue.empty() || !m_newQueue.empty() || !m_destroyedComponents.empty()) {
+            SetDirty(true);
+            OnChanged();
+        }
+
+        if (m_isPreDestroyed) {
+            for (auto&& gameObject : m_newQueue) {
+                if (!gameObject) {
+                    continue;
+                }
+                gameObject->Destroy();
+            }
+        } 
+        else {
+            for (auto&& gameObject : m_newQueue) {
+                const uint64_t id = m_freeObjIndices.empty() ? m_gameObjects.size() : m_freeObjIndices.front();
+
+                gameObject->SetIdInScene(id);
+                gameObject->SetScene(this);
+
+                if (m_freeObjIndices.empty()) {
+                    m_gameObjects.emplace_back(gameObject);
+                }
+                else {
+                    m_gameObjects[m_freeObjIndices.front()] = gameObject;
+                    m_freeObjIndices.erase(m_freeObjIndices.begin());
+                }
+            }
+        }
+
+        m_newQueue.clear();
+
+        for (auto&& gameObject : m_deleteQueue) {
+            gameObject->DestroyComponents();
+        }
+
+        for (auto&& pComponent : m_destroyedComponents) {
+            pComponent->OnDestroy();
+        }
+
+        m_destroyedComponents.clear();
+
+        for (auto&& gameObject : m_deleteQueue) {
+            gameObject->DestroyImpl();
+        }
+
+        m_deleteQueue.clear();
+    }
+
+    void Scene::Remove(Component* pComponent) {
+        m_destroyedComponents.emplace_back(pComponent);
     }
 }

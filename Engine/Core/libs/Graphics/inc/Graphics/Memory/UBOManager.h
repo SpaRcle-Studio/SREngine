@@ -33,6 +33,8 @@ namespace SR_GRAPH_NS::Memory {
             Descriptor descriptor;
             UBO ubo;
             ShaderInfo shaderInfo;
+
+            void Validate();
         };
 
         VirtualUBOInfo() = default;

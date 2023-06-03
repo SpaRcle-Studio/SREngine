@@ -4,9 +4,12 @@
 
 #include <Utils/Input/InputSystem.h>
 #include <Utils/Platform/Platform.h>
+#include <Utils/Profile/TracyContext.h>
 
 namespace SR_UTILS_NS {
     void Input::Check() {
+        SR_TRACY_ZONE;
+
         if (!m_init) {
             Reset();
             m_init = true;
@@ -16,7 +19,7 @@ namespace SR_UTILS_NS {
         m_mouseScrollCurrent = glm::vec2(0, 0);
 
         m_mousePrev = m_mouse;
-        m_mouse = Helper::Platform::GetMousePos();
+        m_mouse = SR_PLATFORM_NS::GetMousePos();
 
         m_mouseDrag = m_mouse - m_mousePrev;
 
@@ -115,6 +118,10 @@ namespace SR_UTILS_NS {
             key = State::UnPressed;
         }
 
+        ResetMouse();
+    }
+
+    void Input::ResetMouse() {
         m_mousePrev = m_mouse = Helper::Platform::GetMousePos();
         m_mouseScroll = m_mouseScrollCurrent = SR_MATH_NS::FVector2(0.f);
     }
@@ -122,5 +129,13 @@ namespace SR_UTILS_NS {
     void Input::Reload() {
         m_init = false;
         Reset();
+    }
+
+    void Input::LockCursor(bool isLock) {
+        m_isLocked = isLock;
+    }
+
+    bool Input::IsMouseMoved() const {
+        return GetMousePos() != GetPrevMousePos();
     }
 }

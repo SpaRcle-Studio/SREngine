@@ -7,11 +7,13 @@
 
 #include <Utils/macros.h>
 
+#include <type_traits>
 #include <stdio.h>
 #include <iosfwd>
 #include <regex>
 #include <stdexcept>
 #include <string_view>
+#include <shared_mutex>
 #include <cstdarg>
 #include <initializer_list>
 #include <codecvt>
@@ -52,6 +54,8 @@
 #include <chrono>
 #include <random>
 #include <cstdint>
+#include <iomanip>
+#include <condition_variable>
 
 #ifdef SR_SUPPORT_PARALLEL
     #include <omp.h>

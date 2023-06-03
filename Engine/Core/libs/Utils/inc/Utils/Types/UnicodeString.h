@@ -5,7 +5,7 @@
 #ifndef SRENGINE_UNICODESTRING_H
 #define SRENGINE_UNICODESTRING_H
 
-#include <Utils/Locale/Encoding.h>
+#include <Utils/stdInclude.h>
 
 namespace SR_HTYPES_NS {
     class UnicodeString {
@@ -34,6 +34,8 @@ namespace SR_HTYPES_NS {
         SR_NODISCARD operator std::u32string() const noexcept { return m_internal; } /// NOLINT(google-explicit-constructor)
 
     public:
+        void resize(size_t size);
+
         SR_NODISCARD bool empty() const noexcept { return m_internal.empty(); }
         SR_NODISCARD size_t size() const noexcept { return m_internal.size(); }
 

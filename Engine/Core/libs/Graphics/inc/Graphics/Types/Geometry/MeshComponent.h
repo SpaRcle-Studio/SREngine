@@ -5,11 +5,11 @@
 #ifndef SRENGINE_MESHCOMPONENT_H
 #define SRENGINE_MESHCOMPONENT_H
 
-#include <Utils/ECS/Component.h>
 #include <Graphics/Types/Geometry/IndexedMesh.h>
+#include <Graphics/Types/IRenderComponent.h>
 
 namespace SR_GTYPES_NS {
-    class MeshComponent : public IndexedMesh, public SR_UTILS_NS::Component {
+    class MeshComponent : public IndexedMesh, public SR_GTYPES_NS::IRenderComponent {
     protected:
         ~MeshComponent() override = default;
 
@@ -19,7 +19,6 @@ namespace SR_GTYPES_NS {
 
     public:
         Component* CopyComponent() const override;
-        IResource* CopyResource(IResource* destination) const override;
 
         SR_MATH_NS::FVector3 GetBarycenter() const override;
 
@@ -27,8 +26,8 @@ namespace SR_GTYPES_NS {
         void OnAttached() override;
         void OnDestroy() override;
         void OnMatrixDirty() override;
-        void OnEnable() override;
-        void OnDisable() override;
+
+        SR_HTYPES_NS::Marshal::Ptr Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SR_UTILS_NS::SavableFlags flags) const override;
 
         SR_NODISCARD bool ExecuteInEditMode() const override;
         SR_NODISCARD SR_FORCE_INLINE bool IsCanUpdate() const noexcept override { return false; }
@@ -53,14 +52,7 @@ namespace SR_GTYPES_NS {
             return m_translation;
         }
 
-        SR_NODISCARD SR_UTILS_NS::Path InitializeResourcePath() const override;
-
     protected:
-        SR_NODISCARD RenderScenePtr GetRenderScene();
-
-    protected:
-        RenderScenePtr m_renderScene;
-
         std::string m_geometryName;
 
         SR_MATH_NS::Matrix4x4 m_modelMatrix = SR_MATH_NS::Matrix4x4::Identity();

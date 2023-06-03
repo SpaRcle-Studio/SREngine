@@ -56,8 +56,16 @@ namespace Framework::Graphics::GUI {
             flags |= ImGuiWindowFlags_::ImGuiWindowFlags_NoResize;
         }
 
+        auto&& pPreviousViewport = ImGui::GetWindowViewport();
+
         bool open = m_open;
         if (ImGui::Begin(m_name.c_str(), &open, flags)) {
+            auto&& pCurrentViewport = ImGui::GetWindowViewport();
+
+            if (pPreviousViewport != pCurrentViewport) {
+                ViewportsTableManager::Instance().RegisterWidget(this, pCurrentViewport);
+            }
+
             if (!open) {
                 Close();
             }

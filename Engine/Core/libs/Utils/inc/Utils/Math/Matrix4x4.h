@@ -32,6 +32,7 @@ namespace SR_MATH_NS {
         explicit constexpr Matrix4x4(const glm::mat4& mat) noexcept;
         explicit Matrix4x4(glm::mat4&& mat) noexcept;
 
+        Matrix4x4(const FVector3& translate, const Quaternion& rotation) noexcept;
         Matrix4x4(const FVector3& translate, const Quaternion& rotation, const FVector3& scale) noexcept;
         Matrix4x4(const FVector3& translate, const Quaternion& rotation, const FVector3& scale, const FVector3& skew) noexcept;
 
@@ -43,8 +44,20 @@ namespace SR_MATH_NS {
             return Matrix4x4(0.f, angles.ToQuat(), 1.f);
         }
 
+        static Matrix4x4 Perspective(float_t FOV, float_t aspect, float_t nearValue, float_t farValue) {
+            return Matrix4x4(glm::perspective(FOV, aspect, nearValue, farValue));
+        }
+
         static Matrix4x4 FromEulers(const FVector3& eulers) {
             return RotationYawPitchRoll(eulers.Radians());
+        }
+
+        static Matrix4x4 Ortho(Unit left, Unit right, Unit bottom, Unit top, Unit zNear, Unit zFar) {
+            return Matrix4x4(glm::ortho(left, right, bottom, top, zNear, zFar));
+        }
+
+        static Matrix4x4 LookAt(const SR_MATH_NS::FVector3& eye, const SR_MATH_NS::FVector3& center, const SR_MATH_NS::FVector3& up) {
+            return Matrix4x4(glm::lookAt(eye.ToGLM(), center.ToGLM(), up.ToGLM()));
         }
 
         static Matrix4x4 FromEulers(const Quaternion& quaternion) {
@@ -69,6 +82,10 @@ namespace SR_MATH_NS {
 
         SR_NODISCARD Matrix4x4 Rotate(const FVector3& angle) const {
             return Matrix4x4(self * mat4_cast(angle.ToQuat().ToGLM()));
+        }
+
+        SR_NODISCARD Matrix4x4 Rotate(const SR_MATH_NS::Quaternion& q) const {
+            return Matrix4x4(*this * q.ToMat4x4());
         }
 
         SR_NODISCARD const glm::mat4& ToGLM() const {
@@ -116,6 +133,24 @@ namespace SR_MATH_NS {
                     glm::vec3(self[0]) / static_cast<float>(scale[0]),
                     glm::vec3(self[1]) / static_cast<float>(scale[1]),
                     glm::vec3(self[2]) / static_cast<float>(scale[2]));
+
+            quaternion = glm::quat_cast(rotMtx);
+
+            return true;
+        }
+
+        bool Decompose(FVector3& translation, Quaternion& quaternion) const {
+            translation = glm::vec3(self[3]);
+
+            auto&& scaleX = glm::length(glm::vec3(self[0]));
+            auto&& scaleY = glm::length(glm::vec3(self[1]));
+            auto&& scaleZ = glm::length(glm::vec3(self[2]));
+
+            const glm::mat3 rotMtx(
+                    glm::vec3(self[0]) / static_cast<float_t>(scaleX),
+                    glm::vec3(self[1]) / static_cast<float_t>(scaleY),
+                    glm::vec3(self[2]) / static_cast<float_t>(scaleZ)
+            );
 
             quaternion = glm::quat_cast(rotMtx);
 
@@ -209,6 +244,14 @@ namespace SR_MATH_NS {
 
         SR_NODISCARD FVector3 GetEulers() const {
             return GetQuat().EulerAngle();
+        }
+
+        SR_FORCE_INLINE const SR_MATH_NS::FVector4& operator[](int32_t row) const {
+            return value[row];
+        }
+
+        SR_FORCE_INLINE SR_MATH_NS::FVector4& operator[](int32_t row) {
+            return value[row];
         }
 
         Matrix4x4 operator*(const Matrix4x4& mat) const;

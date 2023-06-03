@@ -11,51 +11,48 @@ namespace SR_UTILS_NS {
     { }
 
     Prefab::~Prefab() {
-        if (m_data) {
-            m_data.AutoFree([](auto&& pData) {
-                pData->Destroy();
-            });
-        }
+        m_data.AutoFree([](auto&& pData) {
+            pData->Destroy();
+        });
     }
 
     Prefab* Prefab::Load(const Path& rawPath) {
-        SR_GLOBAL_LOCK
+        Prefab* pResource = nullptr;
 
-        Path&& path = Path(rawPath).RemoveSubPath(ResourceManager::Instance().GetResPath());
+        ResourceManager::Instance().Execute([&pResource, &rawPath]() {
+            Path&& path = Path(rawPath).RemoveSubPath(ResourceManager::Instance().GetResPath());
 
-        if (auto&& pResource = ResourceManager::Instance().Find<Prefab>(path)) {
-            return pResource;
-        }
+            if ((pResource = ResourceManager::Instance().Find<Prefab>(path))) {
+                return;
+            }
 
-        auto pResource = new Prefab();
+            pResource = new Prefab();
 
-        pResource->SetId(path, false /** auto register */);
+            pResource->SetId(path, false /** auto register */);
 
-        if (!pResource->Reload()) {
-            SR_ERROR("RawMesh::Load() : failed to load prefab! \n\tPath: " + path.ToString());
-            delete pResource;
-            return nullptr;
-        }
+            if (!pResource->Reload()) {
+                SR_ERROR("RawMesh::Load() : failed to load prefab! \n\tPath: " + path.ToString());
+                delete pResource;
+                pResource = nullptr;
+                return;
+            }
 
-        /// отложенная ручная регистрация
-        ResourceManager::Instance().RegisterResource(pResource);
+            /// отложенная ручная регистрация
+            ResourceManager::Instance().RegisterResource(pResource);
+        });
 
         return pResource;
     }
 
     bool Prefab::Unload() {
-        SR_LOCK_GUARD
-
-        if (m_data) {
-            m_data->Destroy();
-        }
+        m_data.AutoFree([](auto&& pData) {
+            pData->Destroy();
+        });
 
         return IResource::Unload();
     }
 
     bool Prefab::Load() {
-        SR_LOCK_GUARD
-
         Path&& path = Path(GetResourceId());
         if (!path.IsAbs()) {
             path = ResourceManager::Instance().GetResPath().Concat(path);
@@ -75,6 +72,17 @@ namespace SR_UTILS_NS {
             return false;
         }
 
+
         return IResource::Load();
+    }
+
+    Prefab::GameObjectPtr Prefab::Instance(const Prefab::ScenePtr& scene) const {
+        if (m_data) {
+            auto&& instanced = m_data->Copy(scene);
+            instanced->SetPrefab(const_cast<Prefab*>(this), true);
+            return instanced;
+        }
+
+        return Prefab::GameObjectPtr();
     }
 }

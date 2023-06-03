@@ -9,7 +9,6 @@
 #include <Utils/Common/Hashes.h>
 
 #include <Graphics/Types/Texture.h>
-#include <Graphics/Render/Render.h>
 #include <Graphics/Render/RenderContext.h>
 #include <Graphics/Pipeline/Environment.h>
 #include <Graphics/Types/Shader.h>
@@ -19,6 +18,7 @@
 namespace SR_GRAPH_NS::Types {
     Shader::Shader()
         : IResource(SR_COMPILE_TIME_CRC32_TYPE_NAME(Shader), true /** auto remove */)
+        , m_manager(Memory::ShaderProgramManager::Instance())
     { }
 
     Shader::~Shader() {
@@ -29,7 +29,9 @@ namespace SR_GRAPH_NS::Types {
     }
 
     bool Shader::Init() {
-        if (m_isInit) {
+        SR_TRACY_ZONE;
+
+        if (m_isCalculated) {
             SRHalt("Double shader initialization!");
             return true;
         }
@@ -67,30 +69,37 @@ namespace SR_GRAPH_NS::Types {
             SetResourceHash(hash);
         }
 
-        m_isInit = true;
+        m_isCalculated = true;
 
         return true;
     }
 
-    bool Shader::Use() noexcept {
+    ShaderBindResult Shader::Use() noexcept {
+        SR_TRACY_ZONE;
+
         if (m_hasErrors) {
-            return false;
+            return ShaderBindResult::Failed;
         }
 
-        if (!m_isInit && !Init()) {
+        if (!m_isCalculated && !Init()) {
             SR_ERROR("Shader::Use() : failed to initialize shader!");
-            return false;
+            return ShaderBindResult::Failed;
         }
 
-        switch (Memory::ShaderProgramManager::Instance().BindProgram(m_shaderProgram)) {
-            case Memory::ShaderProgramManager::BindResult::Success:
-            case Memory::ShaderProgramManager::BindResult::Duplicated:
+        SRAssert(GetRenderContext());
+
+        auto&& bindResult = Memory::ShaderProgramManager::Instance().BindProgram(m_shaderProgram);
+        switch (bindResult) {
+            case ShaderBindResult::Success:
+            case ShaderBindResult::Duplicated:
+            case ShaderBindResult::ReAllocated:
                 GetRenderContext()->SetCurrentShader(this);
-                return true;
-            case Memory::ShaderProgramManager::BindResult::Failed:
+                SR_FALLTHROUGH;
             default:
-                return false;
+                break;
         }
+
+        return bindResult;
     }
 
     void Shader::UnUse() noexcept {
@@ -103,16 +112,20 @@ namespace SR_GRAPH_NS::Types {
     }
 
     void Shader::FreeVideoMemory() {
-        if (m_isInit) {
+        if (m_isCalculated) {
             SR_SHADER("Shader::FreeVideoMemory() : free \"" + GetResourceId() + "\" video memory...");
 
             if (!Memory::ShaderProgramManager::Instance().FreeProgram(&m_shaderProgram)) {
                 SR_ERROR("Shader::Free() : failed to free shader program! \n\tPath: " + GetResourcePath().ToString());
             }
+
+            m_isCalculated = false;
         }
     }
 
     Shader* Shader::Load(const SR_UTILS_NS::Path &rawPath) {
+        SR_TRACY_ZONE;
+
         auto&& resourceManager = SR_UTILS_NS::ResourceManager::Instance();
 
         SR_UTILS_NS::Path&& path = SR_UTILS_NS::Path(rawPath).RemoveSubPath(resourceManager.GetResPath());
@@ -121,7 +134,9 @@ namespace SR_GRAPH_NS::Types {
             return pShader;
         }
 
-        SR_LOG("Shader::Load() : load \"" + path.ToString() + "\" shader...");
+        if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::Medium) {
+            SR_LOG("Shader::Load() : load \"" + path.ToString() + "\" shader...");
+        }
 
         if (!SRVerifyFalse2(path.Empty(), "Invalid shader path!")) {
             SR_WARN("Shader::Load() : failed to load shader!");
@@ -157,7 +172,7 @@ namespace SR_GRAPH_NS::Types {
             return false;
         }
 
-        if (!m_isInit && !Init()) {
+        if (!m_isCalculated && !Init()) {
             SR_ERROR("Shader::Use() : failed to initialize shader!");
             return false;
         }
@@ -218,7 +233,7 @@ namespace SR_GRAPH_NS::Types {
     }
 
     bool Shader::Ready() const {
-        return !m_hasErrors && m_isInit && m_shaderProgram != SR_ID_INVALID;
+        return !m_hasErrors && m_isCalculated && m_shaderProgram != SR_ID_INVALID;
     }
 
     uint64_t Shader::GetUBOBlockSize() const {
@@ -247,7 +262,9 @@ namespace SR_GRAPH_NS::Types {
     }
 
     bool Shader::Flush() const {
-        if (!m_isInit || m_hasErrors) {
+        SR_TRACY_ZONE;
+
+        if (!m_isCalculated || m_hasErrors) {
             return false;
         }
 
@@ -286,7 +303,7 @@ namespace SR_GRAPH_NS::Types {
     }
 
     bool Shader::Load() {
-        SR_LOCK_GUARD
+        SR_TRACY_ZONE;
 
         SR_UTILS_NS::Path&& path = SR_UTILS_NS::Path(GetResourceId());
 
@@ -339,11 +356,9 @@ namespace SR_GRAPH_NS::Types {
     }
 
     bool Shader::Unload() {
-        SR_LOCK_GUARD
-
         bool hasErrors = !IResource::Unload();
 
-        m_isInit = false;
+        m_isCalculated = false;
         m_hasErrors = false;
 
         m_uniformBlock.DeInit();
@@ -360,5 +375,20 @@ namespace SR_GRAPH_NS::Types {
 
     SR_SRSL_NS::ShaderType Shader::GetType() const noexcept {
         return m_type;
+    }
+
+    bool Shader::IsAllowedToRevive() const {
+        return true;
+    }
+
+    void Shader::ReviveResource() {
+        m_isCalculated = false;
+        m_isRegistered = false;
+        m_hasErrors = false;
+        IResource::ReviveResource();
+    }
+
+    bool Shader::IsAvailable() const {
+        return m_manager.IsAvailable(m_shaderProgram);
     }
 }

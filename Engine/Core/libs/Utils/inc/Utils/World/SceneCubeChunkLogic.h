@@ -20,6 +20,8 @@ namespace SR_WORLD_NS {
         void Destroy() override;
         void Update(float_t dt) override;
 
+        void PostLoad() override;
+
         bool Save(const Path& path) override;
         bool Load(const Path& path) override;
 
@@ -27,6 +29,7 @@ namespace SR_WORLD_NS {
         void SetObserver(const GameObjectPtr& target);
 
         bool ReloadChunks();
+        void UpdateDebug();
 
         SR_NODISCARD const GameObjects& GetGameObjectsAtChunk(const SR_MATH_NS::IVector3& region, const SR_MATH_NS::IVector3& chunk) const;
         SR_NODISCARD Chunk* GetCurrentChunk() const;
@@ -36,8 +39,11 @@ namespace SR_WORLD_NS {
         SR_NODISCARD bool IsChunkLoaded(const SR_MATH_NS::IVector3& region, const SR_MATH_NS::IVector3& chunk) const;
         SR_NODISCARD bool ScopeCheckFunction(int32_t x, int32_t y, int32_t z) const;
         SR_NODISCARD Path GetRegionsPath() const;
+        SR_NODISCARD std::pair<SR_MATH_NS::IVector3, SR_MATH_NS::IVector3> GetRegionAndChunk(const SR_MATH_NS::FVector3& pos) const;
 
     private:
+        SR_NODISCARD SR_MATH_NS::IVector3 CalculateCurrentChunk() const;
+
         bool ReloadConfig();
 
         void CheckShift(const SR_MATH_NS::IVector3& chunk);
@@ -46,6 +52,10 @@ namespace SR_WORLD_NS {
         void SaveRegion(Region* pRegion, SR_HTYPES_NS::DataStorage* pContext) const;
 
     private:
+        std::list<int64_t> m_cubesIds;
+        std::list<int64_t> m_planesIds;
+        bool m_debugDirty = false;
+
         World::Tensor m_tensor;
 
         Regions m_regions;

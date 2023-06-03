@@ -9,11 +9,13 @@
 #include <Utils/ResourceManager/ResourceManager.h>
 #include <Utils/FileSystem/FileSystem.h>
 #include <Utils/Events/EventManager.h>
+#include <Utils/Platform/Platform.h>
 
 #include <Graphics/Pipeline/Environment.h>
 #include <Graphics/Pipeline/Vulkan/VulkanMemory.h>
 #include <Graphics/Pipeline/Vulkan/AbstractCasts.h>
 #include <Graphics/Pipeline/Vulkan/VulkanImGUI.h>
+#include <Graphics/Pipeline/Vulkan/VulkanTracy.h>
 
 #include <EvoVulkan/VulkanKernel.h>
 #include <EvoVulkan/Tools/VulkanInsert.h>
@@ -80,13 +82,15 @@ namespace SR_GRAPH_NS {
 
     class SRVulkan : public EvoVulkan::Core::VulkanKernel {
     protected:
-        EvoVulkan::Core::RenderResult Render() override;
         ~SRVulkan() override = default;
 
     public:
         bool OnResize() override;
 
+        void PollWindowEvents() override;
+
         SR_NODISCARD bool IsWindowValid() const override;
+        SR_NODISCARD bool IsRayTracingRequired() const noexcept override;
 
         bool BuildCmdBuffers() override {
             return true;
@@ -96,15 +100,20 @@ namespace SR_GRAPH_NS {
             return true;
         }
 
-        bool IsRayTracingRequired() const noexcept override;
-
         void SetGUIEnabled(bool enabled) override;
 
         bool Destroy() override {
             return EvoVulkan::Core::VulkanKernel::Destroy();
         }
+
+    private:
+        EvoVulkan::Core::RenderResult Render() override;
+        EvoVulkan::Core::FrameResult PrepareFrame() override;
+        EvoVulkan::Core::FrameResult SubmitFrame() override;
+
     private:
         VkCommandBuffer m_submitCmdBuffs[2] = {0};
+
     };
 
     class Vulkan : public Environment {
@@ -143,15 +152,19 @@ namespace SR_GRAPH_NS {
         bool m_enableValidationLayers = false;
 
     public:
-        [[nodiscard]] SR_FORCE_INLINE PipelineType GetType()       const override { return PipelineType::Vulkan; }
-        [[nodiscard]] SR_FORCE_INLINE uint8_t  GetCountBuildIter() const override { return m_kernel->GetCountBuildIterations(); }
-        [[nodiscard]] VulkanTypes::VkImGUI* GetVkImGUI() const { return m_imgui; }
-        [[nodiscard]] std::string GetPipeLineName()   const override { return "Vulkan";         }
-        [[nodiscard]] VulkanTools::MemoryManager* GetMemoryManager() const { return m_memory; }
-    public:
+        SR_NODISCARD SR_FORCE_INLINE PipelineType GetType()       const override { return PipelineType::Vulkan; }
+        SR_NODISCARD SR_FORCE_INLINE uint8_t  GetCountBuildIter() const override { return m_kernel->GetCountBuildIterations(); }
+        SR_NODISCARD VulkanTypes::VkImGUI* GetVkImGUI() const { return m_imgui; }
+        SR_NODISCARD std::string GetPipeLineName()   const override { return "Vulkan";         }
+        SR_NODISCARD VulkanTools::MemoryManager* GetMemoryManager() const { return m_memory; }
+        SR_NODISCARD EvoVulkan::Core::VulkanKernel* GetKernel() const { return m_kernel; }
+        SR_NODISCARD void* GetCurrentRenderPassHandle() const override;
+
         uint64_t GetVRAMUsage() override;
 
         bool OnResize(const SR_MATH_NS::UVector2& size) override;
+        void UpdateMultiSampling() override;
+        void PrepareFrame() override;
 
         bool PreInit(
                 unsigned int smooth_samples,
@@ -161,6 +174,8 @@ namespace SR_GRAPH_NS {
 
         bool Init(const WindowPtr& windowPtr, int swapInterval) override;
         bool PostInit() override;
+
+        void DeInitialize() override;
 
         bool InitGUI() override;
         bool StopGUI() override;
@@ -176,7 +191,7 @@ namespace SR_GRAPH_NS {
         bool BeginDrawGUI() override;
         void EndDrawGUI() override;
 
-        Helper::Math::IVector2 GetScreenSize() const override;
+        SR_MATH_NS::IVector2 GetScreenSize() const override;
 
         SR_NODISCARD InternalTexture GetTexture(uint32_t id) const override;
 
@@ -223,11 +238,7 @@ namespace SR_GRAPH_NS {
         }
         //[[nodiscard]] void* GetDescriptorSetFromDTDSet(uint32_t id) const override;
 
-        void SetBuildState(const bool& isBuild) override {
-            if (isBuild)
-                this->m_kernel->SetFramebuffersQueue(m_framebuffersQueue);
-            m_needReBuild = !isBuild;
-        }
+        void SetBuildState(bool isBuild) override;
 
         [[nodiscard]] SR_FORCE_INLINE bool IsGUISupport()       const override { return true; }
         [[nodiscard]] SR_FORCE_INLINE std::string GetVendor()   const override { return m_kernel->GetDevice()->GetName(); }
@@ -242,20 +253,30 @@ namespace SR_GRAPH_NS {
         void SetViewport(int32_t width, int32_t height) override;
         void SetScissor(int32_t width, int32_t height) override;
 
+        SR_FORCE_INLINE bool BeginCmdBuffer() override {
+            vkBeginCommandBuffer(m_currentCmd, &m_cmdBufInfo);
+            return true;
+        }
+
+        uint8_t GetFramebufferSampleCount() const override;
+
         SR_FORCE_INLINE bool BeginRender() override {
             if (!m_renderPassBI.pClearValues) {
                 SRAssert2Once(false, "pClearValues is nullptr! Please, call ClearBuffers before BeginRender");
                 return false;
             }
 
-            vkBeginCommandBuffer(m_currentCmd, &m_cmdBufInfo);
             vkCmdBeginRenderPass(m_currentCmd, &m_renderPassBI, VK_SUBPASS_CONTENTS_INLINE);
 
             return true;
         }
+
+        SR_FORCE_INLINE void EndCmdBuffer() override {
+            vkEndCommandBuffer(m_currentCmd);
+        }
+
         SR_FORCE_INLINE void EndRender() override {
             vkCmdEndRenderPass(m_currentCmd);
-            vkEndCommandBuffer(m_currentCmd);
         }
 
         SR_FORCE_INLINE void ClearFramebuffersQueue() override {
@@ -278,51 +299,25 @@ namespace SR_GRAPH_NS {
             }
         }
 
-        SR_FORCE_INLINE void ClearBuffers(float r, float g, float b, float a, float depth, uint8_t colorCount) override {
-            const bool multisamplingEnabled = m_currentVkFramebuffer ? m_currentVkFramebuffer->IsMultisampleEnabled() : m_kernel->MultisamplingEnabled();
-            colorCount *= multisamplingEnabled ? 2 : 1;
-
-            this->m_clearValues.resize(colorCount + 1);
-
-            for (uint8_t i = 0; i < colorCount; ++i)
-                m_clearValues[i] = { .color = {{ r, g, b, a }} };
-
-            m_clearValues[colorCount] = VkClearValue { .depthStencil = { depth, 0 } };
-
-            m_renderPassBI.clearValueCount = colorCount + 1;
-            m_renderPassBI.pClearValues    = m_clearValues.data();
-        }
-
-        SR_FORCE_INLINE void ClearBuffers(const std::vector<SR_MATH_NS::FColor>& colors, float_t depth) override {
-            const bool multisamplingEnabled = m_currentVkFramebuffer ? m_currentVkFramebuffer->IsMultisampleEnabled() : m_kernel->MultisamplingEnabled();
-            uint8_t colorCount = static_cast<uint8_t>(colors.size());
-            colorCount *= multisamplingEnabled ? 2 : 1;
-
-            m_clearValues.resize(colorCount + 1);
-
-            for (uint8_t i = 0; i < colorCount; ++i) {
-                auto&& color = colors[i / (multisamplingEnabled ? 2 : 1)];
-
-                m_clearValues[i] = {
-                    .color = { {
-                        static_cast<float>(color.r),
-                        static_cast<float>(color.g),
-                        static_cast<float>(color.b),
-                        static_cast<float>(color.a)
-                    }
-                } };
-            }
-
-            m_clearValues[colorCount] = VkClearValue { .depthStencil = { depth, 0 } };
-
-            m_renderPassBI.clearValueCount = colorCount + 1;
-            m_renderPassBI.pClearValues    = m_clearValues.data();
-        }
+        void ClearBuffers(float r, float g, float b, float a, float depth, uint8_t colorCount) override;
+        void ClearBuffers(const std::vector<SR_MATH_NS::FColor>& colors, float_t depth) override;
 
         SR_FORCE_INLINE void DrawFrame() override {
-            if (m_kernel->NextFrame() == EvoVulkan::Core::RenderResult::Fatal) {
-                SR_UTILS_NS::EventManager::Instance().Broadcast(SR_UTILS_NS::EventManager::Event::FatalError);
-                m_hasErrors = true;
+            switch (m_kernel->NextFrame()) {
+                case EvoVulkan::Core::RenderResult::Fatal:
+                    SR_UTILS_NS::EventManager::Instance().Broadcast(SR_UTILS_NS::EventManager::Event::FatalError);
+                    m_hasErrors = true;
+                    break;
+                case EvoVulkan::Core::RenderResult::Error:
+                    SR_ERROR("Vulkan::DrawFrame() : ex error has been occurred!");
+                    m_hasErrors = true;
+                    break;
+                case EvoVulkan::Core::RenderResult::DeviceLost:
+                    SR_ERROR("Vulkan::DrawFrame() : device lost! Terminate...");
+                    SR_PLATFORM_NS::Terminate();
+                    break;
+                default:
+                    break;
             }
         }
 
@@ -350,8 +345,6 @@ namespace SR_GRAPH_NS {
 
             return true;
         }
-
-        SR_NODISCARD uint8_t GetSmoothSamplesCount() const override;
 
         bool CompileShader(
                 const std::map<ShaderStage, SR_UTILS_NS::Path>& stages,
@@ -384,6 +377,8 @@ namespace SR_GRAPH_NS {
             m_currentShader->Bind(m_currentCmd);
         }
 
+        void OnMultiSampleChanged() override;
+
         bool CreateFrameBuffer(const SR_MATH_NS::IVector2& size, int32_t& FBO, DepthLayer* pDepth, std::vector<ColorLayer>& colors, uint8_t sampleCount) override;
 
         SR_FORCE_INLINE bool DeleteShader(SR_SHADER_PROGRAM shaderProgram) override {
@@ -400,7 +395,7 @@ namespace SR_GRAPH_NS {
             m_currentLayout   = VK_NULL_HANDLE;
         }
     public:
-        virtual SR_FORCE_INLINE void ResetDescriptorSet() {
+        SR_FORCE_INLINE void ResetDescriptorSet() override {
             Environment::ResetDescriptorSet();
             m_currentDesrSets = VK_NULL_HANDLE;
         }
@@ -498,30 +493,27 @@ namespace SR_GRAPH_NS {
 
             return true;
         }
-        SR_FORCE_INLINE int32_t AllocDescriptorSet(const std::set<DescriptorType>& types) override {
+        SR_FORCE_INLINE int32_t AllocDescriptorSet(std::vector<uint64_t> types) override {
+            types = VulkanTools::CastAbsDescriptorTypeToVk(std::move(types));
+
+		#ifdef SR_DEBUG
             if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::Full) {
                 SR_GRAPH_LOG("Vulkan::AllocDescriptorSet() : allocate new descriptor set...");
             }
+		#endif
 
-            auto&& vkTypes = VulkanTools::CastAbsDescriptorTypeToVk(types);
-            if (vkTypes.size() != types.size()) {
-                SR_ERROR("Vulkan::AllocDescriptorSet() : failed to cast abstract descriptor types to vulkan descriptor types!");
+            if (m_currentShaderID < 0) {
+                SR_ERROR("Vulkan::AllocDescriptorSet() : shader program do not set!");
+                SRHaltOnce0();
                 return SR_ID_INVALID;
             }
-            else {
-                if (m_currentShaderID < 0) {
-                    SR_ERROR("Vulkan::AllocDescriptorSet() : shader program do not set!");
-                    SRHaltOnce0();
-                    return SR_ID_INVALID;
-                }
 
-                if (auto&& id = m_memory->AllocateDescriptorSet(m_currentShaderID, vkTypes); id >= 0) {
-                    return id;
-                }
-                else {
-                    SR_ERROR("Vulkan::AllocDescriptorSet() : failed to allocate descriptor set!");
-                    return SR_ID_INVALID;
-                }
+            if (auto&& id = m_memory->AllocateDescriptorSet(m_currentShaderID, types); id >= 0) {
+                return id;
+            }
+            else {
+                SR_ERROR("Vulkan::AllocDescriptorSet() : failed to allocate descriptor set!");
+                return SR_ID_INVALID;
             }
         }
         SR_FORCE_INLINE int32_t AllocDescriptorSetFromTexture(uint32_t textureID) override {
@@ -535,8 +527,11 @@ namespace SR_GRAPH_NS {
                 return -1;
             }
 
-            const std::set<DescriptorType> types = { DescriptorType::CombinedImage };
-            int32_t descriptorSetID = m_memory->AllocateDescriptorSet(m_currentShaderID, VulkanTools::CastAbsDescriptorTypeToVk(types));
+            const static std::vector<uint64_t> types = {
+                    static_cast<uint64_t>(VulkanTools::CastAbsDescriptorTypeToVk(DescriptorType::CombinedImage))
+            };
+
+            int32_t descriptorSetID = m_memory->AllocateDescriptorSet(m_currentShaderID, types);
             if (descriptorSetID < 0) {
                 SR_ERROR("Vulkan::AllocDescriptorSetFromTexture() : failed to allocate descriptor set!");
                 return -1;

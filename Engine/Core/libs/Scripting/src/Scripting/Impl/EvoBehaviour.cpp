@@ -5,12 +5,8 @@
 #include <Scripting/Impl/EvoBehaviour.h>
 
 namespace SR_SCRIPTING_NS {
-    EvoBehaviour::~EvoBehaviour() {
-        DestroyScript();
-    }
-
     bool EvoBehaviour::Load() {
-        SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
+        SR_EVO_SCRIPT_MANAGER_LOCK_CONTEXT
 
         if (m_script) {
             SR_ERROR("EvoBehaviour::Load() : script is already loaded!");
@@ -19,47 +15,48 @@ namespace SR_SCRIPTING_NS {
 
         m_hasErrors = false;
 
-        auto&& path = GetResourcePath();
-
-        if (!path.empty()) {
-            auto&& compiler = GlobalEvoCompiler::Instance();
-
-            m_script = EvoScript::Script::Allocate(path.GetWithoutExtension(), compiler.GetGenerator()->GetAddresses());
-
-            auto&& fullPath = GetAssociatedPath().Concat(path).GetWithoutExtension();
-            if (!m_script || !m_script->Load(fullPath, compiler, true)) {
-                SR_ERROR("EvoBehaviour::Load() : failed to load script! \n\tPath: " + path.ToString());
-                SR_SAFE_DELETE_PTR(m_script);
-                m_hasErrors = true;
-                return false;
-            }
+        if (auto&& path = GetResourcePath(); !path.empty()) {
+            m_script = EvoScriptManager::Instance().Load(path);
         }
 
+        SRAssert(!m_behaviourContext);
+
         InitHooks();
+        SwitchContext();
 
         if (m_initBehaviour) {
-            m_initBehaviour();
+            m_behaviourContext = m_initBehaviour();
+        }
+
+        if (!m_behaviourContext) {
+            SR_ERROR("Failed to initialize behaviour context!");
+            return false;
         }
 
         SetGameObject();
 
-        SR_LOG("EvoBehaviour::Load() : behaviour successfully initialized!");
+        if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::High) {
+            SR_LOG("EvoBehaviour::Load() : behaviour successfully initialized!");
+        }
 
-        return Behaviour::Load();
+        return Behaviour::Load() && Behaviour::PostLoad();
     }
 
     bool EvoBehaviour::Unload() {
-        SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
+        SR_EVO_SCRIPT_MANAGER_LOCK_CONTEXT
 
         bool hasErrors = !Behaviour::Unload();
 
-        if (m_releaseBehaviour) {
-            m_releaseBehaviour();
+        DestroyScript();
+
+        /// чтобы скрипт занаво отработал логику после перезагрузки,
+        /// делаем такой маневр
+        m_isStarted = false;
+        m_isAwake = false;
+
+        if (auto&& pParent = GetParent()) {
+            pParent->SetDirty(true);
         }
-
-        DeInitHooks();
-
-        SR_SAFE_DELETE_PTR(m_script)
 
         return !hasErrors;
     }
@@ -95,6 +92,7 @@ namespace SR_SCRIPTING_NS {
 
     void EvoBehaviour::DeInitHooks() {
         m_initBehaviour = nullptr;
+        m_switchContext = nullptr;
         m_releaseBehaviour = nullptr;
         m_getProperties = nullptr;
         m_getProperty = nullptr;
@@ -114,33 +112,36 @@ namespace SR_SCRIPTING_NS {
     }
 
     void EvoBehaviour::InitHooks() {
-        m_initBehaviour = m_script->GetFunction<EvoScript::Typedefs::InitBehaviourFnPtr>("InitBehaviour");
-        m_releaseBehaviour = m_script->GetFunction<EvoScript::Typedefs::ReleaseBehaviourFnPtr>("ReleaseBehaviour");
-        m_getProperties = m_script->GetFunction<EvoScript::Typedefs::GetPropertiesFnPtr>("GetProperties");
-        m_getProperty = m_script->GetFunction<EvoScript::Typedefs::GetPropertyFnPtr>("GetProperty");
-        m_setProperty = m_script->GetFunction<EvoScript::Typedefs::SetPropertyFnPtr>("SetProperty");
+        m_initBehaviour = GetFunction<EvoScript::Typedefs::InitBehaviourFnPtr>("InitBehaviour");
+        m_switchContext = GetFunction<EvoScript::Typedefs::SwitchContextFnPtr>("SwitchContext");
+        m_releaseBehaviour = GetFunction<EvoScript::Typedefs::ReleaseBehaviourFnPtr>("ReleaseBehaviour");
+        m_getProperties = GetFunction<EvoScript::Typedefs::GetPropertiesFnPtr>("GetProperties");
+        m_getProperty = GetFunction<EvoScript::Typedefs::GetPropertyFnPtr>("GetProperty");
+        m_setProperty = GetFunction<EvoScript::Typedefs::SetPropertyFnPtr>("SetProperty");
 
-        m_awake = m_script->GetFunction<EvoScript::Typedefs::AwakeFnPtr>("Awake");
-        m_onEnable = m_script->GetFunction<EvoScript::Typedefs::OnEnableFnPtr>("OnEnable");
-        m_onDisable = m_script->GetFunction<EvoScript::Typedefs::OnDisableFnPtr>("OnDisable");
-        m_start = m_script->GetFunction<EvoScript::Typedefs::StartFnPtr>("Start");
-        m_update = m_script->GetFunction<EvoScript::Typedefs::UpdateFnPtr>("Update");
-        m_fixedUpdate = m_script->GetFunction<EvoScript::Typedefs::FixedUpdateFnPtr>("FixedUpdate");
+        m_awake = GetFunction<EvoScript::Typedefs::AwakeFnPtr>("Awake");
+        m_onEnable = GetFunction<EvoScript::Typedefs::OnEnableFnPtr>("OnEnable");
+        m_onDisable = GetFunction<EvoScript::Typedefs::OnDisableFnPtr>("OnDisable");
+        m_start = GetFunction<EvoScript::Typedefs::StartFnPtr>("Start");
+        m_update = GetFunction<EvoScript::Typedefs::UpdateFnPtr>("Update");
+        m_fixedUpdate = GetFunction<EvoScript::Typedefs::FixedUpdateFnPtr>("FixedUpdate");
 
-        m_collisionEnter = m_script->GetFunction<CollisionFnPtr>("OnCollisionEnter");
-        m_collisionStay = m_script->GetFunction<CollisionFnPtr>("OnCollisionStay");
-        m_collisionExit = m_script->GetFunction<CollisionFnPtr>("OnCollisionExit");
-        m_triggerEnter = m_script->GetFunction<CollisionFnPtr>("OnTriggerEnter");
-        m_triggerStay = m_script->GetFunction<CollisionFnPtr>("OnTriggerStay");
-        m_triggerExit = m_script->GetFunction<CollisionFnPtr>("OnTriggerExit");
+        m_collisionEnter = GetFunction<CollisionFnPtr>("OnCollisionEnter");
+        m_collisionStay = GetFunction<CollisionFnPtr>("OnCollisionStay");
+        m_collisionExit = GetFunction<CollisionFnPtr>("OnCollisionExit");
+        m_triggerEnter = GetFunction<CollisionFnPtr>("OnTriggerEnter");
+        m_triggerStay = GetFunction<CollisionFnPtr>("OnTriggerStay");
+        m_triggerExit = GetFunction<CollisionFnPtr>("OnTriggerExit");
     }
 
     EvoBehaviour::Properties EvoBehaviour::GetProperties() const {
-        SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
+        SR_EVO_SCRIPT_MANAGER_LOCK_CONTEXT
 
         if (m_hasErrors) {
             return EvoBehaviour::Properties();
         }
+
+        SwitchContext();
 
         if (!m_getProperties) {
             SR_ERROR("EvoBehaviour::GetProperties() : properties getter invalid!");
@@ -151,7 +152,9 @@ namespace SR_SCRIPTING_NS {
     }
 
     std::any EvoBehaviour::GetProperty(const std::string &id) const {
-        SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
+        SR_EVO_SCRIPT_MANAGER_LOCK_CONTEXT
+
+        SwitchContext();
 
         if (!m_getProperty) {
             SR_ERROR("EvoBehaviour::GetProperty() : property getter invalid!");
@@ -159,12 +162,19 @@ namespace SR_SCRIPTING_NS {
         }
 
         std::any copy1 = m_getProperty(id);
+
+        /// HACK: так как dll может выгрузиться, то RTTI типа в std::any станет невалидным,
+        /// и это значение превратится в замедленную бомбу, потому что любое обращение к переменной
+        /// вызовет краш. При перекопировании RTTI обновится на актуальный для самого приложения.
         std::any copy = copy1;
+
         return copy;
     }
 
     void EvoBehaviour::SetProperty(const std::string &id, const std::any &val) {
-        SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
+        SR_EVO_SCRIPT_MANAGER_LOCK_CONTEXT
+
+        SwitchContext();
 
         if (!m_setProperty) {
             return;
@@ -174,157 +184,122 @@ namespace SR_SCRIPTING_NS {
     }
 
     void EvoBehaviour::Awake() {
-        SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
-
-        if (m_awake) {
-            m_awake();
-        }
+        CallFunction(m_awake, false);
         Behaviour::Awake();
     }
 
     void EvoBehaviour::OnEnable() {
-        SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
-
-        if (m_onEnable) {
-            m_onEnable();
-        }
+        CallFunction(m_onEnable, false);
         Behaviour::OnEnable();
     }
 
     void EvoBehaviour::OnDisable() {
-        SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
-
-        if (m_onDisable) {
-            m_onDisable();
-        }
+        CallFunction(m_onDisable, false);
         Behaviour::OnDisable();
     }
 
     void EvoBehaviour::Start() {
-        SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
-
-        if (m_start) {
-            m_start();
-        }
+        CallFunction(m_start, false);
         Behaviour::Start();
     }
 
     void EvoBehaviour::Update(float_t dt) {
-        SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
-
-        if (m_update) {
-            m_update(dt);
-        }
+        CallFunction(m_update, false, dt);
         Behaviour::Update(dt);
     }
 
-    SR_HTYPES_NS::DataStorage EvoBehaviour::Stash() {
-        auto&& data = Behaviour::Stash();
-
-        if (m_script) {
-            data.SetPointer(m_script);
-            m_script = nullptr;
-        }
-
-        return std::move(data);
-    }
-
-    void EvoBehaviour::PopStash(const SR_HTYPES_NS::DataStorage &data) {
-        if (auto&& pScript = data.GetPointerDef<EvoScript::Script>(nullptr)) {
-            delete pScript;
-        }
-
-        Behaviour::PopStash(data);
-    }
-
-    void EvoBehaviour::OnDestroy() {
-        SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
-
-        DestroyScript();
-
-        Behaviour::OnDestroy();
-    }
-
     void EvoBehaviour::OnAttached() {
-        SetGameObject();
+        SR_HTYPES_NS::Function<void()> fn = [this]() { SetGameObject(); };
+        CallFunction(fn, false);
         Behaviour::OnAttached();
     }
 
-    void EvoBehaviour::SetGameObject() {
-        if (!m_script) {
-            return;
-        }
-
-        typedef void(*SetGameObjectFnPtr)(SR_UTILS_NS::GameObject::Ptr);
-
-        if (auto&& setter = m_script->GetFunction<SetGameObjectFnPtr>("SetGameObject")) {
-            setter(GetGameObject());
-        }
-    }
-
     void EvoBehaviour::FixedUpdate() {
-        SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
-
-        if (m_fixedUpdate) {
-            m_fixedUpdate();
-        }
+        CallFunction(m_fixedUpdate, false);
         Behaviour::FixedUpdate();
     }
 
-    void EvoBehaviour::OnCollisionEnter(const SR_UTILS_NS::CollisionData &data) {
-        if (m_collisionEnter) {
-            m_collisionEnter(data);
-        }
+    void EvoBehaviour::OnCollisionEnter(const SR_UTILS_NS::CollisionData& data) {
+        CallFunction(m_collisionEnter, false, data);
         Behaviour::OnCollisionEnter(data);
     }
 
-    void EvoBehaviour::OnCollisionStay(const SR_UTILS_NS::CollisionData &data) {
-        if (m_collisionStay) {
-            m_collisionStay(data);
-        }
+    void EvoBehaviour::OnCollisionStay(const SR_UTILS_NS::CollisionData& data) {
+        CallFunction(m_collisionStay, false, data);
         Behaviour::OnCollisionStay(data);
     }
 
-    void EvoBehaviour::OnCollisionExit(const SR_UTILS_NS::CollisionData &data) {
-        if (m_collisionExit) {
-            m_collisionExit(data);
-        }
+    void EvoBehaviour::OnCollisionExit(const SR_UTILS_NS::CollisionData& data) {
+        CallFunction(m_collisionExit, false, data);
         Behaviour::OnCollisionExit(data);
     }
 
-    void EvoBehaviour::OnTriggerEnter(const SR_UTILS_NS::CollisionData &data) {
-        if (m_triggerEnter) {
-            m_triggerEnter(data);
-        }
+    void EvoBehaviour::OnTriggerEnter(const SR_UTILS_NS::CollisionData& data) {
+        CallFunction(m_triggerEnter, false, data);
         Behaviour::OnTriggerEnter(data);
     }
 
-    void EvoBehaviour::OnTriggerStay(const SR_UTILS_NS::CollisionData &data) {
-        if (m_triggerStay) {
-            m_triggerStay(data);
-        }
+    void EvoBehaviour::OnTriggerStay(const SR_UTILS_NS::CollisionData& data) {
+        CallFunction(m_triggerStay, false, data);
         Behaviour::OnTriggerStay(data);
     }
 
-    void EvoBehaviour::OnTriggerExit(const SR_UTILS_NS::CollisionData &data) {
-        if (m_triggerExit) {
-            m_triggerExit(data);
-        }
+    void EvoBehaviour::OnTriggerExit(const SR_UTILS_NS::CollisionData& data) {
+        CallFunction(m_triggerExit, false, data);
         Behaviour::OnTriggerExit(data);
     }
 
+    void EvoBehaviour::OnTransformSet() {
+        SR_HTYPES_NS::Function<void()> fn = [this]() { SetGameObject(); };
+        CallFunction(fn, false);
+        Component::OnTransformSet();
+    }
+
+    void EvoBehaviour::OnDestroy() {
+        SR_HTYPES_NS::Function<void()> fn = [this]() { DestroyScript(); };
+        CallFunction(fn, false);
+        Behaviour::OnDestroy();
+    }
+
+    void EvoBehaviour::SetGameObject() {
+        if (!m_script || !GetParent()) {
+            return;
+        }
+
+        SwitchContext();
+
+        typedef void(*SetGameObjectFnPtr)(SR_UTILS_NS::GameObject::Ptr);
+        typedef void(*SetSceneFnPtr)(SR_WORLD_NS::Scene::Ptr);
+
+        if (auto&& gameObject = GetGameObject()) {
+            if (auto&& setter = GetFunction<SetGameObjectFnPtr>("SetGameObject")) {
+                setter(gameObject);
+            }
+        }
+        else if (auto&& pScene = GetScene()) {
+            if (auto&& setter = GetFunction<SetSceneFnPtr>("SetScene")) {
+                setter(pScene->GetThis());
+            }
+        }
+    }
+
     void EvoBehaviour::DestroyScript() {
+        SwitchContext();
+
         if (m_releaseBehaviour) {
             m_releaseBehaviour();
         }
 
         DeInitHooks();
 
-        SR_SAFE_DELETE_PTR(m_script)
+        m_behaviourContext = nullptr;
+
+        m_script = ScriptHolder::Ptr();
     }
 
-    void EvoBehaviour::OnTransformSet() {
-        SetGameObject();
-        Component::OnTransformSet();
+    void EvoBehaviour::SwitchContext() const {
+        if (m_switchContext) {
+            m_switchContext(m_behaviourContext);
+        }
     }
 }

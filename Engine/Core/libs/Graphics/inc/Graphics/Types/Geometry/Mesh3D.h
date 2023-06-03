@@ -2,18 +2,14 @@
 // Created by Nikita on 01.06.2021.
 //
 
-#ifndef GAMEENGINE_MESH3D_H
-#define GAMEENGINE_MESH3D_H
+#ifndef SRENGINE_GRAPHICS_MESH3D_H
+#define SRENGINE_GRAPHICS_MESH3D_H
 
+#include <Utils/Types/IRawMeshHolder.h>
 #include <Graphics/Types/Geometry/MeshComponent.h>
 
-namespace SR_GRAPH_NS::Memory {
-    class MeshAllocator;
-}
-
 namespace SR_GTYPES_NS {
-    class Mesh3D final : public MeshComponent {
-        friend class Mesh;
+    class Mesh3D final : public MeshComponent, public SR_HTYPES_NS::IRawMeshHolder {
         using Super = MeshComponent;
         SR_ENTITY_SET_VERSION(1001);
         SR_INITIALIZE_COMPONENT(Mesh3D);
@@ -21,43 +17,32 @@ namespace SR_GTYPES_NS {
         Mesh3D();
 
     private:
-        ~Mesh3D() override;
+        ~Mesh3D() override = default;
 
     public:
         typedef Vertices::StaticMeshVertex VertexType;
 
     public:
-        IResource* CopyResource(IResource* destination) const override;
-
         static Component* LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage);
+        SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SR_UTILS_NS::SavableFlags flags) const override;
 
         void UseMaterial() override;
         void UseModelMatrix() override;
 
+        void OnRawMeshChanged() override;
+        void OnResourceReloaded(SR_UTILS_NS::IResource* pResource) override;
+
         SR_NODISCARD bool IsCanCalculate() const override;
-        SR_NODISCARD uint32_t GetMeshId() const { return m_meshId; }
-
-    private:
-        void SetRawMesh(SR_HTYPES_NS::RawMesh* raw);
-
-        bool Calculate() override;
-        void FreeVideoMemory() override;
-        void Draw() override;
-
-        SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SR_UTILS_NS::SavableFlags flags) const override;
         SR_NODISCARD std::vector<uint32_t> GetIndices() const override;
+        SR_NODISCARD std::string GetMeshIdentifier() const override;
 
-    protected:
-        bool Reload() override;
-        bool Load() override;
-        bool Unload() override;
+        SR_NODISCARD Component* CopyComponent() const override;
 
     private:
-        SR_HTYPES_NS::RawMesh* m_rawMesh = nullptr;
-        /// определяет порядок меша в файле, если их там несколько
-        int32_t m_meshId = SR_UINT32_MAX;
+        bool Calculate() override;
+        void Draw() override;
 
     };
 }
 
-#endif //GAMEENGINE_MESH3D_H
+#endif //SRENGINE_GRAPHICS_MESH3D_H

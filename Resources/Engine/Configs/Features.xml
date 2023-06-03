@@ -3,12 +3,15 @@
    <Common>
        <EvoCompiler Value="true"/>
        <CompilePDB Value="false"/>
+       <ScriptMultiInstances Value="false"/>
 
        <UpdateScripts Value="false"/>
        <UseEditorGUIScript Value="false"/>
        <ColorBufferPick Value="true"/>
 
        <CrashHandler Value="false"/>
+
+       <Tracy Value="true"/>
 
        <DebugChunks Value="true"/>
        <DebugRegions Value="true"/>
@@ -24,15 +27,20 @@
 
        <RayTracing Value="true"/>
 
-       <FastModelsLoad Value="false"/>
+       <FastModelsLoad Value="true"/>
 
        <Renderer Value="true"/>
        <Physics Value="true"/>
+
+       <PVD Value="true"/>
+
+       <Vehicles Value="true"/>
 
        <LoadSkybox Value="false"/>
        <SkyboxCPUUsage Value="false"/>
        <VulkanValidation Value="true"/>
        <MultiRenderTargets Value="false"/>
        <SingleUBOIdentifierMode Value="false"/>
+       <Undocking Value="true"/>
    </Common>
 </Features>

@@ -16,7 +16,7 @@ namespace SR_GRAPH_NS {
 
 namespace SR_GRAPH_NS::Memory {
     struct SR_DLL_EXPORT VirtualProgramInfo : public SR_UTILS_NS::NonCopyable {
-        using Framebuffer = int32_t;
+        using Identifier = uint64_t;
         using ShaderProgram = int32_t;
     public:
         VirtualProgramInfo() {
@@ -38,13 +38,13 @@ namespace SR_GRAPH_NS::Memory {
 
         struct ShaderProgramInfo {
             ShaderProgram id = SR_ID_INVALID;
-            bool depth;
-            uint8_t samples;
+            bool depth = false;
+            uint8_t samples = 1;
 
             SR_NODISCARD bool Valid() const { return id != SR_ID_INVALID; }
         };
 
-        ska::flat_hash_map<Framebuffer, ShaderProgramInfo> m_data;
+        ska::flat_hash_map<Identifier, ShaderProgramInfo> m_data;
         SRShaderCreateInfo m_createInfo;
 
     };
@@ -58,11 +58,6 @@ namespace SR_GRAPH_NS::Memory {
         using PipelinePtr = Environment*;
         using VirtualProgram = int32_t;
         using ShaderProgram = int32_t;
-        enum class BindResult : uint8_t {
-            Success,
-            Duplicated,
-            Failed
-        };
     private:
         ShaderProgramManager();
         ~ShaderProgramManager() override;
@@ -73,13 +68,15 @@ namespace SR_GRAPH_NS::Memory {
 
         bool FreeProgram(VirtualProgram* program);
 
-        BindResult BindProgram(VirtualProgram virtualProgram) noexcept;
+        ShaderBindResult BindProgram(VirtualProgram virtualProgram) noexcept;
 
         SR_NODISCARD ShaderProgram GetProgram(VirtualProgram virtualProgram) const noexcept;
+        SR_NODISCARD ShaderProgram IsAvailable(VirtualProgram virtualProgram) const noexcept;
 
     private:
+        SR_NODISCARD VirtualProgramInfo::Identifier GetCurrentIdentifier() const;
         SR_NODISCARD VirtualProgramInfo::ShaderProgramInfo AllocateShaderProgram(const SRShaderCreateInfo& createInfo) const;
-        SR_NODISCARD bool BindShaderProgram(VirtualProgramInfo::ShaderProgramInfo& shaderProgramInfo, const SRShaderCreateInfo& createInfo);
+        SR_NODISCARD ShaderBindResult BindShaderProgram(VirtualProgramInfo::ShaderProgramInfo& shaderProgramInfo, const SRShaderCreateInfo& createInfo);
         SR_NODISCARD VirtualProgram GenerateUnique() const;
 
     protected:

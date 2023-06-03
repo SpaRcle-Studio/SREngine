@@ -8,6 +8,10 @@
 #include <Physics/PhysX/PhysXUtils.h>
 #include <Physics/PhysicsWorld.h>
 
+namespace SR_PTYPES_NS {
+    class Rigidbody;
+}
+
 namespace SR_PHYSICS_NS {
     class ContactReportCallback;
     class PhysXPhysicsWorld : public PhysicsWorld {
@@ -26,6 +30,10 @@ namespace SR_PHYSICS_NS {
         bool AddRigidbody(RigidbodyPtr pRigidbody) override;
         bool RemoveRigidbody(RigidbodyPtr pRigidbody) override;
 
+        void ForEachRigidbody3D(const SR_HTYPES_NS::Function<void(SR_PTYPES_NS::Rigidbody3D *)> &fun) override;
+
+        void Flush() override;
+
     private:
         bool SynchronizeStatic();
         bool SynchronizeDynamic();
@@ -37,6 +45,7 @@ namespace SR_PHYSICS_NS {
 
         std::vector<physx::PxActor*> m_dynamicActors;
         std::vector<physx::PxActor*> m_staticActors;
+        std::vector<physx::PxActor*> m_actors;
 
     };
 }

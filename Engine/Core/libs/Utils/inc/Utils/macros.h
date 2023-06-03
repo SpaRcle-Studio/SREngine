@@ -16,8 +16,6 @@
     #pragma warning(disable: 4828)
 #endif
 
-#define SR_CXX_20
-
 #ifdef ANDROID
     #define SR_ANDROID
 #endif
@@ -39,10 +37,6 @@
 
 #define TRUE 1
 #define FALSE 0
-
-#define SR_ICU
-
-#define SR_USE_IMGUI
 
 #ifdef _MSVC_LANG
     #define SR_MSVC
@@ -99,6 +93,12 @@
         ptr = nullptr;          \
     }                           \
 
+#define SR_SAFE_DELETE_ARRAY_PTR(ptr) \
+    if (ptr) {                        \
+        delete[] ptr;                 \
+        ptr = nullptr;                \
+    }                                 \
+
 #define SR_COMBINE_HELPER(X, Y) X##Y
 #define SR_COMBINE(X, Y) SR_COMBINE_HELPER(X, Y)
 #define SR_FASTCALL_ATTRIBUTE __attribute__((fastcall))
@@ -113,6 +113,7 @@
     #define SR_FORCE_INLINE __forceinline
 #endif
 
+#define SR_CLOCKS_PER_SEC CLOCKS_PER_SEC
 #define SR_NODISCARD [[nodiscard]]
 #define SR_FALLTHROUGH [[fallthrough]]
 #define SR_MAYBE_UNUSED [[maybe_unused]]
@@ -140,21 +141,6 @@
     #define SR_USE_GLFW3
 #endif
 
-#ifndef SR_USE_IMGUI
-    #define SR_USE_IMGUI
-    #define SR_USE_IMGUIZMO
-#endif
-
-#if defined(SR_USE_IMGUI) and not defined(SR_USE_IMGUIZMO)
-    #define SR_USE_IMGUIZMO
-#endif
-
-#if defined(SR_USE_IMGUI) and not defined(SR_USE_IMGUI_NODE_EDITOR)
-    #define SR_USE_IMGUI_NODE_EDITOR
-#endif
-
-#define SR_USE_VULKAN
-
 #ifdef SR_USE_VULKAN
     #define VK_PROTOTYPES
 #endif
@@ -179,6 +165,11 @@
     #define SR_WIN32_BOOL false
 #endif
 
+#define SR_MACRO_CONCAT_UTIL(a, b) a ## b
+#define SR_MACRO_CONCAT(a, b) SR_MACRO_CONCAT_UTIL(a, b)
+
+#define SR_LINE __LINE__
+
 #define SR_XML_NS Framework::Helper::Xml
 #define SR_PHYSICS_NS Framework::Physics
 #define SR_PTYPES_NS SR_PHYSICS_NS::Types
@@ -195,6 +186,7 @@
 #define SR_WORLD_NS Framework::Helper::World
 #define SR_CORE_NS Framework::Core
 #define SR_CORE_UI_NS Framework::Core::UI
+#define SR_CORE_GUI_NS Framework::Core::GUI
 #define SR_SCRIPTING_NS Framework::Scripting
 #define SR_AUDIO_NS Framework::Audio
 
@@ -207,10 +199,6 @@
 #else
     #define SR_STATIC_ASSERT(msg) static_assert(false, msg);
 #endif
-
-#define SR_SUPPORT_PARALLEL
-
-#define SR_DLL_EXPORTS 1
 
 #ifndef SR_LINUX
     #if defined(SR_DLL_EXPORTS)

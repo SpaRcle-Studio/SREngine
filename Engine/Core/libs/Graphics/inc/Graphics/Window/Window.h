@@ -44,13 +44,21 @@ namespace SR_GRAPH_NS {
         bool Initialize(const std::string& name, const SR_MATH_NS::UVector2& size);
         void Close();
 
+        void PollEvents();
+
         SR_NODISCARD SR_HTYPES_NS::Thread::Ptr GetThread() const;
         SR_NODISCARD SR_MATH_NS::UVector2 GetSize() const;
+        SR_NODISCARD SR_MATH_NS::IVector2 GetPosition() const;
         SR_NODISCARD bool IsWindowFocus() const;
         SR_NODISCARD bool IsWindowCollapsed() const;
         SR_NODISCARD bool IsValid() const;
         SR_NODISCARD WindowHandle GetHandle() const;
         SR_NODISCARD bool IsFullScreen() const;
+        SR_NODISCARD bool IsMaximized() const;
+        SR_NODISCARD bool IsVisible() const;
+
+        SR_NODISCARD SR_MATH_NS::IVector2 ScreenToClient(const SR_MATH_NS::IVector2& pos) const;
+        SR_NODISCARD SR_MATH_NS::IVector2 ClientToScreen(const SR_MATH_NS::IVector2& pos) const;
 
         void SetFocusCallback(const FocusCallback& callback);
         void SetDrawCallback(const DrawCallback& callback);

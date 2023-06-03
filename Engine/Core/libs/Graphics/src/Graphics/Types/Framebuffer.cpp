@@ -68,7 +68,7 @@ namespace SR_GTYPES_NS {
             return false;
         }
 
-        if ((!IsCalculated() || m_dirty) && !Init()) {
+        if ((!IsCalculated() || m_dirty) && !Update()) {
             SR_ERROR("Framebuffer::Bind() : failed to initialize framebuffer!");
             return false;
         }
@@ -79,13 +79,45 @@ namespace SR_GTYPES_NS {
         return true;
     }
 
-    bool Framebuffer::Init() {
-        if (!OnResize()) {
-            SR_ERROR("Framebuffer::OnResize() : failed to resize frame buffer!");
+    bool Framebuffer::Update() {
+        if (m_size.HasZero() || m_size.HasNegative()) {
+            SR_ERROR("Framebuffer::Update() : incorrect framebuffer size!");
+            m_hasErrors = true;
             return false;
         }
 
+        if (m_sampleCount == 0) {
+            m_currentSampleCount = m_pipeline->GetSamplesCount();
+        }
+        else {
+            m_currentSampleCount = m_sampleCount;
+        }
+
+        /// если устройство не поддерживает, то не будем пытаться использовать
+        if (!m_pipeline->IsMultiSamplingSupported()) {
+            m_currentSampleCount = 1;
+        }
+        else {
+            m_currentSampleCount = SR_MIN(m_currentSampleCount, m_pipeline->GetSupportedSamples());
+        }
+
+        if (!m_pipeline->CreateFrameBuffer(
+                m_size.ToGLM(),
+                m_frameBuffer,
+                m_depthEnabled ? &m_depth : nullptr,
+                m_colors,
+                m_currentSampleCount)
+        ) {
+            SR_ERROR("Framebuffer::Update() : failed to create frame buffer!");
+            m_hasErrors = true;
+            return false;
+        }
+
+        m_hasErrors = false;
+        m_dirty = false;
         m_isCalculated = true;
+
+        m_pipeline->SetBuildState(false);
 
         return true;
     }
@@ -111,52 +143,36 @@ namespace SR_GTYPES_NS {
         IGraphicsResource::FreeVideoMemory();
     }
 
-    bool Framebuffer::OnResize() {
-        if (m_size.HasZero() || m_size.HasNegative()) {
-            SR_ERROR("Framebuffer::OnResize() : incorrect FBO size!");
-            m_hasErrors = true;
+    void Framebuffer::SetSize(const SR_MATH_NS::IVector2 &size) {
+        m_size = size;
+        SetDirty();
+    }
+
+    bool Framebuffer::BeginCmdBuffer(const Framebuffer::ClearColors &clearColors, float_t depth) {
+        m_pipeline->ClearBuffers(clearColors, depth);
+
+        if (!m_pipeline->BeginCmdBuffer()) {
             return false;
         }
 
-        if (!m_pipeline->CreateFrameBuffer(
-            m_size.ToGLM(),
-            m_frameBuffer,
-            m_depthEnabled ? &m_depth : nullptr,
-            m_colors,
-            m_sampleCount)
-        ) {
-            SR_ERROR("Framebuffer::OnResize() : failed to create frame buffer!");
-            m_hasErrors = true;
-            return false;
-        }
-
-        m_hasErrors = false;
-        m_dirty = false;
+        SR_NOOP;
 
         return true;
     }
 
-    void Framebuffer::SetSize(const SR_MATH_NS::IVector2 &size) {
-        m_size = size;
-        m_dirty = true;
-    }
+    bool Framebuffer::BeginCmdBuffer() {
+        m_pipeline->ClearBuffers();
 
-    bool Framebuffer::BeginRender(const Framebuffer::ClearColors &clearColors, float_t depth) {
-        m_pipeline->ClearBuffers(clearColors, depth);
-
-        if (!m_pipeline->BeginRender()) {
+        if (!m_pipeline->BeginCmdBuffer()) {
             return false;
         }
 
-        m_pipeline->SetViewport(m_size.x, m_size.y);
-        m_pipeline->SetScissor(m_size.x, m_size.y);
+        SR_NOOP;
 
         return true;
     }
 
     bool Framebuffer::BeginRender() {
-        m_pipeline->ClearBuffers();
-
         if (!m_pipeline->BeginRender()) {
             return false;
         }
@@ -171,12 +187,16 @@ namespace SR_GTYPES_NS {
         m_pipeline->EndRender();
     }
 
+    void Framebuffer::EndCmdBuffer() {
+        m_pipeline->EndCmdBuffer();
+    }
+
     int32_t Framebuffer::GetId() {
         if (m_hasErrors) {
             return SR_ID_INVALID;
         }
 
-        if ((!IsCalculated() || m_dirty) && !Init()) {
+        if ((!IsCalculated() || m_dirty) && !Update()) {
             SR_ERROR("Framebuffer::GetId() : failed to initialize framebuffer!");
         }
 
@@ -187,16 +207,20 @@ namespace SR_GTYPES_NS {
         return 0;
     }
 
-    int32_t Framebuffer::GetColorTexture(uint32_t layer) const {
-        if (layer >= m_colors.size() || m_hasErrors || m_dirty) {
+    int32_t Framebuffer::GetColorTexture(uint32_t layer) {
+        if ((!IsCalculated() || m_dirty) && !Update()) {
+            SR_ERROR("Framebuffer::GetColorTexture() : failed to initialize framebuffer!");
+        }
+
+        if (layer >= m_colors.size() || m_hasErrors) {
             return SR_ID_INVALID;
         }
 
         return m_colors.at(layer).texture;
     }
 
-    bool Framebuffer::BeginRender(const SR_MATH_NS::FColor &clearColor, float_t depth) {
-        return BeginRender(Framebuffer::ClearColors{ clearColor }, depth);
+    bool Framebuffer::BeginCmdBuffer(const SR_MATH_NS::FColor &clearColor, float_t depth) {
+        return BeginCmdBuffer(Framebuffer::ClearColors{ clearColor }, depth);
     }
 
     uint32_t Framebuffer::GetWidth() const {
@@ -223,5 +247,14 @@ namespace SR_GTYPES_NS {
         }
 
         return m_depth.texture;
+    }
+
+    uint8_t Framebuffer::GetSamplesCount() const {
+        SRAssert(m_currentSampleCount >= 1 && m_currentSampleCount <= 64);
+        return m_currentSampleCount;
+    }
+
+    void Framebuffer::SetDirty() {
+        m_dirty = true;
     }
 }

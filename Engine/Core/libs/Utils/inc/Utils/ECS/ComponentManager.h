@@ -19,6 +19,13 @@ namespace SR_UTILS_NS {
     class Component;
     class GameObject;
 
+    SR_ENUM_NS_CLASS_T(ComponentLoadResult, uint8_t,
+        Success,
+        Migrated,
+        Error,
+        Fatal
+    );
+
     class SR_DLL_EXPORT ComponentManager : public Singleton<ComponentManager> {
         friend class Singleton<ComponentManager>;
         typedef SR_HTYPES_NS::Function<void(Component*)> Event;
@@ -35,12 +42,25 @@ namespace SR_UTILS_NS {
     public:
         Component* CreateComponentOfName(const std::string& name);
 
-        template<typename T> Component* CreateComponent() {
+        template<typename T> T* CreateComponent() {
             SR_SCOPED_LOCK
-            return CreateComponentImpl(T::COMPONENT_HASH_NAME);
+            auto&& pComponent = CreateComponentImpl(T::COMPONENT_HASH_NAME);
+            if (!pComponent) {
+                return nullptr;
+            }
+
+            if (auto&& pImpl = dynamic_cast<T*>(pComponent)) {
+                return pImpl;
+            }
+
+            pComponent->OnDestroy();
+
+            SRHalt0();
+
+            return nullptr;
         }
 
-        std::unordered_map<std::string, size_t> GetComponentsNames() {
+        const std::unordered_map<std::string, size_t>& GetComponentsNames() const {
             SR_SCOPED_LOCK
             return m_ids;
         }
@@ -74,7 +94,7 @@ namespace SR_UTILS_NS {
 
         void SetContextInitializer(const ContextInitializerFn& fn);
 
-        Component* Load(SR_HTYPES_NS::Marshal& marshal);
+        std::pair<Component*, ComponentLoadResult> Load(SR_HTYPES_NS::Marshal& marshal);
 
         SR_HTYPES_NS::DataStorage* GetContext() { return &m_context; }
         SR_NODISCARD std::string GetLastComponentName() const;

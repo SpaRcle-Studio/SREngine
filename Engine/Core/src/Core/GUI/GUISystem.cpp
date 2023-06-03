@@ -14,10 +14,14 @@
 #include <Utils/ECS/ComponentManager.h>
 #include <Utils/World/Chunk.h>
 #include <Utils/Platform/Platform.h>
+#include <Utils/World/SceneBuilder.h>
 
 #include <Graphics/GUI/Editor/MessageBox.h>
+#include <Graphics/SRSL/Shader.h>
 
+/// TODO: перенести инклуд
 #include <imgui_internal.h> /// взято с #5539 https://github.com/ocornut/imgui/issues/5539
+
 #include <Core/GUI/AnimatorEditor.h>
 
 namespace Framework::Core {
@@ -551,11 +555,19 @@ bool GUISystem::BeginMenuBar() {
     if (ImGui::BeginMenu("File")) {
         if (ImGui::MenuItem("New scene")) {
             Engine::Instance().SetScene(SR_WORLD_NS::Scene::New(GetNewScenePath()));
+            Engine::Instance().GetEditor()->CacheScenePath(Engine::Instance().GetScene()->GetPath());
         }
 
         ImGui::Separator();
 
         if (ImGui::MenuItem("New prefab")) {
+            if (auto&& scene = Engine::Instance().GetScene(); scene.RecursiveLockIfValid()) {
+                //TODO: проверку на то, что нынешний префаб не сохранён, чтобы не спамить ими
+                scene->Save();
+                Engine::Instance().GetEditor()->CacheScenePath(Engine::Instance().GetScene()->GetPath());
+                scene.Unlock();
+            }
+
             Engine::Instance().SetScene(SR_WORLD_NS::Scene::New(GetNewPrefabPath()));
         }
 
@@ -569,11 +581,13 @@ bool GUISystem::BeginMenuBar() {
 
                     if (auto &&scene = SR_WORLD_NS::Scene::Load(folder)) {
                         Engine::Instance().SetScene(scene);
+                        Engine::Instance().GetEditor()->CacheScenePath(folder);
                     }
                 }
                 else {
                     if (auto &&scene = SR_WORLD_NS::Scene::Load(path)) {
                         Engine::Instance().SetScene(scene);
+                        Engine::Instance().GetEditor()->CacheScenePath(path);
                     }
                 }
             }
@@ -602,6 +616,7 @@ bool GUISystem::BeginMenuBar() {
                     }
                 }
                 scene.Unlock();
+                Engine::Instance().GetEditor()->CacheScenePath(scene->GetPath());
             }
             else {
                 SR_WARN("GUISystem::BeginMenuBar() : scene is not valid!");
@@ -614,13 +629,20 @@ bool GUISystem::BeginMenuBar() {
             if (auto&& scene = Engine::Instance().GetScene()) {
                 scene->Save();
             }
-            Engine::Instance().SetScene(SR_WORLD_NS::Scene::Ptr());
+            Engine::Instance().SetScene(SR_WORLD_NS::Scene::Empty());
+            Engine::Instance().GetEditor()->CacheScenePath("NONE");
+        }
+
+        ImGui::Separator();
+
+        if (ImGui::MenuItem("Clear shaders cache")) {
+            SR_SRSL_NS::SRSLShader::ClearShadersCache();
         }
 
         ImGui::Separator();
 
         if (ImGui::MenuItem("Exit")) {
-            SR_UTILS_NS::EventManager::Instance().Broadcast(SR_UTILS_NS::EventManager::Event::Exit);
+            SR_CORE_NS::Engine::Instance().GetWindow()->Close();
         }
 
         ImGui::EndMenu();
@@ -705,6 +727,12 @@ bool GUISystem::BeginMenuBar() {
 
         ImGui::Separator();
 
+        if (ImGui::MenuItem("Reset to default")) {
+            Engine::Instance().GetEditor()->ResetToDefault();
+        }
+
+        ImGui::Separator();
+
         if (ImGui::MenuItem("Close all")) {
             Engine::Instance().GetEditor()->CloseAllWidgets();
         }
@@ -713,14 +741,39 @@ bool GUISystem::BeginMenuBar() {
     }
 
     if (ImGui::BeginMenu("About")) {
+        ImGui::Separator();
+        ImGui::Text("*********************");
+        ImGui::Text("SpaRcle Engine v0.0.5");
+        ImGui::Text("*********************");
+        ImGui::Separator();
+        ImGui::Text("Authors: ");
+        ImGui::Text("   * Monika0000");
+        ImGui::Text("   * innerviewer");
+        ImGui::Separator();
         ImGui::EndMenu();
     }
 
     ImGui::PopStyleVar();
 
-    auto &&io = ImGui::GetIO();
+    auto&& io = ImGui::GetIO();
 
-    ImGui::Text("|   FPS: %.2f (%.2gms)", io.Framerate, io.Framerate > 0.f ? 1000.0f / io.Framerate : 0.0f);
+    ImGui::PushItemWidth(115);
+
+    ImGui::LabelText("##FPSLable", "|   FPS: %.2f (%.2gms)", io.Framerate, io.Framerate > 0.f ? 1000.0f / io.Framerate : 0.0f);
+
+    ImGui::PopItemWidth();
+
+    auto&& pBuilder = Engine::Instance().GetSceneBuilder();
+    if (pBuilder) {
+        auto&& now = SR_HTYPES_NS::Time::Instance().Now();
+        auto&& time = now - pBuilder->GetLastBuildTime();
+
+        using ms = std::chrono::duration<double, std::milli>;
+
+        const float_t timeLeft = std::chrono::duration_cast<ms>(time).count() / (double_t) SR_CLOCKS_PER_SEC;
+
+        ImGui::Text("|   Last build: %.2f sec", timeLeft);
+    }
 
     return true;
 }

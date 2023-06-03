@@ -9,7 +9,6 @@
 #include <Utils/ResourceManager/ResourceManager.h>
 
 #include <Graphics/Window/Window.h>
-#include <Graphics/Render/Render.h>
 #include <Graphics/Types/Camera.h>
 #include <Graphics/Types/Material.h>
 #include <Graphics/Types/Texture.h>
@@ -75,7 +74,7 @@ namespace SR_GRAPH_NS {
         while (m_windowImpl->IsValid()) {
             auto t_start = std::chrono::high_resolution_clock::now();
 
-            m_windowImpl->PollEvents();
+            PollEvents();
 
             if (m_drawCallback) {
                 m_drawCallback();
@@ -133,6 +132,18 @@ namespace SR_GRAPH_NS {
     void Window::Close() {
         SR_GRAPH_LOG("Window::Close() : closing the window...");
 
+        auto&& cachePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath();
+        auto&& windowSettingsPath = cachePath.Concat("WindowSettings.xml");
+
+        auto&& windowSettings = SR_XML_NS::Document::New();
+        auto&& rootNode = windowSettings.Root().AppendNode("Settings");
+
+        rootNode.AppendNode("Size").AppendAttribute(GetSize());
+        rootNode.AppendNode("Position").AppendAttribute(GetPosition());
+        rootNode.AppendAttribute("IsMaximized", IsMaximized());
+
+        windowSettings.Save(windowSettingsPath);
+
         if (m_windowImpl && m_windowImpl->IsValid()) {
             m_windowImpl->Close();
         }
@@ -180,5 +191,42 @@ namespace SR_GRAPH_NS {
         m_windowImpl->SetScrollCallback([callback](auto&& pWin, auto&& xOffset, auto&& yOffset) {
             callback(xOffset, yOffset);
         });
+    }
+
+    SR_MATH_NS::IVector2 Window::ScreenToClient(const SR_MATH_NS::IVector2& pos) const {
+        return m_windowImpl->ScreenToClient(pos);
+    }
+
+    SR_MATH_NS::IVector2 Window::ClientToScreen(const SR_MATH_NS::IVector2& pos) const {
+        return m_windowImpl->ClientToScreen(pos);
+    }
+
+    SR_MATH_NS::IVector2 Window::GetPosition() const {
+        return m_windowImpl->GetPosition();
+    }
+
+    bool Window::IsMaximized() const {
+        if (!m_windowImpl) {
+            return false;
+        }
+
+        if (m_windowImpl->GetState() == WindowState::Maximized) {
+            return true;
+        }
+
+        SR_NOOP;
+
+        return false;
+    }
+
+    bool Window::IsVisible() const {
+        return m_windowImpl->IsVisible();
+    }
+
+    void Window::PollEvents() {
+        if (!m_windowImpl) {
+            return;
+        }
+        m_windowImpl->PollEvents();
     }
 }

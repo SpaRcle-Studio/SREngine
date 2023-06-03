@@ -25,10 +25,12 @@ namespace SR_HTYPES_NS {
 
 namespace SR_WORLD_NS {
     class SceneLogic;
+    class SceneBuilder;
 
     class SR_DLL_EXPORT Scene : public SR_HTYPES_NS::SafePtr<Scene>, public SR_UTILS_NS::IComponentable {
     public:
         using Ptr = SR_HTYPES_NS::SafePtr<Scene>;
+        using SceneLogicPtr = SR_HTYPES_NS::SafePtr<SceneLogic>;
         using Super = Ptr;
         using GameObjectPtr = SR_HTYPES_NS::SharedPtr<GameObject>;
         using GameObjects = std::vector<GameObjectPtr>;
@@ -39,25 +41,31 @@ namespace SR_WORLD_NS {
         Scene();
 
     public:
+        static Scene::Ptr Empty();
         static Scene::Ptr New(const Path& path);
         static Scene::Ptr Load(const Path& path);
+
+        void Prepare();
 
         bool Save();
         bool SaveAt(const Path& path);
         bool Destroy();
-        void Update(float_t dt);
 
     public:
-        template<typename T> SR_NODISCARD T* GetLogic() const {
-            return dynamic_cast<T*>(m_logic);
-        }
-
         void SetPath(const Path& path) { m_path = path; }
 
         SR_NODISCARD std::string GetName() const;
         SR_NODISCARD Path GetPath() const { return m_path; }
+        SR_NODISCARD bool IsPrefab() const;
         SR_NODISCARD SR_HTYPES_NS::DataStorage& GetDataStorage() { return m_dataStorage; }
         SR_NODISCARD const SR_HTYPES_NS::DataStorage& GetDataStorage() const { return m_dataStorage; }
+        SR_NODISCARD SR_INLINE SceneBuilder* GetSceneBuilder() const { return m_sceneBuilder; }
+        SR_NODISCARD SR_INLINE SceneLogicPtr GetLogicBase() const { return m_logic; }
+
+        /// Запущена ли сцена
+        SR_NODISCARD virtual bool IsPlayingMode() const { return false; }
+        /// На паузе ли сцена (если запущена)
+        SR_NODISCARD virtual bool IsPausedMode() const { return false; }
 
         GameObjects& GetRootGameObjects();
 
@@ -73,29 +81,37 @@ namespace SR_WORLD_NS {
         virtual GameObjectPtr Instance(const Types::RawMesh* rawMesh);
         virtual GameObjectPtr Instance(SR_HTYPES_NS::Marshal& marshal);
 
+        IComponentable::ScenePtr GetScene() const override { return const_cast<ScenePtr>(this); }
+
     public:
         bool Remove(const GameObjectPtr& gameObject);
+        void Remove(Component* pComponent);
 
         void OnChanged();
 
         bool Reload();
 
     private:
-        SceneLogic* m_logic = nullptr;
+        SceneLogicPtr m_logic;
+        SceneBuilder* m_sceneBuilder = nullptr;
 
-        bool m_isPrefab = false;
-        bool m_isDestroy = false;
+        bool m_isPreDestroyed = false;
+        bool m_isDestroyed = false;
 
-        std::atomic<bool>  m_isHierarchyChanged = false;
-
-        Path m_path;
+        std::atomic<bool> m_isHierarchyChanged = false;
 
         SR_HTYPES_NS::DataStorage m_dataStorage;
 
         std::list<uint64_t> m_freeObjIndices;
+        std::list<GameObjectPtr> m_newQueue;
+        std::list<GameObjectPtr> m_deleteQueue;
+
+        std::list<Component*> m_destroyedComponents;
 
         GameObjects m_gameObjects;
         GameObjects m_rootObjects;
+
+        Path m_path;
 
     };
 }

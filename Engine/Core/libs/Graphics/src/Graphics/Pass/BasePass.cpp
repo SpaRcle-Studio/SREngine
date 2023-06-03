@@ -16,13 +16,10 @@ namespace SR_GRAPH_NS {
 
     BasePass::BasePass(RenderTechnique* pTechnique, BasePass* pParent)
         : Super()
-        , m_camera(nullptr)
-        , m_context(nullptr)
-        , m_pipeline(Environment::Get())
+        , m_pipeline(pTechnique->GetPipeline())
         , m_uboManager(Memory::UBOManager::Instance())
         , m_parentPass(pParent)
         , m_technique(pTechnique)
-        , m_isInit(false)
     { }
 
     bool BasePass::Load(const SR_XML_NS::Node &passNode) {

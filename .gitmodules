@@ -48,3 +48,6 @@
 	url = https://github.com/Monika0000/box2d
 [submodule "EngineCorelibsGraphicslibs"]
 	url = https://github.com/Monika0000/imgui
+[submodule "Engine/Core/libs/Utils/libs/libpng"]
+	path = Engine/Core/libs/Utils/libs/libpng
+	url = https://github.com/libpng/libpng

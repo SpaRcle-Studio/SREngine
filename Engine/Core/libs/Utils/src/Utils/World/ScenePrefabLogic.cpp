@@ -3,6 +3,7 @@
 //
 
 #include <Utils/World/ScenePrefabLogic.h>
+#include <Utils/ECS/Transform3D.h>
 
 namespace SR_WORLD_NS {
     ScenePrefabLogic::ScenePrefabLogic(const SceneLogic::ScenePtr& scene)
@@ -14,7 +15,8 @@ namespace SR_WORLD_NS {
 
         pMarshal->Write(static_cast<uint64_t>(ENTITY_ID_MAX));
         pMarshal->Write(GameObject::VERSION);
-        pMarshal->Write(true /** is enabled */);
+        pMarshal->Write<bool>(false /** is prefab */);
+        pMarshal->Write<bool>(true /** is enabled */);
         pMarshal->Write(m_scene->GetName());
         pMarshal->Write<uint64_t>(0 /** tag */);
 
@@ -58,7 +60,7 @@ namespace SR_WORLD_NS {
 
         for (auto&& pComponent : pPrefab->GetData()->GetLoadedComponents()) {
             if (auto&& pCopy = pComponent->CopyComponent()) {
-                m_scene->LoadComponent(pCopy);
+                m_scene->AddComponent(pCopy);
             }
         }
 

@@ -17,6 +17,8 @@ void fragment() {
     vec3 normalShade = vec3(NORMAL.x + NORMAL.y + NORMAL.z) / 8.0;
 
 	COLOR = vec4(diffuse_albedo + normalShade, 1.0);
+    COLOR_INDEX_1 = vec4(vec3(0), 0.0);
+    COLOR_INDEX_2 = vec4(vec3(0), 0.0);
 }
 
 void vertex() {

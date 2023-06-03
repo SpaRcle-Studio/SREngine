@@ -14,11 +14,15 @@
 
 namespace SR_UTILS_NS {
     class ResourceManager;
+    class ResourceType;
+    class ResourceInfo;
 
     class SR_DLL_EXPORT IResource : public ResourceContainer {
-        friend class ResourceManager;
+        friend class ResourceType;
         using Super = ResourceContainer;
     public:
+        using Ptr = IResource*;
+
         enum class LoadState : uint8_t {
             Unknown, Loaded, Reloading, Loading, Unloading, Unloaded, Error
         };
@@ -48,7 +52,8 @@ namespace SR_UTILS_NS {
         SR_NODISCARD bool IsAlive() const { return m_lifetime > 0; }
         SR_NODISCARD bool IsEnabledAutoRemove() const { return m_autoRemove; }
         SR_NODISCARD uint16_t GetCountUses() const noexcept;
-        SR_NODISCARD float_t GetLifetime() const noexcept { return m_lifetime; }
+        SR_NODISCARD uint16_t GetReloadCount() const noexcept { return m_reloadCount; }
+        SR_NODISCARD uint64_t GetLifetime() const noexcept { return m_lifetime; }
         SR_NODISCARD std::string_view GetResourceName() const;
         SR_NODISCARD uint64_t GetResourceHashName() const noexcept { return m_resourceHashName; }
         SR_NODISCARD const std::string& GetResourceId() const;
@@ -67,12 +72,19 @@ namespace SR_UTILS_NS {
         /** Remove one point from count uses current resource */
         virtual RemoveUPResult RemoveUsePoint();
 
+        virtual void CheckResourceUsage();
+
         virtual void OnResourceRegistered() {
             SRAssert2(!IsRegistered(), "Resource already are registered!");
             m_isRegistered = true;
         }
 
         virtual void OnReloadDone() { }
+
+        /** Вызывается только из ResourceManager и IResource, удаляет экземпляр класса,
+         * или не удаляет, но это уже не его проблема, а того, как он переопределен.
+         * Задача данного метода - сделать финальное оповещение что ресурс не нужен и не отслеживается более. */
+        virtual void DeleteResource() { delete this; }
 
         virtual bool Reload();
 
@@ -110,11 +122,16 @@ namespace SR_UTILS_NS {
         void SetReadOnly(bool value) { m_readOnly = value; }
         void SetAutoRemoveEnabled(bool enabled) { m_autoRemove = enabled; }
         void SetResourceHash(uint64_t hash);
+        void SetLifetime(int64_t lifeTime) { m_lifetime = lifeTime; }
 
         void SetId(const std::string& id, bool autoRegister = true);
         void SetId(uint64_t hashId, bool autoRegister = true);
 
         virtual void ReviveResource();
+
+        template<typename T> bool IsResourceType() const noexcept {
+            return m_resourceHashName == SR_COMPILE_TIME_CRC32_TYPE_NAME(T);
+        }
 
     protected:
         const uint64_t m_resourceHashName = 0;
@@ -125,11 +142,15 @@ namespace SR_UTILS_NS {
         std::atomic<uint16_t> m_countUses = 0;
 
     private:
+        ResourceInfo* m_resourceInfo = nullptr;
+
         uint64_t m_resourceHashId = 0;
         uint64_t m_resourceHash = 0;
         uint64_t m_resourceHashPath = 0;
 
-        float_t m_lifetime = 0;
+        uint16_t m_reloadCount = 0;
+
+        int64_t m_lifetime = 0;
 
         /// Принудительно уничтожить ресурс
         std::atomic<bool> m_force = false;
@@ -139,6 +160,7 @@ namespace SR_UTILS_NS {
 
         /// Автоматическое уничтожение ресурса по истечению use-point'ов
         /// \warning ReadOnly
+        /// TODO: избавиться от этого параметра, везде используется автоматическое управление
         bool m_autoRemove = false;
 
 

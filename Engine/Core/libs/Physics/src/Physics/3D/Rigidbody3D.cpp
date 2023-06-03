@@ -24,8 +24,18 @@ namespace SR_PTYPES_NS {
         : Super(pLibrary)
     { }
 
-    Rigidbody3D::ComponentPtr Rigidbody3D::LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage) {
-        return Super::LoadComponent(SR_UTILS_NS::Measurement::Space3D, marshal, dataStorage);
+    SR_UTILS_NS::Component* Rigidbody3D::LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage) {
+        auto&& pComponent = Super::LoadComponent(SR_UTILS_NS::Measurement::Space3D, marshal, dataStorage);
+
+        if (auto&& pRigidbody3D = dynamic_cast<Rigidbody3D*>(pComponent)) {
+            pRigidbody3D->SetLinearLock(marshal.Read<SR_MATH_NS::BVector3>());
+            pRigidbody3D->SetAngularLock(marshal.Read<SR_MATH_NS::BVector3>());
+        }
+        else {
+            SRHalt("Rigidbody3D::LoadComponent : unsolved situation.");
+        }
+
+        return pComponent;
     }
 
     SR_UTILS_NS::Measurement Rigidbody3D::GetMeasurement() const {
@@ -33,6 +43,31 @@ namespace SR_PTYPES_NS {
     }
 
     SR_HTYPES_NS::Marshal::Ptr Rigidbody3D::Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SR_UTILS_NS::SavableFlags flags) const {
-        return Super::Save(pMarshal, flags);
+        auto&& pComponent = Super::Save(pMarshal, flags);
+
+        pComponent->Write<SR_MATH_NS::BVector3>(m_linearLock);
+        pComponent->Write<SR_MATH_NS::BVector3>(m_angularLock);
+
+        return pComponent;
+    }
+
+    SR_UTILS_NS::Component *Rigidbody3D::CopyComponent() const {
+        auto&& pComponent = m_library->CreateRigidbody3D();
+
+        pComponent->SetType(GetType());
+
+        pComponent->m_linearLock = m_linearLock;
+        pComponent->m_angularLock = m_angularLock;
+
+        pComponent->m_isTrigger = m_isTrigger;
+        pComponent->m_isStatic = m_isStatic;
+
+        pComponent->m_mass = m_mass;
+
+        pComponent->m_center = m_center;
+
+        pComponent->GetCollisionShape()->SetBounds(GetCollisionShape()->GetBounds());
+
+        return dynamic_cast<Rigidbody3D*>(pComponent);
     }
 }

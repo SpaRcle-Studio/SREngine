@@ -3,10 +3,19 @@
 //
 
 #include <Graphics/Types/Geometry/MeshComponent.h>
+#include <Graphics/Utils/MeshUtils.h>
 
 namespace SR_GTYPES_NS {
+    SR_HTYPES_NS::Marshal::Ptr MeshComponent::Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SR_UTILS_NS::SavableFlags flags) const {
+        pMarshal = Component::Save(pMarshal, flags);
+
+        pMarshal->Write(static_cast<int32_t>(GetMeshType()));
+
+        return pMarshal;
+    }
+
     void MeshComponent::OnLoaded() {
-        AddUsePoint();
+        Component::OnLoaded();
     }
 
     void MeshComponent::OnAttached() {
@@ -18,51 +27,27 @@ namespace SR_GTYPES_NS {
     }
 
     void MeshComponent::OnDestroy() {
+        RenderScene::Ptr renderScene = TryGetRenderScene();
+
         Component::OnDestroy();
 
-        auto&& renderScene = GetRenderScene();
-
-        /// после вызова данная сущность может быть уничтожена
-        RemoveUsePoint();
+        /// если ресурс уничтожится сразу, то обрабатывать это нужно в контексте SharedPtr
+        if (!IsGraphicsResourceRegistered()) {
+            GetThis().DynamicCast<MeshComponent>().AutoFree([](auto&& pData) {
+                pData->MarkMeshDestroyed();
+            });
+        }
+        else {
+            MarkMeshDestroyed();
+        }
 
         if (renderScene) {
             renderScene->SetDirty();
         }
     }
 
-    void MeshComponent::OnEnable() {
-        if (auto&& renderScene = GetRenderScene()) {
-            renderScene->SetDirty();
-        }
-        Component::OnEnable();
-    }
-
-    void MeshComponent::OnDisable() {
-        if (auto&& renderScene = GetRenderScene()) {
-            renderScene->SetDirty();
-        }
-        Component::OnDisable();
-    }
-
     bool MeshComponent::ExecuteInEditMode() const {
         return true;
-    }
-
-    Mesh::RenderScenePtr MeshComponent::GetRenderScene() {
-        if (m_renderScene.Valid()) {
-            return m_renderScene;
-        }
-
-        auto&& pScene = TryGetScene();
-        if (!pScene) {
-            return m_renderScene;
-        }
-
-        m_renderScene = pScene->Do<RenderScenePtr>([](SR_WORLD_NS::Scene* ptr) {
-            return ptr->GetDataStorage().GetValue<RenderScenePtr>();
-        }, RenderScenePtr());
-
-        return m_renderScene;
     }
 
     SR_MATH_NS::FVector3 MeshComponent::GetBarycenter() const {
@@ -82,26 +67,19 @@ namespace SR_GTYPES_NS {
         Component::OnMatrixDirty();
     }
 
-    SR_UTILS_NS::IResource *MeshComponent::CopyResource(SR_UTILS_NS::IResource *destination) const {
-        SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
+    SR_UTILS_NS::Component* MeshComponent::CopyComponent() const {
+        auto&& pMesh = SR_GRAPH_NS::CreateMeshByType(GetMeshType());
+        if (!pMesh) {
+            return nullptr;
+        }
 
-        auto* pCopy = dynamic_cast<MeshComponent*>(destination ? destination : nullptr);
-        pCopy = dynamic_cast<MeshComponent*>(IndexedMesh::CopyResource(pCopy));
+        if (auto&& pMeshComponent = dynamic_cast<MeshComponent*>(pMesh)) {
+            pMeshComponent->SetMaterial(GetMaterial());
+            return pMeshComponent;
+        }
 
-        pCopy->m_geometryName = m_geometryName;
-        pCopy->m_barycenter = m_barycenter;
+        SRHalt("Mesh is not a component! Memory leak...");
 
-        return IndexedMesh::CopyResource(destination);
-    }
-
-    SR_UTILS_NS::Path MeshComponent::InitializeResourcePath() const {
-        return SR_UTILS_NS::Path(
-                std::move(SR_UTILS_NS::StringUtils::SubstringView(GetResourceId(), '|', 1)),
-                true /** fast */
-        );
-    }
-
-    SR_UTILS_NS::Component *MeshComponent::CopyComponent() const {
-        return dynamic_cast<Component*>(CopyResource(nullptr));
+        return nullptr;
     }
 }

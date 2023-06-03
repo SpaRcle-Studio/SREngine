@@ -90,7 +90,7 @@ namespace SR_PHYSICS_NS {
                 continue;
             }
 
-            if (pRigidbody->IsShapeDirty() && pRigidbody->UpdateShape() == RBUpdShapeRes::Error) {
+            if (pRigidbody->UpdateShape() == RBUpdShapeRes::Error) {
                 SR_ERROR("Bullet3PhysicsWorld::Synchronize() : failed to update shape!");
                 continue;
             }

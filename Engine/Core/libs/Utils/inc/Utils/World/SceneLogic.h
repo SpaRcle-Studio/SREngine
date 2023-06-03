@@ -15,24 +15,27 @@ namespace SR_UTILS_NS {
 namespace SR_WORLD_NS {
     class Scene;
 
-    class SceneLogic : public SR_UTILS_NS::NonCopyable {
-        using Super = SR_UTILS_NS::NonCopyable;
+    class SceneLogic : public SR_HTYPES_NS::SafePtr<SceneLogic> {
     public:
+        using Ptr = SR_HTYPES_NS::SafePtr<SceneLogic>;
         using ScenePtr = SR_HTYPES_NS::SafePtr<Scene>;
         using GameObjectPtr = SR_HTYPES_NS::SharedPtr<GameObject>;
         using GameObjects = std::vector<GameObjectPtr>;
 
     public:
         explicit SceneLogic(const ScenePtr& scene);
-        ~SceneLogic() override = default;
+        virtual ~SceneLogic() = default;
 
     public:
         /// Метод всегда вернет валидную логику сцены
-        static SceneLogic* CreateByExt(const ScenePtr& scene, const std::string& ext);
+        static SceneLogic::Ptr CreateByExt(const ScenePtr& scene, const std::string& ext);
 
     public:
+        SR_NODISCARD virtual bool IsDefault() const noexcept { return false; }
+
         virtual void Update(float_t dt) { }
         virtual void Destroy() { }
+        virtual void PostLoad() { }
 
         virtual bool Reload() { return true; }
 

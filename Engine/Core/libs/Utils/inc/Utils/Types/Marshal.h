@@ -42,12 +42,35 @@ namespace SR_HTYPES_NS {
         SR_NODISCARD Marshal ReadBytes(uint64_t count) noexcept;
         SR_NODISCARD Marshal::Ptr ReadBytesPtr(uint64_t count) noexcept;
 
+        void WriteBlock(void* pData, uint64_t size) {
+            Write<uint64_t>(size);
+
+            if (size == 0) {
+                return;
+            }
+
+            write(pData, size);
+        }
+
+        void ReadBlock(void* pDestination) {
+            const auto size = Read<uint64_t>();
+
+            if (size == 0) {
+                return;
+            }
+
+            read(pDestination, size);
+        }
+
         template<typename T> void Write(const T& value) {
             if constexpr (std::is_same_v<T, std::any>) {
                 MarshalUtils::SaveAny<std::any>(*this, value);
             }
-            else if constexpr (Math::IsString<T>()) {
+            else if constexpr (SR_MATH_NS::IsString<T>()) {
                 MarshalUtils::SaveShortString(*this, value);
+            }
+            else if constexpr (std::is_same_v<T, SR_HTYPES_NS::UnicodeString>) {
+                MarshalUtils::SaveUnicodeString(*this, value);
             }
             else if constexpr (IsSTLVector<T>()) {
                 MarshalUtils::SaveVector(*this, value);
@@ -76,19 +99,21 @@ namespace SR_HTYPES_NS {
         }
 
         template<typename T> T Read() {
-            T value;
-
             if constexpr (std::is_same_v<T, std::any>) {
-                value = MarshalUtils::LoadAny<std::any>(*this);
+                return MarshalUtils::LoadAny<std::any>(*this);
+            }
+            else if constexpr (std::is_same_v<T, SR_HTYPES_NS::UnicodeString>) {
+                return MarshalUtils::LoadUnicodeString(*this);
             }
             else if constexpr (Math::IsString<T>()) {
-                value = MarshalUtils::LoadShortStr(*this);
+                return MarshalUtils::LoadShortStr(*this);
+            }
+            else if constexpr (IsSTLVector<T>()) {
+                return MarshalUtils::LoadVector<T>(*this);
             }
             else {
-                value = MarshalUtils::LoadValue<T>(*this);
+                return MarshalUtils::LoadValue<T>(*this);
             }
-
-            return value;
         }
 
         template<typename T> T Read(const T& def) {

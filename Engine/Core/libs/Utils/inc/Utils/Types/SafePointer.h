@@ -7,6 +7,7 @@
 
 #include <Utils/Common/StringFormat.h>
 #include <Utils/Types/Function.h>
+#include <Utils/Profile/TracyContext.h>
 
 #define SR_SAFE_PTR_FORWARD_DECLARATION(className) \
     namespace SR_HTYPES_NS { \
@@ -21,9 +22,17 @@ namespace SR_HTYPES_NS {
     #define SR_DEL_SAFE_PTR() {                              \
         }                                                    \
 
+    struct SafePtrDynamicData {
+        mutable std::atomic<bool>            m_lock;
+        mutable std::atomic<uint32_t>        m_lockCount;
+        mutable std::atomic<uint32_t>        m_useCount;
+        bool                                 m_valid = false;
+        mutable std::atomic<std::thread::id> m_owner;
+    };
+
     template<class T> class SR_DLL_EXPORT SafePtr {
     public:
-        explicit SafePtr(T *ptr);
+        explicit SafePtr(const T *ptr);
         SafePtr(SafePtr const &ptr);
         SafePtr();
         ~SafePtr(); /// не должен быть виртуальным
@@ -53,8 +62,11 @@ namespace SR_HTYPES_NS {
         void ReplaceAndLock(const SafePtr& ptr);
         void ReplaceAndCopyLock(const SafePtr& ptr);
 
-        template<typename U> U DynamicCast() {
-           return dynamic_cast<U>(m_ptr);
+        template<typename U> SafePtr<U> DynamicCast() const {
+            if constexpr (std::is_same_v<T, void>) {
+                return SafePtr<U>();
+            }
+            return SafePtr<U>(dynamic_cast<U*>(m_ptr));
         }
 
         bool Do(const std::function<void(T* ptr)>& func);
@@ -65,6 +77,7 @@ namespace SR_HTYPES_NS {
         SR_NODISCARD bool TryRecursiveLockIfValid() const;
         SR_NODISCARD bool LockIfValid() const;
         SR_NODISCARD bool RecursiveLockIfValid() const;
+        SR_NODISCARD SR_FORCE_INLINE SafePtrDynamicData* GetPtrData() const noexcept { return m_data; }
 
         SR_NODISCARD T* Get() const { return m_ptr; }
         SR_NODISCARD void* GetRawPtr() const { return (void*)m_ptr; }
@@ -80,35 +93,40 @@ namespace SR_HTYPES_NS {
         bool FreeImpl(const std::function<void(T *ptr)> &freeFun);
 
     private:
-        struct dynamic_data {
-            mutable std::atomic<bool>            m_lock;
-            mutable std::atomic<uint32_t>        m_lockCount;
-            mutable std::atomic<uint32_t>        m_useCount;
-            bool                                 m_valid {};
-            mutable std::atomic<std::thread::id> m_owner;
-        }* m_data;
-        T* m_ptr;
+        SafePtrDynamicData* m_data = nullptr;
+        T* m_ptr = nullptr;
     };
 
-    template<typename T>SafePtr<T>::SafePtr(T *ptr) {
-        m_ptr = ptr;
-
+    template<typename T>SafePtr<T>::SafePtr(const T *constPtr) {
         SR_NEW_SAFE_PTR();
 
-        m_data = new dynamic_data {
-            false,                         // m_lock
-            0,                             // m_lockCount
-            1,                             // m_useCount
-            (bool)ptr,                     // m_valid
-            std::atomic<std::thread::id>() // m_owner
-        };
+        T* ptr = const_cast<T*>(constPtr);
+        bool needAlloc = true;
+
+        if constexpr (IsDerivedFrom<SafePtr, T>::value) {
+            if (ptr && (m_data = ptr->GetPtrData())) {
+                ++(m_data->m_useCount);
+                needAlloc = false;
+                m_ptr = ptr;
+            }
+        }
+
+        if (needAlloc && ptr) {
+            m_data = new SafePtrDynamicData {
+                false,                         /// m_lock
+                0,                             /// m_lockCount
+                1,                             /// m_useCount
+                (bool)(m_ptr = ptr),           /// m_valid
+                std::atomic<std::thread::id>() /// m_owner
+            };
+        }
     }
     template<typename T>SafePtr<T>::SafePtr() {
         m_ptr = nullptr;
 
         SR_NEW_SAFE_PTR();
 
-        m_data = new dynamic_data {
+        m_data = new SafePtrDynamicData {
             false,                         // m_lock
             0,                             // m_lockCount
             1,                             // m_useCount
@@ -120,10 +138,12 @@ namespace SR_HTYPES_NS {
         m_ptr = ptr.m_ptr;
         m_data = ptr.m_data;
 
-        ++m_data->m_useCount;
+        if (m_data) {
+            ++m_data->m_useCount;
+        }
     }
     template<typename T> SafePtr<T>::~SafePtr() {
-        if (m_data->m_useCount <= 1) {
+        if (m_data && m_data->m_useCount <= 1) {
             SR_SAFE_PTR_ASSERT(!m_data->m_valid, "Ptr was not freed!");
             SR_SAFE_PTR_ASSERT(m_data->m_lockCount == 0 && !m_data->m_lock, "Ptr was not unlocked!");
 
@@ -131,12 +151,13 @@ namespace SR_HTYPES_NS {
 
             delete m_data;
         }
-        else
+        else if (m_data) {
             --(m_data->m_useCount);
+        }
     }
 
     template<typename T> SafePtr<T> &SafePtr<T>::operator=(const SafePtr<T> &ptr) {
-        if (m_data->m_useCount <= 1) {
+        if (m_data && m_data->m_useCount <= 1) {
             SR_SAFE_PTR_ASSERT(!m_data->m_valid, "Ptr was not freed!");
             SR_SAFE_PTR_ASSERT(m_data->m_lockCount == 0 && !m_data->m_lock, "Ptr was not unlocked!");
 
@@ -144,20 +165,23 @@ namespace SR_HTYPES_NS {
 
             delete m_data;
         }
-        else
+        else if (m_data) {
             --(m_data->m_useCount);
+        }
 
         m_data = ptr.m_data;
-        m_data->m_valid = bool(m_ptr = ptr.m_ptr);
 
-        ++(m_data->m_useCount);
+        if (m_data) {
+            m_data->m_valid = bool(m_ptr = ptr.m_ptr);
+            ++(m_data->m_useCount);
+        }
 
         return *this;
     }
 
     template<typename T> SafePtr<T> &SafePtr<T>::operator=(T *ptr) {
         if (m_ptr != ptr) {
-            if (m_data->m_useCount <= 1) {
+            if (m_data && m_data->m_useCount <= 1) {
                 SR_SAFE_PTR_ASSERT(!m_data->m_valid, "Ptr was not freed!");
                 SR_SAFE_PTR_ASSERT(m_data->m_lockCount == 0 && !m_data->m_lock, "Ptr was not unlocked!");
 
@@ -165,8 +189,9 @@ namespace SR_HTYPES_NS {
 
                 delete m_data;
             }
-            else
+            else if (m_data) {
                 --(m_data->m_useCount);
+            }
 
             SR_NEW_SAFE_PTR();
 
@@ -175,7 +200,7 @@ namespace SR_HTYPES_NS {
                 ++(m_data->m_useCount);
             }
             else {
-                m_data = new dynamic_data{
+                m_data = new SafePtrDynamicData {
                         false,                         // m_lock
                         0,                             // m_lockCount
                         1,                             // m_useCount
@@ -185,7 +210,9 @@ namespace SR_HTYPES_NS {
             }
         }
 
-        m_data->m_valid = bool(m_ptr = ptr);
+        if (m_data) {
+            m_data->m_valid = bool(m_ptr = ptr);
+        }
 
         return *this;
     }
@@ -205,7 +232,7 @@ namespace SR_HTYPES_NS {
     }
 
     template<typename T> bool SafePtr<T>::FreeImpl(const std::function<void(T *ptr)> &freeFun) {
-        if (m_data->m_valid) {
+        if (m_data && m_data->m_valid) {
             freeFun(m_ptr);
             m_data->m_valid = false;
             m_ptr = nullptr;
@@ -215,6 +242,12 @@ namespace SR_HTYPES_NS {
     }
 
     template<typename T> void SafePtr<T>::Lock() const {
+        SR_TRACY_ZONE;
+
+        if (!m_data) {
+            return;
+        }
+
         const std::thread::id this_id = std::this_thread::get_id();
 
         if(m_data->m_owner.load() == this_id) {
@@ -231,6 +264,10 @@ namespace SR_HTYPES_NS {
     }
 
     template<typename T> void SafePtr<T>::Unlock() const {
+        if (!m_data) {
+            return;
+        }
+
         if(m_data->m_lockCount > 1) {
             /// recursive unlocking
             --(m_data->m_lockCount);
@@ -248,9 +285,11 @@ namespace SR_HTYPES_NS {
     }
 
     template<typename T> SR_NODISCARD bool SafePtr<T>::LockIfValid() const {
+        SR_TRACY_ZONE;
+
         Lock();
 
-        if (m_data->m_valid)
+        if (m_data && m_data->m_valid)
             return true;
 
         Unlock();
@@ -259,6 +298,12 @@ namespace SR_HTYPES_NS {
     }
 
     template<typename T> void SafePtr<T>::RecursiveLock() const {
+        SR_TRACY_ZONE;
+
+        if (!m_data) {
+            return;
+        }
+
         const std::thread::id this_id = std::this_thread::get_id();
 
         if(m_data->m_owner.load() == this_id) {
@@ -277,6 +322,12 @@ namespace SR_HTYPES_NS {
     }
 
     template<typename T> SR_NODISCARD bool SafePtr<T>::RecursiveLockIfValid() const {
+        SR_TRACY_ZONE;
+
+        if (!m_data) {
+            return false;
+        }
+
         RecursiveLock();
 
         if (m_data->m_valid)
@@ -312,6 +363,10 @@ namespace SR_HTYPES_NS {
     template<typename T> bool SafePtr<T>::TryLock() const {
         const std::thread::id this_id = std::this_thread::get_id();
 
+        if (!m_data) {
+            return false;
+        }
+
         if(m_data->m_owner.load() == this_id) {
             SR_SAFE_PTR_ASSERT(false, "Double locking detected!");
             return false;
@@ -346,6 +401,10 @@ namespace SR_HTYPES_NS {
 
     template<typename T> bool SafePtr<T>::TryRecursiveLock() const {
         const std::thread::id this_id = std::this_thread::get_id();
+
+        if (!m_data) {
+            return false;
+        }
 
         if(m_data->m_owner.load() == this_id) {
             /// recursive locking
@@ -394,14 +453,14 @@ namespace SR_HTYPES_NS {
     }
 
     template<typename T> bool SafePtr<T>::TryUnlock() const {
-        if(m_data->m_lockCount > 1) {
+        if(m_data && m_data->m_lockCount > 1) {
             /// recursive unlocking
             --(m_data->m_lockCount);
 
             return true;
         }
 
-        if (m_data->m_lockCount) {
+        if (m_data && m_data->m_lockCount) {
             /// normal unlocking
 
             m_data->m_owner.store(std::thread::id());
@@ -416,6 +475,10 @@ namespace SR_HTYPES_NS {
     }
 
     template<typename T> void SafePtr<T>::RemoveAllLocks() {
+        if (!m_data) {
+            return;
+        }
+
         m_data->m_owner.store(std::thread::id());
         m_data->m_lockCount.store(0);
         m_data->m_lock.store(false, std::memory_order_release);

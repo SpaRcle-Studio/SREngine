@@ -16,13 +16,9 @@
 #include <Utils/Common/Hashes.h>
 
 namespace SR_UTILS_NS {
-    GameObject::GameObject(std::string name, Transform* pTransform)
-        : Super(this)
-    {
+    GameObject::GameObject(std::string name, Transform* pTransform) {
         SetName(std::move(name));
-
         SetTransform(pTransform);
-
         UpdateEntityPath();
     }
 
@@ -31,42 +27,59 @@ namespace SR_UTILS_NS {
     { }
 
     GameObject::~GameObject() {
+        SRAssert(m_children.empty());
+        if (GetPrefab()) {
+            UnlinkPrefab();
+        }
+        SRAssert(!GetPrefab());
         delete m_transform;
     }
 
-    void GameObject::Destroy(GODestroyByBits by /** = DestroyByFlags::DestroyBy_Other */) {
-        if (m_isDestroy) {
-            SR_ERROR("GameObject::Destroy() : \"" + m_name + "\" game object already destroyed!");
+    void GameObject::Destroy() {
+        if (m_isDestroyed) {
+            SRHalt("GameObject::Destroy() : \"" + m_name + "\" game object already destroyed!");
             return;
         }
 
-        /// сцены может и не быть, к примеру, если это префаб
-        if (m_scene && m_scene->RecursiveLockIfValid()) {
-            const bool byParent = by & GAMEOBJECT_DESTROY_BY_GAMEOBJECT;
+        m_isDestroyed = true;
 
-            if (!byParent && m_parent.RecursiveLockIfValid()) {
-                GameObject::Ptr copy = m_parent;
-                copy->RemoveChild(*this);
-                copy.Unlock();
+        /// сцену не блокируем, предполагается, что и так в контексте заблокированной сцены работаем
+
+        if (GetPrefab()) {
+            UnlinkPrefab();
+        }
+
+        if (auto&& pParent = GetParent()) {
+            auto&& thisPtr = GetThis().DynamicCast<GameObject>();
+            pParent->RemoveChild(thisPtr);
+        }
+
+        if (m_scene) {
+            m_scene->Remove(GetThis().DynamicCast<GameObject>());
+            while (!m_children.empty()) {
+                (*m_children.begin())->Destroy();
             }
-
-            m_scene->Remove(*this);
-
-            m_scene->Unlock();
         }
-
-        IComponentable::DestroyComponents();
-
-        for (auto&& gameObject : m_children) {
-            gameObject.AutoFree([by](GameObject *gm) {
-                gm->Destroy(by | GAMEOBJECT_DESTROY_BY_GAMEOBJECT);
-            });
+        else {
+            while (!m_children.empty()) {
+                auto&& pChild = *m_children.begin();
+                pChild.AutoFree([](auto&& pData) {
+                    pData->Destroy();
+                });
+            }
+            DestroyComponents();
+            DestroyImpl();
         }
-        m_children.clear();
+    }
 
-        m_isDestroy = true;
+    void GameObject::DestroyImpl() {
+        GameObject::Ptr copy = GetThis().DynamicCast<GameObject>();
 
-        delete this;
+        /// это должно быть единственное место,
+        /// где мы уничтожаем объект
+        copy.AutoFree([](GameObject* pGameObject) {
+            delete pGameObject;
+        });
     }
 
     void GameObject::OnMatrixDirty() {
@@ -91,7 +104,7 @@ namespace SR_UTILS_NS {
             return false;
         }
 
-        if (!child->SetParent(*this)) {
+        if (!child->SetParent(GetThis().DynamicCast<GameObject>())) {
             SR_WARN("GameObject::AddChild() : failed to set parent!");
             return false;
         }
@@ -123,6 +136,7 @@ namespace SR_UTILS_NS {
     }
 
     void GameObject::SetScene(ScenePtr pScene) {
+        SRAssert(!m_scene);
         m_scene = pScene;
     }
 
@@ -136,7 +150,7 @@ namespace SR_UTILS_NS {
         return false;
     }
 
-    bool GameObject::SetParent(const GameObject::Ptr &parent) {
+    bool GameObject::SetParent(const GameObject::Ptr& parent) {
         if (parent == m_parent) {
             SRHalt("GameObject::SetParent() : parent is already set!");
             return false;
@@ -173,6 +187,13 @@ namespace SR_UTILS_NS {
         }
 
         SRHalt(Format("GameObject %s is not child for %s!", ptr->GetName().c_str(), GetName().c_str()));
+    }
+
+    void GameObject::RemoveAllChildren() {
+        for (auto&& child : m_children) {
+            child->SetParent(GameObject::Ptr());
+        }
+        m_children.clear();
     }
 
     void GameObject::ForEachChild(const std::function<void(GameObject::Ptr &)> &fun) {
@@ -212,48 +233,52 @@ namespace SR_UTILS_NS {
         return IsEnabled();
     }
 
-    void GameObject::CheckActivity() noexcept {
-        if (!m_dirty) {
+    void GameObject::CheckActivity(bool force) noexcept {
+        if (!force && !IsDirty()) {
             return;
         }
 
+        const bool isActivePrev = m_isActive;
         m_isActive = IsEnabled() && (!m_parent || m_parent->m_isActive);
 
-        IComponentable::CheckActivity();
-
-        for (auto&& child : m_children) {
-            child->m_dirty = true;
-            child->CheckActivity();
-        }
-    }
-
-    void GameObject::Awake(bool isPaused) noexcept {
-        /// Проверяем на IsEnabled а не на IsActive,
-        /// так как если родитель не активен, то метод не вызвался бы.
-        if (!m_dirty || !IsEnabled()) {
+        /// нет смысла продолжать цепочку, все и так выключено
+        if (!m_isActive && m_isActive == isActivePrev) {
             return;
         }
 
-        IComponentable::Awake(isPaused);
+        /// обновляем компоненты
+        IComponentable::CheckActivity(force);
 
         for (auto&& child : m_children) {
-            child->m_dirty = true;
-            child->Awake(isPaused);
+            child->CheckActivity(true);
         }
     }
 
-    void GameObject::Start() noexcept {
+    void GameObject::Awake(bool force, bool isPaused) noexcept {
         /// Проверяем на IsEnabled а не на IsActive,
         /// так как если родитель не активен, то метод не вызвался бы.
-        if (!m_dirty || !IsEnabled()) {
+        if ((!force && !IsDirty()) || !IsEnabled()) {
             return;
         }
 
-        IComponentable::Start();
+        IComponentable::Awake(force, isPaused);
 
         for (auto&& child : m_children) {
-            child->m_dirty = true;
-            child->Start();
+            child->Awake(true, isPaused);
+        }
+    }
+
+    void GameObject::Start(bool force) noexcept {
+        /// Проверяем на IsEnabled а не на IsActive,
+        /// так как если родитель не активен, то метод не вызвался бы.
+        if ((!force && !IsDirty()) || !IsEnabled()) {
+            return;
+        }
+
+        IComponentable::Start(force);
+
+        for (auto&& child : m_children) {
+            child->Start(true);
         }
     }
 
@@ -275,11 +300,11 @@ namespace SR_UTILS_NS {
         //    ///return barycenter + m_transform->m_globalPosition;
         //}
 
-        return Math::FVector3(Math::InfinityFV3);
+        return SR_MATH_NS::FVector3(SR_MATH_NS::InfinityFV3);
     }
 
-    Math::FVector3 GameObject::GetHierarchyBarycenter() {
-        auto barycenter = Math::FVector3((Math::Unit) 0);
+    SR_MATH_NS::FVector3 GameObject::GetHierarchyBarycenter() {
+        auto barycenter = SR_MATH_NS::FVector3((SR_MATH_NS::Unit) 0);
         uint32_t count = 0;
 
         if (auto self = GetBarycenter(); !self.IsInfinity()) {
@@ -294,17 +319,16 @@ namespace SR_UTILS_NS {
             }
         });
 
-        return count == 0 ? Math::InfinityFV3 : barycenter / count;
+        return count == 0 ? SR_MATH_NS::InfinityFV3 : barycenter / count;
     }
 
-     bool GameObject::PostLoad() {
-        if (!IComponentable::PostLoad()) {
-            return false;
-        }
+     bool GameObject::PostLoad(bool force) {
+         if (!IComponentable::PostLoad(force)) {
+             return false;
+         }
 
          for (auto&& child : m_children) {
-             child->m_dirty = true;
-             child->PostLoad();
+             child->PostLoad(true);
          }
 
          return true;
@@ -316,8 +340,20 @@ namespace SR_UTILS_NS {
         }
 
         pMarshal = Entity::Save(pMarshal, flags);
+        pMarshal->Write<uint16_t>(GetEntityVersion());
 
-        pMarshal->Write(VERSION);
+        if (auto&& pPrefab = GetPrefab(); pPrefab && IsPrefabOwner()) {
+            pMarshal->Write<bool>(true);
+            pMarshal->Write<std::string>(pPrefab->GetResourcePath().ToStringRef());
+            pMarshal->Write<std::string>(GetName());
+            pMarshal->Write<uint64_t>(GetTag());
+            pMarshal->Write<bool>(IsEnabled());
+            pMarshal = GetTransform()->Save(pMarshal, flags);
+            return pMarshal;
+        }
+        else {
+            pMarshal->Write<bool>(false);
+        }
 
         pMarshal->Write(IsEnabled());
         pMarshal->Write(m_name);
@@ -345,6 +381,7 @@ namespace SR_UTILS_NS {
             if (child->GetFlags() & GAMEOBJECT_FLAG_NO_SAVE) {
                 continue;
             }
+
             pMarshal = child->Save(pMarshal, flags);
         }
 
@@ -352,7 +389,7 @@ namespace SR_UTILS_NS {
     }
 
     bool GameObject::UpdateEntityPath() {
-        GameObject::Ptr current = *this;
+        GameObject::Ptr current = GetThis().DynamicCast<GameObject>();
         EntityPath path;
 
         do {
@@ -370,15 +407,25 @@ namespace SR_UTILS_NS {
         return true;
     }
 
-    void GameObject::SetTransform(Transform *transform) {
-        if (m_transform == transform || !transform) {
+    void GameObject::SetTransform(Transform* pTransform) {
+        if (!pTransform) {
+            SRHalt("pTransform is nullptr!");
+            return;
+        }
+
+        if (pTransform->GetMeasurement() == Measurement::Holder && GetParent()) {
+            SRHalt("Incorrect HOLDER transform usage!");
+            return;
+        }
+
+        if (m_transform == pTransform) {
             SR_WARN("GameObject::SetTransform() : invalid transform!");
         }
         else {
             if (m_transform) {
                 delete m_transform;
             }
-            m_transform = transform;
+            m_transform = pTransform;
             m_transform->SetGameObject(this);
             SetDirty(true);
         }
@@ -402,13 +449,13 @@ namespace SR_UTILS_NS {
         if (m_parent) {
             GameObject::Ptr copy = m_parent;
             if (copy.RecursiveLockIfValid()) {
-                copy->RemoveChild(*this);
+                copy->RemoveChild(GetThis().DynamicCast<GameObject>());
                 copy->Unlock();
             }
         }
 
         if (destination.Valid()){
-            return destination->AddChild(*this);
+            return destination->AddChild(GetThis().DynamicCast<GameObject>());
         }
         else {
             if (GetParent()){
@@ -433,22 +480,34 @@ namespace SR_UTILS_NS {
         }
     }
 
-    void GameObject::SetDirty(bool dirty) {
-        if (m_dirty == dirty) {
-            return;
+    bool GameObject::SetDirty(bool dirty) {
+        if (IsDirty() == dirty) {
+            return IComponentable::SetDirty(dirty);
         }
+
+        const bool isDirty = IComponentable::SetDirty(dirty);
 
         /// Грязный флаг передаем вверх, а чистый вниз.
         /// Это нужно для оптимизации
-        if ((m_dirty = dirty)) {
+        if (dirty) {
             if (m_parent) {
                 m_parent->SetDirty(dirty);
             }
+
+            return isDirty;
         }
         else {
+            bool hasDirtyChild = false;
+
             for (auto&& children : m_children) {
-                children->SetDirty(dirty);
+                hasDirtyChild |= children->SetDirty(dirty);
             }
+
+            if (hasDirtyChild) {
+                return isDirty || IComponentable::SetDirty(true);
+            }
+
+            return isDirty;
         }
     }
 
@@ -458,18 +517,51 @@ namespace SR_UTILS_NS {
         /// для экономии памяти стека при рекурсивном создании объектов, кладем все переменные в эту область видимости.
         {
             auto&& entityId = marshal.Read<uint64_t>();
-
             auto&& version = marshal.Read<uint16_t>();
 
-            if (version != SR_UTILS_NS::GameObject::VERSION) {
-                SR_WARN("GameObject::Load() : game object has different version! Try migrate...");
+            const uint16_t newVersion = SR_UTILS_NS::GameObject::VERSION;
+
+            if (version != newVersion) {
+                SR_INFO("GameObject::Load() : game object has different version! Trying to migrate from " +
+                        SR_UTILS_NS::ToString(version) + " to " + SR_UTILS_NS::ToString(newVersion) + "..."
+                );
 
                 static const auto GAME_OBJECT_HASH_NAME = SR_HASH_STR("GameObject");
 
                 if (!Migration::Instance().Migrate(GAME_OBJECT_HASH_NAME, marshal, version)) {
                     SR_ERROR("GameObject::Load() : failed to migrate game object!");
-                    return GameObject::Ptr();
+                    return gameObject;
                 }
+            }
+
+            if (marshal.Read<bool>()) { /// is prefab
+                auto&& prefabPath = marshal.Read<std::string>();
+                auto&& objectName = marshal.Read<std::string>();
+                auto&& tag = marshal.Read<uint64_t>();
+                auto&& isEnabled = marshal.Read<bool>();
+                auto&& pTransform = Transform::Load(marshal, nullptr);
+
+                if (!pTransform) {
+                    SRHalt("Failed to load transform!");
+                    return gameObject;
+                }
+
+                if (auto&& pPrefab = Prefab::Load(prefabPath)) {
+                    gameObject = pPrefab->Instance(scene);
+                    pPrefab->CheckResourceUsage();
+                }
+
+                if (!gameObject) {
+                    SR_LOG("GameObject::Load() : failed to load prefab!\n\tPath: " + prefabPath);
+                    delete pTransform;
+                    return gameObject;
+                }
+
+                gameObject->SetName(objectName);
+                gameObject->SetEnabled(isEnabled);
+                gameObject->m_tag = tag;
+                gameObject->SetTransform(pTransform);
+                return gameObject;
             }
 
             auto&& enabled = marshal.Read<bool>();
@@ -478,12 +570,12 @@ namespace SR_UTILS_NS {
             auto&& tag = marshal.Read<uint64_t>();
 
             if (entityId == UINT64_MAX) {
-                gameObject = *(new GameObject(name));
+                gameObject = new GameObject(name);
             }
             else {
-                SR_UTILS_NS::EntityManager::Instance().GetReserved(entityId, [&gameObject, name]() -> SR_UTILS_NS::Entity* {
-                    gameObject = *(new GameObject(name));
-                    return gameObject.DynamicCast<SR_UTILS_NS::Entity*>();
+                SR_UTILS_NS::EntityManager::Instance().GetReserved(entityId, [&gameObject, name]() -> SR_UTILS_NS::Entity::Ptr {
+                    gameObject = new GameObject(name);
+                    return gameObject.DynamicCast<SR_UTILS_NS::Entity>();
                 });
             }
 
@@ -511,7 +603,7 @@ namespace SR_UTILS_NS {
 
             auto&& components = ComponentManager::Instance().LoadComponents(marshal);
             for (auto&& pComponent : components) {
-                gameObject->LoadComponent(pComponent);
+                gameObject->AddComponent(pComponent);
             }
         }
 
@@ -529,8 +621,8 @@ namespace SR_UTILS_NS {
         return "GameObject: " + GetName();
     }
 
-    GameObject::Ptr GameObject::Copy(const GameObject::ScenePtr &scene) const {
-        GameObject::Ptr gameObject = *(new GameObject(GetName(), GetTransform()->Copy()));
+    GameObject::Ptr GameObject::Copy(const GameObject::ScenePtr& scene) const {
+        GameObject::Ptr gameObject = new GameObject(GetName(), GetTransform()->Copy());
 
         gameObject->SetEnabled(IsEnabled());
 
@@ -541,15 +633,19 @@ namespace SR_UTILS_NS {
         }
 
         for (auto&& pComponent : m_components) {
-            gameObject->LoadComponent(pComponent->CopyComponent());
+            gameObject->AddComponent(pComponent->CopyComponent());
         }
 
         for (auto&& pComponent : m_loadedComponents) {
-            gameObject->LoadComponent(pComponent->CopyComponent());
+            gameObject->AddComponent(pComponent->CopyComponent());
         }
 
         for (auto&& children : GetChildrenRef()) {
             gameObject->AddChild(children->Copy(scene));
+        }
+
+        if (IsPrefabOwner()) {
+            gameObject->SetPrefab(GetPrefab(), true);
         }
 
         return gameObject;
@@ -571,5 +667,63 @@ namespace SR_UTILS_NS {
         }
 
         return GameObject::Ptr();
+    }
+
+    GameObject::Ptr GameObject::GetRoot() const noexcept {
+        /// TODO: optimize
+
+        if (m_parent) {
+            return m_parent->GetRoot();
+        }
+
+        return DynamicCast<GameObject>();
+    }
+
+    GameObject::Ptr GameObject::Find(const std::string &name) const noexcept {
+        return Find(SR_HASH_STR(name));
+    }
+
+    void GameObject::SetPrefab(Prefab* pPrefab, bool owner) {
+        SRAssert2(pPrefab, "Invalid prefab!");
+        SRAssert2(!GetPrefab() && !IsPrefabOwner(), "Prefab is already set!");
+
+        if (pPrefab && !GetPrefab()) {
+            m_prefab.first = pPrefab;
+            m_prefab.first->AddUsePoint();
+        }
+        else {
+            return;
+        }
+
+        m_prefab.second = owner;
+
+        for (auto&& child : m_children) {
+            /// наткнулись на другой префаб
+            if (child->IsPrefabOwner()) {
+                continue;
+            }
+
+            child->SetPrefab(pPrefab, false);
+        }
+    }
+
+    void GameObject::UnlinkPrefab() {
+        SRAssert2(GetPrefab(), "Is not a prefab!");
+
+        m_prefab.second = false;
+
+        if (m_prefab.first) {
+            m_prefab.first->RemoveUsePoint();
+            m_prefab.first = nullptr;
+        }
+
+        for (auto&& child : m_children) {
+            /// наткнулись на другой префаб или он не задан
+            if (child->IsPrefabOwner() || !child->GetPrefab()) {
+                continue;
+            }
+
+            child->UnlinkPrefab();
+        }
     }
 }

@@ -2,14 +2,22 @@
 // Created by Monika on 24.11.2022.
 //
 
+#include <Utils/Common/Features.h>
+
 #include <Physics/PhysX/PhysXLibraryImpl.h>
 
 #include <Physics/PhysX/PhysXPhysicsWorld.h>
 #include <Physics/PhysX/PhysXCollisionShape.h>
 #include <Physics/PhysX/PhysXRigidbody3D.h>
+#include <Physics/PhysX/PhysXMaterialImpl.h>
+#include <Physics/PhysX/PhysXVehicle4W3D.h>
 
 namespace SR_PHYSICS_NS {
     bool PhysXLibraryImpl::Initialize() {
+        if (!Super::Initialize()){
+            SR_ERROR("PhysXLibraryImpl::Initialize() : failed to initialize basic library!");
+        }
+
         m_allocatorCallback = new physx::PxDefaultAllocator();
         m_errorCallback = new physx::PxDefaultErrorCallback();
 
@@ -19,9 +27,11 @@ namespace SR_PHYSICS_NS {
             return false;
         }
 
-        m_pvd = PxCreatePvd(*m_foundation);
-        m_pvdTransport = physx::PxDefaultPvdSocketTransportCreate("127.0.0.1", 5425, 1000);
-        m_pvd->connect(*m_pvdTransport, physx::PxPvdInstrumentationFlag::eALL);
+        if (SR_UTILS_NS::Features::Instance().Enabled("PVD", false)) {
+            m_pvd = PxCreatePvd(*m_foundation);
+            m_pvdTransport = physx::PxDefaultPvdSocketTransportCreate("127.0.0.1", 5425, 1000);
+            m_pvd->connect(*m_pvdTransport, physx::PxPvdInstrumentationFlag::eALL);
+        }
 
         m_physics = PxCreatePhysics(SR_PHYSX_FOUNDATION_VERSION, *m_foundation, physx::PxTolerancesScale(), true, m_pvd);
         if (!m_physics) {
@@ -29,10 +39,23 @@ namespace SR_PHYSICS_NS {
             return false;
         }
 
+        if (IsVehicleSupported()){
+            if (!physx::PxInitVehicleSDK(*m_physics)){
+                SR_ERROR("PhysXLibraryImpl::Initialize() : failed to initialize Vehicle SDK!");
+                return false;
+            }
+            physx::PxVehicleSetBasisVectors(physx::PxVec3(0,1,0), physx::PxVec3(0,0,1));
+            physx::PxVehicleSetUpdateMode(physx::PxVehicleUpdateMode::eACCELERATION);
+        }
+
         return true;
     }
 
     PhysXLibraryImpl::~PhysXLibraryImpl() {
+        if (IsVehicleSupported()){
+            physx::PxCloseVehicleSDK();
+        }
+
         if (m_physics) {
             m_physics->release();
             m_physics = nullptr;
@@ -79,5 +102,13 @@ namespace SR_PHYSICS_NS {
 
     SR_PHYSICS_NS::PhysicsWorld* PhysXLibraryImpl::CreatePhysicsWorld(Space space) {
         return new PhysXPhysicsWorld(this, space);
+    }
+
+    SR_PTYPES_NS::PhysicsMaterialImpl* PhysXLibraryImpl::CreatePhysicsMaterial() {
+        return new SR_PTYPES_NS::PhysXMaterialImpl(this);
+    }
+
+    SR_PTYPES_NS::Vehicle4W3D *PhysXLibraryImpl::CreateVehicle4W3D() {
+        return new SR_PTYPES_NS::PhysXVehicle4W3D(this);
     }
 }

@@ -9,21 +9,6 @@
     #include "../Utils/src/Utils/Platform/AndroidNativeAppGlue.c"
 #endif
 
-#include "../Utils/src/Utils/ECS/Component.cpp"
-#include "../Utils/src/Utils/ECS/IComponentable.cpp"
-#include "../Utils/src/Utils/ECS/ComponentManager.cpp"
-#include "../Utils/src/Utils/ECS/GameObject.cpp"
-#include "../Utils/src/Utils/ECS/ISavable.cpp"
-#include "../Utils/src/Utils/ECS/Transform.cpp"
-#include "../Utils/src/Utils/ECS/EntityManager.cpp"
-#include "../Utils/src/Utils/ECS/Transform3D.cpp"
-#include "../Utils/src/Utils/ECS/Transform2D.cpp"
-#include "../Utils/src/Utils/ECS/TransformZero.cpp"
-#include "../Utils/src/Utils/ECS/EntityRef.cpp"
-#include "../Utils/src/Utils/ECS/Prefab.cpp"
-#include "../Utils/src/Utils/ECS/Migration.cpp"
-#include "../Utils/src/Utils/ECS/TagManager.cpp"
-
 #include "../Utils/src/Utils/Events/EventManager.cpp"
 #include "../Utils/src/Utils/Events/Event.cpp"
 #include "../Utils/src/Utils/Events/EventDispatcher.cpp"
@@ -31,6 +16,7 @@
 #include "../Utils/src/Utils/FileSystem/FileSystem.cpp"
 #include "../Utils/src/Utils/FileSystem/Path.cpp"
 #include "../Utils/src/Utils/FileSystem/FileDialog.cpp"
+#include "../Utils/src/Utils/FileSystem/AssimpCache.cpp"
 
 #include "../Utils/src/Utils/Input/InputSystem.cpp"
 #include "../Utils/src/Utils/Input/InputDispatcher.cpp"
@@ -57,6 +43,7 @@
 #include "../Utils/src/Utils/ResourceManager/ResourcesHolder.cpp"
 #include "../Utils/src/Utils/ResourceManager/ResourceManager.cpp"
 #include "../Utils/src/Utils/ResourceManager/ResourceContainer.cpp"
+#include "../Utils/src/Utils/ResourceManager/IResourceReloader.cpp"
 
 #include "../Utils/src/Utils/CommandManager/ICommand.cpp"
 #include "../Utils/src/Utils/CommandManager/CmdManager.cpp"
@@ -73,6 +60,8 @@
 #include "../Utils/src/Utils/Types/UnicodeString.cpp"
 #include "../Utils/src/Utils/Types/Stream.cpp"
 #include "../Utils/src/Utils/Types/Regex.cpp"
+#include "../Utils/src/Utils/Types/IRawMeshHolder.cpp"
+#include "../Utils/src/Utils/Types/Mutex.cpp"
 
 #include "../Utils/src/Utils/Common/Stacktrace.cpp"
 #include "../Utils/src/Utils/Common/StringUtils.cpp"
@@ -93,3 +82,9 @@
 #include "../Utils/src/Utils/World/SceneDefaultLogic.cpp"
 #include "../Utils/src/Utils/World/SceneCubeChunkLogic.cpp"
 #include "../Utils/src/Utils/World/ScenePrefabLogic.cpp"
+
+#include "../Utils/src/Utils/Game/LookAtComponent.cpp"
+
+#ifdef SR_TRACY_ENABLE
+    #include "../Utils/src/Utils/Profile/TracyContext.cpp"
+#endif

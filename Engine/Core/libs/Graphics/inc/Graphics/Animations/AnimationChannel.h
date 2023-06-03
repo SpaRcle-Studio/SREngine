@@ -9,19 +9,20 @@
 
 #include <Graphics/Animations/AnimationKey.h>
 
+struct aiNodeAnim;
+
 namespace SR_ANIMATIONS_NS {
     class AnimationKey;
+    class AnimationPose;
 
     class AnimationChannel final : public SR_UTILS_NS::NonCopyable {
         using Keys = std::vector<std::pair<double_t, AnimationKey*>>;
     public:
-        ~AnimationChannel() override {
-            for (auto&& [time, pKey] : m_keys) {
-                delete pKey;
-            }
-        }
+        ~AnimationChannel() override;
 
     public:
+        static void Load(aiNodeAnim* pChannel, double_t ticksPerSecond, std::vector<AnimationChannel*>& channels);
+
         SR_NODISCARD AnimationChannel* Copy() const noexcept {
             auto&& pChannel = new AnimationChannel();
 
@@ -34,20 +35,18 @@ namespace SR_ANIMATIONS_NS {
             return pChannel;
         }
 
-        void SetName(const std::string_view& name) {
-            m_hashName = SR_HASH_STR_VIEW(name);
-            if (m_hashName == 0) {
-                SRHalt0();
-            }
-        }
+        void SetName(const std::string_view& name);
+        void AddKey(double_t timePoint, AnimationKey* pKey);
 
-        void AddKey(double_t timePoint, AnimationKey* pKey) {
-            m_keys.emplace_back(std::make_pair(timePoint, pKey));
-        }
+        uint32_t UpdateChannel(uint32_t keyIndex,
+                float_t time,
+                float_t weight,
+                const AnimationPose* pStaticPose,
+                AnimationPose* pWorkingPose) const;
 
     public:
         SR_NODISCARD const Keys& GetKeys() const { return m_keys; }
-        SR_NODISCARD uint64_t GetGameObjectHashName() const noexcept { return m_hashName; }
+        SR_NODISCARD SR_FORCE_INLINE uint64_t GetGameObjectHashName() const noexcept { return m_hashName; }
 
     private:
         uint64_t m_hashName = 0;

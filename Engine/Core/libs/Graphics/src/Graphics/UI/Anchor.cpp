@@ -36,7 +36,7 @@ namespace SR_GRAPH_NS::UI {
     }
 
     void Anchor::OnDestroy() {
-        Component::OnDestroy();
+        Super::OnDestroy();
         delete this;
     }
 

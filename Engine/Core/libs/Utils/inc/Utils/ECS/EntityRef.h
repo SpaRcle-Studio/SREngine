@@ -6,39 +6,56 @@
 #define SRENGINE_ENTITYREF_H
 
 #include <Utils/ECS/EntityRefUtils.h>
+#include <Utils/Types/Marshal.h>
 
 namespace SR_UTILS_NS {
     class GameObject;
     class Component;
 
-    class EntityRef {
+    class EntityRef final : public SR_UTILS_NS::NonCopyable {
     public:
-        EntityRef();
-        explicit EntityRef(bool relative);
+        EntityRef() = default;
+        explicit EntityRef(const EntityRefUtils::OwnerRef& owner);
 
-        EntityRef(const EntityRef& other) noexcept;
         EntityRef(EntityRef&& other) noexcept;
 
-        EntityRef& operator=(const EntityRef& other);
+        EntityRef& operator=(EntityRef& other);
+        EntityRef& operator=(EntityRef&& other);
 
     public:
-        void AddPathItem(EntityRefUtils::Action action);
-        void AddPathItem(EntityRefUtils::Action action, const std::string& name);
-        void AddPathItem(EntityRefUtils::Action action, const std::string& name, uint16_t index);
+        SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save(SR_HTYPES_NS::Marshal::Ptr pMarshal) const;
+        SR_NODISCARD EntityRef Copy(const EntityRefUtils::OwnerRef& owner) const;
 
-    public:
-        SR_NODISCARD GameObject* GetGameObject(GameObject* pFrom) const;
+        void Save(SR_HTYPES_NS::Marshal& marshal) const;
+        void Load(SR_HTYPES_NS::Marshal& marshal);
+
+        template<typename T> SR_NODISCARD SR_HTYPES_NS::SharedPtr<T> GetComponent() const {
+            if (auto&& pComponent = GetComponent()) {
+                return pComponent.DynamicCast<T>();
+            }
+            return nullptr;
+        }
+
+        SR_NODISCARD GameObject::Ptr GetGameObject() const;
+        SR_NODISCARD Component::Ptr GetComponent() const;
+        SR_NODISCARD bool IsValid() const;
+        SR_NODISCARD bool IsRelative() const { return m_relative; }
 
         void SetRelative(bool relative);
+        void SetPathTo(Entity::Ptr pEntity);
+        void SetOwner(const EntityRefUtils::OwnerRef& owner);
 
     private:
-        void Update() const;
+        void UpdateTarget() const;
+        void UpdatePath() const;
 
     private:
-        SR_UTILS_NS::EntityRefUtils::RefPath m_path;
-        bool m_relative;
-        mutable EntityId m_fromEntityId;
-        mutable EntityId m_entityId;
+        mutable SR_UTILS_NS::EntityRefUtils::RefPath m_path;
+
+        bool m_relative = true;
+
+        EntityRefUtils::OwnerRef m_owner;
+        mutable Entity::Ptr m_target;
 
     };
 }

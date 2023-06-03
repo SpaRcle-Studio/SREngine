@@ -21,6 +21,16 @@
 namespace SR_UTILS_NS {
     class GameObject;
 
+    /// Ось, которая будет разворачиваться в сторону цели
+    SR_ENUM_NS_CLASS_T(LookAtAxis, uint8_t,
+        AxisX,
+        AxisY,
+        AxisZ,
+        InvAxisX,
+        InvAxisY,
+        InvAxisZ
+    );
+
     class SR_DLL_EXPORT Transform : public ISavable {
         friend class GameObject;
     public:
@@ -31,14 +41,17 @@ namespace SR_UTILS_NS {
         static Transform* Load(SR_HTYPES_NS::Marshal& marshal, GameObject* pGameObject);
 
     public:
+        SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SavableFlags flags) const override;
+
         void SetGameObject(GameObject *gameObject);
 
-        virtual void Translate(const Math::FVector3& translation) { }
-        virtual void Translate(Math::Unit x, Math::Unit y, Math::Unit z);
-        virtual void Rotate(const Math::FVector3& eulers) { }
-        virtual void Rotate(Math::Unit x, Math::Unit y, Math::Unit z);
-        virtual void Scale(const Math::FVector3& scale) { }
-        virtual void Scale(Math::Unit x, Math::Unit y, Math::Unit z);
+        virtual void Translate(const SR_MATH_NS::FVector3& translation) { }
+        virtual void Translate(SR_MATH_NS::Unit x, SR_MATH_NS::Unit y, SR_MATH_NS::Unit z);
+        virtual void Rotate(const SR_MATH_NS::FVector3& eulers) { }
+        virtual void Rotate(const SR_MATH_NS::Quaternion& q) { }
+        virtual void Rotate(SR_MATH_NS::Unit x, SR_MATH_NS::Unit y, SR_MATH_NS::Unit z);
+        virtual void Scale(const SR_MATH_NS::FVector3& scale) { }
+        virtual void Scale(SR_MATH_NS::Unit x, SR_MATH_NS::Unit y, SR_MATH_NS::Unit z);
 
         virtual void GlobalTranslate(const Math::FVector3& translation);
         virtual void GlobalRotate(const Math::FVector3& eulers);
@@ -65,6 +78,9 @@ namespace SR_UTILS_NS {
         virtual void SetSkew(const SR_MATH_NS::FVector3& skew) { }
         virtual void SetSkew(SR_MATH_NS::Unit x, SR_MATH_NS::Unit y, SR_MATH_NS::Unit z);
 
+        virtual void LookAt(const SR_MATH_NS::FVector3& position) { }
+        virtual void LookAt(const SR_MATH_NS::FVector3& position, LookAtAxis axis) { }
+
         SR_NODISCARD virtual const SR_MATH_NS::Matrix4x4& GetMatrix();
 
         SR_NODISCARD virtual SR_MATH_NS::Quaternion GetQuaternion() const { return SR_MATH_NS::Quaternion::Identity(); }
@@ -82,8 +98,6 @@ namespace SR_UTILS_NS {
         SR_NODISCARD SR_HTYPES_NS::SharedPtr<GameObject> GetGameObject() const;
 
         SR_NODISCARD virtual Measurement GetMeasurement() const = 0;
-
-        SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SavableFlags flags) const override;
 
         virtual void UpdateTree();
 

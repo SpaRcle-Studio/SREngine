@@ -5,6 +5,14 @@
 #include "../Graphics/src/Graphics/Animations/AnimationKey.cpp"
 #include "../Graphics/src/Graphics/Animations/Animator.cpp"
 #include "../Graphics/src/Graphics/Animations/Skeleton.cpp"
+#include "../Graphics/src/Graphics/Animations/AnimationPose.cpp"
+#include "../Graphics/src/Graphics/Animations/AnimationChannel.cpp"
+#include "../Graphics/src/Graphics/Animations/AnimationGraph.cpp"
+#include "../Graphics/src/Graphics/Animations/AnimationGraphNode.cpp"
+#include "../Graphics/src/Graphics/Animations/AnimationStateCondition.cpp"
+#include "../Graphics/src/Graphics/Animations/AnimationStateTransition.cpp"
+#include "../Graphics/src/Graphics/Animations/AnimationStateMachine.cpp"
+#include "../Graphics/src/Graphics/Animations/AnimationState.cpp"
 
 #include "../Graphics/src/Graphics/Pipeline/Vulkan/VulkanImGUI.cpp"
 #include "../Graphics/src/Graphics/Pipeline/Vulkan/VulkanMemory.cpp"
@@ -30,9 +38,10 @@
 #include "../Graphics/src/Graphics/GUI/NodeBuilder.cpp"
 
 #include "../Graphics/src/Graphics/Lighting/DirectionalLight.cpp"
-#include "../Graphics/src/Graphics/Lighting/Light.cpp"
+#include "../Graphics/src/Graphics/Lighting/ILightComponent.cpp"
 #include "../Graphics/src/Graphics/Lighting/PointLight.cpp"
 #include "../Graphics/src/Graphics/Lighting/Spotlight.cpp"
+#include "../Graphics/src/Graphics/Lighting/LightSystem.cpp"
 
 #include "../Graphics/src/Graphics/Loaders/FbxLoader.cpp"
 #include "../Graphics/src/Graphics/Loaders/ImageLoader.cpp"
@@ -50,45 +59,24 @@
 #include "../Graphics/src/Graphics/Memory/CameraManager.cpp"
 #include "../Graphics/src/Graphics/Memory/IGraphicsResource.cpp"
 
-#include "../Graphics/src/Graphics/Pass/BasePass.cpp"
-#include "../Graphics/src/Graphics/Pass/SkyboxPass.cpp"
-#include "../Graphics/src/Graphics/Pass/IFramebufferPass.cpp"
-#include "../Graphics/src/Graphics/Pass/FramebufferPass.cpp"
-#include "../Graphics/src/Graphics/Pass/SwapchainPass.cpp"
-#include "../Graphics/src/Graphics/Pass/GroupPass.cpp"
-#include "../Graphics/src/Graphics/Pass/WidgetPass.cpp"
-#include "../Graphics/src/Graphics/Pass/OpaquePass.cpp"
-#include "../Graphics/src/Graphics/Pass/TransparentPass.cpp"
-#include "../Graphics/src/Graphics/Pass/SortedTransparentPass.cpp"
-#include "../Graphics/src/Graphics/Pass/PostProcessPass.cpp"
-#include "../Graphics/src/Graphics/Pass/DebugPass.cpp"
-#include "../Graphics/src/Graphics/Pass/ColorBufferPass.cpp"
-#include "../Graphics/src/Graphics/Pass/DepthBufferPass.cpp"
-#include "../Graphics/src/Graphics/Pass/ShaderOverridePass.cpp"
-#include "../Graphics/src/Graphics/Pass/SSAOPass.cpp"
-
 #include "../Graphics/src/Graphics/Font/Font.cpp"
 #include "../Graphics/src/Graphics/Font/FontLoader.cpp"
 #include "../Graphics/src/Graphics/Font/SDF.cpp"
 #include "../Graphics/src/Graphics/Font/Text.cpp"
 #include "../Graphics/src/Graphics/Font/TextBuilder.cpp"
+#include "../Graphics/src/Graphics/Font/Glyph.cpp"
+#include "../Graphics/src/Graphics/Font/FreeType.cpp"
 
 #include "../Graphics/src/Graphics/UI/Sprite2D.cpp"
 #include "../Graphics/src/Graphics/UI/Canvas.cpp"
 #include "../Graphics/src/Graphics/UI/Anchor.cpp"
 
 #include "../Graphics/src/Graphics/Render/RenderScene.cpp"
-#include "../Graphics/src/Graphics/Render/ColorBuffer.cpp"
 #include "../Graphics/src/Graphics/Render/RenderTechnique.cpp"
 #include "../Graphics/src/Graphics/Render/MeshCluster.cpp"
-#include "../Graphics/src/Graphics/Render/PostProcessing.cpp"
-#include "../Graphics/src/Graphics/Render/Render.cpp"
-#include "../Graphics/src/Graphics/Render/ShaderGenerator.cpp"
-#include "../Graphics/src/Graphics/Render/RenderManager.cpp"
 #include "../Graphics/src/Graphics/Render/RenderContext.cpp"
 #include "../Graphics/src/Graphics/Render/SortedMeshQueue.cpp"
 #include "../Graphics/src/Graphics/Render/DebugRenderer.cpp"
-#include "../Graphics/src/Graphics/Render/Implementations/VulkanRender.cpp"
 
 #include "../Graphics/src/Graphics/Types/Geometry/DebugWireframeMesh.cpp"
 #include "../Graphics/src/Graphics/Types/Geometry/DebugLine.cpp"
@@ -98,6 +86,7 @@
 #include "../Graphics/src/Graphics/Types/Geometry/MeshComponent.cpp"
 #include "../Graphics/src/Graphics/Types/Geometry/SkinnedMesh.cpp"
 
+#include "../Graphics/src/Graphics/Types/IRenderComponent.cpp"
 #include "../Graphics/src/Graphics/Types/EditorGrid.cpp"
 #include "../Graphics/src/Graphics/Types/Framebuffer.cpp"
 #include "../Graphics/src/Graphics/Types/Material.cpp"
@@ -109,8 +98,14 @@
 #include "../Graphics/src/Graphics/Types/Shader.cpp"
 #include "../Graphics/src/Graphics/Types/RenderTexture.cpp"
 
+#include "../Graphics/src/Graphics/Utils/MeshUtils.cpp"
+
 #include "../Graphics/src/Graphics/Window/Window.cpp"
 #include "../Graphics/src/Graphics/Window/BasicWindowImpl.cpp"
+
+#if defined(SR_TRACY_ENABLE) && defined(SR_USE_VULKAN)
+    #include "../Graphics/src/Graphics/Pipeline/Vulkan/VulkanTracy.cpp"
+#endif
 
 #if defined(SR_WIN32)
     #include "../Graphics/src/Graphics/Window/Win32Window.cpp"

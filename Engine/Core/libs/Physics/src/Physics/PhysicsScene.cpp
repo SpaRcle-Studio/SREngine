@@ -17,6 +17,50 @@ namespace SR_PHYSICS_NS {
     { }
 
     PhysicsScene::~PhysicsScene() {
+        auto&& removeRigidbody = [&](SR_PTYPES_NS::Rigidbody* pRigidbody) {
+            if (!pRigidbody) {
+                return;
+            }
+
+            auto&& type = pRigidbody->GetType();
+
+            if (SR_PHYSICS_UTILS_NS::Is2DShape(type)) {
+                m_2DWorld->RemoveRigidbody(pRigidbody);
+            }
+            else if (SR_PHYSICS_UTILS_NS::Is3DShape(type)) {
+                m_3DWorld->RemoveRigidbody(pRigidbody);
+            }
+            else {
+                SRHalt("Unknown measurement of rigidbody!");
+            }
+
+            if (!pRigidbody->GetParent()) {
+                pRigidbody->AutoFree([](auto&& pData) {
+                    delete pData;
+                });
+            }
+            else {
+                SRHalt("Something went wrong...");
+            }
+        };
+
+        std::set<RigidbodyPtr> rigidbodies;
+
+        for (auto&& pRigidbody : m_rigidbodyToRegister) {
+            rigidbodies.insert(pRigidbody);
+        }
+
+        for (auto&& pRigidbody : m_rigidbodyToRemove) {
+            rigidbodies.insert(pRigidbody);
+        }
+
+        m_rigidbodyToRemove.clear();
+        m_rigidbodyToRegister.clear();
+
+        for (auto&& pRigidbody : rigidbodies) {
+            removeRigidbody(pRigidbody);
+        }
+
         SR_SAFE_DELETE_PTR(m_2DWorld);
         SR_SAFE_DELETE_PTR(m_3DWorld);
 
@@ -61,7 +105,7 @@ namespace SR_PHYSICS_NS {
             m_scene.Unlock();
         }
         else {
-            SR_ERROR("PhysicsScene::Init() : scene is invalid!");
+            SRHalt("PhysicsScene::Init() : scene is invalid!");
         }
 
         if (!CreateDynamicWorld()) {
@@ -73,6 +117,49 @@ namespace SR_PHYSICS_NS {
         m_3DWorld->StepSimulation(1.f / 60.f);
 
         return true;
+    }
+
+    bool PhysicsScene::Flush() {
+        const bool needFlush = !m_rigidbodyToRemove.empty();
+
+        for (auto&& pRigidbody : m_rigidbodyToRegister) {
+            auto&& type = pRigidbody->GetType();
+
+            if (SR_PHYSICS_UTILS_NS::Is2DShape(type)) {
+                m_2DWorld->AddRigidbody(pRigidbody);
+            }
+            else if (SR_PHYSICS_UTILS_NS::Is3DShape(type)) {
+                m_3DWorld->AddRigidbody(pRigidbody);
+            }
+            else {
+                SRHalt("Unknown measurement of rigidbody!");
+            }
+        }
+
+        for (auto&& pRigidbody : m_rigidbodyToRemove) {
+            auto&& type = pRigidbody->GetType();
+
+            if (SR_PHYSICS_UTILS_NS::Is2DShape(type)) {
+                m_2DWorld->RemoveRigidbody(pRigidbody);
+            }
+            else if (SR_PHYSICS_UTILS_NS::Is3DShape(type)) {
+                m_3DWorld->RemoveRigidbody(pRigidbody);
+            }
+            else {
+                SRHalt("Unknown measurement of rigidbody!");
+            }
+
+            if (!pRigidbody->GetParent()) {
+                pRigidbody->AutoFree([](auto&& pData) {
+                    delete pData;
+                });
+            }
+        }
+
+        m_rigidbodyToRemove.clear();
+        m_rigidbodyToRegister.clear();
+
+        return needFlush;
     }
 
     bool PhysicsScene::CreateDynamicWorld() {
@@ -90,6 +177,11 @@ namespace SR_PHYSICS_NS {
     }
 
     void PhysicsScene::FixedUpdate() {
+        if (Flush()) {
+            m_2DWorld->Flush();
+            m_3DWorld->Flush();
+        }
+
         if (m_needClearForces) {
             m_2DWorld->ClearForces();
             m_3DWorld->ClearForces();
@@ -104,31 +196,13 @@ namespace SR_PHYSICS_NS {
     }
 
     void PhysicsScene::Register(PhysicsScene::RigidbodyPtr pRigidbody) {
-        auto&& type = pRigidbody->GetType();
-
-        if (SR_PHYSICS_UTILS_NS::Is2DShape(type)) {
-            m_2DWorld->AddRigidbody(pRigidbody);
-        }
-        else if (SR_PHYSICS_UTILS_NS::Is3DShape(type)) {
-            m_3DWorld->AddRigidbody(pRigidbody);
-        }
-        else {
-            SRHalt("Unknown measurement of rigidbody!");
-        }
+        SRAssert(pRigidbody->IsComponentLoaded());
+        m_rigidbodyToRegister.emplace_back(pRigidbody);
     }
 
     void PhysicsScene::Remove(PhysicsScene::RigidbodyPtr pRigidbody) {
-        auto&& type = pRigidbody->GetType();
-
-        if (SR_PHYSICS_UTILS_NS::Is2DShape(type)) {
-            m_2DWorld->RemoveRigidbody(pRigidbody);
-        }
-        else if (SR_PHYSICS_UTILS_NS::Is3DShape(type)) {
-            m_3DWorld->RemoveRigidbody(pRigidbody);
-        }
-        else {
-            SRHalt("Unknown measurement of rigidbody!");
-        }
+        SRAssert(pRigidbody->IsComponentLoaded());
+        m_rigidbodyToRemove.emplace_back(pRigidbody);
     }
 
     void PhysicsScene::ClearForces() {

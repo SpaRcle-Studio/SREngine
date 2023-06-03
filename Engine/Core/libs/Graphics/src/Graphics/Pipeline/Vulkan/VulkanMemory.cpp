@@ -195,7 +195,7 @@ int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateUBO(uint32_t UB
     return -1;
 }
 
-int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateDescriptorSet(uint32_t shaderProgram, const std::set<VkDescriptorType> &types) {
+int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateDescriptorSet(uint32_t shaderProgram, const std::vector<uint64_t> &types) {
     if (shaderProgram >= m_countShaderPrograms.first) {
         SRHalt("MemoryManager::AllocateDescriptorSet() : shader list index out of range! (" + std::to_string(shaderProgram) + ")");
         return -1;

@@ -63,7 +63,7 @@ namespace SR_GRAPH_NS {
 
             if (auto&& shader = pMesh->GetShader(); shader != pShader) {
                 pShader = shader;
-                if (!pShader || (pShader && !pShader->Use())) {
+                if (!pShader || (pShader && !static_cast<bool>(pShader->Use()))) {
                     continue;
                 }
             }

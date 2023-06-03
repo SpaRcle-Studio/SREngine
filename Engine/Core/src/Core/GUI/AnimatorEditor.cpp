@@ -10,6 +10,10 @@ namespace SR_CORE_NS::GUI {
     { }
 
     void AnimatorEditor::Draw() {
+        DrawTopPanel();
+
+        ImGui::Separator();
+
         UpdateTouch();
 
         ax::NodeEditor::SetCurrentEditor(m_editor);
@@ -123,5 +127,39 @@ namespace SR_CORE_NS::GUI {
         ImGui::PopStyleVar();
 
         ax::NodeEditor::Resume();
+    }
+
+    void AnimatorEditor::DrawTopPanel() {
+        ImGui::PushStyleVar(ImGuiStyleVar_ChildRounding, 0);
+        ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0);
+        ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 0);
+
+        if (ImGui::Button("Open")) {
+
+        }
+
+        ImGui::SameLine();
+
+        if (ImGui::Button("Save")) {
+
+        }
+
+        ImGui::SameLine();
+
+        if (ImGui::Button("Save at")) {
+
+        }
+
+        ImGui::SameLine();
+
+        ImGui::Text(" | ");
+
+        ImGui::SameLine();
+
+        if (ImGui::Button("Close")) {
+
+        }
+
+        ImGui::PopStyleVar(3);
     }
 }

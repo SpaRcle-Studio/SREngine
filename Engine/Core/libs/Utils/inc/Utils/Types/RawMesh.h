@@ -16,15 +16,16 @@ namespace Assimp {
 }
 
 class aiScene;
+class aiAnimation;
 
 namespace SR_WORLD_NS {
     class Scene;
 }
 
-namespace SR_UTILS_NS::Types {
+namespace SR_HTYPES_NS {
     class SR_DLL_EXPORT RawMesh : public IResource {
         using ScenePtr = SR_HTYPES_NS::SafePtr<SR_WORLD_NS::Scene>;
-
+        using Ptr = RawMesh*;
     private:
         RawMesh();
         ~RawMesh() override;
@@ -45,6 +46,7 @@ namespace SR_UTILS_NS::Types {
         SR_NODISCARD uint32_t GetVerticesCount(uint32_t id) const;
         SR_NODISCARD uint32_t GetIndicesCount(uint32_t id) const;
         SR_NODISCARD uint32_t GetAnimationsCount() const;
+        SR_UTILS_NS::Path InitializeResourcePath() const override;
 
         SR_NODISCARD float_t GetScaleFactor() const;
         SR_NODISCARD SR_UTILS_NS::Path GetAssociatedPath() const override;
@@ -59,14 +61,17 @@ namespace SR_UTILS_NS::Types {
 
     private:
         void CalculateBones();
+        void CalculateAnimations();
 
     private:
         ska::flat_hash_map<uint64_t, SR_MATH_NS::Matrix4x4> m_boneOffsets;
+        ska::flat_hash_map<uint64_t, aiAnimation*> m_animations;
         std::vector<ska::flat_hash_map<uint64_t, uint32_t>> m_bones;
 
         bool m_asAnimation = false;
         const aiScene* m_scene = nullptr;
-        Assimp::Importer* m_importer;
+        bool m_fromCache = false;
+        Assimp::Importer* m_importer = nullptr;
 
     };
 }

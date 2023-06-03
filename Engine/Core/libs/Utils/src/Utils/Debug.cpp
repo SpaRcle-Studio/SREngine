@@ -181,14 +181,6 @@ namespace SR_UTILS_NS {
         return true;
     }
 
-    void Debug::Terminate() {
-        SR_SCOPED_LOCK
-
-        Assert("[Stacktrace]");
-        System("Function \"Terminate\" has been called... >_<");
-        Platform::Terminate();
-    }
-
     void Debug::MakeCrash() {
         SR_SCOPED_LOCK
 

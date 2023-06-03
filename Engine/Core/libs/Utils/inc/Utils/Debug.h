@@ -57,7 +57,6 @@ namespace SR_UTILS_NS {
 
         bool IsRunningUnderDebugger();
 
-        void Terminate();
         void MakeCrash();
 
         void Init(const std::string& log_path, bool ShowUsedMemory, Theme colorTheme = Theme::Light);

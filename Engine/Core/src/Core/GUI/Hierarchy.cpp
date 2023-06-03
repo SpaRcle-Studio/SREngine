@@ -36,15 +36,15 @@ namespace SR_CORE_NS::GUI {
             m_tree.clear();
         }
 
+        m_sceneRunnerWidget->SetManager(GetManager());
         m_sceneRunnerWidget->DrawAsSubWindow();
 
         for (auto&& gameObject : m_tree) {
-            if (!gameObject.RecursiveLockIfValid()) {
+            if (!gameObject.Valid()) {
                 continue;
             }
 
-            DrawChild(gameObject);
-            gameObject.Unlock();
+            DrawChild(gameObject, -1);
         }
 
         if (GUISystem::Instance().BeginDragDropTargetWindow("Hierarchy##Payload")) {
@@ -102,7 +102,7 @@ namespace SR_CORE_NS::GUI {
         }
     }
 
-    void Hierarchy::ContextMenu(const Helper::GameObject::Ptr &gm, uint64_t id) {
+    void Hierarchy::ContextMenu(const SR_UTILS_NS::GameObject::Ptr& gm, uint64_t id) {
         ImGui::PushID((void*)(intptr_t)id);
         if (ImGui::BeginPopupContextItem("HierarchyContextMenu")) {
             if (m_selected.count(gm) == 0) {
@@ -132,10 +132,18 @@ namespace SR_CORE_NS::GUI {
                 Delete();
             }
 
+            if (gm->GetPrefab()) {
+                ImGui::Separator();
+
+                if (ImGui::Selectable("Break link")) {
+                    gm->UnlinkPrefab();
+                }
+            }
+
             ImGui::Separator();
 
-            if (ImGui::Selectable("Add children")) { ///TODO: ВСМЫСЛЕ children???? Можно добавлять несколько детей одной командой????
-
+            if (ImGui::Selectable("Add child")) {
+                gm->AddChild(gm->GetScene()->Instance("New GameObject"));
             }
 
             ImGui::EndPopup();
@@ -149,15 +157,33 @@ namespace SR_CORE_NS::GUI {
         }
     }
 
-    void Hierarchy::DrawChild(const Helper::GameObject::Ptr &root) {
+    void Hierarchy::DrawChild(const SR_UTILS_NS::GameObject::Ptr& root, uint32_t prefabIndex) {
         const auto& name = root->GetName();
         const bool hasChild = root->HasChildren();
 
         const ImGuiTreeNodeFlags flags = (hasChild ? m_nodeFlagsWithChild : m_nodeFlagsWithoutChild) |
                 ((m_selected.count(root) == 1) ? ImGuiTreeNodeFlags_Selected : 0);
 
+        if (root->IsPrefabOwner()) {
+            ++prefabIndex;
+        }
+
+        if (root->GetPrefab()) {
+            ImGui::PushStyleColor(ImGuiCol_Text, prefabIndex % 2 == 0 ? SR_PREFAB_COLOR_FIRST : SR_PREFAB_COLOR_SECOND);
+        }
+
         const uint64_t id = root->GetEntityId();
         const bool open = ImGui::TreeNodeEx((void*)(intptr_t)id, flags, "%s", name.c_str());
+
+        if (root->GetPrefab()) {
+            ImGui::PopStyleColor();
+        }
+
+        for (auto&& gameObject : m_selected) {
+            if (gameObject) {
+                ExpandPath(gameObject->GetParent());
+            }
+        }
 
         ContextMenu(root, id);
 
@@ -166,11 +192,22 @@ namespace SR_CORE_NS::GUI {
         if (!ImGui::GetDragDropPayload() && ImGui::BeginDragDropSource()) {
             m_pointersHolder.clear();
 
-            for (const SR_UTILS_NS::GameObject::Ptr& ptr : m_selected) {
-                if (ptr.RecursiveLockIfValid()) {
-                    m_pointersHolder.emplace_back(ptr);
-                    ptr.Unlock();
+            bool useSelected = false;
+
+            for (auto&& ptr : m_selected) {
+                useSelected |= ptr == root;
+            }
+
+            if (useSelected) {
+                for (auto&& ptr : m_selected) {
+                    if (ptr.RecursiveLockIfValid()) {
+                        m_pointersHolder.emplace_back(ptr);
+                        ptr.Unlock();
+                    }
                 }
+            }
+            else {
+                m_pointersHolder.emplace_back(root);
             }
 
             ImGui::SetDragDropPayload("Hierarchy##Payload", &m_pointersHolder, sizeof(std::list<Helper::GameObject::Ptr>), ImGuiCond_Once);
@@ -180,6 +217,12 @@ namespace SR_CORE_NS::GUI {
 
         if (ImGui::BeginDragDropTarget()) {
             ImGui::Separator();
+
+            if (auto&& pPayload = ImGui::GetDragDropPayload(); pPayload && strcmp(pPayload->DataType, "InspectorComponent##Payload") == 0) {
+                if (m_selected.count(root) == 0) {
+                    SelectGameObject(root);
+                }
+            }
 
             if (auto payload = ImGui::AcceptDragDropPayload("Hierarchy##Payload"); payload != NULL && payload->Data) {
                 /*for (auto&& ptr : *(std::list<Helper::GameObject::Ptr>*)(payload->Data)) {
@@ -208,8 +251,8 @@ namespace SR_CORE_NS::GUI {
 
         if (open && hasChild) {
             if (root) {
-                root->ForEachChild([&](const Helper::GameObject::Ptr &child) {
-                    DrawChild(child);
+                root->ForEachChild([&](const SR_UTILS_NS::GameObject::Ptr &child) {
+                    DrawChild(child, prefabIndex);
                 });
             }
             ImGui::TreePop();
@@ -299,15 +342,7 @@ namespace SR_CORE_NS::GUI {
                 m_scene.Unlock();
             }
 
-            {
-                SR_LOCK_GUARD
-                m_selected = selected;
-#ifdef SR_DEBUG
-                for (auto&& ptr : m_selected) {
-                    SRAssert(ptr);
-                }
-#endif
-            }
+            SetSelectedImpl(selected);
         }
     }
 
@@ -379,6 +414,16 @@ namespace SR_CORE_NS::GUI {
             SRAssert(ptr);
         }
 #endif
+        m_needExpand = true;
     }
 
+    void Hierarchy::ExpandPath(const SR_UTILS_NS::GameObject::Ptr& gm) { /** NOLINT */
+        if (!gm) {
+            return;
+        }
+        const uint64_t id = gm->GetEntityId();
+        ImGuiWindow* window = ImGui::GetCurrentWindow();
+        ImGui::TreeNodeSetOpen(window->GetID((void*)(intptr_t)id), true);
+        ExpandPath(gm->GetParent());
+    }
 }

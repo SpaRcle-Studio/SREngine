@@ -9,6 +9,8 @@
 #include <Utils/Common/Breakpoint.h>
 #include <Utils/Common/Stacktrace.h>
 
+#include <Utils/Types/SafePtrLockGuard.h>
+
 namespace SR_UTILS_NS {
     template<typename T> class Singleton;
 
@@ -29,6 +31,10 @@ namespace SR_UTILS_NS {
         ~Singleton() override = default;
 
     public:
+        SR_MAYBE_UNUSED static SR_HTYPES_NS::SingletonRecursiveLockGuard<Singleton<T>*> ScopeLockSingleton() {
+            return SR_HTYPES_NS::SingletonRecursiveLockGuard<Singleton<T>*>(&Instance());
+        }
+
         SR_MAYBE_UNUSED static bool IsSingletonInitialized() noexcept {
             return GetSingleton() != nullptr;
         }
@@ -53,6 +59,7 @@ namespace SR_UTILS_NS {
             (*singleton) = nullptr;
         }
 
+        /// TODO: это не потокобезопасно, нужно переделать
         SR_MAYBE_UNUSED static T& Instance() noexcept {
             auto&& singleton = GetSingleton();
 
@@ -86,6 +93,10 @@ namespace SR_UTILS_NS {
 
                 (*singleton)->m_mutex.unlock();
             }
+        }
+
+        SR_MAYBE_UNUSED static std::recursive_mutex& GetMutex() noexcept {
+            return Instance().m_mutex;
         }
 
     protected:

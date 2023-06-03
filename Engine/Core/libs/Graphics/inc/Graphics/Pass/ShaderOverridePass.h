@@ -36,6 +36,8 @@ namespace SR_GRAPH_NS {
         void Update() override;
 
     protected:
+        void RenderInternal(const RenderScenePtr& pRenderScene);
+
         SR_NODISCARD virtual ShaderPtr GetShader(SR_SRSL_NS::ShaderType type) const;
 
         SR_NODISCARD bool IsDirectional() const noexcept { return m_isDirectional; }

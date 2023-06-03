@@ -42,13 +42,21 @@ namespace SR_SRSL_NS {
 
     SR_INLINE_STATIC const std::map<std::string, std::string> SR_SRSL_DEFAULT_UNIFORMS = { /** NOLINT */
             { "MODEL_MATRIX",                   "mat4"          },
+            { "MODEL_NO_SCALE_MATRIX",          "mat4"          },
             { "VIEW_MATRIX",                    "mat4"          },
             { "PROJECTION_MATRIX",              "mat4"          },
             { "ORTHOGONAL_MATRIX",              "mat4"          },
             { "VIEW_NO_TRANSLATE_MATRIX",       "mat4"          },
+            { "LIGHT_SPACE_MATRIX",             "mat4"          },
 
             { "SKELETON_MATRICES_128",          "mat4[128]"     },
             { "SKELETON_MATRIX_OFFSETS_128",    "mat4[128]"     },
+
+            { "SKELETON_MATRICES_256",          "mat4[256]"     },
+            { "SKELETON_MATRIX_OFFSETS_256",    "mat4[256]"     },
+
+            { "SKELETON_MATRICES_384",          "mat4[384]"     },
+            { "SKELETON_MATRIX_OFFSETS_384",    "mat4[384]"     },
 
             { "HALF_SIZE_NEAR_PLANE",           "vec2"          },
             { "RESOLUTION",                     "vec2"          },

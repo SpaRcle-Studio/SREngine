@@ -5,14 +5,12 @@
 #ifndef GAMEENGINE_DIRECTIONALLIGHT_H
 #define GAMEENGINE_DIRECTIONALLIGHT_H
 
-#include <Graphics/Lighting/Light.h>
+#include <Graphics/Lighting/ILightComponent.h>
 
-namespace Framework::Graphics {
-    class Render;
-
-    class DirectionalLight : public Light {
+namespace SR_GRAPH_NS {
+    class DirectionalLight : public ILightComponent {
     public:
-        DirectionalLight(Render* render);
+
     };
 }
 

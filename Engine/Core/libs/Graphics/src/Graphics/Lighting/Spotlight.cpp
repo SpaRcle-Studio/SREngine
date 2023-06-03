@@ -4,6 +4,6 @@
 
 #include <Graphics/Lighting/Spotlight.h>
 
-Framework::Graphics::Spotlight::Spotlight(Framework::Graphics::Render *render) : Light(render) {
+namespace SR_GRAPH_NS {
 
 }

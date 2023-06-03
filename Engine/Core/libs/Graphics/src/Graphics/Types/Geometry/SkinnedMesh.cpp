@@ -8,7 +8,8 @@ namespace SR_GTYPES_NS {
     SR_REGISTER_COMPONENT(SkinnedMesh);
 
     SkinnedMesh::SkinnedMesh()
-        : Super(MeshType::Skinned)
+        : MeshComponent(MeshType::Skinned)
+        , m_skeletonRef(GetThis())
     { }
 
     SkinnedMesh::~SkinnedMesh() {
@@ -16,16 +17,13 @@ namespace SR_GTYPES_NS {
     }
 
     bool SkinnedMesh::Calculate()  {
-        SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
+        SR_TRACY_ZONE;
 
-        if (m_isCalculated)
-            return true;
-
-        const bool iboOK = m_IBO != SR_ID_INVALID;
-        if (m_VBO != SR_ID_INVALID && iboOK && !m_hasErrors) {
-            m_isCalculated = true;
+        if (IsCalculated()) {
             return true;
         }
+
+        FreeVideoMemory();
 
         if (!IsCanCalculate()) {
             return false;
@@ -35,48 +33,31 @@ namespace SR_GTYPES_NS {
             SR_LOG("SkinnedMesh::Calculate() : calculating \"" + m_geometryName + "\"...");
         }
 
-        auto&& vertices = Vertices::CastVertices<Vertices::SkinnedMeshVertex>(m_rawMesh->GetVertices(m_meshId));
-
-        if (!CalculateVBO<Vertices::VertexType::SkinnedMeshVertex>(vertices))
+        if (!CalculateVBO<Vertices::VertexType::SkinnedMeshVertex, Vertices::SkinnedMeshVertex>([this]() {
+            return Vertices::CastVertices<Vertices::SkinnedMeshVertex>(GetVertices());
+        })) {
             return false;
+        }
 
         return IndexedMesh::Calculate();
     }
 
-    SR_UTILS_NS::IResource* SkinnedMesh::CopyResource(IResource* destination) const {
-        SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
-
-        auto* pSkinnedMesh = dynamic_cast<SkinnedMesh *>(destination ? destination : new SkinnedMesh());
-        pSkinnedMesh = dynamic_cast<SkinnedMesh *>(IndexedMesh::CopyResource(pSkinnedMesh));
-
-        pSkinnedMesh->SetRawMesh(m_rawMesh);
-        pSkinnedMesh->m_meshId = m_meshId;
-
-        return pSkinnedMesh;
-    }
-
-    void SkinnedMesh::FreeVideoMemory() {
-        SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
-
-        if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::High) {
-            SR_LOG("SkinnedMesh::FreeVideoMemory() : free \"" + m_geometryName + "\" mesh video memory...");
-        }
-
-        if (!FreeVBO<Vertices::VertexType::SkinnedMeshVertex>()) {
-            SR_ERROR("SkinnedMesh::FreeVideoMemory() : failed to free VBO!");
-        }
-
-        IndexedMesh::FreeVideoMemory();
-    }
-
     void SkinnedMesh::Draw() {
+        SR_TRACY_ZONE;
+
         auto&& pShader = GetRenderContext()->GetCurrentShader();
 
-        if (!pShader || !IsActive() || IsDestroyed() || !IsSkeletonUsable())
+        if (!pShader || !IsActive()) {
             return;
+        }
 
-        if ((!m_isCalculated && !Calculate()) || m_hasErrors)
+        if ((!IsCalculated() && !Calculate()) || m_hasErrors) {
             return;
+        }
+
+        if (!IsSkeletonUsable()) {
+            return;
+        }
 
         if (m_dirtyMaterial)
         {
@@ -115,169 +96,164 @@ namespace SR_GTYPES_NS {
     }
 
     SR_HTYPES_NS::Marshal::Ptr SR_GTYPES_NS::SkinnedMesh::Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SR_UTILS_NS::SavableFlags flags) const {
-        pMarshal = Component::Save(pMarshal, flags);
-
-        pMarshal->Write(static_cast<int32_t>(m_type));
+        pMarshal = MeshComponent::Save(pMarshal, flags);
 
         /// TODO: use unicode
-        pMarshal->Write(GetResourcePath().ToString());
-        pMarshal->Write(m_meshId);
+        pMarshal->Write<std::string>(GetMeshStringPath());
+        pMarshal->Write<int32_t>(GetMeshId());
 
-        pMarshal->Write(m_material ? m_material->GetResourceId() : "None");
+        pMarshal->Write<std::string>(m_material ? m_material->GetResourceId() : "None");
+
+        pMarshal = m_skeletonRef.Save(pMarshal);
 
         return pMarshal;
     }
 
-    SR_UTILS_NS::Component *SR_GTYPES_NS::SkinnedMesh::LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage *dataStorage) {
-        const auto &&type = static_cast<MeshType>(marshal.Read<int32_t>());
+    SR_UTILS_NS::Component* SR_GTYPES_NS::SkinnedMesh::LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage *dataStorage) {
+        const auto&& type = static_cast<MeshType>(marshal.Read<int32_t>());
 
-        const auto &&path = marshal.Read<std::string>();
-        const auto &&id = marshal.Read<uint32_t>();
+        const auto&& path = marshal.Read<std::string>();
+        const auto&& id = marshal.Read<uint32_t>();
 
-        const auto &&material = marshal.Read<std::string>();
+        const auto&& material = marshal.Read<std::string>();
 
         if (id < 0) {
             return nullptr;
         }
 
-        auto &&pMesh = Mesh::Load(SR_UTILS_NS::Path(path, true), type, id);
+        auto&& pMesh = dynamic_cast<SkinnedMesh*>(Mesh::Load(SR_UTILS_NS::Path(path, true), type, id));
+
+        if (pMesh) {
+            pMesh->GetSkeleton().Load(marshal);
+        }
 
         if (pMesh && material != "None") {
-            if (auto&& pMaterial = Types::Material::Load(SR_UTILS_NS::Path(material, true))) {
+            if (auto&& pMaterial = SR_GTYPES_NS::Material::Load(SR_UTILS_NS::Path(material, true))) {
                 pMesh->SetMaterial(pMaterial);
             }
-            else
+            else {
                 SR_ERROR("SkinnedMesh::LoadComponent() : failed to load material! Name: " + material);
+            }
         }
 
         return dynamic_cast<Component*>(pMesh);
     }
 
-    bool SkinnedMesh::Unload() {
-        SetRawMesh(nullptr);
-        return true;
-    }
-
-    bool SkinnedMesh::Load() {
-        if (auto&& pRawMesh = SR_HTYPES_NS::RawMesh::Load(GetResourcePath())) {
-            if (m_meshId >= pRawMesh->GetMeshesCount()) {
-                if (pRawMesh->GetCountUses() == 0) {
-                    SRHalt("SkinnedMesh::Load() : count uses is zero! Unresolved situation...");
-                    pRawMesh->Destroy();
-                }
-                return false;
-            }
-
-            SetRawMesh(pRawMesh);
-
-            m_countIndices = pRawMesh->GetIndicesCount(m_meshId);
-            m_countVertices = pRawMesh->GetVerticesCount(m_meshId);
-
-            SetGeometryName(pRawMesh->GetGeometryName(m_meshId));
-
-            return true;
-        }
-
-        return false;
-    }
-
-    void SkinnedMesh::SetRawMesh(SR_HTYPES_NS::RawMesh *pRaw) {
-        if (m_rawMesh) {
-            RemoveDependency(m_rawMesh);
-        }
-
-        if (pRaw) {
-            AddDependency(pRaw);
-        }
-
-        m_rawMesh = pRaw;
-    }
-
     std::vector<uint32_t> SkinnedMesh::GetIndices() const {
-        return m_rawMesh->GetIndices(m_meshId);
+        return GetRawMesh()->GetIndices(GetMeshId());
     }
 
     bool SkinnedMesh::IsCanCalculate() const {
-        return m_rawMesh && m_meshId < m_rawMesh->GetMeshesCount() && Mesh::IsCanCalculate();
+        return IsValidMeshId() && Mesh::IsCanCalculate();
     }
 
     bool SkinnedMesh::IsSkeletonUsable() const {
-        if (m_skeleton)
-            return m_skeleton->GetRootBone();
-        else
-            return false;
+        return m_skeletonRef.GetComponent<SR_ANIMATIONS_NS::Skeleton>();
     }
 
     void SkinnedMesh::Update(float dt) {
-        FindSkeleton(GetGameObject());
-        Super::Update(dt);
+        const bool usable = IsSkeletonUsable();
+
+        if (m_skeletonIsBroken && !usable) {
+            return MeshComponent::Update(dt);
+        }
+
+        if (!m_skeletonIsBroken && usable) {
+            return MeshComponent::Update(dt);
+        }
+
+        m_skeletonIsBroken = !usable;
+        m_renderScene->SetDirty();
+        m_bonesIds.clear();
+
+        MeshComponent::Update(dt);
     };
 
     void SkinnedMesh::UseMaterial() {
-        Super::UseMaterial();
+        MeshComponent::UseMaterial();
         UseModelMatrix();
     }
 
     void SkinnedMesh::UseModelMatrix() {
-        PopulateSkeletonMatrices(); ///TODO:А не стоило бы изменить ColorBufferPass так, чтобы он вызывал не UseModelMatrix, а более обощённый метод?
-        GetRenderContext()->GetCurrentShader()->SetCustom(SHADER_SKELETON_MATRICES_128, m_skeletonMatrices.data());
-        GetRenderContext()->GetCurrentShader()->SetCustom(SHADER_SKELETON_MATRIX_OFFSETS_128, m_skeletonOffsets.data());
+        SR_TRACY_ZONE;
+
+        /// TODO: А не стоило бы изменить ColorBufferPass так, чтобы он вызывал не UseModelMatrix, а более обощённый метод?
+        /// Нет, не стоило бы.
+        if (!PopulateSkeletonMatrices()) {
+            return;
+        }
+
+        switch (GetMaxBones()) {
+            case 128:
+                GetRenderContext()->GetCurrentShader()->SetCustom(SHADER_SKELETON_MATRICES_128, m_skeletonMatrices.data());
+                GetRenderContext()->GetCurrentShader()->SetCustom(SHADER_SKELETON_MATRIX_OFFSETS_128, m_skeletonOffsets.data());
+                break;
+            case 256:
+                GetRenderContext()->GetCurrentShader()->SetCustom(SHADER_SKELETON_MATRICES_256, m_skeletonMatrices.data());
+                GetRenderContext()->GetCurrentShader()->SetCustom(SHADER_SKELETON_MATRIX_OFFSETS_256, m_skeletonOffsets.data());
+                break;
+            case 384:
+                GetRenderContext()->GetCurrentShader()->SetCustom(SHADER_SKELETON_MATRICES_384, m_skeletonMatrices.data());
+                GetRenderContext()->GetCurrentShader()->SetCustom(SHADER_SKELETON_MATRIX_OFFSETS_384, m_skeletonOffsets.data());
+                break;
+            case 0:
+                break;
+            default:
+                SRHaltOnce0();
+                return;
+        }
+
         GetRenderContext()->GetCurrentShader()->SetMat4(SHADER_MODEL_MATRIX, m_modelMatrix);
     }
 
-    void SkinnedMesh::PopulateSkeletonMatrices() {
+    void SkinnedMesh::OnResourceReloaded(SR_UTILS_NS::IResource* pResource) {
+        if (GetRawMesh() == pResource) {
+            OnRawMeshChanged();
+            return;
+        }
+        Mesh::OnResourceReloaded(pResource);
+    }
+
+    bool SkinnedMesh::PopulateSkeletonMatrices() {
+        SR_TRACY_ZONE;
+
         static SR_MATH_NS::Matrix4x4 identityMatrix = SR_MATH_NS::Matrix4x4().Identity();
 
-        auto&& bones = m_rawMesh->GetBones(m_meshId);
+        auto&& bones = GetRawMesh()->GetBones(GetMeshId());
+
+        if (bones.empty()) {
+            return false;
+        }
 
         if (m_bonesIds.empty()) {
-            const uint64_t bonesCount = SR_MAX(SR_HUMANOID_MAX_BONES, bones.size());
+            const uint64_t bonesCount = SR_MAX(GetMaxBones(), bones.size());
 
             m_bonesIds.resize(bonesCount);
             m_skeletonOffsets.resize(bonesCount);
             m_skeletonMatrices.resize(bonesCount);
 
-            for (uint64_t i = 0; i < m_bonesIds.size(); i++) {
-                m_skeletonMatrices[i] = identityMatrix;
-            }
+            /// for (uint64_t i = 0; i < bonesCount; ++i) {
+            ///     m_skeletonMatrices[i] = identityMatrix;
+            ///     m_skeletonOffsets[i] = identityMatrix;
+            /// }
         }
 
-        if (!m_skeleton) {
-            if (!m_isSkeletonDeleted) {
-                m_isSkeletonDeleted = true;
-                m_renderScene->SetDirty();
-            }
-            return;
-        } else {
-            if (!m_skeleton->GetRootBone())
-                return;
-            if (m_isSkeletonDeleted) {
-                m_isSkeletonDeleted = false;
-                m_renderScene->SetDirty();
-            }
+        auto&& pSkeleton = m_skeletonRef.GetComponent<SR_ANIMATIONS_NS::Skeleton>();
+
+        if (!pSkeleton || !pSkeleton->GetRootBone()) {
+            return false;
         }
-
-        /*if (!IsSkeletonUsable()) {
-            for (uint64_t i = 0; i < m_bonesIds.size(); i++) {
-                m_skeletonMatrices[i] = identityMatrix;
-                m_skeletonOffsets[i] = identityMatrix;
-            }
-            m_isOffsetsInitialized = false;
-
-            return;
-        }*/
 
         if (!m_isOffsetsInitialized) {
             for (auto&& [hashName, boneId] : bones) {
-                m_skeletonOffsets[boneId] = m_rawMesh->GetBoneOffset(hashName);
-                m_bonesIds[boneId] = m_skeleton->GetBoneIndex(hashName);
+                m_skeletonOffsets[boneId] = GetRawMesh()->GetBoneOffset(hashName);
+                m_bonesIds[boneId] = pSkeleton->GetBoneIndex(hashName);
             }
             m_isOffsetsInitialized = true;
         }
 
-        if (m_skeleton)
         for (uint64_t boneId = 0; boneId < m_bonesIds.size(); ++boneId) {
-            if (auto&& bone = m_skeleton->GetBoneByIndex(m_bonesIds[boneId])) {
+            if (auto&& bone = pSkeleton->GetBoneByIndex(m_bonesIds[boneId]); bone && bone->gameObject) {
                 m_skeletonMatrices[boneId] = bone->gameObject->GetTransform()->GetMatrix();
             }
             else {
@@ -285,12 +261,58 @@ namespace SR_GTYPES_NS {
             }
         }
 
+        return true;
     }
 
-    void SkinnedMesh::FindSkeleton(SR_UTILS_NS::GameObject::Ptr gameObject) {
-        m_skeleton = dynamic_cast<Animations::Skeleton *>(gameObject->GetComponent("Skeleton"));
-        if (!m_skeleton && gameObject->GetParent()) {
-            FindSkeleton(gameObject->GetParent());
+    void SkinnedMesh::OnRawMeshChanged() {
+        IRawMeshHolder::OnRawMeshChanged();
+
+        if (GetRawMesh() && IsValidMeshId()) {
+            SetGeometryName(GetRawMesh()->GetGeometryName(GetMeshId()));
+        }
+
+        m_isOffsetsInitialized = false;
+
+        MarkPipelineUnBuild();
+
+        m_dirtyMaterial = true;
+        m_isCalculated = false;
+    }
+
+    SR_UTILS_NS::Component* SkinnedMesh::CopyComponent() const {
+        if (auto&& pComponent = dynamic_cast<SkinnedMesh*>(MeshComponent::CopyComponent())) {
+            pComponent->SetRawMesh(GetRawMesh());
+            pComponent->SetMeshId(GetMeshId());
+            pComponent->m_skeletonRef = m_skeletonRef.Copy(pComponent->GetThis());
+            return pComponent;
+        }
+
+        return nullptr;
+    }
+
+    std::string SkinnedMesh::GetMeshIdentifier() const {
+        if (auto&& pRawMesh = GetRawMesh()) {
+            return SR_UTILS_NS::Format("%s|%i|%i", pRawMesh->GetResourceId().c_str(), GetMeshId(), pRawMesh->GetReloadCount());
+        }
+
+        return MeshComponent::GetMeshIdentifier();
+    }
+
+    uint32_t SkinnedMesh::GetMaxBones() const {
+        if (!GetRawMesh()) {
+            return 0;
+        }
+
+        uint32_t bonesCount = GetRawMesh()->GetBones(GetMeshId()).size();
+
+        if (bonesCount > 256) {
+            return 384;
+        }
+        else if (bonesCount > SR_HUMANOID_MAX_BONES) {
+            return 256;
+        }
+        else {
+            return SR_HUMANOID_MAX_BONES;
         }
     }
 }

@@ -47,7 +47,7 @@ namespace SR_GRAPH_NS {
                 auto point = POINT { LOWORD(lParam), HIWORD(lParam) };
 
                 /// Convert screen coordinates into client
-                if (!ScreenToClient(m_hWnd, &point)) {
+                if (!::ScreenToClient(m_hWnd, &point)) {
                     return 0;
                 }
 
@@ -92,9 +92,16 @@ namespace SR_GRAPH_NS {
 
                 return DefWindowProc(hwnd, msg, wParam, lParam);
             }
+            case WM_CHANGEUISTATE: {
+                return DefWindowProc(hwnd, msg, wParam, lParam);
+            }
+            case WM_WINDOWPOSCHANGING: {
+                return DefWindowProc(hwnd, msg, wParam, lParam);
+            }
             case WM_WINDOWPOSCHANGED: {
-                DWORD styles = GetWindowLongPtr(hwnd,GWL_STYLE);
+                DWORD styles = GetWindowLongPtr(hwnd, GWL_STYLE);
                 m_maximize = styles & WS_MAXIMIZE;
+                m_collapsed = styles & WS_MINIMIZE;
 
                 return DefWindowProc(hwnd, msg, wParam, lParam);
             }
@@ -110,6 +117,11 @@ namespace SR_GRAPH_NS {
                     m_focusCallback(this, false);
                 }
                 m_isFocused = false;
+                return DefWindowProc(hwnd, msg, wParam, lParam);
+            }
+            case WM_MOVE: {
+                m_position.x = (int)(short) LOWORD(lParam);
+                m_position.y = (int)(short) HIWORD(lParam);
                 return DefWindowProc(hwnd, msg, wParam, lParam);
             }
             case WM_SIZE: {
@@ -171,16 +183,13 @@ namespace SR_GRAPH_NS {
                 m_isValid = false;
                 return DefWindowProc(hwnd, msg, wParam, lParam);
             }
-            case WM_PAINT: {
-                return DefWindowProc(hwnd, msg, wParam, lParam);
-            }
             default:
                 return DefWindowProc(hwnd, msg, wParam, lParam);
         }
     }
 
     SR_MATH_NS::IVector2 Win32Window::GetPosition() const {
-        HWND hWndParent = GetParent(m_hWnd);
+        /*HWND hWndParent = GetParent(m_hWnd);
         POINT p = {0};
 
         int32_t offsetY = m_headerEnabled ? (31) : 0;
@@ -188,7 +197,9 @@ namespace SR_GRAPH_NS {
 
         MapWindowPoints(m_hWnd, hWndParent, &p, 1);
 
-        return SR_MATH_NS::IVector2(p.x, p.y + offsetY);
+        return SR_MATH_NS::IVector2(p.x, p.y + offsetY);*/
+
+        return m_position;
     }
 
     void Win32Window::Move(int32_t x, int32_t y) {
@@ -253,7 +264,7 @@ namespace SR_GRAPH_NS {
         m_styleState = WinAPI::StyleState::Changed;
 
         Resize(m_size.x, m_size.y);
-        Centralize();
+        ///Centralize(); - Централизируем по надобности в Engine::CreateMainWindow().
 
         ShowWindow(m_hWnd, SW_SHOW);
     }
@@ -295,10 +306,13 @@ namespace SR_GRAPH_NS {
                 return true;
             }
         }
-
         if (auto&& pWindow = reinterpret_cast<Win32Window*>(GetWindowLongPtr(hWnd, GWLP_USERDATA))) {
             return pWindow->ReadWmdProcedure(hWnd, message, wParam, lParam);
         }
+
+        /*if (auto&& pWindow = reinterpret_cast<Win32Window*>(GetWindowLongPtr(hWnd, GWLP_USERDATA))) {
+            return pWindow->ReadWmdProcedure(hWnd, message, wParam, lParam);
+        }*/
 
         return DefWindowProc(hWnd, message, wParam, lParam);
     }
@@ -335,6 +349,8 @@ namespace SR_GRAPH_NS {
             const SR_MATH_NS::UVector2& size,
             bool fullscreen, bool resizable
     ) {
+        SR_LOG("Win32Window::Initialize() : create WinAPI window...");
+
         m_hInst = GetModuleHandleA(nullptr);
 
         m_size = size;
@@ -402,6 +418,18 @@ namespace SR_GRAPH_NS {
 
     void Win32Window::PollEvents() const {
         MSG msg = {};
+
+        if (ImGui::GetCurrentContext()) {
+            for (auto&& viewport : ImGui::GetPlatformIO().Viewports) {
+                while (::PeekMessage(&msg, (HWND)viewport->PlatformHandle, 0, 0, PM_NOREMOVE)) {
+                    if (!::GetMessage(&msg, (HWND)viewport->PlatformHandle, 0, 0))
+                        break;
+                    ::TranslateMessage(&msg);
+                    ::DispatchMessage(&msg);
+                }
+            }
+        }
+
         while (::PeekMessage(&msg, m_hWnd, 0, 0, PM_NOREMOVE)) {
             if (!::GetMessage(&msg, m_hWnd, 0, 0))
                 break;
@@ -434,5 +462,21 @@ namespace SR_GRAPH_NS {
             m_isValid = false;
             m_hWnd = nullptr;
         }
+    }
+
+    SR_MATH_NS::IVector2 Win32Window::ScreenToClient(const SR_MATH_NS::IVector2& pos) const {
+        POINT pt = { static_cast<int32>(pos.x), static_cast<int32_t>(pos.y) };
+        ::ScreenToClient(m_hWnd, &pt);
+        return SR_MATH_NS::IVector2(pt.x, pt.y);
+    }
+
+    SR_MATH_NS::IVector2 Win32Window::ClientToScreen(const SR_MATH_NS::IVector2& pos) const {
+        POINT pt = { static_cast<int32>(pos.x), static_cast<int32_t>(pos.y) };
+        ::ClientToScreen(m_hWnd, &pt);
+        return SR_MATH_NS::IVector2(pt.x, pt.y);
+    }
+
+    bool Win32Window::IsVisible() const {
+        return ::IsWindowVisible(m_hWnd);
     }
 }

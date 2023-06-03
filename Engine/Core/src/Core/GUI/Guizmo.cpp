@@ -112,10 +112,11 @@ namespace SR_CORE_NS::GUI {
 
         glm::mat4 transform = GetMatrix();
         glm::mat4 view;
+        glm::mat4 projection = camera->GetProjectionRef().ToGLM();
 
         switch (m_transform->GetMeasurement()) {
             case SR_UTILS_NS::Measurement::Space3D:
-                view = camera->GetImGuizmoView();
+                view = camera->GetImGuizmoView().ToGLM();
                 break;
             default:
                 return;
@@ -123,7 +124,7 @@ namespace SR_CORE_NS::GUI {
 
         if (ImGuizmo::Manipulate(
                 glm::value_ptr(view),
-                glm::value_ptr(camera->GetProjectionRef()),
+                glm::value_ptr(projection),
                 m_operation,
                 m_mode,
                 glm::value_ptr(transform),

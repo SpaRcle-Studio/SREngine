@@ -46,22 +46,22 @@ namespace SR_UTILS_NS {
         friend class IComponentable;
         friend class ComponentManager;
     public:
+        using Ptr = SR_HTYPES_NS::SharedPtr<Component>;
         using ScenePtr = SR_WORLD_NS::Scene*;
         using GameObjectPtr = SR_HTYPES_NS::SharedPtr<GameObject>;
-        using ComponentPtr = Component*;
     public:
-        ~Component() override = default;
+        ~Component() override;
 
     public:
         virtual void OnMatrixDirty() { }
         virtual void OnTransformSet() { }
 
         /// Вызывается при загрузке компонента на игровой объект
-        virtual void OnLoaded() { }
+        virtual void OnLoaded() { m_isComponentLoaded = true; }
         /// Вызывается после добавления компонента к игровому объекту
-        virtual void OnAttached() { }
+        virtual void OnAttached() { m_isAttached = true; SRAssert(GetParent()); }
         /// Вызывается кода компонент убирается с объекта, либо объект уничтожается
-        virtual void OnDestroy() { }
+        virtual void OnDestroy() { SetParent(nullptr); }
 
         virtual void OnEnable() { m_isActive = true; }
         virtual void OnDisable() { m_isActive = false; }
@@ -84,11 +84,15 @@ namespace SR_UTILS_NS {
         void CheckActivity();
 
         void SetEnabled(bool value);
+        void SetComponentBuildId(uint64_t buildId) { m_componentBuildId = buildId; }
 
         SR_NODISCARD virtual Component* CopyComponent() const;
 
         SR_NODISCARD virtual uint64_t GetComponentHashName() const = 0;
         SR_NODISCARD virtual const std::string& GetComponentName() const = 0;
+
+        SR_NODISCARD SR_FORCE_INLINE virtual bool IsComponentLoaded() const noexcept { return m_isComponentLoaded; }
+        SR_NODISCARD SR_FORCE_INLINE virtual bool IsAttached() const noexcept { return m_isAttached; }
 
         /// Активен и компонент и его родительский объект
         SR_NODISCARD SR_FORCE_INLINE virtual bool IsCanUpdate() const noexcept { return m_isStarted && m_isActive; }
@@ -100,29 +104,41 @@ namespace SR_UTILS_NS {
         SR_NODISCARD SR_FORCE_INLINE virtual bool IsAwake() const noexcept { return m_isAwake; }
         SR_NODISCARD SR_FORCE_INLINE virtual bool IsStarted() const noexcept { return m_isStarted; }
 
+        /// Запущена ли сцена
+        SR_NODISCARD bool IsPlayingMode() const;
+        /// На паузе ли сцена (если запущена)
+        SR_NODISCARD bool IsPausedMode() const;
+
         SR_NODISCARD SR_FORCE_INLINE virtual bool ExecuteInEditMode() const { return false; }
         SR_NODISCARD virtual Math::FVector3 GetBarycenter() const { return SR_MATH_NS::InfinityFV3; }
         SR_NODISCARD Component* BaseComponent() { return this; }
         SR_NODISCARD IComponentable* GetParent() const;
         SR_NODISCARD ScenePtr GetScene() const;
+        SR_NODISCARD bool HasScene() const { return TryGetScene(); }
         SR_NODISCARD GameObjectPtr GetGameObject() const;
+        SR_NODISCARD bool HasGameObject() const { return m_parent; }
         SR_NODISCARD ScenePtr TryGetScene() const;
         SR_NODISCARD GameObjectPtr GetRoot() const;
         SR_NODISCARD Transform* GetTransform() const noexcept;
+        SR_NODISCARD uint64_t GetComponentBuildId() const noexcept { return m_componentBuildId; }
 
         SR_NODISCARD std::string GetEntityInfo() const override;
 
     protected:
         SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SavableFlags flags) const override;
 
-    private:
         void SetParent(IComponentable* pParent);
 
     protected:
+        bool m_isComponentLoaded = false;
+        bool m_isAttached = false;
         bool m_isEnabled = true;
         bool m_isActive = false;
         bool m_isAwake = false;
         bool m_isStarted = false;
+
+        /// позиция компонента в списке обновляемых компонентов
+        uint64_t m_componentBuildId = SR_ID_INVALID;
 
         IComponentable* m_parent = nullptr;
 

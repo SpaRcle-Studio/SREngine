@@ -9,6 +9,7 @@
 
 namespace SR_UTILS_NS {
     SR_ENUM_NS_CLASS_T(Measurement, int32_t,
+            Holder = -1,
             SpaceZero = 0,
             Space1D = 1,
             Space2D = 2,

@@ -12,7 +12,7 @@
 namespace SR_SCRIPTING_NS {
     class Compiler;
 
-    class EvoScriptImpl : public Script {
+    class SR_DEPRECATED EvoScriptImpl : public Script {
         using Super = Script;
     public:
         EvoScriptImpl(Compiler* compiler, const std::string& name, const SR_UTILS_NS::Path& path)

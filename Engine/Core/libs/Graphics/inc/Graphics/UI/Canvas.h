@@ -19,6 +19,7 @@ namespace SR_GRAPH_NS::UI {
         SR_INITIALIZE_COMPONENT(Canvas);
         using RenderScenePtr = SR_HTYPES_NS::SafePtr<RenderScene>;
         using RenderContextPtr = SR_HTYPES_NS::SafePtr<RenderContext>;
+        using Super = SR_UTILS_NS::Component;
     public:
         Canvas();
         ~Canvas() override = default;

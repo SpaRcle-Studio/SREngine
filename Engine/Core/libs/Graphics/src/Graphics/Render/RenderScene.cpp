@@ -21,7 +21,9 @@ namespace SR_GRAPH_NS {
         , m_context(pContext)
         , m_opaque(&m_transparent)
         , m_transparent(&m_opaque)
-    { }
+    {
+        m_debugRender->Init();
+    }
 
     RenderScene::~RenderScene() {
         if (m_debugRender) {
@@ -39,12 +41,16 @@ namespace SR_GRAPH_NS {
     }
 
     void RenderScene::Render() noexcept {
+        SR_TRACY_ZONE_N("Render scene");
+
+        PrepareFrame();
+
         /// ImGui будет нарисован поверх независимо оторядка отрисовки.
         /// Однако, если его нарисовать в конце, то пользователь может
         /// изменить данные отрисовки сцены и сломать уже нарисованную сцену
         Overlay();
 
-        Prepare();
+        PrepareRender();
 
         if (IsDirty() || GetPipeline()->IsNeedReBuild()) {
             Build();
@@ -74,6 +80,10 @@ namespace SR_GRAPH_NS {
     }
 
     bool RenderScene::IsEmpty() const {
+        if (m_debugRender && !m_debugRender->IsEmpty()) {
+            return false;
+        }
+
         return
             m_transparent.Empty() &&
             m_opaque.Empty() &&
@@ -86,6 +96,8 @@ namespace SR_GRAPH_NS {
     }
 
     void RenderScene::Build() {
+        SR_TRACY_ZONE_N("Build render");
+
         GetPipeline()->ClearFramebuffersQueue();
 
         m_hasDrawData = false;
@@ -100,13 +112,13 @@ namespace SR_GRAPH_NS {
     }
 
     void RenderScene::Update() noexcept {
+        SR_TRACY_ZONE_N("Update render");
+
         SR_RENDER_TECHNIQUES_CALL(Update)
     }
 
     void RenderScene::Submit() noexcept {
-        if (!m_hasDrawData) {
-            return;
-        }
+        SR_TRACY_ZONE_N("Submit frame");
 
         GetPipeline()->DrawFrame();
     }
@@ -137,6 +149,8 @@ namespace SR_GRAPH_NS {
     }
 
     void RenderScene::Overlay() {
+        SR_TRACY_ZONE;
+
         GetPipeline()->SetGUIEnabled(m_bOverlay);
 
         if (!m_bOverlay) {
@@ -146,7 +160,17 @@ namespace SR_GRAPH_NS {
         SR_RENDER_TECHNIQUES_RETURN_CALL(Overlay)
     }
 
-    void RenderScene::Prepare() {
+    void RenderScene::PrepareFrame() {
+        if (auto&& pPipeline = GetPipeline()) {
+            pPipeline->PrepareFrame();
+        }
+
+        m_context->UpdateFramebuffers();
+    }
+
+    void RenderScene::PrepareRender() {
+        SR_TRACY_ZONE;
+
         if (m_debugRender) {
             m_debugRender->Prepare();
         }
@@ -273,7 +297,9 @@ namespace SR_GRAPH_NS {
             if (pIt->isDestroyed) {
                 SR_LOG("RenderScene::SortCameras() : free camera...");
 
-                delete pIt->pCamera;
+                pIt->pCamera->AutoFree([](auto&& pData) {
+                    delete pData;
+                });
 
                 pIt = m_cameras.erase(pIt);
             }
@@ -314,6 +340,8 @@ namespace SR_GRAPH_NS {
     }
 
     void RenderScene::RenderBlackScreen() {
+        SR_TRACY_ZONE;
+
         auto&& pipeline = GetPipeline();
 
         pipeline->SetCurrentFramebuffer(nullptr);
@@ -324,12 +352,14 @@ namespace SR_GRAPH_NS {
             pipeline->BindFrameBuffer(0);
             pipeline->ClearBuffers(0.0f, 0.0f, 0.0f, 1.f, 1.f, 1);
 
-            pipeline->BeginRender();
+            pipeline->BeginCmdBuffer();
             {
+                pipeline->BeginRender();
                 pipeline->SetViewport();
                 pipeline->SetScissor();
+                pipeline->EndRender();
             }
-            pipeline->EndRender();
+            pipeline->EndCmdBuffer();
         }
     }
 
@@ -399,5 +429,17 @@ namespace SR_GRAPH_NS {
 
     SR_MATH_NS::UVector2 RenderScene::GetSurfaceSize() const {
         return m_surfaceSize;
+    }
+
+    DebugRenderer *RenderScene::GetDebugRenderer() const {
+        return m_debugRender;
+    }
+
+    void RenderScene::OnResourceReloaded(SR_UTILS_NS::IResource::Ptr pResource) {
+        m_debug.OnResourceReloaded(pResource);
+        m_opaque.OnResourceReloaded(pResource);
+        m_transparent.OnResourceReloaded(pResource);
+
+        SetDirty();
     }
 }

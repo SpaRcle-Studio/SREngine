@@ -9,16 +9,27 @@
 #include <Graphics/SRSL/AssignExpander.h>
 #include <Graphics/SRSL/TypeInfo.h>
 
+#include <Utils/Platform/Platform.h>
+
 namespace SR_SRSL_NS {
-    SRSLShader::SRSLShader(SR_UTILS_NS::Path path, SRSLAnalyzedTree::Ptr&& pAnalyzedTree)
+    SRSLShader::SRSLShader(SR_UTILS_NS::Path path)
         : Super()
         , m_path(std::move(path))
-        , m_analyzedTree(SR_UTILS_NS::Exchange(pAnalyzedTree, nullptr))
     { }
 
     SRSLShader::Ptr SRSLShader::Load(SR_UTILS_NS::Path path) {
-        auto&& lexems = SR_SRSL_NS::SRSLLexer::Instance().Parse(SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat(path));
+        auto&& absPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat(path);
 
+        if (!absPath.Exists()) {
+            SR_ERROR("SRSLShader::Load() : file not exists!\n\tPath: " + path.ToString());
+            return nullptr;
+        }
+
+        auto&& cachedPath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Shaders").Concat(path);
+
+        auto&& pShader = SRSLShader::Ptr(new SRSLShader(path));
+
+        auto&& lexems = SR_SRSL_NS::SRSLLexer::Instance().Parse(absPath);
         if (lexems.empty()) {
             SR_ERROR("SRSLShader::Load() : failed to parse lexems!\n\tPath: " + path.ToString());
             return nullptr;
@@ -37,18 +48,39 @@ namespace SR_SRSL_NS {
             return nullptr;
         }
 
-        auto&& pShader = SRSLShader::Ptr(new SRSLShader(std::move(path), std::move(pAnalyzedTree)));
+        pShader->m_analyzedTree = std::move(pAnalyzedTree);
 
         if (!pShader->Prepare()) {
             SR_ERROR("SRSLShader::Load() : failed to prepare shader!\n\tPath: " + path.ToString());
             return nullptr;
         }
 
+        if (!pShader->SaveCache()) {
+            SR_WARN("SRSLShader::Load() : failed to save shader cache shader!\n\tPath: " + path.ToString());
+        }
+
+        SR_UTILS_NS::FileSystem::WriteHashToFile(cachedPath.ConcatExt("hash"), absPath.GetFileHash());
+
         return pShader;
     }
 
     bool SRSLShader::IsCacheActual() const {
-        return false;
+        auto&& absPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat(m_path);
+        auto&& cachedPath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Shaders").Concat(m_path);
+
+        return absPath.GetFileHash() == SR_UTILS_NS::FileSystem::ReadHashFromFile(cachedPath.ConcatExt("hash"));
+    }
+
+    bool SRSLShader::IsCacheActual(ShaderLanguage shaderLanguage) const {
+        auto&& absPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat(m_path);
+        auto&& cachedPath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Shaders").Concat(m_path);
+
+        auto&& cachedHash = SR_UTILS_NS::FileSystem::ReadHashFromFile(cachedPath.ConcatExt("hash").ConcatExt(SR_UTILS_NS::EnumReflector::ToString(shaderLanguage)));
+        return absPath.GetFileHash() == cachedHash;
+    }
+
+    bool SRSLShader::SaveCache() const {
+        return true;
     }
 
     std::string SRSLShader::ToString(ShaderLanguage shaderLanguage) const {
@@ -123,9 +155,10 @@ namespace SR_SRSL_NS {
             case ShaderType::Skybox:
             case ShaderType::Simple:
             case ShaderType::Line:
+                return Vertices::VertexType::SimpleVertex;
             case ShaderType::Text:
             case ShaderType::TextUI:
-                return Vertices::VertexType::SimpleVertex;
+                return Vertices::VertexType::None;
             case ShaderType::Custom:
             case ShaderType::Particles:
             case ShaderType::Compute:
@@ -296,6 +329,10 @@ namespace SR_SRSL_NS {
     }
 
     bool SRSLShader::Export(ShaderLanguage shaderLanguage) const {
+        if (IsCacheActual(shaderLanguage)) {
+            return true;
+        }
+
         auto&& [result, stages] = GenerateStages(shaderLanguage);
 
         if (result.code != SRSLReturnCode::Success) {
@@ -316,6 +353,14 @@ namespace SR_SRSL_NS {
                 return false;
             }
         }
+
+        auto&& absPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat(m_path);
+        auto&& cachedPath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Shaders").Concat(m_path);
+
+        SR_UTILS_NS::FileSystem::WriteHashToFile(
+                cachedPath.ConcatExt("hash").ConcatExt(SR_UTILS_NS::EnumReflector::ToString(shaderLanguage)),
+                absPath.GetFileHash()
+        );
 
         return true;
     }
@@ -399,5 +444,16 @@ namespace SR_SRSL_NS {
         }
 
         return nullptr;
+    }
+
+    void SRSLShader::ClearShadersCache() {
+        auto&& cachedPath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Shaders");
+        if (cachedPath.Exists(SR_UTILS_NS::Path::Type::Folder)) {
+            SR_PLATFORM_NS::Delete(cachedPath);
+            SR_LOG("SRSLShader::ClearShadersCache() : cache was cleared.");
+        }
+        else {
+            SR_WARN("SRSLShader::ClearShadersCache() : cache is already clean!");
+        }
     }
 }

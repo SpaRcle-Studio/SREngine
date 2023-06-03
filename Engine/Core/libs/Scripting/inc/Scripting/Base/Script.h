@@ -16,7 +16,7 @@ namespace SR_SCRIPTING_NS {
 
     class Compiler;
 
-    class Script : private SR_UTILS_NS::NonCopyable {
+    class SR_DEPRECATED_EX("Use Behaviour") Script : private SR_UTILS_NS::NonCopyable {
     protected:
         Script(Compiler* compiler, const std::string& name, const std::string& path) {
             m_compiler = compiler;

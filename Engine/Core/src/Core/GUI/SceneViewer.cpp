@@ -10,6 +10,7 @@
 #include <Utils/Input/InputSystem.h>
 #include <Utils/Common/Features.h>
 #include <Utils/ECS/Transform3D.h>
+#include <Utils/World/SceneLogic.h>
 
 #include <Graphics/Window/Window.h>
 #include <Graphics/Types/Camera.h>
@@ -29,19 +30,18 @@ namespace SR_CORE_NS::GUI {
     }
 
     SceneViewer::~SceneViewer() {
-        SetCameraActive(false);
+        Enable(false);
         SR_SAFE_DELETE_PTR(m_guizmo);
     }
 
     void SceneViewer::SetCamera(const GameObjectPtr& camera) {
-        m_camera.AutoFree([this](SR_UTILS_NS::GameObject* camera) {
-            m_translation = camera->GetTransform()->GetTranslation();
-            m_rotation = camera->GetTransform()->GetRotation();
-            BackupCameraSettings();
-            camera->Destroy();
-        });
+        if (m_camera) {
+            m_camera->Destroy();
+        }
 
         m_camera.Replace(camera);
+
+        BackupCameraSettings();
     }
 
     void SceneViewer::Draw() {
@@ -50,6 +50,9 @@ namespace SR_CORE_NS::GUI {
         }
 
         if (m_camera.RecursiveLockIfValid()) {
+            m_translation = m_camera->GetTransform()->GetTranslation();
+            m_rotation = m_camera->GetTransform()->GetRotation();
+
             auto pCamera = m_camera->GetComponent<SR_GTYPES_NS::Camera>();
 
             if (auto&& pFramebuffer = GetContext()->FindFramebuffer("SceneViewFBO", pCamera)) {
@@ -92,11 +95,33 @@ namespace SR_CORE_NS::GUI {
     void SceneViewer::SetScene(const SR_WORLD_NS::Scene::Ptr& scene) {
         SetCamera(GameObjectPtr());
         m_scene.Replace(scene);
-        SetCameraActive(m_cameraActive);
+        Enable(m_enabled);
     }
 
     void SceneViewer::Enable(bool value) {
         m_enabled = value;
+
+        if (!m_scene) {
+            SetCamera(GameObjectPtr());
+            return;
+        }
+
+        auto&& pLogic = m_scene->GetLogicBase();
+
+        /// если сцена сломана, или это "пустышка", то не создаем камеру, т.к. рендерить нет смыла 
+        if (!pLogic || pLogic->IsDefault()) {
+            SetCamera(GameObjectPtr());
+            return;
+        }
+
+        if (m_enabled) {
+            if (!m_camera.Valid()) {
+                InitCamera();
+            }
+        }
+        else {
+            SetCamera(GameObjectPtr());
+        }
     }
 
     void SceneViewer::Update() {
@@ -214,26 +239,11 @@ namespace SR_CORE_NS::GUI {
     }
 
     void SceneViewer::OnClose() {
-        SetCameraActive(false);
+        Enable(false);
     }
 
     void SceneViewer::OnOpen() {
-        SetCameraActive(true);
-    }
-
-    void SceneViewer::SetCameraActive(bool value) {
-        // m_window->BeginSync();
-
-        if ((m_cameraActive = value)) {
-            if (!m_camera.Valid()) {
-                InitCamera();
-                Enable(m_enabled);
-            }
-        }
-        else
-            SetCamera(GameObjectPtr());
-
-        // m_window->EndSync();
+        Enable(true);
     }
 
     void SceneViewer::OnKeyDown(const SR_UTILS_NS::KeyboardInputData* data) {

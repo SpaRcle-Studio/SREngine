@@ -58,6 +58,8 @@ namespace SR_GRAPH_NS {
         virtual ~RenderContext() = default;
 
     public:
+        void UpdateFramebuffers();
+
         void Update() noexcept;
 
         bool Init();
@@ -66,6 +68,7 @@ namespace SR_GRAPH_NS {
         void SetDirty();
 
         void OnResize(const SR_MATH_NS::UVector2& size);
+        void OnMultiSampleChanged();
 
     public:
         RenderScenePtr CreateScene(const SR_WORLD_NS::Scene::Ptr& scene);
@@ -88,6 +91,7 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD FramebufferPtr FindFramebuffer(const std::string& name) const;
         SR_NODISCARD FramebufferPtr FindFramebuffer(const std::string& name, CameraPtr pCamera) const;
         SR_NODISCARD SR_MATH_NS::UVector2 GetWindowSize() const;
+        SR_NODISCARD const std::vector<SR_GTYPES_NS::Shader*>& GetShaders() const noexcept;
 
         void SetCurrentShader(ShaderPtr pShader);
 
@@ -111,8 +115,8 @@ namespace SR_GRAPH_NS {
     private:
         RCUpdateQueueState m_updateState = RCUpdateQueueState::Begin;
 
-        std::vector<Types::Framebuffer*> m_framebuffers;
-        std::vector<Types::Shader*> m_shaders;
+        std::vector<SR_GTYPES_NS::Framebuffer*> m_framebuffers;
+        std::vector<SR_GTYPES_NS::Shader*> m_shaders;
         std::vector<TexturePtr> m_textures;
         std::vector<RenderTechnique*> m_techniques;
         std::vector<MaterialPtr> m_materials;
@@ -146,6 +150,7 @@ namespace SR_GRAPH_NS {
                     /// Ресурс необязательно имеет видеопамять, а лишь содержит другие ресурсы, например материал.
                     if (auto&& pGraphicsResource = dynamic_cast<Memory::IGraphicsResource*>(pResource)) {
                         pGraphicsResource->FreeVideoMemory();
+                        pGraphicsResource->DeInitGraphicsResource();
                     }
 
                     pResource->RemoveUsePoint();

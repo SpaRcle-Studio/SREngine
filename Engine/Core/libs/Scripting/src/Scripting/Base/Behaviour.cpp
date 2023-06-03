@@ -86,8 +86,8 @@ namespace SR_SCRIPTING_NS {
     }
 
     void Behaviour::OnDestroy() {
-        RemoveUsePoint();
         Component::OnDestroy();
+        RemoveUsePoint();
     }
 
     bool Behaviour::IsEmpty() const {
@@ -95,29 +95,8 @@ namespace SR_SCRIPTING_NS {
     }
 
     bool Behaviour::Reload() {
-        SR_LOCK_GUARD_INHERIT(SR_UTILS_NS::IResource);
-
-        SR_LOG("Behaviour::Reload() : reloading \"" + std::string(GetResourceId()) + "\" behaviour...");
-
-        m_loadState = LoadState::Reloading;
-
-        auto&& stash = Stash();
-
-        Unload();
-
-        if (!Load()) {
-            PopStash(stash);
-            return false;
-        }
-
-        ApplyStash(stash);
-        PopStash(stash);
-
-        m_loadState = LoadState::Loaded;
-
-        UpdateResources();
-
-        return true;
+        SRHalt("Is not reloadeable! Use group reloader.");
+        return false;
     }
 
     SR_UTILS_NS::Path Behaviour::GetAssociatedPath() const {
@@ -147,12 +126,9 @@ namespace SR_SCRIPTING_NS {
         }
     }
 
-    void Behaviour::PopStash(const SR_HTYPES_NS::DataStorage& data) {
-        /** nothing */
-    }
-
     void Behaviour::OnLoaded() {
         AddUsePoint();
+
         Component::OnLoaded();
     }
 
@@ -162,5 +138,11 @@ namespace SR_SCRIPTING_NS {
 
     SR_UTILS_NS::Component *Behaviour::CopyComponent() const {
         return Behaviour::Load(GetResourcePath());
+    }
+
+    void Behaviour::DeleteResource() {
+        GetThis().AutoFree([](auto&& pData) {
+           delete pData;
+        });
     }
 }

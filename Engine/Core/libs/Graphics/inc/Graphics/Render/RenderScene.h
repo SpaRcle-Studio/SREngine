@@ -52,6 +52,7 @@ namespace SR_GRAPH_NS {
         void Render() noexcept;
         void Synchronize();
 
+        void OnResourceReloaded(SR_UTILS_NS::IResource* pResource);
         void OnResize(const SR_MATH_NS::UVector2& size);
 
         /// Можно вызывать не синхронно
@@ -82,6 +83,7 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD MeshCluster& GetTransparent();
         SR_NODISCARD MeshCluster& GetDebugCluster();
         SR_NODISCARD CameraPtr GetMainCamera() const;
+        SR_NODISCARD DebugRenderer* GetDebugRenderer() const;
         SR_NODISCARD CameraPtr GetFirstOffScreenCamera() const;
         SR_NODISCARD SR_MATH_NS::UVector2 GetSurfaceSize() const;
 
@@ -89,8 +91,9 @@ namespace SR_GRAPH_NS {
         void SortCameras();
         void RenderBlackScreen();
 
+        void PrepareFrame();
         void Overlay();
-        void Prepare();
+        void PrepareRender();
         void Build();
         void Update() noexcept;
         void Submit() noexcept;
