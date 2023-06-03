@@ -119,7 +119,8 @@ namespace SR_CORE_NS {
                 }
             }
 
-            m_accumulator += dt;
+            /// если по какой-то причине получилось так, что dt большой, то обновляем максимум 120 раз
+            m_accumulator += SR_MIN(dt, m_updateFrequency * 120);
 
             pScene.Unlock();
         }

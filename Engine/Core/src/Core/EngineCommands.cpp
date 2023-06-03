@@ -198,8 +198,9 @@ bool Framework::Core::Commands::GameObjectDelete::Redo() {
 
         m_reserved.Reserve();
         SR_SAFE_DELETE_PTR(m_backup);
-        m_backup = pObject->Save(nullptr, SR_UTILS_NS::SAVABLE_FLAG_NONE);
-        m_backup->SetPosition(0);
+        if ((m_backup = pObject->Save(nullptr, SR_UTILS_NS::SAVABLE_FLAG_NONE))) {
+            m_backup->SetPosition(0);
+        }
         pObject->Destroy();
 
         m_scene.Unlock();

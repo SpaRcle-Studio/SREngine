@@ -2,15 +2,19 @@
 // Created by Monika on 11.07.2022.
 //
 
+#include <Utils/Common/Numeric.h>
+
 #include <Graphics/Memory/ShaderProgramManager.h>
 #include <Graphics/Types/Framebuffer.h>
+#include <Graphics/Pipeline/Environment.h>
+#include <EvoVulkan/Tools/VulkanDebug.h>
 
 namespace SR_GRAPH_NS::Memory {
     ShaderProgramManager::ShaderProgramManager()
         : SR_UTILS_NS::Singleton<ShaderProgramManager>()
         , m_pipeline(Environment::Get())
     {
-        m_virtualTable.max_load_factor(0.9f);
+        m_virtualTable.max_load_factor(0.75f);
         m_virtualTable.reserve(1000);
     }
 
@@ -284,7 +288,7 @@ namespace SR_GRAPH_NS::Memory {
     }
 
     VirtualProgramInfo::Identifier ShaderProgramManager::GetCurrentIdentifier() const {
-        return reinterpret_cast<VirtualProgramInfo::Identifier>(m_pipeline->GetCurrentFramebuffer());
+        return reinterpret_cast<VirtualProgramInfo::Identifier>(m_pipeline->GetCurrentRenderPassHandle());
     }
 }
 
