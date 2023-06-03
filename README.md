@@ -27,7 +27,7 @@
  3. Install Clion 2020.1 / Visual Studio 2019
  4. Install [Vulkan SDK/Runtime](https://vulkan.lunarg.com/sdk/home) 1.3.211.0
  5. Install CMake 3.16.0
- 6. Install [MS Build Tools 14.29.30037](https://learn.microsoft.com/en-us/visualstudio/releases/2019/history) (if you using CLion) 
+ 6. Install [MS Build Tools](https://learn.microsoft.com/en-us/visualstudio/releases/2019/history) 14.29.30037 (if you using CLion) 
  7. Working with CMake (if you're using Visual Studio): 
     1. Choose the path to SREndine (Where the source code is).
     2. Choose the path where to build the binaries (SREngine/Build).
