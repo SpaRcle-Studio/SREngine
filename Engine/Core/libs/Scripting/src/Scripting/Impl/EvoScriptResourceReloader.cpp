@@ -46,6 +46,8 @@ namespace SR_SCRIPTING_NS {
             pResource->Unload();
         }
 
+        SR_LOG("EvoScriptResourceReloader::Reload() : reload \"" + path.ToStringRef() + "\" script...");
+
         if (!EvoScriptManager::Instance().ReloadScript(path)) {
             SR_ERROR("EvoScriptResourceReloader::Reload() : failed to reload script!\n\tPath: " + path.ToStringRef());
             FreeStashedProperties(stashedProps);

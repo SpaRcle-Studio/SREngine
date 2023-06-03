@@ -135,6 +135,7 @@ namespace SR_UTILS_NS {
     #define SR_SAFE_PTR_ASSERT(expr, msg) SRAssert2(expr, SR_UTILS_NS::Format("[SafePtr] %s \n\tPtr: %p", msg, (void *) m_ptr));
 
     #define SRAssert2Once(expr, msg) ((!(expr) && SR_UTILS_NS::Debug::Instance().AssertOnceCheck(SR_MAKE_ASSERT(msg))) || SRAssert2(expr, msg))
+    #define SRHalt(msg) SRAssert2(false, msg)
 #else
     #define SR_CHECK_ERROR(fun, notEquals, errorMsg) fun
     #define SRAssert2(expr, msg) (SR_NOOP)
@@ -143,13 +144,13 @@ namespace SR_UTILS_NS {
     #define SR_SAFE_PTR_ASSERT(expr, msg) (SR_NOOP)
     #define SRAssert2Once(expr, msg) (SR_NOOP)
     #define SRVerifyFalse2(expr, msg) ((!(expr)))
+    #define SRHalt(msg) SR_ERROR(msg)
 #endif
 
 #define SRVerifyFalse(expr) SRVerifyFalse2(expr, "An exception has been occured.")
 
 #define SRAssert1Once(expr) SRAssert2Once(expr, #expr)
 #define SRAssertOnce(expr) SRAssert2Once(expr, "An exception has been occured.")
-#define SRHalt(msg) SRAssert2(false, msg)
 #define SRHaltOnce(msg) SRAssert2Once(false, msg)
 #define SRHalt0() SRAssert(false)
 #define SRHaltOnce0() SRAssert2Once(false, "An exception has been occured.")

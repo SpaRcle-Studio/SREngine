@@ -22,10 +22,11 @@ namespace SR_UTILS_NS {
         using HardPtr = std::shared_ptr<ResourceInfo>;
         using WeakPtr = std::weak_ptr<ResourceInfo>;
 
-        ResourceInfo(uint64_t fileHash, uint64_t resourceHash, ResourceType* pResourceType)
+        ResourceInfo(uint64_t fileHash, uint64_t resourceHash, uint64_t pathHash, ResourceType* pResourceType)
             : m_fileHash(fileHash)
             , m_resourceHash(resourceHash)
             , m_resourceType(pResourceType)
+            , m_pathHash(pathHash)
         { }
 
         SR_NODISCARD IResource* GetResource() const;
@@ -37,6 +38,8 @@ namespace SR_UTILS_NS {
         uint64_t m_fileHash = 0;
         /// текущий хэш самого ресурса (параметры и тд)
         uint64_t m_resourceHash = 0;
+        /// хеш пути ресурса
+        uint64_t m_pathHash = 0;
 
         ResourcesSet m_loaded;
     };
@@ -61,7 +64,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD Info& GetInfo();
         SR_NODISCARD std::pair<ResourcePath, ResourceInfo::HardPtr> GetInfoByIndex(uint64_t index);
         SR_NODISCARD IResourceReloader* GetReloader() const noexcept { return m_reloader; }
-        SR_NODISCARD std::string_view GetName() const { return m_name; }
+        SR_NODISCARD const std::string& GetName() const { return m_name; }
 
         void Remove(IResource* pResource);
         void Add(IResource* pResource);

@@ -89,6 +89,11 @@ namespace SR_UTILS_NS {
     }
 
     void ResourceType::Add(IResource* pResource) {
+        if (pResource->GetResourceHashPath() == 0 && pResource->IsFileResource()) {
+            SRHalt("ResourceType::Add() : resource path have a zero hash!");
+            return;
+        }
+
         m_copies[pResource->GetResourceHashId()].insert(pResource);
         m_resources.insert(pResource);
 
@@ -104,7 +109,7 @@ namespace SR_UTILS_NS {
             pResource->m_resourceInfo = pInfo.get();
         }
         else {
-            auto&& pInfo = std::make_shared<ResourceInfo>(pResource->GetFileHash(), pResource->GetResourceHash(), this);
+            auto&& pInfo = std::make_shared<ResourceInfo>(pResource->GetFileHash(), pResource->GetResourceHash(), path, this);
             pIt = m_info.insert(std::make_pair(path, pInfo)).first;
             goto retry;
         }
