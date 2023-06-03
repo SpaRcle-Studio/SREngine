@@ -306,13 +306,10 @@ namespace SR_GRAPH_NS {
                 return true;
             }
         }
+
         if (auto&& pWindow = reinterpret_cast<Win32Window*>(GetWindowLongPtr(hWnd, GWLP_USERDATA))) {
             return pWindow->ReadWmdProcedure(hWnd, message, wParam, lParam);
         }
-
-        /*if (auto&& pWindow = reinterpret_cast<Win32Window*>(GetWindowLongPtr(hWnd, GWLP_USERDATA))) {
-            return pWindow->ReadWmdProcedure(hWnd, message, wParam, lParam);
-        }*/
 
         return DefWindowProc(hWnd, message, wParam, lParam);
     }

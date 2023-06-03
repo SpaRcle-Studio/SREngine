@@ -88,6 +88,11 @@ LRESULT CustomWindowProcPlatform(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPar
 
             return DefWindowProc(hwnd, msg, wParam, lParam);
         }
+        case WM_SETCURSOR: {
+            /// Костыльный фикс курсора для вторичных окон.
+            SetClassLongPtr(hwnd, GCLP_HCURSOR, reinterpret_cast<LONG_PTR>(LoadCursor(NULL, IDC_ARROW)));
+            return DefWindowProc(hwnd, msg, wParam, lParam);
+        }
         default:
             return DefWindowProc(hwnd, msg, wParam, lParam);
     }
