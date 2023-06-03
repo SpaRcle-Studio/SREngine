@@ -36,7 +36,8 @@ namespace SR_UTILS_NS {
         }
 
         SR_MAYBE_UNUSED static bool IsSingletonInitialized() noexcept {
-            return GetSingleton() != nullptr;
+            auto&& pSingleton = GetSingleton();
+            return pSingleton && *pSingleton;
         }
 
         SR_MAYBE_UNUSED static void DestroySingleton() {
