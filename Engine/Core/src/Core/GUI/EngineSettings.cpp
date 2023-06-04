@@ -6,7 +6,7 @@
 
 namespace SR_CORE_GUI_NS {
     EngineSettings::EngineSettings()
-        : SR_GRAPH_NS::GUI::Widget("Settings", SR_MATH_NS::IVector2(300, 400))
+        : SR_GRAPH_NS::GUI::Widget("Settings")
     { }
 
     void EngineSettings::Draw() {
