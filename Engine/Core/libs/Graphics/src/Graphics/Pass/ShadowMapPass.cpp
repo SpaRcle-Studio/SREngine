@@ -50,4 +50,8 @@ namespace SR_GRAPH_NS {
     void ShadowMapPass::UseSamplers(IMeshClusterPass::ShaderPtr pShader, IMeshClusterPass::MeshPtr pMesh) {
         pMesh->UseModelMatrix();
     }
+
+    MeshClusterTypeFlag ShadowMapPass::GetClusterType() const noexcept {
+        return static_cast<uint64_t>(MeshClusterType::Opaque) | static_cast<uint64_t>(MeshClusterType::Transparent);
+    }
 }
