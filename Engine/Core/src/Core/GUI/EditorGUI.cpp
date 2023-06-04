@@ -275,7 +275,7 @@ namespace SR_CORE_NS::GUI {
         }
 
         if (!scenePath.Exists()) {
-            SR_ERROR("EditorGUI::LoadSceneFromCachedPath() : default scene is not exists! \n\tCreate new by path: " + scenePath.ToStringRef());
+            SR_ERROR("EditorGUI::LoadSceneFromCachedPath() : default scene does not exist! \n\tCreating new one by path: " + scenePath.ToStringRef());
             return Engine::Instance().SetScene(SR_WORLD_NS::Scene::New(scenePath));
         }
 

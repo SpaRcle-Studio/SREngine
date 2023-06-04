@@ -11,23 +11,16 @@ DepthTest false;
 [[uniform]] sampler2D depthMap;
 [[shared]] vec2 uv;
 
-float LinearizeDepth(float z)
-{
-  float n = 1.0; // camera z near
-  float f = 100.0; // camera z far
-  return (2.0 * n) / (f + n - z * (f - n));
+float LinearizeDepth() {
+    float n = 1.0; // camera z near
+    float f = 100.0; // camera z far
+    float z = texture(depthMap, uv).x;
+    return (2.0 * n) / (f + n - z * (f - n));
 }
 
 void fragment() {
-    vec4 color = texture(depthMap, uv);
-
-    if (color.r <= 0) {
-        discard;
-    }
-
-    float depth = 1 - LinearizeDepth(color.r);
-
-    COLOR_INDEX_0 = vec4(depth, depth, depth, 1.0);
+    float d = LinearizeDepth();
+    COLOR_INDEX_0 = vec4(d, d, d, 1.0);
 }
 
 void vertex() {

@@ -8,8 +8,8 @@
             <Layer Format="R16_UNORM" R="0.0" G="0.0" B="0.0" A="1.0"/>
         </FramebufferSettings>
         <Shaders>
-            <Override Type="Spatial" Path="Engine/Shaders/ShadowMap/spatial.srsl"/>
-            <Override Type="Skinned" Path="Engine/Shaders/ShadowMap/skinned.srsl"/>
+            <Override Type="Spatial" Path="Engine/Shaders/ShadowMap/depth-spatial.srsl"/>
+            <Override Type="Skinned" Path="Engine/Shaders/ShadowMap/depth-skinned.srsl"/>
         </Shaders>
     </ShadowMapPass>
     <FramebufferPass Name="SceneViewFBO">
@@ -20,7 +20,7 @@
             <Layer Format="RGBA8_UNORM" R="0.0" G="0.0" B="0.0" A="1.0"/>
         </FramebufferSettings>
         <Passes>
-            <PostProcessPass Shader="Engine/Shaders/ShadowMap/shadow_map.srsl">
+            <PostProcessPass Shader="Engine/Shaders/ShadowMap/shadow-map.srsl">
                 <Attachments>
                     <Attachment FBO="DepthFBO" Id="depthMap" Index="0"/>
                 </Attachments>

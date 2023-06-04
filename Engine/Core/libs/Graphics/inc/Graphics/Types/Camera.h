@@ -56,6 +56,7 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD SR_FORCE_INLINE float_t GetFar() const { return m_far; }
         SR_NODISCARD SR_FORCE_INLINE float_t GetNear() const { return m_near; }
         SR_NODISCARD SR_FORCE_INLINE float_t GetFOV() const { return m_FOV; }
+        SR_NODISCARD SR_FORCE_INLINE float_t GetAspect() const { return m_aspect; }
         SR_NODISCARD SR_FORCE_INLINE int32_t GetPriority() const { return m_priority; }
 
         SR_NODISCARD SR_MATH_NS::Matrix4x4 GetImGuizmoView() const noexcept;
