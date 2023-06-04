@@ -189,6 +189,7 @@ namespace SR_GRAPH_NS {
             pShader->SetMat4(SHADER_VIEW_MATRIX, m_camera->GetViewTranslateRef());
             pShader->SetMat4(SHADER_PROJECTION_MATRIX, m_camera->GetProjectionRef());
             pShader->SetMat4(SHADER_ORTHOGONAL_MATRIX, m_camera->GetOrthogonalRef());
+            pShader->SetVec3(SHADER_VIEW_DIRECTION, m_camera->GetViewDirection());
 
             for (auto const& [key, meshGroup] : subCluster) {
                 for (const auto &pMesh : meshGroup) {
@@ -202,8 +203,6 @@ namespace SR_GRAPH_NS {
                     }
 
                     pMesh->UseMaterial();
-
-                    pShader->SetVec3(SHADER_VIEW_DIRECTION, m_camera->GetViewDirection());
 
                     if (m_uboManager.BindUBO(virtualUbo) == Memory::UBOManager::BindResult::Duplicated) {
                         SR_ERROR("ShaderOverridePass::Update() : memory has been duplicated!");

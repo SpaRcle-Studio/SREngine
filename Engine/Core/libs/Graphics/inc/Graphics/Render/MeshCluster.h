@@ -21,6 +21,13 @@ namespace SR_GTYPES_NS {
 }
 
 namespace SR_GRAPH_NS {
+    SR_ENUM_NS_CLASS_T(MeshClusterType, uint64_t ,
+        None        = 1 << 0,
+        Opaque      = 1 << 1,
+        Transparent = 1 << 2,
+        Debug       = 1 << 3
+    );
+
     typedef uint32_t ClusterVBOId;
 
     typedef std::unordered_set<SR_GTYPES_NS::Mesh*> MeshGroup;

@@ -23,7 +23,8 @@
 
 /// Declare an enumeration inside a namespace
 #define SR_ENUM_NS_CLASS_T(enumName, type, ...) \
-      SR_ENUM_DETAIL_MAKE(enum class, namespace, enumName, type, __VA_ARGS__ )
+      SR_ENUM_DETAIL_MAKE(enum class, namespace, enumName, type, __VA_ARGS__ ) \
+      typedef type SR_MACRO_CONCAT(enumName, Flag);
 
 /// Declare an enumeration inside a namespace
 #define SR_ENUM_NS_STRUCT_T(enumName, type, ...)                                \

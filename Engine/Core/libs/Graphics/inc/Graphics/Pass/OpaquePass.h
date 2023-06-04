@@ -5,18 +5,20 @@
 #ifndef SRENGINE_OPAQUEPASS_H
 #define SRENGINE_OPAQUEPASS_H
 
-#include <Graphics/Pass/BasePass.h>
+#include <Graphics/Pass/IMeshClusterPass.h>
 
 namespace SR_GRAPH_NS {
-    class OpaquePass : public BasePass {
+    class OpaquePass : public IMeshClusterPass {
+        using Super = IMeshClusterPass;
     public:
         explicit OpaquePass(RenderTechnique* pTechnique, BasePass* pParent);
         ~OpaquePass() override = default;
 
     public:
-        bool PreRender() override;
-        bool Render() override;
-        void Update() override;
+        SR_NODISCARD MeshClusterTypeFlag GetClusterType() const noexcept override;
+
+    protected:
+        void UseUniforms(SR_GTYPES_NS::Shader* pShader) override;
 
     };
 }
