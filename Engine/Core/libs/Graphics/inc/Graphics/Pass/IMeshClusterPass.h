@@ -11,8 +11,10 @@
 namespace SR_GRAPH_NS {
     class IMeshClusterPass : public BasePass {
         using Super = BasePass;
+    public:
         using ShaderPtr = SR_GTYPES_NS::Shader*;
         using MeshPtr = SR_GTYPES_NS::Mesh*;
+        using FramebufferPtr = SR_GTYPES_NS::Framebuffer*;
     public:
         explicit IMeshClusterPass(RenderTechnique* pTechnique, BasePass* pParent);
         ~IMeshClusterPass() override = default;
@@ -26,6 +28,8 @@ namespace SR_GRAPH_NS {
         void Update() override;
 
     protected:
+        SR_NODISCARD virtual ShaderPtr GetShader(SR_SRSL_NS::ShaderType shaderType) const { return nullptr; }
+
         virtual bool RenderCluster(MeshCluster& pMeshCluster);
         virtual void UpdateCluster(MeshCluster& pMeshCluster);
 

@@ -84,7 +84,10 @@ namespace SR_HTYPES_NS {
 
             Factory::Instance().LockSingleton();
 
-            m_thread = std::thread([function = std::move(fn), this]() {
+            auto&& thread = std::thread([function = std::move(fn), this]() {
+                while (!m_isCreated) {
+                    SR_NOOP;
+                }
                 m_id = SR_UTILS_NS::GetThreadId(m_thread);
                 Factory::Instance().m_threads.insert(std::make_pair(m_id, this));
                 SR_LOG("Thread::Run() : run thread " + m_id);
@@ -93,6 +96,9 @@ namespace SR_HTYPES_NS {
                 }
                 function();
             });
+
+            m_thread = std::move(thread);
+            m_isCreated = true;
 
             Factory::Instance().UnlockSingleton();
 
@@ -119,6 +125,7 @@ namespace SR_HTYPES_NS {
         ThreadId m_id;
         DataStorage* m_context = nullptr;
 
+        std::atomic<bool> m_isCreated = false;
         std::atomic<bool> m_isRan = false;
 
         mutable std::shared_mutex m_mutex;

@@ -23,64 +23,31 @@ namespace SR_GRAPH_NS {
         return Super::Load(passNode);
     }
 
-    void ShadowMapPass::UpdateCluster(MeshCluster *pCluster) {
-        if (!m_camera) {
-            return;
-        }
+    void ShadowMapPass::UseUniforms(IMeshClusterPass::ShaderPtr pShader) {
+        if (m_camera) {
+            /// ортогональная матрица у glm не работает, тварь.
+            SR_MATH_NS::Matrix4x4 lightProjection = SR_MATH_NS::Matrix4x4::Perspective(
+                SR_RAD(45.f),
+                m_camera->GetAspect(),
+                m_camera->GetNear(),
+                m_camera->GetFar()
+            );
 
-        SR_MATH_NS::Matrix4x4 lightProjection = SR_MATH_NS::Matrix4x4::Perspective( /// ортогональная матрица у glm не работает, тварь.
-            SR_RAD(45.f),
-            m_camera->GetAspect(),
-            m_camera->GetNear(),
-            m_camera->GetFar()
-        );
+            SR_MATH_NS::Matrix4x4 lightView = SR_MATH_NS::Matrix4x4::LookAt(
+                SR_MATH_NS::FVector3(-2.0f, 4.0f, -1.0f),
+                SR_MATH_NS::FVector3(0.0f, 0.0f, 0.0f),
+                SR_MATH_NS::FVector3(0.0f, 1.0f, 0.0f)
+            );
 
-        SR_MATH_NS::Matrix4x4 lightView = SR_MATH_NS::Matrix4x4::LookAt(
-            SR_MATH_NS::FVector3(-2.0f, 4.0f, -1.0f),
-            SR_MATH_NS::FVector3( 0.0f, 0.0f,  0.0f),
-            SR_MATH_NS::FVector3( 0.0f, 1.0f,  0.0f)
-        );
+            m_lightSpaceMatrix = lightProjection * lightView;
 
-        m_lightSpaceMatrix = lightProjection * lightView;
-
-        for (auto const& [_, subCluster] : *pCluster) {
-            auto&& pShader = GetShader(subCluster.GetShaderType());
-            if (!pShader || !pShader->Ready()) {
-                continue;
-            }
-
-            m_context->SetCurrentShader(pShader);
-
-            /**
-             * TODO: нужно сделать что-то вроде SetSharedMat4, который будет биндить не в BLOCK а в SHARED_BLOCK
-             */
             pShader->SetMat4(SHADER_VIEW_MATRIX, m_camera->GetViewTranslateRef());
             pShader->SetMat4(SHADER_PROJECTION_MATRIX, m_camera->GetProjectionRef());
             pShader->SetMat4(SHADER_LIGHT_SPACE_MATRIX, m_lightSpaceMatrix);
-
-            for (auto const& [key, meshGroup] : subCluster) {
-                for (const auto& pMesh : meshGroup) {
-                    if (!pMesh->IsMeshActive()) {
-                        continue;
-                    }
-
-                    auto&& virtualUbo = pMesh->GetVirtualUBO();
-                    if (virtualUbo == SR_ID_INVALID) {
-                        continue;
-                    }
-
-                    pMesh->UseModelMatrix();
-
-                    if (m_uboManager.BindUBO(virtualUbo) == Memory::UBOManager::BindResult::Duplicated) {
-                        SR_ERROR("ShaderMapPass::UpdateCluster() : memory has been duplicated!");
-                    }
-
-                    pShader->Flush();
-                }
-            }
         }
-
-        m_context->SetCurrentShader(nullptr);
     }
 
+    void ShadowMapPass::UseSamplers(IMeshClusterPass::ShaderPtr pShader, IMeshClusterPass::MeshPtr pMesh) {
+        pMesh->UseModelMatrix();
+    }
 }

@@ -20,10 +20,12 @@ namespace SR_GRAPH_NS {
     }
 
     void DebugPass::UseUniforms(SR_GTYPES_NS::Shader* pShader) {
-        pShader->SetMat4(SHADER_VIEW_MATRIX, m_camera->GetViewTranslateRef());
-        pShader->SetMat4(SHADER_PROJECTION_MATRIX, m_camera->GetProjectionRef());
-        pShader->SetMat4(SHADER_ORTHOGONAL_MATRIX, m_camera->GetOrthogonalRef());
-        pShader->SetVec3(SHADER_VIEW_DIRECTION, m_camera->GetViewDirection());
+        if (m_camera) {
+            pShader->SetMat4(SHADER_VIEW_MATRIX, m_camera->GetViewTranslateRef());
+            pShader->SetMat4(SHADER_PROJECTION_MATRIX, m_camera->GetProjectionRef());
+            pShader->SetMat4(SHADER_ORTHOGONAL_MATRIX, m_camera->GetOrthogonalRef());
+            pShader->SetVec3(SHADER_VIEW_DIRECTION, m_camera->GetViewDirection());
+        }
         Super::UseUniforms(pShader);
     }
 }

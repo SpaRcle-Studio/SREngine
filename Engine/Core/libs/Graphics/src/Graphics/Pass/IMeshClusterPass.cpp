@@ -12,10 +12,6 @@ namespace SR_GRAPH_NS {
     bool IMeshClusterPass::Render() {
         SR_TRACY_ZONE;
 
-        if (!m_camera) {
-            return false;
-        }
-
         bool rendered = false;
 
         if (GetClusterType() & static_cast<MeshClusterTypeFlag>(MeshClusterType::Opaque)) {
@@ -35,10 +31,6 @@ namespace SR_GRAPH_NS {
 
     void IMeshClusterPass::Update() {
         SR_TRACY_ZONE;
-
-        if (!m_camera) {
-            return;
-        }
 
         if (GetClusterType() & static_cast<MeshClusterTypeFlag>(MeshClusterType::Opaque)) {
             UpdateCluster(GetRenderScene()->GetOpaque());
@@ -60,7 +52,12 @@ namespace SR_GRAPH_NS {
 
         auto&& time = SR_HTYPES_NS::Time::Instance().Clock();
 
-        for (auto const& [pShader, subCluster] : meshCluster) {
+        for (auto const& [pClusterShader, subCluster] : meshCluster) {
+            auto&& pShader = GetShader(subCluster.GetShaderType());
+            if (!pShader) {
+                pShader = pClusterShader;
+            }
+
             if (!pShader || !pShader->Ready()) {
                 continue;
             }
@@ -102,12 +99,17 @@ namespace SR_GRAPH_NS {
             return false;
         }
 
-        for (auto&& [shader, subCluster] : meshCluster) {
-            if (!shader) {
+        for (auto&& [pClusterShader, subCluster] : meshCluster) {
+            auto&& pShader = GetShader(subCluster.GetShaderType());
+            if (!pShader) {
+                pShader = pClusterShader;
+            }
+
+            if (!pShader) {
                 continue;
             }
 
-            if (shader->Use() == ShaderBindResult::Failed) {
+            if (pShader->Use() == ShaderBindResult::Failed) {
                 continue;
             }
 
@@ -119,7 +121,7 @@ namespace SR_GRAPH_NS {
                 }
             }
 
-            shader->UnUse();
+            pShader->UnUse();
         }
 
         return true;

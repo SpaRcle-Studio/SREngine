@@ -10,6 +10,7 @@ namespace SR_HTYPES_NS {
     Thread::Thread(std::thread &&thread)
         : m_thread(std::exchange(thread, {}))
     {
+        m_isCreated = true;
         m_isRan = true;
         m_id = SR_UTILS_NS::GetThreadId(m_thread);
         m_context = new DataStorage();

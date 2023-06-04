@@ -5,7 +5,7 @@
 #ifndef SRENGINE_SHADEROVERRIDEPASS_H
 #define SRENGINE_SHADEROVERRIDEPASS_H
 
-#include <Graphics/Pass/BasePass.h>
+#include <Graphics/Pass/IMeshClusterPass.h>
 #include <Graphics/Pass/IFramebufferPass.h>
 #include <Graphics/Pipeline/PipelineType.h>
 
@@ -18,11 +18,8 @@ namespace SR_GTYPES_NS {
 namespace SR_GRAPH_NS {
     class MeshCluster;
 
-    class ShaderOverridePass : public BasePass, public IFramebufferPass {
-        using ShaderPtr = SR_GTYPES_NS::Shader*;
-        using FramebufferPtr = SR_GTYPES_NS::Framebuffer*;
-        using MeshPtr = SR_GTYPES_NS::Mesh*;
-        using Super = BasePass;
+    class ShaderOverridePass : public IMeshClusterPass, public IFramebufferPass {
+        using Super = IMeshClusterPass;
     public:
         explicit ShaderOverridePass(RenderTechnique* pTechnique, BasePass* pParent);
         ~ShaderOverridePass() override;
@@ -36,14 +33,10 @@ namespace SR_GRAPH_NS {
         void Update() override;
 
     protected:
-        void RenderInternal(const RenderScenePtr& pRenderScene);
-
-        SR_NODISCARD virtual ShaderPtr GetShader(SR_SRSL_NS::ShaderType type) const;
-
+        SR_NODISCARD ShaderPtr GetShader(SR_SRSL_NS::ShaderType type) const override;
         SR_NODISCARD bool IsDirectional() const noexcept { return m_isDirectional; }
 
-        virtual bool DrawCluster(MeshCluster* pCluster);
-        virtual void UpdateCluster(MeshCluster* pCluster);
+        void UseUniforms(ShaderPtr pShader) override;
 
     private:
         /// режим рендера без кадрового буффера, напрямую

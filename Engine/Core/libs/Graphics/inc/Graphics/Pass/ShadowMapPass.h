@@ -20,12 +20,17 @@ namespace SR_GRAPH_NS {
         bool Init() override;
         void DeInit() override;
 
-        void UpdateCluster(MeshCluster* pCluster) override;
+        //void UpdateCluster(MeshCluster* pCluster) override;
 
         bool Load(const SR_XML_NS::Node &passNode) override;
 
+    protected:
+        void UseUniforms(ShaderPtr pShader) override;
+        void UseSamplers(ShaderPtr pShader, MeshPtr pMesh) override;
+
     private:
         SR_MATH_NS::Matrix4x4 m_lightSpaceMatrix;
+
     };
 }
 
