@@ -6,6 +6,11 @@
 
 #include <Utils/ResourceManager/ResourceManager.h>
 
+#include <Graphics/Types/Framebuffer.h>
+#include <Graphics/Types/Skybox.h>
+
+#include <Graphics/Render/RenderTechnique.h>
+
 namespace Framework::Core::GUI {
     EngineStatistics::EngineStatistics()
         : Graphics::GUI::Widget("Engine statistics")
@@ -127,6 +132,11 @@ namespace Framework::Core::GUI {
         if (ImGui::BeginTabItem("Video memory")) {
             auto&& pContext = GetContext();
             auto&& shaders = pContext->GetShaders();
+            auto&& framebuffers = pContext->GetFramebuffers();
+            auto&& textures = pContext->GetTextures();
+            auto&& techniques = pContext->GetRenderTechniques();
+            auto&& materials = pContext->GetMaterials();
+            auto&& skyboxes = pContext->GetSkyboxes();
 
             if (ImGui::CollapsingHeader("Shaders")) {
                 if (ImGui::BeginTable("##ShadersTable", 1)) {
@@ -135,6 +145,76 @@ namespace Framework::Core::GUI {
 
                         ImGui::TableSetColumnIndex(0);
                         ImGui::Text("%s", pShader->GetResourceId().c_str());
+                        ImGui::Separator();
+                    }
+
+                    ImGui::EndTable();
+                }
+            }
+
+            if (ImGui::CollapsingHeader("Framebuffers")) {
+                if (ImGui::BeginTable("##FramebuffersTable", 1)) {
+                    for (auto&& pFramebuffer : framebuffers) {
+                        ImGui::TableNextRow();
+
+                        ImGui::TableSetColumnIndex(0);
+                        ImGui::Text("%i", pFramebuffer->GetId());
+                        ImGui::Separator();
+                    }
+
+                    ImGui::EndTable();
+                }
+            }
+
+            if (ImGui::CollapsingHeader("Textures")) {
+                if (ImGui::BeginTable("##TexturesTable", 1)) {
+                    for (auto&& pTexture : textures) {
+                        ImGui::TableNextRow();
+
+                        ImGui::TableSetColumnIndex(0);
+                        ImGui::Text("%s", pTexture->GetResourceId().c_str());
+                        ImGui::Separator();
+                    }
+
+                    ImGui::EndTable();
+                }
+            }
+
+            if (ImGui::CollapsingHeader("Render Techniques")) {
+                if (ImGui::BeginTable("##RenderTechniquesTable", 1)) {
+                    for (auto&& pRenderTechnique : techniques) {
+                        ImGui::TableNextRow();
+
+                        ImGui::TableSetColumnIndex(0);
+                        ImGui::Text("%s", pRenderTechnique->GetResourceId().c_str());
+                        ImGui::Separator();
+                    }
+
+                    ImGui::EndTable();
+                }
+            }
+
+            if (ImGui::CollapsingHeader("Materials")) {
+                if (ImGui::BeginTable("##MaterialsTable", 1)) {
+                    for (auto&& pMaterial : materials) {
+                        ImGui::TableNextRow();
+
+                        ImGui::TableSetColumnIndex(0);
+                        ImGui::Text("%s", pMaterial->GetResourceId().c_str());
+                        ImGui::Separator();
+                    }
+
+                    ImGui::EndTable();
+                }
+            }
+
+            if (ImGui::CollapsingHeader("Skyboxes")) {
+                if (ImGui::BeginTable("##SkyboxesTable", 1)) {
+                    for (auto&& pSkybox : skyboxes) {
+                        ImGui::TableNextRow();
+
+                        ImGui::TableSetColumnIndex(0);
+                        ImGui::Text("%s", pSkybox->GetResourceId().c_str());
                         ImGui::Separator();
                     }
 

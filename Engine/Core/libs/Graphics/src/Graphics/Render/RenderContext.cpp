@@ -342,6 +342,27 @@ namespace SR_GRAPH_NS {
     const std::vector<SR_GTYPES_NS::Shader*>& RenderContext::GetShaders() const noexcept {
         return m_shaders;
     }
+
+    const std::vector<SR_GTYPES_NS::Framebuffer*>& RenderContext::GetFramebuffers() const noexcept {
+        return m_framebuffers;
+    }
+
+    const std::vector<SR_GTYPES_NS::Texture*>& RenderContext::GetTextures() const noexcept {
+        return m_textures;
+    }
+
+    const std::vector<RenderTechnique*>& RenderContext::GetRenderTechniques() const noexcept {
+        return m_techniques;
+    }
+
+    const std::vector<SR_GTYPES_NS::Material*>& RenderContext::GetMaterials() const noexcept {
+        return m_materials;
+    }
+
+    const std::vector<SR_GTYPES_NS::Skybox*>& RenderContext::GetSkyboxes() const noexcept {
+        return m_skyboxes;
+    }
+
     void RenderContext::OnMultiSampleChanged() {
         SR_TRACY_ZONE;
 
