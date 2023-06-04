@@ -36,7 +36,7 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD ShaderPtr GetShader(SR_SRSL_NS::ShaderType type) const override;
         SR_NODISCARD bool IsDirectional() const noexcept { return m_isDirectional; }
 
-        void UseUniforms(ShaderPtr pShader) override;
+        void UseSharedUniforms(ShaderPtr pShader) override;
 
     private:
         /// режим рендера без кадрового буффера, напрямую

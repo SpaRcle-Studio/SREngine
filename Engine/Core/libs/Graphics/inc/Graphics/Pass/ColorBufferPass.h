@@ -25,8 +25,8 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD MeshClusterTypeFlag GetClusterType() const noexcept override;
 
     protected:
-        void UseSamplers(ShaderPtr pShader, MeshPtr pMesh) override;
-        void UseUniforms(ShaderPtr pShader) override;
+        void UseUniforms(ShaderPtr pShader, MeshPtr pMesh) override;
+        void UseSharedUniforms(ShaderPtr pShader) override;
 
         void SetMeshIndex(MeshPtr pMesh, uint32_t colorId);
 

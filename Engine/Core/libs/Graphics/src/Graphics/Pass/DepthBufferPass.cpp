@@ -11,11 +11,11 @@ namespace SR_GRAPH_NS {
         : Super(pTechnique, pParent)
     { }
 
-    void DepthBufferPass::UseSamplers(DepthBufferPass::ShaderPtr pShader, DepthBufferPass::MeshPtr pMesh) {
+    void DepthBufferPass::UseUniforms(DepthBufferPass::ShaderPtr pShader, DepthBufferPass::MeshPtr pMesh) {
         pMesh->UseModelMatrix();
     }
 
-    void DepthBufferPass::UseUniforms(DepthBufferPass::ShaderPtr pShader) {
+    void DepthBufferPass::UseSharedUniforms(DepthBufferPass::ShaderPtr pShader) {
         if (m_camera) {
             pShader->SetMat4(SHADER_VIEW_MATRIX, m_camera->GetViewTranslateRef());
             pShader->SetMat4(SHADER_PROJECTION_MATRIX, m_camera->GetProjectionRef());

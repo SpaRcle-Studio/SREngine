@@ -19,7 +19,7 @@ namespace SR_GRAPH_NS {
         return static_cast<MeshClusterTypeFlag>(MeshClusterType::Transparent);
     }
 
-    void TransparentPass::UseUniforms(SR_GTYPES_NS::Shader *pShader) {
+    void TransparentPass::UseSharedUniforms(SR_GTYPES_NS::Shader *pShader) {
         if (m_camera) {
             pShader->SetMat4(SHADER_VIEW_MATRIX, m_camera->GetViewTranslateRef());
             pShader->SetMat4(SHADER_PROJECTION_MATRIX, m_camera->GetProjectionRef());
@@ -27,6 +27,6 @@ namespace SR_GRAPH_NS {
             pShader->SetVec3(SHADER_VIEW_DIRECTION, m_camera->GetViewDirection());
             pShader->SetVec3(SHADER_VIEW_POSITION, m_camera->GetPositionRef());
         }
-        IMeshClusterPass::UseUniforms(pShader);
+        IMeshClusterPass::UseSharedUniforms(pShader);
     }
 }

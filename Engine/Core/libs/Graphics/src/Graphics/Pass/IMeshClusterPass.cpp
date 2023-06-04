@@ -65,7 +65,7 @@ namespace SR_GRAPH_NS {
             m_context->SetCurrentShader(pShader);
 
             pShader->SetFloat(SHADER_TIME, time);
-            UseUniforms(pShader);
+            UseSharedUniforms(pShader);
 
             for (auto const& [key, meshGroup] : subCluster) {
                 for (const auto& pMesh : meshGroup) {
@@ -78,7 +78,7 @@ namespace SR_GRAPH_NS {
                         continue;
                     }
 
-                    UseSamplers(pShader, pMesh);
+                    UseUniforms(pShader, pMesh);
 
                     if (m_uboManager.BindUBO(virtualUbo) == Memory::UBOManager::BindResult::Duplicated) {
                         SR_ERROR("IMeshClusterPass::UpdateCluster() : memory has been duplicated!");
@@ -113,6 +113,8 @@ namespace SR_GRAPH_NS {
                 continue;
             }
 
+            UseSamplers(pShader);
+
             for (auto&& [key, meshGroup] : subCluster) {
                 (*meshGroup.begin())->BindMesh();
 
@@ -127,8 +129,14 @@ namespace SR_GRAPH_NS {
         return true;
     }
 
-    void IMeshClusterPass::UseSamplers(ShaderPtr pShader, MeshPtr pMesh) {
+    void IMeshClusterPass::UseUniforms(ShaderPtr pShader, MeshPtr pMesh) {
         pMesh->UseMaterial();
+    }
+
+    void IMeshClusterPass::UseSamplers(ShaderPtr pShader) {
+        for (auto&& sampler : m_samplers) {
+            /// TODO
+        }
     }
 
     MeshClusterTypeFlag IMeshClusterPass::GetClusterType() const noexcept {
@@ -142,5 +150,13 @@ namespace SR_GRAPH_NS {
         }
 
         return Super::Load(passNode);
+    }
+
+    void IMeshClusterPass::Prepare() {
+        Super::Prepare();
+    }
+
+    void IMeshClusterPass::UseSharedUniforms(IMeshClusterPass::ShaderPtr pShader) {
+        /// определяется классом-наследником 
     }
 }

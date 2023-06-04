@@ -23,8 +23,8 @@ namespace SR_GRAPH_NS {
         bool Load(const SR_XML_NS::Node &passNode) override;
 
     protected:
-        void UseUniforms(ShaderPtr pShader) override;
-        void UseSamplers(ShaderPtr pShader, MeshPtr pMesh) override;
+        void UseSharedUniforms(ShaderPtr pShader) override;
+        void UseUniforms(ShaderPtr pShader, MeshPtr pMesh) override;
 
         SR_NODISCARD MeshClusterTypeFlag GetClusterType() const noexcept override;
 

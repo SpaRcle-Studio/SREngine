@@ -20,6 +20,7 @@ namespace SR_GRAPH_NS {
             pShader->RemoveUsePoint();
             pShader = nullptr;
         }
+
         m_shaders.clear();
 
         if (m_framebuffer) {
@@ -61,7 +62,6 @@ namespace SR_GRAPH_NS {
 
         return BasePass::Load(passNode);
     }
-
 
     void ShaderOverridePass::OnResize(const SR_MATH_NS::UVector2 &size) {
         IFramebufferPass::ResizeFrameBuffer(size);
@@ -136,13 +136,13 @@ namespace SR_GRAPH_NS {
         return nullptr;
     }
 
-    void ShaderOverridePass::UseUniforms(ShaderOverridePass::ShaderPtr pShader) {
+    void ShaderOverridePass::UseSharedUniforms(ShaderOverridePass::ShaderPtr pShader) {
         if (m_camera) {
             pShader->SetMat4(SHADER_VIEW_MATRIX, m_camera->GetViewTranslateRef());
             pShader->SetMat4(SHADER_PROJECTION_MATRIX, m_camera->GetProjectionRef());
             pShader->SetMat4(SHADER_ORTHOGONAL_MATRIX, m_camera->GetOrthogonalRef());
             pShader->SetVec3(SHADER_VIEW_DIRECTION, m_camera->GetViewDirection());
         }
-        Super::UseUniforms(pShader);
+        Super::UseSharedUniforms(pShader);
     }
 }

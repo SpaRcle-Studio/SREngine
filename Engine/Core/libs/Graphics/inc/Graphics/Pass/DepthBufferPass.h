@@ -18,8 +18,8 @@ namespace SR_GRAPH_NS {
         explicit DepthBufferPass(RenderTechnique* pTechnique, BasePass* pParent);
 
     protected:
-        void UseSamplers(ShaderPtr pShader, MeshPtr pMesh) override;
-        void UseUniforms(ShaderPtr pShader) override;
+        void UseUniforms(ShaderPtr pShader, MeshPtr pMesh) override;
+        void UseSharedUniforms(ShaderPtr pShader) override;
 
     };
 }

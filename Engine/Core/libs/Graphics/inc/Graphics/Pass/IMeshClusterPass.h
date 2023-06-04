@@ -11,6 +11,15 @@
 namespace SR_GRAPH_NS {
     class IMeshClusterPass : public BasePass {
         using Super = BasePass;
+        struct Sampler {
+            uint64_t textureId = SR_ID_INVALID;
+            uint64_t hashId = 0;
+            uint64_t fboHashName = 0;
+            uint64_t index = 0;
+            bool depth = false;
+            SR_GTYPES_NS::Framebuffer* pFBO = nullptr;
+        };
+        using Samplers = std::vector<Sampler>;
     public:
         using ShaderPtr = SR_GTYPES_NS::Shader*;
         using MeshPtr = SR_GTYPES_NS::Mesh*;
@@ -22,22 +31,25 @@ namespace SR_GRAPH_NS {
     public:
         bool Load(const SR_XML_NS::Node& passNode) override;
 
-        SR_NODISCARD virtual MeshClusterTypeFlag GetClusterType() const noexcept;
-
+        void Prepare() override;
         bool Render() override;
         void Update() override;
 
     protected:
+        SR_NODISCARD virtual MeshClusterTypeFlag GetClusterType() const noexcept;
         SR_NODISCARD virtual ShaderPtr GetShader(SR_SRSL_NS::ShaderType shaderType) const { return nullptr; }
 
         virtual bool RenderCluster(MeshCluster& pMeshCluster);
         virtual void UpdateCluster(MeshCluster& pMeshCluster);
 
-        virtual void UseSamplers(ShaderPtr pShader, MeshPtr pMesh);
-        virtual void UseUniforms(ShaderPtr pShader) { }
+        virtual void UseSamplers(ShaderPtr pShader);
+        virtual void UseUniforms(ShaderPtr pShader, MeshPtr pMesh);
+        virtual void UseSharedUniforms(ShaderPtr pShader);
 
     private:
+        Samplers m_samplers;
         MeshClusterTypeFlag m_meshClusters = 0;
+        bool m_dirtySamplers = false;
 
     };
 }

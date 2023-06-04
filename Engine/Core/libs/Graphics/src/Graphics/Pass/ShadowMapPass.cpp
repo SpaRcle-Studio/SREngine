@@ -7,7 +7,7 @@
 namespace SR_GRAPH_NS {
     SR_REGISTER_RENDER_PASS(ShadowMapPass);
 
-    ShadowMapPass::ShadowMapPass(RenderTechnique *pTechnique, BasePass *pParent)
+    ShadowMapPass::ShadowMapPass(RenderTechnique* pTechnique, BasePass* pParent)
         : Super(pTechnique, pParent)
     { }
 
@@ -23,7 +23,11 @@ namespace SR_GRAPH_NS {
         return Super::Load(passNode);
     }
 
-    void ShadowMapPass::UseUniforms(IMeshClusterPass::ShaderPtr pShader) {
+    MeshClusterTypeFlag ShadowMapPass::GetClusterType() const noexcept {
+        return static_cast<uint64_t>(MeshClusterType::Opaque) | static_cast<uint64_t>(MeshClusterType::Transparent);
+    }
+
+    void ShadowMapPass::UseSharedUniforms(IMeshClusterPass::ShaderPtr pShader) {
         if (m_camera) {
             /// ортогональная матрица у glm не работает, тварь.
             SR_MATH_NS::Matrix4x4 lightProjection = SR_MATH_NS::Matrix4x4::Perspective(
@@ -47,11 +51,7 @@ namespace SR_GRAPH_NS {
         }
     }
 
-    void ShadowMapPass::UseSamplers(IMeshClusterPass::ShaderPtr pShader, IMeshClusterPass::MeshPtr pMesh) {
+    void ShadowMapPass::UseUniforms(IMeshClusterPass::ShaderPtr pShader, IMeshClusterPass::MeshPtr pMesh) {
         pMesh->UseModelMatrix();
-    }
-
-    MeshClusterTypeFlag ShadowMapPass::GetClusterType() const noexcept {
-        return static_cast<uint64_t>(MeshClusterType::Opaque) | static_cast<uint64_t>(MeshClusterType::Transparent);
     }
 }
