@@ -89,6 +89,7 @@ namespace SR_GTYPES_NS {
         /// Если меш был зарегистрирован, то помечает его на уничтожение
         /// Если меш не зарегистрировали, удаляет экземпляр
         void MarkMeshDestroyed();
+        void MarkMaterialDirty();
 
         void SetMaterial(Material* material);
         void SetMaterial(const SR_UTILS_NS::Path& path);

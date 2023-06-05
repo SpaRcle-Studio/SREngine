@@ -91,6 +91,7 @@ namespace SR_GRAPH_UI_NS {
             pShader->Flush();
 
             m_material->UseSamplers();
+            pShader->FlushSamplers();
         }
 
         switch (uboManager.BindUBO(m_virtualUBO)) {
@@ -98,6 +99,7 @@ namespace SR_GRAPH_UI_NS {
                 pShader->InitUBOBlock();
                 pShader->Flush();
                 m_material->UseSamplers();
+                pShader->FlushSamplers();
                 SR_FALLTHROUGH;
             case Memory::UBOManager::BindResult::Success:
                 m_pipeline->DrawIndices(m_countIndices);

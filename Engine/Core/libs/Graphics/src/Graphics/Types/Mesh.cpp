@@ -154,6 +154,10 @@ namespace SR_GRAPH_NS::Types {
         }
 
         m_material->UseSamplers();
+
+        if (auto&& pShader = m_pipeline->GetCurrentShader()) {
+            pShader->FlushSamplers();
+        }
     }
 
     std::string Mesh::GetMeshIdentifier() const {
@@ -190,6 +194,10 @@ namespace SR_GRAPH_NS::Types {
         if (pTexture && m_material->ContainsTexture(pTexture)) {
             m_dirtyMaterial = true;
         }
+    }
+
+    void Mesh::MarkMaterialDirty() {
+        m_dirtyMaterial = true;
     }
 }
 

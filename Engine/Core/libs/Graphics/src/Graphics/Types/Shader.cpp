@@ -191,8 +191,7 @@ namespace SR_GRAPH_NS::Types {
     void Shader::SetIVec2(uint64_t hashId, const glm::ivec2 &v) noexcept { SetValue(hashId, v); }
 
     void Shader::SetSampler(uint64_t hashId, int32_t sampler) noexcept {
-        auto&& env = SR_GRAPH_NS::Environment::Get();
-        env->BindTexture(m_samplers.at(hashId), sampler);
+        m_samplers.at(hashId).samplerId = sampler;
     }
 
     void Shader::SetSampler2D(uint64_t hashId, int32_t sampler) noexcept {
@@ -341,7 +340,7 @@ namespace SR_GRAPH_NS::Types {
         }
 
         for (auto&& [name, sampler] : pShader->GetSamplers()) {
-            m_samplers[SR_RUNTIME_TIME_CRC32_STR(name.c_str())] = sampler.binding;
+            m_samplers[SR_RUNTIME_TIME_CRC32_STR(name.c_str())].binding = sampler.binding;
 
             const ShaderVarType varType = SR_SRSL_NS::SRSLTypeInfo::Instance().StringToType(sampler.type);
 
@@ -390,5 +389,11 @@ namespace SR_GRAPH_NS::Types {
 
     bool Shader::IsAvailable() const {
         return m_manager.IsAvailable(m_shaderProgram);
+    }
+
+    void Shader::FlushSamplers() {
+        for (auto&& [hashName, samplerInfo] : m_samplers) {
+            m_pipeline->BindTexture(samplerInfo.binding, samplerInfo.samplerId);
+        }
     }
 }

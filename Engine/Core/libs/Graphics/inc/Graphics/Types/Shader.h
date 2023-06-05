@@ -43,6 +43,7 @@ namespace SR_GTYPES_NS {
         void UnUse() noexcept;
         bool InitUBOBlock();
         bool Flush() const;
+        void FlushSamplers();
         void FreeVideoMemory() override;
 
     public:

@@ -61,6 +61,7 @@ namespace SR_SRSL_NS {
             { "HALF_SIZE_NEAR_PLANE",           "vec2"          },
             { "RESOLUTION",                     "vec2"          },
 
+            { "DIRECTIONAL_LIGHT_POSITION",     "vec3"          },
             { "VIEW_POSITION",                  "vec3"          },
             { "VIEW_DIRECTION",                 "vec3"          },
             { "LINE_START_POINT",               "vec3"          },

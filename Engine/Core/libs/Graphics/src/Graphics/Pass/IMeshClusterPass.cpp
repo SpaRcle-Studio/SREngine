@@ -135,7 +135,11 @@ namespace SR_GRAPH_NS {
 
     void IMeshClusterPass::UseSamplers(ShaderPtr pShader) {
         for (auto&& sampler : m_samplers) {
-            /// TODO
+            if (sampler.textureId == SR_ID_INVALID) {
+                continue;
+            }
+
+            pShader->SetSampler2D(sampler.hashId, sampler.textureId);
         }
     }
 
@@ -144,19 +148,122 @@ namespace SR_GRAPH_NS {
     }
 
     bool IMeshClusterPass::Load(const SR_XML_NS::Node& passNode) {
+        m_meshClusters = static_cast<MeshClusterTypeFlag>(MeshClusterType::None);
+
         for (auto&& meshClusterNode : passNode.TryGetNode("MeshClusters").TryGetNodes()) {
             auto&& clusterType = SR_UTILS_NS::EnumReflector::FromString<MeshClusterType>(meshClusterNode.Name());
             m_meshClusters |= static_cast<MeshClusterTypeFlag>(clusterType);
+        }
+
+        m_samplers.clear();
+
+        for (auto&& samplerNode : passNode.TryGetNode("Samplers").TryGetNodes("Sampler")) {
+            Sampler sampler = Sampler();
+
+            if (auto&& idNode = samplerNode.TryGetAttribute("Id")) {
+                sampler.hashId = SR_RUNTIME_TIME_CRC32_STD_STR(idNode.ToString());
+            }
+            else {
+                continue;
+            }
+
+            if (auto&& fboNameNode = samplerNode.TryGetAttribute("FBO")) {
+                sampler.fboHashName = SR_HASH_STR(fboNameNode.ToString());
+
+                if (auto&& depthAttribute = samplerNode.TryGetAttribute("Depth")) {
+                    sampler.depth = depthAttribute.ToBool();
+                }
+
+                if (!sampler.depth) {
+                    sampler.index = samplerNode.TryGetAttribute("Index").ToUInt64(-1);
+                }
+            }
+
+            m_samplers.emplace_back(sampler);
         }
 
         return Super::Load(passNode);
     }
 
     void IMeshClusterPass::Prepare() {
+        PrepareSamplers();
         Super::Prepare();
     }
 
     void IMeshClusterPass::UseSharedUniforms(IMeshClusterPass::ShaderPtr pShader) {
-        /// определяется классом-наследником 
+        /// определяется классом-наследником
+    }
+
+    void IMeshClusterPass::OnSamplesChanged() {
+        m_dirtySamplers = true;
+        Super::OnSamplesChanged();
+    }
+
+    void IMeshClusterPass::PrepareSamplers() {
+        if (!m_dirtySamplers) {
+            return;
+        }
+
+        SR_TRACY_ZONE;
+
+        bool isNeedUpdateMeshes = false;
+
+        for (auto&& sampler : m_samplers) {
+            int32_t textureId = SR_ID_INVALID;
+
+            if (sampler.fboHashName != 0) {
+                auto&& pFBOPass = dynamic_cast<IFramebufferPass*>(GetTechnique()->FindPass(sampler.fboHashName));
+                if (pFBOPass && pFBOPass->GetFramebuffer()) {
+                    auto&& pFBO = pFBOPass->GetFramebuffer();
+
+                    if (sampler.depth) {
+                        textureId = pFBO->GetDepthTexture();
+                    }
+                    else {
+                        textureId = pFBO->GetColorTexture(sampler.index);
+                    }
+                }
+            }
+
+            if (textureId == SR_ID_INVALID) {
+                textureId = GetContext()->GetDefaultTexture()->GetId();
+            }
+
+            if (textureId != sampler.textureId) {
+                isNeedUpdateMeshes = true;
+                sampler.textureId = textureId;
+            }
+        }
+
+        if (isNeedUpdateMeshes) {
+            if (GetClusterType() & static_cast<MeshClusterTypeFlag>(MeshClusterType::Opaque)) {
+                MarkDirtyCluster(GetRenderScene()->GetOpaque());
+            }
+
+            if (GetClusterType() & static_cast<MeshClusterTypeFlag>(MeshClusterType::Transparent)) {
+                MarkDirtyCluster(GetRenderScene()->GetTransparent());
+            }
+
+            if (GetClusterType() & static_cast<MeshClusterTypeFlag>(MeshClusterType::Debug)) {
+                MarkDirtyCluster(GetRenderScene()->GetDebugCluster());
+            }
+        }
+
+        m_dirtySamplers = false;
+    }
+
+    void IMeshClusterPass::MarkDirtyCluster(MeshCluster& meshCluster) {
+        for (auto&& [pClusterShader, subCluster] : meshCluster) {
+            for (auto&& [key, meshGroup] : subCluster) {
+                for (auto&& pMesh : meshGroup) {
+                    pMesh->MarkMaterialDirty();
+                }
+            }
+        }
+    }
+
+    void IMeshClusterPass::OnResize(const SR_MATH_NS::UVector2 &size) {
+        m_dirtySamplers = true;
+        Super::OnResize(size);
     }
 }

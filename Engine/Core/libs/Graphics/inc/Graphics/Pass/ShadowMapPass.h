@@ -28,9 +28,6 @@ namespace SR_GRAPH_NS {
 
         SR_NODISCARD MeshClusterTypeFlag GetClusterType() const noexcept override;
 
-    private:
-        SR_MATH_NS::Matrix4x4 m_lightSpaceMatrix;
-
     };
 }
 

@@ -29,25 +29,23 @@ namespace SR_GRAPH_NS {
 
     void ShadowMapPass::UseSharedUniforms(IMeshClusterPass::ShaderPtr pShader) {
         if (m_camera) {
-            /// ортогональная матрица у glm не работает, тварь.
-            SR_MATH_NS::Matrix4x4 lightProjection = SR_MATH_NS::Matrix4x4::Perspective(
-                SR_RAD(45.f),
-                m_camera->GetAspect(),
-                m_camera->GetNear(),
-                m_camera->GetFar()
-            );
-
-            SR_MATH_NS::Matrix4x4 lightView = SR_MATH_NS::Matrix4x4::LookAt(
-                SR_MATH_NS::FVector3(-2.0f, 4.0f, -1.0f),
-                SR_MATH_NS::FVector3(0.0f, 0.0f, 0.0f),
-                SR_MATH_NS::FVector3(0.0f, 1.0f, 0.0f)
-            );
-
-            m_lightSpaceMatrix = lightProjection * lightView;
-
             pShader->SetMat4(SHADER_VIEW_MATRIX, m_camera->GetViewTranslateRef());
             pShader->SetMat4(SHADER_PROJECTION_MATRIX, m_camera->GetProjectionRef());
-            pShader->SetMat4(SHADER_LIGHT_SPACE_MATRIX, m_lightSpaceMatrix);
+
+            SR_MATH_NS::Matrix4x4 lightProjection = SR_MATH_NS::Matrix4x4::Ortho(-10.0f, 10.0f, -10.0f, 10.0f, 1.f, 7.5f);
+
+            SR_MATH_NS::FVector3 lightPos = SR_MATH_NS::FVector3(-2.0f, 6.0f, -1.0f);
+            SR_MATH_NS::Quaternion q = SR_MATH_NS::Quaternion::FromEuler(SR_MATH_NS::FVector3(45.f, 45.f, 0));
+
+            SR_MATH_NS::Matrix4x4 lightView = q.RotateX(SR_DEG(SR_PI)).Inverse().ToMat4x4();
+            lightView = lightView.Translate(lightPos.Inverse());
+
+            //SR_MATH_NS::Matrix4x4 lightView = SR_MATH_NS::Matrix4x4::LookAt(glm::vec3(-2.0f, 4.0f, -1.0f),
+            //                                  glm::vec3( 0.0f, 0.0f,  0.0f),
+            //                                  glm::vec3( 0.0f, 1.0f,  0.0f));
+
+            pShader->SetMat4(SHADER_LIGHT_SPACE_MATRIX, lightProjection * m_camera->GetViewTranslateRef());
+            pShader->SetVec3(SHADER_DIRECTIONAL_LIGHT_POSITION, m_camera->GetPosition());
         }
     }
 

@@ -53,7 +53,14 @@ namespace SR_MATH_NS {
         }
 
         static Matrix4x4 Ortho(Unit left, Unit right, Unit bottom, Unit top, Unit zNear, Unit zFar) {
-            return Matrix4x4(glm::ortho(left, right, bottom, top, zNear, zFar));
+            Matrix4x4 result = Matrix4x4::Identity();
+            result[0][0] = Unit(2) / (right - left);
+            result[1][1] = Unit(2) / (top - bottom);
+            result[2][2] = - Unit(2) / (zFar - zNear);
+            result[3][0] = - (right + left) / (right - left);
+            result[3][1] = - (top + bottom) / (top - bottom);
+            result[3][2] = - (zFar + zNear) / (zFar - zNear);
+            return result;
         }
 
         static Matrix4x4 LookAt(const SR_MATH_NS::FVector3& eye, const SR_MATH_NS::FVector3& center, const SR_MATH_NS::FVector3& up) {

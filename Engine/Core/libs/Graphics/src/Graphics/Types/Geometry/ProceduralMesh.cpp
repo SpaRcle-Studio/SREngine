@@ -79,14 +79,14 @@ namespace SR_GTYPES_NS {
             return;
         }
 
-        auto&& shader = m_material->GetShader();
+        auto&& pShader = m_material->GetShader();
         auto&& uboManager = Memory::UBOManager::Instance();
 
         if (m_dirtyMaterial)
         {
             m_dirtyMaterial = false;
 
-            m_virtualUBO = uboManager.ReAllocateUBO(m_virtualUBO, shader->GetUBOBlockSize(), shader->GetSamplersCount());
+            m_virtualUBO = uboManager.ReAllocateUBO(m_virtualUBO, pShader->GetUBOBlockSize(), pShader->GetSamplersCount());
 
             if (m_virtualUBO != SR_ID_INVALID) {
                 uboManager.BindUBO(m_virtualUBO);
@@ -97,17 +97,19 @@ namespace SR_GTYPES_NS {
                 return;
             }
 
-            shader->InitUBOBlock();
-            shader->Flush();
+            pShader->InitUBOBlock();
+            pShader->Flush();
 
             m_material->UseSamplers();
+            pShader->FlushSamplers();
         }
 
         switch (uboManager.BindUBO(m_virtualUBO)) {
             case Memory::UBOManager::BindResult::Duplicated:
-                shader->InitUBOBlock();
-                shader->Flush();
+                pShader->InitUBOBlock();
+                pShader->Flush();
                 m_material->UseSamplers();
+                pShader->FlushSamplers();
                 SR_FALLTHROUGH;
             case Memory::UBOManager::BindResult::Success:
                 m_pipeline->DrawIndices(m_countIndices);
