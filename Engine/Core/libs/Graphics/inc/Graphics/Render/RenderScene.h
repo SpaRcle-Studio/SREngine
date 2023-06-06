@@ -23,6 +23,7 @@ namespace SR_GTYPES_NS {
 }
 
 namespace SR_GRAPH_NS {
+    class LightSystem;
     class Window;
     class RenderContext;
     class RenderTechnique;
@@ -76,6 +77,7 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD bool IsEmpty() const;
         SR_NODISCARD bool IsOverlayEnabled() const;
         SR_NODISCARD RenderContext* GetContext() const;
+        SR_NODISCARD LightSystem* GetLightSystem() const { return m_lightSystem; }
         SR_NODISCARD PipelinePtr GetPipeline() const;
         SR_NODISCARD WindowPtr GetWindow() const;
         SR_NODISCARD const WidgetManagers& GetWidgetManagers() const;
@@ -99,6 +101,8 @@ namespace SR_GRAPH_NS {
         void Submit() noexcept;
 
     private:
+        LightSystem* m_lightSystem = nullptr;
+
         CameraPtr m_mainCamera = nullptr;
 
         std::vector<CameraPtr> m_offScreenCameras;

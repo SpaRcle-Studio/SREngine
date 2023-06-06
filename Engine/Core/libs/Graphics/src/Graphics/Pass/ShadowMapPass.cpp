@@ -3,6 +3,7 @@
 //
 
 #include <Graphics/Pass/ShadowMapPass.h>
+#include <Graphics/Lighting/LightSystem.h>
 
 namespace SR_GRAPH_NS {
     SR_REGISTER_RENDER_PASS(ShadowMapPass);
@@ -37,7 +38,7 @@ namespace SR_GRAPH_NS {
             // SR_MATH_NS::Matrix4x4 lightProjection = SR_MATH_NS::Matrix4x4::Ortho(-10.0f, 10.0f, -10.0f, 10.0f, 1.f, 7.5f);
             //SR_MATH_NS::Quaternion q = m_camera->GetRotation(); //SR_MATH_NS::Quaternion::FromEuler(SR_MATH_NS::FVector3(45.f, 45.f, 0));
 
-            SR_MATH_NS::FVector3 lightPos = SR_MATH_NS::FVector3(40, 20, 5);
+            SR_MATH_NS::FVector3 lightPos = GetRenderScene()->GetLightSystem()->m_position;
 
             float zNear = 1.0f;
             float zFar = 96.0f;

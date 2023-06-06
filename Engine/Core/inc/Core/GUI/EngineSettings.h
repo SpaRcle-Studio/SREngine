@@ -14,6 +14,10 @@ namespace Framework::Core::GUI {
     protected:
         void Draw() override;
 
+    private:
+        void DrawMultiSampling();
+        void DrawLighting();
+
     };
 }
 

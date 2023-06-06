@@ -7,6 +7,7 @@
 #include <Graphics/Types/Shader.h>
 #include <Graphics/Types/Geometry/IndexedMesh.h>
 #include <Graphics/Pipeline/IShaderProgram.h>
+#include <Graphics/Lighting/LightSystem.h>
 
 namespace SR_GRAPH_NS {
     SR_REGISTER_RENDER_PASS(OpaquePass)
@@ -31,7 +32,7 @@ namespace SR_GRAPH_NS {
             //        m_camera->GetFar()
             //);
 
-            SR_MATH_NS::FVector3 lightPos = SR_MATH_NS::FVector3(40, 20, 5);
+            SR_MATH_NS::FVector3 lightPos = GetRenderScene()->GetLightSystem()->m_position;
 
             float zNear = 1.0f;
             float zFar = 96.0f;

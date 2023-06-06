@@ -5,6 +5,7 @@
 #ifndef SRENGINE_PIPELINE_H
 #define SRENGINE_PIPELINE_H
 
+#include <Utils/Math/Vector3.h>
 #include <Graphics/Pipeline/PipelineState.h>
 
 namespace SR_GTYPES_NS {

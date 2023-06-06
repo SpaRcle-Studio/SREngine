@@ -12,10 +12,12 @@
 #include <Graphics/Types/Geometry/DebugLine.h>
 #include <Graphics/Render/RenderTechnique.h>
 #include <Graphics/Render/DebugRenderer.h>
+#include <Graphics/Lighting/LightSystem.h>
 
 namespace SR_GRAPH_NS {
     RenderScene::RenderScene(const ScenePtr& scene, RenderContext* pContext)
         : SR_HTYPES_NS::SafePtr<RenderScene>(this)
+        , m_lightSystem(new LightSystem())
         , m_scene(scene)
         , m_debugRender(new DebugRenderer(this))
         , m_context(pContext)
@@ -26,6 +28,8 @@ namespace SR_GRAPH_NS {
     }
 
     RenderScene::~RenderScene() {
+        SR_SAFE_DELETE_PTR(m_lightSystem);
+
         if (m_debugRender) {
             m_debugRender->DeInit();
             delete m_debugRender;
