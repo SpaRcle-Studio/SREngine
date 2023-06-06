@@ -166,6 +166,7 @@ namespace SR_GTYPES_NS {
             m_shader->Flush();
 
             m_shader->SetSamplerCube(SHADER_SKYBOX_DIFFUSE, m_cubeMap);
+            m_shader->FlushSamplers();
         }
 
         m_pipeline->BindVBO(m_VBO);
@@ -176,6 +177,7 @@ namespace SR_GTYPES_NS {
                 m_shader->InitUBOBlock();
                 m_shader->Flush();
                 m_shader->SetSamplerCube(SHADER_SKYBOX_DIFFUSE, m_cubeMap);
+                m_shader->FlushSamplers();
                 SR_FALLTHROUGH;
             case Memory::UBOManager::BindResult::Success:
                 m_pipeline->DrawIndices(36);

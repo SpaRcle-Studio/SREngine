@@ -230,12 +230,19 @@ namespace SR_SRSL_NS {
         }
 
         if (stage != ShaderStage::Vertex) {
+            auto&& pVertexFunction = m_shader->GetUseStack()->FindFunction(SR_SRSL_ENTRY_POINTS.at(ShaderStage::Vertex));
+
             for (auto&& [name, pVariable] : m_shader->GetShared()) {
+                /// если переменную не передали, значит ее нет
+                if (pVertexFunction && !pVertexFunction->IsVariableUsed(name)) {
+                    continue;
+                }
+
                 if (pFunction->IsVariableUsed(name)) {
                     auto&& type = SRSLTypeInfo::Instance().GetTypeName(pVariable->pType);
                     code += SR_UTILS_NS::Format("layout (location = %i) in %s %s;\n", location, type.c_str(), name.c_str());
-                    ++location;
                 }
+                ++location;
             }
 
             if (pFunction->IsVariableUsed("VERTEX_INDEX")) {

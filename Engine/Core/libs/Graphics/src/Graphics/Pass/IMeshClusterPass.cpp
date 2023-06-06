@@ -157,7 +157,7 @@ namespace SR_GRAPH_NS {
 
         m_samplers.clear();
 
-        for (auto&& samplerNode : passNode.TryGetNode("Samplers").TryGetNodes("Sampler")) {
+        for (auto&& samplerNode : passNode.TryGetNodes("Sampler")) {
             Sampler sampler = Sampler();
 
             if (auto&& idNode = samplerNode.TryGetAttribute("Id")) {

@@ -35,16 +35,12 @@
             <Layer Format="RGBA8_UNORM" R="0.0" G="0.0" B="0.0" A="1.0"/>
         </FramebufferSettings>
         <Passes>
-            <!--<OpaquePass>
-                <Samplers>
-                    <Sampler FBO="DepthFBO" Id="shadowMap" Index="0" />
-                </Samplers>
-            </OpaquePass>-->
-            <PostProcessPass Shader="Engine/Shaders/ShadowMap/shadow-map.srsl">
-                <Attachments>
-                    <Attachment FBO="DepthFBO" Id="depthMap" Index="0"/>
-                </Attachments>
-            </PostProcessPass>
+            <OpaquePass>
+                <Sampler FBO="DepthFBO" Id="shadowMap" Index="0" />
+            </OpaquePass>
+            <SkyboxPass Path="Engine/Skyboxes/Sun.png" Shader="Engine/Shaders/skybox.srsl"/>
+            <TransparentPass/>
+            <DebugPass/>
         </Passes>
     </FramebufferPass>
 </Technique>

@@ -14,56 +14,75 @@ DepthTest true;
 [[uniform]] sampler2D shadowMap;
 
 [[shared]] vec3 normal;
-[[shared]] vec3 fragPos;
-[[shared]] vec4 fragPosLightSpace;
+[[shared]] vec3 lightVec;
+[[shared]] vec3 viewVec;
+[[shared]] vec4 shadowCoord;
 
-float ShadowCalculation(vec4 fragPosLightSpace) {
-    // Выполняем деление перспективы
-    vec3 projCoords = fragPosLightSpace.xyz / fragPosLightSpace.w;
+float textureProj(vec4 shadowCoord, vec2 offset) {
+	float shadow = 1.0;
+	float bias = 0.00016;
 
-    // Преобразуем в диапазон [0,1]
-    projCoords = projCoords * 0.5 + 0.5;
+	if (shadowCoord.z > -1.0 && shadowCoord.z < 1.0) {
+		float dist = texture(shadowMap, vec2(shadowCoord.st + offset)).r;
+		if (shadowCoord.w > 0 && dist < shadowCoord.z - bias) {
+			shadow = 0.3;
+		}
+	}
 
-    // Получаем наиболее близкое значение глубины, исходя из перспективы с точки зрения источника света (используя диапазон [0,1] fragPosLight в качестве координат)
-    float closestDepth = texture(shadowMap, projCoords.xy).r;
+	return shadow;
+}
 
-    // Получаем глубину текущего фрагмента, исходя из перспективы с точки зрения источника света
-    float currentDepth = projCoords.z;
+float filterPCF(vec4 sc) {
+	ivec2 texDim = textureSize(shadowMap, 0);
+	float scale = 1.5;
+	float dx = scale * 1.0 / float(texDim.x);
+	float dy = scale * 1.0 / float(texDim.y);
 
-    // Проверяем, находится ли текущий фрагмент в тени
-    if (currentDepth > closestDepth) {
-        return 1.0;
-    }
+	float shadowFactor = 0.0;
+	int count = 0;
+	int range = 1;
 
-    return 0.0;
+	for (int x = -range; x <= range; x++)
+	{
+		for (int y = -range; y <= range; y++)
+		{
+			shadowFactor += textureProj(sc, vec2(dx * x, dy * y));
+			count++;
+		}
+	}
+
+	return shadowFactor / count;
 }
 
 void fragment() {
     vec3 diffuseColor = texture(diffuse, UV).rgb * color.rgb;
-    vec3 normal = normalize(normal);
-    vec3 lightColor = vec3(1.0);
-    // ambient
-    vec3 ambient = 0.15 * diffuseColor;
-    // diffuse
-    vec3 lightDir = normalize(DIRECTIONAL_LIGHT_POSITION - fragPos);
-    float diff = max(dot(lightDir, normal), 0.0);
-    vec3 diffuseLight = diff * lightColor;
-    // specular
-    vec3 viewDir = normalize(VIEW_POSITION - fragPos);
-    vec3 halfwayDir = normalize(lightDir + viewDir);
-    float spec = pow(max(dot(normal, halfwayDir), 0.0), 64.0);
-    vec3 specular = spec * lightColor;
-    // calculate shadow
-    float shadow = ShadowCalculation(fragPosLightSpace);
-    vec3 lighting = (ambient + (1.0 - shadow) * (diffuseLight + specular)) * diffuseColor;
 
-	COLOR = vec4(lighting, 1.0);
+	//float shadow = textureProj(shadowCoord / shadowCoord.w, vec2(0.0));
+	float shadow = filterPCF(shadowCoord / shadowCoord.w);
+
+    vec3 N = normalize(normal);
+    vec3 L = normalize(lightVec);
+    vec3 V = normalize(viewVec);
+    vec3 R = normalize(-reflect(L, N));
+    vec3 lighting = max(dot(N, L), 0.9 /* ambient */) * diffuseColor;
+
+    COLOR = vec4(lighting * vec3(shadow), 1.0);
 }
 
 void vertex() {
-    fragPos = vec3(MODEL_MATRIX * vec4(VERTEX, 1.0));
-    normal = transpose(inverse(mat3(MODEL_MATRIX))) * NORMAL;
-    fragPosLightSpace = LIGHT_SPACE_MATRIX * vec4(fragPos, 1.0);
+    vec4 pos = MODEL_MATRIX * vec4(VERTEX, 1.0);
+    normal = mat3(MODEL_MATRIX) * NORMAL;
+    lightVec = normalize(DIRECTIONAL_LIGHT_POSITION - VERTEX);
+    viewVec = -pos.xyz;
+
+    mat4 biasMat = mat4(
+        0.5, 0.0, 0.0, 0.0,
+        0.0, 0.5, 0.0, 0.0,
+        0.0, 0.0, 1.0, 0.0,
+        0.5, 0.5, 0.0, 1.0
+	);
+
+    shadowCoord = (biasMat * LIGHT_SPACE_MATRIX * MODEL_MATRIX) * vec4(VERTEX, 1.0);
 
     OUT_POSITION = PROJECTION_MATRIX * VIEW_MATRIX * MODEL_MATRIX * vec4(VERTEX, 1.0);
 }
