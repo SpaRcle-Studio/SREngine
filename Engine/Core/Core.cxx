@@ -21,6 +21,8 @@
 #include "src/Core/GUI/Guizmo.cpp"
 #include "src/Core/GUI/AnimatorEditor.cpp"
 #include "src/Core/GUI/DragNDropHelper.cpp"
+#include "src/Core/GUI/PhysicsMaterialEditor.cpp"
+#include "src/Core/GUI/MaterialEditor.cpp"
 
 #include "src/Core/Parsers/BlueprintParser.cpp"
 

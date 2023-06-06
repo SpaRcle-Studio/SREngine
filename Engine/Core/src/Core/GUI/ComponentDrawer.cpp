@@ -21,6 +21,7 @@
 #include <Physics/Rigidbody.h>
 #include <Physics/2D/Rigidbody2D.h>
 #include <Physics/3D/Rigidbody3D.h>
+#include <Physics/PhysicsMaterial.h>
 
 #include <Graphics/Animations/Skeleton.h>
 #include <Graphics/Animations/Animator.h>
@@ -132,6 +133,18 @@ namespace SR_CORE_NS::GUI {
                 pComponent->SetMass(mass);
             }
         }
+
+        std::string materialPath = "";
+
+        if (auto&& pMaterial = pComponent->GetPhysicsMaterial()) {
+            materialPath = pMaterial->GetResourceId();
+        }
+
+        if (ImGui::Button(materialPath.c_str())) {
+            /// TODO: Сделать открытие проводника в директории materialPath.
+        }
+
+        ImGui::SameLine(); ImGui::Text("Physics Material");
     }
 
     void ComponentDrawer::DrawCollisionShape(SR_PTYPES_NS::CollisionShape* pCollisionShape, EditorGUI* context, int32_t index){
@@ -140,7 +153,7 @@ namespace SR_CORE_NS::GUI {
         }
 
         const float_t lineHeight = GImGui->Font->FontSize + GImGui->Style.FramePadding.y * 2.0f;
-        const ImVec2 buttonSize = { lineHeight + 3.0f, lineHeight };
+        const ImVec2 buttonSize = { lineHeight + 30.0f, lineHeight };
 
         if (SR_PHYSICS_UTILS_NS::IsShapeHasSize(pCollisionShape->GetType())) {
             auto&& size = pCollisionShape->GetSize();

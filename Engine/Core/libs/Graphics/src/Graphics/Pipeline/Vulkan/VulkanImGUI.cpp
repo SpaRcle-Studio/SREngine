@@ -82,8 +82,8 @@ LRESULT CustomWindowProcPlatform(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPar
         case WM_DESTROY:
         case WM_CLOSE: {
             auto&& viewport = ImGui::FindViewportByPlatformHandle(hwnd);
-            if (auto&& widget = SR_GRAPH_NS::GUI::ViewportsTableManager::Instance().GetWidgetByViewport(viewport)) {
-                //widget->Close();
+            if (auto&& widget = SR_GRAPH_GUI_NS::ViewportsTableManager::Instance().GetWidgetByViewport(viewport)) {
+                widget->Close();
             }
 
             return DefWindowProc(hwnd, msg, wParam, lParam);

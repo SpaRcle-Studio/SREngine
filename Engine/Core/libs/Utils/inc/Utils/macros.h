@@ -180,6 +180,7 @@
 #define SR_GRAPH_NS Framework::Graphics
 #define SR_SRSL_NS Framework::Graphics::SRSL2
 #define SR_GRAPH_UI_NS Framework::Graphics::UI
+#define SR_GRAPH_GUI_NS Framework::Graphics::GUI
 #define SR_ANIMATIONS_NS Framework::Graphics::Animations
 #define SR_HTYPES_NS SR_UTILS_NS::Types
 #define SR_GTYPES_NS SR_GRAPH_NS::Types

@@ -98,6 +98,7 @@ namespace SR_HTYPES_NS {
             });
 
             m_thread = std::move(thread);
+            SR_LOG("Thread::Run() : thread is moved");
             m_isCreated = true;
 
             Factory::Instance().UnlockSingleton();

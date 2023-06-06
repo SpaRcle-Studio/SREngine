@@ -8,7 +8,7 @@
 #include <Graphics/GUI/Widget.h>
 
 namespace SR_CORE_NS::GUI {
-    class EngineStatistics : public SR_GRAPH_NS::GUI::Widget {
+    class EngineStatistics : public SR_GRAPH_GUI_NS::Widget {
     public:
         EngineStatistics();
         ~EngineStatistics() override = default;

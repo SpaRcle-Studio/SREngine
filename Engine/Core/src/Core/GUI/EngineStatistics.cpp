@@ -11,9 +11,9 @@
 
 #include <Graphics/Render/RenderTechnique.h>
 
-namespace Framework::Core::GUI {
+namespace SR_CORE_GUI_NS {
     EngineStatistics::EngineStatistics()
-        : Graphics::GUI::Widget("Engine statistics")
+        : SR_GRAPH_GUI_NS::Widget("Engine statistics")
     { }
 
     void EngineStatistics::Draw() {

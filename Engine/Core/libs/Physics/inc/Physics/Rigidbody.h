@@ -76,6 +76,7 @@ namespace SR_PTYPES_NS {
         SR_NODISCARD SR_MATH_NS::FVector3 GetScale() const noexcept { return m_scale; }
         SR_NODISCARD SR_HTYPES_NS::RawMesh* GetRawMesh() const noexcept { return m_rawMesh; }
         SR_NODISCARD int32_t GetMeshId() const noexcept { return m_meshId; }
+        SR_NODISCARD PhysicsMaterial* GetPhysicsMaterial() const noexcept { return m_material; }
         SR_NODISCARD bool IsDebugEnabled() const noexcept;
         SR_NODISCARD RBUpdShapeRes UpdateShape();
 
