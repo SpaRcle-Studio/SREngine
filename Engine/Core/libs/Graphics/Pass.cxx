@@ -16,4 +16,5 @@
 #include "../Graphics/src/Graphics/Pass/ShaderOverridePass.cpp"
 #include "../Graphics/src/Graphics/Pass/SSAOPass.cpp"
 #include "../Graphics/src/Graphics/Pass/ShadowMapPass.cpp"
+#include "../Graphics/src/Graphics/Pass/CascadedShadowMapPass.cpp"
 #include "../Graphics/src/Graphics/Pass/IMeshClusterPass.cpp"

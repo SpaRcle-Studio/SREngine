@@ -196,6 +196,7 @@ namespace SR_GRAPH_NS {
 
     void IMeshClusterPass::OnSamplesChanged() {
         m_dirtySamplers = true;
+        m_needUpdateMeshes = true;
         Super::OnSamplesChanged();
     }
 
@@ -205,8 +206,6 @@ namespace SR_GRAPH_NS {
         }
 
         SR_TRACY_ZONE;
-
-        bool isNeedUpdateMeshes = false;
 
         for (auto&& sampler : m_samplers) {
             int32_t textureId = SR_ID_INVALID;
@@ -230,12 +229,12 @@ namespace SR_GRAPH_NS {
             }
 
             if (textureId != sampler.textureId) {
-                isNeedUpdateMeshes = true;
+                m_needUpdateMeshes = true;
                 sampler.textureId = textureId;
             }
         }
 
-        if (isNeedUpdateMeshes) {
+        if (m_needUpdateMeshes && !m_samplers.empty()) {
             if (GetClusterType() & static_cast<MeshClusterTypeFlag>(MeshClusterType::Opaque)) {
                 MarkDirtyCluster(GetRenderScene()->GetOpaque());
             }
@@ -247,6 +246,8 @@ namespace SR_GRAPH_NS {
             if (GetClusterType() & static_cast<MeshClusterTypeFlag>(MeshClusterType::Debug)) {
                 MarkDirtyCluster(GetRenderScene()->GetDebugCluster());
             }
+
+            m_needUpdateMeshes = false;
         }
 
         m_dirtySamplers = false;
@@ -264,6 +265,7 @@ namespace SR_GRAPH_NS {
 
     void IMeshClusterPass::OnResize(const SR_MATH_NS::UVector2 &size) {
         m_dirtySamplers = true;
+        m_needUpdateMeshes = true;
         Super::OnResize(size);
     }
 }

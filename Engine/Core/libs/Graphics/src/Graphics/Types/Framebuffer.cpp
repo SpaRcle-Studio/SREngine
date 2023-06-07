@@ -102,11 +102,12 @@ namespace SR_GTYPES_NS {
         }
 
         if (!m_pipeline->CreateFrameBuffer(
-                m_size.ToGLM(),
-                m_frameBuffer,
-                m_depthEnabled ? &m_depth : nullptr,
-                m_colors,
-                m_currentSampleCount)
+            m_size.ToGLM(),
+            m_frameBuffer,
+            m_depthEnabled ? &m_depth : nullptr,
+            m_colors,
+            m_currentSampleCount,
+            1 /** layers count */)
         ) {
             SR_ERROR("Framebuffer::Update() : failed to create frame buffer!");
             m_hasErrors = true;

@@ -1,17 +1,17 @@
 //
-// Created by innerviewer on 5/21/2023.
+// Created by Monika on 06.06.2023.
 //
 
-#ifndef SRENGINE_SHADOWMAPPASS_H
-#define SRENGINE_SHADOWMAPPASS_H
+#ifndef SRENGINE_CASCADEDSHADOWMAPPASS_H
+#define SRENGINE_CASCADEDSHADOWMAPPASS_H
 
 #include <Graphics/Pass/ShaderOverridePass.h>
 
 namespace SR_GRAPH_NS {
-    class ShadowMapPass : public ShaderOverridePass {
+    class CascadedShadowMapPass : public ShaderOverridePass {
         using Super = ShaderOverridePass;
     public:
-        ShadowMapPass(RenderTechnique* pTechnique, BasePass* pParent);
+        CascadedShadowMapPass(RenderTechnique* pTechnique, BasePass* pParent);
 
     public:
         bool Init() override;
@@ -28,4 +28,4 @@ namespace SR_GRAPH_NS {
     };
 }
 
-#endif //SRENGINE_SHADOWMAPPASS_H
+#endif //SRENGINE_CASCADEDSHADOWMAPPASS_H

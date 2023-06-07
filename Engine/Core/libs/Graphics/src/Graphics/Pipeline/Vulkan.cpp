@@ -488,7 +488,7 @@ namespace SR_GRAPH_NS {
         return true;
     }
 
-    bool Vulkan::CreateFrameBuffer(const SR_MATH_NS::IVector2 &size, int32_t &FBO, DepthLayer *pDepth, std::vector<ColorLayer> &colors, uint8_t sampleCount) {
+    bool Vulkan::CreateFrameBuffer(const SR_MATH_NS::IVector2 &size, int32_t &FBO, DepthLayer *pDepth, std::vector<ColorLayer> &colors, uint8_t sampleCount, uint32_t layersCount) {
         std::vector<int32_t> colorBuffers;
         colorBuffers.reserve(colors.size());
 
@@ -513,13 +513,13 @@ namespace SR_GRAPH_NS {
         std::optional<int32_t> depthBuffer = pDepth ? pDepth->texture : std::optional<int32_t>();
 
         if (FBO > 0) {
-            if (!m_memory->ReAllocateFBO(FBO - 1, size.x, size.y, colorBuffers, depthBuffer, sampleCount)) {
+            if (!m_memory->ReAllocateFBO(FBO - 1, size.x, size.y, colorBuffers, depthBuffer, sampleCount, layersCount)) {
                 SR_ERROR("Vulkan::CreateFrameBuffer() : failed to re-allocate frame buffer object!");
             }
             goto success;
         }
 
-        FBO = m_memory->AllocateFBO(size.x, size.y, formats, colorBuffers, depthBuffer, sampleCount) + 1;
+        FBO = m_memory->AllocateFBO(size.x, size.y, formats, colorBuffers, depthBuffer, sampleCount, layersCount) + 1;
         if (FBO <= 0) {
             FBO = SR_ID_INVALID;
             SR_ERROR("Vulkan::CreateFrameBuffer() : failed to allocate FBO!");

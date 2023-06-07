@@ -8,12 +8,13 @@
 #include <EvoVulkan/Types/VmaBuffer.h>
 
 int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateFBO(
-        uint32_t w, uint32_t h,
-        const std::vector<VkFormat> &inputColorAttachments,
-        std::vector<int32_t> &outputColorAttachments,
-        std::optional<int32_t> &depth,
-        uint8_t sampleCount)
-{
+    uint32_t w, uint32_t h,
+    const std::vector<VkFormat>& inputColorAttachments,
+    std::vector<int32_t>& outputColorAttachments,
+    std::optional<int32_t>& depth,
+    uint8_t sampleCount,
+    uint32_t layersCount
+) {
     if (inputColorAttachments.size() != outputColorAttachments.size()) {
         SR_WARN("MemoryManager::AllocateFBO() : input colors not equal output colors count! Something went wrong...");
     }
@@ -23,16 +24,17 @@ int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateFBO(
     for (uint32_t i = 0; i < m_countFBO.first; ++i) {
         if (m_FBOs[i] == nullptr) {
             m_FBOs[i] = EvoVulkan::Complexes::FrameBuffer::Create(
-                    m_kernel->GetDevice(),
-                    m_kernel->GetAllocator(),
-                    m_kernel->GetDescriptorManager(),
-                    m_kernel->GetSwapchain(),
-                    m_kernel->GetCmdPool(),
-                    inputColorAttachments,
-                    w, h,
-                    1.f /** scale */,
-                    sampleCount,
-                    depth.has_value() /** depth enabled */
+                m_kernel->GetDevice(),
+                m_kernel->GetAllocator(),
+                m_kernel->GetDescriptorManager(),
+                m_kernel->GetSwapchain(),
+                m_kernel->GetCmdPool(),
+                inputColorAttachments,
+                w, h,
+                layersCount,
+                1.f /** scale */,
+                sampleCount,
+                depth.has_value() /** depth enabled */
             );
 
             if (m_FBOs[i] == nullptr) {
@@ -78,17 +80,19 @@ int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateFBO(
 }
 
 bool Framework::Graphics::VulkanTools::MemoryManager::ReAllocateFBO(
-        uint32_t FBO, uint32_t w, uint32_t h,
-        const std::vector<int32_t> &oldColorAttachments,
-        std::optional<int32_t> depthBuffer,
-        uint8_t sampleCount)
-{
+    uint32_t FBO, uint32_t w, uint32_t h,
+    const std::vector<int32_t> &oldColorAttachments,
+    std::optional<int32_t> depthBuffer,
+    uint8_t sampleCount,
+    uint32_t layersCount
+) {
     if (FBO >= m_countFBO.first || m_FBOs[FBO] == nullptr) {
         SR_ERROR("MemoryManager::ReAllocateFBO() : incorrect FBO index!");
         return false;
     }
 
     m_FBOs[FBO]->SetSampleCount(sampleCount);
+    m_FBOs[FBO]->SetLayersCount(layersCount);
 
     if (!m_FBOs[FBO]->ReCreate(w, h)) {
         SR_ERROR("MemoryManager::ReAllocateFBO() : failed to re-create frame buffer object!");

@@ -55,6 +55,7 @@ namespace SR_GRAPH_NS {
 
     private:
         bool m_dirtySamplers = true;
+        bool m_needUpdateMeshes = false;
         Samplers m_samplers;
         MeshClusterTypeFlag m_meshClusters = 0;
 

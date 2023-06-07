@@ -20,7 +20,7 @@ namespace SR_GRAPH_NS {
         Super::DeInit();
     }
 
-    bool ShadowMapPass::Load(const SR_XML_NS::Node &passNode) {
+    bool ShadowMapPass::Load(const SR_XML_NS::Node& passNode) {
         return Super::Load(passNode);
     }
 

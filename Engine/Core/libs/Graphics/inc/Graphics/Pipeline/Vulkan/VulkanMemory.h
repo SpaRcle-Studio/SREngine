@@ -59,7 +59,7 @@ namespace Framework::Graphics::VulkanTools {
             return true;
         }
     private:
-        [[nodiscard]] int32_t FindFreeTextureIndex() const {
+        SR_NODISCARD int32_t FindFreeTextureIndex() const {
             for (uint32_t i = 0; i < m_countTextures.first; i++)
                 if (m_textures[i] == nullptr)
                     return (int32_t)i;
@@ -98,42 +98,45 @@ namespace Framework::Graphics::VulkanTools {
             return memory;
         }
         void Free();
-    public:
-        [[nodiscard]] bool FreeDescriptorSet(uint32_t ID);
-
-        [[nodiscard]] bool FreeShaderProgram(uint32_t ID);
-
-        [[nodiscard]] bool FreeVBO(uint32_t ID);
-        [[nodiscard]] bool FreeUBO(uint32_t ID);
-        [[nodiscard]] bool FreeIBO(uint32_t ID);
-        [[nodiscard]] bool FreeFBO(uint32_t ID);
-
-        [[nodiscard]] bool FreeTexture(uint32_t ID);
 
     public:
-        [[nodiscard]] int32_t AllocateDescriptorSet(uint32_t shaderProgram, const std::vector<uint64_t>& types);
+        SR_NODISCARD bool FreeDescriptorSet(uint32_t ID);
 
-        [[nodiscard]] int32_t AllocateShaderProgram(EvoVulkan::Types::RenderPass renderPass);
+        SR_NODISCARD bool FreeShaderProgram(uint32_t ID);
 
-        [[nodiscard]] int32_t AllocateVBO(uint32_t buffSize, void* data);
-        [[nodiscard]] int32_t AllocateUBO(uint32_t UBOSize);
-        [[nodiscard]] int32_t AllocateIBO(uint32_t buffSize, void* data);
+        SR_NODISCARD bool FreeVBO(uint32_t ID);
+        SR_NODISCARD bool FreeUBO(uint32_t ID);
+        SR_NODISCARD bool FreeIBO(uint32_t ID);
+        SR_NODISCARD bool FreeFBO(uint32_t ID);
 
-        [[nodiscard]] bool ReAllocateFBO(
+        SR_NODISCARD bool FreeTexture(uint32_t ID);
+
+    public:
+        SR_NODISCARD int32_t AllocateDescriptorSet(uint32_t shaderProgram, const std::vector<uint64_t>& types);
+
+        SR_NODISCARD int32_t AllocateShaderProgram(EvoVulkan::Types::RenderPass renderPass);
+
+        SR_NODISCARD int32_t AllocateVBO(uint32_t buffSize, void* data);
+        SR_NODISCARD int32_t AllocateUBO(uint32_t UBOSize);
+        SR_NODISCARD int32_t AllocateIBO(uint32_t buffSize, void* data);
+
+        SR_NODISCARD bool ReAllocateFBO(
                 uint32_t FBO,
                 uint32_t w, uint32_t h,
                 const std::vector<int32_t>& oldColorAttachments,
                 std::optional<int32_t> depth,
-                uint8_t sampleCount);
+                uint8_t sampleCount,
+                uint32_t layersCount);
 
-        [[nodiscard]] int32_t AllocateFBO(
+        SR_NODISCARD int32_t AllocateFBO(
                 uint32_t w, uint32_t h,
                 const std::vector<VkFormat>& inputColorAttachments,
                 std::vector<int32_t>& outputColorAttachments,
                 std::optional<int32_t>& depth,
-                uint8_t sampleCount);
+                uint8_t sampleCount,
+                uint32_t layersCount);
 
-        [[nodiscard]] int32_t AllocateTexture(
+        SR_NODISCARD int32_t AllocateTexture(
                 uint8_t* pixels,
                 uint32_t w,
                 uint32_t h,
@@ -143,7 +146,7 @@ namespace Framework::Graphics::VulkanTools {
                 uint8_t mipLevels,
                 bool cpuUsage);
 
-        [[nodiscard]] int32_t AllocateTexture(
+        SR_NODISCARD int32_t AllocateTexture(
                 std::array<uint8_t*, 6> pixels,
                 uint32_t w,
                 uint32_t h,
