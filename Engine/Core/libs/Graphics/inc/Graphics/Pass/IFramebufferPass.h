@@ -5,6 +5,9 @@
 #ifndef SRENGINE_IFRAMEBUFFERPASS_H
 #define SRENGINE_IFRAMEBUFFERPASS_H
 
+#include <Graphics/Types/Framebuffer.h>
+#include <Graphics/Pipeline/TextureHelper.h>
+
 namespace SR_GTYPES_NS {
     class Framebuffer;
 }
@@ -46,6 +49,7 @@ namespace SR_GRAPH_NS {
 
         float_t m_depth = 1.f;
         uint8_t m_samples = 0;
+        uint32_t m_layersCount = 1;
         DepthFormat m_depthFormat = DepthFormat::Unknown;
 
     };

@@ -174,6 +174,20 @@ namespace Framework::Graphics::VulkanTools {
         return std::move(descriptorTypes);
     }
 
+    static SR_FORCE_INLINE VkImageAspectFlags AbstractImageAspectToVkAspect(const ImageAspect& aspect) {
+        switch (aspect) {
+            case ImageAspect::None: return VK_IMAGE_ASPECT_NONE;
+            case ImageAspect::Depth: return VK_IMAGE_ASPECT_DEPTH_BIT;
+            case ImageAspect::Stencil: return VK_IMAGE_ASPECT_STENCIL_BIT;
+            case ImageAspect::Color: return VK_IMAGE_ASPECT_COLOR_BIT;
+            case ImageAspect::DepthStencil: return VK_IMAGE_ASPECT_DEPTH_BIT | VK_IMAGE_ASPECT_STENCIL_BIT;
+            default:
+                break;
+        }
+
+        return VK_IMAGE_ASPECT_FLAG_BITS_MAX_ENUM;
+    }
+
     static SR_FORCE_INLINE VkFormat AbstractTextureFormatToVkFormat(const ColorFormat& format) {
         switch (format) {
             case ColorFormat::RGBA8_UNORM: return VK_FORMAT_R8G8B8A8_UNORM;

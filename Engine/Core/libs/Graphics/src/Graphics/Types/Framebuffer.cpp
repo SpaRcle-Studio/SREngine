@@ -41,7 +41,11 @@ namespace SR_GTYPES_NS {
         return Create(colors, depth, size, 0);
     }
 
-    Framebuffer::Ptr Framebuffer::Create(const std::list<ColorFormat> &colors, DepthFormat depth, const SR_MATH_NS::IVector2 &size, uint8_t samples) {
+    Framebuffer::Ptr Framebuffer::Create(const std::list<ColorFormat>& colors, DepthFormat depth, const SR_MATH_NS::IVector2& size, uint8_t samples) {
+        return Create(colors, depth, size, samples, 1);
+    }
+
+    Framebuffer::Ptr Framebuffer::Create(const std::list<ColorFormat> &colors, DepthFormat depth, const SR_MATH_NS::IVector2 &size, uint8_t samples, uint32_t layersCount) {
         Framebuffer* fbo = new Framebuffer();
 
         SRAssert(!size.HasZero() && !size.HasNegative());
@@ -49,6 +53,7 @@ namespace SR_GTYPES_NS {
         fbo->SetSize(size);
         fbo->m_depth.format = depth;
         fbo->m_sampleCount = samples;
+        fbo->m_layersCount = layersCount;
 
         for (auto&& color : colors) {
             ColorLayer layer;
@@ -107,7 +112,8 @@ namespace SR_GTYPES_NS {
             m_depthEnabled ? &m_depth : nullptr,
             m_colors,
             m_currentSampleCount,
-            1 /** layers count */)
+            m_layersCount,
+            m_depthEnabled ? ImageAspect::DepthStencil : ImageAspect::None)
         ) {
             SR_ERROR("Framebuffer::Update() : failed to create frame buffer!");
             m_hasErrors = true;
@@ -256,6 +262,11 @@ namespace SR_GTYPES_NS {
     }
 
     void Framebuffer::SetDirty() {
+        m_dirty = true;
+    }
+
+    void Framebuffer::SetLayersCount(uint32_t layersCount) {
+        m_layersCount = layersCount;
         m_dirty = true;
     }
 }

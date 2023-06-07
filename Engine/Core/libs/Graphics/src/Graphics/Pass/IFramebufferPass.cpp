@@ -24,6 +24,7 @@ namespace SR_GRAPH_NS {
         m_dynamicResizing = settingsNode.TryGetAttribute("DynamicResizing").ToBool(true);
         m_depthEnabled = settingsNode.TryGetAttribute("DepthEnabled").ToBool(true);
         m_samples = settingsNode.TryGetAttribute("SmoothSamples").ToUInt(0);
+        m_layersCount = settingsNode.TryGetAttribute("LayersCount").ToUInt(1);
 
         for (auto&& subNode : settingsNode.GetNodes()) {
             /// color layers
@@ -76,14 +77,18 @@ namespace SR_GRAPH_NS {
                 static_cast<int32_t>(static_cast<SR_MATH_NS::Unit>(m_size.y) * m_preScale.y),
         };
 
+        SRAssert(!m_framebuffer);
+
         /// initialize framebuffer
-        if (!(m_framebuffer = SR_GTYPES_NS::Framebuffer::Create(m_colorFormats, m_depthFormat, size))) {
-            SR_ERROR("FramebufferPass::Init() : failed to create framebuffer!");
-        }
-        else {
+        if ((m_framebuffer = SR_GTYPES_NS::Framebuffer::Create(m_colorFormats, m_depthFormat, size))) {
+            m_framebuffer->SetLayersCount(m_layersCount);
             m_framebuffer->SetSampleCount(m_samples);
             m_framebuffer->SetDepthEnabled(m_depthEnabled);
             m_framebuffer->AddUsePoint();
+        }
+        else {
+            SR_ERROR("FramebufferPass::Init() : failed to create framebuffer!");
+            return false;
         }
 
         if (m_framebuffer) {

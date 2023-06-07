@@ -39,6 +39,7 @@ namespace SR_GTYPES_NS {
         static Ptr Create(uint32_t images, const SR_MATH_NS::IVector2& size);
         static Ptr Create(const std::list<ColorFormat>& colors, DepthFormat depth, const SR_MATH_NS::IVector2& size);
         static Ptr Create(const std::list<ColorFormat>& colors, DepthFormat depth, const SR_MATH_NS::IVector2& size, uint8_t samples);
+        static Ptr Create(const std::list<ColorFormat>& colors, DepthFormat depth, const SR_MATH_NS::IVector2& size, uint8_t samples, uint32_t layersCount);
         static Ptr Create(const std::list<ColorFormat>& colors, DepthFormat depth);
 
     public:
@@ -58,6 +59,7 @@ namespace SR_GTYPES_NS {
         void SetSize(const SR_MATH_NS::IVector2& size);
         void SetDepthEnabled(bool depthEnabled);
         void SetSampleCount(uint8_t samples);
+        void SetLayersCount(uint32_t layersCount);
 
         SR_NODISCARD bool IsFileResource() const noexcept override { return false; }
         SR_NODISCARD uint8_t GetSamplesCount() const;
@@ -85,6 +87,8 @@ namespace SR_GTYPES_NS {
         int32_t m_frameBuffer = SR_ID_INVALID;
 
         SR_MATH_NS::IVector2 m_size = { };
+
+        uint8_t m_layersCount = 1;
 
         uint8_t m_sampleCount = 0;
         uint8_t m_currentSampleCount = 0;

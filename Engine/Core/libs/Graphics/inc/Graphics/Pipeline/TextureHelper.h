@@ -24,6 +24,10 @@ namespace SR_GRAPH_NS {
         Samples32
     );
 
+    SR_ENUM_NS_CLASS(ImageAspect,
+        None, Depth, Stencil, Color, DepthStencil
+    );
+
     SR_ENUM_NS_CLASS(ColorFormat,
         Unknown,
 

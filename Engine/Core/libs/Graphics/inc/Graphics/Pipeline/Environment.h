@@ -247,7 +247,7 @@ namespace SR_GRAPH_NS {
 
         virtual SR_FORCE_INLINE void SetCursorPosition(glm::vec2 pos) const { }
 
-        virtual bool CreateFrameBuffer(const SR_MATH_NS::IVector2& size, int32_t& FBO, DepthLayer* pDepth, std::vector<ColorLayer>& colors, uint8_t sampleCount, uint32_t layersCount) { return false; }
+        virtual bool CreateFrameBuffer(const SR_MATH_NS::IVector2& size, int32_t& FBO, DepthLayer* pDepth, std::vector<ColorLayer>& colors, uint8_t sampleCount, uint32_t layersCount, ImageAspect imageAspect) { return false; }
 
         virtual SR_FORCE_INLINE void BindFrameBuffer(const uint32_t& FBO) { }
         virtual SR_FORCE_INLINE void DeleteBuffer(uint32_t& FBO)const { }

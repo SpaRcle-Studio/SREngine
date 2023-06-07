@@ -36,16 +36,19 @@ namespace SR_GRAPH_NS::Types {
             return true;
         }
 
-        auto&& context = SR_THIS_THREAD->GetContext()->GetValue<SR_HTYPES_NS::SafePtr<RenderContext>>();
-        if (!context) {
+        auto&& pContext = SR_THIS_THREAD->GetContext()->GetValue<SR_HTYPES_NS::SafePtr<RenderContext>>();
+        if (!pContext) {
             SRHalt("Is not render context!");
             m_hasErrors = true;
             return false;
         }
 
-        if (!m_isRegistered && context.LockIfValid()) {
-            context->Register(this);
-            context.Unlock();
+        if (!m_isRegistered && pContext.LockIfValid()) {
+            for (auto&& [hashName, sampler] : m_samplers) {
+                sampler.samplerId = pContext->GetDefaultTexture()->GetId();
+            }
+            pContext->Register(this);
+            pContext.Unlock();
             m_isRegistered = true;
         }
 

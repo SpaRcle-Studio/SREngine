@@ -13,7 +13,8 @@ int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateFBO(
     std::vector<int32_t>& outputColorAttachments,
     std::optional<int32_t>& depth,
     uint8_t sampleCount,
-    uint32_t layersCount
+    uint32_t layersCount,
+    VkImageAspectFlags depthAspect
 ) {
     if (inputColorAttachments.size() != outputColorAttachments.size()) {
         SR_WARN("MemoryManager::AllocateFBO() : input colors not equal output colors count! Something went wrong...");
@@ -34,7 +35,7 @@ int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateFBO(
                 layersCount,
                 1.f /** scale */,
                 sampleCount,
-                depth.has_value() /** depth enabled */
+                depthAspect
             );
 
             if (m_FBOs[i] == nullptr) {
@@ -84,7 +85,8 @@ bool Framework::Graphics::VulkanTools::MemoryManager::ReAllocateFBO(
     const std::vector<int32_t> &oldColorAttachments,
     std::optional<int32_t> depthBuffer,
     uint8_t sampleCount,
-    uint32_t layersCount
+    uint32_t layersCount,
+    VkImageAspectFlags depthAspect
 ) {
     if (FBO >= m_countFBO.first || m_FBOs[FBO] == nullptr) {
         SR_ERROR("MemoryManager::ReAllocateFBO() : incorrect FBO index!");
@@ -93,6 +95,7 @@ bool Framework::Graphics::VulkanTools::MemoryManager::ReAllocateFBO(
 
     m_FBOs[FBO]->SetSampleCount(sampleCount);
     m_FBOs[FBO]->SetLayersCount(layersCount);
+    m_FBOs[FBO]->SetDepthAspect(depthAspect);
 
     if (!m_FBOs[FBO]->ReCreate(w, h)) {
         SR_ERROR("MemoryManager::ReAllocateFBO() : failed to re-create frame buffer object!");
