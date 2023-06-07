@@ -91,6 +91,7 @@ namespace SR_PTYPES_NS {
         void SetMass(float_t mass);
 
         void SetMaterial(PhysicsMaterial* pMaterial);
+        void SetMaterial(const SR_UTILS_NS::Path& path);
         void SetRawMesh(SR_HTYPES_NS::RawMesh* pRawMesh);
         void SetMeshId(int32_t id) { m_meshId = id; }
 

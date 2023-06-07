@@ -5,6 +5,7 @@
 #include <Core/GUI/ComponentDrawer.h>
 #include <Core/GUI/GUISystem.h>
 #include <Core/GUI/EditorGUI.h>
+#include <Core/GUI/FileBrowser.h>
 #include <Core/GUI/DragNDropHelper.h>
 #include <Core/Settings/EditorSettings.h>
 
@@ -134,17 +135,30 @@ namespace SR_CORE_NS::GUI {
             }
         }
 
-        std::string materialPath = "";
+        SR_UTILS_NS::Path materialPath;
 
         if (auto&& pMaterial = pComponent->GetPhysicsMaterial()) {
             materialPath = pMaterial->GetResourceId();
         }
 
-        if (ImGui::Button(materialPath.c_str())) {
-            /// TODO: Сделать открытие проводника в директории materialPath.
+        if (materialPath.empty()) {
+            materialPath = "None";
         }
 
-        ImGui::SameLine(); ImGui::Text("Physics Material");
+        if (ImGui::Button(materialPath.c_str())) {
+            if (auto&& pFileBrowser = context->GetWidget<FileBrowser>()) {
+                pFileBrowser->Open();
+
+                pFileBrowser->SetCallback([pComponent](const SR_UTILS_NS::Path& path){
+                    if (pComponent) {
+                        pComponent->SetMaterial(path);
+                    }
+                });
+            }
+        }
+
+        ImGui::SameLine();
+        ImGui::Text("Physics Material");
     }
 
     void ComponentDrawer::DrawCollisionShape(SR_PTYPES_NS::CollisionShape* pCollisionShape, EditorGUI* context, int32_t index){

@@ -349,4 +349,9 @@ namespace SR_PTYPES_NS {
         m_shape->Update(dt);
         Super::Update(dt);
     }
+
+    void Rigidbody::SetMaterial(const SR_UTILS_NS::Path& path) {
+        SR_PTYPES_NS::PhysicsMaterial* pMaterial = SR_PTYPES_NS::PhysicsMaterial::Load(path);
+        SetMaterial(pMaterial);
+    }
 }
