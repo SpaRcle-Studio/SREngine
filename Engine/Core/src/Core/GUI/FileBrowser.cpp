@@ -50,7 +50,7 @@ namespace SR_CORE_NS::GUI {
                 continue;
             }
             else {
-                Element current;
+                FBElement current;
 
                 if (path.IsDir()) {
                     current.filename = path.GetBaseName();
@@ -60,27 +60,27 @@ namespace SR_CORE_NS::GUI {
                     current.isDir = false;
                 }
 
-                current.cutname = SR_UTILS_NS::StringUtils::CutName(current.filename, 7);
+                current.cutName = SR_UTILS_NS::StringUtils::CutName(current.filename, 7);
 
                 auto&& extension = path.GetExtensionView();
 
                 if (extension.empty()) { //TODO Сделать красивым
-                    path.IsEmpty() ? current.icontype = Core::EditorIcon::EmptyFolder
-                                   : current.icontype = Core::EditorIcon::Folder;
+                    path.IsEmpty() ? current.iconType = Core::EditorIcon::EmptyFolder
+                                   : current.iconType = Core::EditorIcon::Folder;
                 } else if (extension == "zip") {
-                    current.icontype = Core::EditorIcon::ZIP;
+                    current.iconType = Core::EditorIcon::ZIP;
                 } else if ((extension == "jpg") || (extension == "jpeg")) {
-                    current.icontype = Core::EditorIcon::JPG;
+                    current.iconType = Core::EditorIcon::JPG;
                 } else if (extension == "txt") {
-                    current.icontype = Core::EditorIcon::TXT;
+                    current.iconType = Core::EditorIcon::TXT;
                 } else if (extension == "xml") {
-                    current.icontype = Core::EditorIcon::XML;
+                    current.iconType = Core::EditorIcon::XML;
                 } else if (extension == "png") {
-                    current.icontype = Core::EditorIcon::PNG;
+                    current.iconType = Core::EditorIcon::PNG;
                 } else if (extension == "dll") {
-                    current.icontype = Core::EditorIcon::DLL;
+                    current.iconType = Core::EditorIcon::DLL;
                 } else {
-                    current.icontype = Core::EditorIcon::File;
+                    current.iconType = Core::EditorIcon::File;
                 }
                 
                 m_elements.emplace_back(current);
@@ -89,17 +89,17 @@ namespace SR_CORE_NS::GUI {
         m_dirtySelectedDir = false;
     }
 
-    void FileBrowser::DrawFoldersTree(const Folder& parentFolder) {
+    void FileBrowser::DrawFoldersTree(const FBFolder& parentFolder) {
         const ImGuiTreeNodeFlags WITH_CHILD = ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_OpenOnDoubleClick;
         const ImGuiTreeNodeFlags SELECTED_WITH_CHILD = ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_OpenOnDoubleClick | ImGuiTreeNodeFlags_Selected;
         const ImGuiTreeNodeFlags WITHOUT_CHILD = ImGuiTreeNodeFlags_NoTreePushOnOpen | ImGuiTreeNodeFlags_Leaf;
         const ImGuiTreeNodeFlags SELECTED_WITHOUT_CHILD = ImGuiTreeNodeFlags_NoTreePushOnOpen | ImGuiTreeNodeFlags_Leaf | ImGuiTreeNodeFlags_Selected;
 
         unsigned short index = 0;
-        for (const auto &folder : parentFolder.innerfolders) {
+        for (const auto &folder : parentFolder.innerFolders) {
             const bool selected = m_selectedDir.GetHash() == folder.path.GetHash();
 
-            if (folder.innerfolders.empty()) {
+            if (folder.innerFolders.empty()) {
                 ImGui::TreeNodeEx((void *) (intptr_t) index, selected ? SELECTED_WITHOUT_CHILD : WITHOUT_CHILD, "%s",
                                   folder.filename.c_str());
 
@@ -128,17 +128,17 @@ namespace SR_CORE_NS::GUI {
         }
     }
 
-    void FileBrowser::LoadFoldersTree(Folder& parentFolder) {
+    void FileBrowser::LoadFoldersTree(FBFolder& parentFolder) {
         const auto &folders = parentFolder.path.GetFolders();
         for (const auto &path : folders) 
         {
-            Folder currentfolder;
+            FBFolder currentfolder;
             currentfolder.path = path;
             currentfolder.filename = path.GetBaseName();
             if (!currentfolder.path.IsEmpty()) {
                 LoadFoldersTree(currentfolder);
             }
-            parentFolder.innerfolders.emplace_back(currentfolder);
+            parentFolder.innerFolders.emplace_back(currentfolder);
         }
     }
 
@@ -149,7 +149,14 @@ namespace SR_CORE_NS::GUI {
 
         if (ImGui::Selectable("Open")) {
             SR_UTILS_NS::Path path = m_selectedDir.Concat(filename);
-            SR_UTILS_NS::Platform::OpenWithAssociatedApp(path);
+
+            if (m_callbackFunction) {
+                m_callbackFunction(path);
+                m_callbackFunction = CallbackFn();
+            }
+            else {
+                SR_UTILS_NS::Platform::OpenWithAssociatedApp(path);
+            }
         }
         if (ImGui::Selectable("Extract animations")) {
             SR_UTILS_NS::Path path = m_selectedDir.Concat(filename);
@@ -229,7 +236,7 @@ namespace SR_CORE_NS::GUI {
 
                 const std::string headerid = "##FileBrowserElement%s" + element.filename;
                 if (element.isDir) {
-                    void* descriptor = dynamic_cast<EditorGUI *>(GetManager())->GetIconDescriptor(element.icontype);
+                    void* descriptor = dynamic_cast<EditorGUI *>(GetManager())->GetIconDescriptor(element.iconType);
 
                     if (GUISystem::Instance().ImageButtonDouble(headerid,
                             descriptor, SR_MATH_NS::IVector2(50), 0)) {
@@ -241,16 +248,25 @@ namespace SR_CORE_NS::GUI {
                 }
                 else
                 {
-                    void* descriptor = dynamic_cast<EditorGUI *>(GetManager())->GetIconDescriptor(element.icontype);
+                    void* descriptor = dynamic_cast<EditorGUI *>(GetManager())->GetIconDescriptor(element.iconType);
 
                     if (GUISystem::Instance().ImageButtonDouble(headerid, descriptor, SR_MATH_NS::IVector2(50), 0)) {
-                        SR_UTILS_NS::Platform::OpenWithAssociatedApp(m_selectedDir.Concat(element.filename));
+                        SR_UTILS_NS::Path path = m_selectedDir.Concat(element.filename);
+                        //SR_UTILS_NS::Platform::OpenWithAssociatedApp(m_selectedDir.Concat(element.filename));
+
+                        if (m_callbackFunction) {
+                            m_callbackFunction(path);
+                            m_callbackFunction = CallbackFn();
+                        }
+                        else {
+                            SR_UTILS_NS::Platform::OpenWithAssociatedApp(path);
+                        }
                     }
 
                     FileContextMenu(element.filename);
                 }
 
-                ImGui::Text("%s", element.cutname.c_str());
+                ImGui::Text("%s", element.cutName.c_str());
 
                 ImGui::EndGroup();
 
@@ -356,7 +372,7 @@ namespace SR_CORE_NS::GUI {
         const float_t leftWidth = 250;
 
         if (m_dirtyFoldersTree) {
-            m_foldersTree.innerfolders.clear();
+            m_foldersTree.innerFolders.clear();
             m_foldersTree.path = m_defaultRoot;
             LoadFoldersTree(m_foldersTree);
             m_dirtyFoldersTree = false;
