@@ -37,10 +37,11 @@ namespace SR_GTYPES_NS {
 
     public:
         static Ptr Create(uint32_t images, const SR_MATH_NS::IVector2& size);
+        static Ptr Create(const std::list<ColorFormat>& colors, DepthFormat depth);
         static Ptr Create(const std::list<ColorFormat>& colors, DepthFormat depth, const SR_MATH_NS::IVector2& size);
         static Ptr Create(const std::list<ColorFormat>& colors, DepthFormat depth, const SR_MATH_NS::IVector2& size, uint8_t samples);
         static Ptr Create(const std::list<ColorFormat>& colors, DepthFormat depth, const SR_MATH_NS::IVector2& size, uint8_t samples, uint32_t layersCount);
-        static Ptr Create(const std::list<ColorFormat>& colors, DepthFormat depth);
+        static Ptr Create(const std::list<ColorFormat>& colors, DepthFormat depth, const SR_MATH_NS::IVector2& size, uint8_t samples, uint32_t layersCount, ImageAspect depthAspect);
 
     public:
         bool Update();
@@ -60,6 +61,7 @@ namespace SR_GTYPES_NS {
         void SetDepthEnabled(bool depthEnabled);
         void SetSampleCount(uint8_t samples);
         void SetLayersCount(uint32_t layersCount);
+        void SetDepthAspect(ImageAspect depthAspect);
 
         SR_NODISCARD bool IsFileResource() const noexcept override { return false; }
         SR_NODISCARD uint8_t GetSamplesCount() const;
@@ -81,6 +83,8 @@ namespace SR_GTYPES_NS {
 
         std::atomic<bool> m_dirty = true;
         std::atomic<bool> m_hasErrors = false;
+
+        ImageAspect m_depthAspect = ImageAspect::DepthStencil;
 
         std::vector<ColorLayer> m_colors = { };
         DepthLayer m_depth = { };

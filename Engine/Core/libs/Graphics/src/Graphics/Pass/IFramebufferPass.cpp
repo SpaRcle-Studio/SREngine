@@ -26,6 +26,8 @@ namespace SR_GRAPH_NS {
         m_samples = settingsNode.TryGetAttribute("SmoothSamples").ToUInt(0);
         m_layersCount = settingsNode.TryGetAttribute("LayersCount").ToUInt(1);
 
+        m_depthAspect = ImageAspect::DepthStencil;
+
         for (auto&& subNode : settingsNode.GetNodes()) {
             /// color layers
             if (subNode.NameView() == "Layer") {
@@ -47,7 +49,11 @@ namespace SR_GRAPH_NS {
                 m_depth = subNode.TryGetAttribute("ClearValue").ToFloat(1.f);
 
                 m_depthFormat = SR_UTILS_NS::EnumReflector::FromString<DepthFormat>(subNode.TryGetAttribute("DepthFormat").ToString(
-                        "Auto"
+                    "Auto"
+                ));
+
+                m_depthAspect = SR_UTILS_NS::EnumReflector::FromString<ImageAspect>(subNode.TryGetAttribute("Aspect").ToString(
+                    "DepthStencil"
                 ));
             }
             else if (subNode.NameView() == "Size") {
@@ -84,6 +90,7 @@ namespace SR_GRAPH_NS {
             m_framebuffer->SetLayersCount(m_layersCount);
             m_framebuffer->SetSampleCount(m_samples);
             m_framebuffer->SetDepthEnabled(m_depthEnabled);
+            m_framebuffer->SetDepthAspect(m_depthAspect);
             m_framebuffer->AddUsePoint();
         }
         else {

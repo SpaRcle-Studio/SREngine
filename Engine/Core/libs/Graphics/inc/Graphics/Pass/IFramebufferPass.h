@@ -51,6 +51,7 @@ namespace SR_GRAPH_NS {
         uint8_t m_samples = 0;
         uint32_t m_layersCount = 1;
         DepthFormat m_depthFormat = DepthFormat::Unknown;
+        ImageAspect m_depthAspect = ImageAspect::DepthStencil;
 
     };
 }
