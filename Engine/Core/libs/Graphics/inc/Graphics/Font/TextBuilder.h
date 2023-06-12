@@ -27,7 +27,7 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD uint32_t GetWidth() const noexcept { return m_imageWidth; }
         SR_NODISCARD uint32_t GetHeight() const noexcept { return m_imageHeight; }
         SR_NODISCARD uint8_t* GetData() const noexcept { return m_textureData; }
-        SR_NODISCARD ColorFormat GetColorFormat() const noexcept;
+        SR_NODISCARD ImageFormat GetColorFormat() const noexcept;
 
         bool Build(StringType text);
 

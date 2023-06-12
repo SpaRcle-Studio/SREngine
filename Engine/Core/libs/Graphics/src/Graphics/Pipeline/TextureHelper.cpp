@@ -46,19 +46,19 @@ namespace SR_GRAPH_NS {
         return cmpBuffer;
     }
 
-    uint32_t GetPixelSize(ColorFormat format) {
+    uint32_t GetPixelSize(ImageFormat format) {
         switch (format) {
-            case ColorFormat::RGBA8_UNORM:
-            case ColorFormat::BGRA8_UNORM:
-            case ColorFormat::RGBA8_SRGB:
+            case ImageFormat::RGBA8_UNORM:
+            case ImageFormat::BGRA8_UNORM:
+            case ImageFormat::RGBA8_SRGB:
                 return 4 * 1;
-            case ColorFormat::RGBA16_UNORM:
-            case ColorFormat::RGBA16_SFLOAT:
+            case ImageFormat::RGBA16_UNORM:
+            case ImageFormat::RGBA16_SFLOAT:
                 return 4 * 2;
-            case ColorFormat::RGB8_UNORM:
-            case ColorFormat::RGB8_SRGB:
+            case ImageFormat::RGB8_UNORM:
+            case ImageFormat::RGB8_SRGB:
                 return 3 * 1;
-            case ColorFormat::RGB16_UNORM:
+            case ImageFormat::RGB16_UNORM:
                 return 3 * 2;
             default:
                 break;

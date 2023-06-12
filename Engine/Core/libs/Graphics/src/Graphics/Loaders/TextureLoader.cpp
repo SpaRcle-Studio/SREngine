@@ -70,32 +70,32 @@ bool Framework::Graphics::TextureLoader::LoadFromMemory(Types::Texture* texture,
     int requireComponents = 0;
 
     switch (config.m_format) {
-        case ColorFormat::RGBA8_UNORM:
-        case ColorFormat::BGRA8_UNORM:
-        case ColorFormat::RGBA8_SRGB:
+        case ImageFormat::RGBA8_UNORM:
+        case ImageFormat::BGRA8_UNORM:
+        case ImageFormat::RGBA8_SRGB:
             requireComponents = 4;
             break;
-        case ColorFormat::R8_UNORM:
-        case ColorFormat::R8_UINT:
+        case ImageFormat::R8_UNORM:
+        case ImageFormat::R8_UINT:
             requireComponents = 1;
             break;
-        case ColorFormat::RG8_UNORM:
+        case ImageFormat::RG8_UNORM:
             requireComponents = 2;
             break;
-        case ColorFormat::RGB8_UNORM:
+        case ImageFormat::RGB8_UNORM:
             requireComponents = 3;
             break;
-        case ColorFormat::RGBA16_UNORM:
-        case ColorFormat::RGB16_UNORM:
-        case ColorFormat::R16_UNORM:
-        case ColorFormat::R32_SFLOAT:
-        case ColorFormat::R64_SFLOAT:
-        case ColorFormat::R16_UINT:
-        case ColorFormat::R32_UINT:
-        case ColorFormat::R64_UINT:
-        case ColorFormat::Unknown:
+        case ImageFormat::RGBA16_UNORM:
+        case ImageFormat::RGB16_UNORM:
+        case ImageFormat::R16_UNORM:
+        case ImageFormat::R32_SFLOAT:
+        case ImageFormat::R64_SFLOAT:
+        case ImageFormat::R16_UINT:
+        case ImageFormat::R32_UINT:
+        case ImageFormat::R64_UINT:
+        case ImageFormat::Unknown:
         default:
-            SR_ERROR("TextureLoader::LoadFromMemory() : unknown color format!\n\tColorFormat: " + SR_UTILS_NS::EnumReflector::ToString(config.m_format));
+            SR_ERROR("TextureLoader::LoadFromMemory() : unknown color format!\n\tImageFormat: " + SR_UTILS_NS::EnumReflector::ToString(config.m_format));
             return false;
     }
 

@@ -37,11 +37,11 @@ namespace SR_GTYPES_NS {
 
     public:
         static Ptr Create(uint32_t images, const SR_MATH_NS::IVector2& size);
-        static Ptr Create(const std::list<ColorFormat>& colors, DepthFormat depth);
-        static Ptr Create(const std::list<ColorFormat>& colors, DepthFormat depth, const SR_MATH_NS::IVector2& size);
-        static Ptr Create(const std::list<ColorFormat>& colors, DepthFormat depth, const SR_MATH_NS::IVector2& size, uint8_t samples);
-        static Ptr Create(const std::list<ColorFormat>& colors, DepthFormat depth, const SR_MATH_NS::IVector2& size, uint8_t samples, uint32_t layersCount);
-        static Ptr Create(const std::list<ColorFormat>& colors, DepthFormat depth, const SR_MATH_NS::IVector2& size, uint8_t samples, uint32_t layersCount, ImageAspect depthAspect);
+        static Ptr Create(const std::list<ImageFormat>& colors, ImageFormat depth);
+        static Ptr Create(const std::list<ImageFormat>& colors, ImageFormat depth, const SR_MATH_NS::IVector2& size);
+        static Ptr Create(const std::list<ImageFormat>& colors, ImageFormat depth, const SR_MATH_NS::IVector2& size, uint8_t samples);
+        static Ptr Create(const std::list<ImageFormat>& colors, ImageFormat depth, const SR_MATH_NS::IVector2& size, uint8_t samples, uint32_t layersCount);
+        static Ptr Create(const std::list<ImageFormat>& colors, ImageFormat depth, const SR_MATH_NS::IVector2& size, uint8_t samples, uint32_t layersCount, ImageAspect depthAspect);
 
     public:
         bool Update();
@@ -83,8 +83,6 @@ namespace SR_GTYPES_NS {
 
         std::atomic<bool> m_dirty = true;
         std::atomic<bool> m_hasErrors = false;
-
-        ImageAspect m_depthAspect = ImageAspect::DepthStencil;
 
         std::vector<ColorLayer> m_colors = { };
         DepthLayer m_depth = { };

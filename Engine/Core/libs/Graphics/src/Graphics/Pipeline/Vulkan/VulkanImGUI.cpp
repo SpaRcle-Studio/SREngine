@@ -249,8 +249,10 @@ namespace SR_GRAPH_NS::VulkanTypes {
                     VK_IMAGE_LAYOUT_PRESENT_SRC_KHR
                 )
             },
+            { } /** input attachments */,
             countMSAASamples,
-            false /** depth buffer */
+            false /** depth buffer */,
+            m_device->GetDepthFormat()
         );
 
         if (!m_renderPass.IsReady()) {

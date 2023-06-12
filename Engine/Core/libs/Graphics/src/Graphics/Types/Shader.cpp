@@ -344,6 +344,7 @@ namespace SR_GRAPH_NS::Types {
 
         for (auto&& [name, sampler] : pShader->GetSamplers()) {
             m_samplers[SR_RUNTIME_TIME_CRC32_STR(name.c_str())].binding = sampler.binding;
+            m_samplers[SR_RUNTIME_TIME_CRC32_STR(name.c_str())].isAttachment = sampler.attachment >= 0;
 
             const ShaderVarType varType = SR_SRSL_NS::SRSLTypeInfo::Instance().StringToType(sampler.type);
 
@@ -396,7 +397,12 @@ namespace SR_GRAPH_NS::Types {
 
     void Shader::FlushSamplers() {
         for (auto&& [hashName, samplerInfo] : m_samplers) {
-            m_pipeline->BindTexture(samplerInfo.binding, samplerInfo.samplerId);
+            if (samplerInfo.isAttachment) {
+                m_pipeline->BindAttachment(samplerInfo.binding, samplerInfo.samplerId);
+            }
+            else {
+                m_pipeline->BindTexture(samplerInfo.binding, samplerInfo.samplerId);
+            }
         }
     }
 }

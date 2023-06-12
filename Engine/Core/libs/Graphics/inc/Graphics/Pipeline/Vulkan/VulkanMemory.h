@@ -124,19 +124,17 @@ namespace Framework::Graphics::VulkanTools {
                 uint32_t FBO,
                 uint32_t w, uint32_t h,
                 const std::vector<int32_t>& oldColorAttachments,
-                std::optional<int32_t> depth,
+                DepthLayer* pDepth,
                 uint8_t sampleCount,
-                uint32_t layersCount,
-                VkImageAspectFlags depthAspect);
+                uint32_t layersCount);
 
         SR_NODISCARD int32_t AllocateFBO(
                 uint32_t w, uint32_t h,
                 const std::vector<VkFormat>& inputColorAttachments,
                 std::vector<int32_t>& outputColorAttachments,
-                std::optional<int32_t>& depth,
+                DepthLayer* pDepth,
                 uint8_t sampleCount,
-                uint32_t layersCount,
-                VkImageAspectFlags depthAspect);
+                uint32_t layersCount);
 
         SR_NODISCARD int32_t AllocateTexture(
                 uint8_t* pixels,

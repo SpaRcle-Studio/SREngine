@@ -23,6 +23,7 @@ float textureProj(vec4 shadowCoord, vec2 offset) {
 	float bias = 0.00016;
 
 	if (shadowCoord.z > -1.0 && shadowCoord.z < 1.0) {
+		//   float dist = texture(shadowMap, vec2(shadowCoord.st + offset)).r;
 		float dist = texture(shadowMap, vec2(shadowCoord.st + offset)).r;
 		if (shadowCoord.w > 0 && dist < shadowCoord.z - bias) {
 			shadow = 0.3;
@@ -57,8 +58,8 @@ float filterPCF(vec4 sc) {
 void fragment() {
     vec3 diffuseColor = texture(diffuse, UV).rgb * color.rgb;
 
-	//float shadow = textureProj(shadowCoord / shadowCoord.w, vec2(0.0));
-	float shadow = filterPCF(shadowCoord / shadowCoord.w);
+	float shadow = textureProj(shadowCoord / shadowCoord.w, vec2(0.0));
+	/// float shadow = filterPCF(shadowCoord / shadowCoord.w);
 
     vec3 N = normalize(normal);
     vec3 L = normalize(lightVec);

@@ -10,7 +10,7 @@ namespace SR_GRAPH_NS {
     IFramebufferPass::IFramebufferPass()
         : m_preScale(SR_MATH_NS::FVector2(1.f))
         , m_depth(1.f)
-        , m_depthFormat(DepthFormat::Unknown)
+        , m_depthFormat(ImageFormat::Unknown)
     { }
 
     IFramebufferPass::~IFramebufferPass() {
@@ -31,7 +31,7 @@ namespace SR_GRAPH_NS {
         for (auto&& subNode : settingsNode.GetNodes()) {
             /// color layers
             if (subNode.NameView() == "Layer") {
-                m_colorFormats.emplace_back(SR_UTILS_NS::EnumReflector::FromString<ColorFormat>(subNode.TryGetAttribute("Format").ToString(
+                m_colorFormats.emplace_back(SR_UTILS_NS::EnumReflector::FromString<ImageFormat>(subNode.TryGetAttribute("Format").ToString(
                         "RGBA8_UNORM"
                 )));
 
@@ -48,7 +48,7 @@ namespace SR_GRAPH_NS {
             else if (subNode.NameView() == "Depth") {
                 m_depth = subNode.TryGetAttribute("ClearValue").ToFloat(1.f);
 
-                m_depthFormat = SR_UTILS_NS::EnumReflector::FromString<DepthFormat>(subNode.TryGetAttribute("DepthFormat").ToString(
+                m_depthFormat = SR_UTILS_NS::EnumReflector::FromString<ImageFormat>(subNode.TryGetAttribute("DepthFormat").ToString(
                     "Auto"
                 ));
 

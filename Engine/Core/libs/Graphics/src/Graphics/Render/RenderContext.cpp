@@ -91,7 +91,7 @@ namespace SR_GRAPH_NS {
 
         Memory::TextureConfig config;
 
-        config.m_format = ColorFormat::RGBA8_UNORM;
+        config.m_format = ImageFormat::RGBA8_UNORM;
         config.m_filter = TextureFilter::NEAREST;
         config.m_compression = TextureCompression::None;
         config.m_mipLevels = 1;

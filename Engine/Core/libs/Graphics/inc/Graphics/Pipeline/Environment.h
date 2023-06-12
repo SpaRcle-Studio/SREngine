@@ -26,12 +26,13 @@ namespace SR_GRAPH_NS {
 
     struct ColorLayer {
         int32_t texture = SR_ID_INVALID;
-        ColorFormat format = ColorFormat::Unknown;
+        ImageFormat format = ImageFormat::Unknown;
     };
 
     struct DepthLayer {
         int32_t texture = SR_ID_INVALID;
-        DepthFormat format = DepthFormat::Unknown;
+        ImageFormat format = ImageFormat::Unknown;
+        ImageAspect aspect = ImageAspect::DepthStencil;
     };
 
     typedef ImGuiContext* GUIContext;
@@ -247,7 +248,7 @@ namespace SR_GRAPH_NS {
 
         virtual SR_FORCE_INLINE void SetCursorPosition(glm::vec2 pos) const { }
 
-        virtual bool CreateFrameBuffer(const SR_MATH_NS::IVector2& size, int32_t& FBO, DepthLayer* pDepth, std::vector<ColorLayer>& colors, uint8_t sampleCount, uint32_t layersCount, ImageAspect imageAspect) { return false; }
+        virtual bool CreateFrameBuffer(const SR_MATH_NS::IVector2& size, int32_t& FBO, DepthLayer* pDepth, std::vector<ColorLayer>& colors, uint8_t sampleCount, uint32_t layersCount) { return false; }
 
         virtual SR_FORCE_INLINE void BindFrameBuffer(const uint32_t& FBO) { }
         virtual SR_FORCE_INLINE void DeleteBuffer(uint32_t& FBO)const { }
@@ -337,6 +338,7 @@ namespace SR_GRAPH_NS {
 
         virtual SR_FORCE_INLINE void BindTexture(const uint32_t&  ID) const { }
         virtual SR_FORCE_INLINE void BindTexture(const uint8_t activeTexture, const uint32_t&  ID) const { }
+        virtual SR_FORCE_INLINE void BindAttachment(const uint8_t activeTexture, const uint32_t&  ID) const { }
         virtual SR_FORCE_INLINE void SetActiveTexture(unsigned char activeTexture) const { }
         virtual SR_FORCE_INLINE bool FreeCubeMap(int32_t* ID) { return false; }
 
@@ -358,7 +360,7 @@ namespace SR_GRAPH_NS {
          */
         virtual int32_t CalculateTexture(
                 uint8_t * data,
-                ColorFormat format,
+                ImageFormat format,
                 uint32_t w, uint32_t h,
                 TextureFilter filter,
                 TextureCompression compression,

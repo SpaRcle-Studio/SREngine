@@ -30,7 +30,7 @@ namespace SR_GTYPES_NS {
         texture->m_data = pFont->CopyData();
 
         texture->m_config.m_alpha = SR_UTILS_NS::BoolExt::True;
-        texture->m_config.m_format = ColorFormat::RGBA8_UNORM;
+        texture->m_config.m_format = ImageFormat::RGBA8_UNORM;
         texture->m_config.m_filter = TextureFilter::NEAREST;
         texture->m_config.m_compression = TextureCompression::None;
         texture->m_config.m_mipLevels = 1;

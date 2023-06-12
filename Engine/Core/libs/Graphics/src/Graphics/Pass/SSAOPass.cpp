@@ -77,7 +77,7 @@ namespace SR_GRAPH_NS {
         }
 
         auto&& config = Memory::TextureConfig();
-        config.m_format = ColorFormat::R32_SFLOAT;
+        config.m_format = ImageFormat::R32_SFLOAT;
         config.m_filter = TextureFilter::NEAREST;
 
         return SR_GTYPES_NS::Texture::LoadRaw((uint8_t*)noise.data(), noise.size() * sizeof(float_t), 4, 4, config);

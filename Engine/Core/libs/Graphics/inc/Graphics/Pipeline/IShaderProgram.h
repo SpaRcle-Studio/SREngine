@@ -84,7 +84,7 @@ namespace SR_GRAPH_NS {
         MissSecondary
     );
 
-    SR_ENUM_NS_CLASS(LayoutBinding, Unknown = 0, Uniform = 1, Sampler2D = 2)
+    SR_ENUM_NS_CLASS(LayoutBinding, Unknown = 0, Uniform = 1, Sampler2D = 2, Attachhment=3)
     SR_ENUM_NS_CLASS(PolygonMode, Unknown, Fill, Line, Point)
     SR_ENUM_NS_CLASS(CullMode, Unknown, None, Front, Back, FrontAndBack)
     SR_ENUM_NS_CLASS(PrimitiveTopology,
@@ -200,6 +200,12 @@ namespace SR_GRAPH_NS {
         if (SR_UTILS_NS::StringUtils::Contains(line, "samplerCube"))
             return LayoutBinding::Sampler2D;
 
+        if (SR_UTILS_NS::StringUtils::Contains(line, "subpassInputMS"))
+            return LayoutBinding::Attachhment;
+
+        if (SR_UTILS_NS::StringUtils::Contains(line, "subpassInput"))
+            return LayoutBinding::Attachhment;
+
         if (SR_UTILS_NS::StringUtils::Contains(line, "uniform"))
             return LayoutBinding::Uniform;
 
@@ -235,19 +241,20 @@ namespace SR_GRAPH_NS {
                     line.resize(pos);
                 }
 
-                if (SR_UTILS_NS::StringUtils::Contains(line, "binding")) {
-                    int32_t index = SR_UTILS_NS::StringUtils::IndexOf(line, '=');
+                int32_t bindingIndex = SR_UTILS_NS::StringUtils::IndexOf(line, "binding");
+                if (bindingIndex >= 0) {
+                    int32_t index = SR_UTILS_NS::StringUtils::IndexOf(line, '=', bindingIndex);
 
                     int32_t comment = SR_UTILS_NS::StringUtils::IndexOf(line, '/');
                     if (comment >= 0 && comment < index)
                         continue;
 
                     if (index <= 0) {
-                        SRAssert2(false, "Graphics::AnalyseShader() : incorrect binding location!");
+                        SRHalt("Graphics::AnalyseShader() : incorrect binding location!");
                         return std::optional<std::vector<Uniform>>();
                     }
 
-                    const auto&& location = SR_UTILS_NS::StringUtils::ReadFrom(line, ')', index + 2);
+                    const auto&& location = SR_UTILS_NS::StringUtils::ReadNumber(line, index + 2 /** space and assign */);
                     if (location.empty()) {
                         SR_ERROR("Graphics::AnalyseShader() : failed match location!");
                         return std::optional<std::vector<Uniform>>();
@@ -256,7 +263,7 @@ namespace SR_GRAPH_NS {
                     Uniform uniform {
                         .type = GetBindingType(line),
                         .stage = module.m_stage,
-                        .binding = static_cast<uint32_t>(std::atoll(location.c_str()))
+                        .binding = static_cast<uint32_t>(SR_UTILS_NS::LexicalCast<uint32_t>(location))
                     };
 
                     uniforms.emplace_back(uniform);

@@ -20,6 +20,7 @@ namespace SR_SRSL_NS {
         std::string type;
         bool isPublic = false;
         uint64_t binding = 0;
+        int32_t attachment = -1;
     };
     typedef std::map<std::string, SRSLSampler> SRSLSamplers;
 

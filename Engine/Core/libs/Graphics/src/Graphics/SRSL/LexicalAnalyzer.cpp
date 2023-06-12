@@ -506,6 +506,9 @@ namespace SR_SRSL_NS {
                 }
                 break;
             }
+            case LexemKind::Assign:
+                m_result = SRSLResult(SRSLReturnCode::InvalidAssign, m_lexems[m_currentLexem].offset);
+                return;
             case LexemKind::Plus:
             case LexemKind::Minus:
             case LexemKind::Negation:

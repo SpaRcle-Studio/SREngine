@@ -70,6 +70,7 @@ namespace SR_SRSL_NS {
 
         /// code += "#extension GL_ARB_separate_shader_objects : enable\n";
         /// code += "#extension GL_EXT_shader_atomic_float : enable\n\n";
+        /// code += "#extension GL_ARB_shader_image_load_store : enable\n\n";
 
         if (auto&& vertexLocations = GenerateInputLocations(stage); !vertexLocations.empty()) {
             code += vertexLocations + "\n";
@@ -87,7 +88,7 @@ namespace SR_SRSL_NS {
 
         auto&& entryPoint = SR_SRSL_ENTRY_POINTS.at(stage);
         if (auto&& pFunctionCallStack = m_shader->GetUseStack()->FindFunction(entryPoint)) {
-            for (auto &&pUnit : m_shader->GetAnalyzedTree()->pLexicalTree->lexicalTree) {
+            for (auto&& pUnit : m_shader->GetAnalyzedTree()->pLexicalTree->lexicalTree) {
                 auto&& pFunction = dynamic_cast<SRSLFunction*>(pUnit);
 
                 if (!pFunction) {
@@ -169,15 +170,21 @@ namespace SR_SRSL_NS {
 
         std::string code = GenerateStage(ShaderStage::Fragment, variablesCode);
 
+        std::string locationsCode;
+
         uint64_t outLocation = 0;
         for (auto&& layer : SR_SRSL_DEFAULT_OUT_LAYERS) {
-            if (layer == SR_SRSL_MAIN_OUT_LAYER || pUseStackFunction->IsVariableUsed(layer)) {
-                code += SR_UTILS_NS::Format("layout (location = %i) out vec4 %s;\n", outLocation, layer.c_str());
+            const bool isNeedMain = layer == SR_SRSL_MAIN_OUT_LAYER && isColorUsed;
+            if (isNeedMain || pUseStackFunction->IsVariableUsed(layer)) {
+                locationsCode += SR_UTILS_NS::Format("layout (location = %i) out vec4 %s;\n", outLocation, layer.c_str());
             }
             ++outLocation;
         }
 
-        code += "\n";
+        if (!locationsCode.empty()) {
+            code += locationsCode;
+            code += "\n";
+        }
 
         std::string preCode;
 
@@ -546,8 +553,17 @@ namespace SR_SRSL_NS {
 
         for (auto&& [name, sampler] : m_shader->GetSamplers()) {
             if (pFunction->IsVariableUsed(name)) {
-                samplersCode += SR_UTILS_NS::Format("layout (binding = %i) uniform %s %s; // (sampler) %s\n",
-                        sampler.binding,
+                std::string layout;
+
+                if (sampler.attachment >= 0) {
+                    layout = SR_UTILS_NS::Format("(input_attachment_index = %i, binding = %i)", sampler.attachment, sampler.binding);
+                }
+                else {
+                    layout = SR_UTILS_NS::Format("(binding = %i)", sampler.binding);
+                }
+
+                samplersCode += SR_UTILS_NS::Format("layout %s uniform %s %s; // (sampler) %s\n",
+                        layout.c_str(),
                         sampler.type.c_str(),
                         name.c_str(),
                         sampler.isPublic ? "public" : "private"

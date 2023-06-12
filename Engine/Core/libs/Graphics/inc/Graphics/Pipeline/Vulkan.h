@@ -379,7 +379,7 @@ namespace SR_GRAPH_NS {
 
         void OnMultiSampleChanged() override;
 
-        bool CreateFrameBuffer(const SR_MATH_NS::IVector2& size, int32_t& FBO, DepthLayer* pDepth, std::vector<ColorLayer>& colors, uint8_t sampleCount, uint32_t layersCount, ImageAspect imageAspect) override;
+        bool CreateFrameBuffer(const SR_MATH_NS::IVector2& size, int32_t& FBO, DepthLayer* pDepth, std::vector<ColorLayer>& colors, uint8_t sampleCount, uint32_t layersCount) override;
 
         SR_FORCE_INLINE bool DeleteShader(SR_SHADER_PROGRAM shaderProgram) override {
             if (!m_memory->FreeShaderProgram(shaderProgram)) {
@@ -559,7 +559,7 @@ namespace SR_GRAPH_NS {
         }
         int32_t CalculateTexture(
                 uint8_t* data,
-                ColorFormat format,
+                ImageFormat format,
                 uint32_t w, uint32_t h,
                 TextureFilter filter,
                 TextureCompression compression,
@@ -637,9 +637,39 @@ namespace SR_GRAPH_NS {
             // TODO: unsafe! VK_INDEX_TYPE_UINT32 can be different!
             vkCmdBindIndexBuffer(m_currentCmd, *m_memory->m_IBOs[IBO], 0, VK_INDEX_TYPE_UINT32);
         }
+
+        SR_FORCE_INLINE void BindAttachment(const uint8_t activeTexture, const uint32_t& ID) const override {
+            if (ID >= m_memory->m_countTextures.first) {
+                SRHalt("Vulkan::BindTexture() : incorrect range! (" + std::to_string(ID) + ")");
+                return;
+            }
+
+            EvoVulkan::Types::Texture* texture = m_memory->m_textures[ID];
+
+            if (!texture) {
+                SR_ERROR("Vulkan::BindTexture() : texture is not exists!");
+                return;
+            }
+
+            auto&& descriptorSet = m_memory->m_countDescriptorSets.first <= m_currentDescriptorSetId ? nullptr : m_memory->m_descriptorSets[m_currentDescriptorSetId];
+            if (!descriptorSet) {
+                SRAssert2Once(false, "Vulkan::BindTexture() : incorrect descriptor set!");
+                return;
+            }
+
+            auto&& imageDescriptorRef = texture->GetDescriptorRef();
+
+            const auto&& descriptorSetWrite = EvoVulkan::Tools::Initializers::WriteDescriptorSet(
+                    descriptorSet.m_self,
+                    VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT, activeTexture,
+                    imageDescriptorRef);
+
+            vkUpdateDescriptorSets(*m_kernel->GetDevice(), 1, &descriptorSetWrite, 0, nullptr);
+        }
+
         SR_FORCE_INLINE void BindTexture(const uint8_t activeTexture, const uint32_t& ID) const override {
             if (ID >= m_memory->m_countTextures.first) {
-                SR_ERROR("Vulkan::BindTexture() : incorrect range! (" + std::to_string(ID) + ")");
+                SRHalt("Vulkan::BindTexture() : incorrect range! (" + std::to_string(ID) + ")");
                 return;
             }
 

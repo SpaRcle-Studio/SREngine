@@ -310,6 +310,10 @@ namespace SR_SRSL_NS {
                 sampler.type = pVariable->GetType();
                 sampler.isPublic = bool(pVariable->pDecorators->Find("public"));
 
+                if (auto&& pAttachment = pVariable->pDecorators->Find("attachment"); pAttachment && pAttachment->args.size() == 1) {
+                    sampler.attachment = SR_UTILS_NS::LexicalCast<int32_t>(pAttachment->args.front()->token);
+                }
+
                 m_samplers[pVariable->GetName()] = sampler;
             }
         }

@@ -20,6 +20,7 @@ float LinearizeDepth() {
 
 void fragment() {
     float d = LinearizeDepth();
+    //float d = texture(depthMap, uv).x;
     COLOR_INDEX_0 = vec4(d, d, d, 1.0);
 }
 

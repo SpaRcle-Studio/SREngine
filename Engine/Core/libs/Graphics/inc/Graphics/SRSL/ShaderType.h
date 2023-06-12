@@ -180,7 +180,10 @@ namespace SR_SRSL_NS {
     }
 
     SR_INLINE_STATIC bool IsSampler(const std::string& type) {
-        return type.find("ampler") != std::string::npos;
+        return
+            type.find("ampler") != std::string::npos ||
+            type.find("mage2DMS") != std::string::npos ||
+            type.find("ubpassInput") != std::string::npos;
     }
 
     SR_INLINE_STATIC uint64_t GetTypeSize(const std::string& type) {

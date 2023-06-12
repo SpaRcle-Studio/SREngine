@@ -356,8 +356,9 @@ namespace SR_GRAPH_NS {
                 switch (uniform.type) {
                     case LayoutBinding::Sampler2D: type = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER; break;
                     case LayoutBinding::Uniform: type = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER; break;
+                    case LayoutBinding::Attachhment: type = VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT; break;
                     default:
-                        SR_ERROR("Vulkan::CompileShader() : unknown binding type!");
+                        SRHalt("Vulkan::CompileShader() : unknown binding type!");
                         return false;
                 }
 
@@ -489,7 +490,7 @@ namespace SR_GRAPH_NS {
         return true;
     }
 
-    bool Vulkan::CreateFrameBuffer(const SR_MATH_NS::IVector2 &size, int32_t &FBO, DepthLayer *pDepth, std::vector<ColorLayer> &colors, uint8_t sampleCount, uint32_t layersCount, ImageAspect imageAspect) {
+    bool Vulkan::CreateFrameBuffer(const SR_MATH_NS::IVector2 &size, int32_t &FBO, DepthLayer *pDepth, std::vector<ColorLayer> &colors, uint8_t sampleCount, uint32_t layersCount) {
         std::vector<int32_t> colorBuffers;
         colorBuffers.reserve(colors.size());
 
@@ -511,17 +512,14 @@ namespace SR_GRAPH_NS {
             return false;
         }
 
-        std::optional<int32_t> depthBuffer = pDepth ? pDepth->texture : std::optional<int32_t>();
-        auto&& vkImageAspect = VulkanTools::AbstractImageAspectToVkAspect(imageAspect);
-
         if (FBO > 0) {
-            if (!m_memory->ReAllocateFBO(FBO - 1, size.x, size.y, colorBuffers, depthBuffer, sampleCount, layersCount, vkImageAspect)) {
+            if (!m_memory->ReAllocateFBO(FBO - 1, size.x, size.y, colorBuffers, pDepth, sampleCount, layersCount)) {
                 SR_ERROR("Vulkan::CreateFrameBuffer() : failed to re-allocate frame buffer object!");
             }
             goto success;
         }
 
-        FBO = m_memory->AllocateFBO(size.x, size.y, formats, colorBuffers, depthBuffer, sampleCount, layersCount, vkImageAspect) + 1;
+        FBO = m_memory->AllocateFBO(size.x, size.y, formats, colorBuffers, pDepth, sampleCount, layersCount) + 1;
         if (FBO <= 0) {
             FBO = SR_ID_INVALID;
             SR_ERROR("Vulkan::CreateFrameBuffer() : failed to allocate FBO!");
@@ -529,13 +527,6 @@ namespace SR_GRAPH_NS {
         }
 
     success:
-        if (pDepth && depthBuffer.has_value()) {
-            pDepth->texture = depthBuffer.value();
-        }
-        else if (pDepth) {
-            pDepth->texture = SR_ID_INVALID;
-        }
-
         for (uint32_t i = 0; i < static_cast<uint32_t>(colors.size()); ++i) {
             colors[i].texture = colorBuffers[i];
         }
@@ -570,7 +561,7 @@ namespace SR_GRAPH_NS {
 
     int32_t Vulkan::CalculateTexture(
             uint8_t *data,
-            ColorFormat format,
+            ImageFormat format,
             uint32_t w,
             uint32_t h,
             TextureFilter filter,

@@ -91,7 +91,7 @@ namespace SR_GRAPH_NS {
         else if (m_framebuffer->Bind()) {
             GetPipeline()->ResetCmdBuffer();
 
-            m_framebuffer->BeginCmdBuffer(SR_MATH_NS::FColor(0.0), 1.f);
+            m_framebuffer->BeginCmdBuffer(m_clearColors, 1.f);
             {
                 m_framebuffer->BeginRender();
 

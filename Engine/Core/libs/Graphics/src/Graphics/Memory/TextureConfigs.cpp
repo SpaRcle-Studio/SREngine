@@ -18,7 +18,7 @@ namespace SR_GRAPH_NS::Memory {
         if (path.Exists()) {
             auto doc = Helper::Xml::Document::Load(path);
             for (const auto& texture : doc.Root().TryGetNode("Textures").TryGetNodes("Texture")) {
-                const auto format      = SR_UTILS_NS::EnumReflector::FromString<ColorFormat>(texture.TryGetAttribute("Format").ToString("RGBA8_UNORM"));
+                const auto format      = SR_UTILS_NS::EnumReflector::FromString<ImageFormat>(texture.TryGetAttribute("Format").ToString("RGBA8_UNORM"));
                 const auto filter      = SR_UTILS_NS::EnumReflector::FromString<TextureFilter>(texture.TryGetAttribute("Filter").ToString("LINEAR"));
                 const auto compression = SR_UTILS_NS::EnumReflector::FromString<TextureCompression>(texture.TryGetAttribute("Compression").ToString("None"));
                 const auto mipLevels   = static_cast<uint32_t>(texture.TryGetAttribute("MipLevels").ToInt(1));

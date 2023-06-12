@@ -71,6 +71,7 @@ namespace SR_GRAPH_NS {
     struct ShaderSampler {
         uint32_t binding = SR_ID_INVALID;
         uint32_t samplerId = SR_ID_INVALID;
+        bool isAttachment = false;
     };
     typedef std::map<uint64_t, ShaderSampler> ShaderSamplers;
 

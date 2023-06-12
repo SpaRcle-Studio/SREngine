@@ -9,9 +9,9 @@ DepthWrite true;
 DepthTest true;
 
 void fragment() {
-	COLOR = vec4(FRAG_COORD.z, 0.0, 0.0, 1.0);
+    /// depth write
 }
 
 void vertex() {
-    OUT_POSITION = LIGHT_SPACE_MATRIX * MODEL_MATRIX * vec4(VERTEX, 1.0);
+    OUT_POSITION = PROJECTION_MATRIX * VIEW_MATRIX * MODEL_MATRIX * vec4(VERTEX, 1.0);
 }

@@ -85,10 +85,9 @@ namespace SR_HTYPES_NS {
             Factory::Instance().LockSingleton();
 
             auto&& thread = std::thread([function = std::move(fn), this]() {
-                while (!m_isCreated) {
-                    SR_NOOP;
+                while (!m_isCreated || m_id == "0" || m_id.empty()) {
+                    m_id = SR_UTILS_NS::GetThreadId(m_thread);
                 }
-                m_id = SR_UTILS_NS::GetThreadId(m_thread);
                 Factory::Instance().m_threads.insert(std::make_pair(m_id, this));
                 SR_LOG("Thread::Run() : run thread " + m_id);
                 while (!m_isRan) {

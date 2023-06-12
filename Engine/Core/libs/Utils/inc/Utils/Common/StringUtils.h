@@ -82,11 +82,19 @@ namespace SR_UTILS_NS {
             return path.substr(0, path.find_last_of("/\\"));
         }
 
-        static SR_FORCE_INLINE int32_t IndexOf(const std::string& str, const char& symbol) {
-            for (uint32_t i = 0; i < str.size(); i++)
+        static SR_FORCE_INLINE int32_t IndexOf(const std::string& str, const char& symbol, uint32_t offset = 0) {
+            for (uint32_t i = offset; i < str.size(); i++)
                 if (str[i] == symbol)
                     return (int32_t)i;
             return SR_INVALID_STR_POS;
+        }
+
+        static SR_FORCE_INLINE int32_t IndexOf(const std::string& str, const std::string& subStr, uint32_t offset = 0) {
+            auto&& index = str.find(subStr, offset);
+            if (index == std::string::npos) {
+                return SR_INVALID_STR_POS;
+            }
+            return index;
         }
 
         static SR_FORCE_INLINE std::string GetFileNameFromFullPath(std::string full_path) {
@@ -173,6 +181,8 @@ namespace SR_UTILS_NS {
         }
 
         static std::string ReadFrom(const std::string& str, const char& c, uint32_t start);
+
+        static std::string ReadNumber(const std::string& str, uint32_t start);
 
         static int32_t FindClosest(const std::string& str, const std::string& characters) {
             int32_t pos = SR_INVALID_STR_POS;

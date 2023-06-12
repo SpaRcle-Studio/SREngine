@@ -302,5 +302,35 @@ namespace SR_UTILS_NS {
         return source.substr(count + start, size - count);
     }
 
+    std::string StringUtils::ReadNumber(const std::string& str, uint32_t start) {
+        if (start >= str.size()) {
+            return std::string();
+        }
 
+        std::string numberStr;
+        numberStr.reserve(str.size() / 2);
+
+        for (uint32_t i = start; i < str.size(); ++i) {
+            switch (str[i]) {
+                case '-':
+                case '0':
+                case '1':
+                case '2':
+                case '3':
+                case '4':
+                case '5':
+                case '6':
+                case '7':
+                case '8':
+                case '9':
+                case '.':
+                    numberStr += str[i];
+                    break;
+                default:
+                    return numberStr;
+            }
+        }
+
+        return numberStr;
+    }
 }
