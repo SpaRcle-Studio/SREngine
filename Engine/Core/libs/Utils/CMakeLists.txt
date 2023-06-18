@@ -58,6 +58,7 @@ endif()
 target_include_directories(Utils PUBLIC inc)
 target_include_directories(Utils PUBLIC libs)
 target_include_directories(Utils PUBLIC libs/assimp/include)
+target_include_directories(Utils PUBLIC libs/glm)
 
 # --------------------------------------------------------------------------------------
 

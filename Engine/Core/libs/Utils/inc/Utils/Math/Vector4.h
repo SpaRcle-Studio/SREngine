@@ -51,6 +51,13 @@ namespace SR_MATH_NS {
             , w(_w)
         { }
 
+        SR_FAST_CONSTRUCTOR Vector4(const Vector3<T>& v, T w)
+            : x(v.x)
+            , y(v.y)
+            , z(v.z)
+            , w(w)
+        { }
+
     public:
         SR_NODISCARD Vector4 Normalize() const {
             auto&& value = x * x + y * y + z * z + w * w;
@@ -102,6 +109,10 @@ namespace SR_MATH_NS {
             z %= p_v.z;
             w %= p_v.w;
             return *this;
+        }
+
+        template<typename U> SR_FORCE_INLINE Vector4 operator/(const U& v) const {
+            return Vector4(x / v, y / v, z / v, w / v);
         }
 
         template<typename U> SR_FORCE_INLINE Vector4 operator*(const Vector4<U> &p_v) const {

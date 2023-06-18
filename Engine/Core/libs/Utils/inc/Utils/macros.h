@@ -5,6 +5,9 @@
 #ifndef GAMEENGINE_MACROS_H
 #define GAMEENGINE_MACROS_H
 
+#define GLM_FORCE_RADIANS
+#define GLM_FORCE_DEPTH_ZERO_TO_ONE
+
 #if defined(_MSVC_LANG)
     static_assert(sizeof(size_t) == 8, "The engine supports only 64-bit systems!");
 

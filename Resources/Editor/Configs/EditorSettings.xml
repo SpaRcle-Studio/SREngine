@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <Settings>
-    <RenderTechnique Path="Editor/Configs/EditorSSAORenderTechnique.xml"/>
+    <RenderTechnique Path="Editor/Configs/EditorShadowMapRenderTechnique.xml"/>
     <DebugChunks Bool="false" />
     <!--<RenderTechnique Path="Editor/Configs/EditorCascadedShadowMapRenderTechnique.xml"/>-->
     <!--<RenderTechnique Path="Editor/Configs/EditorShadowMapRenderTechnique.xml"/>-->

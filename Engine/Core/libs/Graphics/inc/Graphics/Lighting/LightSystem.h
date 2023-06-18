@@ -12,7 +12,10 @@ namespace SR_GRAPH_NS {
 
     class LightSystem : SR_UTILS_NS::NonCopyable {
     public:
-        SR_MATH_NS::FVector3 m_position = SR_MATH_NS::FVector3(40, 30, 5);
+        LightSystem();
+
+    public:
+        SR_MATH_NS::FVector3 m_position = SR_MATH_NS::FVector3(20, 60, 5);
 
     };
 }

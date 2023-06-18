@@ -43,7 +43,7 @@ namespace SR_GRAPH_NS {
             float zNear = 1.0f;
             float zFar = 96.0f;
             SR_MATH_NS::Matrix4x4 depthProjectionMatrix = SR_MATH_NS::Matrix4x4(glm::perspective(glm::radians(45.f), 1.0f, zNear, zFar));
-            SR_MATH_NS::Matrix4x4 depthViewMatrix = SR_MATH_NS::Matrix4x4(glm::lookAt(lightPos.ToGLM(), glm::vec3(0.0f), glm::vec3(0, 1, 0)));
+            SR_MATH_NS::Matrix4x4 depthViewMatrix = SR_MATH_NS::Matrix4x4::LookAt(lightPos, glm::vec3(0.0f), glm::vec3(0, 1, 0));
 
             //SR_MATH_NS::Matrix4x4 lightView = q.Inverse().ToMat4x4();
             //lightView = lightView.Translate(m_camera->GetPosition().Inverse());

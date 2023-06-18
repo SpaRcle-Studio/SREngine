@@ -1,10 +1,26 @@
 <?xml version="1.0"?>
 <Technique Name="ShadowMap">
-    <CascadedShadowMapPass Name="DepthFBO" Directional="false">
+    <ColorBufferPass Directional="false">
+        <FramebufferSettings DynamicResizing="true" DepthEnabled="true" SmoothSamples="1">
+            <Size X="0" Y="0"/>
+            <PreScale X="0.85" Y="0.85"/>
+            <Depth Format="Auto" ClearValue="1.0"/>
+            <Layer Format="RGBA8_UNORM" R="0.0" G="0.0" B="0.0" A="1.0"/>
+        </FramebufferSettings>
+        <Shaders>
+            <Override Type="Canvas" Path="Engine/Shaders/ColorBuffer/canvas.srsl"/>
+            <Override Type="Spatial" Path="Engine/Shaders/ColorBuffer/spatial.srsl"/>
+            <Override Type="SpatialCustom" Path="Engine/Shaders/ColorBuffer/spatial.srsl"/>
+            <Override Type="Skybox" Path="Engine/Shaders/ColorBuffer/simple.srsl"/>
+            <Override Type="Simple" Path="Engine/Shaders/ColorBuffer/simple.srsl"/>
+            <Override Type="Skinned" Path="Engine/Shaders/ColorBuffer/skinned.srsl"/>
+        </Shaders>
+    </ColorBufferPass>
+    <CascadedShadowMapPass Name="DepthFBO" Directional="false" Cascades="4">
         <FramebufferSettings DynamicResizing="true" DepthEnabled="true" SmoothSamples="1">
             <Size X="0" Y="0"/>
             <PreScale X="1.0" Y="1.0"/>
-            <Depth Format="D16_UNORM" ClearValue="1.0" Aspect="Depth" />
+            <Depth Format="Auto" ClearValue="1.0" Aspect="Depth" />
         </FramebufferSettings>
         <Shaders>
             <Override Type="Spatial" Path="Engine/Shaders/ShadowMap/depth-spatial.srsl"/>
@@ -18,15 +34,17 @@
             <Layer Format="RGBA8_UNORM" R="0.0" G="0.0" B="0.0" A="1.0"/>
         </FramebufferSettings>
         <Passes>
-            <PostProcessPass Shader="Engine/Shaders/ShadowMap/shadow-map.srsl">
+            <!--<PostProcessPass Shader="Engine/Shaders/ShadowMap/shadow-map.srsl">
                 <Attachments>
                     <Attachment FBO="DepthFBO" Id="depthMap" Depth="true" />
                 </Attachments>
-            </PostProcessPass>
-            <!--<OpaquePass/>
+            </PostProcessPass>-->
+            <OpaquePass>
+                <Sampler FBO="DepthFBO" Id="shadowMap" Depth="true" />
+            </OpaquePass>
             <SkyboxPass Path="Engine/Skyboxes/Sun.png" Shader="Engine/Shaders/skybox.srsl"/>
             <TransparentPass/>
-            <DebugPass/>-->
+            <DebugPass/>
         </Passes>
     </FramebufferPass>
 </Technique>

@@ -8,6 +8,11 @@
 #include <Graphics/Pass/ShaderOverridePass.h>
 
 namespace SR_GRAPH_NS {
+    struct ShadowMapCascade {
+        float_t splitDepth = 0.f;
+        SR_MATH_NS::Matrix4x4 viewProjMatrix;
+    };
+
     class CascadedShadowMapPass : public ShaderOverridePass {
         using Super = ShaderOverridePass;
     public:
@@ -24,6 +29,14 @@ namespace SR_GRAPH_NS {
         void UseUniforms(ShaderPtr pShader, MeshPtr pMesh) override;
 
         SR_NODISCARD MeshClusterTypeFlag GetClusterType() const noexcept override;
+
+    private:
+        void UpdateCascades();
+
+    private:
+        uint32_t m_cascadesCount = 0;
+        float_t m_cascadeSplitLambda = 0.95f;
+        std::vector<ShadowMapCascade> m_cascades;
 
     };
 }

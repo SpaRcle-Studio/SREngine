@@ -28,9 +28,9 @@ namespace SR_MATH_NS {
         };
 
         constexpr Matrix4x4() noexcept;
-        explicit constexpr Matrix4x4(const Unit& scalar) noexcept;
-        explicit constexpr Matrix4x4(const glm::mat4& mat) noexcept;
-        explicit Matrix4x4(glm::mat4&& mat) noexcept;
+        constexpr Matrix4x4(const Unit& scalar) noexcept;
+        constexpr Matrix4x4(const glm::mat4& mat) noexcept;
+        Matrix4x4(glm::mat4&& mat) noexcept;
 
         Matrix4x4(const FVector3& translate, const Quaternion& rotation) noexcept;
         Matrix4x4(const FVector3& translate, const Quaternion& rotation, const FVector3& scale) noexcept;
@@ -53,18 +53,25 @@ namespace SR_MATH_NS {
         }
 
         static Matrix4x4 Ortho(Unit left, Unit right, Unit bottom, Unit top, Unit zNear, Unit zFar) {
-            Matrix4x4 result = Matrix4x4::Identity();
-            result[0][0] = Unit(2) / (right - left);
-            result[1][1] = Unit(2) / (top - bottom);
-            result[2][2] = - Unit(2) / (zFar - zNear);
-            result[3][0] = - (right + left) / (right - left);
-            result[3][1] = - (top + bottom) / (top - bottom);
-            result[3][2] = - (zFar + zNear) / (zFar - zNear);
-            return result;
+            Matrix4x4 Result(1);
+            Result[0][0] = static_cast<Unit>(2) / (right - left);
+            Result[1][1] = static_cast<Unit>(2) / (top - bottom);
+            Result[3][0] = - (right + left) / (right - left);
+            Result[3][1] = - (top + bottom) / (top - bottom);
+
+        #if GLM_DEPTH_CLIP_SPACE == GLM_DEPTH_ZERO_TO_ONE
+            Result[2][2] = - static_cast<Unit>(1) / (zFar - zNear);
+            Result[3][2] = - zNear / (zFar - zNear);
+        #else
+            Result[2][2] = - static_cast<T>(2) / (zFar - zNear);
+			Result[3][2] = - (zFar + zNear) / (zFar - zNear);
+        #endif
+
+            return Result;
         }
 
         static Matrix4x4 LookAt(const SR_MATH_NS::FVector3& eye, const SR_MATH_NS::FVector3& center, const SR_MATH_NS::FVector3& up) {
-            return Matrix4x4(glm::lookAt(eye.ToGLM(), center.ToGLM(), up.ToGLM()));
+            return Matrix4x4(glm::lookAtRH(eye.ToGLM(), center.ToGLM(), up.ToGLM()));
         }
 
         static Matrix4x4 FromEulers(const Quaternion& quaternion) {
