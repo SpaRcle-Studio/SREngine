@@ -24,6 +24,8 @@ namespace SR_GRAPH_NS {
 
         bool Load(const SR_XML_NS::Node& passNode) override;
 
+        SR_NODISCARD const ShadowMapCascade& GetCascade(uint32_t index) const;
+
     protected:
         void UseSharedUniforms(ShaderPtr pShader) override;
         void UseUniforms(ShaderPtr pShader, MeshPtr pMesh) override;

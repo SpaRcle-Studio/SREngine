@@ -33,6 +33,9 @@ namespace SR_GRAPH_NS {
         if (m_shadowMapPass) {
             pShader->SetMat4(SHADER_LIGHT_SPACE_MATRIX, m_shadowMapPass->GetLightSpaceMatrix());
         }
+        else if (m_cascadedShadowMapPass) {
+            pShader->SetMat4(SHADER_LIGHT_SPACE_MATRIX, m_cascadedShadowMapPass->GetCascade(1).viewProjMatrix);
+        }
 
         Super::UseSharedUniforms(pShader);
     }

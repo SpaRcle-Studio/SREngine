@@ -133,4 +133,14 @@ namespace SR_GRAPH_NS {
             lastSplitDist = cascadeSplits[i];
         }
     }
+
+    const ShadowMapCascade& CascadedShadowMapPass::GetCascade(uint32_t index) const {
+        if (m_cascades.size() <= index) {
+            SRHalt("Out of range!");
+            static ShadowMapCascade cascade;
+            return cascade;
+        }
+
+        return m_cascades.at(index);
+    }
 }
