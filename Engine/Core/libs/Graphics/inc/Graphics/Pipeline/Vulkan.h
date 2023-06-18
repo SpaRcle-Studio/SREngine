@@ -16,6 +16,7 @@
 #include <Graphics/Pipeline/Vulkan/AbstractCasts.h>
 #include <Graphics/Pipeline/Vulkan/VulkanImGUI.h>
 #include <Graphics/Pipeline/Vulkan/VulkanTracy.h>
+#include <Graphics/Window/Window.h>
 
 #include <EvoVulkan/VulkanKernel.h>
 #include <EvoVulkan/Tools/VulkanInsert.h>
@@ -23,7 +24,7 @@
 #include <EvoVulkan/Tools/VulkanInitializers.h>
 #include <EvoVulkan/Tools/VulkanConverter.h>
 #include <EvoVulkan/Types/VmaBuffer.h>
-#include <Graphics/Window/Window.h>
+#include <EvoVulkan/Complexes/FrameBufferLayer.h>
 
 namespace SR_GRAPH_NS {
     // Reusable buffers used for rendering 1 current in-flight frame, for ImGui_ImplVulkan_RenderDrawData()
@@ -611,7 +612,7 @@ namespace SR_GRAPH_NS {
 
                 m_framebuffersQueue.push_back(framebuffer);
 
-                m_renderPassBI.framebuffer = *framebuffer;
+                m_renderPassBI.framebuffer = framebuffer->GetLayers().at(0)->GetFramebuffer();
                 m_renderPassBI.renderPass  = framebuffer->GetRenderPass();
                 m_renderPassBI.renderArea  = framebuffer->GetRenderPassArea();
                 m_currentCmd               = framebuffer->GetCmd();

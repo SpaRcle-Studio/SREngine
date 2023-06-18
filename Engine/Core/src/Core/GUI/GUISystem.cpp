@@ -660,7 +660,7 @@ bool GUISystem::BeginMenuBar() {
         if (ImGui::MenuItem("Instance from file")) {
             if (auto&& scene = Engine::Instance().GetScene(); scene.RecursiveLockIfValid()) {
                 auto&& resourcesPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
-                if (auto path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesPath.ToString(), { { "Any model", "prefab,pmx,fbx,obj,blend,dae,abc,stl,ply,glb,gltf,x3d,sfg,bvh" } }); !path.Empty()) {
+                if (auto path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesPath.ToString(), { { "Any model", "prefab,pmx,fbx,obj,blend,dae,abc,stl,ply,glb,gltf,x3d,sfg,bvh,3ds" } }); !path.Empty()) {
                     /// TODO:Сделать обратимость
                     scene->InstanceFromFile(path);
                 }
