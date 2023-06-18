@@ -19,11 +19,16 @@ namespace SR_GRAPH_NS {
 
         bool Load(const SR_XML_NS::Node& passNode) override;
 
+        SR_NODISCARD SR_MATH_NS::Matrix4x4 GetLightSpaceMatrix() const noexcept { return m_lightSpaceMatrix; }
+
     protected:
         void UseSharedUniforms(ShaderPtr pShader) override;
         void UseUniforms(ShaderPtr pShader, MeshPtr pMesh) override;
 
         SR_NODISCARD MeshClusterTypeFlag GetClusterType() const noexcept override;
+
+    private:
+        SR_MATH_NS::Matrix4x4 m_lightSpaceMatrix;
 
     };
 }

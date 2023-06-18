@@ -12,6 +12,8 @@
 #include <Graphics/Memory/UBOManager.h>
 #include <Graphics/Memory/IGraphicsResource.h>
 
+#include <Graphics/Pass/GroupPass.h>
+
 namespace SR_GTYPES_NS {
     class Camera;
 }
@@ -47,17 +49,19 @@ namespace SR_GRAPH_NS {
 
         void FreeVideoMemory() override;
 
+        void SetCamera(CameraPtr pCamera);
+        void SetRenderScene(const RenderScenePtr& pRScene);
+
         SR_NODISCARD CameraPtr GetCamera() const noexcept { return m_camera; }
         SR_NODISCARD Context GetContext() const noexcept { return m_context; }
         SR_NODISCARD RenderScenePtr GetRenderScene() const;
         SR_NODISCARD bool IsEmpty() const;
         SR_NODISCARD std::string_view GetName() const;
 
-        void SetCamera(CameraPtr pCamera);
-        void SetRenderScene(const RenderScenePtr& pRScene);
-
         SR_NODISCARD BasePass* FindPass(uint64_t hashName) const;
         SR_NODISCARD BasePass* FindPass(const std::string& name) const;
+
+        template<typename T> SR_NODISCARD T* FindPass() const;
 
     protected:
         bool Build();
@@ -82,7 +86,22 @@ namespace SR_GRAPH_NS {
         Memory::UBOManager& m_uboManager;
 
     };
-}
 
+    template<typename T> T* RenderTechnique::FindPass() const {
+        for (auto&& pPass : m_passes) {
+            if (auto&& pFoundPass = dynamic_cast<T*>(pPass)) {
+                return pFoundPass;
+            }
+
+            if (auto&& pGroupPass = dynamic_cast<GroupPass*>(pPass)) {
+                if (auto&& pFoundPass = pGroupPass->FindPass<T>()) {
+                    return pFoundPass;
+                }
+            }
+        }
+
+        return nullptr;
+    }
+}
 
 #endif //SRENGINE_RENDERTECHNIQUE_H

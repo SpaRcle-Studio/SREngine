@@ -9,6 +9,9 @@
 #include <Graphics/Render/MeshCluster.h>
 
 namespace SR_GRAPH_NS {
+    class ShadowMapPass;
+    class CascadedShadowMapPass;
+
     class IMeshClusterPass : public BasePass {
         using Super = BasePass;
         struct Sampler {
@@ -32,6 +35,8 @@ namespace SR_GRAPH_NS {
     public:
         bool Load(const SR_XML_NS::Node& passNode) override;
 
+        bool Init() override;
+
         void Prepare() override;
         bool Render() override;
         void Update() override;
@@ -52,6 +57,10 @@ namespace SR_GRAPH_NS {
         virtual void UseSharedUniforms(ShaderPtr pShader);
 
         virtual void PrepareSamplers();
+
+    protected:
+        ShadowMapPass* m_shadowMapPass = nullptr;
+        CascadedShadowMapPass* m_cascadedShadowMapPass = nullptr;
 
     private:
         bool m_dirtySamplers = true;

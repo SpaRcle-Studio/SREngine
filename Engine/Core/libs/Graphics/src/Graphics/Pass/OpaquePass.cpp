@@ -8,6 +8,8 @@
 #include <Graphics/Types/Geometry/IndexedMesh.h>
 #include <Graphics/Pipeline/IShaderProgram.h>
 #include <Graphics/Lighting/LightSystem.h>
+#include <Graphics/Pass/ShadowMapPass.h>
+#include <Graphics/Pass/CascadedShadowMapPass.h>
 
 namespace SR_GRAPH_NS {
     SR_REGISTER_RENDER_PASS(OpaquePass)
@@ -23,32 +25,15 @@ namespace SR_GRAPH_NS {
             pShader->SetMat4(SHADER_ORTHOGONAL_MATRIX, m_camera->GetOrthogonalRef());
             pShader->SetVec3(SHADER_VIEW_DIRECTION, m_camera->GetViewDirection());
             pShader->SetVec3(SHADER_VIEW_POSITION, m_camera->GetPositionRef());
-
-            ///// ортогональная матрица у glm не работает, тварь.
-            //SR_MATH_NS::Matrix4x4 lightProjection = SR_MATH_NS::Matrix4x4::Perspective(
-            //        SR_RAD(45.f),
-            //        m_camera->GetAspect(),
-            //        m_camera->GetNear(),
-            //        m_camera->GetFar()
-            //);
-
-            SR_MATH_NS::FVector3 lightPos = GetRenderScene()->GetLightSystem()->m_position;
-
-            float zNear = 1.0f;
-            float zFar = 96.0f;
-            SR_MATH_NS::Matrix4x4 depthProjectionMatrix = SR_MATH_NS::Matrix4x4(glm::perspective(glm::radians(45.f), 1.0f, zNear, zFar));
-            SR_MATH_NS::Matrix4x4 depthViewMatrix = SR_MATH_NS::Matrix4x4::LookAt(lightPos, glm::vec3(0.0f), glm::vec3(0, 1, 0));
-
-            //SR_MATH_NS::Matrix4x4 lightView = q.Inverse().ToMat4x4();
-            //lightView = lightView.Translate(m_camera->GetPosition().Inverse());
-
-            //SR_MATH_NS::Matrix4x4 lightView = SR_MATH_NS::Matrix4x4::LookAt(glm::vec3(-2.0f, 4.0f, -1.0f),
-            //                                  glm::vec3( 0.0f, 0.0f,  0.0f),
-            //                                  glm::vec3( 0.0f, 1.0f,  0.0f));
-
-            pShader->SetMat4(SHADER_LIGHT_SPACE_MATRIX, depthProjectionMatrix * depthViewMatrix);
-            pShader->SetVec3(SHADER_DIRECTIONAL_LIGHT_POSITION, lightPos);
         }
+
+        SR_MATH_NS::FVector3 lightPos = GetRenderScene()->GetLightSystem()->m_position;
+        pShader->SetVec3(SHADER_DIRECTIONAL_LIGHT_POSITION, lightPos);
+
+        if (m_shadowMapPass) {
+            pShader->SetMat4(SHADER_LIGHT_SPACE_MATRIX, m_shadowMapPass->GetLightSpaceMatrix());
+        }
+
         Super::UseSharedUniforms(pShader);
     }
 

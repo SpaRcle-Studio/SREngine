@@ -4,6 +4,9 @@
 
 #include <Graphics/Pass/IMeshClusterPass.h>
 
+#include <Graphics/Pass/ShadowMapPass.h>
+#include <Graphics/Pass/CascadedShadowMapPass.h>
+
 namespace SR_GRAPH_NS {
     IMeshClusterPass::IMeshClusterPass(RenderTechnique* pTechnique, BasePass* pParent)
         : Super(pTechnique, pParent)
@@ -267,5 +270,11 @@ namespace SR_GRAPH_NS {
         m_dirtySamplers = true;
         m_needUpdateMeshes = true;
         Super::OnResize(size);
+    }
+
+    bool IMeshClusterPass::Init() {
+        m_shadowMapPass = GetTechnique()->FindPass<ShadowMapPass>();
+        m_cascadedShadowMapPass = GetTechnique()->FindPass<CascadedShadowMapPass>();
+        return Super::Init();
     }
 }
