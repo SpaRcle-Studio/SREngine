@@ -73,6 +73,7 @@ namespace SR_GRAPH_NS {
         int32_t           m_currentShaderID        = -1;
         int32_t           m_preferredDevice        = -1;
         int32_t           m_currentBuildIteration  = 0;
+        uint32_t          m_frameBufferLayer       = 0;
 
         RenderContextPtr m_renderContext;
 
@@ -111,13 +112,14 @@ namespace SR_GRAPH_NS {
         void SetCurrentShaderId(const int32_t& id)  { m_currentShaderID = id;           }
         void SetCurrentShader(Types::Shader* pShader)  { m_currentShader = pShader;           }
         void SetRenderContext(const RenderContextPtr& pRenderContext) { m_renderContext = pRenderContext; }
-        void SetCurrentFramebuffer(Types::Framebuffer* pFramebuffer);
+        virtual void SetCurrentFramebuffer(Types::Framebuffer* pFramebuffer);
+        void SetFrameBufferLayer(uint32_t layer) { m_frameBufferLayer = layer; }
         SR_NODISCARD int32_t GetCurrentShaderId() const noexcept { return m_currentShaderID; }
         SR_NODISCARD Types::Shader* GetCurrentShader() const noexcept { return m_currentShader; }
         SR_NODISCARD Types::Framebuffer* GetCurrentFramebuffer() const noexcept { return m_currentFramebuffer; }
         SR_NODISCARD virtual void* GetCurrentCmd() const noexcept { return nullptr; }
         SR_NODISCARD int32_t GetCurrentFramebufferId() const noexcept { return m_currentFBOid; }
-        SR_NODISCARD virtual void* GetCurrentRenderPassHandle() const { return nullptr; }
+        SR_NODISCARD virtual void* GetCurrentFBOHandle() const { return nullptr; }
 
         virtual void OnMultiSampleChanged();
         virtual void UpdateMultiSampling() { }

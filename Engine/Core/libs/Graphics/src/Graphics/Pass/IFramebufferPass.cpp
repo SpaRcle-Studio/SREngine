@@ -24,7 +24,7 @@ namespace SR_GRAPH_NS {
         m_dynamicResizing = settingsNode.TryGetAttribute("DynamicResizing").ToBool(true);
         m_depthEnabled = settingsNode.TryGetAttribute("DepthEnabled").ToBool(true);
         m_samples = settingsNode.TryGetAttribute("SmoothSamples").ToUInt(0);
-        m_layersCount = settingsNode.TryGetAttribute("LayersCount").ToUInt(1);
+        m_layersCount = settingsNode.TryGetAttribute("Layers").ToUInt(1);
 
         m_depthAspect = ImageAspect::DepthStencil;
 

@@ -94,6 +94,7 @@ namespace SR_GRAPH_NS {
             m_framebuffer->BeginCmdBuffer(m_clearColors, 1.f);
             {
                 m_framebuffer->BeginRender();
+                m_framebuffer->SetViewportScissor();
 
                 Super::Render();
 

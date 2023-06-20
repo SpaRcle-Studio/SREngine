@@ -131,7 +131,7 @@ namespace SR_GRAPH_NS {
         std::vector<VkClearValue>                       m_clearValues        = { };
         VkRenderPassBeginInfo                           m_renderPassBI       = { };
 
-        std::vector<EvoVulkan::Complexes::FrameBuffer*> m_framebuffersQueue  = {};
+        std::vector<std::pair<EvoVulkan::Complexes::FrameBuffer*, uint32_t>>  m_framebuffersQueue = {};
         EvoVulkan::Complexes::FrameBuffer*              m_currentVkFramebuffer = nullptr;
         VkCommandBuffer                                 m_currentCmd         = VK_NULL_HANDLE;
         EvoVulkan::Complexes::Shader*                   m_currentShader      = nullptr;
@@ -159,7 +159,7 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD std::string GetPipeLineName()   const override { return "Vulkan";         }
         SR_NODISCARD VulkanTools::MemoryManager* GetMemoryManager() const { return m_memory; }
         SR_NODISCARD EvoVulkan::Core::VulkanKernel* GetKernel() const { return m_kernel; }
-        SR_NODISCARD void* GetCurrentRenderPassHandle() const override;
+        SR_NODISCARD void* GetCurrentFBOHandle() const override;
 
         uint64_t GetVRAMUsage() override;
 
@@ -517,6 +517,7 @@ namespace SR_GRAPH_NS {
                 return SR_ID_INVALID;
             }
         }
+
         SR_FORCE_INLINE int32_t AllocDescriptorSetFromTexture(uint32_t textureID) override {
             if (!m_memory->m_textures[textureID]) {
                 SR_ERROR("Vulkan::AllocDescriptorSetFromTexture() : texture is not exists!");
@@ -602,17 +603,26 @@ namespace SR_GRAPH_NS {
                     return;
                 }
 
-                for (auto&& fbo : m_framebuffersQueue) {
-                    if (fbo == framebuffer) {
+                auto&& layers = framebuffer->GetLayers();
+                uint32_t layerIndex = SR_MIN(m_frameBufferLayer, layers.size() - 1);
+                auto&& vkFrameBuffer = layers.at(layerIndex)->GetFramebuffer();
+
+                bool found = false;
+
+                for (auto&& [fbo, layer] : m_framebuffersQueue) {
+                    found |= fbo == framebuffer;
+                    if (fbo == framebuffer && layerIndex == layer) {
                         SR_ERROR("Vulkan::BindFrameBuffer() : frame buffer (\"" + std::to_string(FBO) + "\") is already added to FBO queue!");
                         SRHalt0();
                         return;
                     }
                 }
 
-                m_framebuffersQueue.push_back(framebuffer);
+                if (!found) {
+                    m_framebuffersQueue.emplace_back(std::make_pair(framebuffer, layerIndex));
+                }
 
-                m_renderPassBI.framebuffer = framebuffer->GetLayers().at(0)->GetFramebuffer();
+                m_renderPassBI.framebuffer = vkFrameBuffer;
                 m_renderPassBI.renderPass  = framebuffer->GetRenderPass();
                 m_renderPassBI.renderArea  = framebuffer->GetRenderPassArea();
                 m_currentCmd               = framebuffer->GetCmd();
@@ -620,7 +630,7 @@ namespace SR_GRAPH_NS {
                 m_currentVkFramebuffer = framebuffer;
             }
 
-            this->m_currentFBOid = FBO;
+            m_currentFBOid = FBO;
         }
 
         SR_FORCE_INLINE void BindVBO(const uint32_t& VBO) override {
@@ -735,6 +745,8 @@ namespace SR_GRAPH_NS {
         }
 
         [[nodiscard]] bool FreeFBO(uint32_t FBO) const override;
+
+        void SetCurrentFramebuffer(Types::Framebuffer *pFramebuffer) override;
     };
 }
 

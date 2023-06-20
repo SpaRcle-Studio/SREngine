@@ -16,8 +16,8 @@
             <Override Type="Skinned" Path="Engine/Shaders/ColorBuffer/skinned.srsl"/>
         </Shaders>
     </ColorBufferPass>
-    <CascadedShadowMapPass Name="DepthFBO" Directional="false" Cascades="4" Layers="1">
-        <FramebufferSettings DynamicResizing="true" DepthEnabled="true" SmoothSamples="1">
+    <CascadedShadowMapPass Name="DepthFBO" Directional="false" Cascades="4">
+        <FramebufferSettings DynamicResizing="true" DepthEnabled="true" SmoothSamples="1" Layers="4">
             <Size X="0" Y="0"/>
             <PreScale X="1.0" Y="1.0"/>
             <Depth Format="Auto" ClearValue="1.0" Aspect="Depth" />
@@ -34,17 +34,17 @@
             <Layer Format="RGBA8_UNORM" R="0.0" G="0.0" B="0.0" A="1.0"/>
         </FramebufferSettings>
         <Passes>
-            <!--<PostProcessPass Shader="Engine/Shaders/ShadowMap/shadow-map.srsl">
+            <PostProcessPass Shader="Engine/Shaders/CascadedShadowMap/shadow-map.srsl">
                 <Attachments>
                     <Attachment FBO="DepthFBO" Id="depthMap" Depth="true" />
                 </Attachments>
-            </PostProcessPass>-->
-            <OpaquePass>
+            </PostProcessPass>
+            <!--<OpaquePass>
                 <Sampler FBO="DepthFBO" Id="shadowMap" Depth="true" />
             </OpaquePass>
             <SkyboxPass Path="Engine/Skyboxes/Sun.png" Shader="Engine/Shaders/skybox.srsl"/>
             <TransparentPass/>
-            <DebugPass/>
+            <DebugPass/>-->
         </Passes>
     </FramebufferPass>
 </Technique>

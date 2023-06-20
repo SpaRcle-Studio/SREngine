@@ -801,7 +801,7 @@ namespace SR_GRAPH_NS {
 
         if (!LinkShader(&program, &temp, createInfo)) {
             SR_ERROR("Vulkan::AllocateShaderProgram() : failed linking shader!");
-            return false;
+            return SR_ID_INVALID;
         }
 
         return program;
@@ -871,17 +871,17 @@ namespace SR_GRAPH_NS {
         auto colorCount = static_cast<uint8_t>(colors.size());
         colorCount *= sampleCount > 1 ? 2 : 1;
 
-        m_clearValues.resize(colorCount + 1);
+        m_clearValues.resize(colorCount + 1); /// TODO: а если буфера глубины нет??????
 
         for (uint8_t i = 0; i < colorCount; ++i) {
             auto&& color = colors[i / (sampleCount > 1 ? 2 : 1)];
 
             m_clearValues[i] = {
                 .color = { {
-                       static_cast<float>(color.r),
-                       static_cast<float>(color.g),
-                       static_cast<float>(color.b),
-                       static_cast<float>(color.a)
+                       static_cast<float_t>(color.r),
+                       static_cast<float_t>(color.g),
+                       static_cast<float_t>(color.b),
+                       static_cast<float_t>(color.a)
                    }
                 }
             };
@@ -917,20 +917,26 @@ namespace SR_GRAPH_NS {
         return GetSamplesCount();
     }
 
-    void* Vulkan::GetCurrentRenderPassHandle() const {
-        void* pHandle = m_kernel->GetRenderPass();
+    void* Vulkan::GetCurrentFBOHandle() const {
+        void* pHandle = m_kernel->GetRenderPass(); /// ну типо кадровый буфер
 
         if (m_currentFramebuffer) {
             auto&& FBO = m_currentFramebuffer->GetId();
 
             if (FBO == SR_ID_INVALID) {
-                SR_ERROR("Vulkan::GetCurrentRenderPassHandle() : invalid FBO!");
+                SR_ERROR("Vulkan::GetCurrentFBOHandle() : invalid FBO!");
             }
             else if (auto&& framebuffer = m_memory->m_FBOs[FBO - 1]; !framebuffer) {
-                SR_ERROR("Vulkan::GetCurrentRenderPassHandle() : frame buffer object don't exist!");
+                SR_ERROR("Vulkan::GetCurrentFBOHandle() : frame buffer object don't exist!");
             }
             else {
-                pHandle = framebuffer->GetRenderPass();
+                auto&& layers = framebuffer->GetLayers();
+                if (!layers.empty()) {
+                    pHandle = layers.at(SR_MIN(layers.size() - 1, m_frameBufferLayer))->GetFramebuffer();
+                }
+                else {
+                    SR_ERROR("Vulkan::GetCurrentFBOHandle() : frame buffer have not layers!");
+                }
             }
         }
 
@@ -953,20 +959,35 @@ namespace SR_GRAPH_NS {
         submitInfo.pWaitDstStageMask    = m_kernel->GetSubmitPipelineStages();
 
         for (uint16_t i = 0; i < m_framebuffersQueue.size(); ++i) {
-            submitInfo.pCommandBuffers   = m_framebuffersQueue[i]->GetCmdRef();
-            submitInfo.pSignalSemaphores = m_framebuffersQueue[i]->GetSemaphoreRef();
+            submitInfo.pCommandBuffers   = m_framebuffersQueue[i].first->GetCmdRef();
+            submitInfo.pSignalSemaphores = m_framebuffersQueue[i].first->GetSemaphoreRef();
 
             if (i == 0) {
                 submitInfo.pWaitSemaphores = m_kernel->GetPresentCompleteSemaphore();
             }
             else {
-                submitInfo.pWaitSemaphores = m_framebuffersQueue[i - 1]->GetSemaphoreRef();
+                submitInfo.pWaitSemaphores = m_framebuffersQueue[i - 1].first->GetSemaphoreRef();
             }
 
             m_kernel->AddSubmitQueue(submitInfo);
         }
 
         Environment::SetBuildState(isBuild);
+    }
+
+    void Vulkan::SetCurrentFramebuffer(Types::Framebuffer* pFramebuffer) {
+        Environment::SetCurrentFramebuffer(pFramebuffer);
+
+        if (pFramebuffer && pFramebuffer->GetId() != SR_ID_INVALID) {
+            m_currentVkFramebuffer = m_memory->m_FBOs[pFramebuffer->GetId() - 1];
+        }
+        else {
+            m_currentVkFramebuffer = nullptr;
+        }
+
+        if (m_currentVkFramebuffer) {
+            m_currentCmd = m_currentVkFramebuffer->GetCmd();
+        }
     }
 
     //!-----------------------------------------------------------------------------------------------------------------

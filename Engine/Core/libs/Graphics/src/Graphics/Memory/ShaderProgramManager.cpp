@@ -288,7 +288,7 @@ namespace SR_GRAPH_NS::Memory {
     }
 
     VirtualProgramInfo::Identifier ShaderProgramManager::GetCurrentIdentifier() const {
-        return reinterpret_cast<VirtualProgramInfo::Identifier>(m_pipeline->GetCurrentRenderPassHandle());
+        return reinterpret_cast<VirtualProgramInfo::Identifier>(m_pipeline->GetCurrentFBOHandle());
     }
 }
 

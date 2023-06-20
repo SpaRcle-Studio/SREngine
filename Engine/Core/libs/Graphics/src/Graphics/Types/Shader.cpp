@@ -22,9 +22,6 @@ namespace SR_GRAPH_NS::Types {
     { }
 
     Shader::~Shader() {
-        m_uniformBlock.DeInit();
-        m_uniformBlock = Memory::ShaderUBOBlock();
-
         m_samplers.clear();
     }
 
@@ -183,15 +180,23 @@ namespace SR_GRAPH_NS::Types {
         return Memory::ShaderProgramManager::Instance().GetProgram(m_shaderProgram);
     }
 
-    void Shader::SetBool(uint64_t hashId, const bool &v) noexcept { SetValue(hashId, v); }
-    void Shader::SetFloat(uint64_t hashId, const float &v) noexcept { SetValue(hashId, v); }
-    void Shader::SetInt(uint64_t hashId, const int &v) noexcept { SetValue(hashId, v); }
-    void Shader::SetMat4(uint64_t hashId, const glm::mat4 &v) noexcept { SetValue(hashId, v); }
-    void Shader::SetMat4(uint64_t hashId, const SR_MATH_NS::Matrix4x4& v) noexcept { SetValue(hashId, v); }
-    void Shader::SetVec3(uint64_t hashId, const SR_MATH_NS::FVector3& v) noexcept { SetValue(hashId, v); }
-    void Shader::SetVec4(uint64_t hashId, const SR_MATH_NS::FVector4& v) noexcept { SetValue(hashId, v); }
-    void Shader::SetVec2(uint64_t hashId, const SR_MATH_NS::FVector2& v) noexcept { SetValue(hashId, v); }
-    void Shader::SetIVec2(uint64_t hashId, const glm::ivec2 &v) noexcept { SetValue(hashId, v); }
+    void Shader::SetBool(uint64_t hashId, bool v) noexcept { SetValue<false>(hashId, &v); }
+    void Shader::SetFloat(uint64_t hashId, float_t v) noexcept { SetValue<false>(hashId, &v); }
+    void Shader::SetInt(uint64_t hashId, int32_t v) noexcept { SetValue<false>(hashId, &v); }
+    void Shader::SetMat4(uint64_t hashId, const SR_MATH_NS::Matrix4x4& v) noexcept { SetValue<false>(hashId, &v); }
+    void Shader::SetVec3(uint64_t hashId, const SR_MATH_NS::FVector3& v) noexcept { SetValue<false>(hashId, &v); }
+    void Shader::SetVec4(uint64_t hashId, const SR_MATH_NS::FVector4& v) noexcept { SetValue<false>(hashId, &v); }
+    void Shader::SetVec2(uint64_t hashId, const SR_MATH_NS::FVector2& v) noexcept { SetValue<false>(hashId, &v); }
+    void Shader::SetIVec2(uint64_t hashId, const SR_MATH_NS::IVector2& v) noexcept { SetValue<false>(hashId, &v); }
+
+    void Shader::SetConstBool(uint64_t hashId, bool v) noexcept { SetValue<true>(hashId, &v); }
+    void Shader::SetConstFloat(uint64_t hashId, float_t v) noexcept { SetValue<true>(hashId, &v); }
+    void Shader::SetConstInt(uint64_t hashId, int32_t v) noexcept { SetValue<true>(hashId, &v); }
+    void Shader::SetConstMat4(uint64_t hashId, const SR_MATH_NS::Matrix4x4& v) noexcept { SetValue<true>(hashId, &v); }
+    void Shader::SetConstVec3(uint64_t hashId, const SR_MATH_NS::FVector3& v) noexcept { SetValue<true>(hashId, &v); }
+    void Shader::SetConstVec4(uint64_t hashId, const SR_MATH_NS::FVector4& v) noexcept { SetValue<true>(hashId, &v); }
+    void Shader::SetConstVec2(uint64_t hashId, const SR_MATH_NS::FVector2& v) noexcept { SetValue<true>(hashId, &v); }
+    void Shader::SetConstIVec2(uint64_t hashId, const SR_MATH_NS::IVector2& v) noexcept { SetValue<true>(hashId, &v); }
 
     void Shader::SetSampler(uint64_t hashId, int32_t sampler) noexcept {
         m_samplers.at(hashId).samplerId = sampler;
@@ -243,17 +248,15 @@ namespace SR_GRAPH_NS::Types {
     }
 
     bool Shader::InitUBOBlock() {
-        auto&& env = SR_GRAPH_NS::Environment::Get();
-
         if (m_uniformBlock.m_size > 0 && m_uniformBlock.m_memory) {
             memset(m_uniformBlock.m_memory, 1, m_uniformBlock.m_size);
         }
 
-        auto&& ubo = env->GetCurrentUBO();
-        auto&& descriptorSet = env->GetCurrentDescriptorSet();
+        auto&& ubo = GetPipeline()->GetCurrentUBO();
+        auto&& descriptorSet = GetPipeline()->GetCurrentDescriptorSet();
 
         if (ubo != SR_ID_INVALID && descriptorSet != SR_ID_INVALID && m_uniformBlock.Valid()) {
-            env->UpdateDescriptorSets(descriptorSet, {
+            GetPipeline()->UpdateDescriptorSets(descriptorSet, {
                     { DescriptorType::Uniform, { m_uniformBlock.m_binding, ubo } },
             });
 
@@ -270,11 +273,9 @@ namespace SR_GRAPH_NS::Types {
             return false;
         }
 
-        auto&& env = SR_GRAPH_NS::Environment::Get();
-
-        auto &&ubo = env->GetCurrentUBO();
+        auto&& ubo = GetPipeline()->GetCurrentUBO();
         if (ubo != SR_ID_INVALID && m_uniformBlock.Valid()) {
-            env->UpdateUBO(ubo, m_uniformBlock.m_memory, m_uniformBlock.m_size);
+            GetPipeline()->UpdateUBO(ubo, m_uniformBlock.m_memory, m_uniformBlock.m_size);
         }
 
         return true;
@@ -328,6 +329,8 @@ namespace SR_GRAPH_NS::Types {
         m_shaderCreateInfo = SRShaderCreateInfo(pShader->GetCreateInfo());
         m_type = pShader->GetType();
 
+        /// ------------------------------------------------------------------------------------------------------------
+
         if (auto&& pBlock = pShader->FindUniformBlock("BLOCK")) {
             for (auto&& field : pBlock->fields) {
                 m_uniformBlock.Append(SR_RUNTIME_TIME_CRC32_STR(field.name.c_str()), field.size, field.alignedSize, !field.isPublic);
@@ -342,6 +345,24 @@ namespace SR_GRAPH_NS::Types {
             m_uniformBlock.m_binding = pBlock->binding;
         }
 
+        m_uniformBlock.Init();
+
+        /// ------------------------------------------------------------------------------------------------------------
+
+        for (auto&& field : pShader->GetPushConstants().fields) {
+            m_constBlock.Append(SR_RUNTIME_TIME_CRC32_STR(field.name.c_str()), field.size, field.alignedSize, !field.isPublic);
+
+            const ShaderVarType varType = SR_SRSL_NS::SRSLTypeInfo::Instance().StringToType(field.type);
+
+            if (field.isPublic && varType != ShaderVarType::Unknown) {
+                m_properties.emplace_back(std::make_pair(field.name, varType));
+            }
+        }
+
+        m_constBlock.Init();
+
+        /// ------------------------------------------------------------------------------------------------------------
+
         for (auto&& [name, sampler] : pShader->GetSamplers()) {
             m_samplers[SR_RUNTIME_TIME_CRC32_STR(name.c_str())].binding = sampler.binding;
             m_samplers[SR_RUNTIME_TIME_CRC32_STR(name.c_str())].isAttachment = sampler.attachment >= 0;
@@ -353,8 +374,6 @@ namespace SR_GRAPH_NS::Types {
             }
         }
 
-        m_uniformBlock.Init();
-
         return IResource::Load();
     }
 
@@ -365,6 +384,7 @@ namespace SR_GRAPH_NS::Types {
         m_hasErrors = false;
 
         m_uniformBlock.DeInit();
+        m_constBlock.DeInit();
 
         m_properties.clear();
         m_samplers.clear();

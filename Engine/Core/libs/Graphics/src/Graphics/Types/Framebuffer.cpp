@@ -78,7 +78,7 @@ namespace SR_GTYPES_NS {
             return false;
         }
 
-        if ((!IsCalculated() || m_dirty) && !Update()) {
+        if (!Update()) {
             SR_ERROR("Framebuffer::Bind() : failed to initialize framebuffer!");
             return false;
         }
@@ -90,6 +90,10 @@ namespace SR_GTYPES_NS {
     }
 
     bool Framebuffer::Update() {
+        if (IsCalculated() && !m_dirty) {
+            return true;
+        }
+
         if (m_size.HasZero() || m_size.HasNegative()) {
             SR_ERROR("Framebuffer::Update() : incorrect framebuffer size!");
             m_hasErrors = true;
@@ -188,8 +192,7 @@ namespace SR_GTYPES_NS {
             return false;
         }
 
-        m_pipeline->SetViewport(m_size.x, m_size.y);
-        m_pipeline->SetScissor(m_size.x, m_size.y);
+        SR_NOOP;
 
         return true;
     }
@@ -277,5 +280,10 @@ namespace SR_GTYPES_NS {
     void Framebuffer::SetDepthAspect(ImageAspect depthAspect) {
         m_depth.aspect = depthAspect;
         m_dirty = true;
+    }
+
+    void Framebuffer::SetViewportScissor() {
+        m_pipeline->SetViewport(m_size.x, m_size.y);
+        m_pipeline->SetScissor(m_size.x, m_size.y);
     }
 }

@@ -40,7 +40,7 @@ namespace SR_GRAPH_NS {
 
         UpdateCascades();
 
-        pShader->SetMat4(SHADER_LIGHT_SPACE_MATRIX, m_cascades[1].viewProjMatrix);
+        pShader->SetMat4(SHADER_LIGHT_SPACE_MATRIX, m_cascades[m_currentCascade].viewProjMatrix);
 
         SR_MATH_NS::FVector3 lightPos = GetRenderScene()->GetLightSystem()->m_position;
         pShader->SetVec3(SHADER_DIRECTIONAL_LIGHT_POSITION, lightPos);
@@ -128,7 +128,6 @@ namespace SR_GRAPH_NS {
 
             m_cascades[i].splitDepth = (m_camera->GetNear() + splitDist * clipRange) * -1.0f;
             m_cascades[i].viewProjMatrix = lightOrthoMatrix * lightViewMatrix;
-            //m_cascades[i].viewProjMatrix = lightOrthoMatrix * m_camera->GetViewTranslateRef();
 
             lastSplitDist = cascadeSplits[i];
         }
@@ -142,5 +141,50 @@ namespace SR_GRAPH_NS {
         }
 
         return m_cascades.at(index);
+    }
+
+    bool CascadedShadowMapPass::Render() {
+        if (m_cascadesCount == 0 || IsDirectional() || !m_framebuffer) {
+            return false;
+        }
+
+        bool rendered = false;
+
+        m_framebuffer->Update();
+        /// установим кадровый буфер, чтобы BeginCmdBuffer понимал какие значение для очистки ставить
+        GetPipeline()->SetCurrentFramebuffer(m_framebuffer);
+
+        m_framebuffer->BeginCmdBuffer(m_clearColors, 1.f);
+        m_framebuffer->SetViewportScissor();
+
+        for (uint32_t i = 0; i < m_cascadesCount; ++i) {
+            m_currentCascade = i;
+            GetPipeline()->SetFrameBufferLayer(i);
+
+            auto&& pIdentifier = m_uboManager.GetIdentifier();
+            m_uboManager.SetIdentifier(this);
+
+            if (m_framebuffer->Bind()) {
+                m_framebuffer->BeginRender();
+                IMeshClusterPass::Render();
+                m_framebuffer->EndRender();
+            }
+
+            m_uboManager.SetIdentifier(pIdentifier);
+
+            rendered |= IsDirectional();
+        }
+
+        m_framebuffer->EndCmdBuffer();
+
+        return rendered;
+    }
+
+    void CascadedShadowMapPass::Update() {
+        for (uint32_t i = 0; i < m_cascadesCount; ++i) {
+            m_currentCascade = i;
+            GetPipeline()->SetFrameBufferLayer(i);
+            Super::Update();
+        }
     }
 }

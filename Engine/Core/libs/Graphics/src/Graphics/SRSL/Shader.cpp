@@ -12,6 +12,18 @@
 #include <Utils/Platform/Platform.h>
 
 namespace SR_SRSL_NS {
+    void SRSLUniformBlock::Align(const SRSLAnalyzedTree::Ptr& pAnalyzedTree) {
+        for (auto&& field : fields) {
+            field.size = SRSLTypeInfo::Instance().GetTypeSize(field.type, pAnalyzedTree);
+            field.alignedSize = SRSLTypeInfo::Instance().GetAlignedTypeSize(field.type, pAnalyzedTree);
+            size += field.alignedSize;
+        }
+
+        std::sort(fields.begin(), fields.end(), [](const SRSLUniformBlock::Field& a, const SRSLUniformBlock::Field& b) -> bool {
+            return a.size > b.size;
+        });
+    }
+
     SRSLShader::SRSLShader(SR_UTILS_NS::Path path)
         : Super()
         , m_path(std::move(path))
@@ -225,10 +237,6 @@ namespace SR_SRSL_NS {
                 m_shared[pVariable->pName->ToString(0)] = pVariable;
             }
 
-            if (auto&& pDecorator = pVariable->pDecorators->Find("const"); pDecorator && pVariable->pExpr) {
-                m_constants[pVariable->pName->ToString(0)] = pVariable;
-            }
-
             if (auto&& pDecorator = pVariable->pDecorators->Find("uniform")) {
                 /// не добавляем в блок переменные, которые объявили и не используем
                 if (!m_useStack->IsVariableUsedInEntryPoints(pVariable->GetName())) {
@@ -250,8 +258,16 @@ namespace SR_SRSL_NS {
                 field.type = pVariable->pType->ToString(0);
                 field.isPublic = bool(pVariable->pDecorators->Find("public"));
 
-                auto&& uniformBlock = m_uniformBlocks[blockName];
-                uniformBlock.fields.emplace_back(field);
+                if (pVariable->pDecorators->Find("const")) {
+                    m_pushConstants.fields.emplace_back(field);
+                }
+                else {
+                    auto&& uniformBlock = m_uniformBlocks[blockName];
+                    uniformBlock.fields.emplace_back(field);
+                }
+            }
+            else if ((pDecorator = pVariable->pDecorators->Find("const"))) {
+                m_constants[pVariable->pName->ToString(0)] = pVariable;
             }
         }
 
@@ -270,19 +286,25 @@ namespace SR_SRSL_NS {
             }
         }
 
+        for (auto&& [defaultPushConstant, type] : SR_SRSL_DEFAULT_PUSH_CONSTANTS) {
+            if (m_useStack->IsVariableUsedInEntryPoints(defaultPushConstant)) {
+                SRSLUniformBlock::Field field;
+
+                field.name = defaultPushConstant;
+                field.type = type;
+                field.isPublic = false;
+
+                m_pushConstants.fields.emplace_back(field);
+            }
+        }
+
         /// ------------------------------------------------------------------
 
         for (auto&& [name, block] : m_uniformBlocks) {
-            for (auto&& field : block.fields) {
-                field.size = SRSLTypeInfo::Instance().GetTypeSize(field.type, m_analyzedTree);
-                field.alignedSize = SRSLTypeInfo::Instance().GetAlignedTypeSize(field.type, m_analyzedTree);
-                block.size += field.alignedSize;
-            }
-
-            std::sort(block.fields.begin(), block.fields.end(), [](const SRSLUniformBlock::Field& a, const SRSLUniformBlock::Field& b) -> bool {
-                return a.size > b.size;
-            });
+            block.Align(m_analyzedTree);
         }
+
+        m_pushConstants.Align(m_analyzedTree);
 
         /// ------------------------------------------------------------------
 

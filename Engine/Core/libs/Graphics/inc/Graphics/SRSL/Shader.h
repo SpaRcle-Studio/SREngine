@@ -33,6 +33,8 @@ namespace SR_SRSL_NS {
             bool isPublic = false;
         };
 
+        void Align(const SRSLAnalyzedTree::Ptr& pAnalyzedTree);
+
         uint64_t size = 0;
         uint64_t binding = 0;
 
@@ -67,6 +69,7 @@ namespace SR_SRSL_NS {
         SR_NODISCARD const SRSLAnalyzedTree::Ptr GetAnalyzedTree() const;
         SR_NODISCARD const SRSLUseStack::Ptr GetUseStack() const;
         SR_NODISCARD const UniformBlocks& GetUniformBlocks() const { return m_uniformBlocks; }
+        SR_NODISCARD const SRSLUniformBlock& GetPushConstants() const { return m_pushConstants; }
         SR_NODISCARD const SRSLSamplers& GetSamplers() const { return m_samplers; }
         SR_NODISCARD const SRShaderCreateInfo& GetCreateInfo() const { return m_createInfo; }
         SR_NODISCARD const std::map<std::string, SRSLVariable*>& GetShared() const { return m_shared; }
@@ -93,6 +96,7 @@ namespace SR_SRSL_NS {
         SRSLAnalyzedTree::Ptr m_analyzedTree;
         SRSLUseStack::Ptr m_useStack;
         UniformBlocks m_uniformBlocks;
+        SRSLUniformBlock m_pushConstants;
         SRSLSamplers m_samplers;
 
     };

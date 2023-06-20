@@ -13,7 +13,7 @@ namespace SR_GRAPH_NS::Types {
 }
 
 namespace SR_GRAPH_NS::Memory {
-    class ShaderUBOBlock {
+    class ShaderUBOBlock : public SR_UTILS_NS::NonCopyable {
         friend class SR_GRAPH_NS::Types::Shader;
 
         struct SubBlock {
@@ -24,6 +24,8 @@ namespace SR_GRAPH_NS::Memory {
         };
 
     public:
+        ~ShaderUBOBlock() override;
+
         void Append(uint64_t hashId, uint64_t size, bool hidden);
         void Append(uint64_t hashId, uint64_t size, uint64_t alignedSize, bool hidden);
 

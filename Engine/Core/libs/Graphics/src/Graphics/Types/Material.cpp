@@ -31,19 +31,19 @@ namespace SR_GTYPES_NS {
         for (auto&& property : m_properties) {
             switch (property.type) {
                 case ShaderVarType::Int:
-                    pShader->SetValue(property.hashId, std::get<int32_t>(property.data));
+                    pShader->SetInt(property.hashId, std::get<int32_t>(property.data));
                     break;
                 case ShaderVarType::Float:
-                    pShader->SetValue(property.hashId, std::get<float_t>(property.data));
+                    pShader->SetFloat(property.hashId, std::get<float_t>(property.data));
                     break;
                 case ShaderVarType::Vec2:
-                    pShader->SetValue(property.hashId, std::get<SR_MATH_NS::FVector2>(property.data).Cast<float_t>());
+                    pShader->SetVec2(property.hashId, std::get<SR_MATH_NS::FVector2>(property.data).Cast<float_t>());
                     break;
                 case ShaderVarType::Vec3:
-                    pShader->SetValue(property.hashId, std::get<SR_MATH_NS::FVector3>(property.data).Cast<float_t>());
+                    pShader->SetVec3(property.hashId, std::get<SR_MATH_NS::FVector3>(property.data).Cast<float_t>());
                     break;
                 case ShaderVarType::Vec4:
-                    pShader->SetValue(property.hashId, std::get<SR_MATH_NS::FVector4>(property.data).Cast<float_t>());
+                    pShader->SetVec4(property.hashId, std::get<SR_MATH_NS::FVector4>(property.data).Cast<float_t>());
                     break;
                 case ShaderVarType::Sampler2D:
                     /// samplers used at UseSamplers

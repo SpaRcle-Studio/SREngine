@@ -224,6 +224,11 @@ namespace SR_GRAPH_NS {
             }
         }
 
+        if (!pMesh->GetMaterial()->GetShader()) {
+            SR_ERROR("RenderScene::Register() : mesh have not shader!");
+            return;
+        }
+
         pMesh->SetRenderContext(m_context);
 
         if (pMesh->IsDebugMesh()) {

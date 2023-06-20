@@ -22,6 +22,9 @@ namespace SR_GRAPH_NS {
         bool Init() override;
         void DeInit() override;
 
+        bool Render() override;
+        void Update() override;
+
         bool Load(const SR_XML_NS::Node& passNode) override;
 
         SR_NODISCARD const ShadowMapCascade& GetCascade(uint32_t index) const;
@@ -36,6 +39,7 @@ namespace SR_GRAPH_NS {
         void UpdateCascades();
 
     private:
+        uint32_t m_currentCascade = 0;
         uint32_t m_cascadesCount = 0;
         float_t m_cascadeSplitLambda = 0.95f;
         std::vector<ShadowMapCascade> m_cascades;

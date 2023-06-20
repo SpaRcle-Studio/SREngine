@@ -40,6 +40,10 @@ namespace SR_SRSL_NS {
         SRSL_VERTEX_ATTRIBUTE_BITANGENT = 1 << 4,
     };
 
+    SR_INLINE_STATIC const std::map<std::string, std::string> SR_SRSL_DEFAULT_PUSH_CONSTANTS = { /** NOLINT */
+            { "SHADOW_CASCADE_INDEX",           "int"           },
+    };
+
     SR_INLINE_STATIC const std::map<std::string, std::string> SR_SRSL_DEFAULT_UNIFORMS = { /** NOLINT */
             { "MODEL_MATRIX",                   "mat4"          },
             { "MODEL_NO_SCALE_MATRIX",          "mat4"          },

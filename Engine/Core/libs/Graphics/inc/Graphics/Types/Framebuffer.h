@@ -51,6 +51,7 @@ namespace SR_GTYPES_NS {
         bool BeginCmdBuffer(const ClearColors& clearColors, float_t depth);
         bool BeginCmdBuffer(const SR_MATH_NS::FColor& clearColor, float_t depth);
 
+        void SetViewportScissor();
         bool BeginRender();
 
         void EndCmdBuffer();

@@ -45,6 +45,7 @@ namespace SR_GRAPH_NS {
         }
 
         if (m_framebuffer->BeginRender()) {
+            m_framebuffer->SetViewportScissor();
             GroupPass::Render();
             m_framebuffer->EndRender();
             m_framebuffer->EndCmdBuffer();

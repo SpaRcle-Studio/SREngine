@@ -518,7 +518,7 @@ namespace SR_SRSL_NS {
 
         /// ------------------------------------------------------------------------------------------------------------
 
-        std::string blocksCode;
+        std::string uniformsCode;
 
         for (auto&& [name, uniformBlock] : m_shader->GetUniformBlocks()) {
             std::string blockCode = SR_UTILS_NS::Format("layout (std140, binding = %i) uniform %s {\n", uniformBlock.binding, name.c_str());
@@ -543,7 +543,7 @@ namespace SR_SRSL_NS {
             blockCode += "};\n";
 
             if (hasUsage) {
-                blocksCode += blockCode;
+                uniformsCode += blockCode;
             }
         }
 
@@ -573,13 +573,50 @@ namespace SR_SRSL_NS {
 
         /// ------------------------------------------------------------------------------------------------------------
 
-        code += blocksCode;
+        std::string pushConstantsCode;
 
-        if (!samplersCode.empty() && !blocksCode.empty()) {
+        if (!m_shader->GetPushConstants().fields.empty()) {
+            std::string blockCode = "layout(push_constant) uniform PushConstants {\n";
+            bool hasUsage = false;
+
+            for (auto&& field : m_shader->GetPushConstants().fields) {
+                hasUsage |= pFunction->IsVariableUsed(field.name);
+
+                auto&& typeName = SRSLTypeInfo::Instance().GetTypeName(field.type);
+                auto&& dimension = SRSLTypeInfo::Instance().GetDimension(field.type, nullptr);
+
+                std::string strDimension;
+
+                for (auto&& dim : dimension) {
+                    strDimension += "[" +  std::to_string(dim) + "]";
+                }
+
+                blockCode += SR_UTILS_NS::Format("\t// (%i bytes) %s\n", field.size, field.isPublic ? "public" : "private");
+                blockCode += SR_UTILS_NS::Format("\t%s %s%s;\n", typeName.c_str(), field.name.c_str(), strDimension.c_str());
+            }
+
+            blockCode += "};\n";
+
+            if (hasUsage) {
+                pushConstantsCode += blockCode;
+            }
+        }
+
+        /// ------------------------------------------------------------------------------------------------------------
+
+        code += uniformsCode;
+
+        if (!samplersCode.empty() && !uniformsCode.empty()) {
             code += "\n";
         }
 
         code += samplersCode;
+
+        if (!pushConstantsCode.empty() && (!samplersCode.empty() || !uniformsCode.empty())) {
+            code += "\n";
+        }
+
+        code += pushConstantsCode;
 
         return code;
     }

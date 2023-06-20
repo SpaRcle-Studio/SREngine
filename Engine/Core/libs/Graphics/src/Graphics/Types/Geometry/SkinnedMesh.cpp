@@ -187,16 +187,16 @@ namespace SR_GTYPES_NS {
 
         switch (GetMaxBones()) {
             case 128:
-                GetRenderContext()->GetCurrentShader()->SetCustom(SHADER_SKELETON_MATRICES_128, m_skeletonMatrices.data());
-                GetRenderContext()->GetCurrentShader()->SetCustom(SHADER_SKELETON_MATRIX_OFFSETS_128, m_skeletonOffsets.data());
+                GetRenderContext()->GetCurrentShader()->SetValue<false>(SHADER_SKELETON_MATRICES_128, m_skeletonMatrices.data());
+                GetRenderContext()->GetCurrentShader()->SetValue<false>(SHADER_SKELETON_MATRIX_OFFSETS_128, m_skeletonOffsets.data());
                 break;
             case 256:
-                GetRenderContext()->GetCurrentShader()->SetCustom(SHADER_SKELETON_MATRICES_256, m_skeletonMatrices.data());
-                GetRenderContext()->GetCurrentShader()->SetCustom(SHADER_SKELETON_MATRIX_OFFSETS_256, m_skeletonOffsets.data());
+                GetRenderContext()->GetCurrentShader()->SetValue<false>(SHADER_SKELETON_MATRICES_256, m_skeletonMatrices.data());
+                GetRenderContext()->GetCurrentShader()->SetValue<false>(SHADER_SKELETON_MATRIX_OFFSETS_256, m_skeletonOffsets.data());
                 break;
             case 384:
-                GetRenderContext()->GetCurrentShader()->SetCustom(SHADER_SKELETON_MATRICES_384, m_skeletonMatrices.data());
-                GetRenderContext()->GetCurrentShader()->SetCustom(SHADER_SKELETON_MATRIX_OFFSETS_384, m_skeletonOffsets.data());
+                GetRenderContext()->GetCurrentShader()->SetValue<false>(SHADER_SKELETON_MATRICES_384, m_skeletonMatrices.data());
+                GetRenderContext()->GetCurrentShader()->SetValue<false>(SHADER_SKELETON_MATRIX_OFFSETS_384, m_skeletonOffsets.data());
                 break;
             case 0:
                 break;

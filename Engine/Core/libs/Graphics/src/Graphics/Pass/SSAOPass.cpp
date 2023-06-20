@@ -87,7 +87,7 @@ namespace SR_GRAPH_NS {
         SR_TRACY_ZONE_N("SSAO update");
 
         if (m_shader) {
-            m_shader->SetCustom(SHADER_SSAO_SAMPLES, m_kernel.data());
+            m_shader->SetValue<false>(SHADER_SSAO_SAMPLES, m_kernel.data());
         }
 
         PostProcessPass::Update();
@@ -109,6 +109,7 @@ namespace SR_GRAPH_NS {
         }
 
         if (m_framebuffer->BeginRender()) {
+            m_framebuffer->SetViewportScissor();
             PostProcessPass::Render();
             m_framebuffer->EndRender();
             m_framebuffer->EndCmdBuffer();
