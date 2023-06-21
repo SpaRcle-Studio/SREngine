@@ -196,6 +196,9 @@ namespace SR_GRAPH_NS {
     static LayoutBinding GetBindingType(const std::string& line) {
         //! first check sampler, after that check uniform
 
+        if (SR_UTILS_NS::StringUtils::Contains(line, "sampler2DArray"))
+            return LayoutBinding::Sampler2D;
+
         if (SR_UTILS_NS::StringUtils::Contains(line, "sampler2D"))
             return LayoutBinding::Sampler2D;
 

@@ -9,7 +9,7 @@
 
 namespace SR_GRAPH_NS {
     struct ShadowMapCascade {
-        float_t splitDepth = 0.f;
+        /// float_t splitDepth = 0.f;
         SR_MATH_NS::Matrix4x4 viewProjMatrix;
     };
 

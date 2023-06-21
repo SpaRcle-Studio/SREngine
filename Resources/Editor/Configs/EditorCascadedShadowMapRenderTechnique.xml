@@ -23,7 +23,7 @@
             <Depth Format="Auto" ClearValue="1.0" Aspect="Depth" />
         </FramebufferSettings>
         <Shaders>
-            <Override Type="Spatial" Path="Engine/Shaders/ShadowMap/depth-spatial.srsl"/>
+            <Override Type="Spatial" Path="Engine/Shaders/CascadedShadowMap/depth-spatial.srsl"/>
         </Shaders>
     </CascadedShadowMapPass>
     <FramebufferPass Name="SceneViewFBO">
@@ -34,17 +34,17 @@
             <Layer Format="RGBA8_UNORM" R="0.0" G="0.0" B="0.0" A="1.0"/>
         </FramebufferSettings>
         <Passes>
-            <PostProcessPass Shader="Engine/Shaders/CascadedShadowMap/shadow-map.srsl">
+            <!--<PostProcessPass Shader="Engine/Shaders/CascadedShadowMap/shadow-map.srsl">
                 <Attachments>
                     <Attachment FBO="DepthFBO" Id="depthMap" Depth="true" />
                 </Attachments>
-            </PostProcessPass>
-            <!--<OpaquePass>
+            </PostProcessPass>-->
+            <OpaquePass>
                 <Sampler FBO="DepthFBO" Id="shadowMap" Depth="true" />
             </OpaquePass>
             <SkyboxPass Path="Engine/Skyboxes/Sun.png" Shader="Engine/Shaders/skybox.srsl"/>
             <TransparentPass/>
-            <DebugPass/>-->
+            <DebugPass/>
         </Passes>
     </FramebufferPass>
 </Technique>

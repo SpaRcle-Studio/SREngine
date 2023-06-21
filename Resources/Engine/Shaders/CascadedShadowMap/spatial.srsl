@@ -11,7 +11,7 @@ DepthTest true;
 [[uniform], [public]] vec4 color;
 [[uniform], [public]] sampler2D diffuse;
 
-[[uniform]] sampler2D shadowMap;
+[[uniform]] sampler2DArray shadowMap;
 
 [[shared]] vec3 normal;
 [[shared]] vec3 lightVec;
@@ -23,7 +23,7 @@ float textureProj(vec4 shadowCoord, vec2 offset) {
 	float bias = 0.00016;
 
 	if (shadowCoord.z > -1.0 && shadowCoord.z < 1.0) {
-		float dist = texture(shadowMap, vec2(shadowCoord.st + offset)).r;
+		float dist = texture(shadowMap, vec3(shadowCoord.st + offset, 0.0)).r;
 		if (shadowCoord.w > 0 && dist < shadowCoord.z - bias) {
 			shadow = 0.3;
 		}
@@ -33,7 +33,7 @@ float textureProj(vec4 shadowCoord, vec2 offset) {
 }
 
 float filterPCF(vec4 sc) {
-	ivec2 texDim = textureSize(shadowMap, 0);
+	ivec2 texDim = textureSize(shadowMap, 0).xy;
 	float scale = 1.5;
 	float dx = scale * 1.0 / float(texDim.x);
 	float dy = scale * 1.0 / float(texDim.y);

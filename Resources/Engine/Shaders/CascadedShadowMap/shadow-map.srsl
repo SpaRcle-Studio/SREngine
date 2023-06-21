@@ -11,15 +11,7 @@ DepthTest false;
 [[uniform]] sampler2DArray depthMap;
 [[shared]] vec2 uv;
 
-float LinearizeDepth() {
-    float n = 1.0; // camera z near
-    float f = 100.0; // camera z far
-    float z = texture(depthMap, uv).x;
-    return (2.0 * n) / (f + n - z * (f - n));
-}
-
 void fragment() {
-    // float d = LinearizeDepth();
     float d = texture(depthMap, vec3(uv, 0.0)).x;
     COLOR_INDEX_0 = vec4(d, d, d, 1.0);
 }

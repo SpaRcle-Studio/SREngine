@@ -40,7 +40,7 @@ namespace SR_GRAPH_NS {
 
         UpdateCascades();
 
-        pShader->SetMat4(SHADER_LIGHT_SPACE_MATRIX, m_cascades[m_currentCascade].viewProjMatrix);
+        pShader->SetValue<false>(SHADER_CASCADE_LIGHT_SPACE_MATRICES, m_cascades.data());
 
         SR_MATH_NS::FVector3 lightPos = GetRenderScene()->GetLightSystem()->m_position;
         pShader->SetVec3(SHADER_DIRECTIONAL_LIGHT_POSITION, lightPos);
@@ -126,7 +126,7 @@ namespace SR_GRAPH_NS {
             SR_MATH_NS::Matrix4x4 lightViewMatrix = SR_MATH_NS::Matrix4x4::LookAt(frustumCenter - lightDir * -minExtents.z, frustumCenter, SR_MATH_NS::FVector3(0.0f, 1.0f, 0.0f));
             SR_MATH_NS::Matrix4x4 lightOrthoMatrix = SR_MATH_NS::Matrix4x4::Ortho(minExtents.x, maxExtents.x, minExtents.y, maxExtents.y, 0.0f, maxExtents.z - minExtents.z);
 
-            m_cascades[i].splitDepth = (m_camera->GetNear() + splitDist * clipRange) * -1.0f;
+            /// m_cascades[i].splitDepth = (m_camera->GetNear() + splitDist * clipRange) * -1.0f;
             m_cascades[i].viewProjMatrix = lightOrthoMatrix * lightViewMatrix;
 
             lastSplitDist = cascadeSplits[i];
