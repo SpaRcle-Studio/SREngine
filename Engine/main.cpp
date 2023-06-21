@@ -93,16 +93,6 @@ int main(int argc, char **argv) {
 
     resourcesManager.Run();
 
-    if (SR_UTILS_NS::Features::Instance().Enabled("CrashHandler")) {
-    #ifdef SR_WIN32
-        ShellExecute(nullptr, "open", (SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat(
-                "Engine/Utilities/EngineCrashHandler.exe").CStr()),
-                     ("--log log.txt --target " + SR_PLATFORM_NS::GetApplicationName().ToString() + " --out " + exe.ToString() + "\\").c_str(),
-                     nullptr, SW_SHOWDEFAULT
-        );
-    #endif
-    }
-
     SR_WORLD_NS::SceneAllocator::Instance().Init([]() -> SR_WORLD_NS::Scene* {
         return new SR_CORE_NS::World();
     });
