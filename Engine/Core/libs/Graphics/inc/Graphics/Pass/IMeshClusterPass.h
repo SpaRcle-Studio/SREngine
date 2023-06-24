@@ -55,6 +55,7 @@ namespace SR_GRAPH_NS {
         virtual void UseSamplers(ShaderPtr pShader);
         virtual void UseUniforms(ShaderPtr pShader, MeshPtr pMesh);
         virtual void UseSharedUniforms(ShaderPtr pShader);
+        virtual void UseConstants(ShaderPtr pShader);
 
         virtual void PrepareSamplers();
 

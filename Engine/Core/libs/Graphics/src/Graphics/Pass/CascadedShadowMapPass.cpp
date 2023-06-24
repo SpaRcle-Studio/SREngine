@@ -41,7 +41,6 @@ namespace SR_GRAPH_NS {
         UpdateCascades();
 
         pShader->SetValue<false>(SHADER_CASCADE_LIGHT_SPACE_MATRICES, m_cascadeMatrices.data());
-        pShader->SetConstInt(SHADER_SHADOW_CASCADE_INDEX, m_currentCascade);
 
         SR_MATH_NS::FVector3 lightPos = GetRenderScene()->GetLightSystem()->m_position;
         pShader->SetVec3(SHADER_DIRECTIONAL_LIGHT_POSITION, lightPos);
@@ -178,5 +177,10 @@ namespace SR_GRAPH_NS {
             GetPipeline()->SetFrameBufferLayer(i);
             Super::Update();
         }
+    }
+
+    void CascadedShadowMapPass::UseConstants(IMeshClusterPass::ShaderPtr pShader) {
+        pShader->SetConstInt(SHADER_SHADOW_CASCADE_INDEX, m_currentCascade);
+        Super::UseConstants(pShader);
     }
 }

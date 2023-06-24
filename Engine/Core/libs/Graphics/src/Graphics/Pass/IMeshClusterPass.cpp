@@ -117,6 +117,7 @@ namespace SR_GRAPH_NS {
             }
 
             UseSamplers(pShader);
+            UseConstants(pShader);
 
             for (auto&& [key, meshGroup] : subCluster) {
                 (*meshGroup.begin())->BindMesh();
@@ -276,5 +277,9 @@ namespace SR_GRAPH_NS {
         m_shadowMapPass = GetTechnique()->FindPass<ShadowMapPass>();
         m_cascadedShadowMapPass = GetTechnique()->FindPass<CascadedShadowMapPass>();
         return Super::Init();
+    }
+
+    void IMeshClusterPass::UseConstants(IMeshClusterPass::ShaderPtr pShader) {
+
     }
 }

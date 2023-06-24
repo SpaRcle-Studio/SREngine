@@ -60,6 +60,17 @@ namespace SR_GRAPH_NS {
         D16_UNORM
     );
 
+    struct ColorLayer {
+        int32_t texture = SR_ID_INVALID;
+        ImageFormat format = ImageFormat::Unknown;
+    };
+
+    struct DepthLayer {
+        int32_t texture = SR_ID_INVALID;
+        ImageFormat format = ImageFormat::Unknown;
+        ImageAspect aspect = ImageAspect::DepthStencil;
+    };
+
     //inline static bool IsSRGB(ColorFormat f) {
     //    return f == ColorFormat::RGBA8_SRGB;
     //}

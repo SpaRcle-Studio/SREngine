@@ -218,6 +218,11 @@ int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateDescriptorSet(u
         return -1;
     }
 
+    if (!m_ShaderPrograms[shaderProgram]) {
+        SR_ERROR("MemoryManager::AllocateDescriptorSet() : shader program does not exists!");
+        return -1;
+    }
+
     for (uint32_t i = 0; i < m_countDescriptorSets.first; ++i) {
         if (m_descriptorSets[i].m_self == VK_NULL_HANDLE) {
             m_descriptorSets[i] = m_descriptorManager->AllocateDescriptorSet(

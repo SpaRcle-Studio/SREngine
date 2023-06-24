@@ -896,8 +896,16 @@ namespace SR_GRAPH_NS {
     }
 
     void Vulkan::PushConstants(void* pData, uint64_t size) {
+        auto&& pushConstants = m_currentShader->GetPushConstants();
+
+        SRAssert2Once(pushConstants.size() == 1, "Unsupported!");
+
+        if (pushConstants.size() != 1) {
+            return;
+        }
+
         vkCmdPushConstants(m_currentCmd, m_currentLayout,
-            VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT,
+            pushConstants.front().stageFlags,
             0, size, pData
         );
     }

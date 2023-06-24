@@ -26,6 +26,7 @@ namespace SR_GRAPH_NS {
 
     protected:
         void UseSharedUniforms(ShaderPtr pShader) override;
+        void UseConstants(ShaderPtr pShader) override;
         void UseUniforms(ShaderPtr pShader, MeshPtr pMesh) override;
 
         SR_NODISCARD MeshClusterTypeFlag GetClusterType() const noexcept override;

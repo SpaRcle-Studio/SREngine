@@ -24,17 +24,6 @@ namespace SR_GTYPES_NS {
 namespace SR_GRAPH_NS {
     class RenderContext;
 
-    struct ColorLayer {
-        int32_t texture = SR_ID_INVALID;
-        ImageFormat format = ImageFormat::Unknown;
-    };
-
-    struct DepthLayer {
-        int32_t texture = SR_ID_INVALID;
-        ImageFormat format = ImageFormat::Unknown;
-        ImageAspect aspect = ImageAspect::DepthStencil;
-    };
-
     typedef ImGuiContext* GUIContext;
     typedef ImFont* ImguiFont;
 

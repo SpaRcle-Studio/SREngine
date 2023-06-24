@@ -467,6 +467,16 @@ namespace SR_SRSL_NS {
 
                 m_createInfo.uniforms.emplace_back(uniform);
             }
+
+            /// push-constant'ы
+
+            if (m_pushConstants.stages.count(stage) == 1) {
+                SRShaderPushConstant pushConstant;
+                pushConstant.offset = 0;
+                /// Выравнивание по 16 байт. Работает для Vulkan, для остальных неизвестно. Может отличаться в зависимости от устройства
+                pushConstant.size = SR_MAX(16, m_pushConstants.size);
+                m_createInfo.stages[stage].pushConstants.emplace_back(pushConstant);
+            }
         }
 
         auto&& vertexInfo = Vertices::GetVertexInfo(GetVertexType());
