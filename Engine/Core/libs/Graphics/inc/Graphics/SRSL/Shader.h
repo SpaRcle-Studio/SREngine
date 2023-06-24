@@ -21,6 +21,7 @@ namespace SR_SRSL_NS {
         bool isPublic = false;
         uint64_t binding = 0;
         int32_t attachment = -1;
+        std::set<ShaderStage> stages;
     };
     typedef std::map<std::string, SRSLSampler> SRSLSamplers;
 
@@ -39,6 +40,7 @@ namespace SR_SRSL_NS {
         uint64_t binding = 0;
 
         std::vector<Field> fields;
+        std::set<ShaderStage> stages;
     };
 
     /** Это не шейдер в привычном понимании, это набор всех данных для генерирования любого

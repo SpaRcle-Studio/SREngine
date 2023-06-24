@@ -44,6 +44,7 @@ namespace SR_GTYPES_NS {
         bool InitUBOBlock();
         bool Flush() const;
         void FlushSamplers();
+        void FlushConstants();
         void FreeVideoMemory() override;
 
     public:

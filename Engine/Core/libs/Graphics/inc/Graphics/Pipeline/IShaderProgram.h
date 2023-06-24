@@ -59,19 +59,13 @@ namespace SR_GRAPH_NS {
     static constexpr uint64_t SHADER_SHADOW_CASCADE_INDEX = SR_COMPILE_TIME_CRC32_STR("SHADOW_CASCADE_INDEX");
     static constexpr uint64_t SHADER_CASCADE_LIGHT_SPACE_MATRICES = SR_COMPILE_TIME_CRC32_STR("CASCADE_LIGHT_SPACE_MATRICES");
 
-    /**
-       0 - binding
-       1 - ubo size
-    */
-    typedef std::vector<std::pair<uint64_t, uint64_t>> UBOInfo;
-
     typedef std::vector<std::pair<Vertices::Attribute, size_t>> VertexAttributes;
     typedef std::vector<SR_VERTEX_DESCRIPTION> VertexDescriptions;
 
     SR_DEPRECATED
     typedef std::variant<glm::mat4, glm::mat3, glm::mat2, float, int, glm::vec2, glm::vec3, glm::vec4, glm::ivec2, glm::ivec3, glm::ivec4> ShaderVariable;
 
-    SR_ENUM_NS_CLASS(ShaderStage,
+    SR_ENUM_NS_CLASS_T(ShaderStage, uint8_t,
         Unknown,
         Vertex,
         Fragment,
@@ -103,12 +97,6 @@ namespace SR_GRAPH_NS {
             TriangleStripWithAdjacency,
             PathList)
 
-    struct SR_DLL_EXPORT Uniform {
-        LayoutBinding type;
-        ShaderStage stage;
-        uint32_t binding;
-    };
-
     SR_ENUM_NS_CLASS(DepthCompare,
         Unknown,
         Never,
@@ -120,42 +108,28 @@ namespace SR_GRAPH_NS {
         GreaterOrEqual,
         Always)
 
+    struct SR_DLL_EXPORT Uniform {
+        LayoutBinding type = LayoutBinding::Unknown;
+        ShaderStage stage = ShaderStage::Unknown;
+        uint64_t binding = 0;
+        uint64_t size = 0;
+    };
+
+    typedef std::vector<Uniform> UBOInfo;
+
+    struct SR_DLL_EXPORT SRShaderPushConstant {
+        uint64_t size = 0;
+        uint64_t offset = 0;
+    };
+
+    struct SR_DLL_EXPORT SRShaderStageInfo {
+    public:
+        SR_UTILS_NS::Path path;
+        std::vector<SRShaderPushConstant> pushConstants;
+
+    };
+
     struct SR_DLL_EXPORT SRShaderCreateInfo {
-        SRShaderCreateInfo() = default;
-
-        SRShaderCreateInfo(const SRShaderCreateInfo& ref) = default;
-
-        SRShaderCreateInfo(SRShaderCreateInfo&& ref) noexcept {
-            stages = std::exchange(ref.stages, {});
-            polygonMode = std::exchange(ref.polygonMode, {});
-            cullMode = std::exchange(ref.cullMode, {});
-            depthCompare = std::exchange(ref.depthCompare, {});
-            primitiveTopology = std::exchange(ref.primitiveTopology, {});
-            vertexAttributes = std::exchange(ref.vertexAttributes, {});
-            vertexDescriptions = std::exchange(ref.vertexDescriptions, {});
-            uniforms = std::exchange(ref.uniforms, {});
-            blendEnabled = std::exchange(ref.blendEnabled, {});
-            depthWrite = std::exchange(ref.depthWrite, {});
-            depthTest = std::exchange(ref.depthTest, {});
-        }
-
-        SRShaderCreateInfo& operator=(const SRShaderCreateInfo& ref) noexcept = default;
-
-        SRShaderCreateInfo& operator=(SRShaderCreateInfo&& ref) noexcept {
-            stages = std::exchange(ref.stages, {});
-            polygonMode = std::exchange(ref.polygonMode, {});
-            cullMode = std::exchange(ref.cullMode, {});
-            depthCompare = std::exchange(ref.depthCompare, {});
-            primitiveTopology = std::exchange(ref.primitiveTopology, {});
-            vertexAttributes = std::exchange(ref.vertexAttributes, {});
-            vertexDescriptions = std::exchange(ref.vertexDescriptions, {});
-            uniforms = std::exchange(ref.uniforms, {});
-            blendEnabled = std::exchange(ref.blendEnabled, {});
-            depthWrite = std::exchange(ref.depthWrite, {});
-            depthTest = std::exchange(ref.depthTest, {});
-            return *this;
-        }
-
     public:
         SR_NODISCARD bool Validate() const noexcept {
             return polygonMode       != PolygonMode::Unknown
@@ -165,7 +139,7 @@ namespace SR_GRAPH_NS {
         }
 
     public:
-        std::map<ShaderStage, SR_UTILS_NS::Path> stages;
+        std::map<ShaderStage, SRShaderStageInfo> stages;
 
         PolygonMode       polygonMode       = PolygonMode::Unknown;
         CullMode          cullMode          = CullMode::Unknown;

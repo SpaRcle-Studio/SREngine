@@ -347,18 +347,6 @@ namespace SR_GRAPH_NS {
             return true;
         }
 
-        bool CompileShader(
-                const std::map<ShaderStage, SR_UTILS_NS::Path>& stages,
-                int32_t FBO,
-                void** shaderData,
-                const std::vector<uint64_t>& uniformSizes
-                ) override;
-
-        bool LinkShader(
-                SR_SHADER_PROGRAM* shaderProgram,
-                void** shaderData,
-                const SRShaderCreateInfo& shaderCreateInfo) const override;
-
         int32_t AllocateShaderProgram(const SRShaderCreateInfo& createInfo, int32_t fbo) override;
 
         SR_FORCE_INLINE void UseShader(SR_SHADER_PROGRAM shaderProgram) override {
@@ -387,15 +375,18 @@ namespace SR_GRAPH_NS {
                 SR_ERROR("Vulkan::DeleteShader() : failed free shader program!");
                 return false;
             }
-            else
-                return true;
+            return true;
         }
+
         SR_FORCE_INLINE void UnUseShader() override {
             m_currentShader   = nullptr;
             m_currentShaderID = -1;
             m_currentLayout   = VK_NULL_HANDLE;
         }
     public:
+
+        void PushConstants(void* pData, uint64_t size) override;
+
         SR_FORCE_INLINE void ResetDescriptorSet() override {
             Environment::ResetDescriptorSet();
             m_currentDesrSets = VK_NULL_HANDLE;

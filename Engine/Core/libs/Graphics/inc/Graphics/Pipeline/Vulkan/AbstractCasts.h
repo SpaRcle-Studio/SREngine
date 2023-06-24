@@ -10,6 +10,18 @@
 #include <Graphics/Types/Descriptors.h>
 
 namespace Framework::Graphics::VulkanTools {
+    static VkShaderStageFlagBits AbstractShaderToVkShader(ShaderStage stage) {
+        switch (stage) {
+            case ShaderStage::Vertex: return VK_SHADER_STAGE_VERTEX_BIT;
+            case ShaderStage::Fragment: return VK_SHADER_STAGE_FRAGMENT_BIT;
+            case ShaderStage::Geometry: return VK_SHADER_STAGE_GEOMETRY_BIT;
+            case ShaderStage::Compute: return VK_SHADER_STAGE_COMPUTE_BIT;
+            default:
+                SR_ERROR("VulkanTools::AbstractShaderToVkShader() : unknown binding stage!\n\tStage: " + SR_UTILS_NS::EnumReflector::ToString(stage));
+                return VK_SHADER_STAGE_FLAG_BITS_MAX_ENUM;
+        }
+    }
+
     static SR_FORCE_INLINE VkFormat AttributeToVkFormat(const Vertices::Attribute& attr) {
         switch (attr) {
             case Vertices::Attribute::FLOAT_R32G32B32A32: return VK_FORMAT_R32G32B32A32_SFLOAT;
@@ -41,6 +53,70 @@ namespace Framework::Graphics::VulkanTools {
             vkDescriptions.push_back(EvoVulkan::Tools::Initializers::VertexInputBindingDescription(i, descriptions[i], VK_VERTEX_INPUT_RATE_VERTEX));
 
         return vkDescriptions;
+    }
+
+    static std::vector<VkPushConstantRange> AbstractPushConstantToVkPushConstants(const SRShaderCreateInfo& createInfo) {
+        std::map<ShaderStage, VkPushConstantRange> pushConstantsMap;
+
+        for (auto&& [stage, info] : createInfo.stages) {
+            for (auto&& pushConstant : info.pushConstants) {
+                auto&& pushConstantRange = pushConstantsMap[stage];
+                pushConstantRange.size = pushConstant.size;
+                pushConstantRange.offset = pushConstant.offset;
+                pushConstantRange.stageFlags |= AbstractShaderToVkShader(stage); /// NOLINT
+            }
+        }
+
+        std::vector<VkPushConstantRange> pushConstants;
+
+        for (auto&& [stage, pushConstant] : pushConstantsMap) {
+            pushConstants.emplace_back(pushConstant);
+        }
+
+        return pushConstants;
+    }
+
+    static std::optional<std::vector<VkDescriptorSetLayoutBinding>> UniformsToDescriptorLayoutBindings(const UBOInfo& uniforms) {
+        std::vector<VkDescriptorSetLayoutBinding> descriptorLayoutBindings;
+
+        for (auto&& uniform : uniforms) {
+            VkDescriptorType type = VK_DESCRIPTOR_TYPE_MAX_ENUM;
+
+            switch (uniform.type) {
+                case LayoutBinding::Sampler2D: type = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER; break;
+                case LayoutBinding::Uniform: type = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER; break;
+                case LayoutBinding::Attachhment: type = VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT; break;
+                default:
+                    SRHalt("VulknaTools::UniformsToDescriptorLayoutBindings() : unknown binding type!");
+                    return std::nullopt;
+            }
+
+            VkShaderStageFlagBits stage = AbstractShaderToVkShader(uniform.stage);
+
+            for (auto&& descriptor : descriptorLayoutBindings)
+            {
+                if (descriptor.binding == uniform.binding)
+                {
+                    if (descriptor.descriptorType != type)
+                    {
+                        SRHalt("VulkanTools::UniformsToDescriptorLayoutBindings() : descriptor types are different! \n\tBinding: " + SR_UTILS_NS::ToString(uniform.binding));
+                        return std::nullopt;
+                    }
+
+                    descriptor.stageFlags |= stage; /// NOLINT
+                    goto skip;
+                }
+            }
+
+            descriptorLayoutBindings.emplace_back(EvoVulkan::Tools::Initializers::DescriptorSetLayoutBinding(
+                    type, stage, uniform.binding
+            ));
+
+        skip:
+            SR_NOOP;
+        }
+
+        return descriptorLayoutBindings;
     }
 
     static SR_FORCE_INLINE VkShaderStageFlagBits VkShaderShaderTypeToStage(ShaderStage type) {
@@ -180,7 +256,7 @@ namespace Framework::Graphics::VulkanTools {
             case ImageAspect::Depth: return VK_IMAGE_ASPECT_DEPTH_BIT;
             case ImageAspect::Stencil: return VK_IMAGE_ASPECT_STENCIL_BIT;
             case ImageAspect::Color: return VK_IMAGE_ASPECT_COLOR_BIT;
-            case ImageAspect::DepthStencil: return VK_IMAGE_ASPECT_DEPTH_BIT | VK_IMAGE_ASPECT_STENCIL_BIT;
+            case ImageAspect::DepthStencil: return VK_IMAGE_ASPECT_DEPTH_BIT | VK_IMAGE_ASPECT_STENCIL_BIT; /// NOLINT
             default:
                 break;
         }

@@ -82,7 +82,7 @@ void vertex() {
         0.5, 0.5, 0.0, 1.0
 	);
 
-    shadowCoord = (biasMat * LIGHT_SPACE_MATRIX * MODEL_MATRIX) * vec4(VERTEX, 1.0);
+    shadowCoord = (biasMat * CASCADE_LIGHT_SPACE_MATRICES[1] * MODEL_MATRIX) * vec4(VERTEX, 1.0);
 
     OUT_POSITION = PROJECTION_MATRIX * VIEW_MATRIX * MODEL_MATRIX * vec4(VERTEX, 1.0);
 }

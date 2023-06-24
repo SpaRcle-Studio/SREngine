@@ -295,201 +295,6 @@ namespace SR_GRAPH_NS {
         return true;
     }
 
-    bool Vulkan::CompileShader(const std::map<ShaderStage, SR_UTILS_NS::Path>& stages, int32_t FBO, void **shaderData, const std::vector<uint64_t> &uniformSizes) {
-        if (FBO < 0) {
-            SRHalt("Vulkan::CompileShader() : vulkan required valid FBO for shaders!");
-            return false;
-        }
-
-        EvoVulkan::Types::RenderPass renderPass = m_kernel->GetRenderPass();
-        if (FBO != 0) {
-            if (auto fbo = m_memory->m_FBOs[FBO - 1]; fbo) {
-                renderPass = fbo->GetRenderPass();
-            }
-            else {
-                SR_ERROR("Vulkan::CompileShader() : invalid FBO! SOMETHING WENT WRONG! MEMORY MAY BE CORRUPTED!");
-                return false;
-            }
-        }
-
-        if (!renderPass.IsReady()) {
-            SR_ERROR("Vulkan::CompileShader() : internal Evo Vulkan error! Render pass isn't ready!");
-            return false;
-        }
-
-        const int32_t ID = m_memory->AllocateShaderProgram(renderPass);
-        if (ID < 0) {
-            SR_ERROR("Vulkan::CompileShader() : failed to allocate shader program ID!");
-            return false;
-        }
-        else {
-            /// TODO: memory leak possible
-            int *dynamicID = new int();
-            *dynamicID = ID;
-            *shaderData = reinterpret_cast<void *>(dynamicID);
-        }
-
-        std::vector<SourceShader> modules = { };
-
-        for (auto&& [shaderStage, stagePath] : stages) {
-            SourceShader module(stagePath.ToString(), shaderStage);
-            modules.emplace_back(module);
-        }
-
-        if (modules.empty()) {
-            SRHalt("No shader modules were found!");
-            return false;
-        }
-
-        auto&& uniforms = SR_GRAPH_NS::AnalyseShader(modules);
-        if (!uniforms) {
-            SR_ERROR("Vulkan::CompileShader() : failed to analyse shader!");
-            return false;
-        }
-
-        std::vector<VkDescriptorSetLayoutBinding> descriptorLayoutBindings = {};
-        {
-            VkDescriptorType type = VK_DESCRIPTOR_TYPE_MAX_ENUM;
-            VkShaderStageFlagBits stage = VK_SHADER_STAGE_ALL;
-
-            for (auto &&uniform : uniforms.value()) {
-                switch (uniform.type) {
-                    case LayoutBinding::Sampler2D: type = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER; break;
-                    case LayoutBinding::Uniform: type = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER; break;
-                    case LayoutBinding::Attachhment: type = VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT; break;
-                    default:
-                        SRHalt("Vulkan::CompileShader() : unknown binding type!");
-                        return false;
-                }
-
-                switch (uniform.stage) {
-                    case ShaderStage::Vertex: stage = VK_SHADER_STAGE_VERTEX_BIT; break;
-                    case ShaderStage::Fragment: stage = VK_SHADER_STAGE_FRAGMENT_BIT; break;
-                    case ShaderStage::Geometry: stage = VK_SHADER_STAGE_GEOMETRY_BIT; break;
-                    case ShaderStage::Compute: stage = VK_SHADER_STAGE_COMPUTE_BIT; break;
-                    default:
-                        SR_ERROR("Vulkan::CompileShader() : unknown binding stage!\n\tStage: " + SR_UTILS_NS::EnumReflector::ToString(uniform.stage));
-                        return false;
-                }
-
-                for (auto &&descriptor : descriptorLayoutBindings)
-                {
-                    if (descriptor.binding == uniform.binding)
-                    {
-                        if (descriptor.descriptorType != type)
-                        {
-                            SRHalt("Vulkan::CompileShader() : descriptor types are different! \n\tBinding: " + SR_UTILS_NS::ToString(uniform.binding));
-                            return false;
-                        }
-
-                        descriptor.stageFlags |= stage;
-                        goto skip;
-                    }
-                }
-
-                descriptorLayoutBindings.emplace_back(EvoVulkan::Tools::Initializers::DescriptorSetLayoutBinding(
-                        type, stage, uniform.binding
-                ));
-
-            skip:
-                SR_NOOP;
-            }
-        }
-
-        std::vector<EvoVulkan::Complexes::SourceShader> vkModules;
-        for (auto&& module : modules) {
-            VkShaderStageFlagBits stage = VulkanTools::VkShaderShaderTypeToStage(module.m_stage);
-            vkModules.emplace_back(EvoVulkan::Complexes::SourceShader(module.m_path, stage));
-        }
-
-        if (!m_memory->m_ShaderPrograms[ID]->Load(
-                SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("/Cache/Shaders"),
-                vkModules,
-                descriptorLayoutBindings,
-                uniformSizes
-        )) {
-            DeleteShader(ID);
-            SR_ERROR("Vulkan::CompileShader() : failed to load Evo Vulkan shader!");
-            return false;
-        }
-
-        return true;
-    }
-
-    bool Vulkan::LinkShader(
-            SR_SHADER_PROGRAM *shaderProgram,
-            void **shaderData,
-            const SRShaderCreateInfo& shaderCreateInfo) const {
-        if (!shaderData) {
-            SR_ERROR("Vulkan::LinkShader() : shader data is nullptr!");
-            return false;
-        }
-        int *dynamicID = reinterpret_cast<int *>(*shaderData);
-        if (!dynamicID) {
-            SR_ERROR("Vulkan::LinkShader() : dynamic ID is nullptr!");
-            return false;
-        }
-
-        auto &&vkVertexDescriptions = VulkanTools::AbstractVertexDescriptionsToVk(shaderCreateInfo.vertexDescriptions);
-        auto &&vkVertexAttributes = VulkanTools::AbstractAttributesToVkAttributes(shaderCreateInfo.vertexAttributes);
-        if (vkVertexAttributes.size() != shaderCreateInfo.vertexAttributes.size()) {
-            SR_ERROR("Vulkan::LinkShader() : vkVertexDescriptions size != vertexDescriptions size!");
-            delete dynamicID;
-            return false;
-        }
-
-        if (!m_memory->m_ShaderPrograms[*dynamicID]->SetVertexDescriptions(vkVertexDescriptions, vkVertexAttributes)) {
-            SR_ERROR("Vulkan::LinkShader() : failed to set vertex descriptions!");
-            delete dynamicID;
-            return false;
-        }
-
-        /** Так как геометрия грузится отзеркаленная по оси X, то она выворачивается наизнанку,
-         * соответственно, нужно изменить отсечения полигонов на обратный */
-        ///const CullMode cullMode =
-        ///        shaderCreateInfo.cullMode == CullMode::Back ? CullMode::Front :
-        ///            (shaderCreateInfo.cullMode == CullMode::Front ? CullMode::Back : shaderCreateInfo.cullMode);
-
-        const CullMode cullMode = shaderCreateInfo.cullMode;
-
-        if (!shaderCreateInfo.Validate()) {
-            SR_ERROR("Vulkan::LinkShader() : failed to validate shader create info! Create info:"
-                     "\n\tPolygon mode: " + SR_UTILS_NS::EnumReflector::ToString(shaderCreateInfo.polygonMode) +
-                     "\n\tCull mode: " + SR_UTILS_NS::EnumReflector::ToString(cullMode) +
-                     "\n\tDepth compare: " + SR_UTILS_NS::EnumReflector::ToString(shaderCreateInfo.depthCompare) +
-                     "\n\tPrimitive topology: " + SR_UTILS_NS::EnumReflector::ToString(shaderCreateInfo.primitiveTopology)
-            );
-
-            return false;
-        }
-
-        const uint8_t sampleCount = GetFramebufferSampleCount();
-
-        const VkSampleCountFlagBits vkSampleCount = EvoVulkan::Tools::Convert::IntToSampleCount(sampleCount);
-
-        const bool depthEnabled = m_currentVkFramebuffer ? m_currentVkFramebuffer->IsDepthEnabled() : true;
-
-        if (!m_memory->m_ShaderPrograms[*dynamicID]->Compile(
-                VulkanTools::AbstractPolygonModeToVk(shaderCreateInfo.polygonMode),
-                VulkanTools::AbstractCullModeToVk(cullMode),
-                VulkanTools::AbstractDepthOpToVk(shaderCreateInfo.depthCompare),
-                shaderCreateInfo.blendEnabled && depthEnabled,
-                shaderCreateInfo.depthWrite,
-                shaderCreateInfo.depthTest,
-                VulkanTools::AbstractPrimitiveTopologyToVk(shaderCreateInfo.primitiveTopology),
-                vkSampleCount)
-        ) {
-            SR_ERROR("Vulkan::LinkShader() : failed to compile Evo Vulkan shader!");
-            delete dynamicID;
-            return false;
-        }
-
-        *shaderProgram = *dynamicID;
-
-        delete dynamicID;
-        return true;
-    }
-
     bool Vulkan::CreateFrameBuffer(const SR_MATH_NS::IVector2 &size, int32_t &FBO, DepthLayer *pDepth, std::vector<ColorLayer> &colors, uint8_t sampleCount, uint32_t layersCount) {
         std::vector<int32_t> colorBuffers;
         colorBuffers.reserve(colors.size());
@@ -784,27 +589,127 @@ namespace SR_GRAPH_NS {
         vkCmdSetScissor(m_currentCmd, 0, 1, &m_scissor);
     }
 
-    int32_t Vulkan::AllocateShaderProgram(const SRShaderCreateInfo& createInfo, int32_t fbo) {
-        void* temp = nullptr;
-
-        auto&& sizes = std::vector<uint64_t>();
-        sizes.reserve(createInfo.uniforms.size());
-        for (auto&& [binding, size] : createInfo.uniforms)
-            sizes.push_back(size);
-
-        if (!CompileShader(createInfo.stages, fbo, &temp, sizes)) {
-            SR_ERROR("Vulkan::AllocateShaderProgram() : failed to compile shader stages!");
-            return SR_ID_INVALID;
+    int32_t Vulkan::AllocateShaderProgram(const SRShaderCreateInfo& createInfo, int32_t FBO) {
+        if (FBO < 0) {
+            SRHalt("Vulkan::AllocateShaderProgram() : vulkan required valid FBO for shaders!");
+            return false;
         }
 
-        int32_t program = SR_ID_INVALID;
-
-        if (!LinkShader(&program, &temp, createInfo)) {
-            SR_ERROR("Vulkan::AllocateShaderProgram() : failed linking shader!");
-            return SR_ID_INVALID;
+        if (!createInfo.Validate()) {
+            SR_ERROR("Vulkan::AllocateShaderProgram() : failed to validate shader create info! Create info:"
+                     "\n\tPolygon mode: " + SR_UTILS_NS::EnumReflector::ToString(createInfo.polygonMode) +
+                     "\n\tCull mode: " + SR_UTILS_NS::EnumReflector::ToString(createInfo.cullMode) +
+                     "\n\tDepth compare: " + SR_UTILS_NS::EnumReflector::ToString(createInfo.depthCompare) +
+                     "\n\tPrimitive topology: " + SR_UTILS_NS::EnumReflector::ToString(createInfo.primitiveTopology)
+            );
+            return false;
         }
 
-        return program;
+        EvoVulkan::Types::RenderPass renderPass = m_kernel->GetRenderPass();
+        if (FBO != 0) {
+            if (auto&& pFBO = m_memory->m_FBOs[FBO - 1]; pFBO) {
+                renderPass = pFBO->GetRenderPass();
+            }
+            else {
+                SR_ERROR("Vulkan::CompileShader() : invalid FBO! SOMETHING WENT WRONG! MEMORY MAY BE CORRUPTED!");
+                return false;
+            }
+        }
+
+        if (!renderPass.IsReady()) {
+            SR_ERROR("Vulkan::CompileShader() : internal Evo Vulkan error! Render pass isn't ready!");
+            return false;
+        }
+
+        SR_SHADER_PROGRAM shaderProgram = m_memory->AllocateShaderProgram(renderPass);
+        if (shaderProgram < 0) {
+            SR_ERROR("Vulkan::CompileShader() : failed to allocate shader program ID!");
+            return false;
+        }
+
+        auto&& pShaderProgram = m_memory->m_ShaderPrograms[shaderProgram];
+
+        std::vector<SourceShader> modules = { };
+
+        for (auto&& [shaderStage, stage] : createInfo.stages) {
+            SourceShader module(stage.path.ToString(), shaderStage);
+            modules.emplace_back(module);
+        }
+
+        if (modules.empty()) {
+            SRHalt("No shader modules were found!");
+            return false;
+        }
+
+        auto&& pushConstants = VulkanTools::AbstractPushConstantToVkPushConstants(createInfo);
+
+        auto&& descriptorLayoutBindings = VulkanTools::UniformsToDescriptorLayoutBindings(createInfo.uniforms);
+        if (!descriptorLayoutBindings.has_value()) {
+            SRHalt("Vulkan::AllocateShaderProgram() : failed to create descriptor layout bindings!");
+            return false;
+        }
+
+        std::vector<EvoVulkan::Complexes::SourceShader> vkModules;
+        for (auto&& module : modules) {
+            VkShaderStageFlagBits stage = VulkanTools::VkShaderShaderTypeToStage(module.m_stage);
+            vkModules.emplace_back(EvoVulkan::Complexes::SourceShader(module.m_path, stage));
+        }
+
+        if (!pShaderProgram->Load(
+                SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("/Cache/Shaders"),
+                vkModules,
+                descriptorLayoutBindings.value(),
+                pushConstants
+        )) {
+            DeleteShader(shaderProgram);
+            SR_ERROR("Vulkan::CompileShader() : failed to load Evo Vulkan shader!");
+            return false;
+        }
+
+        auto&& vkVertexDescriptions = VulkanTools::AbstractVertexDescriptionsToVk(createInfo.vertexDescriptions);
+        auto&& vkVertexAttributes = VulkanTools::AbstractAttributesToVkAttributes(createInfo.vertexAttributes);
+        if (vkVertexAttributes.size() != createInfo.vertexAttributes.size()) {
+            SR_ERROR("Vulkan::LinkShader() : vkVertexDescriptions size != vertexDescriptions size!");
+            DeleteShader(shaderProgram);
+            return false;
+        }
+
+        if (!pShaderProgram->SetVertexDescriptions(vkVertexDescriptions, vkVertexAttributes)) {
+            SR_ERROR("Vulkan::LinkShader() : failed to set vertex descriptions!");
+            DeleteShader(shaderProgram);
+            return false;
+        }
+
+        /** Так как геометрия грузится отзеркаленная по оси X, то она выворачивается наизнанку,
+         * соответственно, нужно изменить отсечения полигонов на обратный */
+        ///const CullMode cullMode =
+        ///        shaderCreateInfo.cullMode == CullMode::Back ? CullMode::Front :
+        ///            (shaderCreateInfo.cullMode == CullMode::Front ? CullMode::Back : shaderCreateInfo.cullMode);
+
+        const CullMode cullMode = createInfo.cullMode;
+
+        const uint8_t sampleCount = GetFramebufferSampleCount();
+
+        const VkSampleCountFlagBits vkSampleCount = EvoVulkan::Tools::Convert::IntToSampleCount(sampleCount);
+
+        const bool depthEnabled = m_currentVkFramebuffer ? m_currentVkFramebuffer->IsDepthEnabled() : true;
+
+        if (!pShaderProgram->Compile(
+                VulkanTools::AbstractPolygonModeToVk(createInfo.polygonMode),
+                VulkanTools::AbstractCullModeToVk(cullMode),
+                VulkanTools::AbstractDepthOpToVk(createInfo.depthCompare),
+                createInfo.blendEnabled && depthEnabled,
+                createInfo.depthWrite,
+                createInfo.depthTest,
+                VulkanTools::AbstractPrimitiveTopologyToVk(createInfo.primitiveTopology),
+                vkSampleCount)
+        ) {
+            SR_ERROR("Vulkan::LinkShader() : failed to compile Evo Vulkan shader!");
+            DeleteShader(shaderProgram);
+            return false;
+        }
+
+        return shaderProgram;
     }
 
     void Vulkan::OnMultiSampleChanged() {
@@ -988,6 +893,13 @@ namespace SR_GRAPH_NS {
         if (m_currentVkFramebuffer) {
             m_currentCmd = m_currentVkFramebuffer->GetCmd();
         }
+    }
+
+    void Vulkan::PushConstants(void* pData, uint64_t size) {
+        vkCmdPushConstants(m_currentCmd, m_currentLayout,
+            VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT,
+            0, size, pData
+        );
     }
 
     //!-----------------------------------------------------------------------------------------------------------------

@@ -34,7 +34,7 @@ namespace SR_GRAPH_NS {
             pShader->SetMat4(SHADER_LIGHT_SPACE_MATRIX, m_shadowMapPass->GetLightSpaceMatrix());
         }
         else if (m_cascadedShadowMapPass) {
-            pShader->SetMat4(SHADER_LIGHT_SPACE_MATRIX, m_cascadedShadowMapPass->GetCascade(1).viewProjMatrix);
+            pShader->SetValue<false>(SHADER_CASCADE_LIGHT_SPACE_MATRICES, m_cascadedShadowMapPass->GetCascadeMatrices().data());
         }
 
         Super::UseSharedUniforms(pShader);

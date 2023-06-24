@@ -40,7 +40,8 @@ namespace SR_GRAPH_NS {
 
         UpdateCascades();
 
-        pShader->SetValue<false>(SHADER_CASCADE_LIGHT_SPACE_MATRICES, m_cascades.data());
+        pShader->SetValue<false>(SHADER_CASCADE_LIGHT_SPACE_MATRICES, m_cascadeMatrices.data());
+        pShader->SetConstInt(SHADER_SHADOW_CASCADE_INDEX, m_currentCascade);
 
         SR_MATH_NS::FVector3 lightPos = GetRenderScene()->GetLightSystem()->m_position;
         pShader->SetVec3(SHADER_DIRECTIONAL_LIGHT_POSITION, lightPos);
@@ -56,7 +57,8 @@ namespace SR_GRAPH_NS {
         std::vector<float_t> cascadeSplits;
         cascadeSplits.resize(m_cascadesCount);
 
-        m_cascades.resize(m_cascadesCount);
+        m_cascadeMatrices.resize(m_cascadesCount);
+        m_cascadeSplitDepths.resize(m_cascadesCount);
 
         const float_t nearClip = m_camera->GetNear();
         const float_t farClip = m_camera->GetFar();
@@ -126,21 +128,11 @@ namespace SR_GRAPH_NS {
             SR_MATH_NS::Matrix4x4 lightViewMatrix = SR_MATH_NS::Matrix4x4::LookAt(frustumCenter - lightDir * -minExtents.z, frustumCenter, SR_MATH_NS::FVector3(0.0f, 1.0f, 0.0f));
             SR_MATH_NS::Matrix4x4 lightOrthoMatrix = SR_MATH_NS::Matrix4x4::Ortho(minExtents.x, maxExtents.x, minExtents.y, maxExtents.y, 0.0f, maxExtents.z - minExtents.z);
 
-            /// m_cascades[i].splitDepth = (m_camera->GetNear() + splitDist * clipRange) * -1.0f;
-            m_cascades[i].viewProjMatrix = lightOrthoMatrix * lightViewMatrix;
+            m_cascadeSplitDepths[i] = (m_camera->GetNear() + splitDist * clipRange) * -1.0f;
+            m_cascadeMatrices[i] = lightOrthoMatrix * lightViewMatrix;
 
             lastSplitDist = cascadeSplits[i];
         }
-    }
-
-    const ShadowMapCascade& CascadedShadowMapPass::GetCascade(uint32_t index) const {
-        if (m_cascades.size() <= index) {
-            SRHalt("Out of range!");
-            static ShadowMapCascade cascade;
-            return cascade;
-        }
-
-        return m_cascades.at(index);
     }
 
     bool CascadedShadowMapPass::Render() {

@@ -326,7 +326,7 @@ namespace SR_GRAPH_NS::Types {
             return false;
         }
 
-        m_shaderCreateInfo = SRShaderCreateInfo(pShader->GetCreateInfo());
+        m_shaderCreateInfo = pShader->GetCreateInfo();
         m_type = pShader->GetType();
 
         /// ------------------------------------------------------------------------------------------------------------
@@ -423,6 +423,12 @@ namespace SR_GRAPH_NS::Types {
             else {
                 m_pipeline->BindTexture(samplerInfo.binding, samplerInfo.samplerId);
             }
+        }
+    }
+
+    void Shader::FlushConstants() {
+        if (m_constBlock.m_size > 0) {
+            m_pipeline->PushConstants(m_constBlock.m_memory, m_constBlock.m_size);
         }
     }
 }

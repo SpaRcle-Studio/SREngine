@@ -235,6 +235,7 @@ namespace SR_SRSL_NS {
 
             if (auto&& pDecorator = pVariable->pDecorators->Find("shared")) {
                 m_shared[pVariable->pName->ToString(0)] = pVariable;
+                continue;
             }
 
             if (auto&& pDecorator = pVariable->pDecorators->Find("uniform")) {
@@ -258,12 +259,16 @@ namespace SR_SRSL_NS {
                 field.type = pVariable->pType->ToString(0);
                 field.isPublic = bool(pVariable->pDecorators->Find("public"));
 
+                auto&& usedStages = m_useStack->IsVariableUsedInEntryPointsExt(field.name);
+
                 if (pVariable->pDecorators->Find("const")) {
                     m_pushConstants.fields.emplace_back(field);
+                    m_pushConstants.stages.insert(usedStages.begin(), usedStages.end());
                 }
                 else {
                     auto&& uniformBlock = m_uniformBlocks[blockName];
                     uniformBlock.fields.emplace_back(field);
+                    uniformBlock.stages.insert(usedStages.begin(), usedStages.end());
                 }
             }
             else if ((pDecorator = pVariable->pDecorators->Find("const"))) {
@@ -274,7 +279,8 @@ namespace SR_SRSL_NS {
         /// ------------------------------------------------------------------
 
         for (auto&& [defaultUniform, type] : SR_SRSL_DEFAULT_UNIFORMS) {
-            if (m_useStack->IsVariableUsedInEntryPoints(defaultUniform)) {
+            auto&& usedStages = m_useStack->IsVariableUsedInEntryPointsExt(defaultUniform);
+            if (!usedStages.empty()) {
                 SRSLUniformBlock::Field field;
 
                 field.name = defaultUniform;
@@ -283,11 +289,13 @@ namespace SR_SRSL_NS {
 
                 auto&& uniformBlock = m_uniformBlocks["BLOCK"];
                 uniformBlock.fields.emplace_back(field);
+                uniformBlock.stages.insert(usedStages.begin(), usedStages.end());
             }
         }
 
         for (auto&& [defaultPushConstant, type] : SR_SRSL_DEFAULT_PUSH_CONSTANTS) {
-            if (m_useStack->IsVariableUsedInEntryPoints(defaultPushConstant)) {
+            auto&& usedStages = m_useStack->IsVariableUsedInEntryPointsExt(defaultPushConstant);
+            if (!usedStages.empty()) {
                 SRSLUniformBlock::Field field;
 
                 field.name = defaultPushConstant;
@@ -295,6 +303,7 @@ namespace SR_SRSL_NS {
                 field.isPublic = false;
 
                 m_pushConstants.fields.emplace_back(field);
+                m_pushConstants.stages.insert(usedStages.begin(), usedStages.end());
             }
         }
 
@@ -322,7 +331,8 @@ namespace SR_SRSL_NS {
                 continue;
             }
 
-            if (!m_useStack->IsVariableUsedInEntryPoints(pVariable->GetName())) {
+            auto&& stages = m_useStack->IsVariableUsedInEntryPointsExt(pVariable->GetName());
+            if (stages.empty()) {
                 continue;
             }
 
@@ -331,6 +341,7 @@ namespace SR_SRSL_NS {
 
                 sampler.type = pVariable->GetType();
                 sampler.isPublic = bool(pVariable->pDecorators->Find("public"));
+                sampler.stages = std::move(stages);
 
                 if (auto&& pAttachment = pVariable->pDecorators->Find("attachment"); pAttachment && pAttachment->args.size() == 1) {
                     sampler.attachment = SR_UTILS_NS::LexicalCast<int32_t>(pAttachment->args.front()->token);
@@ -341,14 +352,18 @@ namespace SR_SRSL_NS {
         }
 
         for (auto&& [defaultSampler, type] : SR_SRSL_DEFAULT_SAMPLERS) {
-            if (m_useStack->IsVariableUsedInEntryPoints(defaultSampler)) {
-                SRSLSampler sampler;
-
-                sampler.type = type;
-                sampler.isPublic = false;
-
-                m_samplers[defaultSampler] = sampler;
+            auto&& stages = m_useStack->IsVariableUsedInEntryPointsExt(defaultSampler);
+            if (stages.empty()) {
+                continue;
             }
+
+            SRSLSampler sampler;
+
+            sampler.type = type;
+            sampler.isPublic = false;
+            sampler.stages = stages;
+
+            m_samplers[defaultSampler] = sampler;
         }
 
         return true;
@@ -372,7 +387,7 @@ namespace SR_SRSL_NS {
                 return false;
             }
 
-            auto&& path = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Shaders").Concat(m_createInfo.stages.at(stage));
+            auto&& path = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Shaders").Concat(m_createInfo.stages.at(stage).path);
 
             if (!path.Create() || !SR_UTILS_NS::FileSystem::WriteToFile(path, code)) {
                 SR_ERROR("SRSLShader::Export() : failed to write file!\n\tPath: " + path.ToString());
@@ -392,37 +407,71 @@ namespace SR_SRSL_NS {
     }
 
     bool SRSLShader::PrepareStages() {
+        /// расставляем биндинги всем данным в шейдере
+        {
+            uint64_t binding = 0;
+
+            for (auto&&[name, block] : m_uniformBlocks) {
+                block.binding = binding;
+                ++binding;
+            }
+
+            for (auto&&[samplerName, sampler] : m_samplers) {
+                sampler.binding = binding;
+                ++binding;
+            }
+        }
+
         for (auto&& [stage, entryPoint] : SR_SRSL_ENTRY_POINTS) {
-            if (!m_analyzedTree->pLexicalTree->FindFunction(entryPoint)) {
+            auto&& pFunction = m_analyzedTree->pLexicalTree->FindFunction(entryPoint);
+            if (!pFunction) {
                 continue;
             }
 
-            m_createInfo.stages[stage] = m_path.ToString() + "/shader." + SR_SRSL_STAGE_EXTENSIONS.at(stage);
+            m_createInfo.stages[stage].path = m_path.ToString() + "/shader." + SR_SRSL_STAGE_EXTENSIONS.at(stage);
+
+            /// блоки юниформ
+
+            for (auto&& [name, block] : m_uniformBlocks) {
+                if (block.stages.count(stage) == 0) {
+                    continue;
+                }
+
+                Uniform uniform = { };
+                uniform.binding = block.binding;
+                uniform.size = block.size;
+                uniform.stage = stage;
+                uniform.type = LayoutBinding::Uniform;
+
+                m_createInfo.uniforms.emplace_back(uniform);
+            }
+
+            /// текстуры/аттачменты
+
+            for (auto&& [name, sampler] : m_samplers) {
+                if (sampler.stages.count(stage) == 0) {
+                    continue;
+                }
+
+                Uniform uniform = { };
+                uniform.binding = sampler.binding;
+                uniform.size = 0;
+                uniform.stage = stage;
+
+                if (sampler.attachment >= 0) {
+                    uniform.type = LayoutBinding::Attachhment;
+                }
+                else {
+                    uniform.type = LayoutBinding::Sampler2D;
+                }
+
+                m_createInfo.uniforms.emplace_back(uniform);
+            }
         }
 
         auto&& vertexInfo = Vertices::GetVertexInfo(GetVertexType());
         m_createInfo.vertexAttributes = vertexInfo.m_attributes;
         m_createInfo.vertexDescriptions = vertexInfo.m_descriptions;
-
-        uint64_t binding = 0;
-
-        for (auto&& [name, block] : m_uniformBlocks) {
-            block.binding = binding;
-
-            for (auto&& field : block.fields) {
-                m_createInfo.uniforms.emplace_back(std::make_pair(
-                    binding,
-                    field.size
-                ));
-            }
-
-            ++binding;
-        }
-
-        for (auto&& [samplerName, sampler] : m_samplers) {
-            sampler.binding = binding;
-            ++binding;
-        }
 
         return true;
     }

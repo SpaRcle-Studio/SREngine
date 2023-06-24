@@ -89,6 +89,7 @@ namespace SR_GTYPES_NS {
                 pShader->FlushSamplers();
                 SR_FALLTHROUGH;
             case Memory::UBOManager::BindResult::Success:
+                pShader->FlushConstants();
                 m_pipeline->DrawIndices(m_countIndices);
                 break;
             case Memory::UBOManager::BindResult::Failed:
