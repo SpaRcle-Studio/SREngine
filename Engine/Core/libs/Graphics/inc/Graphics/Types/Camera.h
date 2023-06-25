@@ -91,7 +91,7 @@ namespace SR_GTYPES_NS {
          * Выбирается та камера, что ближе к нулю */
         int32_t m_priority = 0;
 
-        float_t m_far      = 300.f;
+        float_t m_far      = 750.f;
         float_t m_near     = 0.01f;
         float_t m_aspect   = 1.f;
         float_t m_FOV      = 90.f;

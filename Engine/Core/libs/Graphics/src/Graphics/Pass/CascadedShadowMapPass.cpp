@@ -56,8 +56,8 @@ namespace SR_GRAPH_NS {
         std::vector<float_t> cascadeSplits;
         cascadeSplits.resize(m_cascadesCount);
 
-        m_cascadeMatrices.resize(m_cascadesCount);
-        m_cascadeSplitDepths.resize(m_cascadesCount);
+        m_cascadeMatrices.resize(4);
+        m_cascadeSplitDepths.resize(4);
 
         const float_t nearClip = m_camera->GetNear();
         const float_t farClip = m_camera->GetFar();
@@ -127,7 +127,7 @@ namespace SR_GRAPH_NS {
             SR_MATH_NS::Matrix4x4 lightViewMatrix = SR_MATH_NS::Matrix4x4::LookAt(frustumCenter - lightDir * -minExtents.z, frustumCenter, SR_MATH_NS::FVector3(0.0f, 1.0f, 0.0f));
             SR_MATH_NS::Matrix4x4 lightOrthoMatrix = SR_MATH_NS::Matrix4x4::Ortho(minExtents.x, maxExtents.x, minExtents.y, maxExtents.y, 0.0f, maxExtents.z - minExtents.z);
 
-            m_cascadeSplitDepths[i] = (m_camera->GetNear() + splitDist * clipRange) * -1.0f;
+            m_cascadeSplitDepths[i] = (nearClip + splitDist * clipRange) * -1.0f;
             m_cascadeMatrices[i] = lightOrthoMatrix * lightViewMatrix;
 
             lastSplitDist = cascadeSplits[i];

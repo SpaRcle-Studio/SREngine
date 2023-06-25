@@ -58,6 +58,7 @@ namespace SR_GRAPH_NS {
     static constexpr uint64_t SHADER_DIRECTIONAL_LIGHT_POSITION = SR_COMPILE_TIME_CRC32_STR("DIRECTIONAL_LIGHT_POSITION");
     static constexpr uint64_t SHADER_SHADOW_CASCADE_INDEX = SR_COMPILE_TIME_CRC32_STR("SHADOW_CASCADE_INDEX");
     static constexpr uint64_t SHADER_CASCADE_LIGHT_SPACE_MATRICES = SR_COMPILE_TIME_CRC32_STR("CASCADE_LIGHT_SPACE_MATRICES");
+    static constexpr uint64_t SHADER_CASCADE_SPLITS = SR_COMPILE_TIME_CRC32_STR("CASCADE_SPLITS");
 
     typedef std::vector<std::pair<Vertices::Attribute, size_t>> VertexAttributes;
     typedef std::vector<SR_VERTEX_DESCRIPTION> VertexDescriptions;

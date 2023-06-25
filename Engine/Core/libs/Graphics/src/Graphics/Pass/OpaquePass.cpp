@@ -35,6 +35,7 @@ namespace SR_GRAPH_NS {
         }
         else if (m_cascadedShadowMapPass) {
             pShader->SetValue<false>(SHADER_CASCADE_LIGHT_SPACE_MATRICES, m_cascadedShadowMapPass->GetCascadeMatrices().data());
+            pShader->SetValue<false>(SHADER_CASCADE_SPLITS, m_cascadedShadowMapPass->GetSplitDepths().data());
         }
 
         Super::UseSharedUniforms(pShader);

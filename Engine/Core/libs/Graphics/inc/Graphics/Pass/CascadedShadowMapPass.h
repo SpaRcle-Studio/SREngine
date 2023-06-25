@@ -23,6 +23,7 @@ namespace SR_GRAPH_NS {
         bool Load(const SR_XML_NS::Node& passNode) override;
 
         SR_NODISCARD const std::vector<SR_MATH_NS::Matrix4x4>& GetCascadeMatrices() const { return m_cascadeMatrices; }
+        SR_NODISCARD const std::vector<float_t>& GetSplitDepths() const { return m_cascadeSplitDepths; }
 
     protected:
         void UseSharedUniforms(ShaderPtr pShader) override;

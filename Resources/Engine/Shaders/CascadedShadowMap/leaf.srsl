@@ -15,26 +15,25 @@ DepthTest true;
 
 [[shared]] vec3 normal;
 [[shared]] vec3 lightVec;
-[[shared]] vec3 viewVec;
-[[shared]] vec4 shadowCoord;
+[[shared]] vec3 viewPos;
 
-float textureProj(vec4 shadowCoord, vec2 offset) {
+float textureProj(vec4 shadowCoord, vec2 offset, uint cascadeIndex) {
 	float shadow = 1.0;
-	float bias = 0.00016;
+	float bias = 0.005;
 
 	if (shadowCoord.z > -1.0 && shadowCoord.z < 1.0) {
-		float dist = texture(shadowMap, vec3(shadowCoord.st + offset, 0.0)).r;
+		float dist = texture(shadowMap, vec3(shadowCoord.st + offset, cascadeIndex)).r;
 		if (shadowCoord.w > 0 && dist < shadowCoord.z - bias) {
-			shadow = 0.3;
+			shadow = 0.2;
 		}
 	}
 
 	return shadow;
 }
 
-float filterPCF(vec4 sc) {
+float filterPCF(vec4 sc, uint cascadeIndex) {
 	ivec2 texDim = textureSize(shadowMap, 0).xy;
-	float scale = 1.5;
+	float scale = 0.75;
 	float dx = scale * 1.0 / float(texDim.x);
 	float dy = scale * 1.0 / float(texDim.y);
 
@@ -46,7 +45,7 @@ float filterPCF(vec4 sc) {
 	{
 		for (int y = -range; y <= range; y++)
 		{
-			shadowFactor += textureProj(sc, vec2(dx * x, dy * y));
+			shadowFactor += textureProj(sc, vec2(dx * x, dy * y), cascadeIndex);
 			count++;
 		}
 	}
@@ -57,23 +56,13 @@ float filterPCF(vec4 sc) {
 void fragment() {
     vec3 diffuseColor = texture(diffuse, UV).rgb * color.rgb;
 
-	/// float shadow = textureProj(shadowCoord / shadowCoord.w, vec2(0.0));
-	float shadow = filterPCF(shadowCoord / shadowCoord.w);
+    uint cascadeIndex = 0;
 
-    vec3 N = normalize(normal);
-    vec3 L = normalize(lightVec);
-    vec3 V = normalize(viewVec);
-    vec3 R = normalize(-reflect(L, N));
-    vec3 lighting = max(dot(N, L), 0.9 /* ambient */) * diffuseColor;
-
-    COLOR = vec4(lighting * vec3(shadow), 1.0);
-}
-
-void vertex() {
-    vec4 pos = MODEL_MATRIX * vec4(VERTEX, 1.0);
-    normal = mat3(MODEL_MATRIX) * NORMAL;
-    lightVec = normalize(DIRECTIONAL_LIGHT_POSITION - VERTEX);
-    viewVec = -pos.xyz;
+    for (uint i = 0; i < 3; ++i) {
+        if (viewPos.z < CASCADE_SPLITS[i]) {
+            cascadeIndex = i + 1;
+        }
+    }
 
     mat4 biasMat = mat4(
         0.5, 0.0, 0.0, 0.0,
@@ -82,7 +71,36 @@ void vertex() {
         0.5, 0.5, 0.0, 1.0
 	);
 
-    shadowCoord = (biasMat * CASCADE_LIGHT_SPACE_MATRICES[1] * MODEL_MATRIX) * vec4(VERTEX, 1.0);
+    vec4 shadowCoord = (biasMat * CASCADE_LIGHT_SPACE_MATRICES[cascadeIndex]) * MODEL_MATRIX * vec4(VERTEX, 1.0);
 
+	/// float shadow = textureProj(shadowCoord / shadowCoord.w, vec2(0.0), cascadeIndex);
+	float shadow = filterPCF(shadowCoord / shadowCoord.w, cascadeIndex);
+
+    vec3 N = normalize(normal);
+    vec3 L = normalize(lightVec);
+    vec3 V = normalize(VIEW_POSITION);
+    vec3 R = normalize(-reflect(L, N));
+    vec3 lighting = max(dot(N, L), 0.9 /* ambient */) * diffuseColor;
+
+    COLOR = vec4(lighting * vec3(shadow), 1.0);
+
+    /// if (cascadeIndex == 0) {
+    ///     COLOR.rgb *= vec3(1.0, 0.25, 0.25);
+    /// }
+    /// else if (cascadeIndex == 1) {
+    ///     COLOR.rgb *= vec3(0.25, 1.0, 0.25);
+    /// }
+    /// else if (cascadeIndex == 2) {
+    ///     COLOR.rgb *= vec3(0.25, 0.25, 1.0);
+    /// }
+    /// else if (cascadeIndex == 3) {
+    ///     COLOR.rgb *= vec3(1.0, 1.0, 0.25);
+    /// }
+}
+
+void vertex() {
+    normal = mat3(MODEL_MATRIX) * NORMAL;
+    lightVec = normalize(DIRECTIONAL_LIGHT_POSITION - VERTEX);
+    viewPos = (VIEW_MATRIX * MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
     OUT_POSITION = PROJECTION_MATRIX * VIEW_MATRIX * MODEL_MATRIX * vec4(VERTEX, 1.0);
 }
