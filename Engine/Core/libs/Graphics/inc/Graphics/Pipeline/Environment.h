@@ -109,6 +109,7 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD virtual void* GetCurrentCmd() const noexcept { return nullptr; }
         SR_NODISCARD int32_t GetCurrentFramebufferId() const noexcept { return m_currentFBOid; }
         SR_NODISCARD virtual void* GetCurrentFBOHandle() const { return nullptr; }
+        SR_NODISCARD virtual std::set<void*> GetFBOHandles() const { return std::set<void*>(); }
 
         virtual void OnMultiSampleChanged();
         virtual void UpdateMultiSampling() { }

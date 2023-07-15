@@ -10,7 +10,7 @@
 #include <Utils/Math/Rect.h>
 #include <Utils/Types/DataStorage.h>
 
-namespace SR_GRAPH_NS::GUI {
+namespace SR_GRAPH_GUI_NS {
     static ImVec4 MakeDisableColor(ImVec4 color) {
         color.w /= 2;
         return color;
@@ -667,6 +667,8 @@ namespace SR_GRAPH_NS::GUI {
     static bool Button(const std::string& label, uint32_t index = 0) {
         return Button(label, ImVec4(0, 0, 0, 0), ImVec4(0, 0, 0, 0), index);
     }
+
+    bool RadioButton(const char* label, bool active, float_t radius = 1.f);
 }
 
 /*

@@ -172,6 +172,13 @@ namespace SR_CORE_NS::GUI {
         }
 
         const uint64_t id = root->GetEntityId();
+
+        if (SR_GRAPH_GUI_NS::RadioButton(SR_FORMAT_C("##HierarchyEnableGM%i", id), root->IsEnabled(), 0.75f)) {
+            root->SetEnabled(!root->IsEnabled());
+        }
+
+        ImGui::SameLine();
+
         const bool open = ImGui::TreeNodeEx((void*)(intptr_t)id, flags, "%s", name.c_str());
 
         if (root->GetPrefab()) {

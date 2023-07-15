@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<Technique Name="VarianceShadowMap">
+<Technique Name="CascadedShadowMap">
     <ColorBufferPass Directional="false">
         <FramebufferSettings DynamicResizing="true" DepthEnabled="true" SmoothSamples="1">
             <Size X="0" Y="0"/>

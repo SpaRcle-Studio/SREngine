@@ -9,6 +9,7 @@
 #include <Graphics/Types/Framebuffer.h>
 #include <Graphics/Types/Skybox.h>
 
+#include <Graphics/Memory/ShaderProgramManager.h>
 #include <Graphics/Render/RenderTechnique.h>
 
 namespace SR_CORE_GUI_NS {
@@ -131,7 +132,7 @@ namespace SR_CORE_GUI_NS {
     void EngineStatistics::VideoMemoryPage() {
         if (ImGui::BeginTabItem("Video memory")) {
             auto&& pContext = GetContext();
-            auto&& shaders = pContext->GetShaders();
+
             auto&& framebuffers = pContext->GetFramebuffers();
             auto&& textures = pContext->GetTextures();
             auto&& techniques = pContext->GetRenderTechniques();
@@ -139,12 +140,27 @@ namespace SR_CORE_GUI_NS {
             auto&& skyboxes = pContext->GetSkyboxes();
 
             if (ImGui::CollapsingHeader("Shaders")) {
+                auto&& shaders = pContext->GetShaders();
+
+                auto&& shadersManager = SR_GRAPH_NS::Memory::ShaderProgramManager::Instance();
+
                 if (ImGui::BeginTable("##ShadersTable", 1)) {
                     for (auto&& pShader : shaders) {
                         ImGui::TableNextRow();
 
+                        auto&& virtualProgram = pShader->GetVirtualProgram();
+
                         ImGui::TableSetColumnIndex(0);
-                        ImGui::Text("%s", pShader->GetResourceId().c_str());
+                        ImGui::Text("%s [%i]", pShader->GetResourceId().c_str(), virtualProgram);
+
+                        if (shadersManager.HasProgram(virtualProgram)) {
+                            auto&& pVirtualInfo = shadersManager.GetInfo(virtualProgram);
+
+                            for (auto&& [identifier, program] : pVirtualInfo->m_data) {
+                                ImGui::Text("\t[%llu] = %i", identifier, program.id);
+                            }
+                        }
+
                         ImGui::Separator();
                     }
 

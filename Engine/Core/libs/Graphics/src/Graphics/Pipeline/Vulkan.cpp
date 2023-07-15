@@ -822,6 +822,29 @@ namespace SR_GRAPH_NS {
         return GetSamplesCount();
     }
 
+    std::set<void*> Vulkan::GetFBOHandles() const {
+        std::set<void*> handles;
+
+        if (void* pHandle = m_kernel->GetRenderPass()) {
+            handles.insert(pHandle);
+        }
+
+        for (uint64_t i = 0; i < m_memory->m_countFBO.first; ++i) {
+            auto&& pFBO = m_memory->m_FBOs[i];
+            if (!pFBO) {
+                continue;
+            }
+
+            for (auto&& layer : pFBO->GetLayers()) {
+                if (auto&& pVkFrameBuffer = layer->GetFramebuffer()) {
+                    handles.insert(pVkFrameBuffer);
+                }
+            }
+        }
+
+        return handles;
+    }
+
     void* Vulkan::GetCurrentFBOHandle() const {
         void* pHandle = m_kernel->GetRenderPass(); /// ну типо кадровый буфер
 

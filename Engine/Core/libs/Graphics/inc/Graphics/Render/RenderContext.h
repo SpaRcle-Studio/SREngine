@@ -34,6 +34,7 @@ namespace SR_GRAPH_NS {
        Techniques,
        Materials,
        Skyboxes,
+       ShadersGC,
        End
     );
 

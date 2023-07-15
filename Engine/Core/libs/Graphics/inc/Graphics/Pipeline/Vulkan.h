@@ -160,6 +160,7 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD VulkanTools::MemoryManager* GetMemoryManager() const { return m_memory; }
         SR_NODISCARD EvoVulkan::Core::VulkanKernel* GetKernel() const { return m_kernel; }
         SR_NODISCARD void* GetCurrentFBOHandle() const override;
+        SR_NODISCARD std::set<void*> GetFBOHandles() const override;
 
         uint64_t GetVRAMUsage() override;
 

@@ -22,6 +22,13 @@ namespace SR_GTYPES_NS {
     class Texture;
     class Shader;
 
+    SR_ENUM_NS_CLASS_T(MaterialShader, uint16_t,
+        Simple,
+        Shadows, SSAO, HDAO, HBAO, VXAO, Bloom,
+        SSAOShadows, HDAOhadows, HBAOShadows, VXAOShadows,
+        SSAOShadowsBloom
+    );
+
     class Material : public SR_UTILS_NS::IResource {
         friend class Mesh;
         friend class Mesh3D;
@@ -47,7 +54,6 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD MaterialProperty* GetProperty(const std::string& id);
         SR_NODISCARD MaterialProperty* GetProperty(uint64_t hashId);
         SR_NODISCARD SR_UTILS_NS::Path GetAssociatedPath() const override;
-
 
         void SetTexture(MaterialProperty* property, Texture* pTexture);
 

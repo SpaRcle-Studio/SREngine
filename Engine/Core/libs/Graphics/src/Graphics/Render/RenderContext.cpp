@@ -42,6 +42,9 @@ namespace SR_GRAPH_NS {
             case RCUpdateQueueState::Techniques: dirty |= Update(m_techniques); break;
             case RCUpdateQueueState::Materials: dirty |= Update(m_materials); break;
             case RCUpdateQueueState::Skyboxes: dirty |= Update(m_skyboxes); break;
+            case RCUpdateQueueState::ShadersGC:
+                SR_GRAPH_NS::Memory::ShaderProgramManager::Instance().CollectUnusedShaders();
+                break;
             case RCUpdateQueueState::End:
                 m_updateState = RCUpdateQueueState::Begin;
                 break;

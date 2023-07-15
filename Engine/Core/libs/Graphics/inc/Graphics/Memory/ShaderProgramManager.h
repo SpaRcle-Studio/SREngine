@@ -67,11 +67,16 @@ namespace SR_GRAPH_NS::Memory {
         SR_NODISCARD VirtualProgram Allocate(const SRShaderCreateInfo& createInfo);
 
         bool FreeProgram(VirtualProgram* program);
+        bool FreeProgram(VirtualProgram program);
+
+        void CollectUnusedShaders();
 
         ShaderBindResult BindProgram(VirtualProgram virtualProgram) noexcept;
 
+        SR_NODISCARD const VirtualProgramInfo* GetInfo(VirtualProgram virtualProgram) const noexcept;
         SR_NODISCARD ShaderProgram GetProgram(VirtualProgram virtualProgram) const noexcept;
-        SR_NODISCARD ShaderProgram IsAvailable(VirtualProgram virtualProgram) const noexcept;
+        SR_NODISCARD bool IsAvailable(VirtualProgram virtualProgram) const noexcept;
+        SR_NODISCARD bool HasProgram(VirtualProgram virtualProgram) const noexcept;
 
     private:
         SR_NODISCARD VirtualProgramInfo::Identifier GetCurrentIdentifier() const;

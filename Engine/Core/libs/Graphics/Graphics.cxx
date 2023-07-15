@@ -36,6 +36,7 @@
 #include "../Graphics/src/Graphics/GUI/NodeWidget.cpp"
 #include "../Graphics/src/Graphics/GUI/ImNodeEditorUtils.cpp"
 #include "../Graphics/src/Graphics/GUI/NodeBuilder.cpp"
+#include "../Graphics/src/Graphics/GUI/Utils.cpp"
 
 #include "../Graphics/src/Graphics/Lighting/DirectionalLight.cpp"
 #include "../Graphics/src/Graphics/Lighting/ILightComponent.cpp"

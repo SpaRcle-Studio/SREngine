@@ -143,20 +143,23 @@ namespace SR_CORE_NS::GUI {
         auto&& dir = SR_UTILS_NS::Input::Instance().GetMouseDrag();
         auto&& wheel = SR_UTILS_NS::Input::Instance().GetMouseWheel() * wheelSpeed;
 
-        if (SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::W)) {
-            m_velocity += SR_UTILS_NS::Transform3D::FORWARD * velocitySpeed;
-        }
+        if (!SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::Ctrl))
+        {
+            if (SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::W)) {
+                m_velocity += SR_UTILS_NS::Transform3D::FORWARD * velocitySpeed;
+            }
 
-        if (SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::S)) {
-            m_velocity -= SR_UTILS_NS::Transform3D::FORWARD * velocitySpeed;
-        }
+            if (SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::S)) {
+                m_velocity -= SR_UTILS_NS::Transform3D::FORWARD * velocitySpeed;
+            }
 
-        if (SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::A)) {
-            m_velocity -= SR_UTILS_NS::Transform3D::RIGHT * velocitySpeed;
-        }
+            if (SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::A)) {
+                m_velocity -= SR_UTILS_NS::Transform3D::RIGHT * velocitySpeed;
+            }
 
-        if (SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::D)) {
-            m_velocity += SR_UTILS_NS::Transform3D::RIGHT * velocitySpeed;
+            if (SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::D)) {
+                m_velocity += SR_UTILS_NS::Transform3D::RIGHT * velocitySpeed;
+            }
         }
 
         if (m_camera) {

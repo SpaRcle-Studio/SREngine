@@ -112,6 +112,18 @@ namespace SR_GRAPH_NS {
                 continue;
             }
 
+            /// Если нет ни одного активного меша, то нет смысла идти дальше
+            for (auto&& [key, meshGroup] : subCluster) {
+                for (auto&& pMesh : meshGroup) {
+                    if (pMesh->IsMeshActive()) {
+                        goto goDraw;
+                    }
+                }
+            }
+
+            continue;
+
+        goDraw:
             if (pShader->Use() == ShaderBindResult::Failed) {
                 continue;
             }

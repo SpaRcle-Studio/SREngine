@@ -51,6 +51,7 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD SR_UTILS_NS::Path GetAssociatedPath() const override;
         SR_DEPRECATED SR_NODISCARD int32_t GetID();
         SR_NODISCARD int32_t GetId() noexcept;
+        SR_NODISCARD ShaderProgram GetVirtualProgram() const noexcept { return m_shaderProgram; }
         SR_NODISCARD bool Ready() const;
         SR_NODISCARD uint64_t GetUBOBlockSize() const;
         SR_NODISCARD uint32_t GetSamplersCount() const;
