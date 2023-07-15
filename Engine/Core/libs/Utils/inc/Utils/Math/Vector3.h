@@ -7,7 +7,6 @@
 
 #include <Utils/Math/Vector2.h>
 #include <Utils/Math/Quaternion.h>
-#include "../../../../../../../cmake-build-checked/Engine/Core/libs/Utils/include/Utils/Math/Vector3.h"
 
 namespace SR_MATH_NS {
     template<typename T> struct SR_DLL_EXPORT Vector3 {
