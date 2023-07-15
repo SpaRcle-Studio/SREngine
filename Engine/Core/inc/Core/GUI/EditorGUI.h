@@ -90,7 +90,8 @@ namespace SR_CORE_GUI_NS {
         void SetDockingEnabled(bool value) { m_useDocking = value; }
 
         void Draw() override;
-        void Update();
+        void Update(float_t dt);
+        void FixedUpdate();
         void Save();
 
         void CacheScenePath(const SR_UTILS_NS::Path& scenePath);

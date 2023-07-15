@@ -480,18 +480,25 @@ namespace SR_CORE_NS {
         SR_HTYPES_NS::Time::Instance().Update();
 
         const auto now = SR_HTYPES_NS::Time::Instance().Now();
-        const auto deltaTime = now - m_timeStart;
-        const auto dt = static_cast<float_t>(deltaTime.count()) / SR_CLOCKS_PER_SEC / SR_CLOCKS_PER_SEC;
+        const auto deltaTime = now - m_timeStart; /// nanoseconds
+        const auto dt = static_cast<float_t>(deltaTime.count()) / SR_CLOCKS_PER_SEC / SR_CLOCKS_PER_SEC / SR_CLOCKS_PER_SEC; /// Seconds
         m_timeStart = now;
 
         if (IsNeedReloadResources()) {
             SR_UTILS_NS::ResourceManager::Instance().ReloadResources(dt);
         }
 
-        auto&& readLock = m_sceneQueue.ReadLock();
+        /// синхронно отрисовываем сцену
+        {
+            auto&& readLock = m_sceneQueue.ReadLock();
 
-        if (m_engineScene) {
-            m_engineScene->Draw(dt);
+            if (m_engineScene) {
+                m_engineScene->Draw(dt);
+            }
+        }
+
+        if (m_editor && m_window->IsWindowFocus()) {
+            m_editor->Update(dt);
         }
     }
 
@@ -549,7 +556,6 @@ namespace SR_CORE_NS {
         if (m_window->IsWindowFocus())
         {
             SR_UTILS_NS::Input::Instance().Check();
-
             m_input->Check();
 
             bool lShiftPressed = SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::LShift);
@@ -589,7 +595,7 @@ namespace SR_CORE_NS {
         }
 
         if (m_editor && m_window->IsWindowFocus()) {
-            m_editor->Update();
+            m_editor->FixedUpdate();
         }
     }
 

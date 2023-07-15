@@ -32,7 +32,7 @@ namespace SR_CORE_NS::GUI {
     public:
         void SetScene(const ScenePtr& scene) override;
         void Enable(bool value);
-        void Update();
+        void FixedUpdate() override;
 
         void OnMouseDown(const SR_UTILS_NS::MouseInputData* data) override;
         void OnMouseUp(const SR_UTILS_NS::MouseInputData* data) override;
@@ -59,14 +59,16 @@ namespace SR_CORE_NS::GUI {
 
         WindowPtr m_window;
 
+        SR_MATH_NS::FVector3 m_velocity;
+        SR_MATH_NS::FVector3 m_rotation;
+        SR_MATH_NS::FVector3 m_translation;
+
         Hierarchy* m_hierarchy = nullptr;
         Guizmo* m_guizmo = nullptr;
-        int32_t m_id;
+        int32_t m_id = SR_ID_INVALID;
         GameObjectPtr m_camera;
         SR_WORLD_NS::Scene::Ptr m_scene;
         std::atomic<bool> m_enabled = false;
-        SR_MATH_NS::FVector3 m_rotation;
-        SR_MATH_NS::FVector3 m_translation;
         bool m_updateNonHoveredSceneViewer = false;
 
     };

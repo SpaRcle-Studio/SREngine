@@ -101,6 +101,10 @@ namespace SR_CORE_NS {
             pSceneBuilder->Build(isPaused);
             pSceneBuilder->Update(dt);
 
+            /// если по какой-то причине получилось так, что dt большой, то обрезаем его
+            ///TODO::::::::::::::::::::::::::::::::::::::::::::::::m_accumulator += SR_MIN(dt, m_updateFrequency);
+            m_accumulator += dt;
+
             /// fixed update
             if (m_accumulator >= m_updateFrequency)
             {
@@ -118,9 +122,6 @@ namespace SR_CORE_NS {
                     m_accumulator -= m_updateFrequency;
                 }
             }
-
-            /// если по какой-то причине получилось так, что dt большой, то обновляем максимум 120 раз
-            m_accumulator += SR_MIN(dt, m_updateFrequency * 120);
 
             pScene.Unlock();
         }
@@ -155,7 +156,7 @@ namespace SR_CORE_NS {
 
     void EngineScene::SetSpeed(float_t speed) {
         m_speed = speed;
-        m_updateFrequency = (1.f / (60.f * m_speed)) * SR_CLOCKS_PER_SEC;
+        m_updateFrequency = (1.f / (60.f * m_speed));
         m_accumulator = m_updateFrequency;
     }
 

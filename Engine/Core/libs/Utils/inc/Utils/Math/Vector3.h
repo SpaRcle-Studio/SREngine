@@ -7,6 +7,7 @@
 
 #include <Utils/Math/Vector2.h>
 #include <Utils/Math/Quaternion.h>
+#include "../../../../../../../cmake-build-checked/Engine/Core/libs/Utils/include/Utils/Math/Vector3.h"
 
 namespace SR_MATH_NS {
     template<typename T> struct SR_DLL_EXPORT Vector3 {
@@ -287,6 +288,14 @@ namespace SR_MATH_NS {
 
         SR_NODISCARD T SquaredNorm() const noexcept {
             return x * x + y * y + z * z;
+        }
+
+        SR_NODISCARD Vector3<T> Clamp(const Vector3<T>& upper, const Vector3<T>& lover) const {
+            return Vector3<T>(
+                SR_CLAMP(x, upper.x, lover.x),
+                SR_CLAMP(y, upper.y, lover.y),
+                SR_CLAMP(z, upper.z, lover.z)
+            );
         }
 
         SR_NODISCARD Quaternion ToQuat() const;

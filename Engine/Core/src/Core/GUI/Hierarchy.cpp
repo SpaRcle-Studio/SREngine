@@ -78,7 +78,7 @@ namespace SR_CORE_NS::GUI {
         }
     }
 
-    void Hierarchy::Update() {
+    void Hierarchy::Update(float_t dt) {
         SR_LOCK_GUARD
 
         for (auto pIt = m_selected.begin(); pIt != m_selected.end(); ) {
@@ -89,7 +89,6 @@ namespace SR_CORE_NS::GUI {
                 pIt = m_selected.erase(pIt);
             }
         }
-
     }
 
     void Hierarchy::SetScene(const SR_WORLD_NS::Scene::Ptr& scene) {

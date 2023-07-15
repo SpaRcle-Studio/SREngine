@@ -63,6 +63,9 @@ namespace SR_GRAPH_NS::GUI {
         virtual void Open();
         virtual void Close();
 
+        virtual void Update(float_t dt) { }
+        virtual void FixedUpdate() { }
+
         virtual void SetScene(const ScenePtr& scene) { }
 
         void DrawAsSubWindow();

@@ -124,34 +124,61 @@ namespace SR_CORE_NS::GUI {
         }
     }
 
-    void SceneViewer::Update() {
-        if (!IsOpen() || (!IsHovered() && !m_updateNonHoveredSceneViewer))
+    void SceneViewer::FixedUpdate() {
+        m_velocity *= 0.8f;
+
+        if (!m_velocity.Empty() && m_camera) {
+            m_camera->GetTransform()->Translate(m_velocity);
+        }
+
+        if (!IsOpen() || (!IsHovered() && !m_updateNonHoveredSceneViewer)) {
             return;
+        }
 
-        float_t speed = 0.1f;
-        auto dir = SR_UTILS_NS::Input::Instance().GetMouseDrag() * speed;
-        auto wheel = SR_UTILS_NS::Input::Instance().GetMouseWheel() * speed;
+        constexpr float_t seekSpeed = 0.1f / 10.f;
+        constexpr float_t wheelSpeed = 4.0f / 10.f;
+        constexpr float_t rotateSpeed = 1.5f / 10.f;
+        constexpr float_t velocitySpeed = 2.0f / 10.f;
 
-        if (m_camera.RecursiveLockIfValid()) {
+        auto&& dir = SR_UTILS_NS::Input::Instance().GetMouseDrag();
+        auto&& wheel = SR_UTILS_NS::Input::Instance().GetMouseWheel() * wheelSpeed;
+
+        if (SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::W)) {
+            m_velocity += SR_UTILS_NS::Transform3D::FORWARD * velocitySpeed;
+        }
+
+        if (SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::S)) {
+            m_velocity -= SR_UTILS_NS::Transform3D::FORWARD * velocitySpeed;
+        }
+
+        if (SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::A)) {
+            m_velocity -= SR_UTILS_NS::Transform3D::RIGHT * velocitySpeed;
+        }
+
+        if (SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::D)) {
+            m_velocity += SR_UTILS_NS::Transform3D::RIGHT * velocitySpeed;
+        }
+
+        if (m_camera) {
             if (wheel != 0) {
                 m_camera->GetTransform()->Translate(SR_UTILS_NS::Transform3D::FORWARD * wheel);
             }
 
             if (SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::MouseRight)) {
-                m_camera->GetTransform()->GlobalRotate(dir.y, dir.x, 0.0);
+                m_camera->GetTransform()->GlobalRotate(dir.y * rotateSpeed, dir.x * rotateSpeed, 0.0);
             }
 
             if (SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::MouseMiddle)) {
-                auto right = SR_UTILS_NS::Transform3D::RIGHT * speed;
-                auto up = SR_UTILS_NS::Transform3D::UP * speed;
+                auto right = SR_UTILS_NS::Transform3D::RIGHT * seekSpeed;
+                auto up = SR_UTILS_NS::Transform3D::UP * seekSpeed;
 
                 m_camera->GetTransform()->Translate(
                         (up * dir.y) + (right * -dir.x)
                 );
             }
-
-            m_camera.Unlock();
         }
+
+        m_velocity = m_velocity.Clamp(SR_MATH_NS::FVector3(1), SR_MATH_NS::FVector3(-1));
     }
 
     void SceneViewer::DrawTexture(SR_MATH_NS::IVector2 winSize, SR_MATH_NS::IVector2 texSize, uint32_t id, bool centralize) {

@@ -21,6 +21,10 @@ namespace SR_GRAPH_NS {
 
     bool CascadedShadowMapPass::Load(const SR_XML_NS::Node& passNode) {
         m_cascadesCount = passNode.TryGetAttribute("Cascades").ToUInt64(4);
+        m_cascadeSplitLambda = passNode.TryGetAttribute("SplitLambda").ToFloat(0.95);
+        m_usePerspective = passNode.TryGetAttribute("UsePerspective").ToBool(false);
+        m_near = passNode.TryGetAttribute("Near").ToFloat(0.1f);
+        m_far = passNode.TryGetAttribute("Far").ToFloat(100.f);
         return Super::Load(passNode);
     }
 
@@ -38,7 +42,9 @@ namespace SR_GRAPH_NS {
     void CascadedShadowMapPass::UseUniforms(IMeshClusterPass::ShaderPtr pShader, IMeshClusterPass::MeshPtr pMesh) {
         pMesh->UseModelMatrix();
 
-        UpdateCascades();
+        if (CheckCamera()) {
+            UpdateCascades();
+        }
 
         pShader->SetValue<false>(SHADER_CASCADE_LIGHT_SPACE_MATRICES, m_cascadeMatrices.data());
 
@@ -47,10 +53,6 @@ namespace SR_GRAPH_NS {
     }
 
     void CascadedShadowMapPass::UpdateCascades() {
-        if (!m_camera) {
-            return;
-        }
-
         SR_MATH_NS::FVector3 lightPos = GetRenderScene()->GetLightSystem()->m_position;
 
         std::vector<float_t> cascadeSplits;
@@ -59,12 +61,10 @@ namespace SR_GRAPH_NS {
         m_cascadeMatrices.resize(4);
         m_cascadeSplitDepths.resize(4);
 
-        const float_t nearClip = m_camera->GetNear();
-        const float_t farClip = m_camera->GetFar();
-        const float_t clipRange = farClip - nearClip;
+        const float_t clipRange = m_far - m_near;
 
-        const float_t minZ = nearClip;
-        const float_t maxZ = nearClip + clipRange;
+        const float_t minZ = m_near;
+        const float_t maxZ = m_near + clipRange;
 
         const float_t range = maxZ - minZ;
         const float_t ratio = maxZ / minZ;
@@ -74,7 +74,7 @@ namespace SR_GRAPH_NS {
             const float_t log = minZ * std::pow(ratio, p);
             const float_t uniform = minZ + range * p;
             const float_t d = m_cascadeSplitLambda * (log - uniform) + uniform;
-            cascadeSplits[i] = (d - nearClip) / clipRange;
+            cascadeSplits[i] = (d - m_near) / clipRange;
         }
 
         float_t lastSplitDist = 0.0;
@@ -125,10 +125,17 @@ namespace SR_GRAPH_NS {
             SR_MATH_NS::FVector3 lightDir = (-lightPos).Normalize();
 
             SR_MATH_NS::Matrix4x4 lightViewMatrix = SR_MATH_NS::Matrix4x4::LookAt(frustumCenter - lightDir * -minExtents.z, frustumCenter, SR_MATH_NS::FVector3(0.0f, 1.0f, 0.0f));
-            SR_MATH_NS::Matrix4x4 lightOrthoMatrix = SR_MATH_NS::Matrix4x4::Ortho(minExtents.x, maxExtents.x, minExtents.y, maxExtents.y, 0.0f, maxExtents.z - minExtents.z);
 
-            m_cascadeSplitDepths[i] = (nearClip + splitDist * clipRange) * -1.0f;
-            m_cascadeMatrices[i] = lightOrthoMatrix * lightViewMatrix;
+            m_cascadeSplitDepths[i] = (m_near + splitDist * clipRange) * -1.0f;
+
+            if (m_usePerspective) {
+                /// TODO: not works
+                m_cascadeMatrices[i] = m_camera->GetProjectionRef() * lightViewMatrix;
+            }
+            else {
+                auto&& lightOrthoMatrix = SR_MATH_NS::Matrix4x4::Ortho(minExtents.x, maxExtents.x, minExtents.y, maxExtents.y, 0.0f, maxExtents.z - minExtents.z);
+                m_cascadeMatrices[i] = lightOrthoMatrix * lightViewMatrix;
+            }
 
             lastSplitDist = cascadeSplits[i];
         }
@@ -182,5 +189,32 @@ namespace SR_GRAPH_NS {
     void CascadedShadowMapPass::UseConstants(IMeshClusterPass::ShaderPtr pShader) {
         pShader->SetConstInt(SHADER_SHADOW_CASCADE_INDEX, m_currentCascade);
         Super::UseConstants(pShader);
+    }
+
+    bool CascadedShadowMapPass::CheckCamera() {
+        if (!m_camera) {
+            return false;
+        }
+
+        if (m_cameraPosition.Distance(m_camera->GetPosition()) > 1.0) {
+            goto dirty;
+        }
+
+        if (m_cameraRotation.Distance(m_camera->GetRotation()) > 10.0) {
+            goto dirty;
+        }
+
+        if (m_screenSize != m_camera->GetSize()) {
+            goto dirty;
+        }
+
+        return false;
+
+    dirty:
+        m_cameraPosition = m_camera->GetPosition();
+        m_cameraRotation = m_camera->GetRotation();
+        m_screenSize = m_camera->GetSize();
+
+        return true;
     }
 }

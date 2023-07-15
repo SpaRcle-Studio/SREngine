@@ -57,7 +57,10 @@ namespace SR_GRAPH_NS {
 
         RG8_UNORM,
 
-        D16_UNORM
+        D16_UNORM,
+        D24_UNORM_S8_UINT,
+        D32_SFLOAT,
+        D32_SFLOAT_S8_UINT
     );
 
     struct ColorLayer {

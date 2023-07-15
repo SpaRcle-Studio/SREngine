@@ -9,6 +9,7 @@
 
 namespace SR_MATH_NS {
     template<typename T> struct Vector3;
+    template<typename T> struct Vector4;
 
     class Matrix4x4;
 
@@ -28,6 +29,7 @@ namespace SR_MATH_NS {
         };
     public:
         SR_NODISCARD SR_FORCE_INLINE glm::quat ToGLM() const noexcept { return self; }
+        SR_NODISCARD Vector4<Unit> Vector() const noexcept;
         SR_NODISCARD Matrix4x4 ToMat4x4() const;
         SR_NODISCARD SR_FORCE_INLINE glm::mat4 ToMat4x4GLM() const noexcept { return mat4_cast(self); }
         SR_NODISCARD Vector3<T> EulerAngle() const;
@@ -117,6 +119,12 @@ namespace SR_MATH_NS {
                 SR_EQUALS(y, q.y) &&
                 SR_EQUALS(z, q.z) &&
                 SR_EQUALS(w, q.w);
+        }
+
+        SR_NODISCARD Unit SR_FASTCALL Distance(const Quaternion& q) const;
+
+        SR_NODISCARD Unit SR_FASTCALL Angle(const Quaternion& q) const {
+            return Distance(q);
         }
 
         SR_NODISCARD bool IsFinite() const noexcept {

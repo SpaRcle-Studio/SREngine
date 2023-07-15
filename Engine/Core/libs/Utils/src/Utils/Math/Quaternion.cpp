@@ -132,4 +132,13 @@ namespace SR_MATH_NS {
     Unit Quaternion::SquaredNorm() const noexcept {
         return w * w + x * x + y * y + z * z;
     }
+
+    Vector4 <Unit> Quaternion::Vector() const noexcept {
+        return Vector4<Unit>(x, y, z, w);
+    }
+
+    Unit Quaternion::Distance(const Quaternion& q) const {
+        auto&& qd = Inverse() * q;
+        return 2 * atan2(qd.Vector().Length(), qd.W());
+    }
 }

@@ -27,7 +27,7 @@ namespace SR_CORE_NS::GUI {
         ~Inspector() override = default;
 
     public:
-        void Update();
+        void Update(float_t dt) override;
 
         void SetScene(const SR_WORLD_NS::Scene::Ptr& scene) override;
 

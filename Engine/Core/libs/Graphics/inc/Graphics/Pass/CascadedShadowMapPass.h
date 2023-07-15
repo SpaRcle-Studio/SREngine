@@ -30,15 +30,24 @@ namespace SR_GRAPH_NS {
         void UseConstants(ShaderPtr pShader) override;
         void UseUniforms(ShaderPtr pShader, MeshPtr pMesh) override;
 
-        SR_NODISCARD MeshClusterTypeFlag GetClusterType() const noexcept override;
-
-    private:
+        bool CheckCamera();
         void UpdateCascades();
 
-    private:
+        SR_NODISCARD MeshClusterTypeFlag GetClusterType() const noexcept override;
+
+    protected:
+        SR_MATH_NS::FVector3 m_cameraPosition;
+        SR_MATH_NS::Quaternion m_cameraRotation;
+        SR_MATH_NS::UVector2 m_screenSize;
+
+        float_t m_near = 0.f;
+        float_t m_far = 0.f;
+
         uint32_t m_currentCascade = 0;
         uint32_t m_cascadesCount = 0;
         float_t m_cascadeSplitLambda = 0.95f;
+
+        bool m_usePerspective = false;
 
         std::vector<SR_MATH_NS::Matrix4x4> m_cascadeMatrices;
         std::vector<float_t> m_cascadeSplitDepths;

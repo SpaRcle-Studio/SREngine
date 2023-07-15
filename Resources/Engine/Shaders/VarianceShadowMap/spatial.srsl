@@ -1,0 +1,69 @@
+ShaderType Spatial;
+
+PolygonMode Fill;
+CullMode Back;
+DepthCompare LessOrEqual;
+PrimitiveTopology TriangleList;
+BlendEnabled false;
+DepthWrite true;
+DepthTest true;
+
+[[uniform], [public]] vec4 color;
+[[uniform], [public]] sampler2D diffuse;
+
+[[uniform]] sampler2DArray shadowMap;
+
+[[shared]] vec3 lightVec;
+
+float upper_bound_shadow(vec2 moments, float scene_depth)
+{
+    float bias = 0.15;
+
+    float p = step(scene_depth, moments.x + bias); // eliminates cubemap boundary thin line
+    // 0 if moments.x < scene_depth; 1 if otherwise
+
+    float variance = max(moments.y - moments.x * moments.x, 0.0001);
+    // depth^2 - mean^2
+    // ensure it as a denominator is not zero
+
+    float d = scene_depth - moments.x;
+
+    float p_max = variance / (variance + d * d);
+    // from the theorem
+
+    return max(p, p_max);
+}
+
+float sample_shadow(vec3 l, float scene_depth)
+{
+    vec3 uv = vec3(l.xy, 0.0);
+    vec2 moments = texture(shadowMap, uv).xy;
+    // moments.x is mean, moments.y is depth^2
+
+    return upper_bound_shadow(moments, scene_depth);
+}
+
+void fragment() {
+    vec3 diffuseColor = texture(diffuse, UV).rgb * color.rgb;
+
+    float d = length(lightVec);
+    vec3 l = normalize(lightVec);
+
+    /// hard-code
+    float range = 1000.0;
+
+    //if (d < range) {
+    	float lambertian = max(0.0, dot(NORMAL, -l));
+    	float atten = max(0.0, min(1.0, d / range));
+    	atten = 1.0 - atten * atten;
+    	float shadow = sample_shadow(l, d);
+    	diffuseColor += vec3(atten * lambertian * shadow);
+    //}
+
+    COLOR = vec4(diffuseColor, 1.0);
+}
+
+void vertex() {
+    lightVec = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz - DIRECTIONAL_LIGHT_POSITION;
+    OUT_POSITION = PROJECTION_MATRIX * VIEW_MATRIX * MODEL_MATRIX * vec4(VERTEX, 1.0);
+}

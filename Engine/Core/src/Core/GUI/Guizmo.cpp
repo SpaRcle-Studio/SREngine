@@ -25,17 +25,17 @@ namespace SR_CORE_NS::GUI {
         const ImVec4 toggleNotActiveColor = ImVec4(0.32, 0.28, 0.25, 1);
 
         if (ImGui::BeginChild("GuizmoTools", ImVec2(0, 20))) {
-            if (SR_GRAPH_NS::GUI::Button("T", IsTranslate() ? activeColor : notActiveColor))
+            if (SR_GRAPH_NS::GUI::Button("T", IsTranslate() && m_active ? activeColor : notActiveColor))
                 SetOperation(ImGuizmo::OPERATION::TRANSLATE);
 
             ImGui::SameLine();
 
-            if (SR_GRAPH_NS::GUI::Button("R", IsRotate() ? activeColor : notActiveColor))
+            if (SR_GRAPH_NS::GUI::Button("R", IsRotate() && m_active ? activeColor : notActiveColor))
                 SetOperation(ImGuizmo::OPERATION::ROTATE);
 
             ImGui::SameLine();
 
-            if (SR_GRAPH_NS::GUI::Button(IsBounds() ? "S+" : "S", (IsScale() || IsBounds()) ? activeColor : notActiveColor)) {
+            if (SR_GRAPH_NS::GUI::Button(IsBounds() && m_active ? "S+" : "S", ((IsScale() || IsBounds()) && m_active) ? activeColor : notActiveColor)) {
                 if (IsScale())
                     SetOperation(ImGuizmo::OPERATION::BOUNDS);
                 else
@@ -44,7 +44,7 @@ namespace SR_CORE_NS::GUI {
 
             ImGui::SameLine();
 
-            if (SR_GRAPH_NS::GUI::Button("U", IsUniversal() ? activeColor : notActiveColor))
+            if (SR_GRAPH_NS::GUI::Button("U", IsUniversal() && m_active ? activeColor : notActiveColor))
                 SetOperation(ImGuizmo::OPERATION::UNIVERSAL);
 
             ImGui::SameLine();
@@ -230,10 +230,11 @@ namespace SR_CORE_NS::GUI {
 
     void Guizmo::OnKeyDown(const SR_UTILS_NS::KeyboardInputData* data) {
         switch (data->GetKeyCode()) {
-            case Helper::KeyCode::Q: m_active = false; break;
-            case Helper::KeyCode::W: SetOperation(ImGuizmo::OPERATION::TRANSLATE); break;
-            case Helper::KeyCode::E: SetOperation(ImGuizmo::OPERATION::ROTATE); break;
-            case Helper::KeyCode::R: SetOperation(ImGuizmo::OPERATION::SCALE); break;
+            case SR_UTILS_NS::KeyCode::_1: m_active = false; break;
+            case SR_UTILS_NS::KeyCode::_2: SetOperation(ImGuizmo::OPERATION::TRANSLATE); break;
+            case SR_UTILS_NS::KeyCode::_3: SetOperation(ImGuizmo::OPERATION::ROTATE); break;
+            case SR_UTILS_NS::KeyCode::_4: SetOperation(ImGuizmo::OPERATION::SCALE); break;
+            case SR_UTILS_NS::KeyCode::_5: SetOperation(ImGuizmo::OPERATION::UNIVERSAL); break;
             default:
                 break;
         }

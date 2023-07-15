@@ -135,6 +135,10 @@ namespace SR_MATH_NS {
             );
         }
 
+        SR_NODISCARD SR_FORCE_INLINE T Length() const {
+            return static_cast<T>(sqrt(pow(x, 2) + pow(y, 2) + pow(z, 2) + pow(w, 2)));
+        }
+
         template<typename U, typename Y> SR_NODISCARD Vector4 Clamp(U _max, Y _min) const {
             return Vector4(
                 SR_CLAMP(x, static_cast<T>(_max), static_cast<T>(_min)),

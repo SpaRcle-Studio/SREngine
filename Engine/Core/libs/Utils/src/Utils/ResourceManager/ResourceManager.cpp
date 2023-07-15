@@ -9,8 +9,8 @@
 #include <Utils/Common/Hashes.h>
 
 namespace SR_UTILS_NS {
-    /// Milliseconds
-    const uint64_t ResourceManager::ResourceLifeTime = 30 * 1000;
+    /// Seconds
+    const uint64_t ResourceManager::ResourceLifeTime = 30;
 
     bool ResourceManager::Init(const SR_UTILS_NS::Path& resourcesFolder) {
     #ifdef SR_ANDROID

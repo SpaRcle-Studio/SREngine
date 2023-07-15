@@ -163,17 +163,22 @@ namespace SR_CORE_NS::GUI {
         }
     }
 
-    void EditorGUI::Update() {
+    void EditorGUI::FixedUpdate() {
         SR_TRACY_ZONE;
-        SR_LOCK_GUARD
-
-        if (Enabled()) {
-            GetWidget<Hierarchy>()->Update();
-            GetWidget<Inspector>()->Update();
-        }
+        SR_LOCK_GUARD;
 
         if (auto&& pViewer = GetWidget<SceneViewer>()) {
-            pViewer->Update();
+            pViewer->FixedUpdate();
+        }
+    }
+
+    void EditorGUI::Update(float_t dt) {
+        SR_TRACY_ZONE;
+        SR_LOCK_GUARD;
+
+        if (Enabled()) {
+            GetWidget<Hierarchy>()->Update(dt);
+            GetWidget<Inspector>()->Update(dt);
         }
     }
 

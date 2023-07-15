@@ -29,7 +29,7 @@ namespace SR_CORE_NS::GUI {
         void OnKeyDown(const SR_UTILS_NS::KeyboardInputData* data) override;
         void OnKeyPress(const SR_UTILS_NS::KeyboardInputData* data) override;
 
-        SR_NODISCARD bool IsTranslate() const { return m_operation == ImGuizmo::OPERATION::TRANSLATE; }
+        SR_NODISCARD bool IsTranslate() const { return  m_operation == ImGuizmo::OPERATION::TRANSLATE; }
         SR_NODISCARD bool IsRotate() const { return m_operation == ImGuizmo::OPERATION::ROTATE; }
         SR_NODISCARD bool IsScale() const { return m_operation == ImGuizmo::OPERATION::SCALE; }
         SR_NODISCARD bool IsBounds() const { return m_operation == ImGuizmo::OPERATION::BOUNDS; }

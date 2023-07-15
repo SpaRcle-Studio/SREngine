@@ -129,7 +129,7 @@ namespace Framework::Core::GUI {
         DrawComponents(dynamic_cast<SR_UTILS_NS::IComponentable*>(m_scene.Get()));
     }
 
-    void Inspector::Update() {
+    void Inspector::Update(float_t dt) {
         SR_LOCK_GUARD
 
         if (auto&& selected = m_hierarchy->GetSelected(); selected.size() == 1) {
