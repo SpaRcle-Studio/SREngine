@@ -41,7 +41,9 @@
 #include "../Graphics/src/Graphics/Lighting/DirectionalLight.cpp"
 #include "../Graphics/src/Graphics/Lighting/ILightComponent.cpp"
 #include "../Graphics/src/Graphics/Lighting/PointLight.cpp"
-#include "../Graphics/src/Graphics/Lighting/Spotlight.cpp"
+#include "../Graphics/src/Graphics/Lighting/SpotLight.cpp"
+#include "../Graphics/src/Graphics/Lighting/AreaLight.cpp"
+#include "../Graphics/src/Graphics/Lighting/ProbeLight.cpp"
 #include "../Graphics/src/Graphics/Lighting/LightSystem.cpp"
 
 #include "../Graphics/src/Graphics/Loaders/FbxLoader.cpp"

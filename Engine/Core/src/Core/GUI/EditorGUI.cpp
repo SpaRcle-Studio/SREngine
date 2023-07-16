@@ -13,6 +13,7 @@
 #include <Core/GUI/Hierarchy.h>
 #include <Core/GUI/SceneViewer.h>
 #include <Core/GUI/FileBrowser.h>
+#include <Core/GUI/About.h>
 #include <Utils/Common/Features.h>
 #include <Core/Settings/EditorSettings.h>
 
@@ -40,6 +41,7 @@ namespace SR_CORE_NS::GUI {
         AddWidget(new EngineSettings());
         AddWidget(new AnimatorEditor());
         AddWidget(new EngineStatistics());
+        AddWidget(new About());
 
         for (auto& [id, widget] : m_widgets) {
             Register(widget);
@@ -140,7 +142,7 @@ namespace SR_CORE_NS::GUI {
         for (auto&& [icon, path] : settings.GetIcons()) {
             auto&& pTexture = SR_GTYPES_NS::Texture::Load(path);
             if (!pTexture) {
-                SR_WARN("EditorGUI::Load() : icon not found!\n\tPath: " + path.ToString());
+                SR_WARN("EditorGUI::Load() : icon wasn't not found!\n\tPath: " + path.ToString());
                 pTexture = m_context->GetNoneTexture();
             }
 
@@ -261,8 +263,9 @@ namespace SR_CORE_NS::GUI {
 
     bool EditorGUI::LoadSceneFromCachedPath() {
         if (!m_cachedScenePath.Valid() && !m_cachedScenePath.Exists()) {
-            /// SR_ERROR("EditorGUI::LoadSceneFromCachedPath : cached file of scene path wasn't found!");
-            /// это не ошибка, движок был запущен в первый раз
+            if (SR_UTILS_NS::Debug::Instance().GetLevel() == SR_UTILS_NS::Debug::Level::High) {
+                SR_LOG("EditorGUI::LoadSceneFromCachedPath : cached file of scene path wasn't found!");
+            }
             return false;
         }
 
@@ -275,7 +278,7 @@ namespace SR_CORE_NS::GUI {
         }
 
         if (!scenePath.Valid() && !scenePath.Exists()) {
-            SR_ERROR("EditorGUI::LoadSceneFromCachedPath() : cached path is not usable! \n\tPath: " + scenePath.ToStringRef() + "\n\tUse default scene.");
+            SR_ERROR("EditorGUI::LoadSceneFromCachedPath() : cached path is not usable! \n\tPath: " + scenePath.ToStringRef() + "\n\tUsing default scene.");
             scenePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Scenes/New-scene.scene");
         }
 

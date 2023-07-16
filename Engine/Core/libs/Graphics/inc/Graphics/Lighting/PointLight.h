@@ -9,6 +9,8 @@
 
 namespace SR_GRAPH_NS {
     class PointLight : public ILightComponent {
+    public:
+
     protected:
         float_t m_radius = 1.f;
 

@@ -17,7 +17,7 @@
 namespace SR_GRAPH_NS {
     RenderScene::RenderScene(const ScenePtr& scene, RenderContext* pContext)
         : SR_HTYPES_NS::SafePtr<RenderScene>(this)
-        , m_lightSystem(new LightSystem())
+        , m_lightSystem(new LightSystem(GetThis()))
         , m_scene(scene)
         , m_debugRender(new DebugRenderer(this))
         , m_context(pContext)
@@ -219,7 +219,7 @@ namespace SR_GRAPH_NS {
                 pMesh->SetMaterial(pDefaultMat);
             }
             else {
-                SR_ERROR("RenderScene::Register() : mesh material and default material is nullptr!");
+                SR_ERROR("RenderScene::Register() : mesh material and default material are nullptr!");
                 return;
             }
         }

@@ -39,6 +39,8 @@ namespace SR_CORE_NS::GUI {
         m_sceneRunnerWidget->SetManager(GetManager());
         m_sceneRunnerWidget->DrawAsSubWindow();
 
+        ContextMenu();
+
         for (auto&& gameObject : m_tree) {
             if (!gameObject.Valid()) {
                 continue;
@@ -76,6 +78,7 @@ namespace SR_CORE_NS::GUI {
         if (!ImGui::IsAnyItemHovered() && ImGui::IsWindowHovered() && ImGui::IsMouseDoubleClicked(0)) {
             ClearSelected();
         }
+
     }
 
     void Hierarchy::Update(float_t dt) {
@@ -101,9 +104,31 @@ namespace SR_CORE_NS::GUI {
         }
     }
 
-    void Hierarchy::ContextMenu(const SR_UTILS_NS::GameObject::Ptr& gm, uint64_t id) {
+    void Hierarchy::ContextMenu() {
+        if (ImGui::BeginPopupContextWindow("HierarchyContextMenu")) {
+            if (ImGui::Selectable("Add New GameObject")) {
+                Engine::Instance().GetScene()->Instance("New GameObject");
+            }
+
+            ImGui::Separator();
+
+            if (ImGui::Selectable("Paste")) {
+                Paste();
+            }
+
+            ImGui::Separator();
+
+            if (ImGui::Selectable("Hierarchy Settings (EMPTY)")) { // TODO: Когда-нибудь мы будем настраивать стили окон и подобное, наверное, надеюсь
+
+            }
+
+            ImGui::EndPopup();
+        }
+    }
+
+    void Hierarchy::ChildContextMenu(const SR_UTILS_NS::GameObject::Ptr& gm, uint64_t id) {
         ImGui::PushID((void*)(intptr_t)id);
-        if (ImGui::BeginPopupContextItem("HierarchyContextMenu")) {
+        if (ImGui::BeginPopupContextItem("HierarchyChildContextMenu")) {
             if (m_selected.count(gm) == 0) {
                 SelectGameObject(gm);
             }
@@ -191,7 +216,7 @@ namespace SR_CORE_NS::GUI {
             }
         }
 
-        ContextMenu(root, id);
+        ChildContextMenu(root, id);
 
         CheckSelected(root);
 
@@ -230,7 +255,7 @@ namespace SR_CORE_NS::GUI {
                 }
             }
 
-            if (auto payload = ImGui::AcceptDragDropPayload("Hierarchy##Payload"); payload != NULL && payload->Data) {
+            if (auto payload = ImGui::AcceptDragDropPayload("Hierarchy##Payload"); payload != nullptr && payload->Data) {
                 /*for (auto&& ptr : *(std::list<Helper::GameObject::Ptr>*)(payload->Data)) {
                     if (ptr.RecursiveLockIfValid()) {
                         ptr->MoveToTree(root);
@@ -308,6 +333,8 @@ namespace SR_CORE_NS::GUI {
     void Hierarchy::Copy() const {
         auto&& pMarshal = new SR_HTYPES_NS::Marshal();
 
+        /*pMarshal->Write("SRCopyPaste#Hierarchy"); //Требуется для проверки валидности содержимого буфера обмена в методе Paste()*/
+
         pMarshal->Write(static_cast<uint64_t>(m_selected.size()));
 
         for (auto&& ptr : m_selected) {
@@ -325,17 +352,21 @@ namespace SR_CORE_NS::GUI {
     }
 
     void Hierarchy::Paste() {
-
+        ///TODO: Paste() должен вставлять внутрь того игрового объекта, на котором был вызван в ChildContextMenu(), а не просто в верх дерева
         auto&& base64 = Helper::Platform::GetClipboardText();
 
         if (auto marshal = SR_HTYPES_NS::Marshal::LoadFromBase64(base64); marshal.Valid()) {
+            /*if (marshal.TryRead<std::string>() != "SRCopyPaste#Hierarchy") {
+                SR_LOG("Hierarchy::Paste() : attempted to paste invalid content from clipboard!") ///TODO: Стоит ли оповещать об этом?
+                return;
+            }*/
             std::set<Helper::GameObject::Ptr> selected;
 
             if (m_scene.RecursiveLockIfValid()) {
                 auto&& count = marshal.Read<uint64_t>();
 
                 if (count > 1000) {
-                    SR_WARN("Hierarchy::Paste() : attempt to insert a large number of objects! Count: " + SR_UTILS_NS::ToString(count));
+                    SR_WARN("Hierarchy::Paste() : attempting to insert a large number of objects! Count: " + SR_UTILS_NS::ToString(count));
                 }
 
                 for (uint64_t i = 0; i < count; ++i) {

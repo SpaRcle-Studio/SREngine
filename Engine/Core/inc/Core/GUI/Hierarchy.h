@@ -39,7 +39,8 @@ namespace SR_CORE_NS::GUI {
         void ExpandPath(const SR_UTILS_NS::GameObject::Ptr& gm);
         void Draw() override;
         void CheckSelected(const SR_UTILS_NS::GameObject::Ptr& gm);
-        void ContextMenu(const SR_UTILS_NS::GameObject::Ptr& gm, uint64_t id);
+        void ContextMenu();
+        void ChildContextMenu(const SR_UTILS_NS::GameObject::Ptr& gm, uint64_t id);
         void DrawChild(const SR_UTILS_NS::GameObject::Ptr& root, uint32_t prefabIndex);
         void Copy() const;
         void Paste();
