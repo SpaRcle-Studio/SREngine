@@ -36,6 +36,7 @@ namespace SR_GRAPH_NS {
         }
 
         m_thread = SR_HTYPES_NS::Thread::Factory::Instance().CreateEmpty();
+        m_thread->SetName("Window");
 
         if (!m_thread->Run([this]() { ThreadFunction(); })) {
             SR_ERROR("Window::Initialize() : failed to run thread!");

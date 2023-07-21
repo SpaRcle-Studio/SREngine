@@ -16,12 +16,16 @@ namespace SR_AUDIO_NS {
         explicit SoundContext(SoundDevice* pDevice);
 
     public:
-        ~SoundContext() override = default;
+        ~SoundContext() override;
 
         static SoundContext* Allocate(SoundDevice* pDevice);
 
     public:
         SR_NODISCARD SoundDevice* GetDevice() const;
+
+        SR_NODISCARD virtual bool IsPlaying(SoundSource pSource) const = 0;
+        SR_NODISCARD virtual bool IsPaused(SoundSource pSource) const = 0;
+        SR_NODISCARD virtual bool IsStopped(SoundSource pSource) const = 0;
 
         SR_NODISCARD virtual SoundSource AllocateSource(SoundBuffer buffer) = 0;
 
@@ -31,13 +35,16 @@ namespace SR_AUDIO_NS {
                 int32_t sampleRate,
                 SoundFormat format) = 0;
 
+        virtual void ApplyParams(SoundSource pSource, const PlayParams& params) = 0;
+
         virtual bool FreeBuffer(SoundBuffer* buffer) = 0;
+        virtual bool FreeSource(SoundSource* pSource) = 0;
 
         virtual void Play(SoundSource source) = 0;
 
         virtual bool Init() = 0;
 
-    private:
+    protected:
         SoundDevice* m_device = nullptr;
 
     };

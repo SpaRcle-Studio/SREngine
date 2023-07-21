@@ -14,7 +14,11 @@ namespace SR_AUDIO_NS {
         : m_device(pDevice)
     { }
 
-    SoundContext *SoundContext::Allocate(SoundDevice *pDevice) {
+    SoundContext::~SoundContext() {
+        delete m_device;
+    }
+
+    SoundContext* SoundContext::Allocate(SoundDevice *pDevice) {
         SR_INFO("SoundContext::Allocate() : allocating a sound context...");
 
         if (!pDevice) {

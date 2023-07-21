@@ -10,7 +10,7 @@
 
 namespace SR_UTILS_NS {
     /// Seconds
-    const uint64_t ResourceManager::ResourceLifeTime = 30;
+    const uint64_t ResourceManager::ResourceLifeTime = 30 * SR_CLOCKS_PER_SEC;
 
     bool ResourceManager::Init(const SR_UTILS_NS::Path& resourcesFolder) {
     #ifdef SR_ANDROID
@@ -458,6 +458,7 @@ namespace SR_UTILS_NS {
         m_isRun = true;
 
         m_thread = SR_HTYPES_NS::Thread::Factory::Instance().Create(std::thread(&ResourceManager::Thread, this));
+        m_thread->SetName("Resources manager");
 
         return true;
     }

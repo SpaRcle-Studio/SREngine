@@ -168,6 +168,11 @@ namespace SR_HTYPES_NS {
         return m_executeResult;
     }
 
+    void Thread::SetName(const std::string& name) {
+        SR_WRITE_LOCK;
+        m_name = name;
+    }
+
     uint32_t Thread::Factory::GetThreadsCount() {
         SR_SCOPED_LOCK
 
@@ -182,6 +187,30 @@ namespace SR_HTYPES_NS {
         SR_LOG("Thread::Factory::SetMainThread() : initializing main thread...");
 
         m_main = new Thread(SR_UTILS_NS::GetThisThreadId());
+    }
+
+    void Thread::Factory::PrintThreads() {
+        SR_LOCK_GUARD
+
+        if (m_threads.empty()) {
+            return;
+        }
+
+        std::string log = "Thread::Factory::PrintThreads() : threads:\n";
+
+        for (auto&& [id, pThread] : m_threads) {
+            if (pThread == m_main) {
+                log += "\tThread [Main]\n";
+            }
+            else if (!pThread->m_name.empty()) {
+                log += "\tThread [" + id + "] - " + pThread->m_name + "\n";
+            }
+            else {
+                log += "\tThread [" + id + "]\n";
+            }
+        }
+
+        SR_SYSTEM_LOG(log);
     }
 }
 

@@ -62,6 +62,8 @@
 #include <Physics/PhysicsScene.h>
 #include <Physics/PhysicsLib.h>
 
+#include <Audio/SoundManager.h>
+
 #include <Scripting/Base/Behaviour.h>
 #include <Scripting/Impl/EvoScriptManager.h>
 
@@ -124,6 +126,7 @@ int main(int argc, char **argv) {
     SR_CORE_NS::EditorSettings::DestroySettings();
     SR_UTILS_NS::TagManager::DestroySettings();
 
+    SR_AUDIO_NS::SoundManager::Instance().DestroySingleton();
     SR_PHYSICS_NS::PhysicsLibrary::DestroySingleton();
     SR_GRAPH_NS::Memory::CameraManager::DestroySingleton();
     SR_SCRIPTING_NS::GlobalEvoCompiler::DestroySingleton();
@@ -138,7 +141,7 @@ int main(int argc, char **argv) {
 
     SR_UTILS_NS::ResourceManager::DestroySingleton();
 
-    SR_SYSTEM_LOG("Thread count: " + SR_UTILS_NS::ToString(SR_HTYPES_NS::Thread::Factory::Instance().GetThreadsCount()));
+    SR_HTYPES_NS::Thread::Factory::Instance().PrintThreads();
 
     SR_UTILS_NS::Debug::DestroySingleton();
 

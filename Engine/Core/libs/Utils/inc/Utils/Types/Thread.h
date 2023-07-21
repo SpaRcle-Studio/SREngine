@@ -38,6 +38,7 @@ namespace SR_HTYPES_NS {
 
         public:
             void SetMainThread();
+            void PrintThreads();
 
             SR_NODISCARD Ptr GetMainThread();
             SR_NODISCARD Ptr GetThisThread();
@@ -73,6 +74,8 @@ namespace SR_HTYPES_NS {
         SR_NODISCARD bool Joinable() const { return m_thread.joinable(); }
         SR_NODISCARD ThreadId GetId();
         SR_NODISCARD DataStorage* GetContext() { return m_context; }
+
+        void SetName(const std::string& name);
 
         void Synchronize();
 
@@ -123,6 +126,7 @@ namespace SR_HTYPES_NS {
     private:
         std::thread m_thread;
         ThreadId m_id;
+        std::string m_name;
         DataStorage* m_context = nullptr;
 
         std::atomic<bool> m_isCreated = false;

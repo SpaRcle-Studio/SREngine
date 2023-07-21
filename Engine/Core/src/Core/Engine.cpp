@@ -16,6 +16,9 @@
 #include <Utils/ECS/ComponentManager.h>
 #include <Utils/DebugDraw.h>
 
+#include <Audio/Sound.h>
+#include <Audio/SoundManager.h>
+
 #include <Graphics/Pipeline/Environment.h>
 #include <Graphics/GUI/WidgetManager.h>
 #include <Graphics/Render/RenderScene.h>
@@ -245,6 +248,8 @@ namespace SR_CORE_NS {
             syncComplete = true;
         });
 
+        thread->SetName("Synchronize");
+
         /** Так как некоторые ресурсы, такие как материалы, имеют вложенные ресурсы,
          * то они могут ожидать пока графический поток уберет метку использования с них */
         while (!syncComplete) {
@@ -394,6 +399,7 @@ namespace SR_CORE_NS {
             SR_INFO("Engine::Run() : running world thread...");
 
             m_worldThread = SR_HTYPES_NS::Thread::Factory::Instance().Create(&Engine::WorldThread, this);
+            m_worldThread->SetName("World");
         }
 
         return true;
@@ -401,6 +407,10 @@ namespace SR_CORE_NS {
 
     void Engine::Await() {
         SR_INFO("Engine::Await() : waiting for the engine to close...");
+
+        if (auto&& pSound = SR_AUDIO_NS::Sound::Load("Editor/Audio/Success.mp3")) {
+            pSound->Play();
+        }
 
         while (m_isRun) {
             SR_HTYPES_NS::Thread::Sleep(50);

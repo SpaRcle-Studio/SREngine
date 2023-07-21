@@ -4,6 +4,7 @@
 
 #include <Core/GUI/SceneRunner.h>
 #include <Utils/TaskManager/TaskManager.h>
+#include <Audio/SoundManager.h>
 
 namespace SR_CORE_NS::GUI {
     SceneRunner::SceneRunner()
@@ -68,6 +69,7 @@ namespace SR_CORE_NS::GUI {
 
             if (auto&& pDescriptor = GetEditor()->GetIconDescriptor(paused ? EditorIcon::Pause : EditorIcon::PauseActive)) {
                 if (GUISystem::Instance().ImageButton("##imgScenePauseBtn", pDescriptor, SR_MATH_NS::IVector2(32), 3)) {
+                    SR_AUDIO_NS::SoundManager::Instance().Play("Editor/Audio/Heavy-popping.wav");
                     paused = !paused;
                 }
             }

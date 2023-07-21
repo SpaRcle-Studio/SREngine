@@ -5,7 +5,7 @@
 #ifndef SRENGINE_SOUNDFORMAT_H
 #define SRENGINE_SOUNDFORMAT_H
 
-#include <Utils/macros.h>
+#include <Utils/Common/NonCopyable.h>
 
 namespace SR_AUDIO_NS {
     using SoundBuffer = void*;
