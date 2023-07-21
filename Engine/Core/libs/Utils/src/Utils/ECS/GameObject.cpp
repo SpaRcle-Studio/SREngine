@@ -655,6 +655,10 @@ namespace SR_UTILS_NS {
         m_tag = TagManager::Instance().HashTag(tag);
     }
 
+    std::string GameObject::GetTagString() const {
+        return TagManager::Instance().GetTag(GetTag());
+    }
+
     Tag GameObject::GetTag() const {
         return m_tag;
     }

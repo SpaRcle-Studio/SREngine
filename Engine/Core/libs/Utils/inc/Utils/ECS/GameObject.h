@@ -62,6 +62,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD GameObject::Ptr Find(const std::string& name) const noexcept;
         SR_NODISCARD std::string GetName() const { return m_name; }
         SR_NODISCARD Tag GetTag() const;
+        SR_NODISCARD std::string GetTagString() const;
         SR_NODISCARD bool HasTag() const;
         SR_NODISCARD bool IsActive() const noexcept;
         SR_NODISCARD SR_FORCE_INLINE bool IsEnabled() const noexcept { return m_isEnabled; }

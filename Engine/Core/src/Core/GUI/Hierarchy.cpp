@@ -162,6 +162,16 @@ namespace SR_CORE_NS::GUI {
                 if (ImGui::Selectable("Break link")) {
                     gm->UnlinkPrefab();
                 }
+
+                ImGui::Separator();
+
+                if (ImGui::Selectable("Edit")) {
+                    auto&& prefabPath = gm->GetPrefab()->GetResourcePath();
+                    if (auto&& pScene = SR_WORLD_NS::Scene::Load(prefabPath)) {
+                        Engine::Instance().SetScene(pScene);
+                        Engine::Instance().GetEditor()->CacheScenePath(prefabPath);
+                    }
+                }
             }
 
             ImGui::Separator();

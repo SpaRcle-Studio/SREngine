@@ -273,6 +273,7 @@ namespace Framework {
         ESRegisterMethod(EvoScript::Public, generator, GameObject, SetTransform, void, ESArg1(Transform* pTransform), ESArg1(pTransform))
         ESRegisterMethodArg0(EvoScript::Public, generator, GameObject, GetBarycenter, FVector3)
         ESRegisterMethodArg0(EvoScript::Public, generator, GameObject, GetName, std::string)
+        ESRegisterMethodArg0(EvoScript::Public, generator, GameObject, GetTagString, std::string)
         ESRegisterMethodArg0(EvoScript::Public, generator, GameObject, GetTransform, Transform*)
         ESRegisterCustomMethodArg0(EvoScript::Public, generator, GameObject, GetScene, SafePtr<Scene>, {
             return ptr->GetScene()->GetThis();
