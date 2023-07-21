@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <Technique Name="ShadowMap">
     <ColorBufferPass Directional="false">
-        <FramebufferSettings DynamicResizing="true" DepthEnabled="true" SmoothSamples="1">
+        <FramebufferSettings DynamicResizing="true" DepthEnabled="true" SmoothSamples="2">
             <Size X="0" Y="0"/>
             <PreScale X="0.85" Y="0.85"/>
             <Depth Format="Auto" ClearValue="1.0"/>
@@ -42,4 +42,13 @@
             <DebugPass/>
         </Passes>
     </FramebufferPass>
+    <Queues>
+        <Queue>
+            <Pass Name="DepthFBO"/>
+        </Queue>
+        <Queue>
+            <Pass Name="ColorBufferPass"/>
+            <Pass Name="SceneViewFBO"/>
+        </Queue>
+    </Queues>
 </Technique>

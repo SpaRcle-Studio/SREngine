@@ -415,21 +415,16 @@ namespace SR_GRAPH_NS::VulkanTypes {
         m_frameBuffs.clear();
     }
 
-    VkSubmitInfo VkImGUI::GetSubmitInfo(uint32_t countSemaphores, const VkSemaphore* waitSemaphores) const {
+    EvoVulkan::SubmitInfo VkImGUI::GetSubmitInfo(const std::vector<VkSemaphore>& waitSemaphores) const {
         auto&& pKernel = dynamic_cast<Vulkan*>(m_pipeline)->GetKernel();
 
-        VkSubmitInfo submitInfo = EvoVulkan::Tools::Initializers::SubmitInfo();
+        EvoVulkan::SubmitInfo submitInfo;
 
-        submitInfo.pWaitDstStageMask = pKernel->GetSubmitPipelineStages();
+        submitInfo.SetWaitDstStageMask(pKernel->GetSubmitPipelineStages());
 
-        submitInfo.commandBufferCount = m_cmdBuffs.size();
-        submitInfo.pCommandBuffers = m_cmdBuffs.data();
-
-        submitInfo.signalSemaphoreCount = 1;
-        submitInfo.pSignalSemaphores = GetSemaphoreRef();
-
-        submitInfo.waitSemaphoreCount = countSemaphores;
-        submitInfo.pWaitSemaphores = waitSemaphores;
+        submitInfo.commandBuffers = m_cmdBuffs;
+        submitInfo.waitSemaphores = waitSemaphores;
+        submitInfo.signalSemaphores.emplace_back(GetSemaphore());
 
         return submitInfo;
     }

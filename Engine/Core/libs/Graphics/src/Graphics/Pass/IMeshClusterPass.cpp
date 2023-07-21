@@ -15,6 +15,8 @@ namespace SR_GRAPH_NS {
     bool IMeshClusterPass::Render() {
         SR_TRACY_ZONE;
 
+        PrepareFBODependencies();
+
         bool rendered = false;
 
         if (GetClusterType() & static_cast<MeshClusterTypeFlag>(MeshClusterType::Opaque)) {
@@ -226,10 +228,14 @@ namespace SR_GRAPH_NS {
         for (auto&& sampler : m_samplers) {
             int32_t textureId = SR_ID_INVALID;
 
+            sampler.fboId = SR_ID_INVALID;
+
             if (sampler.fboHashName != 0) {
                 auto&& pFBOPass = dynamic_cast<IFramebufferPass*>(GetTechnique()->FindPass(sampler.fboHashName));
                 if (pFBOPass && pFBOPass->GetFramebuffer()) {
                     auto&& pFBO = pFBOPass->GetFramebuffer();
+
+                    sampler.fboId = pFBO->GetId();
 
                     if (sampler.depth) {
                         textureId = pFBO->GetDepthTexture();
@@ -292,6 +298,10 @@ namespace SR_GRAPH_NS {
     }
 
     void IMeshClusterPass::UseConstants(IMeshClusterPass::ShaderPtr pShader) {
+
+    }
+
+    void IMeshClusterPass::PrepareFBODependencies() {
 
     }
 }

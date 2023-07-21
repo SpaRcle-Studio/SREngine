@@ -22,6 +22,7 @@
 #include "../Graphics/src/Graphics/Pipeline/Vulkan.cpp"
 #include "../Graphics/src/Graphics/Pipeline/Pipeline.cpp"
 #include "../Graphics/src/Graphics/Pipeline/EmptyPipeline.cpp"
+#include "../Graphics/src/Graphics/Pipeline/FrameBufferQueue.cpp"
 
 #include "../Graphics/src/Graphics/GUI/Link.cpp"
 #include "../Graphics/src/Graphics/GUI/ICanvas.cpp"

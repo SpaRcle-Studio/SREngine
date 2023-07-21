@@ -90,4 +90,11 @@ namespace SR_GRAPH_NS {
 
         m_pipeline->SetCurrentFramebuffer(nullptr);
     }
+
+    std::vector<SR_GTYPES_NS::Framebuffer*> FramebufferPass::GetFrameBuffers() const {
+        if (!m_framebuffer) {
+            return std::vector<SR_GTYPES_NS::Framebuffer*>();
+        }
+        return { m_framebuffer };
+    }
 }

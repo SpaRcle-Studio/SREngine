@@ -43,7 +43,7 @@ namespace SR_GRAPH_NS::VulkanTypes {
         SR_NODISCARD bool IsUndockingActive() const;
         SR_NODISCARD SR_INLINE VkSemaphore GetSemaphore() const noexcept { return m_semaphore; }
         SR_NODISCARD SR_INLINE const VkSemaphore* GetSemaphoreRef() const noexcept { return &m_semaphore; }
-        SR_NODISCARD VkSubmitInfo GetSubmitInfo(uint32_t countSemaphores, const VkSemaphore* waitSemaphores) const;
+        SR_NODISCARD EvoVulkan::SubmitInfo GetSubmitInfo(const std::vector<VkSemaphore>& waitSemaphores) const;
 
     private:
         bool InitializeRenderer();

@@ -95,8 +95,40 @@ namespace SR_GRAPH_NS {
             m_cameras.empty();
     }
 
-    RenderContext *RenderScene::GetContext() const {
+    RenderContext* RenderScene::GetContext() const {
         return m_context;
+    }
+
+    void RenderScene::BuildQueue() {
+        m_queues.clear();
+
+        ForEachTechnique([&](RenderTechnique* pTechnique) {
+            auto&& queues = pTechnique->GetQueues();
+            for (uint32_t depth = 0; depth < queues.size(); ++depth) {
+                if (m_queues.size() < depth + 1) {
+                    m_queues.resize(depth + 1);
+                }
+                for (auto&& pPass : queues[depth]) {
+                    m_queues[depth].emplace_back(pPass);
+                    for (auto&& pFrameBuffer : pPass->GetFrameBuffers()) {
+                        GetPipeline()->GetQueue().AddQueue(pFrameBuffer, depth);
+                    }
+                }
+                SRAssert(!m_queues[depth].empty());
+            }
+        });
+
+        /// if (!m_queues.empty()) {
+        ///     std::string log = "RenderScene::BuildQueue() : \n";
+        ///     for (auto&& queue : m_queues) {
+        ///         log += "============================================\n";
+        ///         for (auto&& pPass : queue) {
+        ///             log += "\t" + std::string(pPass->GetName()) + "\n";
+        ///         }
+        ///     }
+        ///     log += "============================================\n";
+        ///     SR_LOG(log);
+        /// }
     }
 
     void RenderScene::Build() {
@@ -107,6 +139,8 @@ namespace SR_GRAPH_NS {
         m_hasDrawData = false;
 
         SR_RENDER_TECHNIQUES_RETURN_CALL(Render)
+
+        BuildQueue();
 
         m_dirty.Do([](uint32_t& data) {
             data = data > 1 ? 1 : 0;
@@ -358,7 +392,7 @@ namespace SR_GRAPH_NS {
         for (uint8_t i = 0; i < pipeline->GetCountBuildIter(); ++i) {
             pipeline->SetBuildIteration(i);
 
-            pipeline->BindFrameBuffer(0);
+            pipeline->BindFrameBuffer(nullptr);
             pipeline->ClearBuffers(0.0f, 0.0f, 0.0f, 1.f, 1.f, 1);
 
             pipeline->BeginCmdBuffer();
@@ -450,5 +484,23 @@ namespace SR_GRAPH_NS {
         m_transparent.OnResourceReloaded(pResource);
 
         SetDirty();
+    }
+
+    void RenderScene::ForEachTechnique(const Helper::Types::Function<void(RenderTechnique*)>& callback) {
+        for (auto&& pCamera : m_offScreenCameras) {
+            if (auto&& pRenderTechnique = pCamera->GetRenderTechnique()) {
+                callback(pRenderTechnique);
+            }
+        }
+
+        if (m_mainCamera) {
+            if (auto &&pRenderTechnique = m_mainCamera->GetRenderTechnique()) {
+                callback(pRenderTechnique);
+            }
+        }
+
+        if (m_technique) {
+            callback(m_technique);
+        }
     }
 }

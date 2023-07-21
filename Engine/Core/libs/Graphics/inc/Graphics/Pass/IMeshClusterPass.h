@@ -15,7 +15,8 @@ namespace SR_GRAPH_NS {
     class IMeshClusterPass : public BasePass {
         using Super = BasePass;
         struct Sampler {
-            uint32_t textureId = 0;
+            uint32_t textureId = SR_ID_INVALID;
+            uint32_t fboId = SR_ID_INVALID;
 
             uint64_t fboHashName = 0;
             uint64_t index = 0;
@@ -58,6 +59,8 @@ namespace SR_GRAPH_NS {
         virtual void UseConstants(ShaderPtr pShader);
 
         virtual void PrepareSamplers();
+
+        virtual void PrepareFBODependencies();
 
     protected:
         ShadowMapPass* m_shadowMapPass = nullptr;

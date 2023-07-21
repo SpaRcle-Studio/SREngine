@@ -13,6 +13,7 @@
 #include <Graphics/Memory/IGraphicsResource.h>
 
 #include <Graphics/Pass/GroupPass.h>
+#include <Graphics/Pass/PassQueue.h>
 
 namespace SR_GTYPES_NS {
     class Camera;
@@ -61,6 +62,8 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD BasePass* FindPass(uint64_t hashName) const;
         SR_NODISCARD BasePass* FindPass(const std::string& name) const;
 
+        SR_NODISCARD const PassQueues& GetQueues() const { return m_queues; }
+
         template<typename T> SR_NODISCARD T* FindPass() const;
 
     protected:
@@ -76,7 +79,6 @@ namespace SR_GRAPH_NS {
         void SetDirty();
 
     private:
-        std::vector<BasePass*> m_passes;
         RenderScenePtr m_renderScene;
         CameraPtr m_camera = nullptr;
         Context m_context = nullptr;
@@ -84,6 +86,9 @@ namespace SR_GRAPH_NS {
         std::atomic<bool> m_dirty = false;
         std::atomic<bool> m_hasErrors = false;
         Memory::UBOManager& m_uboManager;
+
+        std::vector<BasePass*> m_passes;
+        PassQueues m_queues;
 
     };
 

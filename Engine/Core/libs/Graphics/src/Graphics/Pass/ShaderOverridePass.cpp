@@ -146,4 +146,11 @@ namespace SR_GRAPH_NS {
         }
         Super::UseSharedUniforms(pShader);
     }
+
+    std::vector<SR_GTYPES_NS::Framebuffer*> ShaderOverridePass::GetFrameBuffers() const {
+        if (!m_framebuffer) {
+            return std::vector<SR_GTYPES_NS::Framebuffer*>();
+        }
+        return { m_framebuffer };
+    }
 }

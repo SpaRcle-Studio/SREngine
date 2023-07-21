@@ -12,6 +12,7 @@
 #include <Graphics/Render/MeshCluster.h>
 #include <Graphics/Render/SortedMeshQueue.h>
 #include <Graphics/GUI/WidgetManager.h>
+#include <Graphics/Pass/PassQueue.h>
 
 namespace SR_WORLD_NS {
     class Scene;
@@ -73,6 +74,8 @@ namespace SR_GRAPH_NS {
 
         void SetOverlayEnabled(bool enabled);
 
+        void ForEachTechnique(const SR_HTYPES_NS::Function<void(RenderTechnique*)>& callback);
+
         SR_NODISCARD bool IsDirty() const noexcept;
         SR_NODISCARD bool IsEmpty() const;
         SR_NODISCARD bool IsOverlayEnabled() const;
@@ -97,6 +100,7 @@ namespace SR_GRAPH_NS {
         void Overlay();
         void PrepareRender();
         void Build();
+        void BuildQueue();
         void Update() noexcept;
         void Submit() noexcept;
 
@@ -115,6 +119,8 @@ namespace SR_GRAPH_NS {
         DebugRenderer* m_debugRender = nullptr;
         RenderTechnique* m_technique = nullptr;
         RenderContext* m_context = nullptr;
+
+        PassQueues m_queues;
 
         OpaqueMeshCluster m_opaque;
         TransparentMeshCluster m_transparent;

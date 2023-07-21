@@ -140,4 +140,11 @@ namespace SR_GRAPH_NS {
         IFramebufferPass::ResizeFrameBuffer(size);
         PostProcessPass::OnResize(size);
     }
+
+    std::vector<SR_GTYPES_NS::Framebuffer *> SSAOPass::GetFrameBuffers() const {
+        if (!m_framebuffer) {
+            return std::vector<SR_GTYPES_NS::Framebuffer*>();
+        }
+        return { m_framebuffer };
+    }
 }

@@ -17,6 +17,7 @@
 #include <Graphics/Pipeline/Vulkan/VulkanImGUI.h>
 #include <Graphics/Pipeline/Vulkan/VulkanTracy.h>
 #include <Graphics/Window/Window.h>
+#include <Graphics/Pipeline/FrameBufferQueue.h>
 
 #include <EvoVulkan/VulkanKernel.h>
 #include <EvoVulkan/Tools/VulkanInsert.h>
@@ -111,9 +112,8 @@ namespace SR_GRAPH_NS {
         EvoVulkan::Core::RenderResult Render() override;
         EvoVulkan::Core::FrameResult PrepareFrame() override;
         EvoVulkan::Core::FrameResult SubmitFrame() override;
-
-    private:
-        VkCommandBuffer m_submitCmdBuffs[2] = {0};
+        EvoVulkan::Core::FrameResult QueuePresent() override;
+        EvoVulkan::Core::FrameResult WaitIdle() override;
 
     };
 
@@ -131,7 +131,6 @@ namespace SR_GRAPH_NS {
         std::vector<VkClearValue>                       m_clearValues        = { };
         VkRenderPassBeginInfo                           m_renderPassBI       = { };
 
-        std::vector<std::pair<EvoVulkan::Complexes::FrameBuffer*, uint32_t>>  m_framebuffersQueue = {};
         EvoVulkan::Complexes::FrameBuffer*              m_currentVkFramebuffer = nullptr;
         VkCommandBuffer                                 m_currentCmd         = VK_NULL_HANDLE;
         EvoVulkan::Complexes::Shader*                   m_currentShader      = nullptr;
@@ -282,7 +281,7 @@ namespace SR_GRAPH_NS {
         }
 
         SR_FORCE_INLINE void ClearFramebuffersQueue() override {
-            m_framebuffersQueue.clear();
+            m_fboQueue.Clear();
         }
 
         /** \Vulkan Clear next frame buffer usage */
@@ -574,55 +573,51 @@ namespace SR_GRAPH_NS {
 
         SR_NODISCARD SR_MATH_NS::FColor GetPixelColor(uint64_t textureId, uint32_t x, uint32_t y) override;
 
-        SR_FORCE_INLINE void BindFrameBuffer(const uint32_t& FBO) override {
-            if (FBO == 0) {
+        void BindFrameBuffer(SR_GTYPES_NS::Framebuffer* pFBO) override {
+            if (!pFBO) {
                 m_renderPassBI.framebuffer = m_kernel->m_frameBuffers[m_currentBuildIteration];
                 m_renderPassBI.renderPass  = m_kernel->GetRenderPass();
                 m_renderPassBI.renderArea  = m_kernel->GetRenderArea();
                 m_currentCmd               = m_kernel->m_drawCmdBuffs[m_currentBuildIteration];
 
                 m_currentVkFramebuffer = nullptr;
+                m_currentFBOid = 0;
             }
             else {
+                auto&& FBO = pFBO->GetId();
                 if (FBO == UINT32_MAX) {
                     SR_ERROR("Vulkan::BindFrameBuffer() : frame buffer index equals UINT32_MAX! Something went wrong...");
                     return;
                 }
 
-                auto framebuffer = m_memory->m_FBOs[FBO - 1];
-                if (!framebuffer) {
+                auto&& pFramebuffer = m_memory->m_FBOs[FBO - 1];
+                if (!pFramebuffer) {
                     SR_ERROR("Vulkan::BindFrameBuffer() : frame buffer object don't exist!");
                     return;
                 }
 
-                auto&& layers = framebuffer->GetLayers();
+                auto&& layers = pFramebuffer->GetLayers();
                 uint32_t layerIndex = SR_MIN(m_frameBufferLayer, layers.size() - 1);
                 auto&& vkFrameBuffer = layers.at(layerIndex)->GetFramebuffer();
 
-                bool found = false;
-
-                for (auto&& [fbo, layer] : m_framebuffersQueue) {
-                    found |= fbo == framebuffer;
-                    if (fbo == framebuffer && layerIndex == layer) {
-                        SR_ERROR("Vulkan::BindFrameBuffer() : frame buffer (\"" + std::to_string(FBO) + "\") is already added to FBO queue!");
-                        SRHalt0();
-                        return;
-                    }
+                if (m_fboQueue.Contains(pFBO, layerIndex)) {
+                    SR_ERROR("Vulkan::BindFrameBuffer() : frame buffer (\"" + std::to_string(FBO) + "\") is already added to FBO queue!");
+                    SRHalt0();
+                    return;
                 }
 
-                if (!found) {
-                    m_framebuffersQueue.emplace_back(std::make_pair(framebuffer, layerIndex));
+                if (!m_fboQueue.Contains(pFBO)) {
+                    m_fboQueue.AddFrameBuffer(pFBO, layerIndex);
                 }
 
                 m_renderPassBI.framebuffer = vkFrameBuffer;
-                m_renderPassBI.renderPass  = framebuffer->GetRenderPass();
-                m_renderPassBI.renderArea  = framebuffer->GetRenderPassArea();
-                m_currentCmd               = framebuffer->GetCmd();
+                m_renderPassBI.renderPass  = pFramebuffer->GetRenderPass();
+                m_renderPassBI.renderArea  = pFramebuffer->GetRenderPassArea();
+                m_currentCmd               = pFramebuffer->GetCmd();
 
-                m_currentVkFramebuffer = framebuffer;
+                m_currentVkFramebuffer = pFramebuffer;
+                m_currentFBOid = FBO;
             }
-
-            m_currentFBOid = FBO;
         }
 
         SR_FORCE_INLINE void BindVBO(const uint32_t& VBO) override {

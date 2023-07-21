@@ -200,7 +200,7 @@ namespace SR_GRAPH_NS {
             goto dirty;
         }
 
-        if (m_cameraRotation.Distance(m_camera->GetRotation()) > 10.0) {
+        if (m_cameraRotation != m_camera->GetRotation()) {
             goto dirty;
         }
 

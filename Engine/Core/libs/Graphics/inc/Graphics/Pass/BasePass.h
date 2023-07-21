@@ -19,6 +19,7 @@ namespace SR_GTYPES_NS {
     class Camera;
     class Mesh;
     class Shader;
+    class Framebuffer;
 }
 
 namespace SR_GRAPH_NS {
@@ -69,6 +70,8 @@ namespace SR_GRAPH_NS {
 
         virtual void SR_FASTCALL OnMeshAdded(SR_GTYPES_NS::Mesh* pMesh, bool transparent) { }
         virtual void SR_FASTCALL OnMeshRemoved(SR_GTYPES_NS::Mesh* pMesh, bool transparent) { }
+
+        SR_NODISCARD virtual std::vector<SR_GTYPES_NS::Framebuffer*> GetFrameBuffers() const { return { }; }
 
         void SetName(const std::string& name);
 

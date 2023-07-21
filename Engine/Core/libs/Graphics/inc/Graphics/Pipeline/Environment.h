@@ -10,6 +10,7 @@
 #include <Graphics/Pipeline/TextureHelper.h>
 #include <Graphics/Pipeline/IShaderProgram.h>
 #include <Graphics/Pipeline/PipelineType.h>
+#include <Graphics/Pipeline/FrameBufferQueue.h>
 
 #include <Graphics/Types/Vertices.h>
 #include <Graphics/Types/Descriptors.h>
@@ -48,6 +49,8 @@ namespace SR_GRAPH_NS {
     protected:
         inline static std::vector<std::function<void(double x, double y)>> g_scrollEvents = std::vector<std::function<void(double x, double y)>>();
         static inline std::mutex g_mutex = std::mutex();
+
+        FrameBufferQueue m_fboQueue;
 
         GUIContext        m_guiContext             = nullptr;
         ImguiFont         m_iconFont               = nullptr;
@@ -94,6 +97,7 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD ImguiFont GetIconFont() const { return m_iconFont; }
         SR_NODISCARD GUIContext GetGUIContext() const { return m_guiContext; }
         SR_NODISCARD bool IsGUIEnabled() const { return m_guiEnabled; }
+        SR_NODISCARD FrameBufferQueue& GetQueue() { return m_fboQueue; }
 
         /// \warning Could be the cause of a critical error
         void SetBuildIteration(const uint8_t& iter) { m_currentBuildIteration = iter;   }
@@ -242,8 +246,8 @@ namespace SR_GRAPH_NS {
 
         virtual bool CreateFrameBuffer(const SR_MATH_NS::IVector2& size, int32_t& FBO, DepthLayer* pDepth, std::vector<ColorLayer>& colors, uint8_t sampleCount, uint32_t layersCount) { return false; }
 
-        virtual SR_FORCE_INLINE void BindFrameBuffer(const uint32_t& FBO) { }
-        virtual SR_FORCE_INLINE void DeleteBuffer(uint32_t& FBO)const { }
+        virtual void BindFrameBuffer(SR_GTYPES_NS::Framebuffer* pFBO) { }
+        virtual void DeleteBuffer(uint32_t& FBO) const { }
 
         SR_NODISCARD virtual inline bool IsFullScreen() const { return false; }
         virtual SR_FORCE_INLINE void SetFullScreen(bool value) {  }

@@ -35,6 +35,7 @@ namespace SR_GRAPH_NS {
     protected:
         SR_NODISCARD ShaderPtr GetShader(SR_SRSL_NS::ShaderType type) const override;
         SR_NODISCARD bool IsDirectional() const noexcept { return m_isDirectional; }
+        SR_NODISCARD std::vector<SR_GTYPES_NS::Framebuffer*> GetFrameBuffers() const override;
 
         void UseSharedUniforms(ShaderPtr pShader) override;
 

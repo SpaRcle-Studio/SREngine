@@ -83,7 +83,7 @@ namespace SR_GTYPES_NS {
             return false;
         }
 
-        m_pipeline->BindFrameBuffer(m_frameBuffer);
+        m_pipeline->BindFrameBuffer(this);
         m_pipeline->SetCurrentFramebuffer(this);
 
         return true;

@@ -102,7 +102,7 @@ namespace SR_GRAPH_NS {
             m_kernel->SetValidationLayersEnabled(true);
         }
 
-        m_viewport = EvoVulkan::Tools::Initializers::Viewport(0, 0, 0, 0);
+        m_viewport = EvoVulkan::Tools::Initializers::Viewport(1, 1, 0, 0);
         m_scissor = EvoVulkan::Tools::Initializers::Rect2D(0, 0, 0, 0);
         m_cmdBufInfo = EvoVulkan::Tools::Initializers::CommandBufferBeginInfo();
         m_renderPassBI = EvoVulkan::Tools::Insert::RenderPassBeginInfo(0, 0, VK_NULL_HANDLE, VK_NULL_HANDLE, nullptr, 0);
@@ -872,33 +872,78 @@ namespace SR_GRAPH_NS {
     }
 
     void Vulkan::SetBuildState(bool isBuild) {
-        /// TODO: здесь нужна оптимизация цепочки кадровых буферов, так же исключить перестроение цепочки при отсутсвии изменений
+        SR_TRACY_ZONE;
 
         if (!isBuild) {
             return Environment::SetBuildState(isBuild);
         }
 
+        /// Чистим старую очередь
+
         m_kernel->ClearSubmitQueue();
 
-        VkSubmitInfo submitInfo = EvoVulkan::Tools::Initializers::SubmitInfo();
-        submitInfo.commandBufferCount   = 1;
-        submitInfo.waitSemaphoreCount   = 1;
-        submitInfo.signalSemaphoreCount = 1;
-        submitInfo.pWaitDstStageMask    = m_kernel->GetSubmitPipelineStages();
+        auto&& queues = m_fboQueue.GetQueues();
 
-        for (uint16_t i = 0; i < m_framebuffersQueue.size(); ++i) {
-            submitInfo.pCommandBuffers   = m_framebuffersQueue[i].first->GetCmdRef();
-            submitInfo.pSignalSemaphores = m_framebuffersQueue[i].first->GetSemaphoreRef();
-
-            if (i == 0) {
-                submitInfo.pWaitSemaphores = m_kernel->GetPresentCompleteSemaphore();
+        for (auto&& queue : queues) {
+            for (auto&& pFrameBuffer : queue) {
+                auto&& fboId = pFrameBuffer->GetId();
+                auto&& vkFrameBuffer = m_memory->m_FBOs[fboId - 1];
+                vkFrameBuffer->ClearWaitSemaphores();
+                vkFrameBuffer->ClearSignalSemaphores();
             }
-            else {
-                submitInfo.pWaitSemaphores = m_framebuffersQueue[i - 1].first->GetSemaphoreRef();
+        }
+
+        /// Определяем зависимости
+
+        if (!queues.empty()) {
+            /// Если являемся началом цепочки, то должны дождаться предыдущего кадра
+            for (auto&& pFrameBuffer : queues.front()) {
+                auto&& vkFrameBuffer = m_memory->m_FBOs[pFrameBuffer->GetId() - 1];
+                vkFrameBuffer->GetWaitSemaphores().emplace_back(m_kernel->GetPresentCompleteSemaphore());
+            }
+
+            /// Если являемся концом цепочки, то нужно чтобы нас дождался рендер
+            for (auto&& pFrameBuffer : queues.back()) {
+                auto&& vkFrameBuffer = m_memory->m_FBOs[pFrameBuffer->GetId() - 1];
+                m_kernel->GetWaitSemaphores().emplace_back(vkFrameBuffer->GetSemaphore());
+            }
+        }
+
+        for (uint32_t queueIndex = 1; queueIndex < queues.size(); ++queueIndex) {
+            for (auto&& pFrameBuffer : queues[queueIndex]) {
+                for (auto&& pDependency : queues[queueIndex - 1]) {
+                    auto&& vkFrameBuffer = m_memory->m_FBOs[pFrameBuffer->GetId() - 1];
+                    auto&& vkDependency = m_memory->m_FBOs[pDependency->GetId() - 1];
+                    vkFrameBuffer->GetWaitSemaphores().emplace_back(vkDependency->GetSemaphore());
+                }
+            }
+        }
+
+        /// Строим новую очередь
+
+        for (auto&& queue : queues) {
+            EvoVulkan::SubmitInfo submitInfo;
+
+            submitInfo.SetWaitDstStageMask(m_kernel->GetSubmitPipelineStages());
+
+            for (auto&& pFrameBuffer : queue) {
+                auto&& vkFrameBuffer = m_memory->m_FBOs[pFrameBuffer->GetId() - 1];
+
+                submitInfo.commandBuffers.emplace_back(vkFrameBuffer->GetCmd());
+
+                for (auto&& signalSemaphore : vkFrameBuffer->GetSignalSemaphores()) {
+                    submitInfo.AddSignalSemaphore(signalSemaphore);
+                }
+
+                for (auto&& waitSemaphore : vkFrameBuffer->GetWaitSemaphores()) {
+                    submitInfo.AddWaitSemaphore(waitSemaphore);
+                }
             }
 
             m_kernel->AddSubmitQueue(submitInfo);
         }
+
+        /// m_kernel->PrintSubmitQueue();
 
         Environment::SetBuildState(isBuild);
     }
@@ -977,10 +1022,12 @@ namespace SR_GRAPH_NS {
                 return EvoVulkan::Core::RenderResult::Error;
         }
 
-        for (const auto& submitInfo : m_submitQueue) {
+        for (auto&& submitInfo : m_submitQueue) {
             SR_TRACY_ZONE_S("QueueSubmit");
 
-            if (auto result = vkQueueSubmit(m_device->GetQueues()->GetGraphicsQueue(), 1, &submitInfo, VK_NULL_HANDLE); result != VK_SUCCESS) {
+            auto&& vkSubmitInfo = submitInfo.ToVk();
+
+            if (auto result = vkQueueSubmit(m_device->GetQueues()->GetGraphicsQueue(), 1, &vkSubmitInfo, VK_NULL_HANDLE); result != VK_SUCCESS) {
                 VK_ERROR("renderFunction() : failed to queue submit (frame buffer)! Reason: " + EvoVulkan::Tools::Convert::result_to_description(result));
 
                 if (result == VK_ERROR_DEVICE_LOST) {
@@ -993,26 +1040,26 @@ namespace SR_GRAPH_NS {
 
         auto&& vkImgui = dynamic_cast<SR_GRAPH_NS::Vulkan*>(Environment::Get())->GetVkImGUI();
 
-        m_submitCmdBuffs[0] = m_drawCmdBuffs[m_currentBuffer];
+        m_submitInfo.commandBuffers.clear();
+
+        m_submitInfo.commandBuffers.emplace_back(m_drawCmdBuffs[m_currentBuffer]);
+
         if (m_GUIEnabled && vkImgui && !vkImgui->IsSurfaceDirty()) {
-            m_submitCmdBuffs[1] = vkImgui->Render(m_currentBuffer);
-            m_submitInfo.commandBufferCount = 2;
+            m_submitInfo.commandBuffers.emplace_back(vkImgui->Render(m_currentBuffer));
 
-            //AddSubmitQueue(vkImgui->GetSubmitInfo(
-            //     GetSubmitInfo().signalSemaphoreCount,
-            //     GetSubmitInfo().pSignalSemaphores
-            //));
+            /// AddSubmitQueue(vkImgui->GetSubmitInfo(
+            ///      GetSubmitInfo().signalSemaphoreCount,
+            ///      GetSubmitInfo().pSignalSemaphores
+            /// ));
         }
-        else {
-            m_submitInfo.commandBufferCount = 1;
-        }
-
-        m_submitInfo.pCommandBuffers = m_submitCmdBuffs;
 
         {
             SR_TRACY_ZONE_S("GraphicsQueueSubmit");
+
+            auto&& vkSubmitInfo = m_submitInfo.ToVk();
+
             /// Submit to queue
-            if (auto result = vkQueueSubmit(m_device->GetQueues()->GetGraphicsQueue(), 1, &m_submitInfo, VK_NULL_HANDLE); result != VK_SUCCESS) {
+            if (auto result = vkQueueSubmit(m_device->GetQueues()->GetGraphicsQueue(), 1, &vkSubmitInfo, VK_NULL_HANDLE); result != VK_SUCCESS) {
                 VK_ERROR("renderFunction() : failed to queue submit! Reason: " + EvoVulkan::Tools::Convert::result_to_description(result));
 
                 if (result == VK_ERROR_DEVICE_LOST) {
@@ -1067,6 +1114,16 @@ namespace SR_GRAPH_NS {
     EvoVulkan::Core::FrameResult SRVulkan::SubmitFrame() {
         SR_TRACY_ZONE;
         return VulkanKernel::SubmitFrame();
+    }
+
+    EvoVulkan::Core::FrameResult SRVulkan::QueuePresent() {
+        SR_TRACY_ZONE;
+        return VulkanKernel::QueuePresent();
+    }
+
+    EvoVulkan::Core::FrameResult SRVulkan::WaitIdle() {
+        SR_TRACY_ZONE;
+        return VulkanKernel::WaitIdle();
     }
 
     void SRVulkan::PollWindowEvents() {

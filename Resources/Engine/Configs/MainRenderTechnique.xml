@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <Technique Name="ShadowMap">
-    <CascadedShadowMapPass Name="DepthFBO" Directional="false" Cascades="4">
-        <FramebufferSettings DynamicResizing="true" DepthEnabled="true" SmoothSamples="1" Layers="4">
-            <Size X="2048" Y="2048"/>
+    <CascadedShadowMapPass Name="DepthFBO" Directional="false" Cascades="4" SplitLambda="0.95" Near="10.0" Far="750.0">
+        <FramebufferSettings DynamicResizing="false" DepthEnabled="true" SmoothSamples="1" Layers="4">
+            <Size X="4096" Y="4096"/>
             <PreScale X="1.0" Y="1.0"/>
             <Depth Format="Auto" ClearValue="1.0" Aspect="Depth" />
         </FramebufferSettings>
@@ -32,4 +32,15 @@
             </Attachments>
         </PostProcessPass>
     </SwapchainPass>
+    <Queues>
+        <Queue>
+            <Pass Name="DepthFBO"/>
+        </Queue>
+        <Queue>
+            <Pass Name="SceneViewFBO"/>
+        </Queue>
+        <Queue>
+            <Pass Name="SwapchainPass"/>
+        </Queue>
+    </Queues>
 </Technique>

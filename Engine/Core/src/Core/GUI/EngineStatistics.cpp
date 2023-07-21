@@ -11,6 +11,7 @@
 
 #include <Graphics/Memory/ShaderProgramManager.h>
 #include <Graphics/Render/RenderTechnique.h>
+#include <Graphics/Pipeline/Vulkan.h>
 
 namespace SR_CORE_GUI_NS {
     EngineStatistics::EngineStatistics()
@@ -25,6 +26,7 @@ namespace SR_CORE_GUI_NS {
             ThreadsPage();
             WidgetsPage();
             VideoMemoryPage();
+            SubmitQueuePage();
 
             ImGui::EndTabBar();
         }
@@ -240,5 +242,71 @@ namespace SR_CORE_GUI_NS {
 
             ImGui::EndTabItem();
         }
+    }
+
+    void EngineStatistics::SubmitQueuePage() {
+        if (ImGui::BeginTabItem("Submit queue")) {
+            auto&& pVulkan = dynamic_cast<SR_GRAPH_NS::Vulkan*>(GetContext()->GetPipeline());
+            if (!pVulkan) {
+                ImGui::Text("Not supported!");
+                ImGui::EndTabItem();
+                return;
+            }
+
+            auto&& pKernel = pVulkan->GetKernel();
+            if (!pKernel) {
+                ImGui::Text("Kernel invalid!");
+                ImGui::EndTabItem();
+                return;
+            }
+
+            ImGui::CollapsingHeader(SR_FORMAT_C("Present complete semaphore [%p]", pKernel->GetPresentCompleteSemaphore()));
+
+            auto&& queue = pKernel->GetSubmitQueue();
+
+            uint32_t index = 0;
+            for (auto&& submitInfo : queue) {
+                if (ImGui::CollapsingHeader(SR_FORMAT_C("Queue %i", index))) {
+                    DrawSubmitInfo(submitInfo);
+                }
+                ++index;
+            }
+
+            if (ImGui::CollapsingHeader("Graphics queue")) {
+                DrawSubmitInfo(pKernel->GetSubmitInfo());
+            }
+
+            ImGui::CollapsingHeader(SR_FORMAT_C("Render complete semaphore [%p]", pKernel->GetRenderCompleteSemaphore()));
+
+            ImGui::EndTabItem();
+        }
+    }
+
+    void EngineStatistics::DrawSubmitInfo(const EvoVulkan::SubmitInfo& submitInfo) {
+        ImGui::Separator();
+
+        uint32_t waitIndex = 0;
+        for (auto&& pSemaphore : submitInfo.waitSemaphores) {
+            ImGui::Text("Wait semaphore %i [%p]", waitIndex, pSemaphore);
+            ++waitIndex;
+        }
+
+        ImGui::Separator();
+
+        uint32_t cmdIndex = 0;
+        for (auto&& pCmd : submitInfo.commandBuffers) {
+            ImGui::Text("Cmd buffer %i [%p]", cmdIndex, pCmd);
+            ++cmdIndex;
+        }
+
+        ImGui::Separator();
+
+        uint32_t signalIndex = 0;
+        for (auto&& pSemaphore : submitInfo.signalSemaphores) {
+            ImGui::Text("Signal semaphore %i [%p]", signalIndex, pSemaphore);
+            ++signalIndex;
+        }
+
+        ImGui::Separator();
     }
 }

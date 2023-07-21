@@ -50,4 +50,8 @@ namespace SR_GRAPH_NS {
     void ShadowMapPass::UseUniforms(IMeshClusterPass::ShaderPtr pShader, IMeshClusterPass::MeshPtr pMesh) {
         pMesh->UseModelMatrix();
     }
+
+    bool ShadowMapPass::Render() {
+        return Super::Render();
+    }
 }

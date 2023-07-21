@@ -32,7 +32,7 @@ namespace SR_GRAPH_NS {
         for (uint8_t i = 0; i < pipeline->GetCountBuildIter(); ++i) {
             pipeline->SetBuildIteration(i);
 
-            pipeline->BindFrameBuffer(0);
+            pipeline->BindFrameBuffer(nullptr);
             pipeline->ClearBuffers(m_color.r, m_color.g, m_color.b, m_color.a, m_depth, 1);
 
             pipeline->BeginCmdBuffer();

@@ -17,6 +17,8 @@ namespace SR_GRAPH_NS {
         bool Init() override;
         void DeInit() override;
 
+        bool Render() override;
+
         bool Load(const SR_XML_NS::Node& passNode) override;
 
         SR_NODISCARD SR_MATH_NS::Matrix4x4 GetLightSpaceMatrix() const noexcept { return m_lightSpaceMatrix; }
