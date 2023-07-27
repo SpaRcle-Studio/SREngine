@@ -350,7 +350,7 @@ namespace SR_WORLD_NS {
 
     Path SceneCubeChunkLogic::GetRegionsPath() const {
         /// TODO: cache path
-        return m_scene->GetPath().Concat("regions");
+        return m_scene->GetAbsPath().Concat("regions");
     }
 
     std::pair<SR_MATH_NS::IVector3, SR_MATH_NS::IVector3> SceneCubeChunkLogic::GetRegionAndChunk(const SR_MATH_NS::FVector3& pos) const {
@@ -408,7 +408,7 @@ namespace SR_WORLD_NS {
         SR_TRACY_ZONE;
         SR_LOCK_GUARD
 
-        auto&& componentsPath = m_scene->GetPath().Concat("data/components.bin");
+        auto&& componentsPath = m_scene->GetAbsPath().Concat("data/components.bin");
 
         if (auto&& rootComponentsMarshal = SR_HTYPES_NS::Marshal::LoadPtr(componentsPath)) {
             auto&& components = SR_UTILS_NS::ComponentManager::Instance().LoadComponents(*rootComponentsMarshal);

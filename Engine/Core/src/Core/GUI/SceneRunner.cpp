@@ -117,7 +117,7 @@ namespace SR_CORE_NS::GUI {
 
         m_scenePath = m_lastPath;
 
-        auto&& runtimePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Scenes/Runtime-scene.scene");
+        auto&& runtimePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat(SR_WORLD_NS::Scene::RuntimeScenePath.ConcatExt("scene"));
 
         if (runtimePath.Exists(SR_UTILS_NS::Path::Type::Folder)) {
             if (!SR_PLATFORM_NS::Delete(runtimePath)) {
@@ -128,15 +128,18 @@ namespace SR_CORE_NS::GUI {
 
         SR_LOG("SceneRunner::PlayScene() : copy scene: \n\tFrom: " + m_scene->GetPath().ToString() + "\n\tTo: " + runtimePath.ToString());
 
-        if (!m_scene->GetPath().GetFolder().Copy(runtimePath)) {
+        if (!m_scene->GetAbsPath().GetFolder().Copy(runtimePath)) {
             SR_ERROR("SceneRunner::PlayScene() : failed to copy scene!\n\tSource: "
                 + m_scene->GetPath().ToString() + "\n\tDestination: " + runtimePath.ToString());
             return false;
         }
 
-        auto&& runtimeScene = SR_WORLD_NS::Scene::Load(runtimePath);
-
-        return Engine::Instance().SetScene(runtimeScene);
+        if (auto&& runtimeScene = SR_WORLD_NS::Scene::Load(SR_WORLD_NS::Scene::RuntimeScenePath.ConcatExt("scene"))) {
+            return Engine::Instance().SetScene(runtimeScene);
+        }
+        else {
+            return false;
+        }
     }
 
     void SceneRunner::ReturnScene() {

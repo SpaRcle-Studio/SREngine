@@ -97,9 +97,9 @@ namespace SR_CORE_NS {
         m_autoReloadResources = SR_UTILS_NS::Features::Instance().Enabled("AutoReloadResources", false);
 
         if (!m_engineScene && !m_editor->LoadSceneFromCachedPath()) {
-            auto&& scenePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Scenes/New-scene.scene");
+            auto&& scenePath = SR_WORLD_NS::Scene::NewScenePath.ConcatExt("scene");
 
-            if (SR_PLATFORM_NS::IsExists(scenePath)) {
+            if (SR_WORLD_NS::Scene::IsExists(scenePath)) {
                 if (!SetScene(SR_WORLD_NS::Scene::Load(scenePath))) {
                     SR_ERROR("Engine::Create() : failed to load scene!\n\tPath: " + scenePath.ToString())
                 }

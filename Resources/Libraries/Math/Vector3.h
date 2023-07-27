@@ -46,10 +46,10 @@ public:
     }
 
 public:
-    [[nodiscard]] T Max() const {
+    SR_NODISCARD T Max() const {
         return x > y && x > z ? x : y > x && y > z ? y : z;
     }
-    [[nodiscard]] T Min() const {
+    SR_NODISCARD T Min() const {
         return x < y && x < z ? x : y < x && y < z ? y : z;
     }
 
@@ -61,7 +61,7 @@ public:
         return Vector3(static_cast<T>(cos(x)), static_cast<T>(cos(y)), static_cast<T>(cos(z)));
     }
 
-    [[nodiscard]] bool Empty() const {
+    SR_NODISCARD bool Empty() const {
         return (x == 0 && y == 0 && z == 0);
     }
 
@@ -76,7 +76,7 @@ public:
         return "(" + std::to_string(x) + ", " + std::to_string(y) + ", " + std::to_string(z) + ")";
     }
 
-    [[nodiscard]] T Distance(Vector3 point) const {
+    SR_NODISCARD T Distance(Vector3 point) const {
         return std::sqrt(
                 pow(point.x - x, 2) +
                 pow(point.y - y, 2) +
@@ -84,7 +84,7 @@ public:
         );
     }
 
-    [[nodiscard]] Vector3 Direction(Vector3 point) const {
+    SR_NODISCARD Vector3 Direction(Vector3 point) const {
         if (point == *this)
             return Vector3();
         Vector3 heading = point - (*this);
@@ -92,7 +92,7 @@ public:
         return heading / distance;
     }
 
-    [[nodiscard]] Vector3 Limits(int lim) const {
+    SR_NODISCARD Vector3 Limits(int lim) const {
         int xi = (int)x / lim;
         int yi = (int)y / lim;
         int zi = (int)z / lim;
@@ -104,17 +104,25 @@ public:
         return Vector3(xd, yd, zd);
     }
 
-    [[nodiscard]] Vector3 Inverse() const {
+    SR_NODISCARD Vector3 Inverse() const {
         return Vector3(-x, -y, -z);
     }
 
-    [[nodiscard]] Vector3 InverseAxis(unsigned char axis) const {
+    SR_NODISCARD Vector3 InverseAxis(unsigned char axis) const {
         Vector3 v = *this;
         v[axis] = -v[axis];
         return v;
     }
 
-    [[nodiscard]] Vector3 Normalize() const {
+    SR_NODISCARD Vector3<T> Clamp(const Vector3<T>& upper, const Vector3<T>& lover) const {
+        return Vector3<T>(
+                SR_CLAMP(x, upper.x, lover.x),
+                SR_CLAMP(y, upper.y, lover.y),
+                SR_CLAMP(z, upper.z, lover.z)
+        );
+    }
+
+    SR_NODISCARD Vector3 Normalize() const {
         T len = static_cast<T>(std::sqrt(x * x + y * y + z * z));
 
         Vector3 vec3 = *this;
@@ -136,20 +144,20 @@ public:
         return coord[p_axis];
     }
 
-    [[nodiscard]] Vector3 Replace(int from, int to) const {
+    SR_NODISCARD Vector3 Replace(int from, int to) const {
         return Vector3(
                 x == from ? to : x,
                 y == from ? to : y,
                 z == from ? to : z);
     }
 
-    [[nodiscard]] Vector3 Abs() const {
+    SR_NODISCARD Vector3 Abs() const {
         return Vector3(static_cast<T>(abs(x)), static_cast<T>(abs(y)), static_cast<T>(abs(z)));
     }
 
-    [[nodiscard]] T Dot(Vector3 p_b) const { return x * p_b.x + y * p_b.y + z * p_b.z; }
+    SR_NODISCARD T Dot(Vector3 p_b) const { return x * p_b.x + y * p_b.y + z * p_b.z; }
 
-    [[nodiscard]] Vector3 Cross(const Vector3 &p_b) const {
+    SR_NODISCARD Vector3 Cross(const Vector3 &p_b) const {
         Vector3 ret(
                 (y * p_b.z) - (z * p_b.y),
                 (z * p_b.x) - (x * p_b.z),

@@ -31,32 +31,33 @@ public:
             return;
         }
 
-        FVector3 velocity;
-        float_t speed = Input::GetKey(KeyCode::LShift) ? 0.5f * 1.5f : 0.5f;
+        velocity = pRigidbody3D->GetLinearVelocity();
+        velocity = FVector3(velocity.x * 0.8, velocity.y, velocity.z * 0.8);
 
-        bool isMove = false;
+        auto&& q = Quaternion(transform->GetRotation().Radians());
+        float_t speed = Input::GetKey(KeyCode::LShift) ? 1.75f : 1.5f;
 
         if (Input::GetKey(KeyCode::W)) {
-            velocity += FVector3(0, 0, speed);
-            isMove = true;
+            velocity += q * FVector3(0, 0, speed);
         }
 
         if (Input::GetKey(KeyCode::S)) {
-            velocity -= FVector3(0, 0, speed);
-            isMove = true;
+            velocity -= q * FVector3(0, 0, speed);
         }
 
         if (Input::GetKey(KeyCode::A)) {
-            velocity -= FVector3(speed, 0, 0);
-            isMove = true;
+            velocity -= q * FVector3(speed, 0, 0);
         }
 
         if (Input::GetKey(KeyCode::D)) {
-            velocity += FVector3(speed, 0, 0);
-            isMove = true;
+            velocity += q * FVector3(speed, 0, 0);
         }
 
-        if (Input::GetMouseDown(MouseCode::MouseLeft)){
+        velocity = velocity.Clamp(25.f, -25.f);
+
+        pRigidbody3D->SetLinearVelocity(velocity);
+
+        if (Input::GetMouseDown(MouseCode::MouseLeft)) {
             auto&& rotate = transform->GetRotation().Radians();
             auto&& q = Quaternion(rotate);
 
@@ -68,29 +69,19 @@ public:
         }
 
         if (isGrounded && Input::GetKeyDown(KeyCode::Space)) {
-            velocity += FVector3(0, 15, 0);
-            isMove = true;
+            pRigidbody3D->AddLinearVelocity(FVector3(0, 5, 0));
         }
 
         auto&& drag = Input::GetMouseDrag();
         if (drag.x != 0.f) {
             transform->Rotate(FVector3(0, drag.x / 10, 0));
         }
-
-        if (isMove) {
-            auto&& rotate = transform->GetRotation().Radians();
-            auto&& q = Quaternion(rotate);
-            pRigidbody3D->AddLinearVelocity(q * velocity);
-        }
-        else if (isGrounded) {
-            pRigidbody3D->SetLinearVelocity(pRigidbody3D->GetLinearVelocity() * 0.9);
-        }
     }
 
     void OnCollisionEnter(const CollisionData& data) override {
         auto&& pComponent = DynamicCastRigidbodyToComponent((Rigidbody*)data.pHandler);
         auto&& pParent = pComponent->GetGameObject();
-        if (pParent->GetName() == "Ground") {
+        if (pParent->GetTagString() == "Ground") {
             isGrounded++;
         }
     }
@@ -98,13 +89,14 @@ public:
     void OnCollisionExit(const CollisionData& data) override {
         auto&& pComponent = DynamicCastRigidbodyToComponent((Rigidbody*)data.pHandler);
         auto&& pParent = pComponent->GetGameObject();
-        if (pParent->GetName() == "Ground") {
+        if (pParent->GetTagString() == "Ground") {
             isGrounded--;
         }
     }
 
 private:
     int isGrounded = 0;
+    FVector3 velocity;
 
 };
 

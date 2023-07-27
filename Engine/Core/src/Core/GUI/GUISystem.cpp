@@ -524,11 +524,11 @@ void GUISystem::SetGuizmoTool(uint8_t toolId) {
 }
 
 static SR_UTILS_NS::Path GetNewScenePath() {
-    auto&& scenePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Scenes/New-scene.scene");
+    auto&& scenePath = SR_WORLD_NS::Scene::NewScenePath.ConcatExt("scene");
 
     uint64_t index = 0;
-    while (scenePath.Exists()) {
-        scenePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat(SR_FORMAT("Scenes/New-scene-%u.scene", index));
+    while (SR_WORLD_NS::Scene::IsExists(scenePath)) {
+        scenePath = SR_FORMAT("%s-%u.scene", SR_WORLD_NS::Scene::NewScenePath.CStr(), index);
         ++index;
     }
 
@@ -536,11 +536,11 @@ static SR_UTILS_NS::Path GetNewScenePath() {
 }
 
 static SR_UTILS_NS::Path GetNewPrefabPath() {
-    auto&& scenePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Scenes/new-prefab.prefab");
+    auto&& scenePath = SR_WORLD_NS::Scene::NewPrefabPath.ConcatExt("prefab");
 
     uint64_t index = 0;
-    while (scenePath.Exists()) {
-        scenePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat(SR_FORMAT("Scenes/new-prefab-%u.prefab", index));
+    while (SR_WORLD_NS::Scene::IsExists(scenePath)) {
+        scenePath = SR_FORMAT("%s-%u.prefab", SR_WORLD_NS::Scene::NewPrefabPath.CStr(), index);
         ++index;
     }
 
@@ -574,8 +574,12 @@ bool GUISystem::BeginMenuBar() {
         ImGui::Separator();
 
         if (ImGui::MenuItem("Load")) {
-            auto&& scenesPath = Helper::ResourceManager::Instance().GetResPath();
+            auto&& scenesPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
+
             if (auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(scenesPath.ToString(), { { "Scene", "scene,prefab" } }); !path.Empty()) {
+                path = path.RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetCachePath());
+                path = path.RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetResPath());
+
                 if (path.GetExtensionView() == "scene") {
                     auto &&folder = SR_UTILS_NS::StringUtils::GetDirToFileFromFullPath(path);
 
@@ -605,18 +609,29 @@ bool GUISystem::BeginMenuBar() {
         ImGui::Separator();
 
         if (ImGui::MenuItem("Save at")) {
-            if (auto&& scene = Engine::Instance().GetScene(); scene.RecursiveLockIfValid()) {
-                const auto scenesPath = Helper::ResourceManager::Instance().GetResPath();
-                if (auto path = SR_UTILS_NS::FileDialog::Instance().SaveDialog(scenesPath.ToString(), { { "Scene", "scene,prefab" } }); !path.Empty()) {
+            if (auto&& scene = Engine::Instance().GetScene(); scene.RecursiveLockIfValid())
+            {
+                const auto scenesPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
+
+                if (auto&& path = SR_UTILS_NS::FileDialog::Instance().SaveDialog(scenesPath.ToString(), { { "Scene", "scene,prefab" } }); !path.Empty())
+                {
+                    path = path.RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetCachePath());
+                    path = path.RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetResPath());
+
                     if (scene->SaveAt(path)) {
                         SR_SYSTEM_LOG("GUISystem::BeginMenuBar() : scene is saved as \"" + path.ToString() + "\"");
+
+                        if (auto&& pSavedScene = SR_WORLD_NS::Scene::Load(path)) {
+                            Engine::Instance().SetScene(pSavedScene);
+                            Engine::Instance().GetEditor()->CacheScenePath(path);
+                        }
                     }
                     else {
                         SR_ERROR("GUISystem::BeginMenuBar() : failed to save scene! \n\tPath: \"" + path.ToString() + "\"");
                     }
                 }
+
                 scene.Unlock();
-                Engine::Instance().GetEditor()->CacheScenePath(scene->GetPath());
             }
             else {
                 SR_WARN("GUISystem::BeginMenuBar() : scene is not valid!");

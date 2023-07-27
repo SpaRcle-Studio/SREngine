@@ -241,14 +241,15 @@ namespace SR_CORE_NS::GUI {
             return;
         }
 
-        if (scenePath.Contains("Scenes/Runtime-scene.scene")) {
+        if (scenePath.Contains(SR_WORLD_NS::Scene::RuntimeScenePath.ToStringRef())) {
             return;
         }
 
-        if (!scenePath.Valid() && !scenePath.Exists()) {
-            SR_WARN("EditorGUI::LoadSceneFromCachedPath : scene path is not valid or does not exist! Caching is aborted.");
+        if (!SR_WORLD_NS::Scene::IsExists(scenePath)) {
+            SR_ERROR("EditorGUI::LoadSceneFromCachedPath : scene path is not valid or does not exist! Caching is aborted.");
             return;
         }
+
         if (scenePath.GetExtension() == SR_UTILS_NS::Prefab::EXTENSION) {
             return;
         }
@@ -277,12 +278,12 @@ namespace SR_CORE_NS::GUI {
             return false;
         }
 
-        if (!scenePath.Valid() && !scenePath.Exists()) {
-            SR_ERROR("EditorGUI::LoadSceneFromCachedPath() : cached path is not usable! \n\tPath: " + scenePath.ToStringRef() + "\n\tUsing default scene.");
-            scenePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Scenes/New-scene.scene");
+        if (!SR_WORLD_NS::Scene::IsExists(scenePath)) {
+            SR_WARN("EditorGUI::LoadSceneFromCachedPath() : cached path is not usable! \n\tPath: " + scenePath.ToStringRef() + "\n\tUsing default scene.");
+            scenePath = SR_WORLD_NS::Scene::NewScenePath.ConcatExt("scene");
         }
 
-        if (!scenePath.Exists()) {
+        if (!SR_WORLD_NS::Scene::IsExists(scenePath)) {
             SR_ERROR("EditorGUI::LoadSceneFromCachedPath() : default scene does not exist! \n\tCreating new one by path: " + scenePath.ToStringRef());
             return Engine::Instance().SetScene(SR_WORLD_NS::Scene::New(scenePath));
         }
