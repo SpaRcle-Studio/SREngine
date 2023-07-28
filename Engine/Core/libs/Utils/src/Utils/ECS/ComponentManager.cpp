@@ -14,7 +14,12 @@ namespace SR_UTILS_NS {
             return nullptr;
         }
 
-        return CreateComponentImpl(m_ids.at(name));
+        return CreateComponentOfName(m_ids.at(name));
+    }
+
+    Component *ComponentManager::CreateComponentOfName(ComponentManager::Hash hashName) {
+        SR_SCOPED_LOCK
+        return CreateComponentImpl(hashName);
     }
 
     Component* ComponentManager::CreateComponentImpl(size_t id) {

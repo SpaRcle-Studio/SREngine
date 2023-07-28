@@ -261,7 +261,7 @@ namespace SR_MATH_NS {
             return v;
         }
 
-        SR_NODISCARD Vector3 Lerp(const Vector3& vector3, Unit t) const noexcept {
+        SR_NODISCARD SR_FORCE_INLINE Vector3 SR_FASTCALL Lerp(const Vector3& vector3, Unit t) const noexcept {
             return (Vector3)(*this + (vector3 - *this) * t);
         }
 
@@ -357,9 +357,11 @@ namespace SR_MATH_NS {
             z += p_v.z;
             return *this;
         }
-        template<typename U> SR_FORCE_INLINE Vector3 operator+(const Vector3<U> &p_v) const {
+
+        template<typename U> SR_FORCE_INLINE Vector3 SR_FASTCALL operator+(const Vector3<U> &p_v) const noexcept {
             return Vector3(x + p_v.x, y + p_v.y, z + p_v.z);
         }
+
         template<typename U> SR_FORCE_INLINE Vector3 operator%(const Vector3<U> &p_v) const {
             return Vector3(
                     static_cast<int32_t>(x) % static_cast<int32_t>(p_v.x),

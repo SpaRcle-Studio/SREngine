@@ -47,6 +47,7 @@ namespace SR_UTILS_NS {
         };
 
         virtual Component* GetOrCreateComponent(const std::string& name);
+        virtual Component* GetOrCreateComponent(size_t hashName);
         virtual Component* GetComponent(const std::string& name);
         virtual Component* GetComponent(size_t hashName);
 

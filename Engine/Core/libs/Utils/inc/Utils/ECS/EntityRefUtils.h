@@ -6,20 +6,26 @@
 #define SRENGINE_ENTITYREFUTILS_H
 
 #include <Utils/Common/Enumerations.h>
-#include <Utils/World/Scene.h>
-#include <Utils/ECS/Entity.h>
-#include <Utils/ECS/Component.h>
-#include <Utils/ECS/GameObject.h>
+#include <Utils/Types/SafePointer.h>
+#include <Utils/Types/SharedPtr.h>
+
+namespace SR_WORLD_NS {
+    class Scene;
+}
+
+namespace SR_UTILS_NS {
+    class Entity;
+}
 
 namespace SR_UTILS_NS::EntityRefUtils {
     struct OwnerRef {
         OwnerRef() = default;
 
-        OwnerRef(const Entity::Ptr& ptr) /** NOLINT */
+        OwnerRef(const SR_HTYPES_NS::SharedPtr<Entity>& ptr) /** NOLINT */
             : pEntity(ptr)
         { }
 
-        OwnerRef(const SR_WORLD_NS::Scene::Ptr& ptr) /** NOLINT */
+        OwnerRef(const SR_HTYPES_NS::SafePtr<SR_WORLD_NS::Scene>& ptr) /** NOLINT */
             : pScene(ptr)
         { }
 
@@ -45,8 +51,9 @@ namespace SR_UTILS_NS::EntityRefUtils {
             return *this;
         }
 
-        Entity::Ptr pEntity;
-        SR_WORLD_NS::Scene::Ptr pScene;
+        SR_HTYPES_NS::SharedPtr<Entity> pEntity;
+        SR_HTYPES_NS::SafePtr<SR_WORLD_NS::Scene> pScene;
+
     };
 
     SR_ENUM_NS_CLASS_T(Action, uint8_t,
@@ -68,9 +75,9 @@ namespace SR_UTILS_NS::EntityRefUtils {
 
     typedef std::vector<PathItem> RefPath;
 
-    SR_MAYBE_UNUSED SR_WORLD_NS::Scene::Ptr GetSceneFromOwner(const OwnerRef& owner);
+    SR_MAYBE_UNUSED SR_HTYPES_NS::SafePtr<SR_WORLD_NS::Scene> GetSceneFromOwner(const OwnerRef& owner);
 
-    SR_MAYBE_UNUSED Entity::Ptr GetEntity(const OwnerRef& owner, const RefPath& path);
+    SR_MAYBE_UNUSED SR_HTYPES_NS::SharedPtr<Entity> GetEntity(const OwnerRef& owner, const RefPath& path);
 
     SR_MAYBE_UNUSED RefPath CalculatePath(const OwnerRef& from);
     SR_MAYBE_UNUSED RefPath CalculateRelativePath(const OwnerRef& from, const OwnerRef& target);

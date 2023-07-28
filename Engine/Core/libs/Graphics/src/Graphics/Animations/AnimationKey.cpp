@@ -9,7 +9,16 @@
 #include <Utils/ECS/Transform.h>
 
 namespace SR_ANIMATIONS_NS {
-    void TranslationKey::Update(double_t progress, float_t weight, AnimationKey* pPreviousKey, AnimationData* pData, AnimationData* pStaticData) {
+    AnimationKey::AnimationKey(AnimationChannel* pChannel)
+        : m_channel(pChannel)
+        , m_translation(dynamic_cast<TranslationKey*>(this))
+        , m_rotation(dynamic_cast<RotationKey*>(this))
+        , m_scaling(dynamic_cast<ScalingKey*>(this))
+    { }
+
+    /// ----------------------------------------------------------------------------------------------------------------
+
+    void TranslationKey::Update(double_t progress, float_t weight, AnimationKey* pPreviousKey, AnimationData* pData, AnimationData* pStaticData) noexcept {
         if (!pStaticData->translation.has_value()) {
             return;
         }
@@ -18,7 +27,7 @@ namespace SR_ANIMATIONS_NS {
             pData->translation = SR_MATH_NS::FVector3::Zero();
         }
 
-        if (auto&& pKey = dynamic_cast<TranslationKey*>(pPreviousKey)) {
+        if (auto&& pKey = pPreviousKey ? pPreviousKey->GetTranslation() : nullptr) {
             auto&& newValue = (pKey->m_delta + pStaticData->translation.value()).Lerp(pStaticData->translation.value() + m_delta, progress);
             pData->translation = pData->translation->Lerp(newValue, weight);
         }
@@ -27,7 +36,7 @@ namespace SR_ANIMATIONS_NS {
         }
     }
 
-    void TranslationKey::Set(float_t weight, AnimationData *pData) {
+    void TranslationKey::Set(float_t weight, AnimationData *pData) noexcept {
         if (!pData->translation.has_value()) {
             pData->translation = SR_MATH_NS::FVector3::Zero();
         }
@@ -37,7 +46,7 @@ namespace SR_ANIMATIONS_NS {
 
     /// ----------------------------------------------------------------------------------------------------------------
 
-    void RotationKey::Update(double_t progress, float_t weight, AnimationKey* pPreviousKey, AnimationData* pData, AnimationData* pStaticData) {
+    void RotationKey::Update(double_t progress, float_t weight, AnimationKey* pPreviousKey, AnimationData* pData, AnimationData* pStaticData) noexcept {
         if (!pStaticData->rotation.has_value()) {
             return;
         }
@@ -46,7 +55,7 @@ namespace SR_ANIMATIONS_NS {
             pData->rotation = SR_MATH_NS::Quaternion::Identity();
         }
 
-        if (auto&& pKey = dynamic_cast<RotationKey*>(pPreviousKey)) {
+        if (auto&& pKey = pPreviousKey ? pPreviousKey->GetRotation() : nullptr) {
             auto&& newValue = (pKey->m_delta * pStaticData->rotation.value()).Slerp(m_delta * pStaticData->rotation.value(), progress);
             pData->rotation = pData->rotation->Slerp(newValue, weight);
         }
@@ -55,7 +64,7 @@ namespace SR_ANIMATIONS_NS {
         }
     }
 
-    void RotationKey::Set(float_t weight, AnimationData *pData) {
+    void RotationKey::Set(float_t weight, AnimationData *pData) noexcept {
         if (!pData->rotation.has_value()) {
             pData->rotation = SR_MATH_NS::Quaternion::Identity();
         }
@@ -65,7 +74,7 @@ namespace SR_ANIMATIONS_NS {
 
     /// ----------------------------------------------------------------------------------------------------------------
 
-    void ScalingKey::Update(double_t progress, float_t weight, AnimationKey* pPreviousKey, AnimationData* pData, AnimationData* pStaticData) {
+    void ScalingKey::Update(double_t progress, float_t weight, AnimationKey* pPreviousKey, AnimationData* pData, AnimationData* pStaticData) noexcept {
         if (!pStaticData->scale.has_value()) {
             return;
         }
@@ -74,7 +83,7 @@ namespace SR_ANIMATIONS_NS {
             pData->scale = SR_MATH_NS::FVector3::One();
         }
 
-        if (auto&& pKey = dynamic_cast<ScalingKey*>(pPreviousKey)) {
+        if (auto&& pKey = pPreviousKey ? pPreviousKey->GetScaling() : nullptr) {
             auto&& newValue = (pKey->m_delta * pStaticData->scale.value()).Lerp(pStaticData->scale.value() * m_delta, progress);
             pData->scale = pData->scale->Lerp(newValue, weight);
         }
@@ -83,7 +92,7 @@ namespace SR_ANIMATIONS_NS {
         }
     }
 
-    void ScalingKey::Set(float_t weight, AnimationData* pData) {
+    void ScalingKey::Set(float_t weight, AnimationData* pData) noexcept {
         if (!pData->scale.has_value()) {
             pData->scale = SR_MATH_NS::FVector3::One();
         }

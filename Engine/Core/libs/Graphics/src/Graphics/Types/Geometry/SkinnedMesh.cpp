@@ -220,8 +220,6 @@ namespace SR_GTYPES_NS {
     bool SkinnedMesh::PopulateSkeletonMatrices() {
         SR_TRACY_ZONE;
 
-        static SR_MATH_NS::Matrix4x4 identityMatrix = SR_MATH_NS::Matrix4x4().Identity();
-
         auto&& bones = GetRawMesh()->GetBones(GetMeshId());
 
         if (bones.empty()) {
@@ -234,11 +232,6 @@ namespace SR_GTYPES_NS {
             m_bonesIds.resize(bonesCount);
             m_skeletonOffsets.resize(bonesCount);
             m_skeletonMatrices.resize(bonesCount);
-
-            /// for (uint64_t i = 0; i < bonesCount; ++i) {
-            ///     m_skeletonMatrices[i] = identityMatrix;
-            ///     m_skeletonOffsets[i] = identityMatrix;
-            /// }
         }
 
         auto&& pSkeleton = m_skeletonRef.GetComponent<SR_ANIMATIONS_NS::Skeleton>();
@@ -255,13 +248,12 @@ namespace SR_GTYPES_NS {
             m_isOffsetsInitialized = true;
         }
 
+        auto&& pSkeletonRaw = pSkeleton.Get();
+
+        pSkeletonRaw->CalculateMatrices();
+
         for (uint64_t boneId = 0; boneId < m_bonesIds.size(); ++boneId) {
-            if (auto&& bone = pSkeleton->GetBoneByIndex(m_bonesIds[boneId]); bone && bone->gameObject) {
-                m_skeletonMatrices[boneId] = bone->gameObject->GetTransform()->GetMatrix();
-            }
-            else {
-                m_skeletonMatrices[boneId] = identityMatrix;
-            }
+            memcpy(&m_skeletonMatrices[boneId], &pSkeletonRaw->GetMatrixByIndex(m_bonesIds[boneId]), sizeof(SR_MATH_NS::Matrix4x4));
         }
 
         return true;

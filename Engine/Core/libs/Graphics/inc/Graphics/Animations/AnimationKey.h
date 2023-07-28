@@ -15,22 +15,32 @@ namespace SR_UTILS_NS {
 namespace SR_ANIMATIONS_NS {
     class AnimationChannel;
 
+    class TranslationKey;
+    class RotationKey;
+    class ScalingKey;
+
     /// Задача ключа обеспечить необходимый переход из предыдущего ключа в этот в зависимости от интервала времени.
     /// Интервал времени задается от 0.f до 1.f в зависимости от положения перехода в момент времени.
     /// Переход должен работать и в обратную сторону (от 1.f до 0.f)
     class AnimationKey : public SR_UTILS_NS::NonCopyable {
     public:
-        explicit AnimationKey(AnimationChannel* pChannel)
-            : m_channel(pChannel)
-        { }
+        explicit AnimationKey(AnimationChannel* pChannel);
 
     public:
-        virtual void Update(double_t progress, float_t weight, AnimationKey* pPreviousKey, AnimationData* pData, AnimationData* pStaticData) = 0;
-        virtual void Set(float_t weight, AnimationData* pData) = 0;
+        virtual void SR_FASTCALL Update(double_t progress, float_t weight, AnimationKey* pPreviousKey, AnimationData* pData, AnimationData* pStaticData) noexcept = 0;
+        virtual void SR_FASTCALL Set(float_t weight, AnimationData* pData) noexcept = 0;
         virtual AnimationKey* Copy(AnimationChannel* pChannel) const noexcept = 0;
+
+        SR_NODISCARD SR_FORCE_INLINE TranslationKey* SR_FASTCALL GetTranslation() const noexcept { return m_translation; }
+        SR_NODISCARD SR_FORCE_INLINE RotationKey* SR_FASTCALL GetRotation() const noexcept { return m_rotation; }
+        SR_NODISCARD SR_FORCE_INLINE ScalingKey* SR_FASTCALL GetScaling() const noexcept { return m_scaling; }
 
     protected:
         AnimationChannel* m_channel = nullptr;
+
+        TranslationKey* m_translation = nullptr;
+        RotationKey* m_rotation = nullptr;
+        ScalingKey* m_scaling = nullptr;
 
     };
 
@@ -46,8 +56,8 @@ namespace SR_ANIMATIONS_NS {
         { }
 
     public:
-        void Update(double_t progress, float_t weight, AnimationKey* pPreviousKey, AnimationData* pData, AnimationData* pStaticData) override;
-        void Set(float_t weight, AnimationData* pData) override;
+        void SR_FASTCALL Update(double_t progress, float_t weight, AnimationKey* pPreviousKey, AnimationData* pData, AnimationData* pStaticData) noexcept override;
+        void SR_FASTCALL Set(float_t weight, AnimationData* pData) noexcept override;
 
         SR_NODISCARD AnimationKey* Copy(AnimationChannel* pChannel) const noexcept override {
             return new TranslationKey(pChannel, m_translation, m_delta);
@@ -71,8 +81,8 @@ namespace SR_ANIMATIONS_NS {
         { }
 
     public:
-        void Update(double_t progress, float_t weight, AnimationKey* pPreviousKey, AnimationData* pData, AnimationData* pStaticData) override;
-        void Set(float_t weight, AnimationData* pData) override;
+        void SR_FASTCALL Update(double_t progress, float_t weight, AnimationKey* pPreviousKey, AnimationData* pData, AnimationData* pStaticData) noexcept override;
+        void SR_FASTCALL Set(float_t weight, AnimationData* pData) noexcept override;
 
         SR_NODISCARD AnimationKey* Copy(AnimationChannel* pChannel) const noexcept override {
             return new RotationKey(pChannel, m_rotation, m_delta);
@@ -96,8 +106,8 @@ namespace SR_ANIMATIONS_NS {
         { }
 
     public:
-        void Update(double_t progress, float_t weight, AnimationKey* pPreviousKey, AnimationData* pData, AnimationData* pStaticData) override;
-        void Set(float_t weight, AnimationData* pData) override;
+        void SR_FASTCALL Update(double_t progress, float_t weight, AnimationKey* pPreviousKey, AnimationData* pData, AnimationData* pStaticData) noexcept override;
+        void SR_FASTCALL Set(float_t weight, AnimationData* pData) noexcept override;
 
         SR_NODISCARD AnimationKey* Copy(AnimationChannel* pChannel) const noexcept override {
             return new ScalingKey(pChannel, m_scaling, m_delta);

@@ -12,6 +12,8 @@ namespace SR_ANIMATIONS_NS {
     }
 
     void AnimationClipState::Update(const UpdateContext& context) {
+        SR_TRACY_ZONE;
+
         if (!m_clip) {
             Super::Update(context);
             return;
@@ -51,6 +53,8 @@ namespace SR_ANIMATIONS_NS {
     }
 
     void IAnimationClipState::SetClip(AnimationClip* pClip) {
+        SR_TRACY_ZONE;
+
         if (m_clip == pClip) {
             return;
         }

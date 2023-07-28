@@ -331,6 +331,8 @@ namespace SR_WORLD_NS {
 
         m_newQueue.emplace_back(ptr);
 
+        ptr->SetScene(this);
+
         for (auto&& child : ptr->GetChildrenRef()) {
             RegisterGameObject(child);
         }
@@ -358,7 +360,6 @@ namespace SR_WORLD_NS {
                 const uint64_t id = m_freeObjIndices.empty() ? m_gameObjects.size() : m_freeObjIndices.front();
 
                 gameObject->SetIdInScene(id);
-                gameObject->SetScene(this);
 
                 if (m_freeObjIndices.empty()) {
                     m_gameObjects.emplace_back(gameObject);

@@ -25,6 +25,7 @@ namespace SR_UTILS_NS {
     public:
         SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save(SR_HTYPES_NS::Marshal::Ptr pMarshal) const;
         SR_NODISCARD EntityRef Copy(const EntityRefUtils::OwnerRef& owner) const;
+        SR_NODISCARD const SR_HTYPES_NS::SharedPtr<Entity>& GetTarget() const { return m_target; }
 
         void Save(SR_HTYPES_NS::Marshal& marshal) const;
         void Load(SR_HTYPES_NS::Marshal& marshal);
@@ -36,13 +37,13 @@ namespace SR_UTILS_NS {
             return nullptr;
         }
 
-        SR_NODISCARD GameObject::Ptr GetGameObject() const;
-        SR_NODISCARD Component::Ptr GetComponent() const;
+        SR_NODISCARD SR_HTYPES_NS::SharedPtr<GameObject> GetGameObject() const;
+        SR_NODISCARD SR_HTYPES_NS::SharedPtr<Component> GetComponent() const;
         SR_NODISCARD bool IsValid() const;
         SR_NODISCARD bool IsRelative() const { return m_relative; }
 
         void SetRelative(bool relative);
-        void SetPathTo(Entity::Ptr pEntity);
+        EntityRef& SetPathTo(SR_HTYPES_NS::SharedPtr<Entity> pEntity);
         void SetOwner(const EntityRefUtils::OwnerRef& owner);
 
     private:
@@ -55,7 +56,7 @@ namespace SR_UTILS_NS {
         bool m_relative = true;
 
         EntityRefUtils::OwnerRef m_owner;
-        mutable Entity::Ptr m_target;
+        mutable SR_HTYPES_NS::SharedPtr<Entity> m_target;
 
     };
 }

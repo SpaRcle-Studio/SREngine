@@ -12,11 +12,13 @@ namespace SR_ANIMATIONS_NS {
     }
 
     uint32_t AnimationChannel::UpdateChannel(uint32_t keyIndex,
-            float_t time,
-            float_t weight,
-            const AnimationPose* pStaticPose,
-            AnimationPose* pWorkingPose
+        float_t time,
+        float_t weight,
+        const AnimationPose* pStaticPose,
+        AnimationPose* pWorkingPose
     ) const {
+        SR_TRACY_ZONE;
+
         auto&& pWorkingData = pWorkingPose->GetData(GetGameObjectHashName());
         auto&& pStaticData = pStaticPose->GetData(GetGameObjectHashName());
 
@@ -50,9 +52,9 @@ namespace SR_ANIMATIONS_NS {
         else {
             auto&& [prevTime, prevKey] = m_keys.at(keyIndex - 1);
 
-            const double_t currentTime = time - prevTime;
-            const double_t keyCurrTime = keyTime - prevTime;
-            const double_t progress = currentTime / keyCurrTime;
+            const float_t currentTime = time - prevTime;
+            const float_t keyCurrTime = keyTime - prevTime;
+            const float_t progress = currentTime / keyCurrTime;
 
             pKey->Update(progress, weight, prevKey, pWorkingData, pStaticData);
         }
@@ -60,7 +62,9 @@ namespace SR_ANIMATIONS_NS {
         return keyIndex;
     }
 
-    void AnimationChannel::Load(aiNodeAnim *pChannel, double_t ticksPerSecond, std::vector<AnimationChannel*>& channels) {
+    void AnimationChannel::Load(aiNodeAnim* pChannel, float_t ticksPerSecond, std::vector<AnimationChannel*>& channels) {
+        SR_TRACY_ZONE;
+
         if (pChannel->mNumPositionKeys > 0) {
             static constexpr float_t mul = 0.01;
 
@@ -122,7 +126,7 @@ namespace SR_ANIMATIONS_NS {
 
                 auto&& scale = AiV3ToFV3(pScalingKey.mValue, 1.f);
 
-                pScalingChannel->AddKey(pScalingKey.mTime /ticksPerSecond,
+                pScalingChannel->AddKey(pScalingKey.mTime / ticksPerSecond,
                     new ScalingKey(
                         pScalingChannel,
                         scale,
@@ -142,7 +146,7 @@ namespace SR_ANIMATIONS_NS {
         }
     }
 
-    void AnimationChannel::AddKey(double_t timePoint, AnimationKey* pKey) {
+    void AnimationChannel::AddKey(float_t timePoint, AnimationKey* pKey) {
         m_keys.emplace_back(std::make_pair(timePoint, pKey));
     }
 }

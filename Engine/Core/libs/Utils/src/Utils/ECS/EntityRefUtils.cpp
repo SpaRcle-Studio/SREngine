@@ -3,6 +3,10 @@
 //
 
 #include <Utils/ECS/EntityRefUtils.h>
+#include <Utils/World/Scene.h>
+#include <Utils/ECS/Entity.h>
+#include <Utils/ECS/Component.h>
+#include <Utils/ECS/GameObject.h>
 
 namespace SR_UTILS_NS::EntityRefUtils {
     Entity::Ptr GetEntity(const OwnerRef& owner, const RefPath& path) {

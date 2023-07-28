@@ -22,6 +22,8 @@ namespace SR_ANIMATIONS_NS {
     }
 
     AnimationData* AnimationPose::GetData(AnimationPose::BoneHashName boneHashName) const noexcept {
+        SR_TRACY_ZONE;
+
         if (auto&& pIt = m_indices.find(boneHashName); pIt != m_indices.end()) {
             return pIt->second;
         }

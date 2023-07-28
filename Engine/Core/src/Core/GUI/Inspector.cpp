@@ -22,6 +22,7 @@
 #include <Graphics/Font/Text.h>
 #include <Graphics/Types/Geometry/SkinnedMesh.h>
 #include <Graphics/Animations/Animator.h>
+#include <Graphics/Animations/BoneComponent.h>
 
 namespace Framework::Core::GUI {
     Inspector::Inspector(Hierarchy* hierarchy)
@@ -191,6 +192,7 @@ namespace Framework::Core::GUI {
             copyPtrComponent = DrawComponent<SR_GTYPES_NS::Text>(copyPtrComponent, "Text", index);
             copyPtrComponent = DrawComponent<SR_ANIMATIONS_NS::Animator>(copyPtrComponent, "Animator", index);
             copyPtrComponent = DrawComponent<SR_ANIMATIONS_NS::Skeleton>(copyPtrComponent, "Skeleton", index);
+            copyPtrComponent = DrawComponent<SR_ANIMATIONS_NS::BoneComponent>(copyPtrComponent, "Bone", index);
             copyPtrComponent = DrawComponent<SR_UTILS_NS::LookAtComponent>(copyPtrComponent, "LookAtComponent", index);
 
             if (copyPtrComponent != component && copyPtrComponent) {

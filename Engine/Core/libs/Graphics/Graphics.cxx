@@ -13,6 +13,7 @@
 #include "../Graphics/src/Graphics/Animations/AnimationStateTransition.cpp"
 #include "../Graphics/src/Graphics/Animations/AnimationStateMachine.cpp"
 #include "../Graphics/src/Graphics/Animations/AnimationState.cpp"
+#include "../Graphics/src/Graphics/Animations/BoneComponent.cpp"
 
 #include "../Graphics/src/Graphics/Pipeline/Vulkan/VulkanImGUI.cpp"
 #include "../Graphics/src/Graphics/Pipeline/Vulkan/VulkanMemory.cpp"

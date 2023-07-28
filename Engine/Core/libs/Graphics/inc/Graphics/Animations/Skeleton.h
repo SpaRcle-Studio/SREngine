@@ -30,14 +30,16 @@ namespace SR_ANIMATIONS_NS {
         void OnDestroy() override;
 
         bool ReCalculateSkeleton();
+        void CalculateMatrices();
 
         Bone* AddBone(Bone* pParent, const std::string& name, bool recalculate);
         SR_NODISCARD Bone* GetRootBone() const noexcept { return m_rootBone; }
 
+        const SR_MATH_NS::Matrix4x4& GetMatrixByIndex(uint16_t index) noexcept;
+        SR_UTILS_NS::Transform* GetTransformByIndex(uint16_t index) noexcept;
         SR_NODISCARD const std::vector<Bone*>& GetBones() const noexcept { return m_bonesByIndex; };
         SR_NODISCARD Bone* TryGetBone(uint64_t hashName);
         SR_NODISCARD Bone* GetBone(uint64_t hashName);
-        SR_NODISCARD Bone* GetBoneByIndex(uint64_t index);
         SR_NODISCARD uint64_t GetBoneIndex(uint64_t hashName);
         SR_NODISCARD bool IsDebugEnabled() const noexcept { return m_debugEnabled; }
         void SetDebugEnabled(bool enabled) { m_debugEnabled = enabled; }
@@ -53,11 +55,15 @@ namespace SR_ANIMATIONS_NS {
         ska::flat_hash_map<Bone*, uint64_t> m_debugLines;
 
         ska::flat_hash_map<uint64_t, Bone*> m_bonesByName;
+
         std::vector<Bone*> m_bonesByIndex;
 
-        Bone* m_rootBone = nullptr;
-    };
+        std::vector<SR_MATH_NS::Matrix4x4> m_matrices;
+        bool m_dirtyMatrices = false;
 
+        Bone* m_rootBone = nullptr;
+
+    };
 }
 
 #endif //SRENGINE_SKELETON_H
