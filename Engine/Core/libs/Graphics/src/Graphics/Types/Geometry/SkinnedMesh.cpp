@@ -167,7 +167,6 @@ namespace SR_GTYPES_NS {
 
         m_skeletonIsBroken = !usable;
         m_renderScene->SetDirty();
-        m_bonesIds.clear();
 
         MeshComponent::Update(dt);
     };
@@ -186,18 +185,20 @@ namespace SR_GTYPES_NS {
             return;
         }
 
+        auto&& pSkeleton = m_skeletonRef.GetComponent<SR_ANIMATIONS_NS::Skeleton>();
+
         switch (GetMaxBones()) {
             case 128:
-                GetRenderContext()->GetCurrentShader()->SetValue<false>(SHADER_SKELETON_MATRICES_128, m_skeletonMatrices.data());
-                GetRenderContext()->GetCurrentShader()->SetValue<false>(SHADER_SKELETON_MATRIX_OFFSETS_128, m_skeletonOffsets.data());
+                GetRenderContext()->GetCurrentShader()->SetValue<false>(SHADER_SKELETON_MATRICES_128, pSkeleton->GetMatrices().data());
+                GetRenderContext()->GetCurrentShader()->SetValue<false>(SHADER_SKELETON_MATRIX_OFFSETS_128, pSkeleton->GetOffsets().data());
                 break;
             case 256:
-                GetRenderContext()->GetCurrentShader()->SetValue<false>(SHADER_SKELETON_MATRICES_256, m_skeletonMatrices.data());
-                GetRenderContext()->GetCurrentShader()->SetValue<false>(SHADER_SKELETON_MATRIX_OFFSETS_256, m_skeletonOffsets.data());
+                GetRenderContext()->GetCurrentShader()->SetValue<false>(SHADER_SKELETON_MATRICES_256, pSkeleton->GetMatrices().data());
+                GetRenderContext()->GetCurrentShader()->SetValue<false>(SHADER_SKELETON_MATRIX_OFFSETS_256, pSkeleton->GetOffsets().data());
                 break;
             case 384:
-                GetRenderContext()->GetCurrentShader()->SetValue<false>(SHADER_SKELETON_MATRICES_384, m_skeletonMatrices.data());
-                GetRenderContext()->GetCurrentShader()->SetValue<false>(SHADER_SKELETON_MATRIX_OFFSETS_384, m_skeletonOffsets.data());
+                GetRenderContext()->GetCurrentShader()->SetValue<false>(SHADER_SKELETON_MATRICES_384, pSkeleton->GetMatrices().data());
+                GetRenderContext()->GetCurrentShader()->SetValue<false>(SHADER_SKELETON_MATRIX_OFFSETS_384, pSkeleton->GetOffsets().data());
                 break;
             case 0:
                 break;
@@ -220,18 +221,10 @@ namespace SR_GTYPES_NS {
     bool SkinnedMesh::PopulateSkeletonMatrices() {
         SR_TRACY_ZONE;
 
-        auto&& bones = GetRawMesh()->GetBones(GetMeshId());
+        auto&& bones = GetRawMesh()->GetOptimizedBones();
 
         if (bones.empty()) {
             return false;
-        }
-
-        if (m_bonesIds.empty()) {
-            const uint64_t bonesCount = SR_MAX(GetMaxBones(), bones.size());
-
-            m_bonesIds.resize(bonesCount);
-            m_skeletonOffsets.resize(bonesCount);
-            m_skeletonMatrices.resize(bonesCount);
         }
 
         auto&& pSkeleton = m_skeletonRef.GetComponent<SR_ANIMATIONS_NS::Skeleton>();
@@ -240,21 +233,8 @@ namespace SR_GTYPES_NS {
             return false;
         }
 
-        if (!m_isOffsetsInitialized) {
-            for (auto&& [hashName, boneId] : bones) {
-                m_skeletonOffsets[boneId] = GetRawMesh()->GetBoneOffset(hashName);
-                m_bonesIds[boneId] = pSkeleton->GetBoneIndex(hashName);
-            }
-            m_isOffsetsInitialized = true;
-        }
-
-        auto&& pSkeletonRaw = pSkeleton.Get();
-
-        pSkeletonRaw->CalculateMatrices();
-
-        for (uint64_t boneId = 0; boneId < m_bonesIds.size(); ++boneId) {
-            memcpy(&m_skeletonMatrices[boneId], &pSkeletonRaw->GetMatrixByIndex(m_bonesIds[boneId]), sizeof(SR_MATH_NS::Matrix4x4));
-        }
+        pSkeleton->SetOptimizedBones(GetRawMesh()->GetOptimizedBones());
+        pSkeleton->SetBonesOffsets(GetRawMesh()->GetBoneOffsets());
 
         return true;
     }
@@ -266,7 +246,9 @@ namespace SR_GTYPES_NS {
             SetGeometryName(GetRawMesh()->GetGeometryName(GetMeshId()));
         }
 
-        m_isOffsetsInitialized = false;
+        if (auto&& pSkeleton = m_skeletonRef.GetComponent<SR_ANIMATIONS_NS::Skeleton>()) {
+            pSkeleton->ResetSkeleton();
+        }
 
         MarkPipelineUnBuild();
 

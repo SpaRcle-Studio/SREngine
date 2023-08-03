@@ -323,4 +323,46 @@ namespace SR_ANIMATIONS_NS {
 
         return m_matrices[index];
     }
+
+    const std::vector<SR_MATH_NS::Matrix4x4>& Skeleton::GetMatrices() noexcept {
+        if (!m_dirtyMatrices) {
+            return m_matrices;
+        }
+
+        m_matrices.resize(m_optimizedBones.size());
+
+        for (auto&& [hashName, index] : m_optimizedBones) {
+            auto&& pBone = GetBone(hashName);
+            auto&& pGameObject = pBone->gameObject;
+
+            if (!pGameObject && !pBone->hasError && !pBone->Initialize()) {
+                continue;
+            }
+
+            if (pGameObject) {
+                m_matrices[index] = pGameObject->GetTransform()->GetMatrix();
+            }
+        }
+
+        m_dirtyMatrices = false;
+
+        return m_matrices;
+    }
+
+    void Skeleton::SetOptimizedBones(const ska::flat_hash_map<uint64_t, uint16_t>& bones) {
+        if (m_optimizedBones.empty()) {
+            m_optimizedBones = bones;
+        }
+    }
+
+    void Skeleton::SetBonesOffsets(const std::vector<SR_MATH_NS::Matrix4x4>& offsets) {
+        if (m_skeletonOffsets.empty()) {
+            m_skeletonOffsets = offsets;
+        }
+    }
+
+    void Skeleton::ResetSkeleton() {
+        m_optimizedBones.clear();
+        m_skeletonOffsets.clear();
+    }
 }

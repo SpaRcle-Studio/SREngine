@@ -55,13 +55,7 @@ namespace SR_GTYPES_NS {
     private:
         SR_UTILS_NS::EntityRef m_skeletonRef;
 
-        bool m_isOffsetsInitialized = false;
         bool m_skeletonIsBroken = false;
-
-        std::vector<uint64_t> m_bonesIds;
-
-        std::vector<SR_MATH_NS::Matrix4x4> m_skeletonMatrices;
-        std::vector<SR_MATH_NS::Matrix4x4> m_skeletonOffsets;
 
     };
 }
