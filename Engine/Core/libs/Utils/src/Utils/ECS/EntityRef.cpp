@@ -25,8 +25,6 @@ namespace SR_UTILS_NS {
     }
 
     GameObject::Ptr EntityRef::GetGameObject() const {
-        SR_TRACY_ZONE;
-
         if (m_path.empty() && m_target) {
             UpdatePath();
         }
@@ -39,8 +37,6 @@ namespace SR_UTILS_NS {
     }
 
     Component::Ptr EntityRef::GetComponent() const {
-        SR_TRACY_ZONE;
-
         if (m_path.empty() && m_target) {
             UpdatePath();
         }

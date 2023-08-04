@@ -177,28 +177,40 @@ namespace SR_GTYPES_NS {
     }
 
     void SkinnedMesh::UseModelMatrix() {
-        SR_TRACY_ZONE;
-
         /// TODO: А не стоило бы изменить ColorBufferPass так, чтобы он вызывал не UseModelMatrix, а более обощённый метод?
         /// Нет, не стоило бы.
         if (!PopulateSkeletonMatrices()) {
             return;
         }
 
+        auto&& pShader = GetRenderContext()->GetCurrentShader();
+        SRAssert(pShader);
+
+        pShader->SetMat4(SHADER_MODEL_MATRIX, m_modelMatrix);
+
         auto&& pSkeleton = m_skeletonRef.GetComponent<SR_ANIMATIONS_NS::Skeleton>();
+        auto&& pRenderScene = GetRenderScene();
+
+        SRAssert(pRenderScene);
+
+        if (pRenderScene->GetCurrentSkeleton() == pSkeleton) {
+            return;
+        }
+
+        pRenderScene->SetCurrentSkeleton(pSkeleton.Get());
 
         switch (GetMaxBones()) {
             case 128:
-                GetRenderContext()->GetCurrentShader()->SetValue<false>(SHADER_SKELETON_MATRICES_128, pSkeleton->GetMatrices().data());
-                GetRenderContext()->GetCurrentShader()->SetValue<false>(SHADER_SKELETON_MATRIX_OFFSETS_128, pSkeleton->GetOffsets().data());
+                pShader->SetValue<false>(SHADER_SKELETON_MATRICES_128, pSkeleton->GetMatrices().data());
+                pShader->SetValue<false>(SHADER_SKELETON_MATRIX_OFFSETS_128, pSkeleton->GetOffsets().data());
                 break;
             case 256:
-                GetRenderContext()->GetCurrentShader()->SetValue<false>(SHADER_SKELETON_MATRICES_256, pSkeleton->GetMatrices().data());
-                GetRenderContext()->GetCurrentShader()->SetValue<false>(SHADER_SKELETON_MATRIX_OFFSETS_256, pSkeleton->GetOffsets().data());
+                pShader->SetValue<false>(SHADER_SKELETON_MATRICES_256, pSkeleton->GetMatrices().data());
+                pShader->SetValue<false>(SHADER_SKELETON_MATRIX_OFFSETS_256, pSkeleton->GetOffsets().data());
                 break;
             case 384:
-                GetRenderContext()->GetCurrentShader()->SetValue<false>(SHADER_SKELETON_MATRICES_384, pSkeleton->GetMatrices().data());
-                GetRenderContext()->GetCurrentShader()->SetValue<false>(SHADER_SKELETON_MATRIX_OFFSETS_384, pSkeleton->GetOffsets().data());
+                pShader->SetValue<false>(SHADER_SKELETON_MATRICES_384, pSkeleton->GetMatrices().data());
+                pShader->SetValue<false>(SHADER_SKELETON_MATRIX_OFFSETS_384, pSkeleton->GetOffsets().data());
                 break;
             case 0:
                 break;
@@ -206,8 +218,6 @@ namespace SR_GTYPES_NS {
                 SRHaltOnce0();
                 return;
         }
-
-        GetRenderContext()->GetCurrentShader()->SetMat4(SHADER_MODEL_MATRIX, m_modelMatrix);
     }
 
     void SkinnedMesh::OnResourceReloaded(SR_UTILS_NS::IResource* pResource) {
@@ -219,8 +229,6 @@ namespace SR_GTYPES_NS {
     }
 
     bool SkinnedMesh::PopulateSkeletonMatrices() {
-        SR_TRACY_ZONE;
-
         auto&& bones = GetRawMesh()->GetOptimizedBones();
 
         if (bones.empty()) {
@@ -280,16 +288,6 @@ namespace SR_GTYPES_NS {
             return 0;
         }
 
-        uint32_t bonesCount = GetRawMesh()->GetBones(GetMeshId()).size();
-
-        if (bonesCount > 256) {
-            return 384;
-        }
-        else if (bonesCount > SR_HUMANOID_MAX_BONES) {
-            return 256;
-        }
-        else {
-            return SR_HUMANOID_MAX_BONES;
-        }
+        return SR_GRAPH_NS::RoundBonesCount(GetRawMesh()->GetOptimizedBones().size());
     }
 }

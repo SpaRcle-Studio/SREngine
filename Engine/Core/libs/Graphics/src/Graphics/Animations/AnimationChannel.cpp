@@ -11,16 +11,12 @@ namespace SR_ANIMATIONS_NS {
         }
     }
 
-    uint32_t AnimationChannel::UpdateChannel(uint32_t keyIndex,
-        float_t time,
-        float_t weight,
-        const AnimationPose* pStaticPose,
-        AnimationPose* pWorkingPose
-    ) const {
-        SR_TRACY_ZONE;
+    uint32_t AnimationChannel::UpdateChannel(uint32_t keyIndex, float_t time, const UpdateContext& context) const {
+        auto&& pWorkingData = context.pWorkingPose->GetData(GetGameObjectHashName());
+        auto&& pStaticData = context.pStaticPose->GetData(GetGameObjectHashName());
 
-        auto&& pWorkingData = pWorkingPose->GetData(GetGameObjectHashName());
-        auto&& pStaticData = pStaticPose->GetData(GetGameObjectHashName());
+        // auto&& pWorkingData = context.pWorkingPose->GetDataByIndex(GetBoneIndex());
+        // auto&& pStaticData = context.pStaticPose->GetDataByIndex(GetBoneIndex());
 
         if (!pWorkingData || !pStaticData) {
             return keyIndex;
@@ -31,14 +27,16 @@ namespace SR_ANIMATIONS_NS {
             return keyIndex;
         }
 
-        auto&& [keyTime, pKey] = m_keys.at(keyIndex);
+        auto&& [keyTime, pKey] = m_keys[keyIndex];
 
         if (time > keyTime) {
-            if (keyIndex == 0) {
-                pKey->Update(0.f, weight, nullptr, pWorkingData, pStaticData);
-            }
-            else {
-                pKey->Update(1.f, weight, m_keys.at(keyIndex - 1).second, pWorkingData, pStaticData);
+            if (context.fpsCompensation) {
+                if (keyIndex == 0) {
+                    pKey->Update(0.f, context.weight, nullptr, pWorkingData, pStaticData);
+                }
+                else {
+                    pKey->Update(1.f, context.weight, m_keys[keyIndex - 1].second, pWorkingData, pStaticData);
+                }
             }
 
             ++keyIndex;
@@ -47,23 +45,25 @@ namespace SR_ANIMATIONS_NS {
         }
 
         if (keyIndex == 0) {
-            pKey->Update(0.f, weight, nullptr, pWorkingData, pStaticData);
+            pKey->Update(0.f, context.weight, nullptr, pWorkingData, pStaticData);
         }
         else {
-            auto&& [prevTime, prevKey] = m_keys.at(keyIndex - 1);
+            auto&& [prevTime, prevKey] = m_keys[keyIndex - 1];
 
             const float_t currentTime = time - prevTime;
             const float_t keyCurrTime = keyTime - prevTime;
             const float_t progress = currentTime / keyCurrTime;
 
-            pKey->Update(progress, weight, prevKey, pWorkingData, pStaticData);
+            pKey->Update(progress, context.weight, prevKey, pWorkingData, pStaticData);
         }
 
         return keyIndex;
     }
 
-    void AnimationChannel::Load(aiNodeAnim* pChannel, float_t ticksPerSecond, std::vector<AnimationChannel*>& channels) {
+    void AnimationChannel::Load(SR_HTYPES_NS::RawMesh* pRawMesh, aiNodeAnim* pChannel, float_t ticksPerSecond, std::vector<AnimationChannel*>& channels) {
         SR_TRACY_ZONE;
+
+        auto&& boneIndex = pRawMesh->GetBoneIndex(SR_HASH_STR_VIEW(pChannel->mNodeName.C_Str()));
 
         if (pChannel->mNumPositionKeys > 0) {
             static constexpr float_t mul = 0.01;
@@ -72,6 +72,7 @@ namespace SR_ANIMATIONS_NS {
             auto&& first = AiV3ToFV3(pChannel->mPositionKeys[0].mValue, mul);
 
             pTranslationChannel->SetName(pChannel->mNodeName.C_Str());
+            pTranslationChannel->SetBoneIndex(boneIndex);
 
             for (uint16_t positionKeyIndex = 0; positionKeyIndex < pChannel->mNumPositionKeys; ++positionKeyIndex) {
                 auto&& pPositionKey = pChannel->mPositionKeys[positionKeyIndex];
@@ -97,6 +98,7 @@ namespace SR_ANIMATIONS_NS {
             auto&& first = AiQToQ(pChannel->mRotationKeys[0].mValue).Inverse();
 
             pRotationChannel->SetName(pChannel->mNodeName.C_Str());
+            pRotationChannel->SetBoneIndex(boneIndex);
 
             for (uint16_t rotationKeyIndex = 0; rotationKeyIndex < pChannel->mNumRotationKeys; ++rotationKeyIndex) {
                 auto&& pRotationKey = pChannel->mRotationKeys[rotationKeyIndex];
@@ -120,6 +122,7 @@ namespace SR_ANIMATIONS_NS {
             auto&& first = AiV3ToFV3(pChannel->mScalingKeys[0].mValue, 1.f);
 
             pScalingChannel->SetName(pChannel->mNodeName.C_Str());
+            pScalingChannel->SetBoneIndex(boneIndex);
 
             for (uint16_t scalingKeyIndex = 0; scalingKeyIndex < pChannel->mNumScalingKeys; ++scalingKeyIndex) {
                 auto&& pScalingKey = pChannel->mScalingKeys[scalingKeyIndex];

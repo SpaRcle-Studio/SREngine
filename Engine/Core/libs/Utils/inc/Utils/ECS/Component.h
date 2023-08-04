@@ -92,6 +92,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD virtual const std::string& GetComponentName() const = 0;
 
         SR_NODISCARD SR_FORCE_INLINE virtual bool IsComponentLoaded() const noexcept { return m_isComponentLoaded; }
+        SR_NODISCARD SR_FORCE_INLINE virtual bool IsComponentValid() const noexcept { return m_parent; }
         SR_NODISCARD SR_FORCE_INLINE virtual bool IsAttached() const noexcept { return m_isAttached; }
 
         /// Активен и компонент и его родительский объект

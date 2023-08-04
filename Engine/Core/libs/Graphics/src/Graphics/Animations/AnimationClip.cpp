@@ -73,9 +73,12 @@ namespace SR_ANIMATIONS_NS {
         return animations;
     }
 
-    void AnimationClip::LoadChannels(aiAnimation *pAnimation) {
+    void AnimationClip::LoadChannels(SR_HTYPES_NS::RawMesh* pRawMesh, uint32_t index) {
+        auto&& pAnimation = pRawMesh->GetAssimpScene()->mAnimations[index];
+
         for (uint16_t channelIndex = 0; channelIndex < pAnimation->mNumChannels; ++channelIndex) {
             AnimationChannel::Load(
+                pRawMesh,
                 pAnimation->mChannels[channelIndex],
                 pAnimation->mTicksPerSecond,
                 m_channels
@@ -98,7 +101,7 @@ namespace SR_ANIMATIONS_NS {
         auto&& resourceId = GetResourceId();
 
         if (SR_UTILS_NS::StringUtils::GetExtensionFromFilePath(resourceId) == "animation") {
-
+            SRHalt("TODO!");
         }
         else {
             auto&& [strIndex, rawPath] = SR_UTILS_NS::StringUtils::SplitTwo(resourceId, "|");
@@ -114,7 +117,7 @@ namespace SR_ANIMATIONS_NS {
                 return false;
             }
 
-            LoadChannels(pRawMesh->GetAssimpScene()->mAnimations[index]);
+            LoadChannels(pRawMesh, index);
         }
 
         return Super::Load();

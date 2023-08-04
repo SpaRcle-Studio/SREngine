@@ -34,4 +34,20 @@ namespace SR_GRAPH_NS {
 
         return nullptr;
     }
+
+    uint16_t RoundBonesCount(uint16_t count) {
+        if (count == 0) {
+            SRHalt("Invalid count!");
+            return 0;
+        }
+
+        if (count > 256) {
+            return 384;
+        }
+        else if (count > SR_HUMANOID_MAX_BONES) {
+            return 256;
+        }
+
+        return SR_HUMANOID_MAX_BONES;
+    }
 }

@@ -36,15 +36,16 @@ namespace SR_HTYPES_NS {
         static RawMesh* Load(const SR_UTILS_NS::Path &path);
 
     public:
-        uint32_t GetMeshesCount() const;
-        std::string GetGeometryName(uint32_t id) const;
+        SR_NODISCARD uint32_t GetMeshesCount() const;
+        SR_NODISCARD std::string GetGeometryName(uint32_t id) const;
 
-        std::vector<SR_UTILS_NS::Vertex> GetVertices(uint32_t id) const;
-        std::vector<uint32_t> GetIndices(uint32_t id) const;
-        const ska::flat_hash_map<uint64_t, uint32_t>& GetBones(uint32_t id) const;
-        const ska::flat_hash_map<Hash, uint16_t>& GetOptimizedBones() const { return m_optimizedBones; }
-        const SR_MATH_NS::Matrix4x4& GetBoneOffset(uint64_t hashName) const;
-        const std::vector<SR_MATH_NS::Matrix4x4>& GetBoneOffsets() const { return m_boneOffsets; }
+        SR_NODISCARD std::vector<SR_UTILS_NS::Vertex> GetVertices(uint32_t id) const;
+        SR_NODISCARD std::vector<uint32_t> GetIndices(uint32_t id) const;
+        SR_NODISCARD const ska::flat_hash_map<uint64_t, uint32_t>& GetBones(uint32_t id) const;
+        SR_NODISCARD const ska::flat_hash_map<Hash, uint16_t>& GetOptimizedBones() const { return m_optimizedBones; }
+        SR_NODISCARD const SR_MATH_NS::Matrix4x4& GetBoneOffset(uint64_t hashName) const;
+        SR_NODISCARD uint16_t GetBoneIndex(uint64_t hashName) const;
+        SR_NODISCARD const std::vector<SR_MATH_NS::Matrix4x4>& GetBoneOffsets() const { return m_boneOffsets; }
 
         SR_NODISCARD uint32_t GetVerticesCount(uint32_t id) const;
         SR_NODISCARD uint32_t GetIndicesCount(uint32_t id) const;

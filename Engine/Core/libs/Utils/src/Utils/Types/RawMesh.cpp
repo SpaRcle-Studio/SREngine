@@ -454,4 +454,13 @@ namespace SR_HTYPES_NS {
             m_boneOffsets[boneId] = GetBoneOffset(hashName);
         }
     }
+
+    uint16_t RawMesh::GetBoneIndex(uint64_t hashName) const {
+        auto&& pIt = m_optimizedBones.find(hashName);
+        if (pIt == m_optimizedBones.end()) {
+            return SR_UINT16_MAX;
+        }
+
+        return pIt->second;
+    }
 }

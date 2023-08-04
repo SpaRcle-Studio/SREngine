@@ -13,6 +13,7 @@ namespace SR_GTYPES_NS {
 
 namespace SR_GRAPH_NS {
     SR_GTYPES_NS::Mesh* CreateMeshByType(MeshType type);
+    uint16_t RoundBonesCount(uint16_t count);
 }
 
 #endif //SRENGINE_MESHUTILS_H

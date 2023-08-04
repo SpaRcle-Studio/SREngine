@@ -93,6 +93,7 @@ namespace SR_GRAPH_NS {
                 }
             }
 
+            GetRenderScene()->SetCurrentSkeleton(nullptr);
             m_context->SetCurrentShader(nullptr);
         }
     }

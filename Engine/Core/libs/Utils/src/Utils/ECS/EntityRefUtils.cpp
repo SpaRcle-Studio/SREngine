@@ -19,6 +19,9 @@ namespace SR_UTILS_NS::EntityRefUtils {
 
                     if (!pGameObject && owner.pEntity) {
                         if (auto&& pComponent = owner.pEntity.DynamicCast<Component>()) {
+                            if (!pComponent->IsComponentValid()) {
+                                return nullptr;
+                            }
                             pGameObject = pComponent->GetGameObject();
                         }
                         else if (auto&& pOwnerGameObject = owner.pEntity.DynamicCast<GameObject>()) {
@@ -249,6 +252,9 @@ namespace SR_UTILS_NS::EntityRefUtils {
             SR_UTILS_NS::Entity::Ptr pEntity = owner.pEntity;
 
             if (auto&& pComponent = pEntity.DynamicCast<Component>()) {
+                if (!pComponent->IsComponentValid()) {
+                    return SR_WORLD_NS::Scene::Ptr();
+                }
                 return pComponent->GetGameObject()->GetScene()->GetThis();
             }
             else if (auto&& pGameObject = pEntity.DynamicCast<GameObject>()) {

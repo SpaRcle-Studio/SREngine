@@ -191,8 +191,6 @@ namespace SR_UTILS_NS {
     }
 
     void Transform::UpdateTree() {
-        SR_TRACY_ZONE;
-
         m_dirtyMatrix = true;
 
         if (!m_gameObject) {
@@ -201,8 +199,8 @@ namespace SR_UTILS_NS {
 
         m_gameObject->OnMatrixDirty();
 
-        for (auto&& child : m_gameObject->GetChildrenRef()) {
-            child->GetTransform()->UpdateTree();
+        for (auto&& child : m_gameObject->GetChildrenTransform()) {
+            child->UpdateTree();
         }
     }
 

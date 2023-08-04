@@ -78,6 +78,7 @@ namespace SR_ANIMATIONS_NS {
         float_t dt = 0.f;
         float_t weight = 1.f;
         SR_HTYPES_NS::Time::Point now;
+        bool fpsCompensation = false;
 
     };
 

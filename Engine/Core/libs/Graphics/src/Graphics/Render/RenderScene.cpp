@@ -203,6 +203,8 @@ namespace SR_GRAPH_NS {
             pPipeline->PrepareFrame();
         }
 
+        m_currentSkeleton = nullptr;
+
         m_context->UpdateFramebuffers();
     }
 

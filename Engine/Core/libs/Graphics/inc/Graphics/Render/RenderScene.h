@@ -18,6 +18,10 @@ namespace SR_WORLD_NS {
     class Scene;
 }
 
+namespace SR_ANIMATIONS_NS {
+    class Skeleton;
+}
+
 namespace SR_GTYPES_NS {
     class Camera;
     class Mesh;
@@ -73,6 +77,7 @@ namespace SR_GRAPH_NS {
         void Remove(WidgetManagerPtr pWidgetManager);
 
         void SetOverlayEnabled(bool enabled);
+        void SetCurrentSkeleton(SR_ANIMATIONS_NS::Skeleton* pSkeleton) { m_currentSkeleton = pSkeleton;}
 
         void ForEachTechnique(const SR_HTYPES_NS::Function<void(RenderTechnique*)>& callback);
 
@@ -81,6 +86,7 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD bool IsOverlayEnabled() const;
         SR_NODISCARD RenderContext* GetContext() const;
         SR_NODISCARD LightSystem* GetLightSystem() const { return m_lightSystem; }
+        SR_NODISCARD SR_ANIMATIONS_NS::Skeleton* GetCurrentSkeleton() const { return m_currentSkeleton; }
         SR_NODISCARD PipelinePtr GetPipeline() const;
         SR_NODISCARD WindowPtr GetWindow() const;
         SR_NODISCARD const WidgetManagers& GetWidgetManagers() const;
@@ -105,6 +111,8 @@ namespace SR_GRAPH_NS {
         void Submit() noexcept;
 
     private:
+        SR_ANIMATIONS_NS::Skeleton* m_currentSkeleton = nullptr;
+
         LightSystem* m_lightSystem = nullptr;
 
         CameraPtr m_mainCamera = nullptr;
