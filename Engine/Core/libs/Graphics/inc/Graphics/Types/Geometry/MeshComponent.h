@@ -11,8 +11,6 @@
 namespace SR_GTYPES_NS {
     class MeshComponent : public IndexedMesh, public SR_GTYPES_NS::IRenderComponent {
     protected:
-        ~MeshComponent() override = default;
-
         explicit MeshComponent(MeshType type)
             : IndexedMesh(type)
         { }

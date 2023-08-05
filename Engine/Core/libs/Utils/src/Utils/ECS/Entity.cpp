@@ -93,7 +93,7 @@ namespace SR_UTILS_NS {
     ///---------------------------------------------------------------------------------------------------------------------
 
     Entity::Entity()
-        : SR_HTYPES_NS::SharedPtr<Entity>(this)
+        : SR_HTYPES_NS::SharedPtr<Entity>(this, SharedPtrPolicy::Manually)
         , m_entityId(ENTITY_ID_MAX)
     {
         m_entityId = EntityManager::Instance().Register(this);
