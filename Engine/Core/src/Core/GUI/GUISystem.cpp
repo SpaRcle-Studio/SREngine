@@ -94,21 +94,11 @@ bool GUISystem::BeginDockSpace(SR_GRAPH_NS::BasicWindowImpl* pWindow) {
 
         ImGui::PushStyleVar(ImGuiStyleVar_FrameBorderSize, 0.0f);
 
-        if (ImGui::SmallButton("×")) {
-            pWindow->Close();
-        }
 
-        if (pWindow->GetState() == Graphics::WindowState::Default && ImGui::SmallButton("[ ]")) {
-            pWindow->Maximize();
-        }
 
-        if (pWindow->GetState() == Graphics::WindowState::Maximized && ImGui::SmallButton("[=]")) {
-            pWindow->Restore();
-        }
 
-        if (ImGui::SmallButton("_")) {
-            pWindow->Collapse();
-        }
+
+
 
         ImGui::PopStyleVar();
 
@@ -122,6 +112,29 @@ bool GUISystem::BeginDockSpace(SR_GRAPH_NS::BasicWindowImpl* pWindow) {
         EndMenuBar();
 
 
+
+        ImGui::SetCursorPosX(ImGui::GetWindowSize().x - 20);
+        ImGui::SetCursorPosY(0);
+
+
+        if (ImGui::SmallButton("×")) {
+            pWindow->Close();
+        }
+
+        ImGui::SetCursorPosX(ImGui::GetWindowSize().x - 45);
+        ImGui::SetCursorPosY(0);
+        if (pWindow->GetState() == Graphics::WindowState::Default && ImGui::SmallButton("[ ]")) {
+            pWindow->Maximize();
+        }
+
+        if (pWindow->GetState() == Graphics::WindowState::Maximized && ImGui::SmallButton("[=]")) {
+            pWindow->Restore();
+        }
+        ImGui::SetCursorPosX(ImGui::GetWindowSize().x - 70);
+        ImGui::SetCursorPosY(0);
+        if (ImGui::SmallButton("_")) {
+            pWindow->Collapse();
+        }
         //SR_BEGIN_RIGHT_ALIGNMENT()
         //    SR_RIGHT_BUTTON(close, "×", {
         //        pWindow->Close();
