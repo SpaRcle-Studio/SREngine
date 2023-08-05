@@ -11,10 +11,10 @@ namespace SR_SRSL_NS {
     double_t SRSLEvaluator::Evaluate(const std::string& code) {
         SR_GLOBAL_LOCK
 
-        auto&& lexems = SRSLLexer::Instance().ParseString(code);
+        auto&& lexems = SRSLLexer::Instance().ParseString(code, 0);
         auto&& [pTree, result] = SRSLLexicalAnalyzer::Instance().Analyze(std::move(lexems));
 
-        if (result.code != SRSLReturnCode::Success) {
+        if (result.HasErrors()) {
             SR_ERROR("SSRSLEvaluator::Evaluate() : failed to parse expression!");
             return 0;
         }

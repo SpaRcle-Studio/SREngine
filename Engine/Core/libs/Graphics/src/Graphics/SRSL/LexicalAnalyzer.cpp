@@ -42,7 +42,7 @@ namespace SR_SRSL_NS {
         m_currentLexem = 0;
 
         m_states.clear();
-        m_result = SRSLResult(SRSLReturnCode::Success);
+        m_result = SRSLResult();
     }
 
     const Lexem *SRSLLexicalAnalyzer::GetLexem(int64_t offset) const {
@@ -60,7 +60,7 @@ namespace SR_SRSL_NS {
     void SRSLLexicalAnalyzer::ProcessMain() {
         m_lexicalTree.emplace_back(new SRSLLexicalTree());
 
-        while (InBounds() && m_result.code == SRSLReturnCode::Success) {
+        while (InBounds() && !IsHasErrors()) {
             switch (m_lexems[m_currentLexem].kind) {
                 case LexemKind::OpeningSquareBracket:
                 case LexemKind::ClosingSquareBracket:
@@ -194,7 +194,7 @@ namespace SR_SRSL_NS {
                     ++m_currentLexem;
                     break;
                 default:
-                    m_result = SRSLResult(SRSLReturnCode::UnknownLexem, GetLexem(0)->offset);
+                    m_result = SRSLResult(SRSLReturnCode::UnknownLexem, GetLexem(0));
                     break;
             }
         }
@@ -271,7 +271,7 @@ namespace SR_SRSL_NS {
             }
             case LexemKind::ClosingCurlyBracket: {
                 if (m_lexicalTree.size() <= 1) {
-                    m_result = SRSLResult(SRSLReturnCode::InvalidScope, m_lexems[m_currentLexem].offset);
+                    m_result = SRSLResult(SRSLReturnCode::InvalidScope, GetCurrentLexem());
                     return;
                 }
 
@@ -306,7 +306,7 @@ namespace SR_SRSL_NS {
                 break;
         }
 
-        m_result = SRSLResult(SRSLReturnCode::UnexceptedLexem, m_lexems[m_currentLexem].offset);
+        m_result = SRSLResult(SRSLReturnCode::UnexceptedLexem, GetCurrentLexem());
     }
 
     const Lexem* SRSLLexicalAnalyzer::GetCurrentLexem() const {
@@ -392,7 +392,12 @@ namespace SR_SRSL_NS {
         }
 
         if (deep != 0) {
-            m_result = SRSLResult(SRSLReturnCode::IncompleteExpression, InBounds() ? m_lexems[m_currentLexem].offset : SR_UINT64_MAX);
+            if (InBounds()) {
+                m_result = SRSLResult(SRSLReturnCode::IncompleteExpression, GetCurrentLexem());
+            }
+            else {
+                m_result = SRSLResult(SRSLReturnCode::IncompleteExpression);
+            }
             return;
         }
 
@@ -507,7 +512,7 @@ namespace SR_SRSL_NS {
                 break;
             }
             case LexemKind::Assign:
-                m_result = SRSLResult(SRSLReturnCode::InvalidAssign, m_lexems[m_currentLexem].offset);
+                m_result = SRSLResult(SRSLReturnCode::InvalidAssign, GetCurrentLexem());
                 return;
             case LexemKind::Plus:
             case LexemKind::Minus:
@@ -529,11 +534,11 @@ namespace SR_SRSL_NS {
                 break;
         }
 
-        m_result = SRSLResult(SRSLReturnCode::UnexceptedLexem, m_lexems[m_currentLexem].offset);
+        m_result = SRSLResult(SRSLReturnCode::UnexceptedLexem, GetCurrentLexem());
     }
 
     bool SRSLLexicalAnalyzer::IsHasErrors() const noexcept {
-        return m_result.code != SRSLReturnCode::Success;
+        return m_result.HasErrors();
     }
 
     SRSLLexicalUnit* SRSLLexicalAnalyzer::TryProcessIdentifier() {
@@ -617,7 +622,12 @@ namespace SR_SRSL_NS {
             SR_SAFE_DELETE_PTR(pTypeExpr);
             SR_SAFE_DELETE_PTR(pNameExpr);
 
-            m_result = SRSLResult(SRSLReturnCode::UnexceptedLexem, InBounds() ? m_lexems[m_currentLexem].offset : SR_UINT64_MAX);
+            if (InBounds()) {
+                m_result = SRSLResult(SRSLReturnCode::UnexceptedLexem, GetCurrentLexem());
+            }
+            else {
+                m_result = SRSLResult(SRSLReturnCode::UnexceptedLexem);
+            }
 
             return nullptr;
         }

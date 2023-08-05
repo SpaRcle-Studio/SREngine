@@ -17,15 +17,15 @@ namespace SR_SRSL_NS {
         ~SRSLLexer() override;
 
     public:
-        SR_NODISCARD Lexems Parse(const SR_UTILS_NS::Path& path);
-        SR_NODISCARD Lexems ParseString(std::string code);
+        SR_NODISCARD Lexems Parse(const SR_UTILS_NS::Path& path, uint16_t fileIndex);
+        SR_NODISCARD Lexems ParseString(std::string code, uint16_t fileIndex);
 
     private:
         SR_NODISCARD bool InBounds() const noexcept;
         SR_NODISCARD ProcessedLexem ProcessLexem();
         SR_NODISCARD std::string ProcessIdentifier();
 
-        SR_NODISCARD Lexems ParseInternal(std::string&& code);
+        SR_NODISCARD Lexems ParseInternal(std::string&& code, uint16_t fileIndex);
 
         void Clear();
 
@@ -35,6 +35,7 @@ namespace SR_SRSL_NS {
     private:
         std::string m_source;
         uint64_t m_offset = 0;
+        uint16_t m_fileIndex = 0;
 
         Lexems m_lexems;
 

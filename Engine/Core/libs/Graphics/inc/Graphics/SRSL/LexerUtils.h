@@ -7,6 +7,7 @@
 
 #include <Utils/Common/Singleton.h>
 #include <Utils/Common/Enumerations.h>
+#include <Utils/Common/StringFormat.h>
 #include <Utils/Types/Regex.h>
 #include <Utils/Debug.h>
 
@@ -75,7 +76,7 @@ namespace SR_SRSL_NS {
         return std::find(operators.begin(), operators.end(), operation) != operators.end();
     }
 
-    enum class LexemKind {
+    SR_ENUM_NS_CLASS_T(LexemKind, uint16_t,
         Unknown,
 
         OpeningSquareBracket, /// [
@@ -111,72 +112,135 @@ namespace SR_SRSL_NS {
 
         Macro,                /// #
 
-        Identifier,           /// _az_AZ_19_
-    };
-
-    SR_ENUM_NS_CLASS_T(SRSLReturnCode, uint16_t,
-        Success, OutOfBounds, InvalidLexicalTree,
-        UnknownLexem, UnexceptedLexem, UnexceptedDot, InvalidExpression, InvalidComplexExpression, InvalidDecorator,
-        IncompleteExpression, EmptyExpression, InvalidScope, InvalidCall, InvalidIfStatement, UnknownShaderLanguage,
-        InvalidAngleBracket, InvalidAssign, InvalidMathToken, InvalidNumericToken, EmptyToken, InvalidIncrementOrDecrement, InvalidListEnd
+        Identifier            /// _az_AZ_19_
     );
 
-    struct SRSLResult {
-        SRSLResult() = default;
-
-        SRSLResult(SRSLReturnCode code) /** NOLINT */
-            : code(code)
-            , position(0)
-        { }
-
-        SRSLResult(SRSLReturnCode code, uint64_t position)
-            : code(code)
-            , position(position)
-        { }
-
-        SRSLResult(SRSLResult&& other) noexcept
-            : code(SR_UTILS_NS::Exchange(other.code, { }))
-            , position(SR_UTILS_NS::Exchange(other.position, { }))
-        { }
-
-        SRSLResult& operator=(SRSLResult&& other) noexcept {
-            code = SR_UTILS_NS::Exchange(other.code, { });
-            position = SR_UTILS_NS::Exchange(other.position, { });
-            return *this;
-        }
-
-        SRSLReturnCode code;
-        uint64_t position;
-    };
+    SR_ENUM_NS_CLASS_T(SRSLReturnCode, uint16_t,
+        Unknown, Success, OutOfBounds, InvalidLexicalTree,
+        UnknownLexem, UnexceptedLexem, UnexceptedDot, InvalidExpression, InvalidComplexExpression, InvalidDecorator,
+        IncompleteExpression, EmptyExpression, InvalidScope, InvalidCall, InvalidIfStatement, UnknownShaderLanguage,
+        InvalidAngleBracket, InvalidAssign, InvalidMathToken, InvalidNumericToken, EmptyToken, InvalidIncrementOrDecrement, InvalidListEnd,
+        WrongMacroName, IncludeNotExists, UnexceptedError, IncludeError
+    );
 
     struct LocationEntity {
         LocationEntity() = default;
 
-        LocationEntity(uint64_t offset, uint64_t length)
+        LocationEntity(uint64_t offset, uint64_t length, uint16_t fileIndex)
             : offset(offset)
             , length(length)
+            , fileIndex(fileIndex)
         { }
 
         uint64_t offset = 0;
         uint64_t length = 0;
+        uint16_t fileIndex = 0;
     };
 
     struct Lexem : public LocationEntity {
         Lexem() = default;
 
-        Lexem(uint64_t offset, uint64_t length, LexemKind kind, std::string&& value)
-            : LocationEntity(offset, length)
+        Lexem(uint64_t offset, uint64_t length, LexemKind kind, std::string&& value, uint16_t fileIndex)
+            : LocationEntity(offset, length, fileIndex)
             , kind(kind)
             , value(SR_UTILS_NS::Exchange(value, { }))
         { }
 
-        Lexem(uint64_t offset, uint64_t length, LexemKind kind)
-            : LocationEntity(offset, length)
+        Lexem(uint64_t offset, uint64_t length, LexemKind kind, uint16_t fileIndex)
+            : LocationEntity(offset, length, fileIndex)
             , kind(kind)
         { }
 
         LexemKind kind = LexemKind::Unknown;
         std::string value;
+    };
+
+    struct SRSLMessage {
+        SRSLMessage(SRSLReturnCode code) /** NOLINT */
+            : code(code)
+        { }
+
+        SRSLMessage(SRSLReturnCode code, const Lexem& lexem)
+            : code(code)
+            , position(lexem.offset)
+            , fileIndex(lexem.fileIndex)
+            , lexemKind(lexem.kind)
+        { }
+
+        SRSLMessage(SRSLReturnCode code, const Lexem* pLexem)
+            : SRSLMessage(code, *pLexem)
+        { }
+
+        SR_NODISCARD std::string ToString(const std::vector<std::string>& files, uint8_t tab) const {
+            std::string message = SR_UTILS_NS::EnumReflector::ToString(code);
+
+            if (fileIndex != SR_UINT16_MAX) {
+                if (fileIndex >= files.size()) {
+                    SRHalt("Invalid index!");
+                }
+                else {
+                    message += "\n" + std::string(tab, '\t') + "File: " + files[fileIndex];
+                }
+            }
+
+            if (!description.empty()) {
+                message += "\n" + std::string(tab, '\t') + "Description: " + description;
+            }
+
+            if (position != SR_UINT64_MAX) {
+                message += "\n" + std::string(tab, '\t') + "Position: " + SR_UTILS_NS::ToString(position);
+            }
+
+            if (lexemKind != LexemKind::Unknown) {
+                message += "\n" + std::string(tab, '\t') + "Lexem: " + SR_UTILS_NS::EnumReflector::ToString(lexemKind);
+            }
+
+            return message;
+        }
+
+        SRSLMessage& SetDescription(const std::string& text) { description = text; return *this; }
+
+        SRSLReturnCode code = SRSLReturnCode::Unknown;
+        uint64_t position = SR_UINT64_MAX;
+        uint16_t fileIndex = SR_UINT16_MAX;
+        LexemKind lexemKind = LexemKind::Unknown;
+        std::string description;
+
+    };
+
+    struct SRSLResult {
+        SRSLResult() = default;
+
+        SRSLResult(SRSLReturnCode code) { /** NOLINT */
+            AddError(code);
+        }
+
+        SRSLResult(SRSLReturnCode code, const Lexem* pLexem) {
+            AddError(SRSLMessage(code, pLexem));
+        }
+
+        SRSLMessage& AddError(const SRSLMessage& message) { return errors.emplace_back(message); }
+
+        SR_NODISCARD bool HasErrors() const { return !errors.empty(); }
+        SR_NODISCARD bool HasWarnings() const { return !warnings.empty(); }
+        SR_NODISCARD bool HasAny() const { return HasErrors() || HasWarnings(); }
+
+        SR_NODISCARD std::string ToString(const std::vector<std::string>& files, uint8_t tab = 1) const {
+            std::string message;
+
+            for (auto&& msg : errors) {
+                message += "\n" + std::string(tab, '\t') + "Error code: " + msg.ToString(files, tab + 1);
+            }
+
+            for (auto&& msg : warnings) {
+                message += "\n" + std::string(tab, '\t') + "Warning: " + msg.ToString(files, tab + 1);
+            }
+
+            return message;
+        }
+
+        std::list<SRSLMessage> warnings;
+        std::list<SRSLMessage> errors;
     };
 
     SR_INLINE_STATIC std::string LexemsToString(const std::vector<Lexem>& lexems) {

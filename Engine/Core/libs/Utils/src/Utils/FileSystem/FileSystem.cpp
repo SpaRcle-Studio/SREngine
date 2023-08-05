@@ -8,6 +8,7 @@
 #include <Utils/FileSystem/Path.h>
 #include <Utils/Common/Hashes.h>
 #include <Utils/Common/StringUtils.h>
+#include <Utils/Profile/TracyContext.h>
 
 namespace SR_UTILS_NS {
     void FileSystem::UnmapFile(const char *str) {
@@ -167,10 +168,11 @@ namespace SR_UTILS_NS {
         return true;
     }
 
-    std::string FileSystem::ReadBinaryAsString(const std::string &path, bool checkError) {
+    std::string FileSystem::ReadBinaryAsString(const std::string& path, bool checkError) {
         std::ifstream file(path, std::ios::ate | std::ios::binary);
 
         if (!file.is_open()) {
+            SR_UNUSED_VARIABLE(checkError);
             SRAssert2(!checkError, "FileSystem::ReadBinaryAsString() : failed to open \"" + path + "\" file!");
             return std::string();
         }
@@ -187,22 +189,27 @@ namespace SR_UTILS_NS {
         return buffer;
     }
 
-    uint64_t FileSystem::GetFileHash(const std::string &path) {
-        const std::string& file = ReadBinaryAsString(path, false);
+    uint64_t FileSystem::GetFileHash(const std::string& path) {
+        SR_TRACY_ZONE;
 
-        if (file.empty()) {
+        const std::string& buffer = ReadBinaryAsString(path, false);
+        if (buffer.empty()) {
             SR_WARN("FileSystem::GetFileHash() : failed to read file!\n\tPath: " + path);
             return SR_UINT64_MAX;
         }
 
-        auto&& h = std::hash<std::string>();
-        return h(file);
+        /// static constexpr XXH64_hash_t seed = 0;
+        /// return XXH64(buffer.data(), buffer.size(), seed);
+
+        return SR_HASH_STR(buffer);
     }
 
     uint64_t FileSystem::GetFolderHash(const Path& path, uint64_t deep) {
         if (deep == 0) {
             return 0;
         }
+
+        SR_TRACY_ZONE;
 
         uint64_t hash = 0;
 
@@ -212,7 +219,8 @@ namespace SR_UTILS_NS {
             }
 
             if (subPath.IsFile()) {
-                hash = SR_UTILS_NS::HashCombine<std::string>(ReadBinaryAsString(subPath), hash);
+                auto&& fileHash = GetFileHash(subPath);
+                hash = CombineTwoHashes(hash, fileHash);
             }
             else if (subPath.IsDir()) {
                 hash = SR_UTILS_NS::CombineTwoHashes(subPath.GetFolderHash(deep - 1), hash);

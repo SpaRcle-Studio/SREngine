@@ -124,10 +124,10 @@ namespace SR_SRSL_NS {
     }
 
     SRSLAnalyzedTree::Ptr SRSLTypeInfo::Analyze(const std::string &code) {
-        auto&& lexems = SRSLLexer::Instance().ParseString(code);
+        auto&& lexems = SRSLLexer::Instance().ParseString(code, 0);
         auto&& [pTree, result] = SRSLLexicalAnalyzer::Instance().Analyze(std::move(lexems));
 
-        if (result.code != SRSLReturnCode::Success) {
+        if (result.HasErrors()) {
             SR_ERROR("SRSLTypeInfo::Analyze() : failed to parse expression!");
             return nullptr;
         }

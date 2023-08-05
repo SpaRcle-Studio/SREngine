@@ -88,3 +88,5 @@
 #ifdef SR_TRACY_ENABLE
     #include "../Utils/src/Utils/Profile/TracyContext.cpp"
 #endif
+
+#include "../Utils/libs/xxHash/xxhash.c"

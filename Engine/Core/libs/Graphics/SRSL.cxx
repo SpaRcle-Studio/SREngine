@@ -12,3 +12,4 @@
 #include "../Graphics/src/Graphics/SRSL/AssignExpander.cpp"
 #include "../Graphics/src/Graphics/SRSL/TypeInfo.cpp"
 #include "../Graphics/src/Graphics/SRSL/Evaluator.cpp"
+#include "../Graphics/src/Graphics/SRSL/PreProcessor.cpp"

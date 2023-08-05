@@ -11,7 +11,7 @@ namespace SR_SRSL_NS {
         m_lexems = SR_UTILS_NS::Exchange(lexems, { });
 
         if (m_lexems.empty()) {
-            return std::make_pair(nullptr, SRSLResult(SRSLReturnCode::EmptyExpression));
+            return std::make_pair(nullptr, SRSLReturnCode::EmptyExpression);
         }
 
         auto&& pExpr = ParseBinaryExpression(0);
@@ -286,7 +286,7 @@ namespace SR_SRSL_NS {
     }
 
     void SRSLMathExpression::Clear() {
-        m_result = SRSLResult(SRSLReturnCode::Success);
+        m_result = SRSLResult();
 
         m_lexems.clear();
         m_currentLexem = 0;
@@ -305,7 +305,7 @@ namespace SR_SRSL_NS {
     }
 
     bool SRSLMathExpression::IsHasErrors() const noexcept {
-        return m_result.code != SRSLReturnCode::Success;
+        return m_result.HasErrors();
     }
 
     const Lexem* SRSLMathExpression::GetCurrentLexem() const {
@@ -329,7 +329,7 @@ namespace SR_SRSL_NS {
                     goto retry;
                 case LexemKind::Dot:
                     if (hasDot) {
-                        m_result = SRSLResult(SRSLReturnCode::UnexceptedDot, m_lexems[m_currentLexem].offset);
+                        m_result = SRSLResult(SRSLReturnCode::UnexceptedDot, GetCurrentLexem());
                         return std::string();
                     }
                     token += m_lexems[m_currentLexem++].value;
@@ -520,7 +520,7 @@ namespace SR_SRSL_NS {
                 break;
         }
 
-        m_result = SRSLResult(SRSLReturnCode::InvalidMathToken, m_lexems[m_currentLexem].offset);
+        m_result = SRSLResult(SRSLReturnCode::InvalidMathToken, GetCurrentLexem());
         return std::string();
     }
 

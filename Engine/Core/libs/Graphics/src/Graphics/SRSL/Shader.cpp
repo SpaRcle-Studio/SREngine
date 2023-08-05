@@ -7,6 +7,7 @@
 #include <Graphics/SRSL/PseudoCodeGenerator.h>
 #include <Graphics/SRSL/GLSLCodeGenerator.h>
 #include <Graphics/SRSL/AssignExpander.h>
+#include <Graphics/SRSL/PreProcessor.h>
 #include <Graphics/SRSL/TypeInfo.h>
 
 #include <Utils/Platform/Platform.h>
@@ -41,26 +42,39 @@ namespace SR_SRSL_NS {
 
         auto&& pShader = SRSLShader::Ptr(new SRSLShader(path));
 
-        auto&& lexems = SR_SRSL_NS::SRSLLexer::Instance().Parse(absPath);
+        auto&& lexems = SR_SRSL_NS::SRSLLexer::Instance().Parse(absPath, 0);
         if (lexems.empty()) {
             SR_ERROR("SRSLShader::Load() : failed to parse lexems!\n\tPath: " + path.ToString());
             return nullptr;
         }
 
+        SRSLPreProcessor::Includes includes = { path.ToStringRef() };
+
+        auto&& [preProcessedLexems, preProcessResult] = SRSLPreProcessor::Instance().Process(std::move(lexems), includes);
+        if (preProcessResult.HasErrors()) {
+            SR_ERROR("SRSLShader::Load() : failed to pre-process shader!" + preProcessResult.ToString(includes));
+            return nullptr;
+        }
+
+        lexems = std::move(preProcessedLexems);
+
         auto&& [expandedLexems, expandResult] = SR_SRSL_NS::SRSLAssignExpander::Instance().Expand(std::move(lexems));
+        if (expandResult.HasErrors()) {
+            SR_ERROR("SRSLShader::Load() : failed to expand assign shader!" + expandResult.ToString(includes));
+            return nullptr;
+        }
+
         lexems = std::move(expandedLexems);
 
         auto&& [pAnalyzedTree, analyzeResult] = SR_SRSL_NS::SRSLLexicalAnalyzer::Instance().Analyze(std::move(lexems));
 
-        if (!pAnalyzedTree || analyzeResult.code != SRSLReturnCode::Success) {
-            SR_ERROR("SRSLShader::Load() : failed to analyze shader!\n\tPath: " + path.ToString()
-                + "\n\tPosition: " + std::to_string(analyzeResult.position)
-                + "\b\tReason: " + SR_UTILS_NS::EnumReflector::ToString(analyzeResult.code)
-            );
+        if (!pAnalyzedTree || analyzeResult.HasErrors()) {
+            SR_ERROR("SRSLShader::Load() : failed to analyze shader!" + analyzeResult.ToString(includes));
             return nullptr;
         }
 
         pShader->m_analyzedTree = std::move(pAnalyzedTree);
+        pShader->m_includes = std::move(includes);
 
         if (!pShader->Prepare()) {
             SR_ERROR("SRSLShader::Load() : failed to prepare shader!\n\tPath: " + path.ToString());
@@ -98,8 +112,8 @@ namespace SR_SRSL_NS {
     std::string SRSLShader::ToString(ShaderLanguage shaderLanguage) const {
         auto&& [result, stages] = GenerateStages(shaderLanguage);
 
-        if (result.code != SRSLReturnCode::Success) {
-            return "SRSLShader::ToString() : " + SR_UTILS_NS::EnumReflector::ToString(result.code) + "\n\tPosition: " + std::to_string(result.position);
+        if (result.HasErrors()) {
+            return "SRSLShader::ToString() : " + result.ToString(m_includes);
         }
 
         std::string code;
@@ -376,8 +390,8 @@ namespace SR_SRSL_NS {
 
         auto&& [result, stages] = GenerateStages(shaderLanguage);
 
-        if (result.code != SRSLReturnCode::Success) {
-            SR_ERROR("SRSLShader::Export() : " + SR_UTILS_NS::EnumReflector::ToString(result.code) + "\n\tPosition: " + std::to_string(result.position));
+        if (result.HasErrors()) {
+            SR_ERROR("SRSLShader::Export() : " + result.ToString(m_includes));
             return false;
         }
 

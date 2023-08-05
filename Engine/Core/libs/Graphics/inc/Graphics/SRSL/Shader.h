@@ -91,6 +91,7 @@ namespace SR_SRSL_NS {
     private:
         SR_UTILS_NS::Path m_path;
 
+        std::vector<std::string> m_includes;
         std::map<std::string, SRSLVariable*> m_shared;
         std::map<std::string, SRSLVariable*> m_constants;
         ShaderType m_type = ShaderType::Unknown;
