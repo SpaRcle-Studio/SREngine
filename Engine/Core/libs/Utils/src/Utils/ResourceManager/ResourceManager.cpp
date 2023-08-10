@@ -561,10 +561,12 @@ namespace SR_UTILS_NS {
                 std::lock_guard lockWatcher(pWatcher->GetMutex());
 
                 if (!pWatcher->IsActive()) {
+                    m_dirtyWatchers.pop();
                     continue;
                 }
 
                 if (pWatcher->IsPaused()) {
+                    m_dirtyWatchers.pop();
                     continue;
                 }
 
