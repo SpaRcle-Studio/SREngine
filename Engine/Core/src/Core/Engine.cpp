@@ -219,12 +219,17 @@ namespace SR_CORE_NS {
 
         SR_LOCK_GUARD
 
+        SR_UTILS_NS::ResourceManager::Instance().SetWatchingEnabled(false);
+
         std::atomic<bool> syncComplete(false);
 
         /** Ждем, пока все графические ресурсы не освободятся */
         auto&& thread = SR_HTYPES_NS::Thread::Factory::Instance().Create([&syncComplete, this]() {
             uint32_t syncStep = 0;
             const uint32_t maxErrStep = 50;
+
+            SR_UTILS_NS::ResourceManager::Instance().UpdateWatchers(0.f);
+            SR_UTILS_NS::ResourceManager::Instance().ReloadResources(0.f);
 
             SR_UTILS_NS::ResourceManager::Instance().Synchronize(true);
 
@@ -240,7 +245,7 @@ namespace SR_CORE_NS {
                     break;
                 }
 
-                Helper::Types::Thread::Sleep(50);
+                SR_HTYPES_NS::Thread::Sleep(50);
             }
 
             SR_SYSTEM_LOG("Engine::SynchronizeFreeResources() : close synchronization thread...");
@@ -493,6 +498,8 @@ namespace SR_CORE_NS {
         const auto deltaTime = now - m_timeStart; /// nanoseconds
         const auto dt = static_cast<float_t>(deltaTime.count()) / SR_CLOCKS_PER_SEC / SR_CLOCKS_PER_SEC / SR_CLOCKS_PER_SEC; /// Seconds
         m_timeStart = now;
+
+        SR_UTILS_NS::ResourceManager::Instance().UpdateWatchers(dt);
 
         if (IsNeedReloadResources()) {
             SR_UTILS_NS::ResourceManager::Instance().ReloadResources(dt);

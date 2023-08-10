@@ -31,6 +31,7 @@ namespace SR_UTILS_NS {
 
         SR_NODISCARD IResource* GetResource() const;
         SR_NODISCARD IResource* GetFirstResource() const;
+        SR_NODISCARD IResourceReloader* GetReloader() const;
 
         ResourceType* m_resourceType = nullptr;
 

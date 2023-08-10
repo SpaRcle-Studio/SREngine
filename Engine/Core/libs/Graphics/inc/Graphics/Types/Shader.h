@@ -46,6 +46,7 @@ namespace SR_GTYPES_NS {
         void FlushSamplers();
         void FlushConstants();
         void FreeVideoMemory() override;
+        void StartWatch() override;
 
     public:
         SR_NODISCARD SR_UTILS_NS::Path GetAssociatedPath() const override;
@@ -120,6 +121,7 @@ namespace SR_GTYPES_NS {
 
         SRShaderCreateInfo m_shaderCreateInfo = {};
 
+        std::vector<std::string> m_includes;
         Memory::ShaderUBOBlock m_uniformBlock;
         Memory::ShaderUBOBlock m_constBlock;
         ShaderSamplers m_samplers;

@@ -19,7 +19,7 @@ namespace SR_GTYPES_NS {
         FreeTextureData();
     }
 
-    Texture *Texture::LoadFont(Font *pFont) {
+    Texture::Ptr Texture::LoadFont(Font* pFont) {
         Texture* texture = new Texture();
 
         texture->m_fromMemory = true;
@@ -41,7 +41,7 @@ namespace SR_GTYPES_NS {
         return texture;
     }
 
-    Texture *Texture::LoadRaw(const uint8_t* pData, uint64_t bytes, uint64_t h, uint64_t w, const Memory::TextureConfig &config) {
+    Texture::Ptr Texture::LoadRaw(const uint8_t* pData, uint64_t bytes, uint64_t h, uint64_t w, const Memory::TextureConfig &config) {
         Texture* texture = new Texture();
 
         texture->m_fromMemory = true;
@@ -60,10 +60,10 @@ namespace SR_GTYPES_NS {
         return texture;
     }
 
-    Texture* Texture::Load(const std::string& rawPath, const std::optional<Memory::TextureConfig>& config) {
+    Texture::Ptr Texture::Load(const std::string& rawPath, const std::optional<Memory::TextureConfig>& config) {
         static auto&& resourceManager = SR_UTILS_NS::ResourceManager::Instance();
 
-        Texture* pTexture = nullptr;
+        Texture::Ptr pTexture = nullptr;
 
         resourceManager.Execute([&]() {
             SR_UTILS_NS::Path&& path = SR_UTILS_NS::Path(rawPath).RemoveSubPath(resourceManager.GetResPath());
@@ -248,7 +248,7 @@ namespace SR_GTYPES_NS {
     }
 
     Texture* Texture::LoadFromMemory(const std::string& data, const Memory::TextureConfig &config) {
-        Texture* texture = new Texture();
+        Texture::Ptr texture = new Texture();
 
         if (!TextureLoader::LoadFromMemory(texture, data, config)) {
             SRHalt("Texture::LoadFromMemory() : failed to load the texture!");
@@ -279,7 +279,7 @@ namespace SR_GTYPES_NS {
     }
 
     uint64_t Texture::GetFileHash() const {
-        if (m_fromMemory) {
+        if (IsFromMemory()) {
             return 0;
         }
 
@@ -305,5 +305,12 @@ namespace SR_GTYPES_NS {
     SR_UTILS_NS::IResource::RemoveUPResult Texture::RemoveUsePoint() {
         SRAssert2(!(IsCalculated() && GetCountUses() == 1), "Possible multi threading error!");
         return IResource::RemoveUsePoint();
+    }
+
+    void Texture::StartWatch() {
+        if (IsFromMemory()) {
+            return;
+        }
+        IResource::StartWatch();
     }
 }

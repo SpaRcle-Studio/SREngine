@@ -324,6 +324,15 @@ namespace SR_GRAPH_NS::Types {
 
         m_shaderCreateInfo = pShader->GetCreateInfo();
         m_type = pShader->GetType();
+        m_includes = pShader->GetIncludes();
+
+        if (m_includes.empty()) {
+            SR_ERROR("Shader::Load() : failed to extract includes!\n\tPath: " + path.ToString());
+            return false;
+        }
+
+        StopWatch();
+        StartWatch();
 
         /// ------------------------------------------------------------------------------------------------------------
 
@@ -382,6 +391,7 @@ namespace SR_GRAPH_NS::Types {
         m_uniformBlock.DeInit();
         m_constBlock.DeInit();
 
+        m_includes.clear();
         m_properties.clear();
         m_samplers.clear();
 
@@ -425,6 +435,22 @@ namespace SR_GRAPH_NS::Types {
     void Shader::FlushConstants() {
         if (m_constBlock.m_size > 0) {
             m_pipeline->PushConstants(m_constBlock.m_memory, m_constBlock.m_size);
+        }
+    }
+
+    void Shader::StartWatch() {
+        auto&& resourcesManager = SR_UTILS_NS::ResourceManager::Instance();
+
+        for (auto&& path : m_includes) {
+            auto&& pWatch = resourcesManager.StartWatch(resourcesManager.GetResPath().Concat(path));
+
+            pWatch->SetCallBack([this](auto&& pWatcher) {
+                SignalWatch();
+            });
+
+            pWatch->Init();
+
+            m_watchers.emplace_back(pWatch);
         }
     }
 }

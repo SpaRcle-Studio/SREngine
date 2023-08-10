@@ -15,7 +15,6 @@ namespace SR_GTYPES_NS {
     { }
 
     Material::~Material() {
-        SetReadOnly(false);
         SetShader(nullptr);
 
         for (auto&& pTexture : GetTexturesFromMatProperties(m_properties)) {
@@ -257,13 +256,10 @@ namespace SR_GTYPES_NS {
 
         LoadProperties(matXml.TryGetNode("Properties"));
 
-        SetReadOnly(matXml.TryGetAttribute("ReadOnly").ToBool(false));
-
         return IResource::Load();
     }
 
     bool Material::Unload() {
-        SetReadOnly(false);
         SetShader(nullptr);
 
         for (auto&& pTexture : GetTexturesFromMatProperties(m_properties)) {

@@ -163,18 +163,12 @@ namespace SR_UTILS_NS {
         return m_countUses;
     }
 
-    bool IResource::IsDestroyed() const noexcept {
-        return m_isDestroyed;
-    }
-
     IResource* IResource::CopyResource(IResource *destination) const {
         /// destination->m_lifetime = m_lifetime;
         destination->m_resourceHashPath = m_resourceHashPath;
         destination->m_loadState.store(m_loadState);
 
         destination->SetId(m_resourceHashId, true /** auto register */);
-
-        destination->SetReadOnly(m_readOnly);
 
         return destination;
     }
@@ -255,6 +249,10 @@ namespace SR_UTILS_NS {
             return true;
         }
 
+        for (auto&& pWatch : m_watchers) {
+            pWatch->Pause();
+        }
+
         return false;
     }
 
@@ -266,6 +264,10 @@ namespace SR_UTILS_NS {
         ) {
             m_loadState = LoadState::Loaded;
             return true;
+        }
+
+        for (auto&& pWatch : m_watchers) {
+            pWatch->Resume();
         }
 
         return false;
@@ -299,15 +301,23 @@ namespace SR_UTILS_NS {
     }
 
     void IResource::StartWatch() {
-        /*auto&& resourcesManager = ResourceManager::Instance();
+        auto&& resourcesManager = ResourceManager::Instance();
 
         auto&& path = GetResourcePath();
         auto&& pWatch = resourcesManager.StartWatch(resourcesManager.GetResPath().Concat(path));
 
-        pWatch->SetCallBack([](auto&& pWatcher) {
-            SR_LOG(pWatcher->GetPath().ToStringRef());
+        pWatch->SetCallBack([this](auto&& pWatcher) {
+            SignalWatch();
         });
 
-        m_watchers.emplace_back(pWatch);*/
+        m_watchers.emplace_back(pWatch);
+    }
+
+    void IResource::SignalWatch() {
+        if (IsDestroyed() || IsForceDestroyed()) {
+            return;
+        }
+
+        ResourceManager::Instance().ReloadResource(this);
     }
 }

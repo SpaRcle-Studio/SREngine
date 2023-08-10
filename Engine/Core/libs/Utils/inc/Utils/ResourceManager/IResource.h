@@ -22,6 +22,7 @@ namespace SR_UTILS_NS {
     class SR_DLL_EXPORT IResource : public ResourceContainer {
         friend class ResourceType;
         using Super = ResourceContainer;
+        using ResourceInfoWeakPtr = std::weak_ptr<ResourceInfo>;
     public:
         using Ptr = IResource*;
 
@@ -46,25 +47,27 @@ namespace SR_UTILS_NS {
         SR_NODISCARD virtual bool IsFileResource() const noexcept { return true; }
 
         SR_NODISCARD virtual uint64_t GetFileHash() const;
+        SR_NODISCARD virtual bool IsAllowedToRevive() const { return false; }
+        SR_NODISCARD virtual Path GetAssociatedPath() const;
+
         SR_NODISCARD bool IsRegistered() const noexcept { return m_isRegistered; }
         SR_NODISCARD bool IsLoaded() const noexcept { return m_loadState == LoadState::Loaded; }
-        SR_NODISCARD bool IsReadOnly() const { return m_readOnly; }
-        SR_NODISCARD bool IsDestroyed() const noexcept;
-        SR_NODISCARD virtual bool IsAllowedToRevive() const { return false; }
+        SR_NODISCARD bool IsDestroyed() const noexcept { return m_isDestroyed; }
         SR_NODISCARD bool IsForceDestroyed() const { return m_isForceDestroyed; }
         SR_NODISCARD bool IsAlive() const { return m_lifetime > 0; }
-        SR_NODISCARD uint16_t GetCountUses() const noexcept;
         SR_NODISCARD uint16_t GetReloadCount() const noexcept { return m_reloadCount; }
         SR_NODISCARD uint64_t GetLifetime() const noexcept { return m_lifetime; }
-        SR_NODISCARD std::string_view GetResourceName() const;
         SR_NODISCARD uint64_t GetResourceHashName() const noexcept { return m_resourceHashName; }
-        SR_NODISCARD const std::string& GetResourceId() const;
         SR_NODISCARD uint64_t GetResourceHashId() const noexcept { return m_resourceHashId; }
         SR_NODISCARD LoadState GetResourceLoadState() const { return m_loadState; }
-        SR_NODISCARD const Path& GetResourcePath() const;
         SR_NODISCARD uint64_t GetResourceHashPath() const noexcept { return m_resourceHashPath; }
         SR_NODISCARD uint64_t GetResourceHash() const noexcept { return m_resourceHash; }
-        SR_NODISCARD virtual Path GetAssociatedPath() const;
+        SR_NODISCARD ResourceInfoWeakPtr GetResourceInfo() const noexcept { return m_resourceInfo; }
+
+        SR_NODISCARD std::string_view GetResourceName() const;
+        SR_NODISCARD const Path& GetResourcePath() const;
+        SR_NODISCARD const std::string& GetResourceId() const;
+        SR_NODISCARD uint16_t GetCountUses() const noexcept;
 
         SR_NODISCARD virtual IResource* CopyResource(IResource* destination) const;
 
@@ -96,12 +99,12 @@ namespace SR_UTILS_NS {
         virtual bool Load();
 
         void UpdateResourceLifeTime();
+        void SignalWatch();
 
         /** Call only once | Register resource to destroy in resource manager */
         virtual bool Destroy();
         bool ForceDestroy();
         bool Kill();
-        void SetReadOnly(bool value) { m_readOnly = value; }
         void SetResourceHash(uint64_t hash);
         void SetLifetime(int64_t lifeTime) { m_lifetime = lifeTime; }
 
@@ -122,10 +125,10 @@ namespace SR_UTILS_NS {
         /// не рекомендуется вручную обращаться к счетчику при наследовании
         std::atomic<uint16_t> m_countUses = 0;
 
-    private:
         std::list<SR_HTYPES_NS::SharedPtr<FileWatcher>> m_watchers;
 
-        ResourceInfo* m_resourceInfo = nullptr;
+    private:
+        ResourceInfoWeakPtr m_resourceInfo;
 
         uint64_t m_resourceHashId = 0;
         uint64_t m_resourceHash = 0;
@@ -136,7 +139,6 @@ namespace SR_UTILS_NS {
         int64_t m_lifetime = 0;
 
         std::atomic<bool> m_isForceDestroyed = false;
-        std::atomic<bool> m_readOnly = false;
         std::atomic<bool> m_isDestroyed = false;
         std::atomic<bool> m_isRegistered = false;
 

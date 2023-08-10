@@ -3,6 +3,7 @@
 //
 
 #include <Utils/ResourceManager/ResourceManager.h>
+#include <Utils/ResourceManager/FileWatcher.h>
 #include <Utils/Common/StringUtils.h>
 #include <Utils/Common/Features.h>
 #include <Utils/Common/Vertices.hpp>
@@ -39,7 +40,7 @@ namespace SR_GTYPES_NS {
         }
     }
 
-    Skybox *Skybox::Load(const SR_UTILS_NS::Path& rawPath) {
+    Skybox* Skybox::Load(const SR_UTILS_NS::Path& rawPath) {
         SR_GLOBAL_LOCK
 
         SR_UTILS_NS::Path&& path = SR_UTILS_NS::Path(rawPath).RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetResPath());
@@ -52,7 +53,8 @@ namespace SR_GTYPES_NS {
 
         SR_LOG("Skybox::Load() : loading \"" + path.ToString() + "\" skybox...");
 
-        std::array<uint8_t *, 6> sides = {};
+        std::array<uint8_t*, 6> sides;
+        std::array<SR_UTILS_NS::Path, 6> paths;
 
         static constexpr const char* files[6] { "right", "left", "top", "bottom", "front", "back" };
 
@@ -61,11 +63,21 @@ namespace SR_GTYPES_NS {
         for (uint8_t i = 0; i < 6; ++i) {
             auto&& file = folder.Concat(files[i]).ConcatExt(path.GetExtension());
 
+            paths[i] = file;
+
             int32_t w = 0, h = 0, comp = 0;
             uint8_t *data = stbi_load(file.CStr(), &w, &h, &comp, STBI_rgb_alpha);
 
             if (!data) {
                 SR_ERROR("Skybox::Load() : failed to load skybox!\n\tPath: " + file.ToString());
+
+                for (auto&& img : sides) {
+                    if (img) {
+                        stbi_image_free(img);
+                        img = nullptr;
+                    }
+                }
+
                 return nullptr;
             }
 
@@ -81,11 +93,12 @@ namespace SR_GTYPES_NS {
             sides[i] = data;
         }
 
-        auto pSkybox = new Skybox();
+        auto&& pSkybox = new Skybox();
 
         pSkybox->m_width = W;
         pSkybox->m_height = H;
         pSkybox->m_data = sides;
+        pSkybox->m_paths = paths;
 
         pSkybox->SetId(path.ToString());
 
@@ -284,5 +297,21 @@ namespace SR_GTYPES_NS {
 
     int32_t Skybox::GetVirtualUBO() {
         return m_virtualUBO;
+    }
+
+    void Skybox::StartWatch() {
+        auto&& resourcesManager = SR_UTILS_NS::ResourceManager::Instance();
+
+        for (auto&& path : m_paths) {
+            SRAssert(!path.Empty());
+
+            auto&& pWatch = resourcesManager.StartWatch(path);
+
+            pWatch->SetCallBack([this](auto &&pWatcher) {
+                SignalWatch();
+            });
+
+            m_watchers.emplace_back(pWatch);
+        }
     }
 }

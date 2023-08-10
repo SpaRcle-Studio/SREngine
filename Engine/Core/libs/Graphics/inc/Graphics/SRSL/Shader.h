@@ -76,11 +76,13 @@ namespace SR_SRSL_NS {
         SR_NODISCARD const SRShaderCreateInfo& GetCreateInfo() const { return m_createInfo; }
         SR_NODISCARD const std::map<std::string, SRSLVariable*>& GetShared() const { return m_shared; }
         SR_NODISCARD const std::map<std::string, SRSLVariable*>& GetConstants() const { return m_constants; }
+        SR_NODISCARD const std::vector<std::string>& GetIncludes() const { return m_includes; }
 
     private:
         SR_NODISCARD ISRSLCodeGenerator::SRSLCodeGenRes GenerateStages(ShaderLanguage shaderLanguage) const;
 
         SR_NODISCARD bool SaveCache() const;
+        SR_NODISCARD uint64_t GetHash() const;
 
         bool Prepare();
         bool PrepareSettings();

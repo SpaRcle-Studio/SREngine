@@ -407,9 +407,7 @@ namespace SR_CORE_NS::GUI {
         if (material) {
             ImGui::Separator();
 
-            const bool readOnly = material->IsReadOnly();
-
-            Helper::GUI::DrawTextOnCenter(readOnly ? "Material (Read only)" : "Material");
+            Helper::GUI::DrawTextOnCenter("Material");
 
             if (auto&& pDescriptor = context->GetIconDescriptor(EditorIcon::Material)) {
                 if (GUISystem::Instance().ImageButton(SR_FORMAT("##imgMatBtn%i", index), pDescriptor, SR_MATH_NS::IVector2(75), 5)) {

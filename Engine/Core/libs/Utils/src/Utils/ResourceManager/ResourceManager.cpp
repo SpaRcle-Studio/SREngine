@@ -40,11 +40,11 @@ namespace SR_UTILS_NS {
         return pWatcher;
     }
 
-    void ResourceManager::UpdateWatchers() {
+    void ResourceManager::AsyncUpdateWatchers() {
         SR_SCOPED_LOCK;
         SR_TRACY_ZONE;
 
-        if (m_watchers.empty()) {
+        if (m_watchers.empty() || !m_isWatchingEnabled) {
             return;
         }
 
@@ -62,7 +62,9 @@ namespace SR_UTILS_NS {
                 return;
             }
 
-            pWatcher->Update();
+            if (!pWatcher->IsDirty() && !pWatcher->IsPaused() && pWatcher->Update()) {
+                m_dirtyWatchers.push(pWatcher);
+            }
         }
 
         m_watchers.emplace_back(pWatcher);
@@ -133,8 +135,6 @@ namespace SR_UTILS_NS {
             new ResourceType(name)
         ));
 
-        m_checkResourceGroupIt = m_resources.begin();
-
         return true;
     }
 
@@ -158,7 +158,7 @@ namespace SR_UTILS_NS {
 
     void ResourceManager::Thread() {
         do {
-            SR_PLATFORM_NS::Sleep(25);
+            SR_PLATFORM_NS::Sleep(5);
 
             SR_TRACY_ZONE;
 
@@ -169,13 +169,12 @@ namespace SR_UTILS_NS {
             m_GCDt += m_deltaTime;
             m_hashCheckDt += m_deltaTime;
 
-            if (m_hashCheckDt > 25 /** ms */) {
-                CheckResourceHashes();
-                UpdateWatchers();
+            if (m_hashCheckDt > 15 /** ms */) {
+                AsyncUpdateWatchers();
                 m_hashCheckDt = 0;
             }
 
-            if (m_GCDt > (m_force ? 500 : 100) /** ms */) {
+            if (m_GCDt > (m_force ? 100 : 500) /** ms */) {
                 /** если какой-то ресурс больше не используется, то уничтожаем его.
                  * все происходящее в GC должно быть потоко-безопасным, то есть при освобождении
                  * ресурсов не должны блокироваться другие потоки, иначе будут проблемы. */
@@ -190,7 +189,12 @@ namespace SR_UTILS_NS {
 
     void ResourceManager::GC() {
         SR_TRACY_ZONE;
-        SR_SCOPED_LOCK
+        SR_LOCK_GUARD;
+
+        /// Не можем работать, пока какие-то ресурсы не перезагружены
+        if (!m_dirtyResources.empty() || !m_dirtyWatchers.empty()) {
+            return;
+        }
 
         if (m_destroyed.empty()) {
             return;
@@ -363,60 +367,25 @@ namespace SR_UTILS_NS {
         }
 
         {
-            SR_SCOPED_LOCK
+            SR_LOCK_GUARD
             m_force = false;
         }
     }
 
-    void ResourceManager::Execute(const SR_HTYPES_NS::Function<void()>& fun)
-    {
-        SR_SCOPED_LOCK
+    void ResourceManager::Execute(const SR_HTYPES_NS::Function<void()>& fun) {
+        SR_LOCK_GUARD
 
         fun();
     }
 
     void ResourceManager::InspectResources(const SR_HTYPES_NS::Function<void(const ResourcesTypes &)> &callback) {
-        SR_SCOPED_LOCK
+        SR_LOCK_GUARD
 
         callback(m_resources);
     }
 
-    void ResourceManager::CheckResourceHashes() {
-        SR_TRACY_ZONE;
-        SR_LOCK_GUARD
-
-        if (m_resources.empty()) {
-            return;
-        }
-
-        if (m_checkResourceGroupIt == m_resources.end()) {
-            m_checkResourceGroupIt = m_resources.begin();
-            m_checkInfoIndex = 0;
-            return;
-        }
-
-        auto&& [hashPath, pResourceInfo] = m_checkResourceGroupIt->second->GetInfoByIndex(m_checkInfoIndex);
-        if (!pResourceInfo) {
-            m_checkResourceGroupIt = std::next(m_checkResourceGroupIt);
-            m_checkInfoIndex = 0;
-            return;
-        }
-
-        if (auto&& pResource = pResourceInfo->GetFirstResource()) {
-            auto&& fileHash = pResource->GetFileHash();
-            if (fileHash != pResourceInfo->m_fileHash) {
-                /// если дважды положим один и тот же ресурс (слишком быстро перезагрузили), то будем считать,
-                /// что не повезло и перезагрузим дважды.
-                m_dirtyResources.emplace_back(pResourceInfo);
-                pResourceInfo->m_fileHash = fileHash;
-            }
-        }
-
-        ++m_checkInfoIndex;
-    }
-
     std::string_view ResourceManager::GetTypeName(uint64_t hashName) const {
-        SR_SCOPED_LOCK
+        SR_LOCK_GUARD
 
         if (auto&& pIt = m_resources.find(hashName); pIt != m_resources.end()) {
             return pIt->second->GetName();
@@ -428,7 +397,7 @@ namespace SR_UTILS_NS {
     }
 
     const std::string& ResourceManager::GetResourceId(ResourceManager::Hash hashId) const {
-        SR_SCOPED_LOCK
+        SR_LOCK_GUARD
 
         /// пустая строка
         if (hashId == 0) {
@@ -448,7 +417,7 @@ namespace SR_UTILS_NS {
     }
 
     ResourceManager::Hash ResourceManager::RegisterResourceId(const std::string& resourceId) {
-        SR_SCOPED_LOCK
+        SR_LOCK_GUARD
 
         const ResourceManager::Hash hash = SR_HASH_STR(resourceId);
 
@@ -463,7 +432,7 @@ namespace SR_UTILS_NS {
 
     const Path& ResourceManager::GetResourcePath(ResourceManager::Hash hashPath) const {
         SR_TRACY_ZONE;
-        SR_SCOPED_LOCK
+        SR_LOCK_GUARD
 
         /// пустая строка
         if (hashPath == 0) {
@@ -483,7 +452,7 @@ namespace SR_UTILS_NS {
     }
 
     ResourceManager::Hash ResourceManager::RegisterResourcePath(const Path &path) {
-        SR_SCOPED_LOCK
+        SR_LOCK_GUARD
 
         if (path.Empty()) {
             SRHalt("ResourceManager::RegisterResourcePath() : empty path!");
@@ -515,7 +484,7 @@ namespace SR_UTILS_NS {
     }
 
     bool ResourceManager::RegisterReloader(IResourceReloader *pReloader, uint64_t hashTypeName) {
-        SR_SCOPED_LOCK
+        SR_LOCK_GUARD
 
         if (auto&& pIt = m_resources.find(hashTypeName); pIt != m_resources.end()) {
             auto&& [_, resourceType] = *pIt;
@@ -537,9 +506,12 @@ namespace SR_UTILS_NS {
             return;
         }
 
-        SR_SCOPED_LOCK;
+        SR_LOCK_GUARD;
 
-        for (auto&& pResourceInfo : m_dirtyResources) {
+        while (!m_dirtyResources.empty()) {
+            ResourceInfo::WeakPtr pResourceInfo = m_dirtyResources.front();
+            m_dirtyResources.pop();
+
             /// ресурс мог быть освобожден в GC
             auto&& pHardPtr = pResourceInfo.lock();
             if (!pHardPtr) {
@@ -548,7 +520,7 @@ namespace SR_UTILS_NS {
 
             IResourceReloader* pResourceReloader = nullptr;
 
-            if (auto&& pGroupReloader = m_checkResourceGroupIt->second->GetReloader()) {
+            if (auto&& pGroupReloader = pHardPtr->GetReloader()) {
                 pResourceReloader = pGroupReloader;
             }
             else {
@@ -570,7 +542,42 @@ namespace SR_UTILS_NS {
                 SR_ERROR("ResourceManager::ReloadResources() : failed to reload resource!\n\tPath: " + path.ToStringRef());
             }
         }
+    }
 
-        m_dirtyResources.clear();
+    void ResourceManager::UpdateWatchers(float_t dt) {
+        SR_TRACY_ZONE;
+
+        /// не блокируем поток, иначе не будет смысла от разделения.
+        /// если прочитаем некорректные данные из empty, будем считать, что не повезло.
+        if (m_dirtyWatchers.empty()) {
+            return;
+        }
+
+        SR_LOCK_GUARD;
+
+        while (!m_dirtyWatchers.empty()) {
+            FileWatcher::Ptr pWatcher = m_dirtyWatchers.front();
+
+            if (pWatcher) {
+                std::lock_guard lockWatcher(pWatcher->GetMutex());
+
+                if (!pWatcher->IsActive()) {
+                    continue;
+                }
+
+                if (pWatcher->IsPaused()) {
+                    continue;
+                }
+
+                pWatcher->Signal();
+            }
+
+            m_dirtyWatchers.pop();
+        }
+    }
+
+    void ResourceManager::ReloadResource(IResource* pResource) {
+        SR_LOCK_GUARD;
+        m_dirtyResources.push(pResource->GetResourceInfo());
     }
 }

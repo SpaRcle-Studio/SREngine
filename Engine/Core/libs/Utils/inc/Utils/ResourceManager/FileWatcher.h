@@ -25,22 +25,30 @@ namespace SR_UTILS_NS {
 
     public:
         void Stop();
+        void Pause();
+        void Resume();
+        void Signal();
+        void Init();
 
         void SetCallBack(CallBack callBack);
         void SetName(std::string name);
 
         SR_NODISCARD bool IsActive() const noexcept;
+        SR_NODISCARD bool IsPaused() const noexcept;
+        SR_NODISCARD bool IsDirty() const noexcept;
         SR_NODISCARD std::string GetName() const noexcept;
         SR_NODISCARD SR_UTILS_NS::Path GetPath() const noexcept;
         SR_NODISCARD Mutex& GetMutex() { return m_mutex; };
 
     private:
-        void Update();
+        bool Update();
 
     private:
         SR_UTILS_NS::Path m_path;
         bool m_isActive = true;
         bool m_isInit = false;
+        bool m_isDirty = false;
+        bool m_isPaused = false;
         CallBack m_callBack;
         Hash m_hash = SR_UINT64_MAX;
         std::string m_name;

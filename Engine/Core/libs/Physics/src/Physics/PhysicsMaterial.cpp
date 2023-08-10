@@ -12,8 +12,6 @@ namespace SR_PTYPES_NS {
     { }
 
     PhysicsMaterial::~PhysicsMaterial() {
-        SetReadOnly(false);
-
         for (auto&& [libraryType, physicsMaterial] : m_implementations) {
             delete physicsMaterial;
         }
@@ -80,8 +78,6 @@ namespace SR_PTYPES_NS {
         SetFrictionCombine(SR_UTILS_NS::EnumReflector::FromString<Combine>(matXml.TryGetNode("FrictionCombine").TryGetAttribute("Value").ToString("Average")));
         SetBounceCombine(SR_UTILS_NS::EnumReflector::FromString<Combine>(matXml.TryGetNode("BounceCombine").TryGetAttribute("Value").ToString("Average")));
 
-        SetReadOnly(matXml.TryGetAttribute("ReadOnly").ToBool(false));
-
         for (auto&& libraryType : SR_PHYSICS_NS::PhysicsLibrary::Instance().GetSupportedLibraries()) {
             auto&& pLibrary = SR_PHYSICS_NS::PhysicsLibrary::Instance().GetLibrary(libraryType);
             m_implementations[libraryType] = pLibrary->CreatePhysicsMaterial();
@@ -91,8 +87,6 @@ namespace SR_PTYPES_NS {
     }
 
     bool PhysicsMaterial::Unload() {
-        SetReadOnly(false);
-
         for (auto&& [libraryType, physicsMaterial] : m_implementations) {
             delete physicsMaterial;
         }

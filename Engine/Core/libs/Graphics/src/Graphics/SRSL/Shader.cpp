@@ -38,8 +38,6 @@ namespace SR_SRSL_NS {
             return nullptr;
         }
 
-        auto&& cachedPath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Shaders").Concat(path);
-
         auto&& pShader = SRSLShader::Ptr(new SRSLShader(path));
 
         auto&& lexems = SR_SRSL_NS::SRSLLexer::Instance().Parse(absPath, 0);
@@ -85,27 +83,34 @@ namespace SR_SRSL_NS {
             SR_WARN("SRSLShader::Load() : failed to save shader cache shader!\n\tPath: " + path.ToString());
         }
 
-        SR_UTILS_NS::FileSystem::WriteHashToFile(cachedPath.ConcatExt("hash"), absPath.GetFileHash());
-
         return pShader;
     }
 
     bool SRSLShader::IsCacheActual() const {
-        auto&& absPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat(m_path);
         auto&& cachedPath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Shaders").Concat(m_path);
-
-        return absPath.GetFileHash() == SR_UTILS_NS::FileSystem::ReadHashFromFile(cachedPath.ConcatExt("hash"));
+        return GetHash() == SR_UTILS_NS::FileSystem::ReadHashFromFile(cachedPath.ConcatExt("hash"));
     }
 
     bool SRSLShader::IsCacheActual(ShaderLanguage shaderLanguage) const {
-        auto&& absPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat(m_path);
         auto&& cachedPath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Shaders").Concat(m_path);
-
         auto&& cachedHash = SR_UTILS_NS::FileSystem::ReadHashFromFile(cachedPath.ConcatExt("hash").ConcatExt(SR_UTILS_NS::EnumReflector::ToString(shaderLanguage)));
-        return absPath.GetFileHash() == cachedHash;
+        return GetHash() == cachedHash;
+    }
+
+    uint64_t SRSLShader::GetHash() const {
+        uint64_t hash = 0;
+
+        for (auto&& include : m_includes) {
+            auto&& absPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat(include);
+            hash = SR_UTILS_NS::CombineTwoHashes(hash, absPath.GetFileHash());
+        }
+
+        return hash;
     }
 
     bool SRSLShader::SaveCache() const {
+        auto&& cachedPath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Shaders").Concat(m_path);
+        SR_UTILS_NS::FileSystem::WriteHashToFile(cachedPath.ConcatExt("hash"), GetHash());
         return true;
     }
 
