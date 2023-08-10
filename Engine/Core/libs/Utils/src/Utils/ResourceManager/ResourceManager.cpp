@@ -532,7 +532,6 @@ namespace SR_UTILS_NS {
             if (path.Empty()) {
                 SR_ERROR("ResourceManager::ReloadResources() : resource have empty path!\n\tResource name: " +
                     pHardPtr->m_resourceType->GetName() + "\n\tHash name: " + std::to_string(pHardPtr->m_resourceHash) +
-                    "\n\tFile hash: " + std::to_string(pHardPtr->m_fileHash) +
                     "\n\tPath hash: " + std::to_string(pHardPtr->m_pathHash)
                 );
                 continue;

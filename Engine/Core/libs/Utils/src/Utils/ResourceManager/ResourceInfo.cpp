@@ -109,7 +109,7 @@ namespace SR_UTILS_NS {
             pResource->m_resourceInfo = pInfo;
         }
         else {
-            auto&& pInfo = std::make_shared<ResourceInfo>(pResource->GetFileHash(), pResource->GetResourceHash(), path, this);
+            auto&& pInfo = std::make_shared<ResourceInfo>(pResource->GetResourceHash(), path, this);
             pIt = m_info.insert(std::make_pair(path, pInfo)).first;
             goto retry;
         }

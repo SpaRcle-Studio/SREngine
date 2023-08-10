@@ -22,9 +22,8 @@ namespace SR_UTILS_NS {
         using HardPtr = std::shared_ptr<ResourceInfo>;
         using WeakPtr = std::weak_ptr<ResourceInfo>;
 
-        ResourceInfo(uint64_t fileHash, uint64_t resourceHash, uint64_t pathHash, ResourceType* pResourceType)
-            : m_fileHash(fileHash)
-            , m_resourceHash(resourceHash)
+        ResourceInfo(uint64_t resourceHash, uint64_t pathHash, ResourceType* pResourceType)
+            : m_resourceHash(resourceHash)
             , m_resourceType(pResourceType)
             , m_pathHash(pathHash)
         { }
@@ -35,9 +34,7 @@ namespace SR_UTILS_NS {
 
         ResourceType* m_resourceType = nullptr;
 
-        /// хэш файла ресурса
-        uint64_t m_fileHash = 0;
-        /// текущий хэш самого ресурса (параметры и тд)
+        /// текущий хэш самого ресурса (параметры и тд, не файл!)
         uint64_t m_resourceHash = 0;
         /// хеш пути ресурса
         uint64_t m_pathHash = 0;
