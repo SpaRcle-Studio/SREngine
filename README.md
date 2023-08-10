@@ -24,19 +24,20 @@
  * tmp/* - temporary branches for dangerous experiments
 
 ## Building
- 1. Clone repo 
- 2. Run command "git submodule update --init --recursive"
- 3. Install Clion 2020.1 / Visual Studio 2019
- 4. Install [Vulkan SDK/Runtime](https://vulkan.lunarg.com/sdk/home) 1.3.211.0
- 5. Install CMake 3.16.0
- 6. Install [MS Build Tools](https://learn.microsoft.com/en-us/visualstudio/releases/2019/history) 14.29.30037 (if you using CLion) 
- 7. Working with CMake (if you're using Visual Studio): 
+ 1. Clone repository via the command "git clone https://github.com/Monika0000/SREngine"
+ 2. Switch to the "dev" (or another one) branch via the command "git checkout branch_name"
+ 3. Run command "git submodule update --init --recursive" in repository folder
+ 4. Install Clion 2020.1 / Visual Studio 2019
+ 5. Install [Vulkan SDK/Runtime](https://vulkan.lunarg.com/sdk/home) 1.3.211.0
+ 6. Install CMake 3.16.0
+ 7. Install [MS Build Tools](https://learn.microsoft.com/en-us/visualstudio/releases/2019/history) 14.29.30037 (if you using CLion)
+ 8. Working with CMake (if you're using Visual Studio): 
     1. Choose the path to SREngine (where the source code is located).
     2. Choose the path where to build the binaries (SREngine/Build).
     3. Press "Configure" and choose your VS version.
     4. Press "Generate"
     5. Build and run Engine.exe with command line argument "-resources path-to-your-repository/Resources"
- 8. Working with CLion: 
+ 9. Working with CLion: 
     1. Press Ctrl + Alt + S to open Settings window
     2. Select "Build, Execution, Deployment" to the left, then "Toolchains"
     3. Add (Alt + Insert) Visual Studio compiler
