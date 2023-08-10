@@ -149,7 +149,7 @@ namespace SR_GRAPH_NS {
         for (auto pIt = std::begin(resourceList); pIt != std::end(resourceList); ) {
             auto&& pResource = *pIt;
 
-            const bool removed = pResource->TryExecute([&]() -> bool {
+            const bool removed = pResource->Execute([&]() -> bool {
                 if (pResource->GetCountUses() == 1) {
                     SRAssert(pResource->GetContainerParents().empty());
 
@@ -167,7 +167,7 @@ namespace SR_GRAPH_NS {
                 }
 
                 return false;
-            }, false);
+            });
 
             if (!removed) {
                 ++pIt;

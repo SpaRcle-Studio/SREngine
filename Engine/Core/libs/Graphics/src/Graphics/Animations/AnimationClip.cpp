@@ -12,7 +12,7 @@
 
 namespace SR_ANIMATIONS_NS {
     AnimationClip::AnimationClip()
-        : Super(SR_COMPILE_TIME_CRC32_TYPE_NAME(AnimationClip), true /** auto remove */)
+        : Super(SR_COMPILE_TIME_CRC32_TYPE_NAME(AnimationClip))
     { }
 
     AnimationClip::~AnimationClip() {

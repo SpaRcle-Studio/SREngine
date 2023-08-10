@@ -203,7 +203,6 @@ namespace Framework {
         using namespace SR_UTILS_NS;
 
         generator->RegisterNewClass("IResource", "ResourceManager", { "string" });
-        ESRegisterMethodArg0(EvoScript::Public, generator, IResource, IsEnabledAutoRemove, bool)
         ESRegisterMethodArg0(EvoScript::Public, generator, IResource, Destroy, bool)
         ESRegisterMethodArg0(EvoScript::Public, generator, IResource, GetCountUses, unsigned int)
     }

@@ -17,7 +17,7 @@
 
 namespace SR_GRAPH_NS::Types {
     Shader::Shader()
-        : IResource(SR_COMPILE_TIME_CRC32_TYPE_NAME(Shader), true /** auto remove */)
+        : IResource(SR_COMPILE_TIME_CRC32_TYPE_NAME(Shader))
         , m_manager(Memory::ShaderProgramManager::Instance())
     { }
 

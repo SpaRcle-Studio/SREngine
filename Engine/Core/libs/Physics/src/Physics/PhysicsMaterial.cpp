@@ -8,7 +8,7 @@
 
 namespace SR_PTYPES_NS {
     PhysicsMaterial::PhysicsMaterial()
-        : Super(SR_COMPILE_TIME_CRC32_TYPE_NAME(PhysicsMaterial), true /** auto remove */)
+        : Super(SR_COMPILE_TIME_CRC32_TYPE_NAME(PhysicsMaterial))
     { }
 
     PhysicsMaterial::~PhysicsMaterial() {

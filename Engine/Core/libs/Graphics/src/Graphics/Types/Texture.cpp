@@ -12,7 +12,7 @@
 
 namespace SR_GTYPES_NS {
     Texture::Texture()
-        : IResource(SR_COMPILE_TIME_CRC32_TYPE_NAME(Texture), true /** auto remove */)
+        : IResource(SR_COMPILE_TIME_CRC32_TYPE_NAME(Texture))
     { }
 
     Texture::~Texture() {

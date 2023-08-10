@@ -28,7 +28,7 @@ namespace SR_UTILS_NS {
     class SR_DLL_EXPORT Settings : public IResource {
     protected:
         Settings()
-            : IResource(SR_COMPILE_TIME_CRC32_TYPE_NAME(Settings), true /** auto remove */)
+            : IResource(SR_COMPILE_TIME_CRC32_TYPE_NAME(Settings))
         { }
 
         ~Settings() override = default;

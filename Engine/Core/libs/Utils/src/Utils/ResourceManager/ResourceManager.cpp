@@ -3,7 +3,9 @@
 //
 
 #include <Utils/ResourceManager/ResourceManager.h>
+
 #include <Utils/ResourceManager/IResourceReloader.h>
+#include <Utils/ResourceManager/FileWatcher.h>
 #include <Utils/Common/Features.h>
 #include <Utils/Common/StringFormat.h>
 #include <Utils/Common/Hashes.h>
@@ -28,6 +30,42 @@ namespace SR_UTILS_NS {
         m_isInit = true;
 
         return true;
+    }
+
+    SR_HTYPES_NS::SharedPtr<FileWatcher> ResourceManager::StartWatch(const Path& path) {
+        SR_SCOPED_LOCK;
+        SRAssert(m_isRun);
+        FileWatcher::Ptr pWatcher = new FileWatcher(path);
+        m_watchers.emplace_back(pWatcher);
+        return pWatcher;
+    }
+
+    void ResourceManager::UpdateWatchers() {
+        SR_SCOPED_LOCK;
+        SR_TRACY_ZONE;
+
+        if (m_watchers.empty()) {
+            return;
+        }
+
+        FileWatcher::Ptr pWatcher = m_watchers.front();
+        SRAssert(pWatcher);
+
+        m_watchers.erase(m_watchers.begin());
+
+        /// Watcher может быть уничтожен в конце этой функции
+        /// Так же, учитываем что его состояние может быть изменено сразу после IsActive
+        {
+            std::lock_guard lockWatcher(pWatcher->GetMutex());
+
+            if (!pWatcher->IsActive()) {
+                return;
+            }
+
+            pWatcher->Update();
+        }
+
+        m_watchers.emplace_back(pWatcher);
     }
 
     void ResourceManager::OnSingletonDestroy() {
@@ -56,6 +94,18 @@ namespace SR_UTILS_NS {
             delete pResourceType;
         }
         m_resources.clear();
+
+        for (auto&& pFileWatcher : m_watchers) {
+            if (!pFileWatcher->IsActive()) {
+                continue;
+            }
+
+            SR_ERROR("ResourceManager::OnSingletonDestroy() : file watcher was not stopped!"
+                 "\n\tPath: " + pFileWatcher->GetPath().ToStringRef()
+                + "\n\tName: " + pFileWatcher->GetName()
+            );
+        }
+        m_watchers.clear();
     }
 
     bool ResourceManager::Destroy(IResource *resource) {
@@ -121,6 +171,7 @@ namespace SR_UTILS_NS {
 
             if (m_hashCheckDt > 25 /** ms */) {
                 CheckResourceHashes();
+                UpdateWatchers();
                 m_hashCheckDt = 0;
             }
 
@@ -175,7 +226,7 @@ namespace SR_UTILS_NS {
                 pResource->SetLifetime(0);
             }
 
-            const bool resourceAlive = !pResource->IsForce() && pResource->IsAlive() && !m_force;
+            const bool resourceAlive = !pResource->IsForceDestroyed() && pResource->IsAlive() && !m_force;
 
             if (usageNow || resourceAlive) {
                 ++resourceIt;

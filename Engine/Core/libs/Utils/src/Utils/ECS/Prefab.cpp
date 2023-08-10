@@ -7,7 +7,7 @@
 
 namespace SR_UTILS_NS {
     Prefab::Prefab()
-        : IResource(SR_COMPILE_TIME_CRC32_TYPE_NAME(Prefab), true /** auto remove */)
+        : IResource(SR_COMPILE_TIME_CRC32_TYPE_NAME(Prefab))
     { }
 
     Prefab::~Prefab() {

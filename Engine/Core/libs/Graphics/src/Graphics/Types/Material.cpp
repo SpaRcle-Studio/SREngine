@@ -11,7 +11,7 @@
 
 namespace SR_GTYPES_NS {
     Material::Material()
-        : Super(SR_COMPILE_TIME_CRC32_TYPE_NAME(Material), true /** auto remove */)
+        : Super(SR_COMPILE_TIME_CRC32_TYPE_NAME(Material))
     { }
 
     Material::~Material() {

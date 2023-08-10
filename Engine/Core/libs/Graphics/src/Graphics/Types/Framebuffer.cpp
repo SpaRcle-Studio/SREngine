@@ -8,7 +8,7 @@
 
 namespace SR_GTYPES_NS {
     Framebuffer::Framebuffer()
-        : Super(SR_COMPILE_TIME_CRC32_TYPE_NAME(Framebuffer), true /** auto remove */)
+        : Super(SR_COMPILE_TIME_CRC32_TYPE_NAME(Framebuffer))
         , m_pipeline(Environment::Get())
     {
         SR_UTILS_NS::ResourceManager::Instance().RegisterResource(this);

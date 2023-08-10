@@ -16,7 +16,7 @@ namespace SR_HTYPES_NS {
     SR_INLINE_STATIC int SR_RAW_MESH_ASSIMP_ANIMATION_FLAGS = aiProcess_MakeLeftHanded | aiProcess_FlipWindingOrder;
 
     RawMesh::RawMesh()
-        : IResource(SR_COMPILE_TIME_CRC32_TYPE_NAME(RawMesh), true /** auto remove */)
+        : IResource(SR_COMPILE_TIME_CRC32_TYPE_NAME(RawMesh))
     {
         m_importer = new Assimp::Importer();
     }

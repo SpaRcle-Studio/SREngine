@@ -7,12 +7,14 @@
 
 #include <Utils/Debug.h>
 #include <Utils/Types/Thread.h>
+#include <Utils/Types/SharedPtr.h>
 #include <Utils/Common/Singleton.h>
 #include <Utils/ResourceManager/IResource.h>
 #include <Utils/ResourceManager/ResourceInfo.h>
 
 namespace SR_UTILS_NS {
     class IResourceReloader;
+    class FileWatcher;
 
     class SR_DLL_EXPORT ResourceManager final : public Singleton<ResourceManager> {
         friend class Singleton<ResourceManager>;
@@ -32,6 +34,8 @@ namespace SR_UTILS_NS {
 
         SR_NODISCARD const Path& GetResourcePath(Hash hashPath) const;
         SR_NODISCARD Hash RegisterResourcePath(const Path& path);
+
+        SR_NODISCARD SR_HTYPES_NS::SharedPtr<FileWatcher> StartWatch(const Path& path);
 
         SR_NODISCARD IResource* Find(uint64_t hashTypeName, const std::string& ID);
 
@@ -79,6 +83,7 @@ namespace SR_UTILS_NS {
 
         void Remove(IResource *resource);
         void GC();
+        void UpdateWatchers();
         void CheckResourceHashes();
         void Thread();
 
@@ -93,6 +98,8 @@ namespace SR_UTILS_NS {
         IResourceReloader* m_defaultReloader = nullptr;
 
     private:
+        std::list<SR_HTYPES_NS::SharedPtr<FileWatcher>> m_watchers;
+
         std::atomic<bool> m_isInit = false;
         std::atomic<bool> m_isRun = false;
         std::atomic<bool> m_force = false;

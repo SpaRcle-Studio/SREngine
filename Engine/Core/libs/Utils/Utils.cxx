@@ -38,6 +38,7 @@
 #include "../Utils/src/Utils/Debug.cpp"
 #include "../Utils/src/Utils/Xml.cpp"
 
+#include "../Utils/src/Utils/ResourceManager/FileWatcher.cpp"
 #include "../Utils/src/Utils/ResourceManager/IResource.cpp"
 #include "../Utils/src/Utils/ResourceManager/ResourceInfo.cpp"
 #include "../Utils/src/Utils/ResourceManager/ResourcesHolder.cpp"
