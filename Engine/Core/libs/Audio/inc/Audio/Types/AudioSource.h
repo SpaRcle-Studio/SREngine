@@ -17,6 +17,8 @@ namespace SR_AUDIO_NS
         AudioSource();
 
     public:
+        void OnEnable();
+
         static SR_UTILS_NS::Component* LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage);
 
     private:

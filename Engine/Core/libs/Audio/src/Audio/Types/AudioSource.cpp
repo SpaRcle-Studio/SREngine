@@ -4,6 +4,7 @@
 
 #include <Audio/Types/AudioSource.h>
 #include <Utils/ECS/ComponentManager.h>
+#include <Audio/SoundManager.h>
 
 namespace SR_AUDIO_NS
 {
@@ -15,6 +16,10 @@ namespace SR_AUDIO_NS
 
     SR_UTILS_NS::Component*  AudioSource::LoadComponent(SR_HTYPES_NS::Marshal &marshal, const SR_HTYPES_NS::DataStorage *dataStorage) {
         return new AudioSource();
+    }
+
+    void AudioSource::OnEnable() {
+        SoundManager::Instance().Play("Editor\\Audio\\music.mp3");
     }
 
     void AudioSource::OnDestroy() {

@@ -40,7 +40,10 @@
 #include <Graphics/Font/Text.h>
 #include <Graphics/Font/Font.h>
 
+#include <Audio/Types/AudioSource.h>
+
 namespace SR_CORE_NS::GUI {
+
     void ComponentDrawer::DrawComponent(SR_PTYPES_NS::Rigidbody3D*& pComponent, EditorGUI* context, int32_t index) {
         auto pCopy = dynamic_cast<SR_PTYPES_NS::Rigidbody*>(pComponent);
         DrawComponent(pCopy, context, index);
@@ -527,6 +530,12 @@ namespace SR_CORE_NS::GUI {
     void ComponentDrawer::DrawComponent(SR_GRAPH_NS::UI::Anchor *&anchor, EditorGUI *context, int32_t index) {
 
     }
+    void ComponentDrawer::DrawComponent(Framework::Audio::AudioSource *&pComponent, EditorGUI *context, int32_t index) {
+
+    }
+
+
+
 
     void ComponentDrawer::DrawComponent(SR_GRAPH_NS::UI::Canvas *&canvas, EditorGUI *context, int32_t index) {
 
