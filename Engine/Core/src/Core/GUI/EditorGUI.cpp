@@ -12,6 +12,7 @@
 #include <Core/GUI/EngineStatistics.h>
 #include <Core/GUI/Hierarchy.h>
 #include <Core/GUI/SceneViewer.h>
+#include <Core/GUI/RenderTechniqueEditor.h>
 #include <Core/GUI/FileBrowser.h>
 #include <Core/GUI/About.h>
 #include <Utils/Common/Features.h>
@@ -42,6 +43,7 @@ namespace SR_CORE_NS::GUI {
         AddWidget(new AnimatorEditor());
         AddWidget(new EngineStatistics());
         AddWidget(new About());
+        AddWidget(new RenderTechniqueEditor());
 
         for (auto& [id, widget] : m_widgets) {
             Register(widget);

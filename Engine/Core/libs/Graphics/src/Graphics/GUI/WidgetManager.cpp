@@ -38,6 +38,7 @@ namespace SR_GRAPH_NS::GUI {
         m_widgets.insert(std::make_pair(widget->GetName(), widget));
 
         widget->SetManager(this);
+        widget->Init();
 
         return true;
     }

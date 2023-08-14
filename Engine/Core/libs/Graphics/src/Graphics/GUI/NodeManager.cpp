@@ -4,6 +4,7 @@
 
 #include <Utils/Debug.h>
 #include <Utils/Common/Numeric.h>
+#include <Utils/Common/StringFormat.h>
 
 #include <Graphics/GUI/NodeManager.h>
 

@@ -80,6 +80,14 @@ namespace SR_CORE_GUI_NS {
             return nullptr;
         }
 
+        template<typename T> T* OpenWidget() {
+            if (auto&& pWidget = GetWidget<T>()) {
+                pWidget->Open();
+                return pWidget;
+            }
+            return nullptr;
+        }
+
         void CloseAllWidgets();
 
         SR_NODISCARD bool Enabled() const { return m_enabled; }

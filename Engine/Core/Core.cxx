@@ -23,8 +23,10 @@
 #include "src/Core/GUI/DragNDropHelper.cpp"
 #include "src/Core/GUI/PhysicsMaterialEditor.cpp"
 #include "src/Core/GUI/MaterialEditor.cpp"
-#include "src/Core/Parsers/BlueprintParser.cpp"
 #include "src/Core/GUI/About.cpp"
+#include "src/Core/GUI/RenderTechniqueEditor.cpp"
+
+#include "src/Core/Parsers/BlueprintParser.cpp"
 
 #include "src/Core/Settings/EditorSettings.cpp"
 

@@ -2,10 +2,11 @@
 // Created by Monika on 14.01.2023.
 //
 
-#include <Graphics/GUI/NodeBuilder.h>
+#include <Graphics/Pipeline/Environment.h>
 #include <Graphics/Types/Texture.h>
 #include <Graphics/GUI/Pin.h>
 #include <Graphics/GUI/Node.h>
+#include <Graphics/GUI/NodeBuilder.h>
 
 namespace SR_GRAPH_NS::GUI {
     NodeBuilder::NodeBuilder(SR_GTYPES_NS::Texture *pTexture)

@@ -9,12 +9,18 @@
 
 #include <Utils/Common/NonCopyable.h>
 #include <Utils/Types/DataStorage.h>
+#include <Utils/Types/SafePointer.h>
+#include <Utils/Types/Function.h>
 #include <Utils/Input/InputSystem.h>
 #include <Utils/Input/InputHandler.h>
 
 namespace SR_GRAPH_NS {
     class RenderScene;
     class RenderContext;
+}
+
+namespace SR_WORLD_NS {
+    class Scene;
 }
 
 namespace SR_GRAPH_NS::GUI {
@@ -54,11 +60,13 @@ namespace SR_GRAPH_NS::GUI {
         SR_NODISCARD bool IsFocused() const { return m_internalFlags & WIDGET_FLAG_FOCUSED; }
         SR_NODISCARD bool IsHovered() const { return m_internalFlags & WIDGET_FLAG_HOVERED; }
         SR_NODISCARD WidgetManager* GetManager() const { return m_manager; }
-        SR_NODISCARD std::string GetName() const { return m_name; }
+        SR_NODISCARD const std::string& GetName() const { return m_name; }
         SR_NODISCARD RenderScenePtr GetRenderScene() const;
         SR_NODISCARD ContextPtr GetContext() const;
         SR_NODISCARD SR_HTYPES_NS::DataStorage& GetWeakStorage() const { return m_weakStorage; }
         SR_NODISCARD SR_HTYPES_NS::DataStorage& GetStrongStorage() const { return m_strongStorage; }
+
+        virtual void Init() { }
 
         virtual void Open();
         virtual void Close();

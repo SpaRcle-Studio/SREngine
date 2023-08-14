@@ -36,6 +36,13 @@ namespace SR_GRAPH_NS::GUI {
           Input
     );
 
+    struct PinConstValue {
+        bool m_bool = false;
+        std::string m_string;
+        float_t m_float = 0.f;
+        int32_t m_int = 0;
+    };
+
     class Pin : private SR_UTILS_NS::NonCopyable {
         friend class Node;
         friend class Link;
@@ -45,12 +52,15 @@ namespace SR_GRAPH_NS::GUI {
         Pin(const std::string& name, PinType type);
         Pin(const std::string& name, PinKind kind);
         Pin(const std::string& name, PinType type, PinKind kind);
+        ~Pin() override;
 
     public:
         static ImColor GetIconColor(const PinType& type);
         static IconType GetIconType(const PinType& type);
 
         void DrawPinIcon(bool connected, uint32_t alpha);
+
+        void DrawOption();
 
         void SetNode(Node* node);
 
@@ -74,6 +84,7 @@ namespace SR_GRAPH_NS::GUI {
         void End() const;
 
     private:
+        PinConstValue m_constValue;
         std::unordered_set<Link*> m_links;
         Node* m_node = nullptr;
         std::string m_name;

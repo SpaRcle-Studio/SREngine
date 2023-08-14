@@ -32,6 +32,7 @@ namespace SR_GRAPH_NS {
     class Window;
     class RenderContext;
     class RenderTechnique;
+    class Environment;
     class DebugRenderer;
 
     class RenderScene : public SR_HTYPES_NS::SafePtr<RenderScene> {

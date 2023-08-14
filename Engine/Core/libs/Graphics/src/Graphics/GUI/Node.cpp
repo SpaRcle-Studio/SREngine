@@ -7,9 +7,7 @@
 #include <Graphics/GUI/Pin.h>
 #include <Graphics/GUI/NodeBuilder.h>
 
-#include <imgui-node-editor/imgui_node_editor.h>
-
-namespace SR_GRAPH_NS::GUI {
+namespace SR_GRAPH_GUI_NS {
     Node::Node()
         : Node(std::string(), NodeType::None, ImColor(255, 255, 255, 255))
     { }
@@ -57,8 +55,8 @@ namespace SR_GRAPH_NS::GUI {
         return *this;
     }
 
-    void Node::Draw(NodeBuilder* pBuilder, Pin* pNewLinkPin) const {
-        pBuilder->Begin(const_cast<Node*>(this));
+    void Node::Draw(NodeBuilder* pBuilder, Pin* pNewLinkPin) {
+        pBuilder->Begin(this);
 
         const bool isSimple = m_type == NodeType::Simple;
 
@@ -133,11 +131,16 @@ namespace SR_GRAPH_NS::GUI {
                 ImGui::Spring(0);
             }
 
-            if (pInput->GetType() == PinType::Bool)
-            {
-                ImGui::Button("Hello");
+            if (!pInput->IsLinked()) {
+                pInput->DrawOption();
                 ImGui::Spring(0);
             }
+
+            // if (pInput->GetType() == PinType::Bool)
+            // {
+            //     ImGui::Button("Hello");
+            //
+            // }
 
             ImGui::PopStyleVar();
             pBuilder->EndInput();
@@ -201,6 +204,7 @@ namespace SR_GRAPH_NS::GUI {
     }
 
     uintptr_t Node::GetId() const {
+        /// TODO: переделать, при сохранении будут проблемы
         return reinterpret_cast<const uintptr_t>(this);
     }
 
@@ -229,6 +233,10 @@ namespace SR_GRAPH_NS::GUI {
             return nullptr;
         }
         return m_outputs.at(index);
+    }
+
+    void Node::SetPosition(const SR_MATH_NS::FVector2& pos) {
+        ax::NodeEditor::SetNodePosition(GetId(), ImVec2(pos.x, pos.y));
     }
 
     Node* Node::Copy() const {

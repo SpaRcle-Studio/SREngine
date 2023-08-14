@@ -9,43 +9,6 @@ namespace SR_CORE_NS::GUI {
         : Super("Animator")
     { }
 
-    void AnimatorEditor::Draw() {
-        DrawTopPanel();
-
-        ImGui::Separator();
-
-        UpdateTouch();
-
-        ax::NodeEditor::SetCurrentEditor(m_editor);
-
-        ax::NodeEditor::Begin("AnimatorEditor");
-
-        for (auto&& [id, node] : m_nodes)
-            node->Draw(m_nodeBuilder, nullptr);
-
-        for (auto&& [id, link] : m_links)
-            link->Draw();
-
-        if (ax::NodeEditor::BeginCreate()) {
-            ax::NodeEditor::PinId inputPinId, outputPinId;
-            if (ax::NodeEditor::QueryNewLink(&inputPinId, &outputPinId) && (inputPinId && outputPinId)) {
-                auto&& pInputPin = reinterpret_cast<SR_GRAPH_NS::GUI::Pin*>(inputPinId.AsPointer());
-                auto&& pOutputPin = reinterpret_cast<SR_GRAPH_NS::GUI::Pin*>(outputPinId.AsPointer());
-
-                if (pInputPin != pOutputPin) {
-                    if (SR_GRAPH_NS::GUI::CanCreateLink(pInputPin, pOutputPin) && ax::NodeEditor::AcceptNewItem()) {
-                        AddLink(new SR_GRAPH_NS::GUI::Link(pInputPin, pOutputPin));
-                    }
-                }
-            }
-        }
-        ax::NodeEditor::EndCreate();
-
-        DrawPopupMenu();
-
-        ax::NodeEditor::End();
-    }
-
     void AnimatorEditor::OnOpen() {
         ax::NodeEditor::Config config;
 
@@ -90,28 +53,16 @@ namespace SR_CORE_NS::GUI {
        Super::OnOpen();
     }
 
-   void AnimatorEditor::OnClose() {
-       if (m_editor) {
-           ax::NodeEditor::DestroyEditor(m_editor);
-           m_editor = nullptr;
-       }
-
-       Super::OnClose();
-   }
-
     void AnimatorEditor::DrawPopupMenu() {
         auto&& openPopupPosition = ImGui::GetMousePos();
 
         ax::NodeEditor::Suspend();
 
+        ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(8, 8));
+
         if (ax::NodeEditor::ShowBackgroundContextMenu()) {
             ImGui::OpenPopup("Create New Node");
         }
-
-        ax::NodeEditor::Resume();
-        ax::NodeEditor::Suspend();
-
-        ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(8, 8));
 
         if (ImGui::BeginPopup("Create New Node")) {
             if (ImGui::MenuItem("Add animation")) {
@@ -127,39 +78,5 @@ namespace SR_CORE_NS::GUI {
         ImGui::PopStyleVar();
 
         ax::NodeEditor::Resume();
-    }
-
-    void AnimatorEditor::DrawTopPanel() {
-        ImGui::PushStyleVar(ImGuiStyleVar_ChildRounding, 0);
-        ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0);
-        ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 0);
-
-        if (ImGui::Button("Open")) {
-
-        }
-
-        ImGui::SameLine();
-
-        if (ImGui::Button("Save")) {
-
-        }
-
-        ImGui::SameLine();
-
-        if (ImGui::Button("Save at")) {
-
-        }
-
-        ImGui::SameLine();
-
-        ImGui::Text(" | ");
-
-        ImGui::SameLine();
-
-        if (ImGui::Button("Close")) {
-
-        }
-
-        ImGui::PopStyleVar(3);
     }
 }

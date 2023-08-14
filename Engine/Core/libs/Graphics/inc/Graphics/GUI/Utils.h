@@ -669,6 +669,9 @@ namespace SR_GRAPH_GUI_NS {
     }
 
     bool RadioButton(const char* label, bool active, float_t radius = 1.f);
+
+    bool CheckboxNoNavFocus(const char* label, bool* v);
+    bool ButtonBehaviorNoNavFocus(const ImRect& bb, ImGuiID id, bool* out_hovered, bool* out_held, ImGuiButtonFlags flags = 0);
 }
 
 /*

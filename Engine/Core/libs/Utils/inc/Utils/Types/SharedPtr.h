@@ -62,7 +62,8 @@ namespace SR_HTYPES_NS {
 
             return *this;
         }
-        SR_NODISCARD SR_FORCE_INLINE T *operator->() const noexcept { return m_ptr; }
+        SR_NODISCARD SR_FORCE_INLINE T& operator*() const noexcept { return *m_ptr; }
+        SR_NODISCARD SR_FORCE_INLINE T* operator->() const noexcept { return m_ptr; }
         SR_NODISCARD SR_INLINE bool operator==(const SharedPtr<T>& right) const noexcept {
             return m_ptr == right.m_ptr;
         }

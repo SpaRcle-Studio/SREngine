@@ -3,6 +3,7 @@
 //
 
 #include <Graphics/GUI/Pin.h>
+#include <Graphics/GUI/Utils.h>
 
 namespace SR_GRAPH_NS::GUI {
     Pin::Pin()
@@ -26,6 +27,13 @@ namespace SR_GRAPH_NS::GUI {
         , m_type(type)
         , m_kind(kind)
     { }
+
+    Pin::~Pin() {
+        for (auto&& pLink : m_links) {
+            pLink->Broke(this);
+        }
+        m_node = nullptr;
+    }
 
     ImColor Pin::GetIconColor(const PinType &type) {
         switch (type) {
@@ -145,5 +153,24 @@ namespace SR_GRAPH_NS::GUI {
         const float_t pinIconSize = 24.f;
 
         SR_GRAPH_NS::GUI::Icon(ImVec2(pinIconSize, pinIconSize), iconType, connected, color, ImColor(32, 32, 32, alpha));
+    }
+
+    void Pin::DrawOption() {
+        switch (GetType()) {
+            case PinType::Bool:
+                CheckboxNoNavFocus(SR_FORMAT_C("##Pin-%p", (void*)this), &m_constValue.m_bool);
+                break;
+            case PinType::Int:
+                ImGui::InputInt(SR_FORMAT_C("##Pin-%p", (void*)this), &m_constValue.m_int);
+                break;
+            case PinType::Float:
+                ImGui::InputFloat(SR_FORMAT_C("##Pin-%p", (void*)this), &m_constValue.m_float);
+                break;
+            case PinType::String:
+                ImGui::InputText(SR_FORMAT_C("##Pin-%p", (void*)this), &m_constValue.m_string);
+                break;
+            default:
+                break;
+        }
     }
 }

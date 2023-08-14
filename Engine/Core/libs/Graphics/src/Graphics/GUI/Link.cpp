@@ -51,4 +51,17 @@ namespace SR_GRAPH_NS::GUI {
     bool Link::IsLinked(Pin* pPin) const {
         return pPin && (m_startPin == pPin || m_endPin == pPin);
     }
+
+    void Link::Broke(Pin* pFrom) {
+        if (pFrom != m_startPin && m_startPin) {
+            m_startPin->RemoveLink(this);
+        }
+
+        if (pFrom != m_endPin && m_endPin) {
+            m_endPin->RemoveLink(this);
+        }
+
+        m_startPin = nullptr;
+        m_endPin = nullptr;
+    }
 }

@@ -6,7 +6,7 @@
 #define SRENGINE_PHYSICSMATERIALEDITOR_H
 
 namespace SR_CORE_GUI_NS {
-class PhysicsMaterialEditor : public SR_GRAPH_GUI_NS::Widget {
+    class PhysicsMaterialEditor : public SR_GRAPH_GUI_NS::Widget {
         using Super = SR_GRAPH_GUI_NS::Widget;
     public:
         PhysicsMaterialEditor();
@@ -14,6 +14,7 @@ class PhysicsMaterialEditor : public SR_GRAPH_GUI_NS::Widget {
 
     protected:
         void Draw() override;
+
     };
 }
 

@@ -17,6 +17,10 @@ namespace SR_GRAPH_NS::GUI {
             return false;
         }
 
+        if (a->IsLinked(b) || b->IsLinked(a)) {
+            return false;
+        }
+
         return a->GetNode() != b->GetNode();
     }
 }

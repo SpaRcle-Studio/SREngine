@@ -51,7 +51,9 @@ namespace SR_GRAPH_NS::GUI {
 
         SR_NODISCARD Node* Copy() const;
 
-        void Draw(NodeBuilder* pBuilder, Pin* pNewLinkPin) const;
+        void SetPosition(const SR_MATH_NS::FVector2& pos);
+
+        void Draw(NodeBuilder* pBuilder, Pin* pNewLinkPin);
 
     private:
         std::string m_name;

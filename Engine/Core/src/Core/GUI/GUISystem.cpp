@@ -3,6 +3,7 @@
 //
 
 #include <Core/GUI/GUISystem.h>
+#include <Core/GUI/RenderTechniqueEditor.h>
 #include <Core/GUI/VisualScriptEditor.h>
 #include <Core/Engine.h>
 #include <Core/EngineCommands.h>
@@ -704,53 +705,53 @@ bool GUISystem::BeginMenuBar() {
 
     if (ImGui::BeginMenu("Window")) {
         if (ImGui::MenuItem("Assets")) {
-            Engine::Instance().GetEditor()->GetWidget<FileBrowser>()->Open();
+            Engine::Instance().GetEditor()->OpenWidget<FileBrowser>();
         }
 
         ImGui::Separator();
 
         if (ImGui::MenuItem("Hierarchy")) {
-            Engine::Instance().GetEditor()->GetWidget<Hierarchy>()->Open();
+            Engine::Instance().GetEditor()->OpenWidget<Hierarchy>();
         }
 
         ImGui::Separator();
 
         if (ImGui::MenuItem("Inspector")) {
-            Engine::Instance().GetEditor()->GetWidget<Inspector>()->Open();
+            Engine::Instance().GetEditor()->OpenWidget<Inspector>();
         }
 
         ImGui::Separator();
 
         if (ImGui::MenuItem("Scene")) {
-            Engine::Instance().GetEditor()->GetWidget<SceneViewer>()->Open();
+            Engine::Instance().GetEditor()->OpenWidget<SceneViewer>();
         }
 
         ImGui::Separator();
 
-        //if (ImGui::MenuItem("Visual Script")) {
-        //    Engine::Instance().GetEditor()->GetWidget<VisualScriptEditor>()->Open();
-        //}
+        if (ImGui::MenuItem("Render Technique")) {
+            Engine::Instance().GetEditor()->OpenWidget<RenderTechniqueEditor>();
+        }
 
         if (ImGui::MenuItem("Animator")) {
-            Engine::Instance().GetEditor()->GetWidget<AnimatorEditor>()->Open();
+            Engine::Instance().GetEditor()->OpenWidget<AnimatorEditor>();
         }
 
         ImGui::Separator();
 
         if (ImGui::MenuItem("World edit")) {
-            Engine::Instance().GetEditor()->GetWidget<WorldEdit>()->Open();
+            Engine::Instance().GetEditor()->OpenWidget<WorldEdit>();
         }
 
         ImGui::Separator();
 
         if (ImGui::MenuItem("Settings")) {
-            Engine::Instance().GetEditor()->GetWidget<EngineSettings>()->Open();
+            Engine::Instance().GetEditor()->OpenWidget<EngineSettings>();
         }
 
         ImGui::Separator();
 
         if (ImGui::MenuItem("Statistics")) {
-            Engine::Instance().GetEditor()->GetWidget<EngineStatistics>()->Open();
+            Engine::Instance().GetEditor()->OpenWidget<EngineStatistics>();
         }
 
         ImGui::Separator();
@@ -769,7 +770,7 @@ bool GUISystem::BeginMenuBar() {
     }
 
     if (ImGui::MenuItem("About")) {
-        Engine::Instance().GetEditor()->GetWidget<About>()->Open();
+        Engine::Instance().GetEditor()->OpenWidget<About>();
     }
 
     ImGui::PopStyleVar();
