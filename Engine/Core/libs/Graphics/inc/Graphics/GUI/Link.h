@@ -22,6 +22,11 @@ namespace SR_GRAPH_NS::GUI {
         SR_NODISCARD uintptr_t GetId() const;
         SR_NODISCARD bool IsLinked(Pin* pPin) const;
         SR_NODISCARD bool IsLinked() const { return m_endPin && m_startPin; }
+        SR_NODISCARD Pin* GetStart() const { return m_startPin; }
+        SR_NODISCARD Pin* GetEnd() const { return m_endPin; }
+
+        void SetStart(Pin* pPin);
+        void SetEnd(Pin* pPin);
 
         void Draw() const;
         void Broke(Pin* pFrom);

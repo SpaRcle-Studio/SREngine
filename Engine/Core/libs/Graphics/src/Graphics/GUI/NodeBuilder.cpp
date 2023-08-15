@@ -23,12 +23,13 @@ namespace SR_GRAPH_NS::GUI {
         }
     }
 
-    void NodeBuilder::Begin(Node *pNode) {
+    void NodeBuilder::Begin(Node* pNode) {
         m_hasHeader = false;
         m_headerMin = m_headerMax = ImVec2();
 
         ax::NodeEditor::PushStyleVar(ax::NodeEditor::StyleVar_NodePadding, ImVec4(8, 4, 8, 8));
 
+        m_currentNode = pNode;
         m_currentNodeId = pNode->GetId();
 
         ax::NodeEditor::BeginNode(m_currentNodeId);
@@ -78,6 +79,7 @@ namespace SR_GRAPH_NS::GUI {
         }
 
         m_currentNodeId = 0;
+        m_currentNode = nullptr;
 
         ImGui::PopID();
 

@@ -15,3 +15,4 @@
 #include "../Graphics/src/Graphics/GUI/NodeBuilder.cpp"
 #include "../Graphics/src/Graphics/GUI/Utils.cpp"
 #include "../Graphics/src/Graphics/GUI/PopupMenu.cpp"
+#include "../Graphics/src/Graphics/GUI/NodeCreation.cpp"

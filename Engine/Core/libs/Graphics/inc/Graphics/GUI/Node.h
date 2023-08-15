@@ -15,7 +15,8 @@ namespace SR_GRAPH_NS::GUI {
         Simple,
         Tree,
         Comment,
-        Houdini
+        Houdini,
+        Dot
     );
 
     enum class PinType : int32_t;
@@ -40,6 +41,9 @@ namespace SR_GRAPH_NS::GUI {
         Node& AddInput(Pin* pin);
         Node& AddOutput(Pin* pin);
 
+        Node& AddInput(PinType type);
+        Node& AddOutput(PinType type);
+
         Node& AddInput(const std::string& name, PinType type);
         Node& AddOutput(const std::string& name, PinType type);
 
@@ -48,10 +52,15 @@ namespace SR_GRAPH_NS::GUI {
 
         SR_NODISCARD uintptr_t GetId() const;
         SR_NODISCARD std::string GetName() const;
+        SR_NODISCARD uint64_t GetIdentifier() const { return m_identifier; }
+        SR_NODISCARD bool IsDot() const { return m_type == NodeType::Dot; }
 
         SR_NODISCARD Node* Copy() const;
 
-        void SetPosition(const SR_MATH_NS::FVector2& pos);
+        Node& SetName(std::string name);
+        Node& SetPosition(const SR_MATH_NS::FVector2& pos);
+        Node& SetIdentifier(uint64_t identifier);
+        Node& SetType(NodeType type);
 
         void Draw(NodeBuilder* pBuilder, Pin* pNewLinkPin);
 
@@ -63,6 +72,7 @@ namespace SR_GRAPH_NS::GUI {
         NodeType m_type;
         float_t m_maxOutputWidth;
         bool m_hasOutputDelegates = false;
+        uint64_t m_identifier = SR_UINT64_MAX;
 
     };
 }

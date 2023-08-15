@@ -24,6 +24,8 @@ namespace SR_GRAPH_GUI_NS {
         void RemoveLink(Link* pLink);
 
     protected:
+        virtual bool CanAddNode(Node* pNode) { return true; }
+
         virtual void UpdateTouch();
         virtual void DrawPopupMenu();
         virtual void DrawTopPanel();

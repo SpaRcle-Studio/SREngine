@@ -29,7 +29,7 @@ if (SR_TRACY_ENABLE)
 endif()
 
 if (SR_UTILS_STATIC_LIBRARY)
-    add_library(Utils STATIC ICU.cxx Utils.cxx ECS.cxx)
+    add_library(Utils STATIC ICU.cxx Utils.cxx ECS.cxx World.cxx)
 
     if (CYGWIN)
 
@@ -37,7 +37,7 @@ if (SR_UTILS_STATIC_LIBRARY)
 
     endif()
 else()
-    add_library(Utils SHARED ICU.cxx Utils.cxx ECS.cxx)
+    add_library(Utils SHARED ICU.cxx Utils.cxx ECS.cxx World.cxx)
     add_library(Utils::lib ALIAS Utils)
 endif()
 

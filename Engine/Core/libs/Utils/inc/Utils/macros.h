@@ -178,6 +178,7 @@
 #define SR_PTYPES_NS SR_PHYSICS_NS::Types
 #define SR_PHYSICS_UTILS_NS SR_PHYSICS_NS::Utils
 #define SR_UTILS_NS Framework::Helper
+#define SR_SRLM_NS SR_UTILS_NS::SRLM
 #define SR_PLATFORM_NS Framework::Helper::Platform
 #define SR_MATH_NS Framework::Helper::Math
 #define SR_GRAPH_NS Framework::Graphics

@@ -55,6 +55,7 @@ namespace SR_GRAPH_NS::GUI {
 
         uintptr_t m_currentNodeId = 0;
 
+        Node* m_currentNode = nullptr;
         Pin* m_currentPin = nullptr;
 
         Stage m_currentStage = Stage::Invalid;

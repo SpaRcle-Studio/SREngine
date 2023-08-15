@@ -12,7 +12,7 @@ namespace SR_GRAPH_GUI_NS {
         : Node(std::string(), NodeType::None, ImColor(255, 255, 255, 255))
     { }
 
-    Node::Node( const std::string &name)
+    Node::Node(const std::string &name)
         : Node(name, NodeType::None, ImColor(255, 255, 255, 255))
     { }
 
@@ -58,13 +58,15 @@ namespace SR_GRAPH_GUI_NS {
     void Node::Draw(NodeBuilder* pBuilder, Pin* pNewLinkPin) {
         pBuilder->Begin(this);
 
-        const bool isSimple = m_type == NodeType::Simple;
+        const bool isSimple = m_type == NodeType::Simple || m_type == NodeType::Dot;
 
         if (!isSimple) {
             pBuilder->Header(m_color);
 
             ImGui::Spring(0);
-            ImGui::TextUnformatted(m_name.c_str());
+            if (!m_name.empty()) {
+                ImGui::TextUnformatted(m_name.c_str());
+            }
             ImGui::Spring(1);
             ImGui::Dummy(ImVec2(0, 28));
 
@@ -150,7 +152,9 @@ namespace SR_GRAPH_GUI_NS {
             pBuilder->Middle();
 
             ImGui::Spring(1, 0);
-            ImGui::TextUnformatted(m_name.c_str());
+            if (!m_name.empty()) {
+                ImGui::TextUnformatted(m_name.c_str());
+            }
             ImGui::Spring(1, 0);
         }
 
@@ -235,35 +239,60 @@ namespace SR_GRAPH_GUI_NS {
         return m_outputs.at(index);
     }
 
-    void Node::SetPosition(const SR_MATH_NS::FVector2& pos) {
+    Node& Node::SetPosition(const SR_MATH_NS::FVector2& pos) {
         ax::NodeEditor::SetNodePosition(GetId(), ImVec2(pos.x, pos.y));
+        return *this;
+    }
+
+    Node& Node::SetName(std::string name) {
+        m_name = std::move(name);
+        return *this;
+    }
+
+    Node& Node::SetIdentifier(uint64_t identifier) {
+        m_identifier = identifier;
+        return *this;
+    }
+
+    Node& Node::SetType(NodeType type) {
+        m_type = type;
+        return *this;
     }
 
     Node* Node::Copy() const {
-        auto node = new Node();
-        node->m_name = m_name;
-        node->m_color = m_color;
-        node->m_type = m_type;
-        node->m_maxOutputWidth = m_maxOutputWidth;
+        auto&& pNode = new Node();
+
+        pNode->m_name = m_name;
+        pNode->m_color = m_color;
+        pNode->m_type = m_type;
+        pNode->m_maxOutputWidth = m_maxOutputWidth;
 
         for (const auto& pin : m_inputs)
-            node->AddInput(pin->Copy());
+            pNode->AddInput(pin->Copy());
 
         for (const auto& pin : m_outputs)
-            node->AddOutput(pin->Copy());
+            pNode->AddOutput(pin->Copy());
 
-        return node;
+        return pNode;
     }
 
     std::string Node::GetName() const {
         return m_name;
     }
 
-    Node &Node::AddInput(const std::string &name, PinType type) {
+    Node& Node::AddInput(PinType type) {
+        return AddInput(new Pin(std::string(), type));
+    }
+
+    Node& Node::AddOutput(PinType type) {
+        return AddOutput(new Pin(std::string(), type));
+    }
+
+    Node& Node::AddInput(const std::string &name, PinType type) {
         return AddInput(new Pin(name, type));
     }
 
-    Node &Node::AddOutput(const std::string &name, PinType type) {
+    Node& Node::AddOutput(const std::string &name, PinType type) {
         return AddOutput(new Pin(name, type));
     }
 }

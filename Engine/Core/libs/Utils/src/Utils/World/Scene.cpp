@@ -9,12 +9,16 @@
 #include <Utils/World/SceneAllocator.h>
 #include <Utils/World/SceneLogic.h>
 #include <Utils/World/SceneCubeChunkLogic.h>
-
-#include <Utils/ECS/Component.h>
-#include <Utils/ECS/GameObject.h>
 #include <Utils/World/SceneDefaultLogic.h>
 #include <Utils/World/SceneBuilder.h>
 #include <Utils/World/ScenePrefabLogic.h>
+
+#include <Utils/Types/RawMesh.h>
+
+#include <Utils/ECS/Component.h>
+#include <Utils/ECS/GameObject.h>
+
+#include <Utils/Platform/Platform.h>
 
 namespace SR_WORLD_NS {
     Scene::Scene()

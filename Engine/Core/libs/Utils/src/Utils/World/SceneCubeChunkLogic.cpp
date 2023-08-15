@@ -4,6 +4,8 @@
 
 #include <Utils/World/SceneCubeChunkLogic.h>
 #include <Utils/ECS/ComponentManager.h>
+#include <Utils/Platform/Platform.h>
+#include <Utils/DebugDraw.h>
 
 namespace SR_WORLD_NS {
     SceneCubeChunkLogic::SceneCubeChunkLogic(const ScenePtr& scene)

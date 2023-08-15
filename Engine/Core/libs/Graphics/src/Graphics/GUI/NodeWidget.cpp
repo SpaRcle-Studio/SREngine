@@ -3,7 +3,10 @@
 //
 
 #include <Graphics/GUI/NodeWidget.h>
+#include <Graphics/GUI/NodeCreation.h>
 #include <Graphics/Types/Texture.h>
+
+#include <Utils/SRLM/LogicalMachine.h>
 
 namespace SR_GRAPH_GUI_NS {
     NodeWidget::NodeWidget(std::string name, SR_MATH_NS::IVector2 size)
@@ -109,6 +112,26 @@ namespace SR_GRAPH_GUI_NS {
 
         ax::NodeEditor::EndDelete();
 
+        if (auto&& pRawLink = ax::NodeEditor::GetDoubleClickedLink()) {
+            auto&& pLink = reinterpret_cast<SR_GRAPH_GUI_NS::Link*>(pRawLink.AsPointer());
+            auto&& clickPos = ImGui::GetMousePos();
+
+            if (pLink->IsLinked()) {
+                auto&& pNode = new Node();
+
+                pNode->SetType(NodeType::Dot)
+                    .SetIdentifier(SR_SRLM_NS::NODE_LINK_DOT)
+                    .SetPosition(SR_MATH_NS::FVector2(clickPos.x, clickPos.y))
+                    .AddInput(pLink->GetStart()->GetType())
+                    .AddOutput(pLink->GetStart()->GetType());
+
+                AddLink(new Link(pNode->GetOutputPin(0), pLink->GetEnd()));
+                pLink->SetEnd(pNode->GetInputPin(0));
+
+                AddNode(pNode);
+            }
+        }
+
         DrawPopupMenu();
 
         ax::NodeEditor::End();
@@ -130,9 +153,14 @@ namespace SR_GRAPH_GUI_NS {
     }
 
     Node& NodeWidget::AddNode(Node* pNode) {
+        static Node def;
+
         if (!pNode) {
             SRHalt0();
-            static Node def;
+            return def;
+        }
+
+        if (!CanAddNode(pNode)) {
             return def;
         }
 
@@ -222,7 +250,59 @@ namespace SR_GRAPH_GUI_NS {
     }
 
     void NodeWidget::InitCreationPopup() {
+        auto&& commonNodesMenu = m_creationPopup->AddMenu("Common");
 
+        auto&& logicNodesMenu = commonNodesMenu.AddMenu("Logic");
+
+        logicNodesMenu.AddMenu("Condition").SetAction([](const SR_GRAPH_GUI_NS::DrawPopupContext& context) {
+            context.pWidget->AddNode(CreateNode(context.popupPos, SR_SRLM_NS::NODE_BOOL_CONDITION));
+        });
+
+        logicNodesMenu.AddMenu("And").SetAction([](const SR_GRAPH_GUI_NS::DrawPopupContext& context) {
+            context.pWidget->AddNode(CreateNode(context.popupPos, SR_SRLM_NS::NODE_BOOL_AND));
+        });
+
+        logicNodesMenu.AddMenu("Or").SetAction([](const SR_GRAPH_GUI_NS::DrawPopupContext& context) {
+            context.pWidget->AddNode(CreateNode(context.popupPos, SR_SRLM_NS::NODE_BOOL_OR));
+        });
+
+        logicNodesMenu.AddMenu("Not").SetAction([](const SR_GRAPH_GUI_NS::DrawPopupContext& context) {
+            context.pWidget->AddNode(CreateNode(context.popupPos, SR_SRLM_NS::NODE_BOOL_NOT));
+        });
+
+        auto&& mathNodesMenu = commonNodesMenu.AddMenu("Math");
+
+        mathNodesMenu.AddMenu("- Int").SetAction([](const SR_GRAPH_GUI_NS::DrawPopupContext& context) {
+            context.pWidget->AddNode(CreateNode(context.popupPos, SR_SRLM_NS::NODE_INT_NEGATIVE));
+        });
+
+        mathNodesMenu.AddMenu("- Float").SetAction([](const SR_GRAPH_GUI_NS::DrawPopupContext& context) {
+            context.pWidget->AddNode(CreateNode(context.popupPos, SR_SRLM_NS::NODE_FLOAT_NEGATIVE));
+        });
+
+        mathNodesMenu.AddMenu("Int to Float").SetAction([](const SR_GRAPH_GUI_NS::DrawPopupContext& context) {
+            context.pWidget->AddNode(CreateNode(context.popupPos, SR_SRLM_NS::NODE_INT_TO_FLOAT));
+        });
+
+        mathNodesMenu.AddMenu("Float to Int").SetAction([](const SR_GRAPH_GUI_NS::DrawPopupContext& context) {
+            context.pWidget->AddNode(CreateNode(context.popupPos, SR_SRLM_NS::NODE_FLOAT_TO_INT));
+        });
+
+        mathNodesMenu.AddMenu("int + int").SetAction([](const SR_GRAPH_GUI_NS::DrawPopupContext& context) {
+            context.pWidget->AddNode(CreateNode(context.popupPos, SR_SRLM_NS::NODE_INT_PLUS_INT));
+        });
+
+        mathNodesMenu.AddMenu("int - int").SetAction([](const SR_GRAPH_GUI_NS::DrawPopupContext& context) {
+            context.pWidget->AddNode(CreateNode(context.popupPos, SR_SRLM_NS::NODE_INT_MINUS_INT));
+        });
+
+        mathNodesMenu.AddMenu("float + float").SetAction([](const SR_GRAPH_GUI_NS::DrawPopupContext& context) {
+            context.pWidget->AddNode(CreateNode(context.popupPos, SR_SRLM_NS::NODE_FLOAT_PLUS_FLOAT));
+        });
+
+        mathNodesMenu.AddMenu("float - float").SetAction([](const SR_GRAPH_GUI_NS::DrawPopupContext& context) {
+            context.pWidget->AddNode(CreateNode(context.popupPos, SR_SRLM_NS::NODE_FLOAT_MINUS_FLOAT));
+        });
     }
 
     void NodeWidget::TopPanelSaveAt() {

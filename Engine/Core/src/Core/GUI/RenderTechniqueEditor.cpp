@@ -3,6 +3,7 @@
 //
 
 #include <Core/GUI/RenderTechniqueEditor.h>
+#include <Graphics/GUI/NodeCreation.h>
 
 namespace SR_CORE_GUI_NS {
     RenderTechniqueEditor::RenderTechniqueEditor()
@@ -31,45 +32,19 @@ namespace SR_CORE_GUI_NS {
     }
 
     void RenderTechniqueEditor::InitCreationPopup() {
-        auto&& commonNodesMenu = m_creationPopup->AddMenu("Common");
-
-        commonNodesMenu.AddMenu("Condition").SetAction([](const SR_GRAPH_GUI_NS::DrawPopupContext& context) {
-            context.pWidget->AddNode(new SR_GRAPH_GUI_NS::Node("Condition", SR_GRAPH_GUI_NS::NodeType::Simple))
-                .AddInput("", SR_GRAPH_GUI_NS::PinType::Flow)
-                .AddInput("", SR_GRAPH_GUI_NS::PinType::Bool)
-                .AddOutput("True", SR_GRAPH_GUI_NS::PinType::Flow)
-                .AddOutput("False", SR_GRAPH_GUI_NS::PinType::Flow)
-                .SetPosition(context.popupPos)
-            ;
-        });
-
-        commonNodesMenu.AddMenu("And").SetAction([](const SR_GRAPH_GUI_NS::DrawPopupContext& context) {
-            context.pWidget->AddNode(new SR_GRAPH_GUI_NS::Node("And", SR_GRAPH_GUI_NS::NodeType::Simple))
-                .AddInput("", SR_GRAPH_GUI_NS::PinType::Bool)
-                .AddInput("", SR_GRAPH_GUI_NS::PinType::Bool)
-                .AddOutput("", SR_GRAPH_GUI_NS::PinType::Bool)
-                .SetPosition(context.popupPos)
-            ;
-        });
-
-        commonNodesMenu.AddMenu("Or").SetAction([](const SR_GRAPH_GUI_NS::DrawPopupContext& context) {
-            context.pWidget->AddNode(new SR_GRAPH_GUI_NS::Node("Or", SR_GRAPH_GUI_NS::NodeType::Simple))
-                .AddInput("", SR_GRAPH_GUI_NS::PinType::Bool)
-                .AddInput("", SR_GRAPH_GUI_NS::PinType::Bool)
-                .AddOutput("", SR_GRAPH_GUI_NS::PinType::Bool)
-                .SetPosition(context.popupPos)
-            ;
-        });
-
-        commonNodesMenu.AddMenu("Not").SetAction([](const SR_GRAPH_GUI_NS::DrawPopupContext& context) {
-            context.pWidget->AddNode(new SR_GRAPH_GUI_NS::Node("Not", SR_GRAPH_GUI_NS::NodeType::Simple))
-                .AddInput("", SR_GRAPH_GUI_NS::PinType::Bool)
-                .AddOutput("", SR_GRAPH_GUI_NS::PinType::Bool)
-                .SetPosition(context.popupPos)
-            ;
-        });
-
         auto&& passesNodesMenu = m_creationPopup->AddMenu("Passes");
+
+        passesNodesMenu.AddMenu("Cascaded Shadow Map Pass").SetAction([](const SR_GRAPH_GUI_NS::DrawPopupContext& context) {
+            context.pWidget->AddNode(SR_GRAPH_GUI_NS::CreateNode(context.popupPos, SR_SRLM_NS::NODE_CASCADED_SHADOW_MAP_PASS));
+        });
+
+        passesNodesMenu.AddMenu("Start Pass").SetAction([](const SR_GRAPH_GUI_NS::DrawPopupContext& context) {
+            context.pWidget->AddNode(SR_GRAPH_GUI_NS::CreateNode(context.popupPos, SR_SRLM_NS::NODE_START_PASS));
+        });
+
+        passesNodesMenu.AddMenu("End Pass").SetAction([](const SR_GRAPH_GUI_NS::DrawPopupContext& context) {
+            context.pWidget->AddNode(SR_GRAPH_GUI_NS::CreateNode(context.popupPos, SR_SRLM_NS::NODE_END_PASS));
+        });
 
         Super::InitCreationPopup();
     }

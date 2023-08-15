@@ -6,6 +6,7 @@
 #define SRENGINE_DATASTORAGE_H
 
 #include <Utils/Common/NonCopyable.h>
+#include <Utils/Common/Hashes.h>
 #include <Utils/Debug.h>
 
 namespace SR_HTYPES_NS {

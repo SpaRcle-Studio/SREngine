@@ -3,6 +3,8 @@
 //
 
 #include <Utils/Game/LookAtComponent.h>
+#include <Utils/ECS/Transform3D.h>
+#include <Utils/ECS/ComponentManager.h>
 
 namespace SR_UTILS_NS {
     SR_REGISTER_COMPONENT(LookAtComponent);
