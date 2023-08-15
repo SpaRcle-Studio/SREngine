@@ -42,6 +42,7 @@
 
 #include <Audio/Types/AudioSource.h>
 
+#include <imgui_internal.h>
 namespace SR_CORE_NS::GUI {
 
     void ComponentDrawer::DrawComponent(SR_PTYPES_NS::Rigidbody3D*& pComponent, EditorGUI* context, int32_t index) {
@@ -530,7 +531,25 @@ namespace SR_CORE_NS::GUI {
     void ComponentDrawer::DrawComponent(SR_GRAPH_NS::UI::Anchor *&anchor, EditorGUI *context, int32_t index) {
 
     }
+
     void ComponentDrawer::DrawComponent(Framework::Audio::AudioSource *&pComponent, EditorGUI *context, int32_t index) {
+
+
+
+
+        int32_t Volume = pComponent->GetVolume();
+
+        if(ImGui::SliderInt("Volume",&Volume,0,100))
+        {
+            pComponent->SetVolume(Volume);
+        }
+
+        std::string m_path = pComponent->GetPath().ToString();
+        if (ImGui::InputText("Path to Audio",&m_path))
+        {
+           pComponent->SetPath(m_path);
+        }
+
 
     }
 
