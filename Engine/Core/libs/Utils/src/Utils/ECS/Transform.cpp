@@ -199,8 +199,8 @@ namespace SR_UTILS_NS {
 
         m_gameObject->OnMatrixDirty();
 
-        for (auto&& child : m_gameObject->GetChildrenTransform()) {
-            child->UpdateTree();
+        for (auto&& child : m_gameObject->GetChildrenRef()) {
+            child->GetTransform()->UpdateTree();
         }
     }
 

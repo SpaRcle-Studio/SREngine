@@ -28,7 +28,6 @@ namespace SR_UTILS_NS {
 
     GameObject::~GameObject() {
         SRAssert(m_children.empty());
-        SRAssert(m_childrenTransform.empty());
         if (GetPrefab()) {
             UnlinkPrefab();
         }
@@ -60,8 +59,6 @@ namespace SR_UTILS_NS {
             while (!m_children.empty()) {
                 (*m_children.begin())->Destroy();
             }
-
-            SRAssert(m_childrenTransform.empty());
         }
         else {
             while (!m_children.empty()) {
@@ -70,8 +67,6 @@ namespace SR_UTILS_NS {
                     pData->Destroy();
                 });
             }
-
-            SRAssert(m_childrenTransform.empty());
 
             DestroyComponents();
             DestroyImpl();
@@ -116,7 +111,6 @@ namespace SR_UTILS_NS {
         }
 
         m_children.push_back(child);
-        m_childrenTransform.push_back(child->GetTransform());
 
         child->OnAttached();
 
@@ -187,7 +181,6 @@ namespace SR_UTILS_NS {
         for (uint16_t i = 0; i < m_children.size(); ++i) {
             if (ptr == m_children[i]) {
                 m_children.erase(m_children.begin() + i);
-                m_childrenTransform.erase(m_childrenTransform.begin() + i);
                 return;
             }
         }
@@ -200,7 +193,6 @@ namespace SR_UTILS_NS {
             child->SetParent(GameObject::Ptr());
         }
         m_children.clear();
-        m_childrenTransform.clear();
     }
 
     void GameObject::ForEachChild(const std::function<void(GameObject::Ptr &)> &fun) {

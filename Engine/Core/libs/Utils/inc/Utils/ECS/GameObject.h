@@ -71,8 +71,6 @@ namespace SR_UTILS_NS {
         SR_NODISCARD SR_INLINE bool HasChildren() const { return !m_children.empty(); }
         SR_NODISCARD SR_INLINE GameObjects& GetChildrenRef() { return m_children; }
         SR_NODISCARD SR_INLINE const GameObjects& GetChildrenRef() const { return m_children; }
-        SR_NODISCARD SR_INLINE std::vector<Transform*>& GetChildrenTransform() { return m_childrenTransform; }
-        SR_NODISCARD SR_INLINE const std::vector<Transform*>& GetChildrenTransform() const { return m_childrenTransform; }
         SR_NODISCARD SR_INLINE GameObjects GetChildren() const { return m_children; }
         SR_NODISCARD SR_INLINE GameObjectFlagBits GetFlags() const { return m_flags; }
 
@@ -138,7 +136,6 @@ namespace SR_UTILS_NS {
         GameObject::Ptr m_parent;
 
         GameObjects m_children;
-        std::vector<Transform*> m_childrenTransform;
 
         ScenePtr m_scene = nullptr;
         Transform* m_transform  = nullptr;
