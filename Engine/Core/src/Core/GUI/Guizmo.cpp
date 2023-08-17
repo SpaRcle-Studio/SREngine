@@ -12,61 +12,6 @@ namespace SR_CORE_NS::GUI {
         SR_SAFE_DELETE_PTR(m_marshal)
     }
 
-    void Guizmo::DrawTools() {
-        ImGui::PushStyleVar(ImGuiStyleVar_ChildRounding, 0);
-        ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0);
-        ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 0);
-        ImGui::PushStyleVar(ImGuiStyleVar_FrameBorderSize, 0);
-        ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0, 0));
-
-        const ImVec4 activeColor = ImVec4(0.20, 0.35, 0.20, 1);
-        const ImVec4 notActiveColor = ImVec4(0.25, 0.25, 0.25, 1);
-        const ImVec4 toggleActiveColor = ImVec4(0.60, 0.50, 0.25, 1);
-        const ImVec4 toggleNotActiveColor = ImVec4(0.32, 0.28, 0.25, 1);
-
-        if (ImGui::BeginChild("GuizmoTools", ImVec2(0, 20))) {
-            if (SR_GRAPH_NS::GUI::Button("T", IsTranslate() && m_active ? activeColor : notActiveColor))
-                SetOperation(ImGuizmo::OPERATION::TRANSLATE);
-
-            ImGui::SameLine();
-
-            if (SR_GRAPH_NS::GUI::Button("R", IsRotate() && m_active ? activeColor : notActiveColor))
-                SetOperation(ImGuizmo::OPERATION::ROTATE);
-
-            ImGui::SameLine();
-
-            if (SR_GRAPH_NS::GUI::Button(IsBounds() && m_active ? "S+" : "S", ((IsScale() || IsBounds()) && m_active) ? activeColor : notActiveColor)) {
-                if (IsScale())
-                    SetOperation(ImGuizmo::OPERATION::BOUNDS);
-                else
-                    SetOperation(ImGuizmo::OPERATION::SCALE);
-            }
-
-            ImGui::SameLine();
-
-            if (SR_GRAPH_NS::GUI::Button("U", IsUniversal() && m_active ? activeColor : notActiveColor))
-                SetOperation(ImGuizmo::OPERATION::UNIVERSAL);
-
-            ImGui::SameLine();
-
-            if (SR_GRAPH_NS::GUI::Button("L", IsLocal() ? toggleActiveColor : toggleNotActiveColor)) {
-                if (IsLocal())
-                    SetMode(ImGuizmo::MODE::WORLD);
-                else
-                    SetMode(ImGuizmo::MODE::LOCAL);
-            }
-
-            ImGui::SameLine();
-
-            if (SR_GRAPH_NS::GUI::Button("C", IsCenter() ? toggleActiveColor : toggleNotActiveColor))
-                m_center = !m_center;
-
-            ImGui::EndChild();
-        }
-
-        ImGui::PopStyleVar(5);
-    }
-
     void Guizmo::Draw(const Guizmo::GameObjectPtr& gameObject, const Guizmo::GameObjectPtr& camera) {
         if (!camera.RecursiveLockIfValid()) {
             gameObject.Unlock();
@@ -103,6 +48,66 @@ namespace SR_CORE_NS::GUI {
         }
 
         camera.Unlock();
+    }
+
+    void Guizmo::DrawTools() {
+        ImGui::PushStyleVar(ImGuiStyleVar_ChildRounding, 0);
+        ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0);
+        ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 0);
+        ImGui::PushStyleVar(ImGuiStyleVar_FrameBorderSize, 0);
+        ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0, 0));
+
+        const ImVec4 activeColor = ImVec4(0.20, 0.35, 0.20, 1);
+        const ImVec4 notActiveColor = ImVec4(0.25, 0.25, 0.25, 1);
+        const ImVec4 toggleActiveColor = ImVec4(0.60, 0.50, 0.25, 1);
+        const ImVec4 toggleNotActiveColor = ImVec4(0.32, 0.28, 0.25, 1);
+
+        if (ImGui::BeginChild("GuizmoTools", ImVec2(0, 20))) {
+            if (SR_GRAPH_NS::GUI::Button("T", IsTranslate() && m_active ? activeColor : notActiveColor))
+                SetOperation(ImGuizmo::OPERATION::TRANSLATE);
+
+            ImGui::SameLine();
+            if (SR_GRAPH_NS::GUI::Button("R", IsRotate() && m_active ? activeColor : notActiveColor))
+                SetOperation(ImGuizmo::OPERATION::ROTATE);
+
+            ImGui::SameLine();
+            if (SR_GRAPH_NS::GUI::Button(IsBounds() && m_active ? "S+" : "S", ((IsScale() || IsBounds()) && m_active) ? activeColor : notActiveColor)) {
+                if (IsScale())
+                    SetOperation(ImGuizmo::OPERATION::BOUNDS);
+                else
+                    SetOperation(ImGuizmo::OPERATION::SCALE);
+            }
+
+            ImGui::SameLine();
+            if (SR_GRAPH_NS::GUI::Button("U", IsUniversal() && m_active ? activeColor : notActiveColor))
+                SetOperation(ImGuizmo::OPERATION::UNIVERSAL);
+
+            ImGui::SameLine();
+            if (SR_GRAPH_NS::GUI::Button("L", IsLocal() ? toggleActiveColor : toggleNotActiveColor)) {
+                if (IsLocal())
+                    SetMode(ImGuizmo::MODE::WORLD);
+                else
+                    SetMode(ImGuizmo::MODE::LOCAL);
+            }
+
+            ImGui::SameLine();
+            if (SR_GRAPH_NS::GUI::Button("C", IsCenter() ? toggleActiveColor : toggleNotActiveColor))
+                m_center = !m_center;
+
+            ImGui::SameLine();
+            ImGui::Text(" | ");
+
+            ImGui::SameLine();
+            ImGui::Text("Camera Speed");
+
+            ImGui::SameLine();
+            ImGui::PushItemWidth(200.f);
+            ImGui::SliderFloat("##", &m_cameraVelocityFactor, 0.01f, 10.f);
+
+            ImGui::EndChild();
+        }
+
+        ImGui::PopStyleVar(5);
     }
 
     void Guizmo::DrawManipulation(SR_GRAPH_NS::Types::Camera* camera) {

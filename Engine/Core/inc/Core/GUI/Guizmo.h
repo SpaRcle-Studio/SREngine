@@ -48,6 +48,8 @@ namespace SR_CORE_NS::GUI {
             m_active = true;
         }
 
+        float_t GetCameraVelocityFactor() {return m_cameraVelocityFactor;};
+
     private:
         glm::mat4 GetMatrix();
         void SetRect(SR_GRAPH_NS::Types::Camera* camera);
@@ -59,6 +61,8 @@ namespace SR_CORE_NS::GUI {
         SR_UTILS_NS::Transform*   m_transform     = nullptr;
 
         bool                      m_isUse         = false;
+
+        float_t                   m_cameraVelocityFactor = 1.f;
 
         int32_t                   m_snapValue     = 100;
         float_t                   m_boundsSnap[3] = { 0.1f, 0.1f, 0.1f };

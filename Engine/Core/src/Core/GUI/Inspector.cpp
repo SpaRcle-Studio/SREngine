@@ -37,7 +37,7 @@ namespace Framework::Core::GUI {
             return;
         }
 
-        if (ImGui::BeginTabBar("#inspectorTabBar")) {
+        if (ImGui::BeginTabBar("Inspector#TabBar")) {
             if (ImGui::BeginTabItem("GameObject")) {
                 InspectGameObject();
                 ImGui::EndTabItem();
@@ -58,7 +58,7 @@ namespace Framework::Core::GUI {
         if (m_gameObject.TryRecursiveLockIfValid()) {
             if (bool v = m_gameObject->IsEnabled(); ImGui::Checkbox("Enabled", &v)) {
                 auto&& cmd = new Framework::Core::Commands::GameObjectEnable(m_gameObject, v);
-                Engine::Instance().GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);;
+                Engine::Instance().GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
             }
 
             /// --------------------------------------------------------------------------------------------------------

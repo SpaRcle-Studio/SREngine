@@ -117,7 +117,7 @@ namespace SR_WORLD_NS {
 
         /// TODO: есть предположение, что криво вычисляется попадание в радиус, надо проверить
 
-        return ((SR_POW(x) / alpha) + (SR_POW(y) / alpha) + SR_POW(z) <= SR_POW(m_observer->m_scope));
+        return ((SR_SQUARE(x) / alpha) + (SR_SQUARE(y) / alpha) + SR_SQUARE(z) <= SR_SQUARE(m_observer->m_scope));
     }
 
     SR_NODISCARD Region* SceneCubeChunkLogic::GetRegion(const SR_MATH_NS::IVector3& region) {

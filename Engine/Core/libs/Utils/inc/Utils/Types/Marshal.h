@@ -67,7 +67,7 @@ namespace SR_HTYPES_NS {
                 MarshalUtils::SaveAny<std::any>(*this, value);
             }
             else if constexpr (SR_MATH_NS::IsString<T>()) {
-                MarshalUtils::SaveShortString(*this, value);
+                MarshalUtils::SaveShortString(*this, value);  //нужно вызывать Write<std::string>()
             }
             else if constexpr (std::is_same_v<T, SR_HTYPES_NS::UnicodeString>) {
                 MarshalUtils::SaveUnicodeString(*this, value);
@@ -96,6 +96,15 @@ namespace SR_HTYPES_NS {
             memcpy(&value, Super::View() + offset, sizeof(T));
 
             return value;
+        }
+
+        template<typename T> T TryRead() {
+            if constexpr (Math::IsString<T>()) {
+                return MarshalUtils::TryLoadShortStr(*this);
+            }
+            else if constexpr (std::is_same_v<T, SR_HTYPES_NS::UnicodeString>) {
+                return MarshalUtils::TryLoadUnicodeString(*this);
+            }
         }
 
         template<typename T> T Read() {

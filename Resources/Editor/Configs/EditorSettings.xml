@@ -2,6 +2,7 @@
 <Settings>
     <DebugChunks Bool="false" />
     <RenderTechnique Path="Editor/Configs/EditorCascadedShadowMapRenderTechnique.xml"/>
+	<PrefabRenderTechnique Path="Editor/Configs/EditorPrefabRenderTechnique.xml"/>
     <!--<RenderTechnique Path="Editor/Configs/EditorColorBufferRenderTechnique.xml"/>-->
     <!--<RenderTechnique Path="Editor/Configs/EditorVarianceShadowMapRenderTechnique.xml"/>-->
     <!--<RenderTechnique Path="Editor/Configs/EditorCascadedShadowMapRenderTechnique.xml"/>-->

@@ -193,7 +193,7 @@ namespace SR_GTYPES_NS {
 
         SRAssert(pRenderScene);
 
-        if (pRenderScene->GetCurrentSkeleton() == pSkeleton) {
+        if (pRenderScene->GetCurrentSkeleton() == pSkeleton.Get()) {
             return;
         }
 

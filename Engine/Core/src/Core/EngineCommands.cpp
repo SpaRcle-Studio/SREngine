@@ -181,7 +181,6 @@ bool Framework::Core::Commands::GameObjectDelete::Redo() {
         return false;
     }
 
-    //m_scene = ptr.Do<Scene::Ptr>([](SR_UTILS_NS::GameObject* gm) -> Scene::Ptr { return gm->GetScene(); }, Scene::Ptr());
     m_scene = pObject->GetScene();
 
     /**
@@ -195,9 +194,8 @@ bool Framework::Core::Commands::GameObjectDelete::Redo() {
         SR_HTYPES_NS::SafePtrLockGuard m_lock(m_scene->GetDataStorage().GetValue<SR_GRAPH_NS::RenderScene::Ptr>());
 
         /// резервируем все дерево сущностей, чтобы после отмены команды его можно было восстановить
-
         m_reserved.Reserve();
-        SR_SAFE_DELETE_PTR(m_backup);
+        SR_SAFE_DELETE_PTR(m_backup)
         if ((m_backup = pObject->Save(nullptr, SR_UTILS_NS::SAVABLE_FLAG_NONE))) {
             m_backup->SetPosition(0);
         }
@@ -223,14 +221,14 @@ bool Framework::Core::Commands::GameObjectDelete::Undo() {
             auto pObject = entity.DynamicCast<SR_UTILS_NS::GameObject>();
 
             if (!pObject) {
+                m_scene.Unlock();
                 return false;
             }
 
             pObject->AddChild(ptr);
-            ptr->SetParent(pObject);
         }
 
-        SR_SAFE_DELETE_PTR(m_backup);
+        SR_SAFE_DELETE_PTR(m_backup)
         m_scene.Unlock();
         return true;
     }
@@ -250,29 +248,45 @@ Framework::Core::Commands::GameObjectDelete::GameObjectDelete(const SR_UTILS_NS:
 Framework::Core::Commands::GameObjectDelete::~GameObjectDelete() {
     m_path.UnReserve();
     m_reserved.UnReserve();
-    SR_SAFE_DELETE_PTR(m_backup);
+    SR_SAFE_DELETE_PTR(m_backup)
 }
 
 //!-------------------------------------------------------
 
-bool Framework::Core::Commands::GameObjectPaste::Redo() {
-    if (!m_backup || !m_backup->Valid()) {
+bool Framework::Core::Commands::GameObjectInstance::Redo() {
+    if (!m_marshal || !m_marshal->Valid()) {
         return false;
     }
 
+    m_scene = Engine::Instance().GetScene();
     if (m_scene.RecursiveLockIfValid()) {
-        SR_MAYBE_UNUSED auto gameObject = m_scene->Instance(*m_backup);
-        SR_SAFE_DELETE_PTR(m_backup);
+        SR_UTILS_NS::GameObject::Ptr ptr = m_scene->Instance(*m_marshal);
+
+        if (m_parent) {     ///попытка восстановить дочерность объекта
+            auto entity = SR_UTILS_NS::EntityManager::Instance().FindById(m_parent);
+            auto pObject = entity.DynamicCast<SR_UTILS_NS::GameObject>();
+
+            if (!pObject) {
+                m_scene.Unlock();
+                return false;
+            }
+
+            pObject->AddChild(ptr);
+            ptr->SetParent(pObject);
+        }
+
+        m_path = ptr->GetEntityPath();
+        m_reserved = ptr->GetEntityTree();
+
+        SR_SAFE_DELETE_PTR(m_marshal)
         m_scene.Unlock();
         return true;
     }
-
-    return false;
+    else
+        return false;
 }
 
-bool Framework::Core::Commands::GameObjectPaste::Undo() {
-    using namespace SR_WORLD_NS;
-
+bool Framework::Core::Commands::GameObjectInstance::Undo() {
     auto entity = SR_UTILS_NS::EntityManager::Instance().FindById(m_path.Last());
     auto pObject = entity.DynamicCast<SR_UTILS_NS::GameObject>();
 
@@ -280,16 +294,17 @@ bool Framework::Core::Commands::GameObjectPaste::Undo() {
         return false;
     }
 
-    m_scene = pObject->GetScene();
-
+    m_scene = Engine::Instance().GetScene();
     /// та же специфичная синхронизация, что и в GameObjectDelete::Redo()
     if (m_scene.RecursiveLockIfValid()) {
         SR_HTYPES_NS::SafePtrLockGuard m_lock(m_scene->GetDataStorage().GetValue<SR_GRAPH_NS::RenderScene::Ptr>());
 
-        /// резервируем все дерево сущностей, чтобы после отмены команды его можно было восстановить
+        // резервируем все дерево сущностей, чтобы после отмены команды его можно было восстановить
         m_reserved.Reserve();
-        SR_SAFE_DELETE_PTR(m_backup);
-        m_backup = pObject->Save(nullptr, SR_UTILS_NS::SAVABLE_FLAG_NONE);
+        SR_SAFE_DELETE_PTR(m_marshal)
+        if ((m_marshal = pObject->Save(nullptr, SR_UTILS_NS::SAVABLE_FLAG_NONE))) {
+            m_marshal->SetPosition(0);
+        }
         pObject->Destroy();
 
         m_scene.Unlock();
@@ -297,13 +312,60 @@ bool Framework::Core::Commands::GameObjectPaste::Undo() {
     }
     else
         return false;
+}
 
-    if (!m_backup || !m_backup->Valid())
-        return false;
+Framework::Core::Commands::GameObjectInstance::GameObjectInstance(SR_HTYPES_NS::Marshal::Ptr pMarshal,
+                                                                  const SR_UTILS_NS::GameObject::Ptr& pParent) {
+    m_marshal = pMarshal;
+    if (pParent.Valid()) {
+        m_parent = pParent->GetEntityId();
+    }
+}
 
+Framework::Core::Commands::GameObjectInstance::~GameObjectInstance() {
+    m_path.UnReserve();
+    m_reserved.UnReserve();
+}
+
+//!-------------------------------------------------------
+
+bool Framework::Core::Commands::HierarchyPaste::Redo() {
+    m_scene = Engine::Instance().GetScene();
     if (m_scene.RecursiveLockIfValid()) {
-        SR_MAYBE_UNUSED auto gameObject = m_scene->Instance(*m_backup);
-        SR_SAFE_DELETE_PTR(m_backup);
+        auto &&count = m_marshal->Read<uint64_t>();
+        if (count > 1000) {
+            SR_WARN("Hierarchy::Paste() : attempting to insert a large number of objects! Count: " + SR_UTILS_NS::ToString(count))
+        }
+
+        std::set<SR_UTILS_NS::GameObject::Ptr> newSelected;
+        for (uint64_t i = 0; i < count; ++i) {
+            if (SR_UTILS_NS::GameObject::Ptr ptr = m_scene->Instance(*m_marshal)) {
+                newSelected.insert(ptr);
+            }
+            else
+                return false; ///ermmmmm
+        }
+
+        if (m_paths.empty()) { ///Исполняется единожды при начальном Redo
+            for (auto&& ptr : newSelected) {
+                m_paths.emplace_back(ptr->GetEntityPath());
+                m_reserved.emplace_back(ptr->GetEntityTree());
+            }
+        }
+
+        if (m_parent) {
+            auto entity = SR_UTILS_NS::EntityManager::Instance().FindById(m_parent);
+            auto pParent = entity.DynamicCast<SR_UTILS_NS::GameObject>();
+            if (!pParent.Valid()) {
+                return false;
+            }
+            for (SR_UTILS_NS::GameObject::Ptr ptr : newSelected) {
+                ptr->MoveToTree(pParent);
+            }
+        }
+
+        m_hierarchy->SetSelectedImpl(newSelected);
+
         m_scene.Unlock();
         return true;
     }
@@ -311,14 +373,51 @@ bool Framework::Core::Commands::GameObjectPaste::Undo() {
         return false;
 }
 
-Framework::Core::Commands::GameObjectPaste::GameObjectPaste(const SR_UTILS_NS::GameObject::Ptr& ptr) {
-    m_path = ptr->GetEntityPath();
-    m_reserved = ptr->GetEntityTree();
+bool Framework::Core::Commands::HierarchyPaste::Undo() {
+    /// та же специфичная синхронизация, что и в GameObjectDelete::Redo()
+    m_scene = Engine::Instance().GetScene();
+    if (m_scene.RecursiveLockIfValid()) {
+        SR_HTYPES_NS::SafePtrLockGuard m_lock(m_scene->GetDataStorage().GetValue<SR_GRAPH_NS::RenderScene::Ptr>());
+
+        SR_SAFE_DELETE_PTR(m_marshal)
+
+        m_marshal = new SR_HTYPES_NS::Marshal;
+        m_marshal->Write<uint64_t>(m_paths.size());
+        for (auto&& path : m_paths) {
+            auto entity = SR_UTILS_NS::EntityManager::Instance().FindById(path.Last());
+            auto pObject = entity.DynamicCast<SR_UTILS_NS::GameObject>();
+            if (m_marshal = pObject->Save(m_marshal, SR_UTILS_NS::SAVABLE_FLAG_NONE); !m_marshal) {
+                return false;
+            }
+            pObject->Destroy();
+        }
+        for (auto&& branch : m_reserved)
+            branch.Reserve();
+
+        m_marshal->SetPosition(0);
+
+        m_scene.Unlock();
+        return true;
+    }
+    else
+        return false;
 }
 
-Framework::Core::Commands::GameObjectPaste::~GameObjectPaste() {
-    m_path.UnReserve();
-    m_reserved.UnReserve();
+Framework::Core::Commands::HierarchyPaste::HierarchyPaste(SR_CORE_NS::GUI::Hierarchy* hierarchy, SR_HTYPES_NS::Marshal::Ptr marshal) {
+    m_hierarchy = hierarchy;
+    m_marshal = marshal;
+    m_marshal->SetPosition(23); ///Нужно, так как в начале любого валидного содержимого буфера обмена Hierarchy должен быть префикс "SRCopyPaste#Hierarchy"
+    if (auto&& selected = m_hierarchy->GetSelected(); selected.size() == 1)
+        if (auto&& pParent = selected.begin()->Get(); pParent)
+            m_parent = pParent->GetEntityId();
+}
+
+Framework::Core::Commands::HierarchyPaste::~HierarchyPaste() {
+    SR_SAFE_DELETE_PTR(m_marshal)
+    for (auto&& path : m_paths)
+        path.UnReserve();
+    for (auto&& branch : m_reserved)
+        branch.UnReserve();
 }
 
 //!-------------------------------------------------------
@@ -341,7 +440,7 @@ bool Framework::Core::Commands::GameObjectMove::Redo() {
         pObject->MoveToTree(SR_UTILS_NS::GameObject::Ptr());
     }
 
-    return true;;
+    return true;
 }
 
 bool Framework::Core::Commands::GameObjectMove::Undo() {
@@ -393,7 +492,7 @@ bool Framework::Core::Commands::RegisterEngineCommands() {
 
     hasErrors |= SR_REGISTER_REVERSIBLE_CMD(cmdManager, GameObjectRename);
     hasErrors |= SR_REGISTER_REVERSIBLE_CMD(cmdManager, GameObjectDelete);
-    hasErrors |= SR_REGISTER_REVERSIBLE_CMD(cmdManager, GameObjectPaste);
+    hasErrors |= SR_REGISTER_REVERSIBLE_CMD(cmdManager, HierarchyPaste);
 
     return hasErrors;
 }

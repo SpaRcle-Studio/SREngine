@@ -41,6 +41,7 @@ namespace SR_HTYPES_NS {
 
         Stream& SR_FASTCALL Write(const void* pSrc, uint64_t count) noexcept;
         Stream& SR_FASTCALL Read(void* pDst, uint64_t count) noexcept;
+        Stream& SR_FASTCALL TryRead(void* pDst, uint64_t count) noexcept;
 
         Stream& SR_FASTCALL write(const void* pSrc, uint64_t count) noexcept { return Write(pSrc, count); }
         Stream& SR_FASTCALL read(void* pDst, uint64_t count) noexcept { return Read(pDst, count); }

@@ -54,6 +54,10 @@ namespace SR_GTYPES_NS {
         SR_LOG("Skybox::Load() : loading \"" + path.ToString() + "\" skybox...");
 
         std::array<uint8_t*, 6> sides;
+        for (auto&& side : sides) {
+            side = nullptr;
+        }
+
         std::array<SR_UTILS_NS::Path, 6> paths;
 
         static constexpr const char* files[6] { "right", "left", "top", "bottom", "front", "back" };
@@ -69,7 +73,7 @@ namespace SR_GTYPES_NS {
             uint8_t *data = stbi_load(file.CStr(), &w, &h, &comp, STBI_rgb_alpha);
 
             if (!data) {
-                SR_ERROR("Skybox::Load() : failed to load skybox!\n\tPath: " + file.ToString());
+                SR_ERROR("Skybox::Load() : failed to load skybox!\n\tReason: " + std::basic_string<char>(stbi_failure_reason()) + "\n\tPath: " + file.ToString());
 
                 for (auto&& img : sides) {
                     if (img) {

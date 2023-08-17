@@ -125,6 +125,7 @@ namespace SR_CORE_NS::GUI {
     }
 
     void SceneViewer::FixedUpdate() {
+        float_t velocityFactor = m_guizmo->GetCameraVelocityFactor();
         m_velocity *= 0.8f;
 
         if (!m_velocity.Empty() && m_camera) {
@@ -138,10 +139,11 @@ namespace SR_CORE_NS::GUI {
         constexpr float_t seekSpeed = 0.1f / 10.f;
         constexpr float_t wheelSpeed = 4.0f / 10.f;
         constexpr float_t rotateSpeed = 1.5f / 10.f;
-        constexpr float_t velocitySpeed = 2.0f / 10.f;
+        constexpr float_t moveSpeed = 2.0f / 10.f;
 
+        float_t velocitySpeed = moveSpeed * velocityFactor;
         auto&& dir = SR_UTILS_NS::Input::Instance().GetMouseDrag();
-        auto&& wheel = SR_UTILS_NS::Input::Instance().GetMouseWheel() * wheelSpeed;
+        auto&& wheel = SR_UTILS_NS::Input::Instance().GetMouseWheel() * wheelSpeed * velocityFactor;
 
         if (!SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::Ctrl))
         {
@@ -159,6 +161,14 @@ namespace SR_CORE_NS::GUI {
 
             if (SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::D)) {
                 m_velocity += SR_UTILS_NS::Transform3D::RIGHT * velocitySpeed;
+            }
+
+            if (SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::Space)) {
+                m_velocity += SR_UTILS_NS::Transform3D::UP * moveSpeed;
+            }
+
+            if (SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::Space) && SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::Z)) {
+                m_velocity -= SR_UTILS_NS::Transform3D::UP * moveSpeed;
             }
         }
 
@@ -181,7 +191,7 @@ namespace SR_CORE_NS::GUI {
             }
         }
 
-        m_velocity = m_velocity.Clamp(SR_MATH_NS::FVector3(1), SR_MATH_NS::FVector3(-1));
+        //m_velocity = m_velocity.Clamp(SR_MATH_NS::FVector3(1), SR_MATH_NS::FVector3(-1)); ///Зачем-то ограничивало перемещение камеры по клавишам WASD
     }
 
     void SceneViewer::DrawTexture(SR_MATH_NS::IVector2 winSize, SR_MATH_NS::IVector2 texSize, uint32_t id, bool centralize) {
@@ -255,7 +265,13 @@ namespace SR_CORE_NS::GUI {
 
         auto&& pCamera = new EditorCamera(size.x, size.y);
 
-        pCamera->SetRenderTechnique(SR_CORE_NS::EditorSettings::Instance().GetRenderTechnique());
+        if (m_scene) {
+            if (m_scene->IsPrefab())
+                pCamera->SetRenderTechnique(SR_CORE_NS::EditorSettings::Instance().GetPrefabEditorRenderTechnique());
+        }
+        else {
+            pCamera->SetRenderTechnique(SR_CORE_NS::EditorSettings::Instance().GetRenderTechnique());
+        }
 
         camera->AddComponent(pCamera);
 

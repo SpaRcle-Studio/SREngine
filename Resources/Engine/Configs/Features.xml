@@ -11,7 +11,7 @@
 
        <CrashHandler Value="false"/>
 
-       <Tracy Value="true"/>
+       <Tracy Value="false"/>
 
        <DebugChunks Value="true"/>
        <DebugRegions Value="true"/>

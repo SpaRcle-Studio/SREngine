@@ -120,23 +120,48 @@ namespace SR_CORE_NS::Commands {
         SR_UTILS_NS::EntityId m_parent = { };
     };
 
-    class GameObjectPaste : public SR_UTILS_NS::ReversibleCommand {
+    class GameObjectInstance : public SR_UTILS_NS::ReversibleCommand { ///TODO: Нужно сильно переработать, в частности для GUISystem
     public:
-        GameObjectPaste() = default;
-        explicit GameObjectPaste(const SR_UTILS_NS::GameObject::Ptr& ptr);
+        GameObjectInstance() = default;
+        explicit GameObjectInstance(SR_HTYPES_NS::Marshal::Ptr pMarshal,
+                                    const SR_UTILS_NS::GameObject::Ptr& pParent = nullptr);
 
-        ~GameObjectPaste() override;
+        ~GameObjectInstance() override;
 
         bool Redo() override;
         bool Undo() override;
 
-        std::string GetName() override { return "GameObjectDelete"; }
+        std::string GetName() override { return "GameObjectInstance"; }
 
     private:
         SR_UTILS_NS::EntityPath m_path;
         SR_UTILS_NS::EntityBranch m_reserved;
-        SR_HTYPES_NS::Marshal::Ptr m_backup = nullptr;
+        SR_HTYPES_NS::Marshal::Ptr m_marshal = nullptr;
         SR_HTYPES_NS::SafePtr<Helper::World::Scene> m_scene;
+        SR_UTILS_NS::EntityId m_parent = { };
+
+    };
+
+    class HierarchyPaste : public SR_UTILS_NS::ReversibleCommand {
+    public:
+        HierarchyPaste() = default;
+        explicit HierarchyPaste(SR_CORE_NS::GUI::Hierarchy* hierarchy, SR_HTYPES_NS::Marshal::Ptr marshal);
+
+        ~HierarchyPaste() override;
+
+        bool Redo() override;
+        bool Undo() override;
+
+        std::string GetName() override { return "HierarchyPaste"; }
+
+    private:
+
+        SR_HTYPES_NS::Marshal::Ptr m_marshal = nullptr;
+        SR_CORE_NS::GUI::Hierarchy* m_hierarchy = nullptr;
+        std::list<SR_UTILS_NS::EntityPath> m_paths;
+        std::list<SR_UTILS_NS::EntityBranch> m_reserved;
+        SR_WORLD_NS::Scene::Ptr m_scene;
+        SR_UTILS_NS::EntityId m_parent = { };
 
     };
 

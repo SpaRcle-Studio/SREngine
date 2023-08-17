@@ -7,6 +7,7 @@
 
 #include <Utils/Common/StringFormat.h>
 #include <Utils/Types/Function.h>
+#include <Utils/Common/TypeInfo.h>
 
 namespace SR_UTILS_NS {
     enum class SharedPtrPolicy : uint8_t {

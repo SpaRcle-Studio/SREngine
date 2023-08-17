@@ -12,7 +12,7 @@
 
 #include <Graphics/GUI/Icons.h>
 
-namespace SR_CORE_NS::GUI {
+namespace SR_CORE_GUI_NS {
     Hierarchy::Hierarchy()
         : Widget("Hierarchy")
     {
@@ -343,7 +343,7 @@ namespace SR_CORE_NS::GUI {
     void Hierarchy::Copy() const {
         auto&& pMarshal = new SR_HTYPES_NS::Marshal();
 
-        /*pMarshal->Write("SRCopyPaste#Hierarchy"); //Требуется для проверки валидности содержимого буфера обмена в методе Paste()*/
+        pMarshal->Write<std::string>("SRCopyPaste#Hierarchy"); //Требуется для проверки валидности содержимого буфера обмена в методе Paste()*/
 
         pMarshal->Write(static_cast<uint64_t>(m_selected.size()));
 
@@ -363,34 +363,55 @@ namespace SR_CORE_NS::GUI {
 
     void Hierarchy::Paste() {
         ///TODO: Paste() должен вставлять внутрь того игрового объекта, на котором был вызван в ChildContextMenu(), а не просто в верх дерева
-        auto&& base64 = Helper::Platform::GetClipboardText();
+        /*auto&& base64 = Helper::Platform::GetClipboardText();
 
         if (auto marshal = SR_HTYPES_NS::Marshal::LoadFromBase64(base64); marshal.Valid()) {
-            /*if (marshal.TryRead<std::string>() != "SRCopyPaste#Hierarchy") {
+            if (marshal.TryRead<std::string>() != "SRCopyPaste#Hierarchy") {
                 SR_LOG("Hierarchy::Paste() : attempted to paste invalid content from clipboard!") ///TODO: Стоит ли оповещать об этом?
                 return;
-            }*/
+            }
             std::set<Helper::GameObject::Ptr> selected;
 
             if (m_scene.RecursiveLockIfValid()) {
                 auto&& count = marshal.Read<uint64_t>();
 
                 if (count > 1000) {
-                    SR_WARN("Hierarchy::Paste() : attempting to insert a large number of objects! Count: " + SR_UTILS_NS::ToString(count));
+                    SR_WARN("Hierarchy::Paste() : attempting to insert a large number of objects! Count: " + SR_UTILS_NS::ToString(count))
                 }
 
-                for (uint64_t i = 0; i < count; ++i) {
-                    if (auto &&ptr = m_scene->Instance(marshal)) {
-                        selected.insert(ptr);
+                if (m_selected.size() == 1)
+                    for (uint64_t i = 0; i < count; ++i) {
+                        if (SR_UTILS_NS::GameObject::Ptr ptr = m_scene->Instance(marshal)) {
+                            ptr->MoveToTree(*m_selected.begin());
+                            selected.insert(ptr);
+                        }
+                        else
+                            break;
                     }
-                    else
-                        break;
-                }
+                else
+                    for (uint64_t i = 0; i < count; ++i) {
+                        if (SR_UTILS_NS::GameObject::Ptr ptr = m_scene->Instance(marshal)) {
+                            selected.insert(ptr);
+                        }
+                        else
+                            break;
+                    }
                 m_scene.Unlock();
             }
-
-            SetSelectedImpl(selected);
+        }*/
+        auto&& base64 = Helper::Platform::GetClipboardText();
+        auto marshal = SR_HTYPES_NS::Marshal::LoadFromBase64(base64);
+        if (!marshal.Valid()) {
+            SR_WARN("Hierarchy::Paste() : content of clipboard couldn't be read")
+            return;
         }
+        if (marshal.TryRead<std::string>() != "SRCopyPaste#Hierarchy") {
+            SR_LOG("Hierarchy::Paste() : attempted to paste invalid content from clipboard!") ///TODO: Стоит ли оповещать об этом?
+            return;
+        }
+
+        auto&& cmd = new Framework::Core::Commands::HierarchyPaste(this, marshal.CopyPtr());
+        Engine::Instance().GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
     }
 
     void Hierarchy::Delete() {
@@ -453,6 +474,8 @@ namespace SR_CORE_NS::GUI {
         Engine::Instance().GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Sync);
     }
 
+
+
     void Hierarchy::SetSelectedImpl(const std::set<SR_UTILS_NS::GameObject::Ptr>& changeSelected){
         SR_LOCK_GUARD
         m_selected = changeSelected;
@@ -461,7 +484,6 @@ namespace SR_CORE_NS::GUI {
             SRAssert(ptr);
         }
 #endif
-        m_needExpand = true;
     }
 
     void Hierarchy::ExpandPath(const SR_UTILS_NS::GameObject::Ptr& gm) { /** NOLINT */

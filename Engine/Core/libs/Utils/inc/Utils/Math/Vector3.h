@@ -448,7 +448,7 @@ namespace SR_MATH_NS {
             return *reinterpret_cast<glm::vec3*>((void*)this);
         }
         static Unit Magnitude(Vector3 vec) {
-            return sqrt(SR_POW(vec.x) + SR_POW(vec.y) + SR_POW(vec.z));
+            return sqrt(SR_SQUARE(vec.x) + SR_SQUARE(vec.y) + SR_SQUARE(vec.z));
         }
 
         static T Dot(Vector3 lhs, Vector3 rhs) { return lhs.x * rhs.x + lhs.y * rhs.y + lhs.z * rhs.z; }

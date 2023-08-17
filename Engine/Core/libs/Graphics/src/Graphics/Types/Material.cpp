@@ -66,6 +66,10 @@ namespace SR_GTYPES_NS {
 
         resourceManager.Execute([&](){
             auto&& path = rawPath.SelfRemoveSubPath(resourceManager.GetResPathRef());
+            if (!resourceManager.GetResPathRef().Concat(path).Exists()) {
+                SR_WARN("Material::Load() : path to the shader doesn't exist! Loading is aborted.");
+                return;
+            }
 
             if ((pMaterial = resourceManager.Find<Material>(path))) {
                 return;
