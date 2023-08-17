@@ -34,16 +34,20 @@ namespace SR_CORE_GUI_NS {
     void RenderTechniqueEditor::InitCreationPopup() {
         auto&& passesNodesMenu = m_creationPopup->AddMenu("Passes");
 
-        passesNodesMenu.AddMenu("Cascaded Shadow Map Pass").SetAction([](const SR_GRAPH_GUI_NS::DrawPopupContext& context) {
-            context.pWidget->AddNode(SR_GRAPH_GUI_NS::CreateNode(context.popupPos, SR_SRLM_NS::NODE_CASCADED_SHADOW_MAP_PASS));
-        });
-
         passesNodesMenu.AddMenu("Start Pass").SetAction([](const SR_GRAPH_GUI_NS::DrawPopupContext& context) {
             context.pWidget->AddNode(SR_GRAPH_GUI_NS::CreateNode(context.popupPos, SR_SRLM_NS::NODE_START_PASS));
         });
 
         passesNodesMenu.AddMenu("End Pass").SetAction([](const SR_GRAPH_GUI_NS::DrawPopupContext& context) {
             context.pWidget->AddNode(SR_GRAPH_GUI_NS::CreateNode(context.popupPos, SR_SRLM_NS::NODE_END_PASS));
+        });
+
+        passesNodesMenu.AddMenu("Cascaded Shadow Map Pass").SetAction([](const SR_GRAPH_GUI_NS::DrawPopupContext& context) {
+            context.pWidget->AddNode(SR_GRAPH_GUI_NS::CreateNode(context.popupPos, SR_SRLM_NS::NODE_CASCADED_SHADOW_MAP_PASS));
+        });
+
+        passesNodesMenu.AddMenu("Frame Buffer Settings").SetAction([](const SR_GRAPH_GUI_NS::DrawPopupContext& context) {
+            context.pWidget->AddNode(SR_GRAPH_GUI_NS::CreateNode(context.popupPos, SR_SRLM_NS::NODE_FRAME_BUFFER_SETTINGS));
         });
 
         Super::InitCreationPopup();

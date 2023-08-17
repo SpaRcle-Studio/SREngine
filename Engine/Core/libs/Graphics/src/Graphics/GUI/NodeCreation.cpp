@@ -4,6 +4,7 @@
 
 #include <Graphics/GUI/NodeCreation.h>
 #include <Graphics/GUI/NodeWidget.h>
+#include <Graphics/Render/RenderTechnique.h>
 #include <Utils/SRLM/LogicalMachine.h>
 
 namespace SR_GRAPH_GUI_NS {
@@ -108,6 +109,18 @@ namespace SR_GRAPH_GUI_NS {
                 ;
                 break;
             }
+            case SR_SRLM_NS::NODE_START_PASS: {
+                node.SetName("Start Pass")
+                    .AddOutput(SR_GRAPH_GUI_NS::PinType::Flow)
+                ;
+                break;
+            }
+            case SR_SRLM_NS::NODE_END_PASS: {
+                node.SetName("End Pass")
+                    .AddInput(SR_GRAPH_GUI_NS::PinType::Flow)
+                ;
+                break;
+            }
             case SR_SRLM_NS::NODE_CASCADED_SHADOW_MAP_PASS: {
                 node.SetName("Cascaded Shadow Map Pass")
                     .SetType(NodeType::Blueprint)
@@ -124,15 +137,16 @@ namespace SR_GRAPH_GUI_NS {
                 ;
                 break;
             }
-            case SR_SRLM_NS::NODE_START_PASS: {
-                node.SetName("Start Pass")
-                    .AddOutput(SR_GRAPH_GUI_NS::PinType::Flow)
-                ;
-                break;
-            }
-            case SR_SRLM_NS::NODE_END_PASS: {
-                node.SetName("End Pass")
-                    .AddInput(SR_GRAPH_GUI_NS::PinType::Flow)
+            case SR_SRLM_NS::NODE_FRAME_BUFFER_SETTINGS: {
+                node.SetName("Frame Buffer Settings")
+                    .SetType(NodeType::Blueprint)
+                    .AddInput("Size", SR_GRAPH_GUI_NS::PinType::Struct, SR_SRLM_NS::DATA_TYPE_INT_VECTOR2)
+                    .AddInput("Pre Scale", SR_GRAPH_GUI_NS::PinType::Struct, SR_SRLM_NS::DATA_TYPE_FLOAT_VECTOR2)
+                    .AddInput("Depth Enabled", SR_GRAPH_GUI_NS::PinType::Bool)
+                    .AddInput("DynamicResizing", SR_GRAPH_GUI_NS::PinType::Bool)
+                    .AddInput("Smooth", SR_GRAPH_GUI_NS::PinType::Int)
+                    .AddInput("Layers", SR_GRAPH_GUI_NS::PinType::Int)
+                    .AddOutput("Result", SR_GRAPH_GUI_NS::PinType::Struct, SR_SRLM_NS::DATA_TYPE_FRAME_BUFFER_SETTINGS)
                 ;
                 break;
             }
@@ -140,6 +154,15 @@ namespace SR_GRAPH_GUI_NS {
                 SRHalt("Invalid identifier");
                 break;
         }
+
+        /*
+         *         <FramebufferSettings DynamicResizing="true" DepthEnabled="true" SmoothSamples="1">
+            <Size X="0" Y="0"/>
+            <PreScale X="1.0" Y="1.0"/>
+            <Depth Format="Auto" ClearValue="1.0"/>
+            <Layer Format="RGBA8_UNORM" R="0.0" G="0.0" B="0.0" A="1.0"/>
+        </FramebufferSettings>
+         */
 
         return pNode;
     }

@@ -26,6 +26,16 @@ namespace SR_SRLM_NS {
 
     static constexpr uint64_t NODE_LINK_DOT = SR_COMPILE_TIME_CRC32_STR("LINK_DOT");
 
+    static constexpr uint64_t DATA_TYPE_BOOL = SR_COMPILE_TIME_CRC32_STR("BOOL");
+    static constexpr uint64_t DATA_TYPE_INT = SR_COMPILE_TIME_CRC32_STR("INT");
+    static constexpr uint64_t DATA_TYPE_FLOAT = SR_COMPILE_TIME_CRC32_STR("FLOAT");
+    static constexpr uint64_t DATA_TYPE_INT_VECTOR2 = SR_COMPILE_TIME_CRC32_STR("INT_VECTOR2");
+    static constexpr uint64_t DATA_TYPE_FLOAT_VECTOR2 = SR_COMPILE_TIME_CRC32_STR("FLOAT_VECTOR2");
+    static constexpr uint64_t DATA_TYPE_INT_VECTOR3 = SR_COMPILE_TIME_CRC32_STR("INT_VECTOR3");
+    static constexpr uint64_t DATA_TYPE_FLOAT_VECTOR3 = SR_COMPILE_TIME_CRC32_STR("FLOAT_VECTOR3");
+    static constexpr uint64_t DATA_TYPE_INT_VECTOR4 = SR_COMPILE_TIME_CRC32_STR("INT_VECTOR4");
+    static constexpr uint64_t DATA_TYPE_FLOAT_VECTOR4 = SR_COMPILE_TIME_CRC32_STR("FLOAT_VECTOR4");
+
     class LogicalMachine : public SR_UTILS_NS::NonCopyable {
 
     };

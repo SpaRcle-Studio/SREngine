@@ -19,6 +19,16 @@ namespace SR_GTYPES_NS {
     class Camera;
 }
 
+namespace SR_SRLM_NS {
+    static constexpr uint64_t NODE_START_PASS = SR_COMPILE_TIME_CRC32_STR("START_PASS");
+    static constexpr uint64_t NODE_END_PASS = SR_COMPILE_TIME_CRC32_STR("END_PASS");
+    static constexpr uint64_t NODE_CASCADED_SHADOW_MAP_PASS = SR_COMPILE_TIME_CRC32_STR("CASCADED_SHADOW_MAP_PASS");
+    static constexpr uint64_t NODE_FRAME_BUFFER_SETTINGS = SR_COMPILE_TIME_CRC32_STR("FRAME_BUFFER_SETTINGS");
+    static constexpr uint64_t NODE_FRAME_BUFFER_PASS = SR_COMPILE_TIME_CRC32_STR("FRAME_BUFFER_PASS");
+
+    static constexpr uint64_t DATA_TYPE_FRAME_BUFFER_SETTINGS = SR_COMPILE_TIME_CRC32_STR("FRAME_BUFFER_SETTINGS");
+}
+
 namespace SR_GRAPH_NS {
     class RenderScene;
     class RenderContext;

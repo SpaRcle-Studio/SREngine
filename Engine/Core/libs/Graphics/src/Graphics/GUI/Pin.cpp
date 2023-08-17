@@ -7,25 +7,26 @@
 
 namespace SR_GRAPH_NS::GUI {
     Pin::Pin()
-        : Pin(std::string(), PinType::None, PinKind::None)
+        : Pin(std::string(), PinType::None, PinKind::None, SR_UINT64_MAX)
     { }
 
     Pin::Pin(const std::string &name)
-        : Pin(name, PinType::None, PinKind::None)
+        : Pin(name, PinType::None, PinKind::None, SR_UINT64_MAX)
     { }
 
     Pin::Pin(const std::string &name, PinType type)
-        : Pin(name, type, PinKind::None)
+        : Pin(name, type, PinKind::None, SR_UINT64_MAX)
     { }
 
     Pin::Pin(const std::string &name, PinKind kind)
-        : Pin(name, PinType::None, kind)
+        : Pin(name, PinType::None, kind, SR_UINT64_MAX)
     { }
 
-    Pin::Pin(const std::string &name, PinType type, PinKind kind)
+    Pin::Pin(const std::string &name, PinType type, PinKind kind, uint64_t dataType)
         : m_name(name)
         , m_type(type)
         , m_kind(kind)
+        , m_dataType(dataType)
     { }
 
     Pin::~Pin() {

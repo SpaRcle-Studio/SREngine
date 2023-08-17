@@ -27,7 +27,8 @@ namespace SR_GRAPH_NS::GUI {
           Object,
           Numeric,
           Function,
-          Delegate
+          Delegate,
+          Struct
     );
 
     SR_ENUM_NS_CLASS(PinKind,
@@ -51,7 +52,7 @@ namespace SR_GRAPH_NS::GUI {
         explicit Pin(const std::string& name);
         Pin(const std::string& name, PinType type);
         Pin(const std::string& name, PinKind kind);
-        Pin(const std::string& name, PinType type, PinKind kind);
+        Pin(const std::string& name, PinType type, PinKind kind, uint64_t dataType);
         ~Pin() override;
 
     public:
@@ -73,6 +74,7 @@ namespace SR_GRAPH_NS::GUI {
 
         SR_NODISCARD bool IsLinked(Pin* pin) const;
         SR_NODISCARD bool IsLinked() const;
+        SR_NODISCARD bool CanLink() const;
         SR_NODISCARD float_t GetWidth() const;
         SR_NODISCARD PinType GetType() const { return m_type; }
         SR_NODISCARD PinKind GetKind() const { return m_kind; }
@@ -90,6 +92,7 @@ namespace SR_GRAPH_NS::GUI {
         std::string m_name;
         PinType m_type;
         PinKind m_kind;
+        uint64_t m_dataType = SR_UINT64_MAX;
 
     };
 }

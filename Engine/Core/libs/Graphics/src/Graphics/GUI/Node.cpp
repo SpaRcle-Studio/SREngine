@@ -295,4 +295,12 @@ namespace SR_GRAPH_GUI_NS {
     Node& Node::AddOutput(const std::string &name, PinType type) {
         return AddOutput(new Pin(name, type));
     }
+
+    Node& Node::AddInput(const std::string &name, PinType type, uint64_t dataType) {
+        return AddInput(new Pin(name, type, PinKind::Input, dataType));
+    }
+
+    Node& Node::AddOutput(const std::string &name, PinType type, uint64_t dataType) {
+        return AddOutput(new Pin(name, type, PinKind::Output, dataType));
+    }
 }
