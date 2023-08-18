@@ -98,8 +98,8 @@ namespace SR_AUDIO_NS {
     void OpenALContext::ApplyParams(SoundSource pSource, const PlayParams& params) {
         ALuint* alSource = reinterpret_cast<ALuint*>(pSource);
 
-        SR_AL_CALL(alSourcef, *alSource, AL_PITCH, params.pitch);
-        SR_AL_CALL(alSourcef, *alSource, AL_GAIN, params.gain);
+        SR_AL_CALL(alSourcef, *alSource, AL_PITCH, params.pitch.value());
+        SR_AL_CALL(alSourcef, *alSource, AL_GAIN, params.gain.value());
         SR_AL_CALL(alSource3f, *alSource, AL_POSITION, 0, 0, 0);
         SR_AL_CALL(alSource3f, *alSource, AL_VELOCITY, 0, 0, 0);
         SR_AL_CALL(alSourcei, *alSource, AL_LOOPING, params.loop ? AL_TRUE : AL_FALSE);

@@ -7,7 +7,7 @@
 
 #include <Utils/ECS/Component.h>
 #include <Utils/FileSystem/Path.h>
-
+#include <Audio/PlayParams.h>
 namespace SR_AUDIO_NS
 {
     class AudioSource : public SR_UTILS_NS::Component {
@@ -21,20 +21,19 @@ namespace SR_AUDIO_NS
     public:
         void OnEnable() override;
         SR_UTILS_NS::Path GetPath();
+        void SetPath(std::string path);
 
         SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SR_UTILS_NS::SavableFlags flags) const override;
 
-        void SetPath(std::string path);
-        int GetVolume();
-
-        void SetVolume(int32_t Volume);
+        float_t GetVolume();
+        void SetVolume(float_t volume);
 
         static SR_UTILS_NS::Component* LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage);
 
     private:
-
+        PlayParams m_params = PlayParams::GetDefault();
         SR_UTILS_NS::Path m_path;
-        int32_t Volume = 100;
+        float_t m_volume = 1.f;
 
         void OnDestroy() override;
 

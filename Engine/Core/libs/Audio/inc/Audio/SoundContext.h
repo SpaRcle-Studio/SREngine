@@ -46,6 +46,8 @@ namespace SR_AUDIO_NS {
 
     protected:
         SoundDevice* m_device = nullptr;
+    private:
+        PlayParams m_params;
 
     };
 }

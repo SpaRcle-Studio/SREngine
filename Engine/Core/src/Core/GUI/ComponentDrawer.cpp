@@ -535,13 +535,13 @@ namespace SR_CORE_NS::GUI {
     void ComponentDrawer::DrawComponent(Framework::Audio::AudioSource *&pComponent, EditorGUI *context, int32_t index) {
 
 
+        float_t volume = pComponent->GetVolume();
+        float_t volume1 = std::roundf(volume * 10)/10;
 
-
-        int32_t Volume = pComponent->GetVolume();
-
-        if(ImGui::SliderInt("Volume",&Volume,0,100))
+        if(ImGui::SliderFloat("Volume",&volume,0.f,1.f,"%.2f"))
         {
-            pComponent->SetVolume(Volume);
+            volume = (std::roundf(volume * 10))/10;
+            pComponent->SetVolume(volume);
         }
 
         std::string m_path = pComponent->GetPath().ToString();

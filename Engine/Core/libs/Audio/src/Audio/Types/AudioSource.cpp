@@ -18,7 +18,7 @@ namespace SR_AUDIO_NS
         auto&& pComponent = new AudioSource();
 
         pComponent->m_path = marshal.Read<std::string>();
-        pComponent->Volume = marshal.Read<int32_t>();
+        pComponent->m_volume = marshal.Read<int32_t>();
 
         return dynamic_cast<Component*>(pComponent);
     }
@@ -26,15 +26,15 @@ namespace SR_AUDIO_NS
     SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr AudioSource::Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SR_UTILS_NS::SavableFlags flags) const{
         pMarshal = Component::Save(pMarshal, flags);
         pMarshal->Write<std::string>(m_path.ToString());
-        pMarshal->Write<int>(Volume);
+        pMarshal->Write<float_t>(m_volume);
         return pMarshal;
     }
 
-    int32_t AudioSource::GetVolume() {
-        return Volume;
+    float_t AudioSource::GetVolume() {
+        return std::roundf(m_volume * 10)/10;
     }
-    void AudioSource::SetVolume(int32_t Volume) {
-        this->Volume  = Volume;
+    void AudioSource::SetVolume(float_t volume) {
+        m_volume = std::roundf(volume * 10)/10;
     }
 
     SR_UTILS_NS::Path AudioSource::GetPath() {
@@ -45,7 +45,8 @@ namespace SR_AUDIO_NS
     }
 
     void AudioSource::OnEnable() {
-        SoundManager::Instance().Play(m_path.ToString());
+        m_params.gain = m_volume;
+        SoundManager::Instance().Play(m_path.ToString(),m_params);
         Component::OnEnable();
     }
 
