@@ -24,7 +24,7 @@ namespace SR_PTYPES_NS {
         return nullptr;
     }
 
-    PhysicsMaterial* PhysicsMaterial::Load(SR_UTILS_NS::Path rawPath) {
+    PhysicsMaterial* PhysicsMaterial::Load(const SR_UTILS_NS::Path& rawPath) {
         if (rawPath.Empty()) {
             SRHalt("PhysicsMaterial::Load() : path is empty!");
             return nullptr;
@@ -60,6 +60,8 @@ namespace SR_PTYPES_NS {
     bool PhysicsMaterial::Load() {
         const auto&& path = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat(GetResourcePath());
 
+        SR_LOG("PhysicsMaterial::Load() : the physics material is loading. \n\tPath: " + path.ToString());
+
         auto&& document = SR_XML_NS::Document::Load(path);
         if (!document.Valid()) {
             SR_ERROR("PhysicsMaterial::Load() : file is not found! \n\tPath: " + path.ToString());
@@ -72,15 +74,20 @@ namespace SR_PTYPES_NS {
             return false;
         }
 
-        SetDynamicFriction(matXml.TryGetNode("DynamicFriction").TryGetAttribute("Value").ToFloat(0.6f));
-        SetStaticFriction(matXml.TryGetNode("StaticFriction").TryGetAttribute("Value").ToFloat(0.6f));
-        SetBounciness(matXml.TryGetNode("Bounciness").TryGetAttribute("Value").ToFloat(0.0f));
-        SetFrictionCombine(SR_UTILS_NS::EnumReflector::FromString<Combine>(matXml.TryGetNode("FrictionCombine").TryGetAttribute("Value").ToString("Average")));
-        SetBounceCombine(SR_UTILS_NS::EnumReflector::FromString<Combine>(matXml.TryGetNode("BounceCombine").TryGetAttribute("Value").ToString("Average")));
+        SetDynamicFriction(matXml.TryGetNode("DynamicFriction").TryGetAttribute<float_t>(0.6f));
+        SetStaticFriction(matXml.TryGetNode("StaticFriction").TryGetAttribute<float_t>(0.6f));
+        SetBounciness(matXml.TryGetNode("Bounciness").TryGetAttribute<float_t>(0.6f));
+        SetFrictionCombine(SR_UTILS_NS::EnumReflector::FromString<Combine>(matXml.TryGetNode("FrictionCombine").TryGetAttribute<std::string>("Average")));
+        SetBounceCombine(SR_UTILS_NS::EnumReflector::FromString<Combine>(matXml.TryGetNode("BounceCombine").TryGetAttribute<std::string>("Average")));
 
-        for (auto&& libraryType : SR_PHYSICS_NS::PhysicsLibrary::Instance().GetSupportedLibraries()) {
+        for (auto&& libraryType : SR_PHYSICS_NS::PhysicsLibrary::Instance().GetSupportedLibraries())
+        {
             auto&& pLibrary = SR_PHYSICS_NS::PhysicsLibrary::Instance().GetLibrary(libraryType);
-            m_implementations[libraryType] = pLibrary->CreatePhysicsMaterial();
+
+            if (auto&& pMaterial = pLibrary->CreatePhysicsMaterial()) {
+                m_implementations[libraryType] = pMaterial;
+                pMaterial->Init(this);
+            }
         }
 
         return IResource::Load();
@@ -95,4 +102,35 @@ namespace SR_PTYPES_NS {
 
         return IResource::Unload();
     }
+
+    bool PhysicsMaterial::Save(const SR_UTILS_NS::Path& path, const PhysicsMaterialData& materialData) {
+        auto&& document = SR_XML_NS::Document::New();
+
+        auto&& matXml = document.Root().AppendNode("PhysicsMaterial");
+
+        matXml.AppendNode("DynamicFriction").AppendAttribute(materialData.dynamicFriction);
+        matXml.AppendNode("StaticFriction").AppendAttribute(materialData.staticFriction);
+        matXml.AppendNode("Bounciness").AppendAttribute(materialData.bounciness);
+        matXml.AppendNode("FrictionCombine").AppendAttribute(SR_UTILS_NS::EnumReflector::ToString(materialData.frictionCombine));
+        matXml.AppendNode("BounceCombine").AppendAttribute(SR_UTILS_NS::EnumReflector::ToString(materialData.bounceCombine));
+
+        if (!document.Save(path)) {
+            SR_ERROR("PhysicsMaterial::Save() : Failed to save the document! \n\tPath: " + path.ToString());
+            return false;
+        }
+
+        return true;
+    }
+
+    PhysicsMaterialImpl* PhysicsMaterial::GetMaterialImpl(LibraryType libraryType) const {
+        if (auto&& pIt = m_implementations.find(libraryType); pIt != m_implementations.end()) {
+            return pIt->second;
+        }
+
+        return nullptr;
+    }
 }
+
+
+
+// тссс, тихо. если ты долистал до этого места, то скинь яички) UwU https://t.me/JustMonika48 <3

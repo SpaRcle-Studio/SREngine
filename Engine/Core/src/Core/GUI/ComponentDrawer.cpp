@@ -6,6 +6,7 @@
 #include <Core/GUI/GUISystem.h>
 #include <Core/GUI/EditorGUI.h>
 #include <Core/GUI/FileBrowser.h>
+#include <Core/GUI/PhysicsMaterialEditor.h>
 #include <Core/GUI/DragNDropHelper.h>
 #include <Core/Settings/EditorSettings.h>
 
@@ -136,9 +137,10 @@ namespace SR_CORE_NS::GUI {
         }
 
         SR_UTILS_NS::Path materialPath;
+        auto&& pMaterial = pComponent->GetPhysicsMaterial();
 
-        if (auto&& pMaterial = pComponent->GetPhysicsMaterial()) {
-            materialPath = pMaterial->GetResourceId();
+        if (pMaterial) {
+            materialPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat(pMaterial->GetResourcePath());
         }
 
         if (materialPath.empty()) {
@@ -154,6 +156,14 @@ namespace SR_CORE_NS::GUI {
                         pComponent->SetMaterial(path);
                     }
                 });
+            }
+        }
+
+        ImGui::SameLine();
+
+        if (ImGui::Button("Edit")) {
+            if (materialPath.IsFile()) {
+                context->GetWidget<PhysicsMaterialEditor>()->Edit(materialPath);
             }
         }
 

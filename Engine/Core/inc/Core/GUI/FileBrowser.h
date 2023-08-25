@@ -23,7 +23,7 @@ namespace SR_CORE_NS::GUI {
         std::list<FBFolder> innerFolders;
     };
 
-    class FileBrowser : public SR_GRAPH_NS::GUI::Widget {
+    class FileBrowser : public SR_GRAPH_GUI_NS::Widget {
         using Hash = std::size_t;
         using CallbackFn = std::function<void(const SR_UTILS_NS::Path& path)>;
     public:

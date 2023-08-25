@@ -1,6 +1,5 @@
 <?xml version="1.0"?>
 <Settings>
-    <DebugChunks Bool="false" />
     <RenderTechnique Path="Editor/Configs/EditorCascadedShadowMapRenderTechnique.xml"/>
 	<PrefabRenderTechnique Path="Editor/Configs/EditorPrefabRenderTechnique.xml"/>
     <!--<RenderTechnique Path="Editor/Configs/EditorColorBufferRenderTechnique.xml"/>-->
@@ -14,6 +13,7 @@
     <!--<RenderTechnique Path="Editor/Configs/EditorRenderTechnique.xml"/>-->
     <!--<RenderTechnique Path="Editor/Configs/EditorRayMarchingRenderTechnique.xml"/>-->
     <!--<RenderTechnique Path="Editor/Configs/EditorRenderTechnique.xml"/>-->
+    <DebugChunks Bool="false"/>
     <Icons Type="Custom">
         <Pair First="Unknown" Second="Editor/Textures/unknown.png"/>
         <Pair First="Material" Second="Editor/Textures/material.png"/>

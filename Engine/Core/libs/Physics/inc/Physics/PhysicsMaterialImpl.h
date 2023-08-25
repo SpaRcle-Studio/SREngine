@@ -23,6 +23,7 @@ namespace SR_PTYPES_NS {
 
     public:
         virtual bool Init(PhysicsMaterial* pMaterial) = 0;
+        virtual void DeInit() = 0;
 
         template<typename T> SR_NODISCARD T* GetLibrary() const {
             if (auto&& pLibrary = dynamic_cast<T*>(m_library)) {
@@ -33,6 +34,8 @@ namespace SR_PTYPES_NS {
 
             return nullptr;
         }
+
+        SR_NODISCARD virtual void* GetHandle() = 0;
 
     private:
         SR_PHYSICS_NS::LibraryImpl* m_library = nullptr;

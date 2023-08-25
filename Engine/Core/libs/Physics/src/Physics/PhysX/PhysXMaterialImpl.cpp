@@ -30,4 +30,11 @@ namespace SR_PTYPES_NS {
 
         return true;
     }
+
+    void PhysXMaterialImpl::DeInit() {
+        if (m_material) {
+            m_material->release();
+            m_material = nullptr;
+        }
+    }
 }

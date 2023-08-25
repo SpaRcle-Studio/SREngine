@@ -136,6 +136,10 @@ namespace SR_UTILS_NS::Xml {
             return m_valid ? Attribute(m_node.attribute(name.c_str())) : Attribute();
         }
 
+        template<typename T> SR_NODISCARD T TryGetAttribute(const T& def) const {
+            return m_valid ? GetAttribute<T>() : def;
+        }
+
         SR_NODISCARD bool HasAttribute(const std::string &name) const {
             return m_valid ? !m_node.attribute(name.c_str()).empty() : false;
         }
@@ -294,11 +298,17 @@ namespace SR_UTILS_NS::Xml {
                 hasErrors |= AppendAttribute("B", value.b);
                 hasErrors |= AppendAttribute("A", value.a);
             }
-            if constexpr (std::is_same<T, SR_MATH_NS::FVector4>()) {
+            else if constexpr (std::is_same<T, SR_MATH_NS::FVector4>()) {
                 hasErrors |= AppendAttribute("X", value.x);
                 hasErrors |= AppendAttribute("Y", value.y);
                 hasErrors |= AppendAttribute("Z", value.z);
                 hasErrors |= AppendAttribute("W", value.w);
+            }
+            else if constexpr (std::is_same<T, float>() || std::is_same<T, float_t>()) {
+                hasErrors |= AppendAttribute("Float", value);
+            }
+            else if constexpr (std::is_same<T, std::string>()) {
+                hasErrors |= AppendAttribute("String", value);
             }
             else if constexpr (std::is_same<T, SR_MATH_NS::FVector2>()) {
                 hasErrors |= AppendAttribute("X", value.x);
@@ -327,8 +337,10 @@ namespace SR_UTILS_NS::Xml {
                 hasErrors |= AppendAttribute("Y", value.y);
                 hasErrors |= AppendAttribute("Z", value.z);
             }
-            else
-                static_assert("Unknown type!");
+            else {
+                SRHalt("Unknown type!");
+                SR_STATIC_ASSERT("Unknown type!");
+            }
 
             return !hasErrors;
         }

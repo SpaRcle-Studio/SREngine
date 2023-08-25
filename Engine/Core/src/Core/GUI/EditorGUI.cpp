@@ -9,6 +9,7 @@
 #include <Core/GUI/VisualScriptEditor.h>
 #include <Core/GUI/WorldEdit.h>
 #include <Core/GUI/EngineSettings.h>
+#include <Core/GUI/PhysicsMaterialEditor.h>
 #include <Core/GUI/EngineStatistics.h>
 #include <Core/GUI/Hierarchy.h>
 #include <Core/GUI/SceneViewer.h>
@@ -42,7 +43,8 @@ namespace SR_CORE_NS::GUI {
         AddWidget(new EngineSettings());
         AddWidget(new AnimatorEditor());
         AddWidget(new EngineStatistics());
-        AddWidget(new About());
+		AddWidget(new PhysicsMaterialEditor());
+		AddWidget(new About());
         AddWidget(new RenderTechniqueEditor());
 
         for (auto& [id, widget] : m_widgets) {
