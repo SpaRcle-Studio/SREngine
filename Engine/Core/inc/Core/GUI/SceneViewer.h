@@ -63,6 +63,7 @@ namespace SR_CORE_NS::GUI {
         SR_MATH_NS::FVector3 m_rotation;
         SR_MATH_NS::FVector3 m_translation;
 
+        bool m_isPrefab = false;
         Hierarchy* m_hierarchy = nullptr;
         Guizmo* m_guizmo = nullptr;
         int32_t m_id = SR_ID_INVALID;

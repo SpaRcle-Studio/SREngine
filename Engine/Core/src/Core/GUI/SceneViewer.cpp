@@ -141,7 +141,7 @@ namespace SR_CORE_NS::GUI {
         constexpr float_t rotateSpeed = 1.5f / 10.f;
         constexpr float_t moveSpeed = 2.0f / 10.f;
 
-        float_t velocitySpeed = moveSpeed * velocityFactor;
+        const float_t velocitySpeed = moveSpeed * velocityFactor;
         auto&& dir = SR_UTILS_NS::Input::Instance().GetMouseDrag();
         auto&& wheel = SR_UTILS_NS::Input::Instance().GetMouseWheel() * wheelSpeed * velocityFactor;
 
@@ -164,12 +164,13 @@ namespace SR_CORE_NS::GUI {
             }
 
             if (SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::Space)) {
-                m_velocity += SR_UTILS_NS::Transform3D::UP * moveSpeed;
+                m_velocity += SR_UTILS_NS::Transform3D::UP * velocitySpeed;
             }
 
-            if (SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::Space) && SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::Z)) {
-                m_velocity -= SR_UTILS_NS::Transform3D::UP * moveSpeed;
-            }
+            /// TODO: странное управление. Нет подходящей удобной комбинации клавиши
+            /// if (SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::Space) && SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::Z)) {
+            ///     m_velocity -= SR_UTILS_NS::Transform3D::UP * moveSpeed;
+            /// }
         }
 
         if (m_camera) {
@@ -255,6 +256,7 @@ namespace SR_CORE_NS::GUI {
         if (SR_UTILS_NS::Features::Instance().Enabled("EditorCamera", true) && m_scene.RecursiveLockIfValid()) {
             camera = m_scene->Instance("Editor camera");
             camera->SetFlags(SR_UTILS_NS::GAMEOBJECT_FLAG_NO_SAVE);
+            m_isPrefab = m_scene->IsPrefab();
             m_scene.Unlock();
         }
         else {
@@ -265,9 +267,8 @@ namespace SR_CORE_NS::GUI {
 
         auto&& pCamera = new EditorCamera(size.x, size.y);
 
-        if (m_scene) {
-            if (m_scene->IsPrefab())
-                pCamera->SetRenderTechnique(SR_CORE_NS::EditorSettings::Instance().GetPrefabEditorRenderTechnique());
+        if (m_isPrefab) {
+            pCamera->SetRenderTechnique(SR_CORE_NS::EditorSettings::Instance().GetPrefabEditorRenderTechnique());
         }
         else {
             pCamera->SetRenderTechnique(SR_CORE_NS::EditorSettings::Instance().GetRenderTechnique());
