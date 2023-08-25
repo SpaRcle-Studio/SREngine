@@ -95,10 +95,9 @@ namespace SR_CORE_NS::GUI {
                 m_center = !m_center;
 
             ImGui::SameLine();
-            ImGui::Text(" | ");
 
             ImGui::SameLine();
-            ImGui::Text("Camera Speed");
+            ImGui::Text(" [ Camera Speed ] ");
 
             ImGui::SameLine();
             ImGui::PushItemWidth(200.f);

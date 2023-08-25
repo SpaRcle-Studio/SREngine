@@ -21,7 +21,6 @@ namespace SR_UTILS_NS {
         }
     }
 
-    /// Warning: unsafe
     template<typename T> T LexicalCast(const std::string& str) {
         try {
             if constexpr (std::is_same<T, bool>()) {

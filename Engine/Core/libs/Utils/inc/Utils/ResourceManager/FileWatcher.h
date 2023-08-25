@@ -15,11 +15,13 @@ namespace SR_UTILS_NS {
     class ResourceManager;
 
     class SR_DLL_EXPORT FileWatcher : public SR_HTYPES_NS::SharedPtr<FileWatcher>, SR_UTILS_NS::NonCopyable {
-        using Ptr = SR_HTYPES_NS::SharedPtr<FileWatcher>;
         using CallBack = SR_HTYPES_NS::Function<void(FileWatcher* pWatcher)>;
         using Hash = uint64_t;
         using Mutex = std::recursive_mutex;
         friend class ResourceManager;
+    public:
+        using Ptr = SR_HTYPES_NS::SharedPtr<FileWatcher>;
+
     private:
         explicit FileWatcher(const SR_UTILS_NS::Path& path);
 
@@ -37,7 +39,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD bool IsPaused() const noexcept;
         SR_NODISCARD bool IsDirty() const noexcept;
         SR_NODISCARD std::string GetName() const noexcept;
-        SR_NODISCARD SR_UTILS_NS::Path GetPath() const noexcept;
+        SR_NODISCARD const SR_UTILS_NS::Path& GetPath() const noexcept;
         SR_NODISCARD Mutex& GetMutex() { return m_mutex; };
 
     private:

@@ -5,6 +5,23 @@
 #include <Utils/Common/EnumReflector.h>
 
 namespace SR_UTILS_NS {
+    void EnumReflectorManager::RegisterReflector(EnumReflector* pReflector) {
+        SRAssert(m_reflectors.count(pReflector->GetHashNameInternal()) == 0);
+        m_reflectors[pReflector->GetHashNameInternal()] = pReflector;
+    }
+
+    EnumReflector* EnumReflectorManager::GetReflector(const std::string& name) const {
+        return GetReflector(SR_HASH_STR(name));
+    }
+
+    EnumReflector* EnumReflectorManager::GetReflector(uint64_t hashName) const {
+        if (auto&& pIt = m_reflectors.find(hashName); pIt != m_reflectors.end()) {
+            return pIt->second;
+        }
+
+        return nullptr;
+    }
+
     EnumReflector::~EnumReflector() {
         SR_SAFE_DELETE_PTR(m_data)
     }

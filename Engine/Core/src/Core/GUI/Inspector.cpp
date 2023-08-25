@@ -252,7 +252,7 @@ namespace Framework::Core::GUI {
             *out_text = vector->at(idx).c_str();
 
             return true;
-        }, reinterpret_cast<void*>(&stretchTypes), stretchTypes.size())) {
+        }, const_cast<void*>(reinterpret_cast<const void*>(&stretchTypes)), stretchTypes.size())) {
             pTransform->SetStretch(SR_UTILS_NS::EnumReflector::At<SR_UTILS_NS::StretchFlags_>(stretch));
         }
     }

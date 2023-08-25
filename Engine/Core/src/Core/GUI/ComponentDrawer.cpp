@@ -105,7 +105,7 @@ namespace SR_CORE_NS::GUI {
             *out_text = vector->at(idx).c_str();
 
             return true;
-        }, reinterpret_cast<void*>(&shapes), shapes.size())) {
+        }, const_cast<void*>(reinterpret_cast<const void*>(&shapes)), shapes.size())) {
             pComponent->SetType(SR_UTILS_NS::EnumReflector::At<SR_PHYSICS_NS::ShapeType>(shape));
         }
 
@@ -699,7 +699,7 @@ namespace SR_CORE_NS::GUI {
             *out_text = vector->at(idx).c_str();
 
             return true;
-        }, reinterpret_cast<void*>(&axises), axises.size())) {
+        }, const_cast<void*>(reinterpret_cast<const void*>(&axises)), axises.size())) {
             pComponent->SetAxis(SR_UTILS_NS::EnumReflector::At<SR_UTILS_NS::LookAtAxis>(axis));
         }
 

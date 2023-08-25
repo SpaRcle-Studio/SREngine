@@ -7,10 +7,26 @@
 
 #include <Utils/Common/NonCopyable.h>
 #include <Utils/Common/Hashes.h>
+#include <Utils/Types/Map.h>
 #include <Utils/Debug.h>
 
 namespace SR_UTILS_NS {
-    class EnumReflector : public NonCopyable
+    class EnumReflector;
+
+    class EnumReflectorManager : public SR_UTILS_NS::Singleton<EnumReflectorManager> {
+        friend class SR_UTILS_NS::Singleton<EnumReflectorManager>;
+    public:
+        void RegisterReflector(EnumReflector* pReflector);
+
+        SR_NODISCARD EnumReflector* GetReflector(const std::string& name) const;
+        SR_NODISCARD EnumReflector* GetReflector(uint64_t hashName) const;
+
+    private:
+        ska::flat_hash_map<uint64_t, EnumReflector*> m_reflectors;
+
+    };
+
+    class SR_DLL_EXPORT EnumReflector : public NonCopyable
     {
     public:
         template<typename Integral> EnumReflector(const Integral* values, size_t count, const char* name, const char* body);
@@ -21,17 +37,19 @@ namespace SR_UTILS_NS {
         template<typename EnumType> SR_NODISCARD static std::string ToString(EnumType value);
         template<typename EnumType> SR_NODISCARD static EnumType FromString(const std::string& value);
 
-        template<typename EnumType> SR_NODISCARD static std::vector<std::string> GetNames();
+        template<typename EnumType> SR_NODISCARD static const std::vector<std::string>& GetNames();
         template<typename EnumType> SR_NODISCARD static std::vector<std::string> GetNamesFilter(const std::function<bool(EnumType)>& filter);
 
         template<typename EnumType> SR_NODISCARD static int64_t GetIndex(EnumType value);
         template<typename EnumType> SR_NODISCARD static EnumType At(int64_t index);
 
-    private:
-        SR_NODISCARD std::optional<std::string> ToStringInternal(int64_t value) const;
-        SR_NODISCARD std::optional<int64_t> FromStringInternal(const std::string& name) const;
-        SR_NODISCARD std::optional<int64_t> GetIndexInternal(int64_t value) const;
-        SR_NODISCARD std::optional<int64_t> AtInternal(int64_t index) const;
+        SR_NODISCARD SR_MAYBE_UNUSED std::optional<std::string> ToStringInternal(int64_t value) const;
+        SR_NODISCARD SR_MAYBE_UNUSED std::optional<int64_t> FromStringInternal(const std::string& name) const;
+        SR_NODISCARD SR_MAYBE_UNUSED std::optional<int64_t> GetIndexInternal(int64_t value) const;
+        SR_NODISCARD SR_MAYBE_UNUSED std::optional<int64_t> AtInternal(int64_t index) const;
+        SR_NODISCARD SR_MAYBE_UNUSED const std::vector<std::string>& GetNamesInternal() const { return m_data->names; }
+        SR_NODISCARD SR_MAYBE_UNUSED const std::string& GetNameInternal() const { return m_data->enumName; }
+        SR_NODISCARD SR_MAYBE_UNUSED uint64_t GetHashNameInternal() const { return m_data->hashName; }
 
     private:
         static bool IsIdentChar(char c);
@@ -48,6 +66,7 @@ namespace SR_UTILS_NS {
             std::vector<Enumerator> values;
             std::vector<std::string> names;
             std::string enumName;
+            uint64_t hashName;
         }* m_data;
     };
 }
@@ -57,6 +76,7 @@ namespace SR_UTILS_NS {
         : m_data(new Data())
     {
         m_data->enumName = name;
+        m_data->hashName = SR_HASH_STR(name);
         m_data->values.resize(count);
         m_data->names.resize(count);
 
@@ -147,7 +167,7 @@ namespace SR_UTILS_NS {
         return static_cast<EnumType>(0);
     }
 
-    template<typename EnumType> std::vector<std::string> EnumReflector::GetNames() {
+    template<typename EnumType> const std::vector<std::string>& EnumReflector::GetNames() {
         return _detail_reflector_(EnumType()).m_data->names;
     }
 

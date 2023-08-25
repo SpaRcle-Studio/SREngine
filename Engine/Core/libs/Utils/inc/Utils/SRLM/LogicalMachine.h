@@ -6,7 +6,10 @@
 #define SRENGINE_LOGICALMACHINE_H
 
 #include <Utils/Common/NonCopyable.h>
+#include <Utils/Common/Singleton.h>
 #include <Utils/Common/Hashes.h>
+#include <Utils/ResourceManager/FileWatcher.h>
+#include <flat_hash_map/flat_hash_map.hpp>
 
 namespace SR_SRLM_NS {
     static constexpr uint64_t NODE_BOOL_CONDITION = SR_COMPILE_TIME_CRC32_STR("BOOL_CONDITION");
@@ -35,6 +38,29 @@ namespace SR_SRLM_NS {
     static constexpr uint64_t DATA_TYPE_FLOAT_VECTOR3 = SR_COMPILE_TIME_CRC32_STR("FLOAT_VECTOR3");
     static constexpr uint64_t DATA_TYPE_INT_VECTOR4 = SR_COMPILE_TIME_CRC32_STR("INT_VECTOR4");
     static constexpr uint64_t DATA_TYPE_FLOAT_VECTOR4 = SR_COMPILE_TIME_CRC32_STR("FLOAT_VECTOR4");
+
+    class DataType;
+    class DataTypeStruct;
+
+    class DataTypeManager : public SR_UTILS_NS::Singleton<DataTypeManager> {
+        friend class SR_UTILS_NS::Singleton<DataTypeManager>;
+        using Hash = uint64_t;
+    public:
+        SR_NODISCARD const std::string& HashToString(Hash hash) const;
+        SR_NODISCARD DataType* CreateByName(Hash hashName);
+
+    private:
+        void InitSingleton() override;
+        void OnSingletonDestroy() override;
+        void ReloadSettings();
+        void Clear();
+
+    private:
+        ska::flat_hash_map<Hash, std::string> m_strings;
+        ska::flat_hash_map<Hash, DataTypeStruct*> m_structs;
+        SR_UTILS_NS::FileWatcher::Ptr m_watcher;
+
+    };
 
     class LogicalMachine : public SR_UTILS_NS::NonCopyable {
 

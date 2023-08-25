@@ -10,6 +10,7 @@
 #endif
 
 #include "../Utils/src/Utils/SRLM/LogicalMachine.cpp"
+#include "../Utils/src/Utils/SRLM/DataType.cpp"
 
 #include "../Utils/src/Utils/Events/EventManager.cpp"
 #include "../Utils/src/Utils/Events/Event.cpp"

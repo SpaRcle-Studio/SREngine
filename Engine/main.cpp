@@ -25,6 +25,7 @@
 #include <Utils/Settings.h>
 #include <Utils/Platform/Platform.h>
 #include <Utils/Locale/Encoding.h>
+#include <Utils/SRLM/LogicalMachine.h>
 
 #include <Core/Engine.h>
 #include <Core/World/World.h>
@@ -123,10 +124,12 @@ int main(int argc, char **argv) {
 
     engine.Close();
 
+    SR_SRLM_NS::DataTypeManager::DestroySingleton();
+
     SR_CORE_NS::EditorSettings::DestroySettings();
     SR_UTILS_NS::TagManager::DestroySettings();
 
-    SR_AUDIO_NS::SoundManager::Instance().DestroySingleton();
+    SR_AUDIO_NS::SoundManager::DestroySingleton();
     SR_PHYSICS_NS::PhysicsLibrary::DestroySingleton();
     SR_GRAPH_NS::Memory::CameraManager::DestroySingleton();
     SR_SCRIPTING_NS::GlobalEvoCompiler::DestroySingleton();

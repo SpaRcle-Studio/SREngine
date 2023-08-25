@@ -27,7 +27,7 @@ namespace SR_UTILS_NS {
         m_callBack = std::move(callBack);
     }
 
-    SR_UTILS_NS::Path FileWatcher::GetPath() const noexcept {
+    const SR_UTILS_NS::Path& FileWatcher::GetPath() const noexcept {
         SR_LOCK_GUARD;
         return m_path;
     }
