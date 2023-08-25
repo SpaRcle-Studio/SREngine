@@ -7,13 +7,20 @@
 
 #include <Utils/Common/Hashes.h>
 
-#define SR_LM_REGISTER_TYPE(name)                                                                                   \
+#define SR_LM_REGISTER_TYPE_NO_META(name)                                                                           \
     public:                                                                                                         \
         SR_INLINE_STATIC const uint64_t HASH_NAME = SR_HASH_STR(#name); /** NOLINT*/                                \
-        SR_NODISCARD Meta GetMeta() const noexcept override {                                                       \
-            return 0;                                                                                               \
-        }                                                                                                           \
         SR_NODISCARD std::string GetName() const noexcept override { return #name; }                                \
+        SR_NODISCARD Hash GetHashName() const noexcept override { return HASH_NAME; }                               \
+
+#define SR_LM_REGISTER_TYPE(name)                                                                                   \
+    public:                                                                                                         \
+        SR_LM_REGISTER_TYPE_NO_META(name)                                                                           \
+        SR_NODISCARD Meta GetMeta() const noexcept override {                                                       \
+            Hash hash = GetHashName();                                                                              \
+            for (auto&& pData : GetMetaData()) { hash = SR_COMBINE_HASHES(hash, pData->GetMeta()); }                \
+            return hash;                                                                                            \
+        }                                                                                                           \
 
 #define SR_LM_REGISTER_TYPE_GETTER_SETTER(name, type)                                                               \
     public:                                                                                                         \

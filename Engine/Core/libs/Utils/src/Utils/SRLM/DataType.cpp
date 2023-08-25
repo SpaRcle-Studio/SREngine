@@ -25,4 +25,35 @@ namespace SR_SRLM_NS {
         SRAssert(m_variables.count(name) == 0);
         m_variables[name] = pData;
     }
+
+    std::vector<DataType*> DataTypeStruct::GetMetaData() const {
+        std::vector<DataType*> data;
+
+        data.reserve(m_variables.size());
+
+        for (auto&& [hash, pData] : m_variables) {
+            data.emplace_back(pData);
+        }
+
+        return data;
+    }
+
+    DataTypeArray::DataTypeArray()
+        : DataType()
+    {
+        SetType(new DataTypeNone());
+    }
+
+    DataTypeArray::~DataTypeArray() {
+        SetType(nullptr);
+    }
+
+    DataType::Meta DataTypeArray::GetMeta() const noexcept {
+        return SR_COMBINE_HASHES(GetHashName(), m_type->GetHashName());
+    }
+
+    void DataTypeArray::SetType(DataType* pData) {
+        SR_SAFE_DELETE_PTR(m_type);
+        m_type = pData;
+    }
 }

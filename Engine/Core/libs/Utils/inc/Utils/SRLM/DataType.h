@@ -12,15 +12,32 @@ namespace SR_UTILS_NS {
 }
 
 namespace SR_SRLM_NS {
+    SR_ENUM_NS_CLASS_T(DataTypeClass, uint8_t,
+        None, Default, Enum, Struct, Array, Map, Set
+    );
+
     class DataType : SR_UTILS_NS::NonCopyable {
     public:
         using Meta = uint64_t;
         using Hash = uint64_t;
 
     public:
+        SR_NODISCARD virtual std::vector<DataType*> GetMetaData() const { std::vector<DataType*>(); }
         SR_NODISCARD virtual DataType* Copy() const = 0;
         SR_NODISCARD virtual Meta GetMeta() const noexcept = 0;
         SR_NODISCARD virtual std::string GetName() const noexcept = 0;
+        SR_NODISCARD virtual Hash GetHashName() const noexcept = 0;
+        SR_NODISCARD virtual DataTypeClass GetClass() const noexcept { return DataTypeClass::Default; }
+
+    };
+
+    /// ----------------------------------------------------------------------------------------------------------------
+
+    class DataTypeNone : public DataType {
+        SR_LM_REGISTER_TYPE(None);
+    public:
+        SR_NODISCARD DataType* Copy() const override { return new DataTypeNone(); }
+        SR_NODISCARD DataTypeClass GetClass() const noexcept override { return DataTypeClass::None; }
 
     };
 
@@ -91,6 +108,8 @@ namespace SR_SRLM_NS {
             return new DataTypeEnum(m_value, m_reflector);
         }
 
+        SR_NODISCARD DataTypeClass GetClass() const noexcept override { return DataTypeClass::Enum; }
+
     private:
         EnumReflector* m_reflector = nullptr;
 
@@ -99,15 +118,27 @@ namespace SR_SRLM_NS {
     /// ----------------------------------------------------------------------------------------------------------------
 
     class DataTypeArray : public DataType {
+        SR_LM_REGISTER_TYPE_NO_META(Array)
+    public:
+        DataTypeArray();
+        ~DataTypeArray() override;
+
+    public:
+        void SetType(DataType* pData);
+
+        SR_NODISCARD Meta GetMeta() const noexcept override;
+        SR_NODISCARD DataTypeClass GetClass() const noexcept override { return DataTypeClass::Array; }
+
     private:
         std::vector<DataType*> m_value;
+        DataType* m_type = nullptr;
 
     };
 
     /// ----------------------------------------------------------------------------------------------------------------
 
     class DataTypeStruct : public DataType {
-    SR_LM_REGISTER_TYPE(Struct)
+        SR_LM_REGISTER_TYPE(Struct)
     public:
         explicit DataTypeStruct(Hash name)
             : DataType()
@@ -117,6 +148,8 @@ namespace SR_SRLM_NS {
 
     public:
         SR_NODISCARD DataType* Copy() const override;
+        SR_NODISCARD DataTypeClass GetClass() const noexcept override { return DataTypeClass::Struct; }
+        SR_NODISCARD std::vector<DataType*> GetMetaData() const override;
         void AddVariable(Hash name, DataType* pData);
 
     private:

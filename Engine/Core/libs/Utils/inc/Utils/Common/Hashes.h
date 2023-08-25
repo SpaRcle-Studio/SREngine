@@ -100,6 +100,8 @@ namespace SR_UTILS_NS {
     }
 }
 
+#define SR_COMBINE_HASHES(x1, x2) (SR_UTILS_NS::CombineTwoHashes(x1, x2))
+
 #define SR_HASH(x) (SR_UTILS_NS::CalculateHash(x))
 #define SR_HASH_STR(x) (SR_UTILS_NS::CalculateHash<std::string>(x))
 #define SR_HASH_STR_VIEW(x) (SR_UTILS_NS::CalculateHash<std::string_view>(x))

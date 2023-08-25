@@ -11,11 +11,25 @@ namespace SR_SRLM_NS {
     DataType* DataTypeManager::CreateByName(uint64_t hashName) {
         SR_LOCK_GUARD;
 
-        if (DataTypeInt32::HASH_NAME == hashName) {
+        if (DataTypeNone::HASH_NAME == hashName) {
+            return new DataTypeNone();
+        }
+        else if (DataTypeFloat::HASH_NAME == hashName) {
+            return new DataTypeFloat();
+        }
+        else if (DataTypeBool::HASH_NAME == hashName) {
+            return new DataTypeBool();
+        }
+        else if (DataTypeInt8::HASH_NAME == hashName) {
+            return new DataTypeInt8();
+        }
+        else if (DataTypeInt16::HASH_NAME == hashName) {
+            return new DataTypeInt16();
+        }
+        else if (DataTypeInt32::HASH_NAME == hashName) {
             return new DataTypeInt32();
         }
-
-        if (DataTypeInt64::HASH_NAME == hashName) {
+        else if (DataTypeInt64::HASH_NAME == hashName) {
             return new DataTypeInt64();
         }
 
