@@ -4,82 +4,111 @@
 
 #include <Graphics/GUI/Pin.h>
 #include <Graphics/GUI/Utils.h>
+#include <Utils/SRLM/DataType.h>
 
-namespace SR_GRAPH_NS::GUI {
+namespace SR_GRAPH_GUI_NS {
     Pin::Pin()
-        : Pin(std::string(), PinType::None, PinKind::None, SR_UINT64_MAX)
+        : Pin(std::string(), PinKind::None, nullptr)
     { }
 
-    Pin::Pin(const std::string &name)
-        : Pin(name, PinType::None, PinKind::None, SR_UINT64_MAX)
+    Pin::Pin(const std::string& name)
+        : Pin(name, PinKind::None, nullptr)
     { }
 
-    Pin::Pin(const std::string &name, PinType type)
-        : Pin(name, type, PinKind::None, SR_UINT64_MAX)
+    Pin::Pin(const std::string& name, PinKind kind)
+        : Pin(name, kind, nullptr)
     { }
 
-    Pin::Pin(const std::string &name, PinKind kind)
-        : Pin(name, PinType::None, kind, SR_UINT64_MAX)
+
+    Pin::Pin(const std::string& name, Pin::DataTypePtr pData)
+        : Pin(name, PinKind::None, pData)
     { }
 
-    Pin::Pin(const std::string &name, PinType type, PinKind kind, uint64_t dataType)
+    Pin::Pin(const std::string& name, PinKind kind, DataTypePtr pDataType)
         : m_name(name)
-        , m_type(type)
         , m_kind(kind)
-        , m_dataType(dataType)
+        , m_dataType(pDataType)
+        , m_constValue(pDataType ? pDataType->Copy() : nullptr)
     { }
 
     Pin::~Pin() {
+        SR_SAFE_DELETE_PTR(m_constValue);
+        SR_SAFE_DELETE_PTR(m_dataType);
+
         for (auto&& pLink : m_links) {
             pLink->Broke(this);
         }
+
         m_node = nullptr;
     }
 
     ImColor Pin::GetIconColor(const PinType &type) {
         switch (type) {
-            case PinType::Flow:     return ImColor(255, 255, 255);
-            case PinType::Bool:     return ImColor(220,  48,  48);
-            case PinType::Int:      return ImColor( 68, 201, 156);
-            case PinType::Numeric:  return ImColor( 68, 101, 056);
-            case PinType::Float:    return ImColor(147, 226,  74);
-            case PinType::String:   return ImColor(124,  21, 153);
-            case PinType::Object:   return ImColor( 51, 150, 215);
-            case PinType::Function: return ImColor(218,   0, 183);
-            case PinType::Delegate: return ImColor(255,  48,  48);
-            case PinType::Event:    return ImColor(255,  48,  48);
+            case PinType::Flow:   return ImColor(255, 255, 255);
+            case PinType::Bool:   return ImColor(220,  48,  48);
+            case PinType::Float:  return ImColor(147, 226,  74);
+            case PinType::String: return ImColor(124,  21, 153);
+            case PinType::Int8:
+            case PinType::Int16:
+            case PinType::Int32:
+            case PinType::Int64:
+            case PinType::UInt8:
+            case PinType::UInt16:
+            case PinType::UInt32:
+            case PinType::UInt64:
+                return ImColor( 68, 201, 156);
+                /// case PinType::Numeric:  return ImColor( 68, 101, 056);
+            /// case PinType::Object:   return ImColor( 51, 150, 215);
+            /// case PinType::Function: return ImColor(218,   0, 183);
+            /// case PinType::Delegate: return ImColor(255,  48,  48);
+            /// case PinType::Event:    return ImColor(255,  48,  48);
             default:
-            SRAssertOnce(false);
+                SRAssertOnce(false);
                 return ImColor(0, 0, 0);
         }
     }
 
     IconType Pin::GetIconType(const PinType &type) {
         switch (type) {
-            case PinType::Flow:     return IconType::Flow;
-            case PinType::Bool:     return IconType::Circle;
-            case PinType::Int:      return IconType::Circle;
-            case PinType::Numeric:  return IconType::Circle;
+            case PinType::Flow: return IconType::Flow;
+            case PinType::Bool: return IconType::Circle;
+            case PinType::Int8:
+            case PinType::Int16:
+            case PinType::Int32:
+            case PinType::Int64:
+            case PinType::UInt8:
+            case PinType::UInt16:
+            case PinType::UInt32:
+            case PinType::UInt64:
+                return IconType::Circle;
             case PinType::Float:    return IconType::Circle;
             case PinType::String:   return IconType::Circle;
-            case PinType::Object:   return IconType::Circle;
-            case PinType::Function: return IconType::Circle;
-            case PinType::Delegate: return IconType::Square;
-            case PinType::Event:    return IconType::Square;
+            /// case PinType::Numeric:  return IconType::Circle;
+            /// case PinType::Object:   return IconType::Circle;
+            /// case PinType::Function: return IconType::Circle;
+            /// case PinType::Delegate: return IconType::Square;
+            /// case PinType::Event:    return IconType::Square;
             default:
-            SRAssertOnce(false);
+                SRAssertOnce(false);
                 return IconType::Square;
         }
     }
 
     Pin* Pin::Copy() const {
-        auto pin = new Pin();
+        auto&& pPin = new Pin();
 
-        pin->m_name = m_name;
-        pin->m_type = m_type;
-        pin->m_kind = m_kind;
+        pPin->m_name = m_name;
+        pPin->m_kind = m_kind;
 
-        return pin;
+        if (m_dataType) {
+            pPin->m_dataType = m_dataType->Copy();
+        }
+
+        if (m_constValue) {
+            pPin->m_constValue = m_constValue->Copy();
+        }
+
+        return pPin;
     }
 
     void Pin::SetNode(Node* node) {
@@ -175,25 +204,43 @@ namespace SR_GRAPH_NS::GUI {
     }
 
     void Pin::DrawOption() {
+        if (!m_constValue) {
+            return;
+        }
+
         switch (GetType()) {
             case PinType::Bool:
-                CheckboxNoNavFocus(SR_FORMAT_C("##Pin-%p", (void*)this), &m_constValue.m_bool);
+                CheckboxNoNavFocus(SR_FORMAT_C("##Pin-%p", (void*)this), m_constValue->GetBool());
                 break;
-            case PinType::Int:
+            case PinType::Int8:
+            case PinType::Int16:
+            case PinType::Int32:
+            case PinType::Int64:
+            case PinType::UInt8:
+            case PinType::UInt16:
+            case PinType::UInt32:
+            case PinType::UInt64: {
+                int32_t number = *m_constValue->GetInt32();
                 ImGui::PushItemWidth(40.0f);
-                ImGui::InputInt(SR_FORMAT_C("##Pin-%p", (void*)this), &m_constValue.m_int, 0);
+                ImGui::InputInt(SR_FORMAT_C("##Pin-%p", (void*)this), &number, 0);
+                *m_constValue->GetInt32() = number;
                 ImGui::PopItemWidth();
                 break;
+            }
             case PinType::Float:
                 ImGui::PushItemWidth(40.0f);
-                ImGui::InputFloat(SR_FORMAT_C("##Pin-%p", (void*)this), &m_constValue.m_float);
+                ImGui::InputFloat(SR_FORMAT_C("##Pin-%p", (void*)this), m_constValue->GetFloat());
                 ImGui::PopItemWidth();
                 break;
             case PinType::String:
-                ImGui::InputText(SR_FORMAT_C("##Pin-%p", (void*)this), &m_constValue.m_string);
+                ImGui::InputText(SR_FORMAT_C("##Pin-%p", (void*)this), m_constValue->GetString());
                 break;
             default:
                 break;
         }
+    }
+
+    Pin::PinType Pin::GetType() const {
+        return m_dataType ? m_dataType->GetClass() : PinType::None;
     }
 }

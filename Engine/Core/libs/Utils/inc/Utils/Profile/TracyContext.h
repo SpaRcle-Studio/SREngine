@@ -19,9 +19,7 @@ namespace SR_UTILS_NS {
         Common,
         Vulkan,
 
-        Size,
-
-        All = SR_UINT8_MAX
+        All
     );
 
     class TracyContextManager : public SR_UTILS_NS::Singleton<TracyContextManager> {
@@ -31,7 +29,7 @@ namespace SR_UTILS_NS {
         using ContextMap = std::map<IdentifierPtr, TracyContextPtr>;
     public:
         TracyContextPtr& GetContext(TracyTypeFlag type, IdentifierPtr pIdentifier) {
-            if (type >= TracyType::Size) {
+            if (type >= TracyType::TracyTypeTMAX - 1) {
                 SRHalt0();
                 static TracyContextPtr pNull = nullptr;
                 return pNull;
@@ -50,7 +48,7 @@ namespace SR_UTILS_NS {
         void Destroy(TracyContextPtr pContext, TracyTypeFlag type);
 
     private:
-        std::array<ContextMap, TracyType::Size> m_contexts;
+        std::array<ContextMap, TracyType::TracyTypeTMAX - 1> m_contexts;
 
     };
 }

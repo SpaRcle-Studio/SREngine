@@ -19,137 +19,137 @@ namespace SR_GRAPH_GUI_NS {
         switch (identifier) {
             case SR_SRLM_NS::NODE_BOOL_CONDITION: {
                 node.SetName("Condition")
-                    .AddInput(SR_GRAPH_GUI_NS::PinType::Flow)
-                    .AddInput(SR_GRAPH_GUI_NS::PinType::Bool)
-                    .AddOutput("True", SR_GRAPH_GUI_NS::PinType::Flow)
-                    .AddOutput("False", SR_GRAPH_GUI_NS::PinType::Flow)
+                    .AddInput(SR_SRLM_NS::DataTypeClass::Flow)
+                    .AddInput(SR_SRLM_NS::DataTypeClass::Bool)
+                    .AddOutput("True", SR_SRLM_NS::DataTypeClass::Flow)
+                    .AddOutput("False", SR_SRLM_NS::DataTypeClass::Flow)
                 ;
                 break;
             }
             case SR_SRLM_NS::NODE_BOOL_AND: {
                 node.SetName("And")
-                    .AddInput(SR_GRAPH_GUI_NS::PinType::Bool)
-                    .AddInput(SR_GRAPH_GUI_NS::PinType::Bool)
-                    .AddOutput(SR_GRAPH_GUI_NS::PinType::Bool)
+                    .AddInput(SR_SRLM_NS::DataTypeClass::Bool)
+                    .AddInput(SR_SRLM_NS::DataTypeClass::Bool)
+                    .AddOutput(SR_SRLM_NS::DataTypeClass::Bool)
                 ;
                 break;
             }
             case SR_SRLM_NS::NODE_BOOL_OR: {
                 node.SetName("Or")
-                    .AddInput(SR_GRAPH_GUI_NS::PinType::Bool)
-                    .AddInput(SR_GRAPH_GUI_NS::PinType::Bool)
-                    .AddOutput(SR_GRAPH_GUI_NS::PinType::Bool)
+                    .AddInput(SR_SRLM_NS::DataTypeClass::Bool)
+                    .AddInput(SR_SRLM_NS::DataTypeClass::Bool)
+                    .AddOutput(SR_SRLM_NS::DataTypeClass::Bool)
                 ;
                 break;
             }
             case SR_SRLM_NS::NODE_BOOL_NOT: {
                 node.SetName("Not")
-                    .AddInput(SR_GRAPH_GUI_NS::PinType::Bool)
-                    .AddOutput(SR_GRAPH_GUI_NS::PinType::Bool)
+                    .AddInput(SR_SRLM_NS::DataTypeClass::Bool)
+                    .AddOutput(SR_SRLM_NS::DataTypeClass::Bool)
                 ;
                 break;
             }
             case SR_SRLM_NS::NODE_INT_NEGATIVE: {
                 node.SetName("-")
-                    .AddInput(SR_GRAPH_GUI_NS::PinType::Int)
-                    .AddOutput(SR_GRAPH_GUI_NS::PinType::Int)
+                    .AddInput(SR_SRLM_NS::DataTypeClass::Int32)
+                    .AddOutput(SR_SRLM_NS::DataTypeClass::Int32)
                 ;
                 break;
             }
             case SR_SRLM_NS::NODE_INT_TO_FLOAT: {
                 node.SetName("Int to Float")
-                    .AddInput(SR_GRAPH_GUI_NS::PinType::Int)
-                    .AddOutput(SR_GRAPH_GUI_NS::PinType::Float)
+                    .AddInput(SR_SRLM_NS::DataTypeClass::Int32)
+                    .AddOutput(SR_SRLM_NS::DataTypeClass::Float)
                 ;
                 break;
             }
             case SR_SRLM_NS::NODE_INT_PLUS_INT: {
                 node.SetName("+")
-                    .AddInput(SR_GRAPH_GUI_NS::PinType::Int)
-                    .AddInput(SR_GRAPH_GUI_NS::PinType::Int)
-                    .AddOutput(SR_GRAPH_GUI_NS::PinType::Int)
+                    .AddInput(SR_SRLM_NS::DataTypeClass::Int32)
+                    .AddInput(SR_SRLM_NS::DataTypeClass::Int32)
+                    .AddOutput(SR_SRLM_NS::DataTypeClass::Int32)
                 ;
                 break;
             }
             case SR_SRLM_NS::NODE_INT_MINUS_INT: {
                 node.SetName("-")
-                    .AddInput(SR_GRAPH_GUI_NS::PinType::Int)
-                    .AddInput(SR_GRAPH_GUI_NS::PinType::Int)
-                    .AddOutput(SR_GRAPH_GUI_NS::PinType::Int)
+                    .AddInput(SR_SRLM_NS::DataTypeClass::Int32)
+                    .AddInput(SR_SRLM_NS::DataTypeClass::Int32)
+                    .AddOutput(SR_SRLM_NS::DataTypeClass::Int32)
                 ;
                 break;
             }
             case SR_SRLM_NS::NODE_FLOAT_NEGATIVE: {
                 node.SetName("-")
-                    .AddInput(SR_GRAPH_GUI_NS::PinType::Float)
-                    .AddOutput(SR_GRAPH_GUI_NS::PinType::Float)
+                    .AddInput(SR_SRLM_NS::DataTypeClass::Float)
+                    .AddOutput(SR_SRLM_NS::DataTypeClass::Float)
                 ;
                 break;
             }
             case SR_SRLM_NS::NODE_FLOAT_TO_INT: {
                 node.SetName("Float to Int")
-                    .AddInput(SR_GRAPH_GUI_NS::PinType::Float)
-                    .AddOutput(SR_GRAPH_GUI_NS::PinType::Int)
+                    .AddInput(SR_SRLM_NS::DataTypeClass::Float)
+                    .AddOutput(SR_SRLM_NS::DataTypeClass::Int32)
                 ;
                 break;
             }
             case SR_SRLM_NS::NODE_FLOAT_PLUS_FLOAT: {
                 node.SetName("+")
-                    .AddInput(SR_GRAPH_GUI_NS::PinType::Float)
-                    .AddInput(SR_GRAPH_GUI_NS::PinType::Float)
-                    .AddOutput(SR_GRAPH_GUI_NS::PinType::Float)
+                    .AddInput(SR_SRLM_NS::DataTypeClass::Float)
+                    .AddInput(SR_SRLM_NS::DataTypeClass::Float)
+                    .AddOutput(SR_SRLM_NS::DataTypeClass::Float)
                 ;
                 break;
             }
             case SR_SRLM_NS::NODE_FLOAT_MINUS_FLOAT: {
                 node.SetName("-")
-                    .AddInput(SR_GRAPH_GUI_NS::PinType::Float)
-                    .AddInput(SR_GRAPH_GUI_NS::PinType::Float)
-                    .AddOutput(SR_GRAPH_GUI_NS::PinType::Float)
+                    .AddInput(SR_SRLM_NS::DataTypeClass::Float)
+                    .AddInput(SR_SRLM_NS::DataTypeClass::Float)
+                    .AddOutput(SR_SRLM_NS::DataTypeClass::Float)
                 ;
                 break;
             }
             case SR_SRLM_NS::NODE_START_PASS: {
                 node.SetName("Start Pass")
-                    .AddOutput(SR_GRAPH_GUI_NS::PinType::Flow)
+                    .AddOutput(SR_SRLM_NS::DataTypeClass::Flow)
                 ;
                 break;
             }
             case SR_SRLM_NS::NODE_END_PASS: {
                 node.SetName("End Pass")
-                    .AddInput(SR_GRAPH_GUI_NS::PinType::Flow)
+                    .AddInput(SR_SRLM_NS::DataTypeClass::Flow)
                 ;
                 break;
             }
             case SR_SRLM_NS::NODE_CASCADED_SHADOW_MAP_PASS: {
                 node.SetName("Cascaded Shadow Map Pass")
                     .SetType(NodeType::Blueprint)
-                    .AddInput(SR_GRAPH_GUI_NS::PinType::Flow)
-                    .AddInput("Cascades", SR_GRAPH_GUI_NS::PinType::Int)
-                    .AddInput("SplitLambda", SR_GRAPH_GUI_NS::PinType::Float)
-                    .AddInput("Near", SR_GRAPH_GUI_NS::PinType::Float)
-                    .AddInput("Far", SR_GRAPH_GUI_NS::PinType::Float)
-                    .AddInput("Depth", SR_GRAPH_GUI_NS::PinType::Bool)
-                    .AddInput("DynamicResizing", SR_GRAPH_GUI_NS::PinType::Bool)
-                    .AddInput("Smooth", SR_GRAPH_GUI_NS::PinType::Int)
-                    .AddInput("Layers", SR_GRAPH_GUI_NS::PinType::Int)
-                    .AddOutput(SR_GRAPH_GUI_NS::PinType::Flow)
+                    .AddInput(SR_SRLM_NS::DataTypeClass::Flow)
+                    .AddInput("Cascades", SR_SRLM_NS::DataTypeClass::Int32)
+                    .AddInput("SplitLambda", SR_SRLM_NS::DataTypeClass::Float)
+                    .AddInput("Near", SR_SRLM_NS::DataTypeClass::Float)
+                    .AddInput("Far", SR_SRLM_NS::DataTypeClass::Float)
+                    .AddInput("Depth", SR_SRLM_NS::DataTypeClass::Bool)
+                    .AddInput("DynamicResizing", SR_SRLM_NS::DataTypeClass::Bool)
+                    .AddInput("Smooth", SR_SRLM_NS::DataTypeClass::Int32)
+                    .AddInput("Layers", SR_SRLM_NS::DataTypeClass::Int32)
+                    .AddOutput(SR_SRLM_NS::DataTypeClass::Flow)
                 ;
                 break;
             }
-            case SR_SRLM_NS::NODE_FRAME_BUFFER_SETTINGS: {
-                node.SetName("Frame Buffer Settings")
-                    .SetType(NodeType::Blueprint)
-                    .AddInput("Size", SR_GRAPH_GUI_NS::PinType::Struct, SR_SRLM_NS::DATA_TYPE_INT_VECTOR2)
-                    .AddInput("Pre Scale", SR_GRAPH_GUI_NS::PinType::Struct, SR_SRLM_NS::DATA_TYPE_FLOAT_VECTOR2)
-                    .AddInput("Depth Enabled", SR_GRAPH_GUI_NS::PinType::Bool)
-                    .AddInput("DynamicResizing", SR_GRAPH_GUI_NS::PinType::Bool)
-                    .AddInput("Smooth", SR_GRAPH_GUI_NS::PinType::Int)
-                    .AddInput("Layers", SR_GRAPH_GUI_NS::PinType::Int)
-                    .AddOutput("Result", SR_GRAPH_GUI_NS::PinType::Struct, SR_SRLM_NS::DATA_TYPE_FRAME_BUFFER_SETTINGS)
-                ;
-                break;
-            }
+            //case SR_SRLM_NS::NODE_FRAME_BUFFER_SETTINGS: {
+            //    node.SetName("Frame Buffer Settings")
+            //        .SetType(NodeType::Blueprint)
+            //        .AddInput("Size", SR_SRLM_NS::DataTypeClass::Struct, SR_SRLM_NS::DATA_TYPE_INT_VECTOR2)
+            //        .AddInput("Pre Scale", SR_SRLM_NS::DataTypeClass::Struct, SR_SRLM_NS::DATA_TYPE_FLOAT_VECTOR2)
+            //        .AddInput("Depth Enabled", SR_SRLM_NS::DataTypeClass::Bool)
+            //        .AddInput("DynamicResizing", SR_SRLM_NS::DataTypeClass::Bool)
+            //        .AddInput("Smooth", SR_SRLM_NS::DataTypeClass::Int32)
+            //        .AddInput("Layers", SR_SRLM_NS::DataTypeClass::Int32)
+            //        .AddOutput("Result", SR_SRLM_NS::DataTypeClass::Struct, SR_SRLM_NS::DATA_TYPE_FRAME_BUFFER_SETTINGS)
+            //    ;
+            //    break;
+            //}
             default:
                 SRHalt("Invalid identifier");
                 break;

@@ -5,24 +5,31 @@
 #include <Graphics/GUI/ImNodeEditorUtils.h>
 
 namespace SR_GRAPH_GUI_NS {
-    bool IsPinsCompatible(PinType first, PinType second) {
-        if (first == PinType::Numeric) {
-            if (second == PinType::Float || second == PinType::Int) {
-                return true;
-            }
+    bool IsPinsCompatible(Pin* a, Pin* b) {
+        if (a->GetType() != b->GetType()) {
+            return false;
         }
 
-        if (second == PinType::Numeric) {
-            if (first == PinType::Float || first == PinType::Int) {
-                return true;
-            }
+        switch (a->GetType()) {
+            case SR_SRLM_NS::DataTypeClass::Array:
+            case SR_SRLM_NS::DataTypeClass::Struct:
+                if (a->GetDataType()->GetMeta() != b->GetDataType()->GetMeta()) {
+                    return false;
+                }
+                break;
+            default:
+                break;
         }
 
-        return first == second;
+        return true;
     }
 
-    bool CanCreateLink(Pin *a, Pin *b) {
+    bool CanCreateLink(Pin* a, Pin* b) {
         if (!a || !b || a == b) {
+            return false;
+        }
+
+        if (!a->GetDataType() || !b->GetDataType()) {
             return false;
         }
 
@@ -30,7 +37,7 @@ namespace SR_GRAPH_GUI_NS {
             return false;
         }
 
-        if (!IsPinsCompatible(a->GetType(), b->GetType())) {
+        if (!IsPinsCompatible(a, b)) {
             return false;
         }
 

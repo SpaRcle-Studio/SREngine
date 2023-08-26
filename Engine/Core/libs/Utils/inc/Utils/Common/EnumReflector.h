@@ -217,7 +217,7 @@ namespace SR_UTILS_NS {
 #define SR_ENUM_DETAIL_MAKE(enumClass, spec, enumName, integral, ...)                                                  \
     enumClass enumName : integral                                                                                      \
     {                                                                                                                  \
-        __VA_ARGS__                                                                                                    \
+        __VA_ARGS__, SR_MACRO_CONCAT(enumName, MAX)                                                                    \
     };                                                                                                                 \
     SR_ENUM_DETAIL_SPEC_##spec const SR_UTILS_NS::EnumReflector& _detail_reflector_(enumName)                          \
     {                                                                                                                  \

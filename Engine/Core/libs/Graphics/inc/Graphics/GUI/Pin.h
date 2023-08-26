@@ -12,24 +12,14 @@ namespace ax::NodeEditor {
     enum class PinKind;
 }
 
+namespace SR_SRLM_NS {
+    class DataType;
+    enum class DataTypeClass : uint8_t;
+}
+
 namespace SR_GRAPH_NS::GUI {
     class Node;
     class Link;
-
-    SR_ENUM_NS_CLASS_T(PinType, int32_t,
-          None,
-          Flow,
-          Bool,
-          Event,
-          Int,
-          Float,
-          String,
-          Object,
-          Numeric,
-          Function,
-          Delegate,
-          Struct
-    );
 
     SR_ENUM_NS_CLASS(PinKind,
           None,
@@ -37,22 +27,17 @@ namespace SR_GRAPH_NS::GUI {
           Input
     );
 
-    struct PinConstValue {
-        bool m_bool = false;
-        std::string m_string;
-        float_t m_float = 0.f;
-        int32_t m_int = 0;
-    };
-
     class Pin : private SR_UTILS_NS::NonCopyable {
         friend class Node;
         friend class Link;
+        using PinType = SR_SRLM_NS::DataTypeClass;
+        using DataTypePtr = SR_SRLM_NS::DataType*;
     public:
         Pin();
         explicit Pin(const std::string& name);
-        Pin(const std::string& name, PinType type);
+        Pin(const std::string& name, DataTypePtr pData);
         Pin(const std::string& name, PinKind kind);
-        Pin(const std::string& name, PinType type, PinKind kind, uint64_t dataType);
+        Pin(const std::string& name, PinKind kind, DataTypePtr pData);
         ~Pin() override;
 
     public:
@@ -76,9 +61,10 @@ namespace SR_GRAPH_NS::GUI {
         SR_NODISCARD bool IsLinked() const;
         SR_NODISCARD bool CanLink() const;
         SR_NODISCARD float_t GetWidth() const;
-        SR_NODISCARD PinType GetType() const { return m_type; }
+        SR_NODISCARD PinType GetType() const;
         SR_NODISCARD PinKind GetKind() const { return m_kind; }
         SR_NODISCARD Node* GetNode() const { return m_node; }
+        SR_NODISCARD DataTypePtr GetDataType() const { return m_dataType; }
 
         SR_NODISCARD Pin* Copy() const;
 
@@ -86,13 +72,13 @@ namespace SR_GRAPH_NS::GUI {
         void End() const;
 
     private:
-        PinConstValue m_constValue;
+        DataTypePtr m_constValue = nullptr;
+        DataTypePtr m_dataType = nullptr;
+
         std::unordered_set<Link*> m_links;
         Node* m_node = nullptr;
         std::string m_name;
-        PinType m_type;
         PinKind m_kind;
-        uint64_t m_dataType = SR_UINT64_MAX;
 
     };
 }

@@ -25,6 +25,7 @@
 #include <Utils/Settings.h>
 #include <Utils/Platform/Platform.h>
 #include <Utils/Locale/Encoding.h>
+#include <Utils/SRLM/DataTypeManager.h>
 #include <Utils/SRLM/LogicalMachine.h>
 
 #include <Core/Engine.h>

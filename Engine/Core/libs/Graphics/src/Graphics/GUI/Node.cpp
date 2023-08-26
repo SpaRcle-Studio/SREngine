@@ -6,6 +6,7 @@
 #include <Graphics/GUI/NodeManager.h>
 #include <Graphics/GUI/Pin.h>
 #include <Graphics/GUI/NodeBuilder.h>
+#include <Utils/SRLM/DataType.h>
 
 namespace SR_GRAPH_GUI_NS {
     Node::Node()
@@ -43,12 +44,13 @@ namespace SR_GRAPH_GUI_NS {
         pin->m_kind = PinKind::Output;
         pin->SetNode(this);
 
-        if (const auto pinWidth = pin->GetWidth(); pinWidth > m_maxOutputWidth)
+        if (const auto pinWidth = pin->GetWidth(); pinWidth > m_maxOutputWidth) {
             m_maxOutputWidth = pinWidth;
-
-        if (pin->GetType() == PinType::Delegate) {
-            m_hasOutputDelegates = true;
         }
+
+        /// if (pin->GetType() == PinType::Delegate) {
+        ///     m_hasOutputDelegates = true;
+        /// }
 
         m_outputs.emplace_back(pin);
 
@@ -71,7 +73,7 @@ namespace SR_GRAPH_GUI_NS {
             ImGui::Dummy(ImVec2(0, 28));
 
             if (m_hasOutputDelegates) {
-                ImGui::BeginVertical("delegates", ImVec2(0, 28));
+                /** ImGui::BeginVertical("delegates", ImVec2(0, 28));
                 ImGui::Spring(1, 0);
 
                 for (auto&& pOutput : m_outputs) {
@@ -105,7 +107,7 @@ namespace SR_GRAPH_GUI_NS {
 
                 ImGui::Spring(1, 0);
                 ImGui::EndVertical();
-                ImGui::Spring(0, ImGui::GetStyle().ItemSpacing.x / 2);
+                ImGui::Spring(0, ImGui::GetStyle().ItemSpacing.x / 2);*/
             }
             else {
                 ImGui::Spring(0);
@@ -160,8 +162,8 @@ namespace SR_GRAPH_GUI_NS {
 
         for (auto&& pOutput : m_outputs)
         {
-            if (!isSimple && pOutput->GetType() == PinType::Delegate)
-                continue;
+            /// if (!isSimple && pOutput->GetType() == PinType::Delegate)
+            ///     continue;
 
             auto alpha = ImGui::GetStyle().Alpha;
 
@@ -171,7 +173,7 @@ namespace SR_GRAPH_GUI_NS {
             ImGui::PushStyleVar(ImGuiStyleVar_Alpha, alpha);
             pBuilder->Output(pOutput);
 
-            if (pOutput->GetType() == PinType::String) {
+            if (pOutput->GetType() == SR_SRLM_NS::DataTypeClass::String) {
                 static char buffer[128] = "Edit Me\nMultiline!";
                 static bool wasActive = false;
 
@@ -281,26 +283,26 @@ namespace SR_GRAPH_GUI_NS {
     }
 
     Node& Node::AddInput(PinType type) {
-        return AddInput(new Pin(std::string(), type));
+        return AddInput(new Pin(std::string(), SR_SRLM_NS::DataTypeAllocator::Instance().Allocate(type)));
     }
 
     Node& Node::AddOutput(PinType type) {
-        return AddOutput(new Pin(std::string(), type));
+        return AddOutput(new Pin(std::string(), SR_SRLM_NS::DataTypeAllocator::Instance().Allocate(type)));
     }
 
     Node& Node::AddInput(const std::string &name, PinType type) {
-        return AddInput(new Pin(name, type));
+        return AddInput(new Pin(name, SR_SRLM_NS::DataTypeAllocator::Instance().Allocate(type)));
     }
 
     Node& Node::AddOutput(const std::string &name, PinType type) {
-        return AddOutput(new Pin(name, type));
+        return AddOutput(new Pin(name, SR_SRLM_NS::DataTypeAllocator::Instance().Allocate(type)));
     }
 
-    Node& Node::AddInput(const std::string &name, PinType type, uint64_t dataType) {
-        return AddInput(new Pin(name, type, PinKind::Input, dataType));
+    Node& Node::AddInput(const std::string& name, SR_SRLM_NS::DataType* pDataType) {
+        return AddInput(new Pin(name, pDataType));
     }
 
-    Node& Node::AddOutput(const std::string &name, PinType type, uint64_t dataType) {
-        return AddOutput(new Pin(name, type, PinKind::Output, dataType));
+    Node& Node::AddOutput(const std::string& name, SR_SRLM_NS::DataType* pDataType) {
+        return AddOutput(new Pin(name, pDataType));
     }
 }

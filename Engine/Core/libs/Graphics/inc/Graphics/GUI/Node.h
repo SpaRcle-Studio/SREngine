@@ -5,7 +5,7 @@
 #ifndef SRENGINE_NODE_H
 #define SRENGINE_NODE_H
 
-#include <Utils/Common/Enumerations.h>
+#include <Utils/SRLM/DataType.h>
 #include <Graphics/GUI/Icons.h>
 
 namespace SR_GRAPH_NS::GUI {
@@ -19,8 +19,6 @@ namespace SR_GRAPH_NS::GUI {
         Dot
     );
 
-    enum class PinType : int32_t;
-
     class NodeBuilder;
 
     class Pin;
@@ -28,6 +26,7 @@ namespace SR_GRAPH_NS::GUI {
     class Link;
 
     class Node : public SR_UTILS_NS::NonCopyable {
+        using PinType = SR_SRLM_NS::DataTypeClass;
     public:
         Node();
         explicit Node(const std::string& name);
@@ -47,8 +46,8 @@ namespace SR_GRAPH_NS::GUI {
         Node& AddInput(const std::string& name, PinType type);
         Node& AddOutput(const std::string& name, PinType type);
 
-        Node& AddInput(const std::string& name, PinType type, uint64_t dataType);
-        Node& AddOutput(const std::string& name, PinType type, uint64_t dataType);
+        Node& AddInput(const std::string& name, SR_SRLM_NS::DataType* pDataType);
+        Node& AddOutput(const std::string& name, SR_SRLM_NS::DataType* pDataType);
 
         SR_NODISCARD Pin* GetInputPin(uint32_t index);
         SR_NODISCARD Pin* GetOutputPin(uint32_t index);
