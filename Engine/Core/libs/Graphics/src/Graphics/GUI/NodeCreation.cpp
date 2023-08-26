@@ -135,19 +135,6 @@ namespace SR_GRAPH_GUI_NS {
                 ;
                 break;
             }
-            case SR_SRLM_NS::NODE_FRAME_BUFFER_SETTINGS: {
-                node.SetName("Frame Buffer Settings")
-                    .SetType(NodeType::Blueprint)
-                    .AddInput("Size", SR_SRLM_NS::DataTypeManager::Instance().CreateByName("IVector2"))
-                    .AddInput("Pre Scale", SR_SRLM_NS::DataTypeManager::Instance().CreateByName("FVector2"))
-                    .AddInput("Depth Enabled", SR_SRLM_NS::DataTypeClass::Bool)
-                    .AddInput("Dynamic Resizing", SR_SRLM_NS::DataTypeClass::Bool)
-                    .AddInput("Smooth", SR_SRLM_NS::DataTypeClass::Int32)
-                    .AddInput("Layers", SR_SRLM_NS::DataTypeClass::Int32)
-                    .AddOutput("Result", SR_SRLM_NS::DataTypeManager::Instance().CreateByName("FrameBufferSettings"))
-                ;
-                break;
-            }
             default:
                 SRHalt("Invalid identifier");
                 break;
