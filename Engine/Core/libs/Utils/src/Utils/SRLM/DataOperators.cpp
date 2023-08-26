@@ -194,8 +194,27 @@ namespace SR_SRLM_NS {
     }
 
     DataType* DataOperatorIsLess::Calculate(DataType* pFirst, DataType* pSecond) {
-        DataType* result = DataOperatorIsGreater::Calculate(pFirst, pSecond);
-        return result->SetCustomValue(!result->GetBool());
+        if (pFirst->GetClass() != pSecond->GetClass()) {
+            SRHalt("Types are not the same!");
+            return nullptr;
+        }
+
+        switch (pFirst->GetClass()) {
+            SR_LM_LOGICAL_OPERATOR(pFirst, pSecond, Float,  <)
+            SR_LM_LOGICAL_OPERATOR(pFirst, pSecond, Int8,   <)
+            SR_LM_LOGICAL_OPERATOR(pFirst, pSecond, Int16,  <)
+            SR_LM_LOGICAL_OPERATOR(pFirst, pSecond, Int32,  <)
+            SR_LM_LOGICAL_OPERATOR(pFirst, pSecond, Int64,  <)
+            SR_LM_LOGICAL_OPERATOR(pFirst, pSecond, UInt8,  <)
+            SR_LM_LOGICAL_OPERATOR(pFirst, pSecond, UInt16, <)
+            SR_LM_LOGICAL_OPERATOR(pFirst, pSecond, UInt32, <)
+            SR_LM_LOGICAL_OPERATOR(pFirst, pSecond, UInt64, <)
+            SR_LM_LOGICAL_OPERATOR(pFirst, pSecond, Double, <)
+
+            default:
+                SRHalt("Unknown type!");
+                return nullptr;
+        }
     }
 
     DataType* DataOperatorIsGreaterOrEqual::Calculate(DataType* pFirst, DataType* pSecond) {
