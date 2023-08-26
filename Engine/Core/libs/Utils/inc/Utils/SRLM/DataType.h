@@ -71,6 +71,10 @@ namespace SR_SRLM_NS {
         SR_NODISCARD uint32_t* GetUInt32() const { return (uint32_t*)GetRawValue(); }
         SR_NODISCARD uint64_t* GetUInt64() const { return (uint64_t*)GetRawValue(); }
 
+    public:
+        virtual DataType* SetRawValue(void* pValue) { return this; }
+        template<typename T> DataType* SetCustomValue(const T& value) { return SetRawValue((void*)&value); }
+
     };
 
     /// ----------------------------------------------------------------------------------------------------------------
@@ -99,6 +103,7 @@ namespace SR_SRLM_NS {
 
     class DataTypeInt16 : public DataType {
         SR_LM_REGISTER_TYPE_FULL(DataTypeInt16, DataType, Int16, int16_t, 0)
+
     };
 
     class DataTypeInt32 : public DataType {

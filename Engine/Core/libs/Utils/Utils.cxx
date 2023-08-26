@@ -12,6 +12,7 @@
 #include "../Utils/src/Utils/SRLM/LogicalMachine.cpp"
 #include "../Utils/src/Utils/SRLM/DataType.cpp"
 #include "../Utils/src/Utils/SRLM/DataTypeManager.cpp"
+#include "../Utils/src/Utils/SRLM/DataOperators.cpp"
 
 #include "../Utils/src/Utils/Events/EventManager.cpp"
 #include "../Utils/src/Utils/Events/Event.cpp"
