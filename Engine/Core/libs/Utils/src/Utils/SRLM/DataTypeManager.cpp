@@ -8,6 +8,10 @@
 #include <Utils/Xml.h>
 
 namespace SR_SRLM_NS {
+    DataType* DataTypeManager::CreateByName(const std::string& name) {
+        return CreateByName(SR_HASH_STR(name));
+    }
+
     DataType* DataTypeManager::CreateByName(uint64_t hashName) {
         SR_LOCK_GUARD;
 
@@ -64,11 +68,12 @@ namespace SR_SRLM_NS {
             return;
         }
 
-        auto&& xmlRoot = xmlDocument.Root();
+        auto&& xmlRoot = xmlDocument.Root().GetNode("SRLM");
 
         for (auto&& xmlStruct : xmlRoot.GetNodes("Struct")) {
-            auto&& structHash = SR_HASH_STR(xmlStruct.Name());
-            m_strings[structHash] = xmlStruct.Name();
+            auto&& structName = xmlStruct.GetAttribute("Name").ToString();
+            auto&& structHash = SR_HASH_STR(structName);
+            m_strings[structHash] = structName;
 
             auto&& pStruct = m_structs[structHash] = new DataTypeStruct(structHash);
 
@@ -83,6 +88,9 @@ namespace SR_SRLM_NS {
 
                 if (auto&& pData = CreateByName(typeHash)) {
                     pStruct->AddVariable(nameHash, pData);
+                }
+                else {
+                    SRHalt("Type \"" + xmlVar.Name() + "\" not found!");
                 }
             }
         }
@@ -102,6 +110,8 @@ namespace SR_SRLM_NS {
         m_watcher = SR_UTILS_NS::ResourceManager::Instance().StartWatch(
                 SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Engine/Configs/SRLMTypes.xml")
         );
+
+        ReloadSettings();
 
         m_watcher->SetCallBack([this](FileWatcher* pWatcher) {
             ReloadSettings();

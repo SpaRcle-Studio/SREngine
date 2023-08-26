@@ -36,6 +36,7 @@ namespace SR_GRAPH_GUI_NS {
         virtual void TopPanelClose();
 
         virtual void InitCreationPopup();
+        virtual void InitStructsCreationPopup();
 
         void Clear();
 

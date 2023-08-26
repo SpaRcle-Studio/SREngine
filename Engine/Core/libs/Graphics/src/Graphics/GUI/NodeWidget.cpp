@@ -7,6 +7,7 @@
 #include <Graphics/Types/Texture.h>
 
 #include <Utils/SRLM/LogicalMachine.h>
+#include <Utils/SRLM/DataTypeManager.h>
 
 namespace SR_GRAPH_GUI_NS {
     NodeWidget::NodeWidget(std::string name, SR_MATH_NS::IVector2 size)
@@ -219,10 +220,21 @@ namespace SR_GRAPH_GUI_NS {
 
         ImGui::SameLine();
 
+        if (ImGui::Button("Zoom")) {
+            ax::NodeEditor::NavigateToContent();
+        }
+
+        ImGui::SameLine();
+
+        ImGui::Text(" | ");
+
+        ImGui::SameLine();
+
         if (ImGui::Button("Close")) {
             TopPanelClose();
         }
 
+        ImGui::SameLine();
         ImGui::PopStyleVar(3);
     }
 
@@ -245,8 +257,58 @@ namespace SR_GRAPH_GUI_NS {
     }
 
     void NodeWidget::Init() {
+        InitStructsCreationPopup();
         InitCreationPopup();
         Super::Init();
+    }
+
+    void NodeWidget::InitStructsCreationPopup() {
+        auto&& createStructsNodesMenu = m_creationPopup->AddMenu("Create Structs");
+        auto&& breakStructsNodesMenu = m_creationPopup->AddMenu("Break Structs");
+
+        for (auto&& [hashName, pStruct] : SR_SRLM_NS::DataTypeManager::Instance().GetStructs()) {
+            auto&& structName = SR_SRLM_NS::DataTypeManager::Instance().HashToString(pStruct->GetStructName());
+
+            createStructsNodesMenu.AddMenu(structName).SetAction([structName, pStruct = pStruct](const SR_GRAPH_GUI_NS::DrawPopupContext& context)
+            {
+                auto&& pNode = new SR_GRAPH_GUI_NS::Node();
+                auto&& node = *pNode;
+
+                node.SetPosition(context.popupPos);
+                node.SetIdentifier(SR_SRLM_NS::NODE_CREATE_STRUCT);
+                node.SetType(SR_GRAPH_GUI_NS::NodeType::Blueprint);
+
+                node.SetName(structName);
+
+                for (auto&& [variableHashName, pVariable] : pStruct->GetVariables()) {
+                    node.AddInput(SR_SRLM_NS::DataTypeManager::Instance().HashToString(variableHashName), pVariable->Copy());
+                }
+
+                node.AddOutput(structName, pStruct->Copy());
+
+                context.pWidget->AddNode(pNode);
+            });
+
+            breakStructsNodesMenu.AddMenu(structName).SetAction([structName, pStruct = pStruct](const SR_GRAPH_GUI_NS::DrawPopupContext& context)
+            {
+                auto&& pNode = new SR_GRAPH_GUI_NS::Node();
+                auto&& node = *pNode;
+
+                node.SetPosition(context.popupPos);
+                node.SetIdentifier(SR_SRLM_NS::NODE_BREAK_STRUCT);
+                node.SetType(SR_GRAPH_GUI_NS::NodeType::Blueprint);
+
+                node.SetName(structName);
+
+                node.AddInput(structName, pStruct->Copy());
+
+                for (auto&& [variableHashName, pVariable] : pStruct->GetVariables()) {
+                    node.AddOutput(SR_SRLM_NS::DataTypeManager::Instance().HashToString(variableHashName), pVariable->Copy());
+                }
+
+                context.pWidget->AddNode(pNode);
+            });
+        }
     }
 
     void NodeWidget::InitCreationPopup() {

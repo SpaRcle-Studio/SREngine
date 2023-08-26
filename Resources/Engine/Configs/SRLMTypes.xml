@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <SRLM>
     <Struct Name="DepthLayer">
-        <Format Name="Format"/>
+        <ImageFormat Name="Format"/>
         <Float Name="ClearValue"/>
     </Struct>
     <Struct Name="ColorLayer">
-        <Format Name="Format"/>
+        <ImageFormat Name="Format"/>
         <Float Name="R"/>
         <Float Name="G"/>
         <Float Name="B"/>

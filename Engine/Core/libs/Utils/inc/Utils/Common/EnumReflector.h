@@ -16,7 +16,7 @@ namespace SR_UTILS_NS {
     class EnumReflectorManager : public SR_UTILS_NS::Singleton<EnumReflectorManager> {
         friend class SR_UTILS_NS::Singleton<EnumReflectorManager>;
     public:
-        void RegisterReflector(EnumReflector* pReflector);
+        bool RegisterReflector(EnumReflector* pReflector);
 
         SR_NODISCARD EnumReflector* GetReflector(const std::string& name) const;
         SR_NODISCARD EnumReflector* GetReflector(uint64_t hashName) const;
@@ -208,42 +208,45 @@ namespace SR_UTILS_NS {
     template<typename EnumType> uint64_t EnumReflector::Count() {
         return _detail_reflector_(EnumType()).m_data->values.size();
     }
+}
 
 #define SR_ENUM_DETAIL_SPEC_namespace \
     extern "C"{/* Protection from being used inside a class body */} \
     SR_INLINE
 #define SR_ENUM_DETAIL_SPEC_class friend
 #define SR_ENUM_DETAIL_STR(x) #x
-#define SR_ENUM_DETAIL_MAKE(enumClass, spec, enumName, integral, ...)                                                  \
-    enumClass enumName : integral                                                                                      \
-    {                                                                                                                  \
-        __VA_ARGS__, SR_MACRO_CONCAT(enumName, MAX)                                                                    \
-    };                                                                                                                 \
-    SR_ENUM_DETAIL_SPEC_##spec const SR_UTILS_NS::EnumReflector& _detail_reflector_(enumName)                          \
-    {                                                                                                                  \
-        static const SR_UTILS_NS::EnumReflector _reflector( []{                                                        \
-            static integral _detail_sval;                                                                              \
-            _detail_sval = 0;                                                                                          \
-            struct _detail_val_t                                                                                       \
-            {                                                                                                          \
-                _detail_val_t(const _detail_val_t& rhs) : _val(rhs) { _detail_sval = _val + 1; }                       \
-                _detail_val_t(integral val) /* NOLINT(google-explicit-constructor) */                                  \
-                    : _val(val)                                                                                        \
-                { _detail_sval = _val + 1; }                                                                           \
-                                                                                                                       \
-                _detail_val_t() : _val(_detail_sval){ _detail_sval = _val + 1; }                                       \
-                                                                                                                       \
-                _detail_val_t& operator=(const _detail_val_t&) { return *this; }                                       \
-                _detail_val_t& operator=(integral) { return *this; }                                                   \
-                operator integral() const { return _val; }                                                             \
-                integral _val;                                                                                         \
-            } __VA_ARGS__;                                                                                             \
-            const integral _detail_vals[] = { __VA_ARGS__ };                                                           \
-            return SR_UTILS_NS::EnumReflector( _detail_vals, sizeof(_detail_vals)/sizeof(integral),                    \
-                    #enumName, SR_ENUM_DETAIL_STR((__VA_ARGS__))  );                                                   \
-        }() );                                                                                                         \
-        return _reflector;                                                                                             \
-    }
-}
+#define SR_ENUM_DETAIL_MAKE(enumClass, spec, enumName, integral, ...)                                                   \
+    enumClass enumName : integral                                                                                       \
+    {                                                                                                                   \
+        __VA_ARGS__, SR_MACRO_CONCAT(enumName, MAX)                                                                     \
+    };                                                                                                                  \
+    SR_ENUM_DETAIL_SPEC_##spec const SR_UTILS_NS::EnumReflector& _detail_reflector_(enumName)                           \
+    {                                                                                                                   \
+        static const SR_UTILS_NS::EnumReflector _reflector( []{                                                         \
+            static integral _detail_sval;                                                                               \
+            _detail_sval = 0;                                                                                           \
+            struct _detail_val_t                                                                                        \
+            {                                                                                                           \
+                _detail_val_t(const _detail_val_t& rhs) : _val(rhs) { _detail_sval = _val + 1; }                        \
+                _detail_val_t(integral val) /** NOLINT(google-explicit-constructor) */                                  \
+                    : _val(val)                                                                                         \
+                { _detail_sval = _val + 1; }                                                                            \
+                                                                                                                        \
+                _detail_val_t() : _val(_detail_sval){ _detail_sval = _val + 1; }                                        \
+                                                                                                                        \
+                _detail_val_t& operator=(const _detail_val_t&) { return *this; }                                        \
+                _detail_val_t& operator=(integral) { return *this; }                                                    \
+                operator integral() const { return _val; }                                                              \
+                integral _val;                                                                                          \
+            } __VA_ARGS__;                                                                                              \
+            const integral _detail_vals[] = { __VA_ARGS__ };                                                            \
+            return SR_UTILS_NS::EnumReflector( _detail_vals, sizeof(_detail_vals)/sizeof(integral),                     \
+                    #enumName, SR_ENUM_DETAIL_STR((__VA_ARGS__)));                                                      \
+        }());                                                                                                           \
+        return _reflector;                                                                                              \
+    }                                                                                                                   \
+    SR_INLINE_STATIC const bool SR_MACRO_CONCAT(enumName, RegistrationCodegenResult) =                    /** NOLINT */ \
+        SR_UTILS_NS::EnumReflectorManager::Instance()                                                     /** NOLINT */ \
+            .RegisterReflector(const_cast<SR_UTILS_NS::EnumReflector*>(&_detail_reflector_(enumName()))); /** NOLINT */ \
 
 #endif //SRENGINE_ENUMREFLECTOR_H

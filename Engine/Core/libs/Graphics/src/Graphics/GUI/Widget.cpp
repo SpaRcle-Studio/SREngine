@@ -69,8 +69,9 @@ namespace Framework::Graphics::GUI {
             if (!open) {
                 Close();
             }
-            else
+            else {
                 Draw();
+            }
         }
 
         if (IsFocused() || IsHovered())

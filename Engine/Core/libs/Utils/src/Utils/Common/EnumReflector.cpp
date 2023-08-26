@@ -3,11 +3,15 @@
 //
 
 #include <Utils/Common/EnumReflector.h>
+#include <Utils/Common/Hashes.h>
 
 namespace SR_UTILS_NS {
-    void EnumReflectorManager::RegisterReflector(EnumReflector* pReflector) {
-        SRAssert(m_reflectors.count(pReflector->GetHashNameInternal()) == 0);
+    bool EnumReflectorManager::RegisterReflector(EnumReflector* pReflector) {
+        if (m_reflectors.count(pReflector->GetHashNameInternal()) == 1) {
+            return true;
+        }
         m_reflectors[pReflector->GetHashNameInternal()] = pReflector;
+        return false;
     }
 
     EnumReflector* EnumReflectorManager::GetReflector(const std::string& name) const {

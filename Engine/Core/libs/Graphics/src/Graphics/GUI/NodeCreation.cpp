@@ -6,6 +6,7 @@
 #include <Graphics/GUI/NodeWidget.h>
 #include <Graphics/Render/RenderTechnique.h>
 #include <Utils/SRLM/LogicalMachine.h>
+#include <Utils/SRLM/DataTypeManager.h>
 
 namespace SR_GRAPH_GUI_NS {
     Node* CreateNode(const SR_MATH_NS::FVector2& pos, uint64_t identifier) {
@@ -129,27 +130,24 @@ namespace SR_GRAPH_GUI_NS {
                     .AddInput("SplitLambda", SR_SRLM_NS::DataTypeClass::Float)
                     .AddInput("Near", SR_SRLM_NS::DataTypeClass::Float)
                     .AddInput("Far", SR_SRLM_NS::DataTypeClass::Float)
-                    .AddInput("Depth", SR_SRLM_NS::DataTypeClass::Bool)
-                    .AddInput("DynamicResizing", SR_SRLM_NS::DataTypeClass::Bool)
-                    .AddInput("Smooth", SR_SRLM_NS::DataTypeClass::Int32)
-                    .AddInput("Layers", SR_SRLM_NS::DataTypeClass::Int32)
+                    .AddInput("Frame Buffer Settings", SR_SRLM_NS::DataTypeManager::Instance().CreateByName("FrameBufferSettings"))
                     .AddOutput(SR_SRLM_NS::DataTypeClass::Flow)
                 ;
                 break;
             }
-            //case SR_SRLM_NS::NODE_FRAME_BUFFER_SETTINGS: {
-            //    node.SetName("Frame Buffer Settings")
-            //        .SetType(NodeType::Blueprint)
-            //        .AddInput("Size", SR_SRLM_NS::DataTypeClass::Struct, SR_SRLM_NS::DATA_TYPE_INT_VECTOR2)
-            //        .AddInput("Pre Scale", SR_SRLM_NS::DataTypeClass::Struct, SR_SRLM_NS::DATA_TYPE_FLOAT_VECTOR2)
-            //        .AddInput("Depth Enabled", SR_SRLM_NS::DataTypeClass::Bool)
-            //        .AddInput("DynamicResizing", SR_SRLM_NS::DataTypeClass::Bool)
-            //        .AddInput("Smooth", SR_SRLM_NS::DataTypeClass::Int32)
-            //        .AddInput("Layers", SR_SRLM_NS::DataTypeClass::Int32)
-            //        .AddOutput("Result", SR_SRLM_NS::DataTypeClass::Struct, SR_SRLM_NS::DATA_TYPE_FRAME_BUFFER_SETTINGS)
-            //    ;
-            //    break;
-            //}
+            case SR_SRLM_NS::NODE_FRAME_BUFFER_SETTINGS: {
+                node.SetName("Frame Buffer Settings")
+                    .SetType(NodeType::Blueprint)
+                    .AddInput("Size", SR_SRLM_NS::DataTypeManager::Instance().CreateByName("IVector2"))
+                    .AddInput("Pre Scale", SR_SRLM_NS::DataTypeManager::Instance().CreateByName("FVector2"))
+                    .AddInput("Depth Enabled", SR_SRLM_NS::DataTypeClass::Bool)
+                    .AddInput("Dynamic Resizing", SR_SRLM_NS::DataTypeClass::Bool)
+                    .AddInput("Smooth", SR_SRLM_NS::DataTypeClass::Int32)
+                    .AddInput("Layers", SR_SRLM_NS::DataTypeClass::Int32)
+                    .AddOutput("Result", SR_SRLM_NS::DataTypeManager::Instance().CreateByName("FrameBufferSettings"))
+                ;
+                break;
+            }
             default:
                 SRHalt("Invalid identifier");
                 break;

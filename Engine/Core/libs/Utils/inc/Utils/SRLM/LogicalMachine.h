@@ -11,6 +11,9 @@
 #include <Utils/ResourceManager/FileWatcher.h>
 
 namespace SR_SRLM_NS {
+    static constexpr uint64_t NODE_CREATE_STRUCT = SR_COMPILE_TIME_CRC32_STR("CREATE_STRUCT");
+    static constexpr uint64_t NODE_BREAK_STRUCT = SR_COMPILE_TIME_CRC32_STR("BREAK_STRUCT");
+
     static constexpr uint64_t NODE_BOOL_CONDITION = SR_COMPILE_TIME_CRC32_STR("BOOL_CONDITION");
     static constexpr uint64_t NODE_BOOL_AND = SR_COMPILE_TIME_CRC32_STR("BOOL_AND");
     static constexpr uint64_t NODE_BOOL_OR = SR_COMPILE_TIME_CRC32_STR("BOOL_OR");

@@ -42,7 +42,7 @@ namespace SR_GRAPH_GUI_NS {
         m_node = nullptr;
     }
 
-    ImColor Pin::GetIconColor(const PinType &type) {
+    ImColor Pin::GetIconColor(const PinType& type) {
         switch (type) {
             case PinType::Flow:   return ImColor(255, 255, 255);
             case PinType::Bool:   return ImColor(220,  48,  48);
@@ -56,14 +56,20 @@ namespace SR_GRAPH_GUI_NS {
             case PinType::UInt16:
             case PinType::UInt32:
             case PinType::UInt64:
-                return ImColor( 68, 201, 156);
+                return ImColor(68, 201, 156);
+            case PinType::Struct:
+                return ImColor(51, 150, 215);
+            case PinType::Enum:
+                return ImColor(255, 48,  48);
+            case PinType::Array:
+                return ImColor(218, 0, 183);
                 /// case PinType::Numeric:  return ImColor( 68, 101, 056);
             /// case PinType::Object:   return ImColor( 51, 150, 215);
             /// case PinType::Function: return ImColor(218,   0, 183);
             /// case PinType::Delegate: return ImColor(255,  48,  48);
             /// case PinType::Event:    return ImColor(255,  48,  48);
             default:
-                SRAssertOnce(false);
+                SRHalt("Unknown icon type!");
                 return ImColor(0, 0, 0);
         }
     }
@@ -81,15 +87,18 @@ namespace SR_GRAPH_GUI_NS {
             case PinType::UInt32:
             case PinType::UInt64:
                 return IconType::Circle;
-            case PinType::Float:    return IconType::Circle;
-            case PinType::String:   return IconType::Circle;
+            case PinType::Float:  return IconType::Circle;
+            case PinType::String: return IconType::Circle;
+            case PinType::Struct: return IconType::Square;
             /// case PinType::Numeric:  return IconType::Circle;
             /// case PinType::Object:   return IconType::Circle;
             /// case PinType::Function: return IconType::Circle;
             /// case PinType::Delegate: return IconType::Square;
             /// case PinType::Event:    return IconType::Square;
+            case PinType::Enum: return IconType::Circle;
+            case PinType::Array: return IconType::Grid;
             default:
-                SRAssertOnce(false);
+                SRHalt("Unknown icon type!");
                 return IconType::Square;
         }
     }
@@ -159,8 +168,13 @@ namespace SR_GRAPH_GUI_NS {
             return false;
         }
 
-        if (IsLinked() && GetType() == PinType::Flow && GetKind() == PinKind::Output) {
-            return false;
+        if (IsLinked()) {
+            if (GetType() == PinType::Flow && GetKind() == PinKind::Output) {
+                return false;
+            }
+            else if (GetType() != PinType::Flow && GetKind() == PinKind::Input) {
+                return false;
+            }
         }
 
         if (GetNode()->IsDot() && IsLinked()) {

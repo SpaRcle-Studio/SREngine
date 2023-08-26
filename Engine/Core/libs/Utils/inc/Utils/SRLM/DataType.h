@@ -198,6 +198,7 @@ namespace SR_SRLM_NS {
 
         explicit DataTypeStruct(Hash name)
             : DataType()
+            , m_name(name)
         { }
 
         ~DataTypeStruct() override;
@@ -205,6 +206,8 @@ namespace SR_SRLM_NS {
     public:
         SR_NODISCARD DataType* Copy() const override;
         SR_NODISCARD std::vector<DataType*> GetMetaData() const override;
+        SR_NODISCARD const std::map<Hash, DataType*>& GetVariables() const { return m_variables; };
+        SR_NODISCARD Hash GetStructName() const { return m_name; };
         void AddVariable(Hash name, DataType* pData);
 
     private:
