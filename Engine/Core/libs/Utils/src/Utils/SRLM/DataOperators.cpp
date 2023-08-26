@@ -222,7 +222,7 @@ namespace SR_SRLM_NS {
         DataType* isEqual = DataOperatorIsEqual::Calculate(pFirst, pSecond);
         DataType* result = DataTypeAllocator::Instance().Allocate(DataTypeClass::Bool);
 
-        return isGreater || isEqual ? result->SetCustomValue(true) : result;
+        return isGreater->GetBool() || isEqual->GetBool() ? result->SetCustomValue(true) : result;
     }
 
     DataType* DataOperatorIsLessOrEqual::Calculate(DataType* pFirst, DataType* pSecond) {
@@ -230,6 +230,6 @@ namespace SR_SRLM_NS {
         DataType* isEqual = DataOperatorIsEqual::Calculate(pFirst, pSecond);
         DataType* result = DataTypeAllocator::Instance().Allocate(DataTypeClass::Bool);
 
-        return isLess || isEqual ? result->SetCustomValue(true) : result;
+        return isLess->GetBool() || isEqual->GetBool() ? result->SetCustomValue(true) : result;
     }
 }
