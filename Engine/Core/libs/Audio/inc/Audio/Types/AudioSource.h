@@ -25,16 +25,18 @@ namespace SR_AUDIO_NS
 
         SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SR_UTILS_NS::SavableFlags flags) const override;
 
-        float_t GetVolume();
-        void SetVolume(float_t volume);
+        float GetVolume();
+        void SetVolume(float volume);
 
         static SR_UTILS_NS::Component* LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage);
+
+
 
     private:
         PlayParams m_params = PlayParams::GetDefault();
         SR_UTILS_NS::Path m_path;
-        float_t m_volume = 1.f;
 
+        float m_volume = 0;
         void OnDestroy() override;
 
     };

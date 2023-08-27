@@ -30,11 +30,16 @@ namespace SR_AUDIO_NS
         return pMarshal;
     }
 
-    float_t AudioSource::GetVolume() {
-        return std::roundf(m_volume * 10)/10;
+    float AudioSource::GetVolume() {
+
+        return m_volume;
+
     }
-    void AudioSource::SetVolume(float_t volume) {
-        m_volume = std::roundf(volume * 10)/10;
+    void AudioSource::SetVolume(float volume) {
+
+        m_volume = volume;
+        m_volume = volume;
+
     }
 
     SR_UTILS_NS::Path AudioSource::GetPath() {

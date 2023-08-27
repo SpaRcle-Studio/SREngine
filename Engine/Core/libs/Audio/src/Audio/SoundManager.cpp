@@ -72,7 +72,10 @@ namespace SR_AUDIO_NS {
             return true;
         }
 
-
+        if(!(pPlayData->params.library.has_value()))
+        {
+            pPlayData->params = PlayParams::GetDefault();
+        }
         auto&& pContext = pPlayData->pData->pContext = GetContext(pPlayData->params);
 
 
@@ -272,7 +275,6 @@ namespace SR_AUDIO_NS {
     SoundContext* SoundManager::GetContext(const PlayParams& params) {
         if(params.library == std::nullopt) {
             SRHalt("Params == std::nullopt");
-
             return nullptr;
         }
 
