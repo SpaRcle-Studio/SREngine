@@ -53,6 +53,7 @@ namespace SR_AUDIO_NS {
 
     protected:
         SR_NODISCARD SoundContext* GetContext(const PlayParams& params);
+        SR_NODISCARD AudioLibrary GetRelevantLibrary() const;
 
         void DestroyPlayData(PlayData* pPlayData);
 

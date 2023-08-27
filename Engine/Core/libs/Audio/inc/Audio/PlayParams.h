@@ -11,6 +11,14 @@
 #include <Audio/SoundFormat.h>
 
 namespace SR_AUDIO_NS {
+    SR_ENUM_NS_CLASS_T(PlayParamType, uint8_t,
+        Async, Loop, Library,
+        Relative, Gain, MinGain,
+        Pitch, ConeInnerAngle, UniqueId,
+        Position, Direction, Velocity,
+        Orientation, Device, MaxGain
+    );
+
     struct PlayParams {
         std::optional<bool> async;
         std::optional<bool> loop;

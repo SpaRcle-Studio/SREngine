@@ -95,14 +95,25 @@ namespace SR_AUDIO_NS {
         alSourcePlay(*alSource);
     }
 
-    void OpenALContext::ApplyParams(SoundSource pSource, const PlayParams& params) {
+    void OpenALContext::ApplyParamImpl(SoundSource pSource, PlayParamType paramType, const void* pValue) {
         ALuint* alSource = reinterpret_cast<ALuint*>(pSource);
 
-        SR_AL_CALL(alSourcef, *alSource, AL_PITCH, params.pitch.value());
-        SR_AL_CALL(alSourcef, *alSource, AL_GAIN, params.gain.value());
+        switch (paramType) {
+            case PlayParamType::Pitch:
+                SR_AL_CALL(alSourcef, *alSource, AL_PITCH, *(float_t*)pValue);
+                break;
+            case PlayParamType::Gain:
+                SR_AL_CALL(alSourcef, *alSource, AL_GAIN, *(float_t*)pValue);
+                break;
+            case PlayParamType::Loop:
+                SR_AL_CALL(alSourcei, *alSource, AL_LOOPING, *(bool*)pValue ? AL_TRUE : AL_FALSE);
+            default:
+                break; // (кирпич)
+
+        }
+
         SR_AL_CALL(alSource3f, *alSource, AL_POSITION, 0, 0, 0);
         SR_AL_CALL(alSource3f, *alSource, AL_VELOCITY, 0, 0, 0);
-        SR_AL_CALL(alSourcei, *alSource, AL_LOOPING, params.loop ? AL_TRUE : AL_FALSE);
     }
 
     bool OpenALContext::IsPlaying(SoundSource pSource) const {

@@ -31,7 +31,7 @@ namespace SR_AUDIO_NS {
                 int32_t sampleRate,
                 SoundFormat format) override;
 
-        void ApplyParams(SoundSource pSource, const PlayParams& params) override;
+        void ApplyParamImpl(SoundSource pSource, PlayParamType paramType, const void* pValue) override;
 
         bool FreeBuffer(SoundBuffer* buffer) override;
         bool FreeSource(SoundSource* pSource) override;
