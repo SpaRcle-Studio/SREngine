@@ -13,6 +13,8 @@
 #include "../Utils/src/Utils/SRLM/DataType.cpp"
 #include "../Utils/src/Utils/SRLM/DataTypeManager.cpp"
 #include "../Utils/src/Utils/SRLM/DataOperators.cpp"
+#include "../Utils/src/Utils/SRLM/LogicalNode.cpp"
+#include "../Utils/src/Utils/SRLM/LogicalNodeManager.cpp"
 
 #include "../Utils/src/Utils/Events/EventManager.cpp"
 #include "../Utils/src/Utils/Events/Event.cpp"
@@ -77,6 +79,7 @@
 #include "../Utils/src/Utils/Common/Enumerations.cpp"
 #include "../Utils/src/Utils/Common/EnumReflector.cpp"
 #include "../Utils/src/Utils/Common/Hashes.cpp"
+#include "../Utils/src/Utils/Common/HashManager.cpp"
 
 #include "../Utils/src/Utils/Game/LookAtComponent.cpp"
 

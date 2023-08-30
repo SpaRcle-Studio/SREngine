@@ -45,6 +45,8 @@ namespace SR_SRLM_NS {
     class DataTypeStruct;
 
     class LogicalMachine : public SR_UTILS_NS::NonCopyable {
+    public:
+        SR_INLINE_STATIC uint16_t VERSION = 1000;
 
     };
 }

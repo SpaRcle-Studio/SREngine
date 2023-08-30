@@ -4,6 +4,7 @@
 
 #include <Utils/SRLM/DataTypeManager.h>
 #include <Utils/SRLM/DataType.h>
+#include <Utils/Common/HashManager.h>
 #include <Utils/ResourceManager/ResourceManager.h>
 #include <Utils/Xml.h>
 
@@ -29,8 +30,8 @@ namespace SR_SRLM_NS {
             return new DataTypeEnum(0, pReflector);
         }
 
-        if (auto&& pIt = m_strings.find(hashName); pIt != m_strings.end()) {
-            SR_ERROR("DataTypeManager::CreateByName() : failed to create \"" + pIt->second + "\"!");
+        if (auto&& stringName = SR_UTILS_NS::HashManager::Instance().HashToString(hashName); !stringName.empty()) {
+            SR_ERROR("DataTypeManager::CreateByName() : failed to create \"" + stringName + "\"!");
         }
         else {
             SRHalt("Type by hash \"" + SR_UTILS_NS::ToString(hashName) + "\" not found!");
@@ -39,19 +40,8 @@ namespace SR_SRLM_NS {
         return nullptr;
     }
 
-    const std::string& DataTypeManager::HashToString(uint64_t hash) const {
-        SR_LOCK_GUARD;
-        static std::string gDefault;
-        if (auto&& pIt = m_strings.find(hash); pIt != m_strings.end()) {
-            return pIt->second;
-        }
-        return gDefault;
-    }
-
     void DataTypeManager::Clear() {
         SR_LOCK_GUARD;
-
-        m_strings.clear();
 
         for (auto&& [hash, pData] : m_structs) {
             delete pData;
@@ -72,19 +62,15 @@ namespace SR_SRLM_NS {
 
         for (auto&& xmlStruct : xmlRoot.GetNodes("Struct")) {
             auto&& structName = xmlStruct.GetAttribute("Name").ToString();
-            auto&& structHash = SR_HASH_STR(structName);
-            m_strings[structHash] = structName;
+            auto&& structHash = SR_UTILS_NS::HashManager::Instance().AddHash(structName);
 
             auto&& pStruct = m_structs[structHash] = new DataTypeStruct(structHash);
 
             for (auto&& xmlVar : xmlStruct.GetNodes()) {
                 auto&& varName = xmlVar.GetAttribute("Name");
 
-                auto&& nameHash = SR_HASH_STR(varName.ToString());
-                m_strings[nameHash] = varName.ToString();
-
-                auto&& typeHash = SR_HASH_STR(xmlVar.Name());
-                m_strings[typeHash] = xmlVar.Name();
+                auto&& nameHash = SR_UTILS_NS::HashManager::Instance().AddHash(varName.ToString());
+                auto&& typeHash = SR_UTILS_NS::HashManager::Instance().AddHash(xmlVar.Name());
 
                 if (auto&& pData = CreateByName(typeHash)) {
                     pStruct->AddVariable(nameHash, pData);

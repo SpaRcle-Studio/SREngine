@@ -128,7 +128,7 @@ namespace SR_UTILS_NS {
         return doc;
     }
 
-    Xml::Node Xml::Node::AppendChild(const std::string &name)  {
+    Xml::Node Xml::Node::AppendChild(const std::string &name) {
         if (!m_valid) {
             SRAssert2(false,"Node::AppendChild() : node is not valid!");
             g_xml_last_error = -2;
@@ -138,14 +138,14 @@ namespace SR_UTILS_NS {
         return Node(m_node.append_child(name.c_str()));
     }
 
-    std::vector<Xml::Node> Xml::Node::GetNodes() const  {
+    std::vector<Xml::Node> Xml::Node::GetNodes() const {
         if (!m_valid) {
             SRAssert2(false,"Node::GetNodes() : node is not valid!");
             g_xml_last_error = -2;
             return {};
         }
 
-        auto nodes = std::vector<Node>();
+        auto&& nodes = std::vector<Node>();
         for (const auto child : m_node.children())
             nodes.emplace_back(Node(child));
 
@@ -167,7 +167,7 @@ namespace SR_UTILS_NS {
     }
 
 
-    std::vector<Xml::Node> Xml::Node::GetNodes(const std::string &name) const  {
+    std::vector<Xml::Node> Xml::Node::GetNodes(const std::string &name) const {
         if (!m_valid) {
             SRAssert2(false,"Node::GetNodes() : node is not valid!");
             g_xml_last_error = -2;

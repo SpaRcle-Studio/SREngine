@@ -6,7 +6,6 @@
 #define SRENGINE_HASHES_H
 
 #include <Utils/stdInclude.h>
-
 #include <xxHash/xxhash.h>
 
 namespace SR_UTILS_NS {

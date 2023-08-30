@@ -16,7 +16,6 @@ namespace SR_SRLM_NS {
         using Hash = uint64_t;
         using Structs = std::unordered_map<Hash, DataTypeStruct*>;
     public:
-        SR_NODISCARD const std::string& HashToString(Hash hash) const;
         SR_NODISCARD DataType* CreateByName(Hash hashName);
         SR_NODISCARD DataType* CreateByName(const std::string& name);
         SR_NODISCARD const Structs& GetStructs() const { return m_structs; }
@@ -28,7 +27,6 @@ namespace SR_SRLM_NS {
         void Clear();
 
     private:
-        std::unordered_map<Hash, std::string> m_strings;
         Structs m_structs;
         SR_UTILS_NS::FileWatcher::Ptr m_watcher;
 

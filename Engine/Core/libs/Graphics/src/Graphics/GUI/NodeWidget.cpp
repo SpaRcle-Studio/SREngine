@@ -8,6 +8,7 @@
 
 #include <Utils/SRLM/LogicalMachine.h>
 #include <Utils/SRLM/DataTypeManager.h>
+#include <Utils/Common/HashManager.h>
 
 namespace SR_GRAPH_GUI_NS {
     NodeWidget::NodeWidget(std::string name, SR_MATH_NS::IVector2 size)
@@ -267,7 +268,7 @@ namespace SR_GRAPH_GUI_NS {
         auto&& breakStructsNodesMenu = m_creationPopup->AddMenu("Break Structs");
 
         for (auto&& [hashName, pStruct] : SR_SRLM_NS::DataTypeManager::Instance().GetStructs()) {
-            auto&& structName = SR_SRLM_NS::DataTypeManager::Instance().HashToString(pStruct->GetStructName());
+            auto&& structName = SR_UTILS_NS::HashManager::Instance().HashToString(pStruct->GetStructName());
 
             createStructsNodesMenu.AddMenu(structName).SetAction([structName, pStruct = pStruct](const SR_GRAPH_GUI_NS::DrawPopupContext& context)
             {
@@ -281,7 +282,7 @@ namespace SR_GRAPH_GUI_NS {
                 node.SetName(structName);
 
                 for (auto&& [variableHashName, pVariable] : pStruct->GetVariables()) {
-                    node.AddInput(SR_SRLM_NS::DataTypeManager::Instance().HashToString(variableHashName), pVariable->Copy());
+                    node.AddInput(SR_UTILS_NS::HashManager::Instance().HashToString(variableHashName), pVariable->Copy());
                 }
 
                 node.AddOutput(structName, pStruct->Copy());
@@ -303,7 +304,7 @@ namespace SR_GRAPH_GUI_NS {
                 node.AddInput(structName, pStruct->Copy());
 
                 for (auto&& [variableHashName, pVariable] : pStruct->GetVariables()) {
-                    node.AddOutput(SR_SRLM_NS::DataTypeManager::Instance().HashToString(variableHashName), pVariable->Copy());
+                    node.AddOutput(SR_UTILS_NS::HashManager::Instance().HashToString(variableHashName), pVariable->Copy());
                 }
 
                 context.pWidget->AddNode(pNode);
@@ -376,7 +377,18 @@ namespace SR_GRAPH_GUI_NS {
     }
 
     void NodeWidget::TopPanelSave() {
+        auto&& path = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Engine/RenderTechniques/Sample.xml");
 
+        SR_XML_NS::Document xmlDocument;
+
+        auto&& xmlLogicalMachine = xmlDocument.Root().AppendNode("LogicalMachine");
+        auto&& xmlNodes = xmlLogicalMachine.AppendNode("Nodes");
+
+        for (auto&& [uid, pNode] : m_nodes) {
+            auto&& xmlNode = xmlNodes.AppendNode("Node");
+
+            xmlNode.AppendAttribute("UID", uid);
+        }
     }
 
     void NodeWidget::TopPanelClose() {
