@@ -75,12 +75,17 @@ endif()
 
 # --------------------------------------------------------------------------------------
 
+set(SR_UTILS_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR})
+set(SR_UTILS_BINARY_DIR ${CMAKE_CURRENT_BINARY_DIR})
+
+include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/CopyFiles.cmake)
+
 add_custom_target(CopyUtilsFiles)
 add_custom_command(TARGET CopyUtilsFiles
     PRE_BUILD
     COMMAND ${CMAKE_COMMAND}
-        -DSR_UTILS_SOURCE_DIR=${CMAKE_CURRENT_SOURCE_DIR}
-        -DSR_UTILS_BINARY_DIR=${CMAKE_CURRENT_BINARY_DIR}
+        -DSR_UTILS_SOURCE_DIR=${SR_UTILS_SOURCE_DIR}
+        -DSR_UTILS_BINARY_DIR=${SR_UTILS_BINARY_DIR}
         -DSR_ICU=${SR_ICU}
         -DSR_TRACY_ENABLE=${SR_TRACY_ENABLE}
         -P "${CMAKE_CURRENT_SOURCE_DIR}/cmake/CopyFiles.cmake"
