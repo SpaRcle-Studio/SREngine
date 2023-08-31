@@ -69,7 +69,7 @@ namespace SR_GRAPH_UI_NS {
             return;
         }
 
-        auto&& pShader = m_material->GetShader();
+        auto&& pShader = GetPipeline()->GetCurrentShader();
         auto&& uboManager = Memory::UBOManager::Instance();
 
         if (m_dirtyMaterial)

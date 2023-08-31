@@ -246,7 +246,7 @@ namespace SR_WORLD_NS {
             }
             else {
                 pRegion->Unload();
-                SaveRegion(pRegion, pContext);
+                SaveRegion(GetRegionsPath(), pRegion, pContext);
                 delete pRegion;
                 pIt = m_regions.erase(pIt);
 				m_debugDirty = true;
@@ -326,15 +326,13 @@ namespace SR_WORLD_NS {
         }
     }
 
-    void SceneCubeChunkLogic::SaveRegion(Region* pRegion, SR_HTYPES_NS::DataStorage* pContext) const {
+    void SceneCubeChunkLogic::SaveRegion(const SR_UTILS_NS::Path& path, Region* pRegion, SR_HTYPES_NS::DataStorage* pContext) const {
         SR_TRACY_ZONE;
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
-        auto&& regionsPath = GetRegionsPath();
+        path.Create();
 
-        regionsPath.Make(Path::Type::Folder);
-
-        auto&& regPath = regionsPath.Concat(pRegion->GetPosition().ToString()).ConcatExt("dat");
+        auto&& regPath = path.Concat(pRegion->GetPosition().ToString()).ConcatExt("dat");
         if (auto&& pRegionMarshal = pRegion->Save(pContext); pRegionMarshal) {
             if (pRegionMarshal->Valid()) {
                 pRegionMarshal->Save(regPath);
@@ -375,7 +373,7 @@ namespace SR_WORLD_NS {
         return std::make_pair(currentRegion, currentChunk);
     }
 
-    bool SceneCubeChunkLogic::Save(const Path &path) {
+    bool SceneCubeChunkLogic::Save(const Path& path) {
         SR_TRACY_ZONE;
         SR_LOCK_GUARD
 
@@ -388,7 +386,7 @@ namespace SR_WORLD_NS {
         auto&& pContext = SR_THIS_THREAD->GetContext();
 
         for (auto&& [position, pRegion] : m_regions) {
-            SaveRegion(pRegion, pContext);
+            SaveRegion(path.Concat("regions"), pRegion, pContext);
         }
 
         auto&& pSceneRootMarshal = m_scene->SaveComponents(nullptr, SAVABLE_FLAG_NONE);

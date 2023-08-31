@@ -66,7 +66,10 @@ namespace SR_UTILS_NS {
                     return true;
                 }
 
-                SRAssert(m_historyPC < m_history.size());
+                if (m_historyPC >= m_history.size()) {
+                    SRHalt("Invalid history PC!");
+                    return false;
+                }
 
                 auto&& pPrevCmd = m_history[m_historyPC];
 

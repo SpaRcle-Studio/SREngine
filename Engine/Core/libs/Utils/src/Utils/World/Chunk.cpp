@@ -123,11 +123,9 @@ namespace SR_WORLD_NS {
                 if (auto&& ptr = GameObject::Load(*pMarshal, nullptr)) {
                     auto&& pTransform = ptr->GetTransform();
 
-                    if (pTransform->GetMeasurement() == SR_UTILS_NS::Measurement::Space2D) {
-                        continue;
+                    if (pTransform->GetMeasurement() == SR_UTILS_NS::Measurement::Space3D) {
+                        pTransform->GlobalTranslate(GetWorldPosition());
                     }
-
-                    pTransform->GlobalTranslate(GetWorldPosition());
 
                     m_preloaded.emplace_back(ptr);
                 }
