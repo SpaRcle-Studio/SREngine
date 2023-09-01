@@ -19,7 +19,7 @@ namespace SR_GRAPH_NS {
             case MeshType::Wireframe:
                 return new SR_GTYPES_NS::DebugWireframeMesh();
 
-            case MeshType::Sprite2D:
+            case MeshType::Sprite:
                 return new SR_GTYPES_NS::Sprite();
 
             case MeshType::Skinned:

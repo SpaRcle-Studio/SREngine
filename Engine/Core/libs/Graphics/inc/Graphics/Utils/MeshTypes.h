@@ -13,7 +13,7 @@ namespace SR_GRAPH_NS {
          Static = 1,
          Wireframe = 2,
          Skinned = 3,
-         Sprite2D = 4,
+         Sprite = 4,
          Procedural = 5,
          Line = 6
     )

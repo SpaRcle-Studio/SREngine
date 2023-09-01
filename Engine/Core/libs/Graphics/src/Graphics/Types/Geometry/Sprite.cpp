@@ -2,7 +2,6 @@
 // Created by Monika on 30.07.2022.
 //
 
-#include "../../../../../../../../cmake-build-debug/Engine/Core/libs/Utils/include/Utils/Types/RawMesh.h"
 #include "../../../../../../../../cmake-build-debug/Engine/Core/libs/Utils/include/Utils/Types/DataStorage.h"
 
 #include <Graphics/Types/Geometry/Sprite.h>
@@ -12,18 +11,18 @@
 #include <Graphics/Types/Shader.h>
 
 namespace SR_GTYPES_NS {
-    SR_REGISTER_COMPONENT(Sprite);
+    SR_REGISTER_COMPONENT(Sprite)
 
     Sprite::Sprite()
-        : Super(MeshType::Sprite2D)
+        : Super(MeshType::Sprite)
     {  }
 
     std::string Sprite::GetMeshIdentifier() const {
-        static const std::string id = "Sprite2DFromMemory";
+        static const std::string id = "SpriteFromMemory";
         return id;
     }
 
-    SR_UTILS_NS::Component* Sprite::LoadComponent(SR_HTYPES_NS::Marshal &marshal, const SR_HTYPES_NS::DataStorage *dataStorage) {
+    SR_UTILS_NS::Component* Sprite::LoadComponent(SR_HTYPES_NS::Marshal &marshal, const SR_HTYPES_NS::DataStorage *dataStorage) { //Нафига dataStorage, если он не используется, чёртов полиморфизм
         SR_MAYBE_UNUSED const auto&& type = static_cast<MeshType>(marshal.Read<int32_t>());
 
         const auto&& material = marshal.Read<std::string>();
@@ -35,7 +34,7 @@ namespace SR_GTYPES_NS {
                 pSprite->SetMaterial(pMaterial);
             }
             else {
-                SR_ERROR("Sprite::LoadComponent() : failed to load material! Name: " + material);
+                SR_ERROR("Sprite::LoadComponent() : failed to load material! Name: " + material)
             }
         }
 
