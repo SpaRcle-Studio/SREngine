@@ -84,7 +84,7 @@ namespace SR_GTYPES_NS {
             return true;
         }
 
-        if (m_hasErrors || !IsCanCalculate()) {
+        if (m_hasErrors || !IsCalculatable()) {
             return false;
         }
 
@@ -337,8 +337,8 @@ namespace SR_GTYPES_NS {
         }
     }
 
-    bool Text::IsCanCalculate() const {
-        return Mesh::IsCanCalculate() && !m_text.empty() && m_font;
+    bool Text::IsCalculatable() const {
+        return Mesh::IsCalculatable() && !m_text.empty() && m_font;
     }
 
     void Text::OnLoaded() {

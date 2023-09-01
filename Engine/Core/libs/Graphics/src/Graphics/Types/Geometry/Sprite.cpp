@@ -2,54 +2,54 @@
 // Created by Monika on 30.07.2022.
 //
 
-#include <Utils/Types/RawMesh.h>
-#include <Utils/Types/DataStorage.h>
+#include "../../../../../../../../cmake-build-debug/Engine/Core/libs/Utils/include/Utils/Types/RawMesh.h"
+#include "../../../../../../../../cmake-build-debug/Engine/Core/libs/Utils/include/Utils/Types/DataStorage.h"
 
-#include <Graphics/UI/Sprite2D.h>
+#include <Graphics/Types/Geometry/Sprite.h>
 #include <Graphics/Types/Material.h>
 #include <Graphics/Pipeline/Environment.h>
 #include <Graphics/Types/Uniforms.h>
 #include <Graphics/Types/Shader.h>
 
-namespace SR_GRAPH_UI_NS {
-    SR_REGISTER_COMPONENT(Sprite2D);
+namespace SR_GTYPES_NS {
+    SR_REGISTER_COMPONENT(Sprite);
 
-    Sprite2D::Sprite2D()
+    Sprite::Sprite()
         : Super(MeshType::Sprite2D)
     {  }
 
-    std::string Sprite2D::GetMeshIdentifier() const {
+    std::string Sprite::GetMeshIdentifier() const {
         static const std::string id = "Sprite2DFromMemory";
         return id;
     }
 
-    SR_UTILS_NS::Component* Sprite2D::LoadComponent(SR_HTYPES_NS::Marshal &marshal, const SR_HTYPES_NS::DataStorage *dataStorage) {
+    SR_UTILS_NS::Component* Sprite::LoadComponent(SR_HTYPES_NS::Marshal &marshal, const SR_HTYPES_NS::DataStorage *dataStorage) {
         SR_MAYBE_UNUSED const auto&& type = static_cast<MeshType>(marshal.Read<int32_t>());
 
         const auto&& material = marshal.Read<std::string>();
 
-        auto&& pSprite = new Sprite2D();
+        auto&& pSprite = new Sprite();
 
         if (material != "None") {
             if (auto&& pMaterial = SR_GTYPES_NS::Material::Load(material)) {
                 pSprite->SetMaterial(pMaterial);
             }
             else {
-                SR_ERROR("Sprite2D::LoadComponent() : failed to load material! Name: " + material);
+                SR_ERROR("Sprite::LoadComponent() : failed to load material! Name: " + material);
             }
         }
 
         return pSprite;
     }
 
-    bool Sprite2D::Calculate() {
+    bool Sprite::Calculate() {
         if (IsCalculated()) {
             return true;
         }
 
         FreeVideoMemory();
 
-        if (!IsCanCalculate()) {
+        if (!IsCalculatable()) {
             return false;
         }
 
@@ -60,7 +60,7 @@ namespace SR_GRAPH_UI_NS {
         return IndexedMesh::Calculate();
     }
 
-    void Sprite2D::Draw() {
+    void Sprite::Draw() {
         if (!IsActive()) {
             return;
         }
@@ -69,7 +69,7 @@ namespace SR_GRAPH_UI_NS {
             return;
         }
 
-        auto&& pShader = GetPipeline()->GetCurrentShader();
+		auto&& pShader = GetPipeline()->GetCurrentShader();
         auto&& uboManager = Memory::UBOManager::Instance();
 
         if (m_dirtyMaterial)
@@ -111,7 +111,7 @@ namespace SR_GRAPH_UI_NS {
         }
     }
 
-    SR_HTYPES_NS::Marshal::Ptr Sprite2D::Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SR_UTILS_NS::SavableFlags flags) const {
+    SR_HTYPES_NS::Marshal::Ptr Sprite::Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SR_UTILS_NS::SavableFlags flags) const {
         pMarshal = Super::Save(pMarshal, flags);
 
         pMarshal->Write(m_material ? m_material->GetResourceId() : "None");
@@ -119,21 +119,21 @@ namespace SR_GRAPH_UI_NS {
         return pMarshal;
     }
 
-    std::vector<uint32_t> Sprite2D::GetIndices() const {
+    std::vector<uint32_t> Sprite::GetIndices() const {
         return SR_SPRITE_INDICES;
     }
 
-    void Sprite2D::UseMaterial() {
+    void Sprite::UseMaterial() {
         Super::UseMaterial();
         UseModelMatrix();
     }
 
-    void Sprite2D::UseModelMatrix() {
+    void Sprite::UseModelMatrix() {
         GetRenderContext()->GetCurrentShader()->SetMat4(SHADER_MODEL_MATRIX, m_modelMatrix);
         Super::UseModelMatrix();
     }
 
-    SR_UTILS_NS::Component* Sprite2D::CopyComponent() const {
+    SR_UTILS_NS::Component* Sprite::CopyComponent() const {
         return MeshComponent::CopyComponent();
     }
 }

@@ -28,7 +28,7 @@ namespace SR_GTYPES_NS {
 
         FreeVideoMemory();
 
-        if (!IsCanCalculate()) {
+        if (!IsCalculatable()) {
             return false;
         }
 
@@ -140,8 +140,8 @@ namespace SR_GTYPES_NS {
         return GetRawMesh()->GetIndices(GetMeshId());
     }
 
-    bool Mesh3D::IsCanCalculate() const {
-        return IsValidMeshId() && Mesh::IsCanCalculate();
+    bool Mesh3D::IsCalculatable() const {
+        return IsValidMeshId() && Mesh::IsCalculatable();
     }
 
     void Mesh3D::UseMaterial() {

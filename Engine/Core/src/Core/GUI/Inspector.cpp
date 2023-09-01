@@ -14,7 +14,7 @@
 #include <Physics/3D/Rigidbody3D.h>
 #include <Physics/2D/Rigidbody2D.h>
 
-#include <Graphics/UI/Sprite2D.h>
+#include <Graphics/Types/Geometry/Sprite.h>
 #include <Graphics/UI/Anchor.h>
 #include <Graphics/UI/Canvas.h>
 #include <Graphics/Types/Geometry/ProceduralMesh.h>
@@ -185,7 +185,7 @@ namespace Framework::Core::GUI {
             copyPtrComponent = DrawComponent<SR_GTYPES_NS::Mesh3D>(copyPtrComponent, "Mesh3D", index);
             copyPtrComponent = DrawComponent<SR_GTYPES_NS::SkinnedMesh>(copyPtrComponent, "SkinnedMesh", index);
             copyPtrComponent = DrawComponent<SR_GTYPES_NS::ProceduralMesh>(copyPtrComponent, "ProceduralMesh", index);
-            copyPtrComponent = DrawComponent<SR_GRAPH_NS::UI::Sprite2D>(copyPtrComponent, "Sprite2D", index);
+            copyPtrComponent = DrawComponent<SR_GTYPES_NS::Sprite>(copyPtrComponent, "Sprite", index);
             copyPtrComponent = DrawComponent<SR_GRAPH_NS::UI::Anchor>(copyPtrComponent, "Anchor", index);
             copyPtrComponent = DrawComponent<SR_GRAPH_NS::UI::Canvas>(copyPtrComponent, "Canvas", index);
             copyPtrComponent = DrawComponent<SR_PTYPES_NS::Rigidbody3D>(copyPtrComponent, "Rigidbody3D", index);

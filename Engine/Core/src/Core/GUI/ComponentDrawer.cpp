@@ -33,7 +33,7 @@
 #include <Graphics/Types/Geometry/ProceduralMesh.h>
 #include <Graphics/GUI/Utils.h>
 #include <Graphics/Types/Texture.h>
-#include <Graphics/UI/Sprite2D.h>
+#include <Graphics/Types/Geometry/Sprite.h>
 #include <Graphics/Types/Material.h>
 #include <Graphics/Types/Camera.h>
 #include <Graphics/UI/Anchor.h>
@@ -301,7 +301,7 @@ namespace SR_CORE_NS::GUI {
     }
 
     void ComponentDrawer::DrawComponent(SR_GTYPES_NS::Mesh3D*& pComponent, EditorGUI* context, int32_t index) {
-        if (!pComponent->IsCanCalculate())
+        if (!pComponent->IsCalculatable())
             ImGui::TextColored(ImVec4(1, 0, 0, 1), "Invalid mesh!");
 
         if (!pComponent->IsCalculated())
@@ -353,7 +353,7 @@ namespace SR_CORE_NS::GUI {
     }
 
     void ComponentDrawer::DrawComponent(SR_GTYPES_NS::SkinnedMesh*& pComponent, EditorGUI* context, int32_t index) {
-        if (!pComponent->IsCanCalculate())
+        if (!pComponent->IsCalculatable())
             ImGui::TextColored(ImVec4(1, 0, 0, 1), "Invalid mesh!");
 
         if (!pComponent->IsCalculated())
@@ -540,8 +540,8 @@ namespace SR_CORE_NS::GUI {
 
     }
 
-    void ComponentDrawer::DrawComponent(SR_GRAPH_NS::UI::Sprite2D *&sprite, EditorGUI *context, int32_t index) {
-        if (!sprite->IsCanCalculate())
+    void ComponentDrawer::DrawComponent(SR_GTYPES_NS::Sprite *&sprite, EditorGUI *context, int32_t index) {
+        if (!sprite->IsCalculatable())
             ImGui::TextColored(ImVec4(1, 0, 0, 1), "Invalid mesh!");
 
         if (!sprite->IsCalculated())
@@ -564,7 +564,7 @@ namespace SR_CORE_NS::GUI {
     }
 
     void ComponentDrawer::DrawComponent(SR_GTYPES_NS::ProceduralMesh *&pComponent, EditorGUI *context, int32_t index) {
-        if (!pComponent->IsCanCalculate())
+        if (!pComponent->IsCalculatable())
             ImGui::TextColored(ImVec4(1, 0, 0, 1), "Invalid mesh!");
 
         if (!pComponent->IsCalculated())
@@ -578,7 +578,7 @@ namespace SR_CORE_NS::GUI {
     }
 
     void ComponentDrawer::DrawComponent(SR_GTYPES_NS::Text *&pComponent, EditorGUI *context, int32_t index) {
-        if (!pComponent->IsCanCalculate())
+        if (!pComponent->IsCalculatable())
             ImGui::TextColored(ImVec4(1, 0, 0, 1), "Invalid mesh!");
 
         if (!pComponent->IsCalculated())

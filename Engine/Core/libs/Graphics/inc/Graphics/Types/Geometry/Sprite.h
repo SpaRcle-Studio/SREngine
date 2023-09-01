@@ -2,12 +2,12 @@
 // Created by Monika on 30.07.2022.
 //
 
-#ifndef SRENGINE_SPRITE2D_H
-#define SRENGINE_SPRITE2D_H
+#ifndef SRENGINE_SPRITE_H
+#define SRENGINE_SPRITE_H
 
 #include <Graphics/Types/Geometry/MeshComponent.h>
 
-namespace SR_GRAPH_UI_NS {
+namespace SR_GTYPES_NS {
     const std::vector<uint32_t> SR_SPRITE_INDICES = { 0, 1, 2, 0, 2, 3 }; /// NOLINT
 
     const std::vector<Vertices::UIVertex> SR_SPRITE_VERTICES = { /// NOLINT
@@ -17,15 +17,15 @@ namespace SR_GRAPH_UI_NS {
         { {  1.000000, -1.000000,  0.000000 }, { 0.000000, 0.000000 } }
     };
 
-    class Sprite2D : public SR_GTYPES_NS::MeshComponent {
+    class Sprite : public SR_GTYPES_NS::MeshComponent {
         SR_ENTITY_SET_VERSION(1000);
-        SR_INITIALIZE_COMPONENT(Sprite2D);
+        SR_INITIALIZE_COMPONENT(Sprite);
         using Super = SR_GTYPES_NS::MeshComponent;
     public:
-        Sprite2D();
+        Sprite();
 
     protected:
-        ~Sprite2D() override = default;
+        ~Sprite() override = default;
 
     public:
         typedef Vertices::UIVertex VertexType;
@@ -50,4 +50,4 @@ namespace SR_GRAPH_UI_NS {
     };
 }
 
-#endif //SRENGINE_SPRITE2D_H
+#endif //SRENGINE_SPRITE_H

@@ -38,7 +38,7 @@
 #include <Graphics/Pipeline/Vulkan.h>
 #include <Graphics/UI/Canvas.h>
 #include <Graphics/UI/Anchor.h>
-#include <Graphics/UI/Sprite2D.h>
+#include <Graphics/Types/Geometry/Sprite.h>
 #include <Graphics/SRSL/Shader.h>
 
 #include <Graphics/Font/Text.h>

@@ -25,7 +25,7 @@ namespace SR_GTYPES_NS {
 
         FreeVideoMemory();
 
-        if (!IsCanCalculate()) {
+        if (!IsCalculatable()) {
             return false;
         }
 
@@ -146,8 +146,8 @@ namespace SR_GTYPES_NS {
         return GetRawMesh()->GetIndices(GetMeshId());
     }
 
-    bool SkinnedMesh::IsCanCalculate() const {
-        return IsValidMeshId() && Mesh::IsCanCalculate();
+    bool SkinnedMesh::IsCalculatable() const {
+        return IsValidMeshId() && Mesh::IsCalculatable();
     }
 
     bool SkinnedMesh::IsSkeletonUsable() const {

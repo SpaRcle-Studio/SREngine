@@ -96,7 +96,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD SR_FORCE_INLINE virtual bool IsAttached() const noexcept { return m_isAttached; }
 
         /// Активен и компонент и его родительский объект
-        SR_NODISCARD SR_FORCE_INLINE virtual bool IsCanUpdate() const noexcept { return m_isStarted && m_isActive; }
+        SR_NODISCARD SR_FORCE_INLINE virtual bool IsUpdatable() const noexcept { return m_isStarted && m_isActive; }
         /// Активен и компонент и его родительский объект
         SR_NODISCARD SR_FORCE_INLINE virtual bool IsActive() const noexcept { return m_isActive; }
         /// Активен сам компонент, независимо от объекта

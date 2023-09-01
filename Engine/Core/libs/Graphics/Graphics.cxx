@@ -57,7 +57,7 @@
 #include "../Graphics/src/Graphics/Font/Glyph.cpp"
 #include "../Graphics/src/Graphics/Font/FreeType.cpp"
 
-#include "../Graphics/src/Graphics/UI/Sprite2D.cpp"
+#include "src/Graphics/Types/Geometry/Sprite.cpp"
 #include "../Graphics/src/Graphics/UI/Canvas.cpp"
 #include "../Graphics/src/Graphics/UI/Anchor.cpp"
 

@@ -57,7 +57,7 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD virtual int32_t GetIBO() const { return SR_ID_INVALID; }
         SR_NODISCARD virtual int32_t GetVBO() const { return SR_ID_INVALID; }
 
-        SR_NODISCARD virtual bool IsCanCalculate() const;
+        SR_NODISCARD virtual bool IsCalculatable() const;
         SR_NODISCARD virtual bool IsUniqueMesh() const { return false; }
         SR_NODISCARD virtual bool IsMeshDestroyed() const { return m_isMeshDestroyed; }
 

@@ -7,7 +7,7 @@
 
 //#include <Types/Geometry/Mesh3D.h>
 //#include <Types/Geometry/DebugWireframeMesh.h>
-//#include <UI/Sprite2D.h>
+//#include <UI/Sprite.h>
 //
 //namespace Framework::Graphics::Memory {
 //    class MeshAllocator {
@@ -24,8 +24,8 @@
 //            else if constexpr (std::is_same<Types::DebugWireframeMesh, U>::value) {
 //                return new Types::DebugWireframeMesh();
 //            }
-//            else if constexpr (std::is_same<UI::Sprite2D, U>::value) {
-//                return new UI::Sprite2D();
+//            else if constexpr (std::is_same<UI::Sprite, U>::value) {
+//                return new UI::Sprite();
 //            }
 //            else
 //                return nullptr;

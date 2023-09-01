@@ -55,7 +55,7 @@ namespace SR_GTYPES_NS {
 
         FreeVideoMemory();
 
-        if (!IsCanCalculate()) {
+        if (!IsCalculatable()) {
             return false;
         }
 
@@ -121,7 +121,7 @@ namespace SR_GTYPES_NS {
         }
     }
 
-    bool ProceduralMesh::IsCanCalculate() const {
+    bool ProceduralMesh::IsCalculatable() const {
         return m_countVertices > 0;
     }
 

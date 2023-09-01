@@ -36,7 +36,7 @@ namespace SR_WORLD_NS {
                 continue;
             }
 
-            if (pComponent->IsCanUpdate()) {
+            if (pComponent->IsUpdatable()) {
                 m_updatableComponents.emplace_back(pComponent);
             }
         }
@@ -53,7 +53,7 @@ namespace SR_WORLD_NS {
                     continue;
                 }
 
-                if (pComponent->IsCanUpdate()) {
+                if (pComponent->IsUpdatable()) {
                     m_updatableComponents.emplace_back(pComponent);
                 }
             }

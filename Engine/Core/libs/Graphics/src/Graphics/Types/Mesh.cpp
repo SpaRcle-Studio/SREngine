@@ -83,7 +83,7 @@ namespace SR_GRAPH_NS::Types {
         return meshes;
     }
 
-    bool Mesh::IsCanCalculate() const {
+    bool Mesh::IsCalculatable() const {
         return true;
     }
 

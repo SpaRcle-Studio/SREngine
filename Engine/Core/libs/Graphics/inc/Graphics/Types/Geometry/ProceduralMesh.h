@@ -30,7 +30,7 @@ namespace SR_GTYPES_NS {
 
         SR_NODISCARD bool IsUniqueMesh() const override { return true; }
 
-        SR_NODISCARD bool IsCanCalculate() const override;
+        SR_NODISCARD bool IsCalculatable() const override;
 
         SR_NODISCARD Component* CopyComponent() const override;
 

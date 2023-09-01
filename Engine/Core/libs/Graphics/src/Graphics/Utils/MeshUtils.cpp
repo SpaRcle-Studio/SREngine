@@ -8,7 +8,7 @@
 #include <Graphics/Types/Geometry/DebugWireframeMesh.h>
 #include <Graphics/Types/Geometry/SkinnedMesh.h>
 
-#include <Graphics/UI/Sprite2D.h>
+#include <Graphics/Types/Geometry/Sprite.h>
 
 namespace SR_GRAPH_NS {
     SR_GTYPES_NS::Mesh* CreateMeshByType(MeshType type) {
@@ -20,7 +20,7 @@ namespace SR_GRAPH_NS {
                 return new SR_GTYPES_NS::DebugWireframeMesh();
 
             case MeshType::Sprite2D:
-                return new UI::Sprite2D();
+                return new SR_GTYPES_NS::Sprite();
 
             case MeshType::Skinned:
                 return new SR_GTYPES_NS::SkinnedMesh();
