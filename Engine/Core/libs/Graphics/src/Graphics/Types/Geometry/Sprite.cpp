@@ -2,8 +2,6 @@
 // Created by Monika on 30.07.2022.
 //
 
-#include "../../../../../../../../cmake-build-debug/Engine/Core/libs/Utils/include/Utils/Types/DataStorage.h"
-
 #include <Graphics/Types/Geometry/Sprite.h>
 #include <Graphics/Types/Material.h>
 #include <Graphics/Pipeline/Environment.h>
