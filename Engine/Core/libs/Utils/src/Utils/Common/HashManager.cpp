@@ -11,6 +11,12 @@ namespace SR_UTILS_NS {
         m_strings[hash] = str;
         return hash;
     }
+    HashManager::Hash HashManager::AddHash(const std::string_view& str) {
+        SR_LOCK_GUARD;
+        auto&& hash = SR_HASH_STR_VIEW(str);
+        m_strings[hash] = str;
+        return hash;
+    }
 
     const std::string& HashManager::HashToString(HashManager::Hash hash) const {
         SR_LOCK_GUARD;

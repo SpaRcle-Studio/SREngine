@@ -36,6 +36,8 @@ namespace SR_UTILS_NS {
     }
 
     void GameObject::Destroy() {
+        SR_TRACY_ZONE;
+
         if (m_isDestroyed) {
             SRHalt("GameObject::Destroy() : \"" + m_name + "\" game object already destroyed!");
             return;

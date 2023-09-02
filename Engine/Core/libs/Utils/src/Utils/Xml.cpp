@@ -86,7 +86,10 @@ namespace SR_UTILS_NS {
         return m_valid ? m_attribute.as_ullong() : def;
     }
 
-    Xml::Document Xml::Document::Load(const Path &path)  {
+    Xml::Document Xml::Document::Load(const Path &path) {
+        SR_TRACY_ZONE;
+        SR_TRACY_TEXT_N("Path", path.ToStringRef());
+
         auto&& fileData = SR_PLATFORM_NS::ReadFile(path);
         auto xml = Document::New();
 

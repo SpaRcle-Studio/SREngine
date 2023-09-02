@@ -12,6 +12,7 @@
 #include <Utils/Common/StringFormat.h>
 #include <Utils/Common/Vertices.hpp>
 #include <Utils/Common/Enumerations.h>
+#include <Utils/Profile/TracyContext.h>
 
 namespace SR_GRAPH_NS::Vertices {
     enum class Attribute {
@@ -289,6 +290,8 @@ namespace SR_GRAPH_NS::Vertices {
     }
 
     template<typename T> static std::vector<T> CastVertices(const std::vector<SR_UTILS_NS::Vertex>& raw) {
+        SR_TRACY_ZONE;
+
         auto vertices = std::vector<T>();
 
         vertices.reserve(raw.size());

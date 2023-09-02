@@ -49,6 +49,11 @@ namespace SR_CORE_NS::GUI {
             return;
         }
 
+        /// что-то пошло не так, потеряли камеру
+        if (m_enabled && !m_camera.Valid()) {
+            InitCamera();
+        }
+
         if (m_camera.RecursiveLockIfValid()) {
             m_translation = m_camera->GetTransform()->GetTranslation();
             m_rotation = m_camera->GetTransform()->GetRotation();

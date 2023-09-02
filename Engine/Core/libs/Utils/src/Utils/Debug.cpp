@@ -10,7 +10,9 @@
 
 namespace SR_UTILS_NS {
     void Debug::Print(std::string msg, Debug::Type type) {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
+        SR_TRACY_ZONE;
+        SR_TRACY_TEXT_N("Text", msg);
 
         if (!m_isInit) {
             SR_PLATFORM_NS::WriteConsoleError("Debug::Print() : Debugger isn't initialized!\n\tMessage: " + msg + "\n");

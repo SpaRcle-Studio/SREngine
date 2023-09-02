@@ -11,6 +11,11 @@ namespace SR_WORLD_NS {
     { }
 
     bool ScenePrefabLogic::Save(const Path& path) {
+        if (!Super::Save(path)) {
+            SR_ERROR("ScenePrefabLogic::Save() : failed to save base logic!");
+            return false;
+        }
+
         auto&& pMarshal = new SR_HTYPES_NS::Marshal();
 
         pMarshal->Write(static_cast<uint64_t>(ENTITY_ID_MAX));

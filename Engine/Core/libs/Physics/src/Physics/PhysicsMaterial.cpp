@@ -58,6 +58,8 @@ namespace SR_PTYPES_NS {
     }
 
     bool PhysicsMaterial::Load() {
+        SR_TRACY_ZONE;
+
         const auto&& path = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat(GetResourcePath());
 
         SR_LOG("PhysicsMaterial::Load() : the physics material is loading. \n\tPath: " + path.ToString());

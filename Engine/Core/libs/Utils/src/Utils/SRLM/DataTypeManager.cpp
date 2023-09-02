@@ -60,7 +60,7 @@ namespace SR_SRLM_NS {
 
         auto&& xmlRoot = xmlDocument.Root().GetNode("SRLM");
 
-        for (auto&& xmlStruct : xmlRoot.GetNodes("Struct")) {
+        for (auto&& xmlStruct : xmlRoot.TryGetNodes("Struct")) {
             auto&& structName = xmlStruct.GetAttribute("Name").ToString();
             auto&& structHash = SR_UTILS_NS::HashManager::Instance().AddHash(structName);
 

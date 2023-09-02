@@ -63,6 +63,8 @@ namespace SR_PHYSICS_NS {
     }
 
     LibraryImpl *PhysicsLibrary::GetLibrary(LibraryType type) {
+        SR_TRACY_ZONE;
+
         const auto index = static_cast<int32_t>(type);
 
         if (index >= m_libraries.size()) {

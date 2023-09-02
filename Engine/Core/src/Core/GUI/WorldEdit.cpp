@@ -6,12 +6,12 @@
 #include <Utils/World/Scene.h>
 #include <Utils/World/SceneCubeChunkLogic.h>
 
-namespace Framework::Core::GUI {
+namespace SR_CORE_GUI_NS {
     WorldEdit::WorldEdit()
-        : Graphics::GUI::Widget("World edit")
+        : Super("World edit")
     { }
 
-    void WorldEdit::SetScene(const SR_WORLD_NS::Scene::Ptr &scene) {
+    void WorldEdit::SetScene(const SR_WORLD_NS::Scene::Ptr& scene) {
         m_scene.Replace(scene);
     }
 
@@ -24,38 +24,51 @@ namespace Framework::Core::GUI {
                 return;
             }
 
-            const auto&& observer = pLogic->GetObserver();
-            const auto offset = observer->m_offset;
-
             ImGui::Separator();
-            TextCenter("Current");
+            TextCenter("Settings");
 
-            ImGui::InputInt3("Chunk", &observer->m_chunk[0], ImGuiInputTextFlags_ReadOnly);
-            ImGui::InputInt3("Region", &observer->m_region[0], ImGuiInputTextFlags_ReadOnly);
+            auto&& dataStorage = m_scene->GetDataStorage();
 
-            ImGui::Separator();
-            TextCenter("Offset");
-
-            auto chunkOffset = offset.m_chunk;
-            if (ImGui::InputInt3("Chunk offset", &chunkOffset[0], ImGuiInputTextFlags_EnterReturnsTrue))
-                pLogic->SetWorldOffset(SR_WORLD_NS::Offset(offset.m_region, chunkOffset));
-
-            auto regionOffset = offset.m_region;
-            if (ImGui::InputInt3("Region offset", &regionOffset[0], ImGuiInputTextFlags_EnterReturnsTrue))
-                pLogic->SetWorldOffset(SR_WORLD_NS::Offset(regionOffset, offset.m_chunk));
-
-            auto scope = observer->GetScope();
-            if (ImGui::InputInt("Scope", &scope))
-                observer->SetScope(SR_CLAMP(scope, 32, 0));
-
-            if (ImGui::Button("Reload chunks")) {
-                pLogic->ReloadChunks();
+            auto&& renderTechniquePath = dataStorage.GetValueDef<SR_UTILS_NS::Path>("RenderTechnique", "");
+            if (ImGui::InputText("Render Technique", renderTechniquePath.ToStringPtr())) {
+                dataStorage.SetValue("RenderTechnique", renderTechniquePath);
             }
 
-            if (auto&& chunk = pLogic->GetCurrentChunk()) {
+            auto&& editorRenderTechniquePath = dataStorage.GetValueDef<SR_UTILS_NS::Path>("EditorRenderTechnique", "");
+            if (ImGui::InputText("Editor Render Technique", editorRenderTechniquePath.ToStringPtr())) {
+                dataStorage.SetValue("EditorRenderTechnique", editorRenderTechniquePath);
+            }
+
+            if (const auto&& observer = pLogic->GetObserver()) {
+                const auto offset = observer->m_offset;
+
                 ImGui::Separator();
-                int32_t size = -1;// static_cast<int32_t>(chunk->GetContainerSize());
-                ImGui::InputInt("Container size", &size, 0, 0, ImGuiInputTextFlags_ReadOnly);
+                TextCenter("Current");
+
+                ImGui::InputInt3("Chunk", &observer->m_chunk[0], ImGuiInputTextFlags_ReadOnly);
+                ImGui::InputInt3("Region", &observer->m_region[0], ImGuiInputTextFlags_ReadOnly);
+
+                ImGui::Separator();
+                TextCenter("Offset");
+
+                auto chunkOffset = offset.m_chunk;
+                if (ImGui::InputInt3("Chunk offset", &chunkOffset[0], ImGuiInputTextFlags_EnterReturnsTrue)) {
+                    pLogic->SetWorldOffset(SR_WORLD_NS::Offset(offset.m_region, chunkOffset));
+                }
+
+                auto regionOffset = offset.m_region;
+                if (ImGui::InputInt3("Region offset", &regionOffset[0], ImGuiInputTextFlags_EnterReturnsTrue)) {
+                    pLogic->SetWorldOffset(SR_WORLD_NS::Offset(regionOffset, offset.m_chunk));
+                }
+
+                auto scope = observer->GetScope();
+                if (ImGui::InputInt("Scope", &scope)) {
+                    observer->SetScope(SR_CLAMP(scope, 32, 0));
+                }
+
+                if (ImGui::Button("Reload chunks")) {
+                    pLogic->ReloadChunks();
+                }
             }
 
             m_scene.Unlock();

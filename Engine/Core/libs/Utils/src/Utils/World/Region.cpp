@@ -98,6 +98,8 @@ namespace SR_WORLD_NS {
     }
 
     bool Region::Unload(bool force) {
+        SR_TRACY_ZONE;
+
         if (SR_UTILS_NS::Debug::Instance().GetLevel() >= Debug::Level::Full) {
             SR_LOG("Region::Unload() : unloading region at " + m_position.ToString());
         }
@@ -184,7 +186,11 @@ namespace SR_WORLD_NS {
 
     void Region::Reload() {
         SR_TRACY_ZONE;
-        SR_LOG("Region::Reload() : reloading region at " + m_position.ToString());
+
+        if (SR_UTILS_NS::Debug::Instance().GetLevel() >= Debug::Level::Full) {
+            SR_LOG("Region::Reload() : reloading region at " + m_position.ToString());
+        }
+
         Unload(true /** force */);
         Load();
     }

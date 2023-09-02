@@ -655,16 +655,21 @@ namespace SR_GRAPH_NS {
             vkModules.emplace_back(EvoVulkan::Complexes::SourceShader(module.m_path, stage));
         }
 
+        EVK_PUSH_LOG_LEVEL(EvoVulkan::Tools::LogLevel::ErrorsOnly);
+
         if (!pShaderProgram->Load(
                 SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("/Cache/Shaders"),
                 vkModules,
                 descriptorLayoutBindings.value(),
                 pushConstants
         )) {
+            EVK_POP_LOG_LEVEL();
             DeleteShader(shaderProgram);
             SR_ERROR("Vulkan::CompileShader() : failed to load Evo Vulkan shader!");
             return false;
         }
+
+        EVK_POP_LOG_LEVEL();
 
         auto&& vkVertexDescriptions = VulkanTools::AbstractVertexDescriptionsToVk(createInfo.vertexDescriptions);
         auto&& vkVertexAttributes = VulkanTools::AbstractAttributesToVkAttributes(createInfo.vertexAttributes);
@@ -693,6 +698,8 @@ namespace SR_GRAPH_NS {
         const VkSampleCountFlagBits vkSampleCount = EvoVulkan::Tools::Convert::IntToSampleCount(sampleCount);
 
         const bool depthEnabled = m_currentVkFramebuffer ? m_currentVkFramebuffer->IsDepthEnabled() : true;
+        
+        EVK_PUSH_LOG_LEVEL(EvoVulkan::Tools::LogLevel::ErrorsOnly);
 
         if (!pShaderProgram->Compile(
                 VulkanTools::AbstractPolygonModeToVk(createInfo.polygonMode),
@@ -704,6 +711,7 @@ namespace SR_GRAPH_NS {
                 VulkanTools::AbstractPrimitiveTopologyToVk(createInfo.primitiveTopology),
                 vkSampleCount)
         ) {
+            EVK_POP_LOG_LEVEL();
             SR_ERROR("Vulkan::LinkShader() : failed to compile Evo Vulkan shader!");
             DeleteShader(shaderProgram);
             return false;

@@ -15,6 +15,7 @@ namespace SR_UTILS_NS {
 
     bool IResource::Reload() {
         SR_TRACY_ZONE;
+        SR_TRACY_TEXT_N("Path", GetResourceId());
 
         if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::Medium) {
             SR_LOG("IResource::Reload() : reloading \"" + std::string(GetResourceId()) + "\" resource...");

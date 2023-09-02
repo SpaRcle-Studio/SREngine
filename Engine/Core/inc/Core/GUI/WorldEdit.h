@@ -9,8 +9,9 @@
 
 #include <Graphics/GUI/Widget.h>
 
-namespace Framework::Core::GUI {
-    class WorldEdit : public Graphics::GUI::Widget {
+namespace SR_CORE_GUI_NS {
+    class WorldEdit : public SR_GRAPH_GUI_NS::Widget {
+        using Super = SR_GRAPH_GUI_NS::Widget;
     public:
         WorldEdit();
         ~WorldEdit() override = default;

@@ -55,6 +55,8 @@ namespace SR_WORLD_NS {
     }
 
     bool Chunk::Unload() {
+        SR_TRACY_ZONE;
+
         m_loadState = LoadState::Unload;
 
         /*TODO: это потенциальное место для дедлоков, так как при уничтожении компоненты
@@ -63,12 +65,16 @@ namespace SR_WORLD_NS {
         auto&& pLogic = m_observer->m_scene->GetLogicBase().DynamicCast<SceneCubeChunkLogic>();
         auto&& gameObjects = pLogic->GetGameObjectsAtChunk(m_regionPosition, m_position);
 
-        for (auto gameObject : gameObjects) {
-            gameObject->Destroy();
+        for (auto&& gameObject : gameObjects) {
+            if (gameObject) {
+                gameObject->Destroy();
+            }
         }
 
-        for (auto gameObject : m_preloaded) {
-            gameObject->Destroy();
+        for (auto&& gameObject : m_preloaded) {
+            if (gameObject) {
+                gameObject->Destroy();
+            }
         }
         m_preloaded.clear();
 

@@ -68,10 +68,6 @@ namespace SR_WORLD_NS {
 
         virtual bool ApplyOffset();
 
-    //private:
-    //    void SetDebugActive(BoolExt enabled);
-    //    void SetDebugLoaded(BoolExt enabled);
-
     private:
         static Allocator g_allocator;
 
@@ -88,9 +84,6 @@ namespace SR_WORLD_NS {
         SR_MATH_NS::IVector3 m_position;
 
         std::list<SR_HTYPES_NS::SharedPtr<GameObject>> m_preloaded;
-
-        //uint64_t m_debugLoadedId = SR_ID_INVALID;
-        //uint64_t m_debugActiveId = SR_ID_INVALID;
 
     };
 }

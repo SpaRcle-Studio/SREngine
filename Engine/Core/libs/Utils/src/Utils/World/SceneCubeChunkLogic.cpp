@@ -54,7 +54,10 @@ namespace SR_WORLD_NS {
     bool SceneCubeChunkLogic::ReloadChunks() {
         SR_TRACY_ZONE;
 
+        auto&& pContext = SR_THIS_THREAD->GetContext();
+
         for (auto&& [position, pRegion] : m_regions) {
+            SaveRegion(GetRegionsPath(), pRegion, pContext);
             pRegion->Reload();
         }
 
@@ -69,6 +72,8 @@ namespace SR_WORLD_NS {
     }
 
     const Scene::GameObjects& SceneCubeChunkLogic::GetGameObjectsAtChunk(const SR_MATH_NS::IVector3 &region, const SR_MATH_NS::IVector3 &chunk) const {
+        SR_TRACY_ZONE;
+
         const auto key = TensorKey(region, chunk);
         if (m_tensor.count(key) == 0) {
             static GameObjects _default = GameObjects();
@@ -245,8 +250,8 @@ namespace SR_WORLD_NS {
                 ++pIt;
             }
             else {
-                pRegion->Unload();
                 SaveRegion(GetRegionsPath(), pRegion, pContext);
+                pRegion->Unload();
                 delete pRegion;
                 pIt = m_regions.erase(pIt);
 				m_debugDirty = true;
@@ -375,7 +380,12 @@ namespace SR_WORLD_NS {
 
     bool SceneCubeChunkLogic::Save(const Path& path) {
         SR_TRACY_ZONE;
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
+
+        if (!Super::Save(path)) {
+            SR_ERROR("ScenePrefabLogic::Save() : failed to save base logic!");
+            return false;
+        }
 
         auto&& currentChunk = CalculateCurrentChunk();
         m_observer->SetChunk(currentChunk);

@@ -11,6 +11,8 @@ namespace SR_PHYSICS_NS {
     { }
 
     bool LibraryImpl::Initialize() {
+        SR_TRACY_ZONE;
+
         if (SR_UTILS_NS::Features::Instance().Enabled("Vehicles", true)) {
             m_isVehicleSupported = true;
         }

@@ -227,6 +227,8 @@ namespace SR_UTILS_NS {
     }
 
     void IComponentable::DestroyComponents() {
+        SR_TRACY_ZONE;
+
         for (uint32_t i = 0; i < m_components.size(); ++i) {
             auto&& pComponent = m_components[i];
             DestroyComponent(pComponent);

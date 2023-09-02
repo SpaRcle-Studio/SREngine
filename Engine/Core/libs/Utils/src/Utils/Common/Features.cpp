@@ -48,7 +48,8 @@ namespace SR_UTILS_NS {
     }
 
     bool Features::Reload() {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
+        SR_TRACY_ZONE;
 
         m_features.clear();
 

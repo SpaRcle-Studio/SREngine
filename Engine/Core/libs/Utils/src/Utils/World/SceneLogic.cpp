@@ -9,22 +9,49 @@
 #include <Utils/World/ScenePrefabLogic.h>
 
 namespace SR_WORLD_NS {
-    SceneLogic::SceneLogic(const SceneLogic::ScenePtr &scene)
+    SceneLogic::SceneLogic(const SceneLogic::ScenePtr& pScene)
         : SR_HTYPES_NS::SafePtr<SceneLogic>(this)
-        , m_scene(scene)
+        , m_scene(pScene)
     { }
 
-    SceneLogic::Ptr SceneLogic::CreateByExt(const SceneLogic::ScenePtr &scene, const std::string &ext) {
+    SceneLogic::Ptr SceneLogic::CreateByExt(const SceneLogic::ScenePtr& pScene, const std::string& ext) {
         if (ext == "scene") {
-            return (new SceneCubeChunkLogic(scene))->GetThis();
+            return (new SceneCubeChunkLogic(pScene))->GetThis();
         }
 
         if (ext == SR_UTILS_NS::Prefab::EXTENSION) {
-            return (new ScenePrefabLogic(scene))->GetThis();
+            return (new ScenePrefabLogic(pScene))->GetThis();
         }
 
         SRHalt("SceneLogic::CreateByExt() : unknown extension! Create default...\n\tExtension: " + ext);
 
-        return (new SceneDefaultLogic(scene))->GetThis();
+        return (new SceneDefaultLogic(pScene))->GetThis();
+    }
+
+    bool SceneLogic::Save(const Path& path) {
+        auto&& documentXml = SR_XML_NS::Document::New();
+        auto&& settingsXml = documentXml.Root().AppendNode("Settings");
+
+        auto&& stringsXml = settingsXml.AppendNode("Strings");
+        for (auto&& [name, value] : m_scene->GetDataStorage().GetValues<std::string>()) {
+            stringsXml.AppendNode(name).AppendAttribute(value);
+        }
+
+        auto&& pathsXml = settingsXml.AppendNode("Paths");
+        for (auto&& [name, value] : m_scene->GetDataStorage().GetValues<SR_UTILS_NS::Path>()) {
+            pathsXml.AppendNode(name).AppendAttribute(value);
+        }
+
+        auto&& seetingsPath = path.Concat("data/settings.xml");
+        if (!documentXml.Save(seetingsPath)) {
+            SR_ERROR("SceneLogic::Save() : failed save settings!\n\tPath: " + seetingsPath.ToStringRef());
+            return false;
+        }
+
+        return true;
+    }
+
+    bool SceneLogic::Load(const Path& path) {
+        return true;
     }
 }

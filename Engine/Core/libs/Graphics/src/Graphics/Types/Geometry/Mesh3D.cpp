@@ -32,7 +32,7 @@ namespace SR_GTYPES_NS {
             return false;
         }
 
-        if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::High) {
+        if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::Full) {
             SR_LOG("Mesh3D::Calculate() : calculating \"" + GetGeometryName() + "\"...");
         }
 

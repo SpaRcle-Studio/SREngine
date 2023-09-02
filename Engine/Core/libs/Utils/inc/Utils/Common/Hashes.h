@@ -101,6 +101,8 @@ namespace SR_UTILS_NS {
 
 #define SR_COMBINE_HASHES(x1, x2) (SR_UTILS_NS::CombineTwoHashes(x1, x2))
 
+#define SR_GET_TYPE_NAME(x) SR_UTILS_NS::Hash::Detail::GetTypeName<x>()
+
 #define SR_HASH(x) (SR_UTILS_NS::CalculateHash(x))
 #define SR_HASH_STR(x) (SR_UTILS_NS::CalculateHash<std::string>(x))
 #define SR_HASH_STR_VIEW(x) (SR_UTILS_NS::CalculateHash<std::string_view>(x))
@@ -110,8 +112,8 @@ namespace SR_UTILS_NS {
 
 #define SR_COMPILE_TIME_CRC32_TYPE_NAME_DETAIL(x) (static_cast<uint64_t>(SR_UTILS_NS::Hash::Detail::MM<x.size()>::crc32(x.data())))
 
-#define SR_COMPILE_TIME_CRC32_TYPE_NAME(x) (SR_COMPILE_TIME_CRC32_TYPE_NAME_DETAIL(SR_UTILS_NS::Hash::Detail::GetTypeName<x>()))
-#define SR_RUNTIME_TIME_CRC32_TYPE_NAME(x) (SR_COMPILE_TIME_CRC32_TYPE_NAME_DETAIL(SR_UTILS_NS::Hash::Detail::GetTypeName<x>()))
+#define SR_COMPILE_TIME_CRC32_TYPE_NAME(x) (SR_COMPILE_TIME_CRC32_TYPE_NAME_DETAIL(SR_GET_TYPE_NAME(x)))
+#define SR_RUNTIME_TIME_CRC32_TYPE_NAME(x) (SR_COMPILE_TIME_CRC32_TYPE_NAME_DETAIL(SR_GET_TYPE_NAME(x)))
 
 #define SR_COMPILE_TIME_CRC32_STD_STR(x) (SR_COMPILE_TIME_CRC32_STR(x.c_str()))
 #define SR_RUNTIME_TIME_CRC32_STD_STR(x) (SR_RUNTIME_TIME_CRC32_STR(x.c_str()))

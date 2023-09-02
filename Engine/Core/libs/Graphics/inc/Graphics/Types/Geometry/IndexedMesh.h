@@ -51,6 +51,8 @@ namespace SR_GTYPES_NS {
     /// ----------------------------------------------------------------------------------------------------------------
 
     template<Vertices::VertexType type, typename Vertex> bool IndexedMesh::CalculateVBO(const SR_HTYPES_NS::Function<std::vector<Vertex>()>& getter) {
+        SR_TRACY_ZONE;
+
         SRAssert(m_pipeline);
         SRAssert(m_VBO == SR_ID_INVALID);
 
@@ -75,6 +77,8 @@ namespace SR_GTYPES_NS {
     }
 
     template<Vertices::VertexType type, typename Vertex> bool IndexedMesh::CalculateVBO(const std::vector<Vertex>& vertices) {
+        SR_TRACY_ZONE;
+
         SRAssert(m_pipeline);
         SRAssert(m_VBO == SR_ID_INVALID);
 

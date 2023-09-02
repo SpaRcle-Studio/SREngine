@@ -11,6 +11,8 @@ namespace SR_GTYPES_NS {
     }
 
     bool IndexedMesh::Calculate() {
+        SR_TRACY_ZONE;
+
         if (!CalculateIBO()) {
             return false;
         }
@@ -19,6 +21,8 @@ namespace SR_GTYPES_NS {
     }
 
     bool IndexedMesh::CalculateIBO() {
+        SR_TRACY_ZONE;
+
         SRAssert(m_pipeline);
         SRAssert(m_IBO == SR_ID_INVALID);
 
@@ -104,6 +108,8 @@ namespace SR_GTYPES_NS {
     }
 
     void IndexedMesh::FreeVideoMemory() {
+        SR_TRACY_ZONE;
+
         if (!FreeVBO()) {
             SR_ERROR("IndexedMesh::FreeVideoMemory() : failed to free VBO!");
         }

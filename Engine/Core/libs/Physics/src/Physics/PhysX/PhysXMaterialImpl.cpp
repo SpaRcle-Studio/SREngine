@@ -10,13 +10,17 @@ namespace SR_PTYPES_NS {
     { }
 
     PhysXMaterialImpl::~PhysXMaterialImpl() {
+        SR_TRACY_ZONE;
+
         if (m_material) {
             m_material->release();
             m_material = nullptr;
         }
     }
 
-    bool PhysXMaterialImpl::Init(PhysicsMaterial* pMaterial){
+    bool PhysXMaterialImpl::Init(PhysicsMaterial* pMaterial) {
+        SR_TRACY_ZONE;
+
         auto&& pPhysics = GetLibrary<PhysXLibraryImpl>()->GetPxPhysics();
 
         m_material = pPhysics->createMaterial(
@@ -32,6 +36,8 @@ namespace SR_PTYPES_NS {
     }
 
     void PhysXMaterialImpl::DeInit() {
+        SR_TRACY_ZONE;
+
         if (m_material) {
             m_material->release();
             m_material = nullptr;

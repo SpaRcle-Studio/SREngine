@@ -110,7 +110,7 @@ namespace SR_GRAPH_NS {
         bool Update();
 
     protected:
-        virtual bool SR_FASTCALL ChangeCluster(MeshPtr pMesh) = 0;
+        virtual bool SR_FASTCALL ChangeCluster(MeshPtr pMesh) { return false; }
 
     protected:
         ska::flat_hash_map<SR_GTYPES_NS::Shader*, ShadedMeshSubCluster> m_subClusters;
@@ -158,6 +158,10 @@ namespace SR_GRAPH_NS {
 
     private:
         OpaqueMeshCluster* m_opaque;
+
+    };
+
+    class Spatial2DMeshCluster : public MeshCluster {
 
     };
 }

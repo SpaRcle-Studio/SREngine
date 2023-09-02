@@ -307,6 +307,9 @@ namespace SR_UTILS_NS::Xml {
             else if constexpr (std::is_same<T, float>() || std::is_same<T, float_t>()) {
                 hasErrors |= AppendAttribute("Float", value);
             }
+            else if constexpr (std::is_same<T, SR_UTILS_NS::Path>()) {
+                hasErrors |= AppendAttribute("Path", value);
+            }
             else if constexpr (std::is_same<T, std::string>()) {
                 hasErrors |= AppendAttribute("String", value);
             }
@@ -358,6 +361,9 @@ namespace SR_UTILS_NS::Xml {
 
             if constexpr (std::is_same<T, std::string>()) {
                 attrib.set_value(value.c_str());
+            }
+            else if constexpr (std::is_same<T, SR_UTILS_NS::Path>()) {
+                attrib.set_value(value.CStr());
             }
             else {
                 attrib.set_value(value);
@@ -478,7 +484,7 @@ namespace SR_UTILS_NS::Xml {
 
         bool Save(const SR_UTILS_NS::Path& path) const {
             if (!path.Exists()) {
-                path.Make();
+                path.Create();
             }
             return m_document->save_file(path.CStr());
         }
