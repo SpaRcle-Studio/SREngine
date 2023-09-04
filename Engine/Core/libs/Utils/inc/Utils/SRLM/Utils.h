@@ -41,7 +41,7 @@
         SR_NODISCARD type GetValue() const noexcept { return m_value; }                                                 \
         void SetValue(const type& value) { m_value = value; }                                                           \
         SR_NODISCARD void* GetRawValue() const noexcept override { return const_cast<void*>((const void*)&m_value); }   \
-        DataType* SetRawValue(void* pValue) override { m_value = *(type*)pValue; return (DataType*)this; }             \
+        DataType* SetRawValue(void* pValue) override { m_value = *(type*)pValue; return (DataType*)this; }              \
 
 /// --------------------------------------------------------------------------------------------------------------------
 
@@ -50,6 +50,7 @@
         SR_NODISCARD DataType* Copy() const override {                                                                  \
             return new className(m_value);                                                                              \
         }                                                                                                               \
+        void CopyTo(DataType* pData) const override { pData->SetCustomValue(*(type*)GetRawValue()); }                   \
 
 /// --------------------------------------------------------------------------------------------------------------------
 
@@ -60,7 +61,8 @@
             : base()                                                                                                    \
             , m_value(value)                                                                                            \
         { }                                                                                                             \
-    protected:                                                                                                          \
+        void Reset() override { m_value = defValue; }                                                                   \
+protected:                                                                                                              \
         type m_value = defValue;                                                                                        \
 
 /// --------------------------------------------------------------------------------------------------------------------
@@ -72,6 +74,7 @@
             : base()                                                                                                    \
             , m_value(std::move(value))                                                                                 \
         { }                                                                                                             \
+        void Reset() override { m_value = defValue; }                                                                   \
     protected:                                                                                                          \
         type m_value = defValue;                                                                                        \
 

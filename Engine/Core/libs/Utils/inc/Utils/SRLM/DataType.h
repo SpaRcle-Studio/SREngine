@@ -48,6 +48,9 @@ namespace SR_SRLM_NS {
         using Hash = uint64_t;
 
     public:
+        virtual void Reset() = 0;
+        virtual void CopyTo(DataType* pData) const = 0;
+
         SR_NODISCARD virtual std::vector<DataType*> GetMetaData() const { return std::vector<DataType*>(); }
         SR_NODISCARD virtual DataType* Copy() const = 0;
         SR_NODISCARD virtual Meta GetMeta() const noexcept = 0;
@@ -83,15 +86,8 @@ namespace SR_SRLM_NS {
         SR_LM_REGISTER_TYPE(DataTypeNone, None);
     public:
         SR_NODISCARD DataType* Copy() const override { return new DataTypeNone(); }
-
-    };
-
-    /// ----------------------------------------------------------------------------------------------------------------
-
-    class DataTypeFlow : public DataType {
-        SR_LM_REGISTER_TYPE(DataTypeFlow, Flow);
-    public:
-        SR_NODISCARD DataType* Copy() const override { return new DataTypeFlow(); }
+        void CopyTo(DataType* pData) const override { }
+        void Reset() override { }
 
     };
 
@@ -148,6 +144,12 @@ namespace SR_SRLM_NS {
 
     /// ----------------------------------------------------------------------------------------------------------------
 
+    class DataTypeFlow : public DataTypeBool {
+        SR_LM_REGISTER_TYPE(DataTypeFlow, Flow)
+    };
+
+    /// ----------------------------------------------------------------------------------------------------------------
+
     class DataTypeEnum : public DataTypeInt64 {
         SR_LM_REGISTER_TYPE(DataTypeEnum, Enum)
     public:
@@ -177,7 +179,9 @@ namespace SR_SRLM_NS {
         ~DataTypeArray() override;
 
     public:
+        void CopyTo(DataType* pData) const override;
         void SetType(DataType* pData);
+        void Reset() override;
 
         SR_NODISCARD DataType* Copy() const override;
         SR_NODISCARD Meta GetMeta() const noexcept override;
@@ -204,11 +208,14 @@ namespace SR_SRLM_NS {
         ~DataTypeStruct() override;
 
     public:
+        void CopyTo(DataType* pData) const override;
+        void AddVariable(Hash name, DataType* pData);
+        void Reset() override;
+
         SR_NODISCARD DataType* Copy() const override;
         SR_NODISCARD std::vector<DataType*> GetMetaData() const override;
         SR_NODISCARD const std::map<Hash, DataType*>& GetVariables() const { return m_variables; };
         SR_NODISCARD Hash GetStructName() const { return m_name; };
-        void AddVariable(Hash name, DataType* pData);
 
     private:
         Hash m_name = SR_UINT64_MAX;

@@ -17,7 +17,7 @@ namespace SR_GRAPH_GUI_NS {
         node.SetIdentifier(identifier);
         node.SetType(SR_GRAPH_GUI_NS::NodeType::Simple);
 
-        switch (identifier) {
+        /*switch (identifier) {
             case SR_SRLM_NS::NODE_BOOL_CONDITION: {
                 node.SetName("Condition")
                     .AddInput(SR_SRLM_NS::DataTypeClass::Flow)
@@ -138,7 +138,7 @@ namespace SR_GRAPH_GUI_NS {
             default:
                 SRHalt("Invalid identifier");
                 break;
-        }
+        }*/
 
         /*
          *         <FramebufferSettings DynamicResizing="true" DepthEnabled="true" SmoothSamples="1">

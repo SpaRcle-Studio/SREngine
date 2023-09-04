@@ -148,11 +148,11 @@ namespace SR_UTILS_NS {
     }
 
     void Transform3D::RotateAround(const SR_MATH_NS::FVector3& point, const SR_MATH_NS::FVector3& eulers) {
-        const SR_MATH_NS::Quaternion &&q = SR_MATH_NS::Quaternion::FromEuler(eulers);
-        const SR_MATH_NS::Quaternion &&rotation = q * SR_MATH_NS::Quaternion::FromEuler(m_rotation);
+        const SR_MATH_NS::Quaternion&& q = SR_MATH_NS::Quaternion::FromEuler(eulers);
+        const SR_MATH_NS::Quaternion&& rotation = q * SR_MATH_NS::Quaternion::FromEuler(m_rotation);
 
-        const SR_MATH_NS::FVector3 &&worldPos = m_translation - point;
-        const SR_MATH_NS::FVector3 &&rotatedPos = q * worldPos;
+        const SR_MATH_NS::FVector3&& worldPos = m_translation - point;
+        const SR_MATH_NS::FVector3&& rotatedPos = q * worldPos;
 
         SetTranslationAndRotation(point + rotatedPos, rotation.EulerAngle());
     }

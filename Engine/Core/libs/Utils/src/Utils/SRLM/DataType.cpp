@@ -63,6 +63,22 @@ namespace SR_SRLM_NS {
         return data;
     }
 
+    void DataTypeStruct::Reset() {
+        for (auto&& [name, pVariable] : m_variables) {
+            pVariable->Reset();
+        }
+    }
+
+    void DataTypeStruct::CopyTo(DataType* pData) const {
+        if (auto&& pStruct = dynamic_cast<DataTypeStruct*>(pData)) {
+            for (auto&& [hashName, pVar] : m_variables) {
+                pVar->CopyTo(pStruct->m_variables.at(hashName));
+            }
+        }
+    }
+
+    /// ----------------------------------------------------------------------------------------------------------------
+
     DataTypeArray::DataTypeArray()
         : DataType()
     {
@@ -80,10 +96,7 @@ namespace SR_SRLM_NS {
     void DataTypeArray::SetType(DataType* pData) {
         SR_SAFE_DELETE_PTR(m_type);
         m_type = pData;
-        for (auto&& pValue : m_value) {
-            delete pValue;
-        }
-        m_value.clear();
+        Reset();
     }
 
     DataType* DataTypeArray::Copy() const {
@@ -97,5 +110,24 @@ namespace SR_SRLM_NS {
         }
 
         return pData;
+    }
+
+    void DataTypeArray::Reset() {
+        for (auto&& pValue : m_value) {
+            delete pValue;
+        }
+        m_value.clear();
+    }
+
+    void DataTypeArray::CopyTo(DataType* pData) const {
+        if (auto&& pArray = dynamic_cast<DataTypeArray*>(pData)) {
+            pArray->Reset();
+
+            pArray->m_value.reserve(m_value.size());
+
+            for (auto&& pValue : m_value) {
+                pArray->m_value.emplace_back(pValue->Copy());
+            }
+        }
     }
 }
