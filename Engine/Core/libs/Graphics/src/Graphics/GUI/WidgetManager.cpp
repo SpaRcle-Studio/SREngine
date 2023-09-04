@@ -31,7 +31,7 @@ namespace SR_GRAPH_NS::GUI {
         SR_SCOPED_LOCK
 
         if (m_widgets.count(widget->GetName()) == 1) {
-            SRHalt("Widget are already registered!");
+            SRHalt("WidgetManager::Register() : widget is already registered!");
             return false;
         }
 
@@ -47,7 +47,7 @@ namespace SR_GRAPH_NS::GUI {
         SR_SCOPED_LOCK
 
         if (m_widgets.count(widget->GetName()) == 0) {
-            SRHalt("Widget is not registered!");
+            SRHalt("WidgetManager::Remove() : widget is not registered!");
             return false;
         }
 

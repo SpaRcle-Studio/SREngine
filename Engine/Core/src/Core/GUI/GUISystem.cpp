@@ -744,6 +744,12 @@ bool GUISystem::BeginMenuBar() {
 
         ImGui::Separator();
 
+        if (ImGui::MenuItem("Physics material editor")) {
+            Engine::Instance().GetEditor()->OpenWidget<PhysicsMaterialEditor>();
+        }
+
+        ImGui::Separator();
+
         if (ImGui::MenuItem("Settings")) {
             Engine::Instance().GetEditor()->OpenWidget<EngineSettings>();
         }

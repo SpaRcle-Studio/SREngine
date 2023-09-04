@@ -28,9 +28,9 @@ namespace SR_GRAPH_NS::GUI {
     typedef ImGuiWindowFlags WindowFlags;
 
     enum WidgetFlags : uint32_t {
-        WIDGET_FLAG_NONE         = 1 << 0,
-        WIDGET_FLAG_HOVERED      = 1 << 1,
-        WIDGET_FLAG_FOCUSED      = 1 << 2,
+        WIDGET_FLAG_NONE         = 1 << 0, /** NOLINT */
+        WIDGET_FLAG_HOVERED      = 1 << 1, /** NOLINT */
+        WIDGET_FLAG_FOCUSED      = 1 << 2, /** NOLINT */
     };
     typedef uint32_t WidgetFlagBits;
 

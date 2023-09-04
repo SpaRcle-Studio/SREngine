@@ -128,11 +128,6 @@ namespace SR_PTYPES_NS {
         if (auto&& pIt = m_implementations.find(libraryType); pIt != m_implementations.end()) {
             return pIt->second;
         }
-
         return nullptr;
     }
 }
-
-
-
-// тссс, тихо. если ты долистал до этого места, то скинь яички) UwU https://t.me/JustMonika48 <3

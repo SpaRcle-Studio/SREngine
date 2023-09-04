@@ -19,10 +19,15 @@ namespace SR_CORE_GUI_NS {
     public:
         void Edit(const SR_UTILS_NS::Path& path);
 
+        void SetMaterialPath(const SR_UTILS_NS::Path& path) { m_materialPath = path; ReadData(); }
+
     protected:
         void Draw() override;
 
     private:
+        void ChooseMaterial();
+        void ReadData();
+
         void SetDynamicFriction(float_t dynamicFriction) { m_materialData.dynamicFriction = dynamicFriction; }
         void SetStaticFriction(float_t staticFriction) { m_materialData.staticFriction = staticFriction; }
         void SetBounciness(float_t bounciness) { m_materialData.bounciness = bounciness; }
@@ -31,7 +36,6 @@ namespace SR_CORE_GUI_NS {
 
     private:
         SR_PTYPES_NS::PhysicsMaterialData m_materialData;
-
         SR_UTILS_NS::Path m_materialPath;
     };
 }
