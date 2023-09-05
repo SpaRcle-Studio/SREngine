@@ -6,12 +6,12 @@
 
 namespace SR_SRLM_NS {
     LogicalNode::~LogicalNode() {
-        for (auto&& pData : m_inputs) {
-            delete pData.second;
+        for (auto&& pin : m_inputs) {
+            delete pin.pData;
         }
 
-        for (auto&& pData : m_outputs) {
-            delete pData.second;
+        for (auto&& pin : m_outputs) {
+            delete pin.pData;
         }
     }
 
@@ -26,7 +26,7 @@ namespace SR_SRLM_NS {
             return;
         }
 
-        auto&& pSelfInput = m_inputs.at(index).second;
+        auto&& pSelfInput = m_inputs.at(index).pData;
         if (pSelfInput->GetMeta() != pInput->GetMeta()) {
             m_status |= LogicalNodeStatus::InputTypeError;
             return;
@@ -36,12 +36,12 @@ namespace SR_SRLM_NS {
     }
 
     void LogicalNode::Reset() {
-        for (auto&& pData : m_inputs) {
-            pData.second->Reset();
+        for (auto&& pin : m_inputs) {
+            pin.pData->Reset();
         }
 
-        for (auto&& pData : m_outputs) {
-            pData.second->Reset();
+        for (auto&& pin : m_outputs) {
+            pin.pData->Reset();
         }
 
         m_status = LogicalNodeStatus::None;
@@ -57,13 +57,13 @@ namespace SR_SRLM_NS {
             return nullptr;
         }
 
-        return m_inputs.at(index).second;
+        return m_inputs.at(index).pData;
     }
 
     void LogicalNode::MarkDirty() {
         if (GetType() == LogicalNodeType::Compute || GetType() == LogicalNodeType::Connector) {
-            for (auto&& [pNode, pData] : m_outputs) {
-                pNode->MarkDirty();
+            for (auto&& pin : m_outputs) {
+                pin.pNode->MarkDirty();
             }
         }
     }
@@ -74,7 +74,21 @@ namespace SR_SRLM_NS {
             return nullptr;
         }
 
-        return m_inputs.at(index).first;
+        return m_inputs.at(index).pNode;
+    }
+
+    void LogicalNode::AddInputData(DataType* pData, uint64_t hashName) {
+        auto&& pin = NodePin();
+        pin.pData = pData;
+        pin.hashName = hashName;
+        m_inputs.emplace_back(pin);
+    }
+
+    void LogicalNode::AddOutputData(DataType* pData, uint64_t hashName) {
+        auto&& pin = NodePin();
+        pin.pData = pData;
+        pin.hashName = hashName;
+        m_outputs.emplace_back(pin);
     }
 
     /// ----------------------------------------------------------------------------------------------------------------

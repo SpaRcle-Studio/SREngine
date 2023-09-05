@@ -6,9 +6,10 @@
 #define SRENGINE_NODE_H
 
 #include <Utils/SRLM/DataType.h>
+#include <Utils/SRLM/LogicalNode.h>
 #include <Graphics/GUI/Icons.h>
 
-namespace SR_GRAPH_NS::GUI {
+namespace SR_GRAPH_GUI_NS {
     SR_ENUM_NS_CLASS(NodeType,
         None,
         Blueprint,
@@ -16,7 +17,7 @@ namespace SR_GRAPH_NS::GUI {
         Tree,
         Comment,
         Houdini,
-        Dot
+        Connector
     );
 
     class NodeBuilder;
@@ -30,6 +31,7 @@ namespace SR_GRAPH_NS::GUI {
     public:
         Node();
         explicit Node(const std::string& name);
+        explicit Node(SR_SRLM_NS::LogicalNode* pNode);
         Node(const std::string& name, NodeType type);
         Node(const std::string& name, ImColor color);
         Node(const std::string& name, NodeType type, ImColor color);
@@ -54,27 +56,25 @@ namespace SR_GRAPH_NS::GUI {
 
         SR_NODISCARD uintptr_t GetId() const;
         SR_NODISCARD std::string GetName() const;
-        SR_NODISCARD uint64_t GetIdentifier() const { return m_identifier; }
-        SR_NODISCARD bool IsDot() const { return m_type == NodeType::Dot; }
+        SR_NODISCARD bool IsConnector() const { return m_type == NodeType::Connector; }
 
         SR_NODISCARD Node* Copy() const;
 
         Node& SetName(std::string name);
         Node& SetPosition(const SR_MATH_NS::FVector2& pos);
-        Node& SetIdentifier(uint64_t identifier);
         Node& SetType(NodeType type);
 
         void Draw(NodeBuilder* pBuilder, Pin* pNewLinkPin);
 
     private:
+        SR_SRLM_NS::LogicalNode* m_logicalNode = nullptr;
         std::string m_name;
         std::vector<Pin*> m_inputs;
         std::vector<Pin*> m_outputs;
-        ImColor m_color;
-        NodeType m_type;
+        ImColor m_color = ImColor(255, 255, 255, 255);
+        NodeType m_type = NodeType::None;
         float_t m_maxOutputWidth;
         bool m_hasOutputDelegates = false;
-        uint64_t m_identifier = SR_UINT64_MAX;
 
     };
 }

@@ -7,8 +7,14 @@
 
 #include <Utils/Common/Singleton.h>
 #include <Utils/FileSystem/Path.h>
+#include <Utils/Common/Enumerations.h>
 
 namespace SR_UTILS_NS {
+    SR_ENUM_NS_CLASS_T(DebugLogType, uint8_t,
+        Log, Info, Debug, Graph, Shader, Script, System, Warn,
+        Error, ScriptError, ScriptLog, Vulkan, VulkanLog, VulkanError, Assert
+    );
+
     class SR_DLL_EXPORT Debug : public Singleton<Debug> {
     public:
         enum class Level {
@@ -38,18 +44,11 @@ namespace SR_UTILS_NS {
             White = 15
         };
 
-        enum class Type {
-            Log, Info, Debug, Graph, Shader, Script, System, Warn,
-            Error, ScriptError, ScriptLog, Vulkan, VulkanLog, VulkanError, Assert
-        };
-
     public:
         ~Debug() override = default;
 
     private:
         void InitColorTheme();
-
-        void Print(std::string msg, Type type);
 
     public:
         Level GetLevel() { return m_level; }
@@ -63,22 +62,24 @@ namespace SR_UTILS_NS {
         void OnSingletonDestroy() override;
 
     public:
-        void Log(const std::string& msg) { Print(msg, Type::Log); }
-        void VulkanLog(const std::string& msg) { Print(msg, Type::VulkanLog); }
-        void Info(const std::string& msg) { Print(msg, Type::Info); }
-        void Graph(const std::string& msg) { Print(msg, Type::Graph); }
-        void Vulkan(const std::string& msg) { Print(msg, Type::Vulkan); }
-        void Shader(const std::string& msg) { Print(msg, Type::Shader); }
-        void Script(const std::string& msg) { Print(msg, Type::Script); }
-        void System(const std::string& msg) { Print(msg, Type::System); }
-        void Warn(const std::string& msg) { Print(msg, Type::Warn); m_countWarnings++; }
-        void Error(const std::string& msg) { Print(msg, Type::Error); m_countErrors++; }
-        void VulkanError(const std::string& msg) { Print(msg, Type::VulkanError); m_countErrors++; }
-        bool Assert(const std::string& msg) { Print(msg, Type::Assert); m_countErrors++; return false; }
+        void Log(const std::string& msg) { Print(msg, DebugLogType::Log); }
+        void VulkanLog(const std::string& msg) { Print(msg, DebugLogType::VulkanLog); }
+        void Info(const std::string& msg) { Print(msg, DebugLogType::Info); }
+        void Graph(const std::string& msg) { Print(msg, DebugLogType::Graph); }
+        void Vulkan(const std::string& msg) { Print(msg, DebugLogType::Vulkan); }
+        void Shader(const std::string& msg) { Print(msg, DebugLogType::Shader); }
+        void Script(const std::string& msg) { Print(msg, DebugLogType::Script); }
+        void System(const std::string& msg) { Print(msg, DebugLogType::System); }
+        void Warn(const std::string& msg) { Print(msg, DebugLogType::Warn); m_countWarnings++; }
+        void Error(const std::string& msg) { Print(msg, DebugLogType::Error); m_countErrors++; }
+        void VulkanError(const std::string& msg) { Print(msg, DebugLogType::VulkanError); m_countErrors++; }
+        bool Assert(const std::string& msg) { Print(msg, DebugLogType::Assert); m_countErrors++; return false; }
         bool AssertOnceCheck(const std::string& msg);
 
-        void ScriptLog(const std::string& msg) { Print(msg, Type::ScriptLog); }
-        void ScriptError(const std::string& msg) { Print(msg, Type::ScriptError); }
+        void ScriptLog(const std::string& msg) { Print(msg, DebugLogType::ScriptLog); }
+        void ScriptError(const std::string& msg) { Print(msg, DebugLogType::ScriptError); }
+
+        void Print(std::string msg, DebugLogType type);
 
     private:
         bool               m_showUseMemory             = false;

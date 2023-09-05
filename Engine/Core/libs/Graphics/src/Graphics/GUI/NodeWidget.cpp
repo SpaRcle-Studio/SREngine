@@ -7,7 +7,9 @@
 #include <Graphics/Types/Texture.h>
 
 #include <Utils/SRLM/LogicalMachine.h>
+#include <Utils/SRLM/LogicalNodes.h>
 #include <Utils/SRLM/DataTypeManager.h>
+#include <Utils/SRLM/LogicalNodeManager.h>
 #include <Utils/Common/HashManager.h>
 
 namespace SR_GRAPH_GUI_NS {
@@ -119,13 +121,12 @@ namespace SR_GRAPH_GUI_NS {
             auto&& clickPos = ImGui::GetMousePos();
 
             if (pLink->IsLinked()) {
-                auto&& pNode = new Node();
+                auto&& pLogicalNode = new SR_SRLM_NS::ConnectorNode();
 
-                pNode->SetType(NodeType::Dot)
-                    //.SetIdentifier(SR_SRLM_NS::NODE_LINK_DOT)
-                    .SetPosition(SR_MATH_NS::FVector2(clickPos.x, clickPos.y))
-                    .AddInput(pLink->GetStart()->GetType())
-                    .AddOutput(pLink->GetStart()->GetType());
+                pLogicalNode->AddInputData(pLink->GetStart()->GetDataType()->Copy());
+                pLogicalNode->AddOutputData(pLink->GetStart()->GetDataType()->Copy());
+
+                auto&& pNode = new Node(pLogicalNode);
 
                 AddLink(new Link(pNode->GetOutputPin(0), pLink->GetEnd()));
                 pLink->SetEnd(pNode->GetInputPin(0));
@@ -264,7 +265,7 @@ namespace SR_GRAPH_GUI_NS {
     }
 
     void NodeWidget::InitStructsCreationPopup() {
-        auto&& createStructsNodesMenu = m_creationPopup->AddMenu("Create Structs");
+        /*auto&& createStructsNodesMenu = m_creationPopup->AddMenu("Create Structs");
         auto&& breakStructsNodesMenu = m_creationPopup->AddMenu("Break Structs");
 
         for (auto&& [hashName, pStruct] : SR_SRLM_NS::DataTypeManager::Instance().GetStructs()) {
@@ -309,63 +310,21 @@ namespace SR_GRAPH_GUI_NS {
 
                 context.pWidget->AddNode(pNode);
             });
-        }
+        }*/
     }
 
     void NodeWidget::InitCreationPopup() {
-        auto&& commonNodesMenu = m_creationPopup->AddMenu("Common");
-
-        auto&& logicNodesMenu = commonNodesMenu.AddMenu("Logic");
-
-        logicNodesMenu.AddMenu("Condition").SetAction([](const SR_GRAPH_GUI_NS::DrawPopupContext& context) {
-           // context.pWidget->AddNode(CreateNode(context.popupPos, SR_SRLM_NS::NODE_BOOL_CONDITION));
-        });
-
-        logicNodesMenu.AddMenu("And").SetAction([](const SR_GRAPH_GUI_NS::DrawPopupContext& context) {
-          //  context.pWidget->AddNode(CreateNode(context.popupPos, SR_SRLM_NS::NODE_BOOL_AND));
-        });
-
-        logicNodesMenu.AddMenu("Or").SetAction([](const SR_GRAPH_GUI_NS::DrawPopupContext& context) {
-          //  context.pWidget->AddNode(CreateNode(context.popupPos, SR_SRLM_NS::NODE_BOOL_OR));
-        });
-
-        logicNodesMenu.AddMenu("Not").SetAction([](const SR_GRAPH_GUI_NS::DrawPopupContext& context) {
-         //   context.pWidget->AddNode(CreateNode(context.popupPos, SR_SRLM_NS::NODE_BOOL_NOT));
-        });
-
-        auto&& mathNodesMenu = commonNodesMenu.AddMenu("Math");
-
-        mathNodesMenu.AddMenu("- Int").SetAction([](const SR_GRAPH_GUI_NS::DrawPopupContext& context) {
-          //  context.pWidget->AddNode(CreateNode(context.popupPos, SR_SRLM_NS::NODE_INT_NEGATIVE));
-        });
-
-        mathNodesMenu.AddMenu("- Float").SetAction([](const SR_GRAPH_GUI_NS::DrawPopupContext& context) {
-           // context.pWidget->AddNode(CreateNode(context.popupPos, SR_SRLM_NS::NODE_FLOAT_NEGATIVE));
-        });
-
-        mathNodesMenu.AddMenu("Int to Float").SetAction([](const SR_GRAPH_GUI_NS::DrawPopupContext& context) {
-        //    context.pWidget->AddNode(CreateNode(context.popupPos, SR_SRLM_NS::NODE_INT_TO_FLOAT));
-        });
-
-        mathNodesMenu.AddMenu("Float to Int").SetAction([](const SR_GRAPH_GUI_NS::DrawPopupContext& context) {
-       //     context.pWidget->AddNode(CreateNode(context.popupPos, SR_SRLM_NS::NODE_FLOAT_TO_INT));
-        });
-
-        mathNodesMenu.AddMenu("int + int").SetAction([](const SR_GRAPH_GUI_NS::DrawPopupContext& context) {
-         //   context.pWidget->AddNode(CreateNode(context.popupPos, SR_SRLM_NS::NODE_INT_PLUS_INT));
-        });
-
-        mathNodesMenu.AddMenu("int - int").SetAction([](const SR_GRAPH_GUI_NS::DrawPopupContext& context) {
-         //   context.pWidget->AddNode(CreateNode(context.popupPos, SR_SRLM_NS::NODE_INT_MINUS_INT));
-        });
-
-        mathNodesMenu.AddMenu("float + float").SetAction([](const SR_GRAPH_GUI_NS::DrawPopupContext& context) {
-         //   context.pWidget->AddNode(CreateNode(context.popupPos, SR_SRLM_NS::NODE_FLOAT_PLUS_FLOAT));
-        });
-
-        mathNodesMenu.AddMenu("float - float").SetAction([](const SR_GRAPH_GUI_NS::DrawPopupContext& context) {
-         //   context.pWidget->AddNode(CreateNode(context.popupPos, SR_SRLM_NS::NODE_FLOAT_MINUS_FLOAT));
-        });
+        for (auto&& [hashName, nodeInfo] : SR_SRLM_NS::LogicalNodeManager::Instance().GetNodeConstructors()) {
+            if (nodeInfo.category.empty()) {
+                continue;
+            }
+            auto&& menu = m_creationPopup->AddMenu(nodeInfo.category);
+            menu.AddMenu(SR_HASH_TO_STR(hashName)).SetAction([constructor = nodeInfo.constructor](const SR_GRAPH_GUI_NS::DrawPopupContext& context) {
+                auto&& pLogicalNode = constructor();
+                pLogicalNode->InitDefault();
+                context.pWidget->AddNode(new Node(pLogicalNode)).SetPosition(context.popupPos);
+            });
+        }
     }
 
     void NodeWidget::TopPanelSaveAt() {

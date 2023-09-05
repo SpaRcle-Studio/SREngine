@@ -28,12 +28,11 @@ namespace SR_GRAPH_GUI_NS {
         : m_name(name)
         , m_kind(kind)
         , m_dataType(pDataType)
-        , m_constValue(pDataType ? pDataType->Copy() : nullptr)
     { }
 
     Pin::~Pin() {
-        SR_SAFE_DELETE_PTR(m_constValue);
-        SR_SAFE_DELETE_PTR(m_dataType);
+        /// Будет удалено в управляющей ноде
+        /// SR_SAFE_DELETE_PTR(m_dataType);
 
         for (auto&& pLink : m_links) {
             pLink->Broke(this);
@@ -104,18 +103,15 @@ namespace SR_GRAPH_GUI_NS {
     }
 
     Pin* Pin::Copy() const {
-        auto&& pPin = new Pin();
+        SRHalt("Deprecated");
 
+        auto&& pPin = new Pin();
         pPin->m_name = m_name;
         pPin->m_kind = m_kind;
 
-        if (m_dataType) {
-            pPin->m_dataType = m_dataType->Copy();
-        }
-
-        if (m_constValue) {
-            pPin->m_constValue = m_constValue->Copy();
-        }
+        /// if (m_dataType) {
+        ///     pPin->m_dataType = m_dataType->Copy();
+        /// }
 
         return pPin;
     }
@@ -177,7 +173,7 @@ namespace SR_GRAPH_GUI_NS {
             }
         }
 
-        if (GetNode()->IsDot() && IsLinked()) {
+        if (GetNode()->IsConnector() && IsLinked()) {
             if (GetKind() == PinKind::Input) {
                 return false;
             }
@@ -200,6 +196,8 @@ namespace SR_GRAPH_GUI_NS {
             case PinKind::Input:
                 ax::NodeEditor::BeginPin(GetId(), ax::NodeEditor::PinKind::Input);
                 break;
+            default:
+                break;
         }
     }
 
@@ -218,13 +216,9 @@ namespace SR_GRAPH_GUI_NS {
     }
 
     void Pin::DrawOption() {
-        if (!m_constValue) {
-            return;
-        }
-
         switch (GetType()) {
             case PinType::Bool:
-                CheckboxNoNavFocus(SR_FORMAT_C("##Pin-%p", (void*)this), m_constValue->GetBool());
+                CheckboxNoNavFocus(SR_FORMAT_C("##Pin-%p", (void*)this), m_dataType->GetBool());
                 break;
             case PinType::Int8:
             case PinType::Int16:
@@ -234,20 +228,21 @@ namespace SR_GRAPH_GUI_NS {
             case PinType::UInt16:
             case PinType::UInt32:
             case PinType::UInt64: {
-                int32_t number = *m_constValue->GetInt32();
+                int32_t number = *m_dataType->GetInt32();
                 ImGui::PushItemWidth(40.0f);
                 ImGui::InputInt(SR_FORMAT_C("##Pin-%p", (void*)this), &number, 0);
-                *m_constValue->GetInt32() = number;
+                *m_dataType->GetInt32() = number;
                 ImGui::PopItemWidth();
                 break;
             }
             case PinType::Float:
                 ImGui::PushItemWidth(40.0f);
-                ImGui::InputFloat(SR_FORMAT_C("##Pin-%p", (void*)this), m_constValue->GetFloat());
+                ImGui::InputFloat(SR_FORMAT_C("##Pin-%p", (void*)this), m_dataType->GetFloat());
                 ImGui::PopItemWidth();
                 break;
             case PinType::String:
-                ImGui::InputText(SR_FORMAT_C("##Pin-%p", (void*)this), m_constValue->GetString());
+                ImGui::PushItemWidth(70.0f);
+                ImGui::InputText(SR_FORMAT_C("##Pin-%p", (void*)this), m_dataType->GetString());
                 break;
             default:
                 break;

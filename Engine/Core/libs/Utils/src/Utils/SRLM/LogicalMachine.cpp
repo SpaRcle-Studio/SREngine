@@ -5,7 +5,6 @@
 #include <Utils/SRLM/LogicalMachine.h>
 #include <Utils/SRLM/DataType.h>
 #include <Utils/SRLM/LogicalNode.h>
-#include <Utils/ResourceManager/ResourceManager.h>
 #include <Utils/Xml.h>
 
 namespace SR_SRLM_NS {
@@ -60,17 +59,17 @@ namespace SR_SRLM_NS {
 
             bool needContinue = pExecutable->IsNeedRepeat();
 
-            for (auto&& [pOutputNode, pOutputData] : pExecutable->GetOutputs()) {
-                if (pOutputData->GetClass() != DataTypeClass::Flow || !(*pOutputData->GetBool())) {
+            for (auto&& pin : pExecutable->GetOutputs()) {
+                if (pin.pData->GetClass() != DataTypeClass::Flow || !(*pin.pData->GetBool())) {
                     continue;
                 }
 
                 if (!needContinue) {
                     needContinue = true;
-                    pNode = pOutputNode;
+                    pNode = pin.pNode;
                 }
                 else {
-                    m_active.insert(m_active.begin() + m_currentNode, pOutputNode);
+                    m_active.insert(m_active.begin() + m_currentNode, pin.pNode);
                 }
             }
 

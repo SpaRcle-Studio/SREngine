@@ -9,7 +9,7 @@
 #include <Utils/Platform/Platform.h>
 
 namespace SR_UTILS_NS {
-    void Debug::Print(std::string msg, Debug::Type type) {
+    void Debug::Print(std::string msg, DebugLogType type) {
         SR_LOCK_GUARD;
         SR_TRACY_ZONE;
         SR_TRACY_TEXT_N("Text", msg);
@@ -23,22 +23,22 @@ namespace SR_UTILS_NS {
         ConsoleColor color;
 
         switch (type) {
-            case Debug::Type::Log:		    pref = "[Log] ";	        color = ConsoleColor::Cyan;		      break;
-            case Debug::Type::VulkanLog:	pref = "[VulkanLog] ";	    color = ConsoleColor::DarkGray;       break;
-            case Debug::Type::Info: 	    pref = "[Info] ";	        color = ConsoleColor::Magenta;	      break;
-            case Debug::Type::Debug:	    pref = "[Debug] ";	        color = ConsoleColor::Blue;		      break;
-            case Debug::Type::Graph:	    pref = "[Graph] ";	        color = ConsoleColor::Green;	      break;
-            case Debug::Type::Vulkan:	    pref = "[Vulkan] ";	        color = ConsoleColor::DarkGray;       break;
-            case Debug::Type::Shader:	    pref = "[Shader] ";	        color = ConsoleColor::LightCyan;      break;
-            case Debug::Type::Script:	    pref = "[Script] ";	        color = ConsoleColor::Brown;	      break;
-            case Debug::Type::System:	    pref = "[System] ";	        color = ConsoleColor::LightBlue;      break;
-            case Debug::Type::Warn:	        pref = "[Warn] ";	        color = ConsoleColor::Yellow;	      break;
-            case Debug::Type::Error:	    pref = "[Error] ";	        color = ConsoleColor::LightRed;	      break;
-            case Debug::Type::Assert:	    pref = "[Assert] ";	        color = ConsoleColor::LightRed;	      break;
-            case Debug::Type::ScriptError:	pref = "[ScriptError] ";	color = ConsoleColor::LightRed;	      break;
-            case Debug::Type::VulkanError:	pref = "[VulkanError] ";	color = ConsoleColor::LightRed;	      break;
-            case Debug::Type::ScriptLog:	pref = "[ScriptLog] ";	    color = ConsoleColor::LightCyan;      break;
-            default:					    pref = "[Unk] ";	        color = ConsoleColor::Black;	      break;
+            case DebugLogType::Log:		    pref = "[Log] ";	     color = ConsoleColor::Cyan;      break;
+            case DebugLogType::VulkanLog:	pref = "[VulkanLog] ";   color = ConsoleColor::DarkGray;  break;
+            case DebugLogType::Info:        pref = "[Info] ";        color = ConsoleColor::Magenta;   break;
+            case DebugLogType::Debug:       pref = "[Debug] ";       color = ConsoleColor::Blue;      break;
+            case DebugLogType::Graph:       pref = "[Graph] ";       color = ConsoleColor::Green;     break;
+            case DebugLogType::Vulkan:      pref = "[Vulkan] ";	     color = ConsoleColor::DarkGray;  break;
+            case DebugLogType::Shader:      pref = "[Shader] ";	     color = ConsoleColor::LightCyan; break;
+            case DebugLogType::Script:      pref = "[Script] ";	     color = ConsoleColor::Brown;     break;
+            case DebugLogType::System:      pref = "[System] ";	     color = ConsoleColor::LightBlue; break;
+            case DebugLogType::Warn:        pref = "[Warn] ";        color = ConsoleColor::Yellow;    break;
+            case DebugLogType::Error:       pref = "[Error] ";       color = ConsoleColor::LightRed;  break;
+            case DebugLogType::Assert:      pref = "[Assert] ";      color = ConsoleColor::LightRed;  break;
+            case DebugLogType::ScriptError:	pref = "[ScriptError] "; color = ConsoleColor::LightRed;  break;
+            case DebugLogType::VulkanError:	pref = "[VulkanError] "; color = ConsoleColor::LightRed;  break;
+            case DebugLogType::ScriptLog:	pref = "[ScriptLog] ";	 color = ConsoleColor::LightCyan; break;
+            default:                        pref = "[Unk] ";         color = ConsoleColor::Black;     break;
         }
 
     #ifdef SR_WIN32
@@ -64,7 +64,7 @@ namespace SR_UTILS_NS {
         msg = pref + msg;
     #endif
 
-        if (type == Debug::Type::Assert) {
+        if (type == DebugLogType::Assert) {
             msg.append("\nStack trace:\n").append(GetStacktrace());
         }
 
@@ -93,7 +93,7 @@ namespace SR_UTILS_NS {
         }
 
         volatile static bool enableBreakPoints = true;
-        if (type == Debug::Type::Assert && IsRunningUnderDebugger() && enableBreakPoints) {
+        if (type == DebugLogType::Assert && IsRunningUnderDebugger() && enableBreakPoints) {
             Breakpoint();
         }
     }
@@ -125,19 +125,19 @@ namespace SR_UTILS_NS {
         m_isInit = true;
         m_showUseMemory = ShowUsedMemory;
 
-        Print("Debugger has been initialized. \n\tLog path: " + m_logPath.ToString(), Type::Debug);
+        Print("Debugger has been initialized. \n\tLog path: " + m_logPath.ToString(), DebugLogType::Debug);
     }
 
     void Debug::OnSingletonDestroy() {
         if (!m_countErrors && !m_countWarnings) {
             std::string msg = "Debugger has been stopped.";
-            Print(msg, Type::Debug);
+            Print(msg, DebugLogType::Debug);
         }
         else {
             std::string msg = "Debugger has been stopped with errors!\n"
                               "\tErrors count: "+std::to_string(m_countErrors)+
                               "\n\tWarnings count: "+std::to_string(m_countWarnings);
-            Print(msg, Type::Debug);
+            Print(msg, DebugLogType::Debug);
         }
 
         if (m_file.is_open()) {

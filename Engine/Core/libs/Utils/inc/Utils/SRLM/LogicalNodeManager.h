@@ -16,10 +16,19 @@ namespace SR_SRLM_NS {
     class LogicalNodeManager : public SR_UTILS_NS::Singleton<LogicalNodeManager> {
         friend class SR_UTILS_NS::Singleton<LogicalNodeManager>;
         using Hash = uint64_t;
-        using NodeConstructors = std::unordered_map<Hash, SR_HTYPES_NS::Function<LogicalNode*()>>;
+        using Constructor = SR_HTYPES_NS::Function<LogicalNode*()>;
+        using Category = std::vector<std::string>;
+        struct NodeInfo {
+            Constructor constructor;
+            Category category;
+        };
+        using NodeConstructors = std::unordered_map<Hash, NodeInfo>;
     public:
+        SR_NODISCARD const NodeConstructors& GetNodeConstructors() { return m_constructors; }
         SR_NODISCARD LogicalNode* CreateByName(Hash hashName);
         SR_NODISCARD LogicalNode* CreateByName(const std::string& name);
+
+        SR_NODISCARD bool Register(Hash hashName, const Constructor& constructor, const Category& category);
 
     private:
         NodeConstructors m_constructors;

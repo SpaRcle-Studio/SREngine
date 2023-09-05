@@ -72,7 +72,6 @@ namespace SR_GRAPH_NS::GUI {
         void End() const;
 
     private:
-        DataTypePtr m_constValue = nullptr;
         DataTypePtr m_dataType = nullptr;
 
         std::unordered_set<Link*> m_links;

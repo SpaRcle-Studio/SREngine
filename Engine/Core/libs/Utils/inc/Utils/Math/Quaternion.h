@@ -83,7 +83,7 @@ namespace SR_MATH_NS {
         }
 
         SR_NODISCARD Quaternion Slerp(const Quaternion& q, Unit t) const {
-            SRAssertOnce(t >= 0.f || t <= 1.f);
+            // SRAssertOnce(t >= 0.f || t <= 1.f);
             return Quaternion(glm::slerp(self, q.self, static_cast<float_t>(t)));
         }
 

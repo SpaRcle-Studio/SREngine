@@ -30,6 +30,7 @@ namespace SR_GRAPH_GUI_NS {
         void SetName(std::string name) { m_name = std::move(name); }
 
         MenuItemSubWidget& AddMenu(std::string name);
+        MenuItemSubWidget& AddMenu(const std::vector<std::string>& category);
 
     protected:
         std::string m_name;
@@ -43,6 +44,7 @@ namespace SR_GRAPH_GUI_NS {
         using Action = SR_HTYPES_NS::Function<void(const DrawPopupContext& context)>;
 
     public:
+        MenuItemSubWidget() = default;
         explicit MenuItemSubWidget(std::string name)
             : m_name(std::move(name))
         { }
@@ -50,7 +52,9 @@ namespace SR_GRAPH_GUI_NS {
     public:
         void Draw(const DrawPopupContext& context);
 
-        MenuItemSubWidget& AddMenu(std::string name);
+        SR_NODISCARD const std::string& GetName() const noexcept { return m_name; }
+
+        MenuItemSubWidget& AddMenu(const std::string& name);
         MenuItemSubWidget& SetAction(Action action);
 
     protected:

@@ -48,7 +48,12 @@ namespace SR_GRAPH_GUI_NS {
         }
     }
 
-    MenuItemSubWidget& MenuItemSubWidget::AddMenu(std::string name) {
+    MenuItemSubWidget& MenuItemSubWidget::AddMenu(const std::string& name) {
+        for (auto&& pMenu : m_menuItems) {
+            if (pMenu->GetName() == name) {
+                return *pMenu;
+            }
+        }
         auto&& pMenu = new MenuItemSubWidget(std::move(name));
         return *m_menuItems.emplace_back(pMenu);
     }
@@ -56,6 +61,36 @@ namespace SR_GRAPH_GUI_NS {
     MenuItemSubWidget& PopupItemSubWidget::AddMenu(std::string name) {
         auto&& pMenu = new MenuItemSubWidget(std::move(name));
         return *m_menuItems.emplace_back(pMenu);
+    }
+
+    MenuItemSubWidget& PopupItemSubWidget::AddMenu(const std::vector<std::string>& category) {
+        static MenuItemSubWidget def;
+
+        if (category.empty()) {
+            SRHalt("Invalid category!");
+            return def;
+        }
+
+        MenuItemSubWidget* pItem = nullptr;
+
+        for (uint16_t i = 0; i < category.size(); ++i) {
+            if (i == 0) {
+                for (auto&& pMenu : m_menuItems) {
+                    if (pMenu->GetName() == category.front()) {
+                        pItem = pMenu.Get();
+                        break;
+                    }
+                }
+                if (!pItem) {
+                    pItem = &AddMenu(category.front());
+                }
+                continue;
+            }
+            pItem = &pItem->AddMenu(category[i]);
+        }
+
+        SRAssert(pItem);
+        return *pItem;
     }
 
     MenuItemSubWidget& MenuItemSubWidget::SetAction(MenuItemSubWidget::Action action) {

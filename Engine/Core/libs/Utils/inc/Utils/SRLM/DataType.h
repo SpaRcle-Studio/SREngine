@@ -74,6 +74,8 @@ namespace SR_SRLM_NS {
         SR_NODISCARD uint32_t* GetUInt32() const { return (uint32_t*)GetRawValue(); }
         SR_NODISCARD uint64_t* GetUInt64() const { return (uint64_t*)GetRawValue(); }
 
+        SR_NODISCARD uint64_t* GetEnum() const { return (uint64_t*)GetRawValue(); }
+
     public:
         virtual DataType* SetRawValue(void* pValue) { return this; }
         template<typename T> DataType* SetCustomValue(const T& value) { return SetRawValue((void*)&value); }
@@ -146,6 +148,16 @@ namespace SR_SRLM_NS {
 
     class DataTypeFlow : public DataTypeBool {
         SR_LM_REGISTER_TYPE(DataTypeFlow, Flow)
+
+        DataTypeFlow() = default;
+
+        explicit DataTypeFlow(bool value)
+            : DataTypeBool(value)
+        { }
+
+        SR_NODISCARD DataType* Copy() const override {
+            return new DataTypeFlow(m_value);
+        }
     };
 
     /// ----------------------------------------------------------------------------------------------------------------
@@ -157,6 +169,11 @@ namespace SR_SRLM_NS {
 
         explicit DataTypeEnum(int64_t value, EnumReflector* pReflector)
             : DataTypeInt64(value)
+            , m_reflector(pReflector)
+        { }
+
+        explicit DataTypeEnum(EnumReflector* pReflector)
+            : DataTypeInt64()
             , m_reflector(pReflector)
         { }
 

@@ -13,9 +13,9 @@ namespace SR_GRAPH_GUI_NS {
         auto&& pNode = new SR_GRAPH_GUI_NS::Node();
         auto&& node = *pNode;
 
-        node.SetPosition(pos);
-        node.SetIdentifier(identifier);
-        node.SetType(SR_GRAPH_GUI_NS::NodeType::Simple);
+        // node.SetPosition(pos);
+        // node.SetIdentifier(identifier);
+        // node.SetType(SR_GRAPH_GUI_NS::NodeType::Simple);
 
         /*switch (identifier) {
             case SR_SRLM_NS::NODE_BOOL_CONDITION: {

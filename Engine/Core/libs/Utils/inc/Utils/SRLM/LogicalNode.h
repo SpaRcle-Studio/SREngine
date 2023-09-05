@@ -7,6 +7,7 @@
 
 #include <Utils/Common/NonCopyable.h>
 #include <Utils/Common/Hashes.h>
+#include <Utils/Common/Enumerations.h>
 
 namespace SR_SRLM_NS {
     class DataType;
@@ -34,30 +35,48 @@ namespace SR_SRLM_NS {
     );
 
     class LogicalNode : public SR_UTILS_NS::NonCopyable {
-        using Pins = std::vector<std::pair<LogicalNode*, DataType*>>;
+    public:
+        using Hash = uint64_t;
+        struct NodePin {
+            LogicalNode* pNode = nullptr;
+            DataType* pData = nullptr;
+            Hash hashName = SR_UINT64_MAX;
+        };
+        using Pins = std::vector<NodePin>;
     public:
         ~LogicalNode() override;
 
     public:
         virtual void SetInput(const DataType* pInput, uint8_t index);
+
         SR_NODISCARD virtual const DataType* GetOutput(uint8_t index);
         SR_NODISCARD virtual LogicalNode* GetOutputNode(uint8_t index);
+        SR_NODISCARD const Pins& GetInputs() const { return m_inputs; }
+        SR_NODISCARD const Pins& GetOutputs() const { return m_outputs; }
+        SR_NODISCARD virtual uint64_t GetHashName() const noexcept = 0;
+        SR_NODISCARD virtual std::string GetName() const noexcept = 0;
 
         virtual void Reset();
         virtual void MarkDirty();
-        virtual bool IsNeedRepeat() const { return false; }
-        virtual bool IsNeedPostRepeat() const { return false; }
+        virtual void InitDefault() { }
 
+        SR_NODISCARD virtual bool IsNeedRepeat() const { return false; }
+        SR_NODISCARD virtual bool IsNeedPostRepeat() const { return false; }
         SR_NODISCARD virtual bool IsEntryPoint() const noexcept { return false; }
         SR_NODISCARD virtual LogicalNodeType GetType() const noexcept = 0;
         SR_NODISCARD bool HasErrors() const { return m_status & LogicalNodeStatus::ErrorStatus; }
         SR_NODISCARD LogicalNodeStatusFlag GetStatus() const { return m_status; }
-        SR_NODISCARD const Pins& GetOutputs() const { return m_outputs; }
+
+    public:
+        void AddInputData(DataType* pData, uint64_t hashName = SR_UINT64_MAX);
+        void AddOutputData(DataType* pData, uint64_t hashName = SR_UINT64_MAX);
+
+        template<typename T> void AddInputData(uint64_t hashName = SR_UINT64_MAX) { AddInputData(new T(), hashName); }
+        template<typename T> void AddOutputData(uint64_t hashName = SR_UINT64_MAX) { AddOutputData(new T(), hashName); }
 
     protected:
         LogicalNodeStatusFlag m_status = LogicalNodeStatus::None;
-
-    private:
+        
         Pins m_inputs;
         Pins m_outputs;
 
@@ -65,15 +84,14 @@ namespace SR_SRLM_NS {
 
     /// ----------------------------------------------------------------------------------------------------------------
 
-    class ConnectorNode : public LogicalNode {
-    public:
-        SR_NODISCARD LogicalNodeType GetType() const noexcept final { return LogicalNodeType::Connector; }
-
-    };
-
-    /// ----------------------------------------------------------------------------------------------------------------
-
     class IExecutableNode : public LogicalNode {
+    protected:
+        using Super = LogicalNode;
+        using Base = IExecutableNode;
+
+    protected:
+        IExecutableNode() = default;
+
     public:
         virtual void Execute(float_t dt) = 0;
         SR_NODISCARD LogicalNodeType GetType() const noexcept final { return LogicalNodeType::Executable; }
@@ -83,6 +101,9 @@ namespace SR_SRLM_NS {
     /// ----------------------------------------------------------------------------------------------------------------
 
     class IComputeNode : public LogicalNode {
+    protected:
+        using Base = IExecutableNode;
+
     public:
         void MarkDirty() override;
 

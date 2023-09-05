@@ -32,9 +32,9 @@ namespace SR_CORE_GUI_NS {
     }
 
     void RenderTechniqueEditor::InitCreationPopup() {
-        auto&& passesNodesMenu = m_creationPopup->AddMenu("Passes");
+        // auto&& passesNodesMenu = m_creationPopup->AddMenu("Passes");
 
-        passesNodesMenu.AddMenu("Start Pass").SetAction([](const SR_GRAPH_GUI_NS::DrawPopupContext& context) {
+        /*passesNodesMenu.AddMenu("Start Pass").SetAction([](const SR_GRAPH_GUI_NS::DrawPopupContext& context) {
             context.pWidget->AddNode(SR_GRAPH_GUI_NS::CreateNode(context.popupPos, SR_SRLM_NS::NODE_START_PASS));
         });
 
@@ -48,7 +48,7 @@ namespace SR_CORE_GUI_NS {
 
         passesNodesMenu.AddMenu("Frame Buffer Settings").SetAction([](const SR_GRAPH_GUI_NS::DrawPopupContext& context) {
             context.pWidget->AddNode(SR_GRAPH_GUI_NS::CreateNode(context.popupPos, SR_SRLM_NS::NODE_FRAME_BUFFER_SETTINGS));
-        });
+        });*/
 
         Super::InitCreationPopup();
     }

@@ -14,6 +14,7 @@
 #include "../Utils/src/Utils/SRLM/DataTypeManager.cpp"
 #include "../Utils/src/Utils/SRLM/DataOperators.cpp"
 #include "../Utils/src/Utils/SRLM/LogicalNode.cpp"
+#include "../Utils/src/Utils/SRLM/LogicalNodes.cpp"
 #include "../Utils/src/Utils/SRLM/LogicalNodeManager.cpp"
 
 #include "../Utils/src/Utils/Events/EventManager.cpp"

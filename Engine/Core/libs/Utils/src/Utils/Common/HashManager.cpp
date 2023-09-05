@@ -5,12 +5,20 @@
 #include <Utils/Common/HashManager.h>
 
 namespace SR_UTILS_NS {
+    HashManager::Hash HashManager::AddHash(const char* str) {
+        SR_LOCK_GUARD;
+        auto&& hash = SR_HASH_STR(str);
+        m_strings[hash] = str;
+        return hash;
+    }
+
     HashManager::Hash HashManager::AddHash(const std::string& str) {
         SR_LOCK_GUARD;
         auto&& hash = SR_HASH_STR(str);
         m_strings[hash] = str;
         return hash;
     }
+
     HashManager::Hash HashManager::AddHash(const std::string_view& str) {
         SR_LOCK_GUARD;
         auto&& hash = SR_HASH_STR_VIEW(str);

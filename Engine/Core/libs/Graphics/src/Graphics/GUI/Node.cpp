@@ -7,25 +7,50 @@
 #include <Graphics/GUI/Pin.h>
 #include <Graphics/GUI/NodeBuilder.h>
 #include <Utils/SRLM/DataType.h>
+#include <Utils/Common/HashManager.h>
 
 namespace SR_GRAPH_GUI_NS {
     Node::Node()
         : Node(std::string(), NodeType::None, ImColor(255, 255, 255, 255))
     { }
 
-    Node::Node(const std::string &name)
+    Node::Node(SR_SRLM_NS::LogicalNode* pNode)
+        : m_logicalNode(pNode)
+    {
+        m_name = pNode->GetName();
+
+        if (pNode->GetType() == SR_SRLM_NS::LogicalNodeType::Executable) {
+            m_type = NodeType::Blueprint;
+        }
+        else if (pNode->GetType() == SR_SRLM_NS::LogicalNodeType::Connector) {
+            m_type = NodeType::Connector;
+        }
+        else {
+            m_type = NodeType::Simple;
+        }
+
+        for (auto&& pin : pNode->GetInputs()) {
+            AddInput(new Pin(SR_HASH_TO_STR(pin.hashName), pin.pData));
+        }
+
+        for (auto&& pin : pNode->GetOutputs()) {
+            AddOutput(new Pin(SR_HASH_TO_STR(pin.hashName), pin.pData));
+        }
+    }
+
+    Node::Node(const std::string& name)
         : Node(name, NodeType::None, ImColor(255, 255, 255, 255))
     { }
 
-    Node::Node(const std::string &name, NodeType type)
+    Node::Node(const std::string& name, NodeType type)
         : Node(name, type, ImColor(255, 255, 255, 255))
     { }
 
-    Node::Node(const std::string &name, ImColor color)
+    Node::Node(const std::string& name, ImColor color)
         : Node(name, NodeType::None, color)
     { }
 
-    Node::Node(const std::string &name, NodeType type, ImColor color)
+    Node::Node(const std::string& name, NodeType type, ImColor color)
         : m_name(name)
         , m_color(color)
         , m_type(type)
@@ -60,13 +85,13 @@ namespace SR_GRAPH_GUI_NS {
     void Node::Draw(NodeBuilder* pBuilder, Pin* pNewLinkPin) {
         pBuilder->Begin(this);
 
-        const bool isSimple = m_type == NodeType::Simple || m_type == NodeType::Dot;
+        const bool isSimple = m_type == NodeType::Simple || m_type == NodeType::Connector;
 
         if (!isSimple) {
             pBuilder->Header(m_color);
 
             ImGui::Spring(0);
-            if (!m_name.empty()) {
+            if (!m_name.empty() && !IsConnector()) {
                 ImGui::TextUnformatted(m_name.c_str());
             }
             ImGui::Spring(1);
@@ -154,7 +179,7 @@ namespace SR_GRAPH_GUI_NS {
             pBuilder->Middle();
 
             ImGui::Spring(1, 0);
-            if (!m_name.empty()) {
+            if (!m_name.empty() && !IsConnector()) {
                 ImGui::TextUnformatted(m_name.c_str());
             }
             ImGui::Spring(1, 0);
@@ -248,11 +273,6 @@ namespace SR_GRAPH_GUI_NS {
 
     Node& Node::SetName(std::string name) {
         m_name = std::move(name);
-        return *this;
-    }
-
-    Node& Node::SetIdentifier(uint64_t identifier) {
-        m_identifier = identifier;
         return *this;
     }
 

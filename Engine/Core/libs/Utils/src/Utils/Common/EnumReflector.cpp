@@ -4,6 +4,7 @@
 
 #include <Utils/Common/EnumReflector.h>
 #include <Utils/Common/Hashes.h>
+#include <Utils/Debug.h>
 
 namespace SR_UTILS_NS {
     bool EnumReflectorManager::RegisterReflector(EnumReflector* pReflector) {
@@ -35,6 +36,10 @@ namespace SR_UTILS_NS {
                (c >= 'a' && c <= 'z') ||
                (c >= '0' && c <= '9') ||
                (c == '_');
+    }
+
+    void EnumReflector::ErrorInternal(const std::string& msg) {
+        SRHalt(msg);
     }
 
     std::optional<std::string> EnumReflector::ToStringInternal(int64_t value) const {

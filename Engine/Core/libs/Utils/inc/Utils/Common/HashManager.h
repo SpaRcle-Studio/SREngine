@@ -21,6 +21,7 @@ namespace SR_UTILS_NS {
 
         Hash AddHash(const std::string& str);
         Hash AddHash(const std::string_view& str);
+        Hash AddHash(const char* str);
 
     private:
         ska::flat_hash_map<Hash, std::string> m_strings;

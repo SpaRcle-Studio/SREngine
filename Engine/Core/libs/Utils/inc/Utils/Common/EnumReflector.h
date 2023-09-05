@@ -5,10 +5,9 @@
 #ifndef SRENGINE_ENUMREFLECTOR_H
 #define SRENGINE_ENUMREFLECTOR_H
 
-#include <Utils/Common/NonCopyable.h>
+#include <Utils/Common/Singleton.h>
 #include <Utils/Common/Hashes.h>
 #include <Utils/Types/Map.h>
-#include <Utils/Debug.h>
 
 namespace SR_UTILS_NS {
     class EnumReflector;
@@ -33,6 +32,7 @@ namespace SR_UTILS_NS {
         ~EnumReflector() override;
 
     public:
+        template<typename EnumType> SR_NODISCARD static EnumReflector* GetReflector();
         template<typename EnumType> SR_NODISCARD static uint64_t Count();
         template<typename EnumType> SR_NODISCARD static std::string ToString(EnumType value);
         template<typename EnumType> SR_NODISCARD static EnumType FromString(const std::string& value);
@@ -53,6 +53,7 @@ namespace SR_UTILS_NS {
 
     private:
         static bool IsIdentChar(char c);
+        static void ErrorInternal(const std::string& msg);
 
     private:
         struct Data
@@ -152,7 +153,7 @@ namespace SR_UTILS_NS {
             return result.value();
         }
 
-        SRHalt("EnumReflector::ToString() : unknown type! Value: " + std::to_string(static_cast<int64_t>(value)));
+        ErrorInternal("EnumReflector::ToString() : unknown type! Value: " + std::to_string(static_cast<int64_t>(value)));
 
         return std::string();
     }
@@ -162,7 +163,7 @@ namespace SR_UTILS_NS {
             return static_cast<EnumType>(result.value());
         }
 
-        SRHalt("EnumReflector::FromString() : unknown type! Value: " + value);
+        ErrorInternal("EnumReflector::FromString() : unknown type! Value: " + value);
 
         return static_cast<EnumType>(0);
     }
@@ -190,7 +191,7 @@ namespace SR_UTILS_NS {
             return result.value();
         }
 
-        SRHalt("EnumReflector::GetIndex() : unknown type! Value: " + std::to_string(static_cast<int64_t>(value)));
+        ErrorInternal("EnumReflector::GetIndex() : unknown type! Value: " + std::to_string(static_cast<int64_t>(value)));
 
         return SR_ID_INVALID;
     }
@@ -200,13 +201,17 @@ namespace SR_UTILS_NS {
             return static_cast<EnumType>(result.value());
         }
 
-        SRHalt("EnumReflector::At() : invalid index! Index: " + std::to_string(static_cast<int64_t>(index)));
+        ErrorInternal("EnumReflector::At() : invalid index! Index: " + std::to_string(static_cast<int64_t>(index)));
 
         return EnumType();
     }
 
     template<typename EnumType> uint64_t EnumReflector::Count() {
         return _detail_reflector_(EnumType()).m_data->values.size();
+    }
+
+    template<typename EnumType> EnumReflector* EnumReflector::GetReflector() {
+        return const_cast<EnumReflector*>(&_detail_reflector_(EnumType()));
     }
 }
 
