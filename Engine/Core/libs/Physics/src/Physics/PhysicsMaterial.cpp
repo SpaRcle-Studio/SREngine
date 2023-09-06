@@ -88,8 +88,13 @@ namespace SR_PTYPES_NS {
 
             if (auto&& pMaterial = pLibrary->CreatePhysicsMaterial()) {
                 m_implementations[libraryType] = pMaterial;
-                pMaterial->Init(this);
+                pMaterial->SetMaterial(this);
+                pMaterial->Init();
             }
+        }
+
+        for (auto&& rigidbody : m_rigidbodies) {
+            rigidbody->SetShapeDirty(true);
         }
 
         return IResource::Load();
@@ -117,7 +122,7 @@ namespace SR_PTYPES_NS {
         matXml.AppendNode("BounceCombine").AppendAttribute(SR_UTILS_NS::EnumReflector::ToString(materialData.bounceCombine));
 
         if (!document.Save(path)) {
-            SR_ERROR("PhysicsMaterial::Save() : Failed to save the document! \n\tPath: " + path.ToString());
+            SR_ERROR("PhysicsMaterial::Save() : failed to save the document! \n\tPath: " + path.ToString());
             return false;
         }
 
@@ -129,5 +134,19 @@ namespace SR_PTYPES_NS {
             return pIt->second;
         }
         return nullptr;
+    }
+
+    void PhysicsMaterial::RemoveRigidbody(SR_PTYPES_NS::Rigidbody* pRigidbody) {
+        if (auto&& pIt = m_rigidbodies.find(pRigidbody); pIt != m_rigidbodies.end()) {
+            m_rigidbodies.erase(pIt);
+        }
+        else {
+            SRHalt("PhysicsMaterial::RemoveRigidbody() : rigidbody is not found.");
+        }
+    }
+
+    void PhysicsMaterial::SetRigidbody(SR_PTYPES_NS::Rigidbody* pRigidbody) {
+        SRAssert(m_rigidbodies.count(pRigidbody) == 0);
+        m_rigidbodies.insert(pRigidbody);
     }
 }

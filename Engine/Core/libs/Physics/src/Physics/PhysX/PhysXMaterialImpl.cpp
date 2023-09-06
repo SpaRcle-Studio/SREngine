@@ -7,30 +7,43 @@
 namespace SR_PTYPES_NS {
     PhysXMaterialImpl::PhysXMaterialImpl(LibraryPtr pLibrary)
         : Super(pLibrary)
-    { }
+    {
+        m_physics = GetLibrary<PhysXLibraryImpl>()->GetPxPhysics();
+    }
 
     PhysXMaterialImpl::~PhysXMaterialImpl() {
         SR_TRACY_ZONE;
 
-        if (m_material) {
-            m_material->release();
-            m_material = nullptr;
+        if (m_pxMaterial) {
+            m_pxMaterial->release();
+            m_pxMaterial = nullptr;
         }
     }
 
-    bool PhysXMaterialImpl::Init(PhysicsMaterial* pMaterial) {
+    bool PhysXMaterialImpl::Init() {
         SR_TRACY_ZONE;
+        if (!m_material) {
+            SRHalt("PhysXMaterialImpl::Init() : no material provided.");
+            return false;
+        }
 
-        auto&& pPhysics = GetLibrary<PhysXLibraryImpl>()->GetPxPhysics();
-
-        m_material = pPhysics->createMaterial(
-            pMaterial->GetStaticFriction(),
-            pMaterial->GetDynamicFriction(),
-            pMaterial->GetBounciness()
+        m_pxMaterial = m_physics->createMaterial(
+            m_material->GetStaticFriction(),
+            m_material->GetDynamicFriction(),
+            m_material->GetBounciness()
         );
 
-        m_material->setFrictionCombineMode(SR_PHYSICS_UTILS_NS::CombineToPxCombine(pMaterial->GetFrictionCombine()));
-        m_material->setRestitutionCombineMode(SR_PHYSICS_UTILS_NS::CombineToPxCombine(pMaterial->GetBounceCombine()));
+        m_pxMaterial->setFrictionCombineMode(SR_PHYSICS_UTILS_NS::CombineToPxCombine(m_material->GetFrictionCombine()));
+        m_pxMaterial->setRestitutionCombineMode(SR_PHYSICS_UTILS_NS::CombineToPxCombine(m_material->GetBounceCombine()));
+
+        return true;
+    }
+
+    bool PhysXMaterialImpl::ReInit() {
+        SR_TRACY_ZONE;
+
+        DeInit();
+        Init();
 
         return true;
     }
@@ -38,9 +51,9 @@ namespace SR_PTYPES_NS {
     void PhysXMaterialImpl::DeInit() {
         SR_TRACY_ZONE;
 
-        if (m_material) {
-            m_material->release();
-            m_material = nullptr;
+        if (m_pxMaterial) {
+            m_pxMaterial->release();
+            m_pxMaterial = nullptr;
         }
     }
 }

@@ -315,11 +315,13 @@ namespace SR_PTYPES_NS {
         }
 
         if (m_material) {
+            m_material->RemoveRigidbody(this);
             m_material->RemoveUsePoint();
         }
 
         if ((m_material = pMaterial)) {
             m_material->AddUsePoint();
+            m_material->SetRigidbody(this);
         }
     }
 

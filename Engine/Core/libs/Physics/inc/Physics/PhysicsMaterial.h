@@ -21,6 +21,7 @@ namespace SR_PHYSICS_NS {
 
 namespace SR_PTYPES_NS {
     class PhysicsMaterialImpl;
+    class Rigidbody;
 
     struct PhysicsMaterialData {
         float_t dynamicFriction = 0.6f;
@@ -57,7 +58,9 @@ namespace SR_PTYPES_NS {
         void SetBounciness(float_t bounciness) { m_materialData.bounciness = bounciness; }
         void SetFrictionCombine(Combine frictionCombine) { m_materialData.frictionCombine = frictionCombine; }
         void SetBounceCombine(Combine bounceCombine) { m_materialData.bounceCombine = bounceCombine; }
+        void SetRigidbody(SR_PTYPES_NS::Rigidbody* pRigidbody);
 
+        void RemoveRigidbody(SR_PTYPES_NS::Rigidbody* pRigidbody);
     private:
         bool Load() override;
         bool Unload() override;
@@ -65,6 +68,7 @@ namespace SR_PTYPES_NS {
     private:
         PhysicsMaterialData m_materialData;
 
+        std::set<SR_PTYPES_NS::Rigidbody*> m_rigidbodies;
         std::map<LibraryType, PhysicsMaterialImpl*> m_implementations;
     };
 }
