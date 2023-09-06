@@ -321,7 +321,8 @@ namespace SR_GRAPH_GUI_NS {
             auto&& menu = m_creationPopup->AddMenu(nodeInfo.category);
             menu.AddMenu(SR_HASH_TO_STR(hashName)).SetAction([constructor = nodeInfo.constructor](const SR_GRAPH_GUI_NS::DrawPopupContext& context) {
                 auto&& pLogicalNode = constructor();
-                pLogicalNode->InitDefault();
+                pLogicalNode->InitNode();
+                pLogicalNode->InitValues();
                 context.pWidget->AddNode(new Node(pLogicalNode)).SetPosition(context.popupPos);
             });
         }
@@ -332,25 +333,130 @@ namespace SR_GRAPH_GUI_NS {
     }
 
     void NodeWidget::TopPanelOpen() {
+        Clear();
 
+        auto&& path = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Engine/RenderTechniques/Sample.xml");
+
+        auto&& xmlDocument = SR_XML_NS::Document::Load(path);
+        if (!xmlDocument) {
+            return;
+        }
+
+        auto&& xmlLogicalMachine = xmlDocument.Root().GetNode("LogicalMachine");
+
+        std::map<uint64_t, Node*> nodes;
+
+        auto&& xmlNodes = xmlLogicalMachine.GetNode("Nodes");
+        for (auto&& xmlNode : xmlNodes.GetNodes()) {
+            auto&& uid = xmlNode.GetAttribute("UID").ToUInt64();
+            auto&& hashName = xmlNode.GetAttribute("Name").ToUInt64();
+
+            auto&& pLogicalNode = SR_SRLM_NS::LogicalNodeManager::Instance().CreateByName(hashName);
+            if (!pLogicalNode) {
+                SR_ERROR("NodeWidget::TopPanelOpen() : failed to load node!\n\tHash name: " + SR_UTILS_NS::ToString(hashName));
+                continue;
+            }
+
+            for (auto&& xmlPin : xmlNode.GetNodes()) {
+                auto&& pDataType = SR_SRLM_NS::DataType::LoadXml(xmlPin.GetNode("DT"));
+                if (!pDataType) {
+                    SR_ERROR("NodeWidget::TopPanelOpen() : failed to load pin!\n\tName: " + xmlPin.Name());
+                    continue;
+                }
+
+                auto&& pinHashName = SR_HASH_STR_REGISTER(xmlPin.GetAttribute("Name").ToString());
+
+                if (xmlPin.NameView() == "Input") {
+                    pLogicalNode->AddInputData(pDataType, pinHashName);
+                }
+                else if (xmlPin.NameView() == "Output") {
+                    pLogicalNode->AddOutputData(pDataType, pinHashName);
+                }
+                else {
+                    SR_ERROR("NodeWidget::TopPanelOpen() : invalid pin name!\n\tName: " + xmlPin.Name());
+                }
+            }
+
+            auto&& pNode = new Node(pLogicalNode);
+            pNode->SetPosition(xmlNode.GetAttribute<SR_MATH_NS::FVector2>());
+
+            nodes[uid] = pNode;
+        }
+
+        auto&& xmlLinks = xmlLogicalMachine.GetNode("Links");
+        for (auto&& xmlLink : xmlLinks.GetNodes()) {
+            auto&& startNodeId = xmlLink.GetAttribute("SN").ToUInt64();
+            auto&& endNodeId = xmlLink.GetAttribute("EN").ToUInt64();
+
+            auto&& startPinIndex = xmlLink.GetAttribute("SP").ToUInt64();
+            auto&& endPinIndex = xmlLink.GetAttribute("EP").ToUInt64();
+
+            AddLink(new Link(
+                nodes[startNodeId]->GetOutputPin(startPinIndex),
+                nodes[endNodeId]->GetInputPin(endPinIndex)
+            ));
+        }
+
+        for (auto&& [uid, pNode] : nodes) {
+            AddNode(pNode);
+        }
     }
 
     void NodeWidget::TopPanelSave() {
         auto&& path = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Engine/RenderTechniques/Sample.xml");
 
-        SR_XML_NS::Document xmlDocument;
+        auto&& xmlDocument = SR_XML_NS::Document::New();
 
         auto&& xmlLogicalMachine = xmlDocument.Root().AppendNode("LogicalMachine");
         auto&& xmlNodes = xmlLogicalMachine.AppendNode("Nodes");
 
         for (auto&& [uid, pNode] : m_nodes) {
             auto&& xmlNode = xmlNodes.AppendNode("Node");
-
             xmlNode.AppendAttribute("UID", uid);
+            xmlNode.AppendAttribute("Name", pNode->GetHashName());
+            xmlNode.AppendAttribute(pNode->GetPosition());
+
+            for (auto&& pPin : pNode->GetInputs()) {
+                auto&& xmlPinNode = xmlNode.AppendNode("Input");
+                SavePin(xmlPinNode, pPin);
+            }
+
+            for (auto&& pPin : pNode->GetOutputs()) {
+                auto&& xmlPinNode = xmlNode.AppendNode("Output");
+                SavePin(xmlPinNode, pPin);
+            }
         }
+
+        auto&& xmlLinks = xmlLogicalMachine.AppendNode("Links");
+
+        for (auto&& [uid, pLink] : m_links) {
+            if (!pLink->IsLinked()) {
+                continue;
+            }
+
+            auto&& xmlLink = xmlLinks.AppendChild("Link");
+
+            xmlLink.AppendAttribute("SN", pLink->GetStart()->GetNode()->GetId());
+            xmlLink.AppendAttribute("EN", pLink->GetEnd()->GetNode()->GetId());
+
+            xmlLink.AppendAttribute("SP", pLink->GetStart()->GetIndex());
+            xmlLink.AppendAttribute("EP", pLink->GetEnd()->GetIndex());
+        }
+
+        xmlDocument.Save(path);
     }
 
     void NodeWidget::TopPanelClose() {
         Close();
+    }
+
+    void NodeWidget::SavePin(SR_XML_NS::Node& xmlNode, Pin* pPin) {
+        xmlNode.AppendAttribute("Name", pPin->GetName());
+        SaveDataType(xmlNode, pPin->GetDataType());
+    }
+
+    void NodeWidget::SaveDataType(SR_XML_NS::Node& xmlNode, SR_SRLM_NS::DataType* pDataType) {
+        auto&& dataTypeXml = xmlNode.AppendNode("DT");
+        pDataType->SaveXml(dataTypeXml);
     }
 }

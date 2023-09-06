@@ -56,7 +56,12 @@ namespace SR_GRAPH_GUI_NS {
 
         SR_NODISCARD uintptr_t GetId() const;
         SR_NODISCARD std::string GetName() const;
+        SR_NODISCARD uint64_t GetHashName() const;
         SR_NODISCARD bool IsConnector() const { return m_type == NodeType::Connector; }
+        SR_NODISCARD const std::vector<Pin*>& GetInputs() const noexcept { return m_inputs; }
+        SR_NODISCARD const std::vector<Pin*>& GetOutputs() const noexcept { return m_outputs; }
+        SR_NODISCARD int32_t GetPinIndex(const Pin* pPin) const;
+        SR_NODISCARD SR_MATH_NS::FVector2 GetPosition() const;
 
         SR_NODISCARD Node* Copy() const;
 

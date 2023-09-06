@@ -58,7 +58,8 @@ namespace SR_SRLM_NS {
 
         virtual void Reset();
         virtual void MarkDirty();
-        virtual void InitDefault() { }
+        virtual void InitValues() { }
+        virtual void InitNode() { }
 
         SR_NODISCARD virtual bool IsNeedRepeat() const { return false; }
         SR_NODISCARD virtual bool IsNeedPostRepeat() const { return false; }

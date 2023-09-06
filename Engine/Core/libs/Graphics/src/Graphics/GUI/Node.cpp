@@ -325,4 +325,29 @@ namespace SR_GRAPH_GUI_NS {
     Node& Node::AddOutput(const std::string& name, SR_SRLM_NS::DataType* pDataType) {
         return AddOutput(new Pin(name, pDataType));
     }
+
+    uint64_t Node::GetHashName() const {
+        return m_logicalNode->GetHashName();
+    }
+
+    SR_MATH_NS::FVector2 Node::GetPosition() const {
+        auto&& pos = ax::NodeEditor::GetNodePosition(GetId());
+        return SR_MATH_NS::FVector2(pos.x, pos.y);
+    }
+
+    int32_t Node::GetPinIndex(const Pin* pPin) const {
+        for (uint32_t i = 0; i < m_inputs.size(); ++i) {
+            if (m_inputs.at(i) == pPin) {
+                return i;
+            }
+        }
+
+        for (uint32_t i = 0; i < m_outputs.size(); ++i) {
+            if (m_outputs.at(i) == pPin) {
+                return i;
+            }
+        }
+
+        return SR_ID_INVALID;
+    }
 }

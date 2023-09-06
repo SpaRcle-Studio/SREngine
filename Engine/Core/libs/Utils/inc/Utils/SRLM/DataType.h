@@ -6,6 +6,7 @@
 #define SRENGINE_DATATYPE_H
 
 #include <Utils/SRLM/Utils.h>
+#include <Utils/Xml.h>
 
 namespace SR_UTILS_NS {
     class EnumReflector;
@@ -51,6 +52,10 @@ namespace SR_SRLM_NS {
         virtual void Reset() = 0;
         virtual void CopyTo(DataType* pData) const = 0;
 
+        void SaveXml(SR_XML_NS::Node& xmlNode);
+
+        static DataType* LoadXml(const SR_XML_NS::Node& xmlNode);
+
         SR_NODISCARD virtual std::vector<DataType*> GetMetaData() const { return std::vector<DataType*>(); }
         SR_NODISCARD virtual DataType* Copy() const = 0;
         SR_NODISCARD virtual Meta GetMeta() const noexcept = 0;
@@ -74,7 +79,7 @@ namespace SR_SRLM_NS {
         SR_NODISCARD uint32_t* GetUInt32() const { return (uint32_t*)GetRawValue(); }
         SR_NODISCARD uint64_t* GetUInt64() const { return (uint64_t*)GetRawValue(); }
 
-        SR_NODISCARD uint64_t* GetEnum() const { return (uint64_t*)GetRawValue(); }
+        SR_NODISCARD int64_t* GetEnum() const { return (int64_t*)GetRawValue(); }
 
     public:
         virtual DataType* SetRawValue(void* pValue) { return this; }
@@ -178,9 +183,13 @@ namespace SR_SRLM_NS {
         { }
 
     public:
+        SR_NODISCARD EnumReflector* GetReflector() const { return m_reflector; }
+
         SR_NODISCARD DataType* Copy() const override {
             return new DataTypeEnum(m_value, m_reflector);
         }
+
+        void SetReflector(EnumReflector* pReflector) { m_reflector = pReflector; }
 
     private:
         EnumReflector* m_reflector = nullptr;
@@ -228,6 +237,7 @@ namespace SR_SRLM_NS {
         void CopyTo(DataType* pData) const override;
         void AddVariable(Hash name, DataType* pData);
         void Reset() override;
+        void SetStructHashName(Hash hashName) { m_name = hashName; }
 
         SR_NODISCARD DataType* Copy() const override;
         SR_NODISCARD std::vector<DataType*> GetMetaData() const override;

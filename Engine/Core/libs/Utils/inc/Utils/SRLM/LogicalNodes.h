@@ -21,16 +21,16 @@ namespace SR_SRLM_NS {
     class DebugPrintNode : public IExecutableNode {
         SR_REGISTER_LOGICAL_NODE(DebugPrintNode, Debug Print, { "Base" })
     public:
-        DebugPrintNode();
         void Execute(float_t dt) override;
-        void InitDefault() override;
+        void InitValues() override;
+        void InitNode() override;
     };
 
     class StartNode : public IExecutableNode {
         SR_REGISTER_LOGICAL_NODE(StartNode, Start, { "Base" })
     public:
-        StartNode();
         void Execute(float_t dt) override;
+        void InitNode() override;
     };
 }
 

@@ -252,4 +252,13 @@ namespace SR_GRAPH_GUI_NS {
     Pin::PinType Pin::GetType() const {
         return m_dataType ? m_dataType->GetClass() : PinType::None;
     }
+
+    uint32_t Pin::GetIndex() const {
+        if (auto&& index = m_node->GetPinIndex(this); index >= 0) {
+            return index;
+        }
+
+        SRHalt("Invalid pin!");
+        return SR_UINT32_MAX;
+    }
 }

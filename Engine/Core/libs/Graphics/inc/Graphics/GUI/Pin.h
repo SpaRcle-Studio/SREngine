@@ -65,6 +65,8 @@ namespace SR_GRAPH_NS::GUI {
         SR_NODISCARD PinKind GetKind() const { return m_kind; }
         SR_NODISCARD Node* GetNode() const { return m_node; }
         SR_NODISCARD DataTypePtr GetDataType() const { return m_dataType; }
+        SR_NODISCARD uint32_t GetIndex() const;
+        SR_NODISCARD const std::string& GetName() const { return m_name; }
 
         SR_NODISCARD Pin* Copy() const;
 

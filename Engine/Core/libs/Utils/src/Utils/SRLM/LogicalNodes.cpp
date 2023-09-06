@@ -6,21 +6,6 @@
 #include <Utils/SRLM/DataType.h>
 
 namespace SR_SRLM_NS {
-    DebugPrintNode::DebugPrintNode()
-        : Base()
-    {
-        AddInputData<DataTypeFlow>();
-
-        AddInputData<DataTypeString>(SR_HASH_STR_REGISTER("Msg"));
-
-        AddInputData(new DataTypeEnum(
-            static_cast<uint64_t>(SR_UTILS_NS::DebugLogType::Log),
-            SR_UTILS_NS::EnumReflector::GetReflector<SR_UTILS_NS::DebugLogType>()
-        ), SR_HASH_STR_REGISTER("Type"));
-
-        AddOutputData<DataTypeFlow>();
-    }
-
     void DebugPrintNode::Execute(float_t dt) {
         SR_UTILS_NS::Debug::Instance().Print(
             *m_inputs.at(1).pData->GetString(),
@@ -30,13 +15,28 @@ namespace SR_SRLM_NS {
         m_status |= LogicalNodeStatus::Success;
     }
 
-    void DebugPrintNode::InitDefault() {
+    void DebugPrintNode::InitNode() {
+        IExecutableNode::InitNode();
+
+        AddInputData<DataTypeFlow>();
+
+        AddInputData<DataTypeString>(SR_HASH_STR_REGISTER("Msg"));
+
+        AddInputData(new DataTypeEnum(
+                static_cast<uint64_t>(SR_UTILS_NS::DebugLogType::Log),
+                SR_UTILS_NS::EnumReflector::GetReflector<SR_UTILS_NS::DebugLogType>()
+        ), SR_HASH_STR_REGISTER("Type"));
+
+        AddOutputData<DataTypeFlow>();
+    }
+
+    void DebugPrintNode::InitValues() {
+        IExecutableNode::InitValues();
         m_inputs.at(1).pData->SetCustomValue<std::string>("Hello World!");
     }
 
-    StartNode::StartNode()
-        : Base()
-    {
+    void StartNode::InitNode() {
+        IExecutableNode::InitNode();
         AddOutputData<DataTypeFlow>();
     }
 

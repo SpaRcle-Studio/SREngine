@@ -29,6 +29,14 @@ namespace SR_UTILS_NS {
             return m_attribute.as_float();
     }
 
+    double_t Xml::Attribute::ToDouble() const {
+        if (!CheckError(SR_FORMAT("Attribute::ToFloat() : attribute isn't valid! Name: %s", m_attribute.name()))) {
+            return 0.f;
+        }
+        else
+            return m_attribute.as_double();
+    }
+
     bool Xml::Attribute::ToBool() const {
         if (!CheckError(SR_FORMAT("Attribute::ToBool() : attribute isn't valid! Name: %s", m_attribute.name()))) {
             return false;
