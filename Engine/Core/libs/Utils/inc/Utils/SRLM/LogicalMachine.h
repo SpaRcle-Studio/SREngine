@@ -20,11 +20,14 @@ namespace SR_SRLM_NS {
         SR_INLINE_STATIC uint16_t VERSION = 1000;
 
     public:
+        SR_NODISCARD static LogicalMachine* Load(const SR_UTILS_NS::Path& path);
+
         bool Init();
         void Update(float_t dt);
 
     private:
         bool Execute(LogicalNode*& pNode, float_t dt);
+        void AddNode(LogicalNode* pNode);
 
     private:
         std::vector<LogicalNode*> m_nodes;

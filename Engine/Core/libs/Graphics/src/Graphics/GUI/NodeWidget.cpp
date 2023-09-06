@@ -127,6 +127,7 @@ namespace SR_GRAPH_GUI_NS {
                 pLogicalNode->AddOutputData(pLink->GetStart()->GetDataType()->Copy());
 
                 auto&& pNode = new Node(pLogicalNode);
+                pNode->SetPosition(SR_MATH_NS::FVector2(clickPos.x, clickPos.y));
 
                 AddLink(new Link(pNode->GetOutputPin(0), pLink->GetEnd()));
                 pLink->SetEnd(pNode->GetInputPin(0));
@@ -224,6 +225,16 @@ namespace SR_GRAPH_GUI_NS {
 
         if (ImGui::Button("Zoom")) {
             ax::NodeEditor::NavigateToContent();
+        }
+
+        ImGui::SameLine();
+
+        ImGui::Text(" | ");
+
+        ImGui::SameLine();
+
+        if (ImGui::Button("Execute")) {
+            Execute();
         }
 
         ImGui::SameLine();
@@ -349,38 +360,11 @@ namespace SR_GRAPH_GUI_NS {
         auto&& xmlNodes = xmlLogicalMachine.GetNode("Nodes");
         for (auto&& xmlNode : xmlNodes.GetNodes()) {
             auto&& uid = xmlNode.GetAttribute("UID").ToUInt64();
-            auto&& hashName = xmlNode.GetAttribute("Name").ToUInt64();
-
-            auto&& pLogicalNode = SR_SRLM_NS::LogicalNodeManager::Instance().CreateByName(hashName);
-            if (!pLogicalNode) {
-                SR_ERROR("NodeWidget::TopPanelOpen() : failed to load node!\n\tHash name: " + SR_UTILS_NS::ToString(hashName));
-                continue;
+            if (auto&& pLogicalNode = SR_SRLM_NS::LogicalNode::LoadXml(xmlNode)) {
+                auto&& pNode = new Node(pLogicalNode);
+                pNode->SetPosition(xmlNode.GetAttribute<SR_MATH_NS::FVector2>());
+                nodes[uid] = pNode;
             }
-
-            for (auto&& xmlPin : xmlNode.GetNodes()) {
-                auto&& pDataType = SR_SRLM_NS::DataType::LoadXml(xmlPin.GetNode("DT"));
-                if (!pDataType) {
-                    SR_ERROR("NodeWidget::TopPanelOpen() : failed to load pin!\n\tName: " + xmlPin.Name());
-                    continue;
-                }
-
-                auto&& pinHashName = SR_HASH_STR_REGISTER(xmlPin.GetAttribute("Name").ToString());
-
-                if (xmlPin.NameView() == "Input") {
-                    pLogicalNode->AddInputData(pDataType, pinHashName);
-                }
-                else if (xmlPin.NameView() == "Output") {
-                    pLogicalNode->AddOutputData(pDataType, pinHashName);
-                }
-                else {
-                    SR_ERROR("NodeWidget::TopPanelOpen() : invalid pin name!\n\tName: " + xmlPin.Name());
-                }
-            }
-
-            auto&& pNode = new Node(pLogicalNode);
-            pNode->SetPosition(xmlNode.GetAttribute<SR_MATH_NS::FVector2>());
-
-            nodes[uid] = pNode;
         }
 
         auto&& xmlLinks = xmlLogicalMachine.GetNode("Links");
@@ -390,6 +374,11 @@ namespace SR_GRAPH_GUI_NS {
 
             auto&& startPinIndex = xmlLink.GetAttribute("SP").ToUInt64();
             auto&& endPinIndex = xmlLink.GetAttribute("EP").ToUInt64();
+
+            if (nodes.count(startNodeId) == 0 || nodes.count(endNodeId) == 0) {
+                SRHalt("Invalid node id!");
+                continue;
+            }
 
             AddLink(new Link(
                 nodes[startNodeId]->GetOutputPin(startPinIndex),
@@ -413,18 +402,8 @@ namespace SR_GRAPH_GUI_NS {
         for (auto&& [uid, pNode] : m_nodes) {
             auto&& xmlNode = xmlNodes.AppendNode("Node");
             xmlNode.AppendAttribute("UID", uid);
-            xmlNode.AppendAttribute("Name", pNode->GetHashName());
             xmlNode.AppendAttribute(pNode->GetPosition());
-
-            for (auto&& pPin : pNode->GetInputs()) {
-                auto&& xmlPinNode = xmlNode.AppendNode("Input");
-                SavePin(xmlPinNode, pPin);
-            }
-
-            for (auto&& pPin : pNode->GetOutputs()) {
-                auto&& xmlPinNode = xmlNode.AppendNode("Output");
-                SavePin(xmlPinNode, pPin);
-            }
+            pNode->GetLogicalNode()->SaveXml(xmlNode);
         }
 
         auto&& xmlLinks = xmlLogicalMachine.AppendNode("Links");
@@ -446,17 +425,16 @@ namespace SR_GRAPH_GUI_NS {
         xmlDocument.Save(path);
     }
 
+    void NodeWidget::Execute() {
+        auto&& path = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Engine/RenderTechniques/Sample.xml");
+        if (auto&& pLogicalMachine = SR_SRLM_NS::LogicalMachine::Load(path)) {
+            pLogicalMachine->Init();
+            pLogicalMachine->Update(0.f);
+            delete pLogicalMachine;
+        }
+    }
+
     void NodeWidget::TopPanelClose() {
         Close();
-    }
-
-    void NodeWidget::SavePin(SR_XML_NS::Node& xmlNode, Pin* pPin) {
-        xmlNode.AppendAttribute("Name", pPin->GetName());
-        SaveDataType(xmlNode, pPin->GetDataType());
-    }
-
-    void NodeWidget::SaveDataType(SR_XML_NS::Node& xmlNode, SR_SRLM_NS::DataType* pDataType) {
-        auto&& dataTypeXml = xmlNode.AppendNode("DT");
-        pDataType->SaveXml(dataTypeXml);
     }
 }

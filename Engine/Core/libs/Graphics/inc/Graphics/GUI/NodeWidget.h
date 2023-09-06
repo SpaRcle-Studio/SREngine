@@ -40,8 +40,7 @@ namespace SR_GRAPH_GUI_NS {
         virtual void TopPanelSave();
         virtual void TopPanelClose();
 
-        virtual void SaveDataType(SR_XML_NS::Node& xmlNode, SR_SRLM_NS::DataType* pDataType);
-        virtual void SavePin(SR_XML_NS::Node& xmlNode, Pin* pPin);
+        virtual void Execute();
 
         virtual void InitCreationPopup();
         virtual void InitStructsCreationPopup();

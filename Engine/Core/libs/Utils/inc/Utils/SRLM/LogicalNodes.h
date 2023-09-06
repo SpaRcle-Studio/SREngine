@@ -31,6 +31,7 @@ namespace SR_SRLM_NS {
     public:
         void Execute(float_t dt) override;
         void InitNode() override;
+        SR_NODISCARD bool IsEntryPoint() const noexcept override { return true; }
     };
 }
 

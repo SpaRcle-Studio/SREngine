@@ -39,6 +39,7 @@ namespace SR_SRLM_NS {
         using Hash = uint64_t;
         struct NodePin {
             LogicalNode* pNode = nullptr;
+            uint32_t pinIndex = 0;
             DataType* pData = nullptr;
             Hash hashName = SR_UINT64_MAX;
         };
@@ -47,12 +48,15 @@ namespace SR_SRLM_NS {
         ~LogicalNode() override;
 
     public:
+        SR_NODISCARD static LogicalNode* LoadXml(const SR_XML_NS::Node& xmlNode);
+
+        virtual void SaveXml(SR_XML_NS::Node& xmlNode);
         virtual void SetInput(const DataType* pInput, uint8_t index);
 
         SR_NODISCARD virtual const DataType* GetOutput(uint8_t index);
         SR_NODISCARD virtual LogicalNode* GetOutputNode(uint8_t index);
-        SR_NODISCARD const Pins& GetInputs() const { return m_inputs; }
-        SR_NODISCARD const Pins& GetOutputs() const { return m_outputs; }
+        SR_NODISCARD Pins& GetInputs() { return m_inputs; }
+        SR_NODISCARD Pins& GetOutputs() { return m_outputs; }
         SR_NODISCARD virtual uint64_t GetHashName() const noexcept = 0;
         SR_NODISCARD virtual std::string GetName() const noexcept = 0;
 

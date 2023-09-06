@@ -190,6 +190,10 @@ namespace SR_SRLM_NS {
     }
 
     DataType* DataType::LoadXml(const SR_XML_NS::Node& xmlNode) {
+        if (!xmlNode.HasAttribute("Name")) {
+            return nullptr;
+        }
+
         auto&& hashName = xmlNode.GetAttribute("Name").ToUInt64();
         auto&& pDataType = SR_SRLM_NS::DataTypeAllocator::Instance().Allocate(hashName);
         if (!pDataType) {
