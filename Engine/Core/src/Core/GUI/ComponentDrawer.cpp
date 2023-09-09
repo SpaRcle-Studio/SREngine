@@ -41,7 +41,11 @@
 #include <Graphics/Font/Text.h>
 #include <Graphics/Font/Font.h>
 
+#include <Audio/Types/AudioSource.h>
+
+#include <imgui_internal.h>
 namespace SR_CORE_NS::GUI {
+
     void ComponentDrawer::DrawComponent(SR_PTYPES_NS::Rigidbody3D*& pComponent, EditorGUI* context, int32_t index) {
         auto pCopy = dynamic_cast<SR_PTYPES_NS::Rigidbody*>(pComponent);
         DrawComponent(pCopy, context, index);
@@ -535,6 +539,31 @@ namespace SR_CORE_NS::GUI {
     void ComponentDrawer::DrawComponent(SR_GRAPH_NS::UI::Anchor *&anchor, EditorGUI *context, int32_t index) {
 
     }
+
+    void ComponentDrawer::DrawComponent(Framework::Audio::AudioSource *&pComponent, EditorGUI *context, int32_t index) {
+        float volume = pComponent->GetVolume();
+
+        if(ImGui::SliderFloat("Volume",&volume,0.f,1.f,"%.1f"))
+        {
+
+            pComponent->SetVolume(volume);
+
+
+        }
+
+
+        std::string m_path = pComponent->GetPath().ToString();
+        if (ImGui::InputText("Path to Audio",&m_path))
+        {
+           pComponent->SetPath(m_path);
+        }
+        
+
+
+    }
+
+
+
 
     void ComponentDrawer::DrawComponent(SR_GRAPH_NS::UI::Canvas *&canvas, EditorGUI *context, int32_t index) {
 

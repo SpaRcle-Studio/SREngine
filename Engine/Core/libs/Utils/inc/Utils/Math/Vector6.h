@@ -31,6 +31,19 @@ namespace SR_MATH_NS {
             x = y = z = w = v = t = scalar;
         }
 
+        SR_FORCE_INLINE bool operator==(const Vector6 &p_v) const {
+            return SR_EQUALS(x, p_v.x)
+                && SR_EQUALS(y, p_v.y)
+                && SR_EQUALS(z, p_v.z)
+                && SR_EQUALS(w, p_v.w)
+                && SR_EQUALS(v, p_v.v)
+                && SR_EQUALS(t, p_v.t);
+        }
+
+        SR_FORCE_INLINE bool operator!=(const Vector6 &p_v) const {
+            return !(*this == p_v);
+        }
+
         template<typename U> SR_FAST_CONSTRUCTOR explicit Vector6(const Vector3<U>& vec) {
             x = static_cast<T>(vec.x);
             y = static_cast<T>(vec.y);

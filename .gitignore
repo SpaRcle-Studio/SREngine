@@ -19,3 +19,7 @@ _deps
 /Android/.gradle
 /Android/app/build
 /Android/app/.cxx
+out
+.vs
+Build
+/CMakeSettings.json

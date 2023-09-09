@@ -15,7 +15,7 @@
 #include <Physics/2D/Rigidbody2D.h>
 
 #include <Graphics/Types/Geometry/Sprite.h>
-#include <Graphics/UI/Anchor.h>
+#include <Audio/Types/AudioSource.h>#include <Graphics/UI/Anchor.h>
 #include <Graphics/UI/Canvas.h>
 #include <Graphics/Types/Geometry/ProceduralMesh.h>
 #include <Graphics/GUI/Utils.h>
@@ -194,6 +194,7 @@ namespace Framework::Core::GUI {
             copyPtrComponent = DrawComponent<SR_ANIMATIONS_NS::Skeleton>(copyPtrComponent, "Skeleton", index);
             copyPtrComponent = DrawComponent<SR_ANIMATIONS_NS::BoneComponent>(copyPtrComponent, "Bone", index);
             copyPtrComponent = DrawComponent<SR_UTILS_NS::LookAtComponent>(copyPtrComponent, "LookAtComponent", index);
+            copyPtrComponent = DrawComponent<SR_AUDIO_NS::AudioSource>(copyPtrComponent, "AudioSource", index);
 
             if (copyPtrComponent != component && copyPtrComponent) {
                 SR_LOG("Inspector::DrawComponents() : component \"" + component->GetComponentName() + "\" has been replaced.");

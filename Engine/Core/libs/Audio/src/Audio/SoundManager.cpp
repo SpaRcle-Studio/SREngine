@@ -107,6 +107,7 @@ namespace SR_AUDIO_NS {
             }
 
             pContext->ApplyParams(pPlayData->pSource, pPlayData->params);
+
             pContext->Play(pPlayData->pSource);
 
             pPlayData->isPlaying = true;
@@ -136,6 +137,7 @@ namespace SR_AUDIO_NS {
             pHandle = pPlayData;
 
             pPlayData->pData = pSound->GetData();
+
             pPlayData->params = params;
 
             pSound->AddUsePoint();
@@ -143,7 +145,9 @@ namespace SR_AUDIO_NS {
             m_playStack.emplace_back(pPlayData);
         }
 
-        while (!params.async) {
+        bool async = params.async.has_value() ? params.async.value() : true;
+
+        while (!async) {
             SR_LOCK_GUARD
 
             if (!IsExists(pHandle) || IsFailed(pHandle)) {
@@ -261,21 +265,24 @@ namespace SR_AUDIO_NS {
         return false;
     }
 
+
     SoundContext* SoundManager::GetContext(const PlayParams& params) {
-        if (auto&& pLibIt = m_contexts.find(params.library); pLibIt != m_contexts.end()) {
-            if (params.device.empty() && !pLibIt->second.empty()) {
+        AudioLibrary library = params.library.has_value() ? params.library.value() : GetRelevantLibrary();
+        auto&& device = params.device.has_value() ? params.device.value() : std::string();
+
+        if (auto&& pLibIt = m_contexts.find(library); pLibIt != m_contexts.end()) {
+            if (device.empty() && !pLibIt->second.empty()) {
                 return pLibIt->second.begin()->second;
             }
 
-            if (!params.device.empty()) {
-                if (auto&& pDeviceIt = pLibIt->second.find(params.device); pDeviceIt != pLibIt->second.end()) {
+            if (!device.empty()) {
+                if (auto&& pDeviceIt = pLibIt->second.find(device); pDeviceIt != pLibIt->second.end()) {
                     return pDeviceIt->second;
                 }
             }
         }
 
-        auto&& pDevice = SoundDevice::Allocate(params.library, params.device);
-
+        auto&& pDevice = SoundDevice::Allocate(library, params.device.value());
         if (!pDevice) {
             SR_ERROR("SoundManager::PrepareData() : failed to allocate sound device!");
             return nullptr;
@@ -288,14 +295,13 @@ namespace SR_AUDIO_NS {
         }
 
         auto&& pContext = SoundContext::Allocate(pDevice);
-
         if (!pContext->Init()) {
             SR_ERROR("SoundManager::PrepareData() : failed to initialize sound context!");
             delete pContext;
             return nullptr;
         }
 
-        m_contexts[params.library].insert(std::make_pair(pDevice->GetName(), pContext));
+        m_contexts[library].insert(std::make_pair(pDevice->GetName(), pContext));
 
         return pContext;
     }
@@ -324,6 +330,14 @@ namespace SR_AUDIO_NS {
     }
 
     SoundManager::Handle SoundManager::Play(const std::string& path) {
-        return Play(path, PlayParams());
+        return Play(path, PlayParams::GetDefault());
+    }
+
+    AudioLibrary SoundManager::GetRelevantLibrary() const {
+        if (m_contexts.empty()) {
+            return AudioLibrary::OpenAL;
+        }
+
+        return m_contexts.begin()->first;
     }
 }

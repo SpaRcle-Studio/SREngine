@@ -11,6 +11,10 @@ namespace SR_SCRIPTING_NS {
     class Behaviour;
 }
 
+namespace SR_AUDIO_NS{
+
+    class AudioSource;
+}
 namespace SR_ANIMATIONS_NS {
     class Animator;
     class BoneComponent;
@@ -69,6 +73,8 @@ namespace SR_CORE_NS::GUI::ComponentDrawer {
     void DrawComponent(SR_PTYPES_NS::Rigidbody*& pComponent, EditorGUI* context, int32_t index);
     void DrawCollisionShape(SR_PTYPES_NS::CollisionShape* pCollisionShape, EditorGUI* context, int32_t index);
     void DrawMaterialProps(SR_GRAPH_NS::Types::Material* material, EditorGUI* context, int32_t index);
+
+    void DrawComponent(SR_AUDIO_NS::AudioSource*& pComponent, EditorGUI* context, int32_t index);
 }
 
 #endif //SRENGINE_COMPONENTDRAWER_H
