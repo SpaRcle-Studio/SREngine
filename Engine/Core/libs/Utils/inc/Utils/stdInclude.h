@@ -84,6 +84,17 @@ namespace SR_UTILS_NS {
         obj = std::forward<U>(new_value);
         return old_value;
     }
+
+    template<template<class> class T, class U>
+    struct IsDerivedFrom {
+    private:
+        template<class V> static decltype(static_cast<const T<V>&>(std::declval<U>()), std::true_type{}) test(const T<V>&); /// NOLINT
+        static std::false_type test(...);                                                                                   /// NOLINT
+
+    public:
+        static constexpr bool value = decltype(IsDerivedFrom::test(std::declval<U>()))::value;
+
+    };
 }
 
 #if 0

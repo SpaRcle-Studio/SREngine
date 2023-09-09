@@ -86,7 +86,7 @@ namespace SR_CORE_NS {
                 migrated.Write<uint8_t>(static_cast<uint8_t>(measurement));
 
                 if (measurement == SR_UTILS_NS::Measurement::Space2D) {
-                    migrated.Write<uint32_t>(SR_UTILS_NS::STRETCH_FLAGS_NONE);
+                    migrated.Write<uint32_t>(SR_UTILS_NS::Stretch::None);
                     migrated.Write<SR_MATH_NS::FVector3>(marshal.Read<SR_MATH_NS::FVector3>(SR_MATH_NS::FVector3(0.0)), SR_MATH_NS::FVector3(0.f));
                     migrated.Write<SR_MATH_NS::FVector3>(marshal.Read<SR_MATH_NS::FVector3>(SR_MATH_NS::FVector3(0.0)), SR_MATH_NS::FVector3(0.f));
                     migrated.Write<SR_MATH_NS::FVector3>(marshal.Read<SR_MATH_NS::FVector3>(SR_MATH_NS::FVector3(1.0)), SR_MATH_NS::FVector3(1.f));

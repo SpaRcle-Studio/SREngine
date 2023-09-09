@@ -35,8 +35,8 @@
 namespace SR_SRLM_NS {
     void DebugPrintNode::Execute(float_t dt) {
         SR_UTILS_NS::Debug::Instance().Print(
-            *m_inputs.at(1).pData->GetString(),
-            static_cast<SR_UTILS_NS::DebugLogType>(*m_inputs.at(2).pData->GetEnum())
+            *CalcInput(1)->GetString(),
+            static_cast<SR_UTILS_NS::DebugLogType>(*CalcInput(2)->GetEnum())
         );
         *m_outputs.at(0).pData->GetBool() = true;
         m_status |= LogicalNodeStatus::Success;
@@ -50,8 +50,8 @@ namespace SR_SRLM_NS {
         AddInputData<DataTypeString>(SR_HASH_STR_REGISTER("Msg"));
 
         AddInputData(new DataTypeEnum(
-                static_cast<uint64_t>(SR_UTILS_NS::DebugLogType::Log),
-                SR_UTILS_NS::EnumReflector::GetReflector<SR_UTILS_NS::DebugLogType>()
+            static_cast<uint64_t>(SR_UTILS_NS::DebugLogType::Log),
+            SR_UTILS_NS::EnumReflector::GetReflector<SR_UTILS_NS::DebugLogType>()
         ), SR_HASH_STR_REGISTER("Type"));
 
         AddOutputData<DataTypeFlow>();
@@ -72,19 +72,19 @@ namespace SR_SRLM_NS {
         m_status |= LogicalNodeStatus::Success;
     }
 
-    void PlusNode::Compute() {
+    void PlusNode::Execute(float_t dt) {
         SR_LM_NODE_NUMERIC_OPERATORS_CALCULATION(m_outputs[0].pData, m_inputs[0].pData, m_inputs[1].pData, +);
     }
 
-    void ConstructorNode::Compute() {
-        m_inputs[0].pData->CopyTo(m_outputs[0].pData);
+    void ConstructorNode::Execute(float_t dt) {
+        CalcInput(0)->CopyTo(m_outputs[0].pData);
         m_status |= LogicalNodeStatus::Success;
         m_dirty = false;
     }
 
     void ConstructorNode::InitNode() {
-        AddInputData(DataTypeAllocator::Instance().Allocate(m_initTypeHashName));
-        AddOutputData(DataTypeAllocator::Instance().Allocate(m_initTypeHashName));
+        AddInputData(DataTypeManager::Instance().CreateByName(m_initTypeHashName));
+        AddOutputData(DataTypeManager::Instance().CreateByName(m_initTypeHashName));
         IComputeNode::InitNode();
     }
 

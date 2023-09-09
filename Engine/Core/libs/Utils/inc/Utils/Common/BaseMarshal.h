@@ -67,7 +67,7 @@ namespace SR_UTILS_NS {
                 stream.write((const char *) &value, sizeof(T));
             }
             else {
-                SR_STATIC_ASSERT("Unsupported type!");
+                SRHalt("Unsupported type!");
             }
         }
 
@@ -126,7 +126,7 @@ namespace SR_UTILS_NS {
                 stream.read((char*)&value, sizeof(T));
             }
             else {
-                SR_STATIC_ASSERT("Unsupported type!");
+                SRHalt("Unsupported type!");
             }
 
             return value;
@@ -212,7 +212,7 @@ namespace SR_UTILS_NS {
             stream.read((char*)&size, sizeof(size_t));
             SRAssert(size < SR_UINT16_MAX);
             if (size >= SR_UINT16_MAX) {
-                return std::string();
+                return std::string(); /// NOLINT
             }
             str.resize(size);
             stream.read((char*)&str[0], size * sizeof(char));

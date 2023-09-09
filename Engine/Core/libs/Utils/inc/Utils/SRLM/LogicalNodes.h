@@ -38,7 +38,7 @@ namespace SR_SRLM_NS {
     public:
         SR_NODISCARD uint64_t GetHashName() const noexcept override;
         SR_NODISCARD std::string GetName() const noexcept override;
-        void Compute() override;
+        void Execute(float_t dt) override;
         void InitNode() override;
         void SetInitTypeHashName(uint64_t hashName) { m_initTypeHashName = hashName; }
 
@@ -49,7 +49,7 @@ namespace SR_SRLM_NS {
 
     class PlusNode : public IComputeNode {
     public:
-        void Compute() override;
+        void Execute(float_t dt) override;
 
     };
 }

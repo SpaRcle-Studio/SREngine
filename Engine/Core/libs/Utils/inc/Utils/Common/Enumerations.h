@@ -11,25 +11,27 @@
 
 /// Declare an enumeration inside a class
 #define SR_ENUM_T(enumName, type, ...)                                                                                  \
-      SR_ENUM_DETAIL_MAKE(enum, class, enumName, type, __VA_ARGS__ )                                                    \
+      SR_ENUM_DETAIL_MAKE(enum, class, enumName, #enumName, type, __VA_ARGS__ )                                         \
 
 /// Declare an enumeration inside a class
 #define SR_ENUM_CLASS_T(enumName, type, ...)                                                                            \
-      SR_ENUM_DETAIL_MAKE(enum class, class, enumName, type, __VA_ARGS__ )                                              \
+      SR_ENUM_DETAIL_MAKE(enum class, class, enumName, #enumName, type, __VA_ARGS__ )                                   \
 
 /// Declare an enumeration inside a namespace
 #define SR_ENUM_NS_T(enumName, type, ...)                                                                               \
-      SR_ENUM_DETAIL_MAKE(enum, namespace, enumName, type, __VA_ARGS__ )                                                \
+      SR_ENUM_DETAIL_MAKE(enum, namespace, enumName, #enumName, type, __VA_ARGS__ )                                     \
 
 /// Declare an enumeration inside a namespace
 #define SR_ENUM_NS_CLASS_T(enumName, type, ...)                                                                         \
-      SR_ENUM_DETAIL_MAKE(enum class, namespace, enumName, type, __VA_ARGS__ )                                          \
+      SR_ENUM_DETAIL_MAKE(enum class, namespace, enumName, #enumName, type, __VA_ARGS__ )                               \
       typedef type SR_MACRO_CONCAT(enumName, Flag);                                                                     \
 
 /// Declare an enumeration inside a namespace
 #define SR_ENUM_NS_STRUCT_T(enumName, type, ...)                                                                        \
-      struct enumName {                                                                                                 \
-            SR_ENUM_DETAIL_MAKE(enum, class, SR_MACRO_CONCAT(enumName, T), type, __VA_ARGS__ )                          \
+      struct enumName : public SR_UTILS_NS::IEnumStructBase {                                                           \
+            SR_ENUM_DETAIL_MAKE(enum, class, SR_MACRO_CONCAT(enumName, T), #enumName, type, __VA_ARGS__ )               \
+            using TypeT = SR_MACRO_CONCAT(enumName, T);                                                                 \
+            operator type() const noexcept { return TypeT(); }                                                          \
       };                                                                                                                \
       typedef type SR_MACRO_CONCAT(enumName, Flag);                                                                     \
 

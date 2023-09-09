@@ -53,6 +53,8 @@ namespace SR_SRLM_NS {
         virtual void SaveXml(SR_XML_NS::Node& xmlNode);
         virtual void SetInput(const DataType* pInput, uint8_t index);
 
+        SR_NODISCARD const DataType* CalcInput(uint8_t index);
+
         SR_NODISCARD virtual const DataType* GetOutput(uint8_t index);
         SR_NODISCARD virtual LogicalNode* GetOutputNode(uint8_t index);
         SR_NODISCARD Pins& GetInputs() { return m_inputs; }
@@ -65,12 +67,16 @@ namespace SR_SRLM_NS {
         virtual void InitValues() { }
         virtual void InitNode() { }
 
+        virtual void Execute(float_t dt) { }
+
         SR_NODISCARD virtual bool IsNeedRepeat() const { return false; }
         SR_NODISCARD virtual bool IsNeedPostRepeat() const { return false; }
         SR_NODISCARD virtual bool IsEntryPoint() const noexcept { return false; }
+        SR_NODISCARD virtual bool IsDirty() const noexcept { return false; }
         SR_NODISCARD virtual LogicalNodeType GetType() const noexcept = 0;
         SR_NODISCARD bool HasErrors() const { return m_status & LogicalNodeStatus::ErrorStatus; }
-        SR_NODISCARD LogicalNodeStatusFlag GetStatus() const { return m_status; }
+        SR_NODISCARD bool IsSuccessfullyCompleted() const noexcept;
+        SR_NODISCARD LogicalNodeStatusFlag GetStatus() const noexcept { return m_status; }
 
     public:
         void AddInputData(DataType* pData, uint64_t hashName = SR_UINT64_MAX);
@@ -98,7 +104,6 @@ namespace SR_SRLM_NS {
         IExecutableNode() = default;
 
     public:
-        virtual void Execute(float_t dt) = 0;
         SR_NODISCARD LogicalNodeType GetType() const noexcept final { return LogicalNodeType::Executable; }
 
     };
@@ -115,7 +120,7 @@ namespace SR_SRLM_NS {
         SR_NODISCARD const DataType* GetOutput(uint8_t index) override;
 
     protected:
-        virtual void Compute() = 0;
+        SR_NODISCARD bool IsDirty() const noexcept override { return m_dirty; }
         SR_NODISCARD LogicalNodeType GetType() const noexcept final { return LogicalNodeType::Compute; }
 
     protected:

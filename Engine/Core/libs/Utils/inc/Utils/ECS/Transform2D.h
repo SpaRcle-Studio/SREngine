@@ -12,13 +12,12 @@ namespace SR_UTILS_NS {
     class GameObject;
 
     /// растяжение по ширине родительского элемента
-    SR_ENUM_NS_T(StretchFlags_, uint32_t,
-          STRETCH_FLAGS_NONE = 1 << 0,
-          STRETCH_FLAGS_H = 1 << 1,
-          STRETCH_FLAGS_V = 1 << 2,
-          STRETCH_FLAGS_HV = STRETCH_FLAGS_H | STRETCH_FLAGS_V
+    SR_ENUM_NS_STRUCT_T(Stretch, uint32_t,
+          None = 1 << 0,
+          Width = 1 << 1,
+          Height = 1 << 2,
+          WidthHeight = Width | Height
     );
-    typedef uint32_t StretchFlags;
 
     class SR_DLL_EXPORT Transform2D : public Transform {
         friend class GameObject;
@@ -37,7 +36,7 @@ namespace SR_UTILS_NS {
         void SetGlobalRotation(const SR_MATH_NS::FVector3& eulers) override;
 
         void SetAnchor(const SR_MATH_NS::FRect& rect);
-        void SetStretch(StretchFlags stretch);
+        void SetStretch(StretchFlag stretch);
 
         SR_NODISCARD SR_MATH_NS::FVector3 GetTranslation() const override { return m_translation; }
         SR_NODISCARD SR_MATH_NS::FVector3 GetRotation() const override { return m_rotation; }
@@ -51,7 +50,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD const SR_MATH_NS::Matrix4x4& GetMatrix() override;
 
         SR_NODISCARD SR_MATH_NS::FRect GetAnchor() const { return m_anchor; }
-        SR_NODISCARD StretchFlags GetStretch() const { return m_stretch; }
+        SR_NODISCARD StretchFlag GetStretch() const { return m_stretch; }
 
     protected:
         void UpdateMatrix() override;
@@ -63,7 +62,7 @@ namespace SR_UTILS_NS {
     protected:
         SR_MATH_NS::FRect m_anchor;
 
-        StretchFlags m_stretch = STRETCH_FLAGS_NONE;
+        StretchFlag m_stretch = Stretch::None;
 
         SR_MATH_NS::Matrix4x4 m_localMatrix = SR_MATH_NS::Matrix4x4::Identity();
         SR_MATH_NS::Matrix4x4 m_matrix = SR_MATH_NS::Matrix4x4::Identity();

@@ -143,23 +143,37 @@ namespace SR_SRLM_NS {
         m_outputs.emplace_back(pin);
     }
 
+    const DataType* LogicalNode::CalcInput(uint8_t index) {
+        auto&& pNode = m_inputs[index].pNode;
+        if (!pNode) {
+            return m_inputs[index].pData;
+        }
+
+        if (pNode->GetType() == LogicalNodeType::Compute) {
+            if (pNode->IsDirty()) {
+                pNode->Execute(0.f);
+            }
+
+            if (pNode->HasErrors()) {
+                m_status |= LogicalNodeStatus::ComputeError;
+                return m_inputs[index].pData;
+            }
+        }
+        else if (!IsSuccessfullyCompleted()) {
+            m_status |= LogicalNodeStatus::NotExecuted;
+            return m_inputs[index].pData;
+        }
+
+        return pNode->GetOutput(m_inputs[index].pinIndex);
+    }
+
+    bool LogicalNode::IsSuccessfullyCompleted() const noexcept {
+        return (m_status & LogicalNodeStatus::Success) && !HasErrors();
+    }
+
     /// ----------------------------------------------------------------------------------------------------------------
 
     const DataType* IComputeNode::GetOutput(uint8_t index) {
-        if (m_dirty)
-        {
-            Compute();
-
-            if (HasErrors()) {
-                m_dirty = false;
-                m_status ^= LogicalNodeStatus::ComputeError;
-            }
-            else {
-                m_status |= LogicalNodeStatus::ComputeError;
-                return nullptr;
-            }
-        }
-
         return LogicalNode::GetOutput(index);
     }
 

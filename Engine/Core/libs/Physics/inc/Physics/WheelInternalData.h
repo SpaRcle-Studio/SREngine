@@ -11,11 +11,11 @@ namespace SR_PTYPES_NS {
     class PhysicsMaterial;
 
     SR_ENUM_NS_STRUCT_T(Vehicle4WWheelOrder, uint8_t,
-                        FrontLeft,
-                        FrontRight,
-                        RearLeft,
-                        RearRight,
-                        Size
+        FrontLeft,
+        FrontRight,
+        RearLeft,
+        RearRight,
+        Size
     );
 
     struct WheelInternalData {

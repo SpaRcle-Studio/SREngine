@@ -6,22 +6,26 @@
 #define SRENGINE_ENUMREFLECTOR_H
 
 #include <Utils/Common/Singleton.h>
-#include <Utils/Common/Hashes.h>
+#include <Utils/Common/HashManager.h>
 #include <Utils/Types/Map.h>
 
 namespace SR_UTILS_NS {
     class EnumReflector;
 
+    class IEnumStructBase { };
+
     class EnumReflectorManager : public SR_UTILS_NS::Singleton<EnumReflectorManager> {
         friend class SR_UTILS_NS::Singleton<EnumReflectorManager>;
+        using Reflectors = ska::flat_hash_map<uint64_t, EnumReflector*>;
     public:
         bool RegisterReflector(EnumReflector* pReflector);
 
         SR_NODISCARD EnumReflector* GetReflector(const std::string& name) const;
         SR_NODISCARD EnumReflector* GetReflector(uint64_t hashName) const;
+        SR_NODISCARD const Reflectors& GetReflectors() const noexcept { return m_reflectors; }
 
     private:
-        ska::flat_hash_map<uint64_t, EnumReflector*> m_reflectors;
+        Reflectors m_reflectors;
 
     };
 
@@ -41,7 +45,9 @@ namespace SR_UTILS_NS {
         template<typename EnumType> SR_NODISCARD static std::vector<std::string> GetNamesFilter(const std::function<bool(EnumType)>& filter);
 
         template<typename EnumType> SR_NODISCARD static int64_t GetIndex(EnumType value);
+        template<typename EnumType> SR_NODISCARD static int64_t GetIndex(int64_t value);
         template<typename EnumType> SR_NODISCARD static EnumType At(int64_t index);
+        template<typename EnumType> SR_NODISCARD static int64_t AtAsInt(int64_t index);
 
         SR_NODISCARD SR_MAYBE_UNUSED std::optional<std::string> ToStringInternal(int64_t value) const;
         SR_NODISCARD SR_MAYBE_UNUSED std::optional<int64_t> FromStringInternal(const std::string& name) const;
@@ -77,7 +83,7 @@ namespace SR_UTILS_NS {
         : m_data(new Data())
     {
         m_data->enumName = name;
-        m_data->hashName = SR_HASH_STR(name);
+        m_data->hashName = SR_HASH_STR_REGISTER(name);
         m_data->values.resize(count);
         m_data->names.resize(count);
 
@@ -149,17 +155,17 @@ namespace SR_UTILS_NS {
     }
 
     template<typename EnumType> std::string EnumReflector::ToString(EnumType value) {
-        if (auto&& result = _detail_reflector_(EnumType()).ToStringInternal(static_cast<int64_t>(value)); result.has_value()) {
+        if (auto&& result = GetReflector<EnumType>()->ToStringInternal(static_cast<int64_t>(value)); result.has_value()) {
             return result.value();
         }
 
         ErrorInternal("EnumReflector::ToString() : unknown type! Value: " + std::to_string(static_cast<int64_t>(value)));
 
-        return std::string();
+        return std::string(); /// NOLINT
     }
 
     template<typename EnumType> EnumType EnumReflector::FromString(const std::string &value) {
-        if (auto&& result = _detail_reflector_(EnumType()).FromStringInternal(value); result.has_value()) {
+        if (auto&& result = GetReflector<EnumType>()->FromStringInternal(value); result.has_value()) {
             return static_cast<EnumType>(result.value());
         }
 
@@ -169,13 +175,13 @@ namespace SR_UTILS_NS {
     }
 
     template<typename EnumType> const std::vector<std::string>& EnumReflector::GetNames() {
-        return _detail_reflector_(EnumType()).m_data->names;
+        return GetReflector<EnumType>()->m_data->names;
     }
 
     template<typename EnumType> std::vector<std::string> EnumReflector::GetNamesFilter(const std::function<bool(EnumType)> &filter) {
         std::vector<std::string> names;
 
-        auto&& data = _detail_reflector_(EnumType()).m_data;
+        auto&& data = GetReflector<EnumType>()->m_data;
 
         for (uint64_t i = 0; i < Count<EnumType>(); ++i) {
             if (filter(data->values[i])) {
@@ -187,7 +193,11 @@ namespace SR_UTILS_NS {
     }
 
     template<typename EnumType> int64_t EnumReflector::GetIndex(EnumType value) {
-        if (auto&& result = _detail_reflector_(EnumType()).GetIndexInternal(static_cast<int64_t>(value)); result.has_value()) {
+        return GetIndex<EnumType>(static_cast<int64_t>(value));
+    }
+
+    template<typename EnumType> int64_t EnumReflector::GetIndex(int64_t value) {
+        if (auto&& result = GetReflector<EnumType>()->GetIndexInternal(value); result.has_value()) {
             return result.value();
         }
 
@@ -197,21 +207,35 @@ namespace SR_UTILS_NS {
     }
 
     template<typename EnumType> EnumType EnumReflector::At(int64_t index) {
-        if (auto&& result = _detail_reflector_(EnumType()).AtInternal(index); result.has_value()) {
-            return static_cast<EnumType>(result.value());
+        return static_cast<EnumType>(AtAsInt<EnumType>(index));
+    }
+
+    template<typename EnumType> int64_t EnumReflector::AtAsInt(int64_t index) {
+        if (auto&& result = GetReflector<EnumType>()->AtInternal(index); result.has_value()) {
+            return result.value();
         }
 
         ErrorInternal("EnumReflector::At() : invalid index! Index: " + std::to_string(static_cast<int64_t>(index)));
 
-        return EnumType();
+        return 0;
     }
 
     template<typename EnumType> uint64_t EnumReflector::Count() {
-        return _detail_reflector_(EnumType()).m_data->values.size();
+        return GetReflector<EnumType>()->m_data->values.size();
     }
 
     template<typename EnumType> EnumReflector* EnumReflector::GetReflector() {
-        return const_cast<EnumReflector*>(&_detail_reflector_(EnumType()));
+        if constexpr (std::is_class_v<EnumType>) {
+            if constexpr (std::is_enum_v<EnumType>) {
+                return const_cast<EnumReflector*>(&_detail_reflector_(EnumType()));
+            }
+            else {
+                return const_cast<EnumReflector*>(&_detail_reflector_(EnumType::TypeT()));
+            }
+        }
+        else {
+            return const_cast<EnumReflector*>(&_detail_reflector_(EnumType()));
+        }
     }
 }
 
@@ -220,7 +244,7 @@ namespace SR_UTILS_NS {
     SR_INLINE
 #define SR_ENUM_DETAIL_SPEC_class friend
 #define SR_ENUM_DETAIL_STR(x) #x
-#define SR_ENUM_DETAIL_MAKE(enumClass, spec, enumName, integral, ...)                                                   \
+#define SR_ENUM_DETAIL_MAKE(enumClass, spec, enumName, enumNameStr, integral, ...)                                      \
     enumClass enumName : integral                                                                                       \
     {                                                                                                                   \
         __VA_ARGS__, SR_MACRO_CONCAT(enumName, MAX)                                                                     \
@@ -245,8 +269,8 @@ namespace SR_UTILS_NS {
                 integral _val;                                                                                          \
             } __VA_ARGS__;                                                                                              \
             const integral _detail_vals[] = { __VA_ARGS__ };                                                            \
-            return SR_UTILS_NS::EnumReflector( _detail_vals, sizeof(_detail_vals)/sizeof(integral),                     \
-                    #enumName, SR_ENUM_DETAIL_STR((__VA_ARGS__)));                                                      \
+            return SR_UTILS_NS::EnumReflector( _detail_vals, sizeof(_detail_vals) / sizeof(integral),                   \
+                    enumNameStr, SR_ENUM_DETAIL_STR((__VA_ARGS__)));                                                    \
         }());                                                                                                           \
         return _reflector;                                                                                              \
     }                                                                                                                   \

@@ -159,7 +159,7 @@ namespace SR_UTILS_NS {
                 break;
             case Measurement::Space2D: {
                 auto&& pTransform2D = dynamic_cast<Transform2D*>(pTransform);
-                pTransform2D->SetStretch(static_cast<StretchFlags>(marshal.Read<uint32_t>()));
+                pTransform2D->SetStretch(static_cast<StretchFlag>(marshal.Read<uint32_t>()));
                 SR_FALLTHROUGH;
             }
             case Measurement::Space3D:

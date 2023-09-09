@@ -238,11 +238,9 @@ namespace Framework::Core::GUI {
         //    }
         //}
 
-        auto&& stretchTypes = SR_UTILS_NS::EnumReflector::GetNames<SR_UTILS_NS::StretchFlags_>();
+        auto&& stretchTypes = SR_UTILS_NS::EnumReflector::GetNames<SR_UTILS_NS::Stretch>();
 
-        auto stretch = static_cast<int>(SR_UTILS_NS::EnumReflector::GetIndex<SR_UTILS_NS::StretchFlags_>(
-                static_cast<SR_UTILS_NS::StretchFlags_>(pTransform->GetStretch()))
-        );
+        auto stretch = static_cast<int32_t>(SR_UTILS_NS::EnumReflector::GetIndex<SR_UTILS_NS::Stretch>(pTransform->GetStretch()));
 
         if (ImGui::Combo("Stretch", &stretch, [](void* vec, int idx, const char** out_text){
             auto&& vector = reinterpret_cast<std::vector<std::string>*>(vec);
@@ -253,7 +251,7 @@ namespace Framework::Core::GUI {
 
             return true;
         }, const_cast<void*>(reinterpret_cast<const void*>(&stretchTypes)), stretchTypes.size())) {
-            pTransform->SetStretch(SR_UTILS_NS::EnumReflector::At<SR_UTILS_NS::StretchFlags_>(stretch));
+            pTransform->SetStretch(SR_UTILS_NS::EnumReflector::AtAsInt<SR_UTILS_NS::Stretch>(stretch));
         }
     }
 
