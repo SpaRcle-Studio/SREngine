@@ -64,13 +64,12 @@ namespace SR_GRAPH_GUI_NS {
         SR_NODISCARD SR_MATH_NS::FVector2 GetPosition() const;
         SR_NODISCARD SR_SRLM_NS::LogicalNode* GetLogicalNode() const { return m_logicalNode; }
 
-        SR_NODISCARD Node* Copy() const;
-
         Node& SetName(std::string name);
         Node& SetPosition(const SR_MATH_NS::FVector2& pos);
         Node& SetType(NodeType type);
 
         void Draw(NodeBuilder* pBuilder, Pin* pNewLinkPin);
+        void PostDraw();
 
     private:
         SR_SRLM_NS::LogicalNode* m_logicalNode = nullptr;

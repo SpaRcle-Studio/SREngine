@@ -27,6 +27,7 @@
 #include <Utils/Locale/Encoding.h>
 #include <Utils/SRLM/DataTypeManager.h>
 #include <Utils/SRLM/LogicalMachine.h>
+#include <Utils/SRLM/LogicalNodeManager.h>
 
 #include <Core/Engine.h>
 #include <Core/World/World.h>
@@ -96,6 +97,8 @@ int main(int argc, char **argv) {
     SR_UTILS_NS::Features::Instance().Reload();
 
     resourcesManager.Run();
+
+    SR_SRLM_NS::LogicalNodeManager::Instance().InitializeTypes();
 
     SR_WORLD_NS::SceneAllocator::Instance().Init([]() -> SR_WORLD_NS::Scene* {
         return new SR_CORE_NS::World();

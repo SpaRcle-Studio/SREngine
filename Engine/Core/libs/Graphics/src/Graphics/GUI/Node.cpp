@@ -198,25 +198,25 @@ namespace SR_GRAPH_GUI_NS {
             ImGui::PushStyleVar(ImGuiStyleVar_Alpha, alpha);
             pBuilder->Output(pOutput);
 
-            if (pOutput->GetType() == SR_SRLM_NS::DataTypeClass::String) {
-                static char buffer[128] = "Edit Me\nMultiline!";
-                static bool wasActive = false;
+            //if (pOutput->GetType() == SR_SRLM_NS::DataTypeClass::String) {
+            //    static char buffer[128] = "Edit Me\nMultiline!";
+            //    static bool wasActive = false;
+            //    ImGui::PushItemWidth(100.0f);
+            //    ImGui::InputText("##edit", buffer, 127);
+            //    ImGui::PopItemWidth();
+            //    if (ImGui::IsItemActive() && !wasActive)
+            //    {
+            //        ax::NodeEditor::EnableShortcuts(false);
+            //        wasActive = true;
+            //    }
+            //    else if (!ImGui::IsItemActive() && wasActive)
+            //    {
+            //        ax::NodeEditor::EnableShortcuts(true);
+            //        wasActive = false;
+            //    }
+            //    ImGui::Spring(0);
+            //}
 
-                ImGui::PushItemWidth(100.0f);
-                ImGui::InputText("##edit", buffer, 127);
-                ImGui::PopItemWidth();
-                if (ImGui::IsItemActive() && !wasActive)
-                {
-                    ax::NodeEditor::EnableShortcuts(false);
-                    wasActive = true;
-                }
-                else if (!ImGui::IsItemActive() && wasActive)
-                {
-                    ax::NodeEditor::EnableShortcuts(true);
-                    wasActive = false;
-                }
-                ImGui::Spring(0);
-            }
             if (!pOutput->m_name.empty())
             {
                 ImGui::Spring(0);
@@ -232,6 +232,12 @@ namespace SR_GRAPH_GUI_NS {
         }
 
         pBuilder->End();
+    }
+
+    void Node::PostDraw() {
+        for (auto&& pPin : m_inputs) {
+            pPin->PostDrawOption();
+        }
     }
 
     uintptr_t Node::GetId() const {
@@ -279,23 +285,6 @@ namespace SR_GRAPH_GUI_NS {
     Node& Node::SetType(NodeType type) {
         m_type = type;
         return *this;
-    }
-
-    Node* Node::Copy() const {
-        auto&& pNode = new Node();
-
-        pNode->m_name = m_name;
-        pNode->m_color = m_color;
-        pNode->m_type = m_type;
-        pNode->m_maxOutputWidth = m_maxOutputWidth;
-
-        for (const auto& pin : m_inputs)
-            pNode->AddInput(pin->Copy());
-
-        for (const auto& pin : m_outputs)
-            pNode->AddOutput(pin->Copy());
-
-        return pNode;
     }
 
     std::string Node::GetName() const {

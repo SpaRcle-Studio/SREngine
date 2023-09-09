@@ -11,6 +11,7 @@
 #include <Utils/Types/Function.h>
 
 namespace SR_SRLM_NS {
+    class ConstructorNode;
     class LogicalNode;
 
     class LogicalNodeManager : public SR_UTILS_NS::Singleton<LogicalNodeManager> {
@@ -28,7 +29,9 @@ namespace SR_SRLM_NS {
         SR_NODISCARD LogicalNode* CreateByName(Hash hashName);
         SR_NODISCARD LogicalNode* CreateByName(const std::string& name);
 
-        SR_NODISCARD bool Register(Hash hashName, const Constructor& constructor, const Category& category);
+        bool Register(Hash hashName, const Constructor& constructor, const Category& category);
+
+        void InitializeTypes();
 
     private:
         NodeConstructors m_constructors;

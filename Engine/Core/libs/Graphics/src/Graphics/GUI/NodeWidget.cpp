@@ -139,6 +139,10 @@ namespace SR_GRAPH_GUI_NS {
         DrawPopupMenu();
 
         ax::NodeEditor::End();
+
+        for (auto&& [id, pNode] : m_nodes) {
+            pNode->PostDraw();
+        }
     }
 
     void NodeWidget::RemoveLink(Link *pLink) {

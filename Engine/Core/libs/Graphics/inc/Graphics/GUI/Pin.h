@@ -6,6 +6,7 @@
 #define SRENGINE_PIN_H
 
 #include <Utils/Common/Enumerations.h>
+#include <Utils/Math/Vector2.h>
 #include <Graphics/GUI/Icons.h>
 
 namespace ax::NodeEditor {
@@ -47,6 +48,7 @@ namespace SR_GRAPH_NS::GUI {
         void DrawPinIcon(bool connected, uint32_t alpha);
 
         void DrawOption();
+        void PostDrawOption();
 
         void SetNode(Node* node);
 
@@ -68,12 +70,11 @@ namespace SR_GRAPH_NS::GUI {
         SR_NODISCARD uint32_t GetIndex() const;
         SR_NODISCARD const std::string& GetName() const { return m_name; }
 
-        SR_NODISCARD Pin* Copy() const;
-
         void Begin(PinKind kind) const;
         void End() const;
 
     private:
+        bool m_editEnum = false;
         DataTypePtr m_dataType = nullptr;
 
         std::unordered_set<Link*> m_links;

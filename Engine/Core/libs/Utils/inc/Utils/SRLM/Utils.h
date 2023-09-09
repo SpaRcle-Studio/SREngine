@@ -13,7 +13,7 @@
 
 #define SR_LM_REGISTER_TYPE_NO_META(className, name)                                                                    \
     public:                                                                                                             \
-        SR_INLINE_STATIC const uint64_t HASH_NAME = SR_HASH_STR(#name); /** NOLINT*/                                    \
+        SR_INLINE_STATIC const uint64_t HASH_NAME = SR_HASH_STR_REGISTER(#name); /** NOLINT*/                           \
         SR_NODISCARD std::string GetName() const noexcept override { return #name; }                                    \
         SR_NODISCARD Hash GetHashName() const noexcept override { return HASH_NAME; }                                   \
         static className* AllocateNew() { return new className(); }                                                     \

@@ -132,10 +132,6 @@ void Framework::Core::GUI::VisualScriptEditor::LoadConfig() {
 }
 
 SR_GRAPH_NS::GUI::Node* VisualScriptEditor::CreateBlueprint(const std::string &id) const {
-    if (m_blueprints.count(id)) {
-        return m_blueprints.at(id)->Copy();
-    }
-
     SRAssert2(false, Helper::Format("Blueprint \"%s\" is not found!", id.c_str()));
 
     return nullptr;

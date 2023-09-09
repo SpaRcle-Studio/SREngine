@@ -59,6 +59,10 @@
     #include <ImGuizmo.h>
 #endif
 
+#ifdef SR_USE_IMGUI_NODE_EDITOR
+    #include <imgui-node-editor/imgui_node_editor.h>
+#endif
+
 namespace SR_UTILS_NS::GUI {
     inline static void DrawTextOnCenter(const std::string& text, bool sameLine = true) {
         const auto font_size = ImGui::GetFontSize() * text.size() / 2;
