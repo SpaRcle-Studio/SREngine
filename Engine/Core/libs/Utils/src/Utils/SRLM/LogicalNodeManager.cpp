@@ -5,6 +5,7 @@
 #include <Utils/SRLM/LogicalNodeManager.h>
 #include <Utils/SRLM/DataTypeManager.h>
 #include <Utils/SRLM/LogicalNodes.h>
+#include <Utils/SRLM/ConvertorNode.h>
 
 namespace SR_SRLM_NS {
     template<typename T> void LogicalNodeManagerRegisterType(const std::vector<std::string>& category) {
@@ -35,6 +36,33 @@ namespace SR_SRLM_NS {
                 pConstructorNode->SetInitTypeHashName(hashName);
                 return (LogicalNode*)pConstructorNode;
             }, { "Enum" });
+        }
+
+        using DTC = DataTypeClass;
+        std::map<DTC, std::set<DTC>> conversions = {
+            {DTC::String,{
+                DTC::UInt8, DTC::UInt16, DTC::UInt32, DTC::UInt64, DTC::Int8, DTC::Int16, DTC::Int32, DTC::Int64,
+                DTC::Float, DTC::Double, DTC::Bool, DTC::String
+            } }
+        };
+
+        for (auto&& [output, inputs] : conversions) {
+            auto&& outputTypeName = SR_UTILS_NS::ToString(output);
+
+            for (auto&& input : inputs) {
+                auto&& inputTypeName = SR_UTILS_NS::ToString(input);
+                auto&& nodeName = inputTypeName + " to " + outputTypeName; ///NOLINT
+                auto&& nodeHashName = SR_HASH_STR_REGISTER(nodeName);
+                auto&& inputTypeHashName = SR_HASH_STR_REGISTER(inputTypeName);
+                auto&& outputTypeHashName = SR_HASH_STR_REGISTER(outputTypeName);
+
+                LogicalNodeManager::Instance().Register(nodeHashName, [inputTypeHashName, outputTypeHashName]()-> LogicalNode* {
+                    auto&& pConvertorNode = new ConvertorNode();
+                    pConvertorNode->SetInitInputTypeHashName(inputTypeHashName);
+                    pConvertorNode->SetInitOutputTypeHashName(outputTypeHashName);
+                    return (LogicalNode*)pConvertorNode;
+                }, { "Convert" });
+            }
         }
     }
 

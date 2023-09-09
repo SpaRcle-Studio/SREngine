@@ -10,10 +10,13 @@
 
 namespace SR_UTILS_NS {
     template<typename T> std::string ToString(const T& value) {
-        if constexpr (Math::IsNumber<T>() || Math::IsLogical<T>()) {
+        if constexpr (SR_MATH_NS::IsNumber<T>() || SR_MATH_NS::IsLogical<T>()) {
             return std::to_string(value);
         }
-        else if constexpr (Math::IsString<T>()) {
+        else if constexpr (std::is_enum_v<T>) {
+            return SR_UTILS_NS::EnumReflector::ToString(value);
+        }
+        else if constexpr (SR_MATH_NS::IsString<T>()) {
             return value;
         }
         else if constexpr (false) {

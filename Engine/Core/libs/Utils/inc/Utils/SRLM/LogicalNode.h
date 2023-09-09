@@ -86,7 +86,7 @@ namespace SR_SRLM_NS {
         template<typename T> void AddOutputData(uint64_t hashName = SR_UINT64_MAX) { AddOutputData(new T(), hashName); }
 
     protected:
-        LogicalNodeStatusFlag m_status = LogicalNodeStatus::None;
+        mutable LogicalNodeStatusFlag m_status = LogicalNodeStatus::None;
         
         Pins m_inputs;
         Pins m_outputs;

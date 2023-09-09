@@ -16,6 +16,7 @@
 #include "../Utils/src/Utils/SRLM/LogicalNode.cpp"
 #include "../Utils/src/Utils/SRLM/LogicalNodes.cpp"
 #include "../Utils/src/Utils/SRLM/LogicalNodeManager.cpp"
+#include "../Utils/src/Utils/SRLM/ConvertorNode.cpp"
 
 #include "../Utils/src/Utils/Events/EventManager.cpp"
 #include "../Utils/src/Utils/Events/Event.cpp"

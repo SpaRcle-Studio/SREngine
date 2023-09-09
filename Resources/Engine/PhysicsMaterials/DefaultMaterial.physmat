@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <PhysicsMaterial>
-	<DynamicFriction Float="1" />
-	<StaticFriction Float="1.38" />
-	<Bounciness Float="1.08000004" />
-	<FrictionCombine String="Average" />
-	<BounceCombine String="Average" />
+	<DynamicFriction Float="0.790000021" />
+	<StaticFriction Float="1.5" />
+	<Bounciness Float="1.54999995" />
+	<FrictionCombine String="Maximum" />
+	<BounceCombine String="Maximum" />
 </PhysicsMaterial>
