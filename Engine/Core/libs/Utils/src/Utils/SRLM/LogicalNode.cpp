@@ -67,7 +67,7 @@ namespace SR_SRLM_NS {
         }
     }
 
-    void LogicalNode::SetInput(const DataType* pInput, uint8_t index) {
+    void LogicalNode::SetInput(const DataType* pInput, uint32_t index) {
         if (!pInput) {
             m_status |= LogicalNodeStatus::InputNullPtr;
             return;
@@ -99,17 +99,13 @@ namespace SR_SRLM_NS {
         m_status = LogicalNodeStatus::None;
     }
 
-    const DataType* LogicalNode::GetOutput(uint8_t index) {
-        if (index >= m_inputs.size()) {
+    const DataType* LogicalNode::GetOutput(uint32_t index) {
+        if (index >= m_outputs.size()) {
             m_status |= LogicalNodeStatus::OutputRangeError;
             return nullptr;
         }
 
-        if (m_status & LogicalNodeStatus::ErrorStatus) {
-            return nullptr;
-        }
-
-        return m_inputs.at(index).pData;
+        return m_outputs.at(index).pData;
     }
 
     void LogicalNode::MarkDirty() {
@@ -120,7 +116,7 @@ namespace SR_SRLM_NS {
         }
     }
 
-    LogicalNode* LogicalNode::GetOutputNode(uint8_t index) {
+    LogicalNode* LogicalNode::GetOutputNode(uint32_t index) {
         if (index >= m_outputs.size()) {
             m_status |= LogicalNodeStatus::OutputRangeError;
             return nullptr;
@@ -133,6 +129,7 @@ namespace SR_SRLM_NS {
         auto&& pin = NodePin();
         pin.pData = pData;
         pin.hashName = hashName;
+        pin.pinIndex = SR_UINT32_MAX;
         m_inputs.emplace_back(pin);
     }
 
@@ -140,10 +137,11 @@ namespace SR_SRLM_NS {
         auto&& pin = NodePin();
         pin.pData = pData;
         pin.hashName = hashName;
+        pin.pinIndex = SR_UINT32_MAX;
         m_outputs.emplace_back(pin);
     }
 
-    const DataType* LogicalNode::CalcInput(uint8_t index) {
+    const DataType* LogicalNode::CalcInput(uint32_t index) {
         auto&& pNode = m_inputs[index].pNode;
         if (!pNode) {
             return m_inputs[index].pData;
@@ -164,6 +162,7 @@ namespace SR_SRLM_NS {
             return m_inputs[index].pData;
         }
 
+        SRAssert(m_inputs[index].pinIndex <= 255);
         return pNode->GetOutput(m_inputs[index].pinIndex);
     }
 
@@ -173,7 +172,7 @@ namespace SR_SRLM_NS {
 
     /// ----------------------------------------------------------------------------------------------------------------
 
-    const DataType* IComputeNode::GetOutput(uint8_t index) {
+    const DataType* IComputeNode::GetOutput(uint32_t index) {
         return LogicalNode::GetOutput(index);
     }
 

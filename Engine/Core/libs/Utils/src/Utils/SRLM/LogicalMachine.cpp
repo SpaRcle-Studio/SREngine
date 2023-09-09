@@ -37,14 +37,19 @@ namespace SR_SRLM_NS {
             auto&& startNodeId = xmlLink.GetAttribute("SN").ToUInt64();
             auto&& endNodeId = xmlLink.GetAttribute("EN").ToUInt64();
 
-            auto&& startPinIndex = xmlLink.GetAttribute("SP").ToUInt64();
-            auto&& endPinIndex = xmlLink.GetAttribute("EP").ToUInt64();
+            if (nodes.count(startNodeId) == 0 || nodes.count(endNodeId) == 0) {
+                SRHalt("Node not found!");
+                continue;
+            }
+
+            auto&& startPinIndex = xmlLink.GetAttribute("SP").ToUInt();
+            auto&& endPinIndex = xmlLink.GetAttribute("EP").ToUInt();
 
             nodes[startNodeId]->GetOutputs()[startPinIndex].pNode = nodes[endNodeId];
-            nodes[startNodeId]->GetOutputs()[startPinIndex].pinIndex = endNodeId;
+            nodes[startNodeId]->GetOutputs()[startPinIndex].pinIndex = endPinIndex;
 
             nodes[endNodeId]->GetInputs()[endPinIndex].pNode = nodes[startNodeId];
-            nodes[endNodeId]->GetInputs()[endPinIndex].pinIndex = startNodeId;
+            nodes[endNodeId]->GetInputs()[endPinIndex].pinIndex = startPinIndex;
         }
 
         return pLogicalMachine;

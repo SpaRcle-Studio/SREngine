@@ -168,7 +168,7 @@ namespace SR_SRLM_NS {
     /// ----------------------------------------------------------------------------------------------------------------
 
     class DataTypeEnum : public DataTypeInt64 {
-        SR_LM_REGISTER_TYPE(DataTypeEnum, Enum)
+        SR_LM_REGISTER_BASE(DataTypeEnum, Enum)
     public:
         DataTypeEnum() = default;
 
@@ -183,6 +183,8 @@ namespace SR_SRLM_NS {
         { }
 
     public:
+        SR_NODISCARD Hash GetHashName() const noexcept override;
+        SR_NODISCARD std::string GetName() const noexcept override;
         SR_NODISCARD EnumReflector* GetReflector() const { return m_reflector; }
 
         SR_NODISCARD DataType* Copy() const override {
@@ -211,7 +213,6 @@ namespace SR_SRLM_NS {
 
         SR_NODISCARD DataType* Copy() const override;
         SR_NODISCARD Meta GetMeta() const noexcept override;
-        SR_NODISCARD DataTypeClass GetClass() const noexcept override { return DataTypeClass::Array; }
 
     private:
         std::vector<DataType*> m_value;

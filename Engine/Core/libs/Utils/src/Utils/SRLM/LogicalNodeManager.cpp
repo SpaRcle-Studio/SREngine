@@ -71,7 +71,7 @@ namespace SR_SRLM_NS {
             return pIt->second.constructor();
         }
 
-        SRHalt("Node not found! Hash name: \"" + SR_UTILS_NS::ToString(hashName) + "\"");
+        SRHalt("Node not found! Name: \"" + SR_HASH_TO_STR(hashName) + "\"");
         return nullptr;
     }
 

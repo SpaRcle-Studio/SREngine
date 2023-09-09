@@ -3,6 +3,7 @@
 //
 
 #include <Utils/SRLM/DataType.h>
+#include <Utils/SRLM/DataTypeManager.h>
 
 namespace SR_SRLM_NS {
     bool DataTypeAllocator::Register(DataTypeClass dataTypeClass, Hash hashName, Allocator allocator) {
@@ -144,7 +145,6 @@ namespace SR_SRLM_NS {
                         SRHalt("Bad reflector!");
                         break;
                     }
-                    xmlNode.AppendAttribute("Enum", pEnum->GetReflector()->GetHashNameInternal());
                     xmlNode.AppendAttribute(*pEnum->GetEnum());
                 }
                 else {
@@ -195,9 +195,9 @@ namespace SR_SRLM_NS {
         }
 
         auto&& hashName = xmlNode.GetAttribute("Name").ToUInt64();
-        auto&& pDataType = SR_SRLM_NS::DataTypeAllocator::Instance().Allocate(hashName);
+        auto&& pDataType = SR_SRLM_NS::DataTypeManager::Instance().CreateByName(hashName);
         if (!pDataType) {
-            SRHalt("Data type not found! Hash name: \"" + SR_UTILS_NS::ToString(hashName) + "\"");
+            SRHalt("Data type not found! Name: \"" + SR_HASH_TO_STR(hashName) + "\"");
             return nullptr;
         }
 
@@ -206,12 +206,11 @@ namespace SR_SRLM_NS {
             case DataTypeClass::Flow:
                 break;
             case DataTypeClass::Enum: {
-                auto&& enumHashName = xmlNode.GetAttribute("Enum").ToUInt64();
                 auto&& enumValue = xmlNode.GetAttribute<int64_t>();
 
-                auto&& pReflector = SR_UTILS_NS::EnumReflectorManager::Instance().GetReflector(enumHashName);
+                auto&& pReflector = SR_UTILS_NS::EnumReflectorManager::Instance().GetReflector(hashName);
                 if (!pReflector) {
-                    SRHalt("Reflector not found! Hash name: \"" + SR_UTILS_NS::ToString(enumHashName) + "\"");
+                    SRHalt("Reflector not found! Hash name: \"" + SR_UTILS_NS::ToString(hashName) + "\"");
                     delete pDataType;
                     return nullptr;
                 }
@@ -269,5 +268,13 @@ namespace SR_SRLM_NS {
         }
 
         return pDataType;
+    }
+
+    DataTypeEnum::Hash DataTypeEnum::GetHashName() const noexcept {
+        return m_reflector ? m_reflector->GetHashNameInternal() : HASH_NAME;
+    }
+
+    std::string DataTypeEnum::GetName() const noexcept {
+        return m_reflector ? m_reflector->GetNameInternal() : NAME;
     }
 }

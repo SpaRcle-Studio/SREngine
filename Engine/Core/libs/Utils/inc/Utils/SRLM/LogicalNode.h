@@ -51,12 +51,12 @@ namespace SR_SRLM_NS {
         SR_NODISCARD static LogicalNode* LoadXml(const SR_XML_NS::Node& xmlNode);
 
         virtual void SaveXml(SR_XML_NS::Node& xmlNode);
-        virtual void SetInput(const DataType* pInput, uint8_t index);
+        virtual void SetInput(const DataType* pInput, uint32_t index);
 
-        SR_NODISCARD const DataType* CalcInput(uint8_t index);
+        SR_NODISCARD const DataType* CalcInput(uint32_t index);
 
-        SR_NODISCARD virtual const DataType* GetOutput(uint8_t index);
-        SR_NODISCARD virtual LogicalNode* GetOutputNode(uint8_t index);
+        SR_NODISCARD virtual const DataType* GetOutput(uint32_t index);
+        SR_NODISCARD virtual LogicalNode* GetOutputNode(uint32_t index);
         SR_NODISCARD Pins& GetInputs() { return m_inputs; }
         SR_NODISCARD Pins& GetOutputs() { return m_outputs; }
         SR_NODISCARD virtual uint64_t GetHashName() const noexcept = 0;
@@ -117,7 +117,7 @@ namespace SR_SRLM_NS {
     public:
         void MarkDirty() override;
 
-        SR_NODISCARD const DataType* GetOutput(uint8_t index) override;
+        SR_NODISCARD const DataType* GetOutput(uint32_t index) override;
 
     protected:
         SR_NODISCARD bool IsDirty() const noexcept override { return m_dirty; }
