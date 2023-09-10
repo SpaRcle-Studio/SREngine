@@ -19,6 +19,13 @@ namespace SR_UTILS_NS {
           WidthHeight = Width | Height
     );
 
+    SR_ENUM_NS_CLASS_T(Anchor, uint8_t,
+        None,
+        TopLeft, TopCenter, TopRight,
+        MiddleLeft, MiddleCenter, MiddleRight,
+        BottomLeft, BottomCenter, BottomRight
+    );
+
     class SR_DLL_EXPORT Transform2D : public Transform {
         friend class GameObject;
     public:
@@ -35,7 +42,7 @@ namespace SR_UTILS_NS {
         void SetGlobalTranslation(const SR_MATH_NS::FVector3& translation) override;
         void SetGlobalRotation(const SR_MATH_NS::FVector3& eulers) override;
 
-        void SetAnchor(const SR_MATH_NS::FRect& rect);
+        void SetAnchor(Anchor anchorType);
         void SetStretch(StretchFlag stretch);
 
         SR_NODISCARD SR_MATH_NS::FVector3 GetTranslation() const override { return m_translation; }
@@ -49,19 +56,20 @@ namespace SR_UTILS_NS {
 
         SR_NODISCARD const SR_MATH_NS::Matrix4x4& GetMatrix() override;
 
-        SR_NODISCARD SR_MATH_NS::FRect GetAnchor() const { return m_anchor; }
+        SR_NODISCARD Anchor GetAnchor() const { return m_anchor; }
         SR_NODISCARD StretchFlag GetStretch() const { return m_stretch; }
 
     protected:
         void UpdateMatrix() override;
+        void CalculateStretch(SR_MATH_NS::FVector3& translation, SR_MATH_NS::FVector3& scale, SR_MATH_NS::Unit aspect) const;
+        SR_NODISCARD SR_MATH_NS::FVector3 CalculateAnchor(const SR_MATH_NS::FVector3& scale) const;
 
     public:
         SR_INLINE static constexpr SR_MATH_NS::FVector2 RIGHT = Math::FVector2(1, 0);
         SR_INLINE static constexpr SR_MATH_NS::FVector2 UP    = Math::FVector2(0, 1);
 
     protected:
-        SR_MATH_NS::FRect m_anchor;
-
+        Anchor m_anchor = Anchor::None;
         StretchFlag m_stretch = Stretch::None;
 
         SR_MATH_NS::Matrix4x4 m_localMatrix = SR_MATH_NS::Matrix4x4::Identity();

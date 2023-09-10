@@ -53,6 +53,9 @@ namespace SR_MATH_NS {
         SR_NODISCARD constexpr T Top() const noexcept { return Bottom() + Height(); }
 
     public:
+        SR_NODISCARD static Rect<Unit> FromTranslationAndScale(const SR_MATH_NS::FVector2& translation, const SR_MATH_NS::FVector2& scale);
+
+    public:
         constexpr void SetLeft(const T& value) {
             w -= value - x;
             x = value;
@@ -71,6 +74,10 @@ namespace SR_MATH_NS {
             h = value - y;
         }
     };
+
+    template<typename T> Rect<Unit> Rect<T>::FromTranslationAndScale(const FVector2& translation, const FVector2& scale) {
+        return Rect<Unit>(translation.x, translation.y, scale.x * 2, scale.y * 2);
+    }
 
     typedef Rect<Unit> FRect;
     typedef Rect<int32_t> IRect;

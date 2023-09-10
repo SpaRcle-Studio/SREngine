@@ -77,29 +77,10 @@ namespace SR_UTILS_NS {
         if (auto&& pParent = dynamic_cast<Transform2D*>(GetParentTransform())) {
             auto scale = m_scale;
             auto translation = m_translation;
-
             auto&& aspect = pParent->GetScale().XY().Aspect();
 
-            if (aspect < 1 && !(m_stretch & Stretch::Width)) {
-                if (translation.y > 0) {
-                    translation.y += (1.f - aspect) * scale.y;
-                }
-                else if (translation.y < 0) {
-                    translation.y -= (1.f - aspect) * scale.y;
-                }
-
-                scale.y *= aspect;
-            }
-            else if (aspect > 1 && !(m_stretch & Stretch::Height)) {
-                scale.x *= 1.f / aspect;
-
-                if (translation.x > 0) {
-                    translation.x += (aspect - 1.f) * scale.x;
-                }
-                else if (translation.x < 0) {
-                    translation.x -= (aspect - 1.f) * scale.x;
-                }
-            }
+            CalculateStretch(translation, scale, aspect);
+            translation += CalculateAnchor(scale);
 
             m_localMatrix = SR_MATH_NS::Matrix4x4(
                     translation,
@@ -157,8 +138,8 @@ namespace SR_UTILS_NS {
         }
     }
 
-    void Transform2D::SetAnchor(const SR_MATH_NS::FRect &rect) {
-        m_anchor = rect;
+    void Transform2D::SetAnchor(Anchor anchorType) {
+        m_anchor = anchorType;
         UpdateTree();
     }
 
@@ -180,5 +161,85 @@ namespace SR_UTILS_NS {
         pTransform->m_skew = m_skew;
 
         return pTransform;
+    }
+
+    void Transform2D::CalculateStretch(SR_MATH_NS::FVector3& translation, SR_MATH_NS::FVector3& scale, SR_MATH_NS::Unit aspect) const {
+        if (aspect < 1 && !(m_stretch & Stretch::Width)) {
+            if (translation.y > 0) {
+                translation.y += (1.f - aspect) * scale.y;
+            }
+            else if (translation.y < 0) {
+                translation.y -= (1.f - aspect) * scale.y;
+            }
+
+            scale.y *= aspect;
+        }
+        else if (aspect > 1 && !(m_stretch & Stretch::Height)) {
+            scale.x *= 1.f / aspect;
+
+            if (translation.x > 0) {
+                translation.x += (aspect - 1.f) * scale.x;
+            }
+            else if (translation.x < 0) {
+                translation.x -= (aspect - 1.f) * scale.x;
+            }
+        }
+    }
+
+    SR_MATH_NS::FVector3 Transform2D::CalculateAnchor(const SR_MATH_NS::FVector3& scale) const {
+        auto&& pParentTransform = GetParentTransform();
+        auto&& parentTranslation = pParentTransform->GetTranslation2D();
+        auto&& parentScale = pParentTransform->GetScale2D();
+
+        SR_MATH_NS::FRect parentRect = SR_MATH_NS::FRect::FromTranslationAndScale(parentTranslation, parentScale);
+        SR_MATH_NS::FVector2 center =  SR_MATH_NS::FVector2(parentRect.w / 2, parentRect.h / 2);
+        //SR_MATH_NS::FRect rect = SR_MATH_NS::FRect::FromTranslationAndScale(translation.XY(), scale.XY());
+        SR_MATH_NS::FRect rect = SR_MATH_NS::FRect::FromTranslationAndScale(center, scale.XY());
+
+        switch (m_anchor) {
+            case Anchor::None:
+                return SR_MATH_NS::FVector3();
+            case Anchor::TopLeft:
+                rect.x += parentRect.w / 2;
+                rect.y = parentRect.h / 2;
+                break;
+            case Anchor::TopCenter:
+                rect.x = parentRect.x + (parentRect.w - rect.w) / 2;
+                rect.y = parentRect.y;
+                break;
+            case Anchor::TopRight:
+                rect.x = parentRect.x + parentRect.w - rect.w;
+                rect.y = parentRect.y;
+                break;
+            case Anchor::MiddleLeft:
+                rect.x = parentRect.x;
+                rect.y = parentRect.y + (parentRect.h - rect.h) / 2;
+                break;
+            case Anchor::MiddleCenter:
+                rect.x = parentRect.x + (parentRect.w - rect.w) / 2;
+                rect.y = parentRect.y + (parentRect.h - rect.h) / 2;
+                break;
+            case Anchor::MiddleRight:
+                rect.x = parentRect.x + parentRect.w - rect.w;
+                rect.y = parentRect.y + (parentRect.h - rect.h) / 2;
+                break;
+            case Anchor::BottomLeft:
+                rect.x = parentRect.x;
+                rect.y = parentRect.y + parentRect.h - rect.h;
+                break;
+            case Anchor::BottomCenter:
+                rect.x = parentRect.x + (parentRect.w - rect.w) / 2;
+                rect.y = parentRect.y + parentRect.h - rect.h;
+                break;
+            case Anchor::BottomRight:
+                rect.x = parentRect.x + parentRect.w - rect.w;
+                rect.y = parentRect.y + parentRect.h - rect.h;
+                break;
+            default:
+                SRHalt("Transform2D::CalculateAnchor() : unsupported anchor position!");
+                return SR_MATH_NS::FVector3();
+        }
+
+        return SR_MATH_NS::FVector3(rect.x, rect.y, 0);
     }
 }

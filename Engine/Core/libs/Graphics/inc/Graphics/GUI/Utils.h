@@ -17,6 +17,21 @@ namespace SR_GRAPH_GUI_NS {
         return color;
     }
 
+    template<typename T> void static EnumCombo(const std::string& label, T value, const SR_HTYPES_NS::Function<void(T)>& callback) {
+        if (ImGui::BeginCombo(label, SR_UTILS_NS::EnumReflector::ToString(value).c_str())) {
+            static auto&& selectables = SR_UTILS_NS::EnumReflector::GetNames<T>();
+            for (auto&& selectable : selectables) {
+                if (ImGui::Selectable(selectable.c_str())) {
+                    ImGui::SetItemDefaultFocus();
+                    callback(SR_UTILS_NS::EnumReflector::FromString<T>(selectable));
+                }
+            }
+
+            ImGui::EndCombo();
+        }
+    }
+
+
     static bool Vec4Null(const ImVec4 &v1) { return (v1.x == 0) && (v1.y == 0) && (v1.z == 0) && (v1.w == 0); }
 
     static bool DragUnit(const std::string& name, SR_MATH_NS::Unit& value, float_t drag = 0.1f, bool active = true, uint32_t index = 0) {

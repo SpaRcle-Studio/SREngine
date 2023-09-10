@@ -228,16 +228,17 @@ namespace Framework::Core::GUI {
         if (Graphics::GUI::DrawVec3Control("Skew", skew, 1.f) && !skew.HasZero())
             pTransform->SetSkew(skew);
 
-        //if (ImGui::CollapsingHeader("Anchor")) {
-        //    auto&& offsets = pTransform->GetAnchor();
-        //    if (Graphics::GUI::DrawFRect(
-        //            { "Left", "Bottom", "Right", "Top" },
-        //            offsets, 0.0, 1.0, 0.05, 0,
-        //            &GetWeakStorage())
-        //    ) {
-        //        pTransform->SetAnchor(offsets);
-        //    }
-        //}
+        if (ImGui::BeginCombo("Anchor", SR_UTILS_NS::EnumReflector::ToString(pTransform->GetAnchor()).c_str())) {
+            auto&& selectables = SR_UTILS_NS::EnumReflector::GetNames<SR_UTILS_NS::Anchor>();
+            for (auto&& selectable : selectables) {
+                if (ImGui::Selectable(selectable.c_str())) {
+                    ImGui::SetItemDefaultFocus();
+                    pTransform->SetAnchor(SR_UTILS_NS::EnumReflector::FromString<SR_UTILS_NS::Anchor>(selectable));
+                }
+            }
+
+            ImGui::EndCombo();
+        }
 
         auto&& stretchTypes = SR_UTILS_NS::EnumReflector::GetNames<SR_UTILS_NS::Stretch>();
 
