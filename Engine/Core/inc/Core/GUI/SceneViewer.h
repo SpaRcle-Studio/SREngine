@@ -16,7 +16,7 @@ namespace SR_GRAPH_NS {
     class Window;
 }
 
-namespace SR_CORE_NS::GUI {
+namespace SR_CORE_GUI_NS {
     class Hierarchy;
     class Guizmo;
 

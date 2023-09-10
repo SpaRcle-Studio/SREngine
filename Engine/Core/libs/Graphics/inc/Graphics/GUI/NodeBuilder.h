@@ -61,12 +61,8 @@ namespace SR_GRAPH_NS::GUI {
         Stage m_currentStage = Stage::Invalid;
         ImU32 m_headerColor = 0;
 
-        ImVec2 m_nodeMin;
-        ImVec2 m_nodeMax;
         ImVec2 m_headerMin;
         ImVec2 m_headerMax;
-        ImVec2 m_contentMin;
-        ImVec2 m_contentMax;
 
         bool m_hasHeader = false;
 

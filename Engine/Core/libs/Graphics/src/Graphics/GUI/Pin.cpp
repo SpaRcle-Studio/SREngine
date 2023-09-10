@@ -160,7 +160,7 @@ namespace SR_GRAPH_GUI_NS {
             }
         }
 
-        if (GetNode()->IsConnector() && IsLinked()) {
+        if (GetNode()->IsConnector() && IsLinked() && GetType() != SR_SRLM_NS::DataTypeClass::Flow) {
             if (GetKind() == PinKind::Input) {
                 return false;
             }

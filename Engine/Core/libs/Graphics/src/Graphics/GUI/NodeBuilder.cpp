@@ -44,7 +44,7 @@ namespace SR_GRAPH_NS::GUI {
 
         ax::NodeEditor::EndNode();
 
-        if (ImGui::IsItemVisible())
+        if (ImGui::IsItemVisible() && !m_currentNode->IsConnector())
         {
             auto alpha = static_cast<int>(255 * ImGui::GetStyle().Alpha);
 
@@ -115,8 +115,9 @@ namespace SR_GRAPH_NS::GUI {
     }
 
     void NodeBuilder::Input(Pin *pPin) {
-        if (m_currentStage == Stage::Begin)
+        if (m_currentStage == Stage::Begin) {
             SetStage(Stage::Content);
+        }
 
         const auto applyPadding = (m_currentStage == Stage::Input);
 
@@ -125,16 +126,21 @@ namespace SR_GRAPH_NS::GUI {
 
         SetStage(Stage::Input);
 
-        if (applyPadding)
+        if (applyPadding && !m_currentNode->IsConnector()) {
             ImGui::Spring(0);
+        }
 
         pPin->Begin(PinKind::Input);
 
-        ImGui::BeginHorizontal(pPin->GetId());
+        if (!m_currentNode->IsConnector()) {
+            ImGui::BeginHorizontal(pPin->GetId());
+        }
     }
 
     void NodeBuilder::EndInput() {
-        ImGui::EndHorizontal();
+        if (!m_currentNode->IsConnector()) {
+            ImGui::EndHorizontal();
+        }
         SRAssert(m_currentPin);
         m_currentPin->End();
         m_currentPin = nullptr;
@@ -148,8 +154,9 @@ namespace SR_GRAPH_NS::GUI {
     }
 
     void NodeBuilder::Output(Pin *pPin) {
-        if (m_currentStage == Stage::Begin)
+        if (m_currentStage == Stage::Begin) {
             SetStage(Stage::Content);
+        }
 
         const auto applyPadding = (m_currentStage == Stage::Output);
 
@@ -158,16 +165,23 @@ namespace SR_GRAPH_NS::GUI {
 
         SetStage(Stage::Output);
 
-        if (applyPadding)
-            ImGui::Spring(0);
+        if (!m_currentNode->IsConnector()) {
+            if (applyPadding) {
+                ImGui::Spring(0);
+            }
+        }
 
         pPin->Begin(PinKind::Output);
 
-        ImGui::BeginHorizontal(pPin->GetId());
+        if (!m_currentNode->IsConnector()) {
+            ImGui::BeginHorizontal(pPin->GetId());
+        }
     }
 
     void NodeBuilder::EndOutput() {
-        ImGui::EndHorizontal();
+        if (!m_currentNode->IsConnector()) {
+            ImGui::EndHorizontal();
+        }
         SRAssert(m_currentPin);
         m_currentPin->End();
         m_currentPin = nullptr;
@@ -180,19 +194,19 @@ namespace SR_GRAPH_NS::GUI {
         auto oldStage = m_currentStage;
         m_currentStage = stage;
 
-        ImVec2 cursor;
         switch (oldStage)
         {
             case Stage::Begin:
                 break;
 
             case Stage::Header:
-                ImGui::EndHorizontal();
-                m_headerMin = ImGui::GetItemRectMin();
-                m_headerMax = ImGui::GetItemRectMax();
-
-                /// spacing between header and content
-                ImGui::Spring(0, ImGui::GetStyle().ItemSpacing.y * 2.0f);
+                if (!m_currentNode->IsConnector()) {
+                    ImGui::EndHorizontal();
+                    m_headerMin = ImGui::GetItemRectMin();
+                    m_headerMax = ImGui::GetItemRectMax();
+                    /// spacing between header and content
+                    ImGui::Spring(0, ImGui::GetStyle().ItemSpacing.y * 2.0f);
+                }
 
                 break;
 
@@ -202,21 +216,27 @@ namespace SR_GRAPH_NS::GUI {
             case Stage::Input:
                 ax::NodeEditor::PopStyleVar(2);
 
-                ImGui::Spring(1, 0);
-                ImGui::EndVertical();
+                if (!m_currentNode->IsConnector()) {
+                    ImGui::Spring(1, 0);
+                    ImGui::EndVertical();
+                }
 
                 break;
 
             case Stage::Middle:
-                ImGui::EndVertical();
+                if (!m_currentNode->IsConnector()) {
+                    ImGui::EndVertical();
+                }
 
                 break;
 
             case Stage::Output:
                 ax::NodeEditor::PopStyleVar(2);
 
-                ImGui::Spring(1, 0);
-                ImGui::EndVertical();
+                if (!m_currentNode->IsConnector()) {
+                    ImGui::Spring(1, 0);
+                    ImGui::EndVertical();
+                }
 
                 break;
 
@@ -230,68 +250,82 @@ namespace SR_GRAPH_NS::GUI {
         switch (stage)
         {
             case Stage::Begin:
-                ImGui::BeginVertical("node");
+                if (!m_currentNode->IsConnector()) {
+                    ImGui::BeginVertical("node");
+                }
                 break;
 
             case Stage::Header:
-                m_hasHeader = true;
-                ImGui::BeginHorizontal("header");
+                if (!m_currentNode->IsConnector()) {
+                    m_hasHeader = true;
+                    ImGui::BeginHorizontal("header");
+                }
                 break;
 
             case Stage::Content:
-                if (oldStage == Stage::Begin)
-                    ImGui::Spring(0);
-
-                ImGui::BeginHorizontal("content");
-                ImGui::Spring(0, 0);
+                if (!m_currentNode->IsConnector()) {
+                    if (oldStage == Stage::Begin) {
+                        ImGui::Spring(0);
+                    }
+                    ImGui::BeginHorizontal("content");
+                    ImGui::Spring(0, 0);
+                }
                 break;
 
             case Stage::Input:
-                ImGui::BeginVertical("inputs", ImVec2(0, 0), 0.0f);
-
                 ax::NodeEditor::PushStyleVar(ax::NodeEditor::StyleVar_PivotAlignment, ImVec2(0, 0.5f));
                 ax::NodeEditor::PushStyleVar(ax::NodeEditor::StyleVar_PivotSize, ImVec2(0, 0));
 
-                if (!m_hasHeader)
-                    ImGui::Spring(1, 0);
+                if (!m_currentNode->IsConnector()) {
+                    ImGui::BeginVertical("inputs", ImVec2(0, 0), 0.0f);
+
+                    if (!m_hasHeader) {
+                        ImGui::Spring(1, 0);
+                    }
+                }
 
                 break;
 
             case Stage::Middle:
-                ImGui::Spring(1);
-                ImGui::BeginVertical("middle", ImVec2(0, 0), 1.0f);
+                if (!m_currentNode->IsConnector()) {
+                    ImGui::Spring(1);
+                    ImGui::BeginVertical("middle", ImVec2(0, 0), 1.0f);
+                }
                 break;
 
             case Stage::Output:
-                if (oldStage == Stage::Middle || oldStage == Stage::Input)
-                    ImGui::Spring(1);
-                else
-                    ImGui::Spring(1, 0);
-
-                ImGui::BeginVertical("outputs", ImVec2(0, 0), 1.0f);
-
                 ax::NodeEditor::PushStyleVar(ax::NodeEditor::StyleVar_PivotAlignment, ImVec2(1.0f, 0.5f));
                 ax::NodeEditor::PushStyleVar(ax::NodeEditor::StyleVar_PivotSize, ImVec2(0, 0));
 
-                if (!m_hasHeader)
-                    ImGui::Spring(1, 0);
+                if (!m_currentNode->IsConnector()) {
+                    if (oldStage == Stage::Middle || oldStage == Stage::Input) {
+                        ImGui::Spring(1);
+                    }
+                    else {
+                        ImGui::Spring(1, 0);
+                    }
+
+                    ImGui::BeginVertical("outputs", ImVec2(0, 0), 1.0f);
+
+                    if (!m_hasHeader) {
+                        ImGui::Spring(1, 0);
+                    }
+                }
 
                 break;
 
             case Stage::End:
-                if (oldStage == Stage::Input)
-                    ImGui::Spring(1, 0);
+                if (!m_currentNode->IsConnector()) {
+                    if (oldStage == Stage::Input) {
+                        ImGui::Spring(1, 0);
+                    }
 
-                if (oldStage != Stage::Begin)
-                    ImGui::EndHorizontal();
+                    if (oldStage != Stage::Begin) {
+                        ImGui::EndHorizontal();
+                    }
 
-                m_contentMin = ImGui::GetItemRectMin();
-                m_contentMax = ImGui::GetItemRectMax();
-
-                ImGui::EndVertical();
-
-                m_nodeMin = ImGui::GetItemRectMin();
-                m_nodeMax = ImGui::GetItemRectMax();
+                    ImGui::EndVertical();
+                }
                 break;
 
             case Stage::Invalid:

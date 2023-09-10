@@ -102,6 +102,29 @@ namespace SR_CORE_NS::GUI {
             ImGui::SameLine();
             ImGui::PushItemWidth(200.f);
             ImGui::SliderFloat("##", &m_cameraVelocityFactor, 0.01f, 10.f);
+            ImGui::PopItemWidth();
+
+            ImGui::SameLine();
+
+            ImGui::Text(" | ");
+
+            ImGui::SameLine();
+
+            ImGui::PushItemWidth(150.f);
+
+            if (ImGui::BeginCombo("View Mode", SR_UTILS_NS::EnumReflector::ToString(m_viewMode).c_str())) {
+                static auto&& names = SR_UTILS_NS::EnumReflector::GetNames<EditorSceneViewMode>();
+                for (auto&& name : names) {
+                    if (ImGui::Selectable(name.c_str())) {
+                        ImGui::SetItemDefaultFocus();
+                        m_viewMode = SR_UTILS_NS::EnumReflector::FromString<EditorSceneViewMode>(name);
+                    }
+                }
+
+                ImGui::EndCombo();
+            }
+
+            ImGui::PopItemWidth();
 
             ImGui::EndChild();
         }

@@ -37,9 +37,14 @@ namespace SR_SRLM_NS {
     class LogicalNode : public SR_UTILS_NS::NonCopyable {
     public:
         using Hash = uint64_t;
-        struct NodePin {
+        struct NodeConnect {
             LogicalNode* pNode = nullptr;
             uint32_t pinIndex = 0;
+        };
+        struct NodePin {
+            SR_NODISCARD LogicalNode* GetFirstNode() const { return connections.empty() ? nullptr : connections.front().pNode; }
+            SR_NODISCARD uint32_t GetFirstNodePin() const { return connections.empty() ? SR_UINT32_MAX : connections.front().pinIndex; }
+            std::vector<NodeConnect> connections;
             DataType* pData = nullptr;
             Hash hashName = SR_UINT64_MAX;
         };
@@ -56,7 +61,6 @@ namespace SR_SRLM_NS {
         SR_NODISCARD const DataType* CalcInput(uint32_t index);
 
         SR_NODISCARD virtual const DataType* GetOutput(uint32_t index);
-        SR_NODISCARD virtual LogicalNode* GetOutputNode(uint32_t index);
         SR_NODISCARD Pins& GetInputs() { return m_inputs; }
         SR_NODISCARD Pins& GetOutputs() { return m_outputs; }
         SR_NODISCARD virtual uint64_t GetHashName() const noexcept = 0;
@@ -81,6 +85,12 @@ namespace SR_SRLM_NS {
     public:
         void AddInputData(DataType* pData, uint64_t hashName = SR_UINT64_MAX);
         void AddOutputData(DataType* pData, uint64_t hashName = SR_UINT64_MAX);
+
+        void RemoveInputConnection(LogicalNode* pNode, uint32_t pinIndex);
+        void RemoveOutputConnection(LogicalNode* pNode, uint32_t pinIndex);
+
+        void AddInputConnection(LogicalNode* pNode, uint32_t nodePinIndex, uint32_t pinIndex);
+        void AddOutputConnection(LogicalNode* pNode, uint32_t nodePinIndex, uint32_t pinIndex);
 
         template<typename T> void AddInputData(uint64_t hashName = SR_UINT64_MAX) { AddInputData(new T(), hashName); }
         template<typename T> void AddOutputData(uint64_t hashName = SR_UINT64_MAX) { AddOutputData(new T(), hashName); }

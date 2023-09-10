@@ -9,6 +9,8 @@
 #include <Utils/SRLM/DataType.h>
 #include <Utils/Common/HashManager.h>
 
+#include <utility>
+
 namespace SR_GRAPH_GUI_NS {
     Node::Node()
         : Node(std::string(), NodeType::None, ImColor(255, 255, 255, 255))
@@ -50,8 +52,8 @@ namespace SR_GRAPH_GUI_NS {
         : Node(name, NodeType::None, color)
     { }
 
-    Node::Node(const std::string& name, NodeType type, ImColor color)
-        : m_name(name)
+    Node::Node(std::string  name, NodeType type, ImColor color)
+        : m_name(std::move(name))
         , m_color(color)
         , m_type(type)
     { }
@@ -83,11 +85,17 @@ namespace SR_GRAPH_GUI_NS {
     }
 
     void Node::Draw(NodeBuilder* pBuilder, Pin* pNewLinkPin) {
+        if (IsConnector()) {
+            ax::NodeEditor::PushStyleVar(ax::NodeEditor::StyleVar_NodeBorderWidth, 0.0f);
+            ax::NodeEditor::PushStyleVar(ax::NodeEditor::StyleVar_GroupBorderWidth, 0.0f);
+            ax::NodeEditor::PushStyleColor(ax::NodeEditor::StyleColor_NodeBg, ImVec4(0.f, 0.f, 0.f, 0.f));
+        }
+
         pBuilder->Begin(this);
 
-        const bool isSimple = m_type == NodeType::Simple || m_type == NodeType::Connector;
+        const bool isSimple = m_type == NodeType::Simple;
 
-        if (!isSimple) {
+        if (!IsConnector() && !isSimple) {
             pBuilder->Header(m_color);
 
             ImGui::Spring(0);
@@ -141,6 +149,8 @@ namespace SR_GRAPH_GUI_NS {
             pBuilder->EndHeader();
         }
 
+        auto&& cursorPos = ImGui::GetCursorPos();
+
         for (auto&& pInput : m_inputs) {
             auto alpha = ImGui::GetStyle().Alpha;
 
@@ -152,15 +162,16 @@ namespace SR_GRAPH_GUI_NS {
             ImGui::PushStyleVar(ImGuiStyleVar_Alpha, alpha);
             pInput->DrawPinIcon(pInput->IsLinked(), (int)(alpha * 255));
 
-            ImGui::Spring(0);
+            if (!IsConnector()) {
+                ImGui::Spring(0);
+            }
 
-            if (!pInput->m_name.empty())
-            {
+            if (!pInput->m_name.empty()) {
                 ImGui::TextUnformatted(pInput->m_name.c_str());
                 ImGui::Spring(0);
             }
 
-            if (!pInput->IsLinked()) {
+            if (!pInput->IsLinked() && !IsConnector()) {
                 pInput->DrawOption();
                 ImGui::Spring(0);
             }
@@ -168,7 +179,6 @@ namespace SR_GRAPH_GUI_NS {
             // if (pInput->GetType() == PinType::Bool)
             // {
             //     ImGui::Button("Hello");
-            //
             // }
 
             ImGui::PopStyleVar();
@@ -185,8 +195,11 @@ namespace SR_GRAPH_GUI_NS {
             ImGui::Spring(1, 0);
         }
 
-        for (auto&& pOutput : m_outputs)
-        {
+        if (IsConnector()) {
+            ImGui::SetCursorPos(cursorPos + ImVec2(5, 0));
+        }
+
+        for (auto&& pOutput: m_outputs) {
             /// if (!isSimple && pOutput->GetType() == PinType::Delegate)
             ///     continue;
 
@@ -217,21 +230,27 @@ namespace SR_GRAPH_GUI_NS {
             //    ImGui::Spring(0);
             //}
 
-            if (!pOutput->m_name.empty())
-            {
+            if (!pOutput->m_name.empty()) {
                 ImGui::Spring(0);
                 ImGui::TextUnformatted(pOutput->m_name.c_str());
             }
 
-            ImGui::Spring(0);
+            if (!IsConnector()) {
+                ImGui::Spring(0);
+            }
 
-            pOutput->DrawPinIcon(pOutput->IsLinked(), (int)(alpha * 255));
+            pOutput->DrawPinIcon(pOutput->IsLinked(), (int) (alpha * 255));
 
             ImGui::PopStyleVar();
             pBuilder->EndOutput();
         }
 
         pBuilder->End();
+
+        if (IsConnector()) {
+            ax::NodeEditor::PopStyleVar(2);
+            ax::NodeEditor::PopStyleColor();
+        }
     }
 
     void Node::PostDraw() {
@@ -325,13 +344,13 @@ namespace SR_GRAPH_GUI_NS {
     }
 
     int32_t Node::GetPinIndex(const Pin* pPin) const {
-        for (uint32_t i = 0; i < m_inputs.size(); ++i) {
+        for (int32_t i = 0; i < m_inputs.size(); ++i) {
             if (m_inputs.at(i) == pPin) {
                 return i;
             }
         }
 
-        for (uint32_t i = 0; i < m_outputs.size(); ++i) {
+        for (int32_t i = 0; i < m_outputs.size(); ++i) {
             if (m_outputs.at(i) == pPin) {
                 return i;
             }

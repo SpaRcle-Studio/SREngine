@@ -31,9 +31,9 @@ namespace SR_SRLM_NS {
     }
 
     void ConvertorNode::Execute(float_t dt) {
-        switch (m_inputs[0].pData->GetClass()) {
+        switch (m_outputs[0].pData->GetClass()) {
             case DataTypeClass::String:
-                m_outputs[0].pData->SetCustomValue(ToString(m_inputs[0].pData));
+                m_outputs[0].pData->SetCustomValue(ToString(CalcInput(0)));
                 break;
             default:
                 m_status |= LogicalNodeStatus::ComputeError;

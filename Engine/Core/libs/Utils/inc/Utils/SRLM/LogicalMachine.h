@@ -28,6 +28,7 @@ namespace SR_SRLM_NS {
     private:
         bool Execute(LogicalNode*& pNode, float_t dt);
         void AddNode(LogicalNode* pNode);
+        void Optimize();
 
     private:
         std::vector<LogicalNode*> m_nodes;

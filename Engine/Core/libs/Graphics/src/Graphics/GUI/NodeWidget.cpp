@@ -192,6 +192,8 @@ namespace SR_GRAPH_GUI_NS {
     }
 
     void NodeWidget::OnClose() {
+        Clear();
+
         if (m_editor) {
             ax::NodeEditor::DestroyEditor(m_editor);
             m_editor = nullptr;

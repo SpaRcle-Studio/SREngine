@@ -45,12 +45,11 @@ namespace SR_SRLM_NS {
             auto&& startPinIndex = xmlLink.GetAttribute("SP").ToUInt();
             auto&& endPinIndex = xmlLink.GetAttribute("EP").ToUInt();
 
-            nodes[startNodeId]->GetOutputs()[startPinIndex].pNode = nodes[endNodeId];
-            nodes[startNodeId]->GetOutputs()[startPinIndex].pinIndex = endPinIndex;
-
-            nodes[endNodeId]->GetInputs()[endPinIndex].pNode = nodes[startNodeId];
-            nodes[endNodeId]->GetInputs()[endPinIndex].pinIndex = startPinIndex;
+            nodes[startNodeId]->AddOutputConnection(nodes[endNodeId], endPinIndex, startPinIndex);
+            nodes[endNodeId]->AddInputConnection(nodes[startNodeId], startPinIndex, endPinIndex);
         }
+
+        pLogicalMachine->Optimize();
 
         return pLogicalMachine;
     }
@@ -74,6 +73,34 @@ namespace SR_SRLM_NS {
         }
 
         return true;
+    }
+
+    void LogicalMachine::Optimize() {
+        for (auto pIt = m_nodes.begin(); pIt != m_nodes.end(); ) {
+            auto&& pNode = *pIt;
+
+            if (pNode->GetType() != LogicalNodeType::Connector) {
+                ++pIt;
+                continue;
+            }
+
+            for (auto&& inputPin : pNode->GetInputs()) {
+                for (auto&& inputConnection : inputPin.connections) {
+                    inputConnection.pNode->RemoveOutputConnection(pNode, inputConnection.pinIndex);
+
+                    for (auto&& outputPin : pNode->GetOutputs()) {
+                        for (auto&& outputConnection : outputPin.connections) {
+                            outputConnection.pNode->RemoveInputConnection(pNode, outputConnection.pinIndex);
+                            outputConnection.pNode->AddInputConnection(inputConnection.pNode, inputConnection.pinIndex, outputConnection.pinIndex);
+                            inputConnection.pNode->AddOutputConnection(outputConnection.pNode, outputConnection.pinIndex, inputConnection.pinIndex);
+                        }
+                    }
+                }
+            }
+
+            delete pNode;
+            pIt = m_nodes.erase(pIt);
+        }
     }
 
     void LogicalMachine::AddNode(LogicalNode* pNode) {
@@ -101,11 +128,6 @@ namespace SR_SRLM_NS {
             return false;
         }
 
-        if (pNode->GetType() == LogicalNodeType::Connector) {
-            pNode = pNode->GetOutputNode(0);
-            return true;
-        }
-
         if (pNode->GetType() == LogicalNodeType::Executable) {
             auto&& pExecutable = dynamic_cast<IExecutableNode*>(pNode);
             if (!pExecutable) {
@@ -127,10 +149,10 @@ namespace SR_SRLM_NS {
 
                 if (!needContinue) {
                     needContinue = true;
-                    pNode = pin.pNode;
+                    pNode = pin.GetFirstNode();
                 }
                 else {
-                    m_active.insert(m_active.begin() + m_currentNode, pin.pNode);
+                    m_active.insert(m_active.begin() + m_currentNode, pin.GetFirstNode());
                 }
             }
 

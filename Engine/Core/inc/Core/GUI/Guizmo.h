@@ -15,7 +15,11 @@ namespace SR_GRAPH_NS::Types {
     class Camera;
 }
 
-namespace SR_CORE_NS::GUI {
+namespace SR_CORE_GUI_NS {
+    SR_ENUM_NS_CLASS_T(EditorSceneViewMode, uint8_t,
+        FreeAspect, WindowSize
+    );
+
     class Guizmo : public SR_UTILS_NS::NonCopyable, public SR_UTILS_NS::InputHandler {
         using GameObjectPtr = SR_UTILS_NS::GameObject::Ptr;
     public:
@@ -48,7 +52,8 @@ namespace SR_CORE_NS::GUI {
             m_active = true;
         }
 
-        float_t GetCameraVelocityFactor() {return m_cameraVelocityFactor;};
+        SR_NODISCARD EditorSceneViewMode GetViewMode() const noexcept { return m_viewMode; }
+        SR_NODISCARD float_t GetCameraVelocityFactor() const noexcept { return m_cameraVelocityFactor; };
 
     private:
         glm::mat4 GetMatrix();
@@ -77,6 +82,8 @@ namespace SR_CORE_NS::GUI {
         SR_MATH_NS::FVector3      m_barycenter    = SR_MATH_NS::FVector3();
         ImGuizmo::OPERATION       m_operation     = ImGuizmo::OPERATION::TRANSLATE;
         ImGuizmo::MODE            m_mode          = ImGuizmo::MODE::LOCAL;
+
+        EditorSceneViewMode m_viewMode = EditorSceneViewMode::FreeAspect;
 
     };
 }

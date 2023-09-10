@@ -111,25 +111,20 @@ namespace SR_SRLM_NS {
     void LogicalNode::MarkDirty() {
         if (GetType() == LogicalNodeType::Compute || GetType() == LogicalNodeType::Connector) {
             for (auto&& pin : m_outputs) {
-                pin.pNode->MarkDirty();
+                for (auto&& connection : pin.connections) {
+                    if (!connection.pNode) {
+                        continue;
+                    }
+                    connection.pNode->MarkDirty();
+                }
             }
         }
-    }
-
-    LogicalNode* LogicalNode::GetOutputNode(uint32_t index) {
-        if (index >= m_outputs.size()) {
-            m_status |= LogicalNodeStatus::OutputRangeError;
-            return nullptr;
-        }
-
-        return m_outputs.at(index).pNode;
     }
 
     void LogicalNode::AddInputData(DataType* pData, uint64_t hashName) {
         auto&& pin = NodePin();
         pin.pData = pData;
         pin.hashName = hashName;
-        pin.pinIndex = SR_UINT32_MAX;
         m_inputs.emplace_back(pin);
     }
 
@@ -137,12 +132,11 @@ namespace SR_SRLM_NS {
         auto&& pin = NodePin();
         pin.pData = pData;
         pin.hashName = hashName;
-        pin.pinIndex = SR_UINT32_MAX;
         m_outputs.emplace_back(pin);
     }
 
     const DataType* LogicalNode::CalcInput(uint32_t index) {
-        auto&& pNode = m_inputs[index].pNode;
+        auto&& pNode = m_inputs[index].GetFirstNode();
         if (!pNode) {
             return m_inputs[index].pData;
         }
@@ -162,12 +156,50 @@ namespace SR_SRLM_NS {
             return m_inputs[index].pData;
         }
 
-        SRAssert(m_inputs[index].pinIndex <= 255);
-        return pNode->GetOutput(m_inputs[index].pinIndex);
+        SRAssert(m_inputs[index].GetFirstNodePin() <= 255);
+        return pNode->GetOutput(m_inputs[index].GetFirstNodePin());
     }
 
     bool LogicalNode::IsSuccessfullyCompleted() const noexcept {
         return (m_status & LogicalNodeStatus::Success) && !HasErrors();
+    }
+
+    void LogicalNode::RemoveOutputConnection(LogicalNode* pNode, uint32_t pinIndex) {
+        auto&& connections = m_outputs[pinIndex].connections;
+
+        for (auto pIt = connections.begin(); pIt != connections.end(); ) {
+            if (pIt->pNode == pNode) {
+                connections.erase(pIt);
+                return;
+            }
+            ++pIt;
+        }
+    }
+
+    void LogicalNode::RemoveInputConnection(LogicalNode* pNode, uint32_t pinIndex) {
+        auto&& connections = m_inputs[pinIndex].connections;
+
+        for (auto pIt = connections.begin(); pIt != connections.end(); ) {
+            if (pIt->pNode == pNode) {
+                connections.erase(pIt);
+                return;
+            }
+            ++pIt;
+        }
+    }
+
+    void LogicalNode::AddInputConnection(LogicalNode* pNode, uint32_t nodePinIndex, uint32_t pinIndex) {
+        NodeConnect connect;
+        connect.pinIndex = nodePinIndex;
+        connect.pNode = pNode;
+        m_inputs[pinIndex].connections.emplace_back(connect);
+    }
+
+    void LogicalNode::AddOutputConnection(LogicalNode* pNode, uint32_t nodePinIndex, uint32_t pinIndex) {
+        NodeConnect connect;
+        connect.pinIndex = nodePinIndex;
+        connect.pNode = pNode;
+        m_outputs[pinIndex].connections.emplace_back(connect);
     }
 
     /// ----------------------------------------------------------------------------------------------------------------
