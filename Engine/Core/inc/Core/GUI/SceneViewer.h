@@ -48,6 +48,8 @@ namespace SR_CORE_GUI_NS {
         void OnOpen() override;
         void Draw() override;
 
+        bool UpdateViewSize();
+
         void InitCamera();
         void SetCamera(const GameObjectPtr& camera);
         void DrawTexture(Helper::Math::IVector2 winSize, Helper::Math::IVector2 texSize, uint32_t id, bool centralize);
@@ -71,6 +73,7 @@ namespace SR_CORE_GUI_NS {
         SR_WORLD_NS::Scene::Ptr m_scene;
         std::atomic<bool> m_enabled = false;
         bool m_updateNonHoveredSceneViewer = false;
+        SR_MATH_NS::IVector2 m_windowSize;
 
     };
 }

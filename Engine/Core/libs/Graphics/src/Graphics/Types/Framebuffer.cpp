@@ -50,23 +50,23 @@ namespace SR_GTYPES_NS {
     }
 
     Framebuffer::Ptr Framebuffer::Create(const std::list<ImageFormat> &colors, ImageFormat depth, const SR_MATH_NS::IVector2 &size, uint8_t samples, uint32_t layersCount, ImageAspect depthAspect) {
-        Framebuffer* fbo = new Framebuffer();
+        auto&& pFBO = new Framebuffer();
 
         SRAssert(!size.HasZero() && !size.HasNegative());
 
-        fbo->SetSize(size);
-        fbo->m_depth.format = depth;
-        fbo->m_depth.aspect = depthAspect;
-        fbo->m_sampleCount = samples;
-        fbo->m_layersCount = layersCount;
+        pFBO->SetSize(size);
+        pFBO->m_depth.format = depth;
+        pFBO->m_depth.aspect = depthAspect;
+        pFBO->m_sampleCount = samples;
+        pFBO->m_layersCount = layersCount;
 
         for (auto&& color : colors) {
             ColorLayer layer;
             layer.format = color;
-            fbo->m_colors.emplace_back(layer);
+            pFBO->m_colors.emplace_back(layer);
         }
 
-        return fbo;
+        return pFBO;
     }
 
     Framebuffer::Ptr Framebuffer::Create(const std::list<ImageFormat> &colors, ImageFormat depth) {
@@ -270,6 +270,9 @@ namespace SR_GTYPES_NS {
 
     void Framebuffer::SetDirty() {
         m_dirty = true;
+        if (m_pipeline) {
+            m_pipeline->SetBuildState(false);
+        }
     }
 
     void Framebuffer::SetLayersCount(uint32_t layersCount) {

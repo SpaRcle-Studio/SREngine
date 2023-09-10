@@ -60,25 +60,31 @@ namespace SR_CORE_NS::GUI {
 
             auto pCamera = m_camera->GetComponent<SR_GTYPES_NS::Camera>();
 
-            if (auto&& pFramebuffer = GetContext()->FindFramebuffer("SceneViewFBO", pCamera)) {
-                m_id = pFramebuffer->GetColorTexture(0);
+            if (auto&& pFrameBuffer = GetContext()->FindFramebuffer("SceneViewFBO", pCamera)) {
+                m_id = pFrameBuffer->GetColorTexture(0);
             }
 
-            if (pCamera && m_id != SR_ID_INVALID && pCamera->IsActive()) 
+            m_windowSize = SR_MATH_NS::Vector2(static_cast<int32_t>(ImGui::GetWindowSize().x), static_cast<int32_t>(ImGui::GetWindowSize().y));
+
+            if (!UpdateViewSize() && pCamera && m_id != SR_ID_INVALID && pCamera->IsActive())
             {
-                m_guizmo->DrawTools(); //Отрисовка панели с переключателями
+                m_guizmo->DrawTools(); /// Отрисовка панели с переключателями
 
                 ImGui::BeginGroup();
 
                 ImGui::Separator();
 
                 if (ImGui::BeginChild("ViewerTexture")) {
-                    const auto winSize = ImGui::GetWindowSize();
+                    if (m_guizmo->GetViewMode() == EditorSceneViewMode::WindowSize) {
+                        DrawTexture(m_windowSize, m_window->GetSize().Cast<int32_t>(), m_id, true);
+                    }
+                    else {
+                        DrawTexture(m_windowSize, m_windowSize, m_id, true);
+                    }
 
-                    DrawTexture(SR_MATH_NS::IVector2(winSize.x, winSize.y), m_window->GetSize().Cast<int32_t>(), m_id, true);
-
-                    if (auto&& selected = m_hierarchy->GetSelected(); selected.size() == 1)
+                    if (auto&& selected = m_hierarchy->GetSelected(); selected.size() == 1) {
                         m_guizmo->Draw(*selected.begin(), m_camera);
+                    }
 
                     CheckFocused();
                     CheckHovered();
@@ -386,5 +392,35 @@ namespace SR_CORE_NS::GUI {
         if (!xmlDocument.Save(SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat(CAMERA_XML))) {
             SR_ERROR("SceneViewer::BackupCameraSettings() : failed to save camera settings!");
         }
+    }
+
+    bool SceneViewer::UpdateViewSize() {
+        if (!m_guizmo) {
+            return false;
+        }
+
+        auto pCamera = m_camera->GetComponent<SR_GTYPES_NS::Camera>();
+        if (!pCamera) {
+            return false;
+        }
+
+        if (m_guizmo->GetViewMode() == EditorSceneViewMode::WindowSize) {
+            if (pCamera->GetSize() == GetContext()->GetWindowSize()) {
+                return false;
+            }
+
+            pCamera->UpdateProjection(GetContext()->GetWindowSize().x, GetContext()->GetWindowSize().y);
+            return true;
+        }
+        else if (m_guizmo->GetViewMode() == EditorSceneViewMode::FreeAspect) {
+            if (pCamera->GetSize() == m_windowSize) {
+                return false;
+            }
+
+            pCamera->UpdateProjection(m_windowSize.x, m_windowSize.y);
+            return true;
+        }
+
+        return false;
     }
 }

@@ -75,6 +75,7 @@ namespace SR_GTYPES_NS {
 
         SR_NODISCARD uint32_t GetWidth() const;
         SR_NODISCARD uint32_t GetHeight() const;
+        SR_NODISCARD SR_MATH_NS::IVector2 GetSize() const { return m_size; }
 
         void FreeVideoMemory() override;
         uint64_t GetFileHash() const override;

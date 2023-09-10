@@ -14,7 +14,7 @@ namespace SR_GRAPH_NS::UI {
     SR_REGISTER_COMPONENT(Canvas);
 
     Canvas::Canvas()
-        : SR_UTILS_NS::Component()
+        : Super()
     { }
 
     void Canvas::OnAttached() {
@@ -24,10 +24,10 @@ namespace SR_GRAPH_NS::UI {
 
         m_context = m_renderScene->GetContext();
 
-        Component::OnAttached();
+        Super::OnAttached();
     }
 
-    SR_UTILS_NS::Component* Canvas::LoadComponent(SR_HTYPES_NS::Marshal &marshal, const SR_HTYPES_NS::DataStorage *dataStorage) {
+    SR_UTILS_NS::Component* Canvas::LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* pDataStorage) {
         return new Canvas();
     }
 
@@ -41,9 +41,16 @@ namespace SR_GRAPH_NS::UI {
 
     void Canvas::Update(float_t dt) {
         if (m_renderScene.RecursiveLockIfValid()) {
-            auto&& windowSize = m_renderScene->GetSurfaceSize();
+            SR_MATH_NS::UVector2 windowSize;
 
-            auto &&pTransform = dynamic_cast<SR_UTILS_NS::Transform2D *>(GetTransform());
+            if (auto&& pCamera = m_renderScene->GetMainCamera()) {
+                windowSize = pCamera->GetSize();
+            }
+            else {
+                windowSize = m_renderScene->GetSurfaceSize();
+            }
+
+            auto&& pTransform = dynamic_cast<SR_UTILS_NS::Transform2D *>(GetTransform());
 
             if (windowSize != m_size && pTransform) {
                 m_size = windowSize;
@@ -53,18 +60,18 @@ namespace SR_GRAPH_NS::UI {
                 pTransform->SetTranslation(SR_MATH_NS::FVector3(0.f));
                 pTransform->SetScale(SR_MATH_NS::FVector3(aspect, 1.f, 1.f));
 
-                //if (aspect > 1.f) {
-                //    pTransform->SetScale(SR_MATH_NS::FVector3(1.f, 1.f, 1.f));
-                //}
-                //else {
-                //    pTransform->SetScale(SR_MATH_NS::FVector3(aspect, aspect, 1.f));
-                //}
+                /// if (aspect > 1.f) {
+                ///     pTransform->SetScale(SR_MATH_NS::FVector3(1.f, 1.f, 1.f));
+                /// }
+                /// else {
+                ///     pTransform->SetScale(SR_MATH_NS::FVector3(aspect, aspect, 1.f));
+                /// }
             }
 
             m_renderScene.Unlock();
         }
 
-        Component::Update(dt);
+        Super::Update(dt);
     }
 
     bool Canvas::ExecuteInEditMode() const {
