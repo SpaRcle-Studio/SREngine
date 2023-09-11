@@ -35,6 +35,8 @@ namespace SR_CORE_NS {
 
         SRAssert(pScene);
 
+        m_accumulateDt = SR_UTILS_NS::Features::Instance().Enabled("AccumulateDt", true);
+
         if (SR_UTILS_NS::Features::Instance().Enabled("Renderer", true)) {
             if (auto&& pContext = pEngine->GetRenderContext(); pContext.LockIfValid()) {
                 pRenderScene = pContext->CreateScene(pScene);
@@ -101,9 +103,12 @@ namespace SR_CORE_NS {
             pSceneBuilder->Build(isPaused);
             pSceneBuilder->Update(dt);
 
-            /// если по какой-то причине получилось так, что dt большой, то обрезаем его
-            ///TODO::::::::::::::::::::::::::::::::::::::::::::::::m_accumulator += SR_MIN(dt, m_updateFrequency);
-            m_accumulator += dt;
+            if (m_accumulateDt) {
+                m_accumulator += dt;
+            }
+            else {
+                m_accumulator += SR_MIN(dt, m_updateFrequency);
+            }
 
             /// fixed update
             if (m_accumulator >= m_updateFrequency)
@@ -166,11 +171,7 @@ namespace SR_CORE_NS {
 
     void EngineScene::UpdateMainCamera() {
         pMainCamera = pRenderScene.Do<CameraPtr>([](SR_GRAPH_NS::RenderScene* ptr) -> CameraPtr {
-            if (auto&& pCamera = ptr->GetMainCamera()) {
-                return pCamera;
-            }
-
-            return ptr->GetFirstOffScreenCamera();
+            return ptr->GetMainCamera();
         }, nullptr);
     }
 

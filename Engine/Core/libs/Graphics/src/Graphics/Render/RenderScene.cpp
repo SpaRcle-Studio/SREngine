@@ -429,7 +429,7 @@ namespace SR_GRAPH_NS {
     }
 
     RenderScene::CameraPtr RenderScene::GetMainCamera() const {
-        return m_mainCamera;
+        return m_mainCamera ? m_mainCamera : GetFirstOffScreenCamera();
     }
 
     RenderScene::CameraPtr RenderScene::GetFirstOffScreenCamera() const {

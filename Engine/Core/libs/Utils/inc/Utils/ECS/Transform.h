@@ -33,6 +33,7 @@ namespace SR_UTILS_NS {
 
     class SR_DLL_EXPORT Transform : public ISavable {
         friend class GameObject;
+        SR_INLINE static const uint16_t VERSION = 1000;
     public:
         Transform() = default;
         ~Transform() override;
@@ -41,7 +42,7 @@ namespace SR_UTILS_NS {
         static Transform* Load(SR_HTYPES_NS::Marshal& marshal, GameObject* pGameObject);
 
     public:
-        SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SavableFlags flags) const override;
+        SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save(SavableFlags flags) const override;
 
         void SetGameObject(GameObject *gameObject);
 

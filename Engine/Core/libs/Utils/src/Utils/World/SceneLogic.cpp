@@ -29,23 +29,25 @@ namespace SR_WORLD_NS {
     }
 
     bool SceneLogic::Save(const Path& path) {
-        auto&& documentXml = SR_XML_NS::Document::New();
-        auto&& settingsXml = documentXml.Root().AppendNode("Settings");
+        if (!m_scene->IsPrefab()) {
+            auto&& documentXml = SR_XML_NS::Document::New();
+            auto&& settingsXml = documentXml.Root().AppendNode("Settings");
 
-        auto&& stringsXml = settingsXml.AppendNode("Strings");
-        for (auto&& [name, value] : m_scene->GetDataStorage().GetValues<std::string>()) {
-            stringsXml.AppendNode(name).AppendAttribute(value);
-        }
+            auto&& stringsXml = settingsXml.AppendNode("Strings");
+            for (auto&& [name, value] : m_scene->GetDataStorage().GetValues<std::string>()) {
+                stringsXml.AppendNode(name).AppendAttribute(value);
+            }
 
-        auto&& pathsXml = settingsXml.AppendNode("Paths");
-        for (auto&& [name, value] : m_scene->GetDataStorage().GetValues<SR_UTILS_NS::Path>()) {
-            pathsXml.AppendNode(name).AppendAttribute(value);
-        }
+            auto&& pathsXml = settingsXml.AppendNode("Paths");
+            for (auto&& [name, value] : m_scene->GetDataStorage().GetValues<SR_UTILS_NS::Path>()) {
+                pathsXml.AppendNode(name).AppendAttribute(value);
+            }
 
-        auto&& seetingsPath = path.Concat("data/settings.xml");
-        if (!documentXml.Save(seetingsPath)) {
-            SR_ERROR("SceneLogic::Save() : failed save settings!\n\tPath: " + seetingsPath.ToStringRef());
-            return false;
+            auto&& seetingsPath = path.Concat("data/settings.xml");
+            if (!documentXml.Save(seetingsPath)) {
+                SR_ERROR("SceneLogic::Save() : failed save settings!\n\tPath: " + seetingsPath.ToStringRef());
+                return false;
+            }
         }
 
         return true;

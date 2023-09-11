@@ -207,14 +207,23 @@ namespace SR_CORE_NS::GUI {
     }
 
     void SceneViewer::DrawTexture(SR_MATH_NS::IVector2 winSize, SR_MATH_NS::IVector2 texSize, uint32_t id, bool centralize) {
-        const float_t dx = static_cast<float_t>(winSize.x) / texSize.x;
-        const float_t dy = static_cast<float_t>(winSize.y) / texSize.y;
+        const float_t dx = static_cast<float_t>(winSize.x) / static_cast<float_t>(texSize.x);
+        const float_t dy = static_cast<float_t>(winSize.y) / static_cast<float_t>(texSize.y);
 
         if (dy > dx) {
             texSize *= dx;
         }
         else
             texSize *= dy;
+
+        if (m_guizmo->GetViewMode() == EditorSceneViewMode::FreeAspect) {
+            texSize -= SR_MATH_NS::IVector2(16, 64);
+            winSize -= SR_MATH_NS::IVector2(16, 64);
+        }
+
+        if (texSize.HasNegative() || winSize.HasNegative()) {
+            return;
+        }
 
         m_textureSize = texSize;
 

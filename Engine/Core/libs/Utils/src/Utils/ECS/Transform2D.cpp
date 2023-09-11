@@ -74,29 +74,15 @@ namespace SR_UTILS_NS {
     }
 
     void Transform2D::UpdateMatrix() {
-        if (auto&& pParent = dynamic_cast<Transform2D*>(GetParentTransform())) {
-            auto scale = m_scale;
-            auto translation = m_translation;
-            auto&& aspect = pParent->GetScale().XY().Aspect();
+        auto&& scale = CalculateStretch();
+        auto&& translation = CalculateAnchor(scale);
 
-            //CalculateStretch(translation, scale, aspect);
-            //translation += CalculateAnchor(scale);
-
-            m_localMatrix = SR_MATH_NS::Matrix4x4(
-                    translation,
-                    m_rotation.Radians().ToQuat(),
-                    scale,
-                    m_skew
-            );
-        }
-        else {
-            m_localMatrix = SR_MATH_NS::Matrix4x4(
-                    m_translation,
-                    m_rotation.Radians().ToQuat(),
-                    m_scale,
-                    m_skew
-            );
-        }
+        m_localMatrix = SR_MATH_NS::Matrix4x4(
+            translation,
+            m_rotation.Radians().ToQuat(),
+            m_scale * scale,
+            m_skew
+        );
 
         Transform::UpdateMatrix();
     }
@@ -143,7 +129,7 @@ namespace SR_UTILS_NS {
         UpdateTree();
     }
 
-    void Transform2D::SetStretch(StretchFlag stretch) {
+    void Transform2D::SetStretch(Stretch stretch) {
         m_stretch = stretch;
         UpdateTree();
     }
@@ -152,7 +138,6 @@ namespace SR_UTILS_NS {
         auto&& pTransform = new Transform2D();
 
         pTransform->m_anchor = m_anchor;
-
         pTransform->m_stretch = m_stretch;
 
         pTransform->m_translation = m_translation;
@@ -163,37 +148,112 @@ namespace SR_UTILS_NS {
         return pTransform;
     }
 
-    void Transform2D::CalculateStretch(SR_MATH_NS::FVector3& translation, SR_MATH_NS::FVector3& scale, SR_MATH_NS::Unit aspect) const {
-        if (aspect < 1 && m_stretch & Stretch::Height) {
-            if (translation.y > 0) {
-                translation.y += (1.f - aspect) * scale.y;
-            }
-            else if (translation.y < 0) {
-                translation.y -= (1.f - aspect) * scale.y;
-            }
-
-            scale.y *= aspect;
+    SR_MATH_NS::FVector3 Transform2D::CalculateStretch() const {
+        auto&& pParent = dynamic_cast<Transform2D*>(GetParentTransform());
+        if (!pParent) {
+            return SR_MATH_NS::FVector3::One();
         }
-        else if (aspect > 1 && m_stretch & Stretch::Width) {
+
+        auto&& aspect = pParent->GetScale().XY().Aspect();
+        if (SR_EQUALS(aspect, 0.f)) {
+            return SR_MATH_NS::FVector3();
+        }
+
+        auto scale = SR_MATH_NS::FVector3::One();
+
+        auto&& fitWidth = [&]() {
             scale.x *= 1.f / aspect;
 
-            if (translation.x > 0) {
-                translation.x += (aspect - 1.f) * scale.x;
+            //if (translation.x > 0) {
+            //    translation.x += (aspect - 1.f) * scale.x;
+            //}
+            //else if (translation.x < 0) {
+            //    translation.x -= (aspect - 1.f) * scale.x;
+            //}
+        };
+
+        auto&& fitHeight = [&]() {
+            scale.y *= aspect;
+
+           //if (translation.y > 0) {
+           //    translation.y += (1.f - aspect) * scale.y;
+           //}
+           //else if (translation.y < 0) {
+           //    translation.y -= (1.f - aspect) * scale.y;
+           //}
+        };
+
+        //auto&& otherAspect = (float)screenSize.Width() / (float)screenSize.Height();
+        //auto&& myAspect = (float)_refferenceW / (float)_refferenceH;
+
+        /// Компенсация растяжения родительской ноды
+        switch (m_stretch) {
+            case Stretch::ChangeAspect:
+                break;
+            case Stretch::WidthControlsHeight:
+                fitWidth();
+                break;
+            case Stretch::HeightControlsWidth:
+                fitHeight();
+                break;
+            case Stretch::ShowAll: {
+                if (aspect > 1.f) {
+                    fitWidth();
+                }
+                else {
+                    fitHeight();
+                }
+                break;
             }
-            else if (translation.x < 0) {
-                translation.x -= (aspect - 1.f) * scale.x;
+            case Stretch::NoBorder: {
+                if (aspect > 1.f) {
+                    fitHeight();
+                }
+                else {
+                    fitWidth();
+                }
+                break;
             }
+            default:
+                break;
         }
+
+        return scale;
     }
 
     SR_MATH_NS::FVector3 Transform2D::CalculateAnchor(const SR_MATH_NS::FVector3& scale) const {
-        auto&& pParentTransform = GetParentTransform();
-        auto&& parentTranslation = pParentTransform->GetTranslation2D();
-        auto&& parentScale = pParentTransform->GetScale2D();
+        auto&& pParent = dynamic_cast<Transform2D*>(GetParentTransform());
+        if (!pParent) {
+            return SR_MATH_NS::FVector3();
+        }
 
-        SR_MATH_NS::FRect parentRect = SR_MATH_NS::FRect::FromTranslationAndScale(parentTranslation, parentScale);
-        SR_MATH_NS::FVector2 center =  SR_MATH_NS::FVector2(parentRect.x + (parentRect.w / 2), parentRect.y + (parentRect.h / 2));
-        SR_MATH_NS::FRect rect = SR_MATH_NS::FRect::FromTranslationAndScale(center, scale.XY());
+        auto&& parentScale = pParent->GetScale();
+
+        //auto&& parentTranslation = pParentTransform->GetTranslation2D();
+        //auto&& parentScale = pParentTransform->GetScale2D();
+        //SR_MATH_NS::FRect parentRect = SR_MATH_NS::FRect::FromTranslationAndScale(parentTranslation, parentScale);
+        //SR_MATH_NS::FVector2 center =  SR_MATH_NS::FVector2(parentRect.x + (parentRect.w / 2), parentRect.y + (parentRect.h / 2));
+
+        ///auto&& parentRect = SR_MATH_NS::FRect(0.f, 0.f, parentScale.x, parentScale.y);
+        ///auto&& rect = SR_MATH_NS::FRect(0.f, 0.f, scale.x, scale.y);
+        ///rect.x = (parentRect.w - rect.w) / 2.f;
+        ///rect.y = (parentRect.h - rect.h) / 2.f;
+
+        auto&& aspect = (parentScale / m_scale).XY().Aspect();
+        auto&& horizontalAnchor = (aspect - 1.f) * (1.f / aspect);
+
+        switch (m_anchor) {
+            case Anchor::None:
+                return m_translation + SR_MATH_NS::FVector3();
+            case Anchor::MiddleLeft:
+                return m_translation + SR_MATH_NS::FVector3(-horizontalAnchor, 0.f, 0.f);
+            case Anchor::MiddleRight:
+                return m_translation + SR_MATH_NS::FVector3(horizontalAnchor, 0.f, 0.f);
+            default:
+                return SR_MATH_NS::FVector3();
+        }
+
+        /*SR_MATH_NS::FRect rect = SR_MATH_NS::FRect::FromTranslationAndScale(center, scale.XY());
 
         switch (m_anchor) {
             case Anchor::None:
@@ -237,6 +297,6 @@ namespace SR_UTILS_NS {
                 return SR_MATH_NS::FVector3();
         }
 
-        return SR_MATH_NS::FVector3(rect.x, rect.y, 0);
+        return SR_MATH_NS::FVector3(rect.x, rect.y, 0);*/
     }
 }

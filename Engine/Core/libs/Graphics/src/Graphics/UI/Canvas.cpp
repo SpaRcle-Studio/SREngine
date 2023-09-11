@@ -57,6 +57,21 @@ namespace SR_GRAPH_NS::UI {
 
                 auto&& aspect = m_size.Aspect();
 
+                /** auto fitWidth = [&]() {
+                    pTransform->SetScale(SR_MATH_NS::FVector3(1.f / aspect, 1.f, 1.f));
+                };
+
+                auto fitHeight = [&]() {
+                    pTransform->SetScale(SR_MATH_NS::FVector3(1.f, aspect, 1.f));
+                };
+
+                if (aspect > 1.f) {
+                    fitWidth();
+                }
+                else {
+                    fitHeight();
+                }*/
+
                 pTransform->SetTranslation(SR_MATH_NS::FVector3(0.f));
                 pTransform->SetScale(SR_MATH_NS::FVector3(aspect, 1.f, 1.f));
 

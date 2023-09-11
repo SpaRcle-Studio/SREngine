@@ -15,7 +15,7 @@
 #include <Physics/2D/Rigidbody2D.h>
 
 #include <Graphics/Types/Geometry/Sprite.h>
-#include <Audio/Types/AudioSource.h>#include <Graphics/UI/Anchor.h>
+#include <Audio/Types/AudioSource.h>
 #include <Graphics/UI/Canvas.h>
 #include <Graphics/Types/Geometry/ProceduralMesh.h>
 #include <Graphics/GUI/Utils.h>
@@ -253,7 +253,7 @@ namespace Framework::Core::GUI {
 
             return true;
         }, const_cast<void*>(reinterpret_cast<const void*>(&stretchTypes)), stretchTypes.size())) {
-            pTransform->SetStretch(SR_UTILS_NS::EnumReflector::AtAsInt<SR_UTILS_NS::Stretch>(stretch));
+            pTransform->SetStretch(SR_UTILS_NS::EnumReflector::At<SR_UTILS_NS::Stretch>(stretch));
         }
     }
 
@@ -280,12 +280,12 @@ namespace Framework::Core::GUI {
 
     void SR_CORE_NS::GUI::Inspector::BackupTransform(const SR_UTILS_NS::GameObject::Ptr& ptr, const std::function<void()>& operation) const
     {
-        SR_HTYPES_NS::Marshal::Ptr pMarshal = ptr->GetTransform()->Save(nullptr, SR_UTILS_NS::SavableFlagBits::SAVABLE_FLAG_NONE);
-
-        operation();
-
-        auto&& cmd = new Framework::Core::Commands::GameObjectTransform(ptr, pMarshal);
-        Engine::Instance().GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
+        ///SR_HTYPES_NS::Marshal::Ptr pMarshal = ptr->GetTransform()->Save(nullptr, SR_UTILS_NS::SavableFlagBits::SAVABLE_FLAG_NONE);
+///
+        ///operation();
+///
+        ///auto&& cmd = new Framework::Core::Commands::GameObjectTransform(ptr, pMarshal);
+        ///Engine::Instance().GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
     }
 
     void Inspector::DrawSwitchTransform() {

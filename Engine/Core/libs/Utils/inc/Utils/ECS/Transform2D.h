@@ -12,11 +12,12 @@ namespace SR_UTILS_NS {
     class GameObject;
 
     /// растяжение по ширине родительского элемента
-    SR_ENUM_NS_STRUCT_T(Stretch, uint32_t,
-          None = 1 << 0,
-          Width = 1 << 1,
-          Height = 1 << 2,
-          WidthHeight = Width | Height
+    SR_ENUM_NS_CLASS_T(Stretch, uint8_t ,
+        ShowAll,
+        NoBorder,
+        ChangeAspect,
+        WidthControlsHeight,
+        HeightControlsWidth
     );
 
     SR_ENUM_NS_CLASS_T(Anchor, uint8_t,
@@ -43,7 +44,7 @@ namespace SR_UTILS_NS {
         void SetGlobalRotation(const SR_MATH_NS::FVector3& eulers) override;
 
         void SetAnchor(Anchor anchorType);
-        void SetStretch(StretchFlag stretch);
+        void SetStretch(Stretch stretch);
 
         SR_NODISCARD SR_MATH_NS::FVector3 GetTranslation() const override { return m_translation; }
         SR_NODISCARD SR_MATH_NS::FVector3 GetRotation() const override { return m_rotation; }
@@ -57,20 +58,23 @@ namespace SR_UTILS_NS {
         SR_NODISCARD const SR_MATH_NS::Matrix4x4& GetMatrix() override;
 
         SR_NODISCARD Anchor GetAnchor() const { return m_anchor; }
-        SR_NODISCARD StretchFlag GetStretch() const { return m_stretch; }
+        SR_NODISCARD Stretch GetStretch() const { return m_stretch; }
 
     protected:
         void UpdateMatrix() override;
-        void CalculateStretch(SR_MATH_NS::FVector3& translation, SR_MATH_NS::FVector3& scale, SR_MATH_NS::Unit aspect) const;
+        SR_NODISCARD SR_MATH_NS::FVector3 CalculateStretch() const;
         SR_NODISCARD SR_MATH_NS::FVector3 CalculateAnchor(const SR_MATH_NS::FVector3& scale) const;
 
     public:
         SR_INLINE static constexpr SR_MATH_NS::FVector2 RIGHT = Math::FVector2(1, 0);
         SR_INLINE static constexpr SR_MATH_NS::FVector2 UP    = Math::FVector2(0, 1);
 
+        SR_INLINE static constexpr float_t ReferenceW = 1024.f;
+        SR_INLINE static constexpr float_t ReferenceH = 768.f;
+
     protected:
         Anchor m_anchor = Anchor::None;
-        StretchFlag m_stretch = Stretch::None;
+        Stretch m_stretch = Stretch::ShowAll;
 
         SR_MATH_NS::Matrix4x4 m_localMatrix = SR_MATH_NS::Matrix4x4::Identity();
         SR_MATH_NS::Matrix4x4 m_matrix = SR_MATH_NS::Matrix4x4::Identity();

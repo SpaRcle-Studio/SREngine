@@ -63,7 +63,7 @@ namespace SR_GRAPH_NS {
                 pShader = pClusterShader;
             }
 
-            if (!pShader || !pShader->Ready()) {
+            if (!pShader || !pShader->Ready() || !pShader->IsAvailable()) {
                 continue;
             }
 

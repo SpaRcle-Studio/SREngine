@@ -349,7 +349,11 @@ namespace SR_UTILS_NS {
             pMarshal->Write<std::string>(GetName());
             pMarshal->Write<uint64_t>(GetTag());
             pMarshal->Write<bool>(IsEnabled());
-            pMarshal = GetTransform()->Save(pMarshal, flags);
+
+            auto&& pTransformMarshal = GetTransform()->Save(flags);
+            pMarshal->Write<uint64_t>(pTransformMarshal->Size());
+            pMarshal->Append(pTransformMarshal);
+
             return pMarshal;
         }
         else {
@@ -361,7 +365,9 @@ namespace SR_UTILS_NS {
 
         pMarshal->Write<uint64_t>(m_tag);
 
-        pMarshal = m_transform->Save(pMarshal, flags);
+        auto&& pTransformMarshal = GetTransform()->Save(flags);
+        pMarshal->Write<uint64_t>(pTransformMarshal->Size());
+        pMarshal->Append(pTransformMarshal);
 
         /// save components
 
@@ -540,6 +546,8 @@ namespace SR_UTILS_NS {
                 auto&& objectName = marshal.Read<std::string>();
                 auto&& tag = marshal.Read<uint64_t>();
                 auto&& isEnabled = marshal.Read<bool>();
+
+                SR_MAYBE_UNUSED auto&& transformBlockSize = marshal.Read<uint64_t>();
                 auto&& pTransform = Transform::Load(marshal, nullptr);
 
                 if (!pTransform) {
@@ -592,6 +600,8 @@ namespace SR_UTILS_NS {
             /// ----------------------
 
             gameObject->SetEnabled(enabled);
+
+            SR_MAYBE_UNUSED auto&& transformBlockSize = marshal.Read<uint64_t>();
 
             gameObject->SetTransform(SR_UTILS_NS::Transform::Load(
                     marshal,

@@ -551,6 +551,7 @@ namespace SR_CORE_NS {
                 if (!pMainCamera) {
                     SR_NOOP;
                 }
+
                 else if (auto&& gameObject = dynamic_cast<SR_UTILS_NS::GameObject*>(pMainCamera->GetParent())) {
                     auto&& pLogic = pScene->GetLogicBase().DynamicCast<SR_WORLD_NS::SceneCubeChunkLogic>();
                     if (pLogic && gameObject) {

@@ -27,6 +27,8 @@
 
        <RayTracing Value="true"/>
 
+       <AccumulateDt Value="true"/>
+
        <FastModelsLoad Value="true"/>
 
        <Renderer Value="true"/>

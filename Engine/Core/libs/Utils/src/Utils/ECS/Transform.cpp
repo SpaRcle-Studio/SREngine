@@ -82,8 +82,9 @@ namespace SR_UTILS_NS {
         Scale(Math::FVector3(x, y, z));
     }
 
-    SR_HTYPES_NS::Marshal::Ptr Transform::Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SavableFlags flags) const {
-        pMarshal = ISavable::Save(pMarshal, flags);
+    SR_HTYPES_NS::Marshal::Ptr Transform::Save(SavableFlags flags) const {
+        auto&& pMarshal = ISavable::Save(nullptr, flags);
+        pMarshal->Write<uint16_t>(VERSION);
         pMarshal->Write(static_cast<uint8_t>(GetMeasurement()));
 
         switch (GetMeasurement()) {
@@ -91,7 +92,8 @@ namespace SR_UTILS_NS {
                 break;
             case Measurement::Space2D: {
                 auto&& pTransform2D = dynamic_cast<const SR_UTILS_NS::Transform2D*>(this);
-                pMarshal->Write<uint32_t>(pTransform2D->GetStretch());
+                pMarshal->Write<uint8_t>(static_cast<uint8_t>(pTransform2D->GetStretch()));
+                pMarshal->Write<uint8_t>(static_cast<uint8_t>(pTransform2D->GetAnchor()));
                 pMarshal->Write(GetTranslation(), SR_MATH_NS::FVector3(0.f));
                 pMarshal->Write(GetRotation(), SR_MATH_NS::FVector3(0.f));
                 pMarshal->Write(GetScale(), SR_MATH_NS::FVector3(1.f));
@@ -128,8 +130,10 @@ namespace SR_UTILS_NS {
         return pMarshal;
     }
 
-    Transform *Transform::Load(SR_HTYPES_NS::Marshal &marshal, GameObject* pGameObject) {
+    Transform *Transform::Load(SR_HTYPES_NS::Marshal& marshal, GameObject* pGameObject) {
         Transform* pTransform = nullptr;
+
+        SR_MAYBE_UNUSED auto&& version = marshal.Read<uint16_t>(); /// TODO: migrate
 
         auto&& measurement = static_cast<Measurement>(marshal.Read<uint8_t>());
 
@@ -159,7 +163,8 @@ namespace SR_UTILS_NS {
                 break;
             case Measurement::Space2D: {
                 auto&& pTransform2D = dynamic_cast<Transform2D*>(pTransform);
-                pTransform2D->SetStretch(static_cast<StretchFlag>(marshal.Read<uint32_t>()));
+                pTransform2D->SetStretch(static_cast<Stretch>(marshal.Read<uint8_t>()));
+                pTransform2D->SetAnchor(static_cast<Anchor>(marshal.Read<uint8_t>()));
                 SR_FALLTHROUGH;
             }
             case Measurement::Space3D:

@@ -95,7 +95,7 @@ bool Framework::Core::Commands::GameObjectTransform::Undo() {
 
 Framework::Core::Commands::GameObjectTransform::GameObjectTransform(const SR_UTILS_NS::GameObject::Ptr& ptr, SR_HTYPES_NS::Marshal::Ptr pOldMarshal) {
     m_path = ptr->GetEntityPath();
-    m_newMarshal = ptr->GetTransform()->Save(nullptr, SR_UTILS_NS::SavableFlagBits::SAVABLE_FLAG_NONE);
+    m_newMarshal = ptr->GetTransform()->Save(SR_UTILS_NS::SavableFlagBits::SAVABLE_FLAG_NONE);
     m_oldMarshal = pOldMarshal;
 }
 
