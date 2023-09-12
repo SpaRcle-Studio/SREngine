@@ -64,17 +64,18 @@ namespace SR_CORE_NS::GUI {
                 m_id = pFrameBuffer->GetColorTexture(0);
             }
 
-            m_windowSize = SR_MATH_NS::Vector2(static_cast<int32_t>(ImGui::GetWindowSize().x), static_cast<int32_t>(ImGui::GetWindowSize().y));
+            m_guizmo->DrawTools(); /// Отрисовка панели с переключателями
 
-            if (!UpdateViewSize() && pCamera && m_id != SR_ID_INVALID && pCamera->IsActive())
+            ImGui::BeginGroup();
+
+            ImGui::Separator();
+
+            if (ImGui::BeginChild("ViewerTexture"))
             {
-                m_guizmo->DrawTools(); /// Отрисовка панели с переключателями
+                m_windowSize = SR_MATH_NS::Vector2(static_cast<int32_t>(ImGui::GetWindowSize().x), static_cast<int32_t>(ImGui::GetWindowSize().y));
 
-                ImGui::BeginGroup();
-
-                ImGui::Separator();
-
-                if (ImGui::BeginChild("ViewerTexture")) {
+                if (!UpdateViewSize() && pCamera && m_id != SR_ID_INVALID && pCamera->IsActive())
+                {
                     if (m_guizmo->GetViewMode() == EditorSceneViewMode::WindowSize) {
                         DrawTexture(m_windowSize, m_window->GetSize().Cast<int32_t>(), m_id, true);
                     }
@@ -89,10 +90,10 @@ namespace SR_CORE_NS::GUI {
                     CheckFocused();
                     CheckHovered();
                 }
-                ImGui::EndChild();
-
-                ImGui::EndGroup();
             }
+            ImGui::EndChild();
+
+            ImGui::EndGroup();
 
             m_camera.Unlock();
         }
@@ -207,6 +208,10 @@ namespace SR_CORE_NS::GUI {
     }
 
     void SceneViewer::DrawTexture(SR_MATH_NS::IVector2 winSize, SR_MATH_NS::IVector2 texSize, uint32_t id, bool centralize) {
+        if (texSize.HasNegative() || winSize.HasNegative()) {
+            return;
+        }
+
         const float_t dx = static_cast<float_t>(winSize.x) / static_cast<float_t>(texSize.x);
         const float_t dy = static_cast<float_t>(winSize.y) / static_cast<float_t>(texSize.y);
 
@@ -215,15 +220,6 @@ namespace SR_CORE_NS::GUI {
         }
         else
             texSize *= dy;
-
-        if (m_guizmo->GetViewMode() == EditorSceneViewMode::FreeAspect) {
-            texSize -= SR_MATH_NS::IVector2(16, 64);
-            winSize -= SR_MATH_NS::IVector2(16, 64);
-        }
-
-        if (texSize.HasNegative() || winSize.HasNegative()) {
-            return;
-        }
 
         m_textureSize = texSize;
 
@@ -237,10 +233,10 @@ namespace SR_CORE_NS::GUI {
 
         auto&& env = SR_GRAPH_NS::Environment::Get();
         if (env->GetType() == Graphics::PipelineType::OpenGL) {
-            DrawImage(reinterpret_cast<void*>(static_cast<uint64_t>(id)), ImVec2(m_textureSize.x, m_textureSize.y), ImVec2(0, 1), ImVec2(1, 0), {1, 1, 1, 1 }, {0, 0, 0, 0 }, true);
+            DrawImage(reinterpret_cast<void*>(static_cast<uint64_t>(id)), ImVec2(m_textureSize.x, m_textureSize.y), ImVec2(0, 1), ImVec2(1, 0), {1, 1, 1, 1 }, {0, 0, 0, 0 }, false);
         }
         else if (auto&& pDescriptor = env->TryGetDescriptorSetFromTexture(id, true)) {
-            DrawImage(pDescriptor, ImVec2(m_textureSize.x, m_textureSize.y), ImVec2(-1, 0), ImVec2(0, 1), {1, 1, 1, 1}, {0, 0, 0, 0}, true);
+            DrawImage(pDescriptor, ImVec2(m_textureSize.x, m_textureSize.y), ImVec2(-1, 0), ImVec2(0, 1), {1, 1, 1, 1}, {0, 0, 0, 0}, false);
         }
     }
 
