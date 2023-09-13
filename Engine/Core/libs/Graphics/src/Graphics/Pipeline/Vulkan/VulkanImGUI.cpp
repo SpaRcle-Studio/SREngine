@@ -2,7 +2,6 @@
 // Created by Nikita on 01.07.2021.
 //
 
-#include <Utils/GUI.h>
 #include <Utils/Common/Features.h>
 
 #include <EvoVulkan/Types/DescriptorPool.h>

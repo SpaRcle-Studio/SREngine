@@ -8,7 +8,6 @@
 
 #include "src/Core/GUI/ComponentDrawer.cpp"
 #include "src/Core/GUI/EditorGUI.cpp"
-#include "src/Core/GUI/GUISystem.cpp"
 #include "src/Core/GUI/Inspector.cpp"
 #include "src/Core/GUI/WorldEdit.cpp"
 #include "src/Core/GUI/Hierarchy.cpp"

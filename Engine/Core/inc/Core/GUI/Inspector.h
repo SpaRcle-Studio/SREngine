@@ -2,8 +2,8 @@
 // Created by Monika on 14.02.2022.
 //
 
-#ifndef SRENGINE_INSPECTOR_H
-#define SRENGINE_INSPECTOR_H
+#ifndef SR_ENGINE_CORE_INSPECTOR_H
+#define SR_ENGINE_CORE_INSPECTOR_H
 
 #include <Core/GUI/ComponentDrawer.h>
 
@@ -17,11 +17,11 @@ namespace SR_UTILS_NS {
     class Transform2D;
 }
 
-namespace SR_CORE_NS::GUI {
+namespace SR_CORE_GUI_NS {
     class EditorGUI;
     class Hierarchy;
 
-    class Inspector : public Graphics::GUI::Widget {
+    class Inspector : public SR_GRAPH_GUI_NS::Widget {
     public:
         explicit Inspector(Hierarchy* hierarchy);
         ~Inspector() override = default;
@@ -101,4 +101,4 @@ namespace SR_CORE_NS::GUI {
     };
 }
 
-#endif //SRENGINE_INSPECTOR_H
+#endif //SR_ENGINE_CORE_INSPECTOR_H

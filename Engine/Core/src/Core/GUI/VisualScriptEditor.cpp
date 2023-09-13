@@ -131,34 +131,34 @@ void Framework::Core::GUI::VisualScriptEditor::LoadConfig() {
     }*/
 }
 
-SR_GRAPH_NS::GUI::Node* VisualScriptEditor::CreateBlueprint(const std::string &id) const {
-    SRAssert2(false, Helper::Format("Blueprint \"%s\" is not found!", id.c_str()));
-
-    return nullptr;
-}
-
-bool VisualScriptEditor::ValidateLink(SR_GRAPH_NS::GUI::Pin* start, SR_GRAPH_NS::GUI::Pin* end) const {
-    if (!start || !end || start == end)
-        return false;
-
-    if (start->GetKind() == end->GetKind())
-        return false;
-
-    if (start->GetNode() == end->GetNode())
-        return false;
-
-    return start->GetType() == end->GetType();
-}
-
-void VisualScriptEditor::RegisterBlueprint(SR_GRAPH_NS::GUI::Node* blueprint) {
-    const std::string name = blueprint->GetName();
-
-    if (m_blueprints.count(name)) {
-        SR_ERROR(Helper::Format("VisualScriptEditor::RegisterBlueprint() : blueprint \"%s\" already registered!"));
-        return;
-    }
-
-    m_blueprints.insert(std::make_pair(name, blueprint));
-}
+// SR_GRAPH_NS::GUI::Node* VisualScriptEditor::CreateBlueprint(const std::string &id) const {
+//     SRAssert2(false, Helper::Format("Blueprint \"%s\" is not found!", id.c_str()));
+//
+//     return nullptr;
+// }
+//
+// bool VisualScriptEditor::ValidateLink(SR_GRAPH_NS::GUI::Pin* start, SR_GRAPH_NS::GUI::Pin* end) const {
+//     if (!start || !end || start == end)
+//         return false;
+//
+//     if (start->GetKind() == end->GetKind())
+//         return false;
+//
+//     if (start->GetNode() == end->GetNode())
+//         return false;
+//
+//     return start->GetType() == end->GetType();
+// }
+//
+// void VisualScriptEditor::RegisterBlueprint(SR_GRAPH_NS::GUI::Node* blueprint) {
+//     const std::string name = blueprint->GetName();
+//
+//     if (m_blueprints.count(name)) {
+//         SR_ERROR(Helper::Format("VisualScriptEditor::RegisterBlueprint() : blueprint \"%s\" already registered!"));
+//         return;
+//     }
+//
+//     m_blueprints.insert(std::make_pair(name, blueprint));
+// }
 
 

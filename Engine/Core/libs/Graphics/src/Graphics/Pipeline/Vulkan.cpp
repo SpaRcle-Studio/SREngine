@@ -2,7 +2,6 @@
 // Created by Nikita on 25.03.2021.
 //
 
-#include <Utils/GUI.h>
 #include <Utils/Common/Features.h>
 #include <Utils/Platform/Platform.h>
 

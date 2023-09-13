@@ -2,10 +2,10 @@
 // Created by Nikita on 01.07.2021.
 //
 
-#ifndef GAMEENGINE_VULKANIMGUI_H
-#define GAMEENGINE_VULKANIMGUI_H
+#ifndef SR_ENGINE_VULKANIMGUI_H
+#define SR_ENGINE_VULKANIMGUI_H
 
-#include <Utils/GUI.h>
+#include <Utils/Debug.h>
 
 #include <EvoVulkan/VulkanKernel.h>
 #include <EvoVulkan/DescriptorManager.h>
@@ -77,4 +77,4 @@ namespace SR_GRAPH_NS::VulkanTypes {
     };
 }
 
-#endif //GAMEENGINE_VULKANIMGUI_H
+#endif //SR_ENGINE_VULKANIMGUI_H

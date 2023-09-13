@@ -40,10 +40,14 @@
 #include <Scripting/Impl/EvoScriptManager.h>
 
 namespace SR_CORE_NS {
+    Engine::Engine()
+        : Super(this)
+    { }
+
     bool Engine::Create() {
         SR_INFO("Engine::Create() : register all resources...");
 
-        if (!Resources::RegisterResources()) {
+        if (!Resources::RegisterResources(GetThis())) {
             SR_ERROR("Engine::Create() : failed to register engine resources!");
             return false;
         }
@@ -65,8 +69,12 @@ namespace SR_CORE_NS {
             return false;
         }
 
-        SR_UTILS_NS::ComponentManager::Instance().SetContextInitializer([](auto&& context) {
-            context.SetValue(Engine::Instance().GetWindow());
+        SR_UTILS_NS::ComponentManager::Instance().SetContextInitializer([pEngine = GetThis()](auto&& context) {
+            if (!pEngine) {
+                SRHalt("Engine is nullptr!");
+                return;
+            }
+            context.SetValue(pEngine->GetWindow());
 
             context.template SetPointer<SR_PHYSICS_NS::LibraryImpl>("2DPLib", SR_PHYSICS_NS::PhysicsLibrary::Instance().GetActiveLibrary(SR_UTILS_NS::Measurement::Space2D));
             context.template SetPointer<SR_PHYSICS_NS::LibraryImpl>("3DPLib", SR_PHYSICS_NS::PhysicsLibrary::Instance().GetActiveLibrary(SR_UTILS_NS::Measurement::Space3D));
@@ -78,7 +86,7 @@ namespace SR_CORE_NS {
 
         m_cmdManager = new SR_UTILS_NS::CmdManager();
         m_input      = new SR_UTILS_NS::InputDispatcher();
-        m_editor     = new Core::GUI::EditorGUI();
+        m_editor     = new SR_CORE_GUI_NS::EditorGUI(GetThis());
 
         m_worldTimer = SR_HTYPES_NS::Timer(1u);
 
@@ -216,8 +224,6 @@ namespace SR_CORE_NS {
 
     void Engine::SynchronizeFreeResources() {
         SR_SYSTEM_LOG("Engine::SynchronizeFreeResources() : synchronizing resources...");
-
-        SR_LOCK_GUARD
 
         SR_UTILS_NS::ResourceManager::Instance().SetWatchingEnabled(false);
 
@@ -393,11 +399,6 @@ namespace SR_CORE_NS {
 
         SR_INFO("Engine::Run() : running game engine...");
 
-        if (!Core::Commands::RegisterEngineCommands()) {
-            SR_ERROR("Engine::Run() : errors were detected during the registration of commands!");
-            return false;
-        }
-
         m_isRun = true;
 
         if (SR_UTILS_NS::Features::Instance().Enabled("ChunkSystem", true)) {
@@ -526,7 +527,8 @@ namespace SR_CORE_NS {
     }
 
     void Engine::Reload() {
-        SR_PLATFORM_NS::SelfOpen();
+        /// TODO: SR_PLATFORM_NS::SelfOpen();
+        /// Выйти в main и пересоздать все
     }
 
     void Engine::WorldThread() {
@@ -535,7 +537,7 @@ namespace SR_CORE_NS {
 
             SR_TRACY_ZONE_N("World");
 
-            auto&& readLock = m_sceneQueue.ReadLock();
+            SR_MAYBE_UNUSED auto&& readLock = m_sceneQueue.ReadLock();
 
             if (!m_engineScene) {
                 continue;

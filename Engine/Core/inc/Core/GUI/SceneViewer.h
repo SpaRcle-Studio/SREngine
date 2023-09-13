@@ -24,9 +24,10 @@ namespace SR_CORE_GUI_NS {
         using Super = Graphics::GUI::Widget;
         using GameObjectPtr = SR_UTILS_NS::GameObject::Ptr;
         using WindowPtr = SR_HTYPES_NS::SafePtr<SR_GRAPH_NS::Window>;
+        using EnginePtr = SR_HTYPES_NS::SharedPtr<Engine>;
         SR_INLINE_STATIC const std::string CAMERA_XML = "Editor/Camera.xml";
     public:
-        explicit SceneViewer(const WindowPtr& window, Hierarchy* hierarchy);
+        explicit SceneViewer(const EnginePtr& pEngine, Hierarchy* hierarchy);
         ~SceneViewer() override;
 
     public:
@@ -52,14 +53,14 @@ namespace SR_CORE_GUI_NS {
 
         void InitCamera();
         void SetCamera(const GameObjectPtr& camera);
-        void DrawTexture(Helper::Math::IVector2 winSize, Helper::Math::IVector2 texSize, uint32_t id, bool centralize);
-        void DrawImage(ImTextureID user_texture_id, const ImVec2& size, const ImVec2& uv0, const ImVec2& uv1, const ImVec4& tint_col, const ImVec4& border_col, bool imposition);
+        void DrawTexture(SR_MATH_NS::IVector2 winSize, SR_MATH_NS::IVector2 texSize, uint32_t id, bool centralize);
 
     private:
         SR_MATH_NS::IVector2 m_textureSize;
         ImVec2 m_imagePosition;
 
         WindowPtr m_window;
+        EnginePtr m_engine;
 
         SR_MATH_NS::FVector3 m_velocity;
         SR_MATH_NS::FVector3 m_rotation;

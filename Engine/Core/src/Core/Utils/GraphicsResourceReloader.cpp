@@ -3,7 +3,8 @@
 //
 
 #include <Core/Utils/GraphicsResourceReloader.h>
-#include <Core/Engine.h>
+#include <Graphics/Render/RenderContext.h>
+#include <Graphics/Render/RenderScene.h>
 
 namespace SR_CORE_NS {
     bool GraphicsResourceReloader::Reload(const SR_UTILS_NS::Path& path, SR_UTILS_NS::ResourceInfo* pResourceInfo) {
@@ -32,12 +33,14 @@ namespace SR_CORE_NS {
     void GraphicsResourceReloader::OnResourceReloaded(SR_UTILS_NS::IResource::Ptr pResource) {
         SR_TRACY_ZONE;
 
-        auto&& engine = Engine::Instance();
-        auto&& renderScene = engine.GetRenderScene();
-
-        if (renderScene.LockIfValid()) {
-            renderScene->OnResourceReloaded(pResource);
-            renderScene.Unlock();
+        if (m_context.RecursiveLockIfValid()) {
+            for (auto&& [pScene, pRenderScene] : m_context->GetScenes()) {
+                if (pRenderScene.LockIfValid()) {
+                    pRenderScene->OnResourceReloaded(pResource);
+                    pRenderScene.Unlock();
+                }
+            }
+            m_context.Unlock();
         }
     }
 }

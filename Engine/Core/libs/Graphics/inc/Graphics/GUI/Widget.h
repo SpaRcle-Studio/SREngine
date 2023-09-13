@@ -2,10 +2,8 @@
 // Created by Monika on 10.02.2022.
 //
 
-#ifndef SRENGINE_WIDGET_H
-#define SRENGINE_WIDGET_H
-
-#include <Utils/GUI.h>
+#ifndef SR_ENGINE_GRAPHICS_WIDGET_H
+#define SR_ENGINE_GRAPHICS_WIDGET_H
 
 #include <Utils/Common/NonCopyable.h>
 #include <Utils/Types/DataStorage.h>
@@ -13,6 +11,8 @@
 #include <Utils/Types/Function.h>
 #include <Utils/Input/InputSystem.h>
 #include <Utils/Input/InputHandler.h>
+
+#include <Graphics/GUI/ImGUI.h>
 
 namespace SR_GRAPH_NS {
     class RenderScene;
@@ -23,7 +23,7 @@ namespace SR_WORLD_NS {
     class Scene;
 }
 
-namespace SR_GRAPH_NS::GUI {
+namespace SR_GRAPH_GUI_NS {
     class WidgetManager;
     typedef ImGuiWindowFlags WindowFlags;
 
@@ -121,4 +121,4 @@ namespace SR_GRAPH_NS::GUI {
     };
 }
 
-#endif //SRENGINE_WIDGET_H
+#endif //SR_ENGINE_GRAPHICS_WIDGET_H

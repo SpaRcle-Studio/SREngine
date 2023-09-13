@@ -3,7 +3,6 @@
 //
 
 #include <Core/EvoScriptAPI.h>
-#include <Core/GUI/GUISystem.h>
 #include <Core/Engine.h>
 
 #include <Utils/Input/InputSystem.h>
@@ -543,25 +542,7 @@ namespace Framework {
     }
 
     void API::RegisterGUISystem(EvoScript::AddressTableGen *generator) {
-        using namespace SR_UTILS_NS;
-        using namespace SR_HTYPES_NS;
-        using namespace SR_WORLD_NS;
 
-        generator->RegisterNewClass("GUISystem", "GUISystem", { "cstdint", "Libraries/Math/Vector2.h", "map", "Libraries/Scene.h", "Libraries/Camera.h", "Libraries/GameObject.h" });
-        ESRegisterStaticMethodArg0(EvoScript::Public, generator, GUISystem, Instance, GUISystem&)
-
-        using namespace SR_MATH_NS;
-
-        ESRegisterMethodArg0(EvoScript::Public, generator, GUISystem, BeginMenuBar, bool)
-        ESRegisterMethodArg0(EvoScript::Public, generator, GUISystem, EndMenuBar, void)
-        ESRegisterMethodArg0(EvoScript::Public, generator, GUISystem, EndWindow, void)
-        ESRegisterMethodArg0(EvoScript::Public, generator, GUISystem, EndChildWindow, void)
-        ESRegisterMethodArg0(EvoScript::Public, generator, GUISystem, GetWindowSize, IVector2)
-        ESRegisterMethodArg0(EvoScript::Public, generator, GUISystem, DrawGuizmoTools, void)
-
-        ESRegisterMethod(EvoScript::Public, generator, GUISystem, BeginWindow, bool, ESArg1(const char* name), ESArg1(name))
-        ESRegisterMethod(EvoScript::Public, generator, GUISystem, BeginChildWindow, bool, ESArg1(const char* name), ESArg1(name))
-        ESRegisterMethod(EvoScript::Public, generator, GUISystem, DrawTexture, void, ESArg4(IVector2 win, IVector2 img, uint32_t id, bool center), ESArg4(win, img, id, center))
     }
 
     void API::RegisterPostProcessing(EvoScript::AddressTableGen *generator) {

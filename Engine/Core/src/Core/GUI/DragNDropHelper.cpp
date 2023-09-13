@@ -6,32 +6,8 @@
 
 #include <Utils/ECS/GameObject.h>
 #include <Utils/ECS/Component.h>
-#include <Utils/GUI.h>
 
 namespace SR_CORE_GUI_NS {
-    bool BeginDragDropTargetWindow(const char* payloadType) {
-        ImRect inner_rect = ImGui::GetCurrentWindow()->InnerRect;
-
-        if (ImGui::BeginDragDropTargetCustom(inner_rect, ImGui::GetID("##WindowBgArea"))) {
-            if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload(payloadType, ImGuiDragDropFlags_AcceptBeforeDelivery | ImGuiDragDropFlags_AcceptNoDrawDefaultRect))
-            {
-                if (payload->IsPreview()) {
-                    ImDrawList* draw_list = ImGui::GetForegroundDrawList();
-                    draw_list->AddRectFilled(inner_rect.Min, inner_rect.Max, ImGui::GetColorU32(ImGuiCol_DragDropTarget, 0.05f));
-                    draw_list->AddRect(inner_rect.Min, inner_rect.Max, ImGui::GetColorU32(ImGuiCol_DragDropTarget), 0.0f, 0, 2.0f);
-                }
-
-                if (payload->IsDelivery()) {
-                    return true;
-                }
-
-                ImGui::EndDragDropTarget();
-            }
-        }
-
-        return false;
-    }
-
     bool DragDropTargetEntityRef(EditorGUI* pContext, SR_UTILS_NS::EntityRef& entityRef, const char* id, int32_t index, float_t width) {
         std::string preview;
 

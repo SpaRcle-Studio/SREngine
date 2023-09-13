@@ -68,6 +68,8 @@ namespace SR_GRAPH_NS {
 
         void SetFullScreen(bool value);
 
+        SR_NODISCARD BasicWindowImpl* GetBaseWindow() const noexcept { return m_windowImpl; }
+
         template<typename T> SR_NODISCARD T* GetImplementation() const {
             return dynamic_cast<T*>(m_windowImpl);
         }

@@ -198,18 +198,19 @@ namespace SR_CORE_NS::GUI {
         if (ImGui::BeginChild("current directory panel", ImVec2(0.f, height))) 
         {
             ImGui::Separator();
-            //Back Button
+            /// Back Button
             if (ImGui::Button("Back")) {
                 m_selectedDir = m_selectedDir.GetPrevious();
                 m_dirtySelectedDir = true;
             }
-            //Current Directory Text
+            /// Current Directory Text
             ImGui::SameLine();
             ImGui::Text("%s", m_selectedDir.CStr());
-            //Refresh Button
+            /// Refresh Button
             ImGui::SameLine();
             ImGui::SetCursorPosX(ImGui::GetCursorPosX() + ImGui::GetContentRegionAvail().x - height);
-            if (GUISystem::Instance().ImageButton(dynamic_cast<EditorGUI *>(GetManager())->GetIconDescriptor(Core::EditorIcon::Reset), height-10.f)){
+
+            if (SR_GRAPH_GUI_NS::ImageButton(dynamic_cast<EditorGUI *>(GetManager())->GetIconDescriptor(Core::EditorIcon::Reset), height-10.f)){
                 m_dirtySelectedDir = true;
                 m_dirtyFoldersTree = true;
             }
@@ -238,8 +239,7 @@ namespace SR_CORE_NS::GUI {
                 if (element.isDir) {
                     void* descriptor = dynamic_cast<EditorGUI *>(GetManager())->GetIconDescriptor(element.iconType);
 
-                    if (GUISystem::Instance().ImageButtonDouble(headerid,
-                            descriptor, SR_MATH_NS::IVector2(50), 0)) {
+                    if (SR_GRAPH_GUI_NS::ImageButtonDouble(headerid, descriptor, SR_MATH_NS::IVector2(50), 0)) {
                         m_selectedDir = m_selectedDir.Concat(element.filename);
                         m_dirtySelectedDir = true;
                     }
@@ -250,7 +250,7 @@ namespace SR_CORE_NS::GUI {
                 {
                     void* descriptor = dynamic_cast<EditorGUI *>(GetManager())->GetIconDescriptor(element.iconType);
 
-                    if (GUISystem::Instance().ImageButtonDouble(headerid, descriptor, SR_MATH_NS::IVector2(50), 0)) {
+                    if (SR_GRAPH_GUI_NS::ImageButtonDouble(headerid, descriptor, SR_MATH_NS::IVector2(50), 0)) {
                         SR_UTILS_NS::Path path = m_selectedDir.Concat(element.filename);
                         //SR_UTILS_NS::Platform::OpenWithAssociatedApp(m_selectedDir.Concat(element.filename));
 

@@ -7,12 +7,6 @@
 
 #include <Utils/macros.h>
 
-/// TODO: move to platform class!
-#ifdef SR_WIN32
-    #include <Windows.h>
-    #include <shellapi.h>
-#endif
-
 #include <Utils/Debug.h>
 #include <Utils/World/SceneAllocator.h>
 #include <Utils/ResourceManager/ResourceManager.h>
@@ -31,34 +25,24 @@
 
 #include <Core/Engine.h>
 #include <Core/World/World.h>
-#include <Core/World/VisualChunk.h>
-#include <Core/World/VisualRegion.h>
 #include <Core/Settings/EditorSettings.h>
 
 #include <Graphics/Pipeline/OpenGL.h>
 #include <Graphics/Pipeline/Vulkan.h>
 #include <Graphics/UI/Canvas.h>
 #include <Graphics/UI/Anchor.h>
-#include <Graphics/Types/Geometry/Sprite.h>
-#include <Graphics/SRSL/Shader.h>
 
-#include <Graphics/Font/Text.h>
 #include <Graphics/Types/Texture.h>
 #include <Graphics/Loaders/SRSL.h>
 #include <Graphics/Types/Material.h>
-#include <Graphics/Types/Skybox.h>
-#include <Graphics/Types/Mesh.h>
 #include <Graphics/Types/Shader.h>
 #include <Graphics/Types/Geometry/Mesh3D.h>
 #include <Graphics/Types/Geometry/ProceduralMesh.h>
 #include <Graphics/Types/Geometry/DebugWireframeMesh.h>
 #include <Graphics/Animations/Bone.h>
-#include <Graphics/Memory/MeshAllocator.h>
 #include <Graphics/GUI/NodeManager.h>
 #include <Graphics/Types/Camera.h>
 #include <Graphics/Memory/CameraManager.h>
-#include <Graphics/Types/Framebuffer.h>
-#include <Graphics/Types/RenderTexture.h>
 #include <Graphics/Font/Font.h>
 
 #include <Physics/Rigidbody.h>
@@ -67,19 +51,16 @@
 
 #include <Audio/SoundManager.h>
 
-#include <Scripting/Base/Behaviour.h>
 #include <Scripting/Impl/EvoScriptManager.h>
 
 int main(int argc, char **argv) {
-    setlocale(LC_ALL, "rus");
-    setlocale(LC_NUMERIC, "C");
-    srand(time(NULL));
+    SR_UTILS_NS::Locale::SetLocale();
+    SR_UTILS_NS::Random::Initialize();
+    SR_PLATFORM_NS::InitSegmentationHandler();
 
     auto&& exe = SR_PLATFORM_NS::GetApplicationPath().GetFolder();
     SR_UTILS_NS::Debug::Instance().Init(exe, true, SR_UTILS_NS::Debug::Theme::Dark);
     SR_UTILS_NS::Debug::Instance().SetLevel(SR_UTILS_NS::Debug::Level::Low);
-
-    SR_PLATFORM_NS::InitSegmentationHandler();
 
     SR_HTYPES_NS::Thread::Factory::Instance().SetMainThread();
     SR_HTYPES_NS::Time::Instance().Update();
@@ -104,11 +85,11 @@ int main(int argc, char **argv) {
         return new SR_CORE_NS::World();
     });
 
-    auto&& engine = SR_CORE_NS::Engine::Instance();
+    auto&& pEngine = new SR_CORE_NS::Engine();
 
-    if(engine.Create()) {
-        if (engine.Init()) {
-            if (!engine.Run()) {
+    if (pEngine->Create()) {
+        if (pEngine->Init()) {
+            if (!pEngine->Run()) {
                 SR_ERROR("Failed to run game engine!");
             }
         }
@@ -120,13 +101,14 @@ int main(int argc, char **argv) {
         SR_ERROR("Failed to create game engine!");
     }
 
-    if (engine.IsRun()) {
+    if (pEngine->IsRun()) {
         SR_SYSTEM_LOG("All systems are successfully running!");
 
-        engine.Await(); /// await close engine
+        pEngine->Await(); /// await close engine
     }
 
-    engine.Close();
+    pEngine->Close();
+    delete pEngine;
 
     SR_SRLM_NS::DataTypeManager::DestroySingleton();
 
@@ -139,7 +121,6 @@ int main(int argc, char **argv) {
     SR_SCRIPTING_NS::GlobalEvoCompiler::DestroySingleton();
     SR_SCRIPTING_NS::EvoScriptManager::DestroySingleton();
     SR_UTILS_NS::EntityManager::DestroySingleton();
-    SR_CORE_NS::Engine::DestroySingleton();
     SR_GRAPH_NS::GUI::NodeManager::DestroySingleton();
     SR_UTILS_NS::TaskManager::DestroySingleton();
     SR_GRAPH_NS::Memory::MeshManager::DestroySingleton();

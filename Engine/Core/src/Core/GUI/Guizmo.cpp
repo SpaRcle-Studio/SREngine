@@ -7,7 +7,12 @@
 
 #include <Core/GUI/Guizmo.h>
 
-namespace SR_CORE_NS::GUI {
+namespace SR_CORE_GUI_NS {
+    Guizmo::Guizmo(const EnginePtr& pEngine)
+        : SR_UTILS_NS::InputHandler()
+        , m_engine(pEngine)
+    { }
+
     Guizmo::~Guizmo() {
         SR_SAFE_DELETE_PTR(m_marshal)
     }
@@ -168,8 +173,8 @@ namespace SR_CORE_NS::GUI {
         }
         else {
             if (IsUse() && SR_UTILS_NS::Input::Instance().GetMouseUp(SR_UTILS_NS::MouseCode::MouseLeft)) {
-                auto&& cmd = new Framework::Core::Commands::GameObjectTransform(m_transform->GetGameObject(), m_marshal->CopyPtr());
-                Engine::Instance().GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
+                auto&& cmd = new SR_CORE_NS::Commands::GameObjectTransform(m_engine, m_transform->GetGameObject(), m_marshal->CopyPtr());
+                m_engine->GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
 
                 SR_SAFE_DELETE_PTR(m_marshal)
                 m_isUse = false;

@@ -17,17 +17,17 @@ namespace SR_CORE_NS::GUI {
     }
 
     void SceneRunner::Draw() {
-        auto&& engine = Engine::Instance();
+        auto&& pEngine = dynamic_cast<EditorGUI*>(GetManager())->GetEngine();
+        auto&& pFont = pEngine->GetRenderContext()->GetPipeline()->GetIconFont();
 
-        auto&& font = SR_GRAPH_NS::Environment::Get()->GetIconFont();
-        float_t scale = font->Scale;
-        font->Scale /= 3;
+        float_t scale = pFont->Scale;
+        pFont->Scale /= 3;
 
         bool locked = false;
 
         if (m_scene.TryRecursiveLockIfValid()) {
-            m_isActive = engine.IsActive();
-            m_isPaused = engine.IsPaused();
+            m_isActive = pEngine->IsActive();
+            m_isPaused = pEngine->IsPaused();
             m_lastPath = std::move(m_scene->GetPath());
             locked = true;
         }
@@ -35,7 +35,7 @@ namespace SR_CORE_NS::GUI {
         bool active = m_isActive;
         bool paused = m_isPaused;
 
-        ImGui::PushFont(font);
+        ImGui::PushFont(pFont);
         ImGui::PushStyleVar(ImGuiStyleVar_FrameBorderSize, 0.0f);
 
         ImGui::Separator();
@@ -43,8 +43,8 @@ namespace SR_CORE_NS::GUI {
         if (m_scene->IsPrefab())
         {
             if (auto&& pDescriptor = GetEditor()->GetIconDescriptor(EditorIcon::Back)) {
-                if (GUISystem::Instance().ImageButton("##imgSceneBackBtn", pDescriptor, SR_MATH_NS::IVector2(32), 3)) {
-                    Engine::Instance().GetEditor()->LoadSceneFromCachedPath();
+                if (SR_GRAPH_GUI_NS::ImageButton("##imgSceneBackBtn", pDescriptor, SR_MATH_NS::IVector2(32), 3)) {
+                    pEngine->GetEditor()->LoadSceneFromCachedPath();
                 }
             }
         }
@@ -52,7 +52,7 @@ namespace SR_CORE_NS::GUI {
         {
             const EditorIcon playIcon = active ? EditorIcon::Stop : EditorIcon::Play;
             if (auto&& pDescriptor = GetEditor()->GetIconDescriptor(playIcon)) {
-                if (GUISystem::Instance().ImageButton("##imgScenePlayBtn", pDescriptor, SR_MATH_NS::IVector2(32), 3) && locked) {
+                if (SR_GRAPH_GUI_NS::ImageButton("##imgScenePlayBtn", pDescriptor, SR_MATH_NS::IVector2(32), 3) && locked) {
                     active = !active;
 
                     if (active) {
@@ -68,7 +68,7 @@ namespace SR_CORE_NS::GUI {
             ImGui::SameLine();
 
             if (auto&& pDescriptor = GetEditor()->GetIconDescriptor(paused ? EditorIcon::Pause : EditorIcon::PauseActive)) {
-                if (GUISystem::Instance().ImageButton("##imgScenePauseBtn", pDescriptor, SR_MATH_NS::IVector2(32), 3)) {
+                if (SR_GRAPH_GUI_NS::ImageButton("##imgScenePauseBtn", pDescriptor, SR_MATH_NS::IVector2(32), 3)) {
                     SR_AUDIO_NS::SoundManager::Instance().Play("Editor/Audio/Heavy-popping.wav");
                     paused = !paused;
                 }
@@ -77,12 +77,12 @@ namespace SR_CORE_NS::GUI {
             ImGui::SameLine();
 
             if (auto&& pDescriptor = GetEditor()->GetIconDescriptor(EditorIcon::Game)) {
-                if (GUISystem::Instance().ImageButton("##imgSceneGameBtn", pDescriptor, SR_MATH_NS::IVector2(32), 3) && locked) {
+                if (SR_GRAPH_GUI_NS::ImageButton("##imgSceneGameBtn", pDescriptor, SR_MATH_NS::IVector2(32), 3) && locked) {
                     if (!active) {
                         active = PlayScene();
                     }
 
-                    Engine::Instance().SetGameMode(true);
+                    pEngine->SetGameMode(true);
                 }
             }
         }
@@ -92,15 +92,15 @@ namespace SR_CORE_NS::GUI {
         ImGui::PopFont();
         ImGui::PopStyleVar();
 
-        font->Scale = scale;
+        pFont->Scale = scale;
 
         ImGui::Text("%s", m_isActive ? m_scenePath.CStr() : m_lastPath.CStr());
 
         ImGui::Separator();
 
         if (locked) {
-            engine.SetActive((m_isActive = active));
-            engine.SetPaused((m_isPaused = paused));
+            pEngine->SetActive((m_isActive = active));
+            pEngine->SetPaused((m_isPaused = paused));
             m_scene.Unlock();
         }
     }
@@ -118,6 +118,7 @@ namespace SR_CORE_NS::GUI {
         m_scenePath = m_lastPath;
 
         auto&& runtimePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat(SR_WORLD_NS::Scene::RuntimeScenePath.ConcatExt("scene"));
+        auto&& pEngine = dynamic_cast<EditorGUI*>(GetManager())->GetEngine();
 
         if (runtimePath.Exists(SR_UTILS_NS::Path::Type::Folder)) {
             if (!SR_PLATFORM_NS::Delete(runtimePath)) {
@@ -135,7 +136,7 @@ namespace SR_CORE_NS::GUI {
         }
 
         if (auto&& runtimeScene = SR_WORLD_NS::Scene::Load(SR_WORLD_NS::Scene::RuntimeScenePath.ConcatExt("scene"))) {
-            return Engine::Instance().SetScene(runtimeScene);
+            return pEngine->SetScene(runtimeScene);
         }
         else {
             return false;
@@ -146,10 +147,11 @@ namespace SR_CORE_NS::GUI {
         SR_LOG("SceneRunner::ReturnScene() : stop scene \"" + m_lastPath.ToString() + "\"");
 
         auto&& originalScene = SR_WORLD_NS::Scene::Load(m_scenePath);
-        Engine::Instance().SetScene(originalScene);
+        auto&& pEngine = dynamic_cast<EditorGUI*>(GetManager())->GetEngine();
+        pEngine->SetScene(originalScene);
     }
 
-    EditorGUI *SceneRunner::GetEditor() const {
+    EditorGUI* SceneRunner::GetEditor() const {
         if (auto&& pEditor = dynamic_cast<EditorGUI*>(GetManager())) {
             return pEditor;
         }

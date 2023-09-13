@@ -11,7 +11,7 @@
 #include <Utils/Math/Vector3.h>
 #include <Utils/Input/InputSystem.h>
 
-namespace SR_GRAPH_NS::Types {
+namespace SR_GTYPES_NS {
     class Camera;
 }
 
@@ -22,8 +22,9 @@ namespace SR_CORE_GUI_NS {
 
     class Guizmo : public SR_UTILS_NS::NonCopyable, public SR_UTILS_NS::InputHandler {
         using GameObjectPtr = SR_UTILS_NS::GameObject::Ptr;
+        using EnginePtr = SR_HTYPES_NS::SharedPtr<Engine>;
     public:
-        Guizmo() = default;
+        explicit Guizmo(const EnginePtr& pEngine);
         ~Guizmo() override;
 
     public:
@@ -84,6 +85,8 @@ namespace SR_CORE_GUI_NS {
         ImGuizmo::MODE            m_mode          = ImGuizmo::MODE::LOCAL;
 
         EditorSceneViewMode m_viewMode = EditorSceneViewMode::FreeAspect;
+
+        EnginePtr m_engine;
 
     };
 }

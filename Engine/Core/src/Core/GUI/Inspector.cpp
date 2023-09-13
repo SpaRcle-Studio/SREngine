@@ -56,17 +56,19 @@ namespace Framework::Core::GUI {
 
     void Inspector::InspectGameObject() {
         if (m_gameObject.TryRecursiveLockIfValid()) {
+            auto&& pEngine = dynamic_cast<EditorGUI*>(GetManager())->GetEngine();
+
             if (bool v = m_gameObject->IsEnabled(); ImGui::Checkbox("Enabled", &v)) {
-                auto&& cmd = new Framework::Core::Commands::GameObjectEnable(m_gameObject, v);
-                Engine::Instance().GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
+                auto&& cmd = new SR_CORE_NS::Commands::GameObjectEnable(pEngine, m_gameObject, v);
+                pEngine->GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
             }
 
             /// --------------------------------------------------------------------------------------------------------
 
             std::string gm_name = m_gameObject->GetName();
             if (ImGui::InputText("Name", &gm_name, ImGuiInputTextFlags_NoUndoRedo | ImGuiInputTextFlags_EnterReturnsTrue)) {
-                auto&& cmd = new Framework::Core::Commands::GameObjectRename(m_gameObject, gm_name);
-                Engine::Instance().GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
+                auto&& cmd = new SR_CORE_NS::Commands::GameObjectRename(pEngine, m_gameObject, gm_name);
+                pEngine->GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
             }
 
             /// --------------------------------------------------------------------------------------------------------

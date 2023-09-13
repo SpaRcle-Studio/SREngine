@@ -2,14 +2,15 @@
 // Created by Monika on 28.09.2021.
 //
 
-#ifndef GAMEENGINE_SINGLETON_H
-#define GAMEENGINE_SINGLETON_H
+#ifndef SR_ENGINE_SINGLETON_H
+#define SR_ENGINE_SINGLETON_H
 
 #include <Utils/Common/NonCopyable.h>
 #include <Utils/Common/Breakpoint.h>
 #include <Utils/Common/Stacktrace.h>
 
 #include <Utils/Types/SafePtrLockGuard.h>
+#include <Utils/Types/Map.h>
 
 namespace SR_UTILS_NS {
     template<typename T> class Singleton;
@@ -19,7 +20,7 @@ namespace SR_UTILS_NS {
         void** GetSingleton(uint64_t id) noexcept;
 
     private:
-        std::unordered_map<uint64_t, void*> m_singletons;
+        ska::flat_hash_map<uint64_t, void*> m_singletons;
 
     };
 
@@ -117,4 +118,4 @@ namespace SR_UTILS_NS {
     };
 }
 
-#endif //GAMEENGINE_SINGLETON_H
+#endif //SR_ENGINE_SINGLETON_H

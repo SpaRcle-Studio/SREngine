@@ -2,12 +2,6 @@
 // Created by Nikita on 18.11.2020.
 //
 
-#include <Utils/Common/StringUtils.h>
-#include <Utils/GUI.h>
-#include <Utils/ResourceManager/ResourceManager.h>
-
-#include <Graphics/Pipeline/OpenGL.h>
-
 //#define OpenGLSetVertexAttribPointer(id, count, vertex, offset) \
 //    glEnableVertexAttribArray(id); \
 //    glVertexAttribPointer(id, count, GL_FLOAT, GL_FALSE, sizeof(vertex), (void*)offset); \

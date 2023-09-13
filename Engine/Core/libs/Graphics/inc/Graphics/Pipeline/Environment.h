@@ -5,8 +5,6 @@
 #ifndef GAMEENGINE_ENVIRONMENT_H
 #define GAMEENGINE_ENVIRONMENT_H
 
-#include <Utils/GUI.h>
-
 #include <Graphics/Pipeline/TextureHelper.h>
 #include <Graphics/Pipeline/IShaderProgram.h>
 #include <Graphics/Pipeline/PipelineType.h>
@@ -16,6 +14,8 @@
 #include <Graphics/Types/Descriptors.h>
 #include <Graphics/Window/BasicWindowImpl.h>
 #include <Graphics/Window/Window.h>
+
+#include <Graphics/GUI/ImGUI.h>
 
 namespace SR_GTYPES_NS {
     class Shader;
@@ -32,8 +32,6 @@ namespace SR_GRAPH_NS {
         struct StaticMeshVertex;
         struct SimpleMeshVertex;
     }
-
-    enum class RenderBuffGroup { Kernel, Small, Normal, Large };
 
     /// TODO: TO_REFACTORING
     class Environment {

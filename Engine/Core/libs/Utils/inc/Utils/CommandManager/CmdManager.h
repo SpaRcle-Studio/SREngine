@@ -2,16 +2,13 @@
 // Created by Monika on 08.01.2022.
 //
 
-#ifndef SRENGINE_CMDMANAGER_H
-#define SRENGINE_CMDMANAGER_H
+#ifndef SR_ENGINE_UTILS_CMDMANAGER_H
+#define SR_ENGINE_UTILS_CMDMANAGER_H
 
 #include <Utils/Types/Thread.h>
 #include <Utils/CommandManager/ReversibleCommand.h>
 
 namespace SR_UTILS_NS {
-    typedef std::function<ReversibleCommand*(void)> CmdAllocator;
-    typedef std::unordered_map<std::string, CmdAllocator> CmdAllocators;
-
     enum class SyncType {
         Sync, Async, Force
     };
@@ -33,13 +30,9 @@ namespace SR_UTILS_NS {
 
     public:
         SR_NODISCARD std::string GetLastCmdName() const;
-        SR_NODISCARD ReversibleCommand* MakeCommand(const std::string& id) const;
-
-        bool MakeAndExecute(const std::string& id, SyncType sync);
         bool Execute(ReversibleCommand* cmd, SyncType sync);
         bool Redo();
         bool Cancel();
-        bool RegisterCommand(const std::string& id, const CmdAllocator& allocator);
 
         void Update();
         bool Close();
@@ -57,11 +50,10 @@ namespace SR_UTILS_NS {
         uint32_t m_historyPC = UINT32_MAX;
         uint32_t m_maxHistorySize = 128;
 
-        CmdAllocators m_allocators;
         mutable std::recursive_mutex m_mutex;
         std::string m_lastCmdName;
 
     };
 }
 
-#endif //SRENGINE_CMDMANAGER_H
+#endif //SR_ENGINE_UTILS_CMDMANAGER_H

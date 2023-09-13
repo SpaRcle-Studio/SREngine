@@ -140,10 +140,6 @@
 
 #define SR_FAST_CONSTRUCTOR SR_FORCE_INLINE SR_CONSTEXPR
 
-#ifndef SR_USE_GLFW3
-    #define SR_USE_GLFW3
-#endif
-
 #ifdef SR_USE_VULKAN
     #define VK_PROTOTYPES
 #endif
@@ -194,6 +190,7 @@
 #define SR_CORE_GUI_NS Framework::Core::GUI
 #define SR_SCRIPTING_NS Framework::Scripting
 #define SR_AUDIO_NS Framework::Audio
+#define SR_UTILS_GUI_NS SR_UTILS_NS::GUI
 
 #define SR_GLOBAL_LOCK static std::mutex codegenGlobalMutex##__LINE__; std::lock_guard<std::mutex> codegenLock##__LINE__(codegenGlobalMutex##__LINE__);
 

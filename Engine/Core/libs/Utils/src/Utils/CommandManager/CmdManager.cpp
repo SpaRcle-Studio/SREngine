@@ -7,14 +7,6 @@
 #include <Utils/Debug.h>
 
 namespace SR_UTILS_NS {
-    ReversibleCommand *CmdManager::MakeCommand(const std::string &id) const {
-        return m_allocators.at(id)();
-    }
-
-    bool CmdManager::MakeAndExecute(const std::string &id, SyncType sync) {
-        return Execute(MakeCommand(id), sync);
-    }
-
     bool CmdManager::Execute(ReversibleCommand *cmd) {
         SR_TRACY_ZONE;
 
@@ -107,19 +99,6 @@ namespace SR_UTILS_NS {
         }
 
         return ExecuteImpl(cmd, sync);
-    }
-
-    bool CmdManager::RegisterCommand(const std::string &id, const CmdAllocator &allocator) {
-        SR_LOCK_GUARD
-
-        if (m_allocators.count(id) == 1) {
-            SR_ERROR("CmdManager::RegisterCommand() : command \"" + id + "\" already is registered!");
-            return false;
-        }
-
-        m_allocators.insert(std::make_pair(id, allocator));
-
-        return true;
     }
 
     void CmdManager::Update() {

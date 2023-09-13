@@ -3,7 +3,6 @@
 //
 
 #include <Core/GUI/ComponentDrawer.h>
-#include <Core/GUI/GUISystem.h>
 #include <Core/GUI/EditorGUI.h>
 #include <Core/GUI/FileBrowser.h>
 #include <Core/GUI/PhysicsMaterialEditor.h>
@@ -66,7 +65,7 @@ namespace SR_CORE_NS::GUI {
 
         if (hasMesh) {
             if (auto&& pDescriptor = context->GetIconDescriptor(EditorIcon::Shapes)) {
-                if (GUISystem::Instance().ImageButton(SR_FORMAT("##imgMeshBtn%i", index), pDescriptor, SR_MATH_NS::IVector2(50), 5)) {
+                if (SR_GRAPH_GUI_NS::ImageButton(SR_FORMAT("##imgMeshBtn%i", index), pDescriptor, SR_MATH_NS::IVector2(50), 5)) {
                     auto&& resourcesFolder = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
                     auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesFolder, { { "Mesh", "obj,pmx,fbx,blend,stl,dae" } });
 
@@ -210,7 +209,7 @@ namespace SR_CORE_NS::GUI {
         }
 
         if (auto&& pDescriptor = context->GetIconDescriptor(EditorIcon::Script)) {
-            if (GUISystem::Instance().ImageButton(SR_FORMAT("##BehSelectBtn%i", index), pDescriptor, SR_MATH_NS::IVector2(50), 5)) {
+            if (SR_GRAPH_GUI_NS::ImageButton(SR_FORMAT("##BehSelectBtn%i", index), pDescriptor, SR_MATH_NS::IVector2(50), 5)) {
                 auto &&scriptsPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
                 auto &&path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(scriptsPath, { { "Source file", "cpp" } });
 
@@ -230,7 +229,7 @@ namespace SR_CORE_NS::GUI {
         ImGui::BeginGroup();
         {
             if (auto&& pDescriptor = context->GetIconDescriptor(EditorIcon::Reset)) {
-                if (GUISystem::Instance().ImageButton(SR_FORMAT("##BehResetBtn%i", index), pDescriptor, SR_MATH_NS::IVector2(25), 5)) {
+                if (SR_GRAPH_GUI_NS::ImageButton(SR_FORMAT("##BehResetBtn%i", index), pDescriptor, SR_MATH_NS::IVector2(25), 5)) {
                     pBehaviour = new SR_SCRIPTING_NS::Behaviour();
                 }
             }
@@ -247,7 +246,7 @@ namespace SR_CORE_NS::GUI {
 
         if (!properties.empty()) {
             ImGui::Separator();
-            SR_UTILS_NS::GUI::DrawTextOnCenter("Properties");
+            SR_GRAPH_GUI_NS::DrawTextOnCenter("Properties");
         }
 
         for (auto&& property : properties) {
@@ -317,7 +316,7 @@ namespace SR_CORE_NS::GUI {
         auto&& pMaterial = pComponent->GetMaterial();
 
         if (auto&& pDescriptor = context->GetIconDescriptor(EditorIcon::Shapes)) {
-            if (GUISystem::Instance().ImageButton(SR_FORMAT("##imgMeshBtn%i", index), pDescriptor, SR_MATH_NS::IVector2(50), 5)) {
+            if (SR_GRAPH_GUI_NS::ImageButton(SR_FORMAT("##imgMeshBtn%i", index), pDescriptor, SR_MATH_NS::IVector2(50), 5)) {
                 auto&& resourcesFolder = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
                 auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesFolder, { { "Mesh", "obj,pmx,fbx,blend,stl,dae" } });
 
@@ -375,7 +374,7 @@ namespace SR_CORE_NS::GUI {
         auto&& pMaterial = pComponent->GetMaterial();
 
         if (auto&& pDescriptor = context->GetIconDescriptor(EditorIcon::Shapes)) {
-            if (GUISystem::Instance().ImageButton(SR_FORMAT("##imgMeshBtn%i", index), pDescriptor, SR_MATH_NS::IVector2(50), 5)) {
+            if (SR_GRAPH_GUI_NS::ImageButton(SR_FORMAT("##imgMeshBtn%i", index), pDescriptor, SR_MATH_NS::IVector2(50), 5)) {
                 auto&& resourcesFolder = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
                 auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesFolder, { { "Mesh", "obj,fbx,pmx,blend,stl,dae" } });
 
@@ -421,10 +420,10 @@ namespace SR_CORE_NS::GUI {
         if (material) {
             ImGui::Separator();
 
-            Helper::GUI::DrawTextOnCenter("Material");
+            SR_GRAPH_GUI_NS::DrawTextOnCenter("Material");
 
             if (auto&& pDescriptor = context->GetIconDescriptor(EditorIcon::Material)) {
-                if (GUISystem::Instance().ImageButton(SR_FORMAT("##imgMatBtn%i", index), pDescriptor, SR_MATH_NS::IVector2(75), 5)) {
+                if (SR_GRAPH_GUI_NS::ImageButton(SR_FORMAT("##imgMatBtn%i", index), pDescriptor, SR_MATH_NS::IVector2(75), 5)) {
                     auto&& resourcesFolder = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
                     auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesFolder, { { "Material", "mat" } });
 
@@ -493,7 +492,7 @@ namespace SR_CORE_NS::GUI {
 
                     /// если нашли хоть какой-то дескриптор
                     if (pDescriptor) {
-                        if (GUISystem::Instance().ImageButton(SR_FORMAT("##imgBtnTex%i", index), pDescriptor, SR_MATH_NS::IVector2(55), 3)) {
+                        if (SR_GRAPH_GUI_NS::ImageButton(SR_FORMAT("##imgBtnTex%i", index), pDescriptor, SR_MATH_NS::IVector2(55), 3)) {
                             auto&& texturesPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
                             auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(texturesPath, { { "Images", "png,jpg,bmp,tga" } });
 
@@ -646,7 +645,7 @@ namespace SR_CORE_NS::GUI {
         }
 
         if (auto&& pDescriptor = context->GetIconDescriptor(EditorIcon::Font)) {
-            if (GUISystem::Instance().ImageButton(SR_FORMAT("##imgFontBtn%i", index), pDescriptor, SR_MATH_NS::IVector2(50), 5)) {
+            if (SR_GRAPH_GUI_NS::ImageButton(SR_FORMAT("##imgFontBtn%i", index), pDescriptor, SR_MATH_NS::IVector2(50), 5)) {
                 auto&& resourcesFolder = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
                 auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesFolder, { { "Font", "ttf" } });
 

@@ -2,13 +2,13 @@
 // Created by Monika on 02.03.2022.
 //
 
-#ifndef SRENGINE_THEME_H
-#define SRENGINE_THEME_H
+#ifndef SR_ENGINE_GRAPHICS_THEME_H
+#define SR_ENGINE_GRAPHICS_THEME_H
 
-#include <Utils/GUI.h>
 #include <Utils/Math/Vector4.h>
+#include <Graphics/GUI/ImGUI.h>
 
-namespace SR_GRAPH_NS::GUI {
+namespace SR_GRAPH_GUI_NS {
     inline static const std::unordered_map<std::string, float ImGuiStyle::*> STYLE_FLOAT_VALUES = {
             { "Alpha", &ImGuiStyle::Alpha },
             { "WindowRounding", &ImGuiStyle::WindowRounding },
@@ -137,4 +137,4 @@ namespace SR_GRAPH_NS::GUI {
     };
 }
 
-#endif //SRENGINE_THEME_H
+#endif //SR_ENGINE_GRAPHICS_THEME_H

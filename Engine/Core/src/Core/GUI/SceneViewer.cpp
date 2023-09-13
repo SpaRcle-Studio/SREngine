@@ -19,11 +19,12 @@
 #include <Graphics/Pass/ColorBufferPass.h>
 
 namespace SR_CORE_NS::GUI {
-    SceneViewer::SceneViewer(const WindowPtr& window, Hierarchy* hierarchy)
+    SceneViewer::SceneViewer(const EnginePtr& pEngine, Hierarchy* hierarchy)
         : Widget("Scene")
-        , m_window(window)
+        , m_engine(pEngine)
+        , m_window(pEngine->GetWindow())
         , m_hierarchy(hierarchy)
-        , m_guizmo(new Guizmo())
+        , m_guizmo(new Guizmo(pEngine))
         , m_id(-1)
     {
         LoadCameraSettings();
@@ -90,8 +91,8 @@ namespace SR_CORE_NS::GUI {
                     CheckFocused();
                     CheckHovered();
                 }
+                ImGui::EndChild();
             }
-            ImGui::EndChild();
 
             ImGui::EndGroup();
 
@@ -204,7 +205,7 @@ namespace SR_CORE_NS::GUI {
             }
         }
 
-        //m_velocity = m_velocity.Clamp(SR_MATH_NS::FVector3(1), SR_MATH_NS::FVector3(-1)); ///Зачем-то ограничивало перемещение камеры по клавишам WASD
+        /// m_velocity = m_velocity.Clamp(SR_MATH_NS::FVector3(1), SR_MATH_NS::FVector3(-1)); ///Зачем-то ограничивало перемещение камеры по клавишам WASD
     }
 
     void SceneViewer::DrawTexture(SR_MATH_NS::IVector2 winSize, SR_MATH_NS::IVector2 texSize, uint32_t id, bool centralize) {
@@ -215,11 +216,7 @@ namespace SR_CORE_NS::GUI {
         const float_t dx = static_cast<float_t>(winSize.x) / static_cast<float_t>(texSize.x);
         const float_t dy = static_cast<float_t>(winSize.y) / static_cast<float_t>(texSize.y);
 
-        if (dy > dx) {
-            texSize *= dx;
-        }
-        else
-            texSize *= dy;
+        texSize *= dy > dx ? dx : dy;
 
         m_textureSize = texSize;
 
@@ -231,38 +228,22 @@ namespace SR_CORE_NS::GUI {
             ImGui::SetCursorPos(centralizedCursorPos);
         }
 
-        auto&& env = SR_GRAPH_NS::Environment::Get();
-        if (env->GetType() == Graphics::PipelineType::OpenGL) {
-            DrawImage(reinterpret_cast<void*>(static_cast<uint64_t>(id)), ImVec2(m_textureSize.x, m_textureSize.y), ImVec2(0, 1), ImVec2(1, 0), {1, 1, 1, 1 }, {0, 0, 0, 0 }, false);
-        }
-        else if (auto&& pDescriptor = env->TryGetDescriptorSetFromTexture(id, true)) {
-            DrawImage(pDescriptor, ImVec2(m_textureSize.x, m_textureSize.y), ImVec2(-1, 0), ImVec2(0, 1), {1, 1, 1, 1}, {0, 0, 0, 0}, false);
-        }
-    }
+        auto&& pPipeline = GetContext()->GetPipeline();
 
-    void SceneViewer::DrawImage(ImTextureID user_texture_id, const ImVec2 &size, const ImVec2 &uv0, const ImVec2 &uv1, const ImVec4 &tint_col, const ImVec4 &border_col, bool imposition) {
-        ImGuiWindow* window = ImGui::GetCurrentWindow();
-        if (window->SkipItems)
-            return;
+        void* pDescriptor = nullptr;
 
-        ImRect bb(window->DC.CursorPos, window->DC.CursorPos + size);
-        if (border_col.w > 0.0f)
-            bb.Max = bb.Max + ImVec2(2, 2);
-
-        if (!imposition) {
-            ImGui::ItemSize(bb);
-            if (!ImGui::ItemAdd(bb, 0))
-                return;
+        switch (pPipeline->GetType()) {
+            case SR_GRAPH_NS::PipelineType::Vulkan:
+                pDescriptor = pPipeline->TryGetDescriptorSetFromTexture(id, true);
+                break;
+            case SR_GRAPH_NS::PipelineType::OpenGL:
+                pDescriptor = reinterpret_cast<void*>(static_cast<uint64_t>(id));
+                break;
+            default:
+                break;
         }
 
-        m_imagePosition = bb.GetTL();
-
-        if (border_col.w > 0.0f) {
-            window->DrawList->AddRect(bb.Min, bb.Max, ImGui::GetColorU32(border_col), 0.0f);
-            window->DrawList->AddImage(user_texture_id, bb.Min + ImVec2(1, 1), bb.Max - ImVec2(1, 1), uv0, uv1, ImGui::GetColorU32(tint_col));
-        }
-        else
-            window->DrawList->AddImage(user_texture_id, bb.Min, bb.Max, uv0, uv1, ImGui::GetColorU32(tint_col));
+        m_imagePosition = SR_GRAPH_GUI_NS::DrawTexture(pDescriptor, m_textureSize, pPipeline->GetType(), false);
     }
 
     void SceneViewer::InitCamera() {
@@ -336,8 +317,8 @@ namespace SR_CORE_NS::GUI {
 
         auto&& mousePos = ImGui::GetMousePos() - m_imagePosition;
 
-        const float_t x = mousePos.x / m_textureSize.x;
-        const float_t y = mousePos.y / m_textureSize.y;
+        const float_t x = mousePos.x / static_cast<float_t>(m_textureSize.x);
+        const float_t y = mousePos.y / static_cast<float_t>(m_textureSize.y);
 
         auto&& pCamera = m_camera ? m_camera->GetComponent<SR_GTYPES_NS::Camera>() : nullptr;
         if (!pCamera) {

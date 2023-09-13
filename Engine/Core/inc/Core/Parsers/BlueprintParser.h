@@ -6,7 +6,6 @@
 #define SRENGINE_BLUEPRINTPARSER_H
 
 #include <Utils/Common/Singleton.h>
-#include <Utils/GUI.h>
 #include <Utils/Xml.h>
 
 namespace SR_GRAPH_NS::GUI {

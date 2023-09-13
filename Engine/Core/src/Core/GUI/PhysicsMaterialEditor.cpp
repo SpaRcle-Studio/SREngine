@@ -4,7 +4,6 @@
 
 #include <Core/GUI/PhysicsMaterialEditor.h>
 
-#include <Utils/GUI.h>
 #include <Utils/Xml.h>
 #include <Utils/ResourceManager/IResourceReloader.h>
 

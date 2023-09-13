@@ -16,3 +16,4 @@
 #include "../Graphics/src/Graphics/GUI/Utils.cpp"
 #include "../Graphics/src/Graphics/GUI/PopupMenu.cpp"
 #include "../Graphics/src/Graphics/GUI/NodeCreation.cpp"
+#include "../Graphics/src/Graphics/GUI/ImGUI.cpp"

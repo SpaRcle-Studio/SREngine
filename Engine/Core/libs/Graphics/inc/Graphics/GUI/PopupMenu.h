@@ -2,10 +2,10 @@
 // Created by Monika on 14.08.2023.
 //
 
-#ifndef SRENGINE_POPUPMENU_H
-#define SRENGINE_POPUPMENU_H
+#ifndef SR_ENGINE_POPUPMENU_H
+#define SR_ENGINE_POPUPMENU_H
 
-#include <Utils/GUI.h>
+#include <Graphics/GUI/ImGUI.h>
 
 namespace SR_GRAPH_GUI_NS {
     class MenuItemSubWidget;
@@ -65,4 +65,4 @@ namespace SR_GRAPH_GUI_NS {
     };
 }
 
-#endif //SRENGINE_POPUPMENU_H
+#endif //SR_ENGINE_POPUPMENU_H

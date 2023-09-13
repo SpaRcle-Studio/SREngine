@@ -2,8 +2,6 @@
 // Created by Monika on 15.07.2023.
 //
 
-#include <Utils/GUI.h>
-
 #include <Graphics/GUI/Utils.h>
 
 namespace SR_GRAPH_GUI_NS {

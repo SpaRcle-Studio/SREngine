@@ -55,6 +55,7 @@ namespace SR_GRAPH_NS {
         using CameraPtr = SR_GTYPES_NS::Camera*;
         using ShaderPtr = SR_GTYPES_NS::Shader*;
         using WindowPtr = SR_HTYPES_NS::SafePtr<Window>;
+        using RenderScenes = std::list<std::pair<SR_WORLD_NS::Scene::Ptr, RenderScenePtr>>;
     public:
         explicit RenderContext(const WindowPtr& pWindow);
         virtual ~RenderContext() = default;
@@ -99,6 +100,7 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD const std::vector<RenderTechnique*>& GetRenderTechniques() const noexcept;
         SR_NODISCARD const std::vector<SR_GTYPES_NS::Material*>& GetMaterials() const noexcept;
         SR_NODISCARD const std::vector<SR_GTYPES_NS::Skybox*>& GetSkyboxes() const noexcept;
+        SR_NODISCARD const RenderScenes& GetScenes() const noexcept { return m_scenes; }
 
         void SetCurrentShader(ShaderPtr pShader);
 
@@ -129,7 +131,7 @@ namespace SR_GRAPH_NS {
         std::vector<MaterialPtr> m_materials;
         std::vector<SkyboxPtr> m_skyboxes;
 
-        std::list<std::pair<SR_WORLD_NS::Scene::Ptr, RenderScenePtr>> m_scenes;
+        RenderScenes m_scenes;
 
         WindowPtr m_window;
 

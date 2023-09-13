@@ -2,7 +2,6 @@
 // Created by Nikita on 28.06.2021.
 //
 
-#include <Utils/GUI.h>
 #include <Utils/ResourceManager/ResourceManager.h>
 #include <Utils/Common/Features.h>
 

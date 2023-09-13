@@ -9,7 +9,6 @@
 #include <Utils/Math/Mathematics.h>
 #include <Utils/Math/Rect.h>
 #include <Utils/Types/DataStorage.h>
-#include <Utils/GUI.h>
 
 namespace SR_GRAPH_GUI_NS {
     static ImVec4 MakeDisableColor(ImVec4 color) {
@@ -121,7 +120,7 @@ namespace SR_GRAPH_GUI_NS {
             string = std::string(value);
         }
         else {
-            SR_STATIC_ASSERT("Unknown type!");
+            SRHalt("Unknown type!");
         }
 
         auto&& textWidth = SR_CLAMP(ImGui::CalcTextSize(string.c_str()).x, 300, 150);
