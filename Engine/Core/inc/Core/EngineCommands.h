@@ -162,7 +162,8 @@ namespace SR_CORE_NS::Commands {
 
     class HierarchyPaste : public IEngineReversibleCommand {
     public:
-        HierarchyPaste(const EnginePtr& pEngine, SR_CORE_GUI_NS::Hierarchy* hierarchy, SR_HTYPES_NS::Marshal::Ptr marshal);
+        HierarchyPaste(const EnginePtr& pEngine, SR_CORE_GUI_NS::Hierarchy* hierarchy,
+                       SR_HTYPES_NS::Marshal::Ptr marshal, const SR_UTILS_NS::GameObject::Ptr& pParent);
         ~HierarchyPaste() override;
 
         bool Redo() override;

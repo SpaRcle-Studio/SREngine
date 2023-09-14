@@ -48,6 +48,7 @@ namespace SR_CORE_GUI_NS {
 
             DrawChild(gameObject, -1);
         }
+        ImGui::Dummy(ImVec2(0.0f, 10.0f)); ///Требуется, чтобы в конце древа всегда было пустое пространство для вызова контекстного меню
 
         if (SR_GRAPH_GUI_NS::BeginDragDropTargetWindow("Hierarchy##Payload")) {
             if (auto&& pPayload = ImGui::AcceptDragDropPayload("Hierarchy##Payload"); pPayload != nullptr && pPayload->Data) {
@@ -309,7 +310,7 @@ namespace SR_CORE_GUI_NS {
             }
             case SR_UTILS_NS::KeyCode::V: {
                 if (IsKeyPressed(SR_UTILS_NS::KeyCode::Ctrl))
-                    Paste();
+                    Paste((m_selected.size() == 1) ? m_selected.begin()->Get() : nullptr);
                 break;
             }
             case SR_UTILS_NS::KeyCode::Del: {
@@ -358,47 +359,10 @@ namespace SR_CORE_GUI_NS {
             SR_UTILS_NS::Platform::TextToClipboard(pMarshal->ToBase64());
         }
 
-        SR_SAFE_DELETE_PTR(pMarshal);
+        SR_SAFE_DELETE_PTR(pMarshal)
     }
 
-    void Hierarchy::Paste() {
-        ///TODO: Paste() должен вставлять внутрь того игрового объекта, на котором был вызван в ChildContextMenu(), а не просто в верх дерева
-        /*auto&& base64 = Helper::Platform::GetClipboardText();
-
-        if (auto marshal = SR_HTYPES_NS::Marshal::LoadFromBase64(base64); marshal.Valid()) {
-            if (marshal.TryRead<std::string>() != "SRCopyPaste#Hierarchy") {
-                SR_LOG("Hierarchy::Paste() : attempted to paste invalid content from clipboard!") ///TODO: Стоит ли оповещать об этом?
-                return;
-            }
-            std::set<Helper::GameObject::Ptr> selected;
-
-            if (m_scene.RecursiveLockIfValid()) {
-                auto&& count = marshal.Read<uint64_t>();
-
-                if (count > 1000) {
-                    SR_WARN("Hierarchy::Paste() : attempting to insert a large number of objects! Count: " + SR_UTILS_NS::ToString(count))
-                }
-
-                if (m_selected.size() == 1)
-                    for (uint64_t i = 0; i < count; ++i) {
-                        if (SR_UTILS_NS::GameObject::Ptr ptr = m_scene->Instance(marshal)) {
-                            ptr->MoveToTree(*m_selected.begin());
-                            selected.insert(ptr);
-                        }
-                        else
-                            break;
-                    }
-                else
-                    for (uint64_t i = 0; i < count; ++i) {
-                        if (SR_UTILS_NS::GameObject::Ptr ptr = m_scene->Instance(marshal)) {
-                            selected.insert(ptr);
-                        }
-                        else
-                            break;
-                    }
-                m_scene.Unlock();
-            }
-        }*/
+    void Hierarchy::Paste(const SR_UTILS_NS::GameObject::Ptr& pParent) {
         auto&& base64 = Helper::Platform::GetClipboardText();
         auto marshal = SR_HTYPES_NS::Marshal::LoadFromBase64(base64);
         if (!marshal.Valid()) {
@@ -412,7 +376,7 @@ namespace SR_CORE_GUI_NS {
         }
 
         auto&& pEngine = dynamic_cast<EditorGUI*>(GetManager())->GetEngine();
-        auto&& cmd = new SR_CORE_NS::Commands::HierarchyPaste(pEngine, this, marshal.CopyPtr());
+        auto&& cmd = new SR_CORE_NS::Commands::HierarchyPaste(pEngine, this, marshal.CopyPtr(), pParent);
         pEngine->GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
     }
 

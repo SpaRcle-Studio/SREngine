@@ -259,33 +259,55 @@ namespace Framework::Core::GUI {
         }
     }
 
-    void Inspector::DrawTransform3D(SR_UTILS_NS::Transform3D *transform) const {
+    void Inspector::DrawTransform3D(SR_UTILS_NS::Transform3D *transform) {
         TextCenter("Transform 3D");
 
+        auto&& oldTransform = transform->Copy();
+        bool changed = false;
         auto&& translation = transform->GetTranslation();
         if (Graphics::GUI::DrawVec3Control("Translation", translation, 0.f, 70.f, 0.01f)) {
             transform->SetTranslation(translation);
+            changed = true;
+        }
+        auto&& rotation = transform->GetRotation();  
+        if (Graphics::GUI::DrawVec3Control("Rotation", rotation)) {
+            transform->SetRotation(rotation);
+            changed = true;
+        }
+        auto&& scale = transform->GetScale();
+        if (Graphics::GUI::DrawVec3Control("Scale", scale, 1.f) && !scale.HasZero()) {
+            transform->SetScale(scale);
+            changed = true;
+        }
+        auto&& skew = transform->GetSkew();
+        if (Graphics::GUI::DrawVec3Control("Skew", skew, 1.f) && !skew.HasZero()) {
+            transform->SetSkew(skew);
+            changed = true;
         }
 
-        auto&& rotation = transform->GetRotation();  
-        if (Graphics::GUI::DrawVec3Control("Rotation", rotation))
-            transform->SetRotation(rotation);
+        if (!m_isUsed && changed) {
+            SR_SAFE_DELETE_PTR(m_oldTransformMarshal)
+            m_oldTransformMarshal = oldTransform->Save(SR_UTILS_NS::SavableFlagBits::SAVABLE_FLAG_NONE);
+            m_isUsed = true;
+        }
+        if (m_isUsed && SR_UTILS_NS::Input::Instance().GetMouseUp(SR_UTILS_NS::MouseCode::MouseLeft)) {
+            auto&& pEngine = dynamic_cast<EditorGUI*>(GetManager())->GetEngine();
+            auto&& cmd = new SR_CORE_NS::Commands::GameObjectTransform(pEngine, transform->GetGameObject(), m_oldTransformMarshal->CopyPtr());
+            pEngine->GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
 
-        auto&& scale = transform->GetScale();
-        if (Graphics::GUI::DrawVec3Control("Scale", scale, 1.f) && !scale.HasZero())
-            transform->SetScale(scale);
+            SR_SAFE_DELETE_PTR(m_oldTransformMarshal)
+            m_isUsed = false;
+        }
 
-        auto&& skew = transform->GetSkew();
-        if (Graphics::GUI::DrawVec3Control("Skew", skew, 1.f) && !skew.HasZero())
-            transform->SetSkew(skew);
+        SR_SAFE_DELETE_PTR(oldTransform)
     }
 
     void SR_CORE_NS::GUI::Inspector::BackupTransform(const SR_UTILS_NS::GameObject::Ptr& ptr, const std::function<void()>& operation) const
     {
         ///SR_HTYPES_NS::Marshal::Ptr pMarshal = ptr->GetTransform()->Save(nullptr, SR_UTILS_NS::SavableFlagBits::SAVABLE_FLAG_NONE);
-///
+        ///
         ///operation();
-///
+        ///
         ///auto&& cmd = new Framework::Core::Commands::GameObjectTransform(ptr, pMarshal);
         ///Engine::Instance().GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
     }

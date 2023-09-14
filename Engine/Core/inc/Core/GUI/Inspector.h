@@ -41,9 +41,9 @@ namespace SR_CORE_GUI_NS {
 
         void DrawSwitchTransform();
         void DrawTransform2D(SR_UTILS_NS::Transform2D* transform) const;
-        void DrawTransform3D(SR_UTILS_NS::Transform3D* transform) const;
+        void DrawTransform3D(SR_UTILS_NS::Transform3D* transform);
 
-        void BackupTransform(const SR_UTILS_NS::GameObject::Ptr& ptr, const std::function<void()>& operation) const;
+        SR_MAYBE_UNUSED void BackupTransform(const SR_UTILS_NS::GameObject::Ptr& ptr, const std::function<void()>& operation) const;
 
         template<typename T> SR_UTILS_NS::Component* DrawComponent(SR_UTILS_NS::Component* component, const std::string& name, uint32_t& index) {
             auto&& pComponent = dynamic_cast<T*>(component);
@@ -98,6 +98,10 @@ namespace SR_CORE_GUI_NS {
         SR_UTILS_NS::GameObject::Ptr m_gameObject;
         Hierarchy* m_hierarchy = nullptr;
         SR_WORLD_NS::Scene::Ptr m_scene;
+
+        ///Для DrawTransform3D и может быть DrawTransofrm2D
+        bool m_isUsed = false;
+        SR_HTYPES_NS::Marshal* m_oldTransformMarshal = nullptr;
     };
 }
 

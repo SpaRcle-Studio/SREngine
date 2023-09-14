@@ -343,18 +343,15 @@ namespace SR_CORE_NS::Commands {
 
     //! ----------------------------------------------------------------------------------------------------------------
 
-    HierarchyPaste::HierarchyPaste(const EnginePtr& pEngine, SR_CORE_GUI_NS::Hierarchy* hierarchy, SR_HTYPES_NS::Marshal::Ptr marshal)
+    HierarchyPaste::HierarchyPaste(const EnginePtr& pEngine, SR_CORE_GUI_NS::Hierarchy* hierarchy,
+            SR_HTYPES_NS::Marshal::Ptr marshal, const SR_UTILS_NS::GameObject::Ptr& pParent = nullptr)
         : Base(pEngine)
     {
         m_hierarchy = hierarchy;
         m_marshal = marshal;
-        m_marshal->SetPosition(23);
-        /// Нужно, так как в начале любого валидного содержимого буфера обмена Hierarchy должен быть префикс "SRCopyPaste#Hierarchy"
-        if (auto&& selected = m_hierarchy->GetSelected(); selected.size() == 1) {
-            if (auto&& pParent = selected.begin()->Get(); pParent) {
-                m_parent = pParent->GetEntityId();
-            }
-        }
+        m_marshal->SetPosition(23); ///Нужно, так как в начале любого валидного содержимого буфера обмена Hierarchy должен быть префикс "SRCopyPaste#Hierarchy", который следует пропустить
+        if (pParent.Valid())
+            m_parent = pParent->GetEntityId();
     }
 
     HierarchyPaste::~HierarchyPaste() {
@@ -423,7 +420,7 @@ namespace SR_CORE_NS::Commands {
             m_marshal = new SR_HTYPES_NS::Marshal;
             m_marshal->Write<uint64_t>(m_paths.size());
 
-            for (auto&& path : m_paths) {
+            for (auto &&path : m_paths) {
                 auto entity = SR_UTILS_NS::EntityManager::Instance().FindById(path.Last());
                 auto pObject = entity.DynamicCast<SR_UTILS_NS::GameObject>();
                 if (m_marshal = pObject->Save(m_marshal, SR_UTILS_NS::SAVABLE_FLAG_NONE); !m_marshal) {
@@ -432,12 +429,11 @@ namespace SR_CORE_NS::Commands {
                 pObject->Destroy();
             }
 
-            for (auto&& branch : m_reserved) {
+            for (auto &&branch : m_reserved) {
                 branch.Reserve();
             }
 
             m_marshal->SetPosition(0);
-
             m_scene.Unlock();
             return true;
         }

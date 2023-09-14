@@ -39,12 +39,12 @@ namespace SR_CORE_GUI_NS {
         void ExpandPath(const SR_UTILS_NS::GameObject::Ptr& gm);
         void Draw() override;
         void CheckSelected(const SR_UTILS_NS::GameObject::Ptr& gm);
-        void ContextMenu();
+        void SR_INLINE ContextMenu();
         void ChildContextMenu(const SR_UTILS_NS::GameObject::Ptr& gm, uint64_t id);
         void DrawChild(const SR_UTILS_NS::GameObject::Ptr& root, uint32_t prefabIndex);
-        void Copy() const;
-        void Paste();
-        void Delete();
+        void SR_INLINE Copy() const;
+        void SR_INLINE Paste(const SR_UTILS_NS::GameObject::Ptr& pParent = nullptr);
+        void SR_INLINE Delete();
 
     private:
         const ImGuiTreeNodeFlags m_nodeFlagsWithChild = ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_OpenOnDoubleClick;
