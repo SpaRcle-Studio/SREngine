@@ -79,7 +79,7 @@
 /// C++98 - 199711L
 
 namespace SR_UTILS_NS {
-    template<class T, class U = T> SR_NODISCARD SR_FORCE_INLINE T SR_FASTCALL Exchange(T &obj, U &&new_value) noexcept {
+    template<class T, class U = T> SR_NODISCARD SR_FORCE_INLINE T SR_FASTCALL Exchange(T& obj, U&& new_value) noexcept {
         T old_value = std::move(obj);
         obj = std::forward<U>(new_value);
         return old_value;

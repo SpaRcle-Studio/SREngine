@@ -36,6 +36,7 @@
 #include "src/Core/World/World.cpp"
 #include "src/Core/World/EngineScene.cpp"
 
+#include "src/Core/Application.cpp"
 #include "src/Core/Engine.cpp"
 #include "src/Core/Launcher.cpp"
 #include "src/Core/EngineCommands.cpp"

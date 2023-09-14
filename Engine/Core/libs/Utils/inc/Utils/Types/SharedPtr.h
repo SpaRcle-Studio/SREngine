@@ -44,6 +44,11 @@ namespace SR_HTYPES_NS {
         ~SharedPtr(); /// не должен быть виртуальным
 
     public:
+        template<typename... Args> SR_NODISCARD static SharedPtr<T> MakeShared(Args&&... args) {
+            auto&& pData = new T(std::forward<Args>(args)...);
+            return pData->GetThis();
+        }
+
         SR_NODISCARD SR_FORCE_INLINE operator bool() const noexcept { return m_data && m_data->valid; } /** NOLINT */
         SharedPtr<T>& operator=(const SharedPtr<T> &ptr);
         SharedPtr<T>& operator=(T *ptr);
@@ -240,12 +245,12 @@ namespace SR_HTYPES_NS {
             return;
         }
 
-        if (pData && pData->strongCount <= 1) {
+        if (pData->strongCount <= 1) {
             if (pData->policy == SharedPtrPolicy::Manually) {
                 SR_SAFE_PTR_ASSERT(!pData->valid, "Ptr was not freed!");
                 delete pData;
             }
-            else if (pData->policy == SharedPtrPolicy::Automatic) {
+            else if (pData->policy == SharedPtrPolicy::Automatic && pData->valid) {
                 pData->valid = false;
                 SR_SAFE_DELETE_PTR(m_ptr);
             }
@@ -254,7 +259,7 @@ namespace SR_HTYPES_NS {
                 delete pData;
             }
         }
-        else if (pData) {
+        else {
             --(pData->strongCount);
         }
     }

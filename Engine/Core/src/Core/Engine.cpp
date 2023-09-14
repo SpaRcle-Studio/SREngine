@@ -40,8 +40,9 @@
 #include <Scripting/Impl/EvoScriptManager.h>
 
 namespace SR_CORE_NS {
-    Engine::Engine()
+    Engine::Engine(Application* pApplication)
         : Super(this)
+        , m_application(pApplication)
     { }
 
     bool Engine::Create() {
@@ -411,39 +412,19 @@ namespace SR_CORE_NS {
         return true;
     }
 
-    void Engine::Await() {
-        SR_INFO("Engine::Await() : waiting for the engine to close...");
-
-        if (auto&& pSound = SR_AUDIO_NS::Sound::Load("Editor/Audio/Success.mp3")) {
-            pSound->Play();
-        }
-
-        while (m_isRun) {
-            SR_HTYPES_NS::Thread::Sleep(50);
-
-            FlushScene();
-
-            if (!m_window || !m_window->IsValid()) {
-                SR_SYSTEM_LOG("Engine::Await() : window has been closed!");
-                break;
-            }
-        }
-
-        FlushScene();
-
-        if (m_editor && m_editor->Enabled()) {
-            m_editor->Enable(false);
-            SR_SYSTEM_LOG("Engine::Await() : disabling editor gui...");
-        }
-    }
-
     bool Engine::Close() {
         SR_INFO("Engine::Close() : closing game engine...");
 
         m_isRun = false;
 
-        if (m_editor) {
+        while (!m_sceneQueue.Empty()) {
+            FlushScene();
+        }
+
+        if (m_editor && m_editor->Enabled()) {
+            SR_SYSTEM_LOG("Engine::Await() : disabling editor gui...");
             m_editor->Save();
+            m_editor->Enable(false);
         }
 
         if (m_input) {
@@ -527,8 +508,7 @@ namespace SR_CORE_NS {
     }
 
     void Engine::Reload() {
-        /// TODO: SR_PLATFORM_NS::SelfOpen();
-        /// Выйти в main и пересоздать все
+        m_application->Reload();
     }
 
     void Engine::WorldThread() {

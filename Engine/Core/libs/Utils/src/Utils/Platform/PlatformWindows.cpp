@@ -92,40 +92,19 @@ namespace SR_UTILS_NS::Platform {
 }
 
 namespace SR_UTILS_NS::Platform {
-    void seg_handler(int sig)
-    {
-        //unsigned int   i;
-        //void         * stack[ 100 ];
-        //unsigned short frames;
-        //SYMBOL_INFO  * symbol;
-        //HANDLE         process;
-//
-        //process = GetCurrentProcess();
-        //SymInitialize( process, NULL, TRUE );
-        //frames               = CaptureStackBackTrace( 0, 100, stack, NULL );
-        //symbol               = ( SYMBOL_INFO * )calloc( sizeof( SYMBOL_INFO ) + 256 * sizeof( char ), 1 );
-        //symbol->MaxNameLen   = 255;
-        //symbol->SizeOfStruct = sizeof( SYMBOL_INFO );
-//
-        //for( i = 0; i < frames; i++ ) {
-        //    SymFromAddr( process, ( DWORD64 )( stack[ i ] ), 0, symbol );
-        //    printf( "%i: %s - 0x%0X\n", frames - i - 1, symbol->Name, symbol->Address );
-        //}
-//
-        //free(symbol);
-
-        std::cerr << "Application crashed!\n" << SR_UTILS_NS::GetStacktrace() << std::endl;
+    void SegmentationHandler(int sig) {
+        WriteConsoleError("Application crashed!\n" + SR_UTILS_NS::GetStacktrace());
         Breakpoint();
         exit(1);
     }
 
-    void std_handler( void ) {
-        seg_handler(1);
+    void StdHandler() {
+        SegmentationHandler(1);
     }
 
     void InitSegmentationHandler() {
-        signal(SIGSEGV, seg_handler);
-        std::set_terminate(std_handler);
+        signal(SIGSEGV, SegmentationHandler);
+        std::set_terminate(StdHandler);
     }
 
     void SetInstance(void*) {

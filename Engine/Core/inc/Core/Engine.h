@@ -44,6 +44,7 @@ namespace SR_WORLD_NS {
 
 namespace SR_CORE_NS {
     class EngineScene;
+    class Application;
 
     class Engine : public SR_HTYPES_NS::SharedPtr<Engine> {
         using Super = SR_HTYPES_NS::SharedPtr<Engine>;
@@ -58,7 +59,7 @@ namespace SR_CORE_NS {
         using ScenePtr = SR_HTYPES_NS::SafePtr<SR_WORLD_NS::Scene>;
         using RenderScenePtr = SR_HTYPES_NS::SafePtr<SR_GRAPH_NS::RenderScene>;
     public:
-        Engine();
+        explicit Engine(Application* pApplication);
 
         void Reload();
 
@@ -69,6 +70,7 @@ namespace SR_CORE_NS {
         void SetGameMode(bool enabled);
 
         void FixedUpdate();
+        void FlushScene();
 
         SR_NODISCARD SR_INLINE ScenePtr GetScene() const;
         SR_NODISCARD SR_INLINE RenderContextPtr GetRenderContext() const { return m_renderContext; }
@@ -86,7 +88,6 @@ namespace SR_CORE_NS {
         bool Create();
         bool Init();
         bool Run();
-        void Await();
         bool Close();
 
     private:
@@ -97,8 +98,6 @@ namespace SR_CORE_NS {
 
         void DrawCallback();
         void WorldThread();
-
-        void FlushScene();
 
     private:
         std::atomic<bool> m_isCreate  = false;
@@ -122,6 +121,7 @@ namespace SR_CORE_NS {
         SR_HTYPES_NS::SafeQueue<ScenePtr> m_sceneQueue;
 
         EngineScene* m_engineScene = nullptr;
+        Application* m_application = nullptr;
 
         SR_CORE_GUI_NS::EditorGUI* m_editor = nullptr;
 
