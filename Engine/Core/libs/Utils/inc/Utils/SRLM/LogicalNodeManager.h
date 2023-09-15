@@ -25,6 +25,10 @@ namespace SR_SRLM_NS {
         };
         using NodeConstructors = std::unordered_map<Hash, NodeInfo>;
     public:
+        SR_NODISCARD bool IsSingletonCanBeDestroyed() const override {
+            return false;
+        }
+
         SR_NODISCARD const NodeConstructors& GetNodeConstructors() { return m_constructors; }
         SR_NODISCARD LogicalNode* CreateByName(Hash hashName);
         SR_NODISCARD LogicalNode* CreateByName(const std::string& name);

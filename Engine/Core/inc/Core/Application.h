@@ -36,7 +36,7 @@ namespace SR_CORE_NS {
         SR_UTILS_NS::Path m_resourcesPath;
 
         std::atomic<bool> m_isNeedReload = false;
-        bool m_isNeedPlaySound = true;
+        std::atomic<bool> m_isNeedPlaySound = true;
 
         SR_HTYPES_NS::SharedPtr<Engine> m_engine;
 

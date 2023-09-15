@@ -113,6 +113,8 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD virtual void* GetCurrentFBOHandle() const { return nullptr; }
         SR_NODISCARD virtual std::set<void*> GetFBOHandles() const { return std::set<void*>(); }
 
+        static void Destroy();
+
         virtual void OnMultiSampleChanged();
         virtual void UpdateMultiSampling() { }
         virtual void PrepareFrame() {

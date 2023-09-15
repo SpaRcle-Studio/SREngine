@@ -72,7 +72,7 @@ namespace SR_CORE_GUI_NS {
         int32_t m_id = SR_ID_INVALID;
         GameObjectPtr m_camera;
         SR_WORLD_NS::Scene::Ptr m_scene;
-        std::atomic<bool> m_enabled = false;
+        std::atomic<bool> m_enabled = true;
         bool m_updateNonHoveredSceneViewer = false;
         SR_MATH_NS::IVector2 m_windowSize;
 

@@ -3,6 +3,7 @@
 //
 
 #include <Graphics/Window/Win32Window.h>
+#include <Utils/Platform/Platform.h>
 
 #define SR_BORDERSIZE 5 * 2
 
@@ -301,8 +302,9 @@ namespace SR_GRAPH_NS {
     }
 
     LRESULT Win32Window::WndProcedure(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
-        if (!WinAPI::ImGui_WndProcHandler(hWnd, message, wParam, lParam)) {
-            if (ImGui_ImplWin32_WndProcHandler(hWnd, message, wParam, lParam)) {
+        if (ImGui::GetCurrentContext() && !WinAPI::ImGui_WndProcHandler(hWnd, message, wParam, lParam)) {
+            auto&& pBackend = ImGui::GetIO().BackendPlatformUserData;
+            if (pBackend && ImGui_ImplWin32_WndProcHandler(hWnd, message, wParam, lParam)) {
                 return true;
             }
         }
@@ -352,6 +354,8 @@ namespace SR_GRAPH_NS {
 
         m_size = size;
 
+        std::string className = "SREngineWinClass";
+
         WNDCLASSEX wndClass;
 
         wndClass.cbSize = sizeof(WNDCLASSEX);
@@ -364,11 +368,13 @@ namespace SR_GRAPH_NS {
         wndClass.hCursor = LoadCursor(NULL, IDC_ARROW);
         wndClass.hbrBackground = (HBRUSH)GetStockObject(BLACK_BRUSH);
         wndClass.lpszMenuName = NULL;
-        wndClass.lpszClassName = "SREngineWinClass";
+        wndClass.lpszClassName = className.c_str();
         wndClass.hIconSm = LoadIcon(NULL, IDI_WINLOGO);
 
-        if (!RegisterClassEx(&wndClass)) {
-            SR_ERROR("Win32Window::Initialize() : failed to register class!");
+        auto&& registerResult = RegisterClassEx(&wndClass);
+
+        if (!registerResult && GetLastError() != ERROR_CLASS_ALREADY_EXISTS) { /// NOLINT
+            SR_ERROR("Win32Window::Initialize() : failed to register class!\n\tError code: " + SR_UTILS_NS::ToString(GetLastError()));
             return false;
         }
 
@@ -377,7 +383,7 @@ namespace SR_GRAPH_NS {
 
         {
             m_hWnd = CreateWindowEx(
-                0, "SREngineWinClass",
+                0, className.c_str(),
                 name.c_str(),
                 m_dwStyle | WS_CLIPSIBLINGS | WS_CLIPCHILDREN,
                 position.x - 8, position.y,
@@ -461,19 +467,20 @@ namespace SR_GRAPH_NS {
     void Win32Window::Close() {
         if (m_hWnd && IsValid()) {
             DestroyWindow(m_hWnd);
+            ::UnregisterClass(nullptr, (HINSTANCE)SR_PLATFORM_NS::GetInstance());
             m_isValid = false;
             m_hWnd = nullptr;
         }
     }
 
     SR_MATH_NS::IVector2 Win32Window::ScreenToClient(const SR_MATH_NS::IVector2& pos) const {
-        POINT pt = { static_cast<int32>(pos.x), static_cast<int32_t>(pos.y) };
+        POINT pt = { static_cast<int32_t>(pos.x), static_cast<int32_t>(pos.y) };
         ::ScreenToClient(m_hWnd, &pt);
         return SR_MATH_NS::IVector2(pt.x, pt.y);
     }
 
     SR_MATH_NS::IVector2 Win32Window::ClientToScreen(const SR_MATH_NS::IVector2& pos) const {
-        POINT pt = { static_cast<int32>(pos.x), static_cast<int32_t>(pos.y) };
+        POINT pt = { static_cast<int32_t>(pos.x), static_cast<int32_t>(pos.y) };
         ::ClientToScreen(m_hWnd, &pt);
         return SR_MATH_NS::IVector2(pt.x, pt.y);
     }

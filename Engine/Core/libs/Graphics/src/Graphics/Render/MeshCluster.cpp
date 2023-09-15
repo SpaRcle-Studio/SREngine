@@ -100,7 +100,7 @@ namespace SR_GRAPH_NS {
                     SRAssert2(pMaterial, "Mesh have not material!");
 
                     if (pMesh->IsMeshDestroyed()) {
-                        static auto&& resourceManager = SR_UTILS_NS::ResourceManager::Instance();
+                        auto&& resourceManager = SR_UTILS_NS::ResourceManager::Instance();
                         SR_MAYBE_UNUSED SR_HTYPES_NS::SingletonRecursiveLockGuard lock(&resourceManager);
 
                         if (pMesh->IsCalculated()) {

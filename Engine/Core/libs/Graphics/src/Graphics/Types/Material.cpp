@@ -60,7 +60,7 @@ namespace SR_GTYPES_NS {
     }
 
     Material* Material::Load(SR_UTILS_NS::Path rawPath) {
-        static auto&& resourceManager = SR_UTILS_NS::ResourceManager::Instance();
+        auto&& resourceManager = SR_UTILS_NS::ResourceManager::Instance();
 
         Material* pMaterial = nullptr;
 

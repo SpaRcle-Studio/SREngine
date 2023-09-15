@@ -41,6 +41,10 @@ namespace SR_UTILS_NS {
             uint16_t version;
         };
     public:
+        SR_NODISCARD bool IsSingletonCanBeDestroyed() const override {
+            return false;
+        }
+
         Component* CreateComponentOfName(const std::string& name);
         Component* CreateComponentOfName(Hash hashName);
 

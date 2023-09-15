@@ -51,10 +51,11 @@ namespace SR_UTILS_NS {
         void InitColorTheme();
 
     public:
-        Level GetLevel() { return m_level; }
         void SetLevel(Level level) { m_level = level; }
 
-        bool IsRunningUnderDebugger();
+        SR_NODISCARD Level GetLevel() { return m_level; }
+        SR_NODISCARD bool IsInitialized() const { return m_isInit; }
+        SR_NODISCARD bool IsRunningUnderDebugger();
 
         void MakeCrash();
 

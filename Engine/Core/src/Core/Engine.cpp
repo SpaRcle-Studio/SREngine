@@ -459,6 +459,8 @@ namespace SR_CORE_NS {
             delete pWindow;
         });
 
+        SR_GRAPH_NS::Environment::Destroy();
+
         SR_SCRIPTING_NS::EvoScriptManager::Instance().Update(0.f, true);
 
         return true;

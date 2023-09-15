@@ -16,6 +16,10 @@ namespace SR_UTILS_NS {
     public:
         void InitSingleton() override;
 
+        SR_NODISCARD bool IsSingletonCanBeDestroyed() const override {
+            return false;
+        }
+
         SR_NODISCARD const std::string& HashToString(Hash hash) const;
         SR_NODISCARD bool Exists(Hash hash) const;
 

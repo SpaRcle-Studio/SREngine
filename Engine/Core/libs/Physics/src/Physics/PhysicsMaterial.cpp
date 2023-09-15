@@ -30,7 +30,7 @@ namespace SR_PTYPES_NS {
             return nullptr;
         }
 
-        static auto&& resourceManager = SR_UTILS_NS::ResourceManager::Instance();
+        auto&& resourceManager = SR_UTILS_NS::ResourceManager::Instance();
 
         PhysicsMaterial* pMaterial = nullptr;
 

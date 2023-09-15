@@ -18,6 +18,10 @@ namespace SR_UTILS_NS {
         friend class SR_UTILS_NS::Singleton<EnumReflectorManager>;
         using Reflectors = ska::flat_hash_map<uint64_t, EnumReflector*>;
     public:
+        SR_NODISCARD bool IsSingletonCanBeDestroyed() const override {
+            return false;
+        }
+
         bool RegisterReflector(EnumReflector* pReflector);
 
         SR_NODISCARD EnumReflector* GetReflector(const std::string& name) const;

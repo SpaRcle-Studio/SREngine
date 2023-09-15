@@ -61,7 +61,7 @@ namespace SR_GTYPES_NS {
     }
 
     Texture::Ptr Texture::Load(const std::string& rawPath, const std::optional<Memory::TextureConfig>& config) {
-        static auto&& resourceManager = SR_UTILS_NS::ResourceManager::Instance();
+        auto&& resourceManager = SR_UTILS_NS::ResourceManager::Instance();
 
         Texture::Ptr pTexture = nullptr;
 

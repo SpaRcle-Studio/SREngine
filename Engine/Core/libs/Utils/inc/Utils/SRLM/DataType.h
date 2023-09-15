@@ -30,6 +30,10 @@ namespace SR_SRLM_NS {
         using Allocator = SR_HTYPES_NS::Function<DataType*()>;
         static constexpr uint32_t EnumMax = static_cast<int>(DataTypeClass::DataTypeClassMAX);
     public:
+        SR_NODISCARD bool IsSingletonCanBeDestroyed() const override {
+            return false;
+        }
+
         bool Register(DataTypeClass dataTypeClass, Hash hashName, Allocator allocator);
 
         DataType* Allocate(DataTypeClass dataTypeClass);

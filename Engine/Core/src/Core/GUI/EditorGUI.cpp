@@ -333,7 +333,7 @@ namespace SR_CORE_GUI_NS {
         }
     }
 
-    SR_GTYPES_NS::Texture *EditorGUI::GetIcon(EditorIcon icon) const {
+    SR_GTYPES_NS::Texture* EditorGUI::GetIcon(EditorIcon icon) const {
         if (m_icons.count(icon) == 1) {
             return m_icons.at(icon);
         }
@@ -555,6 +555,12 @@ namespace SR_CORE_GUI_NS {
 
             if (ImGui::MenuItem("Clear shaders cache")) {
                 SR_SRSL_NS::SRSLShader::ClearShadersCache();
+            }
+
+            ImGui::Separator();
+
+            if (ImGui::MenuItem("Reload")) {
+                m_engine->Reload();
             }
 
             ImGui::Separator();

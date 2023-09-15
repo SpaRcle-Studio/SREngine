@@ -18,7 +18,7 @@ namespace SR_GRAPH_GUI_NS {
 
     template<typename T> void static EnumCombo(const std::string& label, T value, const SR_HTYPES_NS::Function<void(T)>& callback) {
         if (ImGui::BeginCombo(label, SR_UTILS_NS::EnumReflector::ToString(value).c_str())) {
-            static auto&& selectables = SR_UTILS_NS::EnumReflector::GetNames<T>();
+            auto&& selectables = SR_UTILS_NS::EnumReflector::GetNames<T>();
             for (auto&& selectable : selectables) {
                 if (ImGui::Selectable(selectable.c_str())) {
                     ImGui::SetItemDefaultFocus();

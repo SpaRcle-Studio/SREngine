@@ -98,7 +98,7 @@ namespace SR_CORE_NS::GUI {
             return;
         }
 
-        static auto&& shapes = SR_UTILS_NS::EnumReflector::GetNames<SR_PHYSICS_NS::ShapeType>();
+        auto&& shapes = SR_UTILS_NS::EnumReflector::GetNames<SR_PHYSICS_NS::ShapeType>();
         auto shape = static_cast<int>(SR_UTILS_NS::EnumReflector::GetIndex(pComponent->GetType()));
 
         if (ImGui::Combo(SR_FORMAT_C("Shape##rgbd%i", index), &shape, [](void* vec, int idx, const char** out_text){
@@ -726,7 +726,7 @@ namespace SR_CORE_NS::GUI {
 
         SR_CORE_GUI_NS::DragDropTargetEntityRef(context, pComponent->GetTarget(), "Target", index, 260.f);
 
-        static auto&& axises = SR_UTILS_NS::EnumReflector::GetNames<SR_UTILS_NS::LookAtAxis>();
+        auto&& axises = SR_UTILS_NS::EnumReflector::GetNames<SR_UTILS_NS::LookAtAxis>();
         auto axis = static_cast<int>(SR_UTILS_NS::EnumReflector::GetIndex(pComponent->GetAxis()));
 
         if (ImGui::Combo(SR_FORMAT_C("Axis##lookAtCmp%i", index), &axis, [](void* vec, int idx, const char** out_text) {

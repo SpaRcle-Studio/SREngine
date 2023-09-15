@@ -20,6 +20,7 @@ namespace SR_CORE_NS {
 
     Application::~Application() {
         Close();
+        SR_UTILS_NS::Debug::DestroySingleton();
     }
 
     bool Application::PreInit(int argc, char** argv) {
@@ -96,12 +97,21 @@ namespace SR_CORE_NS {
     }
 
     bool Application::InitLogger() {
+        if (SR_UTILS_NS::Debug::Instance().IsInitialized()) {
+            return true;
+        }
+
         SR_UTILS_NS::Debug::Instance().Init(m_applicationPath, true, SR_UTILS_NS::Debug::Theme::Dark);
         SR_UTILS_NS::Debug::Instance().SetLevel(SR_UTILS_NS::Debug::Level::Low);
         return true;
     }
 
     bool Application::Init() {
+        if (!InitLogger()) {
+            SR_PLATFORM_NS::WriteConsoleError("Failed to initialize logger!\n");
+            return false;
+        }
+
         SR_SYSTEM_LOG("Application::Init() : initializing application...");
 
         if (m_resourcesPath.Empty()) {
@@ -156,6 +166,12 @@ namespace SR_CORE_NS {
         volatile bool hasErrors = false;
 
         while (!hasErrors) {
+            if (m_isNeedReload) {
+                Close();
+                hasErrors |= !Init();
+                m_isNeedReload = false;
+            }
+
             if (!m_engine) {
                 SR_ERROR("Application::Execute() : engine lost!");
                 hasErrors = true;
@@ -183,9 +199,8 @@ namespace SR_CORE_NS {
     }
 
     void Application::Close() {
-        m_engine->Close();
-
         m_engine->AutoFree([](auto&& pEngine) {
+            pEngine->Close();
             delete pEngine;
         });
 
@@ -210,7 +225,7 @@ namespace SR_CORE_NS {
 
         SR_HTYPES_NS::Thread::Factory::Instance().PrintThreads();
 
-        SR_UTILS_NS::Debug::DestroySingleton();
+        SR_UTILS_NS::GetSingletonManager()->DestroyAll();
     }
 
     void Application::SwitchResourcesFolder(const SR_UTILS_NS::Path& path) {
@@ -218,6 +233,7 @@ namespace SR_CORE_NS {
     }
 
     void Application::Reload() {
-
+        m_isNeedReload = true;
+        m_isNeedPlaySound = true;
     }
 }

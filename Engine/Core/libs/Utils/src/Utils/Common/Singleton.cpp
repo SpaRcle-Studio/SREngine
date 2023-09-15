@@ -15,12 +15,32 @@ namespace SR_UTILS_NS {
         return singletonManager;
     }
 
-    void** SingletonManager::GetSingleton(uint64_t id) noexcept {
+    void* SingletonManager::GetSingleton(uint64_t id) noexcept {
         if (auto&& pIt = m_singletons.find(id); pIt != m_singletons.end()) {
-            return &pIt->second;
+            return pIt->second.pSingleton;
         }
 
-        auto&& pIt = m_singletons.insert(std::make_pair(id, nullptr));
-        return &pIt.first->second;
+        return nullptr;
+    }
+
+    void SingletonManager::DestroyAll() {
+        for (auto pIt = m_singletons.begin(); pIt != m_singletons.end(); ) {
+            auto&& [id, info] = *pIt;
+
+            if (info.pSingletonBase->IsSingletonCanBeDestroyed()) {
+                info.pSingletonBase->OnSingletonDestroy();
+                delete info.pSingletonBase;
+                pIt = m_singletons.erase(pIt);
+            }
+            else {
+                ++pIt;
+            }
+        }
+    }
+
+    void SingletonManager::Remove(uint64_t id) {
+        if (auto&& pIt = m_singletons.find(id); pIt != m_singletons.end()) {
+            m_singletons.erase(pIt);
+        }
     }
 }

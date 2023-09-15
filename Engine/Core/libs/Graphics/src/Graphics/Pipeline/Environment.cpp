@@ -101,3 +101,10 @@ void Framework::Graphics::Environment::SetCurrentFramebuffer(SR_GTYPES_NS::Frame
         SRAssert(!m_currentFramebuffer->IsDirty());
     }
 }
+
+void Framework::Graphics::Environment::Destroy() {
+    if (g_environment) {
+        delete g_environment;
+        g_environment = nullptr;
+    }
+}

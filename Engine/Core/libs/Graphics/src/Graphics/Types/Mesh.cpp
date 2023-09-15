@@ -33,7 +33,7 @@ namespace SR_GRAPH_NS::Types {
     }
 
     Mesh::Ptr Mesh::TryLoad(const SR_UTILS_NS::Path& path, MeshType type, uint32_t id) {
-        static auto&& resourceManager = SR_UTILS_NS::ResourceManager::Instance();
+        auto&& resourceManager = SR_UTILS_NS::ResourceManager::Instance();
 
         SR_MAYBE_UNUSED SR_HTYPES_NS::SingletonRecursiveLockGuard lock(&resourceManager);
 
