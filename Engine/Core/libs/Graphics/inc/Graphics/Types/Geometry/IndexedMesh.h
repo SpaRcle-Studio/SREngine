@@ -7,7 +7,7 @@
 
 #include <Graphics/Memory/MeshManager.h>
 #include <Graphics/Types/Mesh.h>
-#include <Graphics/Pipeline/Environment.h>
+#include <Graphics/Pipeline/Pipeline.h>
 
 namespace SR_GTYPES_NS {
     class IndexedMesh : public Mesh {

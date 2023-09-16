@@ -22,6 +22,7 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD std::string GetName() const override { return "Vulkan ImGUI"; }
 
         SR_NODISCARD VkCommandBuffer Render(uint32_t frame);
+        SR_NODISCARD void* GetTextureDescriptorSet(uint32_t textureId) override;
 
         void Destroy() override;
 

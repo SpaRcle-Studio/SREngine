@@ -26,7 +26,7 @@ namespace SR_GRAPH_NS {
     class RenderScene;
     class RenderContext;
     class RenderTechnique;
-    class Environment;
+    class Pipeline;
     class BasePass;
 
     typedef std::map<std::string, SR_HTYPES_NS::Function<BasePass*(RenderTechnique*, const SR_XML_NS::Node&, BasePass*)>> RenderPassMap;
@@ -37,7 +37,7 @@ namespace SR_GRAPH_NS {
         using Super = SR_UTILS_NS::ResourceContainer;
         using CameraPtr = Types::Camera*;
         using Context = RenderContext*;
-        using PipelinePtr = Environment*;
+        using PipelinePtr = SR_HTYPES_NS::SharedPtr<Pipeline>;
         using RenderScenePtr = SR_HTYPES_NS::SafePtr<RenderScene>;
     public:
         explicit BasePass(RenderTechnique* pTechnique, BasePass* pParent);

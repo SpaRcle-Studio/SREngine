@@ -12,7 +12,7 @@
 #include <Graphics/Memory/IGraphicsResource.h>
 
 namespace SR_GRAPH_NS {
-    class Environment;
+    class Pipeline;
 }
 
 namespace SR_GRAPH_NS::Types {
@@ -30,7 +30,7 @@ namespace SR_GTYPES_NS {
         using Ptr = Framebuffer*;
         using Super = SR_UTILS_NS::IResource;
         using ClearColors = std::vector<SR_MATH_NS::FColor>;
-        using PipelinePtr = Environment*;
+        using PipelinePtr = SR_HTYPES_NS::SharedPtr<Pipeline>;
     private:
         Framebuffer();
         ~Framebuffer() override;
@@ -81,8 +81,6 @@ namespace SR_GTYPES_NS {
         uint64_t GetFileHash() const override;
 
     private:
-        PipelinePtr m_pipeline = nullptr;
-
         std::atomic<bool> m_dirty = true;
         std::atomic<bool> m_hasErrors = false;
 

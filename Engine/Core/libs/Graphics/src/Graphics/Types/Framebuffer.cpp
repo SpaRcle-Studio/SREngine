@@ -9,7 +9,6 @@
 namespace SR_GTYPES_NS {
     Framebuffer::Framebuffer()
         : Super(SR_COMPILE_TIME_CRC32_TYPE_NAME(Framebuffer))
-        , m_pipeline(Environment::Get())
     {
         SR_UTILS_NS::ResourceManager::Instance().RegisterResource(this);
     }
@@ -84,7 +83,7 @@ namespace SR_GTYPES_NS {
         }
 
         m_pipeline->BindFrameBuffer(this);
-        m_pipeline->SetCurrentFramebuffer(this);
+        m_pipeline->SetCurrentFrameBuffer(this);
 
         return true;
     }
@@ -95,7 +94,7 @@ namespace SR_GTYPES_NS {
         }
 
         if (m_size.HasZero() || m_size.HasNegative()) {
-            SR_ERROR("Framebuffer::Update() : incorrect framebuffer size!");
+            SR_ERROR("FrameBuffer::Update() : incorrect framebuffer size!");
             m_hasErrors = true;
             return false;
         }
@@ -115,15 +114,16 @@ namespace SR_GTYPES_NS {
             m_currentSampleCount = SR_MIN(m_currentSampleCount, m_pipeline->GetSupportedSamples());
         }
 
-        if (!m_pipeline->CreateFrameBuffer(
-            m_size.ToGLM(),
-            m_frameBuffer,
-            &m_depth,
-            m_colors,
-            m_currentSampleCount,
-            m_layersCount)
-        ) {
-            SR_ERROR("Framebuffer::Update() : failed to create frame buffer!");
+        SRFrameBufferCreateInfo createInfo;
+        createInfo.size = m_size;
+        createInfo.pFBO = &m_frameBuffer;
+        createInfo.pDepth = &m_depth;
+        createInfo.colors = &m_colors;
+        createInfo.sampleCount = m_currentSampleCount;
+        createInfo.layersCount = m_layersCount;
+
+        if (!m_pipeline->AllocateFrameBuffer(createInfo)) {
+            SR_ERROR("FrameBuffer::Update() : failed to allocate frame buffer!");
             m_hasErrors = true;
             return false;
         }
@@ -132,14 +132,14 @@ namespace SR_GTYPES_NS {
         m_dirty = false;
         m_isCalculated = true;
 
-        m_pipeline->SetBuildState(false);
+        m_pipeline->SetDirty(false);
 
         return true;
     }
 
     void Framebuffer::FreeVideoMemory() {
         if (m_frameBuffer != SR_ID_INVALID) {
-            SRVerifyFalse(!m_pipeline->FreeFBO(m_frameBuffer));
+            SRVerifyFalse(!m_pipeline->FreeFBO(&m_frameBuffer));
             m_frameBuffer = SR_ID_INVALID;
         }
 
@@ -271,7 +271,7 @@ namespace SR_GTYPES_NS {
     void Framebuffer::SetDirty() {
         m_dirty = true;
         if (m_pipeline) {
-            m_pipeline->SetBuildState(false);
+            m_pipeline->SetDirty(false);
         }
     }
 

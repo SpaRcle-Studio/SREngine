@@ -52,7 +52,6 @@ namespace SR_GTYPES_NS {
     private:
         Shader* m_shader = nullptr;
 
-        int32_t m_VAO = SR_ID_INVALID;
         int32_t m_VBO = SR_ID_INVALID;
         int32_t m_IBO = SR_ID_INVALID;
 

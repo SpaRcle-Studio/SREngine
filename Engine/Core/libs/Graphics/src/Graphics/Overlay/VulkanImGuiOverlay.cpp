@@ -335,4 +335,30 @@ namespace SR_GRAPH_NS {
 
         return buffer;
     }
+
+    void* VulkanImGuiOverlay::GetTextureDescriptorSet(uint32_t textureId) {
+        if (textureId == SR_ID_INVALID) {
+            SR_ERROR("VulkanImGuiOverlay::GetTextureDescriptorSet() : invalid id!");
+            return nullptr;
+        }
+
+        if (!m_context) {
+            SR_ERROR("VulkanImGuiOverlay::GetTextureDescriptorSet() : ImGui is not initialized!");
+            return nullptr;
+        }
+
+        auto&& pMemoryManager = m_pipeline.DynamicCast<VulkanPipeline>()->GetMemoryManager();
+
+        if (textureId >= pMemoryManager->m_countTextures.first) {
+            SR_ERROR("VulkanImGuiOverlay::GetTextureDescriptorSet() : out of range!");
+            return nullptr;
+        }
+
+        if (auto&& pTexture = pMemoryManager->m_textures[textureId]) {
+            auto&& layout = ((ImGui_ImplVulkan_Data*)ImGui::GetIO().BackendRendererUserData)->DescriptorSetLayout;
+            return reinterpret_cast<void*>(pTexture->GetDescriptorSet(layout).m_self);
+        }
+
+        return nullptr;
+    }
 }

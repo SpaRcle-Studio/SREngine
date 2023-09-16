@@ -293,15 +293,29 @@ namespace SR_GRAPH_NS {
 
     void Pipeline::SetCurrentFrameBuffer(Pipeline::FramebufferPtr pFrameBuffer) {
         ++m_state.operations;
-        m_state.pFramebuffer = pFrameBuffer;
+        m_state.pFrameBuffer = pFrameBuffer;
 
-        if (m_state.pFramebuffer) {
-            SRAssert(!m_state.pFramebuffer->IsDirty());
+        if (m_state.pFrameBuffer) {
+            SRAssert(!m_state.pFrameBuffer->IsDirty());
         }
     }
 
     void Pipeline::BindFrameBuffer(Pipeline::FramebufferPtr pFBO) {
         ++m_state.operations;
-        m_state.pFramebuffer = pFBO;
+        m_state.pFrameBuffer = pFBO;
+    }
+
+    void* Pipeline::GetOverlayTextureDescriptorSet(uint32_t textureId, OverlayType overlayType) {
+        ++m_state.operations;
+        auto&& pIt = m_overlays.find(overlayType);
+        if (pIt == m_overlays.end() || !pIt->second) {
+            return nullptr;
+        }
+        return pIt->second->GetTextureDescriptorSet(textureId);
+    }
+
+    void Pipeline::SetSampleCount(uint8_t count) {
+        ++m_state.operations;
+        m_newSampleCount = m_requiredSampleCount = count;
     }
 }

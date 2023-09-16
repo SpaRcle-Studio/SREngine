@@ -34,6 +34,7 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD virtual bool ReCreate() = 0;
         SR_NODISCARD bool IsSurfaceDirty() const noexcept { return m_surfaceDirty; }
 
+        SR_NODISCARD virtual void* GetTextureDescriptorSet(uint32_t textureId) { return nullptr; }
         SR_NODISCARD virtual std::string GetName() const = 0;
 
         virtual void Destroy() = 0;

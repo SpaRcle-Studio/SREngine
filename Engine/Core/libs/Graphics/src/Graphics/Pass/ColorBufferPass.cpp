@@ -3,6 +3,7 @@
 //
 
 #include <Graphics/Pass/ColorBufferPass.h>
+#include <Graphics/Pipeline/Pipeline.h>
 
 namespace SR_GRAPH_NS {
     SR_REGISTER_RENDER_PASS(ColorBufferPass)

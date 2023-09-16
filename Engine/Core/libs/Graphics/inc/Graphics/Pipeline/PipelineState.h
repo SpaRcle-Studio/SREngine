@@ -7,6 +7,7 @@
 
 #include <Graphics/Pipeline/PipelineType.h>
 #include <Graphics/Pipeline/TextureHelper.h>
+#include <Graphics/Types/Descriptors.h>
 
 namespace SR_GTYPES_NS {
     class Shader;
@@ -14,6 +15,15 @@ namespace SR_GTYPES_NS {
 }
 
 namespace SR_GRAPH_NS {
+    struct SRFrameBufferCreateInfo {
+        SR_MATH_NS::IVector2 size;
+        int32_t* pFBO = nullptr;
+        DepthLayer* pDepth = nullptr;
+        std::vector<ColorLayer>* colors = nullptr;
+        uint8_t sampleCount = 0;
+        uint32_t layersCount = 0;
+    };
+
     struct SRTextureCreateInfo {
         uint8_t* pData = nullptr;
         ImageFormat format = ImageFormat::None;
@@ -23,6 +33,13 @@ namespace SR_GRAPH_NS {
         uint32_t height = 0;
         uint8_t mipLevels = 0;
         bool alpha = false;
+        bool cpuUsage = false;
+    };
+
+    struct SRCubeMapCreateInfo {
+        std::array<uint8_t*, 6> data = {};
+        uint32_t width = 0;
+        uint32_t height = 0;
         bool cpuUsage = false;
     };
 
@@ -61,7 +78,7 @@ namespace SR_GRAPH_NS {
 
     public:
         ShaderPtr pShader = nullptr;
-        FramebufferPtr pFramebuffer = nullptr;
+        FramebufferPtr pFrameBuffer = nullptr;
 
         int32_t buildIteration = 0;
 
@@ -70,7 +87,8 @@ namespace SR_GRAPH_NS {
         int32_t descriptorSetId = SR_ID_INVALID;
         int32_t shaderId = SR_ID_INVALID;
         int32_t frameBufferId = SR_ID_INVALID;
-        int32_t frameBufferLayer = SR_ID_INVALID;
+
+        uint32_t frameBufferLayer = 0;
 
         /// Количество вызовов Draw и подобное
         mutable uint32_t drawCalls = 0;

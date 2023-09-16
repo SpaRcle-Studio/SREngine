@@ -178,8 +178,8 @@ namespace SR_GRAPH_NS {
     void* VulkanPipeline::GetCurrentFBOHandle() const {
         void* pHandle = m_kernel->GetRenderPass(); /// Ну типо кадровый буфер
 
-        if (m_state.pFramebuffer) {
-            if (auto&& FBO = m_state.pFramebuffer->GetId(); FBO == SR_ID_INVALID) {
+        if (m_state.pFrameBuffer) {
+            if (auto&& FBO = m_state.pFrameBuffer->GetId(); FBO == SR_ID_INVALID) {
                 PipelineError("Vulkan::GetCurrentFBOHandle() : invalid FBO!");
             }
             else if (auto&& framebuffer = m_memory->m_FBOs[FBO - 1]; !framebuffer) {
@@ -369,8 +369,8 @@ namespace SR_GRAPH_NS {
     uint8_t VulkanPipeline::GetFrameBufferSampleCount() const {
         ++m_state.operations;
 
-        if (m_state.pFramebuffer) {
-            return m_state.pFramebuffer->GetSamplesCount();
+        if (m_state.pFrameBuffer) {
+            return m_state.pFrameBuffer->GetSamplesCount();
         }
 
         return GetSamplesCount();
@@ -520,7 +520,7 @@ namespace SR_GRAPH_NS {
             if (m_state.frameBufferId == 0) {
                 m_viewport = m_kernel->GetViewport();
             }
-            else if (m_state.pFramebuffer && m_currentVkFrameBuffer) {
+            else if (m_state.pFrameBuffer && m_currentVkFrameBuffer) {
                 m_viewport = m_currentVkFrameBuffer->GetViewport();
             }
             else {
@@ -542,7 +542,7 @@ namespace SR_GRAPH_NS {
             if (m_state.frameBufferId == 0) {
                 m_scissor = m_kernel->GetScissor();
             }
-            else if (m_state.pFramebuffer && m_currentVkFrameBuffer) {
+            else if (m_state.pFrameBuffer && m_currentVkFrameBuffer) {
                 m_scissor = m_currentVkFrameBuffer->GetScissor();
             }
             else {
@@ -601,5 +601,73 @@ namespace SR_GRAPH_NS {
             m_currentVkFrameBuffer = pFrameBuffer;
             m_state.frameBufferId = FBO;
         }
+    }
+
+    int32_t VulkanPipeline::AllocateFrameBuffer(const SRFrameBufferCreateInfo& createInfo) {
+        ++m_state.allocations;
+        ++m_state.operations;
+
+        std::vector<int32_t> colorBuffers;
+        colorBuffers.reserve((*createInfo.colors).size());
+
+        std::vector<VkFormat> formats;
+        formats.reserve((*createInfo.colors).size());
+
+        for (auto&& color : (*createInfo.colors)) {
+            colorBuffers.emplace_back(color.texture);
+            formats.emplace_back(VulkanTools::AbstractTextureFormatToVkFormat(color.format));
+        }
+
+        if (createInfo.size.x == 0 || createInfo.size.y == 0) {
+            PipelineError("VulkanPipeline::AllocateFrameBuffer() : width or height equals zero!");
+            return false;
+        }
+
+        if (*createInfo.pFBO == 0) {
+            PipelineError("VulkanPipeline::AllocateFrameBuffer() : zero frame buffer are default frame buffer!");
+            return false;
+        }
+
+        if (*createInfo.pFBO > 0) {
+            if (!m_memory->ReAllocateFBO(*createInfo.pFBO - 1, createInfo.size.x, createInfo.size.y, colorBuffers, createInfo.pDepth, createInfo.sampleCount, createInfo.layersCount)) {
+                PipelineError("VulkanPipeline::AllocateFrameBuffer() : failed to re-allocate frame buffer object!");
+            }
+            goto success;
+        }
+
+        *createInfo.pFBO = m_memory->AllocateFBO(createInfo.size.x, createInfo.size.y, formats, colorBuffers, createInfo.pDepth, createInfo.sampleCount, createInfo.layersCount) + 1;
+        if (*createInfo.pFBO <= 0) {
+            *createInfo.pFBO = SR_ID_INVALID;
+            PipelineError("VulkanPipeline::AllocateFrameBuffer() : failed to allocate FBO!");
+            return false;
+        }
+
+    success:
+        for (uint32_t i = 0; i < static_cast<uint32_t>((*createInfo.colors).size()); ++i) {
+            (*createInfo.colors)[i].texture = colorBuffers[i];
+        }
+
+        return true;
+    }
+
+    SR_MATH_NS::FColor VulkanPipeline::GetPixelColor(uint32_t textureId, uint32_t x, uint32_t y) {
+        ++m_state.operations;
+
+        if (textureId == SR_ID_INVALID || textureId >= m_memory->m_countTextures.first) {
+            return SR_MATH_NS::FColor(0.f);
+        }
+
+        auto&& pTexture = m_memory->m_textures[textureId];
+        if (!pTexture) {
+            return SR_MATH_NS::FColor(0.f);
+        }
+
+        auto&& pixel = pTexture->GetPixel(x, y, 0);
+        return SR_MATH_NS::FColor(
+            static_cast<SR_MATH_NS::Unit>(pixel.r),
+            static_cast<SR_MATH_NS::Unit>(pixel.g),
+            static_cast<SR_MATH_NS::Unit>(pixel.b),
+            static_cast<SR_MATH_NS::Unit>(pixel.a)
+        );
     }
 }

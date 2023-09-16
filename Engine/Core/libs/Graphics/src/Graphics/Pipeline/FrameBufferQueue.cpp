@@ -3,6 +3,7 @@
 //
 
 #include <Graphics/Pipeline/FrameBufferQueue.h>
+#include <Graphics/Types/Framebuffer.h>
 
 namespace SR_GRAPH_NS {
     void FrameBufferQueue::AddFrameBuffer(FrameBufferQueue::FrameBuffer pFrameBuffer, uint32_t layer) {

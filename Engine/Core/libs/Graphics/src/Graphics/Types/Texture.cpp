@@ -157,7 +157,6 @@ namespace SR_GTYPES_NS {
 
         m_context.Do([this](RenderContext* ptr) {
             ptr->Register(this);
-            m_pipeline = ptr->GetPipeline();
         });
 
         if (IsDestroyed()) {
@@ -175,11 +174,17 @@ namespace SR_GTYPES_NS {
 
         EVK_PUSH_LOG_LEVEL(EvoVulkan::Tools::LogLevel::ErrorsOnly);
 
-        // TODO: to refactoring
-        m_id = m_pipeline->CalculateTexture(m_data,
-                m_config.m_format, m_width, m_height, m_config.m_filter,
-                m_config.m_compression, m_config.m_mipLevels,
-                m_config.m_alpha == SR_UTILS_NS::BoolExt::None, m_config.m_cpuUsage);
+        SRTextureCreateInfo createInfo;
+        createInfo.pData = m_data;
+        createInfo.width = m_width;
+        createInfo.height = m_height;
+        createInfo.compression = m_config.m_compression;
+        createInfo.cpuUsage = m_config.m_cpuUsage;
+        createInfo.alpha = m_config.m_alpha == SR_UTILS_NS::BoolExt::None;
+        createInfo.format = m_config.m_format;
+        createInfo.mipLevels = m_config.m_mipLevels;
+
+        m_id = m_pipeline->AllocateTexture(createInfo);
 
         EVK_POP_LOG_LEVEL();
 
@@ -191,8 +196,6 @@ namespace SR_GTYPES_NS {
             if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::High) {
                 SR_LOG("Texture::Calculate() : texture \"" + std::string(GetResourceId()) + "\" has " + std::to_string(m_id) + " id.");
             }
-            /// не освобождаем, может пригодиться
-            /// FreeTextureData();
         }
 
         m_isCalculated = true;
@@ -271,7 +274,7 @@ namespace SR_GTYPES_NS {
             return nullptr;
         }
 
-        return m_pipeline->GetDescriptorSetFromTexture(textureId, true);
+        return m_pipeline->GetOverlayTextureDescriptorSet(textureId, OverlayType::ImGui);
     }
 
     SR_UTILS_NS::Path Framework::Graphics::Types::Texture::GetAssociatedPath() const {

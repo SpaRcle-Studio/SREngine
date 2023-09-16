@@ -8,6 +8,7 @@
 #include <Utils/Math/Vector3.h>
 
 #include <Graphics/Pipeline/PipelineState.h>
+#include <Graphics/Pipeline/FrameBufferQueue.h>
 #include <Graphics/Pipeline/IShaderProgram.h>
 #include <Graphics/Overlay/OverlayType.h>
 
@@ -97,7 +98,7 @@ namespace SR_GRAPH_NS {
 
         SR_NODISCARD WindowPtr GetWindow() const { return m_window; }
         SR_NODISCARD ShaderPtr GetCurrentShader() const { ++m_state.operations; return m_state.pShader; }
-        SR_NODISCARD FramebufferPtr GetCurrentFrameBuffer() const noexcept { ++m_state.operations; return m_state.pFramebuffer; }
+        SR_NODISCARD FramebufferPtr GetCurrentFrameBuffer() const noexcept { ++m_state.operations; return m_state.pFrameBuffer; }
         SR_NODISCARD int32_t GetCurrentShaderId() const { ++m_state.operations; return m_state.shaderId; }
         SR_NODISCARD int32_t GetCurrentFrameBufferId() const noexcept { ++m_state.operations; return m_state.frameBufferId; }
         SR_NODISCARD int32_t GetCurrentUBO() const noexcept { ++m_state.operations; return m_state.UBOId; }
@@ -109,10 +110,15 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD virtual std::set<void*> GetFBOHandles() const { return std::set<void*>(); /** NOLINT */ }
         SR_NODISCARD virtual uint8_t GetFrameBufferSampleCount() const { ++m_state.operations; return 0; }
         SR_NODISCARD virtual uint8_t GetBuildIterationsCount() const noexcept { ++m_state.operations; return 0; }
+        SR_NODISCARD virtual uint8_t GetSupportedSamples() const { return m_supportedSampleCount; }
+        SR_NODISCARD virtual SR_MATH_NS::FColor GetPixelColor(uint32_t textureId, uint32_t x, uint32_t y) { return SR_MATH_NS::FColor(0.f); }
 
         virtual void SetCurrentShader(ShaderPtr pShader) { ++m_state.operations; m_state.pShader = pShader; }
         virtual void SetCurrentShaderId(int32_t id) { ++m_state.operations; m_state.shaderId = id; }
+        virtual void SetFrameBufferLayer(uint32_t layer) { ++m_state.operations; m_state.frameBufferLayer = layer; }
         virtual void SetCurrentFrameBuffer(FramebufferPtr pFrameBuffer);
+
+        virtual void* GetOverlayTextureDescriptorSet(uint32_t textureId, OverlayType overlayType);
 
         virtual void PipelineError(const std::string& msg) const;
 
@@ -136,6 +142,7 @@ namespace SR_GRAPH_NS {
 
         virtual void OnMultiSampleChanged();
         virtual void UpdateMultiSampling();
+        virtual void SetSampleCount(uint8_t count);
 
         SR_NODISCARD uint8_t GetSamplesCount() const;
         SR_NODISCARD bool IsMultiSamplingSupported() const noexcept { return m_isMultiSampleSupported; }
@@ -148,12 +155,15 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD virtual int32_t AllocDescriptorSet(const std::vector<uint64_t>& types) { return SR_ID_INVALID; }
         SR_NODISCARD virtual int32_t AllocateShaderProgram(const SRShaderCreateInfo& createInfo, int32_t fbo) { return SR_ID_INVALID; };
         SR_NODISCARD virtual int32_t AllocateTexture(const SRTextureCreateInfo& createInfo) { return SR_ID_INVALID; };
+        SR_NODISCARD virtual int32_t AllocateFrameBuffer(const SRFrameBufferCreateInfo& createInfo) { return SR_ID_INVALID; };
+        SR_NODISCARD virtual int32_t AllocateCubeMap(const SRCubeMapCreateInfo& createInfo) { return SR_ID_INVALID; };
 
         virtual bool FreeDescriptorSet(int32_t* id) { return false; }
         virtual bool FreeVBO(int32_t* id) { return false; }
         virtual bool FreeIBO(int32_t* id) { return false; }
         virtual bool FreeUBO(int32_t* id) { return false; }
         virtual bool FreeFBO(int32_t* id) { return false; }
+        virtual bool FreeCubeMap(int32_t* id) { return false; }
         virtual bool DeleteShader(int32_t* id) { return false; }
         virtual bool FreeTexture(int32_t* id) { return false; }
 

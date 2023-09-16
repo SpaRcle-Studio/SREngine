@@ -40,14 +40,17 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD std::set<void*> GetFBOHandles() const override;
         SR_NODISCARD uint8_t GetFrameBufferSampleCount() const override;
         SR_NODISCARD uint8_t GetBuildIterationsCount() const noexcept override;
+        SR_NODISCARD SR_MATH_NS::FColor GetPixelColor(uint32_t textureId, uint32_t x, uint32_t y) override;
 
         SR_NODISCARD EvoVulkan::Core::VulkanKernel* GetKernel() const noexcept { return m_kernel; }
+        SR_NODISCARD VulkanTools::MemoryManager* GetMemoryManager() const noexcept { return m_memory; }
         SR_NODISCARD uint64_t GetUsedMemory() const override;
 
         SR_NODISCARD int32_t AllocateUBO(uint32_t uboSize) override;
         SR_NODISCARD int32_t AllocDescriptorSet(const std::vector<uint64_t>& types) override;
         SR_NODISCARD int32_t AllocateShaderProgram(const SRShaderCreateInfo& createInfo, int32_t fbo) override;
         SR_NODISCARD int32_t AllocateTexture(const SRTextureCreateInfo& createInfo) override;
+        SR_NODISCARD int32_t AllocateFrameBuffer(const SRFrameBufferCreateInfo& createInfo) override;
 
         void SetViewport(int32_t width, int32_t height) override;
         void SetScissor(int32_t width, int32_t height) override;

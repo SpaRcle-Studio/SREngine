@@ -18,6 +18,7 @@
 #include <Graphics/Pipeline/Vulkan/VulkanTracy.h>
 #include <Graphics/Window/Window.h>
 #include <Graphics/Pipeline/FrameBufferQueue.h>
+#include <Graphics/Types/Framebuffer.h>
 
 #include <EvoVulkan/VulkanKernel.h>
 #include <EvoVulkan/Tools/VulkanInsert.h>

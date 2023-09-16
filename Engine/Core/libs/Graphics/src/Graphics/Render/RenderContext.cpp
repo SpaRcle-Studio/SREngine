@@ -359,12 +359,12 @@ namespace SR_GRAPH_NS {
     void RenderContext::UpdateFramebuffers() {
         SR_TRACY_ZONE;
 
-        for (auto&& pFramebuffer : m_framebuffers) {
-            if (!pFramebuffer->IsDirty()) {
+        for (auto&& pFrameBuffer : m_framebuffers) {
+            if (!pFrameBuffer->IsDirty()) {
                 continue;
             }
 
-            pFramebuffer->Update();
+            pFrameBuffer->Update();
         }
     }
 
@@ -446,5 +446,7 @@ namespace SR_GRAPH_NS {
         SR_LOG("Engine::InitializeRender() : vendor is "   + m_pipeline->GetVendor());
         SR_LOG("Engine::InitializeRender() : renderer is " + m_pipeline->GetRenderer());
         SR_LOG("Engine::InitializeRender() : version is "  + m_pipeline->GetVersion());
+
+        return true;
     }
 }

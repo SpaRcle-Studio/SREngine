@@ -89,8 +89,6 @@ namespace SR_GRAPH_NS {
             Super::Render();
         }
         else if (m_framebuffer->Bind()) {
-            GetPipeline()->ResetCmdBuffer();
-
             m_framebuffer->BeginCmdBuffer(m_clearColors, 1.f);
             {
                 m_framebuffer->BeginRender();
@@ -113,7 +111,7 @@ namespace SR_GRAPH_NS {
             return;
         }
 
-        m_pipeline->SetCurrentFramebuffer(m_framebuffer);
+        m_pipeline->SetCurrentFrameBuffer(m_framebuffer);
 
         auto&& pRenderScene = GetRenderScene();
 
@@ -124,7 +122,7 @@ namespace SR_GRAPH_NS {
 
         m_uboManager.SetIdentifier(pIdentifier);
 
-        m_pipeline->SetCurrentFramebuffer(nullptr);
+        m_pipeline->SetCurrentFrameBuffer(nullptr);
     }
 
     ShaderOverridePass::ShaderPtr ShaderOverridePass::GetShader(SR_SRSL_NS::ShaderType type) const {
