@@ -17,6 +17,7 @@ namespace Framework::Core::GUI {
             ImGui::Text("   Monika0000");
             ImGui::Separator();
             ImGui::Text("Previous contributors: ");
+            ImGui::Text( "innerviewer, Drakeme, Danilka");
             ImGui::Separator();
             ImGui::Text("Made thanks to the following libraries: ");
             ImGui::TextWrapped("glm, OpenGL, GLFW, GLEW, glad, Bullet3, PhysX, Box2D, Dear ImGui, ImGuizmo, tinyobjloader, imgui-node-editor, stbi, json, Assimp");
