@@ -340,4 +340,33 @@ namespace SR_AUDIO_NS {
 
         return m_contexts.begin()->first;
     }
+
+    void SoundManager::ApplyParams(SoundManager::Handle pHandle, const PlayParams& params) {
+        SR_LOCK_GUARD
+
+        for (auto&& pPlayData : m_playStack) {
+            if (pHandle == pPlayData) {
+                if (!pPlayData->pData->initialized) {
+                    break;
+                }
+                pPlayData->pData->pContext->ApplyParams(pPlayData->pSource, params);
+                break;
+            }
+        }
+    }
+
+    void SoundManager::Stop(Handle pHandle) {
+        SR_LOCK_GUARD
+
+        for (auto pIt = m_playStack.begin(); pIt != m_playStack.end(); ) {
+            if (pHandle == *pIt) {
+                DestroyPlayData(*pIt);
+                m_playStack.erase(pIt);
+                break;
+            }
+            else {
+                ++pIt;
+            }
+        }
+    }
 }

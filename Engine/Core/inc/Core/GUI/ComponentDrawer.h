@@ -14,6 +14,7 @@ namespace SR_SCRIPTING_NS {
 namespace SR_AUDIO_NS{
 
     class AudioSource;
+    class AudioListener;
 }
 namespace SR_ANIMATIONS_NS {
     class Animator;
@@ -75,6 +76,7 @@ namespace SR_CORE_NS::GUI::ComponentDrawer {
     void DrawMaterialProps(SR_GRAPH_NS::Types::Material* material, EditorGUI* context, int32_t index);
 
     void DrawComponent(SR_AUDIO_NS::AudioSource*& pComponent, EditorGUI* context, int32_t index);
+    void DrawComponent(SR_AUDIO_NS::AudioListener*& pComponent,EditorGUI* context,int32_t index);
 }
 
 #endif //SRENGINE_COMPONENTDRAWER_H

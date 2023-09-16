@@ -7,6 +7,7 @@
 #include "../Audio/src/Audio/SoundContext.cpp"
 
 #include "../Audio/src/Audio/Types/AudioSource.cpp"
+#include "../Audio/src/Audio/Types/AudioListener.cpp"
 
 #include "../Audio/src/Audio/Impl/OpenALDevice.cpp"
 #include "../Audio/src/Audio/Impl/OpenALContext.cpp"

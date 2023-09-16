@@ -27,11 +27,11 @@ namespace SR_AUDIO_NS {
 
     class SoundManager : public SR_UTILS_NS::Singleton<SoundManager> {
         friend class SR_UTILS_NS::Singleton<SoundManager>;
-        using Handle = void*;
     public:
         enum class State : uint8_t {
             Stopped, Active, Paused
         };
+        using Handle = void*;
     private:
         SoundManager() = default;
         ~SoundManager() override = default;
@@ -47,6 +47,9 @@ namespace SR_AUDIO_NS {
         bool IsPlaying(Handle pHandle) const;
         bool IsInitialized(Handle pHandle) const;
         bool IsFailed(Handle pHandle) const;
+
+        void ApplyParams(Handle pHandle, const PlayParams& params);
+        void Stop(Handle pHandle);
 
         SoundData* Register(Sound* pSound);
         bool Unregister(SoundData** pSoundData);

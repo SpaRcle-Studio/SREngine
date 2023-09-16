@@ -41,6 +41,7 @@
 #include <Graphics/Font/Font.h>
 
 #include <Audio/Types/AudioSource.h>
+#include <Audio/Types/AudioListener.h>
 
 #include <imgui_internal.h>
 namespace SR_CORE_NS::GUI {
@@ -544,20 +545,17 @@ namespace SR_CORE_NS::GUI {
 
         if(ImGui::SliderFloat("Volume",&volume,0.f,1.f,"%.1f"))
         {
-
             pComponent->SetVolume(volume);
-
-
         }
-
 
         std::string m_path = pComponent->GetPath().ToString();
         if (ImGui::InputText("Path to Audio",&m_path))
         {
            pComponent->SetPath(m_path);
         }
-        
 
+    }
+    void ComponentDrawer::DrawComponent(Framework::Audio::AudioListener *&pComponent, EditorGUI *context, int32_t index){
 
     }
 
