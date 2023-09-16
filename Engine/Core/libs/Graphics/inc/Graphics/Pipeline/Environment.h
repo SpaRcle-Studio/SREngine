@@ -113,7 +113,7 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD virtual void* GetCurrentFBOHandle() const { return nullptr; }
         SR_NODISCARD virtual std::set<void*> GetFBOHandles() const { return std::set<void*>(); }
 
-        static void Destroy();
+        //static void Destroy();
 
         virtual void OnMultiSampleChanged();
         virtual void UpdateMultiSampling() { }
@@ -137,25 +137,25 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD SR_FORCE_INLINE virtual bool IsDrawSupport()         const { return false;                    }
         SR_NODISCARD virtual SR_FORCE_INLINE PipelineType GetType()       const { return PipelineType::Unknown;        }
 
-        SR_FORCE_INLINE static void RegisterScrollEvent(const std::function<void(double, double)>& fun){
-            g_mutex.lock();
-            g_scrollEvents.push_back(fun);
-            g_mutex.unlock();
-        }
+        //SR_FORCE_INLINE static void RegisterScrollEvent(const std::function<void(double, double)>& fun){
+        //    g_mutex.lock();
+        //    g_scrollEvents.push_back(fun);
+        //    g_mutex.unlock();
+        //}
 
-        static bool Set(Environment* env) {
-            if (g_environment != nullptr) {
-                SR_ERROR("Environment::Set() : environment already set!");
-                return false;
-            }
-            else {
-                g_environment = env;
-                return true;
-            }
-        }
-        static Environment* Get();
+        //static bool Set(Environment* env) {
+        //    if (g_environment != nullptr) {
+        //        SR_ERROR("Environment::Set() : environment already set!");
+        //        return false;
+        //    }
+        //    else {
+        //        g_environment = env;
+        //        return true;
+        //    }
+        //}
+        //static Environment* Get();
 
-        static void SetWinCallBack(const std::function<void(WinEvents, void* win, void* arg1, void* arg2)>& callback);
+       // static void SetWinCallBack(const std::function<void(WinEvents, void* win, void* arg1, void* arg2)>& callback);
     public:
         virtual bool PreInitGUI(const SR_UTILS_NS::Path& fontPath);
         virtual void SetGUIEnabled(bool enabled) { }

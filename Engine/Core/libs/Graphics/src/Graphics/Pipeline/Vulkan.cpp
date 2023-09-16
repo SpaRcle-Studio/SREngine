@@ -29,13 +29,6 @@ namespace SR_GRAPH_NS {
 
 #define SR_VRAM ("{" + std::to_string(Environment::Get()->GetVRAMUsage() / 1024 / 1024) + "} ")
 
-    void SRVulkan::SetGUIEnabled(bool enabled) {
-        if (auto&& vkImgui = dynamic_cast<SR_GRAPH_NS::Vulkan*>(Environment::Get())->GetVkImGUI()) {
-            vkImgui->SetSurfaceDirty();
-        }
-        VulkanKernel::SetGUIEnabled(enabled);
-    }
-
     bool Vulkan::PreInit(
             unsigned int smooth_samples,
             const std::string &appName,
@@ -46,15 +39,15 @@ namespace SR_GRAPH_NS {
 
         SRAssert2(m_requiredSampleCount >= 1 && m_requiredSampleCount <= 64, "Sample count must be greater 0 and less 64!");
 
-        EvoVulkan::Tools::VkFunctionsHolder::Instance().LogCallback = [](const std::string &msg) { SR_VULKAN_LOG(SR_VRAM + msg); };
-        EvoVulkan::Tools::VkFunctionsHolder::Instance().WarnCallback = [](const std::string &msg) { SR_WARN(SR_VRAM + msg); };
-        EvoVulkan::Tools::VkFunctionsHolder::Instance().ErrorCallback = [](const std::string &msg) { SR_VULKAN_ERROR(SR_VRAM + msg); };
-        EvoVulkan::Tools::VkFunctionsHolder::Instance().GraphCallback = [](const std::string &msg) { SR_VULKAN_MSG(SR_VRAM + msg); };
+        //EvoVulkan::Tools::VkFunctionsHolder::Instance().LogCallback = [](const std::string &msg) { SR_VULKAN_LOG(SR_VRAM + msg); };
+        //EvoVulkan::Tools::VkFunctionsHolder::Instance().WarnCallback = [](const std::string &msg) { SR_WARN(SR_VRAM + msg); };
+        //EvoVulkan::Tools::VkFunctionsHolder::Instance().ErrorCallback = [](const std::string &msg) { SR_VULKAN_ERROR(SR_VRAM + msg); };
+        //EvoVulkan::Tools::VkFunctionsHolder::Instance().GraphCallback = [](const std::string &msg) { SR_VULKAN_MSG(SR_VRAM + msg); };
 
-        EvoVulkan::Tools::VkFunctionsHolder::Instance().AssertCallback = [](const std::string &msg) {
-            SRHalt(SR_VRAM + msg);
-            return false;
-        };
+        //EvoVulkan::Tools::VkFunctionsHolder::Instance().AssertCallback = [](const std::string &msg) {
+        //    SRHalt(SR_VRAM + msg);
+        //    return false;
+        //};
 
         EvoVulkan::Tools::VkFunctionsHolder::Instance().CreateFolder = [](const std::string& path) -> bool {
             return SR_PLATFORM_NS::CreateFolder(path);
@@ -453,6 +446,7 @@ namespace SR_GRAPH_NS {
     }
 
     bool Vulkan::BeginDrawGUI() {
+
         ImGui_ImplVulkan_NewFrame();
 
     #ifdef SR_WIN32
@@ -955,11 +949,11 @@ namespace SR_GRAPH_NS {
         Environment::SetBuildState(isBuild);
     }
 
-    void Vulkan::SetCurrentFramebuffer(Types::Framebuffer* pFramebuffer) {
-        Environment::SetCurrentFramebuffer(pFramebuffer);
+    void Vulkan::SetCurrentFramebuffer(SR_GTYPES_NS::Framebuffer* pFrameBuffer) {
+        Environment::SetCurrentFramebuffer(pFrameBuffer);
 
-        if (pFramebuffer && pFramebuffer->GetId() != SR_ID_INVALID) {
-            m_currentVkFramebuffer = m_memory->m_FBOs[pFramebuffer->GetId() - 1];
+        if (pFrameBuffer && pFrameBuffer->GetId() != SR_ID_INVALID) {
+            m_currentVkFramebuffer = m_memory->m_FBOs[pFrameBuffer->GetId() - 1];
         }
         else {
             m_currentVkFramebuffer = nullptr;
@@ -987,160 +981,4 @@ namespace SR_GRAPH_NS {
 
     //!-----------------------------------------------------------------------------------------------------------------
 
-    bool SRVulkan::OnResize()  {
-        vkQueueWaitIdle(m_device->GetQueues()->GetGraphicsQueue());
-        vkDeviceWaitIdle(*m_device);
-
-        Environment::Get()->SetBuildState(false);
-
-        if (m_GUIEnabled) {
-            dynamic_cast<SR_GRAPH_NS::Vulkan*>(Environment::Get())->GetVkImGUI()->ReCreate();
-        }
-
-        return true;
-    }
-
-    EvoVulkan::Core::RenderResult SRVulkan::Render()  {
-        SR_TRACY_ZONE;
-
-        if (!m_swapchain->SurfaceIsAvailable()) {
-            return EvoVulkan::Core::RenderResult::Success;
-        }
-
-        auto&& prepareResult = PrepareFrame();
-        switch (prepareResult) {
-            case EvoVulkan::Core::FrameResult::OutOfDate:
-            case EvoVulkan::Core::FrameResult::Suboptimal: {
-                VK_LOG("SRVulkan::Render() : out of date...");
-                m_hasErrors |= !ReCreate(prepareResult);
-
-                if (m_hasErrors) {
-                    return EvoVulkan::Core::RenderResult::Fatal;
-                }
-
-                VK_LOG("SRVulkan::Render() : window are successfully resized!");
-
-                return EvoVulkan::Core::RenderResult::Success;
-            }
-            case EvoVulkan::Core::FrameResult::Success:
-                break;
-            default:
-                SRHalt("SRVulkan::Render() : unexcepted behaviour!");
-                return EvoVulkan::Core::RenderResult::Error;
-        }
-
-        for (auto&& submitInfo : m_submitQueue) {
-            SR_TRACY_ZONE_S("QueueSubmit");
-
-            auto&& vkSubmitInfo = submitInfo.ToVk();
-
-            if (auto result = vkQueueSubmit(m_device->GetQueues()->GetGraphicsQueue(), 1, &vkSubmitInfo, VK_NULL_HANDLE); result != VK_SUCCESS) {
-                VK_ERROR("renderFunction() : failed to queue submit (frame buffer)! Reason: " + EvoVulkan::Tools::Convert::result_to_description(result));
-
-                if (result == VK_ERROR_DEVICE_LOST) {
-                    return EvoVulkan::Core::RenderResult::DeviceLost;
-                }
-
-                return EvoVulkan::Core::RenderResult::Error;
-            }
-        }
-
-        auto&& vkImgui = dynamic_cast<SR_GRAPH_NS::Vulkan*>(Environment::Get())->GetVkImGUI();
-
-        m_submitInfo.commandBuffers.clear();
-
-        m_submitInfo.commandBuffers.emplace_back(m_drawCmdBuffs[m_currentBuffer]);
-
-        if (m_GUIEnabled && vkImgui && !vkImgui->IsSurfaceDirty()) {
-            m_submitInfo.commandBuffers.emplace_back(vkImgui->Render(m_currentBuffer));
-
-            /// AddSubmitQueue(vkImgui->GetSubmitInfo(
-            ///      GetSubmitInfo().signalSemaphoreCount,
-            ///      GetSubmitInfo().pSignalSemaphores
-            /// ));
-        }
-
-        {
-            SR_TRACY_ZONE_S("GraphicsQueueSubmit");
-
-            auto&& vkSubmitInfo = m_submitInfo.ToVk();
-
-            /// Submit to queue
-            if (auto result = vkQueueSubmit(m_device->GetQueues()->GetGraphicsQueue(), 1, &vkSubmitInfo, VK_NULL_HANDLE); result != VK_SUCCESS) {
-                VK_ERROR("renderFunction() : failed to queue submit! Reason: " + EvoVulkan::Tools::Convert::result_to_description(result));
-
-                if (result == VK_ERROR_DEVICE_LOST) {
-                    SR_PLATFORM_NS::Terminate();
-                }
-
-                return EvoVulkan::Core::RenderResult::Error;
-            }
-        }
-
-        switch (SubmitFrame()) {
-            case EvoVulkan::Core::FrameResult::Success:
-                return EvoVulkan::Core::RenderResult::Success;
-
-            case EvoVulkan::Core::FrameResult::Error:
-                return EvoVulkan::Core::RenderResult::Error;
-
-            case EvoVulkan::Core::FrameResult::OutOfDate: {
-                m_hasErrors |= !ReCreate(EvoVulkan::Core::FrameResult::OutOfDate);
-
-                if (m_hasErrors) {
-                    return EvoVulkan::Core::RenderResult::Fatal;
-                }
-                else {
-                    return EvoVulkan::Core::RenderResult::Success;
-                }
-            }
-            case EvoVulkan::Core::FrameResult::DeviceLost:
-                SR_PLATFORM_NS::Terminate();
-
-            default: {
-                SRAssertOnce(false);
-                return EvoVulkan::Core::RenderResult::Fatal;
-            }
-        }
-    }
-
-    bool SRVulkan::IsRayTracingRequired() const noexcept {
-    #ifdef SR_ANDROID
-        return false;
-    #else
-        return SR_UTILS_NS::Features::Instance().Enabled("RayTracing", false);
-    #endif
-
-    }
-
-    EvoVulkan::Core::FrameResult SRVulkan::PrepareFrame() {
-        SR_TRACY_ZONE;
-        return VulkanKernel::PrepareFrame();
-    }
-
-    EvoVulkan::Core::FrameResult SRVulkan::SubmitFrame() {
-        SR_TRACY_ZONE;
-        return VulkanKernel::SubmitFrame();
-    }
-
-    EvoVulkan::Core::FrameResult SRVulkan::QueuePresent() {
-        SR_TRACY_ZONE;
-        return VulkanKernel::QueuePresent();
-    }
-
-    EvoVulkan::Core::FrameResult SRVulkan::WaitIdle() {
-        SR_TRACY_ZONE;
-        return VulkanKernel::WaitIdle();
-    }
-
-    void SRVulkan::PollWindowEvents() {
-        auto&& pPipeline = dynamic_cast<SR_GRAPH_NS::Vulkan*>(Environment::Get());
-        if (!pPipeline) {
-            return; 
-        }
-
-        pPipeline->GetWindow().Do([](Window* pWindow) {
-            pWindow->PollEvents();
-        });
-    }
 }

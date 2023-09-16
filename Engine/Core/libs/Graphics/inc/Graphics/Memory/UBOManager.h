@@ -13,7 +13,7 @@ namespace SR_GTYPES_NS {
 }
 
 namespace SR_GRAPH_NS {
-    class Environment;
+    class Pipeline;
 }
 
 namespace SR_GRAPH_NS::Memory {
@@ -34,7 +34,7 @@ namespace SR_GRAPH_NS::Memory {
             UBO ubo;
             ShaderInfo shaderInfo;
 
-            void Validate();
+            void Validate() const;
         };
 
         VirtualUBOInfo() = default;
@@ -66,10 +66,11 @@ namespace SR_GRAPH_NS::Memory {
     */
     class SR_DLL_EXPORT UBOManager : public SR_UTILS_NS::Singleton<UBOManager> {
         friend class SR_UTILS_NS::Singleton<UBOManager>;
+        using Super = SR_UTILS_NS::Singleton<UBOManager>;
         using VirtualUBO = int32_t;
         using Descriptor = int32_t;
         using UBO = int32_t;
-        using PipelinePtr = SR_GRAPH_NS::Environment*;
+        using PipelinePtr = SR_HTYPES_NS::SharedPtr<Pipeline>;
     public:
         enum class BindResult : uint8_t {
             Success,
@@ -81,6 +82,7 @@ namespace SR_GRAPH_NS::Memory {
         ~UBOManager() override = default;
 
     public:
+        void SetPipeline(PipelinePtr pPipeline) { m_pipeline = std::move(pPipeline); }
         void SetIdentifier(void* pIdentifier);
         void* GetIdentifier() const noexcept;
 
@@ -99,7 +101,7 @@ namespace SR_GRAPH_NS::Memory {
         SR_NODISCARD VirtualUBO GenerateUnique() const;
 
     private:
-        PipelinePtr m_pipeline = nullptr;
+        PipelinePtr m_pipeline;
 
         VirtualUBOInfo* m_virtualTable = nullptr;
         uint32_t m_virtualTableSize = 0;

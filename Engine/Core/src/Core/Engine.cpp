@@ -6,7 +6,6 @@
 #include <Core/EngineResources.h>
 #include <Core/EngineMigrators.h>
 #include <Core/GUI/EditorGUI.h>
-#include <Core/UI/Button.h>
 #include <Core/World/EngineScene.h>
 
 #include <Utils/Events/EventManager.h>
@@ -14,10 +13,6 @@
 #include <Utils/World/SceneBuilder.h>
 #include <Utils/Common/Features.h>
 #include <Utils/ECS/ComponentManager.h>
-#include <Utils/DebugDraw.h>
-
-#include <Audio/Sound.h>
-#include <Audio/SoundManager.h>
 
 #include <Graphics/Pipeline/Environment.h>
 #include <Graphics/GUI/WidgetManager.h>
@@ -187,14 +182,15 @@ namespace SR_CORE_NS {
             DrawCallback();
         });
 
-        m_window->SetFocusCallback([this](bool focus) {
+        m_window->SetFocusCallback([](bool focus) {
             SR_SYSTEM_LOG(SR_UTILS_NS::Format("Window focus state: %s", focus ? "True" : "False"));
             SR_UTILS_NS::Input::Instance().Reload();
         });
 
         m_window->SetResizeCallback([this](auto&& size) {
-            m_pipeline->OnResize(size);
-            m_renderContext->OnResize(size);
+            if (m_renderContext) {
+                m_renderContext->OnResize(size);
+            }
         });
 
         m_window->SetScrollCallback([](double_t xOffset, double_t yOffset) {
@@ -202,22 +198,15 @@ namespace SR_CORE_NS {
         });
 
         m_window->SetCloseCallback([this]() {
-            m_pipeline->StopGUI();
-
-            if (auto&& pWin = m_window->GetImplementation<SR_GRAPH_NS::BasicWindowImpl>()) {
-                pWin->StopGUI();
-            }
-
             m_renderContext.Do([](auto&& pContext) {
                 pContext->Close();
             });
 
             SynchronizeFreeResources();
 
-            if (m_pipeline) {
-                m_pipeline->DeInitialize();
-                m_pipeline = nullptr;
-            }
+            m_renderContext.AutoFree([](auto&& pContext) {
+                delete pContext;
+            });
         });
 
         return true;
@@ -228,7 +217,7 @@ namespace SR_CORE_NS {
 
         SR_UTILS_NS::ResourceManager::Instance().SetWatchingEnabled(false);
 
-        std::atomic<bool> syncComplete(false);
+        std::atomic<bool> syncComplete = false;
 
         /** Ждем, пока все графические ресурсы не освободятся */
         auto&& thread = SR_HTYPES_NS::Thread::Factory::Instance().Create([&syncComplete, this]() {
@@ -240,7 +229,7 @@ namespace SR_CORE_NS {
 
             SR_UTILS_NS::ResourceManager::Instance().Synchronize(true);
 
-            while(!m_renderContext->IsEmpty()) {
+            while (!m_renderContext->IsEmpty()) {
                 SR_SYSTEM_LOG("Engine::SynchronizeFreeResources() : synchronizing resources (step " + std::to_string(++syncStep) + ")");
 
                 SR_UTILS_NS::ResourceManager::Instance().Synchronize(true);
@@ -280,86 +269,11 @@ namespace SR_CORE_NS {
 
     bool Engine::InitializeRender() {
         m_renderContext = new SR_GRAPH_NS::RenderContext(m_window);
-        m_pipeline = SR_GRAPH_NS::Environment::Get();
-
-        m_pipeline->SetRenderContext(m_renderContext);
 
         return m_window->GetThread()->Execute([this]() -> bool {
             if (!m_renderContext->Init()) {
                 SR_ERROR("Engine::InitializeRender() : failed to initialize the render context!");
                 return false;
-            }
-
-            SR_GRAPH("Engine::InitializeRender() : initializing the render environment...");
-
-            SR_GRAPH("Engine::InitializeRender() : pre-initializing...");
-            if (!m_pipeline->PreInit(
-                    64,
-                    "SpaRcle Engine", /// App name
-                    "SREngine",       /// Engine name
-                    SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Engine/Utilities/glslc.exe")))
-            {
-                SR_ERROR("Engine::InitializeRender() : failed to pre-initialize the environment!");
-                return false;
-            }
-
-            SR_GRAPH_LOG("Engine::InitializeRender() : set thread context as current...");
-            if (!m_pipeline->SetContextCurrent()) {
-                SR_ERROR("Engine::InitializeRender() : failed to set context!");
-                return false;
-            }
-
-            SR_GRAPH("Engine::InitializeRender() : initializing the environment...");
-            if (!m_pipeline->Init(m_window, false /** vsync */)) {
-                SR_ERROR("Engine::InitializeRender() : failed to initialize the environment!");
-                return false;
-            }
-
-            SR_GRAPH("Engine::InitializeRender() : post-initializing the environment...");
-
-            if (!m_pipeline->PostInit()) {
-                SR_ERROR("Engine::InitializeRender() : failed to post-initialize environment!");
-                return false;
-            }
-
-            SR_LOG("Engine::InitializeRender() : vendor is "   + m_pipeline->GetVendor());
-            SR_LOG("Engine::InitializeRender() : renderer is " + m_pipeline->GetRenderer());
-            SR_LOG("Engine::InitializeRender() : version is "  + m_pipeline->GetVersion());
-
-            if (m_pipeline->IsGUISupport()) {
-                if (m_pipeline->PreInitGUI(SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Engine/Fonts/tahoma.ttf"))) {
-                    ImGuiStyle & style = ImGui::GetStyle();
-
-                    if (auto&& theme = SR_GRAPH_NS::GUI::Theme::Load("Engine/Configs/Themes/Dark.xml")) {
-                        theme->Apply(style);
-                        delete theme;
-                    }
-                    else {
-                        SR_ERROR(" Engine::InitializeRender() : failed to load theme!");
-                    }
-
-                    const static auto iniPathEditor = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Editor/Configs/ImGuiEditor.config");
-                    const static auto iniPathWidgets = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Editor/Configs/EditorWidgets.xml");
-
-                    if (!iniPathEditor.Exists()) {
-                        iniPathEditor.Create();
-                        SR_UTILS_NS::Platform::Copy(SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Editor/Configs/ImGuiEditor.config"), iniPathEditor);
-                        SR_UTILS_NS::Platform::Copy(SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Editor/Configs/EditorWidgets.xml"), iniPathWidgets);
-                    }
-
-                    ImGui::GetIO().IniFilename = iniPathEditor.CStr();
-
-                    m_window->GetImplementation<SR_GRAPH_NS::BasicWindowImpl>()->InitGUI();
-
-                    if (!m_pipeline->InitGUI()) {
-                        SR_ERROR("Engine::InitializeRender() : failed to initialize the GUI!");
-                        return false;
-                    }
-                }
-                else {
-                    SR_ERROR("Engine::InitializeRender() : failed to pre-initialize the GUI!");
-                    return false;
-                }
             }
 
             SR_THIS_THREAD->GetContext()->SetValue<RenderContextPtr>(m_renderContext);
@@ -458,8 +372,6 @@ namespace SR_CORE_NS {
             pWindow->Close();
             delete pWindow;
         });
-
-        SR_GRAPH_NS::Environment::Destroy();
 
         SR_SCRIPTING_NS::EvoScriptManager::Instance().Update(0.f, true);
 

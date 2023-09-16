@@ -82,41 +82,6 @@ namespace SR_GRAPH_NS {
         }
     };
 
-    class SRVulkan : public EvoVulkan::Core::VulkanKernel {
-    protected:
-        ~SRVulkan() override = default;
-
-    public:
-        bool OnResize() override;
-
-        void PollWindowEvents() override;
-
-        SR_NODISCARD bool IsWindowValid() const override;
-        SR_NODISCARD bool IsRayTracingRequired() const noexcept override;
-
-        bool BuildCmdBuffers() override {
-            return true;
-        }
-
-        bool OnComplete() override {
-            return true;
-        }
-
-        void SetGUIEnabled(bool enabled) override;
-
-        bool Destroy() override {
-            return EvoVulkan::Core::VulkanKernel::Destroy();
-        }
-
-    private:
-        EvoVulkan::Core::RenderResult Render() override;
-        EvoVulkan::Core::FrameResult PrepareFrame() override;
-        EvoVulkan::Core::FrameResult SubmitFrame() override;
-        EvoVulkan::Core::FrameResult QueuePresent() override;
-        EvoVulkan::Core::FrameResult WaitIdle() override;
-
-    };
-
     class Vulkan : public Environment {
     public:
         Vulkan(Vulkan &) = delete;

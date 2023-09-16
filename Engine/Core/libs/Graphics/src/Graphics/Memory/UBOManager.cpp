@@ -4,11 +4,11 @@
 
 #include <Graphics/Memory/UBOManager.h>
 #include <Graphics/Types/Shader.h>
-#include <Graphics/Pipeline/Environment.h>
+#include <Graphics/Pipeline/Pipeline.h>
 
 namespace SR_GRAPH_NS::Memory {
     UBOManager::UBOManager()
-        : m_pipeline(Environment::Get())
+        : Super()
     {
         m_virtualTableSize = 1024 * 64;
         m_virtualTable = new VirtualUBOInfo[m_virtualTableSize];
@@ -57,7 +57,7 @@ namespace SR_GRAPH_NS::Memory {
             return SR_ID_INVALID;
         }
 
-        VirtualUBOInfo::ShaderInfo shaderInfo;
+        VirtualUBOInfo::ShaderInfo shaderInfo = { };
         shaderInfo.pShader = pShader;
         shaderInfo.shaderProgram = shaderProgram;
         shaderInfo.samples = samples;
@@ -113,7 +113,7 @@ namespace SR_GRAPH_NS::Memory {
         return SR_ID_INVALID;
     }
 
-    bool UBOManager::AllocMemory(UBO *ubo, Descriptor *descriptor, uint32_t uboSize, uint32_t samples, int32_t shader) {
+    bool UBOManager::AllocMemory(UBO *ubo, Descriptor* descriptor, uint32_t uboSize, uint32_t samples, int32_t shader) {
         auto&& shaderIdStash = m_pipeline->GetCurrentShaderId();
 
         m_pipeline->SetCurrentShaderId(shader);
@@ -193,7 +193,7 @@ namespace SR_GRAPH_NS::Memory {
         /// если не нашли камеру, то дублируем память под новую камеру
         if (!isFound)
         {
-            VirtualUBOInfo::ShaderInfo shaderInfo;
+            VirtualUBOInfo::ShaderInfo shaderInfo = { };
             shaderInfo.pShader = pShader;
             shaderInfo.shaderProgram = pShader->GetId();
             shaderInfo.uboSize = pShader->GetUBOBlockSize();
@@ -263,7 +263,7 @@ namespace SR_GRAPH_NS::Memory {
             return virtualUbo;
         }
 
-        VirtualUBOInfo::ShaderInfo shaderInfo;
+        VirtualUBOInfo::ShaderInfo shaderInfo = { };
         shaderInfo.pShader = pShader;
         shaderInfo.shaderProgram = shaderProgram;
         shaderInfo.samples = samples;
@@ -291,7 +291,7 @@ namespace SR_GRAPH_NS::Memory {
         }
     }
 
-    void VirtualUBOInfo::Data::Validate() {
+    void VirtualUBOInfo::Data::Validate() const {
         SRAssert(ubo != SR_ID_INVALID || descriptor != SR_ID_INVALID || (shaderInfo.uboSize == 0 && shaderInfo.samples == 0));
     }
 }

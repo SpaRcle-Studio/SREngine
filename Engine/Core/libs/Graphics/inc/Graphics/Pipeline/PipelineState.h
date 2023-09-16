@@ -48,17 +48,17 @@ namespace SR_GRAPH_NS {
         int32_t UBOId = SR_ID_INVALID;
         int32_t FBOId = SR_ID_INVALID;
         int32_t descriptorSetId = SR_ID_INVALID;
-        int32_t shaderID = SR_ID_INVALID;
+        int32_t shaderId = SR_ID_INVALID;
 
         /// Количество вызовов Draw и подобное
-        uint64_t drawCalls = 0;
+        mutable uint64_t drawCalls = 0;
         /// Количество всех обращений к API в процессе отрисовки
-        uint64_t operations = 0;
+        mutable uint64_t operations = 0;
         /// Объем данных, который был передан на видеокарту в процессе отрисовки
-        uint64_t transferredMemory = 0;
+        mutable uint64_t transferredMemory = 0;
 
-        uint64_t usedTextures = 0;
-        uint64_t usedShaders = 0;
+        mutable uint64_t usedTextures = 0;
+        mutable uint64_t usedShaders = 0;
 
     };
 }

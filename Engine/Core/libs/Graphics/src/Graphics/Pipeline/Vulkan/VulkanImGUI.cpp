@@ -154,7 +154,7 @@ namespace SR_GRAPH_NS::VulkanTypes {
             return;
         }
 
-        auto&& pVulkanBackend = ImGui::GetCurrentContext() ? (ImGui_ImplVulkan_Data*)ImGui::GetIO().BackendRendererUserData : NULL;
+        auto&& pVulkanBackend = ImGui::GetCurrentContext() ? (ImGui_ImplVulkan_Data*)ImGui::GetIO().BackendRendererUserData : nullptr;
 
         if (pVulkanBackend) {
             ImGui_ImplVulkan_Shutdown();

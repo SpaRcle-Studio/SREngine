@@ -78,16 +78,16 @@ void SR_GRAPH_NS::Environment::OnMultiSampleChanged() {
     m_renderContext->OnMultiSampleChanged();
 }
 
-void Framework::Graphics::Environment::SetWinCallBack(const std::function<void(WinEvents, void * , void * , void * )>& callback) {
-    g_callback = std::move(callback);
-}
+//void Framework::Graphics::Environment::SetWinCallBack(const std::function<void(WinEvents, void * , void * , void * )>& callback) {
+//    g_callback = std::move(callback);
+//}
 
-Framework::Graphics::Environment *Framework::Graphics::Environment::Get() {
-    if (g_environment == nullptr) {
-        g_environment = new Vulkan();
-    }
-    return g_environment;
-}
+//Framework::Graphics::Environment *Framework::Graphics::Environment::Get() {
+//    if (g_environment == nullptr) {
+//        g_environment = new Vulkan();
+//    }
+//    return g_environment;
+//}
 
 uint8_t Framework::Graphics::Environment::GetSamplesCount() const {
     SRAssert(m_currentSampleCount >= 1 && m_currentSampleCount <= 64);
@@ -102,9 +102,9 @@ void Framework::Graphics::Environment::SetCurrentFramebuffer(SR_GTYPES_NS::Frame
     }
 }
 
-void Framework::Graphics::Environment::Destroy() {
-    if (g_environment) {
-        delete g_environment;
-        g_environment = nullptr;
-    }
-}
+//void Framework::Graphics::Environment::Destroy() {
+//    if (g_environment) {
+//        delete g_environment;
+//        g_environment = nullptr;
+//    }
+//}
