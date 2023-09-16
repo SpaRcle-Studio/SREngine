@@ -289,4 +289,50 @@ namespace SR_GRAPH_NS {
 
         return true;
     }
+
+    VkCommandBuffer VulkanImGuiOverlay::Render(uint32_t frame) {
+        auto&& buffer = m_cmdBuffs[frame];
+
+        vkResetCommandPool(*m_device, m_cmdPools[frame], 0);
+
+        if (m_tracyEnabled) {
+            vkBeginCommandBuffer(buffer, &m_cmdBuffBI);
+            {
+                SR_TRACY_VK_FRAME_ZONE_N(buffer, "VkImGUI");
+
+                m_renderPassBI.framebuffer = m_frameBuffs[frame];
+                vkCmdBeginRenderPass(m_cmdBuffs[frame], &m_renderPassBI, VK_SUBPASS_CONTENTS_INLINE);
+
+                if (auto&& drawData = ImGui::GetDrawData()) {
+                    ImGui_ImplVulkan_RenderDrawData(drawData, m_cmdBuffs[frame]);
+                }
+                else {
+                    VK_WARN("VkImGUI::Render() : imgui draw data is nullptr!");
+                }
+
+                vkCmdEndRenderPass(m_cmdBuffs[frame]);
+            }
+            SR_TRACY_VK_COLLECT(buffer);
+        }
+        else {
+            vkBeginCommandBuffer(buffer, &m_cmdBuffBI);
+            {
+                m_renderPassBI.framebuffer = m_frameBuffs[frame];
+                vkCmdBeginRenderPass(m_cmdBuffs[frame], &m_renderPassBI, VK_SUBPASS_CONTENTS_INLINE);
+
+                if (auto&& drawData = ImGui::GetDrawData()) {
+                    ImGui_ImplVulkan_RenderDrawData(drawData, m_cmdBuffs[frame]);
+                }
+                else {
+                    VK_WARN("VkImGUI::Render() : imgui draw data is nullptr!");
+                }
+
+                vkCmdEndRenderPass(m_cmdBuffs[frame]);
+            }
+        }
+
+        vkEndCommandBuffer(m_cmdBuffs[frame]);
+
+        return buffer;
+    }
 }

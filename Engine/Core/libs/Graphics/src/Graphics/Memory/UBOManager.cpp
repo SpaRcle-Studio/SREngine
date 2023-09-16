@@ -119,11 +119,11 @@ namespace SR_GRAPH_NS::Memory {
         m_pipeline->SetCurrentShaderId(shader);
 
         const static std::vector<uint64_t> uniformTypes = {
-                static_cast<uint64_t>(VulkanTools::CastAbsDescriptorTypeToVk(DescriptorType::Uniform))
+            static_cast<uint64_t>(VulkanTools::CastAbsDescriptorTypeToVk(DescriptorType::Uniform))
         };
 
         const static std::vector<uint64_t> combinedImageTypes = {
-                static_cast<uint64_t>(VulkanTools::CastAbsDescriptorTypeToVk(DescriptorType::CombinedImage))
+            static_cast<uint64_t>(VulkanTools::CastAbsDescriptorTypeToVk(DescriptorType::CombinedImage))
         };
 
         if (uboSize > 0) {
@@ -205,10 +205,10 @@ namespace SR_GRAPH_NS::Memory {
             }
 
             info.m_data.emplace_back(VirtualUBOInfo::Data {
-                    m_ignoreIdentifier ? nullptr : m_identifier,
-                    descriptor,
-                    ubo,
-                    shaderInfo
+                m_ignoreIdentifier ? nullptr : m_identifier,
+                descriptor,
+                ubo,
+                shaderInfo
             });
 
             result = BindResult::Duplicated;
@@ -270,10 +270,10 @@ namespace SR_GRAPH_NS::Memory {
         shaderInfo.uboSize = uboSize;
 
         info.m_data.emplace_back(VirtualUBOInfo::Data {
-                m_ignoreIdentifier ? nullptr : m_identifier,
-                descriptor,
-                ubo,
-                shaderInfo
+            m_ignoreIdentifier ? nullptr : m_identifier,
+            descriptor,
+            ubo,
+            shaderInfo
         });
 
         EVK_POP_LOG_LEVEL();
@@ -281,7 +281,7 @@ namespace SR_GRAPH_NS::Memory {
         return virtualUbo;
     }
 
-    void UBOManager::FreeMemory(UBOManager::UBO *ubo, UBOManager::Descriptor *descriptor) {
+    void UBOManager::FreeMemory(UBOManager::UBO* ubo, UBOManager::Descriptor *descriptor) {
         if (*ubo != SR_ID_INVALID && !m_pipeline->FreeUBO(ubo)) {
             SR_ERROR("UBOManager::FreeMemory() : failed to free ubo!");
         }

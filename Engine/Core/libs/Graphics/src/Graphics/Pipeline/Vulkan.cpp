@@ -80,7 +80,7 @@ namespace SR_GRAPH_NS {
 
         m_imgui = new VulkanTypes::VkImGUI(this);
 
-        m_kernel = new SRVulkan();
+        /// m_kernel = new SRVulkan();
 
         SR_INFO("Vulkan::PreInit() : pre-initializing vulkan...");
 
@@ -141,17 +141,6 @@ namespace SR_GRAPH_NS {
     #endif
 
         return true;
-    }
-
-    bool SRVulkan::IsWindowValid() const {
-        auto&& pPipeline = dynamic_cast<SR_GRAPH_NS::Vulkan*>(Environment::Get());
-        if (!pPipeline) {
-            return false;
-        }
-
-        return pPipeline->GetWindow().Do<bool>([](Window* pWindow) -> bool {
-            return pWindow->IsValid();
-        }, false);
     }
 
     bool Vulkan::OnResize(const Helper::Math::UVector2 &size) {

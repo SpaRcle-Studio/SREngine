@@ -26,11 +26,13 @@ namespace SR_GRAPH_NS {
 
     public:
         explicit Overlay(PipelinePtr pPipeline);
+        virtual ~Overlay() = default;
 
     public:
         SR_NODISCARD virtual bool Init() = 0;
         SR_NODISCARD virtual bool IsUndockingActive() const = 0;
         SR_NODISCARD virtual bool ReCreate() = 0;
+        SR_NODISCARD bool IsSurfaceDirty() const noexcept { return m_surfaceDirty; }
 
         SR_NODISCARD virtual std::string GetName() const = 0;
 

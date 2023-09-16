@@ -56,7 +56,7 @@ namespace SR_GRAPH_NS {
 
         PrepareRender();
 
-        if (IsDirty() || GetPipeline()->IsNeedReBuild()) {
+        if (IsDirty() || GetPipeline()->IsDirty()) {
             Build();
         }
 
@@ -134,7 +134,7 @@ namespace SR_GRAPH_NS {
     void RenderScene::Build() {
         SR_TRACY_ZONE_N("Build render");
 
-        GetPipeline()->ClearFramebuffersQueue();
+        GetPipeline()->ClearFrameBuffersQueue();
 
         m_hasDrawData = false;
 
@@ -146,7 +146,7 @@ namespace SR_GRAPH_NS {
             data = data > 1 ? 1 : 0;
         });
 
-        GetPipeline()->SetBuildState(true);
+        GetPipeline()->SetDirty(true);
     }
 
     void RenderScene::Update() noexcept {
@@ -189,7 +189,7 @@ namespace SR_GRAPH_NS {
     void RenderScene::Overlay() {
         SR_TRACY_ZONE;
 
-        GetPipeline()->SetGUIEnabled(m_bOverlay);
+        GetPipeline()->SetOverlayEnabled(m_bOverlay);
 
         if (!m_bOverlay) {
             return;
@@ -387,24 +387,24 @@ namespace SR_GRAPH_NS {
     void RenderScene::RenderBlackScreen() {
         SR_TRACY_ZONE;
 
-        auto&& pipeline = GetPipeline();
+        auto&& pPipeline = GetPipeline();
 
-        pipeline->SetCurrentFramebuffer(nullptr);
+        pPipeline->SetCurrentFrameBuffer(nullptr);
 
-        for (uint8_t i = 0; i < pipeline->GetCountBuildIter(); ++i) {
-            pipeline->SetBuildIteration(i);
+        for (uint8_t i = 0; i < pPipeline->GetBuildIterationsCount(); ++i) {
+            pPipeline->SetBuildIteration(i);
 
-            pipeline->BindFrameBuffer(nullptr);
-            pipeline->ClearBuffers(0.0f, 0.0f, 0.0f, 1.f, 1.f, 1);
+            pPipeline->BindFrameBuffer(nullptr);
+            pPipeline->ClearBuffers(0.0f, 0.0f, 0.0f, 1.f, 1.f, 1);
 
-            pipeline->BeginCmdBuffer();
+            pPipeline->BeginCmdBuffer();
             {
-                pipeline->BeginRender();
-                pipeline->SetViewport();
-                pipeline->SetScissor();
-                pipeline->EndRender();
+                pPipeline->BeginRender();
+                pPipeline->SetViewport();
+                pPipeline->SetScissor();
+                pPipeline->EndRender();
             }
-            pipeline->EndCmdBuffer();
+            pPipeline->EndCmdBuffer();
         }
     }
 
@@ -416,7 +416,7 @@ namespace SR_GRAPH_NS {
         m_bOverlay = enabled;
     }
 
-    MeshCluster &RenderScene::GetOpaque() {
+    MeshCluster& RenderScene::GetOpaque() {
         return m_opaque;
     }
 

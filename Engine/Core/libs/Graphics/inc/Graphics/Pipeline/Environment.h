@@ -335,8 +335,8 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD virtual SR_FORCE_INLINE bool FreeVBO(int32_t* ID) const { return false; }
         SR_NODISCARD virtual SR_FORCE_INLINE bool FreeIBO(int32_t* ID) const { return false; }
         SR_NODISCARD virtual SR_FORCE_INLINE bool FreeUBO(int32_t* ID) const { return false; }
-        SR_NODISCARD virtual bool FreeVAO(int32_t* VAO) const { return false; }
         SR_NODISCARD virtual bool FreeFBO(uint32_t FBO) const { return false; }
+        SR_NODISCARD virtual bool FreeVAO(int32_t* VAO) const { return false; }
         SR_NODISCARD virtual bool FreeRBO(uint32_t RBO) const { return false; }
         SR_NODISCARD virtual bool FreeTextures(int32_t* IDs, uint32_t count) const { return false; }
         SR_NODISCARD virtual bool FreeTexture(int32_t* id) const { return false; }

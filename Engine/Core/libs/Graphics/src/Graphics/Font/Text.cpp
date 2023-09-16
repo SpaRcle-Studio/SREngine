@@ -128,11 +128,19 @@ namespace SR_GTYPES_NS {
         m_width = textBuilder.GetWidth();
         m_height = textBuilder.GetHeight();
 
-        m_id = m_pipeline->CalculateTexture(textBuilder.GetData(),
-            textBuilder.GetColorFormat(), m_width, m_height, TextureFilter::NEAREST,
-            TextureCompression::None, 1,
-            true, false
-        );
+        SR_GRAPH_NS::SRTextureCreateInfo textureCreateInfo;
+
+        textureCreateInfo.pData = textBuilder.GetData();
+        textureCreateInfo.format = textBuilder.GetColorFormat();
+        textureCreateInfo.width = m_width;
+        textureCreateInfo.height = m_height;
+        textureCreateInfo.compression = TextureCompression::None;
+        textureCreateInfo.filter = TextureFilter::NEAREST;
+        textureCreateInfo.mipLevels = 1;
+        textureCreateInfo.cpuUsage = false;
+        textureCreateInfo.alpha = true;
+
+        m_id = m_pipeline->AllocateTexture(textureCreateInfo);
 
         EVK_POP_LOG_LEVEL();
 

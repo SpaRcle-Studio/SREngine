@@ -105,6 +105,8 @@ namespace SR_GRAPH_NS {
         }
 
         Memory::UBOManager::Instance().SetPipeline(m_pipeline);
+        Memory::CameraManager::Instance().SetPipeline(m_pipeline);
+        Memory::ShaderProgramManager::Instance().SetPipeline(m_pipeline);
 
         /// ----------------------------------------------------------------------------
 
@@ -424,26 +426,20 @@ namespace SR_GRAPH_NS {
         pipelinePreInitInfo.GLSLCompilerPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Engine/Utilities/glslc.exe");
 
         if (!m_pipeline->PreInit(pipelinePreInitInfo)) {
-            SR_ERROR("Engine::InitializeRender() : failed to pre-initialize the environment!");
+            SR_ERROR("Engine::InitializeRender() : failed to pre-initialize the pipeline!");
             return false;
         }
 
-        SR_GRAPH_LOG("Engine::InitializeRender() : set thread context as current...");
-        if (!m_pipeline->SetContextCurrent()) {
-            SR_ERROR("Engine::InitializeRender() : failed to set context!");
-            return false;
-        }
-
-        SR_GRAPH("Engine::InitializeRender() : initializing the environment...");
+        SR_GRAPH("Engine::InitializeRender() : initializing the pipeline...");
         if (!m_pipeline->Init()) {
-            SR_ERROR("Engine::InitializeRender() : failed to initialize the environment!");
+            SR_ERROR("Engine::InitializeRender() : failed to initialize the pipeline!");
             return false;
         }
 
-        SR_GRAPH("Engine::InitializeRender() : post-initializing the environment...");
+        SR_GRAPH("Engine::InitializeRender() : post-initializing the pipeline...");
 
         if (!m_pipeline->PostInit()) {
-            SR_ERROR("Engine::InitializeRender() : failed to post-initialize environment!");
+            SR_ERROR("Engine::InitializeRender() : failed to post-initialize pipeline!");
             return false;
         }
 

@@ -19,7 +19,9 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD bool Init() override;
         SR_NODISCARD bool ReCreate() override;
 
-        SR_NODISCARD virtual std::string GetName() const { return "Vulkan ImGUI"; }
+        SR_NODISCARD std::string GetName() const override { return "Vulkan ImGUI"; }
+
+        SR_NODISCARD VkCommandBuffer Render(uint32_t frame);
 
         void Destroy() override;
 

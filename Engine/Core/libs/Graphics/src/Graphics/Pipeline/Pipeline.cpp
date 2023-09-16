@@ -4,6 +4,7 @@
 
 #include <Graphics/Pipeline/Pipeline.h>
 #include <Graphics/Overlay/Overlay.h>
+#include <Graphics/Types/Shader.h>
 
 #ifdef SR_DEBUG
     #define SR_PIPELINE_RENDER_GUARD(ret)                   \
@@ -20,6 +21,7 @@ namespace SR_GRAPH_NS {
     Pipeline::Pipeline(const RenderContextPtr& pContext)
         : Super(this, SR_UTILS_NS::SharedPtrPolicy::Manually)
         , m_renderContext(pContext)
+        , m_window(pContext->GetWindow())
     { }
 
     void Pipeline::DrawFrame() {
@@ -68,6 +70,7 @@ namespace SR_GRAPH_NS {
     }
 
     void Pipeline::ClearFrameBuffersQueue() {
+        m_fboQueue.Clear();
         ++m_state.operations;
     }
 
@@ -100,7 +103,7 @@ namespace SR_GRAPH_NS {
         ++m_state.operations;
     }
 
-    void Pipeline::UpdateUBO(void* pData, uint64_t size) {
+    void Pipeline::UpdateUBO(uint32_t UBO, void* pData, uint64_t size) {
         ++m_state.operations;
         m_state.transferredMemory += size;
     }
@@ -123,6 +126,12 @@ namespace SR_GRAPH_NS {
     void Pipeline::BindDescriptorSet(uint32_t descriptorSet) {
         ++m_state.operations;
         m_state.descriptorSetId = static_cast<int32_t>(descriptorSet);
+    }
+
+    void Pipeline::UseShader(uint32_t shaderProgram) {
+        ++m_state.operations;
+        ++m_state.usedShaders;
+        m_state.shaderId = static_cast<int32_t>(shaderProgram);
     }
 
     void Pipeline::OnResize(const SR_MATH_NS::UVector2& size) {
@@ -223,7 +232,7 @@ namespace SR_GRAPH_NS {
                 continue;
             }
 
-            SR_ERROR("Pipeline::ReCreateOverlay() : failed to re-create \"" + pOverlay->GetName() + "\" overlay!");
+            PipelineError("Pipeline::ReCreateOverlay() : failed to re-create \"" + pOverlay->GetName() + "\" overlay!");
         }
     }
 
@@ -241,5 +250,58 @@ namespace SR_GRAPH_NS {
         if (!m_dirty) {
             m_buildState = m_state;
         }
+    }
+
+    bool Pipeline::PreInit(const PipelinePreInitInfo& info) {
+        m_requiredSampleCount = info.samplesCount;
+        SRAssert2(m_requiredSampleCount >= 1 && m_requiredSampleCount <= 64, "Sample count must be greater 0 and less or equals 64!");
+
+        return true;
+    }
+
+    SR_HTYPES_NS::SharedPtr<Overlay> Pipeline::GetOverlay(OverlayType overlayType) const {
+        auto&& pIt = m_overlays.find(overlayType);
+        if (pIt == m_overlays.end() || !pIt->second) {
+            return SR_HTYPES_NS::SharedPtr<Overlay>();
+        }
+        return pIt->second;
+    }
+
+    void Pipeline::PipelineError(const std::string& msg) const {
+        ++m_errorsCount;
+        SR_ERROR(msg);
+    }
+
+    void Pipeline::ResetDescriptorSet() {
+        ++m_state.operations;
+        m_state.descriptorSetId = SR_ID_INVALID;
+    }
+
+    void Pipeline::UnUseShader() {
+        ++m_state.operations;
+        m_state.shaderId = SR_ID_INVALID;
+        m_state.pShader = nullptr;
+    }
+
+    void Pipeline::UpdateDescriptorSets(uint32_t descriptorSet, const SRDescriptorUpdateInfos& updateInfo) {
+        ++m_state.operations;
+    }
+
+    void Pipeline::SetOverlayEnabled(bool enabled) {
+        ++m_state.operations;
+    }
+
+    void Pipeline::SetCurrentFrameBuffer(Pipeline::FramebufferPtr pFrameBuffer) {
+        ++m_state.operations;
+        m_state.pFramebuffer = pFrameBuffer;
+
+        if (m_state.pFramebuffer) {
+            SRAssert(!m_state.pFramebuffer->IsDirty());
+        }
+    }
+
+    void Pipeline::BindFrameBuffer(Pipeline::FramebufferPtr pFBO) {
+        ++m_state.operations;
+        m_state.pFramebuffer = pFBO;
     }
 }

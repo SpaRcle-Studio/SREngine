@@ -14,6 +14,26 @@ namespace SR_GTYPES_NS {
 }
 
 namespace SR_GRAPH_NS {
+    struct SRTextureCreateInfo {
+        uint8_t* pData = nullptr;
+        ImageFormat format = ImageFormat::None;
+        TextureFilter filter = TextureFilter::Unknown;
+        TextureCompression compression = TextureCompression::None;
+        uint32_t width = 0;
+        uint32_t height = 0;
+        uint8_t mipLevels = 0;
+        bool alpha = false;
+        bool cpuUsage = false;
+    };
+
+    struct SRDescriptorUpdateInfo {
+        DescriptorType descriptorType = DescriptorType::Unknown;
+        uint32_t binding = 0;
+        uint32_t ubo = 0;
+    };
+
+    using SRDescriptorUpdateInfos = std::vector<SRDescriptorUpdateInfo>;
+
     struct PipelinePreInitInfo {
         uint32_t samplesCount = 0;
         std::string appName;
@@ -49,16 +69,26 @@ namespace SR_GRAPH_NS {
         int32_t FBOId = SR_ID_INVALID;
         int32_t descriptorSetId = SR_ID_INVALID;
         int32_t shaderId = SR_ID_INVALID;
+        int32_t frameBufferId = SR_ID_INVALID;
+        int32_t frameBufferLayer = SR_ID_INVALID;
 
         /// Количество вызовов Draw и подобное
-        mutable uint64_t drawCalls = 0;
+        mutable uint32_t drawCalls = 0;
         /// Количество всех обращений к API в процессе отрисовки
-        mutable uint64_t operations = 0;
-        /// Объем данных, который был передан на видеокарту в процессе отрисовки
-        mutable uint64_t transferredMemory = 0;
+        mutable uint32_t operations = 0;
 
-        mutable uint64_t usedTextures = 0;
-        mutable uint64_t usedShaders = 0;
+        /// Объем данных, который был передан на видеокарту в процессе отрисовки
+        mutable uint32_t transferredMemory = 0;
+        /// Объем выделенной памяти
+        mutable uint32_t allocatedMemory = 0;
+
+        mutable uint32_t usedTextures = 0;
+        mutable uint32_t usedShaders = 0;
+
+        /// Сколько было произведено выделений памяти
+        mutable uint32_t allocations = 0;
+        /// Сколько было произведено удалений памяти
+        mutable uint32_t deletions = 0;
 
     };
 }

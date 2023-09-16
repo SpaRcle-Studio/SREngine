@@ -94,7 +94,7 @@ namespace SR_GTYPES_NS {
                 return false;
             }
 
-            if (m_VBO = m_pipeline->CalculateVBO((void*)vertices.data(), type, m_countVertices); m_VBO == SR_ID_INVALID) {
+            if (m_VBO = m_pipeline->AllocateVBO((void*)vertices.data(), type, m_countVertices); m_VBO == SR_ID_INVALID) {
                 SR_ERROR("IndexedMesh::CalculateVBO() : failed calculate VBO \"" + GetGeometryName() + "\" mesh!");
                 m_hasErrors = true;
                 return false;

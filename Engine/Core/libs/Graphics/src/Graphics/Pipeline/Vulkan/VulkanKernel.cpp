@@ -24,11 +24,21 @@ namespace SR_GRAPH_NS {
         return true;
     }
 
+    bool VulkanKernel::IsWindowValid() const {
+        if (!m_pipeline) {
+            return false;
+        }
+
+        return m_pipeline->GetWindow().Do<bool>([](Window* pWindow) -> bool {
+            return pWindow->IsValid();
+        }, false);
+    }
+
     void VulkanKernel::SetGUIEnabled(bool enabled) {
         if (m_pipeline) {
             m_pipeline->SetOverlaySurfaceDirty();
         }
-        VulkanKernel::SetGUIEnabled(enabled);
+        Super::SetGUIEnabled(enabled);
     }
 
     EvoVulkan::Core::RenderResult VulkanKernel::Render()  {
@@ -76,14 +86,14 @@ namespace SR_GRAPH_NS {
             }
         }
 
-        auto&& vkImgui = dynamic_cast<SR_GRAPH_NS::Vulkan*>(Environment::Get())->GetVkImGUI();
+        auto&& pImGuiOverlay = m_pipeline->GetOverlay(OverlayType::ImGui).DynamicCast<VulkanImGuiOverlay>();
 
         m_submitInfo.commandBuffers.clear();
 
         m_submitInfo.commandBuffers.emplace_back(m_drawCmdBuffs[m_currentBuffer]);
 
-        if (m_GUIEnabled && vkImgui && !vkImgui->IsSurfaceDirty()) {
-            m_submitInfo.commandBuffers.emplace_back(vkImgui->Render(m_currentBuffer));
+        if (m_GUIEnabled && pImGuiOverlay && !pImGuiOverlay->IsSurfaceDirty()) {
+            m_submitInfo.commandBuffers.emplace_back(pImGuiOverlay->Render(m_currentBuffer));
 
             /// AddSubmitQueue(vkImgui->GetSubmitInfo(
             ///      GetSubmitInfo().signalSemaphoreCount,
@@ -135,42 +145,41 @@ namespace SR_GRAPH_NS {
         }
     }
 
-    bool SRVulkan::IsRayTracingRequired() const noexcept {
-#ifdef SR_ANDROID
+    bool VulkanKernel::IsRayTracingRequired() const noexcept {
+    #ifdef SR_ANDROID
         return false;
-#else
+    #else
         return SR_UTILS_NS::Features::Instance().Enabled("RayTracing", false);
-#endif
+    #endif
 
     }
 
-    EvoVulkan::Core::FrameResult SRVulkan::PrepareFrame() {
+    EvoVulkan::Core::FrameResult VulkanKernel::PrepareFrame() {
         SR_TRACY_ZONE;
-        return VulkanKernel::PrepareFrame();
+        return Super::PrepareFrame();
     }
 
-    EvoVulkan::Core::FrameResult SRVulkan::SubmitFrame() {
+    EvoVulkan::Core::FrameResult VulkanKernel::SubmitFrame() {
         SR_TRACY_ZONE;
-        return VulkanKernel::SubmitFrame();
+        return Super::SubmitFrame();
     }
 
-    EvoVulkan::Core::FrameResult SRVulkan::QueuePresent() {
+    EvoVulkan::Core::FrameResult VulkanKernel::QueuePresent() {
         SR_TRACY_ZONE;
-        return VulkanKernel::QueuePresent();
+        return Super::QueuePresent();
     }
 
-    EvoVulkan::Core::FrameResult SRVulkan::WaitIdle() {
+    EvoVulkan::Core::FrameResult VulkanKernel::WaitIdle() {
         SR_TRACY_ZONE;
-        return VulkanKernel::WaitIdle();
+        return Super::WaitIdle();
     }
 
-    void SRVulkan::PollWindowEvents() {
-        auto&& pPipeline = dynamic_cast<SR_GRAPH_NS::Vulkan*>(Environment::Get());
-        if (!pPipeline) {
+    void VulkanKernel::PollWindowEvents() {
+        if (!m_pipeline) {
             return;
         }
 
-        pPipeline->GetWindow().Do([](Window* pWindow) {
+        m_pipeline->GetWindow().Do([](Window* pWindow) {
             pWindow->PollEvents();
         });
     }
