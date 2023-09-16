@@ -44,6 +44,7 @@ namespace SR_GRAPH_NS {
 
     void Pipeline::EndRender() {
         SR_PIPELINE_RENDER_GUARD(void())
+        m_isRenderState = false;
         ++m_state.operations;
     }
 
@@ -64,9 +65,8 @@ namespace SR_GRAPH_NS {
         return true;
     }
 
-    bool Pipeline::EndCmdBuffer() {
+    void Pipeline::EndCmdBuffer() {
         ++m_state.operations;
-        return true;
     }
 
     void Pipeline::ClearFrameBuffersQueue() {
@@ -221,7 +221,7 @@ namespace SR_GRAPH_NS {
     }
 
     bool Pipeline::InitOverlay() {
-        return false;
+        return true;
     }
 
     void Pipeline::ReCreateOverlay() {

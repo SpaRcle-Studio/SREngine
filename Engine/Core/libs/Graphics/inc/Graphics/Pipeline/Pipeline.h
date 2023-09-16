@@ -66,7 +66,7 @@ namespace SR_GRAPH_NS {
         virtual bool BeginCmdBuffer();
 
         /// Конец записи в буффер комманд. Разделение необходимо некоторым графическим API
-        virtual bool EndCmdBuffer();
+        virtual void EndCmdBuffer();
 
         /// Начало рендера в кадровый буффер или в SwapChain
         virtual bool BeginRender();

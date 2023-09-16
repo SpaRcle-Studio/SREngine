@@ -303,7 +303,7 @@ namespace SR_GRAPH_NS {
     }
 
     LRESULT Win32Window::WndProcedure(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
-        if (!WinAPI::ImGui_WndProcHandler(hWnd, message, wParam, lParam)) {
+        if (ImGui::GetCurrentContext() && !WinAPI::ImGui_WndProcHandler(hWnd, message, wParam, lParam)) {
             auto&& pBackend = ImGui::GetIO().BackendPlatformUserData;
             if (pBackend && ImGui_ImplWin32_WndProcHandler(hWnd, message, wParam, lParam)) {
                 return true;

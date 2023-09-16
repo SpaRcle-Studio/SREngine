@@ -146,7 +146,7 @@ namespace SR_GRAPH_NS {
             data = data > 1 ? 1 : 0;
         });
 
-        GetPipeline()->SetDirty(true);
+        GetPipeline()->SetDirty(false);
     }
 
     void RenderScene::Update() noexcept {

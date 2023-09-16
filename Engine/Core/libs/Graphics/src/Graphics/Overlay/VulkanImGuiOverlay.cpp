@@ -45,7 +45,10 @@ namespace SR_GRAPH_NS {
         m_multiSample = pKernel->GetMultisampleTarget();
 
         if (!m_device || !m_swapChain || !m_multiSample) {
-            SR_ERROR("VulkanImGuiOverlay::Init() : device, multi sample or swapChain is nullptr!");
+            SR_ERROR(SR_FORMAT("VulkanImGuiOverlay::Init() : device, multi sample or swapChain is nullptr!\n"
+                "\tDevice: %s\n\tSwapChain: %s\n\tMulti sample: %s",
+                m_device ? "Ok" : "Fail", m_swapChain ? "Ok" : "Fail", m_multiSample ? "Ok" : "Fail"
+            ));
             return false;
         }
 

@@ -430,13 +430,10 @@ namespace SR_GRAPH_NS {
             return false;
         }
 
-        SR_GRAPH("Engine::InitializeRender() : initializing the pipeline...");
         if (!m_pipeline->Init()) {
             SR_ERROR("Engine::InitializeRender() : failed to initialize the pipeline!");
             return false;
         }
-
-        SR_GRAPH("Engine::InitializeRender() : post-initializing the pipeline...");
 
         if (!m_pipeline->PostInit()) {
             SR_ERROR("Engine::InitializeRender() : failed to post-initialize pipeline!");

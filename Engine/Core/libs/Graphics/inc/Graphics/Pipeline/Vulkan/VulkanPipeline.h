@@ -26,6 +26,7 @@ namespace SR_GRAPH_NS {
 
         bool PreInit(const PipelinePreInitInfo& info) override;
         bool Init() override;
+        bool PostInit() override;
 
         bool Destroy() override;
 
@@ -52,8 +53,25 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD int32_t AllocateTexture(const SRTextureCreateInfo& createInfo) override;
         SR_NODISCARD int32_t AllocateFrameBuffer(const SRFrameBufferCreateInfo& createInfo) override;
 
+        bool FreeTexture(int32_t* id) override;
+
+    public:
+        void OnResize(const SR_MATH_NS::UVector2& size) override;
+
+        bool BeginCmdBuffer() override;
+        void EndCmdBuffer() override;
+
+        bool BeginRender() override;
+        void EndRender() override;
+
+        void DrawFrame() override;
+
         void SetViewport(int32_t width, int32_t height) override;
         void SetScissor(int32_t width, int32_t height) override;
+
+        void ClearBuffers() override;
+        void ClearBuffers(float_t r, float_t g, float_t b, float_t a, float_t depth, uint8_t colorCount) override;
+        void ClearBuffers(const std::vector<SR_MATH_NS::FColor>& colors, float_t depth) override;
 
         void UpdateDescriptorSets(uint32_t descriptorSet, const SRDescriptorUpdateInfos& updateInfo) override;
         void UpdateUBO(uint32_t UBO, void* pData, uint64_t size) override;
@@ -64,6 +82,9 @@ namespace SR_GRAPH_NS {
         void BindFrameBuffer(FramebufferPtr pFBO) override;
 
         void ResetDescriptorSet() override;
+
+    private:
+        bool InitEvoVulkanHooks();
 
     private:
         VkViewport m_viewport = { };

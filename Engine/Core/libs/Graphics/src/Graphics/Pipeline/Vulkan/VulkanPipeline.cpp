@@ -3,8 +3,7 @@
 //
 
 #include <Graphics/Pipeline/Vulkan/VulkanPipeline.h>
-
-#include <EvoVulkan/VulkanKernel.h>
+#include <Graphics/Pipeline/Vulkan/VulkanKernel.h>
 
 #ifdef SR_USE_IMGUI
     #include <Graphics/Overlay/VulkanImGuiOverlay.h>
@@ -12,7 +11,10 @@
 
 namespace SR_GRAPH_NS {
     std::string VulkanPipeline::GetVendor() const {
-         return m_kernel ? m_kernel->GetDevice()->GetName() : "Invalid";
+        if (m_kernel && m_kernel->GetDevice()) {
+            return m_kernel->GetDevice()->GetName();
+        }
+        return "Invalid";
     }
 
     VulkanPipeline::~VulkanPipeline() {
@@ -24,7 +26,7 @@ namespace SR_GRAPH_NS {
         auto&& pImGuiOverlay = m_overlays[OverlayType::ImGui];
         pImGuiOverlay = new VulkanImGuiOverlay(GetThis());
         if (!pImGuiOverlay->Init()) {
-            SR_ERROR("VulkanPipeline::InitOverlay() : failed to initialize ImGui overlay!");
+            PipelineError("VulkanPipeline::InitOverlay() : failed to initialize ImGui overlay!");
             return false;
         }
     #endif
@@ -42,39 +44,22 @@ namespace SR_GRAPH_NS {
 
     bool VulkanPipeline::PreInit(const PipelinePreInitInfo& info) {
         if (!Pipeline::PreInit(info)) {
-            SR_ERROR("VulkanPipeline::PreInit() : failed to pre-initialize pipeline!");
+            PipelineError("VulkanPipeline::PreInit() : failed to pre-initialize pipeline!");
             return false;
         }
 
-        auto&& GetUsedMemoryFn = [pPipeline = GetThis()]() -> uint32_t {
-            return pPipeline ? pPipeline->GetUsedMemory() / 1024 / 1024 : 0;
-        };
-
-        EvoVulkan::Tools::VkFunctionsHolder::Instance().LogCallback = [GetUsedMemoryFn](const std::string& msg) {
-            SR_VULKAN_LOG(SR_FORMAT("{%i} %s", GetUsedMemoryFn(), msg.c_str()));
-        };
-
-        EvoVulkan::Tools::VkFunctionsHolder::Instance().WarnCallback = [GetUsedMemoryFn](const std::string& msg) {
-            SR_WARN(SR_FORMAT("{%i} %s", GetUsedMemoryFn(), msg.c_str()));
-        };
-        EvoVulkan::Tools::VkFunctionsHolder::Instance().ErrorCallback = [GetUsedMemoryFn](const std::string& msg) {
-            SR_VULKAN_ERROR(SR_FORMAT("{%i} %s", GetUsedMemoryFn(), msg.c_str()));
-        };
-
-        EvoVulkan::Tools::VkFunctionsHolder::Instance().GraphCallback = [GetUsedMemoryFn](const std::string& msg) {
-            SR_VULKAN_MSG(SR_FORMAT("{%i} %s", GetUsedMemoryFn(), msg.c_str()));
-        };
-
-        EvoVulkan::Tools::VkFunctionsHolder::Instance().AssertCallback = [GetUsedMemoryFn](const std::string &msg) {
-            SRHalt(SR_FORMAT("{%i} %s", GetUsedMemoryFn(), msg.c_str()));
+        if (!InitEvoVulkanHooks()) {
+            PipelineError("VulkanPipeline::PreInit() : failed to initialize evo vulkan hooks!");
             return false;
-        };
+        }
 
     #ifdef SR_ANDROID
         m_enableValidationLayers = false;
     #else
         m_enableValidationLayers = SR_UTILS_NS::Features::Instance().Enabled("VulkanValidation", false);
     #endif
+
+        m_kernel = new SR_GRAPH_NS::VulkanKernel(GetThis());
 
         if (m_enableValidationLayers) {
             m_kernel->SetValidationLayersEnabled(true);
@@ -127,7 +112,81 @@ namespace SR_GRAPH_NS {
     }
 
     bool VulkanPipeline::Init() {
-        return Pipeline::Init();
+        SR_GRAPH_LOG("VulkanPipeline::Init() : initializing vulkan...");
+
+        auto&& createSurfaceFn = [this](const VkInstance &instance) -> VkSurfaceKHR {
+        #ifdef VK_USE_PLATFORM_WIN32_KHR
+            if (auto&& pImpl = m_window->GetImplementation<Win32Window>()) {
+                VkWin32SurfaceCreateInfoKHR surfaceInfo = { };
+                surfaceInfo.sType = VK_STRUCTURE_TYPE_WIN32_SURFACE_CREATE_INFO_KHR;
+                surfaceInfo.pNext = nullptr;
+                surfaceInfo.flags = 0;
+                surfaceInfo.hinstance = pImpl->GetHINSTANCE();
+                surfaceInfo.hwnd = pImpl->GetHWND();
+
+                VkSurfaceKHR surface = VK_NULL_HANDLE;
+                VkResult result = vkCreateWin32SurfaceKHR(instance, &surfaceInfo, nullptr, &surface);
+                if (result != VK_SUCCESS) {
+                    return VK_NULL_HANDLE;
+                }
+                else
+                    return surface;
+            }
+            else {
+                PipelineError("VulkanPipeline::Init() : window is not support this architecture!");
+                return VK_NULL_HANDLE;
+            }
+        #elif defined(SR_ANDROID)
+            if (auto&& pImpl = m_window->GetImplementation<AndroidWindow>()) {
+                VkAndroidSurfaceCreateInfoKHR surfaceInfo = { };
+                surfaceInfo.sType = VK_STRUCTURE_TYPE_ANDROID_SURFACE_CREATE_INFO_KHR;
+                surfaceInfo.pNext = nullptr;
+                surfaceInfo.flags = 0;
+                surfaceInfo.window = pImpl->GetNativeWindow();
+
+                VkSurfaceKHR surface = VK_NULL_HANDLE;
+                VkResult result = vkCreateAndroidSurfaceKHR(instance, &surfaceInfo, nullptr, &surface);
+                if (result != VK_SUCCESS) {
+                    return VK_NULL_HANDLE;
+                }
+                else
+                    return surface;
+            }
+            else {
+                PipelineError("VulkanPipeline::Init() : window is not support this architecture!");
+                return VK_NULL_HANDLE;
+            }
+        #else
+            SR_UNUSED_VARIABLE(window);
+            SRHalt("Unsupported platform!");
+            return VK_NULL_HANDLE;
+        #endif
+        };
+
+        if (auto&& pImpl = m_window->GetImplementation<BasicWindowImpl>()) {
+            m_kernel->SetSize(pImpl->GetSurfaceWidth(), pImpl->GetSurfaceHeight());
+        }
+
+        static const std::vector<const char*> deviceExtensions = {
+            VK_KHR_SWAPCHAIN_EXTENSION_NAME,
+            VK_EXT_LINE_RASTERIZATION_EXTENSION_NAME,
+        };
+
+        if (!m_kernel->Init(createSurfaceFn, m_window->GetHandle(), deviceExtensions, true, false /** V-Sync */)) {
+            PipelineError("VulkanPipeline::Init() : failed to initialize Evo Vulkan kernel!");
+            return false;
+        }
+
+        SR_INFO("VulkanPipeline::Init() : create vulkan memory manager...");
+        m_memory = VulkanTools::MemoryManager::Create(m_kernel);
+        if (!m_memory) {
+            PipelineError("VulkanPipeline::Init() : failed to create vulkan memory manager!");
+            return false;
+        }
+
+        m_supportedSampleCount = m_kernel->GetDevice()->GetMSAASamplesCount();
+
+        return Super::Init();
     }
 
     uint64_t VulkanPipeline::GetUsedMemory() const {
@@ -669,5 +728,231 @@ namespace SR_GRAPH_NS {
             static_cast<SR_MATH_NS::Unit>(pixel.b),
             static_cast<SR_MATH_NS::Unit>(pixel.a)
         );
+    }
+
+    bool VulkanPipeline::InitEvoVulkanHooks() {
+        SR_GRAPH("VulkanPipeline::InitEvoVulkanHooks() : initialize evo vulkan hooks...");
+
+        auto&& GetUsedMemoryFn = [pPipeline = GetThis()]() -> uint32_t {
+            return pPipeline ? pPipeline->GetUsedMemory() / 1024 / 1024 : 0;
+        };
+
+        EvoVulkan::Tools::VkFunctionsHolder::Instance().LogCallback = [GetUsedMemoryFn](const std::string& msg) {
+            SR_VULKAN_LOG(SR_FORMAT("{%i} %s", GetUsedMemoryFn(), msg.c_str()));
+        };
+
+        EvoVulkan::Tools::VkFunctionsHolder::Instance().WarnCallback = [GetUsedMemoryFn](const std::string& msg) {
+            SR_WARN(SR_FORMAT("{%i} %s", GetUsedMemoryFn(), msg.c_str()));
+        };
+        EvoVulkan::Tools::VkFunctionsHolder::Instance().ErrorCallback = [GetUsedMemoryFn](const std::string& msg) {
+            SR_VULKAN_ERROR(SR_FORMAT("{%i} %s", GetUsedMemoryFn(), msg.c_str()));
+        };
+
+        EvoVulkan::Tools::VkFunctionsHolder::Instance().GraphCallback = [GetUsedMemoryFn](const std::string& msg) {
+            SR_VULKAN_MSG(SR_FORMAT("{%i} %s", GetUsedMemoryFn(), msg.c_str()));
+        };
+
+        EvoVulkan::Tools::VkFunctionsHolder::Instance().AssertCallback = [GetUsedMemoryFn](const std::string &msg) {
+            SRHalt(SR_FORMAT("{%i} %s", GetUsedMemoryFn(), msg.c_str()));
+            return false;
+        };
+
+        EvoVulkan::Tools::VkFunctionsHolder::Instance().CreateFolder = [](const std::string& path) -> bool {
+            return SR_PLATFORM_NS::CreateFolder(path);
+        };
+
+        EvoVulkan::Tools::VkFunctionsHolder::Instance().Delete = [](const std::string& path) -> bool {
+            return SR_PLATFORM_NS::Delete(path);
+        };
+
+        EvoVulkan::Tools::VkFunctionsHolder::Instance().IsExists = [](const std::string& path) -> bool {
+            return SR_PLATFORM_NS::IsExists(path);
+        };
+
+        EvoVulkan::Tools::VkFunctionsHolder::Instance().Copy = [](const std::string& from, const std::string& to) -> bool {
+            return SR_PLATFORM_NS::Copy(from, to);
+        };
+
+        EvoVulkan::Tools::VkFunctionsHolder::Instance().ReadHash = [](const std::string& path) -> uint64_t {
+            return SR_UTILS_NS::FileSystem::ReadHashFromFile(SR_UTILS_NS::Path(path, true));
+        };
+
+        EvoVulkan::Tools::VkFunctionsHolder::Instance().GetFileHash = [](const std::string& path) -> uint64_t {
+            return SR_UTILS_NS::FileSystem::GetFileHash(SR_UTILS_NS::Path(path, true));
+        };
+
+        EvoVulkan::Tools::VkFunctionsHolder::Instance().WriteHash = [](const std::string& path, uint64_t hash) -> bool {
+            SR_UTILS_NS::FileSystem::WriteHashToFile(SR_UTILS_NS::Path(path, false), hash);
+            return true;
+        };
+
+        return true;
+    }
+
+    bool VulkanPipeline::PostInit() {
+        SR_GRAPH_LOG("VulkanPipeline::PostInit() : post-initializing vulkan...");
+
+        if (!m_kernel || !m_kernel->PostInit()) {
+            SR_ERROR("VulkanPipeline::PostInit() : failed to post-initialize Evo Vulkan kernel!");
+            return false;
+        }
+
+    #ifdef SR_TRACY_ENABLE
+        if (SR_UTILS_NS::Features::Instance().Enabled("Tracy", false)) {
+            if (auto&& pSingleTimeCmd = m_kernel->CreateCmd()) {
+                SR_GRAPH_LOG("VulkanPipeline::PostInit() : initializing tracy...");
+                SR_TRACY_VK_CREATE(*pSingleTimeCmd, m_kernel, "EvoVulkan");
+                delete pSingleTimeCmd;
+            }
+        }
+    #endif
+
+        return Super::PostInit();
+    }
+
+    bool VulkanPipeline::BeginCmdBuffer() {
+        if (!m_currentCmd) {
+            PipelineError("VulkanPipeline::BeginCmdBuffer() : cmd buffer is nullptr!");
+            return false;
+        }
+
+        vkBeginCommandBuffer(m_currentCmd, &m_cmdBufInfo);
+        return Super::BeginCmdBuffer();
+    }
+
+    void VulkanPipeline::EndCmdBuffer() {
+        if (!m_currentCmd) {
+            PipelineError("VulkanPipeline::EndCmdBuffer() : cmd buffer is nullptr!");
+            return;
+        }
+
+        vkEndCommandBuffer(m_currentCmd);
+        Super::EndCmdBuffer();
+    }
+
+    bool VulkanPipeline::BeginRender() {
+        if (!m_renderPassBI.pClearValues) {
+            SRHaltOnce("pClearValues is nullptr! Please, call ClearBuffers before BeginRender");
+            return false;
+        }
+
+        vkCmdBeginRenderPass(m_currentCmd, &m_renderPassBI, VK_SUBPASS_CONTENTS_INLINE);
+        return Super::BeginRender();
+    }
+
+    void VulkanPipeline::EndRender() {
+        Super::EndRender();
+
+        if (!m_currentCmd) {
+            PipelineError("VulkanPipeline::EndRender() : cmd buffer is nullptr!");
+            return;
+        }
+
+        vkCmdEndRenderPass(m_currentCmd);
+    }
+
+    void VulkanPipeline::DrawFrame() {
+        Super::DrawFrame();
+
+        switch (m_kernel->NextFrame()) {
+            case EvoVulkan::Core::RenderResult::Fatal:
+                SR_UTILS_NS::EventManager::Instance().Broadcast(SR_UTILS_NS::EventManager::Event::FatalError);
+                ++m_errorsCount;
+                break;
+            case EvoVulkan::Core::RenderResult::Error:
+                PipelineError("VulkanPipeline::DrawFrame() : an error has been occurred!");
+                break;
+            case EvoVulkan::Core::RenderResult::DeviceLost:
+                PipelineError("VulkanPipeline::DrawFrame() : device lost! Terminate...");
+                SR_PLATFORM_NS::Terminate();
+                break;
+            default:
+                break;
+        }
+    }
+
+    void VulkanPipeline::ClearBuffers() {
+        Super::ClearBuffers();
+
+        if (m_state.frameBufferId < 0) {
+            PipelineError("VulkanPipeline::ClearBuffers() : frame buffer is not attached!");
+            return;
+        }
+        else if (m_state.frameBufferId > 0) {
+            m_renderPassBI.clearValueCount = m_memory->m_FBOs[m_state.frameBufferId - 1]->GetCountClearValues();
+            m_renderPassBI.pClearValues    = m_memory->m_FBOs[m_state.frameBufferId - 1]->GetClearValues();
+        }
+        else {
+            /// в какой ситуации это может случиться?
+            SRHalt("VulkanPipeline::ClearBuffers() : TODO!");
+        }
+    }
+
+    void VulkanPipeline::ClearBuffers(float_t r, float_t g, float_t b, float_t a, float_t depth, uint8_t colorCount) {
+        Super::ClearBuffers(r, g, b, a, depth, colorCount);
+
+        const uint8_t sampleCount = GetFrameBufferSampleCount();
+
+        colorCount *= sampleCount > 1 ? 2 : 1;
+
+        m_clearValues.resize(colorCount + 1);
+
+        for (uint8_t i = 0; i < colorCount; ++i) {
+            m_clearValues[i] = { .color = {{ r, g, b, a }} };
+        }
+
+        m_clearValues[colorCount] = VkClearValue { .depthStencil = { depth, 0 } };
+
+        m_renderPassBI.clearValueCount = colorCount + 1;
+        m_renderPassBI.pClearValues    = m_clearValues.data();
+    }
+
+    void VulkanPipeline::ClearBuffers(const std::vector<SR_MATH_NS::FColor>& colors, float_t depth) {
+        Super::ClearBuffers(colors, depth);
+
+        const uint8_t sampleCount = GetFrameBufferSampleCount();
+
+        auto colorCount = static_cast<uint8_t>(colors.size());
+        colorCount *= sampleCount > 1 ? 2 : 1;
+
+        m_clearValues.resize(colorCount + 1); /// TODO: а если буфера глубины нет??????
+
+        for (uint8_t i = 0; i < colorCount; ++i) {
+            auto&& color = colors[i / (sampleCount > 1 ? 2 : 1)];
+
+            m_clearValues[i] = {
+                .color = { {
+                       static_cast<float_t>(color.r),
+                       static_cast<float_t>(color.g),
+                       static_cast<float_t>(color.b),
+                       static_cast<float_t>(color.a)
+                   }
+                }
+            };
+        }
+
+        m_clearValues[colorCount] = VkClearValue { .depthStencil = { depth, 0 } };
+
+        m_renderPassBI.clearValueCount = colorCount + 1;
+        m_renderPassBI.pClearValues  = m_clearValues.data();
+    }
+
+    void VulkanPipeline::OnResize(const SR_MATH_NS::UVector2& size) {
+        m_kernel->SetSize(size.x, size.y);
+        Super::OnResize(size);
+    }
+
+    bool VulkanPipeline::FreeTexture(int32_t *id) {
+        ++m_state.operations;
+        ++m_state.deletions;
+
+        if (!m_memory || !m_memory->FreeTexture(static_cast<uint32_t>(*id))) {
+            SR_ERROR("VulkanPipeline::FreeTexture() : failed to free texture!");
+            return false;
+        }
+
+        *id = SR_ID_INVALID;
+
+        return true;
     }
 }

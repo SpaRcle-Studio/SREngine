@@ -183,6 +183,7 @@ namespace SR_GTYPES_NS {
         createInfo.alpha = m_config.m_alpha == SR_UTILS_NS::BoolExt::None;
         createInfo.format = m_config.m_format;
         createInfo.mipLevels = m_config.m_mipLevels;
+        createInfo.filter = m_config.m_filter;
 
         m_id = m_pipeline->AllocateTexture(createInfo);
 
