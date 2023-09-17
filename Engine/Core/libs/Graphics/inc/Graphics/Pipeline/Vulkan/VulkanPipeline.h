@@ -48,11 +48,21 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD uint64_t GetUsedMemory() const override;
 
         SR_NODISCARD int32_t AllocateUBO(uint32_t uboSize) override;
+        SR_NODISCARD int32_t AllocateVBO(void* pVertices, Vertices::VertexType type, size_t count) override;
+        SR_NODISCARD int32_t AllocateIBO(void* pIndices, uint32_t indexSize, size_t count, int32_t VBO) override;
         SR_NODISCARD int32_t AllocDescriptorSet(const std::vector<uint64_t>& types) override;
         SR_NODISCARD int32_t AllocateShaderProgram(const SRShaderCreateInfo& createInfo, int32_t fbo) override;
         SR_NODISCARD int32_t AllocateTexture(const SRTextureCreateInfo& createInfo) override;
         SR_NODISCARD int32_t AllocateFrameBuffer(const SRFrameBufferCreateInfo& createInfo) override;
+        SR_NODISCARD int32_t AllocateCubeMap(const SRCubeMapCreateInfo& createInfo) override;
 
+        bool FreeDescriptorSet(int32_t* id) override;
+        bool FreeVBO(int32_t* id) override;
+        bool FreeIBO(int32_t* id) override;
+        bool FreeUBO(int32_t* id) override;
+        bool FreeFBO(int32_t* id) override;
+        bool FreeCubeMap(int32_t* id) override;
+        bool FreeShader(int32_t* id) override;
         bool FreeTexture(int32_t* id) override;
 
     public:
@@ -65,6 +75,8 @@ namespace SR_GRAPH_NS {
         void EndRender() override;
 
         void DrawFrame() override;
+
+        void SetCurrentFrameBuffer(FramebufferPtr pFrameBuffer) override;
 
         void SetViewport(int32_t width, int32_t height) override;
         void SetScissor(int32_t width, int32_t height) override;

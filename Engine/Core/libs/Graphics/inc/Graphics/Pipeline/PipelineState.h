@@ -88,7 +88,7 @@ namespace SR_GRAPH_NS {
         int32_t shaderId = SR_ID_INVALID;
         int32_t frameBufferId = SR_ID_INVALID;
 
-        uint32_t frameBufferLayer = 0;
+        uint32_t frameBufferLayer = SR_ID_INVALID;
 
         /// Количество вызовов Draw и подобное
         mutable uint32_t drawCalls = 0;

@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <Settings>
-    <RenderTechnique Path="Editor/Configs/EditorEmptyRenderTechnique.xml"/>
+    <RenderTechnique Path="Editor/Configs/EditorCascadedShadowMapRenderTechnique.xml"/>
 	<PrefabRenderTechnique Path="Editor/Configs/EditorPrefabRenderTechnique.xml"/>
     <!--<RenderTechnique Path="Editor/Configs/EditorColorBufferRenderTechnique.xml"/>-->
     <!--<RenderTechnique Path="Editor/Configs/EditorVarianceShadowMapRenderTechnique.xml"/>-->

@@ -35,13 +35,19 @@ namespace SR_GRAPH_NS {
     }
 
     bool Pipeline::BeginRender() {
+        ++m_state.operations;
+
+        if (!m_isCmdState) {
+            SRHalt("Pipeline::BeginRender() : missing call \"BeginCmdBuffer\"!");
+            return false;
+        }
+
         if (m_isRenderState) {
             SRHalt("Pipeline::BeginRender() : missing call \"EndRender\"!");
             return false;
         }
 
         m_isRenderState = true;
-        ++m_state.operations;
 
         return true;
     }
@@ -66,11 +72,27 @@ namespace SR_GRAPH_NS {
 
     bool Pipeline::BeginCmdBuffer() {
         ++m_state.operations;
+
+        if (m_isRenderState) {
+            SRHalt("Pipeline::BeginCmdBuffer() : is render state now!");
+            return false;
+        }
+
+        if (m_isCmdState) {
+            SRHalt("Pipeline::BeginCmdBuffer() : missing call \"EndCmdBuffer\"!");
+            return false;
+        }
+
+        m_isCmdState = true;
         return true;
     }
 
     void Pipeline::EndCmdBuffer() {
         ++m_state.operations;
+        if (!m_isCmdState) {
+            SRHalt("Pipeline::EndCmdBuffer() : missing call \"BeginCmdBuffer\"!");
+        }
+        m_isCmdState = false;
     }
 
     void Pipeline::ClearFrameBuffersQueue() {

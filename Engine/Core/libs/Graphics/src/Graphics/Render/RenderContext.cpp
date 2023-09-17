@@ -170,12 +170,6 @@ namespace SR_GRAPH_NS {
             m_defaultMaterial->RemoveUsePoint();
             m_defaultMaterial = nullptr;
         }
-
-        SR_UTILS_NS::ResourceManager::Instance().Synchronize(true);
-
-        if (m_pipeline) {
-            m_pipeline->Destroy();
-        }
     }
 
     RenderContext::RenderScenePtr RenderContext::CreateScene(const SR_WORLD_NS::Scene::Ptr &scene) {
@@ -407,7 +401,10 @@ namespace SR_GRAPH_NS {
     }
 
     RenderContext::~RenderContext() {
+        SRAssert(IsEmpty());
+
         m_pipeline.AutoFree([](auto&& pPipeline) {
+            pPipeline->Destroy();
             delete pPipeline;
         });
     }

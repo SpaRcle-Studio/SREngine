@@ -170,7 +170,6 @@ namespace SR_GRAPH_NS {
                 return VK_NULL_HANDLE;
             }
         #else
-            SR_UNUSED_VARIABLE(window);
             SRHalt("Unsupported platform!");
             return VK_NULL_HANDLE;
         #endif
@@ -389,7 +388,7 @@ namespace SR_GRAPH_NS {
                 pushConstants
         )) {
             EVK_POP_LOG_LEVEL();
-            DeleteShader(&shaderProgram);
+            FreeShader(&shaderProgram);
             PipelineError("VulkanPipeline::CompileShader() : failed to load Evo Vulkan shader!");
             return false;
         }
@@ -400,13 +399,13 @@ namespace SR_GRAPH_NS {
         auto&& vkVertexAttributes = VulkanTools::AbstractAttributesToVkAttributes(createInfo.vertexAttributes);
         if (vkVertexAttributes.size() != createInfo.vertexAttributes.size()) {
             PipelineError("VulkanPipeline::LinkShader() : vkVertexDescriptions size != vertexDescriptions size!");
-            DeleteShader(&shaderProgram);
+            FreeShader(&shaderProgram);
             return false;
         }
 
         if (!pShaderProgram->SetVertexDescriptions(vkVertexDescriptions, vkVertexAttributes)) {
             PipelineError("VulkanPipeline::LinkShader() : failed to set vertex descriptions!");
-            DeleteShader(&shaderProgram);
+            FreeShader(&shaderProgram);
             return false;
         }
 
@@ -429,7 +428,7 @@ namespace SR_GRAPH_NS {
         )) {
             EVK_POP_LOG_LEVEL();
             PipelineError("VulkanPipeline::LinkShader() : failed to compile Evo Vulkan shader!");
-            DeleteShader(&shaderProgram);
+            FreeShader(&shaderProgram);
             return false;
         }
 
@@ -844,13 +843,17 @@ namespace SR_GRAPH_NS {
     }
 
     bool VulkanPipeline::BeginRender() {
+        if (!Super::BeginRender()) {
+            return false;
+        }
+
         if (!m_renderPassBI.pClearValues) {
             SRHaltOnce("pClearValues is nullptr! Please, call ClearBuffers before BeginRender");
             return false;
         }
 
         vkCmdBeginRenderPass(m_currentCmd, &m_renderPassBI, VK_SUBPASS_CONTENTS_INLINE);
-        return Super::BeginRender();
+        return true;
     }
 
     void VulkanPipeline::EndRender() {
@@ -965,6 +968,161 @@ namespace SR_GRAPH_NS {
         }
 
         *id = SR_ID_INVALID;
+
+        return true;
+    }
+
+    void VulkanPipeline::SetCurrentFrameBuffer(Pipeline::FramebufferPtr pFrameBuffer) {
+        Super::SetCurrentFrameBuffer(pFrameBuffer);
+
+        if (pFrameBuffer && pFrameBuffer->GetId() != SR_ID_INVALID) {
+            m_currentVkFrameBuffer = m_memory->m_FBOs[pFrameBuffer->GetId() - 1];
+        }
+        else {
+            m_currentVkFrameBuffer = nullptr;
+        }
+
+        if (m_currentVkFrameBuffer) {
+            m_currentCmd = m_currentVkFrameBuffer->GetCmd();
+        }
+    }
+
+    bool VulkanPipeline::FreeFBO(int32_t* id) {
+        ++m_state.operations;
+        ++m_state.deletions;
+
+        const bool result = m_memory->FreeFBO(*id - 1);
+        *id = SR_ID_INVALID;
+        return result;
+    }
+
+    bool VulkanPipeline::FreeShader(int32_t* id) {
+        ++m_state.operations;
+        ++m_state.deletions;
+
+        if (!m_memory->FreeShaderProgram(*id)) {
+            PipelineError("VulkanPipeline::FreeShader() : failed free shader program!");
+            return false;
+        }
+
+        *id = SR_ID_INVALID;
+
+        return true;
+    }
+
+    int32_t VulkanPipeline::AllocateCubeMap(const SRCubeMapCreateInfo& createInfo) {
+        ++m_state.operations;
+        ++m_state.allocations;
+
+        if (auto id = m_memory->AllocateTexture(createInfo.data, createInfo.width, createInfo.height, VK_FORMAT_R8G8B8A8_UNORM, VK_FILTER_LINEAR, 1, createInfo.cpuUsage); id >= 0) {
+            return id;
+        }
+
+        PipelineError("VulkanPipeline::AllocateCubeMap() : failed to allocate texture!");
+        return SR_ID_INVALID;
+    }
+
+    bool VulkanPipeline::FreeCubeMap(int32_t* id) {
+        ++m_state.operations;
+        ++m_state.deletions;
+
+        const bool result = m_memory->FreeTexture(*id);
+
+        *id = SR_ID_INVALID;
+
+        if (!result) {
+            PipelineError("VulkanPipeline::FreeCubeMap() : failed to free texture! (" + std::to_string(*id) + ")");
+            return false;
+        }
+
+        return true;
+    }
+
+    int32_t VulkanPipeline::AllocateVBO(void* pVertices, Vertices::VertexType type, size_t count) {
+        const auto size = Vertices::GetVertexSize(type);
+
+        ++m_state.operations;
+        ++m_state.allocations;
+        m_state.allocatedMemory += size * count;
+
+        if (auto&& id = m_memory->AllocateVBO(size * count, pVertices); id >= 0) {
+            return id;
+        }
+
+        return SR_ID_INVALID;
+    }
+
+    int32_t VulkanPipeline::AllocateIBO(void* pIndices, uint32_t indexSize, size_t count, int32_t VBO) {
+        ++m_state.operations;
+        ++m_state.allocations;
+        m_state.allocatedMemory += indexSize * count;
+
+        if (auto&& id = m_memory->AllocateIBO(indexSize * count, pIndices); id >= 0) {
+            return id;
+        }
+
+        return SR_ID_INVALID;
+    }
+
+    bool VulkanPipeline::FreeDescriptorSet(int32_t* id) {
+        ++m_state.operations;
+        ++m_state.deletions;
+
+        if (!m_memory->FreeDescriptorSet(*id)) {
+            SR_ERROR("Vulkan::FreeDescriptorSet() : failed to free descriptor set!");
+            *id = SR_ID_INVALID;
+            return false;
+        }
+
+        *id = SR_ID_INVALID;
+
+        return true;
+    }
+
+    bool VulkanPipeline::FreeVBO(int32_t* id) {
+        ++m_state.operations;
+        ++m_state.deletions;
+
+        const bool result = m_memory->FreeVBO(*id);
+
+        *id = SR_ID_INVALID;
+
+        if (!result) {
+            PipelineError("VulkanPipeline::FreeVBO() : failed to free VBO! (" + std::to_string(*id) + ")");
+            return false;
+        }
+
+        return true;
+    }
+
+    bool VulkanPipeline::FreeIBO(int32_t* id) {
+        ++m_state.operations;
+        ++m_state.deletions;
+
+        const bool result = m_memory->FreeIBO(*id);
+
+        *id = SR_ID_INVALID;
+
+        if (!result) {
+            PipelineError("VulkanPipeline::FreeIBO() : failed to free IBO! (" + std::to_string(*id) + ")");
+            return false;
+        }
+
+        return true;
+    }
+
+    bool VulkanPipeline::FreeUBO(int32_t* id) {
+        ++m_state.operations;
+        ++m_state.deletions;
+
+        const bool result = m_memory->FreeUBO(*id);
+
+        *id = SR_ID_INVALID;
+
+        if (!result) {
+            PipelineError("VulkanPipeline::FreeUBO() : failed to free UBO! (" + std::to_string(*id) + ")");
+            return false;
+        }
 
         return true;
     }

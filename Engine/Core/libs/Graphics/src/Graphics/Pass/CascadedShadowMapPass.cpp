@@ -164,7 +164,7 @@ namespace SR_GRAPH_NS {
 
             if (m_framebuffer->Bind()) {
                 m_framebuffer->BeginRender();
-                IMeshClusterPass::Render();
+                IMeshClusterPass::Render(); /// NOLINT
                 m_framebuffer->EndRender();
             }
 

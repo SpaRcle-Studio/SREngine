@@ -129,7 +129,7 @@ namespace SR_GTYPES_NS {
         auto&& indexedVertices = Vertices::CastVertices<Vertices::SimpleVertex>(SR_UTILS_NS::SKYBOX_INDEXED_VERTICES);
 
         if (m_pipeline->GetType() == PipelineType::Vulkan) {
-            auto &&indices = SR_UTILS_NS::SKYBOX_INDICES;
+            auto&& indices = SR_UTILS_NS::SKYBOX_INDICES;
 
             if (m_VBO = m_pipeline->AllocateVBO(indexedVertices.data(), Vertices::VertexType::SimpleVertex, indexedVertices.size()); m_VBO == SR_ID_INVALID) {
                 SR_ERROR("Skybox::Calculate() : failed to calculate VBO!");
@@ -144,7 +144,7 @@ namespace SR_GTYPES_NS {
             }
         }
         else {
-            auto &&vertices = SR_UTILS_NS::IndexedVerticesToNonIndexed(indexedVertices, SR_UTILS_NS::SKYBOX_INDICES);
+            auto&& vertices = SR_UTILS_NS::IndexedVerticesToNonIndexed(indexedVertices, SR_UTILS_NS::SKYBOX_INDICES);
 
             if (m_VBO = m_pipeline->AllocateVBO(vertices.data(), Vertices::VertexType::SimpleVertex, vertices.size()); m_VBO == SR_ID_INVALID) {
                 SR_ERROR("Skybox::Calculate() : failed to calculate VBO!");
@@ -209,10 +209,6 @@ namespace SR_GTYPES_NS {
     }
 
     void Skybox::FreeVideoMemory() {
-        if (!m_isCalculated) {
-            return;
-        }
-
         SR_LOG("Skybox::FreeVideoMemory() : free skybox video memory...");
 
         if (m_VBO != SR_ID_INVALID && !m_pipeline->FreeVBO(&m_VBO)) {

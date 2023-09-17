@@ -132,7 +132,7 @@ namespace SR_GTYPES_NS {
         m_dirty = false;
         m_isCalculated = true;
 
-        m_pipeline->SetDirty(false);
+        m_pipeline->SetDirty(true);
 
         return true;
     }
@@ -271,7 +271,7 @@ namespace SR_GTYPES_NS {
     void Framebuffer::SetDirty() {
         m_dirty = true;
         if (m_pipeline) {
-            m_pipeline->SetDirty(false);
+            m_pipeline->SetDirty(true);
         }
     }
 

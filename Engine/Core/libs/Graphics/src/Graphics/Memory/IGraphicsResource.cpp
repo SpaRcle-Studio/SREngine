@@ -14,7 +14,7 @@ namespace SR_GRAPH_NS::Memory {
 
     void IGraphicsResource::MarkPipelineUnBuild() {
         if (m_isCalculated && m_pipeline) {
-            m_pipeline->SetDirty(false);
+            m_pipeline->SetDirty(true);
         }
     }
 }

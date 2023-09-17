@@ -164,7 +164,7 @@ namespace SR_GRAPH_NS {
         virtual bool FreeUBO(int32_t* id) { return false; }
         virtual bool FreeFBO(int32_t* id) { return false; }
         virtual bool FreeCubeMap(int32_t* id) { return false; }
-        virtual bool DeleteShader(int32_t* id) { return false; }
+        virtual bool FreeShader(int32_t* id) { return false; }
         virtual bool FreeTexture(int32_t* id) { return false; }
 
         /// ------------------------------------------ Вызовы отрисовки ------------------------------------------------
@@ -215,6 +215,7 @@ namespace SR_GRAPH_NS {
         FrameBufferQueue m_fboQueue;
 
         bool m_isRenderState = false;
+        bool m_isCmdState = false;
         bool m_enableValidationLayers = false;
 
         mutable uint64_t m_errorsCount = 0;

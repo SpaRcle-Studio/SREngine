@@ -76,7 +76,7 @@ namespace SR_GRAPH_NS::Memory {
 
         /// очишаем старые шейдерные программы
         for (auto&& [fbo /** unused */, shaderProgramInfo] : virtualProgramInfo.m_data) {
-            m_pipeline->DeleteShader(&shaderProgramInfo.id);
+            m_pipeline->FreeShader(&shaderProgramInfo.id);
         }
         virtualProgramInfo.m_data.clear();
 
@@ -188,7 +188,7 @@ namespace SR_GRAPH_NS::Memory {
         auto&& [_, info] = *pIt;
 
         for (auto&& [fbo /** unused */, shaderProgramInfo] : info.m_data) {
-            m_pipeline->DeleteShader(&shaderProgramInfo.id);
+            m_pipeline->FreeShader(&shaderProgramInfo.id);
         }
 
         m_virtualTable.erase(pIt);
@@ -269,7 +269,7 @@ namespace SR_GRAPH_NS::Memory {
             {
                 SR_LOG("ShaderProgramManager::BindShaderProgram() : the frame buffer parameters have been changed, the shader has been recreated...");
 
-                m_pipeline->DeleteShader(&shaderProgramInfo.id);
+                m_pipeline->FreeShader(&shaderProgramInfo.id);
 
                 if ((shaderProgramInfo = AllocateShaderProgram(createInfo)).Valid()) {
                     if (BindShaderProgram(shaderProgramInfo, createInfo) == ShaderBindResult::Success) {
@@ -334,7 +334,7 @@ namespace SR_GRAPH_NS::Memory {
                 auto&& [identifier, program] = *pProgramIt;
 
                 if (handles.count(reinterpret_cast<void*>(identifier)) == 0) {
-                    m_pipeline->DeleteShader(&program.id);
+                    m_pipeline->FreeShader(&program.id);
                     pProgramIt = info.m_data.erase(pProgramIt);
                     ++count;
                 }
