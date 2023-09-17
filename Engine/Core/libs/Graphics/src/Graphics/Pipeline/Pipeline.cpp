@@ -127,6 +127,7 @@ namespace SR_GRAPH_NS {
 
     void Pipeline::BindUBO(uint32_t UBO) {
         ++m_state.operations;
+        m_state.UBOId = static_cast<int32_t>(UBO);
     }
 
     void Pipeline::UpdateUBO(uint32_t UBO, void* pData, uint64_t size) {
@@ -177,7 +178,7 @@ namespace SR_GRAPH_NS {
 
     void Pipeline::OnMultiSampleChanged() {
         SR_INFO("Pipeline::OnMultiSampleChanged() : samples count was changed to " + SR_UTILS_NS::ToString(GetSamplesCount()));
-        SetDirty(false);
+        SetDirty(true);
         m_renderContext->OnMultiSampleChanged();
     }
 
@@ -320,8 +321,14 @@ namespace SR_GRAPH_NS {
         ++m_state.operations;
     }
 
-    void Pipeline::SetOverlayEnabled(bool enabled) {
+    void Pipeline::SetOverlayEnabled(OverlayType overlayType, bool enabled) {
         ++m_state.operations;
+
+        auto&& pIt = m_overlays.find(overlayType);
+        if (pIt == m_overlays.end() || !pIt->second) {
+            return;
+        }
+        return pIt->second->SetEnabled(enabled);
     }
 
     void Pipeline::SetCurrentFrameBuffer(Pipeline::FramebufferPtr pFrameBuffer) {

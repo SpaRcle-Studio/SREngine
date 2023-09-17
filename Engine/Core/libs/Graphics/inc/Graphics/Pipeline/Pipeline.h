@@ -88,7 +88,7 @@ namespace SR_GRAPH_NS {
         virtual bool BeginDrawOverlay(OverlayType overlayType);
         virtual void EndDrawOverlay(OverlayType overlayType);
 
-        virtual void SetOverlayEnabled(bool enabled);
+        virtual void SetOverlayEnabled(OverlayType overlayType, bool enabled);
 
         /// --------------------------------------- Вспомогательные методы ---------------------------------------------
 

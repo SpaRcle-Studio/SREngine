@@ -238,9 +238,14 @@ namespace SR_GRAPH_NS {
             return SR_ID_INVALID;
         }
 
+        EVK_PUSH_LOG_LEVEL(EvoVulkan::Tools::LogLevel::ErrorsOnly);
+
         if (auto&& id = m_memory->AllocateDescriptorSet(m_state.shaderId, vkTypes); id >= 0) {
+            EVK_POP_LOG_LEVEL();
             return id;
         }
+
+        EVK_POP_LOG_LEVEL();
 
         PipelineError("VulkanPipeline::AllocDescriptorSet() : failed to allocate descriptor set!");
         return SR_ID_INVALID;
@@ -699,10 +704,13 @@ namespace SR_GRAPH_NS {
             return false;
         }
 
+        EVK_PUSH_LOG_LEVEL(EvoVulkan::Tools::LogLevel::ErrorsOnly);
+
         if (*createInfo.pFBO > 0) {
             if (!m_memory->ReAllocateFBO(*createInfo.pFBO - 1, createInfo.size.x, createInfo.size.y, colorBuffers, createInfo.pDepth, createInfo.sampleCount, createInfo.layersCount)) {
                 PipelineError("VulkanPipeline::AllocateFrameBuffer() : failed to re-allocate frame buffer object!");
             }
+            EVK_POP_LOG_LEVEL();
             goto success;
         }
 
@@ -710,8 +718,11 @@ namespace SR_GRAPH_NS {
         if (*createInfo.pFBO <= 0) {
             *createInfo.pFBO = SR_ID_INVALID;
             PipelineError("VulkanPipeline::AllocateFrameBuffer() : failed to allocate FBO!");
+            EVK_POP_LOG_LEVEL();
             return false;
         }
+
+        EVK_POP_LOG_LEVEL();
 
     success:
         for (uint32_t i = 0; i < static_cast<uint32_t>((*createInfo.colors).size()); ++i) {
@@ -1125,5 +1136,258 @@ namespace SR_GRAPH_NS {
         }
 
         return true;
+    }
+
+    void VulkanPipeline::SetOverlayEnabled(OverlayType overlayType, bool enabled) {
+        Super::SetOverlayEnabled(overlayType, enabled);
+
+        bool hasEnabled = false;
+        for (auto&& [type, pOverlay] : m_overlays) {
+            hasEnabled |= pOverlay->IsEnabled();
+        }
+
+        if (m_kernel && m_kernel->IsGUIEnabled() != hasEnabled) {
+            m_kernel->SetGUIEnabled(hasEnabled);
+        }
+    }
+
+    void VulkanPipeline::SetDirty(bool dirty) {
+        SR_TRACY_ZONE;
+
+        Super::SetDirty(dirty);
+
+        if (m_dirty) {
+            return;
+        }
+
+        /// Чистим старую очередь
+
+        m_kernel->ClearSubmitQueue();
+
+        auto&& queues = m_fboQueue.GetQueues();
+
+        for (auto&& queue : queues) {
+            for (auto&& pFrameBuffer : queue) {
+                auto&& fboId = pFrameBuffer->GetId();
+                auto&& vkFrameBuffer = m_memory->m_FBOs[fboId - 1];
+                vkFrameBuffer->ClearWaitSemaphores();
+                vkFrameBuffer->ClearSignalSemaphores();
+            }
+        }
+
+        /// Определяем зависимости
+
+        if (!queues.empty()) {
+            /// Если являемся началом цепочки, то должны дождаться предыдущего кадра
+            for (auto&& pFrameBuffer : queues.front()) {
+                auto&& vkFrameBuffer = m_memory->m_FBOs[pFrameBuffer->GetId() - 1];
+                vkFrameBuffer->GetWaitSemaphores().emplace_back(m_kernel->GetPresentCompleteSemaphore());
+            }
+
+            /// Если являемся концом цепочки, то нужно чтобы нас дождался рендер
+            for (auto&& pFrameBuffer : queues.back()) {
+                auto&& vkFrameBuffer = m_memory->m_FBOs[pFrameBuffer->GetId() - 1];
+                m_kernel->GetWaitSemaphores().emplace_back(vkFrameBuffer->GetSemaphore());
+            }
+        }
+
+        for (uint32_t queueIndex = 1; queueIndex < queues.size(); ++queueIndex) {
+            for (auto&& pFrameBuffer : queues[queueIndex]) {
+                for (auto&& pDependency : queues[queueIndex - 1]) {
+                    auto&& vkFrameBuffer = m_memory->m_FBOs[pFrameBuffer->GetId() - 1];
+                    auto&& vkDependency = m_memory->m_FBOs[pDependency->GetId() - 1];
+                    vkFrameBuffer->GetWaitSemaphores().emplace_back(vkDependency->GetSemaphore());
+                }
+            }
+        }
+
+        /// Строим новую очередь
+
+        for (auto&& queue : queues) {
+            EvoVulkan::SubmitInfo submitInfo;
+
+            submitInfo.SetWaitDstStageMask(m_kernel->GetSubmitPipelineStages());
+
+            for (auto&& pFrameBuffer : queue) {
+                auto&& vkFrameBuffer = m_memory->m_FBOs[pFrameBuffer->GetId() - 1];
+
+                submitInfo.commandBuffers.emplace_back(vkFrameBuffer->GetCmd());
+
+                for (auto&& signalSemaphore : vkFrameBuffer->GetSignalSemaphores()) {
+                    submitInfo.AddSignalSemaphore(signalSemaphore);
+                }
+
+                for (auto&& waitSemaphore : vkFrameBuffer->GetWaitSemaphores()) {
+                    submitInfo.AddWaitSemaphore(waitSemaphore);
+                }
+            }
+
+            m_kernel->AddSubmitQueue(submitInfo);
+        }
+    }
+
+    void VulkanPipeline::PushConstants(void* pData, uint64_t size) {
+        Super::PushConstants(pData, size);
+
+        if (!m_currentVkShader) {
+            SRHalt("Shader is nullptr!");
+            return;
+        }
+
+        auto&& pushConstants = m_currentVkShader->GetPushConstants();
+
+        SRAssert2Once(pushConstants.size() == 1, "Unsupported!");
+
+        if (pushConstants.size() != 1) {
+            return;
+        }
+
+        vkCmdPushConstants(m_currentCmd, m_currentLayout,
+            pushConstants.front().stageFlags,
+            0, size, pData
+        );
+    }
+
+    void VulkanPipeline::PrepareFrame() {
+        Super::PrepareFrame();
+
+        if (m_kernel->IsDirty()) {
+            m_kernel->ReCreate(EvoVulkan::Core::FrameResult::Dirty);
+        }
+
+        for (auto&& [type, pOverlay] : m_overlays) {
+            if (!pOverlay->IsSurfaceDirty()) {
+                continue;
+            }
+
+            if (!pOverlay->ReCreate()) {
+                PipelineError("VulkanPipeline::PrepareFrame() : failed to re-create \"" + pOverlay->GetName() + "\" overlay!");
+            }
+        }
+    }
+
+    void VulkanPipeline::OnMultiSampleChanged() {
+        SR_INFO("VulkanPipeline::OnMultiSampleChanged() : samples count was changed to " + SR_UTILS_NS::ToString(GetSamplesCount()));
+        if (m_kernel) {
+            m_kernel->SetMultisampling(GetSamplesCount());
+        }
+        Super::OnMultiSampleChanged();
+    }
+
+    void VulkanPipeline::BindDescriptorSet(uint32_t descriptorSet) {
+        Super::BindDescriptorSet(descriptorSet);
+
+        if (descriptorSet >= m_memory->m_countDescriptorSets.first) {
+            PipelineError("VulkanPipeline::BindDescriptorSet() : incorrect range! (" + std::to_string(descriptorSet) + ")");
+            return;
+        }
+
+        m_currentDescriptorSets = m_memory->m_descriptorSets[descriptorSet].m_self;
+    }
+
+    void VulkanPipeline::BindAttachment(uint8_t activeTexture, uint32_t textureId) {
+        Super::BindAttachment(activeTexture, textureId);
+
+        if (textureId >= m_memory->m_countTextures.first) {
+            SRHalt("VulkanPipeline::BindAttachment() : incorrect range! (" + std::to_string(textureId) + ")");
+            return;
+        }
+
+        EvoVulkan::Types::Texture* texture = m_memory->m_textures[textureId];
+
+        if (!texture) {
+            PipelineError("VulkanPipeline::BindAttachment() : texture is not exists!");
+            return;
+        }
+
+        auto&& descriptorSet = m_memory->m_countDescriptorSets.first <= m_state.descriptorSetId ? nullptr : m_memory->m_descriptorSets[m_state.descriptorSetId];
+        if (!descriptorSet) {
+            SRHaltOnce("VulkanPipeline::BindAttachment() : incorrect descriptor set!");
+            return;
+        }
+
+        auto&& imageDescriptorRef = texture->GetDescriptorRef();
+
+        const auto&& descriptorSetWrite = EvoVulkan::Tools::Initializers::WriteDescriptorSet(
+                descriptorSet.m_self,
+                VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT, activeTexture,
+                imageDescriptorRef);
+
+        vkUpdateDescriptorSets(*m_kernel->GetDevice(), 1, &descriptorSetWrite, 0, nullptr);
+    }
+
+    void VulkanPipeline::BindVBO(uint32_t VBO) {
+        Super::BindVBO(VBO);
+
+        if (VBO == SR_ID_INVALID) {
+            return;
+        }
+
+        vkCmdBindVertexBuffers(m_currentCmd, 0, 1, m_memory->m_VBOs[VBO]->GetCRef(), m_offsets);
+    }
+
+    void VulkanPipeline::BindIBO(uint32_t IBO) {
+        Super::BindIBO(IBO);
+
+        if (IBO == SR_ID_INVALID) {
+            return;
+        }
+
+        vkCmdBindIndexBuffer(m_currentCmd, *m_memory->m_IBOs[IBO], 0, VK_INDEX_TYPE_UINT32);
+    }
+
+    void VulkanPipeline::BindUBO(uint32_t UBO) {
+        Super::BindUBO(UBO);
+    }
+
+    void VulkanPipeline::BindTexture(uint8_t activeTexture, uint32_t textureId) {
+        Super::BindTexture(activeTexture, textureId);
+
+        if (textureId >= m_memory->m_countTextures.first) {
+            SRHalt("VulkanPipeline::BindTexture() : incorrect range! (" + std::to_string(textureId) + ")");
+            return;
+        }
+
+        EvoVulkan::Types::Texture* texture = m_memory->m_textures[textureId];
+
+        if (!texture) {
+            PipelineError("VulkanPipeline::BindTexture() : texture is not exists!");
+            return;
+        }
+
+        auto&& descriptorSet = m_memory->m_countDescriptorSets.first <= m_state.descriptorSetId ? nullptr : m_memory->m_descriptorSets[m_state.descriptorSetId];
+        if (!descriptorSet) {
+            SRHaltOnce("VulkanPipeline::BindTexture() : incorrect descriptor set!");
+            return;
+        }
+
+        auto&& imageDescriptorRef = texture->GetDescriptorRef();
+
+        const auto&& descriptorSetWrite = EvoVulkan::Tools::Initializers::WriteDescriptorSet(
+                descriptorSet.m_self,
+                VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, activeTexture,
+                imageDescriptorRef);
+
+        vkUpdateDescriptorSets(*m_kernel->GetDevice(), 1, &descriptorSetWrite, 0, nullptr);
+    }
+
+    void VulkanPipeline::Draw(uint32_t count) {
+        Super::Draw(count);
+
+        if (m_currentDescriptorSets) {
+            vkCmdBindDescriptorSets(m_currentCmd, VK_PIPELINE_BIND_POINT_GRAPHICS, m_currentLayout, 0, 1, &m_currentDescriptorSets, 0, NULL);
+        }
+
+        vkCmdDraw(m_currentCmd, count, 1, 0, 0);
+    }
+
+    void VulkanPipeline::DrawIndices(uint32_t count) {
+        Super::DrawIndices(count);
+
+        if (m_currentDescriptorSets) {
+            vkCmdBindDescriptorSets(m_currentCmd, VK_PIPELINE_BIND_POINT_GRAPHICS, m_currentLayout, 0, 1, &m_currentDescriptorSets, 0, NULL);
+        }
+
+        vkCmdDrawIndexed(m_currentCmd, count, 1, 0, 0, 0);
     }
 }

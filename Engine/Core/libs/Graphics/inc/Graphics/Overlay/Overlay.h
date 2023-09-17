@@ -33,6 +33,7 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD virtual bool IsUndockingActive() const = 0;
         SR_NODISCARD virtual bool ReCreate() = 0;
         SR_NODISCARD bool IsSurfaceDirty() const noexcept { return m_surfaceDirty; }
+        SR_NODISCARD bool IsEnabled() const noexcept { return m_enabled; }
 
         SR_NODISCARD virtual void* GetTextureDescriptorSet(uint32_t textureId) { return nullptr; }
         SR_NODISCARD virtual std::string GetName() const = 0;
@@ -42,11 +43,13 @@ namespace SR_GRAPH_NS {
         virtual bool BeginDraw() = 0;
         virtual void EndDraw() = 0;
 
+        void SetEnabled(bool enabled) { m_enabled = enabled; }
         void SetSurfaceDirty() { m_surfaceDirty = true; }
 
     protected:
         PipelinePtr m_pipeline;
 
+        bool m_enabled = true;
         bool m_initialized = false;
         bool m_surfaceDirty = true;
         bool m_tracyEnabled = false;

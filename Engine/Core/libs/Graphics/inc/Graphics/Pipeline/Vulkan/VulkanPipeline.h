@@ -66,6 +66,9 @@ namespace SR_GRAPH_NS {
         bool FreeTexture(int32_t* id) override;
 
     public:
+        void SetOverlayEnabled(OverlayType overlayType, bool enabled) override;
+        void SetDirty(bool dirty) override;
+
         void OnResize(const SR_MATH_NS::UVector2& size) override;
 
         bool BeginCmdBuffer() override;
@@ -74,8 +77,10 @@ namespace SR_GRAPH_NS {
         bool BeginRender() override;
         void EndRender() override;
 
+        void PrepareFrame() override;
         void DrawFrame() override;
 
+        void OnMultiSampleChanged() override;
         void SetCurrentFrameBuffer(FramebufferPtr pFrameBuffer) override;
 
         void SetViewport(int32_t width, int32_t height) override;
@@ -88,9 +93,20 @@ namespace SR_GRAPH_NS {
         void UpdateDescriptorSets(uint32_t descriptorSet, const SRDescriptorUpdateInfos& updateInfo) override;
         void UpdateUBO(uint32_t UBO, void* pData, uint64_t size) override;
 
+        void PushConstants(void* pData, uint64_t size) override;
+
         void UseShader(uint32_t shaderProgram) override;
         void UnUseShader() override;
 
+        void Draw(uint32_t count) override;
+        void DrawIndices(uint32_t count) override;
+
+        void BindAttachment(uint8_t activeTexture, uint32_t textureId) override;
+        void BindVBO(uint32_t VBO) override;
+        void BindUBO(uint32_t UBO) override;
+        void BindIBO(uint32_t IBO) override;
+        void BindTexture(uint8_t activeTexture, uint32_t textureId) override;
+        void BindDescriptorSet(uint32_t descriptorSet) override;
         void BindFrameBuffer(FramebufferPtr pFBO) override;
 
         void ResetDescriptorSet() override;
@@ -99,6 +115,7 @@ namespace SR_GRAPH_NS {
         bool InitEvoVulkanHooks();
 
     private:
+        VkDeviceSize m_offsets[1] = { 0 };
         VkViewport m_viewport = { };
         VkRect2D m_scissor = { };
         VkRenderPassBeginInfo m_renderPassBI = { };

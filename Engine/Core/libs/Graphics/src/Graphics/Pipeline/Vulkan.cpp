@@ -536,272 +536,34 @@ namespace SR_GRAPH_NS {
     }
 
     void Vulkan::SetViewport(int32_t width, int32_t height) {
-        if (width > 0 && height > 0) {
-            m_viewport = EvoVulkan::Tools::Initializers::Viewport(
-                    static_cast<float_t>(width),
-                    static_cast<float_t>(height),
-                    0.f, 1.f
-            );
-        }
-        else {
-            if (m_currentFBOid == 0) {
-                m_viewport = m_kernel->GetViewport();
-            }
-            else if (m_currentFramebuffer) {
-                m_viewport = m_currentVkFramebuffer->GetViewport();
-            }
-        }
 
-        vkCmdSetViewport(m_currentCmd, 0, 1, &m_viewport);
     }
 
     void Vulkan::SetScissor(int32_t width, int32_t height) {
-        if (width > 0 && height > 0) {
-            m_scissor = EvoVulkan::Tools::Initializers::Rect2D(width, height, 0, 0);
-        }
-        else {
-            if (m_currentFBOid == 0) {
-                m_scissor = m_kernel->GetScissor();
-            }
-            else if (m_currentFramebuffer) {
-                m_scissor = m_currentVkFramebuffer->GetScissor();
-            }
-        }
 
-        vkCmdSetScissor(m_currentCmd, 0, 1, &m_scissor);
     }
 
     int32_t Vulkan::AllocateShaderProgram(const SRShaderCreateInfo& createInfo, int32_t FBO) {
-        if (FBO < 0) {
-            SRHalt("Vulkan::AllocateShaderProgram() : vulkan required valid FBO for shaders!");
-            return false;
-        }
-
-        if (!createInfo.Validate()) {
-            SR_ERROR("Vulkan::AllocateShaderProgram() : failed to validate shader create info! Create info:"
-                     "\n\tPolygon mode: " + SR_UTILS_NS::EnumReflector::ToString(createInfo.polygonMode) +
-                     "\n\tCull mode: " + SR_UTILS_NS::EnumReflector::ToString(createInfo.cullMode) +
-                     "\n\tDepth compare: " + SR_UTILS_NS::EnumReflector::ToString(createInfo.depthCompare) +
-                     "\n\tPrimitive topology: " + SR_UTILS_NS::EnumReflector::ToString(createInfo.primitiveTopology)
-            );
-            return false;
-        }
-
-        EvoVulkan::Types::RenderPass renderPass = m_kernel->GetRenderPass();
-        if (FBO != 0) {
-            if (auto&& pFBO = m_memory->m_FBOs[FBO - 1]; pFBO) {
-                renderPass = pFBO->GetRenderPass();
-            }
-            else {
-                SR_ERROR("Vulkan::CompileShader() : invalid FBO! SOMETHING WENT WRONG! MEMORY MAY BE CORRUPTED!");
-                return false;
-            }
-        }
-
-        if (!renderPass.IsReady()) {
-            SR_ERROR("Vulkan::CompileShader() : internal Evo Vulkan error! Render pass isn't ready!");
-            return false;
-        }
-
-        SR_SHADER_PROGRAM shaderProgram = m_memory->AllocateShaderProgram(renderPass);
-        if (shaderProgram < 0) {
-            SR_ERROR("Vulkan::CompileShader() : failed to allocate shader program ID!");
-            return false;
-        }
-
-        auto&& pShaderProgram = m_memory->m_ShaderPrograms[shaderProgram];
-
-        std::vector<SourceShader> modules = { };
-
-        for (auto&& [shaderStage, stage] : createInfo.stages) {
-            SourceShader module(stage.path.ToString(), shaderStage);
-            modules.emplace_back(module);
-        }
-
-        if (modules.empty()) {
-            SRHalt("No shader modules were found!");
-            return false;
-        }
-
-        auto&& pushConstants = VulkanTools::AbstractPushConstantToVkPushConstants(createInfo);
-
-        auto&& descriptorLayoutBindings = VulkanTools::UniformsToDescriptorLayoutBindings(createInfo.uniforms);
-        if (!descriptorLayoutBindings.has_value()) {
-            SRHalt("Vulkan::AllocateShaderProgram() : failed to create descriptor layout bindings!");
-            return false;
-        }
-
-        std::vector<EvoVulkan::Complexes::SourceShader> vkModules;
-        for (auto&& module : modules) {
-            VkShaderStageFlagBits stage = VulkanTools::VkShaderShaderTypeToStage(module.m_stage);
-            vkModules.emplace_back(EvoVulkan::Complexes::SourceShader(module.m_path, stage));
-        }
-
-        EVK_PUSH_LOG_LEVEL(EvoVulkan::Tools::LogLevel::ErrorsOnly);
-
-        if (!pShaderProgram->Load(
-                SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("/Cache/Shaders"),
-                vkModules,
-                descriptorLayoutBindings.value(),
-                pushConstants
-        )) {
-            EVK_POP_LOG_LEVEL();
-            DeleteShader(shaderProgram);
-            SR_ERROR("Vulkan::CompileShader() : failed to load Evo Vulkan shader!");
-            return false;
-        }
-
-        EVK_POP_LOG_LEVEL();
-
-        auto&& vkVertexDescriptions = VulkanTools::AbstractVertexDescriptionsToVk(createInfo.vertexDescriptions);
-        auto&& vkVertexAttributes = VulkanTools::AbstractAttributesToVkAttributes(createInfo.vertexAttributes);
-        if (vkVertexAttributes.size() != createInfo.vertexAttributes.size()) {
-            SR_ERROR("Vulkan::LinkShader() : vkVertexDescriptions size != vertexDescriptions size!");
-            DeleteShader(shaderProgram);
-            return false;
-        }
-
-        if (!pShaderProgram->SetVertexDescriptions(vkVertexDescriptions, vkVertexAttributes)) {
-            SR_ERROR("Vulkan::LinkShader() : failed to set vertex descriptions!");
-            DeleteShader(shaderProgram);
-            return false;
-        }
-
-        /** Так как геометрия грузится отзеркаленная по оси X, то она выворачивается наизнанку,
-         * соответственно, нужно изменить отсечения полигонов на обратный */
-        ///const CullMode cullMode =
-        ///        shaderCreateInfo.cullMode == CullMode::Back ? CullMode::Front :
-        ///            (shaderCreateInfo.cullMode == CullMode::Front ? CullMode::Back : shaderCreateInfo.cullMode);
-
-        const CullMode cullMode = createInfo.cullMode;
-
-        const uint8_t sampleCount = GetFramebufferSampleCount();
-
-        const VkSampleCountFlagBits vkSampleCount = EvoVulkan::Tools::Convert::IntToSampleCount(sampleCount);
-
-        const bool depthEnabled = m_currentVkFramebuffer ? m_currentVkFramebuffer->IsDepthEnabled() : true;
-        
-        EVK_PUSH_LOG_LEVEL(EvoVulkan::Tools::LogLevel::ErrorsOnly);
-
-        if (!pShaderProgram->Compile(
-                VulkanTools::AbstractPolygonModeToVk(createInfo.polygonMode),
-                VulkanTools::AbstractCullModeToVk(cullMode),
-                VulkanTools::AbstractDepthOpToVk(createInfo.depthCompare),
-                createInfo.blendEnabled && depthEnabled,
-                createInfo.depthWrite,
-                createInfo.depthTest,
-                VulkanTools::AbstractPrimitiveTopologyToVk(createInfo.primitiveTopology),
-                vkSampleCount)
-        ) {
-            EVK_POP_LOG_LEVEL();
-            SR_ERROR("Vulkan::LinkShader() : failed to compile Evo Vulkan shader!");
-            DeleteShader(shaderProgram);
-            return false;
-        }
-
-        return shaderProgram;
+        return 0;
     }
 
     void Vulkan::OnMultiSampleChanged() {
-        SR_INFO("Vulkan::OnMultiSampleChanged() : samples count was changed to " + SR_UTILS_NS::ToString(GetSamplesCount()));
-        m_kernel->SetMultisampling(GetSamplesCount());
-        SetBuildState(false);
-        Environment::OnMultiSampleChanged();
+
     }
 
     void Vulkan::PrepareFrame() {
-        Environment::PrepareFrame();
 
-        if (m_kernel->IsDirty()) {
-            m_kernel->ReCreate(EvoVulkan::Core::FrameResult::Dirty);
-        }
-
-        if (GetVkImGUI()->IsSurfaceDirty()) {
-            GetVkImGUI()->ReCreate();
-        }
     }
 
     void Vulkan::UpdateMultiSampling() {
-        const bool isMultiSampleSupported = m_isMultisampleSupported;
-
-        m_isMultisampleSupported = true;
-
-        if (m_supportedSampleCount <= 1) {
-            m_isMultisampleSupported = false;
-        }
-
-        const bool multiSampleSupportsChanged = isMultiSampleSupported != m_isMultisampleSupported;
-
-        if (m_newSampleCount.has_value() || multiSampleSupportsChanged) {
-            const uint8_t oldSampleCount = m_currentSampleCount;
-
-            if (multiSampleSupportsChanged) {
-                if (!IsMultiSamplingSupported()) {
-                    m_currentSampleCount = 1;
-                }
-                else if (m_newSampleCount.has_value()) {
-                    m_currentSampleCount = m_newSampleCount.value();
-                }
-                else {
-                    m_currentSampleCount = m_requiredSampleCount;
-                }
-            }
-            else if (m_newSampleCount.has_value()) {
-                m_currentSampleCount = m_newSampleCount.value();
-            }
-
-            m_currentSampleCount = SR_MIN(m_currentSampleCount, m_supportedSampleCount);
-
-            if (oldSampleCount != m_currentSampleCount) {
-                OnMultiSampleChanged();
-            }
-
-            m_newSampleCount = std::nullopt;
-        }
     }
 
     void Vulkan::ClearBuffers(const std::vector<SR_MATH_NS::FColor> &colors, float_t depth) {
-        const uint8_t sampleCount = GetFramebufferSampleCount();
 
-        auto colorCount = static_cast<uint8_t>(colors.size());
-        colorCount *= sampleCount > 1 ? 2 : 1;
-
-        m_clearValues.resize(colorCount + 1); /// TODO: а если буфера глубины нет??????
-
-        for (uint8_t i = 0; i < colorCount; ++i) {
-            auto&& color = colors[i / (sampleCount > 1 ? 2 : 1)];
-
-            m_clearValues[i] = {
-                .color = { {
-                       static_cast<float_t>(color.r),
-                       static_cast<float_t>(color.g),
-                       static_cast<float_t>(color.b),
-                       static_cast<float_t>(color.a)
-                   }
-                }
-            };
-        }
-
-        m_clearValues[colorCount] = VkClearValue { .depthStencil = { depth, 0 } };
-
-        m_renderPassBI.clearValueCount = colorCount + 1;
-        m_renderPassBI.pClearValues  = m_clearValues.data();
     }
 
     void Vulkan::ClearBuffers(float r, float g, float b, float a, float depth, uint8_t colorCount) {
-        const uint8_t sampleCount = GetFramebufferSampleCount();
 
-        colorCount *= sampleCount > 1 ? 2 : 1;
-
-        m_clearValues.resize(colorCount + 1);
-
-        for (uint8_t i = 0; i < colorCount; ++i)
-            m_clearValues[i] = { .color = {{ r, g, b, a }} };
-
-        m_clearValues[colorCount] = VkClearValue { .depthStencil = { depth, 0 } };
-
-        m_renderPassBI.clearValueCount = colorCount + 1;
-        m_renderPassBI.pClearValues    = m_clearValues.data();
     }
 
     uint8_t Vulkan::GetFramebufferSampleCount() const {
@@ -814,160 +576,21 @@ namespace SR_GRAPH_NS {
 
     std::set<void*> Vulkan::GetFBOHandles() const {
         std::set<void*> handles;
-
-        if (void* pHandle = m_kernel->GetRenderPass()) {
-            handles.insert(pHandle);
-        }
-
-        for (uint64_t i = 0; i < m_memory->m_countFBO.first; ++i) {
-            auto&& pFBO = m_memory->m_FBOs[i];
-            if (!pFBO) {
-                continue;
-            }
-
-            for (auto&& layer : pFBO->GetLayers()) {
-                if (auto&& pVkFrameBuffer = layer->GetFramebuffer()) {
-                    handles.insert(pVkFrameBuffer);
-                }
-            }
-        }
-
         return handles;
     }
 
     void* Vulkan::GetCurrentFBOHandle() const {
-        void* pHandle = m_kernel->GetRenderPass(); /// ну типо кадровый буфер
-
-        if (m_currentFramebuffer) {
-            auto&& FBO = m_currentFramebuffer->GetId();
-
-            if (FBO == SR_ID_INVALID) {
-                SR_ERROR("Vulkan::GetCurrentFBOHandle() : invalid FBO!");
-            }
-            else if (auto&& framebuffer = m_memory->m_FBOs[FBO - 1]; !framebuffer) {
-                SR_ERROR("Vulkan::GetCurrentFBOHandle() : frame buffer object don't exist!");
-            }
-            else {
-                auto&& layers = framebuffer->GetLayers();
-                if (!layers.empty()) {
-                    pHandle = layers.at(SR_MIN(layers.size() - 1, m_frameBufferLayer))->GetFramebuffer();
-                }
-                else {
-                    SR_ERROR("Vulkan::GetCurrentFBOHandle() : frame buffer have not layers!");
-                }
-            }
-        }
-
-        return pHandle;
+        return nullptr;
     }
 
     void Vulkan::SetBuildState(bool isBuild) {
-        SR_TRACY_ZONE;
-
-        if (!isBuild) {
-            return Environment::SetBuildState(isBuild);
-        }
-
-        /// Чистим старую очередь
-
-        m_kernel->ClearSubmitQueue();
-
-        auto&& queues = m_fboQueue.GetQueues();
-
-        for (auto&& queue : queues) {
-            for (auto&& pFrameBuffer : queue) {
-                auto&& fboId = pFrameBuffer->GetId();
-                auto&& vkFrameBuffer = m_memory->m_FBOs[fboId - 1];
-                vkFrameBuffer->ClearWaitSemaphores();
-                vkFrameBuffer->ClearSignalSemaphores();
-            }
-        }
-
-        /// Определяем зависимости
-
-        if (!queues.empty()) {
-            /// Если являемся началом цепочки, то должны дождаться предыдущего кадра
-            for (auto&& pFrameBuffer : queues.front()) {
-                auto&& vkFrameBuffer = m_memory->m_FBOs[pFrameBuffer->GetId() - 1];
-                vkFrameBuffer->GetWaitSemaphores().emplace_back(m_kernel->GetPresentCompleteSemaphore());
-            }
-
-            /// Если являемся концом цепочки, то нужно чтобы нас дождался рендер
-            for (auto&& pFrameBuffer : queues.back()) {
-                auto&& vkFrameBuffer = m_memory->m_FBOs[pFrameBuffer->GetId() - 1];
-                m_kernel->GetWaitSemaphores().emplace_back(vkFrameBuffer->GetSemaphore());
-            }
-        }
-
-        for (uint32_t queueIndex = 1; queueIndex < queues.size(); ++queueIndex) {
-            for (auto&& pFrameBuffer : queues[queueIndex]) {
-                for (auto&& pDependency : queues[queueIndex - 1]) {
-                    auto&& vkFrameBuffer = m_memory->m_FBOs[pFrameBuffer->GetId() - 1];
-                    auto&& vkDependency = m_memory->m_FBOs[pDependency->GetId() - 1];
-                    vkFrameBuffer->GetWaitSemaphores().emplace_back(vkDependency->GetSemaphore());
-                }
-            }
-        }
-
-        /// Строим новую очередь
-
-        for (auto&& queue : queues) {
-            EvoVulkan::SubmitInfo submitInfo;
-
-            submitInfo.SetWaitDstStageMask(m_kernel->GetSubmitPipelineStages());
-
-            for (auto&& pFrameBuffer : queue) {
-                auto&& vkFrameBuffer = m_memory->m_FBOs[pFrameBuffer->GetId() - 1];
-
-                submitInfo.commandBuffers.emplace_back(vkFrameBuffer->GetCmd());
-
-                for (auto&& signalSemaphore : vkFrameBuffer->GetSignalSemaphores()) {
-                    submitInfo.AddSignalSemaphore(signalSemaphore);
-                }
-
-                for (auto&& waitSemaphore : vkFrameBuffer->GetWaitSemaphores()) {
-                    submitInfo.AddWaitSemaphore(waitSemaphore);
-                }
-            }
-
-            m_kernel->AddSubmitQueue(submitInfo);
-        }
-
-        /// m_kernel->PrintSubmitQueue();
-
-        Environment::SetBuildState(isBuild);
     }
 
     void Vulkan::SetCurrentFramebuffer(SR_GTYPES_NS::Framebuffer* pFrameBuffer) {
-        Environment::SetCurrentFramebuffer(pFrameBuffer);
 
-        if (pFrameBuffer && pFrameBuffer->GetId() != SR_ID_INVALID) {
-            m_currentVkFramebuffer = m_memory->m_FBOs[pFrameBuffer->GetId() - 1];
-        }
-        else {
-            m_currentVkFramebuffer = nullptr;
-        }
-
-        if (m_currentVkFramebuffer) {
-            m_currentCmd = m_currentVkFramebuffer->GetCmd();
-        }
     }
 
     void Vulkan::PushConstants(void* pData, uint64_t size) {
-        auto&& pushConstants = m_currentShader->GetPushConstants();
 
-        SRAssert2Once(pushConstants.size() == 1, "Unsupported!");
-
-        if (pushConstants.size() != 1) {
-            return;
-        }
-
-        vkCmdPushConstants(m_currentCmd, m_currentLayout,
-            pushConstants.front().stageFlags,
-            0, size, pData
-        );
     }
-
-    //!-----------------------------------------------------------------------------------------------------------------
-
 }

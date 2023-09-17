@@ -189,7 +189,7 @@ namespace SR_GRAPH_NS {
     void RenderScene::Overlay() {
         SR_TRACY_ZONE;
 
-        GetPipeline()->SetOverlayEnabled(m_bOverlay);
+        GetPipeline()->SetOverlayEnabled(OverlayType::ImGui, m_bOverlay);
 
         if (!m_bOverlay) {
             return;
