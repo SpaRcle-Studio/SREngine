@@ -301,10 +301,9 @@ namespace SR_GRAPH_NS {
         SRHalt("RenderScene::RemoveWidgetManager() : the widget manager not found!");
     }
 
-    void RenderScene::Register(RenderScene::CameraPtr pCamera) {
+    void RenderScene::Register(const CameraPtr& pCamera) {
         CameraInfo info;
 
-        info.isDestroyed = false;
         info.pCamera = pCamera;
 
         m_cameras.emplace_back(info);
@@ -312,15 +311,13 @@ namespace SR_GRAPH_NS {
         m_dirtyCameras = true;
     }
 
-    void RenderScene::Remove(RenderScene::CameraPtr pCamera) {
+    void RenderScene::Remove(const CameraPtr& pCamera) {
         for (auto&& cameraInfo : m_cameras) {
             if (cameraInfo.pCamera != pCamera) {
                 continue;
             }
 
-            SRAssert(!cameraInfo.isDestroyed);
-
-            cameraInfo.isDestroyed = true;
+            cameraInfo.pCamera = CameraPtr();
             m_dirtyCameras = true;
 
             return;
@@ -330,6 +327,8 @@ namespace SR_GRAPH_NS {
     }
 
     void RenderScene::SortCameras() {
+        SR_TRACY_ZONE;
+
         m_dirty = true;
         m_dirtyCameras = false;
         m_mainCamera = nullptr;
@@ -339,14 +338,9 @@ namespace SR_GRAPH_NS {
         m_offScreenCameras.reserve(offScreenCamerasCount);
 
         /// Удаляем уничтоженные камеры
-        for (auto&& pIt = m_cameras.begin(); pIt != m_cameras.end(); ) {
-            if (pIt->isDestroyed) {
-                SR_LOG("RenderScene::SortCameras() : free camera...");
-
-                pIt->pCamera->AutoFree([](auto&& pData) {
-                    delete pData;
-                });
-
+        for (auto pIt = m_cameras.begin(); pIt != m_cameras.end(); ) {
+            if (!pIt->pCamera) {
+                SR_LOG("RenderScene::SortCameras() : remove destroyed camera...");
                 pIt = m_cameras.erase(pIt);
             }
             else {
@@ -375,6 +369,10 @@ namespace SR_GRAPH_NS {
         std::stable_sort(m_offScreenCameras.begin(), m_offScreenCameras.end(), [](CameraPtr lhs, CameraPtr rhs) {
             return lhs->GetPriority() < rhs->GetPriority();
         });
+
+        if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::Full) {
+            SR_LOG("RenderScene::SortCameras() : cameras was sorted");
+        }
     }
 
     RenderScene::PipelinePtr RenderScene::GetPipeline() const {
@@ -442,6 +440,8 @@ namespace SR_GRAPH_NS {
     }
 
     void RenderScene::Synchronize() {
+        SR_TRACY_ZONE;
+
         /// отладочной геометрией ничто не управляет, она уничтожается по истечению времени.
         /// ее нужно принудительно освобождать при закрытии сцены.
         if (m_debugRender && !m_scene.Valid()) {
@@ -460,7 +460,7 @@ namespace SR_GRAPH_NS {
 
         if (!m_context->GetWindow()->IsWindowCollapsed()) {
             for (auto&& cameraInfo : m_cameras) {
-                if (cameraInfo.isDestroyed) {
+                if (!cameraInfo.pCamera) {
                     continue;
                 }
 

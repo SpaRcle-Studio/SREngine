@@ -215,8 +215,6 @@ namespace SR_CORE_NS::Commands {
             Чтобы этого избежать, сперва блокируем сцену.
          */
         if (m_scene.RecursiveLockIfValid()) {
-            SR_HTYPES_NS::SafePtrLockGuard m_lock(m_scene->GetDataStorage().GetValue<SR_GRAPH_NS::RenderScene::Ptr>());
-
             /// резервируем все дерево сущностей, чтобы после отмены команды его можно было восстановить
             m_reserved.Reserve();
             SR_SAFE_DELETE_PTR(m_backup)

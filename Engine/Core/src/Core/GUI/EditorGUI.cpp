@@ -364,7 +364,7 @@ namespace SR_CORE_GUI_NS {
         }
 
         if (!SR_WORLD_NS::Scene::IsExists(scenePath)) {
-            SR_ERROR("EditorGUI::LoadSceneFromCachedPath : scene path is not valid or does not exist! Caching is aborted.");
+            SR_ERROR("EditorGUI::LoadSceneFromCachedPath() : scene path is not valid or does not exist! Caching is aborted.\n\tPath: " + scenePath.ToStringRef());
             return;
         }
 

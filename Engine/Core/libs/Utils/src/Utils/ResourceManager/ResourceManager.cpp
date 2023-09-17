@@ -282,7 +282,8 @@ namespace SR_UTILS_NS {
     }
 
     void ResourceManager::PrintMemoryDump() {
-        SR_SCOPED_LOCK
+        SR_TRACY_ZONE;
+        SR_SCOPED_LOCK;
 
         uint64_t count = 0;
 

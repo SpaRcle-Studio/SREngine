@@ -282,6 +282,8 @@ namespace SR_GRAPH_NS {
     }
 
     std::set<void*> VulkanPipeline::GetFBOHandles() const {
+        SR_TRACY_ZONE;
+
         std::set<void*> handles;
 
         if (void* pHandle = m_kernel->GetRenderPass()) {
@@ -323,6 +325,8 @@ namespace SR_GRAPH_NS {
     }
 
     int32_t VulkanPipeline::AllocateShaderProgram(const SRShaderCreateInfo& createInfo, int32_t fbo) {
+        SR_TRACY_ZONE;
+
         ++m_state.operations;
         ++m_state.allocations;
 
@@ -465,6 +469,8 @@ namespace SR_GRAPH_NS {
     }
 
     int32_t VulkanPipeline::AllocateTexture(const SRTextureCreateInfo& createInfo) {
+        SR_TRACY_ZONE;
+
         SRTextureCreateInfo textureCreateInfo = createInfo;
 
         ++m_state.allocations;
@@ -687,6 +693,8 @@ namespace SR_GRAPH_NS {
     }
 
     int32_t VulkanPipeline::AllocateFrameBuffer(const SRFrameBufferCreateInfo& createInfo) {
+        SR_TRACY_ZONE;
+
         ++m_state.allocations;
         ++m_state.operations;
 
@@ -740,6 +748,8 @@ namespace SR_GRAPH_NS {
     }
 
     SR_MATH_NS::FColor VulkanPipeline::GetPixelColor(uint32_t textureId, uint32_t x, uint32_t y) {
+        SR_TRACY_ZONE;
+
         ++m_state.operations;
 
         if (textureId == SR_ID_INVALID || textureId >= m_memory->m_countTextures.first) {
@@ -761,6 +771,8 @@ namespace SR_GRAPH_NS {
     }
 
     bool VulkanPipeline::InitEvoVulkanHooks() {
+        SR_TRACY_ZONE;
+
         SR_GRAPH("VulkanPipeline::InitEvoVulkanHooks() : initialize evo vulkan hooks...");
 
         auto&& GetUsedMemoryFn = [pPipeline = GetThis()]() -> uint32_t {
@@ -820,6 +832,8 @@ namespace SR_GRAPH_NS {
     }
 
     bool VulkanPipeline::PostInit() {
+        SR_TRACY_ZONE;
+
         SR_GRAPH_LOG("VulkanPipeline::PostInit() : post-initializing vulkan...");
 
         if (!m_kernel || !m_kernel->PostInit()) {
@@ -1006,6 +1020,8 @@ namespace SR_GRAPH_NS {
     }
 
     bool VulkanPipeline::FreeFBO(int32_t* id) {
+        SR_TRACY_ZONE;
+
         ++m_state.operations;
         ++m_state.deletions;
 
@@ -1015,6 +1031,8 @@ namespace SR_GRAPH_NS {
     }
 
     bool VulkanPipeline::FreeShader(int32_t* id) {
+        SR_TRACY_ZONE;
+
         ++m_state.operations;
         ++m_state.deletions;
 
@@ -1041,6 +1059,8 @@ namespace SR_GRAPH_NS {
     }
 
     bool VulkanPipeline::FreeCubeMap(int32_t* id) {
+        SR_TRACY_ZONE;
+
         ++m_state.operations;
         ++m_state.deletions;
 
@@ -1083,6 +1103,8 @@ namespace SR_GRAPH_NS {
     }
 
     bool VulkanPipeline::FreeDescriptorSet(int32_t* id) {
+        SR_TRACY_ZONE;
+
         ++m_state.operations;
         ++m_state.deletions;
 
@@ -1103,6 +1125,8 @@ namespace SR_GRAPH_NS {
     }
 
     bool VulkanPipeline::FreeVBO(int32_t* id) {
+        SR_TRACY_ZONE;
+
         ++m_state.operations;
         ++m_state.deletions;
 
@@ -1119,6 +1143,8 @@ namespace SR_GRAPH_NS {
     }
 
     bool VulkanPipeline::FreeIBO(int32_t* id) {
+        SR_TRACY_ZONE;
+
         ++m_state.operations;
         ++m_state.deletions;
 
@@ -1135,6 +1161,8 @@ namespace SR_GRAPH_NS {
     }
 
     bool VulkanPipeline::FreeUBO(int32_t* id) {
+        SR_TRACY_ZONE;
+
         ++m_state.operations;
         ++m_state.deletions;
 

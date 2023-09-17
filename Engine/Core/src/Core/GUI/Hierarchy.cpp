@@ -441,6 +441,7 @@ namespace SR_CORE_GUI_NS {
         newSelected.insert(ptr);
 
         auto&& pEngine = dynamic_cast<EditorGUI*>(GetManager())->GetEngine();
+
         auto&& cmd = new SR_CORE_NS::Commands::ChangeHierarchySelected(pEngine, this, m_selected, newSelected);
         pEngine->GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Sync);
     }

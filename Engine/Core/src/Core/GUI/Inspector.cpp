@@ -104,10 +104,10 @@ namespace Framework::Core::GUI {
 
             switch (pTransform->GetMeasurement()) {
                 case SR_UTILS_NS::Measurement::Space2D:
-                    DrawTransform2D(dynamic_cast<SR_UTILS_NS::Transform2D *>(pTransform));
+                    DrawTransform2D(dynamic_cast<SR_UTILS_NS::Transform2D*>(pTransform));
                     break;
                 case SR_UTILS_NS::Measurement::Space3D:
-                    DrawTransform3D(dynamic_cast<SR_UTILS_NS::Transform3D *>(pTransform));
+                    DrawTransform3D(dynamic_cast<SR_UTILS_NS::Transform3D*>(pTransform));
                     break;
                 case SR_UTILS_NS::Measurement::SpaceZero:
                 case SR_UTILS_NS::Measurement::Space4D:

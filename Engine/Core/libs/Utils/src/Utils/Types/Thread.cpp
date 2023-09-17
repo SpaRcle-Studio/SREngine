@@ -36,6 +36,7 @@ namespace SR_HTYPES_NS {
     { }
 
     void Thread::Sleep(uint64_t milliseconds) {
+        SR_TRACY_ZONE;
         Platform::Sleep(milliseconds);
     }
 

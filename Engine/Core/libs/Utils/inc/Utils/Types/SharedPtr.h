@@ -249,6 +249,7 @@ namespace SR_HTYPES_NS {
             if (pData->policy == SharedPtrPolicy::Manually) {
                 SR_SAFE_PTR_ASSERT(!pData->valid, "Ptr was not freed!");
                 delete pData;
+                return;
             }
             else if (pData->policy == SharedPtrPolicy::Automatic && pData->valid) {
                 pData->valid = false;

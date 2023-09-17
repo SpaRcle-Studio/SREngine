@@ -148,6 +148,8 @@ namespace SR_GRAPH_NS {
     /// ------------------------------------------------------------------------------
 
     template<typename T> bool RenderContext::Update(T& resourceList) noexcept {
+        SR_TRACY_ZONE;
+        
         bool dirty = false;
 
         for (auto pIt = std::begin(resourceList); pIt != std::end(resourceList); ) {

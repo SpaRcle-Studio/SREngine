@@ -33,9 +33,9 @@ namespace SR_GTYPES_NS {
     void Camera::OnAttached() {
         Component::OnAttached();
 
-        if (auto&& renderScene = GetRenderScene(); renderScene.RecursiveLockIfValid()) {
-            renderScene->Register(this);
-            renderScene.Unlock();
+        if (auto&& pRenderScene = GetRenderScene(); pRenderScene.RecursiveLockIfValid()) {
+            pRenderScene->Register(GetThis().DynamicCast<Camera>());
+            pRenderScene.Unlock();
         }
         else {
             SRHalt("Render scene is invalid!");
@@ -43,19 +43,18 @@ namespace SR_GTYPES_NS {
     }
 
     void Camera::OnDestroy() {
-        RenderScene::Ptr renderScene = TryGetRenderScene();
+        RenderScene::Ptr pRenderScene = TryGetRenderScene();
 
         Super::OnDestroy();
 
-        if (renderScene.RecursiveLockIfValid()) {
-            renderScene->Remove(this);
-            renderScene.Unlock();
+        if (pRenderScene.RecursiveLockIfValid()) {
+            pRenderScene->Remove(GetThis().DynamicCast<Camera>());
+            pRenderScene.Unlock();
         }
-        else {
-            GetThis().AutoFree([](auto&& pData) {
-                delete pData;
-            });
-        }
+
+        GetThis().AutoFree([](auto&& pData) {
+            delete pData;
+        });
     }
 
     SR_HTYPES_NS::Marshal::Ptr Camera::Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SR_UTILS_NS::SavableFlags flags) const {

@@ -170,9 +170,9 @@ namespace SR_CORE_NS {
     }
 
     void EngineScene::UpdateMainCamera() {
-        pMainCamera = pRenderScene.Do<CameraPtr>([](SR_GRAPH_NS::RenderScene* ptr) -> CameraPtr {
+        pMainCamera = pRenderScene.Do<SR_GTYPES_NS::Camera::Ptr>([](SR_GRAPH_NS::RenderScene* ptr) -> SR_GTYPES_NS::Camera::Ptr {
             return ptr->GetMainCamera();
-        }, nullptr);
+        }, SR_GTYPES_NS::Camera::Ptr());
     }
 
     void EngineScene::SetActive(bool active) {

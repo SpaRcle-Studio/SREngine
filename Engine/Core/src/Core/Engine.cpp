@@ -212,6 +212,8 @@ namespace SR_CORE_NS {
     }
 
     void Engine::SynchronizeFreeResources() {
+        SR_TRACY_ZONE;
+
         SR_SYSTEM_LOG("Engine::SynchronizeFreeResources() : synchronizing resources...");
 
         SR_UTILS_NS::ResourceManager::Instance().SetWatchingEnabled(false);
@@ -220,6 +222,8 @@ namespace SR_CORE_NS {
 
         /** Ждем, пока все графические ресурсы не освободятся */
         auto&& thread = SR_HTYPES_NS::Thread::Factory::Instance().Create([&syncComplete, this]() {
+            SR_TRACY_ZONE_N("Sync free resources thread");
+
             uint32_t syncStep = 0;
             const uint32_t maxErrStep = 50;
 
@@ -229,6 +233,8 @@ namespace SR_CORE_NS {
             SR_UTILS_NS::ResourceManager::Instance().Synchronize(true);
 
             while (!m_renderContext->IsEmpty()) {
+                SR_TRACY_ZONE_N("Sync free resources iteration");
+
                 SR_SYSTEM_LOG("Engine::SynchronizeFreeResources() : synchronizing resources (step " + std::to_string(++syncStep) + ")");
 
                 SR_UTILS_NS::ResourceManager::Instance().Synchronize(true);

@@ -41,14 +41,13 @@ namespace SR_GRAPH_NS {
         using WidgetManagers = std::vector<WidgetManagerPtr>;
         using ScenePtr = SR_HTYPES_NS::SafePtr<SR_WORLD_NS::Scene>;
         using WindowPtr = SR_HTYPES_NS::SafePtr<Window>;
-        using CameraPtr = SR_GTYPES_NS::Camera*;
+        using CameraPtr = SR_HTYPES_NS::SharedPtr<SR_GTYPES_NS::Camera>;
         using MeshPtr = SR_GTYPES_NS::Mesh*;
         using PipelinePtr = SR_HTYPES_NS::SharedPtr<Pipeline>;
         using Ptr = SR_HTYPES_NS::SafePtr<RenderScene>;
 
         struct CameraInfo {
-            bool isDestroyed = false;
-            CameraPtr pCamera = nullptr;
+            CameraPtr pCamera;
         };
 
     public:
@@ -70,11 +69,11 @@ namespace SR_GRAPH_NS {
         void SetTechnique(RenderTechnique* pTechnique);
         void SetTechnique(const SR_UTILS_NS::Path& path);
 
-        void Register(CameraPtr pCamera);
+        void Register(const CameraPtr& pCamera);
         void Register(WidgetManagerPtr pWidgetManager);
         void Register(MeshPtr pMesh);
 
-        void Remove(CameraPtr pCamera);
+        void Remove(const CameraPtr& pCamera);
         void Remove(WidgetManagerPtr pWidgetManager);
 
         void SetOverlayEnabled(bool enabled);
@@ -148,6 +147,7 @@ namespace SR_GRAPH_NS {
 
 #define SR_RENDER_TECHNIQUES_CALL(FunctionName, ...)                        \
     for (auto&& pCamera : m_offScreenCameras) {                             \
+        if (!pCamera) { continue; }                                         \
         if (auto&& pRenderTechnique = pCamera->GetRenderTechnique()) {      \
             pRenderTechnique->FunctionName(##__VA_ARGS__);                  \
         }                                                                   \
@@ -163,6 +163,7 @@ namespace SR_GRAPH_NS {
 
 #define SR_RENDER_TECHNIQUES_RETURN_CALL(FunctionName, ...)                 \
     for (auto&& pCamera : m_offScreenCameras) {                             \
+        if (!pCamera) { continue; }                                         \
         if (auto&& pRenderTechnique = pCamera->GetRenderTechnique()) {      \
             m_hasDrawData |= pRenderTechnique->FunctionName(##__VA_ARGS__); \
         }                                                                   \

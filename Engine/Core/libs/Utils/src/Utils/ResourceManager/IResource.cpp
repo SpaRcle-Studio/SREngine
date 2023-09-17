@@ -275,6 +275,7 @@ namespace SR_UTILS_NS {
     }
 
     bool IResource::Execute(const SR_HTYPES_NS::Function<bool()>& fun) const {
+        SR_TRACY_ZONE;
         return fun();
     }
 
