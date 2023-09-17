@@ -13,9 +13,6 @@
 #include <Graphics/Types/Shader.h>
 #include <Graphics/Render/RenderContext.h>
 #include <Graphics/Render/RenderScene.h>
-#include <Graphics/Pipeline/Environment.h>
-
-#include <EvoVulkan/Tools/VulkanDebug.h>
 
 namespace SR_GTYPES_NS {
     SR_REGISTER_COMPONENT(Text);
@@ -110,8 +107,6 @@ namespace SR_GTYPES_NS {
             return false;
         }
 
-        EVK_PUSH_LOG_LEVEL(EvoVulkan::Tools::LogLevel::ErrorsOnly);
-
         if (m_id != SR_ID_INVALID) {
             SRVerifyFalse(!m_pipeline->FreeTexture(&m_id));
         }
@@ -141,8 +136,6 @@ namespace SR_GTYPES_NS {
         textureCreateInfo.alpha = true;
 
         m_id = m_pipeline->AllocateTexture(textureCreateInfo);
-
-        EVK_POP_LOG_LEVEL();
 
         if (m_id == SR_ID_INVALID) {
             SR_ERROR("Text::BuildAtlas() : failed to build the font atlas!");

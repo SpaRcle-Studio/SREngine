@@ -5,6 +5,8 @@
 #include <Graphics/Pipeline/Pipeline.h>
 #include <Graphics/Overlay/Overlay.h>
 #include <Graphics/Types/Shader.h>
+#include <Graphics/Types/Framebuffer.h>
+#include <Graphics/Render/RenderContext.h>
 
 #ifdef SR_DEBUG
     #define SR_PIPELINE_RENDER_GUARD(ret)                   \

@@ -13,6 +13,7 @@
 #include <Graphics/Render/RenderTechnique.h>
 #include <Graphics/Render/DebugRenderer.h>
 #include <Graphics/Lighting/LightSystem.h>
+#include <Graphics/Window/Window.h>
 
 namespace SR_GRAPH_NS {
     RenderScene::RenderScene(const ScenePtr& scene, RenderContext* pContext)

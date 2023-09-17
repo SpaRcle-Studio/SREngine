@@ -11,8 +11,8 @@
 
 #include <Graphics/Memory/ShaderProgramManager.h>
 #include <Graphics/Render/RenderTechnique.h>
-#include <Graphics/Pipeline/Vulkan.h>
 #include <Graphics/Pipeline/Vulkan/VulkanPipeline.h>
+#include <Graphics/Pipeline/Vulkan/VulkanKernel.h>
 
 namespace SR_CORE_GUI_NS {
     EngineStatistics::EngineStatistics()

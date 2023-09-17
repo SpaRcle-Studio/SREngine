@@ -7,7 +7,6 @@
 
 #include <Graphics/Types/Texture.h>
 #include <Graphics/Loaders/TextureLoader.h>
-#include <Graphics/Pipeline/Environment.h>
 #include <Graphics/Render/RenderContext.h>
 
 namespace SR_GTYPES_NS {
@@ -20,25 +19,25 @@ namespace SR_GTYPES_NS {
     }
 
     Texture::Ptr Texture::LoadFont(Font* pFont) {
-        Texture* texture = new Texture();
+        auto&& pTexture = new Texture();
 
-        texture->m_fromMemory = true;
-        texture->m_isFont = true;
+        pTexture->m_fromMemory = true;
+        pTexture->m_isFont = true;
 
-        texture->m_width = pFont->GetWidth();
-        texture->m_height = pFont->GetHeight();
-        texture->m_data = pFont->CopyData();
+        pTexture->m_width = pFont->GetWidth();
+        pTexture->m_height = pFont->GetHeight();
+        pTexture->m_data = pFont->CopyData();
 
-        texture->m_config.m_alpha = SR_UTILS_NS::BoolExt::True;
-        texture->m_config.m_format = ImageFormat::RGBA8_UNORM;
-        texture->m_config.m_filter = TextureFilter::NEAREST;
-        texture->m_config.m_compression = TextureCompression::None;
-        texture->m_config.m_mipLevels = 1;
-        texture->m_config.m_cpuUsage = false;
+        pTexture->m_config.m_alpha = SR_UTILS_NS::BoolExt::True;
+        pTexture->m_config.m_format = ImageFormat::RGBA8_UNORM;
+        pTexture->m_config.m_filter = TextureFilter::NEAREST;
+        pTexture->m_config.m_compression = TextureCompression::None;
+        pTexture->m_config.m_mipLevels = 1;
+        pTexture->m_config.m_cpuUsage = false;
 
-        texture->SetId("FontTexture");
+        pTexture->SetId("FontTexture");
 
-        return texture;
+        return pTexture;
     }
 
     Texture::Ptr Texture::LoadRaw(const uint8_t* pData, uint64_t bytes, uint64_t h, uint64_t w, const Memory::TextureConfig &config) {

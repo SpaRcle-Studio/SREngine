@@ -4,7 +4,6 @@
 
 #include <Graphics/Types/Geometry/Sprite.h>
 #include <Graphics/Types/Material.h>
-#include <Graphics/Pipeline/Environment.h>
 #include <Graphics/Types/Uniforms.h>
 #include <Graphics/Types/Shader.h>
 

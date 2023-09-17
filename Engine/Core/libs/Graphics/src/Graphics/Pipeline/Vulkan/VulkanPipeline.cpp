@@ -2,12 +2,19 @@
 // Created by Monika on 15.09.2023.
 //
 
+#include <Utils/Events/EventManager.h>
+
 #include <Graphics/Pipeline/Vulkan/VulkanPipeline.h>
 #include <Graphics/Pipeline/Vulkan/VulkanKernel.h>
+#include <Graphics/Pipeline/Vulkan/AbstractCasts.h>
+#include <Graphics/Pipeline/Vulkan/VulkanTracy.h>
+#include <Graphics/Pipeline/Vulkan/VulkanMemory.h>
 
 #ifdef SR_USE_IMGUI
     #include <Graphics/Overlay/VulkanImGuiOverlay.h>
 #endif
+
+#include <EvoVulkan/Types/VmaBuffer.h>
 
 namespace SR_GRAPH_NS {
     std::string VulkanPipeline::GetVendor() const {
@@ -220,7 +227,7 @@ namespace SR_GRAPH_NS {
         return SR_ID_INVALID;
     }
 
-    int32_t VulkanPipeline::AllocDescriptorSet(const std::vector<uint64_t>& types) {
+    int32_t VulkanPipeline::AllocDescriptorSet(const std::vector<DescriptorType>& types) {
         ++m_state.operations;
         ++m_state.allocations;
 
@@ -1079,11 +1086,16 @@ namespace SR_GRAPH_NS {
         ++m_state.operations;
         ++m_state.deletions;
 
+        EVK_PUSH_LOG_LEVEL(EvoVulkan::Tools::LogLevel::ErrorsOnly);
+
         if (!m_memory->FreeDescriptorSet(*id)) {
             SR_ERROR("Vulkan::FreeDescriptorSet() : failed to free descriptor set!");
             *id = SR_ID_INVALID;
+            EVK_POP_LOG_LEVEL();
             return false;
         }
+
+        EVK_POP_LOG_LEVEL();
 
         *id = SR_ID_INVALID;
 

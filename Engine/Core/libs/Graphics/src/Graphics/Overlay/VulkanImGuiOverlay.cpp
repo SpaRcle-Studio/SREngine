@@ -5,7 +5,99 @@
 #include <Graphics/Overlay/VulkanImGuiOverlay.h>
 #include <Graphics/Pipeline/Vulkan/VulkanPipeline.h>
 
+#include <EvoVulkan/Types/DescriptorPool.h>
+#include <EvoVulkan/DescriptorManager.h>
+
+extern LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+
 namespace SR_GRAPH_NS {
+    static LRESULT ImGui_WndProcHandler(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
+    {
+        if (ImGui::GetCurrentContext() == NULL)
+            return 0;
+
+        ImGuiIO& io = ImGui::GetIO();
+
+        switch (msg) {
+            case WM_CHAR:
+                wchar_t wch;
+                MultiByteToWideChar(CP_ACP, MB_PRECOMPOSED, (char *) &wParam, 1, &wch, 1);
+                io.AddInputCharacter(wch);
+                return 1;
+            default:
+                break;
+        }
+
+        return 0;
+    }
+
+    int CreatePlatformSurface(ImGuiViewport* pv, ImU64 vk_inst, const void* vk_allocators, ImU64* out_vk_surface) {
+    #ifdef SR_WIN32
+        VkWin32SurfaceCreateInfoKHR sci;
+        PFN_vkCreateWin32SurfaceKHR vkCreateWin32SurfaceKHR;
+
+        vkCreateWin32SurfaceKHR = (PFN_vkCreateWin32SurfaceKHR)vkGetInstanceProcAddr(reinterpret_cast<VkInstance>(vk_inst), "vkCreateWin32SurfaceKHR");
+        if (!vkCreateWin32SurfaceKHR) {
+            return VK_ERROR_EXTENSION_NOT_PRESENT;
+        }
+
+        memset(&sci, 0, sizeof(sci));
+        sci.sType = VK_STRUCTURE_TYPE_WIN32_SURFACE_CREATE_INFO_KHR;
+        sci.hinstance = GetModuleHandle(NULL);
+        sci.hwnd = static_cast<HWND>(pv->PlatformHandleRaw);
+
+        VkResult err = vkCreateWin32SurfaceKHR(reinterpret_cast<VkInstance>(vk_inst), &sci, static_cast<const VkAllocationCallbacks *>(vk_allocators), (VkSurfaceKHR*)out_vk_surface);
+        return (int)err;
+    #else
+        SRHaltOnce("Unsupported platform!");
+    return -1;
+    #endif
+    }
+
+    LRESULT CustomWindowProcPlatform(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)  {
+        if (!SR_GRAPH_NS::ImGui_WndProcHandler(hwnd, msg, wParam, lParam)) {
+            if (ImGui_ImplWin32_WndProcHandler(hwnd, msg, wParam, lParam)) {
+                return true;
+            }
+        }
+
+        switch (msg) {
+            case WM_CREATE: {
+                return DefWindowProc(hwnd, msg, wParam, lParam);
+            }
+            case WM_DESTROY:
+            case WM_CLOSE: {
+                auto&& viewport = ImGui::FindViewportByPlatformHandle(hwnd);
+                if (auto&& widget = SR_GRAPH_GUI_NS::ViewportsTableManager::Instance().GetWidgetByViewport(viewport)) {
+                    widget->Close();
+                }
+
+                return DefWindowProc(hwnd, msg, wParam, lParam);
+            }
+            case WM_SETCURSOR: {
+                /// Костыльный фикс курсора для вторичных окон.
+                SetClassLongPtr(hwnd, GCLP_HCURSOR, reinterpret_cast<LONG_PTR>(LoadCursor(NULL, IDC_ARROW)));
+                return DefWindowProc(hwnd, msg, wParam, lParam);
+            }
+            default:
+                return DefWindowProc(hwnd, msg, wParam, lParam);
+        }
+    }
+
+    static void (*ImGui_Platform_CreateWindow)(ImGuiViewport* vp) = nullptr;
+
+    void Replacement_Platform_CreateWindow(ImGuiViewport* vp)
+    {
+        if (ImGui_Platform_CreateWindow != nullptr) {
+            ImGui_Platform_CreateWindow(vp);
+        }
+
+        if (vp->PlatformHandle != nullptr) {
+            /// platform dependent manipulation of viewport window, f.e. in Win32:
+            SetWindowLongPtr((HWND)vp->PlatformHandle, GWLP_WNDPROC, (LONG_PTR)CustomWindowProcPlatform);
+        }
+    }
+
     const std::vector<VkDescriptorPoolSize> VulkanImGuiOverlay::POOL_SIZES = {
         { VK_DESCRIPTOR_TYPE_SAMPLER,                1000 },
         { VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1000 },

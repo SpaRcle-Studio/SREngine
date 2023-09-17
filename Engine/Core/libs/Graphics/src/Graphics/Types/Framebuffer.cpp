@@ -3,7 +3,6 @@
 //
 
 #include <Graphics/Types/Framebuffer.h>
-#include <Graphics/Pipeline/Environment.h>
 #include <Graphics/Types/Shader.h>
 
 namespace SR_GTYPES_NS {

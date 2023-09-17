@@ -15,8 +15,6 @@
 #include "../Graphics/src/Graphics/Animations/AnimationState.cpp"
 #include "../Graphics/src/Graphics/Animations/BoneComponent.cpp"
 
-#include "../Graphics/src/Graphics/Pipeline/Environment.cpp"
-#include "../Graphics/src/Graphics/Pipeline/OpenGL.cpp"
 #include "../Graphics/src/Graphics/Pipeline/TextureHelper.cpp"
 #include "../Graphics/src/Graphics/Pipeline/Pipeline.cpp"
 #include "../Graphics/src/Graphics/Pipeline/EmptyPipeline.cpp"
@@ -98,9 +96,7 @@
 #endif
 
 #if defined(SR_USE_VULKAN)
-    #include "../Graphics/src/Graphics/Pipeline/Vulkan.cpp"
     #include "../Graphics/src/Graphics/Pipeline/Vulkan/VulkanPipeline.cpp"
-    #include "../Graphics/src/Graphics/Pipeline/Vulkan/VulkanImGUI.cpp"
     #include "../Graphics/src/Graphics/Pipeline/Vulkan/VulkanMemory.cpp"
     #include "../Graphics/src/Graphics/Pipeline/Vulkan/VulkanKernel.cpp"
 

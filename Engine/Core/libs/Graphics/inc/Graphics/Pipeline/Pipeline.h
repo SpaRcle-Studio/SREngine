@@ -152,7 +152,7 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD virtual int32_t AllocateVBO(void* pVertices, Vertices::VertexType type, size_t count) { return SR_ID_INVALID; }
         SR_NODISCARD virtual int32_t AllocateIBO(void* pIndices, uint32_t indexSize, size_t count, int32_t VBO) { return SR_ID_INVALID; }
         SR_NODISCARD virtual int32_t AllocateUBO(uint32_t uboSize) { return SR_ID_INVALID; }
-        SR_NODISCARD virtual int32_t AllocDescriptorSet(const std::vector<uint64_t>& types) { return SR_ID_INVALID; }
+        SR_NODISCARD virtual int32_t AllocDescriptorSet(const std::vector<DescriptorType>& types) { return SR_ID_INVALID; }
         SR_NODISCARD virtual int32_t AllocateShaderProgram(const SRShaderCreateInfo& createInfo, int32_t fbo) { return SR_ID_INVALID; };
         SR_NODISCARD virtual int32_t AllocateTexture(const SRTextureCreateInfo& createInfo) { return SR_ID_INVALID; };
         SR_NODISCARD virtual int32_t AllocateFrameBuffer(const SRFrameBufferCreateInfo& createInfo) { return SR_ID_INVALID; };

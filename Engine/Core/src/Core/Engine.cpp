@@ -14,7 +14,6 @@
 #include <Utils/Common/Features.h>
 #include <Utils/ECS/ComponentManager.h>
 
-#include <Graphics/Pipeline/Environment.h>
 #include <Graphics/GUI/WidgetManager.h>
 #include <Graphics/Render/RenderScene.h>
 #include <Graphics/Render/DebugRenderer.h>

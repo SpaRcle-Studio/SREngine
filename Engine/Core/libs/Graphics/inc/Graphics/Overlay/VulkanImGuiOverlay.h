@@ -6,6 +6,7 @@
 #define SR_ENGINE_GRAPHICS_VULKAN_IMGUI_OVERLAY_H
 
 #include <Graphics/Overlay/ImGuiOverlay.h>
+#include <Graphics/Overlay/ImGuiInternal.h>
 
 namespace SR_GRAPH_NS {
     class VulkanImGuiOverlay : public ImGuiOverlay {

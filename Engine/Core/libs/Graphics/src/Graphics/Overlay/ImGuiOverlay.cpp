@@ -4,6 +4,7 @@
 
 #include <Graphics/Overlay/ImGuiOverlay.h>
 #include <Graphics/GUI/Editor/Theme.h>
+#include <Graphics/GUI/Icons.h>
 
 namespace SR_GRAPH_NS {
     bool ImGuiOverlay::Init() {

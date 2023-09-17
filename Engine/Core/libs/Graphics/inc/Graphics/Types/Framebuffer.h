@@ -10,12 +10,13 @@
 #include <Utils/ResourceManager/IResource.h>
 
 #include <Graphics/Memory/IGraphicsResource.h>
+#include <Graphics/Pipeline/TextureHelper.h>
 
 namespace SR_GRAPH_NS {
     class Pipeline;
 }
 
-namespace SR_GRAPH_NS::Types {
+namespace SR_GTYPES_NS {
     class Shader;
 }
 
