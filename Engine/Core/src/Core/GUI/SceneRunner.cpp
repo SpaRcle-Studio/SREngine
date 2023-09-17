@@ -5,6 +5,7 @@
 #include <Core/GUI/SceneRunner.h>
 #include <Utils/TaskManager/TaskManager.h>
 #include <Audio/SoundManager.h>
+#include <Graphics/Overlay/ImGuiOverlay.h>
 
 namespace SR_CORE_NS::GUI {
     SceneRunner::SceneRunner()
@@ -18,7 +19,12 @@ namespace SR_CORE_NS::GUI {
 
     void SceneRunner::Draw() {
         auto&& pEngine = dynamic_cast<EditorGUI*>(GetManager())->GetEngine();
-        auto&& pFont = pEngine->GetRenderContext()->GetPipeline()->GetIconFont();
+        auto&& pOverlay = pEngine->GetRenderContext()->GetPipeline()->GetOverlay(SR_GRAPH_NS::OverlayType::ImGui);
+        auto&& pFont = pOverlay.DynamicCast<SR_GRAPH_NS::ImGuiOverlay>()->GetIconFont();
+
+        if (!pFont) {
+            return;
+        }
 
         float_t scale = pFont->Scale;
         pFont->Scale /= 3;

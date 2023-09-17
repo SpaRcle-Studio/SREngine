@@ -11,7 +11,8 @@
 
 #include <Graphics/Memory/ShaderProgramManager.h>
 #include <Graphics/Render/RenderTechnique.h>
-#include <Graphics/Pipeline/Vulkan.h>
+#include <Graphics/Pipeline/Vulkan/VulkanPipeline.h>
+#include <Graphics/Pipeline/Vulkan/VulkanKernel.h>
 
 namespace SR_CORE_GUI_NS {
     EngineStatistics::EngineStatistics()
@@ -246,7 +247,7 @@ namespace SR_CORE_GUI_NS {
 
     void EngineStatistics::SubmitQueuePage() {
         if (ImGui::BeginTabItem("Submit queue")) {
-            auto&& pVulkan = dynamic_cast<SR_GRAPH_NS::Vulkan*>(GetContext()->GetPipeline());
+            auto&& pVulkan = GetContext()->GetPipeline().DynamicCast<SR_GRAPH_NS::VulkanPipeline>();
             if (!pVulkan) {
                 ImGui::Text("Not supported!");
                 ImGui::EndTabItem();

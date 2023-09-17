@@ -7,13 +7,14 @@
 
 #include <Graphics/Window/Window.h>
 #include <Graphics/Memory/ShaderProgramManager.h>
+#include <Graphics/Pipeline/Vulkan/VulkanPipeline.h>
+#include <Graphics/Pass/FramebufferPass.h>
 
 #include <Graphics/Types/Framebuffer.h>
 #include <Graphics/Types/Shader.h>
 #include <Graphics/Types/Texture.h>
 #include <Graphics/Types/RenderTexture.h>
-
-#include <Graphics/Pass/FramebufferPass.h>
+#include <Graphics/Types/Skybox.h>
 
 #include <Utils/Locale/Encoding.h>
 
@@ -87,8 +88,25 @@ namespace SR_GRAPH_NS {
     bool RenderContext::Init() {
         SR_TRACY_ZONE;
 
-        m_pipeline = Environment::Get();
-        m_pipelineType = m_pipeline->GetType();
+        SR_INFO("RenderContext::Init() : initializing render context...");
+
+        m_pipeline = new VulkanPipeline(GetThis());
+
+        if (!InitPipeline()) {
+            SR_ERROR("RenderContext::Init() : failed to initialize pipeline!");
+            return false;
+        }
+
+        SR_INFO("RenderContext::Init() : initializing overlay...");
+
+        if (!m_pipeline->InitOverlay()) {
+            SR_ERROR("RenderContext::Init() : failed to initialize overlay!");
+            return false;
+        }
+
+        Memory::UBOManager::Instance().SetPipeline(m_pipeline);
+        Memory::CameraManager::Instance().SetPipeline(m_pipeline);
+        Memory::ShaderProgramManager::Instance().SetPipeline(m_pipeline);
 
         /// ----------------------------------------------------------------------------
 
@@ -186,28 +204,28 @@ namespace SR_GRAPH_NS {
         return pRenderScene;
     }
 
-    void RenderContext::Register(Types::Framebuffer *pResource) {
+    void RenderContext::Register(SR_GTYPES_NS::Framebuffer* pResource) {
         if (!RegisterResource(pResource)) {
             return;
         }
         m_framebuffers.emplace_back(pResource);
     }
 
-    void RenderContext::Register(Types::Shader *pResource) {
+    void RenderContext::Register(SR_GTYPES_NS::Shader *pResource) {
         if (!RegisterResource(pResource)) {
             return;
         }
         m_shaders.emplace_back(pResource);
     }
 
-    void RenderContext::Register(Types::Texture *pResource) {
+    void RenderContext::Register(SR_GTYPES_NS::Texture* pResource) {
         if (!RegisterResource(pResource)) {
             return;
         }
         m_textures.emplace_back(pResource);
     }
 
-    void RenderContext::Register(RenderTechnique *pResource) {
+    void RenderContext::Register(RenderTechnique* pResource) {
         if (!RegisterResource(pResource)) {
             return;
         }
@@ -244,7 +262,7 @@ namespace SR_GRAPH_NS {
     }
 
     PipelineType RenderContext::GetPipelineType() const {
-        return m_pipelineType;
+        return m_pipeline->GetType();
     }
 
     RenderContext::MaterialPtr RenderContext::GetDefaultMaterial() const {
@@ -265,8 +283,12 @@ namespace SR_GRAPH_NS {
         return m_noneTexture;
     }
 
-    void RenderContext::OnResize(const SR_MATH_NS::UVector2 &size) {
+    void RenderContext::OnResize(const SR_MATH_NS::UVector2& size) {
         SR_TRACY_ZONE;
+
+        if (m_pipeline) {
+            m_pipeline->OnResize(size);
+        }
 
         for (auto pIt = std::begin(m_scenes); pIt != std::end(m_scenes); ++pIt) {
             auto&&[pScene, pRenderScene] = *pIt;
@@ -333,12 +355,12 @@ namespace SR_GRAPH_NS {
     void RenderContext::UpdateFramebuffers() {
         SR_TRACY_ZONE;
 
-        for (auto&& pFramebuffer : m_framebuffers) {
-            if (!pFramebuffer->IsDirty()) {
+        for (auto&& pFrameBuffer : m_framebuffers) {
+            if (!pFrameBuffer->IsDirty()) {
                 continue;
             }
 
-            pFramebuffer->Update();
+            pFrameBuffer->Update();
         }
     }
 
@@ -369,12 +391,52 @@ namespace SR_GRAPH_NS {
     void RenderContext::OnMultiSampleChanged() {
         SR_TRACY_ZONE;
 
-        for (auto&& pFramebuffer : m_framebuffers) {
-            pFramebuffer->SetDirty();
+        for (auto&& pFrameBuffer : m_framebuffers) {
+            pFrameBuffer->SetDirty();
         }
 
         for (auto&& pRenderTechnique : m_techniques) {
             pRenderTechnique->OnSamplesChanged();
         }
+    }
+
+    RenderContext::~RenderContext() {
+        SRAssert(IsEmpty());
+
+        m_pipeline.AutoFree([](auto&& pPipeline) {
+            pPipeline->Destroy();
+            delete pPipeline;
+        });
+    }
+
+    bool RenderContext::InitPipeline() {
+        SR_GRAPH("RenderContext::InitPipeline() : initializing the render pipeline...");
+
+        PipelinePreInitInfo pipelinePreInitInfo;
+        pipelinePreInitInfo.appName = "SpaRcle Engine";
+        pipelinePreInitInfo.engineName = "SREngine";
+        pipelinePreInitInfo.samplesCount = 64;
+        pipelinePreInitInfo.GLSLCompilerPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Engine/Utilities/glslc.exe");
+
+        if (!m_pipeline->PreInit(pipelinePreInitInfo)) {
+            SR_ERROR("Engine::InitializeRender() : failed to pre-initialize the pipeline!");
+            return false;
+        }
+
+        if (!m_pipeline->Init()) {
+            SR_ERROR("Engine::InitializeRender() : failed to initialize the pipeline!");
+            return false;
+        }
+
+        if (!m_pipeline->PostInit()) {
+            SR_ERROR("Engine::InitializeRender() : failed to post-initialize pipeline!");
+            return false;
+        }
+
+        SR_LOG("Engine::InitializeRender() : vendor is "   + m_pipeline->GetVendor());
+        SR_LOG("Engine::InitializeRender() : renderer is " + m_pipeline->GetRenderer());
+        SR_LOG("Engine::InitializeRender() : version is "  + m_pipeline->GetVersion());
+
+        return true;
     }
 }

@@ -10,7 +10,6 @@
 
 #include <Graphics/Types/Texture.h>
 #include <Graphics/Render/RenderContext.h>
-#include <Graphics/Pipeline/Environment.h>
 #include <Graphics/Types/Shader.h>
 #include <Graphics/SRSL/Shader.h>
 #include <Graphics/SRSL/TypeInfo.h>
@@ -101,8 +100,7 @@ namespace SR_GRAPH_NS::Types {
     }
 
     void Shader::UnUse() noexcept {
-        auto&& env = SR_GRAPH_NS::Environment::Get();
-        env->UnUseShader();
+        GetPipeline()->UnUseShader();
 
         if (GetRenderContext()->GetCurrentShader() == this) {
             GetRenderContext()->SetCurrentShader(nullptr);
@@ -254,9 +252,12 @@ namespace SR_GRAPH_NS::Types {
         auto&& descriptorSet = GetPipeline()->GetCurrentDescriptorSet();
 
         if (ubo != SR_ID_INVALID && descriptorSet != SR_ID_INVALID && m_uniformBlock.Valid()) {
-            GetPipeline()->UpdateDescriptorSets(descriptorSet, {
-                    { DescriptorType::Uniform, { m_uniformBlock.m_binding, ubo } },
-            });
+            SRDescriptorUpdateInfo updateInfo;
+            updateInfo.binding = m_uniformBlock.m_binding;
+            updateInfo.ubo = ubo;
+            updateInfo.descriptorType = DescriptorType::Uniform;
+
+            GetPipeline()->UpdateDescriptorSets(descriptorSet, { updateInfo });
 
             return true;
         }

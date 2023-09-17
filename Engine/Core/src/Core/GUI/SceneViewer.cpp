@@ -234,7 +234,7 @@ namespace SR_CORE_NS::GUI {
 
         switch (pPipeline->GetType()) {
             case SR_GRAPH_NS::PipelineType::Vulkan:
-                pDescriptor = pPipeline->TryGetDescriptorSetFromTexture(id, true);
+                pDescriptor = pPipeline->GetOverlayTextureDescriptorSet(id, SR_GRAPH_NS::OverlayType::ImGui);
                 break;
             case SR_GRAPH_NS::PipelineType::OpenGL:
                 pDescriptor = reinterpret_cast<void*>(static_cast<uint64_t>(id));

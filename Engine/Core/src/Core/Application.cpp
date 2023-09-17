@@ -55,7 +55,7 @@ namespace SR_CORE_NS {
         }
 
         if (auto&& pRenderScene = m_engine->GetRenderScene()) {
-            if (pRenderScene->GetPipeline()->IsNeedReBuild()) {
+            if (pRenderScene->GetPipeline()->IsDirty()) {
                 return;
             }
 

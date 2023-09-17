@@ -499,4 +499,8 @@ namespace SR_UTILS_NS::Platform {
     void SetMousePos(const SR_MATH_NS::IVector2& pos) {
         ::SetCursorPos(static_cast<int32_t>(pos.x), static_cast<int32_t>(pos.y));
     }
+
+    PlatformType GetType() {
+        return PlatformType::Windows;
+    }
 }

@@ -32,7 +32,7 @@ namespace SR_GRAPH_NS {
     class Window;
     class RenderContext;
     class RenderTechnique;
-    class Environment;
+    class Pipeline;
     class DebugRenderer;
 
     class RenderScene : public SR_HTYPES_NS::SafePtr<RenderScene> {
@@ -43,7 +43,7 @@ namespace SR_GRAPH_NS {
         using WindowPtr = SR_HTYPES_NS::SafePtr<Window>;
         using CameraPtr = SR_GTYPES_NS::Camera*;
         using MeshPtr = SR_GTYPES_NS::Mesh*;
-        using PipelinePtr = Environment*;
+        using PipelinePtr = SR_HTYPES_NS::SharedPtr<Pipeline>;
         using Ptr = SR_HTYPES_NS::SafePtr<RenderScene>;
 
         struct CameraInfo {

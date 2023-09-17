@@ -186,8 +186,7 @@ namespace SR_GRAPH_NS::Memory {
             renderScene.Unlock();
         }
         else {
-            /// TODO: remove this
-            Environment::Get()->SetBuildState(false);
+            m_pipeline->SetDirty(true);
         }
     }
 
@@ -207,8 +206,7 @@ namespace SR_GRAPH_NS::Memory {
                 renderScene.Unlock();
             }
             else {
-                /// TODO: remove this
-                Environment::Get()->SetBuildState(false);
+                m_pipeline->SetDirty(true);;
             }
         }
         else {
@@ -237,8 +235,7 @@ namespace SR_GRAPH_NS::Memory {
                 renderScene.Unlock();
             }
             else {
-                /// TODO: remove this
-                Environment::Get()->SetBuildState(false);
+                m_pipeline->SetDirty(true);
             }
         }
         else {

@@ -44,5 +44,6 @@
        <MultiRenderTargets Value="false"/>
        <SingleUBOIdentifierMode Value="false"/>
        <Undocking Value="true"/>
+       <ImGUI Value="true"/>
    </Common>
 </Features>

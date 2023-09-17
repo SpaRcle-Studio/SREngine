@@ -237,6 +237,27 @@ namespace Framework::Graphics::VulkanTools {
         }
     }
 
+    static SR_FORCE_INLINE std::vector<uint64_t> CastAbsDescriptorTypeToVk(const std::vector<DescriptorType>& descriptorTypes) {
+        std::vector<uint64_t> vkDescriptorTypes;
+
+        for (auto&& descriptorType : descriptorTypes) {
+            switch (descriptorType) {
+                case DescriptorType::Uniform:
+                    vkDescriptorTypes.emplace_back(VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER);
+                    break;
+                case DescriptorType::CombinedImage:
+                    vkDescriptorTypes.emplace_back(VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER);
+                    break;
+                default: {
+                    SR_ERROR("VulkanTools::CastAbsDescriptorTypeToVk() : unknown type!");
+                    break;
+                }
+            }
+        }
+
+        return std::move(vkDescriptorTypes);
+    }
+
     static SR_FORCE_INLINE std::vector<uint64_t> CastAbsDescriptorTypeToVk(std::vector<uint64_t> descriptorTypes) {
         for (uint64_t& type : descriptorTypes) {
             if (type == static_cast<uint64_t>(DescriptorType::Uniform)) {
