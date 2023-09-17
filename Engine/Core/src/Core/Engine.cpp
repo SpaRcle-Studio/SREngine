@@ -198,13 +198,10 @@ namespace SR_CORE_NS {
         });
 
         m_window->SetCloseCallback([this]() {
-            m_renderContext.Do([](auto&& pContext) {
-                pContext->Close();
-            });
-
             SynchronizeFreeResources();
 
             m_renderContext.AutoFree([](auto&& pContext) {
+                pContext->Close();
                 delete pContext;
             });
         });

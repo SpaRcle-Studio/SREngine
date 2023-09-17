@@ -109,6 +109,22 @@ namespace SR_GRAPH_NS {
     }
 
     void VulkanImGuiOverlay::Destroy() {
+        SR_SAFE_DELETE_PTR(m_pool);
+
+        for (auto&& cmdPool : m_cmdPools) {
+            if (cmdPool != VK_NULL_HANDLE) {
+                vkDestroyCommandPool(*m_device, cmdPool, nullptr);
+            }
+        }
+
+        m_cmdPools.clear();
+        m_cmdBuffs.clear();
+
+        if (m_semaphore != VK_NULL_HANDLE) {
+            vkDestroySemaphore(*m_device, m_semaphore, nullptr);
+            m_semaphore = VK_NULL_HANDLE;
+        }
+
         DeInitializeRenderer();
 
         if (m_initialized) {

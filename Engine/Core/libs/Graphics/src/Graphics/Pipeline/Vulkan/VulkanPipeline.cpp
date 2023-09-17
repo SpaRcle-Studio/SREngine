@@ -23,11 +23,13 @@ namespace SR_GRAPH_NS {
 
     bool VulkanPipeline::InitOverlay() {
     #ifdef SR_USE_IMGUI
-        auto&& pImGuiOverlay = m_overlays[OverlayType::ImGui];
-        pImGuiOverlay = new VulkanImGuiOverlay(GetThis());
-        if (!pImGuiOverlay->Init()) {
-            PipelineError("VulkanPipeline::InitOverlay() : failed to initialize ImGui overlay!");
-            return false;
+        if (SR_UTILS_NS::Features::Instance().Enabled("ImGUI", false)) {
+            auto&& pImGuiOverlay = m_overlays[OverlayType::ImGui];
+            pImGuiOverlay = new VulkanImGuiOverlay(GetThis());
+            if (!pImGuiOverlay->Init()) {
+                PipelineError("VulkanPipeline::InitOverlay() : failed to initialize ImGui overlay!");
+                return false;
+            }
         }
     #endif
 
@@ -35,6 +37,17 @@ namespace SR_GRAPH_NS {
     }
 
     bool VulkanPipeline::Destroy() {
+        SR_INFO("VulkanPipeline::Destroy() : destroying vulkan pipeline...");
+
+        SR_TRACY_DESTROY(SR_UTILS_NS::TracyType::Vulkan);
+
+        DestroyOverlay();
+
+        if (m_memory) {
+            m_memory->Free();
+            m_memory = nullptr;
+        }
+
         if (m_kernel) {
             m_kernel->Destroy();
         }

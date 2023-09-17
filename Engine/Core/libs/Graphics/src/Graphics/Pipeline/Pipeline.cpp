@@ -24,6 +24,10 @@ namespace SR_GRAPH_NS {
         , m_window(pContext->GetWindow())
     { }
 
+    Pipeline::~Pipeline() {
+        SRAssert(m_overlays.empty());
+    }
+
     void Pipeline::DrawFrame() {
         ++m_state.operations;
         m_previousState = m_state;
@@ -139,7 +143,14 @@ namespace SR_GRAPH_NS {
     }
 
     void Pipeline::DestroyOverlay() {
+        for (auto&& [type, pOverlay] : m_overlays) {
+            pOverlay.AutoFree([](auto&& pData) {
+                pData->Destroy();
+                delete pData;
+            });
+        }
 
+        m_overlays.clear();
     }
 
     void Pipeline::OnMultiSampleChanged() {

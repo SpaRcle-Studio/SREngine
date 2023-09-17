@@ -156,10 +156,6 @@ namespace SR_GRAPH_NS {
     }
 
     void RenderContext::Close() {
-        if (m_pipeline) {
-            m_pipeline->DestroyOverlay();
-        }
-
         if (m_noneTexture) {
             m_noneTexture->RemoveUsePoint();
             m_noneTexture = nullptr;
@@ -173,6 +169,12 @@ namespace SR_GRAPH_NS {
         if (m_defaultMaterial) {
             m_defaultMaterial->RemoveUsePoint();
             m_defaultMaterial = nullptr;
+        }
+
+        SR_UTILS_NS::ResourceManager::Instance().Synchronize(true);
+
+        if (m_pipeline) {
+            m_pipeline->Destroy();
         }
     }
 
@@ -408,12 +410,6 @@ namespace SR_GRAPH_NS {
         m_pipeline.AutoFree([](auto&& pPipeline) {
             delete pPipeline;
         });
-    }
-
-    void RenderContext::DestroyOverlay() {
-        if (m_pipeline) {
-            m_pipeline->DestroyOverlay();
-        }
     }
 
     bool RenderContext::InitPipeline() {

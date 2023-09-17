@@ -32,7 +32,7 @@ namespace SR_GRAPH_NS {
         using ShaderProgram = int32_t;
     public:
         explicit Pipeline(const RenderContextPtr& pContext);
-        virtual ~Pipeline() = default;
+        virtual ~Pipeline();
 
         /// ---------------------------------------- Инициализация рендера ---------------------------------------------
 
