@@ -355,16 +355,11 @@ namespace SR_CORE_GUI_NS {
 
     void EditorGUI::CacheScenePath(const SR_UTILS_NS::Path& scenePath) {
         if (scenePath.ToStringView() == "NONE") {
-            SR_LOG("EditorGUI::LoadSceneFromCachedPath : scene path is \"NONE\". Caching this value.");
+            SR_LOG("EditorGUI::CacheScenePath() : scene path is \"NONE\". Caching this value.");
             return;
         }
 
         if (scenePath.Contains(SR_WORLD_NS::Scene::RuntimeScenePath.ToStringRef())) {
-            return;
-        }
-
-        if (!SR_WORLD_NS::Scene::IsExists(scenePath)) {
-            SR_ERROR("EditorGUI::LoadSceneFromCachedPath() : scene path is not valid or does not exist! Caching is aborted.\n\tPath: " + scenePath.ToStringRef());
             return;
         }
 
@@ -383,7 +378,7 @@ namespace SR_CORE_GUI_NS {
     bool EditorGUI::LoadSceneFromCachedPath() {
         if (!m_cachedScenePath.Valid() && !m_cachedScenePath.Exists()) {
             if (SR_UTILS_NS::Debug::Instance().GetLevel() == SR_UTILS_NS::Debug::Level::High) {
-                SR_LOG("EditorGUI::LoadSceneFromCachedPath : cached file of scene path wasn't found!");
+                SR_LOG("EditorGUI::LoadSceneFromCachedPath() : cached file of scene path wasn't found!");
             }
             return false;
         }
