@@ -18,7 +18,7 @@ namespace SR_AUDIO_NS
         auto&& pComponent = new AudioSource();
 
         pComponent->m_path = marshal.Read<std::string>();
-        pComponent->m_params.gain = marshal.Read<int32_t>();
+        pComponent->m_params.gain = marshal.Read<float_t>();
 
         return dynamic_cast<Component*>(pComponent);
     }
