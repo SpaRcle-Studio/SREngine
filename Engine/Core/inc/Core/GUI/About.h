@@ -7,22 +7,14 @@
 
 #include <Graphics/GUI/Widget.h>
 
-namespace Framework::Core::GUI {
-    class About : public Graphics::GUI::Widget {
+namespace SR_CORE_GUI_NS {
+    class About : public SR_GRAPH_GUI_NS::Widget {
+        using Super = SR_GRAPH_GUI_NS::Widget;
     public:
         About();
-        ~About() override = default;
 
     protected:
         void Draw() override;
-
-    private:
-        void ResourcesPage();
-        void ThreadsPage();
-
-    private:
-        const ImGuiTreeNodeFlags m_nodeFlagsWithChild = ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_OpenOnDoubleClick;
-        const ImGuiTreeNodeFlags m_nodeFlagsWithoutChild = ImGuiTreeNodeFlags_NoTreePushOnOpen | ImGuiTreeNodeFlags_Leaf;
 
     };
 }

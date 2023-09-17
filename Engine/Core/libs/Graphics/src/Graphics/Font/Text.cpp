@@ -135,7 +135,11 @@ namespace SR_GTYPES_NS {
         textureCreateInfo.cpuUsage = false;
         textureCreateInfo.alpha = true;
 
+        EVK_PUSH_LOG_LEVEL(EvoVulkan::Tools::LogLevel::ErrorsOnly);
+
         m_id = m_pipeline->AllocateTexture(textureCreateInfo);
+
+        EVK_POP_LOG_LEVEL();
 
         if (m_id == SR_ID_INVALID) {
             SR_ERROR("Text::BuildAtlas() : failed to build the font atlas!");
