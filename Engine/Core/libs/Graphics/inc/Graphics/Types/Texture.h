@@ -24,7 +24,6 @@ namespace SR_GTYPES_NS {
     class Texture : public SR_UTILS_NS::IResource, public Memory::IGraphicsResource {
         friend class ::SR_GRAPH_NS::TextureLoader;
         using RenderContextPtr = SR_HTYPES_NS::SafePtr<RenderContext>;
-        using PipelnePtr = Environment*;
         using Ptr = Texture*;
     private:
         Texture();
@@ -65,7 +64,6 @@ namespace SR_GTYPES_NS {
     private:
         bool                       m_isFont       = false;
         uint8_t*                   m_data         = nullptr;
-        PipelnePtr                 m_pipeline     = nullptr;
 
         int32_t                    m_id           = SR_ID_INVALID;
         uint32_t                   m_width        = 0;

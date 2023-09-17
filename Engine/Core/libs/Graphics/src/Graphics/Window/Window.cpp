@@ -101,8 +101,6 @@ namespace SR_GRAPH_NS {
             m_closeCallback();
         }
 
-        SR_SAFE_DELETE_PTR(m_windowImpl);
-
         SR_INFO("Window::Thread() : stopping window thread...");
     }
 
@@ -154,6 +152,8 @@ namespace SR_GRAPH_NS {
             m_thread->Free();
             m_thread = nullptr;
         }
+
+        SR_SAFE_DELETE_PTR(m_windowImpl);
     }
 
     Window::WindowHandle Window::GetHandle() const {

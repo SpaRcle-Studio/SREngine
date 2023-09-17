@@ -150,7 +150,7 @@ namespace SR_GRAPH_NS {
 
         m_framebuffer->Update();
         /// установим кадровый буфер, чтобы BeginCmdBuffer понимал какие значение для очистки ставить
-        GetPipeline()->SetCurrentFramebuffer(m_framebuffer);
+        GetPipeline()->SetCurrentFrameBuffer(m_framebuffer);
 
         m_framebuffer->BeginCmdBuffer(m_clearColors, 1.f);
         m_framebuffer->SetViewportScissor();
@@ -164,7 +164,7 @@ namespace SR_GRAPH_NS {
 
             if (m_framebuffer->Bind()) {
                 m_framebuffer->BeginRender();
-                IMeshClusterPass::Render();
+                IMeshClusterPass::Render(); /// NOLINT
                 m_framebuffer->EndRender();
             }
 

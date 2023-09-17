@@ -40,7 +40,7 @@ namespace SR_GTYPES_NS {
                 return false;
             }
 
-            if (m_IBO = m_pipeline->CalculateIBO((void *) indices.data(), sizeof(uint32_t), m_countIndices, m_VBO); m_IBO == SR_ID_INVALID) {
+            if (m_IBO = m_pipeline->AllocateIBO((void *) indices.data(), sizeof(uint32_t), m_countIndices, m_VBO); m_IBO == SR_ID_INVALID) {
                 SR_ERROR("IndexedMesh::CalculateIBO() : failed calculate IBO \"" + GetGeometryName() + "\" mesh!");
                 m_hasErrors = true;
                 return false;

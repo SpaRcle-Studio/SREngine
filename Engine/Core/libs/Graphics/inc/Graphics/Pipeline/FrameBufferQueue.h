@@ -7,7 +7,9 @@
 
 #include <Utils/Debug.h>
 
-#include <Graphics/Types/Framebuffer.h>
+namespace SR_GTYPES_NS {
+    class Framebuffer;
+}
 
 namespace SR_GRAPH_NS {
     class FrameBufferQueue {

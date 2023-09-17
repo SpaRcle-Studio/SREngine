@@ -2,13 +2,15 @@
 // Created by Monika on 10.06.2022.
 //
 
+#include <Utils/Common/Features.h>
+
 #include <Graphics/Memory/UBOManager.h>
 #include <Graphics/Types/Shader.h>
-#include <Graphics/Pipeline/Environment.h>
+#include <Graphics/Pipeline/Pipeline.h>
 
 namespace SR_GRAPH_NS::Memory {
     UBOManager::UBOManager()
-        : m_pipeline(Environment::Get())
+        : Super()
     {
         m_virtualTableSize = 1024 * 64;
         m_virtualTable = new VirtualUBOInfo[m_virtualTableSize];
@@ -57,7 +59,7 @@ namespace SR_GRAPH_NS::Memory {
             return SR_ID_INVALID;
         }
 
-        VirtualUBOInfo::ShaderInfo shaderInfo;
+        VirtualUBOInfo::ShaderInfo shaderInfo = { };
         shaderInfo.pShader = pShader;
         shaderInfo.shaderProgram = shaderProgram;
         shaderInfo.samples = samples;
@@ -113,21 +115,13 @@ namespace SR_GRAPH_NS::Memory {
         return SR_ID_INVALID;
     }
 
-    bool UBOManager::AllocMemory(UBO *ubo, Descriptor *descriptor, uint32_t uboSize, uint32_t samples, int32_t shader) {
+    bool UBOManager::AllocMemory(UBO *ubo, Descriptor* descriptor, uint32_t uboSize, uint32_t samples, int32_t shader) {
         auto&& shaderIdStash = m_pipeline->GetCurrentShaderId();
 
         m_pipeline->SetCurrentShaderId(shader);
 
-        const static std::vector<uint64_t> uniformTypes = {
-                static_cast<uint64_t>(VulkanTools::CastAbsDescriptorTypeToVk(DescriptorType::Uniform))
-        };
-
-        const static std::vector<uint64_t> combinedImageTypes = {
-                static_cast<uint64_t>(VulkanTools::CastAbsDescriptorTypeToVk(DescriptorType::CombinedImage))
-        };
-
         if (uboSize > 0) {
-            if (*descriptor = m_pipeline->AllocDescriptorSet(uniformTypes); *descriptor < 0) {
+            if (*descriptor = m_pipeline->AllocDescriptorSet({ DescriptorType::Uniform }); *descriptor < 0) {
                 SR_ERROR("UBOManager::AllocMemory() : failed to allocate descriptor set! (Uniform)");
                 goto fails;
             }
@@ -138,7 +132,7 @@ namespace SR_GRAPH_NS::Memory {
             }
         }
         else if (samples > 0) {
-            if (*descriptor = m_pipeline->AllocDescriptorSet(combinedImageTypes); *descriptor < 0) {
+            if (*descriptor = m_pipeline->AllocDescriptorSet({ DescriptorType::CombinedImage }); *descriptor < 0) {
                 SR_ERROR("UBOManager::AllocMemory() : failed to allocate descriptor set! (CombinedImage)");
                 goto fails;
             }
@@ -193,7 +187,7 @@ namespace SR_GRAPH_NS::Memory {
         /// если не нашли камеру, то дублируем память под новую камеру
         if (!isFound)
         {
-            VirtualUBOInfo::ShaderInfo shaderInfo;
+            VirtualUBOInfo::ShaderInfo shaderInfo = { };
             shaderInfo.pShader = pShader;
             shaderInfo.shaderProgram = pShader->GetId();
             shaderInfo.uboSize = pShader->GetUBOBlockSize();
@@ -205,10 +199,10 @@ namespace SR_GRAPH_NS::Memory {
             }
 
             info.m_data.emplace_back(VirtualUBOInfo::Data {
-                    m_ignoreIdentifier ? nullptr : m_identifier,
-                    descriptor,
-                    ubo,
-                    shaderInfo
+                m_ignoreIdentifier ? nullptr : m_identifier,
+                descriptor,
+                ubo,
+                shaderInfo
             });
 
             result = BindResult::Duplicated;
@@ -226,13 +220,8 @@ namespace SR_GRAPH_NS::Memory {
     }
 
     UBOManager::VirtualUBO UBOManager::ReAllocateUBO(VirtualUBO virtualUbo, uint32_t uboSize, uint32_t samples) {
-        EVK_PUSH_LOG_LEVEL(EvoVulkan::Tools::LogLevel::ErrorsOnly);
-
         if (virtualUbo == SR_ID_INVALID) {
             const auto&& virtualUBO = AllocateUBO(uboSize, samples);
-
-            EVK_POP_LOG_LEVEL();
-
             return virtualUBO;
         }
 
@@ -241,7 +230,6 @@ namespace SR_GRAPH_NS::Memory {
 
         if (shaderProgram == SR_ID_INVALID) {
             SR_ERROR("UBOManager::ReAllocateUBO() : shader program do not set!");
-            EVK_POP_LOG_LEVEL();
             return virtualUbo;
         }
 
@@ -259,29 +247,26 @@ namespace SR_GRAPH_NS::Memory {
 
         if (!AllocMemory(&ubo, &descriptor, uboSize, samples, shaderProgram)) {
             SR_ERROR("UBOManager::ReAllocateUBO() : failed to allocate memory!");
-            EVK_POP_LOG_LEVEL();
             return virtualUbo;
         }
 
-        VirtualUBOInfo::ShaderInfo shaderInfo;
+        VirtualUBOInfo::ShaderInfo shaderInfo = { };
         shaderInfo.pShader = pShader;
         shaderInfo.shaderProgram = shaderProgram;
         shaderInfo.samples = samples;
         shaderInfo.uboSize = uboSize;
 
         info.m_data.emplace_back(VirtualUBOInfo::Data {
-                m_ignoreIdentifier ? nullptr : m_identifier,
-                descriptor,
-                ubo,
-                shaderInfo
+            m_ignoreIdentifier ? nullptr : m_identifier,
+            descriptor,
+            ubo,
+            shaderInfo
         });
-
-        EVK_POP_LOG_LEVEL();
 
         return virtualUbo;
     }
 
-    void UBOManager::FreeMemory(UBOManager::UBO *ubo, UBOManager::Descriptor *descriptor) {
+    void UBOManager::FreeMemory(UBOManager::UBO* ubo, UBOManager::Descriptor *descriptor) {
         if (*ubo != SR_ID_INVALID && !m_pipeline->FreeUBO(ubo)) {
             SR_ERROR("UBOManager::FreeMemory() : failed to free ubo!");
         }
@@ -291,7 +276,7 @@ namespace SR_GRAPH_NS::Memory {
         }
     }
 
-    void VirtualUBOInfo::Data::Validate() {
+    void VirtualUBOInfo::Data::Validate() const {
         SRAssert(ubo != SR_ID_INVALID || descriptor != SR_ID_INVALID || (shaderInfo.uboSize == 0 && shaderInfo.samples == 0));
     }
 }

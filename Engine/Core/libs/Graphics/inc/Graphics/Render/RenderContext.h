@@ -2,8 +2,8 @@
 // Created by Monika on 13.07.2022.
 //
 
-#ifndef SRENGINE_RENDERCONTEXT_H
-#define SRENGINE_RENDERCONTEXT_H
+#ifndef SR_ENGINE_GRAPHICS_RENDER_CONTEXT_H
+#define SR_ENGINE_GRAPHICS_RENDER_CONTEXT_H
 
 #include <Utils/World/Scene.h>
 #include <Utils/Math/Vector2.h>
@@ -25,7 +25,7 @@ namespace SR_GRAPH_NS {
     class Window;
     class RenderScene;
     class RenderTechnique;
-    class Environment;
+    class Pipeline;
 
     SR_ENUM_NS_CLASS_T(RCUpdateQueueState, uint8_t,
        Begin = 0,
@@ -46,7 +46,7 @@ namespace SR_GRAPH_NS {
      */
     class RenderContext : public SR_HTYPES_NS::SafePtr<RenderContext> {
         using RenderScenePtr = SR_HTYPES_NS::SafePtr<RenderScene>;
-        using PipelinePtr = Environment*;
+        using PipelinePtr = SR_HTYPES_NS::SharedPtr<SR_GRAPH_NS::Pipeline>;
         using Super = SR_HTYPES_NS::SafePtr<RenderContext>;
         using MaterialPtr = SR_GTYPES_NS::Material*;
         using TexturePtr = SR_GTYPES_NS::Texture*;
@@ -58,7 +58,7 @@ namespace SR_GRAPH_NS {
         using RenderScenes = std::list<std::pair<SR_WORLD_NS::Scene::Ptr, RenderScenePtr>>;
     public:
         explicit RenderContext(const WindowPtr& pWindow);
-        virtual ~RenderContext() = default;
+        virtual ~RenderContext();
 
     public:
         void UpdateFramebuffers();
@@ -76,9 +76,9 @@ namespace SR_GRAPH_NS {
     public:
         RenderScenePtr CreateScene(const SR_WORLD_NS::Scene::Ptr& scene);
 
-        void Register(FramebufferPtr pFramebuffer);
-        void Register(Types::Shader* pShader);
-        void Register(Types::Texture* pTexture);
+        void Register(FramebufferPtr pFrameBuffer);
+        void Register(SR_GTYPES_NS::Shader* pShader);
+        void Register(SR_GTYPES_NS::Texture* pTexture);
         void Register(RenderTechnique* pTechnique);
         void Register(MaterialPtr pMaterial);
         void Register(SkyboxPtr pSkybox);
@@ -105,6 +105,8 @@ namespace SR_GRAPH_NS {
         void SetCurrentShader(ShaderPtr pShader);
 
     private:
+        bool InitPipeline();
+
         template<typename T> bool RegisterResource(T* pResource) {
             if (auto&& pGraphicsResource = dynamic_cast<Memory::IGraphicsResource*>(pResource)) {
                 if (pGraphicsResource->GetRenderContext()) {
@@ -140,7 +142,6 @@ namespace SR_GRAPH_NS {
         TexturePtr m_noneTexture = nullptr;
 
         PipelinePtr m_pipeline = nullptr;
-        PipelineType m_pipelineType = PipelineType::Unknown;
 
     };
 
@@ -181,4 +182,4 @@ namespace SR_GRAPH_NS {
     }
 }
 
-#endif //SRENGINE_RENDERCONTEXT_H
+#endif //SR_ENGINE_GRAPHICS_RENDER_CONTEXT_H

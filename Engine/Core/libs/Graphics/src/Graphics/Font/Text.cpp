@@ -13,9 +13,6 @@
 #include <Graphics/Types/Shader.h>
 #include <Graphics/Render/RenderContext.h>
 #include <Graphics/Render/RenderScene.h>
-#include <Graphics/Pipeline/Environment.h>
-
-#include <EvoVulkan/Tools/VulkanDebug.h>
 
 namespace SR_GTYPES_NS {
     SR_REGISTER_COMPONENT(Text);
@@ -110,8 +107,6 @@ namespace SR_GTYPES_NS {
             return false;
         }
 
-        EVK_PUSH_LOG_LEVEL(EvoVulkan::Tools::LogLevel::ErrorsOnly);
-
         if (m_id != SR_ID_INVALID) {
             SRVerifyFalse(!m_pipeline->FreeTexture(&m_id));
         }
@@ -128,11 +123,21 @@ namespace SR_GTYPES_NS {
         m_width = textBuilder.GetWidth();
         m_height = textBuilder.GetHeight();
 
-        m_id = m_pipeline->CalculateTexture(textBuilder.GetData(),
-            textBuilder.GetColorFormat(), m_width, m_height, TextureFilter::NEAREST,
-            TextureCompression::None, 1,
-            true, false
-        );
+        SR_GRAPH_NS::SRTextureCreateInfo textureCreateInfo;
+
+        textureCreateInfo.pData = textBuilder.GetData();
+        textureCreateInfo.format = textBuilder.GetColorFormat();
+        textureCreateInfo.width = m_width;
+        textureCreateInfo.height = m_height;
+        textureCreateInfo.compression = TextureCompression::None;
+        textureCreateInfo.filter = TextureFilter::NEAREST;
+        textureCreateInfo.mipLevels = 1;
+        textureCreateInfo.cpuUsage = false;
+        textureCreateInfo.alpha = true;
+
+        EVK_PUSH_LOG_LEVEL(EvoVulkan::Tools::LogLevel::ErrorsOnly);
+
+        m_id = m_pipeline->AllocateTexture(textureCreateInfo);
 
         EVK_POP_LOG_LEVEL();
 

@@ -11,6 +11,7 @@
 namespace SR_GRAPH_NS {
     class Window;
     class RenderScene;
+    class Pipeline;
 }
 
 namespace SR_GRAPH_NS::Types {
@@ -23,6 +24,7 @@ namespace SR_GRAPH_NS::Memory {
         friend class SR_UTILS_NS::Singleton<CameraManager>;
         using CameraPtr = Types::Camera*;
         using RenderScenePtr = SR_HTYPES_NS::SafePtr<RenderScene>;
+        using PipelinePtr = SR_HTYPES_NS::SharedPtr<Pipeline>;
 
         struct CameraInfo {
             bool destroyed = false;
@@ -33,6 +35,8 @@ namespace SR_GRAPH_NS::Memory {
         ~CameraManager() override = default;
 
     public:
+        void SetPipeline(PipelinePtr pPipeline) { m_pipeline = std::move(pPipeline); }
+
         void Update();
 
         void OnWindowResized(Window* pWindow, uint32_t width, uint32_t height);
@@ -56,6 +60,7 @@ namespace SR_GRAPH_NS::Memory {
 
     private:
         std::map<CameraPtr, CameraInfo> m_cameras;
+        PipelinePtr m_pipeline;
 
     };
 }

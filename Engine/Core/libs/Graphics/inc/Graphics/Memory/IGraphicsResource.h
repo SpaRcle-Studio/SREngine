@@ -9,7 +9,7 @@
 
 namespace SR_GRAPH_NS {
     class RenderContext;
-    class Environment;
+    class Pipeline;
 }
 
 namespace SR_GRAPH_NS::Memory {
@@ -17,7 +17,7 @@ namespace SR_GRAPH_NS::Memory {
     class IGraphicsResource {
     public:
         using RenderContextPtr = RenderContext*;
-        using PipelinePtr = Environment*;
+        using PipelinePtr = SR_HTYPES_NS::SharedPtr<Pipeline>;
     protected:
         constexpr IGraphicsResource() = default;
         virtual ~IGraphicsResource() {
@@ -58,7 +58,7 @@ namespace SR_GRAPH_NS::Memory {
     protected:
         std::atomic<bool> m_isCalculated = false;
 
-        PipelinePtr m_pipeline = nullptr;
+        PipelinePtr m_pipeline;
         RenderContextPtr m_renderContext = nullptr;
 
     };

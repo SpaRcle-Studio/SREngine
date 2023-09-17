@@ -19,8 +19,9 @@ namespace SR_GRAPH_NS::WinAPI {
 
     static LRESULT ImGui_WndProcHandler(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
     {
-        if (ImGui::GetCurrentContext() == NULL)
+        if (!ImGui::GetCurrentContext()) {
             return 0;
+        }
 
         ImGuiIO& io = ImGui::GetIO();
 
@@ -448,20 +449,6 @@ namespace SR_GRAPH_NS {
 
     void* Win32Window::GetHandle() const {
         return reinterpret_cast<void*>(m_hWnd);
-    }
-
-    bool Win32Window::InitGUI() {
-        ImGui_ImplWin32_Init(m_hWnd);
-        return true;
-    }
-
-    bool Win32Window::StopGUI() {
-        ImGui_ImplWin32_Shutdown();
-        return true;
-    }
-
-    void Win32Window::NextFrameGUI() {
-        ImGui_ImplWin32_NewFrame();
     }
 
     void Win32Window::Close() {

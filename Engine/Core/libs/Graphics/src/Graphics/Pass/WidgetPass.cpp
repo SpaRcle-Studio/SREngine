@@ -20,7 +20,7 @@ namespace SR_GRAPH_NS {
             return false;
         }
 
-        if (pipeline->BeginDrawGUI()) {
+        if (pipeline->BeginDrawOverlay(OverlayType::ImGui)) {
             /// Во время отрисовки виджета он может быть удален
             for (uint16_t i = 0; ; ++i) {
                 if (i >= widgetManagers.size()) {
@@ -30,7 +30,7 @@ namespace SR_GRAPH_NS {
                 widgetManagers[i]->Draw();
             }
 
-            pipeline->EndDrawGUI();
+            pipeline->EndDrawOverlay(OverlayType::ImGui);
 
             return true;
         }

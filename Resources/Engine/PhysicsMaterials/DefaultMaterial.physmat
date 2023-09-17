@@ -2,7 +2,7 @@
 <PhysicsMaterial>
 	<DynamicFriction Float="0.790000021" />
 	<StaticFriction Float="1.5" />
-	<Bounciness Float="1.54999995" />
+	<Bounciness Float="0.109999999" />
 	<FrictionCombine String="Maximum" />
 	<BounceCombine String="Maximum" />
 </PhysicsMaterial>

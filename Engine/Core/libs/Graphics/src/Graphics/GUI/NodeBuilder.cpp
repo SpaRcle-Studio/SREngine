@@ -2,13 +2,13 @@
 // Created by Monika on 14.01.2023.
 //
 
-#include <Graphics/Pipeline/Environment.h>
+#include <Graphics/Pipeline/Pipeline.h>
 #include <Graphics/Types/Texture.h>
 #include <Graphics/GUI/Pin.h>
 #include <Graphics/GUI/Node.h>
 #include <Graphics/GUI/NodeBuilder.h>
 
-namespace SR_GRAPH_NS::GUI {
+namespace SR_GRAPH_GUI_NS {
     NodeBuilder::NodeBuilder(SR_GTYPES_NS::Texture *pTexture)
         : m_texture(pTexture)
     {
@@ -108,7 +108,7 @@ namespace SR_GRAPH_NS::GUI {
         }
 
         if (auto&& pPipeline = m_texture->GetPipeline()) {
-            return pPipeline->GetDescriptorSetFromTexture(id, true);
+            return pPipeline->GetOverlayTextureDescriptorSet(id, OverlayType::ImGui);
         }
 
         return nullptr;

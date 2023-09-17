@@ -46,10 +46,6 @@ namespace SR_GRAPH_NS {
         void SwapBuffers() const override;
         void PollEvents() const override;
 
-        bool InitGUI() override;
-        bool StopGUI() override;
-        void NextFrameGUI() override;
-
         void Close() override;
         void Maximize() override;
         void Restore() override;

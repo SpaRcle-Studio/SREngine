@@ -25,7 +25,6 @@
 namespace SR_GRAPH_NS {
     class Window;
     class Render;
-    class Environment;
     class RenderScene;
     class RenderContext;
 }
@@ -49,7 +48,6 @@ namespace SR_CORE_NS {
     class Engine : public SR_HTYPES_NS::SharedPtr<Engine> {
         using Super = SR_HTYPES_NS::SharedPtr<Engine>;
         using Ptr = SR_HTYPES_NS::SharedPtr<Engine>;
-        using PipelinePtr = SR_GRAPH_NS::Environment*;
         using WindowPtr = SR_HTYPES_NS::SafePtr<SR_GRAPH_NS::Window>;
         using RenderContextPtr = SR_HTYPES_NS::SafePtr<SR_GRAPH_NS::RenderContext>;
         using CameraPtr = SR_GTYPES_NS::Camera*;
@@ -127,8 +125,7 @@ namespace SR_CORE_NS {
 
         RenderContextPtr m_renderContext = { };
 
-        WindowPtr m_window = { };
-        PipelinePtr m_pipeline = nullptr;
+        WindowPtr m_window;
 
     };
 }
