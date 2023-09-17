@@ -25,7 +25,7 @@
 
 ## Building
  0. Requirements:
-    1. Install Clion 2020.1 / Visual Studio 2019
+    1. Install Clion 2020.1 or newer / Visual Studio 2019
     2. Install [Vulkan SDK/Runtime](https://vulkan.lunarg.com/sdk/home) 1.3.211.0
     3. Install CMake 3.16.0
     4. Install [MS Build Tools](https://download.visualstudio.microsoft.com/download/pr/996d318f-4bd0-4f73-8554-ea3ed556ce9b/9610a60ad452c33dd3f9e8d3b4ce5d88d278f8b063d88717e08e1c0c13c29233/vs_BuildTools.exe) for Visual Studio 16.11.29 (if you are using CLion)
@@ -47,28 +47,32 @@
     6. Click "Run 'SREngine'" (Shift + F10)
 
 ## Used libraries
-  * glm
-  * OpenGL / GLFW / GLEW / glad
-  * Bullet3
-  * PhysX
-  * Box2D
   * [ImGUI](https://github.com/ocornut/imgui)
   * [ImGuizmo](https://github.com/CedricGuillemet/ImGuizmo)
   * [tinyobjloader](https://github.com/tinyobjloader/tinyobjloader)
   * [imgui-node-editor](https://github.com/thedmd/imgui-node-editor)
-  * stbi
-  * json
   * [EvoScript](https://github.com/Monika0000/EvoScript)
   * [EvoVulkan](https://github.com/Monika0000/EvoVulkan)
-  * Assimp
+  * [Assimp](https://github.com/assimp/assimp)
+  * [Vulkan Memory Allocator](https://github.com/GPUOpen-LibrariesAndSDKs/VulkanMemoryAllocator)
+  * [stb](https://github.com/nothings/stb)
+  * [glm](https://github.com/g-truc/glm)
+  * [Bullet3](https://github.com/bulletphysics/bullet3)
+  * [PhysX](https://github.com/NVIDIAGameWorks/PhysX)
+  * [Box2D](https://github.com/erincatto/box2d)
+  * [json](https://github.com/nlohmann/json)
   
   ## Features
   * SpaRcle Shader Language (SRSL)
+  * SpaRcle Logical Machine (SRLM) aka Blueprints 
   * Chunk system 
   * Render passes
   * Custom framebuffers
   * C++ scripting system
-  * Animations 
+  * Animations
+  * SSAO
+  * Cascaded shadow mapping
+  * Ray-marching
   * Physics
   * Font renderer
   * Vulkan pipeline
