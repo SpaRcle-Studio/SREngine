@@ -57,7 +57,7 @@ namespace SR_CORE_GUI_NS {
 
             ++index;
 
-            if (ImGui::BeginChild(SR_FORMAT_C("cmp-%s-%i", name.c_str(), index))) {
+            if (ImGui::BeginChild("InspectorComponent")) {
                 bool enabled = pComponent->IsEnabled();
                 if (ImGui::Checkbox(SR_UTILS_NS::Format("##%s-%i-checkbox", name.c_str(), index).c_str(), &enabled)) {
                     pComponent->SetEnabled(enabled);
@@ -86,9 +86,8 @@ namespace SR_CORE_GUI_NS {
                     }
                     ImGui::EndPopup();
                 }
-
-                ImGui::EndChild();
             }
+            ImGui::EndChild();
 
             return dynamic_cast<SR_UTILS_NS::Component*>(pComponent);
         }
