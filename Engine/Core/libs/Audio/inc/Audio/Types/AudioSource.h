@@ -24,7 +24,7 @@ namespace SR_AUDIO_NS
 
         SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SR_UTILS_NS::SavableFlags flags) const override;
 
-        void SetPath(std::string path);
+        void SetPath(const SR_UTILS_NS::Path& path);
         void SetVolume(float_t volume);
 
         SR_NODISCARD SR_UTILS_NS::Path GetPath() const;

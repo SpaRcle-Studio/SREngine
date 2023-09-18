@@ -145,7 +145,7 @@ namespace SR_AUDIO_NS {
             m_playStack.emplace_back(pPlayData);
         }
 
-        bool async = params.async.has_value() ? params.async.value() : true;
+        bool async = params.async.has_value() ? params.async.value() : true; /// NOLINT
 
         while (!async) {
             SR_LOCK_GUARD

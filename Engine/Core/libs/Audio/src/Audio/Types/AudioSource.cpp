@@ -6,8 +6,7 @@
 #include <Utils/ECS/ComponentManager.h>
 #include <Audio/SoundManager.h>
 
-namespace SR_AUDIO_NS
-{
+namespace SR_AUDIO_NS {
     SR_REGISTER_COMPONENT(AudioSource);
 
     AudioSource::AudioSource()
@@ -43,7 +42,7 @@ namespace SR_AUDIO_NS
         return m_path;
     }
 
-    void AudioSource::SetPath(std::string path) {
+    void AudioSource::SetPath(const SR_UTILS_NS::Path& path) {
         m_path = path;
     }
 
@@ -55,18 +54,24 @@ namespace SR_AUDIO_NS
     }
 
     void AudioSource::OnEnable() {
-        m_handle = SoundManager::Instance().Play(m_path.ToString(),m_params);
+        m_handle = SoundManager::Instance().Play(m_path.ToString(), m_params);
         Component::OnEnable();
     }
 
     void AudioSource::OnDestroy() {
-        SoundManager::Instance().Stop(m_handle);
+        if (m_handle) {
+            SoundManager::Instance().Stop(m_handle);
+            m_handle = nullptr;
+        }
         Super::OnDestroy();
         delete this;
     }
 
     void AudioSource::OnDisable() {
-        SoundManager::Instance().Stop(m_handle);
-        Component::OnDisable();
+        if (m_handle) {
+            SoundManager::Instance().Stop(m_handle);
+            m_handle = nullptr;
+        }
+        Super::OnDisable();
     }
 }

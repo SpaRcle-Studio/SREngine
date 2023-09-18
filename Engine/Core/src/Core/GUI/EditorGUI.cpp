@@ -652,11 +652,11 @@ namespace SR_CORE_GUI_NS {
                 OpenWidget<RenderTechniqueEditor>();
             }
 
-            if (ImGui::MenuItem("Animator")) {
-               OpenWidget<AnimatorEditor>();
-            }
+            /// if (ImGui::MenuItem("Animator")) {
+            ///    OpenWidget<AnimatorEditor>();
+            /// }
 
-            ImGui::Separator();
+            /// ImGui::Separator();
 
             if (ImGui::MenuItem("World edit")) {
                OpenWidget<WorldEdit>();
