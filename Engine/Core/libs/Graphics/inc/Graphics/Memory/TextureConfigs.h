@@ -11,7 +11,7 @@
 namespace SR_GRAPH_NS::Memory {
     struct TextureConfig {
         TextureConfig(
-            ColorFormat format,
+            ImageFormat format,
             TextureFilter filter,
             TextureCompression compression,
             uint32_t mipLevels,
@@ -27,7 +27,7 @@ namespace SR_GRAPH_NS::Memory {
         { }
 
         TextureConfig()
-            : m_format(ColorFormat::RGBA8_UNORM)
+            : m_format(ImageFormat::RGBA8_UNORM)
             , m_filter(TextureFilter::LINEAR)
             , m_compression(TextureCompression::None)
             , m_mipLevels(1)
@@ -35,7 +35,7 @@ namespace SR_GRAPH_NS::Memory {
             , m_cpuUsage(false)
         { }
 
-        ColorFormat m_format;
+        ImageFormat m_format;
         TextureFilter m_filter;
         TextureCompression m_compression;
         uint32_t m_mipLevels;

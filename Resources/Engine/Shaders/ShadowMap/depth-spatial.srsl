@@ -1,0 +1,18 @@
+ShaderType Spatial;
+
+PolygonMode Fill;
+CullMode Back;
+DepthCompare LessOrEqual;
+PrimitiveTopology TriangleList;
+BlendEnabled false;
+DepthWrite true;
+DepthTest true;
+
+void fragment() {
+    /// depth write
+}
+
+void vertex() {
+    /// OUT_POSITION = PROJECTION_MATRIX * VIEW_MATRIX * MODEL_MATRIX * vec4(VERTEX, 1.0);
+    OUT_POSITION = LIGHT_SPACE_MATRIX * MODEL_MATRIX * vec4(VERTEX, 1.0);
+}

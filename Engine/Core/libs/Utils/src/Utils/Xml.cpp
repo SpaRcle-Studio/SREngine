@@ -29,6 +29,14 @@ namespace SR_UTILS_NS {
             return m_attribute.as_float();
     }
 
+    double_t Xml::Attribute::ToDouble() const {
+        if (!CheckError(SR_FORMAT("Attribute::ToFloat() : attribute isn't valid! Name: %s", m_attribute.name()))) {
+            return 0.f;
+        }
+        else
+            return m_attribute.as_double();
+    }
+
     bool Xml::Attribute::ToBool() const {
         if (!CheckError(SR_FORMAT("Attribute::ToBool() : attribute isn't valid! Name: %s", m_attribute.name()))) {
             return false;
@@ -86,7 +94,10 @@ namespace SR_UTILS_NS {
         return m_valid ? m_attribute.as_ullong() : def;
     }
 
-    Xml::Document Xml::Document::Load(const Path &path)  {
+    Xml::Document Xml::Document::Load(const Path &path) {
+        SR_TRACY_ZONE;
+        SR_TRACY_TEXT_N("Path", path.ToStringRef());
+
         auto&& fileData = SR_PLATFORM_NS::ReadFile(path);
         auto xml = Document::New();
 
@@ -128,7 +139,7 @@ namespace SR_UTILS_NS {
         return doc;
     }
 
-    Xml::Node Xml::Node::AppendChild(const std::string &name)  {
+    Xml::Node Xml::Node::AppendChild(const std::string &name) {
         if (!m_valid) {
             SRAssert2(false,"Node::AppendChild() : node is not valid!");
             g_xml_last_error = -2;
@@ -138,14 +149,14 @@ namespace SR_UTILS_NS {
         return Node(m_node.append_child(name.c_str()));
     }
 
-    std::vector<Xml::Node> Xml::Node::GetNodes() const  {
+    std::vector<Xml::Node> Xml::Node::GetNodes() const {
         if (!m_valid) {
             SRAssert2(false,"Node::GetNodes() : node is not valid!");
             g_xml_last_error = -2;
             return {};
         }
 
-        auto nodes = std::vector<Node>();
+        auto&& nodes = std::vector<Node>();
         for (const auto child : m_node.children())
             nodes.emplace_back(Node(child));
 
@@ -167,7 +178,7 @@ namespace SR_UTILS_NS {
     }
 
 
-    std::vector<Xml::Node> Xml::Node::GetNodes(const std::string &name) const  {
+    std::vector<Xml::Node> Xml::Node::GetNodes(const std::string &name) const {
         if (!m_valid) {
             SRAssert2(false,"Node::GetNodes() : node is not valid!");
             g_xml_last_error = -2;

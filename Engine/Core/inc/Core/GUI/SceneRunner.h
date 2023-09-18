@@ -11,7 +11,7 @@
 #include <Utils/World/Scene.h>
 #include <Utils/Input/InputEvents.h>
 
-namespace SR_CORE_NS::GUI {
+namespace SR_CORE_GUI_NS {
     class SceneRunner : public SR_GRAPH_NS::GUI::Widget {
     public:
         SceneRunner();

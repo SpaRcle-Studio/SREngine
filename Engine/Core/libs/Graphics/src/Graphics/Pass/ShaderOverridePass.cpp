@@ -20,6 +20,7 @@ namespace SR_GRAPH_NS {
             pShader->RemoveUsePoint();
             pShader = nullptr;
         }
+
         m_shaders.clear();
 
         if (m_framebuffer) {
@@ -62,7 +63,6 @@ namespace SR_GRAPH_NS {
         return BasePass::Load(passNode);
     }
 
-
     void ShaderOverridePass::OnResize(const SR_MATH_NS::UVector2 &size) {
         IFramebufferPass::ResizeFrameBuffer(size);
         BasePass::OnResize(size);
@@ -77,51 +77,28 @@ namespace SR_GRAPH_NS {
         return BasePass::Init() && (IsDirectional() || InitializeFramebuffer(GetContext()));
     }
 
-    bool ShaderOverridePass::DrawCluster(MeshCluster* pCluster) {
-        if (!pCluster || pCluster->Empty()) {
-            return false;
-        }
-
-        for (auto&&[_, subCluster] : *pCluster) {
-            auto&& pShader = GetShader(subCluster.GetShaderType());
-            if (!pShader) {
-                continue;
-            }
-
-            if (pShader->Use() == ShaderBindResult::Failed) {
-                continue;
-            }
-
-            for (auto&& [key, meshGroup] : subCluster) {
-                (*meshGroup.begin())->BindMesh();
-
-                for (auto&& pMesh : meshGroup) {
-                    pMesh->Draw();
-                }
-            }
-
-            pShader->UnUse();
-        }
-
-        return true;
-    }
-
     bool ShaderOverridePass::Render() {
         if (!m_framebuffer && !IsDirectional()) {
             return false;
         }
 
-        auto&& pRenderScene = GetRenderScene();
-
         auto&& pIdentifier = m_uboManager.GetIdentifier();
         m_uboManager.SetIdentifier(this);
 
         if (IsDirectional()) {
-            SR_MAYBE_UNUSED bool hasDrawData = DrawCluster(&pRenderScene->GetOpaque());
-            hasDrawData |= DrawCluster(&pRenderScene->GetTransparent());
+            Super::Render();
         }
-        else {
-            RenderInternal(pRenderScene);
+        else if (m_framebuffer->Bind()) {
+            m_framebuffer->BeginCmdBuffer(m_clearColors, 1.f);
+            {
+                m_framebuffer->BeginRender();
+                m_framebuffer->SetViewportScissor();
+
+                Super::Render();
+
+                m_framebuffer->EndRender();
+            }
+            m_framebuffer->EndCmdBuffer();
         }
 
         m_uboManager.SetIdentifier(pIdentifier);
@@ -129,92 +106,23 @@ namespace SR_GRAPH_NS {
         return IsDirectional();
     }
 
-    void ShaderOverridePass::RenderInternal(const RenderScenePtr& pRenderScene) {
-        if (!m_framebuffer->Bind()) {
-            return;
-        }
-
-        GetPipeline()->ResetCmdBuffer();
-
-        m_framebuffer->BeginCmdBuffer(SR_MATH_NS::FColor(0.0), 1.f);
-        {
-            m_framebuffer->BeginRender();
-
-            DrawCluster(&pRenderScene->GetOpaque());
-            DrawCluster(&pRenderScene->GetTransparent());
-
-            m_framebuffer->EndRender();
-        }
-        m_framebuffer->EndCmdBuffer();
-    }
-
     void ShaderOverridePass::Update() {
-        if (!m_camera) {
-            return;
-        }
-
         if (!IsDirectional() && (!m_framebuffer || m_framebuffer->IsDirty())) {
             return;
         }
 
-        m_pipeline->SetCurrentFramebuffer(m_framebuffer);
+        m_pipeline->SetCurrentFrameBuffer(m_framebuffer);
 
         auto&& pRenderScene = GetRenderScene();
 
         auto&& pIdentifier = m_uboManager.GetIdentifier();
         m_uboManager.SetIdentifier(this);
 
-        UpdateCluster(&pRenderScene->GetOpaque());
-        UpdateCluster(&pRenderScene->GetTransparent());
+        Super::Update();
 
         m_uboManager.SetIdentifier(pIdentifier);
 
-        Super::Update();
-
-        m_pipeline->SetCurrentFramebuffer(nullptr);
-    }
-
-    void ShaderOverridePass::UpdateCluster(MeshCluster* pCluster) {
-        for (auto const& [_, subCluster] : *pCluster) {
-            auto&& pShader = GetShader(subCluster.GetShaderType());
-            if (!pShader || !pShader->Ready()) {
-                continue;
-            }
-
-            m_context->SetCurrentShader(pShader);
-
-            /**
-             * TODO: нужно сделать что-то вроде SetSharedMat4, который будет биндить не в BLOCK а в SHARED_BLOCK
-             */
-            pShader->SetMat4(SHADER_VIEW_MATRIX, m_camera->GetViewTranslateRef());
-            pShader->SetMat4(SHADER_PROJECTION_MATRIX, m_camera->GetProjectionRef());
-            pShader->SetMat4(SHADER_ORTHOGONAL_MATRIX, m_camera->GetOrthogonalRef());
-
-            for (auto const& [key, meshGroup] : subCluster) {
-                for (const auto &pMesh : meshGroup) {
-                    if (!pMesh->IsMeshActive()) {
-                        continue;
-                    }
-
-                    auto&& virtualUbo = pMesh->GetVirtualUBO();
-                    if (virtualUbo == SR_ID_INVALID) {
-                        continue;
-                    }
-
-                    pMesh->UseMaterial();
-
-                    pShader->SetVec3(SHADER_VIEW_DIRECTION, m_camera->GetViewDirection());
-
-                    if (m_uboManager.BindUBO(virtualUbo) == Memory::UBOManager::BindResult::Duplicated) {
-                        SR_ERROR("ShaderOverridePass::Update() : memory has been duplicated!");
-                    }
-
-                    pShader->Flush();
-                }
-            }
-        }
-
-        m_context->SetCurrentShader(nullptr);
+        m_pipeline->SetCurrentFrameBuffer(nullptr);
     }
 
     ShaderOverridePass::ShaderPtr ShaderOverridePass::GetShader(SR_SRSL_NS::ShaderType type) const {
@@ -225,5 +133,22 @@ namespace SR_GRAPH_NS {
         }
 
         return nullptr;
+    }
+
+    void ShaderOverridePass::UseSharedUniforms(ShaderOverridePass::ShaderPtr pShader) {
+        if (m_camera) {
+            pShader->SetMat4(SHADER_VIEW_MATRIX, m_camera->GetViewTranslateRef());
+            pShader->SetMat4(SHADER_PROJECTION_MATRIX, m_camera->GetProjectionRef());
+            pShader->SetMat4(SHADER_ORTHOGONAL_MATRIX, m_camera->GetOrthogonalRef());
+            pShader->SetVec3(SHADER_VIEW_DIRECTION, m_camera->GetViewDirection());
+        }
+        Super::UseSharedUniforms(pShader);
+    }
+
+    std::vector<SR_GTYPES_NS::Framebuffer*> ShaderOverridePass::GetFrameBuffers() const {
+        if (!m_framebuffer) {
+            return std::vector<SR_GTYPES_NS::Framebuffer*>();
+        }
+        return { m_framebuffer };
     }
 }

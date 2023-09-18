@@ -7,41 +7,40 @@
 
 #include <Graphics/Types/Texture.h>
 #include <Graphics/Loaders/TextureLoader.h>
-#include <Graphics/Pipeline/Environment.h>
 #include <Graphics/Render/RenderContext.h>
 
 namespace SR_GTYPES_NS {
     Texture::Texture()
-        : IResource(SR_COMPILE_TIME_CRC32_TYPE_NAME(Texture), true /** auto remove */)
+        : IResource(SR_COMPILE_TIME_CRC32_TYPE_NAME(Texture))
     { }
 
     Texture::~Texture() {
         FreeTextureData();
     }
 
-    Texture *Texture::LoadFont(Font *pFont) {
-        Texture* texture = new Texture();
+    Texture::Ptr Texture::LoadFont(Font* pFont) {
+        auto&& pTexture = new Texture();
 
-        texture->m_fromMemory = true;
-        texture->m_isFont = true;
+        pTexture->m_fromMemory = true;
+        pTexture->m_isFont = true;
 
-        texture->m_width = pFont->GetWidth();
-        texture->m_height = pFont->GetHeight();
-        texture->m_data = pFont->CopyData();
+        pTexture->m_width = pFont->GetWidth();
+        pTexture->m_height = pFont->GetHeight();
+        pTexture->m_data = pFont->CopyData();
 
-        texture->m_config.m_alpha = SR_UTILS_NS::BoolExt::True;
-        texture->m_config.m_format = ColorFormat::RGBA8_UNORM;
-        texture->m_config.m_filter = TextureFilter::NEAREST;
-        texture->m_config.m_compression = TextureCompression::None;
-        texture->m_config.m_mipLevels = 1;
-        texture->m_config.m_cpuUsage = false;
+        pTexture->m_config.m_alpha = SR_UTILS_NS::BoolExt::True;
+        pTexture->m_config.m_format = ImageFormat::RGBA8_UNORM;
+        pTexture->m_config.m_filter = TextureFilter::NEAREST;
+        pTexture->m_config.m_compression = TextureCompression::None;
+        pTexture->m_config.m_mipLevels = 1;
+        pTexture->m_config.m_cpuUsage = false;
 
-        texture->SetId("FontTexture");
+        pTexture->SetId("FontTexture");
 
-        return texture;
+        return pTexture;
     }
 
-    Texture *Texture::LoadRaw(const uint8_t* pData, uint64_t bytes, uint64_t h, uint64_t w, const Memory::TextureConfig &config) {
+    Texture::Ptr Texture::LoadRaw(const uint8_t* pData, uint64_t bytes, uint64_t h, uint64_t w, const Memory::TextureConfig &config) {
         Texture* texture = new Texture();
 
         texture->m_fromMemory = true;
@@ -60,10 +59,10 @@ namespace SR_GTYPES_NS {
         return texture;
     }
 
-    Texture* Texture::Load(const std::string& rawPath, const std::optional<Memory::TextureConfig>& config) {
-        static auto&& resourceManager = SR_UTILS_NS::ResourceManager::Instance();
+    Texture::Ptr Texture::Load(const std::string& rawPath, const std::optional<Memory::TextureConfig>& config) {
+        auto&& resourceManager = SR_UTILS_NS::ResourceManager::Instance();
 
-        Texture* pTexture = nullptr;
+        Texture::Ptr pTexture = nullptr;
 
         resourceManager.Execute([&]() {
             SR_UTILS_NS::Path&& path = SR_UTILS_NS::Path(rawPath).RemoveSubPath(resourceManager.GetResPath());
@@ -157,7 +156,6 @@ namespace SR_GTYPES_NS {
 
         m_context.Do([this](RenderContext* ptr) {
             ptr->Register(this);
-            m_pipeline = ptr->GetPipeline();
         });
 
         if (IsDestroyed()) {
@@ -175,11 +173,18 @@ namespace SR_GTYPES_NS {
 
         EVK_PUSH_LOG_LEVEL(EvoVulkan::Tools::LogLevel::ErrorsOnly);
 
-        // TODO: to refactoring
-        m_id = m_pipeline->CalculateTexture(m_data,
-                m_config.m_format, m_width, m_height, m_config.m_filter,
-                m_config.m_compression, m_config.m_mipLevels,
-                m_config.m_alpha == SR_UTILS_NS::BoolExt::None, m_config.m_cpuUsage);
+        SRTextureCreateInfo createInfo;
+        createInfo.pData = m_data;
+        createInfo.width = m_width;
+        createInfo.height = m_height;
+        createInfo.compression = m_config.m_compression;
+        createInfo.cpuUsage = m_config.m_cpuUsage;
+        createInfo.alpha = m_config.m_alpha == SR_UTILS_NS::BoolExt::None;
+        createInfo.format = m_config.m_format;
+        createInfo.mipLevels = m_config.m_mipLevels;
+        createInfo.filter = m_config.m_filter;
+
+        m_id = m_pipeline->AllocateTexture(createInfo);
 
         EVK_POP_LOG_LEVEL();
 
@@ -191,8 +196,6 @@ namespace SR_GTYPES_NS {
             if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::High) {
                 SR_LOG("Texture::Calculate() : texture \"" + std::string(GetResourceId()) + "\" has " + std::to_string(m_id) + " id.");
             }
-            /// не освобождаем, может пригодиться
-            /// FreeTextureData();
         }
 
         m_isCalculated = true;
@@ -248,7 +251,7 @@ namespace SR_GTYPES_NS {
     }
 
     Texture* Texture::LoadFromMemory(const std::string& data, const Memory::TextureConfig &config) {
-        Texture* texture = new Texture();
+        Texture::Ptr texture = new Texture();
 
         if (!TextureLoader::LoadFromMemory(texture, data, config)) {
             SRHalt("Texture::LoadFromMemory() : failed to load the texture!");
@@ -271,7 +274,7 @@ namespace SR_GTYPES_NS {
             return nullptr;
         }
 
-        return m_pipeline->GetDescriptorSetFromTexture(textureId, true);
+        return m_pipeline->GetOverlayTextureDescriptorSet(textureId, OverlayType::ImGui);
     }
 
     SR_UTILS_NS::Path Framework::Graphics::Types::Texture::GetAssociatedPath() const {
@@ -279,7 +282,7 @@ namespace SR_GTYPES_NS {
     }
 
     uint64_t Texture::GetFileHash() const {
-        if (m_fromMemory) {
+        if (IsFromMemory()) {
             return 0;
         }
 
@@ -305,5 +308,12 @@ namespace SR_GTYPES_NS {
     SR_UTILS_NS::IResource::RemoveUPResult Texture::RemoveUsePoint() {
         SRAssert2(!(IsCalculated() && GetCountUses() == 1), "Possible multi threading error!");
         return IResource::RemoveUsePoint();
+    }
+
+    void Texture::StartWatch() {
+        if (IsFromMemory()) {
+            return;
+        }
+        IResource::StartWatch();
     }
 }

@@ -24,8 +24,14 @@ namespace SR_GRAPH_NS {
         Samples32
     );
 
-    SR_ENUM_NS_CLASS(ColorFormat,
+    SR_ENUM_NS_CLASS(ImageAspect,
+        None, Depth, Stencil, Color, DepthStencil
+    );
+
+    SR_ENUM_NS_CLASS(ImageFormat,
         Unknown,
+        None,
+        Auto,
 
         RGBA8_UNORM,
         BGRA8_UNORM,
@@ -49,14 +55,24 @@ namespace SR_GRAPH_NS {
         R32_UINT,
         R64_UINT,
 
-        RG8_UNORM
+        RG8_UNORM,
+
+        D16_UNORM,
+        D24_UNORM_S8_UINT,
+        D32_SFLOAT,
+        D32_SFLOAT_S8_UINT
     );
 
-    SR_ENUM_NS_CLASS(DepthFormat,
-        Unknown,
-        None,
-        Auto
-    );
+    struct ColorLayer {
+        int32_t texture = SR_ID_INVALID;
+        ImageFormat format = ImageFormat::Unknown;
+    };
+
+    struct DepthLayer {
+        int32_t texture = SR_ID_INVALID;
+        ImageFormat format = ImageFormat::Unknown;
+        ImageAspect aspect = ImageAspect::DepthStencil;
+    };
 
     //inline static bool IsSRGB(ColorFormat f) {
     //    return f == ColorFormat::RGBA8_SRGB;
@@ -96,7 +112,7 @@ namespace SR_GRAPH_NS {
         return image;
     }
 
-    uint32_t GetPixelSize(ColorFormat format);
+    uint32_t GetPixelSize(ImageFormat format);
 
     uint8_t* Compress(uint32_t w, uint32_t h, uint8_t* pixels, Framework::Graphics::TextureCompression method);
 

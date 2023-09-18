@@ -261,7 +261,7 @@ namespace SR_MATH_NS {
             return v;
         }
 
-        SR_NODISCARD Vector3 Lerp(const Vector3& vector3, Unit t) const noexcept {
+        SR_NODISCARD SR_FORCE_INLINE Vector3 SR_FASTCALL Lerp(const Vector3& vector3, Unit t) const noexcept {
             return (Vector3)(*this + (vector3 - *this) * t);
         }
 
@@ -287,6 +287,14 @@ namespace SR_MATH_NS {
 
         SR_NODISCARD T SquaredNorm() const noexcept {
             return x * x + y * y + z * z;
+        }
+
+        SR_NODISCARD Vector3<T> Clamp(const Vector3<T>& upper, const Vector3<T>& lover) const {
+            return Vector3<T>(
+                SR_CLAMP(x, upper.x, lover.x),
+                SR_CLAMP(y, upper.y, lover.y),
+                SR_CLAMP(z, upper.z, lover.z)
+            );
         }
 
         SR_NODISCARD Quaternion ToQuat() const;
@@ -349,9 +357,11 @@ namespace SR_MATH_NS {
             z += p_v.z;
             return *this;
         }
-        template<typename U> SR_FORCE_INLINE Vector3 operator+(const Vector3<U> &p_v) const {
+
+        template<typename U> SR_FORCE_INLINE Vector3 SR_FASTCALL operator+(const Vector3<U> &p_v) const noexcept {
             return Vector3(x + p_v.x, y + p_v.y, z + p_v.z);
         }
+
         template<typename U> SR_FORCE_INLINE Vector3 operator%(const Vector3<U> &p_v) const {
             return Vector3(
                     static_cast<int32_t>(x) % static_cast<int32_t>(p_v.x),
@@ -438,7 +448,7 @@ namespace SR_MATH_NS {
             return *reinterpret_cast<glm::vec3*>((void*)this);
         }
         static Unit Magnitude(Vector3 vec) {
-            return sqrt(SR_POW(vec.x) + SR_POW(vec.y) + SR_POW(vec.z));
+            return sqrt(SR_SQUARE(vec.x) + SR_SQUARE(vec.y) + SR_SQUARE(vec.z));
         }
 
         static T Dot(Vector3 lhs, Vector3 rhs) { return lhs.x * rhs.x + lhs.y * rhs.y + lhs.z * rhs.z; }

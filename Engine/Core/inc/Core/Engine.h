@@ -2,8 +2,8 @@
 // Created by Nikita on 29.12.2020.
 //
 
-#ifndef GAMEENGINE_ENGINE_H
-#define GAMEENGINE_ENGINE_H
+#ifndef SR_ENGINE_ENGINE_H
+#define SR_ENGINE_ENGINE_H
 
 #include <Utils/Events/EventManager.h>
 #include <Utils/Types/Time.h>
@@ -25,7 +25,6 @@
 namespace SR_GRAPH_NS {
     class Window;
     class Render;
-    class Environment;
     class RenderScene;
     class RenderContext;
 }
@@ -44,11 +43,11 @@ namespace SR_WORLD_NS {
 
 namespace SR_CORE_NS {
     class EngineScene;
+    class Application;
 
-    class Engine : public SR_UTILS_NS::Singleton<Engine> {
-        friend class SR_UTILS_NS::Singleton<Engine>;
-        friend class Framework::API;
-        using PipelinePtr = SR_GRAPH_NS::Environment*;
+    class Engine : public SR_HTYPES_NS::SharedPtr<Engine> {
+        using Super = SR_HTYPES_NS::SharedPtr<Engine>;
+        using Ptr = SR_HTYPES_NS::SharedPtr<Engine>;
         using WindowPtr = SR_HTYPES_NS::SafePtr<SR_GRAPH_NS::Window>;
         using RenderContextPtr = SR_HTYPES_NS::SafePtr<SR_GRAPH_NS::RenderContext>;
         using CameraPtr = SR_GTYPES_NS::Camera*;
@@ -57,11 +56,9 @@ namespace SR_CORE_NS {
         using PhysicsScenePtr = SR_HTYPES_NS::SafePtr<SR_PHYSICS_NS::PhysicsScene>;
         using ScenePtr = SR_HTYPES_NS::SafePtr<SR_WORLD_NS::Scene>;
         using RenderScenePtr = SR_HTYPES_NS::SafePtr<SR_GRAPH_NS::RenderScene>;
-    private:
-        Engine() = default;
-        ~Engine() override = default;
-
     public:
+        explicit Engine(Application* pApplication);
+
         void Reload();
 
         bool SetScene(const ScenePtr& scene);
@@ -71,6 +68,7 @@ namespace SR_CORE_NS {
         void SetGameMode(bool enabled);
 
         void FixedUpdate();
+        void FlushScene();
 
         SR_NODISCARD SR_INLINE ScenePtr GetScene() const;
         SR_NODISCARD SR_INLINE RenderContextPtr GetRenderContext() const { return m_renderContext; }
@@ -81,14 +79,13 @@ namespace SR_CORE_NS {
         SR_NODISCARD SR_INLINE bool IsRun() const { return m_isRun; }
         SR_NODISCARD SR_INLINE bool IsPaused() const { return m_isPaused; }
         SR_NODISCARD SR_INLINE bool IsGameMode() const { return m_isGameMode; }
-        SR_NODISCARD SR_INLINE Core::GUI::EditorGUI* GetEditor() const { return m_editor; }
+        SR_NODISCARD SR_INLINE SR_CORE_GUI_NS::EditorGUI* GetEditor() const { return m_editor; }
         SR_NODISCARD SR_INLINE SR_UTILS_NS::CmdManager* GetCmdManager() const { return m_cmdManager; }
 
     public:
         bool Create();
         bool Init();
         bool Run();
-        void Await();
         bool Close();
 
     private:
@@ -99,8 +96,6 @@ namespace SR_CORE_NS {
 
         void DrawCallback();
         void WorldThread();
-
-        void FlushScene();
 
     private:
         std::atomic<bool> m_isCreate  = false;
@@ -124,15 +119,15 @@ namespace SR_CORE_NS {
         SR_HTYPES_NS::SafeQueue<ScenePtr> m_sceneQueue;
 
         EngineScene* m_engineScene = nullptr;
+        Application* m_application = nullptr;
 
-        Core::GUI::EditorGUI* m_editor = nullptr;
+        SR_CORE_GUI_NS::EditorGUI* m_editor = nullptr;
 
         RenderContextPtr m_renderContext = { };
 
-        WindowPtr m_window = { };
-        PipelinePtr m_pipeline = nullptr;
+        WindowPtr m_window;
 
     };
 }
 
-#endif //GAMEENGINE_ENGINE_H
+#endif //SR_ENGINE_ENGINE_H

@@ -92,6 +92,18 @@ namespace SR_SRSL_NS {
         return false;
     }
 
+    std::set<ShaderStage> SRSLUseStack::IsVariableUsedInEntryPointsExt(const std::string &name) const {
+        std::set<ShaderStage> stages;
+
+        for (auto&& [stage, entryPoint] : SR_SRSL_ENTRY_POINTS) {
+            if (auto&& pFunction = FindFunction(entryPoint); pFunction && pFunction->IsVariableUsed(name)) {
+                stages.insert(stage);
+            }
+        }
+
+        return stages;
+    }
+
     /// ----------------------------------------------------------------------------------------------------------------
 
     SRSLUseStack::Ptr SRSLRefAnalyzer::Analyze(const SRSLAnalyzedTree::Ptr& pAnalyzedTree) {

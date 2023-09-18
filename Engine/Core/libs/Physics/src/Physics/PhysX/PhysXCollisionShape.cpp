@@ -25,21 +25,25 @@ namespace SR_PTYPES_NS {
             m_shape = nullptr;
         }
 
-        /// TODO: physics materials
-        //physx::PxMaterial* defaultMaterial = pPhysics->createMaterial(0.5f, 0.5f, 0.6f);
-        physx::PxMaterial* defaultMaterial = pPhysics->createMaterial(1.0f, 1.0f, 0.0f);
+        auto&& pMaterial = GetMaterial();
+        bool isDefaultMaterial = false;
+
+        if (!pMaterial) {
+            pMaterial = pPhysics->createMaterial(1.0f, 1.0f, 0.0f);
+            isDefaultMaterial = true;
+        }
 
         switch (m_type) {
             case ShapeType::Box3D: {
-                m_shape = pPhysics->createShape(physx::PxBoxGeometry(SR_PHYSICS_UTILS_NS::FV3ToPxV3(GetSize())), *defaultMaterial, true);
+                m_shape = pPhysics->createShape(physx::PxBoxGeometry(SR_PHYSICS_UTILS_NS::FV3ToPxV3(GetSize())), *pMaterial, true);
                 break;
             }
             case ShapeType::Sphere3D: {
-                m_shape = pPhysics->createShape(physx::PxSphereGeometry(GetRadius()), *defaultMaterial, true);
+                m_shape = pPhysics->createShape(physx::PxSphereGeometry(GetRadius()), *pMaterial, true);
                 break;
             }
             case ShapeType::Capsule3D: {
-                m_shape = pPhysics->createShape(physx::PxCapsuleGeometry(GetRadius(), GetHeight()), *defaultMaterial, true);
+                m_shape = pPhysics->createShape(physx::PxCapsuleGeometry(GetRadius(), GetHeight()), *pMaterial, true);
                 break;
             }
             case ShapeType::Convex3D: {
@@ -47,7 +51,7 @@ namespace SR_PTYPES_NS {
 
                 if (!rawMesh) {
                     SR_WARN("PhysXCollisionShape::UpdateShape() : mesh is not set!");
-                    m_shape = pPhysics->createShape(physx::PxBoxGeometry(SR_PHYSICS_UTILS_NS::FV3ToPxV3(GetSize())), *defaultMaterial, true);
+                    m_shape = pPhysics->createShape(physx::PxBoxGeometry(SR_PHYSICS_UTILS_NS::FV3ToPxV3(GetSize())), *pMaterial, true);
                     break;
                 }
 
@@ -58,7 +62,7 @@ namespace SR_PTYPES_NS {
                     return false;
                 }
 
-                m_shape = pPhysics->createShape(physx::PxConvexMeshGeometry(convexMesh), *defaultMaterial);
+                m_shape = pPhysics->createShape(physx::PxConvexMeshGeometry(convexMesh), *pMaterial);
                 break;
             }
             case ShapeType::TriangleMesh3D: {
@@ -76,12 +80,16 @@ namespace SR_PTYPES_NS {
                     return false;
                 }
 
-                m_shape = pPhysics->createShape(physx::PxTriangleMeshGeometry(triangleMesh), *defaultMaterial);
+                m_shape = pPhysics->createShape(physx::PxTriangleMeshGeometry(triangleMesh), *pMaterial);
                 break;
             }
             default:
                 SR_ERROR("PhysXCollisionShape::UpdateShape() : unsupported shape! Type: " + SR_UTILS_NS::EnumReflector::ToString(m_type));
-                defaultMaterial->release();
+
+                if (isDefaultMaterial) {
+                    pMaterial->release();
+                }
+                
                 return false;
         }
 
@@ -215,5 +223,24 @@ namespace SR_PTYPES_NS {
         cooking->release();
 
         return triangleMesh;
+    }
+
+    physx::PxMaterial* PhysXCollisionShape::GetMaterial() const {
+        auto&& pMaterial = GetRigidbody()->GetPhysicsMaterial();
+        if (!pMaterial) {
+            return nullptr;
+        }
+
+        auto&& pMaterialImpl = pMaterial->GetMaterialImpl(LibraryType::PhysX);
+        if (!pMaterialImpl) {
+            return nullptr;
+        }
+
+        auto&& pPxMaterial = pMaterialImpl->GetHandle();
+        if (!pPxMaterial) {
+            return nullptr;
+        }
+
+        return (physx::PxMaterial*)pPxMaterial;
     }
 }

@@ -3,6 +3,7 @@
 //
 
 #include <Graphics/Pass/ColorBufferPass.h>
+#include <Graphics/Pipeline/Pipeline.h>
 
 namespace SR_GRAPH_NS {
     SR_REGISTER_RENDER_PASS(ColorBufferPass)
@@ -14,54 +15,6 @@ namespace SR_GRAPH_NS {
     void ColorBufferPass::Update() {
         m_colorId = 0;
         Super::Update();
-    }
-
-    void ColorBufferPass::UpdateCluster(MeshCluster *pCluster) {
-        for (auto const& [_, subCluster] : *pCluster) {
-            auto&& pShader = GetShader(subCluster.GetShaderType());
-            if (!pShader || !pShader->Ready()) {
-                continue;
-            }
-
-            m_context->SetCurrentShader(pShader);
-
-            /**
-             * TODO: нужно сделать что-то вроде SetSharedMat4, который будет биндить не в BLOCK а в SHARED_BLOCK
-             */
-            pShader->SetMat4(SHADER_VIEW_MATRIX, m_camera->GetViewTranslateRef());
-            pShader->SetMat4(SHADER_PROJECTION_MATRIX, m_camera->GetProjectionRef());
-            pShader->SetMat4(SHADER_ORTHOGONAL_MATRIX, m_camera->GetOrthogonalRef());
-
-            for (auto const& [key, meshGroup] : subCluster) {
-                for (const auto &pMesh : meshGroup) {
-                    if (!pMesh->IsMeshActive()) {
-                        continue;
-                    }
-
-                    auto&& virtualUbo = pMesh->GetVirtualUBO();
-                    if (virtualUbo == SR_ID_INVALID) {
-                        continue;
-                    }
-
-                    pMesh->UseModelMatrix();
-
-                    ++m_colorId;
-                    SetMeshIndex(pMesh, m_colorId);
-
-                    auto&& color = SR_MATH_NS::HEXToBGR(m_colorId).Cast<SR_MATH_NS::Unit>();
-
-                    pShader->SetVec3(SR_COMPILE_TIME_CRC32_STR("color"), color.ToGLM() / 255.f);
-
-                    if (m_uboManager.BindUBO(virtualUbo) == Memory::UBOManager::BindResult::Duplicated) {
-                        SR_ERROR("ColorBufferPass::Update() : memory has been duplicated!");
-                    }
-
-                    pShader->Flush();
-                }
-            }
-        }
-
-        m_context->SetCurrentShader(nullptr);
     }
 
     SR_MATH_NS::FColor ColorBufferPass::GetColor(float_t x, float_t y) const {
@@ -126,5 +79,28 @@ namespace SR_GRAPH_NS {
         ));
 
         return colorIndex;
+    }
+
+    MeshClusterTypeFlag ColorBufferPass::GetClusterType() const noexcept {
+        return static_cast<uint64_t>(MeshClusterType::Opaque) | static_cast<uint64_t>(MeshClusterType::Transparent);
+    }
+
+    void ColorBufferPass::UseUniforms(ColorBufferPass::ShaderPtr pShader, ColorBufferPass::MeshPtr pMesh) {
+        pMesh->UseModelMatrix();
+
+        ++m_colorId;
+        SetMeshIndex(pMesh, m_colorId);
+
+        auto&& color = SR_MATH_NS::HEXToBGR(m_colorId).Cast<SR_MATH_NS::Unit>();
+
+        pShader->SetVec3(SR_COMPILE_TIME_CRC32_STR("color"), color.ToGLM() / 255.f);
+    }
+
+    void ColorBufferPass::UseSharedUniforms(ColorBufferPass::ShaderPtr pShader) {
+        if (m_camera) {
+            pShader->SetMat4(SHADER_VIEW_MATRIX, m_camera->GetViewTranslateRef());
+            pShader->SetMat4(SHADER_PROJECTION_MATRIX, m_camera->GetProjectionRef());
+            pShader->SetMat4(SHADER_ORTHOGONAL_MATRIX, m_camera->GetOrthogonalRef());
+        }
     }
 }

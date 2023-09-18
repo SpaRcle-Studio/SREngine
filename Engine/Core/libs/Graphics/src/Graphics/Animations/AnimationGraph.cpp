@@ -32,6 +32,7 @@ namespace SR_ANIMATIONS_NS {
     }
 
     void AnimationGraph::Update(const UpdateContext& context) {
+        SR_TRACY_ZONE;
         GetFinal()->Update(context, AnimationLink(SR_ID_INVALID, SR_ID_INVALID));
     }
 

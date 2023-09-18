@@ -8,12 +8,10 @@
 
 namespace SR_PTYPES_NS {
     PhysicsMaterial::PhysicsMaterial()
-        : Super(SR_COMPILE_TIME_CRC32_TYPE_NAME(PhysicsMaterial), true /** auto remove */)
+        : Super(SR_COMPILE_TIME_CRC32_TYPE_NAME(PhysicsMaterial))
     { }
 
     PhysicsMaterial::~PhysicsMaterial() {
-        SetReadOnly(false);
-
         for (auto&& [libraryType, physicsMaterial] : m_implementations) {
             delete physicsMaterial;
         }
@@ -26,13 +24,13 @@ namespace SR_PTYPES_NS {
         return nullptr;
     }
 
-    PhysicsMaterial* PhysicsMaterial::Load(SR_UTILS_NS::Path rawPath) {
+    PhysicsMaterial* PhysicsMaterial::Load(const SR_UTILS_NS::Path& rawPath) {
         if (rawPath.Empty()) {
             SRHalt("PhysicsMaterial::Load() : path is empty!");
             return nullptr;
         }
 
-        static auto&& resourceManager = SR_UTILS_NS::ResourceManager::Instance();
+        auto&& resourceManager = SR_UTILS_NS::ResourceManager::Instance();
 
         PhysicsMaterial* pMaterial = nullptr;
 
@@ -60,7 +58,11 @@ namespace SR_PTYPES_NS {
     }
 
     bool PhysicsMaterial::Load() {
+        SR_TRACY_ZONE;
+
         const auto&& path = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat(GetResourcePath());
+
+        SR_LOG("PhysicsMaterial::Load() : the physics material is loading. \n\tPath: " + path.ToString());
 
         auto&& document = SR_XML_NS::Document::Load(path);
         if (!document.Valid()) {
@@ -74,25 +76,31 @@ namespace SR_PTYPES_NS {
             return false;
         }
 
-        SetDynamicFriction(matXml.TryGetNode("DynamicFriction").TryGetAttribute("Value").ToFloat(0.6f));
-        SetStaticFriction(matXml.TryGetNode("StaticFriction").TryGetAttribute("Value").ToFloat(0.6f));
-        SetBounciness(matXml.TryGetNode("Bounciness").TryGetAttribute("Value").ToFloat(0.0f));
-        SetFrictionCombine(SR_UTILS_NS::EnumReflector::FromString<Combine>(matXml.TryGetNode("FrictionCombine").TryGetAttribute("Value").ToString("Average")));
-        SetBounceCombine(SR_UTILS_NS::EnumReflector::FromString<Combine>(matXml.TryGetNode("BounceCombine").TryGetAttribute("Value").ToString("Average")));
+        SetDynamicFriction(matXml.TryGetNode("DynamicFriction").TryGetAttribute<float_t>(0.6f));
+        SetStaticFriction(matXml.TryGetNode("StaticFriction").TryGetAttribute<float_t>(0.6f));
+        SetBounciness(matXml.TryGetNode("Bounciness").TryGetAttribute<float_t>(0.6f));
+        SetFrictionCombine(SR_UTILS_NS::EnumReflector::FromString<Combine>(matXml.TryGetNode("FrictionCombine").TryGetAttribute<std::string>("Average")));
+        SetBounceCombine(SR_UTILS_NS::EnumReflector::FromString<Combine>(matXml.TryGetNode("BounceCombine").TryGetAttribute<std::string>("Average")));
 
-        SetReadOnly(matXml.TryGetAttribute("ReadOnly").ToBool(false));
-
-        for (auto&& libraryType : SR_PHYSICS_NS::PhysicsLibrary::Instance().GetSupportedLibraries()) {
+        for (auto&& libraryType : SR_PHYSICS_NS::PhysicsLibrary::Instance().GetSupportedLibraries())
+        {
             auto&& pLibrary = SR_PHYSICS_NS::PhysicsLibrary::Instance().GetLibrary(libraryType);
-            m_implementations[libraryType] = pLibrary->CreatePhysicsMaterial();
+
+            if (auto&& pMaterial = pLibrary->CreatePhysicsMaterial()) {
+                m_implementations[libraryType] = pMaterial;
+                pMaterial->SetMaterial(this);
+                pMaterial->Init();
+            }
+        }
+
+        for (auto&& rigidbody : m_rigidbodies) {
+            rigidbody->SetShapeDirty(true);
         }
 
         return IResource::Load();
     }
 
     bool PhysicsMaterial::Unload() {
-        SetReadOnly(false);
-
         for (auto&& [libraryType, physicsMaterial] : m_implementations) {
             delete physicsMaterial;
         }
@@ -100,5 +108,45 @@ namespace SR_PTYPES_NS {
         m_implementations.clear();
 
         return IResource::Unload();
+    }
+
+    bool PhysicsMaterial::Save(const SR_UTILS_NS::Path& path, const PhysicsMaterialData& materialData) {
+        auto&& document = SR_XML_NS::Document::New();
+
+        auto&& matXml = document.Root().AppendNode("PhysicsMaterial");
+
+        matXml.AppendNode("DynamicFriction").AppendAttribute(materialData.dynamicFriction);
+        matXml.AppendNode("StaticFriction").AppendAttribute(materialData.staticFriction);
+        matXml.AppendNode("Bounciness").AppendAttribute(materialData.bounciness);
+        matXml.AppendNode("FrictionCombine").AppendAttribute(SR_UTILS_NS::EnumReflector::ToString(materialData.frictionCombine));
+        matXml.AppendNode("BounceCombine").AppendAttribute(SR_UTILS_NS::EnumReflector::ToString(materialData.bounceCombine));
+
+        if (!document.Save(path)) {
+            SR_ERROR("PhysicsMaterial::Save() : failed to save the document! \n\tPath: " + path.ToString());
+            return false;
+        }
+
+        return true;
+    }
+
+    PhysicsMaterialImpl* PhysicsMaterial::GetMaterialImpl(LibraryType libraryType) const {
+        if (auto&& pIt = m_implementations.find(libraryType); pIt != m_implementations.end()) {
+            return pIt->second;
+        }
+        return nullptr;
+    }
+
+    void PhysicsMaterial::RemoveRigidbody(SR_PTYPES_NS::Rigidbody* pRigidbody) {
+        if (auto&& pIt = m_rigidbodies.find(pRigidbody); pIt != m_rigidbodies.end()) {
+            m_rigidbodies.erase(pIt);
+        }
+        else {
+            SRHalt("PhysicsMaterial::RemoveRigidbody() : rigidbody is not found.");
+        }
+    }
+
+    void PhysicsMaterial::SetRigidbody(SR_PTYPES_NS::Rigidbody* pRigidbody) {
+        SRAssert(m_rigidbodies.count(pRigidbody) == 0);
+        m_rigidbodies.insert(pRigidbody);
     }
 }

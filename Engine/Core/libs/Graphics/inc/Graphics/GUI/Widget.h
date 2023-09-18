@@ -2,29 +2,35 @@
 // Created by Monika on 10.02.2022.
 //
 
-#ifndef SRENGINE_WIDGET_H
-#define SRENGINE_WIDGET_H
-
-#include <Utils/GUI.h>
+#ifndef SR_ENGINE_GRAPHICS_WIDGET_H
+#define SR_ENGINE_GRAPHICS_WIDGET_H
 
 #include <Utils/Common/NonCopyable.h>
 #include <Utils/Types/DataStorage.h>
+#include <Utils/Types/SafePointer.h>
+#include <Utils/Types/Function.h>
 #include <Utils/Input/InputSystem.h>
 #include <Utils/Input/InputHandler.h>
+
+#include <Graphics/GUI/ImGUI.h>
 
 namespace SR_GRAPH_NS {
     class RenderScene;
     class RenderContext;
 }
 
-namespace SR_GRAPH_NS::GUI {
+namespace SR_WORLD_NS {
+    class Scene;
+}
+
+namespace SR_GRAPH_GUI_NS {
     class WidgetManager;
     typedef ImGuiWindowFlags WindowFlags;
 
     enum WidgetFlags : uint32_t {
-        WIDGET_FLAG_NONE         = 1 << 0,
-        WIDGET_FLAG_HOVERED      = 1 << 1,
-        WIDGET_FLAG_FOCUSED      = 1 << 2,
+        WIDGET_FLAG_NONE         = 1 << 0, /** NOLINT */
+        WIDGET_FLAG_HOVERED      = 1 << 1, /** NOLINT */
+        WIDGET_FLAG_FOCUSED      = 1 << 2, /** NOLINT */
     };
     typedef uint32_t WidgetFlagBits;
 
@@ -54,14 +60,19 @@ namespace SR_GRAPH_NS::GUI {
         SR_NODISCARD bool IsFocused() const { return m_internalFlags & WIDGET_FLAG_FOCUSED; }
         SR_NODISCARD bool IsHovered() const { return m_internalFlags & WIDGET_FLAG_HOVERED; }
         SR_NODISCARD WidgetManager* GetManager() const { return m_manager; }
-        SR_NODISCARD std::string GetName() const { return m_name; }
+        SR_NODISCARD const std::string& GetName() const { return m_name; }
         SR_NODISCARD RenderScenePtr GetRenderScene() const;
         SR_NODISCARD ContextPtr GetContext() const;
         SR_NODISCARD SR_HTYPES_NS::DataStorage& GetWeakStorage() const { return m_weakStorage; }
         SR_NODISCARD SR_HTYPES_NS::DataStorage& GetStrongStorage() const { return m_strongStorage; }
 
+        virtual void Init() { }
+
         virtual void Open();
         virtual void Close();
+
+        virtual void Update(float_t dt) { }
+        virtual void FixedUpdate() { }
 
         virtual void SetScene(const ScenePtr& scene) { }
 
@@ -110,4 +121,4 @@ namespace SR_GRAPH_NS::GUI {
     };
 }
 
-#endif //SRENGINE_WIDGET_H
+#endif //SR_ENGINE_GRAPHICS_WIDGET_H

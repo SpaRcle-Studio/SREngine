@@ -14,6 +14,8 @@
 
 namespace SR_PHYSICS_NS {
     bool PhysXLibraryImpl::Initialize() {
+        SR_TRACY_ZONE;
+
         if (!Super::Initialize()){
             SR_ERROR("PhysXLibraryImpl::Initialize() : failed to initialize basic library!");
         }
@@ -28,6 +30,7 @@ namespace SR_PHYSICS_NS {
         }
 
         if (SR_UTILS_NS::Features::Instance().Enabled("PVD", false)) {
+            SR_TRACY_ZONE_N("Create PVD");
             m_pvd = PxCreatePvd(*m_foundation);
             m_pvdTransport = physx::PxDefaultPvdSocketTransportCreate("127.0.0.1", 5425, 1000);
             m_pvd->connect(*m_pvdTransport, physx::PxPvdInstrumentationFlag::eALL);
@@ -39,7 +42,9 @@ namespace SR_PHYSICS_NS {
             return false;
         }
 
-        if (IsVehicleSupported()){
+        if (IsVehicleSupported()) {
+            SR_TRACY_ZONE_N("Init vechicle");
+
             if (!physx::PxInitVehicleSDK(*m_physics)){
                 SR_ERROR("PhysXLibraryImpl::Initialize() : failed to initialize Vehicle SDK!");
                 return false;

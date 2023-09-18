@@ -5,6 +5,9 @@
 #ifndef GAMEENGINE_MACROS_H
 #define GAMEENGINE_MACROS_H
 
+#define GLM_FORCE_RADIANS
+#define GLM_FORCE_DEPTH_ZERO_TO_ONE
+
 #if defined(_MSVC_LANG)
     static_assert(sizeof(size_t) == 8, "The engine supports only 64-bit systems!");
 
@@ -137,10 +140,6 @@
 
 #define SR_FAST_CONSTRUCTOR SR_FORCE_INLINE SR_CONSTEXPR
 
-#ifndef SR_USE_GLFW3
-    #define SR_USE_GLFW3
-#endif
-
 #ifdef SR_USE_VULKAN
     #define VK_PROTOTYPES
 #endif
@@ -175,11 +174,13 @@
 #define SR_PTYPES_NS SR_PHYSICS_NS::Types
 #define SR_PHYSICS_UTILS_NS SR_PHYSICS_NS::Utils
 #define SR_UTILS_NS Framework::Helper
+#define SR_SRLM_NS SR_UTILS_NS::SRLM
 #define SR_PLATFORM_NS Framework::Helper::Platform
 #define SR_MATH_NS Framework::Helper::Math
 #define SR_GRAPH_NS Framework::Graphics
 #define SR_SRSL_NS Framework::Graphics::SRSL2
 #define SR_GRAPH_UI_NS Framework::Graphics::UI
+#define SR_GRAPH_GUI_NS Framework::Graphics::GUI
 #define SR_ANIMATIONS_NS Framework::Graphics::Animations
 #define SR_HTYPES_NS SR_UTILS_NS::Types
 #define SR_GTYPES_NS SR_GRAPH_NS::Types
@@ -189,6 +190,7 @@
 #define SR_CORE_GUI_NS Framework::Core::GUI
 #define SR_SCRIPTING_NS Framework::Scripting
 #define SR_AUDIO_NS Framework::Audio
+#define SR_UTILS_GUI_NS SR_UTILS_NS::GUI
 
 #define SR_GLOBAL_LOCK static std::mutex codegenGlobalMutex##__LINE__; std::lock_guard<std::mutex> codegenLock##__LINE__(codegenGlobalMutex##__LINE__);
 

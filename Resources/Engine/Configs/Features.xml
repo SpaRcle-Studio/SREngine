@@ -11,7 +11,7 @@
 
        <CrashHandler Value="false"/>
 
-       <Tracy Value="true"/>
+       <Tracy Value="false"/>
 
        <DebugChunks Value="true"/>
        <DebugRegions Value="true"/>
@@ -27,12 +27,14 @@
 
        <RayTracing Value="true"/>
 
+       <AccumulateDt Value="true"/>
+
        <FastModelsLoad Value="true"/>
 
        <Renderer Value="true"/>
        <Physics Value="true"/>
 
-       <PVD Value="true"/>
+       <PVD Value="false"/>
 
        <Vehicles Value="true"/>
 
@@ -42,5 +44,6 @@
        <MultiRenderTargets Value="false"/>
        <SingleUBOIdentifierMode Value="false"/>
        <Undocking Value="true"/>
+       <ImGUI Value="true"/>
    </Common>
 </Features>

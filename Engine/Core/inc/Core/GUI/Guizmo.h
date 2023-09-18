@@ -11,15 +11,20 @@
 #include <Utils/Math/Vector3.h>
 #include <Utils/Input/InputSystem.h>
 
-namespace SR_GRAPH_NS::Types {
+namespace SR_GTYPES_NS {
     class Camera;
 }
 
-namespace SR_CORE_NS::GUI {
+namespace SR_CORE_GUI_NS {
+    SR_ENUM_NS_CLASS_T(EditorSceneViewMode, uint8_t,
+        FreeAspect, WindowSize
+    );
+
     class Guizmo : public SR_UTILS_NS::NonCopyable, public SR_UTILS_NS::InputHandler {
         using GameObjectPtr = SR_UTILS_NS::GameObject::Ptr;
+        using EnginePtr = SR_HTYPES_NS::SharedPtr<Engine>;
     public:
-        Guizmo() = default;
+        explicit Guizmo(const EnginePtr& pEngine);
         ~Guizmo() override;
 
     public:
@@ -29,7 +34,7 @@ namespace SR_CORE_NS::GUI {
         void OnKeyDown(const SR_UTILS_NS::KeyboardInputData* data) override;
         void OnKeyPress(const SR_UTILS_NS::KeyboardInputData* data) override;
 
-        SR_NODISCARD bool IsTranslate() const { return m_operation == ImGuizmo::OPERATION::TRANSLATE; }
+        SR_NODISCARD bool IsTranslate() const { return  m_operation == ImGuizmo::OPERATION::TRANSLATE; }
         SR_NODISCARD bool IsRotate() const { return m_operation == ImGuizmo::OPERATION::ROTATE; }
         SR_NODISCARD bool IsScale() const { return m_operation == ImGuizmo::OPERATION::SCALE; }
         SR_NODISCARD bool IsBounds() const { return m_operation == ImGuizmo::OPERATION::BOUNDS; }
@@ -48,6 +53,9 @@ namespace SR_CORE_NS::GUI {
             m_active = true;
         }
 
+        SR_NODISCARD EditorSceneViewMode GetViewMode() const noexcept { return m_viewMode; }
+        SR_NODISCARD float_t GetCameraVelocityFactor() const noexcept { return m_cameraVelocityFactor; };
+
     private:
         glm::mat4 GetMatrix();
         void SetRect(SR_GRAPH_NS::Types::Camera* camera);
@@ -59,6 +67,8 @@ namespace SR_CORE_NS::GUI {
         SR_UTILS_NS::Transform*   m_transform     = nullptr;
 
         bool                      m_isUse         = false;
+
+        float_t                   m_cameraVelocityFactor = 1.f;
 
         int32_t                   m_snapValue     = 100;
         float_t                   m_boundsSnap[3] = { 0.1f, 0.1f, 0.1f };
@@ -73,6 +83,10 @@ namespace SR_CORE_NS::GUI {
         SR_MATH_NS::FVector3      m_barycenter    = SR_MATH_NS::FVector3();
         ImGuizmo::OPERATION       m_operation     = ImGuizmo::OPERATION::TRANSLATE;
         ImGuizmo::MODE            m_mode          = ImGuizmo::MODE::LOCAL;
+
+        EditorSceneViewMode m_viewMode = EditorSceneViewMode::FreeAspect;
+
+        EnginePtr m_engine;
 
     };
 }

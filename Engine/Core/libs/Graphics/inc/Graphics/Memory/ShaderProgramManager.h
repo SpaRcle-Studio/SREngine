@@ -11,7 +11,7 @@
 #include <Graphics/Pipeline/IShaderProgram.h>
 
 namespace SR_GRAPH_NS {
-    class Environment;
+    class Pipeline;
 }
 
 namespace SR_GRAPH_NS::Memory {
@@ -55,23 +55,30 @@ namespace SR_GRAPH_NS::Memory {
     class SR_DLL_EXPORT ShaderProgramManager : public SR_UTILS_NS::Singleton<ShaderProgramManager> {
         friend class SR_UTILS_NS::Singleton<ShaderProgramManager>;
     public:
-        using PipelinePtr = Environment*;
+        using PipelinePtr = SR_HTYPES_NS::SharedPtr<Pipeline>;
         using VirtualProgram = int32_t;
         using ShaderProgram = int32_t;
     private:
         ShaderProgramManager();
-        ~ShaderProgramManager() override;
+        ~ShaderProgramManager() override = default;
 
     public:
+        void SetPipeline(PipelinePtr pPipeline) { m_pipeline = std::move(pPipeline); }
+
         SR_NODISCARD VirtualProgram ReAllocate(VirtualProgram program, const SRShaderCreateInfo& createInfo);
         SR_NODISCARD VirtualProgram Allocate(const SRShaderCreateInfo& createInfo);
 
         bool FreeProgram(VirtualProgram* program);
+        bool FreeProgram(VirtualProgram program);
+
+        void CollectUnusedShaders();
 
         ShaderBindResult BindProgram(VirtualProgram virtualProgram) noexcept;
 
+        SR_NODISCARD const VirtualProgramInfo* GetInfo(VirtualProgram virtualProgram) const noexcept;
         SR_NODISCARD ShaderProgram GetProgram(VirtualProgram virtualProgram) const noexcept;
-        SR_NODISCARD ShaderProgram IsAvailable(VirtualProgram virtualProgram) const noexcept;
+        SR_NODISCARD bool IsAvailable(VirtualProgram virtualProgram) const noexcept;
+        SR_NODISCARD bool HasProgram(VirtualProgram virtualProgram) const noexcept;
 
     private:
         SR_NODISCARD VirtualProgramInfo::Identifier GetCurrentIdentifier() const;
@@ -84,7 +91,7 @@ namespace SR_GRAPH_NS::Memory {
 
     private:
         ska::flat_hash_map<VirtualProgram, VirtualProgramInfo> m_virtualTable;
-        PipelinePtr m_pipeline = nullptr;
+        PipelinePtr m_pipeline;
 
     };
 }

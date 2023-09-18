@@ -23,7 +23,7 @@ namespace SR_CORE_NS {
         using PhysicsScenePtr = SR_HTYPES_NS::SafePtr<SR_PHYSICS_NS::PhysicsScene>;
         using ScenePtr = SR_HTYPES_NS::SafePtr<SR_WORLD_NS::Scene>;
         using RenderScenePtr = SR_HTYPES_NS::SafePtr<SR_GRAPH_NS::RenderScene>;
-        using CameraPtr = SR_GTYPES_NS::Camera*;
+        using CameraPtr = SR_GTYPES_NS::Camera::Ptr;
 
     public:
         EngineScene(const ScenePtr& scene, Engine* pEngine);
@@ -49,12 +49,13 @@ namespace SR_CORE_NS {
         RenderScenePtr pRenderScene;
         PhysicsScenePtr pPhysicsScene;
         SR_WORLD_NS::SceneBuilder* pSceneBuilder = nullptr;
-        CameraPtr pMainCamera = nullptr;
+        CameraPtr pMainCamera;
         Engine* pEngine = nullptr;
 
         float_t m_speed = 1.f;
         float_t m_updateFrequency = 1.f;
         float_t m_accumulator = 1.f;
+        bool m_accumulateDt = false;
 
     };
 }

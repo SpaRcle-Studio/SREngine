@@ -3,8 +3,30 @@
 //
 
 #include <Utils/Common/EnumReflector.h>
+#include <Utils/Common/Hashes.h>
+#include <Utils/Debug.h>
 
 namespace SR_UTILS_NS {
+    bool EnumReflectorManager::RegisterReflector(EnumReflector* pReflector) {
+        if (m_reflectors.count(pReflector->GetHashNameInternal()) == 1) {
+            return true;
+        }
+        m_reflectors[pReflector->GetHashNameInternal()] = pReflector;
+        return false;
+    }
+
+    EnumReflector* EnumReflectorManager::GetReflector(const std::string& name) const {
+        return GetReflector(SR_HASH_STR(name));
+    }
+
+    EnumReflector* EnumReflectorManager::GetReflector(uint64_t hashName) const {
+        if (auto&& pIt = m_reflectors.find(hashName); pIt != m_reflectors.end()) {
+            return pIt->second;
+        }
+
+        return nullptr;
+    }
+
     EnumReflector::~EnumReflector() {
         SR_SAFE_DELETE_PTR(m_data)
     }
@@ -14,6 +36,10 @@ namespace SR_UTILS_NS {
                (c >= 'a' && c <= 'z') ||
                (c >= '0' && c <= '9') ||
                (c == '_');
+    }
+
+    void EnumReflector::ErrorInternal(const std::string& msg) {
+        SRHalt(msg);
     }
 
     std::optional<std::string> EnumReflector::ToStringInternal(int64_t value) const {

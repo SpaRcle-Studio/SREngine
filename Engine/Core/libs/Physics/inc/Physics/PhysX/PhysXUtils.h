@@ -43,7 +43,7 @@ namespace SR_PHYSICS_UTILS_NS {
             case Combine::Multiply:
                 return physx::PxCombineMode::Enum::eMULTIPLY;
             default:
-                SRHalt("CombineToPxCombine : Unsolved situation.");
+                SRHalt("CombineToPxCombine() : unsolved situation.");
                 return physx::PxCombineMode::Enum::eAVERAGE;
         }
     }

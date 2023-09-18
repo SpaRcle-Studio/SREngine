@@ -5,6 +5,10 @@
 #include <Graphics/Memory/ShaderUBOBlock.h>
 
 namespace SR_GRAPH_NS::Memory {
+    ShaderUBOBlock::~ShaderUBOBlock() {
+        DeInit();
+    }
+
     void ShaderUBOBlock::Append(uint64_t hashId, uint64_t size, uint64_t alignedSize, bool hidden) {
         ++m_dataCount;
 

@@ -60,7 +60,7 @@ namespace SR_UTILS_NS {
         virtual void OnLoaded() { m_isComponentLoaded = true; }
         /// Вызывается после добавления компонента к игровому объекту
         virtual void OnAttached() { m_isAttached = true; SRAssert(GetParent()); }
-        /// Вызывается кода компонент убирается с объекта, либо объект уничтожается
+        /// Вызывается когда компонент убирается с объекта, либо объект уничтожается
         virtual void OnDestroy() { SetParent(nullptr); }
 
         virtual void OnEnable() { m_isActive = true; }
@@ -92,10 +92,11 @@ namespace SR_UTILS_NS {
         SR_NODISCARD virtual const std::string& GetComponentName() const = 0;
 
         SR_NODISCARD SR_FORCE_INLINE virtual bool IsComponentLoaded() const noexcept { return m_isComponentLoaded; }
+        SR_NODISCARD SR_FORCE_INLINE virtual bool IsComponentValid() const noexcept { return m_parent; }
         SR_NODISCARD SR_FORCE_INLINE virtual bool IsAttached() const noexcept { return m_isAttached; }
 
         /// Активен и компонент и его родительский объект
-        SR_NODISCARD SR_FORCE_INLINE virtual bool IsCanUpdate() const noexcept { return m_isStarted && m_isActive; }
+        SR_NODISCARD SR_FORCE_INLINE virtual bool IsUpdatable() const noexcept { return m_isStarted && m_isActive; }
         /// Активен и компонент и его родительский объект
         SR_NODISCARD SR_FORCE_INLINE virtual bool IsActive() const noexcept { return m_isActive; }
         /// Активен сам компонент, независимо от объекта

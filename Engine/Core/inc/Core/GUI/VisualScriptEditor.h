@@ -26,12 +26,12 @@ namespace SR_CORE_NS::GUI {
         void AddNode(SR_GRAPH_NS::GUI::Node* node);
         void AddLink(SR_GRAPH_NS::GUI::Link* link);
 
-        SR_NODISCARD SR_GRAPH_NS::GUI::Node* CreateBlueprint(const std::string& id) const;
-        SR_NODISCARD bool ValidateLink(SR_GRAPH_NS::GUI::Pin* start, SR_GRAPH_NS::GUI::Pin* end) const;
+        ///SR_NODISCARD SR_GRAPH_NS::GUI::Node* CreateBlueprint(const std::string& id) const;
+        ///SR_NODISCARD bool ValidateLink(SR_GRAPH_NS::GUI::Pin* start, SR_GRAPH_NS::GUI::Pin* end) const;
 
     private:
         void LoadConfig();
-        void RegisterBlueprint(SR_GRAPH_NS::GUI::Node* blueprint);
+        ///void RegisterBlueprint(SR_GRAPH_NS::GUI::Node* blueprint);
 
     private:
         //ax::NodeEditor::EditorContext* m_editor = nullptr;

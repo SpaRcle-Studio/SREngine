@@ -21,6 +21,13 @@ namespace SR_GTYPES_NS {
 }
 
 namespace SR_GRAPH_NS {
+    SR_ENUM_NS_CLASS_T(MeshClusterType, uint64_t ,
+        None        = 1 << 0,
+        Opaque      = 1 << 1,
+        Transparent = 1 << 2,
+        Debug       = 1 << 3
+    );
+
     typedef uint32_t ClusterVBOId;
 
     typedef std::unordered_set<SR_GTYPES_NS::Mesh*> MeshGroup;
@@ -103,7 +110,7 @@ namespace SR_GRAPH_NS {
         bool Update();
 
     protected:
-        virtual bool SR_FASTCALL ChangeCluster(MeshPtr pMesh) = 0;
+        virtual bool SR_FASTCALL ChangeCluster(MeshPtr pMesh) { return false; }
 
     protected:
         ska::flat_hash_map<SR_GTYPES_NS::Shader*, ShadedMeshSubCluster> m_subClusters;
@@ -151,6 +158,10 @@ namespace SR_GRAPH_NS {
 
     private:
         OpaqueMeshCluster* m_opaque;
+
+    };
+
+    class Spatial2DMeshCluster : public MeshCluster {
 
     };
 }

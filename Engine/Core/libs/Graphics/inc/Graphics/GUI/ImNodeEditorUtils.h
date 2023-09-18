@@ -7,8 +7,14 @@
 
 #include <imgui-node-editor/imgui_node_editor.h>
 
-namespace SR_GRAPH_NS::GUI {
+namespace SR_SRLM_NS {
+    enum class DataTypeClass : uint8_t;
+}
+
+namespace SR_GRAPH_GUI_NS {
     class Pin;
+
+    bool IsPinsCompatible(SR_SRLM_NS::DataTypeClass first, SR_SRLM_NS::DataTypeClass second);
 
     bool CanCreateLink(Pin* a, Pin* b);
 

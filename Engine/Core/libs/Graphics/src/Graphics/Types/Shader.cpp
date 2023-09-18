@@ -10,21 +10,17 @@
 
 #include <Graphics/Types/Texture.h>
 #include <Graphics/Render/RenderContext.h>
-#include <Graphics/Pipeline/Environment.h>
 #include <Graphics/Types/Shader.h>
 #include <Graphics/SRSL/Shader.h>
 #include <Graphics/SRSL/TypeInfo.h>
 
 namespace SR_GRAPH_NS::Types {
     Shader::Shader()
-        : IResource(SR_COMPILE_TIME_CRC32_TYPE_NAME(Shader), true /** auto remove */)
+        : IResource(SR_COMPILE_TIME_CRC32_TYPE_NAME(Shader))
         , m_manager(Memory::ShaderProgramManager::Instance())
     { }
 
     Shader::~Shader() {
-        m_uniformBlock.DeInit();
-        m_uniformBlock = Memory::ShaderUBOBlock();
-
         m_samplers.clear();
     }
 
@@ -36,16 +32,19 @@ namespace SR_GRAPH_NS::Types {
             return true;
         }
 
-        auto&& context = SR_THIS_THREAD->GetContext()->GetValue<SR_HTYPES_NS::SafePtr<RenderContext>>();
-        if (!context) {
+        auto&& pContext = SR_THIS_THREAD->GetContext()->GetValue<SR_HTYPES_NS::SafePtr<RenderContext>>();
+        if (!pContext) {
             SRHalt("Is not render context!");
             m_hasErrors = true;
             return false;
         }
 
-        if (!m_isRegistered && context.LockIfValid()) {
-            context->Register(this);
-            context.Unlock();
+        if (!m_isRegistered && pContext.LockIfValid()) {
+            for (auto&& [hashName, sampler] : m_samplers) {
+                sampler.samplerId = pContext->GetDefaultTexture()->GetId();
+            }
+            pContext->Register(this);
+            pContext.Unlock();
             m_isRegistered = true;
         }
 
@@ -75,8 +74,6 @@ namespace SR_GRAPH_NS::Types {
     }
 
     ShaderBindResult Shader::Use() noexcept {
-        SR_TRACY_ZONE;
-
         if (m_hasErrors) {
             return ShaderBindResult::Failed;
         }
@@ -103,8 +100,7 @@ namespace SR_GRAPH_NS::Types {
     }
 
     void Shader::UnUse() noexcept {
-        auto&& env = SR_GRAPH_NS::Environment::Get();
-        env->UnUseShader();
+        GetPipeline()->UnUseShader();
 
         if (GetRenderContext()->GetCurrentShader() == this) {
             GetRenderContext()->SetCurrentShader(nullptr);
@@ -180,19 +176,26 @@ namespace SR_GRAPH_NS::Types {
         return Memory::ShaderProgramManager::Instance().GetProgram(m_shaderProgram);
     }
 
-    void Shader::SetBool(uint64_t hashId, const bool &v) noexcept { SetValue(hashId, v); }
-    void Shader::SetFloat(uint64_t hashId, const float &v) noexcept { SetValue(hashId, v); }
-    void Shader::SetInt(uint64_t hashId, const int &v) noexcept { SetValue(hashId, v); }
-    void Shader::SetMat4(uint64_t hashId, const glm::mat4 &v) noexcept { SetValue(hashId, v); }
-    void Shader::SetMat4(uint64_t hashId, const SR_MATH_NS::Matrix4x4& v) noexcept { SetValue(hashId, v); }
-    void Shader::SetVec3(uint64_t hashId, const SR_MATH_NS::FVector3& v) noexcept { SetValue(hashId, v); }
-    void Shader::SetVec4(uint64_t hashId, const SR_MATH_NS::FVector4& v) noexcept { SetValue(hashId, v); }
-    void Shader::SetVec2(uint64_t hashId, const SR_MATH_NS::FVector2& v) noexcept { SetValue(hashId, v); }
-    void Shader::SetIVec2(uint64_t hashId, const glm::ivec2 &v) noexcept { SetValue(hashId, v); }
+    void Shader::SetBool(uint64_t hashId, bool v) noexcept { SetValue<false>(hashId, &v); }
+    void Shader::SetFloat(uint64_t hashId, float_t v) noexcept { SetValue<false>(hashId, &v); }
+    void Shader::SetInt(uint64_t hashId, int32_t v) noexcept { SetValue<false>(hashId, &v); }
+    void Shader::SetMat4(uint64_t hashId, const SR_MATH_NS::Matrix4x4& v) noexcept { SetValue<false>(hashId, &v); }
+    void Shader::SetVec3(uint64_t hashId, const SR_MATH_NS::FVector3& v) noexcept { SetValue<false>(hashId, &v); }
+    void Shader::SetVec4(uint64_t hashId, const SR_MATH_NS::FVector4& v) noexcept { SetValue<false>(hashId, &v); }
+    void Shader::SetVec2(uint64_t hashId, const SR_MATH_NS::FVector2& v) noexcept { SetValue<false>(hashId, &v); }
+    void Shader::SetIVec2(uint64_t hashId, const SR_MATH_NS::IVector2& v) noexcept { SetValue<false>(hashId, &v); }
+
+    void Shader::SetConstBool(uint64_t hashId, bool v) noexcept { SetValue<true>(hashId, &v); }
+    void Shader::SetConstFloat(uint64_t hashId, float_t v) noexcept { SetValue<true>(hashId, &v); }
+    void Shader::SetConstInt(uint64_t hashId, int32_t v) noexcept { SetValue<true>(hashId, &v); }
+    void Shader::SetConstMat4(uint64_t hashId, const SR_MATH_NS::Matrix4x4& v) noexcept { SetValue<true>(hashId, &v); }
+    void Shader::SetConstVec3(uint64_t hashId, const SR_MATH_NS::FVector3& v) noexcept { SetValue<true>(hashId, &v); }
+    void Shader::SetConstVec4(uint64_t hashId, const SR_MATH_NS::FVector4& v) noexcept { SetValue<true>(hashId, &v); }
+    void Shader::SetConstVec2(uint64_t hashId, const SR_MATH_NS::FVector2& v) noexcept { SetValue<true>(hashId, &v); }
+    void Shader::SetConstIVec2(uint64_t hashId, const SR_MATH_NS::IVector2& v) noexcept { SetValue<true>(hashId, &v); }
 
     void Shader::SetSampler(uint64_t hashId, int32_t sampler) noexcept {
-        auto&& env = SR_GRAPH_NS::Environment::Get();
-        env->BindTexture(m_samplers.at(hashId), sampler);
+        m_samplers.at(hashId).samplerId = sampler;
     }
 
     void Shader::SetSampler2D(uint64_t hashId, int32_t sampler) noexcept {
@@ -241,19 +244,20 @@ namespace SR_GRAPH_NS::Types {
     }
 
     bool Shader::InitUBOBlock() {
-        auto&& env = SR_GRAPH_NS::Environment::Get();
-
         if (m_uniformBlock.m_size > 0 && m_uniformBlock.m_memory) {
             memset(m_uniformBlock.m_memory, 1, m_uniformBlock.m_size);
         }
 
-        auto&& ubo = env->GetCurrentUBO();
-        auto&& descriptorSet = env->GetCurrentDescriptorSet();
+        auto&& ubo = GetPipeline()->GetCurrentUBO();
+        auto&& descriptorSet = GetPipeline()->GetCurrentDescriptorSet();
 
         if (ubo != SR_ID_INVALID && descriptorSet != SR_ID_INVALID && m_uniformBlock.Valid()) {
-            env->UpdateDescriptorSets(descriptorSet, {
-                    { DescriptorType::Uniform, { m_uniformBlock.m_binding, ubo } },
-            });
+            SRDescriptorUpdateInfo updateInfo;
+            updateInfo.binding = m_uniformBlock.m_binding;
+            updateInfo.ubo = ubo;
+            updateInfo.descriptorType = DescriptorType::Uniform;
+
+            GetPipeline()->UpdateDescriptorSets(descriptorSet, { updateInfo });
 
             return true;
         }
@@ -262,17 +266,13 @@ namespace SR_GRAPH_NS::Types {
     }
 
     bool Shader::Flush() const {
-        SR_TRACY_ZONE;
-
         if (!m_isCalculated || m_hasErrors) {
             return false;
         }
 
-        auto&& env = SR_GRAPH_NS::Environment::Get();
-
-        auto &&ubo = env->GetCurrentUBO();
+        auto&& ubo = GetPipeline()->GetCurrentUBO();
         if (ubo != SR_ID_INVALID && m_uniformBlock.Valid()) {
-            env->UpdateUBO(ubo, m_uniformBlock.m_memory, m_uniformBlock.m_size);
+            GetPipeline()->UpdateUBO(ubo, m_uniformBlock.m_memory, m_uniformBlock.m_size);
         }
 
         return true;
@@ -323,8 +323,19 @@ namespace SR_GRAPH_NS::Types {
             return false;
         }
 
-        m_shaderCreateInfo = SRShaderCreateInfo(pShader->GetCreateInfo());
+        m_shaderCreateInfo = pShader->GetCreateInfo();
         m_type = pShader->GetType();
+        m_includes = pShader->GetIncludes();
+
+        if (m_includes.empty()) {
+            SR_ERROR("Shader::Load() : failed to extract includes!\n\tPath: " + path.ToString());
+            return false;
+        }
+
+        StopWatch();
+        StartWatch();
+
+        /// ------------------------------------------------------------------------------------------------------------
 
         if (auto&& pBlock = pShader->FindUniformBlock("BLOCK")) {
             for (auto&& field : pBlock->fields) {
@@ -340,8 +351,27 @@ namespace SR_GRAPH_NS::Types {
             m_uniformBlock.m_binding = pBlock->binding;
         }
 
+        m_uniformBlock.Init();
+
+        /// ------------------------------------------------------------------------------------------------------------
+
+        for (auto&& field : pShader->GetPushConstants().fields) {
+            m_constBlock.Append(SR_RUNTIME_TIME_CRC32_STR(field.name.c_str()), field.size, field.alignedSize, !field.isPublic);
+
+            const ShaderVarType varType = SR_SRSL_NS::SRSLTypeInfo::Instance().StringToType(field.type);
+
+            if (field.isPublic && varType != ShaderVarType::Unknown) {
+                m_properties.emplace_back(std::make_pair(field.name, varType));
+            }
+        }
+
+        m_constBlock.Init();
+
+        /// ------------------------------------------------------------------------------------------------------------
+
         for (auto&& [name, sampler] : pShader->GetSamplers()) {
-            m_samplers[SR_RUNTIME_TIME_CRC32_STR(name.c_str())] = sampler.binding;
+            m_samplers[SR_RUNTIME_TIME_CRC32_STR(name.c_str())].binding = sampler.binding;
+            m_samplers[SR_RUNTIME_TIME_CRC32_STR(name.c_str())].isAttachment = sampler.attachment >= 0;
 
             const ShaderVarType varType = SR_SRSL_NS::SRSLTypeInfo::Instance().StringToType(sampler.type);
 
@@ -349,8 +379,6 @@ namespace SR_GRAPH_NS::Types {
                 m_properties.emplace_back(std::make_pair(name, varType));
             }
         }
-
-        m_uniformBlock.Init();
 
         return IResource::Load();
     }
@@ -362,7 +390,9 @@ namespace SR_GRAPH_NS::Types {
         m_hasErrors = false;
 
         m_uniformBlock.DeInit();
+        m_constBlock.DeInit();
 
+        m_includes.clear();
         m_properties.clear();
         m_samplers.clear();
 
@@ -390,5 +420,38 @@ namespace SR_GRAPH_NS::Types {
 
     bool Shader::IsAvailable() const {
         return m_manager.IsAvailable(m_shaderProgram);
+    }
+
+    void Shader::FlushSamplers() {
+        for (auto&& [hashName, samplerInfo] : m_samplers) {
+            if (samplerInfo.isAttachment) {
+                m_pipeline->BindAttachment(samplerInfo.binding, samplerInfo.samplerId);
+            }
+            else {
+                m_pipeline->BindTexture(samplerInfo.binding, samplerInfo.samplerId);
+            }
+        }
+    }
+
+    void Shader::FlushConstants() {
+        if (m_constBlock.m_size > 0) {
+            m_pipeline->PushConstants(m_constBlock.m_memory, m_constBlock.m_size);
+        }
+    }
+
+    void Shader::StartWatch() {
+        auto&& resourcesManager = SR_UTILS_NS::ResourceManager::Instance();
+
+        for (auto&& path : m_includes) {
+            auto&& pWatch = resourcesManager.StartWatch(resourcesManager.GetResPath().Concat(path));
+
+            pWatch->SetCallBack([this](auto&& pWatcher) {
+                SignalWatch();
+            });
+
+            pWatch->Init();
+
+            m_watchers.emplace_back(pWatch);
+        }
     }
 }

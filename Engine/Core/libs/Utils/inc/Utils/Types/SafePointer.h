@@ -8,6 +8,7 @@
 #include <Utils/Common/StringFormat.h>
 #include <Utils/Types/Function.h>
 #include <Utils/Profile/TracyContext.h>
+#include <Utils/Types/SharedPtr.h>
 
 #define SR_SAFE_PTR_FORWARD_DECLARATION(className) \
     namespace SR_HTYPES_NS { \

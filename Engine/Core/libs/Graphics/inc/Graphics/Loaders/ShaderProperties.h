@@ -67,7 +67,13 @@ namespace SR_GRAPH_NS {
 
     typedef std::vector<MaterialProperty> MaterialProperties;
     typedef std::list<std::pair<std::string, ShaderVarType>> ShaderProperties;
-    typedef std::map<uint64_t, uint32_t> ShaderSamplers;
+
+    struct ShaderSampler {
+        uint32_t binding = SR_ID_INVALID;
+        uint32_t samplerId = SR_ID_INVALID;
+        bool isAttachment = false;
+    };
+    typedef std::map<uint64_t, ShaderSampler> ShaderSamplers;
 
     SR_NODISCARD MaterialProperties LoadMaterialProperties(const SR_XML_NS::Node& propertiesNode);
     std::list<SR_GTYPES_NS::Texture*> GetTexturesFromMatProperties(const MaterialProperties& properties);
@@ -187,7 +193,7 @@ namespace std {
 
             for (auto&& [key, val] : value) {
                 res = SR_UTILS_NS::HashCombine(key, res);
-                res = SR_UTILS_NS::HashCombine(val, res);
+                res = SR_UTILS_NS::HashCombine(val.binding, res);
             }
 
             return res;

@@ -33,7 +33,7 @@ namespace SR_GRAPH_NS::Types {
     }
 
     Mesh::Ptr Mesh::TryLoad(const SR_UTILS_NS::Path& path, MeshType type, uint32_t id) {
-        static auto&& resourceManager = SR_UTILS_NS::ResourceManager::Instance();
+        auto&& resourceManager = SR_UTILS_NS::ResourceManager::Instance();
 
         SR_MAYBE_UNUSED SR_HTYPES_NS::SingletonRecursiveLockGuard lock(&resourceManager);
 
@@ -83,7 +83,7 @@ namespace SR_GRAPH_NS::Types {
         return meshes;
     }
 
-    bool Mesh::IsCanCalculate() const {
+    bool Mesh::IsCalculatable() const {
         return true;
     }
 
@@ -154,6 +154,10 @@ namespace SR_GRAPH_NS::Types {
         }
 
         m_material->UseSamplers();
+
+        if (auto&& pShader = m_pipeline->GetCurrentShader()) {
+            pShader->FlushSamplers();
+        }
     }
 
     std::string Mesh::GetMeshIdentifier() const {
@@ -190,6 +194,10 @@ namespace SR_GRAPH_NS::Types {
         if (pTexture && m_material->ContainsTexture(pTexture)) {
             m_dirtyMaterial = true;
         }
+    }
+
+    void Mesh::MarkMaterialDirty() {
+        m_dirtyMaterial = true;
     }
 }
 

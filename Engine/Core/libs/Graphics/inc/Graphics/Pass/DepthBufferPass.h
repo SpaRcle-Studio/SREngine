@@ -18,7 +18,8 @@ namespace SR_GRAPH_NS {
         explicit DepthBufferPass(RenderTechnique* pTechnique, BasePass* pParent);
 
     protected:
-        void UpdateCluster(MeshCluster* pCluster) override;
+        void UseUniforms(ShaderPtr pShader, MeshPtr pMesh) override;
+        void UseSharedUniforms(ShaderPtr pShader) override;
 
     };
 }

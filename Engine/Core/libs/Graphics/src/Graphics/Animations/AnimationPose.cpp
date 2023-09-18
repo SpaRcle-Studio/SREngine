@@ -29,6 +29,14 @@ namespace SR_ANIMATIONS_NS {
         return nullptr;
     }
 
+    AnimationData* AnimationPose::GetDataByIndex(uint16_t index) const noexcept {
+        if (index < m_data.size()) {
+            return m_data[index].second;
+        }
+
+        return nullptr;
+    }
+
     void AnimationPose::Reset() {
         for (auto&& [boneHashName, pData] : m_data) {
             pData->Reset();
@@ -36,6 +44,8 @@ namespace SR_ANIMATIONS_NS {
     }
 
     void AnimationPose::Initialize(Skeleton *pSkeleton) {
+        SR_TRACY_ZONE;
+
         SRAssert(!m_isInitialized);
 
         auto&& bones = pSkeleton->GetBones();
@@ -57,6 +67,8 @@ namespace SR_ANIMATIONS_NS {
     }
 
     void AnimationPose::Apply(Skeleton *pSkeleton) {
+        SR_TRACY_ZONE;
+
         if (!m_isInitialized) {
             Initialize(pSkeleton);
         }
@@ -88,6 +100,8 @@ namespace SR_ANIMATIONS_NS {
     }
 
     void AnimationPose::Update(Skeleton* pSkeleton, AnimationPose* pWorkingPose) {
+        SR_TRACY_ZONE;
+
         if (!pWorkingPose) {
             SRHalt0();
             return;

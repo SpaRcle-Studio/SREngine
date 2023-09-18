@@ -7,11 +7,24 @@
 #include <Graphics/SRSL/PseudoCodeGenerator.h>
 #include <Graphics/SRSL/GLSLCodeGenerator.h>
 #include <Graphics/SRSL/AssignExpander.h>
+#include <Graphics/SRSL/PreProcessor.h>
 #include <Graphics/SRSL/TypeInfo.h>
 
 #include <Utils/Platform/Platform.h>
 
 namespace SR_SRSL_NS {
+    void SRSLUniformBlock::Align(const SRSLAnalyzedTree::Ptr& pAnalyzedTree) {
+        for (auto&& field : fields) {
+            field.size = SRSLTypeInfo::Instance().GetTypeSize(field.type, pAnalyzedTree);
+            field.alignedSize = SRSLTypeInfo::Instance().GetAlignedTypeSize(field.type, pAnalyzedTree);
+            size += field.alignedSize;
+        }
+
+        std::sort(fields.begin(), fields.end(), [](const SRSLUniformBlock::Field& a, const SRSLUniformBlock::Field& b) -> bool {
+            return a.size > b.size;
+        });
+    }
+
     SRSLShader::SRSLShader(SR_UTILS_NS::Path path)
         : Super()
         , m_path(std::move(path))
@@ -25,30 +38,41 @@ namespace SR_SRSL_NS {
             return nullptr;
         }
 
-        auto&& cachedPath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Shaders").Concat(path);
-
         auto&& pShader = SRSLShader::Ptr(new SRSLShader(path));
 
-        auto&& lexems = SR_SRSL_NS::SRSLLexer::Instance().Parse(absPath);
+        auto&& lexems = SR_SRSL_NS::SRSLLexer::Instance().Parse(absPath, 0);
         if (lexems.empty()) {
             SR_ERROR("SRSLShader::Load() : failed to parse lexems!\n\tPath: " + path.ToString());
             return nullptr;
         }
 
+        SRSLPreProcessor::Includes includes = { path.ToStringRef() };
+
+        auto&& [preProcessedLexems, preProcessResult] = SRSLPreProcessor::Instance().Process(std::move(lexems), includes);
+        if (preProcessResult.HasErrors()) {
+            SR_ERROR("SRSLShader::Load() : failed to pre-process shader!" + preProcessResult.ToString(includes));
+            return nullptr;
+        }
+
+        lexems = std::move(preProcessedLexems);
+
         auto&& [expandedLexems, expandResult] = SR_SRSL_NS::SRSLAssignExpander::Instance().Expand(std::move(lexems));
+        if (expandResult.HasErrors()) {
+            SR_ERROR("SRSLShader::Load() : failed to expand assign shader!" + expandResult.ToString(includes));
+            return nullptr;
+        }
+
         lexems = std::move(expandedLexems);
 
         auto&& [pAnalyzedTree, analyzeResult] = SR_SRSL_NS::SRSLLexicalAnalyzer::Instance().Analyze(std::move(lexems));
 
-        if (!pAnalyzedTree || analyzeResult.code != SRSLReturnCode::Success) {
-            SR_ERROR("SRSLShader::Load() : failed to analyze shader!\n\tPath: " + path.ToString()
-                + "\n\tPosition: " + std::to_string(analyzeResult.position)
-                + "\b\tReason: " + SR_UTILS_NS::EnumReflector::ToString(analyzeResult.code)
-            );
+        if (!pAnalyzedTree || analyzeResult.HasErrors()) {
+            SR_ERROR("SRSLShader::Load() : failed to analyze shader!" + analyzeResult.ToString(includes));
             return nullptr;
         }
 
         pShader->m_analyzedTree = std::move(pAnalyzedTree);
+        pShader->m_includes = std::move(includes);
 
         if (!pShader->Prepare()) {
             SR_ERROR("SRSLShader::Load() : failed to prepare shader!\n\tPath: " + path.ToString());
@@ -59,35 +83,42 @@ namespace SR_SRSL_NS {
             SR_WARN("SRSLShader::Load() : failed to save shader cache shader!\n\tPath: " + path.ToString());
         }
 
-        SR_UTILS_NS::FileSystem::WriteHashToFile(cachedPath.ConcatExt("hash"), absPath.GetFileHash());
-
         return pShader;
     }
 
     bool SRSLShader::IsCacheActual() const {
-        auto&& absPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat(m_path);
         auto&& cachedPath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Shaders").Concat(m_path);
-
-        return absPath.GetFileHash() == SR_UTILS_NS::FileSystem::ReadHashFromFile(cachedPath.ConcatExt("hash"));
+        return GetHash() == SR_UTILS_NS::FileSystem::ReadHashFromFile(cachedPath.ConcatExt("hash"));
     }
 
     bool SRSLShader::IsCacheActual(ShaderLanguage shaderLanguage) const {
-        auto&& absPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat(m_path);
         auto&& cachedPath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Shaders").Concat(m_path);
-
         auto&& cachedHash = SR_UTILS_NS::FileSystem::ReadHashFromFile(cachedPath.ConcatExt("hash").ConcatExt(SR_UTILS_NS::EnumReflector::ToString(shaderLanguage)));
-        return absPath.GetFileHash() == cachedHash;
+        return GetHash() == cachedHash;
+    }
+
+    uint64_t SRSLShader::GetHash() const {
+        uint64_t hash = 0;
+
+        for (auto&& include : m_includes) {
+            auto&& absPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat(include);
+            hash = SR_UTILS_NS::CombineTwoHashes(hash, absPath.GetFileHash());
+        }
+
+        return hash;
     }
 
     bool SRSLShader::SaveCache() const {
+        auto&& cachedPath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Shaders").Concat(m_path);
+        SR_UTILS_NS::FileSystem::WriteHashToFile(cachedPath.ConcatExt("hash"), GetHash());
         return true;
     }
 
     std::string SRSLShader::ToString(ShaderLanguage shaderLanguage) const {
         auto&& [result, stages] = GenerateStages(shaderLanguage);
 
-        if (result.code != SRSLReturnCode::Success) {
-            return "SRSLShader::ToString() : " + SR_UTILS_NS::EnumReflector::ToString(result.code) + "\n\tPosition: " + std::to_string(result.position);
+        if (result.HasErrors()) {
+            return "SRSLShader::ToString() : " + result.ToString(m_includes);
         }
 
         std::string code;
@@ -223,10 +254,7 @@ namespace SR_SRSL_NS {
 
             if (auto&& pDecorator = pVariable->pDecorators->Find("shared")) {
                 m_shared[pVariable->pName->ToString(0)] = pVariable;
-            }
-
-            if (auto&& pDecorator = pVariable->pDecorators->Find("const"); pDecorator && pVariable->pExpr) {
-                m_constants[pVariable->pName->ToString(0)] = pVariable;
+                continue;
             }
 
             if (auto&& pDecorator = pVariable->pDecorators->Find("uniform")) {
@@ -250,15 +278,28 @@ namespace SR_SRSL_NS {
                 field.type = pVariable->pType->ToString(0);
                 field.isPublic = bool(pVariable->pDecorators->Find("public"));
 
-                auto&& uniformBlock = m_uniformBlocks[blockName];
-                uniformBlock.fields.emplace_back(field);
+                auto&& usedStages = m_useStack->IsVariableUsedInEntryPointsExt(field.name);
+
+                if (pVariable->pDecorators->Find("const")) {
+                    m_pushConstants.fields.emplace_back(field);
+                    m_pushConstants.stages.insert(usedStages.begin(), usedStages.end());
+                }
+                else {
+                    auto&& uniformBlock = m_uniformBlocks[blockName];
+                    uniformBlock.fields.emplace_back(field);
+                    uniformBlock.stages.insert(usedStages.begin(), usedStages.end());
+                }
+            }
+            else if ((pDecorator = pVariable->pDecorators->Find("const"))) {
+                m_constants[pVariable->pName->ToString(0)] = pVariable;
             }
         }
 
         /// ------------------------------------------------------------------
 
         for (auto&& [defaultUniform, type] : SR_SRSL_DEFAULT_UNIFORMS) {
-            if (m_useStack->IsVariableUsedInEntryPoints(defaultUniform)) {
+            auto&& usedStages = m_useStack->IsVariableUsedInEntryPointsExt(defaultUniform);
+            if (!usedStages.empty()) {
                 SRSLUniformBlock::Field field;
 
                 field.name = defaultUniform;
@@ -267,22 +308,31 @@ namespace SR_SRSL_NS {
 
                 auto&& uniformBlock = m_uniformBlocks["BLOCK"];
                 uniformBlock.fields.emplace_back(field);
+                uniformBlock.stages.insert(usedStages.begin(), usedStages.end());
+            }
+        }
+
+        for (auto&& [defaultPushConstant, type] : SR_SRSL_DEFAULT_PUSH_CONSTANTS) {
+            auto&& usedStages = m_useStack->IsVariableUsedInEntryPointsExt(defaultPushConstant);
+            if (!usedStages.empty()) {
+                SRSLUniformBlock::Field field;
+
+                field.name = defaultPushConstant;
+                field.type = type;
+                field.isPublic = false;
+
+                m_pushConstants.fields.emplace_back(field);
+                m_pushConstants.stages.insert(usedStages.begin(), usedStages.end());
             }
         }
 
         /// ------------------------------------------------------------------
 
         for (auto&& [name, block] : m_uniformBlocks) {
-            for (auto&& field : block.fields) {
-                field.size = SRSLTypeInfo::Instance().GetTypeSize(field.type, m_analyzedTree);
-                field.alignedSize = SRSLTypeInfo::Instance().GetAlignedTypeSize(field.type, m_analyzedTree);
-                block.size += field.alignedSize;
-            }
-
-            std::sort(block.fields.begin(), block.fields.end(), [](const SRSLUniformBlock::Field& a, const SRSLUniformBlock::Field& b) -> bool {
-                return a.size > b.size;
-            });
+            block.Align(m_analyzedTree);
         }
+
+        m_pushConstants.Align(m_analyzedTree);
 
         /// ------------------------------------------------------------------
 
@@ -300,7 +350,8 @@ namespace SR_SRSL_NS {
                 continue;
             }
 
-            if (!m_useStack->IsVariableUsedInEntryPoints(pVariable->GetName())) {
+            auto&& stages = m_useStack->IsVariableUsedInEntryPointsExt(pVariable->GetName());
+            if (stages.empty()) {
                 continue;
             }
 
@@ -309,20 +360,29 @@ namespace SR_SRSL_NS {
 
                 sampler.type = pVariable->GetType();
                 sampler.isPublic = bool(pVariable->pDecorators->Find("public"));
+                sampler.stages = std::move(stages);
+
+                if (auto&& pAttachment = pVariable->pDecorators->Find("attachment"); pAttachment && pAttachment->args.size() == 1) {
+                    sampler.attachment = SR_UTILS_NS::LexicalCast<int32_t>(pAttachment->args.front()->token);
+                }
 
                 m_samplers[pVariable->GetName()] = sampler;
             }
         }
 
         for (auto&& [defaultSampler, type] : SR_SRSL_DEFAULT_SAMPLERS) {
-            if (m_useStack->IsVariableUsedInEntryPoints(defaultSampler)) {
-                SRSLSampler sampler;
-
-                sampler.type = type;
-                sampler.isPublic = false;
-
-                m_samplers[defaultSampler] = sampler;
+            auto&& stages = m_useStack->IsVariableUsedInEntryPointsExt(defaultSampler);
+            if (stages.empty()) {
+                continue;
             }
+
+            SRSLSampler sampler;
+
+            sampler.type = type;
+            sampler.isPublic = false;
+            sampler.stages = stages;
+
+            m_samplers[defaultSampler] = sampler;
         }
 
         return true;
@@ -335,8 +395,8 @@ namespace SR_SRSL_NS {
 
         auto&& [result, stages] = GenerateStages(shaderLanguage);
 
-        if (result.code != SRSLReturnCode::Success) {
-            SR_ERROR("SRSLShader::Export() : " + SR_UTILS_NS::EnumReflector::ToString(result.code) + "\n\tPosition: " + std::to_string(result.position));
+        if (result.HasErrors()) {
+            SR_ERROR("SRSLShader::Export() : " + result.ToString(m_includes));
             return false;
         }
 
@@ -346,7 +406,7 @@ namespace SR_SRSL_NS {
                 return false;
             }
 
-            auto&& path = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Shaders").Concat(m_createInfo.stages.at(stage));
+            auto&& path = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Shaders").Concat(m_createInfo.stages.at(stage).path);
 
             if (!path.Create() || !SR_UTILS_NS::FileSystem::WriteToFile(path, code)) {
                 SR_ERROR("SRSLShader::Export() : failed to write file!\n\tPath: " + path.ToString());
@@ -366,37 +426,81 @@ namespace SR_SRSL_NS {
     }
 
     bool SRSLShader::PrepareStages() {
+        /// расставляем биндинги всем данным в шейдере
+        {
+            uint64_t binding = 0;
+
+            for (auto&&[name, block] : m_uniformBlocks) {
+                block.binding = binding;
+                ++binding;
+            }
+
+            for (auto&&[samplerName, sampler] : m_samplers) {
+                sampler.binding = binding;
+                ++binding;
+            }
+        }
+
         for (auto&& [stage, entryPoint] : SR_SRSL_ENTRY_POINTS) {
-            if (!m_analyzedTree->pLexicalTree->FindFunction(entryPoint)) {
+            auto&& pFunction = m_analyzedTree->pLexicalTree->FindFunction(entryPoint);
+            if (!pFunction) {
                 continue;
             }
 
-            m_createInfo.stages[stage] = m_path.ToString() + "/shader." + SR_SRSL_STAGE_EXTENSIONS.at(stage);
+            m_createInfo.stages[stage].path = m_path.ToString() + "/shader." + SR_SRSL_STAGE_EXTENSIONS.at(stage);
+
+            /// блоки юниформ
+
+            for (auto&& [name, block] : m_uniformBlocks) {
+                if (block.stages.count(stage) == 0) {
+                    continue;
+                }
+
+                Uniform uniform = { };
+                uniform.binding = block.binding;
+                uniform.size = block.size;
+                uniform.stage = stage;
+                uniform.type = LayoutBinding::Uniform;
+
+                m_createInfo.uniforms.emplace_back(uniform);
+            }
+
+            /// текстуры/аттачменты
+
+            for (auto&& [name, sampler] : m_samplers) {
+                if (sampler.stages.count(stage) == 0) {
+                    continue;
+                }
+
+                Uniform uniform = { };
+                uniform.binding = sampler.binding;
+                uniform.size = 0;
+                uniform.stage = stage;
+
+                if (sampler.attachment >= 0) {
+                    uniform.type = LayoutBinding::Attachhment;
+                }
+                else {
+                    uniform.type = LayoutBinding::Sampler2D;
+                }
+
+                m_createInfo.uniforms.emplace_back(uniform);
+            }
+
+            /// push-constant'ы
+
+            if (m_pushConstants.stages.count(stage) == 1) {
+                SRShaderPushConstant pushConstant;
+                pushConstant.offset = 0;
+                /// Выравнивание по 16 байт. Работает для Vulkan, для остальных неизвестно. Может отличаться в зависимости от устройства
+                pushConstant.size = SR_MAX(16, m_pushConstants.size);
+                m_createInfo.stages[stage].pushConstants.emplace_back(pushConstant);
+            }
         }
 
         auto&& vertexInfo = Vertices::GetVertexInfo(GetVertexType());
         m_createInfo.vertexAttributes = vertexInfo.m_attributes;
         m_createInfo.vertexDescriptions = vertexInfo.m_descriptions;
-
-        uint64_t binding = 0;
-
-        for (auto&& [name, block] : m_uniformBlocks) {
-            block.binding = binding;
-
-            for (auto&& field : block.fields) {
-                m_createInfo.uniforms.emplace_back(std::make_pair(
-                    binding,
-                    field.size
-                ));
-            }
-
-            ++binding;
-        }
-
-        for (auto&& [samplerName, sampler] : m_samplers) {
-            sampler.binding = binding;
-            ++binding;
-        }
 
         return true;
     }

@@ -9,6 +9,10 @@
 
 class aiAnimation;
 
+namespace SR_HTYPES_NS {
+    class RawMesh;
+}
+
 namespace SR_ANIMATIONS_NS {
     class AnimationChannel;
 
@@ -33,7 +37,7 @@ namespace SR_ANIMATIONS_NS {
         bool Load() override;
 
     private:
-        void LoadChannels(aiAnimation* pAnimation);
+        void LoadChannels(SR_HTYPES_NS::RawMesh* pRawMesh, uint32_t index);
 
     private:
         std::vector<AnimationChannel*> m_channels;

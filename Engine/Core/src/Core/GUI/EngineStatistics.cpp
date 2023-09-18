@@ -6,9 +6,17 @@
 
 #include <Utils/ResourceManager/ResourceManager.h>
 
-namespace Framework::Core::GUI {
+#include <Graphics/Types/Framebuffer.h>
+#include <Graphics/Types/Skybox.h>
+
+#include <Graphics/Memory/ShaderProgramManager.h>
+#include <Graphics/Render/RenderTechnique.h>
+#include <Graphics/Pipeline/Vulkan/VulkanPipeline.h>
+#include <Graphics/Pipeline/Vulkan/VulkanKernel.h>
+
+namespace SR_CORE_GUI_NS {
     EngineStatistics::EngineStatistics()
-        : Graphics::GUI::Widget("Engine statistics")
+        : SR_GRAPH_GUI_NS::Widget("Engine statistics")
     { }
 
     void EngineStatistics::Draw() {
@@ -19,6 +27,7 @@ namespace Framework::Core::GUI {
             ThreadsPage();
             WidgetsPage();
             VideoMemoryPage();
+            SubmitQueuePage();
 
             ImGui::EndTabBar();
         }
@@ -126,15 +135,105 @@ namespace Framework::Core::GUI {
     void EngineStatistics::VideoMemoryPage() {
         if (ImGui::BeginTabItem("Video memory")) {
             auto&& pContext = GetContext();
-            auto&& shaders = pContext->GetShaders();
+
+            auto&& framebuffers = pContext->GetFramebuffers();
+            auto&& textures = pContext->GetTextures();
+            auto&& techniques = pContext->GetRenderTechniques();
+            auto&& materials = pContext->GetMaterials();
+            auto&& skyboxes = pContext->GetSkyboxes();
 
             if (ImGui::CollapsingHeader("Shaders")) {
+                auto&& shaders = pContext->GetShaders();
+
+                auto&& shadersManager = SR_GRAPH_NS::Memory::ShaderProgramManager::Instance();
+
                 if (ImGui::BeginTable("##ShadersTable", 1)) {
                     for (auto&& pShader : shaders) {
                         ImGui::TableNextRow();
 
+                        auto&& virtualProgram = pShader->GetVirtualProgram();
+
                         ImGui::TableSetColumnIndex(0);
-                        ImGui::Text("%s", pShader->GetResourceId().c_str());
+                        ImGui::Text("%s [%i]", pShader->GetResourceId().c_str(), virtualProgram);
+
+                        if (shadersManager.HasProgram(virtualProgram)) {
+                            auto&& pVirtualInfo = shadersManager.GetInfo(virtualProgram);
+
+                            for (auto&& [identifier, program] : pVirtualInfo->m_data) {
+                                ImGui::Text("\t[%llu] = %i", identifier, program.id);
+                            }
+                        }
+
+                        ImGui::Separator();
+                    }
+
+                    ImGui::EndTable();
+                }
+            }
+
+            if (ImGui::CollapsingHeader("Framebuffers")) {
+                if (ImGui::BeginTable("##FramebuffersTable", 1)) {
+                    for (auto&& pFramebuffer : framebuffers) {
+                        ImGui::TableNextRow();
+
+                        ImGui::TableSetColumnIndex(0);
+                        ImGui::Text("%i", pFramebuffer->GetId());
+                        ImGui::Separator();
+                    }
+
+                    ImGui::EndTable();
+                }
+            }
+
+            if (ImGui::CollapsingHeader("Textures")) {
+                if (ImGui::BeginTable("##TexturesTable", 1)) {
+                    for (auto&& pTexture : textures) {
+                        ImGui::TableNextRow();
+
+                        ImGui::TableSetColumnIndex(0);
+                        ImGui::Text("%s", pTexture->GetResourceId().c_str());
+                        ImGui::Separator();
+                    }
+
+                    ImGui::EndTable();
+                }
+            }
+
+            if (ImGui::CollapsingHeader("Render Techniques")) {
+                if (ImGui::BeginTable("##RenderTechniquesTable", 1)) {
+                    for (auto&& pRenderTechnique : techniques) {
+                        ImGui::TableNextRow();
+
+                        ImGui::TableSetColumnIndex(0);
+                        ImGui::Text("%s", pRenderTechnique->GetResourceId().c_str());
+                        ImGui::Separator();
+                    }
+
+                    ImGui::EndTable();
+                }
+            }
+
+            if (ImGui::CollapsingHeader("Materials")) {
+                if (ImGui::BeginTable("##MaterialsTable", 1)) {
+                    for (auto&& pMaterial : materials) {
+                        ImGui::TableNextRow();
+
+                        ImGui::TableSetColumnIndex(0);
+                        ImGui::Text("%s", pMaterial->GetResourceId().c_str());
+                        ImGui::Separator();
+                    }
+
+                    ImGui::EndTable();
+                }
+            }
+
+            if (ImGui::CollapsingHeader("Skyboxes")) {
+                if (ImGui::BeginTable("##SkyboxesTable", 1)) {
+                    for (auto&& pSkybox : skyboxes) {
+                        ImGui::TableNextRow();
+
+                        ImGui::TableSetColumnIndex(0);
+                        ImGui::Text("%s", pSkybox->GetResourceId().c_str());
                         ImGui::Separator();
                     }
 
@@ -144,5 +243,71 @@ namespace Framework::Core::GUI {
 
             ImGui::EndTabItem();
         }
+    }
+
+    void EngineStatistics::SubmitQueuePage() {
+        if (ImGui::BeginTabItem("Submit queue")) {
+            auto&& pVulkan = GetContext()->GetPipeline().DynamicCast<SR_GRAPH_NS::VulkanPipeline>();
+            if (!pVulkan) {
+                ImGui::Text("Not supported!");
+                ImGui::EndTabItem();
+                return;
+            }
+
+            auto&& pKernel = pVulkan->GetKernel();
+            if (!pKernel) {
+                ImGui::Text("Kernel invalid!");
+                ImGui::EndTabItem();
+                return;
+            }
+
+            ImGui::CollapsingHeader(SR_FORMAT_C("Present complete semaphore [%p]", pKernel->GetPresentCompleteSemaphore()));
+
+            auto&& queue = pKernel->GetSubmitQueue();
+
+            uint32_t index = 0;
+            for (auto&& submitInfo : queue) {
+                if (ImGui::CollapsingHeader(SR_FORMAT_C("Queue %i", index))) {
+                    DrawSubmitInfo(submitInfo);
+                }
+                ++index;
+            }
+
+            if (ImGui::CollapsingHeader("Graphics queue")) {
+                DrawSubmitInfo(pKernel->GetSubmitInfo());
+            }
+
+            ImGui::CollapsingHeader(SR_FORMAT_C("Render complete semaphore [%p]", pKernel->GetRenderCompleteSemaphore()));
+
+            ImGui::EndTabItem();
+        }
+    }
+
+    void EngineStatistics::DrawSubmitInfo(const EvoVulkan::SubmitInfo& submitInfo) {
+        ImGui::Separator();
+
+        uint32_t waitIndex = 0;
+        for (auto&& pSemaphore : submitInfo.waitSemaphores) {
+            ImGui::Text("Wait semaphore %i [%p]", waitIndex, pSemaphore);
+            ++waitIndex;
+        }
+
+        ImGui::Separator();
+
+        uint32_t cmdIndex = 0;
+        for (auto&& pCmd : submitInfo.commandBuffers) {
+            ImGui::Text("Cmd buffer %i [%p]", cmdIndex, pCmd);
+            ++cmdIndex;
+        }
+
+        ImGui::Separator();
+
+        uint32_t signalIndex = 0;
+        for (auto&& pSemaphore : submitInfo.signalSemaphores) {
+            ImGui::Text("Signal semaphore %i [%p]", signalIndex, pSemaphore);
+            ++signalIndex;
+        }
+
+        ImGui::Separator();
     }
 }

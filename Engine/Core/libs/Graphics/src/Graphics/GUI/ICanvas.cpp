@@ -2,8 +2,6 @@
 // Created by Nikita on 08.01.2021.
 //
 
-#include <Utils/GUI.h>
-
 #include <Graphics/GUI/ICanvas.h>
 #include <Graphics/GUI/Editor/Theme.h>
 

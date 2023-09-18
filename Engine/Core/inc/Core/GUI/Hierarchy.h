@@ -12,7 +12,7 @@
 
 #include <Graphics/GUI/Widget.h>
 
-namespace SR_CORE_NS::GUI {
+namespace SR_CORE_GUI_NS {
     class Hierarchy : public SR_GRAPH_NS::GUI::Widget {
         static constexpr ImVec4 SR_PREFAB_COLOR_FIRST = ImVec4(39.f / 255.f, 225 / 255.f, 193.f / 255.f, 1.f);
         static constexpr ImVec4 SR_PREFAB_COLOR_SECOND = ImVec4(1.f, 140.f / 255.f, 0, 1.f);
@@ -21,7 +21,7 @@ namespace SR_CORE_NS::GUI {
         ~Hierarchy() override;
 
     public:
-        void Update();
+        void Update(float_t dt) override;
 
         void SetScene(const SR_WORLD_NS::Scene::Ptr& scene) override;
 
@@ -39,11 +39,12 @@ namespace SR_CORE_NS::GUI {
         void ExpandPath(const SR_UTILS_NS::GameObject::Ptr& gm);
         void Draw() override;
         void CheckSelected(const SR_UTILS_NS::GameObject::Ptr& gm);
-        void ContextMenu(const SR_UTILS_NS::GameObject::Ptr& gm, uint64_t id);
+        void SR_INLINE ContextMenu();
+        void ChildContextMenu(const SR_UTILS_NS::GameObject::Ptr& gm, uint64_t id);
         void DrawChild(const SR_UTILS_NS::GameObject::Ptr& root, uint32_t prefabIndex);
-        void Copy() const;
-        void Paste();
-        void Delete();
+        void SR_INLINE Copy() const;
+        void SR_INLINE Paste(const SR_UTILS_NS::GameObject::Ptr& pParent = nullptr);
+        void SR_INLINE Delete();
 
     private:
         const ImGuiTreeNodeFlags m_nodeFlagsWithChild = ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_OpenOnDoubleClick;
@@ -55,8 +56,6 @@ namespace SR_CORE_NS::GUI {
         SR_UTILS_NS::GameObject::GameObjects m_tree;
 
         std::atomic<bool> m_shiftPressed;
-
-        bool m_needExpand = false;
 
         SR_GRAPH_NS::GUI::Widget* m_sceneRunnerWidget = nullptr;
 

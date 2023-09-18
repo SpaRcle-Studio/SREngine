@@ -41,8 +41,8 @@ namespace SR_GTYPES_NS {
         void OnDisable() override;
 
         SR_NODISCARD bool ExecuteInEditMode() const override { return true; }
-        SR_NODISCARD bool IsCanCalculate() const override;
-        SR_NODISCARD SR_FORCE_INLINE bool IsCanUpdate() const noexcept override { return false; }
+        SR_NODISCARD bool IsCalculatable() const override;
+        SR_NODISCARD SR_FORCE_INLINE bool IsUpdatable() const noexcept override { return false; }
         SR_NODISCARD SR_FORCE_INLINE bool GetKerning() const noexcept { return m_kerning; }
         SR_NODISCARD SR_FORCE_INLINE bool IsDebugEnabled() const noexcept { return m_debug; }
         SR_NODISCARD SR_FORCE_INLINE bool IsPreprocessorEnabled() const noexcept { return m_preprocessor; }

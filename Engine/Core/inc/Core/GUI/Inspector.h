@@ -2,8 +2,8 @@
 // Created by Monika on 14.02.2022.
 //
 
-#ifndef SRENGINE_INSPECTOR_H
-#define SRENGINE_INSPECTOR_H
+#ifndef SR_ENGINE_CORE_INSPECTOR_H
+#define SR_ENGINE_CORE_INSPECTOR_H
 
 #include <Core/GUI/ComponentDrawer.h>
 
@@ -17,17 +17,17 @@ namespace SR_UTILS_NS {
     class Transform2D;
 }
 
-namespace SR_CORE_NS::GUI {
+namespace SR_CORE_GUI_NS {
     class EditorGUI;
     class Hierarchy;
 
-    class Inspector : public Graphics::GUI::Widget {
+    class Inspector : public SR_GRAPH_GUI_NS::Widget {
     public:
         explicit Inspector(Hierarchy* hierarchy);
         ~Inspector() override = default;
 
     public:
-        void Update();
+        void Update(float_t dt) override;
 
         void SetScene(const SR_WORLD_NS::Scene::Ptr& scene) override;
 
@@ -41,9 +41,9 @@ namespace SR_CORE_NS::GUI {
 
         void DrawSwitchTransform();
         void DrawTransform2D(SR_UTILS_NS::Transform2D* transform) const;
-        void DrawTransform3D(SR_UTILS_NS::Transform3D* transform) const;
+        void DrawTransform3D(SR_UTILS_NS::Transform3D* transform);
 
-        void BackupTransform(const SR_UTILS_NS::GameObject::Ptr& ptr, const std::function<void()>& operation) const;
+        SR_MAYBE_UNUSED void BackupTransform(const SR_UTILS_NS::GameObject::Ptr& ptr, const std::function<void()>& operation) const;
 
         template<typename T> SR_UTILS_NS::Component* DrawComponent(SR_UTILS_NS::Component* component, const std::string& name, uint32_t& index) {
             auto&& pComponent = dynamic_cast<T*>(component);
@@ -57,7 +57,7 @@ namespace SR_CORE_NS::GUI {
 
             ++index;
 
-            if (ImGui::BeginChild(SR_FORMAT_C("cmp-%s-%i"))) {
+            if (ImGui::BeginChild("InspectorComponent")) {
                 bool enabled = pComponent->IsEnabled();
                 if (ImGui::Checkbox(SR_UTILS_NS::Format("##%s-%i-checkbox", name.c_str(), index).c_str(), &enabled)) {
                     pComponent->SetEnabled(enabled);
@@ -86,9 +86,8 @@ namespace SR_CORE_NS::GUI {
                     }
                     ImGui::EndPopup();
                 }
-
-                ImGui::EndChild();
             }
+            ImGui::EndChild();
 
             return dynamic_cast<SR_UTILS_NS::Component*>(pComponent);
         }
@@ -98,7 +97,11 @@ namespace SR_CORE_NS::GUI {
         SR_UTILS_NS::GameObject::Ptr m_gameObject;
         Hierarchy* m_hierarchy = nullptr;
         SR_WORLD_NS::Scene::Ptr m_scene;
+
+        ///Для DrawTransform3D и может быть DrawTransofrm2D
+        bool m_isUsed = false;
+        SR_HTYPES_NS::Marshal* m_oldTransformMarshal = nullptr;
     };
 }
 
-#endif //SRENGINE_INSPECTOR_H
+#endif //SR_ENGINE_CORE_INSPECTOR_H

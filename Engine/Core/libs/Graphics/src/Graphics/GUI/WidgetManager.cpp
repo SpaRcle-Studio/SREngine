@@ -31,13 +31,14 @@ namespace SR_GRAPH_NS::GUI {
         SR_SCOPED_LOCK
 
         if (m_widgets.count(widget->GetName()) == 1) {
-            SRHalt("Widget are already registered!");
+            SRHalt("WidgetManager::Register() : widget is already registered!");
             return false;
         }
 
         m_widgets.insert(std::make_pair(widget->GetName(), widget));
 
         widget->SetManager(this);
+        widget->Init();
 
         return true;
     }
@@ -46,7 +47,7 @@ namespace SR_GRAPH_NS::GUI {
         SR_SCOPED_LOCK
 
         if (m_widgets.count(widget->GetName()) == 0) {
-            SRHalt("Widget are not registered!");
+            SRHalt("WidgetManager::Remove() : widget is not registered!");
             return false;
         }
 
@@ -58,7 +59,7 @@ namespace SR_GRAPH_NS::GUI {
     }
 
     WidgetManager::~WidgetManager() {
-        SRAssert2(m_widgets.empty(), "Memory leak possible!");
+        SRAssert2(m_widgets.empty(), "Memory leak is possible!");
         m_widgets.clear();
     }
 

@@ -19,6 +19,8 @@ namespace SR_ANIMATIONS_NS {
     }
 
     void AnimationStateMachine::Update(const UpdateContext& context) {
+        SR_TRACY_ZONE;
+
         for (auto pIt = m_activeStates.begin(); pIt != m_activeStates.end(); ) {
             AnimationState* pState = *pIt;
 

@@ -11,6 +11,11 @@ namespace SR_WORLD_NS {
     { }
 
     bool ScenePrefabLogic::Save(const Path& path) {
+        if (!Super::Save(path)) {
+            SR_ERROR("ScenePrefabLogic::Save() : failed to save base logic!");
+            return false;
+        }
+
         auto&& pMarshal = new SR_HTYPES_NS::Marshal();
 
         pMarshal->Write(static_cast<uint64_t>(ENTITY_ID_MAX));
@@ -20,7 +25,9 @@ namespace SR_WORLD_NS {
         pMarshal->Write(m_scene->GetName());
         pMarshal->Write<uint64_t>(0 /** tag */);
 
-        pMarshal = Transform3D().Save(pMarshal, SAVABLE_FLAG_ECS_NO_ID);
+        auto&& pTransformMarshal = Transform3D().Save(SAVABLE_FLAG_ECS_NO_ID);
+        pMarshal->Write<uint64_t>(pTransformMarshal->Size());
+        pMarshal->Append(pTransformMarshal);
 
         pMarshal = m_scene->SaveComponents(pMarshal, SAVABLE_FLAG_ECS_NO_ID);
 

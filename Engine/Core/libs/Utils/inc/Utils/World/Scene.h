@@ -35,6 +35,10 @@ namespace SR_WORLD_NS {
         using GameObjectPtr = SR_HTYPES_NS::SharedPtr<GameObject>;
         using GameObjects = std::vector<GameObjectPtr>;
 
+        SR_MAYBE_UNUSED SR_INLINE_STATIC const Path RuntimeScenePath = "Scenes/Runtime-cache-scene"; /// NOLINT
+        SR_MAYBE_UNUSED SR_INLINE_STATIC const Path NewScenePath = "Scenes/New-cache-scene"; /// NOLINT
+        SR_MAYBE_UNUSED SR_INLINE_STATIC const Path NewPrefabPath = "Scenes/New-cache-prefab"; /// NOLINT
+
         ~Scene() override;
 
     protected:
@@ -44,6 +48,8 @@ namespace SR_WORLD_NS {
         static Scene::Ptr Empty();
         static Scene::Ptr New(const Path& path);
         static Scene::Ptr Load(const Path& path);
+        static bool IsExists(const Path& path);
+        static Path GetAbsPath(const Path& path);
 
         void Prepare();
 
@@ -52,10 +58,9 @@ namespace SR_WORLD_NS {
         bool Destroy();
 
     public:
-        void SetPath(const Path& path) { m_path = path; }
-
         SR_NODISCARD std::string GetName() const;
         SR_NODISCARD Path GetPath() const { return m_path; }
+        SR_NODISCARD Path GetAbsPath() const;
         SR_NODISCARD bool IsPrefab() const;
         SR_NODISCARD SR_HTYPES_NS::DataStorage& GetDataStorage() { return m_dataStorage; }
         SR_NODISCARD const SR_HTYPES_NS::DataStorage& GetDataStorage() const { return m_dataStorage; }
@@ -112,6 +117,7 @@ namespace SR_WORLD_NS {
         GameObjects m_rootObjects;
 
         Path m_path;
+        Path m_absPath;
 
     };
 }

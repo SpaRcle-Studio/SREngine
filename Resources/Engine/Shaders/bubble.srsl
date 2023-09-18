@@ -8,25 +8,19 @@ BlendEnabled true;
 DepthWrite false;
 DepthTest true;
 
+#include <Engine/Shaders/Common/utils.srsl>
+
 [[uniform], [public]] sampler2D NoiseTex;
 [[uniform], [public]] vec3 BubbleColor;
 [[uniform], [public]] float NoiseSampleSize;
 [[uniform], [public]] float AnimationSpeed;
 [[uniform], [public]] float HeightMultiplier;
 
-float fresnel() {
-	vec3 view_direction_world = (VIEW_MATRIX * vec4(VIEW_DIRECTION, 0)).xyz;
-	vec3 normal_world = (VIEW_MATRIX * vec4(NORMAL, 0.0)).xyz;
-
-	float d = dot(view_direction_world, normal_world);
-	d = abs(d);
-	d = clamp(d, 0.0, 1.0);
-
-	return 1.0 - d;
-}
-
 void fragment() {
-	COLOR = vec4(BubbleColor, fresnel());
+    vec3 viewDirectionWorld = (VIEW_MATRIX * vec4(VIEW_DIRECTION, 0)).xyz;
+	vec3 normalWorld = (VIEW_MATRIX * vec4(NORMAL, 0.0)).xyz;
+
+	COLOR = vec4(BubbleColor, Fresnel(viewDirectionWorld, normalWorld));
 }
 
 void vertex() {

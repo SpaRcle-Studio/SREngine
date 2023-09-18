@@ -11,23 +11,35 @@
 #include <Audio/SoundFormat.h>
 
 namespace SR_AUDIO_NS {
+    SR_ENUM_NS_CLASS_T(PlayParamType, uint8_t,
+        Async, Loop, Library,
+        Relative, Gain, MinGain,
+        Pitch, ConeInnerAngle, UniqueId,
+        Position, Direction, Velocity,
+        Orientation, Device, MaxGain
+    );
+
     struct PlayParams {
-        bool async = true;
-        bool loop = false;
-        AudioLibrary library = AudioLibrary::OpenAL;
-        float_t relative = 360.f;
-        float_t gain = 1.f;
-        float_t minGain = 0.f;
-        float_t maxGain = 1.f;
-        float_t coneInnerAngle = 360.f;
-        uint64_t uniqueId = 0;
-        SR_MATH_NS::FVector3 m_position;
-        SR_MATH_NS::FVector3 m_direction;
-        SR_MATH_NS::FVector3 m_velocity;
-        SR_MATH_NS::FVector3 m_pitch;
-        SR_MATH_NS::FVector6 m_orientation;
-        std::string device;
+        std::optional<bool> async;
+        std::optional<bool> loop;
+        std::optional<AudioLibrary> library;
+        std::optional<float_t> relative;
+        std::optional<float_t> gain;
+        std::optional<float_t> minGain;
+        std::optional<float_t> pitch;
+        std::optional<float_t> maxGain;
+        std::optional<float_t> coneInnerAngle;
+        std::optional<uint64_t> uniqueId;
+        std::optional<SR_MATH_NS::FVector3> position;
+        std::optional<SR_MATH_NS::FVector3> direction;
+        std::optional<SR_MATH_NS::FVector3> velocity;
+        std::optional<SR_MATH_NS::FVector6> orientation;
+        std::optional<std::string> device = "";
+    public:
+        static PlayParams GetDefault();
     };
+
+
 }
 
 #endif //SRENGINE_PLAYPARAMS_H

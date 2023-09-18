@@ -6,102 +6,42 @@
 #include <Graphics/Types/Material.h>
 #include <Graphics/Types/Shader.h>
 #include <Graphics/Types/Geometry/IndexedMesh.h>
-#include <Graphics/Render/MeshCluster.h>
 #include <Graphics/Pipeline/IShaderProgram.h>
+#include <Graphics/Lighting/LightSystem.h>
+#include <Graphics/Pass/ShadowMapPass.h>
+#include <Graphics/Pass/CascadedShadowMapPass.h>
 
 namespace SR_GRAPH_NS {
     SR_REGISTER_RENDER_PASS(OpaquePass)
 
     OpaquePass::OpaquePass(RenderTechnique *pTechnique, BasePass* pParent)
-        : BasePass(pTechnique, pParent)
+        : Super(pTechnique, pParent)
     { }
 
-    bool OpaquePass::PreRender() {
-        return false;
-    }
-
-    bool OpaquePass::Render() {
-        SR_TRACY_ZONE;
-
-        auto&& opaque = GetRenderScene()->GetOpaque();
-
-        if (opaque.Empty()) {
-            return false;
-        }
-
-        for (auto&& [shader, subCluster] : opaque) {
-            if (!shader) {
-                continue;
-            }
-
-            if (shader->Use() == ShaderBindResult::Failed) {
-                continue;
-            }
-
-            for (auto&& [key, meshGroup] : subCluster) {
-                (*meshGroup.begin())->BindMesh();
-
-                for (auto&& pMesh : meshGroup) {
-                    pMesh->Draw();
-                }
-            }
-
-            shader->UnUse();
-        }
-
-        return true;
-    }
-
-    void OpaquePass::Update() {
-        SR_TRACY_ZONE;
-
-        if (!m_camera) {
-            return;
-        }
-
-        auto&& opaque = GetRenderScene()->GetOpaque();
-        auto&& time = SR_HTYPES_NS::Time::Instance().Clock();
-
-        for (auto const& [pShader, subCluster] : opaque) {
-            if (!pShader || !pShader->Ready()) {
-                continue;
-            }
-
-            m_context->SetCurrentShader(pShader);
-
-            /**
-             * TODO: нужно сделать что-то вроде SetSharedMat4, который будет биндить не в BLOCK а в SHARED_BLOCK
-             */
+    void OpaquePass::UseSharedUniforms(SR_GTYPES_NS::Shader *pShader) {
+        if (m_camera) {
             pShader->SetMat4(SHADER_VIEW_MATRIX, m_camera->GetViewTranslateRef());
             pShader->SetMat4(SHADER_PROJECTION_MATRIX, m_camera->GetProjectionRef());
             pShader->SetMat4(SHADER_ORTHOGONAL_MATRIX, m_camera->GetOrthogonalRef());
-            pShader->SetFloat(SHADER_TIME, time);
-
-            for (auto const& [key, meshGroup] : subCluster) {
-                for (const auto& pMesh : meshGroup) {
-                    if (!pMesh->IsMeshActive()) {
-                        continue;
-                    }
-
-                    auto&& virtualUbo = pMesh->GetVirtualUBO();
-                    if (virtualUbo == SR_ID_INVALID) {
-                        continue;
-                    }
-
-                    pMesh->UseMaterial();
-
-                    pShader->SetVec3(SHADER_VIEW_DIRECTION, m_camera->GetViewDirection());
-                    pShader->SetVec3(SHADER_VIEW_POSITION, m_camera->GetPositionRef());
-
-                    if (m_uboManager.BindUBO(virtualUbo) == Memory::UBOManager::BindResult::Duplicated) {
-                        SR_ERROR("OpaquePass::Update() : memory has been duplicated!");
-                    }
-
-                    pShader->Flush();
-                }
-            }
+            pShader->SetVec3(SHADER_VIEW_DIRECTION, m_camera->GetViewDirection());
+            pShader->SetVec3(SHADER_VIEW_POSITION, m_camera->GetPositionRef());
         }
 
-        BasePass::Update();
+        SR_MATH_NS::FVector3 lightPos = GetRenderScene()->GetLightSystem()->m_position;
+        pShader->SetVec3(SHADER_DIRECTIONAL_LIGHT_POSITION, lightPos);
+
+        if (m_shadowMapPass) {
+            pShader->SetMat4(SHADER_LIGHT_SPACE_MATRIX, m_shadowMapPass->GetLightSpaceMatrix());
+        }
+        else if (m_cascadedShadowMapPass) {
+            pShader->SetValue<false>(SHADER_CASCADE_LIGHT_SPACE_MATRICES, m_cascadedShadowMapPass->GetCascadeMatrices().data());
+            pShader->SetValue<false>(SHADER_CASCADE_SPLITS, m_cascadedShadowMapPass->GetSplitDepths().data());
+        }
+
+        Super::UseSharedUniforms(pShader);
+    }
+
+    MeshClusterTypeFlag OpaquePass::GetClusterType() const noexcept {
+        return static_cast<MeshClusterTypeFlag>(MeshClusterType::Opaque);
     }
 }

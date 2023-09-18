@@ -4,9 +4,11 @@
 
 #include <Graphics/Animations/Skeleton.h>
 
+#include <Graphics/Render/RenderScene.h>
+#include <Graphics/Utils/MeshUtils.h>
+
 #include <Utils/Types/RawMesh.h>
 #include <Utils/DebugDraw.h>
-#include <Graphics/Render/RenderScene.h>
 
 namespace SR_ANIMATIONS_NS {
     SR_REGISTER_COMPONENT(Skeleton);
@@ -127,13 +129,13 @@ namespace SR_ANIMATIONS_NS {
         bool hasErrors = false;
 
         const SR_HTYPES_NS::Function<void(SR_ANIMATIONS_NS::Bone*)> processBone = [&](SR_ANIMATIONS_NS::Bone* pBone) {
-#ifdef SR_DEBUG
+        #ifdef SR_DEBUG
             if (m_bonesByName.count(pBone->hashName) == 1) {
                 SR_ERROR("Skeleton::ReCalculateSkeleton() : bone with name \"" + pBone->name + "\" already exists in hash table!");
                 hasErrors = true;
                 return;
             }
-#endif
+        #endif
 
             m_bonesByIndex.emplace_back(pBone);
             m_bonesByName.insert(std::make_pair(pBone->hashName, pBone));
@@ -159,10 +161,6 @@ namespace SR_ANIMATIONS_NS {
             return nullptr;
         }
 
-        //if (pBoneIt->second->name != "Armature") {
-        //    return nullptr;
-        //}
-
         if (!pBoneIt->second->gameObject && !pBoneIt->second->hasError && !pBoneIt->second->Initialize()) {
             SR_WARN("Skeleton::GetBone() : failed to find bone game object!\n\tName: " + pBoneIt->second->name);
         }
@@ -175,10 +173,6 @@ namespace SR_ANIMATIONS_NS {
         if (pBoneIt == m_bonesByName.end()) {
             return nullptr;
         }
-
-        //if (pBoneIt->second->name != "Armature") {
-        //    return nullptr;
-        //}
 
         if (!pBoneIt->second->gameObject && !pBoneIt->second->hasError) {
             pBoneIt->second->Initialize();
@@ -206,6 +200,8 @@ namespace SR_ANIMATIONS_NS {
         if (m_bonesByName.empty()) { /// Update не должен вызываться, если кости ещё не загружены
             return;
         }
+
+        m_dirtyMatrices = true;
 
         if (m_debugEnabled) {
             UpdateDebug();
@@ -265,16 +261,24 @@ namespace SR_ANIMATIONS_NS {
         }
     }
 
-    Bone *Skeleton::GetBoneByIndex(uint64_t index) {
+    SR_UTILS_NS::Transform* Skeleton::GetTransformByIndex(uint16_t index) noexcept {
         if (index >= m_bonesByIndex.size()) {
             return nullptr;
         }
 
-        if (!m_bonesByIndex[index]->gameObject && !m_bonesByIndex[index]->hasError && !m_bonesByIndex[index]->Initialize()) {
-            SR_WARN("Skeleton::GetBoneByIndex() : failed to find bone game object!\n\tName: " + m_bonesByIndex[index]->name);
+        auto&& pBone = m_bonesByIndex[index];
+        auto&& pGameObject = pBone->gameObject;
+
+        if (!pGameObject && !pBone->hasError && !pBone->Initialize()) {
+            return nullptr;
         }
 
-        return m_bonesByIndex.at(index);
+        if (pGameObject) {
+            return pGameObject->GetTransform();
+        }
+        else {
+            return nullptr;
+        }
     }
 
     uint64_t Skeleton::GetBoneIndex(uint64_t hashName) {
@@ -285,5 +289,83 @@ namespace SR_ANIMATIONS_NS {
         }
 
         return SR_ID_INVALID;
+    }
+
+    void Skeleton::CalculateMatrices() {
+        if (!m_dirtyMatrices) {
+            return;
+        }
+
+        SR_TRACY_ZONE;
+
+        m_matrices.resize(m_bonesByIndex.size());
+
+        for (uint16_t i = 0; i < m_bonesByIndex.size(); ++i) {
+            auto&& pBone = m_bonesByIndex[i];
+            auto&& pGameObject = pBone->gameObject;
+
+            if (!pGameObject && !pBone->hasError && !pBone->Initialize()) {
+                continue;
+            }
+
+            if (pGameObject) {
+                m_matrices[i] = pGameObject->GetTransform()->GetMatrix();
+            }
+        }
+
+        m_dirtyMatrices = false;
+    }
+
+    const SR_MATH_NS::Matrix4x4& Skeleton::GetMatrixByIndex(uint16_t index) noexcept {
+        static SR_MATH_NS::Matrix4x4 identityMatrix = SR_MATH_NS::Matrix4x4().Identity();
+
+        if (index >= m_bonesByIndex.size()) {
+            return identityMatrix;
+        }
+
+        return m_matrices[index];
+    }
+
+    const std::vector<SR_MATH_NS::Matrix4x4>& Skeleton::GetMatrices() noexcept {
+        if (!m_dirtyMatrices) {
+            return m_matrices;
+        }
+
+        m_matrices.resize(SR_GRAPH_NS::RoundBonesCount(m_optimizedBones.size()));
+
+        for (auto&& [hashName, index] : m_optimizedBones) {
+            auto&& pBone = GetBone(hashName);
+            auto&& pGameObject = pBone->gameObject;
+
+            if (!pGameObject && !pBone->hasError && !pBone->Initialize()) {
+                continue;
+            }
+
+            if (pGameObject) {
+                m_matrices[index] = pGameObject->GetTransform()->GetMatrix();
+            }
+        }
+
+        m_dirtyMatrices = false;
+
+        return m_matrices;
+    }
+
+    void Skeleton::SetOptimizedBones(const ska::flat_hash_map<uint64_t, uint16_t>& bones) {
+        if (m_optimizedBones.empty()) {
+            m_optimizedBones = bones;
+        }
+    }
+
+    void Skeleton::SetBonesOffsets(const std::vector<SR_MATH_NS::Matrix4x4>& offsets) {
+        if (m_skeletonOffsets.empty()) {
+            m_skeletonOffsets = offsets;
+            m_skeletonOffsets.resize(SR_GRAPH_NS::RoundBonesCount(m_skeletonOffsets.size()));
+        }
+    }
+
+    void Skeleton::ResetSkeleton() {
+        m_optimizedBones.clear();
+        m_skeletonOffsets.clear();
     }
 }

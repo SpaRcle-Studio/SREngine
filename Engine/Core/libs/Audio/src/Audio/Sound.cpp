@@ -9,20 +9,24 @@
 
 namespace SR_AUDIO_NS {
     Sound::Sound()
-        : IResource(SR_COMPILE_TIME_CRC32_TYPE_NAME(Sound), true /** auto remove */)
+        : IResource(SR_COMPILE_TIME_CRC32_TYPE_NAME(Sound))
     { }
 
     Sound::~Sound() {
+        if (m_data && !SoundManager::Instance().Unregister(&m_data)) {
+            SR_ERROR("Sound::~Sound() : failed to unregister sound!");
+        }
         SetRawSound(nullptr);
     }
 
-    Sound *Sound::Load(const SR_UTILS_NS::Path& rawPath) {
+    Sound* Sound::Load(const SR_UTILS_NS::Path& rawPath) {
         auto&& resourceManager = SR_UTILS_NS::ResourceManager::Instance();
 
         SR_UTILS_NS::Path&& path = rawPath.RemoveSubPath(resourceManager.GetResPath());
 
-        if (auto&& pSound = resourceManager.Find<Sound>(path))
+        if (auto&& pSound = resourceManager.Find<Sound>(path)) {
             return pSound;
+        }
 
         auto&& pRawSound = RawSound::Load(path);
 
@@ -47,26 +51,17 @@ namespace SR_AUDIO_NS {
         return pSound;
     }
 
-    bool Sound::Play(const PlayParams &params) {
+    Sound::Handle Sound::Play(const PlayParams& params) {
         return SoundManager::Instance().Play(this, params);
     }
 
-    bool Sound::Play() {
-        PlayParams params = { 0 };
-        params.async = false;
-        return Play(params);
-    }
-
-    bool Sound::PlayAsync() {
-        PlayParams params = { 0 };
-        params.async = true;
+    Sound::Handle Sound::Play() {
+        PlayParams params;
         return Play(params);
     }
 
     bool Sound::Load() {
-        auto&& soundManager = SoundManager::Instance();
-
-        if (!(m_data = soundManager.Register(this))) {
+        if (!(m_data = SoundManager::Instance().Register(this))) {
             SR_ERROR("Sound::Load() : failed to register sound!");
             return false;
         }
@@ -75,9 +70,7 @@ namespace SR_AUDIO_NS {
     }
 
     bool Sound::Unload() {
-        auto&& soundManager = SoundManager::Instance();
-
-        if (m_data && !soundManager.Unregister(&m_data)) {
+        if (m_data && !SoundManager::Instance().Unregister(&m_data)) {
             SR_ERROR("Sound::Unload() : failed to unregister sound!");
         }
 
@@ -138,5 +131,9 @@ namespace SR_AUDIO_NS {
 
     SoundData *Sound::GetData() const {
         return m_data;
+    }
+
+    bool Sound::IsAllowedToRevive() const {
+        return true;
     }
 }

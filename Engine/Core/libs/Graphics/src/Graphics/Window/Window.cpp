@@ -36,6 +36,7 @@ namespace SR_GRAPH_NS {
         }
 
         m_thread = SR_HTYPES_NS::Thread::Factory::Instance().CreateEmpty();
+        m_thread->SetName("Window");
 
         if (!m_thread->Run([this]() { ThreadFunction(); })) {
             SR_ERROR("Window::Initialize() : failed to run thread!");
@@ -100,8 +101,6 @@ namespace SR_GRAPH_NS {
             m_closeCallback();
         }
 
-        SR_SAFE_DELETE_PTR(m_windowImpl);
-
         SR_INFO("Window::Thread() : stopping window thread...");
     }
 
@@ -153,6 +152,8 @@ namespace SR_GRAPH_NS {
             m_thread->Free();
             m_thread = nullptr;
         }
+
+        SR_SAFE_DELETE_PTR(m_windowImpl);
     }
 
     Window::WindowHandle Window::GetHandle() const {

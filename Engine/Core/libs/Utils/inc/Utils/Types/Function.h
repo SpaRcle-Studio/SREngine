@@ -8,8 +8,7 @@
 #include <Utils/stdInclude.h>
 
 namespace SR_HTYPES_NS {
-    template <typename UnusedType>
-    class Function;
+    template <typename UnusedType> class Function;
 
     template <typename ReturnType, typename... ArgumentTypes>
     class Function <ReturnType (ArgumentTypes...)>
@@ -27,7 +26,7 @@ namespace SR_HTYPES_NS {
             : mInvoker()
         { }
 
-        template <typename FunctionT> Function(FunctionT f)
+        template <typename FunctionT> Function(FunctionT f) /// NOLINT
             : mInvoker(new free_function_holder<FunctionT>(f))
         { }
 
@@ -40,8 +39,7 @@ namespace SR_HTYPES_NS {
             return *this;
         }
 
-        template <typename FunctionType, typename ClassType>
-        Function(FunctionType ClassType::* f)
+        template <typename FunctionType, typename ClassType> Function(FunctionType ClassType::* f) /// NOLINT
             : mInvoker(new member_function_holder<FunctionType, ArgumentTypes ...>(f))
         { }
 
@@ -58,7 +56,7 @@ namespace SR_HTYPES_NS {
             return mInvoker->invoke(args...);
         }
 
-        operator bool() const {
+        operator bool() const { /// NOLINT
             return mInvoker.get();
         }
 
@@ -73,8 +71,8 @@ namespace SR_HTYPES_NS {
             virtual invoker_t clone() = 0;
 
         private:
-            function_holder_base(const function_holder_base &);
-            void operator=(const function_holder_base &);
+            function_holder_base(const function_holder_base&); /// NOLINT
+            void operator=(const function_holder_base&); /// NOLINT
 
         };
 
@@ -82,7 +80,7 @@ namespace SR_HTYPES_NS {
         class free_function_holder : public function_holder_base
         {
         public:
-            free_function_holder(FunctionT func)
+            free_function_holder(FunctionT func) /// NOLINT
                 : function_holder_base()
                 , mFunction(func)
             { }
@@ -106,7 +104,7 @@ namespace SR_HTYPES_NS {
         public:
             typedef FunctionType ClassType::* member_function_signature_t;
 
-            member_function_holder(member_function_signature_t f)
+            member_function_holder(member_function_signature_t f) /// NOLINT
                 : mFunction(f)
             { }
 

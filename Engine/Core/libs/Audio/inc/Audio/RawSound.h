@@ -15,7 +15,7 @@ namespace SR_AUDIO_NS {
         ~RawSound() override;
 
     public:
-        static RawSound *Load(const SR_UTILS_NS::Path& rawPath);
+        static RawSound* Load(const SR_UTILS_NS::Path& rawPath);
 
     public:
         SR_NODISCARD uint64_t GetFileHash() const override { return 0; };
@@ -25,6 +25,7 @@ namespace SR_AUDIO_NS {
         SR_NODISCARD uint8_t GetChannels() const;
         SR_NODISCARD uint8_t GetBitsPerSample() const;
         SR_NODISCARD uint32_t GetSampleRate() const;
+        SR_NODISCARD bool IsAllowedToRevive() const override { return true; }
 
     protected:
         bool Unload() override;

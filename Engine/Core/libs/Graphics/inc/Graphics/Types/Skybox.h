@@ -8,10 +8,6 @@
 #include <Utils/ResourceManager/IResource.h>
 #include <Graphics/Memory/IGraphicsResource.h>
 
-namespace SR_GRAPH_NS::Types {
-    class Shader;
-}
-
 namespace SR_GRAPH_NS {
     class Render;
     class Environment;
@@ -19,6 +15,7 @@ namespace SR_GRAPH_NS {
 
 namespace SR_GTYPES_NS {
     class Texture;
+    class Shader;
 
     class Skybox : public SR_UTILS_NS::IResource, public Memory::IGraphicsResource {
     private:
@@ -41,6 +38,8 @@ namespace SR_GTYPES_NS {
 
         void SetShader(Shader *shader);
 
+        void StartWatch() override;
+
     protected:
         void OnResourceUpdated(SR_UTILS_NS::ResourceContainer* pContainer, int32_t depth) override;
         uint64_t GetFileHash() const override { return 0; }
@@ -51,23 +50,23 @@ namespace SR_GTYPES_NS {
         void DrawVulkan();
 
     private:
-        Shader*                 m_shader         = nullptr;
+        Shader* m_shader = nullptr;
 
-        int32_t                 m_VAO            = SR_ID_INVALID;
-        int32_t                 m_VBO            = SR_ID_INVALID;
-        int32_t                 m_IBO            = SR_ID_INVALID;
+        int32_t m_VBO = SR_ID_INVALID;
+        int32_t m_IBO = SR_ID_INVALID;
 
-        int32_t                 m_cubeMap        = SR_ID_INVALID;
+        int32_t m_cubeMap = SR_ID_INVALID;
 
-        int32_t                 m_virtualUBO     = SR_ID_INVALID;
+        int32_t m_virtualUBO = SR_ID_INVALID;
 
-        uint32_t                m_width          = 0;
-        uint32_t                m_height         = 0;
+        uint32_t m_width = 0;
+        uint32_t m_height = 0;
 
-        std::array<uint8_t*, 6> m_data           = std::array<uint8_t*, 6>();
+        std::atomic<bool> m_hasErrors = false;
+        std::atomic<bool> m_dirtyShader = false;
 
-        std::atomic<bool>       m_hasErrors      = false;
-        std::atomic<bool>       m_dirtyShader    = false;
+        std::array<uint8_t*, 6> m_data;
+        std::array<SR_UTILS_NS::Path, 6> m_paths;
 
     };
 }

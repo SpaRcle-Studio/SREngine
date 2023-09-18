@@ -11,9 +11,7 @@ namespace SR_UTILS_NS {
     class SR_DLL_EXPORT Transform3D : public Transform {
         friend class GameObject;
     public:
-        Transform3D()
-            : Transform()
-        { }
+        Transform3D() = default;
 
     public:
         void Translate(const SR_MATH_NS::FVector3& translation) override;

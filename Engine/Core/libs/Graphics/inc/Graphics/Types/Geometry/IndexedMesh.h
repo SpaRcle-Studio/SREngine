@@ -7,7 +7,7 @@
 
 #include <Graphics/Memory/MeshManager.h>
 #include <Graphics/Types/Mesh.h>
-#include <Graphics/Pipeline/Environment.h>
+#include <Graphics/Pipeline/Pipeline.h>
 
 namespace SR_GTYPES_NS {
     class IndexedMesh : public Mesh {
@@ -51,6 +51,8 @@ namespace SR_GTYPES_NS {
     /// ----------------------------------------------------------------------------------------------------------------
 
     template<Vertices::VertexType type, typename Vertex> bool IndexedMesh::CalculateVBO(const SR_HTYPES_NS::Function<std::vector<Vertex>()>& getter) {
+        SR_TRACY_ZONE;
+
         SRAssert(m_pipeline);
         SRAssert(m_VBO == SR_ID_INVALID);
 
@@ -75,6 +77,8 @@ namespace SR_GTYPES_NS {
     }
 
     template<Vertices::VertexType type, typename Vertex> bool IndexedMesh::CalculateVBO(const std::vector<Vertex>& vertices) {
+        SR_TRACY_ZONE;
+
         SRAssert(m_pipeline);
         SRAssert(m_VBO == SR_ID_INVALID);
 
@@ -90,7 +94,7 @@ namespace SR_GTYPES_NS {
                 return false;
             }
 
-            if (m_VBO = m_pipeline->CalculateVBO((void*)vertices.data(), type, m_countVertices); m_VBO == SR_ID_INVALID) {
+            if (m_VBO = m_pipeline->AllocateVBO((void*)vertices.data(), type, m_countVertices); m_VBO == SR_ID_INVALID) {
                 SR_ERROR("IndexedMesh::CalculateVBO() : failed calculate VBO \"" + GetGeometryName() + "\" mesh!");
                 m_hasErrors = true;
                 return false;

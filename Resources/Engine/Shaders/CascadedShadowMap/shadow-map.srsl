@@ -1,0 +1,36 @@
+ShaderType PostProcessing;
+
+PolygonMode Fill;
+CullMode Back;
+DepthCompare LessOrEqual;
+PrimitiveTopology TriangleList;
+BlendEnabled false;
+DepthWrite false;
+DepthTest false;
+
+[[uniform]] sampler2DArray depthMap;
+[[shared]] vec2 uv;
+
+void fragment() {
+    float d = 0.0;
+
+    if (uv.x < 0.499 && uv.y < 0.499) {
+        d = texture(depthMap, vec3(uv * 2, 0.0)).x;
+    }
+    else if (uv.x > 0.511 && uv.y < 0.499) {
+        d = texture(depthMap, vec3(vec2(-1.0, 0.0) + uv * 2, 1.0)).x;
+    }
+    else if (uv.x < 0.499 && uv.y > 0.511) {
+        d = texture(depthMap, vec3(vec2(0, -1.0) + uv * 2, 2.0)).x;
+    }
+    else if (uv.x > 0.511 && uv.y > 0.511) {
+        d = texture(depthMap, vec3(vec2(-1.0, -1.0) + uv * 2, 3.0)).x;
+    }
+
+    COLOR_INDEX_0 = vec4(d, d, d, 1.0);
+}
+
+void vertex() {
+    uv = vec2((VERTEX_INDEX << 1) & 2, VERTEX_INDEX & 2);
+    OUT_POSITION = vec4(uv * 2.0 - 1.0, 0.0, 1.0);
+}

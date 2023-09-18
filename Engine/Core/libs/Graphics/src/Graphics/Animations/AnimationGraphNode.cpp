@@ -37,6 +37,8 @@ namespace SR_ANIMATIONS_NS {
     }
 
     void AnimationGraphNodeFinal::Update(const UpdateContext& context, const AnimationLink& from) {
+        SR_TRACY_ZONE;
+
         if (m_inputPins.front().has_value()) {
             auto&& pNode = m_graph->GetNode(m_inputPins.front().value().m_targetNodeIndex);
             if (pNode) {
@@ -46,6 +48,8 @@ namespace SR_ANIMATIONS_NS {
     }
 
     void AnimationGraphNodeStateMachine::Update(const UpdateContext& context, const AnimationLink& from) {
+        SR_TRACY_ZONE;
+
         if (m_stateMachine) {
             m_stateMachine->Update(context);
         }

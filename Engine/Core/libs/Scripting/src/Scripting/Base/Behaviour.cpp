@@ -13,7 +13,7 @@ namespace SR_SCRIPTING_NS {
     SR_REGISTER_COMPONENT(Behaviour);
 
     Behaviour::Behaviour()
-        : IResource(SR_COMPILE_TIME_CRC32_TYPE_NAME(Behaviour), true /** auto remove */)
+        : IResource(SR_COMPILE_TIME_CRC32_TYPE_NAME(Behaviour))
         , SR_UTILS_NS::Component()
     { }
 
@@ -141,6 +141,7 @@ namespace SR_SCRIPTING_NS {
     }
 
     void Behaviour::DeleteResource() {
+        StopWatch();
         GetThis().AutoFree([](auto&& pData) {
            delete pData;
         });

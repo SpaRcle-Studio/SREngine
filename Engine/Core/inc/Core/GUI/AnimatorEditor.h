@@ -17,7 +17,7 @@ namespace SR_CORE_NS::GUI {
 
     };
 
-    class AnimatorEditor : public SR_GRAPH_NS::GUI::NodeWidget {
+    class AnimatorEditor : public SR_GRAPH_GUI_NS::NodeWidget {
         using Super = SR_GRAPH_NS::GUI::NodeWidget;
         static constexpr uint16_t VERSION = 1000;
     public:
@@ -25,15 +25,8 @@ namespace SR_CORE_NS::GUI {
         ~AnimatorEditor() override = default;
 
     protected:
-        void DrawPopupMenu();
-
         void OnOpen() override;
-        void OnClose() override;
-
-        void Draw() override;
-
-    private:
-        void DrawTopPanel();
+        void DrawPopupMenu() override;
 
     };
 }

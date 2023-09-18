@@ -35,7 +35,7 @@ if (SR_AUDIO_STATIC_LIBRARY)
 
     endif()
 else()
-    add_library(Audio SHARED Audio.cxx)
+    add_library(Audio SHARED Audio.cxx inc/Audio/Types/AudioListener.h src/Audio/Types/AudioListener.cpp)
     add_library(Audio::lib ALIAS Audio)
 endif()
 

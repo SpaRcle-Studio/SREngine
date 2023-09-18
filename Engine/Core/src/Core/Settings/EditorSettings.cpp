@@ -29,6 +29,10 @@ namespace SR_CORE_NS {
             m_renderTechnique = renderTechniqueXml.GetAttribute<SR_UTILS_NS::Path>();
         }
 
+        if (auto&& prefabRenderTechniqueXml = node.GetNode("PrefabRenderTechnique")) {
+            m_prefabEditorRenderTechnique = prefabRenderTechniqueXml.GetAttribute<SR_UTILS_NS::Path>();
+        }
+
         if (auto&& debugChunksXml = node.GetNode("DebugChunks")) {
             m_debugChunks = debugChunksXml.GetAttribute<bool>();
         }

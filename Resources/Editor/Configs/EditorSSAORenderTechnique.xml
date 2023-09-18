@@ -77,4 +77,19 @@
             </PostProcessPass>
         </Passes>
     </FramebufferPass>
+    <Queues>
+        <Queue>
+            <Pass Name="GBuffer"/>
+        </Queue>
+        <Queue>
+            <Pass Name="SSAO"/>
+        </Queue>
+        <Queue>
+            <Pass Name="SSAOBlur"/>
+        </Queue>
+        <Queue>
+            <Pass Name="ColorBufferPass"/>
+            <Pass Name="SceneViewFBO"/>
+        </Queue>
+    </Queues>
 </Technique>

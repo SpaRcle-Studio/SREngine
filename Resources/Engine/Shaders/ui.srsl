@@ -4,7 +4,7 @@ PolygonMode Fill;
 CullMode None;
 DepthCompare LessOrEqual;
 PrimitiveTopology TriangleList;
-BlendEnabled true;
+BlendEnabled false;
 DepthWrite true;
 DepthTest true;
 
@@ -12,7 +12,7 @@ DepthTest true;
 [[uniform], [public]] sampler2D diffuse;
 
 void fragment() {
-	COLOR = texture(diffuse, UV) * color;
+	COLOR = texture(diffuse, vec2(1.0 - UV.x, 1.0 - UV.y)) * color;
 
     if (COLOR.a < 0.8) {
         discard;

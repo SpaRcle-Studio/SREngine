@@ -4,6 +4,7 @@
 
 #include <Graphics/Pass/FramebufferPass.h>
 #include <Graphics/Types/Framebuffer.h>
+#include <Graphics/Pipeline/Pipeline.h>
 
 namespace SR_GRAPH_NS {
     SR_REGISTER_RENDER_PASS(FramebufferPass)
@@ -45,12 +46,13 @@ namespace SR_GRAPH_NS {
         }
 
         if (m_framebuffer->BeginRender()) {
+            m_framebuffer->SetViewportScissor();
             GroupPass::Render();
             m_framebuffer->EndRender();
             m_framebuffer->EndCmdBuffer();
         }
 
-        m_pipeline->SetCurrentFramebuffer(nullptr);
+        m_pipeline->SetCurrentFrameBuffer(nullptr);
 
         m_isRendered = true;
 
@@ -83,10 +85,17 @@ namespace SR_GRAPH_NS {
             return;
         }
 
-        m_pipeline->SetCurrentFramebuffer(m_framebuffer);
+        m_pipeline->SetCurrentFrameBuffer(m_framebuffer);
 
         GroupPass::Update();
 
-        m_pipeline->SetCurrentFramebuffer(nullptr);
+        m_pipeline->SetCurrentFrameBuffer(nullptr);
+    }
+
+    std::vector<SR_GTYPES_NS::Framebuffer*> FramebufferPass::GetFrameBuffers() const {
+        if (!m_framebuffer) {
+            return std::vector<SR_GTYPES_NS::Framebuffer*>(); /// NOLINT
+        }
+        return { m_framebuffer };
     }
 }

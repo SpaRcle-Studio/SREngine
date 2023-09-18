@@ -48,11 +48,17 @@ namespace SR_UTILS_NS {
     }
 
     bool Features::Reload() {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
+        SR_TRACY_ZONE;
+
+        if (m_path.Empty()) {
+            SR_ERROR("Features::Reload() : path is empty!");
+            return false;
+        }
 
         m_features.clear();
 
-        const auto& doc = Xml::Document::Load(m_path);
+        const auto& doc = SR_XML_NS::Document::Load(m_path);
         if (const auto& features = doc.Root().GetNode("Features")) {
             for (const auto& group : features.GetNodes()) {
                 for (const auto& feature : group.GetNodes()) {

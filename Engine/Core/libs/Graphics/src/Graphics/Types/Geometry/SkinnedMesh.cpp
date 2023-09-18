@@ -25,7 +25,7 @@ namespace SR_GTYPES_NS {
 
         FreeVideoMemory();
 
-        if (!IsCanCalculate()) {
+        if (!IsCalculatable()) {
             return false;
         }
 
@@ -78,6 +78,7 @@ namespace SR_GTYPES_NS {
             pShader->Flush();
 
             m_material->UseSamplers();
+            pShader->FlushSamplers();
         }
 
         switch (m_uboManager.BindUBO(m_virtualUBO)) {
@@ -85,8 +86,10 @@ namespace SR_GTYPES_NS {
                 pShader->InitUBOBlock();
                 pShader->Flush();
                 m_material->UseSamplers();
+                pShader->FlushSamplers();
                 SR_FALLTHROUGH;
             case Memory::UBOManager::BindResult::Success:
+                pShader->FlushConstants();
                 m_pipeline->DrawIndices(m_countIndices);
                 break;
             case Memory::UBOManager::BindResult::Failed:
@@ -143,8 +146,8 @@ namespace SR_GTYPES_NS {
         return GetRawMesh()->GetIndices(GetMeshId());
     }
 
-    bool SkinnedMesh::IsCanCalculate() const {
-        return IsValidMeshId() && Mesh::IsCanCalculate();
+    bool SkinnedMesh::IsCalculatable() const {
+        return IsValidMeshId() && Mesh::IsCalculatable();
     }
 
     bool SkinnedMesh::IsSkeletonUsable() const {
@@ -164,7 +167,6 @@ namespace SR_GTYPES_NS {
 
         m_skeletonIsBroken = !usable;
         m_renderScene->SetDirty();
-        m_bonesIds.clear();
 
         MeshComponent::Update(dt);
     };
@@ -175,26 +177,40 @@ namespace SR_GTYPES_NS {
     }
 
     void SkinnedMesh::UseModelMatrix() {
-        SR_TRACY_ZONE;
-
         /// TODO: А не стоило бы изменить ColorBufferPass так, чтобы он вызывал не UseModelMatrix, а более обощённый метод?
         /// Нет, не стоило бы.
         if (!PopulateSkeletonMatrices()) {
             return;
         }
 
+        auto&& pShader = GetRenderContext()->GetCurrentShader();
+        SRAssert(pShader);
+
+        pShader->SetMat4(SHADER_MODEL_MATRIX, m_modelMatrix);
+
+        auto&& pSkeleton = m_skeletonRef.GetComponent<SR_ANIMATIONS_NS::Skeleton>();
+        auto&& pRenderScene = GetRenderScene();
+
+        SRAssert(pRenderScene);
+
+        if (pRenderScene->GetCurrentSkeleton() == pSkeleton.Get()) {
+            return;
+        }
+
+        pRenderScene->SetCurrentSkeleton(pSkeleton.Get());
+
         switch (GetMaxBones()) {
             case 128:
-                GetRenderContext()->GetCurrentShader()->SetCustom(SHADER_SKELETON_MATRICES_128, m_skeletonMatrices.data());
-                GetRenderContext()->GetCurrentShader()->SetCustom(SHADER_SKELETON_MATRIX_OFFSETS_128, m_skeletonOffsets.data());
+                pShader->SetValue<false>(SHADER_SKELETON_MATRICES_128, pSkeleton->GetMatrices().data());
+                pShader->SetValue<false>(SHADER_SKELETON_MATRIX_OFFSETS_128, pSkeleton->GetOffsets().data());
                 break;
             case 256:
-                GetRenderContext()->GetCurrentShader()->SetCustom(SHADER_SKELETON_MATRICES_256, m_skeletonMatrices.data());
-                GetRenderContext()->GetCurrentShader()->SetCustom(SHADER_SKELETON_MATRIX_OFFSETS_256, m_skeletonOffsets.data());
+                pShader->SetValue<false>(SHADER_SKELETON_MATRICES_256, pSkeleton->GetMatrices().data());
+                pShader->SetValue<false>(SHADER_SKELETON_MATRIX_OFFSETS_256, pSkeleton->GetOffsets().data());
                 break;
             case 384:
-                GetRenderContext()->GetCurrentShader()->SetCustom(SHADER_SKELETON_MATRICES_384, m_skeletonMatrices.data());
-                GetRenderContext()->GetCurrentShader()->SetCustom(SHADER_SKELETON_MATRIX_OFFSETS_384, m_skeletonOffsets.data());
+                pShader->SetValue<false>(SHADER_SKELETON_MATRICES_384, pSkeleton->GetMatrices().data());
+                pShader->SetValue<false>(SHADER_SKELETON_MATRIX_OFFSETS_384, pSkeleton->GetOffsets().data());
                 break;
             case 0:
                 break;
@@ -202,8 +218,6 @@ namespace SR_GTYPES_NS {
                 SRHaltOnce0();
                 return;
         }
-
-        GetRenderContext()->GetCurrentShader()->SetMat4(SHADER_MODEL_MATRIX, m_modelMatrix);
     }
 
     void SkinnedMesh::OnResourceReloaded(SR_UTILS_NS::IResource* pResource) {
@@ -215,27 +229,10 @@ namespace SR_GTYPES_NS {
     }
 
     bool SkinnedMesh::PopulateSkeletonMatrices() {
-        SR_TRACY_ZONE;
-
-        static SR_MATH_NS::Matrix4x4 identityMatrix = SR_MATH_NS::Matrix4x4().Identity();
-
-        auto&& bones = GetRawMesh()->GetBones(GetMeshId());
+        auto&& bones = GetRawMesh()->GetOptimizedBones();
 
         if (bones.empty()) {
             return false;
-        }
-
-        if (m_bonesIds.empty()) {
-            const uint64_t bonesCount = SR_MAX(GetMaxBones(), bones.size());
-
-            m_bonesIds.resize(bonesCount);
-            m_skeletonOffsets.resize(bonesCount);
-            m_skeletonMatrices.resize(bonesCount);
-
-            /// for (uint64_t i = 0; i < bonesCount; ++i) {
-            ///     m_skeletonMatrices[i] = identityMatrix;
-            ///     m_skeletonOffsets[i] = identityMatrix;
-            /// }
         }
 
         auto&& pSkeleton = m_skeletonRef.GetComponent<SR_ANIMATIONS_NS::Skeleton>();
@@ -244,22 +241,8 @@ namespace SR_GTYPES_NS {
             return false;
         }
 
-        if (!m_isOffsetsInitialized) {
-            for (auto&& [hashName, boneId] : bones) {
-                m_skeletonOffsets[boneId] = GetRawMesh()->GetBoneOffset(hashName);
-                m_bonesIds[boneId] = pSkeleton->GetBoneIndex(hashName);
-            }
-            m_isOffsetsInitialized = true;
-        }
-
-        for (uint64_t boneId = 0; boneId < m_bonesIds.size(); ++boneId) {
-            if (auto&& bone = pSkeleton->GetBoneByIndex(m_bonesIds[boneId]); bone && bone->gameObject) {
-                m_skeletonMatrices[boneId] = bone->gameObject->GetTransform()->GetMatrix();
-            }
-            else {
-                m_skeletonMatrices[boneId] = identityMatrix;
-            }
-        }
+        pSkeleton->SetOptimizedBones(GetRawMesh()->GetOptimizedBones());
+        pSkeleton->SetBonesOffsets(GetRawMesh()->GetBoneOffsets());
 
         return true;
     }
@@ -271,7 +254,9 @@ namespace SR_GTYPES_NS {
             SetGeometryName(GetRawMesh()->GetGeometryName(GetMeshId()));
         }
 
-        m_isOffsetsInitialized = false;
+        if (auto&& pSkeleton = m_skeletonRef.GetComponent<SR_ANIMATIONS_NS::Skeleton>()) {
+            pSkeleton->ResetSkeleton();
+        }
 
         MarkPipelineUnBuild();
 
@@ -303,16 +288,6 @@ namespace SR_GTYPES_NS {
             return 0;
         }
 
-        uint32_t bonesCount = GetRawMesh()->GetBones(GetMeshId()).size();
-
-        if (bonesCount > 256) {
-            return 384;
-        }
-        else if (bonesCount > SR_HUMANOID_MAX_BONES) {
-            return 256;
-        }
-        else {
-            return SR_HUMANOID_MAX_BONES;
-        }
+        return SR_GRAPH_NS::RoundBonesCount(GetRawMesh()->GetOptimizedBones().size());
     }
 }

@@ -16,7 +16,7 @@ namespace SR_GRAPH_NS {
     class Window;
 }
 
-namespace SR_CORE_NS::GUI {
+namespace SR_CORE_GUI_NS {
     class Hierarchy;
     class Guizmo;
 
@@ -24,15 +24,16 @@ namespace SR_CORE_NS::GUI {
         using Super = Graphics::GUI::Widget;
         using GameObjectPtr = SR_UTILS_NS::GameObject::Ptr;
         using WindowPtr = SR_HTYPES_NS::SafePtr<SR_GRAPH_NS::Window>;
+        using EnginePtr = SR_HTYPES_NS::SharedPtr<Engine>;
         SR_INLINE_STATIC const std::string CAMERA_XML = "Editor/Camera.xml";
     public:
-        explicit SceneViewer(const WindowPtr& window, Hierarchy* hierarchy);
+        explicit SceneViewer(const EnginePtr& pEngine, Hierarchy* hierarchy);
         ~SceneViewer() override;
 
     public:
         void SetScene(const ScenePtr& scene) override;
         void Enable(bool value);
-        void Update();
+        void FixedUpdate() override;
 
         void OnMouseDown(const SR_UTILS_NS::MouseInputData* data) override;
         void OnMouseUp(const SR_UTILS_NS::MouseInputData* data) override;
@@ -48,26 +49,32 @@ namespace SR_CORE_NS::GUI {
         void OnOpen() override;
         void Draw() override;
 
+        bool UpdateViewSize();
+
         void InitCamera();
         void SetCamera(const GameObjectPtr& camera);
-        void DrawTexture(Helper::Math::IVector2 winSize, Helper::Math::IVector2 texSize, uint32_t id, bool centralize);
-        void DrawImage(ImTextureID user_texture_id, const ImVec2& size, const ImVec2& uv0, const ImVec2& uv1, const ImVec4& tint_col, const ImVec4& border_col, bool imposition);
+        void DrawTexture(SR_MATH_NS::IVector2 winSize, SR_MATH_NS::IVector2 texSize, uint32_t id, bool centralize);
 
     private:
         SR_MATH_NS::IVector2 m_textureSize;
         ImVec2 m_imagePosition;
 
         WindowPtr m_window;
+        EnginePtr m_engine;
 
-        Hierarchy* m_hierarchy = nullptr;
-        Guizmo* m_guizmo = nullptr;
-        int32_t m_id;
-        GameObjectPtr m_camera;
-        SR_WORLD_NS::Scene::Ptr m_scene;
-        std::atomic<bool> m_enabled = false;
+        SR_MATH_NS::FVector3 m_velocity;
         SR_MATH_NS::FVector3 m_rotation;
         SR_MATH_NS::FVector3 m_translation;
+
+        bool m_isPrefab = false;
+        Hierarchy* m_hierarchy = nullptr;
+        Guizmo* m_guizmo = nullptr;
+        int32_t m_id = SR_ID_INVALID;
+        GameObjectPtr m_camera;
+        SR_WORLD_NS::Scene::Ptr m_scene;
+        std::atomic<bool> m_enabled = true;
         bool m_updateNonHoveredSceneViewer = false;
+        SR_MATH_NS::IVector2 m_windowSize;
 
     };
 }

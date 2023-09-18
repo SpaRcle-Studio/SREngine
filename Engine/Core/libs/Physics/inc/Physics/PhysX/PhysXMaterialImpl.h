@@ -22,10 +22,21 @@ namespace SR_PTYPES_NS {
         ~PhysXMaterialImpl() override;
 
     public:
-        bool Init(PhysicsMaterial* pMaterial) override;
+        bool Init() override;
+        bool ReInit();
+        void DeInit() override;
+
+    public:
+        void SetMaterial(PhysicsMaterial* pMaterial) override { m_material = pMaterial; }
+
+    public:
+        SR_NODISCARD void* GetHandle() override { return m_pxMaterial; }
 
     private:
-        physx::PxMaterial* m_material = nullptr;
+        physx::PxMaterial* m_pxMaterial = nullptr;
+        PhysicsMaterial* m_material = nullptr;
+
+        physx::PxPhysics* m_physics = nullptr;
     };
 }
 

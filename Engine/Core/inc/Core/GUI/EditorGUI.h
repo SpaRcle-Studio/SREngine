@@ -2,8 +2,8 @@
 // Created by Nikita on 19.07.2021.
 //
 
-#ifndef GAMEENGINE_EDITORGUI_H
-#define GAMEENGINE_EDITORGUI_H
+#ifndef SR_ENGINE_EDITOR_GUI_H
+#define SR_ENGINE_EDITOR_GUI_H
 
 #include <Utils/Common/Enumerations.h>
 #include <Utils/Types/SafePointer.h>
@@ -26,8 +26,8 @@ namespace SR_GRAPH_NS {
     class RenderContext;
 }
 
-namespace SR_GRAPH_NS::GUI {
-    class FileBrowser;
+namespace SR_CORE_NS {
+    class Engine;
 }
 
 namespace SR_CORE_NS {
@@ -39,14 +39,19 @@ namespace SR_CORE_GUI_NS {
     class Inspector;
     class WorldEdit;
 
-    class EditorGUI : public SR_GRAPH_NS::GUI::WidgetManager {
+    class EditorGUI : public SR_GRAPH_GUI_NS::WidgetManager {
+        using Super = SR_GRAPH_GUI_NS::WidgetManager;
         using Widgets = std::unordered_map<size_t, SR_GRAPH_NS::GUI::Widget*>;
         using Icons = std::map<EditorIcon, SR_GTYPES_NS::Texture*>;
         using RenderContextPtr = SR_HTYPES_NS::SafePtr<SR_GRAPH_NS::RenderContext>;
         using WindowPtr = SR_HTYPES_NS::SafePtr<SR_GRAPH_NS::Window>;
         using ScenePtr = SR_HTYPES_NS::SafePtr<SR_WORLD_NS::Scene>;
+        using EnginePtr = SR_HTYPES_NS::SharedPtr<SR_CORE_NS::Engine>;
+        enum class Click {
+            None, Drag, Miss
+        };
     public:
-        explicit EditorGUI();
+        explicit EditorGUI(const EnginePtr& pEngine);
         ~EditorGUI() override;
 
     public:
@@ -80,17 +85,27 @@ namespace SR_CORE_GUI_NS {
             return nullptr;
         }
 
+        template<typename T> T* OpenWidget() {
+            if (auto&& pWidget = GetWidget<T>()) {
+                pWidget->Open();
+                return pWidget;
+            }
+            return nullptr;
+        }
+
         void CloseAllWidgets();
 
         SR_NODISCARD bool Enabled() const { return m_enabled; }
         SR_NODISCARD bool IsDockingEnabled() const { return m_useDocking; }
-        SR_NODISCARD SR_GTYPES_NS::Texture* GetIcon(EditorIcon icon) const;
         SR_NODISCARD void* GetIconDescriptor(EditorIcon icon) const;
+        SR_NODISCARD SR_GTYPES_NS::Texture* GetIcon(EditorIcon icon) const;
+        SR_NODISCARD EnginePtr GetEngine() const { return m_engine; }
 
         void SetDockingEnabled(bool value) { m_useDocking = value; }
 
         void Draw() override;
-        void Update();
+        void Update(float_t dt);
+        void FixedUpdate();
         void Save();
 
         void CacheScenePath(const SR_UTILS_NS::Path& scenePath);
@@ -111,25 +126,31 @@ namespace SR_CORE_GUI_NS {
         bool Init();
         void Load();
 
+        void DrawDockingSpace();
+        void DrawMenuBar();
+        void DrawWindowPage();
+
     private:
         SR_UTILS_NS::Path m_cachedScenePath;
 
-        RenderContextPtr m_context = { };
-        WindowPtr m_window = { };
+        RenderContextPtr m_context;
+        EnginePtr m_engine;
 
-        std::atomic<bool>    m_isInit     = false;
-        std::atomic<bool>    m_hasErrors  = false;
-        std::atomic<bool>    m_enabled    = false;
-        std::atomic<bool>    m_loaded     = false;
+        Widgets m_widgets;
+        Icons m_icons;
 
-        std::atomic<bool>    m_useDocking = true;
-        std::atomic<bool>    m_dragWindow = false;
+        Click m_click = Click::None;
 
-        Widgets              m_widgets    = { };
-        Icons                m_icons      = { };
+        std::atomic<bool> m_isInit     = false;
+        std::atomic<bool> m_hasErrors  = false;
+        std::atomic<bool> m_enabled    = false;
+        std::atomic<bool> m_loaded     = false;
+
+        std::atomic<bool> m_useDocking = true;
+        std::atomic<bool> m_dragWindow = false;
 
     };
 }
 
-#endif //GAMEENGINE_EDITORGUI_H
+#endif //SR_ENGINE_EDITOR_GUI_H
 

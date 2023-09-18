@@ -20,6 +20,8 @@ namespace SR_PTYPES_NS {
         bool UpdateShape() override;
         bool UpdateMatrix() override;
 
+        physx::PxMaterial* GetMaterial() const;
+
         physx::PxConvexMesh* CreateConvexMesh(SR_HTYPES_NS::RawMesh* pRawMesh);
         physx::PxTriangleMesh* CreateTriangleMesh(SR_HTYPES_NS::RawMesh* pRawMesh);
 

@@ -24,16 +24,16 @@ namespace SR_GTYPES_NS {
     class Texture : public SR_UTILS_NS::IResource, public Memory::IGraphicsResource {
         friend class ::SR_GRAPH_NS::TextureLoader;
         using RenderContextPtr = SR_HTYPES_NS::SafePtr<RenderContext>;
-        using PipelnePtr = Environment*;
+        using Ptr = Texture*;
     private:
         Texture();
         ~Texture() override;
 
     public:
-        static Texture* Load(const std::string& path, const std::optional<Memory::TextureConfig>& config = std::nullopt);
-        static Texture* LoadRaw(const uint8_t* pData, uint64_t bytes, uint64_t h, uint64_t w, const Memory::TextureConfig& config);
-        static Texture* LoadFromMemory(const std::string& data, const Memory::TextureConfig& config);
-        static Texture* LoadFont(Font* pFont);
+        static Texture::Ptr Load(const std::string& path, const std::optional<Memory::TextureConfig>& config = std::nullopt);
+        static Texture::Ptr LoadRaw(const uint8_t* pData, uint64_t bytes, uint64_t h, uint64_t w, const Memory::TextureConfig& config);
+        static Texture::Ptr LoadFromMemory(const std::string& data, const Memory::TextureConfig& config);
+        static Texture::Ptr LoadFont(Font* pFont);
 
     public:
         SR_NODISCARD SR_FORCE_INLINE uint32_t GetWidth() const noexcept { return m_width; }
@@ -43,10 +43,12 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD void* GetDescriptor();
         SR_NODISCARD SR_UTILS_NS::Path GetAssociatedPath() const override;
         SR_NODISCARD uint64_t GetFileHash() const override;
+        SR_NODISCARD bool IsFromMemory() const { return m_fromMemory; }
 
         SR_NODISCARD bool IsAllowedToRevive() const override { return true; }
 
         void FreeVideoMemory() override;
+        void StartWatch() override;
 
         RemoveUPResult RemoveUsePoint() override;
 
@@ -62,7 +64,6 @@ namespace SR_GTYPES_NS {
     private:
         bool                       m_isFont       = false;
         uint8_t*                   m_data         = nullptr;
-        PipelnePtr                 m_pipeline     = nullptr;
 
         int32_t                    m_id           = SR_ID_INVALID;
         uint32_t                   m_width        = 0;

@@ -32,9 +32,9 @@ namespace SR_GTYPES_NS {
         void UseModelMatrix() override;
 
         SR_NODISCARD bool IsSkeletonUsable() const;
-        SR_NODISCARD bool IsCanCalculate() const override;
+        SR_NODISCARD bool IsCalculatable() const override;
         SR_NODISCARD bool ExecuteInEditMode() const override { return true; }
-        SR_NODISCARD SR_FORCE_INLINE bool IsCanUpdate() const noexcept override { return true; }
+        SR_NODISCARD SR_FORCE_INLINE bool IsUpdatable() const noexcept override { return true; }
         SR_NODISCARD std::string GetMeshIdentifier() const override;
         SR_NODISCARD SR_UTILS_NS::EntityRef& GetSkeleton() { return m_skeletonRef; }
         SR_NODISCARD uint32_t GetMaxBones() const;
@@ -55,13 +55,7 @@ namespace SR_GTYPES_NS {
     private:
         SR_UTILS_NS::EntityRef m_skeletonRef;
 
-        bool m_isOffsetsInitialized = false;
         bool m_skeletonIsBroken = false;
-
-        std::vector<uint64_t> m_bonesIds;
-
-        std::vector<SR_MATH_NS::Matrix4x4> m_skeletonMatrices;
-        std::vector<SR_MATH_NS::Matrix4x4> m_skeletonOffsets;
 
     };
 }

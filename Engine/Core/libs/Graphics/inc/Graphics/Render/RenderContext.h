@@ -2,8 +2,8 @@
 // Created by Monika on 13.07.2022.
 //
 
-#ifndef SRENGINE_RENDERCONTEXT_H
-#define SRENGINE_RENDERCONTEXT_H
+#ifndef SR_ENGINE_GRAPHICS_RENDER_CONTEXT_H
+#define SR_ENGINE_GRAPHICS_RENDER_CONTEXT_H
 
 #include <Utils/World/Scene.h>
 #include <Utils/Math/Vector2.h>
@@ -11,6 +11,7 @@
 
 #include <Graphics/Render/MeshCluster.h>
 #include <Graphics/Memory/IGraphicsResource.h>
+#include <Graphics/Pipeline/PipelineType.h>
 
 namespace SR_GTYPES_NS {
     class Framebuffer;
@@ -24,7 +25,7 @@ namespace SR_GRAPH_NS {
     class Window;
     class RenderScene;
     class RenderTechnique;
-    class Environment;
+    class Pipeline;
 
     SR_ENUM_NS_CLASS_T(RCUpdateQueueState, uint8_t,
        Begin = 0,
@@ -34,6 +35,7 @@ namespace SR_GRAPH_NS {
        Techniques,
        Materials,
        Skyboxes,
+       ShadersGC,
        End
     );
 
@@ -44,7 +46,7 @@ namespace SR_GRAPH_NS {
      */
     class RenderContext : public SR_HTYPES_NS::SafePtr<RenderContext> {
         using RenderScenePtr = SR_HTYPES_NS::SafePtr<RenderScene>;
-        using PipelinePtr = Environment*;
+        using PipelinePtr = SR_HTYPES_NS::SharedPtr<SR_GRAPH_NS::Pipeline>;
         using Super = SR_HTYPES_NS::SafePtr<RenderContext>;
         using MaterialPtr = SR_GTYPES_NS::Material*;
         using TexturePtr = SR_GTYPES_NS::Texture*;
@@ -53,9 +55,10 @@ namespace SR_GRAPH_NS {
         using CameraPtr = SR_GTYPES_NS::Camera*;
         using ShaderPtr = SR_GTYPES_NS::Shader*;
         using WindowPtr = SR_HTYPES_NS::SafePtr<Window>;
+        using RenderScenes = std::list<std::pair<SR_WORLD_NS::Scene::Ptr, RenderScenePtr>>;
     public:
         explicit RenderContext(const WindowPtr& pWindow);
-        virtual ~RenderContext() = default;
+        virtual ~RenderContext();
 
     public:
         void UpdateFramebuffers();
@@ -73,9 +76,9 @@ namespace SR_GRAPH_NS {
     public:
         RenderScenePtr CreateScene(const SR_WORLD_NS::Scene::Ptr& scene);
 
-        void Register(FramebufferPtr pFramebuffer);
-        void Register(Types::Shader* pShader);
-        void Register(Types::Texture* pTexture);
+        void Register(FramebufferPtr pFrameBuffer);
+        void Register(SR_GTYPES_NS::Shader* pShader);
+        void Register(SR_GTYPES_NS::Texture* pTexture);
         void Register(RenderTechnique* pTechnique);
         void Register(MaterialPtr pMaterial);
         void Register(SkyboxPtr pSkybox);
@@ -92,10 +95,18 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD FramebufferPtr FindFramebuffer(const std::string& name, CameraPtr pCamera) const;
         SR_NODISCARD SR_MATH_NS::UVector2 GetWindowSize() const;
         SR_NODISCARD const std::vector<SR_GTYPES_NS::Shader*>& GetShaders() const noexcept;
+        SR_NODISCARD const std::vector<SR_GTYPES_NS::Framebuffer*>& GetFramebuffers() const noexcept;
+        SR_NODISCARD const std::vector<SR_GTYPES_NS::Texture*>& GetTextures() const noexcept;
+        SR_NODISCARD const std::vector<RenderTechnique*>& GetRenderTechniques() const noexcept;
+        SR_NODISCARD const std::vector<SR_GTYPES_NS::Material*>& GetMaterials() const noexcept;
+        SR_NODISCARD const std::vector<SR_GTYPES_NS::Skybox*>& GetSkyboxes() const noexcept;
+        SR_NODISCARD const RenderScenes& GetScenes() const noexcept { return m_scenes; }
 
         void SetCurrentShader(ShaderPtr pShader);
 
     private:
+        bool InitPipeline();
+
         template<typename T> bool RegisterResource(T* pResource) {
             if (auto&& pGraphicsResource = dynamic_cast<Memory::IGraphicsResource*>(pResource)) {
                 if (pGraphicsResource->GetRenderContext()) {
@@ -122,7 +133,7 @@ namespace SR_GRAPH_NS {
         std::vector<MaterialPtr> m_materials;
         std::vector<SkyboxPtr> m_skyboxes;
 
-        std::list<std::pair<SR_WORLD_NS::Scene::Ptr, RenderScenePtr>> m_scenes;
+        RenderScenes m_scenes;
 
         WindowPtr m_window;
 
@@ -131,19 +142,20 @@ namespace SR_GRAPH_NS {
         TexturePtr m_noneTexture = nullptr;
 
         PipelinePtr m_pipeline = nullptr;
-        PipelineType m_pipelineType = PipelineType::Unknown;
 
     };
 
     /// ------------------------------------------------------------------------------
 
     template<typename T> bool RenderContext::Update(T& resourceList) noexcept {
+        SR_TRACY_ZONE;
+        
         bool dirty = false;
 
         for (auto pIt = std::begin(resourceList); pIt != std::end(resourceList); ) {
             auto&& pResource = *pIt;
 
-            const bool removed = pResource->TryExecute([&]() -> bool {
+            const bool removed = pResource->Execute([&]() -> bool {
                 if (pResource->GetCountUses() == 1) {
                     SRAssert(pResource->GetContainerParents().empty());
 
@@ -161,7 +173,7 @@ namespace SR_GRAPH_NS {
                 }
 
                 return false;
-            }, false);
+            });
 
             if (!removed) {
                 ++pIt;
@@ -172,4 +184,4 @@ namespace SR_GRAPH_NS {
     }
 }
 
-#endif //SRENGINE_RENDERCONTEXT_H
+#endif //SR_ENGINE_GRAPHICS_RENDER_CONTEXT_H

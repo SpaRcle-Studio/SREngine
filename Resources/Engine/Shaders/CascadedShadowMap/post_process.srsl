@@ -1,0 +1,33 @@
+ShaderType PostProcessing;
+
+PolygonMode Fill;
+CullMode Back;
+DepthCompare LessOrEqual;
+PrimitiveTopology TriangleList;
+BlendEnabled false;
+DepthWrite false;
+DepthTest false;
+
+[[uniform]] sampler2D gAlbedo;
+
+[[shared]] vec2 uv;
+
+[[const]] float LightLinear = 0.09;
+[[const]] float LightQuadratic = 0.032;
+[[const]] vec3 LightPosition = vec3(2.0, 4.0, -2.0);
+[[const]] vec3 LightColor = vec3(0.2, 0.2, 0.2);
+
+void fragment() {
+    vec4 albedo = texture(gAlbedo, uv);
+
+    /// vignette
+    float r = length(uv - 0.5);
+    albedo.rgb *= smoothstep(r - 0.65, r + 0.1, 0.5);
+
+    COLOR_INDEX_0 = albedo;
+}
+
+void vertex() {
+    uv = vec2((VERTEX_INDEX << 1) & 2, VERTEX_INDEX & 2);
+    OUT_POSITION = vec4(uv * 2.0 - 1.0, 0.0, 1.0);
+}

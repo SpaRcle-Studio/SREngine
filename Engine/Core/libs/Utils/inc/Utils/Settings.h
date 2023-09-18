@@ -28,7 +28,7 @@ namespace SR_UTILS_NS {
     class SR_DLL_EXPORT Settings : public IResource {
     protected:
         Settings()
-            : IResource(SR_COMPILE_TIME_CRC32_TYPE_NAME(Settings), true /** auto remove */)
+            : IResource(SR_COMPILE_TIME_CRC32_TYPE_NAME(Settings))
         { }
 
         ~Settings() override = default;
@@ -62,12 +62,16 @@ namespace SR_UTILS_NS {
                 return;
             }
 
-            if (!Singleton<T>::Instance().IsRegistered()) {
+            auto&& pSettings = &Singleton<T>::Instance();
+
+            GetSingletonManager()->Remove(Singleton<T>::GetSingletonId());
+
+            if (!pSettings->IsRegistered()) {
                 return;
             }
 
-            if (Singleton<T>::Instance().RemoveUsePoint() == IResource::RemoveUPResult::Success) {
-                Singleton<T>::Instance().ForceDestroy();
+            if (pSettings->RemoveUsePoint() == IResource::RemoveUPResult::Success) {
+                pSettings->ForceDestroy();
             }
 
             /// Форсированно уничтожаем этот ресурс, чтобы не ждать пока закончится время жизни

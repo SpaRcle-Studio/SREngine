@@ -10,7 +10,9 @@ namespace SR_SRSL_NS {
 
         m_lexems = SR_UTILS_NS::Exchange(lexems, { });
 
-        ProcessMain();
+        while (InBounds() && !IsHasErrors()) {
+            ProcessMain();
+        }
 
         return std::make_pair(SR_UTILS_NS::Exchange(m_lexems, { }), std::move(m_result));
     }
@@ -18,7 +20,7 @@ namespace SR_SRSL_NS {
     void SRSLAssignExpander::Clear() {
         m_currentLexem = 0;
         m_lexems.clear();
-        m_result = SRSLResult(SRSLReturnCode::Success);
+        m_result = SRSLResult();
     }
 
     const Lexem* SRSLAssignExpander::GetLexem(int64_t offset) const {
@@ -34,7 +36,7 @@ namespace SR_SRSL_NS {
     }
 
     bool SRSLAssignExpander::IsHasErrors() const noexcept {
-        return m_result.code != SRSLReturnCode::Success;
+        return m_result.HasErrors();
     }
 
     const Lexem* SRSLAssignExpander::GetCurrentLexem() const {
@@ -42,49 +44,47 @@ namespace SR_SRSL_NS {
     }
 
     void SRSLAssignExpander::ProcessMain() {
-        while (InBounds() && m_result.code == SRSLReturnCode::Success) {
-            switch (m_lexems[m_currentLexem].kind) {
-                case LexemKind::Plus:
-                case LexemKind::Minus:
-                case LexemKind::Multiply:
-                case LexemKind::Divide:
-                case LexemKind::Tilda:
-                case LexemKind::Percent:
-                case LexemKind::Exponentiation: {
-                    if (auto&& pNext = GetLexem(1); pNext && pNext->kind == LexemKind::Assign) {
-                        ExpandDouble();
-                        continue;
-                    }
-                    ++m_currentLexem;
-                    break;
+        switch (m_lexems[m_currentLexem].kind) {
+            case LexemKind::Plus:
+            case LexemKind::Minus:
+            case LexemKind::Multiply:
+            case LexemKind::Divide:
+            case LexemKind::Tilda:
+            case LexemKind::Percent:
+            case LexemKind::Exponentiation: {
+                if (auto&& pNext = GetLexem(1); pNext && pNext->kind == LexemKind::Assign) {
+                    ExpandDouble();
+                    return;
                 }
-
-                case LexemKind::OpeningAngleBracket: {
-                    if (auto&& pNext = GetLexem(1); pNext && pNext->kind == LexemKind::OpeningAngleBracket) {
-                        if (auto&& pNextNext = GetLexem(2); pNextNext && pNextNext->kind == LexemKind::Assign) {
-                            ExpandTriple();
-                            continue;
-                        }
-                    }
-                    ++m_currentLexem;
-                    break;
-                }
-
-                case LexemKind::ClosingAngleBracket: {
-                    if (auto&& pNext = GetLexem(1); pNext && pNext->kind == LexemKind::ClosingAngleBracket) {
-                        if (auto&& pNextNext = GetLexem(2); pNextNext && pNextNext->kind == LexemKind::Assign) {
-                            ExpandTriple();
-                            continue;
-                        }
-                    }
-                    ++m_currentLexem;
-                    break;
-                }
-
-                default:
-                    ++m_currentLexem;
-                    break;
+                ++m_currentLexem;
+                break;
             }
+
+            case LexemKind::OpeningAngleBracket: {
+                if (auto&& pNext = GetLexem(1); pNext && pNext->kind == LexemKind::OpeningAngleBracket) {
+                    if (auto&& pNextNext = GetLexem(2); pNextNext && pNextNext->kind == LexemKind::Assign) {
+                        ExpandTriple();
+                        return;
+                    }
+                }
+                ++m_currentLexem;
+                break;
+            }
+
+            case LexemKind::ClosingAngleBracket: {
+                if (auto&& pNext = GetLexem(1); pNext && pNext->kind == LexemKind::ClosingAngleBracket) {
+                    if (auto&& pNextNext = GetLexem(2); pNextNext && pNextNext->kind == LexemKind::Assign) {
+                        ExpandTriple();
+                        return;
+                    }
+                }
+                ++m_currentLexem;
+                break;
+            }
+
+            default:
+                ++m_currentLexem;
+                break;
         }
     }
 
@@ -92,22 +92,41 @@ namespace SR_SRSL_NS {
         auto&& lexems = GetLeftSide();
 
         if (lexems.empty()) {
+            m_result.AddError(SRSLReturnCode::UnexceptedError);
             SRHalt0();
             return;
         }
 
-        m_lexems.insert(m_lexems.begin() + m_currentLexem + 2, Lexem(GetCurrentLexem()->offset, 1, LexemKind::OpeningBracket, "("));
+        m_lexems.insert(m_lexems.begin() + m_currentLexem + 2,
+            Lexem(
+                GetCurrentLexem()->offset,
+                1,
+                LexemKind::OpeningBracket,
+                "(",
+                GetCurrentLexem()->fileIndex
+            )
+        );
 
         std::swap(m_lexems[m_currentLexem], m_lexems[m_currentLexem + 1]);
         m_lexems.insert(m_lexems.begin() + m_currentLexem + 1, lexems.begin(), lexems.end());
 
         const uint64_t semicolon = FindSemicolon();
+
         if (semicolon < m_lexems.size()) {
-            m_lexems.insert(m_lexems.begin() + semicolon, Lexem(GetCurrentLexem()->offset, 1, LexemKind::ClosingBracket, ")"));
+            m_lexems.insert(m_lexems.begin() + semicolon,
+                Lexem(
+                    GetCurrentLexem()->offset,
+                    1,
+                    LexemKind::ClosingBracket,
+                    ")",
+                    GetCurrentLexem()->fileIndex
+                )
+            );
         }
     }
 
     void SRSLAssignExpander::ExpandTriple() {
+        m_result.AddError(SRSLReturnCode::UnexceptedError);
         SRHalt("TODO!");
     }
 

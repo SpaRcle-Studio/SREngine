@@ -7,64 +7,14 @@
 
 #include <Core/GUI/Guizmo.h>
 
-namespace SR_CORE_NS::GUI {
+namespace SR_CORE_GUI_NS {
+    Guizmo::Guizmo(const EnginePtr& pEngine)
+        : SR_UTILS_NS::InputHandler()
+        , m_engine(pEngine)
+    { }
+
     Guizmo::~Guizmo() {
         SR_SAFE_DELETE_PTR(m_marshal)
-    }
-
-    void Guizmo::DrawTools() {
-        ImGui::PushStyleVar(ImGuiStyleVar_ChildRounding, 0);
-        ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0);
-        ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 0);
-        ImGui::PushStyleVar(ImGuiStyleVar_FrameBorderSize, 0);
-        ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0, 0));
-
-        const ImVec4 activeColor = ImVec4(0.20, 0.35, 0.20, 1);
-        const ImVec4 notActiveColor = ImVec4(0.25, 0.25, 0.25, 1);
-        const ImVec4 toggleActiveColor = ImVec4(0.60, 0.50, 0.25, 1);
-        const ImVec4 toggleNotActiveColor = ImVec4(0.32, 0.28, 0.25, 1);
-
-        if (ImGui::BeginChild("GuizmoTools", ImVec2(0, 20))) {
-            if (SR_GRAPH_NS::GUI::Button("T", IsTranslate() ? activeColor : notActiveColor))
-                SetOperation(ImGuizmo::OPERATION::TRANSLATE);
-
-            ImGui::SameLine();
-
-            if (SR_GRAPH_NS::GUI::Button("R", IsRotate() ? activeColor : notActiveColor))
-                SetOperation(ImGuizmo::OPERATION::ROTATE);
-
-            ImGui::SameLine();
-
-            if (SR_GRAPH_NS::GUI::Button(IsBounds() ? "S+" : "S", (IsScale() || IsBounds()) ? activeColor : notActiveColor)) {
-                if (IsScale())
-                    SetOperation(ImGuizmo::OPERATION::BOUNDS);
-                else
-                    SetOperation(ImGuizmo::OPERATION::SCALE);
-            }
-
-            ImGui::SameLine();
-
-            if (SR_GRAPH_NS::GUI::Button("U", IsUniversal() ? activeColor : notActiveColor))
-                SetOperation(ImGuizmo::OPERATION::UNIVERSAL);
-
-            ImGui::SameLine();
-
-            if (SR_GRAPH_NS::GUI::Button("L", IsLocal() ? toggleActiveColor : toggleNotActiveColor)) {
-                if (IsLocal())
-                    SetMode(ImGuizmo::MODE::WORLD);
-                else
-                    SetMode(ImGuizmo::MODE::LOCAL);
-            }
-
-            ImGui::SameLine();
-
-            if (SR_GRAPH_NS::GUI::Button("C", IsCenter() ? toggleActiveColor : toggleNotActiveColor))
-                m_center = !m_center;
-
-            ImGui::EndChild();
-        }
-
-        ImGui::PopStyleVar(5);
     }
 
     void Guizmo::Draw(const Guizmo::GameObjectPtr& gameObject, const Guizmo::GameObjectPtr& camera) {
@@ -105,6 +55,88 @@ namespace SR_CORE_NS::GUI {
         camera.Unlock();
     }
 
+    void Guizmo::DrawTools() {
+        ImGui::PushStyleVar(ImGuiStyleVar_ChildRounding, 0);
+        ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0);
+        ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 0);
+        ImGui::PushStyleVar(ImGuiStyleVar_FrameBorderSize, 0);
+        ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0, 0));
+
+        const ImVec4 activeColor = ImVec4(0.20, 0.35, 0.20, 1);
+        const ImVec4 notActiveColor = ImVec4(0.25, 0.25, 0.25, 1);
+        const ImVec4 toggleActiveColor = ImVec4(0.60, 0.50, 0.25, 1);
+        const ImVec4 toggleNotActiveColor = ImVec4(0.32, 0.28, 0.25, 1);
+
+        if (ImGui::BeginChild("GuizmoTools", ImVec2(0, 20))) {
+            if (SR_GRAPH_NS::GUI::Button("T", IsTranslate() && m_active ? activeColor : notActiveColor))
+                SetOperation(ImGuizmo::OPERATION::TRANSLATE);
+
+            ImGui::SameLine();
+            if (SR_GRAPH_NS::GUI::Button("R", IsRotate() && m_active ? activeColor : notActiveColor))
+                SetOperation(ImGuizmo::OPERATION::ROTATE);
+
+            ImGui::SameLine();
+            if (SR_GRAPH_NS::GUI::Button(IsBounds() && m_active ? "S+" : "S", ((IsScale() || IsBounds()) && m_active) ? activeColor : notActiveColor)) {
+                if (IsScale())
+                    SetOperation(ImGuizmo::OPERATION::BOUNDS);
+                else
+                    SetOperation(ImGuizmo::OPERATION::SCALE);
+            }
+
+            ImGui::SameLine();
+            if (SR_GRAPH_NS::GUI::Button("U", IsUniversal() && m_active ? activeColor : notActiveColor))
+                SetOperation(ImGuizmo::OPERATION::UNIVERSAL);
+
+            ImGui::SameLine();
+            if (SR_GRAPH_NS::GUI::Button("L", IsLocal() ? toggleActiveColor : toggleNotActiveColor)) {
+                if (IsLocal())
+                    SetMode(ImGuizmo::MODE::WORLD);
+                else
+                    SetMode(ImGuizmo::MODE::LOCAL);
+            }
+
+            ImGui::SameLine();
+            if (SR_GRAPH_NS::GUI::Button("C", IsCenter() ? toggleActiveColor : toggleNotActiveColor))
+                m_center = !m_center;
+
+            ImGui::SameLine();
+
+            ImGui::SameLine();
+            ImGui::Text(" [ Camera Speed ] ");
+
+            ImGui::SameLine();
+            ImGui::PushItemWidth(200.f);
+            ImGui::SliderFloat("##", &m_cameraVelocityFactor, 0.01f, 10.f);
+            ImGui::PopItemWidth();
+
+            ImGui::SameLine();
+
+            ImGui::Text(" | ");
+
+            ImGui::SameLine();
+
+            ImGui::PushItemWidth(150.f);
+
+            if (ImGui::BeginCombo("View Mode", SR_UTILS_NS::EnumReflector::ToString(m_viewMode).c_str())) {
+                auto&& names = SR_UTILS_NS::EnumReflector::GetNames<EditorSceneViewMode>();
+                for (auto&& name : names) {
+                    if (ImGui::Selectable(name.c_str())) {
+                        ImGui::SetItemDefaultFocus();
+                        m_viewMode = SR_UTILS_NS::EnumReflector::FromString<EditorSceneViewMode>(name);
+                    }
+                }
+
+                ImGui::EndCombo();
+            }
+
+            ImGui::PopItemWidth();
+
+            ImGui::EndChild();
+        }
+
+        ImGui::PopStyleVar(5);
+    }
+
     void Guizmo::DrawManipulation(SR_GRAPH_NS::Types::Camera* camera) {
         if (!m_transform) {
             return;
@@ -135,14 +167,14 @@ namespace SR_CORE_NS::GUI {
         )) {
             if (!IsUse()) {
                 SR_SAFE_DELETE_PTR(m_marshal)
-                m_marshal = m_transform->Save(nullptr, SR_UTILS_NS::SavableFlagBits::SAVABLE_FLAG_NONE);
+                m_marshal = m_transform->Save(SR_UTILS_NS::SavableFlagBits::SAVABLE_FLAG_NONE);
                 m_isUse = true;
             }
         }
         else {
             if (IsUse() && SR_UTILS_NS::Input::Instance().GetMouseUp(SR_UTILS_NS::MouseCode::MouseLeft)) {
-                auto&& cmd = new Framework::Core::Commands::GameObjectTransform(m_transform->GetGameObject(), m_marshal->CopyPtr());
-                Engine::Instance().GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
+                auto&& cmd = new SR_CORE_NS::Commands::GameObjectTransform(m_engine, m_transform->GetGameObject(), m_marshal->CopyPtr());
+                m_engine->GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
 
                 SR_SAFE_DELETE_PTR(m_marshal)
                 m_isUse = false;
@@ -230,10 +262,11 @@ namespace SR_CORE_NS::GUI {
 
     void Guizmo::OnKeyDown(const SR_UTILS_NS::KeyboardInputData* data) {
         switch (data->GetKeyCode()) {
-            case Helper::KeyCode::Q: m_active = false; break;
-            case Helper::KeyCode::W: SetOperation(ImGuizmo::OPERATION::TRANSLATE); break;
-            case Helper::KeyCode::E: SetOperation(ImGuizmo::OPERATION::ROTATE); break;
-            case Helper::KeyCode::R: SetOperation(ImGuizmo::OPERATION::SCALE); break;
+            case SR_UTILS_NS::KeyCode::_1: m_active = false; break;
+            case SR_UTILS_NS::KeyCode::_2: SetOperation(ImGuizmo::OPERATION::TRANSLATE); break;
+            case SR_UTILS_NS::KeyCode::_3: SetOperation(ImGuizmo::OPERATION::ROTATE); break;
+            case SR_UTILS_NS::KeyCode::_4: SetOperation(ImGuizmo::OPERATION::SCALE); break;
+            case SR_UTILS_NS::KeyCode::_5: SetOperation(ImGuizmo::OPERATION::UNIVERSAL); break;
             default:
                 break;
         }

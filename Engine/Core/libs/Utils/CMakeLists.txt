@@ -29,7 +29,7 @@ if (SR_TRACY_ENABLE)
 endif()
 
 if (SR_UTILS_STATIC_LIBRARY)
-    add_library(Utils STATIC ICU.cxx Utils.cxx ECS.cxx)
+    add_library(Utils STATIC ICU.cxx Utils.cxx ECS.cxx World.cxx)
 
     if (CYGWIN)
 
@@ -37,7 +37,7 @@ if (SR_UTILS_STATIC_LIBRARY)
 
     endif()
 else()
-    add_library(Utils SHARED ICU.cxx Utils.cxx ECS.cxx)
+    add_library(Utils SHARED ICU.cxx Utils.cxx ECS.cxx World.cxx)
     add_library(Utils::lib ALIAS Utils)
 endif()
 
@@ -58,25 +58,12 @@ endif()
 target_include_directories(Utils PUBLIC inc)
 target_include_directories(Utils PUBLIC libs)
 target_include_directories(Utils PUBLIC libs/assimp/include)
-
-# --------------------------------------------------------------------------------------
-
-list(APPEND SR_UTILS_ALL_HEADERS inc/Utils/)
-
-foreach(SR_UTILS_HEADER ${SR_UTILS_ALL_HEADERS})
-    file(COPY ${SR_UTILS_HEADER} DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/include/Utils)
-endforeach()
+target_include_directories(Utils PUBLIC libs/glm)
 
 # --------------------------------------------------------------------------------------
 
 if (SR_ICU)
     target_include_directories(Utils PUBLIC ${CMAKE_CURRENT_BINARY_DIR}/include/icu)
-
-    list(APPEND SR_UTILS_ICU_ALL_HEADERS libs/icu)
-
-    foreach(SR_UTILS_ICU_HEADER ${SR_UTILS_ICU_ALL_HEADERS})
-        file(COPY ${SR_UTILS_ICU_HEADER} DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/include)
-    endforeach()
 endif()
 
 # --------------------------------------------------------------------------------------
@@ -84,10 +71,25 @@ endif()
 if (SR_TRACY_ENABLE)
     target_include_directories(Utils PUBLIC ${CMAKE_CURRENT_BINARY_DIR}/include/tracy/tracy)
     target_include_directories(Utils PUBLIC libs/tracy/tracy)
-
-    list(APPEND SR_UTILS_TRACY_ALL_HEADERS libs/tracy)
-
-    foreach(SR_UTILS_TRACY_HEADER ${SR_UTILS_TRACY_ALL_HEADERS})
-        file(COPY ${SR_UTILS_TRACY_HEADER} DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/include)
-    endforeach()
 endif()
+
+# --------------------------------------------------------------------------------------
+
+set(SR_UTILS_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR})
+set(SR_UTILS_BINARY_DIR ${CMAKE_CURRENT_BINARY_DIR})
+
+include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/CopyFiles.cmake)
+
+add_custom_target(CopyUtilsFiles)
+add_custom_command(TARGET CopyUtilsFiles
+    PRE_BUILD
+    COMMAND ${CMAKE_COMMAND}
+        -DSR_UTILS_SOURCE_DIR=${SR_UTILS_SOURCE_DIR}
+        -DSR_UTILS_BINARY_DIR=${SR_UTILS_BINARY_DIR}
+        -DSR_ICU=${SR_ICU}
+        -DSR_TRACY_ENABLE=${SR_TRACY_ENABLE}
+        -P "${CMAKE_CURRENT_SOURCE_DIR}/cmake/CopyFiles.cmake"
+    COMMENT "SpaRcle Engine: Copy utils source files to build directory"
+)
+
+add_dependencies(${PROJECT_NAME} CopyUtilsFiles)

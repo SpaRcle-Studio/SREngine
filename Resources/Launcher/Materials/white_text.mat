@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<Material ReadOnly="false">
+    <Shader Path="Engine/Shaders/ui_text.srsl"/>
+    <Properties>
+        <Property Id="color" Type="Vec3" X="0.8" Y="0.8" Z="0.8"/>
+    </Properties>
+</Material>

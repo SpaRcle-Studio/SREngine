@@ -35,6 +35,8 @@ namespace SR_CORE_NS {
 
         SRAssert(pScene);
 
+        m_accumulateDt = SR_UTILS_NS::Features::Instance().Enabled("AccumulateDt", true);
+
         if (SR_UTILS_NS::Features::Instance().Enabled("Renderer", true)) {
             if (auto&& pContext = pEngine->GetRenderContext(); pContext.LockIfValid()) {
                 pRenderScene = pContext->CreateScene(pScene);
@@ -101,6 +103,13 @@ namespace SR_CORE_NS {
             pSceneBuilder->Build(isPaused);
             pSceneBuilder->Update(dt);
 
+            if (m_accumulateDt) {
+                m_accumulator += dt;
+            }
+            else {
+                m_accumulator += SR_MIN(dt, m_updateFrequency);
+            }
+
             /// fixed update
             if (m_accumulator >= m_updateFrequency)
             {
@@ -118,9 +127,6 @@ namespace SR_CORE_NS {
                     m_accumulator -= m_updateFrequency;
                 }
             }
-
-            /// если по какой-то причине получилось так, что dt большой, то обновляем максимум 120 раз
-            m_accumulator += SR_MIN(dt, m_updateFrequency * 120);
 
             pScene.Unlock();
         }
@@ -155,7 +161,7 @@ namespace SR_CORE_NS {
 
     void EngineScene::SetSpeed(float_t speed) {
         m_speed = speed;
-        m_updateFrequency = (1.f / (60.f * m_speed)) * SR_CLOCKS_PER_SEC;
+        m_updateFrequency = (1.f / (60.f * m_speed));
         m_accumulator = m_updateFrequency;
     }
 
@@ -164,13 +170,9 @@ namespace SR_CORE_NS {
     }
 
     void EngineScene::UpdateMainCamera() {
-        pMainCamera = pRenderScene.Do<CameraPtr>([](SR_GRAPH_NS::RenderScene* ptr) -> CameraPtr {
-            if (auto&& pCamera = ptr->GetMainCamera()) {
-                return pCamera;
-            }
-
-            return ptr->GetFirstOffScreenCamera();
-        }, nullptr);
+        pMainCamera = pRenderScene.Do<SR_GTYPES_NS::Camera::Ptr>([](SR_GRAPH_NS::RenderScene* ptr) -> SR_GTYPES_NS::Camera::Ptr {
+            return ptr->GetMainCamera();
+        }, SR_GTYPES_NS::Camera::Ptr());
     }
 
     void EngineScene::SetActive(bool active) {

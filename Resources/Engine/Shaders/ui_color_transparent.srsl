@@ -1,0 +1,23 @@
+ShaderType Canvas;
+
+PolygonMode Fill;
+CullMode None;
+DepthCompare LessOrEqual;
+PrimitiveTopology TriangleList;
+BlendEnabled true;
+DepthWrite false;
+DepthTest true;
+
+[[uniform], [public]] vec4 color;
+
+void fragment() {
+	COLOR = color;
+
+    if (COLOR.a == 0) {
+        discard;
+    }
+}
+
+void vertex() {
+    OUT_POSITION = ORTHOGONAL_MATRIX * MODEL_MATRIX * vec4(VERTEX, 1.0);
+}

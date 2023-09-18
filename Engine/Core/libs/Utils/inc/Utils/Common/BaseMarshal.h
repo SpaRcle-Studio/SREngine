@@ -67,7 +67,7 @@ namespace SR_UTILS_NS {
                 stream.write((const char *) &value, sizeof(T));
             }
             else {
-                SR_STATIC_ASSERT("Unsupported type!");
+                SRHalt("Unsupported type!");
             }
         }
 
@@ -126,7 +126,7 @@ namespace SR_UTILS_NS {
                 stream.read((char*)&value, sizeof(T));
             }
             else {
-                SR_STATIC_ASSERT("Unsupported type!");
+                SRHalt("Unsupported type!");
             }
 
             return value;
@@ -212,10 +212,36 @@ namespace SR_UTILS_NS {
             stream.read((char*)&size, sizeof(size_t));
             SRAssert(size < SR_UINT16_MAX);
             if (size >= SR_UINT16_MAX) {
-                return std::string();
+                return std::string(); /// NOLINT
             }
             str.resize(size);
             stream.read((char*)&str[0], size * sizeof(char));
+            return str;
+        }
+
+        static std::string SR_FASTCALL TryLoadShortStr(SR_HTYPES_NS::Stream& stream) {
+            std::string str;
+            uint16_t size;
+            stream.TryRead((char*)&size, sizeof(uint16_t));
+            SRAssert(size < SR_UINT16_MAX);
+            if (size >= SR_UINT16_MAX) {
+                return str;
+            }
+            str.resize(size);
+            stream.TryRead((char*)&str[0], size * sizeof(char));
+            return str;
+        }
+
+        static SR_HTYPES_NS::UnicodeString SR_FASTCALL TryLoadUnicodeString(SR_HTYPES_NS::Stream& stream) {
+            SR_HTYPES_NS::UnicodeString str;
+            uint16_t size;
+            stream.TryRead((char*)&size, sizeof(uint16_t));
+            SRAssert(size < SR_UINT16_MAX);
+            if (size >= SR_UINT16_MAX) {
+                return str;
+            }
+            str.resize(size);
+            stream.TryRead((char*)&str[0], size * sizeof(SR_HTYPES_NS::UnicodeString::CharType));
             return str;
         }
     }

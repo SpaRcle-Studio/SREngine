@@ -48,20 +48,12 @@ namespace SR_UTILS_NS {
         return pMarshal;
     }
 
-    Component* IComponentable::GetComponent(const std::string& name) {
-        return GetComponent(SR_HASH_STR(name));
-    }
-
-    bool IComponentable::ContainsComponent(const std::string& name) {
-        return GetComponent(name);
-    }
-
-    Component* IComponentable::GetOrCreateComponent(const std::string& name) {
-        if (auto&& pComponent = GetComponent(name)) {
+    Component* IComponentable::GetOrCreateComponent(size_t hashName) {
+        if (auto&& pComponent = GetComponent(hashName)) {
             return pComponent;
         }
 
-        if (auto&& pComponent = ComponentManager::Instance().CreateComponentOfName(name)) {
+        if (auto&& pComponent = ComponentManager::Instance().CreateComponentOfName(hashName)) {
             if (AddComponent(pComponent)) {
                 return pComponent;
             }
@@ -71,6 +63,18 @@ namespace SR_UTILS_NS {
         }
 
         return nullptr;
+    }
+
+    Component* IComponentable::GetComponent(const std::string& name) {
+        return GetComponent(SR_HASH_STR(name));
+    }
+
+    bool IComponentable::ContainsComponent(const std::string& name) {
+        return GetComponent(name);
+    }
+
+    Component* IComponentable::GetOrCreateComponent(const std::string& name) {
+        return GetOrCreateComponent(SR_HASH_STR(name));
     }
 
     Component* IComponentable::GetComponent(size_t hashName) {
@@ -101,6 +105,7 @@ namespace SR_UTILS_NS {
 
         m_loadedComponents.emplace_back(pComponent);
 
+        pComponent->SetParent(this);
         pComponent->OnLoaded();
 
         /// pComponent->OnAttached();
@@ -222,6 +227,8 @@ namespace SR_UTILS_NS {
     }
 
     void IComponentable::DestroyComponents() {
+        SR_TRACY_ZONE;
+
         for (uint32_t i = 0; i < m_components.size(); ++i) {
             auto&& pComponent = m_components[i];
             DestroyComponent(pComponent);

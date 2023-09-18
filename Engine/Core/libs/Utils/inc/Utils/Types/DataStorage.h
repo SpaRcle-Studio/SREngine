@@ -6,6 +6,7 @@
 #define SRENGINE_DATASTORAGE_H
 
 #include <Utils/Common/NonCopyable.h>
+#include <Utils/Common/HashManager.h>
 #include <Utils/Debug.h>
 
 namespace SR_HTYPES_NS {
@@ -54,6 +55,8 @@ namespace SR_HTYPES_NS {
         template<typename T> bool RemoveValue();
         template<typename T> bool RemoveValue(const std::string& name);
 
+        template<typename T> std::vector<std::pair<std::string, T>> GetValues();
+
         void Clear() {
             m_pointers.clear();
             m_values.clear();
@@ -80,68 +83,68 @@ namespace SR_HTYPES_NS {
 
     /// ----------------------------------------------------------------------------------------------------------------
 
-    template<typename T> void DataStorage::SetPointer(const std::string &name, T *pointer) {
-        SetPointer(SR_RUNTIME_TIME_CRC32_STD_STR(name), pointer);
+    template<typename T> void DataStorage::SetPointer(const std::string& name, T* pPointer) {
+        SetPointer(SR_HASH_STR_REGISTER(name), pPointer);
     }
 
-    template<typename T> void DataStorage::SetPointer(T *pointer) {
-        SetPointer(SR_COMPILE_TIME_CRC32_TYPE_NAME(T), pointer);
+    template<typename T> void DataStorage::SetPointer(T* pPointer) {
+        SetPointer(SR_HASH_TYPE_NAME_STR_REGISTER(T), pPointer);
     }
 
-    template<typename T> T *DataStorage::GetPointer(const std::string &name) const  {
-        return GetPointer<T>(SR_RUNTIME_TIME_CRC32_STD_STR(name));
+    template<typename T> T *DataStorage::GetPointer(const std::string& name) const  {
+        return GetPointer<T>(SR_HASH_STR_REGISTER(name));
     }
 
     template<typename T> T *DataStorage::GetPointer() const {
-        return GetPointer<T>(SR_COMPILE_TIME_CRC32_TYPE_NAME(T));
+        return GetPointer<T>(SR_HASH_TYPE_NAME_STR_REGISTER(T));
     }
 
     template<typename T> void DataStorage::SetValue(const std::string &name, const T &value) {
-        SetValue(SR_RUNTIME_TIME_CRC32_STD_STR(name), value);
+        SetValue(SR_HASH_STR_REGISTER(name), value);
     }
 
     template<typename T> void DataStorage::SetValue(const T &value) {
-        SetValue(SR_COMPILE_TIME_CRC32_TYPE_NAME(T), value);
+        SetValue(SR_HASH_TYPE_NAME_STR_REGISTER(T), value);
     }
 
-    template<typename T> T DataStorage::GetValue(const std::string &name) const {
-        return GetValue<T>(SR_RUNTIME_TIME_CRC32_STD_STR(name));
+    template<typename T> T DataStorage::GetValue(const std::string& name) const {
+        return GetValue<T>(SR_HASH_STR_REGISTER(name));
     }
 
     template<typename T> T DataStorage::GetValue() const {
-        return GetValue<T>(SR_COMPILE_TIME_CRC32_TYPE_NAME(T));
+        return GetValue<T>(SR_HASH_TYPE_NAME_STR_REGISTER(T));
     }
 
-    template<typename T> T DataStorage::GetValueDef(const std::string &name, const T& def) const {
-        return GetValueDef<T>(SR_RUNTIME_TIME_CRC32_STD_STR(name), def);
+    template<typename T> T DataStorage::GetValueDef(const std::string& name, const T& def) const {
+        return GetValueDef<T>(SR_HASH_STR_REGISTER(name), def);
     }
 
     template<typename T> T DataStorage::GetValueDef(const T& def) const {
-        return GetValueDef<T>(SR_COMPILE_TIME_CRC32_TYPE_NAME(T), def);
+        return GetValueDef<T>(SR_HASH_TYPE_NAME_STR_REGISTER(T), def);
     }
 
-    template<typename T> T *DataStorage::GetPointerDef(const std::string &name, T *def) const {
-        return GetPointerDef<T>(SR_RUNTIME_TIME_CRC32_STD_STR(name), def);
+    template<typename T> T *DataStorage::GetPointerDef(const std::string& name, T *def) const {
+        return GetPointerDef<T>(SR_HASH_STR_REGISTER(name), def);
     }
 
     template<typename T> T *DataStorage::GetPointerDef(T *def) const {
-        return GetPointerDef<T>(SR_COMPILE_TIME_CRC32_TYPE_NAME(T), def);
+        return GetPointerDef<T>(SR_HASH_TYPE_NAME_STR_REGISTER(T), def);
     }
 
     template<typename T> bool DataStorage::RemovePointer() {
-        return RemovePointer<T>(SR_COMPILE_TIME_CRC32_TYPE_NAME(T));
+        return RemovePointer<T>(SR_HASH_TYPE_NAME_STR_REGISTER(T));
     }
 
-    template<typename T> bool DataStorage::RemovePointer(const std::string &name) {
-        return RemovePointer<T>(SR_RUNTIME_TIME_CRC32_STD_STR(name));
+    template<typename T> bool DataStorage::RemovePointer(const std::string& name) {
+        return RemovePointer<T>(SR_HASH_STR_REGISTER(name));
     }
 
-    template<typename T> bool DataStorage::RemoveValue(const std::string &name) {
-        return RemoveValue<T>(SR_RUNTIME_TIME_CRC32_STD_STR(name));
+    template<typename T> bool DataStorage::RemoveValue(const std::string& name) {
+        return RemoveValue<T>(SR_HASH_STR_REGISTER(name));
     }
 
     template<typename T> bool DataStorage::RemoveValue() {
-        return RemoveValue<T>(SR_COMPILE_TIME_CRC32_TYPE_NAME(T));
+        return RemoveValue<T>(SR_HASH_TYPE_NAME_STR_REGISTER(T));
     }
 
     /// ----------------------------------------------------------------------------------------------------------------
@@ -232,6 +235,22 @@ namespace SR_HTYPES_NS {
         m_values.erase(hashCode);
 
         return true;
+    }
+
+    template<typename T> std::vector<std::pair<std::string, T>> DataStorage::GetValues() {
+        std::vector<std::pair<std::string, T>> values;
+
+        for (auto&& [hash, any] : m_values) {
+            try {
+                auto&& type = std::any_cast<T>(any);
+                values.emplace_back(std::make_pair(SR_HASH_TO_STR(hash), type));
+            }
+            catch (const std::bad_any_cast& e) {
+                continue;
+            }
+        }
+
+        return values;
     }
 }
 

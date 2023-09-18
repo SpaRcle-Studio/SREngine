@@ -4,7 +4,7 @@
 #ifndef EVOENGINE_VECTOR_H
 #define EVOENGINE_VECTOR_H
 
-#include <Utils/Debug.h>
+#include <Utils/stdInclude.h>
 
 // TODO: Check, refactoring and add exception processing
 

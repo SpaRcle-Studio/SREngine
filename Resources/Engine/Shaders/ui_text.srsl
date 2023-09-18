@@ -9,12 +9,16 @@ DepthWrite true;
 DepthTest true;
 
 [[shared]] vec2 uv;
+[[uniform], [public]] vec3 color;
 
 void fragment() {
     COLOR = texture(TEXT_ATLAS_TEXTURE, uv);
 
-    if (COLOR.a == 0) {
+    if (COLOR.a < 0.8) {
         discard;
+    }
+    else {
+        COLOR.rgb += color;
     }
 }
 

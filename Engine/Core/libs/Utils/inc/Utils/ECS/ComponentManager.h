@@ -32,6 +32,7 @@ namespace SR_UTILS_NS {
         typedef SR_HTYPES_NS::Function<Component*(void)> Construction;
         typedef SR_HTYPES_NS::Function<Component*(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage)> Loader;
         using ContextInitializerFn = SR_HTYPES_NS::Function<void(SR_HTYPES_NS::DataStorage&)>;
+        using Hash = uint64_t;
 
         struct MetaComponent {
             Construction constructor;
@@ -40,7 +41,12 @@ namespace SR_UTILS_NS {
             uint16_t version;
         };
     public:
+        SR_NODISCARD bool IsSingletonCanBeDestroyed() const override {
+            return false;
+        }
+
         Component* CreateComponentOfName(const std::string& name);
+        Component* CreateComponentOfName(Hash hashName);
 
         template<typename T> T* CreateComponent() {
             SR_SCOPED_LOCK
@@ -106,7 +112,7 @@ namespace SR_UTILS_NS {
         ContextInitializerFn m_contextInitializer;
 
         std::unordered_map<size_t, MetaComponent> m_meta;
-        std::unordered_map<std::string, size_t> m_ids;
+        std::unordered_map<std::string, Hash> m_ids;
 
         SR_HTYPES_NS::DataStorage m_context;
         uint64_t m_lastComponent = 0;

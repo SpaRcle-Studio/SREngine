@@ -12,6 +12,8 @@ namespace SR_ANIMATIONS_NS {
     }
 
     void AnimationClipState::Update(const UpdateContext& context) {
+        SR_TRACY_ZONE;
+
         if (!m_clip) {
             Super::Update(context);
             return;
@@ -21,11 +23,9 @@ namespace SR_ANIMATIONS_NS {
 
         for (auto&& pChannel : m_clip->GetChannels()) {
             const uint32_t keyFrame = pChannel->UpdateChannel(
-                    m_playState[pChannel],
-                    m_time,
-                    context.weight,
-                    context.pStaticPose,
-                    context.pWorkingPose
+                m_playState[pChannel],
+                m_time,
+                context
             );
             currentKeyFrame = SR_MAX(currentKeyFrame, keyFrame);
         }
@@ -51,6 +51,8 @@ namespace SR_ANIMATIONS_NS {
     }
 
     void IAnimationClipState::SetClip(AnimationClip* pClip) {
+        SR_TRACY_ZONE;
+
         if (m_clip == pClip) {
             return;
         }

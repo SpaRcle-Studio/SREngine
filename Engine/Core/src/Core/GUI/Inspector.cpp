@@ -14,14 +14,15 @@
 #include <Physics/3D/Rigidbody3D.h>
 #include <Physics/2D/Rigidbody2D.h>
 
-#include <Graphics/UI/Sprite2D.h>
-#include <Graphics/UI/Anchor.h>
+#include <Graphics/Types/Geometry/Sprite.h>
+#include <Audio/Types/AudioSource.h>
 #include <Graphics/UI/Canvas.h>
 #include <Graphics/Types/Geometry/ProceduralMesh.h>
 #include <Graphics/GUI/Utils.h>
 #include <Graphics/Font/Text.h>
 #include <Graphics/Types/Geometry/SkinnedMesh.h>
 #include <Graphics/Animations/Animator.h>
+#include <Graphics/Animations/BoneComponent.h>
 
 namespace Framework::Core::GUI {
     Inspector::Inspector(Hierarchy* hierarchy)
@@ -36,7 +37,7 @@ namespace Framework::Core::GUI {
             return;
         }
 
-        if (ImGui::BeginTabBar("#inspectorTabBar")) {
+        if (ImGui::BeginTabBar("Inspector#TabBar")) {
             if (ImGui::BeginTabItem("GameObject")) {
                 InspectGameObject();
                 ImGui::EndTabItem();
@@ -55,17 +56,19 @@ namespace Framework::Core::GUI {
 
     void Inspector::InspectGameObject() {
         if (m_gameObject.TryRecursiveLockIfValid()) {
+            auto&& pEngine = dynamic_cast<EditorGUI*>(GetManager())->GetEngine();
+
             if (bool v = m_gameObject->IsEnabled(); ImGui::Checkbox("Enabled", &v)) {
-                auto&& cmd = new Framework::Core::Commands::GameObjectEnable(m_gameObject, v);
-                Engine::Instance().GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);;
+                auto&& cmd = new SR_CORE_NS::Commands::GameObjectEnable(pEngine, m_gameObject, v);
+                pEngine->GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
             }
 
             /// --------------------------------------------------------------------------------------------------------
 
             std::string gm_name = m_gameObject->GetName();
             if (ImGui::InputText("Name", &gm_name, ImGuiInputTextFlags_NoUndoRedo | ImGuiInputTextFlags_EnterReturnsTrue)) {
-                auto&& cmd = new Framework::Core::Commands::GameObjectRename(m_gameObject, gm_name);
-                Engine::Instance().GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
+                auto&& cmd = new SR_CORE_NS::Commands::GameObjectRename(pEngine, m_gameObject, gm_name);
+                pEngine->GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
             }
 
             /// --------------------------------------------------------------------------------------------------------
@@ -101,10 +104,10 @@ namespace Framework::Core::GUI {
 
             switch (pTransform->GetMeasurement()) {
                 case SR_UTILS_NS::Measurement::Space2D:
-                    DrawTransform2D(dynamic_cast<SR_UTILS_NS::Transform2D *>(pTransform));
+                    DrawTransform2D(dynamic_cast<SR_UTILS_NS::Transform2D*>(pTransform));
                     break;
                 case SR_UTILS_NS::Measurement::Space3D:
-                    DrawTransform3D(dynamic_cast<SR_UTILS_NS::Transform3D *>(pTransform));
+                    DrawTransform3D(dynamic_cast<SR_UTILS_NS::Transform3D*>(pTransform));
                     break;
                 case SR_UTILS_NS::Measurement::SpaceZero:
                 case SR_UTILS_NS::Measurement::Space4D:
@@ -129,7 +132,7 @@ namespace Framework::Core::GUI {
         DrawComponents(dynamic_cast<SR_UTILS_NS::IComponentable*>(m_scene.Get()));
     }
 
-    void Inspector::Update() {
+    void Inspector::Update(float_t dt) {
         SR_LOCK_GUARD
 
         if (auto&& selected = m_hierarchy->GetSelected(); selected.size() == 1) {
@@ -184,14 +187,16 @@ namespace Framework::Core::GUI {
             copyPtrComponent = DrawComponent<SR_GTYPES_NS::Mesh3D>(copyPtrComponent, "Mesh3D", index);
             copyPtrComponent = DrawComponent<SR_GTYPES_NS::SkinnedMesh>(copyPtrComponent, "SkinnedMesh", index);
             copyPtrComponent = DrawComponent<SR_GTYPES_NS::ProceduralMesh>(copyPtrComponent, "ProceduralMesh", index);
-            copyPtrComponent = DrawComponent<SR_GRAPH_NS::UI::Sprite2D>(copyPtrComponent, "Sprite2D", index);
+            copyPtrComponent = DrawComponent<SR_GTYPES_NS::Sprite>(copyPtrComponent, "Sprite", index);
             copyPtrComponent = DrawComponent<SR_GRAPH_NS::UI::Anchor>(copyPtrComponent, "Anchor", index);
             copyPtrComponent = DrawComponent<SR_GRAPH_NS::UI::Canvas>(copyPtrComponent, "Canvas", index);
             copyPtrComponent = DrawComponent<SR_PTYPES_NS::Rigidbody3D>(copyPtrComponent, "Rigidbody3D", index);
             copyPtrComponent = DrawComponent<SR_GTYPES_NS::Text>(copyPtrComponent, "Text", index);
             copyPtrComponent = DrawComponent<SR_ANIMATIONS_NS::Animator>(copyPtrComponent, "Animator", index);
             copyPtrComponent = DrawComponent<SR_ANIMATIONS_NS::Skeleton>(copyPtrComponent, "Skeleton", index);
+            copyPtrComponent = DrawComponent<SR_ANIMATIONS_NS::BoneComponent>(copyPtrComponent, "Bone", index);
             copyPtrComponent = DrawComponent<SR_UTILS_NS::LookAtComponent>(copyPtrComponent, "LookAtComponent", index);
+            copyPtrComponent = DrawComponent<SR_AUDIO_NS::AudioSource>(copyPtrComponent, "AudioSource", index);
 
             if (copyPtrComponent != component && copyPtrComponent) {
                 SR_LOG("Inspector::DrawComponents() : component \"" + component->GetComponentName() + "\" has been replaced.");
@@ -225,22 +230,21 @@ namespace Framework::Core::GUI {
         if (Graphics::GUI::DrawVec3Control("Skew", skew, 1.f) && !skew.HasZero())
             pTransform->SetSkew(skew);
 
-        //if (ImGui::CollapsingHeader("Anchor")) {
-        //    auto&& offsets = pTransform->GetAnchor();
-        //    if (Graphics::GUI::DrawFRect(
-        //            { "Left", "Bottom", "Right", "Top" },
-        //            offsets, 0.0, 1.0, 0.05, 0,
-        //            &GetWeakStorage())
-        //    ) {
-        //        pTransform->SetAnchor(offsets);
-        //    }
-        //}
+        if (ImGui::BeginCombo("Anchor", SR_UTILS_NS::EnumReflector::ToString(pTransform->GetAnchor()).c_str())) {
+            auto&& selectables = SR_UTILS_NS::EnumReflector::GetNames<SR_UTILS_NS::Anchor>();
+            for (auto&& selectable : selectables) {
+                if (ImGui::Selectable(selectable.c_str())) {
+                    ImGui::SetItemDefaultFocus();
+                    pTransform->SetAnchor(SR_UTILS_NS::EnumReflector::FromString<SR_UTILS_NS::Anchor>(selectable));
+                }
+            }
 
-        auto&& stretchTypes = SR_UTILS_NS::EnumReflector::GetNames<SR_UTILS_NS::StretchFlags_>();
+            ImGui::EndCombo();
+        }
 
-        auto stretch = static_cast<int>(SR_UTILS_NS::EnumReflector::GetIndex<SR_UTILS_NS::StretchFlags_>(
-                static_cast<SR_UTILS_NS::StretchFlags_>(pTransform->GetStretch()))
-        );
+        auto&& stretchTypes = SR_UTILS_NS::EnumReflector::GetNames<SR_UTILS_NS::Stretch>();
+
+        auto stretch = static_cast<int32_t>(SR_UTILS_NS::EnumReflector::GetIndex<SR_UTILS_NS::Stretch>(pTransform->GetStretch()));
 
         if (ImGui::Combo("Stretch", &stretch, [](void* vec, int idx, const char** out_text){
             auto&& vector = reinterpret_cast<std::vector<std::string>*>(vec);
@@ -250,40 +254,62 @@ namespace Framework::Core::GUI {
             *out_text = vector->at(idx).c_str();
 
             return true;
-        }, reinterpret_cast<void*>(&stretchTypes), stretchTypes.size())) {
-            pTransform->SetStretch(SR_UTILS_NS::EnumReflector::At<SR_UTILS_NS::StretchFlags_>(stretch));
+        }, const_cast<void*>(reinterpret_cast<const void*>(&stretchTypes)), stretchTypes.size())) {
+            pTransform->SetStretch(SR_UTILS_NS::EnumReflector::At<SR_UTILS_NS::Stretch>(stretch));
         }
     }
 
-    void Inspector::DrawTransform3D(SR_UTILS_NS::Transform3D *transform) const {
+    void Inspector::DrawTransform3D(SR_UTILS_NS::Transform3D *transform) {
         TextCenter("Transform 3D");
 
+        auto&& oldTransform = transform->Copy();
+        bool changed = false;
         auto&& translation = transform->GetTranslation();
         if (Graphics::GUI::DrawVec3Control("Translation", translation, 0.f, 70.f, 0.01f)) {
             transform->SetTranslation(translation);
+            changed = true;
+        }
+        auto&& rotation = transform->GetRotation();  
+        if (Graphics::GUI::DrawVec3Control("Rotation", rotation)) {
+            transform->SetRotation(rotation);
+            changed = true;
+        }
+        auto&& scale = transform->GetScale();
+        if (Graphics::GUI::DrawVec3Control("Scale", scale, 1.f) && !scale.HasZero()) {
+            transform->SetScale(scale);
+            changed = true;
+        }
+        auto&& skew = transform->GetSkew();
+        if (Graphics::GUI::DrawVec3Control("Skew", skew, 1.f) && !skew.HasZero()) {
+            transform->SetSkew(skew);
+            changed = true;
         }
 
-        auto&& rotation = transform->GetRotation();  
-        if (Graphics::GUI::DrawVec3Control("Rotation", rotation))
-            transform->SetRotation(rotation);
+        if (!m_isUsed && changed) {
+            SR_SAFE_DELETE_PTR(m_oldTransformMarshal)
+            m_oldTransformMarshal = oldTransform->Save(SR_UTILS_NS::SavableFlagBits::SAVABLE_FLAG_NONE);
+            m_isUsed = true;
+        }
+        if (m_isUsed && SR_UTILS_NS::Input::Instance().GetMouseUp(SR_UTILS_NS::MouseCode::MouseLeft)) {
+            auto&& pEngine = dynamic_cast<EditorGUI*>(GetManager())->GetEngine();
+            auto&& cmd = new SR_CORE_NS::Commands::GameObjectTransform(pEngine, transform->GetGameObject(), m_oldTransformMarshal->CopyPtr());
+            pEngine->GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
 
-        auto&& scale = transform->GetScale();
-        if (Graphics::GUI::DrawVec3Control("Scale", scale, 1.f) && !scale.HasZero())
-            transform->SetScale(scale);
+            SR_SAFE_DELETE_PTR(m_oldTransformMarshal)
+            m_isUsed = false;
+        }
 
-        auto&& skew = transform->GetSkew();
-        if (Graphics::GUI::DrawVec3Control("Skew", skew, 1.f) && !skew.HasZero())
-            transform->SetSkew(skew);
+        SR_SAFE_DELETE_PTR(oldTransform)
     }
 
     void SR_CORE_NS::GUI::Inspector::BackupTransform(const SR_UTILS_NS::GameObject::Ptr& ptr, const std::function<void()>& operation) const
     {
-        SR_HTYPES_NS::Marshal::Ptr pMarshal = ptr->GetTransform()->Save(nullptr, SR_UTILS_NS::SavableFlagBits::SAVABLE_FLAG_NONE);
-
-        operation();
-
-        auto&& cmd = new Framework::Core::Commands::GameObjectTransform(ptr, pMarshal);
-        Engine::Instance().GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
+        ///SR_HTYPES_NS::Marshal::Ptr pMarshal = ptr->GetTransform()->Save(nullptr, SR_UTILS_NS::SavableFlagBits::SAVABLE_FLAG_NONE);
+        ///
+        ///operation();
+        ///
+        ///auto&& cmd = new Framework::Core::Commands::GameObjectTransform(ptr, pMarshal);
+        ///Engine::Instance().GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
     }
 
     void Inspector::DrawSwitchTransform() {

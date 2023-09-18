@@ -48,7 +48,7 @@ namespace SR_GRAPH_NS::UI {
        //}
 
         //for (auto&& pComponent : m_parent->GetComponentsRef()) {
-        //    if (auto&& pSprite = dynamic_cast<Sprite2D*>(pComponent)) {
+        //    if (auto&& pSprite = dynamic_cast<Sprite*>(pComponent)) {
         //        size = pSprite->GetSizes() * GetTransform()->GetScale2D();
         //    }
         //}

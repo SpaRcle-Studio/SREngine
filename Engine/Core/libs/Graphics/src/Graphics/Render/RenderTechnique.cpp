@@ -47,7 +47,7 @@ namespace SR_GRAPH_NS {
     bool RenderTechnique::Render() {
         SR_TRACY_ZONE;
 
-        if ((m_dirty && !Build()) || !m_camera || !m_camera->IsActive()) {
+        if (m_dirty || !m_camera || !m_camera->IsActive()) {
             return false;
         }
 
@@ -73,7 +73,7 @@ namespace SR_GRAPH_NS {
     void RenderTechnique::Prepare() {
         SR_TRACY_ZONE;
 
-        if (m_dirty) {
+        if ((m_dirty && !Build()) || !m_camera || !m_camera->IsActive()) {
             return;
         }
 
@@ -208,12 +208,33 @@ namespace SR_GRAPH_NS {
         m_name = node.GetAttribute("Name").ToString();
 
         for (auto&& passNode : node.GetNodes()) {
+            if (passNode.NameView() == "Queues") {
+                for (auto&& queueNode : passNode.GetNodes()) {
+                    auto&& queue = m_queues.emplace_back();
+                    for (auto&& queuePassNode : queueNode.GetNodes()) {
+                        auto&& name = queuePassNode.GetAttribute("Name").ToString();
+                        if (auto&& pPass = FindPass(name)) {
+                            queue.emplace_back(pPass);
+                        }
+                        else {
+                            SR_ERROR("RenderTechnique::LoadSettings() : pass \"" + name + "\" for queue not found!");
+                        }
+                    }
+                }
+                continue;
+            }
+
             if (auto&& pPass = SR_ALLOCATE_RENDER_PASS(this, passNode, nullptr)) {
                 m_passes.emplace_back(pPass);
             }
             else {
                 SR_ERROR("RenderTechnique::LoadSettings() : failed to load \"" + passNode.Name() + "\" pass!");
             }
+        }
+
+        if (!m_passes.empty() && m_queues.empty()) {
+            SR_ERROR("RenderTechnique::LoadSettings() : passes was loaded, but queue is empty!\n\tTechnique: " + GetResourcePath().ToStringRef());
+            return false;
         }
 
         return true;
@@ -229,6 +250,7 @@ namespace SR_GRAPH_NS {
             delete pPass;
         }
         m_passes.clear();
+        m_queues.clear();
         m_name.clear();
     }
 

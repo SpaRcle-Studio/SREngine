@@ -11,13 +11,13 @@
 namespace SR_AUDIO_NS {
     class SoundDevice : public SR_UTILS_NS::NonCopyable {
     protected:
-        explicit SoundDevice(AudioLibrary library);
+        explicit SoundDevice(AudioLibrary library, const std::string& name);
 
     public:
         ~SoundDevice() override = default;
 
     public:
-        static SoundDevice* Allocate(AudioLibrary audioLibrary);
+        static SoundDevice* Allocate(AudioLibrary audioLibrary, const std::string& name);
 
     public:
         virtual bool Init() = 0;
@@ -25,7 +25,7 @@ namespace SR_AUDIO_NS {
         SR_NODISCARD std::string GetName() const;
         SR_NODISCARD AudioLibrary GetLibrary() const;
 
-    private:
+    protected:
         std::string m_name;
         AudioLibrary m_library;
 

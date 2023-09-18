@@ -7,12 +7,14 @@
 
 #include <Utils/Debug.h>
 #include <Utils/Types/Thread.h>
+#include <Utils/Types/SharedPtr.h>
 #include <Utils/Common/Singleton.h>
 #include <Utils/ResourceManager/IResource.h>
 #include <Utils/ResourceManager/ResourceInfo.h>
 
 namespace SR_UTILS_NS {
     class IResourceReloader;
+    class FileWatcher;
 
     class SR_DLL_EXPORT ResourceManager final : public Singleton<ResourceManager> {
         friend class Singleton<ResourceManager>;
@@ -33,9 +35,14 @@ namespace SR_UTILS_NS {
         SR_NODISCARD const Path& GetResourcePath(Hash hashPath) const;
         SR_NODISCARD Hash RegisterResourcePath(const Path& path);
 
+        SR_NODISCARD SR_HTYPES_NS::SharedPtr<FileWatcher> StartWatch(const Path& path);
+
         SR_NODISCARD IResource* Find(uint64_t hashTypeName, const std::string& ID);
 
         void Synchronize(bool force);
+        void SetWatchingEnabled(bool enabled) { m_isWatchingEnabled = enabled; }
+
+        void ReloadResource(IResource* pResource);
 
         void Execute(const SR_HTYPES_NS::Function<void()>& fun);
         void InspectResources(const SR_HTYPES_NS::Function<void(const ResourcesTypes &)>& callback);
@@ -70,6 +77,7 @@ namespace SR_UTILS_NS {
 
         /// Проверить хэши ресурсов и перезагрузить их, если это требуется
         void ReloadResources(float_t dt);
+        void UpdateWatchers(float_t dt);
 
         void PrintMemoryDump();
 
@@ -79,7 +87,7 @@ namespace SR_UTILS_NS {
 
         void Remove(IResource *resource);
         void GC();
-        void CheckResourceHashes();
+        void AsyncUpdateWatchers();
         void Thread();
 
     private:
@@ -93,6 +101,11 @@ namespace SR_UTILS_NS {
         IResourceReloader* m_defaultReloader = nullptr;
 
     private:
+        std::list<SR_HTYPES_NS::SharedPtr<FileWatcher>> m_watchers;
+        std::queue<SR_HTYPES_NS::SharedPtr<FileWatcher>> m_dirtyWatchers;
+        std::queue<ResourceInfo::WeakPtr> m_dirtyResources;
+
+        std::atomic<bool> m_isWatchingEnabled = true;
         std::atomic<bool> m_isInit = false;
         std::atomic<bool> m_isRun = false;
         std::atomic<bool> m_force = false;
@@ -104,11 +117,6 @@ namespace SR_UTILS_NS {
 
         uint64_t m_GCDt = 0;
         uint64_t m_hashCheckDt = 0;
-
-        ResourcesTypes::iterator m_checkResourceGroupIt;
-        uint64_t m_checkInfoIndex = 0;
-
-        std::vector<ResourceInfo::WeakPtr> m_dirtyResources;
 
     };
 }

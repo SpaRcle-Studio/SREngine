@@ -3,6 +3,7 @@
 //
 
 #include <Graphics/Pass/SwapchainPass.h>
+#include <Graphics/Pipeline/Pipeline.h>
 
 namespace SR_GRAPH_NS {
     SR_REGISTER_RENDER_PASS(SwapchainPass)
@@ -27,12 +28,12 @@ namespace SR_GRAPH_NS {
 
         auto&& pipeline = GetContext()->GetPipeline();
 
-        pipeline->SetCurrentFramebuffer(nullptr);
+        pipeline->SetCurrentFrameBuffer(nullptr);
 
-        for (uint8_t i = 0; i < pipeline->GetCountBuildIter(); ++i) {
+        for (uint8_t i = 0; i < pipeline->GetBuildIterationsCount(); ++i) {
             pipeline->SetBuildIteration(i);
 
-            pipeline->BindFrameBuffer(0);
+            pipeline->BindFrameBuffer(nullptr);
             pipeline->ClearBuffers(m_color.r, m_color.g, m_color.b, m_color.a, m_depth, 1);
 
             pipeline->BeginCmdBuffer();

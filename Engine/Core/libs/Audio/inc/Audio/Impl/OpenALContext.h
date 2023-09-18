@@ -11,12 +11,17 @@ class ALCcontext;
 
 namespace SR_AUDIO_NS {
     class OpenALContext : public SoundContext {
+        using Super = SoundContext;
     public:
         explicit OpenALContext(SoundDevice* pDevice);
         ~OpenALContext() override;
 
     public:
         bool Init() override;
+
+        SR_NODISCARD bool IsPlaying(SoundSource pSource) const override;
+        SR_NODISCARD bool IsPaused(SoundSource pSource) const override;
+        SR_NODISCARD bool IsStopped(SoundSource pSource) const override;
 
         SR_NODISCARD SoundSource AllocateSource(SoundBuffer buffer) override;
 
@@ -26,7 +31,10 @@ namespace SR_AUDIO_NS {
                 int32_t sampleRate,
                 SoundFormat format) override;
 
+        void ApplyParamImpl(SoundSource pSource, PlayParamType paramType, const void* pValue) override;
+
         bool FreeBuffer(SoundBuffer* buffer) override;
+        bool FreeSource(SoundSource* pSource) override;
 
         void Play(SoundSource source) override;
 

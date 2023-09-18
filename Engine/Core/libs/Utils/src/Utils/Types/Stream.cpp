@@ -92,6 +92,18 @@ namespace SR_HTYPES_NS {
         return *this;
     }
 
+    Stream& Stream::TryRead(void* pDst, uint64_t count) noexcept {
+        if (m_pos + count > m_size) {
+            return *this;
+        }
+
+        memcpy(pDst, m_data + m_pos, count);
+
+        m_pos += count;
+
+        return *this;
+    }
+
     Stream& Stream::Write(const void* pSrc, uint64_t count) noexcept {
         m_size += count;
 

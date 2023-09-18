@@ -19,11 +19,12 @@
 #include <Graphics/Pass/ColorBufferPass.h>
 
 namespace SR_CORE_NS::GUI {
-    SceneViewer::SceneViewer(const WindowPtr& window, Hierarchy* hierarchy)
+    SceneViewer::SceneViewer(const EnginePtr& pEngine, Hierarchy* hierarchy)
         : Widget("Scene")
-        , m_window(window)
+        , m_engine(pEngine)
+        , m_window(pEngine->GetWindow())
         , m_hierarchy(hierarchy)
-        , m_guizmo(new Guizmo())
+        , m_guizmo(new Guizmo(pEngine))
         , m_id(-1)
     {
         LoadCameraSettings();
@@ -49,39 +50,51 @@ namespace SR_CORE_NS::GUI {
             return;
         }
 
+        /// что-то пошло не так, потеряли камеру
+        if (m_enabled && !m_camera.Valid()) {
+            InitCamera();
+        }
+
         if (m_camera.RecursiveLockIfValid()) {
             m_translation = m_camera->GetTransform()->GetTranslation();
             m_rotation = m_camera->GetTransform()->GetRotation();
 
             auto pCamera = m_camera->GetComponent<SR_GTYPES_NS::Camera>();
 
-            if (auto&& pFramebuffer = GetContext()->FindFramebuffer("SceneViewFBO", pCamera)) {
-                m_id = pFramebuffer->GetColorTexture(0);
+            if (auto&& pFrameBuffer = GetContext()->FindFramebuffer("SceneViewFBO", pCamera)) {
+                m_id = pFrameBuffer->GetColorTexture(0);
             }
 
-            if (pCamera && m_id != SR_ID_INVALID && pCamera->IsActive()) 
+            m_guizmo->DrawTools(); /// Отрисовка панели с переключателями
+
+            ImGui::BeginGroup();
+
+            ImGui::Separator();
+
+            if (ImGui::BeginChild("ViewerTexture"))
             {
-                m_guizmo->DrawTools(); //Отрисовка панели с переключателями
+                m_windowSize = SR_MATH_NS::Vector2(static_cast<int32_t>(ImGui::GetWindowSize().x), static_cast<int32_t>(ImGui::GetWindowSize().y));
 
-                ImGui::BeginGroup();
+                if (!UpdateViewSize() && pCamera && m_id != SR_ID_INVALID && pCamera->IsActive())
+                {
+                    if (m_guizmo->GetViewMode() == EditorSceneViewMode::WindowSize) {
+                        DrawTexture(m_windowSize, m_window->GetSize().Cast<int32_t>(), m_id, true);
+                    }
+                    else {
+                        DrawTexture(m_windowSize, m_windowSize, m_id, true);
+                    }
 
-                ImGui::Separator();
-
-                if (ImGui::BeginChild("ViewerTexture")) {
-                    const auto winSize = ImGui::GetWindowSize();
-
-                    DrawTexture(SR_MATH_NS::IVector2(winSize.x, winSize.y), m_window->GetSize().Cast<int32_t>(), m_id, true);
-
-                    if (auto&& selected = m_hierarchy->GetSelected(); selected.size() == 1)
+                    if (auto&& selected = m_hierarchy->GetSelected(); selected.size() == 1) {
                         m_guizmo->Draw(*selected.begin(), m_camera);
+                    }
 
                     CheckFocused();
                     CheckHovered();
                 }
                 ImGui::EndChild();
-
-                ImGui::EndGroup();
             }
+
+            ImGui::EndGroup();
 
             m_camera.Unlock();
         }
@@ -124,45 +137,86 @@ namespace SR_CORE_NS::GUI {
         }
     }
 
-    void SceneViewer::Update() {
-        if (!IsOpen() || (!IsHovered() && !m_updateNonHoveredSceneViewer))
+    void SceneViewer::FixedUpdate() {
+        float_t velocityFactor = m_guizmo->GetCameraVelocityFactor();
+        m_velocity *= 0.8f;
+
+        if (!m_velocity.Empty() && m_camera) {
+            m_camera->GetTransform()->Translate(m_velocity);
+        }
+
+        if (!IsOpen() || (!IsHovered() && !m_updateNonHoveredSceneViewer)) {
             return;
+        }
 
-        float_t speed = 0.1f;
-        auto dir = SR_UTILS_NS::Input::Instance().GetMouseDrag() * speed;
-        auto wheel = SR_UTILS_NS::Input::Instance().GetMouseWheel() * speed;
+        constexpr float_t seekSpeed = 0.1f / 10.f;
+        constexpr float_t wheelSpeed = 4.0f / 10.f;
+        constexpr float_t rotateSpeed = 1.5f / 10.f;
+        constexpr float_t moveSpeed = 2.0f / 10.f;
 
-        if (m_camera.RecursiveLockIfValid()) {
+        const float_t velocitySpeed = moveSpeed * velocityFactor;
+        auto&& dir = SR_UTILS_NS::Input::Instance().GetMouseDrag();
+        auto&& wheel = SR_UTILS_NS::Input::Instance().GetMouseWheel() * wheelSpeed * velocityFactor;
+
+        if (!SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::Ctrl))
+        {
+            if (SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::W)) {
+                m_velocity += SR_UTILS_NS::Transform3D::FORWARD * velocitySpeed;
+            }
+
+            if (SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::S)) {
+                m_velocity -= SR_UTILS_NS::Transform3D::FORWARD * velocitySpeed;
+            }
+
+            if (SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::A)) {
+                m_velocity -= SR_UTILS_NS::Transform3D::RIGHT * velocitySpeed;
+            }
+
+            if (SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::D)) {
+                m_velocity += SR_UTILS_NS::Transform3D::RIGHT * velocitySpeed;
+            }
+
+            if (SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::Space)) {
+                m_velocity += SR_UTILS_NS::Transform3D::UP * velocitySpeed;
+            }
+
+            /// TODO: странное управление. Нет подходящей удобной комбинации клавиши
+            /// if (SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::Space) && SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::Z)) {
+            ///     m_velocity -= SR_UTILS_NS::Transform3D::UP * moveSpeed;
+            /// }
+        }
+
+        if (m_camera) {
             if (wheel != 0) {
                 m_camera->GetTransform()->Translate(SR_UTILS_NS::Transform3D::FORWARD * wheel);
             }
 
             if (SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::MouseRight)) {
-                m_camera->GetTransform()->GlobalRotate(dir.y, dir.x, 0.0);
+                m_camera->GetTransform()->GlobalRotate(dir.y * rotateSpeed, dir.x * rotateSpeed, 0.0);
             }
 
             if (SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::MouseMiddle)) {
-                auto right = SR_UTILS_NS::Transform3D::RIGHT * speed;
-                auto up = SR_UTILS_NS::Transform3D::UP * speed;
+                auto right = SR_UTILS_NS::Transform3D::RIGHT * seekSpeed;
+                auto up = SR_UTILS_NS::Transform3D::UP * seekSpeed;
 
                 m_camera->GetTransform()->Translate(
                         (up * dir.y) + (right * -dir.x)
                 );
             }
-
-            m_camera.Unlock();
         }
+
+        /// m_velocity = m_velocity.Clamp(SR_MATH_NS::FVector3(1), SR_MATH_NS::FVector3(-1)); ///Зачем-то ограничивало перемещение камеры по клавишам WASD
     }
 
     void SceneViewer::DrawTexture(SR_MATH_NS::IVector2 winSize, SR_MATH_NS::IVector2 texSize, uint32_t id, bool centralize) {
-        const float_t dx = static_cast<float_t>(winSize.x) / texSize.x;
-        const float_t dy = static_cast<float_t>(winSize.y) / texSize.y;
-
-        if (dy > dx) {
-            texSize *= dx;
+        if (texSize.HasNegative() || winSize.HasNegative()) {
+            return;
         }
-        else
-            texSize *= dy;
+
+        const float_t dx = static_cast<float_t>(winSize.x) / static_cast<float_t>(texSize.x);
+        const float_t dy = static_cast<float_t>(winSize.y) / static_cast<float_t>(texSize.y);
+
+        texSize *= dy > dx ? dx : dy;
 
         m_textureSize = texSize;
 
@@ -174,38 +228,22 @@ namespace SR_CORE_NS::GUI {
             ImGui::SetCursorPos(centralizedCursorPos);
         }
 
-        auto&& env = SR_GRAPH_NS::Environment::Get();
-        if (env->GetType() == Graphics::PipelineType::OpenGL) {
-            DrawImage(reinterpret_cast<void*>(static_cast<uint64_t>(id)), ImVec2(m_textureSize.x, m_textureSize.y), ImVec2(0, 1), ImVec2(1, 0), {1, 1, 1, 1 }, {0, 0, 0, 0 }, true);
-        }
-        else if (auto&& pDescriptor = env->TryGetDescriptorSetFromTexture(id, true)) {
-            DrawImage(pDescriptor, ImVec2(m_textureSize.x, m_textureSize.y), ImVec2(-1, 0), ImVec2(0, 1), {1, 1, 1, 1}, {0, 0, 0, 0}, true);
-        }
-    }
+        auto&& pPipeline = GetContext()->GetPipeline();
 
-    void SceneViewer::DrawImage(ImTextureID user_texture_id, const ImVec2 &size, const ImVec2 &uv0, const ImVec2 &uv1, const ImVec4 &tint_col, const ImVec4 &border_col, bool imposition) {
-        ImGuiWindow* window = ImGui::GetCurrentWindow();
-        if (window->SkipItems)
-            return;
+        void* pDescriptor = nullptr;
 
-        ImRect bb(window->DC.CursorPos, window->DC.CursorPos + size);
-        if (border_col.w > 0.0f)
-            bb.Max = bb.Max + ImVec2(2, 2);
-
-        if (!imposition) {
-            ImGui::ItemSize(bb);
-            if (!ImGui::ItemAdd(bb, 0))
-                return;
+        switch (pPipeline->GetType()) {
+            case SR_GRAPH_NS::PipelineType::Vulkan:
+                pDescriptor = pPipeline->GetOverlayTextureDescriptorSet(id, SR_GRAPH_NS::OverlayType::ImGui);
+                break;
+            case SR_GRAPH_NS::PipelineType::OpenGL:
+                pDescriptor = reinterpret_cast<void*>(static_cast<uint64_t>(id));
+                break;
+            default:
+                break;
         }
 
-        m_imagePosition = bb.GetTL();
-
-        if (border_col.w > 0.0f) {
-            window->DrawList->AddRect(bb.Min, bb.Max, ImGui::GetColorU32(border_col), 0.0f);
-            window->DrawList->AddImage(user_texture_id, bb.Min + ImVec2(1, 1), bb.Max - ImVec2(1, 1), uv0, uv1, ImGui::GetColorU32(tint_col));
-        }
-        else
-            window->DrawList->AddImage(user_texture_id, bb.Min, bb.Max, uv0, uv1, ImGui::GetColorU32(tint_col));
+        m_imagePosition = SR_GRAPH_GUI_NS::DrawTexture(pDescriptor, m_textureSize, pPipeline->GetType(), false);
     }
 
     void SceneViewer::InitCamera() {
@@ -215,6 +253,7 @@ namespace SR_CORE_NS::GUI {
         if (SR_UTILS_NS::Features::Instance().Enabled("EditorCamera", true) && m_scene.RecursiveLockIfValid()) {
             camera = m_scene->Instance("Editor camera");
             camera->SetFlags(SR_UTILS_NS::GAMEOBJECT_FLAG_NO_SAVE);
+            m_isPrefab = m_scene->IsPrefab();
             m_scene.Unlock();
         }
         else {
@@ -225,7 +264,12 @@ namespace SR_CORE_NS::GUI {
 
         auto&& pCamera = new EditorCamera(size.x, size.y);
 
-        pCamera->SetRenderTechnique(SR_CORE_NS::EditorSettings::Instance().GetRenderTechnique());
+        if (m_isPrefab) {
+            pCamera->SetRenderTechnique(SR_CORE_NS::EditorSettings::Instance().GetPrefabEditorRenderTechnique());
+        }
+        else {
+            pCamera->SetRenderTechnique(SR_CORE_NS::EditorSettings::Instance().GetRenderTechnique());
+        }
 
         camera->AddComponent(pCamera);
 
@@ -273,8 +317,8 @@ namespace SR_CORE_NS::GUI {
 
         auto&& mousePos = ImGui::GetMousePos() - m_imagePosition;
 
-        const float_t x = mousePos.x / m_textureSize.x;
-        const float_t y = mousePos.y / m_textureSize.y;
+        const float_t x = mousePos.x / static_cast<float_t>(m_textureSize.x);
+        const float_t y = mousePos.y / static_cast<float_t>(m_textureSize.y);
 
         auto&& pCamera = m_camera ? m_camera->GetComponent<SR_GTYPES_NS::Camera>() : nullptr;
         if (!pCamera) {
@@ -334,5 +378,35 @@ namespace SR_CORE_NS::GUI {
         if (!xmlDocument.Save(SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat(CAMERA_XML))) {
             SR_ERROR("SceneViewer::BackupCameraSettings() : failed to save camera settings!");
         }
+    }
+
+    bool SceneViewer::UpdateViewSize() {
+        if (!m_guizmo) {
+            return false;
+        }
+
+        auto pCamera = m_camera->GetComponent<SR_GTYPES_NS::Camera>();
+        if (!pCamera) {
+            return false;
+        }
+
+        if (m_guizmo->GetViewMode() == EditorSceneViewMode::WindowSize) {
+            if (pCamera->GetSize() == GetContext()->GetWindowSize()) {
+                return false;
+            }
+
+            pCamera->UpdateProjection(GetContext()->GetWindowSize().x, GetContext()->GetWindowSize().y);
+            return true;
+        }
+        else if (m_guizmo->GetViewMode() == EditorSceneViewMode::FreeAspect) {
+            if (pCamera->GetSize() == m_windowSize) {
+                return false;
+            }
+
+            pCamera->UpdateProjection(m_windowSize.x, m_windowSize.y);
+            return true;
+        }
+
+        return false;
     }
 }

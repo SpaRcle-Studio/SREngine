@@ -1,30 +1,54 @@
 <?xml version="1.0"?>
 <Technique Name="ShadowMap">
+    <ColorBufferPass Directional="false">
+        <FramebufferSettings DynamicResizing="true" DepthEnabled="true" SmoothSamples="2">
+            <Size X="0" Y="0"/>
+            <PreScale X="0.85" Y="0.85"/>
+            <Depth Format="Auto" ClearValue="1.0"/>
+            <Layer Format="RGBA8_UNORM" R="0.0" G="0.0" B="0.0" A="1.0"/>
+        </FramebufferSettings>
+        <Shaders>
+            <Override Type="Canvas" Path="Engine/Shaders/ColorBuffer/canvas.srsl"/>
+            <Override Type="Spatial" Path="Engine/Shaders/ColorBuffer/spatial.srsl"/>
+            <Override Type="SpatialCustom" Path="Engine/Shaders/ColorBuffer/spatial.srsl"/>
+            <Override Type="Skybox" Path="Engine/Shaders/ColorBuffer/simple.srsl"/>
+            <Override Type="Simple" Path="Engine/Shaders/ColorBuffer/simple.srsl"/>
+            <Override Type="Skinned" Path="Engine/Shaders/ColorBuffer/skinned.srsl"/>
+        </Shaders>
+    </ColorBufferPass>
     <ShadowMapPass Name="DepthFBO" Directional="false">
         <FramebufferSettings DynamicResizing="true" DepthEnabled="true" SmoothSamples="1">
             <Size X="0" Y="0"/>
             <PreScale X="1.0" Y="1.0"/>
-            <Depth Format="Auto" ClearValue="1.0"/>
-            <Layer Format="R16_UNORM" R="0.0" G="0.0" B="0.0" A="1.0"/>
+            <Depth Format="D16_UNORM" ClearValue="1.0" Aspect="Depth" />
         </FramebufferSettings>
         <Shaders>
-            <Override Type="Spatial" Path="Engine/Shaders/ShadowMap/spatial.srsl"/>
-            <Override Type="Skinned" Path="Engine/Shaders/ShadowMap/skinned.srsl"/>
+            <Override Type="Spatial" Path="Engine/Shaders/ShadowMap/depth-spatial.srsl"/>
         </Shaders>
     </ShadowMapPass>
     <FramebufferPass Name="SceneViewFBO">
-        <FramebufferSettings DynamicResizing="true" DepthEnabled="true" SmoothSamples="1">
+        <FramebufferSettings DynamicResizing="true" DepthEnabled="true" SmoothSamples="0">
             <Size X="0" Y="0"/>
             <PreScale X="1.0" Y="1.0"/>
             <Depth Format="Auto" ClearValue="1.0"/>
             <Layer Format="RGBA8_UNORM" R="0.0" G="0.0" B="0.0" A="1.0"/>
         </FramebufferSettings>
         <Passes>
-            <PostProcessPass Shader="Engine/Shaders/ShadowMap/shadow_map.srsl">
-                <Attachments>
-                    <Attachment FBO="DepthFBO" Id="depthMap" Index="0"/>
-                </Attachments>
-            </PostProcessPass>
+            <OpaquePass>
+                <Sampler FBO="DepthFBO" Id="shadowMap" Depth="true" />
+            </OpaquePass>
+            <SkyboxPass Path="Engine/Skyboxes/Sun.png" Shader="Engine/Shaders/skybox.srsl"/>
+            <TransparentPass/>
+            <DebugPass/>
         </Passes>
     </FramebufferPass>
+    <Queues>
+        <Queue>
+            <Pass Name="DepthFBO"/>
+        </Queue>
+        <Queue>
+            <Pass Name="ColorBufferPass"/>
+            <Pass Name="SceneViewFBO"/>
+        </Queue>
+    </Queues>
 </Technique>

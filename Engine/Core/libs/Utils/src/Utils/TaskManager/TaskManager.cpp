@@ -73,6 +73,7 @@ namespace SR_UTILS_NS {
 
         if (m_createThread) {
             m_thread = SR_HTYPES_NS::Thread::Factory::Instance().Create(m_function, m_state);
+            m_thread->SetName("Task manager");
         }
         else {
             m_function(m_state);

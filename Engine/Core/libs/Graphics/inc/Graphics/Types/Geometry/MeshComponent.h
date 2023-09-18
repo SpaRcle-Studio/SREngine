@@ -11,8 +11,6 @@
 namespace SR_GTYPES_NS {
     class MeshComponent : public IndexedMesh, public SR_GTYPES_NS::IRenderComponent {
     protected:
-        ~MeshComponent() override = default;
-
         explicit MeshComponent(MeshType type)
             : IndexedMesh(type)
         { }
@@ -30,7 +28,7 @@ namespace SR_GTYPES_NS {
         SR_HTYPES_NS::Marshal::Ptr Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SR_UTILS_NS::SavableFlags flags) const override;
 
         SR_NODISCARD bool ExecuteInEditMode() const override;
-        SR_NODISCARD SR_FORCE_INLINE bool IsCanUpdate() const noexcept override { return false; }
+        SR_NODISCARD SR_FORCE_INLINE bool IsUpdatable() const noexcept override { return false; }
 
         SR_NODISCARD SR_FORCE_INLINE bool IsMeshActive() const noexcept override {
             return SR_UTILS_NS::Component::IsActive();

@@ -45,16 +45,20 @@ namespace SR_ANIMATIONS_NS {
     }
 
     void Animator::Update(float_t dt) {
+        SR_TRACY_ZONE;
+
         m_skeleton = GetParent()->GetComponent<Skeleton>();
 
         if (!m_sync) {
-            UpdateInternal(dt / 1000.f);
+            UpdateInternal(dt);
         }
 
         Super::Update(dt);
     }
 
     void Animator::UpdateInternal(float_t dt) {
+        SR_TRACY_ZONE;
+
         if (!GetGameObject() || !m_skeleton) {
             return;
         }
@@ -96,15 +100,15 @@ namespace SR_ANIMATIONS_NS {
         auto&& pStateMachine = pStateMachineNode->GetMachine();
 
         auto&& pSetPoseState = pStateMachine->AddState<AnimationSetPoseState>(pAnimationClip);
-        pSetPoseState->SetClip(pAnimationClip);
+        //pSetPoseState->SetClip(pAnimationClip);
 
         auto&& pClipState = pStateMachine->AddState<AnimationClipState>(pAnimationClip);
-        pClipState->SetClip(pAnimationClip);
+        //pClipState->SetClip(pAnimationClip);
 
         pStateMachine->GetEntryPoint()->AddTransition(pSetPoseState);
         pSetPoseState->AddTransition(pClipState);
 
-        //pStateMachine->GetEntryPoint()->AddTransition(pClipState);
+        pStateMachine->GetEntryPoint()->AddTransition(pClipState);
 
         m_graph->GetFinal()->AddInput(pStateMachineNode, 0, 0);
 

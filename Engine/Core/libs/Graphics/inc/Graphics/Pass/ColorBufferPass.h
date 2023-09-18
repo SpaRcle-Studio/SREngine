@@ -22,9 +22,11 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD MeshPtr GetMesh(float_t x, float_t y) const;
         SR_NODISCARD uint32_t GetIndex(float_t x, float_t y) const;
         SR_NODISCARD SR_MATH_NS::FColor GetColor(float_t x, float_t y) const;
+        SR_NODISCARD MeshClusterTypeFlag GetClusterType() const noexcept override;
 
     protected:
-        void UpdateCluster(MeshCluster* pCluster) override;
+        void UseUniforms(ShaderPtr pShader, MeshPtr pMesh) override;
+        void UseSharedUniforms(ShaderPtr pShader) override;
 
         void SetMeshIndex(MeshPtr pMesh, uint32_t colorId);
 

@@ -12,7 +12,7 @@
 
 #include <Graphics/GUI/Icons.h>
 
-namespace SR_CORE_NS::GUI {
+namespace SR_CORE_GUI_NS {
     Hierarchy::Hierarchy()
         : Widget("Hierarchy")
     {
@@ -39,6 +39,8 @@ namespace SR_CORE_NS::GUI {
         m_sceneRunnerWidget->SetManager(GetManager());
         m_sceneRunnerWidget->DrawAsSubWindow();
 
+        ContextMenu();
+
         for (auto&& gameObject : m_tree) {
             if (!gameObject.Valid()) {
                 continue;
@@ -46,26 +48,24 @@ namespace SR_CORE_NS::GUI {
 
             DrawChild(gameObject, -1);
         }
+        ImGui::Dummy(ImVec2(0.0f, 10.0f)); ///Требуется, чтобы в конце древа всегда было пустое пространство для вызова контекстного меню
 
-        if (GUISystem::Instance().BeginDragDropTargetWindow("Hierarchy##Payload")) {
-            if (auto payload = ImGui::AcceptDragDropPayload("Hierarchy##Payload"); payload != NULL && payload->Data) {
-                /*for (auto&& ptr : *(std::list<Helper::GameObject::Ptr>*)(payload->Data)) {
-                    if (ptr.RecursiveLockIfValid()) {
-                        ptr->MoveToTree(SR_UTILS_NS::GameObject::Ptr());
-                        ptr->Unlock();
-                    }
-                }*/
+        if (SR_GRAPH_GUI_NS::BeginDragDropTargetWindow("Hierarchy##Payload")) {
+            if (auto&& pPayload = ImGui::AcceptDragDropPayload("Hierarchy##Payload"); pPayload != nullptr && pPayload->Data) {
                 if (m_scene.RecursiveLockIfValid()) {
+                    auto&& pEngine = dynamic_cast<EditorGUI*>(GetManager())->GetEngine();
+
                     std::vector<SR_UTILS_NS::ReversibleCommand*> commands;
-                    commands.emplace_back(new Framework::Core::Commands::ChangeHierarchySelected(this, m_selected, {}));
-                    for (auto&& ptr : *(std::list<Helper::GameObject::Ptr>*)(payload->Data)) {
+                    commands.emplace_back(new SR_CORE_NS::Commands::ChangeHierarchySelected(pEngine, this, m_selected, { }));
+                    for (auto&& ptr : *(std::list<SR_UTILS_NS::GameObject::Ptr>*)(pPayload->Data)) {
                         if (ptr.RecursiveLockIfValid()) {
-                            commands.emplace_back(new Framework::Core::Commands::GameObjectMove(ptr, SR_UTILS_NS::GameObject::Ptr()));
+                            commands.emplace_back(new SR_CORE_NS::Commands::GameObjectMove(pEngine, ptr, SR_UTILS_NS::GameObject::Ptr()));
                             ptr.Unlock();
                         }
                     }
+
                     auto&& cmd = new SR_UTILS_NS::GroupCommand(std::move(commands));
-                    Engine::Instance().GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
+                    pEngine->GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
                     m_scene.Unlock();
                 }
             }
@@ -76,9 +76,10 @@ namespace SR_CORE_NS::GUI {
         if (!ImGui::IsAnyItemHovered() && ImGui::IsWindowHovered() && ImGui::IsMouseDoubleClicked(0)) {
             ClearSelected();
         }
+
     }
 
-    void Hierarchy::Update() {
+    void Hierarchy::Update(float_t dt) {
         SR_LOCK_GUARD
 
         for (auto pIt = m_selected.begin(); pIt != m_selected.end(); ) {
@@ -89,7 +90,6 @@ namespace SR_CORE_NS::GUI {
                 pIt = m_selected.erase(pIt);
             }
         }
-
     }
 
     void Hierarchy::SetScene(const SR_WORLD_NS::Scene::Ptr& scene) {
@@ -102,9 +102,32 @@ namespace SR_CORE_NS::GUI {
         }
     }
 
-    void Hierarchy::ContextMenu(const SR_UTILS_NS::GameObject::Ptr& gm, uint64_t id) {
+    void Hierarchy::ContextMenu() {
+        if (ImGui::BeginPopupContextWindow("HierarchyContextMenu")) {
+            if (ImGui::Selectable("Add New GameObject")) {
+                auto&& pEngine = dynamic_cast<EditorGUI*>(GetManager())->GetEngine();
+                pEngine->GetScene()->Instance("New GameObject");
+            }
+
+            ImGui::Separator();
+
+            if (ImGui::Selectable("Paste")) {
+                Paste();
+            }
+
+            ImGui::Separator();
+
+            if (ImGui::Selectable("Hierarchy Settings (EMPTY)")) { // TODO: Когда-нибудь мы будем настраивать стили окон и подобное, наверное, надеюсь
+
+            }
+
+            ImGui::EndPopup();
+        }
+    }
+
+    void Hierarchy::ChildContextMenu(const SR_UTILS_NS::GameObject::Ptr& gm, uint64_t id) {
         ImGui::PushID((void*)(intptr_t)id);
-        if (ImGui::BeginPopupContextItem("HierarchyContextMenu")) {
+        if (ImGui::BeginPopupContextItem("HierarchyChildContextMenu")) {
             if (m_selected.count(gm) == 0) {
                 SelectGameObject(gm);
             }
@@ -137,6 +160,17 @@ namespace SR_CORE_NS::GUI {
 
                 if (ImGui::Selectable("Break link")) {
                     gm->UnlinkPrefab();
+                }
+
+                ImGui::Separator();
+
+                if (ImGui::Selectable("Edit")) {
+                    auto&& pEngine = dynamic_cast<EditorGUI*>(GetManager())->GetEngine();
+                    auto&& prefabPath = gm->GetPrefab()->GetResourcePath();
+                    if (auto&& pScene = SR_WORLD_NS::Scene::Load(prefabPath)) {
+                        pEngine->SetScene(pScene);
+                        pEngine->GetEditor()->CacheScenePath(prefabPath);
+                    }
                 }
             }
 
@@ -173,6 +207,13 @@ namespace SR_CORE_NS::GUI {
         }
 
         const uint64_t id = root->GetEntityId();
+
+        if (SR_GRAPH_GUI_NS::RadioButton(SR_FORMAT_C("##HierarchyEnableGM%i", id), root->IsEnabled(), 0.75f)) {
+            root->SetEnabled(!root->IsEnabled());
+        }
+
+        ImGui::SameLine();
+
         const bool open = ImGui::TreeNodeEx((void*)(intptr_t)id, flags, "%s", name.c_str());
 
         if (root->GetPrefab()) {
@@ -185,8 +226,7 @@ namespace SR_CORE_NS::GUI {
             }
         }
 
-        ContextMenu(root, id);
-
+        ChildContextMenu(root, id);
         CheckSelected(root);
 
         if (!ImGui::GetDragDropPayload() && ImGui::BeginDragDropSource()) {
@@ -224,7 +264,7 @@ namespace SR_CORE_NS::GUI {
                 }
             }
 
-            if (auto payload = ImGui::AcceptDragDropPayload("Hierarchy##Payload"); payload != NULL && payload->Data) {
+            if (auto payload = ImGui::AcceptDragDropPayload("Hierarchy##Payload"); payload != nullptr && payload->Data) {
                 /*for (auto&& ptr : *(std::list<Helper::GameObject::Ptr>*)(payload->Data)) {
                     if (ptr.RecursiveLockIfValid()) {
                         ptr->MoveToTree(root);
@@ -232,16 +272,18 @@ namespace SR_CORE_NS::GUI {
                     }
                 }*/
                 if (m_scene.RecursiveLockIfValid()) {
+                    auto&& pEngine = dynamic_cast<EditorGUI*>(GetManager())->GetEngine();
+
                     std::vector<SR_UTILS_NS::ReversibleCommand*> commands;
-                    commands.emplace_back(new Framework::Core::Commands::ChangeHierarchySelected(this, m_selected, {}));
+                    commands.emplace_back(new SR_CORE_NS::Commands::ChangeHierarchySelected(pEngine, this, m_selected, {}));
                     for (auto&& ptr : *(std::list<Helper::GameObject::Ptr>*)(payload->Data)) {
                         if (ptr.RecursiveLockIfValid()) {
-                            commands.emplace_back(new Framework::Core::Commands::GameObjectMove(ptr, root));
+                            commands.emplace_back(new SR_CORE_NS::Commands::GameObjectMove(pEngine, ptr, root));
                             ptr.Unlock();
                         }
                     }
                     auto&& cmd = new SR_UTILS_NS::GroupCommand(std::move(commands));
-                    Engine::Instance().GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
+                    pEngine->GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
                     m_scene.Unlock();
                 }
             }
@@ -268,7 +310,7 @@ namespace SR_CORE_NS::GUI {
             }
             case SR_UTILS_NS::KeyCode::V: {
                 if (IsKeyPressed(SR_UTILS_NS::KeyCode::Ctrl))
-                    Paste();
+                    Paste((m_selected.size() == 1) ? m_selected.begin()->Get() : nullptr);
                 break;
             }
             case SR_UTILS_NS::KeyCode::Del: {
@@ -302,6 +344,8 @@ namespace SR_CORE_NS::GUI {
     void Hierarchy::Copy() const {
         auto&& pMarshal = new SR_HTYPES_NS::Marshal();
 
+        pMarshal->Write<std::string>("SRCopyPaste#Hierarchy"); /// Требуется для проверки валидности содержимого буфера обмена в методе Paste()*/
+
         pMarshal->Write(static_cast<uint64_t>(m_selected.size()));
 
         for (auto&& ptr : m_selected) {
@@ -315,51 +359,43 @@ namespace SR_CORE_NS::GUI {
             SR_UTILS_NS::Platform::TextToClipboard(pMarshal->ToBase64());
         }
 
-        SR_SAFE_DELETE_PTR(pMarshal);
+        SR_SAFE_DELETE_PTR(pMarshal)
     }
 
-    void Hierarchy::Paste() {
-
+    void Hierarchy::Paste(const SR_UTILS_NS::GameObject::Ptr& pParent) {
         auto&& base64 = Helper::Platform::GetClipboardText();
-
-        if (auto marshal = SR_HTYPES_NS::Marshal::LoadFromBase64(base64); marshal.Valid()) {
-            std::set<Helper::GameObject::Ptr> selected;
-
-            if (m_scene.RecursiveLockIfValid()) {
-                auto&& count = marshal.Read<uint64_t>();
-
-                if (count > 1000) {
-                    SR_WARN("Hierarchy::Paste() : attempt to insert a large number of objects! Count: " + SR_UTILS_NS::ToString(count));
-                }
-
-                for (uint64_t i = 0; i < count; ++i) {
-                    if (auto &&ptr = m_scene->Instance(marshal)) {
-                        selected.insert(ptr);
-                    }
-                    else
-                        break;
-                }
-                m_scene.Unlock();
-            }
-
-            SetSelectedImpl(selected);
+        auto marshal = SR_HTYPES_NS::Marshal::LoadFromBase64(base64);
+        if (!marshal.Valid()) {
+            SR_WARN("Hierarchy::Paste() : content of clipboard couldn't be read")
+            return;
         }
+
+        if (marshal.TryRead<std::string>() != "SRCopyPaste#Hierarchy") {
+            SR_LOG("Hierarchy::Paste() : attempted to paste invalid content from clipboard!") ///TODO: Стоит ли оповещать об этом?
+            return;
+        }
+
+        auto&& pEngine = dynamic_cast<EditorGUI*>(GetManager())->GetEngine();
+        auto&& cmd = new SR_CORE_NS::Commands::HierarchyPaste(pEngine, this, marshal.CopyPtr(), pParent);
+        pEngine->GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
     }
 
     void Hierarchy::Delete() {
         SR_LOCK_GUARD
 
         if (!m_selected.empty() && m_scene.RecursiveLockIfValid()) {
+            auto&& pEngine = dynamic_cast<EditorGUI*>(GetManager())->GetEngine();
+
             std::vector<SR_UTILS_NS::ReversibleCommand*> commands;
-            commands.emplace_back(new Framework::Core::Commands::ChangeHierarchySelected(this, m_selected, {}));
+            commands.emplace_back(new SR_CORE_NS::Commands::ChangeHierarchySelected(pEngine, this, m_selected, {}));
             for (auto&& selected : m_selected) {
                 if (selected.RecursiveLockIfValid()) {
-                    commands.emplace_back(new Framework::Core::Commands::GameObjectDelete(selected));
+                    commands.emplace_back(new SR_CORE_NS::Commands::GameObjectDelete(pEngine, selected));
                     selected.Unlock();
                 }
             }
             auto&& cmd = new SR_UTILS_NS::GroupCommand(std::move(commands));
-            Engine::Instance().GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
+            pEngine->GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
             m_selected.clear();
             m_scene.Unlock();
         }
@@ -372,9 +408,11 @@ namespace SR_CORE_NS::GUI {
 
     void Hierarchy::ClearSelected() {
         SR_LOCK_GUARD
-        if (!m_selected.empty()) { ///команда не должна срабатывать, если ни один объект не выделен, иначе такая команда бесполезна
-            auto&& cmd = new Framework::Core::Commands::ChangeHierarchySelected(this, m_selected, {});
-            Engine::Instance().GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Sync);
+        /// команда не должна срабатывать, если ни один объект не выделен, иначе такая команда бесполезна
+        if (!m_selected.empty()) {
+            auto&& pEngine = dynamic_cast<EditorGUI*>(GetManager())->GetEngine();
+            auto&& cmd = new SR_CORE_NS::Commands::ChangeHierarchySelected(pEngine, this, m_selected, { });
+            pEngine->GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Sync);
         }
     }
 
@@ -402,19 +440,20 @@ namespace SR_CORE_NS::GUI {
         }
         newSelected.insert(ptr);
 
-        auto&& cmd = new Framework::Core::Commands::ChangeHierarchySelected(this, m_selected, newSelected);
-        Engine::Instance().GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Sync);
+        auto&& pEngine = dynamic_cast<EditorGUI*>(GetManager())->GetEngine();
+
+        auto&& cmd = new SR_CORE_NS::Commands::ChangeHierarchySelected(pEngine, this, m_selected, newSelected);
+        pEngine->GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Sync);
     }
 
     void Hierarchy::SetSelectedImpl(const std::set<SR_UTILS_NS::GameObject::Ptr>& changeSelected){
         SR_LOCK_GUARD
         m_selected = changeSelected;
 #ifdef SR_DEBUG
-        for (auto&& ptr : m_selected) {
-            SRAssert(ptr);
+        for (auto&& pGameObject : m_selected) {
+            SRAssert(pGameObject);
         }
 #endif
-        m_needExpand = true;
     }
 
     void Hierarchy::ExpandPath(const SR_UTILS_NS::GameObject::Ptr& gm) { /** NOLINT */

@@ -9,12 +9,16 @@
 #include <Utils/World/SceneAllocator.h>
 #include <Utils/World/SceneLogic.h>
 #include <Utils/World/SceneCubeChunkLogic.h>
-
-#include <Utils/ECS/Component.h>
-#include <Utils/ECS/GameObject.h>
 #include <Utils/World/SceneDefaultLogic.h>
 #include <Utils/World/SceneBuilder.h>
 #include <Utils/World/ScenePrefabLogic.h>
+
+#include <Utils/Types/RawMesh.h>
+
+#include <Utils/ECS/Component.h>
+#include <Utils/ECS/GameObject.h>
+
+#include <Utils/Platform/Platform.h>
 
 namespace SR_WORLD_NS {
     Scene::Scene()
@@ -95,7 +99,10 @@ namespace SR_WORLD_NS {
             return Scene::Ptr();
         }
 
-        scene->SetPath(path);
+        SRAssert(!path.IsAbs());
+
+        scene->m_absPath = GetAbsPath(path);
+        scene->m_path = path;
         scene->m_logic = SceneLogic::CreateByExt(scene, path.GetExtension());
 
         return scene;
@@ -113,10 +120,13 @@ namespace SR_WORLD_NS {
             return Scene::Ptr();
         }
 
-        scene->SetPath(path);
+        SRAssert(!path.IsAbs());
+
+        scene->m_absPath = GetAbsPath(path);
+        scene->m_path = path;
         scene->m_logic = SceneLogic::CreateByExt(scene, path.GetExtension());
 
-        if (!scene->m_logic->Load(path)) {
+        if (!scene->m_logic->Load(scene->m_absPath)) {
             SR_ERROR("Scene::Load() : failed to load scene logic!");
 
             scene.AutoFree([](SR_WORLD_NS::Scene* pScene) {
@@ -216,15 +226,14 @@ namespace SR_WORLD_NS {
     bool Scene::SaveAt(const Path& path) {
         SR_INFO(SR_FORMAT("Scene::SaveAt() : saving scene...\n\tPath: %s", path.CStr()));
 
+        SRAssert(!path.IsAbs());
+
         if (m_path.GetExtensionView() != path.GetExtensionView()) {
             SR_ERROR("Scene::SaveAt() : different extensions!\n\tSave path: " + path.ToString() + "\n\tScene path: " + m_path.ToString());
             return false;
         }
 
-        /// TODO: правильное ли это поведение? Не интуитивно.
-        SetPath(path);
-
-        if (!m_logic->Save(path)) {
+        if (!m_logic->Save(GetAbsPath(path))) {
             SR_ERROR("Scene::SaveAt() : failed to save scene logic!");
             return false;
         }
@@ -326,6 +335,8 @@ namespace SR_WORLD_NS {
 
         m_newQueue.emplace_back(ptr);
 
+        ptr->SetScene(this);
+
         for (auto&& child : ptr->GetChildrenRef()) {
             RegisterGameObject(child);
         }
@@ -353,7 +364,6 @@ namespace SR_WORLD_NS {
                 const uint64_t id = m_freeObjIndices.empty() ? m_gameObjects.size() : m_freeObjIndices.front();
 
                 gameObject->SetIdInScene(id);
-                gameObject->SetScene(this);
 
                 if (m_freeObjIndices.empty()) {
                     m_gameObjects.emplace_back(gameObject);
@@ -386,5 +396,24 @@ namespace SR_WORLD_NS {
 
     void Scene::Remove(Component* pComponent) {
         m_destroyedComponents.emplace_back(pComponent);
+    }
+
+    Path Scene::GetAbsPath() const {
+        return m_absPath;
+    }
+
+    bool Scene::IsExists(const Path& path) {
+        return GetAbsPath(path).Exists();
+    }
+
+    Path Scene::GetAbsPath(const Path& path) {
+        if (path.Contains(RuntimeScenePath.ToStringRef()) ||
+            path.Contains(NewScenePath.ToStringRef()) ||
+            path.Contains(NewPrefabPath.ToStringRef())
+        ) {
+            return SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat(path);
+        }
+
+        return SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat(path);
     }
 }

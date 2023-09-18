@@ -11,11 +11,10 @@
 
 namespace SR_GTYPES_NS {
     Material::Material()
-        : Super(SR_COMPILE_TIME_CRC32_TYPE_NAME(Material), true /** auto remove */)
+        : Super(SR_COMPILE_TIME_CRC32_TYPE_NAME(Material))
     { }
 
     Material::~Material() {
-        SetReadOnly(false);
         SetShader(nullptr);
 
         for (auto&& pTexture : GetTexturesFromMatProperties(m_properties)) {
@@ -31,19 +30,19 @@ namespace SR_GTYPES_NS {
         for (auto&& property : m_properties) {
             switch (property.type) {
                 case ShaderVarType::Int:
-                    pShader->SetValue(property.hashId, std::get<int32_t>(property.data));
+                    pShader->SetInt(property.hashId, std::get<int32_t>(property.data));
                     break;
                 case ShaderVarType::Float:
-                    pShader->SetValue(property.hashId, std::get<float_t>(property.data));
+                    pShader->SetFloat(property.hashId, std::get<float_t>(property.data));
                     break;
                 case ShaderVarType::Vec2:
-                    pShader->SetValue(property.hashId, std::get<SR_MATH_NS::FVector2>(property.data).Cast<float_t>());
+                    pShader->SetVec2(property.hashId, std::get<SR_MATH_NS::FVector2>(property.data).Cast<float_t>());
                     break;
                 case ShaderVarType::Vec3:
-                    pShader->SetValue(property.hashId, std::get<SR_MATH_NS::FVector3>(property.data).Cast<float_t>());
+                    pShader->SetVec3(property.hashId, std::get<SR_MATH_NS::FVector3>(property.data).Cast<float_t>());
                     break;
                 case ShaderVarType::Vec4:
-                    pShader->SetValue(property.hashId, std::get<SR_MATH_NS::FVector4>(property.data).Cast<float_t>());
+                    pShader->SetVec4(property.hashId, std::get<SR_MATH_NS::FVector4>(property.data).Cast<float_t>());
                     break;
                 case ShaderVarType::Sampler2D:
                     /// samplers used at UseSamplers
@@ -61,12 +60,16 @@ namespace SR_GTYPES_NS {
     }
 
     Material* Material::Load(SR_UTILS_NS::Path rawPath) {
-        static auto&& resourceManager = SR_UTILS_NS::ResourceManager::Instance();
+        auto&& resourceManager = SR_UTILS_NS::ResourceManager::Instance();
 
         Material* pMaterial = nullptr;
 
         resourceManager.Execute([&](){
             auto&& path = rawPath.SelfRemoveSubPath(resourceManager.GetResPathRef());
+            if (!resourceManager.GetResPathRef().Concat(path).Exists()) {
+                SR_WARN("Material::Load() : path to the shader doesn't exist! Loading is aborted.");
+                return;
+            }
 
             if ((pMaterial = resourceManager.Find<Material>(path))) {
                 return;
@@ -257,13 +260,10 @@ namespace SR_GTYPES_NS {
 
         LoadProperties(matXml.TryGetNode("Properties"));
 
-        SetReadOnly(matXml.TryGetAttribute("ReadOnly").ToBool(false));
-
         return IResource::Load();
     }
 
     bool Material::Unload() {
-        SetReadOnly(false);
         SetShader(nullptr);
 
         for (auto&& pTexture : GetTexturesFromMatProperties(m_properties)) {

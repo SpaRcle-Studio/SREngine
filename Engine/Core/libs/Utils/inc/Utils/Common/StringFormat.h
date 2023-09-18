@@ -10,23 +10,29 @@
 
 namespace SR_UTILS_NS {
     template<typename T> std::string ToString(const T& value) {
-        if constexpr (Math::IsNumber<T>() || Math::IsLogical<T>()) {
+        if constexpr (SR_MATH_NS::IsLogical<T>()) {
+            return value ? "true" : "false";
+        }
+        else if constexpr (SR_MATH_NS::IsNumber<T>()) {
             return std::to_string(value);
         }
-        else if constexpr (Math::IsString<T>()) {
+        else if constexpr (std::is_enum_v<T>) {
+            return SR_UTILS_NS::EnumReflector::ToString(value);
+        }
+        else if constexpr (SR_MATH_NS::IsString<T>()) {
             return value;
         }
-        else if constexpr (false) {
-            SR_STATIC_ASSERT("Unsupported type!");
+        else {
+            SRHalt("Unsupported type!");
+            return std::string(); /// NOLINT
         }
     }
 
-    /// Warning: unsafe
     template<typename T> T LexicalCast(const std::string& str) {
         try {
             if constexpr (std::is_same<T, bool>()) {
                 const char c = str.front();
-                return c == 't' || c == 'T' || c == '1' || c == 'y' || c == 'Y' || c == '1';
+                return c == 't' || c == 'T' || c == 'y' || c == 'Y' || c == '1'; /// NOLINT
             }
             else if constexpr (std::is_same<T, int8_t>()) {
                 return static_cast<int8_t>(str.front());
@@ -52,14 +58,15 @@ namespace SR_UTILS_NS {
             else if constexpr (std::is_same<T, uint64_t>()) {
                 return static_cast<uint64_t>(std::stoll(str));
             }
-            else if constexpr (std::is_same<T, float_t>()) {
+            else if constexpr (std::is_same<T, float_t>() || std::is_same<T, float>()) {
                 return std::stof(str);
             }
-            else if constexpr (std::is_same<T, double_t>() || std::is_same<T, Math::Unit>()) {
+            else if constexpr (std::is_same<T, double_t>() || std::is_same<T, double>() || std::is_same<T, Math::Unit>()) {
                 return std::stod(str);
             }
             else {
-                SR_STATIC_ASSERT("Unsupported type!");
+                SRHalt("Unsupported type!");
+                return T();
             }
         }
         catch (...) {

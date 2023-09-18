@@ -18,7 +18,7 @@
 #include <Scripting/Impl/EvoScriptResourceReloader.h>
 
 namespace SR_CORE_NS::Resources {
-    bool RegisterResources() {
+    bool RegisterResources(const SR_HTYPES_NS::SharedPtr<Engine>& pEngine) {
         auto&& resourcesManager = SR_UTILS_NS::ResourceManager::Instance();
 
         resourcesManager.RegisterType<SR_HTYPES_NS::RawMesh>();
@@ -46,10 +46,12 @@ namespace SR_CORE_NS::Resources {
 
         resourcesManager.RegisterReloader<SR_SCRIPTING_NS::Behaviour, SR_SCRIPTING_NS::EvoScriptResourceReloader>();
 
-        resourcesManager.RegisterReloader<SR_HTYPES_NS::RawMesh, SR_CORE_NS::GraphicsResourceReloader>();
-        resourcesManager.RegisterReloader<SR_GTYPES_NS::Texture, SR_CORE_NS::GraphicsResourceReloader>();
-        resourcesManager.RegisterReloader<SR_GTYPES_NS::Material, SR_CORE_NS::GraphicsResourceReloader>();
-        resourcesManager.RegisterReloader<SR_GTYPES_NS::Shader, SR_CORE_NS::GraphicsResourceReloader>();
+        auto&& pRenderContext = pEngine->GetRenderContext();
+
+        resourcesManager.RegisterReloader<SR_HTYPES_NS::RawMesh, SR_CORE_NS::GraphicsResourceReloader>(pRenderContext);
+        resourcesManager.RegisterReloader<SR_GTYPES_NS::Texture, SR_CORE_NS::GraphicsResourceReloader>(pRenderContext);
+        resourcesManager.RegisterReloader<SR_GTYPES_NS::Material, SR_CORE_NS::GraphicsResourceReloader>(pRenderContext);
+        resourcesManager.RegisterReloader<SR_GTYPES_NS::Shader, SR_CORE_NS::GraphicsResourceReloader>(pRenderContext);
 
         return true;
     }

@@ -4,6 +4,8 @@
 
 #include <Utils/World/SceneCubeChunkLogic.h>
 #include <Utils/ECS/ComponentManager.h>
+#include <Utils/Platform/Platform.h>
+#include <Utils/DebugDraw.h>
 
 namespace SR_WORLD_NS {
     SceneCubeChunkLogic::SceneCubeChunkLogic(const ScenePtr& scene)
@@ -52,7 +54,10 @@ namespace SR_WORLD_NS {
     bool SceneCubeChunkLogic::ReloadChunks() {
         SR_TRACY_ZONE;
 
+        auto&& pContext = SR_THIS_THREAD->GetContext();
+
         for (auto&& [position, pRegion] : m_regions) {
+            SaveRegion(GetRegionsPath(), pRegion, pContext);
             pRegion->Reload();
         }
 
@@ -67,6 +72,8 @@ namespace SR_WORLD_NS {
     }
 
     const Scene::GameObjects& SceneCubeChunkLogic::GetGameObjectsAtChunk(const SR_MATH_NS::IVector3 &region, const SR_MATH_NS::IVector3 &chunk) const {
+        SR_TRACY_ZONE;
+
         const auto key = TensorKey(region, chunk);
         if (m_tensor.count(key) == 0) {
             static GameObjects _default = GameObjects();
@@ -115,7 +122,7 @@ namespace SR_WORLD_NS {
 
         /// TODO: есть предположение, что криво вычисляется попадание в радиус, надо проверить
 
-        return ((SR_POW(x) / alpha) + (SR_POW(y) / alpha) + SR_POW(z) <= SR_POW(m_observer->m_scope));
+        return ((SR_SQUARE(x) / alpha) + (SR_SQUARE(y) / alpha) + SR_SQUARE(z) <= SR_SQUARE(m_observer->m_scope));
     }
 
     SR_NODISCARD Region* SceneCubeChunkLogic::GetRegion(const SR_MATH_NS::IVector3& region) {
@@ -243,8 +250,8 @@ namespace SR_WORLD_NS {
                 ++pIt;
             }
             else {
+                SaveRegion(GetRegionsPath(), pRegion, pContext);
                 pRegion->Unload();
-                SaveRegion(pRegion, pContext);
                 delete pRegion;
                 pIt = m_regions.erase(pIt);
 				m_debugDirty = true;
@@ -324,15 +331,13 @@ namespace SR_WORLD_NS {
         }
     }
 
-    void SceneCubeChunkLogic::SaveRegion(Region* pRegion, SR_HTYPES_NS::DataStorage* pContext) const {
+    void SceneCubeChunkLogic::SaveRegion(const SR_UTILS_NS::Path& path, Region* pRegion, SR_HTYPES_NS::DataStorage* pContext) const {
         SR_TRACY_ZONE;
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
-        auto&& regionsPath = GetRegionsPath();
+        path.Create();
 
-        regionsPath.Make(Path::Type::Folder);
-
-        auto&& regPath = regionsPath.Concat(pRegion->GetPosition().ToString()).ConcatExt("dat");
+        auto&& regPath = path.Concat(pRegion->GetPosition().ToString()).ConcatExt("dat");
         if (auto&& pRegionMarshal = pRegion->Save(pContext); pRegionMarshal) {
             if (pRegionMarshal->Valid()) {
                 pRegionMarshal->Save(regPath);
@@ -350,7 +355,7 @@ namespace SR_WORLD_NS {
 
     Path SceneCubeChunkLogic::GetRegionsPath() const {
         /// TODO: cache path
-        return m_scene->GetPath().Concat("regions");
+        return m_scene->GetAbsPath().Concat("regions");
     }
 
     std::pair<SR_MATH_NS::IVector3, SR_MATH_NS::IVector3> SceneCubeChunkLogic::GetRegionAndChunk(const SR_MATH_NS::FVector3& pos) const {
@@ -373,9 +378,14 @@ namespace SR_WORLD_NS {
         return std::make_pair(currentRegion, currentChunk);
     }
 
-    bool SceneCubeChunkLogic::Save(const Path &path) {
+    bool SceneCubeChunkLogic::Save(const Path& path) {
         SR_TRACY_ZONE;
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
+
+        if (!Super::Save(path)) {
+            SR_ERROR("ScenePrefabLogic::Save() : failed to save base logic!");
+            return false;
+        }
 
         auto&& currentChunk = CalculateCurrentChunk();
         m_observer->SetChunk(currentChunk);
@@ -386,7 +396,7 @@ namespace SR_WORLD_NS {
         auto&& pContext = SR_THIS_THREAD->GetContext();
 
         for (auto&& [position, pRegion] : m_regions) {
-            SaveRegion(pRegion, pContext);
+            SaveRegion(path.Concat("regions"), pRegion, pContext);
         }
 
         auto&& pSceneRootMarshal = m_scene->SaveComponents(nullptr, SAVABLE_FLAG_NONE);
@@ -408,7 +418,7 @@ namespace SR_WORLD_NS {
         SR_TRACY_ZONE;
         SR_LOCK_GUARD
 
-        auto&& componentsPath = m_scene->GetPath().Concat("data/components.bin");
+        auto&& componentsPath = m_scene->GetAbsPath().Concat("data/components.bin");
 
         if (auto&& rootComponentsMarshal = SR_HTYPES_NS::Marshal::LoadPtr(componentsPath)) {
             auto&& components = SR_UTILS_NS::ComponentManager::Instance().LoadComponents(*rootComponentsMarshal);

@@ -2,8 +2,8 @@
 // Created by Monika on 13.05.2023.
 //
 
-#ifndef SRENGINE_VULKANTRACY_H
-#define SRENGINE_VULKANTRACY_H
+#ifndef SR_ENGINE_GRAPHICS_VULKAN_TRACY_H
+#define SR_ENGINE_GRAPHICS_VULKAN_TRACY_H
 
 #if defined(SR_TRACY_ENABLE) && defined(SR_USE_VULKAN)
     #include <Utils/Profile/TracyContext.h>
@@ -44,4 +44,4 @@
     #define SR_TRACY_VK_COLLECT(cmd)
 #endif
 
-#endif //SRENGINE_VULKANTRACY_H
+#endif //SR_ENGINE_GRAPHICS_VULKAN_TRACY_H

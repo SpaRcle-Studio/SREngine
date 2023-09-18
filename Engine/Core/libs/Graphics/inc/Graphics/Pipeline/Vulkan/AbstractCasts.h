@@ -10,6 +10,18 @@
 #include <Graphics/Types/Descriptors.h>
 
 namespace Framework::Graphics::VulkanTools {
+    static VkShaderStageFlagBits AbstractShaderToVkShader(ShaderStage stage) {
+        switch (stage) {
+            case ShaderStage::Vertex: return VK_SHADER_STAGE_VERTEX_BIT;
+            case ShaderStage::Fragment: return VK_SHADER_STAGE_FRAGMENT_BIT;
+            case ShaderStage::Geometry: return VK_SHADER_STAGE_GEOMETRY_BIT;
+            case ShaderStage::Compute: return VK_SHADER_STAGE_COMPUTE_BIT;
+            default:
+                SR_ERROR("VulkanTools::AbstractShaderToVkShader() : unknown binding stage!\n\tStage: " + SR_UTILS_NS::EnumReflector::ToString(stage));
+                return VK_SHADER_STAGE_FLAG_BITS_MAX_ENUM;
+        }
+    }
+
     static SR_FORCE_INLINE VkFormat AttributeToVkFormat(const Vertices::Attribute& attr) {
         switch (attr) {
             case Vertices::Attribute::FLOAT_R32G32B32A32: return VK_FORMAT_R32G32B32A32_SFLOAT;
@@ -41,6 +53,70 @@ namespace Framework::Graphics::VulkanTools {
             vkDescriptions.push_back(EvoVulkan::Tools::Initializers::VertexInputBindingDescription(i, descriptions[i], VK_VERTEX_INPUT_RATE_VERTEX));
 
         return vkDescriptions;
+    }
+
+    static std::vector<VkPushConstantRange> AbstractPushConstantToVkPushConstants(const SRShaderCreateInfo& createInfo) {
+        std::map<ShaderStage, VkPushConstantRange> pushConstantsMap;
+
+        for (auto&& [stage, info] : createInfo.stages) {
+            for (auto&& pushConstant : info.pushConstants) {
+                auto&& pushConstantRange = pushConstantsMap[stage];
+                pushConstantRange.size = pushConstant.size;
+                pushConstantRange.offset = pushConstant.offset;
+                pushConstantRange.stageFlags |= AbstractShaderToVkShader(stage); /// NOLINT
+            }
+        }
+
+        std::vector<VkPushConstantRange> pushConstants;
+
+        for (auto&& [stage, pushConstant] : pushConstantsMap) {
+            pushConstants.emplace_back(pushConstant);
+        }
+
+        return pushConstants;
+    }
+
+    static std::optional<std::vector<VkDescriptorSetLayoutBinding>> UniformsToDescriptorLayoutBindings(const UBOInfo& uniforms) {
+        std::vector<VkDescriptorSetLayoutBinding> descriptorLayoutBindings;
+
+        for (auto&& uniform : uniforms) {
+            VkDescriptorType type = VK_DESCRIPTOR_TYPE_MAX_ENUM;
+
+            switch (uniform.type) {
+                case LayoutBinding::Sampler2D: type = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER; break;
+                case LayoutBinding::Uniform: type = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER; break;
+                case LayoutBinding::Attachhment: type = VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT; break;
+                default:
+                    SRHalt("VulknaTools::UniformsToDescriptorLayoutBindings() : unknown binding type!");
+                    return std::nullopt;
+            }
+
+            VkShaderStageFlagBits stage = AbstractShaderToVkShader(uniform.stage);
+
+            for (auto&& descriptor : descriptorLayoutBindings)
+            {
+                if (descriptor.binding == uniform.binding)
+                {
+                    if (descriptor.descriptorType != type)
+                    {
+                        SRHalt("VulkanTools::UniformsToDescriptorLayoutBindings() : descriptor types are different! \n\tBinding: " + SR_UTILS_NS::ToString(uniform.binding));
+                        return std::nullopt;
+                    }
+
+                    descriptor.stageFlags |= stage; /// NOLINT
+                    goto skip;
+                }
+            }
+
+            descriptorLayoutBindings.emplace_back(EvoVulkan::Tools::Initializers::DescriptorSetLayoutBinding(
+                    type, stage, uniform.binding
+            ));
+
+        skip:
+            SR_NOOP;
+        }
+
+        return descriptorLayoutBindings;
     }
 
     static SR_FORCE_INLINE VkShaderStageFlagBits VkShaderShaderTypeToStage(ShaderStage type) {
@@ -161,6 +237,27 @@ namespace Framework::Graphics::VulkanTools {
         }
     }
 
+    static SR_FORCE_INLINE std::vector<uint64_t> CastAbsDescriptorTypeToVk(const std::vector<DescriptorType>& descriptorTypes) {
+        std::vector<uint64_t> vkDescriptorTypes;
+
+        for (auto&& descriptorType : descriptorTypes) {
+            switch (descriptorType) {
+                case DescriptorType::Uniform:
+                    vkDescriptorTypes.emplace_back(VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER);
+                    break;
+                case DescriptorType::CombinedImage:
+                    vkDescriptorTypes.emplace_back(VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER);
+                    break;
+                default: {
+                    SR_ERROR("VulkanTools::CastAbsDescriptorTypeToVk() : unknown type!");
+                    break;
+                }
+            }
+        }
+
+        return std::move(vkDescriptorTypes);
+    }
+
     static SR_FORCE_INLINE std::vector<uint64_t> CastAbsDescriptorTypeToVk(std::vector<uint64_t> descriptorTypes) {
         for (uint64_t& type : descriptorTypes) {
             if (type == static_cast<uint64_t>(DescriptorType::Uniform)) {
@@ -174,31 +271,51 @@ namespace Framework::Graphics::VulkanTools {
         return std::move(descriptorTypes);
     }
 
-    static SR_FORCE_INLINE VkFormat AbstractTextureFormatToVkFormat(const ColorFormat& format) {
+    static SR_FORCE_INLINE VkImageAspectFlags AbstractImageAspectToVkAspect(const ImageAspect& aspect) {
+        switch (aspect) {
+            case ImageAspect::None: return VK_IMAGE_ASPECT_NONE;
+            case ImageAspect::Depth: return VK_IMAGE_ASPECT_DEPTH_BIT;
+            case ImageAspect::Stencil: return VK_IMAGE_ASPECT_STENCIL_BIT;
+            case ImageAspect::Color: return VK_IMAGE_ASPECT_COLOR_BIT;
+            case ImageAspect::DepthStencil: return VK_IMAGE_ASPECT_DEPTH_BIT | VK_IMAGE_ASPECT_STENCIL_BIT; /// NOLINT
+            default:
+                break;
+        }
+
+        return VK_IMAGE_ASPECT_FLAG_BITS_MAX_ENUM;
+    }
+
+    static SR_FORCE_INLINE VkFormat AbstractTextureFormatToVkFormat(const ImageFormat& format) {
         switch (format) {
-            case ColorFormat::RGBA8_UNORM: return VK_FORMAT_R8G8B8A8_UNORM;
-            case ColorFormat::BGRA8_UNORM: return VK_FORMAT_B8G8R8A8_UNORM;
-            case ColorFormat::RGBA16_UNORM: return VK_FORMAT_R16G16B16A16_UNORM;
-            case ColorFormat::RGBA16_SFLOAT: return VK_FORMAT_R16G16B16A16_SFLOAT;
+            case ImageFormat::RGBA8_UNORM: return VK_FORMAT_R8G8B8A8_UNORM;
+            case ImageFormat::BGRA8_UNORM: return VK_FORMAT_B8G8R8A8_UNORM;
+            case ImageFormat::RGBA16_UNORM: return VK_FORMAT_R16G16B16A16_UNORM;
+            case ImageFormat::RGBA16_SFLOAT: return VK_FORMAT_R16G16B16A16_SFLOAT;
 
-            case ColorFormat::RGB8_UNORM: return VK_FORMAT_R8G8B8_UNORM;
-            case ColorFormat::RGB16_UNORM: return VK_FORMAT_R16G16B16_UNORM;
+            case ImageFormat::RGB8_UNORM: return VK_FORMAT_R8G8B8_UNORM;
+            case ImageFormat::RGB16_UNORM: return VK_FORMAT_R16G16B16_UNORM;
 
-            case ColorFormat::RGBA8_SRGB: return VK_FORMAT_R8G8B8A8_SRGB;
+            case ImageFormat::RGBA8_SRGB: return VK_FORMAT_R8G8B8A8_SRGB;
 
-            case ColorFormat::R8_UNORM: return VK_FORMAT_R8_UNORM;
-            case ColorFormat::R16_UNORM: return VK_FORMAT_R16_UNORM;
-            case ColorFormat::R32_SFLOAT: return VK_FORMAT_R32_SFLOAT;
-            case ColorFormat::R64_SFLOAT: return VK_FORMAT_R64_SFLOAT;
+            case ImageFormat::R8_UNORM: return VK_FORMAT_R8_UNORM;
+            case ImageFormat::R16_UNORM: return VK_FORMAT_R16_UNORM;
+            case ImageFormat::R32_SFLOAT: return VK_FORMAT_R32_SFLOAT;
+            case ImageFormat::R64_SFLOAT: return VK_FORMAT_R64_SFLOAT;
 
-            case ColorFormat::R8_UINT: return VK_FORMAT_R8_UINT;
-            case ColorFormat::R16_UINT: return VK_FORMAT_R16_UINT;
-            case ColorFormat::R32_UINT: return VK_FORMAT_R32_UINT;
-            case ColorFormat::R64_UINT: return VK_FORMAT_R64_UINT;
+            case ImageFormat::R8_UINT: return VK_FORMAT_R8_UINT;
+            case ImageFormat::R16_UINT: return VK_FORMAT_R16_UINT;
+            case ImageFormat::R32_UINT: return VK_FORMAT_R32_UINT;
+            case ImageFormat::R64_UINT: return VK_FORMAT_R64_UINT;
 
-            case ColorFormat::RG8_UNORM: return VK_FORMAT_R8G8_UNORM;
+            case ImageFormat::RG8_UNORM: return VK_FORMAT_R8G8_UNORM;
 
-            case ColorFormat::Unknown:
+            case ImageFormat::D16_UNORM: return VK_FORMAT_D16_UNORM;
+            case ImageFormat::D24_UNORM_S8_UINT: return VK_FORMAT_D24_UNORM_S8_UINT;
+            case ImageFormat::D32_SFLOAT_S8_UINT: return VK_FORMAT_D32_SFLOAT_S8_UINT;
+            case ImageFormat::D32_SFLOAT: return VK_FORMAT_D32_SFLOAT;
+            case ImageFormat::None: return VK_FORMAT_UNDEFINED;
+
+            case ImageFormat::Unknown:
             default:
                 break;
         }

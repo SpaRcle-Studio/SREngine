@@ -55,12 +55,10 @@ namespace SR_GRAPH_NS {
     static constexpr uint64_t SHADER_TEXT_RECT_Y = SR_COMPILE_TIME_CRC32_STR("TEXT_RECT_Y");
     static constexpr uint64_t SHADER_TEXT_RECT_WIDTH = SR_COMPILE_TIME_CRC32_STR("TEXT_RECT_WIDTH");
     static constexpr uint64_t SHADER_TEXT_RECT_HEIGHT = SR_COMPILE_TIME_CRC32_STR("TEXT_RECT_HEIGHT");
-
-    /**
-       0 - binding
-       1 - ubo size
-    */
-    typedef std::vector<std::pair<uint64_t, uint64_t>> UBOInfo;
+    static constexpr uint64_t SHADER_DIRECTIONAL_LIGHT_POSITION = SR_COMPILE_TIME_CRC32_STR("DIRECTIONAL_LIGHT_POSITION");
+    static constexpr uint64_t SHADER_SHADOW_CASCADE_INDEX = SR_COMPILE_TIME_CRC32_STR("SHADOW_CASCADE_INDEX");
+    static constexpr uint64_t SHADER_CASCADE_LIGHT_SPACE_MATRICES = SR_COMPILE_TIME_CRC32_STR("CASCADE_LIGHT_SPACE_MATRICES");
+    static constexpr uint64_t SHADER_CASCADE_SPLITS = SR_COMPILE_TIME_CRC32_STR("CASCADE_SPLITS");
 
     typedef std::vector<std::pair<Vertices::Attribute, size_t>> VertexAttributes;
     typedef std::vector<SR_VERTEX_DESCRIPTION> VertexDescriptions;
@@ -68,7 +66,7 @@ namespace SR_GRAPH_NS {
     SR_DEPRECATED
     typedef std::variant<glm::mat4, glm::mat3, glm::mat2, float, int, glm::vec2, glm::vec3, glm::vec4, glm::ivec2, glm::ivec3, glm::ivec4> ShaderVariable;
 
-    SR_ENUM_NS_CLASS(ShaderStage,
+    SR_ENUM_NS_CLASS_T(ShaderStage, uint8_t,
         Unknown,
         Vertex,
         Fragment,
@@ -83,7 +81,7 @@ namespace SR_GRAPH_NS {
         MissSecondary
     );
 
-    SR_ENUM_NS_CLASS(LayoutBinding, Unknown = 0, Uniform = 1, Sampler2D = 2)
+    SR_ENUM_NS_CLASS(LayoutBinding, Unknown = 0, Uniform = 1, Sampler2D = 2, Attachhment=3)
     SR_ENUM_NS_CLASS(PolygonMode, Unknown, Fill, Line, Point)
     SR_ENUM_NS_CLASS(CullMode, Unknown, None, Front, Back, FrontAndBack)
     SR_ENUM_NS_CLASS(PrimitiveTopology,
@@ -100,12 +98,6 @@ namespace SR_GRAPH_NS {
             TriangleStripWithAdjacency,
             PathList)
 
-    struct SR_DLL_EXPORT Uniform {
-        LayoutBinding type;
-        ShaderStage stage;
-        uint32_t binding;
-    };
-
     SR_ENUM_NS_CLASS(DepthCompare,
         Unknown,
         Never,
@@ -117,42 +109,28 @@ namespace SR_GRAPH_NS {
         GreaterOrEqual,
         Always)
 
+    struct SR_DLL_EXPORT Uniform {
+        LayoutBinding type = LayoutBinding::Unknown;
+        ShaderStage stage = ShaderStage::Unknown;
+        uint64_t binding = 0;
+        uint64_t size = 0;
+    };
+
+    typedef std::vector<Uniform> UBOInfo;
+
+    struct SR_DLL_EXPORT SRShaderPushConstant {
+        uint64_t size = 0;
+        uint64_t offset = 0;
+    };
+
+    struct SR_DLL_EXPORT SRShaderStageInfo {
+    public:
+        SR_UTILS_NS::Path path;
+        std::vector<SRShaderPushConstant> pushConstants;
+
+    };
+
     struct SR_DLL_EXPORT SRShaderCreateInfo {
-        SRShaderCreateInfo() = default;
-
-        SRShaderCreateInfo(const SRShaderCreateInfo& ref) = default;
-
-        SRShaderCreateInfo(SRShaderCreateInfo&& ref) noexcept {
-            stages = std::exchange(ref.stages, {});
-            polygonMode = std::exchange(ref.polygonMode, {});
-            cullMode = std::exchange(ref.cullMode, {});
-            depthCompare = std::exchange(ref.depthCompare, {});
-            primitiveTopology = std::exchange(ref.primitiveTopology, {});
-            vertexAttributes = std::exchange(ref.vertexAttributes, {});
-            vertexDescriptions = std::exchange(ref.vertexDescriptions, {});
-            uniforms = std::exchange(ref.uniforms, {});
-            blendEnabled = std::exchange(ref.blendEnabled, {});
-            depthWrite = std::exchange(ref.depthWrite, {});
-            depthTest = std::exchange(ref.depthTest, {});
-        }
-
-        SRShaderCreateInfo& operator=(const SRShaderCreateInfo& ref) noexcept = default;
-
-        SRShaderCreateInfo& operator=(SRShaderCreateInfo&& ref) noexcept {
-            stages = std::exchange(ref.stages, {});
-            polygonMode = std::exchange(ref.polygonMode, {});
-            cullMode = std::exchange(ref.cullMode, {});
-            depthCompare = std::exchange(ref.depthCompare, {});
-            primitiveTopology = std::exchange(ref.primitiveTopology, {});
-            vertexAttributes = std::exchange(ref.vertexAttributes, {});
-            vertexDescriptions = std::exchange(ref.vertexDescriptions, {});
-            uniforms = std::exchange(ref.uniforms, {});
-            blendEnabled = std::exchange(ref.blendEnabled, {});
-            depthWrite = std::exchange(ref.depthWrite, {});
-            depthTest = std::exchange(ref.depthTest, {});
-            return *this;
-        }
-
     public:
         SR_NODISCARD bool Validate() const noexcept {
             return polygonMode       != PolygonMode::Unknown
@@ -162,7 +140,7 @@ namespace SR_GRAPH_NS {
         }
 
     public:
-        std::map<ShaderStage, SR_UTILS_NS::Path> stages;
+        std::map<ShaderStage, SRShaderStageInfo> stages;
 
         PolygonMode       polygonMode       = PolygonMode::Unknown;
         CullMode          cullMode          = CullMode::Unknown;
@@ -193,11 +171,20 @@ namespace SR_GRAPH_NS {
     static LayoutBinding GetBindingType(const std::string& line) {
         //! first check sampler, after that check uniform
 
+        if (SR_UTILS_NS::StringUtils::Contains(line, "sampler2DArray"))
+            return LayoutBinding::Sampler2D;
+
         if (SR_UTILS_NS::StringUtils::Contains(line, "sampler2D"))
             return LayoutBinding::Sampler2D;
 
         if (SR_UTILS_NS::StringUtils::Contains(line, "samplerCube"))
             return LayoutBinding::Sampler2D;
+
+        if (SR_UTILS_NS::StringUtils::Contains(line, "subpassInputMS"))
+            return LayoutBinding::Attachhment;
+
+        if (SR_UTILS_NS::StringUtils::Contains(line, "subpassInput"))
+            return LayoutBinding::Attachhment;
 
         if (SR_UTILS_NS::StringUtils::Contains(line, "uniform"))
             return LayoutBinding::Uniform;
@@ -234,19 +221,20 @@ namespace SR_GRAPH_NS {
                     line.resize(pos);
                 }
 
-                if (SR_UTILS_NS::StringUtils::Contains(line, "binding")) {
-                    int32_t index = SR_UTILS_NS::StringUtils::IndexOf(line, '=');
+                int32_t bindingIndex = SR_UTILS_NS::StringUtils::IndexOf(line, "binding");
+                if (bindingIndex >= 0) {
+                    int32_t index = SR_UTILS_NS::StringUtils::IndexOf(line, '=', bindingIndex);
 
                     int32_t comment = SR_UTILS_NS::StringUtils::IndexOf(line, '/');
                     if (comment >= 0 && comment < index)
                         continue;
 
                     if (index <= 0) {
-                        SRAssert2(false, "Graphics::AnalyseShader() : incorrect binding location!");
+                        SRHalt("Graphics::AnalyseShader() : incorrect binding location!");
                         return std::optional<std::vector<Uniform>>();
                     }
 
-                    const auto&& location = SR_UTILS_NS::StringUtils::ReadFrom(line, ')', index + 2);
+                    const auto&& location = SR_UTILS_NS::StringUtils::ReadNumber(line, index + 2 /** space and assign */);
                     if (location.empty()) {
                         SR_ERROR("Graphics::AnalyseShader() : failed match location!");
                         return std::optional<std::vector<Uniform>>();
@@ -255,7 +243,7 @@ namespace SR_GRAPH_NS {
                     Uniform uniform {
                         .type = GetBindingType(line),
                         .stage = module.m_stage,
-                        .binding = static_cast<uint32_t>(std::atoll(location.c_str()))
+                        .binding = static_cast<uint32_t>(SR_UTILS_NS::LexicalCast<uint32_t>(location))
                     };
 
                     uniforms.emplace_back(uniform);

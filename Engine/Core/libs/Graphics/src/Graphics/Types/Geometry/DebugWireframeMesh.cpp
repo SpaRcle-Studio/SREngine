@@ -36,6 +36,7 @@ namespace SR_GTYPES_NS {
             pShader->Flush();
 
             m_material->UseSamplers();
+            pShader->FlushSamplers();
         }
 
         switch (m_uboManager.BindUBO(m_virtualUBO)) {
@@ -43,8 +44,10 @@ namespace SR_GTYPES_NS {
                 pShader->InitUBOBlock();
                 pShader->Flush();
                 m_material->UseSamplers();
+                pShader->FlushSamplers();
                 SR_FALLTHROUGH;
             case Memory::UBOManager::BindResult::Success:
+                pShader->FlushConstants();
                 m_pipeline->DrawIndices(m_countIndices);
                 break;
             case Memory::UBOManager::BindResult::Failed:
@@ -60,7 +63,7 @@ namespace SR_GTYPES_NS {
 
         FreeVideoMemory();
 
-        if (!IsCanCalculate()) {
+        if (!IsCalculatable()) {
             return false;
         }
 

@@ -25,15 +25,30 @@ namespace SR_GRAPH_NS::GUI {
     { }
 
     Link::Link(Pin* start, Pin* end, ImColor color)
-        : m_startPin(start)
-        , m_endPin(end)
-        , m_color(color)
+        : m_color(color)
     {
-        if (m_startPin)
-            m_startPin->AddLink(this);
+        SetStart(start);
+        SetEnd(end);
+    }
 
-        if (m_endPin)
-            m_endPin->AddLink(this);
+    void Link::SetStart(Pin* pPin) {
+        if (m_startPin) {
+            m_startPin->RemoveLink(this);
+        }
+
+        if ((m_startPin = pPin)) {
+            pPin->AddLink(this);
+        }
+    }
+
+    void Link::SetEnd(Pin* pPin) {
+        if (m_endPin) {
+            m_endPin->RemoveLink(this);
+        }
+
+        if ((m_endPin = pPin)) {
+            pPin->AddLink(this);
+        }
     }
 
     Link::~Link() {
@@ -50,5 +65,18 @@ namespace SR_GRAPH_NS::GUI {
 
     bool Link::IsLinked(Pin* pPin) const {
         return pPin && (m_startPin == pPin || m_endPin == pPin);
+    }
+
+    void Link::Broke(Pin* pFrom) {
+        if (pFrom != m_startPin && m_startPin) {
+            m_startPin->RemoveLink(this);
+        }
+
+        if (pFrom != m_endPin && m_endPin) {
+            m_endPin->RemoveLink(this);
+        }
+
+        m_startPin = nullptr;
+        m_endPin = nullptr;
     }
 }

@@ -49,7 +49,7 @@ namespace SR_WORLD_NS {
         void CheckShift(const SR_MATH_NS::IVector3& chunk);
         void UpdateContainers();
         void UpdateScope(float_t dt);
-        void SaveRegion(Region* pRegion, SR_HTYPES_NS::DataStorage* pContext) const;
+        void SaveRegion(const SR_UTILS_NS::Path& path, Region* pRegion, SR_HTYPES_NS::DataStorage* pContext) const;
 
     private:
         std::list<int64_t> m_cubesIds;

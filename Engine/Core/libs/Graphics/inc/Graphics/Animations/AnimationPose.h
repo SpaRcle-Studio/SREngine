@@ -22,6 +22,7 @@ namespace SR_ANIMATIONS_NS {
 
     public:
         SR_NODISCARD AnimationData* GetData(BoneHashName boneHashName) const noexcept;
+        SR_NODISCARD AnimationData* GetDataByIndex(uint16_t index) const noexcept;
 
         void Reset();
         void Initialize(Skeleton* pSkeleton);

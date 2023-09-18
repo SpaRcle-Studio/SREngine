@@ -5,7 +5,7 @@
 #ifndef GAMEENGINE_TEXTURELOADER_H
 #define GAMEENGINE_TEXTURELOADER_H
 
-#include <Utils/stdInclude.h>
+#include <Graphics/Memory/TextureConfigs.h>
 
 namespace SR_HTYPES_NS {
     class Texture;

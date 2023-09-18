@@ -6,6 +6,7 @@
 #define SRENGINE_ENTITY_H
 
 #include <Utils/ECS/ISavable.h>
+#include <Utils/ECS/EntityRef.h>
 #include <Utils/Common/Numeric.h>
 #include <Utils/Types/SharedPtr.h>
 
@@ -96,6 +97,8 @@ namespace SR_UTILS_NS {
         SR_NODISCARD EntityPath GetEntityPath() const { return m_entityPath; }
 
         SR_NODISCARD EntityBranch GetEntityTree() const { return EntityBranch(m_entityId, GetEntityBranches()); }
+        SR_NODISCARD EntityRef GetRef() const noexcept { return EntityRef(GetThis()); }
+        SR_NODISCARD Ptr GetEntity() const noexcept { return GetThis(); }
 
         SR_NODISCARD virtual std::string GetEntityInfo() const { return "None"; }
         SR_NODISCARD virtual uint16_t GetEntityVersion() const noexcept = 0;

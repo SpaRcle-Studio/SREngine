@@ -40,7 +40,7 @@ namespace SR_UTILS_NS {
             return *this;
         }
 
-        operator const std::string&() { return m_path; }
+        operator const std::string&() { return m_path; } /** NOLINT */
         Path& operator=(const Path& path) = default;
 
     public:
@@ -51,6 +51,7 @@ namespace SR_UTILS_NS {
 
         SR_NODISCARD std::string ToString() const;
         SR_NODISCARD const std::string& ToStringRef() const;
+        SR_NODISCARD std::string* ToStringPtr() { return &m_path; }
         SR_NODISCARD std::string_view ToStringView() const;
         SR_NODISCARD std::wstring ToWinApiPath() const;
         SR_NODISCARD std::wstring ToUnicodeString() const;

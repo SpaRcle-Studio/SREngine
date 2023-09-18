@@ -2,8 +2,8 @@
 // Created by Monika on 22.09.2021.
 //
 
-#ifndef GAMEENGINE_NUMERIC_H
-#define GAMEENGINE_NUMERIC_H
+#ifndef SR_ENGINE_NUMERIC_H
+#define SR_ENGINE_NUMERIC_H
 
 #include <Utils/Common/Singleton.h>
 
@@ -22,6 +22,10 @@ namespace SR_UTILS_NS {
         ~Random() override = default;
 
     public:
+        static void Initialize() {
+            srand(time(NULL)); /// NOLINT
+        }
+
         SR_NODISCARD float_t Float(float_t minimum, float_t maximum) {
             std::uniform_real_distribution<float_t> distribution(minimum, maximum);
             return distribution(m_generator);
@@ -49,4 +53,4 @@ namespace SR_UTILS_NS {
     };
 }
 
-#endif //GAMEENGINE_NUMERIC_H
+#endif //SR_ENGINE_NUMERIC_H

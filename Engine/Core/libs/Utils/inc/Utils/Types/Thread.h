@@ -38,6 +38,7 @@ namespace SR_HTYPES_NS {
 
         public:
             void SetMainThread();
+            void PrintThreads();
 
             SR_NODISCARD Ptr GetMainThread();
             SR_NODISCARD Ptr GetThisThread();
@@ -74,6 +75,8 @@ namespace SR_HTYPES_NS {
         SR_NODISCARD ThreadId GetId();
         SR_NODISCARD DataStorage* GetContext() { return m_context; }
 
+        void SetName(const std::string& name);
+
         void Synchronize();
 
         template<class Functor, typename... Args> SR_NODISCARD bool Run(Functor&& fn) {
@@ -84,8 +87,10 @@ namespace SR_HTYPES_NS {
 
             Factory::Instance().LockSingleton();
 
-            m_thread = std::thread([function = std::move(fn), this]() {
-                m_id = SR_UTILS_NS::GetThreadId(m_thread);
+            auto&& thread = std::thread([function = std::move(fn), this]() {
+                while (!m_isCreated || m_id == "0" || m_id.empty()) {
+                    m_id = SR_UTILS_NS::GetThreadId(m_thread);
+                }
                 Factory::Instance().m_threads.insert(std::make_pair(m_id, this));
                 SR_LOG("Thread::Run() : run thread " + m_id);
                 while (!m_isRan) {
@@ -93,6 +98,10 @@ namespace SR_HTYPES_NS {
                 }
                 function();
             });
+
+            m_thread = std::move(thread);
+            SR_LOG("Thread::Run() : thread is moved");
+            m_isCreated = true;
 
             Factory::Instance().UnlockSingleton();
 
@@ -117,8 +126,10 @@ namespace SR_HTYPES_NS {
     private:
         std::thread m_thread;
         ThreadId m_id;
+        std::string m_name;
         DataStorage* m_context = nullptr;
 
+        std::atomic<bool> m_isCreated = false;
         std::atomic<bool> m_isRan = false;
 
         mutable std::shared_mutex m_mutex;

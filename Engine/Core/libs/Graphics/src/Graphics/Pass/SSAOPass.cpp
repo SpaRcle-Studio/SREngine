@@ -77,7 +77,7 @@ namespace SR_GRAPH_NS {
         }
 
         auto&& config = Memory::TextureConfig();
-        config.m_format = ColorFormat::R32_SFLOAT;
+        config.m_format = ImageFormat::R32_SFLOAT;
         config.m_filter = TextureFilter::NEAREST;
 
         return SR_GTYPES_NS::Texture::LoadRaw((uint8_t*)noise.data(), noise.size() * sizeof(float_t), 4, 4, config);
@@ -87,7 +87,7 @@ namespace SR_GRAPH_NS {
         SR_TRACY_ZONE_N("SSAO update");
 
         if (m_shader) {
-            m_shader->SetCustom(SHADER_SSAO_SAMPLES, m_kernel.data());
+            m_shader->SetValue<false>(SHADER_SSAO_SAMPLES, m_kernel.data());
         }
 
         PostProcessPass::Update();
@@ -109,12 +109,13 @@ namespace SR_GRAPH_NS {
         }
 
         if (m_framebuffer->BeginRender()) {
+            m_framebuffer->SetViewportScissor();
             PostProcessPass::Render();
             m_framebuffer->EndRender();
             m_framebuffer->EndCmdBuffer();
         }
 
-        m_pipeline->SetCurrentFramebuffer(nullptr);
+        m_pipeline->SetCurrentFrameBuffer(nullptr);
 
         /// Независимо от того, отрисовали мы что-то в кадровый буффер или нет,
         /// все равно возвращаем false (hasDrawData), так как технически, кадровый буффер
@@ -138,5 +139,12 @@ namespace SR_GRAPH_NS {
     void SSAOPass::OnResize(const SR_MATH_NS::UVector2 &size) {
         IFramebufferPass::ResizeFrameBuffer(size);
         PostProcessPass::OnResize(size);
+    }
+
+    std::vector<SR_GTYPES_NS::Framebuffer *> SSAOPass::GetFrameBuffers() const {
+        if (!m_framebuffer) {
+            return std::vector<SR_GTYPES_NS::Framebuffer*>();
+        }
+        return { m_framebuffer };
     }
 }

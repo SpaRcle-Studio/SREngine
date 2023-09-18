@@ -16,7 +16,7 @@ namespace SR_HTYPES_NS {
     SR_INLINE_STATIC int SR_RAW_MESH_ASSIMP_ANIMATION_FLAGS = aiProcess_MakeLeftHanded | aiProcess_FlipWindingOrder;
 
     RawMesh::RawMesh()
-        : IResource(SR_COMPILE_TIME_CRC32_TYPE_NAME(RawMesh), true /** auto remove */)
+        : IResource(SR_COMPILE_TIME_CRC32_TYPE_NAME(RawMesh))
     {
         m_importer = new Assimp::Importer();
     }
@@ -90,7 +90,11 @@ namespace SR_HTYPES_NS {
         m_fromCache = false;
 
         m_bones.clear();
+        m_optimizedBones.clear();
+
+        m_boneOffsetsMap.clear();
         m_boneOffsets.clear();
+
         m_animations.clear();
 
         return !hasErrors;
@@ -152,6 +156,8 @@ namespace SR_HTYPES_NS {
 
         if (m_scene) {
             CalculateBones();
+            OptimizeSkeleton();
+            CalculateOffsets();
             CalculateAnimations();
         }
         else {
@@ -239,7 +245,9 @@ namespace SR_HTYPES_NS {
                         continue;
                     }
 
-                    vertex.weights[vertex.weightsNum - 1].boneId = bones.at(SR_HASH_STR(mesh->mBones[i]->mName.C_Str()));
+                    auto&& boneIndex = bones.at(SR_HASH_STR(mesh->mBones[i]->mName.C_Str()));
+
+                    vertex.weights[vertex.weightsNum - 1].boneId = boneIndex;
                     vertex.weights[vertex.weightsNum - 1].weight = mesh->mBones[i]->mWeights[j].mWeight;
                 }
             }
@@ -367,8 +375,8 @@ namespace SR_HTYPES_NS {
     const SR_MATH_NS::Matrix4x4& RawMesh::GetBoneOffset(uint64_t hashName) const {
         static const auto&& def = SR_MATH_NS::Matrix4x4::Identity();
 
-        auto&& pIt = m_boneOffsets.find(hashName);
-        if (pIt == m_boneOffsets.end()) {
+        auto&& pIt = m_boneOffsetsMap.find(hashName);
+        if (pIt == m_boneOffsetsMap.end()) {
             return def;
         }
 
@@ -385,8 +393,39 @@ namespace SR_HTYPES_NS {
                 auto&& hashName = SR_HASH_STR(pMesh->mBones[boneId]->mName.data);
 
                 m_bones[meshId].insert(std::make_pair(hashName, static_cast<uint32_t>(m_bones[meshId].size())));
+            }
+        }
+    }
 
-                if (m_boneOffsets.count(hashName) == 1) {
+    void RawMesh::CalculateAnimations() {
+        if (!m_asAnimation || !m_scene) {
+            return;
+        }
+
+        for (uint32_t i = 0; i < m_scene->mNumAnimations; ++i) {
+            auto&& pAnimation = m_scene->mAnimations[i];
+            m_animations[SR_HASH_STR(pAnimation->mName.C_Str())] = pAnimation;
+        }
+    }
+
+    void RawMesh::OptimizeSkeleton() {
+        m_optimizedBones.clear();
+
+        for (auto&& mesh : m_bones) {
+            for (auto&& [hashName, index] : mesh) {
+                m_optimizedBones[hashName] = index;
+            }
+        }
+    }
+
+    void RawMesh::CalculateOffsets() {
+        for (uint32_t meshId = 0; meshId < m_scene->mNumMeshes; ++meshId) {
+            auto&& pMesh = m_scene->mMeshes[meshId];
+
+            for (uint32_t boneId = 0; boneId < pMesh->mNumBones; ++boneId) {
+                auto&& hashName = SR_HASH_STR(pMesh->mBones[boneId]->mName.data);
+
+                if (m_boneOffsetsMap.count(hashName) == 1) {
                     continue;
                 }
 
@@ -402,19 +441,26 @@ namespace SR_HTYPES_NS {
                         SR_MATH_NS::FVector3(scaling.x, scaling.y, scaling.z)
                 );
 
-                m_boneOffsets.insert(std::make_pair(hashName, std::move(matrix4X4)));
+                m_boneOffsetsMap.insert(std::make_pair(hashName, std::move(matrix4X4)));
             }
+        }
+
+        m_boneOffsets.resize(m_boneOffsetsMap.size());
+
+        for (auto&& [hashName, boneId] : m_optimizedBones) {
+            if (boneId >= m_boneOffsets.size()) {
+                m_boneOffsets.resize(boneId + 1);
+            }
+            m_boneOffsets[boneId] = GetBoneOffset(hashName);
         }
     }
 
-    void RawMesh::CalculateAnimations() {
-        if (!m_asAnimation || !m_scene) {
-            return;
+    uint16_t RawMesh::GetBoneIndex(uint64_t hashName) const {
+        auto&& pIt = m_optimizedBones.find(hashName);
+        if (pIt == m_optimizedBones.end()) {
+            return SR_UINT16_MAX;
         }
 
-        for (uint32_t i = 0; i < m_scene->mNumAnimations; ++i) {
-            auto&& pAnimation = m_scene->mAnimations[i];
-            m_animations[SR_HASH_STR(pAnimation->mName.C_Str())] = pAnimation;
-        }
+        return pIt->second;
     }
 }

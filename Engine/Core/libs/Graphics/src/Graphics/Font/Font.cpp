@@ -9,7 +9,7 @@
 
 namespace SR_GTYPES_NS {
     Font::Font()
-        : Super(SR_COMPILE_TIME_CRC32_TYPE_NAME(Font), true /** auto remove */)
+        : Super(SR_COMPILE_TIME_CRC32_TYPE_NAME(Font))
         , m_fontSize(16)
     { }
 

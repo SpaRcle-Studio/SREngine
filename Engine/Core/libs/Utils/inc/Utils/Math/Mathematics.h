@@ -15,8 +15,6 @@
     #define SR_PI M_PI
 #endif
 
-#define SR_POW(value) (value * value)
-
 #define SR_RAD(x) (x * (SR_PI / 180.0))
 #define SR_DEG(x) (x * (180.0 / SR_PI))
 
@@ -65,6 +63,8 @@
 
 #define SR_EARTH_GRAVITY 9.81
 
+#define SR_SQUARE(value) (value * value)
+#define SR_POW(x, n) std::pow(x, n)
 #define SR_SQRT(x) std::sqrt(x)
 #define SR_SIN(x) std::sin(x)
 #define SR_COS(x) std::cos(x)

@@ -87,16 +87,16 @@ namespace SR_UTILS_NS {
         UpdatePath();
     }
 
-    void EntityRef::SetPathTo(Entity::Ptr pEntity) {
+    EntityRef& EntityRef::SetPathTo(Entity::Ptr pEntity) {
         if (!EntityRefUtils::IsOwnerValid(m_owner)) {
             SRHalt("Invalid owner!");
-            return;
+            return *this;
         }
 
         if (!pEntity) {
             m_target = pEntity;
             m_path.clear();
-            return;
+            return *this;
         }
 
         if (IsRelative()) {
@@ -107,6 +107,8 @@ namespace SR_UTILS_NS {
         }
 
         UpdateTarget();
+
+        return *this;
     }
 
     bool EntityRef::IsValid() const {

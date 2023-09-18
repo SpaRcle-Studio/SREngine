@@ -6,7 +6,6 @@
 #include <Core/EngineResources.h>
 #include <Core/EngineMigrators.h>
 #include <Core/GUI/EditorGUI.h>
-#include <Core/UI/Button.h>
 #include <Core/World/EngineScene.h>
 
 #include <Utils/Events/EventManager.h>
@@ -14,9 +13,7 @@
 #include <Utils/World/SceneBuilder.h>
 #include <Utils/Common/Features.h>
 #include <Utils/ECS/ComponentManager.h>
-#include <Utils/DebugDraw.h>
 
-#include <Graphics/Pipeline/Environment.h>
 #include <Graphics/GUI/WidgetManager.h>
 #include <Graphics/Render/RenderScene.h>
 #include <Graphics/Render/DebugRenderer.h>
@@ -37,10 +34,15 @@
 #include <Scripting/Impl/EvoScriptManager.h>
 
 namespace SR_CORE_NS {
+    Engine::Engine(Application* pApplication)
+        : Super(this)
+        , m_application(pApplication)
+    { }
+
     bool Engine::Create() {
         SR_INFO("Engine::Create() : register all resources...");
 
-        if (!Resources::RegisterResources()) {
+        if (!Resources::RegisterResources(GetThis())) {
             SR_ERROR("Engine::Create() : failed to register engine resources!");
             return false;
         }
@@ -62,8 +64,12 @@ namespace SR_CORE_NS {
             return false;
         }
 
-        SR_UTILS_NS::ComponentManager::Instance().SetContextInitializer([](auto&& context) {
-            context.SetValue(Engine::Instance().GetWindow());
+        SR_UTILS_NS::ComponentManager::Instance().SetContextInitializer([pEngine = GetThis()](auto&& context) {
+            if (!pEngine) {
+                SRHalt("Engine is nullptr!");
+                return;
+            }
+            context.SetValue(pEngine->GetWindow());
 
             context.template SetPointer<SR_PHYSICS_NS::LibraryImpl>("2DPLib", SR_PHYSICS_NS::PhysicsLibrary::Instance().GetActiveLibrary(SR_UTILS_NS::Measurement::Space2D));
             context.template SetPointer<SR_PHYSICS_NS::LibraryImpl>("3DPLib", SR_PHYSICS_NS::PhysicsLibrary::Instance().GetActiveLibrary(SR_UTILS_NS::Measurement::Space3D));
@@ -75,7 +81,7 @@ namespace SR_CORE_NS {
 
         m_cmdManager = new SR_UTILS_NS::CmdManager();
         m_input      = new SR_UTILS_NS::InputDispatcher();
-        m_editor     = new Core::GUI::EditorGUI();
+        m_editor     = new SR_CORE_GUI_NS::EditorGUI(GetThis());
 
         m_worldTimer = SR_HTYPES_NS::Timer(1u);
 
@@ -94,9 +100,9 @@ namespace SR_CORE_NS {
         m_autoReloadResources = SR_UTILS_NS::Features::Instance().Enabled("AutoReloadResources", false);
 
         if (!m_engineScene && !m_editor->LoadSceneFromCachedPath()) {
-            auto&& scenePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Scenes/New-scene.scene");
+            auto&& scenePath = SR_WORLD_NS::Scene::NewScenePath.ConcatExt("scene");
 
-            if (SR_PLATFORM_NS::IsExists(scenePath)) {
+            if (SR_WORLD_NS::Scene::IsExists(scenePath)) {
                 if (!SetScene(SR_WORLD_NS::Scene::Load(scenePath))) {
                     SR_ERROR("Engine::Create() : failed to load scene!\n\tPath: " + scenePath.ToString())
                 }
@@ -175,14 +181,15 @@ namespace SR_CORE_NS {
             DrawCallback();
         });
 
-        m_window->SetFocusCallback([this](bool focus) {
+        m_window->SetFocusCallback([](bool focus) {
             SR_SYSTEM_LOG(SR_UTILS_NS::Format("Window focus state: %s", focus ? "True" : "False"));
             SR_UTILS_NS::Input::Instance().Reload();
         });
 
         m_window->SetResizeCallback([this](auto&& size) {
-            m_pipeline->OnResize(size);
-            m_renderContext->OnResize(size);
+            if (m_renderContext) {
+                m_renderContext->OnResize(size);
+            }
         });
 
         m_window->SetScrollCallback([](double_t xOffset, double_t yOffset) {
@@ -190,42 +197,44 @@ namespace SR_CORE_NS {
         });
 
         m_window->SetCloseCallback([this]() {
-            m_pipeline->StopGUI();
-
-            if (auto&& pWin = m_window->GetImplementation<SR_GRAPH_NS::BasicWindowImpl>()) {
-                pWin->StopGUI();
-            }
-
             m_renderContext.Do([](auto&& pContext) {
                 pContext->Close();
             });
 
             SynchronizeFreeResources();
 
-            if (m_pipeline) {
-                m_pipeline->DeInitialize();
-                m_pipeline = nullptr;
-            }
+            m_renderContext.AutoFree([](auto&& pContext) {
+                delete pContext;
+            });
         });
 
         return true;
     }
 
     void Engine::SynchronizeFreeResources() {
+        SR_TRACY_ZONE;
+
         SR_SYSTEM_LOG("Engine::SynchronizeFreeResources() : synchronizing resources...");
 
-        SR_LOCK_GUARD
+        SR_UTILS_NS::ResourceManager::Instance().SetWatchingEnabled(false);
 
-        std::atomic<bool> syncComplete(false);
+        std::atomic<bool> syncComplete = false;
 
         /** Ждем, пока все графические ресурсы не освободятся */
         auto&& thread = SR_HTYPES_NS::Thread::Factory::Instance().Create([&syncComplete, this]() {
+            SR_TRACY_ZONE_N("Sync free resources thread");
+
             uint32_t syncStep = 0;
             const uint32_t maxErrStep = 50;
 
+            SR_UTILS_NS::ResourceManager::Instance().UpdateWatchers(0.f);
+            SR_UTILS_NS::ResourceManager::Instance().ReloadResources(0.f);
+
             SR_UTILS_NS::ResourceManager::Instance().Synchronize(true);
 
-            while(!m_renderContext->IsEmpty()) {
+            while (!m_renderContext->IsEmpty()) {
+                SR_TRACY_ZONE_N("Sync free resources iteration");
+
                 SR_SYSTEM_LOG("Engine::SynchronizeFreeResources() : synchronizing resources (step " + std::to_string(++syncStep) + ")");
 
                 SR_UTILS_NS::ResourceManager::Instance().Synchronize(true);
@@ -237,13 +246,15 @@ namespace SR_CORE_NS {
                     break;
                 }
 
-                Helper::Types::Thread::Sleep(50);
+                SR_HTYPES_NS::Thread::Sleep(50);
             }
 
             SR_SYSTEM_LOG("Engine::SynchronizeFreeResources() : close synchronization thread...");
 
             syncComplete = true;
         });
+
+        thread->SetName("Synchronize");
 
         /** Так как некоторые ресурсы, такие как материалы, имеют вложенные ресурсы,
          * то они могут ожидать пока графический поток уберет метку использования с них */
@@ -263,86 +274,11 @@ namespace SR_CORE_NS {
 
     bool Engine::InitializeRender() {
         m_renderContext = new SR_GRAPH_NS::RenderContext(m_window);
-        m_pipeline = SR_GRAPH_NS::Environment::Get();
-
-        m_pipeline->SetRenderContext(m_renderContext);
 
         return m_window->GetThread()->Execute([this]() -> bool {
             if (!m_renderContext->Init()) {
                 SR_ERROR("Engine::InitializeRender() : failed to initialize the render context!");
                 return false;
-            }
-
-            SR_GRAPH("Engine::InitializeRender() : initializing the render environment...");
-
-            SR_GRAPH("Engine::InitializeRender() : pre-initializing...");
-            if (!m_pipeline->PreInit(
-                    64,
-                    "SpaRcle Engine", /// App name
-                    "SREngine",       /// Engine name
-                    SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Engine/Utilities/glslc.exe")))
-            {
-                SR_ERROR("Engine::InitializeRender() : failed to pre-initialize the environment!");
-                return false;
-            }
-
-            SR_GRAPH_LOG("Engine::InitializeRender() : set thread context as current...");
-            if (!m_pipeline->SetContextCurrent()) {
-                SR_ERROR("Engine::InitializeRender() : failed to set context!");
-                return false;
-            }
-
-            SR_GRAPH("Engine::InitializeRender() : initializing the environment...");
-            if (!m_pipeline->Init(m_window, false /** vsync */)) {
-                SR_ERROR("Engine::InitializeRender() : failed to initialize the environment!");
-                return false;
-            }
-
-            SR_GRAPH("Engine::InitializeRender() : post-initializing the environment...");
-
-            if (!m_pipeline->PostInit()) {
-                SR_ERROR("Engine::InitializeRender() : failed to post-initialize environment!");
-                return false;
-            }
-
-            SR_LOG("Engine::InitializeRender() : vendor is "   + m_pipeline->GetVendor());
-            SR_LOG("Engine::InitializeRender() : renderer is " + m_pipeline->GetRenderer());
-            SR_LOG("Engine::InitializeRender() : version is "  + m_pipeline->GetVersion());
-
-            if (m_pipeline->IsGUISupport()) {
-                if (m_pipeline->PreInitGUI(SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Engine/Fonts/tahoma.ttf"))) {
-                    ImGuiStyle & style = ImGui::GetStyle();
-
-                    if (auto&& theme = SR_GRAPH_NS::GUI::Theme::Load("Engine/Configs/Themes/Dark.xml")) {
-                        theme->Apply(style);
-                        delete theme;
-                    }
-                    else {
-                        SR_ERROR(" Engine::InitializeRender() : failed to load theme!");
-                    }
-
-                    const static auto iniPathEditor = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Editor/Configs/ImGuiEditor.config");
-                    const static auto iniPathWidgets = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Editor/Configs/EditorWidgets.xml");
-
-                    if (!iniPathEditor.Exists()) {
-                        iniPathEditor.Create();
-                        SR_UTILS_NS::Platform::Copy(SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Editor/Configs/ImGuiEditor.config"), iniPathEditor);
-                        SR_UTILS_NS::Platform::Copy(SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Editor/Configs/EditorWidgets.xml"), iniPathWidgets);
-                    }
-
-                    ImGui::GetIO().IniFilename = iniPathEditor.CStr();
-
-                    m_window->GetImplementation<SR_GRAPH_NS::BasicWindowImpl>()->InitGUI();
-
-                    if (!m_pipeline->InitGUI()) {
-                        SR_ERROR("Engine::InitializeRender() : failed to initialize the GUI!");
-                        return false;
-                    }
-                }
-                else {
-                    SR_ERROR("Engine::InitializeRender() : failed to pre-initialize the GUI!");
-                    return false;
-                }
             }
 
             SR_THIS_THREAD->GetContext()->SetValue<RenderContextPtr>(m_renderContext);
@@ -383,42 +319,16 @@ namespace SR_CORE_NS {
 
         SR_INFO("Engine::Run() : running game engine...");
 
-        if (!Core::Commands::RegisterEngineCommands()) {
-            SR_ERROR("Engine::Run() : errors were detected during the registration of commands!");
-            return false;
-        }
-
         m_isRun = true;
 
         if (SR_UTILS_NS::Features::Instance().Enabled("ChunkSystem", true)) {
             SR_INFO("Engine::Run() : running world thread...");
 
             m_worldThread = SR_HTYPES_NS::Thread::Factory::Instance().Create(&Engine::WorldThread, this);
+            m_worldThread->SetName("World");
         }
 
         return true;
-    }
-
-    void Engine::Await() {
-        SR_INFO("Engine::Await() : waiting for the engine to close...");
-
-        while (m_isRun) {
-            SR_HTYPES_NS::Thread::Sleep(50);
-
-            FlushScene();
-
-            if (!m_window || !m_window->IsValid()) {
-                SR_SYSTEM_LOG("Engine::Await() : window has been closed!");
-                break;
-            }
-        }
-
-        FlushScene();
-
-        if (m_editor && m_editor->Enabled()) {
-            m_editor->Enable(false);
-            SR_SYSTEM_LOG("Engine::Await() : disabling editor gui...");
-        }
     }
 
     bool Engine::Close() {
@@ -426,8 +336,14 @@ namespace SR_CORE_NS {
 
         m_isRun = false;
 
-        if (m_editor) {
+        while (!m_sceneQueue.Empty()) {
+            FlushScene();
+        }
+
+        if (m_editor && m_editor->Enabled()) {
+            SR_SYSTEM_LOG("Engine::Await() : disabling editor gui...");
             m_editor->Save();
+            m_editor->Enable(false);
         }
 
         if (m_input) {
@@ -480,18 +396,27 @@ namespace SR_CORE_NS {
         SR_HTYPES_NS::Time::Instance().Update();
 
         const auto now = SR_HTYPES_NS::Time::Instance().Now();
-        const auto deltaTime = now - m_timeStart;
-        const auto dt = static_cast<float_t>(deltaTime.count()) / SR_CLOCKS_PER_SEC / SR_CLOCKS_PER_SEC;
+        const auto deltaTime = now - m_timeStart; /// nanoseconds
+        const auto dt = static_cast<float_t>(deltaTime.count()) / SR_CLOCKS_PER_SEC / SR_CLOCKS_PER_SEC / SR_CLOCKS_PER_SEC; /// Seconds
         m_timeStart = now;
+
+        SR_UTILS_NS::ResourceManager::Instance().UpdateWatchers(dt);
 
         if (IsNeedReloadResources()) {
             SR_UTILS_NS::ResourceManager::Instance().ReloadResources(dt);
         }
 
-        auto&& readLock = m_sceneQueue.ReadLock();
+        /// синхронно отрисовываем сцену
+        {
+            auto&& readLock = m_sceneQueue.ReadLock();
 
-        if (m_engineScene) {
-            m_engineScene->Draw(dt);
+            if (m_engineScene) {
+                m_engineScene->Draw(dt);
+            }
+        }
+
+        if (m_editor && m_window->IsWindowFocus()) {
+            m_editor->Update(dt);
         }
     }
 
@@ -502,7 +427,7 @@ namespace SR_CORE_NS {
     }
 
     void Engine::Reload() {
-        SR_PLATFORM_NS::SelfOpen();
+        m_application->Reload();
     }
 
     void Engine::WorldThread() {
@@ -511,7 +436,7 @@ namespace SR_CORE_NS {
 
             SR_TRACY_ZONE_N("World");
 
-            auto&& readLock = m_sceneQueue.ReadLock();
+            SR_MAYBE_UNUSED auto&& readLock = m_sceneQueue.ReadLock();
 
             if (!m_engineScene) {
                 continue;
@@ -527,6 +452,7 @@ namespace SR_CORE_NS {
                 if (!pMainCamera) {
                     SR_NOOP;
                 }
+
                 else if (auto&& gameObject = dynamic_cast<SR_UTILS_NS::GameObject*>(pMainCamera->GetParent())) {
                     auto&& pLogic = pScene->GetLogicBase().DynamicCast<SR_WORLD_NS::SceneCubeChunkLogic>();
                     if (pLogic && gameObject) {
@@ -549,7 +475,6 @@ namespace SR_CORE_NS {
         if (m_window->IsWindowFocus())
         {
             SR_UTILS_NS::Input::Instance().Check();
-
             m_input->Check();
 
             bool lShiftPressed = SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::LShift);
@@ -589,7 +514,7 @@ namespace SR_CORE_NS {
         }
 
         if (m_editor && m_window->IsWindowFocus()) {
-            m_editor->Update();
+            m_editor->FixedUpdate();
         }
     }
 

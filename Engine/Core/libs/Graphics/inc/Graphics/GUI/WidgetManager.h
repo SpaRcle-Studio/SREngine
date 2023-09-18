@@ -51,6 +51,17 @@ namespace SR_GRAPH_NS::GUI {
         SR_NODISCARD RenderScenePtr GetRenderScene() const;
         SR_NODISCARD ContextPtr GetContext() const;
 
+        template<typename T> T* GetWidget() const {
+            for (auto&& widget : m_widgets) {
+                if (auto&& pWidget = dynamic_cast<T*>(widget.second)) {
+                    return dynamic_cast<T*>(widget.second);
+                }
+            }
+
+            SRHalt("WidgetManager::GetWidget() : unable to find widget!");
+            return nullptr;
+        }
+
         void OnMouseMove(const SR_UTILS_NS::MouseInputData* data) override;
         void OnMousePress(const SR_UTILS_NS::MouseInputData* data) override;
         void OnMouseDown(const SR_UTILS_NS::MouseInputData* data) override;

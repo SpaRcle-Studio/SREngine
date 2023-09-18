@@ -20,6 +20,8 @@ namespace SR_SRSL_NS {
         std::string type;
         bool isPublic = false;
         uint64_t binding = 0;
+        int32_t attachment = -1;
+        std::set<ShaderStage> stages;
     };
     typedef std::map<std::string, SRSLSampler> SRSLSamplers;
 
@@ -32,10 +34,13 @@ namespace SR_SRSL_NS {
             bool isPublic = false;
         };
 
+        void Align(const SRSLAnalyzedTree::Ptr& pAnalyzedTree);
+
         uint64_t size = 0;
         uint64_t binding = 0;
 
         std::vector<Field> fields;
+        std::set<ShaderStage> stages;
     };
 
     /** Это не шейдер в привычном понимании, это набор всех данных для генерирования любого
@@ -66,15 +71,18 @@ namespace SR_SRSL_NS {
         SR_NODISCARD const SRSLAnalyzedTree::Ptr GetAnalyzedTree() const;
         SR_NODISCARD const SRSLUseStack::Ptr GetUseStack() const;
         SR_NODISCARD const UniformBlocks& GetUniformBlocks() const { return m_uniformBlocks; }
+        SR_NODISCARD const SRSLUniformBlock& GetPushConstants() const { return m_pushConstants; }
         SR_NODISCARD const SRSLSamplers& GetSamplers() const { return m_samplers; }
         SR_NODISCARD const SRShaderCreateInfo& GetCreateInfo() const { return m_createInfo; }
         SR_NODISCARD const std::map<std::string, SRSLVariable*>& GetShared() const { return m_shared; }
         SR_NODISCARD const std::map<std::string, SRSLVariable*>& GetConstants() const { return m_constants; }
+        SR_NODISCARD const std::vector<std::string>& GetIncludes() const { return m_includes; }
 
     private:
         SR_NODISCARD ISRSLCodeGenerator::SRSLCodeGenRes GenerateStages(ShaderLanguage shaderLanguage) const;
 
         SR_NODISCARD bool SaveCache() const;
+        SR_NODISCARD uint64_t GetHash() const;
 
         bool Prepare();
         bool PrepareSettings();
@@ -85,6 +93,7 @@ namespace SR_SRSL_NS {
     private:
         SR_UTILS_NS::Path m_path;
 
+        std::vector<std::string> m_includes;
         std::map<std::string, SRSLVariable*> m_shared;
         std::map<std::string, SRSLVariable*> m_constants;
         ShaderType m_type = ShaderType::Unknown;
@@ -92,6 +101,7 @@ namespace SR_SRSL_NS {
         SRSLAnalyzedTree::Ptr m_analyzedTree;
         SRSLUseStack::Ptr m_useStack;
         UniformBlocks m_uniformBlocks;
+        SRSLUniformBlock m_pushConstants;
         SRSLSamplers m_samplers;
 
     };

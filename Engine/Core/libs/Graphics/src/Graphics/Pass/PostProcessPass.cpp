@@ -59,6 +59,7 @@ namespace SR_GRAPH_NS {
             m_shader->InitUBOBlock();
             m_shader->Flush();
             UseTextures();
+            m_shader->FlushSamplers();
         }
 
         switch (uboManager.BindUBO(m_virtualUBO)) {
@@ -66,6 +67,7 @@ namespace SR_GRAPH_NS {
                 m_shader->InitUBOBlock();
                 m_shader->Flush();
                 UseTextures();
+                m_shader->FlushSamplers();
                 SR_FALLTHROUGH;
             case Memory::UBOManager::BindResult::Success:
                 m_pipeline->Draw(3);

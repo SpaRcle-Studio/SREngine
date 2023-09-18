@@ -11,6 +11,8 @@ namespace SR_GTYPES_NS {
     }
 
     bool IndexedMesh::Calculate() {
+        SR_TRACY_ZONE;
+
         if (!CalculateIBO()) {
             return false;
         }
@@ -19,6 +21,8 @@ namespace SR_GTYPES_NS {
     }
 
     bool IndexedMesh::CalculateIBO() {
+        SR_TRACY_ZONE;
+
         SRAssert(m_pipeline);
         SRAssert(m_IBO == SR_ID_INVALID);
 
@@ -36,7 +40,7 @@ namespace SR_GTYPES_NS {
                 return false;
             }
 
-            if (m_IBO = m_pipeline->CalculateIBO((void *) indices.data(), sizeof(uint32_t), m_countIndices, m_VBO); m_IBO == SR_ID_INVALID) {
+            if (m_IBO = m_pipeline->AllocateIBO((void *) indices.data(), sizeof(uint32_t), m_countIndices, m_VBO); m_IBO == SR_ID_INVALID) {
                 SR_ERROR("IndexedMesh::CalculateIBO() : failed calculate IBO \"" + GetGeometryName() + "\" mesh!");
                 m_hasErrors = true;
                 return false;
@@ -104,6 +108,8 @@ namespace SR_GTYPES_NS {
     }
 
     void IndexedMesh::FreeVideoMemory() {
+        SR_TRACY_ZONE;
+
         if (!FreeVBO()) {
             SR_ERROR("IndexedMesh::FreeVideoMemory() : failed to free VBO!");
         }

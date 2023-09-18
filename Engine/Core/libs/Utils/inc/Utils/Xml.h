@@ -64,6 +64,7 @@ namespace SR_UTILS_NS::Xml {
         SR_NODISCARD int64_t ToInt64() const;
         SR_NODISCARD uint64_t ToUInt64() const;
         SR_NODISCARD float_t ToFloat() const;
+        SR_NODISCARD double_t ToDouble() const;
         SR_NODISCARD bool ToBool() const;
 
         SR_NODISCARD std::string ToString(const std::string &def) const;
@@ -134,6 +135,10 @@ namespace SR_UTILS_NS::Xml {
 
         SR_NODISCARD Attribute TryGetAttribute(const std::string &name) const {
             return m_valid ? Attribute(m_node.attribute(name.c_str())) : Attribute();
+        }
+
+        template<typename T> SR_NODISCARD T TryGetAttribute(const T& def) const {
+            return m_valid ? GetAttribute<T>() : def;
         }
 
         SR_NODISCARD bool HasAttribute(const std::string &name) const {
@@ -266,11 +271,35 @@ namespace SR_UTILS_NS::Xml {
             else if constexpr (std::is_same<T, SR_UTILS_NS::Path>()) {
                 return GetAttribute("Path").ToString();
             }
+            else if constexpr (std::is_same<T, int8_t>()) {
+                return GetAttribute("Int8").ToInt();
+            }
+            else if constexpr (std::is_same<T, int16_t>()) {
+                return GetAttribute("Int16").ToInt();
+            }
             else if constexpr (std::is_same<T, int32_t>()) {
                 return GetAttribute("Int32").ToInt();
             }
+            else if constexpr (std::is_same<T, int64_t>()) {
+                return GetAttribute("Int64").ToInt64();
+            }
+            else if constexpr (std::is_same<T, uint8_t>()) {
+                return GetAttribute("UInt8").ToUInt();
+            }
+            else if constexpr (std::is_same<T, uint16_t>()) {
+                return GetAttribute("UInt16").ToUInt();
+            }
+            else if constexpr (std::is_same<T, uint32_t>()) {
+                return GetAttribute("UInt32").ToUInt();
+            }
+            else if constexpr (std::is_same<T, uint64_t>()) {
+                return GetAttribute("UInt64").ToUInt64();
+            }
             else if constexpr (std::is_same<T, float_t>()) {
                 return GetAttribute("Float").ToFloat();
+            }
+            else if constexpr (std::is_same<T, double_t>()) {
+                return GetAttribute("Double").ToDouble();
             }
             else if constexpr (std::is_same<T, std::string>()) {
                 return GetAttribute("String").ToString();
@@ -294,11 +323,50 @@ namespace SR_UTILS_NS::Xml {
                 hasErrors |= AppendAttribute("B", value.b);
                 hasErrors |= AppendAttribute("A", value.a);
             }
-            if constexpr (std::is_same<T, SR_MATH_NS::FVector4>()) {
+            else if constexpr (std::is_same<T, SR_MATH_NS::FVector4>()) {
                 hasErrors |= AppendAttribute("X", value.x);
                 hasErrors |= AppendAttribute("Y", value.y);
                 hasErrors |= AppendAttribute("Z", value.z);
                 hasErrors |= AppendAttribute("W", value.w);
+            }
+            else if constexpr (std::is_same<T, bool>()) {
+                hasErrors |= AppendAttribute("Bool", value);
+            }
+            else if constexpr (std::is_same<T, float>() || std::is_same<T, float_t>()) {
+                hasErrors |= AppendAttribute("Float", value);
+            }
+            else if constexpr (std::is_same<T, double>() || std::is_same<T, double_t>()) {
+                hasErrors |= AppendAttribute("Double", value);
+            }
+            else if constexpr (std::is_same<T, int8_t>()) {
+                hasErrors |= AppendAttribute("Int8", value);
+            }
+            else if constexpr (std::is_same<T, int16_t>()) {
+                hasErrors |= AppendAttribute("Int16", value);
+            }
+            else if constexpr (std::is_same<T, int32_t>()) {
+                hasErrors |= AppendAttribute("Int32", value);
+            }
+            else if constexpr (std::is_same<T, int64_t>()) {
+                hasErrors |= AppendAttribute("Int64", value);
+            }
+            else if constexpr (std::is_same<T, uint8_t>()) {
+                hasErrors |= AppendAttribute("UInt8", value);
+            }
+            else if constexpr (std::is_same<T, uint16_t>()) {
+                hasErrors |= AppendAttribute("UInt16", value);
+            }
+            else if constexpr (std::is_same<T, uint32_t>()) {
+                hasErrors |= AppendAttribute("UInt32", value);
+            }
+            else if constexpr (std::is_same<T, uint64_t>()) {
+                hasErrors |= AppendAttribute("UInt64", value);
+            }
+            else if constexpr (std::is_same<T, SR_UTILS_NS::Path>()) {
+                hasErrors |= AppendAttribute("Path", value);
+            }
+            else if constexpr (std::is_same<T, std::string>()) {
+                hasErrors |= AppendAttribute("String", value);
             }
             else if constexpr (std::is_same<T, SR_MATH_NS::FVector2>()) {
                 hasErrors |= AppendAttribute("X", value.x);
@@ -327,8 +395,10 @@ namespace SR_UTILS_NS::Xml {
                 hasErrors |= AppendAttribute("Y", value.y);
                 hasErrors |= AppendAttribute("Z", value.z);
             }
-            else
-                static_assert("Unknown type!");
+            else {
+                SRHalt("Unknown type!");
+                SR_STATIC_ASSERT("Unknown type!");
+            }
 
             return !hasErrors;
         }
@@ -346,6 +416,9 @@ namespace SR_UTILS_NS::Xml {
 
             if constexpr (std::is_same<T, std::string>()) {
                 attrib.set_value(value.c_str());
+            }
+            else if constexpr (std::is_same<T, SR_UTILS_NS::Path>()) {
+                attrib.set_value(value.CStr());
             }
             else {
                 attrib.set_value(value);
@@ -382,11 +455,11 @@ namespace SR_UTILS_NS::Xml {
         Node AppendNode(const std::string &name) { return AppendChild(name); }
         Node AppendNode(const Node &node) { return AppendChild(node); }
 
-        [[nodiscard]] Node TryGetNode(const std::string &name) const {
+        SR_NODISCARD Node TryGetNode(const std::string &name) const {
             return m_valid ? Node(m_node.child(name.c_str())) : Node();
         }
 
-        [[nodiscard]] Node GetNode(const std::string &name) const {
+        SR_NODISCARD Node GetNode(const std::string &name) const {
             if (!m_valid) {
                 SRAssert2(false, "Node::GetNode() : node is not valid!");
                 g_xml_last_error = -2;
@@ -464,31 +537,35 @@ namespace SR_UTILS_NS::Xml {
             return Node(node);
         }
 
-        bool Save(const SR_UTILS_NS::Path& path) const {
+        bool Save(const SR_UTILS_NS::Path& path) const { /// NOLINT
             if (!path.Exists()) {
-                path.Make();
+                path.Create();
             }
             return m_document->save_file(path.CStr());
         }
 
-        [[nodiscard]] std::string Dump() const;
+        SR_NODISCARD std::string Dump() const;
 
-        [[nodiscard]] Node Root() const {
+        SR_NODISCARD Node Root() const {
             return Node(m_document->root());
         }
 
-        [[nodiscard]] Node TryRoot() const {
+        SR_NODISCARD Node TryRoot() const {
             if (!Valid())
                 return Node();
 
             return Node(m_document->root());
         }
 
-        [[nodiscard]] Node DocumentElement() const {
+        SR_NODISCARD Node DocumentElement() const {
             return Node(m_document->document_element());
         }
 
-        [[nodiscard]] bool Valid() const { return m_valid; }
+        SR_NODISCARD bool Valid() const { return m_valid; }
+
+        operator bool() const { /// NOLINT
+            return Valid();
+        }
     };
 
     template<bool NeedConvert> static SR_MATH_NS::FColor NodeToColor(const Xml::Node& node) {

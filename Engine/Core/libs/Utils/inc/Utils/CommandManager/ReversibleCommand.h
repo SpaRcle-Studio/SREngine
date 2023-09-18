@@ -49,7 +49,7 @@ namespace SR_UTILS_NS {
     };
 }
 
-#define SR_MAKE_REVERSIBLE_CMD_ALLOCATOR(type) []() -> SR_UTILS_NS::ReversibleCommand* { return dynamic_cast<SR_UTILS_NS::ReversibleCommand*>(new type()); }
-#define SR_REGISTER_REVERSIBLE_CMD(manager, type) manager->RegisterCommand(#type, SR_MAKE_REVERSIBLE_CMD_ALLOCATOR(type))
+#define SR_MAKE_REVERSIBLE_CMD_ALLOCATOR(type, pEngine) [pEngine]() -> SR_UTILS_NS::ReversibleCommand* { return dynamic_cast<SR_UTILS_NS::ReversibleCommand*>(new type(pEngine)); }
+#define SR_REGISTER_REVERSIBLE_CMD(manager, type, pEngine) manager->RegisterCommand(#type, SR_MAKE_REVERSIBLE_CMD_ALLOCATOR(type, pEngine))
 
 #endif //SRENGINE_REVERSIBLECOMMAND_H

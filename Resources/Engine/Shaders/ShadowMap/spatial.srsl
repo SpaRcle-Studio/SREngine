@@ -8,10 +8,81 @@ BlendEnabled false;
 DepthWrite true;
 DepthTest true;
 
+[[uniform], [public]] vec4 color;
+[[uniform], [public]] sampler2D diffuse;
+
+[[uniform]] sampler2D shadowMap;
+
+[[shared]] vec3 normal;
+[[shared]] vec3 lightVec;
+[[shared]] vec3 viewVec;
+[[shared]] vec4 shadowCoord;
+
+float textureProj(vec4 shadowCoord, vec2 offset) {
+	float shadow = 1.0;
+	float bias = 0.00016;
+
+	if (shadowCoord.z > -1.0 && shadowCoord.z < 1.0) {
+		float dist = texture(shadowMap, vec2(shadowCoord.st + offset)).r;
+		if (shadowCoord.w > 0 && dist < shadowCoord.z - bias) {
+			shadow = 0.3;
+		}
+	}
+
+	return shadow;
+}
+
+float filterPCF(vec4 sc) {
+	ivec2 texDim = textureSize(shadowMap, 0);
+	float scale = 1.5;
+	float dx = scale * 1.0 / float(texDim.x);
+	float dy = scale * 1.0 / float(texDim.y);
+
+	float shadowFactor = 0.0;
+	int count = 0;
+	int range = 1;
+
+	for (int x = -range; x <= range; x++)
+	{
+		for (int y = -range; y <= range; y++)
+		{
+			shadowFactor += textureProj(sc, vec2(dx * x, dy * y));
+			count++;
+		}
+	}
+
+	return shadowFactor / count;
+}
+
 void fragment() {
-	COLOR = vec4(FRAG_COORD.z, 0.0, 0.0, 1.0);
+    vec3 diffuseColor = texture(diffuse, UV).rgb * color.rgb;
+
+	/// float shadow = textureProj(shadowCoord / shadowCoord.w, vec2(0.0));
+	float shadow = filterPCF(shadowCoord / shadowCoord.w);
+
+    vec3 N = normalize(normal);
+    vec3 L = normalize(lightVec);
+    vec3 V = normalize(viewVec);
+    vec3 R = normalize(-reflect(L, N));
+    vec3 lighting = max(dot(N, L), 0.9 /* ambient */) * diffuseColor;
+
+    COLOR = vec4(lighting * vec3(shadow), 1.0);
 }
 
 void vertex() {
-    OUT_POSITION = LIGHT_SPACE_MATRIX * MODEL_MATRIX * vec4(VERTEX, 1.0);
+    vec4 pos = MODEL_MATRIX * vec4(VERTEX, 1.0);
+    normal = mat3(MODEL_MATRIX) * NORMAL;
+    lightVec = normalize(DIRECTIONAL_LIGHT_POSITION - VERTEX);
+    viewVec = -pos.xyz;
+
+    mat4 biasMat = mat4(
+        0.5, 0.0, 0.0, 0.0,
+        0.0, 0.5, 0.0, 0.0,
+        0.0, 0.0, 1.0, 0.0,
+        0.5, 0.5, 0.0, 1.0
+	);
+
+    shadowCoord = (biasMat * LIGHT_SPACE_MATRIX * MODEL_MATRIX) * vec4(VERTEX, 1.0);
+
+    OUT_POSITION = PROJECTION_MATRIX * VIEW_MATRIX * MODEL_MATRIX * vec4(VERTEX, 1.0);
 }

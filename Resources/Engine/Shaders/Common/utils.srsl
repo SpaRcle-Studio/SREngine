@@ -1,0 +1,13 @@
+float LinearizeDepth(float zNear, float zFar, float depth) {
+    /// преобразуем обратно в NDC
+    float z = depth * 2.0 - 1.0;
+    return (2.0 * zNear * zFar) / (zFar + zNear - z * (zFar - zNear));
+}
+
+float Fresnel(vec3 viewDirectionWorld, vec3 normalWorld) {
+	float d = dot(viewDirectionWorld, normalWorld);
+	d = abs(d);
+	d = clamp(d, 0.0, 1.0);
+
+	return 1.0 - d;
+}

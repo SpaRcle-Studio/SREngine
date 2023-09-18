@@ -13,34 +13,21 @@
 #include "../Graphics/src/Graphics/Animations/AnimationStateTransition.cpp"
 #include "../Graphics/src/Graphics/Animations/AnimationStateMachine.cpp"
 #include "../Graphics/src/Graphics/Animations/AnimationState.cpp"
+#include "../Graphics/src/Graphics/Animations/BoneComponent.cpp"
 
-#include "../Graphics/src/Graphics/Pipeline/Vulkan/VulkanImGUI.cpp"
-#include "../Graphics/src/Graphics/Pipeline/Vulkan/VulkanMemory.cpp"
-#include "../Graphics/src/Graphics/Pipeline/Environment.cpp"
-#include "../Graphics/src/Graphics/Pipeline/OpenGL.cpp"
 #include "../Graphics/src/Graphics/Pipeline/TextureHelper.cpp"
-#include "../Graphics/src/Graphics/Pipeline/Vulkan.cpp"
 #include "../Graphics/src/Graphics/Pipeline/Pipeline.cpp"
 #include "../Graphics/src/Graphics/Pipeline/EmptyPipeline.cpp"
+#include "../Graphics/src/Graphics/Pipeline/FrameBufferQueue.cpp"
 
-#include "../Graphics/src/Graphics/GUI/Link.cpp"
-#include "../Graphics/src/Graphics/GUI/ICanvas.cpp"
-#include "../Graphics/src/Graphics/GUI/Node.cpp"
-#include "../Graphics/src/Graphics/GUI/Icons.cpp"
-#include "../Graphics/src/Graphics/GUI/NodeManager.cpp"
-#include "../Graphics/src/Graphics/GUI/Pin.cpp"
-#include "../Graphics/src/Graphics/GUI/Editor/MessageBox.cpp"
-#include "../Graphics/src/Graphics/GUI/Editor/Theme.cpp"
-#include "../Graphics/src/Graphics/GUI/WidgetManager.cpp"
-#include "../Graphics/src/Graphics/GUI/Widget.cpp"
-#include "../Graphics/src/Graphics/GUI/NodeWidget.cpp"
-#include "../Graphics/src/Graphics/GUI/ImNodeEditorUtils.cpp"
-#include "../Graphics/src/Graphics/GUI/NodeBuilder.cpp"
+#include "../Graphics/src/Graphics/Overlay/Overlay.cpp"
 
 #include "../Graphics/src/Graphics/Lighting/DirectionalLight.cpp"
 #include "../Graphics/src/Graphics/Lighting/ILightComponent.cpp"
 #include "../Graphics/src/Graphics/Lighting/PointLight.cpp"
-#include "../Graphics/src/Graphics/Lighting/Spotlight.cpp"
+#include "../Graphics/src/Graphics/Lighting/SpotLight.cpp"
+#include "../Graphics/src/Graphics/Lighting/AreaLight.cpp"
+#include "../Graphics/src/Graphics/Lighting/ProbeLight.cpp"
 #include "../Graphics/src/Graphics/Lighting/LightSystem.cpp"
 
 #include "../Graphics/src/Graphics/Loaders/FbxLoader.cpp"
@@ -67,7 +54,7 @@
 #include "../Graphics/src/Graphics/Font/Glyph.cpp"
 #include "../Graphics/src/Graphics/Font/FreeType.cpp"
 
-#include "../Graphics/src/Graphics/UI/Sprite2D.cpp"
+#include "src/Graphics/Types/Geometry/Sprite.cpp"
 #include "../Graphics/src/Graphics/UI/Canvas.cpp"
 #include "../Graphics/src/Graphics/UI/Anchor.cpp"
 
@@ -77,6 +64,7 @@
 #include "../Graphics/src/Graphics/Render/RenderContext.cpp"
 #include "../Graphics/src/Graphics/Render/SortedMeshQueue.cpp"
 #include "../Graphics/src/Graphics/Render/DebugRenderer.cpp"
+#include "../Graphics/src/Graphics/Render/RenderSettings.cpp"
 
 #include "../Graphics/src/Graphics/Types/Geometry/DebugWireframeMesh.cpp"
 #include "../Graphics/src/Graphics/Types/Geometry/DebugLine.cpp"
@@ -103,8 +91,22 @@
 #include "../Graphics/src/Graphics/Window/Window.cpp"
 #include "../Graphics/src/Graphics/Window/BasicWindowImpl.cpp"
 
-#if defined(SR_TRACY_ENABLE) && defined(SR_USE_VULKAN)
-    #include "../Graphics/src/Graphics/Pipeline/Vulkan/VulkanTracy.cpp"
+#if defined(SR_USE_IMGUI)
+    #include "../Graphics/src/Graphics/Overlay/ImGuiOverlay.cpp"
+#endif
+
+#if defined(SR_USE_VULKAN)
+    #include "../Graphics/src/Graphics/Pipeline/Vulkan/VulkanPipeline.cpp"
+    #include "../Graphics/src/Graphics/Pipeline/Vulkan/VulkanMemory.cpp"
+    #include "../Graphics/src/Graphics/Pipeline/Vulkan/VulkanKernel.cpp"
+
+    #if defined(SR_USE_IMGUI)
+        #include "../Graphics/src/Graphics/Overlay/VulkanImGuiOverlay.cpp"
+    #endif
+
+    #if defined(SR_TRACY_ENABLE)
+        #include "../Graphics/src/Graphics/Pipeline/Vulkan/VulkanTracy.cpp"
+    #endif
 #endif
 
 #if defined(SR_WIN32)

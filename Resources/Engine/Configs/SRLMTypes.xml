@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<SRLM>
+    <Struct Name="DepthLayer">
+        <ImageFormat Name="Format"/>
+        <Float Name="ClearValue"/>
+    </Struct>
+    <Struct Name="ColorLayer">
+        <ImageFormat Name="Format"/>
+        <Float Name="R"/>
+        <Float Name="G"/>
+        <Float Name="B"/>
+        <Float Name="A"/>
+    </Struct>
+    <Struct Name="IVector2">
+        <Int32 Name="X"/>
+        <Int32 Name="Y"/>
+    </Struct>
+    <Struct Name="FVector2">
+        <Float Name="X"/>
+        <Float Name="Y"/>
+    </Struct>
+    <Struct Name="FrameBufferSettings">
+        <Bool Name="DynamicResizing"/>
+        <Bool Name="DepthEnabled"/>
+        <Int32 Name="SmoothSamples"/>
+        <Int32 Name="Layers"/>
+        <IVector2 Name="Size"/>
+        <FVector2 Name="PreScale"/>
+        <DepthLayer Name="Depth"/>
+        <Array Name="Layer" Arg0="ColorLayer"/>
+    </Struct>
+</SRLM>

@@ -31,6 +31,8 @@ namespace SR_GRAPH_NS {
 
         void UseTextures() override;
 
+        SR_NODISCARD std::vector<SR_GTYPES_NS::Framebuffer*> GetFrameBuffers() const override;
+
     protected:
         SR_NODISCARD SSAOKernel CreateKernel() const;
         SR_NODISCARD SR_GTYPES_NS::Texture* CreateNoise() const;

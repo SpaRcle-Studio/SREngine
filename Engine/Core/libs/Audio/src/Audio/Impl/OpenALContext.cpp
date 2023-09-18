@@ -51,13 +51,6 @@ namespace SR_AUDIO_NS {
         ALuint* alBuffer = reinterpret_cast<ALuint*>(buffer);
 
         SR_AL_CALL(alGenSources, 1, alSource);
-
-        SR_AL_CALL(alSourcef, *alSource, AL_PITCH, 1);
-        SR_AL_CALL(alSourcef, *alSource, AL_GAIN, 1.0f);
-        SR_AL_CALL(alSource3f, *alSource, AL_POSITION, 0, 0, 0);
-        SR_AL_CALL(alSource3f, *alSource, AL_VELOCITY, 0, 0, 0);
-        SR_AL_CALL(alSourcei, *alSource, AL_LOOPING, AL_TRUE);
-
         SR_AL_CALL(alSourcei, *alSource, AL_BUFFER, *alBuffer);
 
         return reinterpret_cast<void*>(alSource);
@@ -88,7 +81,7 @@ namespace SR_AUDIO_NS {
     bool OpenALContext::FreeBuffer(SoundBuffer* buffer) {
         ALuint* alBuffer = reinterpret_cast<ALuint*>(*buffer);
 
-        alDeleteBuffers(1, alBuffer);
+        SR_AL_CALL(alDeleteBuffers, 1, alBuffer);
 
         delete alBuffer;
         (*buffer) = nullptr;
@@ -100,5 +93,55 @@ namespace SR_AUDIO_NS {
         ALuint* alSource = reinterpret_cast<ALuint*>(source);
 
         alSourcePlay(*alSource);
+    }
+
+    void OpenALContext::ApplyParamImpl(SoundSource pSource, PlayParamType paramType, const void* pValue) {
+        ALuint* alSource = reinterpret_cast<ALuint*>(pSource);
+
+        switch (paramType) {
+            case PlayParamType::Pitch:
+                SR_AL_CALL(alSourcef, *alSource, AL_PITCH, *(float_t*)pValue);
+                break;
+            case PlayParamType::Gain:
+                SR_AL_CALL(alSourcef, *alSource, AL_GAIN, *(float_t*)pValue);
+                break;
+            case PlayParamType::Loop:
+                SR_AL_CALL(alSourcei, *alSource, AL_LOOPING, *(bool*)pValue ? AL_TRUE : AL_FALSE);
+            default:
+                break; // (кирпич)
+
+        }
+
+        SR_AL_CALL(alSource3f, *alSource, AL_POSITION, 0, 0, 0);
+        SR_AL_CALL(alSource3f, *alSource, AL_VELOCITY, 0, 0, 0);
+    }
+
+    bool OpenALContext::IsPlaying(SoundSource pSource) const {
+        ALint state = AL_INVALID;
+        SR_AL_CALL(alGetSourcei, *(ALint*)pSource, AL_SOURCE_STATE, &state);
+        return state == AL_PLAYING;
+    }
+
+    bool OpenALContext::IsPaused(SoundSource pSource) const {
+        ALint state = AL_INVALID;
+        SR_AL_CALL(alGetSourcei, *(ALint*)pSource, AL_SOURCE_STATE, &state);
+        return state == AL_PAUSED;
+    }
+
+    bool OpenALContext::IsStopped(SoundSource pSource) const {
+        ALint state = AL_INVALID;
+        SR_AL_CALL(alGetSourcei, *(ALint*)pSource, AL_SOURCE_STATE, &state);
+        return state == AL_STOPPED;
+    }
+
+    bool OpenALContext::FreeSource(SoundSource* pSource) {
+        ALuint* alSource = reinterpret_cast<ALuint*>(*pSource);
+
+        SR_AL_CALL(alDeleteSources, 1, alSource);
+
+        delete alSource;
+        (*pSource) = nullptr;
+
+        return true;
     }
 }

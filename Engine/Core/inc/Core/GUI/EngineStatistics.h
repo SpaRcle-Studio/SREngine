@@ -7,8 +7,10 @@
 
 #include <Graphics/GUI/Widget.h>
 
+#include <EvoVulkan/Tools/SubmitInfo.h>
+
 namespace SR_CORE_NS::GUI {
-    class EngineStatistics : public SR_GRAPH_NS::GUI::Widget {
+    class EngineStatistics : public SR_GRAPH_GUI_NS::Widget {
     public:
         EngineStatistics();
         ~EngineStatistics() override = default;
@@ -21,6 +23,9 @@ namespace SR_CORE_NS::GUI {
         void ThreadsPage();
         void WidgetsPage();
         void VideoMemoryPage();
+        void SubmitQueuePage();
+
+        void DrawSubmitInfo(const EvoVulkan::SubmitInfo& submitInfo);
 
     private:
         const ImGuiTreeNodeFlags m_nodeFlagsWithChild = ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_OpenOnDoubleClick;

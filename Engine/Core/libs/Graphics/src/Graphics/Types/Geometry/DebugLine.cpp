@@ -62,9 +62,9 @@ namespace SR_GTYPES_NS {
         SR_TRACY_ZONE;
 
         if (auto&& pShader = GetShader()) {
-            pShader->SetValue(SHADER_LINE_START_POINT, m_startPoint.Cast<float_t>());
-            pShader->SetValue(SHADER_LINE_END_POINT, m_endPoint.Cast<float_t>());
-            pShader->SetValue(SHADER_LINE_COLOR, SR_MATH_NS::Vector4<float_t>(
+            pShader->SetVec3(SHADER_LINE_START_POINT, m_startPoint.Cast<float_t>());
+            pShader->SetVec3(SHADER_LINE_END_POINT, m_endPoint.Cast<float_t>());
+            pShader->SetVec4(SHADER_LINE_COLOR, SR_MATH_NS::Vector4<float_t>(
                 m_color.r / 255,
                 m_color.g / 255,
                 m_color.b / 255,
@@ -75,11 +75,11 @@ namespace SR_GTYPES_NS {
         Mesh::UseMaterial();
     }
 
-    void DebugLine::SetEndPoint(const SR_MATH_NS::FVector3 &endPoint) {
+    void DebugLine::SetEndPoint(const SR_MATH_NS::FVector3& endPoint) {
         m_endPoint = endPoint;
     }
 
-    void DebugLine::SetColor(const SR_MATH_NS::FVector4 &color) {
+    void DebugLine::SetColor(const SR_MATH_NS::FVector4& color) {
         m_color = color;
     }
 

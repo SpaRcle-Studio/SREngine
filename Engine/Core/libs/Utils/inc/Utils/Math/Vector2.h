@@ -167,6 +167,10 @@ namespace SR_MATH_NS {
             return (x == 0 || y == 0);
         }
 
+        SR_NODISCARD bool IsNull() const {
+            return (x == 0 && y == 0);
+        }
+
         SR_NODISCARD bool HasNegative() const {
             return (x < 0 || y < 0);
         }

@@ -8,7 +8,6 @@
 
 #include <Graphics/Types/Geometry/Mesh3D.h>
 #include <Graphics/Types/Material.h>
-#include <Graphics/Pipeline/Environment.h>
 #include <Graphics/Types/Uniforms.h>
 #include <Graphics/Types/Shader.h>
 
@@ -28,11 +27,11 @@ namespace SR_GTYPES_NS {
 
         FreeVideoMemory();
 
-        if (!IsCanCalculate()) {
+        if (!IsCalculatable()) {
             return false;
         }
 
-        if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::High) {
+        if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::Full) {
             SR_LOG("Mesh3D::Calculate() : calculating \"" + GetGeometryName() + "\"...");
         }
 
@@ -77,6 +76,8 @@ namespace SR_GTYPES_NS {
             pShader->Flush();
 
             m_material->UseSamplers();
+
+            pShader->FlushSamplers();
         }
 
         switch (m_uboManager.BindUBO(m_virtualUBO)) {
@@ -84,8 +85,10 @@ namespace SR_GTYPES_NS {
                 pShader->InitUBOBlock();
                 pShader->Flush();
                 m_material->UseSamplers();
+                pShader->FlushSamplers();
                 SR_FALLTHROUGH;
             case Memory::UBOManager::BindResult::Success:
+                pShader->FlushConstants();
                 m_pipeline->DrawIndices(m_countIndices);
                 break;
             case Memory::UBOManager::BindResult::Failed:
@@ -136,8 +139,8 @@ namespace SR_GTYPES_NS {
         return GetRawMesh()->GetIndices(GetMeshId());
     }
 
-    bool Mesh3D::IsCanCalculate() const {
-        return IsValidMeshId() && Mesh::IsCanCalculate();
+    bool Mesh3D::IsCalculatable() const {
+        return IsValidMeshId() && Mesh::IsCalculatable();
     }
 
     void Mesh3D::UseMaterial() {

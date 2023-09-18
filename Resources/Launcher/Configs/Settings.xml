@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<LauncherSettings>
+    <Enabled Bool="true"/>
+    <AllowEdtior Bool="true"/>
+    <EditorOnStartUp Bool="true"/>
+    <Scene Path="Launcher/Scenes/LauncherScene.scene"/>
+    <EditorRenderTechnique Path="Launcher/Configs/EditorRenderTechnique.xml"/>
+    <NewProjectCopyDirectories>
+        <Directory Path="Engine"/>
+        <Directory Path="Editor"/>
+    </NewProjectCopyDirectories>
+</LauncherSettings>

@@ -9,6 +9,11 @@
 #include <Utils/Locale/UTF.h>
 
 namespace SR_UTILS_NS::Locale {
+    static void SetLocale() {
+        setlocale(LC_ALL, "rus");
+        setlocale(LC_NUMERIC, "C");
+    }
+
     template<typename CharOut,typename CharIn> std::basic_string<CharOut> UtfToUtf(CharIn const *begin, CharIn const *end, EncMethodType how = EncMethodType::Default) {
         std::basic_string<CharOut> result;
         result.reserve(end - begin);

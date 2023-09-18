@@ -39,8 +39,8 @@ namespace SR_WORLD_NS {
 
         virtual bool Reload() { return true; }
 
-        virtual bool Load(const Path& path) { return false; }
-        virtual bool Save(const Path& path) { return false; }
+        virtual bool Load(const Path& path);
+        virtual bool Save(const Path& path);
 
     protected:
         ScenePtr m_scene;

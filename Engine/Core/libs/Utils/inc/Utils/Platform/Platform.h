@@ -2,17 +2,24 @@
 // Created by Monika on 17.03.2022.
 //
 
-#ifndef SRENGINE_PLATFORM_H
-#define SRENGINE_PLATFORM_H
+#ifndef SR_ENGINE_UTILS_PLATFORM_H
+#define SR_ENGINE_UTILS_PLATFORM_H
 
 #include <Utils/Math/Vector2.h>
 #include <Utils/Common/ThreadUtils.h>
 #include <Utils/FileSystem/Path.h>
 
+namespace SR_UTILS_NS {
+    SR_ENUM_NS_CLASS_T(PlatformType, uint8_t,
+        Unknown, Windows, Linux, Android, MacOS
+    );
+}
+
 namespace SR_UTILS_NS::Platform {
     SR_DLL_EXPORT extern void InitSegmentationHandler();
     SR_DLL_EXPORT extern void SetInstance(void* pInstance);
     SR_DLL_EXPORT extern void* GetInstance();
+    SR_DLL_EXPORT extern PlatformType GetType();
 
     SR_DLL_EXPORT extern std::optional<std::string> ReadFile(const Path& path);
     SR_DLL_EXPORT extern void TextToClipboard(const std::string& text);
@@ -44,5 +51,4 @@ namespace SR_UTILS_NS::Platform {
     SR_DLL_EXPORT extern void OpenInNativeFileExplorer(const Path& dir);
 }
 
-
-#endif //SRENGINE_PLATFORM_H
+#endif //SR_ENGINE_UTILS_PLATFORM_H

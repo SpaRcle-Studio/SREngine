@@ -4,6 +4,7 @@
 
 #include <Utils/ResourceManager/IResource.h>
 #include <Utils/ResourceManager/ResourceManager.h>
+#include <Utils/ResourceManager/FileWatcher.h>
 
 namespace SR_UTILS_NS {
     IResource::IResource(uint64_t hashName)
@@ -12,15 +13,9 @@ namespace SR_UTILS_NS {
         , m_lifetime(ResourceManager::ResourceLifeTime)
     { }
 
-    IResource::IResource(uint64_t hashName, bool autoRemove)
-        : Super()
-        , m_resourceHashName(hashName)
-        , m_lifetime(ResourceManager::ResourceLifeTime)
-        , m_autoRemove(autoRemove)
-    { }
-
     bool IResource::Reload() {
         SR_TRACY_ZONE;
+        SR_TRACY_TEXT_N("Path", GetResourceId());
 
         if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::Medium) {
             SR_LOG("IResource::Reload() : reloading \"" + std::string(GetResourceId()) + "\" resource...");
@@ -46,12 +41,12 @@ namespace SR_UTILS_NS {
     }
 
     bool IResource::ForceDestroy() {
-        if (m_force || IsDestroyed()) {
+        if (m_isForceDestroyed || IsDestroyed()) {
             SR_ERROR("IResource::ForceDestroy() : resource is already destroyed!");
             return false;
         }
 
-        m_force = true;
+        m_isForceDestroyed = true;
 
         return Destroy();
     }
@@ -75,6 +70,11 @@ namespace SR_UTILS_NS {
         }
     }
 
+    void IResource::DeleteResource() {
+        StopWatch();
+        delete this;
+    }
+
     void IResource::SetId(const std::string &id, bool autoRegister) {
         SRAssert2(!id.empty(), "Invalid id!");
 
@@ -89,6 +89,8 @@ namespace SR_UTILS_NS {
             auto&& path = InitializeResourcePath();
             m_resourceHashPath = resourcesManager.RegisterResourcePath(path);
 
+            StartWatch();
+
             if (autoRegister) {
                 resourcesManager.RegisterResource(this);
             }
@@ -100,7 +102,7 @@ namespace SR_UTILS_NS {
 
     void IResource::CheckResourceUsage() {
         ResourceManager::Instance().Execute([this]() {
-            if (m_countUses == 0 && m_autoRemove && !IsDestroyed()) {
+            if (m_countUses == 0 && !IsDestroyed()) {
                 if (IsRegistered()) {
                     Destroy();
                     return;
@@ -128,7 +130,7 @@ namespace SR_UTILS_NS {
 
             --m_countUses;
 
-            if (m_countUses == 0 && m_autoRemove && !IsDestroyed()) {
+            if (m_countUses == 0 && !IsDestroyed()) {
                 if (IsRegistered()) {
                     Destroy();
                     result = RemoveUPResult::Destroy;
@@ -152,7 +154,7 @@ namespace SR_UTILS_NS {
         SRAssert(m_countUses != SR_UINT16_MAX);
 
         if (m_isRegistered && m_countUses == 0 && m_isDestroyed) {
-            SRHalt("IResource::AddUsePoint() : potential multi threading error!");
+            SRHalt("IResource::AddUsePoint() : potential multi threading error! Path: " + GetResourcePath().ToStringRef());
         }
 
         ++m_countUses;
@@ -162,19 +164,12 @@ namespace SR_UTILS_NS {
         return m_countUses;
     }
 
-    bool IResource::IsDestroyed() const noexcept {
-        return m_isDestroyed;
-    }
-
     IResource* IResource::CopyResource(IResource *destination) const {
-        destination->m_autoRemove = m_autoRemove;
         /// destination->m_lifetime = m_lifetime;
         destination->m_resourceHashPath = m_resourceHashPath;
         destination->m_loadState.store(m_loadState);
 
         destination->SetId(m_resourceHashId, true /** auto register */);
-
-        destination->SetReadOnly(m_readOnly);
 
         return destination;
     }
@@ -245,19 +240,42 @@ namespace SR_UTILS_NS {
         return SR_UTILS_NS::ResourceManager::Instance().GetResPath();
     }
 
-    bool IResource::TryExecute(const SR_HTYPES_NS::Function<bool()>& fun, bool def) const {
-        /// if (m_mutex.try_lock()) {
-        ///     const bool result = fun();
-        ///     m_mutex.unlock();
-        ///     return result;
-        /// }
+    bool IResource::Unload() {
+        if (m_loadState == LoadState::Unknown ||
+            m_loadState == LoadState::Loaded ||
+            m_loadState == LoadState::Unloading ||
+            m_loadState == LoadState::Reloading
+        ) {
+            m_loadState = LoadState::Unloaded;
+            return true;
+        }
 
-        /// return def;
+        for (auto&& pWatch : m_watchers) {
+            pWatch->Pause();
+        }
 
-        return Execute(fun);
+        return false;
+    }
+
+    bool IResource::Load() {
+        if (m_loadState == LoadState::Unknown ||
+            m_loadState == LoadState::Unloaded ||
+            m_loadState == LoadState::Reloading ||
+            m_loadState == LoadState::Loading
+        ) {
+            m_loadState = LoadState::Loaded;
+            return true;
+        }
+
+        for (auto&& pWatch : m_watchers) {
+            pWatch->Resume();
+        }
+
+        return false;
     }
 
     bool IResource::Execute(const SR_HTYPES_NS::Function<bool()>& fun) const {
+        SR_TRACY_ZONE;
         return fun();
     }
 
@@ -271,5 +289,37 @@ namespace SR_UTILS_NS {
 
     void IResource::UpdateResourceLifeTime() {
         m_lifetime = ResourceManager::ResourceLifeTime;
+    }
+
+    void IResource::StopWatch() {
+        for (auto&& pWatcher : m_watchers) {
+            if (!pWatcher) {
+                SRHalt("Watcher is nullptr!");
+                continue;
+            }
+            pWatcher->Stop();
+        }
+        m_watchers.clear();
+    }
+
+    void IResource::StartWatch() {
+        auto&& resourcesManager = ResourceManager::Instance();
+
+        auto&& path = GetResourcePath();
+        auto&& pWatch = resourcesManager.StartWatch(resourcesManager.GetResPath().Concat(path));
+
+        pWatch->SetCallBack([this](auto&& pWatcher) {
+            SignalWatch();
+        });
+
+        m_watchers.emplace_back(pWatch);
+    }
+
+    void IResource::SignalWatch() {
+        if (IsDestroyed() || IsForceDestroyed()) {
+            return;
+        }
+
+        ResourceManager::Instance().ReloadResource(this);
     }
 }

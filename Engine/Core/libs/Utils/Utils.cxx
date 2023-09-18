@@ -9,6 +9,15 @@
     #include "../Utils/src/Utils/Platform/AndroidNativeAppGlue.c"
 #endif
 
+#include "../Utils/src/Utils/SRLM/LogicalMachine.cpp"
+#include "../Utils/src/Utils/SRLM/DataType.cpp"
+#include "../Utils/src/Utils/SRLM/DataTypeManager.cpp"
+#include "../Utils/src/Utils/SRLM/DataOperators.cpp"
+#include "../Utils/src/Utils/SRLM/LogicalNode.cpp"
+#include "../Utils/src/Utils/SRLM/LogicalNodes.cpp"
+#include "../Utils/src/Utils/SRLM/LogicalNodeManager.cpp"
+#include "../Utils/src/Utils/SRLM/ConvertorNode.cpp"
+
 #include "../Utils/src/Utils/Events/EventManager.cpp"
 #include "../Utils/src/Utils/Events/Event.cpp"
 #include "../Utils/src/Utils/Events/EventDispatcher.cpp"
@@ -38,6 +47,7 @@
 #include "../Utils/src/Utils/Debug.cpp"
 #include "../Utils/src/Utils/Xml.cpp"
 
+#include "../Utils/src/Utils/ResourceManager/FileWatcher.cpp"
 #include "../Utils/src/Utils/ResourceManager/IResource.cpp"
 #include "../Utils/src/Utils/ResourceManager/ResourceInfo.cpp"
 #include "../Utils/src/Utils/ResourceManager/ResourcesHolder.cpp"
@@ -71,20 +81,12 @@
 #include "../Utils/src/Utils/Common/Enumerations.cpp"
 #include "../Utils/src/Utils/Common/EnumReflector.cpp"
 #include "../Utils/src/Utils/Common/Hashes.cpp"
-
-#include "../Utils/src/Utils/World/Chunk.cpp"
-#include "../Utils/src/Utils/World/Observer.cpp"
-#include "../Utils/src/Utils/World/Region.cpp"
-#include "../Utils/src/Utils/World/Scene.cpp"
-#include "../Utils/src/Utils/World/SceneBuilder.cpp"
-#include "../Utils/src/Utils/World/SceneAllocator.cpp"
-#include "../Utils/src/Utils/World/SceneLogic.cpp"
-#include "../Utils/src/Utils/World/SceneDefaultLogic.cpp"
-#include "../Utils/src/Utils/World/SceneCubeChunkLogic.cpp"
-#include "../Utils/src/Utils/World/ScenePrefabLogic.cpp"
+#include "../Utils/src/Utils/Common/HashManager.cpp"
 
 #include "../Utils/src/Utils/Game/LookAtComponent.cpp"
 
 #ifdef SR_TRACY_ENABLE
     #include "../Utils/src/Utils/Profile/TracyContext.cpp"
 #endif
+
+#include "../Utils/libs/xxHash/xxhash.c"

@@ -35,6 +35,8 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD BasePass* FindPass(const std::string& name) const;
         SR_NODISCARD BasePass* FindPass(uint64_t hashName) const;
 
+        template<typename T> SR_NODISCARD T* FindPass() const;
+
         void SR_FASTCALL OnMeshAdded(SR_GTYPES_NS::Mesh* pMesh, bool transparent) override;
         void SR_FASTCALL OnMeshRemoved(SR_GTYPES_NS::Mesh* pMesh, bool transparent) override;
 
@@ -42,6 +44,22 @@ namespace SR_GRAPH_NS {
         std::vector<BasePass*> m_passes;
 
     };
+
+    template<typename T> T* GroupPass::FindPass() const {
+        for (auto&& pPass : m_passes) {
+            if (auto&& pFoundPass = dynamic_cast<T*>(pPass)) {
+                return pFoundPass;
+            }
+
+            if (auto&& pGroupPass = dynamic_cast<GroupPass*>(pPass)) {
+                if (auto&& pFoundPass = pGroupPass->FindPass<T>()) {
+                    return pFoundPass;
+                }
+            }
+        }
+
+        return nullptr;
+    }
 }
 
 #endif //SRENGINE_GROUPPASS_H

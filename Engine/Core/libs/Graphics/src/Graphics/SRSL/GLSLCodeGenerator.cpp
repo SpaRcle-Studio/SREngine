@@ -70,6 +70,7 @@ namespace SR_SRSL_NS {
 
         /// code += "#extension GL_ARB_separate_shader_objects : enable\n";
         /// code += "#extension GL_EXT_shader_atomic_float : enable\n\n";
+        /// code += "#extension GL_ARB_shader_image_load_store : enable\n\n";
 
         if (auto&& vertexLocations = GenerateInputLocations(stage); !vertexLocations.empty()) {
             code += vertexLocations + "\n";
@@ -87,7 +88,7 @@ namespace SR_SRSL_NS {
 
         auto&& entryPoint = SR_SRSL_ENTRY_POINTS.at(stage);
         if (auto&& pFunctionCallStack = m_shader->GetUseStack()->FindFunction(entryPoint)) {
-            for (auto &&pUnit : m_shader->GetAnalyzedTree()->pLexicalTree->lexicalTree) {
+            for (auto&& pUnit : m_shader->GetAnalyzedTree()->pLexicalTree->lexicalTree) {
                 auto&& pFunction = dynamic_cast<SRSLFunction*>(pUnit);
 
                 if (!pFunction) {
@@ -169,15 +170,21 @@ namespace SR_SRSL_NS {
 
         std::string code = GenerateStage(ShaderStage::Fragment, variablesCode);
 
+        std::string locationsCode;
+
         uint64_t outLocation = 0;
         for (auto&& layer : SR_SRSL_DEFAULT_OUT_LAYERS) {
-            if (layer == SR_SRSL_MAIN_OUT_LAYER || pUseStackFunction->IsVariableUsed(layer)) {
-                code += SR_UTILS_NS::Format("layout (location = %i) out vec4 %s;\n", outLocation, layer.c_str());
+            const bool isNeedMain = layer == SR_SRSL_MAIN_OUT_LAYER && isColorUsed;
+            if (isNeedMain || pUseStackFunction->IsVariableUsed(layer)) {
+                locationsCode += SR_UTILS_NS::Format("layout (location = %i) out vec4 %s;\n", outLocation, layer.c_str());
             }
             ++outLocation;
         }
 
-        code += "\n";
+        if (!locationsCode.empty()) {
+            code += locationsCode;
+            code += "\n";
+        }
 
         std::string preCode;
 
@@ -230,12 +237,19 @@ namespace SR_SRSL_NS {
         }
 
         if (stage != ShaderStage::Vertex) {
+            auto&& pVertexFunction = m_shader->GetUseStack()->FindFunction(SR_SRSL_ENTRY_POINTS.at(ShaderStage::Vertex));
+
             for (auto&& [name, pVariable] : m_shader->GetShared()) {
+                /// если переменную не передали, значит ее нет
+                if (pVertexFunction && !pVertexFunction->IsVariableUsed(name)) {
+                    continue;
+                }
+
                 if (pFunction->IsVariableUsed(name)) {
                     auto&& type = SRSLTypeInfo::Instance().GetTypeName(pVariable->pType);
                     code += SR_UTILS_NS::Format("layout (location = %i) in %s %s;\n", location, type.c_str(), name.c_str());
-                    ++location;
                 }
+                ++location;
             }
 
             if (pFunction->IsVariableUsed("VERTEX_INDEX")) {
@@ -504,7 +518,7 @@ namespace SR_SRSL_NS {
 
         /// ------------------------------------------------------------------------------------------------------------
 
-        std::string blocksCode;
+        std::string uniformsCode;
 
         for (auto&& [name, uniformBlock] : m_shader->GetUniformBlocks()) {
             std::string blockCode = SR_UTILS_NS::Format("layout (std140, binding = %i) uniform %s {\n", uniformBlock.binding, name.c_str());
@@ -529,7 +543,7 @@ namespace SR_SRSL_NS {
             blockCode += "};\n";
 
             if (hasUsage) {
-                blocksCode += blockCode;
+                uniformsCode += blockCode;
             }
         }
 
@@ -539,8 +553,17 @@ namespace SR_SRSL_NS {
 
         for (auto&& [name, sampler] : m_shader->GetSamplers()) {
             if (pFunction->IsVariableUsed(name)) {
-                samplersCode += SR_UTILS_NS::Format("layout (binding = %i) uniform %s %s; // (sampler) %s\n",
-                        sampler.binding,
+                std::string layout;
+
+                if (sampler.attachment >= 0) {
+                    layout = SR_UTILS_NS::Format("(input_attachment_index = %i, binding = %i)", sampler.attachment, sampler.binding);
+                }
+                else {
+                    layout = SR_UTILS_NS::Format("(binding = %i)", sampler.binding);
+                }
+
+                samplersCode += SR_UTILS_NS::Format("layout %s uniform %s %s; // (sampler) %s\n",
+                        layout.c_str(),
                         sampler.type.c_str(),
                         name.c_str(),
                         sampler.isPublic ? "public" : "private"
@@ -550,13 +573,50 @@ namespace SR_SRSL_NS {
 
         /// ------------------------------------------------------------------------------------------------------------
 
-        code += blocksCode;
+        std::string pushConstantsCode;
 
-        if (!samplersCode.empty() && !blocksCode.empty()) {
+        if (!m_shader->GetPushConstants().fields.empty()) {
+            std::string blockCode = "layout(push_constant) uniform PushConstants {\n";
+            bool hasUsage = false;
+
+            for (auto&& field : m_shader->GetPushConstants().fields) {
+                hasUsage |= pFunction->IsVariableUsed(field.name);
+
+                auto&& typeName = SRSLTypeInfo::Instance().GetTypeName(field.type);
+                auto&& dimension = SRSLTypeInfo::Instance().GetDimension(field.type, nullptr);
+
+                std::string strDimension;
+
+                for (auto&& dim : dimension) {
+                    strDimension += "[" +  std::to_string(dim) + "]";
+                }
+
+                blockCode += SR_UTILS_NS::Format("\t// (%i bytes) %s\n", field.size, field.isPublic ? "public" : "private");
+                blockCode += SR_UTILS_NS::Format("\t%s %s%s;\n", typeName.c_str(), field.name.c_str(), strDimension.c_str());
+            }
+
+            blockCode += "};\n";
+
+            if (hasUsage) {
+                pushConstantsCode += blockCode;
+            }
+        }
+
+        /// ------------------------------------------------------------------------------------------------------------
+
+        code += uniformsCode;
+
+        if (!samplersCode.empty() && !uniformsCode.empty()) {
             code += "\n";
         }
 
         code += samplersCode;
+
+        if (!pushConstantsCode.empty() && (!samplersCode.empty() || !uniformsCode.empty())) {
+            code += "\n";
+        }
+
+        code += pushConstantsCode;
 
         return code;
     }

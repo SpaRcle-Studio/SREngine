@@ -7,8 +7,14 @@
 
 #include <Utils/Common/Singleton.h>
 #include <Utils/FileSystem/Path.h>
+#include <Utils/Common/Enumerations.h>
 
 namespace SR_UTILS_NS {
+    SR_ENUM_NS_CLASS_T(DebugLogType, uint8_t,
+        Log, Info, Debug, Graph, Shader, Script, System, Warn,
+        Error, ScriptError, ScriptLog, Vulkan, VulkanLog, VulkanError, Assert
+    );
+
     class SR_DLL_EXPORT Debug : public Singleton<Debug> {
     public:
         enum class Level {
@@ -38,24 +44,18 @@ namespace SR_UTILS_NS {
             White = 15
         };
 
-        enum class Type {
-            Log, Info, Debug, Graph, Shader, Script, System, Warn,
-            Error, ScriptError, ScriptLog, Vulkan, VulkanLog, VulkanError, Assert
-        };
-
     public:
         ~Debug() override = default;
 
     private:
         void InitColorTheme();
 
-        void Print(std::string msg, Type type);
-
     public:
-        Level GetLevel() { return m_level; }
         void SetLevel(Level level) { m_level = level; }
 
-        bool IsRunningUnderDebugger();
+        SR_NODISCARD Level GetLevel() { return m_level; }
+        SR_NODISCARD bool IsInitialized() const { return m_isInit; }
+        SR_NODISCARD bool IsRunningUnderDebugger();
 
         void MakeCrash();
 
@@ -63,22 +63,24 @@ namespace SR_UTILS_NS {
         void OnSingletonDestroy() override;
 
     public:
-        void Log(const std::string& msg) { Print(msg, Type::Log); }
-        void VulkanLog(const std::string& msg) { Print(msg, Type::VulkanLog); }
-        void Info(const std::string& msg) { Print(msg, Type::Info); }
-        void Graph(const std::string& msg) { Print(msg, Type::Graph); }
-        void Vulkan(const std::string& msg) { Print(msg, Type::Vulkan); }
-        void Shader(const std::string& msg) { Print(msg, Type::Shader); }
-        void Script(const std::string& msg) { Print(msg, Type::Script); }
-        void System(const std::string& msg) { Print(msg, Type::System); }
-        void Warn(const std::string& msg) { Print(msg, Type::Warn); m_countWarnings++; }
-        void Error(const std::string& msg) { Print(msg, Type::Error); m_countErrors++; }
-        void VulkanError(const std::string& msg) { Print(msg, Type::VulkanError); m_countErrors++; }
-        bool Assert(const std::string& msg) { Print(msg, Type::Assert); m_countErrors++; return false; }
+        void Log(const std::string& msg) { Print(msg, DebugLogType::Log); }
+        void VulkanLog(const std::string& msg) { Print(msg, DebugLogType::VulkanLog); }
+        void Info(const std::string& msg) { Print(msg, DebugLogType::Info); }
+        void Graph(const std::string& msg) { Print(msg, DebugLogType::Graph); }
+        void Vulkan(const std::string& msg) { Print(msg, DebugLogType::Vulkan); }
+        void Shader(const std::string& msg) { Print(msg, DebugLogType::Shader); }
+        void Script(const std::string& msg) { Print(msg, DebugLogType::Script); }
+        void System(const std::string& msg) { Print(msg, DebugLogType::System); }
+        void Warn(const std::string& msg) { Print(msg, DebugLogType::Warn); m_countWarnings++; }
+        void Error(const std::string& msg) { Print(msg, DebugLogType::Error); m_countErrors++; }
+        void VulkanError(const std::string& msg) { Print(msg, DebugLogType::VulkanError); m_countErrors++; }
+        bool Assert(const std::string& msg) { Print(msg, DebugLogType::Assert); m_countErrors++; return false; }
         bool AssertOnceCheck(const std::string& msg);
 
-        void ScriptLog(const std::string& msg) { Print(msg, Type::ScriptLog); }
-        void ScriptError(const std::string& msg) { Print(msg, Type::ScriptError); }
+        void ScriptLog(const std::string& msg) { Print(msg, DebugLogType::ScriptLog); }
+        void ScriptError(const std::string& msg) { Print(msg, DebugLogType::ScriptError); }
+
+        void Print(std::string msg, DebugLogType type);
 
     private:
         bool               m_showUseMemory             = false;
@@ -135,7 +137,6 @@ namespace SR_UTILS_NS {
     #define SR_SAFE_PTR_ASSERT(expr, msg) SRAssert2(expr, SR_UTILS_NS::Format("[SafePtr] %s \n\tPtr: %p", msg, (void *) m_ptr));
 
     #define SRAssert2Once(expr, msg) ((!(expr) && SR_UTILS_NS::Debug::Instance().AssertOnceCheck(SR_MAKE_ASSERT(msg))) || SRAssert2(expr, msg))
-    #define SRHalt(msg) SRAssert2(false, msg)
 #else
     #define SR_CHECK_ERROR(fun, notEquals, errorMsg) fun
     #define SRAssert2(expr, msg) (SR_NOOP)
@@ -144,15 +145,16 @@ namespace SR_UTILS_NS {
     #define SR_SAFE_PTR_ASSERT(expr, msg) (SR_NOOP)
     #define SRAssert2Once(expr, msg) (SR_NOOP)
     #define SRVerifyFalse2(expr, msg) ((!(expr)))
-    #define SRHalt(msg) SR_ERROR(msg)
 #endif
 
-#define SRVerifyFalse(expr) SRVerifyFalse2(expr, "An exception has been occured.")
+#define SRHalt(msg) SR_UTILS_NS::Debug::Instance().Assert(SR_MAKE_ASSERT(msg))
+#define SRHaltOnce(msg)  SR_UTILS_NS::Debug::Instance().AssertOnceCheck(SR_MAKE_ASSERT(msg))
+#define SRHalt0() SR_UTILS_NS::Debug::Instance().Assert(SR_MAKE_ASSERT("An exception has been occured!"))
+#define SRHaltOnce0() SR_UTILS_NS::Debug::Instance().AssertOnceCheck(SR_MAKE_ASSERT("An exception has been occured!"))
+
+#define SRVerifyFalse(expr) SRVerifyFalse2(expr, "An exception has been occured!")
 
 #define SRAssert1Once(expr) SRAssert2Once(expr, #expr)
-#define SRAssertOnce(expr) SRAssert2Once(expr, "An exception has been occured.")
-#define SRHaltOnce(msg) SRAssert2Once(false, msg)
-#define SRHalt0() SRAssert(false)
-#define SRHaltOnce0() SRAssert2Once(false, "An exception has been occured.")
+#define SRAssertOnce(expr) SRAssert2Once(expr, "An exception has been occured!")
 
 #endif //HELPER_DEBUG_H

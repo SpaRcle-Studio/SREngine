@@ -3,6 +3,7 @@
 //
 
 #include <Utils/ResourceManager/ResourceManager.h>
+#include <Utils/ResourceManager/FileWatcher.h>
 #include <Utils/Common/StringUtils.h>
 #include <Utils/Common/Features.h>
 #include <Utils/Common/Vertices.hpp>
@@ -15,7 +16,7 @@
 
 namespace SR_GTYPES_NS {
     Skybox::Skybox()
-        : IResource(SR_COMPILE_TIME_CRC32_TYPE_NAME(Skybox), true /** auto remove */)
+        : IResource(SR_COMPILE_TIME_CRC32_TYPE_NAME(Skybox))
     { }
 
     Skybox::~Skybox() {
@@ -25,8 +26,7 @@ namespace SR_GTYPES_NS {
             m_cubeMap == SR_ID_INVALID &&
             m_virtualUBO == SR_ID_INVALID &&
             m_VBO == SR_ID_INVALID &&
-            m_IBO == SR_ID_INVALID &&
-            m_VAO == SR_ID_INVALID
+            m_IBO == SR_ID_INVALID
         );
 
         for (auto&& img : m_data) {
@@ -39,7 +39,7 @@ namespace SR_GTYPES_NS {
         }
     }
 
-    Skybox *Skybox::Load(const SR_UTILS_NS::Path& rawPath) {
+    Skybox* Skybox::Load(const SR_UTILS_NS::Path& rawPath) {
         SR_GLOBAL_LOCK
 
         SR_UTILS_NS::Path&& path = SR_UTILS_NS::Path(rawPath).RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetResPath());
@@ -52,7 +52,12 @@ namespace SR_GTYPES_NS {
 
         SR_LOG("Skybox::Load() : loading \"" + path.ToString() + "\" skybox...");
 
-        std::array<uint8_t *, 6> sides = {};
+        std::array<uint8_t*, 6> sides = { };
+        for (auto&& side : sides) {
+            side = nullptr;
+        }
+
+        std::array<SR_UTILS_NS::Path, 6> paths;
 
         static constexpr const char* files[6] { "right", "left", "top", "bottom", "front", "back" };
 
@@ -61,11 +66,21 @@ namespace SR_GTYPES_NS {
         for (uint8_t i = 0; i < 6; ++i) {
             auto&& file = folder.Concat(files[i]).ConcatExt(path.GetExtension());
 
+            paths[i] = file;
+
             int32_t w = 0, h = 0, comp = 0;
             uint8_t *data = stbi_load(file.CStr(), &w, &h, &comp, STBI_rgb_alpha);
 
             if (!data) {
-                SR_ERROR("Skybox::Load() : failed to load skybox!\n\tPath: " + file.ToString());
+                SR_ERROR("Skybox::Load() : failed to load skybox!\n\tReason: " + std::basic_string<char>(stbi_failure_reason()) + "\n\tPath: " + file.ToString());
+
+                for (auto&& img : sides) {
+                    if (img) {
+                        stbi_image_free(img);
+                        img = nullptr;
+                    }
+                }
+
                 return nullptr;
             }
 
@@ -81,11 +96,12 @@ namespace SR_GTYPES_NS {
             sides[i] = data;
         }
 
-        auto pSkybox = new Skybox();
+        auto&& pSkybox = new Skybox();
 
         pSkybox->m_width = W;
         pSkybox->m_height = H;
         pSkybox->m_data = sides;
+        pSkybox->m_paths = paths;
 
         pSkybox->SetId(path.ToString());
 
@@ -98,8 +114,13 @@ namespace SR_GTYPES_NS {
             return false;
         }
 
-        const bool cpuUsage = SR_UTILS_NS::Features::Instance().Enabled("SkyboxCPUUsage", false);
-        if (m_cubeMap = m_pipeline->CalculateCubeMap(m_width, m_height, m_data, cpuUsage); m_cubeMap < 0) {
+        SRCubeMapCreateInfo createInfo;
+        createInfo.cpuUsage = SR_UTILS_NS::Features::Instance().Enabled("SkyboxCPUUsage", false);
+        createInfo.width = m_width;
+        createInfo.height = m_height;
+        createInfo.data = m_data;
+
+        if (m_cubeMap = m_pipeline->AllocateCubeMap(createInfo); m_cubeMap < 0) {
             SR_ERROR("Skybox::Calculate() : failed to calculate cube map!");
             m_hasErrors = true;
             return false;
@@ -108,25 +129,24 @@ namespace SR_GTYPES_NS {
         auto&& indexedVertices = Vertices::CastVertices<Vertices::SimpleVertex>(SR_UTILS_NS::SKYBOX_INDEXED_VERTICES);
 
         if (m_pipeline->GetType() == PipelineType::Vulkan) {
-            auto &&indices = SR_UTILS_NS::SKYBOX_INDICES;
+            auto&& indices = SR_UTILS_NS::SKYBOX_INDICES;
 
-            if (m_VBO = m_pipeline->CalculateVBO(indexedVertices.data(), Vertices::VertexType::SimpleVertex, indexedVertices.size()); m_VBO == SR_ID_INVALID) {
+            if (m_VBO = m_pipeline->AllocateVBO(indexedVertices.data(), Vertices::VertexType::SimpleVertex, indexedVertices.size()); m_VBO == SR_ID_INVALID) {
                 SR_ERROR("Skybox::Calculate() : failed to calculate VBO!");
                 m_hasErrors = true;
                 return false;
             }
 
-            if (m_IBO = m_pipeline->CalculateIBO((void *) indices.data(), sizeof(uint32_t), indices.size(), SR_ID_INVALID);
-                    m_IBO == SR_ID_INVALID) {
+            if (m_IBO = m_pipeline->AllocateIBO((void *) indices.data(), sizeof(uint32_t), indices.size(), SR_ID_INVALID); m_IBO == SR_ID_INVALID) {
                 SR_ERROR("Skybox::Calculate() : failed to calculate IBO!");
                 m_hasErrors = true;
                 return false;
             }
         }
         else {
-            auto &&vertices = SR_UTILS_NS::IndexedVerticesToNonIndexed(indexedVertices, SR_UTILS_NS::SKYBOX_INDICES);
+            auto&& vertices = SR_UTILS_NS::IndexedVerticesToNonIndexed(indexedVertices, SR_UTILS_NS::SKYBOX_INDICES);
 
-            if (m_VBO = m_pipeline->CalculateVBO(vertices.data(), Vertices::VertexType::SimpleVertex, vertices.size()); m_VBO == SR_ID_INVALID) {
+            if (m_VBO = m_pipeline->AllocateVBO(vertices.data(), Vertices::VertexType::SimpleVertex, vertices.size()); m_VBO == SR_ID_INVALID) {
                 SR_ERROR("Skybox::Calculate() : failed to calculate VBO!");
                 m_hasErrors = true;
                 return false;
@@ -166,6 +186,7 @@ namespace SR_GTYPES_NS {
             m_shader->Flush();
 
             m_shader->SetSamplerCube(SHADER_SKYBOX_DIFFUSE, m_cubeMap);
+            m_shader->FlushSamplers();
         }
 
         m_pipeline->BindVBO(m_VBO);
@@ -176,6 +197,7 @@ namespace SR_GTYPES_NS {
                 m_shader->InitUBOBlock();
                 m_shader->Flush();
                 m_shader->SetSamplerCube(SHADER_SKYBOX_DIFFUSE, m_cubeMap);
+                m_shader->FlushSamplers();
                 SR_FALLTHROUGH;
             case Memory::UBOManager::BindResult::Success:
                 m_pipeline->DrawIndices(36);
@@ -187,15 +209,7 @@ namespace SR_GTYPES_NS {
     }
 
     void Skybox::FreeVideoMemory() {
-        if (!m_isCalculated) {
-            return;
-        }
-
         SR_LOG("Skybox::FreeVideoMemory() : free skybox video memory...");
-
-        if (m_VAO != SR_ID_INVALID && !m_pipeline->FreeVAO(&m_VAO)) {
-            SR_ERROR("Skybox::FreeVideoMemory() : failed to free VAO!");
-        }
 
         if (m_VBO != SR_ID_INVALID && !m_pipeline->FreeVBO(&m_VBO)) {
             SR_ERROR("Skybox::FreeVideoMemory() : failed to free VBO!");
@@ -282,5 +296,21 @@ namespace SR_GTYPES_NS {
 
     int32_t Skybox::GetVirtualUBO() {
         return m_virtualUBO;
+    }
+
+    void Skybox::StartWatch() {
+        auto&& resourcesManager = SR_UTILS_NS::ResourceManager::Instance();
+
+        for (auto&& path : m_paths) {
+            SRAssert(!path.Empty());
+
+            auto&& pWatch = resourcesManager.StartWatch(path);
+
+            pWatch->SetCallBack([this](auto &&pWatcher) {
+                SignalWatch();
+            });
+
+            m_watchers.emplace_back(pWatch);
+        }
     }
 }

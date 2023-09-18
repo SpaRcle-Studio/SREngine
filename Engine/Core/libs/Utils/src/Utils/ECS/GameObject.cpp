@@ -36,6 +36,8 @@ namespace SR_UTILS_NS {
     }
 
     void GameObject::Destroy() {
+        SR_TRACY_ZONE;
+
         if (m_isDestroyed) {
             SRHalt("GameObject::Destroy() : \"" + m_name + "\" game object already destroyed!");
             return;
@@ -67,6 +69,7 @@ namespace SR_UTILS_NS {
                     pData->Destroy();
                 });
             }
+
             DestroyComponents();
             DestroyImpl();
         }
@@ -174,16 +177,14 @@ namespace SR_UTILS_NS {
         return true;
     }
 
-    void GameObject::RemoveChild(const GameObject::Ptr &ptr) {
+    void GameObject::RemoveChild(const GameObject::Ptr& ptr) {
         ptr->SetParent(GameObject::Ptr());
 
-        for (auto pIt = m_children.begin(); pIt != m_children.end(); ) {
-            if (pIt->Get() == ptr.Get()) {
-                pIt = m_children.erase(pIt);
+        for (uint16_t i = 0; i < m_children.size(); ++i) {
+            if (ptr == m_children[i]) {
+                m_children.erase(m_children.begin() + i);
                 return;
             }
-
-            ++pIt;
         }
 
         SRHalt(Format("GameObject %s is not child for %s!", ptr->GetName().c_str(), GetName().c_str()));
@@ -348,7 +349,11 @@ namespace SR_UTILS_NS {
             pMarshal->Write<std::string>(GetName());
             pMarshal->Write<uint64_t>(GetTag());
             pMarshal->Write<bool>(IsEnabled());
-            pMarshal = GetTransform()->Save(pMarshal, flags);
+
+            auto&& pTransformMarshal = GetTransform()->Save(flags);
+            pMarshal->Write<uint64_t>(pTransformMarshal->Size());
+            pMarshal->Append(pTransformMarshal);
+
             return pMarshal;
         }
         else {
@@ -360,7 +365,9 @@ namespace SR_UTILS_NS {
 
         pMarshal->Write<uint64_t>(m_tag);
 
-        pMarshal = m_transform->Save(pMarshal, flags);
+        auto&& pTransformMarshal = GetTransform()->Save(flags);
+        pMarshal->Write<uint64_t>(pTransformMarshal->Size());
+        pMarshal->Append(pTransformMarshal);
 
         /// save components
 
@@ -539,6 +546,8 @@ namespace SR_UTILS_NS {
                 auto&& objectName = marshal.Read<std::string>();
                 auto&& tag = marshal.Read<uint64_t>();
                 auto&& isEnabled = marshal.Read<bool>();
+
+                SR_MAYBE_UNUSED auto&& transformBlockSize = marshal.Read<uint64_t>();
                 auto&& pTransform = Transform::Load(marshal, nullptr);
 
                 if (!pTransform) {
@@ -591,6 +600,8 @@ namespace SR_UTILS_NS {
             /// ----------------------
 
             gameObject->SetEnabled(enabled);
+
+            SR_MAYBE_UNUSED auto&& transformBlockSize = marshal.Read<uint64_t>();
 
             gameObject->SetTransform(SR_UTILS_NS::Transform::Load(
                     marshal,
@@ -653,6 +664,10 @@ namespace SR_UTILS_NS {
 
     void GameObject::SetTag(const std::string& tag) {
         m_tag = TagManager::Instance().HashTag(tag);
+    }
+
+    std::string GameObject::GetTagString() const {
+        return TagManager::Instance().GetTag(GetTag());
     }
 
     Tag GameObject::GetTag() const {

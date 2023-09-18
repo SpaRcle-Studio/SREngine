@@ -12,10 +12,13 @@
 #include <Graphics/Types/Geometry/DebugLine.h>
 #include <Graphics/Render/RenderTechnique.h>
 #include <Graphics/Render/DebugRenderer.h>
+#include <Graphics/Lighting/LightSystem.h>
+#include <Graphics/Window/Window.h>
 
 namespace SR_GRAPH_NS {
     RenderScene::RenderScene(const ScenePtr& scene, RenderContext* pContext)
         : SR_HTYPES_NS::SafePtr<RenderScene>(this)
+        , m_lightSystem(new LightSystem(GetThis()))
         , m_scene(scene)
         , m_debugRender(new DebugRenderer(this))
         , m_context(pContext)
@@ -26,6 +29,8 @@ namespace SR_GRAPH_NS {
     }
 
     RenderScene::~RenderScene() {
+        SR_SAFE_DELETE_PTR(m_lightSystem);
+
         if (m_debugRender) {
             m_debugRender->DeInit();
             delete m_debugRender;
@@ -45,14 +50,14 @@ namespace SR_GRAPH_NS {
 
         PrepareFrame();
 
-        /// ImGui будет нарисован поверх независимо оторядка отрисовки.
+        /// ImGui будет нарисован поверх независимо от порядка отрисовки.
         /// Однако, если его нарисовать в конце, то пользователь может
         /// изменить данные отрисовки сцены и сломать уже нарисованную сцену
         Overlay();
 
         PrepareRender();
 
-        if (IsDirty() || GetPipeline()->IsNeedReBuild()) {
+        if (IsDirty() || GetPipeline()->IsDirty()) {
             Build();
         }
 
@@ -91,24 +96,58 @@ namespace SR_GRAPH_NS {
             m_cameras.empty();
     }
 
-    RenderContext *RenderScene::GetContext() const {
+    RenderContext* RenderScene::GetContext() const {
         return m_context;
+    }
+
+    void RenderScene::BuildQueue() {
+        m_queues.clear();
+
+        ForEachTechnique([&](RenderTechnique* pTechnique) {
+            auto&& queues = pTechnique->GetQueues();
+            for (uint32_t depth = 0; depth < queues.size(); ++depth) {
+                if (m_queues.size() < depth + 1) {
+                    m_queues.resize(depth + 1);
+                }
+                for (auto&& pPass : queues[depth]) {
+                    m_queues[depth].emplace_back(pPass);
+                    for (auto&& pFrameBuffer : pPass->GetFrameBuffers()) {
+                        GetPipeline()->GetQueue().AddQueue(pFrameBuffer, depth);
+                    }
+                }
+                SRAssert(!m_queues[depth].empty());
+            }
+        });
+
+        /// if (!m_queues.empty()) {
+        ///     std::string log = "RenderScene::BuildQueue() : \n";
+        ///     for (auto&& queue : m_queues) {
+        ///         log += "============================================\n";
+        ///         for (auto&& pPass : queue) {
+        ///             log += "\t" + std::string(pPass->GetName()) + "\n";
+        ///         }
+        ///     }
+        ///     log += "============================================\n";
+        ///     SR_LOG(log);
+        /// }
     }
 
     void RenderScene::Build() {
         SR_TRACY_ZONE_N("Build render");
 
-        GetPipeline()->ClearFramebuffersQueue();
+        GetPipeline()->ClearFrameBuffersQueue();
 
         m_hasDrawData = false;
 
         SR_RENDER_TECHNIQUES_RETURN_CALL(Render)
 
+        BuildQueue();
+
         m_dirty.Do([](uint32_t& data) {
             data = data > 1 ? 1 : 0;
         });
 
-        GetPipeline()->SetBuildState(true);
+        GetPipeline()->SetDirty(false);
     }
 
     void RenderScene::Update() noexcept {
@@ -151,7 +190,7 @@ namespace SR_GRAPH_NS {
     void RenderScene::Overlay() {
         SR_TRACY_ZONE;
 
-        GetPipeline()->SetGUIEnabled(m_bOverlay);
+        GetPipeline()->SetOverlayEnabled(OverlayType::ImGui, m_bOverlay);
 
         if (!m_bOverlay) {
             return;
@@ -164,6 +203,8 @@ namespace SR_GRAPH_NS {
         if (auto&& pPipeline = GetPipeline()) {
             pPipeline->PrepareFrame();
         }
+
+        m_currentSkeleton = nullptr;
 
         m_context->UpdateFramebuffers();
     }
@@ -215,9 +256,14 @@ namespace SR_GRAPH_NS {
                 pMesh->SetMaterial(pDefaultMat);
             }
             else {
-                SR_ERROR("RenderScene::Register() : mesh material and default material is nullptr!");
+                SR_ERROR("RenderScene::Register() : mesh material and default material are nullptr!");
                 return;
             }
+        }
+
+        if (!pMesh->GetMaterial()->GetShader()) {
+            SR_ERROR("RenderScene::Register() : mesh have not shader!");
+            return;
         }
 
         pMesh->SetRenderContext(m_context);
@@ -255,10 +301,9 @@ namespace SR_GRAPH_NS {
         SRHalt("RenderScene::RemoveWidgetManager() : the widget manager not found!");
     }
 
-    void RenderScene::Register(RenderScene::CameraPtr pCamera) {
+    void RenderScene::Register(const CameraPtr& pCamera) {
         CameraInfo info;
 
-        info.isDestroyed = false;
         info.pCamera = pCamera;
 
         m_cameras.emplace_back(info);
@@ -266,15 +311,13 @@ namespace SR_GRAPH_NS {
         m_dirtyCameras = true;
     }
 
-    void RenderScene::Remove(RenderScene::CameraPtr pCamera) {
+    void RenderScene::Remove(const CameraPtr& pCamera) {
         for (auto&& cameraInfo : m_cameras) {
             if (cameraInfo.pCamera != pCamera) {
                 continue;
             }
 
-            SRAssert(!cameraInfo.isDestroyed);
-
-            cameraInfo.isDestroyed = true;
+            cameraInfo.pCamera = CameraPtr();
             m_dirtyCameras = true;
 
             return;
@@ -284,6 +327,8 @@ namespace SR_GRAPH_NS {
     }
 
     void RenderScene::SortCameras() {
+        SR_TRACY_ZONE;
+
         m_dirty = true;
         m_dirtyCameras = false;
         m_mainCamera = nullptr;
@@ -293,14 +338,9 @@ namespace SR_GRAPH_NS {
         m_offScreenCameras.reserve(offScreenCamerasCount);
 
         /// Удаляем уничтоженные камеры
-        for (auto&& pIt = m_cameras.begin(); pIt != m_cameras.end(); ) {
-            if (pIt->isDestroyed) {
-                SR_LOG("RenderScene::SortCameras() : free camera...");
-
-                pIt->pCamera->AutoFree([](auto&& pData) {
-                    delete pData;
-                });
-
+        for (auto pIt = m_cameras.begin(); pIt != m_cameras.end(); ) {
+            if (!pIt->pCamera) {
+                SR_LOG("RenderScene::SortCameras() : remove destroyed camera...");
                 pIt = m_cameras.erase(pIt);
             }
             else {
@@ -329,6 +369,10 @@ namespace SR_GRAPH_NS {
         std::stable_sort(m_offScreenCameras.begin(), m_offScreenCameras.end(), [](CameraPtr lhs, CameraPtr rhs) {
             return lhs->GetPriority() < rhs->GetPriority();
         });
+
+        if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::Full) {
+            SR_LOG("RenderScene::SortCameras() : cameras was sorted");
+        }
     }
 
     RenderScene::PipelinePtr RenderScene::GetPipeline() const {
@@ -342,24 +386,24 @@ namespace SR_GRAPH_NS {
     void RenderScene::RenderBlackScreen() {
         SR_TRACY_ZONE;
 
-        auto&& pipeline = GetPipeline();
+        auto&& pPipeline = GetPipeline();
 
-        pipeline->SetCurrentFramebuffer(nullptr);
+        pPipeline->SetCurrentFrameBuffer(nullptr);
 
-        for (uint8_t i = 0; i < pipeline->GetCountBuildIter(); ++i) {
-            pipeline->SetBuildIteration(i);
+        for (uint8_t i = 0; i < pPipeline->GetBuildIterationsCount(); ++i) {
+            pPipeline->SetBuildIteration(i);
 
-            pipeline->BindFrameBuffer(0);
-            pipeline->ClearBuffers(0.0f, 0.0f, 0.0f, 1.f, 1.f, 1);
+            pPipeline->BindFrameBuffer(nullptr);
+            pPipeline->ClearBuffers(0.0f, 0.0f, 0.0f, 1.f, 1.f, 1);
 
-            pipeline->BeginCmdBuffer();
+            pPipeline->BeginCmdBuffer();
             {
-                pipeline->BeginRender();
-                pipeline->SetViewport();
-                pipeline->SetScissor();
-                pipeline->EndRender();
+                pPipeline->BeginRender();
+                pPipeline->SetViewport();
+                pPipeline->SetScissor();
+                pPipeline->EndRender();
             }
-            pipeline->EndCmdBuffer();
+            pPipeline->EndCmdBuffer();
         }
     }
 
@@ -371,7 +415,7 @@ namespace SR_GRAPH_NS {
         m_bOverlay = enabled;
     }
 
-    MeshCluster &RenderScene::GetOpaque() {
+    MeshCluster& RenderScene::GetOpaque() {
         return m_opaque;
     }
 
@@ -384,7 +428,7 @@ namespace SR_GRAPH_NS {
     }
 
     RenderScene::CameraPtr RenderScene::GetMainCamera() const {
-        return m_mainCamera;
+        return m_mainCamera ? m_mainCamera : GetFirstOffScreenCamera();
     }
 
     RenderScene::CameraPtr RenderScene::GetFirstOffScreenCamera() const {
@@ -396,6 +440,8 @@ namespace SR_GRAPH_NS {
     }
 
     void RenderScene::Synchronize() {
+        SR_TRACY_ZONE;
+
         /// отладочной геометрией ничто не управляет, она уничтожается по истечению времени.
         /// ее нужно принудительно освобождать при закрытии сцены.
         if (m_debugRender && !m_scene.Valid()) {
@@ -414,7 +460,7 @@ namespace SR_GRAPH_NS {
 
         if (!m_context->GetWindow()->IsWindowCollapsed()) {
             for (auto&& cameraInfo : m_cameras) {
-                if (cameraInfo.isDestroyed) {
+                if (!cameraInfo.pCamera) {
                     continue;
                 }
 
@@ -441,5 +487,23 @@ namespace SR_GRAPH_NS {
         m_transparent.OnResourceReloaded(pResource);
 
         SetDirty();
+    }
+
+    void RenderScene::ForEachTechnique(const Helper::Types::Function<void(RenderTechnique*)>& callback) {
+        for (auto&& pCamera : m_offScreenCameras) {
+            if (auto&& pRenderTechnique = pCamera->GetRenderTechnique()) {
+                callback(pRenderTechnique);
+            }
+        }
+
+        if (m_mainCamera) {
+            if (auto &&pRenderTechnique = m_mainCamera->GetRenderTechnique()) {
+                callback(pRenderTechnique);
+            }
+        }
+
+        if (m_technique) {
+            callback(m_technique);
+        }
     }
 }

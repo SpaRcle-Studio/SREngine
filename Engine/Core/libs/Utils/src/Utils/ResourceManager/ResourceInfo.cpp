@@ -106,10 +106,10 @@ namespace SR_UTILS_NS {
         if (pIt != m_info.end()) {
             auto&& [_, pInfo] = *pIt;
             pInfo->m_loaded.insert(pResource);
-            pResource->m_resourceInfo = pInfo.get();
+            pResource->m_resourceInfo = pInfo;
         }
         else {
-            auto&& pInfo = std::make_shared<ResourceInfo>(pResource->GetFileHash(), pResource->GetResourceHash(), path, this);
+            auto&& pInfo = std::make_shared<ResourceInfo>(pResource->GetResourceHash(), path, this);
             pIt = m_info.insert(std::make_pair(path, pInfo)).first;
             goto retry;
         }
@@ -175,5 +175,9 @@ namespace SR_UTILS_NS {
         }
 
         return *m_loaded.begin();
+    }
+
+    IResourceReloader *ResourceInfo::GetReloader() const {
+        return m_resourceType->GetReloader();
     }
 }

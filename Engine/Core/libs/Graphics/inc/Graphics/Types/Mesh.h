@@ -57,7 +57,7 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD virtual int32_t GetIBO() const { return SR_ID_INVALID; }
         SR_NODISCARD virtual int32_t GetVBO() const { return SR_ID_INVALID; }
 
-        SR_NODISCARD virtual bool IsCanCalculate() const;
+        SR_NODISCARD virtual bool IsCalculatable() const;
         SR_NODISCARD virtual bool IsUniqueMesh() const { return false; }
         SR_NODISCARD virtual bool IsMeshDestroyed() const { return m_isMeshDestroyed; }
 
@@ -89,6 +89,7 @@ namespace SR_GTYPES_NS {
         /// Если меш был зарегистрирован, то помечает его на уничтожение
         /// Если меш не зарегистрировали, удаляет экземпляр
         void MarkMeshDestroyed();
+        void MarkMaterialDirty();
 
         void SetMaterial(Material* material);
         void SetMaterial(const SR_UTILS_NS::Path& path);

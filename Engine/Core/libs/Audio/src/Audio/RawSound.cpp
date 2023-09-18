@@ -9,7 +9,7 @@
 
 namespace SR_AUDIO_NS {
     RawSound::RawSound()
-        : IResource(SR_COMPILE_TIME_CRC32_TYPE_NAME(RawSound), true /** auto remove */)
+        : IResource(SR_COMPILE_TIME_CRC32_TYPE_NAME(RawSound))
     { }
 
     RawSound::~RawSound() { }

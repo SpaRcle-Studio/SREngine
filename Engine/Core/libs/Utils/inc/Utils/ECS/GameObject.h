@@ -31,7 +31,7 @@ namespace SR_UTILS_NS {
     typedef uint64_t GameObjectFlagBits;
 
     class SR_DLL_EXPORT GameObject : public IComponentable, public Entity {
-        SR_ENTITY_SET_VERSION(1007);
+        SR_ENTITY_SET_VERSION(1008);
         friend class Component;
     public:
         using Name = std::string;
@@ -62,6 +62,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD GameObject::Ptr Find(const std::string& name) const noexcept;
         SR_NODISCARD std::string GetName() const { return m_name; }
         SR_NODISCARD Tag GetTag() const;
+        SR_NODISCARD std::string GetTagString() const;
         SR_NODISCARD bool HasTag() const;
         SR_NODISCARD bool IsActive() const noexcept;
         SR_NODISCARD SR_FORCE_INLINE bool IsEnabled() const noexcept { return m_isEnabled; }
@@ -133,6 +134,7 @@ namespace SR_UTILS_NS {
         uint64_t m_idInScene = SR_ID_INVALID;
 
         GameObject::Ptr m_parent;
+
         GameObjects m_children;
 
         ScenePtr m_scene = nullptr;

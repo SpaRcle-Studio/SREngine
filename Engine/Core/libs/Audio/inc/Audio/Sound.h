@@ -13,6 +13,7 @@ namespace SR_AUDIO_NS {
     struct SoundData;
 
     class Sound : public SR_UTILS_NS::IResource {
+        using Handle = void*;
     protected:
         Sound();
         ~Sound() override;
@@ -22,9 +23,10 @@ namespace SR_AUDIO_NS {
     public:
         static Sound* Load(const SR_UTILS_NS::Path& path);
 
-        bool Play(const PlayParams& params);
-        bool Play();
-        bool PlayAsync();
+        Handle Play(const PlayParams& params);
+        Handle Play();
+
+        SR_NODISCARD bool IsAllowedToRevive() const override;
 
         SR_NODISCARD const uint8_t* GetBufferData() const;
         SR_NODISCARD uint64_t GetBufferSize() const;

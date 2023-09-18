@@ -5,18 +5,17 @@
 #ifndef SRENGINE_SOUNDDATA_H
 #define SRENGINE_SOUNDDATA_H
 
-#include <Utils/Common/NonCopyable.h>
+#include <Audio/SoundFormat.h>
 
 namespace SR_AUDIO_NS {
     class Sound;
     class SoundManager;
 
-    struct SoundData {
-        friend class SoundManager;
-    private:
+    struct SoundData : public SR_UTILS_NS::NonCopyable {
+        SoundContext* pContext = nullptr;
+        SoundBuffer pBuffer = nullptr;
         Sound* pSound = nullptr;
         bool initialized = false;
-
     };
 }
 

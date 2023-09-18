@@ -12,7 +12,7 @@ class ALCdevice;
 namespace SR_AUDIO_NS {
     class OpenALDevice : public SoundDevice {
     public:
-        explicit OpenALDevice(AudioLibrary library);
+        explicit OpenALDevice(AudioLibrary library, const std::string& name);
         ~OpenALDevice() override;
 
     public:

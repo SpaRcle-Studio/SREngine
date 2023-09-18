@@ -43,12 +43,16 @@ namespace SR_GTYPES_NS {
         void UnUse() noexcept;
         bool InitUBOBlock();
         bool Flush() const;
+        void FlushSamplers();
+        void FlushConstants();
         void FreeVideoMemory() override;
+        void StartWatch() override;
 
     public:
         SR_NODISCARD SR_UTILS_NS::Path GetAssociatedPath() const override;
         SR_DEPRECATED SR_NODISCARD int32_t GetID();
         SR_NODISCARD int32_t GetId() noexcept;
+        SR_NODISCARD ShaderProgram GetVirtualProgram() const noexcept { return m_shaderProgram; }
         SR_NODISCARD bool Ready() const;
         SR_NODISCARD uint64_t GetUBOBlockSize() const;
         SR_NODISCARD uint32_t GetSamplersCount() const;
@@ -58,33 +62,40 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD SR_SRSL_NS::ShaderType GetType() const noexcept;
 
     public:
-        template<typename T, bool shared = false> void SetValue(uint64_t hashId, const T& v) noexcept {
+        template<bool constant, typename T> void SetValue(uint64_t hashId, const T* v) noexcept {
             if (!IsLoaded()) {
                 return;
             }
 
-            m_uniformBlock.SetField(hashId, &v);
-        }
-        template<typename T, bool shared = false> void SetCustom(uint64_t hashId, const T *v) noexcept {
-            if (!IsLoaded()) {
-                return;
+            if constexpr (constant) {
+                m_constBlock.SetField(hashId, v);
             }
-
-            m_uniformBlock.SetField(hashId, v);
+            else {
+                m_uniformBlock.SetField(hashId, v);
+            }
         }
 
-        void SR_FASTCALL SetBool(uint64_t hashId, const bool& v) noexcept;
-        void SR_FASTCALL SetFloat(uint64_t hashId, const float& v) noexcept;
-        void SR_FASTCALL SetInt(uint64_t hashId, const int& v) noexcept;
-        void SR_FASTCALL SetMat4(uint64_t hashId, const glm::mat4& v) noexcept;
+        void SR_FASTCALL SetBool(uint64_t hashId, bool v) noexcept;
+        void SR_FASTCALL SetFloat(uint64_t hashId, float_t v) noexcept;
+        void SR_FASTCALL SetInt(uint64_t hashId, int32_t v) noexcept;
         void SR_FASTCALL SetMat4(uint64_t hashId, const SR_MATH_NS::Matrix4x4& v) noexcept;
         void SR_FASTCALL SetVec4(uint64_t hashId, const SR_MATH_NS::FVector4& v) noexcept;
         void SR_FASTCALL SetVec3(uint64_t hashId, const SR_MATH_NS::FVector3& v) noexcept;
         void SR_FASTCALL SetVec2(uint64_t hashId, const SR_MATH_NS::FVector2& v) noexcept;
-        void SR_FASTCALL SetIVec2(uint64_t hashId, const glm::ivec2& v) noexcept;
-        void SR_FASTCALL SetSampler2D(const std::string& name, Types::Texture* sampler) noexcept;
+        void SR_FASTCALL SetIVec2(uint64_t hashId, const SR_MATH_NS::IVector2& v) noexcept;
+
+        void SR_FASTCALL SetConstBool(uint64_t hashId, bool v) noexcept;
+        void SR_FASTCALL SetConstFloat(uint64_t hashId, float_t v) noexcept;
+        void SR_FASTCALL SetConstInt(uint64_t hashId, int32_t v) noexcept;
+        void SR_FASTCALL SetConstMat4(uint64_t hashId, const SR_MATH_NS::Matrix4x4& v) noexcept;
+        void SR_FASTCALL SetConstVec4(uint64_t hashId, const SR_MATH_NS::FVector4& v) noexcept;
+        void SR_FASTCALL SetConstVec3(uint64_t hashId, const SR_MATH_NS::FVector3& v) noexcept;
+        void SR_FASTCALL SetConstVec2(uint64_t hashId, const SR_MATH_NS::FVector2& v) noexcept;
+        void SR_FASTCALL SetConstIVec2(uint64_t hashId, const SR_MATH_NS::IVector2& v) noexcept;
+
+        void SR_FASTCALL SetSampler2D(const std::string& name, Texture* sampler) noexcept;
         void SR_FASTCALL SetSamplerCube(uint64_t hashId, int32_t sampler) noexcept;
-        void SR_FASTCALL SetSampler2D(uint64_t hashId, Types::Texture* sampler) noexcept;
+        void SR_FASTCALL SetSampler2D(uint64_t hashId, Texture* sampler) noexcept;
         void SR_FASTCALL SetSampler2D(uint64_t hashId, int32_t sampler) noexcept;
 
     protected:
@@ -110,7 +121,9 @@ namespace SR_GTYPES_NS {
 
         SRShaderCreateInfo m_shaderCreateInfo = {};
 
+        std::vector<std::string> m_includes;
         Memory::ShaderUBOBlock m_uniformBlock;
+        Memory::ShaderUBOBlock m_constBlock;
         ShaderSamplers m_samplers;
         ShaderProperties m_properties;
 
