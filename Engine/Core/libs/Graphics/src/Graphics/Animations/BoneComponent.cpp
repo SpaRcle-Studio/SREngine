@@ -22,8 +22,8 @@ namespace SR_ANIMATIONS_NS {
         return new BoneComponent();
     }
 
-    SR_HTYPES_NS::Marshal::Ptr BoneComponent::Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SR_UTILS_NS::SavableFlags flags) const {
-        return Super::Save(pMarshal, flags);
+    SR_HTYPES_NS::Marshal::Ptr BoneComponent::Save(SR_UTILS_NS::SavableSaveData data) const {
+        return Super::Save(data);
     }
 
     void BoneComponent::OnMatrixDirty() {

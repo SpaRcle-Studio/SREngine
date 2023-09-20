@@ -16,14 +16,14 @@ namespace SR_AUDIO_NS{
         delete this;
     }
 
-    SR_UTILS_NS::Component* AudioListener::LoadComponent(SR_HTYPES_NS::Marshal &marshal, const SR_HTYPES_NS::DataStorage *dataStorage) {
+    SR_UTILS_NS::Component* AudioListener::LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage) {
         auto&& pComponent = new AudioListener();
         return dynamic_cast<Component*>(pComponent);
     }
 
-    SR_HTYPES_NS::Marshal::Ptr AudioListener::Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SR_UTILS_NS::SavableFlags flags) const {
-        pMarshal = Component::Save(pMarshal, flags);
-        return pMarshal;
+    SR_HTYPES_NS::Marshal::Ptr AudioListener::Save(SR_UTILS_NS::SavableSaveData data) const {
+        data.pMarshal = Super::Save(data);
+        return data.pMarshal;
     }
 
 }

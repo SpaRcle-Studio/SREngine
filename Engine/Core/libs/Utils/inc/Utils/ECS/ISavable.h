@@ -2,8 +2,8 @@
 // Created by Monika on 21.09.2021.
 //
 
-#ifndef GAMEENGINE_ISAVABLE_H
-#define GAMEENGINE_ISAVABLE_H
+#ifndef SR_ENGINE_UTILS_ISAVABLE_H
+#define SR_ENGINE_UTILS_ISAVABLE_H
 
 #include <Utils/Types/Marshal.h>
 #include <Utils/Xml.h>
@@ -16,19 +16,31 @@ namespace SR_UTILS_NS {
         SAVABLE_FLAG_ECS_NO_ID = 1 << 1,
     };
 
+    struct SavableSaveData {
+        SavableSaveData() = default;
+
+        SavableSaveData(SR_HTYPES_NS::Marshal::Ptr pMarshal, SavableFlags flags)
+            : pMarshal(pMarshal)
+            , flags(flags)
+        { }
+
+        SR_HTYPES_NS::Marshal::Ptr pMarshal = nullptr;
+        SavableFlags flags = SAVABLE_FLAG_NONE;
+    };
+
+    struct SavableLoadData {
+
+    };
+
     class SR_DLL_EXPORT ISavable {
     protected:
         ISavable() = default;
         virtual ~ISavable() = default;
 
     public:
-        SR_NODISCARD virtual SR_HTYPES_NS::Marshal::Ptr Save(SavableFlags flags) const {
-            return new SR_HTYPES_NS::Marshal();
-        }
-
-        SR_NODISCARD virtual SR_HTYPES_NS::Marshal::Ptr Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SavableFlags flags) const {
-            if (pMarshal) {
-                return pMarshal;
+        SR_NODISCARD virtual SR_HTYPES_NS::Marshal::Ptr Save(SavableSaveData data) const {
+            if (data.pMarshal) {
+                return data.pMarshal;
             }
             
             return new SR_HTYPES_NS::Marshal();
@@ -37,4 +49,4 @@ namespace SR_UTILS_NS {
     };
 }
 
-#endif //GAMEENGINE_ISAVABLE_H
+#endif //SR_ENGINE_UTILS_ISAVABLE_H

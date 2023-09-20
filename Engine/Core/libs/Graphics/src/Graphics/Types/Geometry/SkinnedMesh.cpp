@@ -98,8 +98,8 @@ namespace SR_GTYPES_NS {
         }
     }
 
-    SR_HTYPES_NS::Marshal::Ptr SR_GTYPES_NS::SkinnedMesh::Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SR_UTILS_NS::SavableFlags flags) const {
-        pMarshal = MeshComponent::Save(pMarshal, flags);
+    SR_HTYPES_NS::Marshal::Ptr SR_GTYPES_NS::SkinnedMesh::Save(SR_UTILS_NS::SavableSaveData data) const {
+        auto&& pMarshal = MeshComponent::Save(data);
 
         /// TODO: use unicode
         pMarshal->Write<std::string>(GetMeshStringPath());

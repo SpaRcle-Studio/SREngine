@@ -53,7 +53,7 @@ namespace SR_SCRIPTING_NS {
     protected:
         SR_NODISCARD SR_UTILS_NS::Path GetAssociatedPath() const override;
         SR_NODISCARD uint64_t GetFileHash() const override { return 0; };
-        SR_HTYPES_NS::Marshal::Ptr Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SR_UTILS_NS::SavableFlags flags) const override;
+        SR_HTYPES_NS::Marshal::Ptr Save(SR_UTILS_NS::SavableSaveData data) const override;
 
         void OnAttached() override;
         void OnLoaded() override;

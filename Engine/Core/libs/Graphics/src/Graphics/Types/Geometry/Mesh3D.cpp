@@ -97,12 +97,12 @@ namespace SR_GTYPES_NS {
         }
     }
 
-    SR_HTYPES_NS::Marshal::Ptr SR_GTYPES_NS::Mesh3D::Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SR_UTILS_NS::SavableFlags flags) const {
-        pMarshal = MeshComponent::Save(pMarshal, flags);
+    SR_HTYPES_NS::Marshal::Ptr SR_GTYPES_NS::Mesh3D::Save(SR_UTILS_NS::SavableSaveData data) const {
+        auto&& pMarshal = MeshComponent::Save(data);
 
         /// TODO: use unicode
         pMarshal->Write<std::string>(GetMeshStringPath());
-        pMarshal->Write<int32_t>(GetMeshId());
+        pMarshal->Write<int32_t>(static_cast<int32_t>(GetMeshId()));
 
         pMarshal->Write<std::string>(m_material ? m_material->GetResourceId() : "None");
 

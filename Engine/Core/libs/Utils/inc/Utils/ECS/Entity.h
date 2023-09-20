@@ -98,7 +98,7 @@ namespace SR_UTILS_NS {
 
         SR_NODISCARD EntityBranch GetEntityTree() const { return EntityBranch(m_entityId, GetEntityBranches()); }
         SR_NODISCARD EntityRef GetRef() const noexcept { return EntityRef(GetThis()); }
-        SR_NODISCARD Ptr GetEntity() const noexcept { return GetThis(); }
+        SR_NODISCARD Entity::Ptr GetEntity() const noexcept { return GetThis(); }
 
         SR_NODISCARD virtual std::string GetEntityInfo() const { return "None"; }
         SR_NODISCARD virtual uint16_t GetEntityVersion() const noexcept = 0;
@@ -108,16 +108,17 @@ namespace SR_UTILS_NS {
 
         SR_NODISCARD virtual std::list<EntityBranch> GetEntityBranches() const { return {}; }
 
-        SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SavableFlags flags) const override {
-            pMarshal = ISavable::Save(pMarshal, flags);
+        SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save(SavableSaveData data) const override {
+            data.pMarshal = ISavable::Save(data);
 
-            if (!(flags & SAVABLE_FLAG_ECS_NO_ID)) {
-                pMarshal->Write(static_cast<uint64_t>(GetEntityId()));
+            if (!(data.flags & SAVABLE_FLAG_ECS_NO_ID)) {
+                data.pMarshal->Write(static_cast<uint64_t>(GetEntityId()));
             }
-            else
-                pMarshal->Write(static_cast<uint64_t>(ENTITY_ID_MAX));
+            else {
+                data.pMarshal->Write(static_cast<uint64_t>(ENTITY_ID_MAX));
+            }
 
-            return pMarshal;
+            return data.pMarshal;
         }
 
     private:

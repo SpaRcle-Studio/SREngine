@@ -74,7 +74,7 @@ namespace SR_CORE_NS::Commands {
         : Base(pEngine)
     {
         m_path = ptr->GetEntityPath();
-        m_newMarshal = ptr->GetTransform()->Save(SR_UTILS_NS::SavableFlagBits::SAVABLE_FLAG_NONE);
+        m_newMarshal = ptr->GetTransform()->Save(SR_UTILS_NS::SavableSaveData(nullptr, SR_UTILS_NS::SavableFlagBits::SAVABLE_FLAG_NONE));
         m_oldMarshal = pOldMarshal;
     }
 
@@ -218,7 +218,7 @@ namespace SR_CORE_NS::Commands {
             /// резервируем все дерево сущностей, чтобы после отмены команды его можно было восстановить
             m_reserved.Reserve();
             SR_SAFE_DELETE_PTR(m_backup)
-            if ((m_backup = pObject->Save(nullptr, SR_UTILS_NS::SAVABLE_FLAG_NONE))) {
+            if ((m_backup = pObject->Save(SR_UTILS_NS::SavableSaveData(nullptr, SR_UTILS_NS::SAVABLE_FLAG_NONE)))) {
                 m_backup->SetPosition(0);
             }
             pObject->Destroy();
@@ -327,7 +327,7 @@ namespace SR_CORE_NS::Commands {
             // резервируем все дерево сущностей, чтобы после отмены команды его можно было восстановить
             m_reserved.Reserve();
             SR_SAFE_DELETE_PTR(m_marshal)
-            if ((m_marshal = pObject->Save(nullptr, SR_UTILS_NS::SAVABLE_FLAG_NONE))) {
+            if ((m_marshal = pObject->Save(SR_UTILS_NS::SavableSaveData(nullptr, SR_UTILS_NS::SAVABLE_FLAG_NONE)))) {
                 m_marshal->SetPosition(0);
             }
             pObject->Destroy();
@@ -421,7 +421,7 @@ namespace SR_CORE_NS::Commands {
             for (auto &&path : m_paths) {
                 auto entity = SR_UTILS_NS::EntityManager::Instance().FindById(path.Last());
                 auto pObject = entity.DynamicCast<SR_UTILS_NS::GameObject>();
-                if (m_marshal = pObject->Save(m_marshal, SR_UTILS_NS::SAVABLE_FLAG_NONE); !m_marshal) {
+                if (m_marshal = pObject->Save(SR_UTILS_NS::SavableSaveData(m_marshal, SR_UTILS_NS::SAVABLE_FLAG_NONE)); !m_marshal) {
                     return false;
                 }
                 pObject->Destroy();

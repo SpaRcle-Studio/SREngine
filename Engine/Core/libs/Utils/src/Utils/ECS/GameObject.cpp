@@ -335,43 +335,47 @@ namespace SR_UTILS_NS {
          return true;
      }
 
-    SR_HTYPES_NS::Marshal::Ptr GameObject::Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SavableFlags flags) const {
+    SR_HTYPES_NS::Marshal::Ptr GameObject::Save(SavableSaveData data) const {
         if (GetFlags() & GAMEOBJECT_FLAG_NO_SAVE) {
-            return pMarshal;
+            return data.pMarshal;
         }
 
-        pMarshal = Entity::Save(pMarshal, flags);
-        pMarshal->Write<uint16_t>(GetEntityVersion());
+        SavableSaveData transformSaveData;
+        transformSaveData.flags = data.flags;
+        transformSaveData.pMarshal = nullptr;
+
+        data.pMarshal = Entity::Save(data);
+        data.pMarshal->Write<uint16_t>(GetEntityVersion());
 
         if (auto&& pPrefab = GetPrefab(); pPrefab && IsPrefabOwner()) {
-            pMarshal->Write<bool>(true);
-            pMarshal->Write<std::string>(pPrefab->GetResourcePath().ToStringRef());
-            pMarshal->Write<std::string>(GetName());
-            pMarshal->Write<uint64_t>(GetTag());
-            pMarshal->Write<bool>(IsEnabled());
+            data.pMarshal->Write<bool>(true);
+            data.pMarshal->Write<std::string>(pPrefab->GetResourcePath().ToStringRef());
+            data.pMarshal->Write<std::string>(GetName());
+            data.pMarshal->Write<uint64_t>(GetTag());
+            data.pMarshal->Write<bool>(IsEnabled());
 
-            auto&& pTransformMarshal = GetTransform()->Save(flags);
-            pMarshal->Write<uint64_t>(pTransformMarshal->Size());
-            pMarshal->Append(pTransformMarshal);
+            auto&& pTransformMarshal = GetTransform()->Save(transformSaveData);
+            data.pMarshal->Write<uint64_t>(pTransformMarshal->Size());
+            data.pMarshal->Append(pTransformMarshal);
 
-            return pMarshal;
+            return data.pMarshal;
         }
         else {
-            pMarshal->Write<bool>(false);
+            data.pMarshal->Write<bool>(false);
         }
 
-        pMarshal->Write(IsEnabled());
-        pMarshal->Write(m_name);
+        data.pMarshal->Write(IsEnabled());
+        data.pMarshal->Write(m_name);
 
-        pMarshal->Write<uint64_t>(m_tag);
+        data.pMarshal->Write<uint64_t>(m_tag);
 
-        auto&& pTransformMarshal = GetTransform()->Save(flags);
-        pMarshal->Write<uint64_t>(pTransformMarshal->Size());
-        pMarshal->Append(pTransformMarshal);
+        auto&& pTransformMarshal = GetTransform()->Save(transformSaveData);
+        data.pMarshal->Write<uint64_t>(pTransformMarshal->Size());
+        data.pMarshal->Append(pTransformMarshal);
 
         /// save components
 
-        pMarshal = SaveComponents(pMarshal, flags);
+        data.pMarshal = SaveComponents(data);
 
         /// save children
 
@@ -383,16 +387,16 @@ namespace SR_UTILS_NS {
             ++childrenNum;
         }
 
-        pMarshal->Write(static_cast<uint16_t>(childrenNum));
+        data.pMarshal->Write(static_cast<uint16_t>(childrenNum));
         for (auto&& child : m_children) {
             if (child->GetFlags() & GAMEOBJECT_FLAG_NO_SAVE) {
                 continue;
             }
 
-            pMarshal = child->Save(pMarshal, flags);
+            data.pMarshal = child->Save(data);
         }
 
-        return pMarshal;
+        return data.pMarshal;
     }
 
     bool GameObject::UpdateEntityPath() {

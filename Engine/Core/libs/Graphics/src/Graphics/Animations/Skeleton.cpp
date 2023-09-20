@@ -49,8 +49,8 @@ namespace SR_ANIMATIONS_NS {
         return pComponent;
     }
 
-    SR_HTYPES_NS::Marshal::Ptr Skeleton::Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SR_UTILS_NS::SavableFlags flags) const {
-        pMarshal = Super::Save(pMarshal, flags);
+    SR_HTYPES_NS::Marshal::Ptr Skeleton::Save(SR_UTILS_NS::SavableSaveData data) const {
+        auto&& pMarshal = Super::Save(data);
 
         const SR_HTYPES_NS::Function<void(SR_ANIMATIONS_NS::Bone*)> processBone = [&](SR_ANIMATIONS_NS::Bone* pBone) {
             pMarshal->Write<std::string>(pBone->name);

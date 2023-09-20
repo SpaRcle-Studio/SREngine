@@ -350,7 +350,7 @@ namespace SR_CORE_GUI_NS {
 
         for (auto&& ptr : m_selected) {
             if (ptr.RecursiveLockIfValid()) {
-                pMarshal = ptr->Save(pMarshal, SR_UTILS_NS::SAVABLE_FLAG_ECS_NO_ID);
+                pMarshal = ptr->Save(SR_UTILS_NS::SavableSaveData(pMarshal, SR_UTILS_NS::SAVABLE_FLAG_ECS_NO_ID));
                 ptr.Unlock();
             }
         }

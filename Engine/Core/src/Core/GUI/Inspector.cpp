@@ -287,7 +287,7 @@ namespace Framework::Core::GUI {
 
         if (!m_isUsed && changed) {
             SR_SAFE_DELETE_PTR(m_oldTransformMarshal)
-            m_oldTransformMarshal = oldTransform->Save(SR_UTILS_NS::SavableFlagBits::SAVABLE_FLAG_NONE);
+            m_oldTransformMarshal = oldTransform->Save(SR_UTILS_NS::SavableSaveData(nullptr, SR_UTILS_NS::SavableFlagBits::SAVABLE_FLAG_NONE));
             m_isUsed = true;
         }
         if (m_isUsed && SR_UTILS_NS::Input::Instance().GetMouseUp(SR_UTILS_NS::MouseCode::MouseLeft)) {

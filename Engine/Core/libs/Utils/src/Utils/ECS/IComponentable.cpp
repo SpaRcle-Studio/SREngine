@@ -18,34 +18,36 @@ namespace SR_UTILS_NS {
         return m_dirty > 0;
     }
 
-    SR_HTYPES_NS::Marshal::Ptr IComponentable::SaveComponents(SR_HTYPES_NS::Marshal::Ptr pMarshal, SavableFlags flags) const {
-        if (!pMarshal) {
-            pMarshal = new SR_HTYPES_NS::Marshal();
+    SR_HTYPES_NS::Marshal::Ptr IComponentable::SaveComponents(SavableSaveData data) const {
+        if (!data.pMarshal) {
+            data.pMarshal = new SR_HTYPES_NS::Marshal();
         }
 
         std::vector<SR_HTYPES_NS::Marshal::Ptr> components;
         components.reserve(m_components.size() + m_loadedComponents.size());
 
+        const auto componentSaveData = SR_UTILS_NS::SavableSaveData(nullptr, data.flags);
+
         for (auto&& pComponent : m_components) {
-            if (auto&& pMarshalComponent = pComponent->Save(nullptr, flags)) {
+            if (auto&& pMarshalComponent = pComponent->Save(componentSaveData)) {
                 components.emplace_back(pMarshalComponent);
             }
         }
 
         for (auto&& pComponent : m_loadedComponents) {
-            if (auto&& pMarshalComponent = pComponent->Save(nullptr, flags)) {
+            if (auto&& pMarshalComponent = pComponent->Save(componentSaveData)) {
                 components.emplace_back(pMarshalComponent);
             }
         }
 
-        pMarshal->Write(static_cast<uint16_t>(components.size()));
+        data.pMarshal->Write(static_cast<uint16_t>(components.size()));
 
         for (auto&& pMarshalComponent : components) {
-            pMarshal->Write<uint32_t>(pMarshalComponent->Size());
-            pMarshal->Append(pMarshalComponent);
+            data.pMarshal->Write<uint32_t>(pMarshalComponent->Size());
+            data.pMarshal->Append(pMarshalComponent);
         }
 
-        return pMarshal;
+        return data.pMarshal;
     }
 
     Component* IComponentable::GetOrCreateComponent(size_t hashName) {

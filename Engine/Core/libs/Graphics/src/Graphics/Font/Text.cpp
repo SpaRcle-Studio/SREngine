@@ -268,8 +268,8 @@ namespace SR_GTYPES_NS {
         }
     }
 
-    SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Text::Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SR_UTILS_NS::SavableFlags flags) const {
-        pMarshal = Component::Save(pMarshal, flags);
+    SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Text::Save(SR_UTILS_NS::SavableSaveData data) const {
+        auto&& pMarshal = Component::Save(data);
 
         pMarshal->Write<int32_t>(static_cast<int32_t>(GetMeshType()));
         pMarshal->Write<SR_MATH_NS::UVector2>(m_fontSize);

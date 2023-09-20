@@ -40,8 +40,8 @@ namespace SR_GTYPES_NS {
         m_countIndices = m_indices.size();
     }
 
-    SR_HTYPES_NS::Marshal::Ptr SR_GTYPES_NS::ProceduralMesh::Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SR_UTILS_NS::SavableFlags flags) const {
-        pMarshal = MeshComponent::Save(pMarshal, flags);
+    SR_HTYPES_NS::Marshal::Ptr SR_GTYPES_NS::ProceduralMesh::Save(SR_UTILS_NS::SavableSaveData data) const {
+        auto&& pMarshal = MeshComponent::Save(data);
 
         pMarshal->Write(m_material ? m_material->GetResourceId() : "None");
 

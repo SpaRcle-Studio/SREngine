@@ -76,7 +76,7 @@ namespace SR_UTILS_NS {
 
         SR_NODISCARD std::string GetEntityInfo() const override;
 
-        SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SavableFlags flags) const override;
+        SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save(SavableSaveData data) const override;
         SR_NODISCARD std::list<EntityBranch> GetEntityBranches() const override;
 
         SR_MATH_NS::FVector3 GetBarycenter();

@@ -57,8 +57,8 @@ namespace SR_GTYPES_NS {
         });
     }
 
-    SR_HTYPES_NS::Marshal::Ptr Camera::Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SR_UTILS_NS::SavableFlags flags) const {
-        pMarshal = Component::Save(pMarshal, flags);
+    SR_HTYPES_NS::Marshal::Ptr Camera::Save(SR_UTILS_NS::SavableSaveData data) const {
+        auto&& pMarshal = Component::Save(data);
 
         pMarshal->Write(m_far);
         pMarshal->Write(m_near);

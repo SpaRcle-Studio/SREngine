@@ -48,7 +48,7 @@ namespace SR_UTILS_NS {
 
         SR_NODISCARD Component* CopyComponent() const override;
 
-        SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SR_UTILS_NS::SavableFlags flags) const override;
+        SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save(SavableSaveData data) const override;
 
     private:
         SR_MATH_NS::FVector3 m_direction;

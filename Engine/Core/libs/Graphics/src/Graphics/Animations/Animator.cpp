@@ -25,8 +25,8 @@ namespace SR_ANIMATIONS_NS {
         return pController;
     }
 
-    SR_HTYPES_NS::Marshal::Ptr Animator::Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SR_UTILS_NS::SavableFlags flags) const {
-        return Super::Save(pMarshal, flags);
+    SR_HTYPES_NS::Marshal::Ptr Animator::Save(SR_UTILS_NS::SavableSaveData data) const {
+        return Super::Save(data);
     }
 
     void Animator::OnDestroy() {

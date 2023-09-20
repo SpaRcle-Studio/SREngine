@@ -67,7 +67,7 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD RenderScenePtr GetRenderScene() const;
         SR_NODISCARD RenderScenePtr TryGetRenderScene() const;
 
-        SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SR_UTILS_NS::SavableFlags flags) const override;
+        SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save(SR_UTILS_NS::SavableSaveData data) const override;
 
         void SetFar(float_t value);
         void SetNear(float_t value);

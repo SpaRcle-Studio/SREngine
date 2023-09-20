@@ -21,7 +21,7 @@ namespace SR_ANIMATIONS_NS {
 
     public:
         SR_NODISCARD Component* CopyComponent() const override;
-        SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SR_UTILS_NS::SavableFlags flags) const override;
+        SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save(SR_UTILS_NS::SavableSaveData data) const override;
 
         void Update(float_t dt) override;
 

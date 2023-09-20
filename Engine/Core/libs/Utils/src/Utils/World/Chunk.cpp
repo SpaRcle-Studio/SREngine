@@ -182,9 +182,11 @@ namespace SR_WORLD_NS {
         /// сохраняем объекты относительно начала координат чанка
         pContext->SetValue<SR_MATH_NS::FVector3>(-GetWorldPosition());
 
+        const auto gameObjectSaveData = SR_UTILS_NS::SavableSaveData(nullptr, SAVABLE_FLAG_ECS_NO_ID);
+
         for (auto&& gameObject : gameObjects) {
             if (gameObject.RecursiveLockIfValid()) {
-                if (auto &&gameObjectMarshal = gameObject->Save(nullptr, SAVABLE_FLAG_ECS_NO_ID); gameObjectMarshal) {
+                if (auto&& gameObjectMarshal = gameObject->Save(gameObjectSaveData); gameObjectMarshal) {
                     if (gameObjectMarshal->Valid()) {
                         marshaled.emplace_back(gameObjectMarshal);
                     }
@@ -199,7 +201,7 @@ namespace SR_WORLD_NS {
 
         for (auto&& gameObject : m_preloaded) {
             if (gameObject.RecursiveLockIfValid()) {
-                if (auto &&gameObjectMarshal = gameObject->Save(nullptr, SAVABLE_FLAG_ECS_NO_ID); gameObjectMarshal) {
+                if (auto &&gameObjectMarshal = gameObject->Save(gameObjectSaveData); gameObjectMarshal) {
                     if (gameObjectMarshal->Valid()) {
                         marshaled.emplace_back(gameObjectMarshal);
                     }

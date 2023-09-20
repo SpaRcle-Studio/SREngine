@@ -22,11 +22,11 @@ namespace SR_AUDIO_NS {
         return dynamic_cast<Component*>(pComponent);
     }
 
-    SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr AudioSource::Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SR_UTILS_NS::SavableFlags flags) const{
-        pMarshal = Component::Save(pMarshal, flags);
-        pMarshal->Write<std::string>(m_path.ToString());
-        pMarshal->Write<float_t>(GetVolume());
-        return pMarshal;
+    SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr AudioSource::Save(SR_UTILS_NS::SavableSaveData data) const{
+        data.pMarshal = Super::Save(data);
+        data.pMarshal->Write<std::string>(m_path.ToString());
+        data.pMarshal->Write<float_t>(GetVolume());
+        return data.pMarshal;
     }
 
     float_t AudioSource::GetVolume() const {

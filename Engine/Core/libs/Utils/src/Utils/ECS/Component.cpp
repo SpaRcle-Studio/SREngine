@@ -16,14 +16,14 @@ namespace SR_UTILS_NS {
         SRAssert(!GetParent());
     }
 
-    SR_HTYPES_NS::Marshal::Ptr Component::Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SavableFlags flags) const {
-        pMarshal = Entity::Save(pMarshal, flags);
+    SR_HTYPES_NS::Marshal::Ptr Component::Save(SavableSaveData data) const {
+        data.pMarshal = Entity::Save(data);
 
-        pMarshal->Write<uint64_t>(GetComponentHashName());
-        pMarshal->Write(IsEnabled());
-        pMarshal->Write<uint16_t>(GetEntityVersion());
+        data.pMarshal->Write<uint64_t>(GetComponentHashName());
+        data.pMarshal->Write(IsEnabled());
+        data.pMarshal->Write<uint16_t>(GetEntityVersion());
 
-        return pMarshal;
+        return data.pMarshal;
     }
 
     void Component::SetParent(IComponentable* pParent) {

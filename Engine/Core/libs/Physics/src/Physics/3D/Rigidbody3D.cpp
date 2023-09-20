@@ -42,13 +42,13 @@ namespace SR_PTYPES_NS {
         return SR_UTILS_NS::Measurement::Space3D;
     }
 
-    SR_HTYPES_NS::Marshal::Ptr Rigidbody3D::Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SR_UTILS_NS::SavableFlags flags) const {
-        auto&& pComponent = Super::Save(pMarshal, flags);
+    SR_HTYPES_NS::Marshal::Ptr Rigidbody3D::Save(SR_UTILS_NS::SavableSaveData data) const {
+        auto&& pMarshal = Super::Save(data);
 
-        pComponent->Write<SR_MATH_NS::BVector3>(m_linearLock);
-        pComponent->Write<SR_MATH_NS::BVector3>(m_angularLock);
+        pMarshal->Write<SR_MATH_NS::BVector3>(m_linearLock);
+        pMarshal->Write<SR_MATH_NS::BVector3>(m_angularLock);
 
-        return pComponent;
+        return pMarshal;
     }
 
     SR_UTILS_NS::Component *Rigidbody3D::CopyComponent() const {

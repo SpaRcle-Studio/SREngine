@@ -82,8 +82,8 @@ namespace SR_UTILS_NS {
         Scale(Math::FVector3(x, y, z));
     }
 
-    SR_HTYPES_NS::Marshal::Ptr Transform::Save(SavableFlags flags) const {
-        auto&& pMarshal = ISavable::Save(nullptr, flags);
+    SR_HTYPES_NS::Marshal::Ptr Transform::Save(SavableSaveData data) const {
+        auto&& pMarshal = ISavable::Save(data);
         pMarshal->Write<uint16_t>(VERSION);
         pMarshal->Write(static_cast<uint8_t>(GetMeasurement()));
 

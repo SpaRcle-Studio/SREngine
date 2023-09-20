@@ -13,8 +13,8 @@ namespace SR_CORE_UI_NS {
         return new Button();
     }
 
-    SR_HTYPES_NS::Marshal::Ptr Button::Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SR_UTILS_NS::SavableFlags flags) const {
-        pMarshal = Super::Save(pMarshal, flags);
+    SR_HTYPES_NS::Marshal::Ptr Button::Save(SR_UTILS_NS::SavableSaveData data) const {
+        auto&& pMarshal = Super::Save(data);
         return pMarshal;
     }
 }
