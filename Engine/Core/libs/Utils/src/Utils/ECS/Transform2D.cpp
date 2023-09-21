@@ -239,8 +239,11 @@ namespace SR_UTILS_NS {
         ///rect.x = (parentRect.w - rect.w) / 2.f;
         ///rect.y = (parentRect.h - rect.h) / 2.f;
 
-        auto&& aspect = (parentScale / m_scale).XY().Aspect();
-        auto&& horizontalAnchor = (aspect - 1.f) * (1.f / aspect);
+        auto&& horizontalAspect = (parentScale / m_scale).XY().Aspect();
+        auto&& horizontalAnchor = (SR_MAX(horizontalAspect, 1.f) - 1.f) * (1.f / horizontalAspect);
+
+        auto&& verticalAspect = (parentScale / m_scale).XY().AspectInv();
+        auto&& verticalAnchor = (SR_MAX(verticalAspect, 1.f) - 1.f) * (1.f / verticalAspect);
 
         switch (m_anchor) {
             case Anchor::None:
@@ -249,6 +252,10 @@ namespace SR_UTILS_NS {
                 return m_translation + SR_MATH_NS::FVector3(-horizontalAnchor, 0.f, 0.f);
             case Anchor::MiddleRight:
                 return m_translation + SR_MATH_NS::FVector3(horizontalAnchor, 0.f, 0.f);
+            case Anchor::TopCenter:
+                return m_translation + SR_MATH_NS::FVector3(0.f, verticalAnchor, 0.f);
+            case Anchor::BottomCenter:
+                return m_translation + SR_MATH_NS::FVector3(0.f, -verticalAnchor, 0.f);
             default:
                 return SR_MATH_NS::FVector3();
         }

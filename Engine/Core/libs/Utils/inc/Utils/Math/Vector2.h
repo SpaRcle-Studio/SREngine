@@ -88,6 +88,13 @@ namespace SR_MATH_NS {
             return static_cast<Unit>(x) / static_cast<Unit>(y);
         }
 
+        SR_NODISCARD Unit AspectInv() const {
+            if (HasZero()) {
+                return static_cast<Unit>(0);
+            }
+            return static_cast<Unit>(y) / static_cast<Unit>(x);
+        }
+
         SR_FORCE_INLINE Vector2 operator-() const { return Vector2(-x, -y); }
         SR_FORCE_INLINE Vector2 operator+() const { return *this; }
 
