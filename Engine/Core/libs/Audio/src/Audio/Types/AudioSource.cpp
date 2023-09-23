@@ -54,7 +54,9 @@ namespace SR_AUDIO_NS {
     }
 
     void AudioSource::OnEnable() {
-        m_handle = SoundManager::Instance().Play(m_path.ToString(), m_params);
+        if(!m_path.Empty()){
+            m_handle = SoundManager::Instance().Play(m_path.ToString(),m_params);
+        }
         Component::OnEnable();
     }
 

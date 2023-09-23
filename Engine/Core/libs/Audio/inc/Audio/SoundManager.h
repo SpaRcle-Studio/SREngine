@@ -23,6 +23,7 @@ namespace SR_AUDIO_NS {
         float_t offset = 0.f;
         bool isPlaying = false;
         bool isFailed = false;
+        using ListenerHandle = void*;
     };
 
     class SoundManager : public SR_UTILS_NS::Singleton<SoundManager> {
@@ -74,6 +75,7 @@ namespace SR_AUDIO_NS {
         std::atomic<State> m_state = State::Stopped;
         std::list<PlayData*> m_playStack;
         std::map<AudioLibrary, std::map<std::string, SoundContext*>> m_contexts;
+        std::list<PlayData::ListenerHandle> m_audioListeners;
 
     };
 }

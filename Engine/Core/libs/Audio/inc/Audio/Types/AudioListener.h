@@ -13,18 +13,20 @@ namespace SR_AUDIO_NS
         SR_ENTITY_SET_VERSION(1000);
         SR_INITIALIZE_COMPONENT(AudioListener);
         using Super = SR_UTILS_NS::Component;
+        using Handle = void*;
     public:
         AudioListener();
 
     public:
         static SR_UTILS_NS::Component* LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage);
         SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save(SR_UTILS_NS::SavableSaveData data) const override;
+        void OnAttached();
 
     protected:
         void OnDestroy() override;
 
-
-
+    private:
+        Handle m_handle = nullptr;
     };
 }
 

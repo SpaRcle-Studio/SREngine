@@ -26,4 +26,8 @@ namespace SR_AUDIO_NS{
         return data.pMarshal;
     }
 
+    void AudioListener::OnAttached() {
+        Component::OnAttached();
+    }
+
 }

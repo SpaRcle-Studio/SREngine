@@ -37,7 +37,7 @@ namespace SR_AUDIO_NS {
 
         template <typename T> void ApplyParam(SoundSource pSource, const T& newParam, T& currentParam, PlayParamType paramType)
         {
-            if (newParam.has_value()) { /// данил, мы тебя любим! (с) SpaRcle Team <3
+            if (newParam.has_value()) { /// Данил, мы тебя любим! (с) SpaRcle Team <3
                 if (currentParam.has_value()) {
                     if (const_cast<const T&>(currentParam).value() != newParam.value()) {
                         currentParam = newParam;
