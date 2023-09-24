@@ -17,6 +17,7 @@ namespace Assimp {
 
 class aiScene;
 class aiAnimation;
+class aiMesh;
 
 namespace SR_WORLD_NS {
     class Scene;
@@ -64,10 +65,13 @@ namespace SR_HTYPES_NS {
         bool Load() override;
 
     private:
+        void NormalizeWeights();
         void CalculateBones();
         void OptimizeSkeleton();
         void CalculateOffsets();
         void CalculateAnimations();
+
+        uint32_t NormalizeWeights(const aiMesh* pMesh);
 
     private:
         ska::flat_hash_map<Hash, aiAnimation*> m_animations;
