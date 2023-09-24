@@ -322,11 +322,15 @@ namespace SR_AUDIO_NS {
     SoundManager::Handle SoundManager::Play(const std::string& path, const PlayParams& params) {
         SR_LOCK_GUARD
 
-        if(path != " "){
-            if (auto&& pSound = SR_AUDIO_NS::Sound::Load(path)) {
-                return pSound->Play(params);
-            }
+        if (path.empty()) {
+            SRHalt("Empty sound path!");
+            return nullptr;
         }
+
+        if (auto&& pSound = SR_AUDIO_NS::Sound::Load(path)) {
+            return pSound->Play(params);
+        }
+
         return nullptr;
     }
 
