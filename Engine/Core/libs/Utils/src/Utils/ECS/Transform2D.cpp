@@ -306,4 +306,26 @@ namespace SR_UTILS_NS {
 
         return SR_MATH_NS::FVector3(rect.x, rect.y, 0);*/
     }
+
+    int32_t Transform2D::GetPriority() { /// NOLINT
+        if (!m_isDirtyPriority) {
+            return m_priority;
+        }
+
+        if (m_relativePriority) {
+            if (auto&& pParentTransform = dynamic_cast<Transform2D*>(GetParentTransform())) {
+                m_priority = m_localPriority + pParentTransform->GetPriority();
+            }
+            else {
+                m_priority = m_localPriority;
+            }
+        }
+        else {
+            m_priority = m_localPriority;
+        }
+
+        m_isDirtyPriority = false;
+
+        return m_priority;
+    }
 }

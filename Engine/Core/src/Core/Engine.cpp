@@ -77,7 +77,7 @@ namespace SR_CORE_NS {
 
         SR_LOG("Engine::RegisterLibraries() : registering all libraries...");
 
-        API::RegisterEvoScriptClasses();
+        API::RegisterEvoScriptClasses(this);
 
         m_cmdManager = new SR_UTILS_NS::CmdManager();
         m_input      = new SR_UTILS_NS::InputDispatcher();

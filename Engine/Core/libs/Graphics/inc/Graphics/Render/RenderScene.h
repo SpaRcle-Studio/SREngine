@@ -10,6 +10,7 @@
 #include <Utils/Types/SafeVariable.h>
 
 #include <Graphics/Render/MeshCluster.h>
+#include <Graphics/Render/FlatCluster.h>
 #include <Graphics/Render/SortedMeshQueue.h>
 #include <Graphics/GUI/WidgetManager.h>
 #include <Graphics/Pass/PassQueue.h>
@@ -132,6 +133,7 @@ namespace SR_GRAPH_NS {
 
         OpaqueMeshCluster m_opaque;
         TransparentMeshCluster m_transparent;
+        FlatMeshCluster m_flat;
         DebugMeshCluster m_debug;
 
         SR_MATH_NS::UVector2 m_surfaceSize;

@@ -75,6 +75,9 @@ namespace SR_GRAPH_NS {
         bool FreeTexture(int32_t* id) override;
 
     public:
+        void SetVSyncEnabled(bool enabled) override;
+        SR_NODISCARD bool IsVSyncEnabled() const override;
+
         void SetOverlayEnabled(OverlayType overlayType, bool enabled) override;
         void SetDirty(bool dirty) override;
 

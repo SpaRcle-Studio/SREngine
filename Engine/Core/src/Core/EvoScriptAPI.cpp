@@ -17,7 +17,7 @@
 #include <Physics/3D/Raycast3D.h>
 
 namespace Framework {
-    void API::RegisterEvoScriptClasses() {
+    void API::RegisterEvoScriptClasses(SR_CORE_NS::Engine* pEngine) {
         Initialize();
 
         auto&& compiler = SR_SCRIPTING_NS::GlobalEvoCompiler::Instance();
@@ -25,6 +25,8 @@ namespace Framework {
         auto&& casts = compiler.GetCasting();
 
         if (generator) {
+            generator->SetPointer<SR_CORE_NS::Engine>(pEngine);
+
             RegisterScene(generator);
             RegisterDebug(generator);
             RegisterEngine(generator);
@@ -48,6 +50,7 @@ namespace Framework {
             RegisterPostProcessing(generator);
             RegisterISavable(generator);
             RegisterObserver(generator);
+            RegisterText(generator);
             RegisterMath(generator);
             RegisterRaycast(generator);
 
@@ -118,14 +121,24 @@ namespace Framework {
         using namespace SR_UTILS_NS;
         using namespace SR_WORLD_NS;
         using namespace SR_HTYPES_NS;
+        using namespace SR_GRAPH_NS;
+        using namespace SR_CORE_NS;
 
         generator->RegisterNewClass("Engine", "Engine", { "Libraries/Window.h", "Libraries/Types/SafePointer.h" });
-      //ESRegisterStaticMethodArg0(EvoScript::Public, generator, Engine, Instance, Engine&)
-      //ESRegisterMethodArg0(EvoScript::Private, generator, Engine, RegisterLibraries, bool)
-      //ESRegisterMethodArg0(EvoScript::Public, generator, Engine, Reload, void)
-      //ESRegisterMethodArg0(EvoScript::Public, generator, Engine, GetScene, SafePtr<Scene>)
-      //ESRegisterMethodArg0(EvoScript::Public, generator, Engine, IsRun, bool)
-      //ESRegisterMethod(EvoScript::Public, generator, Engine, SetScene, bool, ESArg1(const SafePtr<Scene>& scene), ESArg1(scene))
+
+        auto&& pEngine = generator->GetPointer<Engine>();
+
+        ESRegisterCustomStaticMethodPassArg0(EvoScript::Public, generator, Engine, Instance, Engine&, pEngine, {
+            return *pEngine;
+        });
+
+        //ESRegisterMethodArg0(EvoScript::Private, generator, Engine, RegisterLibraries, bool)
+        //ESRegisterMethodArg0(EvoScript::Public, generator, Engine, Reload, void)
+        //ESRegisterMethodArg0(EvoScript::Public, generator, Engine, GetScene, SafePtr<Scene>)
+        //ESRegisterMethodArg0(EvoScript::Public, generator, Engine, IsRun, bool)
+        //ESRegisterMethod(EvoScript::Public, generator, Engine, SetScene, bool, ESArg1(const SafePtr<Scene>& scene), ESArg1(scene))
+
+        ESRegisterMethodArg0(EvoScript::Public, generator, Engine, GetWindow, SafePtr<Window>);
 
         generator->RegisterTypedef("Time", "Engine", "void");
         generator->RegisterTypedef("PhysEngine", "Engine", "void");
@@ -225,7 +238,7 @@ namespace Framework {
 
         generator->RegisterNewClass("Mesh", "Mesh", {
             "Libraries/ResourceManager.h", "Libraries/Component.h", "Libraries/Math/Vector3.h", "Libraries/Material.h"
-        }, { { "Component", EvoScript::Public } });
+        }, { });
 
         ESRegisterStaticMethod(EvoScript::Public, generator, Mesh, Load, std::vector<Mesh*>, ESArg2(const std::string& path, MeshType type), ESArg2(path, type))
 
@@ -338,13 +351,15 @@ namespace Framework {
         using namespace SR_MATH_NS;
         using namespace SR_GRAPH_NS;
 
-      //ESRegisterMethod(EvoScript::Public, generator, Window, SetGUIEnabled, void, ESArg1(bool v), ESArg1(v))
-      //ESRegisterMethod(EvoScript::Public, generator, Window, Resize, void, ESArg2(uint32_t w, uint32_t h), ESArg2(w, h))
+        //ESRegisterMethod(EvoScript::Public, generator, Window, SetGUIEnabled, void, ESArg1(bool v), ESArg1(v))
+        //ESRegisterMethod(EvoScript::Public, generator, Window, Resize, void, ESArg2(uint32_t w, uint32_t h), ESArg2(w, h))
 
-      //ESRegisterMethodArg0(EvoScript::Public, generator, Window, Synchronize, void)
-      //ESRegisterMethodArg0(EvoScript::Public, generator, Window, CentralizeWindow, void)
-      ////ESRegisterMethodArg0(EvoScript::Public, generator, Window, GetWindowSize, IVector2)
-      //ESRegisterMethodArg0(EvoScript::Public, generator, Window, IsGUIEnabled, bool)
+        //ESRegisterMethodArg0(EvoScript::Public, generator, Window, Synchronize, void)
+        //ESRegisterMethodArg0(EvoScript::Public, generator, Window, CentralizeWindow, void)
+        ////ESRegisterMethodArg0(EvoScript::Public, generator, Window, GetWindowSize, IVector2)
+        //ESRegisterMethodArg0(EvoScript::Public, generator, Window, IsGUIEnabled, bool)
+
+        ESRegisterMethodArg0(EvoScript::Public, generator, Window, GetFramesPerSecond, uint32_t)
 
         generator->AddIncompleteType("Camera", "Window");
         generator->AddIncompleteType("Mesh", "Window");
@@ -573,7 +588,7 @@ namespace Framework {
         ESRegisterDynamicCast(generator, ProceduralMesh, Component)
         ESRegisterDynamicCast(generator, Rigidbody3D, Component)
         ESRegisterDynamicCast(generator, Rigidbody, Component)
-        ESRegisterDynamicCast(generator, Mesh, Component)
+        ESRegisterDynamicCast(generator, Text, Component)
         ESRegisterDynamicCast(generator, SceneLogic, SceneCubeChunkLogic)
     }
 
@@ -603,6 +618,17 @@ namespace Framework {
             auto&& neighbourOffset = ptr->MathNeighbour(offset);
             return std::make_pair(neighbourOffset.GetRegion(), neighbourOffset.GetChunk());
         });
+    }
+
+    void API::RegisterText(EvoScript::AddressTableGen* generator) {
+        using namespace SR_GTYPES_NS;
+        using namespace SR_GRAPH_NS;
+
+        generator->RegisterNewClass("Text", "Text", {
+            "Libraries/Component.h", "Libraries/Mesh.h"
+        }, { { "Component", EvoScript::Public }, { "Mesh", EvoScript::Public  } });
+
+        ESRegisterMethod(EvoScript::Public, generator, Text, SetText, void, ESArg1(const std::string& text), ESArg1(text))
     }
 
     void API::RegisterMath(EvoScript::AddressTableGen *generator) {

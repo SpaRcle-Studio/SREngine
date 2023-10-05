@@ -55,6 +55,7 @@ namespace SR_GRAPH_NS {
         uint32_t samplesCount = 0;
         std::string appName;
         std::string engineName;
+        bool vsync = false;
         SR_UTILS_NS::Path GLSLCompilerPath;
     };
 

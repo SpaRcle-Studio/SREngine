@@ -87,7 +87,15 @@ namespace SR_SCRIPTING_NS {
 
     void Behaviour::OnDestroy() {
         Component::OnDestroy();
-        RemoveUsePoint();
+
+        if (IsResourceWillBeDeleted()) {
+            AutoFree([this](auto&& pData) {
+                RemoveUsePoint();
+            });
+        }
+        else {
+            RemoveUsePoint();
+        }
     }
 
     bool Behaviour::IsEmpty() const {

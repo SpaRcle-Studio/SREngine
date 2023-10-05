@@ -46,6 +46,9 @@ namespace SR_UTILS_NS {
         void SetAnchor(Anchor anchorType);
         void SetStretch(Stretch stretch);
 
+        void SetLocalPriority(int32_t priority) { m_localPriority = priority; m_isDirtyPriority = true; }
+        void SetRelativePriority(bool relative) { m_relativePriority = relative; m_isDirtyPriority = true; }
+
         SR_NODISCARD SR_MATH_NS::FVector3 GetTranslation() const override { return m_translation; }
         SR_NODISCARD SR_MATH_NS::FVector3 GetRotation() const override { return m_rotation; }
         SR_NODISCARD SR_MATH_NS::FVector3 GetScale() const override { return m_scale; }
@@ -59,6 +62,11 @@ namespace SR_UTILS_NS {
 
         SR_NODISCARD Anchor GetAnchor() const { return m_anchor; }
         SR_NODISCARD Stretch GetStretch() const { return m_stretch; }
+
+        SR_NODISCARD int32_t GetPriority();
+        SR_NODISCARD int32_t GetLocalPriority() const noexcept { return m_localPriority; }
+
+        SR_NODISCARD bool IsRelativePriority() const noexcept { return m_relativePriority; }
 
     protected:
         void UpdateMatrix() override;
@@ -75,6 +83,11 @@ namespace SR_UTILS_NS {
     protected:
         Anchor m_anchor = Anchor::None;
         Stretch m_stretch = Stretch::ShowAll;
+
+        int32_t m_priority = 0;
+        int32_t m_localPriority = 0;
+        bool m_relativePriority = false;
+        bool m_isDirtyPriority = true;
 
         SR_MATH_NS::Matrix4x4 m_localMatrix = SR_MATH_NS::Matrix4x4::Identity();
         SR_MATH_NS::Matrix4x4 m_matrix = SR_MATH_NS::Matrix4x4::Identity();

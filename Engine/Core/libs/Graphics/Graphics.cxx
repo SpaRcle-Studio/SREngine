@@ -58,6 +58,7 @@
 #include "../Graphics/src/Graphics/UI/Canvas.cpp"
 #include "../Graphics/src/Graphics/UI/Anchor.cpp"
 
+#include "../Graphics/src/Graphics/Render/FlatCluster.cpp"
 #include "../Graphics/src/Graphics/Render/RenderScene.cpp"
 #include "../Graphics/src/Graphics/Render/RenderTechnique.cpp"
 #include "../Graphics/src/Graphics/Render/MeshCluster.cpp"

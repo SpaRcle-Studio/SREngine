@@ -322,4 +322,8 @@ namespace SR_UTILS_NS {
 
         ResourceManager::Instance().ReloadResource(this);
     }
+
+    bool IResource::IsResourceWillBeDeleted() const {
+        return GetCountUses() == 1 && !IsDestroyed() && !IsRegistered();
+    }
 }

@@ -31,6 +31,12 @@ namespace SR_HTYPES_NS {
         UnicodeString& operator=(const std::u32string& other);
         UnicodeString& operator=(std::u32string&& other) noexcept;
 
+        bool operator==(const std::u32string& str) const noexcept { return m_internal == str; }
+        bool operator!=(const std::u32string& str) const noexcept { return m_internal != str; }
+
+        bool operator==(const UnicodeString& str) const noexcept { return m_internal == str.m_internal; }
+        bool operator!=(const UnicodeString& str) const noexcept { return m_internal != str.m_internal; }
+
         SR_NODISCARD operator std::u32string() const noexcept { return m_internal; } /// NOLINT(google-explicit-constructor)
 
     public:

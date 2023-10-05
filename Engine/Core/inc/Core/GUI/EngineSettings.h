@@ -17,6 +17,7 @@ namespace Framework::Core::GUI {
     private:
         void DrawMultiSampling();
         void DrawLighting();
+        void DrawVSync();
 
     };
 }

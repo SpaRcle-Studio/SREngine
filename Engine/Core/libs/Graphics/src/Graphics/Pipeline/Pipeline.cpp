@@ -290,6 +290,7 @@ namespace SR_GRAPH_NS {
 
     bool Pipeline::PreInit(const PipelinePreInitInfo& info) {
         m_requiredSampleCount = info.samplesCount;
+        m_preInitInfo = info;
         SRAssert2(m_requiredSampleCount >= 1 && m_requiredSampleCount <= 64, "Sample count must be greater 0 and less or equals 64!");
 
         return true;

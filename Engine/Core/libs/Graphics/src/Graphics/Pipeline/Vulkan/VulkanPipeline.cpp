@@ -191,7 +191,7 @@ namespace SR_GRAPH_NS {
             VK_EXT_LINE_RASTERIZATION_EXTENSION_NAME,
         };
 
-        if (!m_kernel->Init(createSurfaceFn, m_window->GetHandle(), deviceExtensions, true, false /** V-Sync */)) {
+        if (!m_kernel->Init(createSurfaceFn, m_window->GetHandle(), deviceExtensions, true, m_preInitInfo.vsync)) {
             PipelineError("VulkanPipeline::Init() : failed to initialize Evo Vulkan kernel!");
             return false;
         }
@@ -1429,5 +1429,31 @@ namespace SR_GRAPH_NS {
         }
 
         vkCmdDrawIndexed(m_currentCmd, count, 1, 0, 0, 0);
+    }
+
+    void VulkanPipeline::SetVSyncEnabled(bool enabled) {
+        if (!m_kernel) {
+            return;
+        }
+
+        auto&& pSwapChain = m_kernel->GetSwapchain();
+        if (!pSwapChain) {
+            return;
+        }
+
+        pSwapChain->SetVSync(enabled);
+    }
+
+    bool VulkanPipeline::IsVSyncEnabled() const {
+        if (!m_kernel) {
+            return false;
+        }
+
+        auto&& pSwapChain = m_kernel->GetSwapchain();
+        if (!pSwapChain) {
+            return false;
+        }
+
+        return pSwapChain->IsVSyncEnabled();
     }
 }

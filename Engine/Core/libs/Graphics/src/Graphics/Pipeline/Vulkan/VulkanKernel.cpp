@@ -51,7 +51,8 @@ namespace SR_GRAPH_NS {
         auto&& prepareResult = PrepareFrame();
         switch (prepareResult) {
             case EvoVulkan::Core::FrameResult::OutOfDate:
-            case EvoVulkan::Core::FrameResult::Suboptimal: {
+            case EvoVulkan::Core::FrameResult::Suboptimal:
+            case EvoVulkan::Core::FrameResult::Dirty: {
                 VK_LOG("SRVulkan::Render() : out of date...");
                 m_hasErrors |= !ReCreate(prepareResult);
 
@@ -151,7 +152,6 @@ namespace SR_GRAPH_NS {
     #else
         return SR_UTILS_NS::Features::Instance().Enabled("RayTracing", false);
     #endif
-
     }
 
     EvoVulkan::Core::FrameResult VulkanKernel::PrepareFrame() {

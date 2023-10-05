@@ -156,6 +156,8 @@ namespace Framework::Core::GUI {
     void Inspector::DrawComponents(SR_UTILS_NS::IComponentable* pIComponentable) {
         ImGui::Separator();
 
+        SR_GRAPH_GUI_NS::DrawTextOnCenter("Components");
+
         ImGuiStyle& style = ImGui::GetStyle();
 
         float_t button_sz = ImGui::GetFrameHeight();
@@ -173,8 +175,6 @@ namespace Framework::Core::GUI {
             ImGui::EndCombo();
         }
         ImGui::PopItemWidth();
-
-        ImGui::Separator();
 
         uint32_t index = 0;
         pIComponentable->ForEachComponent([&](SR_UTILS_NS::Component* component) -> bool {
@@ -257,6 +257,22 @@ namespace Framework::Core::GUI {
         }, const_cast<void*>(reinterpret_cast<const void*>(&stretchTypes)), stretchTypes.size())) {
             pTransform->SetStretch(SR_UTILS_NS::EnumReflector::At<SR_UTILS_NS::Stretch>(stretch));
         }
+
+        ImGui::Separator();
+
+        SR_GRAPH_GUI_NS::DrawTextOnCenter("Sorting");
+
+        int32_t priority = pTransform->GetLocalPriority();
+        if (ImGui::InputInt("Priority", &priority)) {
+            pTransform->SetLocalPriority(priority);
+        }
+
+        bool isRelativePriority = pTransform->IsRelativePriority();
+        if (ImGui::Checkbox("Relative", &isRelativePriority)) {
+            pTransform->SetRelativePriority(isRelativePriority);
+        }
+
+        ImGui::Separator();
     }
 
     void Inspector::DrawTransform3D(SR_UTILS_NS::Transform3D *transform) {
@@ -315,9 +331,9 @@ namespace Framework::Core::GUI {
     void Inspector::DrawSwitchTransform() {
         auto&& pTransform = m_gameObject->GetTransform();
 
-        const char* space_types[] = { "Zero", "1D", "2D", "3D", "4D" };
+        const char* space_types[] = { "Zero (Holder)", "1D", "2D", "3D", "4D" };
         auto item_current = static_cast<int32_t>(pTransform->GetMeasurement());
-        if (ImGui::Combo("Measurement", &item_current, space_types, IM_ARRAYSIZE(space_types))) {
+        if (ImGui::Combo("Transform type", &item_current, space_types, IM_ARRAYSIZE(space_types))) {
             switch (static_cast<SR_UTILS_NS::Measurement>(item_current)) {
                 case SR_UTILS_NS::Measurement::SpaceZero:
                     m_gameObject->SetTransform(new SR_UTILS_NS::TransformZero());

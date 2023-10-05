@@ -190,6 +190,13 @@ namespace SR_GTYPES_NS {
         /// Применяем сохраненные в материале значения
         for (auto&& loadedProperty : LoadMaterialProperties(propertiesNode)) {
             if (auto&& pProperty = GetProperty(loadedProperty.hashId)) {
+                if (pProperty->type != loadedProperty.type) {
+                    SR_ERROR("Material::LoadProperties() : invalid property!\n\tFile: " + GetResourcePath().ToStringRef() +
+                        "\n\tProperty: " + loadedProperty.id + "\n\tLoaded type: " + SR_UTILS_NS::EnumReflector::ToString(loadedProperty.type) +
+                        "\n\tExpected type: " + SR_UTILS_NS::EnumReflector::ToString(pProperty->type)
+                    );
+                    continue;
+                }
                 pProperty->data = loadedProperty.data;
             }
         }

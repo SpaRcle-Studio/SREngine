@@ -103,6 +103,8 @@ namespace SR_CORE_NS {
             pSceneBuilder->Build(isPaused);
             pSceneBuilder->Update(dt);
 
+            UpdateFrequency();
+
             if (m_accumulateDt) {
                 m_accumulator += dt;
             }
@@ -161,7 +163,7 @@ namespace SR_CORE_NS {
 
     void EngineScene::SetSpeed(float_t speed) {
         m_speed = speed;
-        m_updateFrequency = (1.f / (60.f * m_speed));
+        UpdateFrequency();
         m_accumulator = m_updateFrequency;
     }
 
@@ -209,5 +211,10 @@ namespace SR_CORE_NS {
         }
 
         pScene.Unlock();
+    }
+
+    void EngineScene::UpdateFrequency() {
+        const uint32_t framesPerSecond = 60;
+        m_updateFrequency = (1.f / (static_cast<float_t>(framesPerSecond) * m_speed));
     }
 }

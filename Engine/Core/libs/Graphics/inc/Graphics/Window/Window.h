@@ -56,6 +56,7 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD bool IsFullScreen() const;
         SR_NODISCARD bool IsMaximized() const;
         SR_NODISCARD bool IsVisible() const;
+        SR_NODISCARD uint32_t GetFramesPerSecond() const { return m_framesPerSecond; }
 
         SR_NODISCARD SR_MATH_NS::IVector2 ScreenToClient(const SR_MATH_NS::IVector2& pos) const;
         SR_NODISCARD SR_MATH_NS::IVector2 ClientToScreen(const SR_MATH_NS::IVector2& pos) const;
@@ -81,6 +82,8 @@ namespace SR_GRAPH_NS {
         CloseCallback m_closeCallback;
         DrawCallback m_drawCallback;
         ScrollCallback m_scrollCallback;
+
+        int32_t m_framesPerSecond = 0;
 
         SR_HTYPES_NS::Thread::Ptr m_thread = nullptr;
 

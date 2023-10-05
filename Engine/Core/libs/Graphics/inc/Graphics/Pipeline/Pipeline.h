@@ -138,14 +138,17 @@ namespace SR_GRAPH_NS {
 
         virtual uint64_t GetUsedMemory() const { return 0; }
 
-        /// ------------------------------------------- Мультисемплинг -------------------------------------------------
+        /// ---------------------------------------- Мультисемплинг и VSync --------------------------------------------
 
         virtual void OnMultiSampleChanged();
         virtual void UpdateMultiSampling();
         virtual void SetSampleCount(uint8_t count);
 
+        virtual void SetVSyncEnabled(bool enabled) { }
+
         SR_NODISCARD uint8_t GetSamplesCount() const;
         SR_NODISCARD bool IsMultiSamplingSupported() const noexcept { return m_isMultiSampleSupported; }
+        SR_NODISCARD virtual bool IsVSyncEnabled() const { return false; }
 
         /// ------------------------------------------ Работа с памятью ------------------------------------------------
 
@@ -211,6 +214,8 @@ namespace SR_GRAPH_NS {
 
     protected:
         std::map<OverlayType, SR_HTYPES_NS::SharedPtr<Overlay>> m_overlays;
+
+        PipelinePreInitInfo m_preInitInfo;
 
         FrameBufferQueue m_fboQueue;
 

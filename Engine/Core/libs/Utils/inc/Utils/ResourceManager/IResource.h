@@ -50,6 +50,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD virtual bool IsAllowedToRevive() const { return false; }
         SR_NODISCARD virtual Path GetAssociatedPath() const;
 
+        SR_NODISCARD bool IsResourceWillBeDeleted() const;
         SR_NODISCARD bool IsRegistered() const noexcept { return m_isRegistered; }
         SR_NODISCARD bool IsLoaded() const noexcept { return m_loadState == LoadState::Loaded; }
         SR_NODISCARD bool IsDestroyed() const noexcept { return m_isDestroyed; }

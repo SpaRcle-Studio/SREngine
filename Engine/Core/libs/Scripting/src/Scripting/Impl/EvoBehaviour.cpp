@@ -149,7 +149,8 @@ namespace SR_SCRIPTING_NS {
         SwitchContext();
 
         if (!m_getProperties) {
-            SR_ERROR("EvoBehaviour::GetProperties() : properties getter invalid!");
+            SR_ERROR("EvoBehaviour::GetProperties() : properties getter invalid!\n\tPath: " + GetResourcePath().ToStringRef());
+            m_hasErrors = true;
             return EvoBehaviour::Properties();
         }
 

@@ -43,6 +43,7 @@ namespace SR_CORE_NS {
 
     private:
         void DrawChunkDebug();
+        void UpdateFrequency();
 
     public:
         ScenePtr pScene;

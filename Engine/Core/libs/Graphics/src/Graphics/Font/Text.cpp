@@ -318,23 +318,34 @@ namespace SR_GTYPES_NS {
         }
     }
 
-    void Text::SetText(const std::string &text) {
-        m_text = SR_UTILS_NS::Locale::UtfToUtf<char32_t, char>(text);
+    void Text::SetText(const std::string& text) {
+        auto&& newText = SR_UTILS_NS::Locale::UtfToUtf<char32_t, char>(text);
+        if (m_text == newText) {
+            return;
+        }
+        m_text = std::move(newText);
         m_isCalculated = false;
         if (auto&& renderScene = GetRenderScene()) {
             renderScene->SetDirty();
         }
     }
 
-    void Text::SetText(const std::u16string &text) {
-        m_text = SR_UTILS_NS::Locale::UtfToUtf<char32_t, char16_t>(text);
+    void Text::SetText(const std::u16string& text) {
+        auto&& newText = SR_UTILS_NS::Locale::UtfToUtf<char32_t, char16_t>(text);
+        if (m_text == newText) {
+            return;
+        }
+        m_text = std::move(newText);
         m_isCalculated = false;
         if (auto&& renderScene = GetRenderScene()) {
             renderScene->SetDirty();
         }
     }
 
-    void Text::SetText(const std::u32string &text) {
+    void Text::SetText(const std::u32string& text) {
+        if (m_text == text) {
+            return;
+        }
         m_text = text;
         m_isCalculated = false;
         if (auto&& renderScene = GetRenderScene()) {

@@ -64,7 +64,7 @@ namespace SR_SCRIPTING_NS {
         void DeleteResource() override;
 
     protected:
-        bool m_hasErrors = false;
+        mutable bool m_hasErrors = false;
 
     };
 }

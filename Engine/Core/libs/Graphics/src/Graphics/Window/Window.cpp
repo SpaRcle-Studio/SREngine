@@ -90,7 +90,8 @@ namespace SR_GRAPH_NS {
             ++frames;
 
             if (deltaTime > 1.0) { /// every second
-                SR_LOG(SR_UTILS_NS::Format("FPS: %i; ms: %f", frames - 1, milliseconds));
+                m_framesPerSecond = SR_MAX(0, frames - 1);
+                /// SR_LOG(SR_UTILS_NS::Format("FPS: %i; ms: %f", m_framesPerSecond, milliseconds));
                 frames = 0; deltaTime = 0;
             }
         }
