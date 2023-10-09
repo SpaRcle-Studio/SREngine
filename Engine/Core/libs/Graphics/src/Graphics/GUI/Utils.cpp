@@ -282,4 +282,98 @@ namespace SR_GRAPH_GUI_NS {
 
         return pressed;
     }
+
+    bool DrawDataType(SR_SRLM_NS::DataType* pData, bool* pIsEnum, void* pProvider, float_t width) {
+        if (pIsEnum) {
+            *pIsEnum = false;
+        }
+
+        switch (pData->GetClass()) {
+            case SR_SRLM_NS::DataTypeClass::Bool:
+                CheckboxNoNavFocus(SR_FORMAT_C("##Pin-%p", pProvider), pData->GetBool());
+                break;
+            case SR_SRLM_NS::DataTypeClass::Enum: {
+                auto&& pEnum = dynamic_cast<SR_SRLM_NS::DataTypeEnum*>(pData);
+                if (!pEnum) {
+                    break;
+                }
+
+                auto&& pReflector = pEnum->GetReflector();
+
+                if (!pIsEnum) {
+                    ImGui::PushItemWidth(width > 0.f ? width : 80.0f);
+                    SR_GRAPH_GUI_NS::EnumCombo(SR_FORMAT_C("Enum##PinE-%p", pProvider), pReflector, [pEnum](auto&& pNewReflector) {
+                        pEnum->SetReflector(pNewReflector);
+                        pEnum->SetValue(0);
+                    });
+                    ImGui::PopItemWidth();
+                }
+
+                if (!pReflector) {
+                    break;
+                }
+
+                auto&& enumValue = pReflector->ToStringInternal(*pEnum->GetEnum());
+
+                ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 0.f);
+
+                if (pIsEnum) {
+                    if (ImGui::Button(enumValue.has_value() ? enumValue.value().c_str() : "Unknown", ImVec2(80, 20))) {
+                        *pIsEnum = true;
+                    }
+
+                    ImGui::PopStyleVar();
+
+                    ImGui::Text("%s", pReflector->GetNameInternal().c_str());
+                }
+                else {
+                    ImGui::PushItemWidth(width > 0.f ? width : 80.0f);
+                    SR_GRAPH_GUI_NS::EnumCombo(SR_FORMAT_C("##PinE-%p", pProvider), pReflector, enumValue, [pEnum, pReflector](auto&& value) {
+                        if (auto&& integral = pReflector->FromStringInternal(value)) {
+                            pEnum->SetValue(integral.value());
+                        }
+                    });
+                    ImGui::PopItemWidth();
+                    ImGui::PopStyleVar();
+                }
+
+                break;
+            }
+            case SR_SRLM_NS::DataTypeClass::Int8:
+            case SR_SRLM_NS::DataTypeClass::Int16:
+            case SR_SRLM_NS::DataTypeClass::Int32:
+            case SR_SRLM_NS::DataTypeClass::Int64:
+            case SR_SRLM_NS::DataTypeClass::UInt8:
+            case SR_SRLM_NS::DataTypeClass::UInt16:
+            case SR_SRLM_NS::DataTypeClass::UInt32:
+            case SR_SRLM_NS::DataTypeClass::UInt64: {
+                ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 0.f);
+                int32_t number = *pData->GetInt32();
+                ImGui::PushItemWidth(width > 0.f ? width : 40.0f);
+                if (ImGui::InputInt(SR_FORMAT_C("##Pin-%p", pProvider), &number, 0)) {
+                    *pData->GetInt32() = number;
+                }
+                ImGui::PopItemWidth();
+                ImGui::PopStyleVar();
+                break;
+            }
+            case SR_SRLM_NS::DataTypeClass::Float:
+                ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 0.f);
+                ImGui::PushItemWidth(width > 0.f ? width : 40.0f);
+                ImGui::InputFloat(SR_FORMAT_C("##Pin-%p", pProvider), pData->GetFloat());
+                ImGui::PopItemWidth();
+                ImGui::PopStyleVar();
+                break;
+            case SR_SRLM_NS::DataTypeClass::String:
+                ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 0.f);
+                ImGui::PushItemWidth(width > 0.f ? width : 80.0f);
+                ImGui::InputText(SR_FORMAT_C("##Pin-%p", pProvider), pData->GetString());
+                ImGui::PopStyleVar();
+                break;
+            default:
+                break;
+        }
+
+        return true;
+    }
 }

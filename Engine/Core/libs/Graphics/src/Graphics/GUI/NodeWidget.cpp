@@ -63,86 +63,34 @@ namespace SR_GRAPH_GUI_NS {
 
         ImGui::Separator();
 
-        UpdateTouch();
+        SR_GRAPH_GUI_NS::Splitter(true, 4.0f, &m_leftPaneWidth, &m_rightPaneWidth, 50.0f, 50.0f);
 
-        ax::NodeEditor::SetCurrentEditor(m_editor);
-
-        ax::NodeEditor::Begin(GetName().c_str());
-
-        for (auto&& [id, node] : m_nodes)
-            node->Draw(m_nodeBuilder, nullptr);
-
-        for (auto pIt = m_links.begin(); pIt != m_links.end(); ) {
-            auto&& [id, pLink] = *pIt;
-
-            if (pLink->IsLinked()) {
-                pLink->Draw();
-                ++pIt;
-            }
-            else {
-                pIt = m_links.erase(pIt);
-            }
+        if (m_leftPaneWidth <= 10.f) {
+            return;
         }
 
-        if (ax::NodeEditor::BeginCreate()) {
-            ax::NodeEditor::PinId inputPinId, outputPinId;
-            if (ax::NodeEditor::QueryNewLink(&inputPinId, &outputPinId) && (inputPinId && outputPinId)) {
-                auto&& pInputPin = reinterpret_cast<SR_GRAPH_GUI_NS::Pin*>(inputPinId.AsPointer());
-                auto&& pOutputPin = reinterpret_cast<SR_GRAPH_GUI_NS::Pin*>(outputPinId.AsPointer());
-
-                if (pInputPin != pOutputPin) {
-                    if (SR_GRAPH_GUI_NS::CanCreateLink(pInputPin, pOutputPin) && ax::NodeEditor::AcceptNewItem()) {
-                        AddLink(new SR_GRAPH_GUI_NS::Link(pInputPin, pOutputPin));
-                    }
-                }
-            }
+        if (ImGui::BeginChild("Properties", ImVec2(m_leftPaneWidth, 0))) {
+            DrawLeftPanel();
         }
+        ImGui::EndChild();
 
-        ax::NodeEditor::EndCreate();
+        ImGui::SameLine(0.0f, 4.0f);
 
-        if (ax::NodeEditor::BeginDelete()) {
-            ax::NodeEditor::NodeId deleteNodeId;
-            if (ax::NodeEditor::QueryDeletedNode(&deleteNodeId)) {
-                auto&& pNode = reinterpret_cast<SR_GRAPH_GUI_NS::Node*>(deleteNodeId.AsPointer());
-                RemoveNode(pNode);
+        if (ImGui::BeginChild("NodeEditor")) {
+            UpdateTouch();
+
+            ax::NodeEditor::SetCurrentEditor(m_editor);
+
+            if (ax::NodeEditor::Begin(GetName().c_str())) {
+                DrawNodeEditor();
+                ax::NodeEditor::End();
             }
 
-            ax::NodeEditor::LinkId deleteLinkId;
-            if (ax::NodeEditor::QueryDeletedLink(&deleteLinkId)) {
-                auto&& pLink = reinterpret_cast<SR_GRAPH_GUI_NS::Link*>(deleteLinkId.AsPointer());
-                RemoveLink(pLink);
+            for (auto &&[id, pNode]: m_nodes) {
+                pNode->PostDraw();
             }
         }
-
-        ax::NodeEditor::EndDelete();
-
-        if (auto&& pRawLink = ax::NodeEditor::GetDoubleClickedLink()) {
-            auto&& pLink = reinterpret_cast<SR_GRAPH_GUI_NS::Link*>(pRawLink.AsPointer());
-            auto&& clickPos = ImGui::GetMousePos();
-
-            if (pLink->IsLinked()) {
-                auto&& pLogicalNode = new SR_SRLM_NS::ConnectorNode();
-
-                pLogicalNode->AddInputData(pLink->GetStart()->GetDataType()->Copy());
-                pLogicalNode->AddOutputData(pLink->GetStart()->GetDataType()->Copy());
-
-                auto&& pNode = new Node(pLogicalNode);
-                pNode->SetPosition(SR_MATH_NS::FVector2(clickPos.x, clickPos.y));
-
-                AddLink(new Link(pNode->GetOutputPin(0), pLink->GetEnd()));
-                pLink->SetEnd(pNode->GetInputPin(0));
-
-                AddNode(pNode);
-            }
-        }
-
-        DrawPopupMenu();
-
-        ax::NodeEditor::End();
-
-        for (auto&& [id, pNode] : m_nodes) {
-            pNode->PostDraw();
-        }
+        ImGui::EndChild();
     }
 
     void NodeWidget::RemoveLink(Link *pLink) {
@@ -282,52 +230,6 @@ namespace SR_GRAPH_GUI_NS {
     }
 
     void NodeWidget::InitStructsCreationPopup() {
-        /*auto&& createStructsNodesMenu = m_creationPopup->AddMenu("Create Structs");
-        auto&& breakStructsNodesMenu = m_creationPopup->AddMenu("Break Structs");
-
-        for (auto&& [hashName, pStruct] : SR_SRLM_NS::DataTypeManager::Instance().GetStructs()) {
-            auto&& structName = SR_UTILS_NS::HashManager::Instance().HashToString(pStruct->GetStructName());
-
-            createStructsNodesMenu.AddMenu(structName).SetAction([structName, pStruct = pStruct](const SR_GRAPH_GUI_NS::DrawPopupContext& context)
-            {
-                auto&& pNode = new SR_GRAPH_GUI_NS::Node();
-                auto&& node = *pNode;
-
-                node.SetPosition(context.popupPos);
-               // node.SetIdentifier(SR_SRLM_NS::NODE_CREATE_STRUCT);
-                node.SetType(SR_GRAPH_GUI_NS::NodeType::Blueprint);
-
-                node.SetName(structName);
-
-                for (auto&& [variableHashName, pVariable] : pStruct->GetVariables()) {
-                    node.AddInput(SR_UTILS_NS::HashManager::Instance().HashToString(variableHashName), pVariable->Copy());
-                }
-
-                node.AddOutput(structName, pStruct->Copy());
-
-                context.pWidget->AddNode(pNode);
-            });
-
-            breakStructsNodesMenu.AddMenu(structName).SetAction([structName, pStruct = pStruct](const SR_GRAPH_GUI_NS::DrawPopupContext& context)
-            {
-                auto&& pNode = new SR_GRAPH_GUI_NS::Node();
-                auto&& node = *pNode;
-
-                node.SetPosition(context.popupPos);
-                //node.SetIdentifier(SR_SRLM_NS::NODE_BREAK_STRUCT);
-                node.SetType(SR_GRAPH_GUI_NS::NodeType::Blueprint);
-
-                node.SetName(structName);
-
-                node.AddInput(structName, pStruct->Copy());
-
-                for (auto&& [variableHashName, pVariable] : pStruct->GetVariables()) {
-                    node.AddOutput(SR_UTILS_NS::HashManager::Instance().HashToString(variableHashName), pVariable->Copy());
-                }
-
-                context.pWidget->AddNode(pNode);
-            });
-        }*/
     }
 
     void NodeWidget::InitCreationPopup() {
@@ -442,5 +344,154 @@ namespace SR_GRAPH_GUI_NS {
 
     void NodeWidget::TopPanelClose() {
         Close();
+    }
+
+    void NodeWidget::DrawLeftPanel() {
+        ImGui::PushStyleVar(ImGuiStyleVar_ChildRounding, 0);
+        ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0);
+        ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 0);
+
+        ImGui::BeginDisabled(true);
+        {
+            ImGui::Button("Properties", ImVec2(m_leftPaneWidth * 0.75f, 20));
+        }
+        ImGui::EndDisabled();
+
+        ImGui::SameLine();
+
+        if (ImGui::Button("+", ImVec2(m_leftPaneWidth * 0.25f, 20))) {
+            NodeWidgetProperty property;
+
+            uint32_t number = 0;
+            do {
+                property.name = "New property " + SR_UTILS_NS::ToString(number);
+                ++number;
+            }
+            while (FindProperty(property.name));
+
+            property.pData = std::make_unique<SR_SRLM_NS::DataTypeString>();
+
+            m_properties.emplace_back(std::move(property));
+        }
+
+        uint32_t index = 0;
+        for (auto&& property : m_properties) {
+            if (ImGui::RadioButton(SR_FORMAT_C("##CkProp%i%s", index, GetName().c_str()), property.expand)) {
+                property.expand = !property.expand;
+            }
+
+            ImGui::SameLine();
+
+            ImGui::PushItemWidth(100.f);
+            std::string comboName = SR_FORMAT("##NTypeProp%i%s", index, GetName().c_str());
+            SR_GRAPH_GUI_NS::EnumCombo<SR_SRLM_NS::DataTypeClass>(comboName, property.pData->GetClass(), [&property](SR_SRLM_NS::DataTypeClass type) {
+                std::unique_ptr<SR_SRLM_NS::DataType> pData(SR_SRLM_NS::DataTypeAllocator::Instance().Allocate(type));
+                if (pData) {
+                    property.pData = std::move(pData);
+                }
+            });
+            ImGui::PopItemWidth();
+
+            ImGui::SameLine();
+
+            ImGui::PushItemWidth(m_leftPaneWidth);
+            std::string newName = property.name;
+            if (ImGui::InputText(SR_FORMAT_C("##NodeProp%i%s", index, GetName().c_str()), &newName, ImGuiInputTextFlags_NoUndoRedo)) {
+                if (!FindProperty(newName)) {
+                    property.name = std::move(newName);
+                }
+            }
+            ImGui::PopItemWidth();
+
+            if (property.expand) {
+                SR_GRAPH_GUI_NS::DrawDataType(property.pData.get(), nullptr, (void*)&property, m_leftPaneWidth);
+            }
+
+            ImGui::Separator();
+            ++index;
+        }
+
+        ImGui::PopStyleVar(3);
+    }
+
+    void NodeWidget::DrawNodeEditor() {
+        for (auto&& [id, node] : m_nodes) {
+            node->Draw(m_nodeBuilder, nullptr);
+        }
+
+        for (auto pIt = m_links.begin(); pIt != m_links.end(); ) {
+            auto&& [id, pLink] = *pIt;
+
+            if (pLink->IsLinked()) {
+                pLink->Draw();
+                ++pIt;
+            }
+            else {
+                pIt = m_links.erase(pIt);
+            }
+        }
+
+        if (ax::NodeEditor::BeginCreate()) {
+            ax::NodeEditor::PinId inputPinId, outputPinId;
+            if (ax::NodeEditor::QueryNewLink(&inputPinId, &outputPinId) && (inputPinId && outputPinId)) {
+                auto&& pInputPin = reinterpret_cast<SR_GRAPH_GUI_NS::Pin*>(inputPinId.AsPointer());
+                auto&& pOutputPin = reinterpret_cast<SR_GRAPH_GUI_NS::Pin*>(outputPinId.AsPointer());
+
+                if (pInputPin != pOutputPin) {
+                    if (SR_GRAPH_GUI_NS::CanCreateLink(pInputPin, pOutputPin) && ax::NodeEditor::AcceptNewItem()) {
+                        AddLink(new SR_GRAPH_GUI_NS::Link(pInputPin, pOutputPin));
+                    }
+                }
+            }
+        }
+
+        ax::NodeEditor::EndCreate();
+
+        if (ax::NodeEditor::BeginDelete()) {
+            ax::NodeEditor::NodeId deleteNodeId;
+            if (ax::NodeEditor::QueryDeletedNode(&deleteNodeId)) {
+                auto&& pNode = reinterpret_cast<SR_GRAPH_GUI_NS::Node*>(deleteNodeId.AsPointer());
+                RemoveNode(pNode);
+            }
+
+            ax::NodeEditor::LinkId deleteLinkId;
+            if (ax::NodeEditor::QueryDeletedLink(&deleteLinkId)) {
+                auto&& pLink = reinterpret_cast<SR_GRAPH_GUI_NS::Link*>(deleteLinkId.AsPointer());
+                RemoveLink(pLink);
+            }
+        }
+
+        ax::NodeEditor::EndDelete();
+
+        if (auto&& pRawLink = ax::NodeEditor::GetDoubleClickedLink()) {
+            auto&& pLink = reinterpret_cast<SR_GRAPH_GUI_NS::Link*>(pRawLink.AsPointer());
+            auto&& clickPos = ImGui::GetMousePos();
+
+            if (pLink->IsLinked()) {
+                auto&& pLogicalNode = new SR_SRLM_NS::ConnectorNode();
+
+                pLogicalNode->AddInputData(pLink->GetStart()->GetDataType()->Copy());
+                pLogicalNode->AddOutputData(pLink->GetStart()->GetDataType()->Copy());
+
+                auto&& pNode = new Node(pLogicalNode);
+                pNode->SetPosition(SR_MATH_NS::FVector2(clickPos.x, clickPos.y));
+
+                AddLink(new Link(pNode->GetOutputPin(0), pLink->GetEnd()));
+                pLink->SetEnd(pNode->GetInputPin(0));
+
+                AddNode(pNode);
+            }
+        }
+
+        DrawPopupMenu();
+    }
+
+    NodeWidgetProperty* NodeWidget::FindProperty(const std::string& name) {
+        for (auto&& property : m_properties) {
+            if (property.name == name) {
+                return &property;
+            }
+        }
+        return nullptr;
     }
 }

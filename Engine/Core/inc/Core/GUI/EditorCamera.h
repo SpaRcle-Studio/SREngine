@@ -16,6 +16,7 @@ namespace SR_CORE_NS::GUI {
 
     public:
         SR_NODISCARD bool ExecuteInEditMode() const override;
+        SR_NODISCARD bool IsEditorCamera() const noexcept override { return true; }
 
     };
 }

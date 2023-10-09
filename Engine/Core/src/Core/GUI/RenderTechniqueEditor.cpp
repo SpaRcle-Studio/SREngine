@@ -52,4 +52,8 @@ namespace SR_CORE_GUI_NS {
 
         Super::InitCreationPopup();
     }
+
+    void RenderTechniqueEditor::DrawLeftPanel() {
+        Super::DrawLeftPanel();
+    }
 }

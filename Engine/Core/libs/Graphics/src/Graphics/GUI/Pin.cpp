@@ -247,71 +247,7 @@ namespace SR_GRAPH_GUI_NS {
     }
 
     void Pin::DrawOption() {
-        m_editEnum = false;
-
-        switch (GetType()) {
-            case PinType::Bool:
-                CheckboxNoNavFocus(SR_FORMAT_C("##Pin-%p", (void*)this), m_dataType->GetBool());
-                break;
-            case PinType::Enum: {
-                auto&& pEnum = dynamic_cast<SR_SRLM_NS::DataTypeEnum*>(m_dataType);
-                if (!pEnum) {
-                    break;
-                }
-
-                auto&& pReflector = pEnum->GetReflector();
-                if (!pReflector) {
-                    break;
-                }
-
-                auto&& enumValue = pReflector->ToStringInternal(*pEnum->GetEnum());
-
-                ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 0.f);
-
-                if (ImGui::Button(enumValue.has_value() ? enumValue.value().c_str() : "Unknown", ImVec2(80, 20))) {
-                    m_editEnum = true;
-                }
-
-                ImGui::PopStyleVar();
-
-                ImGui::Text("%s", pReflector->GetNameInternal().c_str());
-
-                break;
-            }
-            case PinType::Int8:
-            case PinType::Int16:
-            case PinType::Int32:
-            case PinType::Int64:
-            case PinType::UInt8:
-            case PinType::UInt16:
-            case PinType::UInt32:
-            case PinType::UInt64: {
-                ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 0.f);
-                int32_t number = *m_dataType->GetInt32();
-                ImGui::PushItemWidth(40.0f);
-                if (ImGui::InputInt(SR_FORMAT_C("##Pin-%p", (void*)this), &number, 0)) {
-                    *m_dataType->GetInt32() = number;
-                }
-                ImGui::PopItemWidth();
-                ImGui::PopStyleVar();
-                break;
-            }
-            case PinType::Float:
-                ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 0.f);
-                ImGui::PushItemWidth(40.0f);
-                ImGui::InputFloat(SR_FORMAT_C("##Pin-%p", (void*)this), m_dataType->GetFloat());
-                ImGui::PopItemWidth();
-                ImGui::PopStyleVar();
-                break;
-            case PinType::String:
-                ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 0.f);
-                ImGui::PushItemWidth(80.0f);
-                ImGui::InputText(SR_FORMAT_C("##Pin-%p", (void*)this), m_dataType->GetString());
-                ImGui::PopStyleVar();
-                break;
-            default:
-                break;
-        }
+        SR_GRAPH_GUI_NS::DrawDataType(m_dataType, &m_editEnum, (void*)this);
     }
 
     Pin::PinType Pin::GetType() const {

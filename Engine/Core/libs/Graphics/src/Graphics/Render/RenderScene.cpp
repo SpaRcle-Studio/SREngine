@@ -337,6 +337,10 @@ namespace SR_GRAPH_NS {
         m_offScreenCameras.clear();
         m_offScreenCameras.reserve(offScreenCamerasCount);
 
+        const uint64_t editorCamerasCount = m_editorCameras.size();
+        m_editorCameras.clear();
+        m_editorCameras.reserve(editorCamerasCount);
+
         /// Удаляем уничтоженные камеры
         for (auto pIt = m_cameras.begin(); pIt != m_cameras.end(); ) {
             if (!pIt->pCamera) {
@@ -354,6 +358,10 @@ namespace SR_GRAPH_NS {
                 continue;
             }
 
+            if (cameraInfo.pCamera->IsEditorCamera()) {
+                m_editorCameras.emplace_back(cameraInfo.pCamera);
+            }
+
             if (cameraInfo.pCamera->GetPriority() < 0) {
                 m_offScreenCameras.emplace_back(cameraInfo.pCamera);
                 continue;
@@ -367,6 +375,10 @@ namespace SR_GRAPH_NS {
 
         /// TODO: убедиться, что сортируется так, как нужно
         std::stable_sort(m_offScreenCameras.begin(), m_offScreenCameras.end(), [](CameraPtr lhs, CameraPtr rhs) {
+            return lhs->GetPriority() < rhs->GetPriority();
+        });
+
+        std::stable_sort(m_editorCameras.begin(), m_editorCameras.end(), [](CameraPtr lhs, CameraPtr rhs) {
             return lhs->GetPriority() < rhs->GetPriority();
         });
 
@@ -428,6 +440,10 @@ namespace SR_GRAPH_NS {
     }
 
     RenderScene::CameraPtr RenderScene::GetMainCamera() const {
+        if (!m_editorCameras.empty()) {
+            return m_editorCameras.front();
+        }
+
         return m_mainCamera ? m_mainCamera : GetFirstOffScreenCamera();
     }
 

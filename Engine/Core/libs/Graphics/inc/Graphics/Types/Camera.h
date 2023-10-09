@@ -38,6 +38,8 @@ namespace SR_GTYPES_NS {
         void OnAttached() override;
         void UpdateProjection(uint32_t w, uint32_t h);
 
+        SR_NODISCARD virtual bool IsEditorCamera() const noexcept { return false; }
+
         SR_NODISCARD Component* CopyComponent() const override;
 
     public:
@@ -76,7 +78,7 @@ namespace SR_GTYPES_NS {
 
         void SetRenderTechnique(const SR_UTILS_NS::Path& path);
 
-    private:
+    protected:
         void UpdateProjection();
 
         void UpdateView() noexcept;

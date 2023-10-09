@@ -416,7 +416,7 @@ namespace SR_GRAPH_NS {
         pipelinePreInitInfo.appName = "SpaRcle Engine";
         pipelinePreInitInfo.engineName = "SREngine";
         pipelinePreInitInfo.samplesCount = 64;
-        pipelinePreInitInfo.vsync = true;
+        pipelinePreInitInfo.vsync = false;
         pipelinePreInitInfo.GLSLCompilerPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Engine/Utilities/glslc.exe");
 
         if (!m_pipeline->PreInit(pipelinePreInitInfo)) {

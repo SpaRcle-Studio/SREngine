@@ -15,6 +15,12 @@ namespace SR_SRLM_NS {
 }
 
 namespace SR_GRAPH_GUI_NS {
+    struct NodeWidgetProperty {
+        std::string name;
+        std::unique_ptr<SR_SRLM_NS::DataType> pData;
+        bool expand = false;
+    };
+
     class NodeWidget : public SR_GRAPH_GUI_NS::Widget {
         using Super = SR_GRAPH_GUI_NS::Widget;
     public:
@@ -34,6 +40,8 @@ namespace SR_GRAPH_GUI_NS {
         virtual void UpdateTouch();
         virtual void DrawPopupMenu();
         virtual void DrawTopPanel();
+        virtual void DrawLeftPanel();
+        virtual void DrawNodeEditor();
 
         virtual void TopPanelSaveAt();
         virtual void TopPanelOpen();
@@ -44,6 +52,8 @@ namespace SR_GRAPH_GUI_NS {
 
         virtual void InitCreationPopup();
         virtual void InitStructsCreationPopup();
+
+        SR_NODISCARD NodeWidgetProperty* FindProperty(const std::string& name);
 
         void Clear();
 
@@ -62,6 +72,11 @@ namespace SR_GRAPH_GUI_NS {
 
         std::map<uintptr_t, Node*> m_nodes;
         std::map<uintptr_t, Link*> m_links;
+
+        std::vector<NodeWidgetProperty> m_properties;
+
+        float_t m_leftPaneWidth = 400.0f;
+        float_t m_rightPaneWidth = 800.0f;
 
     };
 }

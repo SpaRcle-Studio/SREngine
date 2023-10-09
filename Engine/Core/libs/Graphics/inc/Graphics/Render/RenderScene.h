@@ -118,6 +118,7 @@ namespace SR_GRAPH_NS {
 
         CameraPtr m_mainCamera = nullptr;
 
+        std::vector<CameraPtr> m_editorCameras;
         std::vector<CameraPtr> m_offScreenCameras;
         std::vector<CameraInfo> m_cameras;
 

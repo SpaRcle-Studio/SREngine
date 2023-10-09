@@ -19,6 +19,7 @@ namespace SR_CORE_GUI_NS {
     public:
         void OnOpen() override;
         void InitCreationPopup() override;
+        void DrawLeftPanel() override;
 
     };
 }

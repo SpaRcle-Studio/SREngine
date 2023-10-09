@@ -9,6 +9,7 @@
 #include <Utils/Math/Mathematics.h>
 #include <Utils/Math/Rect.h>
 #include <Utils/Types/DataStorage.h>
+#include <Utils/SRLM/DataType.h>
 
 namespace SR_GRAPH_GUI_NS {
     static ImVec4 MakeDisableColor(ImVec4 color) {
@@ -16,8 +17,38 @@ namespace SR_GRAPH_GUI_NS {
         return color;
     }
 
+    void static EnumCombo(const std::string& label, SR_UTILS_NS::EnumReflector* pReflector, const SR_HTYPES_NS::Function<void(SR_UTILS_NS::EnumReflector* pReflector)>& callback) {
+        if (ImGui::BeginCombo(label.c_str(), (pReflector ? pReflector->GetNameInternal() : std::string()).c_str())) {
+            auto&& selectables = SR_UTILS_NS::EnumReflectorManager::Instance().GetReflectors();
+            for (auto&& selectable : selectables) {
+                if (ImGui::Selectable(selectable.second->GetNameInternal().c_str())) {
+                    ImGui::SetItemDefaultFocus();
+                    callback(selectable.second);
+                }
+            }
+
+            ImGui::EndCombo();
+        }
+    }
+
+    void static EnumCombo(const std::string& label, SR_UTILS_NS::EnumReflector* pReflector, const std::optional<std::string>& value, const SR_HTYPES_NS::Function<void(std::string)>& callback) {
+        auto&& strValue = value ? value.value() : std::string();
+
+        if (ImGui::BeginCombo(label.c_str(), strValue.c_str())) {
+            auto&& selectables = pReflector->GetNamesInternal();
+            for (auto&& selectable : selectables) {
+                if (ImGui::Selectable(selectable.c_str())) {
+                    ImGui::SetItemDefaultFocus();
+                    callback(selectable);
+                }
+            }
+
+            ImGui::EndCombo();
+        }
+    }
+
     template<typename T> void static EnumCombo(const std::string& label, T value, const SR_HTYPES_NS::Function<void(T)>& callback) {
-        if (ImGui::BeginCombo(label, SR_UTILS_NS::EnumReflector::ToString(value).c_str())) {
+        if (ImGui::BeginCombo(label.c_str(), SR_UTILS_NS::EnumReflector::ToString(value).c_str())) {
             auto&& selectables = SR_UTILS_NS::EnumReflector::GetNames<T>();
             for (auto&& selectable : selectables) {
                 if (ImGui::Selectable(selectable.c_str())) {
@@ -29,7 +60,6 @@ namespace SR_GRAPH_GUI_NS {
             ImGui::EndCombo();
         }
     }
-
 
     static bool Vec4Null(const ImVec4 &v1) { return (v1.x == 0) && (v1.y == 0) && (v1.z == 0) && (v1.w == 0); }
 
@@ -263,6 +293,8 @@ namespace SR_GRAPH_GUI_NS {
 
         return result;
     }
+
+    static bool DrawDataType(SR_SRLM_NS::DataType* pData, bool* pIsEnum, void* pProvider, float_t width = 0);
 
     static bool DrawColorControl(
             const std::string& label,
