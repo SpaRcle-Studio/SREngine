@@ -8,9 +8,11 @@
 #include <Utils/Common/NonCopyable.h>
 #include <Utils/Common/Hashes.h>
 #include <Utils/Common/Enumerations.h>
+#include <Utils/Xml.h>
 
 namespace SR_SRLM_NS {
     class DataType;
+    class LogicalMachine;
 
     SR_ENUM_NS_STRUCT_T(LogicalNodeStatus, uint64_t,
         None             = 1 << 0,  /// NOLINT
@@ -55,6 +57,9 @@ namespace SR_SRLM_NS {
     public:
         SR_NODISCARD static LogicalNode* LoadXml(const SR_XML_NS::Node& xmlNode);
 
+        void SetMachine(LogicalMachine* pMachine) { m_machine = pMachine; }
+        void SetNodeIndex(uint32_t index) { m_nodeIndex = index; }
+
         virtual void SaveXml(SR_XML_NS::Node& xmlNode);
         virtual void SetInput(const DataType* pInput, uint32_t index);
 
@@ -80,6 +85,7 @@ namespace SR_SRLM_NS {
         SR_NODISCARD virtual LogicalNodeType GetType() const noexcept = 0;
         SR_NODISCARD bool HasErrors() const { return m_status & LogicalNodeStatus::ErrorStatus; }
         SR_NODISCARD bool IsSuccessfullyCompleted() const noexcept;
+        SR_NODISCARD uint32_t GetNodeIndex() const noexcept { return m_nodeIndex; }
         SR_NODISCARD LogicalNodeStatusFlag GetStatus() const noexcept { return m_status; }
 
     public:
@@ -97,9 +103,13 @@ namespace SR_SRLM_NS {
 
     protected:
         mutable LogicalNodeStatusFlag m_status = LogicalNodeStatus::None;
-        
+
+        uint32_t m_nodeIndex = SR_UINT32_MAX;
+
         Pins m_inputs;
         Pins m_outputs;
+
+        LogicalMachine* m_machine = nullptr;
 
     };
 

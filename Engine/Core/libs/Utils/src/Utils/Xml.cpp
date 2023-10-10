@@ -103,7 +103,7 @@ namespace SR_UTILS_NS {
 
         if (!fileData) {
             SR_ERROR("Document::Load() : file not exists! \n\tPath: " + path.ToString());
-            return xml;
+            return Document(); /// NOLINT
         }
 
         if (pugi::xml_parse_result result = xml.m_document->load_string(fileData->c_str())) {
@@ -113,6 +113,7 @@ namespace SR_UTILS_NS {
         else {
             SR_ERROR("Document::Load() : failed to load xml! \n\tPath: " + path.ToString() + "\n\tDescription: " + std::string(result.description()));
             Xml::g_xml_last_error = -3;
+            xml.m_valid = false;
         }
 
         return xml;

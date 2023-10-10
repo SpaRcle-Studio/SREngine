@@ -32,7 +32,7 @@ namespace SR_GRAPH_NS {
     class LightSystem;
     class Window;
     class RenderContext;
-    class RenderTechnique;
+    class IRenderTechnique;
     class Pipeline;
     class DebugRenderer;
 
@@ -67,7 +67,7 @@ namespace SR_GRAPH_NS {
 
         void SetDirtyCameras();
 
-        void SetTechnique(RenderTechnique* pTechnique);
+        void SetTechnique(IRenderTechnique* pTechnique);
         void SetTechnique(const SR_UTILS_NS::Path& path);
 
         void Register(const CameraPtr& pCamera);
@@ -80,7 +80,7 @@ namespace SR_GRAPH_NS {
         void SetOverlayEnabled(bool enabled);
         void SetCurrentSkeleton(SR_ANIMATIONS_NS::Skeleton* pSkeleton) { m_currentSkeleton = pSkeleton;}
 
-        void ForEachTechnique(const SR_HTYPES_NS::Function<void(RenderTechnique*)>& callback);
+        void ForEachTechnique(const SR_HTYPES_NS::Function<void(IRenderTechnique*)>& callback);
 
         SR_NODISCARD bool IsDirty() const noexcept;
         SR_NODISCARD bool IsEmpty() const;
@@ -127,7 +127,7 @@ namespace SR_GRAPH_NS {
         ScenePtr m_scene;
 
         DebugRenderer* m_debugRender = nullptr;
-        RenderTechnique* m_technique = nullptr;
+        IRenderTechnique* m_technique = nullptr;
         RenderContext* m_context = nullptr;
 
         PassQueues m_queues;

@@ -12,6 +12,7 @@
 namespace SR_GRAPH_NS {
     class Window;
     class RenderTechnique;
+    class IRenderTechnique;
     class RenderScene;
 }
 
@@ -21,7 +22,7 @@ namespace SR_GTYPES_NS {
         SR_INITIALIZE_COMPONENT(Camera);
         struct RenderTechniqueInfo {
             SR_UTILS_NS::Path path;
-            RenderTechnique* pTechnique = nullptr;
+            SR_GRAPH_NS::IRenderTechnique* pTechnique = nullptr;
         };
         using Ptr = SR_HTYPES_NS::SharedPtr<Camera>;
         using RenderScenePtr = SR_HTYPES_NS::SafePtr<RenderScene>;
@@ -37,6 +38,7 @@ namespace SR_GTYPES_NS {
         void OnMatrixDirty() override;
         void OnAttached() override;
         void UpdateProjection(uint32_t w, uint32_t h);
+        void Update(float_t dt) override;
 
         SR_NODISCARD virtual bool IsEditorCamera() const noexcept { return false; }
 
@@ -65,7 +67,7 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD const SR_MATH_NS::FVector3& GetViewDirection() const;
         SR_NODISCARD SR_MATH_NS::FVector3 GetViewDirection(const SR_MATH_NS::FVector3& pos) const noexcept;
 
-        SR_NODISCARD RenderTechnique* GetRenderTechnique();
+        SR_NODISCARD IRenderTechnique* GetRenderTechnique();
         SR_NODISCARD RenderScenePtr GetRenderScene() const;
         SR_NODISCARD RenderScenePtr TryGetRenderScene() const;
 

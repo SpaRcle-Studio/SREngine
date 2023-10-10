@@ -205,7 +205,14 @@ namespace SR_CORE_GUI_NS {
                         ImGui::TableNextRow();
 
                         ImGui::TableSetColumnIndex(0);
-                        ImGui::Text("%s", pRenderTechnique->GetResourceId().c_str());
+
+                        if (auto&& pResource = dynamic_cast<SR_UTILS_NS::IResource*>(pRenderTechnique)) {
+                            ImGui::Text("%s", pResource->GetResourceId().c_str());
+                        }
+                        else {
+                            ImGui::Text("%s", pRenderTechnique->GetName().data());
+                        }
+
                         ImGui::Separator();
                     }
 

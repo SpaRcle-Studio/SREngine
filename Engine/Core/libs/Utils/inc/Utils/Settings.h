@@ -48,7 +48,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD Path GetAssociatedPath() const override;
         SR_NODISCARD SR_XML_NS::Document LoadDocument() const;
 
-    private:
+    protected:
         bool Load() override;
         bool Unload() override;
 

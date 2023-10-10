@@ -38,7 +38,9 @@ namespace SR_GRAPH_NS {
         }
 
         if (m_technique) {
-            m_technique->RemoveUsePoint();
+            if (auto&& pResource = dynamic_cast<SR_UTILS_NS::IResource*>(m_technique)) {
+                pResource->RemoveUsePoint();
+            }
             m_technique = nullptr;
         }
 
@@ -103,7 +105,7 @@ namespace SR_GRAPH_NS {
     void RenderScene::BuildQueue() {
         m_queues.clear();
 
-        ForEachTechnique([&](RenderTechnique* pTechnique) {
+        ForEachTechnique([&](IRenderTechnique* pTechnique) {
             auto&& queues = pTechnique->GetQueues();
             for (uint32_t depth = 0; depth < queues.size(); ++depth) {
                 if (m_queues.size() < depth + 1) {
@@ -162,14 +164,18 @@ namespace SR_GRAPH_NS {
         GetPipeline()->DrawFrame();
     }
 
-    void RenderScene::SetTechnique(RenderTechnique *pTechnique) {
+    void RenderScene::SetTechnique(IRenderTechnique *pTechnique) {
         if (m_technique) {
-            m_technique->RemoveUsePoint();
+            if (auto&& pResource = dynamic_cast<SR_UTILS_NS::IResource*>(m_technique)) {
+                pResource->RemoveUsePoint();
+            }
             m_technique = nullptr;
         }
 
         if ((m_technique = pTechnique)) {
-            m_technique->AddUsePoint();
+            if (auto&& pResource = dynamic_cast<SR_UTILS_NS::IResource*>(m_technique)) {
+                pResource->AddUsePoint();
+            }
             m_technique->SetRenderScene(GetThis());
         }
         else {
@@ -505,7 +511,7 @@ namespace SR_GRAPH_NS {
         SetDirty();
     }
 
-    void RenderScene::ForEachTechnique(const Helper::Types::Function<void(RenderTechnique*)>& callback) {
+    void RenderScene::ForEachTechnique(const SR_HTYPES_NS::Function<void(IRenderTechnique*)>& callback) {
         for (auto&& pCamera : m_offScreenCameras) {
             if (auto&& pRenderTechnique = pCamera->GetRenderTechnique()) {
                 callback(pRenderTechnique);

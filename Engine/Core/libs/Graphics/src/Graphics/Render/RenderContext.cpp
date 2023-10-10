@@ -4,6 +4,7 @@
 
 #include <Graphics/Render/RenderContext.h>
 #include <Graphics/Render/RenderScene.h>
+#include <Graphics/Render/IRenderTechnique.h>
 
 #include <Graphics/Window/Window.h>
 #include <Graphics/Memory/ShaderProgramManager.h>
@@ -225,7 +226,7 @@ namespace SR_GRAPH_NS {
         m_textures.emplace_back(pResource);
     }
 
-    void RenderContext::Register(RenderTechnique* pResource) {
+    void RenderContext::Register(IRenderTechnique* pResource) {
         if (!RegisterResource(pResource)) {
             return;
         }
@@ -376,7 +377,7 @@ namespace SR_GRAPH_NS {
         return m_textures;
     }
 
-    const std::vector<RenderTechnique*>& RenderContext::GetRenderTechniques() const noexcept {
+    const std::vector<IRenderTechnique*>& RenderContext::GetRenderTechniques() const noexcept {
         return m_techniques;
     }
 

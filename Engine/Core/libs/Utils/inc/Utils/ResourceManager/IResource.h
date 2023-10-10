@@ -12,6 +12,7 @@
 #include <Utils/Types/Function.h>
 #include <Utils/Types/SharedPtr.h>
 #include <Utils/ResourceManager/ResourceContainer.h>
+#include <Utils/ResourceManager/FileWatcher.h>
 
 namespace SR_UTILS_NS {
     class ResourceManager;

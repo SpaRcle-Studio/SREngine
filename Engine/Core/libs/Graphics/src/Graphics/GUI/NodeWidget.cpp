@@ -11,6 +11,7 @@
 #include <Utils/SRLM/DataTypeManager.h>
 #include <Utils/SRLM/LogicalNodeManager.h>
 #include <Utils/Common/HashManager.h>
+#include <Utils/FileSystem/FileDialog.h>
 
 namespace SR_GRAPH_GUI_NS {
     NodeWidget::NodeWidget(std::string name, SR_MATH_NS::IVector2 size)
@@ -47,6 +48,8 @@ namespace SR_GRAPH_GUI_NS {
 
         m_nodes.clear();
         m_links.clear();
+
+        m_currentFile = SR_UTILS_NS::Path();
     }
 
     void NodeWidget::Draw() {
@@ -202,6 +205,10 @@ namespace SR_GRAPH_GUI_NS {
         }
 
         ImGui::SameLine();
+
+        ImGui::Text(" | %s", m_currentFile.empty() ? " [Non saved]" : m_currentFile.CStr());
+
+        ImGui::SameLine();
         ImGui::PopStyleVar(3);
     }
 
@@ -248,13 +255,25 @@ namespace SR_GRAPH_GUI_NS {
     }
 
     void NodeWidget::TopPanelSaveAt() {
+        auto&& path = SR_UTILS_NS::FileDialog::Instance().SaveDialog(SR_UTILS_NS::ResourceManager::Instance().GetResPath(), { { "SRLM", "srlm" } });
+        if (path.empty()) {
+            return;
+        }
 
+        m_currentFile = path;
+
+        TopPanelSave();
     }
 
     void NodeWidget::TopPanelOpen() {
+        auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(SR_UTILS_NS::ResourceManager::Instance().GetResPath(), { { "SRLM", "srlm" } });
+        if (path.empty()) {
+            return;
+        }
+
         Clear();
 
-        auto&& path = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Engine/RenderTechniques/Sample.xml");
+        m_currentFile = path;
 
         auto&& xmlDocument = SR_XML_NS::Document::Load(path);
         if (!xmlDocument) {
@@ -300,7 +319,10 @@ namespace SR_GRAPH_GUI_NS {
     }
 
     void NodeWidget::TopPanelSave() {
-        auto&& path = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Engine/RenderTechniques/Sample.xml");
+        if (m_currentFile.empty()) {
+            TopPanelSaveAt();
+            return;
+        }
 
         auto&& xmlDocument = SR_XML_NS::Document::New();
 
@@ -330,14 +352,13 @@ namespace SR_GRAPH_GUI_NS {
             xmlLink.AppendAttribute("EP", pLink->GetEnd()->GetIndex());
         }
 
-        xmlDocument.Save(path);
+        xmlDocument.Save(m_currentFile);
     }
 
     void NodeWidget::Execute() {
-        auto&& path = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Engine/RenderTechniques/Sample.xml");
-        if (auto&& pLogicalMachine = SR_SRLM_NS::LogicalMachine::Load(path)) {
+        if (auto&& pLogicalMachine = SR_SRLM_NS::LogicalMachine::Load(m_currentFile)) {
             pLogicalMachine->Init();
-            pLogicalMachine->Update(0.f);
+            pLogicalMachine->UpdateMachine(0.f);
             delete pLogicalMachine;
         }
     }

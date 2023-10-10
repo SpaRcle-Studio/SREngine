@@ -9,52 +9,15 @@
 #include <Utils/Xml.h>
 
 namespace SR_SRLM_NS {
-    LogicalMachine* LogicalMachine::Load(const SR_UTILS_NS::Path& path) {
-        auto&& xmlDocument = SR_XML_NS::Document::Load(path);
-        if (!xmlDocument) {
-            SR_ERROR("LogicalMachine::Load() : failed to load xml!n\n\tPath: " + path.ToStringRef());
-            return nullptr;
-        }
+    LogicalMachine::LogicalMachine()
+        : IResource(SR_COMPILE_TIME_CRC32_TYPE_NAME(LogicalMachine))
+    { }
 
-        auto&& xmlLogicalMachine = xmlDocument.Root().GetNode("LogicalMachine");
-
-        std::map<uint64_t, LogicalNode*> nodes;
-
-        auto&& pLogicalMachine = new LogicalMachine();
-
-        auto&& xmlNodes = xmlLogicalMachine.GetNode("Nodes");
-        for (auto&& xmlNode : xmlNodes.GetNodes()) {
-            auto&& uid = xmlNode.GetAttribute("UID").ToUInt64();
-
-            if (auto&& pLogicalNode = SR_SRLM_NS::LogicalNode::LoadXml(xmlNode)) {
-                pLogicalMachine->AddNode(pLogicalNode);
-                nodes[uid] = pLogicalNode;
-            }
-        }
-
-        auto&& xmlLinks = xmlLogicalMachine.GetNode("Links");
-        for (auto&& xmlLink : xmlLinks.GetNodes()) {
-            auto&& startNodeId = xmlLink.GetAttribute("SN").ToUInt64();
-            auto&& endNodeId = xmlLink.GetAttribute("EN").ToUInt64();
-
-            if (nodes.count(startNodeId) == 0 || nodes.count(endNodeId) == 0) {
-                SRHalt("Node not found!");
-                continue;
-            }
-
-            auto&& startPinIndex = xmlLink.GetAttribute("SP").ToUInt();
-            auto&& endPinIndex = xmlLink.GetAttribute("EP").ToUInt();
-
-            nodes[startNodeId]->AddOutputConnection(nodes[endNodeId], endPinIndex, startPinIndex);
-            nodes[endNodeId]->AddInputConnection(nodes[startNodeId], startPinIndex, endPinIndex);
-        }
-
-        pLogicalMachine->Optimize();
-
-        return pLogicalMachine;
+    LogicalMachine::~LogicalMachine() {
+        Clear();
     }
 
-    void LogicalMachine::Update(float_t dt) {
+    void LogicalMachine::UpdateMachine(float_t dt) {
         for (m_currentNode = 0; m_currentNode < m_active.size(); ++m_currentNode) {
             LogicalNode* pNode = m_active[m_currentNode];
 
@@ -106,6 +69,9 @@ namespace SR_SRLM_NS {
     void LogicalMachine::AddNode(LogicalNode* pNode) {
         m_nodes.emplace_back(pNode);
 
+        pNode->SetMachine(this);
+        pNode->SetNodeIndex(m_nodes.size() - 1);
+
         if (pNode->IsEntryPoint()) {
             auto&& name = pNode->GetName();
 
@@ -116,6 +82,67 @@ namespace SR_SRLM_NS {
                 SR_ERROR("LogicalMachine::AddNode() : entry-point \"" + name + "\" already exists!");
             }
         }
+    }
+
+    bool LogicalMachine::Load() {
+        auto&& path = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat(GetResourcePath());
+        auto&& xmlDocument = SR_XML_NS::Document::Load(path);
+        if (!xmlDocument) {
+            SR_ERROR("LogicalMachine::Load() : failed to load xml!n\n\tPath: " + path.ToStringRef());
+            return false;
+        }
+
+        auto&& xmlLogicalMachine = xmlDocument.Root().GetNode("LogicalMachine");
+
+        std::map<uint64_t, LogicalNode*> nodes;
+
+        auto&& xmlNodes = xmlLogicalMachine.GetNode("Nodes");
+        for (auto&& xmlNode : xmlNodes.GetNodes()) {
+            auto&& uid = xmlNode.GetAttribute("UID").ToUInt64();
+
+            if (auto&& pLogicalNode = SR_SRLM_NS::LogicalNode::LoadXml(xmlNode)) {
+                AddNode(pLogicalNode);
+                nodes[uid] = pLogicalNode;
+            }
+        }
+
+        auto&& xmlLinks = xmlLogicalMachine.GetNode("Links");
+        for (auto&& xmlLink : xmlLinks.GetNodes()) {
+            auto&& startNodeId = xmlLink.GetAttribute("SN").ToUInt64();
+            auto&& endNodeId = xmlLink.GetAttribute("EN").ToUInt64();
+
+            if (nodes.count(startNodeId) == 0 || nodes.count(endNodeId) == 0) {
+                SRHalt("Node not found!");
+                continue;
+            }
+
+            auto&& startPinIndex = xmlLink.GetAttribute("SP").ToUInt();
+            auto&& endPinIndex = xmlLink.GetAttribute("EP").ToUInt();
+
+            nodes[startNodeId]->AddOutputConnection(nodes[endNodeId], endPinIndex, startPinIndex);
+            nodes[endNodeId]->AddInputConnection(nodes[startNodeId], startPinIndex, endPinIndex);
+        }
+
+        Optimize();
+
+        return Super::Load();
+    }
+
+    void LogicalMachine::Clear() {
+        for (auto&& pNode : m_nodes) {
+            delete pNode;
+        }
+
+        m_currentNode = 0;
+
+        m_nodes.clear();
+        m_active.clear();
+        m_entryPoints.clear();
+    }
+
+    bool LogicalMachine::Unload() {
+        Clear();
+        return Super::Unload();
     }
 
     bool LogicalMachine::Execute(LogicalNode*& pNode, float_t dt) {
@@ -169,5 +196,9 @@ namespace SR_SRLM_NS {
         SRHalt("Unresolved behaviour!");
 
         return false;
+    }
+
+    IResource* LogicalMachine::CopyResource(SR_UTILS_NS::IResource* pDestination) const {
+        return nullptr;
     }
 }

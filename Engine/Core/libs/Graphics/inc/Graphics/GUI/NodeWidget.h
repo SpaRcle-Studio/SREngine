@@ -75,6 +75,8 @@ namespace SR_GRAPH_GUI_NS {
 
         std::vector<NodeWidgetProperty> m_properties;
 
+        SR_UTILS_NS::Path m_currentFile;
+
         float_t m_leftPaneWidth = 400.0f;
         float_t m_rightPaneWidth = 800.0f;
 

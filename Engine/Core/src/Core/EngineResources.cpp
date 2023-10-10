@@ -6,6 +6,7 @@
 #include <Core/Utils/GraphicsResourceReloader.h>
 
 #include <Utils/Types/RawMesh.h>
+#include <Utils/SRLM/LogicalMachine.h>
 
 #include <Graphics/Types/Shader.h>
 #include <Graphics/Font/Font.h>
@@ -24,6 +25,8 @@ namespace SR_CORE_NS::Resources {
         resourcesManager.RegisterType<SR_HTYPES_NS::RawMesh>();
         resourcesManager.RegisterType<SR_UTILS_NS::Settings>();
         resourcesManager.RegisterType<SR_UTILS_NS::Prefab>();
+
+        resourcesManager.RegisterType<SR_SRLM_NS::LogicalMachine>();
 
         resourcesManager.RegisterType<SR_GTYPES_NS::Mesh>();
         resourcesManager.RegisterType<SR_GTYPES_NS::Texture>();

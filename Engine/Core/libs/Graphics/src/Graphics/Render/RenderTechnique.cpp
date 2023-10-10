@@ -8,20 +8,7 @@
 #include <Graphics/Pass/GroupPass.h>
 
 namespace SR_GRAPH_NS {
-    RenderTechnique::RenderTechnique()
-        : Super()
-        , m_dirty(true)
-        , m_uboManager(Memory::UBOManager::Instance())
-    { }
-
-    RenderTechnique::~RenderTechnique() {
-        for (auto&& pPass : m_passes) {
-            delete pPass;
-        }
-        m_passes.clear();
-    }
-
-    RenderTechnique *RenderTechnique::Load(const SR_UTILS_NS::Path &rawPath) {
+    RenderTechnique* RenderTechnique::Load(const SR_UTILS_NS::Path &rawPath) {
         SR_TRACY_ZONE;
 
         /// Данный ресурс может иметь копии
@@ -44,84 +31,6 @@ namespace SR_GRAPH_NS {
         return pRenderTechnique;
     }
 
-    bool RenderTechnique::Render() {
-        SR_TRACY_ZONE;
-
-        if (m_dirty || !m_camera || !m_camera->IsActive()) {
-            return false;
-        }
-
-        m_uboManager.SetIdentifier(GetCamera());
-
-        bool hasDrawData = false;
-
-        for (auto&& pass : m_passes) {
-            hasDrawData |= pass->PreRender();
-        }
-
-        for (auto&& pass : m_passes) {
-            hasDrawData |= pass->Render();
-        }
-
-        for (auto&& pass : m_passes) {
-            hasDrawData |= pass->PostRender();
-        }
-
-        return hasDrawData;
-    }
-
-    void RenderTechnique::Prepare() {
-        SR_TRACY_ZONE;
-
-        if ((m_dirty && !Build()) || !m_camera || !m_camera->IsActive()) {
-            return;
-        }
-
-        for (auto&& pass : m_passes) {
-            pass->Prepare();
-        }
-    }
-
-    void RenderTechnique::Update() {
-        SR_TRACY_ZONE;
-
-        if (m_dirty || !m_camera || !m_camera->IsActive()) {
-            return;
-        }
-
-        m_uboManager.SetIdentifier(GetCamera());
-
-        for (auto&& pass : m_passes) {
-            pass->Update();
-        }
-    }
-
-    bool RenderTechnique::Overlay() {
-        SR_TRACY_ZONE;
-
-        if (m_dirty) {
-            return false;
-        }
-
-        m_uboManager.SetIdentifier(GetCamera());
-
-        bool hasDrawData = false;
-
-        for (auto&& pass : m_passes) {
-            hasDrawData |= pass->Overlay();
-        }
-
-        return hasDrawData;
-    }
-
-    void RenderTechnique::OnResize(const SR_MATH_NS::UVector2 &size) {
-        SR_TRACY_ZONE;
-
-        for (auto&& pass : m_passes) {
-            pass->OnResize(size);
-        }
-    }
-
     bool RenderTechnique::Load() {
         SetDirty();
 
@@ -133,22 +42,7 @@ namespace SR_GRAPH_NS {
     bool RenderTechnique::Unload() {
         m_loadState = LoadState::Unloading;
 
-        return IResource::Unload();
-    }
-
-    void RenderTechnique::SetDirty() {
-        m_dirty = true;
-
-        /// Авось что-то изменилось, нужно попробовать еще раз сбилдить
-        m_hasErrors = false;
-
-        if (m_renderScene) {
-            m_renderScene->SetDirty();
-        }
-    }
-
-    void RenderTechnique::SetCamera(RenderTechnique::CameraPtr pCamera) {
-        m_camera = pCamera;
+        return Settings::Unload();
     }
 
     bool RenderTechnique::Build() {
@@ -243,85 +137,8 @@ namespace SR_GRAPH_NS {
     void RenderTechnique::ClearSettings() {
         SR_TRACY_ZONE;
 
-        for (auto&& pPass : m_passes) {
-            if (pPass->IsInit()) {
-                pPass->DeInit();
-            }
-            delete pPass;
-        }
-        m_passes.clear();
+        DeInitPasses();
         m_queues.clear();
         m_name.clear();
-    }
-
-    void RenderTechnique::SetRenderScene(const RenderTechnique::RenderScenePtr& pRScene) {
-        if (m_renderScene.Valid()) {
-            SR_ERROR("RenderTechnique::SetRenderScene() : render scene already exists!");
-            return;
-        }
-
-        m_renderScene = pRScene;
-
-        if (m_renderScene.RecursiveLockIfValid()) {
-            m_context = m_renderScene->GetContext();
-            m_context->Register(this);
-            m_renderScene.Unlock();
-        }
-        else {
-            SR_ERROR("RenderTechnique::SetRenderScene() : render scene are invalid!");
-        }
-    }
-
-    RenderTechnique::RenderScenePtr RenderTechnique::GetRenderScene() const {
-        SRAssert(m_renderScene.Valid());
-        return m_renderScene;
-    }
-
-    void RenderTechnique::FreeVideoMemory() {
-        for (auto&& pPass : m_passes) {
-            if (!pPass->IsInit()) {
-                continue;
-            }
-
-            pPass->DeInit();
-        }
-    }
-
-    bool RenderTechnique::IsEmpty() const {
-        /// Не делаем блокировки, так как взаимодействие
-        /// идет только из графического потока
-        return m_passes.empty();
-    }
-
-    BasePass* RenderTechnique::FindPass(const std::string& name) const {
-        return FindPass(SR_HASH_STR(name));
-    }
-
-    BasePass *RenderTechnique::FindPass(uint64_t hashName) const {
-        for (auto&& pPass : m_passes) {
-            if (auto&& pGroupPass = dynamic_cast<GroupPass*>(pPass)) {
-                if (auto&& pFoundPass = pGroupPass->FindPass(hashName)) {
-                    return pFoundPass;
-                }
-            }
-
-            if (pPass->GetHashName() != hashName) {
-                continue;
-            }
-
-            return pPass;
-        }
-
-        return nullptr;
-    }
-
-    std::string_view RenderTechnique::GetName() const {
-        return m_name;
-    }
-
-    void RenderTechnique::OnSamplesChanged() {
-        for (auto&& pPass : m_passes) {
-            pPass->OnSamplesChanged();
-        }
     }
 }
