@@ -94,8 +94,6 @@ namespace SR_UTILS_NS {
         ResourcesList m_destroyed;
         ResourcesTypes m_resources;
 
-        /// никогда не очищаем и ничего не удаляем
-        ska::flat_hash_map<Hash, std::string> m_hashIds;
         ska::flat_hash_map<Hash, Path> m_hashPaths;
 
         IResourceReloader* m_defaultReloader = nullptr;

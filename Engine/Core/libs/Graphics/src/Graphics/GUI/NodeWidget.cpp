@@ -357,9 +357,10 @@ namespace SR_GRAPH_GUI_NS {
 
     void NodeWidget::Execute() {
         if (auto&& pLogicalMachine = SR_SRLM_NS::LogicalMachine::Load(m_currentFile)) {
+            pLogicalMachine->AddUsePoint();
             pLogicalMachine->Init();
             pLogicalMachine->UpdateMachine(0.f);
-            delete pLogicalMachine;
+            pLogicalMachine->RemoveUsePoint();
         }
     }
 

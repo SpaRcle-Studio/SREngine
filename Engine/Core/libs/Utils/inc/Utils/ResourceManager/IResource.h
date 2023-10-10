@@ -37,7 +37,7 @@ namespace SR_UTILS_NS {
 
     protected:
         explicit IResource(uint64_t hashName);
-        ~IResource() override = default;
+        ~IResource() override;
 
     public:
         SR_NODISCARD virtual Path InitializeResourcePath() const;

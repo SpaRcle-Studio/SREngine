@@ -400,35 +400,25 @@ namespace SR_UTILS_NS {
     const std::string& ResourceManager::GetResourceId(ResourceManager::Hash hashId) const {
         SR_LOCK_GUARD
 
+        static std::string defaultId;
+
         /// пустая строка
         if (hashId == 0) {
-            static SR_UTILS_NS::Path emptyPath;
-            return emptyPath;
-        }
-
-        auto&& pIt = m_hashIds.find(hashId);
-
-        if (pIt == m_hashIds.end()) {
-            SRHalt("ResourceManager::GetResourceId() : id is not registered!");
-            static std::string defaultId;
             return defaultId;
         }
 
-        return pIt->second;
+        if (auto&& id = SR_UTILS_NS::HashManager::Instance().HashToString(hashId); !id.empty()) {
+            return id;
+        }
+
+        SRHalt("ResourceManager::GetResourceId() : id is not registered!");
+
+        return defaultId;
     }
 
     ResourceManager::Hash ResourceManager::RegisterResourceId(const std::string& resourceId) {
         SR_LOCK_GUARD
-
-        const ResourceManager::Hash hash = SR_HASH_STR(resourceId);
-
-        auto&& pIt = m_hashIds.find(hash);
-
-        if (pIt == m_hashIds.end()) {
-            m_hashIds.insert(std::make_pair(hash, resourceId));
-        }
-
-        return hash;
+        return SR_HASH_STR_REGISTER(resourceId);
     }
 
     const Path& ResourceManager::GetResourcePath(ResourceManager::Hash hashPath) const {

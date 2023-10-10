@@ -13,6 +13,11 @@ namespace SR_UTILS_NS {
         , m_lifetime(ResourceManager::ResourceLifeTime)
     { }
 
+    IResource::~IResource() {
+        SRAssert(GetCountUses() == 0);
+        SRAssert(m_watchers.empty());
+    }
+
     bool IResource::Reload() {
         SR_TRACY_ZONE;
         SR_TRACY_TEXT_N("Path", GetResourceId());
