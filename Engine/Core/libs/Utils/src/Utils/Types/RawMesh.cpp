@@ -63,7 +63,7 @@ namespace SR_HTYPES_NS {
 
             if (!pRawMesh->Reload()) {
                 SR_ERROR("RawMesh::Load() : failed to load raw mesh! \n\tPath: " + rawPath.ToString());
-                delete pRawMesh;
+                pRawMesh->DeleteResource();
                 pRawMesh = nullptr;
                 return;
             }

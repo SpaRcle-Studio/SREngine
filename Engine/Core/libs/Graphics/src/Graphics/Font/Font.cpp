@@ -28,7 +28,7 @@ namespace SR_GTYPES_NS {
 
         if (!pResource->Reload()) {
             SR_ERROR("Font::Load() : failed to load font! \n\tPath: " + path.ToString());
-            delete pResource;
+            pResource->DeleteResource();
             return nullptr;
         }
 

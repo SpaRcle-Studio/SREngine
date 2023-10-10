@@ -32,7 +32,7 @@ namespace SR_UTILS_NS {
 
             if (!pResource->Reload()) {
                 SR_ERROR("RawMesh::Load() : failed to load prefab! \n\tPath: " + path.ToString());
-                delete pResource;
+                pResource->DeleteResource();
                 pResource = nullptr;
                 return;
             }

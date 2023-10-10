@@ -42,7 +42,7 @@ namespace SR_AUDIO_NS {
 
         if (!pSound->Reload()) {
             SR_ERROR("Sound::Load() : failed to reload sound!");
-            delete pSound;
+            pSound->DeleteResource();
             return nullptr;
         }
 

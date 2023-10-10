@@ -66,7 +66,7 @@ namespace SR_SRLM_NS {
 
         if (!pResource->Reload()) {
             SR_ERROR("LogicalMachine::Load() : failed to load!");
-            delete pResource;
+            pResource->DeleteResource();
             return nullptr;
         }
 

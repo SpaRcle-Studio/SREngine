@@ -88,7 +88,7 @@ namespace SR_GTYPES_NS {
 
             if (!pTexture->Load()) {
                 SR_ERROR("Texture::Load() : failed to load texture! \n\tPath: " + path.ToString());
-                delete pTexture;
+                pTexture->DeleteResource();
                 pTexture = nullptr;
                 return;
             }
