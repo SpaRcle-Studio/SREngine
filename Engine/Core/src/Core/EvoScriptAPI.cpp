@@ -5,6 +5,8 @@
 #include <Core/EvoScriptAPI.h>
 #include <Core/Engine.h>
 
+#include <EvoScript/Compilation/CMakeCodeGen.h>
+
 #include <Utils/Input/InputSystem.h>
 #include <Utils/Math/Noise.h>
 #include <Utils/ResourceManager/ResourceManager.h>
@@ -72,6 +74,8 @@ namespace Framework {
         if (generator) {
             compiler.SetApiVersion(generator->GetApiVersion());
         }
+
+        EvoScript::CMakeCodeGen::Generate(Helper::ResourceManager::Instance().GetResPath().ToStringRef());
     }
 
     void API::RegisterDebug(EvoScript::AddressTableGen *generator) {
