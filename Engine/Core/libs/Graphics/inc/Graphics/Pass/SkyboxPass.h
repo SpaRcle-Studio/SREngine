@@ -13,8 +13,8 @@ namespace SR_GTYPES_NS {
 
 namespace SR_GRAPH_NS {
     class SkyboxPass : public BasePass {
+        SR_REGISTER_LOGICAL_NODE(SkyboxPass, Skybox Pass, { "Passes" })
     public:
-        explicit SkyboxPass(RenderTechnique* pTechnique, BasePass* pParent);
         ~SkyboxPass() override;
 
     public:

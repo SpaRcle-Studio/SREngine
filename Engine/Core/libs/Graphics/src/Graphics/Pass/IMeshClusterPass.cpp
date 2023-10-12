@@ -8,10 +8,6 @@
 #include <Graphics/Pass/CascadedShadowMapPass.h>
 
 namespace SR_GRAPH_NS {
-    IMeshClusterPass::IMeshClusterPass(RenderTechnique* pTechnique, BasePass* pParent)
-        : Super(pTechnique, pParent)
-    { }
-
     bool IMeshClusterPass::Render() {
         SR_TRACY_ZONE;
 

@@ -19,7 +19,7 @@ namespace SR_GRAPH_GUI_NS {
     Node::Node(SR_SRLM_NS::LogicalNode* pNode)
         : m_logicalNode(pNode)
     {
-        m_name = pNode->GetName();
+        m_name = pNode->GetNodeName();
 
         if (pNode->GetType() == SR_SRLM_NS::LogicalNodeType::Executable) {
             m_type = NodeType::Blueprint;
@@ -335,7 +335,7 @@ namespace SR_GRAPH_GUI_NS {
     }
 
     uint64_t Node::GetHashName() const {
-        return m_logicalNode->GetHashName();
+        return m_logicalNode->GetNodeHashName();
     }
 
     SR_MATH_NS::FVector2 Node::GetPosition() const {

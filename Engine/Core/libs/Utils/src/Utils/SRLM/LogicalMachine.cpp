@@ -73,7 +73,7 @@ namespace SR_SRLM_NS {
         pNode->SetNodeIndex(m_nodes.size() - 1);
 
         if (pNode->IsEntryPoint()) {
-            auto&& name = pNode->GetName();
+            auto&& name = pNode->GetNodeName();
 
             if (m_entryPoints.count(name) == 0) {
                 m_entryPoints.insert(std::make_pair(name, pNode));
@@ -88,7 +88,7 @@ namespace SR_SRLM_NS {
         auto&& path = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat(GetResourcePath());
         auto&& xmlDocument = SR_XML_NS::Document::Load(path);
         if (!xmlDocument) {
-            SR_ERROR("LogicalMachine::Load() : failed to load xml!n\n\tPath: " + path.ToStringRef());
+            SR_ERROR("LogicalMachine::Load() : failed to load xml!\n\tPath: " + path.ToStringRef());
             return false;
         }
 

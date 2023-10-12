@@ -16,8 +16,8 @@ namespace SR_SRLM_NS {
         SR_NODISCARD std::string GetOutputTypeName() const noexcept;
         SR_NODISCARD uint64_t GetInputHashName() const noexcept;
         SR_NODISCARD uint64_t GetOutputHashName() const noexcept;
-        SR_NODISCARD uint64_t GetHashName() const noexcept override;
-        SR_NODISCARD std::string GetName() const noexcept override;
+        SR_NODISCARD uint64_t GetNodeHashName() const noexcept override;
+        SR_NODISCARD std::string GetNodeName() const noexcept override;
 
         void SetInitInputTypeHashName(uint64_t hashName) { m_initInputTypeHashName = hashName; }
         void SetInitOutputTypeHashName(uint64_t hashName) { m_initOutputTypeHashName = hashName; }

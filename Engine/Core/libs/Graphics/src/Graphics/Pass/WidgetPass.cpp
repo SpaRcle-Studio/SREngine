@@ -7,10 +7,6 @@
 namespace SR_GRAPH_NS {
     SR_REGISTER_RENDER_PASS(WidgetPass)
 
-    WidgetPass::WidgetPass(RenderTechnique *pTechnique, BasePass* pParent)
-        : BasePass(pTechnique, pParent)
-    { }
-
     bool WidgetPass::Overlay() {
         auto&& pipeline = GetContext()->GetPipeline();
 

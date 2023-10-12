@@ -13,12 +13,9 @@ namespace SR_GRAPH_NS {
         return renderPassMap;
     }
 
-    BasePass::BasePass(RenderTechnique* pTechnique, BasePass* pParent)
+    BasePass::BasePass()
         : Super()
-        , m_pipeline(pTechnique->GetPipeline())
         , m_uboManager(Memory::UBOManager::Instance())
-        , m_parentPass(pParent)
-        , m_technique(pTechnique)
     { }
 
     bool BasePass::Load(const SR_XML_NS::Node &passNode) {
@@ -52,8 +49,19 @@ namespace SR_GRAPH_NS {
         return m_name;
     }
 
+    void BasePass::SetRenderTechnique(RenderTechnique* pRenderTechnique) {
+        SRAssert(pRenderTechnique);
+        m_technique = pRenderTechnique;
+        m_pipeline = m_technique ? m_technique->GetPipeline() : nullptr;
+    }
+
     void BasePass::SetName(const std::string& name) {
         m_name = name;
         m_hashName = SR_HASH_STR(name);
+    }
+
+    void StartPassNode::InitNode() {
+        IExecutableNode::InitNode();
+        AddOutputData<SR_SRLM_NS::DataTypeFlow>();
     }
 }

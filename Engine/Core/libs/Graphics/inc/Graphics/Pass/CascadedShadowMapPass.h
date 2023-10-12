@@ -9,10 +9,8 @@
 
 namespace SR_GRAPH_NS {
     class CascadedShadowMapPass : public ShaderOverridePass {
+        SR_REGISTER_LOGICAL_NODE(CascadedShadowMapPass, Cascaded Shadow Map Pass, { "Passes" })
         using Super = ShaderOverridePass;
-    public:
-        CascadedShadowMapPass(RenderTechnique* pTechnique, BasePass* pParent);
-
     public:
         bool Init() override;
         void DeInit() override;

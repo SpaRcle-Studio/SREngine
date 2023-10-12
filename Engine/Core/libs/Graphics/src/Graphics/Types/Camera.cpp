@@ -15,7 +15,8 @@ namespace SR_GTYPES_NS {
     SR_REGISTER_COMPONENT(Camera);
 
     Camera::Camera(uint32_t width, uint32_t height)
-        : m_viewportSize(SR_MATH_NS::UVector2(width, height))
+        : Super()
+        , m_viewportSize(SR_MATH_NS::UVector2(width, height))
     {
         if (width != 0 && height != 0) {
             UpdateProjection();
@@ -27,6 +28,9 @@ namespace SR_GTYPES_NS {
         if (m_renderTechnique.pTechnique) {
             if (auto&& pResource = dynamic_cast<SR_UTILS_NS::IResource*>( m_renderTechnique.pTechnique)) {
                 pResource->RemoveUsePoint();
+            }
+            else {
+                SRHalt0();
             }
             m_renderTechnique.pTechnique = nullptr;
         }
@@ -62,15 +66,17 @@ namespace SR_GTYPES_NS {
     SR_HTYPES_NS::Marshal::Ptr Camera::Save(SR_UTILS_NS::SavableSaveData data) const {
         auto&& pMarshal = Component::Save(data);
 
-        pMarshal->Write(m_far);
-        pMarshal->Write(m_near);
-        pMarshal->Write(m_FOV);
-        pMarshal->Write(m_priority);
+        pMarshal->Write<std::string>(m_renderTechnique.path.ToStringRef());
+        pMarshal->Write<float_t>(m_far);
+        pMarshal->Write<float_t>(m_near);
+        pMarshal->Write<float_t>(m_FOV);
+        pMarshal->Write<int32_t>(m_priority);
 
         return pMarshal;
     }
 
-    SR_UTILS_NS::Component * Camera::LoadComponent(SR_HTYPES_NS::Marshal &marshal, const SR_HTYPES_NS::DataStorage *dataStorage) {
+    SR_UTILS_NS::Component* Camera::LoadComponent(SR_HTYPES_NS::Marshal &marshal, const SR_HTYPES_NS::DataStorage *dataStorage) {
+        const auto&& renderTechniquePath = marshal.Read<std::string>();
         const auto&& _far = marshal.Read<float_t>();
         const auto&& _near = marshal.Read<float_t>();
         const auto&& FOV = marshal.Read<float_t>();
@@ -90,6 +96,7 @@ namespace SR_GTYPES_NS {
         pCamera->SetNear(_near);
         pCamera->SetFOV(FOV);
         pCamera->SetPriority(priority);
+        pCamera->SetRenderTechnique(renderTechniquePath);
 
         pCamera->UpdateView();
         pCamera->UpdateProjection();
@@ -98,20 +105,17 @@ namespace SR_GTYPES_NS {
     }
 
     IRenderTechnique* Camera::GetRenderTechnique() {
-        if (m_renderTechnique.pTechnique) {
+        if (m_renderTechnique.pTechnique || m_hasErrors) {
             return m_renderTechnique.pTechnique;
         }
 
-        /// default technique
-        if (m_renderTechnique.path.Empty()) {
-            m_renderTechnique.path = "Engine/Configs/MainRenderTechnique.xml";
-        }
+        auto&& path = GetRenderTechniquePath();
 
-        if (m_renderTechnique.path.GetExtensionView() == "srlm") {
-            m_renderTechnique.pTechnique = ScriptableRenderTechnique::Load(m_renderTechnique.path);
+        if (path.GetExtensionView() == "srlm") {
+            m_renderTechnique.pTechnique = ScriptableRenderTechnique::Load(path);
         }
         else {
-            m_renderTechnique.pTechnique = RenderTechnique::Load(m_renderTechnique.path);
+            m_renderTechnique.pTechnique = RenderTechnique::Load(path);
         }
 
         if (m_renderTechnique.pTechnique) {
@@ -124,6 +128,15 @@ namespace SR_GTYPES_NS {
         }
 
         return m_renderTechnique.pTechnique;
+    }
+
+    const SR_UTILS_NS::Path& Camera::GetRenderTechniquePath() {
+        /// default technique
+        if (m_renderTechnique.path.Empty()) {
+            m_renderTechnique.path = RenderTechnique::DEFAULT_RENDER_TECHNIQUE;
+        }
+
+        return m_renderTechnique.path;
     }
 
     Camera::RenderScenePtr Camera::TryGetRenderScene() const {
@@ -276,6 +289,7 @@ namespace SR_GTYPES_NS {
             m_renderTechnique.pTechnique = nullptr;
         }
 
+        m_hasErrors = false;
         m_renderTechnique.path = path;
     }
 

@@ -30,6 +30,7 @@ namespace SR_GRAPH_NS {
         using Super = Memory::IGraphicsResource;
         using RenderScenePtr = SR_HTYPES_NS::SafePtr<RenderScene>;
         using Context = RenderContext*;
+        SR_INLINE static const std::string DEFAULT_RENDER_TECHNIQUE = "Engine/Configs/MainRenderTechnique.xml";
     public:
         IRenderTechnique();
         ~IRenderTechnique() override;

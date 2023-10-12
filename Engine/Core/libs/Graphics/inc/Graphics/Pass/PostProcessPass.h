@@ -15,6 +15,7 @@ namespace SR_GTYPES_NS {
 
 namespace SR_GRAPH_NS {
     class PostProcessPass : public BasePass {
+        SR_REGISTER_LOGICAL_NODE(PostProcessPass, Post Process Pass, { "Passes" })
         struct Property {
             uint64_t hashId = 0;
             ShaderPropertyVariant data;
@@ -33,7 +34,6 @@ namespace SR_GRAPH_NS {
         using Attachments = std::vector<Attachment>;
         using ShaderPtr = SR_GTYPES_NS::Shader*;
     public:
-        explicit PostProcessPass(RenderTechnique* pTechnique, BasePass* pParent);
         ~PostProcessPass() override;
 
     public:

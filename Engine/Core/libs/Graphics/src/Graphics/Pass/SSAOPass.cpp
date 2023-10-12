@@ -9,11 +9,6 @@
 namespace SR_GRAPH_NS {
     SR_REGISTER_RENDER_PASS(SSAOPass);
 
-    SSAOPass::SSAOPass(RenderTechnique *pTechnique, BasePass *pParent)
-        : PostProcessPass(pTechnique, pParent)
-        , IFramebufferPass()
-    { }
-
     bool SSAOPass::Init() {
         SR_TRACY_ZONE;
 

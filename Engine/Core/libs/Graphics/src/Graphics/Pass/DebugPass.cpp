@@ -11,10 +11,6 @@
 namespace SR_GRAPH_NS {
     SR_REGISTER_RENDER_PASS(DebugPass)
 
-    DebugPass::DebugPass(RenderTechnique *pTechnique, BasePass* pParent)
-        : Super(pTechnique, pParent)
-    { }
-
     MeshClusterTypeFlag DebugPass::GetClusterType() const noexcept {
         return static_cast<MeshClusterTypeFlag>(MeshClusterType::Debug);
     }

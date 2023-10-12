@@ -11,7 +11,6 @@ namespace SR_GRAPH_NS {
     class VarianceShadowMapPass : public CascadedShadowMapPass {
         using Super = CascadedShadowMapPass;
     public:
-        VarianceShadowMapPass(RenderTechnique* pTechnique, BasePass* pParent);
 
     };
 }

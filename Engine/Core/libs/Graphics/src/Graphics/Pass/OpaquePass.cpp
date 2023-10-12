@@ -14,10 +14,6 @@
 namespace SR_GRAPH_NS {
     SR_REGISTER_RENDER_PASS(OpaquePass)
 
-    OpaquePass::OpaquePass(RenderTechnique *pTechnique, BasePass* pParent)
-        : Super(pTechnique, pParent)
-    { }
-
     void OpaquePass::UseSharedUniforms(SR_GTYPES_NS::Shader *pShader) {
         if (m_camera) {
             pShader->SetMat4(SHADER_VIEW_MATRIX, m_camera->GetViewTranslateRef());

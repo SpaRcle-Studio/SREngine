@@ -9,10 +9,7 @@
 
 namespace SR_GRAPH_NS {
     class WidgetPass : public BasePass {
-    public:
-        explicit WidgetPass(RenderTechnique* pTechnique, BasePass* pParent);
-        ~WidgetPass() override = default;
-
+        SR_REGISTER_LOGICAL_NODE(WidgetPass, Widget Pass, { "Passes" })
     public:
         bool Overlay() override;
 

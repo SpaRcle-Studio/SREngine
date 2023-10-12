@@ -57,6 +57,8 @@ namespace SR_SRLM_NS {
     public:
         SR_NODISCARD static LogicalNode* LoadXml(const SR_XML_NS::Node& xmlNode);
 
+        void ClearLogicalNode();
+
         void SetMachine(LogicalMachine* pMachine) { m_machine = pMachine; }
         void SetNodeIndex(uint32_t index) { m_nodeIndex = index; }
 
@@ -68,8 +70,9 @@ namespace SR_SRLM_NS {
         SR_NODISCARD virtual const DataType* GetOutput(uint32_t index);
         SR_NODISCARD Pins& GetInputs() { return m_inputs; }
         SR_NODISCARD Pins& GetOutputs() { return m_outputs; }
-        SR_NODISCARD virtual uint64_t GetHashName() const noexcept = 0;
-        SR_NODISCARD virtual std::string GetName() const noexcept = 0;
+        SR_NODISCARD LogicalNode* GetBaseLogicalNode() noexcept { return this; }
+        SR_NODISCARD virtual uint64_t GetNodeHashName() const noexcept = 0;
+        SR_NODISCARD virtual std::string GetNodeName() const noexcept = 0;
 
         virtual void Reset();
         virtual void MarkDirty();

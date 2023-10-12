@@ -18,6 +18,7 @@ namespace SR_SRLM_NS {
     public:
         SR_NODISCARD DataType* CreateByName(Hash hashName);
         SR_NODISCARD DataType* CreateByName(const std::string& name);
+        SR_NODISCARD const DataTypeStruct* GetStruct(Hash hashName) const;
         SR_NODISCARD const Structs& GetStructs() const { return m_structs; }
 
     private:

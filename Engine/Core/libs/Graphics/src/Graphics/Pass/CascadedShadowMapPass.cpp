@@ -7,10 +7,6 @@
 namespace SR_GRAPH_NS {
     SR_REGISTER_RENDER_PASS(CascadedShadowMapPass);
 
-    CascadedShadowMapPass::CascadedShadowMapPass(RenderTechnique* pTechnique, BasePass* pParent)
-        : Super(pTechnique, pParent)
-    { }
-
     bool CascadedShadowMapPass::Init() {
         return Super::Init();
     }

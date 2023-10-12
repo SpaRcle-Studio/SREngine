@@ -16,8 +16,9 @@ namespace SR_GRAPH_NS {
     public:
         SR_NODISCARD static ScriptableRenderTechnique::Ptr Load(const SR_UTILS_NS::Path& path);
 
-    private:
+        void UpdateMachine(float_t dt) override;
 
+    private:
 
     };
 }

@@ -12,6 +12,10 @@
 #include <Utils/Types/Time.h>
 #include <Utils/Xml.h>
 #include <Utils/ResourceManager/ResourceContainer.h>
+#include <Utils/SRLM/LogicalNode.h>
+#include <Utils/SRLM/LogicalNodeManager.h>
+#include <Utils/SRLM/DataType.h>
+#include <Utils/SRLM/Utils.h>
 
 #include <Graphics/Memory/UBOManager.h>
 
@@ -29,10 +33,10 @@ namespace SR_GRAPH_NS {
     class Pipeline;
     class BasePass;
 
-    typedef std::map<std::string, SR_HTYPES_NS::Function<BasePass*(RenderTechnique*, const SR_XML_NS::Node&, BasePass*)>> RenderPassMap;
+    typedef std::map<std::string, SR_HTYPES_NS::Function<BasePass*(const SR_XML_NS::Node&)>> RenderPassMap;
     RenderPassMap& GetRenderPassMap();
 
-    class BasePass : public SR_UTILS_NS::ResourceContainer {
+    class BasePass : public SR_UTILS_NS::ResourceContainer, public SR_SRLM_NS::IExecutableNode {
     public:
         using Super = SR_UTILS_NS::ResourceContainer;
         using CameraPtr = Types::Camera*;
@@ -40,7 +44,7 @@ namespace SR_GRAPH_NS {
         using PipelinePtr = SR_HTYPES_NS::SharedPtr<Pipeline>;
         using RenderScenePtr = SR_HTYPES_NS::SafePtr<RenderScene>;
     public:
-        explicit BasePass(RenderTechnique* pTechnique, BasePass* pParent);
+        BasePass();
         ~BasePass() override = default;
 
     public:
@@ -73,6 +77,7 @@ namespace SR_GRAPH_NS {
 
         SR_NODISCARD virtual std::vector<SR_GTYPES_NS::Framebuffer*> GetFrameBuffers() const { return { }; }
 
+        virtual void SetRenderTechnique(RenderTechnique* pRenderTechnique);
         void SetName(const std::string& name);
 
         SR_NODISCARD RenderScenePtr GetRenderScene() const;
@@ -82,14 +87,12 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD bool IsInit() const { return m_isInit; }
         SR_NODISCARD std::string_view GetName() const;
         SR_NODISCARD uint64_t GetHashName() const noexcept { return m_hashName; }
-        SR_NODISCARD BasePass* GetParentPass() const { return m_parentPass; }
 
     protected:
         CameraPtr m_camera = nullptr;
         Context m_context = nullptr;
         PipelinePtr m_pipeline = nullptr;
         Memory::UBOManager& m_uboManager;
-        BasePass* m_parentPass = nullptr;
 
     private:
         std::string m_name;
@@ -99,14 +102,21 @@ namespace SR_GRAPH_NS {
         bool m_isInit = false;
 
     };
+
+    class StartPassNode : public SR_SRLM_NS::IExecutableNode {
+        SR_REGISTER_LOGICAL_NODE(StartPassNode, Start Pass, { "Passes" })
+    public:
+        void InitNode() override;
+
+    };
 }
 
 #define SR_REGISTER_RENDER_PASS(name)                                                                                   \
     static bool SR_CODEGEN_##name##_render_pass_register_result =                                                       \
         SR_GRAPH_NS::GetRenderPassMap().insert(std::make_pair(                                                          \
             std::move(#name),                                                                                           \
-            [](RenderTechnique* pTechnique, const SR_XML_NS::Node& node, BasePass* pParent) -> SR_GRAPH_NS::BasePass* { \
-                BasePass* pPass = new name(pTechnique, pParent);                                                        \
+            [](const SR_XML_NS::Node& node) -> SR_GRAPH_NS::BasePass* {                                                 \
+                BasePass* pPass = new name();                                                                           \
                 if (!pPass->Load(node)) {                                                                               \
                     delete pPass;                                                                                       \
                     pPass = nullptr;                                                                                    \
@@ -115,9 +125,9 @@ namespace SR_GRAPH_NS {
             }                                                                                                           \
         )).second;                                                                                                      \
 
-#define SR_ALLOCATE_RENDER_PASS(pRenderTechnique, passNode, pParent)                                                    \
+#define SR_ALLOCATE_RENDER_PASS(passNode)                                                                               \
     (SR_GRAPH_NS::GetRenderPassMap().count(passNode.Name()) == 0 ? nullptr :                                            \
-        SR_GRAPH_NS::GetRenderPassMap().at(passNode.Name())(pRenderTechnique, passNode, pParent))                       \
+        SR_GRAPH_NS::GetRenderPassMap().at(passNode.Name())(passNode))                                                  \
 
 
 #endif //SRENGINE_BASEPASS_H

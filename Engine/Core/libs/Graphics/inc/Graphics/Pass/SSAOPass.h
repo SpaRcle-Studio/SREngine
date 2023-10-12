@@ -14,10 +14,8 @@ namespace SR_GTYPES_NS {
 
 namespace SR_GRAPH_NS {
     class SSAOPass : public PostProcessPass, public IFramebufferPass {
+        SR_REGISTER_LOGICAL_NODE(SSAOPass, SSAO Pass, { "Passes" })
         using SSAOKernel = std::vector<SR_MATH_NS::FVector4>;
-    public:
-        SSAOPass(RenderTechnique* pTechnique, BasePass* pParent);
-
     public:
         bool Init() override;
         void DeInit() override;

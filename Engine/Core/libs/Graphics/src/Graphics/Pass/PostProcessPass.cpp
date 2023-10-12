@@ -9,10 +9,6 @@
 namespace SR_GRAPH_NS {
     SR_REGISTER_RENDER_PASS(PostProcessPass)
 
-    PostProcessPass::PostProcessPass(RenderTechnique* pTechnique, BasePass* pParent)
-        : Super(pTechnique, pParent)
-    { }
-
     PostProcessPass::~PostProcessPass() {
         SetShader(nullptr);
     }

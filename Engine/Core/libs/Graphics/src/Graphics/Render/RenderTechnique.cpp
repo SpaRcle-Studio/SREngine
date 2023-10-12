@@ -118,7 +118,8 @@ namespace SR_GRAPH_NS {
                 continue;
             }
 
-            if (auto&& pPass = SR_ALLOCATE_RENDER_PASS(this, passNode, nullptr)) {
+            if (auto&& pPass = SR_ALLOCATE_RENDER_PASS(passNode)) {
+                pPass->SetRenderTechnique(this);
                 m_passes.emplace_back(pPass);
             }
             else {

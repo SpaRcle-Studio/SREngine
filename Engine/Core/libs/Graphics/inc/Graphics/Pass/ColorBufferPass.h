@@ -9,13 +9,12 @@
 
 namespace SR_GRAPH_NS {
     class ColorBufferPass : public ShaderOverridePass {
+        SR_REGISTER_LOGICAL_NODE(ColorBufferPass, Color Buffer Pass, { "Passes" })
         using ShaderPtr = SR_GTYPES_NS::Shader*;
         using FramebufferPtr = SR_GTYPES_NS::Framebuffer*;
         using MeshPtr = SR_GTYPES_NS::Mesh*;
         using Super = ShaderOverridePass;
     public:
-        explicit ColorBufferPass(RenderTechnique* pTechnique, BasePass* pParent);
-
     public:
         void Update() override;
 

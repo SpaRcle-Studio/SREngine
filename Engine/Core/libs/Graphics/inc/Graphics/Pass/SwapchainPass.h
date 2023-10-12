@@ -10,14 +10,12 @@
 
 namespace SR_GRAPH_NS {
     class SwapchainPass : public GroupPass {
-    public:
-        explicit SwapchainPass(RenderTechnique* pTechnique, BasePass* pParent);
-        ~SwapchainPass() override = default;
-
+        SR_REGISTER_LOGICAL_NODE(SwapchainPass, Swapchain Pass, { "Passes" })
     public:
         bool Load(const SR_XML_NS::Node& passNode) override;
         bool Render() override;
         void Update() override;
+        void InitNode() override;
 
     private:
         float_t m_depth = 1.f;

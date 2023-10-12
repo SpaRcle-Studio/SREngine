@@ -30,10 +30,6 @@ namespace SR_GRAPH_NS {
         using MeshPtr = SR_GTYPES_NS::Mesh*;
         using FramebufferPtr = SR_GTYPES_NS::Framebuffer*;
     public:
-        explicit IMeshClusterPass(RenderTechnique* pTechnique, BasePass* pParent);
-        ~IMeshClusterPass() override = default;
-
-    public:
         bool Load(const SR_XML_NS::Node& passNode) override;
 
         bool Init() override;

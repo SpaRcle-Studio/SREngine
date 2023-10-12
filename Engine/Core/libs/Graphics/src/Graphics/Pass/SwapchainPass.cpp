@@ -8,10 +8,6 @@
 namespace SR_GRAPH_NS {
     SR_REGISTER_RENDER_PASS(SwapchainPass)
 
-    SwapchainPass::SwapchainPass(RenderTechnique *pTechnique, BasePass* pParent)
-        : GroupPass(pTechnique, pParent)
-    { }
-
     bool SwapchainPass::Load(const SR_XML_NS::Node &passNode) {
         m_depth = passNode.TryGetAttribute("Depth").ToFloat(1.f);
 
@@ -55,5 +51,16 @@ namespace SR_GRAPH_NS {
 
     void SwapchainPass::Update() {
         GroupPass::Update();
+    }
+
+    void SwapchainPass::InitNode() {
+        IExecutableNode::InitNode();
+
+        AddInputData<SR_SRLM_NS::DataTypeFlow>();
+
+        AddInputData<SR_SRLM_NS::DataTypeFloat>(SR_HASH_STR_REGISTER("Depth"));
+        AddInputData<SR_SRLM_NS::DataTypeStruct>(SR_HASH_STR_REGISTER("FVector4"));
+
+        AddOutputData<SR_SRLM_NS::DataTypeFlow>();
     }
 }

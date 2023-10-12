@@ -155,8 +155,8 @@ namespace SR_SRLM_NS {
             case DataTypeClass::Struct:
                 if (auto&& pStruct = dynamic_cast<DataTypeStruct*>(this)) {
                     xmlNode.AppendAttribute("Struct", pStruct->GetStructName());
-                    auto&& xmlVariable = xmlNode.AppendNode("Var");
                     for (auto&& [hashName, pVar] : pStruct->GetVariables()) {
+                        auto&& xmlVariable = xmlNode.AppendNode("Var");
                         xmlVariable.AppendAttribute("VarName", hashName);
                         pVar->SaveXml(xmlVariable);
                     }
@@ -165,12 +165,12 @@ namespace SR_SRLM_NS {
                     SRHalt("Bad cast!");
                 }
                 break;
-            /// case SR_SRLM_NS::DataTypeClass::Array:
-            ///     break;
-            /// case SR_SRLM_NS::DataTypeClass::Map:
-            ///     break;
-            /// case SR_SRLM_NS::DataTypeClass::Set:
-            ///     break;
+            case SR_SRLM_NS::DataTypeClass::Array:
+                break;
+            case SR_SRLM_NS::DataTypeClass::Map:
+                break;
+            case SR_SRLM_NS::DataTypeClass::Set:
+                break;
             case DataTypeClass::Bool: xmlNode.AppendAttribute(*GetBool()); break;
             case DataTypeClass::Float: xmlNode.AppendAttribute(*GetFloat()); break;
             case DataTypeClass::Double: xmlNode.AppendAttribute(*GetDouble()); break;
@@ -184,7 +184,7 @@ namespace SR_SRLM_NS {
             case DataTypeClass::UInt32: xmlNode.AppendAttribute(*GetUInt32()); break;
             case DataTypeClass::UInt64: xmlNode.AppendAttribute(*GetUInt64()); break;
             default:
-                SRHalt("Unknown type!");
+                SRHalt("Unknown type! Type: " + SR_UTILS_NS::EnumReflector::ToString(GetClass()));
                 break;
         }
     }
@@ -244,12 +244,12 @@ namespace SR_SRLM_NS {
                 }
                 break;
             }
-            /// case DataTypeClass::Array:
-            ///     break;
-            /// case DataTypeClass::Map:
-            ///     break;
-            /// case DataTypeClass::Set:
-            ///     break;
+             case DataTypeClass::Array:
+                 break; /// TODO
+             case DataTypeClass::Map:
+                 break; /// TODO
+             case DataTypeClass::Set:
+                 break; /// TODO
             case DataTypeClass::Bool: pDataType->SetCustomValue(xmlNode.GetAttribute<bool>()); break;
             case DataTypeClass::Float: pDataType->SetCustomValue(xmlNode.GetAttribute<float_t>()); break;
             case DataTypeClass::Double: pDataType->SetCustomValue(xmlNode.GetAttribute<double_t>()); break;
@@ -263,7 +263,7 @@ namespace SR_SRLM_NS {
             case DataTypeClass::UInt32: pDataType->SetCustomValue(xmlNode.GetAttribute<uint32_t>()); break;
             case DataTypeClass::UInt64: pDataType->SetCustomValue(xmlNode.GetAttribute<uint64_t>()); break;
             default:
-                SRHalt("Unknown type!");
+                SRHalt("Unknown type! Type: " + SR_UTILS_NS::EnumReflector::ToString(dataTypeClass));
                 break;
         }
 

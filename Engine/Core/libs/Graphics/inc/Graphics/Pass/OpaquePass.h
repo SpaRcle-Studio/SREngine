@@ -9,11 +9,8 @@
 
 namespace SR_GRAPH_NS {
     class OpaquePass : public IMeshClusterPass {
+        SR_REGISTER_LOGICAL_NODE(OpaquePass, Opaque Pass, { "Passes" })
         using Super = IMeshClusterPass;
-    public:
-        explicit OpaquePass(RenderTechnique* pTechnique, BasePass* pParent);
-        ~OpaquePass() override = default;
-
     public:
         SR_NODISCARD MeshClusterTypeFlag GetClusterType() const noexcept override;
 

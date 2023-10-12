@@ -19,9 +19,9 @@ namespace SR_GRAPH_NS {
     class MeshCluster;
 
     class ShaderOverridePass : public IMeshClusterPass, public IFramebufferPass {
+        SR_REGISTER_LOGICAL_NODE(ShaderOverridePass, Shader Override Pass, { "Passes" })
         using Super = IMeshClusterPass;
     public:
-        explicit ShaderOverridePass(RenderTechnique* pTechnique, BasePass* pParent);
         ~ShaderOverridePass() override;
 
     public:

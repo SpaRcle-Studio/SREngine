@@ -18,6 +18,34 @@ namespace SR_SRLM_NS {
 
     };
 
+    class CreateStructNode : public IComputeNode {
+        SR_REGISTER_LOGICAL_NODE(CreateStructNode, Create Struct, { })
+        using Super = IComputeNode;
+    public:
+        void Execute(float_t dt) override;
+        void InitNode() override;
+
+        void SetStructHashName(uint64_t hash) { m_structHashName = hash; }
+
+    private:
+        uint64_t m_structHashName = SR_UINT64_MAX;
+
+    };
+
+    class BreakStructNode : public IComputeNode {
+        SR_REGISTER_LOGICAL_NODE(BreakStructNode, Break Struct, { })
+        using Super = IComputeNode;
+    public:
+        void Execute(float_t dt) override;
+        void InitNode() override;
+
+        void SetStructHashName(uint64_t hash) { m_structHashName = hash; }
+
+    private:
+        uint64_t m_structHashName = SR_UINT64_MAX;
+
+    };
+
     class DebugPrintNode : public IExecutableNode {
         SR_REGISTER_LOGICAL_NODE(DebugPrintNode, Debug Print, { "Base" })
     public:
@@ -36,8 +64,8 @@ namespace SR_SRLM_NS {
 
     class ConstructorNode : public IComputeNode {
     public:
-        SR_NODISCARD uint64_t GetHashName() const noexcept override;
-        SR_NODISCARD std::string GetName() const noexcept override;
+        SR_NODISCARD uint64_t GetNodeHashName() const noexcept override;
+        SR_NODISCARD std::string GetNodeName() const noexcept override;
         void Execute(float_t dt) override;
         void InitNode() override;
         void SetInitTypeHashName(uint64_t hashName) { m_initTypeHashName = hashName; }

@@ -5,10 +5,6 @@
 #include <Graphics/Pass/GroupPass.h>
 
 namespace SR_GRAPH_NS {
-    GroupPass::GroupPass(RenderTechnique *pTechnique, BasePass* pParent)
-        : BasePass(pTechnique, pParent)
-    { }
-
     GroupPass::~GroupPass() {
         for (auto&& pPass : m_passes) {
             delete pPass;
@@ -20,7 +16,7 @@ namespace SR_GRAPH_NS {
         SR_TRACY_ZONE;
 
         for (auto&& subPassNode : passNode.TryGetNodes()) {
-            if (auto&& pPass = SR_ALLOCATE_RENDER_PASS(GetTechnique(), subPassNode, this)) {
+            if (auto&& pPass = SR_ALLOCATE_RENDER_PASS(subPassNode)) {
                 m_passes.emplace_back(pPass);
             }
             else {
@@ -165,5 +161,12 @@ namespace SR_GRAPH_NS {
             pPass->OnSamplesChanged();
         }
         BasePass::OnSamplesChanged();
+    }
+
+    void GroupPass::SetRenderTechnique(RenderTechnique* pRenderTechnique) {
+        for (auto&& pPass : m_passes) {
+            pPass->SetRenderTechnique(pRenderTechnique);
+        }
+        BasePass::SetRenderTechnique(pRenderTechnique);
     }
 }

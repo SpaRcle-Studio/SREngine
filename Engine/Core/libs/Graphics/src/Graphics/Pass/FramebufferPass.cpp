@@ -9,11 +9,6 @@
 namespace SR_GRAPH_NS {
     SR_REGISTER_RENDER_PASS(FramebufferPass)
 
-    FramebufferPass::FramebufferPass(RenderTechnique *pTechnique, BasePass* pParent)
-        : GroupPass(pTechnique, pParent)
-        , IFramebufferPass()
-    { }
-
     bool FramebufferPass::Load(const SR_XML_NS::Node &passNode) {
         LoadFramebufferSettings(passNode.TryGetNode("FramebufferSettings"));
 

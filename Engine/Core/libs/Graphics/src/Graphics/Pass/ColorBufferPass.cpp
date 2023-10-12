@@ -8,10 +8,6 @@
 namespace SR_GRAPH_NS {
     SR_REGISTER_RENDER_PASS(ColorBufferPass)
 
-    ColorBufferPass::ColorBufferPass(RenderTechnique *pTechnique, BasePass* pParent)
-        : Super(pTechnique, pParent)
-    { }
-
     void ColorBufferPass::Update() {
         m_colorId = 0;
         Super::Update();

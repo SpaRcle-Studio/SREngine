@@ -43,9 +43,7 @@
 #include <Audio/Types/AudioSource.h>
 #include <Audio/Types/AudioListener.h>
 
-#include <imgui_internal.h>
 namespace SR_CORE_NS::GUI {
-
     void ComponentDrawer::DrawComponent(SR_PTYPES_NS::Rigidbody3D*& pComponent, EditorGUI* context, int32_t index) {
         auto pCopy = dynamic_cast<SR_PTYPES_NS::Rigidbody*>(pComponent);
         DrawComponent(pCopy, context, index);
@@ -282,25 +280,30 @@ namespace SR_CORE_NS::GUI {
         }
     }
 
-    void ComponentDrawer::DrawComponent(SR_GRAPH_NS::Types::Camera*& camera, EditorGUI* context, int32_t index) {
-        float_t cameraFar  = camera->GetFar();
-        if (ImGui::InputFloat("Far", &cameraFar, 5) && cameraFar >= 0) {
-            camera->SetFar(cameraFar);
+    void ComponentDrawer::DrawComponent(SR_GRAPH_NS::Types::Camera*& pComponent, EditorGUI* pContext, int32_t index) {
+        std::string renderTechnique = pComponent->GetRenderTechniquePath().ToStringRef();
+        if (ImGui::InputText(SR_FORMAT_C("Render technique##%p%i", (void*)pContext, index), &renderTechnique)) {
+            pComponent->SetRenderTechnique(renderTechnique);
         }
 
-        float_t cameraNear = camera->GetNear();
-        if (ImGui::InputFloat("Near", &cameraNear, 0.01) && cameraNear >= 0) {
-            camera->SetNear(cameraNear);
+        float_t cameraFar = pComponent->GetFar();
+        if (ImGui::InputFloat(SR_FORMAT_C("Far##%p%i", (void*)pContext, index), &cameraFar, 5) && cameraFar >= 0) {
+            pComponent->SetFar(cameraFar);
         }
 
-        float_t cameraFOV = camera->GetFOV();
-        if (ImGui::InputFloat("FOV", &cameraFOV, 0.5) && cameraFOV >= 0) {
-            camera->SetFOV(cameraFOV);
+        float_t cameraNear = pComponent->GetNear();
+        if (ImGui::InputFloat(SR_FORMAT_C("Near##%p%i", (void*)pContext, index), &cameraNear, 0.01) && cameraNear >= 0) {
+            pComponent->SetNear(cameraNear);
         }
 
-        int32_t priority = camera->GetPriority();
-        if (ImGui::InputInt("Priority", &priority, 1)) {
-            camera->SetPriority(priority);
+        float_t cameraFOV = pComponent->GetFOV();
+        if (ImGui::InputFloat(SR_FORMAT_C("FOV##%p%i", (void*)pContext, index), &cameraFOV, 0.5) && cameraFOV >= 0) {
+            pComponent->SetFOV(cameraFOV);
+        }
+
+        int32_t priority = pComponent->GetPriority();
+        if (ImGui::InputInt(SR_FORMAT_C("Priority##%p%i", (void*)pContext, index), &priority, 1)) {
+            pComponent->SetPriority(priority);
         }
     }
 

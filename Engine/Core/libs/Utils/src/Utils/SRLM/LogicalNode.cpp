@@ -6,13 +6,7 @@
 
 namespace SR_SRLM_NS {
     LogicalNode::~LogicalNode() {
-        for (auto&& pin : m_inputs) {
-            delete pin.pData;
-        }
-
-        for (auto&& pin : m_outputs) {
-            delete pin.pData;
-        }
+        ClearLogicalNode();
     }
 
     LogicalNode* LogicalNode::LoadXml(const SR_XML_NS::Node& xmlNode) {
@@ -48,7 +42,7 @@ namespace SR_SRLM_NS {
     }
 
     void LogicalNode::SaveXml(SR_XML_NS::Node& xmlNode) {
-        xmlNode.AppendAttribute("Name", GetHashName());
+        xmlNode.AppendAttribute("Name", GetNodeHashName());
 
         for (auto&& pin : GetInputs()) {
             auto&& xmlPinNode = xmlNode.AppendNode("Input");
@@ -192,6 +186,10 @@ namespace SR_SRLM_NS {
         NodeConnect connect;
         connect.pinIndex = nodePinIndex;
         connect.pNode = pNode;
+        if (m_inputs.size() <= pinIndex) {
+            SRHalt("Out of range!");
+            return;
+        }
         m_inputs[pinIndex].connections.emplace_back(connect);
     }
 
@@ -199,7 +197,23 @@ namespace SR_SRLM_NS {
         NodeConnect connect;
         connect.pinIndex = nodePinIndex;
         connect.pNode = pNode;
+        if (m_outputs.size() <= pinIndex) {
+            SRHalt("Out of range!");
+            return;
+        }
         m_outputs[pinIndex].connections.emplace_back(connect);
+    }
+
+    void LogicalNode::ClearLogicalNode() {
+        for (auto&& pin : m_inputs) {
+            delete pin.pData;
+        }
+        m_inputs.clear();
+
+        for (auto&& pin : m_outputs) {
+            delete pin.pData;
+        }
+        m_outputs.clear();
     }
 
     /// ----------------------------------------------------------------------------------------------------------------

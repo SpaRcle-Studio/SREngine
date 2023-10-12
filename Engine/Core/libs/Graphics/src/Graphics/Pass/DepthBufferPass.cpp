@@ -7,10 +7,6 @@
 namespace SR_GRAPH_NS {
     SR_REGISTER_RENDER_PASS(DepthBufferPass)
 
-    DepthBufferPass::DepthBufferPass(RenderTechnique *pTechnique, BasePass *pParent)
-        : Super(pTechnique, pParent)
-    { }
-
     void DepthBufferPass::UseUniforms(DepthBufferPass::ShaderPtr pShader, DepthBufferPass::MeshPtr pMesh) {
         pMesh->UseModelMatrix();
     }

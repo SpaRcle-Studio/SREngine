@@ -16,14 +16,12 @@ namespace SR_SRLM_NS {
     DataType* DataTypeManager::CreateByName(uint64_t hashName) {
         SR_LOCK_GUARD;
 
-        SRAssert(hashName != DataTypeStruct::HASH_NAME);
+        if (auto&& pIt = m_structs.find(hashName); pIt != m_structs.end()) {
+            return pIt->second->Copy();
+        }
 
         if (auto&& pData = DataTypeAllocator::Instance().Allocate(hashName)) {
             return pData;
-        }
-
-        if (auto&& pIt = m_structs.find(hashName); pIt != m_structs.end()) {
-            return pIt->second->Copy();
         }
 
         if (auto&& pReflector = SR_UTILS_NS::EnumReflectorManager::Instance().GetReflector(hashName)) {
@@ -102,5 +100,15 @@ namespace SR_SRLM_NS {
         m_watcher->SetCallBack([this](FileWatcher* pWatcher) {
             ReloadSettings();
         });
+    }
+
+    const DataTypeStruct* DataTypeManager::GetStruct(DataTypeManager::Hash hashName) const {
+        SR_LOCK_GUARD;
+
+        if (auto&& pIt = m_structs.find(hashName); pIt != m_structs.end()) {
+            return pIt->second;
+        }
+
+        return nullptr;
     }
 }

@@ -256,6 +256,26 @@ namespace SR_CORE_NS {
             return true;
         });
 
+        static const auto CAMERA_HASH_NAME = SR_HASH_STR("Camera");
+        SR_UTILS_NS::Migration::Instance().RegisterMigrator(CAMERA_HASH_NAME, 1001, 1002, [](SR_HTYPES_NS::Marshal& marshal) -> bool {
+            SR_HTYPES_NS::Marshal migrated;
+
+            uint64_t position = marshal.GetPosition();
+
+            migrated.Stream::Write(marshal.Stream::View(), marshal.GetPosition());
+            /// --------------------------------------------------------------------------------------------------------
+
+            migrated.Write<std::string>(std::string()); /// render technique path
+
+            /// -------------------- меня наняли дублировать длинные строки потому что я люблю большие длинные прямые комментарии, состоящие исключительно из тире.
+            migrated.Stream::Write(marshal.Stream::View() + marshal.GetPosition(), marshal.Size() - marshal.GetPosition());
+
+            marshal.SetData(migrated.Stream::View(), migrated.Size());
+            marshal.SetPosition(position);
+
+            return true;
+        });
+
         return true;
     }
 }

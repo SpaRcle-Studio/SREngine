@@ -18,7 +18,7 @@ namespace SR_GRAPH_NS {
 
 namespace SR_GTYPES_NS {
     class Camera : public SR_UTILS_NS::Component {
-        SR_ENTITY_SET_VERSION(1001);
+        SR_ENTITY_SET_VERSION(1002);
         SR_INITIALIZE_COMPONENT(Camera);
         struct RenderTechniqueInfo {
             SR_UTILS_NS::Path path;
@@ -41,6 +41,8 @@ namespace SR_GTYPES_NS {
         void Update(float_t dt) override;
 
         SR_NODISCARD virtual bool IsEditorCamera() const noexcept { return false; }
+
+        SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save(SR_UTILS_NS::SavableSaveData data) const override;
 
         SR_NODISCARD Component* CopyComponent() const override;
 
@@ -70,8 +72,7 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD IRenderTechnique* GetRenderTechnique();
         SR_NODISCARD RenderScenePtr GetRenderScene() const;
         SR_NODISCARD RenderScenePtr TryGetRenderScene() const;
-
-        SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save(SR_UTILS_NS::SavableSaveData data) const override;
+        SR_NODISCARD const SR_UTILS_NS::Path& GetRenderTechniquePath();
 
         void SetFar(float_t value);
         void SetNear(float_t value);
@@ -94,10 +95,12 @@ namespace SR_GTYPES_NS {
          * Выбирается та камера, что ближе к нулю */
         int32_t m_priority = 0;
 
-        float_t m_far      = 750.f;
-        float_t m_near     = 0.01f;
-        float_t m_aspect   = 1.f;
-        float_t m_FOV      = 90.f;
+        float_t m_far = 750.f;
+        float_t m_near = 0.01f;
+        float_t m_aspect = 1.f;
+        float_t m_FOV = 90.f;
+
+        bool m_hasErrors = false;
 
         SR_MATH_NS::Matrix4x4 m_projection;
         SR_MATH_NS::Matrix4x4 m_viewTranslateMat;

@@ -8,4 +8,8 @@ namespace SR_GRAPH_NS {
     ScriptableRenderTechnique::Ptr ScriptableRenderTechnique::Load(const SR_UTILS_NS::Path& path) {
         return dynamic_cast<ScriptableRenderTechnique*>(SR_SRLM_NS::LogicalMachine::Load<ScriptableRenderTechnique>(path));
     }
+
+    void ScriptableRenderTechnique::UpdateMachine(float_t dt) {
+        LogicalMachine::UpdateMachine(dt);
+    }
 }

@@ -31,7 +31,7 @@ namespace SR_SRLM_NS {
         template<class T = LogicalMachine> SR_NODISCARD static LogicalMachine* Load(const SR_UTILS_NS::Path& rawPath);
 
         bool Init();
-        void UpdateMachine(float_t dt);
+        virtual void UpdateMachine(float_t dt);
 
     private:
         SR_NODISCARD IResource* CopyResource(SR_UTILS_NS::IResource* pDestination) const override;

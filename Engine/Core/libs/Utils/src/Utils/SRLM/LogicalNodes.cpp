@@ -76,6 +76,8 @@ namespace SR_SRLM_NS {
         SR_LM_NODE_NUMERIC_OPERATORS_CALCULATION(m_outputs[0].pData, m_inputs[0].pData, m_inputs[1].pData, +);
     }
 
+    /// ----------------------------------------------------------------------------------------------------------------
+
     void ConstructorNode::Execute(float_t dt) {
         CalcInput(0)->CopyTo(m_outputs[0].pData);
         m_status |= LogicalNodeStatus::Success;
@@ -88,12 +90,88 @@ namespace SR_SRLM_NS {
         IComputeNode::InitNode();
     }
 
-    uint64_t ConstructorNode::GetHashName() const noexcept {
+    uint64_t ConstructorNode::GetNodeHashName() const noexcept {
         auto&& pOutput = m_outputs[0].pData;
         return pOutput->GetHashName();
     }
 
-    std::string ConstructorNode::GetName() const noexcept {
-        return SR_HASH_TO_STR(GetHashName());
+    std::string ConstructorNode::GetNodeName() const noexcept {
+        return SR_HASH_TO_STR(GetNodeHashName());
+    }
+
+    /// ----------------------------------------------------------------------------------------------------------------
+
+    void CreateStructNode::InitNode() {
+        auto&& pStructInfo = SR_SRLM_NS::DataTypeManager::Instance().GetStruct(m_structHashName);
+        if (pStructInfo) {
+            for (auto&& [hashName, pVariable] : pStructInfo->GetVariables()) {
+                AddInputData(pVariable->Copy(), hashName);
+            }
+            AddOutputData(pStructInfo->Copy());
+        }
+
+        Super::InitNode();
+    }
+
+    void CreateStructNode::Execute(float_t dt) {
+        auto&& pStruct = dynamic_cast<DataTypeStruct*>(GetOutputs().at(0).pData);
+        if (pStruct) {
+            auto&& variables = pStruct->GetVariables();
+            for (uint32_t i = 0; i < m_inputs.size(); ++i) {
+                auto&& pInput = CalcInput(i);
+
+                auto&& pIt = variables.find(m_inputs[i].hashName);
+                if (pIt == variables.end()) {
+                    SRHalt("Input not found!");
+                    continue;
+                }
+
+                if (pIt->second->GetClass() != pInput->GetClass()) {
+                    SRHalt("Input have incompatible class!");
+                    continue;
+                }
+
+                pInput->CopyTo(pIt->second);
+            }
+        }
+
+        Super::Execute(dt);
+    }
+
+    /// ----------------------------------------------------------------------------------------------------------------
+
+    void BreakStructNode::InitNode() {
+        auto&& pStructInfo = SR_SRLM_NS::DataTypeManager::Instance().GetStruct(m_structHashName);
+        if (pStructInfo) {
+            for (auto&& [hashName, pVariable] : pStructInfo->GetVariables()) {
+                AddOutputData(pVariable->Copy(), hashName);
+            }
+            AddInputData(pStructInfo->Copy());
+        }
+
+        Super::InitNode();
+    }
+
+    void BreakStructNode::Execute(float_t dt) {
+        auto&& pStruct = dynamic_cast<const DataTypeStruct*>(CalcInput(0));
+        if (pStruct) {
+            auto&& variables = pStruct->GetVariables();
+            for (auto&& output : GetOutputs()) {
+                auto&& pIt = variables.find(output.hashName);
+                if (pIt == variables.end()) {
+                    SRHalt("Output not found! Name: " + SR_HASH_TO_STR(output.hashName));
+                    continue;
+                }
+
+                if (pIt->second->GetClass() != output.pData->GetClass()) {
+                    SRHalt("Output have incompatible class! Name: " + SR_HASH_TO_STR(output.hashName));
+                    continue;
+                }
+
+                pIt->second->CopyTo(output.pData);
+            }
+        }
+
+        Super::Execute(dt);
     }
 }

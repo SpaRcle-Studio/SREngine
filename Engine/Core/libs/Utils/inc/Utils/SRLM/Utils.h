@@ -22,7 +22,7 @@
 
 #define SR_LM_REGISTER_TYPE_NO_META(className, name)                                                                    \
     public:                                                                                                             \
-        SR_NODISCARD std::string GetName() const noexcept override { return #name; }                                    \
+        SR_NODISCARD std::string GetName() const noexcept override { return #name; }                                \
         SR_NODISCARD Hash GetHashName() const noexcept override { return HASH_NAME; }                                   \
         SR_LM_REGISTER_BASE(className, name)                                                                            \
 
@@ -84,14 +84,20 @@ protected:                                                                      
 
 /// --------------------------------------------------------------------------------------------------------------------
 
-#define SR_REGISTER_LOGICAL_NODE(className, name, category)                                                             \
+#define SR_INIT_LOGICAL_NODE(className, name)                                                                           \
 public:                                                                                                                 \
         SR_INLINE_STATIC const uint64_t HASH_NAME = SR_HASH_STR_REGISTER(#name); /** NOLINT*/                           \
-        SR_NODISCARD std::string GetName() const noexcept override { return #name; }                                    \
-        SR_NODISCARD Hash GetHashName() const noexcept override { return HASH_NAME; }                                   \
-        static className* AllocateNew() { return new className(); }                                                     \
+        SR_NODISCARD std::string GetNodeName() const noexcept override { return #name; }                                \
+        SR_NODISCARD Hash GetNodeHashName() const noexcept override { return HASH_NAME; }                               \
+        static SR_SRLM_NS::LogicalNode* AllocateNew() { return (new className())->GetBaseLogicalNode(); }               \
+
+#define SR_REGISTER_LOGICAL_NODE(className, name, category)                                                             \
+public:                                                                                                                 \
+        SR_INIT_LOGICAL_NODE(className, name)                                                                           \
         SR_INLINE_STATIC const bool REGISTER_STATUS = SR_SRLM_NS::LogicalNodeManager::Instance().Register( /** NOLINT*/ \
-            HASH_NAME, []() -> LogicalNode* { return (LogicalNode*)AllocateNew(); }, std::vector<std::string> category  \
+            HASH_NAME, []() -> SR_SRLM_NS::LogicalNode* {                                                               \
+                return AllocateNew();                                                                                   \
+            }, std::vector<std::string> category                                                                        \
         );                                                                                                              \
 
 #endif //SRENGINE_SRLM_UTILS_H

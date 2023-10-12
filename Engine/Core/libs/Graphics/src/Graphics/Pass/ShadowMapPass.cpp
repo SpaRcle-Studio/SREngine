@@ -8,10 +8,6 @@
 namespace SR_GRAPH_NS {
     SR_REGISTER_RENDER_PASS(ShadowMapPass);
 
-    ShadowMapPass::ShadowMapPass(RenderTechnique* pTechnique, BasePass* pParent)
-        : Super(pTechnique, pParent)
-    { }
-
     bool ShadowMapPass::Init() {
         return Super::Init();
     }

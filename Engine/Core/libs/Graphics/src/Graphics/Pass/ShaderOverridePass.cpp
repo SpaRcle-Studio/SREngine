@@ -7,10 +7,6 @@
 namespace SR_GRAPH_NS {
     SR_REGISTER_RENDER_PASS(ShaderOverridePass)
 
-    ShaderOverridePass::ShaderOverridePass(RenderTechnique *pTechnique, BasePass* pParent)
-        : Super(pTechnique, pParent)
-    { }
-
     ShaderOverridePass::~ShaderOverridePass() {
         for (auto&& [type, pShader] : m_shaders) {
             if (!pShader) {
@@ -69,11 +65,6 @@ namespace SR_GRAPH_NS {
     }
 
     bool ShaderOverridePass::Init() {
-        if (!IsDirectional() && GetParentPass()) {
-            SR_ERROR("ShaderOverridePass::Init() : if the rendering pass of the color buffer is not directional, then it cannot be nested!");
-            return BasePass::Init() && false;
-        }
-
         return BasePass::Init() && (IsDirectional() || InitializeFramebuffer(GetContext()));
     }
 

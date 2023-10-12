@@ -11,10 +11,6 @@
 namespace SR_GRAPH_NS {
     SR_REGISTER_RENDER_PASS(TransparentPass)
 
-    TransparentPass::TransparentPass(RenderTechnique* pTechnique, BasePass* pParent)
-        : Super(pTechnique, pParent)
-    { }
-
     MeshClusterTypeFlag TransparentPass::GetClusterType() const noexcept {
         return static_cast<MeshClusterTypeFlag>(MeshClusterType::Transparent);
     }

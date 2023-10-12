@@ -66,11 +66,11 @@ namespace SR_SRLM_NS {
         }
     }
 
-    uint64_t ConvertorNode::GetHashName() const noexcept {
-        return SR_HASH_STR_REGISTER(GetName());
+    uint64_t ConvertorNode::GetNodeHashName() const noexcept {
+        return SR_HASH_STR_REGISTER(GetNodeName());
     }
 
-    std::string ConvertorNode::GetName() const noexcept {
+    std::string ConvertorNode::GetNodeName() const noexcept {
         return std::string(GetInputTypeName() + " to " + GetOutputTypeName());
     }
 }

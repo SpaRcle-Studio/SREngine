@@ -237,6 +237,25 @@ namespace SR_GRAPH_GUI_NS {
     }
 
     void NodeWidget::InitStructsCreationPopup() {
+        auto&& menu = m_creationPopup->AddMenu("Structs");
+
+        for (auto&& [hashName, pStruct] : SR_SRLM_NS::DataTypeManager::Instance().GetStructs()) {
+            auto&& structMenu = menu.AddMenu(SR_HASH_TO_STR(hashName));
+
+            structMenu.AddMenu("Create").SetAction([hashName](const SR_GRAPH_GUI_NS::DrawPopupContext& context) {
+                auto&& pNode = new SR_SRLM_NS::CreateStructNode();
+                pNode->SetStructHashName(hashName);
+                pNode->InitNode();
+                context.pWidget->AddNode(new Node(pNode)).SetPosition(context.popupPos);
+            });
+
+            structMenu.AddMenu("Break").SetAction([hashName](const SR_GRAPH_GUI_NS::DrawPopupContext& context) {
+                auto&& pNode = new SR_SRLM_NS::BreakStructNode();
+                pNode->SetStructHashName(hashName);
+                pNode->InitNode();
+                context.pWidget->AddNode(new Node(pNode)).SetPosition(context.popupPos);
+            });
+        }
     }
 
     void NodeWidget::InitCreationPopup() {
@@ -244,9 +263,10 @@ namespace SR_GRAPH_GUI_NS {
             if (nodeInfo.category.empty()) {
                 continue;
             }
+
             auto&& menu = m_creationPopup->AddMenu(nodeInfo.category);
             menu.AddMenu(SR_HASH_TO_STR(hashName)).SetAction([constructor = nodeInfo.constructor](const SR_GRAPH_GUI_NS::DrawPopupContext& context) {
-                auto&& pLogicalNode = constructor();
+                SR_SRLM_NS::LogicalNode* pLogicalNode = constructor();
                 pLogicalNode->InitNode();
                 pLogicalNode->InitValues();
                 context.pWidget->AddNode(new Node(pLogicalNode)).SetPosition(context.popupPos);
@@ -459,8 +479,12 @@ namespace SR_GRAPH_GUI_NS {
                 auto&& pInputPin = reinterpret_cast<SR_GRAPH_GUI_NS::Pin*>(inputPinId.AsPointer());
                 auto&& pOutputPin = reinterpret_cast<SR_GRAPH_GUI_NS::Pin*>(outputPinId.AsPointer());
 
-                if (pInputPin != pOutputPin) {
+                if (pInputPin != pOutputPin && pInputPin && pOutputPin) {
                     if (SR_GRAPH_GUI_NS::CanCreateLink(pInputPin, pOutputPin) && ax::NodeEditor::AcceptNewItem()) {
+                        if (pInputPin->GetKind() == PinKind::Input) {
+                            std::swap(pInputPin, pOutputPin);
+                        }
+
                         AddLink(new SR_GRAPH_GUI_NS::Link(pInputPin, pOutputPin));
                     }
                 }

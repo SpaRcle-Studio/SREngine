@@ -9,11 +9,8 @@
 
 namespace SR_GRAPH_NS {
     class DebugPass : public IMeshClusterPass {
+        SR_REGISTER_LOGICAL_NODE(DebugPass, Debug Pass, { "Passes" })
         using Super = IMeshClusterPass;
-    public:
-        explicit DebugPass(RenderTechnique* pTechnique, BasePass* pParent);
-        ~DebugPass() override = default;
-
     public:
         SR_NODISCARD MeshClusterTypeFlag GetClusterType() const noexcept override;
 

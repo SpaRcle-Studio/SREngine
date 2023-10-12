@@ -14,9 +14,7 @@ namespace SR_GTYPES_NS {
 
 namespace SR_GRAPH_NS {
     class FramebufferPass : public GroupPass, public IFramebufferPass {
-    public:
-        FramebufferPass(RenderTechnique* pTechnique, BasePass* pParent);
-
+        SR_REGISTER_LOGICAL_NODE(FramebufferPass, Framebuffer Pass, { "Passes" })
     public:
         bool Load(const SR_XML_NS::Node& passNode) override;
         void OnResize(const SR_MATH_NS::UVector2 &size) override;
