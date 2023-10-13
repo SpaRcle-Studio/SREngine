@@ -158,6 +158,12 @@ namespace SR_GRAPH_GUI_NS {
             else if (GetType() != PinType::Flow && GetKind() == PinKind::Input) {
                 return false;
             }
+            else if (GetType() == PinType::Flow && GetKind() == PinKind::Input) {
+                auto&& pSynchronize = dynamic_cast<SR_SRLM_NS::SynchronizeNode*>(GetNode()->GetLogicalNode());
+                if (pSynchronize) {
+                    return false;
+                }
+            }
         }
 
         if (GetNode()->IsConnector() && IsLinked() && GetType() != SR_SRLM_NS::DataTypeClass::Flow) {

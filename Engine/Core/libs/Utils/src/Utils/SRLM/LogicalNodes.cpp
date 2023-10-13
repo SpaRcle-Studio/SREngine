@@ -38,7 +38,7 @@ namespace SR_SRLM_NS {
             *CalcInput(1)->GetString(),
             static_cast<SR_UTILS_NS::DebugLogType>(*CalcInput(2)->GetEnum())
         );
-        *m_outputs.at(0).pData->GetBool() = true;
+        *m_outputs.at(0).pData->GetEnum() = static_cast<int32_t>(FlowState::Available);
         m_status |= LogicalNodeStatus::Success;
     }
 
@@ -68,7 +68,7 @@ namespace SR_SRLM_NS {
     }
 
     void StartNode::Execute(float_t dt) {
-        *m_outputs.at(0).pData->GetBool() = true;
+        *m_outputs.at(0).pData->GetEnum() = static_cast<int32_t>(FlowState::Available);
         m_status |= LogicalNodeStatus::Success;
     }
 
@@ -173,5 +173,74 @@ namespace SR_SRLM_NS {
         }
 
         Super::Execute(dt);
+    }
+
+    void SequenceNode::Execute(float_t dt) {
+        for (auto&& output : GetOutputs()) {
+            *output.pData->GetEnum() = static_cast<int32_t>(FlowState::Available);
+        }
+
+        m_status |= LogicalNodeStatus::Success;
+
+        Super::Execute(dt);
+    }
+
+    void SequenceNode::InitNode() {
+        Super::InitNode();
+
+        AddInputData<DataTypeFlow>();
+
+        AddOutputData<DataTypeFlow>(SR_HASH_STR_REGISTER("Then 0"));
+        AddOutputData<DataTypeFlow>(SR_HASH_STR_REGISTER("Then 1"));
+    }
+
+    void BranchNode::Execute(float_t dt) {
+        if (*CalcInput(1)->GetBool()) {
+            *GetOutput(0)->GetEnum() = static_cast<int32_t>(FlowState::Available);
+            *GetOutput(1)->GetEnum() = static_cast<int32_t>(FlowState::NotAvailable);
+        }
+        else {
+            *GetOutput(0)->GetEnum() = static_cast<int32_t>(FlowState::NotAvailable);
+            *GetOutput(1)->GetEnum() = static_cast<int32_t>(FlowState::Available);
+        }
+
+        m_status |= LogicalNodeStatus::Success;
+
+        Base::Execute(dt);
+    }
+
+    void BranchNode::InitNode() {
+        Base::InitNode();
+
+        AddInputData<DataTypeFlow>();
+        AddInputData<DataTypeBool>(SR_HASH_STR_REGISTER("Condition"));
+
+        AddOutputData<DataTypeFlow>(SR_HASH_STR_REGISTER("True"));
+        AddOutputData<DataTypeFlow>(SR_HASH_STR_REGISTER("False"));
+    }
+
+    void SynchronizeNode::Execute(float_t dt) {
+        for (uint32_t i = 0; i < m_inputs.size(); ++i) {
+            if (*CalcInput(i)->GetEnum() != static_cast<int32_t>(FlowState::Executed)) {
+                *GetOutput(0)->GetEnum() = static_cast<int32_t>(FlowState::NotAvailable);
+                Base::Execute(dt);
+                return;
+            }
+        }
+
+        *GetOutput(0)->GetEnum() = static_cast<int32_t>(FlowState::Available);
+
+        m_status |= LogicalNodeStatus::Success;
+
+        Base::Execute(dt);
+    }
+
+    void SynchronizeNode::InitNode() {
+        Base::InitNode();
+
+        AddInputData<DataTypeFlow>(SR_HASH_STR_REGISTER("If 0"));
+        AddInputData<DataTypeFlow>(SR_HASH_STR_REGISTER("If 1"));
+
+        AddOutputData<DataTypeFlow>();
     }
 }

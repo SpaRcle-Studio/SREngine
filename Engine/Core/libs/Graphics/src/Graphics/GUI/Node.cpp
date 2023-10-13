@@ -7,9 +7,8 @@
 #include <Graphics/GUI/Pin.h>
 #include <Graphics/GUI/NodeBuilder.h>
 #include <Utils/SRLM/DataType.h>
+#include <Utils/SRLM/LogicalNodes.h>
 #include <Utils/Common/HashManager.h>
-
-#include <utility>
 
 namespace SR_GRAPH_GUI_NS {
     Node::Node()
@@ -21,14 +20,19 @@ namespace SR_GRAPH_GUI_NS {
     {
         m_name = pNode->GetNodeName();
 
-        if (pNode->GetType() == SR_SRLM_NS::LogicalNodeType::Executable) {
-            m_type = NodeType::Blueprint;
-        }
-        else if (pNode->GetType() == SR_SRLM_NS::LogicalNodeType::Connector) {
-            m_type = NodeType::Connector;
-        }
-        else {
-            m_type = NodeType::Simple;
+        switch (pNode->GetType()) {
+            case SR_SRLM_NS::LogicalNodeType::Compute:
+                m_type = NodeType::Simple;
+                break;
+            case SR_SRLM_NS::LogicalNodeType::Connector:
+                m_type = NodeType::Connector;
+                break;
+            case SR_SRLM_NS::LogicalNodeType::Executable:
+                m_type = NodeType::Blueprint;
+                break;
+            default:
+                SRHaltOnce("Unknown node type! Type: " + SR_UTILS_NS::EnumReflector::ToString(pNode->GetType()));
+                break;
         }
 
         for (auto&& pin : pNode->GetInputs()) {
@@ -104,6 +108,50 @@ namespace SR_GRAPH_GUI_NS {
             }
             ImGui::Spring(1);
             ImGui::Dummy(ImVec2(0, 28));
+
+            const bool isSequence = dynamic_cast<SR_SRLM_NS::SequenceNode*>(m_logicalNode);
+            const bool isSynchronize = dynamic_cast<SR_SRLM_NS::SynchronizeNode*>(m_logicalNode);
+
+            if (isSequence || isSynchronize) {
+                ImGui::BeginVertical(m_logicalNode, ImVec2(0, 28));
+
+                ImGui::Spring(1, 0);
+
+                ImGui::BeginHorizontal(m_logicalNode);
+
+                if (ImGui::Button("+")) {
+                    if (isSequence) {
+                        auto&& pin = m_logicalNode->AddOutputData<SR_SRLM_NS::DataTypeFlow>(SR_HASH_STR_REGISTER(SR_FORMAT("Then %i", m_logicalNode->GetOutputs().size())));
+                        AddOutput(new Pin(SR_HASH_TO_STR(pin.hashName), pin.pData));
+                    }
+                    else {
+                        auto&& pin = m_logicalNode->AddInputData<SR_SRLM_NS::DataTypeFlow>(SR_HASH_STR_REGISTER(SR_FORMAT("If %i", m_logicalNode->GetInputs().size())));
+                        AddInput(new Pin(SR_HASH_TO_STR(pin.hashName), pin.pData));
+                    }
+                }
+
+                if (ImGui::Button("-")) {
+                    if (isSequence) {
+                        if (!m_logicalNode->GetOutputs().empty()) {
+                            RemoveOutput(m_logicalNode->GetOutputs().size() - 1);
+                            m_logicalNode->RemoveOutput(m_logicalNode->GetOutputs().size() - 1);
+                        }
+                    }
+                    else {
+                        if (!m_logicalNode->GetInputs().empty()) {
+                            RemoveInput(m_logicalNode->GetInputs().size() - 1);
+                            m_logicalNode->RemoveInput(m_logicalNode->GetInputs().size() - 1);
+                        }
+                    }
+                }
+
+                ImGui::Spring(0, ImGui::GetStyle().ItemSpacing.x / 2);
+                ImGui::EndHorizontal();
+
+                ImGui::Spring(1, 0);
+                ImGui::EndVertical();
+                ImGui::Spring(0, ImGui::GetStyle().ItemSpacing.x / 2);
+            }
 
             if (m_hasOutputDelegates) {
                 /** ImGui::BeginVertical("delegates", ImVec2(0, 28));
@@ -357,5 +405,19 @@ namespace SR_GRAPH_GUI_NS {
         }
 
         return SR_ID_INVALID;
+    }
+
+    void Node::RemoveInput(uint32_t index) {
+        if (m_inputs.size() > index) {
+            delete m_inputs.at(index);
+            m_inputs.erase(m_inputs.begin() + index);
+        }
+    }
+
+    void Node::RemoveOutput(uint32_t index) {
+        if (m_outputs.size() > index) {
+            delete m_outputs.at(index);
+            m_outputs.erase(m_outputs.begin() + index);
+        }
     }
 }

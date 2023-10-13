@@ -155,22 +155,6 @@ namespace SR_SRLM_NS {
 
     /// ----------------------------------------------------------------------------------------------------------------
 
-    class DataTypeFlow : public DataTypeBool {
-        SR_LM_REGISTER_TYPE(DataTypeFlow, Flow)
-
-        DataTypeFlow() = default;
-
-        explicit DataTypeFlow(bool value)
-            : DataTypeBool(value)
-        { }
-
-        SR_NODISCARD DataType* Copy() const override {
-            return new DataTypeFlow(m_value);
-        }
-    };
-
-    /// ----------------------------------------------------------------------------------------------------------------
-
     class DataTypeEnum : public DataTypeInt64 {
         SR_LM_REGISTER_BASE(DataTypeEnum, Enum)
     public:
@@ -200,6 +184,29 @@ namespace SR_SRLM_NS {
     private:
         EnumReflector* m_reflector = nullptr;
 
+    };
+
+    /// ----------------------------------------------------------------------------------------------------------------
+
+    SR_ENUM_NS_CLASS_T(FlowState, uint8_t,
+        NotAvailable, Available, Executed
+    );
+
+
+    class DataTypeFlow : public DataTypeEnum {
+        SR_LM_REGISTER_TYPE(DataTypeFlow, Flow)
+
+        explicit DataTypeFlow(FlowState flowState)
+            : DataTypeEnum(static_cast<int64_t>(flowState), SR_UTILS_NS::EnumReflector::GetReflector<FlowState>())
+        { }
+
+        DataTypeFlow()
+            : DataTypeFlow(FlowState::NotAvailable)
+        { }
+
+        SR_NODISCARD DataType* Copy() const override {
+            return new DataTypeFlow(static_cast<FlowState>(*GetEnum()));
+        }
     };
 
     /// ----------------------------------------------------------------------------------------------------------------

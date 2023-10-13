@@ -19,11 +19,9 @@ namespace SR_SRLM_NS {
 
     void LogicalMachine::UpdateMachine(float_t dt) {
         for (m_currentNode = 0; m_currentNode < m_active.size(); ++m_currentNode) {
-            LogicalNode* pNode = m_active[m_currentNode];
+            while (Execute(dt));
 
-            while (Execute(pNode, dt));
-
-            if (!pNode) {
+            if (!GetCurrentNode()) {
                 m_active.erase(m_active.begin() + m_currentNode);
                 --m_currentNode;
             }
@@ -32,7 +30,10 @@ namespace SR_SRLM_NS {
 
     bool LogicalMachine::Init() {
         for (auto&& [name, pNode] : m_entryPoints) {
-            m_active.emplace_back(pNode);
+            ActiveNodeInfo info;
+            info.pNode = pNode;
+            info.pFromPin = nullptr;
+            m_active.emplace_back(info);
         }
 
         return true;
@@ -145,18 +146,25 @@ namespace SR_SRLM_NS {
         return Super::Unload();
     }
 
-    bool LogicalMachine::Execute(LogicalNode*& pNode, float_t dt) {
-        if (!pNode) {
+    bool LogicalMachine::Execute(float_t dt) {
+        if (!GetCurrentNode()) {
             return false;
         }
 
-        if (pNode->GetType() == LogicalNodeType::Compute) {
+        if (GetCurrentNode()->GetType() == LogicalNodeType::Compute) {
             SRHalt("Compute node in queue!");
             return false;
         }
 
-        if (pNode->GetType() == LogicalNodeType::Executable) {
-            auto&& pExecutable = dynamic_cast<IExecutableNode*>(pNode);
+        if (auto&& pPin = GetCurrentPin()) {
+            *pPin->pData->GetEnum() = static_cast<int64_t>(FlowState::Executed);
+        }
+
+        ActiveNodeInfo info;
+        uint32_t offset = m_currentNode + 1;
+
+        if (GetCurrentNode()->GetType() == LogicalNodeType::Executable) {
+            auto&& pExecutable = dynamic_cast<IExecutableNode*>(GetCurrentNode());
             if (!pExecutable) {
                 return false;
             }
@@ -170,22 +178,31 @@ namespace SR_SRLM_NS {
             bool needContinue = pExecutable->IsNeedRepeat();
 
             for (auto&& pin : pExecutable->GetOutputs()) {
-                if (pin.pData->GetClass() != DataTypeClass::Flow || !(*pin.pData->GetBool())) {
+                if (pin.pData->GetClass() != DataTypeClass::Flow) {
+                    continue;
+                }
+
+                if (*pin.pData->GetEnum() == static_cast<int64_t>(FlowState::NotAvailable)) {
                     continue;
                 }
 
                 if (!needContinue) {
                     needContinue = true;
-                    pNode = pin.GetFirstNode();
+                    SetCurrentNode(pin.GetFirstNode(), &pin);
                 }
                 else {
-                    m_active.insert(m_active.begin() + m_currentNode, pin.GetFirstNode());
+                    info.pNode = pin.GetFirstNode();
+                    info.pFromPin = &pin;
+                    m_active.insert(m_active.begin() + offset, info);
+                    ++offset;
                 }
             }
 
             if (pExecutable->IsNeedPostRepeat()) {
                 if (needContinue) {
-                    m_active.insert(m_active.begin() + m_currentNode, pExecutable);
+                    info.pNode = pExecutable;
+                    info.pFromPin = nullptr;
+                    m_active.insert(m_active.begin() + offset, info);
                 }
                 needContinue = true;
             }
@@ -200,5 +217,26 @@ namespace SR_SRLM_NS {
 
     IResource* LogicalMachine::CopyResource(SR_UTILS_NS::IResource* pDestination) const {
         return nullptr;
+    }
+
+    LogicalNode* LogicalMachine::GetCurrentNode() const {
+        if (m_currentNode >= m_active.size()) {
+            return nullptr;
+        }
+        return m_active[m_currentNode].pNode;
+    }
+
+    LogicalNode::NodePin* LogicalMachine::GetCurrentPin() const {
+        if (m_currentNode >= m_active.size()) {
+            return nullptr;
+        }
+        return m_active[m_currentNode].pFromPin;
+    }
+
+    void LogicalMachine::SetCurrentNode(LogicalNode* pNode, LogicalNode::NodePin* pFromPin) {
+        if (m_currentNode < m_active.size()) {
+            m_active[m_currentNode].pNode = pNode;
+            m_active[m_currentNode].pFromPin = pFromPin;
+        }
     }
 }

@@ -36,9 +36,14 @@ namespace SR_SRLM_NS {
     private:
         SR_NODISCARD IResource* CopyResource(SR_UTILS_NS::IResource* pDestination) const override;
 
-        bool Execute(LogicalNode*& pNode, float_t dt);
+        bool Execute(float_t dt);
         void AddNode(LogicalNode* pNode);
         void Optimize();
+
+        void SetCurrentNode(LogicalNode* pNode, LogicalNode::NodePin* pFromPin);
+
+        SR_NODISCARD LogicalNode* GetCurrentNode() const;
+        SR_NODISCARD LogicalNode::NodePin* GetCurrentPin() const;
 
         bool Load() override;
         bool Unload() override;
@@ -47,7 +52,13 @@ namespace SR_SRLM_NS {
 
     private:
         std::vector<LogicalNode*> m_nodes;
-        std::vector<LogicalNode*> m_active;
+
+        struct ActiveNodeInfo {
+            LogicalNode* pNode = nullptr;
+            LogicalNode::NodePin* pFromPin = nullptr;
+        };
+
+        std::vector<ActiveNodeInfo> m_active;
 
         uint32_t m_currentNode = 0;
 
@@ -56,8 +67,12 @@ namespace SR_SRLM_NS {
     };
 
     template<class T> LogicalMachine* LogicalMachine::Load(const Path& rawPath) {
-        auto&& resourceManager = SR_UTILS_NS::ResourceManager::Instance();
+        if (!rawPath.Exists()) {
+            SR_ERROR("LogicalMachine::Load() : file not exists! Path: " + rawPath.ToStringRef());
+            return nullptr;
+        }
 
+        auto&& resourceManager = SR_UTILS_NS::ResourceManager::Instance();
         SR_UTILS_NS::Path&& path = rawPath.RemoveSubPath(resourceManager.GetResPath());
 
         auto&& pResource = new T();

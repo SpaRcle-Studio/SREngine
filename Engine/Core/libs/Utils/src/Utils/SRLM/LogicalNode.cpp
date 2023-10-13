@@ -115,18 +115,18 @@ namespace SR_SRLM_NS {
         }
     }
 
-    void LogicalNode::AddInputData(DataType* pData, uint64_t hashName) {
+    LogicalNode::NodePin& LogicalNode::AddInputData(DataType* pData, uint64_t hashName) {
         auto&& pin = NodePin();
         pin.pData = pData;
         pin.hashName = hashName;
-        m_inputs.emplace_back(pin);
+        return m_inputs.emplace_back(pin);
     }
 
-    void LogicalNode::AddOutputData(DataType* pData, uint64_t hashName) {
+    LogicalNode::NodePin& LogicalNode::AddOutputData(DataType* pData, uint64_t hashName) {
         auto&& pin = NodePin();
         pin.pData = pData;
         pin.hashName = hashName;
-        m_outputs.emplace_back(pin);
+        return m_outputs.emplace_back(pin);
     }
 
     const DataType* LogicalNode::CalcInput(uint32_t index) {
@@ -142,6 +142,12 @@ namespace SR_SRLM_NS {
 
             if (pNode->HasErrors()) {
                 m_status |= LogicalNodeStatus::ComputeError;
+                return m_inputs[index].pData;
+            }
+        }
+        else if (m_inputs[index].pData->GetClass() == DataTypeClass::Flow) {
+            if (HasErrors()) {
+                m_status |= LogicalNodeStatus::NotExecuted;
                 return m_inputs[index].pData;
             }
         }
@@ -214,6 +220,28 @@ namespace SR_SRLM_NS {
             delete pin.pData;
         }
         m_outputs.clear();
+    }
+
+    void LogicalNode::RemoveInput(uint32_t index) {
+        if (m_inputs.size() > index) {
+            auto&& pIt = m_inputs.begin() + index;
+            for (auto&& connection : pIt->connections) {
+                connection.pNode->RemoveOutputConnection(this, index);
+            }
+            delete pIt->pData;
+            m_inputs.erase(pIt);
+        }
+    }
+
+    void LogicalNode::RemoveOutput(uint32_t index) {
+        if (m_outputs.size() > index) {
+            auto&& pIt = m_outputs.begin() + index;
+            for (auto&& connection : pIt->connections) {
+                connection.pNode->RemoveInputConnection(this, index);
+            }
+            delete pIt->pData;
+            m_outputs.erase(pIt);
+        }
     }
 
     /// ----------------------------------------------------------------------------------------------------------------

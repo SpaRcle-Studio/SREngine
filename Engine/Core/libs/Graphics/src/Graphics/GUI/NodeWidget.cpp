@@ -376,6 +376,13 @@ namespace SR_GRAPH_GUI_NS {
     }
 
     void NodeWidget::Execute() {
+        if (m_nodes.empty() && m_properties.empty()) {
+            TopPanelOpen();
+        }
+        else {
+            TopPanelSave();
+        }
+
         if (auto&& pLogicalMachine = SR_SRLM_NS::LogicalMachine::Load(m_currentFile)) {
             pLogicalMachine->AddUsePoint();
             pLogicalMachine->Init();

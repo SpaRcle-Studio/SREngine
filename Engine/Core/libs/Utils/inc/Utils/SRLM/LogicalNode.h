@@ -92,8 +92,11 @@ namespace SR_SRLM_NS {
         SR_NODISCARD LogicalNodeStatusFlag GetStatus() const noexcept { return m_status; }
 
     public:
-        void AddInputData(DataType* pData, uint64_t hashName = SR_UINT64_MAX);
-        void AddOutputData(DataType* pData, uint64_t hashName = SR_UINT64_MAX);
+        void RemoveInput(uint32_t index);
+        void RemoveOutput(uint32_t index);
+
+        NodePin& AddInputData(DataType* pData, uint64_t hashName = SR_UINT64_MAX);
+        NodePin& AddOutputData(DataType* pData, uint64_t hashName = SR_UINT64_MAX);
 
         void RemoveInputConnection(LogicalNode* pNode, uint32_t pinIndex);
         void RemoveOutputConnection(LogicalNode* pNode, uint32_t pinIndex);
@@ -101,8 +104,8 @@ namespace SR_SRLM_NS {
         void AddInputConnection(LogicalNode* pNode, uint32_t nodePinIndex, uint32_t pinIndex);
         void AddOutputConnection(LogicalNode* pNode, uint32_t nodePinIndex, uint32_t pinIndex);
 
-        template<typename T> void AddInputData(uint64_t hashName = SR_UINT64_MAX) { AddInputData(new T(), hashName); }
-        template<typename T> void AddOutputData(uint64_t hashName = SR_UINT64_MAX) { AddOutputData(new T(), hashName); }
+        template<typename T> NodePin& AddInputData(uint64_t hashName = SR_UINT64_MAX) { return AddInputData(new T(), hashName); }
+        template<typename T> NodePin& AddOutputData(uint64_t hashName = SR_UINT64_MAX) { return AddOutputData(new T(), hashName); }
 
     protected:
         mutable LogicalNodeStatusFlag m_status = LogicalNodeStatus::None;

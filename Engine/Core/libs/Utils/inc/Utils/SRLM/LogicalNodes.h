@@ -10,11 +10,34 @@
 
 namespace SR_SRLM_NS {
     class ConnectorNode : public LogicalNode {
-    public:
         SR_REGISTER_LOGICAL_NODE(ConnectorNode, Connector, { })
-
     public:
         SR_NODISCARD LogicalNodeType GetType() const noexcept final { return LogicalNodeType::Connector; }
+
+    };
+
+    class SequenceNode : public IExecutableNode {
+        SR_REGISTER_LOGICAL_NODE(SequenceNode, Sequence, { "Logic" })
+        using Super = LogicalNode;
+    public:
+        void Execute(float_t dt) override;
+        void InitNode() override;
+
+    };
+
+    class SynchronizeNode : public IExecutableNode {
+        SR_REGISTER_LOGICAL_NODE(SynchronizeNode, Synchronize, { "Logic" })
+    public:
+        void Execute(float_t dt) override;
+        void InitNode() override;
+
+    };
+
+    class BranchNode : public IExecutableNode {
+        SR_REGISTER_LOGICAL_NODE(BranchNode, Branch, { "Logic" })
+    public:
+        void Execute(float_t dt) override;
+        void InitNode() override;
 
     };
 

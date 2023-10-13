@@ -51,6 +51,9 @@ namespace SR_GRAPH_GUI_NS {
         Node& AddInput(const std::string& name, SR_SRLM_NS::DataType* pDataType);
         Node& AddOutput(const std::string& name, SR_SRLM_NS::DataType* pDataType);
 
+        void RemoveInput(uint32_t index);
+        void RemoveOutput(uint32_t index);
+
         SR_NODISCARD Pin* GetInputPin(uint32_t index);
         SR_NODISCARD Pin* GetOutputPin(uint32_t index);
 
