@@ -15,6 +15,7 @@ namespace SR_AUDIO_NS {
     class SoundDevice;
     class SoundData;
     class SoundContext;
+    class ListenerContext;
 
     struct PlayData : public SR_UTILS_NS::NonCopyable {
         SoundData* pData = nullptr;
@@ -55,9 +56,13 @@ namespace SR_AUDIO_NS {
         SoundData* Register(Sound* pSound);
         bool Unregister(SoundData** pSoundData);
 
+        SR_NODISCARD ListenerContext* CreateListenerContext();
+        void DestroyListenerContext(ListenerContext* pListener);
+
     protected:
-        SR_NODISCARD SoundContext* GetContext(const PlayParams& params);
-        SR_NODISCARD AudioLibrary GetRelevantLibrary() const;
+        SR_NODISCARD SoundContext* GetSoundContext(const PlayParams& params) noexcept;
+        SR_NODISCARD AudioLibrary GetRelevantLibrary() const noexcept;
+        SR_NODISCARD ListenerContext* GetListenerContext() const noexcept;
 
         void DestroyPlayData(PlayData* pPlayData);
 
@@ -75,7 +80,7 @@ namespace SR_AUDIO_NS {
         std::atomic<State> m_state = State::Stopped;
         std::list<PlayData*> m_playStack;
         std::map<AudioLibrary, std::map<std::string, SoundContext*>> m_contexts;
-        std::list<PlayData::ListenerHandle> m_audioListeners;
+        std::list<ListenerContext*> m_audioListeners;
 
     };
 }

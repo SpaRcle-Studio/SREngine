@@ -53,6 +53,15 @@ namespace SR_MATH_NS {
             t = static_cast<T>(vec.t);
         }
 
+        template<typename U> SR_FAST_CONSTRUCTOR explicit Vector6(const Vector3<U>& vec1, const Vector3<U>& vec2) {
+            x = static_cast<T>(vec1.x);
+            y = static_cast<T>(vec1.y);
+            z = static_cast<T>(vec1.z);
+            w = static_cast<T>(vec2.x);
+            v = static_cast<T>(vec2.y);
+            t = static_cast<T>(vec2.z);
+        }
+
         SR_FAST_CONSTRUCTOR Vector6(T _x, T _y, T _z, T _w, T _v, T _t) {
             x = _x;
             y = _y;

@@ -2,19 +2,19 @@
 // Created by Monika on 08.07.2022.
 //
 
-#ifndef SRENGINE_OPENALCONTEXT_H
-#define SRENGINE_OPENALCONTEXT_H
+#ifndef SRENGINE_OPENALSOUNDCONTEXT_H
+#define SRENGINE_OPENALSOUNDCONTEXT_H
 
 #include <Audio/SoundContext.h>
 
 class ALCcontext;
 
 namespace SR_AUDIO_NS {
-    class OpenALContext : public SoundContext {
+    class OpenALSoundContext : public SoundContext {
         using Super = SoundContext;
     public:
-        explicit OpenALContext(SoundDevice* pDevice);
-        ~OpenALContext() override;
+        explicit OpenALSoundContext(SoundDevice* pDevice);
+        ~OpenALSoundContext() override;
 
     public:
         bool Init() override;
@@ -44,4 +44,4 @@ namespace SR_AUDIO_NS {
     };
 }
 
-#endif //SRENGINE_OPENALCONTEXT_H
+#endif //SRENGINE_OPENALSOUNDCONTEXT_H

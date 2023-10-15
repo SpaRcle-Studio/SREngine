@@ -11,7 +11,8 @@
 #include "../Audio/src/Audio/Types/AudioListener.cpp"
 
 #include "../Audio/src/Audio/Impl/OpenALDevice.cpp"
-#include "../Audio/src/Audio/Impl/OpenALContext.cpp"
+#include "../Audio/src/Audio/Impl/OpenALSoundContext.cpp"
+#include "../Audio/src/Audio/Impl/OpenALListenerContext.cpp"
 
 #include "../Audio/src/Audio/Decoders/IWaveDataProvider.cpp"
 #include "../Audio/src/Audio/Decoders/MP3DataProvider.cpp"

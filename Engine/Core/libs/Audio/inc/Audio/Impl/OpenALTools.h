@@ -11,6 +11,9 @@
 #include <AL/alc.h>
 
 namespace SR_AUDIO_NS {
+    typedef struct ALfVec3 { ALfloat vec3[3]; } ALfVec3;
+    typedef struct ALfVec6 { ALfloat vec6[6]; } ALfVec6;
+
     /*bool get_available_devices(std::vector<std::string>& devicesVec, ALCdevice* device)
     {
         const ALCchar* devices;
@@ -30,6 +33,38 @@ namespace SR_AUDIO_NS {
 
         return true;
     }*/
+
+    ALenum DistanceModelToALDistanceModel(ListenerDistanceModel distanceModel) {
+        switch (distanceModel) {
+            case ListenerDistanceModel::None:
+                return AL_NONE;
+            case ListenerDistanceModel::InverseDistance:
+                return AL_INVERSE_DISTANCE;
+            case ListenerDistanceModel::InverseDistanceClamped:
+                return AL_INVERSE_DISTANCE_CLAMPED;
+            case ListenerDistanceModel::LinearDistance:
+                return AL_LINEAR_DISTANCE;
+            case ListenerDistanceModel::LinearDistanceClamped:
+                return AL_LINEAR_DISTANCE_CLAMPED;
+            case ListenerDistanceModel::ExponentDistance:
+                return AL_EXPONENT_DISTANCE;
+            case ListenerDistanceModel::ExponentDistanceClamped:
+                return AL_EXPONENT_DISTANCE_CLAMPED;
+            default:
+                SRHalt("DistanceModelToALDistanceModel() : no such distance model;");
+                return AL_NONE;
+        }
+    }
+
+    SR_MAYBE_UNUSED static ALfVec6 FV6ToALV6(const SR_MATH_NS::FVector6& vector6) {
+        ALfVec6 vec6 = {vector6.x, vector6.y, vector6.z, vector6.w, vector6.v, vector6.t};
+        return vec6;
+    }
+
+    SR_MAYBE_UNUSED static ALfVec3 FV3ToALV3(const SR_MATH_NS::FVector3& vector3) {
+        ALfVec3 vec3 =  {vector3.x, vector3.y, vector3.z};
+        return vec3;
+    }
 
     //this is here thanks to https://indiegamedev.net/2020/02/15/the-complete-guide-to-openal-with-c-part-1-playing-a-sound/
     bool check_alc_errors(const std::string& filename, const std::uint_fast32_t line, ALCdevice* device)

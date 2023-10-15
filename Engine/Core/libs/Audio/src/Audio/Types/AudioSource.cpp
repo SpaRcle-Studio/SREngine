@@ -99,8 +99,12 @@ namespace SR_AUDIO_NS {
             SoundManager::Instance().Stop(m_handle);
             m_handle = nullptr;
         }
+
         Super::OnDestroy();
-        delete this;
+
+        GetThis().AutoFree([](auto&& pData) {
+            delete pData;
+        });
     }
 
     void AudioSource::OnDisable() {

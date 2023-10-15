@@ -2,15 +2,15 @@
 // Created by Monika on 08.07.2022.
 //
 
-#include <Audio/Impl/OpenALContext.h>
+#include <Audio/Impl/OpenALSoundContext.h>
 #include <Audio/Impl/OpenALTools.h>
 
 namespace SR_AUDIO_NS {
-    OpenALContext::OpenALContext(SoundDevice *pDevice)
+    OpenALSoundContext::OpenALSoundContext(SoundDevice *pDevice)
         : SoundContext(pDevice)
     { }
 
-    OpenALContext::~OpenALContext() {
+    OpenALSoundContext::~OpenALSoundContext() {
         auto&& openALDevice = dynamic_cast<OpenALDevice*>(GetDevice())->GetALDevice();
 
         if (m_openALContext && openALDevice) {
@@ -21,7 +21,7 @@ namespace SR_AUDIO_NS {
         }
     }
 
-    bool OpenALContext::Init() {
+    bool OpenALSoundContext::Init() {
         auto&& openALDevice = dynamic_cast<OpenALDevice*>(GetDevice())->GetALDevice();
 
         if (!openALDevice) {
@@ -46,7 +46,7 @@ namespace SR_AUDIO_NS {
         return true;
     }
 
-    SoundSource OpenALContext::AllocateSource(SoundBuffer buffer) {
+    SoundSource OpenALSoundContext::AllocateSource(SoundBuffer buffer) {
         ALuint* alSource = new ALuint();
         ALuint* alBuffer = reinterpret_cast<ALuint*>(buffer);
 
@@ -56,7 +56,7 @@ namespace SR_AUDIO_NS {
         return reinterpret_cast<void*>(alSource);
     }
 
-    SoundBuffer OpenALContext::AllocateBuffer(void *data, uint64_t dataSize, int32_t sampleRate, SoundFormat format) {
+    SoundBuffer OpenALSoundContext::AllocateBuffer(void *data, uint64_t dataSize, int32_t sampleRate, SoundFormat format) {
         ALuint* alBuffer = new ALuint();
 
         SR_AL_CALL(alGenBuffers, 1, alBuffer);
@@ -78,7 +78,7 @@ namespace SR_AUDIO_NS {
         return reinterpret_cast<void*>(alBuffer);
     }
 
-    bool OpenALContext::FreeBuffer(SoundBuffer* buffer) {
+    bool OpenALSoundContext::FreeBuffer(SoundBuffer* buffer) {
         ALuint* alBuffer = reinterpret_cast<ALuint*>(*buffer);
 
         SR_AL_CALL(alDeleteBuffers, 1, alBuffer);
@@ -89,13 +89,13 @@ namespace SR_AUDIO_NS {
         return true;
     }
 
-    void OpenALContext::Play(SoundSource source) {
+    void OpenALSoundContext::Play(SoundSource source) {
         ALuint* alSource = reinterpret_cast<ALuint*>(source);
 
         alSourcePlay(*alSource);
     }
 
-    void OpenALContext::ApplyParamImpl(SoundSource pSource, PlayParamType paramType, const void* pValue) {
+    void OpenALSoundContext::ApplyParamImpl(SoundSource pSource, PlayParamType paramType, const void* pValue) {
         ALuint* alSource = reinterpret_cast<ALuint*>(pSource);
 
         switch (paramType) {
@@ -116,25 +116,25 @@ namespace SR_AUDIO_NS {
         SR_AL_CALL(alSource3f, *alSource, AL_VELOCITY, 0, 0, 0);
     }
 
-    bool OpenALContext::IsPlaying(SoundSource pSource) const {
+    bool OpenALSoundContext::IsPlaying(SoundSource pSource) const {
         ALint state = AL_INVALID;
         SR_AL_CALL(alGetSourcei, *(ALint*)pSource, AL_SOURCE_STATE, &state);
         return state == AL_PLAYING;
     }
 
-    bool OpenALContext::IsPaused(SoundSource pSource) const {
+    bool OpenALSoundContext::IsPaused(SoundSource pSource) const {
         ALint state = AL_INVALID;
         SR_AL_CALL(alGetSourcei, *(ALint*)pSource, AL_SOURCE_STATE, &state);
         return state == AL_PAUSED;
     }
 
-    bool OpenALContext::IsStopped(SoundSource pSource) const {
+    bool OpenALSoundContext::IsStopped(SoundSource pSource) const {
         ALint state = AL_INVALID;
         SR_AL_CALL(alGetSourcei, *(ALint*)pSource, AL_SOURCE_STATE, &state);
         return state == AL_STOPPED;
     }
 
-    bool OpenALContext::FreeSource(SoundSource* pSource) {
+    bool OpenALSoundContext::FreeSource(SoundSource* pSource) {
         ALuint* alSource = reinterpret_cast<ALuint*>(*pSource);
 
         SR_AL_CALL(alDeleteSources, 1, alSource);

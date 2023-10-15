@@ -6,6 +6,7 @@
 #include <Audio/SoundData.h>
 #include <Audio/SoundDevice.h>
 #include <Audio/SoundContext.h>
+#include <Audio/ListenerContext.h>
 
 namespace SR_AUDIO_NS {
     void SoundManager::OnSingletonDestroy() {
@@ -72,7 +73,7 @@ namespace SR_AUDIO_NS {
             return true;
         }
 
-        auto&& pContext = pPlayData->pData->pContext = GetContext(pPlayData->params);
+        auto&& pContext = pPlayData->pData->pContext = GetSoundContext(pPlayData->params);
         auto&& pSound = pPlayData->pData->pSound;
 
         if (!pContext) {
@@ -266,7 +267,7 @@ namespace SR_AUDIO_NS {
     }
 
 
-    SoundContext* SoundManager::GetContext(const PlayParams& params) {
+    SoundContext* SoundManager::GetSoundContext(const PlayParams &params) noexcept {
         AudioLibrary library = params.library.has_value() ? params.library.value() : GetRelevantLibrary();
         auto&& device = params.device.has_value() ? params.device.value() : std::string();
 
@@ -338,7 +339,7 @@ namespace SR_AUDIO_NS {
         return Play(path, PlayParams::GetDefault());
     }
 
-    AudioLibrary SoundManager::GetRelevantLibrary() const {
+    AudioLibrary SoundManager::GetRelevantLibrary() const noexcept {
         if (m_contexts.empty()) {
             return AudioLibrary::OpenAL;
         }
@@ -373,5 +374,31 @@ namespace SR_AUDIO_NS {
                 ++pIt;
             }
         }
+    }
+
+    ListenerContext* SoundManager::GetListenerContext() const noexcept {
+        if (m_audioListeners.empty()) {
+            return nullptr;
+        }
+
+        return m_audioListeners.front();
+    }
+
+    ListenerContext *SoundManager::CreateListenerContext() {
+        auto&& pListenerContext = new ListenerContext();
+        m_audioListeners.push_back(pListenerContext);
+
+        return pListenerContext;
+    }
+
+    void SoundManager::DestroyListenerContext(ListenerContext *pListener) {
+        for (auto pIt = m_audioListeners.begin(); pIt != m_audioListeners.end(); ++pIt) {
+            if (*pIt == pListener) {
+                m_audioListeners.erase(pIt);
+                delete pListener;
+                break;
+            }
+        }
+
     }
 }
