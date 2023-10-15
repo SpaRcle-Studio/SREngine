@@ -543,9 +543,11 @@ namespace SR_CORE_NS::GUI {
 
     }
 
-    void ComponentDrawer::DrawComponent(Framework::Audio::AudioSource *&pComponent, EditorGUI *context, int32_t index) {
+    void ComponentDrawer::DrawComponent(SR_AUDIO_NS::AudioSource *&pComponent, EditorGUI *context, int32_t index) {
         float_t volume = pComponent->GetVolume();
         float_t pitch = pComponent->GetPitch();
+        float_t coneInnerAngle = pComponent->GetConeInnerAngle();
+        bool loop = pComponent->GetLoop();
 
         if (ImGui::SliderFloat(SR_FORMAT_C("Volume##SliderVolume%i", index), &volume, 0.f, 1.f,"%.1f"))
         {
@@ -557,9 +559,17 @@ namespace SR_CORE_NS::GUI {
             pComponent->SetPitch(pitch);
         }
 
+        if (ImGui::SliderFloat(SR_FORMAT_C("coneInnerAngle##SliderConeInnerAngle%i", index), &coneInnerAngle, 0.f,360.f,"%.1f")){
+            pComponent->SetConeInnerAngle(coneInnerAngle);
+        }
+
+        if(ImGui::Checkbox(SR_FORMAT_C("Loop##CheckBoxLoop%i", index), &loop)){
+            pComponent->SetLoop(loop);
+        }
+
         std::string m_path = pComponent->GetPath().ToString();
 
-        if (ImGui::InputText("Path to Audio", &m_path))
+        if (ImGui::InputText(SR_FORMAT_C("Path##Path%i", index), &m_path))
         {
            pComponent->SetPath(m_path);
         }

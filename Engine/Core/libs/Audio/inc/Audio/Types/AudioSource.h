@@ -12,7 +12,7 @@
 namespace SR_AUDIO_NS
 {
     class AudioSource : public SR_UTILS_NS::Component {
-        SR_ENTITY_SET_VERSION(1002);
+        SR_ENTITY_SET_VERSION(1004);
         SR_INITIALIZE_COMPONENT(AudioSource);
         using Super = SR_UTILS_NS::Component;
         using Handle = void*;
@@ -24,10 +24,14 @@ namespace SR_AUDIO_NS
 
         SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save(SR_UTILS_NS::SavableSaveData data) const override;
 
+        void SetLoop(bool loop);
+        void SetConeInnerAngle(float_t Angle);
         void SetPitch(float_t pitch);
         void SetPath(const SR_UTILS_NS::Path& path);
         void SetVolume(float_t volume);
 
+        SR_NODISCARD bool GetLoop() const;
+        SR_NODISCARD float_t GetConeInnerAngle() const;
         SR_NODISCARD float_t GetPitch() const;
         SR_NODISCARD SR_UTILS_NS::Path GetPath() const;
         SR_NODISCARD float_t GetVolume() const;
