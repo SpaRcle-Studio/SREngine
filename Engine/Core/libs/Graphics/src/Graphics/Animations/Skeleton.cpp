@@ -126,14 +126,10 @@ namespace SR_ANIMATIONS_NS {
         m_bonesByName.reserve(SR_HUMANOID_MAX_BONES);
         m_bonesByIndex.reserve(SR_HUMANOID_MAX_BONES);
 
-        bool hasErrors = false;
-
         const SR_HTYPES_NS::Function<void(SR_ANIMATIONS_NS::Bone*)> processBone = [&](SR_ANIMATIONS_NS::Bone* pBone) {
         #ifdef SR_DEBUG
             if (m_bonesByName.count(pBone->hashName) == 1) {
-                SR_ERROR("Skeleton::ReCalculateSkeleton() : bone with name \"" + pBone->name + "\" already exists in hash table!");
-                hasErrors = true;
-                return;
+                SR_WARN("Skeleton::ReCalculateSkeleton() : bone with name \"" + pBone->name + "\" already exists in hash table!");
             }
         #endif
 
@@ -146,11 +142,6 @@ namespace SR_ANIMATIONS_NS {
         };
 
         processBone(m_rootBone);
-
-        if (hasErrors) {
-            m_bonesByName.clear();
-            SR_SAFE_DELETE_PTR(m_rootBone);
-        }
 
         return true;
     }

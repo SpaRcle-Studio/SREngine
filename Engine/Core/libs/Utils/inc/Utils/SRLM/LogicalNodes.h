@@ -16,10 +16,23 @@ namespace SR_SRLM_NS {
 
     };
 
-    class SequenceNode : public IExecutableNode {
-        SR_REGISTER_LOGICAL_NODE(SequenceNode, Sequence, { "Logic" })
+    class StartResetNode : public LogicalNode {
+        SR_REGISTER_LOGICAL_NODE(StartResetNode, Start Reset, { "Logic" })
         using Super = LogicalNode;
     public:
+        SR_NODISCARD LogicalNodeType GetType() const noexcept override { return LogicalNodeType::StartReset; }
+
+        void Execute(float_t dt) override;
+        void InitNode() override;
+
+    };
+
+    class EndResetNode : public LogicalNode {
+        SR_REGISTER_LOGICAL_NODE(EndResetNode, End Reset, { "Logic" })
+        using Super = LogicalNode;
+    public:
+        SR_NODISCARD LogicalNodeType GetType() const noexcept override { return LogicalNodeType::EndReset; }
+
         void Execute(float_t dt) override;
         void InitNode() override;
 
@@ -27,6 +40,16 @@ namespace SR_SRLM_NS {
 
     class SynchronizeNode : public IExecutableNode {
         SR_REGISTER_LOGICAL_NODE(SynchronizeNode, Synchronize, { "Logic" })
+        using Super = IExecutableNode;
+    public:
+        void Execute(float_t dt) override;
+        void InitNode() override;
+
+    };
+
+    class SequenceNode : public IExecutableNode {
+        SR_REGISTER_LOGICAL_NODE(SequenceNode, Sequence, { "Logic" })
+        using Super = IExecutableNode;
     public:
         void Execute(float_t dt) override;
         void InitNode() override;
@@ -35,6 +58,7 @@ namespace SR_SRLM_NS {
 
     class BranchNode : public IExecutableNode {
         SR_REGISTER_LOGICAL_NODE(BranchNode, Branch, { "Logic" })
+        using Super = IExecutableNode;
     public:
         void Execute(float_t dt) override;
         void InitNode() override;
@@ -71,6 +95,7 @@ namespace SR_SRLM_NS {
 
     class DebugPrintNode : public IExecutableNode {
         SR_REGISTER_LOGICAL_NODE(DebugPrintNode, Debug Print, { "Base" })
+        using Super = IExecutableNode;
     public:
         void Execute(float_t dt) override;
         void InitValues() override;
@@ -79,6 +104,7 @@ namespace SR_SRLM_NS {
 
     class StartNode : public IExecutableNode {
         SR_REGISTER_LOGICAL_NODE(StartNode, Start, { "Base" })
+        using Super = IExecutableNode;
     public:
         void Execute(float_t dt) override;
         void InitNode() override;
@@ -86,6 +112,7 @@ namespace SR_SRLM_NS {
     };
 
     class ConstructorNode : public IComputeNode {
+        using Super = IComputeNode;
     public:
         SR_NODISCARD uint64_t GetNodeHashName() const noexcept override;
         SR_NODISCARD std::string GetNodeName() const noexcept override;
@@ -99,6 +126,7 @@ namespace SR_SRLM_NS {
     };
 
     class PlusNode : public IComputeNode {
+        using Super = IComputeNode;
     public:
         void Execute(float_t dt) override;
 

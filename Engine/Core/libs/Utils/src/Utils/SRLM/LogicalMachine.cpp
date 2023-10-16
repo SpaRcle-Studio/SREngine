@@ -160,54 +160,14 @@ namespace SR_SRLM_NS {
             *pPin->pData->GetEnum() = static_cast<int64_t>(FlowState::Executed);
         }
 
-        ActiveNodeInfo info;
-        uint32_t offset = m_currentNode + 1;
-
-        if (GetCurrentNode()->GetType() == LogicalNodeType::Executable) {
-            auto&& pExecutable = dynamic_cast<IExecutableNode*>(GetCurrentNode());
-            if (!pExecutable) {
-                return false;
-            }
-
-            pExecutable->Execute(dt);
-
-            if (pExecutable->HasErrors()) {
-                return false;
-            }
-
-            bool needContinue = pExecutable->IsNeedRepeat();
-
-            for (auto&& pin : pExecutable->GetOutputs()) {
-                if (pin.pData->GetClass() != DataTypeClass::Flow) {
-                    continue;
-                }
-
-                if (*pin.pData->GetEnum() == static_cast<int64_t>(FlowState::NotAvailable)) {
-                    continue;
-                }
-
-                if (!needContinue) {
-                    needContinue = true;
-                    SetCurrentNode(pin.GetFirstNode(), &pin);
-                }
-                else {
-                    info.pNode = pin.GetFirstNode();
-                    info.pFromPin = &pin;
-                    m_active.insert(m_active.begin() + offset, info);
-                    ++offset;
-                }
-            }
-
-            if (pExecutable->IsNeedPostRepeat()) {
-                if (needContinue) {
-                    info.pNode = pExecutable;
-                    info.pFromPin = nullptr;
-                    m_active.insert(m_active.begin() + offset, info);
-                }
-                needContinue = true;
-            }
-
-            return needContinue;
+        switch (GetCurrentNode()->GetType()) {
+            case LogicalNodeType::Executable:
+            case LogicalNodeType::EndReset:
+                return ProcessExecutable(dt);
+            case LogicalNodeType::StartReset:
+                return ProcessReset(dt);
+            default:
+                break;
         }
 
         SRHalt("Unresolved behaviour!");
@@ -238,5 +198,109 @@ namespace SR_SRLM_NS {
             m_active[m_currentNode].pNode = pNode;
             m_active[m_currentNode].pFromPin = pFromPin;
         }
+    }
+
+    bool LogicalMachine::ProcessExecutable(float_t dt) {
+        ActiveNodeInfo info;
+        uint32_t offset = m_currentNode + 1;
+
+        auto&& pNode = GetCurrentNode();
+        if (!pNode) {
+            return false;
+        }
+
+        pNode->Execute(dt);
+
+        if (pNode->HasErrors()) {
+            return false;
+        }
+
+        bool needContinue = pNode->IsNeedRepeat();
+
+        for (auto&& pin : pNode->GetOutputs()) {
+            if (pin.pData->GetClass() != DataTypeClass::Flow) {
+                continue;
+            }
+
+            if (*pin.pData->GetEnum() == static_cast<int64_t>(FlowState::NotAvailable)) {
+                continue;
+            }
+
+            if (!needContinue) {
+                needContinue = true;
+                SetCurrentNode(pin.GetFirstNode(), &pin);
+            }
+            else {
+                info.pNode = pin.GetFirstNode();
+                info.pFromPin = &pin;
+                m_active.insert(m_active.begin() + offset, info);
+                ++offset;
+            }
+        }
+
+        if (pNode->IsNeedPostRepeat()) {
+            if (needContinue) {
+                info.pNode = pNode;
+                info.pFromPin = nullptr;
+                m_active.insert(m_active.begin() + offset, info);
+            }
+            needContinue = true;
+        }
+
+        return needContinue;
+    }
+
+    bool LogicalMachine::ProcessReset(float_t dt) {
+        GetCurrentNode()->Execute(dt);
+
+        if (GetCurrentNode()->GetOutputs().empty()) {
+            return false;
+        }
+
+        std::set<LogicalNode*> passed;
+        std::list<LogicalNode*> nodes;
+
+        nodes.emplace_back(GetCurrentNode());
+        passed.insert(GetCurrentNode());
+
+        while (!nodes.empty()) {
+            auto&& pCurrentNode = nodes.front();
+
+            if (pCurrentNode != GetCurrentNode()) {
+                // pCurrentNode->ResetInputFlows();
+                pCurrentNode->ResetOutputFlows();
+                pCurrentNode->ResetStatus();
+            }
+
+            for (auto&& pin : pCurrentNode->GetOutputs()) {
+                for (auto&& connection : pin.connections) {
+                    if (passed.count(connection.pNode) == 1) {
+                        continue;
+                    }
+
+                    if (!connection.pNode) {
+                        continue;
+                    }
+
+                    if (connection.pNode->GetType() == LogicalNodeType::EndReset) {
+                        continue;
+                    }
+
+                    passed.insert(connection.pNode);
+                    nodes.emplace_back(connection.pNode);
+                }
+            }
+
+            nodes.pop_front();
+        }
+
+        /// делаем переход на следующую ноду
+        {
+            auto&& pin = GetCurrentNode()->GetOutputs().front();
+            *pin.pData->GetEnum() = static_cast<int64_t>(FlowState::Executed);
+            SetCurrentNode(pin.GetFirstNode(), &pin);
+        }
+
+        return true;
     }
 }

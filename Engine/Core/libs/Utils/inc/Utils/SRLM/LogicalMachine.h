@@ -39,6 +39,8 @@ namespace SR_SRLM_NS {
         bool Execute(float_t dt);
         void AddNode(LogicalNode* pNode);
         void Optimize();
+        bool ProcessExecutable(float_t dt);
+        bool ProcessReset(float_t dt);
 
         void SetCurrentNode(LogicalNode* pNode, LogicalNode::NodePin* pFromPin);
 

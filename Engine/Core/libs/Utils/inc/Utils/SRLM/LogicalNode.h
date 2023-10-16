@@ -33,7 +33,7 @@ namespace SR_SRLM_NS {
     );
 
     SR_ENUM_NS_CLASS_T(LogicalNodeType, uint8_t,
-        Compute, Executable, Connector
+        Compute, Executable, Connector, StartReset, EndReset
     );
 
     class LogicalNode : public SR_UTILS_NS::NonCopyable {
@@ -59,6 +59,10 @@ namespace SR_SRLM_NS {
 
         void ClearLogicalNode();
 
+        void ResetInputFlows();
+        void ResetOutputFlows();
+        void ResetStatus();
+
         void SetMachine(LogicalMachine* pMachine) { m_machine = pMachine; }
         void SetNodeIndex(uint32_t index) { m_nodeIndex = index; }
 
@@ -79,7 +83,9 @@ namespace SR_SRLM_NS {
         virtual void InitValues() { }
         virtual void InitNode() { }
 
-        virtual void Execute(float_t dt) { }
+        virtual void Execute(float_t dt) {
+            m_status |= LogicalNodeStatus::Success;
+        }
 
         SR_NODISCARD virtual bool IsNeedRepeat() const { return false; }
         SR_NODISCARD virtual bool IsNeedPostRepeat() const { return false; }
@@ -122,8 +128,8 @@ namespace SR_SRLM_NS {
     /// ----------------------------------------------------------------------------------------------------------------
 
     class IExecutableNode : public LogicalNode {
-    protected:
         using Super = LogicalNode;
+    protected:
         using Base = IExecutableNode;
 
     protected:

@@ -39,11 +39,11 @@ namespace SR_SRLM_NS {
             static_cast<SR_UTILS_NS::DebugLogType>(*CalcInput(2)->GetEnum())
         );
         *m_outputs.at(0).pData->GetEnum() = static_cast<int32_t>(FlowState::Available);
-        m_status |= LogicalNodeStatus::Success;
+        Super::Execute(dt);
     }
 
     void DebugPrintNode::InitNode() {
-        IExecutableNode::InitNode();
+        Super::InitNode();
 
         AddInputData<DataTypeFlow>();
 
@@ -58,30 +58,31 @@ namespace SR_SRLM_NS {
     }
 
     void DebugPrintNode::InitValues() {
-        IExecutableNode::InitValues();
+        Super::InitValues();
         m_inputs.at(1).pData->SetCustomValue<std::string>("Hello World!");
     }
 
     void StartNode::InitNode() {
-        IExecutableNode::InitNode();
+        Super::InitNode();
         AddOutputData<DataTypeFlow>();
     }
 
     void StartNode::Execute(float_t dt) {
         *m_outputs.at(0).pData->GetEnum() = static_cast<int32_t>(FlowState::Available);
-        m_status |= LogicalNodeStatus::Success;
+        Super::Execute(dt);
     }
 
     void PlusNode::Execute(float_t dt) {
         SR_LM_NODE_NUMERIC_OPERATORS_CALCULATION(m_outputs[0].pData, m_inputs[0].pData, m_inputs[1].pData, +);
+        Super::Execute(dt);
     }
 
     /// ----------------------------------------------------------------------------------------------------------------
 
     void ConstructorNode::Execute(float_t dt) {
         CalcInput(0)->CopyTo(m_outputs[0].pData);
-        m_status |= LogicalNodeStatus::Success;
         m_dirty = false;
+        Super::Execute(dt);
     }
 
     void ConstructorNode::InitNode() {
@@ -177,10 +178,11 @@ namespace SR_SRLM_NS {
 
     void SequenceNode::Execute(float_t dt) {
         for (auto&& output : GetOutputs()) {
+            if (*output.pData->GetEnum() != static_cast<int32_t>(FlowState::NotAvailable)) {
+                continue;
+            }
             *output.pData->GetEnum() = static_cast<int32_t>(FlowState::Available);
         }
-
-        m_status |= LogicalNodeStatus::Success;
 
         Super::Execute(dt);
     }
@@ -204,13 +206,11 @@ namespace SR_SRLM_NS {
             *GetOutput(1)->GetEnum() = static_cast<int32_t>(FlowState::Available);
         }
 
-        m_status |= LogicalNodeStatus::Success;
-
-        Base::Execute(dt);
+        Super::Execute(dt);
     }
 
     void BranchNode::InitNode() {
-        Base::InitNode();
+        Super::InitNode();
 
         AddInputData<DataTypeFlow>();
         AddInputData<DataTypeBool>(SR_HASH_STR_REGISTER("Condition"));
@@ -219,20 +219,40 @@ namespace SR_SRLM_NS {
         AddOutputData<DataTypeFlow>(SR_HASH_STR_REGISTER("False"));
     }
 
+    void StartResetNode::InitNode() {
+        AddInputData<DataTypeFlow>();
+        AddOutputData<DataTypeFlow>();
+        Super::InitNode();
+    }
+
+    void StartResetNode::Execute(float_t dt) {
+        *GetOutput(0)->GetEnum() = static_cast<int32_t>(FlowState::Available);
+        Super::Execute(dt);
+    }
+
+    void EndResetNode::InitNode() {
+        AddInputData<DataTypeFlow>();
+        AddOutputData<DataTypeFlow>();
+        Super::InitNode();
+    }
+
+    void EndResetNode::Execute(float_t dt) {
+        *GetOutput(0)->GetEnum() = static_cast<int32_t>(FlowState::Available);
+        Super::Execute(dt);
+    }
+
     void SynchronizeNode::Execute(float_t dt) {
         for (uint32_t i = 0; i < m_inputs.size(); ++i) {
             if (*CalcInput(i)->GetEnum() != static_cast<int32_t>(FlowState::Executed)) {
                 *GetOutput(0)->GetEnum() = static_cast<int32_t>(FlowState::NotAvailable);
-                Base::Execute(dt);
+                Super::Execute(dt);
                 return;
             }
         }
 
         *GetOutput(0)->GetEnum() = static_cast<int32_t>(FlowState::Available);
 
-        m_status |= LogicalNodeStatus::Success;
-
-        Base::Execute(dt);
+        Super::Execute(dt);
     }
 
     void SynchronizeNode::InitNode() {

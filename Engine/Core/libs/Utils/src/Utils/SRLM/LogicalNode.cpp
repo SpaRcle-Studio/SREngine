@@ -244,6 +244,28 @@ namespace SR_SRLM_NS {
         }
     }
 
+    void LogicalNode::ResetInputFlows() {
+        for (auto&& pin : GetInputs()) {
+            if (pin.pData->GetClass() != DataTypeClass::Flow) {
+                continue;
+            }
+            *pin.pData->GetEnum() = static_cast<int64_t>(FlowState::NotAvailable);
+        }
+    }
+
+    void LogicalNode::ResetOutputFlows() {
+        for (auto&& pin : GetOutputs()) {
+            if (pin.pData->GetClass() != DataTypeClass::Flow) {
+                continue;
+            }
+            *pin.pData->GetEnum() = static_cast<int64_t>(FlowState::NotAvailable);
+        }
+    }
+
+    void LogicalNode::ResetStatus() {
+        m_status = LogicalNodeStatus::None;
+    }
+
     /// ----------------------------------------------------------------------------------------------------------------
 
     const DataType* IComputeNode::GetOutput(uint32_t index) {
