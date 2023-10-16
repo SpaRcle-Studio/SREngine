@@ -9,7 +9,7 @@
 
 namespace SR_AUDIO_NS
 {
-    class ListenerContext;
+    class SoundListener;
 
     class AudioListener : public SR_UTILS_NS::Component{
         SR_ENTITY_SET_VERSION(1000);
@@ -30,9 +30,7 @@ namespace SR_AUDIO_NS
         void OnDestroy() override;
 
     private:
-        Handle m_handle = nullptr;
-
-        ListenerContext* m_listenerContext = nullptr;
+        SoundListener* m_listenerContext = nullptr;
     };
 }
 

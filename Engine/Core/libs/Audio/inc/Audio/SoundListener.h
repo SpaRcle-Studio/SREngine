@@ -2,8 +2,8 @@
 // Created by Capitan_Slider on 30.09.2023.
 //
 
-#ifndef SRENGINE_LISTENERCONTEXT_H
-#define SRENGINE_LISTENERCONTEXT_H
+#ifndef SRENGINE_SOUNDLISTENER_H
+#define SRENGINE_SOUNDLISTENER_H
 
 #include <Utils/Common/NonCopyable.h>
 #include <Utils/Common/Enumerations.h>
@@ -21,12 +21,15 @@ namespace SR_AUDIO_NS{
        ExponentDistanceClamped
     );
 
-    class ListenerContext : public SR_UTILS_NS::NonCopyable {
+    class SoundListener : public SR_UTILS_NS::NonCopyable {
+    public:
+        SoundListener* Allocate(SoundDevice* pDevice);
+
     public:
         virtual bool Init() { return true; };
-
         virtual bool Update(const SR_MATH_NS::FVector3& position, const SR_MATH_NS::Quaternion& quaternion) { return true; }
 
+    public:
         SR_NODISCARD ListenerDistanceModel GetDistanceModel() const noexcept { return m_distanceModel; }
         SR_NODISCARD float_t GetRolloffFactor() const noexcept { return m_rolloffFactor; }
         SR_NODISCARD float_t GetReferenceDistance() const noexcept { return m_referenceDistance; }
@@ -38,7 +41,6 @@ namespace SR_AUDIO_NS{
         virtual void SetMaxDistance(float_t maxDistance) { m_maxDistance = maxDistance; }
 
     protected:
-
         ListenerDistanceModel m_distanceModel = ListenerDistanceModel::InverseDistanceClamped;
         float_t m_rolloffFactor = 1.0f;
         float_t m_referenceDistance = 1.0f;
@@ -47,4 +49,4 @@ namespace SR_AUDIO_NS{
     };
 }
 
-#endif //SRENGINE_LISTENERCONTEXT_H
+#endif //SRENGINE_SOUNDLISTENER_H

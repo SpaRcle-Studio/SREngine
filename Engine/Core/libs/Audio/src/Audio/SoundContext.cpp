@@ -4,11 +4,25 @@
 
 #include <Audio/SoundContext.h>
 #include <Audio/Impl/OpenALSoundContext.h>
+#include <Audio/Impl/OpenALSoundListener.h>
 
 namespace SR_AUDIO_NS {
-    SoundDevice *SoundContext::GetDevice() const {
+    SoundContext::SoundContext(SoundDevice *pDevice)
+        : m_device(pDevice)
+    { }
+
+    SoundContext::~SoundContext() {
+        for (auto&& pListener : m_listeners) {
+            delete pListener;
+        }
+
+        SR_SAFE_DELETE_PTR(m_device);
+    }
+
+    SoundDevice* SoundContext::GetDevice() const {
         return m_device;
     }
+
     PlayParams PlayParams::GetDefault() {
         PlayParams playParams;
 
@@ -46,17 +60,7 @@ namespace SR_AUDIO_NS {
         ApplyParam(pSource, params.velocity, m_params.velocity, PlayParamType::Velocity);
     }
 
-    SoundContext::SoundContext(SoundDevice *pDevice)
-        : m_device(pDevice)
-    { }
-
-    SoundContext::~SoundContext() {
-        delete m_device;
-    }
-
-    SoundContext* SoundContext::Allocate(SoundDevice *pDevice) {
-        SR_INFO("SoundContext::Allocate() : allocating a sound context...");
-
+    SoundContext* SoundContext::Allocate(SoundDevice* pDevice) {
         if (!pDevice) {
             SR_ERROR("SoundContext::Allocate() : the device is nullptr!");
             return nullptr;
@@ -75,5 +79,40 @@ namespace SR_AUDIO_NS {
         }
 
         return nullptr;
+    }
+
+    SoundListener* SoundContext::AllocateListener() {
+        if (!m_device) {
+            SR_ERROR("SoundContext::Allocate() : the device is nullptr!");
+            return nullptr;
+        }
+
+        switch (m_device->GetLibrary()) {
+            case AudioLibrary::OpenAL:{
+                auto&& pListener = new OpenALSoundListener();
+                m_listeners.emplace_back(pListener);
+
+                return pListener;
+            }
+            case AudioLibrary::FMOD:
+            case AudioLibrary::Wwise:
+            case AudioLibrary::Allegro:
+            case AudioLibrary::SoLoud:
+            case AudioLibrary::Unknown:
+                SR_ERROR("SoundContext::Allocate() : unsupported library!");
+        }
+
+        return nullptr;
+    }
+
+    bool SoundContext::FreeListener(SoundListener* pListener) {
+        for (auto pIt = m_listeners.begin(); pIt != m_listeners.end(); ++pIt ) {
+            if (*pIt == pListener) {
+                m_listeners.erase(pIt);
+                return true;
+            }
+        }
+
+        return false;
     }
 }

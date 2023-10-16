@@ -6,7 +6,7 @@
 #include <Audio/SoundData.h>
 #include <Audio/SoundDevice.h>
 #include <Audio/SoundContext.h>
-#include <Audio/ListenerContext.h>
+#include <Audio/SoundListener.h>
 
 namespace SR_AUDIO_NS {
     void SoundManager::OnSingletonDestroy() {
@@ -267,17 +267,19 @@ namespace SR_AUDIO_NS {
     }
 
 
-    SoundContext* SoundManager::GetSoundContext(const PlayParams &params) noexcept {
+    SoundContext* SoundManager::GetSoundContext(const PlayParams& params) noexcept {
         AudioLibrary library = params.library.has_value() ? params.library.value() : GetRelevantLibrary();
         auto&& device = params.device.has_value() ? params.device.value() : std::string();
 
         if (auto&& pLibIt = m_contexts.find(library); pLibIt != m_contexts.end()) {
-            if (device.empty() && !pLibIt->second.empty()) {
-                return pLibIt->second.begin()->second;
+            auto&& deviceContexts = pLibIt->second;
+
+            if (device.empty() && !deviceContexts.empty()) {
+                return deviceContexts.begin()->second;
             }
 
             if (!device.empty()) {
-                if (auto&& pDeviceIt = pLibIt->second.find(device); pDeviceIt != pLibIt->second.end()) {
+                if (auto&& pDeviceIt = deviceContexts.find(device); pDeviceIt != deviceContexts.end()) {
                     return pDeviceIt->second;
                 }
             }
@@ -302,7 +304,7 @@ namespace SR_AUDIO_NS {
             return nullptr;
         }
 
-        m_contexts[library].insert(std::make_pair(pDevice->GetName(), pContext));
+        m_contexts[library][pDevice->GetName()] = pContext;
 
         return pContext;
     }
@@ -313,10 +315,11 @@ namespace SR_AUDIO_NS {
         StopAll();
 
         for (auto&& [libraryType, contexts] : m_contexts) {
-            for (auto&& [deviceName, pContext] : contexts) {
-                delete pContext;
+            for (auto&& [deviceName, pSoundContext] : contexts) {
+                delete pSoundContext;
             }
         }
+
         m_contexts.clear();
     }
 
@@ -376,29 +379,38 @@ namespace SR_AUDIO_NS {
         }
     }
 
-    ListenerContext* SoundManager::GetListenerContext() const noexcept {
-        if (m_audioListeners.empty()) {
-            return nullptr;
-        }
-
-        return m_audioListeners.front();
+    SoundListener* SoundManager::CreateListener() {
+        return CreateListener(AudioLibrary::Unknown);
     }
 
-    ListenerContext *SoundManager::CreateListenerContext() {
-        auto&& pListenerContext = new ListenerContext();
-        m_audioListeners.push_back(pListenerContext);
-
-        return pListenerContext;
-    }
-
-    void SoundManager::DestroyListenerContext(ListenerContext *pListener) {
-        for (auto pIt = m_audioListeners.begin(); pIt != m_audioListeners.end(); ++pIt) {
-            if (*pIt == pListener) {
-                m_audioListeners.erase(pIt);
-                delete pListener;
-                break;
+    SoundListener* SoundManager::CreateListener(AudioLibrary audioLibrary) {
+        if (audioLibrary == AudioLibrary::Unknown) {
+            if (m_contexts.empty()) {
+                audioLibrary = GetRelevantLibrary();
+            }
+            else {
+                audioLibrary = m_contexts.begin()->first;
             }
         }
 
+        PlayParams params;
+        params.library = audioLibrary;
+        auto&& pSoundContext = GetSoundContext(params);
+        if (!pSoundContext) {
+            SR_ERROR("SoundManager::CreateListenerContext() : failed to create sound context!");
+            return nullptr;
+        }
+
+        return pSoundContext->AllocateListener();
+    }
+
+    void SoundManager::DestroyListener(SoundListener* pListener) {
+        for (auto&& [libraryType, deviceContexts] : m_contexts) {
+            for (auto&& [deviceName, pSoundContext] : deviceContexts) {
+                if (pSoundContext->FreeListener(pListener)) {
+                    return;
+                }
+            }
+        }
     }
 }

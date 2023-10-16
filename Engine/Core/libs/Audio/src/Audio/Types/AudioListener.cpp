@@ -3,9 +3,10 @@
 //
 
 #include <Audio/Types/AudioListener.h>
-#include <Audio/ListenerContext.h>
-#include <Utils/ECS/GameObject.h>
+#include <Audio/SoundListener.h>
+#include <Audio/Impl/OpenALSoundListener.h>
 
+#include <Utils/ECS/GameObject.h>
 #include <Utils/ECS/Transform.h>
 
 namespace SR_AUDIO_NS{
@@ -14,11 +15,11 @@ namespace SR_AUDIO_NS{
     AudioListener::AudioListener()
         : SR_UTILS_NS::Component()
     {
-        m_listenerContext = SR_AUDIO_NS ::SoundManager::Instance().CreateListenerContext();
+        m_listenerContext = SR_AUDIO_NS ::SoundManager::Instance().CreateListener();
     }
 
     void AudioListener::OnDestroy() {
-        SR_AUDIO_NS ::SoundManager::Instance().DestroyListenerContext(m_listenerContext);
+        SR_AUDIO_NS ::SoundManager::Instance().DestroyListener(m_listenerContext);
         m_listenerContext = nullptr;
 
         Super::OnDestroy();
@@ -43,6 +44,11 @@ namespace SR_AUDIO_NS{
     }
 
     void AudioListener::OnMatrixDirty() {
+        if (!m_listenerContext) {
+            SRHalt("AudioListener::OnMatrixDirty() : listener context is nullptr!");
+            return;
+        }
+
         auto&& matrix = GetTransform()->GetMatrix();
         SR_MATH_NS::Quaternion q;
         SR_MATH_NS::FVector3 pos;

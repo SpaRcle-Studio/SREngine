@@ -18,11 +18,16 @@ namespace SR_AUDIO_NS {
 
     public:
         bool Init() override;
+        void Play(SoundSource source) override;
 
+        void ApplyParamImpl(SoundSource pSource, PlayParamType paramType, const void* pValue) override;
+
+    public:
         SR_NODISCARD bool IsPlaying(SoundSource pSource) const override;
         SR_NODISCARD bool IsPaused(SoundSource pSource) const override;
         SR_NODISCARD bool IsStopped(SoundSource pSource) const override;
 
+    public:
         SR_NODISCARD SoundSource AllocateSource(SoundBuffer buffer) override;
 
         SR_NODISCARD SoundBuffer AllocateBuffer(
@@ -31,12 +36,9 @@ namespace SR_AUDIO_NS {
                 int32_t sampleRate,
                 SoundFormat format) override;
 
-        void ApplyParamImpl(SoundSource pSource, PlayParamType paramType, const void* pValue) override;
-
+    public:
         bool FreeBuffer(SoundBuffer* buffer) override;
         bool FreeSource(SoundSource* pSource) override;
-
-        void Play(SoundSource source) override;
 
     private:
         ALCcontext* m_openALContext = nullptr;

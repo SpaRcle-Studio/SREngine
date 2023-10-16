@@ -10,6 +10,7 @@
 
 namespace SR_AUDIO_NS {
     class SoundDevice;
+    class SoundListener;
 
     class SoundContext : public SR_UTILS_NS::NonCopyable {
     protected:
@@ -27,6 +28,8 @@ namespace SR_AUDIO_NS {
         SR_NODISCARD virtual bool IsPaused(SoundSource pSource) const = 0;
         SR_NODISCARD virtual bool IsStopped(SoundSource pSource) const = 0;
 
+        SR_NODISCARD virtual SoundListener* AllocateListener();
+
         SR_NODISCARD virtual SoundSource AllocateSource(SoundBuffer buffer) = 0;
 
         SR_NODISCARD virtual SoundBuffer AllocateBuffer(
@@ -35,8 +38,7 @@ namespace SR_AUDIO_NS {
                 int32_t sampleRate,
                 SoundFormat format) = 0;
 
-        template <typename T> void ApplyParam(SoundSource pSource, const T& newParam, T& currentParam, PlayParamType paramType)
-        {
+        template <typename T> void ApplyParam(SoundSource pSource, const T& newParam, T& currentParam, PlayParamType paramType) {
             if (newParam.has_value()) { /// Данил, мы тебя любим! (с) SpaRcle Team <3
                 if (currentParam.has_value()) {
                     if (const_cast<const T&>(currentParam).value() != newParam.value()) {
@@ -56,6 +58,7 @@ namespace SR_AUDIO_NS {
 
         virtual bool FreeBuffer(SoundBuffer* buffer) = 0;
         virtual bool FreeSource(SoundSource* pSource) = 0;
+        virtual bool FreeListener(SoundListener* pListener);
 
         virtual void Play(SoundSource source) = 0;
 
@@ -63,6 +66,8 @@ namespace SR_AUDIO_NS {
 
     protected:
         SoundDevice* m_device = nullptr;
+        std::list<SoundListener*> m_listeners;
+
     private:
         PlayParams m_params;
 
