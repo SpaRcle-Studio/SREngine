@@ -33,22 +33,40 @@
  1. ```Clone repository via the command "git clone https://github.com/Monika0000/SREngine"```
  2. ```Switch to the "dev" (or another one) branch via the command "git checkout branch_name"```
  3. ```Run command "git submodule update --init --recursive" in repository folder```
- 4. ```Working with CMake (if you're using Visual Studio):``` 
+ <details>
+ <summary> 4. Working with CMake (if you're using Visual Studio): </summary>
+  
     - 4.1 Choose the path to the SREngine folder (where the source code is located).
+  
     - 4.2 Choose the path where to build the binaries (SREngine/Build).
+     
     - 4.3 Press "Configure" and choose your VS version.
+    
     - 4.4 Press "Generate"
- 5. ```Working with CLion:```
+ </details>
+ <details>
+ <summary> 5. Working with CLion: </summary>
+  
     - 5.1 Press Ctrl + Alt + S to open Settings window
+    
     - 5.2. Select "Build, Execution, Deployment" on the left
+    
     - 5.3. Select "Toolchains"
+    
     - 5.4. Add (Alt + Insert) Visual Studio compiler
+    
     - 5.5. Select amd64 in "Architecture:"
-    - 5.6. Repeat 6.2
+    
+    - 5.6. Repeat 5.2
+    
     - 5.7. Select "CMake"
+    
     - 5.8. Pass "-j*" argument as "Build options", while * is a number of your logical processors minus 2
+    
     - 5.9. In Project window right-click SREngine folder and click "Reload CMake Project"
+    
     - 5.10. Click "Run 'SREngine'" (Shift + F10)
+ </details>
 
 ## Used libraries
   * [ImGUI](https://github.com/ocornut/imgui)
