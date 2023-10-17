@@ -72,4 +72,40 @@ namespace SR_AUDIO_NS {
 
         return true;
     }
+
+    void OpenALSoundListener::SetVelocity(Framework::Helper::Math::FVector3 velocity) {
+        if (!SR_AL_CALL(alListenerfv, AL_VELOCITY, FV3ToALV3(velocity).vec3)) {
+            SR_ERROR("OpenALListenerContext::SetVelocity() : failed to set velocity!");
+            return;
+        }
+
+        Super::SetVelocity(velocity);
+    }
+
+    void OpenALSoundListener::SetDopplerFactor(float_t dopplerFactor) {
+        if (!SR_AL_CALL(alListenerf, AL_DOPPLER_FACTOR, dopplerFactor)) {
+            SR_ERROR("OpenALListenerContext::SetDopplerFactor() : failed to set doppler factor!");
+            return;
+        }
+
+        Super::SetDopplerFactor(dopplerFactor);
+    }
+
+    void OpenALSoundListener::SetGain(float_t gain) {
+        if (!SR_AL_CALL(alListenerf, AL_GAIN, gain)) {
+            SR_ERROR("OpenALListenerContext::SetDopplerFactor() : failed to set gain!");
+            return;
+        }
+
+        Super::SetGain(gain);
+    }
+
+    void OpenALSoundListener::SetOuterConeGain(float_t outerConeGain) {
+        if (!SR_AL_CALL(alListenerf, AL_CONE_OUTER_GAIN, outerConeGain)) {
+            SR_ERROR("OpenALListenerContext::SetOuterConeGain() : failed to set outer cone gain!");
+            return;
+        }
+
+        Super::SetOuterConeGain(outerConeGain);
+    }
 }

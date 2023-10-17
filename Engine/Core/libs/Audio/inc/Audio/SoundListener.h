@@ -8,18 +8,10 @@
 #include <Utils/Common/NonCopyable.h>
 #include <Utils/Common/Enumerations.h>
 
+#include <Audio/ListenerData.h>
+
 namespace SR_AUDIO_NS{
     class SoundDevice;
-
-    SR_ENUM_NS_CLASS_T(ListenerDistanceModel, uint8_t,
-       None,
-       InverseDistance,
-       InverseDistanceClamped,
-       LinearDistance,
-       LinearDistanceClamped,
-       ExponentDistance,
-       ExponentDistanceClamped
-    );
 
     class SoundListener : public SR_UTILS_NS::NonCopyable {
     public:
@@ -30,21 +22,30 @@ namespace SR_AUDIO_NS{
         virtual bool Update(const SR_MATH_NS::FVector3& position, const SR_MATH_NS::Quaternion& quaternion) { return true; }
 
     public:
-        SR_NODISCARD ListenerDistanceModel GetDistanceModel() const noexcept { return m_distanceModel; }
-        SR_NODISCARD float_t GetRolloffFactor() const noexcept { return m_rolloffFactor; }
-        SR_NODISCARD float_t GetReferenceDistance() const noexcept { return m_referenceDistance; }
-        SR_NODISCARD float_t GetMaxDistance() const noexcept { return m_maxDistance; }
+        SR_NODISCARD ListenerData* GetData() const noexcept { return m_data; }
 
-        virtual void SetDistanceModel(ListenerDistanceModel distanceModel) { m_distanceModel = distanceModel; }
-        virtual void SetRolloffFactor(float_t rolloffFactor) { m_rolloffFactor = rolloffFactor; }
-        virtual void SetReferenceDistance(float_t referenceDistance) { m_referenceDistance = referenceDistance; }
-        virtual void SetMaxDistance(float_t maxDistance) { m_maxDistance = maxDistance; }
+        SR_NODISCARD ListenerDistanceModel GetDistanceModel() const noexcept { return m_data->distanceModel; }
+        SR_NODISCARD float_t GetRolloffFactor() const noexcept { return m_data->rolloffFactor; }
+        SR_NODISCARD float_t GetReferenceDistance() const noexcept { return m_data->referenceDistance; }
+        SR_NODISCARD float_t GetMaxDistance() const noexcept { return m_data->maxDistance; }
+        SR_NODISCARD SR_MATH_NS::FVector3 GetVelocity() const noexcept { return m_data->velocity; }
+        SR_NODISCARD float_t GetDopplerFactor() const noexcept { return m_data->dopplerFactor; }
+        SR_NODISCARD float_t GetGain() const noexcept { return m_data->gain; }
+        SR_NODISCARD float_t GetOuterConeGain() const noexcept { return m_data->outerConeGain; }
+
+        void SetData(ListenerData* data) { m_data = data; }
+
+        virtual void SetDistanceModel(ListenerDistanceModel distanceModel) { m_data->distanceModel = distanceModel; }
+        virtual void SetRolloffFactor(float_t rolloffFactor) { m_data->rolloffFactor = rolloffFactor; }
+        virtual void SetReferenceDistance(float_t referenceDistance) { m_data->referenceDistance = referenceDistance; }
+        virtual void SetMaxDistance(float_t maxDistance) { m_data->maxDistance = maxDistance; }
+        virtual void SetVelocity(SR_MATH_NS::FVector3 velocity) { m_data->velocity = velocity; }
+        virtual void SetDopplerFactor(float_t dopplerFactor) { m_data->dopplerFactor = dopplerFactor; }
+        virtual void SetGain(float_t gain) { m_data->gain = gain; }
+        virtual void SetOuterConeGain(float_t outerConeGain) { m_data->outerConeGain = outerConeGain; }
 
     protected:
-        ListenerDistanceModel m_distanceModel = ListenerDistanceModel::InverseDistanceClamped;
-        float_t m_rolloffFactor = 1.0f;
-        float_t m_referenceDistance = 1.0f;
-        float_t m_maxDistance = SR_FLOAT_MAX;
+        ListenerData* m_data = nullptr;
 
     };
 }

@@ -19,6 +19,10 @@ namespace SR_AUDIO_NS {
         void SetRolloffFactor(float_t rolloffFactor) override;
         void SetReferenceDistance(float_t referenceDistance) override;
         void SetMaxDistance(float_t maxDistance) override;
+        void SetVelocity(SR_MATH_NS::FVector3 velocity) override;
+        void SetDopplerFactor(float_t dopplerFactor) override;
+        void SetGain(float_t gain) override;
+        void SetOuterConeGain(float_t outerConeGain) override;
     };
 }
 #endif //SRENGINE_OPENALSOUNDLISTENER_H

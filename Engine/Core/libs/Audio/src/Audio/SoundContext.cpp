@@ -87,9 +87,12 @@ namespace SR_AUDIO_NS {
             return nullptr;
         }
 
+        auto&& listenerData = ListenerData();
+
         switch (m_device->GetLibrary()) {
             case AudioLibrary::OpenAL:{
                 auto&& pListener = new OpenALSoundListener();
+                pListener->
                 m_listeners.emplace_back(pListener);
 
                 return pListener;
@@ -108,6 +111,7 @@ namespace SR_AUDIO_NS {
     bool SoundContext::FreeListener(SoundListener* pListener) {
         for (auto pIt = m_listeners.begin(); pIt != m_listeners.end(); ++pIt ) {
             if (*pIt == pListener) {
+                pListener->SetData(nullptr);
                 m_listeners.erase(pIt);
                 return true;
             }
