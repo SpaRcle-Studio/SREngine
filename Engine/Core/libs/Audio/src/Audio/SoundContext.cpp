@@ -92,7 +92,7 @@ namespace SR_AUDIO_NS {
         switch (m_device->GetLibrary()) {
             case AudioLibrary::OpenAL:{
                 auto&& pListener = new OpenALSoundListener();
-                pListener->
+                pListener->SetData(new ListenerData());
                 m_listeners.emplace_back(pListener);
 
                 return pListener;
