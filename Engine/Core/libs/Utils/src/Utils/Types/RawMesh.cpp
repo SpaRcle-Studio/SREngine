@@ -133,12 +133,12 @@ namespace SR_HTYPES_NS {
         else {
             m_scene = m_importer->ReadFile(path.ToStringRef(), m_asAnimation ? SR_RAW_MESH_ASSIMP_ANIMATION_FLAGS : SR_RAW_MESH_ASSIMP_FLAGS);
 
-            NormalizeWeights();
-
             if (!m_scene) {
                 SR_ERROR("RawMesh::Load() : failed to load file!\n\tPath: " + path.ToStringRef() + "\n\tReason: " + std::string(m_importer->GetErrorString()));
                 return false;
             }
+
+            NormalizeWeights();
 
             if (needFastLoad) {
                 SR_LOG("RawMesh::Load() : export model to cache... \n\tPath: " + binary.ToString());
@@ -467,6 +467,11 @@ namespace SR_HTYPES_NS {
     }
 
     void RawMesh::NormalizeWeights() {
+        if (!m_scene) {
+            SR_ERROR("RawMesh::NormalizeWeights() : scene is nullptr!");
+            return;
+        }
+
         for (uint32_t i = 0; i < m_scene->mNumMeshes; ++i) {
             NormalizeWeights(m_scene->mMeshes[i]);
         }
