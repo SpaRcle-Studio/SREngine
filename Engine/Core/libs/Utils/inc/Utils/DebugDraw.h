@@ -11,6 +11,10 @@
 #include <Utils/Common/Singleton.h>
 #include <Utils/Types/Function.h>
 
+namespace SR_HTYPES_NS {
+    class RawMesh;
+}
+
 namespace SR_UTILS_NS {
     /**
      * \arg Time:
@@ -28,6 +32,7 @@ namespace SR_UTILS_NS {
         using DrawPlaneCallback = DrawCubeCallback;
         using DrawSphereCallback = DrawCubeCallback;
         using DrawCapsuleCallback = DrawCubeCallback;
+        using DrawMeshCallback = SR_HTYPES_NS::Function<uint64_t(SR_HTYPES_NS::RawMesh* pRawMesh, uint64_t id, const SR_MATH_NS::FVector3& pos, const SR_MATH_NS::Quaternion& rot, const SR_MATH_NS::FVector3& scale, const SR_MATH_NS::FColor& color, float_t time)>;
 
         struct Callbacks {
             RemoveCallback removeCallback;
@@ -36,6 +41,7 @@ namespace SR_UTILS_NS {
             DrawPlaneCallback drawPlaneCallback;
             DrawSphereCallback drawSphereCallback;
             DrawCapsuleCallback drawCapsuleCallback;
+            DrawMeshCallback drawMeshCallback;
         };
 
         static constexpr float_t DEFAULT_DURATION = 10.f;
@@ -45,13 +51,7 @@ namespace SR_UTILS_NS {
         static constexpr SR_MATH_NS::Quaternion DEFAULT_QUATERNION = SR_MATH_NS::Quaternion::Identity();
 
     public:
-        void SetCallbacks(void* pUserIdentifier,
-                const RemoveCallback& removeCallback,
-                const DrawLineCallback& lineCallback,
-                const DrawCubeCallback& cubeCallback,
-                const DrawPlaneCallback& drawPlaneCallback,
-                const DrawSphereCallback& drawSphereCallback,
-                const DrawCapsuleCallback& drawCapsuleCallback);
+        void SetCallbacks(void* pUserIdentifier, Callbacks callbacks);
 
         void* GetUserIdentifier() const { return m_currentSwitcher; }
 
@@ -60,6 +60,25 @@ namespace SR_UTILS_NS {
         void Remove(uint64_t id);
 
     public:
+        uint64_t DrawMesh(SR_HTYPES_NS::RawMesh* pRawMesh, uint64_t id, const SR_MATH_NS::FVector3& pos, const SR_MATH_NS::Quaternion& rot, const SR_MATH_NS::FVector3& scale, const SR_MATH_NS::FColor& color, float_t time);
+        uint64_t DrawMesh(SR_HTYPES_NS::RawMesh* pRawMesh, uint64_t id, const SR_MATH_NS::FVector3& pos, const SR_MATH_NS::Quaternion& rot, const SR_MATH_NS::FVector3& scale, const SR_MATH_NS::FColor& color);
+        uint64_t DrawMesh(SR_HTYPES_NS::RawMesh* pRawMesh, uint64_t id, const SR_MATH_NS::FVector3& pos, const SR_MATH_NS::Quaternion& rot, const SR_MATH_NS::FVector3& scale);
+        uint64_t DrawMesh(SR_HTYPES_NS::RawMesh* pRawMesh, uint64_t id, const SR_MATH_NS::FVector3& pos, const SR_MATH_NS::Quaternion& rot);
+        uint64_t DrawMesh(SR_HTYPES_NS::RawMesh* pRawMesh, uint64_t id, const SR_MATH_NS::FVector3& pos, const SR_MATH_NS::FColor& color, float_t time);
+        uint64_t DrawMesh(SR_HTYPES_NS::RawMesh* pRawMesh, uint64_t id, const SR_MATH_NS::FVector3& pos, const SR_MATH_NS::FColor& color);
+        uint64_t DrawMesh(SR_HTYPES_NS::RawMesh* pRawMesh, uint64_t id, const SR_MATH_NS::FVector3& pos, float_t time);
+        uint64_t DrawMesh(SR_HTYPES_NS::RawMesh* pRawMesh, uint64_t id, const SR_MATH_NS::FVector3& pos);
+        uint64_t DrawMesh(SR_HTYPES_NS::RawMesh* pRawMesh, const SR_MATH_NS::FVector3& pos, const SR_MATH_NS::Quaternion& rot, const SR_MATH_NS::FVector3& scale, const SR_MATH_NS::FColor& color, float_t time);
+        uint64_t DrawMesh(SR_HTYPES_NS::RawMesh* pRawMesh, const SR_MATH_NS::FVector3& pos, const SR_MATH_NS::Quaternion& rot, const SR_MATH_NS::FVector3& scale, const SR_MATH_NS::FColor& color);
+        uint64_t DrawMesh(SR_HTYPES_NS::RawMesh* pRawMesh, const SR_MATH_NS::FVector3& pos, const SR_MATH_NS::Quaternion& rot, const SR_MATH_NS::FVector3& scale);
+        uint64_t DrawMesh(SR_HTYPES_NS::RawMesh* pRawMesh, const SR_MATH_NS::FVector3& pos, const SR_MATH_NS::Quaternion& rot);
+        uint64_t DrawMesh(SR_HTYPES_NS::RawMesh* pRawMesh, const SR_MATH_NS::FVector3& pos, const SR_MATH_NS::FColor& color, float_t time);
+        uint64_t DrawMesh(SR_HTYPES_NS::RawMesh* pRawMesh, const SR_MATH_NS::FVector3& pos, const SR_MATH_NS::FColor& color);
+        uint64_t DrawMesh(SR_HTYPES_NS::RawMesh* pRawMesh, const SR_MATH_NS::FVector3& pos, float_t time);
+        uint64_t DrawMesh(SR_HTYPES_NS::RawMesh* pRawMesh, const SR_MATH_NS::FVector3& pos);
+        uint64_t DrawMesh(SR_HTYPES_NS::RawMesh* pRawMesh, uint64_t id);
+        uint64_t DrawMesh(SR_HTYPES_NS::RawMesh* pRawMesh);
+
         uint64_t DrawLine(uint64_t id, const SR_MATH_NS::FVector3& start, const SR_MATH_NS::FVector3& end, const SR_MATH_NS::FColor& color, float_t time);
         uint64_t DrawLine(uint64_t id, const SR_MATH_NS::FVector3& start, const SR_MATH_NS::FVector3& end, const SR_MATH_NS::FColor& color);
         uint64_t DrawLine(uint64_t id, const SR_MATH_NS::FVector3& start, const SR_MATH_NS::FVector3& end, float_t time);

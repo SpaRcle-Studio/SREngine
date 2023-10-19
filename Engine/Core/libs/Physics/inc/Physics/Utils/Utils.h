@@ -103,6 +103,15 @@ namespace SR_PHYSICS_UTILS_NS {
         }
     }
 
+    SR_MAYBE_UNUSED static constexpr bool IsConvex(ShapeType type) {
+        switch (type) {
+            case ShapeType::Convex3D:
+                return true;
+            default:
+                return false;
+        }
+    }
+
     SR_MAYBE_UNUSED static constexpr bool IsCylinder(ShapeType type) {
         switch (type) {
             case ShapeType::Cylinder2D:

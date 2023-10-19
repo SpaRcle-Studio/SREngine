@@ -23,8 +23,8 @@ namespace SR_GRAPH_NS::Types {
     }
 
     Mesh::Ptr Mesh::Load(const SR_UTILS_NS::Path& path, MeshType type, uint32_t id) {
-        if (auto&& pMesh = TryLoad(std::move(path), type, id)) {
-            return pMesh;
+        if (auto&& pRawMesh =  SR_HTYPES_NS::RawMesh::Load(path)) {
+            return TryLoad(pRawMesh, type, id);
         }
 
         SR_ERROR("Mesh::Load() : failed to load mesh!\n\tPath: " + path.ToStringRef() + "\n\tId: " + std::to_string(id));
@@ -32,17 +32,12 @@ namespace SR_GRAPH_NS::Types {
         return nullptr;
     }
 
-    Mesh::Ptr Mesh::TryLoad(const SR_UTILS_NS::Path& path, MeshType type, uint32_t id) {
-        auto&& resourceManager = SR_UTILS_NS::ResourceManager::Instance();
-
-        SR_MAYBE_UNUSED SR_HTYPES_NS::SingletonRecursiveLockGuard lock(&resourceManager);
-
+    Mesh::Ptr Mesh::TryLoad(SR_HTYPES_NS::RawMesh* pRawMesh, MeshType type, uint32_t id) {
         Mesh::Ptr pMesh = nullptr;
         bool exists = false;
 
         /// Проверяем существование меша
-        SR_HTYPES_NS::RawMesh* pRawMesh = nullptr;
-        if ((pRawMesh = SR_HTYPES_NS::RawMesh::Load(path))) {
+        if (pRawMesh) {
             exists = id < pRawMesh->GetMeshesCount();
         }
         else {
@@ -71,9 +66,11 @@ namespace SR_GRAPH_NS::Types {
         std::vector<Mesh::Ptr> meshes;
 
         uint32_t id = 0;
-        while (auto&& pMesh = TryLoad(path, type, id)) {
-            meshes.emplace_back(pMesh);
-            ++id;
+        while (auto&& pRawMesh = SR_HTYPES_NS::RawMesh::Load(path)) {
+            if (auto&& pMesh = TryLoad(pRawMesh, type, id)){
+                meshes.emplace_back(pMesh);
+                ++id;
+            }
         }
 
         if (meshes.empty()) {
@@ -198,6 +195,37 @@ namespace SR_GRAPH_NS::Types {
 
     void Mesh::MarkMaterialDirty() {
         m_dirtyMaterial = true;
+    }
+
+    Mesh::Ptr Mesh::TryLoad(const Helper::Path &path, MeshType type, uint32_t id) {
+        Mesh::Ptr pMesh = nullptr;
+        bool exists = false;
+
+        /// Проверяем существование меша
+        SR_HTYPES_NS::RawMesh* pRawMesh = nullptr;
+        if ((pRawMesh = SR_HTYPES_NS::RawMesh::Load(path))) {
+            exists = id < pRawMesh->GetMeshesCount();
+        }
+        else {
+            return nullptr;
+        }
+
+        if (!exists || !(pMesh = CreateMeshByType(type))) {
+            pRawMesh->CheckResourceUsage();
+            return nullptr;
+        }
+
+        if (auto&& pRawMeshHolder = dynamic_cast<SR_HTYPES_NS::IRawMeshHolder*>(pMesh)) {
+            pRawMeshHolder->SetRawMesh(pRawMesh);
+            pRawMeshHolder->SetMeshId(id);
+        }
+        else {
+            SRHalt("Mesh is not a raw mesh holder! Memory leak...");
+            pRawMesh->CheckResourceUsage();
+            return nullptr;
+        }
+
+        return pMesh;
     }
 }
 

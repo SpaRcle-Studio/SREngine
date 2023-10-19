@@ -56,6 +56,17 @@ namespace SR_PTYPES_NS {
                     SR_FLOAT_MAX
             );
         }
+        else if (SR_PHYSICS_UTILS_NS::IsConvex(GetType())) {
+            m_debugId = SR_UTILS_NS::DebugDraw::Instance().DrawMesh(
+                    m_rigidbody->GetRawMesh(),
+                    m_debugId,
+                    m_rigidbody->GetTranslation() + m_rigidbody->GetCenterDirection(),
+                    m_rigidbody->GetRotation(),
+                    m_rigidbody->GetScale() * GetSize(),
+                    SR_MATH_NS::FColor(0, 255, 200, 255),
+                    SR_FLOAT_MAX
+            );
+        }
     }
 
     void CollisionShape::SetHeight(float_t height) {

@@ -5,27 +5,18 @@
 #include <Utils/DebugDraw.h>
 #include <Utils/Debug.h>
 
+#include <Utils/Types/RawMesh.h>
+
+#include <utility>
+
 namespace SR_UTILS_NS {
     /// ---------------------------------------------- CALLBACKS INITIALIZATIONS ---------------------------------------
 
-    void DebugDraw::SetCallbacks(void* pUserIdentifier,
-            const RemoveCallback& removeCallback,
-            const DrawLineCallback& lineCallback,
-            const DrawCubeCallback& cubeCallback,
-            const DrawPlaneCallback& drawPlaneCallback,
-            const DrawSphereCallback& drawSphereCallback,
-            const DrawCapsuleCallback& drawCapsuleCallback)
+    void DebugDraw::SetCallbacks(void* pUserIdentifier, Callbacks callbacks)
     {
         SR_LOCK_GUARD
 
-        auto&& callbacks = m_callbacks[pUserIdentifier];
-
-        callbacks.removeCallback = removeCallback;
-        callbacks.drawLineCallback = lineCallback;
-        callbacks.drawCubeCallback = cubeCallback;
-        callbacks.drawPlaneCallback = drawPlaneCallback;
-        callbacks.drawSphereCallback = drawSphereCallback;
-        callbacks.drawCapsuleCallback = drawCapsuleCallback;
+        m_callbacks[pUserIdentifier] = std::move(callbacks);
     }
 
     void DebugDraw::RemoveCallbacks(void* pUserIdentifier) {
@@ -113,7 +104,7 @@ namespace SR_UTILS_NS {
 
     uint64_t DebugDraw::DrawLine() {
         return DrawLine(SR_ID_INVALID, DEFAULT_POSITION, DEFAULT_POSITION, DEFAULT_COLOR, DEFAULT_DURATION);
-    }
+    } /// не расстраивай гориллу, вызови DrawLine(DEFAULT_POSITION, DEFAULT_POSITION, DEFAULT_COLOR, DEFAULT_DURATION)
 
     /// ---------------------------------------------------- CUBE DRAWING ----------------------------------------------
 
@@ -436,4 +427,88 @@ namespace SR_UTILS_NS {
     }
 
     /// ---------------------------------------------------- CAPSULE DRAWING ----------------------------------------------
+
+    uint64_t DebugDraw::DrawMesh(SR_HTYPES_NS::RawMesh* pRawMesh, uint64_t id, const SR_MATH_NS::FVector3& pos, const SR_MATH_NS::Quaternion& rot, const SR_MATH_NS::FVector3& scale, const SR_MATH_NS::FColor& color, float_t time) {
+        SR_LOCK_GUARD
+
+        if (!pRawMesh) {
+            return SR_ID_INVALID;
+        }
+
+        if (m_currentCallbacks && m_currentCallbacks->drawMeshCallback) {
+            return m_currentCallbacks->drawMeshCallback(pRawMesh, id, pos, rot, scale, color, time);
+        }
+
+        return SR_ID_INVALID;
+    }
+
+    uint64_t DebugDraw::DrawMesh(SR_HTYPES_NS::RawMesh* pRawMesh, uint64_t id, const SR_MATH_NS::FVector3 &pos, const SR_MATH_NS::Quaternion &rot, const SR_MATH_NS::FVector3 &scale, const SR_MATH_NS::FColor &color) {
+        return DrawMesh(pRawMesh, id, pos, rot, scale, color, DEFAULT_DURATION);
+    }
+
+    uint64_t DebugDraw::DrawMesh(SR_HTYPES_NS::RawMesh* pRawMesh, uint64_t id, const SR_MATH_NS::FVector3 &pos, const SR_MATH_NS::Quaternion &rot, const SR_MATH_NS::FVector3 &scale) {
+        return DrawMesh(pRawMesh, id, pos, rot, scale, DEFAULT_COLOR, DEFAULT_DURATION);
+    }
+
+    uint64_t DebugDraw::DrawMesh(SR_HTYPES_NS::RawMesh* pRawMesh, uint64_t id, const SR_MATH_NS::FVector3 &pos, const SR_MATH_NS::Quaternion &rot) {
+        return DrawMesh(pRawMesh, id, pos, rot, DEFAULT_SCALE, DEFAULT_COLOR, DEFAULT_DURATION);
+    }
+
+    uint64_t DebugDraw::DrawMesh(SR_HTYPES_NS::RawMesh* pRawMesh, uint64_t id, const SR_MATH_NS::FVector3 &pos) {
+        return DrawMesh(pRawMesh, id, pos, DEFAULT_QUATERNION, DEFAULT_SCALE, DEFAULT_COLOR, DEFAULT_DURATION);
+    }
+
+    uint64_t DebugDraw::DrawMesh(SR_HTYPES_NS::RawMesh* pRawMesh, uint64_t id, const SR_MATH_NS::FVector3 &pos, const SR_MATH_NS::FColor &color, float_t time) {
+        return DrawMesh(pRawMesh, id, pos, DEFAULT_QUATERNION, DEFAULT_SCALE, color, time);
+    }
+
+    uint64_t DebugDraw::DrawMesh(SR_HTYPES_NS::RawMesh* pRawMesh, const SR_MATH_NS::FVector3 &pos, const SR_MATH_NS::Quaternion &rot, const SR_MATH_NS::FVector3 &scale, const SR_MATH_NS::FColor &color) {
+        return DrawMesh(pRawMesh, SR_ID_INVALID, pos, rot, scale, color, DEFAULT_DURATION);
+    }
+
+    uint64_t DebugDraw::DrawMesh(SR_HTYPES_NS::RawMesh* pRawMesh, const SR_MATH_NS::FVector3 &pos, const SR_MATH_NS::Quaternion &rot, const SR_MATH_NS::FVector3 &scale) {
+        return DrawMesh(pRawMesh, SR_ID_INVALID, pos, rot, scale, DEFAULT_COLOR, DEFAULT_DURATION);
+    }
+
+    uint64_t DebugDraw::DrawMesh(SR_HTYPES_NS::RawMesh* pRawMesh, const SR_MATH_NS::FVector3 &pos, const SR_MATH_NS::Quaternion &rot) {
+        return DrawMesh(pRawMesh, SR_ID_INVALID, pos, rot, DEFAULT_SCALE, DEFAULT_COLOR, DEFAULT_DURATION);
+    }
+
+    uint64_t DebugDraw::DrawMesh(SR_HTYPES_NS::RawMesh* pRawMesh, const SR_MATH_NS::FVector3 &pos) {
+        return DrawMesh(pRawMesh, SR_ID_INVALID, pos, DEFAULT_QUATERNION, DEFAULT_SCALE, DEFAULT_COLOR, DEFAULT_DURATION);
+    }
+
+    uint64_t DebugDraw::DrawMesh(SR_HTYPES_NS::RawMesh* pRawMesh, uint64_t id, const SR_MATH_NS::FVector3 &pos, const SR_MATH_NS::FColor &color) {
+        return DrawMesh(pRawMesh, id, pos, DEFAULT_QUATERNION, DEFAULT_SCALE, color, DEFAULT_DURATION);
+    }
+
+    uint64_t DebugDraw::DrawMesh(SR_HTYPES_NS::RawMesh* pRawMesh, uint64_t id, const SR_MATH_NS::FVector3 &pos, float_t time) {
+        return DrawMesh(pRawMesh, id, pos, DEFAULT_QUATERNION, DEFAULT_SCALE, DEFAULT_COLOR, time);
+    }
+
+    uint64_t DebugDraw::DrawMesh(SR_HTYPES_NS::RawMesh* pRawMesh, const SR_MATH_NS::FVector3 &pos, const SR_MATH_NS::Quaternion &rot, const SR_MATH_NS::FVector3 &scale, const SR_MATH_NS::FColor &color, float_t time) {
+        return DrawMesh(pRawMesh, SR_ID_INVALID, pos, rot, scale, color, time);
+    }
+
+    uint64_t DebugDraw::DrawMesh(SR_HTYPES_NS::RawMesh* pRawMesh, const SR_MATH_NS::FVector3& pos, const SR_MATH_NS::FColor& color, float_t time) {
+        return DrawMesh(pRawMesh, SR_ID_INVALID, pos, DEFAULT_QUATERNION, DEFAULT_SCALE, color, time);
+    }
+
+    uint64_t DebugDraw::DrawMesh(SR_HTYPES_NS::RawMesh* pRawMesh, const SR_MATH_NS::FVector3& pos, const SR_MATH_NS::FColor& color) {
+        return DrawMesh(pRawMesh, SR_ID_INVALID, pos, DEFAULT_QUATERNION, DEFAULT_SCALE, color, DEFAULT_DURATION);
+    }
+
+    uint64_t DebugDraw::DrawMesh(SR_HTYPES_NS::RawMesh* pRawMesh, const SR_MATH_NS::FVector3& pos, float_t time) {
+        return DrawMesh(pRawMesh, SR_ID_INVALID, pos, DEFAULT_QUATERNION, DEFAULT_SCALE, DEFAULT_COLOR, time);
+    }
+
+    uint64_t DebugDraw::DrawMesh(SR_HTYPES_NS::RawMesh* pRawMesh, uint64_t id) {
+        return DrawMesh(pRawMesh, id, DEFAULT_POSITION, DEFAULT_QUATERNION, DEFAULT_SCALE, DEFAULT_COLOR, 0.f);
+    }
+
+    uint64_t DebugDraw::DrawMesh(SR_HTYPES_NS::RawMesh* pRawMesh) {
+        return DrawMesh(pRawMesh, SR_ID_INVALID, DEFAULT_POSITION, DEFAULT_QUATERNION, DEFAULT_SCALE, DEFAULT_COLOR, DEFAULT_DURATION);
+    }
+
+    /// ---------------------------------------------------- MESH DRAWING ----------------------------------------------
 }

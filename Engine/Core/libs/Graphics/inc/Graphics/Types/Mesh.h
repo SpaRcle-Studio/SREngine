@@ -47,6 +47,7 @@ namespace SR_GTYPES_NS {
 
     public:
         static std::vector<Mesh::Ptr> Load(const SR_UTILS_NS::Path& path, MeshType type);
+        static Mesh::Ptr TryLoad(SR_HTYPES_NS::RawMesh* pRawMesh, MeshType type, uint32_t id);
         static Mesh::Ptr TryLoad(const SR_UTILS_NS::Path& path, MeshType type, uint32_t id);
         static Mesh::Ptr Load(const SR_UTILS_NS::Path& path, MeshType type, uint32_t id);
 
