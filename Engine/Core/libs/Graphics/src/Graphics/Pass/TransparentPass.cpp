@@ -23,6 +23,6 @@ namespace SR_GRAPH_NS {
             pShader->SetVec3(SHADER_VIEW_DIRECTION, m_camera->GetViewDirection());
             pShader->SetVec3(SHADER_VIEW_POSITION, m_camera->GetPositionRef());
         }
-        IMeshClusterPass::UseSharedUniforms(pShader);
+        Super::UseSharedUniforms(pShader);
     }
 }

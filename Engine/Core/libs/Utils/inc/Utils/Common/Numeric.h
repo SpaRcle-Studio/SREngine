@@ -26,6 +26,10 @@ namespace SR_UTILS_NS {
             srand(time(NULL)); /// NOLINT
         }
 
+        template<typename T> void Shuffle(std::vector<T>& vector) {
+            std::shuffle(std::begin(vector), std::end(vector), m_randomDevice);
+        }
+
         SR_NODISCARD float_t Float(float_t minimum, float_t maximum) {
             std::uniform_real_distribution<float_t> distribution(minimum, maximum);
             return distribution(m_generator);

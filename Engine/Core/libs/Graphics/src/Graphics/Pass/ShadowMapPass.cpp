@@ -41,6 +41,7 @@ namespace SR_GRAPH_NS {
             pShader->SetMat4(SHADER_LIGHT_SPACE_MATRIX, m_lightSpaceMatrix);
             pShader->SetVec3(SHADER_DIRECTIONAL_LIGHT_POSITION, lightPos);
         }
+        Super::UseSharedUniforms(pShader);
     }
 
     void ShadowMapPass::UseUniforms(IMeshClusterPass::ShaderPtr pShader, IMeshClusterPass::MeshPtr pMesh) {

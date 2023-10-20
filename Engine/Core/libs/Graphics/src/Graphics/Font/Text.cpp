@@ -389,4 +389,10 @@ namespace SR_GTYPES_NS {
             renderScene->SetDirty();
         }
     }
+
+    void Text::FreeMesh() {
+        AutoFree([](auto&& pData) {
+            delete pData;
+        });
+    }
 }

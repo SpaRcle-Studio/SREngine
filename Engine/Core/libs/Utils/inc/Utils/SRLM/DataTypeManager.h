@@ -16,6 +16,7 @@ namespace SR_SRLM_NS {
         using Hash = uint64_t;
         using Structs = std::unordered_map<Hash, DataTypeStruct*>;
     public:
+        SR_NODISCARD bool IsStructExists(Hash hashName) const;
         SR_NODISCARD DataType* CreateByName(Hash hashName);
         SR_NODISCARD DataType* CreateByName(const std::string& name);
         SR_NODISCARD const DataTypeStruct* GetStruct(Hash hashName) const;

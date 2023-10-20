@@ -94,6 +94,7 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD MeshCluster& GetOpaque();
         SR_NODISCARD MeshCluster& GetTransparent();
         SR_NODISCARD MeshCluster& GetDebugCluster();
+        SR_NODISCARD FlatMeshCluster& GetFlatCluster() { return m_flat; }
         SR_NODISCARD CameraPtr GetMainCamera() const;
         SR_NODISCARD DebugRenderer* GetDebugRenderer() const;
         SR_NODISCARD CameraPtr GetFirstOffScreenCamera() const;

@@ -78,6 +78,10 @@ namespace SR_SRLM_NS {
         }
     }
 
+    void DataTypeStruct::AddVariable(const std::string& name, DataType* pData) {
+        AddVariable(SR_HASH_STR_REGISTER(name), pData);
+    }
+
     /// ----------------------------------------------------------------------------------------------------------------
 
     DataTypeArray::DataTypeArray()
@@ -133,7 +137,7 @@ namespace SR_SRLM_NS {
     }
 
     void DataType::SaveXml(SR_XML_NS::Node& xmlNode) {
-        xmlNode.AppendAttribute("Name", GetHashName());
+        xmlNode.AppendAttribute("Name", GetName());
         xmlNode.AppendAttribute("Class", SR_UTILS_NS::EnumReflector::ToString(GetClass()));
 
         switch (GetClass()) {
@@ -154,7 +158,7 @@ namespace SR_SRLM_NS {
             }
             case DataTypeClass::Struct:
                 if (auto&& pStruct = dynamic_cast<DataTypeStruct*>(this)) {
-                    xmlNode.AppendAttribute("Struct", pStruct->GetStructName());
+                    xmlNode.AppendAttribute("Struct", SR_HASH_TO_STR(pStruct->GetStructName()));
                     for (auto&& [hashName, pVar] : pStruct->GetVariables()) {
                         auto&& xmlVariable = xmlNode.AppendNode("Var");
                         xmlVariable.AppendAttribute("VarName", hashName);
@@ -194,10 +198,10 @@ namespace SR_SRLM_NS {
             return nullptr;
         }
 
-        auto&& hashName = xmlNode.GetAttribute("Name").ToUInt64();
-        auto&& pDataType = SR_SRLM_NS::DataTypeManager::Instance().CreateByName(hashName);
+        auto&& name = xmlNode.GetAttribute("Name").ToString();
+        auto&& pDataType = SR_SRLM_NS::DataTypeManager::Instance().CreateByName(name);
         if (!pDataType) {
-            SRHalt("Data type not found! Name: \"" + SR_HASH_TO_STR(hashName) + "\"");
+            SR_ERROR("DataType::LoadXml() : data type not found! Name: \"" + name + "\"");
             return nullptr;
         }
 
@@ -208,9 +212,9 @@ namespace SR_SRLM_NS {
             case DataTypeClass::Enum: {
                 auto&& enumValue = xmlNode.GetAttribute<int64_t>();
 
-                auto&& pReflector = SR_UTILS_NS::EnumReflectorManager::Instance().GetReflector(hashName);
+                auto&& pReflector = SR_UTILS_NS::EnumReflectorManager::Instance().GetReflector(name);
                 if (!pReflector) {
-                    SRHalt("Reflector not found! Hash name: \"" + SR_UTILS_NS::ToString(hashName) + "\"");
+                    SRHalt("Reflector not found! Hash name: \"" + name + "\"");
                     delete pDataType;
                     return nullptr;
                 }
@@ -227,14 +231,14 @@ namespace SR_SRLM_NS {
             }
             case DataTypeClass::Struct: {
                 if (auto&& pStruct = dynamic_cast<DataTypeStruct*>(pDataType)) {
-                    pStruct->SetStructHashName(xmlNode.GetAttribute("Struct").ToUInt64());
+                    pStruct->SetStructHashName(SR_HASH_STR_REGISTER(xmlNode.GetAttribute("Struct").ToString()));
                     for (auto&& xmlVariable : xmlNode.GetNodes("Var")) {
-                        auto&& varHashName = xmlVariable.GetAttribute("VarName").ToUInt64();
+                        auto&& varName = xmlVariable.GetAttribute("VarName").ToString();
                         if (auto&& pVarData = LoadXml(xmlVariable)) {
-                            pStruct->AddVariable(varHashName, pVarData);
+                            pStruct->AddVariable(varName, pVarData);
                         }
                         else {
-                            SRHalt("Failed to load variable! Hash name: " + SR_UTILS_NS::ToString(varHashName));
+                            SR_ERROR("DataType::LoadXml() : failed to load struct variable! Name: " + varName);
                         }
                     }
                 }

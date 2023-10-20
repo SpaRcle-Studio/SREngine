@@ -98,5 +98,6 @@ namespace SR_GRAPH_NS {
             pShader->SetMat4(SHADER_PROJECTION_MATRIX, m_camera->GetProjectionRef());
             pShader->SetMat4(SHADER_ORTHOGONAL_MATRIX, m_camera->GetOrthogonalRef());
         }
+        Super::UseSharedUniforms(pShader);
     }
 }

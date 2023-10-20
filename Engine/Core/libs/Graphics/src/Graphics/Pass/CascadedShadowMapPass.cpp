@@ -33,6 +33,7 @@ namespace SR_GRAPH_NS {
             pShader->SetMat4(SHADER_VIEW_MATRIX, m_camera->GetViewTranslateRef());
             pShader->SetMat4(SHADER_PROJECTION_MATRIX, m_camera->GetProjectionRef());
         }
+        Super::UseSharedUniforms(pShader);
     }
 
     void CascadedShadowMapPass::UseUniforms(IMeshClusterPass::ShaderPtr pShader, IMeshClusterPass::MeshPtr pMesh) {
@@ -160,7 +161,7 @@ namespace SR_GRAPH_NS {
 
             if (m_framebuffer->Bind()) {
                 m_framebuffer->BeginRender();
-                IMeshClusterPass::Render(); /// NOLINT
+                IMesh3DClusterPass::Render(); /// NOLINT
                 m_framebuffer->EndRender();
             }
 

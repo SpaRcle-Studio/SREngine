@@ -18,4 +18,6 @@
 #include "../Graphics/src/Graphics/Pass/ShadowMapPass.cpp"
 #include "../Graphics/src/Graphics/Pass/CascadedShadowMapPass.cpp"
 #include "../Graphics/src/Graphics/Pass/IMeshClusterPass.cpp"
+#include "../Graphics/src/Graphics/Pass/IMesh3DClusterPass.cpp"
 #include "../Graphics/src/Graphics/Pass/VarianceShadowMapPass.cpp"
+#include "../Graphics/src/Graphics/Pass/FlatClusterPass.cpp"

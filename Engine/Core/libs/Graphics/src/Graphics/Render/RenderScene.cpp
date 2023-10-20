@@ -238,6 +238,10 @@ namespace SR_GRAPH_NS {
             SetDirty();
         }
 
+        if (m_flat.Update()) {
+            SetDirty();
+        }
+
         SR_RENDER_TECHNIQUES_CALL(Prepare)
     }
 
@@ -278,7 +282,10 @@ namespace SR_GRAPH_NS {
             m_debug.Add(pMesh);
         }
         else {
-            if (pMesh->GetMaterial()->IsTransparent()) {
+            if (pMesh->IsFlatMesh()) {
+                m_flat.Add(pMesh);
+            }
+            else if (pMesh->GetMaterial()->IsTransparent()) {
                 m_transparent.Add(pMesh);
             }
             else {
@@ -437,11 +444,11 @@ namespace SR_GRAPH_NS {
         return m_opaque;
     }
 
-    MeshCluster &RenderScene::GetTransparent() {
+    MeshCluster& RenderScene::GetTransparent() {
         return m_transparent;
     }
 
-    MeshCluster &RenderScene::GetDebugCluster() {
+    MeshCluster& RenderScene::GetDebugCluster() {
         return m_debug;
     }
 
@@ -475,6 +482,7 @@ namespace SR_GRAPH_NS {
         m_opaque.Update();
         m_transparent.Update();
         m_debug.Update();
+        m_flat.Update();
     }
 
     void RenderScene::OnResize(const SR_MATH_NS::UVector2 &size) {

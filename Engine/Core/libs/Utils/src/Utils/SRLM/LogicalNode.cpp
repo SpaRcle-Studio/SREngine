@@ -10,11 +10,11 @@ namespace SR_SRLM_NS {
     }
 
     LogicalNode* LogicalNode::LoadXml(const SR_XML_NS::Node& xmlNode) {
-        auto&& hashName = xmlNode.GetAttribute("Name").ToUInt64();
+        auto&& nodeName = xmlNode.GetAttribute("Name").ToString();
 
-        auto&& pLogicalNode = SR_SRLM_NS::LogicalNodeManager::Instance().CreateByName(hashName);
+        auto&& pLogicalNode = SR_SRLM_NS::LogicalNodeManager::Instance().CreateByName(nodeName);
         if (!pLogicalNode) {
-            SR_ERROR("LogicalNode::LoadXml() : failed to load node!\n\tHash name: " + SR_UTILS_NS::ToString(hashName));
+            SR_ERROR("LogicalNode::LoadXml() : failed to load node!\n\tHash name: " + nodeName);
             return nullptr;
         }
 
@@ -22,7 +22,8 @@ namespace SR_SRLM_NS {
             auto&& pDataType = SR_SRLM_NS::DataType::LoadXml(xmlPin.GetNode("DT"));
             if (!pDataType) {
                 SR_ERROR("LogicalNode::LoadXml() : failed to load pin!\n\tName: " + xmlPin.Name());
-                continue;
+                delete pLogicalNode;
+                return nullptr;
             }
 
             auto&& pinHashName = SR_HASH_STR_REGISTER(xmlPin.GetAttribute("Name").ToString());
@@ -42,7 +43,7 @@ namespace SR_SRLM_NS {
     }
 
     void LogicalNode::SaveXml(SR_XML_NS::Node& xmlNode) {
-        xmlNode.AppendAttribute("Name", GetNodeHashName());
+        xmlNode.AppendAttribute("Name", SR_HASH_TO_STR(GetNodeHashName()));
 
         for (auto&& pin : GetInputs()) {
             auto&& xmlPinNode = xmlNode.AppendNode("Input");

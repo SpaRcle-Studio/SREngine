@@ -322,8 +322,13 @@ namespace SR_GRAPH_GUI_NS {
             auto&& startPinIndex = xmlLink.GetAttribute("SP").ToUInt64();
             auto&& endPinIndex = xmlLink.GetAttribute("EP").ToUInt64();
 
-            if (nodes.count(startNodeId) == 0 || nodes.count(endNodeId) == 0) {
-                SRHalt("Invalid node id!");
+            if (nodes.count(startNodeId) == 0) {
+                SR_ERROR("NodeWidget::TopPanelOpen() : start node not exists! Id: " + SR_UTILS_NS::ToString(startNodeId));
+                continue;
+            }
+
+            if (nodes.count(endNodeId) == 0) {
+                SR_ERROR("NodeWidget::TopPanelOpen() : end node not exists! Id: " + SR_UTILS_NS::ToString(endNodeId));
                 continue;
             }
 
@@ -424,6 +429,8 @@ namespace SR_GRAPH_GUI_NS {
         }
 
         uint32_t index = 0;
+        uint32_t removeIndex = SR_UINT32_MAX;
+
         for (auto&& property : m_properties) {
             if (ImGui::RadioButton(SR_FORMAT_C("##CkProp%i%s", index, GetName().c_str()), property.expand)) {
                 property.expand = !property.expand;
@@ -453,11 +460,18 @@ namespace SR_GRAPH_GUI_NS {
             ImGui::PopItemWidth();
 
             if (property.expand) {
+                if (ImGui::Button(SR_FORMAT_C("Remove property##CkProp%i", index))) {
+                    removeIndex = index;
+                }
                 SR_GRAPH_GUI_NS::DrawDataType(property.pData.get(), nullptr, (void*)&property, m_leftPaneWidth);
             }
 
             ImGui::Separator();
             ++index;
+        }
+
+        if (removeIndex != SR_UINT32_MAX && removeIndex < m_properties.size()) {
+            m_properties.erase(m_properties.begin() + removeIndex);
         }
 
         ImGui::PopStyleVar(3);

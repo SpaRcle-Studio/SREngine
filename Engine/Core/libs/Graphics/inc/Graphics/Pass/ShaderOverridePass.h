@@ -5,7 +5,7 @@
 #ifndef SRENGINE_SHADEROVERRIDEPASS_H
 #define SRENGINE_SHADEROVERRIDEPASS_H
 
-#include <Graphics/Pass/IMeshClusterPass.h>
+#include <Graphics/Pass/IMesh3DClusterPass.h>
 #include <Graphics/Pass/IFramebufferPass.h>
 #include <Graphics/Pipeline/PipelineType.h>
 
@@ -18,9 +18,9 @@ namespace SR_GTYPES_NS {
 namespace SR_GRAPH_NS {
     class MeshCluster;
 
-    class ShaderOverridePass : public IMeshClusterPass, public IFramebufferPass {
+    class ShaderOverridePass : public IMesh3DClusterPass, public IFramebufferPass {
         SR_REGISTER_LOGICAL_NODE(ShaderOverridePass, Shader Override Pass, { "Passes" })
-        using Super = IMeshClusterPass;
+        using Super = IMesh3DClusterPass;
     public:
         ~ShaderOverridePass() override;
 

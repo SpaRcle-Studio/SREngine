@@ -72,6 +72,7 @@
 #include "../Utils/src/Utils/Types/Regex.cpp"
 #include "../Utils/src/Utils/Types/IRawMeshHolder.cpp"
 #include "../Utils/src/Utils/Types/Mutex.cpp"
+#include "../Utils/src/Utils/Types/LockGuard.cpp"
 
 #include "../Utils/src/Utils/Common/Stacktrace.cpp"
 #include "../Utils/src/Utils/Common/StringUtils.cpp"

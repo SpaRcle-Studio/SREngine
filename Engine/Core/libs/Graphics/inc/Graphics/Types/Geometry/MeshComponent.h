@@ -25,6 +25,8 @@ namespace SR_GTYPES_NS {
         void OnDestroy() override;
         void OnMatrixDirty() override;
 
+        void FreeMesh() override;
+
         SR_HTYPES_NS::Marshal::Ptr Save(SR_UTILS_NS::SavableSaveData data) const override;
 
         SR_NODISCARD bool ExecuteInEditMode() const override;

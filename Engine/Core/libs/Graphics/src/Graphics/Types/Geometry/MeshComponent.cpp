@@ -82,4 +82,10 @@ namespace SR_GTYPES_NS {
 
         return nullptr;
     }
+
+    void MeshComponent::FreeMesh() {
+        AutoFree([](auto&& pData) {
+            delete pData;
+        });
+    }
 }

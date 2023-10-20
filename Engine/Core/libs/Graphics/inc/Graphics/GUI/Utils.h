@@ -294,7 +294,7 @@ namespace SR_GRAPH_GUI_NS {
         return result;
     }
 
-    static bool DrawDataType(SR_SRLM_NS::DataType* pData, bool* pIsEnum, void* pProvider, float_t width = 0);
+    static bool DrawDataType(SR_SRLM_NS::DataType* pData, bool* pIsEnum, void* pProvider, float_t width = 0, uint32_t deep = 0);
 
     static bool DrawColorControl(
             const std::string& label,

@@ -10,7 +10,7 @@
 
 namespace SR_SRLM_NS {
     DataType* DataTypeManager::CreateByName(const std::string& name) {
-        return CreateByName(SR_HASH_STR(name));
+        return CreateByName(SR_HASH_STR_REGISTER(name));
     }
 
     DataType* DataTypeManager::CreateByName(uint64_t hashName) {
@@ -110,5 +110,11 @@ namespace SR_SRLM_NS {
         }
 
         return nullptr;
+    }
+
+    bool DataTypeManager::IsStructExists(DataTypeManager::Hash hashName) const {
+        SR_LOCK_GUARD;
+
+        return m_structs.count(hashName) == 1;
     }
 }

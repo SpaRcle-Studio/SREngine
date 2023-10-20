@@ -64,11 +64,13 @@ namespace SR_GTYPES_NS {
 
         SR_NODISCARD virtual SR_FORCE_INLINE bool IsMeshActive() const noexcept { return true; }
         SR_NODISCARD virtual SR_FORCE_INLINE bool IsDebugMesh() const noexcept { return false; }
+        SR_NODISCARD virtual SR_FORCE_INLINE bool IsFlatMesh() const noexcept { return false; }
         SR_NODISCARD virtual SR_MATH_NS::FVector3 GetTranslation() const { return SR_MATH_NS::FVector3::Zero(); }
         SR_NODISCARD virtual const SR_MATH_NS::Matrix4x4& GetModelMatrix() const;
         SR_NODISCARD virtual std::vector<uint32_t> GetIndices() const { return { }; }
         SR_NODISCARD virtual std::string GetGeometryName() const { return std::string(); }
         SR_NODISCARD virtual std::string GetMeshIdentifier() const;
+        SR_NODISCARD virtual int64_t GetSortingPriority() const { return 0; }
 
         SR_NODISCARD ShaderPtr GetShader() const;
         SR_NODISCARD MaterialPtr GetMaterial() const { return m_material; }
@@ -84,6 +86,8 @@ namespace SR_GTYPES_NS {
         virtual void UseMaterial();
         virtual void UseModelMatrix() { }
         virtual void UseSamplers();
+
+        virtual void FreeMesh() { delete this; }
 
         void FreeVideoMemory() override;
 

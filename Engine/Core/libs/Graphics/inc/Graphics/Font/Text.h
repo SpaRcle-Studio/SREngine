@@ -40,6 +40,8 @@ namespace SR_GTYPES_NS {
         void OnEnable() override;
         void OnDisable() override;
 
+        void FreeMesh() override;
+
         SR_NODISCARD bool ExecuteInEditMode() const override { return true; }
         SR_NODISCARD bool IsCalculatable() const override;
         SR_NODISCARD SR_FORCE_INLINE bool IsUpdatable() const noexcept override { return false; }

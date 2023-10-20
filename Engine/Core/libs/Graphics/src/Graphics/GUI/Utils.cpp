@@ -283,12 +283,35 @@ namespace SR_GRAPH_GUI_NS {
         return pressed;
     }
 
-    bool DrawDataType(SR_SRLM_NS::DataType* pData, bool* pIsEnum, void* pProvider, float_t width) {
+    bool DrawDataType(SR_SRLM_NS::DataType* pData, bool* pIsEnum, void* pProvider, float_t width, uint32_t deep) {
         if (pIsEnum) {
             *pIsEnum = false;
         }
 
         switch (pData->GetClass()) {
+            case SR_SRLM_NS::DataTypeClass::Struct:
+                if (!pProvider) {
+                    break;
+                }
+
+                if (auto&& pStruct = dynamic_cast<SR_SRLM_NS::DataTypeStruct*>(pData)) {
+                    if (SR_SRLM_NS::DataTypeManager::Instance().IsStructExists(pStruct->GetHashName())) {
+                        ImGui::Text("%s", SR_HASH_TO_STR(pStruct->GetHashName()).c_str());
+
+                        for (auto&& [hashName, pVar] : pStruct->GetVariables()) {
+                            ImGui::BeginDisabled(true);
+                            ImGui::Button(SR_HASH_TO_STR(hashName).c_str(), ImVec2(width * 0.25f, 20));
+                            ImGui::EndDisabled();
+
+                            ImGui::SameLine();
+
+                            DrawDataType(pVar, pIsEnum, pProvider, width, deep + 1);
+
+                            ImGui::Separator();
+                        }
+                    }
+                }
+                break;
             case SR_SRLM_NS::DataTypeClass::Bool:
                 CheckboxNoNavFocus(SR_FORMAT_C("##Pin-%p", pProvider), pData->GetBool());
                 break;

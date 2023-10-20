@@ -71,7 +71,7 @@ namespace SR_SRLM_NS {
             return pIt->second.constructor();
         }
 
-        SRHalt("Node not found! Name: \"" + SR_HASH_TO_STR(hashName) + "\"");
+        SR_ERROR("LogicalNodeManager::CreateByName() : node not found! Name: \"" + SR_HASH_TO_STR(hashName) + "\"");
         return nullptr;
     }
 

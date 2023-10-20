@@ -5,12 +5,12 @@
 #ifndef SRENGINE_OPAQUEPASS_H
 #define SRENGINE_OPAQUEPASS_H
 
-#include <Graphics/Pass/IMeshClusterPass.h>
+#include <Graphics/Pass/IMesh3DClusterPass.h>
 
 namespace SR_GRAPH_NS {
-    class OpaquePass : public IMeshClusterPass {
+    class OpaquePass : public IMesh3DClusterPass {
         SR_REGISTER_LOGICAL_NODE(OpaquePass, Opaque Pass, { "Passes" })
-        using Super = IMeshClusterPass;
+        using Super = IMesh3DClusterPass;
     public:
         SR_NODISCARD MeshClusterTypeFlag GetClusterType() const noexcept override;
 

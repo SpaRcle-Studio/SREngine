@@ -248,6 +248,7 @@ namespace SR_SRLM_NS {
     public:
         void CopyTo(DataType* pData) const override;
         void AddVariable(Hash name, DataType* pData);
+        void AddVariable(const std::string& name, DataType* pData);
         void Reset() override;
         void SetStructHashName(Hash hashName) { m_name = hashName; }
 
