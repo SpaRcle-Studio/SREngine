@@ -93,7 +93,7 @@ namespace SR_PTYPES_NS {
         void SetMaterial(PhysicsMaterial* pMaterial);
         void SetMaterial(const SR_UTILS_NS::Path& path);
         void SetRawMesh(SR_HTYPES_NS::RawMesh* pRawMesh);
-        void SetMeshId(int32_t id) { m_meshId = id; }
+        void SetMeshId(int32_t id) { m_meshId = id; SetShapeDirty(true); }
 
         virtual bool InitBody();
 

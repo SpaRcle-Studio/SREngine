@@ -35,7 +35,7 @@ namespace SR_PTYPES_NS {
             );
         }
         else if (SR_PHYSICS_UTILS_NS::IsSphere(GetType())) {
-            m_debugId = SR_UTILS_NS::DebugDraw::Instance().DrawSphere(
+                    m_debugId = SR_UTILS_NS::DebugDraw::Instance().DrawSphere(
                     m_debugId,
                     m_rigidbody->GetTranslation() + m_rigidbody->GetCenterDirection(),
                     m_rigidbody->GetRotation(),
@@ -59,6 +59,7 @@ namespace SR_PTYPES_NS {
         else if (SR_PHYSICS_UTILS_NS::IsConvex(GetType())) {
             m_debugId = SR_UTILS_NS::DebugDraw::Instance().DrawMesh(
                     m_rigidbody->GetRawMesh(),
+                    m_rigidbody->GetMeshId(),
                     m_debugId,
                     m_rigidbody->GetTranslation() + m_rigidbody->GetCenterDirection(),
                     m_rigidbody->GetRotation(),
@@ -91,7 +92,7 @@ namespace SR_PTYPES_NS {
     void CollisionShape::SetSize(const SR_MATH_NS::FVector3& size) {
         m_bounds = SR_MATH_NS::FVector3(size.x, size.y, size.z);
         UpdateDebugShape();
-        UpdateMatrix();
+        UpdateShape();
     }
 
     float_t CollisionShape::GetHeight() const {
@@ -170,5 +171,10 @@ namespace SR_PTYPES_NS {
         else if (!isDebugEnabled && m_debugId != SR_ID_INVALID) {
             RemoveDebugShape();
         }
+    }
+
+    void CollisionShape::ReInitDebugShape() {
+        RemoveDebugShape();
+        UpdateDebugShape();
     }
 }

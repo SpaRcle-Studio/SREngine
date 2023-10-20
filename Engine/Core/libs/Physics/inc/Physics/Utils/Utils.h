@@ -131,7 +131,7 @@ namespace SR_PHYSICS_UTILS_NS {
     }
 
     SR_MAYBE_UNUSED static constexpr bool IsShapeHasSize(ShapeType type) {
-        return IsBox(type) || type == ShapeType::Plane3D;
+        return IsBox(type) || type == ShapeType::Plane3D || IsConvex(type);
     }
 }
 

@@ -46,6 +46,8 @@ namespace SR_PTYPES_NS {
         const auto&& isStatic = marshal.Read<bool>();
 
         const auto&& material = marshal.Read<std::string>();
+        const auto&& rawMesh = marshal.Read<std::string>();
+        const auto&& meshId = marshal.Read<int32_t>();
 
         static auto&& verifyType = [](LibraryImpl* pLibrary, ShapeType shapeType) -> ShapeType {
             if (!pLibrary->IsShapeSupported(shapeType)) {
@@ -83,6 +85,10 @@ namespace SR_PTYPES_NS {
             return nullptr;
         }
 
+        if (!rawMesh.empty()) {
+            pComponent->SetRawMesh(SR_HTYPES_NS::RawMesh::Load(rawMesh));
+        }
+
         if (material.empty()) {
             pComponent->SetMaterial(SR_PHYSICS_NS::PhysicsLibrary::Instance().GetDefaultMaterial());
         }
@@ -96,6 +102,7 @@ namespace SR_PTYPES_NS {
         pComponent->SetMass(mass);
         pComponent->SetIsTrigger(isTrigger);
         pComponent->SetIsStatic(isStatic);
+        pComponent->SetMeshId(meshId);
 
         return pComponent;
     }
@@ -118,6 +125,15 @@ namespace SR_PTYPES_NS {
         else {
             pMarshal->Write<std::string>("");
         }
+
+        if (m_rawMesh) {
+            pMarshal->Write<std::string>(m_rawMesh->GetResourceId());
+        }
+        else {
+            pMarshal->Write<std::string>("");
+        }
+
+        pMarshal->Write<int32_t>(m_meshId);
 
         return pMarshal;
     }
@@ -337,6 +353,8 @@ namespace SR_PTYPES_NS {
         if ((m_rawMesh = pRawMesh)) {
             m_rawMesh->AddUsePoint();
         }
+
+        SetShapeDirty(true);
     }
 
     bool Rigidbody::IsDebugEnabled() const noexcept {

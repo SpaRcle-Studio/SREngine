@@ -71,7 +71,7 @@ namespace SR_CORE_NS::GUI {
                     if (path.Exists()) {
                         if (auto&& pRawMesh = SR_HTYPES_NS::RawMesh::Load(path)){
                             pComponent->SetRawMesh(pRawMesh);
-                            pComponent->SetShapeDirty(true);
+                            pComponent->GetCollisionShape()->ReInitDebugShape();
                         }
                         else {
                             SR_ERROR("ComponentDrawer::DrawComponent() : mesh is nullptr!");
@@ -83,7 +83,7 @@ namespace SR_CORE_NS::GUI {
             int32_t meshId = pComponent->GetMeshId();
             if (Graphics::GUI::InputInt("Id", meshId, 1, true, index) && meshId >= 0) {
                 pComponent->SetMeshId(meshId);
-                pComponent->SetShapeDirty(true);
+                pComponent->GetCollisionShape()->ReInitDebugShape();
             }
         }
 

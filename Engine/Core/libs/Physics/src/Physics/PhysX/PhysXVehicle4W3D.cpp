@@ -263,7 +263,7 @@ namespace SR_PTYPES_NS {
         return Super::InitVehicle();
     }
 
-    void *PhysXVehicle4W3D::GetHandle() const noexcept {
+    void* PhysXVehicle4W3D::GetHandle() const noexcept {
         return nullptr;
     }
 }

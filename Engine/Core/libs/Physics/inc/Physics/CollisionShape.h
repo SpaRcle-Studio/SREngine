@@ -38,6 +38,8 @@ namespace SR_PTYPES_NS {
         void UpdateDebugShape();
         void RemoveDebugShape();
 
+        void ReInitDebugShape();
+
         void SetType(ShapeType type);
 
         void SetHeight(float_t height);
