@@ -15,9 +15,12 @@ del /s /q "%APK_FOLDER%"
 rem --------------------------------------------------------------------------------------------------------
 if exist "C:\Program Files\Java\jdk-11.0.6\bin\javaw.exe" (
   set JAVA_HOME="C:\Program Files\Java\jdk-11.0.6"
+  echo | set /p ANDROID_SDK_ROOT = "C:\Program Files\Java\jdk-11.0.6"
 ) 
 echo Java home is: %JAVA_HOME%
 rem --------------------------------------------------------------------------------------------------------
+
+"cmd /c accept_licenses.bat"
 
 echo Packing resources...
 "cmd /c pack_resources.bat assembleRelease"
