@@ -55,7 +55,7 @@ namespace SR_UTILS_NS {
                  "Trying to migrate from " + SR_UTILS_NS::ToString(version) + " to " + SR_UTILS_NS::ToString(newVersion) + "..."
             );
 
-            if (!Migration::Instance().Migrate(m_lastComponent, marshal, version)) {
+            if (!Migration::Instance().Migrate(m_lastComponent, marshal, version, newVersion)) {
                 SR_ERROR("ComponentManager::Load() : failed to migrate component!");
                 return std::make_pair(nullptr, ComponentLoadResult::Error);
             }

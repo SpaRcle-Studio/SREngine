@@ -20,7 +20,7 @@ namespace SR_UTILS_NS {
             Migrator migrator;
         };
     public:
-        bool Migrate(uint64_t hashName, SR_HTYPES_NS::Marshal& pMarshal, Version version) const;
+        bool Migrate(uint64_t hashName, SR_HTYPES_NS::Marshal& pMarshal, Version from, Version to) const;
 
         bool RegisterMigrator(uint64_t hashName, Version from, Version to, Migrator&& migrator);
 

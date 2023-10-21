@@ -14,8 +14,8 @@ namespace SR_UTILS_NS {
     { }
 
     IResource::~IResource() {
-        SRAssert(GetCountUses() == 0);
-        SRAssert(m_watchers.empty());
+        SRAssert2(GetCountUses() == 0, "Resource has uses!");
+        SRAssert2(m_watchers.empty(), "Watchers has not stopped!");
     }
 
     bool IResource::Reload() {

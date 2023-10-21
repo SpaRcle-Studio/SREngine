@@ -539,7 +539,7 @@ namespace SR_UTILS_NS {
 
                 static const auto GAME_OBJECT_HASH_NAME = SR_HASH_STR("GameObject");
 
-                if (!Migration::Instance().Migrate(GAME_OBJECT_HASH_NAME, marshal, version)) {
+                if (!Migration::Instance().Migrate(GAME_OBJECT_HASH_NAME, marshal, version, newVersion)) {
                     SR_ERROR("GameObject::Load() : failed to migrate game object!");
                     return gameObject;
                 }

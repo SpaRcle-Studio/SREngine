@@ -41,6 +41,7 @@ namespace SR_ANIMATIONS_NS {
 
             if (!pAnimationClip->Reload()) {
                 SR_ERROR("AnimationClip::Load() : failed to load animation clip! \n\tPath: " + path.ToString());
+                pAnimationClip->StopWatch();
                 delete pAnimationClip;
                 pAnimationClip = nullptr;
                 return;
