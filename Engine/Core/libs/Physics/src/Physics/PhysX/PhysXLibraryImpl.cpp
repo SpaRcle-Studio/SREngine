@@ -29,12 +29,7 @@ namespace SR_PHYSICS_NS {
             return false;
         }
 
-        if (SR_UTILS_NS::Features::Instance().Enabled("PVD", false)) {
-            SR_TRACY_ZONE_N("Create PVD");
-            m_pvd = PxCreatePvd(*m_foundation);
-            m_pvdTransport = physx::PxDefaultPvdSocketTransportCreate("127.0.0.1", 5425, 1000);
-            m_pvd->connect(*m_pvdTransport, physx::PxPvdInstrumentationFlag::eALL);
-        }
+        m_pvd = PxCreatePvd(*m_foundation);
 
         m_physics = PxCreatePhysics(SR_PHYSX_FOUNDATION_VERSION, *m_foundation, physx::PxTolerancesScale(), true, m_pvd);
         if (!m_physics) {
@@ -66,7 +61,7 @@ namespace SR_PHYSICS_NS {
             m_physics = nullptr;
         }
 
-        if(m_pvd) {
+        if (m_pvd) {
             m_pvd->release();
             m_pvd = nullptr;
         }
@@ -116,5 +111,24 @@ namespace SR_PHYSICS_NS {
 
     SR_PTYPES_NS::Vehicle4W3D *PhysXLibraryImpl::CreateVehicle4W3D() {
         return new SR_PTYPES_NS::PhysXVehicle4W3D(this);
+    }
+
+    void PhysXLibraryImpl::ConnectPVD() {
+        SR_TRACY_ZONE_N("Create PVD");
+
+        if (m_pvd->isConnected()) {
+            m_pvd->disconnect();
+            SR_LOG("PhysXLibraryImpl::ConnectPVD() : previous connection aborted.")
+        }
+
+        if (m_pvdTransport) {
+            m_pvdTransport->release();
+            m_pvdTransport = nullptr;
+        }
+
+        SR_LOG("PhysXLibraryImpl::ConnectPVD() : trying to connect.")
+
+        m_pvdTransport = physx::PxDefaultPvdSocketTransportCreate("127.0.0.1", 5425, 1000);
+        m_pvd->connect(*m_pvdTransport, physx::PxPvdInstrumentationFlag::eALL);
     }
 }

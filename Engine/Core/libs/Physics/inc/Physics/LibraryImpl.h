@@ -31,6 +31,8 @@ namespace SR_PHYSICS_NS {
     public:
         SR_NODISCARD virtual bool Initialize();
 
+        virtual void ConnectPVD() { }
+
         SR_NODISCARD virtual bool IsShapeSupported(ShapeType type) const { return false; }
         SR_NODISCARD virtual ShapeType GetDefaultShape() const { return ShapeType::Unknown; }
 

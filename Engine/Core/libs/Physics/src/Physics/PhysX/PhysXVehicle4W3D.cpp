@@ -260,7 +260,7 @@ namespace SR_PTYPES_NS {
         }
 
 
-        return Super::InitVehicle();
+        return true;
     }
 
     void* PhysXVehicle4W3D::GetHandle() const noexcept {

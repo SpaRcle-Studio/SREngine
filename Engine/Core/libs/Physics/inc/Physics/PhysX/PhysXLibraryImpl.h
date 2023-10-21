@@ -18,6 +18,8 @@ namespace SR_PHYSICS_NS {
     public:
         SR_NODISCARD bool Initialize() override;
 
+        void ConnectPVD() override;
+
         SR_NODISCARD bool IsShapeSupported(ShapeType type) const override;
         SR_NODISCARD ShapeType GetDefaultShape() const override { return ShapeType::Box3D; }
 

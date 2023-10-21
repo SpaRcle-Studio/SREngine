@@ -5,6 +5,8 @@
 #include <Graphics/Types/Camera.h>
 #include <Graphics/GUI/Utils.h>
 
+#include <Physics/LibraryImpl.h>
+
 #include <Core/GUI/Guizmo.h>
 
 namespace SR_CORE_GUI_NS {
@@ -127,6 +129,19 @@ namespace SR_CORE_GUI_NS {
                 }
 
                 ImGui::EndCombo();
+            }
+
+            ImGui::SameLine();
+
+            ImGui::Text("   | ");
+
+            ImGui::SameLine();
+
+            if (ImGui::Button("Connect PVD")) {
+                auto&& pLibrary = SR_PHYSICS_NS::PhysicsLibrary::Instance().GetActiveLibrary(SR_UTILS_NS::Measurement::Space3D);
+                if (pLibrary) {
+                    pLibrary->ConnectPVD();
+                }
             }
 
             ImGui::PopItemWidth();
