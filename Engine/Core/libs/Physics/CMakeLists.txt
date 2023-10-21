@@ -51,88 +51,44 @@ if (SR_PHYSICS_USE_BULLET3)
 endif()
 # ----------------------------------------------------------------------------------------------------------------------
 if (SR_PHYSICS_USE_PHYSX)
-    add_compile_definitions(SR_PHYSICS_USE_PHYSX)
+    option(PHYSX_BUILD_TYPE "debug")
 
     set(PHYSX_ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR}/libs/PhysX/physx)
     set(PHYSX_INCLUDE_DIRS ${PHYSX_ROOT_DIR}/include/ ${PHYSX_ROOT_DIR}/../pxshared/include/)
     set(CMAKEMODULES_PATH ${PHYSX_ROOT_DIR}/../externals/cmakemodules)
 
-    #if (CMAKE_BUILD_TYPE STREQUAL "Debug")
-    #    set(CMAKE_CONFIGURATION_TYPES "debug")
-    #else()
-    #    set(CMAKE_CONFIGURATION_TYPES "release")
-    #endif()
-
-    if (WIN32)
-        set(TARGET_BUILD_PLATFORM "windows")
-        set(NV_USE_DEBUG_WINCRT ON CACHE BOOL "Use the debug version of the CRT")
-    else()
-        if (ANDROID_NDK)
-            set(TARGET_BUILD_PLATFORM "android")
-        else()
-            message("Unsupported platform!")
-        endif()
-    endif()
-
     set(PX_BUILDSNIPPETS OFF CACHE BOOL "Generate the snippets")
     set(PX_USE_PLATFORM_MAP_FLAG OFF CACHE BOOL "Use platform MAP flag")
     set(PX_BUILDPUBLICSAMPLES OFF CACHE BOOL "Generate the samples projects")
-
-    if (ANDROID_NDK)
-        set(PX_GENERATE_STATIC_LIBRARIES ON CACHE BOOL "Generate static libraries")
-    else()
-        set(PX_GENERATE_STATIC_LIBRARIES OFF CACHE BOOL "Generate static libraries")
-    endif()
 
     set(PX_FLOAT_POINT_PRECISE_MATH OFF CACHE BOOL "Float point precise math")
     set(NV_USE_STATIC_WINCRT OFF CACHE BOOL "Use the statically linked windows CRT")
     set(PXSHARED_PATH ${PHYSX_ROOT_DIR}/../pxshared)
     set(PXSHARED_INSTALL_PREFIX ${CMAKE_INSTALL_PREFIX})
-    set(CMAKEMODULES_VERSION "1.27")
+    #set(CMAKEMODULES_VERSION "1.27")
     set(CMAKEMODULES_PATH ${PHYSX_ROOT_DIR}/../externals/cmakemodules)
     set(PX_OUTPUT_LIB_DIR ${CMAKE_CURRENT_BINARY_DIR}/extern/physx)
     set(PX_OUTPUT_BIN_DIR ${CMAKE_CURRENT_BINARY_DIR}/extern/physx)
 
-    add_subdirectory(${PHYSX_ROOT_DIR}/compiler/public)
+    add_subdirectory(libs/PhysX/physx/source/compiler/cmake)
 
-    set(PHYSX_LIBRARIES
-        PhysXFoundation
-        LowLevel
-        LowLevelAABB
-        LowLevelDynamics
-        PhysX
-        PhysXCharacterKinematic
-        PhysXCommon
-        PhysXCooking
-        PhysXExtensions
-        PhysXVehicle
-        SceneQuery
-        SimulationController
-        FastXml
-        PhysXPvdSDK
-        PhysXTask
-    )
-
-    if(MSVC)
-        foreach(LIBRARY_ITERATE ${PHYSX_LIBRARIES})
-            target_compile_options(${LIBRARY_ITERATE} PUBLIC "/wd5054;")
-            target_compile_options(${LIBRARY_ITERATE} PUBLIC "/wd5055;")
-        endforeach()
+#[[    if(CMAKE_BUILD_TYPE AND CMAKE_BUILD_TYPE STREQUAL "Debug")
+        message("Building physics in debug configuration")
+        add_compile_definitions(_DEBUG)
+        link_directories("PhysX/bin/linux.clang/debug") # This is the path where PhysX libraries are installed
     else()
-        foreach(LIBRARY_ITERATE ${PHYSX_LIBRARIES})
-            target_compile_options(${LIBRARY_ITERATE} PRIVATE -Wall -Wextra -Wpedantic -Werror
-                    -Wno-unused-private-field
-                    -Wno-unused-local-typedefs
-                    -Wno-gnu-statement-expression
-                    -Wno-bitwise-instead-of-logical
-                    -Wno-unused-but-set-variable
-                    -Wno-deprecated-copy-with-user-provided-copy
-                    -Wno-dtor-name
-            )
-        endforeach()
-    endif()
+        message("Building physics in release configuration with PhysX ${PHYSX_BUILD_TYPE} configuration")
+        add_compile_definitions(NDEBUG)
+        link_directories("physx/source/compiler\cmake/${PHYSX_BUILD_TYPE}") # This is the path where PhysX libraries are installed
+    endif()]]
 
-    list(APPEND SR_PHYSICS_LINK_LIBRARIES ${PHYSX_LIBRARIES})
+    #list(APPEND SR_PHYSICS_LINK_LIBRARIES PhysXExtensions_static_64)
+    #list(APPEND SR_PHYSICS_LINK_LIBRARIES PhysX_static_64)
+    #list(APPEND SR_PHYSICS_LINK_LIBRARIES PhysXPvdSDK_static_64)
+    #list(APPEND SR_PHYSICS_LINK_LIBRARIES PhysXCommon_static_64)
+    #list(APPEND SR_PHYSICS_LINK_LIBRARIES PhysXFoundation_static_64)
+    #list(APPEND SR_PHYSICS_LINK_LIBRARIES pthread)
+    #list(APPEND SR_PHYSICS_LINK_LIBRARIES dl)
 endif()
 # ----------------------------------------------------------------------------------------------------------------------
 
