@@ -12,7 +12,7 @@
 
 namespace SR_CORE_NS {
     VisualChunk::VisualChunk(SRChunkAllocArgs)
-        : Helper::World::Chunk(SRChunkAllocVArgs)
+        : SR_UTILS_NS::World::Chunk(SRChunkAllocVArgs)
     { }
 
     VisualChunk::~VisualChunk() {

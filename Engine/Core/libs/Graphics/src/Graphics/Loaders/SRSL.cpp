@@ -4,7 +4,7 @@
 
 #include <Graphics/Loaders/SRSL.h>
 
-const std::unordered_map<std::string, Framework::Graphics::ShaderVarType> SR_GRAPH_NS::SRSL::SRSLLoader::STANDARD_VARIABLES = {
+const std::unordered_map<std::string, SR_GRAPH_NS::ShaderVarType> SR_GRAPH_NS::SRSL::SRSLLoader::STANDARD_VARIABLES = {
         { "HALF_SIZE_NEAR_PLANE", ShaderVarType::Vec2 },
         { "MODEL_MATRIX", ShaderVarType::Mat4 },
         { "VIEW_MATRIX", ShaderVarType::Mat4 },
@@ -28,7 +28,7 @@ const std::unordered_map<std::string, Framework::Graphics::ShaderVarType> SR_GRA
         { "LINE_COLOR", ShaderVarType::Vec4 },
 };
 
-const std::unordered_map<std::string, Framework::Graphics::ShaderVarType> SR_GRAPH_NS::SRSL::SRSLLoader::COLOR_INDICES = {
+const std::unordered_map<std::string, SR_GRAPH_NS::ShaderVarType> SR_GRAPH_NS::SRSL::SRSLLoader::COLOR_INDICES = {
         { "COLOR_INDEX_0", ShaderVarType::Vec4 },
         { "COLOR_INDEX_1", ShaderVarType::Vec4 },
         { "COLOR_INDEX_2", ShaderVarType::Vec4 },
@@ -193,7 +193,7 @@ bool SR_GRAPH_NS::SRSL::SRSLLoader::PrepareUnit(SRSLUnit& unit, const SRSLVars& 
     return true;
 }
 
-bool Framework::Graphics::SRSL::SRSLLoader::AnalyzeUniforms(SRSLUnit &unit, SRSLParseData &parseData, const std::string &fullCode) {
+bool SR_GRAPH_NS::SRSL::SRSLLoader::AnalyzeUniforms(SRSLUnit &unit, SRSLParseData &parseData, const std::string &fullCode) {
     SRSLVariables uniforms;
 
     for (auto&& [name, var] : RefAnalyzer(fullCode, parseData.vars)) {
@@ -219,7 +219,7 @@ bool Framework::Graphics::SRSL::SRSLLoader::AnalyzeUniforms(SRSLUnit &unit, SRSL
     return true;
 }
 
-Framework::Graphics::SRSL::SRSLVariables Framework::Graphics::SRSL::SRSLLoader::GetColorIndices(const std::string &code) {
+SR_GRAPH_NS::SRSL::SRSLVariables SR_GRAPH_NS::SRSL::SRSLLoader::GetColorIndices(const std::string &code) {
     SRSLVariables indices;
 
     const std::string prefix = "COLOR_INDEX_";
@@ -770,7 +770,7 @@ bool SR_GRAPH_NS::SRSL::SRSLLoader::CreateVertex(SRSLUnit &unit, SRSLParseData& 
     return SR_UTILS_NS::FileSystem::WriteToFile(stage.path.ToString(), source);
 }
 
-std::map<uint32_t, uint32_t> Framework::Graphics::SRSL::SRSLUnit::GetUniformSizes() const {
+std::map<uint32_t, uint32_t> SR_GRAPH_NS::SRSL::SRSLUnit::GetUniformSizes() const {
     std::map<uint32_t, uint32_t> uniforms;
 
     for (const auto& [name, var] : bindings) {
@@ -784,7 +784,7 @@ std::map<uint32_t, uint32_t> Framework::Graphics::SRSL::SRSLUnit::GetUniformSize
     return uniforms;
 }
 
-std::list<std::pair<std::string, SR_GRAPH_NS::SRSL::SRSLVariable>> Framework::Graphics::SRSL::SRSLUnit::GetUniformBlock() const {
+std::list<std::pair<std::string, SR_GRAPH_NS::SRSL::SRSLVariable>> SR_GRAPH_NS::SRSL::SRSLUnit::GetUniformBlock() const {
     auto&& variables = std::list<std::pair<std::string, SRSLVariable>>();
 
     for (auto&& [name, var] : bindings) {
@@ -816,7 +816,7 @@ std::list<std::pair<std::string, SR_GRAPH_NS::SRSL::SRSLVariable>> Framework::Gr
     return variables;
 }
 
-std::map<std::string, SR_GRAPH_NS::SRSL::SRSLVariable> Framework::Graphics::SRSL::SRSLUnit::GetSamplers() const {
+std::map<std::string, SR_GRAPH_NS::SRSL::SRSLVariable> SR_GRAPH_NS::SRSL::SRSLUnit::GetSamplers() const {
     auto&& samplers = std::map<std::string, SR_GRAPH_NS::SRSL::SRSLVariable>();
 
     for (auto&& [name, var] : bindings) {

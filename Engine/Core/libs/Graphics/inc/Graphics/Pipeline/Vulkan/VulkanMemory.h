@@ -24,7 +24,7 @@
         array[i] = nullptr;                              \
 }                                                        \
 
-namespace Framework::Graphics::VulkanTools {
+namespace SR_GRAPH_NS::VulkanTools {
     class MemoryManager : Helper::NonCopyable {
     private:
         MemoryManager() = default;

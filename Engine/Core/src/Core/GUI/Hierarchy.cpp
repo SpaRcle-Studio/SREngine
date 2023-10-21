@@ -26,7 +26,7 @@ namespace SR_CORE_GUI_NS {
     void Hierarchy::Draw() {
         SR_LOCK_GUARD
 
-        m_shiftPressed = SR_UTILS_NS::Input::Instance().GetKey(Helper::KeyCode::LShift);
+        m_shiftPressed = SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::LShift);
 
         if (m_scene.TryRecursiveLockIfValid()) {
             m_tree = m_scene->GetRootGameObjects();
@@ -250,7 +250,7 @@ namespace SR_CORE_GUI_NS {
                 m_pointersHolder.emplace_back(root);
             }
 
-            ImGui::SetDragDropPayload("Hierarchy##Payload", &m_pointersHolder, sizeof(std::list<Helper::GameObject::Ptr>), ImGuiCond_Once);
+            ImGui::SetDragDropPayload("Hierarchy##Payload", &m_pointersHolder, sizeof(std::list<SR_UTILS_NS::GameObject::Ptr>), ImGuiCond_Once);
             ImGui::Text("%s ->", name.c_str());
             ImGui::EndDragDropSource();
         }
@@ -276,7 +276,7 @@ namespace SR_CORE_GUI_NS {
 
                     std::vector<SR_UTILS_NS::ReversibleCommand*> commands;
                     commands.emplace_back(new SR_CORE_NS::Commands::ChangeHierarchySelected(pEngine, this, m_selected, {}));
-                    for (auto&& ptr : *(std::list<Helper::GameObject::Ptr>*)(payload->Data)) {
+                    for (auto&& ptr : *(std::list<SR_UTILS_NS::GameObject::Ptr>*)(payload->Data)) {
                         if (ptr.RecursiveLockIfValid()) {
                             commands.emplace_back(new SR_CORE_NS::Commands::GameObjectMove(pEngine, ptr, root));
                             ptr.Unlock();
@@ -363,7 +363,7 @@ namespace SR_CORE_GUI_NS {
     }
 
     void Hierarchy::Paste(const SR_UTILS_NS::GameObject::Ptr& pParent) {
-        auto&& base64 = Helper::Platform::GetClipboardText();
+        auto&& base64 = SR_UTILS_NS::Platform::GetClipboardText();
         auto marshal = SR_HTYPES_NS::Marshal::LoadFromBase64(base64);
         if (!marshal.Valid()) {
             SR_WARN("Hierarchy::Paste() : content of clipboard couldn't be read")
@@ -401,7 +401,7 @@ namespace SR_CORE_GUI_NS {
         }
     }
 
-    std::set<Helper::GameObject::Ptr> Hierarchy::GetSelected() const {
+    std::set<SR_UTILS_NS::GameObject::Ptr> Hierarchy::GetSelected() const {
         SR_LOCK_GUARD
         return m_selected;
     }

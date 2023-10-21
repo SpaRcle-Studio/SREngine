@@ -197,7 +197,7 @@ namespace SR_GRAPH_NS::Types {
         m_dirtyMaterial = true;
     }
 
-    Mesh::Ptr Mesh::TryLoad(const Helper::Path &path, MeshType type, uint32_t id) {
+    Mesh::Ptr Mesh::TryLoad(const SR_UTILS_NS::Path &path, MeshType type, uint32_t id) {
         Mesh::Ptr pMesh = nullptr;
         bool exists = false;
 

@@ -4,7 +4,7 @@
 
 #include <Graphics/GUI/Icons.h>
 
-void Framework::Graphics::GUI::Icon(const ImVec2& size, IconType type, bool filled, const ImVec4& color/* = ImVec4(1, 1, 1, 1)*/, const ImVec4& innerColor/* = ImVec4(0, 0, 0, 0)*/) {
+void SR_GRAPH_GUI_NS::Icon(const ImVec2& size, IconType type, bool filled, const ImVec4& color/* = ImVec4(1, 1, 1, 1)*/, const ImVec4& innerColor/* = ImVec4(0, 0, 0, 0)*/) {
     if (ImGui::IsRectVisible(size)) {
         auto cursorPos = ImGui::GetCursorScreenPos();
         auto drawList  = ImGui::GetWindowDrawList();
@@ -14,7 +14,7 @@ void Framework::Graphics::GUI::Icon(const ImVec2& size, IconType type, bool fill
     ImGui::Dummy(size);
 }
 
-void Framework::Graphics::GUI::DrawIcon(ImDrawList* drawList, const ImVec2& a, const ImVec2& b, IconType type, bool filled, ImU32 color, ImU32 innerColor) {
+void SR_GRAPH_GUI_NS::DrawIcon(ImDrawList* drawList, const ImVec2& a, const ImVec2& b, IconType type, bool filled, ImU32 color, ImU32 innerColor) {
     auto rect           = ImRect(a, b);
     //auto rect_x         = rect.Min.x;
     auto rect_y         = rect.Min.y;

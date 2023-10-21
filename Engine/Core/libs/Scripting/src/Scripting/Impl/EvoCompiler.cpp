@@ -61,7 +61,7 @@ namespace SR_SCRIPTING_NS {
         return false;
     }
 
-    std::string Framework::Scripting::EvoCompiler::GetGeneratorName(const SR_XML_NS::Node &config) const {
+    std::string SR_SCRIPTING_NS::EvoCompiler::GetGeneratorName(const SR_XML_NS::Node &config) const {
         if (!SR_UTILS_NS::Features::Instance().Enabled("EvoCompiler", true)) {
             SR_INFO("EvoCompiler::GetGenerator() : cmake generator is disabled.");
             return "Disabled";

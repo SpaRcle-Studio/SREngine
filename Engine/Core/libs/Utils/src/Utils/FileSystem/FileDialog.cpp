@@ -23,7 +23,7 @@ namespace SR_UTILS_NS {
         Singleton::OnSingletonDestroy();
     }
 
-    Path Helper::FileDialog::PickFolder(const Path &defaultPath) const {
+    Path SR_UTILS_NS::FileDialog::PickFolder(const Path &defaultPath) const {
         std::string path;
 
     #ifndef SR_ANDROID

@@ -162,11 +162,11 @@ namespace SR_WORLD_NS {
         return position;
     }
 
-    Chunk *Region::At(const Helper::Math::IVector3& position) const {
+    Chunk *Region::At(const SR_UTILS_NS::Math::IVector3& position) const {
         return m_loadedChunks.at(position);
     }
 
-    Chunk *Region::Find(const Framework::Helper::Math::IVector3 &position) const {
+    Chunk *Region::Find(const SR_MATH_NS::IVector3 &position) const {
         if (const auto& pIt = m_loadedChunks.find(position); pIt == m_loadedChunks.end()) {
             return nullptr;
         }

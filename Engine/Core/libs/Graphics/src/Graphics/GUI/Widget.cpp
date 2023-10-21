@@ -4,7 +4,7 @@
 
 #include <Graphics/GUI/Widget.h>
 
-namespace Framework::Graphics::GUI {
+namespace SR_GRAPH_GUI_NS {
     void Widget::DrawAsSubWindow() {
         m_widgetFlags = WIDGET_FLAG_NONE;
 

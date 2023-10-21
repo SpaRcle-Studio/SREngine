@@ -5,7 +5,7 @@
 #ifndef GAMEENGINE_IMAGELOADER_H
 #define GAMEENGINE_IMAGELOADER_H
 
-namespace Framework::Graphics {
+namespace SR_GRAPH_NS {
     class ImageLoader {
 
     };

@@ -203,7 +203,7 @@ bool SR_GRAPH_NS::SRSL::PreProcess(SR_GRAPH_NS::SRSL::SRSLCode &code, std::map<s
     return true;
 }
 
-std::string Framework::Graphics::SRSL::GenerateFunctions(const SRSLFunctions& functions, const std::string& callFrom) {
+std::string SR_GRAPH_NS::SRSL::GenerateFunctions(const SRSLFunctions& functions, const std::string& callFrom) {
     std::string code;
 
     std::vector<std::pair<SRSLFunc, bool>> used;

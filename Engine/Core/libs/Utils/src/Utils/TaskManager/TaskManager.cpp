@@ -103,7 +103,7 @@ namespace SR_UTILS_NS {
         m_id = id;
     }
 
-    Helper::TaskManager::~TaskManager() {
+    SR_UTILS_NS::TaskManager::~TaskManager() {
         if (!m_tasks.empty() || !m_ids.empty()) {
             SRAssert(false);
 
@@ -118,7 +118,7 @@ namespace SR_UTILS_NS {
         SRAssert(!m_thread);
     }
 
-    uint64_t Helper::TaskManager::GetUniqueId() const {
+    uint64_t SR_UTILS_NS::TaskManager::GetUniqueId() const {
         return 0;
     }
 
@@ -182,7 +182,7 @@ namespace SR_UTILS_NS {
         return Execute(std::move(task));
     }
 
-    Task::State Helper::TaskManager::GetResult(uint64_t taskId) const {
+    Task::State SR_UTILS_NS::TaskManager::GetResult(uint64_t taskId) const {
         if (m_ids.count(taskId) == 1) {
             return Task::State::Launched;
         }

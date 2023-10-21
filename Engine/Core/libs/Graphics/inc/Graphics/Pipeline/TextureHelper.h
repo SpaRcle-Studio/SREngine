@@ -114,7 +114,7 @@ namespace SR_GRAPH_NS {
 
     uint32_t GetPixelSize(ImageFormat format);
 
-    uint8_t* Compress(uint32_t w, uint32_t h, uint8_t* pixels, Framework::Graphics::TextureCompression method);
+    uint8_t* Compress(uint32_t w, uint32_t h, uint8_t* pixels, SR_GRAPH_NS::TextureCompression method);
 
     struct InternalTexture {
         void*    m_data;

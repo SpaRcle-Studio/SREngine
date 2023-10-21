@@ -5,8 +5,8 @@
 #ifndef SRENGINE_ENGINESETTINGS_H
 #define SRENGINE_ENGINESETTINGS_H
 
-namespace Framework::Core::GUI {
-    class EngineSettings : public Graphics::GUI::Widget {
+namespace SR_CORE_GUI_NS {
+    class EngineSettings : public SR_GRAPH_GUI_NS::Widget {
     public:
         EngineSettings();
         ~EngineSettings() override = default;

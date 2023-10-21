@@ -9,7 +9,7 @@
 #include <EvoVulkan/Memory/Allocator.h>
 #include <Graphics/Types/Descriptors.h>
 
-namespace Framework::Graphics::VulkanTools {
+namespace SR_GRAPH_NS::VulkanTools {
     static VkShaderStageFlagBits AbstractShaderToVkShader(ShaderStage stage) {
         switch (stage) {
             case ShaderStage::Vertex: return VK_SHADER_STAGE_VERTEX_BIT;

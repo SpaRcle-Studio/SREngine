@@ -15,7 +15,7 @@ namespace SR_CORE_NS {
     class Engine;
 }
 
-namespace Framework {
+namespace SpaRcle {
     class API {
     public:
         API() = delete;

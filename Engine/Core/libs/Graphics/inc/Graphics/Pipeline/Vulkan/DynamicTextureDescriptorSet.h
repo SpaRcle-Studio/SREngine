@@ -8,7 +8,7 @@
 #include <Utils/macros.h>
 #include <EvoVulkan/Memory/Allocator.h>
 
-namespace Framework::Graphics::VulkanTypes {
+namespace SR_GRAPH_NS::VulkanTypes {
     struct DynamicTextureDescriptorSet {
         int32_t         m_textureID;
         VkDescriptorSet m_descriptor;

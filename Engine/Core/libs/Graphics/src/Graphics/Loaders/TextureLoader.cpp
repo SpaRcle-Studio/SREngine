@@ -12,7 +12,7 @@
 
 #include <stbi/stb_image.c>
 
-bool Framework::Graphics::TextureLoader::Load(Types::Texture* texture, std::string path) {
+bool SR_GRAPH_NS::TextureLoader::Load(Types::Texture* texture, std::string path) {
     if (!SRVerifyFalse(!texture)) {
         return false;
     }
@@ -40,7 +40,7 @@ bool Framework::Graphics::TextureLoader::Load(Types::Texture* texture, std::stri
     return true;
 }
 
-bool Framework::Graphics::TextureLoader::Free(unsigned char *data) {
+bool SR_GRAPH_NS::TextureLoader::Free(unsigned char *data) {
     if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::High) {
         SR_LOG("TextureLoader::Free() : free source image data...");
     }
@@ -56,11 +56,11 @@ bool Framework::Graphics::TextureLoader::Free(unsigned char *data) {
     return true;
 }
 
-SR_GTYPES_NS::Texture *Framework::Graphics::TextureLoader::GetDefaultTexture() noexcept {
+SR_GTYPES_NS::Texture* SR_GRAPH_NS::TextureLoader::GetDefaultTexture() noexcept {
     return nullptr;
 }
 
-bool Framework::Graphics::TextureLoader::LoadFromMemory(Types::Texture* texture, const std::string& data, const Memory::TextureConfig &config) {
+bool SR_GRAPH_NS::TextureLoader::LoadFromMemory(Types::Texture* texture, const std::string& data, const Memory::TextureConfig &config) {
     if (!SRVerifyFalse(!texture)) {
         return false;
     }

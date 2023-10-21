@@ -73,7 +73,7 @@ namespace SR_AUDIO_NS {
         return true;
     }
 
-    void OpenALSoundListener::SetVelocity(Framework::Helper::Math::FVector3 velocity) {
+    void OpenALSoundListener::SetVelocity(SR_MATH_NS::FVector3 velocity) {
         if (!SR_AL_CALL(alListenerfv, AL_VELOCITY, FV3ToALV3(velocity).vec3)) {
             SR_ERROR("OpenALListenerContext::SetVelocity() : failed to set velocity!");
             return;

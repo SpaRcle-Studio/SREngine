@@ -7,7 +7,7 @@
 
 #include <EvoVulkan/Types/VmaBuffer.h>
 
-int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateFBO(
+int32_t SR_GRAPH_NS::VulkanTools::MemoryManager::AllocateFBO(
     uint32_t w, uint32_t h,
     const std::vector<VkFormat>& inputColorAttachments,
     std::vector<int32_t>& outputColorAttachments,
@@ -89,7 +89,7 @@ int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateFBO(
     return SR_ID_INVALID;
 }
 
-bool Framework::Graphics::VulkanTools::MemoryManager::ReAllocateFBO(
+bool SR_GRAPH_NS::VulkanTools::MemoryManager::ReAllocateFBO(
     uint32_t FBO, uint32_t w, uint32_t h,
     const std::vector<int32_t> &oldColorAttachments,
     DepthLayer* pDepth,
@@ -143,7 +143,7 @@ bool Framework::Graphics::VulkanTools::MemoryManager::ReAllocateFBO(
     return true;
 }
 
-bool Framework::Graphics::VulkanTools::MemoryManager::FreeDescriptorSet(uint32_t ID) {
+bool SR_GRAPH_NS::VulkanTools::MemoryManager::FreeDescriptorSet(uint32_t ID) {
     if (ID >= m_countDescriptorSets.first) {
         SR_ERROR("MemoryManager::FreeDescriptorSet() : list index out of range!");
         return false;
@@ -167,32 +167,32 @@ bool Framework::Graphics::VulkanTools::MemoryManager::FreeDescriptorSet(uint32_t
     return true;
 }
 
-bool Framework::Graphics::VulkanTools::MemoryManager::FreeVBO(uint32_t ID) {
+bool SR_GRAPH_NS::VulkanTools::MemoryManager::FreeVBO(uint32_t ID) {
     SRVerifyFalse(--m_countVBO.second < 0);
     return FreeMemory(ID, m_countVBO.first, m_VBOs);
 }
-bool Framework::Graphics::VulkanTools::MemoryManager::FreeUBO(uint32_t ID) {
+bool SR_GRAPH_NS::VulkanTools::MemoryManager::FreeUBO(uint32_t ID) {
     SRVerifyFalse(--m_countUBO.second < 0);
     return FreeMemory(ID, m_countUBO.first, m_UBOs);
 }
-bool Framework::Graphics::VulkanTools::MemoryManager::FreeIBO(uint32_t ID) {
+bool SR_GRAPH_NS::VulkanTools::MemoryManager::FreeIBO(uint32_t ID) {
     SRVerifyFalse(--m_countIBO.second < 0);
     return FreeMemory(ID, m_countIBO.first, m_IBOs);
 }
-bool Framework::Graphics::VulkanTools::MemoryManager::FreeFBO(uint32_t ID) {
+bool SR_GRAPH_NS::VulkanTools::MemoryManager::FreeFBO(uint32_t ID) {
     SRVerifyFalse(--m_countFBO.second < 0);
     return FreeMemory(ID, m_countFBO.first, m_FBOs);
 }
-bool Framework::Graphics::VulkanTools::MemoryManager::FreeShaderProgram(uint32_t ID) {
+bool SR_GRAPH_NS::VulkanTools::MemoryManager::FreeShaderProgram(uint32_t ID) {
     SRVerifyFalse(--m_countShaderPrograms.second < 0);
     return FreeMemory(ID, m_countShaderPrograms.first, m_ShaderPrograms);
 }
-bool Framework::Graphics::VulkanTools::MemoryManager::FreeTexture(uint32_t ID) {
+bool SR_GRAPH_NS::VulkanTools::MemoryManager::FreeTexture(uint32_t ID) {
     SRVerifyFalse(--m_countTextures.second < 0);
     return FreeMemory(ID, m_countTextures.first, m_textures);
 }
 
-int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateUBO(uint32_t UBOSize) {
+int32_t SR_GRAPH_NS::VulkanTools::MemoryManager::AllocateUBO(uint32_t UBOSize) {
     for (uint32_t i = 0; i < m_countUBO.first; ++i) {
         if (m_UBOs[i] == nullptr) {
             m_UBOs[i] = EvoVulkan::Types::VmaBuffer::Create(
@@ -212,7 +212,7 @@ int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateUBO(uint32_t UB
     return -1;
 }
 
-int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateDescriptorSet(uint32_t shaderProgram, const std::vector<uint64_t> &types) {
+int32_t SR_GRAPH_NS::VulkanTools::MemoryManager::AllocateDescriptorSet(uint32_t shaderProgram, const std::vector<uint64_t> &types) {
     if (shaderProgram >= m_countShaderPrograms.first) {
         SRHalt("MemoryManager::AllocateDescriptorSet() : shader list index out of range! (" + std::to_string(shaderProgram) + ")");
         return -1;
@@ -246,7 +246,7 @@ int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateDescriptorSet(u
     return -1;
 }
 
-int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateVBO(uint32_t buffSize, void *data) {
+int32_t SR_GRAPH_NS::VulkanTools::MemoryManager::AllocateVBO(uint32_t buffSize, void *data) {
     VkBufferUsageFlags bufferUsageFlagBits = VK_BUFFER_USAGE_VERTEX_BUFFER_BIT;
 
     if (m_kernel->GetDevice()->IsRayTracingSupported()) {
@@ -273,7 +273,7 @@ int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateVBO(uint32_t bu
     return SR_ID_INVALID;
 }
 
-int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateIBO(uint32_t buffSize, void *data)  {
+int32_t SR_GRAPH_NS::VulkanTools::MemoryManager::AllocateIBO(uint32_t buffSize, void *data)  {
     VkBufferUsageFlags bufferUsageFlagBits = VK_BUFFER_USAGE_INDEX_BUFFER_BIT;
 
     if (m_kernel->GetDevice()->IsRayTracingSupported()) {
@@ -300,7 +300,7 @@ int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateIBO(uint32_t bu
     return SR_ID_INVALID;
 }
 
-int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateShaderProgram(EvoVulkan::Types::RenderPass renderPass)  {
+int32_t SR_GRAPH_NS::VulkanTools::MemoryManager::AllocateShaderProgram(EvoVulkan::Types::RenderPass renderPass)  {
     for (uint32_t i = 0; i < m_countShaderPrograms.first; ++i) {
         if (m_ShaderPrograms[i] == nullptr) {
             m_ShaderPrograms[i] = new EvoVulkan::Complexes::Shader(
@@ -319,7 +319,7 @@ int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateShaderProgram(E
     return -1;
 }
 
-int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateTexture(
+int32_t SR_GRAPH_NS::VulkanTools::MemoryManager::AllocateTexture(
         std::array<uint8_t *, 6> pixels,
         uint32_t w,
         uint32_t h,
@@ -347,11 +347,11 @@ int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateTexture(
     return -1;
 }
 
-int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateTexture(
+int32_t SR_GRAPH_NS::VulkanTools::MemoryManager::AllocateTexture(
     uint8_t *pixels, uint32_t w, uint32_t h,
     VkFormat format,
     VkFilter filter,
-    Framework::Graphics::TextureCompression /*compression*/,
+    SR_GRAPH_NS::TextureCompression /*compression*/,
     uint8_t mipLevels,
     bool cpuUsage)
 {
@@ -382,7 +382,7 @@ int32_t Framework::Graphics::VulkanTools::MemoryManager::AllocateTexture(
 
 #define VULKAN_MEMORY_MANAGER_SAFE_FREE(memory) if (memory) { delete[] memory; memory = nullptr; }
 
-void Framework::Graphics::VulkanTools::MemoryManager::Free() {
+void SR_GRAPH_NS::VulkanTools::MemoryManager::Free() {
     SRAssert2(m_countShaderPrograms.second == 0, "Shaders are not empty!");
     SRAssert2(m_countDescriptorSets.second == 0, "Descriptor sets are not empty!");
     SRAssert2(m_countTextures.second == 0, "Textures are not empty!");

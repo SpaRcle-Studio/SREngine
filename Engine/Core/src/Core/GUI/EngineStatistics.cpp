@@ -38,7 +38,7 @@ namespace SR_CORE_GUI_NS {
             auto&& drawResource = [=](SR_UTILS_NS::IResource* pRes, uint32_t index) {
                 const bool isDestroyed = pRes->IsDestroyed();
 
-                std::string node = Helper::Format("[%u] %s = %u", index, pRes->GetResourceId().data(), pRes->GetCountUses());
+                std::string node = SR_UTILS_NS::Format("[%u] %s = %u", index, pRes->GetResourceId().data(), pRes->GetCountUses());
 
                 if (isDestroyed) {
                     ImGui::PushStyleColor(ImGuiCol_::ImGuiCol_Text, ImVec4(255, 0, 0, 255));
@@ -63,7 +63,7 @@ namespace SR_CORE_GUI_NS {
             auto&& drawResources = [=](const std::unordered_set<SR_UTILS_NS::IResource*>& resources, uint32_t index) {
                 uint32_t subIndex = 0;
 
-                const auto node = Helper::Format("[%u] %s (%u)", index, (*resources.begin())->GetResourceId().data(), resources.size());
+                const auto node = SR_UTILS_NS::Format("[%u] %s (%u)", index, (*resources.begin())->GetResourceId().data(), resources.size());
 
                 if (ImGui::TreeNodeEx(node.c_str(), m_nodeFlagsWithChild)) {
                     for (auto &&pRes : resources)

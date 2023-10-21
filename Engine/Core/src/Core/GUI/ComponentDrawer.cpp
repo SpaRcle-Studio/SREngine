@@ -575,7 +575,7 @@ namespace SR_CORE_NS::GUI {
         }
 
     }
-    void ComponentDrawer::DrawComponent(Framework::Audio::AudioListener *&pComponent, EditorGUI *context, int32_t index){
+    void ComponentDrawer::DrawComponent(SR_AUDIO_NS::AudioListener *&pComponent, EditorGUI *context, int32_t index){
 
     }
 

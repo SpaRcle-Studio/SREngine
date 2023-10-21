@@ -88,15 +88,15 @@ namespace SR_GRAPH_GUI_NS {
 }
 
 namespace std {
-    template<> struct hash<Framework::Graphics::GUI::Node> {
-        size_t operator()(Framework::Graphics::GUI::Node const& node) const {
+    template<> struct hash<SR_GRAPH_GUI_NS::Node> {
+        size_t operator()(SR_GRAPH_GUI_NS::Node const& node) const {
             std::hash<uintptr_t> h;
             return h(node.GetId()) + 0x9e3779b9 + (0 << 6) + (0 >> 2);
         }
     };
 
-    template<> struct hash<Framework::Graphics::GUI::Link> {
-        size_t operator()(Framework::Graphics::GUI::Node const& link) const {
+    template<> struct hash<SR_GRAPH_GUI_NS::Link> {
+        size_t operator()(SR_GRAPH_GUI_NS::Node const& link) const {
             std::hash<uintptr_t> h;
             return h(link.GetId()) + 0x9e3779b9 + (0 << 6) + (0 >> 2);
         }

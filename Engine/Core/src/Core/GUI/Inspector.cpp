@@ -24,9 +24,9 @@
 #include <Graphics/Animations/Animator.h>
 #include <Graphics/Animations/BoneComponent.h>
 
-namespace Framework::Core::GUI {
+namespace SR_CORE_GUI_NS {
     Inspector::Inspector(Hierarchy* hierarchy)
-        : Graphics::GUI::Widget("Inspector")
+        : SR_GRAPH_GUI_NS::Widget("Inspector")
         , m_hierarchy(hierarchy)
     { }
 

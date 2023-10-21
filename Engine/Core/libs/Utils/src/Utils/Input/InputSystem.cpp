@@ -122,7 +122,7 @@ namespace SR_UTILS_NS {
     }
 
     void Input::ResetMouse() {
-        m_mousePrev = m_mouse = Helper::Platform::GetMousePos();
+        m_mousePrev = m_mouse = SR_UTILS_NS::Platform::GetMousePos();
         m_mouseScroll = m_mouseScrollCurrent = SR_MATH_NS::FVector2(0.f);
     }
 

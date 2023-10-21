@@ -277,7 +277,7 @@ namespace SR_GTYPES_NS {
         return m_pipeline->GetOverlayTextureDescriptorSet(textureId, OverlayType::ImGui);
     }
 
-    SR_UTILS_NS::Path Framework::Graphics::Types::Texture::GetAssociatedPath() const {
+    SR_UTILS_NS::Path SR_GTYPES_NS::Texture::GetAssociatedPath() const {
         return SR_UTILS_NS::ResourceManager::Instance().GetResPath();
     }
 

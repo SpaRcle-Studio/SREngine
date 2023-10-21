@@ -18,7 +18,7 @@
 #include <Physics/3D/Rigidbody3D.h>
 #include <Physics/3D/Raycast3D.h>
 
-namespace Framework {
+namespace SpaRcle {
     void API::RegisterEvoScriptClasses(SR_CORE_NS::Engine* pEngine) {
         Initialize();
 
@@ -56,7 +56,7 @@ namespace Framework {
             RegisterMath(generator);
             RegisterRaycast(generator);
 
-            generator->Save(Helper::ResourceManager::Instance().GetCachePath().Concat("Scripts/Libraries/"));
+            generator->Save(SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Scripts/Libraries/"));
         }
         else {
             SR_ERROR("API::RegisterEvoScriptClasses() : generator is nullptr!");
@@ -65,7 +65,7 @@ namespace Framework {
         if (casts) {
             RegisterCasts(casts);
 
-            casts->Save(Helper::ResourceManager::Instance().GetCachePath().Concat("Scripts/Libraries/"));
+            casts->Save(SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Scripts/Libraries/"));
         }
         else {
             SR_ERROR("API::RegisterEvoScriptClasses() : casts is nullptr!");
@@ -75,7 +75,7 @@ namespace Framework {
             compiler.SetApiVersion(generator->GetApiVersion());
         }
 
-        EvoScript::CMakeCodeGen::Generate(Helper::ResourceManager::Instance().GetResPath().ToStringRef());
+        EvoScript::CMakeCodeGen::Generate(SR_UTILS_NS::ResourceManager::Instance().GetResPath().ToStringRef());
     }
 
     void API::RegisterDebug(EvoScript::AddressTableGen *generator) {

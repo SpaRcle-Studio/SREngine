@@ -5,7 +5,7 @@
 #ifndef GAMEENGINE_ICANVAS_H
 #define GAMEENGINE_ICANVAS_H
 
-namespace Framework::Graphics::GUI {
+namespace SR_GRAPH_GUI_NS {
 
 }
 

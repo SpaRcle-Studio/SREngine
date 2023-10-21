@@ -216,8 +216,8 @@ namespace SR_CORE_GUI_NS {
 
         const auto winSize = SR_MATH_NS::FVector2(window->Size.x, window->Size.y);
 
-        const Helper::Math::Unit dx = winSize.x / imgSize.x;
-        const Helper::Math::Unit dy = winSize.y / imgSize.y;
+        const SR_MATH_NS::Unit dx = winSize.x / imgSize.x;
+        const SR_MATH_NS::Unit dy = winSize.y / imgSize.y;
 
         if (dy > dx)
             imgSize *= dx;
@@ -238,14 +238,14 @@ namespace SR_CORE_GUI_NS {
         auto&& transformation = m_transform->GetMatrix();
 
         switch (m_transform->GetMeasurement()) {
-            case Helper::Measurement::SpaceZero:
-            case Helper::Measurement::Space1D:
-            case Helper::Measurement::Space4D:
+            case SR_UTILS_NS::Measurement::SpaceZero:
+            case SR_UTILS_NS::Measurement::Space1D:
+            case SR_UTILS_NS::Measurement::Space4D:
             default:
                 matrix = glm::mat4(0);
                 break;
-            case Helper::Measurement::Space2D:
-            case Helper::Measurement::Space3D: {
+            case SR_UTILS_NS::Measurement::Space2D:
+            case SR_UTILS_NS::Measurement::Space3D: {
                 const SR_MATH_NS::FVector3 translation = transformation.GetTranslate().InverseAxis(SR_MATH_NS::Axis::AXIS_X);
                 const SR_MATH_NS::FVector3 rotation = transformation.GetQuat().EulerAngle().InverseAxis(SR_MATH_NS::Axis::AXIS_YZ);
                 const SR_MATH_NS::FVector3 scale = m_transform->GetScale();
@@ -278,7 +278,7 @@ namespace SR_CORE_GUI_NS {
         }
 
         switch (data->GetKeyCode()) {
-            case Helper::KeyCode::F: {
+            case SR_UTILS_NS::KeyCode::F: {
                 //m_transform->RotateAroundParent(SR_MATH_NS::FVector3(0, 1, 0));
                 break;
             }
