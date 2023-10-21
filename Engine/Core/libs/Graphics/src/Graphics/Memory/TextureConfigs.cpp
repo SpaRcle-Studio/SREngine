@@ -16,7 +16,7 @@ namespace SR_GRAPH_NS::Memory {
         const auto path = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Asset.xml");
 
         if (path.Exists()) {
-            auto doc = Helper::Xml::Document::Load(path);
+            auto doc = SR_UTILS_NS::Xml::Document::Load(path);
             for (const auto& texture : doc.Root().TryGetNode("Textures").TryGetNodes("Texture")) {
                 const auto format      = SR_UTILS_NS::EnumReflector::FromString<ImageFormat>(texture.TryGetAttribute("Format").ToString("RGBA8_UNORM"));
                 const auto filter      = SR_UTILS_NS::EnumReflector::FromString<TextureFilter>(texture.TryGetAttribute("Filter").ToString("LINEAR"));

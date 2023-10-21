@@ -25,7 +25,7 @@
 }                                                        \
 
 namespace SR_GRAPH_NS::VulkanTools {
-    class MemoryManager : Helper::NonCopyable {
+    class MemoryManager : SR_UTILS_NS::NonCopyable {
     private:
         MemoryManager() = default;
         ~MemoryManager() override = default;

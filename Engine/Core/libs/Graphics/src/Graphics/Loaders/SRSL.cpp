@@ -296,7 +296,7 @@ bool SR_GRAPH_NS::SRSL::SRSLLoader::CreateFragment(SRSLUnit &unit, SRSLParseData
     auto& stage = unit.stages[ShaderStage::Fragment];
     stage.path = std::move(path);
 
-    if (!stage.path.Make(Helper::Path::Type::File)) {
+    if (!stage.path.Make(SR_UTILS_NS::Path::Type::File)) {
         SR_ERROR("SRSLLoader::CreateFragment() : failed to create fragment path! Path: " + stage.path.ToString());
         unit.stages.erase(ShaderStage::Fragment);
         return false;
@@ -689,7 +689,7 @@ bool SR_GRAPH_NS::SRSL::SRSLLoader::CreateVertex(SRSLUnit &unit, SRSLParseData& 
     auto& stage = unit.stages[ShaderStage::Vertex];
     stage.path = std::move(path);
 
-    if (!stage.path.Make(Helper::Path::Type::File)) {
+    if (!stage.path.Make(SR_UTILS_NS::Path::Type::File)) {
         SR_ERROR("SRSLLoader::CreateVertex() : failed to create vertex path! Path: " + stage.path.ToString());
         unit.stages.erase(ShaderStage::Vertex);
         return false;

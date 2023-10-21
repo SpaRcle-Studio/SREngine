@@ -18,7 +18,7 @@ namespace SR_GRAPH_NS::GUI {
 
         auto&& theme = new Theme();
 
-        auto&& document = Helper::Xml::Document::Load(absPath);
+        auto&& document = SR_UTILS_NS::Xml::Document::Load(absPath);
 
         auto&& themes = document.Root().GetNode("Theme");
 
@@ -62,7 +62,7 @@ namespace SR_GRAPH_NS::GUI {
     }
 
     bool Theme::Save(const SR_UTILS_NS::Path &path) {
-        auto&& document = Helper::Xml::Document::New();
+        auto&& document = SR_UTILS_NS::Xml::Document::New();
         auto&& theme = document.Root().AppendChild("Theme");
 
         auto&& colors = theme.AppendChild("Colors");
@@ -81,7 +81,7 @@ namespace SR_GRAPH_NS::GUI {
         for (const auto& [name, value] : m_booleans)
             booleans.AppendChild(name).AppendAttribute("value", value);
 
-        return document.Save(Helper::ResourceManager::Instance().GetResPath().Concat(path));
+        return document.Save(SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat(path));
     }
 
     void Theme::SetColor(const std::string& id, const SR_MATH_NS::FColor& color) {

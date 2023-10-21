@@ -35,7 +35,7 @@ bool SR_GRAPH_NS::TextureLoader::Load(Types::Texture* texture, std::string path)
     texture->m_width      = width;
     texture->m_channels   = numComponents;
     texture->m_data       = imgData;
-    texture->m_config.m_alpha = (numComponents == 4) ? Helper::BoolExt::True : Helper::BoolExt::False;
+    texture->m_config.m_alpha = (numComponents == 4) ? SR_UTILS_NS::BoolExt::True : SR_UTILS_NS::BoolExt::False;
 
     return true;
 }
