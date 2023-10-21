@@ -30,26 +30,45 @@ jobs:
           version: 1.3.211.0
         
       - name: Updating submodules
-        run: git submodule --quiet update --init --recursive --depth 1 --jobs 4    
+        run: git submodule --quiet update --init --recursive --depth 1 --jobs 4
 
       - name: Setup Ninja
         uses: ashutoshvarma/setup-ninja@v1.1
         with:
           version: 1.10.2
+          
+      - name : Setup CMake 
+        uses: jwlawson/actions-setup-cmake@v1.13
+        with:
+          cmake-version: '3.25.2'
 
   Building:
     name: Building
     runs-on: windows-2022
     needs: Preparing
+    
+    steps: 
+      - name: Creating Build Environment
+        # Some projects don't allow in-source building, so create a separate build directory
+        # We'll use this as our working directory for all subsequent commands
+        run: cmake -E make_directory ${{github.workspace}}/build
 
-    steps:
-      - name: Building with CMake
-        uses: ashutoshvarma/action-cmake-build@master
-        with:
-          build-dir: ${{github.workspace}}/build
-          configure-options: -G Ninja 
-          build-options: -j 4
-          build-type: $BUILD_TYPE
+      - name: Configuring CMake
+        # Use a bash shell so we can use the same syntax for environment variable
+        # access regardless of the host operating system
+        shell: bash
+        working-directory: ${{github.workspace}}/build
+        # Note the current convention is to use the -S and -B options here to specify source 
+        # and build directories, but this is only available with CMake 3.13 and higher.  
+        # The CMake binaries on the Github Actions machines are (as of this writing) 3.12
+        # run: cmake $GITHUB_WORKSPACE -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON -DCMAKE_BUILD_TYPE=Debug -DCMAKE_GENERATOR_PLATFORM=WIN64
+        run: cmake -G Ninja ../
+
+      - name: Building
+        working-directory: ${{github.workspace}}/build
+        shell: bash
+        # Execute the build.  You can specify a specific target with "--target <NAME>"
+        run: cmake --build . --config $BUILD_TYPE -j 4
       
       - name: Testing
         working-directory: ${{github.workspace}}/build
