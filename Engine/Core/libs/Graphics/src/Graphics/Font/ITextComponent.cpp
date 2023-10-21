@@ -379,4 +379,8 @@ namespace SR_GTYPES_NS {
             delete pData;
         });
     }
+
+    void ITextComponent::SetFont(const SR_UTILS_NS::Path& path) {
+        SetFont(SR_GTYPES_NS::Font::Load(path));
+    }
 }

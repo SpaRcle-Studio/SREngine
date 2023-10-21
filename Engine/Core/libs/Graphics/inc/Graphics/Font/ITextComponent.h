@@ -69,6 +69,7 @@ namespace SR_GTYPES_NS {
         void SetKerning(bool enabled);
         void SetDebug(bool enabled);
         void SetFont(Font* pFont);
+        void SetFont(const SR_UTILS_NS::Path& path);
         void SetFontSize(const SR_MATH_NS::UVector2& size);
 
         void Draw() override;

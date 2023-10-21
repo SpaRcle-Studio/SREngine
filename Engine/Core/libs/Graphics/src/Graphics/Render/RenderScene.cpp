@@ -270,6 +270,10 @@ namespace SR_GRAPH_NS {
             return;
         }
 
+        if (auto&& pText = dynamic_cast<SR_GTYPES_NS::ITextComponent*>(pMesh); pText && !pText->GetFont()) {
+            pText->SetFont("Engine/Fonts/CalibriL.ttf");
+        }
+
         if (!pMesh->GetMaterial()->GetShader()) {
             SR_ERROR("RenderScene::Register() : mesh have not shader!");
             return;
@@ -539,12 +543,18 @@ namespace SR_GRAPH_NS {
 
     void RenderScene::SetMeshMaterial(RenderScene::MeshPtr pMesh) {
         if (pMesh->IsFlatMesh()) {
-            if (auto&& pDefaultMat = GetContext()->GetDefaultUIMaterial()) {
+            if (auto&& pText2D = dynamic_cast<SR_GTYPES_NS::Text2D*>(pMesh)) {
+                pText2D->SetMaterial("Engine/Materials/UI/ui_text_white.mat");
+            }
+            else if (auto&& pDefaultMat = GetContext()->GetDefaultUIMaterial()) {
                 pMesh->SetMaterial(pDefaultMat);
             }
         }
         else {
-            if (auto&& pDefaultMat = GetContext()->GetDefaultMaterial()) {
+            if (auto&& pText3D = dynamic_cast<SR_GTYPES_NS::Text3D*>(pMesh)) {
+                pText3D->SetMaterial("Engine/Materials/text.mat");
+            }
+            else if (auto&& pDefaultMat = GetContext()->GetDefaultMaterial()) {
                 pMesh->SetMaterial(pDefaultMat);
             }
         }

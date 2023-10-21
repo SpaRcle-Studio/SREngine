@@ -13,6 +13,8 @@
 
 #include <Graphics/Loaders/ObjLoader.h>
 #include <Graphics/Types/Skybox.h>
+#include <Graphics/Font/Text2D.h>
+#include <Graphics/Font/Text3D.h>
 #include <Graphics/Types/Geometry/ProceduralMesh.h>
 
 #include <Physics/3D/Rigidbody3D.h>
@@ -592,7 +594,8 @@ namespace SpaRcle {
         ESRegisterDynamicCast(generator, ProceduralMesh, Component)
         ESRegisterDynamicCast(generator, Rigidbody3D, Component)
         ESRegisterDynamicCast(generator, Rigidbody, Component)
-        //ESRegisterDynamicCast(generator, Text, Component)
+        ESRegisterDynamicCast(generator, Text2D, Component)
+        ESRegisterDynamicCast(generator, Text3D, Component)
         ESRegisterDynamicCast(generator, SceneLogic, SceneCubeChunkLogic)
     }
 
@@ -628,11 +631,17 @@ namespace SpaRcle {
         using namespace SR_GTYPES_NS;
         using namespace SR_GRAPH_NS;
 
-       //generator->RegisterNewClass("Text", "Text", {
-       //    "Libraries/Component.h", "Libraries/Mesh.h"
-       //}, { { "Component", EvoScript::Public }, { "Mesh", EvoScript::Public  } });
+       generator->RegisterNewClass("Text2D", "Text", {
+           "Libraries/Component.h", "Libraries/Mesh.h"
+       }, { { "Component", EvoScript::Public }, { "Mesh", EvoScript::Public  } });
 
-        //ESRegisterMethod(EvoScript::Public, generator, Text, SetText, void, ESArg1(const std::string& text), ESArg1(text))
+        ESRegisterMethod(EvoScript::Public, generator, Text2D, SetText, void, ESArg1(const std::string& text), ESArg1(text))
+
+       generator->RegisterNewClass("Text3D", "Text", {
+           "Libraries/Component.h", "Libraries/Mesh.h"
+       }, { { "Component", EvoScript::Public }, { "Mesh", EvoScript::Public  } });
+
+       ESRegisterMethod(EvoScript::Public, generator, Text3D, SetText, void, ESArg1(const std::string& text), ESArg1(text))
     }
 
     void API::RegisterMath(EvoScript::AddressTableGen *generator) {
