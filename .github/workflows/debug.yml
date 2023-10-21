@@ -15,8 +15,8 @@ env:
   BUILD_TYPE: Debug
   
 jobs:
-  build:
-    name: Installing Vulkan SDK, updating submodules and building with CMake
+  Preparing:
+    name: Preparing
     runs-on: windows-2022
 
     steps:
@@ -37,7 +37,13 @@ jobs:
         uses: ashutoshvarma/setup-ninja@v1.1
         with:
           version: 1.10.2
-        
+
+  Building:
+    name: Building
+    runs-on: windows-2022
+    needs: Preparing
+
+    steps:
       - name: Building with CMake
         uses: ashutoshvarma/action-cmake-build@master
         with:
