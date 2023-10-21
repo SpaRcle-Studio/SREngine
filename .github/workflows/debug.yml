@@ -52,7 +52,7 @@ jobs:
         # We'll use this as our working directory for all subsequent commands
         run: cmake -E make_directory ${{github.workspace}}/build
 
-      - name: Configuring CMake
+      - name: Configuring and Building
         shell: bash
         working-directory: ${{github.workspace}}/build
         run: |
