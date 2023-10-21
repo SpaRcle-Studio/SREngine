@@ -42,10 +42,10 @@ jobs:
           version: '1.10.2'
           dest: '${{github.workspace}}/../ninja'
           
-      - name : Setup CMake 
-        uses: jwlawson/actions-setup-cmake@v1.13
-        with:
-          cmake-version: '3.25.2'
+      #- name : Setup CMake 
+      #  uses: jwlawson/actions-setup-cmake@v1.13
+      #  with:
+      #    cmake-version: '3.25.2'
           
       - name: Creating Build Environment
         # Some projects don't allow in-source building, so create a separate build directory
