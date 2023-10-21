@@ -57,7 +57,7 @@ jobs:
         # and build directories, but this is only available with CMake 3.13 and higher.  
         # The CMake binaries on the Github Actions machines are (as of this writing) 3.12
         # run: cmake $GITHUB_WORKSPACE -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON -DCMAKE_BUILD_TYPE=Debug -DCMAKE_GENERATOR_PLATFORM=WIN64
-        run: cmake -G '${{github.workspace}}/../ninja/ninja.exe' ../
+        run: cmake -G Ninja 
 
       - name: Building
         working-directory: ${{github.workspace}}/build
