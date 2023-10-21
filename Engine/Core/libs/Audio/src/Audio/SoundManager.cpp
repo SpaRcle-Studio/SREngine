@@ -268,6 +268,8 @@ namespace SR_AUDIO_NS {
 
 
     SoundContext* SoundManager::GetSoundContext(const PlayParams& params) noexcept {
+        SR_LOCK_GUARD;
+
         AudioLibrary library = params.library.has_value() ? params.library.value() : GetRelevantLibrary();
         auto&& device = params.device.has_value() ? params.device.value() : std::string();
 
@@ -284,22 +286,25 @@ namespace SR_AUDIO_NS {
                 }
             }
         }
+        else {
+            SR_INFO("SoundManager::GetSoundContext() : initializing \"" + SR_UTILS_NS::EnumReflector::ToString(library) + "\" library...");
+        }
 
-        auto&& pDevice = SoundDevice::Allocate(library, params.device.value());
+        auto&& pDevice = SoundDevice::Allocate(library, device);
         if (!pDevice) {
-            SR_ERROR("SoundManager::PrepareData() : failed to allocate sound device!");
+            SR_ERROR("SoundManager::GetSoundContext() : failed to allocate sound device!");
             return nullptr;
         }
 
         if (!pDevice->Init()) {
-            SR_ERROR("SoundManager::PrepareData() : failed to initialize sound device!");
+            SR_ERROR("SoundManager::GetSoundContext() : failed to initialize sound device!");
             delete pDevice;
             return nullptr;
         }
 
         auto&& pContext = SoundContext::Allocate(pDevice);
         if (!pContext->Init()) {
-            SR_ERROR("SoundManager::PrepareData() : failed to initialize sound context!");
+            SR_ERROR("SoundManager::GetSoundContext() : failed to initialize sound context!");
             delete pContext;
             return nullptr;
         }
@@ -311,6 +316,8 @@ namespace SR_AUDIO_NS {
 
     void SoundManager::Destroy() {
         SR_LOCK_GUARD
+
+        SR_INFO("SoundManager::Destroy() : destroy all sound libraries...");
 
         StopAll();
 
@@ -384,6 +391,8 @@ namespace SR_AUDIO_NS {
     }
 
     SoundListener* SoundManager::CreateListener(AudioLibrary audioLibrary) {
+        SR_LOCK_GUARD;
+
         if (audioLibrary == AudioLibrary::Unknown) {
             if (m_contexts.empty()) {
                 audioLibrary = GetRelevantLibrary();
@@ -393,7 +402,7 @@ namespace SR_AUDIO_NS {
             }
         }
 
-        PlayParams params;
+        PlayParams params = PlayParams::GetDefault();
         params.library = audioLibrary;
         auto&& pSoundContext = GetSoundContext(params);
         if (!pSoundContext) {
@@ -405,6 +414,8 @@ namespace SR_AUDIO_NS {
     }
 
     void SoundManager::DestroyListener(SoundListener* pListener) {
+        SR_LOCK_GUARD;
+
         for (auto&& [libraryType, deviceContexts] : m_contexts) {
             for (auto&& [deviceName, pSoundContext] : deviceContexts) {
                 if (pSoundContext->FreeListener(pListener)) {
