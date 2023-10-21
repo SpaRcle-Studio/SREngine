@@ -29,7 +29,7 @@ jobs:
         version: 1.3.211.0
         
     - name: Updating submodules
-      run: git submodule update --init --recursive   
+      run: git submodule --quiet update --init --recursive --depth 1 --jobs 8    
         
     - name : Setup CMake 
       uses: jwlawson/actions-setup-cmake@v1.13
@@ -59,7 +59,7 @@ jobs:
       working-directory: ${{github.workspace}}/build
       shell: bash
       # Execute the build.  You can specify a specific target with "--target <NAME>"
-      run: cmake --build . --config $BUILD_TYPE
+      run: cmake --build . --config $BUILD_TYPE -j 8
       
     - name: Testing
       working-directory: ${{github.workspace}}/build
