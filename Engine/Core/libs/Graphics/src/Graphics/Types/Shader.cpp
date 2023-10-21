@@ -91,8 +91,12 @@ namespace SR_GRAPH_NS::Types {
             case ShaderBindResult::Duplicated:
             case ShaderBindResult::ReAllocated:
                 GetRenderContext()->SetCurrentShader(this);
-                SR_FALLTHROUGH;
+                break;
+            case ShaderBindResult::Failed:
+                SR_ERROR("Shader::Use() : failed to bind shader!");
+                break;
             default:
+                SRHaltOnce("Unexcepted behaviour!");
                 break;
         }
 
@@ -100,10 +104,13 @@ namespace SR_GRAPH_NS::Types {
     }
 
     void Shader::UnUse() noexcept {
-        GetPipeline()->UnUseShader();
+        auto&& pCurrentShader = GetRenderContext()->GetCurrentShader();
 
-        if (GetRenderContext()->GetCurrentShader() == this) {
-            GetRenderContext()->SetCurrentShader(nullptr);
+        if (pCurrentShader == this) {
+            GetPipeline()->UnUseShader();
+        }
+        else {
+            SRHalt("You are trying to unuse wrong shader!");
         }
     }
 

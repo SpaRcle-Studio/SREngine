@@ -19,7 +19,7 @@
 #include <Graphics/UI/Canvas.h>
 #include <Graphics/Types/Geometry/ProceduralMesh.h>
 #include <Graphics/GUI/Utils.h>
-#include <Graphics/Font/Text.h>
+#include <Graphics/Font/ITextComponent.h>
 #include <Graphics/Types/Geometry/SkinnedMesh.h>
 #include <Graphics/Animations/Animator.h>
 #include <Graphics/Animations/BoneComponent.h>
@@ -191,7 +191,8 @@ namespace SR_CORE_GUI_NS {
             copyPtrComponent = DrawComponent<SR_GRAPH_NS::UI::Anchor>(copyPtrComponent, "Anchor", index);
             copyPtrComponent = DrawComponent<SR_GRAPH_NS::UI::Canvas>(copyPtrComponent, "Canvas", index);
             copyPtrComponent = DrawComponent<SR_PTYPES_NS::Rigidbody3D>(copyPtrComponent, "Rigidbody3D", index);
-            copyPtrComponent = DrawComponent<SR_GTYPES_NS::Text>(copyPtrComponent, "Text", index);
+            copyPtrComponent = DrawComponent<SR_GTYPES_NS::Text2D>(copyPtrComponent, "Text2D", index);
+            copyPtrComponent = DrawComponent<SR_GTYPES_NS::Text3D>(copyPtrComponent, "Text3D", index);
             copyPtrComponent = DrawComponent<SR_ANIMATIONS_NS::Animator>(copyPtrComponent, "Animator", index);
             copyPtrComponent = DrawComponent<SR_ANIMATIONS_NS::Skeleton>(copyPtrComponent, "Skeleton", index);
             copyPtrComponent = DrawComponent<SR_ANIMATIONS_NS::BoneComponent>(copyPtrComponent, "Bone", index);

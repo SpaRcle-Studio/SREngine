@@ -2,11 +2,12 @@
 // Created by Monika on 14.02.2022.
 //
 
+#include <Graphics/Font/ITextComponent.h>
+
 #include <Utils/ECS/Transform.h>
 #include <Utils/ECS/ComponentManager.h>
 #include <Utils/Locale/Encoding.h>
 
-#include <Graphics/Font/Text.h>
 #include <Graphics/Font/Font.h>
 #include <Graphics/Font/TextBuilder.h>
 #include <Graphics/Types/Material.h>
@@ -15,17 +16,15 @@
 #include <Graphics/Render/RenderScene.h>
 
 namespace SR_GTYPES_NS {
-    SR_REGISTER_COMPONENT(Text);
-
-    Text::Text()
+    ITextComponent::ITextComponent()
         : Mesh(MeshType::Static)
     { }
 
-    Text::~Text() {
+    ITextComponent::~ITextComponent() {
         SetFont(nullptr);
     }
 
-    void Text::Draw() {
+    void ITextComponent::Draw() {
         auto&& pShader = GetRenderContext()->GetCurrentShader();
 
         if (!pShader || !IsActive()) {
@@ -76,7 +75,7 @@ namespace SR_GTYPES_NS {
         }
     }
 
-    bool Text::Calculate() {
+    bool ITextComponent::Calculate() {
         if (IsCalculated()) {
             return true;
         }
@@ -93,7 +92,7 @@ namespace SR_GTYPES_NS {
         return Mesh::Calculate();
     }
 
-    void Text::FreeVideoMemory() {
+    void ITextComponent::FreeVideoMemory() {
         if (m_id != SR_ID_INVALID) {
             SRVerifyFalse(!m_pipeline->FreeTexture(&m_id));
         }
@@ -101,7 +100,7 @@ namespace SR_GTYPES_NS {
         Mesh::FreeVideoMemory();
     }
 
-    bool Text::BuildAtlas() {
+    bool ITextComponent::BuildAtlas() {
         if (!m_font) {
             SR_ERROR("Text::BuildAtlas() : missing font!");
             return false;
@@ -149,21 +148,19 @@ namespace SR_GTYPES_NS {
         return true;
     }
 
-    SR_UTILS_NS::Component* Text::LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage) {
-        auto&& pMesh = new Text();
-
+    bool ITextComponent::LoadComponent(SR_GTYPES_NS::ITextComponent* pText, SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage) {
         SR_MAYBE_UNUSED const auto&& type = static_cast<MeshType>(marshal.Read<int32_t>());
 
-        pMesh->m_fontSize = marshal.Read<SR_MATH_NS::UVector2>();
-        pMesh->m_localization = marshal.Read<bool>();
-        pMesh->m_preprocessor = marshal.Read<bool>();
-        pMesh->m_kerning = marshal.Read<bool>();
-        pMesh->m_debug = marshal.Read<bool>();
+        pText->m_fontSize = marshal.Read<SR_MATH_NS::UVector2>();
+        pText->m_localization = marshal.Read<bool>();
+        pText->m_preprocessor = marshal.Read<bool>();
+        pText->m_kerning = marshal.Read<bool>();
+        pText->m_debug = marshal.Read<bool>();
 
         const auto&& material = marshal.Read<std::string>();
         if (material != "None") {
             if (auto&& pMaterial = SR_GTYPES_NS::Material::Load(SR_UTILS_NS::Path(material, true))) {
-                pMesh->SetMaterial(pMaterial);
+                pText->SetMaterial(pMaterial);
             }
             else {
                 SR_ERROR("Text::LoadComponent() : failed to load material! Name: " + material);
@@ -173,24 +170,24 @@ namespace SR_GTYPES_NS {
         const auto&& font = marshal.Read<std::string>();
         if (font != "None") {
             if (auto&& pFont = SR_GTYPES_NS::Font::Load(SR_UTILS_NS::Path(font, true))) {
-                pMesh->SetFont(pFont);
+                pText->SetFont(pFont);
             }
             else {
                 SR_ERROR("Text::LoadComponent() : failed to load font! Name: " + font);
             }
         }
 
-        pMesh->m_text = marshal.Read<SR_HTYPES_NS::UnicodeString>();
+        pText->m_text = marshal.Read<SR_HTYPES_NS::UnicodeString>();
 
-        return dynamic_cast<Component*>(pMesh);
+        return true;
     }
 
-    void Text::UseMaterial() {
+    void ITextComponent::UseMaterial() {
         Mesh::UseMaterial();
         UseModelMatrix();
     }
 
-    void Text::UseModelMatrix() {
+    void ITextComponent::UseModelMatrix() {
         GetRenderContext()->GetCurrentShader()->SetMat4(SHADER_MODEL_MATRIX, m_modelMatrix);
         GetRenderContext()->GetCurrentShader()->SetFloat(SHADER_TEXT_RECT_X, 0.f);
         GetRenderContext()->GetCurrentShader()->SetFloat(SHADER_TEXT_RECT_Y, 0.f);
@@ -200,7 +197,7 @@ namespace SR_GTYPES_NS {
         Mesh::UseModelMatrix();
     }
 
-    void Types::Text::OnMatrixDirty() {
+    void ITextComponent::OnMatrixDirty() {
         if (auto&& pTransform = GetTransform()) {
             m_modelMatrix = pTransform->GetMatrix();
         }
@@ -211,7 +208,7 @@ namespace SR_GTYPES_NS {
         Component::OnMatrixDirty();
     }
 
-    Mesh::RenderScenePtr Text::GetRenderScene() {
+    Mesh::RenderScenePtr ITextComponent::GetRenderScene() {
         if (!m_renderScene.Valid()) {
             auto&& pScene = TryGetScene();
             if (!pScene) {
@@ -226,21 +223,21 @@ namespace SR_GTYPES_NS {
         return m_renderScene;
     }
 
-    void Text::OnEnable() {
+    void ITextComponent::OnEnable() {
         if (auto&& renderScene = GetRenderScene()) {
             renderScene->SetDirty();
         }
         Component::OnEnable();
     }
 
-    void Text::OnDisable() {
+    void ITextComponent::OnDisable() {
         if (auto&& renderScene = GetRenderScene()) {
             renderScene->SetDirty();
         }
         Component::OnDisable();
     }
 
-    void Text::OnAttached() {
+    void ITextComponent::OnAttached() {
         GetRenderScene().Do([this](SR_GRAPH_NS::RenderScene *ptr) {
             ptr->Register(this);
         });
@@ -248,14 +245,14 @@ namespace SR_GTYPES_NS {
         Component::OnAttached();
     }
 
-    void Text::OnDestroy() {
+    void ITextComponent::OnDestroy() {
         RenderScene::Ptr renderScene = GetRenderScene();
 
         Component::OnDestroy();
 
         /// если ресурс уничтожится сразу, то обрабатывать это нужно в контексте SharedPtr
         if (!IsGraphicsResourceRegistered()) {
-            GetThis().DynamicCast<Text>().AutoFree([](auto&& pData) {
+            GetThis().DynamicCast<ITextComponent>().AutoFree([](auto&& pData) {
                 pData->MarkMeshDestroyed();
             });
         }
@@ -268,7 +265,7 @@ namespace SR_GTYPES_NS {
         }
     }
 
-    SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Text::Save(SR_UTILS_NS::SavableSaveData data) const {
+    SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr ITextComponent::Save(SR_UTILS_NS::SavableSaveData data) const {
         auto&& pMarshal = Component::Save(data);
 
         pMarshal->Write<int32_t>(static_cast<int32_t>(GetMeshType()));
@@ -284,12 +281,12 @@ namespace SR_GTYPES_NS {
         return pMarshal;
     }
 
-    void Text::UseSamplers() {
+    void ITextComponent::UseSamplers() {
         GetRenderContext()->GetCurrentShader()->SetSampler2D(SHADER_TEXT_ATLAS_TEXTURE, m_id);
         Mesh::UseSamplers();
     }
 
-    void Text::SetFont(Font *pFont) {
+    void ITextComponent::SetFont(Font *pFont) {
         if (pFont == m_font) {
             return;
         }
@@ -309,7 +306,7 @@ namespace SR_GTYPES_NS {
         }
     }
 
-    void Text::SetFontSize(const SR_MATH_NS::UVector2& size)
+    void ITextComponent::SetFontSize(const SR_MATH_NS::UVector2& size)
     {
         m_fontSize = size;
         m_isCalculated = false;
@@ -318,7 +315,7 @@ namespace SR_GTYPES_NS {
         }
     }
 
-    void Text::SetText(const std::string& text) {
+    void ITextComponent::SetText(const std::string& text) {
         auto&& newText = SR_UTILS_NS::Locale::UtfToUtf<char32_t, char>(text);
         if (m_text == newText) {
             return;
@@ -330,7 +327,7 @@ namespace SR_GTYPES_NS {
         }
     }
 
-    void Text::SetText(const std::u16string& text) {
+    void ITextComponent::SetText(const std::u16string& text) {
         auto&& newText = SR_UTILS_NS::Locale::UtfToUtf<char32_t, char16_t>(text);
         if (m_text == newText) {
             return;
@@ -342,7 +339,7 @@ namespace SR_GTYPES_NS {
         }
     }
 
-    void Text::SetText(const std::u32string& text) {
+    void ITextComponent::SetText(const std::u32string& text) {
         if (m_text == text) {
             return;
         }
@@ -353,28 +350,15 @@ namespace SR_GTYPES_NS {
         }
     }
 
-    bool Text::IsCalculatable() const {
+    bool ITextComponent::IsCalculatable() const {
         return Mesh::IsCalculatable() && !m_text.empty() && m_font;
     }
 
-    void Text::OnLoaded() {
+    void ITextComponent::OnLoaded() {
         Component::OnLoaded();
     }
 
-    SR_UTILS_NS::Component* Text::CopyComponent() const {
-        if (auto&& pComponent = dynamic_cast<Text*>(Component::CopyComponent())) {
-            pComponent->SetText(m_text);
-            pComponent->SetDebug(m_debug);
-            pComponent->SetFont(m_font);
-            pComponent->SetFontSize(m_fontSize);
-            pComponent->SetKerning(m_kerning);
-            return pComponent;
-        }
-
-        return nullptr;
-    }
-
-    void Text::SetKerning(bool enabled) {
+    void ITextComponent::SetKerning(bool enabled) {
         m_kerning = enabled;
         m_isCalculated = false;
         if (auto&& renderScene = GetRenderScene()) {
@@ -382,7 +366,7 @@ namespace SR_GTYPES_NS {
         }
     }
 
-    void Text::SetDebug(bool enabled) {
+    void ITextComponent::SetDebug(bool enabled) {
         m_debug = enabled;
         m_isCalculated = false;
         if (auto&& renderScene = GetRenderScene()) {
@@ -390,7 +374,7 @@ namespace SR_GTYPES_NS {
         }
     }
 
-    void Text::FreeMesh() {
+    void ITextComponent::FreeMesh() {
         AutoFree([](auto&& pData) {
             delete pData;
         });

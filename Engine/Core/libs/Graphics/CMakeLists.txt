@@ -26,8 +26,10 @@ include(freetype.cmake)
 
 add_subdirectory(libs/cmp_core)
 
+set(SR_GRAPHICS_SOURCES cxx/Graphics.cxx cxx/ImGUI.cxx cxx/SRSL.cxx cxx/Pass.cxx cxx/GUI.cxx cxx/Animations.cxx)
+
 if (SR_GRAPHICS_STATIC_LIBRARY)
-    add_library(Graphics STATIC Graphics.cxx ImGUI.cxx SRSL.cxx Pass.cxx GUI.cxx)
+    add_library(Graphics STATIC ${SR_GRAPHICS_SOURCES})
 
     if (CYGWIN)
         target_link_libraries(Graphics "$ENV{VULKAN_SDK}/Lib/vulkan-1.lib")
@@ -45,7 +47,7 @@ else()
         endif()
     endif()
 
-    add_library(Graphics SHARED Graphics.cxx inc/Graphics/Font/FreeType.h)
+    add_library(Graphics SHARED ${SR_GRAPHICS_SOURCES})
     add_library(Graphics::lib ALIAS Graphics)
 endif()
 

@@ -6,6 +6,7 @@
 #define GAMEENGINE_PIPELINE_TYPE_H
 
 #include <Utils/Common/Enumerations.h>
+#include <Utils/Debug.h>
 
 namespace SR_GRAPH_NS {
     SR_ENUM_NS_CLASS_T(PipelineType, uint8_t,

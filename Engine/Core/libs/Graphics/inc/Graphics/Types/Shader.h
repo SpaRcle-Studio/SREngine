@@ -14,6 +14,7 @@
 #include <Graphics/Memory/ShaderUBOBlock.h>
 #include <Graphics/Loaders/SRSL.h>
 #include <Graphics/Memory/ShaderProgramManager.h>
+#include <Graphics/Memory/IGraphicsResource.h>
 
 namespace SR_GTYPES_NS {
     class Texture;

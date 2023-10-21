@@ -16,6 +16,7 @@
 namespace SR_GTYPES_NS {
     class Framebuffer;
     class Shader;
+    class Camera;
     class Texture;
     class Skybox;
     class Material;
@@ -88,6 +89,7 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD WindowPtr GetWindow() const;
         SR_NODISCARD PipelineType GetPipelineType() const;
         SR_NODISCARD MaterialPtr GetDefaultMaterial() const;
+        SR_NODISCARD MaterialPtr GetDefaultUIMaterial() const { return m_defaultUIMaterial; }
         SR_NODISCARD TexturePtr GetDefaultTexture() const;
         SR_NODISCARD TexturePtr GetNoneTexture() const;
         SR_NODISCARD ShaderPtr GetCurrentShader() const noexcept;
@@ -139,6 +141,7 @@ namespace SR_GRAPH_NS {
 
         WindowPtr m_window;
 
+        MaterialPtr m_defaultUIMaterial = nullptr;
         MaterialPtr m_defaultMaterial = nullptr;
         TexturePtr m_defaultTexture = nullptr;
         TexturePtr m_noneTexture = nullptr;

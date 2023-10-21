@@ -11,7 +11,13 @@
             <OpaquePass/>
             <SkyboxPass Path="Engine/Skyboxes/Sun.png" Shader="Engine/Shaders/skybox.srsl"/>
             <TransparentPass/>
+            <FlatClusterPass/>
             <DebugPass/>
         </Passes>
     </FramebufferPass>
+    <Queues>
+        <Queue>
+            <Pass Name="SceneViewFBO"/>
+        </Queue>
+    </Queues>
 </Technique>

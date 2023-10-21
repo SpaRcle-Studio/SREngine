@@ -4,6 +4,7 @@
 
 #include <Utils/DebugDraw.h>
 #include <Utils/Types/Time.h>
+#include <Utils/Types/RawMesh.h>
 
 #include <Graphics/Render/DebugRenderer.h>
 #include <Graphics/Types/Geometry/DebugWireframeMesh.h>

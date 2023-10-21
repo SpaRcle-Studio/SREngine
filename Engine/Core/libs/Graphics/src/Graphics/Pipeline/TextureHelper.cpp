@@ -3,6 +3,7 @@
 //
 
 #include <Graphics/Pipeline/TextureHelper.h>
+#include <Utils/Debug.h>
 
 #include <cmp_core.h>
 

@@ -6,6 +6,7 @@
 #define SR_ENGINE_PIPELINE_H
 
 #include <Utils/Math/Vector3.h>
+#include <Utils/Types/SafePointer.h>
 
 #include <Graphics/Pipeline/PipelineState.h>
 #include <Graphics/Pipeline/FrameBufferQueue.h>
@@ -20,6 +21,7 @@ namespace SR_GTYPES_NS {
 namespace SR_GRAPH_NS {
     class RenderContext;
     class Overlay;
+    class Window;
 
     class Pipeline : public SR_HTYPES_NS::SharedPtr<Pipeline> {
     public:

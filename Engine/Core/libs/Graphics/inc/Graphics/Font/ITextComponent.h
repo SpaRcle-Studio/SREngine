@@ -2,8 +2,8 @@
 // Created by Monika on 14.02.2022.
 //
 
-#ifndef SRENGINE_TEXT_H
-#define SRENGINE_TEXT_H
+#ifndef SRENGINE_ITEXTCOMPONENT_H
+#define SRENGINE_ITEXTCOMPONENT_H
 
 #include <Graphics/Types/Vertices.h>
 #include <Graphics/Types/Mesh.h>
@@ -13,18 +13,16 @@
 namespace SR_GTYPES_NS {
     class Font;
 
-    class Text : public Mesh, public SR_UTILS_NS::Component {
-        SR_ENTITY_SET_VERSION(1002);
-        SR_INITIALIZE_COMPONENT(Text);
+    class ITextComponent : public Mesh, public SR_UTILS_NS::Component {
     public:
         typedef Vertices::SimpleVertex VertexType;
 
     public:
-        Text();
-        ~Text() override;
+        ITextComponent();
+        ~ITextComponent() override;
 
     public:
-        static Component* LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage);
+        static bool LoadComponent(SR_GTYPES_NS::ITextComponent* pText, SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage);
 
         SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save(SR_UTILS_NS::SavableSaveData data) const override;
 
@@ -56,8 +54,6 @@ namespace SR_GTYPES_NS {
             return SR_UTILS_NS::Component::IsActive();
         }
 
-        SR_NODISCARD Component* CopyComponent() const override;
-
         const SR_MATH_NS::Matrix4x4& GetModelMatrix() const override {
             return m_modelMatrix;
         }
@@ -80,11 +76,11 @@ namespace SR_GTYPES_NS {
         bool Calculate() override;
         void FreeVideoMemory() override;
 
-    private:
+    protected:
         SR_NODISCARD RenderScenePtr GetRenderScene();
         SR_NODISCARD bool BuildAtlas();
 
-    private:
+    protected:
         RenderScenePtr m_renderScene;
         Font* m_font = nullptr;
 
@@ -106,4 +102,4 @@ namespace SR_GTYPES_NS {
     };
 }
 
-#endif //SRENGINE_TEXT_H
+#endif //SRENGINE_ITEXTCOMPONENT_H

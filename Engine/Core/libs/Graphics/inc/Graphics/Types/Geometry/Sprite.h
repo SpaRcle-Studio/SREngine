@@ -34,6 +34,8 @@ namespace SR_GTYPES_NS {
         void UseMaterial() override;
         void UseModelMatrix() override;
 
+        SR_NODISCARD bool IsFlatMesh() const noexcept override { return true; }
+
         static Component* LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage);
 
         SR_NODISCARD std::vector<uint32_t> GetIndices() const override;

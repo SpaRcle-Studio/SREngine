@@ -13,7 +13,7 @@ namespace SR_GRAPH_NS {
 
         PrepareFBODependencies();
 
-        return false;
+        return true;
     }
 
     void IMeshClusterPass::Update() {

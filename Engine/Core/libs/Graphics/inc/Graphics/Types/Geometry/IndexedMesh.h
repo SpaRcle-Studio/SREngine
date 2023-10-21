@@ -22,9 +22,6 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD int32_t GetIBO() override;
         SR_NODISCARD int32_t GetVBO() override;
 
-        SR_NODISCARD int32_t GetIBO() const override { return m_IBO; }
-        SR_NODISCARD int32_t GetVBO() const override { return m_VBO; }
-
         SR_NODISCARD uint32_t GetIndicesCount() const { return m_countIndices; }
         SR_NODISCARD uint32_t GetVerticesCount() const { return m_countVertices; }
 

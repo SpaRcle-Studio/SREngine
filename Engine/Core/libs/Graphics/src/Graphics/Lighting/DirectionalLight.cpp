@@ -4,9 +4,9 @@
 
 #include <Graphics/Lighting/LightSystem.h>
 #include <Graphics/Lighting/DirectionalLight.h>
+#include <Graphics/Render/RenderScene.h>
 
 namespace SR_GRAPH_NS {
-
     void DirectionalLight::OnAttached() {
         GetRenderScene().Do([this](SR_GRAPH_NS::RenderScene *ptr) {
             ptr->GetLightSystem()->Register(this);

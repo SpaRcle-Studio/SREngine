@@ -90,7 +90,8 @@ namespace SR_GTYPES_NS {
             pShader->FlushSamplers();
         }
 
-        switch (uboManager.BindUBO(m_virtualUBO)) {
+        const auto result = uboManager.BindUBO(m_virtualUBO);
+        switch (result) {
             case Memory::UBOManager::BindResult::Duplicated:
                 pShader->InitUBOBlock();
                 pShader->Flush();
@@ -102,8 +103,10 @@ namespace SR_GTYPES_NS {
                 m_pipeline->DrawIndices(m_countIndices);
                 break;
             case Memory::UBOManager::BindResult::Failed:
-            default:
-                break;
+            default: {
+                m_hasErrors = true;
+                return;
+            }
         }
     }
 
@@ -125,7 +128,12 @@ namespace SR_GTYPES_NS {
     }
 
     void Sprite::UseModelMatrix() {
-        GetRenderContext()->GetCurrentShader()->SetMat4(SHADER_MODEL_MATRIX, m_modelMatrix);
+        if (auto&& pShader = GetRenderContext()->GetCurrentShader()) {
+            pShader->SetMat4(SHADER_MODEL_MATRIX, m_modelMatrix);
+        }
+        else {
+            SRHaltOnce("Shader is nullptr!");
+        }
         Super::UseModelMatrix();
     }
 

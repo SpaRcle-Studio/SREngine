@@ -101,6 +101,8 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD SR_MATH_NS::UVector2 GetSurfaceSize() const;
 
     private:
+        void SetMeshMaterial(MeshPtr pMesh);
+
         void SortCameras();
         void RenderBlackScreen();
 

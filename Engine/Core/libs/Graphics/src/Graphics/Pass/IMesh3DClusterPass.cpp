@@ -120,6 +120,10 @@ namespace SR_GRAPH_NS {
     bool IMesh3DClusterPass::Render() {
         SR_TRACY_ZONE;
 
+        if (!Super::Render()) {
+            return false;
+        }
+
         bool rendered = false;
 
         if (GetClusterType() & MeshClusterType::Opaque) {
@@ -134,7 +138,7 @@ namespace SR_GRAPH_NS {
             rendered |= RenderCluster(GetRenderScene()->GetDebugCluster());
         }
 
-        return Super::Render() || rendered;
+        return rendered;
     }
 
     void IMesh3DClusterPass::Update() {

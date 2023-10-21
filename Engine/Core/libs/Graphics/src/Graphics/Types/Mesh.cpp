@@ -130,7 +130,7 @@ namespace SR_GRAPH_NS::Types {
         m_material->Use();
     }
 
-    void Mesh::BindMesh() const {
+    void Mesh::BindMesh() {
         if (auto&& VBO = GetVBO(); VBO != SR_ID_INVALID) {
             m_pipeline->BindVBO(VBO);
         }

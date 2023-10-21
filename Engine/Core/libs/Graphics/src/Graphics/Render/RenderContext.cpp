@@ -144,6 +144,15 @@ namespace SR_GRAPH_NS {
 
         /// ----------------------------------------------------------------------------
 
+        if ((m_defaultUIMaterial = SR_GTYPES_NS::Material::Load("Engine/Materials/UI/ui.mat"))) {
+            m_defaultUIMaterial->AddUsePoint();
+        }
+        else {
+            SR_ERROR("RenderContext::Init() : failed to load default UI material!");
+        }
+
+        /// ----------------------------------------------------------------------------
+
         if ((m_defaultMaterial = SR_GTYPES_NS::Material::Load("Engine/Materials/default.mat"))) {
             m_defaultMaterial->AddUsePoint();
         }
@@ -170,6 +179,11 @@ namespace SR_GRAPH_NS {
         if (m_defaultMaterial) {
             m_defaultMaterial->RemoveUsePoint();
             m_defaultMaterial = nullptr;
+        }
+
+        if (m_defaultUIMaterial) {
+            m_defaultUIMaterial->RemoveUsePoint();
+            m_defaultUIMaterial = nullptr;
         }
     }
 

@@ -121,7 +121,7 @@ namespace SR_GTYPES_NS {
         Mesh::FreeVideoMemory();
     }
 
-    int32_t IndexedMesh::GetVBO() {
+    int32_t IndexedMesh::GetVBO()  {
         if (!IsCalculated() && !Calculate()) {
             return SR_ID_INVALID;
         }

@@ -55,9 +55,6 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD virtual int32_t GetIBO() { return SR_ID_INVALID; }
         SR_NODISCARD virtual int32_t GetVBO() { return SR_ID_INVALID; }
 
-        SR_NODISCARD virtual int32_t GetIBO() const { return SR_ID_INVALID; }
-        SR_NODISCARD virtual int32_t GetVBO() const { return SR_ID_INVALID; }
-
         SR_NODISCARD virtual bool IsCalculatable() const;
         SR_NODISCARD virtual bool IsUniqueMesh() const { return false; }
         SR_NODISCARD virtual bool IsMeshDestroyed() const { return m_isMeshDestroyed; }
@@ -79,7 +76,7 @@ namespace SR_GTYPES_NS {
 
         virtual void OnResourceReloaded(SR_UTILS_NS::IResource* pResource);
         virtual void SetGeometryName(const std::string& name) { }
-        virtual void BindMesh() const;
+        virtual void BindMesh();
 
         virtual void Draw() = 0;
 

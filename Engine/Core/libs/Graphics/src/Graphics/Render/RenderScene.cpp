@@ -262,13 +262,12 @@ namespace SR_GRAPH_NS {
         }
 
         if (!pMesh->GetMaterial()) {
-            if (auto&& pDefaultMat = GetContext()->GetDefaultMaterial()) {
-                pMesh->SetMaterial(pDefaultMat);
-            }
-            else {
-                SR_ERROR("RenderScene::Register() : mesh material and default material are nullptr!");
-                return;
-            }
+            SetMeshMaterial(pMesh);
+        }
+
+        if (!pMesh->GetMaterial()) {
+            SR_ERROR("RenderScene::Register() : mesh material and default material are nullptr!");
+            return;
         }
 
         if (!pMesh->GetMaterial()->GetShader()) {
@@ -285,7 +284,8 @@ namespace SR_GRAPH_NS {
             if (pMesh->IsFlatMesh()) {
                 m_flat.Add(pMesh);
             }
-            else if (pMesh->GetMaterial()->IsTransparent()) {
+            else
+                if (pMesh->GetMaterial()->IsTransparent()) {
                 m_transparent.Add(pMesh);
             }
             else {
@@ -534,6 +534,19 @@ namespace SR_GRAPH_NS {
 
         if (m_technique) {
             callback(m_technique);
+        }
+    }
+
+    void RenderScene::SetMeshMaterial(RenderScene::MeshPtr pMesh) {
+        if (pMesh->IsFlatMesh()) {
+            if (auto&& pDefaultMat = GetContext()->GetDefaultUIMaterial()) {
+                pMesh->SetMaterial(pDefaultMat);
+            }
+        }
+        else {
+            if (auto&& pDefaultMat = GetContext()->GetDefaultMaterial()) {
+                pMesh->SetMaterial(pDefaultMat);
+            }
         }
     }
 }

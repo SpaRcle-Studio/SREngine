@@ -47,7 +47,7 @@ namespace SR_UTILS_NS {
 
             auto&& pMetadataIt = m_meta.find(m_lastComponent);
             if (pMetadataIt == m_meta.end()) {
-                SRHalt("Unknown component!");
+                SR_ERROR("ComponentManager::Load() : unknown component! Hash name: " + SR_UTILS_NS::ToString(m_lastComponent));
                 return std::make_pair(nullptr, ComponentLoadResult::Error);
             }
 

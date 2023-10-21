@@ -130,6 +130,7 @@ namespace SR_GRAPH_NS {
                 pMesh->FreeMesh();
                 pMesh = nullptr;
                 changed = true;
+                --m_count;
             }
         }
 

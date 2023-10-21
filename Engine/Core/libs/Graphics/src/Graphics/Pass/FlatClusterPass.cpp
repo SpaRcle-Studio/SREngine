@@ -5,6 +5,8 @@
 #include <Graphics/Pass/FlatClusterPass.h>
 
 namespace SR_GRAPH_NS {
+    SR_REGISTER_RENDER_PASS(FlatClusterPass)
+
     MeshClusterTypeFlag FlatClusterPass::GetClusterType() const noexcept {
         return MeshClusterType::Flat;
     }
@@ -23,6 +25,10 @@ namespace SR_GRAPH_NS {
     void FlatClusterPass::Update() {
         SR_TRACY_ZONE;
 
+        if (!m_hasRendered) {
+            return;
+        }
+
         GetRenderScene()->GetFlatCluster().Sort();
 
         ShaderPtr pCurrentShader = nullptr;
@@ -38,15 +44,18 @@ namespace SR_GRAPH_NS {
             }
 
             auto&& pShader = pMesh->GetShader();
-            if (!pShader) {
+            if (!pShader || !pShader->Ready() || !pShader->IsAvailable()) {
                 continue;
             }
 
+            m_context->SetCurrentShader(pShader);
+
             if (pCurrentShader != pShader) {
-                m_context->SetCurrentShader(pCurrentShader);
                 pCurrentShader = pShader;
                 UseSharedUniforms(pShader);
             }
+
+            UseUniforms(pShader, pMesh);
 
             if (m_uboManager.BindUBO(virtualUbo) == Memory::UBOManager::BindResult::Duplicated) {
                 SR_ERROR("FlatClusterPass::UpdateCluster() : memory has been duplicated!");
@@ -63,17 +72,18 @@ namespace SR_GRAPH_NS {
     bool FlatClusterPass::Render() {
         SR_TRACY_ZONE;
 
+        m_hasRendered = false;
+
+        if (!Super::Render()) {
+            return false;
+        }
+
         GetRenderScene()->GetFlatCluster().Sort();
 
         ShaderPtr pCurrentShader = nullptr;
 
         for (auto&& pMesh : GetRenderScene()->GetFlatCluster()) {
             if (!pMesh || !pMesh->IsMeshActive()) {
-                continue;
-            }
-
-            auto&& virtualUbo = pMesh->GetVirtualUBO();
-            if (virtualUbo == SR_ID_INVALID) {
                 continue;
             }
 
@@ -85,9 +95,8 @@ namespace SR_GRAPH_NS {
             if (pCurrentShader != pShader) {
                 if (pCurrentShader) {
                     pCurrentShader->UnUse();
+                    pCurrentShader = nullptr;
                 }
-
-                m_context->SetCurrentShader(pShader);
 
                 if (pShader->Use() == ShaderBindResult::Failed) {
                     continue;
@@ -101,12 +110,26 @@ namespace SR_GRAPH_NS {
 
             pMesh->BindMesh();
             pMesh->Draw();
+
+            m_hasRendered |= true;
         }
 
         if (pCurrentShader) {
             pCurrentShader->UnUse();
         }
 
-        return Super::Render();
+        return m_hasRendered;
+    }
+
+    void FlatClusterPass::UseSharedUniforms(SR_GTYPES_NS::Shader* pShader) {
+        if (m_camera) {
+            pShader->SetMat4(SHADER_VIEW_MATRIX, m_camera->GetViewTranslateRef());
+            pShader->SetMat4(SHADER_PROJECTION_MATRIX, m_camera->GetProjectionRef());
+            pShader->SetMat4(SHADER_ORTHOGONAL_MATRIX, m_camera->GetOrthogonalRef());
+            pShader->SetVec3(SHADER_VIEW_DIRECTION, m_camera->GetViewDirection());
+            pShader->SetVec3(SHADER_VIEW_POSITION, m_camera->GetPositionRef());
+        }
+
+        Super::UseSharedUniforms(pShader);
     }
 }

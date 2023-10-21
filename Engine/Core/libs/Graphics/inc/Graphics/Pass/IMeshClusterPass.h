@@ -55,6 +55,7 @@ namespace SR_GRAPH_NS {
         virtual void OnClusterDirty() { }
 
     protected:
+        bool m_hasRendered = false;
         bool m_dirtySamplers = true;
         bool m_needUpdateMeshes = false;
         Samplers m_samplers;

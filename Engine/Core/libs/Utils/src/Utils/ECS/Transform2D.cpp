@@ -229,82 +229,40 @@ namespace SR_UTILS_NS {
 
         auto&& parentScale = pParent->GetScale();
 
-        //auto&& parentTranslation = pParentTransform->GetTranslation2D();
-        //auto&& parentScale = pParentTransform->GetScale2D();
-        //SR_MATH_NS::FRect parentRect = SR_MATH_NS::FRect::FromTranslationAndScale(parentTranslation, parentScale);
-        //SR_MATH_NS::FVector2 center =  SR_MATH_NS::FVector2(parentRect.x + (parentRect.w / 2), parentRect.y + (parentRect.h / 2));
-
-        ///auto&& parentRect = SR_MATH_NS::FRect(0.f, 0.f, parentScale.x, parentScale.y);
-        ///auto&& rect = SR_MATH_NS::FRect(0.f, 0.f, scale.x, scale.y);
-        ///rect.x = (parentRect.w - rect.w) / 2.f;
-        ///rect.y = (parentRect.h - rect.h) / 2.f;
-
         auto&& horizontalAspect = (parentScale / m_scale).XY().Aspect();
-        auto&& horizontalAnchor = (SR_MAX(horizontalAspect, 1.f) - 1.f) * (1.f / horizontalAspect);
+        auto&& horizontalAnchor = (horizontalAspect - 1.f) * (1.f / horizontalAspect);
 
         auto&& verticalAspect = (parentScale / m_scale).XY().AspectInv();
-        auto&& verticalAnchor = (SR_MAX(verticalAspect, 1.f) - 1.f) * (1.f / verticalAspect);
+        auto&& verticalAnchor = (verticalAspect - 1.f) * (1.f / verticalAspect);
 
         switch (m_anchor) {
             case Anchor::None:
-                return m_translation + SR_MATH_NS::FVector3();
+            case Anchor::MiddleCenter:
+                return m_translation;
+
             case Anchor::MiddleLeft:
                 return m_translation + SR_MATH_NS::FVector3(-horizontalAnchor, 0.f, 0.f);
             case Anchor::MiddleRight:
                 return m_translation + SR_MATH_NS::FVector3(horizontalAnchor, 0.f, 0.f);
+
             case Anchor::TopCenter:
                 return m_translation + SR_MATH_NS::FVector3(0.f, verticalAnchor, 0.f);
             case Anchor::BottomCenter:
                 return m_translation + SR_MATH_NS::FVector3(0.f, -verticalAnchor, 0.f);
-            default:
-                return SR_MATH_NS::FVector3();
-        }
 
-        /*SR_MATH_NS::FRect rect = SR_MATH_NS::FRect::FromTranslationAndScale(center, scale.XY());
-
-        switch (m_anchor) {
-            case Anchor::None:
-                return SR_MATH_NS::FVector3();
             case Anchor::TopLeft:
-                rect.x -= parentRect.w / 2;
-                rect.y -= parentRect.y / 2;
-                break;
-            case Anchor::TopCenter:
-                rect.x = parentRect.x + (parentRect.w - rect.w) / 2;
-                rect.y = parentRect.y;
-                break;
+                return m_translation + SR_MATH_NS::FVector3(-horizontalAnchor, verticalAnchor, 0.f);
             case Anchor::TopRight:
-                rect.x = parentRect.x + parentRect.w - rect.w;
-                rect.y = parentRect.y;
-                break;
-            case Anchor::MiddleLeft:
-                rect.x = parentRect.x;
-                rect.y = parentRect.y + (parentRect.h - rect.h) / 2;
-                break;
-            case Anchor::MiddleCenter:
-                break;
-            case Anchor::MiddleRight:
-                rect.x = parentRect.x + parentRect.w - rect.w;
-                rect.y = parentRect.y + (parentRect.h - rect.h) / 2;
-                break;
+                return m_translation + SR_MATH_NS::FVector3(horizontalAnchor, verticalAnchor, 0.f);
+
             case Anchor::BottomLeft:
-                rect.x = parentTranslation.x;
-                rect.y = parentTranslation.y;
-                break;
-            case Anchor::BottomCenter:
-                rect.x = parentRect.x + (parentRect.w - rect.w) / 2;
-                rect.y = parentRect.y + parentRect.h - rect.h;
-                break;
+                return m_translation + SR_MATH_NS::FVector3(-horizontalAnchor, -verticalAnchor, 0.f);
             case Anchor::BottomRight:
-                rect.x = parentRect.x + parentRect.w - rect.w;
-                rect.y = parentRect.y + parentRect.h - rect.h;
-                break;
+                return m_translation + SR_MATH_NS::FVector3(horizontalAnchor, -verticalAnchor, 0.f);
+
             default:
-                SRHalt("Transform2D::CalculateAnchor() : unsupported anchor position!");
                 return SR_MATH_NS::FVector3();
         }
-
-        return SR_MATH_NS::FVector3(rect.x, rect.y, 0);*/
     }
 
     int32_t Transform2D::GetPriority() { /// NOLINT

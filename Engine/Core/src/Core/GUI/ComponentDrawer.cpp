@@ -37,7 +37,9 @@
 #include <Graphics/Types/Camera.h>
 #include <Graphics/UI/Anchor.h>
 #include <Graphics/UI/Canvas.h>
-#include <Graphics/Font/Text.h>
+#include <Graphics/Font/ITextComponent.h>
+#include <Graphics/Font/Text2D.h>
+#include <Graphics/Font/Text3D.h>
 #include <Graphics/Font/Font.h>
 
 #include <Audio/Types/AudioSource.h>
@@ -623,7 +625,7 @@ namespace SR_CORE_NS::GUI {
         Graphics::GUI::DrawValue("Indices count", pComponent->GetIndicesCount(), index);
     }
 
-    void ComponentDrawer::DrawComponent(SR_GTYPES_NS::Text *&pComponent, EditorGUI *context, int32_t index) {
+    void ComponentDrawer::DrawComponent(SR_GTYPES_NS::ITextComponent* pComponent, EditorGUI *context, int32_t index) {
         if (!pComponent->IsCalculatable())
             ImGui::TextColored(ImVec4(1, 0, 0, 1), "Invalid mesh!");
 
@@ -778,5 +780,13 @@ namespace SR_CORE_NS::GUI {
         if (ImGui::Checkbox("Mirror", &mirror)) {
             pComponent->SetMirror(mirror);
         }
+    }
+
+    void ComponentDrawer::DrawComponent(SR_GTYPES_NS::Text2D*& pComponent, EditorGUI* context, int32_t index) {
+        DrawComponent(dynamic_cast<SR_GTYPES_NS::ITextComponent*>(pComponent), context, index);
+    }
+
+    void ComponentDrawer::DrawComponent(SR_GTYPES_NS::Text3D*& pComponent, EditorGUI* context, int32_t index) {
+        DrawComponent(dynamic_cast<SR_GTYPES_NS::ITextComponent*>(pComponent), context, index);
     }
 }
