@@ -25,18 +25,18 @@ jobs:
        # with:
        #   script: |
        #     print("${{github.event.head_commit.message}}")
-
-      - name: Handling arguments
-        shell: bash 
-        #working-directory: $RUNNER_WORKSPACE/CI
-        run: |
-          cd ${{ runner.workspace }}
-          arguments_handling.py github.event.head_commit.message
     
       - name: Fetching repo and installing Vulkan SDK
         uses: actions/checkout@v3
         with:
           fetch-depth: 1
+          
+      - name: Handling arguments
+        shell: bash 
+        working-directory: $github.workspace/CI
+        run: |
+          arguments_handling.py github.event.head_commit.message
+          
       - uses: TWoolhouse/setup-vulkan-sdk@v1.1.0
         with:
           # SDK Version to install
