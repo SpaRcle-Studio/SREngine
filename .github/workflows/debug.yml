@@ -21,10 +21,12 @@ jobs:
 
     steps:
       - name: Handling arguments 
-        working-directory: ${{github.workspace}}/CI
-        shell: bash
-        run: | 
-          arguments_handling.py ${{github.event.head_commit.message}}
+        uses: jannekem/run-python-script-action@v1
+        with:
+          script: |
+            import sys 
+            for i in range(len(sys.argv)):
+              print(i, " : ", str(sys.argv[i]))
     
       - name: Fetching repo and installing Vulkan SDK
         uses: actions/checkout@v3
