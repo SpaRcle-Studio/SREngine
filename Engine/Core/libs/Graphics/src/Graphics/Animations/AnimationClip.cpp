@@ -57,7 +57,10 @@ namespace SR_ANIMATIONS_NS {
     std::vector<AnimationClip*> AnimationClip::Load(const SR_UTILS_NS::Path& rawPath) {
         std::vector<AnimationClip*> animations;
 
-        auto&& pRawMesh = SR_HTYPES_NS::RawMesh::Load(rawPath, true);
+        SR_HTYPES_NS::RawMeshParams params;
+        params.animation = true;
+
+        auto&& pRawMesh = SR_HTYPES_NS::RawMesh::Load(rawPath, params);
         if (!pRawMesh) {
             return animations;
         }
@@ -106,7 +109,10 @@ namespace SR_ANIMATIONS_NS {
             auto&& [strIndex, rawPath] = SR_UTILS_NS::StringUtils::SplitTwo(resourceId, "|");
             uint32_t index = SR_UTILS_NS::LexicalCast<uint32_t>(strIndex);
 
-            auto&& pRawMesh = SR_HTYPES_NS::RawMesh::Load(rawPath, true);
+            SR_HTYPES_NS::RawMeshParams params;
+            params.animation = true;
+
+            auto&& pRawMesh = SR_HTYPES_NS::RawMesh::Load(rawPath, params);
             if (!pRawMesh) {
                 return false;
             }

@@ -24,6 +24,11 @@ namespace SR_WORLD_NS {
 }
 
 namespace SR_HTYPES_NS {
+    struct RawMeshParams {
+        bool animation = false;
+        bool tessellation = false;
+    };
+
     class SR_DLL_EXPORT RawMesh : public IResource {
         using ScenePtr = SR_HTYPES_NS::SafePtr<SR_WORLD_NS::Scene>;
         using Ptr = RawMesh*;
@@ -33,7 +38,7 @@ namespace SR_HTYPES_NS {
         ~RawMesh() override;
 
     public:
-        static RawMesh* Load(const SR_UTILS_NS::Path &path, bool animation);
+        static RawMesh* Load(const SR_UTILS_NS::Path &path, RawMeshParams params);
         static RawMesh* Load(const SR_UTILS_NS::Path &path);
 
     public:
@@ -82,7 +87,8 @@ namespace SR_HTYPES_NS {
         ska::flat_hash_map<Hash, SR_MATH_NS::Matrix4x4> m_boneOffsetsMap;
         std::vector<SR_MATH_NS::Matrix4x4> m_boneOffsets;
 
-        bool m_asAnimation = false;
+        RawMeshParams m_params;
+
         const aiScene* m_scene = nullptr;
         bool m_fromCache = false;
         Assimp::Importer* m_importer = nullptr;

@@ -38,27 +38,27 @@ namespace SR_HTYPES_NS {
     }
 
     RawMesh::Ptr RawMesh::Load(const SR_UTILS_NS::Path &rawPath) {
-        return Load(rawPath, false);
+        return Load(rawPath, RawMeshParams());
     }
 
-    RawMesh::Ptr RawMesh::Load(const SR_UTILS_NS::Path &rawPath, bool animation) {
+    RawMesh::Ptr RawMesh::Load(const SR_UTILS_NS::Path &rawPath, RawMeshParams params) {
         RawMesh::Ptr pRawMesh = nullptr;
 
         ResourceManager::Instance().Execute([&]() {
             Path&& id = Path(rawPath).RemoveSubPath(ResourceManager::Instance().GetResPath());
 
-            if (animation) {
+            if (params.animation) {
                 id = id.EmplaceFront("Animation|");
             }
 
             if (auto&& pResource = ResourceManager::Instance().Find<RawMesh>(id)) {
                 pRawMesh = pResource;
-                SRAssert(pRawMesh->m_asAnimation == animation);
+                SRAssert(pRawMesh->m_params.animation == params.animation);
                 return;
             }
 
             pRawMesh = new RawMesh();
-            pRawMesh->m_asAnimation = animation;
+            pRawMesh->m_params.animation = params.animation;
             pRawMesh->SetId(id, false /** auto register */);
 
             if (!pRawMesh->Reload()) {
@@ -108,7 +108,7 @@ namespace SR_HTYPES_NS {
         Path&& path = ResourceManager::Instance().GetResPath().Concat(resPath);
         Path&& cache = ResourceManager::Instance().GetCachePath().Concat("Models").Concat(resPath);
 
-        if (m_asAnimation) {
+        if (m_params.animation) {
             cache = cache.ConcatExt("animation");
         }
 
@@ -131,7 +131,7 @@ namespace SR_HTYPES_NS {
             }
         }
         else {
-            m_scene = m_importer->ReadFile(path.ToStringRef(), m_asAnimation ? SR_RAW_MESH_ASSIMP_ANIMATION_FLAGS : SR_RAW_MESH_ASSIMP_FLAGS);
+            m_scene = m_importer->ReadFile(path.ToStringRef(), m_params.animation ? SR_RAW_MESH_ASSIMP_ANIMATION_FLAGS : SR_RAW_MESH_ASSIMP_FLAGS);
 
             if (!m_scene) {
                 SR_ERROR("RawMesh::Load() : failed to load file!\n\tPath: " + path.ToStringRef() + "\n\tReason: " + std::string(m_importer->GetErrorString()));
@@ -146,7 +146,7 @@ namespace SR_HTYPES_NS {
                 Assimp::Exporter exporter;
                 const aiExportFormatDesc* format = exporter.GetExportFormatDescription(14);
 
-                exporter.Export(m_scene, format->id, binary.ToString(), m_asAnimation ? SR_RAW_MESH_ASSIMP_ANIMATION_FLAGS : SR_RAW_MESH_ASSIMP_FLAGS);
+                exporter.Export(m_scene, format->id, binary.ToString(), m_params.animation ? SR_RAW_MESH_ASSIMP_ANIMATION_FLAGS : SR_RAW_MESH_ASSIMP_FLAGS);
 
                 SR_UTILS_NS::FileSystem::WriteHashToFile(hashFile, resourceHash);
             }
@@ -400,7 +400,7 @@ namespace SR_HTYPES_NS {
     }
 
     void RawMesh::CalculateAnimations() {
-        if (!m_asAnimation || !m_scene) {
+        if (!m_params.animation || !m_scene) {
             return;
         }
 
