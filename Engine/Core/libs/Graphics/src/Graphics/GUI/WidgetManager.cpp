@@ -153,15 +153,19 @@ namespace SR_GRAPH_NS::GUI {
     }
 
     void WidgetManager::HideAll() {
+    #ifdef SR_WIN32
         for (auto&& widget : ViewportsTableManager::Instance().GetViewportsTable()) {
             ShowWindow((HWND)widget.first->PlatformHandle, SW_HIDE);
         }
+    #endif
     }
 
     void WidgetManager::ShowAll() {
+    #ifdef SR_WIN32
         for (auto&& widget : ViewportsTableManager::Instance().GetViewportsTable()) {
             ShowWindow((HWND)widget.first->PlatformHandle, SW_SHOW);
         }
+    #endif
     }
 
     Widget* ViewportsTableManager::GetWidgetByViewport(ImGuiViewport *viewport) const {

@@ -10,13 +10,13 @@ namespace SR_HTYPES_NS {
     { }
 
     Regex::Regex(Regex&& other) noexcept
-        : m_regex(SR_UTILS_NS::Exchange(other.m_regex, { }))
-        , m_match(SR_UTILS_NS::Exchange(other.m_match, { }))
+        : m_regex(SR_EXCHANGE(other.m_regex, std::regex()))
+        , m_match(SR_EXCHANGE(other.m_match, std::smatch()))
     { }
 
     Regex &Regex::operator=(Regex&& other) noexcept {
-        m_regex = SR_UTILS_NS::Exchange(other.m_regex, { });
-        m_match = SR_UTILS_NS::Exchange(other.m_match, { });
+        m_regex = SR_EXCHANGE(other.m_regex, std::regex());
+        m_match = SR_EXCHANGE(other.m_match, std::smatch());
         return *this;
     }
 

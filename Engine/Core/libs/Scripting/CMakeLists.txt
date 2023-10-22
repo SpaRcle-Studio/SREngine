@@ -21,7 +21,7 @@ endif()
 if (EVO_SCRIPT_STATIC_LIBRARY)
     target_link_libraries(Scripting EvoScriptCore)
 else()
-    target_link_libraries(Scripting EvoScript::lib)
+    target_link_libraries(Scripting EvoScriptCore::lib)
 endif()
 
 target_include_directories(Scripting PUBLIC inc)

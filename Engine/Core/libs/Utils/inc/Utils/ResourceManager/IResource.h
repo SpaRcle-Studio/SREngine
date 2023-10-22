@@ -17,8 +17,9 @@
 namespace SR_UTILS_NS {
     class ResourceManager;
     class ResourceType;
-    class ResourceInfo;
     class FileWatcher;
+
+    struct ResourceInfo;
 
     class SR_DLL_EXPORT IResource : public ResourceContainer {
         friend class ResourceType;

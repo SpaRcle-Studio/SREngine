@@ -242,16 +242,16 @@ namespace SR_GRAPH_GUI_NS {
         for (auto&& [hashName, pStruct] : SR_SRLM_NS::DataTypeManager::Instance().GetStructs()) {
             auto&& structMenu = menu.AddMenu(SR_HASH_TO_STR(hashName));
 
-            structMenu.AddMenu("Create").SetAction([hashName](const SR_GRAPH_GUI_NS::DrawPopupContext& context) {
+            structMenu.AddMenu("Create").SetAction([typeHashName = hashName](const SR_GRAPH_GUI_NS::DrawPopupContext& context) {
                 auto&& pNode = new SR_SRLM_NS::CreateStructNode();
-                pNode->SetStructHashName(hashName);
+                pNode->SetStructHashName(typeHashName);
                 pNode->InitNode();
                 context.pWidget->AddNode(new Node(pNode)).SetPosition(context.popupPos);
             });
 
-            structMenu.AddMenu("Break").SetAction([hashName](const SR_GRAPH_GUI_NS::DrawPopupContext& context) {
+            structMenu.AddMenu("Break").SetAction([typeHashName = hashName](const SR_GRAPH_GUI_NS::DrawPopupContext& context) {
                 auto&& pNode = new SR_SRLM_NS::BreakStructNode();
-                pNode->SetStructHashName(hashName);
+                pNode->SetStructHashName(typeHashName);
                 pNode->InitNode();
                 context.pWidget->AddNode(new Node(pNode)).SetPosition(context.popupPos);
             });

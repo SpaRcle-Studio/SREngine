@@ -56,7 +56,7 @@ namespace SR_GRAPH_NS {
             kernel[i] = sample * scale;
         }
 
-        return std::move(kernel);
+        return kernel;
     }
 
     SR_GTYPES_NS::Texture *SSAOPass::CreateNoise() const {

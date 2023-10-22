@@ -42,6 +42,9 @@ namespace SR_GRAPH_NS {
             case LightType::Probe:
                 m_probeLights.insert(dynamic_cast<ProbeLight*>(pLightComponent));
                 break;
+            default:
+                SRHalt0();
+                break;
         }
 
         m_renderScene->SetDirty();
@@ -64,7 +67,9 @@ namespace SR_GRAPH_NS {
             case LightType::Probe:
                 m_probeLights.erase(dynamic_cast<ProbeLight*>(pLightComponent));
                 break;
+            default:
+                SRHalt0();
+                break;
         }
     }
-
 }

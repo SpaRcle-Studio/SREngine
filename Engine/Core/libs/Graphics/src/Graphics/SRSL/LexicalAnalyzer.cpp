@@ -421,7 +421,7 @@ namespace SR_SRSL_NS {
             case LexemKind::OpeningSquareBracket: {
                 if (!m_states.empty() && m_states.back() == LXAState::Decorators) {
                     m_states.emplace_back(LXAState::Decorator);
-                    m_decorators->decorators.emplace_back(std::move(SRSLDecorator()));
+                    m_decorators->decorators.emplace_back(SRSLDecorator());
                     ++m_currentLexem;
                     goto retry;
                 }
@@ -595,7 +595,7 @@ namespace SR_SRSL_NS {
                     return nullptr;
                 }
 
-                return std::move(pVariable);
+                return pVariable;
             }
             /// переменная имеющая значение: "type[...] name[...] = value;"
             else if (pCurrent && pCurrent->kind == LexemKind::OpeningBracket) {
@@ -605,7 +605,7 @@ namespace SR_SRSL_NS {
                 pFunction->pType = SR_UTILS_NS::Exchange(pTypeExpr, nullptr);
                 pFunction->pName = SR_UTILS_NS::Exchange(pNameExpr, nullptr);
 
-                return std::move(pFunction);
+                return pFunction;
             }
             /// обычная переменная типа "type[...] name[...];"
             else if (pTypeExpr && pNameExpr) {
@@ -615,7 +615,7 @@ namespace SR_SRSL_NS {
                 pVariable->pName = SR_UTILS_NS::Exchange(pNameExpr, nullptr);
                 pVariable->pDecorators = SR_UTILS_NS::Exchange(m_decorators, nullptr);
 
-                return std::move(pVariable);
+                return pVariable;
             }
 
             SR_SAFE_DELETE_PTR(m_expr);
@@ -633,7 +633,7 @@ namespace SR_SRSL_NS {
         }
 
         SR_SAFE_DELETE_PTR(m_expr);
-        m_currentLexem = currentLexem;
+        m_currentLexem = static_cast<int64_t>(currentLexem);
 
         return nullptr;
     }

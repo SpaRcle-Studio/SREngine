@@ -45,7 +45,7 @@ namespace SR_SRSL_NS {
         '_',
     };
 
-    static bool IsIdentifier(const std::string& token) noexcept {
+    SR_MAYBE_UNUSED static bool IsIdentifier(const std::string& token) noexcept {
         bool isFirst = true;
 
         for (auto&& tokenChar : token) {
@@ -69,7 +69,7 @@ namespace SR_SRSL_NS {
         return true;
     }
 
-    static bool IsOperator(const std::string& operation) noexcept {
+    SR_MAYBE_UNUSED static bool IsOperator(const std::string& operation) noexcept {
         static const std::vector<std::string> operators = {
                 "+", "-", "!", ".", "~", ">", "^", "<", ":", "?", "|", "&", "%",
         };
@@ -243,7 +243,7 @@ namespace SR_SRSL_NS {
         std::list<SRSLMessage> errors;
     };
 
-    SR_INLINE_STATIC std::string LexemsToString(const std::vector<Lexem>& lexems) {
+    SR_MAYBE_UNUSED SR_INLINE_STATIC std::string LexemsToString(const std::vector<Lexem>& lexems) {
         std::string code;
 
         LexemKind previously = LexemKind::Unknown;

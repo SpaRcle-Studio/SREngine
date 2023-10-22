@@ -105,7 +105,11 @@ namespace SR_GRAPH_NS {
             VK_KHR_WIN32_SURFACE_EXTENSION_NAME,
         #endif
         #ifdef SR_ANDROID
-            VK_KHR_ANDROID_SURFACE_EXTENSION_NAME,
+            #ifdef VK_KHR_ANDROID_SURFACE_EXTENSION_NAME
+                VK_KHR_ANDROID_SURFACE_EXTENSION_NAME,
+            #else
+                #error VK_KHR_ANDROID_SURFACE_EXTENSION_NAME is not available!
+            #endif
         #endif
         };
 
@@ -259,7 +263,7 @@ namespace SR_GRAPH_NS {
     }
 
     void* VulkanPipeline::GetCurrentFBOHandle() const {
-        void* pHandle = m_kernel->GetRenderPass(); /// Ну типо кадровый буфер
+        void* pHandle = (void*)(VkRenderPass)m_kernel->GetRenderPass(); /// Ну типо кадровый буфер
 
         if (m_state.pFrameBuffer) {
             if (auto&& FBO = m_state.pFrameBuffer->GetId(); FBO == SR_ID_INVALID) {
@@ -270,7 +274,7 @@ namespace SR_GRAPH_NS {
             }
             else {
                 if (auto&& layers = framebuffer->GetLayers(); !layers.empty()) {
-                    pHandle = layers.at(SR_MIN(layers.size() - 1, m_state.frameBufferLayer))->GetFramebuffer();
+                    pHandle = (void*)layers.at(SR_MIN(layers.size() - 1, m_state.frameBufferLayer))->GetFramebuffer();
                 }
                 else {
                     PipelineError("Vulkan::GetCurrentFBOHandle() : frame buffer have not layers!");
@@ -286,7 +290,7 @@ namespace SR_GRAPH_NS {
 
         std::set<void*> handles;
 
-        if (void* pHandle = m_kernel->GetRenderPass()) {
+        if (void* pHandle = (void*)(VkRenderPass)m_kernel->GetRenderPass()) {
             handles.insert(pHandle);
         }
 
@@ -298,7 +302,7 @@ namespace SR_GRAPH_NS {
 
             for (auto&& layer : pFBO->GetLayers()) {
                 if (auto&& pVkFrameBuffer = layer->GetFramebuffer()) {
-                    handles.insert(pVkFrameBuffer);
+                    handles.insert((void*)pVkFrameBuffer);
                 }
             }
         }

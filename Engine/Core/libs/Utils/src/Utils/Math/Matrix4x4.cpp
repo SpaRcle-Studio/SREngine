@@ -6,22 +6,6 @@
 #include <Utils/Math/Matrix4x4Utils.h>
 
 namespace SR_MATH_NS {
-    constexpr Matrix4x4::Matrix4x4() noexcept
-        : self(GLM_IDENTITY_MAT4X4)
-    { }
-
-    constexpr Matrix4x4::Matrix4x4(const Unit& scalar) noexcept
-        : self(glm::mat4(static_cast<float_t>(scalar)))
-    {  }
-
-    constexpr Matrix4x4::Matrix4x4(const glm::mat4& mat) noexcept
-        : self(mat)
-    { }
-
-    Matrix4x4::Matrix4x4(glm::mat4&& mat) noexcept
-        : self(mat)
-    { }
-
     Matrix4x4::Matrix4x4(const FVector3& translate, const Quaternion& rotation, const FVector3& scale) noexcept
         : Matrix4x4()
     {

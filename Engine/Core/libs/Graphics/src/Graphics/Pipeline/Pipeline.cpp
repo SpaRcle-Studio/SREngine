@@ -22,8 +22,8 @@
 namespace SR_GRAPH_NS {
     Pipeline::Pipeline(const RenderContextPtr& pContext)
         : Super(this, SR_UTILS_NS::SharedPtrPolicy::Manually)
-        , m_renderContext(pContext)
         , m_window(pContext->GetWindow())
+        , m_renderContext(pContext)
     { }
 
     Pipeline::~Pipeline() {

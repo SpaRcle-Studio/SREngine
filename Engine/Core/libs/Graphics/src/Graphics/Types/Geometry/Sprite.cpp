@@ -49,7 +49,7 @@ namespace SR_GTYPES_NS {
             return false;
         }
 
-        if (!CalculateVBO<Vertices::VertexType::UIVertex, Vertices::UIVertex>([this]() { return SR_SPRITE_VERTICES; })) {
+        if (!CalculateVBO<Vertices::VertexType::UIVertex, Vertices::UIVertex>([]() { return SR_SPRITE_VERTICES; })) {
             return false;
         }
 

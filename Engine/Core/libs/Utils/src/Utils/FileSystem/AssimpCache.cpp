@@ -658,4 +658,12 @@ namespace SR_UTILS_NS {
 
         return std::move(meshMap);
     }
+
+    void AssimpCache::AllocateAiColor4t(void** pData, uint32_t count) {
+        *pData = (void*)(new aiColor4t<float>[count]);
+    }
+
+    void AssimpCache::AllocateAiVector3t(void** pData, uint32_t count) {
+        *pData = (void*)(new aiVector3t<float>[count]);
+    }
 }

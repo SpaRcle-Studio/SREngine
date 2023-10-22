@@ -97,8 +97,6 @@ namespace SR_ANIMATIONS_NS {
     }
 
     bool AnimationClip::Load() {
-        auto&& resourceManager = SR_UTILS_NS::ResourceManager::Instance();
-
         auto&& resourceId = GetResourceId();
 
         if (SR_UTILS_NS::StringUtils::GetExtensionFromFilePath(resourceId) == "animation") {

@@ -40,6 +40,8 @@ namespace SR_GRAPH_NS {
                                 cmpBuffer + colOffs+ (rowOffs * 4)  // dst
                         );
                         break;
+                    default:
+                        break;
                 }
             }
         }

@@ -31,9 +31,9 @@ namespace SR_SRLM_NS {
         LogicalNodeManagerRegisterType<DataTypeBool>({ "Logic" });
 
         for (auto&& [hashName, pReflector] : SR_UTILS_NS::EnumReflectorManager::Instance().GetReflectors()) {
-            LogicalNodeManager::Instance().Register(hashName, [hashName]() -> LogicalNode* {
+            LogicalNodeManager::Instance().Register(hashName, [typeHashName = hashName]() -> LogicalNode* {
                 auto&& pConstructorNode = new ConstructorNode();
-                pConstructorNode->SetInitTypeHashName(hashName);
+                pConstructorNode->SetInitTypeHashName(typeHashName);
                 return (LogicalNode*)pConstructorNode;
             }, { "Enum" });
         }

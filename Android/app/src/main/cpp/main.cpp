@@ -26,8 +26,6 @@
 #include <Core/World/World.h>
 
 #include <android/log.h>
-#include <Graphics/Pipeline/OpenGL.h>
-#include <Graphics/Pipeline/Vulkan.h>
 
 
 #define LOGI(...) ((void)__android_log_print(ANDROID_LOG_INFO, "SREngine", __VA_ARGS__))
@@ -284,7 +282,7 @@ void android_main(struct android_app* state) {
 
     SR_UTILS_NS::ResourceManager::Instance().Init("");
 
-    SR_UTILS_NS::Features::Instance().Reload(SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Engine/Configs/Features.xml"));
+    SR_UTILS_NS::Features::Instance().SetPath(SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Engine/Configs/Features.xml"));
 
     SR_WORLD_NS::SceneAllocator::Instance().Init([]() -> SR_WORLD_NS::Scene* {
         return new SR_CORE_NS::World();

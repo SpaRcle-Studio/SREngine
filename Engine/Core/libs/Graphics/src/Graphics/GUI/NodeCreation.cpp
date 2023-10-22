@@ -10,8 +10,8 @@
 
 namespace SR_GRAPH_GUI_NS {
     Node* CreateNode(const SR_MATH_NS::FVector2& pos, uint64_t identifier) {
-        auto&& pNode = new SR_GRAPH_GUI_NS::Node();
-        auto&& node = *pNode;
+        //auto&& pNode = new SR_GRAPH_GUI_NS::Node();
+        //auto&& node = *pNode;
 
         // node.SetPosition(pos);
         // node.SetIdentifier(identifier);
@@ -149,6 +149,6 @@ namespace SR_GRAPH_GUI_NS {
         </FramebufferSettings>
          */
 
-        return pNode;
+        return nullptr;
     }
 }

@@ -47,13 +47,13 @@ namespace SR_GRAPH_NS {
         ~ShadedMeshSubCluster() override = default;
 
         ShadedMeshSubCluster(ShadedMeshSubCluster&& ref) noexcept {
-            m_groups = std::exchange(ref.m_groups, {});
-            m_shader = std::exchange(ref.m_shader, {});
+            m_groups = SR_UTILS_NS::Exchange(ref.m_groups, {});
+            m_shader = SR_UTILS_NS::Exchange(ref.m_shader, {});
         }
 
         ShadedMeshSubCluster& operator=(ShadedMeshSubCluster&& ref) noexcept {
-            m_groups = std::exchange(ref.m_groups, {});
-            m_shader = std::exchange(ref.m_shader, {});
+            m_groups = SR_UTILS_NS::Exchange(ref.m_groups, {});
+            m_shader = SR_UTILS_NS::Exchange(ref.m_shader, {});
             return *this;
         }
 

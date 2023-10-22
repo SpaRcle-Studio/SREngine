@@ -38,8 +38,8 @@ namespace SR_HTYPES_NS {
         SharedPtr(const T* constPtr, SharedPtrPolicy policy); /** NOLINT */
         SharedPtr(SharedPtr const &ptr);
         SharedPtr(SharedPtr&& ptr) noexcept
-            : m_ptr(std::exchange(ptr.m_ptr, { }))
-            , m_data(std::exchange(ptr.m_data, { }))
+            : m_data(SR_UTILS_NS::Exchange(ptr.m_data, { }))
+            , m_ptr(SR_UTILS_NS::Exchange(ptr.m_ptr, { }))
         { }
         ~SharedPtr(); /// не должен быть виртуальным
 
@@ -58,13 +58,13 @@ namespace SR_HTYPES_NS {
                 --m_data->strongCount;
             }
 
-            m_data = std::exchange(ptr.m_data, {});
+            m_data = SR_UTILS_NS::Exchange(ptr.m_data, {});
 
             if (m_data) {
                 ++m_data->strongCount;
             }
 
-            m_ptr = std::exchange(ptr.m_ptr, {});
+            m_ptr = SR_UTILS_NS::Exchange(ptr.m_ptr, {});
 
             return *this;
         }

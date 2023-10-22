@@ -8,9 +8,12 @@
 #include <EvoVulkan/Types/DescriptorPool.h>
 #include <EvoVulkan/DescriptorManager.h>
 
-extern LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+#ifdef SR_WIN32
+    extern LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+#endif
 
 namespace SR_GRAPH_NS {
+#ifdef SR_WIN32
     static LRESULT ImGui_WndProcHandler(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
     {
         if (ImGui::GetCurrentContext() == NULL)
@@ -30,6 +33,7 @@ namespace SR_GRAPH_NS {
 
         return 0;
     }
+#endif
 
     int CreatePlatformSurface(ImGuiViewport* pv, ImU64 vk_inst, const void* vk_allocators, ImU64* out_vk_surface) {
     #ifdef SR_WIN32
@@ -54,6 +58,7 @@ namespace SR_GRAPH_NS {
     #endif
     }
 
+#ifdef SR_WIN32
     LRESULT CustomWindowProcPlatform(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)  {
         if (!SR_GRAPH_NS::ImGui_WndProcHandler(hwnd, msg, wParam, lParam)) {
             if (ImGui_ImplWin32_WndProcHandler(hwnd, msg, wParam, lParam)) {
@@ -83,6 +88,7 @@ namespace SR_GRAPH_NS {
                 return DefWindowProc(hwnd, msg, wParam, lParam);
         }
     }
+#endif
 
     static void (*ImGui_Platform_CreateWindow)(ImGuiViewport* vp) = nullptr;
 
@@ -93,8 +99,10 @@ namespace SR_GRAPH_NS {
         }
 
         if (vp->PlatformHandle != nullptr) {
+        #ifdef SR_WIN32
             /// platform dependent manipulation of viewport window, f.e. in Win32:
             SetWindowLongPtr((HWND)vp->PlatformHandle, GWLP_WNDPROC, (LONG_PTR)CustomWindowProcPlatform);
+        #endif
         }
     }
 

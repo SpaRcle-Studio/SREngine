@@ -72,11 +72,11 @@ namespace SR_UTILS_NS {
 
     #ifdef SR_ANDROID
         switch (type) {
-            case Type::Warn:
+            case DebugLogType::Warn:
                 SR_PLATFORM_NS::WriteConsoleWarn(msg);
-            case Type::Error:
-            case Type::VulkanError:
-            case Type::Assert:
+            case DebugLogType::Error:
+            case DebugLogType::VulkanError:
+            case DebugLogType::Assert:
                 SR_PLATFORM_NS::WriteConsoleLog(msg);
                 break;
             default:

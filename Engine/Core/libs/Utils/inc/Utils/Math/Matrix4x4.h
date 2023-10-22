@@ -27,25 +27,36 @@ namespace SR_MATH_NS {
             glm::mat4 self;
         };
 
-        constexpr Matrix4x4() noexcept;
-        constexpr Matrix4x4(const Unit& scalar) noexcept;
-        constexpr Matrix4x4(const glm::mat4& mat) noexcept;
-        Matrix4x4(glm::mat4&& mat) noexcept;
+        constexpr Matrix4x4() noexcept
+            : self(GLM_IDENTITY_MAT4X4)
+        { }
+
+        constexpr Matrix4x4(const Unit& scalar) noexcept /// NOLINT
+            : self(glm::mat4(static_cast<float_t>(scalar)))
+        { }
+
+        constexpr Matrix4x4(const glm::mat4& mat) noexcept /// NOLINT
+            : self(mat)
+        { }
+
+        Matrix4x4(glm::mat4&& mat) noexcept /// NOLINT
+            : self(mat)
+        { }
 
         Matrix4x4(const FVector3& translate, const Quaternion& rotation) noexcept;
         Matrix4x4(const FVector3& translate, const Quaternion& rotation, const FVector3& scale) noexcept;
         Matrix4x4(const FVector3& translate, const Quaternion& rotation, const FVector3& scale, const FVector3& skew) noexcept;
 
         static constexpr Matrix4x4 Identity() {
-            return Matrix4x4(1);
+            return Matrix4x4(1); /// NOLINT
         }
 
         static Matrix4x4 RotationYawPitchRoll(const FVector3& angles) {
-            return Matrix4x4(0.f, angles.ToQuat(), 1.f);
+            return Matrix4x4(0.f, angles.ToQuat(), 1.f); /// NOLINT
         }
 
         static Matrix4x4 Perspective(float_t FOV, float_t aspect, float_t nearValue, float_t farValue) {
-            return Matrix4x4(glm::perspective(FOV, aspect, nearValue, farValue));
+            return Matrix4x4(glm::perspective(FOV, aspect, nearValue, farValue)); /// NOLINT
         }
 
         static Matrix4x4 FromEulers(const FVector3& eulers) {

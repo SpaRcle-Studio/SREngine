@@ -41,11 +41,11 @@ namespace SR_GRAPH_NS::Memory {
         ~VirtualUBOInfo() override = default;
 
         VirtualUBOInfo(VirtualUBOInfo&& ref) noexcept {
-            m_data = std::exchange(ref.m_data, {});
+            m_data = SR_UTILS_NS::Exchange(ref.m_data, {});
         }
 
         VirtualUBOInfo& operator=(VirtualUBOInfo&& ref) noexcept {
-            m_data = std::exchange(ref.m_data, {});
+            m_data = SR_UTILS_NS::Exchange(ref.m_data, {});
             return *this;
         }
 

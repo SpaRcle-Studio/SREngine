@@ -9,15 +9,18 @@
 
 namespace SR_SRSL_NS {
     /// минимальная лексическая единица
-    struct SRSLLexicalUnit : public SR_UTILS_NS::NonCopyable {
+    class SRSLLexicalUnit : public SR_UTILS_NS::NonCopyable {
+    public:
         SR_NODISCARD virtual std::string ToString(uint32_t deep) const { return std::string(); }
+
     };
 
     class SRSLLexicalTree;
 
     /// ----------------------------------------------------------------------------------------------------------------
 
-    struct SRSLExpr : public SRSLLexicalUnit {
+    class SRSLExpr : public SRSLLexicalUnit {
+    public:
         SRSLExpr() = default;
 
         explicit SRSLExpr(std::string&& token)
@@ -88,13 +91,15 @@ namespace SR_SRSL_NS {
 
     /// ----------------------------------------------------------------------------------------------------------------
 
-    struct SRSLInclude : public SRSLLexicalUnit {
+    class SRSLInclude : public SRSLLexicalUnit {
+    public:
         std::string path;
     };
 
     /// ----------------------------------------------------------------------------------------------------------------
 
-    struct SRSLDecorator : public SRSLLexicalUnit {
+    class SRSLDecorator : public SRSLLexicalUnit {
+    public:
         SRSLDecorator() = default;
 
         ~SRSLDecorator() override {
@@ -116,7 +121,8 @@ namespace SR_SRSL_NS {
 
     /// ----------------------------------------------------------------------------------------------------------------
 
-    struct SRSLDecorators : public SRSLLexicalUnit {
+    class SRSLDecorators : public SRSLLexicalUnit {
+    public:
         SRSLDecorators() = default;
 
         SRSLDecorators(SRSLDecorators&& other) noexcept
@@ -136,7 +142,8 @@ namespace SR_SRSL_NS {
 
     /// ----------------------------------------------------------------------------------------------------------------
 
-    struct SRSLVariable : public SRSLLexicalUnit {
+    class SRSLVariable : public SRSLLexicalUnit {
+    public:
         SRSLVariable() = default;
 
         SRSLVariable(SRSLVariable&& other) noexcept
@@ -174,7 +181,8 @@ namespace SR_SRSL_NS {
 
     /// ----------------------------------------------------------------------------------------------------------------
 
-    struct SRSLReturn : public SRSLLexicalUnit {
+    class SRSLReturn : public SRSLLexicalUnit {
+    public:
         explicit SRSLReturn(SRSLExpr* pExpr)
             : pExpr(pExpr)
         { }
@@ -197,7 +205,8 @@ namespace SR_SRSL_NS {
 
     /// ----------------------------------------------------------------------------------------------------------------
 
-    struct SRSLFunction : public SRSLLexicalUnit {
+    class SRSLFunction : public SRSLLexicalUnit {
+    public:
         ~SRSLFunction() override;
 
         SR_NODISCARD std::string ToString(uint32_t deep) const override;
@@ -214,7 +223,8 @@ namespace SR_SRSL_NS {
 
     /// ----------------------------------------------------------------------------------------------------------------
 
-    struct SRSLIfStatement : public SRSLLexicalUnit {
+    class SRSLIfStatement : public SRSLLexicalUnit {
+    public:
         SRSLIfStatement() = default;
         explicit SRSLIfStatement(bool isElse);
 
@@ -227,7 +237,8 @@ namespace SR_SRSL_NS {
 
     /// ----------------------------------------------------------------------------------------------------------------
 
-    struct SRSLForStatement : public SRSLLexicalUnit {
+    class SRSLForStatement : public SRSLLexicalUnit {
+    public:
         SRSLForStatement() = default;
         ~SRSLForStatement() override;
 
@@ -239,7 +250,8 @@ namespace SR_SRSL_NS {
 
     /// ----------------------------------------------------------------------------------------------------------------
 
-    struct SRSLLexicalTree : public SRSLLexicalUnit {
+    class SRSLLexicalTree : public SRSLLexicalUnit {
+    public:
         SRSLLexicalTree() = default;
 
         ~SRSLLexicalTree() override {
@@ -267,7 +279,8 @@ namespace SR_SRSL_NS {
 
     /// ----------------------------------------------------------------------------------------------------------------
 
-    struct SRSLAnalyzedTree : public SR_UTILS_NS::NonCopyable {
+    class SRSLAnalyzedTree : public SR_UTILS_NS::NonCopyable {
+    public:
         using Ptr = std::shared_ptr<SRSLAnalyzedTree>;
 
         SRSLAnalyzedTree() = default;

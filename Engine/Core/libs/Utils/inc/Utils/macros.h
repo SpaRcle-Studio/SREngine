@@ -202,7 +202,9 @@
     #define SR_STATIC_ASSERT(msg) static_assert(false, msg);
 #endif
 
-#ifndef SR_LINUX
+#ifdef SR_LINUX
+    #define SR_DLL_EXPORT
+#else
     #if defined(SR_DLL_EXPORTS)
         #ifdef SR_ANDROID
             #define SR_DLL_EXPORT
@@ -210,10 +212,12 @@
             #define SR_DLL_EXPORT __declspec(dllexport)
         #endif
     #else
-        #define SR_DLL_EXPORT __declspec(dllimport)
+        #ifdef SR_ANDROID
+            #define SR_DLL_EXPORT
+        #else
+            #define SR_DLL_EXPORT __declspec(dllimport)
+        #endif
     #endif
-#else
-    #define SR_DLL_EXPORT
 #endif
 
 #if defined(SR_MSVC)

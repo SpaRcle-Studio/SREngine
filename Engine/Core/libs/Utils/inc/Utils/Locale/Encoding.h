@@ -9,7 +9,7 @@
 #include <Utils/Locale/UTF.h>
 
 namespace SR_UTILS_NS::Locale {
-    static void SetLocale() {
+    SR_MAYBE_UNUSED static void SetLocale() {
         setlocale(LC_ALL, "rus");
         setlocale(LC_NUMERIC, "C");
     }

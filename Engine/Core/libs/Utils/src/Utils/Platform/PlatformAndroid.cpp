@@ -15,8 +15,16 @@
 namespace SR_UTILS_NS::Platform {
     static android_app* pAndroidInstance = nullptr;
 
+    void InitSegmentationHandler() {
+
+    }
+
     void SetInstance(void* pInstance) {
         pAndroidInstance = reinterpret_cast<android_app*>(pInstance);
+    }
+
+    void SetMousePos(const SR_MATH_NS::IVector2& pos) {
+
     }
 
     void* GetInstance() {

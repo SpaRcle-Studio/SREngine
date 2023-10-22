@@ -38,7 +38,7 @@ namespace SR_GRAPH_NS::GUI {
         explicit Pin(const std::string& name);
         Pin(const std::string& name, DataTypePtr pData);
         Pin(const std::string& name, PinKind kind);
-        Pin(const std::string& name, PinKind kind, DataTypePtr pData);
+        Pin(std::string  name, PinKind kind, DataTypePtr pData);
         ~Pin() override;
 
     public:

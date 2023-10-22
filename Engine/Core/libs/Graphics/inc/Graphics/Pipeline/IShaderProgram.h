@@ -157,7 +157,7 @@ namespace SR_GRAPH_NS {
 
     };
 
-    static CullMode InverseCullMode(CullMode cullMode) {
+    SR_MAYBE_UNUSED static CullMode InverseCullMode(CullMode cullMode) {
         switch (cullMode) {
             case CullMode::Back:
                 return CullMode::Front;
@@ -168,7 +168,7 @@ namespace SR_GRAPH_NS {
         }
     }
 
-    static LayoutBinding GetBindingType(const std::string& line) {
+    SR_MAYBE_UNUSED static LayoutBinding GetBindingType(const std::string& line) {
         //! first check sampler, after that check uniform
 
         if (SR_UTILS_NS::StringUtils::Contains(line, "sampler2DArray"))
@@ -202,7 +202,7 @@ namespace SR_GRAPH_NS {
         }
     };
 
-    static std::optional<std::vector<Uniform>> AnalyseShader(const std::vector<SourceShader>& modules) {
+    SR_MAYBE_UNUSED static std::optional<std::vector<Uniform>> AnalyseShader(const std::vector<SourceShader>& modules) {
         uint32_t count = 0;
 
         auto uniforms = std::vector<Uniform>();

@@ -16,12 +16,6 @@ class aiScene;
 class aiNode;
 class aiMesh;
 
-template<typename T> struct aiColor4t;
-typedef aiColor4t<float> aiColor4DFwd;
-
-template<typename T> struct aiVector3t;
-typedef aiVector3t<float> aiVector3DFwd;
-
 namespace SR_HTYPES_NS {
     class Marshal;
 }
@@ -29,7 +23,7 @@ namespace SR_HTYPES_NS {
 namespace SR_UTILS_NS {
     class AssimpCache final : public Singleton<AssimpCache> {
         friend class Singleton<AssimpCache>;
-        static const uint64_t VERSION = 1010;
+        SR_MAYBE_UNUSED SR_INLINE_STATIC const uint64_t VERSION = 1010;
         static const uint8_t SR_ASSIMP_MAX_NUMBER_OF_COLOR_SETS;
         static const uint8_t SR_ASSIMP_MAX_NUMBER_OF_TEXTURECOORDS;
         using NodeIndex = uint64_t;
@@ -41,6 +35,9 @@ namespace SR_UTILS_NS {
         aiScene* Load(const SR_UTILS_NS::Path& path) const;
 
     private:
+        static void AllocateAiColor4t(void** pData, uint32_t count);
+        static void AllocateAiVector3t(void** pData, uint32_t count);
+
         SR_NODISCARD NodeMap BuildNodeMap(const aiScene* pScene) const;
         SR_NODISCARD MeshMap BuildMeshMap(const aiScene* pScene) const;
 
@@ -99,6 +96,7 @@ namespace SR_UTILS_NS {
                 }
             }
         }
+
         template<typename T> void LoadMesh(SR_HTYPES_NS::Marshal* pMarshal, T* pMesh) const {
             pMesh->mName = pMarshal->Read<std::string>();
 
@@ -110,7 +108,7 @@ namespace SR_UTILS_NS {
                 auto&& pColors = pMesh->mColors[colorId];
 
                 if (pMarshal->Read<bool>()) {
-                    pColors = new aiColor4DFwd[pMesh->mNumVertices];
+                    AllocateAiColor4t((void**)&pColors, pMesh->mNumVertices);
                     pMarshal->ReadBlock(pColors);
                 }
                 else {
@@ -122,25 +120,25 @@ namespace SR_UTILS_NS {
 
             /// has vertices
             if (pMarshal->Read<bool>()) {
-                pMesh->mVertices = new aiVector3DFwd[pMesh->mNumVertices];
+                AllocateAiVector3t((void**)&pMesh->mVertices, pMesh->mNumVertices);
                 pMarshal->ReadBlock(pMesh->mVertices);
             }
 
             /// has normals
             if (pMarshal->Read<bool>()) {
-                pMesh->mNormals = new aiVector3DFwd[pMesh->mNumVertices];
+                AllocateAiVector3t((void**)&pMesh->mNormals, pMesh->mNumVertices);
                 pMarshal->ReadBlock(pMesh->mNormals);
             }
 
             /// has tangents
             if (pMarshal->Read<bool>()) {
-                pMesh->mTangents = new aiVector3DFwd[pMesh->mNumVertices];
+                AllocateAiVector3t((void**)&pMesh->mTangents, pMesh->mNumVertices);
                 pMarshal->ReadBlock(pMesh->mTangents);
             }
 
             /// has bitangents
             if (pMarshal->Read<bool>()) {
-                pMesh->mBitangents = new aiVector3DFwd[pMesh->mNumVertices];
+                AllocateAiVector3t((void**)&pMesh->mBitangents, pMesh->mNumVertices);
                 pMarshal->ReadBlock(pMesh->mBitangents);
             }
 
@@ -148,7 +146,7 @@ namespace SR_UTILS_NS {
                 auto&& textureCoords = pMesh->mTextureCoords[numberTextureCoords];
 
                 if (pMarshal->Read<bool>()) {
-                    textureCoords = new aiVector3DFwd[pMesh->mNumVertices];
+                    AllocateAiVector3t((void**)&textureCoords, pMesh->mNumVertices);
                     pMarshal->ReadBlock(textureCoords);
                 }
                 else {

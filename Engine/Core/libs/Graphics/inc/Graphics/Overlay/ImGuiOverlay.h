@@ -7,8 +7,8 @@
 
 #include <Graphics/Overlay/Overlay.h>
 
-class ImFont;
-class ImGuiContext;
+struct ImFont;
+struct ImGuiContext;
 
 namespace SR_GRAPH_NS {
     class ImGuiOverlay : public Overlay {

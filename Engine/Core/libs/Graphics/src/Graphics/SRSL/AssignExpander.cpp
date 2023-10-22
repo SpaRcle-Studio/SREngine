@@ -149,7 +149,7 @@ namespace SR_SRSL_NS {
         }
 
     exit:
-        return std::move(lexems);
+        return lexems;
     }
 
     uint64_t SRSLAssignExpander::FindSemicolon() {

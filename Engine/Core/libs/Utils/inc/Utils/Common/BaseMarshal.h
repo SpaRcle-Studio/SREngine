@@ -14,7 +14,7 @@
 
 namespace SR_UTILS_NS {
     namespace MarshalUtils {
-        template<typename T> static void SR_FASTCALL SaveValue(SR_HTYPES_NS::Stream& stream, const T& value) {
+        template<typename T> SR_INLINE_STATIC void SR_FASTCALL SaveValue(SR_HTYPES_NS::Stream& stream, const T& value) {
             if constexpr (std::is_same<T, SR_MATH_NS::FColor>()) {
                 stream.write((const char *) &value.r, sizeof(SR_MATH_NS::Unit));
                 stream.write((const char *) &value.g, sizeof(SR_MATH_NS::Unit));
@@ -71,7 +71,7 @@ namespace SR_UTILS_NS {
             }
         }
 
-        template<typename T> static T SR_FASTCALL LoadValue(SR_HTYPES_NS::Stream& stream) {
+        template<typename T> SR_INLINE_STATIC T SR_FASTCALL LoadValue(SR_HTYPES_NS::Stream& stream) {
             T value = T();
 
             if constexpr (std::is_same<T, SR_MATH_NS::FColor>()) {
@@ -132,31 +132,31 @@ namespace SR_UTILS_NS {
             return value;
         }
 
-        SR_MAYBE_UNUSED static void SR_FASTCALL SaveShortString(SR_HTYPES_NS::Stream& stream, const std::string& str) {
+        SR_MAYBE_UNUSED SR_INLINE_STATIC void SR_FASTCALL SaveShortString(SR_HTYPES_NS::Stream& stream, const std::string& str) {
             const int16_t size = str.size();
             stream.write((const char*)&size, sizeof(int16_t));
             stream.write((const char*)&str[0], size * sizeof(char));
         }
 
-        SR_MAYBE_UNUSED static void SR_FASTCALL SaveUnicodeString(SR_HTYPES_NS::Stream& stream, const SR_HTYPES_NS::UnicodeString& str) {
+        SR_MAYBE_UNUSED SR_INLINE_STATIC void SR_FASTCALL SaveUnicodeString(SR_HTYPES_NS::Stream& stream, const SR_HTYPES_NS::UnicodeString& str) {
             const int16_t size = str.size();
             stream.write((const char*)&size, sizeof(int16_t));
             stream.write((const char*)&str[0], size * sizeof(SR_HTYPES_NS::UnicodeString::CharType));
         }
 
-        SR_MAYBE_UNUSED static void SR_FASTCALL SaveString(SR_HTYPES_NS::Stream& stream, const std::string& str) {
+        SR_MAYBE_UNUSED SR_INLINE_STATIC void SR_FASTCALL SaveString(SR_HTYPES_NS::Stream& stream, const std::string& str) {
             const size_t size = str.size();
             stream.write((const char*)&size, sizeof(size_t));
             stream.write((const char*)&str[0], size * sizeof(char));
         }
 
-        static void SR_FASTCALL SaveString(SR_HTYPES_NS::Stream& stream, const std::string_view& str) {
+        SR_MAYBE_UNUSED static void SR_FASTCALL SaveString(SR_HTYPES_NS::Stream& stream, const std::string_view& str) {
             const size_t size = str.size();
             stream.write((const char*)&size, sizeof(size_t));
             stream.write((const char*)&str[0], size * sizeof(char));
         }
 
-        template<typename T> static void SR_FASTCALL SaveVector(SR_HTYPES_NS::Stream& stream, const std::vector<T>& vector) {
+        template<typename T> SR_INLINE_STATIC void SR_FASTCALL SaveVector(SR_HTYPES_NS::Stream& stream, const std::vector<T>& vector) {
             const size_t size = vector.size();
             stream.write((const char*)&size, sizeof(size_t));
             if (size > 0) {
@@ -164,7 +164,7 @@ namespace SR_UTILS_NS {
             }
         }
 
-        template<typename Vector> static Vector SR_FASTCALL LoadVector(SR_HTYPES_NS::Stream& stream) {
+        template<typename Vector> SR_INLINE_STATIC Vector SR_FASTCALL LoadVector(SR_HTYPES_NS::Stream& stream) {
             Vector vector;
 
             size_t size;
@@ -180,7 +180,7 @@ namespace SR_UTILS_NS {
             return std::move(vector);
         }
 
-        static std::string SR_FASTCALL LoadShortStr(SR_HTYPES_NS::Stream& stream) {
+        SR_MAYBE_UNUSED SR_INLINE_STATIC std::string SR_FASTCALL LoadShortStr(SR_HTYPES_NS::Stream& stream) {
             std::string str;
             uint16_t size;
             stream.read((char*)&size, sizeof(uint16_t));
@@ -193,7 +193,7 @@ namespace SR_UTILS_NS {
             return str;
         }
 
-        static SR_HTYPES_NS::UnicodeString SR_FASTCALL LoadUnicodeString(SR_HTYPES_NS::Stream& stream) {
+        SR_MAYBE_UNUSED SR_INLINE_STATIC SR_HTYPES_NS::UnicodeString SR_FASTCALL LoadUnicodeString(SR_HTYPES_NS::Stream& stream) {
             SR_HTYPES_NS::UnicodeString str;
             uint16_t size;
             stream.read((char*)&size, sizeof(uint16_t));
@@ -206,7 +206,7 @@ namespace SR_UTILS_NS {
             return str;
         }
 
-        static std::string SR_FASTCALL LoadStr(SR_HTYPES_NS::Stream& stream) {
+        SR_MAYBE_UNUSED SR_INLINE_STATIC std::string SR_FASTCALL LoadStr(SR_HTYPES_NS::Stream& stream) {
             std::string str;
             size_t size;
             stream.read((char*)&size, sizeof(size_t));
@@ -219,7 +219,7 @@ namespace SR_UTILS_NS {
             return str;
         }
 
-        static std::string SR_FASTCALL TryLoadShortStr(SR_HTYPES_NS::Stream& stream) {
+        SR_MAYBE_UNUSED SR_INLINE_STATIC std::string SR_FASTCALL TryLoadShortStr(SR_HTYPES_NS::Stream& stream) {
             std::string str;
             uint16_t size;
             stream.TryRead((char*)&size, sizeof(uint16_t));
@@ -232,7 +232,7 @@ namespace SR_UTILS_NS {
             return str;
         }
 
-        static SR_HTYPES_NS::UnicodeString SR_FASTCALL TryLoadUnicodeString(SR_HTYPES_NS::Stream& stream) {
+        SR_MAYBE_UNUSED SR_INLINE_STATIC SR_HTYPES_NS::UnicodeString SR_FASTCALL TryLoadUnicodeString(SR_HTYPES_NS::Stream& stream) {
             SR_HTYPES_NS::UnicodeString str;
             uint16_t size;
             stream.TryRead((char*)&size, sizeof(uint16_t));

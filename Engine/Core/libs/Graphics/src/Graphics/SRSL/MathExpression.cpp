@@ -340,7 +340,7 @@ namespace SR_SRSL_NS {
                         return token;
                     }
                     else if (hasInt) {
-                        return std::move(token);
+                        return token;
                     }
 
                     break;

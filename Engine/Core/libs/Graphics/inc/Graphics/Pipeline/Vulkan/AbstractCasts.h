@@ -10,7 +10,7 @@
 #include <Graphics/Types/Descriptors.h>
 
 namespace SR_GRAPH_NS::VulkanTools {
-    static VkShaderStageFlagBits AbstractShaderToVkShader(ShaderStage stage) {
+    SR_MAYBE_UNUSED static VkShaderStageFlagBits AbstractShaderToVkShader(ShaderStage stage) {
         switch (stage) {
             case ShaderStage::Vertex: return VK_SHADER_STAGE_VERTEX_BIT;
             case ShaderStage::Fragment: return VK_SHADER_STAGE_FRAGMENT_BIT;
@@ -22,7 +22,7 @@ namespace SR_GRAPH_NS::VulkanTools {
         }
     }
 
-    static SR_FORCE_INLINE VkFormat AttributeToVkFormat(const Vertices::Attribute& attr) {
+    SR_MAYBE_UNUSED static SR_FORCE_INLINE VkFormat AttributeToVkFormat(const Vertices::Attribute& attr) {
         switch (attr) {
             case Vertices::Attribute::FLOAT_R32G32B32A32: return VK_FORMAT_R32G32B32A32_SFLOAT;
             case Vertices::Attribute::FLOAT_R32G32B32:    return VK_FORMAT_R32G32B32_SFLOAT;
@@ -31,7 +31,7 @@ namespace SR_GRAPH_NS::VulkanTools {
         }
     }
 
-    static SR_FORCE_INLINE VkFilter AbstractTextureFilterToVkFilter(const TextureFilter& filter) {
+    SR_MAYBE_UNUSED static SR_FORCE_INLINE VkFilter AbstractTextureFilterToVkFilter(const TextureFilter& filter) {
         switch (filter) {
             case TextureFilter::NEAREST: return VK_FILTER_NEAREST;
             case TextureFilter::LINEAR:  return VK_FILTER_LINEAR;
@@ -46,7 +46,7 @@ namespace SR_GRAPH_NS::VulkanTools {
         }
     }
 
-    static SR_FORCE_INLINE std::vector<VkVertexInputBindingDescription> AbstractVertexDescriptionsToVk(const std::vector<SR_VERTEX_DESCRIPTION>& descriptions) {
+    SR_MAYBE_UNUSED static SR_FORCE_INLINE std::vector<VkVertexInputBindingDescription> AbstractVertexDescriptionsToVk(const std::vector<SR_VERTEX_DESCRIPTION>& descriptions) {
         auto vkDescriptions = std::vector<VkVertexInputBindingDescription>();
 
         for (uint32_t i = 0; i < descriptions.size(); i++)
@@ -55,7 +55,7 @@ namespace SR_GRAPH_NS::VulkanTools {
         return vkDescriptions;
     }
 
-    static std::vector<VkPushConstantRange> AbstractPushConstantToVkPushConstants(const SRShaderCreateInfo& createInfo) {
+    SR_MAYBE_UNUSED static std::vector<VkPushConstantRange> AbstractPushConstantToVkPushConstants(const SRShaderCreateInfo& createInfo) {
         std::map<ShaderStage, VkPushConstantRange> pushConstantsMap;
 
         for (auto&& [stage, info] : createInfo.stages) {
@@ -76,7 +76,7 @@ namespace SR_GRAPH_NS::VulkanTools {
         return pushConstants;
     }
 
-    static std::optional<std::vector<VkDescriptorSetLayoutBinding>> UniformsToDescriptorLayoutBindings(const UBOInfo& uniforms) {
+    SR_MAYBE_UNUSED static std::optional<std::vector<VkDescriptorSetLayoutBinding>> UniformsToDescriptorLayoutBindings(const UBOInfo& uniforms) {
         std::vector<VkDescriptorSetLayoutBinding> descriptorLayoutBindings;
 
         for (auto&& uniform : uniforms) {
@@ -119,7 +119,7 @@ namespace SR_GRAPH_NS::VulkanTools {
         return descriptorLayoutBindings;
     }
 
-    static SR_FORCE_INLINE VkShaderStageFlagBits VkShaderShaderTypeToStage(ShaderStage type) {
+    SR_MAYBE_UNUSED static SR_FORCE_INLINE VkShaderStageFlagBits VkShaderShaderTypeToStage(ShaderStage type) {
         switch (type) {
             case ShaderStage::Fragment: return VkShaderStageFlagBits::VK_SHADER_STAGE_FRAGMENT_BIT;
             case ShaderStage::Vertex:   return VkShaderStageFlagBits::VK_SHADER_STAGE_VERTEX_BIT;
@@ -129,7 +129,7 @@ namespace SR_GRAPH_NS::VulkanTools {
         }
     }
 
-    static SR_FORCE_INLINE ShaderStage VkShaderStageToShaderType(VkShaderStageFlagBits stage) {
+    SR_MAYBE_UNUSED static SR_FORCE_INLINE ShaderStage VkShaderStageToShaderType(VkShaderStageFlagBits stage) {
         switch (stage) {
             case VkShaderStageFlagBits::VK_SHADER_STAGE_FRAGMENT_BIT: return ShaderStage::Fragment;
             case VkShaderStageFlagBits::VK_SHADER_STAGE_VERTEX_BIT:   return ShaderStage::Vertex;
@@ -139,7 +139,7 @@ namespace SR_GRAPH_NS::VulkanTools {
         }
     }
 
-    static SR_FORCE_INLINE std::vector<VkVertexInputAttributeDescription> AbstractAttributesToVkAttributes(
+    SR_MAYBE_UNUSED static SR_FORCE_INLINE std::vector<VkVertexInputAttributeDescription> AbstractAttributesToVkAttributes(
             const std::vector<std::pair<Vertices::Attribute, size_t>>& attributes)
     {
         auto vkDescrs = std::vector<VkVertexInputAttributeDescription>();
@@ -157,7 +157,7 @@ namespace SR_GRAPH_NS::VulkanTools {
         return vkDescrs;
     }
 
-    static SR_FORCE_INLINE std::vector<std::pair<std::string, ShaderStage>> VkModulesToAbstractModules(
+    SR_MAYBE_UNUSED static SR_FORCE_INLINE std::vector<std::pair<std::string, ShaderStage>> VkModulesToAbstractModules(
             const std::vector<std::pair<std::string, VkShaderStageFlagBits>>& modules)
     {
         auto abstract = std::vector<std::pair<std::string, ShaderStage>>();
@@ -166,7 +166,7 @@ namespace SR_GRAPH_NS::VulkanTools {
         return abstract;
     }
 
-    static SR_FORCE_INLINE VkPrimitiveTopology AbstractPrimitiveTopologyToVk(PrimitiveTopology primitiveTopology) {
+    SR_MAYBE_UNUSED static SR_FORCE_INLINE VkPrimitiveTopology AbstractPrimitiveTopologyToVk(PrimitiveTopology primitiveTopology) {
         switch (primitiveTopology) {
             case PrimitiveTopology::PointList: return VK_PRIMITIVE_TOPOLOGY_POINT_LIST;
             case PrimitiveTopology::LineList: return VK_PRIMITIVE_TOPOLOGY_LINE_LIST;
@@ -180,35 +180,38 @@ namespace SR_GRAPH_NS::VulkanTools {
             case PrimitiveTopology::TriangleStripWithAdjacency: return VK_PRIMITIVE_TOPOLOGY_TRIANGLE_STRIP_WITH_ADJACENCY;
             case PrimitiveTopology::PathList: return VK_PRIMITIVE_TOPOLOGY_PATCH_LIST;
             case PrimitiveTopology::Unknown:
+            default:
                 break;
         }
         return VkPrimitiveTopology::VK_PRIMITIVE_TOPOLOGY_MAX_ENUM;
     }
 
-    static SR_FORCE_INLINE VkPolygonMode AbstractPolygonModeToVk(PolygonMode polygonMode) {
+    SR_MAYBE_UNUSED static SR_FORCE_INLINE VkPolygonMode AbstractPolygonModeToVk(PolygonMode polygonMode) {
         switch (polygonMode) {
             case PolygonMode::Fill:  return VK_POLYGON_MODE_FILL;
             case PolygonMode::Line:  return VK_POLYGON_MODE_LINE;
             case PolygonMode::Point: return VK_POLYGON_MODE_POINT;
             case PolygonMode::Unknown:
+            default:
                 break;
         }
         return VkPolygonMode::VK_POLYGON_MODE_MAX_ENUM;
     }
 
-    static SR_FORCE_INLINE VkCullModeFlagBits AbstractCullModeToVk(CullMode cullMode) {
+    SR_MAYBE_UNUSED static SR_FORCE_INLINE VkCullModeFlagBits AbstractCullModeToVk(CullMode cullMode) {
         switch (cullMode) {
             case CullMode::None:         return VK_CULL_MODE_NONE;
             case CullMode::Front:        return VK_CULL_MODE_FRONT_BIT;
             case CullMode::Back:         return VK_CULL_MODE_BACK_BIT;
             case CullMode::FrontAndBack: return VK_CULL_MODE_FRONT_AND_BACK;
             case CullMode::Unknown:
+            default:
                 break;
         }
         return VkCullModeFlagBits::VK_CULL_MODE_FLAG_BITS_MAX_ENUM;
     }
 
-    static SR_FORCE_INLINE VkCompareOp AbstractDepthOpToVk(DepthCompare depthCompare) {
+    SR_MAYBE_UNUSED static SR_FORCE_INLINE VkCompareOp AbstractDepthOpToVk(DepthCompare depthCompare) {
         switch (depthCompare) {
             case DepthCompare::Never:          return VK_COMPARE_OP_NEVER;
             case DepthCompare::Less:           return VK_COMPARE_OP_LESS;
@@ -219,12 +222,13 @@ namespace SR_GRAPH_NS::VulkanTools {
             case DepthCompare::GreaterOrEqual: return VK_COMPARE_OP_GREATER_OR_EQUAL;
             case DepthCompare::Always:         return VK_COMPARE_OP_ALWAYS;
             case DepthCompare::Unknown:
+            default:
                 break;
         }
         return VkCompareOp::VK_COMPARE_OP_MAX_ENUM;
     }
 
-    static SR_FORCE_INLINE VkDescriptorType CastAbsDescriptorTypeToVk(const DescriptorType& descriptorType) {
+    SR_MAYBE_UNUSED static SR_FORCE_INLINE VkDescriptorType CastAbsDescriptorTypeToVk(const DescriptorType& descriptorType) {
         switch (descriptorType) {
             case DescriptorType::Uniform:
                 return VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
@@ -237,7 +241,7 @@ namespace SR_GRAPH_NS::VulkanTools {
         }
     }
 
-    static SR_FORCE_INLINE std::vector<uint64_t> CastAbsDescriptorTypeToVk(const std::vector<DescriptorType>& descriptorTypes) {
+    SR_MAYBE_UNUSED static SR_FORCE_INLINE std::vector<uint64_t> CastAbsDescriptorTypeToVk(const std::vector<DescriptorType>& descriptorTypes) {
         std::vector<uint64_t> vkDescriptorTypes;
 
         for (auto&& descriptorType : descriptorTypes) {
@@ -255,10 +259,10 @@ namespace SR_GRAPH_NS::VulkanTools {
             }
         }
 
-        return std::move(vkDescriptorTypes);
+        return vkDescriptorTypes;
     }
 
-    static SR_FORCE_INLINE std::vector<uint64_t> CastAbsDescriptorTypeToVk(std::vector<uint64_t> descriptorTypes) {
+    SR_MAYBE_UNUSED static SR_FORCE_INLINE std::vector<uint64_t> CastAbsDescriptorTypeToVk(std::vector<uint64_t> descriptorTypes) {
         for (uint64_t& type : descriptorTypes) {
             if (type == static_cast<uint64_t>(DescriptorType::Uniform)) {
                 type = static_cast<uint64_t>(VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER);
@@ -268,12 +272,12 @@ namespace SR_GRAPH_NS::VulkanTools {
             }
         }
 
-        return std::move(descriptorTypes);
+        return descriptorTypes;
     }
 
-    static SR_FORCE_INLINE VkImageAspectFlags AbstractImageAspectToVkAspect(const ImageAspect& aspect) {
+    SR_MAYBE_UNUSED static SR_FORCE_INLINE VkImageAspectFlags AbstractImageAspectToVkAspect(const ImageAspect& aspect) {
         switch (aspect) {
-            case ImageAspect::None: return VK_IMAGE_ASPECT_NONE;
+            case ImageAspect::None: return EvoVulkan::Tools::Initializers::EVK_IMAGE_ASPECT_NONE;
             case ImageAspect::Depth: return VK_IMAGE_ASPECT_DEPTH_BIT;
             case ImageAspect::Stencil: return VK_IMAGE_ASPECT_STENCIL_BIT;
             case ImageAspect::Color: return VK_IMAGE_ASPECT_COLOR_BIT;
@@ -285,7 +289,7 @@ namespace SR_GRAPH_NS::VulkanTools {
         return VK_IMAGE_ASPECT_FLAG_BITS_MAX_ENUM;
     }
 
-    static SR_FORCE_INLINE VkFormat AbstractTextureFormatToVkFormat(const ImageFormat& format) {
+    SR_MAYBE_UNUSED static SR_FORCE_INLINE VkFormat AbstractTextureFormatToVkFormat(const ImageFormat& format) {
         switch (format) {
             case ImageFormat::RGBA8_UNORM: return VK_FORMAT_R8G8B8A8_UNORM;
             case ImageFormat::BGRA8_UNORM: return VK_FORMAT_B8G8R8A8_UNORM;
@@ -322,7 +326,7 @@ namespace SR_GRAPH_NS::VulkanTools {
         return VkFormat::VK_FORMAT_MAX_ENUM;
     }
 
-    static SR_FORCE_INLINE VkFormat AbstractTextureCompToVkFormat(const TextureCompression& comp, VkFormat format) {
+    SR_MAYBE_UNUSED static SR_FORCE_INLINE VkFormat AbstractTextureCompToVkFormat(const TextureCompression& comp, VkFormat format) {
         switch (comp) {
             case TextureCompression::None: return format;
             case TextureCompression::BC1:
@@ -405,6 +409,9 @@ namespace SR_GRAPH_NS::VulkanTools {
                     default:
                         return VK_FORMAT_MAX_ENUM;
                 }
+            default:
+                SRHalt0();
+                break;
         }
 
         return VkFormat::VK_FORMAT_MAX_ENUM;

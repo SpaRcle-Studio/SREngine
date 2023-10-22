@@ -23,8 +23,8 @@ namespace SR_UTILS_NS {
         using WeakPtr = std::weak_ptr<ResourceInfo>;
 
         ResourceInfo(uint64_t resourceHash, uint64_t pathHash, ResourceType* pResourceType)
-            : m_resourceHash(resourceHash)
-            , m_resourceType(pResourceType)
+            : m_resourceType(pResourceType)
+            , m_resourceHash(resourceHash)
             , m_pathHash(pathHash)
         { }
 

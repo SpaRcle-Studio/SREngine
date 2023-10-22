@@ -12,12 +12,12 @@
 #include <Utils/SRLM/DataType.h>
 
 namespace SR_GRAPH_GUI_NS {
-    static ImVec4 MakeDisableColor(ImVec4 color) {
+    SR_MAYBE_UNUSED static ImVec4 MakeDisableColor(ImVec4 color) {
         color.w /= 2;
         return color;
     }
 
-    void static EnumCombo(const std::string& label, SR_UTILS_NS::EnumReflector* pReflector, const SR_HTYPES_NS::Function<void(SR_UTILS_NS::EnumReflector* pReflector)>& callback) {
+    SR_MAYBE_UNUSED void static EnumCombo(const std::string& label, SR_UTILS_NS::EnumReflector* pReflector, const SR_HTYPES_NS::Function<void(SR_UTILS_NS::EnumReflector* pReflector)>& callback) {
         if (ImGui::BeginCombo(label.c_str(), (pReflector ? pReflector->GetNameInternal() : std::string()).c_str())) {
             auto&& selectables = SR_UTILS_NS::EnumReflectorManager::Instance().GetReflectors();
             for (auto&& selectable : selectables) {
@@ -31,7 +31,7 @@ namespace SR_GRAPH_GUI_NS {
         }
     }
 
-    void static EnumCombo(const std::string& label, SR_UTILS_NS::EnumReflector* pReflector, const std::optional<std::string>& value, const SR_HTYPES_NS::Function<void(std::string)>& callback) {
+    SR_MAYBE_UNUSED void static EnumCombo(const std::string& label, SR_UTILS_NS::EnumReflector* pReflector, const std::optional<std::string>& value, const SR_HTYPES_NS::Function<void(std::string)>& callback) {
         auto&& strValue = value ? value.value() : std::string();
 
         if (ImGui::BeginCombo(label.c_str(), strValue.c_str())) {
@@ -61,9 +61,9 @@ namespace SR_GRAPH_GUI_NS {
         }
     }
 
-    static bool Vec4Null(const ImVec4 &v1) { return (v1.x == 0) && (v1.y == 0) && (v1.z == 0) && (v1.w == 0); }
+    SR_MAYBE_UNUSED static bool Vec4Null(const ImVec4 &v1) { return (v1.x == 0) && (v1.y == 0) && (v1.z == 0) && (v1.w == 0); }
 
-    static bool DragUnit(const std::string& name, SR_MATH_NS::Unit& value, float_t drag = 0.1f, bool active = true, uint32_t index = 0) {
+    SR_MAYBE_UNUSED static bool DragUnit(const std::string& name, SR_MATH_NS::Unit& value, float_t drag = 0.1f, bool active = true, uint32_t index = 0) {
         float_t temp = value;
 
         ImGui::PushItemFlag(ImGuiItemFlags_Disabled, !active);
@@ -79,7 +79,7 @@ namespace SR_GRAPH_GUI_NS {
         return false;
     }
 
-    static bool DragInt32(const std::string& name, int32_t& value, int32_t drag = 1, bool active = true, uint32_t index = 0) {
+    SR_MAYBE_UNUSED static bool DragInt32(const std::string& name, int32_t& value, int32_t drag = 1, bool active = true, uint32_t index = 0) {
         int32_t temp = value;
 
         ImGui::PushItemFlag(ImGuiItemFlags_Disabled, !active);
@@ -95,7 +95,7 @@ namespace SR_GRAPH_GUI_NS {
         return false;
     }
 
-    static bool DragUInt32(const std::string& name, uint32_t& value, uint32_t drag = 1, bool active = true, uint32_t index = 0) {
+    SR_MAYBE_UNUSED static bool DragUInt32(const std::string& name, uint32_t& value, uint32_t drag = 1, bool active = true, uint32_t index = 0) {
         int32_t temp = value;
 
         ImGui::PushItemFlag(ImGuiItemFlags_Disabled, !active);
@@ -111,7 +111,7 @@ namespace SR_GRAPH_GUI_NS {
         return false;
     }
 
-    static bool InputInt(const std::string& name, int32_t& value, int32_t step = 1, bool active = true, uint32_t index = 0) {
+    SR_MAYBE_UNUSED static bool InputInt(const std::string& name, int32_t& value, int32_t step = 1, bool active = true, uint32_t index = 0) {
         int32_t temp = value;
         bool changed = false;
 
@@ -230,7 +230,7 @@ namespace SR_GRAPH_GUI_NS {
         return result;
     }
 
-    static bool DrawSlider(const std::string& label,
+    SR_MAYBE_UNUSED static bool DrawSlider(const std::string& label,
                            SR_MATH_NS::Unit& value,
                            float_t min = 0.0f,
                            float_t max = 0.0f,
@@ -296,7 +296,7 @@ namespace SR_GRAPH_GUI_NS {
 
     static bool DrawDataType(SR_SRLM_NS::DataType* pData, bool* pIsEnum, void* pProvider, float_t width = 0, uint32_t deep = 0);
 
-    static bool DrawColorControl(
+    SR_MAYBE_UNUSED static bool DrawColorControl(
             const std::string& label,
             SR_MATH_NS::FVector4& values,
             float_t resetValue = 0.0f,
@@ -305,8 +305,6 @@ namespace SR_GRAPH_GUI_NS {
             uint32_t index = 0)
     {
         bool result = false;
-
-        ImGuiIO& io = ImGui::GetIO();
 
         ImGui::PushID(label.c_str());
 
@@ -368,7 +366,7 @@ namespace SR_GRAPH_GUI_NS {
         return result;
     }
 
-    static bool DrawEditableSlider(const std::string& label,
+    SR_MAYBE_UNUSED static bool DrawEditableSlider(const std::string& label,
            SR_MATH_NS::Unit& value,
            float_t min = 0.0f,
            float_t max = 0.0f,
@@ -411,7 +409,7 @@ namespace SR_GRAPH_GUI_NS {
          );
     }
 
-    static bool DrawFRect(
+    SR_MAYBE_UNUSED static bool DrawFRect(
            const std::array<std::string, 4>& names,
            SR_MATH_NS::FRect& value,
            float_t min = 0.0f,
@@ -449,7 +447,7 @@ namespace SR_GRAPH_GUI_NS {
         return dirty;
     }
 
-    static bool DrawVec3Control(
+    SR_MAYBE_UNUSED static bool DrawVec3Control(
             const std::string& label,
             SR_MATH_NS::FVector3& values,
             float_t resetValue = 0.0f,
@@ -459,8 +457,6 @@ namespace SR_GRAPH_GUI_NS {
             bool active = true)
     {
         bool result = false;
-
-        ImGuiIO& io = ImGui::GetIO();
 
         ImGui::PushID(label.c_str());
 
@@ -508,7 +504,7 @@ namespace SR_GRAPH_GUI_NS {
         return result;
     }
 
-    static bool DrawBVec3Control(
+    SR_MAYBE_UNUSED static bool DrawBVec3Control(
             const std::string& label,
             SR_MATH_NS::BVector3& values,
             bool resetValue,
@@ -516,8 +512,6 @@ namespace SR_GRAPH_GUI_NS {
             uint32_t index = 0)
     {
         bool result = false;
-
-        ImGuiIO& io = ImGui::GetIO();
 
         ImGui::PushID(label.c_str());
 
@@ -564,8 +558,8 @@ namespace SR_GRAPH_GUI_NS {
 
         return result;
     }
-    
-    static bool DrawUVec2Control(
+
+    SR_MAYBE_UNUSED static bool DrawUVec2Control(
         const std::string& label,
         SR_MATH_NS::UVector2& values,
         uint32_t resetValue = 0,
@@ -575,8 +569,6 @@ namespace SR_GRAPH_GUI_NS {
         bool active = true)
     {
         bool result = false;
-
-        ImGuiIO& io = ImGui::GetIO();
 
         ImGui::PushID(label.c_str());
 
@@ -616,7 +608,7 @@ namespace SR_GRAPH_GUI_NS {
         return result;
     }
 
-    static bool DrawIVec3Control(
+    SR_MAYBE_UNUSED static bool DrawIVec3Control(
             const std::string& label,
             SR_MATH_NS::IVector3& values,
             int32_t resetValue = 0,
@@ -626,8 +618,6 @@ namespace SR_GRAPH_GUI_NS {
             bool active = true)
     {
         bool result = false;
-
-        ImGuiIO& io = ImGui::GetIO();
 
         ImGui::PushID(label.c_str());
 
@@ -675,7 +665,7 @@ namespace SR_GRAPH_GUI_NS {
         return result;
     }
 
-    static bool CheckBox(const std::string& name, bool& value, bool active = true) {
+    SR_MAYBE_UNUSED static bool CheckBox(const std::string& name, bool& value, bool active = true) {
         ImGui::PushItemFlag(ImGuiItemFlags_Disabled, !active);
 
         const bool result = ImGui::Checkbox(name.c_str(), &value);
@@ -685,7 +675,7 @@ namespace SR_GRAPH_GUI_NS {
         return result;
     }
 
-    static bool Button(const std::string& label, ImVec4 color = ImVec4(0, 0, 0, 0), ImVec4 hovered = ImVec4(0, 0, 0, 0), uint32_t index = 0) {
+    SR_MAYBE_UNUSED static bool Button(const std::string& label, ImVec4 color = ImVec4(0, 0, 0, 0), ImVec4 hovered = ImVec4(0, 0, 0, 0), uint32_t index = 0) {
         const auto hasBtnColor = !Vec4Null(color);
         const auto hasHoveredColor = !Vec4Null(hovered);
 
@@ -711,7 +701,7 @@ namespace SR_GRAPH_GUI_NS {
         return result;
     }
 
-    static bool Button(const std::string& label, uint32_t index = 0) {
+    SR_MAYBE_UNUSED static bool Button(const std::string& label, uint32_t index = 0) {
         return Button(label, ImVec4(0, 0, 0, 0), ImVec4(0, 0, 0, 0), index);
     }
 
@@ -720,7 +710,7 @@ namespace SR_GRAPH_GUI_NS {
     bool CheckboxNoNavFocus(const char* label, bool* v);
     bool ButtonBehaviorNoNavFocus(const ImRect& bb, ImGuiID id, bool* out_hovered, bool* out_held, ImGuiButtonFlags flags = 0);
 
-    static float CalcMaxPopupHeightFromItemCount(int items_count)
+    SR_MAYBE_UNUSED static float CalcMaxPopupHeightFromItemCount(int items_count)
     {
         ImGuiContext& g = *GImGui;
         if (items_count <= 0)
@@ -728,7 +718,7 @@ namespace SR_GRAPH_GUI_NS {
         return (g.FontSize + g.Style.ItemSpacing.y) * items_count - g.Style.ItemSpacing.y + (g.Style.WindowPadding.y * 2);
     }
 
-    static bool BeginNodeCombo(const char* label, const char* preview_value, ImGuiComboFlags flags = 0)
+    SR_MAYBE_UNUSED static bool BeginNodeCombo(const char* label, const char* preview_value, ImGuiComboFlags flags = 0)
     {
         using namespace ImGui;
 
@@ -849,7 +839,7 @@ namespace SR_GRAPH_GUI_NS {
         return true;
     }
 
-    static void EndNodeCombo()
+    SR_MAYBE_UNUSED static void EndNodeCombo()
     {
         ImGui::EndPopup();
 

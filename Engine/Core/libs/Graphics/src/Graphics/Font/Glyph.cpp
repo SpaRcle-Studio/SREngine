@@ -7,8 +7,8 @@
 namespace SR_GRAPH_NS {
     Glyph::Glyph(FT_Glyph pGlyph, FT_Render_Mode renderMode)
         : Super()
-        , m_glyph(pGlyph)
         , m_renderMode(renderMode)
+        , m_glyph(pGlyph)
     {
         FT_Glyph_To_Bitmap(&m_glyph, m_renderMode, 0, 1);
         FT_BitmapGlyph bitmap_glyph = (FT_BitmapGlyph)m_glyph;

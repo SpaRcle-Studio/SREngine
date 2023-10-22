@@ -26,13 +26,13 @@ namespace SR_GRAPH_NS::Memory {
         ~VirtualProgramInfo() override = default;
 
         VirtualProgramInfo(VirtualProgramInfo&& ref) noexcept {
-            m_data = std::exchange(ref.m_data, {});
-            m_createInfo = std::exchange(ref.m_createInfo, {});
+            m_data = SR_UTILS_NS::Exchange(ref.m_data, {});
+            m_createInfo = SR_UTILS_NS::Exchange(ref.m_createInfo, {});
         }
 
         VirtualProgramInfo& operator=(VirtualProgramInfo&& ref) noexcept {
-            m_data = std::exchange(ref.m_data, {});
-            m_createInfo = std::exchange(ref.m_createInfo, {});
+            m_data = SR_UTILS_NS::Exchange(ref.m_data, {});
+            m_createInfo = SR_UTILS_NS::Exchange(ref.m_createInfo, {});
             return *this;
         }
 

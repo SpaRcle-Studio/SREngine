@@ -7,6 +7,8 @@
 #include <Utils/SRLM/DataType.h>
 #include <Utils/Platform/Platform.h>
 
+#include <utility>
+
 namespace SR_GRAPH_GUI_NS {
     Pin::Pin()
         : Pin(std::string(), PinKind::None, nullptr)
@@ -20,15 +22,14 @@ namespace SR_GRAPH_GUI_NS {
         : Pin(name, kind, nullptr)
     { }
 
-
     Pin::Pin(const std::string& name, Pin::DataTypePtr pData)
         : Pin(name, PinKind::None, pData)
     { }
 
-    Pin::Pin(const std::string& name, PinKind kind, DataTypePtr pDataType)
-        : m_name(name)
+    Pin::Pin(std::string name, PinKind kind, DataTypePtr pDataType)
+        : m_dataType(pDataType)
+        , m_name(std::move(name))
         , m_kind(kind)
-        , m_dataType(pDataType)
     { }
 
     Pin::~Pin() {
@@ -225,8 +226,6 @@ namespace SR_GRAPH_GUI_NS {
                 if (!pReflector) {
                     break;
                 }
-
-                auto&& enumValue = pReflector->ToStringInternal(*pEnum->GetEnum());
 
                 if (ImGui::BeginPopup(SR_FORMAT_C("pin_enum_popup%p", (void*)this))) {
                     ImGui::TextDisabled("Select:");

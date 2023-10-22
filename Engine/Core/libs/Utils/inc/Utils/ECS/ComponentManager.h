@@ -66,7 +66,7 @@ namespace SR_UTILS_NS {
             return nullptr;
         }
 
-        const std::unordered_map<std::string, size_t>& GetComponentsNames() const {
+        const std::unordered_map<std::string, Hash>& GetComponentsNames() const {
             SR_SCOPED_LOCK
             return m_ids;
         }

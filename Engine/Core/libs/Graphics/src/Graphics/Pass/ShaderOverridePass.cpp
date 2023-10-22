@@ -104,8 +104,6 @@ namespace SR_GRAPH_NS {
 
         m_pipeline->SetCurrentFrameBuffer(m_framebuffer);
 
-        auto&& pRenderScene = GetRenderScene();
-
         auto&& pIdentifier = m_uboManager.GetIdentifier();
         m_uboManager.SetIdentifier(this);
 

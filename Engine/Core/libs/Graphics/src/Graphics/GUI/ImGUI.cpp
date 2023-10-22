@@ -6,6 +6,7 @@
 #include <Graphics/Pipeline/PipelineType.h>
 
 namespace SR_GRAPH_GUI_NS {
+#ifdef SR_USE_IMGUI
     void DrawTextOnCenter(const std::string& text, ImVec4 color, bool sameLine) {
         const auto fontSize = ImGui::GetFontSize() * static_cast<float_t>(text.size()) / 2.f;
 
@@ -268,4 +269,5 @@ namespace SR_GRAPH_GUI_NS {
         bb.Max = bb.Min + ImGui::CalcItemSize(split_vertically ? ImVec2(thickness, splitter_long_axis_size) : ImVec2(splitter_long_axis_size, thickness), 0.0f, 0.0f);
         return ImGui::SplitterBehavior(bb, id, split_vertically ? ImGuiAxis_X : ImGuiAxis_Y, size1, size2, min_size1, min_size2, 0.0f);
     }
+#endif
 }
