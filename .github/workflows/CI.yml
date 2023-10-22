@@ -71,7 +71,7 @@ jobs:
         run: |
           cmake -G "Ninja" ../ -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=${{github.workspace}}/../ninja/ninja.exe" 
           cmake --build . -j 4
-          rmdir 
+          echo y | del * /S /Q
           
       - if: "contains(github.event.head_commit.message, '#SR_CI_ALL')"
         name: Building All - Release.
