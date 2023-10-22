@@ -26,10 +26,11 @@ jobs:
           BODY: ${{ env.GIT_COMMIT_MESSAGE_BODY }}
     
       - name: Handling arguments 
-        shell: bash
-        run: | 
-          cd CI
-          arguments_handling.py ${BODY}
+        #shell: bash
+        #run: | 
+        #  cd CI
+        #  arguments_handling.py ${BODY}
+        run: echo ${{ env.GIT_COMMIT_MESSAGE_BODY }}
     
       - name: Fetching repo and installing Vulkan SDK
         uses: actions/checkout@v3
