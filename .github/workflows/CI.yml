@@ -65,6 +65,7 @@ jobs:
         run: |
           cmake -G "Ninja" ../ -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=${{github.workspace}}/../ninja/ninja.exe" 
           cmake --build . -j 4
+          echo "uploadDebug=true" >> "$GITHUB_ENV"
 
       - if: "contains(github.event.head_commit.message, '#SR_CI_ALL')"
         name: Building All - Debug.
@@ -73,6 +74,7 @@ jobs:
         run: |
          cmake -G "Ninja" ../ -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=${{github.workspace}}/../ninja/ninja.exe" 
          cmake --build . -j 4
+         echo "uploadDebug=true" >> "$GITHUB_ENV"
 
       - if: "contains(github.event.head_commit.message, '#SR_CI_ALL')"
         name: Building All - Release.
@@ -89,7 +91,7 @@ jobs:
         name: Creating a Debug Build Trace.
         shell: bash 
         working-directory: ${{github.workspace}}/CI
-        run: ninjatracing.py ../build/.ninja_log > trace.json
+        run: python ninjatracing.py ../build/.ninja_log > trace.json
         
       - if: | 
           contains(github.event.head_commit.message, '#SR_CI_ALL')
@@ -97,7 +99,7 @@ jobs:
         name: Creating a Release Build Trace.
         shell: bash 
         working-directory: ${{github.workspace}}/CI
-        run: ninjatracing.py ../build-release/.ninja_log > trace-release.json
+        run: python ninjatracing.py ../build-release/.ninja_log > trace-release.json
         
       - if: |
           contains(github.event.head_commit.message, '#SR_CI_ALL')
@@ -121,7 +123,15 @@ jobs:
       - if: env.uploadRelease == 'true'
         uses: actions/upload-artifact@v3
         with:
-          name: 'SREngine Release Artifact'
+          name: 'SREngine Release Artifact.'
           path: | 
             '${{github.workspace}}/build-release/Engine/release/'
+            '${{github.workspace}}/Resources'
+
+      - if: env.uploadDebug == 'true'
+        uses: actions/upload-artifact@v3
+        with:
+          name: 'SREngine Debug Artifact.'
+          path: | 
+            '${{github.workspace}}/build/Engine/debug/'
             '${{github.workspace}}/Resources'
