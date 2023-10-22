@@ -33,7 +33,7 @@ jobs:
           
       - name: Handling arguments
         shell: bash 
-        working-directory: $github.workspace/CI
+        working-directory: ${{github.workspace}}/CI
         run: |
           arguments_handling.py github.event.head_commit.message
           
