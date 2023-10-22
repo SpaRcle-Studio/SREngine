@@ -26,11 +26,10 @@ jobs:
             Body: env.GIT_COMMIT_MESSAGE_BODY
 
       - name: Handling arguments 
-        uses: jannekem/run-python-script-action@v1
-        with:
-          script: |
-            body = get_input($Body)
-            print("body")
+        shell: bash
+        run: | 
+          cd ${{github.workspace}}/CI
+          arguments_handling.py $Body
     
       - name: Fetching repo and installing Vulkan SDK
         uses: actions/checkout@v3
