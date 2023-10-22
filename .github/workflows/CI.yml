@@ -19,7 +19,8 @@ jobs:
     runs-on: windows-2022
     if: "!contains(github.event.head_commit.message, '#SR_CI_NONE')"
     steps:
-      - if: github.event.head_commit.message == ''
+      - if: "github.event.head_commit.message == ''"
+        name: Checking for aguments existence.
         run: |
           echo "buildDebug=true" >> "$GITHUB_ENV"
     
