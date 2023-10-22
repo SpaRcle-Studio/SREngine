@@ -19,14 +19,11 @@ jobs:
     runs-on: windows-2022
     if: "!contains(github.event.head_commit.message, '#SR_CI_NONE')"
     steps:
-      - if: ${{ github.event.head_commit.message }} == ''
+      - if: "${{ github.event.head_commit.message }} != '#SR_CI_DEBUG' && ${{ github.event.head_commit.message }} != '#SR_CI_RELEASE' && ${{ github.event.head_commit.message }} != '#SR_CI_ALL'"
         name: Checking for aguments existence.
         shell: bash
         run: |
-          if [ "${{ github.event.head_commit.message }}" == '' ]; then
-            echo "buildDebug=true" >> "$GITHUB_ENV";
-          fi
-          exit 1
+          echo "buildDebug=true" >> "$GITHUB_ENV";
     
       - name: Fetching repository.
         uses: actions/checkout@v3
