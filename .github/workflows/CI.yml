@@ -17,8 +17,12 @@ jobs:
   Preparing:
     name: Preparing and building.
     runs-on: windows-2022
-    if:  "!contains(github.event.head_commit.message, '#SR_CI_NONE')"
+    if: "!contains(github.event.head_commit.message, '#SR_CI_NONE')"
     steps:
+      - if: github.event.head_commit.message == ''
+        run: |
+          echo "buildDebug=true" >> "$GITHUB_ENV"
+    
       - name: Fetching repository.
         uses: actions/checkout@v3
         with:
@@ -46,92 +50,136 @@ jobs:
 
       - name: Creating Building Environment.
         run: |
-         cmake -E make_directory ${{github.workspace}}/build
+         cmake -E make_directory ${{github.workspace}}/build-debug
          cmake -E make_directory ${{github.workspace}}/build-release
 
       - if: "contains(github.event.head_commit.message, '#SR_CI_RELEASE')"
-        name: Building Release.
-        shell: bash
-        working-directory: ${{github.workspace}}/build
         run: |
-          cmake -G "Ninja" ../ -DCMAKE_BUILD_TYPE=Release "-DCMAKE_MAKE_PROGRAM=${{github.workspace}}/../ninja/ninja.exe" 
-          cmake --build . -j 4
-          echo "uploadRelease=true" >> "$GITHUB_ENV"
+          echo "buildRelease=true" >> "$GITHUB_ENV"
 
       - if: "contains(github.event.head_commit.message, '#SR_CI_DEBUG')"
-        name: Building Debug.
-        shell: bash
-        working-directory: ${{github.workspace}}/build
         run: |
-          cmake -G "Ninja" ../ -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=${{github.workspace}}/../ninja/ninja.exe" 
-          cmake --build . -j 4
-          echo "uploadDebug=true" >> "$GITHUB_ENV"
+          echo "buildDebug=true" >> "$GITHUB_ENV"
 
       - if: "contains(github.event.head_commit.message, '#SR_CI_ALL')"
-        name: Building All - Debug.
-        shell: bash
-        working-directory: ${{github.workspace}}/build
         run: |
-         cmake -G "Ninja" ../ -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=${{github.workspace}}/../ninja/ninja.exe" 
-         cmake --build . -j 4
-         echo "uploadDebug=true" >> "$GITHUB_ENV"
+          echo "buildRelease=true" >> "$GITHUB_ENV"
+          echo "buildDebug=true" >> "$GITHUB_ENV"
 
-      - if: "contains(github.event.head_commit.message, '#SR_CI_ALL')"
-        name: Building All - Release.
+      - if: env.buildRelease == 'true'
+        name: Building Release.
         shell: bash
         working-directory: ${{github.workspace}}/build-release
         run: |
+          echo "releaseSuccessful=false" >> "$GITHUB_ENV"
           cmake -G "Ninja" ../ -DCMAKE_BUILD_TYPE=Release "-DCMAKE_MAKE_PROGRAM=${{github.workspace}}/../ninja/ninja.exe" 
           cmake --build . -j 4
-          echo "uploadRelease=true" >> "$GITHUB_ENV"
+          echo "releaseSuccessful=true" >> "$GITHUB_ENV"
+
+      - if: env.buildDebug == 'true'
+        name: Building Debug.
+        shell: bash
+        working-directory: ${{github.workspace}}/build-debug
+        run: |
+          echo "debugSuccessful=false" >> "$GITHUB_ENV"
+          cmake -G "Ninja" ../ -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=${{github.workspace}}/../ninja/ninja.exe" 
+          cmake --build . -j 4
+          echo "debugSuccessful=true" >> "$GITHUB_ENV"
           
-      - if: |
-          contains(github.event.head_commit.message, '#SR_CI_ALL')
-            || contains(github.event.head_commit.message, '#SR_CI_DEBUG') 
-        name: Creating a Debug Build Trace.
+      - if: env.buildDebug == 'true'
+        name: Creating a Debug build trace.
         shell: bash 
         working-directory: ${{github.workspace}}/CI
-        run: python ninjatracing.py ../build/.ninja_log > trace.json
+        run: python ninjatracing.py ../build-debug/.ninja_log > trace-debug.json
         
-      - if: | 
-          contains(github.event.head_commit.message, '#SR_CI_ALL')
-            || contains(github.event.head_commit.message, '#SR_CI_RELEASE')     
-        name: Creating a Release Build Trace.
+      - if: env.buildRelease == 'true'  
+        name: Creating a Release build trace.
         shell: bash 
         working-directory: ${{github.workspace}}/CI
         run: python ninjatracing.py ../build-release/.ninja_log > trace-release.json
         
-      - if: |
-          contains(github.event.head_commit.message, '#SR_CI_ALL')
-            || contains(github.event.head_commit.message, '#SR_CI_DEBUG') 
-            
-        name: Uploading a Debug Build Trace Artifact.
+      - if: env.buildDebug == 'true'
+        name: Uploading a Debug build trace artifact.
         uses: actions/upload-artifact@v3
         with:
           name: 'SREngine Debug Build Trace Artifact'
-          path: '${{github.workspace}}/CI/trace.json'
+          path: '${{github.workspace}}/CI/trace-debug.json'
          
-      - if: |
-          contains(github.event.head_commit.message, '#SR_CI_ALL')
-            || contains(github.event.head_commit.message, '#SR_CI_RELEASE') 
-        name: Uploading a Release Build Trace Artifact.
+      - if: env.buildRelease == 'true'
+        name: Uploading a Release build trace artifact.
         uses: actions/upload-artifact@v3
         with:
           name: 'SREngine Release Build Trace Artifact'
           path: '${{github.workspace}}/CI/trace-release.json'
 
-      - if: env.uploadRelease == 'true'
-        uses: actions/upload-artifact@v3
-        with:
-          name: 'SREngine Release Artifact.'
-          path: | 
-            '${{github.workspace}}/build-release/Engine/release/'
-            '${{github.workspace}}/Resources'
+      - if: env.debugSuccessful == 'true'
+        name: Creating Debug artifact.
+        working-directory: ${{github.workspace}}/build-debug/Engine
+        shell: bash
+        run: | 
+          rename debug Bin
+          md SREngineDebugBuild
+          md SREngineDebugBuild/Resources
+          md SREngineDebugBuild/Bin
+          move Bin SREngineDebugBuild
+          cd ../../
+          move Resources build-debug/Engine/SREngineDebugBuild
 
-      - if: env.uploadDebug == 'true'
+      - if: env.releaseSuccessful == 'true'
+        name: Creating Release artifact.
+        working-directory: ${{github.workspace}}/build-release/Engine
+        shell: bash
+        run: | 
+          rename release Bin
+          md SREngineReleaseBuild
+          md SREngineReleaseBuild/Resources
+          md SREngineReleaseBuild/Bin
+          move Bin SREngineReleaseBuild
+          cd ../../
+          move Resources build-release/Engine/SREngineReleaseBuild
+        
+      - if: env.debugSuccessful == 'true'
+        name: Uploading a successful Debug build artifact.
         uses: actions/upload-artifact@v3
         with:
-          name: 'SREngine Debug Artifact.'
-          path: | 
-            '${{github.workspace}}/build/Engine/debug/'
-            '${{github.workspace}}/Resources'
+          name: SREngine Debug
+          path: '${{github.workspace}}/build-debug/Engine/SREngineDebugBuild'
+
+      - if: env.releaseSuccessful == 'true'
+        name: Uploading a successful Release build artifact.
+        uses: actions/upload-artifact@v3
+        with:
+          name: SREngine Release
+          path: '${{github.workspace}}/build-release/Engine/SREngineReleaseBuild'
+      
+
+      - if: env.debugSuccessful == 'false'
+        name: Uploading a failed Debug build artifact.
+        uses: actions/upload-artifact@v3
+        with:
+          name: 'SREngine Failed Debug'
+          path: '${{github.workspace}}/build-debug'
+
+      - if: env.releaseSuccessful == 'false'
+        name: Uploading a failed Release build artifact.
+        uses: actions/upload-artifact@v3
+        with:
+          name: 'SREngine Failed Release'
+          path: '${{github.workspace}}/build-release'
+        
+  
+      #- if: env.releaseSuccessfull == 'true'
+      #  uses: actions/upload-artifact@v3
+      #  with:
+      #    name: 'SREngine Release Artifact.'
+      #    path: | 
+      #      '${{github.workspace}}/build-release/Engine/release/'
+      #      '${{github.workspace}}/Resources'
+
+      #- if: env.uploadDebug == 'true'
+      #  uses: actions/upload-artifact@v3
+      #  with:
+      #    name: 'SREngine Debug Artifact.'
+      #    path: | 
+      #      '${{github.workspace}}/build/Engine/debug/'
+      #      '${{github.workspace}}/Resources'
