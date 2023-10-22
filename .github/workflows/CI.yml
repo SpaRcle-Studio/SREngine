@@ -53,8 +53,6 @@ jobs:
         name: Building Release.
         shell: bash
         working-directory: ${{github.workspace}}/build
-        env:
-          traceRelease:  'true'
         run: |
           cmake -G "Ninja" ../ -DCMAKE_BUILD_TYPE=Release "-DCMAKE_MAKE_PROGRAM=${{github.workspace}}/../ninja/ninja.exe" 
           cmake --build . -j 4
@@ -63,8 +61,6 @@ jobs:
         name: Building Debug.
         shell: bash
         working-directory: ${{github.workspace}}/build
-        env:
-          traceDebug: 'true'
         run: |
           cmake -G "Ninja" ../ -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=${{github.workspace}}/../ninja/ninja.exe" 
           cmake --build . -j 4
@@ -73,8 +69,6 @@ jobs:
         name: Building All - Debug.
         shell: bash
         working-directory: ${{github.workspace}}/build
-        env:
-          traceDebug: 'true'
         run: |
          cmake -G "Ninja" ../ -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=${{github.workspace}}/../ninja/ninja.exe" 
          cmake --build . -j 4
@@ -83,34 +77,41 @@ jobs:
         name: Building All - Release.
         shell: bash
         working-directory: ${{github.workspace}}/build-release
-        env:
-          traceRelease: 'true'
         run: |
           cmake -G "Ninja" ../ -DCMAKE_BUILD_TYPE=Release "-DCMAKE_MAKE_PROGRAM=${{github.workspace}}/../ninja/ninja.exe" 
           cmake --build . -j 4
           
-      - if: env.traceDebug == 'true'      
+      - if: |
+          contains(github.event.head_commit.message, '#SR_CI_ALL')
+            || contains(github.event.head_commit.message, '#SR_CI_RELEASE') 
         name: Creating a Debug Build Trace.
         shell: bash 
         working-directory: ${{github.workspace}}/CI
         run: ninjatracing.py ../build/.ninja_log > trace.json
         
-      - if: env.traceRelease == 'true'      
+      - if: | 
+          contains(github.event.head_commit.message, '#SR_CI_ALL')
+            || contains(github.event.head_commit.message, '#DEBUG')     
         name: Creating a Release Build Trace.
         shell: bash 
         working-directory: ${{github.workspace}}/CI
         run: ninjatracing.py ../build-release/.ninja_log > trace-release.json
         
-      - if: env.traceDebug == 'true'
+      - if: |
+          contains(github.event.head_commit.message, '#SR_CI_ALL')
+            || contains(github.event.head_commit.message, '#SR_CI_DEBUG') 
+            
         name: Uploading a Debug Build Trace Artifact.
         uses: actions/upload-artifact@v3
         with:
-         name: 'SREngine Debug Build Trace Artifact'
-         path: '${{github.workspace}}/CI/trace.json'
+          name: 'SREngine Debug Build Trace Artifact'
+          path: '${{github.workspace}}/CI/trace.json'
          
-      - if: env.traceRelease == 'true'
+      - if: |
+          contains(github.event.head_commit.message, '#SR_CI_ALL')
+            || contains(github.event.head_commit.message, '#SR_CI_RELEASE') 
         name: Uploading a Release Build Trace Artifact.
         uses: actions/upload-artifact@v3
         with:
-         name: 'SREngine Release Build Trace Artifact'
-         path: '${{github.workspace}}/CI/trace-release.json'
+          name: 'SREngine Release Build Trace Artifact'
+          path: '${{github.workspace}}/CI/trace-release.json'
