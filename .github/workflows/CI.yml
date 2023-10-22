@@ -25,6 +25,8 @@ jobs:
         run: |
           if [ "${{ github.event.head_commit.message }}" == '' ]; then
             echo "buildDebug=true" >> "$GITHUB_ENV";
+          fi
+          exit 1
     
       - name: Fetching repository.
         uses: actions/checkout@v3
