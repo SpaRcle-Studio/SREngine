@@ -10,10 +10,12 @@ def main():
                 ciArguments.append(value)
             
     for argument in ciArguments:
+        argument[1:]
         print(f"{argument}=true")
         ciValues.remove(argument)
         
     for value in ciValues:
+        value[1:]
         print(f"{argument}=false")
     
 if __name__ == "__main__":
