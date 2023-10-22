@@ -54,7 +54,7 @@ jobs:
         shell: bash
         working-directory: ${{github.workspace}}/build
         env:
-          traceRelease:  true
+          traceRelease:  'true'
         run: |
           cmake -G "Ninja" ../ -DCMAKE_BUILD_TYPE=Release "-DCMAKE_MAKE_PROGRAM=${{github.workspace}}/../ninja/ninja.exe" 
           cmake --build . -j 4
@@ -64,7 +64,7 @@ jobs:
         shell: bash
         working-directory: ${{github.workspace}}/build
         env:
-          traceDebug: true
+          traceDebug: 'true'
         run: |
           cmake -G "Ninja" ../ -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=${{github.workspace}}/../ninja/ninja.exe" 
           cmake --build . -j 4
@@ -74,7 +74,7 @@ jobs:
         shell: bash
         working-directory: ${{github.workspace}}/build
         env:
-          traceDebug: true
+          traceDebug: 'true'
         run: |
          cmake -G "Ninja" ../ -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=${{github.workspace}}/../ninja/ninja.exe" 
          cmake --build . -j 4
@@ -84,7 +84,7 @@ jobs:
         shell: bash
         working-directory: ${{github.workspace}}/build-release
         env:
-          traceRelease: true
+          traceRelease: 'true'
         run: |
           cmake -G "Ninja" ../ -DCMAKE_BUILD_TYPE=Release "-DCMAKE_MAKE_PROGRAM=${{github.workspace}}/../ninja/ninja.exe" 
           cmake --build . -j 4
