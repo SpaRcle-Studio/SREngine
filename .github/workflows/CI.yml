@@ -17,8 +17,8 @@ jobs:
   Preparing:
     name: Preparing and building.
     runs-on: windows-2022
+    if:  "!contains(github.event.head_commit.message, '#SR_CI_NONE')"
     steps:
-      - if:  "contains(github.event.head_commit.message, '#SR_CI_NONE')"
   
       - name: Fetching repository.
         uses: actions/checkout@v3
