@@ -123,7 +123,7 @@ jobs:
       - if: env.debugSuccessful == 'true'
         name: Creating Debug artifact.
         working-directory: ${{github.workspace}}/build-debug/Engine
-        shell: bash
+        shell: cmd
         run: | 
           rename debug Bin
           md SREngineDebugBuild
@@ -136,7 +136,7 @@ jobs:
       - if: env.releaseSuccessful == 'true'
         name: Creating Release artifact.
         working-directory: ${{github.workspace}}/build-release/Engine
-        shell: bash
+        shell: cmd
         run: | 
           rename release Bin
           md SREngineReleaseBuild
