@@ -15,7 +15,7 @@ on:
 
 jobs:  
   Preparing:
-    name: Preparing Environment.
+    name: Preparing and building.
     runs-on: windows-2022
     steps:
       - name: Fetching repository.
