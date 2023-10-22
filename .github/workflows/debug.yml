@@ -21,7 +21,7 @@ jobs:
 
     steps:
       - name: Handling arguments 
-        working-directory: CI
+        working-directory: ../CI
         shell: bash
         run: | 
           arguments_handling.py ${{github.event.head_commit.message}}
