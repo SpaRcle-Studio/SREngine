@@ -34,8 +34,21 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            manifestPlaceholders.main_library_name = "sparcle"
+        }
+        debug {
+            jniDebuggable true
+            debuggable true
+            manifestPlaceholders.main_library_name = "sparcled"
         }
     }
+
+    packagingOptions {
+        jniLibs {
+            pickFirsts += ['**/libz.so', '**/libvulkan.so', '**/libOpenSLES.so', '**/liblog.so']
+        }
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8

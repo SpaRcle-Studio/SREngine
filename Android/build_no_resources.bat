@@ -30,29 +30,9 @@ if not exist %APK_UNSIGNED_FILE% (
 	goto LABEL_FAIL
 )
 
-IF NOT EXIST "key.keystore" (
-	echo Create key.keystore
-	"%PLATFORM_TOOLS%/keytool.exe" -noprompt -genkey -v -keystore key.keystore -alias android -keyalg RSA -keysize 2048 -validity 20000
-) 
+"cmd /c sign_apk.bat"
 
-echo Build application
-
-"%PLATFORM_TOOLS%/jarsigner.exe" -storepass 123456 -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore key.keystore "%APK_UNSIGNED_FILE%" android
-"%PLATFORM_TOOLS%/jarsigner.exe" -verify "%APK_UNSIGNED_FILE%"
-
-echo Zip align apk...
-
-"%PLATFORM_TOOLS%/zipalign.exe" -v 4 "%APK_UNSIGNED_FILE%" "%APK_SIGNED_FILE%"
-
-echo Apk signing...
-
-echo 123456|"java.exe" -jar "%PLATFORM_TOOLS%/apksigner.jar" sign --ks key.keystore --ks-key-alias android "%APK_SIGNED_FILE%"
-
-echo Uninstall application...
-"%PLATFORM_TOOLS%/adb.exe" uninstall "%APP_NAME%"
-
-echo Install application...
-"%PLATFORM_TOOLS%/adb.exe" install -r "%APK_SIGNED_FILE%"
+"cmd /c install_app.bat"
 
 goto LABEL_SUCCESS
 

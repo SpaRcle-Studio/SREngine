@@ -47,5 +47,7 @@ target_link_libraries(sparcle
     GLESv1_CM
 )
 
+set_target_properties(sparcle PROPERTIES DEBUG_POSTFIX "")
+
 target_include_directories(sparcle PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../../../../../Engine/Core/inc)
 target_include_directories(Core PUBLIC ${CMAKE_CURRENT_BINARY_DIR}/../Utils/include)

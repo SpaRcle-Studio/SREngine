@@ -174,9 +174,14 @@ static void engine_term_display(struct engine* engine) {
 static int32_t engine_handle_input(struct android_app* app, AInputEvent* event) {
     auto* engine = (struct engine*)app->userData;
     if (AInputEvent_getType(event) == AINPUT_EVENT_TYPE_MOTION) {
-        engine->animating = 1;
-        engine->state.x = AMotionEvent_getX(event, 0);
-        engine->state.y = AMotionEvent_getY(event, 0);
+        if (engine) {
+            engine->animating = 1;
+            engine->state.x = AMotionEvent_getX(event, 0);
+            engine->state.y = AMotionEvent_getY(event, 0);
+        }
+        else {
+            app->onInputEvent = nullptr;
+        }
         return 1;
     }
     return 0;
@@ -268,7 +273,32 @@ ASensorManager* AcquireASensorManagerInstance(android_app* app) {
     return getInstanceFunc();
 }
 
+#include <unistd.h>
+
 void android_main(struct android_app* state) {
+
+    state->onInputEvent = engine_handle_input;
+
+    while (state->onInputEvent)
+    {
+        int out_events;
+        struct android_poll_source* out_data;
+
+        // Poll all events. If the app is not visible, this loop blocks until g_Initialized == true. g_Initialized ? 0 : -1
+        while (ALooper_pollAll(0, NULL, &out_events, (void**)&out_data) >= 0)
+        {
+            // Process one event
+            if (out_data != NULL)
+                out_data->process(state, out_data);
+
+            // Exit the app by returning from within the infinite loop
+            if (state->destroyRequested != 0)
+            {
+                return;
+            }
+        }
+    }
+
     SR_PLATFORM_NS::SetInstance(state);
 
     auto&& applicationPath = SR_PLATFORM_NS::GetApplicationPath().GetFolder();
