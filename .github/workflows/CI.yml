@@ -136,6 +136,7 @@ jobs:
           md SREngineDebugBuild/Resources
           md SREngineDebugBuild/Bin
           move Bin SREngineDebugBuild
+          copy SREngine.exe SREngineDebugBuild/Bin
           cd ../../
           move Resources build-debug/Engine/SREngineDebugBuild
 
@@ -149,6 +150,7 @@ jobs:
           md SREngineReleaseBuild/Resources
           md SREngineReleaseBuild/Bin
           move Bin SREngineReleaseBuild
+          copy SREngine.exe SREngineDebugBuild/Bin
           cd ../../
           move Resources build-release/Engine/SREngineReleaseBuild
         
@@ -165,7 +167,6 @@ jobs:
         with:
           name: SREngine Release
           path: '${{github.workspace}}/build-release/Engine/SREngineReleaseBuild'
-      
 
       - if: env.debugSuccessful == 'false' || env.artifactPush == 'true'
         name: Uploading a failed Debug build artifact.
