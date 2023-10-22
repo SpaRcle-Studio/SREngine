@@ -22,12 +22,14 @@ jobs:
     steps:
       - name: Getting arguments         
         uses: rlespinasse/git-commit-data-action@v1.5.0
+        env:
+            Body: env.GIT_COMMIT_MESSAGE_BODY
 
       - name: Handling arguments 
         uses: jannekem/run-python-script-action@v1
         with:
           script: |
-            body = get_input(${{env.GIT_COMMIT_MESSAGE_BODY}})
+            body = get_input($Body)
             print("body")
     
       - name: Fetching repo and installing Vulkan SDK
