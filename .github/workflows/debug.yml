@@ -28,7 +28,7 @@ jobs:
 
       - name: Handling arguments
         shell: bash 
-        working-directory: ${{runner.workspace}}/CI
+        working-directory: $RUNNER_WORKSPACE/CI
         run: |
           arguments_handling.py github.event.head_commit.message
     
