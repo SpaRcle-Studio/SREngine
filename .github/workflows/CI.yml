@@ -19,10 +19,11 @@ jobs:
     runs-on: windows-2022
     if: "!contains(github.event.head_commit.message, '#SR_CI_NONE')"
     steps:
-      - if: "github.event.head_commit.message == ''"
+      - if: ${{ github.event.head_commit.message }} == ''
         name: Checking for aguments existence.
         run: |
-          echo "buildDebug=true" >> "$GITHUB_ENV"
+          if [ "${{ github.event.head_commit.message }}" == '' ]; then
+            echo "buildDebug=true" >> "$GITHUB_ENV";
     
       - name: Fetching repository.
         uses: actions/checkout@v3
@@ -56,16 +57,19 @@ jobs:
 
       - if: "contains(github.event.head_commit.message, '#SR_CI_RELEASE')"
         name: Handling "#SR_CI_RELEASE" argument.
+        shell: bash
         run: |
           echo "buildRelease=true" >> "$GITHUB_ENV"
 
       - if: "contains(github.event.head_commit.message, '#SR_CI_DEBUG')"
         name: Handling "#SR_CI_DEBUG" argument.
+        shell: bash
         run: |
           echo "buildDebug=true" >> "$GITHUB_ENV"
 
       - if: "contains(github.event.head_commit.message, '#SR_CI_ALL')"
         name: Handling "#SR_CI_ALL" argument.
+        shell: bash
         run: |
           echo "buildRelease=true" >> "$GITHUB_ENV"
           echo "buildDebug=true" >> "$GITHUB_ENV"
