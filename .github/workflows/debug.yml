@@ -21,11 +21,10 @@ jobs:
 
     steps:
       - name: Handling arguments 
+        working-directory: ${{github.workspace}}/CI
         shell: bash
         run: | 
-          dir
-        #  arguments_handling.py ${BODY}
-        #run: echo ${{github.event.head_commit.message}}
+          arguments_handling.py ${{github.event.head_commit.message}}
     
       - name: Fetching repo and installing Vulkan SDK
         uses: actions/checkout@v3
