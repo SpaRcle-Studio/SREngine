@@ -22,15 +22,15 @@ jobs:
     steps:
       - name: Getting arguments
         uses: rlespinasse/git-commit-data-action@v1.5.0
-        env: 
-          BODY: ${{ env.GIT_COMMIT_MESSAGE_BODY }}
+        #env: 
+        #  BODY: ${{ env.GIT_COMMIT_MESSAGE_BODY }}
     
       - name: Handling arguments 
         #shell: bash
         #run: | 
         #  cd CI
         #  arguments_handling.py ${BODY}
-        run: echo ${{ env.GIT_COMMIT_MESSAGE_BODY }}
+        run: echo ${{github.event.head_commit.message}}
     
       - name: Fetching repo and installing Vulkan SDK
         uses: actions/checkout@v3
