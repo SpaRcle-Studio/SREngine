@@ -56,6 +56,7 @@ jobs:
         run: |
           cmake -G "Ninja" ../ -DCMAKE_BUILD_TYPE=Release "-DCMAKE_MAKE_PROGRAM=${{github.workspace}}/../ninja/ninja.exe" 
           cmake --build . -j 4
+          echo "uploadRelease=true" >> "$GITHUB_ENV"
 
       - if: "contains(github.event.head_commit.message, '#SR_CI_DEBUG')"
         name: Building Debug.
@@ -80,6 +81,7 @@ jobs:
         run: |
           cmake -G "Ninja" ../ -DCMAKE_BUILD_TYPE=Release "-DCMAKE_MAKE_PROGRAM=${{github.workspace}}/../ninja/ninja.exe" 
           cmake --build . -j 4
+          echo "uploadRelease=true" >> "$GITHUB_ENV"
           
       - if: |
           contains(github.event.head_commit.message, '#SR_CI_ALL')
@@ -115,3 +117,11 @@ jobs:
         with:
           name: 'SREngine Release Build Trace Artifact'
           path: '${{github.workspace}}/CI/trace-release.json'
+
+      - if: env.uploadRelease == 'true'
+        uses: actions/upload-artifact@v3
+        with:
+          name: 'SREngine Release Artifact'
+          path: | 
+            '${{github.workspace}}/build-release/Engine/release/'
+            '${{github.workspace}}/Resources'
