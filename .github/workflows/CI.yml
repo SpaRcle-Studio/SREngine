@@ -68,6 +68,12 @@ jobs:
           echo "buildRelease=true" >> "$GITHUB_ENV"
           echo "buildDebug=true" >> "$GITHUB_ENV"
 
+      - if: "contains(github.event.head_commit.message, '#SR_CI_ARTIFACT')"
+        name: Handling "#SR_CI_ARTIFACT" argument.
+        shell: bash
+        run: |
+          echo "artifactPush=true" >> "$GITHUB_ENV"
+
       - if: env.buildRelease != 'true' && env.buildDebug != 'true'
         name: Setting default argument.
         shell: bash
@@ -161,14 +167,14 @@ jobs:
           path: '${{github.workspace}}/build-release/Engine/SREngineReleaseBuild'
       
 
-      - if: env.debugSuccessful == 'false'
+      - if: env.debugSuccessful == 'false' || env.artifactPush == 'true'
         name: Uploading a failed Debug build artifact.
         uses: actions/upload-artifact@v3
         with:
           name: 'SREngine Failed Debug'
           path: '${{github.workspace}}/build-debug'
 
-      - if: env.releaseSuccessful == 'false'
+      - if: env.releaseSuccessful == 'false' || env.artifactPush == 'true'
         name: Uploading a failed Release build artifact.
         uses: actions/upload-artifact@v3
         with:
