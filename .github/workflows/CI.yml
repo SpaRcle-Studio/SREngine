@@ -54,14 +54,17 @@ jobs:
          cmake -E make_directory ${{github.workspace}}/build-release
 
       - if: "contains(github.event.head_commit.message, '#SR_CI_RELEASE')"
+        name: Handling "#SR_CI_RELEASE" argument.
         run: |
           echo "buildRelease=true" >> "$GITHUB_ENV"
 
       - if: "contains(github.event.head_commit.message, '#SR_CI_DEBUG')"
+        name: Handling "#SR_CI_DEBUG" argument.
         run: |
           echo "buildDebug=true" >> "$GITHUB_ENV"
 
       - if: "contains(github.event.head_commit.message, '#SR_CI_ALL')"
+        name: Handling "#SR_CI_ALL" argument.
         run: |
           echo "buildRelease=true" >> "$GITHUB_ENV"
           echo "buildDebug=true" >> "$GITHUB_ENV"
