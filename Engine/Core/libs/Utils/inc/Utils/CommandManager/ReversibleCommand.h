@@ -35,8 +35,8 @@ namespace SR_UTILS_NS {
         ~GroupCommand() override;
 
     private:
-        virtual bool Redo() override;
-        virtual bool Undo() override;
+        bool Redo() override;
+        bool Undo() override;
         std::string GetName() override { return "GroupCommand"; } ;
 
     public:

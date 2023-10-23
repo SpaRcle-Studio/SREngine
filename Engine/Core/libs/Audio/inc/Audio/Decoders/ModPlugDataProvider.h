@@ -17,15 +17,15 @@ namespace SR_AUDIO_NS {
         explicit ModPlugDataProvider(const RawSoundDataPtr& data);
         ~ModPlugDataProvider() override;
 
-        virtual const WaveDataFormat& GetWaveDataFormat() const override { return m_format; }
+        SR_NODISCARD const WaveDataFormat& GetWaveDataFormat() const override { return m_format; }
 
-        virtual const uint8_t* GetWaveData() const override;
-        virtual size_t GetWaveDataSize() const override;
+        const uint8_t* GetWaveData() const override;
+        size_t GetWaveDataSize() const override;
 
-        virtual size_t StreamWaveData(size_t size) override;
-        virtual bool IsStreaming() const override { return true; }
-        virtual bool IsEndOfStream() const override { return m_isEndOfStream; }
-        virtual void Seek(float_t seconds) override;
+        size_t StreamWaveData(size_t size) override;
+        bool IsStreaming() const override { return true; }
+        bool IsEndOfStream() const override { return m_isEndOfStream; }
+        void Seek(float_t seconds) override;
 
     private:
         int DecodeFromFile(size_t size);

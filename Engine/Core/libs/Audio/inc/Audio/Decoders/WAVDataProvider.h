@@ -13,13 +13,13 @@ namespace SR_AUDIO_NS {
     public:
         explicit WAVDataProvider(const RawSoundDataPtr& data);
 
-        SR_NODISCARD virtual const WaveDataFormat &GetWaveDataFormat() const override { return m_format; }
+        SR_NODISCARD const WaveDataFormat &GetWaveDataFormat() const override { return m_format; }
 
-        SR_NODISCARD virtual const uint8_t *GetWaveData() const override;
-        SR_NODISCARD virtual size_t GetWaveDataSize() const override;
-        SR_NODISCARD virtual size_t StreamWaveData(size_t Size) override;
+        SR_NODISCARD const uint8_t *GetWaveData() const override;
+        SR_NODISCARD size_t GetWaveDataSize() const override;
+        SR_NODISCARD size_t StreamWaveData(size_t Size) override;
 
-        virtual void Seek(float Seconds) override;
+        void Seek(float Seconds) override;
 
     private:
         RawSoundDataPtr m_data;
