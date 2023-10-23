@@ -61,9 +61,9 @@ namespace SR_GRAPH_NS {
             }
 
             // If a sensor has data, process it now.
-            if (ident == LOOPER_ID_USER) {
+            /*if (ident == LOOPER_ID_USER) {
 
-            }
+            }*/
 
             // Check if we are exiting.
             if (pAndroidApp->destroyRequested != 0) {

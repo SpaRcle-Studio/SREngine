@@ -3,7 +3,7 @@ from distutils.version import StrictVersion
 
 try:
     import winapps
-except:
+except ImportError:
     subprocess.run([sys.executable, '-m', 'pip', 'install', 'winapps'])
     import winapps
 
@@ -65,4 +65,4 @@ def main() -> bool:
 
 if __name__ == "__main__":
     if not main():
-        os.system('pause')
+        input()
