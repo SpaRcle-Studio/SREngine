@@ -163,28 +163,11 @@ namespace SR_UTILS_NS {
 
         auto&& fitWidth = [&]() {
             scale.x *= 1.f / aspect;
-
-            //if (translation.x > 0) {
-            //    translation.x += (aspect - 1.f) * scale.x;
-            //}
-            //else if (translation.x < 0) {
-            //    translation.x -= (aspect - 1.f) * scale.x;
-            //}
         };
 
         auto&& fitHeight = [&]() {
             scale.y *= aspect;
-
-           //if (translation.y > 0) {
-           //    translation.y += (1.f - aspect) * scale.y;
-           //}
-           //else if (translation.y < 0) {
-           //    translation.y -= (1.f - aspect) * scale.y;
-           //}
         };
-
-        //auto&& otherAspect = (float)screenSize.Width() / (float)screenSize.Height();
-        //auto&& myAspect = (float)_refferenceW / (float)_refferenceH;
 
         /// Компенсация растяжения родительской ноды
         switch (m_stretch) {
@@ -227,38 +210,73 @@ namespace SR_UTILS_NS {
             return SR_MATH_NS::FVector3();
         }
 
-        auto&& parentScale = pParent->GetScale();
+        const auto parentScale = pParent->GetScale();
 
-        auto&& horizontalAspect = (parentScale / m_scale).XY().Aspect();
-        auto&& horizontalAnchor = (horizontalAspect - 1.f) * (1.f / horizontalAspect);
+        SR_MATH_NS::FVector3 stretch;
 
-        auto&& verticalAspect = (parentScale / m_scale).XY().AspectInv();
-        auto&& verticalAnchor = (verticalAspect - 1.f) * (1.f / verticalAspect);
+        if (m_stretch == Stretch::ShowAll) {
+            if (scale.XY().Aspect() > 1.f) {
+                stretch = SR_MATH_NS::FVector3(1.f, 1.f, 1.f);
+            }
+            else {
+                stretch = SR_MATH_NS::FVector3(scale.y, scale.x, 1.f);
+            }
+        }
+        else if (m_stretch == Stretch::WidthControlsHeight) {
+            stretch = parentScale;
+        }
+        else if (m_stretch == Stretch::ChangeAspect || m_stretch == Stretch::HeightControlsWidth) {
+            stretch = SR_MATH_NS::FVector3(1.f);
+        }
+        else if (m_stretch == Stretch::NoBorder) {
+            if (scale.XY().Aspect() > 1.f) {
+                stretch = parentScale;
+            }
+            else {
+                stretch = SR_MATH_NS::FVector3(1.f);
+            }
+        }
+
+        const auto horizontalAspect = (stretch / m_scale).XY().Aspect();
+        const auto horizontalAnchor = (horizontalAspect - 1.f) * (1.f / horizontalAspect);
+
+        const auto verticalAspect = (stretch / m_scale).XY().AspectInv();
+        const auto verticalAnchor = (verticalAspect - 1.f) * (1.f / verticalAspect);
+
+        SR_MATH_NS::FVector3 translation = m_translation;
+
+        if (m_anchor != Anchor::None) {
+            translation = SR_MATH_NS::FVector3(
+                m_translation.x * (1.f / horizontalAspect),
+                m_translation.y * (1.f / verticalAspect),
+                m_translation.z
+            );
+        }
 
         switch (m_anchor) {
             case Anchor::None:
             case Anchor::MiddleCenter:
-                return m_translation;
+                return translation;
 
             case Anchor::MiddleLeft:
-                return m_translation + SR_MATH_NS::FVector3(-horizontalAnchor, 0.f, 0.f);
+                return translation + SR_MATH_NS::FVector3(-horizontalAnchor, 0.f, 0.f);
             case Anchor::MiddleRight:
-                return m_translation + SR_MATH_NS::FVector3(horizontalAnchor, 0.f, 0.f);
+                return translation + SR_MATH_NS::FVector3(horizontalAnchor, 0.f, 0.f);
 
             case Anchor::TopCenter:
-                return m_translation + SR_MATH_NS::FVector3(0.f, verticalAnchor, 0.f);
+                return translation + SR_MATH_NS::FVector3(0.f, verticalAnchor, 0.f);
             case Anchor::BottomCenter:
-                return m_translation + SR_MATH_NS::FVector3(0.f, -verticalAnchor, 0.f);
+                return translation + SR_MATH_NS::FVector3(0.f, -verticalAnchor, 0.f);
 
             case Anchor::TopLeft:
-                return m_translation + SR_MATH_NS::FVector3(-horizontalAnchor, verticalAnchor, 0.f);
+                return translation + SR_MATH_NS::FVector3(-horizontalAnchor, verticalAnchor, 0.f);
             case Anchor::TopRight:
-                return m_translation + SR_MATH_NS::FVector3(horizontalAnchor, verticalAnchor, 0.f);
+                return translation + SR_MATH_NS::FVector3(horizontalAnchor, verticalAnchor, 0.f);
 
             case Anchor::BottomLeft:
-                return m_translation + SR_MATH_NS::FVector3(-horizontalAnchor, -verticalAnchor, 0.f);
+                return translation + SR_MATH_NS::FVector3(-horizontalAnchor, -verticalAnchor, 0.f);
             case Anchor::BottomRight:
-                return m_translation + SR_MATH_NS::FVector3(horizontalAnchor, -verticalAnchor, 0.f);
+                return translation + SR_MATH_NS::FVector3(horizontalAnchor, -verticalAnchor, 0.f);
 
             default:
                 return SR_MATH_NS::FVector3();
