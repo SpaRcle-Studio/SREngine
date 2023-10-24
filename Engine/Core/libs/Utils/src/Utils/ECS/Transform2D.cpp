@@ -237,10 +237,10 @@ namespace SR_UTILS_NS {
             }
         }
 
-        const auto horizontalAspect = (stretch / m_scale).XY().Aspect();
+        const auto horizontalAspect = SR_MATH_NS::FVector2(stretch.XY() / m_scale.x).Aspect();
         const auto horizontalAnchor = (horizontalAspect - 1.f) * (1.f / horizontalAspect);
 
-        const auto verticalAspect = (stretch / m_scale).XY().AspectInv();
+        const auto verticalAspect = SR_MATH_NS::FVector2(stretch.XY() / m_scale.y).AspectInv();
         const auto verticalAnchor = (verticalAspect - 1.f) * (1.f / verticalAspect);
 
         SR_MATH_NS::FVector3 translation = m_translation;
