@@ -12,6 +12,7 @@
 
 #include <android/sensor.h>
 
+#include <Core/Application.h>
 #include <Utils/Platform/Platform.h>
 #include <Utils/Platform/AndroidNativeAppGlue.h>
 #include <Utils/Debug.h>
@@ -279,68 +280,37 @@ void android_main(struct android_app* state) {
 
     state->onInputEvent = engine_handle_input;
 
-    while (state->onInputEvent)
-    {
-        int out_events;
-        struct android_poll_source* out_data;
+    /*//SREngine
 
-        // Poll all events. If the app is not visible, this loop blocks until g_Initialized == true. g_Initialized ? 0 : -1
-        while (ALooper_pollAll(0, NULL, &out_events, (void**)&out_data) >= 0)
-        {
-            // Process one event
-            if (out_data != NULL)
-                out_data->process(state, out_data);
+    auto&& pApplication = SR_CORE_NS::Application::MakeShared();
 
-            // Exit the app by returning from within the infinite loop
-            if (state->destroyRequested != 0)
-            {
-                return;
-            }
-        }
+    int32_t code = 0;
+
+    char **argv = nullptr;
+    int argc = 1;
+
+    if (!pApplication->PreInit(argc, argv)) {
+        SR_PLATFORM_NS::WriteConsoleError("Failed to pre-initialize application!\n");
+        code = -1;
     }
 
-    SR_PLATFORM_NS::SetInstance(state);
+    if (code == 0 && !pApplication->Init()) {
+        SR_ERROR("Failed to initialize application!");
+        code = -2;
+    }
 
-    auto&& applicationPath = SR_PLATFORM_NS::GetApplicationPath().GetFolder();
-    SR_UTILS_NS::Debug::Instance().Init(applicationPath, true, SR_UTILS_NS::Debug::Theme::Dark);
-    SR_UTILS_NS::Debug::Instance().SetLevel(SR_UTILS_NS::Debug::Level::Low);
+    if (code == 0 && !pApplication->Execute()) {
+        SR_ERROR("Failed to execute application!");
+        code = -3;
+    }
 
-    SR_SYSTEM_LOG("Run SpaRcle Engine on android...");
-
-    SR_HTYPES_NS::Thread::Factory::Instance().SetMainThread();
-    SR_HTYPES_NS::Time::Instance().Update();
-
-    SR_UTILS_NS::ResourceManager::Instance().Init("");
-
-    SR_UTILS_NS::Features::Instance().SetPath(SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Engine/Configs/Features.xml"));
-
-    SR_WORLD_NS::SceneAllocator::Instance().Init([]() -> SR_WORLD_NS::Scene* {
-        return new SR_CORE_NS::World();
+    pApplication->AutoFree([](auto&& pData) {
+        delete pData;
     });
 
-    /*auto&& engine = SR_CORE_NS::Engine::Instance();
+    //return code;
 
-    if (engine.Create()) {
-        if (engine.Init()) {
-            if (!engine.Run()) {
-                SR_ERROR("Failed to run game engine!");
-            }
-        }
-        else {
-            SR_ERROR("Failed to initialize game engine!");
-        }
-    }
-    else {
-        SR_ERROR("Failed to create game engine!");
-    }
-
-    if (engine.IsRun()) {
-        SR_SYSTEM_LOG("All systems are successfully running!");
-
-        engine.Await(); /// await close engine
-    }
-
-    engine.Close();*/
+    //SREngine*/
 
     struct engine engineAndroid{};
 

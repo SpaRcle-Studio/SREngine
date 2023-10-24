@@ -24,3 +24,4 @@ out
 Build
 /CMakeSettings.json
 /Android/app/src/main/assets
+/Android/local.properties
