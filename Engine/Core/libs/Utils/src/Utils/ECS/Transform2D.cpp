@@ -124,13 +124,8 @@ namespace SR_UTILS_NS {
         }
     }
 
-    void Transform2D::SetTranslationAnchor(Anchor anchorType) {
-        m_anchorTranslation = anchorType;
-        UpdateTree();
-    }
-
-    void Transform2D::SetScaleAnchor(Anchor anchorType) {
-        m_anchorScale = anchorType;
+    void Transform2D::SetAnchor(Anchor anchorType) {
+        m_anchor = anchorType;
         UpdateTree();
     }
 
@@ -142,8 +137,7 @@ namespace SR_UTILS_NS {
     Transform *Transform2D::Copy() const {
         auto&& pTransform = new Transform2D();
 
-        pTransform->m_anchorTranslation = m_anchorTranslation;
-        pTransform->m_anchorScale = m_anchorScale;
+        pTransform->m_anchor = m_anchor;
         pTransform->m_priority = m_priority;
         pTransform->m_stretch = m_stretch;
 
@@ -260,19 +254,16 @@ namespace SR_UTILS_NS {
         const auto verticalAspect = SR_MATH_NS::FVector2(stretchVertical.XY()).AspectInv();
         auto verticalAnchor = (verticalAspect - 1.f) * (1.f / verticalAspect);
 
-        /// aspect-ed translation
-        SR_MATH_NS::FVector3 translation;// = SR_MATH_NS::FVector3(
-        //    m_translation.x * (1.f / horizontalAspect),
-        //    m_translation.y * (1.f / verticalAspect),
-        //    m_translation.z
-        //);
-
-        translation.x += m_translation.x * m_scale.x * (1.f / horizontalAspect);
+        const SR_MATH_NS::FVector3 translation = SR_MATH_NS::FVector3(
+            m_translation.x * m_scale.x * (1.f / horizontalAspect),
+            m_translation.y * m_scale.y * (1.f / verticalAspect),
+            0.f
+        );
 
         horizontalAnchor += (1.f - m_scale.x) * (1.f / horizontalAspect);
         verticalAnchor += (1.f - m_scale.y) * (1.f / verticalAspect);
 
-        switch (m_anchorTranslation) {
+        switch (m_anchor) {
             case Anchor::None:
             case Anchor::MiddleCenter:
                 return translation;
@@ -280,7 +271,7 @@ namespace SR_UTILS_NS {
             case Anchor::MiddleLeft:
                 return translation + SR_MATH_NS::FVector3(-horizontalAnchor, 0.f, 0.f);
             case Anchor::MiddleRight:
-                return translation + SR_MATH_NS::FVector3(horizontalAnchor, 0.f, 0.f); // (1.f - m_scale.x) * (1.f / horizontalAspect)
+                return translation + SR_MATH_NS::FVector3(horizontalAnchor, 0.f, 0.f);
 
             case Anchor::TopCenter:
                 return translation + SR_MATH_NS::FVector3(0.f, verticalAnchor, 0.f);
