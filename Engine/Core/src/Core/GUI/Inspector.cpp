@@ -232,12 +232,24 @@ namespace SR_CORE_GUI_NS {
         if (Graphics::GUI::DrawVec3Control("Skew", skew, 1.f) && !skew.HasZero())
             pTransform->SetSkew(skew);
 
-        if (ImGui::BeginCombo("Anchor", SR_UTILS_NS::EnumReflector::ToString(pTransform->GetAnchor()).c_str())) {
+        if (ImGui::BeginCombo("Translation anchor", SR_UTILS_NS::EnumReflector::ToString(pTransform->GetTranslationAnchor()).c_str())) {
             auto&& selectables = SR_UTILS_NS::EnumReflector::GetNames<SR_UTILS_NS::Anchor>();
             for (auto&& selectable : selectables) {
                 if (ImGui::Selectable(selectable.c_str())) {
                     ImGui::SetItemDefaultFocus();
-                    pTransform->SetAnchor(SR_UTILS_NS::EnumReflector::FromString<SR_UTILS_NS::Anchor>(selectable));
+                    pTransform->SetTranslationAnchor(SR_UTILS_NS::EnumReflector::FromString<SR_UTILS_NS::Anchor>(selectable));
+                }
+            }
+
+            ImGui::EndCombo();
+        }
+
+        if (ImGui::BeginCombo("Scale anchor", SR_UTILS_NS::EnumReflector::ToString(pTransform->GetScaleAnchor()).c_str())) {
+            auto&& selectables = SR_UTILS_NS::EnumReflector::GetNames<SR_UTILS_NS::Anchor>();
+            for (auto&& selectable : selectables) {
+                if (ImGui::Selectable(selectable.c_str())) {
+                    ImGui::SetItemDefaultFocus();
+                    pTransform->SetScaleAnchor(SR_UTILS_NS::EnumReflector::FromString<SR_UTILS_NS::Anchor>(selectable));
                 }
             }
 

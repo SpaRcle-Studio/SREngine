@@ -76,6 +76,13 @@ namespace SR_GRAPH_NS::UI {
                 pTransform->SetScale(SR_MATH_NS::FVector3(aspect, 1.f, 1.f));
 
                 /// if (aspect > 1.f) {
+                ///     pTransform->SetScale(SR_MATH_NS::FVector3(aspect, 1.f, 1.f));
+                /// }
+                /// else {
+                ///     pTransform->SetScale(SR_MATH_NS::FVector3(1.f, 1.f / aspect, 1.f));
+                /// }
+
+                /// if (aspect > 1.f) {
                 ///     pTransform->SetScale(SR_MATH_NS::FVector3(1.f, 1.f, 1.f));
                 /// }
                 /// else {

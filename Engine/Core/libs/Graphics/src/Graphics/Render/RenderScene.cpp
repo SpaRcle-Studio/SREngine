@@ -288,8 +288,7 @@ namespace SR_GRAPH_NS {
             if (pMesh->IsFlatMesh()) {
                 m_flat.Add(pMesh);
             }
-            else
-                if (pMesh->GetMaterial()->IsTransparent()) {
+            else if (pMesh->GetMaterial()->IsTransparent()) {
                 m_transparent.Add(pMesh);
             }
             else {

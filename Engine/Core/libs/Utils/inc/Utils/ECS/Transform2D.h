@@ -43,7 +43,8 @@ namespace SR_UTILS_NS {
         void SetGlobalTranslation(const SR_MATH_NS::FVector3& translation) override;
         void SetGlobalRotation(const SR_MATH_NS::FVector3& eulers) override;
 
-        void SetAnchor(Anchor anchorType);
+        void SetTranslationAnchor(Anchor anchorType);
+        void SetScaleAnchor(Anchor anchorType);
         void SetStretch(Stretch stretch);
 
         void SetLocalPriority(int32_t priority) { m_localPriority = priority; m_isDirtyPriority = true; }
@@ -60,7 +61,8 @@ namespace SR_UTILS_NS {
 
         SR_NODISCARD const SR_MATH_NS::Matrix4x4& GetMatrix() override;
 
-        SR_NODISCARD Anchor GetAnchor() const { return m_anchor; }
+        SR_NODISCARD Anchor GetTranslationAnchor() const { return m_anchorTranslation; }
+        SR_NODISCARD Anchor GetScaleAnchor() const { return m_anchorScale; }
         SR_NODISCARD Stretch GetStretch() const { return m_stretch; }
 
         SR_NODISCARD int32_t GetPriority();
@@ -77,11 +79,9 @@ namespace SR_UTILS_NS {
         SR_INLINE static constexpr SR_MATH_NS::FVector2 RIGHT = Math::FVector2(1, 0);
         SR_INLINE static constexpr SR_MATH_NS::FVector2 UP    = Math::FVector2(0, 1);
 
-        SR_INLINE static constexpr float_t ReferenceW = 1024.f;
-        SR_INLINE static constexpr float_t ReferenceH = 768.f;
-
     protected:
-        Anchor m_anchor = Anchor::None;
+        Anchor m_anchorTranslation = Anchor::None;
+        Anchor m_anchorScale = Anchor::None;
         Stretch m_stretch = Stretch::ShowAll;
 
         int32_t m_priority = 0;
