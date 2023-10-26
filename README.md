@@ -2,6 +2,11 @@
 
 [![Project Status: Active – The project is under active delopment!.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active) [![CodeFactor](https://www.codefactor.io/repository/github/sparcle-studio/srengine/badge/dev)](https://www.codefactor.io/repository/github/sparclestudio/srengine/overview/dev)
 
+SpaRcle Engine is an ongoing game engine developed in C++. 
+It aims to establish a strong base for game creation and is currently in the early stages of development, emphasizing the creation of a versatile and efficient architecture.
+
+## Screenshots
+
 <img width="1920" alt="image_2023-05-31_21-40-59" src="https://github.com/Monika0000/SREngine/assets/47291246/6bf73c99-81a2-4a3e-ad28-4c788884eb38">
 <img width="1920" alt="image_2023-05-31_21-40-59" src="https://github.com/Monika0000/SREngine/assets/47291246/32cfdbcb-5a0d-4a74-9501-539da40379e2">
 
