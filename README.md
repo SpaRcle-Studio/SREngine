@@ -1,6 +1,21 @@
-# SpaRcle Engine
-
-[![Project Status: Active – The project is under active delopment!.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active) [![CodeFactor](https://www.codefactor.io/repository/github/sparcle-studio/srengine/badge/dev)](https://www.codefactor.io/repository/github/sparclestudio/srengine/overview/dev)
+<p align="center">
+ <h1 align="center">SpaRcle Engine</h2>
+ <p align="center">Get dynamically generated GitHub stats on your READMEs!</p>
+</p>
+  <p align="center">
+    <a href="https://github.com/anuraghazra/github-readme-stats/actions">
+      <img alt="Project Status: Active – The project is under active delopment!." src="https://www.repostatus.org/badges/latest/active.svg" />
+    </a>
+    <a href="https://github.com/anuraghazra/github-readme-stats/graphs/contributors">
+      <img alt="CodeFactor." src="https://www.codefactor.io/repository/github/sparcle-studio/srengine/badge/dev" />
+    </a>
+    <a href="https://codecov.io/gh/anuraghazra/github-readme-stats">
+      <img alt="GitHub Contributors." src="https://img.shields.io/github/contributors/SpaRcle-Studio/SREngine" />
+    </a>
+    <a href="https://github.com/anuraghazra/github-readme-stats/issues">
+      <img alt="Issues" src="https://img.shields.io/github/issues/SpaRcle-Studio/SREngine?color=0088ff" />
+    </a>
+  </p>
 
 SpaRcle Engine is an ongoing game engine developed in C++. 
 It aims to establish a strong base for game creation and is currently in the early stages of development, emphasizing the creation of a versatile and efficient architecture.
