@@ -24,6 +24,7 @@ namespace SR_GRAPH_NS {
         , m_context(pContext)
         , m_opaque(&m_transparent)
         , m_transparent(&m_opaque)
+        , m_flat(this)
     {
         m_debugRender->Init();
     }

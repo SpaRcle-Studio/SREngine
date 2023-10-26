@@ -258,4 +258,16 @@ namespace SR_UTILS_NS {
         SRHalt("Not implemented!");
         return nullptr;
     }
+
+    void IComponentable::OnPriorityDirty() {
+        for (auto&& pComponent : m_components) {
+            pComponent->OnPriorityDirty();
+        }
+    }
+
+    void IComponentable::OnMatrixDirty() {
+        for (auto&& pComponent : m_components) {
+            pComponent->OnMatrixDirty();
+        }
+    }
 }

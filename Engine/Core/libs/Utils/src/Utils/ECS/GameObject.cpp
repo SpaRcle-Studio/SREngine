@@ -85,12 +85,6 @@ namespace SR_UTILS_NS {
         });
     }
 
-    void GameObject::OnMatrixDirty() {
-        for (auto&& pComponent : m_components) {
-            pComponent->OnMatrixDirty();
-        }
-    }
-
     bool GameObject::AddChild(const GameObject::Ptr& child) {
         if (child.Get() == this) {
             SRHalt("It is impossible to make the parent a child!");
@@ -172,7 +166,7 @@ namespace SR_UTILS_NS {
             m_scene->OnChanged();
         }
 
-        m_transform->UpdateTree();
+        m_transform->OnHierarchyChanged();
 
         return true;
     }

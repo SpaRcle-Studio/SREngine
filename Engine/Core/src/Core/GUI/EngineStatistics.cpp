@@ -28,6 +28,7 @@ namespace SR_CORE_GUI_NS {
             WidgetsPage();
             VideoMemoryPage();
             SubmitQueuePage();
+            FlatClusterPage();
 
             ImGui::EndTabBar();
         }
@@ -316,5 +317,55 @@ namespace SR_CORE_GUI_NS {
         }
 
         ImGui::Separator();
+    }
+
+    void EngineStatistics::FlatClusterPage() {
+        auto&& pRenderScene = GetRenderScene();
+        if (!pRenderScene) {
+            return;
+        }
+
+        if (ImGui::BeginTabItem("Flat cluster"))
+        {
+            if (ImGui::BeginTable("##FlatCluster", 4))
+            {
+                uint32_t index = 0;
+
+                for (auto&& pMesh : pRenderScene->GetFlatCluster()) {
+                    ++index;
+
+                    if (!pMesh) {
+                        continue;
+                    }
+
+                    ImGui::TableNextRow();
+
+                    ImGui::TableSetColumnIndex(0);
+                    ImGui::Text("Index: %i", index);
+                    ImGui::Separator();
+
+                    ImGui::TableSetColumnIndex(1);
+                    if (auto&& pMeshComponent = dynamic_cast<SR_GTYPES_NS::MeshComponent*>(pMesh); pMeshComponent && pMeshComponent->GetGameObject()) {
+                        ImGui::Text("GameObject: %s", pMeshComponent->GetGameObject()->GetName().c_str());
+                    }
+                    else {
+                        ImGui::Text("Geometry: %s", pMesh->GetGeometryName().c_str());
+                    }
+                    ImGui::Separator();
+
+                    ImGui::TableSetColumnIndex(2);
+                    ImGui::Text("Priority: %lli", pMesh->GetSortingPriority());
+                    ImGui::Separator();
+
+                    ImGui::TableSetColumnIndex(3);
+                    ImGui::Text("%s", pMesh->GetShader() ? pMesh->GetShader()->GetResourceId().data() : "[no shader]");
+                    ImGui::Separator();
+                }
+
+                ImGui::EndTable();
+            }
+
+            ImGui::EndTabItem();
+        }
     }
 }

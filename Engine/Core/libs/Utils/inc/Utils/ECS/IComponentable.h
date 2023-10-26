@@ -63,6 +63,9 @@ namespace SR_UTILS_NS {
             return dynamic_cast<T*>(GetComponent(T::COMPONENT_HASH_NAME));
         }
 
+        virtual void OnPriorityDirty();
+        virtual void OnMatrixDirty();
+
         SR_NODISCARD virtual ScenePtr GetScene() const;
 
     protected:

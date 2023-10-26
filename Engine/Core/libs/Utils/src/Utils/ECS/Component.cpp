@@ -28,6 +28,13 @@ namespace SR_UTILS_NS {
 
     void Component::SetParent(IComponentable* pParent) {
         m_parent = pParent;
+
+        if (auto&& pGameObject = dynamic_cast<SR_UTILS_NS::GameObject*>(m_parent)) {
+            m_gameObject = pGameObject->GetThis().DynamicCast<GameObject>();
+        }
+        else {
+            m_gameObject.Reset();
+        }
     }
 
     void Component::SetEnabled(bool value) {
@@ -43,13 +50,11 @@ namespace SR_UTILS_NS {
     }
 
     void Component::CheckActivity() {
-        SRAssert1Once(m_parent);
-
-        auto&& pParent = dynamic_cast<SR_UTILS_NS::GameObject*>(m_parent);
+        SRAssert1Once(m_gameObject);
 
         /// если родителя нет, или он отличается от ожидаемого, то будем считать, что родитель активен.
         /// сцена выключенной (в понимании игровых объектов) быть не может.
-        const bool isActive = m_isEnabled && (!pParent || pParent->m_isActive);
+        const bool isActive = m_isEnabled && (!m_gameObject || m_gameObject->m_isActive);
         if (isActive == m_isActive) {
             return;
         }
@@ -77,8 +82,8 @@ namespace SR_UTILS_NS {
         /// как не установит "m_parent" в "nullptr"
 
         /// наиболее часто ожидаемое поведение, это GameObject-родитель, поэтому проверяем его первым делом
-        if (auto&& pGameObject = dynamic_cast<SR_UTILS_NS::GameObject*>(m_parent)) {
-            return pGameObject->GetScene();
+        if (m_gameObject) {
+            return m_gameObject->GetScene();
         }
 
         if (auto&& pScene = dynamic_cast<SR_WORLD_NS::Scene*>(m_parent)) {
@@ -90,12 +95,7 @@ namespace SR_UTILS_NS {
 
     Component::GameObjectPtr Component::GetGameObject() const {
         SRAssert(m_parent);
-
-        if (auto&& pGameObject = dynamic_cast<SR_UTILS_NS::GameObject*>(m_parent)) {
-            return pGameObject->GetThis().DynamicCast<GameObject>();
-        }
-
-        return GameObjectPtr();
+        return m_gameObject;
     }
 
     IComponentable* Component::GetParent() const {
@@ -105,13 +105,11 @@ namespace SR_UTILS_NS {
     GameObject::Ptr Component::GetRoot() const {
         SRAssert(m_parent);
 
-        auto&& pParent = dynamic_cast<SR_UTILS_NS::GameObject*>(m_parent);
-
-        if (!pParent) {
+        if (!m_gameObject) {
             return GameObjectPtr();
         }
 
-        GameObjectPtr root = pParent->GetThis().DynamicCast<GameObject>();
+        GameObjectPtr root = m_gameObject;
 
         while (root.Valid()) {
             if (auto&& parent = root->GetParent()) {
@@ -128,8 +126,8 @@ namespace SR_UTILS_NS {
     Transform* Component::GetTransform() const noexcept {
         SRAssert(m_parent);
 
-        if (auto&& pGameObject = dynamic_cast<SR_UTILS_NS::GameObject*>(m_parent)) {
-            return pGameObject->GetTransform();
+        if (m_gameObject) {
+            return m_gameObject->GetTransform();
         }
 
         return nullptr;

@@ -99,13 +99,13 @@ namespace SR_HTYPES_NS {
 
         /// Оставляем методы для совместимости с SafePtr
         void Replace(const SharedPtr &ptr);
+        void Reset();
         SR_NODISCARD SR_FORCE_INLINE bool RecursiveLockIfValid() const noexcept;
         SR_NODISCARD SR_FORCE_INLINE bool TryRecursiveLockIfValid() const noexcept;
         SR_FORCE_INLINE void Unlock() const noexcept { /** nothing */  }
 
     private:
         bool FreeImpl(const SR_HTYPES_NS::Function<void(T *ptr)> &freeFun);
-        void Destroy();
 
     private:
         SharedPtrDynamicData* m_data = nullptr;
@@ -147,11 +147,11 @@ namespace SR_HTYPES_NS {
     }
 
     template<class T> SharedPtr<T>::~SharedPtr() {
-        Destroy();
+        Reset();
     }
 
     template<class T> SharedPtr<T>& SharedPtr<T>::operator=(const SharedPtr<T> &ptr) {
-        Destroy();
+        Reset();
 
         m_ptr = ptr.m_ptr;
 
@@ -165,7 +165,7 @@ namespace SR_HTYPES_NS {
 
     template<class T> SharedPtr<T>& SharedPtr<T>::operator=(T *ptr) {
         if (m_ptr != ptr) {
-            Destroy();
+            Reset();
 
             bool needAlloc = true;
 
@@ -235,11 +235,13 @@ namespace SR_HTYPES_NS {
         return m_data && m_data->valid;
     }
 
-    template<class T> void SharedPtr<T>::Destroy() {
+    template<class T> void SharedPtr<T>::Reset() {
         /// Делаем копию, так как в процессе удаления можем потярять this,
         /// а так же зануляем m_data, чтобы не войти в рекурсию
         SharedPtrDynamicData* pData = m_data;
+        T* pPtr = m_ptr;
         m_data = nullptr;
+        m_ptr = nullptr;
 
         if (!pData) {
             return;
@@ -253,7 +255,7 @@ namespace SR_HTYPES_NS {
             }
             else if (pData->policy == SharedPtrPolicy::Automatic && pData->valid) {
                 pData->valid = false;
-                SR_SAFE_DELETE_PTR(m_ptr);
+                SR_SAFE_DELETE_PTR(pPtr);
             }
 
             if (pData->weakCount == 0) {

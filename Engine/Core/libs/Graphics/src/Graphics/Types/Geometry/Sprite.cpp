@@ -140,4 +140,11 @@ namespace SR_GTYPES_NS {
     SR_UTILS_NS::Component* Sprite::CopyComponent() const {
         return MeshComponent::CopyComponent();
     }
+
+    void Sprite::OnPriorityDirty() {
+        if (auto&& pRenderScene = GetRenderScene()) {
+            pRenderScene->GetFlatCluster().MarkDirty();
+        }
+        Component::OnPriorityDirty();
+    }
 }

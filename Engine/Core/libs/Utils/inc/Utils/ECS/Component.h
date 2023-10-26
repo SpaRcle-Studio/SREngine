@@ -54,6 +54,7 @@ namespace SR_UTILS_NS {
 
     public:
         virtual void OnMatrixDirty() { }
+        virtual void OnPriorityDirty() { }
         virtual void OnTransformSet() { }
 
         /// Вызывается при загрузке компонента на игровой объект
@@ -117,7 +118,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD ScenePtr GetScene() const;
         SR_NODISCARD bool HasScene() const { return TryGetScene(); }
         SR_NODISCARD GameObjectPtr GetGameObject() const;
-        SR_NODISCARD bool HasGameObject() const { return m_parent; }
+        SR_NODISCARD bool HasParent() const { return m_parent; }
         SR_NODISCARD ScenePtr TryGetScene() const;
         SR_NODISCARD GameObjectPtr GetRoot() const;
         SR_NODISCARD Transform* GetTransform() const noexcept;
@@ -141,6 +142,7 @@ namespace SR_UTILS_NS {
         /// позиция компонента в списке обновляемых компонентов
         uint64_t m_componentBuildId = SR_ID_INVALID;
 
+        GameObjectPtr m_gameObject;
         IComponentable* m_parent = nullptr;
 
     };

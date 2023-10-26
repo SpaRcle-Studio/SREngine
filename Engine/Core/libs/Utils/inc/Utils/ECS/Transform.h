@@ -101,6 +101,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD virtual Measurement GetMeasurement() const = 0;
 
         virtual void UpdateTree();
+        virtual void OnHierarchyChanged();
 
     protected:
         SR_NODISCARD virtual bool IsDirty() const noexcept;

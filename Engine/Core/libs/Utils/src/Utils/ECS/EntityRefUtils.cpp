@@ -237,7 +237,7 @@ namespace SR_UTILS_NS::EntityRefUtils {
         }
 
         if (auto&& pComponent = owner.pEntity.DynamicCast<Component>()) {
-            return pComponent->HasGameObject();
+            return pComponent->HasParent();
         }
 
         if (auto&& pGameObject = owner.pEntity.DynamicCast<GameObject>()) {

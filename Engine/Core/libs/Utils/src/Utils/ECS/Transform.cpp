@@ -12,9 +12,9 @@ namespace SR_UTILS_NS {
         m_gameObject = nullptr;
     }
 
-    void Transform::SetGameObject(GameObject *gameObject) {
+    void Transform::SetGameObject(GameObject* gameObject) {
         if ((m_gameObject = gameObject)) {
-            UpdateTree();
+            OnHierarchyChanged();
         }
     }
 
@@ -216,5 +216,9 @@ namespace SR_UTILS_NS {
     Transform *Transform::Copy() const {
         SRHalt("Not implemented!");
         return nullptr;
+    }
+
+    void Transform::OnHierarchyChanged() {
+        UpdateTree();
     }
 }

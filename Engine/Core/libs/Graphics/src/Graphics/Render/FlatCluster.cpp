@@ -3,6 +3,7 @@
 //
 
 #include <Graphics/Render/FlatCluster.h>
+#include <Graphics/Render/RenderScene.h>
 
 namespace SR_GRAPH_NS {
     int32_t FlatMeshClusterComparator(const void* one, const void* two)
@@ -38,7 +39,9 @@ namespace SR_GRAPH_NS {
         return 1;
     }
 
-    FlatMeshCluster::FlatMeshCluster() {
+    FlatMeshCluster::FlatMeshCluster(RenderScene* pRenderScene)
+        : m_renderScene(pRenderScene)
+    {
         m_pool.reserve(1024);
     }
 
@@ -70,7 +73,7 @@ namespace SR_GRAPH_NS {
         ++m_count;
         ++m_capacity;
         m_pool.emplace_back(pMesh);
-        m_dirty = true;
+        MarkDirty();
     }
 
     void FlatMeshCluster::Remove(const FlatMeshCluster::MeshPtr& pMesh) {
@@ -98,7 +101,7 @@ namespace SR_GRAPH_NS {
 
     void FlatMeshCluster::Randomize() {
         SR_UTILS_NS::Random::Instance().Shuffle(m_pool);
-        m_dirty = true;
+        MarkDirty();
     }
 
     void FlatMeshCluster::OnResourceReloaded(SR_UTILS_NS::IResource* pResource) {
@@ -135,5 +138,12 @@ namespace SR_GRAPH_NS {
         }
 
         return changed;
+    }
+
+    void FlatMeshCluster::MarkDirty() {
+        m_dirty = true;
+        if (m_renderScene) {
+            m_renderScene->SetDirty();
+        }
     }
 }

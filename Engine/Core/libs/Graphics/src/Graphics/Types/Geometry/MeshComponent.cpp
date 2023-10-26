@@ -5,6 +5,9 @@
 #include <Graphics/Types/Geometry/MeshComponent.h>
 #include <Graphics/Utils/MeshUtils.h>
 
+#include <Utils/ECS/GameObject.h>
+#include <Utils/ECS/Transform2D.h>
+
 namespace SR_GTYPES_NS {
     SR_HTYPES_NS::Marshal::Ptr MeshComponent::Save(SR_UTILS_NS::SavableSaveData data) const {
         auto&& pMarshal = Component::Save(data);
@@ -87,5 +90,17 @@ namespace SR_GTYPES_NS {
         AutoFree([](auto&& pData) {
             delete pData;
         });
+    }
+
+    int64_t MeshComponent::GetSortingPriority() const {
+        if (!m_gameObject) {
+            return -1;
+        }
+
+        if (auto&& pTransform = dynamic_cast<SR_UTILS_NS::Transform2D*>(m_gameObject->GetTransform())) {
+            return pTransform->GetPriority();
+        }
+
+        return -1;
     }
 }

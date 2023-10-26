@@ -15,6 +15,8 @@ namespace SR_GTYPES_NS {
 }
 
 namespace SR_GRAPH_NS {
+    class RenderScene;
+
     class FlatMeshCluster : public SR_UTILS_NS::NonCopyable {
     public:
         using MeshPtr = SR_GTYPES_NS::Mesh*;
@@ -22,7 +24,7 @@ namespace SR_GRAPH_NS {
         using ConstIterator = std::vector<MeshPtr>::const_iterator;
 
     public:
-        FlatMeshCluster();
+        FlatMeshCluster(RenderScene* pRenderScene);
         ~FlatMeshCluster() override;
 
     public:
@@ -36,6 +38,8 @@ namespace SR_GRAPH_NS {
         void Sort();
         void Randomize();
 
+        void MarkDirty();
+
         SR_NODISCARD Iterator begin() { return m_pool.begin(); }
         SR_NODISCARD Iterator end() { return m_pool.end(); }
 
@@ -45,6 +49,7 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD bool SR_FASTCALL Empty() const noexcept { return m_pool.empty(); }
 
     private:
+        RenderScene* m_renderScene = nullptr;
         std::vector<MeshPtr> m_pool;
         uint32_t m_count = 0;
         uint32_t m_capacity = 0;

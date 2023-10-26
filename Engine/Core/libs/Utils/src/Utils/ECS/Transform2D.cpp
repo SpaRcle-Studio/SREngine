@@ -250,18 +250,17 @@ namespace SR_UTILS_NS {
 
         const auto horizontalAspect = SR_MATH_NS::FVector2(stretchHorizontal.XY()).Aspect();
         auto horizontalAnchor = (horizontalAspect - 1.f) * (1.f / horizontalAspect);
+        horizontalAnchor += (1.f - m_scale.x) * (1.f / horizontalAspect);
 
         const auto verticalAspect = SR_MATH_NS::FVector2(stretchVertical.XY()).AspectInv();
         auto verticalAnchor = (verticalAspect - 1.f) * (1.f / verticalAspect);
+        verticalAnchor += (1.f - m_scale.y) * (1.f / verticalAspect);
 
         const SR_MATH_NS::FVector3 translation = SR_MATH_NS::FVector3(
             m_translation.x * m_scale.x * (1.f / horizontalAspect),
             m_translation.y * m_scale.y * (1.f / verticalAspect),
             0.f
         );
-
-        horizontalAnchor += (1.f - m_scale.x) * (1.f / horizontalAspect);
-        verticalAnchor += (1.f - m_scale.y) * (1.f / verticalAspect);
 
         switch (m_anchor) {
             case Anchor::None:
@@ -313,5 +312,42 @@ namespace SR_UTILS_NS {
         m_isDirtyPriority = false;
 
         return m_priority;
+    }
+
+    void Transform2D::SetLocalPriority(int32_t priority) {
+        if (m_localPriority == priority) {
+            return;
+        }
+        m_localPriority = priority;
+        UpdatePriorityTree();
+    }
+
+    void Transform2D::SetRelativePriority(bool relative) {
+        if (m_relativePriority == relative) {
+            return;
+        }
+        m_relativePriority = relative;
+        UpdatePriorityTree();
+    }
+
+    void Transform2D::UpdatePriorityTree() {
+        m_isDirtyPriority = true;
+
+        if (!m_gameObject) {
+            return;
+        }
+
+        m_gameObject->OnPriorityDirty();
+
+        for (auto&& child : m_gameObject->GetChildrenRef()) {
+            if (auto&& pTransform2D = dynamic_cast<Transform2D*>(child->GetTransform())) {
+                pTransform2D->UpdatePriorityTree();
+            }
+        }
+    }
+
+    void Transform2D::OnHierarchyChanged() {
+        UpdatePriorityTree();
+        Transform::OnHierarchyChanged();
     }
 }

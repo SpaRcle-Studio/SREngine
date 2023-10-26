@@ -112,7 +112,6 @@ namespace SR_UTILS_NS {
         void CheckActivity(bool force) noexcept override;
 
         bool SetDirty(bool value) override;
-        void OnMatrixDirty();
 
         /// ставит объект на очередь уничтожения, если есть сцена. Если сцены нет - сразу уничтожает
         void Destroy();
