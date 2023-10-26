@@ -6,7 +6,7 @@
 #include <Utils/ResourceManager/FileWatcher.h>
 #include <Utils/Common/StringUtils.h>
 #include <Utils/Common/Features.h>
-#include <Utils/Common/Vertices.hpp>
+#include <Utils/Common/Vertices.h>
 
 #include <Graphics/Types/Skybox.h>
 #include <Graphics/Types/Vertices.h>

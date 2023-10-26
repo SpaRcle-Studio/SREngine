@@ -93,3 +93,4 @@ target_include_directories(Core PUBLIC ${CMAKE_CURRENT_BINARY_DIR}/Utils/include
 target_include_directories(Core PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/Utils/libs)
 target_include_directories(Core PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/Utils/libs/assimp/include)
 target_include_directories(Core PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/Utils/libs/assimp/include)
+target_include_directories(Core PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/Utils/libs/FQHSA/header)

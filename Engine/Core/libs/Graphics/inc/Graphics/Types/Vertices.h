@@ -10,7 +10,7 @@
 #include <Utils/Math/Vector4.h>
 
 #include <Utils/Common/StringFormat.h>
-#include <Utils/Common/Vertices.hpp>
+#include <Utils/Common/Vertices.h>
 #include <Utils/Common/Enumerations.h>
 #include <Utils/Profile/TracyContext.h>
 

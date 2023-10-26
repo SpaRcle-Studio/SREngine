@@ -47,18 +47,17 @@ namespace SR_HTYPES_NS {
         ResourceManager::Instance().Execute([&]() {
             Path&& id = Path(rawPath).RemoveSubPath(ResourceManager::Instance().GetResPath());
 
-            if (params.animation) {
-                id = id.EmplaceFront("Animation|");
-            }
+            auto&& paramsHash = SR_HASH(params);
+            id = id.EmplaceFront(SR_FORMAT("%l|", paramsHash));
 
             if (auto&& pResource = ResourceManager::Instance().Find<RawMesh>(id)) {
                 pRawMesh = pResource;
-                SRAssert(pRawMesh->m_params.animation == params.animation);
+                SRAssert(pRawMesh->m_params == params);
                 return;
             }
 
             pRawMesh = new RawMesh();
-            pRawMesh->m_params.animation = params.animation;
+            pRawMesh->m_params = params;
             pRawMesh->SetId(id, false /** auto register */);
 
             if (!pRawMesh->Reload()) {
@@ -136,6 +135,10 @@ namespace SR_HTYPES_NS {
             if (!m_scene) {
                 SR_ERROR("RawMesh::Load() : failed to load file!\n\tPath: " + path.ToStringRef() + "\n\tReason: " + std::string(m_importer->GetErrorString()));
                 return false;
+            }
+
+            if (m_params.convexHull) {
+                ComputeConvexHull();
             }
 
             NormalizeWeights();
@@ -534,5 +537,20 @@ namespace SR_HTYPES_NS {
         }
 
         return count;
+    }
+
+    void RawMesh::ComputeConvexHull() {
+        if (!m_params.convexHull) {
+            return;
+        }
+
+        //std::vector<>
+
+        for (uint16_t i = 0; i <= static_cast<uint16_t>(GetMeshesCount()); ++i) {
+            auto&& computedVertices = SR_UTILS_NS::ComputeConvexHull(GetVertices(i));
+            SR_NOOP;
+
+        }
+
     }
 }

@@ -8,7 +8,7 @@
 #include <Utils/ResourceManager/IResource.h>
 #include <Utils/Types/SafePointer.h>
 #include <Utils/Types/Map.h>
-#include <Utils/Common/Vertices.hpp>
+#include <Utils/Common/Vertices.h>
 #include <Utils/Math/Matrix4x4.h>
 
 namespace Assimp {
@@ -26,7 +26,11 @@ namespace SR_WORLD_NS {
 namespace SR_HTYPES_NS {
     struct RawMeshParams {
         bool animation = false;
-        bool tessellation = false;
+        bool convexHull = false;
+
+        bool operator==(const RawMeshParams& rhs) const {
+            return animation == rhs.animation && convexHull == rhs.convexHull;
+        }
     };
 
     class SR_DLL_EXPORT RawMesh : public IResource {
@@ -42,6 +46,8 @@ namespace SR_HTYPES_NS {
         static RawMesh* Load(const SR_UTILS_NS::Path &path);
 
     public:
+        void ComputeConvexHull();
+
         SR_NODISCARD uint32_t GetMeshesCount() const;
         SR_NODISCARD std::string GetGeometryName(uint32_t id) const;
 
@@ -93,6 +99,21 @@ namespace SR_HTYPES_NS {
         bool m_fromCache = false;
         Assimp::Importer* m_importer = nullptr;
 
+    };
+}
+
+namespace std {
+    template<> struct hash<SR_HTYPES_NS::RawMeshParams> {
+        size_t operator()(SR_HTYPES_NS::RawMeshParams const& params) const {
+            std::size_t res = 0;
+
+            std::hash<bool> hBool;
+
+            res ^= hBool(params.animation) + 0x9e3779b9 + (res << 6u) + (res >> 2u);
+            res ^= hBool(params.convexHull) + 0x9e3779b9 + (res << 6u) + (res >> 2u);
+
+            return res;
+        }
     };
 }
 

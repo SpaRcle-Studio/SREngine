@@ -83,6 +83,7 @@
 #include "../Utils/src/Utils/Common/EnumReflector.cpp"
 #include "../Utils/src/Utils/Common/Hashes.cpp"
 #include "../Utils/src/Utils/Common/HashManager.cpp"
+#include "../Utils/src/Utils/Common/Vertices.cpp"
 
 #include "../Utils/src/Utils/Game/LookAtComponent.cpp"
 

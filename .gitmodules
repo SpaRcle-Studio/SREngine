@@ -54,3 +54,6 @@
 [submodule "Resources/FluSion"]
 	path = Resources/FluSion
 	url = https://github.com/innerviewer/FluSion.git
+[submodule "Engine/Core/libs/Utils/libs/FQHSA"]
+	path = Engine/Core/libs/Utils/libs/FQHSA
+	url = https://github.com/SpaRcle-Studio/FQHSA.git

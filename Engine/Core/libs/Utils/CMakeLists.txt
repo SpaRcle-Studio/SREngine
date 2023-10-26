@@ -28,6 +28,7 @@ endif()
 
 add_subdirectory(libs/glm)
 add_subdirectory(libs/assimp)
+add_subdirectory(libs/FQHSA)
 
 if (SR_TRACY_ENABLE)
     add_subdirectory(libs/tracy)
@@ -60,10 +61,13 @@ if (MSVC)
     target_compile_options(Utils PUBLIC /openmp)
 endif()
 
+target_link_libraries(Utils Fast-Quick-Hull)
+
 target_include_directories(Utils PUBLIC inc)
 target_include_directories(Utils PUBLIC libs)
 target_include_directories(Utils PUBLIC libs/assimp/include)
 target_include_directories(Utils PUBLIC libs/glm)
+target_include_directories(Utils PUBLIC libs/FQHSA/header)
 
 # --------------------------------------------------------------------------------------
 

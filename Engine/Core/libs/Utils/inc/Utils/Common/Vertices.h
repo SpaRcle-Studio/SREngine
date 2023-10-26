@@ -46,7 +46,6 @@ namespace SR_UTILS_NS {
     };
 
     const std::vector<uint32_t> SKYBOX_INDICES = { 0,1,2,0,2,3,2,1,4,5,2,4,6,0,3,6,3,7,5,4,6,7,5,6,3,2,5,3,5,7,4,1,0,6,4,0 };
-
     const std::vector<Vertex> SKYBOX_INDEXED_VERTICES = {
             Vertex(1, -1, 1),
             Vertex(-1, -1, 1),
@@ -57,6 +56,8 @@ namespace SR_UTILS_NS {
             Vertex(1, -1, -1),
             Vertex(1, 1, -1),
     };
+
+    std::vector<Vertex> ComputeConvexHull(const std::vector<Vertex>& vertices);
 
     template<typename T> static std::vector<T> IndexedVerticesToNonIndexed(
             const std::vector<T>& vertices,
