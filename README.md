@@ -44,7 +44,7 @@ It aims to establish a strong base for game creation and is currently in the ear
  > - 0.2. Install [Vulkan SDK/Runtime](https://vulkan.lunarg.com/sdk/home) 1.3.211.0
  > - 0.3. Install CMake 3.16.0
  > - 0.4. Install [MS Build Tools](https://download.visualstudio.microsoft.com/download/pr/996d318f-4bd0-4f73-8554-ea3ed556ce9b/9610a60ad452c33dd3f9e8d3b4ce5d88d278f8b063d88717e08e1c0c13c29233/vs_BuildTools.exe) for Visual Studio 16.11.29 (if you are using CLion)
- 1. ```Clone repository via the command "git clone https://github.com/Monika0000/SREngine"```
+ 1. ```Clone repository via the command "git clone https://github.com/SpaRcle-Studio/SREngine"```
  2. ```Switch to the "dev" (or another one) branch via the command "git checkout branch_name"```
  3. ```Run command "git submodule update --init --recursive" in repository folder```
  <details>
