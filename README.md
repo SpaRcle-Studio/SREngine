@@ -1,12 +1,14 @@
 <p align="center">
  <h1 align="center">SpaRcle Engine</h2>
- <p align="center">Get dynamically generated GitHub stats on your READMEs!</p>
 </p>
   <p align="center">
     <img alt="Project Status: Active – The project is under active delopment!." src="https://www.repostatus.org/badges/latest/active.svg" />
     <img alt="CodeFactor." src="https://www.codefactor.io/repository/github/sparcle-studio/srengine/badge/dev" />
     <img alt="GitHub Contributors." src="https://img.shields.io/github/contributors/SpaRcle-Studio/SREngine" />
     <img alt="Issues" src="https://img.shields.io/github/issues/SpaRcle-Studio/SREngine?color=0088ff" />
+  </p>
+  <p align="center">
+    <img alt="Build statistics." src="https://buildstats.info/github/chart/sparcle-studio/srengine" />
   </p>
 
 SpaRcle Engine is an ongoing game engine developed in C++. 
