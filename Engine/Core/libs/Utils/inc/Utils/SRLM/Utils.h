@@ -15,14 +15,15 @@
         SR_INLINE_STATIC const std::string NAME = #name; /** NOLINT*/                                                   \
         SR_INLINE_STATIC const uint64_t HASH_NAME = SR_HASH_STR_REGISTER(#name); /** NOLINT*/                           \
         static className* AllocateNew() { return new className(); }                                                     \
+        static DataType* AllocateBase() { return (DataType*)new className(); }                                          \
         SR_INLINE_STATIC const bool REGISTER_STATUS = SR_SRLM_NS::DataTypeAllocator::Instance().Register( /** NOLINT*/  \
-            DataTypeClass::name, HASH_NAME, []() -> DataType* { return (DataType*)AllocateNew(); }                      \
+            DataTypeClass::name, HASH_NAME, []() -> DataType* { return AllocateBase(); }                                \
         );                                                                                                              \
         SR_NODISCARD DataTypeClass GetClass() const noexcept override { return DataTypeClass::name; }                   \
 
 #define SR_LM_REGISTER_TYPE_NO_META(className, name)                                                                    \
     public:                                                                                                             \
-        SR_NODISCARD std::string GetName() const noexcept override { return #name; }                                \
+        SR_NODISCARD std::string GetName() const noexcept override { return #name; }                                    \
         SR_NODISCARD Hash GetHashName() const noexcept override { return HASH_NAME; }                                   \
         SR_LM_REGISTER_BASE(className, name)                                                                            \
 

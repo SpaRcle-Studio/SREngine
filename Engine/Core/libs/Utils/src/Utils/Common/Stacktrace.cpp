@@ -19,6 +19,12 @@
     }
 #endif
 
+#ifdef SR_LINUX
+    std::string SR_UTILS_NS::GetStacktrace() {
+        return "Linux not support stack trace!";
+    }
+#endif
+
 #ifdef SR_WIN32
 
 #pragma comment(lib, "psapi.lib")

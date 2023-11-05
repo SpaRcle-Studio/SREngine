@@ -33,7 +33,7 @@
 	url = https://github.com/bulletphysics/bullet3
 [submodule "Engine/Core/libs/Graphics/libs/freetype"]
 	path = Engine/Core/libs/Graphics/libs/freetype
-	url = https://github.com/freetype/freetype
+	url = https://github.com/SpaRcle-Studio/freetype
 [submodule "Engine/Core/libs/Graphics/libs/harfbuzz"]
 	path = Engine/Core/libs/Graphics/libs/harfbuzz
 	url = https://github.com/harfbuzz/harfbuzz
@@ -46,7 +46,8 @@
 [submodule "Engine/Core/libs/Physics/libs/box2d"]
 	path = Engine/Core/libs/Physics/libs/box2d
 	url = https://github.com/Monika0000/box2d
-[submodule "EngineCorelibsGraphicslibs"]
+[submodule "Engine/Core/libs/Graphics/libs/imgui"]
+	path = Engine/Core/libs/Graphics/libs/imgui
 	url = https://github.com/Monika0000/imgui
 [submodule "Engine/Core/libs/Utils/libs/libpng"]
 	path = Engine/Core/libs/Utils/libs/libpng

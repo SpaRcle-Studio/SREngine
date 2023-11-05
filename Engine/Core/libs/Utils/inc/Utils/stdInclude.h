@@ -69,9 +69,13 @@
     #include <iomanip>
 #endif
 
-#if defined(SR_WIN32) || defined(SR_LINUX)
-    #include <direct.h>
+#ifdef SR_LINUX
+    #include <cstdarg>
 #endif
+
+/*#if defined(SR_WIN32) || defined(SR_LINUX)
+    #include <direct.h>
+#endif*/
 
 /// C++17 - 201703L
 /// C++14 - 201402L

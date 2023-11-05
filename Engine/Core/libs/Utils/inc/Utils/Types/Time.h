@@ -2,8 +2,8 @@
 // Created by Nikita on 30.12.2020.
 //
 
-#ifndef GAMEENGINE_TIME_H
-#define GAMEENGINE_TIME_H
+#ifndef SR_ENGINE_TIME_H
+#define SR_ENGINE_TIME_H
 
 #include <Utils/Debug.h>
 #include <Utils/Common/Singleton.h>
@@ -13,7 +13,7 @@ namespace SR_HTYPES_NS {
         friend class Singleton<Time>;
     public:
         using ClockT = std::chrono::high_resolution_clock;
-        using Point = std::chrono::time_point<std::chrono::steady_clock>;
+        using Point = std::chrono::time_point<std::chrono::system_clock>;
 
     public:
         void Update() {
@@ -33,4 +33,4 @@ namespace SR_HTYPES_NS {
     };
 }
 
-#endif //GAMEENGINE_TIME_H
+#endif // SR_ENGINE_TIME_H

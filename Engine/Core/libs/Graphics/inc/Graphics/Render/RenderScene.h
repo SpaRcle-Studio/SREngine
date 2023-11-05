@@ -119,7 +119,7 @@ namespace SR_GRAPH_NS {
 
         LightSystem* m_lightSystem = nullptr;
 
-        CameraPtr m_mainCamera = nullptr;
+        CameraPtr m_mainCamera;
 
         std::vector<CameraPtr> m_editorCameras;
         std::vector<CameraPtr> m_offScreenCameras;

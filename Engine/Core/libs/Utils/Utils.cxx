@@ -9,6 +9,10 @@
     #include "../Utils/src/Utils/Platform/AndroidNativeAppGlue.c"
 #endif
 
+#ifdef SR_LINUX
+#include "../Utils/src/Utils/Platform/PlatformLinux.cpp"
+#endif
+
 #include "../Utils/src/Utils/SRLM/LogicalMachine.cpp"
 #include "../Utils/src/Utils/SRLM/DataType.cpp"
 #include "../Utils/src/Utils/SRLM/DataTypeManager.cpp"

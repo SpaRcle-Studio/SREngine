@@ -15,17 +15,17 @@ int main(int argc, char** argv) {
 
     if (!pApplication->PreInit(argc, argv)) {
         SR_PLATFORM_NS::WriteConsoleError("Failed to pre-initialize application!\n");
-        code = -1;
+        code = 1;
     }
 
     if (code == 0 && !pApplication->Init()) {
         SR_ERROR("Failed to initialize application!");
-        code = -2;
+        code = 2;
     }
 
     if (code == 0 && !pApplication->Execute()) {
         SR_ERROR("Failed to execute application!");
-        code = -3;
+        code = 3;
     }
 
     pApplication->AutoFree([](auto&& pData) {

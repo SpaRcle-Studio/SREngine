@@ -23,6 +23,10 @@
     #define SR_ANDROID
 #endif
 
+#ifdef __linux__
+    #define SR_LINUX
+#endif
+
 #ifdef __clang__
     #define SR_CLANG
 #endif
@@ -109,6 +113,9 @@
 #define SR_INLINE inline
 
 #ifdef SR_ANDROID
+    #define SR_FASTCALL
+    #define SR_FORCE_INLINE SR_INLINE
+#elifdef SR_GCC
     #define SR_FASTCALL
     #define SR_FORCE_INLINE SR_INLINE
 #else
@@ -231,5 +238,7 @@
 #else
 #define SR_FUNCTION_SIGNATURE __PRETTY_FUNCTION__
 #endif
+
+#define SR_OFFSETOF(s,m) ((::size_t)&reinterpret_cast<char const volatile&>((((s*)0)->m)))
 
 #endif //GAMEENGINE_MACROS_H

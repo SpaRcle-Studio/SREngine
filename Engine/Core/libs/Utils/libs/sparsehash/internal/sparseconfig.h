@@ -28,7 +28,7 @@
     #define HASH_NAMESPACE std
 #else
     /* the namespace of the hash<> function */
-    #define HASH_NAMESPACE  stdext
+    #define HASH_NAMESPACE  std
 #endif
 
 /* Define to 1 if you have the <inttypes.h> header file. */
@@ -59,7 +59,7 @@
     #define SPARSEHASH_HASH HASH_NAMESPACE::hash
 #else
     /* The system-provided hash function including the namespace. */
-    #define SPARSEHASH_HASH  HASH_NAMESPACE::hash_compare
+    #define SPARSEHASH_HASH  HASH_NAMESPACE::hash
 #endif
 
 /* The system-provided hash function, in namespace HASH_NAMESPACE. */

@@ -6,7 +6,7 @@
 #define SRENGINE_SCRIPTABLERENDERTECHNIQUE_H
 
 #include <Graphics/Render/IRenderTechnique.h>
-#include <UTils/SRLM/LogicalMachine.h>
+#include <Utils/SRLM/LogicalMachine.h>
 
 namespace SR_GRAPH_NS {
     class ScriptableRenderTechnique : public IRenderTechnique, public SR_SRLM_NS::LogicalMachine {

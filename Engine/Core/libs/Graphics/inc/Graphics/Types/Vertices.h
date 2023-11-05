@@ -107,14 +107,14 @@ namespace SR_GRAPH_NS::Vertices {
         static SR_FORCE_INLINE std::vector<std::pair<Attribute, size_t>> GetAttributes() {
             auto descriptions = std::vector<std::pair<Attribute, size_t>>();
 
-            descriptions.emplace_back(std::pair(Attribute::FLOAT_R32G32B32, offsetof(SkinnedMeshVertex, pos)));
-            descriptions.emplace_back(std::pair(Attribute::FLOAT_R32G32,    offsetof(SkinnedMeshVertex, uv)));
-            descriptions.emplace_back(std::pair(Attribute::FLOAT_R32G32B32, offsetof(SkinnedMeshVertex, norm)));
-            descriptions.emplace_back(std::pair(Attribute::FLOAT_R32G32B32, offsetof(SkinnedMeshVertex, tang)));
-            descriptions.emplace_back(std::pair(Attribute::FLOAT_R32G32B32, offsetof(SkinnedMeshVertex, bitang)));
+            descriptions.emplace_back(std::pair(Attribute::FLOAT_R32G32B32, SR_OFFSETOF(SkinnedMeshVertex, pos)));
+            descriptions.emplace_back(std::pair(Attribute::FLOAT_R32G32,    SR_OFFSETOF(SkinnedMeshVertex, uv)));
+            descriptions.emplace_back(std::pair(Attribute::FLOAT_R32G32B32, SR_OFFSETOF(SkinnedMeshVertex, norm)));
+            descriptions.emplace_back(std::pair(Attribute::FLOAT_R32G32B32, SR_OFFSETOF(SkinnedMeshVertex, tang)));
+            descriptions.emplace_back(std::pair(Attribute::FLOAT_R32G32B32, SR_OFFSETOF(SkinnedMeshVertex, bitang)));
 
             for (uint8_t i = 0; i < SR_MAX_BONES_ON_VERTEX; ++i) {
-                descriptions.emplace_back(std::pair(Attribute::FLOAT_R32G32, offsetof(SkinnedMeshVertex, weights[i])));
+                descriptions.emplace_back(std::pair(Attribute::FLOAT_R32G32, SR_OFFSETOF(SkinnedMeshVertex, weights[i])));
             }
 
             return descriptions;

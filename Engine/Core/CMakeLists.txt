@@ -3,6 +3,10 @@ project(Core)
 
 set(CMAKE_CXX_STANDARD 20)
 
+if (UNIX)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fcompare-debug-second -w")
+endif()
+
 message(STATUS "SpaRcle Engine compiler: ${CMAKE_C_COMPILER}")
 
 set(CORE_ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR})
@@ -39,7 +43,11 @@ else()
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wcomment -Wno-comment -Woverloaded-virtual -Wno-everything -Wmissing-braces -Wunused-private-field -Wno-unused-private-field")
         set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wcomment -Wno-comment -Woverloaded-virtual -Wno-everything -Wmissing-braces -Wunused-private-field -Wno-unused-private-field")
     else()
-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /bigobj /utf-8")
+        if (MSVC)
+            set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /bigobj /utf-8")
+        else ()
+            add_compile_options(-fexec-charset=UTF-8)
+        endif ()
     endif()
 endif()
 

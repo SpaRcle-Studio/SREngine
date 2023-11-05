@@ -25,6 +25,8 @@ namespace SR_GRAPH_NS {
     }
 
     SR_MAYBE_UNUSED static void FTUnusedFunctions() {
+    #ifdef SR_LINUX
+    #else
         tt_glyphzone_done(nullptr);
         tt_glyphzone_new(nullptr, 0, 0, nullptr);
         tt_size_init(nullptr);
@@ -36,6 +38,7 @@ namespace SR_GRAPH_NS {
         tt_driver_init(nullptr);
         tt_driver_done(nullptr);
         tt_slot_init(nullptr);
+    #endif
     }
 }
 

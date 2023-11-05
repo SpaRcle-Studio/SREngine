@@ -7,7 +7,7 @@
 
 #include <Physics/LibraryImpl.h>
 
-#include <box2d\box2d.h>
+#include <box2d/box2d.h>
 
 namespace SR_PHYSICS_NS {
     class Box2DLibraryImpl : public SR_PHYSICS_NS::LibraryImpl {

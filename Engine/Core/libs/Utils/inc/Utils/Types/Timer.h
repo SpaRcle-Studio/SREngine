@@ -12,7 +12,7 @@ namespace SR_HTYPES_NS {
 #ifdef SR_MINGW
         using ClockType = std::chrono::high_resolution_clock::time_point;
 #else
-        using ClockType = std::chrono::time_point<std::chrono::steady_clock>;
+        using ClockType = std::chrono::time_point<std::chrono::system_clock>;
 #endif
     public:
         explicit Timer(float_t updateFrequency)
