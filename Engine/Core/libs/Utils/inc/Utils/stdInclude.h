@@ -73,9 +73,9 @@
     #include <cstdarg>
 #endif
 
-/*#if defined(SR_WIN32) || defined(SR_LINUX)
+#if defined(SR_WIN32)
     #include <direct.h>
-#endif*/
+#endif
 
 /// C++17 - 201703L
 /// C++14 - 201402L
@@ -83,6 +83,16 @@
 /// C++98 - 199711L
 
 namespace SR_UTILS_NS {
+    #ifdef SR_LINUX
+        using TimePointType = std::chrono::time_point<std::chrono::system_clock>;
+    #else
+        #ifdef SR_MINGW
+            using TimePointType = std::chrono::high_resolution_clock::time_point;
+        #else
+            using TimePointType = std::chrono::time_point<std::chrono::steady_clock>;
+        #endif
+    #endif
+
     template<class T, class U = T> SR_NODISCARD static SR_FORCE_INLINE T SR_FASTCALL Exchange(T& obj, U&& new_value) noexcept {
         T old_value = std::move(obj);
         obj = std::forward<U>(new_value);

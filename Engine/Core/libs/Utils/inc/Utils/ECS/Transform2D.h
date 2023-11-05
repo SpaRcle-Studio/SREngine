@@ -12,12 +12,20 @@ namespace SR_UTILS_NS {
     class GameObject;
 
     /// растяжение по ширине родительского элемента
-    SR_ENUM_NS_CLASS_T(Stretch, uint8_t ,
+    SR_ENUM_NS_CLASS_T(Stretch, uint8_t,
         ShowAll,
         NoBorder,
         ChangeAspect,
         WidthControlsHeight,
-        HeightControlsWidth
+        HeightControlsWidth,
+        SavePosition
+    );
+
+    SR_ENUM_NS_CLASS_T(PositionMode, uint8_t,
+        None,
+        ProportionalX,
+        ProportionalY,
+        ProportionalXY
     );
 
     SR_ENUM_NS_CLASS_T(Anchor, uint8_t,
@@ -45,6 +53,7 @@ namespace SR_UTILS_NS {
 
         void SetAnchor(Anchor anchorType);
         void SetStretch(Stretch stretch);
+        void SetPositionMode(PositionMode positionMode);
 
         void SetLocalPriority(int32_t priority);
         void SetRelativePriority(bool relative);
@@ -62,6 +71,7 @@ namespace SR_UTILS_NS {
 
         SR_NODISCARD Anchor GetAnchor() const { return m_anchor; }
         SR_NODISCARD Stretch GetStretch() const { return m_stretch; }
+        SR_NODISCARD PositionMode GetPositionMode() const { return m_positionMode; }
 
         SR_NODISCARD int32_t GetPriority();
         SR_NODISCARD int32_t GetLocalPriority() const noexcept { return m_localPriority; }
@@ -85,6 +95,7 @@ namespace SR_UTILS_NS {
     protected:
         Anchor m_anchor = Anchor::None;
         Stretch m_stretch = Stretch::ShowAll;
+        PositionMode m_positionMode = PositionMode::ProportionalXY;
 
         int32_t m_priority = 0;
         int32_t m_localPriority = 0;

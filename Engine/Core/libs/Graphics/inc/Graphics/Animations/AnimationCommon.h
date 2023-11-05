@@ -77,7 +77,7 @@ namespace SR_ANIMATIONS_NS {
         AnimationPose* pStaticPose = nullptr;
         float_t dt = 0.f;
         float_t weight = 1.f;
-        SR_HTYPES_NS::Time::Point now;
+        SR_UTILS_NS::TimePointType now;
         bool fpsCompensation = false;
 
     };

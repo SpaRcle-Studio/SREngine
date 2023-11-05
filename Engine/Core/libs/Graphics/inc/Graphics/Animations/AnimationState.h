@@ -27,8 +27,8 @@ namespace SR_ANIMATIONS_NS {
     public:
         SR_NODISCARD AnimationStateMachine* GetMachine() const noexcept { return m_machine; }
 
-        SR_NODISCARD SR_HTYPES_NS::Time::Point GetStart() const noexcept { return m_startPoint; }
-        SR_NODISCARD SR_HTYPES_NS::Time::Point GetEnd() const noexcept { return m_endPoint; }
+        SR_NODISCARD SR_UTILS_NS::TimePointType GetStart() const noexcept { return m_startPoint; }
+        SR_NODISCARD SR_UTILS_NS::TimePointType GetEnd() const noexcept { return m_endPoint; }
         SR_NODISCARD Transitions& GetTransitions() noexcept { return m_transitions; }
         SR_NODISCARD const Transitions& GetTransitions() const noexcept { return m_transitions; }
 
@@ -45,8 +45,8 @@ namespace SR_ANIMATIONS_NS {
     protected:
         Transitions m_transitions;
 
-        SR_HTYPES_NS::Time::Point m_startPoint;
-        SR_HTYPES_NS::Time::Point m_endPoint;
+        SR_UTILS_NS::TimePointType m_startPoint;
+        SR_UTILS_NS::TimePointType m_endPoint;
 
         AnimationStateMachine* m_machine = nullptr;
 

@@ -34,7 +34,7 @@ namespace SR_GRAPH_NS {
         tt_size_run_fpgm(nullptr, false);
         tt_size_run_prep(nullptr, false);
         tt_size_ready_bytecode(nullptr, false);
-        tt_size_reset(nullptr, false);
+        tt_size_reset(nullptr);
         tt_driver_init(nullptr);
         tt_driver_done(nullptr);
         tt_slot_init(nullptr);

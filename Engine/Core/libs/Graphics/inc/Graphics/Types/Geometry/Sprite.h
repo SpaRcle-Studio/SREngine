@@ -50,6 +50,10 @@ namespace SR_GTYPES_NS {
 
         SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save(SR_UTILS_NS::SavableSaveData data) const override;
 
+    protected:
+        bool m_sliced = true;
+        //SR_MATH_NS::FRect m_slicedRect = SR_MATH_NS::FRect(0.15f, 0.15f, 0.15f, 0.15f);
+
     };
 }
 

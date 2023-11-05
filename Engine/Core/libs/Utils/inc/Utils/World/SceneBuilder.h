@@ -22,7 +22,7 @@ namespace SR_WORLD_NS {
         ~SceneBuilder() override = default;
 
     public:
-        SR_NODISCARD SR_HTYPES_NS::Time::Point GetLastBuildTime() const { return m_lastBuildTimePoint; }
+        SR_NODISCARD SR_UTILS_NS::TimePointType GetLastBuildTime() const { return m_lastBuildTimePoint; }
 
         void Build(bool isPaused);
         void Update(float_t dt);
@@ -34,7 +34,7 @@ namespace SR_WORLD_NS {
         void Initialize(bool isPaused);
 
     private:
-        SR_HTYPES_NS::Time::Point m_lastBuildTimePoint;
+        SR_UTILS_NS::TimePointType m_lastBuildTimePoint;
         std::recursive_mutex m_mutex;
         std::vector<SR_UTILS_NS::Component*> m_updatableComponents;
         bool m_dirty = false;

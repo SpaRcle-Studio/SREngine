@@ -130,6 +130,10 @@ namespace SR_GTYPES_NS {
     void Sprite::UseModelMatrix() {
         if (auto&& pShader = GetRenderContext()->GetCurrentShader()) {
             pShader->SetMat4(SHADER_MODEL_MATRIX, m_modelMatrix);
+
+            if (m_sliced) {
+                //pShader->SetVec4(SHADER_SLICED_RECT, m_slicedRect);
+            }
         }
         else {
             SRHaltOnce("Shader is nullptr!");

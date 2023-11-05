@@ -52,7 +52,6 @@ namespace SR_CORE_NS {
         using RenderContextPtr = SR_HTYPES_NS::SafePtr<SR_GRAPH_NS::RenderContext>;
         using CameraPtr = SR_GTYPES_NS::Camera*;
         using Clock = std::chrono::high_resolution_clock;
-        using TimePoint = std::chrono::time_point<std::chrono::system_clock>;
         using PhysicsScenePtr = SR_HTYPES_NS::SafePtr<SR_PHYSICS_NS::PhysicsScene>;
         using ScenePtr = SR_HTYPES_NS::SafePtr<SR_WORLD_NS::Scene>;
         using RenderScenePtr = SR_HTYPES_NS::SafePtr<SR_GRAPH_NS::RenderScene>;
@@ -108,7 +107,7 @@ namespace SR_CORE_NS {
         std::atomic<bool> m_autoReloadResources = false;
 
         float_t m_speed = 1.f;
-        TimePoint m_timeStart;
+        SR_UTILS_NS::TimePointType m_timeStart;
         SR_HTYPES_NS::Timer m_worldTimer;
 
         SR_UTILS_NS::CmdManager* m_cmdManager  = nullptr;

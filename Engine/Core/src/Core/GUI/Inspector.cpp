@@ -260,6 +260,10 @@ namespace SR_CORE_GUI_NS {
             pTransform->SetStretch(SR_UTILS_NS::EnumReflector::At<SR_UTILS_NS::Stretch>(stretch));
         }
 
+        SR_GRAPH_GUI_NS::EnumCombo<SR_UTILS_NS::PositionMode>("Position mode", pTransform->GetPositionMode(), [pTransform](auto&& value) {
+            pTransform->SetPositionMode(value);
+        });
+
         ImGui::Separator();
 
         SR_GRAPH_GUI_NS::DrawTextOnCenter("Sorting");

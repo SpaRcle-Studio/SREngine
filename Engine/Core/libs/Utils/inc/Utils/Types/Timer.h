@@ -9,11 +9,6 @@
 
 namespace SR_HTYPES_NS {
     class SR_DLL_EXPORT Timer {
-#ifdef SR_MINGW
-        using ClockType = std::chrono::high_resolution_clock::time_point;
-#else
-        using ClockType = std::chrono::time_point<std::chrono::system_clock>;
-#endif
     public:
         explicit Timer(float_t updateFrequency)
             : m_updateFrequency(updateFrequency)
@@ -54,7 +49,7 @@ namespace SR_HTYPES_NS {
         float_t   m_updateFrequency;
         double_t  m_deltaTime = 0;
         uint32_t  m_frames = 0;
-        ClockType m_beginFrame{};
+        TimePointType m_beginFrame{};
 
     };
 }

@@ -134,6 +134,11 @@ namespace SR_UTILS_NS {
         UpdateTree();
     }
 
+    void Transform2D::SetPositionMode(PositionMode positionMode) {
+        m_positionMode = positionMode;
+        UpdateTree();
+    }
+
     Transform *Transform2D::Copy() const {
         auto&& pTransform = new Transform2D();
 
@@ -172,6 +177,8 @@ namespace SR_UTILS_NS {
 
         /// Компенсация растяжения родительской ноды
         switch (m_stretch) {
+            case Stretch::SavePosition:
+                break;
             case Stretch::ChangeAspect:
                 break;
             case Stretch::WidthControlsHeight:
@@ -230,7 +237,7 @@ namespace SR_UTILS_NS {
             stretchHorizontal = parentScale;
             stretchVertical = SR_MATH_NS::FVector3(1.f);
         }
-        else if (m_stretch == Stretch::ChangeAspect) {
+        else if (m_stretch == Stretch::ChangeAspect || m_stretch == Stretch::SavePosition) {
             stretchVertical = stretchHorizontal = SR_MATH_NS::FVector3(1.f);
         }
         else if (m_stretch == Stretch::HeightControlsWidth) {
@@ -256,9 +263,12 @@ namespace SR_UTILS_NS {
         auto verticalAnchor = (verticalAspect - 1.f) * (1.f / verticalAspect);
         verticalAnchor += (1.f - m_scale.y) * (1.f / verticalAspect);
 
+        const bool isProportionalX = m_positionMode == PositionMode::ProportionalXY || m_positionMode == PositionMode::ProportionalX;
+        const bool isProportionalY = m_positionMode == PositionMode::ProportionalXY || m_positionMode == PositionMode::ProportionalY;
+
         const SR_MATH_NS::FVector3 translation = SR_MATH_NS::FVector3(
-            m_translation.x * m_scale.x * (1.f / horizontalAspect),
-            m_translation.y * m_scale.y * (1.f / verticalAspect),
+            m_translation.x * (isProportionalX ? m_scale.x : 1.f) * (1.f / horizontalAspect),
+            m_translation.y * (isProportionalY ? m_scale.y : 1.f) * (1.f / verticalAspect),
             0.f
         );
 

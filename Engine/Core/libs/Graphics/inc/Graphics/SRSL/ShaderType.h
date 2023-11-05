@@ -76,6 +76,7 @@ namespace SR_SRSL_NS {
             { "SSAO_SAMPLES",                   "vec4[64]"      },
 
             { "LINE_COLOR",                     "vec4"          },
+            { "SLICED_RECT",                    "vec4"          },
 
             { "TIME",                           "float"         },
             { "TEXT_RECT_X",                    "float"         },
