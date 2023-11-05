@@ -55,7 +55,6 @@ namespace SR_UTILS_NS {
 
         SR_NODISCARD Level GetLevel() { return m_level; }
         SR_NODISCARD bool IsInitialized() const { return m_isInit; }
-        SR_NODISCARD bool IsRunningUnderDebugger();
 
         void MakeCrash();
 
@@ -148,9 +147,9 @@ namespace SR_UTILS_NS {
 #endif
 
 #define SRHalt(msg) SR_UTILS_NS::Debug::Instance().Assert(SR_MAKE_ASSERT(msg))
-#define SRHaltOnce(msg)  SR_UTILS_NS::Debug::Instance().AssertOnceCheck(SR_MAKE_ASSERT(msg))
-#define SRHalt0() SR_UTILS_NS::Debug::Instance().Assert(SR_MAKE_ASSERT("An exception has been occured!"))
-#define SRHaltOnce0() SR_UTILS_NS::Debug::Instance().AssertOnceCheck(SR_MAKE_ASSERT("An exception has been occured!"))
+#define SRHaltOnce(msg)  SR_UTILS_NS::Debug::Instance().AssertOnceCheck(SR_MAKE_ASSERT(msg)) || SRHalt(msg)
+#define SRHalt0() SRHalt("An exception has been occured!")
+#define SRHaltOnce0() SRHaltOnce("An exception has been occured!")
 
 #define SRVerifyFalse(expr) SRVerifyFalse2(expr, "An exception has been occured!")
 

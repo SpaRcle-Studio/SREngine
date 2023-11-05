@@ -110,6 +110,11 @@ namespace SR_GRAPH_NS {
     }
 
     SR_MATH_NS::UVector2 Window::GetSize() const {
+        if (!m_windowImpl) {
+            SR_ERROR("Window::GetSize() : window implementation is nullptr.");
+            return { };
+        }
+
         return SR_MATH_NS::UVector2(m_windowImpl->GetWidth(), m_windowImpl->GetHeight());
     }
 
@@ -204,11 +209,17 @@ namespace SR_GRAPH_NS {
     }
 
     SR_MATH_NS::IVector2 Window::GetPosition() const {
+        if (!m_windowImpl) {
+            SR_ERROR("Window::GetPosition() : window implementation is nullptr.");
+            return { };
+        }
+
         return m_windowImpl->GetPosition();
     }
 
     bool Window::IsMaximized() const {
         if (!m_windowImpl) {
+            SR_ERROR("Window::IsMaximized() : window implementation is nullptr.");
             return false;
         }
 
@@ -222,11 +233,17 @@ namespace SR_GRAPH_NS {
     }
 
     bool Window::IsVisible() const {
+        if (!m_windowImpl) {
+            SR_ERROR("Window::IsVisible() : window implementation is nullptr.");
+            return false;
+        }
+
         return m_windowImpl->IsVisible();
     }
 
     void Window::PollEvents() {
         if (!m_windowImpl) {
+            SR_ERROR("Window::PollEvents() : window implementation is nullptr.");
             return;
         }
         m_windowImpl->PollEvents();

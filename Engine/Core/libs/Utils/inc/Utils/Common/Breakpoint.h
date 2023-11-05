@@ -12,6 +12,9 @@ namespace SR_UTILS_NS {
 #if defined(SR_WIN32) and defined(SR_MSVC)
         __debugbreak();
 #endif
+#ifdef SR_LINUX
+    raise(SIGTRAP);
+#endif
     }
 }
 

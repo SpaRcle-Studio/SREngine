@@ -93,7 +93,7 @@ namespace SR_UTILS_NS {
         }
 
         volatile static bool enableBreakPoints = true;
-        if (type == DebugLogType::Assert && IsRunningUnderDebugger() && enableBreakPoints) {
+        if (type == DebugLogType::Assert && Platform::IsRunningUnderDebugger() && enableBreakPoints) {
             Breakpoint();
         }
     }
@@ -160,14 +160,6 @@ namespace SR_UTILS_NS {
         }
     #endif
         m_ColorThemeIsEnabled = true;
-    }
-
-    bool Debug::IsRunningUnderDebugger() {
-#if defined(SR_WIN32) and defined(SR_MSVC)
-        return ::IsDebuggerPresent() == TRUE;
-#else
-        return false;
-#endif
     }
 
     bool Debug::AssertOnceCheck(const std::string &msg) {

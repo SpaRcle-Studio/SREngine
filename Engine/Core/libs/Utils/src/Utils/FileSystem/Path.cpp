@@ -153,7 +153,7 @@ namespace SR_UTILS_NS {
     }
 
     Path::Type Path::GetType() const {
-#if defined(SR_MSVC)
+#if defined(SR_MSVC) || defined (SR_LINUX)
         struct stat s{};
         if(stat(m_path.c_str(), &s) == 0) {
             if (s.st_mode & S_IFDIR) {

@@ -10,6 +10,10 @@ set(ASSIMP_BUILD_ASSIMP_VIEW OFF CACHE INTERNAL "" FORCE)
 set(BUILD_SHARED_LIBS OFF CACHE INTERNAL "" FORCE)
 set(ASSIMP_WARNINGS_AS_ERRORS OFF CACHE INTERNAL "" FORCE)
 
+if (UNIX AND NOT APPLE)
+    find_package(X11 REQUIRED)
+endif()
+
 if (ANDROID_NDK)
     set(ASSIMP_BUILD_ZLIB OFF CACHE INTERNAL "" FORCE)
 else()
@@ -35,7 +39,7 @@ if (SR_TRACY_ENABLE)
 endif()
 
 if (SR_UTILS_STATIC_LIBRARY)
-    add_library(Utils STATIC ICU.cxx Utils.cxx ECS.cxx World.cxx)
+    add_library(Utils STATIC cxx/ICU.cxx cxx/Utils.cxx cxx/ECS.cxx cxx/World.cxx cxx/Platform.cxx)
 
     if (CYGWIN)
 
@@ -43,8 +47,13 @@ if (SR_UTILS_STATIC_LIBRARY)
 
     endif()
 else()
-    add_library(Utils SHARED ICU.cxx Utils.cxx ECS.cxx World.cxx)
+    add_library(Utils SHARED cxx/ICU.cxx cxx/Utils.cxx cxx/ECS.cxx cxx/World.cxx cxx/Platform.cxx)
     add_library(Utils::lib ALIAS Utils)
+endif()
+
+if (UNIX AND NOT APPLE)
+    target_link_libraries(Utils ${X11_LIBRARIES})
+    target_include_directories(Utils PUBLIC ${X11_INCLUDE_DIR})
 endif()
 
 if (ANDROID_NDK)

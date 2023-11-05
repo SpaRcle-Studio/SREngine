@@ -27,6 +27,11 @@ namespace SR_UTILS_NS::Platform {
 
     }
 
+    bool IsRunningUnderDebugger() {
+        SRHaltOnce("Not implemented!");
+        return false;
+    }
+
     void* GetInstance() {
         return (void*)pAndroidInstance;
     }

@@ -71,6 +71,8 @@
 
 #ifdef SR_LINUX
     #include <cstdarg>
+    #include <sys/stat.h>
+    #include <signal.h>
 #endif
 
 #if defined(SR_WIN32)

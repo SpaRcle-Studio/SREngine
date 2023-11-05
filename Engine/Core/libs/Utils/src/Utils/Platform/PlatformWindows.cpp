@@ -185,6 +185,10 @@ namespace SR_UTILS_NS::Platform {
         CloseClipboard();
     }
 
+    bool IsRunningUnderDebugger() {
+        return ::IsDebuggerPresent() == TRUE;
+    }
+
     ///функция для получения файла/файлов из буфер обмена
     void PasteFilesFromClipboard(const SR_UTILS_NS::Path &topath) {
 

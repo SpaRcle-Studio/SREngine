@@ -21,7 +21,7 @@
 
 #ifdef SR_LINUX
     std::string SR_UTILS_NS::GetStacktrace() {
-        return "Linux not support stack trace!";
+        return "Linux implementation does not yet support stack trace!";
     }
 #endif
 

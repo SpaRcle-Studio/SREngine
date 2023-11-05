@@ -26,6 +26,7 @@ namespace SR_UTILS_NS::Platform {
     SR_DLL_EXPORT extern void CopyFilesToClipboard(std::list<SR_UTILS_NS::Path> paths);
     SR_DLL_EXPORT extern void PasteFilesFromClipboard(const SR_UTILS_NS::Path& topath);
     SR_DLL_EXPORT extern Path GetApplicationPath();
+    SR_DLL_EXPORT extern bool IsRunningUnderDebugger();
     SR_DLL_EXPORT extern Path GetApplicationName();
     SR_DLL_EXPORT extern std::string GetClipboardText();
     SR_DLL_EXPORT extern void ClearClipboard();
