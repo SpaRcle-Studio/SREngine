@@ -3,6 +3,10 @@
 //
 
 #include <Utils/Types/RawMesh.h>
+#include <Utils/Common/Features.h>
+#include <Utils/FileSystem/FileSystem.h>
+#include <Utils/ResourceManager/ResourceManager.h>
+#include <Utils/FileSystem/AssimpCache.h>
 
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>

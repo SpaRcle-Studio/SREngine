@@ -33,14 +33,19 @@ namespace SR_CORE_NS {
     void GraphicsResourceReloader::OnResourceReloaded(SR_UTILS_NS::IResource::Ptr pResource) {
         SR_TRACY_ZONE;
 
-        if (m_context.RecursiveLockIfValid()) {
-            for (auto&& [pScene, pRenderScene] : m_context->GetScenes()) {
+        auto&& pContext = m_contextGetter ? m_contextGetter() : RenderContextPtr();
+
+        if (pContext.RecursiveLockIfValid()) {
+            for (auto&& [pScene, pRenderScene] : pContext->GetScenes()) {
                 if (pRenderScene.LockIfValid()) {
                     pRenderScene->OnResourceReloaded(pResource);
                     pRenderScene.Unlock();
                 }
             }
-            m_context.Unlock();
+            pContext.Unlock();
+        }
+        else {
+            SR_WARN("GraphicsResourceReloader::OnResourceReloaded() : render context is not available!");
         }
     }
 }

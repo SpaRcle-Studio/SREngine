@@ -58,6 +58,9 @@ namespace SR_GRAPH_NS {
         using WindowPtr = SR_HTYPES_NS::SafePtr<Window>;
         using RenderScenes = std::list<std::pair<SR_WORLD_NS::Scene::Ptr, RenderScenePtr>>;
     public:
+        using Ptr = SR_HTYPES_NS::SafePtr<RenderContext>;
+
+    public:
         explicit RenderContext(const WindowPtr& pWindow);
         virtual ~RenderContext();
 

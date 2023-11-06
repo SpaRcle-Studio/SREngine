@@ -25,6 +25,20 @@ namespace SR_UTILS_NS {
         String
     );
 
+    union StandardData {
+        bool m_bool;
+        int8_t m_int8;
+        uint8_t m_uint8;
+        int16_t m_int16;
+        uint16_t m_uint16;
+        int32_t m_int32;
+        uint32_t m_uint32;
+        int64_t m_int64;
+        uint64_t m_uint64;
+        float_t m_float;
+        double_t m_double;
+    };
+
     template<typename Any> static StandardType GetStandardType(const Any& any) {
         StandardType type = StandardType::Unknown;
 

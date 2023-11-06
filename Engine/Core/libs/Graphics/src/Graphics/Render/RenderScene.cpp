@@ -519,6 +519,7 @@ namespace SR_GRAPH_NS {
         m_debug.OnResourceReloaded(pResource);
         m_opaque.OnResourceReloaded(pResource);
         m_transparent.OnResourceReloaded(pResource);
+        m_flat.OnResourceReloaded(pResource);
 
         SetDirty();
     }

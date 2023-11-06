@@ -52,6 +52,9 @@ namespace SR_MATH_NS {
         SR_NODISCARD constexpr T Bottom() const noexcept { return y;  }
         SR_NODISCARD constexpr T Top() const noexcept { return Bottom() + Height(); }
 
+        SR_NODISCARD constexpr SR_MATH_NS::Vector2<T> XY() const noexcept { return SR_MATH_NS::Vector2<T>(x, y); }
+        SR_NODISCARD constexpr SR_MATH_NS::Vector2<T> WH() const noexcept { return SR_MATH_NS::Vector2<T>(w, h); }
+
     public:
         SR_NODISCARD static Rect<Unit> FromTranslationAndScale(const SR_MATH_NS::FVector2& translation, const SR_MATH_NS::FVector2& scale);
 

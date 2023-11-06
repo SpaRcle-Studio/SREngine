@@ -60,7 +60,7 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD virtual bool IsUniqueMesh() const { return false; }
         SR_NODISCARD virtual bool IsMeshDestroyed() const { return m_isMeshDestroyed; }
 
-        SR_NODISCARD virtual SR_FORCE_INLINE bool IsMeshActive() const noexcept { return true; }
+        SR_NODISCARD virtual SR_FORCE_INLINE bool IsMeshActive() const noexcept { return !m_hasErrors; }
         SR_NODISCARD virtual SR_FORCE_INLINE bool IsDebugMesh() const noexcept { return false; }
         SR_NODISCARD virtual SR_FORCE_INLINE bool IsFlatMesh() const noexcept { return false; }
         SR_NODISCARD virtual SR_MATH_NS::FVector3 GetTranslation() const { return SR_MATH_NS::FVector3::Zero(); }

@@ -1,0 +1,17 @@
+#include <Utils/stdInclude.h>
+
+#include "../../Utils/src/Utils/Types/MarshalProperties.cpp"
+#include "../../Utils/src/Utils/Types/String.cpp"
+#include "../../Utils/src/Utils/Types/Time.cpp"
+#include "../../Utils/src/Utils/Types/Time.cpp"
+#include "../../Utils/src/Utils/Types/Marshal.cpp"
+#include "../../Utils/src/Utils/Types/EDMarshal.cpp"
+#include "../../Utils/src/Utils/Types/Thread.cpp"
+#include "../../Utils/src/Utils/Types/SafeQueue.cpp"
+#include "../../Utils/src/Utils/Types/RawMesh.cpp"
+#include "../../Utils/src/Utils/Types/UnicodeString.cpp"
+#include "../../Utils/src/Utils/Types/Stream.cpp"
+#include "../../Utils/src/Utils/Types/Regex.cpp"
+#include "../../Utils/src/Utils/Types/IRawMeshHolder.cpp"
+#include "../../Utils/src/Utils/Types/Mutex.cpp"
+#include "../../Utils/src/Utils/Types/LockGuard.cpp"

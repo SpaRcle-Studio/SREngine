@@ -109,6 +109,7 @@ namespace SR_GRAPH_NS::Types {
         }
 
         m_dirtyMaterial = true;
+        m_hasErrors = false;
 
         if (m_material) {
             m_material->RemoveUsePoint();
@@ -179,17 +180,20 @@ namespace SR_GRAPH_NS::Types {
 
         if (pResource == m_material) {
             m_dirtyMaterial = true;
+            m_hasErrors = false;
             return;
         }
 
         if (m_material->GetShader() == pResource) {
             m_dirtyMaterial = true;
+            m_hasErrors = false;
             return;
         }
 
         auto&& pTexture = dynamic_cast<SR_GTYPES_NS::Texture*>(pResource);
         if (pTexture && m_material->ContainsTexture(pTexture)) {
             m_dirtyMaterial = true;
+            m_hasErrors = false;
         }
     }
 

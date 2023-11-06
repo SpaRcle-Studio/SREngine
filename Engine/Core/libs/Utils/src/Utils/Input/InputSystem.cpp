@@ -6,6 +6,10 @@
 #include <Utils/Platform/Platform.h>
 #include <Utils/Profile/TracyContext.h>
 
+#ifdef SR_WIN32
+    #include <Windows.h>
+#endif
+
 namespace SR_UTILS_NS {
     void Input::Check() {
         SR_TRACY_ZONE;

@@ -5,6 +5,8 @@
 #include <Utils/Types/Thread.h>
 #include <Utils/Platform/Platform.h>
 #include <Utils/Types/DataStorage.h>
+#include <Utils/Common/StringUtils.h>
+#include <Utils/Profile/TracyContext.h>
 
 namespace SR_HTYPES_NS {
     Thread::Thread(std::thread &&thread)

@@ -39,7 +39,7 @@ if (SR_TRACY_ENABLE)
 endif()
 
 if (SR_UTILS_STATIC_LIBRARY)
-    add_library(Utils STATIC cxx/ICU.cxx cxx/Utils.cxx cxx/ECS.cxx cxx/World.cxx cxx/Platform.cxx)
+    add_library(Utils STATIC cxx/ICU.cxx cxx/Utils.cxx cxx/ECS.cxx cxx/World.cxx cxx/Platform.cxx cxx/Types.cxx)
 
     if (CYGWIN)
 
@@ -47,7 +47,7 @@ if (SR_UTILS_STATIC_LIBRARY)
 
     endif()
 else()
-    add_library(Utils SHARED cxx/ICU.cxx cxx/Utils.cxx cxx/ECS.cxx cxx/World.cxx cxx/Platform.cxx)
+    add_library(Utils SHARED cxx/ICU.cxx cxx/Utils.cxx cxx/ECS.cxx cxx/World.cxx cxx/Platform.cxx cxx/Types.cxx)
     add_library(Utils::lib ALIAS Utils)
 endif()
 

@@ -49,12 +49,14 @@ namespace SR_CORE_NS::Resources {
 
         resourcesManager.RegisterReloader<SR_SCRIPTING_NS::Behaviour, SR_SCRIPTING_NS::EvoScriptResourceReloader>();
 
-        auto&& pRenderContext = pEngine->GetRenderContext();
+        const auto contextGetter = [pEngine]() -> SR_GRAPH_NS::RenderContext::Ptr {
+            return pEngine ? pEngine->GetRenderContext() : SR_GRAPH_NS::RenderContext::Ptr();
+        };
 
-        resourcesManager.RegisterReloader<SR_HTYPES_NS::RawMesh, SR_CORE_NS::GraphicsResourceReloader>(pRenderContext);
-        resourcesManager.RegisterReloader<SR_GTYPES_NS::Texture, SR_CORE_NS::GraphicsResourceReloader>(pRenderContext);
-        resourcesManager.RegisterReloader<SR_GTYPES_NS::Material, SR_CORE_NS::GraphicsResourceReloader>(pRenderContext);
-        resourcesManager.RegisterReloader<SR_GTYPES_NS::Shader, SR_CORE_NS::GraphicsResourceReloader>(pRenderContext);
+        resourcesManager.RegisterReloader<SR_HTYPES_NS::RawMesh, SR_CORE_NS::GraphicsResourceReloader>(contextGetter);
+        resourcesManager.RegisterReloader<SR_GTYPES_NS::Texture, SR_CORE_NS::GraphicsResourceReloader>(contextGetter);
+        resourcesManager.RegisterReloader<SR_GTYPES_NS::Material, SR_CORE_NS::GraphicsResourceReloader>(contextGetter);
+        resourcesManager.RegisterReloader<SR_GTYPES_NS::Shader, SR_CORE_NS::GraphicsResourceReloader>(contextGetter);
 
         return true;
     }

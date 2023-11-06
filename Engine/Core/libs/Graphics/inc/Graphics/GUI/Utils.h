@@ -504,6 +504,55 @@ namespace SR_GRAPH_GUI_NS {
         return result;
     }
 
+    SR_MAYBE_UNUSED static bool DrawVec2Control(
+            const std::string& label,
+            SR_MATH_NS::FVector2& values,
+            float_t resetValue = 0.0f,
+            float_t columnWidth = 70.0f,
+            float_t drag = 0.1,
+            uint32_t index = 0,
+            bool active = true)
+    {
+        bool result = false;
+
+        ImGui::PushID(label.c_str());
+
+        ImGui::Columns(2);
+        ImGui::SetColumnWidth(0, columnWidth);
+        ImGui::Text("%s", label.c_str());
+        ImGui::NextColumn();
+
+        ImGui::PushMultiItemsWidths(2, ImGui::CalcItemWidth());
+        ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2{ 0, 0 });
+
+        float lineHeight = GImGui->Font->FontSize + GImGui->Style.FramePadding.y * 2.0f;
+        ImVec2 buttonSize = { lineHeight + 3.0f, lineHeight };
+
+        /// ---------------------------------------------------------------------------
+
+        result |= DrawValueControl<SR_MATH_NS::Unit>("X", values.x, resetValue, buttonSize,
+                ImVec4{ 0.8f, 0.1f, 0.15f, 1.0f },
+                ImVec4{ 0.9f, 0.2f, 0.2f, 1.0f  },
+                ImVec4{ 0.8f, 0.1f, 0.15f, 1.0f }, nullptr, active, drag, index);
+
+        ImGui::PopItemWidth();
+        ImGui::SameLine();
+
+        result |= DrawValueControl<SR_MATH_NS::Unit>("Y", values.y, resetValue, buttonSize,
+               ImVec4{ 0.2f, 0.7f, 0.2f, 1.0f },
+               ImVec4{ 0.3f, 0.8f, 0.3f, 1.0f },
+               ImVec4{ 0.2f, 0.7f, 0.2f, 1.0f }, nullptr, active, drag, index);
+
+        ImGui::PopItemWidth();
+        ImGui::PopStyleVar();
+
+        ImGui::Columns(1);
+
+        ImGui::PopID();
+
+        return result;
+    }
+
     SR_MAYBE_UNUSED static bool DrawBVec3Control(
             const std::string& label,
             SR_MATH_NS::BVector3& values,

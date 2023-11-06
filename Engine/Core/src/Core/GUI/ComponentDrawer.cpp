@@ -588,26 +588,38 @@ namespace SR_CORE_NS::GUI {
 
     }
 
-    void ComponentDrawer::DrawComponent(SR_GTYPES_NS::Sprite *&sprite, EditorGUI *context, int32_t index) {
-        if (!sprite->IsCalculatable())
+    void ComponentDrawer::DrawComponent(SR_GTYPES_NS::Sprite*& pComponent, EditorGUI *context, int32_t index) {
+        if (!pComponent->IsCalculatable())
             ImGui::TextColored(ImVec4(1, 0, 0, 1), "Invalid mesh!");
 
-        if (!sprite->IsCalculated())
+        if (!pComponent->IsCalculated())
             ImGui::TextColored(ImVec4(1, 1, 0, 1), "Mesh isn't calculated!");
 
-        if (!sprite->GetRenderContext())
+        if (!pComponent->GetRenderContext())
             ImGui::TextColored(ImVec4(1, 1, 0, 1), "Mesh isn't registered!");
 
         ImGui::Separator();
 
-        auto&& pMaterial = sprite->GetMaterial();
+        auto&& textureBorder = pComponent->GetTextureBorder();
+        if (Graphics::GUI::DrawVec2Control("Texture border", textureBorder, 0.15f, 80.f, 0.01f, index)) {
+            pComponent->SetTextureBorder(textureBorder);
+        }
+
+        auto&& windowBorder = pComponent->GetWindowBorder();
+        if (Graphics::GUI::DrawVec2Control("Window border", windowBorder, 0.15f, 80.f, 0.01f, index)) {
+            pComponent->SetWindowBorder(windowBorder);
+        }
+
+        ImGui::Separator();
+
+        auto&& pMaterial = pComponent->GetMaterial();
 
         SR_GTYPES_NS::Material* copy = pMaterial;
         DrawComponent(copy, context, index);
 
         /// компилятор считает, что это недостижимый код (он ошибается)
         if (copy != pMaterial) {
-            sprite->SetMaterial(copy);
+            pComponent->SetMaterial(copy);
         }
     }
 

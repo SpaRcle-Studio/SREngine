@@ -320,7 +320,7 @@ namespace SR_GRAPH_NS {
 
         m_currentVkShader = m_memory->m_ShaderPrograms[shaderProgram];
         if (!m_currentVkShader) {
-            PipelineError("Vulkan::UseShader() : shader is nullptr!");
+            SRHalt("Vulkan::UseShader() : shader is nullptr!");
             return;
         }
         m_currentLayout = m_currentVkShader->GetPipelineLayout();
@@ -336,7 +336,7 @@ namespace SR_GRAPH_NS {
 
         if (fbo < 0) {
             SRHalt("VulkanPipeline::AllocateShaderProgram() : vulkan required valid FBO for shaders!");
-            return false;
+            return SR_ID_INVALID;
         }
 
         if (!createInfo.Validate()) {
@@ -346,7 +346,7 @@ namespace SR_GRAPH_NS {
                  "\n\tDepth compare: " + SR_UTILS_NS::EnumReflector::ToString(createInfo.depthCompare) +
                  "\n\tPrimitive topology: " + SR_UTILS_NS::EnumReflector::ToString(createInfo.primitiveTopology)
             );
-            return false;
+            return SR_ID_INVALID;
         }
 
         EvoVulkan::Types::RenderPass renderPass = m_kernel->GetRenderPass();
@@ -356,19 +356,19 @@ namespace SR_GRAPH_NS {
             }
             else {
                 PipelineError("VulkanPipeline::CompileShader() : invalid FBO! SOMETHING WENT WRONG! MEMORY MAY BE CORRUPTED!");
-                return false;
+                return SR_ID_INVALID;
             }
         }
 
         if (!renderPass.IsReady()) {
             PipelineError("VulkanPipeline::CompileShader() : internal Evo Vulkan error! Render pass isn't ready!");
-            return false;
+            return SR_ID_INVALID;
         }
 
         ShaderProgram shaderProgram = m_memory->AllocateShaderProgram(renderPass);
         if (shaderProgram < 0) {
             PipelineError("VulkanPipeline::CompileShader() : failed to allocate shader program ID!");
-            return false;
+            return SR_ID_INVALID;
         }
 
         auto&& pShaderProgram = m_memory->m_ShaderPrograms[shaderProgram];
@@ -382,7 +382,7 @@ namespace SR_GRAPH_NS {
 
         if (modules.empty()) {
             SRHalt("No shader modules were found!");
-            return false;
+            return SR_ID_INVALID;
         }
 
         auto&& pushConstants = VulkanTools::AbstractPushConstantToVkPushConstants(createInfo);
@@ -390,7 +390,7 @@ namespace SR_GRAPH_NS {
         auto&& descriptorLayoutBindings = VulkanTools::UniformsToDescriptorLayoutBindings(createInfo.uniforms);
         if (!descriptorLayoutBindings.has_value()) {
             SRHalt("VulkanPipeline::AllocateShaderProgram() : failed to create descriptor layout bindings!");
-            return false;
+            return SR_ID_INVALID;
         }
 
         std::vector<EvoVulkan::Complexes::SourceShader> vkModules;
@@ -410,7 +410,7 @@ namespace SR_GRAPH_NS {
             EVK_POP_LOG_LEVEL();
             FreeShader(&shaderProgram);
             PipelineError("VulkanPipeline::CompileShader() : failed to load Evo Vulkan shader!");
-            return false;
+            return SR_ID_INVALID;
         }
 
         EVK_POP_LOG_LEVEL();
@@ -420,13 +420,13 @@ namespace SR_GRAPH_NS {
         if (vkVertexAttributes.size() != createInfo.vertexAttributes.size()) {
             PipelineError("VulkanPipeline::LinkShader() : vkVertexDescriptions size != vertexDescriptions size!");
             FreeShader(&shaderProgram);
-            return false;
+            return SR_ID_INVALID;
         }
 
         if (!pShaderProgram->SetVertexDescriptions(vkVertexDescriptions, vkVertexAttributes)) {
             PipelineError("VulkanPipeline::LinkShader() : failed to set vertex descriptions!");
             FreeShader(&shaderProgram);
-            return false;
+            return SR_ID_INVALID;
         }
 
         const CullMode cullMode = createInfo.cullMode;
@@ -449,7 +449,7 @@ namespace SR_GRAPH_NS {
             EVK_POP_LOG_LEVEL();
             PipelineError("VulkanPipeline::LinkShader() : failed to compile Evo Vulkan shader!");
             FreeShader(&shaderProgram);
-            return false;
+            return SR_ID_INVALID;
         }
 
         EVK_POP_LOG_LEVEL();

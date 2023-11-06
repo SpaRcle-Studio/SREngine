@@ -66,18 +66,14 @@ namespace SR_GTYPES_NS {
         }
 
 		auto&& pShader = GetPipeline()->GetCurrentShader();
-        auto&& uboManager = Memory::UBOManager::Instance();
 
         if (m_dirtyMaterial)
         {
             m_dirtyMaterial = false;
 
-            m_virtualUBO = uboManager.ReAllocateUBO(m_virtualUBO, pShader->GetUBOBlockSize(), pShader->GetSamplersCount());
+            m_virtualUBO = m_uboManager.ReAllocateUBO(m_virtualUBO, pShader->GetUBOBlockSize(), pShader->GetSamplersCount());
 
-            if (m_virtualUBO != SR_ID_INVALID) {
-                uboManager.BindUBO(m_virtualUBO);
-            }
-            else {
+            if (m_virtualUBO == SR_ID_INVALID || m_uboManager.BindUBO(m_virtualUBO) == Memory::UBOManager::BindResult::Failed) {
                 m_pipeline->ResetDescriptorSet();
                 m_hasErrors = true;
                 return;
@@ -90,8 +86,7 @@ namespace SR_GTYPES_NS {
             pShader->FlushSamplers();
         }
 
-        const auto result = uboManager.BindUBO(m_virtualUBO);
-        switch (result) {
+        switch (m_uboManager.BindUBO(m_virtualUBO)) {
             case Memory::UBOManager::BindResult::Duplicated:
                 pShader->InitUBOBlock();
                 pShader->Flush();
@@ -132,7 +127,7 @@ namespace SR_GTYPES_NS {
             pShader->SetMat4(SHADER_MODEL_MATRIX, m_modelMatrix);
 
             if (m_sliced) {
-                //pShader->SetVec4(SHADER_SLICED_RECT, m_slicedRect);
+                pShader->SetRect(SHADER_SLICED_RECT, m_slicedRect);
             }
         }
         else {

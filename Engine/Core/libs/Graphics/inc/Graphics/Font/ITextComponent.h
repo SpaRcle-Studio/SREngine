@@ -51,7 +51,7 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD SR_FORCE_INLINE SR_MATH_NS::UVector2 GetFontSize() const noexcept { return m_fontSize; }
 
         SR_NODISCARD SR_FORCE_INLINE bool IsMeshActive() const noexcept override {
-            return SR_UTILS_NS::Component::IsActive();
+            return SR_UTILS_NS::Component::IsActive() && Mesh::IsMeshActive();
         }
 
         const SR_MATH_NS::Matrix4x4& GetModelMatrix() const override {

@@ -211,7 +211,7 @@
     #include "../../Utils/libs/icu/uvectr64.cpp"
 
     #ifdef SR_WIN32
-        #include "../Utils/libs/icu/wintz.cpp"
+        #include "../../Utils/libs/icu/wintz.cpp"
     #endif
 #endif
 

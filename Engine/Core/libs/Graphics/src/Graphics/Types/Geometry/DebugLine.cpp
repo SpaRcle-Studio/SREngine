@@ -31,10 +31,7 @@ namespace SR_GTYPES_NS {
 
             m_virtualUBO = m_uboManager.ReAllocateUBO(m_virtualUBO, pShader->GetUBOBlockSize(), pShader->GetSamplersCount());
 
-            if (m_virtualUBO != SR_ID_INVALID) {
-                m_uboManager.BindUBO(m_virtualUBO);
-            }
-            else {
+            if (m_virtualUBO == SR_ID_INVALID || m_uboManager.BindUBO(m_virtualUBO) == Memory::UBOManager::BindResult::Failed) {
                 m_pipeline->ResetDescriptorSet();
                 m_hasErrors = true;
                 return;

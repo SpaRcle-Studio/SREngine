@@ -189,6 +189,7 @@ namespace SR_GRAPH_NS::Types {
     void Shader::SetMat4(uint64_t hashId, const SR_MATH_NS::Matrix4x4& v) noexcept { SetValue<false>(hashId, &v); }
     void Shader::SetVec3(uint64_t hashId, const SR_MATH_NS::FVector3& v) noexcept { SetValue<false>(hashId, &v); }
     void Shader::SetVec4(uint64_t hashId, const SR_MATH_NS::FVector4& v) noexcept { SetValue<false>(hashId, &v); }
+    void Shader::SetRect(uint64_t hashId, const SR_MATH_NS::FRect& v) noexcept { SetValue<false>(hashId, &v); }
     void Shader::SetVec2(uint64_t hashId, const SR_MATH_NS::FVector2& v) noexcept { SetValue<false>(hashId, &v); }
     void Shader::SetIVec2(uint64_t hashId, const SR_MATH_NS::IVector2& v) noexcept { SetValue<false>(hashId, &v); }
 

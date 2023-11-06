@@ -3,6 +3,7 @@
 //
 
 #include <Utils/Types/Marshal.h>
+#include <Utils/Common/StringUtils.h>
 #include <Utils/ResourceManager/ResourceManager.h>
 
 namespace SR_HTYPES_NS {
