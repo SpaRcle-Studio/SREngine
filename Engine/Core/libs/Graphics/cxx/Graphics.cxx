@@ -106,3 +106,7 @@
 #if defined(SR_ANDROID)
     #include "../../Graphics/src/Graphics/Window/AndroidWindow.cpp"
 #endif
+
+#if defined(SR_LINUX)
+    #include "../../Graphics/src/Graphics/Window/X11Window.cpp"
+#endif

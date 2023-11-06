@@ -136,8 +136,7 @@ namespace SR_UTILS_NS::Platform {
     }
 
     bool CreateFolder(const std::string& path) {
-        SRHaltOnce("Not implemented!");
-        return false;
+        return mkdir(path.c_str(), S_IRWXU);
     }
 
     bool Delete(const Path &path) {

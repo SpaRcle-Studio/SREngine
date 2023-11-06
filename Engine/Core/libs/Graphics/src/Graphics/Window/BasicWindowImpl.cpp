@@ -9,6 +9,8 @@
     #include <Graphics/Window/Win32Window.h>
 #elif defined(SR_ANDROID)
     #include <Graphics/Window/AndroidWindow.h>
+#elif defined(SR_LINUX)
+    #include <Graphics/Window/X11Window.h>
 #endif
 
 namespace SR_GRAPH_NS {
@@ -63,6 +65,18 @@ namespace SR_GRAPH_NS {
         }
 
         SR_ERROR("BasicWindowImpl::CreatePlatformWindow() : OS Android not support \"" +
+                 SR_UTILS_NS::EnumReflector::ToString(type) + "\" window!"
+        );
+    #elif defined (SR_LINUX)
+        switch (type) {
+            case WindowType::Auto:
+            case WindowType::X11:
+                return new X11Window();
+            default:
+                break;
+        }
+
+        SR_ERROR("BasicWindowImpl::CreatePlatformWindow() : Linux OS does not yet support \"" +
                  SR_UTILS_NS::EnumReflector::ToString(type) + "\" window!"
         );
     #else
