@@ -10,6 +10,9 @@
 #include <unistd.h>         // readlink
 #include <linux/limits.h>   // PATH_MAX
 #include <X11/Xlib.h>
+#include <X11/extensions/Xrandr.h>
+
+#include <filesystem>
 
 namespace SR_UTILS_NS::Platform {
     void SegmentationHandler(int sig) {
@@ -172,14 +175,7 @@ namespace SR_UTILS_NS::Platform {
     }
 
     Path GetApplicationPath() {
-        char result[PATH_MAX];
-        ssize_t count = readlink("/proc/self/exe", result, PATH_MAX);
-        const char* path = nullptr;
-        if (count != -1) {
-            path = dirname(result);
-        }
-
-        return path;
+        return std::filesystem::current_path().string();
     }
 
     Path GetApplicationName() {
@@ -214,12 +210,14 @@ namespace SR_UTILS_NS::Platform {
 
     std::vector<SR_MATH_NS::UVector2> GetScreenResolutions() {
         std::vector<SR_MATH_NS::UVector2> resolutions;
-        if (auto&& pDisplay = XOpenDisplay(nullptr)) {
+        if (auto&& pDisplay = XOpenDisplay(":0")) {
             for (int32_t i = 0; i < ScreenCount(pDisplay); ++i) {
-                if (auto&& pScreen = ScreenOfDisplay(pDisplay, i)) {
-                    resolutions.emplace_back(SR_MATH_NS::UVector2(pScreen->width, pScreen->height));
-                }
+                auto&& screen = XRRGetScreenResources(pDisplay, DefaultRootWindow(pDisplay));
+                //0 to get the first monitor
+                auto&& crtc_info = XRRGetCrtcInfo (pDisplay, screen, screen->crtcs[0]);
+                resolutions.emplace_back(crtc_info->width, crtc_info->height);
             }
+            XCloseDisplay(pDisplay);
         }
 
         return resolutions;

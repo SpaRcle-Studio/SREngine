@@ -51,6 +51,11 @@ else()
     add_library(Graphics::lib ALIAS Graphics)
 endif()
 
+if (UNIX AND NOT APPLE)
+    target_link_libraries(Graphics ${X11_xcb_LIB} X11-xcb)
+    target_include_directories(Graphics PUBLIC "${X11_xcb_INCLUDE_PATH}")
+endif()
+
 target_link_libraries(Graphics CMP_Core freetype)
 
 if (EVO_VULKAN_STATIC_LIBRARY)
