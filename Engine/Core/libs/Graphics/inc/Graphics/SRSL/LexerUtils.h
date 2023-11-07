@@ -192,7 +192,7 @@ namespace SR_SRSL_NS {
             }
 
             if (lexemKind != LexemKind::Unknown) {
-                message += "\n" + std::string(tab, '\t') + "Lexem: " + SR_UTILS_NS::EnumReflector::ToString(lexemKind);
+                message += "\n" + std::string(tab, '\t') + "Lexem: " + SR_UTILS_NS::EnumReflector::ToString(lexemKind).ToStringRef();
             }
 
             return message;

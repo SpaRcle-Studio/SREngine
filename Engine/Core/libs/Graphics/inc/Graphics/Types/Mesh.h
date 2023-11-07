@@ -103,7 +103,7 @@ namespace SR_GTYPES_NS {
     protected:
         Memory::UBOManager& m_uboManager;
 
-        const MeshType m_meshType = MeshType::Unknown;
+        MeshType m_meshType = MeshType::Unknown;
 
         MaterialPtr m_material = nullptr;
 

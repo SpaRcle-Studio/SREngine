@@ -66,6 +66,8 @@ namespace SR_SRSL_NS {
 
             { "HALF_SIZE_NEAR_PLANE",           "vec2"          },
             { "RESOLUTION",                     "vec2"          },
+            { "SLICED_TEXTURE_BORDER",          "vec2"          },
+            { "SLICED_WINDOW_BORDER",           "vec2"          },
 
             { "DIRECTIONAL_LIGHT_POSITION",     "vec3"          },
             { "VIEW_POSITION",                  "vec3"          },
@@ -76,7 +78,6 @@ namespace SR_SRSL_NS {
             { "SSAO_SAMPLES",                   "vec4[64]"      },
 
             { "LINE_COLOR",                     "vec4"          },
-            { "SLICED_RECT",                    "vec4"          },
 
             { "TIME",                           "float"         },
             { "TEXT_RECT_X",                    "float"         },

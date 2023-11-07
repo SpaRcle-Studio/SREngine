@@ -24,7 +24,7 @@ namespace SR_GTYPES_NS {
 
         const auto&& material = marshal.Read<std::string>();
 
-        auto&& pSprite = new Sprite();
+        auto&& pSprite = SR_UTILS_NS::ComponentManager::Instance().CreateComponent<Sprite>();
 
         if (material != "None") {
             if (auto&& pMaterial = SR_GTYPES_NS::Material::Load(material)) {
@@ -127,7 +127,8 @@ namespace SR_GTYPES_NS {
             pShader->SetMat4(SHADER_MODEL_MATRIX, m_modelMatrix);
 
             if (m_sliced) {
-                pShader->SetRect(SHADER_SLICED_RECT, m_slicedRect);
+                pShader->SetVec2(SHADER_SLICED_TEXTURE_BORDER, m_textureBorder);
+                pShader->SetVec2(SHADER_SLICED_WINDOW_BORDER, m_windowBorder);
             }
         }
         else {
@@ -145,5 +146,35 @@ namespace SR_GTYPES_NS {
             pRenderScene->GetFlatCluster().MarkDirty();
         }
         Component::OnPriorityDirty();
+    }
+
+    void Sprite::InitProperties() {
+        m_properties.AddStandardProperty("Sliced", &m_sliced);
+
+        m_properties.AddStandardProperty("Texture border", &m_textureBorder)
+            .SetDrag(0.01f)
+            .SetWidth(90.f);
+
+        m_properties.AddStandardProperty("Window border", &m_windowBorder)
+            .SetDrag(0.01f)
+            .SetWidth(90.f);
+
+        m_properties.AddEnumProperty("Mesh type", &m_meshType).SetReadOnly();
+
+        m_properties.AddCustomProperty<SR_UTILS_NS::StandardProperty>("Material")
+            .SetType(SR_UTILS_NS::StandardType::Path)
+            .SetGetter([this](void* pData) {
+                if (m_material) {
+                    *reinterpret_cast<SR_UTILS_NS::Path*>(pData) = m_material->GetResourcePath();
+                }
+                else {
+                    *reinterpret_cast<SR_UTILS_NS::Path*>(pData) = SR_UTILS_NS::Path();
+                }
+            })
+            .SetSetter([this](void* pData) {
+                SetMaterial(*reinterpret_cast<SR_UTILS_NS::Path*>(pData));
+            });
+
+        Component::InitProperties();
     }
 }

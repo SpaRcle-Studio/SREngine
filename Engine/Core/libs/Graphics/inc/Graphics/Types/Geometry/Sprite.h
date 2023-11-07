@@ -34,6 +34,7 @@ namespace SR_GTYPES_NS {
         void UseMaterial() override;
         void UseModelMatrix() override;
         void OnPriorityDirty() override;
+        void InitProperties() override;
 
         SR_NODISCARD bool IsFlatMesh() const noexcept override { return true; }
 
@@ -42,17 +43,15 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD std::vector<uint32_t> GetIndices() const override;
         SR_NODISCARD std::string GetMeshIdentifier() const override;
 
-        SR_NODISCARD SR_MATH_NS::FVector2 GetTextureBorder() const { return m_slicedRect.XY(); }
-        SR_NODISCARD SR_MATH_NS::FVector2 GetWindowBorder() const { return m_slicedRect.WH(); }
+        SR_NODISCARD SR_MATH_NS::FVector2 GetTextureBorder() const { return m_textureBorder; }
+        SR_NODISCARD SR_MATH_NS::FVector2 GetWindowBorder() const { return m_windowBorder; }
 
         void SetTextureBorder(const SR_MATH_NS::FVector2& border) {
-            m_slicedRect.x = border.x;
-            m_slicedRect.y = border.y;
+            m_textureBorder = border;
         }
 
         void SetWindowBorder(const SR_MATH_NS::FVector2& border) {
-            m_slicedRect.w = border.x;
-            m_slicedRect.h = border.y;
+            m_windowBorder = border;
         }
 
         SR_NODISCARD Component* CopyComponent() const override;
@@ -65,7 +64,8 @@ namespace SR_GTYPES_NS {
 
     protected:
         bool m_sliced = true;
-        SR_MATH_NS::FRect m_slicedRect = SR_MATH_NS::FRect(0.15f, 0.15f, 0.15f, 0.15f);
+        SR_MATH_NS::FVector2 m_textureBorder = 0.15f;
+        SR_MATH_NS::FVector2 m_windowBorder = 0.15f;
 
     };
 }

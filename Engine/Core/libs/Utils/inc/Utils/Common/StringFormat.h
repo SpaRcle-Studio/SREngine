@@ -17,7 +17,7 @@ namespace SR_UTILS_NS {
             return std::to_string(value);
         }
         else if constexpr (std::is_enum_v<T>) {
-            return SR_UTILS_NS::EnumReflector::ToString(value);
+            return SR_UTILS_NS::EnumReflector::ToString(value).ToString();
         }
         else if constexpr (SR_MATH_NS::IsString<T>()) {
             return value;

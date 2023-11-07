@@ -7,6 +7,10 @@
 
 #include <Utils/Common/Enumerations.h>
 #include <Utils/Common/AnyVisitor.h>
+#include <Utils/Math/Vector2.h>
+#include <Utils/Math/Vector3.h>
+#include <Utils/Math/Vector4.h>
+#include <Utils/Math/Vector6.h>
 
 namespace SR_UTILS_NS {
     SR_ENUM_NS_CLASS_T(StandardType, uint16_t,
@@ -22,7 +26,19 @@ namespace SR_UTILS_NS {
         UInt64,
         Float,
         Double,
-        String
+
+        String,
+        StringAtom,
+
+        Enum,
+        Class,
+
+        Path,
+
+        FVector2, FVector3, FVector4, FVector5, FVector6,
+        IVector2, IVector3, IVector4, IVector5, IVector6,
+        UVector2, UVector3, UVector4, UVector5, UVector6,
+        BVector2, BVector3, BVector4, BVector5, BVector6
     );
 
     union StandardData {
@@ -99,6 +115,27 @@ namespace SR_UTILS_NS {
         }
         else if constexpr (std::is_same<T, std::string>() || std::is_same<T, const char*>()) {
             return StandardType::String;
+        }
+        else if constexpr (std::is_same<T, std::string>() || std::is_same<T, const char*>()) {
+            return StandardType::String;
+        }
+        else if constexpr (std::is_same<T, SR_MATH_NS::FVector2>() || std::is_same<T, SR_MATH_NS::Vector2<float>>() || std::is_same<T, SR_MATH_NS::Vector2<float_t>>()) {
+            return StandardType::FVector2;
+        }
+        else if constexpr (std::is_same<T, SR_MATH_NS::FVector3>() || std::is_same<T, SR_MATH_NS::Vector3<float>>() || std::is_same<T, SR_MATH_NS::Vector3<float_t>>()) {
+            return StandardType::FVector3;
+        }
+        else if constexpr (std::is_same<T, SR_MATH_NS::FVector4>() || std::is_same<T, SR_MATH_NS::Vector4<float>>() || std::is_same<T, SR_MATH_NS::Vector4<float_t>>()) {
+            return StandardType::FVector4;
+        }
+        else if constexpr (std::is_same<T, SR_MATH_NS::FVector6>() || std::is_same<T, SR_MATH_NS::Vector6<float>>() || std::is_same<T, SR_MATH_NS::Vector6<float_t>>()) {
+            return StandardType::FVector6;
+        }
+        else if constexpr (std::is_class_v<T>) {
+            return StandardType::Class;
+        }
+        else if constexpr (std::is_enum_v<T>) {
+            return StandardType::Enum;
         }
         else
             return StandardType::Unknown;

@@ -10,11 +10,18 @@
 #include <Utils/Types/Map.h>
 
 namespace SR_UTILS_NS {
+    struct StringHashInfo {
+        std::string data;
+        uint64_t hash = SR_ID_INVALID;
+        uint64_t size = 0;
+    };
+
     class HashManager : public SR_UTILS_NS::Singleton<HashManager> {
         friend class SR_UTILS_NS::Singleton<HashManager>;
         using Hash = uint64_t;
     public:
         void InitSingleton() override;
+        void OnSingletonDestroy() override;
 
         SR_NODISCARD bool IsSingletonCanBeDestroyed() const override {
             return false;
@@ -23,12 +30,19 @@ namespace SR_UTILS_NS {
         SR_NODISCARD const std::string& HashToString(Hash hash) const;
         SR_NODISCARD bool Exists(Hash hash) const;
 
+        SR_NODISCARD StringHashInfo* GetOrAddInfo(const std::string& str);
+        SR_NODISCARD StringHashInfo* GetOrAddInfo(const std::string_view& str);
+        SR_NODISCARD StringHashInfo* GetOrAddInfo(const char* str);
+
         Hash AddHash(const std::string& str);
         Hash AddHash(const std::string_view& str);
         Hash AddHash(const char* str);
 
     private:
-        ska::flat_hash_map<Hash, std::string> m_strings;
+        SR_NODISCARD StringHashInfo* Register(std::string str, Hash hash);
+
+    private:
+        ska::flat_hash_map<Hash, StringHashInfo*> m_strings;
 
     };
 }

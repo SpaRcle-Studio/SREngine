@@ -192,8 +192,8 @@ namespace SR_GTYPES_NS {
             if (auto&& pProperty = GetProperty(loadedProperty.hashId)) {
                 if (pProperty->type != loadedProperty.type) {
                     SR_ERROR("Material::LoadProperties() : invalid property!\n\tFile: " + GetResourcePath().ToStringRef() +
-                        "\n\tProperty: " + loadedProperty.id + "\n\tLoaded type: " + SR_UTILS_NS::EnumReflector::ToString(loadedProperty.type) +
-                        "\n\tExpected type: " + SR_UTILS_NS::EnumReflector::ToString(pProperty->type)
+                        "\n\tProperty: " + loadedProperty.id + "\n\tLoaded type: " + SR_UTILS_NS::EnumReflector::ToString(loadedProperty.type).ToStringRef() +
+                        "\n\tExpected type: " + SR_UTILS_NS::EnumReflector::ToString(pProperty->type).ToStringRef()
                     );
                     continue;
                 }

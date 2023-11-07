@@ -124,7 +124,7 @@ namespace SR_SRSL_NS {
         std::string code;
 
         for (auto&& [stage, stageCode] : stages) {
-            code += "Stage[" + SR_UTILS_NS::EnumReflector::ToString(stage) + "] {\n" + stageCode + "\n}";
+            code += "Stage[" + SR_UTILS_NS::EnumReflector::ToString(stage).ToStringRef() + "] {\n" + stageCode + "\n}";
         }
 
         return code;
@@ -518,7 +518,7 @@ namespace SR_SRSL_NS {
             case ShaderLanguage::HLSL:
             case ShaderLanguage::Metal:
             default:
-                SR_ERROR("SRSLShader::ToString() : unknown shader language! Language: " + SR_UTILS_NS::EnumReflector::ToString(shaderLanguage));
+                SR_ERROR("SRSLShader::ToString() : unknown shader language! Language: " + SR_UTILS_NS::EnumReflector::ToString(shaderLanguage).ToStringRef());
                 codeGenRes.first = SRSLReturnCode::UnknownShaderLanguage;
                 return codeGenRes;
         }
