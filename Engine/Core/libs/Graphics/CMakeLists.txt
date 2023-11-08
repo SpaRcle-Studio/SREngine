@@ -52,7 +52,7 @@ else()
 endif()
 
 if (UNIX AND NOT APPLE)
-    target_link_libraries(Graphics ${X11_xcb_LIB} X11-xcb)
+    target_include_directories(Graphics PUBLIC ${X11_INCLUDE_DIR})
     target_include_directories(Graphics PUBLIC "${X11_xcb_INCLUDE_PATH}")
 endif()
 

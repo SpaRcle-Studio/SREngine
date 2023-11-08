@@ -4,7 +4,6 @@
 
 #include <Graphics/Pipeline/Vulkan/X11SurfaceInit.h>
 
-#include <X11/X.h>
 #include <X11/Xlib-xcb.h>
 
 #include <vulkan/vulkan_xcb.h>
