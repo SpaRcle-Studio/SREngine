@@ -8,15 +8,19 @@
 #include <Utils/TypeTraits/StandardProperty.h>
 
 namespace SR_UTILS_NS {
-    class Properties : SR_UTILS_NS::NonCopyable {
+    class PropertyContainer : public Property {
         SR_INLINE_STATIC int16_t VERSION = 1000;
-        using PropertyList = std::map<SR_UTILS_NS::StringAtom, Property*>;
+        using PropertyList = std::vector<Property*>;
     public:
-        ~Properties() override;
+        PropertyContainer();
+        ~PropertyContainer() override;
 
     public:
         SR_NODISCARD PropertyList& GetProperties() { return m_properties; }
 
+        template<typename T = Property> SR_NODISCARD T* Find(const SR_UTILS_NS::StringAtom& name) const noexcept;
+
+        PropertyContainer& AddContainer(const char* name);
         template<typename T> T& AddCustomProperty(const char* name);
         template<typename T> StandardProperty& AddStandardProperty(const char* name, T* pRawProperty);
         template<typename T> StandardProperty& AddEnumProperty(const char* name, T* pRawProperty);
@@ -26,25 +30,42 @@ namespace SR_UTILS_NS {
 
     };
 
-    template<typename T> T& Properties::AddCustomProperty(const char *name)  {
-        if (auto&& pIt = m_properties.find(name); pIt != m_properties.end()) {
+    template<typename T> T* PropertyContainer::Find(const StringAtom& name) const noexcept {
+        for (auto&& pProperty : m_properties) {
+            if (pProperty->GetName() != name) {
+                continue;
+            }
+
+            if constexpr (std::is_same_v<T, SR_UTILS_NS::Property>) {
+                return pProperty;
+            }
+
+            if (auto&& pCasted = dynamic_cast<T*>(pProperty)) {
+                return pCasted;
+            }
+        }
+        return nullptr;
+    }
+
+    template<typename T> T& PropertyContainer::AddCustomProperty(const char* name)  {
+        if (auto&& pProperty = Find(name)) {
             SRHalt("Properties::AddCustomProperty() : property \"" + std::string(name) + "\" already exists!");
-            return *dynamic_cast<T*>(pIt->second);
+            return *dynamic_cast<T*>(pProperty);
         }
 
         auto&& pProperty = new T();
 
         pProperty->SetName(name);
 
-        m_properties[SR_UTILS_NS::StringAtom(name)] = pProperty;
+        m_properties.emplace_back(pProperty);
 
         return *pProperty;
     }
 
-    template<typename T> StandardProperty& Properties::AddStandardProperty(const char* name, T* pRawProperty) {
-        if (auto &&pIt = m_properties.find(name); pIt != m_properties.end()) {
+    template<typename T> StandardProperty& PropertyContainer::AddStandardProperty(const char* name, T* pRawProperty) {
+        if (auto&& pProperty = Find(name)) {
             SRHalt("Properties::AddStandardProperty() : property \"" + std::string(name) + "\" already exists!");
-            return *dynamic_cast<StandardProperty *>(pIt->second);
+            return *dynamic_cast<StandardProperty*>(pProperty);
         }
 
         auto &&pProperty = new StandardProperty();
@@ -60,15 +81,15 @@ namespace SR_UTILS_NS {
             *pRawProperty = *reinterpret_cast<T *>(pData);
         });
 
-        m_properties[SR_UTILS_NS::StringAtom(name)] = pProperty;
+        m_properties.emplace_back(pProperty);
 
         return *pProperty;
     }
 
-    template<typename T> StandardProperty& Properties::AddEnumProperty(const char* name, T* pRawProperty) {
-        if (auto&& pIt = m_properties.find(name); pIt != m_properties.end()) {
+    template<typename T> StandardProperty& PropertyContainer::AddEnumProperty(const char* name, T* pRawProperty) {
+        if (auto&& pProperty = Find(name)) {
             SRHalt("Properties::AddEnumProperty() : property \"" + std::string(name) + "\" already exists!");
-            return *dynamic_cast<StandardProperty*>(pIt->second);
+            return *dynamic_cast<StandardProperty*>(pProperty);
         }
 
         auto&& pProperty = new StandardProperty();
@@ -86,7 +107,7 @@ namespace SR_UTILS_NS {
             *pRawProperty = SR_UTILS_NS::EnumReflector::FromString<T>(value);
         });
 
-        m_properties[SR_UTILS_NS::StringAtom(name)] = pProperty;
+        m_properties.emplace_back(pProperty);
 
         return *pProperty;
     }

@@ -30,19 +30,19 @@ namespace SR_GTYPES_NS {
         for (auto&& property : m_properties) {
             switch (property.type) {
                 case ShaderVarType::Int:
-                    pShader->SetInt(property.hashId, std::get<int32_t>(property.data));
+                    pShader->SetInt(property.id.GetHash(), std::get<int32_t>(property.data));
                     break;
                 case ShaderVarType::Float:
-                    pShader->SetFloat(property.hashId, std::get<float_t>(property.data));
+                    pShader->SetFloat(property.id.GetHash(), std::get<float_t>(property.data));
                     break;
                 case ShaderVarType::Vec2:
-                    pShader->SetVec2(property.hashId, std::get<SR_MATH_NS::FVector2>(property.data).Cast<float_t>());
+                    pShader->SetVec2(property.id.GetHash(), std::get<SR_MATH_NS::FVector2>(property.data).Cast<float_t>());
                     break;
                 case ShaderVarType::Vec3:
-                    pShader->SetVec3(property.hashId, std::get<SR_MATH_NS::FVector3>(property.data).Cast<float_t>());
+                    pShader->SetVec3(property.id.GetHash(), std::get<SR_MATH_NS::FVector3>(property.data).Cast<float_t>());
                     break;
                 case ShaderVarType::Vec4:
-                    pShader->SetVec4(property.hashId, std::get<SR_MATH_NS::FVector4>(property.data).Cast<float_t>());
+                    pShader->SetVec4(property.id.GetHash(), std::get<SR_MATH_NS::FVector4>(property.data).Cast<float_t>());
                     break;
                 case ShaderVarType::Sampler2D:
                     /// samplers used at UseSamplers
@@ -158,7 +158,7 @@ namespace SR_GTYPES_NS {
         for (auto&& property : m_properties) {
             switch (property.type) {
                 case ShaderVarType::Sampler2D:
-                    m_shader->SetSampler2D(property.hashId, std::get<Texture*>(property.data));
+                    m_shader->SetSampler2D(property.id.GetHash(), std::get<Texture*>(property.data));
                     break;
                 default:
                     break;
@@ -179,7 +179,6 @@ namespace SR_GTYPES_NS {
             MaterialProperty aProperty;
 
             aProperty.id = name;
-            aProperty.hashId = SR_RUNTIME_TIME_CRC32_STR(aProperty.id.c_str());
             aProperty.displayName = name; // TODO: make a pretty name
             aProperty.data = GetVariantFromShaderVarType(property);
             aProperty.type = property;
@@ -189,10 +188,10 @@ namespace SR_GTYPES_NS {
 
         /// Применяем сохраненные в материале значения
         for (auto&& loadedProperty : LoadMaterialProperties(propertiesNode)) {
-            if (auto&& pProperty = GetProperty(loadedProperty.hashId)) {
+            if (auto&& pProperty = GetProperty(loadedProperty.id.GetHash())) {
                 if (pProperty->type != loadedProperty.type) {
                     SR_ERROR("Material::LoadProperties() : invalid property!\n\tFile: " + GetResourcePath().ToStringRef() +
-                        "\n\tProperty: " + loadedProperty.id + "\n\tLoaded type: " + SR_UTILS_NS::EnumReflector::ToString(loadedProperty.type).ToStringRef() +
+                        "\n\tProperty: " + loadedProperty.id.ToStringRef() + "\n\tLoaded type: " + SR_UTILS_NS::EnumReflector::ToString(loadedProperty.type).ToStringRef() +
                         "\n\tExpected type: " + SR_UTILS_NS::EnumReflector::ToString(pProperty->type).ToStringRef()
                     );
                     continue;
@@ -228,9 +227,9 @@ namespace SR_GTYPES_NS {
         IResource::OnResourceUpdated(pContainer, depth);
     }
 
-    MaterialProperty *Material::GetProperty(uint64_t hashId) {
+    MaterialProperty* Material::GetProperty(uint64_t hashId) {
         for (auto&& property : m_properties) {
-            if (property.hashId == hashId) {
+            if (property.id.GetHash() == hashId) {
                 return &property;
             }
         }
@@ -238,8 +237,8 @@ namespace SR_GTYPES_NS {
         return nullptr;
     }
 
-    MaterialProperty *Material::GetProperty(const std::string& id) {
-        return GetProperty(SR_RUNTIME_TIME_CRC32_STR(id.c_str()));
+    MaterialProperty* Material::GetProperty(const SR_UTILS_NS::StringAtom& id) {
+        return GetProperty(id.GetHash());
     }
 
     bool Material::Load() {

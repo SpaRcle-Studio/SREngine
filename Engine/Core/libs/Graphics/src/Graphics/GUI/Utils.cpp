@@ -77,6 +77,10 @@ namespace SR_GRAPH_GUI_NS {
     }
 
     bool DrawProperty(SR_UTILS_NS::Property* pProperty) {
+        if (!pProperty->IsVisible()) {
+            return false;
+        }
+
         if (pProperty->GetPublicity() == SR_UTILS_NS::PropertyPublicity::Private) {
             return false;
         }
@@ -88,8 +92,8 @@ namespace SR_GRAPH_GUI_NS {
         return false;
     }
 
-    bool DrawProperties(SR_UTILS_NS::Properties* pProperties) {
-        for (auto&& [name, pProperty] : pProperties->GetProperties()) {
+    bool DrawPropertyContainer(SR_UTILS_NS::PropertyContainer* pProperties) {
+        for (auto&& pProperty : pProperties->GetProperties()) {
             DrawProperty(pProperty);
         }
         return true;

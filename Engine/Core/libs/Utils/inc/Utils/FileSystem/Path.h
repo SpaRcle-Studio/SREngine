@@ -7,6 +7,7 @@
 
 #include <Utils/stdInclude.h>
 #include <Utils/Math/Mathematics.h>
+#include <Utils/Types/StringAtom.h>
 
 namespace SR_UTILS_NS {
     class SR_DLL_EXPORT Path {
@@ -19,6 +20,7 @@ namespace SR_UTILS_NS {
         Path();
         Path(const Path& path);
         Path(const char* path, bool fast = false);
+        Path(SR_UTILS_NS::StringAtom stringAtom, bool fast = false);
         Path(std::string path, bool fast = false);
         Path(std::string_view path, bool fast = false);
         Path(std::wstring path, bool fast = false);

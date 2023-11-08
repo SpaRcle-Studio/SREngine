@@ -32,6 +32,19 @@ namespace SR_UTILS_NS {
         m_hash = SR_HASH_STR(m_path);
     }
 
+    Path::Path(SR_UTILS_NS::StringAtom stringAtom, bool fast)
+        : m_path(stringAtom)
+        , m_name()
+        , m_ext()
+        , m_hash(SR_UINT64_MAX)
+        , m_type(Type::Undefined)
+    {
+        if (!fast) {
+            Update();
+        }
+        m_hash = SR_HASH_STR(m_path);
+    }
+
     Path::Path(std::string path, bool fast)
         : m_path(std::move(path))
         , m_name()

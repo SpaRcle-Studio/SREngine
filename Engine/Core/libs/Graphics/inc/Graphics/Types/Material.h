@@ -51,7 +51,7 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD bool IsTransparent() const;
         SR_NODISCARD Shader* GetShader() const { return m_shader; }
         SR_NODISCARD MaterialProperties& GetProperties() { return m_properties; }
-        SR_NODISCARD MaterialProperty* GetProperty(const std::string& id);
+        SR_NODISCARD MaterialProperty* GetProperty(const SR_UTILS_NS::StringAtom& id);
         SR_NODISCARD MaterialProperty* GetProperty(uint64_t hashId);
         SR_NODISCARD SR_UTILS_NS::Path GetAssociatedPath() const override;
 

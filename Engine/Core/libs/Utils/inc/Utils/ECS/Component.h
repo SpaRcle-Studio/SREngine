@@ -124,7 +124,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD GameObjectPtr GetRoot() const;
         SR_NODISCARD Transform* GetTransform() const noexcept;
         SR_NODISCARD uint64_t GetComponentBuildId() const noexcept { return m_componentBuildId; }
-        SR_NODISCARD SR_UTILS_NS::Properties& GetComponentProperties() noexcept { return m_properties; }
+        SR_NODISCARD SR_UTILS_NS::PropertyContainer& GetComponentProperties() noexcept { return m_properties; }
 
         SR_NODISCARD std::string GetEntityInfo() const override;
 
@@ -149,7 +149,7 @@ namespace SR_UTILS_NS {
         GameObjectPtr m_gameObject;
         IComponentable* m_parent = nullptr;
 
-        SR_UTILS_NS::Properties m_properties;
+        SR_UTILS_NS::PropertyContainer m_properties;
 
     };
 }

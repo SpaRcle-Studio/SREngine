@@ -152,10 +152,12 @@ namespace SR_GTYPES_NS {
         m_properties.AddStandardProperty("Sliced", &m_sliced);
 
         m_properties.AddStandardProperty("Texture border", &m_textureBorder)
+            .SetVisibleCondition([this]() { return m_sliced; })
             .SetDrag(0.01f)
             .SetWidth(90.f);
 
         m_properties.AddStandardProperty("Window border", &m_windowBorder)
+            .SetVisibleCondition([this]() { return m_sliced; })
             .SetDrag(0.01f)
             .SetWidth(90.f);
 
@@ -174,6 +176,9 @@ namespace SR_GTYPES_NS {
             .SetSetter([this](void* pData) {
                 SetMaterial(*reinterpret_cast<SR_UTILS_NS::Path*>(pData));
             });
+
+        //m_properties.AddContainer("Material")
+        //    .AddStandardProperty()
 
         Component::InitProperties();
     }

@@ -95,8 +95,9 @@ namespace SR_GTYPES_NS {
 
     void DebugWireframeMesh::UseMaterial() {
         Mesh::UseMaterial();
+        static const uint64_t colorHashName = SR_UTILS_NS::StringAtom("color").GetHash();
         GetShader()->SetMat4(SHADER_MODEL_MATRIX, m_modelMatrix);
-        GetShader()->SetVec4(SR_COMPILE_TIME_CRC32_STR("color"), m_color.Cast<float_t>().ToGLM());
+        GetShader()->SetVec4(colorHashName, m_color.Cast<float_t>().ToGLM());
     }
 
     const SR_MATH_NS::Matrix4x4 &DebugWireframeMesh::GetModelMatrix() const {

@@ -53,7 +53,7 @@ namespace SR_GRAPH_NS {
             Sampler sampler = Sampler();
 
             if (auto&& idNode = samplerNode.TryGetAttribute("Id")) {
-                sampler.hashId = SR_RUNTIME_TIME_CRC32_STD_STR(idNode.ToString());
+                sampler.hashId = SR_HASH_STR(idNode.ToString());
             }
             else {
                 continue;

@@ -339,6 +339,6 @@ namespace SR_CORE_GUI_NS {
 
     void Inspector::DrawComponentProperties(SR_UTILS_NS::Component* pComponent) {
         auto&& properties = pComponent->GetComponentProperties();
-        SR_GRAPH_GUI_NS::DrawProperties(&properties);
+        SR_GRAPH_GUI_NS::DrawPropertyContainer(&properties);
     }
 }

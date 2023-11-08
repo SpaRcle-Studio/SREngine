@@ -171,7 +171,7 @@ namespace SR_SRSL_NS {
             : SRSLMessage(code, *pLexem)
         { }
 
-        SR_NODISCARD std::string ToString(const std::vector<std::string>& files, uint8_t tab) const {
+        SR_NODISCARD std::string ToString(const std::vector<SR_UTILS_NS::StringAtom>& files, uint8_t tab) const {
             std::string message = SR_UTILS_NS::EnumReflector::ToString(code);
 
             if (fileIndex != SR_UINT16_MAX) {
@@ -179,7 +179,7 @@ namespace SR_SRSL_NS {
                     SRHalt("Invalid index!");
                 }
                 else {
-                    message += "\n" + std::string(tab, '\t') + "File: " + files[fileIndex];
+                    message += "\n" + std::string(tab, '\t') + "File: " + files[fileIndex].ToStringRef();
                 }
             }
 
@@ -225,7 +225,7 @@ namespace SR_SRSL_NS {
         SR_NODISCARD bool HasWarnings() const { return !warnings.empty(); }
         SR_NODISCARD bool HasAny() const { return HasErrors() || HasWarnings(); }
 
-        SR_NODISCARD std::string ToString(const std::vector<std::string>& files, uint8_t tab = 1) const {
+        SR_NODISCARD std::string ToString(const std::vector<SR_UTILS_NS::StringAtom>& files, uint8_t tab = 1) const {
             std::string message;
 
             for (auto&& msg : errors) {

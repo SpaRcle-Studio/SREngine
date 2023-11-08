@@ -15,7 +15,7 @@ namespace SR_SRSL_NS {
             Idle, Macro, MacroName, IncludeOpen, IncludePath
         };
     public:
-        using Include = std::string;
+        using Include = SR_UTILS_NS::StringAtom;
         using Includes = std::vector<Include>;
         using OutResult = std::pair<std::vector<Lexem>, SRSLResult>;
 

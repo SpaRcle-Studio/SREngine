@@ -249,12 +249,12 @@ namespace SR_WORLD_NS {
         const uint64_t idInScene = gameObject->GetIdInScene();
 
         if (idInScene >= m_gameObjects.size()) {
-            SRHalt("Scene::Prepare() : invalid game object id!");
+            SRHalt("Scene::Remove() : invalid game object id!");
             return false;
         }
 
         if (m_gameObjects.at(idInScene) != gameObject) {
-            SRHalt("Scene::Prepare() : game objects do not match!");
+            SRHalt("Scene::Remove() : game objects do not match!");
             return false;
         }
 

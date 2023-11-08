@@ -272,7 +272,7 @@ namespace SR_GRAPH_GUI_NS {
 
     SR_MAYBE_UNUSED bool DrawProperty(SR_UTILS_NS::Property* pProperty);
     SR_MAYBE_UNUSED bool DrawStandardProperty(SR_UTILS_NS::StandardProperty* pProperty);
-    SR_MAYBE_UNUSED bool DrawProperties(SR_UTILS_NS::Properties* pProperties);
+    SR_MAYBE_UNUSED bool DrawPropertyContainer(SR_UTILS_NS::PropertyContainer* pProperties);
 
     SR_MAYBE_UNUSED static bool DrawColorControl(
             const std::string& label,

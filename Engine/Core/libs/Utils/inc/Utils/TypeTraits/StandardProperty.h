@@ -9,6 +9,7 @@
 
 namespace SR_UTILS_NS {
     class StandardProperty : public Property {
+        SR_INLINE_STATIC int16_t VERSION = 1000;
         using SetterFn = SR_HTYPES_NS::Function<void(void*)>;
         using GetterFn = SR_HTYPES_NS::Function<void(void*)>;
     public:

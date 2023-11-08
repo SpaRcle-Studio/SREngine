@@ -239,8 +239,8 @@ namespace SR_GRAPH_NS::Types {
         SetSampler(hashId, sampler->GetId());
     }
 
-    void Shader::SetSampler2D(const std::string &name, Types::Texture *sampler) noexcept {
-        SetSampler2D(SR_RUNTIME_TIME_CRC32_STR(name.c_str()), sampler);
+    void Shader::SetSampler2D(const SR_UTILS_NS::StringAtom& name, Types::Texture *sampler) noexcept {
+        SetSampler2D(name.GetHash(), sampler);
     }
 
     bool Shader::Ready() const {
@@ -347,7 +347,7 @@ namespace SR_GRAPH_NS::Types {
 
         if (auto&& pBlock = pShader->FindUniformBlock("BLOCK")) {
             for (auto&& field : pBlock->fields) {
-                m_uniformBlock.Append(SR_RUNTIME_TIME_CRC32_STR(field.name.c_str()), field.size, field.alignedSize, !field.isPublic);
+                m_uniformBlock.Append(field.name.GetHash(), field.size, field.alignedSize, !field.isPublic);
 
                 const ShaderVarType varType = SR_SRSL_NS::SRSLTypeInfo::Instance().StringToType(field.type);
 
@@ -364,7 +364,7 @@ namespace SR_GRAPH_NS::Types {
         /// ------------------------------------------------------------------------------------------------------------
 
         for (auto&& field : pShader->GetPushConstants().fields) {
-            m_constBlock.Append(SR_RUNTIME_TIME_CRC32_STR(field.name.c_str()), field.size, field.alignedSize, !field.isPublic);
+            m_constBlock.Append(field.name.GetHash(), field.size, field.alignedSize, !field.isPublic);
 
             const ShaderVarType varType = SR_SRSL_NS::SRSLTypeInfo::Instance().StringToType(field.type);
 
@@ -378,8 +378,8 @@ namespace SR_GRAPH_NS::Types {
         /// ------------------------------------------------------------------------------------------------------------
 
         for (auto&& [name, sampler] : pShader->GetSamplers()) {
-            m_samplers[SR_RUNTIME_TIME_CRC32_STR(name.c_str())].binding = sampler.binding;
-            m_samplers[SR_RUNTIME_TIME_CRC32_STR(name.c_str())].isAttachment = sampler.attachment >= 0;
+            m_samplers[name.GetHash()].binding = sampler.binding;
+            m_samplers[name.GetHash()].isAttachment = sampler.attachment >= 0;
 
             const ShaderVarType varType = SR_SRSL_NS::SRSLTypeInfo::Instance().StringToType(sampler.type);
 

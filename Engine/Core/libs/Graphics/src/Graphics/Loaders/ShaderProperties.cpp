@@ -12,7 +12,6 @@ namespace SR_GRAPH_NS {
             MaterialProperty materialProperty;
 
             materialProperty.id = propertyXml.GetAttribute("Id").ToString();
-            materialProperty.hashId = SR_RUNTIME_TIME_CRC32_STR(materialProperty.id.c_str());
             materialProperty.type = SR_UTILS_NS::EnumReflector::FromString<ShaderVarType>(propertyXml.GetAttribute("Type").ToString());
 
             switch (materialProperty.type) {

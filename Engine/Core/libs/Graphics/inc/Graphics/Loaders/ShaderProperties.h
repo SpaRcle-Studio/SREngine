@@ -58,10 +58,9 @@ namespace SR_GRAPH_NS {
     )
 
     struct MaterialProperty {
-        std::string id;
-        std::string displayName;
+        SR_UTILS_NS::StringAtom id;
+        SR_UTILS_NS::StringAtom displayName;
         ShaderPropertyVariant data;
-        uint64_t hashId;
         ShaderVarType type;
     };
 

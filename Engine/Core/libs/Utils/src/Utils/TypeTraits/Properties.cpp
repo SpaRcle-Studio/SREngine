@@ -5,10 +5,29 @@
 #include <Utils/TypeTraits/Properties.h>
 
 namespace SR_UTILS_NS {
-    Properties::~Properties() {
-        for (auto&& [name, pProperty] : m_properties) {
+    PropertyContainer::PropertyContainer() {
+        m_properties.reserve(8);
+    }
+
+    PropertyContainer::~PropertyContainer() {
+        for (auto&& pProperty : m_properties) {
             delete pProperty;
         }
         m_properties.clear();
+    }
+
+    PropertyContainer& PropertyContainer::AddContainer(const char* name) {
+        if (auto&& pProperty = Find(name)) {
+            SRHalt("Properties::AddContainer() : property \"" + std::string(name) + "\" already exists!");
+            return *dynamic_cast<PropertyContainer*>(pProperty);
+        }
+
+        auto&& pProperty = new PropertyContainer();
+
+        pProperty->SetName(name);
+
+        m_properties.emplace_back(pProperty);
+
+        return *pProperty;
     }
 }

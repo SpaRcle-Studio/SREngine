@@ -17,18 +17,18 @@ namespace SR_SRSL_NS {
     );
 
     struct SRSLSampler {
-        std::string type;
+        SR_UTILS_NS::StringAtom type;
         bool isPublic = false;
         uint64_t binding = 0;
         int32_t attachment = -1;
         std::set<ShaderStage> stages;
     };
-    typedef std::map<std::string, SRSLSampler> SRSLSamplers;
+    typedef std::map<SR_UTILS_NS::StringAtom, SRSLSampler> SRSLSamplers;
 
     struct SRSLUniformBlock {
         struct Field {
-            std::string type;
-            std::string name;
+            SR_UTILS_NS::StringAtom type;
+            SR_UTILS_NS::StringAtom name;
             uint64_t size = 0;
             uint64_t alignedSize = 0;
             bool isPublic = false;
@@ -48,7 +48,7 @@ namespace SR_SRSL_NS {
     class SRSLShader : public SR_UTILS_NS::NonCopyable {
         using Ptr = std::shared_ptr<SRSLShader>;
         using Super = SR_UTILS_NS::NonCopyable;
-        using UniformBlocks = std::map<std::string, SRSLUniformBlock>;
+        using UniformBlocks = std::map<SR_UTILS_NS::StringAtom, SRSLUniformBlock>;
         uint64_t VERSION = 1000;
     private:
         explicit SRSLShader(SR_UTILS_NS::Path path);
@@ -64,8 +64,8 @@ namespace SR_SRSL_NS {
         SR_NODISCARD bool IsCacheActual() const;
         SR_NODISCARD bool IsCacheActual(ShaderLanguage shaderLanguage) const;
 
-        SR_NODISCARD const SRSLUniformBlock* FindUniformBlock(const std::string& name) const;
-        SR_NODISCARD const SRSLUniformBlock::Field* FindField(const std::string& name) const;
+        SR_NODISCARD const SRSLUniformBlock* FindUniformBlock(const SR_UTILS_NS::StringAtom& name) const;
+        SR_NODISCARD const SRSLUniformBlock::Field* FindField(const SR_UTILS_NS::StringAtom& name) const;
         SR_NODISCARD Vertices::VertexType GetVertexType() const;
         SR_NODISCARD SR_SRSL_NS::ShaderType GetType() const;
         SR_NODISCARD const SRSLAnalyzedTree::Ptr GetAnalyzedTree() const;
@@ -74,9 +74,9 @@ namespace SR_SRSL_NS {
         SR_NODISCARD const SRSLUniformBlock& GetPushConstants() const { return m_pushConstants; }
         SR_NODISCARD const SRSLSamplers& GetSamplers() const { return m_samplers; }
         SR_NODISCARD const SRShaderCreateInfo& GetCreateInfo() const { return m_createInfo; }
-        SR_NODISCARD const std::map<std::string, SRSLVariable*>& GetShared() const { return m_shared; }
-        SR_NODISCARD const std::map<std::string, SRSLVariable*>& GetConstants() const { return m_constants; }
-        SR_NODISCARD const std::vector<std::string>& GetIncludes() const { return m_includes; }
+        SR_NODISCARD const std::map<SR_UTILS_NS::StringAtom, SRSLVariable*>& GetShared() const { return m_shared; }
+        SR_NODISCARD const std::map<SR_UTILS_NS::StringAtom, SRSLVariable*>& GetConstants() const { return m_constants; }
+        SR_NODISCARD const std::vector<SR_UTILS_NS::StringAtom>& GetIncludes() const { return m_includes; }
 
     private:
         SR_NODISCARD ISRSLCodeGenerator::SRSLCodeGenRes GenerateStages(ShaderLanguage shaderLanguage) const;
@@ -93,9 +93,9 @@ namespace SR_SRSL_NS {
     private:
         SR_UTILS_NS::Path m_path;
 
-        std::vector<std::string> m_includes;
-        std::map<std::string, SRSLVariable*> m_shared;
-        std::map<std::string, SRSLVariable*> m_constants;
+        std::vector<SR_UTILS_NS::StringAtom> m_includes;
+        std::map<SR_UTILS_NS::StringAtom, SRSLVariable*> m_shared;
+        std::map<SR_UTILS_NS::StringAtom, SRSLVariable*> m_constants;
         ShaderType m_type = ShaderType::Unknown;
         SRShaderCreateInfo m_createInfo;
         SRSLAnalyzedTree::Ptr m_analyzedTree;

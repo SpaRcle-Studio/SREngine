@@ -123,7 +123,7 @@ namespace SR_GRAPH_NS {
             for (auto&& attachmentNode : attachmentsNode.TryGetNodes("Attachment")) {
                 Attachment attachment = Attachment();
                 attachment.fboHashName = SR_HASH_STR(attachmentNode.GetAttribute("FBO").ToString());
-                attachment.hashId = SR_RUNTIME_TIME_CRC32_STD_STR(attachmentNode.GetAttribute("Id").ToString());
+                attachment.hashId = SR_HASH_STR(attachmentNode.GetAttribute("Id").ToString());
 
                 if (auto&& depthAttribute = attachmentNode.TryGetAttribute("Depth")) {
                     attachment.depth = depthAttribute.ToBool();

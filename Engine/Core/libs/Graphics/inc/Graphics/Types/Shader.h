@@ -96,7 +96,7 @@ namespace SR_GTYPES_NS {
         void SR_FASTCALL SetConstVec2(uint64_t hashId, const SR_MATH_NS::FVector2& v) noexcept;
         void SR_FASTCALL SetConstIVec2(uint64_t hashId, const SR_MATH_NS::IVector2& v) noexcept;
 
-        void SR_FASTCALL SetSampler2D(const std::string& name, Texture* sampler) noexcept;
+        void SR_FASTCALL SetSampler2D(const SR_UTILS_NS::StringAtom& name, Texture* sampler) noexcept;
         void SR_FASTCALL SetSamplerCube(uint64_t hashId, int32_t sampler) noexcept;
         void SR_FASTCALL SetSampler2D(uint64_t hashId, Texture* sampler) noexcept;
         void SR_FASTCALL SetSampler2D(uint64_t hashId, int32_t sampler) noexcept;
@@ -124,7 +124,7 @@ namespace SR_GTYPES_NS {
 
         SRShaderCreateInfo m_shaderCreateInfo = {};
 
-        std::vector<std::string> m_includes;
+        std::vector<SR_UTILS_NS::StringAtom> m_includes;
         Memory::ShaderUBOBlock m_uniformBlock;
         Memory::ShaderUBOBlock m_constBlock;
         ShaderSamplers m_samplers;

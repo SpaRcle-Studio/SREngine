@@ -526,7 +526,7 @@ namespace SR_SRSL_NS {
         return codeGenRes;
     }
 
-    const SRSLUniformBlock::Field* SRSLShader::FindField(const std::string& name) const {
+    const SRSLUniformBlock::Field* SRSLShader::FindField(const SR_UTILS_NS::StringAtom& name) const {
         for (auto&& [blockName, block] : m_uniformBlocks) {
             for (auto&& field : block.fields) {
                 if (field.name == name) {
@@ -535,12 +535,12 @@ namespace SR_SRSL_NS {
             }
         }
 
-        SR_WARN("SRSLShader::FindField() : field \"" + name + "\" not found!");
+        SR_WARN("SRSLShader::FindField() : field \"" + name.ToStringRef() + "\" not found!");
 
         return nullptr;
     }
 
-    const SRSLUniformBlock *SRSLShader::FindUniformBlock(const std::string &name) const {
+    const SRSLUniformBlock *SRSLShader::FindUniformBlock(const SR_UTILS_NS::StringAtom& name) const {
         for (auto&& [blockName, block] : m_uniformBlocks) {
             if (name == blockName) {
                 return &block;

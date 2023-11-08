@@ -89,7 +89,8 @@ namespace SR_GRAPH_NS {
 
         auto&& color = SR_MATH_NS::HEXToBGR(m_colorId).Cast<SR_MATH_NS::Unit>();
 
-        pShader->SetVec3(SR_COMPILE_TIME_CRC32_STR("color"), color.ToGLM() / 255.f);
+        static const uint64_t colorHashName = SR_UTILS_NS::StringAtom("color").GetHash();
+        pShader->SetVec3(colorHashName, color.ToGLM() / 255.f);
     }
 
     void ColorBufferPass::UseSharedUniforms(ColorBufferPass::ShaderPtr pShader) {
