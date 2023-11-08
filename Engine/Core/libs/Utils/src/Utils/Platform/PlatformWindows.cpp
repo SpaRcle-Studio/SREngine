@@ -451,7 +451,29 @@ namespace SR_UTILS_NS::Platform {
 
     void SelfOpen() {
         auto&& exe = SR_PLATFORM_NS::GetApplicationPath();
-        ShellExecute(NULL, "open", exe.CStr(), NULL, NULL, SW_SHOWDEFAULT);
+        STARTUPINFO si;
+        PROCESS_INFORMATION pi;
+
+        ZeroMemory(&si, sizeof(si));
+        si.cb = sizeof(si);
+        ZeroMemory(&pi, sizeof(pi));
+
+        /// start the program up
+        CreateProcess( exe.c_str(), /// the path
+    NULL,
+    NULL, /// Process handle not inheritable
+    NULL, /// Thread handle not inheritable
+    FALSE, /// Set handle inheritance to FALSE
+    0, /// No creation flags
+    NULL, /// Use parent's environment block
+    NULL, /// Use parent's starting directory
+    &si, /// Pointer to STARTUPINFO structure
+    &pi  /// Pointer to PROCESS_INFORMATION structure (removed extra parentheses)
+        );
+
+        // Close process and thread handles.
+        CloseHandle(pi.hProcess);
+        CloseHandle(pi.hThread);
     }
 
     bool IsAbsolutePath(const Path &path) {
