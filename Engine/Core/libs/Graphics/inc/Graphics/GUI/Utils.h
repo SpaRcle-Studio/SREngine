@@ -2,14 +2,15 @@
 // Created by Monika on 16.02.2022.
 //
 
-#ifndef SRENGINE_GUIUTILS_H
-#define SRENGINE_GUIUTILS_H
+#ifndef SR_ENGINE_GUIUTILS_H
+#define SR_ENGINE_GUIUTILS_H
 
 #include <Utils/Debug.h>
 #include <Utils/Math/Mathematics.h>
 #include <Utils/Math/Rect.h>
 #include <Utils/Types/DataStorage.h>
 #include <Utils/SRLM/DataType.h>
+#include <Utils/TypeTraits/Properties.h>
 
 namespace SR_GRAPH_GUI_NS {
     SR_MAYBE_UNUSED static ImVec4 MakeDisableColor(ImVec4 color) {
@@ -18,10 +19,10 @@ namespace SR_GRAPH_GUI_NS {
     }
 
     SR_MAYBE_UNUSED void static EnumCombo(const std::string& label, SR_UTILS_NS::EnumReflector* pReflector, const SR_HTYPES_NS::Function<void(SR_UTILS_NS::EnumReflector* pReflector)>& callback) {
-        if (ImGui::BeginCombo(label.c_str(), (pReflector ? pReflector->GetNameInternal() : std::string()).c_str())) {
+        if (ImGui::BeginCombo(label.c_str(), (pReflector ? pReflector->GetNameInternal().ToStringRef() : std::string()).c_str())) {
             auto&& selectables = SR_UTILS_NS::EnumReflectorManager::Instance().GetReflectors();
             for (auto&& selectable : selectables) {
-                if (ImGui::Selectable(selectable.second->GetNameInternal().c_str())) {
+                if (ImGui::Selectable(selectable.second->GetNameInternal().ToCStr())) {
                     ImGui::SetItemDefaultFocus();
                     callback(selectable.second);
                 }
@@ -31,13 +32,13 @@ namespace SR_GRAPH_GUI_NS {
         }
     }
 
-    SR_MAYBE_UNUSED void static EnumCombo(const std::string& label, SR_UTILS_NS::EnumReflector* pReflector, const std::optional<std::string>& value, const SR_HTYPES_NS::Function<void(std::string)>& callback) {
-        auto&& strValue = value ? value.value() : std::string();
+    SR_MAYBE_UNUSED void static EnumCombo(const std::string& label, SR_UTILS_NS::EnumReflector* pReflector, const std::optional<SR_UTILS_NS::StringAtom>& value, const SR_HTYPES_NS::Function<void(SR_UTILS_NS::StringAtom)>& callback) {
+        auto&& strValue = value ? value.value() : SR_UTILS_NS::StringAtom();
 
-        if (ImGui::BeginCombo(label.c_str(), strValue.c_str())) {
+        if (ImGui::BeginCombo(SR_FORMAT_C("%s##%p", label.c_str(), &value), strValue.c_str())) {
             auto&& selectables = pReflector->GetNamesInternal();
             for (auto&& selectable : selectables) {
-                if (ImGui::Selectable(selectable.c_str())) {
+                if (ImGui::Selectable(selectable.ToCStr())) {
                     ImGui::SetItemDefaultFocus();
                     callback(selectable);
                 }
@@ -63,70 +64,53 @@ namespace SR_GRAPH_GUI_NS {
 
     SR_MAYBE_UNUSED static bool Vec4Null(const ImVec4 &v1) { return (v1.x == 0) && (v1.y == 0) && (v1.z == 0) && (v1.w == 0); }
 
-    SR_MAYBE_UNUSED static bool DragUnit(const std::string& name, SR_MATH_NS::Unit& value, float_t drag = 0.1f, bool active = true, uint32_t index = 0) {
+    SR_MAYBE_UNUSED static bool DragUnit(const std::string& name, SR_MATH_NS::Unit& value, float_t drag = 0.1f) {
         float_t temp = value;
 
-        ImGui::PushItemFlag(ImGuiItemFlags_Disabled, !active);
-
-        if (ImGui::DragFloat(SR_FORMAT_C("##%s%i", name.c_str(), index), &temp, drag, 0.0f, 0.0f, "%.5f")) {
+        if (ImGui::DragFloat(SR_FORMAT_C("##%s%p", name.c_str(), &value), &temp, drag, 0.0f, 0.0f, "%.5f")) {
             value = temp;
-            ImGui::PopItemFlag();
             return true;
         }
-
-        ImGui::PopItemFlag();
 
         return false;
     }
 
-    SR_MAYBE_UNUSED static bool DragInt32(const std::string& name, int32_t& value, int32_t drag = 1, bool active = true, uint32_t index = 0) {
+    SR_MAYBE_UNUSED static bool DragInt32(const std::string& name, int32_t& value, int32_t drag = 1) {
         int32_t temp = value;
 
-        ImGui::PushItemFlag(ImGuiItemFlags_Disabled, !active);
-
-        if (ImGui::DragInt(SR_FORMAT_C("##%s%i", name.c_str(), index), &temp, drag, 0, 0, "%.2i")) {
+        if (ImGui::DragInt(SR_FORMAT_C("##%s%p", name.c_str(), &value), &temp, drag, 0, 0, "%.2i")) {
             value = temp;
-            ImGui::PopItemFlag();
             return true;
         }
-
-        ImGui::PopItemFlag();
 
         return false;
     }
 
-    SR_MAYBE_UNUSED static bool DragUInt32(const std::string& name, uint32_t& value, uint32_t drag = 1, bool active = true, uint32_t index = 0) {
+    SR_MAYBE_UNUSED static bool DragUInt32(const std::string& name, uint32_t& value, uint32_t drag = 1) {
         int32_t temp = value;
 
-        ImGui::PushItemFlag(ImGuiItemFlags_Disabled, !active);
-
-        if (ImGui::DragInt(SR_FORMAT_C("##%s%i", name.c_str(), index), &temp, drag, 0, 0, "%.2i")) {
+        if (ImGui::DragInt(SR_FORMAT_C("##%s%p", name.c_str(), &value), &temp, drag, 0, 0, "%.2i")) {
             value = SR_MAX(0, temp);
-            ImGui::PopItemFlag();
             return true;
         }
-
-        ImGui::PopItemFlag();
 
         return false;
     }
 
-    SR_MAYBE_UNUSED static bool InputInt(const std::string& name, int32_t& value, int32_t step = 1, bool active = true, uint32_t index = 0) {
+    SR_MAYBE_UNUSED static bool InputInt(const std::string& name, int32_t& value, int32_t step = 1) {
         int32_t temp = value;
         bool changed = false;
 
         auto&& textWidth = SR_CLAMP(ImGui::CalcTextSize(std::to_string(value).c_str()).x, 300, 150);
 
-        ImGui::PushItemFlag(ImGuiItemFlags_Disabled, !active);
         ImGui::PushItemWidth(textWidth);
 
-        if (ImGui::InputInt(SR_FORMAT_C("%s##%i", name.c_str(), index), &temp, step)) {
+        if (ImGui::InputInt(SR_FORMAT_C("%s##%p", name.c_str(), &value), &temp, step)) {
             value = temp;
             changed = true;
         }
 
         ImGui::PopItemWidth();
-        ImGui::PopItemFlag();
 
         return changed;
     }
@@ -177,22 +161,18 @@ namespace SR_GRAPH_GUI_NS {
             ImVec4 hovered,
             ImVec4 activeCol,
             ImFont* font = nullptr,
-            bool active = true,
-            T drag = static_cast<T>(0.1f),
-            uint32_t index = 0)
+            T drag = static_cast<T>(0.1f))
     {
         bool result = false;
 
-        ImGui::PushStyleColor(ImGuiCol_Button, active ? btn : MakeDisableColor(btn));
-        ImGui::PushStyleColor(ImGuiCol_ButtonHovered, active ? hovered : MakeDisableColor(hovered));
-        ImGui::PushStyleColor(ImGuiCol_ButtonActive, active ? activeCol : MakeDisableColor(activeCol));
-
-        ImGui::PushItemFlag(ImGuiItemFlags_Disabled, !active);
+        ImGui::PushStyleColor(ImGuiCol_Button, btn);
+        ImGui::PushStyleColor(ImGuiCol_ButtonHovered, hovered);
+        ImGui::PushStyleColor(ImGuiCol_ButtonActive, activeCol);
 
         if (font)
             ImGui::PushFont(font);
 
-        if (ImGui::Button(SR_FORMAT_C("%s##%i", label, index), btnSize) && active) {
+        if (ImGui::Button(SR_FORMAT_C("%s##%p", label, &value), btnSize)) {
             value = reset;
             result = true;
         }
@@ -200,31 +180,26 @@ namespace SR_GRAPH_GUI_NS {
         if (font)
             ImGui::PopFont();
 
-        ImGui::PopItemFlag();
         ImGui::PopStyleColor(3);
 
         ImGui::SameLine();
 
         if constexpr (std::is_same_v<T, SR_MATH_NS::Unit>) {
-            result |= DragUnit(label, value, drag, active, index);
+            result |= DragUnit(label, value, drag);
         }
         else if constexpr (std::is_same_v<T, bool>) {
             bool temp = value;
 
-            ImGui::PushItemFlag(ImGuiItemFlags_Disabled, !active);
-
-            if (ImGui::Checkbox(SR_FORMAT_C("##%s%i",label, index), &temp)) {
+            if (ImGui::Checkbox(SR_FORMAT_C("##%s%p", label, &value), &temp)) {
                 value = temp;
                 result |= true;
             }
-
-            ImGui::PopItemFlag();
         }
         else if constexpr (std::is_same_v<T, uint32_t>) {
-            result |= DragUInt32(label, value, drag, active, index);
+            result |= DragUInt32(label, value, drag);
         }
         else {
-            result |= DragInt32(label, value, drag, active, index);
+            result |= DragInt32(label, value, drag);
         }
 
         return result;
@@ -238,7 +213,7 @@ namespace SR_GRAPH_GUI_NS {
     ) {
         auto tmp = static_cast<float_t>(value);
 
-        if (ImGui::SliderScalar(SR_FORMAT_C("%s##%i", label.c_str(), index), ImGuiDataType_Float, &tmp, &min, &max, nullptr, ImGuiSliderFlags_Logarithmic)) {
+        if (ImGui::SliderScalar(SR_FORMAT_C("%s##%p", label.c_str(), &value), ImGuiDataType_Float, &tmp, &min, &max, nullptr, ImGuiSliderFlags_Logarithmic)) {
             value = static_cast<SR_MATH_NS::Unit>(tmp);
             return true;
         }
@@ -257,8 +232,7 @@ namespace SR_GRAPH_GUI_NS {
             ImVec4 hovered,
             ImVec4 activeCol,
             ImFont* font = nullptr,
-            bool active = true,
-            uint32_t index = 0)
+            bool active = true)
     {
         bool result = false;
 
@@ -272,7 +246,7 @@ namespace SR_GRAPH_GUI_NS {
             ImGui::PushFont(font);
         }
 
-        if (ImGui::Button(SR_FORMAT_C("%s##%i", label.c_str(), index), btnSize) && active) {
+        if (ImGui::Button(SR_FORMAT_C("%s##%p", label.c_str(), &value), btnSize) && active) {
             value = reset;
             result = true;
         }
@@ -285,7 +259,7 @@ namespace SR_GRAPH_GUI_NS {
 
         ImGui::SameLine();
 
-        if (DrawSlider("##" + label, value, static_cast<float_t>(min), static_cast<float_t>(max), index)) {
+        if (DrawSlider("##" + label, value, static_cast<float_t>(min), static_cast<float_t>(max))) {
             result |= true;
         }
 
@@ -294,7 +268,11 @@ namespace SR_GRAPH_GUI_NS {
         return result;
     }
 
-    static bool DrawDataType(SR_SRLM_NS::DataType* pData, bool* pIsEnum, void* pProvider, float_t width = 0, uint32_t deep = 0);
+    SR_MAYBE_UNUSED bool DrawDataType(SR_SRLM_NS::DataType* pData, bool* pIsEnum, void* pProvider, float_t width = 0, uint32_t deep = 0);
+
+    SR_MAYBE_UNUSED bool DrawProperty(SR_UTILS_NS::Property* pProperty);
+    SR_MAYBE_UNUSED bool DrawStandardProperty(SR_UTILS_NS::StandardProperty* pProperty);
+    SR_MAYBE_UNUSED bool DrawProperties(SR_UTILS_NS::Properties* pProperties);
 
     SR_MAYBE_UNUSED static bool DrawColorControl(
             const std::string& label,
@@ -325,7 +303,7 @@ namespace SR_GRAPH_GUI_NS {
                                   ImVec4{ 0.8f, 0.1f, 0.15f, 1.0f },
                                   ImVec4{ 0.9f, 0.2f, 0.2f, 1.0f  },
                                   ImVec4{ 0.8f, 0.1f, 0.15f, 1.0f },
-                                  nullptr, active, 0.01f, index);
+                                  nullptr, 0.01f);
 
         ImGui::PopItemWidth();
         ImGui::SameLine();
@@ -334,7 +312,7 @@ namespace SR_GRAPH_GUI_NS {
                                   ImVec4{ 0.2f, 0.7f, 0.2f, 1.0f },
                                   ImVec4{ 0.3f, 0.8f, 0.3f, 1.0f },
                                   ImVec4{ 0.2f, 0.7f, 0.2f, 1.0f },
-                                  nullptr, active, 0.01f, index);
+                                  nullptr, 0.01f);
 
         ImGui::PopItemWidth();
         ImGui::SameLine();
@@ -343,7 +321,7 @@ namespace SR_GRAPH_GUI_NS {
                                   ImVec4{ 0.1f, 0.25f, 0.8f, 1.0f },
                                   ImVec4{ 0.2f, 0.35f, 0.9f, 1.0f },
                                   ImVec4{ 0.1f, 0.25f, 0.8f, 1.0f },
-                                  nullptr, active, 0.01f, index);
+                                  nullptr, 0.01f);
 
         ImGui::PopItemWidth();
         ImGui::SameLine();
@@ -352,7 +330,7 @@ namespace SR_GRAPH_GUI_NS {
                                   ImVec4{ 0.7f, 0.7f, 0.7f, 1.0f },
                                   ImVec4{ 0.8f, 0.8f, 0.8f, 1.0f },
                                   ImVec4{ 0.7f, 0.7f, 0.7f, 1.0f },
-                                  nullptr, active, 0.01f, index);
+                                  nullptr, 0.01f);
 
         ImGui::PopItemWidth();
         ImGui::PopStyleVar();
@@ -371,13 +349,12 @@ namespace SR_GRAPH_GUI_NS {
            float_t min = 0.0f,
            float_t max = 0.0f,
            float_t power = 0.1,
-           uint32_t index = 0,
            SR_HTYPES_NS::DataStorage* storage = nullptr)
     {
         bool slider = true;
 
         if (storage) {
-            auto&& id = SR_FORMAT("##edt_slider_%s%i", label.c_str(), index);
+            auto&& id = SR_FORMAT("##edt_slider_%s%p", label.c_str(), &value);
             slider = storage->GetValueDef<bool>(id, true);
             if (ImGui::Checkbox(id.c_str(), &slider)) {
                 storage->SetValue<bool>(id, slider);
@@ -397,7 +374,7 @@ namespace SR_GRAPH_GUI_NS {
                     buttonSize,
                     ImVec4{0.2f, 0.7f, 0.2f, 1.0f},
                     ImVec4{0.3f, 0.8f, 0.3f, 1.0f},
-                    ImVec4{0.2f, 0.7f, 0.2f, 1.0f}, nullptr, true, index
+                    ImVec4{0.2f, 0.7f, 0.2f, 1.0f}, nullptr, true
             );
         }
 
@@ -405,7 +382,7 @@ namespace SR_GRAPH_GUI_NS {
                  label.c_str(), value, 0.f, buttonSize,
                  ImVec4{ 0.2f, 0.7f, 0.2f, 1.0f },
                  ImVec4{ 0.3f, 0.8f, 0.3f, 1.0f },
-                 ImVec4{ 0.2f, 0.7f, 0.2f, 1.0f }, nullptr, true, power, index
+                 ImVec4{ 0.2f, 0.7f, 0.2f, 1.0f }, nullptr, power
          );
     }
 
@@ -415,31 +392,30 @@ namespace SR_GRAPH_GUI_NS {
            float_t min = 0.0f,
            float_t max = 0.0f,
            float_t power = 0.1,
-           uint32_t index = 0,
            SR_HTYPES_NS::DataStorage* storage = nullptr
     ) {
         bool dirty = false;
 
         auto left = static_cast<SR_MATH_NS::Unit>(value.Left());
-        if (Graphics::GUI::DrawEditableSlider(names[0], left, min, max, power, index, storage)) {
+        if (Graphics::GUI::DrawEditableSlider(names[0], left, min, max, power, storage)) {
             value.SetLeft(left);
             dirty = true;
         }
 
         auto bottom = static_cast<SR_MATH_NS::Unit>(value.Bottom());
-        if (Graphics::GUI::DrawEditableSlider(names[1], bottom, min, max, power, index, storage)) {
+        if (Graphics::GUI::DrawEditableSlider(names[1], bottom, min, max, power, storage)) {
             value.SetBottom(bottom);
             dirty = true;
         }
 
         auto right = static_cast<SR_MATH_NS::Unit>(value.Right());
-        if (Graphics::GUI::DrawEditableSlider(names[2], right, min, max, power, index, storage)) {
+        if (Graphics::GUI::DrawEditableSlider(names[2], right, min, max, power, storage)) {
             value.SetRight(right);
             dirty = true;
         }
 
         auto top = static_cast<SR_MATH_NS::Unit>(value.Top());
-        if (Graphics::GUI::DrawEditableSlider(names[3], top, min, max, power, index, storage)) {
+        if (Graphics::GUI::DrawEditableSlider(names[3], top, min, max, power, storage)) {
             value.SetTop(top);
             dirty = true;
         }
@@ -476,7 +452,7 @@ namespace SR_GRAPH_GUI_NS {
         result |= DrawValueControl<SR_MATH_NS::Unit>("X", values.x, resetValue, buttonSize,
                 ImVec4{ 0.8f, 0.1f, 0.15f, 1.0f },
                 ImVec4{ 0.9f, 0.2f, 0.2f, 1.0f  },
-                ImVec4{ 0.8f, 0.1f, 0.15f, 1.0f }, nullptr, active, drag, index);
+                ImVec4{ 0.8f, 0.1f, 0.15f, 1.0f }, nullptr, drag);
 
         ImGui::PopItemWidth();
         ImGui::SameLine();
@@ -484,7 +460,7 @@ namespace SR_GRAPH_GUI_NS {
         result |= DrawValueControl<SR_MATH_NS::Unit>("Y", values.y, resetValue, buttonSize,
                ImVec4{ 0.2f, 0.7f, 0.2f, 1.0f },
                ImVec4{ 0.3f, 0.8f, 0.3f, 1.0f },
-               ImVec4{ 0.2f, 0.7f, 0.2f, 1.0f }, nullptr, active, drag, index);
+               ImVec4{ 0.2f, 0.7f, 0.2f, 1.0f }, nullptr, drag);
 
         ImGui::PopItemWidth();
         ImGui::SameLine();
@@ -492,7 +468,7 @@ namespace SR_GRAPH_GUI_NS {
         result |= DrawValueControl<SR_MATH_NS::Unit>("Z", values.z, resetValue, buttonSize,
                ImVec4{ 0.1f, 0.25f, 0.8f, 1.0f },
                ImVec4{ 0.2f, 0.35f, 0.9f, 1.0f },
-               ImVec4{ 0.1f, 0.25f, 0.8f, 1.0f }, nullptr, active, drag, index);
+               ImVec4{ 0.1f, 0.25f, 0.8f, 1.0f }, nullptr, drag);
 
         ImGui::PopItemWidth();
         ImGui::PopStyleVar();
@@ -509,13 +485,11 @@ namespace SR_GRAPH_GUI_NS {
             SR_MATH_NS::FVector2& values,
             float_t resetValue = 0.0f,
             float_t columnWidth = 70.0f,
-            float_t drag = 0.1,
-            uint32_t index = 0,
-            bool active = true)
+            float_t drag = 0.1)
     {
         bool result = false;
 
-        ImGui::PushID(label.c_str());
+        ImGui::PushID(SR_FORMAT_C("%s%p", label.c_str(), &values));
 
         ImGui::Columns(2);
         ImGui::SetColumnWidth(0, columnWidth);
@@ -533,7 +507,7 @@ namespace SR_GRAPH_GUI_NS {
         result |= DrawValueControl<SR_MATH_NS::Unit>("X", values.x, resetValue, buttonSize,
                 ImVec4{ 0.8f, 0.1f, 0.15f, 1.0f },
                 ImVec4{ 0.9f, 0.2f, 0.2f, 1.0f  },
-                ImVec4{ 0.8f, 0.1f, 0.15f, 1.0f }, nullptr, active, drag, index);
+                ImVec4{ 0.8f, 0.1f, 0.15f, 1.0f }, nullptr, drag);
 
         ImGui::PopItemWidth();
         ImGui::SameLine();
@@ -541,7 +515,7 @@ namespace SR_GRAPH_GUI_NS {
         result |= DrawValueControl<SR_MATH_NS::Unit>("Y", values.y, resetValue, buttonSize,
                ImVec4{ 0.2f, 0.7f, 0.2f, 1.0f },
                ImVec4{ 0.3f, 0.8f, 0.3f, 1.0f },
-               ImVec4{ 0.2f, 0.7f, 0.2f, 1.0f }, nullptr, active, drag, index);
+               ImVec4{ 0.2f, 0.7f, 0.2f, 1.0f }, nullptr, drag);
 
         ImGui::PopItemWidth();
         ImGui::PopStyleVar();
@@ -580,7 +554,7 @@ namespace SR_GRAPH_GUI_NS {
         result |= DrawValueControl<bool>("X", values.x, resetValue, buttonSize,
                                                      ImVec4{ 0.8f, 0.1f, 0.15f, 1.0f },
                                                      ImVec4{ 0.9f, 0.2f, 0.2f, 1.0f  },
-                                                     ImVec4{ 0.8f, 0.1f, 0.15f, 1.0f }, nullptr, true, false, index);
+                                                     ImVec4{ 0.8f, 0.1f, 0.15f, 1.0f }, nullptr, false);
 
         ImGui::PopItemWidth();
         ImGui::SameLine();
@@ -588,7 +562,7 @@ namespace SR_GRAPH_GUI_NS {
         result |= DrawValueControl<bool>("Y", values.y, resetValue, buttonSize,
                                                      ImVec4{ 0.2f, 0.7f, 0.2f, 1.0f },
                                                      ImVec4{ 0.3f, 0.8f, 0.3f, 1.0f },
-                                                     ImVec4{ 0.2f, 0.7f, 0.2f, 1.0f }, nullptr, true, false, index);
+                                                     ImVec4{ 0.2f, 0.7f, 0.2f, 1.0f }, nullptr, false);
 
         ImGui::PopItemWidth();
         ImGui::SameLine();
@@ -596,7 +570,7 @@ namespace SR_GRAPH_GUI_NS {
         result |= DrawValueControl<bool>("Z", values.z, resetValue, buttonSize,
                                                      ImVec4{ 0.1f, 0.25f, 0.8f, 1.0f },
                                                      ImVec4{ 0.2f, 0.35f, 0.9f, 1.0f },
-                                                     ImVec4{ 0.1f, 0.25f, 0.8f, 1.0f }, nullptr, true, false, index);
+                                                     ImVec4{ 0.1f, 0.25f, 0.8f, 1.0f }, nullptr, false);
 
         ImGui::PopItemWidth();
         ImGui::PopStyleVar();
@@ -637,7 +611,7 @@ namespace SR_GRAPH_GUI_NS {
         result |= DrawValueControl<uint32_t>("X", values.x, resetValue, buttonSize,
             ImVec4{ 0.8f, 0.1f, 0.15f, 1.0f },
             ImVec4{ 0.9f, 0.2f, 0.2f, 1.0f },
-            ImVec4{ 0.8f, 0.1f, 0.15f, 1.0f }, nullptr, active, drag, index);
+            ImVec4{ 0.8f, 0.1f, 0.15f, 1.0f }, nullptr, drag);
 
         ImGui::PopItemWidth();
         ImGui::SameLine();
@@ -645,7 +619,7 @@ namespace SR_GRAPH_GUI_NS {
         result |= DrawValueControl<uint32_t>("Y", values.y, resetValue, buttonSize,
             ImVec4{ 0.2f, 0.7f, 0.2f, 1.0f },
             ImVec4{ 0.3f, 0.8f, 0.3f, 1.0f },
-            ImVec4{ 0.2f, 0.7f, 0.2f, 1.0f }, nullptr, active, drag, index);
+            ImVec4{ 0.2f, 0.7f, 0.2f, 1.0f }, nullptr, drag);
 
         ImGui::PopItemWidth();
         ImGui::PopStyleVar();
@@ -686,7 +660,7 @@ namespace SR_GRAPH_GUI_NS {
         result |= DrawValueControl<int32_t>("X", values.x, resetValue, buttonSize,
                 ImVec4{ 0.8f, 0.1f, 0.15f, 1.0f },
                 ImVec4{ 0.9f, 0.2f, 0.2f, 1.0f  },
-                ImVec4{ 0.8f, 0.1f, 0.15f, 1.0f }, nullptr, active, drag, index);
+                ImVec4{ 0.8f, 0.1f, 0.15f, 1.0f }, nullptr, drag);
 
         ImGui::PopItemWidth();
         ImGui::SameLine();
@@ -694,7 +668,7 @@ namespace SR_GRAPH_GUI_NS {
         result |= DrawValueControl<int32_t>("Y", values.y, resetValue, buttonSize,
                ImVec4{ 0.2f, 0.7f, 0.2f, 1.0f },
                ImVec4{ 0.3f, 0.8f, 0.3f, 1.0f },
-               ImVec4{ 0.2f, 0.7f, 0.2f, 1.0f }, nullptr, active, drag, index);
+               ImVec4{ 0.2f, 0.7f, 0.2f, 1.0f }, nullptr, drag);
 
         ImGui::PopItemWidth();
         ImGui::SameLine();
@@ -702,7 +676,7 @@ namespace SR_GRAPH_GUI_NS {
         result |= DrawValueControl<int32_t>("Z", values.z, resetValue, buttonSize,
                ImVec4{ 0.1f, 0.25f, 0.8f, 1.0f },
                ImVec4{ 0.2f, 0.35f, 0.9f, 1.0f },
-               ImVec4{ 0.1f, 0.25f, 0.8f, 1.0f }, nullptr, active, drag, index);
+               ImVec4{ 0.1f, 0.25f, 0.8f, 1.0f }, nullptr, drag);
 
         ImGui::PopItemWidth();
         ImGui::PopStyleVar();
@@ -714,13 +688,8 @@ namespace SR_GRAPH_GUI_NS {
         return result;
     }
 
-    SR_MAYBE_UNUSED static bool CheckBox(const std::string& name, bool& value, bool active = true) {
-        ImGui::PushItemFlag(ImGuiItemFlags_Disabled, !active);
-
+    SR_MAYBE_UNUSED static bool CheckBox(const std::string& name, bool& value) {
         const bool result = ImGui::Checkbox(name.c_str(), &value);
-
-        ImGui::PopItemFlag();
-
         return result;
     }
 

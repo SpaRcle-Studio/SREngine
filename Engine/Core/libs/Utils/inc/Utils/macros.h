@@ -77,7 +77,9 @@
 
 #if defined(SR_MSVC)
     #define SR_MSC_VERSION _MSC_VER
-    #if defined(NDEBUG)
+    #if defined(_DEBUG)
+        #define SR_DEBUG
+    #elif defined(NDEBUG)
         #define SR_RELEASE
     #else
         #define SR_DEBUG

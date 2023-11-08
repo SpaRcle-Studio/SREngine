@@ -232,33 +232,13 @@ namespace SR_CORE_GUI_NS {
         if (Graphics::GUI::DrawVec3Control("Skew", skew, 1.f) && !skew.HasZero())
             pTransform->SetSkew(skew);
 
-        if (ImGui::BeginCombo("Anchor", SR_UTILS_NS::EnumReflector::ToString(pTransform->GetAnchor()).c_str())) {
-            auto&& selectables = SR_UTILS_NS::EnumReflector::GetNames<SR_UTILS_NS::Anchor>();
-            for (auto&& selectable : selectables) {
-                if (ImGui::Selectable(selectable.c_str())) {
-                    ImGui::SetItemDefaultFocus();
-                    pTransform->SetAnchor(SR_UTILS_NS::EnumReflector::FromString<SR_UTILS_NS::Anchor>(selectable));
-                }
-            }
+        SR_GRAPH_GUI_NS::EnumCombo<SR_UTILS_NS::Anchor>("Anchor", pTransform->GetAnchor(), [pTransform](auto&& value) {
+            pTransform->SetAnchor(value);
+        });
 
-            ImGui::EndCombo();
-        }
-
-        auto&& stretchTypes = SR_UTILS_NS::EnumReflector::GetNames<SR_UTILS_NS::Stretch>();
-
-        auto stretch = static_cast<int32_t>(SR_UTILS_NS::EnumReflector::GetIndex<SR_UTILS_NS::Stretch>(pTransform->GetStretch()));
-
-        if (ImGui::Combo("Stretch", &stretch, [](void* vec, int idx, const char** out_text){
-            auto&& vector = reinterpret_cast<std::vector<std::string>*>(vec);
-            if (idx < 0 || idx >= vector ->size())
-                  return false;
-
-            *out_text = vector->at(idx).c_str();
-
-            return true;
-        }, const_cast<void*>(reinterpret_cast<const void*>(&stretchTypes)), stretchTypes.size())) {
-            pTransform->SetStretch(SR_UTILS_NS::EnumReflector::At<SR_UTILS_NS::Stretch>(stretch));
-        }
+        SR_GRAPH_GUI_NS::EnumCombo<SR_UTILS_NS::Stretch>("Stretch", pTransform->GetStretch(), [pTransform](auto&& value) {
+            pTransform->SetStretch(value);
+        });
 
         SR_GRAPH_GUI_NS::EnumCombo<SR_UTILS_NS::PositionMode>("Position mode", pTransform->GetPositionMode(), [pTransform](auto&& value) {
             pTransform->SetPositionMode(value);
@@ -355,5 +335,10 @@ namespace SR_CORE_GUI_NS {
                     break;
             }
         }
+    }
+
+    void Inspector::DrawComponentProperties(SR_UTILS_NS::Component* pComponent) {
+        auto&& properties = pComponent->GetComponentProperties();
+        SR_GRAPH_GUI_NS::DrawProperties(&properties);
     }
 }

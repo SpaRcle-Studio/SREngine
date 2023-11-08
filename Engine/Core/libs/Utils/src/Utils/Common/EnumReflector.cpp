@@ -15,8 +15,8 @@ namespace SR_UTILS_NS {
         return false;
     }
 
-    EnumReflector* EnumReflectorManager::GetReflector(const std::string& name) const {
-        return GetReflector(SR_HASH_STR(name));
+    EnumReflector* EnumReflectorManager::GetReflector(const SR_UTILS_NS::StringAtom& name) const {
+        return GetReflector(name.GetHash());
     }
 
     EnumReflector* EnumReflectorManager::GetReflector(uint64_t hashName) const {
@@ -42,7 +42,7 @@ namespace SR_UTILS_NS {
         SRHalt(msg);
     }
 
-    std::optional<std::string> EnumReflector::ToStringInternal(int64_t value) const {
+    std::optional<SR_UTILS_NS::StringAtom> EnumReflector::ToStringInternal(int64_t value) const {
         for (auto&& enumerator : m_data->values) {
             if (enumerator.value == value) {
                 return enumerator.name;
@@ -52,11 +52,9 @@ namespace SR_UTILS_NS {
         return std::optional<std::string>();
     }
 
-    std::optional<int64_t> EnumReflector::FromStringInternal(const std::string &name) const {
-        const int64_t hash = SR_UTILS_NS::HashCombine(name);
-
+    std::optional<int64_t> EnumReflector::FromStringInternal(const SR_UTILS_NS::StringAtom& name) const {
         for (auto&& enumerator : m_data->values) {
-            if (enumerator.hashName == hash) {
+            if (enumerator.hashName == name.GetHash()) {
                 return enumerator.value;
             }
         }

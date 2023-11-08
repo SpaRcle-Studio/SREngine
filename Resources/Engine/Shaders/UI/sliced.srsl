@@ -29,11 +29,11 @@ float processAxis(float coord, float textureBorder, float windowBorder) {
 
 void fragment() {
     vec2 newUV = vec2(
-        1.0 - processAxis(UV.x, SLICED_RECT.x, SLICED_RECT.z),
-        1.0 - processAxis(UV.y, SLICED_RECT.y, SLICED_RECT.w)
+        1.0 - processAxis(UV.x, SLICED_TEXTURE_BORDER.x, SLICED_WINDOW_BORDER.x),
+        1.0 - processAxis(UV.y, SLICED_TEXTURE_BORDER.y, SLICED_WINDOW_BORDER.y)
     );
     COLOR = texture(diffuse, newUV).rgba * color;
-	
+
 	if (COLOR.a <= 0.8) {
 		discard;
 	}

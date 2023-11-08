@@ -95,7 +95,7 @@ bool SR_GRAPH_NS::TextureLoader::LoadFromMemory(Types::Texture* texture, const s
         case ImageFormat::R64_UINT:
         case ImageFormat::Unknown:
         default:
-            SR_ERROR("TextureLoader::LoadFromMemory() : unknown color format!\n\tImageFormat: " + SR_UTILS_NS::EnumReflector::ToString(config.m_format));
+            SR_ERROR("TextureLoader::LoadFromMemory() : unknown color format!\n\tImageFormat: " + SR_UTILS_NS::EnumReflector::ToString(config.m_format).ToStringRef());
             return false;
     }
 

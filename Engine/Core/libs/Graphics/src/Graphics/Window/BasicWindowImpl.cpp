@@ -53,7 +53,7 @@ namespace SR_GRAPH_NS {
         }
 
         SR_ERROR("BasicWindowImpl::CreatePlatformWindow() : OS Windows not support \"" +
-            SR_UTILS_NS::EnumReflector::ToString(type) + "\" window!"
+            SR_UTILS_NS::EnumReflector::ToString(type).ToStringRef() + "\" window!"
         );
     #elif defined(SR_ANDROID)
         switch (type) {
@@ -65,7 +65,7 @@ namespace SR_GRAPH_NS {
         }
 
         SR_ERROR("BasicWindowImpl::CreatePlatformWindow() : OS Android not support \"" +
-                 SR_UTILS_NS::EnumReflector::ToString(type) + "\" window!"
+                 SR_UTILS_NS::EnumReflector::ToString(type).ToStringRef() + "\" window!"
         );
     #elif defined (SR_LINUX)
         switch (type) {

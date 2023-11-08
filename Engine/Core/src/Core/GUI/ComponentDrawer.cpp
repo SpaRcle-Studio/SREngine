@@ -83,7 +83,7 @@ namespace SR_CORE_NS::GUI {
             }
 
             int32_t meshId = pComponent->GetMeshId();
-            if (Graphics::GUI::InputInt("Id", meshId, 1, true, index) && meshId >= 0) {
+            if (Graphics::GUI::InputInt("Id", meshId, 1) && meshId >= 0) {
                 pComponent->SetMeshId(meshId);
                 pComponent->GetCollisionShape()->ReInitDebugShape();
             }
@@ -197,7 +197,7 @@ namespace SR_CORE_NS::GUI {
                         "Height", height, 0.f, buttonSize,
                         ImVec4{ 0.2f, 0.7f, 0.2f, 1.0f },
                         ImVec4{ 0.3f, 0.8f, 0.3f, 1.0f },
-                        ImVec4{ 0.2f, 0.7f, 0.2f, 1.0f }, nullptr, true, 0.1f, index
+                        ImVec4{ 0.2f, 0.7f, 0.2f, 1.0f }, nullptr, 0.1f
             )){
                 pCollisionShape->SetHeight(height);
             }
@@ -341,7 +341,7 @@ namespace SR_CORE_NS::GUI {
         Graphics::GUI::DrawValue("Name", pComponent->GetGeometryName(), index);
 
         int32_t meshId = pComponent->GetMeshId();
-        if (Graphics::GUI::InputInt("Id", meshId, 1, true, index) && meshId >= 0) {
+        if (Graphics::GUI::InputInt("Id", meshId, 1) && meshId >= 0) {
             pComponent->SetMeshId(meshId);
         }
 
@@ -400,7 +400,7 @@ namespace SR_CORE_NS::GUI {
         Graphics::GUI::DrawValue("Name", pComponent->GetGeometryName(), index);
 
         int32_t meshId = pComponent->GetMeshId();
-        if (Graphics::GUI::InputInt("Id", meshId, 1, true, index) && meshId >= 0) {
+        if (Graphics::GUI::InputInt("Id", meshId, 1) && meshId >= 0) {
            pComponent->SetMeshId(meshId);
         }
 
@@ -601,12 +601,12 @@ namespace SR_CORE_NS::GUI {
         ImGui::Separator();
 
         auto&& textureBorder = pComponent->GetTextureBorder();
-        if (Graphics::GUI::DrawVec2Control("Texture border", textureBorder, 0.15f, 80.f, 0.01f, index)) {
+        if (Graphics::GUI::DrawVec2Control("Texture border", textureBorder, 0.15f, 80.f, 0.01f)) {
             pComponent->SetTextureBorder(textureBorder);
         }
 
         auto&& windowBorder = pComponent->GetWindowBorder();
-        if (Graphics::GUI::DrawVec2Control("Window border", windowBorder, 0.15f, 80.f, 0.01f, index)) {
+        if (Graphics::GUI::DrawVec2Control("Window border", windowBorder, 0.15f, 80.f, 0.01f)) {
             pComponent->SetWindowBorder(windowBorder);
         }
 
@@ -705,7 +705,7 @@ namespace SR_CORE_NS::GUI {
 
     void ComponentDrawer::DrawComponent(SR_ANIMATIONS_NS::Skeleton *&pComponent, EditorGUI *context, int32_t index) {
         bool debug = pComponent->IsDebugEnabled();
-        if (Graphics::GUI::CheckBox("Debug", debug, index)) {
+        if (Graphics::GUI::CheckBox("Debug", debug)) {
             pComponent->SetDebugEnabled(debug);
         }
 

@@ -90,6 +90,10 @@
     #include "../../Graphics/src/Graphics/Pipeline/Vulkan/VulkanMemory.cpp"
     #include "../../Graphics/src/Graphics/Pipeline/Vulkan/VulkanKernel.cpp"
 
+    #if defined(SR_LINUX)
+        #include "../../Graphics/src/Graphics/Pipeline/Vulkan/X11SurfaceInit.cpp"
+    #endif
+
     #if defined(SR_USE_IMGUI)
         #include "../../Graphics/src/Graphics/Overlay/VulkanImGuiOverlay.cpp"
     #endif

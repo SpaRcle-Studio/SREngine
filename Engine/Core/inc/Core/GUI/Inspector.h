@@ -43,6 +43,8 @@ namespace SR_CORE_GUI_NS {
         void DrawTransform2D(SR_UTILS_NS::Transform2D* transform) const;
         void DrawTransform3D(SR_UTILS_NS::Transform3D* transform);
 
+        void DrawComponentProperties(SR_UTILS_NS::Component* pComponent);
+
         SR_MAYBE_UNUSED void BackupTransform(const SR_UTILS_NS::GameObject::Ptr& ptr, const std::function<void()>& operation) const;
 
         template<typename T> SR_UTILS_NS::Component* DrawComponent(SR_UTILS_NS::Component* component, const std::string& name, uint32_t& index) {
@@ -67,6 +69,7 @@ namespace SR_CORE_GUI_NS {
 
                 if (ImGui::CollapsingHeader(SR_UTILS_NS::Format("[%i] %s", index, pComponent->GetComponentName().c_str()).c_str())) {
                     ComponentDrawer::DrawComponent(pComponent, context, index);
+                    DrawComponentProperties(pComponent);
                 }
 
                 if (!ImGui::GetDragDropPayload() && ImGui::BeginDragDropSource(ImGuiDragDropFlags_SourceAllowNullID)) {

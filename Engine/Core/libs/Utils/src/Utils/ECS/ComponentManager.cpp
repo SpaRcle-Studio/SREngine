@@ -28,7 +28,12 @@ namespace SR_UTILS_NS {
             return nullptr;
         }
 
-        return m_meta.at(id).constructor();
+        auto&& pComponent = m_meta.at(id).constructor();
+        if (pComponent) {
+            pComponent->InitProperties();
+        }
+
+        return pComponent;
     }
 
     std::pair<Component*, ComponentLoadResult> ComponentManager::Load(SR_HTYPES_NS::Marshal& marshal) {

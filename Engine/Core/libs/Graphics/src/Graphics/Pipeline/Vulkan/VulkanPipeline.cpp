@@ -14,6 +14,10 @@
     #include <Graphics/Overlay/VulkanImGuiOverlay.h>
 #endif
 
+#ifdef SR_LINUX
+    #include <Graphics/Pipeline/Vulkan/X11SurfaceInit.h>
+#endif
+
 #include <EvoVulkan/Types/VmaBuffer.h>
 
 namespace SR_GRAPH_NS {
@@ -104,6 +108,9 @@ namespace SR_GRAPH_NS {
         #ifdef SR_WIN32
             VK_KHR_WIN32_SURFACE_EXTENSION_NAME,
         #endif
+        #ifdef SR_LINUX
+            X11SurfaceInit::GetSurfaceExtensionName(),
+        #endif
         #ifdef SR_ANDROID
             #ifdef VK_KHR_ANDROID_SURFACE_EXTENSION_NAME
                 VK_KHR_ANDROID_SURFACE_EXTENSION_NAME,
@@ -180,6 +187,13 @@ namespace SR_GRAPH_NS {
                 PipelineError("VulkanPipeline::Init() : window is not support this architecture!");
                 return VK_NULL_HANDLE;
             }
+        #elif defined(SR_LINUX)
+            if (auto&& surface = X11SurfaceInit::Init(m_window, instance)) {
+                return surface;
+            }
+
+            PipelineError("VulkanPipeline::Init() : X11 surface initialization failed!");
+            return VK_NULL_HANDLE;
         #else
             SRHalt("Unsupported platform!");
             return VK_NULL_HANDLE;
@@ -341,10 +355,10 @@ namespace SR_GRAPH_NS {
 
         if (!createInfo.Validate()) {
             PipelineError("VulkanPipeline::AllocateShaderProgram() : failed to validate shader create info! Create info:"
-                 "\n\tPolygon mode: " + SR_UTILS_NS::EnumReflector::ToString(createInfo.polygonMode) +
-                 "\n\tCull mode: " + SR_UTILS_NS::EnumReflector::ToString(createInfo.cullMode) +
-                 "\n\tDepth compare: " + SR_UTILS_NS::EnumReflector::ToString(createInfo.depthCompare) +
-                 "\n\tPrimitive topology: " + SR_UTILS_NS::EnumReflector::ToString(createInfo.primitiveTopology)
+                 "\n\tPolygon mode: " + SR_UTILS_NS::EnumReflector::ToString(createInfo.polygonMode).ToStringRef() +
+                 "\n\tCull mode: " + SR_UTILS_NS::EnumReflector::ToString(createInfo.cullMode).ToStringRef() +
+                 "\n\tDepth compare: " + SR_UTILS_NS::EnumReflector::ToString(createInfo.depthCompare).ToStringRef() +
+                 "\n\tPrimitive topology: " + SR_UTILS_NS::EnumReflector::ToString(createInfo.primitiveTopology).ToStringRef()
             );
             return SR_ID_INVALID;
         }

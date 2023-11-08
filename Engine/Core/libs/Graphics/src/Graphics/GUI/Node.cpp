@@ -31,7 +31,7 @@ namespace SR_GRAPH_GUI_NS {
                 m_type = NodeType::Blueprint;
                 break;
             default:
-                SRHaltOnce("Unknown node type! Type: " + SR_UTILS_NS::EnumReflector::ToString(pNode->GetType()));
+                SRHaltOnce("Unknown node type! Type: " + SR_UTILS_NS::EnumReflector::ToString(pNode->GetType()).ToStringRef());
                 break;
         }
 
