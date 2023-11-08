@@ -77,7 +77,7 @@ namespace SR_GRAPH_NS {
         }
 
         SR_ERROR("BasicWindowImpl::CreatePlatformWindow() : Linux OS does not yet support \"" +
-                 SR_UTILS_NS::EnumReflector::ToString(type) + "\" window!"
+                 SR_UTILS_NS::EnumReflector::ToString(type).ToStringRef() + "\" window!"
         );
     #else
         SR_ERROR("BasicWindowImpl::CreatePlatformWindow() : unsupported OS!");

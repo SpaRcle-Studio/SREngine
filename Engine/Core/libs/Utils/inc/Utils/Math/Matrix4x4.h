@@ -13,7 +13,7 @@
 
 namespace SR_MATH_NS {
     class SR_DLL_EXPORT Matrix4x4 {
-        SR_INLINE_STATIC const glm::mat4 GLM_IDENTITY_MAT4X4 = glm::mat4(1); /** NOLINT */
+        SR_INLINE_STATIC constexpr glm::mat4 GLM_IDENTITY_MAT4X4 = glm::mat4(1); /** NOLINT */
     public:
         static Matrix4x4 CreateViewMat(Unit pitch = 0, Unit yaw = 0, Unit roll = 0) {
             auto matrix = glm::rotate(glm::mat4(1), (float)pitch, { 1, 0, 0 });
