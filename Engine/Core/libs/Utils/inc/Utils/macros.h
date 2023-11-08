@@ -114,10 +114,10 @@
 #define SR_CONSTEXPR constexpr
 #define SR_INLINE inline
 
-#ifdef SR_ANDROID
+#if defined(SR_ANDROID)
     #define SR_FASTCALL
     #define SR_FORCE_INLINE SR_INLINE
-#elifdef SR_GCC
+#elif defined(SR_GCC)
     #define SR_FASTCALL
     #define SR_FORCE_INLINE SR_INLINE
 #else
@@ -205,7 +205,7 @@
 
 #define SR_STATIC_ASSERT2(expr, msg) static_assert(expr, msg);
 
-#if defined(SR_MINGW) || (SR_MSC_VERSION > 1929) || defined(SR_ANDROID)
+#if defined(SR_MINGW) || (SR_MSC_VERSION > 1929) || defined(SR_ANDROID) || defined(SR_LINUX)
     #define SR_STATIC_ASSERT(msg) static_assert(msg);
 #else
     #define SR_STATIC_ASSERT(msg) static_assert(false, msg);
