@@ -30,11 +30,11 @@ jobs:
       #gartifactPush: ${{ steps.sArtifact.outputs.gartifactPush }}
       #gbuildWindows: ${{ steps.sBuildWindows.outputs.gbuildWindows }}
       #gbuildLinux: ${{ steps.sBuildLinux.outputs.gbuildLinux }}
-      gbuildRelease: ${{ steps.globals.outputs.gbuildRelease }}
-      gbuildDebug: ${{ steps.globals.outputs.gbuildDebug }}
-      gartifactPush: ${{ steps.globals.outputs.gartifactPush }}
-      gbuildWindows: ${{ steps.globals.outputs.gbuildWindows }}
-      gbuildLinux: ${{ steps.globals.outputs.gbuildLinux }}
+      buildRelease: ${{ steps.globals.outputs.gbuildRelease }}
+      buildDebug: ${{ steps.globals.outputs.gbuildDebug }}
+      artifactPush: ${{ steps.globals.outputs.gartifactPush }}
+      buildWindows: ${{ steps.globals.outputs.gbuildWindows }}
+      buildLinux: ${{ steps.globals.outputs.gbuildLinux }}
 
     steps:
       - name: Fetching repository.
@@ -131,7 +131,7 @@ jobs:
   BuildWindows:
     name: Windows.
     needs: manage
-    if: needs.manage.outputs.gbuildWindows == 'true'
+    if: needs.manage.outputs.buildWindows == 'true'
     uses: ./.github/workflows/WindowsCI.yml
     with:
       buildRelease: needs.manage.outputs.gbuildRelease
@@ -141,7 +141,7 @@ jobs:
   BuildLinux:
     name: Linux.
     needs: manage
-    if: needs.manage.outputs.gbuildLinux == 'true'
+    if: needs.manage.outputs.buildLinux == 'true'
     uses: ./.github/workflows/LinuxCI.yml
     with:
       buildRelease: needs.manage.outputs.gbuildRelease
