@@ -25,11 +25,11 @@ jobs:
     runs-on: windows-latest
     if: "!contains(github.event.head_commit.message, '#SR_CI_NONE')"
     outputs:
-      buildRelease: ${{ steps.init.outputs.buildRelease }}
-      buildDebug: ${{ steps.init.outputs.buildDebug }}
-      artifactPush: ${{ steps.init.outputs.artifactPush }}
-      buildWindows: ${{ steps.init.outputs.buildWindows }}
-      buildLinux: ${{ steps.init.outputs.buildLinux }}
+      buildRelease: ${{ steps.buildRelease.outputs.buildRelease }}
+      buildDebug: ${{ steps.buildDebug.outputs.buildDebug }}
+      artifactPush: ${{ steps.artifact.outputs.artifactPush }}
+      buildWindows: ${{ steps.buildWindows.outputs.buildWindows }}
+      buildLinux: ${{ steps.buildLinux.outputs.buildLinux }}
     steps:
       - name: Fetching repository.
         uses: actions/checkout@v3
@@ -40,54 +40,80 @@ jobs:
         name: Handling "#SR_CI_RELEASE" argument.
         shell: bash
         run: |
-          echo "buildRelease=true" >> "GITHUB_OUTPUT"
+          echo "buildRelease=true" >> "$GITHUB_ENV"
 
       - if: "contains(github.event.head_commit.message, '#SR_CI_DEBUG')"
         name: Handling "#SR_CI_DEBUG" argument.
         shell: bash
         run: |
-          echo "buildDebug=true" >> "GITHUB_OUTPUT"
+          echo "buildDebug=true" >> "$GITHUB_ENV"
 
       - if: "contains(github.event.head_commit.message, '#SR_CI_ALL')"
         name: Handling "#SR_CI_ALL" argument.
         shell: bash
         run: |
-          echo "buildRelease=true" >> "GITHUB_OUTPUT"
-          echo "buildDebug=true" >> "GITHUB_OUTPUT"
+          echo "buildRelease=true" >> "$GITHUB_ENV"
+          echo "buildDebug=true" >> "$GITHUB_ENV"
 
       - if: "contains(github.event.head_commit.message, '#SR_CI_ARTIFACT')"
         name: Handling "#SR_CI_ARTIFACT" argument.
+        id: artifact
         shell: bash
         run: |
-          echo "artifactPush=true" >> "GITHUB_OUTPUT"
+          echo "artifactPush=true" >> "$GITHUB_OUTPUT"
 
       - if: "contains(github.event.head_commit.message, '#SR_CI_LINUX')"
         name: Handling "#SR_CI_LINUX" argument.
         shell: bash
         run: |
-          echo "buildLinux=true" >> "GITHUB_OUTPUT"
+          echo "buildLinux=true" >> "$GITHUB_ENV"
 
       - if: "contains(github.event.head_commit.message, '#SR_CI_WINDOWS')"
         name: Handling "#SR_CI_WINDOWS" argument.
         shell: bash
         run: |
-          echo "buildWindows=true" >> "GITHUB_OUTPUT"
+          echo "buildWindows=true" >> "$GITHUB_ENV"
 
       - if: env.buildRelease != 'true' && env.buildDebug != 'true'
         name: Setting default build type.
         shell: bash
         run: |
-          echo "buildDebug=true" >> "GITHUB_OUTPUT"
+          echo "buildDebug=true" >> "$GITHUB_ENV"
 
       - if: env.buildWindows != 'true' && env.buildLinux != 'true'
         name: Setting default platform type.
         shell: bash
         run: |
-          echo "buildWindows=true" >> "GITHUB_OUTPUT"
-          echo "buildLinux=true" >> "GITHUB_OUTPUT"
+          echo "buildWindows=true" >> "$GITHUB_ENV"
+          echo "buildLinux=true" >> "$GITHUB_ENV"
+
+      - if: env.buildLinux == 'true'
+        name: Set global buildWindows.
+        id: buildWindows
+        run: |
+          echo "buildWindows=true" >> "$GITHUB_OUTPUT"
+
+      - if: env.buildWindows == 'true'
+        name: Set global buildLinux.
+        id: buildLinux
+        run: |
+          echo "buildWindows=true" >> "$GITHUB_OUTPUT"
+
+      - if: env.buildDebug == 'true'
+        name: Set global buildDebug.
+        id: buildDebug
+        run: |
+          echo "buildDebug=true" >> "$GITHUB_OUTPUT"
+
+      - if: env.buildRelease == 'true'
+        name: Set global buildRelease.
+        id: buildRelease
+        run: |
+          echo "buildDebug=true" >> "$GITHUB_OUTPUT"
+  
 
   BuildWindows:
-    name: Call Windows Build.
+    name: Windows.
     needs: manage
     if: ${{ needs.manage.outputs.buildWindows == 'true' }}
     uses: ./.github/workflows/WindowsCI.yml
@@ -97,7 +123,7 @@ jobs:
       artifactPush: needs.manage.outputs.artifactPush
 
   BuildLinux:
-    name: Call Linux Build.
+    name: Linux.
     needs: manage
     if: ${{ needs.manage.outputs.buildLinux == 'true' }}
     uses: ./.github/workflows/LinuxCI.yml
@@ -105,4 +131,3 @@ jobs:
       buildRelease: needs.manage.outputs.buildRelease
       buildDebug: needs.manage.outputs.buildDebug
       artifactPush: needs.manage.outputs.artifactPush
-  
