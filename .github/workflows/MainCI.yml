@@ -25,11 +25,12 @@ jobs:
     runs-on: windows-latest
     if: "!contains(github.event.head_commit.message, '#SR_CI_NONE')"
     outputs:
-      buildRelease: ${{ steps.sBuildRelease.outputs.buildRelease }}
-      buildDebug: ${{ steps.sBuildDebug.outputs.buildDebug }}
-      artifactPush: ${{ steps.sArtifact.outputs.artifactPush }}
-      buildWindows: ${{ steps.sBuildWindows.outputs.buildWindows }}
-      buildLinux: ${{ steps.sBuildLinux.outputs.buildLinux }}
+      gbuildRelease: ${{ steps.sBuildRelease.outputs.gbuildRelease }}
+      gbuildDebug: ${{ steps.sBuildDebug.outputs.gbuildDebug }}
+      gartifactPush: ${{ steps.sArtifact.outputs.gartifactPush }}
+      gbuildWindows: ${{ steps.sBuildWindows.outputs.gbuildWindows }}
+      gbuildLinux: ${{ steps.sBuildLinux.outputs.gbuildLinux }}
+
     steps:
       - name: Fetching repository.
         uses: actions/checkout@v3
@@ -60,7 +61,7 @@ jobs:
         id: sArtifact
         shell: bash
         run: |
-          echo "artifactPush=true" >> $GITHUB_OUTPUT
+          echo "gartifactPush=true" >> $GITHUB_OUTPUT
 
       - if: "contains(github.event.head_commit.message, '#SR_CI_LINUX')"
         name: Handling "#SR_CI_LINUX" argument.
@@ -91,43 +92,43 @@ jobs:
         name: Set global buildWindows.
         id: sBuildWindows
         run: |
-          echo "buildWindows=true" >> $GITHUB_OUTPUT
+          echo "gbuildWindows=true" >> $GITHUB_OUTPUT
 
       - if: env.buildWindows == 'true'
         name: Set global buildLinux.
         id: sBuildLinux
         run: |
-          echo "buildWindows=true" >> $GITHUB_OUTPUT
+          echo "gbuildWindows=true" >> $GITHUB_OUTPUT
 
       - if: env.buildDebug == 'true'
         name: Set global buildDebug.
         id: sBuildDebug
         run: |
-          echo "buildDebug=true" >> $GITHUB_OUTPUT
+          echo "gbuildDebug=true" >> $GITHUB_OUTPUT
 
       - if: env.buildRelease == 'true'
         name: Set global buildRelease.
         id: sBuildRelease
         run: |
-          echo "buildDebug=true" >> $GITHUB_OUTPUT
+          echo "gbuildDebug=true" >> $GITHUB_OUTPUT
   
 
   BuildWindows:
     name: Windows.
     needs: manage
-    if: needs.manage.outputs.buildWindows == 'true'
+    if: needs.manage.outputs.gbuildWindows == 'true'
     uses: ./.github/workflows/WindowsCI.yml
     with:
-      buildRelease: needs.manage.outputs.buildRelease
-      buildDebug: needs.manage.outputs.buildDebug
-      artifactPush: needs.manage.outputs.artifactPush
+      buildRelease: needs.manage.outputs.gbuildRelease
+      buildDebug: needs.manage.outputs.gbuildDebug
+      artifactPush: needs.manage.outputs.gartifactPush
 
   BuildLinux:
     name: Linux.
     needs: manage
-    if: needs.manage.outputs.buildLinux == 'true'
+    if: needs.manage.outputs.gbuildLinux == 'true'
     uses: ./.github/workflows/LinuxCI.yml
     with:
-      buildRelease: needs.manage.outputs.buildRelease
-      buildDebug: needs.manage.outputs.buildDebug
-      artifactPush: needs.manage.outputs.artifactPush
+      buildRelease: needs.manage.outputs.gbuildRelease
+      buildDebug: needs.manage.outputs.gbuildDebug
+      artifactPush: needs.manage.outputs.gartifactPush
