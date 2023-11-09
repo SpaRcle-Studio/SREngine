@@ -29,7 +29,7 @@ jobs:
       #  with:
       #   version: 1.3.211.0
 
-      - name: Installing dependencies
+      - name: Installing dependencies.
         run: |
           wget -qO- https://packages.lunarg.com/lunarg-signing-key-pub.asc | sudo tee /etc/apt/trusted.gpg.d/lunarg.asc
           sudo wget -qO /etc/apt/sources.list.d/lunarg-vulkan-jammy.list http://packages.lunarg.com/vulkan/lunarg-vulkan-jammy.list
@@ -134,28 +134,28 @@ jobs:
         working-directory: ${{github.workspace}}/build-debug/Engine
         shell: bash
         run: | 
-          rename debug Bin
-          md SREngineDebugBuild
-          md SREngineDebugBuild/Resources
-          md SREngineDebugBuild/Bin
-          move Bin SREngineDebugBuild
-          copy SREngine.exe SREngineDebugBuild/Bin
+          mv ./debug ./Bin
+          mkdir ./SREngineDebugBuild
+          mkdir ./SREngineDebugBuild/Resources
+          mkdir ./SREngineDebugBuild/Bin
+          mv ./Bin ./SREngineDebugBuild
+          cp ./SREngine.exe ./SREngineDebugBuild/Bin
           cd ../../
-          move Resources build-debug/Engine/SREngineDebugBuild
+          mv ./Resources ./build-debug/Engine/SREngineDebugBuild
 
       - if: env.releaseSuccessful == 'true'
         name: Creating Release artifact.
         working-directory: ${{github.workspace}}/build-release/Engine
         shell: bash
         run: | 
-          rename release Bin
-          md SREngineReleaseBuild
-          md SREngineReleaseBuild/Resources
-          md SREngineReleaseBuild/Bin
-          move Bin SREngineReleaseBuild
-          copy SREngine.exe SREngineDebugBuild/Bin
+          mv ./release ./Bin
+          mkdir ./SREngineReleaseBuild
+          mkdir ./SREngineReleaseBuild/Resources
+          mkdir ./SREngineReleaseBuild/Bin
+          mv ./Bin ./SREngineReleaseBuild
+          cp ./SREngine.exe ./SREngineDebugBuild/Bin
           cd ../../
-          move Resources build-release/Engine/SREngineReleaseBuild
+          mv ./Resources ./build-release/Engine/SREngineReleaseBuild
         
       - if: env.debugSuccessful == 'true'
         name: Uploading a successful Debug build artifact.
