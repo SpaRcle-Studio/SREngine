@@ -22,19 +22,14 @@ on:
 jobs:
   manage:
     name: Handle arguments and choose platform.
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, '#SR_CI_NONE')"
     outputs:
-      #gbuildRelease: ${{ steps.sBuildRelease.outputs.gbuildRelease }}
-      #gbuildDebug: ${{ steps.sBuildDebug.outputs.gbuildDebug }}
-      #gartifactPush: ${{ steps.sArtifact.outputs.gartifactPush }}
-      #gbuildWindows: ${{ steps.sBuildWindows.outputs.gbuildWindows }}
-      #gbuildLinux: ${{ steps.sBuildLinux.outputs.gbuildLinux }}
-      buildRelease: ${{ steps.globals.outputs.gbuildRelease }}
-      buildDebug: ${{ steps.globals.outputs.gbuildDebug }}
-      artifactPush: ${{ steps.globals.outputs.gartifactPush }}
-      buildWindows: ${{ steps.globals.outputs.gbuildWindows }}
-      buildLinux: ${{ steps.globals.outputs.gbuildLinux }}
+      buildRelease: ${{ steps.globals.outputs.buildRelease }}
+      buildDebug: ${{ steps.globals.outputs.buildDebug }}
+      artifactPush: ${{ steps.globals.outputs.artifactPush }}
+      buildWindows: ${{ steps.globals.outputs.buildWindows }}
+      buildLinux: ${{ steps.globals.outputs.buildLinux }}
 
     steps:
       - name: Fetching repository.
@@ -63,10 +58,9 @@ jobs:
 
       - if: "contains(github.event.head_commit.message, '#SR_CI_ARTIFACT')"
         name: Handling "#SR_CI_ARTIFACT" argument.
-        id: sArtifact
         shell: bash
         run: |
-          echo "gartifactPush=true" >> $GITHUB_OUTPUT
+          echo "artifactPush=true" >> $GITHUB_ENV
 
       - if: "contains(github.event.head_commit.message, '#SR_CI_LINUX')"
         name: Handling "#SR_CI_LINUX" argument.
@@ -92,39 +86,15 @@ jobs:
         run: |
           echo "buildWindows=true" >> "$GITHUB_ENV"
           echo "buildLinux=true" >> "$GITHUB_ENV"
-
-      - if: env.buildLinux == 'true'
-        name: Set global buildWindows.
-        id: sBuildWindows
-        run: |
-          echo "gbuildWindows=true" >> $GITHUB_OUTPUT
-
-      - if: env.buildWindows == 'true'
-        name: Set global buildLinux.
-        id: sBuildLinux
-        run: |
-          echo "gbuildWindows=true" >> $GITHUB_OUTPUT
-
-      - if: env.buildDebug == 'true'
-        name: Set global buildDebug.
-        id: sBuildDebug
-        run: |
-          echo "gbuildDebug=true" >> $GITHUB_OUTPUT
-
-      - if: env.buildRelease == 'true'
-        name: Set global buildRelease.
-        id: sBuildRelease
-        run: |
-          echo "gbuildDebug=true" >> $GITHUB_OUTPUT
           
       - name: Set global variables.
         id: globals
         run: |
-          echo "gbuildDebug=${{env.buildDebug}}" >> $GITHUB_OUTPUT
-          echo "gbuildRelease=${{env.buildRelease}}" >> $GITHUB_OUTPUT
-          echo "gbuildWindows=${{env.buildWindows}}" >> $GITHUB_OUTPUT
-          echo "gbuildLinux=true" >> "$GITHUB_OUTPUT"
-      #echo "gbuildLinux=${{env.buildLinux}} >> $GITHUB_OUTPUT
+          echo "buildDebug=${{env.buildDebug}}" >> $GITHUB_OUTPUT
+          echo "buildRelease=${{env.buildRelease}}" >> $GITHUB_OUTPUT
+          echo "buildWindows=${{env.buildWindows}}" >> $GITHUB_OUTPUT
+          echo "buildLinux=${{env.buildLinux}} >> $GITHUB_OUTPUT
+          echo "artifactPush=${{env.artifactPush}} >> $GITHUB_OUTPUT
 
       #echo "::set-output name=gartifactPush::$deployment_key_for_api"
   
