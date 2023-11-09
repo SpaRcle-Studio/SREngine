@@ -80,18 +80,20 @@ jobs:
           echo "buildWindows=true" >> "$GITHUB_ENV"
           echo "buildLinux=true" >> "$GITHUB_ENV"
 
-      - if: env.buildWindows == 'true'
-        name: Run Windows Workflow.
-        uses: ./.github/workflows/WindowsCI.yml
-        with:
-          buildRelease: env.buildRelease
-          buildDebug: env.buildDebug
-          artifactPush: env.artifactPush
+  BuildWindows:
+    name: Call Windows Build.
+    if: env.buildWindows == 'true'
+    uses: ./.github/workflows/WindowsCI.yml
+    with:
+      buildRelease: env.buildRelease
+      buildDebug: env.buildDebug
+      artifactPush: env.artifactPush
 
-      - if: env.buildLinux == 'true'
-        name: Run Linux Workflow.
-        uses: ./.github/workflows/LinuxCI.yml
-        with:
-          buildRelease: env.buildRelease
-          buildDebug: env.buildDebug
-          artifactPush: env.artifactPush
+  BuildLinux:
+    name: Call Linux Build.
+    if: env.buildLinux == 'true'
+    uses: ./.github/workflows/LinuxCI.yml
+    with:
+      buildRelease: env.buildRelease
+      buildDebug: env.buildDebug
+      artifactPush: env.artifactPush
