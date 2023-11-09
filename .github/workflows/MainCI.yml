@@ -25,11 +25,16 @@ jobs:
     runs-on: windows-latest
     if: "!contains(github.event.head_commit.message, '#SR_CI_NONE')"
     outputs:
-      gbuildRelease: ${{ steps.sBuildRelease.outputs.gbuildRelease }}
-      gbuildDebug: ${{ steps.sBuildDebug.outputs.gbuildDebug }}
-      gartifactPush: ${{ steps.sArtifact.outputs.gartifactPush }}
-      gbuildWindows: ${{ steps.sBuildWindows.outputs.gbuildWindows }}
-      gbuildLinux: ${{ steps.sBuildLinux.outputs.gbuildLinux }}
+      #gbuildRelease: ${{ steps.sBuildRelease.outputs.gbuildRelease }}
+      #gbuildDebug: ${{ steps.sBuildDebug.outputs.gbuildDebug }}
+      #gartifactPush: ${{ steps.sArtifact.outputs.gartifactPush }}
+      #gbuildWindows: ${{ steps.sBuildWindows.outputs.gbuildWindows }}
+      #gbuildLinux: ${{ steps.sBuildLinux.outputs.gbuildLinux }}
+      gbuildRelease: ${{ steps.globals.outputs.gbuildRelease }}
+      gbuildDebug: ${{ steps.globals.outputs.gbuildDebug }}
+      gartifactPush: ${{ steps.globals.outputs.gartifactPush }}
+      gbuildWindows: ${{ steps.globals.outputs.gbuildWindows }}
+      gbuildLinux: ${{ steps.globals.outputs.gbuildLinux }}
 
     steps:
       - name: Fetching repository.
@@ -111,6 +116,16 @@ jobs:
         id: sBuildRelease
         run: |
           echo "gbuildDebug=true" >> $GITHUB_OUTPUT
+          
+      - name: Set global variables.
+        id: globals
+        run: |
+          echo "gbuildDebug=env.buildDebug >> $GITHUB_OUTPUT
+          echo "gbuildRelease=env.buildRelease >> $GITHUB_OUTPUT
+          echo "gbuildWindows=env.buildWindows >> $GITHUB_OUTPUT
+          echo "gbuildLinux=env.buildLinux >> $GITHUB_OUTPUT
+
+      #echo "::set-output name=gartifactPush::$deployment_key_for_api"
   
 
   BuildWindows:
