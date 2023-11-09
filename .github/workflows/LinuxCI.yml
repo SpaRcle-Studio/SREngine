@@ -134,28 +134,28 @@ jobs:
         working-directory: ${{github.workspace}}/build-debug/Engine
         shell: bash
         run: | 
-          mv ./debug ./Bin
-          mkdir ./SREngineDebugBuild
-          mkdir ./SREngineDebugBuild/Resources
-          mkdir ./SREngineDebugBuild/Bin
-          mv ./Bin ./SREngineDebugBuild
-          cp ./SREngine.exe ./SREngineDebugBuild/Bin
+          mv debug Bin
+          mkdir SREngineDebugBuild
+          mkdir SREngineDebugBuild/Resources
+          mkdir SREngineDebugBuild/Bin
+          mv Bin SREngineDebugBuild
+          cp SREngine.exe SREngineDebugBuild/Bin
           cd ../../
-          mv ./Resources ./build-debug/Engine/SREngineDebugBuild
+          mv Resources build-debug/Engine/SREngineDebugBuild
 
       - if: env.releaseSuccessful == 'true'
         name: Creating Release artifact.
         working-directory: ${{github.workspace}}/build-release/Engine
         shell: bash
         run: | 
-          mv ./release ./Bin
-          mkdir ./SREngineReleaseBuild
-          mkdir ./SREngineReleaseBuild/Resources
-          mkdir ./SREngineReleaseBuild/Bin
-          mv ./Bin ./SREngineReleaseBuild
-          cp ./SREngine.exe ./SREngineDebugBuild/Bin
+          mv release Bin
+          mkdir SREngineReleaseBuild
+          mkdir SREngineReleaseBuild/Resources
+          mkdir SREngineReleaseBuild/Bin
+          mv Bin SREngineReleaseBuild
+          cp SREngine.exe SREngineDebugBuild/Bin
           cd ../../
-          mv ./Resources ./build-release/Engine/SREngineReleaseBuild
+          mv Resources build-release/Engine/SREngineReleaseBuild
         
       - if: env.debugSuccessful == 'true'
         name: Uploading a successful Debug build artifact.
