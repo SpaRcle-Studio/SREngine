@@ -81,7 +81,7 @@ namespace SR_GRAPH_GUI_NS {
     SR_DLL_EXPORT extern bool CollapsingHeader(const std::string& label, ImGuiTreeNodeFlags flags);
     SR_DLL_EXPORT extern void DrawMultiLineTextOnCenter(const std::string& text);
     SR_DLL_EXPORT extern void DrawMultiLineTextOnCenter(const std::string& text, ImVec4 color);
-    SR_DLL_EXPORT extern void DrawTextOnCenter(const std::string& text, ImVec4 color = ImVec4(1.f, 1.f, 1.f, 1.f), bool sameLine = true);
+    SR_DLL_EXPORT extern void DrawTextOnCenter(const std::string& text, ImVec4 color = ImVec4(1.f, 1.f, 1.f, 1.f));
     SR_DLL_EXPORT extern int ImTextCharToUtf8(char* buf, int32_t bufSize, uint32_t c);
     SR_DLL_EXPORT extern ImVec2 DrawTexture(void* pDescriptor, const SR_MATH_NS::IVector2& size, SR_GRAPH_NS::PipelineType pipelineType, bool imposition);
     SR_DLL_EXPORT extern ImVec2 DrawImage(ImTextureID user_texture_id, const ImVec2& size, const ImVec2& uv0, const ImVec2& uv1, const ImVec4& tint_col, const ImVec4& border_col, bool imposition);

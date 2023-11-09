@@ -11,9 +11,7 @@
 namespace SR_GTYPES_NS {
     class MeshComponent : public IndexedMesh, public SR_GTYPES_NS::IRenderComponent {
     protected:
-        explicit MeshComponent(MeshType type)
-            : IndexedMesh(type)
-        { }
+        explicit MeshComponent(MeshType type);
 
     public:
         Component* CopyComponent() const override;

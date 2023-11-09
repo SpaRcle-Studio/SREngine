@@ -9,9 +9,11 @@
 #include <Utils/Common/Hashes.h>
 #include <Utils/Common/Enumerations.h>
 #include <Utils/Xml.h>
+#include <Utils/TypeTraits/Properties.h>
 
 namespace SR_GTYPES_NS {
     class Texture;
+    class Material;
 }
 
 namespace SR_GRAPH_NS {
@@ -57,14 +59,27 @@ namespace SR_GRAPH_NS {
           Skeleton128
     )
 
-    struct MaterialProperty {
-        SR_UTILS_NS::StringAtom id;
-        SR_UTILS_NS::StringAtom displayName;
-        ShaderPropertyVariant data;
-        ShaderVarType type;
+    class MaterialProperty : public SR_UTILS_NS::Property {
+    public:
+        SR_NODISCARD SR_UTILS_NS::StringAtom GetDisplayName() const noexcept { return m_displayName; }
+        SR_NODISCARD ShaderVarType GetShaderVarType() const noexcept { return m_type; }
+        SR_NODISCARD const ShaderPropertyVariant& GetData() const noexcept { return m_data; }
+        SR_NODISCARD SR_GTYPES_NS::Material* GetMaterial() const noexcept { return m_material; }
+
+        MaterialProperty& SetDisplayName(SR_UTILS_NS::StringAtom value) noexcept { m_displayName = value; return *this; }
+        MaterialProperty& SetData(const ShaderPropertyVariant& value) noexcept { m_data = value; return *this; }
+        MaterialProperty& SetShaderVarType(ShaderVarType value) noexcept { m_type = value; return *this; }
+        MaterialProperty& SetMaterial(SR_GTYPES_NS::Material* value) noexcept { m_material = value; return *this; }
+
+    private:
+        SR_GTYPES_NS::Material* m_material = nullptr;
+        SR_UTILS_NS::StringAtom m_displayName;
+        ShaderPropertyVariant m_data;
+        ShaderVarType m_type = ShaderVarType::Unknown;
+
     };
 
-    typedef std::vector<MaterialProperty> MaterialProperties;
+    typedef SR_UTILS_NS::PropertyContainer MaterialProperties;
     typedef std::list<std::pair<std::string, ShaderVarType>> ShaderProperties;
 
     struct ShaderSampler {
@@ -74,7 +89,7 @@ namespace SR_GRAPH_NS {
     };
     typedef std::map<uint64_t, ShaderSampler> ShaderSamplers;
 
-    SR_NODISCARD MaterialProperties LoadMaterialProperties(const SR_XML_NS::Node& propertiesNode);
+    void LoadMaterialProperties(const SR_GTYPES_NS::Material* pMaterial, const SR_XML_NS::Node& propertiesNode, MaterialProperties* pProperties);
     std::list<SR_GTYPES_NS::Texture*> GetTexturesFromMatProperties(const MaterialProperties& properties);
 
     SR_MAYBE_UNUSED static bool IsSamplerType(ShaderVarType type) {

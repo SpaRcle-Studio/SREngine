@@ -282,6 +282,10 @@ namespace SR_SRSL_NS {
                     m_states.pop_back();
 
                     auto&& pFunction = dynamic_cast<SRSLFunction*>(m_lexicalTree.back()->lexicalTree.back());
+                    if (!pFunction) {
+                        m_result = SRSLResult(SRSLReturnCode::InvalidFunction, GetCurrentLexem());
+                        return;
+                    }
                     pFunction->pLexicalTree = std::move(pLexicalTree);
                 }
                 else if (!m_states.empty() && m_states.back() == LXAState::IfStatementBody) {

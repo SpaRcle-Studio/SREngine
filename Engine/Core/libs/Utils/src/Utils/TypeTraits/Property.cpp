@@ -5,10 +5,10 @@
 #include <Utils/TypeTraits/Property.h>
 
 namespace SR_UTILS_NS {
-    bool Property::IsVisible() const noexcept {
-        if (!m_visibleCondition) {
+    bool Property::IsActive() const noexcept {
+        if (!m_activeCondition) {
             return true;
         }
-        return m_visibleCondition();
+        return m_activeCondition();
     }
 }

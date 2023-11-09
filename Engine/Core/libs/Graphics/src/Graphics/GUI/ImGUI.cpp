@@ -7,13 +7,9 @@
 
 namespace SR_GRAPH_GUI_NS {
 #ifdef SR_USE_IMGUI
-    void DrawTextOnCenter(const std::string& text, ImVec4 color, bool sameLine) {
+    void DrawTextOnCenter(const std::string& text, ImVec4 color) {
         const auto fontSize = ImGui::GetFontSize() * static_cast<float_t>(text.size()) / 2.f;
-
-        if (sameLine) {
-            ImGui::SameLine(ImGui::GetWindowSize().x / 2 - fontSize + (fontSize / 2));
-        }
-
+        ImGui::SameLine(ImGui::GetWindowSize().x / 2 - fontSize + (fontSize / 2));
         ImGui::TextColored(color, "%s", text.c_str());
     }
 

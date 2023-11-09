@@ -7,6 +7,7 @@
 #include <Core/GUI/FileBrowser.h>
 #include <Core/GUI/PhysicsMaterialEditor.h>
 #include <Core/GUI/DragNDropHelper.h>
+#include <Core/GUI/PropertyDrawer.h>
 #include <Core/Settings/EditorSettings.h>
 
 #include <Utils/Types/DataStorage.h>
@@ -457,88 +458,10 @@ namespace SR_CORE_NS::GUI {
         }
     }
 
-    void ComponentDrawer::DrawMaterialProps(SR_GTYPES_NS::Material* material, EditorGUI *context, int32_t index) {
-        for (auto&& property : material->GetProperties()) {
-            std::visit([&property, &material, index, context](SR_GRAPH_NS::ShaderPropertyVariant&& arg){
-                if (std::holds_alternative<int32_t>(arg)) {
-                    auto&& value = std::get<int32_t>(arg);
-                    if (ImGui::InputInt(SR_FORMAT_C("%i##%s", property.displayName.c_str(), index), &value)) {
-                        property.data = value;
-                    }
-                }
-                else if (std::holds_alternative<float_t>(arg)) {
-                    float_t value = std::get<float_t>(arg);
-                    if (ImGui::InputFloat(property.displayName.c_str(), &value)) {
-                        property.data = value;
-                    }
-                }
-                else if (std::holds_alternative<SR_MATH_NS::FVector3>(arg)) {
-                    auto&& value = std::get<SR_MATH_NS::FVector3>(arg);
-                    if (Graphics::GUI::DrawVec3Control(property.displayName, value, 0.f, 70.f, 0.01f, index)) {
-                        property.data = value;
-                    }
-                }
-                else if (std::holds_alternative<SR_MATH_NS::FVector4>(arg)) {
-                    auto&& value = std::get<SR_MATH_NS::FVector4>(arg);
-                    if (Graphics::GUI::DrawColorControl(property.displayName, value, 0.f, true, 70.f)) {
-                        property.data = value;
-                    }
-                }
-                else if (std::holds_alternative<SR_GTYPES_NS::Texture*>(arg)) {
-                    auto&& value = std::get<SR_GTYPES_NS::Texture*>(arg);
-
-                    ImGui::Separator();
-
-                    void* pDescriptor = value ? value->GetDescriptor() : nullptr;
-
-                    /// пробуем взять иконку из редактора
-                    if (!pDescriptor) {
-                        pDescriptor = context->GetIconDescriptor(EditorIcon::Unknown);
-                    }
-
-                    /// если нашли хоть какой-то дескриптор
-                    if (pDescriptor) {
-                        if (SR_GRAPH_GUI_NS::ImageButton(SR_FORMAT("##imgBtnTex%i", index), pDescriptor, SR_MATH_NS::IVector2(55), 3)) {
-                            auto&& texturesPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
-                            auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(texturesPath, { { "Images", "png,jpg,bmp,tga" } });
-
-                            if (path.Exists()) {
-                                if (auto&& texture = SR_GTYPES_NS::Texture::Load(path)) {
-                                    material->SetTexture(&property, texture);
-                                }
-                            }
-                        }
-                    }
-
-                    /// -------------------------
-
-                    ImGui::SameLine();
-                    ImGui::BeginGroup();
-
-                    ImGui::Text("Property: %s", property.displayName.c_str());
-
-                    if (value) {
-                        ImGui::Text("Size: %ix%i\nChannels: %i", value->GetWidth(), value->GetHeight(), value->GetChannels());
-                    }
-                    else {
-                        ImGui::Text("Size: None\nChannels: None");
-                    }
-
-                    std::string id = value ? std::string(value->GetResourceId()) : std::string();
-
-                    auto&& inputLabel = SR_UTILS_NS::Format("##%s-%i-mat-tex", property.displayName.c_str(), index);
-                    if (ImGui::InputText(inputLabel.c_str(), &id, ImGuiInputTextFlags_EnterReturnsTrue | ImGuiInputTextFlags_NoUndoRedo)) {
-                        auto&& texture = SR_GTYPES_NS::Texture::Load(id);
-                        material->SetTexture(&property, texture);
-                        value = texture;
-                    }
-
-                    ImGui::EndGroup();
-
-                    ImGui::Separator();
-                }
-            }, property.data);
-        }
+    void ComponentDrawer::DrawMaterialProps(SR_GTYPES_NS::Material* material, EditorGUI* pEditor, int32_t index) {
+        SR_CORE_GUI_NS::DrawPropertyContext context;
+        context.pEditor = pEditor;
+        SR_CORE_GUI_NS::DrawPropertyContainer(context, &material->GetProperties());
     }
 
     void ComponentDrawer::DrawComponent(SR_GRAPH_NS::UI::Anchor *&anchor, EditorGUI *context, int32_t index) {
@@ -589,7 +512,7 @@ namespace SR_CORE_NS::GUI {
     }
 
     void ComponentDrawer::DrawComponent(SR_GTYPES_NS::Sprite*& pComponent, EditorGUI *context, int32_t index) {
-        if (!pComponent->IsCalculatable())
+        /*if (!pComponent->IsCalculatable())
             ImGui::TextColored(ImVec4(1, 0, 0, 1), "Invalid mesh!");
 
         if (!pComponent->IsCalculated())
@@ -620,7 +543,7 @@ namespace SR_CORE_NS::GUI {
         /// компилятор считает, что это недостижимый код (он ошибается)
         if (copy != pMaterial) {
             pComponent->SetMaterial(copy);
-        }
+        }*/
     }
 
     void ComponentDrawer::DrawComponent(SR_GTYPES_NS::ProceduralMesh *&pComponent, EditorGUI *context, int32_t index) {

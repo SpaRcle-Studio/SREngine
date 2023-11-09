@@ -339,6 +339,8 @@ namespace SR_CORE_GUI_NS {
 
     void Inspector::DrawComponentProperties(SR_UTILS_NS::Component* pComponent) {
         auto&& properties = pComponent->GetComponentProperties();
-        SR_GRAPH_GUI_NS::DrawPropertyContainer(&properties);
+        SR_CORE_GUI_NS::DrawPropertyContext context;
+        context.pEditor = dynamic_cast<EditorGUI*>(GetManager());
+        SR_CORE_GUI_NS::DrawPropertyContainer(context, &properties);
     }
 }

@@ -6,6 +6,7 @@
 #define SR_ENGINE_CORE_INSPECTOR_H
 
 #include <Core/GUI/ComponentDrawer.h>
+#include <Core/GUI/PropertyDrawer.h>
 
 #include <Utils/ECS/GameObject.h>
 #include <Utils/World/Scene.h>
@@ -49,9 +50,9 @@ namespace SR_CORE_GUI_NS {
 
         template<typename T> SR_UTILS_NS::Component* DrawComponent(SR_UTILS_NS::Component* component, const std::string& name, uint32_t& index) {
             auto&& pComponent = dynamic_cast<T*>(component);
-            auto&& context = dynamic_cast<EditorGUI*>(GetManager());
+            auto&& pContext = dynamic_cast<EditorGUI*>(GetManager());
 
-            if (!pComponent || !context) {
+            if (!pComponent || !pContext) {
                 return component;
             }
 
@@ -68,7 +69,14 @@ namespace SR_CORE_GUI_NS {
                 ImGui::SameLine();
 
                 if (ImGui::CollapsingHeader(SR_UTILS_NS::Format("[%i] %s", index, pComponent->GetComponentName().c_str()).c_str())) {
-                    ComponentDrawer::DrawComponent(pComponent, context, index);
+                    SR_CORE_GUI_NS::DrawPropertyContext context;
+                    context.pEditor = pContext;
+
+                    if (SR_CORE_GUI_NS::DrawPropertyContainer(context, &pComponent->GetEntityMessages())) {
+                        ImGui::Separator();
+                    }
+
+                    ComponentDrawer::DrawComponent(pComponent, pContext, index);
                     DrawComponentProperties(pComponent);
                 }
 

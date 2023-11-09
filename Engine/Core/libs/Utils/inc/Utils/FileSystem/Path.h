@@ -45,6 +45,10 @@ namespace SR_UTILS_NS {
         operator const std::string&() { return m_path; } /** NOLINT */
         Path& operator=(const Path& path) = default;
 
+        bool operator==(const Path& path) const noexcept {
+            return m_path == path.ToStringRef();
+        }
+
     public:
         SR_DEPRECATED bool Make(Type type = Type::Undefined) const;
         bool Create() const;

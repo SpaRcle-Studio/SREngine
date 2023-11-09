@@ -120,7 +120,7 @@ namespace SR_SRSL_NS {
         UnknownLexem, UnexceptedLexem, UnexceptedDot, InvalidExpression, InvalidComplexExpression, InvalidDecorator,
         IncompleteExpression, EmptyExpression, InvalidScope, InvalidCall, InvalidIfStatement, UnknownShaderLanguage,
         InvalidAngleBracket, InvalidAssign, InvalidMathToken, InvalidNumericToken, EmptyToken, InvalidIncrementOrDecrement, InvalidListEnd,
-        WrongMacroName, IncludeNotExists, UnexceptedError, IncludeError
+        WrongMacroName, IncludeNotExists, UnexceptedError, IncludeError, InvalidFunction
     );
 
     struct LocationEntity {

@@ -19,33 +19,55 @@ namespace SR_UTILS_NS {
     );
 
     class Property : public SR_UTILS_NS::NonCopyable {
-        using VisibleConditionFn = SR_HTYPES_NS::Function<bool()>;
+        using ActiveConditionFn = SR_HTYPES_NS::Function<bool()>;
     public:
         Property& SetPublicity(PropertyPublicity publicity) { m_publicity = publicity; return *this; }
-        Property& SetVisibleCondition(VisibleConditionFn value) { m_visibleCondition = std::move(value); return *this; }
+        Property& SetActiveCondition(ActiveConditionFn value) { m_activeCondition = std::move(value); return *this; }
         Property& SetName(SR_UTILS_NS::StringAtom value) { m_name = value; return *this; }
-        Property& SetFileBrowserIcon(SR_UTILS_NS::StringAtom value) { m_fileBrowserIcon = value; return *this; }
         Property& SetWidth(float_t value) { m_width = value; return *this; }
         Property& SetDrag(float_t value) { m_drag = value; return *this; }
         Property& SetReadOnly() { m_publicity = PropertyPublicity::ReadOnly; return *this; }
 
         SR_NODISCARD PropertyPublicity GetPublicity() const noexcept { return m_publicity; }
         SR_NODISCARD SR_UTILS_NS::StringAtom GetName() const noexcept { return m_name; }
-        SR_NODISCARD SR_UTILS_NS::StringAtom GetFileBrowserIcon() const noexcept { return m_fileBrowserIcon; }
         SR_NODISCARD float_t GetWidth() const noexcept { return m_width; }
         SR_NODISCARD float_t GetDrag() const noexcept { return m_drag; }
 
-        SR_NODISCARD bool IsVisible() const noexcept;
+        SR_NODISCARD bool IsActive() const noexcept;
 
     private:
-        VisibleConditionFn m_visibleCondition;
+        ActiveConditionFn m_activeCondition;
         PropertyPublicity m_publicity = PropertyPublicity::Public;
         SR_UTILS_NS::StringAtom m_description;
         SR_UTILS_NS::StringAtom m_name;
-        SR_UTILS_NS::StringAtom m_fileBrowserIcon;
 
         float_t m_width = 70.f;
         float_t m_drag = 1.f;
+
+    };
+
+    class ExternalProperty : public Property {
+        using PropertyGetterFn = SR_HTYPES_NS::Function<Property*()>;
+    public:
+        SR_NODISCARD const PropertyGetterFn& GetPropertyGetter() const noexcept { return m_getter; }
+        ExternalProperty& SetPropertyGetter(const PropertyGetterFn& value) noexcept { m_getter = value; return *this; }
+
+    private:
+        PropertyGetterFn m_getter;
+
+    };
+
+    class LabelProperty : public Property {
+    public:
+        LabelProperty& SetLabel(const SR_UTILS_NS::StringAtom& value) { m_label = value; return *this; }
+        LabelProperty& SetColor(const SR_MATH_NS::FColor& value) { m_color = value; return *this; }
+
+        SR_NODISCARD SR_UTILS_NS::StringAtom GetLabel() const noexcept { return m_label; }
+        SR_NODISCARD SR_MATH_NS::FColor GetColor() const noexcept { return m_color; }
+
+    private:
+        SR_UTILS_NS::StringAtom m_label;
+        SR_MATH_NS::FColor m_color;
 
     };
 }

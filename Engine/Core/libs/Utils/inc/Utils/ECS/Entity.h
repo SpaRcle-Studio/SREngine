@@ -9,6 +9,7 @@
 #include <Utils/ECS/EntityRef.h>
 #include <Utils/Common/Numeric.h>
 #include <Utils/Types/SharedPtr.h>
+#include <Utils/TypeTraits/Properties.h>
 
 #define SR_ENTITY_SET_VERSION(version)                                                       \
     public:                                                                                  \
@@ -93,6 +94,8 @@ namespace SR_UTILS_NS {
         Entity();
 
     public:
+        SR_NODISCARD const SR_UTILS_NS::PropertyContainer& GetEntityMessages() const { return m_entityMessages; }
+
         SR_NODISCARD EntityId GetEntityId() const { return m_entityId; }
         SR_NODISCARD EntityPath GetEntityPath() const { return m_entityPath; }
 
@@ -120,6 +123,9 @@ namespace SR_UTILS_NS {
 
             return data.pMarshal;
         }
+
+    protected:
+        SR_UTILS_NS::PropertyContainer m_entityMessages;
 
     private:
         EntityId m_entityId;

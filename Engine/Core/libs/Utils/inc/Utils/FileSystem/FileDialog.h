@@ -1,13 +1,14 @@
-#ifndef UTILS_DILEDIALOG_H
-#define UTILS_DILEDIALOG_H
+#ifndef SR_ENGINE_UTILS_FILE_DIALOG_H
+#define SR_ENGINE_UTILS_FILE_DIALOG_H
 
 #include <Utils/FileSystem/Path.h>
+#include <Utils/Types/StringAtom.h>
 #include <Utils/Common/Singleton.h>
 
 namespace SR_UTILS_NS {
     class SR_DLL_EXPORT FileDialog : public Singleton<FileDialog> {
         friend class Singleton<FileDialog>;
-        using Filter = std::vector<std::pair<std::string, std::string>>;
+        using Filter = std::vector<std::pair<StringAtom, StringAtom>>;
     protected:
         ~FileDialog() override = default;
 
@@ -23,4 +24,4 @@ namespace SR_UTILS_NS {
     };
 }
 
-#endif // UTILS_DILEDIALOG
+#endif // SR_ENGINE_UTILS_FILE_DIALOG_H

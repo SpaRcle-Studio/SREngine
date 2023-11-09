@@ -67,6 +67,31 @@ namespace SR_UTILS_NS {
         GetterFn m_getter;
 
     };
+
+    class PathProperty : public Property {
+        using Filter = std::vector<std::pair<SR_UTILS_NS::StringAtom, SR_UTILS_NS::StringAtom>>;
+        using SetterFn = SR_HTYPES_NS::Function<void(const SR_UTILS_NS::Path&)>;
+        using GetterFn = SR_HTYPES_NS::Function<SR_UTILS_NS::Path()>;
+    public:
+        PathProperty& AddFileFilter(SR_UTILS_NS::StringAtom description, SR_UTILS_NS::StringAtom extension) {
+            m_filter.emplace_back(std::make_pair(description, extension));
+            return *this;
+        }
+
+        void SetPath(const SR_UTILS_NS::Path& path) noexcept;
+        SR_UTILS_NS::Path GetPath() const noexcept;
+
+        PathProperty& SetSetter(const SetterFn& value) { m_setter = value; return *this; }
+        PathProperty& SetGetter(const GetterFn & value) { m_getter = value; return *this; }
+
+        SR_NODISCARD const Filter& GetFileFilter() const noexcept { return m_filter; }
+
+    private:
+        Filter m_filter;
+        SetterFn m_setter;
+        GetterFn m_getter;
+
+    };
 }
 
 #endif //SR_ENGINE_TYPE_TRAITS_STANDARD_PROPERTY_H

@@ -10,10 +10,7 @@ namespace SR_UTILS_NS {
     }
 
     PropertyContainer::~PropertyContainer() {
-        for (auto&& pProperty : m_properties) {
-            delete pProperty;
-        }
-        m_properties.clear();
+        ClearContainer();
     }
 
     PropertyContainer& PropertyContainer::AddContainer(const char* name) {
@@ -29,5 +26,12 @@ namespace SR_UTILS_NS {
         m_properties.emplace_back(pProperty);
 
         return *pProperty;
+    }
+
+    void PropertyContainer::ClearContainer() {
+        for (auto&& pProperty : m_properties) {
+            delete pProperty;
+        }
+        m_properties.clear();
     }
 }

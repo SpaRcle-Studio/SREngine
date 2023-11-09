@@ -12,7 +12,7 @@ namespace SR_GTYPES_NS {
 
     Sprite::Sprite()
         : Super(MeshType::Sprite)
-    {  }
+    { }
 
     std::string Sprite::GetMeshIdentifier() const {
         static const std::string id = "SpriteFromMemory";
@@ -152,33 +152,32 @@ namespace SR_GTYPES_NS {
         m_properties.AddStandardProperty("Sliced", &m_sliced);
 
         m_properties.AddStandardProperty("Texture border", &m_textureBorder)
-            .SetVisibleCondition([this]() { return m_sliced; })
+            .SetActiveCondition([this]() { return m_sliced; })
             .SetDrag(0.01f)
             .SetWidth(90.f);
 
         m_properties.AddStandardProperty("Window border", &m_windowBorder)
-            .SetVisibleCondition([this]() { return m_sliced; })
+            .SetActiveCondition([this]() { return m_sliced; })
             .SetDrag(0.01f)
             .SetWidth(90.f);
 
         m_properties.AddEnumProperty("Mesh type", &m_meshType).SetReadOnly();
 
-        m_properties.AddCustomProperty<SR_UTILS_NS::StandardProperty>("Material")
-            .SetType(SR_UTILS_NS::StandardType::Path)
-            .SetGetter([this](void* pData) {
-                if (m_material) {
-                    *reinterpret_cast<SR_UTILS_NS::Path*>(pData) = m_material->GetResourcePath();
-                }
-                else {
-                    *reinterpret_cast<SR_UTILS_NS::Path*>(pData) = SR_UTILS_NS::Path();
-                }
+        auto&& materialContainer = m_properties.AddContainer("Material");
+
+        materialContainer.AddCustomProperty<SR_UTILS_NS::PathProperty>("Path")
+            .AddFileFilter("Material", "mat")
+            .SetGetter([this]()-> SR_UTILS_NS::Path {
+                 return m_material ? m_material->GetResourcePath() : SR_UTILS_NS::Path();
             })
-            .SetSetter([this](void* pData) {
-                SetMaterial(*reinterpret_cast<SR_UTILS_NS::Path*>(pData));
+            .SetSetter([this](const SR_UTILS_NS::Path& path) {
+                SetMaterial(path);
             });
 
-        //m_properties.AddContainer("Material")
-        //    .AddStandardProperty()
+        materialContainer.AddCustomProperty<SR_UTILS_NS::ExternalProperty>("Material")
+            .SetPropertyGetter([this]() -> SR_UTILS_NS::Property* { return m_material ? &m_material->GetProperties() : nullptr; })
+            .SetActiveCondition([this]() -> bool { return m_material; })
+            .SetReadOnly();
 
         Component::InitProperties();
     }

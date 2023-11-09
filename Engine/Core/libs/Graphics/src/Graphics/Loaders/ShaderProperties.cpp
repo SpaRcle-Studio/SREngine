@@ -3,61 +3,67 @@
 //
 
 #include <Graphics/Loaders/ShaderProperties.h>
+#include <Graphics/Types/Material.h>
 
 namespace SR_GRAPH_NS {
-    MaterialProperties LoadMaterialProperties(const SR_XML_NS::Node &propertiesNode) {
-        MaterialProperties properties;
-
+    void LoadMaterialProperties(const SR_GTYPES_NS::Material* pMaterial, const SR_XML_NS::Node& propertiesNode, MaterialProperties* pProperties) {
         for (auto&& propertyXml : propertiesNode.TryGetNodes()) {
-            MaterialProperty materialProperty;
+            auto&& type = SR_UTILS_NS::EnumReflector::FromString<ShaderVarType>(propertyXml.GetAttribute("Type").ToString());
+            auto&& id = propertyXml.GetAttribute("Id").ToString();
 
-            materialProperty.id = propertyXml.GetAttribute("Id").ToString();
-            materialProperty.type = SR_UTILS_NS::EnumReflector::FromString<ShaderVarType>(propertyXml.GetAttribute("Type").ToString());
+            auto&& pMaterialProperty = pProperties->Find<MaterialProperty>(id);
+            if (!pMaterialProperty) {
+                continue;
+            }
 
-            switch (materialProperty.type) {
+            if (pMaterialProperty->GetShaderVarType() != type) {
+                SR_ERROR("LoadMaterialProperties() : invalid property!\n\tFile: " + pMaterial->GetResourcePath().ToStringRef() +
+                     "\n\tProperty: " + id + "\n\tLoaded type: " + SR_UTILS_NS::EnumReflector::ToString(type).ToStringRef() +
+                     "\n\tExpected type: " + SR_UTILS_NS::EnumReflector::ToString(pMaterialProperty->GetShaderVarType()).ToStringRef()
+                );
+                continue;
+            }
+
+            switch (type) {
                 case ShaderVarType::Int:
-                    materialProperty.data = propertyXml.GetAttribute<int32_t>();
+                    pMaterialProperty->SetData(propertyXml.GetAttribute<int32_t>());
                     break;
                 case ShaderVarType::Float:
-                    materialProperty.data = propertyXml.GetAttribute<float_t>();
+                    pMaterialProperty->SetData(propertyXml.GetAttribute<float_t>());
                     break;
                 case ShaderVarType::Vec2:
-                    materialProperty.data = propertyXml.GetAttribute<SR_MATH_NS::FVector2>();
+                    pMaterialProperty->SetData(propertyXml.GetAttribute<SR_MATH_NS::FVector2>());
                     break;
                 case ShaderVarType::Vec3:
-                    materialProperty.data = propertyXml.GetAttribute<SR_MATH_NS::FVector3>();
+                    pMaterialProperty->SetData(propertyXml.GetAttribute<SR_MATH_NS::FVector3>());
                     break;
                 case ShaderVarType::Vec4:
-                    materialProperty.data = propertyXml.GetAttribute<SR_MATH_NS::FVector4>();
+                    pMaterialProperty->SetData(propertyXml.GetAttribute<SR_MATH_NS::FVector4>());
                     break;
                 case ShaderVarType::Sampler2D: {
                     auto&& pTexture = SR_GTYPES_NS::Texture::Load(propertyXml.GetAttribute<std::string>());
-                    materialProperty.data = pTexture;
+                    pMaterialProperty->SetData(pTexture);
                     break;
                 }
                 default:
                     SRHalt("Unknown property!");
                     break;
             }
-
-            properties.emplace_back(materialProperty);
         }
-
-        return properties;
     }
 
-    std::list<SR_GTYPES_NS::Texture*> GetTexturesFromMatProperties(const MaterialProperties &properties) {
+    std::list<SR_GTYPES_NS::Texture*> GetTexturesFromMatProperties(const MaterialProperties& properties) {
         std::list<SR_GTYPES_NS::Texture*> textures;
 
-        for (auto&& property : properties) {
-            std::visit([&textures](ShaderPropertyVariant &&arg) {
+        properties.ForEachProperty<MaterialProperty>([&textures](auto&& pProperty){
+            std::visit([&textures](ShaderPropertyVariant&& arg) {
                 if (std::holds_alternative<SR_GTYPES_NS::Texture*>(arg)) {
-                    if (auto &&value = std::get<SR_GTYPES_NS::Texture*>(arg)) {
+                    if (auto&& value = std::get<SR_GTYPES_NS::Texture*>(arg)) {
                         textures.emplace_back(value);
                     }
                 }
-            }, property.data);
-        }
+            }, pProperty->GetData());
+        });
 
         return textures;
     }

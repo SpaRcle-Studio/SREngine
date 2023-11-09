@@ -41,7 +41,7 @@ namespace SR_GTYPES_NS {
     class Text3D;
 }
 
-namespace SR_CORE_NS::GUI {
+namespace SR_CORE_GUI_NS {
     class EditorGUI;
 }
 

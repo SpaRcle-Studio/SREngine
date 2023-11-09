@@ -100,6 +100,9 @@ namespace SR_GRAPH_NS::Types {
     }
 
     void Mesh::SetMaterial(const SR_UTILS_NS::Path& path) {
+        if (m_material && m_material->GetResourcePath() == path) {
+            return;
+        }
         SetMaterial(Material::Load(path));
     }
 

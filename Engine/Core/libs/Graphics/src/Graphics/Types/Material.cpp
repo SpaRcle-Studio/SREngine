@@ -27,22 +27,24 @@ namespace SR_GTYPES_NS {
 
         auto&& pShader = m_context->GetCurrentShader() ? m_context->GetCurrentShader() : m_shader;
 
-        for (auto&& property : m_properties) {
-            switch (property.type) {
+        m_properties.ForEachProperty<MaterialProperty>([pShader](auto&& pProperty){
+            auto&& hashId = pProperty->GetName().GetHash();
+
+            switch (pProperty->GetShaderVarType()) {
                 case ShaderVarType::Int:
-                    pShader->SetInt(property.id.GetHash(), std::get<int32_t>(property.data));
+                    pShader->SetInt(hashId, std::get<int32_t>(pProperty->GetData()));
                     break;
                 case ShaderVarType::Float:
-                    pShader->SetFloat(property.id.GetHash(), std::get<float_t>(property.data));
+                    pShader->SetFloat(hashId, std::get<float_t>(pProperty->GetData()));
                     break;
                 case ShaderVarType::Vec2:
-                    pShader->SetVec2(property.id.GetHash(), std::get<SR_MATH_NS::FVector2>(property.data).Cast<float_t>());
+                    pShader->SetVec2(hashId, std::get<SR_MATH_NS::FVector2>(pProperty->GetData()).Cast<float_t>());
                     break;
                 case ShaderVarType::Vec3:
-                    pShader->SetVec3(property.id.GetHash(), std::get<SR_MATH_NS::FVector3>(property.data).Cast<float_t>());
+                    pShader->SetVec3(hashId, std::get<SR_MATH_NS::FVector3>(pProperty->GetData()).Cast<float_t>());
                     break;
                 case ShaderVarType::Vec4:
-                    pShader->SetVec4(property.id.GetHash(), std::get<SR_MATH_NS::FVector4>(property.data).Cast<float_t>());
+                    pShader->SetVec4(hashId, std::get<SR_MATH_NS::FVector4>(pProperty->GetData()).Cast<float_t>());
                     break;
                 case ShaderVarType::Sampler2D:
                     /// samplers used at UseSamplers
@@ -51,7 +53,7 @@ namespace SR_GTYPES_NS {
                     SRAssertOnce(false);
                     break;
             }
-        }
+        });
     }
 
     SR_UTILS_NS::IResource* Material::CopyResource(SR_UTILS_NS::IResource* destination) const {
@@ -67,7 +69,7 @@ namespace SR_GTYPES_NS {
         resourceManager.Execute([&](){
             auto&& path = rawPath.SelfRemoveSubPath(resourceManager.GetResPathRef());
             if (!resourceManager.GetResPathRef().Concat(path).Exists()) {
-                SR_WARN("Material::Load() : path to the shader doesn't exist! Loading is aborted.");
+                SR_WARN("Material::Load() : path to the material doesn't exist! Loading is aborted.\n\tPath: " + path.ToStringRef());
                 return;
             }
 
@@ -119,7 +121,7 @@ namespace SR_GTYPES_NS {
             return;
         }
 
-        if (auto&& oldTexture = std::get<Texture*>(property->data)) {
+        if (auto&& oldTexture = std::get<Texture*>(property->GetData())) {
             if (oldTexture == pTexture) {
                 return;
             }
@@ -132,7 +134,7 @@ namespace SR_GTYPES_NS {
             AddDependency(pTexture);
         }
 
-        property->data = pTexture;
+        property->SetData(pTexture);
 
         /// обновляем всю иерархию вверх (меши)
         UpdateResources(1);
@@ -155,50 +157,36 @@ namespace SR_GTYPES_NS {
             return;
         }
 
-        for (auto&& property : m_properties) {
-            switch (property.type) {
+        m_properties.ForEachProperty<MaterialProperty>([this](auto&& pProperty){
+            switch (pProperty->GetShaderVarType()) {
                 case ShaderVarType::Sampler2D:
-                    m_shader->SetSampler2D(property.id.GetHash(), std::get<Texture*>(property.data));
+                    m_shader->SetSampler2D(pProperty->GetName().GetHash(), std::get<Texture*>(pProperty->GetData()));
                     break;
                 default:
                     break;
             }
-        }
+        });
     }
 
     bool Material::LoadProperties(const SR_XML_NS::Node &propertiesNode) {
-        SRAssert(m_properties.empty());
-
         if (!m_shader) {
             SR_ERROR("Material::LoadProperties() : shader is nullptr!");
             return false;
         }
 
+        m_properties.ClearContainer();
+
         /// Загружаем базовые значения
-        for (auto&&[name, property] : m_shader->GetProperties()) {
-            MaterialProperty aProperty;
-
-            aProperty.id = name;
-            aProperty.displayName = name; // TODO: make a pretty name
-            aProperty.data = GetVariantFromShaderVarType(property);
-            aProperty.type = property;
-
-            m_properties.emplace_back(aProperty);
+        for (auto&& [id, propertyType] : m_shader->GetProperties()) {
+            m_properties.AddCustomProperty<MaterialProperty>(id.c_str())
+                .SetData(GetVariantFromShaderVarType(propertyType))
+                .SetShaderVarType(propertyType)
+                .SetMaterial(this)
+                .SetDisplayName(id); // TODO: make a pretty name
         }
 
         /// Применяем сохраненные в материале значения
-        for (auto&& loadedProperty : LoadMaterialProperties(propertiesNode)) {
-            if (auto&& pProperty = GetProperty(loadedProperty.id.GetHash())) {
-                if (pProperty->type != loadedProperty.type) {
-                    SR_ERROR("Material::LoadProperties() : invalid property!\n\tFile: " + GetResourcePath().ToStringRef() +
-                        "\n\tProperty: " + loadedProperty.id.ToStringRef() + "\n\tLoaded type: " + SR_UTILS_NS::EnumReflector::ToString(loadedProperty.type).ToStringRef() +
-                        "\n\tExpected type: " + SR_UTILS_NS::EnumReflector::ToString(pProperty->type).ToStringRef()
-                    );
-                    continue;
-                }
-                pProperty->data = loadedProperty.data;
-            }
-        }
+        LoadMaterialProperties(this, propertiesNode, &m_properties);
 
         /// Добавляем все текстуры в зависимости
         for (auto&& pTexture : GetTexturesFromMatProperties(m_properties)) {
@@ -228,13 +216,7 @@ namespace SR_GTYPES_NS {
     }
 
     MaterialProperty* Material::GetProperty(uint64_t hashId) {
-        for (auto&& property : m_properties) {
-            if (property.id.GetHash() == hashId) {
-                return &property;
-            }
-        }
-
-        return nullptr;
+        return m_properties.Find<MaterialProperty>(hashId);
     }
 
     MaterialProperty* Material::GetProperty(const SR_UTILS_NS::StringAtom& id) {
@@ -276,7 +258,7 @@ namespace SR_GTYPES_NS {
             RemoveDependency(pTexture);
         }
 
-        m_properties.clear();
+        m_properties.ClearContainer();
 
         return IResource::Unload();
     }
@@ -342,17 +324,16 @@ namespace SR_GTYPES_NS {
             return false;
         }
 
-        for (auto&& property : m_properties) {
+        return !m_properties.ForEachPropertyRet<MaterialProperty>([pTexture](auto&& pProperty) -> bool{
             if (std::visit([pTexture](ShaderPropertyVariant&& arg) -> bool {
                 if (std::holds_alternative<SR_GTYPES_NS::Texture*>(arg)) {
                     return std::get<SR_GTYPES_NS::Texture*>(arg) == pTexture;
                 }
                 return false;
-            }, property.data)) {
-                return true;
+            }, pProperty->GetData())) {
+                return false;
             }
-        }
-
-        return false;
+            return true;
+        });
     }
 }

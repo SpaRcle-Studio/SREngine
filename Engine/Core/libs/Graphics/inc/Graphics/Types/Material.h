@@ -75,10 +75,10 @@ namespace SR_GTYPES_NS {
         bool LoadProperties(const SR_XML_NS::Node& propertiesNode);
 
     private:
-        Types::Shader*     m_shader      = nullptr;
-        std::atomic<bool>  m_dirtyShader = false;
-        MaterialProperties m_properties  = { };
-        RenderContextPtr   m_context     = { };
+        SR_GTYPES_NS::Shader* m_shader = nullptr;
+        std::atomic<bool> m_dirtyShader = false;
+        MaterialProperties m_properties;
+        RenderContextPtr m_context;
 
     };
 }

@@ -13,6 +13,19 @@
 #include <Utils/TypeTraits/Properties.h>
 
 namespace SR_GRAPH_GUI_NS {
+    class ImGuiDisabledLockGuard : public SR_UTILS_NS::NonCopyable {
+    public:
+        explicit ImGuiDisabledLockGuard(bool disabled)
+            : SR_UTILS_NS::NonCopyable()
+        {
+            ImGui::BeginDisabled(disabled);
+        }
+
+        ~ImGuiDisabledLockGuard() override {
+            ImGui::EndDisabled();
+        }
+    };
+
     SR_MAYBE_UNUSED static ImVec4 MakeDisableColor(ImVec4 color) {
         color.w /= 2;
         return color;
@@ -270,17 +283,11 @@ namespace SR_GRAPH_GUI_NS {
 
     SR_MAYBE_UNUSED bool DrawDataType(SR_SRLM_NS::DataType* pData, bool* pIsEnum, void* pProvider, float_t width = 0, uint32_t deep = 0);
 
-    SR_MAYBE_UNUSED bool DrawProperty(SR_UTILS_NS::Property* pProperty);
-    SR_MAYBE_UNUSED bool DrawStandardProperty(SR_UTILS_NS::StandardProperty* pProperty);
-    SR_MAYBE_UNUSED bool DrawPropertyContainer(SR_UTILS_NS::PropertyContainer* pProperties);
-
     SR_MAYBE_UNUSED static bool DrawColorControl(
             const std::string& label,
             SR_MATH_NS::FVector4& values,
             float_t resetValue = 0.0f,
-            bool active = true,
-            float_t columnWidth = 40.0f,
-            uint32_t index = 0)
+            float_t columnWidth = 40.0f)
     {
         bool result = false;
 
@@ -691,6 +698,10 @@ namespace SR_GRAPH_GUI_NS {
     SR_MAYBE_UNUSED static bool CheckBox(const std::string& name, bool& value) {
         const bool result = ImGui::Checkbox(name.c_str(), &value);
         return result;
+    }
+
+    SR_MAYBE_UNUSED static void Text(const char* text) {
+        ImGui::Text(text);
     }
 
     SR_MAYBE_UNUSED static bool Button(const std::string& label, ImVec4 color = ImVec4(0, 0, 0, 0), ImVec4 hovered = ImVec4(0, 0, 0, 0), uint32_t index = 0) {

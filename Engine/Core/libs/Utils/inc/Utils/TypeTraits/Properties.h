@@ -16,23 +16,62 @@ namespace SR_UTILS_NS {
         ~PropertyContainer() override;
 
     public:
-        SR_NODISCARD PropertyList& GetProperties() { return m_properties; }
+        void ClearContainer();
+
+        SR_NODISCARD PropertyList& GetProperties() noexcept { return m_properties; }
+        SR_NODISCARD const PropertyList& GetProperties() const noexcept { return m_properties; }
 
         template<typename T = Property> SR_NODISCARD T* Find(const SR_UTILS_NS::StringAtom& name) const noexcept;
+        template<typename T = Property> SR_NODISCARD T* Find(uint64_t hashName) const noexcept;
 
         PropertyContainer& AddContainer(const char* name);
         template<typename T> T& AddCustomProperty(const char* name);
         template<typename T> StandardProperty& AddStandardProperty(const char* name, T* pRawProperty);
         template<typename T> StandardProperty& AddEnumProperty(const char* name, T* pRawProperty);
 
+        template<typename T> PropertyContainer& ForEachProperty(const SR_HTYPES_NS::Function<void(T*)>& function);
+        template<typename T> const PropertyContainer& ForEachProperty(const SR_HTYPES_NS::Function<void(T*)>& function) const;
+
+        template<typename T> bool ForEachPropertyRet(const SR_HTYPES_NS::Function<bool(T*)>& function) const;
+
     private:
         PropertyList m_properties;
 
     };
 
-    template<typename T> T* PropertyContainer::Find(const StringAtom& name) const noexcept {
+    template<typename T> bool PropertyContainer::ForEachPropertyRet(const SR_HTYPES_NS::Function<bool(T*)>& function) const {
         for (auto&& pProperty : m_properties) {
-            if (pProperty->GetName() != name) {
+            if (auto&& pCastedProperty = dynamic_cast<T*>(pProperty)) {
+                if (!function(pCastedProperty)) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    template<typename T> PropertyContainer& PropertyContainer::ForEachProperty(const SR_HTYPES_NS::Function<void(T*)>& function) {
+        for (auto&& pProperty : m_properties) {
+            if (auto&& pCastedProperty = dynamic_cast<T*>(pProperty)) {
+                function(pCastedProperty);
+            }
+        }
+        return *this;
+    }
+
+    template<typename T> const PropertyContainer& PropertyContainer::ForEachProperty(const SR_HTYPES_NS::Function<void(T*)>& function) const {
+        for (auto&& pProperty : m_properties) {
+            if (auto&& pCastedProperty = dynamic_cast<T*>(pProperty)) {
+                function(pCastedProperty);
+            }
+        }
+        return *this;
+    }
+
+    template<typename T> T* PropertyContainer::Find(uint64_t hashName) const noexcept {
+        for (auto&& pProperty : m_properties) {
+            if (pProperty->GetName().GetHash() != hashName) {
                 continue;
             }
 
@@ -45,6 +84,10 @@ namespace SR_UTILS_NS {
             }
         }
         return nullptr;
+    }
+
+    template<typename T> T* PropertyContainer::Find(const StringAtom& name) const noexcept {
+        return Find<T>(name.GetHash());
     }
 
     template<typename T> T& PropertyContainer::AddCustomProperty(const char* name)  {

@@ -24,6 +24,7 @@
 #include "src/Core/GUI/MaterialEditor.cpp"
 #include "src/Core/GUI/About.cpp"
 #include "src/Core/GUI/RenderTechniqueEditor.cpp"
+#include "src/Core/GUI/PropertyDrawer.cpp"
 
 #include "src/Core/Parsers/BlueprintParser.cpp"
 
