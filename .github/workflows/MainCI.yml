@@ -123,7 +123,7 @@ jobs:
           echo "gbuildDebug=${{env.buildDebug}}" >> $GITHUB_OUTPUT
           echo "gbuildRelease=${{env.buildRelease}}" >> $GITHUB_OUTPUT
           echo "gbuildWindows=${{env.buildWindows}}" >> $GITHUB_OUTPUT
-          echo "gbuildLinux=true" >> $GITHUB_OUTPUT
+          echo "gbuildLinux=true" >> "$GITHUB_OUTPUT"
       #echo "gbuildLinux=${{env.buildLinux}} >> $GITHUB_OUTPUT
 
       #echo "::set-output name=gartifactPush::$deployment_key_for_api"
