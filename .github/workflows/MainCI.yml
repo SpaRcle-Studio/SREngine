@@ -25,11 +25,11 @@ jobs:
     runs-on: windows-latest
     if: "!contains(github.event.head_commit.message, '#SR_CI_NONE')"
     outputs:
-      buildRelease: ${{ steps.buildRelease.outputs.buildRelease }}
-      buildDebug: ${{ steps.buildDebug.outputs.buildDebug }}
-      artifactPush: ${{ steps.artifact.outputs.artifactPush }}
-      buildWindows: ${{ steps.buildWindows.outputs.buildWindows }}
-      buildLinux: ${{ steps.buildLinux.outputs.buildLinux }}
+      buildRelease: ${{ steps.sBuildRelease.outputs.buildRelease }}
+      buildDebug: ${{ steps.sBuildDebug.outputs.buildDebug }}
+      artifactPush: ${{ steps.sArtifact.outputs.artifactPush }}
+      buildWindows: ${{ steps.sBuildWindows.outputs.buildWindows }}
+      buildLinux: ${{ steps.sBuildLinux.outputs.buildLinux }}
     steps:
       - name: Fetching repository.
         uses: actions/checkout@v3
@@ -57,7 +57,7 @@ jobs:
 
       - if: "contains(github.event.head_commit.message, '#SR_CI_ARTIFACT')"
         name: Handling "#SR_CI_ARTIFACT" argument.
-        id: artifact
+        id: sArtifact
         shell: bash
         run: |
           echo "artifactPush=true" >> "$GITHUB_OUTPUT"
@@ -89,25 +89,25 @@ jobs:
 
       - if: env.buildLinux == 'true'
         name: Set global buildWindows.
-        id: buildWindows
+        id: sBuildWindows
         run: |
           echo "buildWindows=true" >> "$GITHUB_OUTPUT"
 
       - if: env.buildWindows == 'true'
         name: Set global buildLinux.
-        id: buildLinux
+        id: sBuildLinux
         run: |
           echo "buildWindows=true" >> "$GITHUB_OUTPUT"
 
       - if: env.buildDebug == 'true'
         name: Set global buildDebug.
-        id: buildDebug
+        id: sBuildDebug
         run: |
           echo "buildDebug=true" >> "$GITHUB_OUTPUT"
 
       - if: env.buildRelease == 'true'
         name: Set global buildRelease.
-        id: buildRelease
+        id: sBuildRelease
         run: |
           echo "buildDebug=true" >> "$GITHUB_OUTPUT"
   
@@ -115,7 +115,7 @@ jobs:
   BuildWindows:
     name: Windows.
     needs: manage
-    if: ${{ needs.manage.outputs.buildWindows == 'true' }}
+    if: needs.manage.outputs.buildWindows == 'true'
     uses: ./.github/workflows/WindowsCI.yml
     with:
       buildRelease: needs.manage.outputs.buildRelease
@@ -125,7 +125,7 @@ jobs:
   BuildLinux:
     name: Linux.
     needs: manage
-    if: ${{ needs.manage.outputs.buildLinux == 'true' }}
+    if: needs.manage.outputs.buildLinux == 'true'
     uses: ./.github/workflows/LinuxCI.yml
     with:
       buildRelease: needs.manage.outputs.buildRelease
