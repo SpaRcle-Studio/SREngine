@@ -60,7 +60,7 @@ jobs:
         id: sArtifact
         shell: bash
         run: |
-          echo "artifactPush=true" >> "$GITHUB_OUTPUT"
+          echo "artifactPush=true" >> $GITHUB_OUTPUT
 
       - if: "contains(github.event.head_commit.message, '#SR_CI_LINUX')"
         name: Handling "#SR_CI_LINUX" argument.
@@ -91,25 +91,25 @@ jobs:
         name: Set global buildWindows.
         id: sBuildWindows
         run: |
-          echo "buildWindows=true" >> "$GITHUB_OUTPUT"
+          echo "buildWindows=true" >> $GITHUB_OUTPUT
 
       - if: env.buildWindows == 'true'
         name: Set global buildLinux.
         id: sBuildLinux
         run: |
-          echo "buildWindows=true" >> "$GITHUB_OUTPUT"
+          echo "buildWindows=true" >> $GITHUB_OUTPUT
 
       - if: env.buildDebug == 'true'
         name: Set global buildDebug.
         id: sBuildDebug
         run: |
-          echo "buildDebug=true" >> "$GITHUB_OUTPUT"
+          echo "buildDebug=true" >> $GITHUB_OUTPUT
 
       - if: env.buildRelease == 'true'
         name: Set global buildRelease.
         id: sBuildRelease
         run: |
-          echo "buildDebug=true" >> "$GITHUB_OUTPUT"
+          echo "buildDebug=true" >> $GITHUB_OUTPUT
   
 
   BuildWindows:
