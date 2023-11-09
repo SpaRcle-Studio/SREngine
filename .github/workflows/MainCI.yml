@@ -120,17 +120,18 @@ jobs:
       - name: Set global variables.
         id: globals
         run: |
-          echo "gbuildDebug=env.buildDebug >> $GITHUB_OUTPUT
-          echo "gbuildRelease=env.buildRelease >> $GITHUB_OUTPUT
-          echo "gbuildWindows=env.buildWindows >> $GITHUB_OUTPUT
-          echo "gbuildLinux=env.buildLinux >> $GITHUB_OUTPUT
+          echo "gbuildDebug=${{env.buildDebug}}" >> $GITHUB_OUTPUT
+          echo "gbuildRelease=${{env.buildRelease}}" >> $GITHUB_OUTPUT
+          echo "gbuildWindows=${{env.buildWindows}}" >> $GITHUB_OUTPUT
+          echo "gbuildLinux=true" >> $GITHUB_OUTPUT
+      #echo "gbuildLinux=${{env.buildLinux}} >> $GITHUB_OUTPUT
 
       #echo "::set-output name=gartifactPush::$deployment_key_for_api"
   
 
   BuildWindows:
     name: Windows.
-    needs: manage
+    needs: [manage]
     if: needs.manage.outputs.buildWindows == 'true'
     uses: ./.github/workflows/WindowsCI.yml
     with:
@@ -140,7 +141,7 @@ jobs:
 
   BuildLinux:
     name: Linux.
-    needs: manage
+    needs: [manage]
     if: needs.manage.outputs.buildLinux == 'true'
     uses: ./.github/workflows/LinuxCI.yml
     with:
