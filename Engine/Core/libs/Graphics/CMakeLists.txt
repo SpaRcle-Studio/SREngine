@@ -52,8 +52,17 @@ else()
 endif()
 
 if (UNIX AND NOT APPLE)
-    target_include_directories(Graphics PUBLIC ${X11_INCLUDE_DIR})
+    #target_include_directories(Graphics PUBLIC ${X11_X11_INCLUDE_PATH})
+    #target_link_libraries(Graphics ${X11_X11_LIB})
+
     target_include_directories(Graphics PUBLIC "${X11_xcb_INCLUDE_PATH}")
+    target_link_libraries(Graphics ${X11_xcb_LIB})
+
+    #target_include_directories(Graphics PUBLIC "${X11_Xrandr_INCLUDE_PATH}")
+    #target_link_libraries(Graphics ${X11_Xrandr_LIB})
+
+    target_include_directories(Graphics PUBLIC ${X11_X11_xcb_INCLUDE_PATH})
+    target_link_libraries(Graphics ${X11_X11_xcb_LIB})
 endif()
 
 target_link_libraries(Graphics CMP_Core freetype)

@@ -6,9 +6,7 @@
 #include <Utils/Common/StringFormat.h>
 #include <Utils/Debug.h>
 
-#include <libgen.h>         // dirname
-#include <unistd.h>         // readlink
-#include <linux/limits.h>   // PATH_MAX
+//#include <unistd.h>         // readlink
 #include <X11/Xlib.h>
 #include <X11/extensions/Xrandr.h>
 
@@ -213,7 +211,6 @@ namespace SR_UTILS_NS::Platform {
         if (auto&& pDisplay = XOpenDisplay(":0")) {
             for (int32_t i = 0; i < ScreenCount(pDisplay); ++i) {
                 auto&& screen = XRRGetScreenResources(pDisplay, DefaultRootWindow(pDisplay));
-                //0 to get the first monitor
                 auto&& crtc_info = XRRGetCrtcInfo (pDisplay, screen, screen->crtcs[0]);
                 resolutions.emplace_back(crtc_info->width, crtc_info->height);
             }
