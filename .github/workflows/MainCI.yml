@@ -94,10 +94,8 @@ jobs:
           echo "buildRelease=${{env.buildRelease}}" >> $GITHUB_OUTPUT
           echo "buildWindows=${{env.buildWindows}}" >> $GITHUB_OUTPUT
           echo "buildLinux=${{env.buildLinux}}" >> $GITHUB_OUTPUT
-          echo "artifactPush=${{env.artifactPush}}" >> $GITHUB_OUTPUT
+          echo "artifactPush=${{env.artifactPush}}" >> $GITHUB_OUTPUT  
 
-      #echo "::set-output name=gartifactPush::$deployment_key_for_api"
-  
 
   BuildWindows:
     name: Windows.
@@ -105,9 +103,9 @@ jobs:
     if: needs.manage.outputs.buildWindows == 'true'
     uses: ./.github/workflows/WindowsCI.yml
     with:
-      buildRelease: needs.manage.outputs.buildRelease
-      buildDebug: needs.manage.outputs.buildDebug
-      artifactPush: needs.manage.outputs.artifactPush
+      buildRelease: ${{needs.manage.outputs.buildRelease}}
+      buildDebug: ${{needs.manage.outputs.buildDebug}}
+      artifactPush: ${{needs.manage.outputs.artifactPush}}
 
   BuildLinux:
     name: Linux.
@@ -115,6 +113,6 @@ jobs:
     if: needs.manage.outputs.buildLinux == 'true'
     uses: ./.github/workflows/LinuxCI.yml
     with:
-      buildRelease: needs.manage.outputs.buildRelease
-      buildDebug: needs.manage.outputs.buildDebug
-      artifactPush: needs.manage.outputs.artifactPush
+      buildRelease: ${{needs.manage.outputs.buildRelease}}
+      buildDebug: ${{needs.manage.outputs.buildDebug}}
+      artifactPush: ${{needs.manage.outputs.artifactPush}}
