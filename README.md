@@ -8,7 +8,7 @@
     <img alt="Issues" src="https://img.shields.io/github/issues/SpaRcle-Studio/SREngine?color=0088ff" />
   </p>
   <p align="center">
-    <img alt="Build statistics." src="https://buildstats.info/github/chart/sparcle-studio/srengine" />
+    <img alt="Build statistics." src="https://buildstats.info/github/chart/SpaRcle-Studio/SREngine?buildCount=50&branch=dev" />
   </p>
 
 SpaRcle Engine is an ongoing game engine developed in C++. 
