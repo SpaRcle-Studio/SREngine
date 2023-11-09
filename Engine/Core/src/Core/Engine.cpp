@@ -156,6 +156,12 @@ namespace SR_CORE_NS {
             resolution = resolutions[SR_MAX(static_cast<uint32_t>(resolutions.size() / 2), 0)];
         }
 
+        if (resolution.x == 0 || resolution.y == 0) {
+            SR_ERROR("Engine::CreateMainWindow() : resolution can not be " +
+                    std::to_string(resolution.x) + "x" + std::to_string(resolution.y) + "!");
+            return false;
+        }
+
         m_window = new SR_GRAPH_NS::Window();
         if (!m_window->Initialize("SpaRcle Engine", resolution)) {
             SR_ERROR("Engine::CreateMainWindow() : failed to initialize window!");

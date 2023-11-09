@@ -1,0 +1,143 @@
+name: SpaRcle Engine Linux CI
+
+on:
+  workflow_call:
+    inputs:
+      buildDebug:
+        required: true
+        type: string
+      buildRelease:
+        required: true
+        type: string
+      artifactPush:
+        required: true
+        type: string
+
+jobs:  
+  Build:
+    name: Preparing and building.
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetching repository.
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+
+      - name: Installing dependencies.
+        run: |
+          wget -qO- https://packages.lunarg.com/lunarg-signing-key-pub.asc | sudo tee /etc/apt/trusted.gpg.d/lunarg.asc
+          sudo wget -qO /etc/apt/sources.list.d/lunarg-vulkan-jammy.list http://packages.lunarg.com/vulkan/lunarg-vulkan-jammy.list
+          sudo apt update
+          sudo apt-get install -y libgtk-3-0 cmake build-essential libgtk-3-dev libx11-dev
+          sudo apt-get install -y xcb libxcb-xkb-dev x11-xkb-utils libx11-xcb-dev libxkbcommon-x11-dev libxtst-dev
+          sudo apt install vulkan-sdk
+
+      - name: Updating submodules.
+        run: git submodule --quiet update --init --recursive --depth 1 --jobs 4
+
+      - name: Installing Ninja.
+        uses: ashutoshvarma/setup-ninja@v1.1
+        with:
+          version: '1.10.2'
+          dest: '${{github.workspace}}/../ninja'
+
+      - name: Creating Building Environment.
+        run: |
+         cmake -E make_directory ${{github.workspace}}/build-debug
+         cmake -E make_directory ${{github.workspace}}/build-release
+
+      - if: inputs.buildRelease == 'true'
+        name: Building Release.
+        shell: bash
+        working-directory: ${{github.workspace}}/build-release
+        run: |
+          echo "releaseSuccessful=false" >> "$GITHUB_ENV"
+          cmake -G "Ninja" ../ -DCMAKE_BUILD_TYPE=Release
+          cmake --build . -j 4
+          echo "releaseSuccessful=true" >> "$GITHUB_ENV"
+
+      - if: inputs.buildDebug == 'true'
+        name: Building Debug.
+        shell: bash
+        working-directory: ${{github.workspace}}/build-debug
+        run: |
+          echo "debugSuccessful=false" >> "$GITHUB_ENV"
+          cmake -G "Ninja" ../ -DCMAKE_BUILD_TYPE=Debug 
+          cmake --build . -j 4
+          echo "debugSuccessful=true" >> "$GITHUB_ENV"
+          
+      - if: inputs.buildDebug == 'true'
+        name: Creating a Debug build trace.
+        shell: bash 
+        working-directory: ${{github.workspace}}/CI
+        run: python ninjatracing.py ../build-debug/.ninja_log > trace-debug.json
+        
+      - if: inputs.buildRelease == 'true'
+        name: Creating a Release build trace.
+        shell: bash 
+        working-directory: ${{github.workspace}}/CI
+        run: python ninjatracing.py ../build-release/.ninja_log > trace-release.json
+        
+      - if: inputs.buildDebug == 'true'
+        name: Uploading a Debug build trace artifact.
+        uses: actions/upload-artifact@v3
+        with:
+          name: 'SREngine Debug Build Trace Artifact'
+          path: '${{github.workspace}}/CI/trace-debug.json'
+         
+      - if: inputs.buildRelease == 'true'
+        name: Uploading a Release build trace artifact.
+        uses: actions/upload-artifact@v3
+        with:
+          name: 'SREngine Release Build Trace Artifact'
+          path: '${{github.workspace}}/CI/trace-release.json'
+
+      - if: env.debugSuccessful == 'true'
+        name: Creating Debug artifact.
+        working-directory: ${{github.workspace}}/build-debug/Engine
+        shell: bash
+        run: | 
+          mkdir SREngineDebugBuild
+          mkdir SREngineDebugBuild/Bin
+          cp SREngine SREngineDebugBuild/Bin
+          cd ../../
+          cp -r Resources build-debug/Engine/SREngineDebugBuild
+
+      - if: env.releaseSuccessful == 'true'
+        name: Creating Release artifact.
+        working-directory: ${{github.workspace}}/build-release/Engine
+        shell: bash
+        run: | 
+          mkdir SREngineReleaseBuild
+          mkdir SREngineReleaseBuild/Bin
+          cp SREngine SREngineDebugBuild/Bin
+          cd ../../
+          cp -r Resources build-release/Engine/SREngineReleaseBuild
+        
+      - if: env.debugSuccessful == 'true'
+        name: Uploading a successful Debug build artifact.
+        uses: actions/upload-artifact@v3
+        with:
+          name: SREngine Debug
+          path: '${{github.workspace}}/build-debug/Engine/SREngineDebugBuild'
+
+      - if: env.releaseSuccessful == 'true'
+        name: Uploading a successful Release build artifact.
+        uses: actions/upload-artifact@v3
+        with:
+          name: SREngine Release
+          path: '${{github.workspace}}/build-release/Engine/SREngineReleaseBuild'
+
+      - if: env.debugSuccessful == 'false' || inputs.artifactPush == 'true'
+        name: Uploading a failed Debug build artifact.
+        uses: actions/upload-artifact@v3
+        with:
+          name: 'SREngine Failed Debug'
+          path: '${{github.workspace}}/build-debug'
+
+      - if: env.releaseSuccessful == 'false' || inputs.artifactPush == 'true'
+        name: Uploading a failed Release build artifact.
+        uses: actions/upload-artifact@v3
+        with:
+          name: 'SREngine Failed Release'
+          path: '${{github.workspace}}/build-release'

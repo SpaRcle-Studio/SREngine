@@ -4,12 +4,11 @@
 
 #include <Graphics/Window/X11Window.h>
 
-#include <X11/Xlib.h>
+//#include <X11/Xlib.h>
 #include <X11/Xutil.h>
-#include <X11/Xos.h>
-#include <X11/Xatom.h>
-#include <X11/Xlib-xcb.h>
-#include <xcb/xcb_ewmh.h>
+//#include <X11/Xlib-xcb.h>
+//#include <xcb/xcb_ewmh.h>
+#include <xcb/xcb.h>
 
 namespace SR_GRAPH_NS {
     bool X11Window::Initialize(const std::string &name,
@@ -48,6 +47,33 @@ namespace SR_GRAPH_NS {
         SetFullscreen(fullScreen);
 
         return true;
+
+        /*Display *display = XOpenDisplay(NULL);
+        if (display == NULL) {
+            fprintf(stderr, "ERROR: could not open the default display\n");
+            exit(1);
+        }
+
+        uint32_t window = XCreateSimpleWindow(
+                display,
+                XDefaultRootWindow(display),
+                0, 0,
+                800, 600,
+                0,
+                0,
+                0);
+
+        Atom wm_delete_window = XInternAtom(display, "WM_DELETE_WINDOW", False);
+        XSetWMProtocols(display, window, &wm_delete_window, 1);
+
+        XSelectInput(display, window, KeyPressMask);
+
+        XMapWindow(display, window);
+
+        m_window = window;
+        m_display = display;
+
+        return true;*/
     }
 
     void* X11Window::GetHandle() const {
@@ -79,10 +105,17 @@ namespace SR_GRAPH_NS {
     }
 
     void X11Window::SetFullscreen(bool fullscreen) const {
-        //TODO: (Linux) Finish implementing fullscreen mode for X11.
+        //TODO: (Linux) Finish implementing SetFullscreen() for X11.
     }
 
     void* X11Window::GetDisplay() const {
         return m_display;
+    }
+
+    SR_MATH_NS::IVector2 X11Window::GetScreenResolution() const {
+        //TODO: (Linux) Finish implementing GetScreenResolution() for X11.
+
+        return BasicWindowImpl::GetScreenResolution();
+        //return SR_MATH_NS::IVector2(width, height);
     }
 }

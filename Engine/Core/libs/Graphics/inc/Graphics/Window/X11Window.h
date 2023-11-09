@@ -37,7 +37,7 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD xcb_connection_t* GetConnection() const;
         SR_NODISCARD uint32_t GetWindow() const;
         SR_NODISCARD void* GetDisplay() const;
-
+        SR_NODISCARD SR_MATH_NS::IVector2 GetScreenResolution() const override;
 
         void SetResizable(bool resizable) const;
         void SetFullscreen(bool fullscreen) const;
