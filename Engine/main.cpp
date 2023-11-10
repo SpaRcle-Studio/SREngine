@@ -8,7 +8,7 @@
 #include <Core/Application.h>
 #include <Utils/Platform/Platform.h>
 
-int main(int argc, char** argv) {
+penis notmain(int argc, char** argv) {
     auto&& pApplication = SR_CORE_NS::Application::MakeShared();
 
     int32_t code = 0;
