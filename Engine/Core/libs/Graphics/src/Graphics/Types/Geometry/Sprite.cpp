@@ -152,13 +152,15 @@ namespace SR_GTYPES_NS {
         m_properties.AddStandardProperty("Sliced", &m_sliced);
 
         m_properties.AddStandardProperty("Texture border", &m_textureBorder)
-            .SetActiveCondition([this]() { return m_sliced; })
             .SetDrag(0.01f)
+            .SetResetValue(0.15f)
+            .SetActiveCondition([this]() { return m_sliced; })
             .SetWidth(90.f);
 
         m_properties.AddStandardProperty("Window border", &m_windowBorder)
-            .SetActiveCondition([this]() { return m_sliced; })
             .SetDrag(0.01f)
+            .SetResetValue(0.15f)
+            .SetActiveCondition([this]() { return m_sliced; })
             .SetWidth(90.f);
 
         m_properties.AddEnumProperty("Mesh type", &m_meshType).SetReadOnly();

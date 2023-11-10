@@ -114,6 +114,16 @@ namespace SR_CORE_GUI_NS {
             }
         }
 
+        if (!pProperty->GetWidgetEditor().Empty()) {
+            ImGui::SameLine();
+
+            if (ImGui::Button(SR_FORMAT_C("Edit##%i", (void*) pProperty))) {
+                if (auto&& pWidget = context.pEditor->GetWidget(pProperty->GetWidgetEditor())) {
+                    pWidget->OpenFile(pProperty->GetPath());
+                }
+            }
+        }
+
         ImGui::SameLine();
 
         std::string path = pProperty->GetPath().ToString();
@@ -121,6 +131,14 @@ namespace SR_CORE_GUI_NS {
             pProperty->SetPath(path);
         }
 
+        return true;
+    }
+
+    bool DrawEnumProperty(const DrawPropertyContext& context, SR_UTILS_NS::EnumProperty* pProperty) {
+        auto&& label = pProperty->GetName().ToStringRef();
+        SR_GRAPH_GUI_NS::EnumCombo(label, pProperty->GetEnumReflector(), pProperty->GetEnum(), [pProperty](auto&& value) {
+            pProperty->SetEnum(value);
+        }, pProperty->GetFilter());
         return true;
     }
 
@@ -135,16 +153,40 @@ namespace SR_CORE_GUI_NS {
                 }
                 break;
             }
-            case SR_UTILS_NS::StandardType::Enum: {
-                SR_GRAPH_GUI_NS::EnumCombo(label, pProperty->GetEnumReflector(), pProperty->GetEnum(), [pProperty](auto&& value) {
-                    pProperty->SetEnum(value);
-                });
-                break;
-            }
             case SR_UTILS_NS::StandardType::FVector2: {
                 auto&& value = pProperty->GetFVector2();
-                if (SR_GRAPH_GUI_NS::DrawVec2Control(label, value, 0.f, pProperty->GetWidth(), pProperty->GetDrag())) {
+                if (SR_GRAPH_GUI_NS::DrawVec2Control(label, value, pProperty->GetResetValue(), pProperty->GetWidth(), pProperty->GetDrag())) {
                     pProperty->SetFVector2(value);
+                }
+                break;
+            }
+            case SR_UTILS_NS::StandardType::FVector3: {
+                auto&& value = pProperty->GetFVector3();
+                if (SR_GRAPH_GUI_NS::DrawVec3Control(label, value, pProperty->GetResetValue(), pProperty->GetWidth(), pProperty->GetDrag())) {
+                    pProperty->SetFVector3(value);
+                }
+                break;
+            }
+            case SR_UTILS_NS::StandardType::BVector3: {
+                auto&& value = pProperty->GetBVector3();
+                if (SR_GRAPH_GUI_NS::DrawBVec3Control(label, value, false, pProperty->GetWidth())) {
+                    pProperty->SetBVector3(value);
+                }
+                break;
+            }
+            case SR_UTILS_NS::StandardType::Float: {
+                float_t value = pProperty->GetFloat();
+
+                const float_t lineHeight = GImGui->Font->FontSize + GImGui->Style.FramePadding.y * 2.0f;
+                const ImVec2 buttonSize = { lineHeight + 30.0f, lineHeight };
+
+                if (SR_GRAPH_GUI_NS::DrawValueControl<SR_MATH_NS::Unit>(
+                        label.c_str(), value, pProperty->GetResetValue(), buttonSize,
+                        ImVec4{ 0.2f, 0.7f, 0.2f, 1.0f },
+                        ImVec4{ 0.3f, 0.8f, 0.3f, 1.0f },
+                        ImVec4{ 0.2f, 0.7f, 0.2f, 1.0f }, nullptr, pProperty->GetDrag()
+                )){
+                    pProperty->SetFloat(value);
                 }
                 break;
             }
@@ -156,10 +198,8 @@ namespace SR_CORE_GUI_NS {
             case SR_UTILS_NS::StandardType::UInt32:
             case SR_UTILS_NS::StandardType::Int64:
             case SR_UTILS_NS::StandardType::UInt64:
-            case SR_UTILS_NS::StandardType::Float:
             case SR_UTILS_NS::StandardType::Double:
             case SR_UTILS_NS::StandardType::String:
-            case SR_UTILS_NS::StandardType::FVector3:
             case SR_UTILS_NS::StandardType::FVector4:
             case SR_UTILS_NS::StandardType::FVector5:
             case SR_UTILS_NS::StandardType::FVector6:
@@ -174,7 +214,6 @@ namespace SR_CORE_GUI_NS {
             case SR_UTILS_NS::StandardType::UVector5:
             case SR_UTILS_NS::StandardType::UVector6:
             case SR_UTILS_NS::StandardType::BVector2:
-            case SR_UTILS_NS::StandardType::BVector3:
             case SR_UTILS_NS::StandardType::BVector4:
             case SR_UTILS_NS::StandardType::BVector5:
             case SR_UTILS_NS::StandardType::BVector6:
@@ -198,6 +237,10 @@ namespace SR_CORE_GUI_NS {
             return false;
         }
 
+        if (pProperty->IsSameLine()) {
+            ImGui::SameLine();
+        }
+
         SR_GRAPH_GUI_NS::ImGuiDisabledLockGuard guard(pProperty->GetPublicity() == SR_UTILS_NS::PropertyPublicity::ReadOnly);
         if (auto&& pContainer = dynamic_cast<SR_UTILS_NS::PropertyContainer*>(pProperty)) {
             if (!pContainer->GetName().Empty()) {
@@ -209,6 +252,9 @@ namespace SR_CORE_GUI_NS {
         }
         else if (auto&& pStandardProperty = dynamic_cast<SR_UTILS_NS::StandardProperty*>(pProperty)) {
             return DrawStandardProperty(context, pStandardProperty);
+        }
+        else if (auto&& pEnumProperty = dynamic_cast<SR_UTILS_NS::EnumProperty*>(pProperty)) {
+            return DrawEnumProperty(context, pEnumProperty);
         }
         else if (auto&& pMaterialProperty = dynamic_cast<SR_GRAPH_NS::MaterialProperty*>(pProperty)) {
             return DrawMaterialProperty(context, pMaterialProperty);

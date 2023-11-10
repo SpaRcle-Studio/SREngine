@@ -45,12 +45,22 @@ namespace SR_GRAPH_GUI_NS {
         }
     }
 
-    SR_MAYBE_UNUSED void static EnumCombo(const std::string& label, SR_UTILS_NS::EnumReflector* pReflector, const std::optional<SR_UTILS_NS::StringAtom>& value, const SR_HTYPES_NS::Function<void(SR_UTILS_NS::StringAtom)>& callback) {
+    SR_MAYBE_UNUSED void static EnumCombo(
+            const std::string& label,
+            SR_UTILS_NS::EnumReflector* pReflector,
+            const std::optional<SR_UTILS_NS::StringAtom>& value,
+            const SR_HTYPES_NS::Function<void(SR_UTILS_NS::StringAtom)>& callback,
+            const SR_HTYPES_NS::Function<bool(const SR_UTILS_NS::StringAtom&)>& filter
+    ) {
         auto&& strValue = value ? value.value() : SR_UTILS_NS::StringAtom();
 
         if (ImGui::BeginCombo(SR_FORMAT_C("%s##%p", label.c_str(), &value), strValue.c_str())) {
             auto&& selectables = pReflector->GetNamesInternal();
             for (auto&& selectable : selectables) {
+                if (filter && !filter(selectable)) {
+                    continue;
+                }
+
                 if (ImGui::Selectable(selectable.ToCStr())) {
                     ImGui::SetItemDefaultFocus();
                     callback(selectable);
@@ -59,6 +69,15 @@ namespace SR_GRAPH_GUI_NS {
 
             ImGui::EndCombo();
         }
+    }
+
+    SR_MAYBE_UNUSED void static EnumCombo(
+        const std::string& label,
+        SR_UTILS_NS::EnumReflector* pReflector,
+        const std::optional<SR_UTILS_NS::StringAtom>& value,
+        const SR_HTYPES_NS::Function<void(SR_UTILS_NS::StringAtom)>& callback
+    ) {
+        EnumCombo(label, pReflector, value, callback, SR_HTYPES_NS::Function<bool(const SR_UTILS_NS::StringAtom&)>());
     }
 
     template<typename T> void static EnumCombo(const std::string& label, T value, const SR_HTYPES_NS::Function<void(T)>& callback) {
@@ -538,8 +557,7 @@ namespace SR_GRAPH_GUI_NS {
             const std::string& label,
             SR_MATH_NS::BVector3& values,
             bool resetValue,
-            float_t columnWidth = 70.0f,
-            uint32_t index = 0)
+            float_t columnWidth = 70.0f)
     {
         bool result = false;
 

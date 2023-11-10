@@ -114,6 +114,7 @@ namespace SR_PTYPES_NS {
         SR_NODISCARD PhysicsMaterial* GetPhysicsMaterial() const noexcept { return m_material; }
         SR_NODISCARD bool IsDebugEnabled() const noexcept;
         SR_NODISCARD RBUpdShapeRes UpdateShape();
+        SR_NODISCARD bool IsShapeSupported(ShapeType type) const;
 
         void SetMatrixDirty(bool value) { m_isMatrixDirty = value; }
         void SetShapeDirty(bool value) { m_isShapeDirty = value; }

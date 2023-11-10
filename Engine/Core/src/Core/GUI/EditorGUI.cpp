@@ -695,4 +695,13 @@ namespace SR_CORE_GUI_NS {
             ImGui::EndMenu();
         }
     }
+
+    SR_GRAPH_GUI_NS::Widget* EditorGUI::GetWidget(const SR_UTILS_NS::StringAtom& name) const {
+        for (auto&& [hashCode, pWidget] : m_widgets) {
+            if (pWidget->GetName() == name) {
+                return pWidget;
+            }
+        }
+        return nullptr;
+    }
 }

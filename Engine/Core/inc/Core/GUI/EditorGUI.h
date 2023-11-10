@@ -74,6 +74,8 @@ namespace SR_CORE_GUI_NS {
             return GetWidget<T>();
         }
 
+        SR_NODISCARD SR_GRAPH_GUI_NS::Widget* GetWidget(const SR_UTILS_NS::StringAtom& name) const;
+
         template<typename T> T* GetWidget() {
             if (auto&& pIt = m_widgets.find(typeid(T).hash_code()); pIt != m_widgets.end()) {
                 if (auto&& pWidget = dynamic_cast<T*>(pIt->second))

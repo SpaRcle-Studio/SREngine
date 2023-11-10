@@ -52,12 +52,12 @@ namespace SR_CORE_NS::GUI {
         DrawComponent(pCopy, context, index);
 
         auto&& linearLock = pComponent->GetLinearLock();
-        if (SR_GRAPH_NS::GUI::DrawBVec3Control("Linear lock", linearLock, false, 70.f, ++index)) {
+        if (SR_GRAPH_NS::GUI::DrawBVec3Control("Linear lock", linearLock, false, 70.f)) {
             pComponent->SetLinearLock(linearLock);
         }
 
         auto&& angularLock = pComponent->GetAngularLock();
-        if (SR_GRAPH_NS::GUI::DrawBVec3Control("Angular lock", angularLock, false, 70.f, ++index)) {
+        if (SR_GRAPH_NS::GUI::DrawBVec3Control("Angular lock", angularLock, false, 70.f)) {
             pComponent->SetAngularLock(angularLock);
         }
 
@@ -93,6 +93,13 @@ namespace SR_CORE_NS::GUI {
         if ((void*)pComponent != (void*)pCopy) {
             pComponent = dynamic_cast<SR_PTYPES_NS::Rigidbody3D*>(pCopy);
         }
+
+        ImGui::Separator();
+        ImGui::Separator();
+        ImGui::Separator();
+        ImGui::Separator();
+        ImGui::Separator();
+        ImGui::Separator();
     }
 
     void ComponentDrawer::DrawComponent(SR_PTYPES_NS::Rigidbody*& pComponent, EditorGUI* context, int32_t index) {
@@ -155,11 +162,11 @@ namespace SR_CORE_NS::GUI {
 
         ImGui::SameLine();
 
-        if (ImGui::Button("Edit")) {
-            if (materialPath.IsFile()) {
-                context->GetWidget<PhysicsMaterialEditor>()->Edit(materialPath);
-            }
-        }
+        //if (ImGui::Button("Edit")) {
+        //    if (materialPath.IsFile()) {
+        //        context->GetWidget<PhysicsMaterialEditor>()->Edit(materialPath);
+        //    }
+        //}
 
         ImGui::SameLine();
         ImGui::Text("Physics Material");

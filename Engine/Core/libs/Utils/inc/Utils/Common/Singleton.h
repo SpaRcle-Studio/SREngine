@@ -22,6 +22,9 @@ namespace SR_UTILS_NS {
         ~SingletonBase() override = default;
 
     protected:
+        SingletonBase() = default;
+
+    protected:
         virtual void OnSingletonDestroy() { }
         virtual void InitSingleton() { }
         virtual bool IsSingletonCanBeDestroyed() const { return true; }
@@ -57,7 +60,16 @@ namespace SR_UTILS_NS {
 
     template<typename T> class SR_DLL_EXPORT Singleton : public SingletonBase {
     protected:
-        Singleton() = default;
+        Singleton()
+            : SingletonBase()
+        {
+            if (GetSingleton()) {
+                std::cerr << "Singleton already exists!\n";
+                std::cerr << GetStacktrace() << std::endl;
+                SR_MAKE_BREAKPOINT;
+            }
+        }
+
         ~Singleton() override = default;
 
     public:

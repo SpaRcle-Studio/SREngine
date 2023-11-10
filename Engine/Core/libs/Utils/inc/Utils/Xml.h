@@ -161,10 +161,10 @@ namespace SR_UTILS_NS::Xml {
             if (attrib.empty())
                 return *this;
 
-            if constexpr (std::is_same<T, std::string>()) {
+            if constexpr (std::is_same<T, std::string>() || std::is_same<T, SR_UTILS_NS::StringAtom>()) {
                 attrib.set_value(value.c_str());
             }
-            else {
+            else  {
                 attrib.set_value(value);
             }
 
@@ -301,7 +301,7 @@ namespace SR_UTILS_NS::Xml {
             else if constexpr (std::is_same<T, double_t>()) {
                 return GetAttribute("Double").ToDouble();
             }
-            else if constexpr (std::is_same<T, std::string>()) {
+            else if constexpr (std::is_same<T, std::string>() || std::is_same<T, SR_UTILS_NS::StringAtom>()) {
                 return GetAttribute("String").ToString();
             }
             else
@@ -365,7 +365,7 @@ namespace SR_UTILS_NS::Xml {
             else if constexpr (std::is_same<T, SR_UTILS_NS::Path>()) {
                 hasErrors |= AppendAttribute("Path", value);
             }
-            else if constexpr (std::is_same<T, std::string>()) {
+            else if constexpr (std::is_same<T, std::string>() || std::is_same<T, SR_UTILS_NS::StringAtom>()) {
                 hasErrors |= AppendAttribute("String", value);
             }
             else if constexpr (std::is_same<T, SR_MATH_NS::FVector2>()) {
@@ -414,7 +414,7 @@ namespace SR_UTILS_NS::Xml {
             if (attrib.empty())
                 return false;
 
-            if constexpr (std::is_same<T, std::string>()) {
+            if constexpr (std::is_same<T, std::string>() || std::is_same<T, SR_UTILS_NS::StringAtom>()) {
                 attrib.set_value(value.c_str());
             }
             else if constexpr (std::is_same<T, SR_UTILS_NS::Path>()) {
