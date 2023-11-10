@@ -21,7 +21,7 @@ on:
 
 jobs:
   manage:
-    name: Handle arguments and choose platform.
+    name: Choose platforms.
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, '#SR_CI_NONE')"
     outputs:
@@ -118,13 +118,14 @@ jobs:
       artifactPush: ${{needs.manage.outputs.artifactPush}}
 
   HandleIssues:
-    name: Handle Issues.
+    name: Issues.
     needs: [BuildWindowsJob, BuildLinuxJob]
     if: ${{ always() }}
     uses: ./.github/workflows/IssuesCI.yml
     with:
       windowsBuildState: ${{needs.BuildWindowsJob.result}}
       linuxBuildState: ${{needs.BuildLinuxJob.result}}
-      commitActor: github.actor
-      commitSha: github.sha
-      commitBranch: github.ref_name
+      commitActor: ${{github.actor}}
+      commitSha: ${{github.sha}}
+      commitBranch: ${{github.ref_name}}
+      commitMessage: ${{github.event.head_commit.message}}

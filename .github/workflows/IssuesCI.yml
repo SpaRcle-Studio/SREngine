@@ -16,19 +16,24 @@ on:
       commitBranch:
         required: true
         type: string
+      commitMessage:
+        required: true
+        type: string
 
 jobs:
   Manager:
-    name: Issue manager.
+    name: Manager.
     runs-on: ubuntu-latest
     steps:
-      - name: Setting environment.
-        run: |
-          echo "commitMessage=${{github.event.head_commit.message}}" << $GITHUB_ENV
+      #- name: Setting environment.
+      #  run: |
+      #    echo "commitMessage=${{github.event.head_commit.message}}" << $GITHUB_ENV
 
       - name: Getting issue id.
         uses: jannekem/run-python-script-action@v1
         id: script
+        env:
+          commitMessage = ${{inputs.commitMessage}}
         with:
           fail-on-error: false
           script: |
@@ -50,7 +55,7 @@ jobs:
 
       - if: inputs.linuxBuildState == 'failure' || inputs.windowsBuildState == 'failure'
         name: Creating an issue.
-        uses: buluma/create-issue-action@v2.0.0
+        uses: dacbd/create-issue-action@main
         with:
           title: (Build) Build failed. ${{inputs.commitBranch}}
           body: |
