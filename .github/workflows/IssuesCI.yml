@@ -66,4 +66,4 @@ jobs:
             Commit Author: ${{inputs.commitActor}}
           assignees: ${{inputs.commitActor}}
           labels: build-failed
-          token: ${{ secrets.citoken }}
+          token: ${{ secrets.CITOKEN }}
