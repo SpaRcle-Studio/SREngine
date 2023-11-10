@@ -25,15 +25,14 @@ jobs:
     name: Manager.
     runs-on: ubuntu-latest
     steps:
-      #- name: Setting environment.
-      #  run: |
-      #    echo "commitMessage=${{github.event.head_commit.message}}" << $GITHUB_ENV
+      - name: Setting environment.
+        run: |
+          echo "commitMessage=${{github.event.head_commit.message}}" << $GITHUB_ENV
+          echo ${{github.event.head_commit.message}}
 
       - name: Getting issue id.
         uses: jannekem/run-python-script-action@v1
         id: script
-        env:
-          commitMessage = ${{inputs.commitMessage}}
         with:
           fail-on-error: false
           script: |
