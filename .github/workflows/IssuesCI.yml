@@ -23,11 +23,11 @@ on:
 jobs:
   Manager:
     name: Manager.
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - name: Setting environment.
         run: |
-          echo "commitMessage=${{github.event.head_commit.message}}" << $GITHUB_ENV
+          echo "commitMessage=${{github.event.head_commit.message}}" << "$GITHUB_ENV"
           echo ${{github.event.head_commit.message}}
 
       - name: Getting issue id.
@@ -37,7 +37,7 @@ jobs:
           fail-on-error: false
           script: |
             import os 
-            commitMessage = os.environ.get('commitMessage')
+            commitMessage = os.environ.get("commitMessage")
             print(f"Commit message:\n{commitMessage}\n")
             words = commitMessage.split()
             for word in words:
@@ -56,6 +56,7 @@ jobs:
         name: Creating an issue.
         uses: dacbd/create-issue-action@main
         with:
+          token: ${{ secrets.CITOKEN }}
           title: (Build) Build failed. ${{inputs.commitBranch}}
           body: |
             This issue is created automatically by CI.
@@ -66,4 +67,3 @@ jobs:
             Commit Author: ${{inputs.commitActor}}
           assignees: ${{inputs.commitActor}}
           labels: build-failed
-          token: ${{ secrets.CITOKEN }}
