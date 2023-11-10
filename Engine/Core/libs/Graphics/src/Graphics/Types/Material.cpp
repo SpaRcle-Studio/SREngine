@@ -38,13 +38,13 @@ namespace SR_GTYPES_NS {
                     pShader->SetFloat(hashId, std::get<float_t>(pProperty->GetData()));
                     break;
                 case ShaderVarType::Vec2:
-                    pShader->SetVec2(hashId, std::get<SR_MATH_NS::FVector2>(pProperty->GetData()).Cast<float_t>());
+                    pShader->SetVec2(hashId, std::get<SR_MATH_NS::FVector2>(pProperty->GetData()).template Cast<float_t>());
                     break;
                 case ShaderVarType::Vec3:
-                    pShader->SetVec3(hashId, std::get<SR_MATH_NS::FVector3>(pProperty->GetData()).Cast<float_t>());
+                    pShader->SetVec3(hashId, std::get<SR_MATH_NS::FVector3>(pProperty->GetData()).template Cast<float_t>());
                     break;
                 case ShaderVarType::Vec4:
-                    pShader->SetVec4(hashId, std::get<SR_MATH_NS::FVector4>(pProperty->GetData()).Cast<float_t>());
+                    pShader->SetVec4(hashId, std::get<SR_MATH_NS::FVector4>(pProperty->GetData()).template Cast<float_t>());
                     break;
                 case ShaderVarType::Sampler2D:
                     /// samplers used at UseSamplers
