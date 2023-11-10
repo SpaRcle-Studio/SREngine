@@ -15,7 +15,7 @@ on:
 
 jobs:  
   Build:
-    name: Preparing and building.
+    name: Build.
     runs-on: ubuntu-latest
     steps:
       - name: Fetching repository.

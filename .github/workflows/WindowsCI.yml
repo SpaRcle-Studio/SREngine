@@ -15,7 +15,7 @@ on:
 
 jobs:  
   Preparing:
-    name: Preparing and building.
+    name: Build.
     runs-on: windows-latest
     steps:
       - name: Fetching repository.
