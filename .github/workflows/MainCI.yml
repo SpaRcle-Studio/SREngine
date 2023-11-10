@@ -97,7 +97,7 @@ jobs:
           echo "artifactPush=${{env.artifactPush}}" >> $GITHUB_OUTPUT  
 
 
-  BuildWindows:
+  BuildWindowsJob:
     name: Windows.
     needs: [manage]
     if: needs.manage.outputs.buildWindows == 'true'
@@ -107,7 +107,7 @@ jobs:
       buildDebug: ${{needs.manage.outputs.buildDebug}}
       artifactPush: ${{needs.manage.outputs.artifactPush}}
 
-  BuildLinux:
+  BuildLinuxJob:
     name: Linux.
     needs: [manage]
     if: needs.manage.outputs.buildLinux == 'true'
@@ -116,3 +116,14 @@ jobs:
       buildRelease: ${{needs.manage.outputs.buildRelease}}
       buildDebug: ${{needs.manage.outputs.buildDebug}}
       artifactPush: ${{needs.manage.outputs.artifactPush}}
+
+  HandleIssues:
+    name: Handle Issues.
+    needs: [BuildWindowsJob, BuildLinuxJob]
+    uses: ./.github/workflows/IssuesCI.yml
+    with:
+      windowsBuildState: ${{needs.BuildWindowsJob.result}}
+      linuxBuildState: ${{needs.BuildLinuxJob.result}}
+      commitActor: github.actor
+      commitSha: github.sha
+      commitBranch: github.ref_name
