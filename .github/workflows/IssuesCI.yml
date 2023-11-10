@@ -1,0 +1,65 @@
+on:
+  workflow_call:
+    inputs:
+      windowsBuildState:
+        required: true
+        type: string
+      linuxBuildState:
+        required: true
+        type: string
+      commitActor:
+        required: true
+        type: string
+      commitSha:
+        required: true
+        type: string
+      commitBranch:
+        required: true
+        type: string
+
+jobs:
+  Manager:
+    name: Issue manager.
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setting environment.
+        run: |
+          echo "commitMessage=${{github.event.head_commit.message}}" << $GITHUB_ENV
+
+      - name: Getting issue id.
+        uses: jannekem/run-python-script-action@v1
+        id: script
+        with:
+          fail-on-error: false
+          script: |
+            import os 
+            commitMessage = os.environ.get('commitMessage')
+            print(f"Commit message:\n{commitMessage}\n")
+            words = commitMessage.split()
+            for word in words:
+              if word[:10] == "#SR_CLOSE(" and word[10:][:-1].isnumeric():
+                print(f"Issue ID: {word[10:][:-1]}")
+                set_env("issueId", int(word[10:][:-1]))
+
+      - if: inputs.linuxBuildState != 'failure' && inputs.windowsBuildState != 'failure'
+        name: Closing the issue.
+        uses: peter-evans/close-issue@v3
+        with:
+          issue-number: env.issueId
+          comment: Closed automatically by CI.
+
+      - if: inputs.linuxBuildState == 'failure' || inputs.windowsBuildState == 'failure'
+        name: Creating an issue.
+        uses: buluma/create-issue-action@v2.0.0
+        with:
+          title: (Build) Build failed. ${{inputs.commitBranch}}
+          body: |
+            This issue is created automatically by CI.
+            Linux Build State: ${{inputs.linuxBuildState}}
+            Windows Build State: ${{inputs.windowsBuildState}}
+            Commit: ${{inputs.commitSha}}
+            Commit Branch: ${{inputs.commitBranch}}
+            Commit Author: ${{inputs.commitActor}}
+          assignees: ${{inputs.commitActor}}
+          labels: build-failed
+          token: ${{ secrets.citoken }}
