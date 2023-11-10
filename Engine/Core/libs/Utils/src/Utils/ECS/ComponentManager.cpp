@@ -30,7 +30,13 @@ namespace SR_UTILS_NS {
 
         auto&& pComponent = m_meta.at(id).constructor();
         if (pComponent) {
-            pComponent->InitProperties();
+            if (!pComponent->InitializeEntity()) {
+                SR_ERROR("ComponentManager::CreateComponentImpl() : failed to initialize entity!");
+                pComponent->AutoFree([](auto&& pData) {
+                    delete pData;
+                });
+                return nullptr;
+            }
         }
 
         return pComponent;

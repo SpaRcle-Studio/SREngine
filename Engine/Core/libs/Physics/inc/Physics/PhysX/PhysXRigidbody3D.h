@@ -8,11 +8,10 @@
 #include <Physics/3D/Rigidbody3D.h>
 
 namespace SR_PTYPES_NS {
-    class PhysXRigidbody3D : public Rigidbody3D {
-        using Super = Rigidbody3D;
+    class PhysXRigidbody3DImpl : public Rigidbody3DImpl {
+        using Super = Rigidbody3DImpl;
     public:
-        explicit PhysXRigidbody3D(LibraryPtr pLibrary);
-        ~PhysXRigidbody3D() override;
+        ~PhysXRigidbody3DImpl() override;
 
     public:
         SR_NODISCARD void* GetHandle() const noexcept override;

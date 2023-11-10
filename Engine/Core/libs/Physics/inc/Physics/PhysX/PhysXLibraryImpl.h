@@ -24,7 +24,7 @@ namespace SR_PHYSICS_NS {
         SR_NODISCARD ShapeType GetDefaultShape() const override { return ShapeType::Box3D; }
 
         SR_NODISCARD SR_PTYPES_NS::CollisionShape* CreateCollisionShape() override;
-        SR_NODISCARD SR_PTYPES_NS::Rigidbody3D* CreateRigidbody3D() override;
+        SR_NODISCARD SR_PTYPES_NS::Rigidbody3DImpl* CreateRigidbody3DImpl() override;
         SR_NODISCARD SR_PHYSICS_NS::PhysicsWorld* CreatePhysicsWorld(Space space) override;
 
         SR_NODISCARD SR_PTYPES_NS::Vehicle4W3D* CreateVehicle4W3D() override;

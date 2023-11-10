@@ -8,8 +8,8 @@
 #include <Physics/Utils/Utils.h>
 
 namespace SR_PTYPES_NS {
-    class Rigidbody2D;
-    class Rigidbody3D;
+    class Rigidbody2DImpl;
+    class Rigidbody3DImpl;
     class CollisionShape;
     class PhysicsMaterialImpl;
     class Vehicle4W3D;
@@ -38,8 +38,8 @@ namespace SR_PHYSICS_NS {
 
         SR_NODISCARD virtual SR_PTYPES_NS::CollisionShape* CreateCollisionShape() { return nullptr; }
 
-        SR_NODISCARD virtual SR_PTYPES_NS::Rigidbody2D* CreateRigidbody2D() { return nullptr; }
-        SR_NODISCARD virtual SR_PTYPES_NS::Rigidbody3D* CreateRigidbody3D() { return nullptr; }
+        SR_NODISCARD virtual SR_PTYPES_NS::Rigidbody2DImpl* CreateRigidbody2DImpl() { return nullptr; }
+        SR_NODISCARD virtual SR_PTYPES_NS::Rigidbody3DImpl* CreateRigidbody3DImpl() { return nullptr; }
 
         SR_NODISCARD virtual SR_PTYPES_NS::Vehicle4W3D* CreateVehicle4W3D() { return nullptr; }
 

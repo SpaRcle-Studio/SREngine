@@ -39,7 +39,7 @@ namespace SR_PTYPES_NS {
                     m_debugId,
                     m_rigidbody->GetTranslation() + m_rigidbody->GetCenterDirection(),
                     m_rigidbody->GetRotation(),
-                    (m_rigidbody->GetScale() * GetSize()).Max3(),
+                    (m_rigidbody->GetScale() * GetRadius()).Max3(),
                     SR_MATH_NS::FColor(0, 255, 200, 255),
                     SR_FLOAT_MAX
             );
@@ -92,7 +92,7 @@ namespace SR_PTYPES_NS {
     void CollisionShape::SetSize(const SR_MATH_NS::FVector3& size) {
         m_bounds = SR_MATH_NS::FVector3(size.x, size.y, size.z);
         UpdateDebugShape();
-        UpdateShape();
+        UpdateMatrix();
     }
 
     float_t CollisionShape::GetHeight() const {

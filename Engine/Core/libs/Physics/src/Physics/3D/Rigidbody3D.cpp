@@ -9,20 +9,7 @@
 #include <Utils/ECS/ComponentManager.h>
 
 namespace SR_PTYPES_NS {
-    SR_REGISTER_COMPONENT_CUSTOM(Rigidbody3D, {
-        auto&& pLibrary = SR_PHYSICS_NS::PhysicsLibrary::Instance().GetActiveLibrary(SR_UTILS_NS::Measurement::Space3D);
-
-        if (auto&& pRigidbody = pLibrary->CreateRigidbody3D()) {
-            pRigidbody->SetType(pLibrary->GetDefaultShape());
-            return pRigidbody;
-        }
-
-        return (SR_PTYPES_NS::Rigidbody3D*)nullptr;
-    });
-
-    Rigidbody3D::Rigidbody3D(Super::LibraryPtr pLibrary)
-        : Super(pLibrary)
-    { }
+    SR_REGISTER_COMPONENT(Rigidbody3D);
 
     SR_UTILS_NS::Component* Rigidbody3D::LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage) {
         auto&& pComponent = Super::LoadComponent(SR_UTILS_NS::Measurement::Space3D, marshal, dataStorage);
@@ -51,8 +38,8 @@ namespace SR_PTYPES_NS {
         return pMarshal;
     }
 
-    SR_UTILS_NS::Component *Rigidbody3D::CopyComponent() const {
-        auto&& pComponent = m_library->CreateRigidbody3D();
+    SR_UTILS_NS::Component* Rigidbody3D::CopyComponent() const {
+        auto&& pComponent = SR_UTILS_NS::ComponentManager::Instance().CreateComponent<Rigidbody3D>();
 
         pComponent->SetType(GetType());
 
@@ -69,5 +56,57 @@ namespace SR_PTYPES_NS {
         pComponent->GetCollisionShape()->SetBounds(GetCollisionShape()->GetBounds());
 
         return dynamic_cast<Rigidbody3D*>(pComponent);
+    }
+
+    void Rigidbody3D::SetLinearLock(const SR_MATH_NS::BVector3& lock) {
+        m_linearLock = lock;
+        if (auto&& pImpl = GetImpl<Rigidbody3DImpl>()) {
+            pImpl->SetLinearLock(lock);
+        }
+    }
+
+    void Rigidbody3D::SetAngularLock(const SR_MATH_NS::BVector3& lock) {
+        m_angularLock = lock;
+        if (auto&& pImpl = GetImpl<Rigidbody3DImpl>()) {
+            pImpl->SetAngularLock(lock);
+        }
+    }
+
+    void Rigidbody3D::SetLinearVelocity(const SR_MATH_NS::FVector3& velocity) {
+        if (auto&& pImpl = GetImpl<Rigidbody3DImpl>()) {
+            pImpl->SetLinearVelocity(velocity);
+        }
+    }
+
+    void Rigidbody3D::AddAngularVelocity(const SR_MATH_NS::FVector3& velocity) {
+        if (auto&& pImpl = GetImpl<Rigidbody3DImpl>()) {
+            pImpl->AddAngularVelocity(velocity);
+        }
+    }
+
+    SR_MATH_NS::FVector3 Rigidbody3D::GetLinearVelocity() const {
+        if (auto&& pImpl = GetImpl<Rigidbody3DImpl>()) {
+            return pImpl->GetLinearVelocity();
+        }
+        return SR_MATH_NS::FVector3();
+    }
+
+    SR_MATH_NS::FVector3 Rigidbody3D::GetAngularVelocity() const {
+        if (auto&& pImpl = GetImpl<Rigidbody3DImpl>()) {
+            return pImpl->GetAngularVelocity();
+        }
+        return SR_MATH_NS::FVector3();
+    }
+
+    void Rigidbody3D::AddLinearVelocity(const SR_MATH_NS::FVector3& velocity) {
+        if (auto&& pImpl = GetImpl<Rigidbody3DImpl>()) {
+            return pImpl->AddLinearVelocity(velocity);
+        }
+    }
+
+    void Rigidbody3D::SetAngularVelocity(const SR_MATH_NS::FVector3& velocity) {
+        if (auto&& pImpl = GetImpl<Rigidbody3DImpl>()) {
+            return pImpl->SetAngularVelocity(velocity);
+        }
     }
 }

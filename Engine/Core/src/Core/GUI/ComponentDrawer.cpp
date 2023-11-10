@@ -100,20 +100,9 @@ namespace SR_CORE_NS::GUI {
             return;
         }
 
-        auto&& shapes = SR_UTILS_NS::EnumReflector::GetNames<SR_PHYSICS_NS::ShapeType>();
-        auto shape = static_cast<int>(SR_UTILS_NS::EnumReflector::GetIndex(pComponent->GetType()));
-
-        if (ImGui::Combo(SR_FORMAT_C("Shape##rgbd%i", index), &shape, [](void* vec, int idx, const char** out_text){
-            auto&& vector = reinterpret_cast<std::vector<std::string>*>(vec);
-            if (idx < 0 || idx >= vector->size())
-                return false;
-
-            *out_text = vector->at(idx).c_str();
-
-            return true;
-        }, const_cast<void*>(reinterpret_cast<const void*>(&shapes)), shapes.size())) {
-            pComponent->SetType(SR_UTILS_NS::EnumReflector::At<SR_PHYSICS_NS::ShapeType>(shape));
-        }
+        SR_GRAPH_GUI_NS::EnumCombo<SR_PHYSICS_NS::ShapeType>(SR_FORMAT("Collision shape##%p", pComponent), pComponent->GetType(), [pComponent](auto&& shape){
+            pComponent->SetType(shape);
+        });
 
         ComponentDrawer::DrawCollisionShape(pComponent->GetCollisionShape(), context, index);
 
@@ -201,6 +190,18 @@ namespace SR_CORE_NS::GUI {
                         ImVec4{ 0.2f, 0.7f, 0.2f, 1.0f }, nullptr, 0.1f
             )){
                 pCollisionShape->SetHeight(height);
+            }
+        }
+
+        if (SR_PHYSICS_UTILS_NS::IsShapeHasRadius(pCollisionShape->GetType())) {
+            auto&& radius = pCollisionShape->GetRadius();
+            if (Graphics::GUI::DrawValueControl<SR_MATH_NS::Unit>(
+                        "Radius", radius, 0.f, buttonSize,
+                        ImVec4{ 0.2f, 0.7f, 0.2f, 1.0f },
+                        ImVec4{ 0.3f, 0.8f, 0.3f, 1.0f },
+                        ImVec4{ 0.2f, 0.7f, 0.2f, 1.0f }, nullptr, 0.1f
+            )){
+                pCollisionShape->SetRadius(radius);
             }
         }
     }

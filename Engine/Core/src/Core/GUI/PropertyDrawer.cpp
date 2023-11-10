@@ -202,7 +202,8 @@ namespace SR_CORE_GUI_NS {
         if (auto&& pContainer = dynamic_cast<SR_UTILS_NS::PropertyContainer*>(pProperty)) {
             if (!pContainer->GetName().Empty()) {
                 ImGui::Separator();
-                SR_GRAPH_GUI_NS::DrawTextOnCenter(pContainer->GetName().ToStringRef());
+                const std::string text = SR_FORMAT("[ %s ]", pContainer->GetName().ToCStr());
+                SR_GRAPH_GUI_NS::DrawTextOnCenter(text, ImColor(0.f, 1.f, 1.f, 1.f));
             }
             return DrawPropertyContainer(context, pContainer);
         }
@@ -224,7 +225,6 @@ namespace SR_CORE_GUI_NS {
             }
             return false;
         }
-
 
         return false;
     }

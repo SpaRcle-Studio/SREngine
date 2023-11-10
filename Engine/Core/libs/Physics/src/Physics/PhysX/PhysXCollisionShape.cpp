@@ -19,6 +19,10 @@ namespace SR_PTYPES_NS {
     }
 
     bool PhysXCollisionShape::UpdateShape() {
+        if (!m_rigidbody->IsUpdatable()) {
+            return false;
+        }
+
         auto&& pPhysics = GetLibrary<PhysXLibraryImpl>()->GetPxPhysics();
 
         if (m_shape) {

@@ -133,8 +133,6 @@ namespace SR_UTILS_NS {
 
         void SetParent(IComponentable* pParent);
 
-        virtual void InitProperties() { }
-
     protected:
         bool m_isComponentLoaded = false;
         bool m_isAttached = false;

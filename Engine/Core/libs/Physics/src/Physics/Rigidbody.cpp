@@ -14,21 +14,49 @@
 #include <Physics/PhysicsMaterial.h>
 
 namespace SR_PTYPES_NS {
-    Rigidbody::Rigidbody(LibraryPtr pLibrary)
-        : SR_UTILS_NS::Component()
-        , m_library(pLibrary)
-        , m_shape(pLibrary->CreateCollisionShape())
-        , m_isBodyDirty(true)
-        , m_scale(SR_MATH_NS::FVector3::One())
-    {
-        m_shape->SetRigidbody(this);
-    }
-
     Rigidbody::~Rigidbody() {
         SR_SAFE_DELETE_PTR(m_shape);
+        SR_SAFE_DELETE_PTR(m_impl);
 
         SetMaterial(nullptr);
         SetRawMesh(nullptr);
+    }
+
+    bool Rigidbody::InitializeEntity() noexcept {
+        m_library = SR_PHYSICS_NS::PhysicsLibrary::Instance().GetActiveLibrary(GetMeasurement());
+        if (!m_library) {
+            SR_ERROR("Rigidbody::InitializeEntity() : library not found!");
+            return false;
+        }
+
+        m_shape = m_library->CreateCollisionShape();
+        if (!m_shape) {
+            SR_ERROR("Rigidbody::InitializeEntity() : failed to initialize collision shape!");
+            return false;
+        }
+
+        m_shape->SetRigidbody(this);
+
+        switch (GetMeasurement()) {
+            case SR_UTILS_NS::Measurement::Space2D:
+                m_impl = m_library->CreateRigidbody2DImpl();
+                break;
+            case SR_UTILS_NS::Measurement::Space3D:
+                m_impl = m_library->CreateRigidbody3DImpl();
+                break;
+            default:
+                SR_ERROR("Rigidbody::InitializeEntity() : unknown space type!");
+                return false;
+        }
+
+        if (!m_impl) {
+            SR_ERROR("Rigidbody::InitializeEntity() : failed to allocate implementation!");
+            return false;
+        }
+
+        m_impl->SetRigidbody(this);
+
+        return Entity::InitializeEntity();
     }
 
     std::string Rigidbody::GetEntityInfo() const {
@@ -59,12 +87,14 @@ namespace SR_PTYPES_NS {
         };
 
         Rigidbody* pComponent = nullptr;
-        LibraryImpl* pLibrary = nullptr;
 
         switch (measurement) {
+            case SR_UTILS_NS::Measurement::Space2D: {
+                pComponent = SR_UTILS_NS::ComponentManager::Instance().CreateComponent<Rigidbody2D>();
+                break;
+            }
             case SR_UTILS_NS::Measurement::Space3D: {
-                pLibrary = pDataStorage->GetPointer<LibraryImpl>("3DPLib");
-                pComponent = pLibrary->CreateRigidbody3D();
+                pComponent = SR_UTILS_NS::ComponentManager::Instance().CreateComponent<Rigidbody3D>();
                 break;
             }
             default:
@@ -96,7 +126,7 @@ namespace SR_PTYPES_NS {
             pComponent->SetMaterial(PhysicsMaterial::Load(material));
         }
 
-        pComponent->SetType(verifyType(pLibrary, type));
+        pComponent->SetType(verifyType(pComponent->GetLibrary(), type));
         pComponent->SetCenter(center);
         pComponent->GetCollisionShape()->SetSize(size);
         pComponent->SetMass(mass);
@@ -198,6 +228,10 @@ namespace SR_PTYPES_NS {
             return false;
         }
 
+        if (m_impl) {
+            m_impl->UpdateMatrix(force);
+        }
+
         SetMatrixDirty(false);
 
         m_shape->SetScale(m_scale);
@@ -236,6 +270,11 @@ namespace SR_PTYPES_NS {
 
     void Rigidbody::SetType(ShapeType type) {
         if (m_shape->GetType() == type) {
+            return;
+        }
+
+        if (m_library && !m_library->IsShapeSupported(type)) {
+            SR_ERROR("Rigidbody::SetType() : shape \"" + SR_UTILS_NS::EnumReflector::ToString(type).ToStringRef() + "\" unsupported!");
             return;
         }
 
@@ -320,6 +359,10 @@ namespace SR_PTYPES_NS {
             return false;
         }
 
+        if (m_impl) {
+            m_impl->InitBody();
+        }
+
         m_isBodyDirty = false;
 
         return true;
@@ -373,5 +416,34 @@ namespace SR_PTYPES_NS {
     void Rigidbody::SetMaterial(const SR_UTILS_NS::Path& path) {
         SR_PTYPES_NS::PhysicsMaterial* pMaterial = SR_PTYPES_NS::PhysicsMaterial::Load(path);
         SetMaterial(pMaterial);
+    }
+
+    void Rigidbody::UpdateInertia() {
+        if (m_impl) {
+            m_impl->UpdateInertia();
+        }
+    }
+
+    void Rigidbody::ClearForces() {
+        if (m_impl) {
+            m_impl->ClearForces();
+        }
+    }
+
+    bool Rigidbody::UpdateShapeInternal() {
+        if (m_impl) {
+            return m_impl->UpdateShapeInternal();
+        }
+        return false;
+    }
+
+    void* Rigidbody::GetHandle() const noexcept {
+        return m_impl ? m_impl->GetHandle() : nullptr;
+    }
+
+    void Rigidbody::Synchronize() {
+        if (m_impl) {
+            m_impl->Synchronize();
+        }
     }
 }

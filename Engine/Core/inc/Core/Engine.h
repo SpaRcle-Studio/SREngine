@@ -69,6 +69,7 @@ namespace SR_CORE_NS {
         void FixedUpdate();
         void FlushScene();
 
+        SR_NODISCARD bool HasSceneInQueue() const { return !m_sceneQueue.Empty(); }
         SR_NODISCARD SR_INLINE ScenePtr GetScene() const;
         SR_NODISCARD SR_INLINE RenderContextPtr GetRenderContext() const { return m_renderContext; }
         SR_NODISCARD SR_INLINE RenderScenePtr GetRenderScene() const;

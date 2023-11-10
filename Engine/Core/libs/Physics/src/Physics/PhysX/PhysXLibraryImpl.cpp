@@ -97,8 +97,8 @@ namespace SR_PHYSICS_NS {
         return new SR_PTYPES_NS::PhysXCollisionShape(this);
     }
 
-    SR_PTYPES_NS::Rigidbody3D* PhysXLibraryImpl::CreateRigidbody3D() {
-        return new SR_PTYPES_NS::PhysXRigidbody3D(this);
+    SR_PTYPES_NS::Rigidbody3DImpl* PhysXLibraryImpl::CreateRigidbody3DImpl() {
+        return new SR_PTYPES_NS::PhysXRigidbody3DImpl();
     }
 
     SR_PHYSICS_NS::PhysicsWorld* PhysXLibraryImpl::CreatePhysicsWorld(Space space) {

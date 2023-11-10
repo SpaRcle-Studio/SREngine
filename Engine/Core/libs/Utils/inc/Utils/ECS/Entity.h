@@ -106,6 +106,8 @@ namespace SR_UTILS_NS {
         SR_NODISCARD virtual std::string GetEntityInfo() const { return "None"; }
         SR_NODISCARD virtual uint16_t GetEntityVersion() const noexcept = 0;
 
+        SR_NODISCARD virtual bool InitializeEntity() noexcept { return true; }
+
     protected:
         void SetEntityPath(const EntityPath& path);
 

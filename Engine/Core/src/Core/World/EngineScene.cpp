@@ -98,7 +98,7 @@ namespace SR_CORE_NS {
 
             pScene->Prepare();
 
-            const bool isPaused = pEngine->IsPaused() || !pEngine->IsActive();
+            const bool isPaused = pEngine->IsPaused() || !pEngine->IsActive() || pEngine->HasSceneInQueue();
 
             pSceneBuilder->Build(isPaused);
             pSceneBuilder->Update(dt);

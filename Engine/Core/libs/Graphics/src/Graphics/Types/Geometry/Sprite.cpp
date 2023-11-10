@@ -148,7 +148,7 @@ namespace SR_GTYPES_NS {
         Component::OnPriorityDirty();
     }
 
-    void Sprite::InitProperties() {
+    bool Sprite::InitializeEntity() noexcept {
         m_properties.AddStandardProperty("Sliced", &m_sliced);
 
         m_properties.AddStandardProperty("Texture border", &m_textureBorder)
@@ -179,6 +179,6 @@ namespace SR_GTYPES_NS {
             .SetActiveCondition([this]() -> bool { return m_material; })
             .SetReadOnly();
 
-        Component::InitProperties();
+        return Component::InitializeEntity();
     }
 }
