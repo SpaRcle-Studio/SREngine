@@ -120,6 +120,7 @@ jobs:
   HandleIssues:
     name: Handle Issues.
     needs: [BuildWindowsJob, BuildLinuxJob]
+    if: ${{ always() }}
     uses: ./.github/workflows/IssuesCI.yml
     with:
       windowsBuildState: ${{needs.BuildWindowsJob.result}}
