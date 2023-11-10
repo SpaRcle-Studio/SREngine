@@ -37,6 +37,14 @@ jobs:
         with:
           fetch-depth: 1
 
+      - id: setup
+        run: |
+          if ! [[ -z "${{ secrets.CITOKEN }}" ]]; then
+             echo "TOKEN PROVIDED ------------"
+          else
+             echo "NO TOKEN ------------"
+          fi
+
       - if: "contains(github.event.head_commit.message, '#SR_CI_RELEASE')"
         name: Handling "#SR_CI_RELEASE" argument.
         shell: bash
