@@ -493,19 +493,12 @@ namespace SR_CORE_NS::GUI {
             pComponent->SetLoop(loop);
         }
 
-        ImGui::SameLine();
-        ImGui::BeginGroup();
-        if (auto&& pDescriptor = context->GetIconDescriptor(EditorIcon::Audio)) {
-            if (SR_GRAPH_GUI_NS::ImageButton(SR_FORMAT("##AudioPath%i", index), pDescriptor, SR_MATH_NS::IVector2(50), 5)) {
-                auto&& resourcesFolder = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
-                auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesFolder, { { "Audio", "mp3" } });
+        std::string m_path = pComponent->GetPath().ToString();
 
-                if (path.Exists()) {
-                    pComponent->SetPath(path.RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetResPath()));
-                }
-            }
+        if (ImGui::InputText(SR_FORMAT_C("Path##Path%i", index), &m_path))
+        {
+           pComponent->SetPath(m_path);
         }
-        Graphics::GUI::DrawValue("AudioSource", pComponent->GetPath(), index);
 
     }
     void ComponentDrawer::DrawComponent(SR_AUDIO_NS::AudioListener *&pComponent, EditorGUI *context, int32_t index){
