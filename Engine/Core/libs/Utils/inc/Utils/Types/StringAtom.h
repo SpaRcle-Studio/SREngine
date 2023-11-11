@@ -5,12 +5,14 @@
 #ifndef SR_ENGINE_STRING_ATOM_H
 #define SR_ENGINE_STRING_ATOM_H
 
-#include <Utils/Common/HashManager.h>
+#include <Utils/stdInclude.h>
 
 namespace SR_UTILS_NS {
+    class StringHashInfo;
+
     class SR_DLL_EXPORT StringAtom {
         SR_INLINE_STATIC std::string DEFAULT = std::string();
-        SR_INLINE_STATIC auto DEFAULT_STRING_INFO = SR_UTILS_NS::HashManager::Instance().GetOrAddInfo("");
+        static StringHashInfo* DEFAULT_STRING_INFO;
     public:
         StringAtom() {
             m_info = DEFAULT_STRING_INFO;
@@ -18,93 +20,31 @@ namespace SR_UTILS_NS {
 
         StringAtom(const StringAtom& str) = default;
 
-        StringAtom(const char* str) /// NOLINT
-            : m_info(SR_UTILS_NS::HashManager::Instance().GetOrAddInfo(str))
-        { }
-
-        StringAtom(const std::string& str) /// NOLINT
-            : m_info(SR_UTILS_NS::HashManager::Instance().GetOrAddInfo(str))
-        { }
+        StringAtom(const char* str); /// NOLINT
+        StringAtom(const std::string& str); /// NOLINT
 
     public:
-        operator std::string() const noexcept { /// NOLINT
-            return m_info ? m_info->data : DEFAULT;
-        }
-
-        bool operator==(const StringAtom& rhs) const noexcept {
-            return m_info == rhs.m_info;
-        }
-
-        bool operator==(const std::string& rhs) const noexcept {
-            return m_info != nullptr && m_info->data == rhs;
-        }
-
-        bool operator==(const char* rhs) const noexcept {
-            return m_info != nullptr && m_info->data == rhs;
-        }
-
-        StringAtom& operator=(const std::string& str) {
-            m_info = SR_UTILS_NS::HashManager::Instance().GetOrAddInfo(str);
-            return *this;
-        }
-
-        StringAtom& operator=(const char* str) {
-            m_info = SR_UTILS_NS::HashManager::Instance().GetOrAddInfo(str);
-            return *this;
-        }
-
-        void operator()(const std::string& str) {
-            m_info = SR_UTILS_NS::HashManager::Instance().GetOrAddInfo(str);
-        }
-
-        void operator()(const char* str) {
-            m_info = SR_UTILS_NS::HashManager::Instance().GetOrAddInfo(str);
-        }
+        operator std::string() const noexcept; /// NOLINT
+        bool operator==(const StringAtom& rhs) const noexcept;
+        bool operator==(const std::string& rhs) const noexcept;
+        bool operator==(const char* rhs) const noexcept;
+        StringAtom& operator=(const std::string& str);
+        StringAtom& operator=(const char* str);
+        void operator()(const std::string& str);
+        void operator()(const char* str);
 
     public:
-        SR_NODISCARD uint64_t Size() const {
-            return m_info ? m_info->size : 0;
-        };
-
-        SR_NODISCARD uint64_t size() const {
-            return Size();
-        };
-
-        SR_NODISCARD bool Empty() const {
-            return m_info == nullptr || m_info->size == 0;
-        };
-
-        SR_NODISCARD bool empty() const {
-            return Empty();
-        };
-
-        SR_NODISCARD uint64_t GetHash() const {
-            return m_info ? m_info->hash : 0;
-        };
-
-        SR_NODISCARD std::string ToString() const {
-            return m_info ? m_info->data : DEFAULT;
-        };
-
-        SR_NODISCARD const char* ToCStr() const {
-            return m_info ? m_info->data.c_str() : "";
-        };
-
-        SR_NODISCARD const char* c_str() const {
-            return ToCStr();
-        };
-
-        SR_NODISCARD const char* data() const {
-            return ToCStr();
-        };
-
-        SR_NODISCARD const std::string& ToStringRef() const {
-            return m_info ? m_info->data : DEFAULT;
-        };
-
-        SR_NODISCARD std::string_view ToStringView() const {
-            return m_info ? m_info->data : DEFAULT;
-        };
+        SR_NODISCARD uint64_t Size() const;
+        SR_NODISCARD uint64_t size() const;
+        SR_NODISCARD bool Empty() const;
+        SR_NODISCARD bool empty() const;
+        SR_NODISCARD uint64_t GetHash() const;
+        SR_NODISCARD std::string ToString() const;
+        SR_NODISCARD const char* ToCStr() const;
+        SR_NODISCARD const char* c_str() const;
+        SR_NODISCARD const char* data() const;
+        SR_NODISCARD const std::string& ToStringRef() const;
+        SR_NODISCARD std::string_view ToStringView() const;
 
         void clear() {
             Clear();

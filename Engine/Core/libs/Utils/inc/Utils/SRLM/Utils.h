@@ -15,7 +15,7 @@
         SR_INLINE_STATIC const std::string NAME = #name; /** NOLINT*/                                                   \
         SR_INLINE_STATIC const uint64_t HASH_NAME = SR_HASH_STR_REGISTER(#name); /** NOLINT*/                           \
         static className* AllocateNew() { return new className(); }                                                     \
-        static DataType* AllocateBase() { return (DataType*)new className(); }                                          \
+            static DataType* AllocateBase() { return (DataType*)new className(); }                                          \
         SR_INLINE_STATIC const bool REGISTER_STATUS = SR_SRLM_NS::DataTypeAllocator::Instance().Register( /** NOLINT*/  \
             DataTypeClass::name, HASH_NAME, []() -> DataType* { return AllocateBase(); }                                \
         );                                                                                                              \

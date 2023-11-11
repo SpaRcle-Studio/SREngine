@@ -15,8 +15,8 @@ namespace SR_UTILS_NS {
         return singletonManager;
     }
 
-    void* SingletonManager::GetSingleton(uint64_t id) noexcept {
-        if (auto&& pIt = m_singletons.find(id); pIt != m_singletons.end()) {
+    void* SingletonManager::GetSingleton(StringAtom name) noexcept {
+        if (auto&& pIt = m_singletons.find(name); pIt != m_singletons.end()) {
             return pIt->second.pSingleton;
         }
 
@@ -38,8 +38,8 @@ namespace SR_UTILS_NS {
         }
     }
 
-    void SingletonManager::Remove(uint64_t id) {
-        if (auto&& pIt = m_singletons.find(id); pIt != m_singletons.end()) {
+    void SingletonManager::Remove(StringAtom name) {
+        if (auto&& pIt = m_singletons.find(name); pIt != m_singletons.end()) {
             m_singletons.erase(pIt);
         }
     }

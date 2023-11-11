@@ -49,7 +49,7 @@ namespace SR_UTILS_NS {
     };
 
     class SR_DLL_EXPORT TaskManager : public Singleton<TaskManager> {
-        friend class Singleton<TaskManager>;
+        SR_REGISTER_SINGLETON(TaskManager)
         using TaskFn = SR_HTYPES_NS::Function<void(std::atomic<Task::State>*)>;
         using TaskId = uint64_t;
     public:

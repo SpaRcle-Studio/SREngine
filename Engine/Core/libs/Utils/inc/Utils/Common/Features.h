@@ -26,7 +26,7 @@ namespace SR_UTILS_NS {
     };
 
     class SR_DLL_EXPORT Features : public Singleton<Features> {
-        friend class Singleton<Features>;
+        SR_REGISTER_SINGLETON(Features);
     private:
         ~Features() override = default;
 

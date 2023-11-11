@@ -31,7 +31,7 @@ namespace SR_SRSL_NS {
     };
 
     class SRSLRefAnalyzer : public SR_UTILS_NS::Singleton<SRSLRefAnalyzer> {
-        friend class SR_UTILS_NS::Singleton<SRSLRefAnalyzer>;
+        SR_REGISTER_SINGLETON(SRSLRefAnalyzer)
     public:
         SR_NODISCARD SRSLUseStack::Ptr Analyze(const SRSLAnalyzedTree::Ptr& pAnalyzedTree);
 

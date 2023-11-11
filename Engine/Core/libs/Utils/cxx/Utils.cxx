@@ -61,6 +61,7 @@
 #include "../../Utils/src/Utils/Common/HashManager.cpp"
 #include "../../Utils/src/Utils/Common/Vertices.cpp"
 
+#include "../../Utils/src/Utils/TypeTraits/PropertyManager.cpp"
 #include "../../Utils/src/Utils/TypeTraits/Property.cpp"
 #include "../../Utils/src/Utils/TypeTraits/Properties.cpp"
 #include "../../Utils/src/Utils/TypeTraits/StandardProperty.cpp"

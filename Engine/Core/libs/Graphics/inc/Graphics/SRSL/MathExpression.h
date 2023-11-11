@@ -10,7 +10,7 @@
 
 namespace SR_SRSL_NS {
     class SRSLMathExpression : public SR_UTILS_NS::Singleton<SRSLMathExpression> {
-        friend class SR_UTILS_NS::Singleton<SRSLMathExpression>;
+        SR_REGISTER_SINGLETON(SRSLMathExpression)
     public:
         SR_NODISCARD std::pair<SRSLExpr*, SRSLResult> Analyze(std::vector<Lexem>&& lexems);
 

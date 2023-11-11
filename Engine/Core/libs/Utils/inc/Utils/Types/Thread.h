@@ -31,7 +31,7 @@ namespace SR_HTYPES_NS {
         using ThreadsMap = std::unordered_map<ThreadId, Thread::Ptr>;
 
         class SR_DLL_EXPORT Factory : public Singleton<Factory> {
-            friend class Singleton<Factory>;
+            SR_REGISTER_SINGLETON(Factory)
             friend class Thread;
         protected:
             ~Factory() override = default;

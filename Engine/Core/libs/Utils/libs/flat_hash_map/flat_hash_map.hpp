@@ -876,9 +876,9 @@ namespace ska
                 rehash(std::max(size_t(4), 2 * bucket_count()));
             }
 
-            void deallocate_data(EntryPointer begin, size_t num_slots_minus_one, int8_t max_lookups)
+            void deallocate_data(EntryPointer begin, size_t num_slots_minus_one_arg, int8_t max_lookups_arg)
             {
-                AllocatorTraits::deallocate(*this, begin, num_slots_minus_one + max_lookups + 1);
+                AllocatorTraits::deallocate(*this, begin, num_slots_minus_one_arg + max_lookups_arg + 1);
             }
 
             void reset_to_empty_state()

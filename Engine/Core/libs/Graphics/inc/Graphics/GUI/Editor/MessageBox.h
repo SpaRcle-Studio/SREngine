@@ -23,7 +23,7 @@ namespace SR_GRAPH_NS::GUI {
     typedef uint32_t MessageBoxButton;
 
     class SR_DLL_EXPORT MessageBoxWidget : public Widget, public SR_UTILS_NS::Singleton<MessageBoxWidget> {
-        friend class SR_UTILS_NS::Singleton<MessageBoxWidget>;
+        SR_REGISTER_SINGLETON(MessageBoxWidget)
     private:
         MessageBoxWidget();
         ~MessageBoxWidget() override;

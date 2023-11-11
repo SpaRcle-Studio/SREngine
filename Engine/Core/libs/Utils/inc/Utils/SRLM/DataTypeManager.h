@@ -12,7 +12,7 @@ namespace SR_SRLM_NS {
     class DataTypeStruct;
 
     class DataTypeManager : public SR_UTILS_NS::Singleton<DataTypeManager> {
-        friend class SR_UTILS_NS::Singleton<DataTypeManager>;
+        SR_REGISTER_SINGLETON(DataTypeManager)
         using Hash = uint64_t;
         using Structs = std::unordered_map<Hash, DataTypeStruct*>;
     public:

@@ -123,4 +123,27 @@ namespace SR_GTYPES_NS {
 
         return -1;
     }
+
+    bool MeshComponent::InitializeEntity() noexcept {
+        m_properties.AddEnumProperty("Mesh type", &m_meshType).SetReadOnly();
+
+        auto&& materialContainer = m_properties.AddContainer("Material");
+
+        materialContainer.AddCustomProperty<SR_UTILS_NS::PathProperty>("Path")
+            .AddFileFilter("Material", "mat")
+            .SetGetter([this]()-> SR_UTILS_NS::Path {
+                return m_material ? m_material->GetResourcePath() : SR_UTILS_NS::Path();
+            })
+            .SetSetter([this](const SR_UTILS_NS::Path& path) {
+                SetMaterial(path);
+            });
+
+        materialContainer.AddCustomProperty<SR_UTILS_NS::ExternalProperty>("Material")
+            .SetPropertyGetter([this]() -> SR_UTILS_NS::Property* { return m_material ? &m_material->GetProperties() : nullptr; })
+            .SetActiveCondition([this]() -> bool { return m_material; })
+            .SetReadOnly()
+            .SetDontSave();
+
+        return Entity::InitializeEntity();
+    }
 }

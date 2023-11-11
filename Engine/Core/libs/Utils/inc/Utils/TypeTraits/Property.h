@@ -13,6 +13,9 @@
 #include <Utils/Types/Marshal.h>
 #include <Utils/Debug.h>
 
+#define SR_REGISTER_TYPE_TRAITS_PROPERTY(className)                                                                     \
+    static SR_UTILS_NS::Property* AllocateBase() { return (SR_UTILS_NS::Property*)new className(); }                    \
+
 namespace SR_UTILS_NS {
     SR_ENUM_NS_CLASS_T(PropertyPublicity, uint8_t,
         ReadOnly, Private, Public

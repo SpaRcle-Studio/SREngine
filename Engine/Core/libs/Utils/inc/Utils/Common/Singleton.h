@@ -8,9 +8,16 @@
 #include <Utils/Common/NonCopyable.h>
 #include <Utils/Common/Breakpoint.h>
 #include <Utils/Common/Stacktrace.h>
+#include <Utils/Types/StringAtom.h>
 
 #include <Utils/Types/SafePtrLockGuard.h>
 #include <Utils/Types/Map.h>
+
+#define SR_REGISTER_SINGLETON(name)                                                                                     \
+    private:                                                                                                            \
+        friend class SR_UTILS_NS::Singleton<name>;                                                                      \
+        SR_INLINE_STATIC SR_UTILS_NS::StringAtom SINGLETON_NAME = #name;                                                \
+        SR_UTILS_NS::StringAtom GetSingletonName() const noexcept final { return SINGLETON_NAME; };                     \
 
 namespace SR_UTILS_NS {
     class SingletonManager;
@@ -25,6 +32,7 @@ namespace SR_UTILS_NS {
         SingletonBase() = default;
 
     protected:
+        virtual StringAtom GetSingletonName() const noexcept = 0;
         virtual void OnSingletonDestroy() { }
         virtual void InitSingleton() { }
         virtual bool IsSingletonCanBeDestroyed() const { return true; }
@@ -36,23 +44,25 @@ namespace SR_UTILS_NS {
 
     class SR_DLL_EXPORT SingletonManager : public NonCopyable {
     public:
-        void* GetSingleton(uint64_t id) noexcept;
+        void* GetSingleton(StringAtom name) noexcept;
         void DestroyAll();
-        void Remove(uint64_t id);
+        void Remove(StringAtom name);
 
-        template<typename T> void Register(uint64_t id, const std::string& name, Singleton<T>* pSingleton) {
-            m_singletons[id].pSingleton = (void*)pSingleton;
-            m_singletons[id].pSingletonBase = dynamic_cast<SingletonBase*>(pSingleton);
-            m_singletons[id].name = name;
+        template<typename T> void Register(Singleton<T>* pSingleton) {
+            auto&& name = pSingleton->GetSingletonName();
+
+            m_singletons[name].pSingleton = (void*)pSingleton;
+            m_singletons[name].pSingletonBase = dynamic_cast<SingletonBase*>(pSingleton);
+            m_singletons[name].name = name;
         }
 
     private:
         struct SingletonInfo {
-            std::string name;
+            StringAtom name;
             void* pSingleton = nullptr;
             SingletonBase* pSingletonBase = nullptr;
         };
-        std::unordered_map<uint64_t, SingletonInfo> m_singletons;
+        ska::flat_hash_map<StringAtom, SingletonInfo> m_singletons;
 
     };
 
@@ -88,7 +98,7 @@ namespace SR_UTILS_NS {
                 }
 
                 pSingleton->OnSingletonDestroy();
-                GetSingletonManager()->Remove(typeid(Singleton<T>).hash_code());
+                GetSingletonManager()->Remove(T::SINGLETON_NAME);
                 delete pSingleton;
             }
         }
@@ -99,16 +109,12 @@ namespace SR_UTILS_NS {
 
             if (!pSingleton) {
                 pSingleton = new T();
-                GetSingletonManager()->Register<T>(GetSingletonId(), typeid(Singleton<T>).name(), pSingleton);
+                GetSingletonManager()->Register<T>(pSingleton);
                 pSingleton->InitSingleton();
                 return *static_cast<T*>(pSingleton);
             }
 
             return *static_cast<T*>(pSingleton);
-        }
-
-        SR_MAYBE_UNUSED static uint64_t GetSingletonId() {
-            return typeid(Singleton<T>).hash_code();
         }
 
         SR_MAYBE_UNUSED static void LockSingleton() noexcept {
@@ -132,7 +138,7 @@ namespace SR_UTILS_NS {
 
     private:
         static Singleton<T>* GetSingleton() noexcept {
-            void* p = GetSingletonManager()->GetSingleton(GetSingletonId());
+            void* p = GetSingletonManager()->GetSingleton(T::SINGLETON_NAME);
             return reinterpret_cast<Singleton<T>*>(p);
         }
     };

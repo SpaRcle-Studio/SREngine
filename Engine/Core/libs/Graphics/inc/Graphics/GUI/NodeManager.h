@@ -10,7 +10,7 @@
 
 namespace SR_GRAPH_NS::GUI {
     class NodeManager : public SR_UTILS_NS::Singleton<NodeManager> {
-        friend class SR_UTILS_NS::Singleton<NodeManager>;
+        SR_REGISTER_SINGLETON(NodeManager)
     public:
         ~NodeManager() override = default;
 

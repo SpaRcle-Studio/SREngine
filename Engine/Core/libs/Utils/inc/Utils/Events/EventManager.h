@@ -12,7 +12,7 @@
 
 namespace SR_UTILS_NS {
     class SR_DLL_EXPORT EventManager : public Singleton<EventManager> {
-        friend class Singleton<EventManager>;
+        SR_REGISTER_SINGLETON(EventManager)
     private:
         ~EventManager() override = default;
 

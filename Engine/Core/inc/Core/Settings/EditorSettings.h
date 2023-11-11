@@ -35,8 +35,8 @@ namespace SR_CORE_NS {
     );
 
     class EditorSettings : public SR_UTILS_NS::GlobalSettings<EditorSettings> {
+        SR_REGISTER_SINGLETON(EditorSettings)
         friend class SR_UTILS_NS::GlobalSettings<EditorSettings>;
-        friend class SR_UTILS_NS::Singleton<EditorSettings>;
         using Icons = std::map<EditorIcon, SR_UTILS_NS::Path>;
         using Super = SR_UTILS_NS::GlobalSettings<EditorSettings>;
     protected:

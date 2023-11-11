@@ -12,7 +12,7 @@ namespace SR_UTILS_NS {
     typedef std::function<Entity::Ptr(void)> EntityAllocator;
 
     class SR_DLL_EXPORT EntityManager : public Singleton<EntityManager> {
-        friend class Singleton<EntityManager>;
+        SR_REGISTER_SINGLETON(EntityManager)
     public:
         EntityManager();
         ~EntityManager() override = default;

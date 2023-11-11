@@ -16,7 +16,7 @@ namespace SR_WORLD_NS {
     class Scene;
 
     class SR_DLL_EXPORT SceneAllocator : public SR_UTILS_NS::Singleton<SceneAllocator> {
-        friend class SR_UTILS_NS::Singleton<SceneAllocator>;
+        SR_REGISTER_SINGLETON(SceneAllocator)
         typedef std::function<Scene*(void)> Allocator;
         using ScenePtr = Types::SafePtr<Scene>;
         using GameObjectPtr = SR_HTYPES_NS::SharedPtr<GameObject>;

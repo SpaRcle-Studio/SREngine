@@ -22,7 +22,7 @@ namespace SR_HTYPES_NS {
 
 namespace SR_UTILS_NS {
     class AssimpCache final : public Singleton<AssimpCache> {
-        friend class Singleton<AssimpCache>;
+        SR_REGISTER_SINGLETON(AssimpCache);
         SR_MAYBE_UNUSED SR_INLINE_STATIC const uint64_t VERSION = 1010;
         static const uint8_t SR_ASSIMP_MAX_NUMBER_OF_COLOR_SETS;
         static const uint8_t SR_ASSIMP_MAX_NUMBER_OF_TEXTURECOORDS;

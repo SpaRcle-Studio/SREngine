@@ -11,7 +11,7 @@
 
 namespace SR_UTILS_NS {
     class Migration : public Singleton<Migration> {
-        friend class Singleton<Migration>;
+        SR_REGISTER_SINGLETON(Migration)
         using Version = uint16_t;
         using Migrator = SR_HTYPES_NS::Function<bool(SR_HTYPES_NS::Marshal&)>;
         struct MigrationInfo {

@@ -17,7 +17,7 @@ namespace SR_UTILS_NS {
     };
 
     class HashManager : public SR_UTILS_NS::Singleton<HashManager> {
-        friend class SR_UTILS_NS::Singleton<HashManager>;
+        SR_REGISTER_SINGLETON(HashManager);
         using Hash = uint64_t;
     public:
         void InitSingleton() override;
@@ -42,7 +42,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD StringHashInfo* Register(std::string str, Hash hash);
 
     private:
-        ska::flat_hash_map<Hash, StringHashInfo*> m_strings;
+        ska::flat_hash_map<Hash, StringHashInfo*> m_strings; /// NOLINT
 
     };
 }

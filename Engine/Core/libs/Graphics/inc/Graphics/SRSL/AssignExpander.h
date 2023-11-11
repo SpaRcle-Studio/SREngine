@@ -10,7 +10,7 @@
 
 namespace SR_SRSL_NS {
     class SRSLAssignExpander : public SR_UTILS_NS::Singleton<SRSLAssignExpander> {
-        friend class SR_UTILS_NS::Singleton<SRSLAssignExpander>;
+        SR_REGISTER_SINGLETON(SRSLAssignExpander)
     public:
         SR_NODISCARD std::pair<std::vector<Lexem>, SRSLResult> Expand(std::vector<Lexem>&& lexems);
 

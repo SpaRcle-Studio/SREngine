@@ -9,7 +9,7 @@
 
 namespace SR_UTILS_NS {
     class SR_DLL_EXPORT Random : public Singleton<Random> {
-        friend class Singleton<Random>;
+        SR_REGISTER_SINGLETON(Random)
     private:
         Random()
             : m_generator(clock())

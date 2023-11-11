@@ -24,7 +24,7 @@ namespace SR_UTILS_NS {
      * \arg Id: maybe SR_ID_INVALID
      */
     class SR_DLL_EXPORT DebugDraw : public Singleton<DebugDraw> {
-        friend class Singleton<DebugDraw>;
+        SR_REGISTER_SINGLETON(DebugDraw)
     public:
         using RemoveCallback = SR_HTYPES_NS::Function<void(uint64_t id)>;
         using DrawLineCallback = SR_HTYPES_NS::Function<uint64_t(uint64_t id, const SR_MATH_NS::FVector3& start, const SR_MATH_NS::FVector3& end, const SR_MATH_NS::FColor& color, float_t time)>;

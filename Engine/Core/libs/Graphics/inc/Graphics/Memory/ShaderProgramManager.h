@@ -53,7 +53,7 @@ namespace SR_GRAPH_NS::Memory {
      * Класс реализует возможность рендера одного объекта в несколько кадровых буферов
     */
     class SR_DLL_EXPORT ShaderProgramManager : public SR_UTILS_NS::Singleton<ShaderProgramManager> {
-        friend class SR_UTILS_NS::Singleton<ShaderProgramManager>;
+        SR_REGISTER_SINGLETON(ShaderProgramManager)
     public:
         using PipelinePtr = SR_HTYPES_NS::SharedPtr<Pipeline>;
         using VirtualProgram = int32_t;
