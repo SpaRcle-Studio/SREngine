@@ -42,6 +42,7 @@ jobs:
           commitMessage = os.getenv('commitMessage')          
           token = os.getenv('ciToken')
           auth = Auth.Token(token)
+          g = Github(auth=auth)
           repo = g.get_repo("SpaRcle-Studio/SREngine")
           print(f"Commit message:\n{commitMessage}\n")
           words = commitMessage.split()
