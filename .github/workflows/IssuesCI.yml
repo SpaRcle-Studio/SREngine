@@ -50,8 +50,9 @@ jobs:
       #outputEnv = os.getenv('GITHUB_ENV')
       #cmd = f"echo \"issueId={int(word[10:][:-1])}\" >> \"{outputEnv}\" "
 
-      - run: |
-          source env.sh
+      - run:
+          sudo source ~/env.sh
+        shell: bash
 
       - if: inputs.linuxBuildState != 'failure' && inputs.windowsBuildState != 'failure'
         name: Closing the issue.
