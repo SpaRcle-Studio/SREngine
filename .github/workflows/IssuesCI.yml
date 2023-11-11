@@ -42,6 +42,7 @@ jobs:
           commitMessage = os.getenv('commitMessage')          
           commitSha = os.getenv('commitSha')          
           token = os.getenv('ciToken')
+          print("Trying to login to GitHub and get the repository")
           auth = Auth.Token(token)
           g = Github(auth=auth)
           repo = g.get_repo("SpaRcle-Studio/SREngine")
@@ -53,13 +54,20 @@ jobs:
               args = word[10:][:-1] 
               args = args.replace(' ', '')
               args = args.split(",")
+              print(f"Arguments are: {args}")
               for arg in args:
                 if arg.isnumeric():
+                  print(f"Append issue id: {arg}")
                   issueIds.append(int(arg))
+          print(f"Issue Ids are: {issueIds}")
           for issueId in issueIds:
+            print(f"Trying to get issue: {issueId}")
             issue = repo.get_issue(issueId)
+            print(f"Creating comment and closing issue: {issueId}")
             issue.create_comment(f"Issue is closed automatically by CI. Commit: {commitSha}")
             issue.edit(state='closed')
+            print(f"Success for issue: {issueId}")
+          printf("Script execution is finished.")
         env:
           commitMessage: ${{ inputs.commitMessage }}
           ciToken: ${{ secrets.CITOKEN }}
