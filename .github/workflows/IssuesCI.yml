@@ -52,7 +52,7 @@ jobs:
               print(f"Issue IDs: {word[10:][:-1]}")
               issueIds.append(word[10:][:-1])
           for issueId in issueIds:
-            issue = repo.get_issue(issueId)
+            issue = repo.get_issue(int(issueId))
             issue.create_comment("Issue is closed automatically by CI")
             issue.edit(state='closed')
         env:
