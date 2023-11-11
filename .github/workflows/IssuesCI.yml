@@ -28,40 +28,52 @@ jobs:
     name: Manager.
     runs-on: ubuntu-latest
     steps:
-      - name: Getting issue id.
+      - run: |
+          pip install PyGithub
+        name: Installing dependencies.
+
+      - name: Closing the issues.
         shell: python
         id: script
         working-directory: ${{github.workspace}}/CI
         run: |
           import os 
-          from pathlib import Path
-          import subprocess
-          home = str(Path.home())
-          commitMessage = os.getenv('commitMessage')
+          from github import Github
+          from github import Auth
+          commitMessage = os.getenv('commitMessage')          
+          commitMessage = os.getenv('CITOKEN')
+          auth = Auth.Token(CITOKEN)
+          repo = g.get_repo("SpaRcle-Studio/SREngine")
           print(f"Commit message:\n{commitMessage}\n")
           words = commitMessage.split()
-          f = open(f"issueIdList.txt", "a")
+          issueIds = []
           for word in words:
             if word[:10] == "#SR_CLOSE(" and word[10:][:-1].isnumeric():
               print(f"Issue IDs: {word[10:][:-1]}")
-              f.write(f"{word[10:][:-1]}\n")
-          f.close()
+              issueIds.append(word[10:][:-1])
+          for issueId in issueIds:
+            issue = repo.get_issue(issueId)
+            issue.create_comment("Issue is closed automatically by CI")
+            issue.edit(state='closed')
         env:
           commitMessage: ${{ inputs.commitMessage }}
+          CITOKEN: %{{ secrets.CITOKEN }}
+        #secrets:
+        #  CITOKEN: %{{ secrets.CITOKEN }}
       #outputEnv = os.getenv('GITHUB_ENV')
       #cmd = f"echo \"issueId={int(word[10:][:-1])}\" >> \"{outputEnv}\" "
 
-      - name: Closing the issues.
-        run:
-          input="issueIdList.txt"
-          while IFS= read -r line
-          do
-            gh issue close --comment "Issue is closed automatically by CI." "$line"
-          done < "$input"
-        shell: bash
-        working-directory: ${{github.workspace}}/CI
-        env:
-          GH_TOKEN: ${{ secrets.CITOKEN }}
+      #- name: Closing the issues.
+      #  run:
+      #    input="issueIdList.txt"
+      #    while IFS= read -r line
+      #    do
+      #      gh issue close --comment "Issue is closed automatically by CI." "$line"
+      #    done < "$input"
+      #  shell: bash
+      #  working-directory: ${{github.workspace}}/CI
+      #  env:
+      #    GH_TOKEN: ${{ secrets.CITOKEN }}
 
       #- if: inputs.linuxBuildState != 'failure' && inputs.windowsBuildState != 'failure'
       #  name: Closing the issue.
