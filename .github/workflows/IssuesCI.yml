@@ -42,7 +42,7 @@ jobs:
           for word in words:
             if word[:10] == "#SR_CLOSE(" and word[10:][:-1].isnumeric():
               print(f"Issue ID: {word[10:][:-1]}")
-              f = open(f"{home}env.sh", "a")
+              f = open(f"{home}/env.sh", "a")
               f.write(f"\"issueId={word[10:][:-1]}\" >> $GITHUB_ENV")
               f.close()
         env:
