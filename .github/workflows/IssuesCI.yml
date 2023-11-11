@@ -28,24 +28,22 @@ jobs:
     name: Manager.
     runs-on: windows-latest
     steps:
-      - name: Setting environment.
-        run: |
-          echo "commitMessage=${{github.event.head_commit.message}}" >> "$GITHUB_ENV"
-
       - name: Getting issue id.
-        uses: jannekem/run-python-script-action@v1
+        shell: python
         id: script
-        with:
-          fail-on-error: false
-          script: |
-            import os 
-            commitMessage = os.environ.get("commitMessage")
-            print(f"Commit message:\n{commitMessage}\n")
-            words = commitMessage.split()
-            for word in words:
-              if word[:10] == "#SR_CLOSE(" and word[10:][:-1].isnumeric():
-                print(f"Issue ID: {word[10:][:-1]}")
-                set_env("issueId", int(word[10:][:-1]))
+        run: |
+          import os 
+          commitMessage = os.getenv('commitMessage')
+          print(f"Commit message:\n{commitMessage}\n")
+          words = commitMessage.split()
+          for word in words:
+            if word[:10] == "#SR_CLOSE(" and word[10:][:-1].isnumeric():
+              print(f"Issue ID: {word[10:][:-1]}")
+              outputEnv = os.getenv('GITHUB_ENV')
+              cmd = f"echo \"issueId={int(word[10:][:-1])}\" >> \"{outputEnv}\" "
+              subprocess.call([str(cmd)], shell=True)
+        env:
+          commitMessage: ${{ inputs.commitMessage }}
 
       - if: inputs.linuxBuildState != 'failure' && inputs.windowsBuildState != 'failure'
         name: Closing the issue.
