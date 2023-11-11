@@ -41,8 +41,8 @@ jobs:
           from github import Github
           from github import Auth
           commitMessage = os.getenv('commitMessage')          
-          commitMessage = os.getenv('CITOKEN')
-          auth = Auth.Token(CITOKEN)
+          token = os.getenv('ciToken')
+          auth = Auth.Token(token)
           repo = g.get_repo("SpaRcle-Studio/SREngine")
           print(f"Commit message:\n{commitMessage}\n")
           words = commitMessage.split()
@@ -57,7 +57,7 @@ jobs:
             issue.edit(state='closed')
         env:
           commitMessage: ${{ inputs.commitMessage }}
-          CITOKEN: %{{ secrets.CITOKEN }}
+          ciToken: %{{ secrets.CITOKEN }}
         #secrets:
         #  CITOKEN: %{{ secrets.CITOKEN }}
       #outputEnv = os.getenv('GITHUB_ENV')
