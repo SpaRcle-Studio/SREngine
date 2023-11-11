@@ -475,31 +475,36 @@ namespace SR_CORE_NS::GUI {
         float_t coneInnerAngle = pComponent->GetConeInnerAngle();
         bool loop = pComponent->GetLoop();
 
-        if (ImGui::SliderFloat(SR_FORMAT_C("Volume##SliderVolume%i", index), &volume, 0.f, 1.f,"%.1f"))
-        {
+        if (ImGui::SliderFloat(SR_FORMAT_C("Volume##SliderVolume%i", index), &volume, 0.f, 1.f, "%.1f")) {
             pComponent->SetVolume(volume);
         }
 
-        if (ImGui::SliderFloat(SR_FORMAT_C("Pitch##SliderPitch%i", index), &pitch, 0.f, 10.f,"%.1f"))
-        {
+        if (ImGui::SliderFloat(SR_FORMAT_C("Pitch##SliderPitch%i", index), &pitch, 0.f, 10.f, "%.1f")) {
             pComponent->SetPitch(pitch);
         }
 
-        if (ImGui::SliderFloat(SR_FORMAT_C("coneInnerAngle##SliderConeInnerAngle%i", index), &coneInnerAngle, 0.f,360.f,"%.1f")){
+        if (ImGui::SliderFloat(SR_FORMAT_C("coneInnerAngle##SliderConeInnerAngle%i", index), &coneInnerAngle, 0.f,
+                               360.f, "%.1f")) {
             pComponent->SetConeInnerAngle(coneInnerAngle);
         }
 
-        if(ImGui::Checkbox(SR_FORMAT_C("Loop##CheckBoxLoop%i", index), &loop)){
+        if (ImGui::Checkbox(SR_FORMAT_C("Loop##CheckBoxLoop%i", index), &loop)) {
             pComponent->SetLoop(loop);
         }
 
-        std::string m_path = pComponent->GetPath().ToString();
+        if (auto &&pDescriptor = context->GetIconDescriptor(EditorIcon::Audio)) {
+            if (SR_GRAPH_GUI_NS::ImageButton(SR_FORMAT("##ButtonPath%i", index), pDescriptor, SR_MATH_NS::IVector2(50),
+                                             5)) {
+                auto &&resourcesFolder = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
+                auto &&path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesFolder,
+                                                                             {{"Audio", "mp3"}});
 
-        if (ImGui::InputText(SR_FORMAT_C("Path##Path%i", index), &m_path))
-        {
-           pComponent->SetPath(m_path);
+                if (path.Exists()) {
+                    pComponent->SetPath(path.RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetResPath()));
+                }
+            }
         }
-
+        SR_GRAPH_GUI_NS::DrawValue("Path", pComponent->GetPath().c_str(), index);
     }
     void ComponentDrawer::DrawComponent(SR_AUDIO_NS::AudioListener *&pComponent, EditorGUI *context, int32_t index){
 
