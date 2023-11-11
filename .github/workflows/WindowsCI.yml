@@ -84,14 +84,14 @@ jobs:
         name: Uploading a Debug build trace artifact.
         uses: actions/upload-artifact@v3
         with:
-          name: 'SREngine Debug Build Trace Artifact'
+          name: 'SREngine Debug Windows Build Trace Artifact'
           path: '${{github.workspace}}/CI/trace-debug.json'
          
       - if: inputs.buildRelease == 'true'
         name: Uploading a Release build trace artifact.
         uses: actions/upload-artifact@v3
         with:
-          name: 'SREngine Release Build Trace Artifact'
+          name: 'SREngine Release Windows Build Trace Artifact'
           path: '${{github.workspace}}/CI/trace-release.json'
 
       - if: env.debugSuccessful == 'true'
@@ -126,26 +126,26 @@ jobs:
         name: Uploading a successful Debug build artifact.
         uses: actions/upload-artifact@v3
         with:
-          name: SREngine Debug
+          name: SREngine Windows Debug
           path: '${{github.workspace}}/build-debug/Engine/SREngineDebugBuild'
 
       - if: env.releaseSuccessful == 'true'
         name: Uploading a successful Release build artifact.
         uses: actions/upload-artifact@v3
         with:
-          name: SREngine Release
+          name: SREngine Windows Release
           path: '${{github.workspace}}/build-release/Engine/SREngineReleaseBuild'
 
       - if: env.debugSuccessful == 'false' || inputs.artifactPush == 'true'
         name: Uploading a failed Debug build artifact.
         uses: actions/upload-artifact@v3
         with:
-          name: 'SREngine Failed Debug'
+          name: 'SREngine Windows Failed Debug'
           path: '${{github.workspace}}/build-debug'
 
       - if: env.releaseSuccessful == 'false' || inputs.artifactPush == 'true'
         name: Uploading a failed Release build artifact.
         uses: actions/upload-artifact@v3
         with:
-          name: 'SREngine Failed Release'
+          name: 'SREngine Windows Failed Release'
           path: '${{github.workspace}}/build-release'
