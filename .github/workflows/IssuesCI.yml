@@ -35,7 +35,6 @@ jobs:
       - name: Closing the issues.
         shell: python
         id: script
-        working-directory: ${{github.workspace}}/CI
         run: |
           import os 
           from github import Github
