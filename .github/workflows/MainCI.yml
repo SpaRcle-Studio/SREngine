@@ -129,4 +129,4 @@ jobs:
       commitSha: ${{github.sha}}
       commitBranch: ${{github.ref_name}}
       commitMessage: ${{github.event.head_commit.message}}
-      secrets: inherit
+    secrets: inherit
