@@ -420,7 +420,7 @@ namespace SR_GRAPH_NS {
         ::SwapBuffers(m_hDC);
     }
 
-    void Win32Window::PollEvents() const {
+    void Win32Window::PollEvents() {
         MSG msg = {};
 
         if (ImGui::GetCurrentContext()) {
