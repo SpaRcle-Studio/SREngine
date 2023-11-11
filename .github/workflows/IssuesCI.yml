@@ -57,7 +57,8 @@ jobs:
             issue.edit(state='closed')
         env:
           commitMessage: ${{ inputs.commitMessage }}
-          ciToken: %{{ secrets.CITOKEN }}
+          ciToken: ${{ secrets.CITOKEN }}
+
         #secrets:
         #  CITOKEN: %{{ secrets.CITOKEN }}
       #outputEnv = os.getenv('GITHUB_ENV')
