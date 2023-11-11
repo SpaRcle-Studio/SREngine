@@ -50,7 +50,7 @@ jobs:
         name: Closing the issue.
         uses: peter-evans/close-issue@v3
         with:
-          issue-number: env.issueId
+          issue-number: ${env.issueId}
           comment: Closed automatically by CI.
 
       - if: inputs.linuxBuildState == 'failure' || inputs.windowsBuildState == 'failure'
