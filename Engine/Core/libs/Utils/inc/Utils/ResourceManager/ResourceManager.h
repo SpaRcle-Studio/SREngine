@@ -17,7 +17,7 @@ namespace SR_UTILS_NS {
     class FileWatcher;
 
     class SR_DLL_EXPORT ResourceManager final : public Singleton<ResourceManager> {
-        friend class Singleton<ResourceManager>;
+        SR_REGISTER_SINGLETON(ResourceManager)
         using Hash = uint64_t;
     public:
         static const uint64_t ResourceLifeTime;

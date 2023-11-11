@@ -131,6 +131,21 @@ namespace SR_UTILS_NS {
         else if constexpr (std::is_same<T, SR_MATH_NS::FVector6>() || std::is_same<T, SR_MATH_NS::Vector6<float>>() || std::is_same<T, SR_MATH_NS::Vector6<float_t>>()) {
             return StandardType::FVector6;
         }
+        else if constexpr (std::is_same<T, SR_MATH_NS::BVector3>() || std::is_same<T, SR_MATH_NS::Vector3<bool>>()) {
+            return StandardType::BVector3;
+        }
+        else if constexpr (std::is_same<T, SR_MATH_NS::IVector2>() || std::is_same<T, SR_MATH_NS::Vector2<int>>()|| std::is_same<T, SR_MATH_NS::Vector2<int32_t>>()) {
+            return StandardType::IVector2;
+        }
+        else if constexpr (std::is_same<T, SR_MATH_NS::IVector3>() || std::is_same<T, SR_MATH_NS::Vector3<int>>()|| std::is_same<T, SR_MATH_NS::Vector3<int32_t>>()) {
+            return StandardType::IVector3;
+        }
+        else if constexpr (std::is_same<T, SR_MATH_NS::IVector4>() || std::is_same<T, SR_MATH_NS::Vector4<int>>()|| std::is_same<T, SR_MATH_NS::Vector4<int32_t>>()) {
+            return StandardType::IVector4;
+        }
+        else if constexpr (std::is_same<T, SR_MATH_NS::IVector6>() || std::is_same<T, SR_MATH_NS::Vector6<int>>()|| std::is_same<T, SR_MATH_NS::Vector6<int32_t>>()) {
+            return StandardType::IVector6;
+        }
         else if constexpr (std::is_class_v<T>) {
             return StandardType::Class;
         }

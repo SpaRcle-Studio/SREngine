@@ -13,6 +13,9 @@
 #include <Utils/Types/Marshal.h>
 #include <Utils/Debug.h>
 
+#define SR_REGISTER_TYPE_TRAITS_PROPERTY(className)                                                                     \
+    static SR_UTILS_NS::Property* AllocateBase() { return (SR_UTILS_NS::Property*)new className(); }                    \
+
 namespace SR_UTILS_NS {
     SR_ENUM_NS_CLASS_T(PropertyPublicity, uint8_t,
         ReadOnly, Private, Public
@@ -25,13 +28,14 @@ namespace SR_UTILS_NS {
         Property& SetActiveCondition(ActiveConditionFn value) { m_activeCondition = std::move(value); return *this; }
         Property& SetName(SR_UTILS_NS::StringAtom value) { m_name = value; return *this; }
         Property& SetWidth(float_t value) { m_width = value; return *this; }
-        Property& SetDrag(float_t value) { m_drag = value; return *this; }
         Property& SetReadOnly() { m_publicity = PropertyPublicity::ReadOnly; return *this; }
+        Property& SetSameLine() { m_sameLine = true; return *this; }
+        Property& SetDontSave() { m_dontSave = true; return *this; }
 
         SR_NODISCARD PropertyPublicity GetPublicity() const noexcept { return m_publicity; }
         SR_NODISCARD SR_UTILS_NS::StringAtom GetName() const noexcept { return m_name; }
         SR_NODISCARD float_t GetWidth() const noexcept { return m_width; }
-        SR_NODISCARD float_t GetDrag() const noexcept { return m_drag; }
+        SR_NODISCARD bool IsSameLine() const noexcept { return m_sameLine; }
 
         SR_NODISCARD bool IsActive() const noexcept;
 
@@ -41,8 +45,9 @@ namespace SR_UTILS_NS {
         SR_UTILS_NS::StringAtom m_description;
         SR_UTILS_NS::StringAtom m_name;
 
+        bool m_dontSave = false;
+        bool m_sameLine = false;
         float_t m_width = 70.f;
-        float_t m_drag = 1.f;
 
     };
 

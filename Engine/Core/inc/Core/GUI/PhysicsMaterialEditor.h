@@ -17,7 +17,7 @@ namespace SR_CORE_GUI_NS {
         ~PhysicsMaterialEditor() override = default;
 
     public:
-        void Edit(const SR_UTILS_NS::Path& path);
+        bool OpenFile(const SR_UTILS_NS::Path& path) override;
 
         void SetMaterialPath(const SR_UTILS_NS::Path& path) { m_materialPath = path; ReadData(); }
 

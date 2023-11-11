@@ -48,162 +48,15 @@
 
 namespace SR_CORE_NS::GUI {
     void ComponentDrawer::DrawComponent(SR_PTYPES_NS::Rigidbody3D*& pComponent, EditorGUI* context, int32_t index) {
-        auto pCopy = dynamic_cast<SR_PTYPES_NS::Rigidbody*>(pComponent);
-        DrawComponent(pCopy, context, index);
 
-        auto&& linearLock = pComponent->GetLinearLock();
-        if (SR_GRAPH_NS::GUI::DrawBVec3Control("Linear lock", linearLock, false, 70.f, ++index)) {
-            pComponent->SetLinearLock(linearLock);
-        }
-
-        auto&& angularLock = pComponent->GetAngularLock();
-        if (SR_GRAPH_NS::GUI::DrawBVec3Control("Angular lock", angularLock, false, 70.f, ++index)) {
-            pComponent->SetAngularLock(angularLock);
-        }
-
-        const bool hasMesh =
-                pComponent->GetCollisionShape()->GetType() == SR_PHYSICS_NS::ShapeType::Convex3D ||
-                pComponent->GetCollisionShape()->GetType() == SR_PHYSICS_NS::ShapeType::TriangleMesh3D;
-
-        if (hasMesh) {
-            if (auto&& pDescriptor = context->GetIconDescriptor(EditorIcon::Shapes)) {
-                if (SR_GRAPH_GUI_NS::ImageButton(SR_FORMAT("##imgMeshBtn%i", index), pDescriptor, SR_MATH_NS::IVector2(50), 5)) {
-                    auto&& resourcesFolder = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
-                    auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesFolder, { { "Mesh", "obj,pmx,fbx,blend,stl,dae" } });
-
-                    if (path.Exists()) {
-                        if (auto&& pRawMesh = SR_HTYPES_NS::RawMesh::Load(path)){
-                            pComponent->SetRawMesh(pRawMesh);
-                            pComponent->GetCollisionShape()->ReInitDebugShape();
-                        }
-                        else {
-                            SR_ERROR("ComponentDrawer::DrawComponent() : mesh is nullptr!");
-                        }
-                    }
-                }
-            }
-
-            int32_t meshId = pComponent->GetMeshId();
-            if (Graphics::GUI::InputInt("Id", meshId, 1) && meshId >= 0) {
-                pComponent->SetMeshId(meshId);
-                pComponent->GetCollisionShape()->ReInitDebugShape();
-            }
-        }
-
-        if ((void*)pComponent != (void*)pCopy) {
-            pComponent = dynamic_cast<SR_PTYPES_NS::Rigidbody3D*>(pCopy);
-        }
     }
 
     void ComponentDrawer::DrawComponent(SR_PTYPES_NS::Rigidbody*& pComponent, EditorGUI* context, int32_t index) {
-        if (!pComponent) {
-            return;
-        }
 
-        SR_GRAPH_GUI_NS::EnumCombo<SR_PHYSICS_NS::ShapeType>(SR_FORMAT("Collision shape##%p", pComponent), pComponent->GetType(), [pComponent](auto&& shape){
-            pComponent->SetType(shape);
-        });
-
-        ComponentDrawer::DrawCollisionShape(pComponent->GetCollisionShape(), context, index);
-
-        auto&& center = pComponent->GetCenter();
-        if (Graphics::GUI::DrawVec3Control("Center", center, 0.f, 70.f, 0.01f, index)) {
-            pComponent->SetCenter(center);
-        }
-
-        auto&& isTrigger = pComponent->IsTrigger();
-        if (ImGui::Checkbox(SR_FORMAT_C("Is trigger##rgbd%i", index), &isTrigger)) {
-            pComponent->SetIsTrigger(isTrigger);
-        }
-
-        ImGui::SameLine();
-
-        auto&& isStatic = pComponent->IsStatic();
-        if (ImGui::Checkbox(SR_FORMAT_C("Is static##rgbd%i", index), &isStatic)) {
-            pComponent->SetIsStatic(isStatic);
-        }
-
-        if (!pComponent->IsStatic()) {
-            auto &&mass = pComponent->GetMass();
-            if (ImGui::DragFloat(SR_FORMAT_C("Mass##rgbd%i", index), &mass, 0.01f)) {
-                pComponent->SetMass(mass);
-            }
-        }
-
-        SR_UTILS_NS::Path materialPath;
-        auto&& pMaterial = pComponent->GetPhysicsMaterial();
-
-        if (pMaterial) {
-            materialPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat(pMaterial->GetResourcePath());
-        }
-
-        if (materialPath.empty()) {
-            materialPath = "None";
-        }
-
-        if (ImGui::Button(materialPath.c_str())) {
-            if (auto&& pFileBrowser = context->GetWidget<FileBrowser>()) {
-                pFileBrowser->Open();
-
-                pFileBrowser->SetCallback([pComponent](const SR_UTILS_NS::Path& path){
-                    if (pComponent) {
-                        pComponent->SetMaterial(path);
-                    }
-                });
-            }
-        }
-
-        ImGui::SameLine();
-
-        if (ImGui::Button("Edit")) {
-            if (materialPath.IsFile()) {
-                context->GetWidget<PhysicsMaterialEditor>()->Edit(materialPath);
-            }
-        }
-
-        ImGui::SameLine();
-        ImGui::Text("Physics Material");
     }
 
     void ComponentDrawer::DrawCollisionShape(SR_PTYPES_NS::CollisionShape* pCollisionShape, EditorGUI* context, int32_t index){
-        if (!pCollisionShape){
-            return;
-        }
 
-        const float_t lineHeight = GImGui->Font->FontSize + GImGui->Style.FramePadding.y * 2.0f;
-        const ImVec2 buttonSize = { lineHeight + 30.0f, lineHeight };
-
-        if (SR_PHYSICS_UTILS_NS::IsShapeHasSize(pCollisionShape->GetType())) {
-            auto&& size = pCollisionShape->GetSize();
-
-            if (Graphics::GUI::DrawVec3Control("Size", size, 0.f, 70.f, 0.1, index)) {
-                pCollisionShape->SetSize(size);
-            }
-        }
-
-        if (SR_PHYSICS_UTILS_NS::IsShapeHasHeight(pCollisionShape->GetType())) {
-            auto&& height = pCollisionShape->GetHeight();
-            if (Graphics::GUI::DrawValueControl<SR_MATH_NS::Unit>(
-                        "Height", height, 0.f, buttonSize,
-                        ImVec4{ 0.2f, 0.7f, 0.2f, 1.0f },
-                        ImVec4{ 0.3f, 0.8f, 0.3f, 1.0f },
-                        ImVec4{ 0.2f, 0.7f, 0.2f, 1.0f }, nullptr, 0.1f
-            )){
-                pCollisionShape->SetHeight(height);
-            }
-        }
-
-        if (SR_PHYSICS_UTILS_NS::IsShapeHasRadius(pCollisionShape->GetType())) {
-            auto&& radius = pCollisionShape->GetRadius();
-            if (Graphics::GUI::DrawValueControl<SR_MATH_NS::Unit>(
-                        "Radius", radius, 0.f, buttonSize,
-                        ImVec4{ 0.2f, 0.7f, 0.2f, 1.0f },
-                        ImVec4{ 0.3f, 0.8f, 0.3f, 1.0f },
-                        ImVec4{ 0.2f, 0.7f, 0.2f, 1.0f }, nullptr, 0.1f
-            )){
-                pCollisionShape->SetRadius(radius);
-            }
-        }
     }
 
     void ComponentDrawer::DrawComponent(Scripting::Behaviour *&pBehaviour, EditorGUI* context, int32_t index) {
@@ -475,38 +328,38 @@ namespace SR_CORE_NS::GUI {
         float_t coneInnerAngle = pComponent->GetConeInnerAngle();
         bool loop = pComponent->GetLoop();
 
-        if (ImGui::SliderFloat(SR_FORMAT_C("Volume##SliderVolume%i", index), &volume, 0.f, 1.f,"%.1f"))
-        {
+        if (ImGui::SliderFloat(SR_FORMAT_C("Volume##SliderVolume%i", index), &volume, 0.f, 1.f, "%.1f")) {
             pComponent->SetVolume(volume);
         }
 
-        if (ImGui::SliderFloat(SR_FORMAT_C("Pitch##SliderPitch%i", index), &pitch, 0.f, 10.f,"%.1f"))
-        {
+        if (ImGui::SliderFloat(SR_FORMAT_C("Pitch##SliderPitch%i", index), &pitch, 0.f, 10.f, "%.1f")) {
             pComponent->SetPitch(pitch);
         }
 
-        if (ImGui::SliderFloat(SR_FORMAT_C("coneInnerAngle##SliderConeInnerAngle%i", index), &coneInnerAngle, 0.f,360.f,"%.1f")){
+        if (ImGui::SliderFloat(SR_FORMAT_C("coneInnerAngle##SliderConeInnerAngle%i", index), &coneInnerAngle, 0.f,360.f, "%.1f")) {
             pComponent->SetConeInnerAngle(coneInnerAngle);
         }
 
-        if(ImGui::Checkbox(SR_FORMAT_C("Loop##CheckBoxLoop%i", index), &loop)){
+        if (ImGui::Checkbox(SR_FORMAT_C("Loop##CheckBoxLoop%i", index), &loop)) {
             pComponent->SetLoop(loop);
         }
 
-        std::string m_path = pComponent->GetPath().ToString();
+        if (auto&& pDescriptor = context->GetIconDescriptor(EditorIcon::Audio)) {
+            if (SR_GRAPH_GUI_NS::ImageButton(SR_FORMAT("##ButtonPath%i", index), pDescriptor, SR_MATH_NS::IVector2(50),5)) {
+                auto&& resourcesFolder = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
+                auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesFolder,{{"Audio", "mp3"}});
 
-        if (ImGui::InputText(SR_FORMAT_C("Path##Path%i", index), &m_path))
-        {
-           pComponent->SetPath(m_path);
+                if (path.Exists()) {
+                    pComponent->SetPath(path.RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetResPath()));
+                }
+            }
         }
-
+        SR_GRAPH_GUI_NS::DrawValue("Path", pComponent->GetPath().c_str(), index);
     }
+
     void ComponentDrawer::DrawComponent(SR_AUDIO_NS::AudioListener *&pComponent, EditorGUI *context, int32_t index){
 
     }
-
-
-
 
     void ComponentDrawer::DrawComponent(SR_GRAPH_NS::UI::Canvas *&canvas, EditorGUI *context, int32_t index) {
 

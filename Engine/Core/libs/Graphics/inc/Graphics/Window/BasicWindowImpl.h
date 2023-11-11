@@ -54,13 +54,14 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD virtual bool IsMaximized() const { return m_maximize; };
         SR_NODISCARD virtual bool IsHeaderEnabled() const { return m_headerEnabled; };
         SR_NODISCARD virtual bool IsFocused() const { return m_isFocused; };
+        SR_NODISCARD bool IsClosed() const { return m_isClosed; };
         SR_NODISCARD virtual SR_MATH_NS::IVector2 GetPosition() const { return SR_MATH_NS::IVector2(); }
         SR_NODISCARD virtual SR_MATH_NS::IVector2 GetScreenResolution() const { return SR_MATH_NS::IVector2(); }
         SR_NODISCARD virtual SR_MATH_NS::IVector2 ClientToScreen(const SR_MATH_NS::IVector2& pos) const { return SR_MATH_NS::IVector2(); }
         SR_NODISCARD virtual SR_MATH_NS::IVector2 ScreenToClient(const SR_MATH_NS::IVector2& pos) const { return SR_MATH_NS::IVector2(); }
         SR_NODISCARD virtual bool IsVisible() const { return true; }
 
-        virtual void Close() { }
+        virtual void Close() { m_isClosed = true;  m_isValid = false; }
 
         virtual void Resize(uint32_t width, uint32_t height) { }
         virtual void Move(int32_t x, int32_t y) { }
@@ -69,7 +70,7 @@ namespace SR_GRAPH_NS {
         virtual void Expand() { }
         virtual void Maximize() { }
         virtual void Restore() { }
-        virtual void PollEvents() const { };
+        virtual void PollEvents() { };
         virtual void SwapBuffers() const { };
         virtual void SetIcon(const std::string& path) { }
         virtual void SetHeaderEnabled(bool enable) { }
@@ -94,6 +95,7 @@ namespace SR_GRAPH_NS {
         bool m_isFocused = false;
         bool m_maximize = false;
         bool m_isValid = false;
+        bool m_isClosed = false;
 
         ResizeCallback m_resizeCallback;
         MoveCallback m_moveCallback;

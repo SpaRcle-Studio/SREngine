@@ -420,7 +420,7 @@ namespace SR_GRAPH_NS {
         ::SwapBuffers(m_hDC);
     }
 
-    void Win32Window::PollEvents() const {
+    void Win32Window::PollEvents() {
         MSG msg = {};
 
         if (ImGui::GetCurrentContext()) {
@@ -455,9 +455,10 @@ namespace SR_GRAPH_NS {
         if (m_hWnd && IsValid()) {
             DestroyWindow(m_hWnd);
             ::UnregisterClass(nullptr, (HINSTANCE)SR_PLATFORM_NS::GetInstance());
-            m_isValid = false;
             m_hWnd = nullptr;
         }
+
+        BasicWindowImpl::Close();
     }
 
     SR_MATH_NS::IVector2 Win32Window::ScreenToClient(const SR_MATH_NS::IVector2& pos) const {

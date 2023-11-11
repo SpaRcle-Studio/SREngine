@@ -20,8 +20,8 @@ namespace SR_GRAPH_NS::Types {
 
 namespace SR_GRAPH_NS::Memory {
     class CameraManager : public SR_UTILS_NS::Singleton<CameraManager> {
-        friend class Types::Camera;
-        friend class SR_UTILS_NS::Singleton<CameraManager>;
+        SR_REGISTER_SINGLETON(CameraManager)
+        friend class SR_GTYPES_NS::Camera;
         using CameraPtr = Types::Camera*;
         using RenderScenePtr = SR_HTYPES_NS::SafePtr<RenderScene>;
         using PipelinePtr = SR_HTYPES_NS::SharedPtr<Pipeline>;

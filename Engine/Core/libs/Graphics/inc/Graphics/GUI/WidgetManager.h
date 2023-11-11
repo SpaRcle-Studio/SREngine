@@ -84,12 +84,13 @@ namespace SR_GRAPH_NS::GUI {
     };
 
     class GlobalWidgetManager : public WidgetManager, public SR_UTILS_NS::Singleton<GlobalWidgetManager> {
-        friend class SR_UTILS_NS::Singleton<GlobalWidgetManager>;
+        SR_REGISTER_SINGLETON(GlobalWidgetManager)
     public:
         ~GlobalWidgetManager() override = default;
     };
 
     class ViewportsTableManager : public SR_UTILS_NS::Singleton<ViewportsTableManager> {
+        SR_REGISTER_SINGLETON(ViewportsTableManager)
     public:
         SR_NODISCARD ViewportsTable& GetViewportsTable() { return m_viewports; }
         SR_NODISCARD Widget* GetWidgetByViewport(ImGuiViewport* viewport) const;

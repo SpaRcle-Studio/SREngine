@@ -36,5 +36,6 @@
         <Pair First="PauseActive" Second="Editor/Textures/pause.png"/>
         <Pair First="Back" Second="Editor/Textures/back.png"/>
         <Pair First="Font" Second="Editor/Textures/font.png"/>
+        <Pair First="Audio" Second="Editor/Textures/audio.png"/>
     </Icons>
 </Settings>

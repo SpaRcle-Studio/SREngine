@@ -11,9 +11,9 @@
 
 namespace SR_UTILS_NS {
     class SR_DLL_EXPORT Input : public Singleton<Input> {
-        friend class Singleton<Input>;
+        SR_REGISTER_SINGLETON(Input)
 
-        enum class State{
+        enum class State {
             UnPressed, Down, Pressed, Up
         };
 

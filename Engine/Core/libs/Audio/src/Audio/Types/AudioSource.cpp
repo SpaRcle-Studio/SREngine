@@ -77,7 +77,7 @@ namespace SR_AUDIO_NS {
     }
 
     void AudioSource::SetPath(const SR_UTILS_NS::Path& path) {
-        m_path = path;
+        m_path = path.RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetResPath());
     }
 
     void AudioSource::UpdateParams() {

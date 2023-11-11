@@ -9,7 +9,7 @@
 
 namespace SR_SRSL_NS {
     class SRSLPseudoCodeGenerator : public ISRSLCodeGenerator, public SR_UTILS_NS::Singleton<SRSLPseudoCodeGenerator> {
-        friend class SR_UTILS_NS::Singleton<SRSLPseudoCodeGenerator>;
+        SR_REGISTER_SINGLETON(SRSLPseudoCodeGenerator)
     protected:
         SRSLPseudoCodeGenerator() = default;
         ~SRSLPseudoCodeGenerator() override = default;

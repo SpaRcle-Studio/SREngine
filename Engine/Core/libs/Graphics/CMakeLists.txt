@@ -63,6 +63,9 @@ if (UNIX AND NOT APPLE)
 
     target_include_directories(Graphics PUBLIC ${X11_X11_xcb_INCLUDE_PATH})
     target_link_libraries(Graphics ${X11_X11_xcb_LIB})
+
+    target_include_directories(Graphics PUBLIC ${X11_xcb_ewmh_INCLUDE_PATH})
+    target_link_libraries(Graphics ${X11_xcb_ewmh_LIB} xcb-ewmh)
 endif()
 
 target_link_libraries(Graphics CMP_Core freetype)

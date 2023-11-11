@@ -15,8 +15,8 @@ namespace SR_UTILS_NS {
 
     class IEnumStructBase { };
 
-    class EnumReflectorManager : public SR_UTILS_NS::Singleton<EnumReflectorManager> {
-        friend class SR_UTILS_NS::Singleton<EnumReflectorManager>;
+    class SR_DLL_EXPORT EnumReflectorManager : public SR_UTILS_NS::Singleton<EnumReflectorManager> {
+        SR_REGISTER_SINGLETON(EnumReflectorManager);
         using Reflectors = ska::flat_hash_map<uint64_t, EnumReflector*>;
     public:
         SR_NODISCARD bool IsSingletonCanBeDestroyed() const override {

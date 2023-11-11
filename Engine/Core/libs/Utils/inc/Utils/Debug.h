@@ -16,6 +16,7 @@ namespace SR_UTILS_NS {
     );
 
     class SR_DLL_EXPORT Debug : public Singleton<Debug> {
+        SR_REGISTER_SINGLETON(Debug);
     public:
         enum class Level {
             None = 0, Low = 1, Medium = 2, High = 3, Full = 4

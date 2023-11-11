@@ -23,17 +23,22 @@
 
 namespace SR_HTYPES_NS {
     class DataStorage;
+    class Thread;
 
     class SR_DLL_EXPORT Thread : public NonCopyable {
+        friend class Factory;
     public:
         using Ptr = Thread*;
         using ThreadId = std::string;
         using ThreadsMap = std::unordered_map<ThreadId, Thread::Ptr>;
 
         class SR_DLL_EXPORT Factory : public Singleton<Factory> {
-            friend class Singleton<Factory>;
+            SR_REGISTER_SINGLETON(Factory)
             friend class Thread;
         protected:
+            Factory()
+                : Singleton<Factory>()
+            { }
             ~Factory() override = default;
 
         public:
@@ -92,7 +97,7 @@ namespace SR_HTYPES_NS {
                     m_id = SR_UTILS_NS::GetThreadId(m_thread);
                 }
                 Factory::Instance().m_threads.insert(std::make_pair(m_id, this));
-                SR_LOG("Thread::Run() : run thread " + m_id);
+                SR_LOG("Thread::Run() : run thread \"" + m_id + "\"");
                 while (!m_isRan) {
                     SR_NOOP;
                 }

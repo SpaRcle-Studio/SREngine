@@ -13,6 +13,9 @@ namespace SR_GTYPES_NS {
         using RenderScenePtr = SR_HTYPES_NS::SafePtr<RenderScene>;
         using Super = SR_UTILS_NS::Component;
 
+    protected:
+        IRenderComponent() = default;
+
     public:
         void OnEnable() override;
         void OnDisable() override;

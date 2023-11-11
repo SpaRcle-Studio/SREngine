@@ -10,7 +10,7 @@
 
 namespace SR_SRSL_NS {
     class SRSLPreProcessor : public SR_UTILS_NS::Singleton<SRSLPreProcessor> {
-        friend class SR_UTILS_NS::Singleton<SRSLPreProcessor>;
+        SR_REGISTER_SINGLETON(SRSLPreProcessor)
         enum class PPState : uint8_t {
             Idle, Macro, MacroName, IncludeOpen, IncludePath
         };

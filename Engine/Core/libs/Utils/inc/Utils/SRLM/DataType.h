@@ -25,7 +25,7 @@ namespace SR_SRLM_NS {
     class DataType;
 
     class DataTypeAllocator : public SR_UTILS_NS::Singleton<DataTypeAllocator> {
-        friend class SR_UTILS_NS::Singleton<DataTypeAllocator>;
+        SR_REGISTER_SINGLETON(DataTypeAllocator)
         using Hash = uint64_t;
         using Allocator = SR_HTYPES_NS::Function<DataType*()>;
         static constexpr uint32_t EnumMax = static_cast<int>(DataTypeClass::DataTypeClassMAX);

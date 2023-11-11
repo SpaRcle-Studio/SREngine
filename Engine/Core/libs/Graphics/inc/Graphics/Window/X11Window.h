@@ -24,9 +24,9 @@ namespace SR_GRAPH_NS {
 
         SR_NODISCARD WindowType GetType() const override { return BasicWindowImpl::WindowType::X11; }
     public:
-        //void PollEvents() const override;
+        void PollEvents() override;
 
-        //void Close() override;
+        void Close() override;
         //void Maximize() override;
         //void Restore() override;
         //void Collapse() override;

@@ -12,6 +12,7 @@ namespace SR_UTILS_NS {
     typedef uint64_t Tag;
 
     class TagManager : public GlobalSettings<TagManager> {
+        SR_REGISTER_SINGLETON(TagManager)
         friend class GlobalSettings<TagManager>;
         using Hash = uint64_t;
     public:

@@ -10,7 +10,7 @@
 
 namespace SR_HTYPES_NS {
     class SR_DLL_EXPORT Time : public Singleton<Time> {
-        friend class Singleton<Time>;
+        SR_REGISTER_SINGLETON(Time)
     public:
         using ClockT = std::chrono::high_resolution_clock;
 

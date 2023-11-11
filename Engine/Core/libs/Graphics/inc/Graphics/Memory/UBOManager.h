@@ -65,7 +65,7 @@ namespace SR_GRAPH_NS::Memory {
      * Класс реализует возможность рендера в несколько камер с нескольких ракурсов
     */
     class SR_DLL_EXPORT UBOManager : public SR_UTILS_NS::Singleton<UBOManager> {
-        friend class SR_UTILS_NS::Singleton<UBOManager>;
+        SR_REGISTER_SINGLETON(UBOManager)
         using Super = SR_UTILS_NS::Singleton<UBOManager>;
         using VirtualUBO = int32_t;
         using Descriptor = int32_t;

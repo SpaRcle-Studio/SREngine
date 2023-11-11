@@ -23,7 +23,7 @@ namespace SR_UTILS_NS {
     );
 
     class TracyContextManager : public SR_UTILS_NS::Singleton<TracyContextManager> {
-        friend class SR_UTILS_NS::Singleton<TracyContextManager>;
+        SR_REGISTER_SINGLETON(TracyContextManager)
         using TracyContextPtr = void*;
         using IdentifierPtr = void*;
         using ContextMap = std::map<IdentifierPtr, TracyContextPtr>;

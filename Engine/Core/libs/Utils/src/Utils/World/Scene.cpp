@@ -249,6 +249,17 @@ namespace SR_WORLD_NS {
         const uint64_t idInScene = gameObject->GetIdInScene();
 
         if (idInScene >= m_gameObjects.size()) {
+            for (auto pIt = m_newQueue.begin(); pIt != m_newQueue.end(); ++pIt) {
+                if (*pIt == gameObject) {
+                    m_newQueue.erase(pIt);
+
+                    SetDirty(true);
+                    OnChanged();
+
+                    return true;
+                }
+            }
+
             SRHalt("Scene::Remove() : invalid game object id!");
             return false;
         }
@@ -352,11 +363,15 @@ namespace SR_WORLD_NS {
         }
 
         if (m_isPreDestroyed) {
-            for (auto&& gameObject : m_newQueue) {
-                if (!gameObject) {
-                    continue;
+            while (!m_newQueue.empty()) {
+                auto&& pGameObject = m_newQueue.front();
+
+                if (pGameObject) {
+                    pGameObject->Destroy();
                 }
-                gameObject->Destroy();
+                else {
+                    m_newQueue.pop_front();
+                }
             }
         } 
         else {

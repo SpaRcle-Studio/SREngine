@@ -29,7 +29,7 @@ namespace SR_AUDIO_NS {
     };
 
     class SoundManager : public SR_UTILS_NS::Singleton<SoundManager> {
-        friend class SR_UTILS_NS::Singleton<SoundManager>;
+        SR_REGISTER_SINGLETON(SoundManager)
     public:
         enum class State : uint8_t {
             Stopped, Active, Paused

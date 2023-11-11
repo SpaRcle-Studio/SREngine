@@ -11,7 +11,7 @@
 
 namespace SR_SRSL_NS {
     class SRSLTypeInfo : public SR_UTILS_NS::Singleton<SRSLTypeInfo> {
-        friend class SR_UTILS_NS::Singleton<SRSLTypeInfo>;
+        SR_REGISTER_SINGLETON(SRSLTypeInfo)
     public:
         SR_NODISCARD std::vector<uint64_t> GetDimension(const std::string& code, const SRSLAnalyzedTree::Ptr& pAnalyzedTree);
         SR_NODISCARD std::vector<uint64_t> GetDimension(const SRSLExpr* pExpr, const SRSLAnalyzedTree::Ptr& pAnalyzedTree);

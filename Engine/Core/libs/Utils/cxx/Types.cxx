@@ -14,3 +14,4 @@
 #include "../../Utils/src/Utils/Types/IRawMeshHolder.cpp"
 #include "../../Utils/src/Utils/Types/Mutex.cpp"
 #include "../../Utils/src/Utils/Types/LockGuard.cpp"
+#include "../../Utils/src/Utils/Types/StringAtom.cpp"

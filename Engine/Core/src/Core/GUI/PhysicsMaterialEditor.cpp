@@ -65,16 +65,8 @@ namespace SR_CORE_GUI_NS {
         }
 
         if (ImGui::Button("Save")) {
-            SR_PTYPES_NS::PhysicsMaterial::Save(m_materialPath, m_materialData);
+            SR_PTYPES_NS::PhysicsMaterial::Save(SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat(m_materialPath), m_materialData);
         }
-    }
-
-    void PhysicsMaterialEditor::Edit(const SR_UTILS_NS::Path& path) {
-        m_materialPath = path;
-
-        ReadData();
-
-        Super::Open();
     }
 
     void PhysicsMaterialEditor::ChooseMaterial() {
@@ -88,7 +80,8 @@ namespace SR_CORE_GUI_NS {
     }
 
     void PhysicsMaterialEditor::ReadData() {
-        auto&& document = SR_XML_NS::Document::Load(m_materialPath);
+        auto&& path = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat(m_materialPath);
+        auto&& document = SR_XML_NS::Document::Load(path);
         if (!document.Valid()) {
             SR_ERROR("PhysicsMaterialEditor::Draw() : file is not found! \n\tPath: " + m_materialPath.ToString());
             return;
@@ -105,5 +98,12 @@ namespace SR_CORE_GUI_NS {
         SetBounciness(matXml.TryGetNode("Bounciness").TryGetAttribute<float_t>(0.6f));
         SetFrictionCombine(SR_UTILS_NS::EnumReflector::FromString<SR_PHYSICS_NS::Combine>(matXml.TryGetNode("FrictionCombine").TryGetAttribute<std::string>("Average")));
         SetBounceCombine(SR_UTILS_NS::EnumReflector::FromString<SR_PHYSICS_NS::Combine>(matXml.TryGetNode("BounceCombine").TryGetAttribute<std::string>("Average")));
+    }
+
+    bool PhysicsMaterialEditor::OpenFile(const SR_UTILS_NS::Path& path) {
+        m_materialPath = path;
+        ReadData();
+        Super::Open();
+        return true;
     }
 }

@@ -19,7 +19,7 @@ namespace SR_PHYSICS_NS {
     class LibraryImpl;
 
     class PhysicsLibrary : public SR_UTILS_NS::Singleton<PhysicsLibrary> {
-        friend class SR_UTILS_NS::Singleton<PhysicsLibrary>;
+        SR_REGISTER_SINGLETON(PhysicsLibrary)
         using Super = SR_UTILS_NS::Singleton<PhysicsLibrary>;
         using Space = SR_UTILS_NS::Measurement;
         using LibraryTypes = std::vector<LibraryType>;

@@ -68,6 +68,8 @@ namespace SR_GRAPH_GUI_NS {
 
         virtual void Init() { }
 
+        virtual bool OpenFile(const SR_UTILS_NS::Path& path) { return false; }
+
         virtual void Open();
         virtual void Close();
 

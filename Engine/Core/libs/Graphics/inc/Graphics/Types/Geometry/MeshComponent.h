@@ -14,7 +14,8 @@ namespace SR_GTYPES_NS {
         explicit MeshComponent(MeshType type);
 
     public:
-        Component* CopyComponent() const override;
+        SR_NODISCARD Component* CopyComponent() const override;
+        SR_NODISCARD bool InitializeEntity() noexcept override;
 
         SR_MATH_NS::FVector3 GetBarycenter() const override;
 

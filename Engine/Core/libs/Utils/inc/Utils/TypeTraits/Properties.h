@@ -27,7 +27,8 @@ namespace SR_UTILS_NS {
         PropertyContainer& AddContainer(const char* name);
         template<typename T> T& AddCustomProperty(const char* name);
         template<typename T> StandardProperty& AddStandardProperty(const char* name, T* pRawProperty);
-        template<typename T> StandardProperty& AddEnumProperty(const char* name, T* pRawProperty);
+        template<typename T> EnumProperty& AddEnumProperty(const char* name, T* pRawProperty);
+        template<typename T> EnumProperty& AddEnumProperty(const char* name);
 
         template<typename T> PropertyContainer& ForEachProperty(const SR_HTYPES_NS::Function<void(T*)>& function);
         template<typename T> const PropertyContainer& ForEachProperty(const SR_HTYPES_NS::Function<void(T*)>& function) const;
@@ -129,26 +130,40 @@ namespace SR_UTILS_NS {
         return *pProperty;
     }
 
-    template<typename T> StandardProperty& PropertyContainer::AddEnumProperty(const char* name, T* pRawProperty) {
+    template<typename T> EnumProperty& PropertyContainer::AddEnumProperty(const char* name, T* pRawProperty) {
         if (auto&& pProperty = Find(name)) {
             SRHalt("Properties::AddEnumProperty() : property \"" + std::string(name) + "\" already exists!");
-            return *dynamic_cast<StandardProperty*>(pProperty);
+            return *dynamic_cast<EnumProperty*>(pProperty);
         }
 
-        auto&& pProperty = new StandardProperty();
+        auto&& pProperty = new EnumProperty();
 
         pProperty->SetName(name);
-        pProperty->SetType(StandardType::Enum);
         pProperty->SetEnumReflector(SR_UTILS_NS::EnumReflector::GetReflector<T>());
 
-        pProperty->SetGetter([pRawProperty](void* pData) {
-            *reinterpret_cast<SR_UTILS_NS::StringAtom*>(pData) = SR_UTILS_NS::EnumReflector::ToString<T>(*pRawProperty);
+        pProperty->SetGetter([pRawProperty]() -> SR_UTILS_NS::StringAtom {
+            return SR_UTILS_NS::EnumReflector::ToString<T>(*pRawProperty);
         });
 
-        pProperty->SetSetter([pRawProperty](void* pData) {
-            auto&& value = *reinterpret_cast<SR_UTILS_NS::StringAtom*>(pData);
+        pProperty->SetSetter([pRawProperty](const SR_UTILS_NS::StringAtom& value) {
             *pRawProperty = SR_UTILS_NS::EnumReflector::FromString<T>(value);
         });
+
+        m_properties.emplace_back(pProperty);
+
+        return *pProperty;
+    }
+
+    template<typename T> EnumProperty& PropertyContainer::AddEnumProperty(const char* name) {
+        if (auto&& pProperty = Find(name)) {
+            SRHalt("Properties::AddEnumProperty() : property \"" + std::string(name) + "\" already exists!");
+            return *dynamic_cast<EnumProperty*>(pProperty);
+        }
+
+        auto&& pProperty = new EnumProperty();
+
+        pProperty->SetName(name);
+        pProperty->SetEnumReflector(SR_UTILS_NS::EnumReflector::GetReflector<T>());
 
         m_properties.emplace_back(pProperty);
 

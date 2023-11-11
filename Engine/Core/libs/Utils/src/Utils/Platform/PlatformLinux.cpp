@@ -193,7 +193,10 @@ namespace SR_UTILS_NS::Platform {
     }
 
     bool IsAbsolutePath(const Path &path) {
-        SRHaltOnce("Not implemented!");
+        if (!path.empty() && path[0] == '/') {
+            return true;
+        }
+
         return false;
     }
 

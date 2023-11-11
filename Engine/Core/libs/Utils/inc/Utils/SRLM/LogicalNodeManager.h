@@ -15,7 +15,7 @@ namespace SR_SRLM_NS {
     class LogicalNode;
 
     class LogicalNodeManager : public SR_UTILS_NS::Singleton<LogicalNodeManager> {
-        friend class SR_UTILS_NS::Singleton<LogicalNodeManager>;
+        SR_REGISTER_SINGLETON(LogicalNodeManager)
         using Hash = uint64_t;
         using Constructor = SR_HTYPES_NS::Function<LogicalNode*()>;
         using Category = std::vector<std::string>;

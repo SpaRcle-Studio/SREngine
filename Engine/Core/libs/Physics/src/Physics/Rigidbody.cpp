@@ -56,6 +56,53 @@ namespace SR_PTYPES_NS {
 
         m_impl->SetRigidbody(this);
 
+        m_properties.AddStandardProperty("Center", &m_center)
+            .SetSetter([this](void* pValue){
+                SetCenter(*reinterpret_cast<SR_MATH_NS::FVector3*>(pValue));
+            })
+            .SetDrag(0.1f);
+
+        m_properties.AddStandardProperty("Is trigger", &m_isTrigger)
+            .SetSetter([this](void* pValue){
+                SetIsTrigger(*reinterpret_cast<bool*>(pValue));
+            });
+
+        m_properties.AddStandardProperty("Is static", &m_isStatic)
+            .SetSetter([this](void* pValue){
+                SetIsStatic(*reinterpret_cast<bool*>(pValue));
+            })
+            .SetSameLine();
+
+        m_properties.AddCustomProperty<SR_UTILS_NS::PathProperty>("Physics material")
+            .SetGetter([this]() { return m_material ? m_material->GetResourcePath() : SR_UTILS_NS::Path(); })
+            .SetSetter([this](const SR_UTILS_NS::Path& path) {
+                SetMaterial(path);
+            })
+            .AddFileFilter("Physics material", "physmat")
+            .SetWidgetEditor("Physics Material Editor");
+
+        m_properties.AddStandardProperty("Mass", &m_mass)
+            .SetDrag(0.01f)
+            .SetResetValue(1.f)
+            .SetSetter([this](void* pValue){
+                SetMass(*reinterpret_cast<float_t*>(pValue));
+            })
+            .SetActiveCondition([this]() -> bool { return !IsStatic(); });
+
+        m_properties.AddEnumProperty<ShapeType>("Collision shape type")
+            .SetGetter([this]() -> SR_UTILS_NS::StringAtom {
+               return SR_UTILS_NS::EnumReflector::ToString(GetType());
+            })
+            .SetSetter([this](const SR_UTILS_NS::StringAtom& value) {
+                SetType(SR_UTILS_NS::EnumReflector::FromString<ShapeType>(value));
+            })
+            .SetFilter([this](const SR_UTILS_NS::StringAtom& value) -> bool {
+                return IsShapeSupported(SR_UTILS_NS::EnumReflector::FromString<ShapeType>(value));
+            });
+
+        m_properties.AddCustomProperty<SR_UTILS_NS::ExternalProperty>("Collision shape")
+            .SetPropertyGetter([this]() -> SR_UTILS_NS::Property* { return m_shape->GetProperties(); });
+
         return Entity::InitializeEntity();
     }
 
@@ -157,7 +204,7 @@ namespace SR_PTYPES_NS {
         }
 
         if (m_rawMesh) {
-            pMarshal->Write<std::string>(m_rawMesh->GetResourceId());
+            pMarshal->Write<std::string>(m_rawMesh->GetResourcePath().ToStringRef());
         }
         else {
             pMarshal->Write<std::string>("");
@@ -398,6 +445,12 @@ namespace SR_PTYPES_NS {
         }
 
         SetShapeDirty(true);
+
+        m_meshId = 0;
+
+        if (m_shape) {
+            m_shape->ReInitDebugShape();
+        }
     }
 
     bool Rigidbody::IsDebugEnabled() const noexcept {
@@ -445,5 +498,38 @@ namespace SR_PTYPES_NS {
         if (m_impl) {
             m_impl->Synchronize();
         }
+    }
+
+    bool Rigidbody::IsShapeSupported(ShapeType type) const {
+        if (!m_library || !m_library->IsShapeSupported(type)) {
+            return false;
+        }
+
+        if (SR_PHYSICS_NS::Utils::Is2DShape(type) && GetMeasurement() == SR_UTILS_NS::Measurement::Space2D) {
+            return true;
+        }
+
+        if (SR_PHYSICS_NS::Utils::Is3DShape(type) && GetMeasurement() == SR_UTILS_NS::Measurement::Space3D) {
+            return true;
+        }
+
+        return false;
+    }
+
+    void Rigidbody::SetMeshId(uint32_t id) {
+        m_meshId = id;
+        SetShapeDirty(true);
+        if (m_shape) {
+            m_shape->ReInitDebugShape();
+        }
+    }
+
+    void Rigidbody::SetRawMesh(const SR_UTILS_NS::Path& path) {
+        auto&& pRawMesh = SR_HTYPES_NS::RawMesh::Load(path);
+        if (!pRawMesh) {
+            return;
+        }
+
+        SetRawMesh(pRawMesh);
     }
 }

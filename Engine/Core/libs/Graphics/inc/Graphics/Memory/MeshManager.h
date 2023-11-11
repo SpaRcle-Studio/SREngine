@@ -48,7 +48,7 @@ namespace SR_GRAPH_NS {
         };
 
         class MeshManager : public SR_UTILS_NS::Singleton<MeshManager> {
-            friend class SR_UTILS_NS::Singleton<MeshManager>;
+            SR_REGISTER_SINGLETON(MeshManager)
             using Hash = uint64_t;
             using HashTable = std::vector<uint64_t>;
         public:

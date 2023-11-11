@@ -18,10 +18,12 @@ namespace SR_PTYPES_NS {
     }
 
     void PhysXRigidbody3DImpl::UpdateInertia() {
-        if (m_rigidActor) {
-            if (auto&& pRigidBody = m_rigidActor->is<physx::PxRigidBody>()) {
-                physx::PxRigidBodyExt::updateMassAndInertia(*pRigidBody, m_rigidbody->GetMass());
-            }
+        if (!m_rigidActor) {
+            return;
+        }
+
+        if (auto&& pRigidBody = m_rigidActor->is<physx::PxRigidBody>()) {
+            physx::PxRigidBodyExt::updateMassAndInertia(*pRigidBody, m_rigidbody->GetMass());
         }
     }
 
@@ -37,6 +39,9 @@ namespace SR_PTYPES_NS {
             return false;
         }
 
+        m_rigidbodyTranslation = m_rigidbody->GetTranslation();
+        m_rigidbodyRotation = m_rigidbody->GetRotation();
+
         if (m_rigidActor) {
             m_rigidActor->release();
             m_rigidActor = nullptr;
@@ -49,12 +54,12 @@ namespace SR_PTYPES_NS {
             m_rigidActor = pPhysics->createRigidDynamic(physx::PxTransform(physx::PxVec3(0.f, 0.f, 0.f)));
         }
 
-        UpdateLocks();
-
         if (!m_rigidActor) {
             SR_ERROR("PhysXRigidbody3D::InitBody() : failed to create rigid body!");
             return false;
         }
+
+        UpdateLocks();
 
         m_rigidActor->userData = (void*)m_rigidbody;
 
@@ -225,6 +230,10 @@ namespace SR_PTYPES_NS {
     }
 
     void PhysXRigidbody3DImpl::ClearForces() {
+        if (!m_rigidActor) {
+            return;
+        }
+
         if (auto&& pRigidBody = m_rigidActor->is<physx::PxRigidBody>(); pRigidBody && pRigidBody->getScene()) {
             pRigidBody->clearForce();
             pRigidBody->setLinearVelocity(physx::PxVec3(0, 0, 0));
@@ -234,6 +243,10 @@ namespace SR_PTYPES_NS {
     }
 
     void PhysXRigidbody3DImpl::Synchronize() {
+        if (!m_rigidActor) {
+            return;
+        }
+
         auto&& pTransform = m_rigidbody->GetTransform();
         if (!pTransform) {
             return;

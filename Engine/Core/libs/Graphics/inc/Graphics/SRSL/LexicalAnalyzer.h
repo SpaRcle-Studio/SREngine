@@ -9,7 +9,7 @@
 
 namespace SR_SRSL_NS {
     class SRSLLexicalAnalyzer : public SR_UTILS_NS::Singleton<SRSLLexicalAnalyzer> {
-        friend class SR_UTILS_NS::Singleton<SRSLLexicalAnalyzer>;
+        SR_REGISTER_SINGLETON(SRSLLexicalAnalyzer)
     private:
         enum class LXAState {
             Decorators, Decorator, DecoratorArgs,

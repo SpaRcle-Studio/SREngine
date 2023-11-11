@@ -324,7 +324,7 @@ namespace SR_GTYPES_NS {
             return false;
         }
 
-        return !m_properties.ForEachPropertyRet<MaterialProperty>([pTexture](auto&& pProperty) -> bool{
+        return !m_properties.ForEachPropertyRet<MaterialProperty>([pTexture](auto&& pProperty) -> bool {
             if (std::visit([pTexture](ShaderPropertyVariant&& arg) -> bool {
                 if (std::holds_alternative<SR_GTYPES_NS::Texture*>(arg)) {
                     return std::get<SR_GTYPES_NS::Texture*>(arg) == pTexture;

@@ -9,7 +9,7 @@
 
 namespace SR_UTILS_NS {
     class SR_DLL_EXPORT Random : public Singleton<Random> {
-        friend class Singleton<Random>;
+        SR_REGISTER_SINGLETON(Random)
     private:
         Random()
             : m_generator(clock())
@@ -32,6 +32,11 @@ namespace SR_UTILS_NS {
 
         SR_NODISCARD float_t Float(float_t minimum, float_t maximum) {
             std::uniform_real_distribution<float_t> distribution(minimum, maximum);
+            return distribution(m_generator);
+        }
+
+        SR_NODISCARD int32_t Int32Range(int32_t minimum, int32_t maximum) {
+            std::uniform_int_distribution<int32_t> distribution(minimum, maximum);
             return distribution(m_generator);
         }
 

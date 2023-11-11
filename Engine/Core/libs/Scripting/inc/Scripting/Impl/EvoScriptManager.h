@@ -18,7 +18,7 @@ namespace SR_SCRIPTING_NS {
         std::lock_guard<std::recursive_mutex> lk2(mutex_2, std::adopt_lock); \
 
     class EvoScriptManager : public SR_UTILS_NS::Singleton<EvoScriptManager> {
-        friend class SR_UTILS_NS::Singleton<EvoScriptManager>;
+        SR_REGISTER_SINGLETON(EvoScriptManager);
         using ScriptPtr = ScriptHolder::Ptr;
         using ScirptsMap = ska::flat_hash_map<std::string, ScriptPtr>;
     public:
