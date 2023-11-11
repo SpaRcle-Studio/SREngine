@@ -40,12 +40,16 @@ jobs:
           for word in words:
             if word[:10] == "#SR_CLOSE(" and word[10:][:-1].isnumeric():
               print(f"Issue ID: {word[10:][:-1]}")
-              with open(os.environ['GITHUB_ENV'], 'a') as fh:
-                print(f'issueId={word[10:][:-1]}', file=fh)
+              f = open("env.sh", "a")
+              f.write(f"\"issueId={word[10:][:-1]}\" >> $GITHUB_ENV")
+              f.close()
         env:
           commitMessage: ${{ inputs.commitMessage }}
       #outputEnv = os.getenv('GITHUB_ENV')
       #cmd = f"echo \"issueId={int(word[10:][:-1])}\" >> \"{outputEnv}\" "
+
+      - run: |
+          env.sh
 
       - if: inputs.linuxBuildState != 'failure' && inputs.windowsBuildState != 'failure'
         name: Closing the issue.
