@@ -483,8 +483,7 @@ namespace SR_CORE_NS::GUI {
             pComponent->SetPitch(pitch);
         }
 
-        if (ImGui::SliderFloat(SR_FORMAT_C("coneInnerAngle##SliderConeInnerAngle%i", index), &coneInnerAngle, 0.f,
-                               360.f, "%.1f")) {
+        if (ImGui::SliderFloat(SR_FORMAT_C("coneInnerAngle##SliderConeInnerAngle%i", index), &coneInnerAngle, 0.f,360.f, "%.1f")) {
             pComponent->SetConeInnerAngle(coneInnerAngle);
         }
 
@@ -492,12 +491,10 @@ namespace SR_CORE_NS::GUI {
             pComponent->SetLoop(loop);
         }
 
-        if (auto &&pDescriptor = context->GetIconDescriptor(EditorIcon::Audio)) {
-            if (SR_GRAPH_GUI_NS::ImageButton(SR_FORMAT("##ButtonPath%i", index), pDescriptor, SR_MATH_NS::IVector2(50),
-                                             5)) {
-                auto &&resourcesFolder = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
-                auto &&path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesFolder,
-                                                                             {{"Audio", "mp3"}});
+        if (auto&& pDescriptor = context->GetIconDescriptor(EditorIcon::Audio)) {
+            if (SR_GRAPH_GUI_NS::ImageButton(SR_FORMAT("##ButtonPath%i", index), pDescriptor, SR_MATH_NS::IVector2(50),5)) {
+                auto&& resourcesFolder = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
+                auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesFolder,{{"Audio", "mp3"}});
 
                 if (path.Exists()) {
                     pComponent->SetPath(path.RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetResPath()));
@@ -506,12 +503,10 @@ namespace SR_CORE_NS::GUI {
         }
         SR_GRAPH_GUI_NS::DrawValue("Path", pComponent->GetPath().c_str(), index);
     }
+
     void ComponentDrawer::DrawComponent(SR_AUDIO_NS::AudioListener *&pComponent, EditorGUI *context, int32_t index){
 
     }
-
-
-
 
     void ComponentDrawer::DrawComponent(SR_GRAPH_NS::UI::Canvas *&canvas, EditorGUI *context, int32_t index) {
 
