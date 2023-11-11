@@ -31,6 +31,7 @@ jobs:
       - name: Getting issue id.
         shell: python
         id: script
+        working-directory: ${{github.workspace}}/CI
         run: |
           import os 
           from pathlib import Path
@@ -39,7 +40,7 @@ jobs:
           commitMessage = os.getenv('commitMessage')
           print(f"Commit message:\n{commitMessage}\n")
           words = commitMessage.split()
-          f = open(f"{home}/issueIdList.txt", "a")
+          f = open(f"issueIdList.txt", "a")
           for word in words:
             if word[:10] == "#SR_CLOSE(" and word[10:][:-1].isnumeric():
               print(f"Issue IDs: {word[10:][:-1]}")
@@ -58,6 +59,7 @@ jobs:
             gh issue close --comment "Issue is closed automatically by CI." "$line"
           done < "$input"
         shell: bash
+        working-directory: ${{github.workspace}}/CI
         env:
           GH_TOKEN: ${{ secrets.CITOKEN }}
 
