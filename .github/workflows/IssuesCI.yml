@@ -40,8 +40,8 @@ jobs:
           for word in words:
             if word[:10] == "#SR_CLOSE(" and word[10:][:-1].isnumeric():
               print(f"Issue ID: {word[10:][:-1]}")
-              cmd = f"echo \"issueId={int(word[10:][:-1])}\" >> \"$GITHUB_ENV\" " 
-              subprocess.call([str(cmd)], shell=True)
+              with open(os.environ['GITHUB_ENV'], 'a') as fh:
+                print(f'issueId={word[10:][:-1]}', file=fh)
         env:
           commitMessage: ${{ inputs.commitMessage }}
       #outputEnv = os.getenv('GITHUB_ENV')
