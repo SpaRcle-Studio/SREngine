@@ -51,7 +51,7 @@ jobs:
       #cmd = f"echo \"issueId={int(word[10:][:-1])}\" >> \"{outputEnv}\" "
 
       - run:
-          sudo source ~/env.sh
+          source ~/env.sh
         shell: bash
 
       - if: inputs.linuxBuildState != 'failure' && inputs.windowsBuildState != 'failure'
