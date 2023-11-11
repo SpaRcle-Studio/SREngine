@@ -33,14 +33,16 @@ jobs:
         id: script
         run: |
           import os 
+          from pathlib import Path
           import subprocess
+          home = str(Path.home())
           commitMessage = os.getenv('commitMessage')
           print(f"Commit message:\n{commitMessage}\n")
           words = commitMessage.split()
           for word in words:
             if word[:10] == "#SR_CLOSE(" and word[10:][:-1].isnumeric():
               print(f"Issue ID: {word[10:][:-1]}")
-              f = open("env.sh", "a")
+              f = open(f"{home}env.sh", "a")
               f.write(f"\"issueId={word[10:][:-1]}\" >> $GITHUB_ENV")
               f.close()
         env:
@@ -49,7 +51,7 @@ jobs:
       #cmd = f"echo \"issueId={int(word[10:][:-1])}\" >> \"{outputEnv}\" "
 
       - run: |
-          env.sh
+          source env.sh
 
       - if: inputs.linuxBuildState != 'failure' && inputs.windowsBuildState != 'failure'
         name: Closing the issue.
