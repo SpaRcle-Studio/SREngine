@@ -26,7 +26,7 @@ on:
 jobs:
   Manager:
     name: Manager.
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Getting issue id.
         shell: python
