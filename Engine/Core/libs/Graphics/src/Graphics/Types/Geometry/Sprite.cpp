@@ -179,7 +179,8 @@ namespace SR_GTYPES_NS {
         materialContainer.AddCustomProperty<SR_UTILS_NS::ExternalProperty>("Material")
             .SetPropertyGetter([this]() -> SR_UTILS_NS::Property* { return m_material ? &m_material->GetProperties() : nullptr; })
             .SetActiveCondition([this]() -> bool { return m_material; })
-            .SetReadOnly();
+            .SetReadOnly()
+            .SetDontSave();
 
         return Component::InitializeEntity();
     }

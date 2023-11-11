@@ -107,7 +107,7 @@ namespace SR_CORE_GUI_NS {
     bool DrawPathProperty(const DrawPropertyContext& context, SR_UTILS_NS::PathProperty* pProperty) {
         if (ImGui::Button(SR_FORMAT_C("Pick##%i", (void*)pProperty))) {
             auto&& resourcesFolder = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
-            auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesFolder, { { "Material", "mat" } });
+            auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesFolder, pProperty->GetFileFilter());
 
             if (!path.Empty()) {
                 pProperty->SetPath(path);
@@ -190,33 +190,20 @@ namespace SR_CORE_GUI_NS {
                 }
                 break;
             }
-            case SR_UTILS_NS::StandardType::Int8:
-            case SR_UTILS_NS::StandardType::UInt8:
-            case SR_UTILS_NS::StandardType::Int16:
-            case SR_UTILS_NS::StandardType::UInt16:
-            case SR_UTILS_NS::StandardType::Int32:
-            case SR_UTILS_NS::StandardType::UInt32:
-            case SR_UTILS_NS::StandardType::Int64:
-            case SR_UTILS_NS::StandardType::UInt64:
-            case SR_UTILS_NS::StandardType::Double:
-            case SR_UTILS_NS::StandardType::String:
-            case SR_UTILS_NS::StandardType::FVector4:
-            case SR_UTILS_NS::StandardType::FVector5:
-            case SR_UTILS_NS::StandardType::FVector6:
-            case SR_UTILS_NS::StandardType::IVector2:
-            case SR_UTILS_NS::StandardType::IVector3:
-            case SR_UTILS_NS::StandardType::IVector4:
-            case SR_UTILS_NS::StandardType::IVector5:
-            case SR_UTILS_NS::StandardType::IVector6:
-            case SR_UTILS_NS::StandardType::UVector2:
-            case SR_UTILS_NS::StandardType::UVector3:
-            case SR_UTILS_NS::StandardType::UVector4:
-            case SR_UTILS_NS::StandardType::UVector5:
-            case SR_UTILS_NS::StandardType::UVector6:
-            case SR_UTILS_NS::StandardType::BVector2:
-            case SR_UTILS_NS::StandardType::BVector4:
-            case SR_UTILS_NS::StandardType::BVector5:
-            case SR_UTILS_NS::StandardType::BVector6:
+            case SR_UTILS_NS::StandardType::Int32: {
+                auto&& value = pProperty->GetInt32();
+                if (SR_GRAPH_GUI_NS::InputInt(label, value, static_cast<int32_t>(pProperty->GetDrag()))) {
+                    pProperty->SetInt32(value);
+                }
+                break;
+            }
+            case SR_UTILS_NS::StandardType::UInt32: {
+                auto&& value = pProperty->GetUInt32();
+                if (SR_GRAPH_GUI_NS::UInputInt32(label, value, static_cast<uint32_t>(pProperty->GetDrag()))) {
+                    pProperty->SetUInt32(value);
+                }
+                break;
+            }
             default:
                 ImGui::Text("Property \"%s\" has unknown type: %s",
                     pProperty->GetName().ToCStr(),

@@ -110,7 +110,7 @@ namespace SR_PTYPES_NS {
         SR_NODISCARD SR_MATH_NS::Quaternion GetRotation() const noexcept { return m_rotation; }
         SR_NODISCARD SR_MATH_NS::FVector3 GetScale() const noexcept { return m_scale; }
         SR_NODISCARD SR_HTYPES_NS::RawMesh* GetRawMesh() const noexcept { return m_rawMesh; }
-        SR_NODISCARD int32_t GetMeshId() const noexcept { return m_meshId; }
+        SR_NODISCARD uint32_t GetMeshId() const noexcept { return m_meshId; }
         SR_NODISCARD PhysicsMaterial* GetPhysicsMaterial() const noexcept { return m_material; }
         SR_NODISCARD bool IsDebugEnabled() const noexcept;
         SR_NODISCARD RBUpdShapeRes UpdateShape();
@@ -129,7 +129,8 @@ namespace SR_PTYPES_NS {
         void SetMaterial(PhysicsMaterial* pMaterial);
         void SetMaterial(const SR_UTILS_NS::Path& path);
         void SetRawMesh(SR_HTYPES_NS::RawMesh* pRawMesh);
-        void SetMeshId(int32_t id) { m_meshId = id; SetShapeDirty(true); }
+        void SetRawMesh(const SR_UTILS_NS::Path& path);
+        void SetMeshId(uint32_t id);
 
         bool InitBody();
 
@@ -172,9 +173,11 @@ namespace SR_PTYPES_NS {
         SR_MATH_NS::FVector3 m_scale = SR_MATH_NS::FVector3::One();
 
         SR_PTYPES_NS::PhysicsMaterial* m_material = nullptr;
+
+        /// TODO: move to CollisionShape class
         SR_HTYPES_NS::RawMesh* m_rawMesh = nullptr;
 
-        int32_t m_meshId = 0;
+        uint32_t m_meshId = 0;
 
         SR_MATH_NS::FVector3 m_center;
 

@@ -2,12 +2,13 @@
 // Created by Monika on 28.09.2022.
 //
 
-#ifndef SRENGINE_COLLISIONSHAPE_H
-#define SRENGINE_COLLISIONSHAPE_H
+#ifndef SR_ENGINE_PHYSICS_COLLISION_SHAPE_H
+#define SR_ENGINE_PHYSICS_COLLISION_SHAPE_H
 
 #include <Utils/Common/NonCopyable.h>
 #include <Utils/Types/SafePointer.h>
 #include <Utils/Math/Matrix4x4.h>
+#include <Utils/TypeTraits/Properties.h>
 
 #include <Physics/PhysicsLib.h>
 
@@ -18,6 +19,7 @@ namespace SR_PHYSICS_NS {
 
 namespace SR_PTYPES_NS {
     class Rigidbody;
+
     class CollisionShape : public SR_UTILS_NS::NonCopyable {
         friend class SR_PHYSICS_NS::PhysicsScene;
     public:
@@ -57,6 +59,7 @@ namespace SR_PTYPES_NS {
         SR_NODISCARD SR_MATH_NS::FVector3 GetScale() const;
         SR_NODISCARD SR_MATH_NS::FVector3 GetBounds() const { return m_bounds; }
         SR_NODISCARD Rigidbody* GetRigidbody() const;
+        SR_NODISCARD SR_UTILS_NS::PropertyContainer* GetProperties() noexcept { return &m_properties; }
 
         SR_NODISCARD bool Valid() const noexcept;
         SR_NODISCARD ShapeType GetType() const noexcept;
@@ -73,6 +76,8 @@ namespace SR_PTYPES_NS {
         }
 
     protected:
+        SR_UTILS_NS::PropertyContainer m_properties;
+
         LibraryPtr m_library = nullptr;
         Rigidbody* m_rigidbody = nullptr;
 
@@ -82,8 +87,9 @@ namespace SR_PTYPES_NS {
         ShapeType m_type = ShapeType::Unknown;
 
         uint64_t m_debugId = SR_ID_INVALID;
+
     };
 }
 
 
-#endif //SRENGINE_COLLISIONSHAPE_H
+#endif //SR_ENGINE_PHYSICS_COLLISION_SHAPE_H

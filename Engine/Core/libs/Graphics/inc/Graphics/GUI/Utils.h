@@ -147,6 +147,27 @@ namespace SR_GRAPH_GUI_NS {
         return changed;
     }
 
+    SR_MAYBE_UNUSED static bool UInputInt32(const std::string& name, uint32_t& value, uint32_t step = 1) {
+        int32_t temp = static_cast<int32_t>(value); /// NOLINT
+        bool changed = false;
+
+        auto&& textWidth = SR_CLAMP(ImGui::CalcTextSize(std::to_string(value).c_str()).x, 300, 150);
+
+        ImGui::PushItemWidth(textWidth);
+
+        if (ImGui::InputInt(SR_FORMAT_C("%s##%p", name.c_str(), &value), &temp, static_cast<int32_t>(step))) {
+            if (temp < 0) {
+                temp = 0;
+            }
+            changed = value != temp;
+            value = temp;
+        }
+
+        ImGui::PopItemWidth();
+
+        return changed;
+    }
+
     template<typename T> static void DrawValue(const std::string& label, const T& value, uint32_t index = 0) {
         std::string string;
 

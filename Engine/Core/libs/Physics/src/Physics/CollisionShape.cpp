@@ -145,8 +145,74 @@ namespace SR_PTYPES_NS {
 
     void CollisionShape::SetType(ShapeType type) {
         m_type = type;
+        m_bounds = SR_MATH_NS::FVector3(1.f);
+
         RemoveDebugShape();
         UpdateDebugShape();
+
+        m_properties.ClearContainer();
+
+        switch (m_type) {
+            case ShapeType::Plane3D:
+                m_properties.AddCustomProperty<SR_UTILS_NS::StandardProperty>("Plane3D size")
+                    .SetGetter([this](void* pValue) { *reinterpret_cast<SR_MATH_NS::FVector2*>(pValue) = GetSize().XZ(); })
+                    .SetSetter([this](void* pValue) {
+                        auto&& size = *reinterpret_cast<SR_MATH_NS::FVector2*>(pValue);
+                        SetSize(SR_MATH_NS::FVector3(size.x, 0.f, size.y));
+                    })
+                    .SetType(SR_UTILS_NS::StandardType::FVector3)
+                    .SetResetValue(1.f)
+                    .SetDrag(0.1f);
+                break;
+            case ShapeType::Box3D:
+                m_properties.AddCustomProperty<SR_UTILS_NS::StandardProperty>("Box3D size")
+                    .SetGetter([this](void* pValue) { *reinterpret_cast<SR_MATH_NS::FVector3*>(pValue) = GetSize(); })
+                    .SetSetter([this](void* pValue) { SetSize(*reinterpret_cast<SR_MATH_NS::FVector3*>(pValue)); })
+                    .SetType(SR_UTILS_NS::StandardType::FVector3)
+                    .SetResetValue(1.f)
+                    .SetDrag(0.1f);
+                break;
+            case ShapeType::Capsule3D:
+                m_properties.AddCustomProperty<SR_UTILS_NS::StandardProperty>("Height")
+                    .SetGetter([this](void* pValue) { *reinterpret_cast<float_t*>(pValue) = GetHeight(); })
+                    .SetSetter([this](void* pValue) {
+                        SetHeight(*reinterpret_cast<float_t*>(pValue));
+                    })
+                    .SetType(SR_UTILS_NS::StandardType::Float)
+                    .SetResetValue(1.f)
+                    .SetDrag(0.1f);
+            case ShapeType::Sphere3D:
+                m_properties.AddCustomProperty<SR_UTILS_NS::StandardProperty>("Radius")
+                    .SetGetter([this](void* pValue) { *reinterpret_cast<float_t*>(pValue) = GetRadius(); })
+                    .SetSetter([this](void* pValue) {
+                        SetRadius(*reinterpret_cast<float_t*>(pValue));
+                    })
+                    .SetType(SR_UTILS_NS::StandardType::Float)
+                    .SetResetValue(1.f)
+                    .SetDrag(0.1f);
+                break;
+            case ShapeType::Convex3D:
+                m_properties.AddCustomProperty<SR_UTILS_NS::PathProperty>("Mesh path")
+                    .SetGetter([this]() { return GetRigidbody()->GetRawMesh() ? GetRigidbody()->GetRawMesh()->GetResourcePath() : SR_UTILS_NS::Path(); })
+                    .SetSetter([this](auto&& path) {
+                        GetRigidbody()->SetRawMesh(path);
+                    })
+                    .AddFileFilter("Object", "obj")
+                    .AddFileFilter("FBX", "fbx")
+                    .AddFileFilter("Blender", "blend");
+
+                m_properties.AddCustomProperty<SR_UTILS_NS::StandardProperty>("Mesh index")
+                    .SetGetter([this](void* pValue) {
+                        *reinterpret_cast<uint32_t*>(pValue) = GetRigidbody()->GetMeshId();
+                    })
+                    .SetSetter([this](void* pValue) {
+                        GetRigidbody()->SetMeshId(*reinterpret_cast<uint32_t*>(pValue));
+                    })
+                    .SetType(SR_UTILS_NS::StandardType::UInt32);
+                break;
+            default:
+                break;
+        }
     }
 
     void CollisionShape::RemoveDebugShape() {
