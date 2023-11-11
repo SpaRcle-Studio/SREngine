@@ -39,34 +39,41 @@ jobs:
           commitMessage = os.getenv('commitMessage')
           print(f"Commit message:\n{commitMessage}\n")
           words = commitMessage.split()
+          f = open(f"{home}/issueIdList.txt", "a")
           for word in words:
             if word[:10] == "#SR_CLOSE(" and word[10:][:-1].isnumeric():
-              print(f"Issue ID: {word[10:][:-1]}")
-              f = open(f"{home}/env.sh", "a")
-              f.write(f"\"issueId={word[10:][:-1]}\" >> $GITHUB_ENV")
-              f.close()
+              print(f"Issue IDs: {word[10:][:-1]}")
+              f.write(f"{word[10:][:-1]}\n")
+          f.close()
         env:
           commitMessage: ${{ inputs.commitMessage }}
       #outputEnv = os.getenv('GITHUB_ENV')
       #cmd = f"echo \"issueId={int(word[10:][:-1])}\" >> \"{outputEnv}\" "
 
-      - run:
-          source ~/env.sh
+      - name: Closing the issues.
+        run:
+          input="~/issueIdList.txt"
+          while IFS= read -r line
+          do
+            gh issue close --comment "Issue is closed automatically by CI." "$line"
+          done < "$input"
         shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.CITOKEN }}
 
-      - if: inputs.linuxBuildState != 'failure' && inputs.windowsBuildState != 'failure'
-        name: Closing the issue.
-        uses: peter-evans/close-issue@v3
-        with:
-          issue-number: ${env.issueId}
-          comment: Closed automatically by CI.
+      #- if: inputs.linuxBuildState != 'failure' && inputs.windowsBuildState != 'failure'
+      #  name: Closing the issue.
+      #  uses: peter-evans/close-issue@v3
+      #  with:
+      #    issue-number: ${env.issueId}
+      #    comment: Closed automatically by CI.
 
       - if: inputs.linuxBuildState == 'failure' || inputs.windowsBuildState == 'failure'
         name: Creating an issue.
         uses: dacbd/create-issue-action@main
         with:
           token: ${{ secrets.CITOKEN }}
-          title: (Build) Build failed. ${{inputs.commitBranch}}
+          title: (Build) Fail on ${{inputs.commitBranch}} branch.
           body: |
             This issue is created automatically by CI.
             Linux Build State: ${{inputs.linuxBuildState}}
