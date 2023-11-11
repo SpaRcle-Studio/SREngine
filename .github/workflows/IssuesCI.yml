@@ -40,6 +40,7 @@ jobs:
           from github import Github
           from github import Auth
           commitMessage = os.getenv('commitMessage')          
+          commitSha = os.getenv('commitSha')          
           token = os.getenv('ciToken')
           auth = Auth.Token(token)
           g = Github(auth=auth)
@@ -48,16 +49,20 @@ jobs:
           words = commitMessage.split()
           issueIds = []
           for word in words:
-            if word[:10] == "#SR_CLOSE(" and word[10:][:-1].isnumeric():
-              print(f"Issue IDs: {word[10:][:-1]}")
-              issueIds.append(word[10:][:-1])
+            if word[:10] == "#SR_CLOSE(":
+              args = word[10:][:-1] 
+              args = args.split(",")
+              for arg in args:
+                if arg.isnumeric():
+                  issueIds.append(int(arg))
           for issueId in issueIds:
-            issue = repo.get_issue(int(issueId))
-            issue.create_comment("Issue is closed automatically by CI")
+            issue = repo.get_issue(issueId)
+            issue.create_comment(f"Issue is closed automatically by CI. Commit: {commitSha}")
             issue.edit(state='closed')
         env:
           commitMessage: ${{ inputs.commitMessage }}
           ciToken: ${{ secrets.CITOKEN }}
+          commitSha: ${{ inputs.commitSha }}
 
         #secrets:
         #  CITOKEN: %{{ secrets.CITOKEN }}
