@@ -84,6 +84,12 @@
     #else
         #define SR_DEBUG
     #endif
+#elif defined(SR_LINUX)
+    #if defined(NDEBUG)
+        #define SR_RELEASE
+    #else
+        #define SR_DEBUG
+    #endif
 #elif defined(SR_MINGW)
     #if defined(NDEBUG)
         #define SR_RELEASE

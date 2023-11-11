@@ -29,7 +29,7 @@ namespace SR_GRAPH_NS {
 
         SR_NODISCARD WindowType GetType() const override { return BasicWindowImpl::WindowType::Android; }
 
-        void PollEvents() const override;
+        void PollEvents() override;
 
         SR_NODISCARD ANativeWindow* GetNativeWindow() const;
 

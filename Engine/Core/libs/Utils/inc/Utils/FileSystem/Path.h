@@ -49,6 +49,25 @@ namespace SR_UTILS_NS {
             return m_path == path.ToStringRef();
         }
 
+        char operator[](size_t index) const noexcept {
+            if (index >= m_path.size()) {
+                 std::cerr << "Path::operator[] : index is out of range!\n";
+                 SR_MAKE_BREAKPOINT;
+                 return char();
+            }
+            return m_path[index];
+        }
+
+        char& operator[](size_t index) noexcept {
+            if (index >= m_path.size()) {
+                std::cerr << "Path::operator[] : index is out of range!\n";
+                SR_MAKE_BREAKPOINT;
+                static char def = char();
+                return def;
+            }
+            return m_path[index];
+        }
+
     public:
         SR_DEPRECATED bool Make(Type type = Type::Undefined) const;
         bool Create() const;

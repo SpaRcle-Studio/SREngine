@@ -63,7 +63,7 @@ namespace SR_GRAPH_NS {
             return;
         }
 
-        while (m_windowImpl && !m_windowImpl->IsValid()) {
+        while (m_windowImpl && !m_windowImpl->IsValid() && !m_windowImpl->IsClosed()) {
             m_thread->Synchronize();
         }
 
@@ -143,13 +143,16 @@ namespace SR_GRAPH_NS {
         auto&& windowSettings = SR_XML_NS::Document::New();
         auto&& rootNode = windowSettings.Root().AppendNode("Settings");
 
-        rootNode.AppendNode("Size").AppendAttribute(GetSize());
+        if (!GetSize().HasZero()) {
+            rootNode.AppendNode("Size").AppendAttribute(GetSize());
+        }
+
         rootNode.AppendNode("Position").AppendAttribute(GetPosition());
         rootNode.AppendAttribute("IsMaximized", IsMaximized());
 
         windowSettings.Save(windowSettingsPath);
 
-        if (m_windowImpl && m_windowImpl->IsValid()) {
+        if (m_windowImpl) {
             m_windowImpl->Close();
         }
 

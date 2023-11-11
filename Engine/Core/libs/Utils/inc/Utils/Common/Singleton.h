@@ -8,8 +8,8 @@
 #include <Utils/Common/NonCopyable.h>
 #include <Utils/Common/Breakpoint.h>
 #include <Utils/Common/Stacktrace.h>
-#include <Utils/Types/StringAtom.h>
 
+#include <Utils/Types/StringAtom.h>
 #include <Utils/Types/SafePtrLockGuard.h>
 #include <Utils/Types/Map.h>
 
@@ -45,10 +45,12 @@ namespace SR_UTILS_NS {
     class SR_DLL_EXPORT SingletonManager : public NonCopyable {
     public:
         void* GetSingleton(StringAtom name) noexcept;
+        std::recursive_mutex& GetMutex() noexcept { return m_mutex; }
         void DestroyAll();
         void Remove(StringAtom name);
 
         template<typename T> void Register(Singleton<T>* pSingleton) {
+            std::lock_guard lock(m_mutex);
             auto&& name = pSingleton->GetSingletonName();
 
             m_singletons[name].pSingleton = (void*)pSingleton;
@@ -63,6 +65,7 @@ namespace SR_UTILS_NS {
             SingletonBase* pSingletonBase = nullptr;
         };
         ska::flat_hash_map<StringAtom, SingletonInfo> m_singletons;
+        mutable std::recursive_mutex m_mutex;
 
     };
 
@@ -103,7 +106,7 @@ namespace SR_UTILS_NS {
             }
         }
 
-        /// TODO: это не потокобезопасно, нужно переделать
+        /// TODO: (Multi-threading) Refactor Singleton::Instance().
         SR_MAYBE_UNUSED static T& Instance() noexcept {
             auto&& pSingleton = GetSingleton();
 

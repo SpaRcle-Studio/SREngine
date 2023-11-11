@@ -155,8 +155,10 @@ namespace SR_CORE_NS {
 
             resolution = resolutions[SR_MAX(static_cast<uint32_t>(resolutions.size() / 2), 0)];
         }
-
-        if (resolution.x == 0 || resolution.y == 0) {
+#ifdef SR_LINUX
+        resolution = { 100, 100 };
+#endif
+        if (resolution.HasZero()) {
             SR_ERROR("Engine::CreateMainWindow() : resolution can not be " +
                     std::to_string(resolution.x) + "x" + std::to_string(resolution.y) + "!");
             return false;
@@ -284,6 +286,11 @@ namespace SR_CORE_NS {
         return m_window->GetThread()->Execute([this]() -> bool {
             if (!m_renderContext->Init()) {
                 SR_ERROR("Engine::InitializeRender() : failed to initialize the render context!");
+                return false;
+            }
+
+            if (!SR_THIS_THREAD) {
+                SR_ERROR("Engine::InitializeRender() : this thread is nullptr!");
                 return false;
             }
 

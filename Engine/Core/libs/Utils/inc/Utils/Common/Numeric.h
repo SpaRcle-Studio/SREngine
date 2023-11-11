@@ -35,6 +35,11 @@ namespace SR_UTILS_NS {
             return distribution(m_generator);
         }
 
+        SR_NODISCARD int32_t Int32Range(int32_t minimum, int32_t maximum) {
+            std::uniform_int_distribution<int32_t> distribution(minimum, maximum);
+            return distribution(m_generator);
+        }
+
         SR_NODISCARD int64_t Int64() {
             return m_dist(m_e2);
         }

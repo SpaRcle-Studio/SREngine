@@ -101,6 +101,7 @@ namespace SR_GTYPES_NS {
         float_t m_FOV = 90.f;
 
         bool m_hasErrors = false;
+        bool m_isRegistered = false;
 
         SR_MATH_NS::Matrix4x4 m_projection;
         SR_MATH_NS::Matrix4x4 m_viewTranslateMat;

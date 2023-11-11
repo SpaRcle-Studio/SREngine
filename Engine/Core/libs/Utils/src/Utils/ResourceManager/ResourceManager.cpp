@@ -313,7 +313,7 @@ namespace SR_UTILS_NS {
             SR_SYSTEM_LOG(dump);
         }
         else {
-            SR_SYSTEM_LOG("Memory dump is empty!");
+            SR_SYSTEM_LOG("ResourceManager::PrintMemoryDump() : memory dump is empty!");
         }
     }
 

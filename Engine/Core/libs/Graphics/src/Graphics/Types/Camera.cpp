@@ -42,6 +42,7 @@ namespace SR_GTYPES_NS {
         if (auto&& pRenderScene = GetRenderScene(); pRenderScene.RecursiveLockIfValid()) {
             pRenderScene->Register(GetThis().DynamicCast<Camera>());
             pRenderScene.Unlock();
+            m_isRegistered = true;
         }
         else {
             SRHalt("Render scene is invalid!");
@@ -53,7 +54,7 @@ namespace SR_GTYPES_NS {
 
         Super::OnDestroy();
 
-        if (pRenderScene.RecursiveLockIfValid()) {
+        if (m_isRegistered && pRenderScene.RecursiveLockIfValid()) {
             pRenderScene->Remove(GetThis().DynamicCast<Camera>());
             pRenderScene.Unlock();
         }

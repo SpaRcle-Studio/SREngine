@@ -58,6 +58,8 @@ if (UNIX AND NOT APPLE)
     #target_include_directories(Utils PUBLIC ${X11_Xext_INCLUDE_PATH})
     target_link_libraries(Utils ${X11_Xrandr_LIB})
     target_include_directories(Utils PUBLIC "${X11_Xrandr_INCLUDE_PATH}")
+    #target_link_libraries(Utils ${X11_xcb_randr_LIB})
+    #target_include_directories(Utils PUBLIC "${X11_xcb_randr_INCLUDE_PATH}")
 endif()
 
 if (ANDROID_NDK)

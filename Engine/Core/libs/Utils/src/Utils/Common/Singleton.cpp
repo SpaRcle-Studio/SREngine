@@ -16,6 +16,8 @@ namespace SR_UTILS_NS {
     }
 
     void* SingletonManager::GetSingleton(StringAtom name) noexcept {
+        std::lock_guard lock(m_mutex);
+
         if (auto&& pIt = m_singletons.find(name); pIt != m_singletons.end()) {
             return pIt->second.pSingleton;
         }
@@ -24,6 +26,8 @@ namespace SR_UTILS_NS {
     }
 
     void SingletonManager::DestroyAll() {
+        std::lock_guard lock(m_mutex);
+
         for (auto pIt = m_singletons.begin(); pIt != m_singletons.end(); ) {
             auto&& [id, info] = *pIt;
 
@@ -39,6 +43,8 @@ namespace SR_UTILS_NS {
     }
 
     void SingletonManager::Remove(StringAtom name) {
+        std::lock_guard lock(m_mutex);
+
         if (auto&& pIt = m_singletons.find(name); pIt != m_singletons.end()) {
             m_singletons.erase(pIt);
         }

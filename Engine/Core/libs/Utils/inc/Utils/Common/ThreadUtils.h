@@ -21,6 +21,11 @@ namespace SR_UTILS_NS {
     SR_INLINE std::string GetThreadId(const std::thread& thread) {
         std::stringstream stream;
         stream << thread.get_id();
+
+        if (stream.str() == "thread::id of a non-executing thread") {
+            return std::string();
+        }
+
         return stream.str();
     }
 

@@ -44,7 +44,7 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD bool IsVisible() const override;
 
         void SwapBuffers() const override;
-        void PollEvents() const override;
+        void PollEvents() override;
 
         void Close() override;
         void Maximize() override;
