@@ -19,6 +19,9 @@ on:
       commitMessage:
         required: true
         type: string
+    secrets:
+      CITOKEN:
+        required: true
 
 jobs:
   Manager:
@@ -27,8 +30,7 @@ jobs:
     steps:
       - name: Setting environment.
         run: |
-          echo "commitMessage=${{github.event.head_commit.message}}" << "$GITHUB_ENV"
-          echo ${{github.event.head_commit.message}}
+          echo "commitMessage=${{github.event.head_commit.message}}" >> "$GITHUB_ENV"
 
       - name: Getting issue id.
         uses: jannekem/run-python-script-action@v1
