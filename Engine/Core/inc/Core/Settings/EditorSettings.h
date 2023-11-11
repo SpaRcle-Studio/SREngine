@@ -30,7 +30,8 @@ namespace SR_CORE_NS {
           XML,
           PNG,
           DLL,
-          Font
+          Font,
+          Audio
     );
 
     class EditorSettings : public SR_UTILS_NS::GlobalSettings<EditorSettings> {
