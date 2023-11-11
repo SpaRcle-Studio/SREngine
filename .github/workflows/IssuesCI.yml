@@ -33,6 +33,7 @@ jobs:
         id: script
         run: |
           import os 
+          import subprocess
           commitMessage = os.getenv('commitMessage')
           print(f"Commit message:\n{commitMessage}\n")
           words = commitMessage.split()
