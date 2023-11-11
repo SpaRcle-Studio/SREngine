@@ -53,7 +53,7 @@ jobs:
 
       - name: Closing the issues.
         run:
-          input="~/issueIdList.txt"
+          input="issueIdList.txt"
           while IFS= read -r line
           do
             gh issue close --comment "Issue is closed automatically by CI." "$line"
