@@ -48,6 +48,7 @@ namespace SR_GRAPH_NS {
 
         xcb_map_window(m_connection, m_window);
 
+        m_isValid = true;
         /*xcb_ewmh_connection_t* ewmhConnection;
         ewmhConnection->connection = m_connection;
         ewmhConnection->nb_screens = 1;
