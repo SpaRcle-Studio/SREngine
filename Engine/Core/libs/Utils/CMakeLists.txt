@@ -38,8 +38,17 @@ if (SR_TRACY_ENABLE)
     add_subdirectory(libs/tracy)
 endif()
 
+
+list(APPEND SR_UTILS_LINK_LIBRARIES cxx/ICU.cxx)
+list(APPEND SR_UTILS_LINK_LIBRARIES cxx/Utils.cxx)
+list(APPEND SR_UTILS_LINK_LIBRARIES cxx/ECS.cxx)
+list(APPEND SR_UTILS_LINK_LIBRARIES cxx/World.cxx)
+list(APPEND SR_UTILS_LINK_LIBRARIES cxx/Platform.cxx)
+list(APPEND SR_UTILS_LINK_LIBRARIES cxx/Types.cxx)
+list(APPEND SR_UTILS_LINK_LIBRARIES src/Utils/Platform/LinuxStacktraceImpl.cpp)
+
 if (SR_UTILS_STATIC_LIBRARY)
-    add_library(Utils STATIC cxx/ICU.cxx cxx/Utils.cxx cxx/ECS.cxx cxx/World.cxx cxx/Platform.cxx cxx/Types.cxx)
+    add_library(Utils STATIC ${SR_UTILS_LINK_LIBRARIES})
 
     if (CYGWIN)
 
@@ -47,7 +56,7 @@ if (SR_UTILS_STATIC_LIBRARY)
 
     endif()
 else()
-    add_library(Utils SHARED cxx/ICU.cxx cxx/Utils.cxx cxx/ECS.cxx cxx/World.cxx cxx/Platform.cxx cxx/Types.cxx)
+    add_library(Utils SHARED ${SR_UTILS_LINK_LIBRARIES})
     add_library(Utils::lib ALIAS Utils)
 endif()
 
@@ -56,10 +65,15 @@ if (UNIX AND NOT APPLE)
     #target_include_directories(Utils PUBLIC ${X11_INCLUDE_DIR})
     #target_include_directories(Utils PUBLIC ${X11_xcb_INCLUDE_PATH})
     #target_include_directories(Utils PUBLIC ${X11_Xext_INCLUDE_PATH})
+
     target_link_libraries(Utils ${X11_Xrandr_LIB})
     target_include_directories(Utils PUBLIC "${X11_Xrandr_INCLUDE_PATH}")
-    #target_link_libraries(Utils ${X11_xcb_randr_LIB})
-    #target_include_directories(Utils PUBLIC "${X11_xcb_randr_INCLUDE_PATH}")
+
+    target_link_libraries(Utils ${X11_xcb_randr_LIB})
+    target_include_directories(Utils PUBLIC "${X11_xcb_randr_INCLUDE_PATH}")
+
+    target_link_libraries(Utils bfd)
+    target_include_directories(Utils PUBLIC ${LIBBFD_INCLUDE_DIRS})
 endif()
 
 if (ANDROID_NDK)

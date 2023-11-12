@@ -432,8 +432,11 @@ namespace SR_GRAPH_NS {
         pipelinePreInitInfo.engineName = "SREngine";
         pipelinePreInitInfo.samplesCount = 64;
         pipelinePreInitInfo.vsync = false;
+    #if defined(SR_WIN32)
         pipelinePreInitInfo.GLSLCompilerPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Engine/Utilities/glslc.exe");
-
+    #elif defined(SR_LINUX)
+        pipelinePreInitInfo.GLSLCompilerPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Engine/Utilities/glslc");
+    #endif
         if (!m_pipeline->PreInit(pipelinePreInitInfo)) {
             SR_ERROR("Engine::InitializeRender() : failed to pre-initialize the pipeline!");
             return false;

@@ -88,7 +88,8 @@ namespace SR_SCRIPTING_NS {
     }
 
     GlobalEvoCompiler::GlobalEvoCompiler()
-        : SR_SCRIPTING_NS::EvoCompiler(SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Scripts"))
+        : SR_UTILS_NS::Singleton<GlobalEvoCompiler>()
+        , SR_SCRIPTING_NS::EvoCompiler(SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Scripts"))
     {
         Init();
     }

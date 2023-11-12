@@ -70,14 +70,15 @@ namespace SR_UTILS_NS {
 
         msg.append("\n");
 
-    #ifdef SR_ANDROID
+    #if defined(SR_ANDROID) || defined(SR_LINUX)
         switch (type) {
             case DebugLogType::Warn:
                 SR_PLATFORM_NS::WriteConsoleWarn(msg);
+                break;
             case DebugLogType::Error:
             case DebugLogType::VulkanError:
             case DebugLogType::Assert:
-                SR_PLATFORM_NS::WriteConsoleLog(msg);
+                SR_PLATFORM_NS::WriteConsoleError(msg);
                 break;
             default:
                 SR_PLATFORM_NS::WriteConsoleLog(msg);

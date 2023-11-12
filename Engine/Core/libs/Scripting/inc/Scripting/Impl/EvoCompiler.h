@@ -35,7 +35,7 @@ namespace SR_SCRIPTING_NS {
 
     };
 
-    class SR_DLL_EXPORT GlobalEvoCompiler : public EvoCompiler, public SR_UTILS_NS::Singleton<GlobalEvoCompiler> {
+    class SR_DLL_EXPORT GlobalEvoCompiler : public SR_UTILS_NS::Singleton<GlobalEvoCompiler>, public EvoCompiler  {
         SR_REGISTER_SINGLETON(GlobalEvoCompiler)
     protected:
         GlobalEvoCompiler();

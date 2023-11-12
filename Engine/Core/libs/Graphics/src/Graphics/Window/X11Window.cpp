@@ -26,8 +26,7 @@ namespace SR_GRAPH_NS {
         }
 
         xcb_connection_t* pConnection = XGetXCBConnection(pDisplay);
-        if (!pConnection)
-        {
+        if (!pConnection) {
             SR_ERROR("X11Window::Initialize() : failed to create X11 connection!");
             return false;
         }
@@ -36,8 +35,19 @@ namespace SR_GRAPH_NS {
         xcb_screen_t* pScreen = (xcb_setup_roots_iterator(pSetup)).data;
         xcb_window_t window = xcb_generate_id (pConnection);
 
+        uint32_t mask = XCB_CW_BACK_PIXEL | XCB_CW_EVENT_MASK;
+        uint32_t values[2] = {pScreen->white_pixel,
+                                  XCB_EVENT_MASK_NO_EVENT |
+                                  XCB_EVENT_MASK_EXPOSURE       | XCB_EVENT_MASK_BUTTON_PRESS   |
+                                  XCB_EVENT_MASK_BUTTON_RELEASE | XCB_EVENT_MASK_POINTER_MOTION |
+                                  XCB_EVENT_MASK_ENTER_WINDOW   | XCB_EVENT_MASK_LEAVE_WINDOW   |
+                                  XCB_EVENT_MASK_KEY_PRESS      | XCB_EVENT_MASK_KEY_RELEASE |
+                                  XCB_EVENT_MASK_PROPERTY_CHANGE | XCB_EVENT_MASK_VISIBILITY_CHANGE |
+                                  XCB_EVENT_MASK_RESIZE_REDIRECT | XCB_EVENT_MASK_FOCUS_CHANGE
+       };
+
         xcb_create_window(pConnection, 0, window, pScreen->root, position.x, position.y, size.x, size.y,
-                           0, InputOutput, pScreen->root_visual, 0, nullptr);
+                           0, InputOutput, pScreen->root_visual, mask, values);
 
         m_connection = pConnection;
         m_display = pDisplay;
@@ -47,8 +57,8 @@ namespace SR_GRAPH_NS {
         SetFullscreen(fullScreen);
 
         xcb_map_window(m_connection, m_window);
+        xcb_flush(m_connection);
 
-        m_isValid = true;
         /*xcb_ewmh_connection_t* ewmhConnection;
         ewmhConnection->connection = m_connection;
         ewmhConnection->nb_screens = 1;
@@ -68,6 +78,7 @@ namespace SR_GRAPH_NS {
         //m_surfaceSize.y += 1;
 
         //free(geometryReply);
+        m_isValid = true;
         return true;
     }
 
@@ -115,19 +126,80 @@ namespace SR_GRAPH_NS {
     }
 
     void X11Window::PollEvents() {
-        XEvent event;
-        XNextEvent((Display *) m_display, &event);
+        auto&& event = xcb_wait_for_event(m_connection);
+        if (!event) {
+            return;
+        }
 
-        switch (event.type) {
-            case ResizeRequest:
-                m_surfaceSize.x = event.xconfigure.width;
-                m_surfaceSize.y = event.xconfigure.height;
+        switch (event->response_type & ~0x80) {
+            case XCB_EXPOSE: {
+                //xcb_expose_event_t *expose = (xcb_expose_event_t *)event;
 
                 break;
-            case KeyPress:
+            }
+            case XCB_BUTTON_PRESS: {
+                //xcb_button_press_event_t *bp = (xcb_button_press_event_t *)event;
+                //print_modifiers (bp->state);
+
+                break;
+            }
+            case XCB_BUTTON_RELEASE: {
+                //xcb_button_release_event_t *br = (xcb_button_release_event_t *)event;
+                //print_modifiers(br->state);
+
+                break;
+            }
+            case XCB_MOTION_NOTIFY: {
+                //xcb_motion_notify_event_t *motion = (xcb_motion_notify_event_t *)event;
+
+                break;
+            }
+            case XCB_ENTER_NOTIFY: {
+                //xcb_enter_notify_event_t *enter = (xcb_enter_notify_event_t *)event;
+
+                break;
+            }
+            case XCB_LEAVE_NOTIFY: {
+                //xcb_leave_notify_event_t *leave = (xcb_leave_notify_event_t *)event;
+
+                break;
+            }
+            case XCB_KEY_PRESS: {
+                //xcb_key_press_event_t *kp = (xcb_key_press_event_t *)event;
+                //print_modifiers(kp->state);
+
+                break;
+            }
+            case XCB_KEY_RELEASE: {
+                //xcb_key_release_event_t *kr = (xcb_key_release_event_t *)event;
+                //print_modifiers(kr->state);
+
+                break;
+            }
+            case XCB_RESIZE_REQUEST: {
+                //auto&& resizeEvent = (xcb_resize_request_event_t *) event;
+                //m_surfaceSize = { resizeEvent->width, resizeEvent->height };
+                break;
+            }
+            case XCB_CONFIGURE_NOTIFY: {
+                auto&& configureEvent = (xcb_configure_notify_event_t*)event;
+                if (configureEvent->width != m_surfaceSize.x || configureEvent->height != m_surfaceSize.y)
+                {
+                    if (configureEvent->width > 0 && configureEvent->height > 0) {
+                        m_surfaceSize.x = configureEvent->width;
+                        m_surfaceSize.y = configureEvent->height;
+
+                        if (m_resizeCallback) {
+                            m_resizeCallback(this, GetSurfaceWidth(), GetSurfaceHeight());
+                        }
+                    }
+                }
+            }
             default:
                 break;
         }
+
+        free (event);
     }
 
     void X11Window::Close() {

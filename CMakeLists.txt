@@ -9,6 +9,14 @@ message(STATUS "SpaRcle Engine: cmake version is ${CMAKE_VERSION}")
 
 set(CMAKE_CXX_STANDARD 20)
 
+if (UNIX)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fcompare-debug-second -w -Wno-deprecated")
+endif()
+
+if (UNIX AND CMAKE_BUILD_TYPE STREQUAL "Debug")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-pie -no-pie -g3")
+endif()
+
 set(SR_PHYSICS_USE_BULLET3 OFF)
 set(SR_PHYSICS_USE_PHYSX ON)
 set(SR_PHYSICS_USE_BOX2D OFF)

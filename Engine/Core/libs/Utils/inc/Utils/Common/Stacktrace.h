@@ -9,6 +9,7 @@
 
 namespace SR_UTILS_NS {
     SR_DLL_EXPORT std::string GetStacktrace();
+    SR_DLL_EXPORT void StacktraceInit();
 }
 
 #endif //GAMEENGINE_STACKTRACE_H

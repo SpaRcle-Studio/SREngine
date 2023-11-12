@@ -6,15 +6,21 @@
 #include <Utils/Common/StringFormat.h>
 #include <Utils/Debug.h>
 
-//#include <unistd.h>         // readlink
 #include <X11/Xlib.h>
 #include <X11/extensions/Xrandr.h>
 
 #include <filesystem>
 
+#include <sys/sendfile.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <xcb/randr.h>
+#include <X11/Xlib-xcb.h>
+
 namespace SR_UTILS_NS::Platform {
     void SegmentationHandler(int sig) {
-        WriteConsoleError("Application crashed!\n" + SR_UTILS_NS::GetStacktrace());
+        WriteConsoleError("Application crashed! Waiting for stacktrace...\n");
+        WriteConsoleError("Crash stacktrace: \n" + SR_UTILS_NS::GetStacktrace());
         Breakpoint();
         exit(1);
     }
@@ -24,6 +30,7 @@ namespace SR_UTILS_NS::Platform {
     }
 
     void InitSegmentationHandler() {
+        StacktraceInit();
         signal(SIGSEGV, SegmentationHandler);
         std::set_terminate(StdHandler);
     }
@@ -73,11 +80,11 @@ namespace SR_UTILS_NS::Platform {
     }
 
     void WriteConsoleError(const std::string& msg) {
-        std::cout << msg;
+        std::cerr << msg;
     }
 
     void WriteConsoleWarn(const std::string& msg) {
-        std::cout << msg;
+        std::cerr << msg;
     }
 
     void TextToClipboard(const std::string &text) {
@@ -128,12 +135,58 @@ namespace SR_UTILS_NS::Platform {
     }
 
     bool Copy(const Path &from, const Path &to) {
-        SRHaltOnce("Not implemented!");
-        return false;
+        if (from.IsFile()) {
+            int source = open(from.c_str(), O_RDONLY, 0);
+            int dest = open(to.c_str(), O_WRONLY | O_CREAT /*| O_TRUNC/**/, 0644);
+
+            // struct required, rationale: function stat() exists also
+            struct stat stat_source;
+            fstat(source, &stat_source);
+
+            auto&& result = sendfile(dest, source, 0, stat_source.st_size);
+
+            close(source);
+            close(dest);
+
+            if (result == -1) {
+                SR_WARN(SR_FORMAT("Platform::Copy() : failed to copy!\n\tFrom: %s\n\tTo: %s", from.CStr(), to.CStr()));
+            }
+
+            return result != -1;
+        }
+
+        if (!from.IsDir()) {
+            SR_WARN(SR_FORMAT("Platform::Copy() : \"%s\" is not directory!", from.c_str()));
+            return false;
+        }
+
+        CreateFolder(to.ToStringRef());
+
+        for (auto&& item : GetInDirectory(from, Path::Type::Undefined)) {
+            if (Copy(item, to.Concat(item.GetBaseNameAndExt()))) {
+                continue;
+            }
+
+            return false;
+        }
+
+        return true;
     }
 
     std::list<Path> GetInDirectory(const Path &dir, Path::Type type) {
-        return { };
+        std::list<Path> result;
+
+        if (!IsExists(dir)) {
+            return result;
+        }
+
+        for (const auto& entry : std::filesystem::directory_iterator(dir.ToStringRef())) {
+            if ((entry.is_directory() && type == Path::Type::Folder) || (entry.is_regular_file() && type == Path::Type::File)) {
+                result.emplace_back(entry.path());
+            }
+        }
+
+        return result;
     }
 
     bool CreateFolder(const std::string& path) {
@@ -212,13 +265,33 @@ namespace SR_UTILS_NS::Platform {
     std::vector<SR_MATH_NS::UVector2> GetScreenResolutions() {
         std::vector<SR_MATH_NS::UVector2> resolutions;
         if (auto&& pDisplay = XOpenDisplay(":0")) {
+            XRRScreenResources *screen;
+            XRRCrtcInfo *crtc_info;
+
+            pDisplay = XOpenDisplay(":0");
+            screen = XRRGetScreenResources (pDisplay, DefaultRootWindow(pDisplay));
+            crtc_info = XRRGetCrtcInfo (pDisplay, screen, screen->crtcs[0]);
+
             for (int32_t i = 0; i < ScreenCount(pDisplay); ++i) {
                 auto&& screen = XRRGetScreenResources(pDisplay, DefaultRootWindow(pDisplay));
                 auto&& crtc_info = XRRGetCrtcInfo (pDisplay, screen, screen->crtcs[0]);
                 resolutions.emplace_back(crtc_info->width, crtc_info->height);
             }
+
             XCloseDisplay(pDisplay);
         }
+
+        /*Display* pDisplay = XOpenDisplay(nullptr);
+        xcb_connection_t* pConnection = XGetXCBConnection(pDisplay);
+        if (!pConnection) {
+            SR_ERROR("GetScreenResolutions() : failed to create X11 connection!");
+            return resolutions;
+        }
+
+        //auto&& screenInfoCookie = xcb_randr_get_screen_info_reply(pConnection, );
+        auto&& screenInfoReply = xcb_randr_get_screen_info()
+        //xcb_randr_get_screen_info_reply(pConnection, screenInfoReply, nullptr);
+        xcb_randr_get_screen_info_reply(pConnection, screenInfoReply, nullptr);*/
 
         return resolutions;
     }

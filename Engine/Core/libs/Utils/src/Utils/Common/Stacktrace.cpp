@@ -20,8 +20,18 @@
 #endif
 
 #ifdef SR_LINUX
+    #include <Utils/Platform/LinuxStacktraceImpl.h>
+
+    void SR_UTILS_NS::StacktraceInit() {
+        StacktraceInitImpl();
+    }
+
     std::string SR_UTILS_NS::GetStacktrace() {
-        return "Linux implementation does not yet support stack trace!";
+        auto&& stacktrace = GetStacktraceImpl();
+        std::string result = stacktrace;
+
+        free(stacktrace);
+        return result;
     }
 #endif
 
