@@ -56,7 +56,7 @@ jobs:
           print(f"Issue Ids are: {issueIds}")
           for issueId in issueIds:
             print(f"Trying to get issue: {issueId}")
-            issue = repo.get_issue(issueId)
+            issue = repo.get_issue(int(issueId))
             print(f"Creating comment and closing issue: {issueId}")
             issue.create_comment(f"Issue is closed automatically by CI. Commit: {commitSha}")
             issue.edit(state='closed')
