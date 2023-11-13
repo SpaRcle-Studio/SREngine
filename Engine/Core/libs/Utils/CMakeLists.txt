@@ -45,7 +45,10 @@ list(APPEND SR_UTILS_LINK_LIBRARIES cxx/ECS.cxx)
 list(APPEND SR_UTILS_LINK_LIBRARIES cxx/World.cxx)
 list(APPEND SR_UTILS_LINK_LIBRARIES cxx/Platform.cxx)
 list(APPEND SR_UTILS_LINK_LIBRARIES cxx/Types.cxx)
-list(APPEND SR_UTILS_LINK_LIBRARIES src/Utils/Platform/LinuxStacktraceImpl.cpp)
+
+if (UNIX)
+    list(APPEND SR_UTILS_LINK_LIBRARIES src/Utils/Platform/LinuxStacktraceImpl.cpp)
+endif ()
 
 if (SR_UTILS_STATIC_LIBRARY)
     add_library(Utils STATIC ${SR_UTILS_LINK_LIBRARIES})
