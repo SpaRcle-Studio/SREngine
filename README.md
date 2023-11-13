@@ -5,7 +5,9 @@
     <img alt="Project Status: Active – The project is under active delopment!." src="https://www.repostatus.org/badges/latest/active.svg" />
     <img alt="CodeFactor." src="https://www.codefactor.io/repository/github/sparcle-studio/srengine/badge/dev" />
     <img alt="GitHub Contributors." src="https://img.shields.io/github/contributors/SpaRcle-Studio/SREngine" />
-    <img alt="Issues" src="https://img.shields.io/github/issues/SpaRcle-Studio/SREngine?color=0088ff" />
+    <img alt="Issues." src="https://img.shields.io/github/issues/SpaRcle-Studio/SREngine?color=0088ff" />
+    <img alt="Commit Activity." src="https://img.shields.io/github/commit-activity/m/SpaRcle-Studio/SREngine/dev" />
+    <img alt="Discord server." src="https://img.shields.io/discord/768652124204433429?logo=discord&link=https%3A%2F%2Fdiscord.gg%2FqAr7Grz3RD" />
   </p>
   <p align="center">
     <img alt="Build statistics." src="https://buildstats.info/github/chart/SpaRcle-Studio/SREngine?buildCount=50&branch=dev" />
