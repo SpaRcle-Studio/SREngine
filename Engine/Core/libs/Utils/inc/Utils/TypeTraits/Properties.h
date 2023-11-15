@@ -9,13 +9,16 @@
 
 namespace SR_UTILS_NS {
     class PropertyContainer : public Property {
-        SR_INLINE_STATIC int16_t VERSION = 1000;
+        SR_REGISTER_TYPE_TRAITS_PROPERTY(PropertyContainer, 1000)
         using PropertyList = std::vector<Property*>;
     public:
         PropertyContainer();
         ~PropertyContainer() override;
 
     public:
+        void SaveProperty(MarshalRef marshal) const noexcept override;
+        void LoadProperty(MarshalRef marshal) noexcept override;
+
         void ClearContainer();
 
         SR_NODISCARD PropertyList& GetProperties() noexcept { return m_properties; }

@@ -2,15 +2,16 @@
 // Created by Monika on 22.09.2021.
 //
 
-#ifndef GAMEENGINE_STRINGFORMAT_H
-#define GAMEENGINE_STRINGFORMAT_H
+#ifndef SR_ENGINE_UTILS__STRINGFORMAT_H
+#define SR_ENGINE_UTILS__STRINGFORMAT_H
 
 #include <Utils/Debug.h>
 #include <Utils/Math/Mathematics.h>
+#include <Utils/Types/StringAtom.h>
 
 namespace SR_UTILS_NS {
     template<typename T> std::string ToString(const T& value) {
-        if constexpr (SR_MATH_NS::IsLogical<T>()) {
+        if constexpr (IsLogical<T>()) {
             return value ? "true" : "false";
         }
         else if constexpr (SR_MATH_NS::IsNumber<T>()) {
@@ -19,7 +20,7 @@ namespace SR_UTILS_NS {
         else if constexpr (std::is_enum_v<T>) {
             return SR_UTILS_NS::EnumReflector::ToString(value).ToString();
         }
-        else if constexpr (SR_MATH_NS::IsString<T>()) {
+        else if constexpr (IsString<T>()) {
             return value;
         }
         else {

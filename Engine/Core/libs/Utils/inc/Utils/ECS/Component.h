@@ -125,6 +125,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD Transform* GetTransform() const noexcept;
         SR_NODISCARD uint64_t GetComponentBuildId() const noexcept { return m_componentBuildId; }
         SR_NODISCARD SR_UTILS_NS::PropertyContainer& GetComponentProperties() noexcept { return m_properties; }
+        SR_NODISCARD const SR_UTILS_NS::PropertyContainer& GetComponentProperties() const noexcept { return m_properties; }
 
         SR_NODISCARD std::string GetEntityInfo() const override;
 

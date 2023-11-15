@@ -14,12 +14,14 @@ namespace SR_UTILS_NS {
     class Property;
 
     class PropertyManager : public Singleton<PropertyManager> {
+        SR_REGISTER_SINGLETON(PropertyManager)
         using ConstructorFn = SR_HTYPES_NS::Function<Property*(void)>;
     public:
         void Register(StringAtom name, ConstructorFn constructor);
+        SR_NODISCARD Property* Allocate(const StringAtom& name) const noexcept;
 
     private:
-        //ska::flat_hash_map<StringAtom, ConstructorFn> m_constructors;
+        ska::flat_hash_map<StringAtom, ConstructorFn> m_constructors;
 
     };
 }

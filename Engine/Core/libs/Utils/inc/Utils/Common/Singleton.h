@@ -16,8 +16,11 @@
 #define SR_REGISTER_SINGLETON(name)                                                                                     \
     private:                                                                                                            \
         friend class SR_UTILS_NS::Singleton<name>;                                                                      \
-        SR_INLINE_STATIC SR_UTILS_NS::StringAtom SINGLETON_NAME = #name;                                                \
-        SR_UTILS_NS::StringAtom GetSingletonName() const noexcept final { return SINGLETON_NAME; };                     \
+        static SR_UTILS_NS::StringAtom GetStaticSingletonName() {                                                       \
+            static SR_UTILS_NS::StringAtom staticSingletonName = #name;                                                 \
+            return staticSingletonName;                                                                                 \
+        }                                                                                                               \
+        SR_UTILS_NS::StringAtom GetSingletonName() const noexcept final { return GetStaticSingletonName(); };           \
 
 namespace SR_UTILS_NS {
     class SingletonManager;
@@ -101,7 +104,7 @@ namespace SR_UTILS_NS {
                 }
 
                 pSingleton->OnSingletonDestroy();
-                GetSingletonManager()->Remove(T::SINGLETON_NAME);
+                GetSingletonManager()->Remove(T::GetStaticSingletonName());
                 delete pSingleton;
             }
         }
@@ -141,7 +144,7 @@ namespace SR_UTILS_NS {
 
     private:
         static Singleton<T>* GetSingleton() noexcept {
-            void* p = GetSingletonManager()->GetSingleton(T::SINGLETON_NAME);
+            void* p = GetSingletonManager()->GetSingleton(T::GetStaticSingletonName());
             return reinterpret_cast<Singleton<T>*>(p);
         }
     };

@@ -179,26 +179,6 @@ namespace SR_MATH_NS {
         return abs(a - b) < tolerance;
     }
 
-    template<typename T> constexpr bool IsVolatile() {
-        return std::is_volatile<T>::value;
-    }
-
-    template<typename T> constexpr bool IsLogical() {
-        if (!IsVolatile<T>()) {
-            return IsLogical<volatile T>();
-        }
-
-        return std::is_same_v<T, volatile bool>;
-    }
-
-    template<typename T> constexpr bool IsString() {
-        if (!IsVolatile<T>()) {
-            return IsString<volatile T>();
-        }
-
-        return std::is_same_v<T, volatile std::string> || std::is_same_v<T, volatile std::string_view>;
-    }
-
     template<typename T> constexpr bool IsNumber() {
         if (!IsVolatile<T>()) {
             return IsNumber<volatile T>();

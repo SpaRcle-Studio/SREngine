@@ -9,10 +9,12 @@
 
 namespace SR_GTYPES_NS {
     class Mesh;
+    class MeshComponent;
 }
 
 namespace SR_GRAPH_NS {
     SR_GTYPES_NS::Mesh* CreateMeshByType(MeshType type);
+    SR_GTYPES_NS::MeshComponent* CreateMeshComponentByType(MeshType type);
     uint16_t RoundBonesCount(uint16_t count);
 }
 

@@ -111,6 +111,18 @@ namespace SR_UTILS_NS {
         static constexpr bool value = decltype(IsDerivedFrom::test(std::declval<U>()))::value;
 
     };
+
+    template<typename T> constexpr bool IsVolatile() {
+        return std::is_volatile<T>::value;
+    }
+
+    template<typename T> constexpr bool IsLogical() {
+        if (!IsVolatile<T>()) {
+            return IsLogical<volatile T>();
+        }
+
+        return std::is_same_v<T, volatile bool>;
+    }
 }
 
 #define SR_EXCHANGE(x, y) SR_UTILS_NS::Exchange(x, y)

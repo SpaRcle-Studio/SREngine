@@ -18,7 +18,7 @@ namespace SR_GTYPES_NS {
     };
 
     class Sprite : public SR_GTYPES_NS::MeshComponent {
-        SR_ENTITY_SET_VERSION(1000);
+        SR_ENTITY_SET_VERSION(1001);
         SR_INITIALIZE_COMPONENT(Sprite);
         using Super = SR_GTYPES_NS::MeshComponent;
     public:

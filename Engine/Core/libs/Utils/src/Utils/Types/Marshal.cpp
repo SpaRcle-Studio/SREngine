@@ -20,20 +20,26 @@ namespace SR_HTYPES_NS {
     { }
 
     void Marshal::Append(Marshal&& marshal) {
-        if (marshal) {
+        if (marshal && marshal.Size() > 0) {
             Super::Write(marshal.Super::View(), marshal.Size());
         }
     }
 
     void Marshal::Append(Marshal::Ptr& pMarshal) {
-        if (pMarshal && *pMarshal) {
+        if (pMarshal && *pMarshal && pMarshal->Size() > 0) {
             Super::Write(pMarshal->Super::View(), pMarshal->Size());
         }
 
         SR_SAFE_DELETE_PTR(pMarshal);
     }
 
-    bool Marshal::Save(const Path &path) const {
+    void Marshal::Append(std::unique_ptr<Marshal>&& pMarshal) {
+        if (pMarshal && *pMarshal && pMarshal->Size() > 0) {
+            Super::Write(pMarshal->Super::View(), pMarshal->Size());
+        }
+    }
+
+    bool Marshal::Save(const Path& path) const {
         if (!path.Make()) {
             return false;
         }
@@ -97,7 +103,12 @@ namespace SR_HTYPES_NS {
     }
 
     Marshal Marshal::ReadBytes(uint64_t count) noexcept {
-        auto&& marshal = Marshal(Super::View(), count);
+        if (GetPosition() + count > GetCapacity()) {
+            SRHalt("Invalid range!");
+            return Marshal(); /// NOLINT
+        }
+
+        auto&& marshal = Marshal(Super::View() + GetPosition(), count);
         Skip(count);
         return marshal;
     }

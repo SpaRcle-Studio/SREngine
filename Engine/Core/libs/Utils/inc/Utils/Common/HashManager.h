@@ -16,17 +16,17 @@ namespace SR_UTILS_NS {
         uint64_t size = 0;
     };
 
-    class HashManager : public SR_UTILS_NS::Singleton<HashManager> {
-        SR_REGISTER_SINGLETON(HashManager);
+    /// Не можем наследоваться от Singleton
+    class HashManager : SR_UTILS_NS::NonCopyable {
         using Hash = uint64_t;
+    private:
+        HashManager() = default;
+        ~HashManager() override = default;
+
     public:
-        void InitSingleton() override;
-        void OnSingletonDestroy() override;
+        static HashManager& Instance();
 
-        SR_NODISCARD bool IsSingletonCanBeDestroyed() const override {
-            return false;
-        }
-
+    public:
         SR_NODISCARD const std::string& HashToString(Hash hash) const;
         SR_NODISCARD bool Exists(Hash hash) const;
 
@@ -43,6 +43,7 @@ namespace SR_UTILS_NS {
 
     private:
         ska::flat_hash_map<Hash, StringHashInfo*> m_strings; /// NOLINT
+        mutable std::recursive_mutex m_mutex;
 
     };
 }

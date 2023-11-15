@@ -5,6 +5,11 @@
 #include <Utils/Common/HashManager.h>
 
 namespace SR_UTILS_NS {
+    HashManager& HashManager::Instance() {
+        static HashManager instance;
+        return instance;
+    }
+
     HashManager::Hash HashManager::AddHash(const char* str) {
         return GetOrAddInfo(str)->hash;
     }
@@ -29,20 +34,6 @@ namespace SR_UTILS_NS {
     bool HashManager::Exists(HashManager::Hash hash) const {
         SR_LOCK_GUARD;
         return m_strings.find(hash) != m_strings.end();
-    }
-
-    void HashManager::InitSingleton() {
-        m_strings.reserve(1024);
-        Singleton::InitSingleton();
-    }
-
-    void HashManager::OnSingletonDestroy() {
-        SR_LOCK_GUARD;
-        for (auto&& [hash, pInfo] : m_strings) {
-            delete pInfo;
-        }
-        m_strings.clear();
-        SingletonBase::OnSingletonDestroy();
     }
 
     StringHashInfo* HashManager::Register(std::string str, Hash hash) {

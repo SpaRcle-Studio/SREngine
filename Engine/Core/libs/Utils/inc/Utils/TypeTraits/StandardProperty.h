@@ -8,11 +8,16 @@
 #include <Utils/TypeTraits/Property.h>
 
 namespace SR_UTILS_NS {
+    /// ---------------------------------------- StandardProperty ------------------------------------------------------
+
     class StandardProperty : public Property {
-        SR_INLINE_STATIC int16_t VERSION = 1000;
+        SR_REGISTER_TYPE_TRAITS_PROPERTY(StandardProperty, 1000)
         using SetterFn = SR_HTYPES_NS::Function<void(void*)>;
         using GetterFn = SR_HTYPES_NS::Function<void(void*)>;
     public:
+        void SaveProperty(MarshalRef marshal) const noexcept override;
+        void LoadProperty(MarshalRef marshal) noexcept override;
+
         StandardProperty& SetSetter(SetterFn fn) { m_setter = std::move(fn); return *this; }
         StandardProperty& SetGetter(GetterFn fn) { m_getter = std::move(fn); return *this; }
         StandardProperty& SetType(StandardType type) { m_type = type; return *this; }
@@ -82,36 +87,17 @@ namespace SR_UTILS_NS {
 
     };
 
-    class EnumProperty : public Property {
-        using SetterFn = SR_HTYPES_NS::Function<void(const SR_UTILS_NS::StringAtom&)>;
-        using GetterFn = SR_HTYPES_NS::Function<SR_UTILS_NS::StringAtom()>;
-        using FilterFn = SR_HTYPES_NS::Function<bool(const SR_UTILS_NS::StringAtom&)>;
-    public:
-        EnumProperty& SetEnumReflector(SR_UTILS_NS::EnumReflector* pReflector) noexcept { m_reflector = pReflector; return *this; }
-        SR_NODISCARD SR_UTILS_NS::EnumReflector* GetEnumReflector() const noexcept { return m_reflector; }
-
-        SR_NODISCARD SR_UTILS_NS::StringAtom GetEnum() const noexcept;
-
-        SR_NODISCARD const FilterFn& GetFilter() const noexcept { return m_filter; }
-        EnumProperty& SetEnum(const SR_UTILS_NS::StringAtom& value) noexcept;
-
-        EnumProperty& SetSetter(const SetterFn& value) { m_setter = value; return *this; }
-        EnumProperty& SetGetter(const GetterFn& value) { m_getter = value; return *this; }
-        EnumProperty& SetFilter(const FilterFn& value) { m_filter = value; return *this; }
-
-    private:
-        SR_UTILS_NS::EnumReflector* m_reflector = nullptr;
-        SetterFn m_setter;
-        GetterFn m_getter;
-        FilterFn m_filter;
-
-    };
+    /// ------------------------------------------ PathProperty --------------------------------------------------------
 
     class PathProperty : public Property {
+        SR_REGISTER_TYPE_TRAITS_PROPERTY(PathProperty, 1000)
         using Filter = std::vector<std::pair<SR_UTILS_NS::StringAtom, SR_UTILS_NS::StringAtom>>;
         using SetterFn = SR_HTYPES_NS::Function<void(const SR_UTILS_NS::Path&)>;
         using GetterFn = SR_HTYPES_NS::Function<SR_UTILS_NS::Path()>;
     public:
+        void SaveProperty(MarshalRef marshal) const noexcept override;
+        void LoadProperty(MarshalRef marshal) noexcept override;
+
         PathProperty& AddFileFilter(SR_UTILS_NS::StringAtom description, SR_UTILS_NS::StringAtom extension) {
             m_filter.emplace_back(std::make_pair(description, extension));
             return *this;
@@ -132,6 +118,37 @@ namespace SR_UTILS_NS {
         Filter m_filter;
         SetterFn m_setter;
         GetterFn m_getter;
+
+    };
+
+    /// ------------------------------------------ PathProperty --------------------------------------------------------
+
+    class EnumProperty : public Property {
+        SR_REGISTER_TYPE_TRAITS_PROPERTY(EnumProperty, 1000)
+        using SetterFn = SR_HTYPES_NS::Function<void(const SR_UTILS_NS::StringAtom&)>;
+        using GetterFn = SR_HTYPES_NS::Function<SR_UTILS_NS::StringAtom()>;
+        using FilterFn = SR_HTYPES_NS::Function<bool(const SR_UTILS_NS::StringAtom&)>;
+    public:
+        void SaveProperty(MarshalRef marshal) const noexcept override;
+        void LoadProperty(MarshalRef marshal) noexcept override;
+
+        EnumProperty& SetEnumReflector(SR_UTILS_NS::EnumReflector* pReflector) noexcept { m_reflector = pReflector; return *this; }
+        SR_NODISCARD SR_UTILS_NS::EnumReflector* GetEnumReflector() const noexcept { return m_reflector; }
+
+        SR_NODISCARD SR_UTILS_NS::StringAtom GetEnum() const noexcept;
+
+        SR_NODISCARD const FilterFn& GetFilter() const noexcept { return m_filter; }
+        EnumProperty& SetEnum(const SR_UTILS_NS::StringAtom& value) noexcept;
+
+        EnumProperty& SetSetter(const SetterFn& value) { m_setter = value; return *this; }
+        EnumProperty& SetGetter(const GetterFn& value) { m_getter = value; return *this; }
+        EnumProperty& SetFilter(const FilterFn& value) { m_filter = value; return *this; }
+
+    private:
+        SR_UTILS_NS::EnumReflector* m_reflector = nullptr;
+        SetterFn m_setter;
+        GetterFn m_getter;
+        FilterFn m_filter;
 
     };
 }

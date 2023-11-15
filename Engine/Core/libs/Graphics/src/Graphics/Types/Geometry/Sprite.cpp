@@ -6,6 +6,7 @@
 #include <Graphics/Types/Material.h>
 #include <Graphics/Types/Uniforms.h>
 #include <Graphics/Types/Shader.h>
+#include <Graphics/Utils/MeshUtils.h>
 
 namespace SR_GTYPES_NS {
     SR_REGISTER_COMPONENT(Sprite)
@@ -19,23 +20,48 @@ namespace SR_GTYPES_NS {
         return id;
     }
 
-    SR_UTILS_NS::Component* Sprite::LoadComponent(SR_HTYPES_NS::Marshal &marshal, const SR_HTYPES_NS::DataStorage *dataStorage) { //Нафига dataStorage, если он не используется, чёртов полиморфизм
-        SR_MAYBE_UNUSED const auto&& type = static_cast<MeshType>(marshal.Read<int32_t>());
-
-        const auto&& material = marshal.Read<std::string>();
-
+    SR_UTILS_NS::Component* Sprite::LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage *dataStorage) { //Нафига dataStorage, если он не используется, чёртов полиморфизм
         auto&& pSprite = SR_UTILS_NS::ComponentManager::Instance().CreateComponent<Sprite>();
+        pSprite->GetComponentProperties().LoadProperty(marshal);
+        return pSprite;
+    }
 
-        if (material != "None") {
-            if (auto&& pMaterial = SR_GTYPES_NS::Material::Load(material)) {
-                pSprite->SetMaterial(pMaterial);
-            }
-            else {
-                SR_ERROR("Sprite::LoadComponent() : failed to load material! Name: " + material)
-            }
+    SR_HTYPES_NS::Marshal::Ptr Sprite::Save(SR_UTILS_NS::SavableSaveData data) const {
+        auto&& pMarshal = Component::Save(data); /// NOLINT идем в обход MeshComponent
+        GetComponentProperties().SaveProperty(*pMarshal);
+        return pMarshal;
+    }
+
+    SR_UTILS_NS::Component* Sprite::CopyComponent() const {
+        auto&& pMesh = SR_GRAPH_NS::CreateMeshComponentByType(GetMeshType());
+        if (!pMesh) {
+            return nullptr;
         }
 
-        return pSprite;
+        /// TODO: non-optimized way
+        SR_HTYPES_NS::Marshal marshal;
+        GetComponentProperties().SaveProperty(marshal);
+        pMesh->GetComponentProperties().LoadProperty(marshal);
+
+        return pMesh;
+    }
+
+    bool Sprite::InitializeEntity() noexcept {
+        m_properties.AddStandardProperty("Sliced", &m_sliced);
+
+        m_properties.AddStandardProperty("Texture border", &m_textureBorder)
+            .SetDrag(0.01f)
+            .SetResetValue(0.15f)
+            .SetActiveCondition([this]() { return m_sliced; })
+            .SetWidth(90.f);
+
+        m_properties.AddStandardProperty("Window border", &m_windowBorder)
+            .SetDrag(0.01f)
+            .SetResetValue(0.15f)
+            .SetActiveCondition([this]() { return m_sliced; })
+            .SetWidth(90.f);
+
+        return Super::InitializeEntity();
     }
 
     bool Sprite::Calculate() {
@@ -105,14 +131,6 @@ namespace SR_GTYPES_NS {
         }
     }
 
-    SR_HTYPES_NS::Marshal::Ptr Sprite::Save(SR_UTILS_NS::SavableSaveData data) const {
-        auto&& pMarshal = Super::Save(data);
-
-        pMarshal->Write(m_material ? m_material->GetResourceId() : "None");
-
-        return pMarshal;
-    }
-
     std::vector<uint32_t> Sprite::GetIndices() const {
         return SR_SPRITE_INDICES;
     }
@@ -137,32 +155,10 @@ namespace SR_GTYPES_NS {
         Super::UseModelMatrix();
     }
 
-    SR_UTILS_NS::Component* Sprite::CopyComponent() const {
-        return MeshComponent::CopyComponent();
-    }
-
     void Sprite::OnPriorityDirty() {
         if (auto&& pRenderScene = GetRenderScene()) {
             pRenderScene->GetFlatCluster().MarkDirty();
         }
         Component::OnPriorityDirty();
-    }
-
-    bool Sprite::InitializeEntity() noexcept {
-        m_properties.AddStandardProperty("Sliced", &m_sliced);
-
-        m_properties.AddStandardProperty("Texture border", &m_textureBorder)
-            .SetDrag(0.01f)
-            .SetResetValue(0.15f)
-            .SetActiveCondition([this]() { return m_sliced; })
-            .SetWidth(90.f);
-
-        m_properties.AddStandardProperty("Window border", &m_windowBorder)
-            .SetDrag(0.01f)
-            .SetResetValue(0.15f)
-            .SetActiveCondition([this]() { return m_sliced; })
-            .SetWidth(90.f);
-
-        return Super::InitializeEntity();
     }
 }

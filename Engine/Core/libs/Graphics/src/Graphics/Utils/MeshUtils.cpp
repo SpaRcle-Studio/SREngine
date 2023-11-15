@@ -35,6 +35,27 @@ namespace SR_GRAPH_NS {
         return nullptr;
     }
 
+    SR_GTYPES_NS::MeshComponent* CreateMeshComponentByType(MeshType type) {
+        switch (type) {
+            case MeshType::Static:
+            case MeshType::Sprite:
+            case MeshType::Skinned:
+            case MeshType::Procedural: {
+                if (auto&& pMeshComponent = dynamic_cast<SR_GTYPES_NS::MeshComponent*>(CreateMeshByType(type))) {
+                    return pMeshComponent;
+                }
+                SRHalt("Mesh is not a component! Memory leak...");
+                return nullptr;
+            }
+            default:
+                break;
+        }
+
+        SRHalt("Unknown mesh type!");
+
+        return nullptr;
+    }
+
     uint16_t RoundBonesCount(uint16_t count) {
         if (count == 0) {
             SRHalt("Invalid count!");

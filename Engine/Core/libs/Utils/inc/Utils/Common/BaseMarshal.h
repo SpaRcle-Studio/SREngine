@@ -63,7 +63,7 @@ namespace SR_UTILS_NS {
                 stream.write((const char *) &value.x, sizeof(uint32_t));
                 stream.write((const char *) &value.y, sizeof(uint32_t));
             }
-            else if constexpr (SR_MATH_NS::IsNumber<T>() || SR_MATH_NS::IsLogical<T>()) {
+            else if constexpr (SR_MATH_NS::IsNumber<T>() || IsLogical<T>()) {
                 stream.write((const char *) &value, sizeof(T));
             }
             else {
@@ -122,7 +122,7 @@ namespace SR_UTILS_NS {
                 stream.read((char*)&value.x, sizeof(uint32_t));
                 stream.read((char*)&value.y, sizeof(uint32_t));
             }
-            else if constexpr (SR_MATH_NS::IsNumber<T>() || SR_MATH_NS::IsLogical<T>()) {
+            else if constexpr (SR_MATH_NS::IsNumber<T>() || IsLogical<T>()) {
                 stream.read((char*)&value, sizeof(T));
             }
             else {

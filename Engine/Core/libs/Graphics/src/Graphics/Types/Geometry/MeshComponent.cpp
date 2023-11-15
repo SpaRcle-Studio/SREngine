@@ -16,17 +16,20 @@ namespace SR_GTYPES_NS {
         m_entityMessages.AddCustomProperty<SR_UTILS_NS::LabelProperty>("MeshInv")
             .SetLabel("Invalid mesh!")
             .SetColor(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f))
-            .SetActiveCondition([this] { return !IsCalculatable(); });
+            .SetActiveCondition([this] { return !IsCalculatable(); })
+            .SetDontSave();
 
         m_entityMessages.AddCustomProperty<SR_UTILS_NS::LabelProperty>("MeshNotCalc")
             .SetLabel("Mesh isn't calculated!")
             .SetColor(SR_MATH_NS::FColor(1.f, 1.f, 0.f, 1.f))
-            .SetActiveCondition([this] { return !IsCalculated(); });
+            .SetActiveCondition([this] { return !IsCalculated(); })
+            .SetDontSave();
 
         m_entityMessages.AddCustomProperty<SR_UTILS_NS::LabelProperty>("MeshNotReg")
             .SetLabel("Mesh isn't registered!")
             .SetColor(SR_MATH_NS::FColor(1.f, 1.f, 0.f, 1.f))
-            .SetActiveCondition([this] { return !IsGraphicsResourceRegistered(); });
+            .SetActiveCondition([this] { return !IsGraphicsResourceRegistered(); })
+            .SetDontSave();
     }
 
     SR_HTYPES_NS::Marshal::Ptr MeshComponent::Save(SR_UTILS_NS::SavableSaveData data) const {

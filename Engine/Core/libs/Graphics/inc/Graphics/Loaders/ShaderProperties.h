@@ -60,6 +60,7 @@ namespace SR_GRAPH_NS {
     )
 
     class MaterialProperty : public SR_UTILS_NS::Property {
+        SR_REGISTER_TYPE_TRAITS_PROPERTY(MaterialProperty, 1000)
     public:
         SR_NODISCARD SR_UTILS_NS::StringAtom GetDisplayName() const noexcept { return m_displayName; }
         SR_NODISCARD ShaderVarType GetShaderVarType() const noexcept { return m_type; }

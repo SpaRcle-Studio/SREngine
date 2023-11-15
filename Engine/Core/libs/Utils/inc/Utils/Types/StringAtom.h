@@ -62,6 +62,17 @@ namespace SR_UTILS_NS {
         StringHashInfo* m_info = nullptr;
 
     };
+
+    template<typename T> constexpr bool IsString() {
+        if (!IsVolatile<T>()) {
+            return IsString<volatile T>();
+        }
+
+        return
+            std::is_same_v<T, volatile std::string> ||
+            std::is_same_v<T, volatile std::string_view> ||
+            std::is_same_v<T, volatile StringAtom>;
+    }
 }
 
 namespace std {

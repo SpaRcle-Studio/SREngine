@@ -37,6 +37,7 @@ namespace SR_HTYPES_NS {
         static Marshal LoadFromBase64(const std::string& base64);
 
         void Append(Marshal&& marshal);
+        void Append(std::unique_ptr<Marshal>&& pMarshal);
         void Append(Marshal::Ptr& pMarshal);
 
         SR_NODISCARD Marshal ReadBytes(uint64_t count) noexcept;
@@ -66,7 +67,10 @@ namespace SR_HTYPES_NS {
             if constexpr (std::is_same_v<T, std::any>) {
                 MarshalUtils::SaveAny<std::any>(*this, value);
             }
-            else if constexpr (SR_MATH_NS::IsString<T>()) {
+            else if constexpr (std::is_same_v<T, SR_UTILS_NS::StringAtom>) {
+                MarshalUtils::SaveShortString(*this, value.ToStringRef());
+            }
+            else if constexpr (IsString<T>()) {
                 MarshalUtils::SaveShortString(*this, value);  //нужно вызывать Write<std::string>()
             }
             else if constexpr (std::is_same_v<T, SR_HTYPES_NS::UnicodeString>) {
@@ -99,7 +103,7 @@ namespace SR_HTYPES_NS {
         }
 
         template<typename T> T TryRead() {
-            if constexpr (Math::IsString<T>()) {
+            if constexpr (IsString<T>()) {
                 return MarshalUtils::TryLoadShortStr(*this);
             }
             else if constexpr (std::is_same_v<T, SR_HTYPES_NS::UnicodeString>) {
@@ -114,7 +118,7 @@ namespace SR_HTYPES_NS {
             else if constexpr (std::is_same_v<T, SR_HTYPES_NS::UnicodeString>) {
                 return MarshalUtils::LoadUnicodeString(*this);
             }
-            else if constexpr (Math::IsString<T>()) {
+            else if constexpr (IsString<T>()) {
                 return MarshalUtils::LoadShortStr(*this);
             }
             else if constexpr (IsSTLVector<T>()) {
