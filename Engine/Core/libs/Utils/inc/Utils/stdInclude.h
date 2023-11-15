@@ -7,8 +7,10 @@
 
 #include <Utils/macros.h>
 
+#include <cfloat>
+#include <limits>
 #include <type_traits>
-#include <stdio.h>
+#include <cstdio>
 #include <iosfwd>
 #include <regex>
 #include <stdexcept>

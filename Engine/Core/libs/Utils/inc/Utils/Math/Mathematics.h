@@ -5,7 +5,7 @@
 #ifndef GAMEENGINE_MATHEMATICS_H
 #define GAMEENGINE_MATHEMATICS_H
 
-#include <Utils/macros.h>
+#include <Utils/stdInclude.h>
 
 #ifndef M_PI
     #define M_PI 3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679
@@ -78,13 +78,6 @@
 
 #define RAD3(v) glm::vec3(RAD(v.x), RAD(v.y), RAD(v.z))
 #define DEG3(v) glm::vec3(DEG(v.x), DEG(v.y), DEG(v.z))
-
-#include <cmath>
-#include <cfloat>
-#include <cstdint>
-#include <limits>
-#include <string>
-#include <algorithm>
 
 #include <glm/glm.hpp>
 //#include <glm/gtx/hash.hpp>
