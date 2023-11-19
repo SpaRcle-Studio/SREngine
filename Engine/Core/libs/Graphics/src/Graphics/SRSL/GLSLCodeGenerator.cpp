@@ -521,7 +521,7 @@ namespace SR_SRSL_NS {
         std::string uniformsCode;
 
         for (auto&& [name, uniformBlock] : m_shader->GetUniformBlocks()) {
-            std::string blockCode = SR_SPRINTF_FORMAT("layout (std140, binding = %d) uniform %s {\n", uniformBlock.binding, name.c_str());
+            std::string blockCode = SR_SPRINTF("layout (std140, binding = %d) uniform %s {\n", uniformBlock.binding, name.c_str());
             bool hasUsage = false;
 
             for (auto&& field : uniformBlock.fields) {

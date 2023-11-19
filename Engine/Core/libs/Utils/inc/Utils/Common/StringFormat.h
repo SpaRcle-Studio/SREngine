@@ -73,7 +73,7 @@ namespace SR_UTILS_NS {
         }
     }
 
-    template <class... Args> std::string SPrintFFormat(const char* fmt, Args&&... args) {
+    template <class... Args> std::string SPrintF(const char* fmt, Args&&... args) {
         try {
             return fmt::sprintf(fmt, args...);
         }
@@ -89,8 +89,8 @@ namespace SR_UTILS_NS {
     }
 }
 
-#define SR_FORMAT(fmt, ...) SR_UTILS_NS::Format(fmt, __VA_ARGS__)
-#define SR_SPRINTF_FORMAT(fmt, ...) SR_UTILS_NS::SPrintFFormat(fmt, __VA_ARGS__)
-#define SR_FORMAT_C(fmt, ...) SR_UTILS_NS::Format(fmt, __VA_ARGS__).c_str()
+#define SR_FORMAT(...) SR_UTILS_NS::Format(__VA_ARGS__)
+#define SR_SPRINTF(...) SR_UTILS_NS::SPrintF(__VA_ARGS__)
+#define SR_FORMAT_C(...) SR_UTILS_NS::Format(__VA_ARGS__).c_str()
 
 #endif //SR_ENGINE_UTILS_STRING_FORMAT_H
