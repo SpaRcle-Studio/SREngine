@@ -104,21 +104,20 @@ namespace SR_UTILS_NS {
     };
 }
 
-#define SR_LOG(msg, ...) SR_UTILS_NS::Debug::Instance().Log(SR_FORMAT(msg, __VA_ARGS__));
-#define SR_INFO(msg, ...) SR_UTILS_NS::Debug::Instance().Info(SR_FORMAT(msg, __VA_ARGS__));
-#define SR_WARN(msg, ...) SR_UTILS_NS::Debug::Instance().Warn(SR_FORMAT(msg, __VA_ARGS__));
-#define SR_ERROR(msg, ...) SR_UTILS_NS::Debug::Instance().Error(SR_FORMAT(msg, __VA_ARGS__));
-#define SR_GRAPH(msg, ...) SR_UTILS_NS::Debug::Instance().Graph(SR_FORMAT(msg, __VA_ARGS__));
-#define SR_GRAPH_LOG(msg, ...) SR_GRAPH(SR_FORMAT(msg, __VA_ARGS__));
-#define SR_SHADER(msg, ...) SR_UTILS_NS::Debug::Instance().Shader(SR_FORMAT(msg, __VA_ARGS__));
-#define SR_SHADER_LOG(msg, ...) SR_UTILS_NS::Debug::Instance().Shader(SR_FORMAT(msg, __VA_ARGS__));
-#define SR_SYSTEM_LOG(msg, ...) SR_UTILS_NS::Debug::Instance().System(SR_FORMAT(msg, __VA_ARGS__));
-#define SR_VULKAN_MSG(msg, ...) SR_UTILS_NS::Debug::Instance().Vulkan(SR_FORMAT(msg, __VA_ARGS__));
-#define SR_VULKAN_LOG(msg, ...) SR_UTILS_NS::Debug::Instance().VulkanLog(SR_FORMAT(msg, __VA_ARGS__));
-#define SR_VULKAN_ERROR(msg, ...) SR_UTILS_NS::Debug::Instance().VulkanError(SR_FORMAT(msg, __VA_ARGS__));
+#define SR_LOG(...) SR_UTILS_NS::Debug::Instance().Log(SR_FORMAT(__VA_ARGS__));
+#define SR_INFO(...) SR_UTILS_NS::Debug::Instance().Info(SR_FORMAT(__VA_ARGS__));
+#define SR_WARN(...) SR_UTILS_NS::Debug::Instance().Warn(SR_FORMAT(__VA_ARGS__));
+#define SR_ERROR(...) SR_UTILS_NS::Debug::Instance().Error(SR_FORMAT(__VA_ARGS__));
+#define SR_GRAPH(...) SR_UTILS_NS::Debug::Instance().Graph(SR_FORMAT(__VA_ARGS__));
+#define SR_GRAPH_LOG(...) SR_GRAPH(SR_FORMAT(__VA_ARGS__));
+#define SR_SHADER(...) SR_UTILS_NS::Debug::Instance().Shader(SR_FORMAT(__VA_ARGS__));
+#define SR_SHADER_LOG(...) SR_UTILS_NS::Debug::Instance().Shader(SR_FORMAT(__VA_ARGS__));
+#define SR_SYSTEM_LOG(...) SR_UTILS_NS::Debug::Instance().System(SR_FORMAT(__VA_ARGS__));
+#define SR_VULKAN_MSG(...) SR_UTILS_NS::Debug::Instance().Vulkan(SR_FORMAT(__VA_ARGS__));
+#define SR_VULKAN_LOG(...) SR_UTILS_NS::Debug::Instance().VulkanLog(SR_FORMAT(__VA_ARGS__));
+#define SR_VULKAN_ERROR(...) SR_UTILS_NS::Debug::Instance().VulkanError(SR_FORMAT(__VA_ARGS__));
 
-#define SR_MAKE_ASSERT(msg) std::string(msg).append("\nFile: ")           \
-            .append(__FILE__).append("\nLine: ").append(std::to_string(__LINE__)) \
+#define SR_MAKE_ASSERT(msg) (msg).append("\nFile: ").append(__FILE__).append("\nLine: ").append(std::to_string(__LINE__))
 
 #if defined(SR_DEBUG) || defined(SR_ANDROID)
     #define SR_ENABLE_ASSERTS
@@ -128,16 +127,16 @@ namespace SR_UTILS_NS {
     #define SR_CHECK_ERROR(fun, notEquals, errorMsg) \
         if (fun != notEquals) SR_UTILS_NS::Debug::Instance().Error(errorMsg)
 
-    #define SRAssert2(expr, msg) (!!(expr) || SR_UTILS_NS::Debug::Instance().Assert (SR_MAKE_ASSERT(msg)))
+    #define SRAssert2(expr, ...) (!!(expr) || SR_UTILS_NS::Debug::Instance().Assert(SR_MAKE_ASSERT(SR_FORMAT(__VA_ARGS__))))
 
     #define SRAssert1(expr) SRAssert2(expr, #expr)
     #define SRAssert(expr) SRAssert2(expr, "An exception has been occured.")
 
-    #define SRVerifyFalse2(expr, msg) ((!(expr) || SR_UTILS_NS::Debug::Instance().Assert(SR_MAKE_ASSERT(msg))))
+    #define SRVerifyFalse2(expr, ...) ((!(expr) || SR_UTILS_NS::Debug::Instance().Assert(SR_MAKE_ASSERT(SR_FORMAT(__VA_ARGS__)))))
 
-    #define SR_SAFE_PTR_ASSERT(expr, msg) SRAssert2(expr, SR_UTILS_NS::Format("[SafePtr] %s \n\tPtr: %p", msg, (void *) m_ptr));
+    #define SR_SAFE_PTR_ASSERT(expr, msg) SRAssert2(expr, SR_UTILS_NS::Format("[SafePtr] {} \n\tPtr: {}", msg, (void *) m_ptr));
 
-    #define SRAssert2Once(expr, msg) ((!(expr) && SR_UTILS_NS::Debug::Instance().AssertOnceCheck(SR_MAKE_ASSERT(msg))) || SRAssert2(expr, msg))
+    #define SRAssert2Once(expr, ...) ((!(expr) && SR_UTILS_NS::Debug::Instance().AssertOnceCheck(SR_MAKE_ASSERT(SR_FORMAT(__VA_ARGS__)))) || SRAssert2(expr, SR_FORMAT(__VA_ARGS__)))
 #else
     #define SR_CHECK_ERROR(fun, notEquals, errorMsg) fun
     #define SRAssert2(expr, msg) (SR_NOOP)
@@ -148,8 +147,8 @@ namespace SR_UTILS_NS {
     #define SRVerifyFalse2(expr, msg) ((!(expr)))
 #endif
 
-#define SRHalt(msg, ...) SR_UTILS_NS::Debug::Instance().Assert(SR_MAKE_ASSERT(SR_FORMAT(msg, __VA_ARGS__)))
-#define SRHaltOnce(msg, ...)  SR_UTILS_NS::Debug::Instance().AssertOnceCheck(SR_MAKE_ASSERT(SR_FORMAT(msg, __VA_ARGS__))) || SRHalt(SR_FORMAT(msg, __VA_ARGS__))
+#define SRHalt(...) SR_UTILS_NS::Debug::Instance().Assert(SR_MAKE_ASSERT(SR_FORMAT(__VA_ARGS__)))
+#define SRHaltOnce(...)  SR_UTILS_NS::Debug::Instance().AssertOnceCheck(SR_MAKE_ASSERT(SR_FORMAT(__VA_ARGS__))) || SRHalt(SR_FORMAT(__VA_ARGS__))
 #define SRHalt0() SRHalt("An exception has been occured!")
 #define SRHaltOnce0() SRHaltOnce("An exception has been occured!")
 
