@@ -243,6 +243,21 @@ namespace SR_MATH_NS {
 
             return v;
         }
+
+        SR_NODISCARD Vector3 SR_FASTCALL Swap(Axis axis) const {
+            Vector3 v = *this;
+
+            switch (axis) {
+                case Axis::AXIS_XY: std::swap(v.x, v.y); break;
+                case Axis::AXIS_YZ: std::swap(v.y, v.z); break;
+                case Axis::AXIS_XZ: std::swap(v.x, v.z); break;
+                default:
+                    break;
+            }
+
+            return v;
+        }
+
         SR_NODISCARD Vector3 ZeroAxis(Axis axis) const {
             Vector3 v = *this;
 

@@ -6,7 +6,7 @@
 	url = https://github.com/Monika0000/imgui-node-editor
 [submodule "Engine/Core/libs/Graphics/libs/ImGuizmo"]
 	path = Engine/Core/libs/Graphics/libs/ImGuizmo
-	url = https://github.com/Monika0000/ImGuizmo
+	url = https://github.com/SpaRcle-Studio/ImGuizmo
 [submodule "Engine/Core/libs/Graphics/libs/EvoVulkan"]
 	path = Engine/Core/libs/Graphics/libs/EvoVulkan
 	url = https://github.com/Monika0000/EvoVulkan
