@@ -162,7 +162,13 @@ void GetStacktraceImpl() {
 #endif
 }
 
-std::string SR_UTILS_NS::GetStacktrace() {
-    GetStacktraceImpl();
-    return builder.str();
+namespace SR_UTILS_NS {
+    void DisableStacktrace() {
+
+    }
+
+    std::string GetStacktrace() {
+        GetStacktraceImpl();
+        return builder.str();
+    }
 }

@@ -8,6 +8,7 @@
 #include <Utils/stdInclude.h>
 
 namespace SR_UTILS_NS {
+    extern SR_DLL_EXPORT void DisableStacktrace();
     extern SR_DLL_EXPORT std::string GetStacktrace();
     extern SR_DLL_EXPORT void StacktraceInit();
 }

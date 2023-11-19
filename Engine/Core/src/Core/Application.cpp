@@ -125,6 +125,10 @@ namespace SR_CORE_NS {
         SR_UTILS_NS::Features::Instance().SetPath(m_resourcesPath.Concat("Engine/Configs/Features.xml"));
         SR_UTILS_NS::Features::Instance().Reload();
 
+        if (SR_UTILS_NS::Features::Instance().Enabled("DisableStackTrace")) {
+            SR_UTILS_NS::DisableStacktrace();
+        }
+
         SR_UTILS_NS::ResourceManager::Instance().Init(m_resourcesPath);
 
         if (!SR_UTILS_NS::ResourceManager::Instance().Run()) {

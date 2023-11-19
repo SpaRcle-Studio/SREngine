@@ -19,7 +19,6 @@
 
 namespace SR_UTILS_NS::Platform {
     void SegmentationHandler(int sig) {
-        WriteConsoleError("Application crashed! Waiting for stacktrace...\n");
         WriteConsoleError("Crash stacktrace: \n" + SR_UTILS_NS::GetStacktrace());
         Breakpoint();
         exit(1);

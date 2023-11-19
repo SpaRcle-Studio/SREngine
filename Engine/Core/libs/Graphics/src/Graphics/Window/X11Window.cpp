@@ -9,6 +9,7 @@
 //#include <X11/Xlib-xcb.h>
 #include <xcb/xcb_ewmh.h>
 #include <xcb/xcb.h>
+#include <xcb/xcb_util.h>
 
 namespace SR_GRAPH_NS {
     bool X11Window::Initialize(const std::string &name,
@@ -79,6 +80,9 @@ namespace SR_GRAPH_NS {
 
         //free(geometryReply);
         m_isValid = true;
+
+        m_poolEventsThread = SR_HTYPES_NS::Thread::Factory::Instance().Create(&X11Window::PoolIEventsHandler, this);
+
         return true;
     }
 
@@ -126,12 +130,30 @@ namespace SR_GRAPH_NS {
     }
 
     void X11Window::PollEvents() {
+
+    }
+
+    void X11Window::Close() {
+        BasicWindowImpl::Close();
+    }
+
+    void X11Window::PoolIEventsHandler() {
+    repeat:
         auto&& event = xcb_wait_for_event(m_connection);
         if (!event) {
+            SR_INFO("X11Window::PollEvents() : event is nullptr.");
             return;
         }
 
-        switch (event->response_type & ~0x80) {
+        uint8_t responseType = XCB_EVENT_RESPONSE_TYPE(event);
+        if (responseType == 0) {
+            SR_ERROR("X11Window::PollEvents() : response type is 0!");
+            return;
+        }
+
+        SR_LOG("X11Window::PollEvents() : event - {}", xcb_event_get_label(event->response_type));
+
+        switch (responseType) {
             case XCB_EXPOSE: {
                 //xcb_expose_event_t *expose = (xcb_expose_event_t *)event;
 
@@ -182,28 +204,23 @@ namespace SR_GRAPH_NS {
                 break;
             }
             case XCB_CONFIGURE_NOTIFY: {
-                auto&& configureEvent = (xcb_configure_notify_event_t*)event;
-                if (configureEvent->width != m_surfaceSize.x || configureEvent->height != m_surfaceSize.y)
-                {
-                    if (configureEvent->width > 0 && configureEvent->height > 0) {
-                        m_surfaceSize.x = configureEvent->width;
-                        m_surfaceSize.y = configureEvent->height;
-
-                        if (m_resizeCallback) {
-                            m_resizeCallback(this, GetSurfaceWidth(), GetSurfaceHeight());
-                        }
-                    }
-                }
+                //auto&& configureEvent = (xcb_configure_notify_event_t*)event;
+                //if (configureEvent->width != m_surfaceSize.x || configureEvent->height != m_surfaceSize.y)
+                //{
+                //    if (configureEvent->width > 0 && configureEvent->height > 0) {
+                //        m_surfaceSize.x = configureEvent->width;
+                //        m_surfaceSize.y = configureEvent->height;
+                //        if (m_resizeCallback) {
+                //            m_resizeCallback(this, GetSurfaceWidth(), GetSurfaceHeight());
+                //        }
+                //    }
+                //}
             }
             default:
                 break;
         }
 
-        free (event);
-    }
-
-    void X11Window::Close() {
-
-        BasicWindowImpl::Close();
+        free(event);
+        goto repeat;
     }
 }

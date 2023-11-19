@@ -29,6 +29,10 @@
         #include <backends/imgui_impl_win32.h>
     #endif
 
+    #ifdef SR_LINUX
+        #include <imgui/examples/imgui_impl_x11.h>
+    #endif
+
     #ifdef SR_USE_VULKAN
         #include <backends/imgui_impl_vulkan.h>
 

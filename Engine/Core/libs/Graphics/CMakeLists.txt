@@ -52,20 +52,29 @@ else()
 endif()
 
 if (UNIX AND NOT APPLE)
-    #target_include_directories(Graphics PUBLIC ${X11_X11_INCLUDE_PATH})
-    #target_link_libraries(Graphics ${X11_X11_LIB})
+    target_include_directories(Graphics PUBLIC "${X11_xcb_keysyms_INCLUDE_PATH}")
+    target_link_libraries(Graphics ${X11_xcb_keysyms_LIB})
+
+    target_include_directories(Graphics PUBLIC "${X11_xcb_cursor_INCLUDE_PATH}")
+    target_link_libraries(Graphics ${X11_xcb_cursor_LIB} xcb-cursor)
+
+    target_include_directories(Graphics PUBLIC "${X11_xcb_xfixes_INCLUDE_PATH}")
+    target_link_libraries(Graphics ${X11_xcb_xfixes_LIB})
 
     target_include_directories(Graphics PUBLIC "${X11_xcb_INCLUDE_PATH}")
     target_link_libraries(Graphics ${X11_xcb_LIB})
 
-    #target_include_directories(Graphics PUBLIC "${X11_Xrandr_INCLUDE_PATH}")
-    #target_link_libraries(Graphics ${X11_Xrandr_LIB})
+    target_include_directories(Graphics PUBLIC "${X11_xcb_randr_INCLUDE_PATH}")
+    target_link_libraries(Graphics ${X11_xcb_randr_LIB})
 
     target_include_directories(Graphics PUBLIC ${X11_X11_xcb_INCLUDE_PATH})
     target_link_libraries(Graphics ${X11_X11_xcb_LIB})
 
+    target_include_directories(Graphics PUBLIC ${X11_xcb_xkb_INCLUDE_PATH})
+    target_link_libraries(Graphics ${X11_xcb_xkb_LIB})
+
     target_include_directories(Graphics PUBLIC ${X11_xcb_ewmh_INCLUDE_PATH})
-    target_link_libraries(Graphics ${X11_xcb_ewmh_LIB} xcb-ewmh)
+    target_link_libraries(Graphics ${X11_xcb_ewmh_LIB} xcb-ewmh xcb-util)
 endif()
 
 target_link_libraries(Graphics CMP_Core freetype)

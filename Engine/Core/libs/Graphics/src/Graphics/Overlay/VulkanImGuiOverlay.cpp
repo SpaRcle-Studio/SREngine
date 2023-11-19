@@ -131,9 +131,14 @@ namespace SR_GRAPH_NS {
             return false;
         }
 
-    #ifdef SR_WIN32
+    #if defined(SR_WIN32)
         auto&& pWindow = m_pipeline->GetWindow();
         ImGui_ImplWin32_Init((HWND)pWindow->GetHandle());
+    #elif defined(SR_LINUX)
+        auto&& pWindow = m_pipeline->GetWindow();
+        ImGui_ImplX11_Init(pWindow->GetImplementation<X11Window>()->GetWindow());
+    #else
+        SRHalt("Unsupported platform!");
     #endif
 
         m_pipeline->UpdateMultiSampling();
@@ -231,6 +236,9 @@ namespace SR_GRAPH_NS {
         #ifdef SR_WIN32
             ImGui_ImplWin32_Shutdown();
         #endif
+        #ifdef SR_LINUX
+            ImGui_ImplX11_Shutdown();
+        #endif
         }
 
         m_initialized = false;
@@ -247,6 +255,10 @@ namespace SR_GRAPH_NS {
 
         #ifdef SR_WIN32
             ImGui_ImplWin32_NewFrame();
+        #endif
+
+        #ifdef SR_LINUX
+            ImGui_ImplX11_NewFrame();
         #endif
 
         ImGui::NewFrame();
