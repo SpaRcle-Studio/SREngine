@@ -55,13 +55,22 @@ It aims to establish a strong base for game creation and is currently in the ear
  <details>
  <summary> 4. Working with CMake (if you're using Visual Studio): </summary>
   
-    - 4.1 Choose the path to the SREngine folder (where the source code is located).
+    - 4.1 Open CMake GUI
   
-    - 4.2 Choose the path where to build the binaries (SREngine/Build).
+    - 4.2 Choose the path to the SREngine folder (where the source code is located).
+  
+    - 4.3 Choose the path where to build the binaries (SREngine/Build).
      
-    - 4.3 Press "Configure" and choose your VS version.
+    - 4.4 Press "Configure" and choose your VS version.
     
-    - 4.4 Press "Generate"
+    - 4.5 Press "Generate"
+
+    - 4.6 Open Visual Studio solition
+
+    - 4.7 Set as startap project SREngine 
+
+    - 4.8 Run build 
+    
  </details>
  <details>
  <summary> 5. Working with CLion: </summary>
