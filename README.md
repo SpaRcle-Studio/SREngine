@@ -65,7 +65,7 @@ It aims to establish a strong base for game creation and is currently in the ear
     
     - 4.5 Press "Generate"
 
-    - 4.6 Open Visual Studio solition
+    - 4.6 Open Visual Studio solution
 
     - 4.7 Set as startap project SREngine 
 
