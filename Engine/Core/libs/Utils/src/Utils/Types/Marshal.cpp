@@ -125,4 +125,10 @@ namespace SR_HTYPES_NS {
 
         return pMarshal;
     }
+
+    Marshal Marshal::FullCopy() const {
+        Marshal copy = *this;
+        copy.SetPosition(GetPosition());
+        return std::move(copy);
+    }
 }

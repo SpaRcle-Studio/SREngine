@@ -11,9 +11,11 @@ namespace SR_UTILS_NS {
             return false;
         }
 
+        SR_HTYPES_NS::Marshal migrated = marshal.FullCopy();
+
         for (auto&& migrator : pIt->second) {
             if (migrator.from == from) {
-                if (migrator.migrator(marshal)) {
+                if (migrator.migrator(migrated)) {
                     from = migrator.to;
                 }
                 else {
@@ -23,6 +25,7 @@ namespace SR_UTILS_NS {
         }
 
         if (!pIt->second.empty() && pIt->second.back().to == to) {
+            marshal = migrated.FullCopy();
             return true;
         }
 

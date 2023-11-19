@@ -31,6 +31,8 @@ namespace SR_HTYPES_NS {
         SR_NODISCARD Marshal Copy() const;
         SR_NODISCARD Marshal::Ptr CopyPtr() const;
 
+        SR_NODISCARD Marshal FullCopy() const;
+
         static Marshal Load(const Path& path);
         static Marshal::Ptr LoadPtr(const Path& path);
         static Marshal LoadFromMemory(const std::string& data);
