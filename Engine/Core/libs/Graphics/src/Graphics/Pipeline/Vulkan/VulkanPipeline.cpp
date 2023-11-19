@@ -206,7 +206,7 @@ namespace SR_GRAPH_NS {
 
         static const std::vector<const char*> deviceExtensions = {
             VK_KHR_SWAPCHAIN_EXTENSION_NAME,
-            VK_EXT_LINE_RASTERIZATION_EXTENSION_NAME,
+            //VK_EXT_LINE_RASTERIZATION_EXTENSION_NAME,
         };
 
         if (!m_kernel->Init(createSurfaceFn, m_window->GetHandle(), deviceExtensions, true, m_preInitInfo.vsync)) {
@@ -1247,6 +1247,9 @@ namespace SR_GRAPH_NS {
                 auto&& vkFrameBuffer = m_memory->m_FBOs[pFrameBuffer->GetId() - 1];
                 m_kernel->GetWaitSemaphores().emplace_back(vkFrameBuffer->GetSemaphore());
             }
+        }
+        else {
+            m_kernel->GetWaitSemaphores().emplace_back(m_kernel->GetPresentCompleteSemaphore());
         }
 
         for (uint32_t queueIndex = 1; queueIndex < queues.size(); ++queueIndex) {
