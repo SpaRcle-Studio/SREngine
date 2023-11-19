@@ -5,6 +5,8 @@
 #ifndef SRENGINE_CONVERTORNODE_H
 #define SRENGINE_CONVERTORNODE_H
 
+#include <Utils/SRLM/LogicalNode.h>
+
 namespace SR_SRLM_NS {
     class ConvertorNode : public IComputeNode {
     public:

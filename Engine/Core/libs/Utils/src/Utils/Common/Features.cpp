@@ -5,6 +5,7 @@
 #include <Utils/Common/Features.h>
 #include <Utils/Xml.h>
 #include <Utils/Types/Thread.h>
+#include <Utils/Profile/TracyContext.h>
 
 namespace SR_UTILS_NS {
     bool FeatureGroup::Register(const std::string &name, bool value) {
@@ -20,7 +21,7 @@ namespace SR_UTILS_NS {
         if (auto pIt = m_values.find(name); pIt != m_values.end())
             return pIt->second;
 
-        SR_WARN("FeatureGroup::Enabled() : feature \"" + name + "\" not found!");
+        SR_WARN("FeatureGroup::Enabled() : feature \"{}\" not found!", name);
 
         return false;
     }
@@ -40,7 +41,7 @@ namespace SR_UTILS_NS {
         SR_LOCK_GUARD
 
         if (path.Empty() || !path.Exists()) {
-            SR_ERROR("Features::Reload() : file not found! \n\tPath: " + path.ToString());
+            SR_ERROR("Features::Reload() : file not found! \n\tPath: {}", path.ToString());
             return;
         }
 
@@ -67,7 +68,7 @@ namespace SR_UTILS_NS {
             }
         }
         else {
-            SR_ERROR("Features::Reload() : error while loading file! \n\tPath: " + m_path.ToString());
+            SR_ERROR("Features::Reload() : error while loading file! \n\tPath: {}", m_path.ToString());
             return false;
         }
 

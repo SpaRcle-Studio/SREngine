@@ -179,7 +179,7 @@ namespace SR_GRAPH_NS {
     }
 
     void Pipeline::OnMultiSampleChanged() {
-        SR_INFO("Pipeline::OnMultiSampleChanged() : samples count was changed to " + SR_UTILS_NS::ToString(GetSamplesCount()));
+        SR_INFO("Pipeline::OnMultiSampleChanged() : samples count was changed to {}", GetSamplesCount());
         SetDirty(true);
         m_renderContext->OnMultiSampleChanged();
     }

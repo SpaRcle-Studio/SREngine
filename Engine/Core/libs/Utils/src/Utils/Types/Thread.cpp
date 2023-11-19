@@ -57,7 +57,7 @@ namespace SR_HTYPES_NS {
 
         auto&& pThread = new Thread(std::move(thread));
 
-        SR_LOG("Thread::Factory::Create() : create new \"" + std::string(pThread->m_id) + "\" thread...");
+        SR_LOG("Thread::Factory::Create() : create new \"{}\" thread...", pThread->m_id);
 
         m_threads.insert(std::make_pair(pThread->GetId(), pThread));
 
@@ -112,7 +112,7 @@ namespace SR_HTYPES_NS {
     void Thread::Factory::Remove(Thread* pThread) {
         SR_SCOPED_LOCK
 
-        SR_LOG("Thread::Free() : free \"" + std::string(pThread->GetId()) + "\" thread...");
+        SR_LOG("Thread::Free() : free \"{}\" thread...", pThread->GetId());
 
         if (pThread == m_main) {
             m_main = nullptr;
@@ -191,7 +191,7 @@ namespace SR_HTYPES_NS {
 
         m_main = new Thread(SR_UTILS_NS::GetThisThreadId());
 
-        SR_LOG("Thread::Factory::SetMainThread() : main thread id: \"" + m_main->GetId() + "\"");
+        SR_LOG("Thread::Factory::SetMainThread() : main thread id: \"{}\"", m_main->GetId());
     }
 
     void Thread::Factory::PrintThreads() {

@@ -54,7 +54,7 @@ namespace SR_GRAPH_GUI_NS {
     ) {
         auto&& strValue = value ? value.value() : SR_UTILS_NS::StringAtom();
 
-        if (ImGui::BeginCombo(SR_FORMAT_C("%s##%p", label.c_str(), &value), strValue.c_str())) {
+        if (ImGui::BeginCombo(SR_FORMAT_C("{}##{}", label.c_str(), (void*)&value), strValue.c_str())) {
             auto&& selectables = pReflector->GetNamesInternal();
             for (auto&& selectable : selectables) {
                 if (filter && !filter(selectable)) {
@@ -99,7 +99,7 @@ namespace SR_GRAPH_GUI_NS {
     SR_MAYBE_UNUSED static bool DragUnit(const std::string& name, SR_MATH_NS::Unit& value, float_t drag = 0.1f) {
         float_t temp = value;
 
-        if (ImGui::DragFloat(SR_FORMAT_C("##%s%p", name.c_str(), &value), &temp, drag, 0.0f, 0.0f, "%.5f")) {
+        if (ImGui::DragFloat(SR_FORMAT_C("##{}{}", name.c_str(), (void*)&value), &temp, drag, 0.0f, 0.0f, "%.5f")) {
             value = temp;
             return true;
         }
@@ -110,7 +110,7 @@ namespace SR_GRAPH_GUI_NS {
     SR_MAYBE_UNUSED static bool DragInt32(const std::string& name, int32_t& value, int32_t drag = 1) {
         int32_t temp = value;
 
-        if (ImGui::DragInt(SR_FORMAT_C("##%s%p", name.c_str(), &value), &temp, drag, 0, 0, "%.2i")) {
+        if (ImGui::DragInt(SR_FORMAT_C("##{}{}", name.c_str(), (void*)&value), &temp, drag, 0, 0, "%.2i")) {
             value = temp;
             return true;
         }
@@ -121,7 +121,7 @@ namespace SR_GRAPH_GUI_NS {
     SR_MAYBE_UNUSED static bool DragUInt32(const std::string& name, uint32_t& value, uint32_t drag = 1) {
         int32_t temp = value;
 
-        if (ImGui::DragInt(SR_FORMAT_C("##%s%p", name.c_str(), &value), &temp, drag, 0, 0, "%.2i")) {
+        if (ImGui::DragInt(SR_FORMAT_C("##{}{}", name.c_str(), (void*)&value), &temp, drag, 0, 0, "%.2i")) {
             value = SR_MAX(0, temp);
             return true;
         }
@@ -137,7 +137,7 @@ namespace SR_GRAPH_GUI_NS {
 
         ImGui::PushItemWidth(textWidth);
 
-        if (ImGui::InputInt(SR_FORMAT_C("%s##%p", name.c_str(), &value), &temp, step)) {
+        if (ImGui::InputInt(SR_FORMAT_C("{}##{}", name.c_str(), (void*)&value), &temp, step)) {
             value = temp;
             changed = true;
         }
@@ -155,7 +155,7 @@ namespace SR_GRAPH_GUI_NS {
 
         ImGui::PushItemWidth(textWidth);
 
-        if (ImGui::InputInt(SR_FORMAT_C("%s##%p", name.c_str(), &value), &temp, static_cast<int32_t>(step))) {
+        if (ImGui::InputInt(SR_FORMAT_C("{}##{}", name.c_str(), (void*)&value), &temp, static_cast<int32_t>(step))) {
             if (temp < 0) {
                 temp = 0;
             }
@@ -196,7 +196,7 @@ namespace SR_GRAPH_GUI_NS {
         ImGui::PushItemWidth(textWidth);
 
         ImGui::InputText(
-                SR_FORMAT_C("%s##%i", label.c_str(), index),
+                SR_FORMAT_C("{}##{}", label.c_str(), index),
                 &string,
                 ImGuiInputTextFlags_::ImGuiInputTextFlags_ReadOnly
         );
@@ -225,7 +225,7 @@ namespace SR_GRAPH_GUI_NS {
         if (font)
             ImGui::PushFont(font);
 
-        if (ImGui::Button(SR_FORMAT_C("%s##%p", label, &value), btnSize)) {
+        if (ImGui::Button(SR_FORMAT_C("{}##{}", label, (void*)&value), btnSize)) {
             value = reset;
             result = true;
         }
@@ -243,7 +243,7 @@ namespace SR_GRAPH_GUI_NS {
         else if constexpr (std::is_same_v<T, bool>) {
             bool temp = value;
 
-            if (ImGui::Checkbox(SR_FORMAT_C("##%s%p", label, &value), &temp)) {
+            if (ImGui::Checkbox(SR_FORMAT_C("##{}{}", label, (void*)&value), &temp)) {
                 value = temp;
                 result |= true;
             }
@@ -266,7 +266,7 @@ namespace SR_GRAPH_GUI_NS {
     ) {
         auto tmp = static_cast<float_t>(value);
 
-        if (ImGui::SliderScalar(SR_FORMAT_C("%s##%p", label.c_str(), &value), ImGuiDataType_Float, &tmp, &min, &max, nullptr, ImGuiSliderFlags_Logarithmic)) {
+        if (ImGui::SliderScalar(SR_FORMAT_C("%s##%p", label.c_str(), (void*)&value), ImGuiDataType_Float, &tmp, &min, &max, nullptr, ImGuiSliderFlags_Logarithmic)) {
             value = static_cast<SR_MATH_NS::Unit>(tmp);
             return true;
         }
@@ -299,7 +299,7 @@ namespace SR_GRAPH_GUI_NS {
             ImGui::PushFont(font);
         }
 
-        if (ImGui::Button(SR_FORMAT_C("%s##%p", label.c_str(), &value), btnSize) && active) {
+        if (ImGui::Button(SR_FORMAT_C("%s##%p", label.c_str(), (void*)&value), btnSize) && active) {
             value = reset;
             result = true;
         }
@@ -401,7 +401,7 @@ namespace SR_GRAPH_GUI_NS {
         bool slider = true;
 
         if (storage) {
-            auto&& id = SR_FORMAT("##edt_slider_%s%p", label.c_str(), &value);
+            auto&& id = SR_FORMAT("##edt_slider_%s%p", label.c_str(), (void*)&value);
             slider = storage->GetValueDef<bool>(id, true);
             if (ImGui::Checkbox(id.c_str(), &slider)) {
                 storage->SetValue<bool>(id, slider);
@@ -536,7 +536,7 @@ namespace SR_GRAPH_GUI_NS {
     {
         bool result = false;
 
-        ImGui::PushID(SR_FORMAT_C("%s%p", label.c_str(), &values));
+        ImGui::PushID(SR_FORMAT_C("%s%p", label.c_str(), (void*)&values));
 
         ImGui::Columns(2);
         ImGui::SetColumnWidth(0, columnWidth);

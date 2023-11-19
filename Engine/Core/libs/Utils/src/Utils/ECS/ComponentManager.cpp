@@ -4,6 +4,7 @@
 
 #include <Utils/ECS/ComponentManager.h>
 #include <Utils/ECS/Migration.h>
+#include <Utils/Common/ToString.h>
 
 namespace SR_UTILS_NS {
     Component* ComponentManager::CreateComponentOfName(const std::string &name) {

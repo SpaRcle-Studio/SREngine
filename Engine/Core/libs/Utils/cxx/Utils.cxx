@@ -50,17 +50,6 @@
 #include "../../Utils/src/Utils/CommandManager/CmdManager.cpp"
 #include "../../Utils/src/Utils/CommandManager/ReversibleCommand.cpp"
 
-#include "../../Utils/src/Utils/Common/Stacktrace.cpp"
-#include "../../Utils/src/Utils/Common/StringUtils.cpp"
-#include "../../Utils/src/Utils/Common/Features.cpp"
-#include "../../Utils/src/Utils/Common/Singleton.cpp"
-#include "../../Utils/src/Utils/Common/SingletonHolder.cpp"
-#include "../../Utils/src/Utils/Common/Enumerations.cpp"
-#include "../../Utils/src/Utils/Common/EnumReflector.cpp"
-#include "../../Utils/src/Utils/Common/Hashes.cpp"
-#include "../../Utils/src/Utils/Common/HashManager.cpp"
-#include "../../Utils/src/Utils/Common/Vertices.cpp"
-
 #include "../../Utils/src/Utils/TypeTraits/PropertyManager.cpp"
 #include "../../Utils/src/Utils/TypeTraits/Property.cpp"
 #include "../../Utils/src/Utils/TypeTraits/Properties.cpp"

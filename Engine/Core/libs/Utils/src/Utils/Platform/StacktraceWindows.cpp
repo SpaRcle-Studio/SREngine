@@ -1,51 +1,18 @@
 //
-// Created by Monika on 02.11.2021.
+// Created by Monika on 19.11.2023.
 //
 
-/// TODO: move to platform class!
-
-#include <Utils/Common/Stacktrace.h>
-
-#include <Utils/macros.h>
-
-#include <sstream>
-#include <vector>
-#include <algorithm>
-#include <iterator>
-
-#ifdef SR_ANDROID
-    std::string SR_UTILS_NS::GetStacktrace() {
-        return "Android not support stack trace!";
-    }
-#endif
-
-#ifdef SR_LINUX
-    #include <Utils/Platform/LinuxStacktraceImpl.h>
-
-    void SR_UTILS_NS::StacktraceInit() {
-        StacktraceInitImpl();
-    }
-
-    std::string SR_UTILS_NS::GetStacktrace() {
-        auto&& stacktrace = GetStacktraceImpl();
-        std::string result = stacktrace;
-
-        free(stacktrace);
-        return result;
-    }
-#endif
-
-#ifdef SR_WIN32
+#include <Utils/Platform/Stacktrace.h>
 
 #pragma comment(lib, "psapi.lib")
 #pragma comment(lib, "dbghelp.lib")
 
-#include <windows.h>
+#include <Windows.h>
 #include <Psapi.h>
 
-#pragma pack( push, before_imagehlp, 8 )
-#include <imagehlp.h>
-#pragma pack( pop, before_imagehlp )
+#pragma pack(push, before_imagehlp, 8)
+#include <ImageHlp.h>
+#pragma pack(pop, before_imagehlp)
 
 struct module_data {
     std::string image_name;
@@ -189,8 +156,8 @@ DWORD getStack(EXCEPTION_POINTERS* ep) {
 void GetStacktraceImpl() {
 #ifdef SR_MSVC
     __try {
-        int f = 0;
-        f = 7 / f;   // Trigger a divide-by-zero exception
+            int f = 0;
+            f = 7 / f;   // Trigger a divide-by-zero exception
     } __except(getStack(GetExceptionInformation())) { }
 #endif
 }
@@ -199,5 +166,3 @@ std::string SR_UTILS_NS::GetStacktrace() {
     GetStacktraceImpl();
     return builder.str();
 }
-
-#endif

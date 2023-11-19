@@ -11,6 +11,7 @@
 #include <Utils/Math/Vector4.h>
 #include <Utils/Common/TypeInfo.h>
 #include <Utils/Types/UnicodeString.h>
+#include <Utils/Debug.h>
 
 namespace SR_UTILS_NS {
     namespace MarshalUtils {

@@ -9,7 +9,7 @@ namespace SR_CORE_GUI_NS {
         auto&& data = pProperty->GetData();
 
         std::visit([pProperty, &context](SR_GRAPH_NS::ShaderPropertyVariant&& arg){
-            auto&& name = SR_FORMAT("%s##%p", pProperty->GetName().ToCStr(), pProperty);
+            auto&& name = SR_FORMAT("%s##%p", pProperty->GetName().ToCStr(), (void*)pProperty);
 
             if (std::holds_alternative<int32_t>(arg)) {
                 auto&& value = std::get<int32_t>(arg);
@@ -49,7 +49,7 @@ namespace SR_CORE_GUI_NS {
 
                 /// если нашли хоть какой-то дескриптор
                 if (pDescriptor) {
-                    if (SR_GRAPH_GUI_NS::ImageButton(SR_FORMAT("##%p", pProperty), pDescriptor, SR_MATH_NS::IVector2(55), 3)) {
+                    if (SR_GRAPH_GUI_NS::ImageButton(SR_FORMAT("##%p", (void*)pProperty), (void*)pDescriptor, SR_MATH_NS::IVector2(55), 3)) {
                         auto&& texturesPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
                         auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(texturesPath, { { "Images", "png,jpg,bmp,tga" } });
 
@@ -77,7 +77,7 @@ namespace SR_CORE_GUI_NS {
 
                 std::string id = value ? std::string(value->GetResourceId()) : std::string();
 
-                if (ImGui::InputText(SR_FORMAT_C("##texture%p", pProperty), &id, ImGuiInputTextFlags_EnterReturnsTrue | ImGuiInputTextFlags_NoUndoRedo)) {
+                if (ImGui::InputText(SR_FORMAT_C("##texture%p", (void*)pProperty), &id, ImGuiInputTextFlags_EnterReturnsTrue | ImGuiInputTextFlags_NoUndoRedo)) {
                     auto&& texture = SR_GTYPES_NS::Texture::Load(id);
                     pProperty->GetMaterial()->SetTexture(pProperty, texture);
                     value = texture;
@@ -117,7 +117,7 @@ namespace SR_CORE_GUI_NS {
         if (!pProperty->GetWidgetEditor().Empty()) {
             ImGui::SameLine();
 
-            if (ImGui::Button(SR_FORMAT_C("Edit##%i", (void*) pProperty))) {
+            if (ImGui::Button(SR_FORMAT_C("Edit##%i", (void*)pProperty))) {
                 if (auto&& pWidget = context.pEditor->GetWidget(pProperty->GetWidgetEditor())) {
                     pWidget->OpenFile(pProperty->GetPath());
                 }
@@ -127,7 +127,7 @@ namespace SR_CORE_GUI_NS {
         ImGui::SameLine();
 
         std::string path = pProperty->GetPath().ToString();
-        if (ImGui::InputText(SR_FORMAT_C("%s##%p", pProperty->GetName().ToCStr(), pProperty), &path, ImGuiInputTextFlags_EnterReturnsTrue)) {
+        if (ImGui::InputText(SR_FORMAT_C("%s##%p", pProperty->GetName().ToCStr(), (void*)pProperty), &path, ImGuiInputTextFlags_EnterReturnsTrue)) {
             pProperty->SetPath(path);
         }
 

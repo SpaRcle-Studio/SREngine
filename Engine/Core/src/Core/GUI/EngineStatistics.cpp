@@ -269,7 +269,7 @@ namespace SR_CORE_GUI_NS {
                 return;
             }
 
-            ImGui::CollapsingHeader(SR_FORMAT_C("Present complete semaphore [%p]", pKernel->GetPresentCompleteSemaphore()));
+            ImGui::CollapsingHeader(SR_FORMAT_C("Present complete semaphore [%p]", (void*)pKernel->GetPresentCompleteSemaphore()));
 
             auto&& queue = pKernel->GetSubmitQueue();
 
@@ -285,7 +285,7 @@ namespace SR_CORE_GUI_NS {
                 DrawSubmitInfo(pKernel->GetSubmitInfo());
             }
 
-            ImGui::CollapsingHeader(SR_FORMAT_C("Render complete semaphore [%p]", pKernel->GetRenderCompleteSemaphore()));
+            ImGui::CollapsingHeader(SR_FORMAT_C("Render complete semaphore [%p]", (void*)pKernel->GetRenderCompleteSemaphore()));
 
             ImGui::EndTabItem();
         }

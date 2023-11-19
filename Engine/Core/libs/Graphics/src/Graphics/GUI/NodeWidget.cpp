@@ -432,14 +432,14 @@ namespace SR_GRAPH_GUI_NS {
         uint32_t removeIndex = SR_UINT32_MAX;
 
         for (auto&& property : m_properties) {
-            if (ImGui::RadioButton(SR_FORMAT_C("##CkProp%i%s", index, GetName().c_str()), property.expand)) {
+            if (ImGui::RadioButton(SR_FORMAT_C("##CkProp{}{}", index, GetName().c_str()), property.expand)) {
                 property.expand = !property.expand;
             }
 
             ImGui::SameLine();
 
             ImGui::PushItemWidth(100.f);
-            std::string comboName = SR_FORMAT("##NTypeProp%i%s", index, GetName().c_str());
+            std::string comboName = SR_FORMAT("##NTypeProp{}{}", index, GetName().c_str());
             SR_GRAPH_GUI_NS::EnumCombo<SR_SRLM_NS::DataTypeClass>(comboName, property.pData->GetClass(), [&property](SR_SRLM_NS::DataTypeClass type) {
                 std::unique_ptr<SR_SRLM_NS::DataType> pData(SR_SRLM_NS::DataTypeAllocator::Instance().Allocate(type));
                 if (pData) {
@@ -452,7 +452,7 @@ namespace SR_GRAPH_GUI_NS {
 
             ImGui::PushItemWidth(m_leftPaneWidth);
             std::string newName = property.name;
-            if (ImGui::InputText(SR_FORMAT_C("##NodeProp%i%s", index, GetName().c_str()), &newName, ImGuiInputTextFlags_NoUndoRedo)) {
+            if (ImGui::InputText(SR_FORMAT_C("##NodeProp{}{}", index, GetName().c_str()), &newName, ImGuiInputTextFlags_NoUndoRedo)) {
                 if (!FindProperty(newName)) {
                     property.name = std::move(newName);
                 }
@@ -460,7 +460,7 @@ namespace SR_GRAPH_GUI_NS {
             ImGui::PopItemWidth();
 
             if (property.expand) {
-                if (ImGui::Button(SR_FORMAT_C("Remove property##CkProp%i", index))) {
+                if (ImGui::Button(SR_FORMAT_C("Remove property##CkProp{}", index))) {
                     removeIndex = index;
                 }
                 SR_GRAPH_GUI_NS::DrawDataType(property.pData.get(), nullptr, (void*)&property, m_leftPaneWidth);

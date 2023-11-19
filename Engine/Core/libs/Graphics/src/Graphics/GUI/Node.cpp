@@ -121,11 +121,11 @@ namespace SR_GRAPH_GUI_NS {
 
                 if (ImGui::Button("+")) {
                     if (isSequence) {
-                        auto&& pin = m_logicalNode->AddOutputData<SR_SRLM_NS::DataTypeFlow>(SR_HASH_STR_REGISTER(SR_FORMAT("Then %i", m_logicalNode->GetOutputs().size())));
+                        auto&& pin = m_logicalNode->AddOutputData<SR_SRLM_NS::DataTypeFlow>(SR_HASH_STR_REGISTER(SR_FORMAT("Then {}", m_logicalNode->GetOutputs().size())));
                         AddOutput(new Pin(SR_HASH_TO_STR(pin.hashName), pin.pData));
                     }
                     else {
-                        auto&& pin = m_logicalNode->AddInputData<SR_SRLM_NS::DataTypeFlow>(SR_HASH_STR_REGISTER(SR_FORMAT("If %i", m_logicalNode->GetInputs().size())));
+                        auto&& pin = m_logicalNode->AddInputData<SR_SRLM_NS::DataTypeFlow>(SR_HASH_STR_REGISTER(SR_FORMAT("If {}", m_logicalNode->GetInputs().size())));
                         AddInput(new Pin(SR_HASH_TO_STR(pin.hashName), pin.pData));
                     }
                 }

@@ -14,7 +14,7 @@ namespace SR_SRSL_NS {
         auto&& text = SR_UTILS_NS::FileSystem::ReadAllText(path.ToString());
 
         if (text.empty()) {
-            SR_ERROR("SRSLLexer::Parse() : failed to read file!\n\tPath: " + path.ToStringRef());
+            SR_ERROR("SRSLLexer::Parse() : failed to read file!\n\tPath: {}", path.ToStringRef());
         }
 
         return ParseInternal(std::move(text), fileIndex);
@@ -135,8 +135,8 @@ namespace SR_SRSL_NS {
 
         if (identifier.empty()) {
             SR_ERROR("SRSLLexer::ProcessIdentifier() : invalid identifier!"
-                 " \n\tPosition: " + std::to_string(m_offset) +
-                 " \n\tIdentifier: \"" + m_source[m_offset] + "\""
+                 " \n\tPosition: {}"
+                 " \n\tIdentifier: \"{}\"", m_offset, m_source[m_offset]
             );
             ++m_offset;
         }

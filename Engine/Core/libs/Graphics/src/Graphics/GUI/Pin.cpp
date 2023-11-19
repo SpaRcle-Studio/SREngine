@@ -211,7 +211,7 @@ namespace SR_GRAPH_GUI_NS {
 
     void Pin::PostDrawOption() {
         if (m_editEnum) {
-            ImGui::OpenPopup(SR_FORMAT_C("pin_enum_popup%p", (void*)this));
+            ImGui::OpenPopup(SR_FORMAT_C("pin_enum_popup{}", (void*)this));
             m_editEnum = false;
         }
 
@@ -227,7 +227,7 @@ namespace SR_GRAPH_GUI_NS {
                     break;
                 }
 
-                if (ImGui::BeginPopup(SR_FORMAT_C("pin_enum_popup%p", (void*)this))) {
+                if (ImGui::BeginPopup(SR_FORMAT_C("pin_enum_popup{}", (void*)this))) {
                     ImGui::TextDisabled("Select:");
                     ImGui::BeginChild("pin_enum_popup_scrollbar", ImVec2(100, 300), true, ImGuiWindowFlags_AlwaysVerticalScrollbar);
                     ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 0.f);

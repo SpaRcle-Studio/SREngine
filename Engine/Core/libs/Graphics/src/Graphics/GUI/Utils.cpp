@@ -313,7 +313,7 @@ namespace SR_GRAPH_GUI_NS {
                 }
                 break;
             case SR_SRLM_NS::DataTypeClass::Bool:
-                CheckboxNoNavFocus(SR_FORMAT_C("##Pin-%p", pProvider), pData->GetBool());
+                CheckboxNoNavFocus(SR_FORMAT_C("##Pin-{}", pProvider), pData->GetBool());
                 break;
             case SR_SRLM_NS::DataTypeClass::Enum: {
                 auto&& pEnum = dynamic_cast<SR_SRLM_NS::DataTypeEnum*>(pData);
@@ -325,7 +325,7 @@ namespace SR_GRAPH_GUI_NS {
 
                 if (!pIsEnum) {
                     ImGui::PushItemWidth(width > 0.f ? width : 80.0f);
-                    SR_GRAPH_GUI_NS::EnumCombo(SR_FORMAT_C("Enum##PinE-%p", pProvider), pReflector, [pEnum](auto&& pNewReflector) {
+                    SR_GRAPH_GUI_NS::EnumCombo(SR_FORMAT_C("Enum##PinE-{}", pProvider), pReflector, [pEnum](auto&& pNewReflector) {
                         pEnum->SetReflector(pNewReflector);
                         pEnum->SetValue(0);
                     });
@@ -351,7 +351,7 @@ namespace SR_GRAPH_GUI_NS {
                 }
                 else {
                     ImGui::PushItemWidth(width > 0.f ? width : 80.0f);
-                    SR_GRAPH_GUI_NS::EnumCombo(SR_FORMAT_C("##PinE-%p", pProvider), pReflector, enumValue, [pEnum, pReflector](auto&& value) {
+                    SR_GRAPH_GUI_NS::EnumCombo(SR_FORMAT_C("##PinE-{}", pProvider), pReflector, enumValue, [pEnum, pReflector](auto&& value) {
                         if (auto&& integral = pReflector->FromStringInternal(value)) {
                             pEnum->SetValue(integral.value());
                         }
@@ -373,7 +373,7 @@ namespace SR_GRAPH_GUI_NS {
                 ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 0.f);
                 int32_t number = *pData->GetInt32();
                 ImGui::PushItemWidth(width > 0.f ? width : 40.0f);
-                if (ImGui::InputInt(SR_FORMAT_C("##Pin-%p", pProvider), &number, 0)) {
+                if (ImGui::InputInt(SR_FORMAT_C("##Pin-{}", pProvider), &number, 0)) {
                     *pData->GetInt32() = number;
                 }
                 ImGui::PopItemWidth();
@@ -383,14 +383,14 @@ namespace SR_GRAPH_GUI_NS {
             case SR_SRLM_NS::DataTypeClass::Float:
                 ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 0.f);
                 ImGui::PushItemWidth(width > 0.f ? width : 40.0f);
-                ImGui::InputFloat(SR_FORMAT_C("##Pin-%p", pProvider), pData->GetFloat());
+                ImGui::InputFloat(SR_FORMAT_C("##Pin-{}", pProvider), pData->GetFloat());
                 ImGui::PopItemWidth();
                 ImGui::PopStyleVar();
                 break;
             case SR_SRLM_NS::DataTypeClass::String:
                 ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 0.f);
                 ImGui::PushItemWidth(width > 0.f ? width : 80.0f);
-                ImGui::InputText(SR_FORMAT_C("##Pin-%p", pProvider), pData->GetString());
+                ImGui::InputText(SR_FORMAT_C("##Pin-{}", pProvider), pData->GetString());
                 ImGui::PopStyleVar();
                 break;
             default:

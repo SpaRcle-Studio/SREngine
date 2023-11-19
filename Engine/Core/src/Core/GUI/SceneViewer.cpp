@@ -331,10 +331,6 @@ namespace SR_CORE_NS::GUI {
         }
 
         if (auto&& pColorPass = dynamic_cast<Graphics::ColorBufferPass*>(pRenderTechnique->FindPass("ColorBufferPass"))) {
-            /// auto&& color = pColorPass->GetColor(x, y);
-            /// auto&& index = pColorPass->GetIndex(x, y);
-            /// SR_LOG(SR_FORMAT("%f, %f, %f, %f - %i", color.r, color.g, color.b, color.a, index));
-
             if (auto&& pMesh = dynamic_cast<SR_GTYPES_NS::MeshComponent*>(pColorPass->GetMesh(x, y))) {
                 m_hierarchy->SelectGameObject(pMesh->GetRoot());
             }

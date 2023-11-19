@@ -118,7 +118,7 @@ namespace SR_ANIMATIONS_NS {
             }
 
             if (index >= pRawMesh->GetAssimpScene()->mNumAnimations) {
-                SR_ERROR("AnimationClip::Load() : wrong animation index!\n\tTotal animations: " + SR_UTILS_NS::ToString(pRawMesh->GetAssimpScene()->mNumAnimations));
+                SR_ERROR("AnimationClip::Load() : wrong animation index!\n\tTotal animations: {}", pRawMesh->GetAssimpScene()->mNumAnimations);
                 return false;
             }
 

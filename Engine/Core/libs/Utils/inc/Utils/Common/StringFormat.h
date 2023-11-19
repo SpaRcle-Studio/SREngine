@@ -2,33 +2,17 @@
 // Created by Monika on 22.09.2021.
 //
 
-#ifndef SR_ENGINE_UTILS__STRINGFORMAT_H
-#define SR_ENGINE_UTILS__STRINGFORMAT_H
+#ifndef SR_ENGINE_UTILS_STRING_FORMAT_H
+#define SR_ENGINE_UTILS_STRING_FORMAT_H
 
-#include <Utils/Debug.h>
 #include <Utils/Math/Mathematics.h>
 #include <Utils/Types/StringAtom.h>
+#include <Utils/Common/Breakpoint.h>
+
+#include <fmt/format.h>
+#include <fmt/printf.h>
 
 namespace SR_UTILS_NS {
-    template<typename T> std::string ToString(const T& value) {
-        if constexpr (IsLogical<T>()) {
-            return value ? "true" : "false";
-        }
-        else if constexpr (SR_MATH_NS::IsNumber<T>()) {
-            return std::to_string(value);
-        }
-        else if constexpr (std::is_enum_v<T>) {
-            return SR_UTILS_NS::EnumReflector::ToString(value).ToString();
-        }
-        else if constexpr (IsString<T>()) {
-            return value;
-        }
-        else {
-            SRHalt("Unsupported type!");
-            return std::string(); /// NOLINT
-        }
-    }
-
     template<typename T> T LexicalCast(const std::string& str) {
         try {
             if constexpr (std::is_same<T, bool>()) {
@@ -66,42 +50,47 @@ namespace SR_UTILS_NS {
                 return std::stod(str);
             }
             else {
-                SRHalt("Unsupported type!");
+                std::cerr << "LexicalCast: unsupported type!" << std::endl;
+                SR_MAKE_BREAKPOINT;
                 return T();
             }
         }
         catch (...) {
-            SRHalt("Failed to cast!");
+            std::cerr << "LexicalCast: failed to cast!" << std::endl;
+            SR_MAKE_BREAKPOINT;
             return T();
         }
     }
 
-    static std::string Format(const char* fmt, ...) {
-        va_list args;
-        va_start(args, fmt);
-        std::vector<char> v(1024);
-        while (true) {
-            va_list args2;
-            va_copy(args2, args);
-            int res = vsnprintf(v.data(), v.size(), fmt, args2);
-            if ((res >= 0) && (res < static_cast<int>(v.size()))) {
-                va_end(args);
-                va_end(args2);
-                return std::string(v.data());
-            }
-            size_t size;
-            if (res < 0)
-                size = v.size() * 2;
-            else
-                size = static_cast<size_t>(res) + 1;
-            v.clear();
-            v.resize(size);
-            va_end(args2);
+    template <class... Args> std::string Format(const char* fmt, Args&&... args) {
+        try {
+            return fmt::format(fmt::runtime(fmt), args...);
         }
+        catch (std::exception& exception) {
+            std::cerr << "Format: an exception has been occurred! Exception: " << exception.what() << std::endl;
+            SR_MAKE_BREAKPOINT;
+            return std::string(); /// NOLINT
+        }
+    }
+
+    template <class... Args> std::string SPrintFFormat(const char* fmt, Args&&... args) {
+        try {
+            return fmt::sprintf(fmt, args...);
+        }
+        catch (std::exception& exception) {
+            std::cerr << "SPrintFFormat: an exception has been occurred! Exception: " << exception.what() << std::endl;
+            SR_MAKE_BREAKPOINT;
+            return std::string(); /// NOLINT
+        }
+    }
+
+    template <class... Args> std::string Format(const std::string& fmt, Args&&... args) {
+        return Format<Args...>(fmt.c_str(), args...);
     }
 }
 
 #define SR_FORMAT(fmt, ...) SR_UTILS_NS::Format(fmt, __VA_ARGS__)
+#define SR_SPRINTF_FORMAT(fmt, ...) SR_UTILS_NS::SPrintFFormat(fmt, __VA_ARGS__)
 #define SR_FORMAT_C(fmt, ...) SR_UTILS_NS::Format(fmt, __VA_ARGS__).c_str()
 
-#endif //GAMEENGINE_STRINGFORMAT_H
+#endif //SR_ENGINE_UTILS_STRING_FORMAT_H

@@ -71,7 +71,7 @@ namespace SR_GRAPH_NS::Vertices {
         }
 
         SR_NODISCARD std::string ToString() const {
-            return SR_FORMAT("{ %s, %s, %s, %s, %s },",
+            return SR_FORMAT("[ {}, {}, {}, {}, {} ],",
                     Vertices::ToString(pos).c_str(),
                     Vertices::ToString(uv).c_str(),
                     Vertices::ToString(norm).c_str(),
@@ -130,7 +130,7 @@ namespace SR_GRAPH_NS::Vertices {
         }
 
         SR_NODISCARD std::string ToString() const {
-            return SR_FORMAT("{ %s, %s, %s, %s, %s },",
+            return SR_FORMAT("[ {}, {}, {}, {}, {} ],",
                              Vertices::ToString(pos).c_str(),
                              Vertices::ToString(uv).c_str(),
                              Vertices::ToString(norm).c_str(),

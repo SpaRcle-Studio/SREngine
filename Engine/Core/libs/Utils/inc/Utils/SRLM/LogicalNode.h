@@ -8,6 +8,7 @@
 #include <Utils/Common/NonCopyable.h>
 #include <Utils/Common/Hashes.h>
 #include <Utils/Common/Enumerations.h>
+#include <Utils/Common/ToString.h>
 #include <Utils/Xml.h>
 
 namespace SR_SRLM_NS {

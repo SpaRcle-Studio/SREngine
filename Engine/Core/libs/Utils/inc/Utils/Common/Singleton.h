@@ -7,7 +7,8 @@
 
 #include <Utils/Common/NonCopyable.h>
 #include <Utils/Common/Breakpoint.h>
-#include <Utils/Common/Stacktrace.h>
+
+#include <Utils/Platform/Stacktrace.h>
 
 #include <Utils/Types/StringAtom.h>
 #include <Utils/Types/SafePtrLockGuard.h>

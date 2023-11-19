@@ -321,6 +321,9 @@ namespace SR_UTILS_NS {
 
         auto&& path = GetResourcePath();
         auto&& pWatch = resourcesManager.StartWatch(resourcesManager.GetResPath().Concat(path));
+        if (!pWatch) {
+            return;
+        }
 
         pWatch->SetCallBack([this](auto&& pWatcher) {
             SignalWatch();

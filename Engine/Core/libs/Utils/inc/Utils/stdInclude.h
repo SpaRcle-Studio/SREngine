@@ -81,6 +81,9 @@
     #include <direct.h>
 #endif
 
+#undef min
+#undef max
+
 /// C++17 - 201703L
 /// C++14 - 201402L
 /// C++11 - 201103L

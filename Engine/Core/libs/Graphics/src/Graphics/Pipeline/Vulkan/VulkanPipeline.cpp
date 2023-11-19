@@ -798,22 +798,22 @@ namespace SR_GRAPH_NS {
         };
 
         EvoVulkan::Tools::VkFunctionsHolder::Instance().LogCallback = [GetUsedMemoryFn](const std::string& msg) {
-            SR_VULKAN_LOG(SR_FORMAT("{%i} %s", GetUsedMemoryFn(), msg.c_str()));
+            SR_VULKAN_LOG("[{}] {}", GetUsedMemoryFn(), msg);
         };
 
         EvoVulkan::Tools::VkFunctionsHolder::Instance().WarnCallback = [GetUsedMemoryFn](const std::string& msg) {
-            SR_WARN(SR_FORMAT("{%i} %s", GetUsedMemoryFn(), msg.c_str()));
+            SR_WARN("[{}] {}", GetUsedMemoryFn(), msg);
         };
         EvoVulkan::Tools::VkFunctionsHolder::Instance().ErrorCallback = [GetUsedMemoryFn](const std::string& msg) {
-            SR_VULKAN_ERROR(SR_FORMAT("{%i} %s", GetUsedMemoryFn(), msg.c_str()));
+            SR_VULKAN_ERROR("[{}] {}", GetUsedMemoryFn(), msg);
         };
 
         EvoVulkan::Tools::VkFunctionsHolder::Instance().GraphCallback = [GetUsedMemoryFn](const std::string& msg) {
-            SR_VULKAN_MSG(SR_FORMAT("{%i} %s", GetUsedMemoryFn(), msg.c_str()));
+            SR_VULKAN_MSG("[{}] {}", GetUsedMemoryFn(), msg);
         };
 
         EvoVulkan::Tools::VkFunctionsHolder::Instance().AssertCallback = [GetUsedMemoryFn](const std::string &msg) {
-            SRHalt(SR_FORMAT("{%i} %s", GetUsedMemoryFn(), msg.c_str()));
+            SRHalt("[{}] {}", GetUsedMemoryFn(), msg);
             return false;
         };
 

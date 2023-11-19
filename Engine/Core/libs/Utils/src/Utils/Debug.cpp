@@ -5,7 +5,7 @@
 #include <Utils/Debug.h>
 #include <Utils/FileSystem/FileSystem.h>
 #include <Utils/ResourceManager/ResourceManager.h>
-#include <Utils/Common/Stacktrace.h>
+#include <Utils/Platform/Stacktrace.h>
 #include <Utils/Platform/Platform.h>
 
 namespace SR_UTILS_NS {
@@ -43,9 +43,10 @@ namespace SR_UTILS_NS {
 
     #ifdef SR_WIN32
         if (m_showUseMemory) {
-            SR_PLATFORM_NS::WriteConsoleLog(SR_UTILS_NS::Format("<%i KB> ", static_cast<uint32_t>(SR_PLATFORM_NS::GetProcessUsedMemory() / 1024)));
+            auto&& memMessage = SR_UTILS_NS::Format("<{} KB> ", static_cast<uint32_t>(SR_PLATFORM_NS::GetProcessUsedMemory() / 1024));
+            SR_PLATFORM_NS::WriteConsoleLog(memMessage);
             if (m_file.is_open()) {
-                m_file << '<' << static_cast<uint32_t>(SR_PLATFORM_NS::GetProcessUsedMemory() / 1024) << " KB> ";
+                m_file << memMessage;
             }
         }
 

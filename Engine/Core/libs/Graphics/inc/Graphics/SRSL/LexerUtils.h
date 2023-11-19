@@ -8,6 +8,7 @@
 #include <Utils/Common/Singleton.h>
 #include <Utils/Common/Enumerations.h>
 #include <Utils/Common/StringFormat.h>
+#include <Utils/Common/ToString.h>
 #include <Utils/Types/Regex.h>
 #include <Utils/Debug.h>
 

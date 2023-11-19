@@ -2,8 +2,8 @@
 // Created by Monika on 13.05.2023.
 //
 
-#ifndef SRENGINE_TRACYCONTEXT_H
-#define SRENGINE_TRACYCONTEXT_H
+#ifndef SR_ENGINE_UTILS_TRACY_CONTEXT_H
+#define SR_ENGINE_UTILS_TRACY_CONTEXT_H
 
 #ifdef SR_TRACY_ENABLE
 
@@ -11,6 +11,7 @@
 #include <Utils/Common/Singleton.h>
 #include <Utils/Common/Enumerations.h>
 #include <Utils/Types/Map.h>
+#include <Utils/Debug.h>
 
 #include <Tracy.hpp>
 
@@ -76,4 +77,4 @@ namespace SR_UTILS_NS {
 #endif
 
 
-#endif //SRENGINE_TRACYCONTEXT_H
+#endif //SR_ENGINE_UTILS_TRACY_CONTEXT_H

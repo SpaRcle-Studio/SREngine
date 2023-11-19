@@ -8,6 +8,7 @@
 #include <Utils/stdInclude.h>
 #include <Utils/Math/Mathematics.h>
 #include <Utils/Types/StringAtom.h>
+#include <Utils/Common/Breakpoint.h>
 
 namespace SR_UTILS_NS {
     class SR_DLL_EXPORT Path {

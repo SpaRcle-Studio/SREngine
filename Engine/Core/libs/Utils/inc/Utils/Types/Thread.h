@@ -97,7 +97,7 @@ namespace SR_HTYPES_NS {
                     m_id = SR_UTILS_NS::GetThreadId(m_thread);
                 }
                 Factory::Instance().m_threads.insert(std::make_pair(m_id, this));
-                SR_LOG("Thread::Run() : run thread \"" + m_id + "\"");
+                SR_LOG("Thread::Run() : run thread \"{}\"",  m_id);
                 while (!m_isRan) {
                     SR_NOOP;
                 }
