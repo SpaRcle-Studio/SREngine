@@ -564,7 +564,7 @@ namespace SR_GRAPH_NS {
                     auto&& vkDescriptorSet = m_memory->m_descriptorSets[descriptorSet].m_self;
 
                     if (info.ubo >= m_memory->m_countUBO.first) {
-                        SRHalt(SR_FORMAT("VulkanPipeline::UpdateDescriptorSets() : uniform index out of range! \n\tCount uniforms: %i\n\tIndex: %i", m_memory->m_countUBO.first, info.ubo));
+                        SRHalt("VulkanPipeline::UpdateDescriptorSets() : uniform index out of range! \n\tCount uniforms: {}\n\tIndex: {}", m_memory->m_countUBO.first, info.ubo);
                         continue;
                     }
 
@@ -597,7 +597,7 @@ namespace SR_GRAPH_NS {
         Super::UpdateUBO(UBO, pData, size);
 
         if (UBO >= m_memory->m_countUBO.first) {
-            SRHalt(SR_FORMAT("VulkanPipeline::UpdateUBO() : uniform index out of range! \n\tCount uniforms: %i\n\tIndex: %i", m_memory->m_countUBO.first, UBO));
+            SRHalt("VulkanPipeline::UpdateUBO() : uniform index out of range! \n\tCount uniforms: {}\n\tIndex: {}", m_memory->m_countUBO.first, UBO);
             return;
         }
 

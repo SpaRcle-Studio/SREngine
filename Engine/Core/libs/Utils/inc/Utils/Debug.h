@@ -134,7 +134,7 @@ namespace SR_UTILS_NS {
 
     #define SRVerifyFalse2(expr, ...) ((!(expr) || SR_UTILS_NS::Debug::Instance().Assert(SR_MAKE_ASSERT(SR_FORMAT(__VA_ARGS__)))))
 
-    #define SR_SAFE_PTR_ASSERT(expr, msg) SRAssert2(expr, SR_UTILS_NS::Format("[SafePtr] {} \n\tPtr: {}", msg, (void *) m_ptr));
+    #define SR_SAFE_PTR_ASSERT(expr, msg) SRAssert2(expr, SR_FORMAT("[SafePtr] {} \n\tPtr: {}", msg, (void *) m_ptr));
 
     #define SRAssert2Once(expr, ...) ((!(expr) && SR_UTILS_NS::Debug::Instance().AssertOnceCheck(SR_MAKE_ASSERT(SR_FORMAT(__VA_ARGS__)))) || SRAssert2(expr, SR_FORMAT(__VA_ARGS__)))
 #else

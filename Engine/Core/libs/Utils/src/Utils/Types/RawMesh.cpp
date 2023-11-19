@@ -248,8 +248,8 @@ namespace SR_HTYPES_NS {
 
                     if (vertex.weightsNum > SR_MAX_BONES_ON_VERTEX) {
                         if (!hasWarn) {
-                            SR_WARN(SR_FORMAT("RawMesh::GetVertices() : number of weights on vertex is already %i. Some weights will be omitted! VertexID = %i. weightsNum = %i",
-                                SR_MAX_BONES_ON_VERTEX, mesh->mBones[i]->mWeights[j].mVertexId, vertex.weightsNum));
+                            SR_WARN("RawMesh::GetVertices() : number of weights on vertex is already {}. Some weights will be omitted! VertexID = {}. weightsNum = {}",
+                                SR_MAX_BONES_ON_VERTEX, mesh->mBones[i]->mWeights[j].mVertexId, vertex.weightsNum);
                             hasWarn = true;
                         }
                         continue;

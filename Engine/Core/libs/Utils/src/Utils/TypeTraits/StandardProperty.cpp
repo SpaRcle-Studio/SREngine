@@ -34,11 +34,11 @@ namespace SR_UTILS_NS {
         if (auto&& pBlock = LoadPropertyBase(marshal)) {
             auto&& standardType = SR_UTILS_NS::EnumReflector::FromString<StandardType>(pBlock->Read<StringAtom>());
             if (standardType != GetStandardType()) {
-                SR_WARN(SR_FORMAT("StandardProperty::LoadProperty() : incompatible properties!\n\tName: %s\n\tProperty type: %s\n\tLoaded type: %s",
+                SR_WARN("StandardProperty::LoadProperty() : incompatible properties!\n\tName: {}\n\tProperty type: {}\n\tLoaded type: {}",
                       GetName().ToCStr(),
                       SR_UTILS_NS::EnumReflector::ToString(GetStandardType()).ToCStr(),
                       SR_UTILS_NS::EnumReflector::ToString(standardType).ToCStr()
-                ));
+                );
                 return;
             }
 

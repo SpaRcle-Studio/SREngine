@@ -6,7 +6,7 @@
 
 namespace SR_UTILS_NS {
     std::string Xml::Attribute::ToString() const {
-        if (!CheckError(SR_FORMAT("Attribute::ToString() : attribute isn't valid! Name: %s", m_attribute.name()))) {
+        if (!CheckError(SR_FORMAT("Attribute::ToString() : attribute isn't valid! Name: {}", m_attribute.name()))) {
             return std::string();
         }
         else
@@ -14,7 +14,7 @@ namespace SR_UTILS_NS {
     }
 
     int32_t Xml::Attribute::ToInt() const {
-        if (!CheckError(SR_FORMAT("Attribute::ToInt() : attribute isn't valid! Name: %s", m_attribute.name()))) {
+        if (!CheckError(SR_FORMAT("Attribute::ToInt() : attribute isn't valid! Name: {}", m_attribute.name()))) {
             return 0;
         }
         else
@@ -22,7 +22,7 @@ namespace SR_UTILS_NS {
     }
 
     float_t Xml::Attribute::ToFloat() const {
-        if (!CheckError(SR_FORMAT("Attribute::ToFloat() : attribute isn't valid! Name: %s", m_attribute.name()))) {
+        if (!CheckError(SR_FORMAT("Attribute::ToFloat() : attribute isn't valid! Name: {}", m_attribute.name()))) {
             return 0.f;
         }
         else
@@ -30,7 +30,7 @@ namespace SR_UTILS_NS {
     }
 
     double_t Xml::Attribute::ToDouble() const {
-        if (!CheckError(SR_FORMAT("Attribute::ToFloat() : attribute isn't valid! Name: %s", m_attribute.name()))) {
+        if (!CheckError(SR_FORMAT("Attribute::ToFloat() : attribute isn't valid! Name: {}", m_attribute.name()))) {
             return 0.f;
         }
         else
@@ -38,7 +38,7 @@ namespace SR_UTILS_NS {
     }
 
     bool Xml::Attribute::ToBool() const {
-        if (!CheckError(SR_FORMAT("Attribute::ToBool() : attribute isn't valid! Name: %s", m_attribute.name()))) {
+        if (!CheckError(SR_FORMAT("Attribute::ToBool() : attribute isn't valid! Name: {}", m_attribute.name()))) {
             return false;
         }
         else

@@ -284,7 +284,7 @@ namespace SR_GRAPH_NS {
 
     /// ЭТО ВСЕ НЕ РАБОТАЕТ, ОКНУ ПОХУЙ ОНО РАСТЯГИВАЕТСЯ ТАК КАК ХОЧЕТ, ВИНАПИ ДЕРЬМО
     void Win32Window::Resize(uint32_t w, uint32_t h) {
-        SR_LOG(SR_FORMAT("Win32Window::Resize() : set new sizes %ux%u", w, h));
+        SR_LOG("Win32Window::Resize() : set new sizes {}x{}", w, h);
 
         RECT newRect = RECT{
                 .left = 0L,

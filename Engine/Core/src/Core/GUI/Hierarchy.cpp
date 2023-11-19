@@ -208,7 +208,7 @@ namespace SR_CORE_GUI_NS {
 
         const uint64_t id = root->GetEntityId();
 
-        if (SR_GRAPH_GUI_NS::RadioButton(SR_FORMAT_C("##HierarchyEnableGM%i", id), root->IsEnabled(), 0.75f)) {
+        if (SR_GRAPH_GUI_NS::RadioButton(SR_FORMAT_C("##HierarchyEnableGM{}", id), root->IsEnabled(), 0.75f)) {
             root->SetEnabled(!root->IsEnabled());
         }
 

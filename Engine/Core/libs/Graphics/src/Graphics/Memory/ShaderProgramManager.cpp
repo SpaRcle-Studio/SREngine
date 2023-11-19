@@ -345,7 +345,7 @@ namespace SR_GRAPH_NS::Memory {
         }
 
         if (count > 0) {
-            SR_LOG(SR_FORMAT("ShaderProgramManager::CollectUnusedShaders() : collected %i unused shaders.", count));
+            SR_LOG("ShaderProgramManager::CollectUnusedShaders() : collected {} unused shaders.", count);
         }
     }
 }

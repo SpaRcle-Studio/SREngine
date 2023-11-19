@@ -35,7 +35,7 @@ namespace SR_CORE_GUI_NS {
 
         uint64_t index = 0;
         while (SR_WORLD_NS::Scene::IsExists(scenePath)) {
-            scenePath = SR_FORMAT("%s-%u.scene", SR_WORLD_NS::Scene::NewScenePath.CStr(), index);
+            scenePath = SR_FORMAT("{}-{}.scene", SR_WORLD_NS::Scene::NewScenePath.CStr(), index);
             ++index;
         }
 
@@ -47,7 +47,7 @@ namespace SR_CORE_GUI_NS {
 
         uint64_t index = 0;
         while (SR_WORLD_NS::Scene::IsExists(scenePath)) {
-            scenePath = SR_FORMAT("%s-%u.prefab", SR_WORLD_NS::Scene::NewPrefabPath.CStr(), index);
+            scenePath = SR_FORMAT("{}-{}.prefab", SR_WORLD_NS::Scene::NewPrefabPath.CStr(), index);
             ++index;
         }
 

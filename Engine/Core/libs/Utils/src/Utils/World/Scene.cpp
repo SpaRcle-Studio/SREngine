@@ -168,8 +168,8 @@ namespace SR_WORLD_NS {
         Prepare();
 
         if (m_gameObjects.size() != m_freeObjIndices.size()) {
-            SRHalt(SR_UTILS_NS::Format("Scene::Destroy() : after destroying the root objects, "
-                                       "there are %i objects left!", m_gameObjects.size() - m_freeObjIndices.size()));
+            SRHalt("Scene::Destroy() : after destroying the root objects, "
+                                       "there are {} objects left!", m_gameObjects.size() - m_freeObjIndices.size());
         }
 
         m_isDestroyed = true;
@@ -224,7 +224,7 @@ namespace SR_WORLD_NS {
     }
 
     bool Scene::SaveAt(const Path& path) {
-        SR_INFO(SR_FORMAT("Scene::SaveAt() : saving scene...\n\tPath: %s", path.CStr()));
+        SR_INFO(SR_FORMAT("Scene::SaveAt() : saving scene...\n\tPath: {}", path.CStr()));
 
         SRAssert(!path.IsAbs());
 

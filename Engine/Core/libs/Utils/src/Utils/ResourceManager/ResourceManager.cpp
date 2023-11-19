@@ -300,7 +300,7 @@ namespace SR_UTILS_NS {
 
             uint32_t id = 0;
             for (auto& pRes : type->m_resources) {
-                dump += SR_UTILS_NS::Format("\n\t\t%u: %s = %u", id++, pRes->GetResourceId().data(), pRes->GetCountUses());
+                dump += SR_UTILS_NS::Format("\n\t\t{}: {} = {}", id++, pRes->GetResourceId().data(), pRes->GetCountUses());
                 ++count;
             }
         }

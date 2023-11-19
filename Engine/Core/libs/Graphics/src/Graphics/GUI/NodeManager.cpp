@@ -33,7 +33,7 @@ namespace SR_GRAPH_NS::GUI {
 
     #ifdef SR_DEBUG
         if (m_uniques.count(id) == 0) {
-            SRAssert2(false, SR_UTILS_NS::Format("Id not found! Id: %ul", id));
+            SRAssert2(false, "Id not found! Id: {}", id);
             return;
         }
     #endif
@@ -43,7 +43,7 @@ namespace SR_GRAPH_NS::GUI {
 
     void NodeManager::OnSingletonDestroy() {
         if (!m_uniques.empty()) {
-            SR_WARN(SR_UTILS_NS::Format("NodeManager::OnSingletonDestroy() : %u uniques was been released!", m_uniques.size()));
+            SR_WARN("NodeManager::OnSingletonDestroy() : {} uniques was been released!", m_uniques.size());
         }
     }
 }

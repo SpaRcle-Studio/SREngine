@@ -274,7 +274,7 @@ namespace SR_GTYPES_NS {
 
     std::string SkinnedMesh::GetMeshIdentifier() const {
         if (auto&& pRawMesh = GetRawMesh()) {
-            return SR_UTILS_NS::Format("%s|%i|%i", pRawMesh->GetResourceId().c_str(), GetMeshId(), pRawMesh->GetReloadCount());
+            return SR_FORMAT("{}|{}|{}", pRawMesh->GetResourceId().c_str(), GetMeshId(), pRawMesh->GetReloadCount());
         }
 
         return MeshComponent::GetMeshIdentifier();

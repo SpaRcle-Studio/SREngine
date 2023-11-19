@@ -260,7 +260,7 @@ std::string SR_GRAPH_NS::SRSL::GenerateFunctions(const SRSLFunctions& functions,
         if (!isUsed)
             continue;
 
-        code += SR_UTILS_NS::Format("%s %s(%s) {\n%s}\n\n",
+        code += SR_SPRINTF("%s %s(%s) {\n%s}\n\n",
                                     function.retType.c_str(),
                                     function.name.c_str(),
                                     function.args.c_str(),

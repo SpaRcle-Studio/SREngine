@@ -152,7 +152,7 @@ namespace SR_UTILS_NS {
                 break;
             case Measurement::Space4D:
             default:
-                SRHalt(SR_UTILS_NS::Format("Unknown measurement \"%i\"!", static_cast<int32_t>(measurement)));
+                SRHalt("Unknown measurement \"{}\"!", static_cast<int32_t>(measurement));
                 return nullptr;
         }
 

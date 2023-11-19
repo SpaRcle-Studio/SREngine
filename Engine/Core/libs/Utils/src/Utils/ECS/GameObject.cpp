@@ -181,7 +181,7 @@ namespace SR_UTILS_NS {
             }
         }
 
-        SRHalt(Format("GameObject %s is not child for %s!", ptr->GetName().c_str(), GetName().c_str()));
+        SRHalt("GameObject {} is not child for {}!", ptr->GetName().c_str(), GetName().c_str());
     }
 
     void GameObject::RemoveAllChildren() {

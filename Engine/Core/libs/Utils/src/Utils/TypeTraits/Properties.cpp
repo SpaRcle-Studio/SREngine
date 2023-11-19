@@ -79,9 +79,9 @@ namespace SR_UTILS_NS {
                     pProperty->LoadProperty(propertyMarshal);
                 }
                 else {
-                    SR_WARN(SR_FORMAT("PropertyContainer::LoadProperty() : property not found!\n\tContainer: %s\n\tProperty name: %s",
+                    SR_WARN("PropertyContainer::LoadProperty() : property not found!\n\tContainer: {}\n\tProperty name: {}",
                         GetName().ToCStr(), name.ToCStr()
-                    ));
+                    );
                 }
             }
         }

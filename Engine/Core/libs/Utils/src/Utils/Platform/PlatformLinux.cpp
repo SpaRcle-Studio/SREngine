@@ -149,14 +149,14 @@ namespace SR_UTILS_NS::Platform {
             close(dest);
 
             if (result == -1) {
-                SR_WARN(SR_FORMAT("Platform::Copy() : failed to copy!\n\tFrom: %s\n\tTo: %s", from.CStr(), to.CStr()));
+                SR_WARN("Platform::Copy() : failed to copy!\n\tFrom: {}\n\tTo: {}", from.CStr(), to.CStr());
             }
 
             return result != -1;
         }
 
         if (!from.IsDir()) {
-            SR_WARN(SR_FORMAT("Platform::Copy() : \"%s\" is not directory!", from.c_str()));
+            SR_WARN("Platform::Copy() : \"{}\" is not directory!", from.c_str());
             return false;
         }
 
@@ -198,7 +198,7 @@ namespace SR_UTILS_NS::Platform {
             const bool result = std::remove(path.CStr()) == 0;
 
             if (!result) {
-                SR_WARN(SR_FORMAT("Platform::Delete() : failed to delete file!\n\tPath: %s", path.CStr()));
+                SR_WARN("Platform::Delete() : failed to delete file!\n\tPath: {}", path.CStr());
             }
 
             return result;
@@ -219,7 +219,7 @@ namespace SR_UTILS_NS::Platform {
         const bool result = rmdir(path.CStr()) == 0;
 
         if (!result) {
-            SR_WARN(SR_FORMAT("Platform::Delete() : failed to delete folder!\n\tPath: %s", path.CStr()));
+            SR_WARN("Platform::Delete() : failed to delete folder!\n\tPath: {}", path.CStr());
         }
 
         return result;

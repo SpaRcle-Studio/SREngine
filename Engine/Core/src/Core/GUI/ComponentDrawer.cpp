@@ -65,7 +65,7 @@ namespace SR_CORE_NS::GUI {
         }
 
         if (auto&& pDescriptor = context->GetIconDescriptor(EditorIcon::Script)) {
-            if (SR_GRAPH_GUI_NS::ImageButton(SR_FORMAT("##BehSelectBtn%i", index), pDescriptor, SR_MATH_NS::IVector2(50), 5)) {
+            if (SR_GRAPH_GUI_NS::ImageButton(SR_FORMAT("##BehSelectBtn{}", index), pDescriptor, SR_MATH_NS::IVector2(50), 5)) {
                 auto &&scriptsPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
                 auto &&path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(scriptsPath, { { "Source file", "cpp" } });
 
@@ -85,7 +85,7 @@ namespace SR_CORE_NS::GUI {
         ImGui::BeginGroup();
         {
             if (auto&& pDescriptor = context->GetIconDescriptor(EditorIcon::Reset)) {
-                if (SR_GRAPH_GUI_NS::ImageButton(SR_FORMAT("##BehResetBtn%i", index), pDescriptor, SR_MATH_NS::IVector2(25), 5)) {
+                if (SR_GRAPH_GUI_NS::ImageButton(SR_FORMAT("##BehResetBtn{}", index), pDescriptor, SR_MATH_NS::IVector2(25), 5)) {
                     pBehaviour = new SR_SCRIPTING_NS::Behaviour();
                 }
             }
@@ -110,22 +110,22 @@ namespace SR_CORE_NS::GUI {
 
             auto&& visitor = SR_UTILS_NS::Overloaded {
                 [&](int value) {
-                    if (ImGui::InputInt(SR_FORMAT_C("%s##BehProp%i", property.c_str(), index), &value)) {
+                    if (ImGui::InputInt(SR_FORMAT_C("{}##BehProp{}", property.c_str(), index), &value)) {
                         pBehaviour->SetProperty(property, value);
                     }
                 },
                 [&](bool value) {
-                    if (ImGui::Checkbox(SR_FORMAT_C("%s##BehProp%i", property.c_str(), index), &value)) {
+                    if (ImGui::Checkbox(SR_FORMAT_C("{}##BehProp{}", property.c_str(), index), &value)) {
                         pBehaviour->SetProperty(property, value);
                     }
                 },
                 [&](float value) {
-                    if (ImGui::DragFloat(SR_FORMAT_C("%s##BehProp%i", property.c_str(), index), &value, 0.01f)) {
+                    if (ImGui::DragFloat(SR_FORMAT_C("{}##BehProp{}", property.c_str(), index), &value, 0.01f)) {
                         pBehaviour->SetProperty(property, value);
                     }
                 },
                 [&](double value) {
-                    if (ImGui::InputDouble(SR_FORMAT_C("%s##BehProp%i", property.c_str(), index), &value)) {
+                    if (ImGui::InputDouble(SR_FORMAT_C("{}##BehProp{}", property.c_str(), index), &value)) {
                         pBehaviour->SetProperty(property, value);
                     }
                 },
@@ -139,27 +139,27 @@ namespace SR_CORE_NS::GUI {
 
     void ComponentDrawer::DrawComponent(SR_GRAPH_NS::Types::Camera*& pComponent, EditorGUI* pContext, int32_t index) {
         std::string renderTechnique = pComponent->GetRenderTechniquePath().ToStringRef();
-        if (ImGui::InputText(SR_FORMAT_C("Render technique##%p%i", (void*)pContext, index), &renderTechnique)) {
+        if (ImGui::InputText(SR_FORMAT_C("Render technique##{}{}", (void*)pContext, index), &renderTechnique)) {
             pComponent->SetRenderTechnique(renderTechnique);
         }
 
         float_t cameraFar = pComponent->GetFar();
-        if (ImGui::InputFloat(SR_FORMAT_C("Far##%p%i", (void*)pContext, index), &cameraFar, 5) && cameraFar >= 0) {
+        if (ImGui::InputFloat(SR_FORMAT_C("Far##{}{}", (void*)pContext, index), &cameraFar, 5) && cameraFar >= 0) {
             pComponent->SetFar(cameraFar);
         }
 
         float_t cameraNear = pComponent->GetNear();
-        if (ImGui::InputFloat(SR_FORMAT_C("Near##%p%i", (void*)pContext, index), &cameraNear, 0.01) && cameraNear >= 0) {
+        if (ImGui::InputFloat(SR_FORMAT_C("Near##{}{}", (void*)pContext, index), &cameraNear, 0.01) && cameraNear >= 0) {
             pComponent->SetNear(cameraNear);
         }
 
         float_t cameraFOV = pComponent->GetFOV();
-        if (ImGui::InputFloat(SR_FORMAT_C("FOV##%p%i", (void*)pContext, index), &cameraFOV, 0.5) && cameraFOV >= 0) {
+        if (ImGui::InputFloat(SR_FORMAT_C("FOV##{}{}", (void*)pContext, index), &cameraFOV, 0.5) && cameraFOV >= 0) {
             pComponent->SetFOV(cameraFOV);
         }
 
         int32_t priority = pComponent->GetPriority();
-        if (ImGui::InputInt(SR_FORMAT_C("Priority##%p%i", (void*)pContext, index), &priority, 1)) {
+        if (ImGui::InputInt(SR_FORMAT_C("Priority##{}{}", (void*)pContext, index), &priority, 1)) {
             pComponent->SetPriority(priority);
         }
     }
@@ -177,7 +177,7 @@ namespace SR_CORE_NS::GUI {
         auto&& pMaterial = pComponent->GetMaterial();
 
         if (auto&& pDescriptor = context->GetIconDescriptor(EditorIcon::Shapes)) {
-            if (SR_GRAPH_GUI_NS::ImageButton(SR_FORMAT("##imgMeshBtn%i", index), pDescriptor, SR_MATH_NS::IVector2(50), 5)) {
+            if (SR_GRAPH_GUI_NS::ImageButton(SR_FORMAT("##imgMeshBtn{}", index), pDescriptor, SR_MATH_NS::IVector2(50), 5)) {
                 auto&& resourcesFolder = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
                 auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesFolder, { { "Mesh", "obj,pmx,fbx,blend,stl,dae" } });
 
@@ -235,7 +235,7 @@ namespace SR_CORE_NS::GUI {
         auto&& pMaterial = pComponent->GetMaterial();
 
         if (auto&& pDescriptor = context->GetIconDescriptor(EditorIcon::Shapes)) {
-            if (SR_GRAPH_GUI_NS::ImageButton(SR_FORMAT("##imgMeshBtn%i", index), pDescriptor, SR_MATH_NS::IVector2(50), 5)) {
+            if (SR_GRAPH_GUI_NS::ImageButton(SR_FORMAT("##imgMeshBtn{}", index), pDescriptor, SR_MATH_NS::IVector2(50), 5)) {
                 auto&& resourcesFolder = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
                 auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesFolder, { { "Mesh", "obj,fbx,pmx,blend,stl,dae" } });
 
@@ -284,7 +284,7 @@ namespace SR_CORE_NS::GUI {
             SR_GRAPH_GUI_NS::DrawTextOnCenter("Material");
 
             if (auto&& pDescriptor = context->GetIconDescriptor(EditorIcon::Material)) {
-                if (SR_GRAPH_GUI_NS::ImageButton(SR_FORMAT("##imgMatBtn%i", index), pDescriptor, SR_MATH_NS::IVector2(75), 5)) {
+                if (SR_GRAPH_GUI_NS::ImageButton(SR_FORMAT("##imgMatBtn{}", index), pDescriptor, SR_MATH_NS::IVector2(75), 5)) {
                     auto&& resourcesFolder = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
                     auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesFolder, { { "Material", "mat" } });
 
@@ -328,19 +328,19 @@ namespace SR_CORE_NS::GUI {
         float_t coneInnerAngle = pComponent->GetConeInnerAngle();
         bool loop = pComponent->GetLoop();
 
-        if (ImGui::SliderFloat(SR_FORMAT_C("Volume##SliderVolume%i", index), &volume, 0.f, 1.f, "%.1f")) {
+        if (ImGui::SliderFloat(SR_FORMAT_C("Volume##SliderVolume{}", index), &volume, 0.f, 1.f, "%.1f")) {
             pComponent->SetVolume(volume);
         }
 
-        if (ImGui::SliderFloat(SR_FORMAT_C("Pitch##SliderPitch%i", index), &pitch, 0.f, 10.f, "%.1f")) {
+        if (ImGui::SliderFloat(SR_FORMAT_C("Pitch##SliderPitch{}", index), &pitch, 0.f, 10.f, "%.1f")) {
             pComponent->SetPitch(pitch);
         }
 
-        if (ImGui::SliderFloat(SR_FORMAT_C("coneInnerAngle##SliderConeInnerAngle%i", index), &coneInnerAngle, 0.f,360.f, "%.1f")) {
+        if (ImGui::SliderFloat(SR_FORMAT_C("coneInnerAngle##SliderConeInnerAngle{}", index), &coneInnerAngle, 0.f,360.f, "%.1f")) {
             pComponent->SetConeInnerAngle(coneInnerAngle);
         }
 
-        if (ImGui::Checkbox(SR_FORMAT_C("Loop##CheckBoxLoop%i", index), &loop)) {
+        if (ImGui::Checkbox(SR_FORMAT_C("Loop##CheckBoxLoop{}", index), &loop)) {
             pComponent->SetLoop(loop);
         }
 
@@ -427,18 +427,18 @@ namespace SR_CORE_NS::GUI {
         ImGui::Text("Atlas size: %ix%i", pComponent->GetAtlasWidth(), pComponent->GetAtlasHeight());
 
         bool kerning = pComponent->GetKerning();
-        if (ImGui::Checkbox(SR_FORMAT_C("Kerning##textK%i", index), &kerning)) {
+        if (ImGui::Checkbox(SR_FORMAT_C("Kerning##textK{}", index), &kerning)) {
             pComponent->SetKerning(kerning);
         }
 
         bool debug = pComponent->IsDebugEnabled();
-        if (ImGui::Checkbox(SR_FORMAT_C("Debug##textD%i", index), &debug)) {
+        if (ImGui::Checkbox(SR_FORMAT_C("Debug##textD{}", index), &debug)) {
             pComponent->SetDebug(debug);
         }
 
         auto&& text = SR_UTILS_NS::Locale::UtfToUtf<char, char32_t>(pComponent->GetText());
 
-        if (ImGui::InputTextMultiline(SR_FORMAT_C("##textBox%i", index), &text, ImVec2(ImGui::GetWindowWidth() - 10, 100))) {
+        if (ImGui::InputTextMultiline(SR_FORMAT_C("##textBox{}", index), &text, ImVec2(ImGui::GetWindowWidth() - 10, 100))) {
             pComponent->SetText(text);
         }
 
@@ -538,7 +538,7 @@ namespace SR_CORE_NS::GUI {
         auto&& axises = SR_UTILS_NS::EnumReflector::GetNames<SR_UTILS_NS::LookAtAxis>();
         auto axis = static_cast<int>(SR_UTILS_NS::EnumReflector::GetIndex(pComponent->GetAxis()));
 
-        if (ImGui::Combo(SR_FORMAT_C("Axis##lookAtCmp%i", index), &axis, [](void* vec, int idx, const char** out_text) {
+        if (ImGui::Combo(SR_FORMAT_C("Axis##lookAtCmp{}", index), &axis, [](void* vec, int idx, const char** out_text) {
             auto&& vector = reinterpret_cast<std::vector<std::string>*>(vec);
             if (idx < 0 || idx >= vector->size())
                 return false;

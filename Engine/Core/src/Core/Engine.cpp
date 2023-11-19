@@ -190,7 +190,7 @@ namespace SR_CORE_NS {
         });
 
         m_window->SetFocusCallback([](bool focus) {
-            SR_SYSTEM_LOG(SR_UTILS_NS::Format("Window focus state: %s", focus ? "True" : "False"));
+            SR_SYSTEM_LOG("Window focus state: {}", focus ? "True" : "False");
             SR_UTILS_NS::Input::Instance().Reload();
         });
 

@@ -566,7 +566,7 @@ std::string SR_GRAPH_NS::SRSL::SRSLLoader::MakeVertexCode(const SRSLUnit &unit, 
             source += "\tVERTEX_INDEX_OUT = float(VERTEX_INDEX);\n";
 
             for (uint8_t i = 0; i < SR_MAX_BONES_ON_VERTEX; i++) {
-                source += SR_FORMAT("\tWEIGHT%i = WEIGHT%i_INPUT;\n", i, i);
+                source += SR_FORMAT("\tWEIGHT{} = WEIGHT{}_INPUT;\n", i, i);
             }
 
             break;

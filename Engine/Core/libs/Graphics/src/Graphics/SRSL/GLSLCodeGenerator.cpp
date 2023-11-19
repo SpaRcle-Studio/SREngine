@@ -126,7 +126,7 @@ namespace SR_SRSL_NS {
 
         auto&& vertexInfo = Vertices::GetVertexInfo(m_shader->GetVertexType());
         for (auto&& vertexAttribute : vertexInfo.m_names) {
-            preCode += SR_UTILS_NS::Format("%s%s = %s_INPUT;\n", GenerateTab(1).c_str(), vertexAttribute.c_str(), vertexAttribute.c_str());
+            preCode += SR_FORMAT("{}{} = {}_INPUT;\n", GenerateTab(1).c_str(), vertexAttribute.c_str(), vertexAttribute.c_str());
         }
 
         if (m_shader->GetUseStack()->IsVariableUsedInEntryPoints("VERTEX_INDEX")) {
@@ -176,7 +176,7 @@ namespace SR_SRSL_NS {
         for (auto&& layer : SR_SRSL_DEFAULT_OUT_LAYERS) {
             const bool isNeedMain = layer == SR_SRSL_MAIN_OUT_LAYER && isColorUsed;
             if (isNeedMain || pUseStackFunction->IsVariableUsed(layer)) {
-                locationsCode += SR_UTILS_NS::Format("layout (location = %i) out vec4 %s;\n", outLocation, layer.c_str());
+                locationsCode += SR_FORMAT("layout (location = {}) out vec4 {};\n", outLocation, layer.c_str());
             }
             ++outLocation;
         }
@@ -216,7 +216,7 @@ namespace SR_SRSL_NS {
         for (auto&& [name, pVariable] : m_shader->GetConstants()) {
             if (pFunction->IsVariableUsed(name)) {
                 auto&& type = SRSLTypeInfo::Instance().GetTypeName(pVariable->pType);
-                code += SR_UTILS_NS::Format("const %s %s = %s;\n", type.c_str(), name.c_str(), GenerateExpression(pVariable->pExpr, 0).c_str());
+                code += SR_FORMAT("const {} {} = {};\n", type.c_str(), name.c_str(), GenerateExpression(pVariable->pExpr, 0).c_str());
             }
         }
 
@@ -226,11 +226,11 @@ namespace SR_SRSL_NS {
             std::string type = VertexAttributeToString(vertexInfo.m_attributes[location].first);
 
             if (isUsed && stage != ShaderStage::Vertex) {
-                code += SR_UTILS_NS::Format("layout (location = %i) in %s %s;\n", location, type.c_str(), vertexAttribute.c_str());
+                code += SR_FORMAT("layout (location = {}) in {} {};\n", location, type.c_str(), vertexAttribute.c_str());
             }
 
             if (stage == ShaderStage::Vertex) {
-                code += SR_UTILS_NS::Format("layout (location = %i) in %s %s_INPUT;\n", location, type.c_str(), vertexAttribute.c_str());
+                code += SR_FORMAT("layout (location = {}) in {} {}_INPUT;\n", location, type.c_str(), vertexAttribute.c_str());
             }
 
             ++location;
@@ -247,13 +247,13 @@ namespace SR_SRSL_NS {
 
                 if (pFunction->IsVariableUsed(name)) {
                     auto&& type = SRSLTypeInfo::Instance().GetTypeName(pVariable->pType);
-                    code += SR_UTILS_NS::Format("layout (location = %i) in %s %s;\n", location, type.c_str(), name.c_str());
+                    code += SR_FORMAT("layout (location = {}) in {} {};\n", location, type.c_str(), name.c_str());
                 }
                 ++location;
             }
 
             if (pFunction->IsVariableUsed("VERTEX_INDEX")) {
-                code += SR_UTILS_NS::Format("layout (location = %i) in int VERTEX_INDEX;\n", location);
+                code += SR_FORMAT("layout (location = {}) in int VERTEX_INDEX;\n", location);
             }
             ++location;
         }
@@ -274,7 +274,7 @@ namespace SR_SRSL_NS {
         if (stage == ShaderStage::Vertex) {
             for (auto &&vertexAttribute : vertexInfo.m_names) {
                 std::string type = VertexAttributeToString(vertexInfo.m_attributes[location].first);
-                code += SR_UTILS_NS::Format("layout (location = %i) out %s %s;\n", location, type.c_str(), vertexAttribute.c_str());
+                code += SR_FORMAT("layout (location = {}) out {} {};\n", location, type.c_str(), vertexAttribute.c_str());
                 ++location;
             }
 
@@ -291,13 +291,13 @@ namespace SR_SRSL_NS {
             for (auto&& [name, pVariable] : m_shader->GetShared()) {
                 if (pFunction->IsVariableUsed(name)) {
                     auto&& type = SRSLTypeInfo::Instance().GetTypeName(pVariable->pType);
-                    code += SR_UTILS_NS::Format("layout (location = %i) out %s %s;\n", location, type.c_str(), name.c_str());
+                    code += SR_FORMAT("layout (location = {}) out {} {};\n", location, type.c_str(), name.c_str());
                     ++location;
                 }
             }
 
             if (m_shader->GetUseStack()->IsVariableUsedInEntryPoints("VERTEX_INDEX")) {
-                code += SR_UTILS_NS::Format("layout (location = %i) out int VERTEX_INDEX;\n", location);
+                code += SR_FORMAT("layout (location = {}) out int VERTEX_INDEX;\n", location);
             }
             ++location;
         }
@@ -536,8 +536,8 @@ namespace SR_SRSL_NS {
                     strDimension += "[" +  std::to_string(dim) + "]";
                 }
 
-                blockCode += SR_UTILS_NS::Format("\t// (%i bytes) %s\n", field.size, field.isPublic ? "public" : "private");
-                blockCode += SR_UTILS_NS::Format("\t%s %s%s;\n", typeName.c_str(), field.name.c_str(), strDimension.c_str());
+                blockCode += SR_FORMAT("\t// ({} bytes) {}\n", field.size, field.isPublic ? "public" : "private");
+                blockCode += SR_FORMAT("\t{} {}{};\n", typeName.c_str(), field.name.c_str(), strDimension.c_str());
             }
 
             blockCode += "};\n";
@@ -556,13 +556,13 @@ namespace SR_SRSL_NS {
                 std::string layout;
 
                 if (sampler.attachment >= 0) {
-                    layout = SR_UTILS_NS::Format("(input_attachment_index = %i, binding = %i)", sampler.attachment, sampler.binding);
+                    layout = SR_FORMAT("(input_attachment_index = {}, binding = {})", sampler.attachment, sampler.binding);
                 }
                 else {
-                    layout = SR_UTILS_NS::Format("(binding = %i)", sampler.binding);
+                    layout = SR_FORMAT("(binding = {})", sampler.binding);
                 }
 
-                samplersCode += SR_UTILS_NS::Format("layout %s uniform %s %s; // (sampler) %s\n",
+                samplersCode += SR_FORMAT("layout {} uniform {} {}; // (sampler) {}\n",
                         layout.c_str(),
                         sampler.type.c_str(),
                         name.c_str(),
@@ -591,8 +591,8 @@ namespace SR_SRSL_NS {
                     strDimension += "[" +  std::to_string(dim) + "]";
                 }
 
-                blockCode += SR_UTILS_NS::Format("\t// (%i bytes) %s\n", field.size, field.isPublic ? "public" : "private");
-                blockCode += SR_UTILS_NS::Format("\t%s %s%s;\n", typeName.c_str(), field.name.c_str(), strDimension.c_str());
+                blockCode += SR_FORMAT("\t// ({} bytes) {}\n", field.size, field.isPublic ? "public" : "private");
+                blockCode += SR_FORMAT("\t{} {}{};\n", typeName.c_str(), field.name.c_str(), strDimension.c_str());
             }
 
             blockCode += "};\n";

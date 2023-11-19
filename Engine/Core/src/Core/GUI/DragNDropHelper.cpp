@@ -23,12 +23,12 @@ namespace SR_CORE_GUI_NS {
 
         bool changed = false;
 
-        if (ImGui::BeginChild(SR_FORMAT_C("%s-%i", id, index), ImVec2(width, 50), true)) {
+        if (ImGui::BeginChild(SR_FORMAT_C("{}-{}", id, index), ImVec2(width, 50), true)) {
             ImGui::Text("%s:", id);
 
             ImGui::SameLine();
 
-            if (ImGui::BeginChild(SR_FORMAT_C("%s-%i-1", id, index), ImVec2(200, 20), true)) {
+            if (ImGui::BeginChild(SR_FORMAT_C("{}-{}-1", id, index), ImVec2(200, 20), true)) {
                 ImGui::Text("%s", preview.c_str());
 
                 if (ImGui::BeginDragDropTarget()) {
@@ -71,7 +71,7 @@ namespace SR_CORE_GUI_NS {
             ImGui::SameLine();
 
             bool relative = entityRef.IsRelative();
-            if (ImGui::Checkbox(SR_FORMAT_C("Relative##%s-%i", id, index), &relative)) {
+            if (ImGui::Checkbox(SR_FORMAT_C("Relative##{}-{}", id, index), &relative)) {
                 entityRef.SetRelative(relative);
                 changed = true;
             }

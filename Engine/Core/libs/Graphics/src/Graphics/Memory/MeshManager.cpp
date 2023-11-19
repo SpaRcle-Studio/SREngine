@@ -97,13 +97,11 @@ namespace SR_GRAPH_NS::Memory {
 
     void MeshManager::OnSingletonDestroy() {
         if (!m_VBOs.empty()) {
-            SR_WARN(SR_UTILS_NS::Format("MeshManager::OnSingletonDestroy() : VBOs isn't empty! \n\tCount = %i \n\t"
-                                   "Memory leak possible.", m_VBOs.size()));
+            SR_WARN("MeshManager::OnSingletonDestroy() : VBOs isn't empty! \n\tCount = {} \n\tMemory leak possible.", m_VBOs.size());
         }
 
         if (!m_IBOs.empty()) {
-            SR_WARN(SR_UTILS_NS::Format("MeshManager::OnSingletonDestroy() : IBOs isn't empty! \n\tCount = %i \n\t"
-                                   "Memory leak possible.", m_IBOs.size()));
+            SR_WARN("MeshManager::OnSingletonDestroy() : IBOs isn't empty! \n\tCount = {} \n\tMemory leak possible.", m_IBOs.size());
         }
 
         m_VBOs.clear();

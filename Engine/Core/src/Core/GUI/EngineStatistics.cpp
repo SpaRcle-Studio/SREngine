@@ -39,7 +39,7 @@ namespace SR_CORE_GUI_NS {
             auto&& drawResource = [=](SR_UTILS_NS::IResource* pRes, uint32_t index) {
                 const bool isDestroyed = pRes->IsDestroyed();
 
-                std::string node = SR_UTILS_NS::Format("[%u] %s = %u", index, pRes->GetResourceId().data(), pRes->GetCountUses());
+                std::string node = SR_FORMAT("[{}] {} = {}", index, pRes->GetResourceId().data(), pRes->GetCountUses());
 
                 if (isDestroyed) {
                     ImGui::PushStyleColor(ImGuiCol_::ImGuiCol_Text, ImVec4(255, 0, 0, 255));
@@ -64,7 +64,7 @@ namespace SR_CORE_GUI_NS {
             auto&& drawResources = [=](const std::unordered_set<SR_UTILS_NS::IResource*>& resources, uint32_t index) {
                 uint32_t subIndex = 0;
 
-                const auto node = SR_UTILS_NS::Format("[%u] %s (%u)", index, (*resources.begin())->GetResourceId().data(), resources.size());
+                const auto node = SR_FORMAT("[{}] {} ({})", index, (*resources.begin())->GetResourceId().data(), resources.size());
 
                 if (ImGui::TreeNodeEx(node.c_str(), m_nodeFlagsWithChild)) {
                     for (auto &&pRes : resources)
@@ -269,13 +269,13 @@ namespace SR_CORE_GUI_NS {
                 return;
             }
 
-            ImGui::CollapsingHeader(SR_FORMAT_C("Present complete semaphore [%p]", (void*)pKernel->GetPresentCompleteSemaphore()));
+            ImGui::CollapsingHeader(SR_FORMAT_C("Present complete semaphore [{}]", (void*)pKernel->GetPresentCompleteSemaphore()));
 
             auto&& queue = pKernel->GetSubmitQueue();
 
             uint32_t index = 0;
             for (auto&& submitInfo : queue) {
-                if (ImGui::CollapsingHeader(SR_FORMAT_C("Queue %i", index))) {
+                if (ImGui::CollapsingHeader(SR_FORMAT_C("Queue {}", index))) {
                     DrawSubmitInfo(submitInfo);
                 }
                 ++index;
@@ -285,7 +285,7 @@ namespace SR_CORE_GUI_NS {
                 DrawSubmitInfo(pKernel->GetSubmitInfo());
             }
 
-            ImGui::CollapsingHeader(SR_FORMAT_C("Render complete semaphore [%p]", (void*)pKernel->GetRenderCompleteSemaphore()));
+            ImGui::CollapsingHeader(SR_FORMAT_C("Render complete semaphore [{}]", (void*)pKernel->GetRenderCompleteSemaphore()));
 
             ImGui::EndTabItem();
         }

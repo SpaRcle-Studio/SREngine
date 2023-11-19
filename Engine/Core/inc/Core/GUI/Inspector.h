@@ -62,13 +62,13 @@ namespace SR_CORE_GUI_NS {
 
             if (ImGui::BeginChild("InspectorComponent")) {
                 bool enabled = pComponent->IsEnabled();
-                if (ImGui::Checkbox(SR_UTILS_NS::Format("##%s-%i-checkbox", name.c_str(), index).c_str(), &enabled)) {
+                if (ImGui::Checkbox(SR_FORMAT("##{}-{}-checkbox", name.c_str(), index).c_str(), &enabled)) {
                     pComponent->SetEnabled(enabled);
                 }
 
                 ImGui::SameLine();
 
-                if (ImGui::CollapsingHeader(SR_UTILS_NS::Format("[%i] %s", index, pComponent->GetComponentName().c_str()).c_str())) {
+                if (ImGui::CollapsingHeader(SR_FORMAT("[{}] {}", index, pComponent->GetComponentName().c_str()).c_str())) {
                     SR_CORE_GUI_NS::DrawPropertyContext context;
                     context.pEditor = pContext;
 

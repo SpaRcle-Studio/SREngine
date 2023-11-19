@@ -266,7 +266,7 @@ namespace SR_GRAPH_GUI_NS {
     ) {
         auto tmp = static_cast<float_t>(value);
 
-        if (ImGui::SliderScalar(SR_FORMAT_C("%s##%p", label.c_str(), (void*)&value), ImGuiDataType_Float, &tmp, &min, &max, nullptr, ImGuiSliderFlags_Logarithmic)) {
+        if (ImGui::SliderScalar(SR_FORMAT_C("{}##{}", label.c_str(), (void*)&value), ImGuiDataType_Float, &tmp, &min, &max, nullptr, ImGuiSliderFlags_Logarithmic)) {
             value = static_cast<SR_MATH_NS::Unit>(tmp);
             return true;
         }
@@ -299,7 +299,7 @@ namespace SR_GRAPH_GUI_NS {
             ImGui::PushFont(font);
         }
 
-        if (ImGui::Button(SR_FORMAT_C("%s##%p", label.c_str(), (void*)&value), btnSize) && active) {
+        if (ImGui::Button(SR_FORMAT_C("{}##{}", label.c_str(), (void*)&value), btnSize) && active) {
             value = reset;
             result = true;
         }
@@ -401,7 +401,7 @@ namespace SR_GRAPH_GUI_NS {
         bool slider = true;
 
         if (storage) {
-            auto&& id = SR_FORMAT("##edt_slider_%s%p", label.c_str(), (void*)&value);
+            auto&& id = SR_FORMAT("##edt_slider_{}{}", label.c_str(), (void*)&value);
             slider = storage->GetValueDef<bool>(id, true);
             if (ImGui::Checkbox(id.c_str(), &slider)) {
                 storage->SetValue<bool>(id, slider);
@@ -536,7 +536,7 @@ namespace SR_GRAPH_GUI_NS {
     {
         bool result = false;
 
-        ImGui::PushID(SR_FORMAT_C("%s%p", label.c_str(), (void*)&values));
+        ImGui::PushID(SR_FORMAT_C("{}{}", label.c_str(), (void*)&values));
 
         ImGui::Columns(2);
         ImGui::SetColumnWidth(0, columnWidth);
@@ -758,7 +758,7 @@ namespace SR_GRAPH_GUI_NS {
         if (hasHoveredColor || hasBtnColor)
             ImGui::PushStyleColor(ImGuiCol_ButtonHovered, hovered);
 
-        const auto result = ImGui::Button(SR_FORMAT_C("%s##%i", label.c_str(), index));
+        const auto result = ImGui::Button(SR_FORMAT_C("{}##{}", label.c_str(), index));
 
         if (hasBtnColor)
             ImGui::PopStyleColor(2);
