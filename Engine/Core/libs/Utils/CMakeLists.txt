@@ -48,7 +48,11 @@ list(APPEND SR_UTILS_LINK_LIBRARIES cxx/Platform.cxx)
 list(APPEND SR_UTILS_LINK_LIBRARIES cxx/Types.cxx)
 list(APPEND SR_UTILS_LINK_LIBRARIES cxx/Common.cxx)
 
-define_property(GLOBAL PROPERTY SR_UTILS_INCLUDE_DIRECTORIES)
+define_property(GLOBAL PROPERTY SR_UTILS_INCLUDE_DIRECTORIES
+    BRIEF_DOCS "Contains linkable libraries"
+    FULL_DOCS "Contains paths to libraries for linking"
+)
+
 set_property(GLOBAL PROPERTY SR_UTILS_INCLUDE_DIRECTORIES "")
 
 macro(SR_UTILS_INCLUDE_DIRECTORIES_APPEND var)
@@ -94,8 +98,10 @@ if (UNIX AND NOT APPLE)
     target_link_libraries(Utils ${X11_Xrandr_LIB})
     SR_UTILS_INCLUDE_DIRECTORIES_APPEND(${X11_Xrandr_INCLUDE_PATH})
 
-    target_link_libraries(Utils ${X11_xcb_randr_LIB})
-    SR_UTILS_INCLUDE_DIRECTORIES_APPEND(${X11_xcb_randr_INCLUDE_PATH})
+    if (X11_xcb_randr_FOUND)
+        target_link_libraries(Utils ${X11_xcb_randr_LIB})
+        SR_UTILS_INCLUDE_DIRECTORIES_APPEND(${X11_xcb_randr_INCLUDE_PATH})
+    endif()
 
     target_link_libraries(Utils bfd)
 endif()
