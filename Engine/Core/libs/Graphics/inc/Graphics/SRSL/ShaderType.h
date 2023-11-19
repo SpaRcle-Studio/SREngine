@@ -42,6 +42,8 @@ namespace SR_SRSL_NS {
 
     SR_INLINE_STATIC const std::map<std::string, std::string> SR_SRSL_DEFAULT_PUSH_CONSTANTS = { /** NOLINT */
             { "SHADOW_CASCADE_INDEX",           "int"           },
+            { "COLOR_BUFFER_MODE",              "int"           },
+            { "COLOR_BUFFER_VALUE",             "vec3"          },
     };
 
     SR_INLINE_STATIC const std::map<std::string, std::string> SR_SRSL_DEFAULT_UNIFORMS = { /** NOLINT */

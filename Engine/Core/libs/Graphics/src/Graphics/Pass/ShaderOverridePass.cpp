@@ -18,11 +18,6 @@ namespace SR_GRAPH_NS {
         }
 
         m_shaders.clear();
-
-        if (m_framebuffer) {
-            m_framebuffer->RemoveUsePoint();
-            m_framebuffer = nullptr;
-        }
     }
 
     bool ShaderOverridePass::Load(const SR_XML_NS::Node& passNode) {
@@ -30,20 +25,14 @@ namespace SR_GRAPH_NS {
 
         m_isDirectional = passNode.GetAttribute("Directional").ToBool(false);
 
-        for (auto&& subNode : passNode.GetNodes()) {
-            if (subNode.NameView() == "PreScale") {
-                m_preScale.x = subNode.TryGetAttribute("X").ToFloat(1.f);
-                m_preScale.y = subNode.TryGetAttribute("Y").ToFloat(1.f);
-            }
-        }
-
         if (auto&& shadersNode = passNode.TryGetNode("Shaders")) {
             for (auto&& overrideNode : shadersNode.TryGetNodes("Override")) {
                 if (auto&& pShader = SR_GTYPES_NS::Shader::Load(overrideNode.GetAttribute("Path").ToString())) {
-                    m_shaders.emplace_back(std::make_pair(
+                    auto&& pair = std::make_pair(
                             SR_UTILS_NS::EnumReflector::FromString<SR_SRSL_NS::ShaderType>(overrideNode.GetAttribute("Type").ToString()),
                             pShader
-                    ));
+                    );
+                    m_shaders.emplace_back(pair);
                 }
             }
         }
@@ -56,16 +45,16 @@ namespace SR_GRAPH_NS {
             pShader->AddUsePoint();
         }
 
-        return BasePass::Load(passNode);
+        return IMesh3DClusterPass::Load(passNode);
     }
 
     void ShaderOverridePass::OnResize(const SR_MATH_NS::UVector2 &size) {
         IFramebufferPass::ResizeFrameBuffer(size);
-        BasePass::OnResize(size);
+        IMesh3DClusterPass::OnResize(size);
     }
 
     bool ShaderOverridePass::Init() {
-        return BasePass::Init() && (IsDirectional() || InitializeFramebuffer(GetContext()));
+        return IMesh3DClusterPass::Init() && (IsDirectional() || InitializeFramebuffer(GetContext()));
     }
 
     bool ShaderOverridePass::Render() {
@@ -136,7 +125,7 @@ namespace SR_GRAPH_NS {
 
     std::vector<SR_GTYPES_NS::Framebuffer*> ShaderOverridePass::GetFrameBuffers() const {
         if (!m_framebuffer) {
-            return std::vector<SR_GTYPES_NS::Framebuffer*>();
+            return std::vector<SR_GTYPES_NS::Framebuffer*>(); /// NOLINT
         }
         return { m_framebuffer };
     }

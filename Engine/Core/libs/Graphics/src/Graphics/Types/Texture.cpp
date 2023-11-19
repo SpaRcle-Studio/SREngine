@@ -21,7 +21,7 @@ namespace SR_GTYPES_NS {
     Texture::Ptr Texture::LoadFont(Font* pFont) {
         auto&& pTexture = new Texture();
 
-        pTexture->m_fromMemory = true;
+        pTexture->m_isFromMemory = true;
         pTexture->m_isFont = true;
 
         pTexture->m_width = pFont->GetWidth();
@@ -43,7 +43,7 @@ namespace SR_GTYPES_NS {
     Texture::Ptr Texture::LoadRaw(const uint8_t* pData, uint64_t bytes, uint64_t h, uint64_t w, const Memory::TextureConfig &config) {
         Texture* texture = new Texture();
 
-        texture->m_fromMemory = true;
+        texture->m_isFromMemory = true;
         texture->m_rawMemory = true;
 
         texture->m_width = w;
@@ -259,7 +259,7 @@ namespace SR_GTYPES_NS {
             return nullptr;
         }
 
-        texture->m_fromMemory = true;
+        texture->m_isFromMemory = true;
 
         texture->SetConfig(config);
         texture->SetId("TextureFromMemory");
@@ -281,14 +281,6 @@ namespace SR_GTYPES_NS {
         return SR_UTILS_NS::ResourceManager::Instance().GetResPath();
     }
 
-    uint64_t Texture::GetFileHash() const {
-        if (IsFromMemory()) {
-            return 0;
-        }
-
-        return IResource::GetFileHash();
-    }
-
     void Texture::FreeTextureData() {
         if (!m_data) {
             return;
@@ -308,12 +300,5 @@ namespace SR_GTYPES_NS {
     SR_UTILS_NS::IResource::RemoveUPResult Texture::RemoveUsePoint() {
         SRAssert2(!(IsCalculated() && GetCountUses() == 1), "Possible multi threading error!");
         return IResource::RemoveUsePoint();
-    }
-
-    void Texture::StartWatch() {
-        if (IsFromMemory()) {
-            return;
-        }
-        IResource::StartWatch();
     }
 }

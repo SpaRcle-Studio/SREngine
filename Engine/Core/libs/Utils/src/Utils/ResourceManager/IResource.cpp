@@ -92,6 +92,7 @@ namespace SR_UTILS_NS {
             SRAssert(m_resourceHashPath == 0);
 
             auto&& path = InitializeResourcePath();
+
             m_resourceHashPath = resourcesManager.RegisterResourcePath(path);
 
             StartWatch();
@@ -203,6 +204,10 @@ namespace SR_UTILS_NS {
     }
 
     uint64_t IResource::GetFileHash() const {
+        if (IsResourceFromMemory()) {
+            return 0;
+        }
+
         SR_TRACY_ZONE;
 
         auto&& path = Path(GetResourcePath());
@@ -308,6 +313,10 @@ namespace SR_UTILS_NS {
     }
 
     void IResource::StartWatch() {
+        if (IsResourceFromMemory()) {
+            return;
+        }
+
         auto&& resourcesManager = ResourceManager::Instance();
 
         auto&& path = GetResourcePath();

@@ -35,8 +35,9 @@ namespace SR_HTYPES_NS {
     }
 
     SR_UTILS_NS::Path RawMesh::InitializeResourcePath() const {
+        auto&& resourceId = GetResourceId();
         return SR_UTILS_NS::Path(
-                std::move(SR_UTILS_NS::StringUtils::SubstringView(GetResourceId(), '|', 1)),
+                SR_UTILS_NS::StringUtils::SubstringView(resourceId, '|', 1),
                 true /** fast */
         );
     }
@@ -52,7 +53,7 @@ namespace SR_HTYPES_NS {
             Path&& id = Path(rawPath).RemoveSubPath(ResourceManager::Instance().GetResPath());
 
             auto&& paramsHash = SR_HASH(params);
-            id = id.EmplaceFront(SR_FORMAT("%l|", paramsHash));
+            id = id.EmplaceFront(SR_FORMAT("%llu|", paramsHash));
 
             if (auto&& pResource = ResourceManager::Instance().Find<RawMesh>(id)) {
                 pRawMesh = pResource;

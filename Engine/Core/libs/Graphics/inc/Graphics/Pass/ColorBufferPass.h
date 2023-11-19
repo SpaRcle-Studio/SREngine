@@ -6,9 +6,10 @@
 #define SRENGINE_COLORBUFFERPASS_H
 
 #include <Graphics/Pass/ShaderOverridePass.h>
+#include <Graphics/Pass/IColorBufferPass.h>
 
 namespace SR_GRAPH_NS {
-    class ColorBufferPass : public ShaderOverridePass {
+    class ColorBufferPass : public ShaderOverridePass, public IColorBufferPass {
         SR_REGISTER_LOGICAL_NODE(ColorBufferPass, Color Buffer Pass, { "Passes" })
         using ShaderPtr = SR_GTYPES_NS::Shader*;
         using FramebufferPtr = SR_GTYPES_NS::Framebuffer*;
@@ -18,20 +19,12 @@ namespace SR_GRAPH_NS {
     public:
         void Update() override;
 
-        SR_NODISCARD MeshPtr GetMesh(float_t x, float_t y) const;
-        SR_NODISCARD uint32_t GetIndex(float_t x, float_t y) const;
-        SR_NODISCARD SR_MATH_NS::FColor GetColor(float_t x, float_t y) const;
+        SR_NODISCARD SR_GTYPES_NS::Framebuffer* GetColorFrameBuffer() const noexcept override;
         SR_NODISCARD MeshClusterTypeFlag GetClusterType() const noexcept override;
 
     protected:
         void UseUniforms(ShaderPtr pShader, MeshPtr pMesh) override;
         void UseSharedUniforms(ShaderPtr pShader) override;
-
-        void SetMeshIndex(MeshPtr pMesh, uint32_t colorId);
-
-    private:
-        std::vector<MeshPtr> m_table;
-        uint32_t m_colorId = 0;
 
     };
 }

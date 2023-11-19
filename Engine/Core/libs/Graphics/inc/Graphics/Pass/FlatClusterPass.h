@@ -18,9 +18,7 @@ namespace SR_GRAPH_NS {
         bool Render() override;
 
         void UseSharedUniforms(SR_GTYPES_NS::Shader* pShader) override;
-
         void OnClusterDirty() override;
-
     };
 }
 

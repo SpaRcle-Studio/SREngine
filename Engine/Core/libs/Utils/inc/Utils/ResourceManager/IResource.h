@@ -66,6 +66,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD uint64_t GetResourceHashPath() const noexcept { return m_resourceHashPath; }
         SR_NODISCARD uint64_t GetResourceHash() const noexcept { return m_resourceHash; }
         SR_NODISCARD ResourceInfoWeakPtr GetResourceInfo() const noexcept { return m_resourceInfo; }
+        SR_NODISCARD bool IsResourceFromMemory() const noexcept { return m_isFromMemory; }
 
         SR_NODISCARD std::string_view GetResourceName() const;
         SR_NODISCARD const Path& GetResourcePath() const;
@@ -127,6 +128,8 @@ namespace SR_UTILS_NS {
 
         /// не рекомендуется вручную обращаться к счетчику при наследовании
         std::atomic<uint16_t> m_countUses = 0;
+
+        std::atomic<bool> m_isFromMemory = false;
 
         std::list<SR_HTYPES_NS::SharedPtr<FileWatcher>> m_watchers;
 

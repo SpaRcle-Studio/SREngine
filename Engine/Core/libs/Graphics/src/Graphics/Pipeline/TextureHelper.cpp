@@ -63,6 +63,8 @@ namespace SR_GRAPH_NS {
                 return 3 * 1;
             case ImageFormat::RGB16_UNORM:
                 return 3 * 2;
+            case ImageFormat::R32_SFLOAT:
+                return 4;
             default:
                 break;
         }

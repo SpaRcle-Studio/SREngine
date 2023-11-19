@@ -111,6 +111,7 @@ namespace SR_GRAPH_NS {
     };
 }
 
+/// TODO: переделать на встраивание в объявление класса
 #define SR_REGISTER_RENDER_PASS(name)                                                                                   \
     static bool SR_CODEGEN_##name##_render_pass_register_result =                                                       \
         SR_GRAPH_NS::GetRenderPassMap().insert(std::make_pair(                                                          \

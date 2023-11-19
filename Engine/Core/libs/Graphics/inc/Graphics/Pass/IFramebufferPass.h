@@ -5,7 +5,8 @@
 #ifndef SRENGINE_IFRAMEBUFFERPASS_H
 #define SRENGINE_IFRAMEBUFFERPASS_H
 
-#include <Graphics/Types/Framebuffer.h>
+#include <Utils/Xml.h>
+#include <Graphics/Pipeline/TextureHelper.h>
 #include <Graphics/Pipeline/TextureHelper.h>
 
 namespace SR_GTYPES_NS {
@@ -22,7 +23,6 @@ namespace SR_GRAPH_NS {
         using FramebufferPtr = SR_GTYPES_NS::Framebuffer*;
 
     public:
-        IFramebufferPass();
         virtual ~IFramebufferPass();
 
     public:
@@ -39,7 +39,7 @@ namespace SR_GRAPH_NS {
         bool m_dynamicResizing = false;
         bool m_depthEnabled = true;
 
-        SR_MATH_NS::FVector2 m_preScale;
+        SR_MATH_NS::FVector2 m_preScale = SR_MATH_NS::FVector2(1.f);
         SR_MATH_NS::IVector2 m_size;
 
         ColorFormats m_colorFormats;

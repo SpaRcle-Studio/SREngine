@@ -151,7 +151,7 @@ namespace SR_GRAPH_NS {
     }
 
     void IMeshClusterPass::UseConstants(IMeshClusterPass::ShaderPtr pShader) {
-
+        pShader->SetConstInt(SHADER_COLOR_BUFFER_MODE, 0);
     }
 
     void IMeshClusterPass::PrepareFBODependencies() {

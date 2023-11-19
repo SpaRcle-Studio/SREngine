@@ -42,13 +42,10 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD int32_t GetId() noexcept;
         SR_NODISCARD void* GetDescriptor();
         SR_NODISCARD SR_UTILS_NS::Path GetAssociatedPath() const override;
-        SR_NODISCARD uint64_t GetFileHash() const override;
-        SR_NODISCARD bool IsFromMemory() const { return m_fromMemory; }
 
         SR_NODISCARD bool IsAllowedToRevive() const override { return true; }
 
         void FreeVideoMemory() override;
-        void StartWatch() override;
 
         RemoveUPResult RemoveUsePoint() override;
 
@@ -71,7 +68,6 @@ namespace SR_GTYPES_NS {
         uint8_t                    m_channels     = 0;
 
         std::atomic<bool>          m_hasErrors    = false;
-        std::atomic<bool>          m_fromMemory   = false;
         std::atomic<bool>          m_rawMemory    = false;
 
         Memory::TextureConfig      m_config       = Memory::TextureConfig();

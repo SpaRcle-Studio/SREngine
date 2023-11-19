@@ -35,6 +35,12 @@ namespace SR_UTILS_NS {
     SR_HTYPES_NS::SharedPtr<FileWatcher> ResourceManager::StartWatch(const Path& path) {
         SR_SCOPED_LOCK;
         SRAssert(m_isRun);
+
+        if (!path.Exists()) {
+            SRHalt("ResourceManager::StartWatch() : watching a non-existent file!");
+            return nullptr;
+        }
+
         FileWatcher::Ptr pWatcher = new FileWatcher(path);
         m_watchers.emplace_back(pWatcher);
         return pWatcher;

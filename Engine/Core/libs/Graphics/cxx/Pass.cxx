@@ -1,5 +1,7 @@
 #include <Utils/macros.h>
 
+#include "../../Graphics/src/Graphics/Pass/FlatColorBufferPass.cpp"
+#include "../../Graphics/src/Graphics/Pass/IColorBufferPass.cpp"
 #include "../../Graphics/src/Graphics/Pass/BasePass.cpp"
 #include "../../Graphics/src/Graphics/Pass/SkyboxPass.cpp"
 #include "../../Graphics/src/Graphics/Pass/IFramebufferPass.cpp"

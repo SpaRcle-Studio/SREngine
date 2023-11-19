@@ -7,12 +7,6 @@
 #include <Graphics/Types/Framebuffer.h>
 
 namespace SR_GRAPH_NS {
-    IFramebufferPass::IFramebufferPass()
-        : m_preScale(SR_MATH_NS::FVector2(1.f))
-        , m_depth(1.f)
-        , m_depthFormat(ImageFormat::Unknown)
-    { }
-
     IFramebufferPass::~IFramebufferPass() {
         if (m_framebuffer) {
             m_framebuffer->RemoveUsePoint();
@@ -21,6 +15,10 @@ namespace SR_GRAPH_NS {
     }
 
     void IFramebufferPass::LoadFramebufferSettings(const SR_XML_NS::Node& settingsNode) {
+        if (!settingsNode) {
+            return;
+        }
+
         m_dynamicResizing = settingsNode.TryGetAttribute("DynamicResizing").ToBool(true);
         m_depthEnabled = settingsNode.TryGetAttribute("DepthEnabled").ToBool(true);
         m_samples = settingsNode.TryGetAttribute("SmoothSamples").ToUInt(0);
@@ -70,11 +68,11 @@ namespace SR_GRAPH_NS {
     bool IFramebufferPass::InitializeFramebuffer(RenderContext* pContext) {
         /// fix zero size
         if (m_size.x == 0) {
-            m_size.x = pContext->GetWindowSize().x;
+            m_size.x = static_cast<int32_t>(pContext->GetWindowSize().x);
         }
 
         if (m_size.y == 0) {
-            m_size.y = pContext->GetWindowSize().y;
+            m_size.y = static_cast<int32_t>(pContext->GetWindowSize().y);
         }
 
         /// pre scale size

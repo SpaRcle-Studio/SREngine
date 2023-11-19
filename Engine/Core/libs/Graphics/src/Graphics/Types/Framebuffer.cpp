@@ -52,6 +52,11 @@ namespace SR_GTYPES_NS {
 
         SRAssert(!size.HasZero() && !size.HasNegative());
 
+        if (depth == ImageFormat::Unknown) {
+            SRHalt("Framebuffer::Create() : depth format is unknown!");
+            return nullptr;
+        }
+
         pFBO->SetSize(size);
         pFBO->m_depth.format = depth;
         pFBO->m_depth.aspect = depthAspect;
