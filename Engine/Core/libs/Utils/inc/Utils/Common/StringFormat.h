@@ -11,6 +11,7 @@
 
 #include <fmt/format.h>
 #include <fmt/printf.h>
+#include <fmt/color.h>
 
 namespace SR_UTILS_NS {
     template<typename T> T LexicalCast(const std::string& str) {

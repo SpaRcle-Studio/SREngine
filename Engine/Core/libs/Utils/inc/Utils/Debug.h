@@ -2,8 +2,8 @@
 // Created by Nikita on 16.11.2020.
 //
 
-#ifndef HELPER_DEBUG_H
-#define HELPER_DEBUG_H
+#ifndef SR_ENGINE_UTILS_DEBUG_H
+#define SR_ENGINE_UTILS_DEBUG_H
 
 #include <Utils/FileSystem/Path.h>
 #include <Utils/Common/Singleton.h>
@@ -16,6 +16,8 @@ namespace SR_UTILS_NS {
         Error, ScriptError, ScriptLog, Vulkan, VulkanLog, VulkanError, Assert
     );
 
+    static fmt::text_style GetTextStyleColorByLogType(DebugLogType type);
+
     class SR_DLL_EXPORT Debug : public Singleton<Debug> {
         SR_REGISTER_SINGLETON(Debug);
     public:
@@ -25,25 +27,6 @@ namespace SR_UTILS_NS {
 
         enum class Theme {
             Dark, Light
-        };
-
-        enum class ConsoleColor {
-            Black = 0,
-            Blue = 1,
-            Green = 2,
-            Cyan = 3,
-            Red = 4,
-            Magenta = 5,
-            Brown = 6,
-            LightGray = 7,
-            DarkGray = 8,
-            LightBlue = 9,
-            LightGreen = 10,
-            LightCyan = 11,
-            LightRed = 12,
-            LightMagenta = 13,
-            Yellow = 14,
-            White = 15
         };
 
     public:
@@ -59,6 +42,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD bool IsInitialized() const { return m_isInit; }
 
         void MakeCrash();
+        void TestPrint();
 
         void Init(const std::string& log_path, bool ShowUsedMemory, Theme colorTheme = Theme::Light);
         void OnSingletonDestroy() override;
@@ -84,22 +68,17 @@ namespace SR_UTILS_NS {
         void Print(std::string msg, DebugLogType type);
 
     private:
-        bool               m_showUseMemory             = false;
-        bool               m_ColorThemeIsEnabled       = false;
-        bool               m_profile                   = false;
+        bool m_showUseMemory = false;
+        bool m_ColorThemeIsEnabled = false;
 
-        Theme              m_theme                     = Theme::Light;
+        Theme m_theme = Theme::Light;
 
-        std::atomic<bool>  m_isInit                    = false;
-        Path               m_logPath                   = Path();
-        std::ofstream      m_file                      = std::ofstream();
-        std::atomic<Level> m_level                     = Level::Low;
-        size_t             m_countErrors               = 0;
-        size_t             m_countWarnings             = 0;
-
-#ifdef SR_WIN32
-        void*              m_console                   = nullptr;
-#endif
+        std::atomic<bool> m_isInit = false;
+        Path m_logPath;
+        std::ofstream m_file;
+        std::atomic<Level> m_level = Level::Low;
+        size_t m_countErrors = 0;
+        size_t m_countWarnings = 0;
 
     };
 }
@@ -157,4 +136,4 @@ namespace SR_UTILS_NS {
 #define SRAssert1Once(expr) SRAssert2Once(expr, #expr)
 #define SRAssertOnce(expr) SRAssert2Once(expr, "An exception has been occured!")
 
-#endif //HELPER_DEBUG_H
+#endif //SR_ENGINE_UTILS_DEBUG_H

@@ -75,15 +75,15 @@ namespace SR_UTILS_NS::Platform {
     }
 
     void WriteConsoleLog(const std::string& msg) {
-        std::cout << msg;
+        std::cout << msg << std::flush;
     }
 
     void WriteConsoleError(const std::string& msg) {
-        std::cerr << msg;
+        std::cerr << msg << std::flush;;
     }
 
     void WriteConsoleWarn(const std::string& msg) {
-        std::cerr << msg;
+        std::cerr << msg << std::flush;
     }
 
     void TextToClipboard(const std::string &text) {

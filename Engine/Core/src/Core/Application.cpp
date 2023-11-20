@@ -103,6 +103,7 @@ namespace SR_CORE_NS {
 
         SR_UTILS_NS::Debug::Instance().Init(m_applicationPath, true, SR_UTILS_NS::Debug::Theme::Dark);
         SR_UTILS_NS::Debug::Instance().SetLevel(SR_UTILS_NS::Debug::Level::Low);
+
         return true;
     }
 
