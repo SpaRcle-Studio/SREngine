@@ -81,7 +81,7 @@ namespace SR_GRAPH_NS {
         //free(geometryReply);
         m_isValid = true;
 
-        m_poolEventsThread = SR_HTYPES_NS::Thread::Factory::Instance().Create(&X11Window::PoolIEventsHandler, this);
+        //m_poolEventsThread = SR_HTYPES_NS::Thread::Factory::Instance().Create(&X11Window::PoolIEventsHandler, this);
 
         return true;
     }
@@ -130,7 +130,7 @@ namespace SR_GRAPH_NS {
     }
 
     void X11Window::PollEvents() {
-
+        PoolIEventsHandler();
     }
 
     void X11Window::Close() {
@@ -138,7 +138,6 @@ namespace SR_GRAPH_NS {
     }
 
     void X11Window::PoolIEventsHandler() {
-    repeat:
         auto&& event = xcb_wait_for_event(m_connection);
         if (!event) {
             SR_INFO("X11Window::PollEvents() : event is nullptr.");
@@ -151,7 +150,7 @@ namespace SR_GRAPH_NS {
             return;
         }
 
-        SR_LOG("X11Window::PollEvents() : event - {}", xcb_event_get_label(event->response_type));
+        //SR_LOG("X11Window::PollEvents() : event - {}", xcb_event_get_label(event->response_type));
 
         switch (responseType) {
             case XCB_EXPOSE: {
@@ -204,23 +203,22 @@ namespace SR_GRAPH_NS {
                 break;
             }
             case XCB_CONFIGURE_NOTIFY: {
-                //auto&& configureEvent = (xcb_configure_notify_event_t*)event;
-                //if (configureEvent->width != m_surfaceSize.x || configureEvent->height != m_surfaceSize.y)
-                //{
-                //    if (configureEvent->width > 0 && configureEvent->height > 0) {
-                //        m_surfaceSize.x = configureEvent->width;
-                //        m_surfaceSize.y = configureEvent->height;
-                //        if (m_resizeCallback) {
-                //            m_resizeCallback(this, GetSurfaceWidth(), GetSurfaceHeight());
-                //        }
-                //    }
-                //}
+                auto&& configureEvent = (xcb_configure_notify_event_t*)event;
+                if (configureEvent->width != m_surfaceSize.x || configureEvent->height != m_surfaceSize.y) {
+                    if (configureEvent->width > 0 && configureEvent->height > 0) {
+                        m_surfaceSize.x = configureEvent->width;
+                        m_surfaceSize.y = configureEvent->height;
+                        if (m_resizeCallback) {
+                            m_resizeCallback(this, GetSurfaceWidth(), GetSurfaceHeight());
+                        }
+                    }
+                }
+                break;
             }
             default:
                 break;
         }
 
         free(event);
-        goto repeat;
     }
 }

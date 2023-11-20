@@ -156,7 +156,7 @@ namespace SR_CORE_NS {
             resolution = resolutions[SR_MAX(static_cast<uint32_t>(resolutions.size() / 2), 0)];
         }
 #ifdef SR_LINUX
-        resolution = { 100, 100 };
+        resolution = { 800, 800 };
 #endif
         if (resolution.HasZero()) {
             SR_ERROR("Engine::CreateMainWindow() : resolution can not be " +
