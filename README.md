@@ -26,14 +26,12 @@ It aims to establish a strong base for game creation and is currently in the ear
 - [x] MinGW
 - [ ] Cygwin
 - [x] Clang
-- [ ] GCC
+- [x] GCC
 
 ## Supported platforms
 - [x] Windows 10
-- [ ] Manjaro (in development)
-- [ ] Ubuntu
-- [ ] Arch
-- [ ] Redhat
+- [ ] Linux X11 (in development)
+- [ ] Linux Wayland
 - [ ] Android
 
 ## Branches 
