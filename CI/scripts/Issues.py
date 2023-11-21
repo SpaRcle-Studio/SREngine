@@ -21,6 +21,9 @@ except Exception as e:
     exit(-1)
 
 print(f"Commit message:\n{commitMessage}\n")
+
+issueIds = []
+
 try:
     regexClose = re.search('#SR_CLOSE(.*)', commitMessage)
     if regexClose != None:
@@ -43,4 +46,5 @@ for issueId in issueIds:
         print(f"Success for issue: {issueId}")
     except Exception as e:
         print(f"Issue managing exception occurred: {str(e)}")
+        
 print(f"Script execution is finished.")
