@@ -5,7 +5,7 @@ try:
     from github import Auth
 except ImportError:
     print("Import exception occurred!")
-    exit(-1)
+    exit(0)
 
 commitMessage = os.getenv('commitMessage')
 commitSha = os.getenv('commitSha')
@@ -18,7 +18,7 @@ try:
     repo = g.get_repo("SpaRcle-Studio/SREngine")
 except Exception as e:
     print(f"GitHub login exception occurred: {str(e)}")
-    exit(-1)
+    exit(0)
 
 print(f"Commit message:\n{commitMessage}\n")
 
@@ -34,7 +34,6 @@ try:
         print(f"Issue Ids are: {issueIds}")
 except Exception as e:
     print(f"Regex error occurred: {str(e)}")
-    exit(-1)
 
 for issueId in issueIds:
     try:
