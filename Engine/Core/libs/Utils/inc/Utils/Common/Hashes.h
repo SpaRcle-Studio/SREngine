@@ -144,15 +144,18 @@ namespace SR_UTILS_NS {
     SR_MAYBE_UNUSED static uint64_t CombineTwoHashes(uint64_t hash1, uint64_t hash2) {
         return hash2 ^ hash1 + 0x9e3779b9 + (hash2 << 6) + (hash2 >> 2);
     }
+
+    template <class T, class... Types> constexpr bool IsAnyOfV = std::disjunction_v<std::is_same<T, Types>...>;
+    template <class T> SR_INLINE constexpr bool IsECharT = IsAnyOfV<T, char, wchar_t, char8_t, char16_t, char32_t>;
 }
 
-template <class Elem, class Alloc> struct SR_UTILS_NS::SRHash<std::basic_string<Elem, std::char_traits<Elem>, Alloc>> : std::_Conditionally_enabled_hash<std::basic_string<Elem, std::char_traits<Elem>, Alloc>, std::_Is_EcharT<Elem>> {
+template <class Elem, class Alloc> struct SR_UTILS_NS::SRHash<std::basic_string<Elem, std::char_traits<Elem>, Alloc>> : SR_UTILS_NS::SRConditionallyEnabledHash<std::basic_string<Elem, std::char_traits<Elem>, Alloc>, IsECharT<Elem>> {
     SR_NODISCARD static size_t DoHash(const std::basic_string<Elem, std::char_traits<Elem>, Alloc>& keyVal) noexcept {
         return HashArrayRepresentation(keyVal.c_str(), keyVal.size());
     }
 };
 
-template <class Elem> struct SR_UTILS_NS::SRHash<std::basic_string_view<Elem>> : std::_Conditionally_enabled_hash<std::basic_string_view<Elem>, std::_Is_EcharT<Elem>> {
+template <class Elem> struct SR_UTILS_NS::SRHash<std::basic_string_view<Elem>> : SR_UTILS_NS::SRConditionallyEnabledHash<std::basic_string_view<Elem>, IsECharT<Elem>> {
     SR_NODISCARD static size_t DoHash(const std::basic_string_view<Elem> keyVal) noexcept {
         return HashArrayRepresentation(keyVal.data(), keyVal.size());
     }
