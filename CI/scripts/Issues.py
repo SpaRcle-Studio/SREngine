@@ -23,11 +23,12 @@ except Exception as e:
 print(f"Commit message:\n{commitMessage}\n")
 try:
     regexClose = re.search('#SR_CLOSE(.*)', commitMessage)
-    closeMacros = regexClose.group(1)
-    closeMacros = closeMacros[1:][:-1]
-    closeMacros = closeMacros.replace(' ', '')
-    issueIds = closeMacros.split(",")
-    print(f"Issue Ids are: {issueIds}")
+    if regexClose != None:
+        closeMacros = regexClose.group(1)
+        closeMacros = closeMacros[1:][:-1]
+        closeMacros = closeMacros.replace(' ', '')
+        issueIds = closeMacros.split(",")
+        print(f"Issue Ids are: {issueIds}")
 except Exception as e:
     print(f"Regex error occurred: {str(e)}")
     exit(-1)
