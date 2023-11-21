@@ -85,8 +85,55 @@ namespace SR_UTILS_NS {
         }
     }
 
+    SR_INLINE_STATIC constexpr size_t SR_FNV_OFFSET_BASIS = 14695981039346656037ULL;
+    SR_INLINE_STATIC constexpr size_t SR_FNV_PRIME = 1099511628211ULL;
+
+    SR_NODISCARD SR_INLINE_STATIC size_t FNV1AAppendBytes(size_t value, const unsigned char* const first, const size_t count) noexcept {
+        for (size_t i = 0; i < count; ++i) {
+            value ^= static_cast<size_t>(first[i]);
+            value *= SR_FNV_PRIME;
+        }
+
+        return value;
+    }
+
+    template<class T> SR_NODISCARD SR_INLINE_STATIC size_t FNV1AAppendValue(const size_t value, const T& keyValue) noexcept {
+        return FNV1AAppendBytes(value, &reinterpret_cast<const unsigned char&>(keyValue), sizeof(T));
+    }
+
+    template<class T> SR_NODISCARD size_t HashArrayRepresentation(const T* const first, const size_t count) noexcept {
+        return FNV1AAppendBytes(SR_FNV_OFFSET_BASIS, reinterpret_cast<const unsigned char*>(first), count * sizeof(T));
+    }
+
+    template<class T> SR_NODISCARD size_t HashRepresentation(const T& keyVal) noexcept {
+        return FNV1AAppendValue(SR_FNV_OFFSET_BASIS, keyVal);
+    }
+
+    template <class T> class SRHash;
+
+    template <class T, bool Enabled> struct SRConditionallyEnabledHash {
+        SR_NODISCARD size_t operator()(const T& keyVal) const
+        noexcept(noexcept(SR_UTILS_NS::SRHash<T>::DoHash(keyVal))) {
+            return SR_UTILS_NS::SRHash<T>::DoHash(keyVal);
+        }
+    };
+
+    template <class T> struct SRConditionallyEnabledHash<T, false> {
+        SRConditionallyEnabledHash() = delete;
+        SRConditionallyEnabledHash(const SRConditionallyEnabledHash&) = delete;
+        SRConditionallyEnabledHash(SRConditionallyEnabledHash&&) = delete;
+        SRConditionallyEnabledHash& operator=(const SRConditionallyEnabledHash&) = delete;
+        SRConditionallyEnabledHash& operator=(SRConditionallyEnabledHash&&) = delete;
+    };
+
+    template<class T> struct SRHash : SRConditionallyEnabledHash<T, !std::is_const_v<T> && !std::is_volatile_v<T> && (std::is_enum_v<T> || std::is_integral_v<T> || std::is_pointer_v<T>)> {
+        static size_t DoHash(const T& value) noexcept {
+            return FNV1AAppendValue(SR_FNV_OFFSET_BASIS, value);
+        }
+    };
+
     template<typename T> uint64_t CalculateHash(const T& value) {
-        static std::hash<T> h;
+        static SRHash<T> h;
         return h(value);
     }
 
@@ -98,6 +145,43 @@ namespace SR_UTILS_NS {
         return hash2 ^ hash1 + 0x9e3779b9 + (hash2 << 6) + (hash2 >> 2);
     }
 }
+
+template <class Elem, class Alloc> struct SR_UTILS_NS::SRHash<std::basic_string<Elem, std::char_traits<Elem>, Alloc>> : std::_Conditionally_enabled_hash<std::basic_string<Elem, std::char_traits<Elem>, Alloc>, std::_Is_EcharT<Elem>> {
+    SR_NODISCARD static size_t DoHash(const std::basic_string<Elem, std::char_traits<Elem>, Alloc>& keyVal) noexcept {
+        return HashArrayRepresentation(keyVal.c_str(), keyVal.size());
+    }
+};
+
+template <class Elem> struct SR_UTILS_NS::SRHash<std::basic_string_view<Elem>> : std::_Conditionally_enabled_hash<std::basic_string_view<Elem>, std::_Is_EcharT<Elem>> {
+    SR_NODISCARD static size_t DoHash(const std::basic_string_view<Elem> keyVal) noexcept {
+        return HashArrayRepresentation(keyVal.data(), keyVal.size());
+    }
+};
+
+template<> struct SR_UTILS_NS::SRHash<float> {
+    SR_NODISCARD size_t operator()(const float keyVal) const noexcept {
+        return HashRepresentation(keyVal == 0.0F ? 0.0F : keyVal);
+    }
+};
+
+template<> struct SR_UTILS_NS::SRHash<double> {
+    SR_NODISCARD size_t operator()(const double keyVal) const noexcept {
+        return HashRepresentation(keyVal == 0.0 ? 0.0 : keyVal);
+    }
+};
+
+template<> struct SR_UTILS_NS::SRHash<long double> {
+    SR_NODISCARD size_t operator()(const long double keyVal) const noexcept {
+        return HashRepresentation(keyVal == 0.0L ? 0.0L : keyVal);
+    }
+};
+
+template<> struct SR_UTILS_NS::SRHash<nullptr_t> {
+    SR_NODISCARD size_t operator()(nullptr_t) const noexcept {
+        void* null = nullptr;
+        return HashRepresentation(null);
+    }
+};
 
 #define SR_COMBINE_HASHES(x1, x2) (SR_UTILS_NS::CombineTwoHashes(x1, x2))
 

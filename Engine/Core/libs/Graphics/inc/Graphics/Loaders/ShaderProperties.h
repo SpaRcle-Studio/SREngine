@@ -201,32 +201,30 @@ namespace SR_GRAPH_NS {
     }
 }
 
-namespace std {
-    template<> struct hash<SR_GRAPH_NS::ShaderSamplers> {
-        size_t operator()(SR_GRAPH_NS::ShaderSamplers const& value) const {
-            std::size_t res = 0;
+template<> struct SR_UTILS_NS::SRHash<SR_GRAPH_NS::ShaderSamplers> {
+    size_t operator()(SR_GRAPH_NS::ShaderSamplers const& value) const {
+        std::size_t res = 0;
 
-            for (auto&& [key, val] : value) {
-                res = SR_UTILS_NS::HashCombine(key, res);
-                res = SR_UTILS_NS::HashCombine(val.binding, res);
-            }
-
-            return res;
+        for (auto&& [key, val] : value) {
+            res = SR_UTILS_NS::HashCombine(key, res);
+            res = SR_UTILS_NS::HashCombine(val.binding, res);
         }
-    };
 
-    template<> struct hash<SR_GRAPH_NS::ShaderProperties> {
-        size_t operator()(SR_GRAPH_NS::ShaderProperties const& value) const {
-            std::size_t res = 0;
+        return res;
+    }
+};
 
-            for (auto&& [key, val] : value) {
-                res = SR_UTILS_NS::HashCombine(key, res);
-                res = SR_UTILS_NS::HashCombine(val, res);
-            }
+template<> struct SR_UTILS_NS::SRHash<SR_GRAPH_NS::ShaderProperties> {
+    size_t operator()(SR_GRAPH_NS::ShaderProperties const& value) const {
+        std::size_t res = 0;
 
-            return res;
+        for (auto&& [key, val] : value) {
+            res = SR_UTILS_NS::HashCombine(key, res);
+            res = SR_UTILS_NS::HashCombine(val, res);
         }
-    };
-}
+
+        return res;
+    }
+};
 
 #endif //SRENGINE_SHADERPROPERTIES_H

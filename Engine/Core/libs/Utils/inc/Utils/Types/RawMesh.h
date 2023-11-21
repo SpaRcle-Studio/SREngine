@@ -102,19 +102,17 @@ namespace SR_HTYPES_NS {
     };
 }
 
-namespace std {
-    template<> struct hash<SR_HTYPES_NS::RawMeshParams> {
-        size_t operator()(SR_HTYPES_NS::RawMeshParams const& params) const {
-            std::size_t res = 0;
+template<> struct SR_UTILS_NS::SRHash<SR_HTYPES_NS::RawMeshParams> {
+    size_t operator()(SR_HTYPES_NS::RawMeshParams const& params) const {
+        std::size_t res = 0;
 
-            std::hash<bool> hBool;
+        std::hash<bool> hBool;
 
-            res ^= hBool(params.animation) + 0x9e3779b9 + (res << 6u) + (res >> 2u);
-            res ^= hBool(params.convexHull) + 0x9e3779b9 + (res << 6u) + (res >> 2u);
+        res ^= hBool(params.animation) + 0x9e3779b9 + (res << 6u) + (res >> 2u);
+        res ^= hBool(params.convexHull) + 0x9e3779b9 + (res << 6u) + (res >> 2u);
 
-            return res;
-        }
-    };
-}
+        return res;
+    }
+};
 
 #endif //SRENGINE_RAWMESH_H
