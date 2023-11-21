@@ -72,6 +72,7 @@ namespace SR_GRAPH_NS {
         int32_t texture = SR_ID_INVALID;
         ImageFormat format = ImageFormat::Unknown;
         ImageAspect aspect = ImageAspect::DepthStencil;
+        std::vector<int32_t> subLayers;
     };
 
     //inline static bool IsSRGB(ColorFormat f) {

@@ -8,6 +8,7 @@
 
 #include <Graphics/Types/Framebuffer.h>
 #include <Graphics/Types/Skybox.h>
+#include <Graphics/Pass/IFramebufferPass.h>
 
 #include <Graphics/Memory/ShaderProgramManager.h>
 #include <Graphics/Render/RenderTechnique.h>
@@ -213,6 +214,33 @@ namespace SR_CORE_GUI_NS {
                         else {
                             ImGui::Text("%s", pRenderTechnique->GetName().data());
                         }
+
+                        pRenderTechnique->ForEachPass([this](auto&& pPass) {
+                            auto&& pFramebufferPass = dynamic_cast<SR_GRAPH_NS::IFramebufferPass*>(pPass);
+                            if (!pFramebufferPass) {
+                                return;
+                            }
+
+                            auto&& pFramebuffer = pFramebufferPass->GetFramebuffer();
+                            if (!pFramebuffer) {
+                                return;
+                            }
+
+                            for (uint32_t i = 0; i < pFramebuffer->GetColorLayersCount(); ++i) {
+                                auto&& textureId = pFramebuffer->GetColorTexture(i);
+                                auto&& pPipeline = GetContext()->GetPipeline();
+                                SR_GRAPH_GUI_NS::DrawTexture(pPipeline.Get(), textureId, 256, false);
+                            }
+
+                            if (pFramebuffer->GetDepthAspect() == SR_GRAPH_NS::ImageAspect::Depth) {
+                                for (uint32_t i = 0; i < pFramebuffer->GetLayersCount(); ++i) {
+                                    if (auto&& textureId = pFramebuffer->GetDepthTexture(i); textureId != SR_ID_INVALID) {
+                                        auto&& pPipeline = GetContext()->GetPipeline();
+                                        SR_GRAPH_GUI_NS::DrawTexture(pPipeline.Get(), textureId, 256, false);
+                                    }
+                                }
+                            }
+                        });
 
                         ImGui::Separator();
                     }

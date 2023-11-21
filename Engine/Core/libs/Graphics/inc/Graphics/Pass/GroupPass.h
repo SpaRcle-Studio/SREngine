@@ -36,6 +36,8 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD BasePass* FindPass(const std::string& name) const;
         SR_NODISCARD BasePass* FindPass(uint64_t hashName) const;
 
+        void ForEachPass(const SR_HTYPES_NS::Function<void(BasePass*)>& callback);
+
         template<typename T> SR_NODISCARD T* FindPass() const;
 
         void SR_FASTCALL OnMeshAdded(SR_GTYPES_NS::Mesh* pMesh, bool transparent) override;

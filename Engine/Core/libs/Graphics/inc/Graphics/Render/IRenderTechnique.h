@@ -60,6 +60,8 @@ namespace SR_GRAPH_NS {
 
         SR_NODISCARD const PassQueues& GetQueues() const { return m_queues; }
 
+        void ForEachPass(const SR_HTYPES_NS::Function<void(BasePass*)>& callback);
+
         template<typename T> SR_NODISCARD T* FindPass() const;
 
     protected:

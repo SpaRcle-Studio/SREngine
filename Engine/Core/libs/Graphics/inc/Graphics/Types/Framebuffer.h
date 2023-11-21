@@ -67,12 +67,15 @@ namespace SR_GTYPES_NS {
 
         SR_NODISCARD bool IsFileResource() const noexcept override { return false; }
         SR_NODISCARD uint8_t GetSamplesCount() const;
+        SR_NODISCARD uint32_t GetColorLayersCount() const noexcept { return m_colors.size(); }
+        SR_NODISCARD uint32_t GetLayersCount() const noexcept { return m_layersCount; }
+        SR_NODISCARD ImageAspect GetDepthAspect() const noexcept { return m_depth.aspect; }
         SR_NODISCARD bool IsDepthEnabled() const { return m_depthEnabled; }
         SR_NODISCARD bool IsDirty() const { return m_dirty; }
 
         SR_NODISCARD int32_t GetId();
         SR_NODISCARD int32_t GetColorTexture(uint32_t layer);
-        SR_NODISCARD int32_t GetDepthTexture() const;
+        SR_NODISCARD int32_t GetDepthTexture(int32_t layer = -1) const;
 
         SR_NODISCARD uint32_t GetWidth() const;
         SR_NODISCARD uint32_t GetHeight() const;

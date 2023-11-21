@@ -64,7 +64,7 @@ int32_t SR_GRAPH_NS::VulkanTools::MemoryManager::AllocateFBO(
             }
 
             if (pDepth->format != ImageFormat::None && pDepth->aspect != ImageAspect::None) {
-                if (auto&& depthTexture = m_FBOs[i]->AllocateDepthTextureReference()) {
+                if (auto&& depthTexture = m_FBOs[i]->AllocateDepthTextureReference(-1)) {
                     int32_t id = FindFreeTextureIndex();
                     if (id < 0) {
                         SR_ERROR("MemoryManager::AllocateFBO() : failed to allocate index for FBO depth!");
@@ -75,6 +75,19 @@ int32_t SR_GRAPH_NS::VulkanTools::MemoryManager::AllocateFBO(
                         pDepth->texture = id;
                         ++m_countTextures.second;
                     }
+                }
+            }
+
+            for (auto&& texture : m_FBOs[i]->AllocateDepthTextureReferences()) {
+                int32_t id = FindFreeTextureIndex();
+                if (id < 0) {
+                    SR_ERROR("MemoryManager::AllocateFBO() : failed to allocate index for FBO depth attachment!");
+                    return SR_ID_INVALID;
+                }
+                else {
+                    m_textures[id] = texture;
+                    ++m_countTextures.second;
+                    pDepth->subLayers.emplace_back(id);
                 }
             }
 
@@ -135,9 +148,34 @@ bool SR_GRAPH_NS::VulkanTools::MemoryManager::ReAllocateFBO(
         m_textures[oldColorAttachments[i]] = textures[i];
     }
 
+    /// Depth attachments
+
+    auto depthTextures = m_FBOs[FBO]->AllocateDepthTextureReferences();
+    if (depthTextures.size() != pDepth->subLayers.size()) {
+        SR_ERROR("MemoryManager::ReAllocateFBO() : incorrect old depth attachments!");
+        return false;
+    }
+
+    for (uint32_t i = 0; i < depthTextures.size(); ++i) {
+        if (pDepth->subLayers[i] < 0 || pDepth->subLayers[i] >= m_countTextures.first) {
+            SR_ERROR("MemoryManager::ReAllocateFBO() : incorrect old depth attachment at index " + std::to_string(i) + ", range problem!");
+            return false;
+        }
+
+        if (m_textures[pDepth->subLayers[i]] == nullptr) {
+            SR_ERROR("MemoryManager::ReAllocateFBO() : incorrect old depth attachment at index " + std::to_string(i) + ", texture not exists!");
+            return false;
+        }
+
+        delete m_textures[pDepth->subLayers[i]];
+        m_textures[pDepth->subLayers[i]] = depthTextures[i];
+    }
+
+    /// Depth attachment
+
     if (pDepth->texture != SR_ID_INVALID) {
         delete m_textures[pDepth->texture];
-        m_textures[pDepth->texture] = m_FBOs[FBO]->AllocateDepthTextureReference();
+        m_textures[pDepth->texture] = m_FBOs[FBO]->AllocateDepthTextureReference(-1);
     }
 
     return true;

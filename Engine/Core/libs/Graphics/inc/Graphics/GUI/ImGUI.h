@@ -68,6 +68,7 @@
 
 namespace SR_GRAPH_NS {
     enum class PipelineType : uint8_t;
+    class Pipeline;
 }
 
 namespace SR_GRAPH_GUI_NS {
@@ -88,6 +89,7 @@ namespace SR_GRAPH_GUI_NS {
     SR_DLL_EXPORT extern void DrawTextOnCenter(const std::string& text, ImVec4 color = ImVec4(1.f, 1.f, 1.f, 1.f));
     SR_DLL_EXPORT extern int ImTextCharToUtf8(char* buf, int32_t bufSize, uint32_t c);
     SR_DLL_EXPORT extern ImVec2 DrawTexture(void* pDescriptor, const SR_MATH_NS::IVector2& size, SR_GRAPH_NS::PipelineType pipelineType, bool imposition);
+    SR_DLL_EXPORT extern ImVec2 DrawTexture(SR_GRAPH_NS::Pipeline* pPipeline, uint32_t textureId, const SR_MATH_NS::IVector2& size, bool imposition);
     SR_DLL_EXPORT extern ImVec2 DrawImage(ImTextureID user_texture_id, const ImVec2& size, const ImVec2& uv0, const ImVec2& uv1, const ImVec4& tint_col, const ImVec4& border_col, bool imposition);
 #endif
 }

@@ -15,12 +15,17 @@ namespace SR_GRAPH_NS {
 
         IncrementColorIndex();
 
-        pShader->SetConstInt(SHADER_COLOR_BUFFER_MODE, 1);
-        pShader->SetConstVec3(SHADER_COLOR_BUFFER_VALUE, GetMeshColor());
+        //pShader->SetConstInt(SHADER_COLOR_BUFFER_MODE, 1);
+        //pShader->SetConstVec3(SHADER_COLOR_BUFFER_VALUE, GetMeshColor());
     }
 
     SR_GTYPES_NS::Framebuffer* FlatColorBufferPass::GetColorFrameBuffer() const noexcept {
         return GetFramebuffer();
+    }
+
+    void FlatColorBufferPass::OnResize(const SR_MATH_NS::UVector2& size) {
+        IFramebufferPass::ResizeFrameBuffer(size);
+        FlatClusterPass::OnResize(size);
     }
 
     void FlatColorBufferPass::Update() {

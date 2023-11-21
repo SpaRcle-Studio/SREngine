@@ -18,6 +18,7 @@ namespace SR_GRAPH_NS {
         bool Render() override;
         bool Init() override;
         bool Load(const SR_XML_NS::Node& passNode) override;
+        void OnResize(const SR_MATH_NS::UVector2& size) override;
 
     public:
         SR_NODISCARD SR_GTYPES_NS::Framebuffer* GetColorFrameBuffer() const noexcept override;

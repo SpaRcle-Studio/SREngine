@@ -134,7 +134,17 @@ namespace SR_GRAPH_NS {
         BasePass::OnMeshRemoved(pMesh, transparent);
     }
 
-    BasePass *GroupPass::FindPass(const std::string& name) const {
+    void GroupPass::ForEachPass(const SR_HTYPES_NS::Function<void(BasePass*)>& callback) {
+        for (auto&& pPass : m_passes) {
+            callback(pPass);
+
+            if (auto&& pGroupPass = dynamic_cast<GroupPass*>(pPass)) {
+                pGroupPass->ForEachPass(callback);
+            }
+        }
+    }
+
+    BasePass* GroupPass::FindPass(const std::string& name) const {
         return FindPass(SR_HASH_STR(name));
     }
 

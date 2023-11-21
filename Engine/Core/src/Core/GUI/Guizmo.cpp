@@ -161,10 +161,23 @@ namespace SR_CORE_GUI_NS {
         glm::mat4 view;
         glm::mat4 projection = camera->GetProjectionRef().ToGLM();
 
+        ImGuizmo::OPERATION operation = m_operation;
+
         switch (m_transform->GetMeasurement()) {
             case SR_UTILS_NS::Measurement::Space3D:
+                ImGuizmo::SetOrthographic(false);
                 view = camera->GetImGuizmoView().ToGLM();
                 break;
+            case SR_UTILS_NS::Measurement::Space2D: {
+                ImGuizmo::SetOrthographic(true);
+                auto&& matrix = SR_MATH_NS::Matrix4x4::Identity();
+                matrix = matrix.RotateAxis(SR_MATH_NS::FVector3(0, 1, 0), -90);
+                view = matrix.ToGLM();
+                operation = static_cast<ImGuizmo::OPERATION>(operation & ~ImGuizmo::OPERATION::TRANSLATE_Z);
+                operation = static_cast<ImGuizmo::OPERATION>(operation & ~ImGuizmo::OPERATION::ROTATE_Z);
+                operation = static_cast<ImGuizmo::OPERATION>(operation & ~ImGuizmo::OPERATION::SCALE_Z);
+                break;
+            }
             default:
                 return;
         }
@@ -172,7 +185,7 @@ namespace SR_CORE_GUI_NS {
         if (ImGuizmo::Manipulate(
                 glm::value_ptr(view),
                 glm::value_ptr(projection),
-                m_operation,
+                operation,
                 m_mode,
                 glm::value_ptr(transform),
                 NULL, /// delta matrix
@@ -200,8 +213,16 @@ namespace SR_CORE_GUI_NS {
             SR_MATH_NS::FVector3 translation, rotation, scale;
             SR_MATH_NS::DecomposeTransform(transform, translation, rotation, scale);
 
-            translation = translation.InverseAxis(SR_MATH_NS::Axis::AXIS_X);
-            rotation = rotation.Degrees().InverseAxis(SR_MATH_NS::Axis::AXIS_YZ);
+            switch (m_transform->GetMeasurement()) {
+                case Utils::Measurement::Space2D:
+                    break;
+                case Utils::Measurement::Space3D:
+                    translation = translation.InverseAxis(SR_MATH_NS::Axis::AXIS_X);
+                    rotation = rotation.Degrees().InverseAxis(SR_MATH_NS::Axis::AXIS_YZ);
+                    break;
+                default:
+                    break;
+            }
 
             switch (m_operation) {
                 case ImGuizmo::TRANSLATE: {
@@ -259,7 +280,18 @@ namespace SR_CORE_GUI_NS {
             default:
                 matrix = glm::mat4(0);
                 break;
-            case SR_UTILS_NS::Measurement::Space2D:
+            case SR_UTILS_NS::Measurement::Space2D: {
+                SR_MATH_NS::FVector3 translation = transformation.GetTranslate();
+                translation = SR_MATH_NS::FVector3(1.f /* z-depth */, -translation.y, translation.x);
+
+                const SR_MATH_NS::FVector3 rotation = transformation.GetQuat().RotateY(90.f).EulerAngle();
+                const SR_MATH_NS::FVector3 scale = m_transform->GetScale();
+
+                matrix = glm::translate(glm::mat4(1), translation.ToGLM());
+                matrix *= mat4_cast(SR_MATH_NS::Quaternion::FromEuler(rotation).ToGLM());
+                matrix = glm::scale(matrix, scale.ToGLM());
+                break;
+            }
             case SR_UTILS_NS::Measurement::Space3D: {
                 const SR_MATH_NS::FVector3 translation = transformation.GetTranslate().InverseAxis(SR_MATH_NS::Axis::AXIS_X);
                 const SR_MATH_NS::FVector3 rotation = transformation.GetQuat().EulerAngle().InverseAxis(SR_MATH_NS::Axis::AXIS_YZ);

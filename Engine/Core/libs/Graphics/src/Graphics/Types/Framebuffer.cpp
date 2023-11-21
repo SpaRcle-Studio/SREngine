@@ -151,6 +151,14 @@ namespace SR_GTYPES_NS {
             SRVerifyFalse(!m_pipeline->FreeTexture(&m_depth.texture));
         }
 
+        for (auto&& texture : m_depth.subLayers) {
+            if (texture == SR_ID_INVALID) {
+                continue;
+            }
+
+            SRVerifyFalse(!m_pipeline->FreeTexture(&texture));
+        }
+
         for (auto&& [texture, format] : m_colors) {
             if (texture == SR_ID_INVALID) {
                 continue;
@@ -259,12 +267,21 @@ namespace SR_GTYPES_NS {
         m_dirty = true;
     }
 
-    int32_t Framebuffer::GetDepthTexture() const {
+    int32_t Framebuffer::GetDepthTexture(int32_t layer) const {
         if (!m_depthEnabled) {
             return SR_ID_INVALID;
         }
 
-        return m_depth.texture;
+        if (layer < 0) {
+            return m_depth.texture;
+        }
+
+        if (layer >= m_depth.subLayers.size()) {
+            SRHalt0();
+            return SR_ID_INVALID;
+        }
+
+        return m_depth.subLayers[layer];
     }
 
     uint8_t Framebuffer::GetSamplesCount() const {

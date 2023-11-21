@@ -17,6 +17,7 @@
 #include <Graphics/Types/Framebuffer.h>
 #include <Graphics/Render/RenderTechnique.h>
 #include <Graphics/Pass/ColorBufferPass.h>
+#include <Graphics/Pass/FlatColorBufferPass.h>
 
 namespace SR_CORE_NS::GUI {
     SceneViewer::SceneViewer(const EnginePtr& pEngine, Hierarchy* hierarchy)
@@ -229,21 +230,7 @@ namespace SR_CORE_NS::GUI {
         }
 
         auto&& pPipeline = GetContext()->GetPipeline();
-
-        void* pDescriptor = nullptr;
-
-        switch (pPipeline->GetType()) {
-            case SR_GRAPH_NS::PipelineType::Vulkan:
-                pDescriptor = pPipeline->GetOverlayTextureDescriptorSet(id, SR_GRAPH_NS::OverlayType::ImGui);
-                break;
-            case SR_GRAPH_NS::PipelineType::OpenGL:
-                pDescriptor = reinterpret_cast<void*>(static_cast<uint64_t>(id));
-                break;
-            default:
-                break;
-        }
-
-        m_imagePosition = SR_GRAPH_GUI_NS::DrawTexture(pDescriptor, m_textureSize, pPipeline->GetType(), false);
+        m_imagePosition = SR_GRAPH_GUI_NS::DrawTexture(pPipeline.Get(), id, m_textureSize, false);
     }
 
     void SceneViewer::InitCamera() {
@@ -330,7 +317,19 @@ namespace SR_CORE_NS::GUI {
             return Super::OnMouseUp(data);
         }
 
-        if (auto&& pColorPass = dynamic_cast<Graphics::ColorBufferPass*>(pRenderTechnique->FindPass("ColorBufferPass"))) {
+        bool isObjectFound = false;
+
+        if (auto&& pFlatColorPass = dynamic_cast<SR_GRAPH_NS::FlatColorBufferPass*>(pRenderTechnique->FindPass("FlatColorBufferPass"))) {
+            if (auto&& pMesh = dynamic_cast<SR_GTYPES_NS::MeshComponent*>(pFlatColorPass->GetMesh(x, y))) {
+                m_hierarchy->SelectGameObject(pMesh->GetRoot());
+                isObjectFound = true;
+            }
+            else if (IsHovered()) { ///список выделенных объектов не должен очищаться, если клик не прожат по самой сцене, вероятно стоит сам клик обрабатывать с этим условием
+                m_hierarchy->ClearSelected();
+            }
+        }
+
+        if (auto&& pColorPass = dynamic_cast<SR_GRAPH_NS::ColorBufferPass*>(pRenderTechnique->FindPass("ColorBufferPass")); !isObjectFound && pColorPass) {
             if (auto&& pMesh = dynamic_cast<SR_GTYPES_NS::MeshComponent*>(pColorPass->GetMesh(x, y))) {
                 m_hierarchy->SelectGameObject(pMesh->GetRoot());
             }

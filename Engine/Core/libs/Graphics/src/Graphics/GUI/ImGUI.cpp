@@ -265,5 +265,22 @@ namespace SR_GRAPH_GUI_NS {
         bb.Max = bb.Min + ImGui::CalcItemSize(split_vertically ? ImVec2(thickness, splitter_long_axis_size) : ImVec2(splitter_long_axis_size, thickness), 0.0f, 0.0f);
         return ImGui::SplitterBehavior(bb, id, split_vertically ? ImGuiAxis_X : ImGuiAxis_Y, size1, size2, min_size1, min_size2, 0.0f);
     }
+
+    ImVec2 DrawTexture(SR_GRAPH_NS::Pipeline* pPipeline, uint32_t textureId, const SR_MATH_NS::IVector2 &size, bool imposition) {
+        void* pDescriptor = nullptr;
+
+        switch (pPipeline->GetType()) {
+            case SR_GRAPH_NS::PipelineType::Vulkan:
+                pDescriptor = pPipeline->GetOverlayTextureDescriptorSet(textureId, SR_GRAPH_NS::OverlayType::ImGui);
+                break;
+            case SR_GRAPH_NS::PipelineType::OpenGL:
+                pDescriptor = reinterpret_cast<void*>(static_cast<uint64_t>(textureId));
+                break;
+            default:
+                break;
+        }
+
+        return SR_GRAPH_GUI_NS::DrawTexture(pDescriptor, size, pPipeline->GetType(), false);
+    }
 #endif
 }

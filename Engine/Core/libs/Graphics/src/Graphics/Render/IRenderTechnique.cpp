@@ -195,4 +195,14 @@ namespace SR_GRAPH_NS {
         }
         m_passes.clear();
     }
+
+    void IRenderTechnique::ForEachPass(const SR_HTYPES_NS::Function<void(BasePass*)>& callback) {
+        for (auto&& pPass : m_passes) {
+            callback(pPass);
+
+            if (auto&& pGroupPass = dynamic_cast<GroupPass*>(pPass)) {
+                pGroupPass->ForEachPass(callback);
+            }
+        }
+    }
 }
