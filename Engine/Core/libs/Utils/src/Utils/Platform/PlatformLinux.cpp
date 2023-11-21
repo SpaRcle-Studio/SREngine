@@ -117,8 +117,27 @@ namespace SR_UTILS_NS::Platform {
     }
 
     uint64_t GetProcessUsedMemory() {
-        SRHaltOnce("Not implemented!");
-        return 0;
+        std::ifstream proc_meminfo("/proc/self/status");
+        uint64_t result = 0;
+        if (proc_meminfo.good()) {
+            std::string content((std::istreambuf_iterator<char>(proc_meminfo)), std::istreambuf_iterator<char>());
+
+            static const auto&& getVal = [](const std::string &target, const std::string &content) {
+                int result = -1;
+                std::size_t start = content.find(target);
+                if (start != std::string::npos) {
+                    int begin = start + target.length();
+                    std::size_t end = content.find("kB", start);
+                    std::string substr = content.substr(begin, end - begin);
+                    result = std::stoi(substr);
+                }
+                return result * 1024;
+            };
+
+            result  = getVal("VmRSS:", content);
+        }
+
+        return result;
     }
 
     void SetThreadPriority(void *nativeHandle, ThreadPriority priority) {
