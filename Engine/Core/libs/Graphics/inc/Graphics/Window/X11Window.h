@@ -6,6 +6,7 @@
 #define SRENGINE_X11WINDOW_H
 
 #include <Graphics/Window/BasicWindowImpl.h>
+
 #include <xcb/xcb.h>
 
 namespace SR_GRAPH_NS {
@@ -25,6 +26,8 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD WindowType GetType() const override { return BasicWindowImpl::WindowType::X11; }
     public:
         void PollEvents() override;
+
+        xcb_intern_atom_reply_t* ChangeWMProperty(const std::string& atomName);
 
         void Close() override;
         //void Maximize() override;
@@ -46,14 +49,15 @@ namespace SR_GRAPH_NS {
         //void Move(int32_t x, int32_t y) override;
         //void Resize(uint32_t w, uint32_t h) override;
     private:
-        void PoolIEventsHandler();
+        void PollEventsHandler();
 
     private:
-        SR_HTYPES_NS::Thread::Ptr m_poolEventsThread = nullptr;
         void* m_display = nullptr;
         uint32_t m_window = 0;
         xcb_connection_t* m_connection = nullptr;
 
+        xcb_intern_atom_reply_t* m_deleteWindowReply = nullptr;
+        xcb_intern_atom_reply_t* m_wmProtocols = nullptr;
     };
 }
 

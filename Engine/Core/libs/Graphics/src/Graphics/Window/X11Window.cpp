@@ -4,9 +4,7 @@
 
 #include <Graphics/Window/X11Window.h>
 
-//#include <X11/Xlib.h>
 #include <X11/Xutil.h>
-//#include <X11/Xlib-xcb.h>
 #include <xcb/xcb_ewmh.h>
 #include <xcb/xcb.h>
 #include <xcb/xcb_util.h>
@@ -44,7 +42,8 @@ namespace SR_GRAPH_NS {
                                   XCB_EVENT_MASK_ENTER_WINDOW   | XCB_EVENT_MASK_LEAVE_WINDOW   |
                                   XCB_EVENT_MASK_KEY_PRESS      | XCB_EVENT_MASK_KEY_RELEASE |
                                   XCB_EVENT_MASK_PROPERTY_CHANGE | XCB_EVENT_MASK_VISIBILITY_CHANGE |
-                                  XCB_EVENT_MASK_RESIZE_REDIRECT | XCB_EVENT_MASK_FOCUS_CHANGE
+                                  //XCB_EVENT_MASK_RESIZE_REDIRECT | XCB_EVENT_MASK_FOCUS_CHANGE |
+                                  XCB_EVENT_MASK_FOCUS_CHANGE | XCB_EVENT_MASK_STRUCTURE_NOTIFY
        };
 
         xcb_create_window(pConnection, 0, window, pScreen->root, position.x, position.y, size.x, size.y,
@@ -53,36 +52,18 @@ namespace SR_GRAPH_NS {
         m_connection = pConnection;
         m_display = pDisplay;
         m_window = window;
+        m_surfaceSize = size;
+        m_size = size;
 
         SetResizable(resizable);
         SetFullscreen(fullScreen);
 
+        m_deleteWindowReply = ChangeWMProperty("WM_DELETE_WINDOW");
+
         xcb_map_window(m_connection, m_window);
         xcb_flush(m_connection);
 
-        /*xcb_ewmh_connection_t* ewmhConnection;
-        ewmhConnection->connection = m_connection;
-        ewmhConnection->nb_screens = 1;
-        ewmhConnection->screens = &pScreen;
-
-        auto&& frameExtentsCookie = xcb_ewmh_get_frame_extents(ewmhConnection, window);
-        xcb_ewmh_get_extents_reply_t extentsReply;
-        xcb_ewmh_get_frame_extents_reply(ewmhConnection, frameExtentsCookie, &extentsReply, nullptr);*/
-
-        //xcb_get_geometry_cookie_t geometryCookie = xcb_get_geometry_unchecked(m_connection, m_window);
-        //auto&& geometryReply =  xcb_get_geometry_reply(m_connection, geometryCookie, nullptr);
-
-        //m_surfaceSize = {size.x, size.y - extentsReply.bottom - extentsReply.top};
-        m_surfaceSize = size;
-        m_size = size;
-
-        //m_surfaceSize.y += 1;
-
-        //free(geometryReply);
         m_isValid = true;
-
-        //m_poolEventsThread = SR_HTYPES_NS::Thread::Factory::Instance().Create(&X11Window::PoolIEventsHandler, this);
-
         return true;
     }
 
@@ -130,29 +111,40 @@ namespace SR_GRAPH_NS {
     }
 
     void X11Window::PollEvents() {
-        PoolIEventsHandler();
+        PollEventsHandler();
     }
 
     void X11Window::Close() {
+        if (m_connection) {
+            xcb_destroy_window(m_connection, m_window);
+            xcb_disconnect(m_connection);
+
+            m_connection = nullptr;
+        }
+
         BasicWindowImpl::Close();
     }
 
-    void X11Window::PoolIEventsHandler() {
-        auto&& event = xcb_wait_for_event(m_connection);
+    void X11Window::PollEventsHandler() {
+        auto&& event = xcb_poll_for_event(m_connection);
         if (!event) {
-            SR_INFO("X11Window::PollEvents() : event is nullptr.");
             return;
         }
 
         uint8_t responseType = XCB_EVENT_RESPONSE_TYPE(event);
         if (responseType == 0) {
-            SR_ERROR("X11Window::PollEvents() : response type is 0!");
+            SR_ERROR("X11Window::PollEvents() : response type is 0!")
             return;
         }
 
-        //SR_LOG("X11Window::PollEvents() : event - {}", xcb_event_get_label(event->response_type));
-
         switch (responseType) {
+            case XCB_CLIENT_MESSAGE: {
+                if ((*(xcb_client_message_event_t*)event).data.data32[0] == (*m_deleteWindowReply).atom) {
+                    Close();
+                }
+
+                break;
+            }
             case XCB_EXPOSE: {
                 //xcb_expose_event_t *expose = (xcb_expose_event_t *)event;
 
@@ -198,8 +190,6 @@ namespace SR_GRAPH_NS {
                 break;
             }
             case XCB_RESIZE_REQUEST: {
-                //auto&& resizeEvent = (xcb_resize_request_event_t *) event;
-                //m_surfaceSize = { resizeEvent->width, resizeEvent->height };
                 break;
             }
             case XCB_CONFIGURE_NOTIFY: {
@@ -220,5 +210,19 @@ namespace SR_GRAPH_NS {
         }
 
         free(event);
+    }
+
+    xcb_intern_atom_reply_t* X11Window::ChangeWMProperty(const std::string& propertyName) {
+        if (!m_wmProtocols) {
+            xcb_intern_atom_cookie_t protocolsAtom = xcb_intern_atom(m_connection, false, 12, "WM_PROTOCOLS");
+            m_wmProtocols = xcb_intern_atom_reply(m_connection, protocolsAtom, nullptr);
+        }
+
+        xcb_intern_atom_cookie_t cookie = xcb_intern_atom(m_connection, false, propertyName.size(), propertyName.c_str());
+        xcb_intern_atom_reply_t* reply = xcb_intern_atom_reply(m_connection, cookie, nullptr);
+
+        xcb_change_property(m_connection, XCB_PROP_MODE_REPLACE, m_window, m_wmProtocols->atom, XCB_ATOM_ATOM, 32, 1, &(*reply).atom);
+
+        return reply;
     }
 }
