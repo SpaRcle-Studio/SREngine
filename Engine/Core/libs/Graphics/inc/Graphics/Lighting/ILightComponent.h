@@ -22,7 +22,7 @@ namespace SR_GRAPH_NS {
     class ILightComponent : public SR_GTYPES_NS::IRenderComponent {
     public:
         SR_NODISCARD SR_FORCE_INLINE bool ExecuteInEditMode() const override { return true; }
-        SR_NODISCARD SR_FORCE_INLINE bool IsUpdatable() const noexcept override { return false; }
+        SR_NODISCARD bool IsUpdatable() const noexcept override { return false; }
         SR_NODISCARD virtual LightType GetLightType() const = 0;
 
         void OnAttached() override;

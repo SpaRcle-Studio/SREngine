@@ -35,6 +35,7 @@ namespace SR_GTYPES_NS {
         static Component* LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage);
 
     public:
+        void Start() override;
         void OnMatrixDirty() override;
         void OnAttached() override;
         void UpdateProjection(uint32_t w, uint32_t h);

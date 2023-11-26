@@ -56,6 +56,7 @@
 #include "../../Utils/src/Utils/TypeTraits/StandardProperty.cpp"
 
 #include "../../Utils/src/Utils/Game/LookAtComponent.cpp"
+#include "../../Utils/src/Utils/Game/DebugLogComponent.cpp"
 
 #ifdef SR_TRACY_ENABLE
     #include "../../Utils/src/Utils/Profile/TracyContext.cpp"

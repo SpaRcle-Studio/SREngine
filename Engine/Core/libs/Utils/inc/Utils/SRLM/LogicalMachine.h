@@ -79,7 +79,7 @@ namespace SR_SRLM_NS {
 
         auto&& pResource = new T();
 
-        pResource->SetId(path, false);
+        pResource->SetId(path.ToStringRef(), false);
 
         if (!pResource->Reload()) {
             SR_ERROR("LogicalMachine::Load() : failed to load!");

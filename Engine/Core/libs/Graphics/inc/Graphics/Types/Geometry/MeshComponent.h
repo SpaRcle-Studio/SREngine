@@ -32,7 +32,7 @@ namespace SR_GTYPES_NS {
         SR_HTYPES_NS::Marshal::Ptr Save(SR_UTILS_NS::SavableSaveData data) const override;
 
         SR_NODISCARD bool ExecuteInEditMode() const override;
-        SR_NODISCARD SR_FORCE_INLINE bool IsUpdatable() const noexcept override { return false; }
+        SR_NODISCARD bool IsUpdatable() const noexcept override { return false; }
         SR_NODISCARD int64_t GetSortingPriority() const override;
 
         SR_NODISCARD SR_FORCE_INLINE bool IsMeshActive() const noexcept override {

@@ -532,4 +532,8 @@ namespace SR_PTYPES_NS {
 
         SetRawMesh(pRawMesh);
     }
+
+    void Rigidbody::Start() {
+        Super::Start();
+    }
 }

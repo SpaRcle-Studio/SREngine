@@ -34,7 +34,7 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD bool IsSkeletonUsable() const;
         SR_NODISCARD bool IsCalculatable() const override;
         SR_NODISCARD bool ExecuteInEditMode() const override { return true; }
-        SR_NODISCARD SR_FORCE_INLINE bool IsUpdatable() const noexcept override { return true; }
+        SR_NODISCARD bool IsUpdatable() const noexcept override { return true; }
         SR_NODISCARD std::string GetMeshIdentifier() const override;
         SR_NODISCARD SR_UTILS_NS::EntityRef& GetSkeleton() { return m_skeletonRef; }
         SR_NODISCARD uint32_t GetMaxBones() const;

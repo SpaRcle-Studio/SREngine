@@ -340,4 +340,8 @@ namespace SR_GTYPES_NS {
 
         Super::Update(dt);
     }
+
+    void Camera::Start() {
+        Super::Start();
+    }
 }

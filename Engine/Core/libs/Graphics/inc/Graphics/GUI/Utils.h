@@ -174,6 +174,9 @@ namespace SR_GRAPH_GUI_NS {
         if constexpr (std::is_same_v<T, std::string>) {
             string = value;
         }
+        else if constexpr (std::is_same_v<T, SR_UTILS_NS::StringAtom>) {
+            string = value;
+        }
         else if constexpr (std::is_same_v<T, std::string_view>) {
             string = std::string(value);
         }

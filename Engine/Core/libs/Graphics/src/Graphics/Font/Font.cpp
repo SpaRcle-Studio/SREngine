@@ -24,7 +24,7 @@ namespace SR_GTYPES_NS {
 
         auto&& pResource = new Font();
 
-        pResource->SetId(path, false /** auto register */);
+        pResource->SetId(path.ToStringRef(), false /** auto register */);
 
         if (!pResource->Reload()) {
             SR_ERROR("Font::Load() : failed to load font! \n\tPath: " + path.ToString());

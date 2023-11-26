@@ -43,7 +43,7 @@ namespace SR_PTYPES_NS {
 
             pMaterial = new PhysicsMaterial();
 
-            pMaterial->SetId(path, false);
+            pMaterial->SetId(path.ToStringRef(), false);
 
             if (!pMaterial->Reload()) {
                 delete pMaterial;

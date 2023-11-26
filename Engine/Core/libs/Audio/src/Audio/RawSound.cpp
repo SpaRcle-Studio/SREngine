@@ -24,7 +24,7 @@ namespace SR_AUDIO_NS {
 
         auto&& pRawSound = new RawSound();
 
-        pRawSound->SetId(path, false);
+        pRawSound->SetId(path.ToStringRef(), false);
 
         if (!pRawSound->Reload()) {
             delete pRawSound;
@@ -78,7 +78,7 @@ namespace SR_AUDIO_NS {
     }
 
     bool RawSound::Reload() {
-        SR_LOG("RawSound::Reload() : reloading \"{}\" audio...", GetResourceId());
+        SR_LOG("RawSound::Reload() : reloading \"{}\" audio...", GetResourceId().ToStringRef());
 
         m_loadState = LoadState::Reloading;
 

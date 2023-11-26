@@ -63,7 +63,7 @@ namespace SR_HTYPES_NS {
 
             pRawMesh = new RawMesh();
             pRawMesh->m_params = params;
-            pRawMesh->SetId(id, false /** auto register */);
+            pRawMesh->SetId(id.ToStringRef(), false /** auto register */);
 
             if (!pRawMesh->Reload()) {
                 SR_ERROR("RawMesh::Load() : failed to load raw mesh! \n\tPath: " + rawPath.ToString());

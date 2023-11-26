@@ -48,7 +48,7 @@ namespace SR_CORE_GUI_NS {
 
         SR_MAYBE_UNUSED void BackupTransform(const SR_UTILS_NS::GameObject::Ptr& ptr, const std::function<void()>& operation) const;
 
-        SR_UTILS_NS::Component* DrawComponent(SR_UTILS_NS::Component* pComponent, uint32_t& index);
+        void DrawComponent(SR_UTILS_NS::Component* pComponent, uint32_t& index);
 
     private:
         std::list<SR_UTILS_NS::Component::Ptr> m_pointersHolder;

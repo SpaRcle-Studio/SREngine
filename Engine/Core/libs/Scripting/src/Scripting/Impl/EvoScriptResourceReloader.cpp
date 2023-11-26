@@ -28,7 +28,7 @@ namespace SR_SCRIPTING_NS {
                 continue;
             }
 
-            if (auto&& pBehaviour = dynamic_cast<Behaviour*>(pResource)) {
+            if (auto&& pBehaviour = dynamic_cast<IRawBehaviour*>(pResource)) {
                 auto&& pMarshal = new SR_HTYPES_NS::Marshal();
                 auto&& properties = pBehaviour->GetProperties();
 
@@ -64,7 +64,7 @@ namespace SR_SCRIPTING_NS {
                 pBehaviour->SetProperty(name, value);
             }
 
-            pBehaviour->PostLoad();
+            pBehaviour->OnReloadDone();
         }
 
         FreeStashedProperties(stashedProps);

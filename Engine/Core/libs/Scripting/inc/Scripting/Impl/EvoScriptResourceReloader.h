@@ -9,7 +9,7 @@
 
 namespace SR_SCRIPTING_NS {
     class SR_DLL_EXPORT EvoScriptResourceReloader final : public SR_UTILS_NS::IResourceReloader {
-        using StashedProperties = std::vector<std::pair<Behaviour*, SR_HTYPES_NS::Marshal::Ptr>>;
+        using StashedProperties = std::vector<std::pair<IRawBehaviour*, SR_HTYPES_NS::Marshal::Ptr>>;
     public:
         SR_NODISCARD bool Reload(const SR_UTILS_NS::Path& path, SR_UTILS_NS::ResourceInfo* pResourceInfo) override;
 

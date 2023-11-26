@@ -22,7 +22,7 @@
 #include <Utils/ECS/Prefab.h>
 #include <Utils/Platform/Platform.h>
 #include <Utils/Profile/TracyContext.h>
-#include <Utils/World/SceneBuilder.h>
+#include <Utils/World/SceneUpdater.h>
 
 #include <Graphics/Types/Texture.h>
 #include <Graphics/Render/RenderContext.h>

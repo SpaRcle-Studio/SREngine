@@ -61,7 +61,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD uint16_t GetReloadCount() const noexcept { return m_reloadCount; }
         SR_NODISCARD uint64_t GetLifetime() const noexcept { return m_lifetime; }
         SR_NODISCARD uint64_t GetResourceHashName() const noexcept { return m_resourceHashName; }
-        SR_NODISCARD uint64_t GetResourceHashId() const noexcept { return m_resourceHashId; }
+        SR_NODISCARD SR_UTILS_NS::StringAtom GetResourceId() const noexcept { return m_resourceId; }
         SR_NODISCARD LoadState GetResourceLoadState() const { return m_loadState; }
         SR_NODISCARD uint64_t GetResourceHashPath() const noexcept { return m_resourceHashPath; }
         SR_NODISCARD uint64_t GetResourceHash() const noexcept { return m_resourceHash; }
@@ -70,7 +70,6 @@ namespace SR_UTILS_NS {
 
         SR_NODISCARD std::string_view GetResourceName() const;
         SR_NODISCARD const Path& GetResourcePath() const;
-        SR_NODISCARD const std::string& GetResourceId() const;
         SR_NODISCARD uint16_t GetCountUses() const noexcept;
 
         SR_NODISCARD virtual IResource* CopyResource(IResource* destination) const;
@@ -112,8 +111,7 @@ namespace SR_UTILS_NS {
         void SetResourceHash(uint64_t hash);
         void SetLifetime(int64_t lifeTime) { m_lifetime = lifeTime; }
 
-        void SetId(const std::string& id, bool autoRegister = true);
-        void SetId(uint64_t hashId, bool autoRegister = true);
+        void SetId(SR_UTILS_NS::StringAtom id, bool autoRegister = true);
 
         virtual void ReviveResource();
 
@@ -136,7 +134,7 @@ namespace SR_UTILS_NS {
     private:
         ResourceInfoWeakPtr m_resourceInfo;
 
-        uint64_t m_resourceHashId = 0;
+        SR_UTILS_NS::StringAtom m_resourceId;
         uint64_t m_resourceHash = 0;
         uint64_t m_resourceHashPath = 0;
 

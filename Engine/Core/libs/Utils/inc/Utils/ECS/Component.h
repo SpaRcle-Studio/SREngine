@@ -62,16 +62,16 @@ namespace SR_UTILS_NS {
         virtual void OnLoaded() { m_isComponentLoaded = true; }
         /// Вызывается после добавления компонента к игровому объекту
         virtual void OnAttached() { m_isAttached = true; SRAssert(GetParent()); }
-        /// Вызывается когда компонент убирается с объекта, либо объект уничтожается, но до OnDestroy
-        virtual void OnDetach() { m_isAttached = false; }
+        /// Вызывается когда компонент убирается с объекта, но до OnDestroy и только если был OnAttached
+        virtual void OnDetached();
         /// Вызывается когда компонент убирается с объекта, либо объект уничтожается. Может произойти отложенно.
         virtual void OnDestroy() { SetParent(nullptr); }
 
-        virtual void OnEnable() { m_isActive = true; }
-        virtual void OnDisable() { m_isActive = false; }
+        virtual void OnEnable();
+        virtual void OnDisable();
 
         virtual void Awake() { m_isAwake = true; }
-        virtual void Start() { m_isStarted = true; }
+        virtual void Start();
         virtual void Update(float_t dt) { }
         virtual void FixedUpdate() { }
         virtual void LateUpdate() { }
@@ -90,7 +90,7 @@ namespace SR_UTILS_NS {
         void Detach();
 
         void SetEnabled(bool value);
-        void SetComponentBuildId(uint64_t buildId) { m_componentBuildId = buildId; }
+        void SetIndexIdSceneUpdater(int32_t index) { m_indexInSceneUpdater = index; }
 
         SR_NODISCARD virtual Component* CopyComponent() const;
 
@@ -102,7 +102,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD SR_FORCE_INLINE virtual bool IsAttached() const noexcept { return m_isAttached; }
 
         /// Активен и компонент и его родительский объект
-        SR_NODISCARD SR_FORCE_INLINE virtual bool IsUpdatable() const noexcept { return m_isStarted && m_isActive; }
+        SR_NODISCARD virtual bool IsUpdatable() const noexcept;
         /// Активен и компонент и его родительский объект
         SR_NODISCARD SR_FORCE_INLINE virtual bool IsActive() const noexcept { return m_isActive; }
         /// Активен сам компонент, независимо от объекта
@@ -127,9 +127,9 @@ namespace SR_UTILS_NS {
         SR_NODISCARD ScenePtr TryGetScene() const;
         SR_NODISCARD GameObjectPtr GetRoot() const;
         SR_NODISCARD Transform* GetTransform() const noexcept;
-        SR_NODISCARD uint64_t GetComponentBuildId() const noexcept { return m_componentBuildId; }
         SR_NODISCARD SR_UTILS_NS::PropertyContainer& GetComponentProperties() noexcept { return m_properties; }
         SR_NODISCARD const SR_UTILS_NS::PropertyContainer& GetComponentProperties() const noexcept { return m_properties; }
+        SR_NODISCARD int32_t GetIndexInSceneUpdater() const noexcept { return m_indexInSceneUpdater; }
 
         SR_NODISCARD std::string GetEntityInfo() const override;
 
@@ -146,11 +146,11 @@ namespace SR_UTILS_NS {
         bool m_isAwake = false;
         bool m_isStarted = false;
 
-        /// позиция компонента в списке обновляемых компонентов
-        uint64_t m_componentBuildId = SR_ID_INVALID;
+        int32_t m_indexInSceneUpdater = SR_ID_INVALID;
 
         GameObjectPtr m_gameObject;
         IComponentable* m_parent = nullptr;
+        SR_WORLD_NS::Scene* m_scene = nullptr;
 
         SR_UTILS_NS::PropertyContainer m_properties;
 

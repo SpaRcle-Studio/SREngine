@@ -17,6 +17,7 @@
 
 #include <Scripting/Base/Behaviour.h>
 #include <Scripting/Impl/EvoScriptResourceReloader.h>
+#include <Scripting/Impl/EvoBehaviour.h>
 
 namespace SR_CORE_NS::Resources {
     bool RegisterResources(const SR_HTYPES_NS::SharedPtr<Engine>& pEngine) {
@@ -36,7 +37,7 @@ namespace SR_CORE_NS::Resources {
         resourcesManager.RegisterType<SR_GTYPES_NS::Framebuffer>();
         resourcesManager.RegisterType<SR_GTYPES_NS::Font>();
 
-        resourcesManager.RegisterType<SR_SCRIPTING_NS::Behaviour>();
+        resourcesManager.RegisterType<SR_SCRIPTING_NS::EvoBehaviour>();
 
         resourcesManager.RegisterType<SR_AUDIO_NS::Sound>();
         resourcesManager.RegisterType<SR_AUDIO_NS::RawSound>();
@@ -47,7 +48,7 @@ namespace SR_CORE_NS::Resources {
 
         /// ------------------------------------------------------------------------------------------------------------
 
-        resourcesManager.RegisterReloader<SR_SCRIPTING_NS::Behaviour, SR_SCRIPTING_NS::EvoScriptResourceReloader>();
+        resourcesManager.RegisterReloader<SR_SCRIPTING_NS::EvoBehaviour, SR_SCRIPTING_NS::EvoScriptResourceReloader>();
 
         const auto contextGetter = [pEngine]() -> SR_GRAPH_NS::RenderContext::Ptr {
             return pEngine ? pEngine->GetRenderContext() : SR_GRAPH_NS::RenderContext::Ptr();

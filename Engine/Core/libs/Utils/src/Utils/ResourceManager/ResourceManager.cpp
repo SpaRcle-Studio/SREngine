@@ -159,7 +159,7 @@ namespace SR_UTILS_NS {
 
     bool ResourceManager::IsLastResource(IResource* pResource) {
         auto&& [name, resourcesGroup] = *m_resources.find(pResource->GetResourceHashName());
-        return resourcesGroup->IsLast(pResource->GetResourceHashId());
+        return resourcesGroup->IsLast(pResource->GetResourceId());
     }
 
     void ResourceManager::Thread() {
@@ -307,7 +307,7 @@ namespace SR_UTILS_NS {
 
         std::string wait;
         for (auto&& pResource : m_destroyed) {
-            wait += "\n\t\t" + GetResourceId(pResource->GetResourceHashId()) + "; uses = " +std::to_string(pResource->GetCountUses());
+            wait += "\n\t\t" + pResource->GetResourceId().ToStringRef() + "; uses = " +std::to_string(pResource->GetCountUses());
             ++count;
         }
 
@@ -336,7 +336,7 @@ namespace SR_UTILS_NS {
 
         auto&& [name, resourcesGroup] = *m_resources.find(hashTypeName);
 
-        if (auto&& pResource = resourcesGroup->Find(SR_HASH_STR(id))) {
+        if (auto&& pResource = resourcesGroup->Find(id)) {
             /// раз ресурс ищем, значит он все еще может быть нужен.
             pResource->UpdateResourceLifeTime();
             return pResource;
@@ -420,11 +420,6 @@ namespace SR_UTILS_NS {
         SRHalt("ResourceManager::GetResourceId() : id is not registered!");
 
         return defaultId;
-    }
-
-    ResourceManager::Hash ResourceManager::RegisterResourceId(const std::string& resourceId) {
-        SR_LOCK_GUARD
-        return SR_HASH_STR_REGISTER(resourceId);
     }
 
     const Path& ResourceManager::GetResourcePath(ResourceManager::Hash hashPath) const {

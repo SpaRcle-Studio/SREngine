@@ -6,7 +6,7 @@
 #include <Utils/ECS/Component.h>
 #include <Utils/ECS/GameObject.h>
 #include <Utils/World/Scene.h>
-#include <Utils/World/SceneBuilder.h>
+#include <Utils/World/SceneUpdater.h>
 
 namespace SR_UTILS_NS {
     IComponentable::~IComponentable() {
@@ -15,7 +15,7 @@ namespace SR_UTILS_NS {
     }
 
     bool IComponentable::IsDirty() const noexcept {
-        return m_dirty > 0;
+        return m_dirty;
     }
 
     SR_HTYPES_NS::Marshal::Ptr IComponentable::SaveComponents(SavableSaveData data) const {
@@ -92,8 +92,15 @@ namespace SR_UTILS_NS {
     }
 
     void IComponentable::ForEachComponent(const std::function<bool(Component *)> &fun) {
-        for (auto&& component : m_components) {
-            if (!fun(component)) {
+        for (uint32_t i = 0; i < m_components.size(); ++i) {
+            auto&& pComponent = m_components[i];
+            if (!fun(pComponent)) {
+                break;
+            }
+        }
+
+        for (auto pIt = m_loadedComponents.begin(); pIt != m_loadedComponents.end(); ++pIt) {
+            if (!fun(*pIt)) {
                 break;
             }
         }
@@ -107,7 +114,9 @@ namespace SR_UTILS_NS {
 
         m_loadedComponents.emplace_back(pComponent);
 
-        pComponent->SetParent(this);
+        /// Пока только загрузили, нет ни сцены ничего
+        /// pComponent->SetParent(this);
+
         pComponent->OnLoaded();
 
         /// pComponent->OnAttached();
@@ -138,9 +147,7 @@ namespace SR_UTILS_NS {
             m_components.erase(pIt);
         }
 
-        if (pComponent->GetParent() != this) {
-            SRHalt("Game object not are children!");
-        }
+        SRAssert2(!pComponent->GetParent() || pComponent->GetParent() == this, "The component does not belong to the game object!");
 
         DestroyComponent(pComponent);
 
@@ -157,16 +164,17 @@ namespace SR_UTILS_NS {
 
             m_components.reserve(m_loadedComponents.size());
 
-            for (auto&& pLoadedCmp : m_loadedComponents) {
+            while (!m_loadedComponents.empty()) {
+                auto&& pLoadedCmp = m_loadedComponents.front();
                 m_components.emplace_back(pLoadedCmp);
 
                 pLoadedCmp->SetParent(this);
 
                 pLoadedCmp->OnAttached();
                 pLoadedCmp->OnMatrixDirty();
-            }
 
-            m_loadedComponents.clear();
+                m_loadedComponents.pop_front();
+            }
         }
 
         return true;
@@ -179,7 +187,6 @@ namespace SR_UTILS_NS {
 
         for (uint32_t i = 0; i < m_components.size(); ++i) {
             auto&& pComponent = m_components[i];
-
             if (isPaused && !pComponent->ExecuteInEditMode()) {
                 continue;
             }
@@ -197,9 +204,14 @@ namespace SR_UTILS_NS {
             return;
         }
 
+        SetDirty(false);
+
+        if (!IsActive()) {
+            return;
+        }
+
         for (uint32_t i = 0; i < m_components.size(); ++i) {
             auto&& pComponent = m_components[i];
-
             if (!pComponent->IsAwake()) {
                 continue;
             }
@@ -219,7 +231,6 @@ namespace SR_UTILS_NS {
 
         for (uint32_t i = 0; i < m_components.size(); ++i) {
             auto&& pComponent = m_components[i];
-
             if (!pComponent->IsAwake()) {
                 continue;
             }
@@ -246,7 +257,9 @@ namespace SR_UTILS_NS {
     }
 
     void IComponentable::DestroyComponent(Component* pComponent) {
-        pComponent->OnDetach();
+        if (pComponent->IsAttached()) {
+            pComponent->OnDetached();
+        }
 
         if (auto&& pScene = GetScene()) {
             pScene->Remove(pComponent);
@@ -263,13 +276,15 @@ namespace SR_UTILS_NS {
     }
 
     void IComponentable::OnPriorityDirty() {
-        for (auto&& pComponent : m_components) {
+        for (uint32_t i = 0; i < m_components.size(); ++i) {
+            auto&& pComponent = m_components[i];
             pComponent->OnPriorityDirty();
         }
     }
 
     void IComponentable::OnMatrixDirty() {
-        for (auto&& pComponent : m_components) {
+        for (uint32_t i = 0; i < m_components.size(); ++i) {
+            auto&& pComponent = m_components[i];
             pComponent->OnMatrixDirty();
         }
     }

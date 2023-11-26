@@ -8,6 +8,7 @@
 #include <Utils/ECS/ComponentManager.h>
 #include <Utils/Types/Thread.h>
 #include <Utils/World/Scene.h>
+#include <Utils/World/SceneUpdater.h>
 
 namespace SR_UTILS_NS {
     Component::~Component() {
@@ -29,13 +30,21 @@ namespace SR_UTILS_NS {
     }
 
     void Component::SetParent(IComponentable* pParent) {
-        m_parent = pParent;
+        if ((m_parent = pParent)) {
+            if (auto&& pGameObject = dynamic_cast<SR_UTILS_NS::GameObject*>(m_parent)) {
+                m_gameObject = pGameObject->GetThis().DynamicCast<GameObject>();
+                m_scene = m_gameObject->GetScene();
+            }
+            else {
+                m_gameObject.Reset();
+                m_scene = dynamic_cast<SR_WORLD_NS::Scene*>(m_parent);
+            }
 
-        if (auto&& pGameObject = dynamic_cast<SR_UTILS_NS::GameObject*>(m_parent)) {
-            m_gameObject = pGameObject->GetThis().DynamicCast<GameObject>();
+            SRAssert(m_scene);
         }
         else {
             m_gameObject.Reset();
+            m_scene = nullptr;
         }
     }
 
@@ -52,19 +61,21 @@ namespace SR_UTILS_NS {
     }
 
     void Component::CheckActivity() {
-        SRAssert1Once(m_gameObject);
-
         /// если родителя нет, или он отличается от ожидаемого, то будем считать, что родитель активен.
         /// сцена выключенной (в понимании игровых объектов) быть не может.
-        const bool isActive = m_isEnabled && (!m_gameObject || m_gameObject->m_isActive);
+        const bool isActive = m_isEnabled && (!m_gameObject || m_gameObject->IsActive());
         if (isActive == m_isActive) {
             return;
         }
 
         if ((m_isActive = isActive)) {
+            m_scene->GetSceneUpdater()->RegisterComponent(this);
             OnEnable();
         }
         else {
+            if (m_indexInSceneUpdater != SR_ID_INVALID) {
+                m_scene->GetSceneUpdater()->UnRegisterComponent(this);
+            }
             OnDisable();
         }
     }
@@ -80,19 +91,7 @@ namespace SR_UTILS_NS {
     }
 
     Component::ScenePtr Component::TryGetScene() const {
-        /// Игровой объект или сцена никогда не уничтожится до того,
-        /// как не установит "m_parent" в "nullptr"
-
-        /// наиболее часто ожидаемое поведение, это GameObject-родитель, поэтому проверяем его первым делом
-        if (m_gameObject) {
-            return m_gameObject->GetScene();
-        }
-
-        if (auto&& pScene = dynamic_cast<SR_WORLD_NS::Scene*>(m_parent)) {
-            return pScene;
-        }
-
-        return nullptr;
+        return m_scene;
     }
 
     Component::GameObjectPtr Component::GetGameObject() const {
@@ -139,6 +138,10 @@ namespace SR_UTILS_NS {
         return "Component: " + GetComponentName();
     }
 
+    bool Component::IsUpdatable() const noexcept {
+        return m_isStarted && m_isActive;
+    }
+
     Component* Component::CopyComponent() const {
         SRHalt("Not implemented! [" + GetComponentName() + "]");
         return nullptr;
@@ -164,6 +167,25 @@ namespace SR_UTILS_NS {
         if (m_parent && IsAttached()) {
             m_parent->RemoveComponent(this);
         }
+    }
+
+    void Component::OnEnable() {
+
+    }
+
+    void Component::OnDisable() {
+
+    }
+
+    void Component::Start() {
+        m_isStarted = true;
+    }
+
+    void Component::OnDetached() {
+        if (m_indexInSceneUpdater != SR_ID_INVALID) {
+            m_scene->GetSceneUpdater()->UnRegisterComponent(this);
+        }
+        m_isAttached = false;
     }
 }
 

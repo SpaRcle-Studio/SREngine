@@ -60,34 +60,18 @@ namespace SR_UTILS_NS {
         return ResourceManager::Instance().GetTypeName(m_resourceHashName);
     }
 
-    void IResource::SetId(uint64_t hashId, bool autoRegister) {
-        if (m_resourceHashId == 0) {
-            m_resourceHashId = hashId;
-
-            SRAssert(m_resourceHashPath != 0);
-
-            if (autoRegister) {
-                ResourceManager::Instance().RegisterResource(this);
-            }
-        }
-        else {
-            SRHalt("Double set resource id!");
-        }
-    }
-
     void IResource::DeleteResource() {
         StopWatch();
         delete this;
     }
 
-    void IResource::SetId(const std::string &id, bool autoRegister) {
+    void IResource::SetId(SR_UTILS_NS::StringAtom id, bool autoRegister) {
         SRAssert2(!id.empty(), "Invalid id!");
 
-        if (m_resourceHashId == 0) {
+        if (m_resourceId.empty()) {
             auto&& resourcesManager = ResourceManager::Instance();
 
-            /// обязательно присваиваем до инициализации пути
-            m_resourceHashId = resourcesManager.RegisterResourceId(id);
+            m_resourceId = id;
 
             SRAssert(m_resourceHashPath == 0);
 
@@ -175,7 +159,7 @@ namespace SR_UTILS_NS {
         destination->m_resourceHashPath = m_resourceHashPath;
         destination->m_loadState.store(m_loadState);
 
-        destination->SetId(m_resourceHashId, true /** auto register */);
+        destination->SetId(m_resourceId, true /** auto register */);
 
         return destination;
     }
@@ -232,10 +216,6 @@ namespace SR_UTILS_NS {
 
     void IResource::SetResourceHash(uint64_t hash) {
         m_resourceHash = hash;
-    }
-
-    const std::string& IResource::GetResourceId() const {
-        return SR_UTILS_NS::ResourceManager::Instance().GetResourceId(m_resourceHashId);
     }
 
     const Path& IResource::GetResourcePath() const {

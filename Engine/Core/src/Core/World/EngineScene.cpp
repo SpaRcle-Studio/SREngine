@@ -69,7 +69,7 @@ namespace SR_CORE_NS {
         pScene->GetDataStorage().SetValue(pRenderScene);
         pScene->GetDataStorage().SetValue(pPhysicsScene);
 
-        pSceneBuilder = pScene->GetSceneBuilder();
+        pSceneUpdater = pScene->GetSceneUpdater();
 
         return true;
     }
@@ -100,8 +100,8 @@ namespace SR_CORE_NS {
 
             const bool isPaused = pEngine->IsPaused() || !pEngine->IsActive() || pEngine->HasSceneInQueue();
 
-            pSceneBuilder->Build(isPaused);
-            pSceneBuilder->Update(dt);
+            pSceneUpdater->Build(isPaused);
+            pSceneUpdater->Update(dt);
 
             UpdateFrequency();
 
@@ -124,7 +124,7 @@ namespace SR_CORE_NS {
 
                     pEngine->FixedUpdate();
 
-                    pSceneBuilder->FixedUpdate();
+                    pSceneUpdater->FixedUpdate();
 
                     m_accumulator -= m_updateFrequency;
                 }
@@ -178,11 +178,11 @@ namespace SR_CORE_NS {
     }
 
     void EngineScene::SetActive(bool active) {
-        pSceneBuilder->SetDirty();
+        pSceneUpdater->SetDirty();
     }
 
     void EngineScene::SetPaused(bool pause) {
-        pSceneBuilder->SetDirty();
+        pSceneUpdater->SetDirty();
     }
 
     void EngineScene::SetGameMode(bool gameMode) {

@@ -5,7 +5,7 @@
 #ifndef SRENGINE_ENGINESCENE_H
 #define SRENGINE_ENGINESCENE_H
 
-#include <Utils/World/SceneBuilder.h>
+#include <Utils/World/SceneUpdater.h>
 #include <Utils/World/Scene.h>
 
 #include <Graphics/Render/RenderScene.h>
@@ -49,7 +49,7 @@ namespace SR_CORE_NS {
         ScenePtr pScene;
         RenderScenePtr pRenderScene;
         PhysicsScenePtr pPhysicsScene;
-        SR_WORLD_NS::SceneBuilder* pSceneBuilder = nullptr;
+        SR_WORLD_NS::SceneUpdater* pSceneUpdater = nullptr;
         CameraPtr pMainCamera;
         Engine* pEngine = nullptr;
 

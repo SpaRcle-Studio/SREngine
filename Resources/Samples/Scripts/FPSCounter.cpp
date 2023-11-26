@@ -18,7 +18,7 @@ public:
 		if (!pText) {
 			return;
 		}
-		
+
 		auto&& pWindow = Engine::Instance().GetWindow();
         if (pWindow) {
             pText->SetText(std::to_string(pWindow->GetFramesPerSecond()));

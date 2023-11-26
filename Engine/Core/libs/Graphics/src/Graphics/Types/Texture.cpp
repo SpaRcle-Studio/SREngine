@@ -84,7 +84,7 @@ namespace SR_GTYPES_NS {
                 pTexture->SetConfig(Memory::TextureConfig());
             }
 
-            pTexture->SetId(path, false /** auto register */);
+            pTexture->SetId(path.ToStringRef(), false /** auto register */);
 
             if (!pTexture->Load()) {
                 SR_ERROR("Texture::Load() : failed to load texture! \n\tPath: " + path.ToString());

@@ -92,5 +92,9 @@ namespace SR_UTILS_NS {
 
     SR_NODISCARD std::string_view StringAtom::ToStringView() const {
         return m_info ? m_info->data : DEFAULT;
+    }
+
+    StringAtom::operator std::string_view() const noexcept {
+        return m_info ? m_info->data : DEFAULT;
     };
 }

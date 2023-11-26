@@ -28,7 +28,7 @@ namespace SR_UTILS_NS {
 
                 if (pResource->IsAllowedToRevive()) {
                     if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::Medium) {
-                        SR_LOG("ResourceType::Find() : revive resource \"" + pResource->GetResourceId() + "\"");
+                        SR_LOG("ResourceType::Find() : revive resource \"" + pResource->GetResourceId().ToStringRef() + "\"");
                     }
                     pResource->ReviveResource();
                     return false;
@@ -56,7 +56,7 @@ namespace SR_UTILS_NS {
     }
 
     void ResourceType::Remove(IResource *pResource) {
-        const auto id = pResource->GetResourceHashId();
+        const auto id = pResource->GetResourceId();
         auto&& hashPath = pResource->GetResourceHashPath();
 
         /// -------------------------------------------------------------
@@ -94,7 +94,7 @@ namespace SR_UTILS_NS {
             return;
         }
 
-        m_copies[pResource->GetResourceHashId()].insert(pResource);
+        m_copies[pResource->GetResourceId()].insert(pResource);
         m_resources.insert(pResource);
 
         pResource->OnResourceRegistered();

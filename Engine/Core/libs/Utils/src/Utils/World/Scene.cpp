@@ -10,7 +10,7 @@
 #include <Utils/World/SceneLogic.h>
 #include <Utils/World/SceneCubeChunkLogic.h>
 #include <Utils/World/SceneDefaultLogic.h>
-#include <Utils/World/SceneBuilder.h>
+#include <Utils/World/SceneUpdater.h>
 #include <Utils/World/ScenePrefabLogic.h>
 
 #include <Utils/Types/RawMesh.h>
@@ -23,7 +23,7 @@
 namespace SR_WORLD_NS {
     Scene::Scene()
         : Super(this)
-        , m_sceneBuilder(new SR_WORLD_NS::SceneBuilder(this))
+        , m_sceneUpdater(new SR_WORLD_NS::SceneUpdater(this))
     { }
 
     Scene::~Scene() {
@@ -38,7 +38,7 @@ namespace SR_WORLD_NS {
         SRAssert(m_destroyedComponents.empty());
         SRAssert(m_freeObjIndices.size() == m_gameObjects.size());
 
-        SR_SAFE_DELETE_PTR(m_sceneBuilder);
+        SR_SAFE_DELETE_PTR(m_sceneUpdater);
     }
 
     GameObject::Ptr Scene::Instance(const std::string& name) {
@@ -430,5 +430,10 @@ namespace SR_WORLD_NS {
         }
 
         return SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat(path);
+    }
+
+    bool Scene::SetDirty(bool dirty) {
+        m_sceneUpdater->SetDirty();
+        return IComponentable::SetDirty(dirty);
     }
 }

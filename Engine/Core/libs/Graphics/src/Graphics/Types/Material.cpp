@@ -79,7 +79,7 @@ namespace SR_GTYPES_NS {
 
             pMaterial = new Material();
 
-            pMaterial->SetId(path, false);
+            pMaterial->SetId(path.ToStringRef(), false);
 
             if (!pMaterial->Reload()) {
                 delete pMaterial;

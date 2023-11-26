@@ -219,13 +219,7 @@ namespace SR_UTILS_NS {
     }
 
     bool GameObject::IsActive() const noexcept {
-        if (m_parent.RecursiveLockIfValid()) {
-            const bool parentActive = m_parent->m_isActive;
-            m_parent.Unlock();
-            return IsEnabled() && parentActive;
-        }
-
-        return IsEnabled();
+        return m_isActive;
     }
 
     void GameObject::CheckActivity(bool force) noexcept {
@@ -264,9 +258,7 @@ namespace SR_UTILS_NS {
     }
 
     void GameObject::Start(bool force) noexcept {
-        /// Проверяем на IsEnabled а не на IsActive,
-        /// так как если родитель не активен, то метод не вызвался бы.
-        if ((!force && !IsDirty()) || !IsEnabled()) {
+        if (!force && !IsDirty()) {
             return;
         }
 
@@ -426,9 +418,7 @@ namespace SR_UTILS_NS {
             SR_WARN("GameObject::SetTransform() : invalid transform!");
         }
         else {
-            if (m_transform) {
-                delete m_transform;
-            }
+            SR_SAFE_DELETE_PTR(m_transform);
             m_transform = pTransform;
             m_transform->SetGameObject(this);
             SetDirty(true);
@@ -486,10 +476,12 @@ namespace SR_UTILS_NS {
 
     bool GameObject::SetDirty(bool dirty) {
         if (IsDirty() == dirty) {
-            return IComponentable::SetDirty(dirty);
+            return dirty;
         }
 
-        const bool isDirty = IComponentable::SetDirty(dirty);
+        if (IComponentable::SetDirty(dirty) && !dirty) {
+            return true; /// несмогли очистить флаг, объект еще грязный
+        }
 
         /// Грязный флаг передаем вверх, а чистый вниз.
         /// Это нужно для оптимизации
@@ -497,22 +489,22 @@ namespace SR_UTILS_NS {
             if (m_parent) {
                 m_parent->SetDirty(dirty);
             }
-
-            return isDirty;
-        }
-        else {
-            bool hasDirtyChild = false;
-
-            for (auto&& children : m_children) {
-                hasDirtyChild |= children->SetDirty(dirty);
+            else if (m_scene) {
+                /// дошли до верха иерархии, сообщаем о необходимости обновления дерева сцены
+                m_scene->GetSceneUpdater()->SetDirty();
             }
 
-            if (hasDirtyChild) {
-                return isDirty || IComponentable::SetDirty(true);
-            }
-
-            return isDirty;
+            return true;
         }
+
+        for (auto&& children : m_children) {
+            if (children->SetDirty(dirty)) {
+                IComponentable::SetDirty(true);
+                return true; /// несмогли очистить флаг, объект еще грязный
+            }
+        }
+
+        return false;
     }
 
     GameObject::Ptr GameObject::Load(SR_HTYPES_NS::Marshal& marshal, const ScenePtr& scene) {

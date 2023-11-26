@@ -17,7 +17,7 @@ namespace SR_GRAPH_NS {
 
         auto&& pRenderTechnique = new RenderTechnique();
 
-        pRenderTechnique->SetId(path, false /** auto register */);
+        pRenderTechnique->SetId(path.ToStringRef(), false /** auto register */);
 
         if (!pRenderTechnique->Reload()) {
             SR_ERROR("RenderTechnique::Load() : failed to load render technique!\n\tPath: " + path.ToString());

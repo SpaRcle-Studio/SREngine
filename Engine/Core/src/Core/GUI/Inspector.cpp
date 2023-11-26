@@ -64,6 +64,11 @@ namespace SR_CORE_GUI_NS {
                 pEngine->GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
             }
 
+            if (m_gameObject->IsDirty()) {
+                ImGui::SameLine();
+                ImGui::TextColored(ImVec4(1, 1, 0, 1), "(Is dirty)");
+            }
+
             /// --------------------------------------------------------------------------------------------------------
 
             std::string gm_name = m_gameObject->GetName();
@@ -178,22 +183,9 @@ namespace SR_CORE_GUI_NS {
         ImGui::PopItemWidth();
 
         uint32_t index = 0;
-        pIComponentable->ForEachComponent([&](SR_UTILS_NS::Component* component) -> bool {
-            SR_UTILS_NS::Component* copyPtrComponent = component;
 
-            SRAssert1Once(copyPtrComponent->GetParent());
-
-            copyPtrComponent = DrawComponent(copyPtrComponent, index);
-
-            if (copyPtrComponent != component && copyPtrComponent) {
-                SR_LOG("Inspector::DrawComponents() : component \"" + component->GetComponentName() + "\" has been replaced.");
-
-                pIComponentable->RemoveComponent(component);
-                pIComponentable->AddComponent(copyPtrComponent);
-
-                return false;
-            }
-
+        pIComponentable->ForEachComponent([&](SR_UTILS_NS::Component* pComponent) -> bool {
+            DrawComponent(pComponent, index);
             return true;
         });
     }
@@ -329,11 +321,11 @@ namespace SR_CORE_GUI_NS {
         SR_CORE_GUI_NS::DrawPropertyContainer(context, &properties);
     }
 
-    SR_UTILS_NS::Component* Inspector::DrawComponent(SR_UTILS_NS::Component* pComponent, uint32_t &index) {
+    void Inspector::DrawComponent(SR_UTILS_NS::Component* pComponent, uint32_t &index) {
         auto&& pContext = dynamic_cast<EditorGUI*>(GetManager());
 
         if (!pComponent || !pContext) {
-            return pComponent;
+            return;
         }
 
         SRAssert1Once(pComponent->Valid());
@@ -347,6 +339,11 @@ namespace SR_CORE_GUI_NS {
             }
 
             ImGui::SameLine();
+
+            if (!pComponent->IsAttached()) {
+                ImGui::TextColored(ImVec4(1, 1, 0, 1), "(Loaded)");
+                ImGui::SameLine();
+            }
 
             if (ImGui::CollapsingHeader(SR_FORMAT("[{}] {}", index, pComponent->GetComponentName().c_str()).c_str())) {
                 SR_CORE_GUI_NS::DrawPropertyContext context;
@@ -372,7 +369,6 @@ namespace SR_CORE_GUI_NS {
                 if (ImGui::BeginMenu("Remove component")) {
                     if (ImGui::MenuItem(pComponent->GetComponentName().c_str())) {
                         pComponent->GetParent()->RemoveComponent(pComponent);
-                        pComponent = nullptr;
                     }
                     ImGui::EndMenu();
                 }
@@ -380,7 +376,5 @@ namespace SR_CORE_GUI_NS {
             }
         }
         ImGui::EndChild();
-
-        return dynamic_cast<SR_UTILS_NS::Component*>(pComponent);
     }
 }

@@ -58,7 +58,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD Tag GetTag() const;
         SR_NODISCARD std::string GetTagString() const;
         SR_NODISCARD bool HasTag() const;
-        SR_NODISCARD bool IsActive() const noexcept;
+        SR_NODISCARD bool IsActive() const noexcept override;
         SR_NODISCARD SR_FORCE_INLINE bool IsEnabled() const noexcept { return m_isEnabled; }
         SR_NODISCARD SR_FORCE_INLINE uint64_t GetHashName() const noexcept { return m_hashName; }
         SR_NODISCARD SR_FORCE_INLINE uint64_t GetIdInScene() const noexcept { return m_idInScene; }

@@ -28,7 +28,7 @@ namespace SR_UTILS_NS {
 
             pResource = new Prefab();
 
-            pResource->SetId(path, false /** auto register */);
+            pResource->SetId(path.ToStringRef(), false /** auto register */);
 
             if (!pResource->Reload()) {
                 SR_ERROR("RawMesh::Load() : failed to load prefab! \n\tPath: " + path.ToString());

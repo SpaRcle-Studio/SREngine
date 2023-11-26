@@ -116,7 +116,7 @@ namespace SR_GRAPH_NS::Types {
 
     void Shader::FreeVideoMemory() {
         if (m_isCalculated) {
-            SR_SHADER("Shader::FreeVideoMemory() : free \"" + GetResourceId() + "\" video memory...");
+            SR_SHADER("Shader::FreeVideoMemory() : free \"" + GetResourceId().ToStringRef() + "\" video memory...");
 
             if (!Memory::ShaderProgramManager::Instance().FreeProgram(&m_shaderProgram)) {
                 SR_ERROR("Shader::Free() : failed to free shader program! \n\tPath: " + GetResourcePath().ToString());

@@ -38,7 +38,7 @@ namespace SR_AUDIO_NS {
         auto&& pSound = new Sound();
 
         pSound->SetRawSound(pRawSound);
-        pSound->SetId(path, false);
+        pSound->SetId(path.ToStringRef(), false);
 
         if (!pSound->Reload()) {
             SR_ERROR("Sound::Load() : failed to reload sound!");

@@ -10,7 +10,7 @@
 
 #include <Utils/Events/EventManager.h>
 #include <Utils/World/Scene.h>
-#include <Utils/World/SceneBuilder.h>
+#include <Utils/World/SceneUpdater.h>
 #include <Utils/Common/Features.h>
 #include <Utils/ECS/ComponentManager.h>
 
@@ -619,8 +619,8 @@ namespace SR_CORE_NS {
         return m_engineScene ? m_engineScene->pScene : ScenePtr();
     }
 
-    SR_WORLD_NS::SceneBuilder* Engine::GetSceneBuilder() const {
-        return m_engineScene ? m_engineScene->pSceneBuilder : nullptr;
+    SR_WORLD_NS::SceneUpdater* Engine::GetSceneBuilder() const {
+        return m_engineScene ? m_engineScene->pSceneUpdater : nullptr;
     }
 
     Engine::RenderScenePtr Engine::GetRenderScene() const {

@@ -74,7 +74,7 @@ namespace SR_CORE_NS {
         SR_NODISCARD SR_INLINE RenderContextPtr GetRenderContext() const { return m_renderContext; }
         SR_NODISCARD SR_INLINE RenderScenePtr GetRenderScene() const;
         SR_NODISCARD SR_INLINE WindowPtr GetWindow() const { return m_window; }
-        SR_NODISCARD SR_INLINE SR_WORLD_NS::SceneBuilder* GetSceneBuilder() const;
+        SR_NODISCARD SR_INLINE SR_WORLD_NS::SceneUpdater* GetSceneBuilder() const;
         SR_NODISCARD SR_INLINE bool IsActive() const { return m_isActive; }
         SR_NODISCARD SR_INLINE bool IsRun() const { return m_isRun; }
         SR_NODISCARD SR_INLINE bool IsPaused() const { return m_isPaused; }

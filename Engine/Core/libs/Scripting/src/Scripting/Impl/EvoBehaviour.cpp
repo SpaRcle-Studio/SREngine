@@ -38,30 +38,19 @@ namespace SR_SCRIPTING_NS {
             return false;
         }
 
-        SetGameObject();
-
         if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::High) {
             SR_LOG("EvoBehaviour::Load() : behaviour successfully initialized!");
         }
 
-        return Behaviour::Load() && Behaviour::PostLoad();
+        return IRawBehaviour::Load();
     }
 
     bool EvoBehaviour::Unload() {
         SR_EVO_SCRIPT_MANAGER_LOCK_CONTEXT
 
-        bool hasErrors = !Behaviour::Unload();
+        bool hasErrors = !IRawBehaviour::Unload();
 
         DestroyScript();
-
-        /// чтобы скрипт занаво отработал логику после перезагрузки,
-        /// делаем такой маневр
-        m_isStarted = false;
-        m_isAwake = false;
-
-        if (auto&& pParent = GetParent()) {
-            pParent->SetDirty(true);
-        }
 
         return !hasErrors;
     }
@@ -191,84 +180,59 @@ namespace SR_SCRIPTING_NS {
 
     void EvoBehaviour::Awake() {
         CallFunction(m_awake, false);
-        Behaviour::Awake();
     }
 
     void EvoBehaviour::OnEnable() {
         CallFunction(m_onEnable, false);
-        Behaviour::OnEnable();
     }
 
     void EvoBehaviour::OnDisable() {
         CallFunction(m_onDisable, false);
-        Behaviour::OnDisable();
     }
 
     void EvoBehaviour::Start() {
         CallFunction(m_start, false);
-        Behaviour::Start();
     }
 
     void EvoBehaviour::Update(float_t dt) {
         CallFunction(m_update, false, dt);
-        Behaviour::Update(dt);
     }
 
     void EvoBehaviour::OnAttached() {
         SR_HTYPES_NS::Function<void()> fn = [this]() { SetGameObject(); };
         CallFunction(fn, false);
-        Behaviour::OnAttached();
     }
 
     void EvoBehaviour::FixedUpdate() {
         CallFunction(m_fixedUpdate, false);
-        Behaviour::FixedUpdate();
     }
 
     void EvoBehaviour::OnCollisionEnter(const SR_UTILS_NS::CollisionData& data) {
         CallFunction(m_collisionEnter, false, data);
-        Behaviour::OnCollisionEnter(data);
     }
 
     void EvoBehaviour::OnCollisionStay(const SR_UTILS_NS::CollisionData& data) {
         CallFunction(m_collisionStay, false, data);
-        Behaviour::OnCollisionStay(data);
     }
 
     void EvoBehaviour::OnCollisionExit(const SR_UTILS_NS::CollisionData& data) {
         CallFunction(m_collisionExit, false, data);
-        Behaviour::OnCollisionExit(data);
     }
 
     void EvoBehaviour::OnTriggerEnter(const SR_UTILS_NS::CollisionData& data) {
         CallFunction(m_triggerEnter, false, data);
-        Behaviour::OnTriggerEnter(data);
     }
 
     void EvoBehaviour::OnTriggerStay(const SR_UTILS_NS::CollisionData& data) {
         CallFunction(m_triggerStay, false, data);
-        Behaviour::OnTriggerStay(data);
     }
 
     void EvoBehaviour::OnTriggerExit(const SR_UTILS_NS::CollisionData& data) {
         CallFunction(m_triggerExit, false, data);
-        Behaviour::OnTriggerExit(data);
-    }
-
-    void EvoBehaviour::OnTransformSet() {
-        SR_HTYPES_NS::Function<void()> fn = [this]() { SetGameObject(); };
-        CallFunction(fn, false);
-        Component::OnTransformSet();
-    }
-
-    void EvoBehaviour::OnDestroy() {
-        SR_HTYPES_NS::Function<void()> fn = [this]() { DestroyScript(); };
-        CallFunction(fn, false);
-        Behaviour::OnDestroy();
     }
 
     void EvoBehaviour::SetGameObject() {
-        if (!m_script || !GetParent()) {
+        if (!m_component || !m_script || !m_component->GetParent()) {
             return;
         }
 
@@ -277,12 +241,12 @@ namespace SR_SCRIPTING_NS {
         typedef void(*SetGameObjectFnPtr)(SR_UTILS_NS::GameObject::Ptr);
         typedef void(*SetSceneFnPtr)(SR_WORLD_NS::Scene::Ptr);
 
-        if (auto&& gameObject = GetGameObject()) {
+        if (auto&& gameObject = m_component->GetGameObject()) {
             if (auto&& setter = GetFunction<SetGameObjectFnPtr>("SetGameObject")) {
                 setter(gameObject);
             }
         }
-        else if (auto&& pScene = GetScene()) {
+        else if (auto&& pScene = m_component->GetScene()) {
             if (auto&& setter = GetFunction<SetSceneFnPtr>("SetScene")) {
                 setter(pScene->GetThis());
             }
@@ -307,5 +271,19 @@ namespace SR_SCRIPTING_NS {
         if (m_switchContext) {
             m_switchContext(m_behaviourContext);
         }
+    }
+
+    void EvoBehaviour::OnTransformSet() {
+        SR_HTYPES_NS::Function<void()> fn = [this]() { SetGameObject(); };
+        CallFunction(fn, false);
+    }
+
+    void EvoBehaviour::OnDestroy() {
+        SR_HTYPES_NS::Function<void()> fn = [this]() { DestroyScript(); };
+        CallFunction(fn, false);
+    }
+
+    void EvoBehaviour::OnDetached() {
+
     }
 }

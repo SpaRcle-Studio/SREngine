@@ -71,9 +71,7 @@ namespace SR_CORE_NS::GUI {
                 auto &&path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(scriptsPath, { { "Source file", "cpp" } });
 
                 if (path.Exists()) {
-                    if (auto &&newBehaviour = Scripting::Behaviour::Load(path)) {
-                        pBehaviour = newBehaviour;
-                    }
+                    pBehaviour->SetRawBehaviour(path);
                 }
                 else if (!path.Empty()) {
                     SR_WARN("ComponentDrawer::DrawComponent() : behaviour is not found!\n\tPath: " + path.ToString());
@@ -91,15 +89,16 @@ namespace SR_CORE_NS::GUI {
                 }
             }
 
-            Graphics::GUI::DrawValue("Script", pBehaviour->GetResourceId());
+            Graphics::GUI::DrawValue("Script", pBehaviour->GetRawBehaviour() ? pBehaviour->GetRawBehaviour()->GetResourcePath().ToStringRef() : "");
         }
         ImGui::EndGroup();
 
-        if (pBehaviour->IsEmpty()) {
+        auto&& pRawBehaviour = pBehaviour->GetRawBehaviour();
+        if (!pRawBehaviour) {
             return;
         }
 
-        auto&& properties = pBehaviour->GetProperties();
+        auto&& properties = pRawBehaviour->GetProperties();
 
         if (!properties.empty()) {
             ImGui::Separator();
@@ -107,27 +106,27 @@ namespace SR_CORE_NS::GUI {
         }
 
         for (auto&& property : properties) {
-            std::any&& value = pBehaviour->GetProperty(property);
+            std::any&& value = pRawBehaviour->GetProperty(property);
 
             auto&& visitor = SR_UTILS_NS::Overloaded {
                 [&](int value) {
                     if (ImGui::InputInt(SR_FORMAT_C("{}##BehProp{}", property.c_str(), index), &value)) {
-                        pBehaviour->SetProperty(property, value);
+                        pRawBehaviour->SetProperty(property, value);
                     }
                 },
                 [&](bool value) {
                     if (ImGui::Checkbox(SR_FORMAT_C("{}##BehProp{}", property.c_str(), index), &value)) {
-                        pBehaviour->SetProperty(property, value);
+                        pRawBehaviour->SetProperty(property, value);
                     }
                 },
                 [&](float value) {
                     if (ImGui::DragFloat(SR_FORMAT_C("{}##BehProp{}", property.c_str(), index), &value, 0.01f)) {
-                        pBehaviour->SetProperty(property, value);
+                        pRawBehaviour->SetProperty(property, value);
                     }
                 },
                 [&](double value) {
                     if (ImGui::InputDouble(SR_FORMAT_C("{}##BehProp{}", property.c_str(), index), &value)) {
-                        pBehaviour->SetProperty(property, value);
+                        pRawBehaviour->SetProperty(property, value);
                     }
                 },
                 [&](auto&&) {

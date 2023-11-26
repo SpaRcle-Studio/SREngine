@@ -44,7 +44,7 @@ namespace SR_UTILS_NS {
 
     class SR_DLL_EXPORT ResourceType : public NonCopyable {
         friend class ResourceManager;
-        using ResourceId = uint64_t;
+        using ResourceId = SR_UTILS_NS::StringAtom;
         using ResourcePath = uint64_t;
         using CopiesMap = std::unordered_map<ResourceId, std::unordered_set<IResource*>>;
         using Info = std::unordered_map<ResourcePath, ResourceInfo::HardPtr>;

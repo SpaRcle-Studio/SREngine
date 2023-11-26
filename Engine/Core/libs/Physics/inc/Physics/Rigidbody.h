@@ -146,6 +146,7 @@ namespace SR_PTYPES_NS {
         bool UpdateShapeInternal();
 
         void Update(float_t dt) override;
+        void Start() override;
         void OnEnable() override;
         void OnDisable() override;
         void OnAttached() override;

@@ -25,7 +25,7 @@ namespace SR_HTYPES_NS {
 
 namespace SR_WORLD_NS {
     class SceneLogic;
-    class SceneBuilder;
+    class SceneUpdater;
 
     class SR_DLL_EXPORT Scene : public SR_HTYPES_NS::SafePtr<Scene>, public SR_UTILS_NS::IComponentable {
     public:
@@ -56,6 +56,7 @@ namespace SR_WORLD_NS {
         bool Save();
         bool SaveAt(const Path& path);
         bool Destroy();
+        bool SetDirty(bool dirty) override;
 
     public:
         SR_NODISCARD std::string GetName() const;
@@ -64,7 +65,7 @@ namespace SR_WORLD_NS {
         SR_NODISCARD bool IsPrefab() const;
         SR_NODISCARD SR_HTYPES_NS::DataStorage& GetDataStorage() { return m_dataStorage; }
         SR_NODISCARD const SR_HTYPES_NS::DataStorage& GetDataStorage() const { return m_dataStorage; }
-        SR_NODISCARD SR_INLINE SceneBuilder* GetSceneBuilder() const { return m_sceneBuilder; }
+        SR_NODISCARD SR_INLINE SceneUpdater* GetSceneUpdater() const { return m_sceneUpdater; }
         SR_NODISCARD SR_INLINE SceneLogicPtr GetLogicBase() const { return m_logic; }
 
         /// Запущена ли сцена
@@ -98,7 +99,7 @@ namespace SR_WORLD_NS {
 
     private:
         SceneLogicPtr m_logic;
-        SceneBuilder* m_sceneBuilder = nullptr;
+        SceneUpdater* m_sceneUpdater = nullptr;
 
         bool m_isPreDestroyed = false;
         bool m_isDestroyed = false;

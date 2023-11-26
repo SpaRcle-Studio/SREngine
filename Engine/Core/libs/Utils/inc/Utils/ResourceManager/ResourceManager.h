@@ -30,7 +30,6 @@ namespace SR_UTILS_NS {
         SR_NODISCARD std::string_view GetTypeName(Hash hashName) const;
 
         SR_NODISCARD const std::string& GetResourceId(Hash hashId) const;
-        SR_NODISCARD Hash RegisterResourceId(const std::string& resourceId);
 
         SR_NODISCARD const Path& GetResourcePath(Hash hashPath) const;
         SR_NODISCARD Hash RegisterResourcePath(const Path& path);

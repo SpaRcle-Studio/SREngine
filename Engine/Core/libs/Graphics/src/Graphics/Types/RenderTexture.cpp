@@ -31,7 +31,7 @@ namespace SR_GTYPES_NS {
 
         auto&& pRenderTexture = new RenderTexture();
 
-        pRenderTexture->SetId(path, false /** auto register */);
+        pRenderTexture->SetId(path.ToStringRef(), false /** auto register */);
 
         if (!pRenderTexture->Reload()) {
             SR_ERROR("RenderTexture::Load() : failed to load render texture!\n\tPath: " + path.ToString());
