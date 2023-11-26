@@ -95,15 +95,17 @@ namespace SR_GTYPES_NS {
     }
 
     SR_HTYPES_NS::Marshal::Ptr SR_GTYPES_NS::Mesh3D::Save(SR_UTILS_NS::SavableSaveData data) const {
-        auto&& pMarshal = MeshComponent::Save(data);
+        if (auto&& pMarshal = MeshComponent::Save(data)) {
 
-        /// TODO: use unicode
-        pMarshal->Write<std::string>(GetMeshStringPath());
-        pMarshal->Write<int32_t>(static_cast<int32_t>(GetMeshId()));
+            /// TODO: use unicode
+            pMarshal->Write<std::string>(GetMeshStringPath());
+            pMarshal->Write<int32_t>(static_cast<int32_t>(GetMeshId()));
 
-        pMarshal->Write<std::string>(m_material ? m_material->GetResourceId() : "None");
+            pMarshal->Write<std::string>(m_material ? m_material->GetResourceId() : "None");
 
-        return pMarshal;
+            return pMarshal;
+        }
+        return nullptr;
     }
 
     SR_UTILS_NS::Component* SR_GTYPES_NS::Mesh3D::LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage *dataStorage) {

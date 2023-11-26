@@ -239,7 +239,7 @@ namespace SR_CORE_NS::GUI {
         /// сцена может быть уже заблокирована до Engine::SetScene
         if (SR_UTILS_NS::Features::Instance().Enabled("EditorCamera", true) && m_scene.RecursiveLockIfValid()) {
             camera = m_scene->Instance("Editor camera");
-            camera->SetFlags(SR_UTILS_NS::GAMEOBJECT_FLAG_NO_SAVE);
+            camera->SetDontSave(true);
             m_isPrefab = m_scene->IsPrefab();
             m_scene.Unlock();
         }
@@ -313,27 +313,12 @@ namespace SR_CORE_NS::GUI {
         }
 
         auto&& pRenderTechnique = pCamera->GetRenderTechnique();
-        if (!pRenderTechnique) {
-            return Super::OnMouseUp(data);
-        }
-
-        bool isObjectFound = false;
-
-        if (auto&& pFlatColorPass = dynamic_cast<SR_GRAPH_NS::FlatColorBufferPass*>(pRenderTechnique->FindPass("FlatColorBufferPass"))) {
-            if (auto&& pMesh = dynamic_cast<SR_GTYPES_NS::MeshComponent*>(pFlatColorPass->GetMesh(x, y))) {
-                m_hierarchy->SelectGameObject(pMesh->GetRoot());
-                isObjectFound = true;
+        if (pRenderTechnique && IsHovered()) {
+            static std::vector<SR_UTILS_NS::StringAtom> filter = { "FlatColorBufferPass", "ColorBufferPass" };
+            if (auto&& pMesh = dynamic_cast<SR_GTYPES_NS::MeshComponent*>(pRenderTechnique->PickMeshAt(x, y, filter))) {
+                SelectMesh(pMesh);
             }
-            else if (IsHovered()) { ///список выделенных объектов не должен очищаться, если клик не прожат по самой сцене, вероятно стоит сам клик обрабатывать с этим условием
-                m_hierarchy->ClearSelected();
-            }
-        }
-
-        if (auto&& pColorPass = dynamic_cast<SR_GRAPH_NS::ColorBufferPass*>(pRenderTechnique->FindPass("ColorBufferPass")); !isObjectFound && pColorPass) {
-            if (auto&& pMesh = dynamic_cast<SR_GTYPES_NS::MeshComponent*>(pColorPass->GetMesh(x, y))) {
-                m_hierarchy->SelectGameObject(pMesh->GetRoot());
-            }
-            else if (IsHovered()) { ///список выделенных объектов не должен очищаться, если клик не прожат по самой сцене, вероятно стоит сам клик обрабатывать с этим условием
+            else {
                 m_hierarchy->ClearSelected();
             }
         }
@@ -403,5 +388,26 @@ namespace SR_CORE_NS::GUI {
         }
 
         return false;
+    }
+
+    void SceneViewer::SelectMesh(SR_GTYPES_NS::MeshComponent* pMesh) {
+        if (m_hierarchy->GetSelected().size() != 1) {
+            m_hierarchy->SelectGameObject(pMesh->GetRoot());
+            return;
+        }
+
+        SR_UTILS_NS::GameObject::Ptr pGameObject = *m_hierarchy->GetSelected().begin();
+
+        if (pGameObject == pMesh->GetRoot()) {
+            m_hierarchy->SelectGameObject(pMesh->GetGameObject());
+            return;
+        }
+
+        if (pGameObject == pMesh->GetGameObject()) {
+            m_hierarchy->SelectGameObject(pMesh->GetRoot());
+            return;
+        }
+
+        m_hierarchy->SelectGameObject(pMesh->GetRoot());
     }
 }

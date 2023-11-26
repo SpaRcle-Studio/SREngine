@@ -17,7 +17,9 @@ namespace SR_UTILS_NS {
     }
 
     SR_HTYPES_NS::Marshal::Ptr Component::Save(SavableSaveData data) const {
-        data.pMarshal = Entity::Save(data);
+        if (!(data.pMarshal = Entity::Save(data))) {
+            return data.pMarshal;
+        }
 
         data.pMarshal->Write<uint64_t>(GetComponentHashName());
         data.pMarshal->Write(IsEnabled());
@@ -156,6 +158,12 @@ namespace SR_UTILS_NS {
         }
 
         return false;
+    }
+
+    void Component::Detach() {
+        if (m_parent && IsAttached()) {
+            m_parent->RemoveComponent(this);
+        }
     }
 }
 

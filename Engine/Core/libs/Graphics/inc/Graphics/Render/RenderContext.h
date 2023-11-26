@@ -88,6 +88,7 @@ namespace SR_GRAPH_NS {
         void Register(SkyboxPtr pSkybox);
 
         SR_NODISCARD bool IsEmpty() const;
+        SR_NODISCARD bool IsDirty() const;
         SR_NODISCARD PipelinePtr GetPipeline() const;
         SR_NODISCARD WindowPtr GetWindow() const;
         SR_NODISCARD PipelineType GetPipelineType() const;

@@ -27,6 +27,7 @@ namespace SR_GRAPH_NS {
 
     public:
         SR_NODISCARD FramebufferPtr GetFramebuffer() const noexcept { return m_framebuffer; }
+        SR_NODISCARD bool IsFrameBufferRendered() const noexcept { return m_isFrameBufferRendered; }
 
     protected:
         void LoadFramebufferSettings(const SR_XML_NS::Node& settingsNode);
@@ -36,6 +37,7 @@ namespace SR_GRAPH_NS {
         void ResizeFrameBuffer(const SR_MATH_NS::UVector2 &size);
 
     protected:
+        bool m_isFrameBufferRendered = false;
         bool m_dynamicResizing = false;
         bool m_depthEnabled = true;
 

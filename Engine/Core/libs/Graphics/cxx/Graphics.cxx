@@ -41,9 +41,9 @@
 #include "../../Graphics/src/Graphics/Font/Glyph.cpp"
 #include "../../Graphics/src/Graphics/Font/FreeType.cpp"
 
-#include "../../Graphics/src/Graphics/Types/Geometry/Sprite.cpp"
 #include "../../Graphics/src/Graphics/UI/Canvas.cpp"
 #include "../../Graphics/src/Graphics/UI/Anchor.cpp"
+#include "../../Graphics/src/Graphics/UI/Gizmo.cpp"
 
 #include "../../Graphics/src/Graphics/Render/ScriptableRenderTechnique.cpp"
 #include "../../Graphics/src/Graphics/Render/IRenderTechnique.cpp"
@@ -63,6 +63,7 @@
 #include "../../Graphics/src/Graphics/Types/Geometry/Mesh3D.cpp"
 #include "../../Graphics/src/Graphics/Types/Geometry/MeshComponent.cpp"
 #include "../../Graphics/src/Graphics/Types/Geometry/SkinnedMesh.cpp"
+#include "../../Graphics/src/Graphics/Types/Geometry/Sprite.cpp"
 
 #include "../../Graphics/src/Graphics/Types/IRenderComponent.cpp"
 #include "../../Graphics/src/Graphics/Types/EditorGrid.cpp"

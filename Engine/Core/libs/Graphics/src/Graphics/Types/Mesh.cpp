@@ -41,6 +41,7 @@ namespace SR_GRAPH_NS::Types {
             exists = id < pRawMesh->GetMeshesCount();
         }
         else {
+            pRawMesh->CheckResourceUsage();
             return nullptr;
         }
 
@@ -67,7 +68,7 @@ namespace SR_GRAPH_NS::Types {
 
         uint32_t id = 0;
         while (auto&& pRawMesh = SR_HTYPES_NS::RawMesh::Load(path)) {
-            if (auto&& pMesh = TryLoad(pRawMesh, type, id)){
+            if (auto&& pMesh = TryLoad(pRawMesh, type, id)) {
                 meshes.emplace_back(pMesh);
                 ++id;
             }
@@ -233,6 +234,13 @@ namespace SR_GRAPH_NS::Types {
         }
 
         return pMesh;
+    }
+
+    Mesh::Ptr Mesh::Load(const SR_UTILS_NS::Path& path, MeshType type, SR_UTILS_NS::StringAtom name) {
+        if (auto&& pRawMesh = SR_HTYPES_NS::RawMesh::Load(path)) {
+            return Load(path, type, pRawMesh->GetMeshId(name));
+        }
+        return nullptr;
     }
 }
 

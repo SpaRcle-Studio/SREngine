@@ -43,7 +43,6 @@ namespace SR_SRSL_NS {
     SR_INLINE_STATIC const std::map<std::string, std::string> SR_SRSL_DEFAULT_PUSH_CONSTANTS = { /** NOLINT */
             { "SHADOW_CASCADE_INDEX",           "int"           },
             { "COLOR_BUFFER_MODE",              "int"           },
-            { "COLOR_BUFFER_VALUE",             "vec3"          },
     };
 
     SR_INLINE_STATIC const std::map<std::string, std::string> SR_SRSL_DEFAULT_UNIFORMS = { /** NOLINT */
@@ -71,6 +70,7 @@ namespace SR_SRSL_NS {
             { "SLICED_TEXTURE_BORDER",          "vec2"          },
             { "SLICED_WINDOW_BORDER",           "vec2"          },
 
+            { "COLOR_BUFFER_VALUE",             "vec3"          },
             { "DIRECTIONAL_LIGHT_POSITION",     "vec3"          },
             { "VIEW_POSITION",                  "vec3"          },
             { "VIEW_DIRECTION",                 "vec3"          },

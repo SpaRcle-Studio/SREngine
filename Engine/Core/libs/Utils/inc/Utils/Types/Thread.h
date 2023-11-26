@@ -117,7 +117,11 @@ namespace SR_HTYPES_NS {
 
         bool Execute(const SR_HTYPES_NS::Function<bool()>& function) const;
 
-        void Join() { m_thread.join(); }
+        void Join() {
+            SR_LOG("Thead::Join() : join thread \"{}\" with id \"{}\"...", m_name, m_id);
+            m_thread.join();
+        }
+
         bool TryJoin();
 
         void Free();

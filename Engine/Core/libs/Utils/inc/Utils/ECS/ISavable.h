@@ -38,13 +38,24 @@ namespace SR_UTILS_NS {
         virtual ~ISavable() = default;
 
     public:
+        void SetDontSave(bool value) { m_dontSave = value; }
+
+        SR_NODISCARD bool IsDontSave() const noexcept { return m_dontSave; }
+
         SR_NODISCARD virtual SR_HTYPES_NS::Marshal::Ptr Save(SavableSaveData data) const {
+            if (IsDontSave()) {
+                return nullptr;
+            }
+
             if (data.pMarshal) {
                 return data.pMarshal;
             }
             
             return new SR_HTYPES_NS::Marshal();
         }
+
+    private:
+        bool m_dontSave = false;
 
     };
 }

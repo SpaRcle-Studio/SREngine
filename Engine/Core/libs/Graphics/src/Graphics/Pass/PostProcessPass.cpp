@@ -122,8 +122,8 @@ namespace SR_GRAPH_NS {
         if (auto&& attachmentsNode = passNode.TryGetNode("Attachments")) {
             for (auto&& attachmentNode : attachmentsNode.TryGetNodes("Attachment")) {
                 Attachment attachment = Attachment();
-                attachment.fboHashName = SR_HASH_STR(attachmentNode.GetAttribute("FBO").ToString());
-                attachment.hashId = SR_HASH_STR(attachmentNode.GetAttribute("Id").ToString());
+                attachment.fboName = attachmentNode.GetAttribute("FBO").ToString();
+                attachment.id = attachmentNode.GetAttribute("Id").ToString();
 
                 if (auto&& depthAttribute = attachmentNode.TryGetAttribute("Depth")) {
                     attachment.depth = depthAttribute.ToBool();
@@ -170,7 +170,7 @@ namespace SR_GRAPH_NS {
     void PostProcessPass::UseTextures() {
         for (auto&& attachment : m_attachments) {
             if (!attachment.pFBO) {
-                if (auto&& pFBOPass = dynamic_cast<IFramebufferPass*>(GetTechnique()->FindPass(attachment.fboHashName))) {
+                if (auto&& pFBOPass = dynamic_cast<IFramebufferPass*>(GetTechnique()->FindPass(attachment.fboName))) {
                     attachment.pFBO = pFBOPass->GetFramebuffer();
                 }
             }
@@ -190,7 +190,7 @@ namespace SR_GRAPH_NS {
                 textureId = GetContext()->GetDefaultTexture()->GetId();
             }
 
-            m_shader->SetSampler2D(attachment.hashId, textureId);
+            m_shader->SetSampler2D(attachment.id, textureId);
         }
     }
 

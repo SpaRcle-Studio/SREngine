@@ -22,8 +22,10 @@ namespace SR_GRAPH_NS {
 
     public:
         SR_NODISCARD SR_GTYPES_NS::Framebuffer* GetColorFrameBuffer() const noexcept override;
+        SR_NODISCARD std::vector<SR_GTYPES_NS::Framebuffer*> GetFrameBuffers() const override;
 
         void UseConstants(SR_GTYPES_NS::Shader* pShader) override;
+        void UseUniforms(SR_GTYPES_NS::Shader* pShader, MeshPtr pMesh) override;
 
     };
 }

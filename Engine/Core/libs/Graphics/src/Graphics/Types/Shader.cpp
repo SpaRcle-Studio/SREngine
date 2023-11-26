@@ -239,8 +239,12 @@ namespace SR_GRAPH_NS::Types {
         SetSampler(hashId, sampler->GetId());
     }
 
-    void Shader::SetSampler2D(const SR_UTILS_NS::StringAtom& name, Types::Texture *sampler) noexcept {
-        SetSampler2D(name.GetHash(), sampler);
+    void Shader::SetSampler2D(const SR_UTILS_NS::StringAtom& name, SR_GTYPES_NS::Texture* pSampler) noexcept {
+        SetSampler2D(name.GetHash(), pSampler);
+    }
+
+    void Shader::SetSampler2D(const SR_UTILS_NS::StringAtom& name, int32_t samplerId) noexcept {
+        SetSampler2D(name.GetHash(), samplerId);
     }
 
     bool Shader::Ready() const {

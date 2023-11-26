@@ -330,7 +330,7 @@ namespace SR_UTILS_NS {
      }
 
     SR_HTYPES_NS::Marshal::Ptr GameObject::Save(SavableSaveData data) const {
-        if (GetFlags() & GAMEOBJECT_FLAG_NO_SAVE) {
+        if (!(data.pMarshal = Entity::Save(data))) {
             return data.pMarshal;
         }
 
@@ -338,7 +338,6 @@ namespace SR_UTILS_NS {
         transformSaveData.flags = data.flags;
         transformSaveData.pMarshal = nullptr;
 
-        data.pMarshal = Entity::Save(data);
         data.pMarshal->Write<uint16_t>(GetEntityVersion());
 
         if (auto&& pPrefab = GetPrefab(); pPrefab && IsPrefabOwner()) {
@@ -375,7 +374,7 @@ namespace SR_UTILS_NS {
 
         uint16_t childrenNum = 0;
         for (auto&& child : m_children) {
-            if (child->GetFlags() & GAMEOBJECT_FLAG_NO_SAVE) {
+            if (child->IsDontSave()) {
                 continue;
             }
             ++childrenNum;
@@ -383,7 +382,7 @@ namespace SR_UTILS_NS {
 
         data.pMarshal->Write(static_cast<uint16_t>(childrenNum));
         for (auto&& child : m_children) {
-            if (child->GetFlags() & GAMEOBJECT_FLAG_NO_SAVE) {
+            if (child->IsDontSave()) {
                 continue;
             }
 

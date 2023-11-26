@@ -118,7 +118,7 @@ namespace SR_UTILS_NS {
         return true;
     }
 
-    bool IComponentable::RemoveComponent(Component *pComponent) {
+    bool IComponentable::RemoveComponent(Component* pComponent) {
         auto&& pIt = std::find(m_components.begin(), m_components.end(), pComponent);
 
         if (pIt == m_components.end()) {
@@ -231,7 +231,8 @@ namespace SR_UTILS_NS {
     void IComponentable::DestroyComponents() {
         SR_TRACY_ZONE;
 
-        for (uint32_t i = 0; i < m_components.size(); ++i) {
+        /// Используем такой проход, так как в процессе удаления может измениться список!
+        for (uint32_t i = 0; i < m_components.size(); ++i) { /// NOLINT
             auto&& pComponent = m_components[i];
             DestroyComponent(pComponent);
         }
@@ -245,6 +246,8 @@ namespace SR_UTILS_NS {
     }
 
     void IComponentable::DestroyComponent(Component* pComponent) {
+        pComponent->OnDetach();
+
         if (auto&& pScene = GetScene()) {
             pScene->Remove(pComponent);
         }

@@ -26,6 +26,7 @@
 #include <Physics/PhysicsMaterial.h>
 
 #include <Graphics/Animations/Skeleton.h>
+#include <Graphics/Animations/BoneComponent.h>
 #include <Graphics/Animations/Animator.h>
 #include <Graphics/Types/Geometry/Mesh3D.h>
 #include <Graphics/Types/Shader.h>
@@ -577,5 +578,32 @@ namespace SR_CORE_NS::GUI {
 
     void ComponentDrawer::DrawComponent(SR_GTYPES_NS::Text3D*& pComponent, EditorGUI* context, int32_t index) {
         DrawComponent(dynamic_cast<SR_GTYPES_NS::ITextComponent*>(pComponent), context, index);
+    }
+
+    bool ComponentDrawer::DrawComponentOld(SR_UTILS_NS::Component* pComponent, EditorGUI* pContext, int32_t index) {
+        #define SR_OLD_DRAW_COMPONENT(class, cmpName)                 \
+        if (pComponent->GetComponentName() == cmpName) {              \
+            auto&& pCasted = dynamic_cast<class*>(pComponent);        \
+            ComponentDrawer::DrawComponent(pCasted, pContext, index); \
+            return true;                                              \
+        }                                                             \
+
+        SR_OLD_DRAW_COMPONENT(SR_SCRIPTING_NS::Behaviour, "Behaviour")
+        SR_OLD_DRAW_COMPONENT(SR_GTYPES_NS::Camera, "Camera")
+        SR_OLD_DRAW_COMPONENT(SR_GTYPES_NS::Mesh3D, "Mesh3D")
+        SR_OLD_DRAW_COMPONENT(SR_GTYPES_NS::SkinnedMesh, "SkinnedMesh")
+        SR_OLD_DRAW_COMPONENT(SR_GTYPES_NS::ProceduralMesh, "ProceduralMesh")
+        SR_OLD_DRAW_COMPONENT(SR_GTYPES_NS::Text2D, "Text2D")
+        SR_OLD_DRAW_COMPONENT(SR_GTYPES_NS::Text3D, "Text3D")
+        SR_OLD_DRAW_COMPONENT(SR_ANIMATIONS_NS::Animator, "Animator")
+        SR_OLD_DRAW_COMPONENT(SR_ANIMATIONS_NS::Skeleton, "Skeleton")
+        SR_OLD_DRAW_COMPONENT(SR_ANIMATIONS_NS::BoneComponent, "Bone")
+        SR_OLD_DRAW_COMPONENT(SR_UTILS_NS::LookAtComponent, "LookAtComponent")
+        SR_OLD_DRAW_COMPONENT(SR_AUDIO_NS::AudioSource, "AudioSource")
+        SR_OLD_DRAW_COMPONENT(SR_AUDIO_NS::AudioListener, "AudioListener")
+        SR_OLD_DRAW_COMPONENT(SR_GRAPH_UI_NS::Anchor, "Anchor")
+        SR_OLD_DRAW_COMPONENT(SR_GRAPH_UI_NS::Canvas, "Canvas")
+
+        return false;
     }
 }

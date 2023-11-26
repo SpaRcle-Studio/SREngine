@@ -69,7 +69,7 @@ namespace SR_GRAPH_NS {
             Super::Render();
         }
         else if (m_framebuffer->Bind()) {
-            m_framebuffer->BeginCmdBuffer(m_clearColors, 1.f);
+            m_framebuffer->BeginCmdBuffer(m_clearColors, m_depth);
             {
                 m_framebuffer->BeginRender();
                 m_framebuffer->SetViewportScissor();

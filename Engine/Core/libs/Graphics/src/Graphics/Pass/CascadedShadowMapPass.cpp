@@ -149,7 +149,7 @@ namespace SR_GRAPH_NS {
         /// установим кадровый буфер, чтобы BeginCmdBuffer понимал какие значение для очистки ставить
         GetPipeline()->SetCurrentFrameBuffer(m_framebuffer);
 
-        m_framebuffer->BeginCmdBuffer(m_clearColors, 1.f);
+        m_framebuffer->BeginCmdBuffer(m_clearColors, m_depth);
         m_framebuffer->SetViewportScissor();
 
         for (uint32_t i = 0; i < m_cascadesCount; ++i) {

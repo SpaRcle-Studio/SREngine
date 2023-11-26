@@ -28,9 +28,6 @@ namespace SR_GRAPH_NS {
 
         SR_NODISCARD std::vector<SR_GTYPES_NS::Framebuffer*> GetFrameBuffers() const override;
 
-    private:
-        bool m_isRendered = false;
-
     };
 }
 

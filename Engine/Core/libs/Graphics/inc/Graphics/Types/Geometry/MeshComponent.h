@@ -10,6 +10,9 @@
 
 namespace SR_GTYPES_NS {
     class MeshComponent : public IndexedMesh, public SR_GTYPES_NS::IRenderComponent {
+    public:
+        using Ptr = SR_HTYPES_NS::SharedPtr<MeshComponent>;
+
     protected:
         explicit MeshComponent(MeshType type);
 

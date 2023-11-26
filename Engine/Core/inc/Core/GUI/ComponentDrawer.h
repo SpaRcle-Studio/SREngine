@@ -57,6 +57,8 @@ namespace SR_PTYPES_NS {
 }
 
 namespace SR_CORE_NS::GUI::ComponentDrawer {
+    bool DrawComponentOld(SR_UTILS_NS::Component* pComponent, EditorGUI* context, int32_t index);
+
     void DrawComponent(SR_SCRIPTING_NS::Behaviour*& behaviour, EditorGUI* context, int32_t index);
     void DrawComponent(SR_GTYPES_NS::Text2D*& pComponent, EditorGUI* context, int32_t index);
     void DrawComponent(SR_GTYPES_NS::Text3D*& pComponent, EditorGUI* context, int32_t index);

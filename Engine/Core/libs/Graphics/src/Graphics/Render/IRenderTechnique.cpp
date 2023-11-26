@@ -6,6 +6,7 @@
 #include <Graphics/Render/RenderScene.h>
 #include <Graphics/Render/RenderContext.h>
 #include <Graphics/Pass/GroupPass.h>
+#include <Graphics/Pass/IColorBufferPass.h>
 
 namespace SR_GRAPH_NS {
     IRenderTechnique::IRenderTechnique()
@@ -154,19 +155,15 @@ namespace SR_GRAPH_NS {
         return m_passes.empty();
     }
 
-    BasePass* IRenderTechnique::FindPass(const std::string& name) const {
-        return FindPass(SR_HASH_STR(name));
-    }
-
-    BasePass* IRenderTechnique::FindPass(uint64_t hashName) const {
+    BasePass* IRenderTechnique::FindPass(const SR_UTILS_NS::StringAtom& name) const {
         for (auto&& pPass : m_passes) {
             if (auto&& pGroupPass = dynamic_cast<GroupPass*>(pPass)) {
-                if (auto&& pFoundPass = pGroupPass->FindPass(hashName)) {
+                if (auto&& pFoundPass = pGroupPass->FindPass(name)) {
                     return pFoundPass;
                 }
             }
 
-            if (pPass->GetHashName() != hashName) {
+            if (pPass->GetName() != name) {
                 continue;
             }
 
@@ -196,13 +193,29 @@ namespace SR_GRAPH_NS {
         m_passes.clear();
     }
 
-    void IRenderTechnique::ForEachPass(const SR_HTYPES_NS::Function<void(BasePass*)>& callback) {
+    bool IRenderTechnique::ForEachPass(const SR_HTYPES_NS::Function<bool(BasePass*)>& callback) const {
         for (auto&& pPass : m_passes) {
-            callback(pPass);
+            if (!callback(pPass)) {
+                return false;
+            }
 
             if (auto&& pGroupPass = dynamic_cast<GroupPass*>(pPass)) {
-                pGroupPass->ForEachPass(callback);
+                if (!pGroupPass->ForEachPass(callback)) {
+                    return false;
+                }
             }
         }
+        return true;
+    }
+
+    SR_GTYPES_NS::Mesh* IRenderTechnique::PickMeshAt(float_t x, float_t y, const std::vector<SR_UTILS_NS::StringAtom>& passFilter) const {
+        for (auto&& filter : passFilter) {
+            if (auto&& pPass = dynamic_cast<SR_GRAPH_NS::IColorBufferPass*>(FindPass(filter))) {
+                if (auto&& pMesh = pPass->GetMesh(x, y)) {
+                    return pMesh;
+                }
+            }
+        }
+        return nullptr;
     }
 }

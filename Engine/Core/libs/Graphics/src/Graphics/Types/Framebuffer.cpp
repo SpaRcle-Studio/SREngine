@@ -267,9 +267,13 @@ namespace SR_GTYPES_NS {
         m_dirty = true;
     }
 
-    int32_t Framebuffer::GetDepthTexture(int32_t layer) const {
+    int32_t Framebuffer::GetDepthTexture(int32_t layer) {
         if (!m_depthEnabled) {
             return SR_ID_INVALID;
+        }
+
+        if ((!IsCalculated() || m_dirty) && !Update()) {
+            SR_ERROR("Framebuffer::GetDepthTexture() : failed to initialize framebuffer!");
         }
 
         if (layer < 0) {

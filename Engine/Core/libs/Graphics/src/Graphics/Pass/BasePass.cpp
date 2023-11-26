@@ -45,7 +45,7 @@ namespace SR_GRAPH_NS {
         return m_technique->GetRenderScene();
     }
 
-    std::string_view BasePass::GetName() const {
+    SR_UTILS_NS::StringAtom BasePass::GetName() const {
         return m_name;
     }
 
@@ -55,9 +55,8 @@ namespace SR_GRAPH_NS {
         m_pipeline = m_technique ? m_technique->GetPipeline() : nullptr;
     }
 
-    void BasePass::SetName(const std::string& name) {
+    void BasePass::SetName(const SR_UTILS_NS::StringAtom& name) {
         m_name = name;
-        m_hashName = SR_HASH_STR(name);
     }
 
     void StartPassNode::InitNode() {

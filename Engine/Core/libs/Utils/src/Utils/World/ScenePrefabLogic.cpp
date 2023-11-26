@@ -35,7 +35,7 @@ namespace SR_WORLD_NS {
 
         uint16_t childrenNum = 0;
         for (auto&& gameObject : root) {
-            if (gameObject->GetFlags() & GAMEOBJECT_FLAG_NO_SAVE) {
+            if (gameObject->IsDontSave()) {
                 continue;
             }
             ++childrenNum;
@@ -44,7 +44,7 @@ namespace SR_WORLD_NS {
         pMarshal->Write(static_cast<uint16_t>(childrenNum));
 
         for (auto&& gameObject : root) {
-            if (gameObject->GetFlags() & GAMEOBJECT_FLAG_NO_SAVE) {
+            if (gameObject->IsDontSave()) {
                 continue;
             }
 

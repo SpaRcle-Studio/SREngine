@@ -8,7 +8,9 @@
 namespace SR_GTYPES_NS {
     DebugWireframeMesh::DebugWireframeMesh()
         : Super(MeshType::Wireframe)
-    { }
+    {
+        SetIsDebugMesh(true);
+    }
 
     void DebugWireframeMesh::Draw() {
         if ((!IsCalculated() && !Calculate()) || m_hasErrors) {

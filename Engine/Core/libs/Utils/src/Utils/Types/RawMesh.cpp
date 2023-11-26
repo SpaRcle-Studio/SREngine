@@ -558,4 +558,19 @@ namespace SR_HTYPES_NS {
         }
 
     }
+
+    int32_t RawMesh::GetMeshId(SR_UTILS_NS::StringAtom name) const {
+        if (!m_scene) {
+            SRHalt("Invalid scene!");
+            return SR_ID_INVALID;
+        }
+
+        for (uint32_t i = 0; i < m_scene->mNumMeshes; ++i) {
+            if (m_scene->mMeshes[i]->mName.C_Str() == name) {
+                return static_cast<int32_t>(i);
+            }
+        }
+
+        return SR_ID_INVALID;
+    }
 }

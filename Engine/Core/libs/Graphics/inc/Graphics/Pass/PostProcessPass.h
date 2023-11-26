@@ -17,14 +17,14 @@ namespace SR_GRAPH_NS {
     class PostProcessPass : public BasePass {
         SR_REGISTER_LOGICAL_NODE(PostProcessPass, Post Process Pass, { "Passes" })
         struct Property {
-            uint64_t hashId = 0;
-            ShaderPropertyVariant data;
+            SR_UTILS_NS::StringAtom id;
+            ShaderPropertyVariant data = {};
             ShaderVarType type = ShaderVarType::Unknown;
         };
 
         struct Attachment {
-            uint64_t hashId = 0;
-            uint64_t fboHashName = 0;
+            SR_UTILS_NS::StringAtom id;
+            SR_UTILS_NS::StringAtom fboName;
             uint64_t index = 0;
             bool depth = false;
             SR_GTYPES_NS::Framebuffer* pFBO = nullptr;

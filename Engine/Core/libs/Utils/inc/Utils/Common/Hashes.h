@@ -2,8 +2,8 @@
 // Created by Monika on 03.05.2022.
 //
 
-#ifndef SRENGINE_HASHES_H
-#define SRENGINE_HASHES_H
+#ifndef SR_ENGINE_UTILS_HASHES_H
+#define SR_ENGINE_UTILS_HASHES_H
 
 #include <Utils/stdInclude.h>
 #include <xxHash/xxhash.h>
@@ -205,4 +205,4 @@ template<> struct SR_UTILS_NS::SRHash<nullptr_t> {
 #define SR_COMPILE_TIME_CRC32_STD_STR(x) (SR_COMPILE_TIME_CRC32_STR(x.c_str()))
 #define SR_RUNTIME_TIME_CRC32_STD_STR(x) (SR_RUNTIME_TIME_CRC32_STR(x.c_str()))
 
-#endif //SRENGINE_HASHES_H
+#endif //SR_ENGINE_UTILS_HASHES_H

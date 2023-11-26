@@ -114,7 +114,9 @@ namespace SR_UTILS_NS {
         SR_NODISCARD virtual std::list<EntityBranch> GetEntityBranches() const { return {}; }
 
         SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save(SavableSaveData data) const override {
-            data.pMarshal = ISavable::Save(data);
+            if (!(data.pMarshal = ISavable::Save(data))) {
+                return data.pMarshal;
+            }
 
             if (!(data.flags & SAVABLE_FLAG_ECS_NO_ID)) {
                 data.pMarshal->Write(static_cast<uint64_t>(GetEntityId()));

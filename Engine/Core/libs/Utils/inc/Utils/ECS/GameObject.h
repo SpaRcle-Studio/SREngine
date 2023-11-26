@@ -24,12 +24,6 @@ namespace SR_UTILS_NS {
     class Transform;
     class Component;
 
-    SR_ENUM_NS(GameObjectFlags,
-        GAMEOBJECT_FLAG_NONE    = 1 << 0,
-        GAMEOBJECT_FLAG_NO_SAVE = 1 << 1
-    );
-    typedef uint64_t GameObjectFlagBits;
-
     class SR_DLL_EXPORT GameObject : public IComponentable, public Entity {
         SR_ENTITY_SET_VERSION(1008);
         friend class Component;
@@ -72,7 +66,6 @@ namespace SR_UTILS_NS {
         SR_NODISCARD SR_INLINE GameObjects& GetChildrenRef() { return m_children; }
         SR_NODISCARD SR_INLINE const GameObjects& GetChildrenRef() const { return m_children; }
         SR_NODISCARD SR_INLINE GameObjects GetChildren() const { return m_children; }
-        SR_NODISCARD SR_INLINE GameObjectFlagBits GetFlags() const { return m_flags; }
 
         SR_NODISCARD std::string GetEntityInfo() const override;
 
@@ -97,7 +90,6 @@ namespace SR_UTILS_NS {
         bool Contains(const GameObject::Ptr& child);
         void SetEnabled(bool value);
         void SetTransform(Transform* transform);
-        void SetFlags(GameObjectFlagBits flags) { m_flags = flags; }
 
         bool MoveToTree(const GameObject::Ptr& destination);
         bool AddChild(const GameObject::Ptr& child);
@@ -142,8 +134,6 @@ namespace SR_UTILS_NS {
 
         Name m_name;
         Tag m_tag = 0;
-
-        GameObjectFlagBits m_flags = GAMEOBJECT_FLAG_NONE;
 
     };
 }

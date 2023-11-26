@@ -13,10 +13,7 @@ namespace SR_GRAPH_NS {
     void FlatColorBufferPass::UseConstants(SR_GTYPES_NS::Shader* pShader) {
         Super::UseConstants(pShader);
 
-        IncrementColorIndex();
-
-        //pShader->SetConstInt(SHADER_COLOR_BUFFER_MODE, 1);
-        //pShader->SetConstVec3(SHADER_COLOR_BUFFER_VALUE, GetMeshColor());
+        pShader->SetConstInt(SHADER_COLOR_BUFFER_MODE, 1);
     }
 
     SR_GTYPES_NS::Framebuffer* FlatColorBufferPass::GetColorFrameBuffer() const noexcept {
@@ -29,9 +26,11 @@ namespace SR_GRAPH_NS {
     }
 
     void FlatColorBufferPass::Update() {
-        if (!m_framebuffer || m_framebuffer->IsDirty()) {
+        if (!m_framebuffer || m_framebuffer->IsDirty() || !m_isFrameBufferRendered) {
             return;
         }
+
+        ResetColorIndex();
 
         m_pipeline->SetCurrentFrameBuffer(m_framebuffer);
 
@@ -46,7 +45,7 @@ namespace SR_GRAPH_NS {
     }
 
     bool FlatColorBufferPass::Render() {
-        ResetColorIndex();
+        m_isFrameBufferRendered = false;
 
         if (!m_framebuffer) {
             return false;
@@ -55,8 +54,9 @@ namespace SR_GRAPH_NS {
         auto&& pIdentifier = m_uboManager.GetIdentifier();
         m_uboManager.SetIdentifier(this);
 
-        if (m_framebuffer->Bind()) {
-            m_framebuffer->BeginCmdBuffer(m_clearColors, 1.f);
+        if (m_framebuffer->Bind())
+        {
+            if (m_framebuffer->BeginCmdBuffer(m_clearColors, m_depth))
             {
                 m_framebuffer->BeginRender();
                 m_framebuffer->SetViewportScissor();
@@ -64,8 +64,10 @@ namespace SR_GRAPH_NS {
                 FlatClusterPass::Render();
 
                 m_framebuffer->EndRender();
+                m_framebuffer->EndCmdBuffer();
+
+                m_isFrameBufferRendered = true;
             }
-            m_framebuffer->EndCmdBuffer();
         }
 
         m_uboManager.SetIdentifier(pIdentifier);
@@ -80,5 +82,21 @@ namespace SR_GRAPH_NS {
     bool FlatColorBufferPass::Load(const SR_XML_NS::Node& passNode) {
         LoadFramebufferSettings(passNode.TryGetNode("FramebufferSettings"));
         return IMeshClusterPass::Load(passNode);
+    }
+
+    std::vector<SR_GTYPES_NS::Framebuffer *> FlatColorBufferPass::GetFrameBuffers() const {
+        if (!m_framebuffer) {
+            return std::vector<SR_GTYPES_NS::Framebuffer*>(); /// NOLINT
+        }
+        return { m_framebuffer };
+    }
+
+    void FlatColorBufferPass::UseUniforms(SR_GTYPES_NS::Shader* pShader, MeshPtr pMesh) {
+        IncrementColorIndex();
+        SetMeshIndex(pMesh, GetColorIndex());
+
+        pShader->SetVec3(SHADER_COLOR_BUFFER_VALUE, GetMeshColor());
+
+        Super::UseUniforms(pShader, pMesh);
     }
 }

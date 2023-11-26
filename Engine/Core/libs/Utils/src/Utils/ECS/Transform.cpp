@@ -190,7 +190,7 @@ namespace SR_UTILS_NS {
         return GetScale().XY();
     }
 
-    const SR_MATH_NS::Matrix4x4 &Transform::GetMatrix() {
+    const SR_MATH_NS::Matrix4x4& Transform::GetMatrix() {
         static SR_MATH_NS::Matrix4x4 matrix4X4 = SR_MATH_NS::Matrix4x4::Identity();
         return matrix4X4;
     }

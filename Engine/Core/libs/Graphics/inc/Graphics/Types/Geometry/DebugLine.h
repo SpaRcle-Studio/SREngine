@@ -21,8 +21,6 @@ namespace SR_GTYPES_NS {
         DebugLine(SR_MATH_NS::FVector3 startPoint, SR_MATH_NS::FVector3 endPoint, SR_MATH_NS::FVector4 color);
 
     public:
-        SR_NODISCARD SR_FORCE_INLINE bool IsDebugMesh() const noexcept override { return true; }
-
         void SetStartPoint(const SR_MATH_NS::FVector3& startPoint);
         void SetEndPoint(const SR_MATH_NS::FVector3& endPoint);
         void SetColor(const SR_MATH_NS::FVector4& color);

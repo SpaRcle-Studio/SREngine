@@ -52,8 +52,8 @@
             </OpaquePass>
             <SkyboxPass Path="Engine/Skyboxes/Sun.png" Shader="Engine/Shaders/skybox.srsl"/>
             <TransparentPass/>
-            <DebugPass/>
             <FlatClusterPass/>
+            <DebugPass/>
         </Passes>
     </FramebufferPass>
     <Queues>

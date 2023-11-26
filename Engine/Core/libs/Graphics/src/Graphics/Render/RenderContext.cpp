@@ -458,4 +458,14 @@ namespace SR_GRAPH_NS {
 
         return true;
     }
+
+    bool RenderContext::IsDirty() const {
+        for (auto&& [pScene, pRenderScene] : m_scenes) {
+            if (pRenderScene->IsDirty()) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

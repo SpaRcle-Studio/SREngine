@@ -83,7 +83,8 @@ namespace SR_UTILS_NS {
     protected:
         void UpdateMatrix() override;
         SR_NODISCARD SR_MATH_NS::FVector3 CalculateStretch() const;
-        SR_NODISCARD SR_MATH_NS::FVector3 CalculateAnchor(const SR_MATH_NS::FVector3& scale) const;
+        SR_NODISCARD SR_MATH_NS::FVector3 CalculateAnchor(const SR_MATH_NS::FVector3& position, const SR_MATH_NS::FVector3& scale) const;
+        SR_NODISCARD SR_MATH_NS::BVector2 CalculatePositionMode() const noexcept;
 
     public:
         SR_INLINE static constexpr SR_MATH_NS::FVector2 RIGHT = Math::FVector2(1, 0);

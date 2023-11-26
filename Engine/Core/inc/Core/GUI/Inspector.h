@@ -48,60 +48,7 @@ namespace SR_CORE_GUI_NS {
 
         SR_MAYBE_UNUSED void BackupTransform(const SR_UTILS_NS::GameObject::Ptr& ptr, const std::function<void()>& operation) const;
 
-        template<typename T> SR_UTILS_NS::Component* DrawComponent(SR_UTILS_NS::Component* component, const std::string& name, uint32_t& index) {
-            auto&& pComponent = dynamic_cast<T*>(component);
-            auto&& pContext = dynamic_cast<EditorGUI*>(GetManager());
-
-            if (!pComponent || !pContext) {
-                return component;
-            }
-
-            SRAssert1Once(component->Valid());
-
-            ++index;
-
-            if (ImGui::BeginChild("InspectorComponent")) {
-                bool enabled = pComponent->IsEnabled();
-                if (ImGui::Checkbox(SR_FORMAT("##{}-{}-checkbox", name.c_str(), index).c_str(), &enabled)) {
-                    pComponent->SetEnabled(enabled);
-                }
-
-                ImGui::SameLine();
-
-                if (ImGui::CollapsingHeader(SR_FORMAT("[{}] {}", index, pComponent->GetComponentName().c_str()).c_str())) {
-                    SR_CORE_GUI_NS::DrawPropertyContext context;
-                    context.pEditor = pContext;
-
-                    if (SR_CORE_GUI_NS::DrawPropertyContainer(context, &pComponent->GetEntityMessages())) {
-                        ImGui::Separator();
-                    }
-
-                    ComponentDrawer::DrawComponent(pComponent, pContext, index);
-                    DrawComponentProperties(pComponent);
-                }
-
-                if (!ImGui::GetDragDropPayload() && ImGui::BeginDragDropSource(ImGuiDragDropFlags_SourceAllowNullID)) {
-                    m_pointersHolder = { component->DynamicCast<SR_UTILS_NS::Component>() };
-                    ImGui::SetDragDropPayload("InspectorComponent##Payload", &m_pointersHolder, sizeof(std::vector<SR_UTILS_NS::Component::Ptr>), ImGuiCond_Once);
-                    ImGui::Text("%s ->", pComponent->GetComponentName().c_str());
-                    ImGui::EndDragDropSource();
-                }
-
-                if (ImGui::BeginPopupContextWindow("InspectorMenu")) {
-                    if (ImGui::BeginMenu("Remove component")) {
-                        if (ImGui::MenuItem(component->GetComponentName().c_str())) {
-                            component->GetParent()->RemoveComponent(component);
-                            pComponent = nullptr;
-                        }
-                        ImGui::EndMenu();
-                    }
-                    ImGui::EndPopup();
-                }
-            }
-            ImGui::EndChild();
-
-            return dynamic_cast<SR_UTILS_NS::Component*>(pComponent);
-        }
+        SR_UTILS_NS::Component* DrawComponent(SR_UTILS_NS::Component* pComponent, uint32_t& index);
 
     private:
         std::list<SR_UTILS_NS::Component::Ptr> m_pointersHolder;

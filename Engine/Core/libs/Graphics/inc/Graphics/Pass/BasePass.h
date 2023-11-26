@@ -78,15 +78,14 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD virtual std::vector<SR_GTYPES_NS::Framebuffer*> GetFrameBuffers() const { return { }; }
 
         virtual void SetRenderTechnique(RenderTechnique* pRenderTechnique);
-        void SetName(const std::string& name);
+        void SetName(const SR_UTILS_NS::StringAtom& name);
 
         SR_NODISCARD RenderScenePtr GetRenderScene() const;
         SR_NODISCARD Context GetContext() const { return m_context; }
         SR_NODISCARD PipelinePtr GetPipeline() const { return m_pipeline; }
         SR_NODISCARD RenderTechnique* GetTechnique() const { return m_technique; }
         SR_NODISCARD bool IsInit() const { return m_isInit; }
-        SR_NODISCARD std::string_view GetName() const;
-        SR_NODISCARD uint64_t GetHashName() const noexcept { return m_hashName; }
+        SR_NODISCARD SR_UTILS_NS::StringAtom GetName() const;
 
     protected:
         CameraPtr m_camera = nullptr;
@@ -95,8 +94,7 @@ namespace SR_GRAPH_NS {
         Memory::UBOManager& m_uboManager;
 
     private:
-        std::string m_name;
-        uint64_t m_hashName = 0;
+        SR_UTILS_NS::StringAtom m_name;
 
         RenderTechnique* m_technique = nullptr;
         bool m_isInit = false;

@@ -75,7 +75,7 @@ namespace SR_UTILS_NS {
 
     void Transform2D::UpdateMatrix() {
         auto&& scale = CalculateStretch();
-        auto&& translation = CalculateAnchor(scale);
+        auto&& translation = CalculateAnchor(m_translation, scale);
 
         m_localMatrix = SR_MATH_NS::Matrix4x4(
             translation,
@@ -145,6 +145,9 @@ namespace SR_UTILS_NS {
         pTransform->m_anchor = m_anchor;
         pTransform->m_priority = m_priority;
         pTransform->m_stretch = m_stretch;
+        pTransform->m_positionMode = m_positionMode;
+        pTransform->m_localPriority = m_localPriority;
+        pTransform->m_relativePriority = m_relativePriority;
 
         pTransform->m_translation = m_translation;
         pTransform->m_rotation = m_rotation;
@@ -162,7 +165,7 @@ namespace SR_UTILS_NS {
 
         auto&& aspect = pParent->GetScale().XY().Aspect();
         if (SR_EQUALS(aspect, 0.f)) {
-            return SR_MATH_NS::FVector3();
+            return SR_MATH_NS::FVector3::One();
         }
 
         auto scale = SR_MATH_NS::FVector3::One();
@@ -212,7 +215,7 @@ namespace SR_UTILS_NS {
         return scale;
     }
 
-    SR_MATH_NS::FVector3 Transform2D::CalculateAnchor(const SR_MATH_NS::FVector3& scale) const {
+    SR_MATH_NS::FVector3 Transform2D::CalculateAnchor(const SR_MATH_NS::FVector3& position, const SR_MATH_NS::FVector3& scale) const {
         auto&& pParent = dynamic_cast<Transform2D*>(GetParentTransform());
         if (!pParent) {
             return SR_MATH_NS::FVector3();
@@ -263,12 +266,10 @@ namespace SR_UTILS_NS {
         auto verticalAnchor = (verticalAspect - 1.f) * (1.f / verticalAspect);
         verticalAnchor += (1.f - m_scale.y) * (1.f / verticalAspect);
 
-        const bool isProportionalX = m_positionMode == PositionMode::ProportionalXY || m_positionMode == PositionMode::ProportionalX;
-        const bool isProportionalY = m_positionMode == PositionMode::ProportionalXY || m_positionMode == PositionMode::ProportionalY;
-
+        auto&& positionMode = CalculatePositionMode();
         const SR_MATH_NS::FVector3 translation = SR_MATH_NS::FVector3(
-            m_translation.x * (isProportionalX ? m_scale.x : 1.f) * (1.f / horizontalAspect),
-            m_translation.y * (isProportionalY ? m_scale.y : 1.f) * (1.f / verticalAspect),
+            position.x * (positionMode.x ? m_scale.x : 1.f) * (1.f / horizontalAspect),
+            position.y * (positionMode.y ? m_scale.y : 1.f) * (1.f / verticalAspect),
             0.f
         );
 
@@ -359,5 +360,12 @@ namespace SR_UTILS_NS {
     void Transform2D::OnHierarchyChanged() {
         UpdatePriorityTree();
         Transform::OnHierarchyChanged();
+    }
+
+    SR_MATH_NS::BVector2 Transform2D::CalculatePositionMode() const noexcept {
+        return SR_MATH_NS::BVector2(
+            m_positionMode == PositionMode::ProportionalXY || m_positionMode == PositionMode::ProportionalX,
+            m_positionMode == PositionMode::ProportionalXY || m_positionMode == PositionMode::ProportionalY
+        );
     }
 }

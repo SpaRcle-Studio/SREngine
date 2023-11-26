@@ -42,6 +42,8 @@ namespace SR_CORE_GUI_NS {
         void OnKeyPress(const SR_UTILS_NS::KeyboardInputData* data) override;
 
     private:
+        void SelectMesh(SR_GTYPES_NS::MeshComponent* pMesh);
+
         void LoadCameraSettings();
         void BackupCameraSettings();
 

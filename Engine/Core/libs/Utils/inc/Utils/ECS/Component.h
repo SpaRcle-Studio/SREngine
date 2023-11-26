@@ -62,7 +62,9 @@ namespace SR_UTILS_NS {
         virtual void OnLoaded() { m_isComponentLoaded = true; }
         /// Вызывается после добавления компонента к игровому объекту
         virtual void OnAttached() { m_isAttached = true; SRAssert(GetParent()); }
-        /// Вызывается когда компонент убирается с объекта, либо объект уничтожается
+        /// Вызывается когда компонент убирается с объекта, либо объект уничтожается, но до OnDestroy
+        virtual void OnDetach() { m_isAttached = false; }
+        /// Вызывается когда компонент убирается с объекта, либо объект уничтожается. Может произойти отложенно.
         virtual void OnDestroy() { SetParent(nullptr); }
 
         virtual void OnEnable() { m_isActive = true; }
@@ -84,6 +86,8 @@ namespace SR_UTILS_NS {
 
     public:
         void CheckActivity();
+
+        void Detach();
 
         void SetEnabled(bool value);
         void SetComponentBuildId(uint64_t buildId) { m_componentBuildId = buildId; }

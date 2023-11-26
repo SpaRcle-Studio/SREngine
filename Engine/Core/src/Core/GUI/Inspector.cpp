@@ -17,6 +17,7 @@
 #include <Graphics/Types/Geometry/Sprite.h>
 #include <Audio/Types/AudioSource.h>
 #include <Graphics/UI/Canvas.h>
+#include <Graphics/UI/Gizmo.h>
 #include <Graphics/Types/Geometry/ProceduralMesh.h>
 #include <Graphics/GUI/Utils.h>
 #include <Graphics/Font/ITextComponent.h>
@@ -182,23 +183,7 @@ namespace SR_CORE_GUI_NS {
 
             SRAssert1Once(copyPtrComponent->GetParent());
 
-            copyPtrComponent = DrawComponent<SR_SCRIPTING_NS::Behaviour>(copyPtrComponent, "Behaviour", index);
-            copyPtrComponent = DrawComponent<SR_GTYPES_NS::Camera>(copyPtrComponent, "Camera", index);
-            copyPtrComponent = DrawComponent<SR_GTYPES_NS::Mesh3D>(copyPtrComponent, "Mesh3D", index);
-            copyPtrComponent = DrawComponent<SR_GTYPES_NS::SkinnedMesh>(copyPtrComponent, "SkinnedMesh", index);
-            copyPtrComponent = DrawComponent<SR_GTYPES_NS::ProceduralMesh>(copyPtrComponent, "ProceduralMesh", index);
-            copyPtrComponent = DrawComponent<SR_GTYPES_NS::Sprite>(copyPtrComponent, "Sprite", index);
-            copyPtrComponent = DrawComponent<SR_GRAPH_NS::UI::Anchor>(copyPtrComponent, "Anchor", index);
-            copyPtrComponent = DrawComponent<SR_GRAPH_NS::UI::Canvas>(copyPtrComponent, "Canvas", index);
-            copyPtrComponent = DrawComponent<SR_PTYPES_NS::Rigidbody3D>(copyPtrComponent, "Rigidbody3D", index);
-            copyPtrComponent = DrawComponent<SR_GTYPES_NS::Text2D>(copyPtrComponent, "Text2D", index);
-            copyPtrComponent = DrawComponent<SR_GTYPES_NS::Text3D>(copyPtrComponent, "Text3D", index);
-            copyPtrComponent = DrawComponent<SR_ANIMATIONS_NS::Animator>(copyPtrComponent, "Animator", index);
-            copyPtrComponent = DrawComponent<SR_ANIMATIONS_NS::Skeleton>(copyPtrComponent, "Skeleton", index);
-            copyPtrComponent = DrawComponent<SR_ANIMATIONS_NS::BoneComponent>(copyPtrComponent, "Bone", index);
-            copyPtrComponent = DrawComponent<SR_UTILS_NS::LookAtComponent>(copyPtrComponent, "LookAtComponent", index);
-            copyPtrComponent = DrawComponent<SR_AUDIO_NS::AudioSource>(copyPtrComponent, "AudioSource", index);
-            copyPtrComponent = DrawComponent<SR_AUDIO_NS::AudioListener>(copyPtrComponent, "AudioListener", index);
+            copyPtrComponent = DrawComponent(copyPtrComponent, index);
 
             if (copyPtrComponent != component && copyPtrComponent) {
                 SR_LOG("Inspector::DrawComponents() : component \"" + component->GetComponentName() + "\" has been replaced.");
@@ -342,5 +327,60 @@ namespace SR_CORE_GUI_NS {
         SR_CORE_GUI_NS::DrawPropertyContext context;
         context.pEditor = dynamic_cast<EditorGUI*>(GetManager());
         SR_CORE_GUI_NS::DrawPropertyContainer(context, &properties);
+    }
+
+    SR_UTILS_NS::Component* Inspector::DrawComponent(SR_UTILS_NS::Component* pComponent, uint32_t &index) {
+        auto&& pContext = dynamic_cast<EditorGUI*>(GetManager());
+
+        if (!pComponent || !pContext) {
+            return pComponent;
+        }
+
+        SRAssert1Once(pComponent->Valid());
+
+        ++index;
+
+        if (ImGui::BeginChild("InspectorComponent")) {
+            bool enabled = pComponent->IsEnabled();
+            if (ImGui::Checkbox(SR_FORMAT("##{}{}ckb", pComponent->GetComponentName().c_str(), (void*)pComponent).c_str(), &enabled)) {
+                pComponent->SetEnabled(enabled);
+            }
+
+            ImGui::SameLine();
+
+            if (ImGui::CollapsingHeader(SR_FORMAT("[{}] {}", index, pComponent->GetComponentName().c_str()).c_str())) {
+                SR_CORE_GUI_NS::DrawPropertyContext context;
+                context.pEditor = pContext;
+
+                if (SR_CORE_GUI_NS::DrawPropertyContainer(context, &pComponent->GetEntityMessages())) {
+                    ImGui::Separator();
+                }
+
+                if (!ComponentDrawer::DrawComponentOld(pComponent, pContext, index)) {
+                    DrawComponentProperties(pComponent);
+                }
+            }
+
+            if (!ImGui::GetDragDropPayload() && ImGui::BeginDragDropSource(ImGuiDragDropFlags_SourceAllowNullID)) {
+                m_pointersHolder = { pComponent->DynamicCast<SR_UTILS_NS::Component>() };
+                ImGui::SetDragDropPayload("InspectorComponent##Payload", &m_pointersHolder, sizeof(std::vector<SR_UTILS_NS::Component::Ptr>), ImGuiCond_Once);
+                ImGui::Text("%s ->", pComponent->GetComponentName().c_str());
+                ImGui::EndDragDropSource();
+            }
+
+            if (ImGui::BeginPopupContextWindow("InspectorMenu")) {
+                if (ImGui::BeginMenu("Remove component")) {
+                    if (ImGui::MenuItem(pComponent->GetComponentName().c_str())) {
+                        pComponent->GetParent()->RemoveComponent(pComponent);
+                        pComponent = nullptr;
+                    }
+                    ImGui::EndMenu();
+                }
+                ImGui::EndPopup();
+            }
+        }
+        ImGui::EndChild();
+
+        return dynamic_cast<SR_UTILS_NS::Component*>(pComponent);
     }
 }

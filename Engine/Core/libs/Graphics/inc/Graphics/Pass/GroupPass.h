@@ -33,10 +33,9 @@ namespace SR_GRAPH_NS {
 
         void SetRenderTechnique(RenderTechnique* pRenderTechnique) override;
 
-        SR_NODISCARD BasePass* FindPass(const std::string& name) const;
-        SR_NODISCARD BasePass* FindPass(uint64_t hashName) const;
+        SR_NODISCARD BasePass* FindPass(const SR_UTILS_NS::StringAtom& name) const;
 
-        void ForEachPass(const SR_HTYPES_NS::Function<void(BasePass*)>& callback);
+        bool ForEachPass(const SR_HTYPES_NS::Function<bool(BasePass*)>& callback) const;
 
         template<typename T> SR_NODISCARD T* FindPass() const;
 

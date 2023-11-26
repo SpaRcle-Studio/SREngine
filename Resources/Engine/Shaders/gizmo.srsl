@@ -1,0 +1,19 @@
+ShaderType Spatial;
+
+PolygonMode Fill;
+CullMode Back;
+DepthCompare LessOrEqual;
+PrimitiveTopology TriangleList;
+BlendEnabled true;
+DepthWrite true;
+DepthTest false;
+
+[[uniform], [public]] vec4 color;
+
+void fragment() {
+	COLOR = color;
+}
+
+void vertex() {
+    OUT_POSITION = PROJECTION_MATRIX * VIEW_MATRIX * MODEL_MATRIX * vec4(VERTEX, 1.0);
+}

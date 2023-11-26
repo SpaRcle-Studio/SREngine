@@ -18,12 +18,10 @@ namespace SR_GRAPH_NS {
         struct Sampler {
             uint32_t textureId = SR_ID_INVALID;
             uint32_t fboId = SR_ID_INVALID;
-
-            uint64_t fboHashName = 0;
+            SR_UTILS_NS::StringAtom id;
+            SR_UTILS_NS::StringAtom fboName;
             uint64_t index = 0;
             bool depth = false;
-
-            uint64_t hashId = 0;
         };
         using Samplers = std::vector<Sampler>;
         using ShaderPtr = SR_GTYPES_NS::Shader*;

@@ -31,7 +31,7 @@ namespace SR_GRAPH_NS {
                 continue;
             }
 
-            pShader->SetSampler2D(sampler.hashId, sampler.textureId);
+            pShader->SetSampler2D(sampler.id, sampler.textureId);
         }
     }
 
@@ -53,14 +53,14 @@ namespace SR_GRAPH_NS {
             Sampler sampler = Sampler();
 
             if (auto&& idNode = samplerNode.TryGetAttribute("Id")) {
-                sampler.hashId = SR_HASH_STR(idNode.ToString());
+                sampler.id = idNode.ToString();
             }
             else {
                 continue;
             }
 
             if (auto&& fboNameNode = samplerNode.TryGetAttribute("FBO")) {
-                sampler.fboHashName = SR_HASH_STR(fboNameNode.ToString());
+                sampler.fboName = fboNameNode.ToString();
 
                 if (auto&& depthAttribute = samplerNode.TryGetAttribute("Depth")) {
                     sampler.depth = depthAttribute.ToBool();
@@ -106,8 +106,8 @@ namespace SR_GRAPH_NS {
 
             sampler.fboId = SR_ID_INVALID;
 
-            if (sampler.fboHashName != 0) {
-                auto&& pFBOPass = dynamic_cast<IFramebufferPass*>(GetTechnique()->FindPass(sampler.fboHashName));
+            if (!sampler.fboName.Empty()) {
+                auto&& pFBOPass = dynamic_cast<IFramebufferPass*>(GetTechnique()->FindPass(sampler.fboName));
                 if (pFBOPass && pFBOPass->GetFramebuffer()) {
                     auto&& pFBO = pFBOPass->GetFramebuffer();
 

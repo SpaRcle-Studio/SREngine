@@ -152,7 +152,7 @@ namespace SR_CORE_GUI_NS {
         ImGui::PopStyleVar(5);
     }
 
-    void Guizmo::DrawManipulation(SR_GRAPH_NS::Types::Camera* camera) {
+    void Guizmo::DrawManipulation(SR_GTYPES_NS::Camera* camera) {
         if (!m_transform) {
             return;
         }
@@ -170,8 +170,10 @@ namespace SR_CORE_GUI_NS {
                 break;
             case SR_UTILS_NS::Measurement::Space2D: {
                 ImGuizmo::SetOrthographic(true);
-                auto&& matrix = SR_MATH_NS::Matrix4x4::Identity();
-                matrix = matrix.RotateAxis(SR_MATH_NS::FVector3(0, 1, 0), -90);
+                projection = camera->GetOrthogonalRef().ToGLM();
+                SR_MATH_NS::Matrix4x4 matrix = SR_MATH_NS::Matrix4x4::Identity();
+                matrix = matrix.RotateAxis(SR_MATH_NS::FVector3(0, 1, 0), 180);
+                matrix = matrix.RotateAxis(SR_MATH_NS::FVector3(0, 0, 1), 180);
                 view = matrix.ToGLM();
                 operation = static_cast<ImGuizmo::OPERATION>(operation & ~ImGuizmo::OPERATION::TRANSLATE_Z);
                 operation = static_cast<ImGuizmo::OPERATION>(operation & ~ImGuizmo::OPERATION::ROTATE_Z);
@@ -214,9 +216,9 @@ namespace SR_CORE_GUI_NS {
             SR_MATH_NS::DecomposeTransform(transform, translation, rotation, scale);
 
             switch (m_transform->GetMeasurement()) {
-                case Utils::Measurement::Space2D:
+                case SR_UTILS_NS::Measurement::Space2D:
                     break;
-                case Utils::Measurement::Space3D:
+                case SR_UTILS_NS::Measurement::Space3D:
                     translation = translation.InverseAxis(SR_MATH_NS::Axis::AXIS_X);
                     rotation = rotation.Degrees().InverseAxis(SR_MATH_NS::Axis::AXIS_YZ);
                     break;
@@ -243,12 +245,12 @@ namespace SR_CORE_GUI_NS {
         }
     }
 
-    void Guizmo::SetRect(SR_GRAPH_NS::Types::Camera* camera) {
+    void Guizmo::SetRect(SR_GTYPES_NS::Camera* pCamera) {
         ImGuiWindow *window = ImGui::GetCurrentWindow();
         if (!window || window->SkipItems)
             return;
 
-        auto imgSize = camera->GetSize();
+        auto imgSize = pCamera->GetSize();
 
         const auto winSize = SR_MATH_NS::FVector2(window->Size.x, window->Size.y);
 
@@ -281,15 +283,11 @@ namespace SR_CORE_GUI_NS {
                 matrix = glm::mat4(0);
                 break;
             case SR_UTILS_NS::Measurement::Space2D: {
-                SR_MATH_NS::FVector3 translation = transformation.GetTranslate();
-                translation = SR_MATH_NS::FVector3(1.f /* z-depth */, -translation.y, translation.x);
-
-                const SR_MATH_NS::FVector3 rotation = transformation.GetQuat().RotateY(90.f).EulerAngle();
-                const SR_MATH_NS::FVector3 scale = m_transform->GetScale();
-
-                matrix = glm::translate(glm::mat4(1), translation.ToGLM());
-                matrix *= mat4_cast(SR_MATH_NS::Quaternion::FromEuler(rotation).ToGLM());
-                matrix = glm::scale(matrix, scale.ToGLM());
+                //const SR_MATH_NS::FVector3 rotation = transformation.GetQuat().RotateY(90.f).EulerAngle();
+                matrix = glm::translate(glm::mat4(1), transformation.GetTranslate().ToGLM());
+                //matrix *= mat4_cast(SR_MATH_NS::Quaternion::FromEuler(rotation).ToGLM());
+                //matrix = glm::scale(matrix, transformation.GetScale().ToGLM());
+                matrix = glm::scale(matrix, m_transform->GetScale().ToGLM());
                 break;
             }
             case SR_UTILS_NS::Measurement::Space3D: {

@@ -51,6 +51,7 @@ namespace SR_GTYPES_NS {
         static Mesh::Ptr TryLoad(SR_HTYPES_NS::RawMesh* pRawMesh, MeshType type, uint32_t id);
         static Mesh::Ptr TryLoad(const SR_UTILS_NS::Path& path, MeshType type, uint32_t id);
         static Mesh::Ptr Load(const SR_UTILS_NS::Path& path, MeshType type, uint32_t id);
+        static Mesh::Ptr Load(const SR_UTILS_NS::Path& path, MeshType type, SR_UTILS_NS::StringAtom name);
 
     public:
         SR_NODISCARD virtual int32_t GetIBO() { return SR_ID_INVALID; }
@@ -61,7 +62,6 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD virtual bool IsMeshDestroyed() const { return m_isMeshDestroyed; }
 
         SR_NODISCARD virtual SR_FORCE_INLINE bool IsMeshActive() const noexcept { return !m_hasErrors; }
-        SR_NODISCARD virtual SR_FORCE_INLINE bool IsDebugMesh() const noexcept { return false; }
         SR_NODISCARD virtual SR_FORCE_INLINE bool IsFlatMesh() const noexcept { return false; }
         SR_NODISCARD virtual SR_MATH_NS::FVector3 GetTranslation() const { return SR_MATH_NS::FVector3::Zero(); }
         SR_NODISCARD virtual const SR_MATH_NS::Matrix4x4& GetModelMatrix() const;
@@ -74,6 +74,7 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD MaterialPtr GetMaterial() const { return m_material; }
         SR_NODISCARD int32_t GetVirtualUBO() const { return m_virtualUBO; }
         SR_NODISCARD MeshType GetMeshType() const noexcept { return m_meshType; }
+        SR_NODISCARD bool IsDebugMesh() const noexcept { return m_isDebugMesh; }
 
         virtual void OnResourceReloaded(SR_UTILS_NS::IResource* pResource);
         virtual void SetGeometryName(const std::string& name) { }
@@ -97,6 +98,8 @@ namespace SR_GTYPES_NS {
         void SetMaterial(Material* material);
         void SetMaterial(const SR_UTILS_NS::Path& path);
 
+        void SetIsDebugMesh(bool value) { m_isDebugMesh = value; }
+
     protected:
         virtual bool Calculate();
 
@@ -106,6 +109,9 @@ namespace SR_GTYPES_NS {
         MeshType m_meshType = MeshType::Unknown;
 
         MaterialPtr m_material = nullptr;
+
+        /// Задавать до добавления в рендерер
+        bool m_isDebugMesh = false;
 
         std::atomic<bool> m_hasErrors = false;
         std::atomic<bool> m_dirtyMaterial = false;

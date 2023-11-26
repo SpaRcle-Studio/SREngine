@@ -7,7 +7,9 @@
 namespace SR_GTYPES_NS {
     DebugLine::DebugLine()
         : Super(MeshType::Line)
-    { }
+    {
+        SetIsDebugMesh(true);
+    }
 
     DebugLine::DebugLine(SR_MATH_NS::FVector3 startPoint, SR_MATH_NS::FVector3 endPoint, SR_MATH_NS::FVector4 color)
         : Super(MeshType::Line)

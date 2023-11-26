@@ -33,11 +33,12 @@ namespace SR_GTYPES_NS {
     }
 
     SR_HTYPES_NS::Marshal::Ptr MeshComponent::Save(SR_UTILS_NS::SavableSaveData data) const {
-        auto&& pMarshal = Component::Save(data);
+        if (auto&& pMarshal = Component::Save(data)) {
+            pMarshal->Write(static_cast<int32_t>(GetMeshType()));
+            return pMarshal;
+        }
 
-        pMarshal->Write(static_cast<int32_t>(GetMeshType()));
-
-        return pMarshal;
+        return nullptr;
     }
 
     void MeshComponent::OnLoaded() {
