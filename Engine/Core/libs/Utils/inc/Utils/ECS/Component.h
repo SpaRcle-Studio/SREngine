@@ -29,7 +29,7 @@ namespace SR_HTYPES_NS {
 #define SR_INITIALIZE_COMPONENT(name)                                                                                   \
 public:                                                                                                                 \
     SR_INLINE static const std::string COMPONENT_NAME = #name; /** NOLINT */                                            \
-    SR_INLINE static const uint64_t COMPONENT_HASH_NAME = SR_HASH_STR(name::COMPONENT_NAME); /** NOLINT */              \
+    SR_INLINE static const uint64_t COMPONENT_HASH_NAME = SR_HASH_STR_REGISTER(name::COMPONENT_NAME); /** NOLINT */     \
     SR_NODISCARD uint64_t GetComponentHashName() const override { return name::COMPONENT_HASH_NAME; }                   \
     SR_NODISCARD const std::string& GetComponentName() const override { return name::COMPONENT_NAME; }                  \
 
@@ -118,7 +118,7 @@ namespace SR_UTILS_NS {
 
         SR_NODISCARD SR_FORCE_INLINE virtual bool ExecuteInEditMode() const { return false; }
         SR_NODISCARD virtual Math::FVector3 GetBarycenter() const { return SR_MATH_NS::InfinityFV3; }
-        SR_NODISCARD Component* BaseComponent() { return this; }
+        SR_NODISCARD Component* BaseComponent() noexcept { return this; }
         SR_NODISCARD IComponentable* GetParent() const;
         SR_NODISCARD ScenePtr GetScene() const;
         SR_NODISCARD bool HasScene() const { return TryGetScene(); }

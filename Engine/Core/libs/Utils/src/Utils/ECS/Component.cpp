@@ -26,6 +26,10 @@ namespace SR_UTILS_NS {
         data.pMarshal->Write(IsEnabled());
         data.pMarshal->Write<uint16_t>(GetEntityVersion());
 
+        if (!SR_UTILS_NS::ComponentManager::Instance().HasLoader(GetComponentHashName())) {
+            GetComponentProperties().SaveProperty(*data.pMarshal);
+        }
+
         return data.pMarshal;
     }
 
@@ -143,8 +147,18 @@ namespace SR_UTILS_NS {
     }
 
     Component* Component::CopyComponent() const {
-        SRHalt("Not implemented! [" + GetComponentName() + "]");
-        return nullptr;
+        auto&& pComponent = SR_UTILS_NS::ComponentManager::Instance().CreateComponentOfName(GetComponentHashName());
+        if (!pComponent) {
+            return nullptr;
+        }
+
+        /// TODO: non-optimized way
+        SR_HTYPES_NS::Marshal marshal;
+        GetComponentProperties().SaveProperty(marshal);
+        marshal.SetPosition(0);
+        pComponent->GetComponentProperties().LoadProperty(marshal);
+
+        return pComponent;
     }
 
     bool Component::IsPlayingMode() const {

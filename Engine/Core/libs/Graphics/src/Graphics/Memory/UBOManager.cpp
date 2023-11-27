@@ -149,6 +149,8 @@ namespace SR_GRAPH_NS::Memory {
     }
 
     UBOManager::BindResult UBOManager::BindUBO(VirtualUBO virtualUbo) noexcept {
+        SR_TRACY_ZONE;
+
         auto&& pShader = m_pipeline->GetCurrentShader();
 
 	#ifdef SR_DEBUG

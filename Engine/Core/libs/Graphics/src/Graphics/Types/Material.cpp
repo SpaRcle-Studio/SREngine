@@ -25,26 +25,24 @@ namespace SR_GTYPES_NS {
     void Material::Use() {
         InitContext();
 
-        auto&& pShader = m_context->GetCurrentShader() ? m_context->GetCurrentShader() : m_shader;
-
-        m_properties.ForEachProperty<MaterialProperty>([pShader](auto&& pProperty){
+        m_properties.ForEachProperty<MaterialProperty>([this](auto&& pProperty){
             auto&& hashId = pProperty->GetName().GetHash();
 
             switch (pProperty->GetShaderVarType()) {
                 case ShaderVarType::Int:
-                    pShader->SetInt(hashId, std::get<int32_t>(pProperty->GetData()));
+                    m_shader->SetInt(hashId, std::get<int32_t>(pProperty->GetData()));
                     break;
                 case ShaderVarType::Float:
-                    pShader->SetFloat(hashId, std::get<float_t>(pProperty->GetData()));
+                    m_shader->SetFloat(hashId, std::get<float_t>(pProperty->GetData()));
                     break;
                 case ShaderVarType::Vec2:
-                    pShader->SetVec2(hashId, std::get<SR_MATH_NS::FVector2>(pProperty->GetData()).template Cast<float_t>());
+                    m_shader->SetVec2(hashId, std::get<SR_MATH_NS::FVector2>(pProperty->GetData()).template Cast<float_t>());
                     break;
                 case ShaderVarType::Vec3:
-                    pShader->SetVec3(hashId, std::get<SR_MATH_NS::FVector3>(pProperty->GetData()).template Cast<float_t>());
+                    m_shader->SetVec3(hashId, std::get<SR_MATH_NS::FVector3>(pProperty->GetData()).template Cast<float_t>());
                     break;
                 case ShaderVarType::Vec4:
-                    pShader->SetVec4(hashId, std::get<SR_MATH_NS::FVector4>(pProperty->GetData()).template Cast<float_t>());
+                    m_shader->SetVec4(hashId, std::get<SR_MATH_NS::FVector4>(pProperty->GetData()).template Cast<float_t>());
                     break;
                 case ShaderVarType::Sampler2D:
                     /// samplers used at UseSamplers

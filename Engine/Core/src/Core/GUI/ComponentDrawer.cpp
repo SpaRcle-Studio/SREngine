@@ -43,6 +43,7 @@
 #include <Graphics/Font/Text2D.h>
 #include <Graphics/Font/Text3D.h>
 #include <Graphics/Font/Font.h>
+#include <Graphics/Utils/MeshUtils.h>
 
 #include <Audio/Types/AudioSource.h>
 #include <Audio/Types/AudioListener.h>
@@ -179,7 +180,7 @@ namespace SR_CORE_NS::GUI {
         if (auto&& pDescriptor = context->GetIconDescriptor(EditorIcon::Shapes)) {
             if (SR_GRAPH_GUI_NS::ImageButton(SR_FORMAT("##imgMeshBtn{}", index), pDescriptor, SR_MATH_NS::IVector2(50), 5)) {
                 auto&& resourcesFolder = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
-                auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesFolder, { { "Mesh", "obj,pmx,fbx,blend,stl,dae" } });
+                auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesFolder, { { "Mesh", SR_GRAPH_NS::SR_SUPPORTED_MESH_FORMATS } });
 
                 if (path.Exists()) {
                     pComponent->SetRawMesh(path);
@@ -581,7 +582,7 @@ namespace SR_CORE_NS::GUI {
 
     bool ComponentDrawer::DrawComponentOld(SR_UTILS_NS::Component* pComponent, EditorGUI* pContext, int32_t index) {
         #define SR_OLD_DRAW_COMPONENT(class, cmpName)                 \
-        if (pComponent->GetComponentName() == cmpName) {              \
+        if (pComponent->GetComponentName() == (cmpName)) {            \
             auto&& pCasted = dynamic_cast<class*>(pComponent);        \
             ComponentDrawer::DrawComponent(pCasted, pContext, index); \
             return true;                                              \
@@ -589,9 +590,6 @@ namespace SR_CORE_NS::GUI {
 
         SR_OLD_DRAW_COMPONENT(SR_SCRIPTING_NS::Behaviour, "Behaviour")
         SR_OLD_DRAW_COMPONENT(SR_GTYPES_NS::Camera, "Camera")
-        SR_OLD_DRAW_COMPONENT(SR_GTYPES_NS::Mesh3D, "Mesh3D")
-        SR_OLD_DRAW_COMPONENT(SR_GTYPES_NS::SkinnedMesh, "SkinnedMesh")
-        SR_OLD_DRAW_COMPONENT(SR_GTYPES_NS::ProceduralMesh, "ProceduralMesh")
         SR_OLD_DRAW_COMPONENT(SR_GTYPES_NS::Text2D, "Text2D")
         SR_OLD_DRAW_COMPONENT(SR_GTYPES_NS::Text3D, "Text3D")
         SR_OLD_DRAW_COMPONENT(SR_ANIMATIONS_NS::Animator, "Animator")

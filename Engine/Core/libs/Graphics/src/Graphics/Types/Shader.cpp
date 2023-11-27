@@ -282,6 +282,8 @@ namespace SR_GRAPH_NS::Types {
             return false;
         }
 
+        SR_TRACY_ZONE;
+
         auto&& ubo = GetPipeline()->GetCurrentUBO();
         if (ubo != SR_ID_INVALID && m_uniformBlock.Valid()) {
             GetPipeline()->UpdateUBO(ubo, m_uniformBlock.m_memory, m_uniformBlock.m_size);

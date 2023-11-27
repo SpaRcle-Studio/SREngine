@@ -204,6 +204,20 @@ namespace SR_CORE_GUI_NS {
                 }
                 break;
             }
+            case SR_UTILS_NS::StandardType::UInt16: {
+                auto&& value = static_cast<uint32_t>(pProperty->GetUInt16());
+                if (SR_GRAPH_GUI_NS::UInputInt32(label, value, static_cast<uint32_t>(pProperty->GetDrag()))) {
+                    pProperty->SetUInt16(static_cast<uint16_t>(value));
+                }
+                break;
+            }
+            case SR_UTILS_NS::StandardType::Int16: {
+                auto&& value = static_cast<int32_t>(pProperty->GetInt16());
+                if (SR_GRAPH_GUI_NS::InputInt(label, value, static_cast<int32_t>(pProperty->GetDrag()))) {
+                    pProperty->SetInt16(static_cast<int16_t>(value));
+                }
+                break;
+            }
             default:
                 ImGui::Text("Property \"%s\" has unknown type: %s",
                     pProperty->GetName().ToCStr(),

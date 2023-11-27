@@ -32,15 +32,6 @@ namespace SR_GTYPES_NS {
             .SetDontSave();
     }
 
-    SR_HTYPES_NS::Marshal::Ptr MeshComponent::Save(SR_UTILS_NS::SavableSaveData data) const {
-        if (auto&& pMarshal = Component::Save(data)) {
-            pMarshal->Write(static_cast<int32_t>(GetMeshType()));
-            return pMarshal;
-        }
-
-        return nullptr;
-    }
-
     void MeshComponent::OnLoaded() {
         Component::OnLoaded();
     }
@@ -92,22 +83,6 @@ namespace SR_GTYPES_NS {
         }
 
         Component::OnMatrixDirty();
-    }
-
-    SR_UTILS_NS::Component* MeshComponent::CopyComponent() const {
-        auto&& pMesh = SR_GRAPH_NS::CreateMeshByType(GetMeshType());
-        if (!pMesh) {
-            return nullptr;
-        }
-
-        if (auto&& pMeshComponent = dynamic_cast<MeshComponent*>(pMesh)) {
-            pMeshComponent->SetMaterial(GetMaterial());
-            return pMeshComponent;
-        }
-
-        SRHalt("Mesh is not a component! Memory leak...");
-
-        return nullptr;
     }
 
     void MeshComponent::FreeMesh() {

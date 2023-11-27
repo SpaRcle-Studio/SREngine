@@ -25,9 +25,15 @@ namespace SR_ANIMATIONS_NS {
     AnimationClip* AnimationClip::Load(const SR_UTILS_NS::Path &rawPath, uint32_t index) {
         SR_GLOBAL_LOCK
 
+        auto&& resourceManager = SR_UTILS_NS::ResourceManager::Instance();
+        if (!resourceManager.GetResPath().Concat(rawPath).Exists(SR_UTILS_NS::Path::Type::File)) {
+            SR_ERROR("AnimationClip::Load() : animation \"{}\" isn't exists!", rawPath.ToStringRef());
+            return nullptr;
+        }
+
         AnimationClip* pAnimationClip = nullptr;
 
-        SR_UTILS_NS::ResourceManager::Instance().Execute([&]() {
+        resourceManager.Execute([&]() {
             auto&& path = rawPath.SelfRemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetResPathRef());
             auto&& resourceId = path.GetExtensionView() == "animation" ? path.ToString() : std::to_string(index) + "|" + path.ToString();
 

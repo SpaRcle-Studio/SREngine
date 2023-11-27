@@ -340,12 +340,26 @@ namespace SR_CORE_GUI_NS {
 
             ImGui::SameLine();
 
-            if (!pComponent->IsAttached()) {
-                ImGui::TextColored(ImVec4(1, 1, 0, 1), "(Loaded)");
+            const bool isOpened = ImGui::CollapsingHeader(SR_FORMAT("[{}] {}", index, pComponent->GetComponentName().c_str()).c_str());
+
+            ImGui::SameLine(); ImGui::Text(" ");
+
+            if (pComponent->ExecuteInEditMode()) {
                 ImGui::SameLine();
+                ImGui::TextColored(ImVec4(0, 1, 0, 1), "[Editor mode]");
             }
 
-            if (ImGui::CollapsingHeader(SR_FORMAT("[{}] {}", index, pComponent->GetComponentName().c_str()).c_str())) {
+            if (pComponent->IsDontSave()) {
+                ImGui::SameLine();
+                ImGui::TextColored(ImVec4(1, 1, 0, 1), "[Dont save]");
+            }
+
+            if (!pComponent->IsAttached()) {
+                ImGui::SameLine();
+                ImGui::TextColored(ImVec4(1, 1, 0, 1), "[Loaded]");
+            }
+
+            if (isOpened) {
                 SR_CORE_GUI_NS::DrawPropertyContext context;
                 context.pEditor = pContext;
 

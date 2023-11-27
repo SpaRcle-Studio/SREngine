@@ -26,7 +26,7 @@ namespace SR_HTYPES_NS {
             OnRawMeshChanged();
         }
         else {
-            SetMeshId(GetMeshId());
+            SetMeshId(static_cast<MeshIndex>(GetMeshId()));
         }
     }
 
@@ -81,8 +81,22 @@ namespace SR_HTYPES_NS {
     }
 
     void IRawMeshHolder::SetRawMesh(const SR_UTILS_NS::Path& path) {
+        if (path.empty()) {
+            SetRawMesh(nullptr);
+            return;
+        }
+
         SR_UTILS_NS::ResourceManager::Instance().Execute([&]() {
             SetRawMesh(SR_HTYPES_NS::RawMesh::Load(path));
         });
+    }
+
+    const SR_UTILS_NS::Path& IRawMeshHolder::GetMeshPath() const noexcept {
+        if (m_rawMesh) {
+            return m_rawMesh->GetResourcePath();
+        }
+
+        static const SR_UTILS_NS::Path empty;
+        return empty;
     }
 }

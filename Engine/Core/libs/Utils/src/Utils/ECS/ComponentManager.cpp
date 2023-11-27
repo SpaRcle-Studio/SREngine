@@ -69,11 +69,14 @@ namespace SR_UTILS_NS {
 
             if (!Migration::Instance().Migrate(m_lastComponent, marshal, version, newVersion)) {
                 SR_WARN("ComponentManager::Load() : failed to migrate component!");
-                return std::make_pair(nullptr, ComponentLoadResult::Error);
+                return std::make_pair(CreateComponentOfName(m_lastComponent), ComponentLoadResult::Error);
             }
         }
 
-        if (auto&& pComponent = m_meta.at(m_lastComponent).loader(marshal, &m_context)) {
+        auto&& loader = m_meta.at(m_lastComponent).loader;
+        auto&& pComponent = loader ? loader(marshal, &m_context) : LoadComponent(m_lastComponent, marshal);
+
+        if (pComponent) {
             pComponent->m_isEnabled = enabled;
             return std::make_pair(pComponent, result);
         }
@@ -153,14 +156,14 @@ namespace SR_UTILS_NS {
 
                 if (lostBytes < 0 && loadResult != ComponentLoadResult::Migrated) {
                     SRHalt("ComponentManager::LoadComponents() : component is read incorrectly!");
-                    return false;
+                    continue;
                 }
 
                 if (lostBytes > 0 && loadResult != ComponentLoadResult::Migrated) {
                     SR_WARN("ComponentManager::LoadComponents() : bytes were lost when loading the component!\n\tBytes count: " + std::to_string(lostBytes));
                     if (lostBytes >= UINT16_MAX) {
                         SRHalt("Something went wrong!");
-                        return false;
+                        continue;
                     }
                     marshal.Skip(lostBytes);
                 }
@@ -174,5 +177,14 @@ namespace SR_UTILS_NS {
 
     void ComponentManager::SetContextInitializer(const ComponentManager::ContextInitializerFn &fn) {
         m_contextInitializer = fn;
+    }
+
+    bool ComponentManager::HasLoader(ComponentManager::Hash hashName) const {
+        auto&& pMetadataIt = m_meta.find(hashName);
+        if (pMetadataIt == m_meta.end()) {
+            return false;
+        }
+
+        return static_cast<bool>(pMetadataIt->second.loader);
     }
 }

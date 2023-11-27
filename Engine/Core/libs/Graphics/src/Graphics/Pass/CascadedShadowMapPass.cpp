@@ -37,6 +37,8 @@ namespace SR_GRAPH_NS {
     }
 
     void CascadedShadowMapPass::UseUniforms(IMeshClusterPass::ShaderPtr pShader, IMeshClusterPass::MeshPtr pMesh) {
+        SR_TRACY_ZONE;
+
         pMesh->UseModelMatrix();
 
         if (CheckCamera()) {

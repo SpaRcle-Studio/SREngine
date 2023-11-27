@@ -14,6 +14,8 @@ namespace SR_UTILS_NS {
             switch (GetStandardType()) {
                 case StandardType::Bool: pBlock->Write<bool>(GetBool()); break;
                 case StandardType::Float: pBlock->Write<float_t>(GetFloat()); break;
+                case StandardType::Int16: pBlock->Write<int32_t>(GetInt16()); break;
+                case StandardType::UInt16: pBlock->Write<uint32_t>(GetUInt16()); break;
                 case StandardType::Int32: pBlock->Write<int32_t>(GetInt32()); break;
                 case StandardType::UInt32: pBlock->Write<uint32_t>(GetUInt32()); break;
                 case StandardType::String: pBlock->Write<std::string>(GetString()); break;
@@ -45,6 +47,8 @@ namespace SR_UTILS_NS {
             switch (GetStandardType()) {
                 case StandardType::Bool: SetBool(pBlock->Read<bool>()); break;
                 case StandardType::Float: SetFloat(pBlock->Read<float_t>()); break;
+                case StandardType::Int16: SetInt16(pBlock->Read<int16_t>()); break;
+                case StandardType::UInt16: SetUInt16(pBlock->Read<uint16_t>()); break;
                 case StandardType::Int32: SetInt32(pBlock->Read<int32_t>()); break;
                 case StandardType::UInt32: SetUInt32(pBlock->Read<uint32_t>()); break;
                 case StandardType::String: SetString(pBlock->Read<std::string>()); break;

@@ -5,8 +5,6 @@
 #include <Graphics/Types/Geometry/SkinnedMesh.h>
 
 namespace SR_GTYPES_NS {
-    SR_REGISTER_COMPONENT(SkinnedMesh);
-
     SkinnedMesh::SkinnedMesh()
         : MeshComponent(MeshType::Skinned)
         , m_skeletonRef(GetThis())
@@ -96,47 +94,8 @@ namespace SR_GTYPES_NS {
     }
 
     SR_HTYPES_NS::Marshal::Ptr SR_GTYPES_NS::SkinnedMesh::Save(SR_UTILS_NS::SavableSaveData data) const {
-        auto&& pMarshal = MeshComponent::Save(data);
-
-        /// TODO: use unicode
-        pMarshal->Write<std::string>(GetMeshStringPath());
-        pMarshal->Write<int32_t>(GetMeshId());
-
-        pMarshal->Write<std::string>(m_material ? m_material->GetResourceId() : "None");
-
-        pMarshal = m_skeletonRef.Save(pMarshal);
-
-        return pMarshal;
-    }
-
-    SR_UTILS_NS::Component* SR_GTYPES_NS::SkinnedMesh::LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage *dataStorage) {
-        const auto&& type = static_cast<MeshType>(marshal.Read<int32_t>());
-
-        const auto&& path = marshal.Read<std::string>();
-        const auto&& id = marshal.Read<uint32_t>();
-
-        const auto&& material = marshal.Read<std::string>();
-
-        if (id < 0) {
-            return nullptr;
-        }
-
-        auto&& pMesh = dynamic_cast<SkinnedMesh*>(Mesh::Load(SR_UTILS_NS::Path(path, true), type, id));
-
-        if (pMesh) {
-            pMesh->GetSkeleton().Load(marshal);
-        }
-
-        if (pMesh && material != "None") {
-            if (auto&& pMaterial = SR_GTYPES_NS::Material::Load(SR_UTILS_NS::Path(material, true))) {
-                pMesh->SetMaterial(pMaterial);
-            }
-            else {
-                SR_ERROR("SkinnedMesh::LoadComponent() : failed to load material! Name: " + material);
-            }
-        }
-
-        return dynamic_cast<Component*>(pMesh);
+        SRHalt("Not implemented!"); /// перевести компонент на Property. См. Mesh3D
+        return nullptr;
     }
 
     std::vector<uint32_t> SkinnedMesh::GetIndices() const {
@@ -259,17 +218,6 @@ namespace SR_GTYPES_NS {
 
         m_dirtyMaterial = true;
         m_isCalculated = false;
-    }
-
-    SR_UTILS_NS::Component* SkinnedMesh::CopyComponent() const {
-        if (auto&& pComponent = dynamic_cast<SkinnedMesh*>(MeshComponent::CopyComponent())) {
-            pComponent->SetRawMesh(GetRawMesh());
-            pComponent->SetMeshId(GetMeshId());
-            pComponent->m_skeletonRef = m_skeletonRef.Copy(pComponent->GetThis());
-            return pComponent;
-        }
-
-        return nullptr;
     }
 
     std::string SkinnedMesh::GetMeshIdentifier() const {

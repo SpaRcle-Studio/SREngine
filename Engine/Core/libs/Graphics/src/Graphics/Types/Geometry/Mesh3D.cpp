@@ -10,10 +10,9 @@
 #include <Graphics/Types/Material.h>
 #include <Graphics/Types/Uniforms.h>
 #include <Graphics/Types/Shader.h>
+#include <Graphics/Utils/MeshUtils.h>
 
 namespace SR_GTYPES_NS {
-    SR_REGISTER_COMPONENT(Mesh3D);
-
     Mesh3D::Mesh3D()
         : Super(MeshType::Static)
     { }
@@ -94,52 +93,12 @@ namespace SR_GTYPES_NS {
         }
     }
 
-    SR_HTYPES_NS::Marshal::Ptr SR_GTYPES_NS::Mesh3D::Save(SR_UTILS_NS::SavableSaveData data) const {
-        if (auto&& pMarshal = MeshComponent::Save(data)) {
-
-            /// TODO: use unicode
-            pMarshal->Write<std::string>(GetMeshStringPath());
-            pMarshal->Write<int32_t>(static_cast<int32_t>(GetMeshId()));
-
-            pMarshal->Write<std::string>(m_material ? m_material->GetResourceId() : "None");
-
-            return pMarshal;
-        }
-        return nullptr;
-    }
-
-    SR_UTILS_NS::Component* SR_GTYPES_NS::Mesh3D::LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage *dataStorage) {
-        const auto&& type = static_cast<MeshType>(marshal.Read<int32_t>());
-
-        const auto&& path = marshal.Read<std::string>();
-        const auto&& id = marshal.Read<uint32_t>();
-
-        const auto&& material = marshal.Read<std::string>();
-
-        if (id < 0) {
-            return nullptr;
-        }
-
-        auto&& pMesh = Mesh::Load(SR_UTILS_NS::Path(path, true), type, id);
-
-        if (pMesh && material != "None") {
-            if (auto&& pMaterial = SR_GTYPES_NS::Material::Load(SR_UTILS_NS::Path(material, true))) {
-                pMesh->SetMaterial(pMaterial);
-            }
-            else {
-                SR_ERROR("Mesh3D::LoadComponent() : failed to load material! Name: " + material);
-            }
-        }
-
-        return dynamic_cast<Component*>(pMesh);
-    }
-
     std::vector<uint32_t> Mesh3D::GetIndices() const {
         return GetRawMesh()->GetIndices(GetMeshId());
     }
 
     bool Mesh3D::IsCalculatable() const {
-        return IsValidMeshId() && Mesh::IsCalculatable();
+        return IsValidMeshId() && Super::IsCalculatable();
     }
 
     void Mesh3D::UseMaterial() {
@@ -172,21 +131,33 @@ namespace SR_GTYPES_NS {
         return Super::GetMeshIdentifier();
     }
 
-    SR_UTILS_NS::Component* Mesh3D::CopyComponent() const {
-        if (auto&& pMesh = dynamic_cast<Mesh3D*>(MeshComponent::CopyComponent())) {
-            pMesh->SetRawMesh(GetRawMesh());
-            pMesh->SetMeshId(GetMeshId());
-            return pMesh;
-        }
-
-        return nullptr;
-    }
-
     void Mesh3D::OnResourceReloaded(SR_UTILS_NS::IResource* pResource) {
         if (GetRawMesh() == pResource) {
             OnRawMeshChanged();
             return;
         }
         Mesh::OnResourceReloaded(pResource);
+    }
+
+    bool Mesh3D::InitializeEntity() noexcept {
+        m_properties.AddCustomProperty<SR_UTILS_NS::PathProperty>("Mesh")
+            .AddFileFilter("Mesh", SR_GRAPH_NS::SR_SUPPORTED_MESH_FORMATS)
+            .SetGetter([this]()-> SR_UTILS_NS::Path {
+                return GetRawMesh() ? GetRawMesh()->GetResourcePath() : SR_UTILS_NS::Path();
+            })
+            .SetSetter([this](const SR_UTILS_NS::Path& path) {
+                SetRawMesh(path);
+            });
+
+        m_properties.AddCustomProperty<SR_UTILS_NS::StandardProperty>("Index")
+            .SetGetter([this](void* pData) {
+                *reinterpret_cast<int16_t*>(pData) = static_cast<int16_t>(GetMeshId());
+            })
+            .SetSetter([this](void* pData) {
+                SetMeshId(static_cast<MeshIndex>(*reinterpret_cast<int16_t*>(pData)));
+            })
+            .SetType(SR_UTILS_NS::StandardType::Int16);
+
+        return Super::InitializeEntity();
     }
 }

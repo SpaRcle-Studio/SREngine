@@ -104,7 +104,7 @@ namespace SR_GRAPH_NS::Types {
         if (m_material && m_material->GetResourcePath() == path) {
             return;
         }
-        SetMaterial(Material::Load(path));
+        SetMaterial(path.empty() ? nullptr : Material::Load(path));
     }
 
     void Mesh::SetMaterial(MaterialPtr pMaterial) {

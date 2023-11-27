@@ -2,8 +2,8 @@
 // Created by Monika on 19.09.2022.
 //
 
-#ifndef SRENGINE_MESHCOMPONENT_H
-#define SRENGINE_MESHCOMPONENT_H
+#ifndef SR_ENGINE_GRAPHICS_MESH_COMPONENT_H
+#define SR_ENGINE_GRAPHICS_MESH_COMPONENT_H
 
 #include <Graphics/Types/Geometry/IndexedMesh.h>
 #include <Graphics/Types/IRenderComponent.h>
@@ -17,7 +17,6 @@ namespace SR_GTYPES_NS {
         explicit MeshComponent(MeshType type);
 
     public:
-        SR_NODISCARD Component* CopyComponent() const override;
         SR_NODISCARD bool InitializeEntity() noexcept override;
 
         SR_MATH_NS::FVector3 GetBarycenter() const override;
@@ -28,8 +27,6 @@ namespace SR_GTYPES_NS {
         void OnMatrixDirty() override;
 
         void FreeMesh() override;
-
-        SR_HTYPES_NS::Marshal::Ptr Save(SR_UTILS_NS::SavableSaveData data) const override;
 
         SR_NODISCARD bool ExecuteInEditMode() const override;
         SR_NODISCARD bool IsUpdatable() const noexcept override { return false; }
@@ -66,4 +63,4 @@ namespace SR_GTYPES_NS {
     };
 }
 
-#endif //SRENGINE_MESHCOMPONENT_H
+#endif //SR_ENGINE_GRAPHICS_MESH_COMPONENT_H

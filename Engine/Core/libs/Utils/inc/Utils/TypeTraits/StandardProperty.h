@@ -39,6 +39,12 @@ namespace SR_UTILS_NS {
         SR_NODISCARD int32_t GetInt32() const noexcept { return GetValue<int32_t, StandardType::Int32>(); }
         void SetInt32(int32_t value) noexcept { SetValue<int32_t, StandardType::Int32>(value); }
 
+        SR_NODISCARD uint16_t GetUInt16() const noexcept { return GetValue<uint16_t, StandardType::UInt16>(); }
+        void SetUInt16(uint16_t value) noexcept { SetValue<uint16_t, StandardType::UInt16>(value); }
+
+        SR_NODISCARD int16_t GetInt16() const noexcept { return GetValue<int16_t, StandardType::Int16>(); }
+        void SetInt16(int16_t value) noexcept { SetValue<int16_t, StandardType::Int16>(value); }
+
         SR_NODISCARD uint32_t GetUInt32() const noexcept { return GetValue<uint32_t, StandardType::UInt32>(); }
         void SetUInt32(uint32_t value) noexcept { SetValue<uint32_t, StandardType::UInt32>(value); }
 

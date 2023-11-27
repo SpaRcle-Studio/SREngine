@@ -9,8 +9,6 @@
 #include <Graphics/Utils/MeshUtils.h>
 
 namespace SR_GTYPES_NS {
-    SR_REGISTER_COMPONENT(Sprite)
-
     Sprite::Sprite()
         : Super(MeshType::Sprite)
     { }
@@ -18,32 +16,6 @@ namespace SR_GTYPES_NS {
     std::string Sprite::GetMeshIdentifier() const {
         static const std::string id = "SpriteFromMemory";
         return id;
-    }
-
-    SR_UTILS_NS::Component* Sprite::LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage *dataStorage) { //Нафига dataStorage, если он не используется, чёртов полиморфизм
-        auto&& pSprite = SR_UTILS_NS::ComponentManager::Instance().CreateComponent<Sprite>();
-        pSprite->GetComponentProperties().LoadProperty(marshal);
-        return pSprite;
-    }
-
-    SR_HTYPES_NS::Marshal::Ptr Sprite::Save(SR_UTILS_NS::SavableSaveData data) const {
-        auto&& pMarshal = Component::Save(data); /// NOLINT идем в обход MeshComponent
-        GetComponentProperties().SaveProperty(*pMarshal);
-        return pMarshal;
-    }
-
-    SR_UTILS_NS::Component* Sprite::CopyComponent() const {
-        auto&& pMesh = SR_GRAPH_NS::CreateMeshComponentByType(GetMeshType());
-        if (!pMesh) {
-            return nullptr;
-        }
-
-        /// TODO: non-optimized way
-        SR_HTYPES_NS::Marshal marshal;
-        GetComponentProperties().SaveProperty(marshal);
-        pMesh->GetComponentProperties().LoadProperty(marshal);
-
-        return pMesh;
     }
 
     bool Sprite::InitializeEntity() noexcept {

@@ -48,6 +48,8 @@ namespace SR_UTILS_NS {
         Component* CreateComponentOfName(const std::string& name);
         Component* CreateComponentOfName(Hash hashName);
 
+        SR_NODISCARD bool HasLoader(Hash hashName) const;
+
         template<typename T> T* CreateComponent() {
             SR_SCOPED_LOCK
             auto&& pComponent = CreateComponentImpl(T::COMPONENT_HASH_NAME);
@@ -66,6 +68,18 @@ namespace SR_UTILS_NS {
             return nullptr;
         }
 
+        SR_NODISCARD Component* LoadComponent(uint64_t hashName, SR_HTYPES_NS::Marshal& marshal) {
+            SR_SCOPED_LOCK;
+            SR_TRACY_ZONE;
+
+            if (auto&& pComponent = CreateComponentOfName(hashName)) {
+                pComponent->GetComponentProperties().LoadProperty(marshal);
+                return pComponent;
+            }
+
+            return nullptr;
+        }
+
         const std::unordered_map<std::string, Hash>& GetComponentsNames() const {
             SR_SCOPED_LOCK
             return m_ids;
@@ -74,7 +88,7 @@ namespace SR_UTILS_NS {
         uint16_t GetVersion(const Component* pComponent) const;
         uint16_t GetVersionById(uint64_t id) const;
 
-        template<typename T> bool RegisterComponent(const Construction& constructor) {
+        template<typename T> bool RegisterComponentLoader(const Construction& constructor) {
             SR_SCOPED_LOCK
 
             auto&& hashName = T::COMPONENT_HASH_NAME;
@@ -82,6 +96,23 @@ namespace SR_UTILS_NS {
             m_meta[hashName].loader = [](SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage) -> Component* {
                 return T::LoadComponent(marshal, dataStorage);
             };
+
+            m_meta[hashName].name = T::COMPONENT_NAME;
+            m_meta[hashName].constructor = constructor;
+            m_meta[hashName].version = T::VERSION;
+
+            m_ids.insert(std::make_pair(T::COMPONENT_NAME, hashName));
+
+            /// не логируем, так как вызывается до инициализации отладчика
+            /// SR_SYSTEM_LOG("ComponentManager::RegisterComponent() : register \"" + T::COMPONENT_NAME + "\"...");
+
+            return true;
+        }
+
+        template<typename T> bool RegisterComponent(const Construction& constructor) {
+            SR_SCOPED_LOCK
+
+            auto&& hashName = T::COMPONENT_HASH_NAME;
 
             m_meta[hashName].name = T::COMPONENT_NAME;
             m_meta[hashName].constructor = constructor;
@@ -120,14 +151,23 @@ namespace SR_UTILS_NS {
     };
 }
 
-#define SR_REGISTER_COMPONENT_CUSTOM(name, constructor)                                                                                                         \
-    SR_INLINE_STATIC const bool SR_CODEGEN_REGISTER_COMPONENT_##name = SR_UTILS_NS::ComponentManager::Instance().RegisterComponent< name >([]() { /** NOLINT */ \
-         constructor                                                                                                                                            \
-    });                                                                                                                                                         \
+#define SR_REGISTER_COMPONENT_CUSTOM(name, constructor)                                                                                                             \
+    SR_INLINE_STATIC const bool SR_CODEGEN_REGISTER_COMPONENT_##name = SR_UTILS_NS::ComponentManager::Instance().RegisterComponentLoader<name>([]() { /** NOLINT */ \
+         constructor                                                                                                                                                \
+    });                                                                                                                                                             \
 
-#define SR_REGISTER_COMPONENT(name)                                                                                                                             \
-    SR_INLINE_STATIC const bool SR_CODEGEN_REGISTER_COMPONENT_##name = SR_UTILS_NS::ComponentManager::Instance().RegisterComponent< name >([]() { /** NOLINT */ \
-         return new name ();                                                                                                                                    \
-    });                                                                                                                                                         \
+#define SR_REGISTER_COMPONENT(name)                                                                                                                                 \
+    SR_INLINE_STATIC const bool SR_CODEGEN_REGISTER_COMPONENT_##name = SR_UTILS_NS::ComponentManager::Instance().RegisterComponentLoader<name>([]() { /** NOLINT */ \
+         return new name ();                                                                                                                                        \
+    });                                                                                                                                                             \
+
+
+#define SR_REGISTER_NEW_COMPONENT(className, version)                                                                                                     \
+    SR_INITIALIZE_COMPONENT(className)                                                                                                                    \
+    SR_ENTITY_SET_VERSION(version);                                                                                                                       \
+    SR_INLINE_STATIC SR_UTILS_NS::Component* AllocateNew() { return (new className())->BaseComponent(); }                                                 \
+    SR_INLINE_STATIC bool CODEGEN_REGISTER_COMPONENT_STATUS = SR_UTILS_NS::ComponentManager::Instance().RegisterComponent<className>([]() { /** NOLINT */ \
+        return AllocateNew();                                                                                                                             \
+    });                                                                                                                                                   \
 
 #endif //SRENGINE_COMPONENTMANAGER_H

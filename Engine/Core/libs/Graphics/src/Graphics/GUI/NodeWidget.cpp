@@ -17,8 +17,7 @@ namespace SR_GRAPH_GUI_NS {
     NodeWidget::NodeWidget(std::string name, SR_MATH_NS::IVector2 size)
         : Super(std::move(name), size)
     {
-        auto&& texturePath = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Editor/Textures/BlueprintBackground.png");
-        m_nodeBuilder = new NodeBuilder(SR_GTYPES_NS::Texture::Load(texturePath));
+        m_nodeBuilder = new NodeBuilder(SR_GTYPES_NS::Texture::Load("Editor/Textures/BlueprintBackground.png"));
 
         m_creationPopup = new PopupItemSubWidget(GetName() + "-Popup");
     }

@@ -60,22 +60,25 @@ namespace SR_GRAPH_NS {
     )
 
     class MaterialProperty : public SR_UTILS_NS::Property {
-        SR_REGISTER_TYPE_TRAITS_PROPERTY(MaterialProperty, 1000)
+        SR_REGISTER_TYPE_TRAITS_PROPERTY(MaterialProperty, 1001)
     public:
         SR_NODISCARD SR_UTILS_NS::StringAtom GetDisplayName() const noexcept { return m_displayName; }
         SR_NODISCARD ShaderVarType GetShaderVarType() const noexcept { return m_type; }
         SR_NODISCARD const ShaderPropertyVariant& GetData() const noexcept { return m_data; }
         SR_NODISCARD SR_GTYPES_NS::Material* GetMaterial() const noexcept { return m_material; }
+        SR_NODISCARD bool IsPushConstant() const noexcept { return m_pushConstant; }
 
         MaterialProperty& SetDisplayName(SR_UTILS_NS::StringAtom value) noexcept { m_displayName = value; return *this; }
         MaterialProperty& SetData(const ShaderPropertyVariant& value) noexcept { m_data = value; return *this; }
         MaterialProperty& SetShaderVarType(ShaderVarType value) noexcept { m_type = value; return *this; }
         MaterialProperty& SetMaterial(SR_GTYPES_NS::Material* value) noexcept { m_material = value; return *this; }
+        MaterialProperty& SetPushConstant(bool value) noexcept { m_pushConstant = value; return *this; }
 
     private:
         SR_GTYPES_NS::Material* m_material = nullptr;
         SR_UTILS_NS::StringAtom m_displayName;
         ShaderPropertyVariant m_data;
+        bool m_pushConstant = false;
         ShaderVarType m_type = ShaderVarType::Unknown;
 
     };

@@ -8,7 +8,11 @@
 namespace SR_PTYPES_NS {
     PhysXCollisionShape::PhysXCollisionShape(Super::LibraryPtr pLibrary)
         : Super(pLibrary)
-    { }
+    {
+        if (pLibrary) {
+            SetType(pLibrary->GetDefaultShape());
+        }
+    }
 
     PhysXCollisionShape::~PhysXCollisionShape() {
         if (m_shape) {

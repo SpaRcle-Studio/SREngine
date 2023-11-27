@@ -13,8 +13,7 @@
 
 namespace SR_GTYPES_NS {
     class SkinnedMesh final : public MeshComponent, public SR_HTYPES_NS::IRawMeshHolder {
-        SR_ENTITY_SET_VERSION(1002);
-        SR_INITIALIZE_COMPONENT(SkinnedMesh);
+        SR_REGISTER_NEW_COMPONENT(SkinnedMesh, 1003);
     public:
         SkinnedMesh();
 
@@ -25,8 +24,6 @@ namespace SR_GTYPES_NS {
         typedef Vertices::SkinnedMeshVertex VertexType;
 
     public:
-        static Component* LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage);
-
         void Update(float dt) override;
         void UseMaterial() override;
         void UseModelMatrix() override;
@@ -38,8 +35,6 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD std::string GetMeshIdentifier() const override;
         SR_NODISCARD SR_UTILS_NS::EntityRef& GetSkeleton() { return m_skeletonRef; }
         SR_NODISCARD uint32_t GetMaxBones() const;
-
-        SR_NODISCARD Component* CopyComponent() const override;
 
     private:
         bool PopulateSkeletonMatrices();

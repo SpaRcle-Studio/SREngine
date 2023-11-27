@@ -6,15 +6,9 @@
 #include <Utils/ECS/ComponentManager.h>
 
 namespace SR_GTYPES_NS {
-    SR_REGISTER_COMPONENT(ProceduralMesh);
-
     ProceduralMesh::ProceduralMesh()
         : Super(MeshType::Procedural)
     { }
-
-    SR_UTILS_NS::Component* ProceduralMesh::LoadComponent(SR_HTYPES_NS::Marshal &marshal, const SR_HTYPES_NS::DataStorage *dataStorage) {
-        return nullptr;
-    }
 
     void ProceduralMesh::SetVertices(const std::vector<Vertices::StaticMeshVertex>& vertices) {
         m_indices.clear();
@@ -38,14 +32,6 @@ namespace SR_GTYPES_NS {
 
         m_countVertices = m_vertices.size();
         m_countIndices = m_indices.size();
-    }
-
-    SR_HTYPES_NS::Marshal::Ptr SR_GTYPES_NS::ProceduralMesh::Save(SR_UTILS_NS::SavableSaveData data) const {
-        auto&& pMarshal = MeshComponent::Save(data);
-
-        pMarshal->Write(m_material ? m_material->GetResourceId() : "None");
-
-        return pMarshal;
     }
 
     bool ProceduralMesh::Calculate()  {
@@ -157,7 +143,7 @@ namespace SR_GTYPES_NS {
     }
 
     SR_UTILS_NS::Component* ProceduralMesh::CopyComponent() const {
-        if (auto&& pComponent = dynamic_cast<ProceduralMesh*>(MeshComponent::CopyComponent())) {
+        if (auto&& pComponent = dynamic_cast<ProceduralMesh*>(Super::CopyComponent())) {
             pComponent->SetIndexedVertices((void*)m_vertices.data(), m_vertices.size());
             pComponent->SetIndices((void*)m_indices.data(), m_indices.size());
             return pComponent;

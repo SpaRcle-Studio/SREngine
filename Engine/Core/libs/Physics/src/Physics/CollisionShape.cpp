@@ -16,7 +16,7 @@ namespace SR_PTYPES_NS {
     CollisionShape::~CollisionShape() = default;
 
     void CollisionShape::UpdateDebugShape() {
-        if (!m_rigidbody->IsDebugEnabled()) {
+        if (!m_rigidbody || !m_rigidbody->IsDebugEnabled()) {
             return;
         }
 

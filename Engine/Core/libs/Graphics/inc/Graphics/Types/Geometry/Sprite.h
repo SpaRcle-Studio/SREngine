@@ -18,8 +18,7 @@ namespace SR_GTYPES_NS {
     };
 
     class Sprite : public SR_GTYPES_NS::MeshComponent {
-        SR_ENTITY_SET_VERSION(1001);
-        SR_INITIALIZE_COMPONENT(Sprite);
+        SR_REGISTER_NEW_COMPONENT(Sprite, 1001)
         using Super = SR_GTYPES_NS::MeshComponent;
     public:
         Sprite();
@@ -38,8 +37,6 @@ namespace SR_GTYPES_NS {
 
         SR_NODISCARD bool IsFlatMesh() const noexcept override { return true; }
 
-        static Component* LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage);
-
         SR_NODISCARD std::vector<uint32_t> GetIndices() const override;
         SR_NODISCARD std::string GetMeshIdentifier() const override;
 
@@ -54,13 +51,9 @@ namespace SR_GTYPES_NS {
             m_windowBorder = border;
         }
 
-        SR_NODISCARD Component* CopyComponent() const override;
-
     protected:
         bool Calculate() override;
         void Draw() override;
-
-        SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save(SR_UTILS_NS::SavableSaveData data) const override;
 
     protected:
         bool m_sliced = true;

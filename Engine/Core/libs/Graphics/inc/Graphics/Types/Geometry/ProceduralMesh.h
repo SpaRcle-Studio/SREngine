@@ -10,8 +10,7 @@
 namespace SR_GTYPES_NS {
     class ProceduralMesh : public MeshComponent {
         using Super = MeshComponent;
-        SR_ENTITY_SET_VERSION(1000);
-        SR_INITIALIZE_COMPONENT(ProceduralMesh);
+        SR_REGISTER_NEW_COMPONENT(ProceduralMesh, 1001);
     public:
         ProceduralMesh();
 
@@ -19,8 +18,6 @@ namespace SR_GTYPES_NS {
         typedef Vertices::StaticMeshVertex VertexType;
 
     public:
-        static Component* LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage);
-
         void SetIndexedVertices(void* pData, uint64_t count);
         void SetIndices(void* pData, uint64_t count);
         void SetVertices(const std::vector<Vertices::StaticMeshVertex>& vertices);
@@ -39,7 +36,6 @@ namespace SR_GTYPES_NS {
         void Draw() override;
         void SetDirtyMesh();
 
-        SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save(SR_UTILS_NS::SavableSaveData data) const override;
         SR_NODISCARD std::vector<uint32_t> GetIndices() const override;
 
     private:

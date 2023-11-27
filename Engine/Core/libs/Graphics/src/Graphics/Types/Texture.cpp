@@ -61,6 +61,10 @@ namespace SR_GTYPES_NS {
 
     Texture::Ptr Texture::Load(const std::string& rawPath, const std::optional<Memory::TextureConfig>& config) {
         auto&& resourceManager = SR_UTILS_NS::ResourceManager::Instance();
+        if (!resourceManager.GetResPath().Concat(rawPath).Exists(SR_UTILS_NS::Path::Type::File)) {
+            SR_ERROR("Texture::Load() : texture \"{}\" isn't exists!", rawPath);
+            return nullptr;
+        }
 
         Texture::Ptr pTexture = nullptr;
 

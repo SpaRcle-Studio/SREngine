@@ -199,7 +199,8 @@ namespace SR_GRAPH_NS::Memory {
     }
 
     bool ShaderProgramManager::IsAvailable(ShaderProgramManager::VirtualProgram virtualProgram) const noexcept {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
+        SR_TRACY_ZONE;
 
         auto&& pIt = m_virtualTable.find(virtualProgram);
         if (pIt == std::end(m_virtualTable)) {
@@ -214,7 +215,8 @@ namespace SR_GRAPH_NS::Memory {
     }
 
     ShaderProgramManager::ShaderProgram ShaderProgramManager::GetProgram(VirtualProgram virtualProgram) const noexcept {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
+        SR_TRACY_ZONE;
 
         auto&& pIt = m_virtualTable.find(virtualProgram);
         if (pIt == std::end(m_virtualTable)) {
