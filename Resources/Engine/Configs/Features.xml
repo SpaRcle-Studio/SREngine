@@ -4,6 +4,7 @@
        <EvoCompiler Value="true"/>
        <CompilePDB Value="false"/>
        <ScriptMultiInstances Value="false"/>
+       <DisableStackTrace Value="true"/>
 
        <UpdateScripts Value="false"/>
        <UseEditorGUIScript Value="false"/>

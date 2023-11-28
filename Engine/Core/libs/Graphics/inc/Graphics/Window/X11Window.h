@@ -27,7 +27,9 @@ namespace SR_GRAPH_NS {
     public:
         void PollEvents() override;
 
-        xcb_intern_atom_reply_t* ChangeWMProperty(const std::string& atomName);
+        std::vector<xcb_intern_atom_reply_t*> ChangeWMProtocols(const std::vector<std::string>& protocolNames);
+        xcb_intern_atom_reply_t* ChangeWMProtocol(const std::string& protocolName);
+        std::vector<xcb_intern_atom_reply_t*> ChangeWMAllowedActions(const std::vector<std::string>& propertyNames);
 
         void Close() override;
         //void Maximize() override;
