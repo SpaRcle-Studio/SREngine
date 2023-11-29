@@ -52,8 +52,20 @@ namespace SR_CORE_NS::GUI {
         }
 
         /// что-то пошло не так, потеряли камеру
-        if (m_enabled && !m_camera.Valid()) {
+        if (m_enabled && !m_camera) {
             InitCamera();
+        }
+
+        if (m_enabled && !m_platform && m_isPrefab) {
+            m_platform = m_scene->Find("PREFAB_PLATFORM");
+            if (!m_platform) {
+                m_platform = m_scene->InstanceFromFile("Engine/Models/plane_extended.obj");
+            }
+            if (m_platform) {
+                m_platform->SetName("PREFAB_PLATFORM");
+                m_platform->SetDontSave(true);
+                m_platform->GetTransform()->SetScale(2.5, 1.f, 2.5);
+            }
         }
 
         if (m_camera.RecursiveLockIfValid()) {

@@ -6,9 +6,14 @@
 
 namespace SR_GTYPES_NS {
     SkinnedMesh::SkinnedMesh()
-        : MeshComponent(MeshType::Skinned)
-        , m_skeletonRef(GetThis())
-    { }
+        : Super(MeshType::Skinned)
+    {
+        m_entityMessages.AddCustomProperty<SR_UTILS_NS::LabelProperty>("SkeletonInv")
+            .SetLabel("Skeleton is not usable!")
+            .SetColor(SR_MATH_NS::FColor(1.f, 0.f, 0.f, 1.f))
+            .SetActiveCondition([this] { return !IsSkeletonUsable(); })
+            .SetDontSave();
+    }
 
     SkinnedMesh::~SkinnedMesh() {
         SetRawMesh(nullptr);
@@ -93,11 +98,6 @@ namespace SR_GTYPES_NS {
         }
     }
 
-    SR_HTYPES_NS::Marshal::Ptr SR_GTYPES_NS::SkinnedMesh::Save(SR_UTILS_NS::SavableSaveData data) const {
-        SRHalt("Not implemented!"); /// перевести компонент на Property. См. Mesh3D
-        return nullptr;
-    }
-
     std::vector<uint32_t> SkinnedMesh::GetIndices() const {
         return GetRawMesh()->GetIndices(GetMeshId());
     }
@@ -107,28 +107,28 @@ namespace SR_GTYPES_NS {
     }
 
     bool SkinnedMesh::IsSkeletonUsable() const {
-        return m_skeletonRef.GetComponent<SR_ANIMATIONS_NS::Skeleton>();
+        return GetSkeleton().GetComponent<SR_ANIMATIONS_NS::Skeleton>();
     }
 
     void SkinnedMesh::Update(float dt) {
         const bool usable = IsSkeletonUsable();
 
         if (m_skeletonIsBroken && !usable) {
-            return MeshComponent::Update(dt);
+            return Super::Update(dt);
         }
 
         if (!m_skeletonIsBroken && usable) {
-            return MeshComponent::Update(dt);
+            return Super::Update(dt);
         }
 
         m_skeletonIsBroken = !usable;
         m_renderScene->SetDirty();
 
-        MeshComponent::Update(dt);
+        Super::Update(dt);
     };
 
     void SkinnedMesh::UseMaterial() {
-        MeshComponent::UseMaterial();
+        Super::UseMaterial();
         UseModelMatrix();
     }
 
@@ -144,7 +144,7 @@ namespace SR_GTYPES_NS {
 
         pShader->SetMat4(SHADER_MODEL_MATRIX, m_modelMatrix);
 
-        auto&& pSkeleton = m_skeletonRef.GetComponent<SR_ANIMATIONS_NS::Skeleton>();
+        auto&& pSkeleton = GetSkeleton().GetComponent<SR_ANIMATIONS_NS::Skeleton>();
         auto&& pRenderScene = GetRenderScene();
 
         SRAssert(pRenderScene);
@@ -191,7 +191,7 @@ namespace SR_GTYPES_NS {
             return false;
         }
 
-        auto&& pSkeleton = m_skeletonRef.GetComponent<SR_ANIMATIONS_NS::Skeleton>();
+        auto&& pSkeleton = GetSkeleton().GetComponent<SR_ANIMATIONS_NS::Skeleton>();
 
         if (!pSkeleton || !pSkeleton->GetRootBone()) {
             return false;
@@ -210,7 +210,7 @@ namespace SR_GTYPES_NS {
             SetGeometryName(GetRawMesh()->GetGeometryName(GetMeshId()));
         }
 
-        if (auto&& pSkeleton = m_skeletonRef.GetComponent<SR_ANIMATIONS_NS::Skeleton>()) {
+        if (auto&& pSkeleton = GetSkeleton().GetComponent<SR_ANIMATIONS_NS::Skeleton>()) {
             pSkeleton->ResetSkeleton();
         }
 
@@ -225,7 +225,7 @@ namespace SR_GTYPES_NS {
             return SR_FORMAT("{}|{}|{}", pRawMesh->GetResourceId().c_str(), GetMeshId(), pRawMesh->GetReloadCount());
         }
 
-        return MeshComponent::GetMeshIdentifier();
+        return Super::GetMeshIdentifier();
     }
 
     uint32_t SkinnedMesh::GetMaxBones() const {
@@ -234,5 +234,40 @@ namespace SR_GTYPES_NS {
         }
 
         return SR_GRAPH_NS::RoundBonesCount(GetRawMesh()->GetOptimizedBones().size());
+    }
+
+    bool SkinnedMesh::InitializeEntity() noexcept {
+        m_properties.AddCustomProperty<SR_UTILS_NS::PathProperty>("Mesh")
+            .AddFileFilter("Mesh", SR_GRAPH_NS::SR_SUPPORTED_MESH_FORMATS)
+            .SetGetter([this]()-> SR_UTILS_NS::Path {
+                return GetRawMesh() ? GetRawMesh()->GetResourcePath() : SR_UTILS_NS::Path();
+            })
+            .SetSetter([this](const SR_UTILS_NS::Path& path) {
+                SetRawMesh(path);
+            });
+
+        m_properties.AddCustomProperty<SR_UTILS_NS::StandardProperty>("Index")
+            .SetGetter([this](void* pData) {
+                *reinterpret_cast<int16_t*>(pData) = static_cast<int16_t>(GetMeshId());
+            })
+            .SetSetter([this](void* pData) {
+                SetMeshId(static_cast<MeshIndex>(*reinterpret_cast<int16_t*>(pData)));
+            })
+            .SetType(SR_UTILS_NS::StandardType::Int16);
+
+        m_properties.AddEntityRefProperty(SR_SKELETON_REF_PROP_NAME, GetThis())
+            .SetWidth(260.f);
+
+        return Super::InitializeEntity();
+    }
+
+    SR_UTILS_NS::EntityRef& SkinnedMesh::GetSkeleton() const {
+        auto&& pSkeletonRefProperty = GetComponentProperties().Find<SR_UTILS_NS::EntityRefProperty>(SR_SKELETON_REF_PROP_NAME);
+        if (pSkeletonRefProperty) {
+            return pSkeletonRefProperty->GetEntityRef();
+        }
+        SRHaltOnce0();
+        static SR_UTILS_NS::EntityRef defaultEntityRef;
+        return defaultEntityRef;
     }
 }

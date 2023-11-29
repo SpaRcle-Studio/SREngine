@@ -16,7 +16,7 @@ namespace SR_UTILS_NS {
         , m_target(SR_UTILS_NS::Exchange(other.m_target, { }))
     { }
 
-    EntityRef &EntityRef::operator=(EntityRef&& other) {
+    EntityRef &EntityRef::operator=(EntityRef&& other) noexcept {
         m_path = SR_UTILS_NS::Exchange(other.m_path, { });
         m_relative = SR_UTILS_NS::Exchange(other.m_relative, { });
         m_owner = SR_UTILS_NS::Exchange(other.m_owner, { });
@@ -146,5 +146,18 @@ namespace SR_UTILS_NS {
         ref.m_relative = m_relative;
         ref.m_path = m_path;
         return ref;
+    }
+
+    void EntityRefProperty::SaveProperty(MarshalRef marshal) const noexcept {
+        if (auto&& pBlock = AllocatePropertyBlock()) {
+            m_entityRef.Save(*pBlock);
+            SavePropertyBase(marshal, std::move(pBlock));
+        }
+    }
+
+    void EntityRefProperty::LoadProperty(MarshalRef marshal) noexcept {
+        if (auto&& pBlock = LoadPropertyBase(marshal)) {
+            m_entityRef.Load(*pBlock);
+        }
     }
 }

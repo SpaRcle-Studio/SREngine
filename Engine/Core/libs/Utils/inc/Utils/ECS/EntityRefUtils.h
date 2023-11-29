@@ -2,8 +2,8 @@
 // Created by Monika on 30.11.2022.
 //
 
-#ifndef SRENGINE_ENTITYREFUTILS_H
-#define SRENGINE_ENTITYREFUTILS_H
+#ifndef SR_ENGINE_UTILS_ENTITY_REF_UTILS_H
+#define SR_ENGINE_UTILS_ENTITY_REF_UTILS_H
 
 #include <Utils/Common/Enumerations.h>
 #include <Utils/Types/SafePointer.h>
@@ -20,14 +20,8 @@ namespace SR_UTILS_NS {
 namespace SR_UTILS_NS::EntityRefUtils {
     struct OwnerRef {
         OwnerRef() = default;
-
-        OwnerRef(const SR_HTYPES_NS::SharedPtr<Entity>& ptr) /** NOLINT */
-            : pEntity(ptr)
-        { }
-
-        OwnerRef(const SR_HTYPES_NS::SafePtr<SR_WORLD_NS::Scene>& ptr) /** NOLINT */
-            : pScene(ptr)
-        { }
+        SR_MAYBE_UNUSED OwnerRef(const SR_HTYPES_NS::SharedPtr<Entity>& ptr); /// NOLINT
+        SR_MAYBE_UNUSED OwnerRef(const SR_HTYPES_NS::SafePtr<SR_WORLD_NS::Scene>& ptr); /// NOLINT
 
         OwnerRef(OwnerRef&& other) noexcept
             : pEntity(SR_UTILS_NS::Exchange(other.pEntity, { }))
@@ -86,4 +80,4 @@ namespace SR_UTILS_NS::EntityRefUtils {
     SR_MAYBE_UNUSED bool IsTargetInitialized(const OwnerRef& owner);
 }
 
-#endif //SRENGINE_ENTITYREFUTILS_H
+#endif //SR_ENGINE_UTILS_ENTITY_REF_UTILS_H

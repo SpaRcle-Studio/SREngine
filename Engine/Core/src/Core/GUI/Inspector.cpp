@@ -69,6 +69,11 @@ namespace SR_CORE_GUI_NS {
                 ImGui::TextColored(ImVec4(1, 1, 0, 1), "(Is dirty)");
             }
 
+            if (m_gameObject->IsDontSave()) {
+                ImGui::SameLine();
+                ImGui::TextColored(ImVec4(1, 1, 0, 1), "(Dont Save)");
+            }
+
             /// --------------------------------------------------------------------------------------------------------
 
             std::string gm_name = m_gameObject->GetName();
@@ -342,6 +347,13 @@ namespace SR_CORE_GUI_NS {
 
             const bool isOpened = ImGui::CollapsingHeader(SR_FORMAT("[{}] {}", index, pComponent->GetComponentName().c_str()).c_str());
 
+            if (!ImGui::GetDragDropPayload() && ImGui::BeginDragDropSource(ImGuiDragDropFlags_SourceAllowNullID)) {
+                m_pointersHolder = { pComponent->DynamicCast<SR_UTILS_NS::Component>() };
+                ImGui::SetDragDropPayload("InspectorComponent##Payload", &m_pointersHolder, sizeof(std::vector<SR_UTILS_NS::Component::Ptr>), ImGuiCond_Once);
+                ImGui::Text("%s ->", pComponent->GetComponentName().c_str());
+                ImGui::EndDragDropSource();
+            }
+
             ImGui::SameLine(); ImGui::Text(" ");
 
             if (pComponent->ExecuteInEditMode()) {
@@ -370,13 +382,6 @@ namespace SR_CORE_GUI_NS {
                 if (!ComponentDrawer::DrawComponentOld(pComponent, pContext, index)) {
                     DrawComponentProperties(pComponent);
                 }
-            }
-
-            if (!ImGui::GetDragDropPayload() && ImGui::BeginDragDropSource(ImGuiDragDropFlags_SourceAllowNullID)) {
-                m_pointersHolder = { pComponent->DynamicCast<SR_UTILS_NS::Component>() };
-                ImGui::SetDragDropPayload("InspectorComponent##Payload", &m_pointersHolder, sizeof(std::vector<SR_UTILS_NS::Component::Ptr>), ImGuiCond_Once);
-                ImGui::Text("%s ->", pComponent->GetComponentName().c_str());
-                ImGui::EndDragDropSource();
             }
 
             if (ImGui::BeginPopupContextWindow("InspectorMenu")) {

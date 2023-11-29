@@ -60,6 +60,8 @@ namespace SR_GTYPES_NS {
 
         SR_MATH_NS::FVector3 m_barycenter = SR_MATH_NS::FVector3(SR_MATH_NS::UnitMAX);
 
+        SR_UTILS_NS::PropertyContainer* m_customMaterialProperties = nullptr;
+
     };
 }
 

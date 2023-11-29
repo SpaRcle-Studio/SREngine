@@ -9,6 +9,14 @@
 #include <Utils/ECS/GameObject.h>
 
 namespace SR_UTILS_NS::EntityRefUtils {
+    EntityRefUtils::OwnerRef::OwnerRef(const SR_HTYPES_NS::SharedPtr<Entity>& ptr)
+        : pEntity(ptr)
+    { }
+
+    EntityRefUtils::OwnerRef::OwnerRef(const SR_HTYPES_NS::SafePtr<SR_WORLD_NS::Scene>& ptr)
+        : pScene(ptr)
+    { }
+
     Entity::Ptr GetEntity(const OwnerRef& owner, const RefPath& path) {
         Entity::Ptr pEntity;
 
@@ -174,9 +182,9 @@ namespace SR_UTILS_NS::EntityRefUtils {
                 }
 
                 PathItem item = {
-                        .hashName = pGameObject->GetHashName(),
-                        .index = objectIndex,
-                        .action = Action::Action_Child
+                    .hashName = pGameObject->GetHashName(),
+                    .index = objectIndex,
+                    .action = Action::Action_Child
                 };
 
                 refPath.emplace_back(item);
@@ -215,7 +223,7 @@ namespace SR_UTILS_NS::EntityRefUtils {
         /// Вычитаем 2, так как один это конец массива, а второй это компонент
         for (int32_t i = fromPath.size() - 2; i >= offset; --i) {
             PathItem item = {
-                    .action = Action::Action_Parent
+                .action = Action::Action_Parent
             };
             refPath.emplace_back(item);
         }

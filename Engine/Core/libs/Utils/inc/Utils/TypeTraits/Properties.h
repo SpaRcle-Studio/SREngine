@@ -6,6 +6,7 @@
 #define SR_ENGINE_TYPE_TRAITS_PROPERTIES_H
 
 #include <Utils/TypeTraits/StandardProperty.h>
+#include <Utils/ECS/EntityRef.h>
 
 namespace SR_UTILS_NS {
     class PropertyContainer : public Property {
@@ -28,7 +29,8 @@ namespace SR_UTILS_NS {
         template<typename T = Property> SR_NODISCARD T* Find(uint64_t hashName) const noexcept;
 
         PropertyContainer& AddContainer(const char* name);
-        template<typename T> T& AddCustomProperty(const char* name);
+        EntityRefProperty& AddEntityRefProperty(SR_UTILS_NS::StringAtom name, const EntityRefUtils::OwnerRef& owner);
+        template<typename T> T& AddCustomProperty(SR_UTILS_NS::StringAtom name);
         template<typename T> StandardProperty& AddStandardProperty(const char* name, T* pRawProperty);
         template<typename T> EnumProperty& AddEnumProperty(const char* name, T* pRawProperty);
         template<typename T> EnumProperty& AddEnumProperty(const char* name);
@@ -94,9 +96,9 @@ namespace SR_UTILS_NS {
         return Find<T>(name.GetHash());
     }
 
-    template<typename T> T& PropertyContainer::AddCustomProperty(const char* name)  {
+    template<typename T> T& PropertyContainer::AddCustomProperty(SR_UTILS_NS::StringAtom name)  {
         if (auto&& pProperty = Find(name)) {
-            SRHalt("Properties::AddCustomProperty() : property \"" + std::string(name) + "\" already exists!");
+            SRHalt("Properties::AddCustomProperty() : property \"" + name.ToStringRef() + "\" already exists!");
             return *dynamic_cast<T*>(pProperty);
         }
 

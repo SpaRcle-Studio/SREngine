@@ -73,6 +73,7 @@ namespace SR_CORE_GUI_NS {
         Guizmo* m_guizmo = nullptr;
         int32_t m_id = SR_ID_INVALID;
         GameObjectPtr m_camera;
+        GameObjectPtr m_platform;
         SR_WORLD_NS::Scene::Ptr m_scene;
         std::atomic<bool> m_enabled = true;
         bool m_updateNonHoveredSceneViewer = false;

@@ -2,11 +2,11 @@
 // Created by Monika on 26.11.2022.
 //
 
-#ifndef SRENGINE_ENTITYREF_H
-#define SRENGINE_ENTITYREF_H
+#ifndef SR_ENGINE_UTILS_ENTITY_REF_H
+#define SR_ENGINE_UTILS_ENTITY_REF_H
 
 #include <Utils/ECS/EntityRefUtils.h>
-#include <Utils/Types/Marshal.h>
+#include <Utils/TypeTraits/Property.h>
 
 namespace SR_UTILS_NS {
     class GameObject;
@@ -19,8 +19,7 @@ namespace SR_UTILS_NS {
 
         EntityRef(EntityRef&& other) noexcept;
 
-        EntityRef& operator=(EntityRef& other);
-        EntityRef& operator=(EntityRef&& other);
+        EntityRef& operator=(EntityRef&& other) noexcept;
 
     public:
         SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save(SR_HTYPES_NS::Marshal::Ptr pMarshal) const;
@@ -59,6 +58,19 @@ namespace SR_UTILS_NS {
         mutable SR_HTYPES_NS::SharedPtr<Entity> m_target;
 
     };
+
+    class EntityRefProperty : public SR_UTILS_NS::Property {
+        SR_REGISTER_TYPE_TRAITS_PROPERTY(EntityRefProperty, 1000)
+    public:
+        void SaveProperty(MarshalRef marshal) const noexcept override;
+        void LoadProperty(MarshalRef marshal) noexcept override;
+
+        SR_UTILS_NS::EntityRef& GetEntityRef() noexcept { return m_entityRef; }
+
+    private:
+        SR_UTILS_NS::EntityRef m_entityRef;
+
+    };
 }
 
-#endif //SRENGINE_ENTITYREF_H
+#endif //SR_ENGINE_UTILS_ENTITY_REF_H

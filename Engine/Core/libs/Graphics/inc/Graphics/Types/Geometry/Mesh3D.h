@@ -19,7 +19,7 @@ namespace SR_GTYPES_NS {
         typedef Vertices::StaticMeshVertex VertexType;
 
     public:
-        bool InitializeEntity() noexcept override;
+        SR_NODISCARD bool InitializeEntity() noexcept override;
 
         void UseMaterial() override;
         void UseModelMatrix() override;

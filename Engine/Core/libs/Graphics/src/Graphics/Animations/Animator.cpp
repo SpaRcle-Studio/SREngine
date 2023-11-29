@@ -94,8 +94,7 @@ namespace SR_ANIMATIONS_NS {
     void Animator::OnAttached() {
         m_graph = new AnimationGraph(nullptr);
 
-        //auto&& pAnimationClip = AnimationClip::Load("Samples/Tsumugi/Tsumugi.fbx", 3);
-        auto&& pAnimationClip = AnimationClip::Load("Samples/FBX.fbx", 0);
+        auto&& pAnimationClip = AnimationClip::Load("Samples/Tsumugi/Tsumugi.fbx", 3);
 
         auto&& pStateMachineNode = m_graph->AddNode<AnimationGraphNodeStateMachine>();
         auto&& pStateMachine = pStateMachineNode->GetMachine();

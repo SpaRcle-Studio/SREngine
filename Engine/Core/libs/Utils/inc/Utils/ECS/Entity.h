@@ -2,8 +2,8 @@
 // Created by Monika on 12.04.2023.
 //
 
-#ifndef SRENGINE_ENTITY_H
-#define SRENGINE_ENTITY_H
+#ifndef SR_ENGINE_UTILS_ENTITY_H
+#define SR_ENGINE_UTILS_ENTITY_H
 
 #include <Utils/ECS/ISavable.h>
 #include <Utils/ECS/EntityRef.h>
@@ -138,4 +138,4 @@ namespace SR_UTILS_NS {
     };
 }
 
-#endif //SRENGINE_ENTITY_H
+#endif //SR_ENGINE_UTILS_ENTITY_H

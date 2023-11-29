@@ -123,6 +123,8 @@ namespace SR_GTYPES_NS {
             .SetReadOnly()
             .SetDontSave();
 
+        //m_customMaterialProperties = &materialContainer.AddArray<MaterialProperty>("Custom properties");
+
         return Entity::InitializeEntity();
     }
 }

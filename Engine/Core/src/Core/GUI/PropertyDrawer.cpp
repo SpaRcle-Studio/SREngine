@@ -272,6 +272,12 @@ namespace SR_CORE_GUI_NS {
             }
             return false;
         }
+        else if (auto&& pEntityRefProperty = dynamic_cast<SR_UTILS_NS::EntityRefProperty*>(pProperty)) {
+            SR_CORE_GUI_NS::DragDropTargetEntityRef(context.pEditor, pEntityRefProperty->GetEntityRef(), pProperty->GetName().ToCStr(), pProperty->GetWidth());
+        }
+        else {
+            ImGui::TextColored(ImColor(1.f, 0.f, 0.f, 1.f), "No available drawer for property: %s", pProperty->GetPropertyTypeName().ToCStr());
+        }
 
         return false;
     }
