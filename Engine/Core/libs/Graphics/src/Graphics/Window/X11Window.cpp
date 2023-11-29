@@ -59,9 +59,8 @@ namespace SR_GRAPH_NS {
         SetResizable(resizable);
         SetFullscreen(fullScreen);
 
-        m_deleteWindowReply = ChangeWMProtocol("WM_DELETE_WINDOW");
-
-        //ChangeWMAllowedActions({"_NET_WM_ACTION_MOVE", "_NET_WM_ACTION_RESIZE"});
+        m_deleteWindowReply = ChangeAtom("WM_PROTOCOLS", "WM_DELETE_WINDOW");
+        m_deleteWindowReply = ChangeAtom("_NET_WM_WINDOW_TYPE", "_NET_WM_WINDOW_TYPE_DESKTOP");
 
         xcb_map_window(m_connection, m_window);
         xcb_flush(m_connection);
@@ -225,48 +224,25 @@ namespace SR_GRAPH_NS {
         free(event);
     }
 
-    std::vector<xcb_intern_atom_reply_t*> X11Window::ChangeWMProtocols(const std::vector<std::string>& protocolNames) {
-        std::vector<xcb_intern_atom_reply_t*> replies;
-        if (!m_wmProtocols) {
-            xcb_intern_atom_cookie_t protocolsAtom = xcb_intern_atom(m_connection, false, 12, "WM_PROTOCOLS");
-            m_wmProtocols = xcb_intern_atom_reply(m_connection, protocolsAtom, nullptr);
-        }
+    xcb_intern_atom_reply_t* X11Window::ChangeAtom(const std::string& propertyName, const std::string& atomName) {
+        xcb_intern_atom_cookie_t propertyAtom = xcb_intern_atom(m_connection, false, propertyName.size(), propertyName.c_str());
+        auto&& propertyAtomReply = xcb_intern_atom_reply(m_connection, propertyAtom, nullptr);
 
-        for (auto&& protocolName : protocolNames) {
-            xcb_intern_atom_cookie_t cookie = xcb_intern_atom(m_connection, false, protocolName.size(), protocolName.c_str());
-            xcb_intern_atom_reply_t* reply = xcb_intern_atom_reply(m_connection, cookie, nullptr);
-
-            replies.emplace_back(reply);
-
-            xcb_change_property(m_connection, XCB_PROP_MODE_REPLACE, m_window, m_wmProtocols->atom, XCB_ATOM_ATOM, 32, 1, &(*reply).atom);
-        }
-
-        return replies;
-    }
-
-    xcb_intern_atom_reply_t* X11Window::ChangeWMProtocol(const std::string &protocolName) {
-        if (!m_wmProtocols) {
-            xcb_intern_atom_cookie_t protocolsAtom = xcb_intern_atom(m_connection, false, 12, "WM_PROTOCOLS");
-            m_wmProtocols = xcb_intern_atom_reply(m_connection, protocolsAtom, nullptr);
-        }
-
-        xcb_intern_atom_cookie_t cookie = xcb_intern_atom(m_connection, false, protocolName.size(), protocolName.c_str());
+        xcb_intern_atom_cookie_t cookie = xcb_intern_atom(m_connection, false, atomName.size(), atomName.c_str());
         xcb_intern_atom_reply_t* reply = xcb_intern_atom_reply(m_connection, cookie, nullptr);
 
-        xcb_change_property(m_connection, XCB_PROP_MODE_REPLACE, m_window, m_wmProtocols->atom, XCB_ATOM_ATOM, 32, 1, &(*reply).atom);
+        xcb_change_property(m_connection, XCB_PROP_MODE_REPLACE, m_window, propertyAtomReply->atom, XCB_ATOM_ATOM, 32, 1, &(*reply).atom);
 
         return reply;
     }
 
-    std::vector<xcb_intern_atom_reply_t *> X11Window::ChangeWMAllowedActions(const std::vector<std::string>& actionNames) {
+    std::vector<xcb_intern_atom_reply_t*> X11Window::ChangeAtoms(const std::string& propertyName, const std::vector<std::string>& atomNames) {
         std::vector<xcb_intern_atom_reply_t*> replies;
-        if (!m_wmProtocols) {
-            xcb_intern_atom_cookie_t protocolsAtom = xcb_intern_atom(m_connection, false, 12, "_NET_WM_ALLOWED_ACTIONS");
-            m_wmProtocols = xcb_intern_atom_reply(m_connection, protocolsAtom, nullptr);
-        }
+        xcb_intern_atom_cookie_t propertyAtom = xcb_intern_atom(m_connection, false, propertyName.size(), propertyName.c_str());
+        auto&& propertyAtomReply = xcb_intern_atom_reply(m_connection, propertyAtom, nullptr);
 
-        for (auto&& actionName : actionNames) {
-            xcb_intern_atom_cookie_t cookie = xcb_intern_atom(m_connection, false, actionName.size(), actionName.c_str());
+        for (auto&& atomName : atomNames) {
+            xcb_intern_atom_cookie_t cookie = xcb_intern_atom(m_connection, false, atomName.size(), atomName.c_str());
             xcb_intern_atom_reply_t* reply = xcb_intern_atom_reply(m_connection, cookie, nullptr);
 
             replies.emplace_back(reply);

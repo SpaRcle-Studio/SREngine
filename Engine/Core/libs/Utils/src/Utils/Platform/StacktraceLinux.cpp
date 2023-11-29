@@ -18,7 +18,7 @@ namespace SR_UTILS_NS {
 
     std::string GetStacktrace() {
         if (!g_stackStraceEnabled) {
-            return std::string();
+            return std::string("Stacktrace is disabled by Features.xml!");
         }
 
         static bool stackStaceLoaded = false;
