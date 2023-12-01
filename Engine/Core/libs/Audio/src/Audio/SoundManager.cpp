@@ -287,7 +287,7 @@ namespace SR_AUDIO_NS {
             }
         }
         else {
-            SR_INFO("SoundManager::GetSoundContext() : initializing \"" + SR_UTILS_NS::EnumReflector::ToString(library).ToStringRef() + "\" library...");
+            SR_INFO("SoundManager::GetSoundContext() : initializing \"" + SR_UTILS_NS::EnumReflector::ToStringAtom(library).ToStringRef() + "\" library...");
         }
 
         auto&& pDevice = SoundDevice::Allocate(library, device);

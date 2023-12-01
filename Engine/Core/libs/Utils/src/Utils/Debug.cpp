@@ -24,7 +24,7 @@ namespace SR_UTILS_NS {
         }
         msg.append("\n");
 
-        auto&& prefix = SR_FORMAT("[{}]", SR_UTILS_NS::EnumReflector::ToString(type).ToCStr());
+        auto&& prefix = SR_FORMAT("[{}]", SR_UTILS_NS::EnumReflector::ToStringAtom(type).ToCStr());
         auto&& memoryUsage = m_showUseMemory ? SR_FORMAT("<{} KB> ", static_cast<uint32_t>(SR_PLATFORM_NS::GetProcessUsedMemory() / 1024)) : std::string();
 
         fmt::print(fmt::fg(fmt::color::dark_gray) | fmt::emphasis::faint, memoryUsage);

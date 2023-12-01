@@ -93,7 +93,7 @@ namespace SR_PTYPES_NS {
                 break;
             }
             default:
-                SR_ERROR("PhysXCollisionShape::UpdateShape() : unsupported shape! Type: " + SR_UTILS_NS::EnumReflector::ToString(m_type).ToStringRef());
+                SR_ERROR("PhysXCollisionShape::UpdateShape() : unsupported shape! Type: " + SR_UTILS_NS::EnumReflector::ToStringAtom(m_type).ToStringRef());
 
                 if (isDefaultMaterial) {
                     pMaterial->release();

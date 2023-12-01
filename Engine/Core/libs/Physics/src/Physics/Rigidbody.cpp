@@ -91,7 +91,7 @@ namespace SR_PTYPES_NS {
 
         m_properties.AddEnumProperty<ShapeType>("Collision shape type")
             .SetGetter([this]() -> SR_UTILS_NS::StringAtom {
-               return SR_UTILS_NS::EnumReflector::ToString(GetType());
+               return SR_UTILS_NS::EnumReflector::ToStringAtom(GetType());
             })
             .SetSetter([this](const SR_UTILS_NS::StringAtom& value) {
                 SetType(SR_UTILS_NS::EnumReflector::FromString<ShapeType>(value));
@@ -107,7 +107,7 @@ namespace SR_PTYPES_NS {
     }
 
     std::string Rigidbody::GetEntityInfo() const {
-        return Super::GetEntityInfo() + " | " + SR_UTILS_NS::EnumReflector::ToString(m_shape->GetType()).ToStringRef();
+        return Super::GetEntityInfo() + " | " + SR_UTILS_NS::EnumReflector::ToStringAtom(m_shape->GetType()).ToStringRef();
     }
 
     SR_UTILS_NS::Component* Rigidbody::LoadComponent(SR_UTILS_NS::Measurement measurement, SR_HTYPES_NS::Marshal &marshal, const SR_HTYPES_NS::DataStorage* pDataStorage) {
@@ -321,7 +321,7 @@ namespace SR_PTYPES_NS {
         }
 
         if (m_library && !m_library->IsShapeSupported(type)) {
-            SR_ERROR("Rigidbody::SetType() : shape \"" + SR_UTILS_NS::EnumReflector::ToString(type).ToStringRef() + "\" unsupported!");
+            SR_ERROR("Rigidbody::SetType() : shape \"" + SR_UTILS_NS::EnumReflector::ToStringAtom(type).ToStringRef() + "\" unsupported!");
             return;
         }
 

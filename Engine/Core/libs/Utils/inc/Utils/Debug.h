@@ -83,19 +83,19 @@ namespace SR_UTILS_NS {
     };
 }
 
-#define SR_LOG(...) SR_UTILS_NS::Debug::Instance().Log(SR_FORMAT(__VA_ARGS__));
-#define SR_INFO(...) SR_UTILS_NS::Debug::Instance().Info(SR_FORMAT(__VA_ARGS__));
-#define SR_WARN(...) SR_UTILS_NS::Debug::Instance().Warn(SR_FORMAT(__VA_ARGS__));
-#define SR_ERROR(...) SR_UTILS_NS::Debug::Instance().Error(SR_FORMAT(__VA_ARGS__));
-#define SR_GRAPH(...) SR_UTILS_NS::Debug::Instance().Graph(SR_FORMAT(__VA_ARGS__));
-#define SR_GRAPH_LOG(...) SR_GRAPH(SR_FORMAT(__VA_ARGS__));
-#define SR_SHADER(...) SR_UTILS_NS::Debug::Instance().Shader(SR_FORMAT(__VA_ARGS__));
-#define SR_SHADER_LOG(...) SR_UTILS_NS::Debug::Instance().Shader(SR_FORMAT(__VA_ARGS__));
-#define SR_SYSTEM_LOG(...) SR_UTILS_NS::Debug::Instance().System(SR_FORMAT(__VA_ARGS__));
-#define SR_VULKAN_MSG(...) SR_UTILS_NS::Debug::Instance().Vulkan(SR_FORMAT(__VA_ARGS__));
-#define SR_VULKAN_LOG(...) SR_UTILS_NS::Debug::Instance().VulkanLog(SR_FORMAT(__VA_ARGS__));
-#define SR_VULKAN_ERROR(...) SR_UTILS_NS::Debug::Instance().VulkanError(SR_FORMAT(__VA_ARGS__));
-#define SR_DEBUG_LOG(...) SR_UTILS_NS::Debug::Instance().Print(SR_FORMAT(__VA_ARGS__), SR_UTILS_NS::DebugLogType::System);
+#define SR_LOG(...) SR_UTILS_NS::Debug::Instance().Log(SR_FORMAT(__VA_ARGS__))
+#define SR_INFO(...) SR_UTILS_NS::Debug::Instance().Info(SR_FORMAT(__VA_ARGS__))
+#define SR_WARN(...) SR_UTILS_NS::Debug::Instance().Warn(SR_FORMAT(__VA_ARGS__))
+#define SR_ERROR(...) SR_UTILS_NS::Debug::Instance().Error(SR_FORMAT(__VA_ARGS__))
+#define SR_GRAPH(...) SR_UTILS_NS::Debug::Instance().Graph(SR_FORMAT(__VA_ARGS__))
+#define SR_GRAPH_LOG(...) SR_GRAPH(SR_FORMAT(__VA_ARGS__))
+#define SR_SHADER(...) SR_UTILS_NS::Debug::Instance().Shader(SR_FORMAT(__VA_ARGS__))
+#define SR_SHADER_LOG(...) SR_UTILS_NS::Debug::Instance().Shader(SR_FORMAT(__VA_ARGS__))
+#define SR_SYSTEM_LOG(...) SR_UTILS_NS::Debug::Instance().System(SR_FORMAT(__VA_ARGS__))
+#define SR_VULKAN_MSG(...) SR_UTILS_NS::Debug::Instance().Vulkan(SR_FORMAT(__VA_ARGS__))
+#define SR_VULKAN_LOG(...) SR_UTILS_NS::Debug::Instance().VulkanLog(SR_FORMAT(__VA_ARGS__))
+#define SR_VULKAN_ERROR(...) SR_UTILS_NS::Debug::Instance().VulkanError(SR_FORMAT(__VA_ARGS__))
+#define SR_DEBUG_LOG(...) SR_UTILS_NS::Debug::Instance().Print(SR_FORMAT(__VA_ARGS__), SR_UTILS_NS::DebugLogType::System)
 
 #define SR_MAKE_ASSERT(msg) (msg).append("\nFile: ").append(__FILE__).append("\nLine: ").append(std::to_string(__LINE__))
 

@@ -126,7 +126,7 @@ namespace SR_GRAPH_NS {
             m_defaultTexture->AddUsePoint();
         }
         else {
-            SR_ERROR("RenderContext::Init() : failed to load default texture!")
+            SR_ERROR("RenderContext::Init() : failed to load default texture!");
         }
 
         /// ----------------------------------------------------------------------------
@@ -138,7 +138,7 @@ namespace SR_GRAPH_NS {
             m_noneTexture->AddUsePoint();
         }
         else {
-            SR_ERROR("RenderContext::Init() : failed to create none texture!")
+            SR_ERROR("RenderContext::Init() : failed to create none texture!");
             return false;
         }
 

@@ -118,7 +118,7 @@ namespace SR_PHYSICS_NS {
 
         if (m_pvd->isConnected()) {
             m_pvd->disconnect();
-            SR_LOG("PhysXLibraryImpl::ConnectPVD() : previous connection aborted.")
+            SR_LOG("PhysXLibraryImpl::ConnectPVD() : previous connection aborted.");
         }
 
         if (m_pvdTransport) {
@@ -126,7 +126,7 @@ namespace SR_PHYSICS_NS {
             m_pvdTransport = nullptr;
         }
 
-        SR_LOG("PhysXLibraryImpl::ConnectPVD() : trying to connect.")
+        SR_LOG("PhysXLibraryImpl::ConnectPVD() : trying to connect.");
 
         m_pvdTransport = physx::PxDefaultPvdSocketTransportCreate("127.0.0.1", 5425, 1000);
         m_pvd->connect(*m_pvdTransport, physx::PxPvdInstrumentationFlag::eALL);

@@ -147,7 +147,7 @@ namespace SR_UTILS_NS {
         pProperty->SetEnumReflector(SR_UTILS_NS::EnumReflector::GetReflector<T>());
 
         pProperty->SetGetter([pRawProperty]() -> SR_UTILS_NS::StringAtom {
-            return SR_UTILS_NS::EnumReflector::ToString<T>(*pRawProperty);
+            return SR_UTILS_NS::EnumReflector::ToStringAtom<T>(*pRawProperty);
         });
 
         pProperty->SetSetter([pRawProperty](const SR_UTILS_NS::StringAtom& value) {

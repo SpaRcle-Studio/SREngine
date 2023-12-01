@@ -368,7 +368,7 @@ namespace SR_CORE_NS::Commands {
         if (m_scene.RecursiveLockIfValid()) {
             auto &&count = m_marshal->Read<uint64_t>();
             if (count > 1000) {
-                SR_WARN("Hierarchy::Paste() : attempting to insert a large number of objects! Count: " + SR_UTILS_NS::ToString(count))
+                SR_WARN("Hierarchy::Paste() : attempting to insert a large number of objects! Count: " + SR_UTILS_NS::ToString(count));
             }
 
             std::set<SR_UTILS_NS::GameObject::Ptr> newSelected;

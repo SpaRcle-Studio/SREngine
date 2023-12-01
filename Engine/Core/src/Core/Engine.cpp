@@ -104,11 +104,11 @@ namespace SR_CORE_NS {
 
             if (SR_WORLD_NS::Scene::IsExists(scenePath)) {
                 if (!SetScene(SR_WORLD_NS::Scene::Load(scenePath))) {
-                    SR_ERROR("Engine::Create() : failed to load scene!\n\tPath: " + scenePath.ToString())
+                    SR_ERROR("Engine::Create() : failed to load scene!\n\tPath: " + scenePath.ToString());
                 }
             }
             else if (!SetScene(SR_WORLD_NS::Scene::New(scenePath))) {
-                SR_ERROR("Engine::Create() : failed to create new scene!\n\tPath: " + scenePath.ToString())
+                SR_ERROR("Engine::Create() : failed to create new scene!\n\tPath: " + scenePath.ToString());
             }
         }
 

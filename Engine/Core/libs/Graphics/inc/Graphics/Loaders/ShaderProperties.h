@@ -127,7 +127,7 @@ namespace SR_GRAPH_NS {
             type = ShaderVarType::Mat4;
         }
 
-        std::string str = SR_UTILS_NS::EnumReflector::ToString(type);
+        std::string str = SR_UTILS_NS::EnumReflector::ToStringAtom(type);
 
         if (!str.empty()) {
             str[0] = tolower(str[0]);

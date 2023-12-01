@@ -118,8 +118,10 @@ namespace SR_PTYPES_NS {
         matXml.AppendNode("DynamicFriction").AppendAttribute(materialData.dynamicFriction);
         matXml.AppendNode("StaticFriction").AppendAttribute(materialData.staticFriction);
         matXml.AppendNode("Bounciness").AppendAttribute(materialData.bounciness);
-        matXml.AppendNode("FrictionCombine").AppendAttribute(SR_UTILS_NS::EnumReflector::ToString(materialData.frictionCombine));
-        matXml.AppendNode("BounceCombine").AppendAttribute(SR_UTILS_NS::EnumReflector::ToString(materialData.bounceCombine));
+        matXml.AppendNode("FrictionCombine").AppendAttribute(
+                SR_UTILS_NS::EnumReflector::ToStringAtom(materialData.frictionCombine));
+        matXml.AppendNode("BounceCombine").AppendAttribute(
+                SR_UTILS_NS::EnumReflector::ToStringAtom(materialData.bounceCombine));
 
         if (!document.Save(path)) {
             SR_ERROR("PhysicsMaterial::Save() : failed to save the document! \n\tPath: " + path.ToString());

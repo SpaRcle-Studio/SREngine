@@ -6,7 +6,7 @@
 
 namespace SR_UTILS_NS {
     std::string Xml::Attribute::ToString() const {
-        if (!CheckError(SR_FORMAT("Attribute::ToString() : attribute isn't valid! Name: {}", m_attribute.name()))) {
+        if (!CheckError(SR_FORMAT("Attribute::ToStringAtom() : attribute isn't valid! Name: {}", m_attribute.name()))) {
             return std::string();
         }
         else

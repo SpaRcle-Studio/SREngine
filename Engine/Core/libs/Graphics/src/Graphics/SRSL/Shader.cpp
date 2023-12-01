@@ -93,7 +93,8 @@ namespace SR_SRSL_NS {
 
     bool SRSLShader::IsCacheActual(ShaderLanguage shaderLanguage) const {
         auto&& cachedPath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Shaders").Concat(m_path);
-        auto&& cachedHash = SR_UTILS_NS::FileSystem::ReadHashFromFile(cachedPath.ConcatExt("hash").ConcatExt(SR_UTILS_NS::EnumReflector::ToString(shaderLanguage)));
+        auto&& cachedHash = SR_UTILS_NS::FileSystem::ReadHashFromFile(cachedPath.ConcatExt("hash").ConcatExt(
+                SR_UTILS_NS::EnumReflector::ToStringAtom(shaderLanguage)));
         return GetHash() == cachedHash;
     }
 
@@ -118,13 +119,13 @@ namespace SR_SRSL_NS {
         auto&& [result, stages] = GenerateStages(shaderLanguage);
 
         if (result.HasErrors()) {
-            return "SRSLShader::ToString() : " + result.ToString(m_includes);
+            return "SRSLShader::ToStringAtom() : " + result.ToString(m_includes);
         }
 
         std::string code;
 
         for (auto&& [stage, stageCode] : stages) {
-            code += "Stage[" + SR_UTILS_NS::EnumReflector::ToString(stage).ToStringRef() + "] {\n" + stageCode + "\n}";
+            code += "Stage[" + SR_UTILS_NS::EnumReflector::ToStringAtom(stage).ToStringRef() + "] {\n" + stageCode + "\n}";
         }
 
         return code;
@@ -418,7 +419,7 @@ namespace SR_SRSL_NS {
         auto&& cachedPath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Shaders").Concat(m_path);
 
         SR_UTILS_NS::FileSystem::WriteHashToFile(
-                cachedPath.ConcatExt("hash").ConcatExt(SR_UTILS_NS::EnumReflector::ToString(shaderLanguage)),
+                cachedPath.ConcatExt("hash").ConcatExt(SR_UTILS_NS::EnumReflector::ToStringAtom(shaderLanguage)),
                 absPath.GetFileHash()
         );
 
@@ -518,7 +519,7 @@ namespace SR_SRSL_NS {
             case ShaderLanguage::HLSL:
             case ShaderLanguage::Metal:
             default:
-                SR_ERROR("SRSLShader::ToString() : unknown shader language! Language: " + SR_UTILS_NS::EnumReflector::ToString(shaderLanguage).ToStringRef());
+                SR_ERROR("SRSLShader::ToStringAtom() : unknown shader language! Language: " + SR_UTILS_NS::EnumReflector::ToStringAtom(shaderLanguage).ToStringRef());
                 codeGenRes.first = SRSLReturnCode::UnknownShaderLanguage;
                 return codeGenRes;
         }

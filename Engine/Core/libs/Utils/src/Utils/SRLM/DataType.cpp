@@ -138,7 +138,7 @@ namespace SR_SRLM_NS {
 
     void DataType::SaveXml(SR_XML_NS::Node& xmlNode) {
         xmlNode.AppendAttribute("Name", GetName());
-        xmlNode.AppendAttribute("Class", SR_UTILS_NS::EnumReflector::ToString(GetClass()).ToStringRef());
+        xmlNode.AppendAttribute("Class", SR_UTILS_NS::EnumReflector::ToStringAtom(GetClass()).ToStringRef());
 
         switch (GetClass()) {
             case DataTypeClass::Flow:
@@ -188,7 +188,7 @@ namespace SR_SRLM_NS {
             case DataTypeClass::UInt32: xmlNode.AppendAttribute(*GetUInt32()); break;
             case DataTypeClass::UInt64: xmlNode.AppendAttribute(*GetUInt64()); break;
             default:
-                SRHalt("Unknown type! Type: " + SR_UTILS_NS::EnumReflector::ToString(GetClass()).ToStringRef());
+                SRHalt("Unknown type! Type: " + SR_UTILS_NS::EnumReflector::ToStringAtom(GetClass()).ToStringRef());
                 break;
         }
     }
@@ -267,7 +267,7 @@ namespace SR_SRLM_NS {
             case DataTypeClass::UInt32: pDataType->SetCustomValue(xmlNode.GetAttribute<uint32_t>()); break;
             case DataTypeClass::UInt64: pDataType->SetCustomValue(xmlNode.GetAttribute<uint64_t>()); break;
             default:
-                SRHalt("Unknown type! Type: " + SR_UTILS_NS::EnumReflector::ToString(dataTypeClass).ToStringRef());
+                SRHalt("Unknown type! Type: " + SR_UTILS_NS::EnumReflector::ToStringAtom(dataTypeClass).ToStringRef());
                 break;
         }
 

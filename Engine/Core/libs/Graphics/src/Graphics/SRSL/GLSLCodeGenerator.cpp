@@ -63,8 +63,8 @@ namespace SR_SRSL_NS {
         std::string code;
 
         code += "/// [WARNING: THIS FILE WAS CREATED BY SRSL CODE GENERATION]\n\n";
-        code += "/// Shader stage: " + SR_UTILS_NS::EnumReflector::ToString(stage).ToStringRef() + "\n";
-        code += "/// Shader type: " + SR_UTILS_NS::EnumReflector::ToString(m_shader->GetType()).ToStringRef() + "\n\n";
+        code += "/// Shader stage: " + SR_UTILS_NS::EnumReflector::ToStringAtom(stage).ToStringRef() + "\n";
+        code += "/// Shader type: " + SR_UTILS_NS::EnumReflector::ToStringAtom(m_shader->GetType()).ToStringRef() + "\n\n";
 
         code += "#version " + GetVersion(stage) + "\n\n";
 

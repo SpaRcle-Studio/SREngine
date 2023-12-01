@@ -173,7 +173,7 @@ namespace SR_SRSL_NS {
         { }
 
         SR_NODISCARD std::string ToString(const std::vector<SR_UTILS_NS::StringAtom>& files, uint8_t tab) const {
-            std::string message = SR_UTILS_NS::EnumReflector::ToString(code);
+            std::string message = SR_UTILS_NS::EnumReflector::ToStringAtom(code);
 
             if (fileIndex != SR_UINT16_MAX) {
                 if (fileIndex >= files.size()) {
@@ -193,7 +193,8 @@ namespace SR_SRSL_NS {
             }
 
             if (lexemKind != LexemKind::Unknown) {
-                message += "\n" + std::string(tab, '\t') + "Lexem: " + SR_UTILS_NS::EnumReflector::ToString(lexemKind).ToStringRef();
+                message += "\n" + std::string(tab, '\t') + "Lexem: " +
+                        SR_UTILS_NS::EnumReflector::ToStringAtom(lexemKind).ToStringRef();
             }
 
             return message;

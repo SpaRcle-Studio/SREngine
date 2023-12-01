@@ -221,7 +221,7 @@ namespace SR_CORE_GUI_NS {
             default:
                 ImGui::Text("Property \"%s\" has unknown type: %s",
                     pProperty->GetName().ToCStr(),
-                    SR_UTILS_NS::EnumReflector::ToString(pProperty->GetStandardType()).c_str()
+                            SR_UTILS_NS::EnumReflector::ToStringAtom(pProperty->GetStandardType()).c_str()
                 );
                 break;
         }

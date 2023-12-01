@@ -561,7 +561,7 @@ namespace SR_CORE_GUI_NS {
             ImGui::Separator();
 
             if (ImGui::MenuItem("Exit")) {
-                m_engine->GetWindow()->Close();
+                m_engine->GetWindow()->GetBaseWindow()->Close();
             }
 
             ImGui::EndMenu();

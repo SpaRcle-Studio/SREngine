@@ -43,7 +43,7 @@ namespace SR_SCRIPTING_NS {
 
     protected:
         void OnSingletonDestroy() override {
-            SR_INFO("GlobalEvoCompiler::OnSingletonDestroy() : free global compiler...")
+            SR_INFO("GlobalEvoCompiler::OnSingletonDestroy() : free global compiler...");
         }
 
     };

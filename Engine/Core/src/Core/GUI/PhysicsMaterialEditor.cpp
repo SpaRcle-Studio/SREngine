@@ -40,7 +40,8 @@ namespace SR_CORE_GUI_NS {
             SetBounciness(m_materialData.bounciness);
         }
 
-        if (ImGui::BeginCombo("Friction Combine", SR_UTILS_NS::EnumReflector::ToString(m_materialData.frictionCombine).c_str())) {
+        if (ImGui::BeginCombo("Friction Combine",
+                              SR_UTILS_NS::EnumReflector::ToStringAtom(m_materialData.frictionCombine).c_str())) {
             auto&& selectables = SR_UTILS_NS::EnumReflector::GetNames<SR_PHYSICS_NS::Combine>();
             for (auto&& selectable : selectables) {
                 if (ImGui::Selectable(selectable.c_str())) {
@@ -52,7 +53,7 @@ namespace SR_CORE_GUI_NS {
             ImGui::EndCombo();
         }
 
-        if (ImGui::BeginCombo("Bounce Combine", SR_UTILS_NS::EnumReflector::ToString(m_materialData.bounceCombine).c_str())) {
+        if (ImGui::BeginCombo("Bounce Combine", SR_UTILS_NS::EnumReflector::ToStringAtom(m_materialData.bounceCombine).c_str())) {
             auto&& selectables = SR_UTILS_NS::EnumReflector::GetNames<SR_PHYSICS_NS::Combine>();
             for (auto&& selectable : selectables) {
                 if (ImGui::Selectable(selectable.c_str())) {

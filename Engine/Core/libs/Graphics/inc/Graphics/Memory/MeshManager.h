@@ -74,7 +74,7 @@ namespace SR_GRAPH_NS {
 
             template<Vertices::VertexType vertexType, MeshMemoryType memType> VideoResourcesIter Find(const std::string& identifier) {
                 if constexpr (memType == MeshMemoryType::VBO) {
-                    const Hash hash = SR_HASH_STR(identifier + SR_UTILS_NS::EnumReflector::ToString<Vertices::VertexType>(vertexType).ToStringRef());
+                    const Hash hash = SR_HASH_STR(identifier + SR_UTILS_NS::EnumReflector::ToStringAtom<Vertices::VertexType>(vertexType).ToStringRef());
                     return FindImpl(hash, memType);
                 }
 
@@ -102,7 +102,7 @@ namespace SR_GRAPH_NS {
                 }
 
                 if constexpr (memType == MeshMemoryType::VBO) {
-                    return RegisterImpl(identifier + SR_UTILS_NS::EnumReflector::ToString(vertexType).ToStringRef(), memType, size, id);
+                    return RegisterImpl(identifier + SR_UTILS_NS::EnumReflector::ToStringAtom(vertexType).ToStringRef(), memType, size, id);
                 }
                 else
                     return RegisterImpl(identifier, memType, size, id);

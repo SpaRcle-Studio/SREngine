@@ -32,8 +32,8 @@
 //
 //SR_GRAPH_NS::GUI::Pin* SR_CORE_NS::BlueprintParser::ParsePin(const SR_UTILS_NS::Xml::Node &pinXml) {
 //   // auto pin = new Framework::Graphics::GUI::Pin(
-//   //         pinXml.TryGetAttribute("Name").ToString("Unnamed"),
-//   //         SR_GRAPH_NS::GUI::StringToEnumPinType(pinXml.TryGetAttribute("Type").ToString("None"))
+//   //         pinXml.TryGetAttribute("Name").ToStringAtom("Unnamed"),
+//   //         SR_GRAPH_NS::GUI::StringToEnumPinType(pinXml.TryGetAttribute("Type").ToStringAtom("None"))
 //   // );
 //
 //    //return pin;
@@ -42,11 +42,11 @@
 //}
 //
 //SR_GRAPH_NS::Node* SR_CORE_NS::BlueprintParser::ParseBlueprint(const SR_GRAPH_NS::Node &blueprintXml) {
-//    //const auto name = blueprintXml.TryGetAttribute("Name").ToString(blueprintXml.Name());
+//    //const auto name = blueprintXml.TryGetAttribute("Name").ToStringAtom(blueprintXml.Name());
 ////
 //    //auto node = new Framework::Graphics::GUI::Node(
 //    //    name,
-//    //    SR_GRAPH_NS::GUI::StringToEnumNodeType(blueprintXml.TryGetAttribute("Type").ToString("None")),
+//    //    SR_GRAPH_NS::GUI::StringToEnumNodeType(blueprintXml.TryGetAttribute("Type").ToStringAtom("None")),
 //    //    ParseColor(blueprintXml.TryGetNode("Color"))
 //    //);
 ////

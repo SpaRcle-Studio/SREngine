@@ -17,7 +17,7 @@ namespace SR_GRAPH_NS::VulkanTools {
             case ShaderStage::Geometry: return VK_SHADER_STAGE_GEOMETRY_BIT;
             case ShaderStage::Compute: return VK_SHADER_STAGE_COMPUTE_BIT;
             default:
-                SR_ERROR("VulkanTools::AbstractShaderToVkShader() : unknown binding stage!\n\tStage: " + SR_UTILS_NS::EnumReflector::ToString(stage).ToStringRef());
+                SR_ERROR("VulkanTools::AbstractShaderToVkShader() : unknown binding stage!\n\tStage: " + SR_UTILS_NS::EnumReflector::ToStringAtom(stage).ToStringRef());
                 return VK_SHADER_STAGE_FLAG_BITS_MAX_ENUM;
         }
     }

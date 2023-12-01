@@ -81,7 +81,7 @@ namespace SR_GRAPH_GUI_NS {
     }
 
     template<typename T> void static EnumCombo(const std::string& label, T value, const SR_HTYPES_NS::Function<void(T)>& callback) {
-        if (ImGui::BeginCombo(label.c_str(), SR_UTILS_NS::EnumReflector::ToString(value).c_str())) {
+        if (ImGui::BeginCombo(label.c_str(), SR_UTILS_NS::EnumReflector::ToStringAtom(value).c_str())) {
             auto&& selectables = SR_UTILS_NS::EnumReflector::GetNames<T>();
             for (auto&& selectable : selectables) {
                 if (ImGui::Selectable(selectable.c_str())) {
@@ -181,7 +181,7 @@ namespace SR_GRAPH_GUI_NS {
             string = std::string(value);
         }
         else if constexpr (std::is_same_v<T, SR_UTILS_NS::Path>) {
-            string = value.ToString();
+            string = value.ToStringAtom();
         }
         else if constexpr (SR_MATH_NS::IsNumber<T>()) {
             string = std::to_string(value);

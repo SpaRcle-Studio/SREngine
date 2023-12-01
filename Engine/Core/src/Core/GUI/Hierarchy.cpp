@@ -366,12 +366,12 @@ namespace SR_CORE_GUI_NS {
         auto&& base64 = SR_UTILS_NS::Platform::GetClipboardText();
         auto marshal = SR_HTYPES_NS::Marshal::LoadFromBase64(base64);
         if (!marshal.Valid()) {
-            SR_WARN("Hierarchy::Paste() : content of clipboard couldn't be read")
+            SR_WARN("Hierarchy::Paste() : content of clipboard couldn't be read");
             return;
         }
 
         if (marshal.TryRead<std::string>() != "SRCopyPaste#Hierarchy") {
-            SR_LOG("Hierarchy::Paste() : attempted to paste invalid content from clipboard!") ///TODO: Стоит ли оповещать об этом?
+            SR_LOG("Hierarchy::Paste() : attempted to paste invalid content from clipboard!"); ///TODO: Стоит ли оповещать об этом?
             return;
         }
 

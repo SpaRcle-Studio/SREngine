@@ -9,7 +9,7 @@ namespace SR_UTILS_NS {
 
     void StandardProperty::SaveProperty(MarshalRef marshal) const noexcept {
         if (auto&& pBlock = AllocatePropertyBlock()) {
-            pBlock->Write<StringAtom>(SR_UTILS_NS::EnumReflector::ToString(GetStandardType()));
+            pBlock->Write<StringAtom>(SR_UTILS_NS::EnumReflector::ToStringAtom(GetStandardType()));
 
             switch (GetStandardType()) {
                 case StandardType::Bool: pBlock->Write<bool>(GetBool()); break;
@@ -24,7 +24,7 @@ namespace SR_UTILS_NS {
                 case StandardType::FVector3: pBlock->Write<SR_MATH_NS::FVector3>(GetFVector3()); break;
                 case StandardType::FVector4: pBlock->Write<SR_MATH_NS::FVector4>(GetFVector4()); break;
                 default:
-                    SRHalt("Unsupported type! Type: \"" + SR_UTILS_NS::EnumReflector::ToString(GetStandardType()).ToStringRef() + "\"");
+                    SRHalt("Unsupported type! Type: \"" + SR_UTILS_NS::EnumReflector::ToStringAtom(GetStandardType()).ToStringRef() + "\"");
                     return;
             }
 
@@ -38,8 +38,8 @@ namespace SR_UTILS_NS {
             if (standardType != GetStandardType()) {
                 SR_WARN("StandardProperty::LoadProperty() : incompatible properties!\n\tName: {}\n\tProperty type: {}\n\tLoaded type: {}",
                       GetName().ToCStr(),
-                      SR_UTILS_NS::EnumReflector::ToString(GetStandardType()).ToCStr(),
-                      SR_UTILS_NS::EnumReflector::ToString(standardType).ToCStr()
+                      SR_UTILS_NS::EnumReflector::ToStringAtom(GetStandardType()).ToCStr(),
+                      SR_UTILS_NS::EnumReflector::ToStringAtom(standardType).ToCStr()
                 );
                 return;
             }
@@ -57,7 +57,7 @@ namespace SR_UTILS_NS {
                 case StandardType::FVector3: SetFVector3(pBlock->Read<SR_MATH_NS::FVector3>()); break;
                 case StandardType::FVector4: SetFVector4(pBlock->Read<SR_MATH_NS::FVector4>()); break;
                 default:
-                    SRHalt("Unsupported type! Type: \"" + SR_UTILS_NS::EnumReflector::ToString(GetStandardType()).ToStringRef() + "\"");
+                    SRHalt("Unsupported type! Type: \"" + SR_UTILS_NS::EnumReflector::ToStringAtom(GetStandardType()).ToStringRef() + "\"");
                     return;
             }
         }

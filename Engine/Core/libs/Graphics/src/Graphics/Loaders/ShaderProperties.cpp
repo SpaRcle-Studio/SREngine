@@ -18,8 +18,8 @@ namespace SR_GRAPH_NS {
 
             if (pMaterialProperty->GetShaderVarType() != type) {
                 SR_ERROR("LoadMaterialProperties() : invalid property!\n\tFile: " + pMaterial->GetResourcePath().ToStringRef() +
-                     "\n\tProperty: " + id + "\n\tLoaded type: " + SR_UTILS_NS::EnumReflector::ToString(type).ToStringRef() +
-                     "\n\tExpected type: " + SR_UTILS_NS::EnumReflector::ToString(pMaterialProperty->GetShaderVarType()).ToStringRef()
+                     "\n\tProperty: " + id + "\n\tLoaded type: " + SR_UTILS_NS::EnumReflector::ToStringAtom(type).ToStringRef() +
+                     "\n\tExpected type: " + SR_UTILS_NS::EnumReflector::ToStringAtom(pMaterialProperty->GetShaderVarType()).ToStringRef()
                 );
                 continue;
             }

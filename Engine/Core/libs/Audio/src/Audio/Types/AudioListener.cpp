@@ -54,7 +54,7 @@ namespace SR_AUDIO_NS{
         SR_MATH_NS::FVector3 pos;
 
         if (!matrix.Decompose(pos, q)) {
-            SR_ERROR("AudioListener::OnMatrixDirty() : failed to decompose matrix!")
+            SR_ERROR("AudioListener::OnMatrixDirty() : failed to decompose matrix!");
             return;
         }
 

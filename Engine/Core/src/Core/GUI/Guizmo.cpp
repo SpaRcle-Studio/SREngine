@@ -119,7 +119,7 @@ namespace SR_CORE_GUI_NS {
 
             ImGui::PushItemWidth(150.f);
 
-            if (ImGui::BeginCombo("View Mode", SR_UTILS_NS::EnumReflector::ToString(m_viewMode).c_str())) {
+            if (ImGui::BeginCombo("View Mode", SR_UTILS_NS::EnumReflector::ToStringAtom(m_viewMode).c_str())) {
                 auto&& names = SR_UTILS_NS::EnumReflector::GetNames<EditorSceneViewMode>();
                 for (auto&& name : names) {
                     if (ImGui::Selectable(name.c_str())) {

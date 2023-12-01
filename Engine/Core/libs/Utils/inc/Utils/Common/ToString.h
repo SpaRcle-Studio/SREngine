@@ -20,10 +20,10 @@ namespace SR_UTILS_NS {
             return value;
         }
         else if constexpr (std::is_enum_v<T>) {
-            return SR_UTILS_NS::EnumReflector::ToString(value);
+            return SR_UTILS_NS::EnumReflector::ToStringAtom(value);
         }
         else {
-            std::cerr << "ToString: unsupported type!" << std::endl;
+            std::cerr << "ToStringAtom: unsupported type!" << std::endl;
             SR_MAKE_BREAKPOINT;
             return std::string(); /// NOLINT
         }

@@ -281,7 +281,7 @@ namespace SR_GRAPH_NS::Vertices {
             case VertexType::None:
                 break;
             default: {
-                SR_ERROR("Vertices::GetVertexInfo() : unknown type! \n\tType: " + SR_UTILS_NS::EnumReflector::ToString(type).ToStringRef());
+                SR_ERROR("Vertices::GetVertexInfo() : unknown type! \n\tType: " + SR_UTILS_NS::EnumReflector::ToStringAtom(type).ToStringRef());
                 SRHalt0();
                 break;
             }

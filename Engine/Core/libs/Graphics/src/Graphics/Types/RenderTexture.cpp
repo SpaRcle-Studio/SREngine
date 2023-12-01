@@ -69,13 +69,13 @@ namespace SR_GTYPES_NS {
 
         //for (auto&& colorNode : node.GetNodes("Colors")) {
         //    m_colors.emplace_back(ColorLayer {
-        //        StringToEnumColorFormat(colorNode.TryGetAttribute("Format").ToString("Unknown")),
+        //        StringToEnumColorFormat(colorNode.TryGetAttribute("Format").ToStringAtom("Unknown")),
         //        SR_ID_INVALID
         //    });
         //}
 
         //m_dynamicScaling = node.TryGetAttribute("dynamicScaling").ToBool(true);
-        //m_depth.format = StringToEnumDepthFormat(node.GetNode("Depth").TryGetAttribute("Format").ToString("Unknown"));
+        //m_depth.format = StringToEnumDepthFormat(node.GetNode("Depth").TryGetAttribute("Format").ToStringAtom("Unknown"));
 
         return Settings::LoadSettings(node);
     }

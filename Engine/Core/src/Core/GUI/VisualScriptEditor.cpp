@@ -120,7 +120,7 @@ void SR_CORE_GUI_NS::VisualScriptEditor::LoadConfig() {
     if (Helper::FileSystem::FileExists(strPath)) {
         auto xml = SR_XML_NS::Document::Load(strPath);
         for (const SR_XML_NS::Node& blueprintPath : xml.Root().GetNode("Configs").GetNode("BlueprintRefs").GetNodes()) {
-            auto nodes = Core::BlueprintParser::Instance().Parse(resManager.GetResPath().Concat(blueprintPath.GetAttribute("Value").ToString()));
+            auto nodes = Core::BlueprintParser::Instance().Parse(resManager.GetResPath().Concat(blueprintPath.GetAttribute("Value").ToStringAtom()));
             for (auto&& node : nodes) {
                 RegisterBlueprint(node);
             }
