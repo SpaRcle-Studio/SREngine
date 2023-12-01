@@ -133,7 +133,7 @@ namespace SR_GRAPH_NS {
 
         uint8_t responseType = XCB_EVENT_RESPONSE_TYPE(event);
         if (responseType == 0) {
-            SR_ERROR("X11Window::PollEvents() : response type is 0!")
+            SR_ERROR("X11Window::PollEvents() : response type is 0!");
             return;
         }
 
