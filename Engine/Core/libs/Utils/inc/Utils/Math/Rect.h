@@ -58,6 +58,10 @@ namespace SR_MATH_NS {
     public:
         SR_NODISCARD static Rect<Unit> FromTranslationAndScale(const SR_MATH_NS::FVector2& translation, const SR_MATH_NS::FVector2& scale);
 
+        SR_NODISCARD bool Contains(const SR_MATH_NS::Vector2<T>& point) const noexcept {
+            return point.x >= Left() && point.x <= Right() && point.y <= Top() && point.y >= Bottom();
+        }
+
     public:
         constexpr void SetLeft(const T& value) {
             w -= value - x;
