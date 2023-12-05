@@ -217,10 +217,13 @@ namespace SR_UTILS_NS::Platform {
     }
 
     std::string GetClipboardText() {
-        std::string text;
+        std::string text{};
 
         if (OpenClipboard(NULL)) {
             HANDLE hData = GetClipboardData(CF_TEXT);
+
+            if (hData == nullptr)
+                return text;
 
             const uint64_t size = GlobalSize(hData);
             if (size > 0) {
@@ -324,9 +327,6 @@ namespace SR_UTILS_NS::Platform {
 #endif
     }
 
-    void OpenWithAssociatedApp(const Path &filepath) {
-        system(filepath.ToString().c_str());
-    }
 
     bool Copy(const Path &from, const Path &to) {
         if (from.IsFile()) {
@@ -481,7 +481,7 @@ namespace SR_UTILS_NS::Platform {
         return view.size() >= 2 && view[1] == ':';
     }
 
-    void OpenInNativeFileExplorer(const Path &path){
+    void OpenWithAssociatedApp(const Path &path){
         ShellExecuteA(NULL, "open", path.ToString().c_str(), NULL, NULL, SW_SHOWDEFAULT);
     }
 
