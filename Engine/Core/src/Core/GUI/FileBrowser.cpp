@@ -34,7 +34,7 @@ namespace SR_CORE_NS::GUI {
                 m_dirtySelectedDir = true;
             }
             if (ImGui::Selectable("Open in native Explorer")) {
-                SR_UTILS_NS::Platform::OpenInNativeFileExplorer(m_selectedDir);
+                SR_UTILS_NS::Platform::OpenWithAssociatedApp(m_selectedDir);
             }
             if (ImGui::Selectable("Refresh")) {
                 m_dirtySelectedDir = true;
