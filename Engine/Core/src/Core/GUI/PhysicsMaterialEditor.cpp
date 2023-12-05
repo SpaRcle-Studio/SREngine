@@ -81,8 +81,7 @@ namespace SR_CORE_GUI_NS {
     }
 
     void PhysicsMaterialEditor::ReadData() {
-        auto&& path = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat(m_materialPath);
-        auto&& document = SR_XML_NS::Document::Load(path);
+        auto&& document = SR_XML_NS::Document::Load(m_materialPath);
         if (!document.Valid()) {
             SR_ERROR("PhysicsMaterialEditor::Draw() : file is not found! \n\tPath: " + m_materialPath.ToString());
             return;
