@@ -32,7 +32,7 @@ namespace SR_CORE_GUI_NS {
     { }
 
     void Inspector::Draw() {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         if (!m_scene.RecursiveLockIfValid()) {
             return;
@@ -144,7 +144,7 @@ namespace SR_CORE_GUI_NS {
     }
 
     void Inspector::Update(float_t dt) {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         if (auto&& selected = m_hierarchy->GetSelected(); selected.size() == 1) {
             if (*selected.begin() != m_gameObject) {
@@ -159,7 +159,7 @@ namespace SR_CORE_GUI_NS {
     }
 
     void Inspector::SetScene(const SR_WORLD_NS::Scene::Ptr& scene) {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         m_scene = scene;
     }

@@ -23,7 +23,7 @@ namespace SR_GRAPH_NS::Memory {
     }
 
     ShaderProgramManager::VirtualProgram ShaderProgramManager::Allocate(const SRShaderCreateInfo &createInfo) {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         SR_TRACY_ZONE;
 
@@ -54,7 +54,7 @@ namespace SR_GRAPH_NS::Memory {
     }
 
     ShaderProgramManager::VirtualProgram ShaderProgramManager::ReAllocate(VirtualProgram program, const SRShaderCreateInfo& createInfo) {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         if (SR_UTILS_NS::Debug::Instance().GetLevel() >= SR_UTILS_NS::Debug::Level::Medium) {
             SR_GRAPH_LOG("ShaderProgramManager::ReAllocate() : re-allocate shader program...");
@@ -123,7 +123,7 @@ namespace SR_GRAPH_NS::Memory {
     }
 
     ShaderBindResult ShaderProgramManager::BindProgram(VirtualProgram virtualProgram) noexcept {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         auto&& pIt = m_virtualTable.find(virtualProgram);
         if (pIt == std::end(m_virtualTable)) {
@@ -302,7 +302,7 @@ namespace SR_GRAPH_NS::Memory {
     }
 
     const VirtualProgramInfo* ShaderProgramManager::GetInfo(ShaderProgramManager::VirtualProgram virtualProgram) const noexcept {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         auto&& pIt = m_virtualTable.find(virtualProgram);
         if (pIt == std::end(m_virtualTable)) {
@@ -314,13 +314,13 @@ namespace SR_GRAPH_NS::Memory {
     }
 
     bool ShaderProgramManager::HasProgram(ShaderProgramManager::VirtualProgram virtualProgram) const noexcept {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
         return m_virtualTable.find(virtualProgram) != std::end(m_virtualTable);
     }
 
     void ShaderProgramManager::CollectUnusedShaders() {
         SR_TRACY_ZONE;
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         if (m_virtualTable.empty()) {
             return;

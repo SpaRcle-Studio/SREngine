@@ -26,7 +26,7 @@ namespace SR_GRAPH_NS::Memory {
     }
 
     void UBOManager::SetIgnoreIdentifiers(bool value) {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
         m_ignoreIdentifier = value;
     }
 

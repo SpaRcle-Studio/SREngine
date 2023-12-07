@@ -14,7 +14,7 @@ namespace SR_HTYPES_NS {
 
     public:
         void Remove(const T& value) {
-            SR_LOCK_GUARD
+            SR_LOCK_GUARD;
             m_remove.insert(value);
             m_needFlush = true;
         }
@@ -23,7 +23,7 @@ namespace SR_HTYPES_NS {
             Remove(value);
 
             while(true) {
-                SR_LOCK_GUARD
+                SR_LOCK_GUARD;
                 if (m_container.count(value) == 0) {
                     return;
                 }
@@ -31,7 +31,7 @@ namespace SR_HTYPES_NS {
         }
 
         void Add(T value) {
-            SR_LOCK_GUARD
+            SR_LOCK_GUARD;
             m_add.insert(value);
             m_needFlush = true;
         }
@@ -46,7 +46,7 @@ namespace SR_HTYPES_NS {
         }
 
         void Flush() {
-            SR_LOCK_GUARD
+            SR_LOCK_GUARD;
 
             for (auto &value : m_add) {
                 m_container.insert(value);

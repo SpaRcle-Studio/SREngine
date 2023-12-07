@@ -12,7 +12,7 @@ namespace SR_UTILS_NS {
     { }
 
     bool EntityManager::Reserve(const EntityId &id) {
-        SR_SCOPED_LOCK
+        SR_SCOPED_LOCK;
 
     #ifdef SR_DEBUG
         if (m_reserved.count(id)) {
@@ -27,7 +27,7 @@ namespace SR_UTILS_NS {
     }
 
     Entity::Ptr EntityManager::GetReserved(const EntityId& id, const EntityAllocator& allocator) {
-        SR_SCOPED_LOCK
+        SR_SCOPED_LOCK;
 
     #ifdef SR_DEBUG
         if (m_entities.count(id)) {
@@ -54,7 +54,7 @@ namespace SR_UTILS_NS {
             return entity->GetEntityId();
         }
 
-        SR_SCOPED_LOCK
+        SR_SCOPED_LOCK;
 
         EntityId id = m_nextId;
 
@@ -79,7 +79,7 @@ namespace SR_UTILS_NS {
     }
 
     void EntityManager::Unregister(const EntityId &id) {
-        SR_SCOPED_LOCK
+        SR_SCOPED_LOCK;
 
         if (m_entities.count(id) == 0) {
             SRHalt0();
@@ -90,7 +90,7 @@ namespace SR_UTILS_NS {
     }
 
     void EntityManager::OnSingletonDestroy() {
-        SR_SCOPED_LOCK
+        SR_SCOPED_LOCK;
 
         if (!m_entities.empty()) {
             SR_WARN("EntityManager::OnSingletonDestroy() : entities was not be destroyed! Collect data...");
@@ -109,7 +109,7 @@ namespace SR_UTILS_NS {
     }
 
     Entity::Ptr EntityManager::FindById(const EntityId &id) const {
-        SR_SCOPED_LOCK
+        SR_SCOPED_LOCK;
 
         if (!m_entities.count(id)) {
             return Entity::Ptr();
@@ -129,7 +129,7 @@ namespace SR_UTILS_NS {
     }
 
     bool EntityManager::TryUnReserve(const EntityId &id) {
-        SR_SCOPED_LOCK
+        SR_SCOPED_LOCK;
 
         if (m_reserved.count(id) == 0) {
             return false;

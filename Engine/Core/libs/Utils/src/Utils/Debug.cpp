@@ -104,7 +104,7 @@ namespace SR_UTILS_NS {
     }
 
     bool Debug::AssertOnceCheck(const std::string &msg) {
-        SR_SCOPED_LOCK
+        SR_SCOPED_LOCK;
 
         static std::unordered_set<std::string> asserts;
 
@@ -117,7 +117,7 @@ namespace SR_UTILS_NS {
     }
 
     void Debug::MakeCrash() {
-        SR_SCOPED_LOCK
+        SR_SCOPED_LOCK;
 
         Assert("[Stacktrace]");
         System("Function \"MakeCrash\" has been called... >_<");

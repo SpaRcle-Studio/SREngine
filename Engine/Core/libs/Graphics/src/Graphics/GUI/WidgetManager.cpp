@@ -19,7 +19,7 @@ namespace SR_GRAPH_NS::GUI {
     }
 
     void WidgetManager::Draw() {
-        SR_SCOPED_LOCK
+        SR_SCOPED_LOCK;
 
         for (auto&&[name, widget] : m_widgets) {
             if (widget->IsOpen())
@@ -28,7 +28,7 @@ namespace SR_GRAPH_NS::GUI {
     }
 
     bool WidgetManager::Register(Widget *widget) {
-        SR_SCOPED_LOCK
+        SR_SCOPED_LOCK;
 
         if (m_widgets.count(widget->GetName()) == 1) {
             SRHalt("WidgetManager::Register() : widget is already registered!");
@@ -44,7 +44,7 @@ namespace SR_GRAPH_NS::GUI {
     }
 
     bool WidgetManager::Remove(Widget *widget) {
-        SR_SCOPED_LOCK
+        SR_SCOPED_LOCK;
 
         if (m_widgets.count(widget->GetName()) == 0) {
             SRHalt("WidgetManager::Remove() : widget is not registered!");
@@ -64,7 +64,7 @@ namespace SR_GRAPH_NS::GUI {
     }
 
     void WidgetManager::OnKeyDown(const SR_UTILS_NS::KeyboardInputData* data) {
-        SR_SCOPED_LOCK
+        SR_SCOPED_LOCK;
 
         for (auto&&[name, pWidget] : m_widgets) {
             if (pWidget->IsFocused() || !m_ignoreNonFocused)
@@ -73,7 +73,7 @@ namespace SR_GRAPH_NS::GUI {
     }
 
     void WidgetManager::OnKeyUp(const SR_UTILS_NS::KeyboardInputData* data) {
-        SR_SCOPED_LOCK
+        SR_SCOPED_LOCK;
 
         for (auto&&[name, pWidget] : m_widgets) {
             if (pWidget->IsFocused() || !m_ignoreNonFocused)
@@ -82,7 +82,7 @@ namespace SR_GRAPH_NS::GUI {
     }
 
     void WidgetManager::OnKeyPress(const SR_UTILS_NS::KeyboardInputData *data) {
-        SR_SCOPED_LOCK
+        SR_SCOPED_LOCK;
 
         for (auto&&[name, pWidget] : m_widgets) {
             if (pWidget->IsFocused() || !m_ignoreNonFocused)
@@ -91,7 +91,7 @@ namespace SR_GRAPH_NS::GUI {
     }
 
     void WidgetManager::OnMouseMove(const SR_UTILS_NS::MouseInputData *data) {
-        SR_SCOPED_LOCK
+        SR_SCOPED_LOCK;
 
         for (auto&&[name, pWidget] : m_widgets) {
             if (pWidget->IsFocused() || !m_ignoreNonFocused)
@@ -100,7 +100,7 @@ namespace SR_GRAPH_NS::GUI {
     }
 
     void WidgetManager::OnMouseUp(const SR_UTILS_NS::MouseInputData *data) {
-        SR_SCOPED_LOCK
+        SR_SCOPED_LOCK;
 
         for (auto&&[name, pWidget] : m_widgets) {
             if (pWidget->IsFocused() || !m_ignoreNonFocused)
@@ -109,7 +109,7 @@ namespace SR_GRAPH_NS::GUI {
     }
 
     void WidgetManager::OnMouseDown(const SR_UTILS_NS::MouseInputData *data) {
-        SR_SCOPED_LOCK
+        SR_SCOPED_LOCK;
 
         for (auto&&[name, pWidget] : m_widgets) {
             if (pWidget->IsFocused() || !m_ignoreNonFocused)
@@ -118,7 +118,7 @@ namespace SR_GRAPH_NS::GUI {
     }
 
     void WidgetManager::OnMousePress(const SR_UTILS_NS::MouseInputData *data) {
-        SR_SCOPED_LOCK
+        SR_SCOPED_LOCK;
 
         for (auto&&[name, pWidget] : m_widgets) {
             if (pWidget->IsFocused() || !m_ignoreNonFocused)
@@ -143,7 +143,7 @@ namespace SR_GRAPH_NS::GUI {
     }
 
     void WidgetManager::SetScene(const WidgetManager::ScenePtr &scene) {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         SR_HTYPES_NS::SafePtrLockGuard<SR_WORLD_NS::Scene::Ptr> lockGuard(scene);
 

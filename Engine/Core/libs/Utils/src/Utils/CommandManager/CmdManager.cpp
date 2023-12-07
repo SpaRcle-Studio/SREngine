@@ -43,7 +43,7 @@ namespace SR_UTILS_NS {
         switch (cmd.m_type) {
             case CmdType::Redo: {
                 if ((m_historyPC >= (m_history.size() - 1) && m_historyPC != UINT32_MAX) || m_history.empty()) {
-                    SR_INFO("CmdManager::DoCmd() : have not commands for redo!");
+                    SR_INFO("CmdManager::DoCmd() : have no commands to redo!");
                     return true;
                 }
 
@@ -54,7 +54,7 @@ namespace SR_UTILS_NS {
             }
             case CmdType::Undo: {
                 if (m_history.empty() || m_historyPC == UINT32_MAX) {
-                    SR_INFO("CmdManager::DoCmd() : have not commands for undo!");
+                    SR_INFO("CmdManager::DoCmd() : have no commands to undo!");
                     return true;
                 }
 
@@ -81,7 +81,7 @@ namespace SR_UTILS_NS {
 
     bool CmdManager::Execute(ReversibleCommand *cmd, SyncType sync) {
         SR_TRACY_ZONE;
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         if (m_historyPC != UINT32_MAX) {
             for (uint32_t PC = m_history.size() - 1; PC > m_historyPC; --PC) {
@@ -103,7 +103,7 @@ namespace SR_UTILS_NS {
 
     void CmdManager::Update() {
         SR_TRACY_ZONE;
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         while (!m_commands.empty()) {
             SRVerifyFalse2(!DoCmd(m_commands.front()), "Failed to execute command!");
@@ -153,7 +153,7 @@ namespace SR_UTILS_NS {
     }
 
     void CmdManager::Clear() {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         while (!m_commands.empty()) {
             m_history.emplace_back(m_commands.front().m_cmd);
@@ -169,7 +169,7 @@ namespace SR_UTILS_NS {
     }
 
     bool CmdManager::Redo() {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         m_commands.push({ nullptr, CmdType::Redo });
 
@@ -177,7 +177,7 @@ namespace SR_UTILS_NS {
     }
 
     bool CmdManager::Cancel() {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         m_commands.push({ nullptr, CmdType::Undo });
 
@@ -185,7 +185,7 @@ namespace SR_UTILS_NS {
     }
 
     std::string CmdManager::GetLastCmdName() const {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
         return m_lastCmdName;
     }
 }

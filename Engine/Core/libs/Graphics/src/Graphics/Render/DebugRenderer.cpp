@@ -48,7 +48,7 @@ namespace SR_GRAPH_NS {
     }
 
     void DebugRenderer::DeInit() {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
         SR_UTILS_NS::DebugDraw::Instance().RemoveCallbacks(this);
 
         if (m_wireFrameMaterial) {
@@ -64,7 +64,7 @@ namespace SR_GRAPH_NS {
         /// меняем тут, иначе дедлок
         SR_UTILS_NS::DebugDraw::Instance().SwitchCallbacks(this);
 
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         auto&& timePoint = SR_HTYPES_NS::Time::Instance().Count();
 
@@ -89,7 +89,7 @@ namespace SR_GRAPH_NS {
     }
 
     void DebugRenderer::Remove(uint64_t id) {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         if (id == SR_ID_INVALID || id >= m_timedObjects.size()) {
             SRHalt0();
@@ -100,7 +100,7 @@ namespace SR_GRAPH_NS {
     }
 
     uint64_t DebugRenderer::DrawLine(uint64_t id, const SR_MATH_NS::FVector3 &start, const SR_MATH_NS::FVector3 &end, const SR_MATH_NS::FColor &color, float_t time) {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
     retry:
         if (id == SR_ID_INVALID) {
@@ -142,7 +142,7 @@ namespace SR_GRAPH_NS {
         const SR_MATH_NS::Quaternion& rot, const SR_MATH_NS::FVector3& scale,
         const SR_MATH_NS::FColor& color, float_t time
     ) {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         if (auto&& pRawMesh = SR_HTYPES_NS::RawMesh::Load(SR_UTILS_NS::Path(path, true /** fast */))) {
             return DrawMesh(pRawMesh, 0, id, pos, rot, scale, color, time);
@@ -152,12 +152,12 @@ namespace SR_GRAPH_NS {
     }
 
     uint64_t DebugRenderer::AddTimedObject(float_t seconds, SR_GTYPES_NS::Mesh *pMesh) {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         auto&& duration = std::chrono::duration_cast<std::chrono::steady_clock::duration>(std::chrono::duration<float_t>(seconds));
         auto&& timePoint = SR_HTYPES_NS::Time::Instance().Count();
 
-        DebugTimedObject timedObject;
+        DebugTimedObject timedObject{};
 
         timedObject.pMesh = pMesh;
         timedObject.startPoint = timePoint;
@@ -178,7 +178,7 @@ namespace SR_GRAPH_NS {
     }
 
     void DebugRenderer::UpdateTimedObject(uint64_t id, float_t seconds) {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         auto&& duration = std::chrono::duration_cast<std::chrono::steady_clock::duration>(std::chrono::duration<float_t>(seconds));
         auto&& timePoint = SR_HTYPES_NS::Time::Instance().Count();
@@ -191,7 +191,7 @@ namespace SR_GRAPH_NS {
     }
 
     void DebugRenderer::Clear() {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         for (uint64_t i = 0; i < m_timedObjects.size(); ++i) {
             auto&& timed = m_timedObjects[i];
@@ -220,7 +220,7 @@ namespace SR_GRAPH_NS {
         const SR_MATH_NS::Quaternion& rot, const SR_MATH_NS::FVector3& scale,
         const SR_MATH_NS::FColor& color, float_t time
     ) {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         if (id == SR_ID_INVALID) {
             SR_GTYPES_NS::DebugWireframeMesh* pMesh = dynamic_cast<SR_GTYPES_NS::DebugWireframeMesh *>(

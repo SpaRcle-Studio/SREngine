@@ -51,7 +51,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD bool HasLoader(Hash hashName) const;
 
         template<typename T> T* CreateComponent() {
-            SR_SCOPED_LOCK
+            SR_SCOPED_LOCK;
             auto&& pComponent = CreateComponentImpl(T::COMPONENT_HASH_NAME);
             if (!pComponent) {
                 return nullptr;
@@ -81,7 +81,7 @@ namespace SR_UTILS_NS {
         }
 
         const std::unordered_map<std::string, Hash>& GetComponentsNames() const {
-            SR_SCOPED_LOCK
+            SR_SCOPED_LOCK;
             return m_ids;
         }
 
@@ -89,7 +89,7 @@ namespace SR_UTILS_NS {
         uint16_t GetVersionById(uint64_t id) const;
 
         template<typename T> bool RegisterComponentLoader(const Construction& constructor) {
-            SR_SCOPED_LOCK
+            SR_SCOPED_LOCK;
 
             auto&& hashName = T::COMPONENT_HASH_NAME;
 
@@ -110,7 +110,7 @@ namespace SR_UTILS_NS {
         }
 
         template<typename T> bool RegisterComponent(const Construction& constructor) {
-            SR_SCOPED_LOCK
+            SR_SCOPED_LOCK;
 
             auto&& hashName = T::COMPONENT_HASH_NAME;
 

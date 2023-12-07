@@ -121,7 +121,7 @@ namespace SR_UTILS_NS {
             SR_LOG("ResourceManager::Destroy() : destroying \"" + std::string(resource->GetResourceName()) + "\"");
         }
 
-        SR_SCOPED_LOCK
+        SR_SCOPED_LOCK;
 
         m_destroyed.emplace_back(resource);
 
@@ -272,7 +272,7 @@ namespace SR_UTILS_NS {
             SR_LOG("ResourceManager::RegisterResource() : add new \"" + std::string(pResource->GetResourceName()) + "\" resource.");
         }
 
-        SR_SCOPED_LOCK
+        SR_SCOPED_LOCK;
 
     #ifdef SR_DEBUG
         if (m_resources.count(pResource->GetResourceHashName()) == 0) {
@@ -325,7 +325,7 @@ namespace SR_UTILS_NS {
 
     IResource *ResourceManager::Find(uint64_t hashTypeName, const std::string& id) {
         SR_TRACY_ZONE;
-        SR_SCOPED_LOCK
+        SR_SCOPED_LOCK;
 
     #if defined(SR_DEBUG)
         if (m_resources.count(hashTypeName) == 0) {
@@ -349,7 +349,7 @@ namespace SR_UTILS_NS {
         SR_TRACY_ZONE;
 
         {
-            SR_SCOPED_LOCK
+            SR_SCOPED_LOCK;
             m_force = true;
         }
 
@@ -360,7 +360,7 @@ namespace SR_UTILS_NS {
             for (;;)
             {
                 {
-                    SR_SCOPED_LOCK
+                    SR_SCOPED_LOCK;
                     if (m_destroyed.empty()) {
                         break;
                     }
@@ -374,25 +374,25 @@ namespace SR_UTILS_NS {
         }
 
         {
-            SR_LOCK_GUARD
+            SR_LOCK_GUARD;
             m_force = false;
         }
     }
 
     void ResourceManager::Execute(const SR_HTYPES_NS::Function<void()>& fun) {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         fun();
     }
 
     void ResourceManager::InspectResources(const SR_HTYPES_NS::Function<void(const ResourcesTypes &)> &callback) {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         callback(m_resources);
     }
 
     std::string_view ResourceManager::GetTypeName(uint64_t hashName) const {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         if (auto&& pIt = m_resources.find(hashName); pIt != m_resources.end()) {
             return pIt->second->GetName();
@@ -404,7 +404,7 @@ namespace SR_UTILS_NS {
     }
 
     const std::string& ResourceManager::GetResourceId(ResourceManager::Hash hashId) const {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         static std::string defaultId;
 
@@ -424,7 +424,7 @@ namespace SR_UTILS_NS {
 
     const Path& ResourceManager::GetResourcePath(ResourceManager::Hash hashPath) const {
         SR_TRACY_ZONE;
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         /// пустая строка
         if (hashPath == 0) {
@@ -444,7 +444,7 @@ namespace SR_UTILS_NS {
     }
 
     ResourceManager::Hash ResourceManager::RegisterResourcePath(const Path &path) {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         if (path.Empty()) {
             SRHalt("ResourceManager::RegisterResourcePath() : empty path!");
@@ -476,7 +476,7 @@ namespace SR_UTILS_NS {
     }
 
     bool ResourceManager::RegisterReloader(IResourceReloader *pReloader, uint64_t hashTypeName) {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         if (auto&& pIt = m_resources.find(hashTypeName); pIt != m_resources.end()) {
             auto&& [_, resourceType] = *pIt;

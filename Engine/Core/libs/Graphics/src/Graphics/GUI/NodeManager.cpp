@@ -10,7 +10,7 @@
 
 namespace SR_GRAPH_NS::GUI {
     uintptr_t NodeManager::AllocUniqueId(void* ptr) {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
     retry:
         uintptr_t id = static_cast<uintptr_t>(SR_UTILS_NS::Random::Instance().Int64());
@@ -29,7 +29,7 @@ namespace SR_GRAPH_NS::GUI {
         if (id == SR_UINTPTR_MAX)
             return;
 
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
     #ifdef SR_DEBUG
         if (m_uniques.count(id) == 0) {

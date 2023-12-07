@@ -10,7 +10,7 @@
 
 namespace SR_GRAPH_NS::Memory {
     void CameraManager::Update() {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         for (auto pIt = m_cameras.begin(); pIt != m_cameras.end();) {
             auto /** copy */ [pCamera, info] = *pIt;
@@ -29,7 +29,7 @@ namespace SR_GRAPH_NS::Memory {
     }
 
     void CameraManager::OnWindowResized(Window *pWindow, uint32_t width, uint32_t height) {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         for (auto&&[camera, info] : m_cameras) {
             if (info.destroyed) {
@@ -41,13 +41,13 @@ namespace SR_GRAPH_NS::Memory {
     }
 
     uint32_t CameraManager::GetCountCameras() const {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         return static_cast<uint32>(m_cameras.size());
     }
 
     CameraManager::CameraPtr CameraManager::GetFirstCamera() const {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         for (auto&&[camera, info] : m_cameras) {
             if (info.destroyed) {
@@ -65,7 +65,7 @@ namespace SR_GRAPH_NS::Memory {
     }
 
     CameraManager::CameraPtr CameraManager::GetMainCamera(RenderScene *pRScene) {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         CameraPtr pMainCamera = nullptr;
         int32_t priority = -1;
@@ -93,7 +93,7 @@ namespace SR_GRAPH_NS::Memory {
     }
 
     std::vector<CameraManager::CameraPtr> CameraManager::GetOffScreenCameras(RenderScene *pRScene) {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         std::vector<CameraManager::CameraPtr> cameras;
         cameras.reserve(m_cameras.size());
@@ -124,7 +124,7 @@ namespace SR_GRAPH_NS::Memory {
     }
 
     std::list<CameraManager::CameraPtr> CameraManager::GetCameras() const {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         std::list<CameraPtr> cameras;
 
@@ -152,7 +152,7 @@ namespace SR_GRAPH_NS::Memory {
     }
 
     void CameraManager::RegisterCamera(const CameraPtr &pCamera) {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         SR_LOG("CameraManager::RegisterCamera() : register new camera...");
 
@@ -191,7 +191,7 @@ namespace SR_GRAPH_NS::Memory {
     }
 
     void CameraManager::DestroyCamera(const CameraPtr &camera) {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         SR_LOG("CameraManager::Update() : destroy camera...");
 
@@ -215,12 +215,12 @@ namespace SR_GRAPH_NS::Memory {
     }
 
     bool CameraManager::IsRegistered(const CameraManager::CameraPtr &camera) const {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
         return m_cameras.count(camera) != 0;
     }
 
     void CameraManager::UnRegisterCamera(CameraManager::CameraPtr const &camera) {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         SR_LOG("CameraManager::UnRegisterCamera() : unregister camera...");
 
@@ -244,7 +244,7 @@ namespace SR_GRAPH_NS::Memory {
     }
 
     bool CameraManager::IsDestroyed(const CameraManager::CameraPtr &camera) const {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         if (auto&& pIt = m_cameras.find(camera); pIt != m_cameras.end()) {
             return pIt->second.destroyed;

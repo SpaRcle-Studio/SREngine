@@ -29,7 +29,7 @@ namespace SR_CORE_NS::Commands {
     }
 
     bool ChangeHierarchySelected::Redo() {
-        std::set<SR_UTILS_NS::GameObject::Ptr> changeSelected;
+        Selection changeSelected;
         for (SR_UTILS_NS::EntityId gmId:m_newSelected) {
             auto entity = SR_UTILS_NS::EntityManager::Instance().FindById(gmId);
             auto pObject = entity.DynamicCast<SR_UTILS_NS::GameObject>();
@@ -52,7 +52,7 @@ namespace SR_CORE_NS::Commands {
     }
 
     bool ChangeHierarchySelected::Undo() {
-        std::set<SR_UTILS_NS::GameObject::Ptr> changeSelected;
+        Selection changeSelected;
         for (SR_UTILS_NS::EntityId gmId:m_oldSelected) {
             auto entity = SR_UTILS_NS::EntityManager::Instance().FindById(gmId);
             auto pObject = entity.DynamicCast<SR_UTILS_NS::GameObject>();
@@ -398,7 +398,7 @@ namespace SR_CORE_NS::Commands {
                 }
             }
 
-            m_hierarchy->SetSelectedImpl(newSelected);
+            m_hierarchy->SetSelectedImpl(newSelected); ///TODO: HierarchyPaste::Undo() тоже должен иметь смену выделенных в иерархии объектов
 
             m_scene.Unlock();
             return true;

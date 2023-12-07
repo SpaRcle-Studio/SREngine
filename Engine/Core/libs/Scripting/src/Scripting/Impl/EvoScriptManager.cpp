@@ -6,7 +6,7 @@
 
 namespace SR_SCRIPTING_NS {
     void EvoScriptManager::Update(float_t dt, bool force) {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         if (force) {
             for (auto pIt = m_scripts.begin(); pIt != m_scripts.end(); ) {
@@ -65,7 +65,7 @@ namespace SR_SCRIPTING_NS {
     }
 
     bool EvoScriptManager::ReloadScript(const SR_UTILS_NS::Path& localPath) {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         auto&& compiler = GlobalEvoCompiler::Instance();
 
@@ -95,7 +95,7 @@ namespace SR_SCRIPTING_NS {
     }
 
     EvoScriptManager::ScriptPtr EvoScriptManager::Load(const SR_UTILS_NS::Path& localPath) {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         if (m_scripts.count(localPath.ToStringRef()) == 1 && m_scripts.at(localPath.ToStringRef()).Valid()) {
             return m_scripts.at(localPath.ToStringRef());
@@ -112,7 +112,7 @@ namespace SR_SCRIPTING_NS {
     }
 
     void EvoScriptManager::OnSingletonDestroy() {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         if (!m_scripts.empty()) {
             SR_ERROR("EvoScriptManager::OnSingletonDestroy() : not all scripts were deleted!\n\tCount: " + std::to_string(m_scripts.size()));

@@ -19,7 +19,7 @@ namespace SR_GRAPH_NS::GUI {
         void FreeUniqueId(const uintptr_t& id);
 
         template<typename T> T* GetUnique(uintptr_t id) const {
-            SR_LOCK_GUARD
+            SR_LOCK_GUARD;
 
             if (m_uniques.count(id) == 0)
                 return nullptr;

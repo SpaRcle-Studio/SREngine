@@ -9,7 +9,7 @@
 
 namespace SR_GRAPH_NS::Memory {
     bool TextureConfigs::Reload() {
-        SR_SCOPED_LOCK
+        SR_SCOPED_LOCK;
 
         SR_INFO("TextureConfigs::Reload() : reloading configs...");
 
@@ -47,7 +47,7 @@ namespace SR_GRAPH_NS::Memory {
     }
 
     TextureConfig TextureConfigs::FindOrDefault(const std::string &path) {
-        SR_SCOPED_LOCK
+        SR_SCOPED_LOCK;
 
         if (auto&& config = Find(path); config.has_value())
             return config.value();
@@ -56,7 +56,7 @@ namespace SR_GRAPH_NS::Memory {
     }
 
     std::optional<TextureConfig> TextureConfigs::Find(const std::string& path) {
-        SR_SCOPED_LOCK
+        SR_SCOPED_LOCK;
 
         if (!m_loaded) {
             Reload();

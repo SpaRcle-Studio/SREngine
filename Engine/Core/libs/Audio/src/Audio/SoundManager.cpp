@@ -39,7 +39,7 @@ namespace SR_AUDIO_NS {
     }
 
     void SoundManager::StopAll() {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         for (auto&& pPlayData : m_playStack) {
             DestroyPlayData(pPlayData);
@@ -49,7 +49,7 @@ namespace SR_AUDIO_NS {
     }
 
     void SoundManager::Update() {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         for (auto pIt = m_playStack.begin(); pIt != m_playStack.end(); ) {
             auto&& pPlayData = *pIt;
@@ -126,7 +126,7 @@ namespace SR_AUDIO_NS {
         ///// синхронно добавляем звук в стек
         Handle pHandle = nullptr;
         {
-            SR_LOCK_GUARD
+            SR_LOCK_GUARD;
 
             if (m_playStack.size() >= 256) {
                 SR_WARN("SoundManager::Play() : stack overflow!");
@@ -149,7 +149,7 @@ namespace SR_AUDIO_NS {
         bool async = params.async.has_value() ? params.async.value() : true; /// NOLINT
 
         while (!async) {
-            SR_LOCK_GUARD
+            SR_LOCK_GUARD;
 
             if (!IsExists(pHandle) || IsFailed(pHandle)) {
                 break;
@@ -168,7 +168,7 @@ namespace SR_AUDIO_NS {
     }
 
     bool SoundManager::IsPlaying(Handle pHandle) const {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         for (auto&& pPlayData : m_playStack) {
             if (pHandle == pPlayData) {
@@ -227,7 +227,7 @@ namespace SR_AUDIO_NS {
     }
 
     bool SoundManager::IsInitialized(SoundManager::Handle pHandle) const {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         for (auto&& pPlayData : m_playStack) {
             if (pHandle == pPlayData) {
@@ -241,7 +241,7 @@ namespace SR_AUDIO_NS {
     }
 
     bool SoundManager::IsExists(SoundManager::Handle pHandle) const {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         for (auto&& pPlayData : m_playStack) {
             if (pHandle == pPlayData) {
@@ -253,7 +253,7 @@ namespace SR_AUDIO_NS {
     }
 
     bool SoundManager::IsFailed(SoundManager::Handle pHandle) const {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         for (auto&& pPlayData : m_playStack) {
             if (pHandle == pPlayData) {
@@ -315,7 +315,7 @@ namespace SR_AUDIO_NS {
     }
 
     void SoundManager::Destroy() {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         SR_INFO("SoundManager::Destroy() : destroy all sound libraries...");
 
@@ -331,7 +331,7 @@ namespace SR_AUDIO_NS {
     }
 
     SoundManager::Handle SoundManager::Play(const std::string& path, const PlayParams& params) {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         if (path.empty()) {
             SRHalt("Empty sound path!");
@@ -358,7 +358,7 @@ namespace SR_AUDIO_NS {
     }
 
     void SoundManager::ApplyParams(SoundManager::Handle pHandle, const PlayParams& params) {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         for (auto&& pPlayData : m_playStack) {
             if (pHandle == pPlayData) {
@@ -372,7 +372,7 @@ namespace SR_AUDIO_NS {
     }
 
     void SoundManager::Stop(Handle pHandle) {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         for (auto pIt = m_playStack.begin(); pIt != m_playStack.end(); ) {
             if (pHandle == *pIt) {

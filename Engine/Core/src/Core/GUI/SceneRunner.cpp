@@ -13,7 +13,7 @@ namespace SR_CORE_NS::GUI {
     { }
 
     void SceneRunner::SetScene(const SR_WORLD_NS::Scene::Ptr &scene) {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
         m_scene = scene;
     }
 
@@ -112,7 +112,7 @@ namespace SR_CORE_NS::GUI {
     }
 
     bool SceneRunner::PlayScene() {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         SR_LOG("SceneRunner::PlayScene() : play scene \"" + m_lastPath.ToString() + "\"");
 

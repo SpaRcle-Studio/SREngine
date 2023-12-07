@@ -15,11 +15,11 @@
 /** Warning: этот метод очень медленный! */
 #define SR_THIS_THREAD (SR_HTYPES_NS::Thread::Factory::Instance().GetThisThread())
 
-#define SR_LOCK_GUARD std::lock_guard<std::recursive_mutex> codegen_lock(m_mutex);
-#define SR_LOCK_GUARD_INHERIT(baseClass) std::lock_guard<std::recursive_mutex> codegen_lock(baseClass::m_mutex);
-#define SR_SCOPED_LOCK std::lock_guard<std::recursive_mutex> codegen_lock(m_mutex);
-#define SR_WRITE_LOCK std::lock_guard<std::shared_mutex> SR_MACRO_CONCAT(codegen_write_lock, SR_LINE)(m_mutex);
-#define SR_READ_LOCK std::shared_lock<std::shared_mutex> SR_MACRO_CONCAT(codegen_read_lock, SR_LINE)(m_mutex);
+#define SR_LOCK_GUARD std::lock_guard<std::recursive_mutex> codegen_lock(m_mutex)
+#define SR_LOCK_GUARD_INHERIT(baseClass) std::lock_guard<std::recursive_mutex> codegen_lock(baseClass::m_mutex)
+#define SR_SCOPED_LOCK std::lock_guard<std::recursive_mutex> codegen_lock(m_mutex)
+#define SR_WRITE_LOCK std::lock_guard<std::shared_mutex> SR_MACRO_CONCAT(codegen_write_lock, SR_LINE)(m_mutex)
+#define SR_READ_LOCK std::shared_lock<std::shared_mutex> SR_MACRO_CONCAT(codegen_read_lock, SR_LINE)(m_mutex)
 
 namespace SR_HTYPES_NS {
     class DataStorage;
@@ -86,13 +86,13 @@ namespace SR_HTYPES_NS {
 
         template<class Functor, typename... Args> SR_NODISCARD bool Run(Functor&& fn) {
             if (Joinable()) {
-                SRHalt("Thread::Run() : thread already ran!");
+                SRHalt("Thread::Run() : thread is already running!");
                 return false;
             }
 
-            Factory::Instance().LockSingleton();
+            Factory::LockSingleton();
 
-            auto&& thread = std::thread([function = std::move(fn), this]() {
+            auto&& thread = std::thread([function = std::forward<Functor>(fn), this]() {
                 while (!m_isCreated || m_id == "0" || m_id.empty()) {
                     m_id = SR_UTILS_NS::GetThreadId(m_thread);
                 }
@@ -108,7 +108,7 @@ namespace SR_HTYPES_NS {
             SR_LOG("Thread::Run() : thread is moved");
             m_isCreated = true;
 
-            Factory::Instance().UnlockSingleton();
+            Factory::UnlockSingleton();
 
             m_isRan = true;
 

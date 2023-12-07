@@ -8,7 +8,7 @@
 
 namespace SR_UTILS_NS {
     Component* ComponentManager::CreateComponentOfName(const std::string &name) {
-        SR_SCOPED_LOCK
+        SR_SCOPED_LOCK;
 
         if (m_ids.count(name) == 0) {
             SR_ERROR("ComponentManager::CreateComponentOfName() : component \"" + name + "\" not found!");
@@ -19,7 +19,7 @@ namespace SR_UTILS_NS {
     }
 
     Component* ComponentManager::CreateComponentOfName(ComponentManager::Hash hashName) {
-        SR_SCOPED_LOCK
+        SR_SCOPED_LOCK;
         return CreateComponentImpl(hashName);
     }
 
@@ -44,7 +44,7 @@ namespace SR_UTILS_NS {
     }
 
     std::pair<Component*, ComponentLoadResult> ComponentManager::Load(SR_HTYPES_NS::Marshal& marshal) {
-        SR_SCOPED_LOCK
+        SR_SCOPED_LOCK;
 
         ComponentLoadResult result = ComponentLoadResult::Success;
 
@@ -85,13 +85,13 @@ namespace SR_UTILS_NS {
     }
 
     uint16_t ComponentManager::GetVersion(const Component *pComponent) const {
-        SR_SCOPED_LOCK
+        SR_SCOPED_LOCK;
 
         return GetVersionById(pComponent->GetComponentHashName());
     }
 
     uint16_t ComponentManager::GetVersionById(uint64_t id) const {
-        SR_SCOPED_LOCK
+        SR_SCOPED_LOCK;
 
         auto&& pIt = m_meta.find(id);
 
@@ -103,7 +103,7 @@ namespace SR_UTILS_NS {
     }
 
     bool ComponentManager::LoadComponents(const SR_HTYPES_NS::Function<bool(Types::DataStorage & )> &loader) {
-        SR_SCOPED_LOCK
+        SR_SCOPED_LOCK;
 
         const bool result = loader(m_context);
 
@@ -113,7 +113,7 @@ namespace SR_UTILS_NS {
     }
 
     std::string ComponentManager::GetLastComponentName() const {
-        SR_SCOPED_LOCK
+        SR_SCOPED_LOCK;
 
         auto&& pMetadataIt = m_meta.find(m_lastComponent);
         if (pMetadataIt == m_meta.end()) {

@@ -25,12 +25,12 @@ namespace SR_UTILS_NS {
 
     public:
         void Subscribe(Subscription&& subHandler) {
-            SR_LOCK_GUARD
+            SR_LOCK_GUARD;
             m_subscriptions.emplace_back(std::move(subHandler));
         }
 
         void Broadcast(const Event& event){
-            SR_LOCK_GUARD
+            SR_LOCK_GUARD;
 
             for (auto&& subscription : m_subscriptions) {
                 subscription(event);

@@ -38,7 +38,7 @@ namespace SR_UTILS_NS {
     }
 
     void Features::SetPath(const SR_UTILS_NS::Path& path) {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         if (path.Empty() || !path.Exists()) {
             SR_ERROR("Features::Reload() : file not found! \n\tPath: {}", path.ToString());
@@ -93,7 +93,7 @@ namespace SR_UTILS_NS {
     }
 
     const FeatureGroup& Features::GetGroup(const std::string &name) const {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         if (auto pIt = m_features.find(name); pIt != m_features.end())
             return pIt->second;

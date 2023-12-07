@@ -12,7 +12,7 @@
 namespace SR_SCRIPTING_NS {
     bool EvoScriptResourceReloader::Reload(const SR_UTILS_NS::Path& path, SR_UTILS_NS::ResourceInfo* pResourceInfo) {
         SR_TRACY_ZONE;
-        SR_SCOPED_LOCK
+        SR_SCOPED_LOCK;
 
         if (SR_UTILS_NS::Features::Instance().Enabled("CompilePDB", false)) {
             SR_WARN("EvoScriptResourceReloader::Reload() : PDB compilation enabled! Script reloading impossible.");

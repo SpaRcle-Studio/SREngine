@@ -14,13 +14,13 @@ namespace SR_UTILS_NS {
 
     void DebugDraw::SetCallbacks(void* pUserIdentifier, Callbacks callbacks)
     {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         m_callbacks[pUserIdentifier] = std::move(callbacks);
     }
 
     void DebugDraw::RemoveCallbacks(void* pUserIdentifier) {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         if (auto&& pIt = m_callbacks.find(pUserIdentifier); pIt != m_callbacks.end()) {
             if (&pIt->second == m_currentCallbacks) {
@@ -35,7 +35,7 @@ namespace SR_UTILS_NS {
     }
 
     void DebugDraw::SwitchCallbacks(void* pUserIdentifier) {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         if (m_currentSwitcher == pUserIdentifier) {
             return;
@@ -51,7 +51,7 @@ namespace SR_UTILS_NS {
     }
 
     void DebugDraw::Remove(uint64_t id) {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         if (m_currentCallbacks && m_currentCallbacks->removeCallback) {
             m_currentCallbacks->removeCallback(id);
@@ -61,7 +61,7 @@ namespace SR_UTILS_NS {
     /// ---------------------------------------------------- LINE DRAWING ----------------------------------------------
 
     uint64_t DebugDraw::DrawLine(uint64_t id, const SR_MATH_NS::FVector3& start, const SR_MATH_NS::FVector3& end, const SR_MATH_NS::FColor& color, float_t time) {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         if (m_currentCallbacks && m_currentCallbacks->drawLineCallback) {
             return m_currentCallbacks->drawLineCallback(id, start, end, color, time);
@@ -109,7 +109,7 @@ namespace SR_UTILS_NS {
     /// ---------------------------------------------------- CUBE DRAWING ----------------------------------------------
 
     uint64_t DebugDraw::DrawCube(uint64_t id, const SR_MATH_NS::FVector3& pos, const SR_MATH_NS::Quaternion& rot, const SR_MATH_NS::FVector3& scale, const SR_MATH_NS::FColor& color, float_t time) {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         if (m_currentCallbacks && m_currentCallbacks->drawCubeCallback) {
             return m_currentCallbacks->drawCubeCallback(id, pos, rot, scale, color, time);
@@ -189,7 +189,7 @@ namespace SR_UTILS_NS {
     /// ---------------------------------------------------- PLANE DRAWING ----------------------------------------------
 
     uint64_t DebugDraw::DrawPlane(uint64_t id, const SR_MATH_NS::FVector3& pos, const SR_MATH_NS::Quaternion& rot, const SR_MATH_NS::FVector3& scale, const SR_MATH_NS::FColor& color, float_t time) {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         if (m_currentCallbacks && m_currentCallbacks->drawPlaneCallback) {
             return m_currentCallbacks->drawPlaneCallback(id, pos, rot, scale, color, time);
@@ -269,7 +269,7 @@ namespace SR_UTILS_NS {
     /// ---------------------------------------------------- SPHERE DRAWING ----------------------------------------------
 
     uint64_t DebugDraw::DrawSphere(uint64_t id, const SR_MATH_NS::FVector3& pos, const SR_MATH_NS::Quaternion& rot, const SR_MATH_NS::FVector3& scale, const SR_MATH_NS::FColor& color, float_t time) {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         if (m_currentCallbacks && m_currentCallbacks->drawSphereCallback) {
             return m_currentCallbacks->drawSphereCallback(id, pos, rot, scale, color, time);
@@ -349,7 +349,7 @@ namespace SR_UTILS_NS {
     /// ---------------------------------------------------- CAPSULE DRAWING ----------------------------------------------
 
     uint64_t DebugDraw::DrawCapsule(uint64_t id, const SR_MATH_NS::FVector3& pos, const SR_MATH_NS::Quaternion& rot, const SR_MATH_NS::FVector3& scale, const SR_MATH_NS::FColor& color, float_t time) {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         if (m_currentCallbacks && m_currentCallbacks->drawCapsuleCallback) {
             return m_currentCallbacks->drawCapsuleCallback(id, pos, rot, scale, color, time);
@@ -429,7 +429,7 @@ namespace SR_UTILS_NS {
     /// ---------------------------------------------------- CAPSULE DRAWING ----------------------------------------------
 
     uint64_t DebugDraw::DrawMesh(SR_HTYPES_NS::RawMesh* pRawMesh, int32_t meshId, uint64_t id, const SR_MATH_NS::FVector3& pos, const SR_MATH_NS::Quaternion& rot, const SR_MATH_NS::FVector3& scale, const SR_MATH_NS::FColor& color, float_t time) {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         if (!pRawMesh) {
             return SR_ID_INVALID;

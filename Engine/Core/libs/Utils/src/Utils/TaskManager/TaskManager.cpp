@@ -136,7 +136,7 @@ namespace SR_UTILS_NS {
             while (m_isRun.load()) {
                 m_thread->Sleep(10);
 
-                SR_SCOPED_LOCK
+                SR_SCOPED_LOCK;
 
                 for (auto pIt = m_tasks.begin(); pIt != m_tasks.end(); ) {
                     if (pIt->IsWaiting()) {
@@ -163,7 +163,7 @@ namespace SR_UTILS_NS {
     }
 
     TaskManager::TaskId TaskManager::Execute(Task &&task) {
-        SR_SCOPED_LOCK
+        SR_SCOPED_LOCK;
 
         const uint64_t uniqueId = GetUniqueId();
 
@@ -175,7 +175,7 @@ namespace SR_UTILS_NS {
     }
 
     TaskManager::TaskId TaskManager::Execute(const TaskFn& function, bool createThread) {
-        SR_SCOPED_LOCK
+        SR_SCOPED_LOCK;
 
         Task task(function, createThread);
 

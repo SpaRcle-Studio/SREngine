@@ -47,13 +47,13 @@ namespace SR_HTYPES_NS {
     }
 
     SR_NODISCARD Thread::Ptr Thread::Factory::CreateEmpty() {
-        SR_SCOPED_LOCK
+        SR_SCOPED_LOCK;
         SR_LOG("Thread::Factory::CreateEmpty() : create empty thread...");
         return new Thread();
     }
 
     Thread::Ptr Thread::Factory::Create(std::thread thread) {
-        SR_SCOPED_LOCK
+        SR_SCOPED_LOCK;
 
         auto&& pThread = new Thread(std::move(thread));
 
@@ -78,13 +78,13 @@ namespace SR_HTYPES_NS {
     }
 
     Thread::Ptr Thread::Factory::GetMainThread() {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
         SRAssert2(m_main, "Main thread isn't initialized!");
         return m_main;
     }
 
     Thread::Ptr Thread::Factory::GetThisThread() {
-        SR_SCOPED_LOCK
+        SR_SCOPED_LOCK;
 
         auto&& threadId = SR_UTILS_NS::GetThisThreadId();
 
@@ -110,7 +110,7 @@ namespace SR_HTYPES_NS {
     }
 
     void Thread::Factory::Remove(Thread* pThread) {
-        SR_SCOPED_LOCK
+        SR_SCOPED_LOCK;
 
         SR_LOG("Thread::Free() : free \"{}\" thread...", pThread->GetId());
 
@@ -132,7 +132,7 @@ namespace SR_HTYPES_NS {
     }
 
     void Thread::Synchronize() {
-        SR_WRITE_LOCK
+        SR_WRITE_LOCK;
 
     #if defined(SR_DEBUG) && SR_THREAD_SAFE_CHECKS
         auto&& thread = Thread::Factory::Instance().GetThisThread();
@@ -158,7 +158,7 @@ namespace SR_HTYPES_NS {
 
         /// синхронно записываем
         {
-            SR_WRITE_LOCK
+            SR_WRITE_LOCK;
             m_function = &function;
         }
 
@@ -177,13 +177,13 @@ namespace SR_HTYPES_NS {
     }
 
     uint32_t Thread::Factory::GetThreadsCount() {
-        SR_SCOPED_LOCK
+        SR_SCOPED_LOCK;
 
         return m_threads.size();
     }
 
     void Thread::Factory::SetMainThread() {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         SRAssert2(!m_main, "Main thread already initialized!");
 
@@ -195,7 +195,7 @@ namespace SR_HTYPES_NS {
     }
 
     void Thread::Factory::PrintThreads() {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         if (m_threads.empty()) {
             return;
