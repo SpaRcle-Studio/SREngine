@@ -120,7 +120,7 @@ namespace SR_CORE_GUI_NS {
 
     void EditorGUI::Draw() {
         SR_TRACY_ZONE;
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         if (m_hasErrors || !m_enabled)
             return;
@@ -651,6 +651,8 @@ namespace SR_CORE_GUI_NS {
             if (ImGui::MenuItem("Render Technique")) {
                 OpenWidget<RenderTechniqueEditor>();
             }
+
+            ImGui::Separator();
 
             /// if (ImGui::MenuItem("Animator")) {
             ///    OpenWidget<AnimatorEditor>();

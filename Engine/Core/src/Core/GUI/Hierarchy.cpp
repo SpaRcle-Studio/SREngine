@@ -17,6 +17,8 @@ namespace SR_CORE_GUI_NS {
         : Widget("Hierarchy")
     {
         m_sceneRunnerWidget = new SceneRunner();
+
+        SetFlags(ImGuiWindowFlags_HorizontalScrollbar);
     }
 
     Hierarchy::~Hierarchy() {
@@ -24,7 +26,7 @@ namespace SR_CORE_GUI_NS {
     }
 
     void Hierarchy::Draw() {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         m_shiftPressed = SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::LShift);
 
@@ -80,7 +82,7 @@ namespace SR_CORE_GUI_NS {
     }
 
     void Hierarchy::Update(float_t dt) {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         for (auto pIt = m_selected.begin(); pIt != m_selected.end(); ) {
             if (*pIt) {
@@ -93,7 +95,7 @@ namespace SR_CORE_GUI_NS {
     }
 
     void Hierarchy::SetScene(const SR_WORLD_NS::Scene::Ptr& scene) {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         m_scene = scene;
 
@@ -125,78 +127,12 @@ namespace SR_CORE_GUI_NS {
         }
     }
 
-    void Hierarchy::ChildContextMenu(const SR_UTILS_NS::GameObject::Ptr& gm, uint64_t id) {
-        ImGui::PushID((void*)(intptr_t)id);
-        if (ImGui::BeginPopupContextItem("HierarchyChildContextMenu")) {
-            if (m_selected.count(gm) == 0) {
-                SelectGameObject(gm);
-            }
-
-            if (ImGui::Selectable("Copy")) {
-                Copy();
-            }
-
-            ImGui::Separator();
-
-            if (ImGui::Selectable("Paste")) {
-                Paste();
-            }
-
-            ImGui::Separator();
-
-            if (ImGui::Selectable("Cut")) {
-                Copy();
-                Delete();
-            }
-
-            ImGui::Separator();
-
-            if (ImGui::Selectable("Delete")) {
-                Delete();
-            }
-
-            if (gm->GetPrefab()) {
-                ImGui::Separator();
-
-                if (ImGui::Selectable("Break link")) {
-                    gm->UnlinkPrefab();
-                }
-
-                ImGui::Separator();
-
-                if (ImGui::Selectable("Edit")) {
-                    auto&& pEngine = dynamic_cast<EditorGUI*>(GetManager())->GetEngine();
-                    auto&& prefabPath = gm->GetPrefab()->GetResourcePath();
-                    if (auto&& pScene = SR_WORLD_NS::Scene::Load(prefabPath)) {
-                        pEngine->SetScene(pScene);
-                        pEngine->GetEditor()->CacheScenePath(prefabPath);
-                    }
-                }
-            }
-
-            ImGui::Separator();
-
-            if (ImGui::Selectable("Add child")) {
-                gm->AddChild(gm->GetScene()->Instance("New GameObject"));
-            }
-
-            ImGui::EndPopup();
-        }
-        ImGui::PopID();
-    }
-
-    void Hierarchy::CheckSelected(const SR_UTILS_NS::GameObject::Ptr& gm) {
-        if (ImGui::IsItemHovered() && ImGui::IsMouseReleased(ImGuiMouseButton_Left)) {
-            SelectGameObject(gm);
-        }
-    }
-
     void Hierarchy::DrawChild(const SR_UTILS_NS::GameObject::Ptr& root, uint32_t prefabIndex) {
         const auto& name = root->GetName();
         const bool hasChild = root->HasChildren();
 
         const ImGuiTreeNodeFlags flags = (hasChild ? m_nodeFlagsWithChild : m_nodeFlagsWithoutChild) |
-                ((m_selected.count(root) == 1) ? ImGuiTreeNodeFlags_Selected : 0);
+                                         ((m_selected.count(root) == 1) ? ImGuiTreeNodeFlags_Selected : 0);
 
         if (root->IsPrefabOwner()) {
             ++prefabIndex;
@@ -301,6 +237,72 @@ namespace SR_CORE_GUI_NS {
         }
     }
 
+    void Hierarchy::ChildContextMenu(const SR_UTILS_NS::GameObject::Ptr& gm, uint64_t id) {
+        ImGui::PushID((void*)(intptr_t)id);
+        if (ImGui::BeginPopupContextItem("HierarchyChildContextMenu")) {
+            if (m_selected.count(gm) == 0) {
+                SelectGameObject(gm);
+            }
+
+            if (ImGui::Selectable("Copy")) {
+                Copy();
+            }
+
+            ImGui::Separator();
+
+            if (ImGui::Selectable("Paste")) {
+                Paste((m_selected.size() == 1) ? m_selected.begin()->Get() : nullptr);
+            }
+
+            ImGui::Separator();
+
+            if (ImGui::Selectable("Cut")) {
+                Copy();
+                Delete();
+            }
+
+            ImGui::Separator();
+
+            if (ImGui::Selectable("Delete")) {
+                Delete();
+            }
+
+            if (gm->GetPrefab()) {
+                ImGui::Separator();
+
+                if (ImGui::Selectable("Break link")) {
+                    gm->UnlinkPrefab();
+                }
+
+                ImGui::Separator();
+
+                if (ImGui::Selectable("Edit")) {
+                    auto&& pEngine = dynamic_cast<EditorGUI*>(GetManager())->GetEngine();
+                    auto&& prefabPath = gm->GetPrefab()->GetResourcePath();
+                    if (auto&& pScene = SR_WORLD_NS::Scene::Load(prefabPath)) {
+                        pEngine->SetScene(pScene);
+                        pEngine->GetEditor()->CacheScenePath(prefabPath);
+                    }
+                }
+            }
+
+            ImGui::Separator();
+
+            if (ImGui::Selectable("Add child")) {
+                gm->AddChild(gm->GetScene()->Instance("New GameObject"));
+            }
+
+            ImGui::EndPopup();
+        }
+        ImGui::PopID();
+    }
+
+    void Hierarchy::CheckSelected(const SR_UTILS_NS::GameObject::Ptr& gm) {
+        if (ImGui::IsItemHovered() && ImGui::IsMouseReleased(ImGuiMouseButton_Left)) {
+            SelectGameObject(gm);
+        }
+    }
+
     void Hierarchy::OnKeyDown(const SR_UTILS_NS::KeyboardInputData* data) {
         switch (data->GetKeyCode()) {
             case SR_UTILS_NS::KeyCode::C: {
@@ -325,7 +327,7 @@ namespace SR_CORE_GUI_NS {
     }
 
     void Hierarchy::OnKeyUp(const SR_UTILS_NS::KeyboardInputData* data) {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         switch (data->GetKeyCode()) {
             case SR_UTILS_NS::KeyCode::LShift: {
@@ -344,7 +346,7 @@ namespace SR_CORE_GUI_NS {
     void Hierarchy::Copy() const {
         auto&& pMarshal = new SR_HTYPES_NS::Marshal();
 
-        pMarshal->Write<std::string>("SRCopyPaste#Hierarchy"); /// Требуется для проверки валидности содержимого буфера обмена в методе Paste()*/
+        pMarshal->Write<std::string>("SRCopyPaste#Hierarchy"); /// Требуется для проверки валидности содержимого буфера обмена в методе Paste()
 
         pMarshal->Write(static_cast<uint64_t>(m_selected.size()));
 
@@ -381,7 +383,7 @@ namespace SR_CORE_GUI_NS {
     }
 
     void Hierarchy::Delete() {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         if (!m_selected.empty() && m_scene.RecursiveLockIfValid()) {
             auto&& pEngine = dynamic_cast<EditorGUI*>(GetManager())->GetEngine();
@@ -402,12 +404,12 @@ namespace SR_CORE_GUI_NS {
     }
 
     std::set<SR_UTILS_NS::GameObject::Ptr> Hierarchy::GetSelected() const {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
         return m_selected;
     }
 
     void Hierarchy::ClearSelected() {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
         /// команда не должна срабатывать, если ни один объект не выделен, иначе такая команда бесполезна
         if (!m_selected.empty()) {
             auto&& pEngine = dynamic_cast<EditorGUI*>(GetManager())->GetEngine();
@@ -417,7 +419,7 @@ namespace SR_CORE_GUI_NS {
     }
 
     void Hierarchy::SelectGameObject(const SR_UTILS_NS::GameObject::Ptr& ptr) {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         if (!ptr) {
             ClearSelected();
@@ -447,7 +449,7 @@ namespace SR_CORE_GUI_NS {
     }
 
     void Hierarchy::SetSelectedImpl(const std::set<SR_UTILS_NS::GameObject::Ptr>& changeSelected){
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
         m_selected = changeSelected;
 #ifdef SR_DEBUG
         for (auto&& pGameObject : m_selected) {
