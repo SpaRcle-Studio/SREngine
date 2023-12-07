@@ -7,7 +7,7 @@
     <img alt="GitHub Contributors." src="https://img.shields.io/github/contributors/SpaRcle-Studio/SREngine" />
     <img alt="Issues." src="https://img.shields.io/github/issues/SpaRcle-Studio/SREngine?color=0088ff" />
     <img alt="Commit Activity." src="https://img.shields.io/github/commit-activity/m/SpaRcle-Studio/SREngine/dev" />
-    <img alt="Discord server." src="https://img.shields.io/discord/768652124204433429?logo=discord&link=https%3A%2F%2Fdiscord.gg%2FqAr7Grz3RD" />
+    <a href="https://discord.gg/NHuhNwFtYQ"><img alt="Discord server." src="https://img.shields.io/discord/768652124204433429?logo=discord&link=https%3A%2F%2Fdiscord.gg%2FqAr7Grz3RD" /></a>
   </p>
   <p align="center">
     <img alt="Build statistics." src="https://buildstats.info/github/chart/SpaRcle-Studio/SREngine?buildCount=50&branch=dev" />
