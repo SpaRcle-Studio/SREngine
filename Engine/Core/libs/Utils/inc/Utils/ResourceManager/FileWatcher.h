@@ -52,6 +52,7 @@ namespace SR_UTILS_NS {
         bool m_isDirty = false;
         bool m_isPaused = false;
         CallBack m_callBack;
+        uint64_t m_lastWriteTime = 0;
         Hash m_hash = SR_UINT64_MAX;
         std::string m_name;
         mutable Mutex m_mutex;

@@ -16,6 +16,10 @@ namespace SR_UTILS_NS {
 }
 
 namespace SR_UTILS_NS::Platform {
+    struct FileMetadata {
+        uint64_t lastWriteTime;
+    };
+
     SR_DLL_EXPORT extern void InitSegmentationHandler();
     SR_DLL_EXPORT extern void SetInstance(void* pInstance);
     SR_DLL_EXPORT extern void* GetInstance();
@@ -49,6 +53,6 @@ namespace SR_UTILS_NS::Platform {
     SR_DLL_EXPORT extern bool IsExists(const Path& path);
     SR_DLL_EXPORT extern bool FileIsHidden(const Path& path);
     SR_DLL_EXPORT extern std::list<Path> GetInDirectory(const Path& dir, Path::Type type);
+    SR_DLL_EXPORT extern FileMetadata GetFileMetadata(const Path& file);
 }
-
 #endif //SR_ENGINE_UTILS_PLATFORM_H

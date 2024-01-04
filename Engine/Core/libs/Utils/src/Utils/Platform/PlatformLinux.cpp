@@ -259,6 +259,12 @@ namespace SR_UTILS_NS::Platform {
         return false;
     }
 
+    FileMetadata GetFileMetadata(const Path& file) {
+        FileMetadata fm {0};
+        SRHaltOnce("GetFileMetadata::Not implemented!");
+        return fm;
+    }
+
     void SelfOpen() {
         SRHaltOnce("Not implemented!");
     }

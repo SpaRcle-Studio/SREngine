@@ -476,6 +476,21 @@ namespace SR_UTILS_NS::Platform {
         CloseHandle(pi.hThread);
     }
 
+    FileMetadata GetFileMetadata(const Path& file) {
+        FileMetadata fileMetadata {0};
+        WIN32_FIND_DATA fd;
+        HANDLE hFind = ::FindFirstFile(file.c_str(), &fd);
+        if(hFind != INVALID_HANDLE_VALUE) {
+            ///You must convert FILETIME to ULARGE_INTEGER to get a value for uint64_t
+            ULARGE_INTEGER lastWriteTime{fd.ftLastWriteTime.dwLowDateTime, fd.ftLastWriteTime.dwHighDateTime};
+            fileMetadata.lastWriteTime = lastWriteTime.QuadPart;
+            ::FindClose(hFind);
+        } else {
+            fileMetadata.lastWriteTime = SR_UINT64_MAX; ///TODO: какое значение стоит назначить в случае, если не был получен handle файла?
+        }
+        return fileMetadata; ///TODO: std::move в будущем, когда FileMetadata станет больше?
+    }
+
     bool IsAbsolutePath(const Path &path) {
         auto&& view = path.View();
         return view.size() >= 2 && view[1] == ':';
