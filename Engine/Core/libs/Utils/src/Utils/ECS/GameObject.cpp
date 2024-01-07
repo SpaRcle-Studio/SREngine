@@ -730,4 +730,18 @@ namespace SR_UTILS_NS {
             child->UnlinkPrefab();
         }
     }
+
+    void GameObject::SetLayer(const StringAtom &layer) {
+        ForEachComponent([](Component* pComponent) -> bool {
+            pComponent->BeforeLayerChanged();
+            return true;
+        });
+
+        m_layer = layer;
+
+        ForEachComponent([](Component* pComponent) -> bool {
+            pComponent->OnLayerChanged();
+            return true;
+        });
+    }
 }

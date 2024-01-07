@@ -76,6 +76,9 @@ namespace SR_UTILS_NS {
         virtual void FixedUpdate() { }
         virtual void LateUpdate() { }
 
+        virtual void BeforeLayerChanged() { }
+        virtual void OnLayerChanged() { }
+
         virtual void OnCollisionEnter(const CollisionData& data) { }
         virtual void OnCollisionStay(const CollisionData& data) { }
         virtual void OnCollisionExit(const CollisionData& data) { }

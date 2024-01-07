@@ -46,6 +46,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD GameObject::Ptr Copy(const ScenePtr& scene) const;
 
         SR_NODISCARD ScenePtr GetScene() const override { return m_scene; }
+        SR_NODISCARD StringAtom GetLayer() const noexcept { return m_layer; }
         SR_NODISCARD Prefab* GetPrefab() const noexcept { return m_prefab.first; }
         SR_NODISCARD bool IsPrefabOwner() const noexcept { return m_prefab.second; }
         SR_NODISCARD Transform* GetParentTransform() const noexcept { return m_parent ? m_parent->m_transform : nullptr; }
@@ -89,6 +90,7 @@ namespace SR_UTILS_NS {
 
         bool Contains(const GameObject::Ptr& child);
         void SetEnabled(bool value);
+        void SetLayer(const StringAtom& layer);
         void SetTransform(Transform* transform);
 
         bool MoveToTree(const GameObject::Ptr& destination);
@@ -120,6 +122,8 @@ namespace SR_UTILS_NS {
         bool m_isEnabled = true;
         bool m_isActive = false;
         bool m_isDestroyed = false;
+
+        StringAtom m_layer;
 
         uint64_t m_hashName = 0;
         uint64_t m_idInScene = SR_ID_INVALID;

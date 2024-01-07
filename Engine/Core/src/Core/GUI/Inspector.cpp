@@ -7,6 +7,7 @@
 #include <Utils/ECS/Transform3D.h>
 #include <Utils/ECS/Transform2D.h>
 #include <Utils/ECS/TransformZero.h>
+#include <Utils/ECS/LayerManager.h>
 #include <Utils/Types/SafePtrLockGuard.h>
 
 #include <Scripting/Base/Behaviour.h>
@@ -102,6 +103,26 @@ namespace SR_CORE_GUI_NS {
                 }, reinterpret_cast<void*>(pTags), tags.size())) {
                     /// TODO: переделать на комманды
                     m_gameObject->SetTag(pTagManager->GetTagByIndex(tagIndex));
+                }
+            });
+
+            SR_UTILS_NS::LayerManager::Instance().Do([&](auto&& pSettings) {
+                auto&& pLayerManager = dynamic_cast<SR_UTILS_NS::LayerManager*>(pSettings);
+                auto&& layers = pLayerManager->GetLayers();
+                auto&& layerIndex = static_cast<int>(pLayerManager->GetLayerIndex(m_gameObject->GetLayer()));
+                auto&& pLayers = const_cast<std::vector<SR_UTILS_NS::StringAtom>*>(&layers);
+
+                if (ImGui::Combo("Layer", &layerIndex, [](void* vec, int idx, const char** out_text){
+                    auto&& vector = reinterpret_cast<std::vector<SR_UTILS_NS::StringAtom>*>(vec);
+                    if (idx < 0 || idx >= vector->size())
+                        return false;
+
+                    *out_text = vector->at(idx).c_str();
+
+                    return true;
+                }, reinterpret_cast<void*>(pLayers), layers.size())) {
+                    /// TODO: переделать на комманды
+                    m_gameObject->SetLayer(layers[layerIndex]);
                 }
             });
 

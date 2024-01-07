@@ -213,6 +213,7 @@ namespace SR_CORE_NS {
 
         SR_CORE_NS::EditorSettings::DestroySettings();
         SR_UTILS_NS::TagManager::DestroySettings();
+        SR_UTILS_NS::LayerManager::DestroySettings();
 
         SR_AUDIO_NS::SoundManager::DestroySingleton();
         SR_PHYSICS_NS::PhysicsLibrary::DestroySingleton();

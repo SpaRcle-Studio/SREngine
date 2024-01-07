@@ -58,6 +58,8 @@ namespace SR_UTILS_NS {
     bool TagManager::LoadSettings(const Xml::Node &node) {
         SR_LOCK_GUARD;
 
+        m_tags.clear();
+
         m_tags.emplace_back(UNTAGGED);
         m_indices[HashTag(UNTAGGED)] = m_indices.size();
 
