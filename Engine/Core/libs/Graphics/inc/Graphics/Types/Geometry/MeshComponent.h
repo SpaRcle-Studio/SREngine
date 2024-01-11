@@ -26,6 +26,9 @@ namespace SR_GTYPES_NS {
         void OnDestroy() override;
         void OnMatrixDirty() override;
 
+        void OnBeforeLayerChanged() override;
+        void OnLayerChanged() override;
+
         void FreeMesh() override;
 
         SR_NODISCARD bool ExecuteInEditMode() const override;

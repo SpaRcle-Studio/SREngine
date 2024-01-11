@@ -14,7 +14,7 @@ namespace SR_UTILS_NS {
 
         m_layers.clear();
 
-        Settings::ClearSettings();
+        Super::ClearSettings();
     }
 
     bool LayerManager::LoadSettings(const Xml::Node &node) {
@@ -30,7 +30,7 @@ namespace SR_UTILS_NS {
             }
         }
 
-        return Settings::LoadSettings(node);
+        return Super::LoadSettings(node);
     }
 
     uint16_t LayerManager::GetLayerIndex(StringAtom layer) const {

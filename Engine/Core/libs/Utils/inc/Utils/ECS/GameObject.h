@@ -90,7 +90,7 @@ namespace SR_UTILS_NS {
 
         bool Contains(const GameObject::Ptr& child);
         void SetEnabled(bool value);
-        void SetLayer(const StringAtom& layer);
+        void SetLayer(StringAtom layer);
         void SetTransform(Transform* transform);
 
         bool MoveToTree(const GameObject::Ptr& destination);

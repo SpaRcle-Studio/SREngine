@@ -37,7 +37,7 @@ namespace SR_GTYPES_NS {
     }
 
     void MeshComponent::OnAttached() {
-        GetRenderScene().Do([this](SR_GRAPH_NS::RenderScene *ptr) {
+        GetRenderScene().Do([this](SR_GRAPH_NS::RenderScene* ptr) {
             ptr->Register(this);
         });
 
@@ -126,5 +126,13 @@ namespace SR_GTYPES_NS {
         //m_customMaterialProperties = &materialContainer.AddArray<MaterialProperty>("Custom properties");
 
         return Entity::InitializeEntity();
+    }
+
+    void MeshComponent::OnBeforeLayerChanged() {
+        Component::OnBeforeLayerChanged();
+    }
+
+    void MeshComponent::OnLayerChanged() {
+        Component::OnLayerChanged();
     }
 }

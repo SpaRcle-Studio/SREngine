@@ -14,6 +14,7 @@ namespace SR_UTILS_NS {
     class TagManager : public GlobalSettings<TagManager> {
         SR_REGISTER_SINGLETON(TagManager)
         friend class GlobalSettings<TagManager>;
+        using Super = GlobalSettings<TagManager>;
         using Hash = uint64_t;
     public:
         SR_INLINE_STATIC const std::string UNTAGGED = "Untagged"; /** NOLINT */

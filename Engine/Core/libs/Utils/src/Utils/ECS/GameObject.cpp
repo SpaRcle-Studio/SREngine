@@ -731,9 +731,9 @@ namespace SR_UTILS_NS {
         }
     }
 
-    void GameObject::SetLayer(const StringAtom &layer) {
+    void GameObject::SetLayer(StringAtom layer) {
         ForEachComponent([](Component* pComponent) -> bool {
-            pComponent->BeforeLayerChanged();
+            pComponent->OnBeforeLayerChanged();
             return true;
         });
 

@@ -11,6 +11,7 @@ namespace SR_UTILS_NS {
     class LayerManager : public GlobalSettings<LayerManager> {
         SR_REGISTER_SINGLETON(LayerManager);
         friend class GlobalSettings<LayerManager>;
+        using Super = GlobalSettings<LayerManager>;
 
     public:
         //SR_NODISCARD const std::string& GetLayer(Layer layer) const;

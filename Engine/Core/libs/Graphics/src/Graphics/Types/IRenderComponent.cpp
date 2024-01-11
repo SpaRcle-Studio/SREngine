@@ -12,6 +12,7 @@ namespace SR_GTYPES_NS {
         if (auto&& renderScene = TryGetRenderScene()) {
             renderScene->SetDirty();
         }
+
         Super::OnEnable();
     }
 
@@ -19,6 +20,7 @@ namespace SR_GTYPES_NS {
         if (auto&& renderScene = TryGetRenderScene()) {
             renderScene->SetDirty();
         }
+
         Super::OnDisable();
     }
 

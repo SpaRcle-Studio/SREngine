@@ -52,7 +52,7 @@ namespace SR_UTILS_NS {
         m_tags.clear();
         m_indices.clear();
 
-        Settings::ClearSettings();
+        Super::ClearSettings();
     }
 
     bool TagManager::LoadSettings(const Xml::Node &node) {
@@ -69,7 +69,7 @@ namespace SR_UTILS_NS {
             }
         }
 
-        return Settings::LoadSettings(node);
+        return Super::LoadSettings(node);
     }
 
     TagManager::Hash TagManager::HashTag(const std::string &tag) const {
