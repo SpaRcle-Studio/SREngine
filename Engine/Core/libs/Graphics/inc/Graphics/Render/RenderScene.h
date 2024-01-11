@@ -2,8 +2,8 @@
 // Created by Monika on 16.05.2022.
 //
 
-#ifndef SRENGINE_RENDERSCENE_H
-#define SRENGINE_RENDERSCENE_H
+#ifndef SR_ENGINE_RENDERSCENE_H
+#define SR_ENGINE_RENDERSCENE_H
 
 #include <Utils/Common/NonCopyable.h>
 #include <Utils/Types/SafePointer.h>
@@ -183,4 +183,4 @@ namespace SR_GRAPH_NS {
         m_hasDrawData |= m_technique->FunctionName(##__VA_ARGS__);          \
     }                                                                       \
 
-#endif //SRENGINE_RENDERSCENE_H
+#endif //SR_ENGINE_RENDERSCENE_H

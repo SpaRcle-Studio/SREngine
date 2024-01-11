@@ -2,8 +2,8 @@
 // Created by Monika on 30.10.2022.
 //
 
-#ifndef SRENGINE_TEXTBUILDER_H
-#define SRENGINE_TEXTBUILDER_H
+#ifndef SR_ENGINE_TEXTBUILDER_H
+#define SR_ENGINE_TEXTBUILDER_H
 
 #include <Utils/Common/NonCopyable.h>
 #include <Graphics/Font/FreeType.h>
@@ -72,4 +72,4 @@ namespace SR_GRAPH_NS {
     };
 }
 
-#endif //SRENGINE_TEXTBUILDER_H
+#endif //SR_ENGINE_TEXTBUILDER_H

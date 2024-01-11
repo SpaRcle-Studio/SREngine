@@ -2,8 +2,8 @@
 // Created by Monika on 28.07.2023.
 //
 
-#ifndef SRENGINE_BONECOMPONENT_H
-#define SRENGINE_BONECOMPONENT_H
+#ifndef SR_ENGINE_BONECOMPONENT_H
+#define SR_ENGINE_BONECOMPONENT_H
 
 #include <Utils/ECS/EntityRef.h>
 #include <Utils/ECS/Component.h>
@@ -39,4 +39,4 @@ namespace SR_ANIMATIONS_NS {
     };
 }
 
-#endif //SRENGINE_BONECOMPONENT_H
+#endif //SR_ENGINE_BONECOMPONENT_H

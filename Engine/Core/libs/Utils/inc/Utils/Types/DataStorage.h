@@ -2,8 +2,8 @@
 // Created by Monika on 21.02.2022.
 //
 
-#ifndef SRENGINE_DATASTORAGE_H
-#define SRENGINE_DATASTORAGE_H
+#ifndef SR_ENGINE_DATASTORAGE_H
+#define SR_ENGINE_DATASTORAGE_H
 
 #include <Utils/Common/NonCopyable.h>
 #include <Utils/Common/HashManager.h>
@@ -254,4 +254,4 @@ namespace SR_HTYPES_NS {
     }
 }
 
-#endif //SRENGINE_DATASTORAGE_H
+#endif //SR_ENGINE_DATASTORAGE_H

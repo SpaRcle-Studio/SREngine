@@ -2,8 +2,8 @@
 // Created by Monika on 23.08.2022.
 //
 
-#ifndef SRENGINE_TENSORKEY_H
-#define SRENGINE_TENSORKEY_H
+#ifndef SR_ENGINE_TENSORKEY_H
+#define SR_ENGINE_TENSORKEY_H
 
 #include <Utils/Math/Vector2.h>
 #include <Utils/Math/Vector3.h>
@@ -55,4 +55,4 @@ namespace SR_WORLD_NS {
     typedef std::unordered_map<SR_MATH_NS::IVector3, Region*> Regions;
 }
 
-#endif //SRENGINE_TENSORKEY_H
+#endif //SR_ENGINE_TENSORKEY_H

@@ -2,8 +2,8 @@
 // Created by Monika on 22.01.2023.
 //
 
-#ifndef SRENGINE_SRSL_LEXERUTILS_H
-#define SRENGINE_SRSL_LEXERUTILS_H
+#ifndef SR_ENGINE_SRSL_LEXERUTILS_H
+#define SR_ENGINE_SRSL_LEXERUTILS_H
 
 #include <Utils/Common/Singleton.h>
 #include <Utils/Common/Enumerations.h>
@@ -261,4 +261,4 @@ namespace SR_SRSL_NS {
     }
 }
 
-#endif //SRENGINE_SRSL_LEXERUTILS_H
+#endif //SR_ENGINE_SRSL_LEXERUTILS_H

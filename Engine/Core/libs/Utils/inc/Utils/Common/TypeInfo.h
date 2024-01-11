@@ -2,8 +2,8 @@
 // Created by Monika on 29.06.2022.
 //
 
-#ifndef SRENGINE_TYPEINFO_H
-#define SRENGINE_TYPEINFO_H
+#ifndef SR_ENGINE_TYPEINFO_H
+#define SR_ENGINE_TYPEINFO_H
 
 #include <Utils/Common/Enumerations.h>
 #include <Utils/Common/AnyVisitor.h>
@@ -228,4 +228,4 @@ namespace SR_UTILS_NS {
     }
 }
 
-#endif //SRENGINE_TYPEINFO_H
+#endif //SR_ENGINE_TYPEINFO_H

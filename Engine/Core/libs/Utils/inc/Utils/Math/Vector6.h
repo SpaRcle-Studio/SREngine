@@ -2,8 +2,8 @@
 // Created by Monika on 08.07.2022.
 //
 
-#ifndef SRENGINE_VECTOR6_H
-#define SRENGINE_VECTOR6_H
+#ifndef SR_ENGINE_VECTOR6_H
+#define SR_ENGINE_VECTOR6_H
 
 #include <Utils/Math/Mathematics.h>
 
@@ -77,4 +77,4 @@ namespace SR_MATH_NS {
     typedef Vector6<uint32_t> UVector6;
 }
 
-#endif //SRENGINE_VECTOR6_H
+#endif //SR_ENGINE_VECTOR6_H

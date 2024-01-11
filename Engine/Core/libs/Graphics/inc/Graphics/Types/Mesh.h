@@ -128,4 +128,4 @@ namespace SR_GTYPES_NS {
     };
 }
 
-#endif //SRENGINE_GRAPHICS_MESH_H
+#endif //SR_ENGINE_GRAPHICS_MESH_H

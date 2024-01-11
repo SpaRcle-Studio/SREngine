@@ -2,8 +2,8 @@
 // Created by Monika on 07.07.2022.
 //
 
-#ifndef SRENGINE_SOUNDMANAGER_H
-#define SRENGINE_SOUNDMANAGER_H
+#ifndef SR_ENGINE_SOUNDMANAGER_H
+#define SR_ENGINE_SOUNDMANAGER_H
 
 #include <Utils/Common/Singleton.h>
 #include <Utils/Types/Thread.h>
@@ -85,4 +85,4 @@ namespace SR_AUDIO_NS {
     };
 }
 
-#endif //SRENGINE_SOUNDMANAGER_H
+#endif //SR_ENGINE_SOUNDMANAGER_H

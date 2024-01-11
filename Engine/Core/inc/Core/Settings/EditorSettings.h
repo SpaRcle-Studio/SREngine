@@ -2,8 +2,8 @@
 // Created by Monika on 17.06.2022.
 //
 
-#ifndef SRENGINE_EDITORSETTINGS_H
-#define SRENGINE_EDITORSETTINGS_H
+#ifndef SR_ENGINE_EDITORSETTINGS_H
+#define SR_ENGINE_EDITORSETTINGS_H
 
 #include <Utils/Settings.h>
 
@@ -65,4 +65,4 @@ namespace SR_CORE_NS {
     };
 }
 
-#endif //SRENGINE_EDITORSETTINGS_H
+#endif //SR_ENGINE_EDITORSETTINGS_H

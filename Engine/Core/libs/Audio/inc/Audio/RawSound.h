@@ -2,8 +2,8 @@
 // Created by Monika on 06.07.2022.
 //
 
-#ifndef SRENGINE_RAWSOUND_H
-#define SRENGINE_RAWSOUND_H
+#ifndef SR_ENGINE_RAWSOUND_H
+#define SR_ENGINE_RAWSOUND_H
 
 #include <Utils/ResourceManager/IResource.h>
 #include <Audio/Decoders/IWaveDataProvider.h>
@@ -38,4 +38,4 @@ namespace SR_AUDIO_NS {
     };
 }
 
-#endif //SRENGINE_RAWSOUND_H
+#endif //SR_ENGINE_RAWSOUND_H

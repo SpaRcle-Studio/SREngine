@@ -2,8 +2,8 @@
 // Created by Monika on 23.08.2022.
 //
 
-#ifndef SRENGINE_SCENEALLOCATOR_H
-#define SRENGINE_SCENEALLOCATOR_H
+#ifndef SR_ENGINE_SCENEALLOCATOR_H
+#define SR_ENGINE_SCENEALLOCATOR_H
 
 #include <Utils/Types/SharedPtr.h>
 #include <Utils/Types/SafePointer.h>
@@ -33,4 +33,4 @@ namespace SR_WORLD_NS {
     };
 }
 
-#endif //SRENGINE_SCENEALLOCATOR_H
+#endif //SR_ENGINE_SCENEALLOCATOR_H

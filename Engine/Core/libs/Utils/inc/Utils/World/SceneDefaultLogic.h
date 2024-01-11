@@ -2,8 +2,8 @@
 // Created by Monika on 23.12.2022.
 //
 
-#ifndef SRENGINE_SCENEDEFAULTLOGIC_H
-#define SRENGINE_SCENEDEFAULTLOGIC_H
+#ifndef SR_ENGINE_SCENEDEFAULTLOGIC_H
+#define SR_ENGINE_SCENEDEFAULTLOGIC_H
 
 #include <Utils/World/SceneLogic.h>
 
@@ -26,4 +26,4 @@ namespace SR_WORLD_NS {
     };
 }
 
-#endif //SRENGINE_SCENEDEFAULTLOGIC_H
+#endif //SR_ENGINE_SCENEDEFAULTLOGIC_H

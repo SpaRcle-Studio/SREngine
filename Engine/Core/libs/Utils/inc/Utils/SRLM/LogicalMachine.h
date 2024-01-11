@@ -2,8 +2,8 @@
 // Created by Monika on 15.08.2023.
 //
 
-#ifndef SRENGINE_LOGICALMACHINE_H
-#define SRENGINE_LOGICALMACHINE_H
+#ifndef SR_ENGINE_LOGICALMACHINE_H
+#define SR_ENGINE_LOGICALMACHINE_H
 
 #include <Utils/Common/NonCopyable.h>
 #include <Utils/Common/Singleton.h>
@@ -93,4 +93,4 @@ namespace SR_SRLM_NS {
     }
 }
 
-#endif //SRENGINE_LOGICALMACHINE_H
+#endif //SR_ENGINE_LOGICALMACHINE_H

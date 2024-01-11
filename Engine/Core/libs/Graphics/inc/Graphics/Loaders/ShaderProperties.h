@@ -2,8 +2,8 @@
 // Created by Monika on 07.08.2022.
 //
 
-#ifndef SRENGINE_SHADERPROPERTIES_H
-#define SRENGINE_SHADERPROPERTIES_H
+#ifndef SR_ENGINE_SHADERPROPERTIES_H
+#define SR_ENGINE_SHADERPROPERTIES_H
 
 #include <Utils/Common/StringUtils.h>
 #include <Utils/Common/Hashes.h>
@@ -253,4 +253,4 @@ template<> struct SR_UTILS_NS::SRHash<SR_GRAPH_NS::ShaderProperties> {
     }
 };
 
-#endif //SRENGINE_SHADERPROPERTIES_H
+#endif //SR_ENGINE_SHADERPROPERTIES_H

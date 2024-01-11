@@ -2,8 +2,8 @@
 // Created by Monika on 10.02.2022.
 //
 
-#ifndef SRENGINE_SAFEGATEARRAY_H
-#define SRENGINE_SAFEGATEARRAY_H
+#ifndef SR_ENGINE_SAFEGATEARRAY_H
+#define SR_ENGINE_SAFEGATEARRAY_H
 
 #include <Utils/Debug.h>
 
@@ -82,4 +82,4 @@ namespace SR_HTYPES_NS {
     };
 }
 
-#endif //SRENGINE_SAFEGATEARRAY_H
+#endif //SR_ENGINE_SAFEGATEARRAY_H

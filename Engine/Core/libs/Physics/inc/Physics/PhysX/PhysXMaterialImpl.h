@@ -2,8 +2,8 @@
 // Created by innerviewer on 3/4/2023.
 //
 
-#ifndef SRENGINE_PHYSXMATERIALIMPL_H
-#define SRENGINE_PHYSXMATERIALIMPL_H
+#ifndef SR_ENGINE_PHYSXMATERIALIMPL_H
+#define SR_ENGINE_PHYSXMATERIALIMPL_H
 
 #include <Physics/PhysicsMaterialImpl.h>
 
@@ -40,4 +40,4 @@ namespace SR_PTYPES_NS {
     };
 }
 
-#endif //SRENGINE_PHYSXMATERIALIMPL_H
+#endif //SR_ENGINE_PHYSXMATERIALIMPL_H

@@ -2,8 +2,8 @@
 // Created by Monika on 13.03.2023.
 //
 
-#ifndef SRENGINE_MULTITHREADPTR_H
-#define SRENGINE_MULTITHREADPTR_H
+#ifndef SR_ENGINE_MULTITHREADPTR_H
+#define SR_ENGINE_MULTITHREADPTR_H
 
 #include <Utils/Debug.h>
 
@@ -193,4 +193,4 @@ namespace SR_HTYPES_NS {
     }
 }
 
-#endif //SRENGINE_MULTITHREADPTR_H
+#endif //SR_ENGINE_MULTITHREADPTR_H

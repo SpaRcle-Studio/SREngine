@@ -2,8 +2,8 @@
 // Created by Monika on 21.01.2023.
 //
 
-#ifndef SRENGINE_IFRAMEBUFFERPASS_H
-#define SRENGINE_IFRAMEBUFFERPASS_H
+#ifndef SR_ENGINE_IFRAMEBUFFERPASS_H
+#define SR_ENGINE_IFRAMEBUFFERPASS_H
 
 #include <Utils/Xml.h>
 #include <Graphics/Pipeline/TextureHelper.h>
@@ -58,4 +58,4 @@ namespace SR_GRAPH_NS {
     };
 }
 
-#endif //SRENGINE_IFRAMEBUFFERPASS_H
+#endif //SR_ENGINE_IFRAMEBUFFERPASS_H

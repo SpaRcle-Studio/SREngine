@@ -2,8 +2,8 @@
 // Created by Monika on 09.07.2022.
 //
 
-#ifndef SRENGINE_OPENALTOOLS_H
-#define SRENGINE_OPENALTOOLS_H
+#ifndef SR_ENGINE_OPENALTOOLS_H
+#define SR_ENGINE_OPENALTOOLS_H
 
 #include <Utils/macros.h>
 
@@ -178,4 +178,4 @@ namespace SR_AUDIO_NS {
 #define SR_ALC_CALL(function, device, ...) SR_AUDIO_NS::alcCallImpl(__FILE__, __LINE__, function, device, __VA_ARGS__)
 #define SR_AL_CALL(function, ...) SR_AUDIO_NS::alCallImpl(__FILE__, __LINE__, function, __VA_ARGS__)
 
-#endif //SRENGINE_OPENALTOOLS_H
+#endif //SR_ENGINE_OPENALTOOLS_H

@@ -2,8 +2,8 @@
 // Created by Monika on 22.07.2022.
 //
 
-#ifndef SRENGINE_FRAMEBUFFERPASS_H
-#define SRENGINE_FRAMEBUFFERPASS_H
+#ifndef SR_ENGINE_FRAMEBUFFERPASS_H
+#define SR_ENGINE_FRAMEBUFFERPASS_H
 
 #include <Graphics/Pass/GroupPass.h>
 #include <Graphics/Pass/IFramebufferPass.h>
@@ -31,4 +31,4 @@ namespace SR_GRAPH_NS {
     };
 }
 
-#endif //SRENGINE_FRAMEBUFFERPASS_H
+#endif //SR_ENGINE_FRAMEBUFFERPASS_H

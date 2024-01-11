@@ -2,8 +2,8 @@
 // Created by Monika on 24.05.2022.
 //
 
-#ifndef SRENGINE_EVOBEHAVIOUR_H
-#define SRENGINE_EVOBEHAVIOUR_H
+#ifndef SR_ENGINE_EVOBEHAVIOUR_H
+#define SR_ENGINE_EVOBEHAVIOUR_H
 
 #include <Scripting/Base/Behaviour.h>
 #include <Scripting/ScriptHolder.h>
@@ -107,4 +107,4 @@ namespace SR_SCRIPTING_NS {
     };
 }
 
-#endif //SRENGINE_EVOBEHAVIOUR_H
+#endif //SR_ENGINE_EVOBEHAVIOUR_H

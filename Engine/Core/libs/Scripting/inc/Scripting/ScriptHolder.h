@@ -2,8 +2,8 @@
 // Created by Monika on 04.03.2023.
 //
 
-#ifndef SRENGINE_SCRIPTHOLDER_H
-#define SRENGINE_SCRIPTHOLDER_H
+#ifndef SR_ENGINE_SCRIPTHOLDER_H
+#define SR_ENGINE_SCRIPTHOLDER_H
 
 #include <Utils/Types/SafePointer.h>
 #include <Utils/Common/NonCopyable.h>
@@ -38,4 +38,4 @@ namespace SR_SCRIPTING_NS {
     };
 }
 
-#endif //SRENGINE_SCRIPTHOLDER_H
+#endif //SR_ENGINE_SCRIPTHOLDER_H

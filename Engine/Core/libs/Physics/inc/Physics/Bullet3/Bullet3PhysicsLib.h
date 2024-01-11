@@ -2,8 +2,8 @@
 // Created by Monika on 22.11.2022.
 //
 
-#ifndef SRENGINE_BULLET3PHYSICSLIB_H
-#define SRENGINE_BULLET3PHYSICSLIB_H
+#ifndef SR_ENGINE_BULLET3PHYSICSLIB_H
+#define SR_ENGINE_BULLET3PHYSICSLIB_H
 
 #include <Physics/PhysicsLib.h>
 
@@ -23,4 +23,4 @@ namespace SR_PHYSICS_UTILS_NS {
     }
 }
 
-#endif //SRENGINE_BULLET3PHYSICSLIB_H
+#endif //SR_ENGINE_BULLET3PHYSICSLIB_H

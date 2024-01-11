@@ -2,8 +2,8 @@
 // Created by Monika on 10.01.2022.
 //
 
-#ifndef SRENGINE_FEATURES_H
-#define SRENGINE_FEATURES_H
+#ifndef SR_ENGINE_FEATURES_H
+#define SR_ENGINE_FEATURES_H
 
 #include <Utils/Common/Singleton.h>
 #include <Utils/FileSystem/Path.h>
@@ -50,4 +50,4 @@ namespace SR_UTILS_NS {
     };
 }
 
-#endif //SRENGINE_FEATURES_H
+#endif //SR_ENGINE_FEATURES_H

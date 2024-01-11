@@ -2,8 +2,8 @@
 // Created by Monika on 13.12.2020.
 //
 
-#ifndef SRENGINE_ILIGHTCOMPONENT_H
-#define SRENGINE_ILIGHTCOMPONENT_H
+#ifndef SR_ENGINE_ILIGHTCOMPONENT_H
+#define SR_ENGINE_ILIGHTCOMPONENT_H
 
 #include <Graphics/Types/IRenderComponent.h>
 #include <Utils/Common/Enumerations.h>
@@ -36,4 +36,4 @@ namespace SR_GRAPH_NS {
     };
 }
 
-#endif //SRENGINE_ILIGHTCOMPONENT_H
+#endif //SR_ENGINE_ILIGHTCOMPONENT_H

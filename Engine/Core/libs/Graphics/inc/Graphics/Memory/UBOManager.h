@@ -2,8 +2,8 @@
 // Created by Monika on 10.06.2022.
 //
 
-#ifndef SRENGINE_UBOMANAGER_H
-#define SRENGINE_UBOMANAGER_H
+#ifndef SR_ENGINE_UBOMANAGER_H
+#define SR_ENGINE_UBOMANAGER_H
 
 #include <Utils/Common/Singleton.h>
 #include <Utils/Types/Map.h>
@@ -114,4 +114,4 @@ namespace SR_GRAPH_NS::Memory {
     };
 }
 
-#endif //SRENGINE_UBOMANAGER_H
+#endif //SR_ENGINE_UBOMANAGER_H

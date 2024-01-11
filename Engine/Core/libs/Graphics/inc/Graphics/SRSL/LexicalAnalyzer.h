@@ -2,8 +2,8 @@
 // Created by Monika on 22.01.2023.
 //
 
-#ifndef SRENGINE_SRSL_LEXICAL_ANALYZER_H
-#define SRENGINE_SRSL_LEXICAL_ANALYZER_H
+#ifndef SR_ENGINE_SRSL_LEXICAL_ANALYZER_H
+#define SR_ENGINE_SRSL_LEXICAL_ANALYZER_H
 
 #include <Graphics/SRSL/MathExpression.h>
 
@@ -49,4 +49,4 @@ namespace SR_SRSL_NS {
     };
 }
 
-#endif //SRENGINE_SRSL_LEXICAL_ANALYZER_H
+#endif //SR_ENGINE_SRSL_LEXICAL_ANALYZER_H

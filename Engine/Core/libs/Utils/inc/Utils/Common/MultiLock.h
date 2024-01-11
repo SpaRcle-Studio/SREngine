@@ -2,8 +2,8 @@
 // Created by Monika on 13.03.2023.
 //
 
-#ifndef SRENGINE_MULTILOCK_H
-#define SRENGINE_MULTILOCK_H
+#ifndef SR_ENGINE_MULTILOCK_H
+#define SR_ENGINE_MULTILOCK_H
 
 #include <Utils/Types/SafePointer.h>
 #include <Utils/Types/MultiThreadPtr.h>
@@ -14,4 +14,4 @@ namespace SR_UTILS_NS {
     };
 }
 
-#endif //SRENGINE_MULTILOCK_H
+#endif //SR_ENGINE_MULTILOCK_H

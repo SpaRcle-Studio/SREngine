@@ -2,8 +2,8 @@
 // Created by Danilka000novishok on 08.08.2023.
 //
 
-#ifndef SRENGINE_AUDIOSOURCE_H
-#define SRENGINE_AUDIOSOURCE_H
+#ifndef SR_ENGINE_AUDIOSOURCE_H
+#define SR_ENGINE_AUDIOSOURCE_H
 
 #include <Utils/ECS/Component.h>
 #include <Utils/FileSystem/Path.h>
@@ -51,4 +51,4 @@ namespace SR_AUDIO_NS
     };
 }
 
-#endif //SRENGINE_AUDIOSOURCE_H
+#endif //SR_ENGINE_AUDIOSOURCE_H

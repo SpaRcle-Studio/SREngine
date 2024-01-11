@@ -2,8 +2,8 @@
 // Created by Monika on 27.11.2022.
 //
 
-#ifndef SRENGINE_BOX2DLIBRARYIMPL_H
-#define SRENGINE_BOX2DLIBRARYIMPL_H
+#ifndef SR_ENGINE_BOX2DLIBRARYIMPL_H
+#define SR_ENGINE_BOX2DLIBRARYIMPL_H
 
 #include <Physics/LibraryImpl.h>
 
@@ -29,4 +29,4 @@ namespace SR_PHYSICS_NS {
     };
 }
 
-#endif //SRENGINE_BOX2DLIBRARYIMPL_H
+#endif //SR_ENGINE_BOX2DLIBRARYIMPL_H

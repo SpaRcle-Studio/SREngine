@@ -2,8 +2,8 @@
 // Created by Monika on 03.08.2022.
 //
 
-#ifndef SRENGINE_SAFEVARIABLE_H
-#define SRENGINE_SAFEVARIABLE_H
+#ifndef SR_ENGINE_SAFEVARIABLE_H
+#define SR_ENGINE_SAFEVARIABLE_H
 
 #include <Utils/Types/Function.h>
 
@@ -166,4 +166,4 @@ namespace SR_HTYPES_NS {
     }
 }
 
-#endif //SRENGINE_SAFEVARIABLE_H
+#endif //SR_ENGINE_SAFEVARIABLE_H

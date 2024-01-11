@@ -2,8 +2,8 @@
 // Created by Monika on 07.04.2022.
 //
 
-#ifndef SRENGINE_STDINCLUDE_H
-#define SRENGINE_STDINCLUDE_H
+#ifndef SR_ENGINE_STDINCLUDE_H
+#define SR_ENGINE_STDINCLUDE_H
 
 #include <Utils/macros.h>
 
@@ -143,4 +143,4 @@ namespace SR_UTILS_NS {
     }
 #endif
 
-#endif //SRENGINE_STDINCLUDE_H
+#endif //SR_ENGINE_STDINCLUDE_H

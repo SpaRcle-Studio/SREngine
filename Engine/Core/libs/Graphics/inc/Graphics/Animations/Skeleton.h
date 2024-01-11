@@ -2,8 +2,8 @@
 // Created by Igor on 08/12/2022.
 //
 
-#ifndef SRENGINE_SKELETON_H
-#define SRENGINE_SKELETON_H
+#ifndef SR_ENGINE_SKELETON_H
+#define SR_ENGINE_SKELETON_H
 
 #include <Graphics/Animations/Bone.h>
 
@@ -77,4 +77,4 @@ namespace SR_ANIMATIONS_NS {
     };
 }
 
-#endif //SRENGINE_SKELETON_H
+#endif //SR_ENGINE_SKELETON_H

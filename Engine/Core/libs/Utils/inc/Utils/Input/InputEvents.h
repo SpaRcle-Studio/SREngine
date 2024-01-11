@@ -2,8 +2,8 @@
 // Created by Monika on 17.02.2022.
 //
 
-#ifndef SRENGINE_INPUTEVENTS_H
-#define SRENGINE_INPUTEVENTS_H
+#ifndef SR_ENGINE_INPUTEVENTS_H
+#define SR_ENGINE_INPUTEVENTS_H
 
 #include <Utils/Input/KeyCodes.h>
 #include <Utils/Math/Vector2.h>
@@ -93,4 +93,4 @@ namespace SR_UTILS_NS {
     };*/
 }
 
-#endif //SRENGINE_INPUTEVENTS_H
+#endif //SR_ENGINE_INPUTEVENTS_H

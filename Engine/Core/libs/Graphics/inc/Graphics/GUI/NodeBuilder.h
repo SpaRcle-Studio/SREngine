@@ -2,8 +2,8 @@
 // Created by Monika on 14.01.2023.
 //
 
-#ifndef SRENGINE_NODEBUILDER_H
-#define SRENGINE_NODEBUILDER_H
+#ifndef SR_ENGINE_NODEBUILDER_H
+#define SR_ENGINE_NODEBUILDER_H
 
 #include <Graphics/GUI/ImNodeEditorUtils.h>
 
@@ -70,4 +70,4 @@ namespace SR_GRAPH_NS::GUI {
 
 }
 
-#endif //SRENGINE_NODEBUILDER_H
+#endif //SR_ENGINE_NODEBUILDER_H

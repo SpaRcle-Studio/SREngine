@@ -2,8 +2,8 @@
 // Created by Monika on 23.10.2022.
 //
 
-#ifndef SRENGINE_CONVERT_H
-#define SRENGINE_CONVERT_H
+#ifndef SR_ENGINE_CONVERT_H
+#define SR_ENGINE_CONVERT_H
 
 #include <Utils/Locale/Icu.h>
 
@@ -33,4 +33,4 @@ namespace SR_UTILS_NS::Locale {
     }
 }
 
-#endif //SRENGINE_CONVERT_H
+#endif //SR_ENGINE_CONVERT_H

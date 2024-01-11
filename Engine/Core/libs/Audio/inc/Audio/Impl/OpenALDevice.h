@@ -2,8 +2,8 @@
 // Created by Monika on 08.07.2022.
 //
 
-#ifndef SRENGINE_OPENALDEVICE_H
-#define SRENGINE_OPENALDEVICE_H
+#ifndef SR_ENGINE_OPENALDEVICE_H
+#define SR_ENGINE_OPENALDEVICE_H
 
 #include <Audio/SoundDevice.h>
 
@@ -26,4 +26,4 @@ namespace SR_AUDIO_NS {
     };
 }
 
-#endif //SRENGINE_OPENALDEVICE_H
+#endif //SR_ENGINE_OPENALDEVICE_H

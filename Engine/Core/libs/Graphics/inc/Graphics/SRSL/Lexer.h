@@ -2,8 +2,8 @@
 // Created by Monika on 22.01.2023.
 //
 
-#ifndef SRENGINE_SRSL_LEXER_H
-#define SRENGINE_SRSL_LEXER_H
+#ifndef SR_ENGINE_SRSL_LEXER_H
+#define SR_ENGINE_SRSL_LEXER_H
 
 #include <Graphics/SRSL/LexerUtils.h>
 
@@ -42,4 +42,4 @@ namespace SR_SRSL_NS {
     };
 }
 
-#endif //SRENGINE_SRSL_LEXER_H
+#endif //SR_ENGINE_SRSL_LEXER_H

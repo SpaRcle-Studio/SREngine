@@ -2,8 +2,8 @@
 // Created by Monika on 08.05.2023.
 //
 
-#ifndef SRENGINE_ANIMATIONSTATE_H
-#define SRENGINE_ANIMATIONSTATE_H
+#ifndef SR_ENGINE_ANIMATIONSTATE_H
+#define SR_ENGINE_ANIMATIONSTATE_H
 
 #include <Graphics/Animations/AnimationStateTransition.h>
 
@@ -116,4 +116,4 @@ namespace SR_ANIMATIONS_NS {
     };
 }
 
-#endif //SRENGINE_ANIMATIONSTATE_H
+#endif //SR_ENGINE_ANIMATIONSTATE_H

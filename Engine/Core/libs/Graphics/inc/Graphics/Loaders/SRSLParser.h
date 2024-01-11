@@ -2,8 +2,8 @@
 // Created by Monika on 12.04.2022.
 //
 
-#ifndef SRENGINE_SRSLPARSER_H
-#define SRENGINE_SRSLPARSER_H
+#ifndef SR_ENGINE_SRSLPARSER_H
+#define SR_ENGINE_SRSLPARSER_H
 
 #include <Utils/Common/Singleton.h>
 
@@ -44,4 +44,4 @@ namespace SR_GRAPH_NS::SRSL {
     std::string GenerateFunctions(const SRSLFunctions& functions, const std::string& callFrom);
 }
 
-#endif //SRENGINE_SRSLPARSER_H
+#endif //SR_ENGINE_SRSLPARSER_H

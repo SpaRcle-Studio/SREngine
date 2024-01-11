@@ -2,8 +2,8 @@
 // Created by innerviewer on 5/6/2023.
 //
 
-#ifndef SRENGINE_WHEELINTERNALDATA_H
-#define SRENGINE_WHEELINTERNALDATA_H
+#ifndef SR_ENGINE_WHEELINTERNALDATA_H
+#define SR_ENGINE_WHEELINTERNALDATA_H
 
 #include <Utils/Common/Enumerations.h>
 
@@ -33,4 +33,4 @@ namespace SR_PTYPES_NS {
     };
 }
 
-#endif //SRENGINE_WHEELINTERNALDATA_H
+#endif //SR_ENGINE_WHEELINTERNALDATA_H

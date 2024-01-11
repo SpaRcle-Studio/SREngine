@@ -2,8 +2,8 @@
 // Created by Monika on 04.02.2023.
 //
 
-#ifndef SRENGINE_SRSL_SHADERTYPE_H
-#define SRENGINE_SRSL_SHADERTYPE_H
+#ifndef SR_ENGINE_SRSL_SHADERTYPE_H
+#define SR_ENGINE_SRSL_SHADERTYPE_H
 
 #include <Graphics/Loaders/ShaderProperties.h>
 
@@ -218,4 +218,4 @@ namespace SR_SRSL_NS {
     }
 }
 
-#endif //SRENGINE_SRSL_SHADERTYPE_H
+#endif //SR_ENGINE_SRSL_SHADERTYPE_H

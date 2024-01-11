@@ -2,8 +2,8 @@
 // Created by Monika on 20.09.2022.
 //
 
-#ifndef SRENGINE_DEBUGRENDERER_H
-#define SRENGINE_DEBUGRENDERER_H
+#ifndef SR_ENGINE_DEBUGRENDERER_H
+#define SR_ENGINE_DEBUGRENDERER_H
 
 #include <Utils/Common/NonCopyable.h>
 
@@ -57,4 +57,4 @@ namespace SR_GRAPH_NS {
     };
 }
 
-#endif //SRENGINE_DEBUGRENDERER_H
+#endif //SR_ENGINE_DEBUGRENDERER_H

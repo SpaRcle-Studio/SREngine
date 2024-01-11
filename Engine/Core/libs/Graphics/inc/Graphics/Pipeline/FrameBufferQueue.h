@@ -2,8 +2,8 @@
 // Created by Monika on 20.07.2023.
 //
 
-#ifndef SRENGINE_FRAMEBUFFERQUEUE_H
-#define SRENGINE_FRAMEBUFFERQUEUE_H
+#ifndef SR_ENGINE_FRAMEBUFFERQUEUE_H
+#define SR_ENGINE_FRAMEBUFFERQUEUE_H
 
 #include <Utils/Debug.h>
 
@@ -33,4 +33,4 @@ namespace SR_GRAPH_NS {
     };
 }
 
-#endif //SRENGINE_FRAMEBUFFERQUEUE_H
+#endif //SR_ENGINE_FRAMEBUFFERQUEUE_H

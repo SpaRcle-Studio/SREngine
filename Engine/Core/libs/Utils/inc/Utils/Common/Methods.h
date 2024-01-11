@@ -2,8 +2,8 @@
 // Created by Monika on 07.03.2022.
 //
 
-#ifndef SRENGINE_METHODS_H
-#define SRENGINE_METHODS_H
+#ifndef SR_ENGINE_METHODS_H
+#define SR_ENGINE_METHODS_H
 
 #include <Utils/macros.h>
 
@@ -21,4 +21,4 @@ namespace SR_UTILS_NS {
     }
 }
 
-#endif //SRENGINE_METHODS_H
+#endif //SR_ENGINE_METHODS_H

@@ -2,8 +2,8 @@
 // Created by Monika on 14.02.2022.
 //
 
-#ifndef SRENGINE_ITEXTCOMPONENT_H
-#define SRENGINE_ITEXTCOMPONENT_H
+#ifndef SR_ENGINE_ITEXTCOMPONENT_H
+#define SR_ENGINE_ITEXTCOMPONENT_H
 
 #include <Graphics/Types/Vertices.h>
 #include <Graphics/Types/Mesh.h>
@@ -103,4 +103,4 @@ namespace SR_GTYPES_NS {
     };
 }
 
-#endif //SRENGINE_ITEXTCOMPONENT_H
+#endif //SR_ENGINE_ITEXTCOMPONENT_H

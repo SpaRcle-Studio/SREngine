@@ -2,8 +2,8 @@
 // Created by Monika on 25.11.2022.
 //
 
-#ifndef SRENGINE_PHYSXRIGIDBODY3D_H
-#define SRENGINE_PHYSXRIGIDBODY3D_H
+#ifndef SR_ENGINE_PHYSXRIGIDBODY3D_H
+#define SR_ENGINE_PHYSXRIGIDBODY3D_H
 
 #include <Physics/3D/Rigidbody3D.h>
 
@@ -47,4 +47,4 @@ namespace SR_PTYPES_NS {
     };
 }
 
-#endif //SRENGINE_PHYSXRIGIDBODY3D_H
+#endif //SR_ENGINE_PHYSXRIGIDBODY3D_H

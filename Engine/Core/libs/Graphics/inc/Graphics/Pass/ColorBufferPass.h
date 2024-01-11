@@ -2,8 +2,8 @@
 // Created by Monika on 10.10.2022.
 //
 
-#ifndef SRENGINE_COLORBUFFERPASS_H
-#define SRENGINE_COLORBUFFERPASS_H
+#ifndef SR_ENGINE_COLORBUFFERPASS_H
+#define SR_ENGINE_COLORBUFFERPASS_H
 
 #include <Graphics/Pass/ShaderOverridePass.h>
 #include <Graphics/Pass/IColorBufferPass.h>
@@ -29,4 +29,4 @@ namespace SR_GRAPH_NS {
     };
 }
 
-#endif //SRENGINE_COLORBUFFERPASS_H
+#endif //SR_ENGINE_COLORBUFFERPASS_H

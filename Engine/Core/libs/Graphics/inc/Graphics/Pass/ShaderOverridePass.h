@@ -2,8 +2,8 @@
 // Created by Monika on 21.01.2023.
 //
 
-#ifndef SRENGINE_SHADEROVERRIDEPASS_H
-#define SRENGINE_SHADEROVERRIDEPASS_H
+#ifndef SR_ENGINE_SHADEROVERRIDEPASS_H
+#define SR_ENGINE_SHADEROVERRIDEPASS_H
 
 #include <Graphics/Pass/IMesh3DClusterPass.h>
 #include <Graphics/Pass/IFramebufferPass.h>
@@ -48,4 +48,4 @@ namespace SR_GRAPH_NS {
     };
 }
 
-#endif //SRENGINE_SHADEROVERRIDEPASS_H
+#endif //SR_ENGINE_SHADEROVERRIDEPASS_H

@@ -2,8 +2,8 @@
 // Created by Monika on 28.01.2022.
 //
 
-#ifndef SRENGINE_SEMAPHORE_H
-#define SRENGINE_SEMAPHORE_H
+#ifndef SR_ENGINE_SEMAPHORE_H
+#define SR_ENGINE_SEMAPHORE_H
 
 #include <Utils/Debug.h>
 
@@ -29,4 +29,4 @@ namespace SR_HTYPES_NS {
     };
 }
 
-#endif //SRENGINE_SEMAPHORE_H
+#endif //SR_ENGINE_SEMAPHORE_H

@@ -2,8 +2,8 @@
 // Created by Monika on 05.04.2022.
 //
 
-#ifndef SRENGINE_PROCEDURALMESH_H
-#define SRENGINE_PROCEDURALMESH_H
+#ifndef SR_ENGINE_PROCEDURALMESH_H
+#define SR_ENGINE_PROCEDURALMESH_H
 
 #include <Graphics/Types/Geometry/MeshComponent.h>
 
@@ -45,4 +45,4 @@ namespace SR_GTYPES_NS {
     };
 }
 
-#endif //SRENGINE_PROCEDURALMESH_H
+#endif //SR_ENGINE_PROCEDURALMESH_H

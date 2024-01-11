@@ -2,8 +2,8 @@
 // Created by Monika on 17.02.2022.
 //
 
-#ifndef SRENGINE_KEYCODES_H
-#define SRENGINE_KEYCODES_H
+#ifndef SR_ENGINE_KEYCODES_H
+#define SR_ENGINE_KEYCODES_H
 
 #include <Utils/Debug.h>
 
@@ -172,4 +172,4 @@ namespace SR_UTILS_NS {
     };
 }
 
-#endif //SRENGINE_KEYCODES_H
+#endif //SR_ENGINE_KEYCODES_H

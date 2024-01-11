@@ -2,8 +2,8 @@
 // Created by Monika on 07.07.2022.
 //
 
-#ifndef SRENGINE_MP3DATAPROVIDER_H
-#define SRENGINE_MP3DATAPROVIDER_H
+#ifndef SR_ENGINE_MP3DATAPROVIDER_H
+#define SR_ENGINE_MP3DATAPROVIDER_H
 
 #include <Audio/Decoders/IWaveDataProvider.h>
 
@@ -42,4 +42,4 @@ namespace SR_AUDIO_NS {
     };
 }
 
-#endif //SRENGINE_MP3DATAPROVIDER_H
+#endif //SR_ENGINE_MP3DATAPROVIDER_H

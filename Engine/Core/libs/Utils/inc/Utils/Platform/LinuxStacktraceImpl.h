@@ -1,5 +1,5 @@
-#ifndef SRENGINE_LINUXSTACKTRACEIMPL_H
-#define SRENGINE_LINUXSTACKTRACEIMPL_H
+#ifndef SR_ENGINE_LINUXSTACKTRACEIMPL_H
+#define SR_ENGINE_LINUXSTACKTRACEIMPL_H
 
 #include <Utils/macros.h>
 
@@ -8,4 +8,4 @@ namespace SR_UTILS_NS {
     extern void StacktraceInitImpl();
 }
 
-#endif // SRENGINE_LINUXSTACKTRACEIMPL_H
+#endif // SR_ENGINE_LINUXSTACKTRACEIMPL_H

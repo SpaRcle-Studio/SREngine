@@ -2,8 +2,8 @@
 // Created by Monika on 08.01.2022.
 //
 
-#ifndef SRENGINE_ENGINECOMMANDS_H
-#define SRENGINE_ENGINECOMMANDS_H
+#ifndef SR_ENGINE_ENGINECOMMANDS_H
+#define SR_ENGINE_ENGINECOMMANDS_H
 
 #include <Utils/Types/SafePointer.h>
 #include <Utils/CommandManager/CmdManager.h>
@@ -201,4 +201,4 @@ namespace SR_CORE_NS::Commands {
     };
 }
 
-#endif //SRENGINE_ENGINECOMMANDS_H
+#endif //SR_ENGINE_ENGINECOMMANDS_H

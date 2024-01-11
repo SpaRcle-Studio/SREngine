@@ -2,8 +2,8 @@
 // Created by Monika on 18.01.2022.
 //
 
-#ifndef SRENGINE_PIN_H
-#define SRENGINE_PIN_H
+#ifndef SR_ENGINE_PIN_H
+#define SR_ENGINE_PIN_H
 
 #include <Utils/Common/Enumerations.h>
 #include <Utils/Math/Vector2.h>
@@ -85,4 +85,4 @@ namespace SR_GRAPH_NS::GUI {
     };
 }
 
-#endif //SRENGINE_PIN_H
+#endif //SR_ENGINE_PIN_H

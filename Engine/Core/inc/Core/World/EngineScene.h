@@ -2,8 +2,8 @@
 // Created by Monika on 25.12.2022.
 //
 
-#ifndef SRENGINE_ENGINESCENE_H
-#define SRENGINE_ENGINESCENE_H
+#ifndef SR_ENGINE_ENGINESCENE_H
+#define SR_ENGINE_ENGINESCENE_H
 
 #include <Utils/World/SceneUpdater.h>
 #include <Utils/World/Scene.h>
@@ -61,4 +61,4 @@ namespace SR_CORE_NS {
     };
 }
 
-#endif //SRENGINE_ENGINESCENE_H
+#endif //SR_ENGINE_ENGINESCENE_H

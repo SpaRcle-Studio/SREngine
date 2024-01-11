@@ -2,8 +2,8 @@
 // Created by Monika on 17.02.2022.
 //
 
-#ifndef SRENGINE_INPUTDISPATCHER_H
-#define SRENGINE_INPUTDISPATCHER_H
+#ifndef SR_ENGINE_INPUTDISPATCHER_H
+#define SR_ENGINE_INPUTDISPATCHER_H
 
 #include <Utils/Events/EventDispatcher.h>
 #include <Utils/Input/InputDevice.h>
@@ -29,4 +29,4 @@ namespace SR_UTILS_NS {
     };
 }
 
-#endif //SRENGINE_INPUTDISPATCHER_H
+#endif //SR_ENGINE_INPUTDISPATCHER_H

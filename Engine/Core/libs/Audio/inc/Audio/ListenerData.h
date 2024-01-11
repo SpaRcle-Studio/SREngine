@@ -2,8 +2,8 @@
 // Created by innerviewer on 10/17/2023.
 //
 
-#ifndef SRENGINE_LISTENERDATA_H
-#define SRENGINE_LISTENERDATA_H
+#ifndef SR_ENGINE_LISTENERDATA_H
+#define SR_ENGINE_LISTENERDATA_H
 
 namespace SR_AUDIO_NS {
     SR_ENUM_NS_CLASS_T(ListenerDistanceModel, uint8_t,
@@ -28,4 +28,4 @@ namespace SR_AUDIO_NS {
     };
 }
 
-#endif //SRENGINE_LISTENERDATA_H
+#endif //SR_ENGINE_LISTENERDATA_H

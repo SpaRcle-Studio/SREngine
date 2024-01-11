@@ -2,8 +2,8 @@
 // Created by Monika on 15.02.2023.
 //
 
-#ifndef SRENGINE_ASSIMPCACHE_H
-#define SRENGINE_ASSIMPCACHE_H
+#ifndef SR_ENGINE_ASSIMPCACHE_H
+#define SR_ENGINE_ASSIMPCACHE_H
 
 #include <Utils/Debug.h>
 #include <Utils/Types/Marshal.h>
@@ -158,4 +158,4 @@ namespace SR_UTILS_NS {
     };
 }
 
-#endif //SRENGINE_ASSIMPCACHE_H
+#endif //SR_ENGINE_ASSIMPCACHE_H

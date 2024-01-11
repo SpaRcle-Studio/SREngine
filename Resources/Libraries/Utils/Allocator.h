@@ -2,8 +2,8 @@
 // Created by Monika on 09.08.2022.
 //
 
-#ifndef SRENGINE_ALLOCATOR_H
-#define SRENGINE_ALLOCATOR_H
+#ifndef SR_ENGINE_ALLOCATOR_H
+#define SR_ENGINE_ALLOCATOR_H
 
 #include <Libraries/MemoryAllocator.h>
 
@@ -57,4 +57,4 @@ void operator delete[](void* ptr) {
     #define EVK_DEBUG
 #endif
 
-#endif //SRENGINE_ALLOCATOR_H
+#endif //SR_ENGINE_ALLOCATOR_H

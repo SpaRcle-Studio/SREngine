@@ -2,8 +2,8 @@
 // Created by Monika on 22.07.2022.
 //
 
-#ifndef SRENGINE_SAFEPTRLOCKGUARD_H
-#define SRENGINE_SAFEPTRLOCKGUARD_H
+#ifndef SR_ENGINE_SAFEPTRLOCKGUARD_H
+#define SR_ENGINE_SAFEPTRLOCKGUARD_H
 
 #include <Utils/Common/NonCopyable.h>
 
@@ -92,4 +92,4 @@ namespace SR_HTYPES_NS {
     };
 }
 
-#endif //SRENGINE_SAFEPTRLOCKGUARD_H
+#endif //SR_ENGINE_SAFEPTRLOCKGUARD_H

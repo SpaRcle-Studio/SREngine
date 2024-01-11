@@ -2,8 +2,8 @@
 // Created by Monika on 25.08.2023.
 //
 
-#ifndef SRENGINE_DATATYPE_H
-#define SRENGINE_DATATYPE_H
+#ifndef SR_ENGINE_DATATYPE_H
+#define SR_ENGINE_DATATYPE_H
 
 #include <Utils/SRLM/Utils.h>
 #include <Utils/Xml.h>
@@ -264,4 +264,4 @@ namespace SR_SRLM_NS {
     };
 }
 
-#endif //SRENGINE_DATATYPE_H
+#endif //SR_ENGINE_DATATYPE_H

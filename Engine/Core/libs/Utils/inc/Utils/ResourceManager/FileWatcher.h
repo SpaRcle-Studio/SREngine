@@ -2,8 +2,8 @@
 // Created by Monika on 05.08.2023.
 //
 
-#ifndef SRENGINE_FILEWATCHER_H
-#define SRENGINE_FILEWATCHER_H
+#ifndef SR_ENGINE_FILEWATCHER_H
+#define SR_ENGINE_FILEWATCHER_H
 
 #include <Utils/Debug.h>
 #include <Utils/FileSystem/Path.h>
@@ -60,4 +60,4 @@ namespace SR_UTILS_NS {
     };
 }
 
-#endif //SRENGINE_FILEWATCHER_H
+#endif //SR_ENGINE_FILEWATCHER_H

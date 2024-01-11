@@ -949,4 +949,4 @@ glm::vec2 Framework::Graphics::Window::GetGlobalWindowMousePos(Framework::Graphi
 }
  */
 
-#endif //SRENGINE_GUIUTILS_H
+#endif //SR_ENGINE_GUIUTILS_H

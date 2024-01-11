@@ -2,8 +2,8 @@
 // Created by Monika on 18.01.2023.
 //
 
-#ifndef SRENGINE_STREAM_H
-#define SRENGINE_STREAM_H
+#ifndef SR_ENGINE_STREAM_H
+#define SR_ENGINE_STREAM_H
 
 #include <Utils/stdInclude.h>
 
@@ -67,4 +67,4 @@ namespace SR_HTYPES_NS {
     };
 }
 
-#endif //SRENGINE_STREAM_H
+#endif //SR_ENGINE_STREAM_H

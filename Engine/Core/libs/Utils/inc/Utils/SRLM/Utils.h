@@ -2,8 +2,8 @@
 // Created by Monika on 25.08.2023.
 //
 
-#ifndef SRENGINE_SRLM_UTILS_H
-#define SRENGINE_SRLM_UTILS_H
+#ifndef SR_ENGINE_SRLM_UTILS_H
+#define SR_ENGINE_SRLM_UTILS_H
 
 #include <Utils/Common/HashManager.h>
 #include <Utils/Common/Singleton.h>
@@ -101,4 +101,4 @@ public:                                                                         
             }, std::vector<std::string> category                                                                        \
         );                                                                                                              \
 
-#endif //SRENGINE_SRLM_UTILS_H
+#endif //SR_ENGINE_SRLM_UTILS_H

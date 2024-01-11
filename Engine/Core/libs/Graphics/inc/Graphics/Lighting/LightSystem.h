@@ -2,8 +2,8 @@
 // Created by Monika on 22.05.2023.
 //
 
-#ifndef SRENGINE_LIGHTSYSTEM_H
-#define SRENGINE_LIGHTSYSTEM_H
+#ifndef SR_ENGINE_LIGHTSYSTEM_H
+#define SR_ENGINE_LIGHTSYSTEM_H
 
 #include <Graphics/Pipeline/Pipeline.h>
 
@@ -37,4 +37,4 @@ namespace SR_GRAPH_NS {
     };
 }
 
-#endif //SRENGINE_LIGHTSYSTEM_H
+#endif //SR_ENGINE_LIGHTSYSTEM_H

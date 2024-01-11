@@ -2,8 +2,8 @@
 // Created by Monika on 14.07.2022.
 //
 
-#ifndef SRENGINE_SKYBOXPASS_H
-#define SRENGINE_SKYBOXPASS_H
+#ifndef SR_ENGINE_SKYBOXPASS_H
+#define SR_ENGINE_SKYBOXPASS_H
 
 #include <Graphics/Pass/BasePass.h>
 
@@ -29,4 +29,4 @@ namespace SR_GRAPH_NS {
     };
 }
 
-#endif //SRENGINE_SKYBOXPASS_H
+#endif //SR_ENGINE_SKYBOXPASS_H

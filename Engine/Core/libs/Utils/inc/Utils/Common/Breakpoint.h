@@ -2,8 +2,8 @@
 // Created by Monika on 18.06.2022.
 //
 
-#ifndef SRENGINE_BREAKPOINT_H
-#define SRENGINE_BREAKPOINT_H
+#ifndef SR_ENGINE_BREAKPOINT_H
+#define SR_ENGINE_BREAKPOINT_H
 
 #include <Utils/macros.h>
 
@@ -20,4 +20,4 @@ namespace SR_UTILS_NS {
 
 #define SR_MAKE_BREAKPOINT SR_UTILS_NS::Breakpoint()
 
-#endif //SRENGINE_BREAKPOINT_H
+#endif //SR_ENGINE_BREAKPOINT_H
