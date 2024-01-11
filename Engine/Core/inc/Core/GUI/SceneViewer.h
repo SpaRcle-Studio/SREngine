@@ -2,8 +2,8 @@
 // Created by Monika on 11.02.2022.
 //
 
-#ifndef SRENGINE_SCENEVIEWER_H
-#define SRENGINE_SCENEVIEWER_H
+#ifndef SR_ENGINE_SCENEVIEWER_H
+#define SR_ENGINE_SCENEVIEWER_H
 
 #include <Utils/ECS/GameObject.h>
 #include <Utils/World/Scene.h>
@@ -82,4 +82,4 @@ namespace SR_CORE_GUI_NS {
     };
 }
 
-#endif //SRENGINE_SCENEVIEWER_H
+#endif //SR_ENGINE_SCENEVIEWER_H

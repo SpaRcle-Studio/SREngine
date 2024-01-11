@@ -2,8 +2,8 @@
 // Created by Monika on 20.03.2023.
 //
 
-#ifndef SRENGINE_MESHTYPES_H
-#define SRENGINE_MESHTYPES_H
+#ifndef SR_ENGINE_MESHTYPES_H
+#define SR_ENGINE_MESHTYPES_H
 
 #include <Utils/Common/Enumerations.h>
 
@@ -19,4 +19,4 @@ namespace SR_GRAPH_NS {
     )
 }
 
-#endif //SRENGINE_MESHTYPES_H
+#endif //SR_ENGINE_MESHTYPES_H

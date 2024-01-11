@@ -2,8 +2,8 @@
 // Created by Monika on 07.12.2022.
 //
 
-#ifndef SRENGINE_PIPELINESTATE_H
-#define SRENGINE_PIPELINESTATE_H
+#ifndef SR_ENGINE_PIPELINESTATE_H
+#define SR_ENGINE_PIPELINESTATE_H
 
 #include <Graphics/Pipeline/PipelineType.h>
 #include <Graphics/Pipeline/TextureHelper.h>
@@ -112,4 +112,4 @@ namespace SR_GRAPH_NS {
     };
 }
 
-#endif //SRENGINE_PIPELINESTATE_H
+#endif //SR_ENGINE_PIPELINESTATE_H

@@ -2,8 +2,8 @@
 // Created by Monika on 17.02.2022.
 //
 
-#ifndef SRENGINE_EVENT_H
-#define SRENGINE_EVENT_H
+#ifndef SR_ENGINE_EVENT_H
+#define SR_ENGINE_EVENT_H
 
 #include <Utils/Debug.h>
 
@@ -39,4 +39,4 @@ namespace SR_UTILS_NS {
     };
 }
 
-#endif //SRENGINE_EVENT_H
+#endif //SR_ENGINE_EVENT_H

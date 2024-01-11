@@ -2,8 +2,8 @@
 // Created by innerviewer on 06/11/23.
 //
 
-#ifndef SRENGINE_X11WINDOW_H
-#define SRENGINE_X11WINDOW_H
+#ifndef SR_ENGINE_X11WINDOW_H
+#define SR_ENGINE_X11WINDOW_H
 
 #include <Graphics/Window/BasicWindowImpl.h>
 
@@ -61,4 +61,4 @@ namespace SR_GRAPH_NS {
     };
 }
 
-#endif //SRENGINE_X11WINDOW_H
+#endif //SR_ENGINE_X11WINDOW_H

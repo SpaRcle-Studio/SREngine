@@ -2,8 +2,8 @@
 // Created by Monika on 21.10.2023.
 //
 
-#ifndef SRENGINE_TEXT3D_H
-#define SRENGINE_TEXT3D_H
+#ifndef SR_ENGINE_TEXT3D_H
+#define SR_ENGINE_TEXT3D_H
 
 #include <Graphics/Font/ITextComponent.h>
 
@@ -20,4 +20,4 @@ namespace SR_GTYPES_NS {
     };
 }
 
-#endif //SRENGINE_TEXT3D_H
+#endif //SR_ENGINE_TEXT3D_H

@@ -2,8 +2,8 @@
 // Created by Monika on 08.01.2023.
 //
 
-#ifndef SRENGINE_ANIMATIONCLIP_H
-#define SRENGINE_ANIMATIONCLIP_H
+#ifndef SR_ENGINE_ANIMATIONCLIP_H
+#define SR_ENGINE_ANIMATIONCLIP_H
 
 #include <Utils/ResourceManager/IResource.h>
 
@@ -45,4 +45,4 @@ namespace SR_ANIMATIONS_NS {
     };
 }
 
-#endif //SRENGINE_ANIMATIONCLIP_H
+#endif //SR_ENGINE_ANIMATIONCLIP_H

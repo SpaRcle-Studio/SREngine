@@ -2,8 +2,8 @@
 // Created by Monika on 30.08.2023.
 //
 
-#ifndef SRENGINE_LOGICALNODEMANAGER_H
-#define SRENGINE_LOGICALNODEMANAGER_H
+#ifndef SR_ENGINE_LOGICALNODEMANAGER_H
+#define SR_ENGINE_LOGICALNODEMANAGER_H
 
 #include <Utils/Common/NonCopyable.h>
 #include <Utils/Common/Singleton.h>
@@ -43,4 +43,4 @@ namespace SR_SRLM_NS {
     };
 }
 
-#endif //SRENGINE_LOGICALNODEMANAGER_H
+#endif //SR_ENGINE_LOGICALNODEMANAGER_H

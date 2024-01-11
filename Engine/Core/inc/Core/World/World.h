@@ -2,8 +2,8 @@
 // Created by Monika on 05.01.2022.
 //
 
-#ifndef SRENGINE_WORLD_H
-#define SRENGINE_WORLD_H
+#ifndef SR_ENGINE_WORLD_H
+#define SR_ENGINE_WORLD_H
 
 #include <Core/Engine.h>
 
@@ -38,4 +38,4 @@ namespace SR_CORE_NS {
     };
 }
 
-#endif //SRENGINE_WORLD_H
+#endif //SR_ENGINE_WORLD_H

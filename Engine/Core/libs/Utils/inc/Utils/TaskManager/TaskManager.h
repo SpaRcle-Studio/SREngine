@@ -2,8 +2,8 @@
 // Created by Monika on 19.03.2022.
 //
 
-#ifndef SRENGINE_TASKMANAGER_H
-#define SRENGINE_TASKMANAGER_H
+#ifndef SR_ENGINE_TASKMANAGER_H
+#define SR_ENGINE_TASKMANAGER_H
 
 #include <Utils/Common/Singleton.h>
 #include <Utils/Common/NonCopyable.h>
@@ -79,4 +79,4 @@ namespace SR_UTILS_NS {
     };
 }
 
-#endif // SRENGINE_TASKMANAGER_H
+#endif // SR_ENGINE_TASKMANAGER_H

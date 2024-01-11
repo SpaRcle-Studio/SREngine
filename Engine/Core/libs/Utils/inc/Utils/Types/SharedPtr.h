@@ -2,8 +2,8 @@
 // Created by Monika on 23.08.2022.
 //
 
-#ifndef SRENGINE_SHAREDPTR_H
-#define SRENGINE_SHAREDPTR_H
+#ifndef SR_ENGINE_SHAREDPTR_H
+#define SR_ENGINE_SHAREDPTR_H
 
 #include <Utils/Common/StringFormat.h>
 #include <Utils/Types/Function.h>
@@ -285,4 +285,4 @@ namespace std {
     };
 }
 
-#endif //SRENGINE_SHAREDPTR_H
+#endif //SR_ENGINE_SHAREDPTR_H

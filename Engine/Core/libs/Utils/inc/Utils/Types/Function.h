@@ -2,8 +2,8 @@
 // Created by Monika on 21.07.2022.
 //
 
-#ifndef SRENGINE_FUNCTION_H
-#define SRENGINE_FUNCTION_H
+#ifndef SR_ENGINE_FUNCTION_H
+#define SR_ENGINE_FUNCTION_H
 
 #include <Utils/stdInclude.h>
 
@@ -125,4 +125,4 @@ namespace SR_HTYPES_NS {
     };
 }
 
-#endif //SRENGINE_FUNCTION_H
+#endif //SR_ENGINE_FUNCTION_H

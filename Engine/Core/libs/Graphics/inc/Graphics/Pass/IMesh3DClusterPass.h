@@ -2,8 +2,8 @@
 // Created by Monika on 18.10.2023.
 //
 
-#ifndef SRENGINE_IMESH3DCLUSTERPASS_H
-#define SRENGINE_IMESH3DCLUSTERPASS_H
+#ifndef SR_ENGINE_IMESH3DCLUSTERPASS_H
+#define SR_ENGINE_IMESH3DCLUSTERPASS_H
 
 #include <Graphics/Pass/IMeshClusterPass.h>
 
@@ -30,4 +30,4 @@ namespace SR_GRAPH_NS {
     };
 }
 
-#endif //SRENGINE_IMESH3DCLUSTERPASS_H
+#endif //SR_ENGINE_IMESH3DCLUSTERPASS_H

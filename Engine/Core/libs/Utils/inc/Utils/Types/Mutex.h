@@ -2,8 +2,8 @@
 // Created by Monika on 22.05.2023.
 //
 
-#ifndef SRENGINE_MUTEX_H
-#define SRENGINE_MUTEX_H
+#ifndef SR_ENGINE_MUTEX_H
+#define SR_ENGINE_MUTEX_H
 
 #include <Utils/Common/NonCopyable.h>
 
@@ -133,4 +133,4 @@ namespace SR_HTYPES_NS {
     };
 }
 
-#endif //SRENGINE_MUTEX_H
+#endif //SR_ENGINE_MUTEX_H

@@ -2,8 +2,8 @@
 // Created by Monika on 19.05.2022.
 //
 
-#ifndef SRENGINE_SAFEQUEUE_H
-#define SRENGINE_SAFEQUEUE_H
+#ifndef SR_ENGINE_SAFEQUEUE_H
+#define SR_ENGINE_SAFEQUEUE_H
 
 #include <Utils/Debug.h>
 #include <Utils/Types/Mutex.h>
@@ -62,4 +62,4 @@ namespace SR_HTYPES_NS {
     }
 }
 
-#endif //SRENGINE_SAFEQUEUE_H
+#endif //SR_ENGINE_SAFEQUEUE_H

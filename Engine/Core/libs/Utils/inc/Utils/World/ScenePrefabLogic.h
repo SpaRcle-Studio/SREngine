@@ -2,8 +2,8 @@
 // Created by Monika on 24.12.2022.
 //
 
-#ifndef SRENGINE_SCENEPREFABLOGIC_H
-#define SRENGINE_SCENEPREFABLOGIC_H
+#ifndef SR_ENGINE_SCENEPREFABLOGIC_H
+#define SR_ENGINE_SCENEPREFABLOGIC_H
 
 #include <Utils/World/SceneLogic.h>
 
@@ -25,4 +25,4 @@ namespace SR_WORLD_NS {
     };
 }
 
-#endif //SRENGINE_SCENEPREFABLOGIC_H
+#endif //SR_ENGINE_SCENEPREFABLOGIC_H

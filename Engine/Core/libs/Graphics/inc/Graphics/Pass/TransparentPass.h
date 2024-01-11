@@ -2,8 +2,8 @@
 // Created by Monika on 14.07.2022.
 //
 
-#ifndef SRENGINE_TRANSPARENTPASS_H
-#define SRENGINE_TRANSPARENTPASS_H
+#ifndef SR_ENGINE_TRANSPARENTPASS_H
+#define SR_ENGINE_TRANSPARENTPASS_H
 
 #include <Graphics/Pass/IMesh3DClusterPass.h>
 
@@ -20,4 +20,4 @@ namespace SR_GRAPH_NS {
     };
 }
 
-#endif //SRENGINE_TRANSPARENTPASS_H
+#endif //SR_ENGINE_TRANSPARENTPASS_H

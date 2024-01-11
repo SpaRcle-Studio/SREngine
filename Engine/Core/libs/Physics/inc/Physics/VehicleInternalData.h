@@ -2,8 +2,8 @@
 // Created by innerviewer on 5/6/2023.
 //
 
-#ifndef SRENGINE_VEHICLEINTERNALDATA_H
-#define SRENGINE_VEHICLEINTERNALDATA_H
+#ifndef SR_ENGINE_VEHICLEINTERNALDATA_H
+#define SR_ENGINE_VEHICLEINTERNALDATA_H
 
 namespace SR_PTYPES_NS {
     struct VehicleInternalData {
@@ -18,4 +18,4 @@ namespace SR_PTYPES_NS {
     };
 }
 
-#endif //SRENGINE_VEHICLEINTERNALDATA_H
+#endif //SR_ENGINE_VEHICLEINTERNALDATA_H

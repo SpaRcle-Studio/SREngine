@@ -2,8 +2,8 @@
 // Created by Monika on 14.07.2022.
 //
 
-#ifndef SRENGINE_BASEPASS_H
-#define SRENGINE_BASEPASS_H
+#ifndef SR_ENGINE_BASEPASS_H
+#define SR_ENGINE_BASEPASS_H
 
 #include <Utils/Common/NonCopyable.h>
 #include <Utils/Math/Vector2.h>
@@ -129,4 +129,4 @@ namespace SR_GRAPH_NS {
         SR_GRAPH_NS::GetRenderPassMap().at(passNode.Name())(passNode))                                                  \
 
 
-#endif //SRENGINE_BASEPASS_H
+#endif //SR_ENGINE_BASEPASS_H

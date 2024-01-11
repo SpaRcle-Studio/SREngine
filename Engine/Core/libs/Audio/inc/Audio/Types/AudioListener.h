@@ -2,8 +2,8 @@
 // Created by Capitan_Slider on 16.09.2023.
 //
 
-#ifndef SRENGINE_AUDIOLSTENER_H
-#define SRENGINE_AUDIOLSTENER_H
+#ifndef SR_ENGINE_AUDIOLSTENER_H
+#define SR_ENGINE_AUDIOLSTENER_H
 
 #include <Utils/ECS/Component.h>
 
@@ -34,4 +34,4 @@ namespace SR_AUDIO_NS
     };
 }
 
-#endif //SRENGINE_AUDIOLSTENER_H
+#endif //SR_ENGINE_AUDIOLSTENER_H

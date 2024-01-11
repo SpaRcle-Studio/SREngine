@@ -2,8 +2,8 @@
 // Created by Monika on 30.01.2023.
 //
 
-#ifndef SRENGINE_GLSLCODEGENERATOR_H
-#define SRENGINE_GLSLCODEGENERATOR_H
+#ifndef SR_ENGINE_GLSLCODEGENERATOR_H
+#define SR_ENGINE_GLSLCODEGENERATOR_H
 
 #include <Graphics/SRSL/ICodeGenerator.h>
 #include <Graphics/SRSL/ShaderType.h>
@@ -60,4 +60,4 @@ namespace SR_SRSL_NS {
     };
 }
 
-#endif //SRENGINE_GLSLCODEGENERATOR_H
+#endif //SR_ENGINE_GLSLCODEGENERATOR_H

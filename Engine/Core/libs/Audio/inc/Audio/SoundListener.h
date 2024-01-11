@@ -2,8 +2,8 @@
 // Created by Capitan_Slider on 30.09.2023.
 //
 
-#ifndef SRENGINE_SOUNDLISTENER_H
-#define SRENGINE_SOUNDLISTENER_H
+#ifndef SR_ENGINE_SOUNDLISTENER_H
+#define SR_ENGINE_SOUNDLISTENER_H
 
 #include <Utils/Common/NonCopyable.h>
 #include <Utils/Common/Enumerations.h>
@@ -50,4 +50,4 @@ namespace SR_AUDIO_NS{
     };
 }
 
-#endif //SRENGINE_SOUNDLISTENER_H
+#endif //SR_ENGINE_SOUNDLISTENER_H

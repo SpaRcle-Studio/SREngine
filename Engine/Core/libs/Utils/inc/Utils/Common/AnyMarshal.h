@@ -2,8 +2,8 @@
 // Created by Monika on 09.08.2022.
 //
 
-#ifndef SRENGINE_ANYMARSHAL_H
-#define SRENGINE_ANYMARSHAL_H
+#ifndef SR_ENGINE_ANYMARSHAL_H
+#define SR_ENGINE_ANYMARSHAL_H
 
 #include <Utils/Common/BaseMarshal.h>
 #include <Utils/Types/Stream.h>
@@ -61,4 +61,4 @@ namespace SR_UTILS_NS::MarshalUtils {
     }
 }
 
-#endif //SRENGINE_ANYMARSHAL_H
+#endif //SR_ENGINE_ANYMARSHAL_H

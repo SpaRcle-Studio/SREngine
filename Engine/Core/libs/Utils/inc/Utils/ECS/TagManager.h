@@ -2,8 +2,8 @@
 // Created by Monika on 01.01.2023.
 //
 
-#ifndef SRENGINE_TAGMANAGER_H
-#define SRENGINE_TAGMANAGER_H
+#ifndef SR_ENGINE_TAGMANAGER_H
+#define SR_ENGINE_TAGMANAGER_H
 
 #include <Utils/Settings.h>
 #include <Utils/Types/Map.h>
@@ -43,4 +43,4 @@ namespace SR_UTILS_NS {
     };
 }
 
-#endif //SRENGINE_TAGMANAGER_H
+#endif //SR_ENGINE_TAGMANAGER_H

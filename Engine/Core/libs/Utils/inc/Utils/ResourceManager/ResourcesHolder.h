@@ -2,8 +2,8 @@
 // Created by Monika on 18.03.2022.
 //
 
-#ifndef SRENGINE_RESOURCESHOLDER_H
-#define SRENGINE_RESOURCESHOLDER_H
+#ifndef SR_ENGINE_RESOURCESHOLDER_H
+#define SR_ENGINE_RESOURCESHOLDER_H
 
 #include <Utils/ResourceManager/IResource.h>
 
@@ -24,4 +24,4 @@ namespace SR_UTILS_NS {
     };
 }
 
-#endif //SRENGINE_RESOURCESHOLDER_H
+#endif //SR_ENGINE_RESOURCESHOLDER_H

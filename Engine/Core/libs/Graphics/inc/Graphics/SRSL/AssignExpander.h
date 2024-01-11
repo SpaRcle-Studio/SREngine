@@ -2,8 +2,8 @@
 // Created by Monika on 24.01.2023.
 //
 
-#ifndef SRENGINE_SRSL_ASSIGNEXPANDER_H
-#define SRENGINE_SRSL_ASSIGNEXPANDER_H
+#ifndef SR_ENGINE_SRSL_ASSIGNEXPANDER_H
+#define SR_ENGINE_SRSL_ASSIGNEXPANDER_H
 
 #include <Utils/Common/Singleton.h>
 #include <Graphics/SRSL/LexicalTree.h>
@@ -38,4 +38,4 @@ namespace SR_SRSL_NS {
     };
 }
 
-#endif //SRENGINE_SRSL_ASSIGNEXPANDER_H
+#endif //SR_ENGINE_SRSL_ASSIGNEXPANDER_H

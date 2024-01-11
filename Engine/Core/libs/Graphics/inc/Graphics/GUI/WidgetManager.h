@@ -2,8 +2,8 @@
 // Created by Monika on 10.02.2022.
 //
 
-#ifndef SRENGINE_WIDGETMANAGER_H
-#define SRENGINE_WIDGETMANAGER_H
+#ifndef SR_ENGINE_WIDGETMANAGER_H
+#define SR_ENGINE_WIDGETMANAGER_H
 
 #include <Utils/Types/Thread.h>
 #include <Utils/Types/SafePointer.h>
@@ -102,4 +102,4 @@ namespace SR_GRAPH_NS::GUI {
     };
 }
 
-#endif //SRENGINE_WIDGETMANAGER_H
+#endif //SR_ENGINE_WIDGETMANAGER_H

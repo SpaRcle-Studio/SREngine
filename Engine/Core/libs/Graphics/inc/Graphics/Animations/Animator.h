@@ -2,8 +2,8 @@
 // Created by Monika on 07.01.2023.
 //
 
-#ifndef SRENGINE_ANIMATOR_H
-#define SRENGINE_ANIMATOR_H
+#ifndef SR_ENGINE_ANIMATOR_H
+#define SR_ENGINE_ANIMATOR_H
 
 #include <Utils/ECS/Component.h>
 #include <Graphics/Animations/AnimationKey.h>
@@ -57,4 +57,4 @@ namespace SR_ANIMATIONS_NS {
     };
 }
 
-#endif //SRENGINE_ANIMATOR_H
+#endif //SR_ENGINE_ANIMATOR_H

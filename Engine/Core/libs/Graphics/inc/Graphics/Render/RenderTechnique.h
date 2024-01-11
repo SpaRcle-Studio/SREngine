@@ -2,8 +2,8 @@
 // Created by Monika on 17.07.2022.
 //
 
-#ifndef SRENGINE_RENDERTECHNIQUE_H
-#define SRENGINE_RENDERTECHNIQUE_H
+#ifndef SR_ENGINE_RENDERTECHNIQUE_H
+#define SR_ENGINE_RENDERTECHNIQUE_H
 
 #include <Graphics/Render/IRenderTechnique.h>
 
@@ -28,4 +28,4 @@ namespace SR_GRAPH_NS {
     };
 }
 
-#endif //SRENGINE_RENDERTECHNIQUE_H
+#endif //SR_ENGINE_RENDERTECHNIQUE_H

@@ -2,8 +2,8 @@
 // Created by Monika on 22.07.2022.
 //
 
-#ifndef SRENGINE_SWAPCHAINPASS_H
-#define SRENGINE_SWAPCHAINPASS_H
+#ifndef SR_ENGINE_SWAPCHAINPASS_H
+#define SR_ENGINE_SWAPCHAINPASS_H
 
 #include <Utils/Math/Vector3.h>
 #include <Graphics/Pass/GroupPass.h>
@@ -24,4 +24,4 @@ namespace SR_GRAPH_NS {
     };
 }
 
-#endif //SRENGINE_SWAPCHAINPASS_H
+#endif //SR_ENGINE_SWAPCHAINPASS_H

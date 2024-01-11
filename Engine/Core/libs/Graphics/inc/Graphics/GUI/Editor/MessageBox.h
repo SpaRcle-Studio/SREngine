@@ -2,8 +2,8 @@
 // Created by Monika on 10.02.2022.
 //
 
-#ifndef SRENGINE_MESSAGEBOX_H
-#define SRENGINE_MESSAGEBOX_H
+#ifndef SR_ENGINE_MESSAGEBOX_H
+#define SR_ENGINE_MESSAGEBOX_H
 
 #include <Utils/Common/Singleton.h>
 
@@ -45,4 +45,4 @@ namespace SR_GRAPH_NS::GUI {
     };
 }
 
-#endif //SRENGINE_MESSAGEBOX_H
+#endif //SR_ENGINE_MESSAGEBOX_H

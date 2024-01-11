@@ -2,8 +2,8 @@
 // Created by innerviewer on 2/28/2023.
 //
 
-#ifndef SRENGINE_VEHICLE_H
-#define SRENGINE_VEHICLE_H
+#ifndef SR_ENGINE_VEHICLE_H
+#define SR_ENGINE_VEHICLE_H
 
 #include <Physics/PhysicsLib.h>
 #include <Physics/VehicleInternalData.h>
@@ -40,4 +40,4 @@ namespace SR_PTYPES_NS {
     };
 }
 
-#endif //SRENGINE_VEHICLE_H
+#endif //SR_ENGINE_VEHICLE_H

@@ -2,8 +2,8 @@
 // Created by innerviewer on 1/6/2024.
 //
 
-#ifndef SRENGINE_LAYERMANAGER_H
-#define SRENGINE_LAYERMANAGER_H
+#ifndef SR_ENGINE_LAYERMANAGER_H
+#define SR_ENGINE_LAYERMANAGER_H
 
 #include <Utils/Settings.h>
 
@@ -35,4 +35,4 @@ namespace SR_UTILS_NS {
         std::vector<StringAtom> m_layers;
     };
 }
-#endif //SRENGINE_LAYERMANAGER_H
+#endif //SR_ENGINE_LAYERMANAGER_H

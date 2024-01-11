@@ -3,8 +3,8 @@
 // Created by Monika on 20.09.2022.
 //
 
-#ifndef SRENGINE_DEBUGDRAW_H
-#define SRENGINE_DEBUGDRAW_H
+#ifndef SR_ENGINE_DEBUGDRAW_H
+#define SR_ENGINE_DEBUGDRAW_H
 
 #include <Utils/Math/Vector3.h>
 #include <Utils/Math/Vector4.h>
@@ -174,4 +174,4 @@ namespace SR_UTILS_NS {
     };
 }
 
-#endif //SRENGINE_DEBUGDRAW_H
+#endif //SR_ENGINE_DEBUGDRAW_H

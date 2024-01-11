@@ -2,8 +2,8 @@
 // Created by Monika on 20.03.2023.
 //
 
-#ifndef SRENGINE_MESHUTILS_H
-#define SRENGINE_MESHUTILS_H
+#ifndef SR_ENGINE_MESHUTILS_H
+#define SR_ENGINE_MESHUTILS_H
 
 #include <Graphics/Utils/MeshTypes.h>
 
@@ -20,4 +20,4 @@ namespace SR_GRAPH_NS {
     uint16_t RoundBonesCount(uint16_t count);
 }
 
-#endif //SRENGINE_MESHUTILS_H
+#endif //SR_ENGINE_MESHUTILS_H

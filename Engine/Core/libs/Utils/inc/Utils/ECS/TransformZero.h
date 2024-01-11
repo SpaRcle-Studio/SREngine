@@ -2,8 +2,8 @@
 // Created by Monika on 23.08.2022.
 //
 
-#ifndef SRENGINE_TRANSFORMZERO_H
-#define SRENGINE_TRANSFORMZERO_H
+#ifndef SR_ENGINE_TRANSFORMZERO_H
+#define SR_ENGINE_TRANSFORMZERO_H
 
 #include <Utils/ECS/Transform.h>
 
@@ -36,4 +36,4 @@ namespace SR_UTILS_NS {
 }
 
 
-#endif //SRENGINE_TRANSFORMZERO_H
+#endif //SR_ENGINE_TRANSFORMZERO_H

@@ -2,8 +2,8 @@
 // Created by Monika on 02.03.2023.
 //
 
-#ifndef SRENGINE_EVOSCRIPTMANAGER_H
-#define SRENGINE_EVOSCRIPTMANAGER_H
+#ifndef SR_ENGINE_EVOSCRIPTMANAGER_H
+#define SR_ENGINE_EVOSCRIPTMANAGER_H
 
 #include <Utils/Types/Map.h>
 #include <Scripting/Impl/EvoCompiler.h>
@@ -36,4 +36,4 @@ namespace SR_SCRIPTING_NS {
     };
 }
 
-#endif //SRENGINE_EVOSCRIPTMANAGER_H
+#endif //SR_ENGINE_EVOSCRIPTMANAGER_H

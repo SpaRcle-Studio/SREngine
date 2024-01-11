@@ -2,8 +2,8 @@
 //// Created by Monika on 17.01.2022.
 ////
 //
-//#ifndef SRENGINE_BLUEPRINTPARSER_H
-//#define SRENGINE_BLUEPRINTPARSER_H
+//#ifndef SR_ENGINE_BLUEPRINTPARSER_H
+//#define SR_ENGINE_BLUEPRINTPARSER_H
 //
 //#include <Utils/Common/Singleton.h>
 //#include <Utils/Xml.h>
@@ -27,4 +27,4 @@
 //    };
 //}
 //
-//#endif //SRENGINE_BLUEPRINTPARSER_H
+//#endif //SR_ENGINE_BLUEPRINTPARSER_H

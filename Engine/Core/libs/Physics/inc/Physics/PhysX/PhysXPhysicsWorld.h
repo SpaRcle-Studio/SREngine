@@ -2,8 +2,8 @@
 // Created by Monika on 24.11.2022.
 //
 
-#ifndef SRENGINE_PHYSXPHYSICSWORLD_H
-#define SRENGINE_PHYSXPHYSICSWORLD_H
+#ifndef SR_ENGINE_PHYSXPHYSICSWORLD_H
+#define SR_ENGINE_PHYSXPHYSICSWORLD_H
 
 #include <Physics/PhysX/PhysXUtils.h>
 #include <Physics/PhysicsWorld.h>
@@ -50,4 +50,4 @@ namespace SR_PHYSICS_NS {
     };
 }
 
-#endif //SRENGINE_PHYSXPHYSICSWORLD_H
+#endif //SR_ENGINE_PHYSXPHYSICSWORLD_H

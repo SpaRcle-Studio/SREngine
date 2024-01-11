@@ -2,8 +2,8 @@
 // Created by Monika on 05.07.2022.
 //
 
-#ifndef SRENGINE_SCENERUNNER_H
-#define SRENGINE_SCENERUNNER_H
+#ifndef SR_ENGINE_SCENERUNNER_H
+#define SR_ENGINE_SCENERUNNER_H
 
 #include <Graphics/GUI/Widget.h>
 
@@ -39,4 +39,4 @@ namespace SR_CORE_GUI_NS {
     };
 }
 
-#endif //SRENGINE_SCENERUNNER_H
+#endif //SR_ENGINE_SCENERUNNER_H

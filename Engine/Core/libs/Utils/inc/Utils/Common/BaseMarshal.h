@@ -2,8 +2,8 @@
 // Created by Monika on 09.08.2022.
 //
 
-#ifndef SRENGINE_BASEMARSHAL_H
-#define SRENGINE_BASEMARSHAL_H
+#ifndef SR_ENGINE_BASEMARSHAL_H
+#define SR_ENGINE_BASEMARSHAL_H
 
 #include <Utils/Common/StringFormat.h>
 #include <Utils/Types/Stream.h>
@@ -248,4 +248,4 @@ namespace SR_UTILS_NS {
     }
 }
 
-#endif //SRENGINE_BASEMARSHAL_H
+#endif //SR_ENGINE_BASEMARSHAL_H

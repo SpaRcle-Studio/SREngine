@@ -2,8 +2,8 @@
 // Created by Monika on 27.08.2022.
 //
 
-#ifndef SRENGINE_NOISETABLE_H
-#define SRENGINE_NOISETABLE_H
+#ifndef SR_ENGINE_NOISETABLE_H
+#define SR_ENGINE_NOISETABLE_H
 
 #include <Utils/Math/Mathematics.h>
 
@@ -896,4 +896,4 @@ namespace SR_MATH_NS::NoiseTable {
             {0.36515378737282944,    -0.30789464747212397,   -0.79297090020807459,   0.37823372278062467}};
 }
 
-#endif //SRENGINE_NOISETABLE_H
+#endif //SR_ENGINE_NOISETABLE_H

@@ -2,8 +2,8 @@
 // Created by Monika on 20.11.2022.
 //
 
-#ifndef SRENGINE_UI_BUTTON_H
-#define SRENGINE_UI_BUTTON_H
+#ifndef SR_ENGINE_UI_BUTTON_H
+#define SR_ENGINE_UI_BUTTON_H
 
 #include <Utils/ECS/Component.h>
 
@@ -27,4 +27,4 @@ namespace SR_CORE_UI_NS {
     };
 }
 
-#endif //SRENGINE_UI_BUTTON_H
+#endif //SR_ENGINE_UI_BUTTON_H

@@ -2,8 +2,8 @@
 // Created by Monika on 26.11.2022.
 //
 
-#ifndef SRENGINE_PREFAB_H
-#define SRENGINE_PREFAB_H
+#ifndef SR_ENGINE_PREFAB_H
+#define SR_ENGINE_PREFAB_H
 
 #include <Utils/ResourceManager/IResource.h>
 #include <Utils/Types/SharedPtr.h>
@@ -46,4 +46,4 @@ namespace SR_UTILS_NS {
     };
 }
 
-#endif //SRENGINE_PREFAB_H
+#endif //SR_ENGINE_PREFAB_H

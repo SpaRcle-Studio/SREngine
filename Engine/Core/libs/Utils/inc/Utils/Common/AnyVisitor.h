@@ -2,8 +2,8 @@
 // Created by Monika on 28.06.2022.
 //
 
-#ifndef SRENGINE_ANYVISITOR_H
-#define SRENGINE_ANYVISITOR_H
+#ifndef SR_ENGINE_ANYVISITOR_H
+#define SR_ENGINE_ANYVISITOR_H
 
 #include <Utils/stdInclude.h>
 
@@ -59,4 +59,4 @@ namespace SR_UTILS_NS {
     Overloaded(Fs&&...)->Overloaded<std::decay_t<Fs>...>;
 }
 
-#endif //SRENGINE_ANYVISITOR_H
+#endif //SR_ENGINE_ANYVISITOR_H

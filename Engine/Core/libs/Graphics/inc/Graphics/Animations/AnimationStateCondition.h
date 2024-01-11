@@ -2,8 +2,8 @@
 // Created by Monika on 06.05.2023.
 //
 
-#ifndef SRENGINE_ANIMATIONSTATECONDITION_H
-#define SRENGINE_ANIMATIONSTATECONDITION_H
+#ifndef SR_ENGINE_ANIMATIONSTATECONDITION_H
+#define SR_ENGINE_ANIMATIONSTATECONDITION_H
 
 #include <Utils/Types/Time.h>
 #include <Graphics/Animations/AnimationCommon.h>
@@ -154,4 +154,4 @@ namespace SR_ANIMATIONS_NS {
     //};
 }
 
-#endif //SRENGINE_ANIMATIONSTATECONDITION_H
+#endif //SR_ENGINE_ANIMATIONSTATECONDITION_H

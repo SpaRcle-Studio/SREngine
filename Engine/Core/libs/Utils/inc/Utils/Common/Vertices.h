@@ -2,8 +2,8 @@
 // Created by Monika on 25.03.2022.
 //
 
-#ifndef SRENGINE_SKYBOXCONSTANTS_H
-#define SRENGINE_SKYBOXCONSTANTS_H
+#ifndef SR_ENGINE_SKYBOXCONSTANTS_H
+#define SR_ENGINE_SKYBOXCONSTANTS_H
 
 #include <Utils/Debug.h>
 
@@ -72,4 +72,4 @@ namespace SR_UTILS_NS {
     }
 }
 
-#endif //SRENGINE_SKYBOXCONSTANTS_H
+#endif //SR_ENGINE_SKYBOXCONSTANTS_H

@@ -2,8 +2,8 @@
 // Created by Monika on 24.05.2023.
 //
 
-#ifndef SRENGINE_GLYPH_H
-#define SRENGINE_GLYPH_H
+#ifndef SR_ENGINE_GLYPH_H
+#define SR_ENGINE_GLYPH_H
 
 #include <Utils/Common/NonCopyable.h>
 #include <Graphics/Font/FreeType.h>
@@ -77,4 +77,4 @@ namespace SR_GRAPH_NS {
     };
 }
 
-#endif //SRENGINE_GLYPH_H
+#endif //SR_ENGINE_GLYPH_H

@@ -2,8 +2,8 @@
 // Created by Monika on 27.05.2022.
 //
 
-#ifndef SRENGINE_COMPONENTMANAGER_H
-#define SRENGINE_COMPONENTMANAGER_H
+#ifndef SR_ENGINE_COMPONENTMANAGER_H
+#define SR_ENGINE_COMPONENTMANAGER_H
 
 #include <Utils/ECS/EntityManager.h>
 #include <Utils/ECS/Component.h>
@@ -170,4 +170,4 @@ namespace SR_UTILS_NS {
         return AllocateNew();                                                                                                                             \
     });                                                                                                                                                   \
 
-#endif //SRENGINE_COMPONENTMANAGER_H
+#endif //SR_ENGINE_COMPONENTMANAGER_H

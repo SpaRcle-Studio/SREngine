@@ -2,8 +2,8 @@
 // Created by Nikita on 17.11.2020.
 //
 
-#ifndef SRENGINE_GRAPHICS_MESH_H
-#define SRENGINE_GRAPHICS_MESH_H
+#ifndef SR_ENGINE_GRAPHICS_MESH_H
+#define SR_ENGINE_GRAPHICS_MESH_H
 
 #include <Utils/Math/Matrix4x4.h>
 #include <Utils/Common/Enumerations.h>
@@ -123,4 +123,4 @@ namespace SR_GTYPES_NS {
     };
 }
 
-#endif //SRENGINE_GRAPHICS_MESH_H
+#endif //SR_ENGINE_GRAPHICS_MESH_H

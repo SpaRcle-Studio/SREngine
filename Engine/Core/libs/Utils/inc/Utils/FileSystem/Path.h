@@ -2,8 +2,8 @@
 // Created by Monika on 10.12.2021.
 //
 
-#ifndef SRENGINE_PATH_H
-#define SRENGINE_PATH_H
+#ifndef SR_ENGINE_PATH_H
+#define SR_ENGINE_PATH_H
 
 #include <Utils/stdInclude.h>
 #include <Utils/Math/Mathematics.h>
@@ -138,4 +138,4 @@ namespace SR_UTILS_NS {
     };
 }
 
-#endif //SRENGINE_PATH_H
+#endif //SR_ENGINE_PATH_H

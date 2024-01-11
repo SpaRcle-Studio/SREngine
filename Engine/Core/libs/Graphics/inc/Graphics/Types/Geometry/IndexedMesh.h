@@ -2,8 +2,8 @@
 // Created by Monika on 30.10.2021.
 //
 
-#ifndef SRENGINE_GRAPHICS_INDEXEDMESH_H
-#define SRENGINE_GRAPHICS_INDEXEDMESH_H
+#ifndef SR_ENGINE_GRAPHICS_INDEXEDMESH_H
+#define SR_ENGINE_GRAPHICS_INDEXEDMESH_H
 
 #include <Graphics/Memory/MeshManager.h>
 #include <Graphics/Types/Mesh.h>
@@ -117,4 +117,4 @@ namespace SR_GTYPES_NS {
     }
 }
 
-#endif //SRENGINE_GRAPHICS_INDEXEDMESH_H
+#endif //SR_ENGINE_GRAPHICS_INDEXEDMESH_H

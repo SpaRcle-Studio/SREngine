@@ -2,8 +2,8 @@
 // Created by Monika on 22.05.2023.
 //
 
-#ifndef SRENGINE_IRENDERCOMPONENT_H
-#define SRENGINE_IRENDERCOMPONENT_H
+#ifndef SR_ENGINE_IRENDERCOMPONENT_H
+#define SR_ENGINE_IRENDERCOMPONENT_H
 
 #include <Utils/ECS/Component.h>
 
@@ -29,4 +29,4 @@ namespace SR_GTYPES_NS {
     };
 }
 
-#endif //SRENGINE_IRENDERCOMPONENT_H
+#endif //SR_ENGINE_IRENDERCOMPONENT_H

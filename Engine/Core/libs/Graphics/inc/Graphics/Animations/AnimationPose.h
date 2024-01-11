@@ -2,8 +2,8 @@
 // Created by Monika on 25.04.2023.
 //
 
-#ifndef SRENGINE_ANIMATIONPOSE_H
-#define SRENGINE_ANIMATIONPOSE_H
+#ifndef SR_ENGINE_ANIMATIONPOSE_H
+#define SR_ENGINE_ANIMATIONPOSE_H
 
 #include <Utils/ECS/GameObject.h>
 
@@ -43,4 +43,4 @@ namespace SR_ANIMATIONS_NS {
     };
 }
 
-#endif //SRENGINE_ANIMATIONPOSE_H
+#endif //SR_ENGINE_ANIMATIONPOSE_H

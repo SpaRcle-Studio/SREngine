@@ -2,8 +2,8 @@
 // Created by Monika on 09.09.2022.
 //
 
-#ifndef SRENGINE_ENUMREFLECTOR_H
-#define SRENGINE_ENUMREFLECTOR_H
+#ifndef SR_ENGINE_ENUMREFLECTOR_H
+#define SR_ENGINE_ENUMREFLECTOR_H
 
 #include <Utils/Common/Singleton.h>
 #include <Utils/Common/HashManager.h>
@@ -285,4 +285,4 @@ namespace SR_UTILS_NS {
         SR_UTILS_NS::EnumReflectorManager::Instance()                                                     /** NOLINT */ \
             .RegisterReflector(const_cast<SR_UTILS_NS::EnumReflector*>(&_detail_reflector_(enumName()))); /** NOLINT */ \
 
-#endif //SRENGINE_ENUMREFLECTOR_H
+#endif //SR_ENGINE_ENUMREFLECTOR_H

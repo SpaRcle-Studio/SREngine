@@ -2,8 +2,8 @@
 // Created by Monika on 13.06.2022.
 //
 
-#ifndef SRENGINE_CAMERADATA_H
-#define SRENGINE_CAMERADATA_H
+#ifndef SR_ENGINE_CAMERADATA_H
+#define SR_ENGINE_CAMERADATA_H
 
 #include <Utils/Math/Vector2.h>
 #include <Utils/Math/Vector3.h>
@@ -52,4 +52,4 @@ namespace SR_WORLD_NS {
     };
 }
 
-#endif //SRENGINE_CAMERADATA_H
+#endif //SR_ENGINE_CAMERADATA_H
