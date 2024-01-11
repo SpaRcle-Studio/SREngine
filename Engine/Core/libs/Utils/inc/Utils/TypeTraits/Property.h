@@ -33,6 +33,29 @@ namespace SR_UTILS_NS {
         using MarshalRef = SR_HTYPES_NS::Marshal&;
         using MarshalUniquePtr = std::unique_ptr<SR_HTYPES_NS::Marshal>;
     public:
+        Property() = default;
+
+        Property(Property&& other) noexcept
+            : m_activeCondition(SR_EXCHANGE(other.m_activeCondition, ActiveConditionFn()))
+            , m_publicity(SR_EXCHANGE(other.m_publicity, { }))
+            , m_description(SR_EXCHANGE(other.m_description, { }))
+            , m_name(SR_EXCHANGE(other.m_name, { }))
+            , m_dontSave(SR_EXCHANGE(other.m_dontSave, { }))
+            , m_sameLine(SR_EXCHANGE(other.m_sameLine, { }))
+            , m_width(SR_EXCHANGE(other.m_width, { }))
+        { }
+
+        Property& operator=(Property&& other) noexcept {
+            m_activeCondition = SR_EXCHANGE(other.m_activeCondition, ActiveConditionFn());
+            m_publicity = SR_EXCHANGE(other.m_publicity, { });
+            m_description = SR_EXCHANGE(other.m_description, { });
+            m_name = SR_EXCHANGE(other.m_name, { });
+            m_dontSave = SR_EXCHANGE(other.m_dontSave, { });
+            m_sameLine = SR_EXCHANGE(other.m_sameLine, { });
+            m_width = SR_EXCHANGE(other.m_width, { });
+            return *this;
+        }
+
         virtual void SaveProperty(MarshalRef marshal) const noexcept { /** nothing */ }
         virtual void LoadProperty(MarshalRef marshal) noexcept { /** nothing */ }
 

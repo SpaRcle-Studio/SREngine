@@ -5,6 +5,7 @@
 #include <Utils/ECS/GameObject.h>
 #include <Utils/ECS/Transform3D.h>
 #include <Utils/ECS/Component.h>
+#include <Utils/ECS/LayerManager.h>
 
 #include <Utils/World/Scene.h>
 
@@ -17,6 +18,7 @@
 
 namespace SR_UTILS_NS {
     GameObject::GameObject(std::string name, Transform* pTransform) {
+        m_layer = SR_UTILS_NS::LayerManager::Instance().GetDefaultLayer();
         SetName(std::move(name));
         SetTransform(pTransform);
         UpdateEntityPath();
@@ -336,7 +338,8 @@ namespace SR_UTILS_NS {
             data.pMarshal->Write<bool>(true);
             data.pMarshal->Write<std::string>(pPrefab->GetResourcePath().ToStringRef());
             data.pMarshal->Write<std::string>(GetName());
-            data.pMarshal->Write<uint64_t>(GetTag());
+            //data.pMarshal->Write<uint64_t>(GetTag().GetHash());
+            //data.pMarshal->Write<uint64_t>(GetLayer().GetHash());
             data.pMarshal->Write<bool>(IsEnabled());
 
             auto&& pTransformMarshal = GetTransform()->Save(transformSaveData);
@@ -353,6 +356,7 @@ namespace SR_UTILS_NS {
         data.pMarshal->Write(m_name);
 
         data.pMarshal->Write<uint64_t>(m_tag);
+        data.pMarshal->Write<uint64_t>(m_layer.GetHash());
 
         auto&& pTransformMarshal = GetTransform()->Save(transformSaveData);
         data.pMarshal->Write<uint64_t>(pTransformMarshal->Size());
@@ -533,7 +537,8 @@ namespace SR_UTILS_NS {
             if (marshal.Read<bool>()) { /// is prefab
                 auto&& prefabPath = marshal.Read<std::string>();
                 auto&& objectName = marshal.Read<std::string>();
-                auto&& tag = marshal.Read<uint64_t>();
+                //auto&& tag = marshal.Read<uint64_t>();
+                //auto&& layer = SR_HASH_TO_STR_ATOM(marshal.Read<uint64_t>());
                 auto&& isEnabled = marshal.Read<bool>();
 
                 SR_MAYBE_UNUSED auto&& transformBlockSize = marshal.Read<uint64_t>();
@@ -557,8 +562,10 @@ namespace SR_UTILS_NS {
 
                 gameObject->SetName(objectName);
                 gameObject->SetEnabled(isEnabled);
-                gameObject->m_tag = tag;
+                //gameObject->m_tag = tag;
+                //gameObject->m_layer = layer;
                 gameObject->SetTransform(pTransform);
+
                 return gameObject;
             }
 
@@ -566,6 +573,7 @@ namespace SR_UTILS_NS {
             auto&& name = marshal.Read<std::string>();
 
             auto&& tag = marshal.Read<uint64_t>();
+            auto&& layer = SR_HASH_TO_STR_ATOM(marshal.Read<uint64_t>());
 
             if (entityId == UINT64_MAX) {
                 gameObject = new GameObject(name);
@@ -598,6 +606,7 @@ namespace SR_UTILS_NS {
             ));
 
             gameObject->m_tag = tag;
+            gameObject->m_layer = layer;
 
             /// ----------------------
 
@@ -627,6 +636,7 @@ namespace SR_UTILS_NS {
         gameObject->SetEnabled(IsEnabled());
 
         gameObject->m_tag = m_tag;
+        gameObject->m_layer = m_layer;
 
         if (scene) {
             scene->RegisterGameObject(gameObject);
@@ -656,11 +666,11 @@ namespace SR_UTILS_NS {
     }
 
     std::string GameObject::GetTagString() const {
-        return TagManager::Instance().GetTag(GetTag());
+        return TagManager::Instance().GetTag(GetTag().GetHash());
     }
 
-    Tag GameObject::GetTag() const {
-        return m_tag;
+    StringAtom GameObject::GetTag() const {
+        return SR_HASH_TO_STR_ATOM(m_tag);
     }
 
     GameObject::Ptr GameObject::Find(uint64_t hashName) const noexcept {

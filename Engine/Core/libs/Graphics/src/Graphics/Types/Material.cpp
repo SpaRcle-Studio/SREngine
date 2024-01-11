@@ -26,30 +26,8 @@ namespace SR_GTYPES_NS {
         InitContext();
 
         m_properties.ForEachProperty<MaterialProperty>([this](auto&& pProperty){
-            auto&& hashId = pProperty->GetName().GetHash();
-
-            switch (pProperty->GetShaderVarType()) {
-                case ShaderVarType::Int:
-                    m_shader->SetInt(hashId, std::get<int32_t>(pProperty->GetData()));
-                    break;
-                case ShaderVarType::Float:
-                    m_shader->SetFloat(hashId, std::get<float_t>(pProperty->GetData()));
-                    break;
-                case ShaderVarType::Vec2:
-                    m_shader->SetVec2(hashId, std::get<SR_MATH_NS::FVector2>(pProperty->GetData()).template Cast<float_t>());
-                    break;
-                case ShaderVarType::Vec3:
-                    m_shader->SetVec3(hashId, std::get<SR_MATH_NS::FVector3>(pProperty->GetData()).template Cast<float_t>());
-                    break;
-                case ShaderVarType::Vec4:
-                    m_shader->SetVec4(hashId, std::get<SR_MATH_NS::FVector4>(pProperty->GetData()).template Cast<float_t>());
-                    break;
-                case ShaderVarType::Sampler2D:
-                    /// samplers used at UseSamplers
-                    break;
-                default:
-                    SRAssertOnce(false);
-                    break;
+            if (!pProperty->IsSampler()) {
+                pProperty->Use(m_shader);
             }
         });
     }
@@ -156,12 +134,8 @@ namespace SR_GTYPES_NS {
         }
 
         m_properties.ForEachProperty<MaterialProperty>([this](auto&& pProperty){
-            switch (pProperty->GetShaderVarType()) {
-                case ShaderVarType::Sampler2D:
-                    m_shader->SetSampler2D(pProperty->GetName().GetHash(), std::get<Texture*>(pProperty->GetData()));
-                    break;
-                default:
-                    break;
+            if (pProperty->IsSampler()) {
+                pProperty->Use(m_shader);
             }
         });
     }

@@ -25,7 +25,7 @@ namespace SR_UTILS_NS {
     class Component;
 
     class SR_DLL_EXPORT GameObject : public IComponentable, public Entity {
-        SR_ENTITY_SET_VERSION(1008);
+        SR_ENTITY_SET_VERSION(1009);
         friend class Component;
     public:
         using Name = std::string;
@@ -48,6 +48,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD ScenePtr GetScene() const override { return m_scene; }
         SR_NODISCARD StringAtom GetLayer() const noexcept { return m_layer; }
         SR_NODISCARD Prefab* GetPrefab() const noexcept { return m_prefab.first; }
+        SR_NODISCARD bool IsPrefab() const noexcept { return m_prefab.first; }
         SR_NODISCARD bool IsPrefabOwner() const noexcept { return m_prefab.second; }
         SR_NODISCARD Transform* GetParentTransform() const noexcept { return m_parent ? m_parent->m_transform : nullptr; }
         SR_NODISCARD Transform* GetTransform() const noexcept { return m_transform; }
@@ -56,7 +57,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD GameObject::Ptr Find(uint64_t hashName) const noexcept;
         SR_NODISCARD GameObject::Ptr Find(const std::string& name) const noexcept;
         SR_NODISCARD std::string GetName() const { return m_name; }
-        SR_NODISCARD Tag GetTag() const;
+        SR_NODISCARD StringAtom GetTag() const;
         SR_NODISCARD std::string GetTagString() const;
         SR_NODISCARD bool HasTag() const;
         SR_NODISCARD bool IsActive() const noexcept override;

@@ -12,6 +12,7 @@ namespace SR_UTILS_NS {
     void LayerManager::ClearSettings() {
         SR_LOCK_GUARD;
 
+        m_defaultLayer = StringAtom();
         m_layers.clear();
 
         Super::ClearSettings();
@@ -22,7 +23,7 @@ namespace SR_UTILS_NS {
 
         m_layers.clear();
 
-        m_layers.emplace_back();
+        m_defaultLayer = node.TryGetNode("Default").TryGetAttribute("Name").ToString("Default");
 
         if (auto&& layersNode = node.GetNode("Layers")) {
             for (auto&& layerNode : layersNode.GetNodes()) {

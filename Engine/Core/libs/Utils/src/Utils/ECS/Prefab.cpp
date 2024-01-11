@@ -72,7 +72,6 @@ namespace SR_UTILS_NS {
             return false;
         }
 
-
         return IResource::Load();
     }
 

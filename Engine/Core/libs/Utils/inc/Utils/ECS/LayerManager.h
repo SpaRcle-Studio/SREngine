@@ -18,6 +18,7 @@ namespace SR_UTILS_NS {
         //SR_NODISCARD const std::string& GetLayerByIndex(uint16_t index) const;
         SR_NODISCARD uint16_t GetLayerIndex(StringAtom layer) const;
         SR_NODISCARD std::vector<StringAtom> GetLayers() const { return m_layers; }
+        SR_NODISCARD StringAtom GetDefaultLayer() const noexcept { return m_defaultLayer; }
 
         //SR_NODISCARD Hash HashTag(const std::string& tag) const;
 
@@ -33,6 +34,8 @@ namespace SR_UTILS_NS {
         //std::map<Hash, std::string> m_layerNames;
         //std::map<Hash, uint16_t> m_indices;
         std::vector<StringAtom> m_layers;
+        StringAtom m_defaultLayer;
+
     };
 }
 #endif //SRENGINE_LAYERMANAGER_H

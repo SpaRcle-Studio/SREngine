@@ -2,8 +2,8 @@
 // Created by Nikita on 17.11.2020.
 //
 
-#ifndef SRENGINE_GRAPHICS_MESH_H
-#define SRENGINE_GRAPHICS_MESH_H
+#ifndef SR_ENGINE_GRAPHICS_MESH_H
+#define SR_ENGINE_GRAPHICS_MESH_H
 
 #include <Utils/Math/Matrix4x4.h>
 #include <Utils/Common/Enumerations.h>
@@ -13,6 +13,7 @@
 #include <Graphics/Utils/MeshTypes.h>
 #include <Graphics/Memory/IGraphicsResource.h>
 #include <Graphics/Memory/UBOManager.h>
+#include <Graphics/Loaders/ShaderProperties.h>
 
 namespace SR_UTILS_NS {
     class IResource;
@@ -70,6 +71,7 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD virtual std::string GetMeshIdentifier() const;
         SR_NODISCARD virtual int64_t GetSortingPriority() const { return 0; }
 
+        SR_NODISCARD std::vector<MaterialProperty>& GetOverrideUniforms() noexcept { return m_overrideUniforms; }
         SR_NODISCARD ShaderPtr GetShader() const;
         SR_NODISCARD MaterialPtr GetMaterial() const { return m_material; }
         SR_NODISCARD int32_t GetVirtualUBO() const { return m_virtualUBO; }
@@ -119,6 +121,9 @@ namespace SR_GTYPES_NS {
         std::atomic<bool> m_isMeshDestroyed = false;
 
         int32_t m_virtualUBO = SR_ID_INVALID;
+
+        std::vector<MaterialProperty> m_overrideUniforms;
+        std::vector<MaterialProperty> m_overrideConstant;
 
     };
 }

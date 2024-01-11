@@ -67,4 +67,36 @@ namespace SR_GRAPH_NS {
 
         return textures;
     }
+
+    void MaterialProperty::Use(SR_GTYPES_NS::Shader* pShader) const {
+        auto&& hashId = GetName().GetHash();
+
+        switch (GetShaderVarType()) {
+            case ShaderVarType::Int:
+                pShader->SetInt(hashId, std::get<int32_t>(GetData()));
+                break;
+            case ShaderVarType::Float:
+                pShader->SetFloat(hashId, std::get<float_t>(GetData()));
+                break;
+            case ShaderVarType::Vec2:
+                pShader->SetVec2(hashId, std::get<SR_MATH_NS::FVector2>(GetData()).template Cast<float_t>());
+                break;
+            case ShaderVarType::Vec3:
+                pShader->SetVec3(hashId, std::get<SR_MATH_NS::FVector3>(GetData()).template Cast<float_t>());
+                break;
+            case ShaderVarType::Vec4:
+                pShader->SetVec4(hashId, std::get<SR_MATH_NS::FVector4>(GetData()).template Cast<float_t>());
+                break;
+            case ShaderVarType::Sampler2D:
+                pShader->SetSampler2D(hashId, std::get<SR_GTYPES_NS::Texture*>(GetData()));
+                break;
+            default:
+                SRAssertOnce(false);
+                break;
+        }
+    }
+
+    bool MaterialProperty::IsSampler() const noexcept {
+        return m_type >= ShaderVarType::Sampler2D && m_type <= ShaderVarType::Sampler2DShadow;
+    }
 }

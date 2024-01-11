@@ -107,7 +107,9 @@ namespace SR_GTYPES_NS {
     }
 
     void Mesh3D::UseModelMatrix() {
-        GetRenderContext()->GetCurrentShader()->SetMat4(SHADER_MODEL_MATRIX, m_modelMatrix);
+        auto&& pShader = GetRenderContext()->GetCurrentShader();
+
+        pShader->SetMat4(SHADER_MODEL_MATRIX, m_modelMatrix);
     }
 
     void Mesh3D::OnRawMeshChanged() {

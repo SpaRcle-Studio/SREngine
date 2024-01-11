@@ -22,6 +22,7 @@ namespace SR_UTILS_NS {
     public:
         SR_NODISCARD const std::string& GetTag(Tag tag) const;
         SR_NODISCARD const std::string& GetTagByIndex(uint16_t index) const;
+        SR_NODISCARD StringAtom GetDefaultTag() const;
         SR_NODISCARD uint16_t GetTagIndex(Tag tag) const;
         SR_NODISCARD const std::vector<std::string>& GetTags() const { return m_tags; }
 

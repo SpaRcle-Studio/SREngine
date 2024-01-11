@@ -132,7 +132,14 @@ namespace SR_GRAPH_NS::Types {
 
     void Mesh::UseMaterial() {
         SR_TRACY_ZONE;
+
         m_material->Use();
+
+        for (auto&& property : m_overrideUniforms) {
+            if (!property.IsSampler()) {
+                property.Use(GetRenderContext()->GetCurrentShader());
+            }
+        }
     }
 
     void Mesh::BindMesh() {

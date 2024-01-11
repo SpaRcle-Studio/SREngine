@@ -22,6 +22,16 @@ namespace SR_WORLD_NS {
         void Destroy() override;
         void Update(float_t dt) override;
 
+        void SetTag(StringAtom tag) { m_tag = tag; }
+        void SetLayer(StringAtom layer) { m_layer = layer; }
+
+        SR_NODISCARD StringAtom GetTag() const noexcept { return m_tag; }
+        SR_NODISCARD StringAtom GetLayer() const noexcept { return m_layer; }
+
+    private:
+        StringAtom m_tag;
+        StringAtom m_layer;
+
     };
 }
 

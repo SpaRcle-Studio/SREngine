@@ -1,8 +1,11 @@
 <?xml version="1.0"?>
 <Settings>
+    <Default Name="Default"/>
     <Layers>
-        <None/>
+        <Default/>
+		<Opaque/>
+    	<Transparent/>
+    	<UI/>
         <Gizmo/>
-	<TestLayer1/>
     </Layers>
 </Settings>

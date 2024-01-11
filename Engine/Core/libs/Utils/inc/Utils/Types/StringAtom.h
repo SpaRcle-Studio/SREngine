@@ -20,6 +20,7 @@ namespace SR_UTILS_NS {
 
         StringAtom(const StringAtom& str) = default;
 
+        StringAtom(StringHashInfo* pInfo); /// NOLINT
         StringAtom(const char* str); /// NOLINT
         StringAtom(const std::string& str); /// NOLINT
 

@@ -13,6 +13,7 @@
 
 namespace SR_GTYPES_NS {
     class Texture;
+    class Shader;
     class Material;
 }
 
@@ -55,24 +56,46 @@ namespace SR_GRAPH_NS {
           Sampler3D,
           SamplerCube,
           Sampler1DShadow,
-          Sampler2DShadow,
+          Sampler2DShadow, /// see MaterialProperty::IsSampler()
           Skeleton128
     )
 
     class MaterialProperty : public SR_UTILS_NS::Property {
         SR_REGISTER_TYPE_TRAITS_PROPERTY(MaterialProperty, 1001)
     public:
+        MaterialProperty() = default;
+
+        MaterialProperty(MaterialProperty&& other) noexcept
+            : m_material(SR_EXCHANGE(other.m_material, nullptr))
+            , m_displayName(SR_EXCHANGE(other.m_displayName, { }))
+            , m_data(SR_EXCHANGE(other.m_data, { }))
+            , m_pushConstant(SR_EXCHANGE(other.m_pushConstant, { }))
+            , m_type(SR_EXCHANGE(other.m_type, { }))
+        { }
+
+        MaterialProperty& operator=(MaterialProperty&& other) noexcept {
+            m_material = SR_EXCHANGE(other.m_material, nullptr);
+            m_displayName = SR_EXCHANGE(other.m_displayName, { });
+            m_data = SR_EXCHANGE(other.m_data, { });
+            m_pushConstant = SR_EXCHANGE(other.m_pushConstant, { });
+            m_type = SR_EXCHANGE(other.m_type, { });
+            return *this;
+        }
+
         SR_NODISCARD SR_UTILS_NS::StringAtom GetDisplayName() const noexcept { return m_displayName; }
         SR_NODISCARD ShaderVarType GetShaderVarType() const noexcept { return m_type; }
         SR_NODISCARD const ShaderPropertyVariant& GetData() const noexcept { return m_data; }
         SR_NODISCARD SR_GTYPES_NS::Material* GetMaterial() const noexcept { return m_material; }
         SR_NODISCARD bool IsPushConstant() const noexcept { return m_pushConstant; }
+        SR_NODISCARD bool IsSampler() const noexcept;
 
         MaterialProperty& SetDisplayName(SR_UTILS_NS::StringAtom value) noexcept { m_displayName = value; return *this; }
         MaterialProperty& SetData(const ShaderPropertyVariant& value) noexcept { m_data = value; return *this; }
         MaterialProperty& SetShaderVarType(ShaderVarType value) noexcept { m_type = value; return *this; }
         MaterialProperty& SetMaterial(SR_GTYPES_NS::Material* value) noexcept { m_material = value; return *this; }
         MaterialProperty& SetPushConstant(bool value) noexcept { m_pushConstant = value; return *this; }
+
+        void Use(SR_GTYPES_NS::Shader* pShader) const;
 
     private:
         SR_GTYPES_NS::Material* m_material = nullptr;

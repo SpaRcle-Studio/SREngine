@@ -79,13 +79,13 @@ namespace SR_UTILS_NS {
             return 0;
         }
 
-        return SR_HASH_STR(tag);
+        return SR_HASH_STR_REGISTER(tag);
     }
 
     uint16_t TagManager::GetTagIndex(Tag tag) const {
         SR_LOCK_GUARD;
 
-        if (tag == 0) {
+        if (tag == 0 || tag == StringAtom().GetHash()) {
             return 0;
         }
 
@@ -109,5 +109,12 @@ namespace SR_UTILS_NS {
         }
 
         return m_tags.at(index);
+    }
+
+    StringAtom TagManager::GetDefaultTag() const {
+        if (m_tags.empty()) {
+            return "Default";
+        }
+        return m_tags[0];
     }
 }
