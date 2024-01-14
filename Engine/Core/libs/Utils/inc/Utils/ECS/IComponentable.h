@@ -31,7 +31,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD bool IsDirty() const noexcept;
 
     public:
-        SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr SaveComponents(SavableSaveData data) const;
+        SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr SaveComponents(SavableContext data) const;
 
         /// Вызывает OnAttached у компонентов загруженных через LoadComponent
         virtual bool PostLoad(bool force);

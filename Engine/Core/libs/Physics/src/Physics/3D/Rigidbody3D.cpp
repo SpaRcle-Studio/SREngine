@@ -29,7 +29,7 @@ namespace SR_PTYPES_NS {
         return SR_UTILS_NS::Measurement::Space3D;
     }
 
-    SR_HTYPES_NS::Marshal::Ptr Rigidbody3D::Save(SR_UTILS_NS::SavableSaveData data) const {
+    SR_HTYPES_NS::Marshal::Ptr Rigidbody3D::Save(SR_UTILS_NS::SavableContext data) const {
         auto&& pMarshal = Super::Save(data);
 
         pMarshal->Write<SR_MATH_NS::BVector3>(m_linearLock);

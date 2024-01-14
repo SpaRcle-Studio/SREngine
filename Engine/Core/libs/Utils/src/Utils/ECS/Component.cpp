@@ -14,10 +14,10 @@ namespace SR_UTILS_NS {
     Component::~Component() {
         /// если срабатывает ассерт, значит, вероятнее всего, какой-то игровой объект до сих пор удерживает компонент,
         /// а значит, будет падение.
-        SRAssert(!GetParent());
+        SRAssert(!HasParent());
     }
 
-    SR_HTYPES_NS::Marshal::Ptr Component::Save(SavableSaveData data) const {
+    SR_HTYPES_NS::Marshal::Ptr Component::Save(SavableContext data) const {
         if (!(data.pMarshal = Entity::Save(data))) {
             return data.pMarshal;
         }
@@ -44,7 +44,9 @@ namespace SR_UTILS_NS {
                 m_scene = dynamic_cast<SR_WORLD_NS::Scene*>(m_parent);
             }
 
-            SRAssert(m_scene);
+            if (m_isComponentLoaded && !m_scene) {
+                SRHalt("Missing scene!");
+            }
         }
         else {
             m_gameObject.Reset();
@@ -104,6 +106,7 @@ namespace SR_UTILS_NS {
     }
 
     IComponentable* Component::GetParent() const {
+        SRAssert(m_parent);
         return m_parent;
     }
 

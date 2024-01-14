@@ -113,7 +113,7 @@ namespace SR_UTILS_NS {
 
         SR_NODISCARD virtual std::list<EntityBranch> GetEntityBranches() const { return {}; }
 
-        SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save(SavableSaveData data) const override {
+        SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save(SavableContext data) const override {
             if (!(data.pMarshal = ISavable::Save(data))) {
                 return data.pMarshal;
             }

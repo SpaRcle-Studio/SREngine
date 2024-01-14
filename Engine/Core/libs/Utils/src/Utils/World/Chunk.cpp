@@ -182,7 +182,7 @@ namespace SR_WORLD_NS {
         /// сохраняем объекты относительно начала координат чанка
         pContext->SetValue<SR_MATH_NS::FVector3>(-GetWorldPosition());
 
-        const auto gameObjectSaveData = SR_UTILS_NS::SavableSaveData(nullptr, SAVABLE_FLAG_ECS_NO_ID);
+        const auto gameObjectSaveData = SR_UTILS_NS::SavableContext(nullptr, SAVABLE_FLAG_ECS_NO_ID);
 
         for (auto&& gameObject : gameObjects) {
             if (gameObject.RecursiveLockIfValid()) {

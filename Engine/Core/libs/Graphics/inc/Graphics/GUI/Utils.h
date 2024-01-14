@@ -2,8 +2,8 @@
 // Created by Monika on 16.02.2022.
 //
 
-#ifndef SR_ENGINE_GUIUTILS_H
-#define SR_ENGINE_GUIUTILS_H
+#ifndef SR_ENGINE_GUI_UTILS_H
+#define SR_ENGINE_GUI_UTILS_H
 
 #include <Utils/Debug.h>
 #include <Utils/Math/Mathematics.h>
@@ -949,4 +949,4 @@ glm::vec2 Framework::Graphics::Window::GetGlobalWindowMousePos(Framework::Graphi
 }
  */
 
-#endif //SRENGINE_GUIUTILS_H
+#endif //SR_ENGINE_GUI_UTILS_H

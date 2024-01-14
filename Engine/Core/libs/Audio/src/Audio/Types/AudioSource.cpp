@@ -25,7 +25,7 @@ namespace SR_AUDIO_NS {
         return dynamic_cast<Component*>(pComponent);
     }
 
-    SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr AudioSource::Save(SR_UTILS_NS::SavableSaveData data) const{
+    SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr AudioSource::Save(SR_UTILS_NS::SavableContext data) const{
         data.pMarshal = Super::Save(data);
 
         data.pMarshal->Write<bool>(GetLoop());

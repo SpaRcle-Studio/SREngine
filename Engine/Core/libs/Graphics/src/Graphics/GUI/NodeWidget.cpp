@@ -404,11 +404,10 @@ namespace SR_GRAPH_GUI_NS {
         ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0);
         ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 0);
 
-        ImGui::BeginDisabled(true);
-        {
+        ImGui::BeginDisabled(true); {
             ImGui::Button("Properties", ImVec2(m_leftPaneWidth * 0.75f, 20));
+            ImGui::EndDisabled();
         }
-        ImGui::EndDisabled();
 
         ImGui::SameLine();
 

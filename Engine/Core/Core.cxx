@@ -31,6 +31,7 @@
 #include "src/Core/Settings/EditorSettings.cpp"
 
 #include "src/Core/UI/Button.cpp"
+#include "src/Core/UI/IButton.cpp"
 
 #include "src/Core/World/VisualChunk.cpp"
 #include "src/Core/World/VisualRegion.cpp"

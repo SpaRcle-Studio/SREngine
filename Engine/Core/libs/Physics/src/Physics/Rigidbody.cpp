@@ -184,7 +184,7 @@ namespace SR_PTYPES_NS {
         return pComponent;
     }
 
-    SR_HTYPES_NS::Marshal::Ptr Rigidbody::Save(SR_UTILS_NS::SavableSaveData data) const {
+    SR_HTYPES_NS::Marshal::Ptr Rigidbody::Save(SR_UTILS_NS::SavableContext data) const {
         auto&& pMarshal = Super::Save(data);
 
         pMarshal->Write<int32_t>(static_cast<int32_t>(m_shape->GetType()));

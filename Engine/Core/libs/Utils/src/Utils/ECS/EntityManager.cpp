@@ -93,7 +93,7 @@ namespace SR_UTILS_NS {
         SR_SCOPED_LOCK;
 
         if (!m_entities.empty()) {
-            SR_WARN("EntityManager::OnSingletonDestroy() : entities was not be destroyed! Collect data...");
+            SR_WARN("EntityManager::OnSingletonDestroy() : entities were not destroyed! Collecting data...");
 
             std::string ids;
             uint32_t index = 0;
