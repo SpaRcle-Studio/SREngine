@@ -149,14 +149,14 @@ namespace SR_GRAPH_NS {
 
         m_framebuffer->Update();
         /// установим кадровый буфер, чтобы BeginCmdBuffer понимал какие значение для очистки ставить
-        GetPipeline()->SetCurrentFrameBuffer(m_framebuffer);
+        GetPassPipeline()->SetCurrentFrameBuffer(m_framebuffer);
 
         m_framebuffer->BeginCmdBuffer(m_clearColors, m_depth);
         m_framebuffer->SetViewportScissor();
 
         for (uint32_t i = 0; i < m_cascadesCount; ++i) {
             m_currentCascade = i;
-            GetPipeline()->SetFrameBufferLayer(i);
+            GetPassPipeline()->SetFrameBufferLayer(i);
 
             auto&& pIdentifier = m_uboManager.GetIdentifier();
             m_uboManager.SetIdentifier(this);
@@ -180,7 +180,7 @@ namespace SR_GRAPH_NS {
     void CascadedShadowMapPass::Update() {
         for (uint32_t i = 0; i < m_cascadesCount; ++i) {
             m_currentCascade = i;
-            GetPipeline()->SetFrameBufferLayer(i);
+            GetPassPipeline()->SetFrameBufferLayer(i);
             Super::Update();
         }
     }

@@ -34,6 +34,8 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD bool ExecuteInEditMode() const override;
         SR_NODISCARD bool IsUpdatable() const noexcept override { return false; }
         SR_NODISCARD int64_t GetSortingPriority() const override;
+        SR_NODISCARD bool HasSortingPriority() const override;
+        SR_NODISCARD SR_UTILS_NS::StringAtom GetMeshLayer() const override;
 
         SR_NODISCARD SR_FORCE_INLINE bool IsMeshActive() const noexcept override {
             return SR_UTILS_NS::Component::IsActive() && IndexedMesh::IsMeshActive();

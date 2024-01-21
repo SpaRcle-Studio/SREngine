@@ -1,5 +1,6 @@
 #include <Utils/macros.h>
 
+#include "../../Graphics/src/Graphics/Pass/MeshDrawerPass.cpp"
 #include "../../Graphics/src/Graphics/Pass/FlatColorBufferPass.cpp"
 #include "../../Graphics/src/Graphics/Pass/IColorBufferPass.cpp"
 #include "../../Graphics/src/Graphics/Pass/BasePass.cpp"

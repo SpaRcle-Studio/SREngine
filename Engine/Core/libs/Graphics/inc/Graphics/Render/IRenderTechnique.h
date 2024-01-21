@@ -24,7 +24,7 @@ namespace SR_GRAPH_NS {
     class RenderContext;
     class BasePass;
 
-    class IRenderTechnique : public Memory::IGraphicsResource {
+    class IRenderTechnique : public Memory::IGraphicsResource, public GroupPass {
     public:
         using CameraPtr = Types::Camera*;
         using Super = Memory::IGraphicsResource;
@@ -36,13 +36,10 @@ namespace SR_GRAPH_NS {
         ~IRenderTechnique() override;
 
     public:
-        virtual void Prepare();
-        virtual bool Overlay();
-        virtual bool Render();
-        virtual void Update();
-
-        virtual void OnResize(const SR_MATH_NS::UVector2& size);
-        virtual void OnSamplesChanged();
+        void Prepare() override;
+        bool Overlay() override;
+        bool Render() override;
+        void Update() override;
 
         void FreeVideoMemory() override;
 
@@ -50,54 +47,28 @@ namespace SR_GRAPH_NS {
         void SetRenderScene(const RenderScenePtr& pRScene);
 
         SR_NODISCARD CameraPtr GetCamera() const noexcept { return m_camera; }
-        SR_NODISCARD Context GetContext() const noexcept { return m_context; }
-        SR_NODISCARD RenderScenePtr GetRenderScene() const;
+        SR_NODISCARD RenderScenePtr GetRenderScene() const override;
         SR_NODISCARD bool IsEmpty() const;
-        SR_NODISCARD std::string_view GetName() const;
-
-        SR_NODISCARD BasePass* FindPass(const SR_UTILS_NS::StringAtom& name) const;
 
         SR_GTYPES_NS::Mesh* PickMeshAt(float_t x, float_t y, const std::vector<SR_UTILS_NS::StringAtom>& passFilter) const;
         SR_NODISCARD const PassQueues& GetQueues() const { return m_queues; }
-
-        bool ForEachPass(const SR_HTYPES_NS::Function<bool(BasePass*)>& callback) const;
-
-        template<typename T> SR_NODISCARD T* FindPass() const;
 
     protected:
         virtual bool Build() { return true; }
         void SetDirty();
         void DeInitPasses();
 
+        SR_NODISCARD uint64_t GetNodeHashName() const noexcept override { return 0; }
+        SR_NODISCARD std::string GetNodeName() const noexcept override { return std::string(); }
+
     protected:
         RenderScenePtr m_renderScene;
-        CameraPtr m_camera = nullptr;
-        Context m_context = nullptr;
-        std::string m_name;
         std::atomic<bool> m_dirty = false;
         std::atomic<bool> m_hasErrors = false;
-        Memory::UBOManager& m_uboManager;
 
-        std::vector<BasePass*> m_passes;
         PassQueues m_queues;
 
     };
-
-    template<typename T> T* IRenderTechnique::FindPass() const {
-        for (auto&& pPass : m_passes) {
-            if (auto&& pFoundPass = dynamic_cast<T*>(pPass)) {
-                return pFoundPass;
-            }
-
-            if (auto&& pGroupPass = dynamic_cast<GroupPass*>(pPass)) {
-                if (auto&& pFoundPass = pGroupPass->FindPass<T>()) {
-                    return pFoundPass;
-                }
-            }
-        }
-
-        return nullptr;
-    }
 }
 
 #endif //SR_ENGINE_GRAPHICS_I_RENDER_TECHNIQUE_H

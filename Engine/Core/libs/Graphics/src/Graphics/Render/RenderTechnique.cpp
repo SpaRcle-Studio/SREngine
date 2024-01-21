@@ -8,7 +8,7 @@
 #include <Graphics/Pass/GroupPass.h>
 
 namespace SR_GRAPH_NS {
-    RenderTechnique* RenderTechnique::Load(const SR_UTILS_NS::Path &rawPath) {
+    RenderTechnique* RenderTechnique::Load(const SR_UTILS_NS::Path& rawPath) {
         SR_TRACY_ZONE;
 
         /// Данный ресурс может иметь копии
@@ -99,7 +99,7 @@ namespace SR_GRAPH_NS {
     bool RenderTechnique::LoadSettings(const SR_XML_NS::Node &node) {
         SR_TRACY_ZONE;
 
-        m_name = node.GetAttribute("Name").ToString();
+        SetName(node.GetAttribute("Name").ToString());
 
         for (auto&& passNode : node.GetNodes()) {
             if (passNode.NameView() == "Queues") {
@@ -140,6 +140,6 @@ namespace SR_GRAPH_NS {
 
         DeInitPasses();
         m_queues.clear();
-        m_name.clear();
+        SetName(SR_UTILS_NS::StringAtom());
     }
 }

@@ -87,7 +87,7 @@ namespace SR_GRAPH_NS {
                 continue;
             }
 
-            m_context->SetCurrentShader(pShader);
+            GetContext()->SetCurrentShader(pShader);
 
             UseSharedUniforms(pShader);
 
@@ -113,7 +113,7 @@ namespace SR_GRAPH_NS {
             }
 
             GetRenderScene()->SetCurrentSkeleton(nullptr);
-            m_context->SetCurrentShader(nullptr);
+            GetContext()->SetCurrentShader(nullptr);
         }
     }
 

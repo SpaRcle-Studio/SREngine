@@ -61,8 +61,13 @@ namespace SR_GRAPH_NS {
         SR_TRACY_ZONE;
 
         bool hasDrawData = false;
+
         for (auto&& pPass : m_passes) {
-            hasDrawData |= pPass->PreRender();
+            if (pPass->HasPreRender()) {
+                SR_TRACY_ZONE_S(pPass->GetName().data());
+                pPass->Bind();
+                hasDrawData |= pPass->PreRender();
+            }
         }
 
         return hasDrawData;
@@ -73,8 +78,11 @@ namespace SR_GRAPH_NS {
 
         bool hasDrawData = false;
         for (auto&& pPass : m_passes) {
-            SR_TRACY_ZONE_S(pPass->GetName().data());
-            hasDrawData |= pPass->Render();
+            if (pPass->HasRender()) {
+                SR_TRACY_ZONE_S(pPass->GetName().data());
+                pPass->Bind();
+                hasDrawData |= pPass->Render();
+            }
         }
 
         return hasDrawData;
@@ -83,8 +91,11 @@ namespace SR_GRAPH_NS {
     bool GroupPass::PostRender() {
         bool hasDrawData = false;
         for (auto&& pPass : m_passes) {
-            SR_TRACY_ZONE_S(pPass->GetName().data());
-            hasDrawData |= pPass->PostRender();
+            if (pPass->HasPostRender()) {
+                SR_TRACY_ZONE_S(pPass->GetName().data());
+                pPass->Bind();
+                hasDrawData |= pPass->PostRender();
+            }
         }
 
         return hasDrawData;
@@ -92,8 +103,11 @@ namespace SR_GRAPH_NS {
 
     void GroupPass::Update() {
         for (auto&& pPass : m_passes) {
-            SR_TRACY_ZONE_S(pPass->GetName().data());
-            pPass->Update();
+            if (pPass->HasUpdate()) {
+                SR_TRACY_ZONE_S(pPass->GetName().data());
+                pPass->Bind();
+                pPass->Update();
+            }
         }
 
         BasePass::Update();

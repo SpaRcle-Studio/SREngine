@@ -70,6 +70,8 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD virtual std::string GetGeometryName() const { return std::string(); }
         SR_NODISCARD virtual std::string GetMeshIdentifier() const;
         SR_NODISCARD virtual int64_t GetSortingPriority() const { return 0; }
+        SR_NODISCARD virtual bool HasSortingPriority() const { return false; }
+        SR_NODISCARD virtual SR_UTILS_NS::StringAtom GetMeshLayer() const { return SR_UTILS_NS::StringAtom(); }
 
         SR_NODISCARD std::vector<MaterialProperty>& GetOverrideUniforms() noexcept { return m_overrideUniforms; }
         SR_NODISCARD ShaderPtr GetShader() const;

@@ -30,12 +30,12 @@ namespace SR_HTYPES_NS {
             : mInvoker(new free_function_holder<FunctionT>(f))
         { }
 
-        Function(Function&& function) noexcept {
-            mInvoker = function.mInvoker->clone();
-        }
+        Function(Function&& function) noexcept
+            : mInvoker(std::move(function.mInvoker))
+        { }
 
         Function& operator=(Function&& function) noexcept {
-            mInvoker = function.mInvoker->clone();
+            mInvoker = std::move(function.mInvoker);
             return *this;
         }
 
@@ -43,7 +43,7 @@ namespace SR_HTYPES_NS {
             : mInvoker(new member_function_holder<FunctionType, ArgumentTypes ...>(f))
         { }
 
-        Function(const Function & other)
+        Function(const Function& other)
             : mInvoker(other.mInvoker->clone())
         { }
 
@@ -85,8 +85,8 @@ namespace SR_HTYPES_NS {
                 , mFunction(func)
             { }
 
-            virtual ReturnType invoke(ArgumentTypes ... args) {
-                return mFunction(args ...);
+            virtual ReturnType invoke(ArgumentTypes... args) {
+                return mFunction(args...);
             }
 
             virtual invoker_t clone() {

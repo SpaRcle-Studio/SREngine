@@ -44,6 +44,9 @@ namespace SR_CORE_NS {
             return false;
         }
 
+        auto&& p = new SR_GRAPH_NS::RenderStrategy(nullptr);
+		delete p;
+
         return true;
     }
 

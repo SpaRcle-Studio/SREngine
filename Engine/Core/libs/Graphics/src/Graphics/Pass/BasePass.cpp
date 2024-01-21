@@ -27,7 +27,7 @@ namespace SR_GRAPH_NS {
     bool BasePass::Init() {
         SRAssert2(!m_isInit, "Pass already initialized!");
 
-        m_context = m_technique->GetContext();
+        SetContext(m_technique->GetContext());
         m_camera = m_technique->GetCamera();
 
         m_isInit = true;
@@ -52,11 +52,18 @@ namespace SR_GRAPH_NS {
     void BasePass::SetRenderTechnique(RenderTechnique* pRenderTechnique) {
         SRAssert(pRenderTechnique);
         m_technique = pRenderTechnique;
-        m_pipeline = m_technique ? m_technique->GetPipeline() : nullptr;
+        if (!m_pipeline) {
+            m_pipeline = m_technique ? m_technique->GetPipeline() : nullptr;
+        }
     }
 
-    void BasePass::SetName(const SR_UTILS_NS::StringAtom& name) {
+    void BasePass::SetName(SR_UTILS_NS::StringAtom name) {
         m_name = name;
+    }
+
+    void BasePass::SetContext(BasePass::Context pContext) {
+        m_context = pContext;
+        m_pipeline = m_pipeline ? m_pipeline : m_context->GetPipeline();
     }
 
     void StartPassNode::InitNode() {

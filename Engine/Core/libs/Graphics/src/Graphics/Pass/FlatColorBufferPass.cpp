@@ -32,7 +32,7 @@ namespace SR_GRAPH_NS {
 
         ResetColorIndex();
 
-        m_pipeline->SetCurrentFrameBuffer(m_framebuffer);
+        GetPassPipeline()->SetCurrentFrameBuffer(m_framebuffer);
 
         auto&& pIdentifier = m_uboManager.GetIdentifier();
         m_uboManager.SetIdentifier(this);
@@ -41,7 +41,7 @@ namespace SR_GRAPH_NS {
 
         m_uboManager.SetIdentifier(pIdentifier);
 
-        m_pipeline->SetCurrentFrameBuffer(nullptr);
+        GetPassPipeline()->SetCurrentFrameBuffer(nullptr);
     }
 
     bool FlatColorBufferPass::Render() {

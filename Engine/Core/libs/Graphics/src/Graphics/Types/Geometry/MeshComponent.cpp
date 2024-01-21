@@ -135,4 +135,20 @@ namespace SR_GTYPES_NS {
     void MeshComponent::OnLayerChanged() {
         Component::OnLayerChanged();
     }
+
+    bool MeshComponent::HasSortingPriority() const {
+        if (!m_gameObject) {
+            return false;
+        }
+
+        return m_gameObject->GetTransform()->GetMeasurement() == SR_UTILS_NS::Measurement::Space2D;
+    }
+
+    SR_UTILS_NS::StringAtom MeshComponent::GetMeshLayer() const {
+        if (!m_gameObject) {
+            return SR_UTILS_NS::StringAtom();
+        }
+
+        return m_gameObject->GetLayer();
+    }
 }

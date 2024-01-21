@@ -48,7 +48,7 @@ namespace SR_GRAPH_NS {
                 uboManager.BindUBO(m_virtualUBO);
             }
             else {
-                m_pipeline->ResetDescriptorSet();
+                GetPassPipeline()->ResetDescriptorSet();
                 return false;
             }
 
@@ -66,7 +66,7 @@ namespace SR_GRAPH_NS {
                 m_shader->FlushSamplers();
                 SR_FALLTHROUGH;
             case Memory::UBOManager::BindResult::Success:
-                m_pipeline->Draw(3);
+                GetPassPipeline()->Draw(3);
                 break;
             case Memory::UBOManager::BindResult::Failed:
             default:
@@ -83,7 +83,7 @@ namespace SR_GRAPH_NS {
             return;
         }
 
-        m_pipeline->SetCurrentShader(m_shader);
+        GetPassPipeline()->SetCurrentShader(m_shader);
 
         if (m_shader) {
             m_shader->SetFloat(SHADER_TIME, SR_HTYPES_NS::Time::Instance().FClock());

@@ -38,8 +38,10 @@ namespace SR_GRAPH_NS {
 
     class BasePass : public SR_UTILS_NS::ResourceContainer, public SR_SRLM_NS::IExecutableNode {
     public:
+        using ShaderPtr = SR_GTYPES_NS::Shader*;
+        using MeshPtr = SR_GTYPES_NS::Mesh*;
         using Super = SR_UTILS_NS::ResourceContainer;
-        using CameraPtr = Types::Camera*;
+        using CameraPtr = SR_GTYPES_NS::Camera*;
         using Context = RenderContext*;
         using PipelinePtr = SR_HTYPES_NS::SharedPtr<Pipeline>;
         using RenderScenePtr = SR_HTYPES_NS::SafePtr<RenderScene>;
@@ -53,8 +55,16 @@ namespace SR_GRAPH_NS {
         virtual bool Init();
         virtual void DeInit();
 
+        virtual bool HasPreRender() const noexcept { return true; }
+        virtual bool HasRender() const noexcept { return true; }
+        virtual bool HasPostRender() const noexcept { return true; }
+        virtual bool HasUpdate() const noexcept { return true; }
+
         /// Вызывается всегда и в самом начале
         virtual bool Overlay() { return false; }
+
+        /// Вызывается перед PreRender, Render, PostRender, Update
+        virtual void Bind() { }
 
         /// Вызывается всегда но полсе оверлея
         virtual void Prepare() { }
@@ -78,22 +88,24 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD virtual std::vector<SR_GTYPES_NS::Framebuffer*> GetFrameBuffers() const { return { }; }
 
         virtual void SetRenderTechnique(RenderTechnique* pRenderTechnique);
-        void SetName(const SR_UTILS_NS::StringAtom& name);
+        void SetName(SR_UTILS_NS::StringAtom name);
+        void SetContext(Context pContext);
 
-        SR_NODISCARD RenderScenePtr GetRenderScene() const;
+        SR_NODISCARD virtual RenderScenePtr GetRenderScene() const;
         SR_NODISCARD Context GetContext() const { return m_context; }
-        SR_NODISCARD PipelinePtr GetPipeline() const { return m_pipeline; }
+        SR_NODISCARD PipelinePtr GetPassPipeline() const { return m_pipeline; }
         SR_NODISCARD RenderTechnique* GetTechnique() const { return m_technique; }
         SR_NODISCARD bool IsInit() const { return m_isInit; }
         SR_NODISCARD SR_UTILS_NS::StringAtom GetName() const;
 
     protected:
         CameraPtr m_camera = nullptr;
-        Context m_context = nullptr;
-        PipelinePtr m_pipeline = nullptr;
         Memory::UBOManager& m_uboManager;
 
     private:
+        Context m_context = nullptr;
+        PipelinePtr m_pipeline = nullptr;
+
         SR_UTILS_NS::StringAtom m_name;
 
         RenderTechnique* m_technique = nullptr;
