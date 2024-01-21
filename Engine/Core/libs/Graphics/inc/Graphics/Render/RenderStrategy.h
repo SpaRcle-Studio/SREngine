@@ -57,6 +57,7 @@ namespace SR_GRAPH_NS {
         virtual void UnRegisterMesh(const MeshRegistrationInfo& info) { }
 
         SR_NODISCARD virtual bool IsRendered() const { return m_isRendered; }
+        SR_NODISCARD virtual bool IsEmpty() const { return true; }
 
         SR_NODISCARD RenderContext* GetRenderContext() const;
         SR_NODISCARD RenderScene* GetRenderScene() const;
@@ -88,7 +89,9 @@ namespace SR_GRAPH_NS {
         void Update(ShaderPtr pShader);
 
         bool RegisterMesh(const MeshRegistrationInfo& info) override;
-        //void UnRegisterMesh(const MeshRegistrationInfo& info) override;
+        void UnRegisterMesh(const MeshRegistrationInfo& info) override;
+
+        SR_NODISCARD bool IsEmpty() const override { return m_meshes.empty(); }
 
     private:
         Memory::UBOManager& m_uboManager;
@@ -114,7 +117,9 @@ namespace SR_GRAPH_NS {
         void Update();
 
         bool RegisterMesh(const MeshRegistrationInfo& info) override;
-        //void UnRegisterMesh(const MeshRegistrationInfo& info) override;
+        void UnRegisterMesh(const MeshRegistrationInfo& info) override;
+
+        SR_NODISCARD bool IsEmpty() const override { return m_VBOStages.empty(); }
 
     private:
         SR_NODISCARD bool HasActiveMesh() const;
@@ -145,9 +150,11 @@ namespace SR_GRAPH_NS {
         void Update();
 
         bool RegisterMesh(const MeshRegistrationInfo& info) override;
-        //void UnRegisterMesh(const MeshRegistrationInfo& info) override;
+        void UnRegisterMesh(const MeshRegistrationInfo& info) override;
 
         SR_NODISCARD int64_t GetPriority() const noexcept { return m_priority; }
+
+        SR_NODISCARD bool IsEmpty() const override { return m_shaderStages.empty(); }
 
     private:
         int64_t m_priority = 0;
@@ -176,6 +183,8 @@ namespace SR_GRAPH_NS {
         void UnRegisterMesh(const MeshRegistrationInfo& info) override;
 
         SR_NODISCARD int64_t FindPriorityStageIndex(int64_t priority, bool nearest) const;
+
+        SR_NODISCARD bool IsEmpty() const override { return m_priorityStages.empty() && m_shaderStages.empty(); }
 
     private:
         void InsertPriorityStage(PriorityRenderStage* pStage);
@@ -230,6 +239,7 @@ namespace SR_GRAPH_NS {
 
     private:
         void RegisterMesh(const MeshRegistrationInfo& info);
+        void UnRegisterMesh(const MeshRegistrationInfo& info);
 
     private:
         FilterCallback m_layerFilter;
