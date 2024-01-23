@@ -39,7 +39,6 @@ namespace SR_GRAPH_UI_NS {
             return;
         }
 
-        pMeshComponent->SetIsDebugMesh(true);
         pMeshComponent->SetDontSave(true);
 
         if (operation & GizmoOperation::X) {

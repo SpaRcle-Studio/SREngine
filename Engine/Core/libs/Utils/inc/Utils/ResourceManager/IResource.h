@@ -131,6 +131,9 @@ namespace SR_UTILS_NS {
 
         std::list<SR_HTYPES_NS::SharedPtr<FileWatcher>> m_watchers;
 
+        std::list<SR_UTILS_NS::StringAtom> m_debugUseStackTraces;
+        std::list<SR_UTILS_NS::StringAtom> m_debugUnUseStackTraces;
+
     private:
         ResourceInfoWeakPtr m_resourceInfo;
 

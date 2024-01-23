@@ -61,6 +61,7 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD ShaderProperties GetProperties();
         SR_NODISCARD bool IsBlendEnabled() const;
         SR_NODISCARD bool IsAvailable() const;
+        SR_NODISCARD bool IsSamplersValid() const;
         SR_NODISCARD SR_SRSL_NS::ShaderType GetType() const noexcept;
 
     public:

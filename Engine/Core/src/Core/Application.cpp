@@ -44,9 +44,6 @@ namespace SR_CORE_NS {
             return false;
         }
 
-        auto&& p = new SR_GRAPH_NS::RenderStrategy(nullptr);
-		delete p;
-
         return true;
     }
 
@@ -134,6 +131,10 @@ namespace SR_CORE_NS {
         }
 
         SR_UTILS_NS::ResourceManager::Instance().Init(m_resourcesPath);
+
+        if (SR_UTILS_NS::Features::Instance().Enabled("ResourceUsePointStackTraceProfiling", false)) {
+            SR_UTILS_NS::ResourceManager::Instance().EnableStackTraceProfiling();
+        }
 
         if (!SR_UTILS_NS::ResourceManager::Instance().Run()) {
             SR_ERROR("Application::Init() : failed to initialize resources manager!");

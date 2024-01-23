@@ -10,7 +10,7 @@
 #include <Utils/Types/SafePointer.h>
 #include <Utils/Types/Function.h>
 
-#include <Graphics/Utils/MeshTypes.h>
+#include <Graphics/Utils/MeshUtils.h>
 #include <Graphics/Memory/IGraphicsResource.h>
 #include <Graphics/Memory/UBOManager.h>
 #include <Graphics/Loaders/ShaderProperties.h>
@@ -60,7 +60,6 @@ namespace SR_GTYPES_NS {
 
         SR_NODISCARD virtual bool IsCalculatable() const;
         SR_NODISCARD virtual bool IsUniqueMesh() const { return false; }
-        SR_NODISCARD virtual bool IsMeshDestroyed() const { return m_isMeshDestroyed; }
 
         SR_NODISCARD virtual SR_FORCE_INLINE bool IsMeshActive() const noexcept { return !m_hasErrors; }
         SR_NODISCARD virtual SR_FORCE_INLINE bool IsFlatMesh() const noexcept { return false; }
@@ -78,11 +77,14 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD MaterialPtr GetMaterial() const { return m_material; }
         SR_NODISCARD int32_t GetVirtualUBO() const { return m_virtualUBO; }
         SR_NODISCARD MeshType GetMeshType() const noexcept { return m_meshType; }
-        SR_NODISCARD bool IsDebugMesh() const noexcept { return m_isDebugMesh; }
+        SR_NODISCARD bool IsMeshRegistered() const noexcept { return m_registrationInfo.has_value(); }
+        SR_NODISCARD const MeshRegistrationInfo& GetMeshRegistrationInfo() const noexcept { return m_registrationInfo.value(); }
 
-        virtual void OnResourceReloaded(SR_UTILS_NS::IResource* pResource);
+        void SetMeshRegistrationInfo(const std::optional<MeshRegistrationInfo>& info) { m_registrationInfo = info; }
+
+        virtual bool OnResourceReloaded(SR_UTILS_NS::IResource* pResource);
         virtual void SetGeometryName(const std::string& name) { }
-        virtual void BindMesh();
+        virtual bool BindMesh();
 
         virtual void Draw() = 0;
 
@@ -90,22 +92,17 @@ namespace SR_GTYPES_NS {
         virtual void UseModelMatrix() { }
         virtual void UseSamplers();
 
-        virtual void FreeMesh() { delete this; }
-
-        void FreeVideoMemory() override;
-
-        /// Если меш был зарегистрирован, то помечает его на уничтожение
-        /// Если меш не зарегистрировали, удаляет экземпляр
-        void MarkMeshDestroyed();
+        bool UnRegisterMesh();
+        void ReRegisterMesh();
 
         void MarkMaterialDirty();
 
         void SetMaterial(Material* material);
         void SetMaterial(const SR_UTILS_NS::Path& path);
 
-        void SetIsDebugMesh(bool value) { m_isDebugMesh = value; }
-
     protected:
+        void FreeVideoMemory() override;
+
         virtual bool Calculate();
 
     protected:
@@ -115,17 +112,16 @@ namespace SR_GTYPES_NS {
 
         MaterialPtr m_material = nullptr;
 
-        /// Задавать до добавления в рендерер
-        bool m_isDebugMesh = false;
-
         std::atomic<bool> m_hasErrors = false;
         std::atomic<bool> m_dirtyMaterial = false;
-        std::atomic<bool> m_isMeshDestroyed = false;
 
         int32_t m_virtualUBO = SR_ID_INVALID;
 
         std::vector<MaterialProperty> m_overrideUniforms;
         std::vector<MaterialProperty> m_overrideConstant;
+
+    private:
+        std::optional<MeshRegistrationInfo> m_registrationInfo;
 
     };
 }

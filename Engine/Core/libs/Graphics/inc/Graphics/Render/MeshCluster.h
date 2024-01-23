@@ -89,7 +89,9 @@ namespace SR_GRAPH_NS {
 
     public:
         MeshCluster();
-        ~MeshCluster() override = default;
+        ~MeshCluster() override {
+            SRAssert(m_subClusters.empty());
+        }
 
     public:
         Iterator erase(const Iterator& iterator) {

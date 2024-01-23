@@ -41,6 +41,9 @@ namespace SR_GRAPH_NS::Types {
 
         if (!m_isRegistered && pContext.LockIfValid()) {
             for (auto&& [hashName, sampler] : m_samplers) {
+                if (sampler.isAttachment || sampler.isArray) {
+                    continue;
+                }
                 sampler.samplerId = pContext->GetDefaultTexture()->GetId();
             }
             pContext->Register(this);
@@ -222,17 +225,18 @@ namespace SR_GRAPH_NS::Types {
         SetSampler(hashId, sampler);
     }
 
-    void Shader::SetSampler2D(uint64_t hashId, Types::Texture *sampler) noexcept {
+    void Shader::SetSampler2D(uint64_t hashId, SR_GTYPES_NS::Texture *sampler) noexcept {
         if (!IsLoaded() || m_samplers.count(hashId) == 0) {
             return;
         }
 
         if (!sampler) {
+            SRHalt("The sampler is nullptr!");
             sampler = GetRenderContext()->GetNoneTexture();
         }
 
         if (!sampler) {
-            SRHalt("The sampler is nullptr!");
+            SRHalt("The default sampler is nullptr!");
             return;
         }
 
@@ -386,6 +390,7 @@ namespace SR_GRAPH_NS::Types {
         for (auto&& [name, sampler] : pShader->GetSamplers()) {
             m_samplers[name.GetHash()].binding = sampler.binding;
             m_samplers[name.GetHash()].isAttachment = sampler.attachment >= 0;
+            m_samplers[name.GetHash()].isArray = sampler.type.Contains("Array");
 
             const ShaderVarType varType = SR_SRSL_NS::SRSLTypeInfo::Instance().StringToType(sampler.type);
 
@@ -467,5 +472,15 @@ namespace SR_GRAPH_NS::Types {
 
             m_watchers.emplace_back(pWatch);
         }
+    }
+
+    bool Shader::IsSamplersValid() const {
+        for (auto&& [hashName, samplerInfo] : m_samplers) {
+            if (!m_pipeline->IsSamplerValid(samplerInfo.samplerId)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

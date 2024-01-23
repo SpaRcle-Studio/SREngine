@@ -163,12 +163,19 @@ void GetStacktraceImpl() {
 }
 
 namespace SR_UTILS_NS {
-    void DisableStacktrace() {
+    static bool g_stackStraceEnabled = true;
 
+    void DisableStacktrace() {
+        g_stackStraceEnabled = false;
     }
 
     std::string GetStacktrace() {
+        if (!g_stackStraceEnabled) {
+            return std::string();
+        }
+        builder = std::ostringstream();
         GetStacktraceImpl();
-        return builder.str();
+        std::string str = builder.str();
+        return str;
     }
 }

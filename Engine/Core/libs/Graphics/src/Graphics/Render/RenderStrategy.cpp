@@ -10,109 +10,11 @@ namespace SR_GRAPH_NS {
     RenderStrategy::RenderStrategy(RenderScene* pRenderScene)
         : Super()
         , m_renderScene(pRenderScene)
-    {
-        MeshRegistrationInfo info;
-
-        /*info.priority = 10;
-        RegisterMesh(info);
-
-        info.priority = 20;
-        RegisterMesh(info);
-
-        info.priority = 15;
-        RegisterMesh(info);*/
-
-        info.priority = 20;
-        RegisterMesh(info);
-
-        auto&& layer1 = m_layers[""];
-
-        info.priority = 30;
-        RegisterMesh(info);
-
-        info.priority = -24;
-        RegisterMesh(info);
-
-        info.priority = 10;
-        RegisterMesh(info);
-
-        info.priority = 40;
-        RegisterMesh(info);
-
-        info.priority = 5;
-        RegisterMesh(info);
-
-        info.priority = 15;
-        RegisterMesh(info);
-
-        info.priority = 25;
-        RegisterMesh(info);
-
-        info.priority = 1;
-        RegisterMesh(info);
-
-        info.priority = 11;
-        RegisterMesh(info);
-
-        info.priority = 17;
-        RegisterMesh(info);
-
-        info.priority = -145;
-        RegisterMesh(info);
-
-        info.priority = 27;
-        RegisterMesh(info);
-
-        info.priority = -21;
-        RegisterMesh(info);
-
-        info.priority = 60;
-        RegisterMesh(info);
-
-        info.priority = 50;
-        RegisterMesh(info);
-
-        info.priority = -10;
-        RegisterMesh(info);
-
-        info.priority = 51;
-        RegisterMesh(info);
-
-        info.priority = 52;
-        RegisterMesh(info);
-
-        info.priority = 49;
-        RegisterMesh(info);
-
-        info.priority = 46;
-        RegisterMesh(info);
-
-        info.priority = -1;
-        RegisterMesh(info);
-
-        info.priority = -6;
-        RegisterMesh(info);
-
-        ///
-
-        info.priority = 60;
-        UnRegisterMesh(info);
-
-        info.priority = 11;
-        UnRegisterMesh(info);
-
-        info.priority = -145;
-        UnRegisterMesh(info);
-
-        auto&& layer = m_layers[""];
-    }
+    { }
 
     RenderStrategy::~RenderStrategy() {
-        SRAssert(m_meshes.empty());
-        for (auto&& [layer, pStage] : m_layers) {
-            delete pStage;
-        }
-        m_layers.clear();
+        SRAssert(m_layers.empty());
+        SRAssert(m_meshCount == 0);
     }
 
     RenderContext* RenderStrategy::GetRenderContext() const {
@@ -121,6 +23,8 @@ namespace SR_GRAPH_NS {
 
     bool RenderStrategy::Render() {
         SR_TRACY_ZONE;
+
+        m_errors.clear();
 
         bool isRendered = false;
 
@@ -140,14 +44,22 @@ namespace SR_GRAPH_NS {
             }
         }
 
+        GetRenderContext()->GetPipeline()->ResetLastShader();
+
         return isRendered;
     }
 
     void RenderStrategy::Update() {
         SR_TRACY_ZONE;
 
+        SR_MAYBE_UNUSED auto&& guard = SR_UTILS_NS::LayerManager::Instance().ScopeLockSingleton();
+
         for (auto&& [layer, pStage] : m_layers) {
             SR_TRACY_ZONE_S(layer.c_str());
+
+            if (!SR_UTILS_NS::LayerManager::Instance().HasLayer(layer)) {
+                SetError(SR_FORMAT("Layer \"{}\" is not registered!", layer.c_str()));
+            }
 
             if (m_layerFilter && !m_layerFilter(layer)) {
                 continue;
@@ -160,7 +72,10 @@ namespace SR_GRAPH_NS {
     void RenderStrategy::RegisterMesh(SR_GTYPES_NS::Mesh* pMesh) {
         SR_TRACY_ZONE;
 
-        SRAssert2(m_meshes.count(pMesh) == 0, "Double mesh registration!");
+        if (pMesh->IsMeshRegistered()) {
+            SRHalt("Double mesh registration!");
+            return;
+        }
 
         MeshRegistrationInfo info;
 
@@ -168,6 +83,7 @@ namespace SR_GRAPH_NS {
         info.pShader = pMesh->GetShader();
         info.layer = pMesh->GetMeshLayer();
         info.VBO = pMesh->GetVBO();
+        info.pScene = GetRenderScene();
 
         if (pMesh->HasSortingPriority()) {
             info.priority = pMesh->GetSortingPriority();
@@ -177,24 +93,17 @@ namespace SR_GRAPH_NS {
         }
 
         RegisterMesh(info);
-
-        m_meshes[info.pMesh] = info;
     }
 
     void RenderStrategy::UnRegisterMesh(SR_GTYPES_NS::Mesh* pMesh) {
         SR_TRACY_ZONE;
 
-        auto&& pIt = m_meshes.find(pMesh);
-        if (pIt == m_meshes.end()) {
-            SRHalt("Mesh not found!");
+        if (!pMesh->IsMeshRegistered()) {
+            SRHalt("Mesh is not registered!");
             return;
         }
 
-        MeshRegistrationInfo& info = pIt->second;
-
-        UnRegisterMesh(info);
-
-        m_meshes.erase(pIt);
+        UnRegisterMesh(pMesh->GetMeshRegistrationInfo());
     }
 
     bool RenderStrategy::IsPriorityAllowed(int64_t priority) const {
@@ -253,6 +162,9 @@ namespace SR_GRAPH_NS {
             }
             m_layers[info.layer] = pLayerStage;
         }
+
+        info.pMesh->SetMeshRegistrationInfo(info);
+        ++m_meshCount;
     }
 
     void RenderStrategy::UnRegisterMesh(const MeshRegistrationInfo& info) {
@@ -265,6 +177,35 @@ namespace SR_GRAPH_NS {
         }
         else {
             SRHalt("Layer \"{}\" not found!", info.layer.c_str());
+        }
+
+        info.pMesh->SetMeshRegistrationInfo(std::nullopt);
+
+        SRAssert(m_meshCount != 0);
+        --m_meshCount;
+    }
+
+    void RenderStrategy::ForEachMesh(const SR_HTYPES_NS::Function<void(MeshPtr)>& callback) const {
+        SR_TRACY_ZONE;
+
+        for (auto&& [layer, pStage] : m_layers) {
+            pStage->ForEachMesh(callback);
+        }
+    }
+
+    void RenderStrategy::OnResourceReloaded(SR_UTILS_NS::IResource* pResource) const {
+        SR_TRACY_ZONE;
+
+        std::list<MeshPtr> meshesToReRegister;
+
+        ForEachMesh([pResource, &meshesToReRegister](auto&& pMesh) {
+            if (pMesh->OnResourceReloaded(pResource)) {
+                meshesToReRegister.emplace_back(pMesh);
+            }
+        });
+
+        for (auto&& pMesh : meshesToReRegister) {
+            pMesh->ReRegisterMesh();
         }
     }
 
@@ -281,8 +222,8 @@ namespace SR_GRAPH_NS {
             }
         }
 
-        for (auto&& pStage : m_priorityStages) {
-            m_isRendered |= pStage->Render();
+        for (auto&& [pShader, pShaderStage] : m_shaderStages) {
+            m_isRendered |= pShaderStage->Render();
         }
 
         return IsRendered();
@@ -329,7 +270,7 @@ namespace SR_GRAPH_NS {
             return pIt->second->RegisterMesh(info);
         }
         else {
-            auto&& pStage = new ShaderRenderStage(m_renderStrategy);
+            auto&& pStage = new ShaderRenderStage(m_renderStrategy, info.pShader);
             if (!pStage->RegisterMesh(info)) {
                 delete pStage;
                 return false;
@@ -433,6 +374,16 @@ namespace SR_GRAPH_NS {
         m_priorityStages[index] = pStage;
     }
 
+    void LayerRenderStage::ForEachMesh(const SR_HTYPES_NS::Function<void(MeshPtr)>& callback) const {
+        for (auto&& pStage : m_priorityStages) {
+            pStage->ForEachMesh(callback);
+        }
+
+        for (auto&& [pShader, pStage] : m_shaderStages) {
+            pStage->ForEachMesh(callback);
+        }
+    }
+
     /// ----------------------------------------------------------------------------------------------------------------
 
     bool PriorityRenderStage::Render() {
@@ -466,7 +417,7 @@ namespace SR_GRAPH_NS {
             return pIt->second->RegisterMesh(info);
         }
         else {
-            auto&& pStage = new ShaderRenderStage(m_renderStrategy);
+            auto&& pStage = new ShaderRenderStage(m_renderStrategy, info.pShader);
             if (!pStage->RegisterMesh(info)) {
                 delete pStage;
                 return false;
@@ -490,24 +441,61 @@ namespace SR_GRAPH_NS {
         }
     }
 
+    void PriorityRenderStage::ForEachMesh(const SR_HTYPES_NS::Function<void(MeshPtr)>& callback) const {
+        for (auto&& [pShader, pStage] : m_shaderStages) {
+            pStage->ForEachMesh(callback);
+        }
+    }
+
     /// ----------------------------------------------------------------------------------------------------------------
+
+    ShaderRenderStage::ShaderRenderStage(RenderStrategy* pRenderStrategy, SR_GTYPES_NS::Shader* pShader)
+        : Super(pRenderStrategy)
+        , m_shader(pShader)
+    {
+        if (m_shader) {
+            m_shader->AddUsePoint();
+        }
+    }
+
+    ShaderRenderStage::~ShaderRenderStage() {
+        SRAssert(m_VBOStages.empty());
+        if (m_shader) {
+            m_shader->RemoveUsePoint();
+        }
+    }
 
     bool ShaderRenderStage::Render() {
         SR_TRACY_ZONE;
 
         m_isRendered = false;
 
+        if (!IsValid()) {
+            m_renderStrategy->SetError("Shader is nullptr!");
+            return false;
+        }
+
         auto&& pShader = m_renderStrategy->ReplaceShader(m_shader);
         if (!pShader || !HasActiveMesh()) {
             return false;
         }
 
+        SR_TRACY_TEXT_N("Shader", pShader->GetResourcePath().ToStringRef());
+
         if (pShader->Use() == ShaderBindResult::Failed) {
             return false;
         }
 
-        m_renderStrategy->UseConstants(pShader);
-        m_renderStrategy->UseSamplers(pShader);
+        if (GetRenderContext()->GetPipeline()->IsShaderChanged()) {
+            m_renderStrategy->UseConstants(pShader);
+            m_renderStrategy->UseSamplers(pShader);
+        }
+
+        if (!pShader->IsSamplersValid()) {
+            m_renderStrategy->SetError("Shader samplers is not valid!");
+            pShader->UnUse();
+            return false;
+        }
 
         for (auto&& [VBO, pStage] : m_VBOStages) {
             m_isRendered |= pStage->Render();
@@ -533,6 +521,8 @@ namespace SR_GRAPH_NS {
         if (!pShader || !pShader->Ready() || !pShader->IsAvailable()) {
             return;
         }
+
+        SR_TRACY_TEXT_N("Shader", pShader->GetResourcePath().ToStringRef());
 
         GetRenderContext()->SetCurrentShader(pShader);
 
@@ -569,7 +559,7 @@ namespace SR_GRAPH_NS {
             return pIt->second->RegisterMesh(info);
         }
         else {
-            auto&& pStage = new VBORenderStage(m_renderStrategy);
+            auto&& pStage = new VBORenderStage(m_renderStrategy, info.VBO);
             if (!pStage->RegisterMesh(info)) {
                 delete pStage;
                 return false;
@@ -593,6 +583,12 @@ namespace SR_GRAPH_NS {
         }
     }
 
+    void ShaderRenderStage::ForEachMesh(const SR_HTYPES_NS::Function<void(MeshPtr)>& callback) const {
+        for (auto&& [VBO, pStage] : m_VBOStages) {
+            pStage->ForEachMesh(callback);
+        }
+    }
+
     /// ----------------------------------------------------------------------------------------------------------------
 
     RenderContext* IRenderStage::GetRenderContext() const {
@@ -605,9 +601,10 @@ namespace SR_GRAPH_NS {
 
     /// ----------------------------------------------------------------------------------------------------------------
 
-    VBORenderStage::VBORenderStage(RenderStrategy* pRenderStrategy)
+    VBORenderStage::VBORenderStage(RenderStrategy* pRenderStrategy, int32_t VBO)
         : Super(pRenderStrategy)
         , m_uboManager(SR_GRAPH_NS::Memory::UBOManager::Instance())
+        , m_VBO(VBO)
     {
         m_meshes.reserve(64);
     }
@@ -627,8 +624,17 @@ namespace SR_GRAPH_NS {
     bool VBORenderStage::Render() {
         SR_TRACY_ZONE;
 
+        m_isRendered = false;
+
+        if (!IsValid()) {
+            m_renderStrategy->SetError("VBO is not valid!");
+            return false;
+        }
+
         if ((m_isRendered = !m_meshes.empty())) {
-            m_meshes[0]->BindMesh();
+            if (!m_meshes[0]->BindMesh()) {
+                return false;
+            }
         }
 
         for (auto&& pMesh : m_meshes) {
@@ -640,6 +646,10 @@ namespace SR_GRAPH_NS {
 
     void VBORenderStage::Update(ShaderPtr pShader) {
         SR_TRACY_ZONE;
+
+        if (!IsRendered()) {
+            return;
+        }
 
         for (auto&& pMesh : m_meshes) {
             if (!pMesh->IsMeshActive()) {
@@ -674,5 +684,14 @@ namespace SR_GRAPH_NS {
         }
 
         SRHalt("VBO {} not found!", info.VBO);
+    }
+
+    void VBORenderStage::ForEachMesh(const SR_HTYPES_NS::Function<void(MeshPtr)>& callback) const {
+        for (auto&& pMesh : m_meshes) {
+            if (!pMesh) {
+                continue;
+            }
+            callback(pMesh);
+        }
     }
 }

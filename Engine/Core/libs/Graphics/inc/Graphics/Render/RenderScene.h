@@ -30,6 +30,7 @@ namespace SR_GTYPES_NS {
 }
 
 namespace SR_GRAPH_NS {
+    class RenderStrategy;
     class LightSystem;
     class Window;
     class RenderContext;
@@ -77,6 +78,7 @@ namespace SR_GRAPH_NS {
 
         void Remove(const CameraPtr& pCamera);
         void Remove(WidgetManagerPtr pWidgetManager);
+        void Remove(MeshPtr pMesh);
 
         void SetOverlayEnabled(bool enabled);
         void SetCurrentSkeleton(SR_ANIMATIONS_NS::Skeleton* pSkeleton) { m_currentSkeleton = pSkeleton;}
@@ -98,6 +100,7 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD FlatMeshCluster& GetFlatCluster() { return m_flat; }
         SR_NODISCARD CameraPtr GetMainCamera() const;
         SR_NODISCARD DebugRenderer* GetDebugRenderer() const;
+        SR_NODISCARD RenderStrategy* GetRenderStrategy() const { return m_renderStrategy.Get(); }
         SR_NODISCARD CameraPtr GetFirstOffScreenCamera() const;
         SR_NODISCARD SR_MATH_NS::UVector2 GetSurfaceSize() const;
 
@@ -116,6 +119,8 @@ namespace SR_GRAPH_NS {
         void Submit() noexcept;
 
     private:
+        SR_HTYPES_NS::SharedPtr<RenderStrategy> m_renderStrategy;
+
         SR_ANIMATIONS_NS::Skeleton* m_currentSkeleton = nullptr;
 
         LightSystem* m_lightSystem = nullptr;

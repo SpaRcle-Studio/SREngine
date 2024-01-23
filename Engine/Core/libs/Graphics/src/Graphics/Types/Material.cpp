@@ -23,13 +23,11 @@ namespace SR_GTYPES_NS {
     }
 
     void Material::Use() {
+        SR_TRACY_ZONE;
+
         InitContext();
 
-        m_properties.ForEachProperty<MaterialProperty>([this](auto&& pProperty){
-            if (!pProperty->IsSampler()) {
-                pProperty->Use(m_shader);
-            }
-        });
+        m_properties.UseMaterialUniforms(m_shader);
     }
 
     SR_UTILS_NS::IResource* Material::CopyResource(SR_UTILS_NS::IResource* destination) const {
@@ -133,11 +131,7 @@ namespace SR_GTYPES_NS {
             return;
         }
 
-        m_properties.ForEachProperty<MaterialProperty>([this](auto&& pProperty){
-            if (pProperty->IsSampler()) {
-                pProperty->Use(m_shader);
-            }
-        });
+        m_properties.UseMaterialSamplers(m_shader);
     }
 
     bool Material::LoadProperties(const SR_XML_NS::Node &propertiesNode) {
@@ -150,9 +144,8 @@ namespace SR_GTYPES_NS {
 
         /// Загружаем базовые значения
         for (auto&& [id, propertyType] : m_shader->GetProperties()) {
-            m_properties.AddCustomProperty<MaterialProperty>(id.c_str())
+            m_properties.AddCustomProperty<MaterialProperty>(id.c_str(), propertyType)
                 .SetData(GetVariantFromShaderVarType(propertyType))
-                .SetShaderVarType(propertyType)
                 .SetMaterial(this)
                 .SetDisplayName(id); // TODO: make a pretty name
         }

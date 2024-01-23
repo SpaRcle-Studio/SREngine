@@ -24,7 +24,7 @@ namespace SR_CORE_NS::GUI {
         void WidgetsPage();
         void VideoMemoryPage();
         void SubmitQueuePage();
-        void FlatClusterPage();
+        void RenderStrategyPage();
 
         void DrawSubmitInfo(const EvoVulkan::SubmitInfo& submitInfo);
 

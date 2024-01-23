@@ -26,10 +26,7 @@ namespace SR_GTYPES_NS {
         void OnDestroy() override;
         void OnMatrixDirty() override;
 
-        void OnBeforeLayerChanged() override;
         void OnLayerChanged() override;
-
-        void FreeMesh() override;
 
         SR_NODISCARD bool ExecuteInEditMode() const override;
         SR_NODISCARD bool IsUpdatable() const noexcept override { return false; }
@@ -58,6 +55,7 @@ namespace SR_GTYPES_NS {
         }
 
     protected:
+        /// TODO: remove it 
         std::string m_geometryName;
 
         SR_MATH_NS::Matrix4x4 m_modelMatrix = SR_MATH_NS::Matrix4x4::Identity();

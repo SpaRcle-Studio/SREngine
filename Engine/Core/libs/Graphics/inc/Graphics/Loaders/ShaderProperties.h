@@ -60,10 +60,15 @@ namespace SR_GRAPH_NS {
           Skeleton128
     )
 
-    class MaterialProperty : public SR_UTILS_NS::Property {
+    class MaterialProperty final : public SR_UTILS_NS::Property {
         SR_REGISTER_TYPE_TRAITS_PROPERTY(MaterialProperty, 1001)
     public:
         MaterialProperty() = default;
+
+        explicit MaterialProperty(ShaderVarType type)
+            : SR_UTILS_NS::Property()
+            , m_type(type)
+        { }
 
         MaterialProperty(MaterialProperty&& other) noexcept
             : m_material(SR_EXCHANGE(other.m_material, nullptr))
@@ -95,7 +100,7 @@ namespace SR_GRAPH_NS {
         MaterialProperty& SetMaterial(SR_GTYPES_NS::Material* value) noexcept { m_material = value; return *this; }
         MaterialProperty& SetPushConstant(bool value) noexcept { m_pushConstant = value; return *this; }
 
-        void Use(SR_GTYPES_NS::Shader* pShader) const;
+        void Use(SR_GTYPES_NS::Shader* pShader) const noexcept;
 
     private:
         SR_GTYPES_NS::Material* m_material = nullptr;
@@ -106,12 +111,48 @@ namespace SR_GRAPH_NS {
 
     };
 
-    typedef SR_UTILS_NS::PropertyContainer MaterialProperties;
+    class MaterialProperties : public SR_UTILS_NS::PropertyContainer {
+    public:
+        void ClearContainer() override {
+            m_materialSamplerProperties.clear();
+            m_materialUniformsProperties.clear();
+        }
+
+        void OnPropertyAdded(SR_UTILS_NS::Property* pProperty) override {
+            if (auto&& pMaterialProperty = dynamic_cast<MaterialProperty*>(pProperty)) {
+                if (pMaterialProperty->IsSampler()) {
+                    m_materialSamplerProperties.emplace_back(pMaterialProperty);
+                }
+                else {
+                    m_materialUniformsProperties.emplace_back(pMaterialProperty);
+                }
+            }
+        }
+
+        void UseMaterialSamplers(SR_GTYPES_NS::Shader* pShader) {
+            for (auto&& pProperty : m_materialSamplerProperties) {
+                pProperty->Use(pShader);
+            }
+        }
+
+        void UseMaterialUniforms(SR_GTYPES_NS::Shader* pShader) {
+            for (auto&& pProperty : m_materialUniformsProperties) {
+                pProperty->Use(pShader);
+            }
+        }
+
+    private:
+        std::vector<MaterialProperty*> m_materialSamplerProperties;
+        std::vector<MaterialProperty*> m_materialUniformsProperties;
+
+    };
+
     typedef std::list<std::pair<std::string, ShaderVarType>> ShaderProperties;
 
     struct ShaderSampler {
         uint32_t binding = SR_ID_INVALID;
         uint32_t samplerId = SR_ID_INVALID;
+        bool isArray = false;
         bool isAttachment = false;
     };
     typedef std::map<uint64_t, ShaderSampler> ShaderSamplers;

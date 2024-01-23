@@ -123,7 +123,7 @@ namespace SR_GRAPH_NS::Types {
             m_material->AddUsePoint();
         }
 
-        MarkPipelineUnBuild();
+        ReRegisterMesh();
     }
 
     Mesh::ShaderPtr Mesh::GetShader() const {
@@ -142,14 +142,22 @@ namespace SR_GRAPH_NS::Types {
         }
     }
 
-    void Mesh::BindMesh() {
+    bool Mesh::BindMesh() {
         if (auto&& VBO = GetVBO(); VBO != SR_ID_INVALID) {
             m_pipeline->BindVBO(VBO);
+        }
+        else {
+            return false;
         }
 
         if (auto&& IBO = GetIBO(); IBO != SR_ID_INVALID) {
             m_pipeline->BindIBO(IBO);
         }
+        else {
+            return false;
+        }
+
+        return true;
     }
 
     const SR_MATH_NS::Matrix4x4& Mesh::GetModelMatrix() const {
@@ -174,38 +182,28 @@ namespace SR_GRAPH_NS::Types {
         return empty;
     }
 
-    void Mesh::MarkMeshDestroyed() {
-        SRAssert(!m_isMeshDestroyed);
+    bool Mesh::OnResourceReloaded(SR_UTILS_NS::IResource* pResource) {
+        if (m_material) {
+            if (pResource == m_material) {
+                m_dirtyMaterial = true;
+                m_hasErrors = false;
+                return true;
+            }
 
-        m_isMeshDestroyed = true;
+            if (m_material->GetShader() == pResource) {
+                m_dirtyMaterial = true;
+                m_hasErrors = false;
+                return true;
+            }
 
-        if (!IsGraphicsResourceRegistered()) {
-            delete this;
+            auto&& pTexture = dynamic_cast<SR_GTYPES_NS::Texture*>(pResource);
+            if (pTexture && m_material->ContainsTexture(pTexture)) {
+                m_dirtyMaterial = true;
+                m_hasErrors = false;
+                return true;
+            }
         }
-    }
-
-    void Mesh::OnResourceReloaded(SR_UTILS_NS::IResource* pResource) {
-        if (!m_material) {
-            return;
-        }
-
-        if (pResource == m_material) {
-            m_dirtyMaterial = true;
-            m_hasErrors = false;
-            return;
-        }
-
-        if (m_material->GetShader() == pResource) {
-            m_dirtyMaterial = true;
-            m_hasErrors = false;
-            return;
-        }
-
-        auto&& pTexture = dynamic_cast<SR_GTYPES_NS::Texture*>(pResource);
-        if (pTexture && m_material->ContainsTexture(pTexture)) {
-            m_dirtyMaterial = true;
-            m_hasErrors = false;
-        }
+        return false;
     }
 
     void Mesh::MarkMaterialDirty() {
@@ -248,6 +246,40 @@ namespace SR_GRAPH_NS::Types {
             return Load(path, type, pRawMesh->GetMeshId(name));
         }
         return nullptr;
+    }
+
+    bool Mesh::UnRegisterMesh() {
+        const bool isRegistered = IsMeshRegistered();
+
+        if (isRegistered) {
+            m_registrationInfo.value().pScene->Remove(this);
+
+            if (IsCalculated()) {
+                FreeVideoMemory();
+                DeInitGraphicsResource();
+            }
+        }
+        else {
+            SRAssert(!IsCalculated());
+        }
+
+        if (auto&& pRenderComponent = dynamic_cast<IRenderComponent*>(this)) {
+            pRenderComponent->AutoFree();
+        }
+        else {
+            delete this;
+        }
+
+        return isRegistered;
+    }
+
+    void Mesh::ReRegisterMesh() {
+        if (m_registrationInfo.has_value()) {
+            auto pRenderScene = m_registrationInfo.value().pScene;
+            pRenderScene->Remove(this);
+            pRenderScene->Register(this);
+            MarkPipelineUnBuild();
+        }
     }
 }
 

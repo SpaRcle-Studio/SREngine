@@ -96,7 +96,8 @@ namespace SR_HTYPES_NS {
         }
         SR_NODISCARD SR_FORCE_INLINE bool Valid() const noexcept { return m_data && m_data->valid; }
 
-        bool AutoFree(const SR_HTYPES_NS::Function<void(T *ptr)> &freeFun);
+        bool AutoFree(const SR_HTYPES_NS::Function<void(T *ptr)>& freeFun);
+        bool AutoFree();
 
         /// Оставляем методы для совместимости с SafePtr
         void Replace(const SharedPtr &ptr);
@@ -207,6 +208,13 @@ namespace SR_HTYPES_NS {
         return ptrCopy.Valid() ? ptrCopy.FreeImpl(freeFun) : false;
     }
 
+    template<typename T> bool SharedPtr<T>::AutoFree() {
+        SharedPtr<T> ptrCopy = SharedPtr<T>(*this);
+        /// после вызова FreeImpl this может потенциально инвалидироваться!
+
+        return ptrCopy.Valid() ? ptrCopy.FreeImpl([](auto&& pData) { delete pData; }) : false;
+    }
+
     template<typename T> bool SharedPtr<T>::FreeImpl(const SR_HTYPES_NS::Function<void(T *ptr)> &freeFun) {
         if (m_data && m_data->valid) {
             freeFun(m_ptr);
@@ -249,6 +257,8 @@ namespace SR_HTYPES_NS {
         }
 
         if (pData->strongCount <= 1) {
+            pData->strongCount = 0;
+
             if (pData->policy == SharedPtrPolicy::Manually) {
                 SR_SAFE_PTR_ASSERT(!pData->valid, "Ptr was not freed!");
                 delete pData;

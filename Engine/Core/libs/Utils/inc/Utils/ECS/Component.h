@@ -55,7 +55,7 @@ namespace SR_UTILS_NS {
 
     public:
         virtual void OnMatrixDirty() { }
-        virtual void OnPriorityDirty() { }
+        virtual void OnPriorityChanged() { }
         virtual void OnTransformSet() { }
 
         /// Вызывается при загрузке компонента на игровой объект

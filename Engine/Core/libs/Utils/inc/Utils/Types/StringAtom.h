@@ -23,6 +23,7 @@ namespace SR_UTILS_NS {
         StringAtom(StringHashInfo* pInfo); /// NOLINT
         StringAtom(const char* str); /// NOLINT
         StringAtom(const std::string& str); /// NOLINT
+        StringAtom(const std::string_view& str); /// NOLINT
 
     public:
         operator std::string() const noexcept; /// NOLINT
@@ -38,6 +39,7 @@ namespace SR_UTILS_NS {
     public:
         SR_NODISCARD uint64_t Size() const;
         SR_NODISCARD uint64_t size() const;
+        SR_NODISCARD bool Contains(const char* str) const;
         SR_NODISCARD bool Empty() const;
         SR_NODISCARD bool empty() const;
         SR_NODISCARD uint64_t GetHash() const;

@@ -572,4 +572,14 @@ namespace SR_UTILS_NS {
         SR_LOCK_GUARD;
         m_dirtyResources.push(pResource->GetResourceInfo());
     }
+
+    void ResourceManager::EnableStackTraceProfiling() {
+        if (m_usePointStackTraceProfiling) {
+            return;
+        }
+
+        SR_WARN("ResourceManager::EnableStackTraceProfiling() : profiling was enabled! ONLY FOR DEV!");
+
+        m_usePointStackTraceProfiling = true;
+    }
 }

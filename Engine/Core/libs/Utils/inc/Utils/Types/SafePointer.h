@@ -90,6 +90,7 @@ namespace SR_HTYPES_NS {
         SR_NODISCARD uint32_t GetUseCount() const;
 
         bool AutoFree(const std::function<void(T *ptr)> &freeFun);
+        bool AutoFree();
     private:
         bool FreeImpl(const std::function<void(T *ptr)> &freeFun);
 
@@ -226,6 +227,20 @@ namespace SR_HTYPES_NS {
 
         if (ptrCopy.RecursiveLockIfValid()) {
             result = ptrCopy.FreeImpl(freeFun);
+            ptrCopy.Unlock();
+        }
+
+        return result;
+    }
+
+    template<typename T> bool SafePtr<T>::AutoFree() {
+        SafePtr<T> ptrCopy = SafePtr<T>(*this);
+        /// после вызова FreeImpl this может потенциально инвалидироваться!
+
+        bool result = false;
+
+        if (ptrCopy.RecursiveLockIfValid()) {
+            result = ptrCopy.FreeImpl([](auto&& pData) { delete pData; });
             ptrCopy.Unlock();
         }
 

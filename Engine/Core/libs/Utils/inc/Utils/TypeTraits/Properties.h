@@ -20,7 +20,8 @@ namespace SR_UTILS_NS {
         void SaveProperty(MarshalRef marshal) const noexcept override;
         void LoadProperty(MarshalRef marshal) noexcept override;
 
-        void ClearContainer();
+        virtual void ClearContainer();
+        virtual void OnPropertyAdded(Property* pProprerty) { }
 
         SR_NODISCARD PropertyList& GetProperties() noexcept { return m_properties; }
         SR_NODISCARD const PropertyList& GetProperties() const noexcept { return m_properties; }
@@ -30,7 +31,7 @@ namespace SR_UTILS_NS {
 
         PropertyContainer& AddContainer(const char* name);
         EntityRefProperty& AddEntityRefProperty(SR_UTILS_NS::StringAtom name, const EntityRefUtils::OwnerRef& owner);
-        template<typename T> T& AddCustomProperty(SR_UTILS_NS::StringAtom name);
+        template<typename T, typename ...Args> T& AddCustomProperty(SR_UTILS_NS::StringAtom name, Args... args);
         template<typename T> StandardProperty& AddStandardProperty(const char* name, T* pRawProperty);
         template<typename T> EnumProperty& AddEnumProperty(const char* name, T* pRawProperty);
         template<typename T> EnumProperty& AddEnumProperty(const char* name);
@@ -96,17 +97,18 @@ namespace SR_UTILS_NS {
         return Find<T>(name.GetHash());
     }
 
-    template<typename T> T& PropertyContainer::AddCustomProperty(SR_UTILS_NS::StringAtom name)  {
+    template<typename T, typename ...Args> T& PropertyContainer::AddCustomProperty(SR_UTILS_NS::StringAtom name, Args... args)  {
         if (auto&& pProperty = Find(name)) {
             SRHalt("Properties::AddCustomProperty() : property \"" + name.ToStringRef() + "\" already exists!");
             return *dynamic_cast<T*>(pProperty);
         }
 
-        auto&& pProperty = new T();
+        auto&& pProperty = new T(std::forward<Args>(args)...);
 
         pProperty->SetName(name);
 
         m_properties.emplace_back(pProperty);
+        OnPropertyAdded(pProperty);
 
         return *pProperty;
     }
@@ -131,6 +133,7 @@ namespace SR_UTILS_NS {
         });
 
         m_properties.emplace_back(pProperty);
+        OnPropertyAdded(pProperty);
 
         return *pProperty;
     }
@@ -155,6 +158,7 @@ namespace SR_UTILS_NS {
         });
 
         m_properties.emplace_back(pProperty);
+        OnPropertyAdded(pProperty);
 
         return *pProperty;
     }
@@ -171,6 +175,7 @@ namespace SR_UTILS_NS {
         pProperty->SetEnumReflector(SR_UTILS_NS::EnumReflector::GetReflector<T>());
 
         m_properties.emplace_back(pProperty);
+        OnPropertyAdded(pProperty);
 
         return *pProperty;
     }

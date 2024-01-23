@@ -68,7 +68,9 @@ namespace SR_GRAPH_NS {
         return textures;
     }
 
-    void MaterialProperty::Use(SR_GTYPES_NS::Shader* pShader) const {
+    void MaterialProperty::Use(SR_GTYPES_NS::Shader* pShader) const noexcept {
+        SR_TRACY_ZONE;
+
         auto&& hashId = GetName().GetHash();
 
         switch (GetShaderVarType()) {

@@ -6,6 +6,7 @@
 		<Opaque/>
     	<Transparent/>
     	<UI/>
+    	<Debug/>
         <Gizmo/>
     </Layers>
 </Settings>

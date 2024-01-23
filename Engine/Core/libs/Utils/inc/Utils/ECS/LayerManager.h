@@ -16,6 +16,7 @@ namespace SR_UTILS_NS {
     public:
         //SR_NODISCARD const std::string& GetLayer(Layer layer) const;
         //SR_NODISCARD const std::string& GetLayerByIndex(uint16_t index) const;
+        SR_NODISCARD bool HasLayer(StringAtom layer) const;
         SR_NODISCARD uint16_t GetLayerIndex(StringAtom layer) const;
         SR_NODISCARD std::vector<StringAtom> GetLayers() const { return m_layers; }
         SR_NODISCARD StringAtom GetDefaultLayer() const noexcept { return m_defaultLayer; }

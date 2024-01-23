@@ -43,4 +43,14 @@ namespace SR_UTILS_NS {
 
         return SR_ID_INVALID;
     }
+
+    bool LayerManager::HasLayer(StringAtom layer) const {
+        for (uint16_t i = 0; i < m_layers.size(); ++i) {
+            if (layer == m_layers[i]) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

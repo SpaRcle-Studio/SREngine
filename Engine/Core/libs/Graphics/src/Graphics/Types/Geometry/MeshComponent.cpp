@@ -45,23 +45,8 @@ namespace SR_GTYPES_NS {
     }
 
     void MeshComponent::OnDestroy() {
-        RenderScene::Ptr renderScene = TryGetRenderScene();
-
         Component::OnDestroy();
-
-        /// если ресурс уничтожится сразу, то обрабатывать это нужно в контексте SharedPtr
-        if (!IsGraphicsResourceRegistered()) {
-            GetThis().DynamicCast<MeshComponent>().AutoFree([](auto&& pData) {
-                pData->MarkMeshDestroyed();
-            });
-        }
-        else {
-            MarkMeshDestroyed();
-        }
-
-        if (renderScene) {
-            renderScene->SetDirty();
-        }
+        UnRegisterMesh();
     }
 
     bool MeshComponent::ExecuteInEditMode() const {
@@ -83,12 +68,6 @@ namespace SR_GTYPES_NS {
         }
 
         Component::OnMatrixDirty();
-    }
-
-    void MeshComponent::FreeMesh() {
-        AutoFree([](auto&& pData) {
-            delete pData;
-        });
     }
 
     int64_t MeshComponent::GetSortingPriority() const {
@@ -128,12 +107,9 @@ namespace SR_GTYPES_NS {
         return Entity::InitializeEntity();
     }
 
-    void MeshComponent::OnBeforeLayerChanged() {
-        Component::OnBeforeLayerChanged();
-    }
-
     void MeshComponent::OnLayerChanged() {
-        Component::OnLayerChanged();
+        ReRegisterMesh();
+        IRenderComponent::OnLayerChanged();
     }
 
     bool MeshComponent::HasSortingPriority() const {

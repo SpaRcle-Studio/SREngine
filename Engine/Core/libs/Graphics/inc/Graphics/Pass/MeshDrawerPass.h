@@ -13,7 +13,19 @@ namespace SR_GRAPH_NS {
     class MeshDrawerPass : public BasePass {
         SR_REGISTER_LOGICAL_NODE(MeshDrawerPass, Mesh Drawer Pass, { "Passes" })
         using Super = BasePass;
+        struct Sampler {
+            uint32_t textureId = SR_ID_INVALID;
+            uint32_t fboId = SR_ID_INVALID;
+            SR_UTILS_NS::StringAtom id;
+            SR_UTILS_NS::StringAtom fboName;
+            uint64_t index = 0;
+            bool depth = false;
+        };
+        using Samplers = std::vector<Sampler>;
     public:
+        bool Load(const SR_XML_NS::Node& passNode) override;
+
+        void Prepare() override;
         void Bind() override;
         bool Render() override;
         void Update() override;
@@ -27,7 +39,12 @@ namespace SR_GRAPH_NS {
         virtual void UseConstants(ShaderPtr pShader);
         virtual void UseSamplers(ShaderPtr pShader);
 
+        void OnResize(const SR_MATH_NS::UVector2& size) override;
+        void OnSamplesChanged() override;
+
     private:
+        void PrepareSamplers();
+
         ShaderPtr ReplaceShader(ShaderPtr pShader) const;
 
         bool IsLayerAllowed(SR_UTILS_NS::StringAtom layer) const;
@@ -35,9 +52,14 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD RenderStrategy* GetRenderStrategy() const;
 
     private:
-        bool m_useMaterial = true;
+        bool m_useMaterials = true;
 
         bool m_passWasRendered = false;
+
+        bool m_dirtySamplers = true;
+        bool m_needUpdateMeshes = false;
+
+        Samplers m_samplers;
 
         std::map<ShaderPtr, ShaderPtr> m_shaderReplacements;
         std::set<SR_UTILS_NS::StringAtom> m_allowedLayers;

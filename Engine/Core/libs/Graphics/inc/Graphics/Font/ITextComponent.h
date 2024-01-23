@@ -7,13 +7,13 @@
 
 #include <Graphics/Types/Vertices.h>
 #include <Graphics/Types/Mesh.h>
+#include <Graphics/Types/IRenderComponent.h>
 #include <Utils/Types/UnicodeString.h>
-#include <Utils/ECS/Component.h>
 
 namespace SR_GTYPES_NS {
     class Font;
 
-    class ITextComponent : public Mesh, public SR_UTILS_NS::Component {
+    class ITextComponent : public Mesh, public IRenderComponent {
     public:
         typedef Vertices::SimpleVertex VertexType;
 
@@ -38,7 +38,7 @@ namespace SR_GTYPES_NS {
         void OnEnable() override;
         void OnDisable() override;
 
-        void FreeMesh() override;
+        void OnLayerChanged() override;
 
         SR_NODISCARD bool ExecuteInEditMode() const override { return true; }
         SR_NODISCARD bool IsCalculatable() const override;
@@ -78,11 +78,9 @@ namespace SR_GTYPES_NS {
         void FreeVideoMemory() override;
 
     protected:
-        SR_NODISCARD RenderScenePtr GetRenderScene();
         SR_NODISCARD bool BuildAtlas();
 
     protected:
-        RenderScenePtr m_renderScene;
         Font* m_font = nullptr;
 
         SR_MATH_NS::Matrix4x4 m_modelMatrix = SR_MATH_NS::Matrix4x4::Identity();

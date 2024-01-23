@@ -32,7 +32,7 @@ namespace SR_GTYPES_NS {
     public:
         void UseMaterial() override;
         void UseModelMatrix() override;
-        void OnPriorityDirty() override;
+        void OnPriorityChanged() override;
         SR_NODISCARD bool InitializeEntity() noexcept override;
 
         SR_NODISCARD bool IsFlatMesh() const noexcept override { return true; }

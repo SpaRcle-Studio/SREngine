@@ -24,6 +24,7 @@ namespace SR_UTILS_NS {
         pProperty->SetName(name);
 
         m_properties.emplace_back(pProperty);
+        OnPropertyAdded(pProperty);
 
         return *pProperty;
     }
@@ -78,6 +79,7 @@ namespace SR_UTILS_NS {
         pProperty->GetEntityRef().SetOwner(owner);
 
         m_properties.emplace_back(pProperty);
+        OnPropertyAdded(pProperty);
 
         return *pProperty;
     }
