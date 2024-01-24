@@ -155,7 +155,7 @@ namespace SR_GRAPH_NS {
         bool isArray = false;
         bool isAttachment = false;
     };
-    typedef std::map<uint64_t, ShaderSampler> ShaderSamplers;
+    typedef std::map<SR_UTILS_NS::StringAtom, ShaderSampler> ShaderSamplers;
 
     void LoadMaterialProperties(const SR_GTYPES_NS::Material* pMaterial, const SR_XML_NS::Node& propertiesNode, MaterialProperties* pProperties);
     std::list<SR_GTYPES_NS::Texture*> GetTexturesFromMatProperties(const MaterialProperties& properties);
@@ -273,7 +273,7 @@ template<> struct SR_UTILS_NS::SRHash<SR_GRAPH_NS::ShaderSamplers> {
         std::size_t res = 0;
 
         for (auto&& [key, val] : value) {
-            res = SR_UTILS_NS::HashCombine(key, res);
+            res = SR_UTILS_NS::HashCombine(key.GetHash(), res);
             res = SR_UTILS_NS::HashCombine(val.binding, res);
         }
 

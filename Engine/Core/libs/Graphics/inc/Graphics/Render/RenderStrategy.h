@@ -58,6 +58,8 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD RenderContext* GetRenderContext() const;
         SR_NODISCARD RenderScene* GetRenderScene() const;
 
+        void SetError(SR_UTILS_NS::StringAtom error);
+
         virtual bool IsValid() const { return true; }
 
         virtual void ForEachMesh(const SR_HTYPES_NS::Function<void(MeshPtr)>& callback) const { }
@@ -238,9 +240,14 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD ShaderPtr ReplaceShader(ShaderPtr pShader) const;
         SR_NODISCARD bool IsPriorityAllowed(int64_t priority) const;
         SR_NODISCARD bool IsNeedCheckMeshActivity() const noexcept { return m_isNeedCheckMeshActivity; }
+        SR_NODISCARD bool IsDebugModeEnabled() const noexcept { return m_enableDebugMode; }
         SR_NODISCARD const std::set<SR_UTILS_NS::StringAtom>& GetErrors() const noexcept { return m_errors; }
+        SR_NODISCARD const std::set<SR_GTYPES_NS::Mesh*>& GetProblemMeshes() const noexcept { return m_problemMeshes; }
 
-        void SetError(SR_UTILS_NS::StringAtom error) { m_errors.insert(error); }
+        void ClearErrors();
+        void AddError(SR_UTILS_NS::StringAtom error) { m_errors.insert(error); }
+        void AddProblemMesh(SR_GTYPES_NS::Mesh* pMesh) { m_problemMeshes.insert(pMesh); }
+        void SetDebugMode(bool value);
 
         void UseSharedUniforms(ShaderPtr pShader);
         void UseConstants(ShaderPtr pShader);
@@ -267,6 +274,8 @@ namespace SR_GRAPH_NS {
         bool m_isNeedCheckMeshActivity = true;
 
         std::set<SR_UTILS_NS::StringAtom> m_errors;
+        std::set<SR_GTYPES_NS::Mesh*> m_problemMeshes;
+        bool m_enableDebugMode = false;
 
         uint32_t m_meshCount = 0;
 

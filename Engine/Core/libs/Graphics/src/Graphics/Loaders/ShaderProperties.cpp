@@ -90,7 +90,7 @@ namespace SR_GRAPH_NS {
                 pShader->SetVec4(hashId, std::get<SR_MATH_NS::FVector4>(GetData()).template Cast<float_t>());
                 break;
             case ShaderVarType::Sampler2D:
-                pShader->SetSampler2D(hashId, std::get<SR_GTYPES_NS::Texture*>(GetData()));
+                pShader->SetSampler2D(GetName(), std::get<SR_GTYPES_NS::Texture*>(GetData()));
                 break;
             default:
                 SRAssertOnce(false);

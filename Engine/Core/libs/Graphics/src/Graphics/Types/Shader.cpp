@@ -205,28 +205,28 @@ namespace SR_GRAPH_NS::Types {
     void Shader::SetConstVec2(uint64_t hashId, const SR_MATH_NS::FVector2& v) noexcept { SetValue<true>(hashId, &v); }
     void Shader::SetConstIVec2(uint64_t hashId, const SR_MATH_NS::IVector2& v) noexcept { SetValue<true>(hashId, &v); }
 
-    void Shader::SetSampler(uint64_t hashId, int32_t sampler) noexcept {
-        m_samplers.at(hashId).samplerId = sampler;
+    void Shader::SetSampler(SR_UTILS_NS::StringAtom name, int32_t sampler) noexcept {
+        m_samplers.at(name).samplerId = sampler;
     }
 
-    void Shader::SetSampler2D(uint64_t hashId, int32_t sampler) noexcept {
-        if (!IsLoaded() || m_samplers.count(hashId) == 0) {
+    void Shader::SetSampler2D(SR_UTILS_NS::StringAtom name, int32_t sampler) noexcept {
+        if (!IsLoaded() || m_samplers.count(name) == 0) {
             return;
         }
 
-        SetSampler(hashId, sampler);
+        SetSampler(name, sampler);
     }
 
-    void Shader::SetSamplerCube(uint64_t hashId, int32_t sampler) noexcept {
-        if (!IsLoaded() || m_samplers.count(hashId) == 0) {
+    void Shader::SetSamplerCube(SR_UTILS_NS::StringAtom name, int32_t sampler) noexcept {
+        if (!IsLoaded() || m_samplers.count(name) == 0) {
             return;
         }
 
-        SetSampler(hashId, sampler);
+        SetSampler(name, sampler);
     }
 
-    void Shader::SetSampler2D(uint64_t hashId, SR_GTYPES_NS::Texture *sampler) noexcept {
-        if (!IsLoaded() || m_samplers.count(hashId) == 0) {
+    void Shader::SetSampler2D(SR_UTILS_NS::StringAtom name, SR_GTYPES_NS::Texture *sampler) noexcept {
+        if (!IsLoaded() || m_samplers.count(name) == 0) {
             return;
         }
 
@@ -240,15 +240,7 @@ namespace SR_GRAPH_NS::Types {
             return;
         }
 
-        SetSampler(hashId, sampler->GetId());
-    }
-
-    void Shader::SetSampler2D(const SR_UTILS_NS::StringAtom& name, SR_GTYPES_NS::Texture* pSampler) noexcept {
-        SetSampler2D(name.GetHash(), pSampler);
-    }
-
-    void Shader::SetSampler2D(const SR_UTILS_NS::StringAtom& name, int32_t samplerId) noexcept {
-        SetSampler2D(name.GetHash(), samplerId);
+        SetSampler(name, sampler->GetId());
     }
 
     bool Shader::Ready() const {
@@ -388,9 +380,9 @@ namespace SR_GRAPH_NS::Types {
         /// ------------------------------------------------------------------------------------------------------------
 
         for (auto&& [name, sampler] : pShader->GetSamplers()) {
-            m_samplers[name.GetHash()].binding = sampler.binding;
-            m_samplers[name.GetHash()].isAttachment = sampler.attachment >= 0;
-            m_samplers[name.GetHash()].isArray = sampler.type.Contains("Array");
+            m_samplers[name].binding = sampler.binding;
+            m_samplers[name].isAttachment = sampler.attachment >= 0;
+            m_samplers[name].isArray = sampler.type.Contains("Array");
 
             const ShaderVarType varType = SR_SRSL_NS::SRSLTypeInfo::Instance().StringToType(sampler.type);
 

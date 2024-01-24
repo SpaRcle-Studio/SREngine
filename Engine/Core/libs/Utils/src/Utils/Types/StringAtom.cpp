@@ -115,4 +115,12 @@ namespace SR_UTILS_NS {
 
         return m_info->data.find(str) != std::string::npos;
     }
+
+    bool StringAtom::operator<(const StringAtom& other) const noexcept {
+        return m_info ? (m_info->hash < other.GetHash()) : false;
+    }
+
+    bool StringAtom::operator<(uint64_t hash) const noexcept {
+        return m_info ? (m_info->hash < hash) : false;
+    }
 }

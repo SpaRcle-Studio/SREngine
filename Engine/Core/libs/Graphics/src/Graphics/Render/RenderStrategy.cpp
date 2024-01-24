@@ -24,8 +24,6 @@ namespace SR_GRAPH_NS {
     bool RenderStrategy::Render() {
         SR_TRACY_ZONE;
 
-        m_errors.clear();
-
         bool isRendered = false;
 
         SR_MAYBE_UNUSED auto&& guard = SR_UTILS_NS::LayerManager::Instance().ScopeLockSingleton();
@@ -58,7 +56,15 @@ namespace SR_GRAPH_NS {
             SR_TRACY_ZONE_S(layer.c_str());
 
             if (!SR_UTILS_NS::LayerManager::Instance().HasLayer(layer)) {
-                SetError(SR_FORMAT("Layer \"{}\" is not registered!", layer.c_str()));
+                AddError(SR_FORMAT("Layer \"{}\" is not registered!", layer.c_str()));
+                if (IsDebugModeEnabled()) {
+                    pStage->ForEachMesh([this](auto&& pMesh) {
+                        if (!pMesh->IsMeshActive()) {
+                            return;
+                        }
+                        AddProblemMesh(pMesh);
+                    });
+                }
             }
 
             if (m_layerFilter && !m_layerFilter(layer)) {
@@ -97,6 +103,10 @@ namespace SR_GRAPH_NS {
 
     void RenderStrategy::UnRegisterMesh(SR_GTYPES_NS::Mesh* pMesh) {
         SR_TRACY_ZONE;
+
+        if (IsDebugModeEnabled() && m_problemMeshes.count(pMesh) == 1) {
+            m_problemMeshes.erase(pMesh);
+        }
 
         if (!pMesh->IsMeshRegistered()) {
             SRHalt("Mesh is not registered!");
@@ -207,6 +217,21 @@ namespace SR_GRAPH_NS {
         for (auto&& pMesh : meshesToReRegister) {
             pMesh->ReRegisterMesh();
         }
+    }
+
+    void RenderStrategy::SetDebugMode(bool value) {
+        m_enableDebugMode = value;
+
+        if (!m_enableDebugMode) {
+            ClearErrors();
+        }
+
+        m_renderScene->SetDirty();
+    }
+
+    void RenderStrategy::ClearErrors() {
+        m_problemMeshes.clear();
+        m_errors.clear();
     }
 
     /// ----------------------------------------------------------------------------------------------------------------
@@ -471,7 +496,7 @@ namespace SR_GRAPH_NS {
         m_isRendered = false;
 
         if (!IsValid()) {
-            m_renderStrategy->SetError("Shader is nullptr!");
+            SetError("Shader is nullptr!");
             return false;
         }
 
@@ -492,7 +517,14 @@ namespace SR_GRAPH_NS {
         }
 
         if (!pShader->IsSamplersValid()) {
-            m_renderStrategy->SetError("Shader samplers is not valid!");
+            std::string message = "Shader samplers is not valid!\n\tPath: " + pShader->GetResourcePath().ToStringRef();
+            for (auto&& [name, sampler] : pShader->GetSamplers()) {
+                if (GetRenderContext()->GetPipeline()->IsSamplerValid(sampler.samplerId)) {
+                    continue;
+                }
+                message += "\n\tSampler is not set: " + name.ToStringRef();
+            }
+            SetError(message);
             pShader->UnUse();
             return false;
         }
@@ -599,6 +631,19 @@ namespace SR_GRAPH_NS {
         return m_renderStrategy->GetRenderScene();
     }
 
+    void IRenderStage::SetError(SR_UTILS_NS::StringAtom error) {
+        m_renderStrategy->AddError(error);
+
+        if (m_renderStrategy->IsDebugModeEnabled()) {
+            ForEachMesh([this](auto&& pMesh) {
+                if (!pMesh->IsMeshActive()) {
+                    return;
+                }
+                m_renderStrategy->AddProblemMesh(pMesh);
+            });
+        }
+    }
+
     /// ----------------------------------------------------------------------------------------------------------------
 
     VBORenderStage::VBORenderStage(RenderStrategy* pRenderStrategy, int32_t VBO)
@@ -627,7 +672,7 @@ namespace SR_GRAPH_NS {
         m_isRendered = false;
 
         if (!IsValid()) {
-            m_renderStrategy->SetError("VBO is not valid!");
+            SetError("VBO is not valid!");
             return false;
         }
 

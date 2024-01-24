@@ -36,6 +36,11 @@ namespace SR_UTILS_NS {
         void operator()(const std::string& str);
         void operator()(const char* str);
 
+        bool operator<(const StringAtom& other) const noexcept;
+        bool operator<(uint64_t hash) const noexcept;
+
+        SR_NODISCARD SR_FORCE_INLINE operator uint64_t() const noexcept { return GetHash(); }
+
     public:
         SR_NODISCARD uint64_t Size() const;
         SR_NODISCARD uint64_t size() const;

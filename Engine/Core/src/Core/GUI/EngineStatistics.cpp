@@ -364,10 +364,12 @@ namespace SR_CORE_GUI_NS {
             return;
         }
 
+        auto&& pRenderStrategy = pRenderScene->GetRenderStrategy();
+
         SR_GRAPH_GUI_NS::Text("Status:");
         ImGui::SameLine();
 
-        if (!pRenderScene->GetRenderStrategy()->GetErrors().empty()) {
+        if (!pRenderStrategy->GetErrors().empty()) {
             ImGui::TextColored(ImVec4(1, 0, 0, 1), "Error");
 
             if (ImGui::BeginListBox("Render errors")) {
@@ -381,15 +383,15 @@ namespace SR_CORE_GUI_NS {
             ImGui::TextColored(ImVec4(0, 1, 0, 1), "Ok");
         }
 
+        bool debugMode = pRenderStrategy->IsDebugModeEnabled();
+        if (SR_GRAPH_GUI_NS::CheckBox("Debug mode", debugMode)) {
+            pRenderStrategy->SetDebugMode(debugMode);
+        }
+
         auto&& pHierarchy = GetManager()->GetWidget<Hierarchy>();
 
         if (ImGui::BeginListBox("Invalid meshes")) {
-            pRenderScene->GetRenderStrategy()->ForEachMesh([pHierarchy](auto&& pMesh) {
-                auto&& info = pMesh->GetMeshRegistrationInfo();
-                if (info.VBO != SR_ID_INVALID && info.pShader) {
-                    return;
-                }
-
+            for (auto&& pMesh : pRenderStrategy->GetProblemMeshes()) {
                 auto&& pRenderComponent = dynamic_cast<SR_GTYPES_NS::IRenderComponent*>(pMesh);
                 auto&& pRawMeshHolder = dynamic_cast<SR_HTYPES_NS::IRawMeshHolder*>(pMesh);
 
@@ -413,10 +415,11 @@ namespace SR_CORE_GUI_NS {
 
                 if (ImGui::Selectable(name.c_str())) {
                     if (pHierarchy && pRenderComponent) {
-                        pHierarchy->SelectGameObject(pRenderComponent->GetRoot());
+                        pHierarchy->SelectGameObject(pRenderComponent->GetGameObject());
                     }
                 }
-            });
+            }
+
             ImGui::EndListBox();
         }
         /*if (ImGui::BeginTable("##FlatCluster", 4))

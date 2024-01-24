@@ -140,6 +140,10 @@ namespace SR_GRAPH_NS {
     void RenderScene::Build() {
         SR_TRACY_ZONE_N("Build render");
 
+        if (m_renderStrategy) {
+            m_renderStrategy->ClearErrors();
+        }
+
         GetPipeline()->ClearFrameBuffersQueue();
 
         m_hasDrawData = false;

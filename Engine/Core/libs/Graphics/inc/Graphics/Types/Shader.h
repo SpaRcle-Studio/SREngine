@@ -59,6 +59,7 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD uint64_t GetUBOBlockSize() const;
         SR_NODISCARD uint32_t GetSamplersCount() const;
         SR_NODISCARD ShaderProperties GetProperties();
+        SR_NODISCARD const ShaderSamplers& GetSamplers() const noexcept { return m_samplers; };
         SR_NODISCARD bool IsBlendEnabled() const;
         SR_NODISCARD bool IsAvailable() const;
         SR_NODISCARD bool IsSamplersValid() const;
@@ -97,13 +98,9 @@ namespace SR_GTYPES_NS {
         void SR_FASTCALL SetConstVec2(uint64_t hashId, const SR_MATH_NS::FVector2& v) noexcept;
         void SR_FASTCALL SetConstIVec2(uint64_t hashId, const SR_MATH_NS::IVector2& v) noexcept;
 
-        void SR_FASTCALL SetSampler2D(const SR_UTILS_NS::StringAtom& name, Texture* sampler) noexcept;
-        void SR_FASTCALL SetSampler2D(const SR_UTILS_NS::StringAtom& name, int32_t sampler) noexcept;
-
-        void SR_FASTCALL SetSampler2D(uint64_t hashId, Texture* sampler) noexcept;
-        void SR_FASTCALL SetSampler2D(uint64_t hashId, int32_t sampler) noexcept;
-
-        void SR_FASTCALL SetSamplerCube(uint64_t hashId, int32_t sampler) noexcept;
+        void SR_FASTCALL SetSampler2D(SR_UTILS_NS::StringAtom name, Texture* sampler) noexcept;
+        void SR_FASTCALL SetSampler2D(SR_UTILS_NS::StringAtom name, int32_t sampler) noexcept;
+        void SR_FASTCALL SetSamplerCube(SR_UTILS_NS::StringAtom name, int32_t sampler) noexcept;
 
     protected:
         bool IsAllowedToRevive() const override;
@@ -115,7 +112,7 @@ namespace SR_GTYPES_NS {
         void OnReloadDone() override;
 
     private:
-        void SetSampler(uint64_t hashId, int32_t sampler) noexcept;
+        void SetSampler(SR_UTILS_NS::StringAtom name, int32_t sampler) noexcept;
 
     private:
         Memory::ShaderProgramManager& m_manager;
@@ -126,7 +123,7 @@ namespace SR_GTYPES_NS {
 
         bool m_isRegistered = false;
 
-        SRShaderCreateInfo m_shaderCreateInfo = {};
+        SRShaderCreateInfo m_shaderCreateInfo = { };
 
         std::vector<SR_UTILS_NS::StringAtom> m_includes;
         Memory::ShaderUBOBlock m_uniformBlock;
