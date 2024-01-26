@@ -6,9 +6,13 @@
 #define SR_ENGINE_MESH_DRAWER_PASS_H
 
 #include <Graphics/Pass/BasePass.h>
+#include <Graphics/SRSL/ShaderType.h>
 
 namespace SR_GRAPH_NS {
     class RenderStrategy;
+
+    class CascadedShadowMapPass;
+    class ShadowMapPass;
 
     class MeshDrawerPass : public BasePass {
         SR_REGISTER_LOGICAL_NODE(MeshDrawerPass, Mesh Drawer Pass, { "Passes" })
@@ -25,6 +29,8 @@ namespace SR_GRAPH_NS {
     public:
         bool Load(const SR_XML_NS::Node& passNode) override;
 
+        bool Init() override;
+        void DeInit() override;
         void Prepare() override;
         void Bind() override;
         bool Render() override;
@@ -44,6 +50,7 @@ namespace SR_GRAPH_NS {
 
     private:
         void PrepareSamplers();
+        void ClearOverrideShaders();
 
         ShaderPtr ReplaceShader(ShaderPtr pShader) const;
 
@@ -59,9 +66,13 @@ namespace SR_GRAPH_NS {
         bool m_dirtySamplers = true;
         bool m_needUpdateMeshes = false;
 
+        ShadowMapPass* m_shadowMapPass = nullptr;
+        CascadedShadowMapPass* m_cascadedShadowMapPass = nullptr;
+
         Samplers m_samplers;
 
         std::map<ShaderPtr, ShaderPtr> m_shaderReplacements;
+        std::map<SR_SRSL_NS::ShaderType, ShaderPtr> m_shaderTypeReplacements;
         std::set<SR_UTILS_NS::StringAtom> m_allowedLayers;
         std::set<SR_UTILS_NS::StringAtom> m_disallowedLayers;
 

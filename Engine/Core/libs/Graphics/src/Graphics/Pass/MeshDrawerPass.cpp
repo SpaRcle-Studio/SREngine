@@ -3,16 +3,19 @@
 //
 
 #include <Graphics/Pass/MeshDrawerPass.h>
+#include <Graphics/Pass/CascadedShadowMapPass.h>
+#include <Graphics/Pass/ShadowMapPass.h>
+#include <Graphics/Pass/IFramebufferPass.h>
 #include <Graphics/Render/RenderStrategy.h>
 #include <Graphics/Render/RenderScene.h>
 #include <Graphics/Render/RenderContext.h>
 #include <Graphics/Render/RenderTechnique.h>
+#include <Graphics/Lighting/LightSystem.h>
 #include <Graphics/Types/Shader.h>
 #include <Graphics/Types/Framebuffer.h>
 #include <Graphics/Types/Texture.h>
 #include <Graphics/Types/Camera.h>
 #include <Graphics/Types/Mesh.h>
-#include <Graphics/Pass/IFramebufferPass.h>
 
 namespace SR_GRAPH_NS {
     SR_REGISTER_RENDER_PASS(MeshDrawerPass)
@@ -21,6 +24,60 @@ namespace SR_GRAPH_NS {
         m_samplers.clear();
         m_allowedLayers.clear();
         m_disallowedLayers.clear();
+
+        ClearOverrideShaders();
+
+        if (auto&& shaderOverrideNode = passNode.TryGetNode("Shaders")) {
+            for (auto&& overrideNode : shaderOverrideNode.TryGetNodes("Override")) {
+                auto&& shaderPath = overrideNode.TryGetAttribute("Shader").ToString(std::string());
+                if (shaderPath.empty()) {
+                    continue;
+                }
+
+                if (auto&& shaderTypeAttribute = overrideNode.TryGetAttribute("Type")) {
+                    auto&& shaderType = SR_UTILS_NS::EnumReflector::FromString<SR_SRSL_NS::ShaderType>(shaderTypeAttribute.ToString());
+                    if (m_shaderTypeReplacements[shaderType]) {
+                        SRHalt("Shader is already set!");
+                        continue;
+                    }
+
+                    if (auto&& pShader = SR_GTYPES_NS::Shader::Load(shaderPath)) {
+                        pShader->AddUsePoint();
+                        m_shaderTypeReplacements[shaderType] = pShader;
+                    }
+                }
+                else if (auto&& shaderPathAttribute = overrideNode.TryGetAttribute("Path")) {
+                    bool found = false;
+                    for (auto&& [pShaderKey, pShader] : m_shaderReplacements) {
+                        if (shaderPathAttribute.ToString() == pShaderKey->GetResourcePath()) {
+                            found = true;
+                            break;
+                        }
+                    }
+
+                    if (found) {
+                        SRHalt("Shader is already set!");
+                        continue;
+                    }
+
+                    auto&& pShader = SR_GTYPES_NS::Shader::Load(shaderPath);
+                    if (pShader) {
+                        pShader->AddUsePoint();
+                    }
+
+                    auto&& pKeyShader = SR_GTYPES_NS::Shader::Load(shaderPathAttribute.ToString());
+                    if (pKeyShader) {
+                        pKeyShader->AddUsePoint();
+                    }
+                    else {
+                        pShader->RemoveUsePoint();
+                        continue;
+                    }
+
+                    m_shaderReplacements[pKeyShader] = pShader;
+                }
+            }
+        }
 
         if (auto&& allowedLayersNode = passNode.TryGetNode("AllowedLayers")) {
             for (auto&& layerNode : allowedLayersNode.TryGetNodes()) {
@@ -115,6 +172,17 @@ namespace SR_GRAPH_NS {
             pShader->SetVec3(SHADER_VIEW_DIRECTION, m_camera->GetViewDirection());
             pShader->SetVec3(SHADER_VIEW_POSITION, m_camera->GetPositionRef());
         }
+
+        const SR_MATH_NS::FVector3 lightPos = GetRenderScene()->GetLightSystem()->GetDirectionalLightPosition();
+        pShader->SetVec3(SHADER_DIRECTIONAL_LIGHT_POSITION, lightPos);
+
+        if (m_shadowMapPass) {
+            pShader->SetMat4(SHADER_LIGHT_SPACE_MATRIX, m_shadowMapPass->GetLightSpaceMatrix());
+        }
+        else if (m_cascadedShadowMapPass) {
+            pShader->SetValue<false>(SHADER_CASCADE_LIGHT_SPACE_MATRICES, m_cascadedShadowMapPass->GetCascadeMatrices().data());
+            pShader->SetValue<false>(SHADER_CASCADE_SPLITS, m_cascadedShadowMapPass->GetSplitDepths().data());
+        }
     }
 
     void MeshDrawerPass::UseConstants(ShaderPtr pShader) {
@@ -153,11 +221,19 @@ namespace SR_GRAPH_NS {
     BasePass::ShaderPtr MeshDrawerPass::ReplaceShader(ShaderPtr pShader) const {
         SR_TRACY_ZONE;
 
-        if (m_shaderReplacements.empty()) {
+        if (!pShader) {
+            return nullptr;
+        }
+
+        if (m_shaderReplacements.empty() && m_shaderTypeReplacements.empty()) {
             return pShader;
         }
 
         if (auto&& pIt = m_shaderReplacements.find(pShader); pIt != m_shaderReplacements.end()) {
+            return pIt->second;
+        }
+
+        if (auto&& pIt = m_shaderTypeReplacements.find(pShader->GetType()); pIt != m_shaderTypeReplacements.end()) {
             return pIt->second;
         }
 
@@ -222,5 +298,29 @@ namespace SR_GRAPH_NS {
         }
 
         m_dirtySamplers = false;
+    }
+
+    void MeshDrawerPass::ClearOverrideShaders() {
+        for (auto&& [type, pShader] : m_shaderTypeReplacements) {
+            pShader->RemoveUsePoint();
+        }
+        m_shaderTypeReplacements.clear();
+
+        for (auto&& [pShaderKey, pShader] : m_shaderReplacements) {
+            pShaderKey->RemoveUsePoint();
+            pShader->RemoveUsePoint();
+        }
+        m_shaderReplacements.clear();
+    }
+
+    void MeshDrawerPass::DeInit() {
+        ClearOverrideShaders();
+        Super::DeInit();
+    }
+
+    bool MeshDrawerPass::Init() {
+        m_shadowMapPass = GetTechnique()->FindPass<ShadowMapPass>();
+        m_cascadedShadowMapPass = GetTechnique()->FindPass<CascadedShadowMapPass>();
+        return Super::Init();
     }
 }

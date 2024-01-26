@@ -10,7 +10,7 @@ namespace SR_GRAPH_NS {
     SR_REGISTER_RENDER_PASS(FramebufferPass)
 
     bool FramebufferPass::Load(const SR_XML_NS::Node &passNode) {
-        LoadFramebufferSettings(passNode.TryGetNode("FramebufferSettings"));
+        LoadFramebufferSettings(passNode);
 
         bool result = GroupPass::Load(passNode.TryGetNode("Passes"));
 

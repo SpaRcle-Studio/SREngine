@@ -91,6 +91,7 @@ public:                                                                         
         SR_NODISCARD std::string GetNodeName() const noexcept override { return #name; }                                \
         SR_NODISCARD Hash GetNodeHashName() const noexcept override { return HASH_NAME; }                               \
         static SR_SRLM_NS::LogicalNode* AllocateNew() { return (new className())->GetBaseLogicalNode(); }               \
+private:                                                                                                                \
 
 #define SR_REGISTER_LOGICAL_NODE(className, name, category)                                                             \
 public:                                                                                                                 \
@@ -100,5 +101,6 @@ public:                                                                         
                 return AllocateNew();                                                                                   \
             }, std::vector<std::string> category                                                                        \
         );                                                                                                              \
+private:                                                                                                                \
 
 #endif //SR_ENGINE_SRLM_UTILS_H

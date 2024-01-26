@@ -21,9 +21,7 @@ namespace SR_GRAPH_NS {
     }
 
     bool ShaderOverridePass::Load(const SR_XML_NS::Node& passNode) {
-        LoadFramebufferSettings(passNode.TryGetNode("FramebufferSettings"));
-
-        m_isDirectional = passNode.GetAttribute("Directional").ToBool(false);
+        LoadFramebufferSettings(passNode);
 
         if (auto&& shadersNode = passNode.TryGetNode("Shaders")) {
             for (auto&& overrideNode : shadersNode.TryGetNodes("Override")) {

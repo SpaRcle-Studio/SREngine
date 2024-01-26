@@ -355,7 +355,7 @@ namespace SR_UTILS_NS {
         data.pMarshal->Write(IsEnabled());
         data.pMarshal->Write(m_name);
 
-        data.pMarshal->Write<uint64_t>(m_tag);
+        data.pMarshal->Write<uint64_t>(m_tag.GetHash());
         data.pMarshal->Write<uint64_t>(m_layer.GetHash());
 
         auto&& pTransformMarshal = GetTransform()->Save(transformSaveData);
@@ -465,10 +465,6 @@ namespace SR_UTILS_NS {
         }
     }
 
-    bool GameObject::HasTag() const {
-        return m_tag != 0;
-    }
-
     void GameObject::OnAttached() {
         if (auto&& parent = GetParentTransform()) {
             m_transform->UpdateTree();
@@ -572,7 +568,7 @@ namespace SR_UTILS_NS {
             auto&& enabled = marshal.Read<bool>();
             auto&& name = marshal.Read<std::string>();
 
-            auto&& tag = marshal.Read<uint64_t>();
+            auto&& tag = SR_HASH_TO_STR_ATOM(marshal.Read<uint64_t>());
             auto&& layer = SR_HASH_TO_STR_ATOM(marshal.Read<uint64_t>());
 
             if (entityId == UINT64_MAX) {
@@ -661,16 +657,16 @@ namespace SR_UTILS_NS {
         return gameObject;
     }
 
-    void GameObject::SetTag(const std::string& tag) {
-        m_tag = TagManager::Instance().HashTag(tag);
+    void GameObject::SetTag(SR_UTILS_NS::StringAtom tag) {
+        m_tag = tag;
     }
 
     std::string GameObject::GetTagString() const {
-        return TagManager::Instance().GetTag(GetTag().GetHash());
+        return m_tag.ToStringRef();
     }
 
     StringAtom GameObject::GetTag() const {
-        return SR_HASH_TO_STR_ATOM(m_tag);
+        return m_tag;
     }
 
     GameObject::Ptr GameObject::Find(uint64_t hashName) const noexcept {

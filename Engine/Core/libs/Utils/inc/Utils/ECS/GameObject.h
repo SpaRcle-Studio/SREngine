@@ -59,7 +59,6 @@ namespace SR_UTILS_NS {
         SR_NODISCARD std::string GetName() const { return m_name; }
         SR_NODISCARD StringAtom GetTag() const;
         SR_NODISCARD std::string GetTagString() const;
-        SR_NODISCARD bool HasTag() const;
         SR_NODISCARD bool IsActive() const noexcept override;
         SR_NODISCARD SR_FORCE_INLINE bool IsEnabled() const noexcept { return m_isEnabled; }
         SR_NODISCARD SR_FORCE_INLINE uint64_t GetHashName() const noexcept { return m_hashName; }
@@ -87,7 +86,7 @@ namespace SR_UTILS_NS {
         bool SetParent(const GameObject::Ptr& parent);
         void RemoveAllChildren();
         void SetName(std::string name);
-        void SetTag(const std::string& tag);
+        void SetTag(SR_UTILS_NS::StringAtom tag);
 
         bool Contains(const GameObject::Ptr& child);
         void SetEnabled(bool value);
@@ -125,6 +124,7 @@ namespace SR_UTILS_NS {
         bool m_isDestroyed = false;
 
         StringAtom m_layer;
+        StringAtom m_tag;
 
         uint64_t m_hashName = 0;
         uint64_t m_idInScene = SR_ID_INVALID;
@@ -138,7 +138,6 @@ namespace SR_UTILS_NS {
         std::pair<Prefab*, bool> m_prefab;
 
         Name m_name;
-        Tag m_tag = 0;
 
     };
 }

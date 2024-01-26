@@ -80,7 +80,7 @@ namespace SR_GRAPH_NS {
     }
 
     bool FlatColorBufferPass::Load(const SR_XML_NS::Node& passNode) {
-        LoadFramebufferSettings(passNode.TryGetNode("FramebufferSettings"));
+        LoadFramebufferSettings(passNode);
         return IMeshClusterPass::Load(passNode);
     }
 

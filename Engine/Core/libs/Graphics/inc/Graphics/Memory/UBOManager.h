@@ -2,11 +2,12 @@
 // Created by Monika on 10.06.2022.
 //
 
-#ifndef SR_ENGINE_UBOMANAGER_H
-#define SR_ENGINE_UBOMANAGER_H
+#ifndef SR_ENGINE_UBO_MANAGER_H
+#define SR_ENGINE_UBO_MANAGER_H
 
 #include <Utils/Common/Singleton.h>
 #include <Utils/Types/Map.h>
+#include <Utils/Types/SharedPtr.h>
 
 namespace SR_GTYPES_NS {
     class Shader;

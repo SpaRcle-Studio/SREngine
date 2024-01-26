@@ -2,8 +2,8 @@
 // Created by Monika on 21.01.2023.
 //
 
-#ifndef SR_ENGINE_SHADEROVERRIDEPASS_H
-#define SR_ENGINE_SHADEROVERRIDEPASS_H
+#ifndef SR_ENGINE_SHADER_OVERRIDE_PASS_H
+#define SR_ENGINE_SHADER_OVERRIDE_PASS_H
 
 #include <Graphics/Pass/IMesh3DClusterPass.h>
 #include <Graphics/Pass/IFramebufferPass.h>
@@ -34,15 +34,11 @@ namespace SR_GRAPH_NS {
 
     protected:
         SR_NODISCARD ShaderPtr GetShader(SR_SRSL_NS::ShaderType type) const override;
-        SR_NODISCARD bool IsDirectional() const noexcept { return m_isDirectional; }
         SR_NODISCARD std::vector<SR_GTYPES_NS::Framebuffer*> GetFrameBuffers() const override;
 
         void UseSharedUniforms(ShaderPtr pShader) override;
 
     private:
-        /// режим рендера без кадрового буффера, напрямую
-        bool m_isDirectional = false;
-
         std::vector<std::pair<SR_SRSL_NS::ShaderType, ShaderPtr>> m_shaders;
 
     };
