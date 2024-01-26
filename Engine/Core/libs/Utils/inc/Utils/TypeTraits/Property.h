@@ -41,6 +41,8 @@ namespace SR_UTILS_NS {
             , m_description(SR_EXCHANGE(other.m_description, { }))
             , m_name(SR_EXCHANGE(other.m_name, { }))
             , m_dontSave(SR_EXCHANGE(other.m_dontSave, { }))
+            , m_isOptionalMode(SR_EXCHANGE(other.m_isOptionalMode, { }))
+            , m_optional(SR_EXCHANGE(other.m_optional, { }))
             , m_sameLine(SR_EXCHANGE(other.m_sameLine, { }))
             , m_width(SR_EXCHANGE(other.m_width, { }))
         { }
@@ -51,6 +53,8 @@ namespace SR_UTILS_NS {
             m_description = SR_EXCHANGE(other.m_description, { });
             m_name = SR_EXCHANGE(other.m_name, { });
             m_dontSave = SR_EXCHANGE(other.m_dontSave, { });
+            m_isOptionalMode = SR_EXCHANGE(other.m_isOptionalMode, { });
+            m_optional = SR_EXCHANGE(other.m_optional, { });
             m_sameLine = SR_EXCHANGE(other.m_sameLine, { });
             m_width = SR_EXCHANGE(other.m_width, { });
             return *this;
@@ -66,6 +70,8 @@ namespace SR_UTILS_NS {
         Property& SetReadOnly() { m_publicity = PropertyPublicity::ReadOnly; return *this; }
         Property& SetSameLine() { m_sameLine = true; return *this; }
         Property& SetDontSave() { m_dontSave = true; return *this; }
+        Property& SetOptionalMode() { m_isOptionalMode = true; return *this; }
+        Property& SetOptional(bool value) { m_optional = value; SRAssert(IsOptionalMode()); return *this; }
 
         SR_NODISCARD virtual SR_UTILS_NS::StringAtom GetPropertyTypeName() const noexcept = 0;
         SR_NODISCARD virtual uint16_t GetPropertyVersion() const noexcept = 0;
@@ -74,6 +80,8 @@ namespace SR_UTILS_NS {
         SR_NODISCARD float_t GetWidth() const noexcept { return m_width; }
         SR_NODISCARD bool IsSameLine() const noexcept { return m_sameLine; }
         SR_NODISCARD bool IsDontSave() const noexcept { return m_dontSave; }
+        SR_NODISCARD bool IsOptionalMode() const noexcept { return m_isOptionalMode; }
+        SR_NODISCARD bool GetOptional() const noexcept { return m_optional; }
 
         SR_NODISCARD bool IsActive() const noexcept;
 
@@ -90,8 +98,11 @@ namespace SR_UTILS_NS {
         SR_UTILS_NS::StringAtom m_name;
 
         bool m_dontSave = false;
+        bool m_isOptionalMode = false;
         bool m_sameLine = false;
         float_t m_width = 70.f;
+
+        bool m_optional = false;
 
     };
 

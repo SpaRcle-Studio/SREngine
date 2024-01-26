@@ -102,6 +102,8 @@ namespace SR_GTYPES_NS {
             .SetReadOnly()
             .SetDontSave();
 
+        //m_properties.AddStandardProperty("Custom layer", &);
+
         //m_customMaterialProperties = &materialContainer.AddArray<MaterialProperty>("Custom properties");
 
         return Entity::InitializeEntity();
