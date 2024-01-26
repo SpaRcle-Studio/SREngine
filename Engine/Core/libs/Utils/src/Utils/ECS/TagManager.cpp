@@ -6,39 +6,13 @@
 #include <Utils/Common/Hashes.h>
 
 namespace SR_UTILS_NS {
-    TagManager::Hash TagManager::RegisterTag(const std::string &tag) {
+    void TagManager::RegisterTag(StringAtom tag) {
         SR_LOCK_GUARD;
 
-        if (UNTAGGED == tag) {
-            return 0;
+        if (m_indices.count(tag) == 0) {
+            m_tags.emplace_back(tag);
+            m_indices[tag] = m_indices.size();
         }
-
-        const auto hash = HashTag(tag);
-
-        m_tagNames[hash] = tag;
-
-        m_tags.emplace_back(tag);
-        m_indices[hash] = m_indices.size();
-
-        return hash;
-    }
-
-    const std::string& TagManager::GetTag(Tag tag) const {
-        SR_LOCK_GUARD;
-
-        if (tag == 0) {
-            return UNTAGGED;
-        }
-
-        auto&& pIt = m_tagNames.find(tag);
-
-        if (pIt == m_tagNames.end()) {
-            SRHalt("TagManager::GetTagName() : unknown tag!");
-            static const std::string def;
-            return def;
-        }
-
-        return pIt->second;
     }
 
     SR_UTILS_NS::Path TagManager::InitializeResourcePath() const {
@@ -48,7 +22,6 @@ namespace SR_UTILS_NS {
     void TagManager::ClearSettings() {
         SR_LOCK_GUARD;
 
-        m_tagNames.clear();
         m_tags.clear();
         m_indices.clear();
 
@@ -59,9 +32,9 @@ namespace SR_UTILS_NS {
         SR_LOCK_GUARD;
 
         m_tags.clear();
+        m_indices.clear();
 
-        m_tags.emplace_back(UNTAGGED);
-        m_indices[HashTag(UNTAGGED)] = m_indices.size();
+        RegisterTag(UNTAGGED);
 
         if (auto&& tagsNode = node.GetNode("Tags")) {
             for (auto&& tagNode : tagsNode.GetNodes()) {
@@ -72,20 +45,10 @@ namespace SR_UTILS_NS {
         return Super::LoadSettings(node);
     }
 
-    TagManager::Hash TagManager::HashTag(const std::string &tag) const {
+    uint16_t TagManager::GetTagIndex(StringAtom tag) const {
         SR_LOCK_GUARD;
 
-        if (tag == UNTAGGED) {
-            return 0;
-        }
-
-        return SR_HASH_STR_REGISTER(tag);
-    }
-
-    uint16_t TagManager::GetTagIndex(Tag tag) const {
-        SR_LOCK_GUARD;
-
-        if (tag == 0 || tag == StringAtom().GetHash()) {
+        if (tag == StringAtom()) {
             return 0;
         }
 
@@ -99,12 +62,12 @@ namespace SR_UTILS_NS {
         return pIt->second;
     }
 
-    const std::string &TagManager::GetTagByIndex(uint16_t index) const {
+    StringAtom TagManager::GetTagByIndex(uint16_t index) const {
         SR_LOCK_GUARD;
 
         if (index >= m_tags.size()) {
             SRHalt("TagManager::GetTagByIndex() : out of range!");
-            static const std::string def;
+            static const StringAtom def;
             return def;
         }
 

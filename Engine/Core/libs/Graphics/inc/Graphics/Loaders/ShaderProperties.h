@@ -113,9 +113,12 @@ namespace SR_GRAPH_NS {
 
     class MaterialProperties : public SR_UTILS_NS::PropertyContainer {
     public:
+        MaterialProperties() = default;
+
         void ClearContainer() override {
             m_materialSamplerProperties.clear();
             m_materialUniformsProperties.clear();
+            SR_UTILS_NS::PropertyContainer::ClearContainer();
         }
 
         void OnPropertyAdded(SR_UTILS_NS::Property* pProperty) override {

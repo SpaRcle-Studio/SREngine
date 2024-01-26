@@ -511,10 +511,10 @@ namespace SR_GRAPH_NS {
             return false;
         }
 
-        //if (GetRenderContext()->GetPipeline()->IsShaderChanged()) {
-            m_renderStrategy->UseConstants(pShader);
-            m_renderStrategy->UseSamplers(pShader);
-        //}
+        if (GetRenderContext()->GetPipeline()->IsShaderChanged()) {
+          m_renderStrategy->UseConstants(pShader);
+          m_renderStrategy->UseSamplers(pShader);
+        }
 
         if (!pShader->IsSamplersValid()) {
             std::string message = "Shader samplers is not valid!\n\tPath: " + pShader->GetResourcePath().ToStringRef();
@@ -522,6 +522,7 @@ namespace SR_GRAPH_NS {
                 if (GetRenderContext()->GetPipeline()->IsSamplerValid(sampler.samplerId)) {
                     continue;
                 }
+
                 message += "\n\tSampler is not set: " + name.ToStringRef();
             }
             SetError(message);

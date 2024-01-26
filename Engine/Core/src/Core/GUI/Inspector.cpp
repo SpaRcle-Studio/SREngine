@@ -408,11 +408,11 @@ namespace SR_CORE_GUI_NS {
         SR_UTILS_NS::TagManager::Instance().Do([&](auto&& pSettings) {
             auto&& pTagManager = dynamic_cast<SR_UTILS_NS::TagManager*>(pSettings);
             auto&& tags = pTagManager->GetTags();
-            auto&& tagIndex = static_cast<int>(pTagManager->GetTagIndex(tag.GetHash()));
-            auto&& pTags = const_cast<std::vector<std::string>*>(&tags);
+            auto&& tagIndex = static_cast<int>(pTagManager->GetTagIndex(tag));
+            auto&& pTags = const_cast<std::vector<SR_UTILS_NS::StringAtom>*>(&tags);
 
             if (ImGui::Combo("Tag", &tagIndex, [](void* vec, int idx, const char** out_text){
-                auto&& vector = reinterpret_cast<std::vector<std::string>*>(vec);
+                auto&& vector = reinterpret_cast<std::vector<SR_UTILS_NS::StringAtom>*>(vec);
                 if (idx < 0 || idx >= vector->size())
                     return false;
 

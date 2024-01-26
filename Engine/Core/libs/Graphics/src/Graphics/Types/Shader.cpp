@@ -225,22 +225,21 @@ namespace SR_GRAPH_NS::Types {
         SetSampler(name, sampler);
     }
 
-    void Shader::SetSampler2D(SR_UTILS_NS::StringAtom name, SR_GTYPES_NS::Texture *sampler) noexcept {
+    void Shader::SetSampler2D(SR_UTILS_NS::StringAtom name, SR_GTYPES_NS::Texture* pSampler) noexcept {
         if (!IsLoaded() || m_samplers.count(name) == 0) {
             return;
         }
 
-        if (!sampler) {
-            SRHalt("The sampler is nullptr!");
-            sampler = GetRenderContext()->GetNoneTexture();
+        if (!pSampler) {
+            pSampler = GetRenderContext()->GetNoneTexture();
         }
 
-        if (!sampler) {
+        if (!pSampler) {
             SRHalt("The default sampler is nullptr!");
             return;
         }
 
-        SetSampler(name, sampler->GetId());
+        SetSampler(name, pSampler->GetId());
     }
 
     bool Shader::Ready() const {
@@ -468,6 +467,10 @@ namespace SR_GRAPH_NS::Types {
 
     bool Shader::IsSamplersValid() const {
         for (auto&& [hashName, samplerInfo] : m_samplers) {
+            if (!samplerInfo.isArray && !samplerInfo.isAttachment) {
+                continue;
+            }
+
             if (!m_pipeline->IsSamplerValid(samplerInfo.samplerId)) {
                 return false;
             }

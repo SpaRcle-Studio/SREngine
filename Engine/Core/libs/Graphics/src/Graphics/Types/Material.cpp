@@ -134,7 +134,7 @@ namespace SR_GTYPES_NS {
         m_properties.UseMaterialSamplers(m_shader);
     }
 
-    bool Material::LoadProperties(const SR_XML_NS::Node &propertiesNode) {
+    bool Material::LoadProperties(const SR_XML_NS::Node& propertiesNode) {
         if (!m_shader) {
             SR_ERROR("Material::LoadProperties() : shader is nullptr!");
             return false;
