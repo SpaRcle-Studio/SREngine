@@ -50,6 +50,9 @@ namespace SR_GRAPH_UI_NS {
         SR_ENTITY_SET_VERSION(1000);
         SR_INITIALIZE_COMPONENT(Gizmo);
         using Super = SR_GTYPES_NS::IRenderComponent;
+        enum class GizmoMeshLoadMode {
+            Visual, Selection, All
+        };
     public:
         static Component* LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage);
 
@@ -65,10 +68,14 @@ namespace SR_GRAPH_UI_NS {
     protected:
         void LoadGizmo();
         void ReleaseGizmo();
-        void LoadMesh(GizmoOperationFlag operation, SR_UTILS_NS::StringAtom path, SR_UTILS_NS::StringAtom name);
+        void LoadMesh(GizmoOperationFlag operation, SR_UTILS_NS::StringAtom path, SR_UTILS_NS::StringAtom name, GizmoMeshLoadMode mode);
 
     private:
-        std::map<GizmoOperationFlag, SR_GTYPES_NS::MeshComponent::Ptr> m_meshes;
+        struct MeshInfo {
+            SR_GTYPES_NS::MeshComponent::Ptr pVisual;
+            SR_GTYPES_NS::MeshComponent::Ptr pSelection;
+        };
+        std::map<GizmoOperationFlag, MeshInfo> m_meshes;
 
         GizmoMode m_mode = GizmoMode::Local;
         GizmoOperationFlag m_operation = GizmoOperation::Universal;

@@ -365,6 +365,12 @@ namespace SR_CORE_GUI_NS {
         }
 
         auto&& pRenderStrategy = pRenderScene->GetRenderStrategy();
+        auto&& pPipeline = pRenderScene->GetPipeline();
+
+        const uint32_t transferredKBytes = pPipeline->GetPreviousState().transferredMemory / 1024;
+
+        SR_GRAPH_GUI_NS::Text(SR_FORMAT_C("Transferred memory: {}Kb", transferredKBytes));
+        SR_GRAPH_GUI_NS::Text(SR_FORMAT_C("Transferred count: {}", pPipeline->GetPreviousState().transferredCount));
 
         SR_GRAPH_GUI_NS::Text("Status:");
         ImGui::SameLine();

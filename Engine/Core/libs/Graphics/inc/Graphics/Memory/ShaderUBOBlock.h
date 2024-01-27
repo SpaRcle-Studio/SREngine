@@ -34,7 +34,7 @@ namespace SR_GRAPH_NS::Memory {
         void SR_FASTCALL SetField(uint64_t hashId, const void* data) noexcept;
 
         SR_NODISCARD uint32_t GetBinding() const { return m_binding; }
-        SR_NODISCARD bool Valid() const { return m_memory && m_binding != SR_ID_INVALID; }
+        SR_NODISCARD bool Valid() const noexcept { return m_memory && m_binding != SR_ID_INVALID; }
 
     private:
         SR_NODISCARD uint64_t Align(uint64_t size) const;

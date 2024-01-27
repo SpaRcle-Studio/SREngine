@@ -3,6 +3,7 @@
 //
 
 #include <Graphics/Render/RenderStrategy.h>
+#include <Graphics/Pass/MeshDrawerPass.h>
 
 #include <Utils/ECS/LayerManager.h>
 
@@ -134,38 +135,6 @@ namespace SR_GRAPH_NS {
     RenderStrategy::ShaderPtr RenderStrategy::ReplaceShader(RenderStrategy::ShaderPtr pShader) const {
         SR_TRACY_ZONE;
         return m_shaderReplaceCallback ? m_shaderReplaceCallback(pShader) : pShader;
-    }
-
-    void RenderStrategy::UseSharedUniforms(RenderStrategy::ShaderPtr pShader) {
-        SR_TRACY_ZONE;
-
-        if (m_sharedUniformsCallback) {
-            m_sharedUniformsCallback(pShader);
-        }
-    }
-
-    void RenderStrategy::UseConstants(RenderStrategy::ShaderPtr pShader) {
-        SR_TRACY_ZONE;
-
-        if (m_constantsCallback) {
-            m_constantsCallback(pShader);
-        }
-    }
-
-    void RenderStrategy::UseSamplers(RenderStrategy::ShaderPtr pShader) {
-        SR_TRACY_ZONE;
-
-        if (m_samplersCallback) {
-            m_samplersCallback(pShader);
-        }
-    }
-
-    void RenderStrategy::UseUniforms(ShaderPtr pShader, MeshPtr pMesh) {
-        SR_TRACY_ZONE;
-
-        if (m_uniformsCallback) {
-            m_uniformsCallback(pShader, pMesh);
-        }
     }
 
     void RenderStrategy::RegisterMesh(const MeshRegistrationInfo& info) {
@@ -529,8 +498,9 @@ namespace SR_GRAPH_NS {
         }
 
         if (GetRenderContext()->GetPipeline()->IsShaderChanged()) {
-          m_renderStrategy->UseConstants(pShader);
-          m_renderStrategy->UseSamplers(pShader);
+            auto&& pMeshPass = m_renderStrategy->GetMeshDrawerPass();
+            pMeshPass->UseConstants(pShader);
+            pMeshPass->UseSamplers(pShader);
         }
 
         if (!pShader->IsSamplersValid()) {
@@ -576,7 +546,7 @@ namespace SR_GRAPH_NS {
 
         GetRenderContext()->SetCurrentShader(pShader);
 
-        m_renderStrategy->UseSharedUniforms(pShader);
+        m_renderStrategy->GetMeshDrawerPass()->UseSharedUniforms(pShader);
 
         for (auto&& [VBO, pVBOStage] : m_VBOStages) {
             pVBOStage->Update(pShader);
@@ -715,17 +685,22 @@ namespace SR_GRAPH_NS {
             return;
         }
 
-        for (auto&& pMesh : m_meshes) {
-            if (!pMesh->IsMeshActive()) {
+        SR_GTYPES_NS::Mesh** pMesh = m_meshes.data();
+        SR_GTYPES_NS::Mesh** pMeshEnd = m_meshes.data() + m_meshes.size();
+
+        for (; pMesh != pMeshEnd; ++pMesh) {
+            auto&& pMeshUnwrapped = *pMesh;
+
+            if (!pMeshUnwrapped->IsMeshActive()) {
                 continue;
             }
 
-            auto&& virtualUbo = pMesh->GetVirtualUBO();
+            auto&& virtualUbo = pMeshUnwrapped->GetVirtualUBO();
             if (virtualUbo == SR_ID_INVALID) {
                 continue;
             }
 
-            m_renderStrategy->UseUniforms(pShader, pMesh);
+            m_renderStrategy->GetMeshDrawerPass()->UseUniforms(pShader, pMeshUnwrapped);
 
             if (m_uboManager.BindUBO(virtualUbo) == Memory::UBOManager::BindResult::Duplicated) {
                 SR_ERROR("VBORenderStage::Update() : memory has been duplicated!");

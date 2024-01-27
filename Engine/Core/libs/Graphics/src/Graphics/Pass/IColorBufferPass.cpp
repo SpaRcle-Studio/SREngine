@@ -8,6 +8,8 @@
 
 namespace SR_GRAPH_NS {
     SR_MATH_NS::FColor IColorBufferPass::GetColor(float_t x, float_t y) const {
+        SR_TRACY_ZONE;
+
         if (x < 0 || x > 1 || y < 0 || y > 1) {
             return SR_MATH_NS::FColor(0.f);
         }
@@ -26,6 +28,8 @@ namespace SR_GRAPH_NS {
     }
 
     SR_GTYPES_NS::Mesh *IColorBufferPass::GetMesh(float_t x, float_t y) const {
+        SR_TRACY_ZONE;
+
         auto&& color = GetColor(x, y);
 
         auto&& colorIndex = SR_MATH_NS::BGRToHEX(SR_MATH_NS::IVector3(

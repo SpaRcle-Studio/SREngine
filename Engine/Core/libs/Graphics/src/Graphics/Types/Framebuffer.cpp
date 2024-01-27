@@ -234,6 +234,8 @@ namespace SR_GTYPES_NS {
     }
 
     int32_t Framebuffer::GetColorTexture(uint32_t layer) {
+        SR_TRACY_ZONE;
+
         if ((!IsCalculated() || m_dirty) && !Update()) {
             SR_ERROR("Framebuffer::GetColorTexture() : failed to initialize framebuffer!");
         }

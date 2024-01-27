@@ -4,6 +4,7 @@
 
 #include <Utils/Types/DataStorage.h>
 #include <Utils/Types/SafePtrLockGuard.h>
+#include <Utils/Platform/Platform.h>
 
 #include <Graphics/Types/Camera.h>
 #include <Graphics/Memory/CameraManager.h>
@@ -343,5 +344,9 @@ namespace SR_GTYPES_NS {
 
     void Camera::Start() {
         Super::Start();
+    }
+
+    SR_MATH_NS::FPoint Camera::GetMousePos() const {
+        return SR_PLATFORM_NS::GetMousePos();
     }
 }

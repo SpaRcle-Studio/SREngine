@@ -16,6 +16,7 @@ namespace SR_GRAPH_UI_NS {
 
     void Gizmo::OnAttached() {
         GetGameObject()->SetLayer("Gizmo");
+        GetGameObject()->GetOrAddChild("Selection")->SetLayer("GizmoSelection");
         Super::OnAttached();
     }
 
@@ -29,7 +30,17 @@ namespace SR_GRAPH_UI_NS {
         });
     }
 
-    void Gizmo::LoadMesh(GizmoOperationFlag operation, SR_UTILS_NS::StringAtom path, SR_UTILS_NS::StringAtom name) {
+    void Gizmo::LoadMesh(GizmoOperationFlag operation, SR_UTILS_NS::StringAtom path, SR_UTILS_NS::StringAtom name, GizmoMeshLoadMode mode) { /// NOLINT
+        if (mode == GizmoMeshLoadMode::All) {
+            LoadMesh(operation, path, name, GizmoMeshLoadMode::Visual);
+            LoadMesh(operation, path, name, GizmoMeshLoadMode::Selection);
+            return;
+        }
+
+        if (!GetGameObject()) {
+            return;
+        }
+
         auto&& pMesh = SR_GTYPES_NS::Mesh::Load(path, MeshType::Static, name);
         if (!pMesh) {
             SR_ERROR("Gizmo::LoadMesh() : failed to load mesh!\n\tPath: {}\n\tName: {}", path.ToStringRef(), name.ToStringRef());
@@ -57,14 +68,17 @@ namespace SR_GRAPH_UI_NS {
             pMeshComponent->SetMaterial("Engine/Materials/Colors/gizmo-center.mat");
         }
 
-        //MaterialProperty& materialProperty = pMeshComponent->GetOverrideUniforms().emplace_back();
-        //materialProperty.SetData(SR_MATH_NS::FColor(1.f, 1.f, 0.f, 1.f));
-        //materialProperty.SetName("color");
-        //materialProperty.SetShaderVarType(ShaderVarType::Vec4);
-
-        GetParent()->AddComponent(pMeshComponent);
-
-        m_meshes[operation] = pMeshComponent;
+        if (mode == GizmoMeshLoadMode::Visual) {
+            GetGameObject()->AddComponent(pMeshComponent);
+            m_meshes[operation].pVisual = pMeshComponent;
+        }
+        else if (mode == GizmoMeshLoadMode::Selection) {
+            GetGameObject()->GetOrAddChild("Selection")->AddComponent(pMeshComponent);
+            m_meshes[operation].pSelection = pMeshComponent;
+        }
+        else {
+            SRHalt("Unresolved situation!");
+        }
     }
 
     void Gizmo::OnEnable() {
@@ -75,19 +89,31 @@ namespace SR_GRAPH_UI_NS {
     void Gizmo::LoadGizmo() {
         SRAssert(m_meshes.empty());
 
-        LoadMesh(GizmoOperation::Center, "Engine/Models/gizmo-translation.fbx", "Center");
-        LoadMesh(GizmoOperation::TranslateX, "Engine/Models/gizmo-translation.fbx", "ArrowX");
-        LoadMesh(GizmoOperation::TranslateY, "Engine/Models/gizmo-translation.fbx", "ArrowY");
-        LoadMesh(GizmoOperation::TranslateZ, "Engine/Models/gizmo-translation.fbx", "ArrowZ");
-        LoadMesh(GizmoOperation::TranslateAltX, "Engine/Models/gizmo-translation.fbx", "PlaneX");
-        LoadMesh(GizmoOperation::TranslateAltY, "Engine/Models/gizmo-translation.fbx", "PlaneY");
-        LoadMesh(GizmoOperation::TranslateAltZ, "Engine/Models/gizmo-translation.fbx", "PlaneZ");
+        static const SR_UTILS_NS::StringAtom gizmoFile = "Engine/Models/gizmo-translation.fbx";
+
+        LoadMesh(GizmoOperation::Center, gizmoFile, "Center", GizmoMeshLoadMode::Visual);
+        LoadMesh(GizmoOperation::Center, gizmoFile, "CenterSelection", GizmoMeshLoadMode::Selection);
+
+        LoadMesh(GizmoOperation::TranslateAltX, gizmoFile, "PlaneX", GizmoMeshLoadMode::All);
+        LoadMesh(GizmoOperation::TranslateAltY, gizmoFile, "PlaneY", GizmoMeshLoadMode::All);
+        LoadMesh(GizmoOperation::TranslateAltZ, gizmoFile, "PlaneZ", GizmoMeshLoadMode::All);
+
+        LoadMesh(GizmoOperation::TranslateX, gizmoFile, "ArrowX", GizmoMeshLoadMode::Visual);
+        LoadMesh(GizmoOperation::TranslateY, gizmoFile, "ArrowY", GizmoMeshLoadMode::Visual);
+        LoadMesh(GizmoOperation::TranslateZ, gizmoFile, "ArrowZ", GizmoMeshLoadMode::Visual);
+
+        LoadMesh(GizmoOperation::TranslateX, gizmoFile, "ArrowXSelection", GizmoMeshLoadMode::Selection);
+        LoadMesh(GizmoOperation::TranslateY, gizmoFile, "ArrowYSelection", GizmoMeshLoadMode::Selection);
+        LoadMesh(GizmoOperation::TranslateZ, gizmoFile, "ArrowZSelection", GizmoMeshLoadMode::Selection);
     }
 
     void Gizmo::ReleaseGizmo() {
-        for (auto&& [operation, pMesh] : m_meshes) {
-            if (pMesh) {
-                pMesh->Detach();
+        for (auto&& [operation, info] : m_meshes) {
+            if (info.pSelection) {
+                info.pSelection->Detach();
+            }
+            if (info.pVisual) {
+                info.pVisual->Detach();
             }
         }
         m_meshes.clear();
@@ -99,19 +125,39 @@ namespace SR_GRAPH_UI_NS {
     }
 
     void Gizmo::Update(float_t dt) {
-        SR_MATH_NS::FVector3 cameraPosition;
-        IRenderTechnique* pTechnique = nullptr;
+        SR_TRACY_ZONE;
 
-        if (auto&& pRenderScene = TryGetRenderScene()) {
-            if (auto&& pCamera = pRenderScene->GetMainCamera()) {
-                cameraPosition = pCamera->GetPosition();
-                pTechnique = pCamera->GetRenderTechnique();
-            }
+        auto&& pRenderScene = TryGetRenderScene();
+        if (!pRenderScene) {
+            return;
         }
 
-        const float_t distance = GetTransform()->GetTranslation().Distance(cameraPosition);
+        auto&& pCamera = pRenderScene->GetMainCamera();
+        if (!pCamera) {
+            return;
+        }
+
+        auto&& pTechnique = pCamera->GetRenderTechnique();
+        if (!pTechnique) {
+            return;
+        }
+
+        const float_t distance = GetTransform()->GetTranslation().Distance(pCamera->GetPosition());
 
         GetTransform()->SetScale(distance / 10.f);
+
+        if (auto&& pMesh = pTechnique->PickMeshAt(pCamera->GetMousePos())) {
+            for (auto&& [flag, info] : m_meshes) {
+                if (pMesh == info.pSelection.Get()) {
+                    info.pVisual->OverrideUniform("color")
+                        .SetData(SR_MATH_NS::FColor(1.f, 1.f, 0.f, 1.f))
+                        .SetShaderVarType(ShaderVarType::Vec4);
+                }
+                else {
+                    info.pVisual->RemoveUniformOverride("color");
+                }
+            }
+        }
 
         Super::Update(dt);
     }

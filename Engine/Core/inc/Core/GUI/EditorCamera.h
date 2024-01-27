@@ -19,21 +19,12 @@ namespace SR_CORE_GUI_NS {
         SR_NODISCARD bool ExecuteInEditMode() const override;
         SR_NODISCARD bool IsEditorCamera() const noexcept override { return true; }
 
+        SR_NODISCARD SR_MATH_NS::FPoint GetMousePos() const override;
+
     private:
         SceneViewer* m_sceneViewer = nullptr;
 
     };
-}
-
-namespace SR_CORE_GUI_NS {
-    EditorCamera::EditorCamera(SceneViewer* pSceneViewer, uint32_t width, uint32_t height)
-        : Camera(width, height)
-        , m_sceneViewer(pSceneViewer)
-    { }
-
-    bool EditorCamera::ExecuteInEditMode() const {
-        return true;
-    }
 }
 
 #endif //SR_ENGINE_EDITORCAMERA_H

@@ -138,6 +138,8 @@ namespace SR_GRAPH_NS {
     }
 
     SR_GTYPES_NS::Mesh* IRenderTechnique::PickMeshAt(float_t x, float_t y, SR_UTILS_NS::StringAtom passName) const {
+        SR_TRACY_ZONE;
+
         if (auto&& pPass = dynamic_cast<SR_GRAPH_NS::IColorBufferPass*>(FindPass(passName))) {
             if (auto&& pMesh = pPass->GetMesh(x, y)) {
                 return pMesh;
@@ -158,5 +160,9 @@ namespace SR_GRAPH_NS {
     SR_GTYPES_NS::Mesh* IRenderTechnique::PickMeshAt(float_t x, float_t y) const {
         static SR_UTILS_NS::StringAtom colorBufferPassName = "ColorBufferPass";
         return PickMeshAt(x, y, colorBufferPassName);
+    }
+
+    SR_GTYPES_NS::Mesh* IRenderTechnique::PickMeshAt(const SR_MATH_NS::FPoint& pos) const {
+        return PickMeshAt(pos.x, pos.y);
     }
 }

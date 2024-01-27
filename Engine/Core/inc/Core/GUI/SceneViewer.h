@@ -2,8 +2,8 @@
 // Created by Monika on 11.02.2022.
 //
 
-#ifndef SR_ENGINE_SCENEVIEWER_H
-#define SR_ENGINE_SCENEVIEWER_H
+#ifndef SR_ENGINE_SCENE_VIEWER_H
+#define SR_ENGINE_SCENE_VIEWER_H
 
 #include <Utils/ECS/GameObject.h>
 #include <Utils/World/Scene.h>
@@ -40,6 +40,9 @@ namespace SR_CORE_GUI_NS {
 
         void OnKeyDown(const SR_UTILS_NS::KeyboardInputData* data) override;
         void OnKeyPress(const SR_UTILS_NS::KeyboardInputData* data) override;
+
+        SR_NODISCARD SR_MATH_NS::FPoint GetImagePosition() const;
+        SR_NODISCARD SR_MATH_NS::IPoint GetTextureSize() const { return m_textureSize; }
 
     private:
         void SelectMesh(SR_GTYPES_NS::MeshComponent* pMesh);

@@ -23,6 +23,7 @@
                 <DisallowedLayers>
                     <Default/>
                     <Opaque/>
+                    <GizmoSelection/>
                 </DisallowedLayers>
             </MeshDrawerPass>
         </Passes>

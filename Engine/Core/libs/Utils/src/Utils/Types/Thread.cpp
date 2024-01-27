@@ -132,6 +132,7 @@ namespace SR_HTYPES_NS {
     }
 
     void Thread::Synchronize() {
+        SR_TRACY_ZONE;
         SR_WRITE_LOCK;
 
     #if defined(SR_DEBUG) && SR_THREAD_SAFE_CHECKS

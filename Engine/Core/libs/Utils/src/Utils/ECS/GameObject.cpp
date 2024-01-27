@@ -750,4 +750,29 @@ namespace SR_UTILS_NS {
             return true;
         });
     }
+
+    GameObject::Ptr GameObject::Find(StringAtom name) const noexcept {
+        for (auto&& child : m_children) {
+            if (child->GetHashName() == name.GetHash()) {
+                return child;
+            }
+        }
+
+        return GameObject::Ptr();
+    }
+
+    GameObject::Ptr GameObject::GetOrAddChild(StringAtom name) {
+        if (auto&& pChild = Find(name)) {
+            return pChild;
+        }
+        return AddChild(name);
+    }
+
+    GameObject::Ptr GameObject::AddChild(StringAtom name) {
+        auto&& pGameObject = GetScene()->Instance(name);
+        if (!AddChild(pGameObject)) {
+            SRHalt("Something went wrong!");
+        }
+        return pGameObject;
+    }
 }

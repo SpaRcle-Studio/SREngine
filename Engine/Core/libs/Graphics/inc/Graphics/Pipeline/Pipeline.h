@@ -149,6 +149,7 @@ namespace SR_GRAPH_NS {
 
         virtual void SetVSyncEnabled(bool enabled) { }
 
+        SR_NODISCARD const PipelineState& GetPreviousState() const { return m_previousState; }
         SR_NODISCARD uint8_t GetSamplesCount() const;
         SR_NODISCARD bool IsMultiSamplingSupported() const noexcept { return m_isMultiSampleSupported; }
         SR_NODISCARD virtual bool IsVSyncEnabled() const { return false; }

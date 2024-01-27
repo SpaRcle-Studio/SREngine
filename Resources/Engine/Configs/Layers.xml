@@ -10,5 +10,6 @@
     	<UI/>
         <DebugUI/>
         <Gizmo/>
+        <GizmoSelection/>
     </Layers>
 </Settings>

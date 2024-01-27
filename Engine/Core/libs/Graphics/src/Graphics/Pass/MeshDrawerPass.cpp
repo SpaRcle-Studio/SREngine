@@ -205,12 +205,9 @@ namespace SR_GRAPH_NS {
 
         auto&& pStrategy = GetRenderStrategy();
 
+        pStrategy->SetMeshDrawerPass(this);
         pStrategy->BindFilterCallback([this](auto&& layer) { return IsLayerAllowed(layer); });
         pStrategy->BindShaderReplaceCallback([this](auto&& pShader) { return ReplaceShader(pShader); });
-        pStrategy->BindSharedUniformsCallback([this](auto&& pShader) { UseSharedUniforms(pShader); });
-        pStrategy->BindUniformsCallback([this](auto&& pShader, auto&& pMesh) { UseUniforms(pShader, pMesh); });
-        pStrategy->BindConstantsCallback([this](auto&& pShader) { UseConstants(pShader); });
-        pStrategy->BindSamplersCallback([this](auto&& pShader) { UseSamplers(pShader); });
 
         Super::Bind();
     }

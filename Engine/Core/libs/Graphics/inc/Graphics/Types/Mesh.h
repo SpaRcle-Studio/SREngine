@@ -80,6 +80,9 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD bool IsMeshRegistered() const noexcept { return m_registrationInfo.has_value(); }
         SR_NODISCARD const MeshRegistrationInfo& GetMeshRegistrationInfo() const noexcept { return m_registrationInfo.value(); }
 
+        MaterialProperty& OverrideUniform(SR_UTILS_NS::StringAtom name);
+        void RemoveUniformOverride(SR_UTILS_NS::StringAtom name);
+
         void SetMeshRegistrationInfo(const std::optional<MeshRegistrationInfo>& info) { m_registrationInfo = info; }
 
         virtual bool OnResourceReloaded(SR_UTILS_NS::IResource* pResource);

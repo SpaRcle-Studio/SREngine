@@ -20,7 +20,7 @@
             <Default/>
             <Opaque/>
             <Transparent/>
-            <Gizmo/>
+            <GizmoSelection/>
         </AllowedLayers>
     </ColorBufferPass>
 </Include>

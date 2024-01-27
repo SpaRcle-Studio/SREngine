@@ -40,12 +40,12 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD bool HasPostRender() const noexcept override { return false; }
         SR_NODISCARD virtual bool IsNeedUseMaterials() const noexcept { return m_useMaterials; }
 
-    protected:
         virtual void UseUniforms(ShaderPtr pShader, MeshPtr pMesh);
         virtual void UseSharedUniforms(ShaderPtr pShader);
         virtual void UseConstants(ShaderPtr pShader);
         virtual void UseSamplers(ShaderPtr pShader);
 
+    protected:
         void OnResize(const SR_MATH_NS::UVector2& size) override;
         void OnSamplesChanged() override;
 

@@ -31,6 +31,7 @@ namespace SR_GTYPES_NS {
 namespace SR_GRAPH_NS {
     class RenderStrategy;
     class RenderScene;
+    class MeshDrawerPass;
 
     /// ----------------------------------------------------------------------------------------------------------------
 
@@ -223,16 +224,14 @@ namespace SR_GRAPH_NS {
         void Update();
 
         void BindFilterCallback(FilterCallback callback) { m_layerFilter = std::move(callback); }
-        void BindSharedUniformsCallback(ShaderCallback callback) { m_sharedUniformsCallback = std::move(callback); }
         void BindShaderReplaceCallback(ShaderReplaceCallback callback) { m_shaderReplaceCallback = std::move(callback); }
-        void BindUniformsCallback(MeshShaderCallback callback) { m_uniformsCallback = std::move(callback); }
-        void BindConstantsCallback(ShaderCallback callback) { m_constantsCallback = std::move(callback); }
-        void BindSamplersCallback(ShaderCallback callback) { m_samplersCallback = std::move(callback); }
         void BindPriorityCallback(PriorityCallback callback) { m_priorityCallback = std::move(callback); }
 
         void RegisterMesh(SR_GTYPES_NS::Mesh* pMesh);
         bool UnRegisterMesh(SR_GTYPES_NS::Mesh* pMesh);
         void ReRegisterMesh(const MeshRegistrationInfo& info);
+
+        void SetMeshDrawerPass(MeshDrawerPass* pMeshDrawerPass) { m_meshDrawerPass = pMeshDrawerPass; }
 
         void OnResourceReloaded(SR_UTILS_NS::IResource* pResource) const;
 
@@ -245,15 +244,12 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD const std::set<SR_UTILS_NS::StringAtom>& GetErrors() const noexcept { return m_errors; }
         SR_NODISCARD const std::set<SR_GTYPES_NS::Mesh*>& GetProblemMeshes() const noexcept { return m_problemMeshes; }
 
+        SR_NODISCARD MeshDrawerPass* GetMeshDrawerPass() const noexcept { return m_meshDrawerPass; }
+
         void ClearErrors();
         void AddError(SR_UTILS_NS::StringAtom error) { m_errors.insert(error); }
         void AddProblemMesh(SR_GTYPES_NS::Mesh* pMesh) { m_problemMeshes.insert(pMesh); }
         void SetDebugMode(bool value);
-
-        void UseSharedUniforms(ShaderPtr pShader);
-        void UseConstants(ShaderPtr pShader);
-        void UseSamplers(ShaderPtr pShader);
-        void UseUniforms(ShaderPtr pShader, MeshPtr pMesh);
 
         void ForEachMesh(const SR_HTYPES_NS::Function<void(MeshPtr)>& callback) const;
 
@@ -263,12 +259,10 @@ namespace SR_GRAPH_NS {
 
     private:
         FilterCallback m_layerFilter;
-        ShaderCallback m_sharedUniformsCallback;
-        ShaderCallback m_constantsCallback;
-        ShaderCallback m_samplersCallback;
         ShaderReplaceCallback m_shaderReplaceCallback;
-        MeshShaderCallback m_uniformsCallback;
         PriorityCallback m_priorityCallback;
+
+        MeshDrawerPass* m_meshDrawerPass = nullptr;
 
         RenderScene* m_renderScene = nullptr;
 

@@ -281,5 +281,29 @@ namespace SR_GRAPH_NS::Types {
             pRenderScene->ReRegister(m_registrationInfo.value());
         }
     }
+
+    MaterialProperty& Mesh::OverrideUniform(SR_UTILS_NS::StringAtom name) {
+        SR_TRACY_ZONE;
+
+        for (auto&& uniform : m_overrideUniforms) {
+            if (uniform.GetName() == name) {
+                return uniform;
+            }
+        }
+        m_overrideUniforms.emplace_back();
+        m_overrideUniforms.back().SetName("color");
+        return m_overrideUniforms.back();
+    }
+
+    void Mesh::RemoveUniformOverride(SR_UTILS_NS::StringAtom name) {
+        SR_TRACY_ZONE;
+
+        for (auto pIt = m_overrideUniforms.begin(); pIt != m_overrideUniforms.end(); ++pIt) {
+            if (name == pIt->GetName()) {
+                m_overrideUniforms.erase(pIt);
+                return;
+            }
+        }
+    }
 }
 

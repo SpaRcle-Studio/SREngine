@@ -56,6 +56,7 @@ namespace SR_UTILS_NS {
         SR_NODISCARD GameObject::Ptr GetRoot() const noexcept;
         SR_NODISCARD GameObject::Ptr Find(uint64_t hashName) const noexcept;
         SR_NODISCARD GameObject::Ptr Find(const std::string& name) const noexcept;
+        SR_NODISCARD GameObject::Ptr Find(StringAtom name) const noexcept;
         SR_NODISCARD std::string GetName() const { return m_name; }
         SR_NODISCARD StringAtom GetTag() const;
         SR_NODISCARD std::string GetTagString() const;
@@ -94,8 +95,11 @@ namespace SR_UTILS_NS {
         void SetTransform(Transform* transform);
 
         bool MoveToTree(const GameObject::Ptr& destination);
-        bool AddChild(const GameObject::Ptr& child);
         void RemoveChild(const GameObject::Ptr& child);
+        bool AddChild(const GameObject::Ptr& child);
+
+        SR_NODISCARD GameObject::Ptr AddChild(StringAtom name);
+        SR_NODISCARD GameObject::Ptr GetOrAddChild(StringAtom name);
 
         /// Вызывает OnAttached у компонентов загруженных через LoadComponent
         bool PostLoad(bool force) override;

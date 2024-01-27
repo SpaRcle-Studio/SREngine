@@ -73,6 +73,8 @@ namespace SR_GRAPH_NS {
         uint32_t frames = 0;
 
         while (m_windowImpl->IsValid()) {
+            SR_TRACY_ZONE_N("Main frame");
+
             auto t_start = std::chrono::high_resolution_clock::now();
 
             PollEvents();
@@ -245,6 +247,7 @@ namespace SR_GRAPH_NS {
     }
 
     void Window::PollEvents() {
+        SR_TRACY_ZONE;
         if (!m_windowImpl) {
             SR_ERROR("Window::PollEvents() : window implementation is nullptr.");
             return;

@@ -314,11 +314,6 @@ namespace SR_CORE_NS::GUI {
             return;
         }
 
-        auto&& mousePos = ImGui::GetMousePos() - m_imagePosition;
-
-        const float_t x = mousePos.x / static_cast<float_t>(m_textureSize.x);
-        const float_t y = mousePos.y / static_cast<float_t>(m_textureSize.y);
-
         auto&& pCamera = m_camera ? m_camera->GetComponent<SR_GTYPES_NS::Camera>() : nullptr;
         if (!pCamera) {
             return Super::OnMouseUp(data);
@@ -326,7 +321,7 @@ namespace SR_CORE_NS::GUI {
 
         auto&& pRenderTechnique = pCamera->GetRenderTechnique();
         if (pRenderTechnique && IsHovered()) {
-            if (auto&& pMesh = dynamic_cast<SR_GTYPES_NS::MeshComponent*>(pRenderTechnique->PickMeshAt(x, y, "ColorBufferPass"))) {
+            if (auto&& pMesh = dynamic_cast<SR_GTYPES_NS::MeshComponent*>(pRenderTechnique->PickMeshAt(pCamera->GetMousePos()))) {
                 SelectMesh(pMesh);
             }
             else {
@@ -420,5 +415,9 @@ namespace SR_CORE_NS::GUI {
         }
 
         m_hierarchy->SelectGameObject(pMesh->GetRoot());
+    }
+
+    SR_MATH_NS::FPoint SceneViewer::GetImagePosition() const {
+        return SR_MATH_NS::FPoint(m_imagePosition.x, m_imagePosition.y);
     }
 }

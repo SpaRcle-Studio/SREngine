@@ -15,7 +15,7 @@ namespace SR_CORE_GUI_NS {
             preview = "[GMJ] " + pGameObject->GetName();
         }
         else if (auto&& pComponent = entityRef.GetComponent()) {
-            preview = "[CMP] " + pComponent->GetComponentName();
+            preview = "[CMP] " + pComponent->GetComponentName().ToStringRef();
         }
         else {
             preview = "[None]";
