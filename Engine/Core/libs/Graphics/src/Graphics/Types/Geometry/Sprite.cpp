@@ -127,10 +127,8 @@ namespace SR_GTYPES_NS {
         Super::UseModelMatrix();
     }
 
-    void Sprite::OnPriorityDirty() {
-        if (auto&& pRenderScene = GetRenderScene()) {
-            pRenderScene->GetFlatCluster().MarkDirty();
-        }
-        Component::OnPriorityDirty();
+    void Sprite::OnPriorityChanged() {
+        ReRegisterMesh();
+        Component::OnPriorityChanged();
     }
 }

@@ -2,8 +2,8 @@
 // Created by Monika on 23.02.2022.
 //
 
-#ifndef SRENGINE_COMPONENTDRAWER_H
-#define SRENGINE_COMPONENTDRAWER_H
+#ifndef SR_ENGINE_COMPONENTDRAWER_H
+#define SR_ENGINE_COMPONENTDRAWER_H
 
 #include <Utils/stdInclude.h>
 
@@ -86,4 +86,4 @@ namespace SR_CORE_NS::GUI::ComponentDrawer {
     void DrawComponent(SR_AUDIO_NS::AudioListener*& pComponent,EditorGUI* context,int32_t index);
 }
 
-#endif //SRENGINE_COMPONENTDRAWER_H
+#endif //SR_ENGINE_COMPONENTDRAWER_H

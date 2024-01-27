@@ -29,7 +29,7 @@ namespace SR_CORE_GUI_NS {
             WidgetsPage();
             VideoMemoryPage();
             SubmitQueuePage();
-            FlatClusterPage();
+            RenderStrategyPage();
 
             ImGui::EndTabBar();
         }
@@ -354,53 +354,112 @@ namespace SR_CORE_GUI_NS {
         ImGui::Separator();
     }
 
-    void EngineStatistics::FlatClusterPage() {
+    void EngineStatistics::RenderStrategyPage() {
         auto&& pRenderScene = GetRenderScene();
         if (!pRenderScene) {
             return;
         }
 
-        if (ImGui::BeginTabItem("Flat cluster"))
-        {
-            if (ImGui::BeginTable("##FlatCluster", 4))
-            {
-                uint32_t index = 0;
+        if (!ImGui::BeginTabItem("Render strategy")) {
+            return;
+        }
 
-                for (auto&& pMesh : pRenderScene->GetFlatCluster()) {
-                    ++index;
+        auto&& pRenderStrategy = pRenderScene->GetRenderStrategy();
 
-                    if (!pMesh) {
-                        continue;
-                    }
+        SR_GRAPH_GUI_NS::Text("Status:");
+        ImGui::SameLine();
 
-                    ImGui::TableNextRow();
+        if (!pRenderStrategy->GetErrors().empty()) {
+            ImGui::TextColored(ImVec4(1, 0, 0, 1), "Error");
 
-                    ImGui::TableSetColumnIndex(0);
-                    ImGui::Text("Index: %i", index);
-                    ImGui::Separator();
+            if (ImGui::BeginListBox("Render errors")) {
+                for (auto&& error : pRenderScene->GetRenderStrategy()->GetErrors()) {
+                    ImGui::Selectable(error.c_str());
+                }
+                ImGui::EndListBox();
+            }
+        }
+        else {
+            ImGui::TextColored(ImVec4(0, 1, 0, 1), "Ok");
+        }
 
-                    ImGui::TableSetColumnIndex(1);
-                    if (auto&& pMeshComponent = dynamic_cast<SR_GTYPES_NS::MeshComponent*>(pMesh); pMeshComponent && pMeshComponent->GetGameObject()) {
-                        ImGui::Text("GameObject: %s", pMeshComponent->GetGameObject()->GetName().c_str());
-                    }
-                    else {
-                        ImGui::Text("Geometry: %s", pMesh->GetGeometryName().c_str());
-                    }
-                    ImGui::Separator();
+        bool debugMode = pRenderStrategy->IsDebugModeEnabled();
+        if (SR_GRAPH_GUI_NS::CheckBox("Debug mode", debugMode)) {
+            pRenderStrategy->SetDebugMode(debugMode);
+        }
 
-                    ImGui::TableSetColumnIndex(2);
-                    ImGui::Text("Priority: %lli", pMesh->GetSortingPriority());
-                    ImGui::Separator();
+        auto&& pHierarchy = GetManager()->GetWidget<Hierarchy>();
 
-                    ImGui::TableSetColumnIndex(3);
-                    ImGui::Text("%s", pMesh->GetShader() ? pMesh->GetShader()->GetResourceId().data() : "[no shader]");
-                    ImGui::Separator();
+        if (ImGui::BeginListBox("Invalid meshes")) {
+            for (auto&& pMesh : pRenderStrategy->GetProblemMeshes()) {
+                auto&& pRenderComponent = dynamic_cast<SR_GTYPES_NS::IRenderComponent*>(pMesh);
+                auto&& pRawMeshHolder = dynamic_cast<SR_HTYPES_NS::IRawMeshHolder*>(pMesh);
+
+                SR_UTILS_NS::StringAtom name;
+
+                if (pRenderComponent && pRenderComponent->GetGameObject()) {
+                    name = pRenderComponent->GetGameObject()->GetName();
                 }
 
-                ImGui::EndTable();
+                if (name.empty() && pRawMeshHolder) {
+                    name = pRawMeshHolder->GetMeshPath().ToStringView();
+                }
+
+                if (name.empty()) {
+                    name = pMesh->GetGeometryName();
+                }
+
+                if (name.empty()) {
+                    name = SR_UTILS_NS::EnumReflector::ToStringAtom(pMesh->GetMeshType());
+                }
+
+                if (ImGui::Selectable(name.c_str())) {
+                    if (pHierarchy && pRenderComponent) {
+                        pHierarchy->SelectGameObject(pRenderComponent->GetGameObject());
+                    }
+                }
             }
 
-            ImGui::EndTabItem();
+            ImGui::EndListBox();
         }
+        /*if (ImGui::BeginTable("##FlatCluster", 4))
+        {
+            uint32_t index = 0;
+
+            for (auto&& pMesh : pRenderScene->GetFlatCluster()) {
+                ++index;
+
+                if (!pMesh) {
+                    continue;
+                }
+
+                ImGui::TableNextRow();
+
+                ImGui::TableSetColumnIndex(0);
+                ImGui::Text("Index: %i", index);
+                ImGui::Separator();
+
+                ImGui::TableSetColumnIndex(1);
+                if (auto&& pMeshComponent = dynamic_cast<SR_GTYPES_NS::MeshComponent*>(pMesh); pMeshComponent && pMeshComponent->GetGameObject()) {
+                    ImGui::Text("GameObject: %s", pMeshComponent->GetGameObject()->GetName().c_str());
+                }
+                else {
+                    ImGui::Text("Geometry: %s", pMesh->GetGeometryName().c_str());
+                }
+                ImGui::Separator();
+
+                ImGui::TableSetColumnIndex(2);
+                ImGui::Text("Priority: %lli", pMesh->GetSortingPriority());
+                ImGui::Separator();
+
+                ImGui::TableSetColumnIndex(3);
+                ImGui::Text("%s", pMesh->GetShader() ? pMesh->GetShader()->GetResourceId().data() : "[no shader]");
+                ImGui::Separator();
+            }
+
+            ImGui::EndTable();
+        }*/
+
+        ImGui::EndTabItem();
     }
 }

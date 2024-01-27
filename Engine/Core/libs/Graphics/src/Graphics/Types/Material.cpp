@@ -23,35 +23,11 @@ namespace SR_GTYPES_NS {
     }
 
     void Material::Use() {
+        SR_TRACY_ZONE;
+
         InitContext();
 
-        m_properties.ForEachProperty<MaterialProperty>([this](auto&& pProperty){
-            auto&& hashId = pProperty->GetName().GetHash();
-
-            switch (pProperty->GetShaderVarType()) {
-                case ShaderVarType::Int:
-                    m_shader->SetInt(hashId, std::get<int32_t>(pProperty->GetData()));
-                    break;
-                case ShaderVarType::Float:
-                    m_shader->SetFloat(hashId, std::get<float_t>(pProperty->GetData()));
-                    break;
-                case ShaderVarType::Vec2:
-                    m_shader->SetVec2(hashId, std::get<SR_MATH_NS::FVector2>(pProperty->GetData()).template Cast<float_t>());
-                    break;
-                case ShaderVarType::Vec3:
-                    m_shader->SetVec3(hashId, std::get<SR_MATH_NS::FVector3>(pProperty->GetData()).template Cast<float_t>());
-                    break;
-                case ShaderVarType::Vec4:
-                    m_shader->SetVec4(hashId, std::get<SR_MATH_NS::FVector4>(pProperty->GetData()).template Cast<float_t>());
-                    break;
-                case ShaderVarType::Sampler2D:
-                    /// samplers used at UseSamplers
-                    break;
-                default:
-                    SRAssertOnce(false);
-                    break;
-            }
-        });
+        m_properties.UseMaterialUniforms(m_shader);
     }
 
     SR_UTILS_NS::IResource* Material::CopyResource(SR_UTILS_NS::IResource* destination) const {
@@ -155,18 +131,10 @@ namespace SR_GTYPES_NS {
             return;
         }
 
-        m_properties.ForEachProperty<MaterialProperty>([this](auto&& pProperty){
-            switch (pProperty->GetShaderVarType()) {
-                case ShaderVarType::Sampler2D:
-                    m_shader->SetSampler2D(pProperty->GetName().GetHash(), std::get<Texture*>(pProperty->GetData()));
-                    break;
-                default:
-                    break;
-            }
-        });
+        m_properties.UseMaterialSamplers(m_shader);
     }
 
-    bool Material::LoadProperties(const SR_XML_NS::Node &propertiesNode) {
+    bool Material::LoadProperties(const SR_XML_NS::Node& propertiesNode) {
         if (!m_shader) {
             SR_ERROR("Material::LoadProperties() : shader is nullptr!");
             return false;
@@ -176,9 +144,8 @@ namespace SR_GTYPES_NS {
 
         /// Загружаем базовые значения
         for (auto&& [id, propertyType] : m_shader->GetProperties()) {
-            m_properties.AddCustomProperty<MaterialProperty>(id.c_str())
+            m_properties.AddCustomProperty<MaterialProperty>(id.c_str(), propertyType)
                 .SetData(GetVariantFromShaderVarType(propertyType))
-                .SetShaderVarType(propertyType)
                 .SetMaterial(this)
                 .SetDisplayName(id); // TODO: make a pretty name
         }

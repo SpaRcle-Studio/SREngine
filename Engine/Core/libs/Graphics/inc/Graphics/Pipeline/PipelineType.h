@@ -7,6 +7,7 @@
 
 #include <Utils/Common/Enumerations.h>
 #include <Utils/Debug.h>
+#include <Utils/Math/Matrix4x4.h>
 
 namespace SR_GRAPH_NS {
     SR_ENUM_NS_CLASS_T(PipelineType, uint8_t,

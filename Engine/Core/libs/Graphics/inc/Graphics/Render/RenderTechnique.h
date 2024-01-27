@@ -2,8 +2,8 @@
 // Created by Monika on 17.07.2022.
 //
 
-#ifndef SRENGINE_RENDERTECHNIQUE_H
-#define SRENGINE_RENDERTECHNIQUE_H
+#ifndef SR_ENGINE_RENDERTECHNIQUE_H
+#define SR_ENGINE_RENDERTECHNIQUE_H
 
 #include <Graphics/Render/IRenderTechnique.h>
 
@@ -25,7 +25,10 @@ namespace SR_GRAPH_NS {
         bool LoadSettings(const SR_XML_NS::Node &node) override;
         void ClearSettings() override;
 
+    private:
+        void LoadPass(const SR_XML_NS::Node& node);
+
     };
 }
 
-#endif //SRENGINE_RENDERTECHNIQUE_H
+#endif //SR_ENGINE_RENDERTECHNIQUE_H

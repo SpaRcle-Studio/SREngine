@@ -2,8 +2,8 @@
 // Created by Monika on 25.04.2023.
 //
 
-#ifndef SRENGINE_ANIMATIONDATA_H
-#define SRENGINE_ANIMATIONDATA_H
+#ifndef SR_ENGINE_ANIMATIONDATA_H
+#define SR_ENGINE_ANIMATIONDATA_H
 
 #include <Graphics/Animations/AnimationCommon.h>
 
@@ -32,4 +32,4 @@ namespace SR_ANIMATIONS_NS {
     };
 }
 
-#endif //SRENGINE_ANIMATIONDATA_H
+#endif //SR_ENGINE_ANIMATIONDATA_H

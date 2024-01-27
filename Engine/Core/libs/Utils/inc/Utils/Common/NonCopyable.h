@@ -2,8 +2,8 @@
 // Created by Monika on 16.01.2022.
 //
 
-#ifndef SRENGINE_NONCOPYABLE_H
-#define SRENGINE_NONCOPYABLE_H
+#ifndef SR_ENGINE_NONCOPYABLE_H
+#define SR_ENGINE_NONCOPYABLE_H
 
 #include <Utils/stdInclude.h>
 
@@ -18,4 +18,4 @@ namespace SR_UTILS_NS {
     };
 }
 
-#endif //SRENGINE_NONCOPYABLE_H
+#endif //SR_ENGINE_NONCOPYABLE_H

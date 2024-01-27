@@ -118,6 +118,8 @@ namespace SR_WORLD_NS {
     }
 
     bool Chunk::PreLoad(SR_HTYPES_NS::Marshal* pMarshal) {
+        /// TODO: add version and migration
+
         if (pMarshal && pMarshal->Valid()) {
             if (m_position != pMarshal->Read<SR_MATH_NS::IVector3>()) {
                 SRAssert2(false, "Something went wrong...");

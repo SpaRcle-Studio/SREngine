@@ -2,8 +2,8 @@
 // Created by Monika on 06.05.2022.
 //
 
-#ifndef SRENGINE_FRAMEBUFFER_H
-#define SRENGINE_FRAMEBUFFER_H
+#ifndef SR_ENGINE_FRAMEBUFFER_H
+#define SR_ENGINE_FRAMEBUFFER_H
 
 #include <Utils/Debug.h>
 #include <Utils/Math/Vector2.h>
@@ -103,4 +103,4 @@ namespace SR_GTYPES_NS {
     };
 }
 
-#endif //SRENGINE_FRAMEBUFFER_H
+#endif //SR_ENGINE_FRAMEBUFFER_H

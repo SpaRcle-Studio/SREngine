@@ -2,8 +2,8 @@
 // Created by Monika on 20.03.2023.
 //
 
-#ifndef SRENGINE_UTILS_IRAWMESHHOLDER_H
-#define SRENGINE_UTILS_IRAWMESHHOLDER_H
+#ifndef SR_ENGINE_UTILS_IRAWMESHHOLDER_H
+#define SR_ENGINE_UTILS_IRAWMESHHOLDER_H
 
 #include <Utils/stdInclude.h>
 
@@ -41,4 +41,4 @@ namespace SR_HTYPES_NS {
     };
 }
 
-#endif //SRENGINE_UTILS_IRAWMESHHOLDER_H
+#endif //SR_ENGINE_UTILS_IRAWMESHHOLDER_H

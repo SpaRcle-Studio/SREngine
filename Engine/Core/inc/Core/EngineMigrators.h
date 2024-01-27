@@ -2,11 +2,11 @@
 // Created by Monika on 27.03.2023.
 //
 
-#ifndef SRENGINE_ENGINEMIGRATORS_H
-#define SRENGINE_ENGINEMIGRATORS_H
+#ifndef SR_ENGINE_ENGINEMIGRATORS_H
+#define SR_ENGINE_ENGINEMIGRATORS_H
 
 namespace SR_CORE_NS {
     bool RegisterMigrators();
 }
 
-#endif //SRENGINE_ENGINEMIGRATORS_H
+#endif //SR_ENGINE_ENGINEMIGRATORS_H

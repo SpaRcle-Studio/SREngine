@@ -2,8 +2,8 @@
 // Created by Monika on 01.04.2022.
 //
 
-#ifndef SRENGINE_OPTIMIZATION_H
-#define SRENGINE_OPTIMIZATION_H
+#ifndef SR_ENGINE_OPTIMIZATION_H
+#define SR_ENGINE_OPTIMIZATION_H
 
 #include <FbxLoader/Mesh.h>
 #include <FbxLoader/Node.h>
@@ -40,4 +40,4 @@ namespace FbxLoader {
     };
 }
 
-#endif //SRENGINE_OPTIMIZATION_H
+#endif //SR_ENGINE_OPTIMIZATION_H

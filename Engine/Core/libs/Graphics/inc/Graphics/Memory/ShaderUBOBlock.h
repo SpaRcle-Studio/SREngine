@@ -2,8 +2,8 @@
 // Created by Monika on 11.07.2022.
 //
 
-#ifndef SRENGINE_SHADERUBOBLOCK_H
-#define SRENGINE_SHADERUBOBLOCK_H
+#ifndef SR_ENGINE_SHADERUBOBLOCK_H
+#define SR_ENGINE_SHADERUBOBLOCK_H
 
 #include <Utils/Types/Map.h>
 #include <Graphics/Pipeline/IShaderProgram.h>
@@ -60,4 +60,4 @@ namespace SR_GRAPH_NS::Memory {
     };
 }
 
-#endif //SRENGINE_SHADERUBOBLOCK_H
+#endif //SR_ENGINE_SHADERUBOBLOCK_H

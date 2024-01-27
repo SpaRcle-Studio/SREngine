@@ -2,8 +2,8 @@
 // Created by Monika on 30.08.2023.
 //
 
-#ifndef SRENGINE_LOGICALNODE_H
-#define SRENGINE_LOGICALNODE_H
+#ifndef SR_ENGINE_LOGICALNODE_H
+#define SR_ENGINE_LOGICALNODE_H
 
 #include <Utils/Common/NonCopyable.h>
 #include <Utils/Common/Hashes.h>
@@ -162,4 +162,4 @@ namespace SR_SRLM_NS {
     };
 }
 
-#endif //SRENGINE_LOGICALNODE_H
+#endif //SR_ENGINE_LOGICALNODE_H

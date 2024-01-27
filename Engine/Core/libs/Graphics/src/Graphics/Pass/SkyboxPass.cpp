@@ -81,7 +81,7 @@ namespace SR_GRAPH_NS {
             return;
         }
 
-        m_context->SetCurrentShader(pShader);
+        GetContext()->SetCurrentShader(pShader);
 
         if (m_uboManager.BindUBO(virtualUbo) == Memory::UBOManager::BindResult::Duplicated) {
             SR_ERROR("SkyboxPass::Update() : memory has been duplicated!");
@@ -96,7 +96,7 @@ namespace SR_GRAPH_NS {
         bool result = BasePass::Init();
 
         if (m_skybox) {
-            m_context->Register(m_skybox);
+            GetContext()->Register(m_skybox);
         }
 
         return result;

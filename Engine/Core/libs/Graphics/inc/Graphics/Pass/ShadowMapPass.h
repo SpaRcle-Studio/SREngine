@@ -2,8 +2,8 @@
 // Created by innerviewer on 5/21/2023.
 //
 
-#ifndef SRENGINE_SHADOWMAPPASS_H
-#define SRENGINE_SHADOWMAPPASS_H
+#ifndef SR_ENGINE_SHADOW_MAP_PASS_H
+#define SR_ENGINE_SHADOW_MAP_PASS_H
 
 #include <Graphics/Pass/ShaderOverridePass.h>
 
@@ -33,4 +33,4 @@ namespace SR_GRAPH_NS {
     };
 }
 
-#endif //SRENGINE_SHADOWMAPPASS_H
+#endif //SR_ENGINE_SHADOW_MAP_PASS_H

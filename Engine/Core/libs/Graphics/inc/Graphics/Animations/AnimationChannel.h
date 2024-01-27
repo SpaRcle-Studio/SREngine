@@ -2,8 +2,8 @@
 // Created by Monika on 08.01.2023.
 //
 
-#ifndef SRENGINE_ANIMATIONCHANNEL_H
-#define SRENGINE_ANIMATIONCHANNEL_H
+#ifndef SR_ENGINE_ANIMATIONCHANNEL_H
+#define SR_ENGINE_ANIMATIONCHANNEL_H
 
 #include <Utils/ECS/EntityRef.h>
 
@@ -61,4 +61,4 @@ namespace SR_ANIMATIONS_NS {
     };
 }
 
-#endif //SRENGINE_ANIMATIONCHANNEL_H
+#endif //SR_ENGINE_ANIMATIONCHANNEL_H

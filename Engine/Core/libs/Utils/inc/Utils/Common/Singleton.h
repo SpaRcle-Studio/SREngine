@@ -90,7 +90,7 @@ namespace SR_UTILS_NS {
         ~Singleton() override = default;
 
     public:
-        SR_MAYBE_UNUSED static SR_HTYPES_NS::SingletonRecursiveLockGuard<Singleton<T>*> ScopeLockSingleton() {
+        SR_MAYBE_UNUSED SR_NODISCARD static SR_HTYPES_NS::SingletonRecursiveLockGuard<Singleton<T>*> ScopeLockSingleton() {
             return SR_HTYPES_NS::SingletonRecursiveLockGuard<Singleton<T>*>(&Instance());
         }
 

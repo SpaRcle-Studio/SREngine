@@ -4,11 +4,15 @@
 
 #include <Utils/World/ScenePrefabLogic.h>
 #include <Utils/ECS/Transform3D.h>
+#include <Utils/ECS/LayerManager.h>
 
 namespace SR_WORLD_NS {
     ScenePrefabLogic::ScenePrefabLogic(const SceneLogic::ScenePtr& scene)
         : Super(scene)
-    { }
+    {
+        m_tag = SR_UTILS_NS::TagManager::Instance().GetDefaultTag();
+        m_layer = SR_UTILS_NS::LayerManager::Instance().GetDefaultLayer();
+    }
 
     bool ScenePrefabLogic::Save(const Path& path) {
         if (!Super::Save(path)) {
@@ -23,7 +27,8 @@ namespace SR_WORLD_NS {
         pMarshal->Write<bool>(false /** is prefab */);
         pMarshal->Write<bool>(true /** is enabled */);
         pMarshal->Write(m_scene->GetName());
-        pMarshal->Write<uint64_t>(0 /** tag */);
+        pMarshal->Write<uint64_t>(m_tag.GetHash());
+        pMarshal->Write<uint64_t>(m_layer.GetHash());
 
         auto&& pTransformMarshal = Transform3D().Save(SR_UTILS_NS::SavableSaveData(nullptr, SAVABLE_FLAG_ECS_NO_ID));
         pMarshal->Write<uint64_t>(pTransformMarshal->Size());
@@ -64,6 +69,9 @@ namespace SR_WORLD_NS {
         }
 
         pPrefab->AddUsePoint();
+
+        m_tag = pPrefab->GetData()->GetTag();
+        m_layer = pPrefab->GetData()->GetLayer();
 
         for (auto&& pComponent : pPrefab->GetData()->GetLoadedComponents()) {
             if (auto&& pCopy = pComponent->CopyComponent()) {

@@ -130,10 +130,14 @@ namespace SR_UTILS_NS {
         return pMarshal;
     }
 
-    Transform *Transform::Load(SR_HTYPES_NS::Marshal& marshal, GameObject* pGameObject) {
+    Transform* Transform::Load(SR_HTYPES_NS::Marshal& marshal, GameObject* pGameObject) {
         Transform* pTransform = nullptr;
 
         SR_MAYBE_UNUSED auto&& version = marshal.Read<uint16_t>(); /// TODO: migrate
+        if (version != VERSION) {
+            SRHalt("Transform::Load() : missing migrator!\n\tLoaded version: {}\n\tActual version: {}", version, VERSION);
+            return nullptr;
+        }
 
         auto&& measurement = static_cast<Measurement>(marshal.Read<uint8_t>());
 

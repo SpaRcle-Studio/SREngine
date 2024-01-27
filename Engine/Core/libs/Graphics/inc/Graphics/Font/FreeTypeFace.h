@@ -2,8 +2,8 @@
 // Created by Monika on 06.11.2022.
 //
 
-#ifndef SRENGINE_FREETYPEFACE_H
-#define SRENGINE_FREETYPEFACE_H
+#ifndef SR_ENGINE_FREETYPEFACE_H
+#define SR_ENGINE_FREETYPEFACE_H
 
 #include <Graphics/Font/FreeType.h>
 #include <Graphics/Font/FreeTypeDrawContext.h>
@@ -144,4 +144,4 @@ namespace SR_GRAPH_NS {
     };
 }
 
-#endif //SRENGINE_FREETYPEFACE_H
+#endif //SR_ENGINE_FREETYPEFACE_H

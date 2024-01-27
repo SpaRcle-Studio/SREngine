@@ -2,8 +2,8 @@
 // Created by Monika on 09.02.2023.
 //
 
-#ifndef SRENGINE_SSAOPASS_H
-#define SRENGINE_SSAOPASS_H
+#ifndef SR_ENGINE_SSAOPASS_H
+#define SR_ENGINE_SSAOPASS_H
 
 #include <Graphics/Pass/PostProcessPass.h>
 #include <Graphics/Pass/IFramebufferPass.h>
@@ -43,4 +43,4 @@ namespace SR_GRAPH_NS {
 }
 
 
-#endif //SRENGINE_SSAOPASS_H
+#endif //SR_ENGINE_SSAOPASS_H

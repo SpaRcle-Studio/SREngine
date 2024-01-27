@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<Settings>
+    <!-- TODO: rebuild render after change -->
+    <Default Name="Default"/>
+    <Layers>
+        <Default/>
+		<Opaque/>
+        <Debug/>
+    	<Transparent/>
+    	<UI/>
+        <DebugUI/>
+        <Gizmo/>
+    </Layers>
+</Settings>

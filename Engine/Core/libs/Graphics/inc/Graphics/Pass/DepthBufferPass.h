@@ -2,8 +2,8 @@
 // Created by Monika on 21.01.2023.
 //
 
-#ifndef SRENGINE_DEPTHBUFFERPASS_H
-#define SRENGINE_DEPTHBUFFERPASS_H
+#ifndef SR_ENGINE_DEPTHBUFFERPASS_H
+#define SR_ENGINE_DEPTHBUFFERPASS_H
 
 #include <Graphics/Pass/ShaderOverridePass.h>
 #include <Graphics/Pipeline/PipelineType.h>
@@ -22,4 +22,4 @@ namespace SR_GRAPH_NS {
     };
 }
 
-#endif //SRENGINE_DEPTHBUFFERPASS_H
+#endif //SR_ENGINE_DEPTHBUFFERPASS_H

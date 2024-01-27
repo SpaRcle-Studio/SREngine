@@ -2,8 +2,8 @@
 // Created by Monika on 06.02.2023.
 //
 
-#ifndef SRENGINE_SRSL_EVALUATOR_H
-#define SRENGINE_SRSL_EVALUATOR_H
+#ifndef SR_ENGINE_SRSL_EVALUATOR_H
+#define SR_ENGINE_SRSL_EVALUATOR_H
 
 #include <Graphics/SRSL/LexicalTree.h>
 #include <Graphics/SRSL/ShaderType.h>
@@ -21,4 +21,4 @@ namespace SR_SRSL_NS {
     };
 }
 
-#endif //SRENGINE_SRSL_EVALUATOR_H
+#endif //SR_ENGINE_SRSL_EVALUATOR_H

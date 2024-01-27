@@ -326,8 +326,7 @@ namespace SR_CORE_NS::GUI {
 
         auto&& pRenderTechnique = pCamera->GetRenderTechnique();
         if (pRenderTechnique && IsHovered()) {
-            static std::vector<SR_UTILS_NS::StringAtom> filter = { "FlatColorBufferPass", "ColorBufferPass" };
-            if (auto&& pMesh = dynamic_cast<SR_GTYPES_NS::MeshComponent*>(pRenderTechnique->PickMeshAt(x, y, filter))) {
+            if (auto&& pMesh = dynamic_cast<SR_GTYPES_NS::MeshComponent*>(pRenderTechnique->PickMeshAt(x, y, "ColorBufferPass"))) {
                 SelectMesh(pMesh);
             }
             else {

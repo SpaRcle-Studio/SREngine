@@ -2,8 +2,8 @@
 // Created by Monika on 11.01.2023.
 //
 
-#ifndef SRENGINE_IMPORTERS_H
-#define SRENGINE_IMPORTERS_H
+#ifndef SR_ENGINE_IMPORTERS_H
+#define SR_ENGINE_IMPORTERS_H
 
 namespace SR_HTYPES_NS {
     class RawMesh;
@@ -18,4 +18,4 @@ namespace SR_CORE_NS::Importers {
     SR_ANIMATIONS_NS::Skeleton* ImportSkeletonFromRawMesh(const SR_HTYPES_NS::RawMesh* pRawMesh);
 }
 
-#endif //SRENGINE_IMPORTERS_H
+#endif //SR_ENGINE_IMPORTERS_H

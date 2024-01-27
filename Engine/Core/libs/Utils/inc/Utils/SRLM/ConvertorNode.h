@@ -2,8 +2,8 @@
 // Created by innerviewer on 9/9/2023.
 //
 
-#ifndef SRENGINE_CONVERTORNODE_H
-#define SRENGINE_CONVERTORNODE_H
+#ifndef SR_ENGINE_CONVERTORNODE_H
+#define SR_ENGINE_CONVERTORNODE_H
 
 #include <Utils/SRLM/LogicalNode.h>
 
@@ -33,4 +33,4 @@ namespace SR_SRLM_NS {
     };
 }
 
-#endif //SRENGINE_CONVERTORNODE_H
+#endif //SR_ENGINE_CONVERTORNODE_H

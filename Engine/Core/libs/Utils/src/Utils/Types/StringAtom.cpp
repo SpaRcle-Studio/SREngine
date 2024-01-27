@@ -9,12 +9,22 @@ namespace SR_UTILS_NS {
     StringHashInfo* StringAtom::DEFAULT_STRING_INFO = SR_UTILS_NS::HashManager::Instance().GetOrAddInfo("");
 
     StringAtom::StringAtom(const char* str)
-        : m_info(SR_UTILS_NS::HashManager::Instance().GetOrAddInfo(str))
+        : StringAtom(SR_UTILS_NS::HashManager::Instance().GetOrAddInfo(str))
     { }
 
     StringAtom::StringAtom(const std::string& str)
-        : m_info(SR_UTILS_NS::HashManager::Instance().GetOrAddInfo(str))
+        : StringAtom(SR_UTILS_NS::HashManager::Instance().GetOrAddInfo(str))
     { }
+
+    StringAtom::StringAtom(const std::string_view& str)
+        : StringAtom(SR_UTILS_NS::HashManager::Instance().GetOrAddInfo(str))
+    { }
+
+    StringAtom::StringAtom(StringHashInfo* pInfo)
+        : m_info(pInfo)
+    {
+        SRAssert(m_info);
+    }
 
     StringAtom::operator std::string() const noexcept { /// NOLINT
         return m_info ? m_info->data : DEFAULT;
@@ -96,5 +106,21 @@ namespace SR_UTILS_NS {
 
     StringAtom::operator std::string_view() const noexcept {
         return m_info ? m_info->data : DEFAULT;
-    };
+    }
+
+    bool StringAtom::Contains(const char* str) const {
+        if (!m_info || m_info->size == 0) {
+            return false;
+        }
+
+        return m_info->data.find(str) != std::string::npos;
+    }
+
+    bool StringAtom::operator<(const StringAtom& other) const noexcept {
+        return m_info ? (m_info->hash < other.GetHash()) : false;
+    }
+
+    bool StringAtom::operator<(uint64_t hash) const noexcept {
+        return m_info ? (m_info->hash < hash) : false;
+    }
 }

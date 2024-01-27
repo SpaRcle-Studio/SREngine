@@ -9,6 +9,7 @@
 #include <Graphics/SRSL/AssignExpander.h>
 #include <Graphics/SRSL/PreProcessor.h>
 #include <Graphics/SRSL/TypeInfo.h>
+#include <Graphics/SRSL/ShaderVariables.h>
 
 #include <Utils/Platform/Platform.h>
 

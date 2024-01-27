@@ -2,8 +2,8 @@
 // Created by Monika on 30.03.2022.
 //
 
-#ifndef SRENGINE_MARSHALUTILS_H
-#define SRENGINE_MARSHALUTILS_H
+#ifndef SR_ENGINE_MARSHALUTILS_H
+#define SR_ENGINE_MARSHALUTILS_H
 
 #include <Utils/Common/StringFormat.h>
 #include <Utils/Math/Vector3.h>
@@ -41,4 +41,4 @@ namespace SR_UTILS_NS {
     };
 }
 
-#endif //SRENGINE_MARSHALUTILS_H
+#endif //SR_ENGINE_MARSHALUTILS_H

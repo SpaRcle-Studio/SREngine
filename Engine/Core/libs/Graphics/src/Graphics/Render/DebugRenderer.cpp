@@ -81,7 +81,9 @@ namespace SR_GRAPH_NS {
             }
 
             if (timed.endPoint <= timePoint) {
-                timed.pMesh->MarkMeshDestroyed();
+                if (!timed.pMesh->UnRegisterMesh()) {
+                    SRHalt("Failed to unregister mesh!");
+                }
                 timed.pMesh = nullptr;
                 m_emptyIds.emplace_back(i);
             }
@@ -200,12 +202,10 @@ namespace SR_GRAPH_NS {
                 continue;
             }
 
-            if (!timed.registered) {
-                timed.pMesh->FreeVideoMemory();
-                timed.pMesh->DeInitGraphicsResource();
+            if (!timed.pMesh->UnRegisterMesh() && timed.registered) {
+                SRHalt("Failed to unregister mesh!");
             }
 
-            timed.pMesh->MarkMeshDestroyed();
             timed.pMesh = nullptr;
 
             m_emptyIds.emplace_back(i);

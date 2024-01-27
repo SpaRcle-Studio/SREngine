@@ -37,7 +37,7 @@ namespace SR_GTYPES_NS {
     }
 
     void MeshComponent::OnAttached() {
-        GetRenderScene().Do([this](SR_GRAPH_NS::RenderScene *ptr) {
+        GetRenderScene().Do([this](SR_GRAPH_NS::RenderScene* ptr) {
             ptr->Register(this);
         });
 
@@ -45,23 +45,8 @@ namespace SR_GTYPES_NS {
     }
 
     void MeshComponent::OnDestroy() {
-        RenderScene::Ptr renderScene = TryGetRenderScene();
-
         Component::OnDestroy();
-
-        /// если ресурс уничтожится сразу, то обрабатывать это нужно в контексте SharedPtr
-        if (!IsGraphicsResourceRegistered()) {
-            GetThis().DynamicCast<MeshComponent>().AutoFree([](auto&& pData) {
-                pData->MarkMeshDestroyed();
-            });
-        }
-        else {
-            MarkMeshDestroyed();
-        }
-
-        if (renderScene) {
-            renderScene->SetDirty();
-        }
+        UnRegisterMesh();
     }
 
     bool MeshComponent::ExecuteInEditMode() const {
@@ -83,12 +68,6 @@ namespace SR_GTYPES_NS {
         }
 
         Component::OnMatrixDirty();
-    }
-
-    void MeshComponent::FreeMesh() {
-        AutoFree([](auto&& pData) {
-            delete pData;
-        });
     }
 
     int64_t MeshComponent::GetSortingPriority() const {
@@ -123,8 +102,31 @@ namespace SR_GTYPES_NS {
             .SetReadOnly()
             .SetDontSave();
 
+        //m_properties.AddStandardProperty("Custom layer", &);
+
         //m_customMaterialProperties = &materialContainer.AddArray<MaterialProperty>("Custom properties");
 
         return Entity::InitializeEntity();
+    }
+
+    void MeshComponent::OnLayerChanged() {
+        ReRegisterMesh();
+        IRenderComponent::OnLayerChanged();
+    }
+
+    bool MeshComponent::HasSortingPriority() const {
+        if (!m_gameObject) {
+            return false;
+        }
+
+        return m_gameObject->GetTransform()->GetMeasurement() == SR_UTILS_NS::Measurement::Space2D;
+    }
+
+    SR_UTILS_NS::StringAtom MeshComponent::GetMeshLayer() const {
+        if (!m_gameObject) {
+            return SR_UTILS_NS::StringAtom();
+        }
+
+        return m_gameObject->GetLayer();
     }
 }

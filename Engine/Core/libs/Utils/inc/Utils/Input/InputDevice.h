@@ -2,8 +2,8 @@
 // Created by Monika on 16.06.2022.
 //
 
-#ifndef SRENGINE_INPUTDEVICE_H
-#define SRENGINE_INPUTDEVICE_H
+#ifndef SR_ENGINE_INPUTDEVICE_H
+#define SR_ENGINE_INPUTDEVICE_H
 
 #include <Utils/Common/NonCopyable.h>
 #include <Utils/Input/KeyCodes.h>
@@ -84,4 +84,4 @@ namespace SR_UTILS_NS {
     };
 }
 
-#endif //SRENGINE_INPUTDEVICE_H
+#endif //SR_ENGINE_INPUTDEVICE_H

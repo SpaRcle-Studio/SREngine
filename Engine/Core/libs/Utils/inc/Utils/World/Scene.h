@@ -2,8 +2,8 @@
 // Created by Nikita on 30.11.2020.
 //
 
-#ifndef SRENGINE_SCENE_H
-#define SRENGINE_SCENE_H
+#ifndef SR_ENGINE_SCENE_H
+#define SR_ENGINE_SCENE_H
 
 #include <Utils/ECS/IComponentable.h>
 #include <Utils/Types/SafePointer.h>
@@ -123,4 +123,4 @@ namespace SR_WORLD_NS {
     };
 }
 
-#endif //SRENGINE_SCENE_H
+#endif //SR_ENGINE_SCENE_H

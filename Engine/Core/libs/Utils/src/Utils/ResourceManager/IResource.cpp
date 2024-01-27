@@ -135,6 +135,10 @@ namespace SR_UTILS_NS {
             }
 
             result = RemoveUPResult::Success;
+
+            if (SR_UTILS_NS::ResourceManager::Instance().IsUsePointStackTraceProfilingEnabled()) {
+                m_debugUnUseStackTraces.emplace_back(SR_UTILS_NS::GetStacktrace());
+            }
         });
 
         return result;
@@ -148,6 +152,10 @@ namespace SR_UTILS_NS {
         }
 
         ++m_countUses;
+
+        if (SR_UTILS_NS::ResourceManager::Instance().IsUsePointStackTraceProfilingEnabled()) {
+            m_debugUseStackTraces.emplace_back(SR_UTILS_NS::GetStacktrace());
+        }
     }
 
     uint16_t IResource::GetCountUses() const noexcept {

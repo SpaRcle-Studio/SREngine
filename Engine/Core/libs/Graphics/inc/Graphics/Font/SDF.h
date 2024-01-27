@@ -2,8 +2,8 @@
 // Created by Monika on 18.10.2022.
 //
 
-#ifndef SRENGINE_SDFL_H
-#define SRENGINE_SDFL_H
+#ifndef SR_ENGINE_SDFL_H
+#define SR_ENGINE_SDFL_H
 
 #include <Utils/macros.h>
 
@@ -103,4 +103,4 @@ namespace SR_GRAPH_NS::SDF {
     SR_MAYBE_UNUSED static SDFImage DFCalculate(const SDFImage& image, int32_t distanceFieldScale, bool transparent);
 }
 
-#endif //SRENGINE_SDFL_H
+#endif //SR_ENGINE_SDFL_H

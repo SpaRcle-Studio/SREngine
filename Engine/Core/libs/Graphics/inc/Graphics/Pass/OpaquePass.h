@@ -2,8 +2,8 @@
 // Created by Monika on 14.07.2022.
 //
 
-#ifndef SRENGINE_OPAQUEPASS_H
-#define SRENGINE_OPAQUEPASS_H
+#ifndef SR_ENGINE_OPAQUEPASS_H
+#define SR_ENGINE_OPAQUEPASS_H
 
 #include <Graphics/Pass/IMesh3DClusterPass.h>
 
@@ -20,4 +20,4 @@ namespace SR_GRAPH_NS {
     };
 }
 
-#endif //SRENGINE_OPAQUEPASS_H
+#endif //SR_ENGINE_OPAQUEPASS_H

@@ -2,8 +2,8 @@
 // Created by Monika on 07.07.2022.
 //
 
-#ifndef SRENGINE_WAVDATAPROVIDER_H
-#define SRENGINE_WAVDATAPROVIDER_H
+#ifndef SR_ENGINE_WAVDATAPROVIDER_H
+#define SR_ENGINE_WAVDATAPROVIDER_H
 
 #include <Audio/Decoders/IWaveDataProvider.h>
 
@@ -31,4 +31,4 @@ namespace SR_AUDIO_NS {
     RawSoundDataPtr TryMP3InsideWAV(const RawSoundDataPtr& data);
 }
 
-#endif //SRENGINE_WAVDATAPROVIDER_H
+#endif //SR_ENGINE_WAVDATAPROVIDER_H

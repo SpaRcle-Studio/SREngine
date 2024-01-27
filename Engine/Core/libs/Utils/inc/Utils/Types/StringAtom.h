@@ -20,8 +20,10 @@ namespace SR_UTILS_NS {
 
         StringAtom(const StringAtom& str) = default;
 
+        StringAtom(StringHashInfo* pInfo); /// NOLINT
         StringAtom(const char* str); /// NOLINT
         StringAtom(const std::string& str); /// NOLINT
+        StringAtom(const std::string_view& str); /// NOLINT
 
     public:
         operator std::string() const noexcept; /// NOLINT
@@ -34,9 +36,15 @@ namespace SR_UTILS_NS {
         void operator()(const std::string& str);
         void operator()(const char* str);
 
+        bool operator<(const StringAtom& other) const noexcept;
+        bool operator<(uint64_t hash) const noexcept;
+
+        SR_NODISCARD SR_FORCE_INLINE operator uint64_t() const noexcept { return GetHash(); }
+
     public:
         SR_NODISCARD uint64_t Size() const;
         SR_NODISCARD uint64_t size() const;
+        SR_NODISCARD bool Contains(const char* str) const;
         SR_NODISCARD bool Empty() const;
         SR_NODISCARD bool empty() const;
         SR_NODISCARD uint64_t GetHash() const;

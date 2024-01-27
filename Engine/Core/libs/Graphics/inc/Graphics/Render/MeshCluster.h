@@ -33,7 +33,6 @@ namespace SR_GRAPH_NS {
 
     typedef std::unordered_set<SR_GTYPES_NS::Mesh*> MeshGroup;
     typedef std::unordered_map<ClusterVBOId, MeshGroup> MeshGroups;
-    typedef std::unordered_map<uint32_t, uint32_t> MeshGroupCounters;
 
     class ShadedMeshSubCluster : public SR_UTILS_NS::NonCopyable {
     public:
@@ -90,7 +89,9 @@ namespace SR_GRAPH_NS {
 
     public:
         MeshCluster();
-        ~MeshCluster() override = default;
+        ~MeshCluster() override {
+            SRAssert(m_subClusters.empty());
+        }
 
     public:
         Iterator erase(const Iterator& iterator) {

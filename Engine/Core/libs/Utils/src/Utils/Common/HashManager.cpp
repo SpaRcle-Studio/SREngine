@@ -31,6 +31,15 @@ namespace SR_UTILS_NS {
         return gDefault;
     }
 
+    StringAtom HashManager::HashToStringAtom(HashManager::Hash hash) const {
+        SR_LOCK_GUARD;
+        static StringAtom gDefault;
+        if (auto&& pIt = m_strings.find(hash); pIt != m_strings.end()) {
+            return StringAtom(pIt->second); /// NOLINT
+        }
+        return gDefault;
+    }
+
     bool HashManager::Exists(HashManager::Hash hash) const {
         SR_LOCK_GUARD;
         return m_strings.find(hash) != m_strings.end();

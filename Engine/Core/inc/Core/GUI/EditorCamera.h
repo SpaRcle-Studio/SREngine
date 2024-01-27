@@ -2,8 +2,8 @@
 // Created by Monika on 13.08.2022.
 //
 
-#ifndef SRENGINE_EDITORCAMERA_H
-#define SRENGINE_EDITORCAMERA_H
+#ifndef SR_ENGINE_EDITORCAMERA_H
+#define SR_ENGINE_EDITORCAMERA_H
 
 #include <Graphics/Types/Camera.h>
 
@@ -31,4 +31,4 @@ namespace SR_CORE_NS::GUI {
     }
 }
 
-#endif //SRENGINE_EDITORCAMERA_H
+#endif //SR_ENGINE_EDITORCAMERA_H

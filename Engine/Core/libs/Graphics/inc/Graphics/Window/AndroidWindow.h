@@ -2,8 +2,8 @@
 // Created by Monika on 08.12.2022.
 //
 
-#ifndef SRENGINE_ANDROIDWINDOW_H
-#define SRENGINE_ANDROIDWINDOW_H
+#ifndef SR_ENGINE_ANDROIDWINDOW_H
+#define SR_ENGINE_ANDROIDWINDOW_H
 
 #include <Graphics/Window/BasicWindowImpl.h>
 
@@ -40,4 +40,4 @@ namespace SR_GRAPH_NS {
     };
 }
 
-#endif //SRENGINE_ANDROIDWINDOW_H
+#endif //SR_ENGINE_ANDROIDWINDOW_H

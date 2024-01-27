@@ -2,8 +2,8 @@
 // Created by Monika on 16.05.2022.
 //
 
-#ifndef SRENGINE_REVERSIBLECOMMAND_H
-#define SRENGINE_REVERSIBLECOMMAND_H
+#ifndef SR_ENGINE_REVERSIBLECOMMAND_H
+#define SR_ENGINE_REVERSIBLECOMMAND_H
 
 #include <Utils/CommandManager/ICommand.h>
 #include <Utils/Xml.h>
@@ -52,4 +52,4 @@ namespace SR_UTILS_NS {
 #define SR_MAKE_REVERSIBLE_CMD_ALLOCATOR(type, pEngine) [pEngine]() -> SR_UTILS_NS::ReversibleCommand* { return dynamic_cast<SR_UTILS_NS::ReversibleCommand*>(new type(pEngine)); }
 #define SR_REGISTER_REVERSIBLE_CMD(manager, type, pEngine) manager->RegisterCommand(#type, SR_MAKE_REVERSIBLE_CMD_ALLOCATOR(type, pEngine))
 
-#endif //SRENGINE_REVERSIBLECOMMAND_H
+#endif //SR_ENGINE_REVERSIBLECOMMAND_H

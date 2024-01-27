@@ -7,6 +7,7 @@
 
 #include <Graphics/Render/RenderScene.h>
 #include <Graphics/Render/RenderContext.h>
+#include <Graphics/Render/RenderStrategy.h>
 #include <Graphics/Memory/CameraManager.h>
 #include <Graphics/Types/Camera.h>
 #include <Graphics/Types/Geometry/DebugLine.h>
@@ -26,11 +27,14 @@ namespace SR_GRAPH_NS {
         , m_transparent(&m_opaque)
         , m_flat(this)
     {
+        m_renderStrategy = new RenderStrategy(this);
         m_debugRender->Init();
     }
 
     RenderScene::~RenderScene() {
         SR_SAFE_DELETE_PTR(m_lightSystem);
+
+        m_renderStrategy.AutoFree();
 
         if (m_debugRender) {
             m_debugRender->DeInit();
@@ -74,9 +78,7 @@ namespace SR_GRAPH_NS {
     }
 
     void RenderScene::SetDirty() {
-        m_dirty.Do([](uint32_t& data) {
-            ++data;
-        });
+        m_dirty.Increment();
     }
 
     bool RenderScene::IsDirty() const noexcept {
@@ -137,6 +139,10 @@ namespace SR_GRAPH_NS {
 
     void RenderScene::Build() {
         SR_TRACY_ZONE_N("Build render");
+
+        if (m_renderStrategy) {
+            m_renderStrategy->ClearErrors();
+        }
 
         GetPipeline()->ClearFrameBuffersQueue();
 
@@ -282,22 +288,8 @@ namespace SR_GRAPH_NS {
 
         pMesh->SetRenderContext(m_context);
 
-        if (pMesh->IsDebugMesh()) {
-            m_debug.Add(pMesh);
-        }
-        else {
-            if (pMesh->IsFlatMesh()) {
-                m_flat.Add(pMesh);
-            }
-            else if (pMesh->GetMaterial()->IsTransparent()) {
-                m_transparent.Add(pMesh);
-            }
-            else {
-                m_opaque.Add(pMesh);
-            }
-        }
-
-        m_dirty = true;
+        m_renderStrategy->RegisterMesh(pMesh);
+        SetDirty();
     }
 
     void RenderScene::Remove(RenderScene::WidgetManagerPtr pWidgetManager) {
@@ -346,7 +338,8 @@ namespace SR_GRAPH_NS {
     void RenderScene::SortCameras() {
         SR_TRACY_ZONE;
 
-        m_dirty = true;
+        SetDirty();
+
         m_dirtyCameras = false;
         m_mainCamera = nullptr;
 
@@ -521,6 +514,8 @@ namespace SR_GRAPH_NS {
         m_transparent.OnResourceReloaded(pResource);
         m_flat.OnResourceReloaded(pResource);
 
+        m_renderStrategy->OnResourceReloaded(pResource);
+
         SetDirty();
     }
 
@@ -559,5 +554,10 @@ namespace SR_GRAPH_NS {
                 pMesh->SetMaterial(pDefaultMat);
             }
         }
+    }
+
+    void RenderScene::Remove(RenderScene::MeshPtr pMesh) {
+        m_renderStrategy->UnRegisterMesh(pMesh);
+        SetDirty();
     }
 }

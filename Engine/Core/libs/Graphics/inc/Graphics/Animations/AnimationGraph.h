@@ -2,8 +2,8 @@
 // Created by Monika on 23.04.2023.
 //
 
-#ifndef SRENGINE_ANIMATIONGRAPH_H
-#define SRENGINE_ANIMATIONGRAPH_H
+#ifndef SR_ENGINE_ANIMATIONGRAPH_H
+#define SR_ENGINE_ANIMATIONGRAPH_H
 
 #include <Graphics/Animations/AnimationGraphNode.h>
 

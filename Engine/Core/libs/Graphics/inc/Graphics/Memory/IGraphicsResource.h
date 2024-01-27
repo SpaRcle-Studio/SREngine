@@ -2,8 +2,8 @@
 // Created by Monika on 18.07.2022.
 //
 
-#ifndef SRENGINE_IGRAHPICSRESOURCE_H
-#define SRENGINE_IGRAHPICSRESOURCE_H
+#ifndef SR_ENGINE_IGRAHPICSRESOURCE_H
+#define SR_ENGINE_IGRAHPICSRESOURCE_H
 
 #include <Utils/Debug.h>
 
@@ -61,4 +61,4 @@ namespace SR_GRAPH_NS::Memory {
     };
 }
 
-#endif //SRENGINE_IGRAHPICSRESOURCE_H
+#endif //SR_ENGINE_IGRAHPICSRESOURCE_H

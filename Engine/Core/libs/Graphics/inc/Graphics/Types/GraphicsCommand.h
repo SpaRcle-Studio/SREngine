@@ -2,8 +2,8 @@
 // Created by Monika on 16.05.2022.
 //
 
-#ifndef SRENGINE_GRAPHICSCOMMAND_H
-#define SRENGINE_GRAPHICSCOMMAND_H
+#ifndef SR_ENGINE_GRAPHICSCOMMAND_H
+#define SR_ENGINE_GRAPHICSCOMMAND_H
 
 
 class GraphicsCommand {
@@ -11,4 +11,4 @@ class GraphicsCommand {
 };
 
 
-#endif //SRENGINE_GRAPHICSCOMMAND_H
+#endif //SR_ENGINE_GRAPHICSCOMMAND_H

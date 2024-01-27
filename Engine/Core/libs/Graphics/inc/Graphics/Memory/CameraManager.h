@@ -2,8 +2,8 @@
 // Created by Monika on 05.06.2022.
 //
 
-#ifndef SRENGINE_CAMERAMANAGER_H
-#define SRENGINE_CAMERAMANAGER_H
+#ifndef SR_ENGINE_CAMERAMANAGER_H
+#define SR_ENGINE_CAMERAMANAGER_H
 
 #include <Utils/Common/Singleton.h>
 #include <Utils/Types/SafePointer.h>
@@ -65,4 +65,4 @@ namespace SR_GRAPH_NS::Memory {
     };
 }
 
-#endif //SRENGINE_CAMERAMANAGER_H
+#endif //SR_ENGINE_CAMERAMANAGER_H

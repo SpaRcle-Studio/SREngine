@@ -2,8 +2,8 @@
 // Created by Monika on 11.01.2022.
 //
 
-#ifndef SRENGINE_NODE_H
-#define SRENGINE_NODE_H
+#ifndef SR_ENGINE_NODE_H
+#define SR_ENGINE_NODE_H
 
 #include <Utils/SRLM/DataType.h>
 #include <Utils/SRLM/LogicalNode.h>
@@ -103,4 +103,4 @@ namespace std {
     };
 }
 
-#endif //SRENGINE_NODE_H
+#endif //SR_ENGINE_NODE_H

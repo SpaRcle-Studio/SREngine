@@ -2,8 +2,8 @@
 // Created by Monika on 07.07.2022.
 //
 
-#ifndef SRENGINE_IWAVEDATAPROVIDER_H
-#define SRENGINE_IWAVEDATAPROVIDER_H
+#ifndef SR_ENGINE_IWAVEDATAPROVIDER_H
+#define SR_ENGINE_IWAVEDATAPROVIDER_H
 
 #include <Utils/macros.h>
 
@@ -53,4 +53,4 @@ namespace SR_AUDIO_NS {
     IWaveDataProvider::Ptr CreateWaveDataProvider(const SR_UTILS_NS::Path& path, const RawSoundDataPtr& data);
 }
 
-#endif //SRENGINE_IWAVEDATAPROVIDER_H
+#endif //SR_ENGINE_IWAVEDATAPROVIDER_H

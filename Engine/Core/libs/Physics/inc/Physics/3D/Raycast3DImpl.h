@@ -2,8 +2,8 @@
 // Created by innerviewer on 2/16/2023.
 //
 
-#ifndef SRENGINE_RAYCAST3DIMPL_H
-#define SRENGINE_RAYCAST3DIMPL_H
+#ifndef SR_ENGINE_RAYCAST3DIMPL_H
+#define SR_ENGINE_RAYCAST3DIMPL_H
 
 #include <Physics/RaycastImpl.h>
 
@@ -19,4 +19,4 @@ namespace SR_PHYSICS_NS {
     };
 }
 
-#endif //SRENGINE_RAYCAST3DIMPL_H
+#endif //SR_ENGINE_RAYCAST3DIMPL_H

@@ -107,7 +107,9 @@ namespace SR_GTYPES_NS {
     }
 
     void Mesh3D::UseModelMatrix() {
-        GetRenderContext()->GetCurrentShader()->SetMat4(SHADER_MODEL_MATRIX, m_modelMatrix);
+        auto&& pShader = GetRenderContext()->GetCurrentShader();
+
+        pShader->SetMat4(SHADER_MODEL_MATRIX, m_modelMatrix);
     }
 
     void Mesh3D::OnRawMeshChanged() {
@@ -117,7 +119,7 @@ namespace SR_GTYPES_NS {
             SetGeometryName(GetRawMesh()->GetGeometryName(GetMeshId()));
         }
 
-        MarkPipelineUnBuild();
+        ReRegisterMesh();
 
         m_dirtyMaterial = true;
         m_isCalculated = false;
@@ -131,12 +133,13 @@ namespace SR_GTYPES_NS {
         return Super::GetMeshIdentifier();
     }
 
-    void Mesh3D::OnResourceReloaded(SR_UTILS_NS::IResource* pResource) {
+    bool Mesh3D::OnResourceReloaded(SR_UTILS_NS::IResource* pResource) {
+        bool changed = Mesh::OnResourceReloaded(pResource);
         if (GetRawMesh() == pResource) {
             OnRawMeshChanged();
-            return;
+            return true;
         }
-        Mesh::OnResourceReloaded(pResource);
+        return changed;
     }
 
     bool Mesh3D::InitializeEntity() noexcept {

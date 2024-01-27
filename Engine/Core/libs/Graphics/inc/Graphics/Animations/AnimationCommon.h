@@ -2,8 +2,8 @@
 // Created by Monika on 23.04.2023.
 //
 
-#ifndef SRENGINE_ANIMATIONCOMMON_H
-#define SRENGINE_ANIMATIONCOMMON_H
+#ifndef SR_ENGINE_ANIMATIONCOMMON_H
+#define SR_ENGINE_ANIMATIONCOMMON_H
 
 #include <Utils/Types/Map.h>
 #include <Utils/Types/Time.h>
@@ -109,4 +109,4 @@ namespace SR_ANIMATIONS_NS {
     };
 }
 
-#endif //SRENGINE_ANIMATIONCOMMON_H
+#endif //SR_ENGINE_ANIMATIONCOMMON_H

@@ -2,8 +2,8 @@
 // Created by Monika on 03.02.2023.
 //
 
-#ifndef SRENGINE_REFANALYZER_H
-#define SRENGINE_REFANALYZER_H
+#ifndef SR_ENGINE_REFANALYZER_H
+#define SR_ENGINE_REFANALYZER_H
 
 #include <Graphics/SRSL/LexicalTree.h>
 
@@ -53,4 +53,4 @@ namespace SR_SRSL_NS {
     };
 }
 
-#endif //SRENGINE_REFANALYZER_H
+#endif //SR_ENGINE_REFANALYZER_H

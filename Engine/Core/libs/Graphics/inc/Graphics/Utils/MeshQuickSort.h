@@ -2,8 +2,8 @@
 // Created by Monika on 31.07.2022.
 //
 
-#ifndef SRENGINE_MESHQUICKSORT_H
-#define SRENGINE_MESHQUICKSORT_H
+#ifndef SR_ENGINE_MESHQUICKSORT_H
+#define SR_ENGINE_MESHQUICKSORT_H
 
 #include <Utils/stdInclude.h>
 #include <Utils/Math/Vector3.h>
@@ -65,4 +65,4 @@ namespace SR_GRAPH_NS {
     }
 }
 
-#endif //SRENGINE_MESHQUICKSORT_H
+#endif //SR_ENGINE_MESHQUICKSORT_H

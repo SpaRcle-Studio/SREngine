@@ -55,7 +55,7 @@ namespace SR_UTILS_NS {
 
     public:
         virtual void OnMatrixDirty() { }
-        virtual void OnPriorityDirty() { }
+        virtual void OnPriorityChanged() { }
         virtual void OnTransformSet() { }
 
         /// Вызывается при загрузке компонента на игровой объект
@@ -75,6 +75,9 @@ namespace SR_UTILS_NS {
         virtual void Update(float_t dt) { }
         virtual void FixedUpdate() { }
         virtual void LateUpdate() { }
+
+        virtual void OnBeforeLayerChanged() { }
+        virtual void OnLayerChanged() { }
 
         virtual void OnCollisionEnter(const CollisionData& data) { }
         virtual void OnCollisionStay(const CollisionData& data) { }

@@ -121,7 +121,7 @@ namespace SR_GRAPH_NS {
                 continue;
             }
 
-            if (pMesh->IsMeshDestroyed()) {
+            /*if (pMesh->IsMeshDestroyed()) {
                 auto&& resourceManager = SR_UTILS_NS::ResourceManager::Instance();
                 SR_MAYBE_UNUSED SR_HTYPES_NS::SingletonRecursiveLockGuard lock(&resourceManager);
 
@@ -134,7 +134,7 @@ namespace SR_GRAPH_NS {
                 pMesh = nullptr;
                 changed = true;
                 --m_count;
-            }
+            }*/
         }
 
         return changed;

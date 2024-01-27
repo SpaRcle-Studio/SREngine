@@ -176,12 +176,13 @@ namespace SR_GTYPES_NS {
         }
     }
 
-    void SkinnedMesh::OnResourceReloaded(SR_UTILS_NS::IResource* pResource) {
+    bool SkinnedMesh::OnResourceReloaded(SR_UTILS_NS::IResource* pResource) {
+        bool changed = Mesh::OnResourceReloaded(pResource);
         if (GetRawMesh() == pResource) {
             OnRawMeshChanged();
-            return;
+            return true;
         }
-        Mesh::OnResourceReloaded(pResource);
+        return changed;
     }
 
     bool SkinnedMesh::PopulateSkeletonMatrices() {
@@ -214,7 +215,7 @@ namespace SR_GTYPES_NS {
             pSkeleton->ResetSkeleton();
         }
 
-        MarkPipelineUnBuild();
+        ReRegisterMesh();
 
         m_dirtyMaterial = true;
         m_isCalculated = false;

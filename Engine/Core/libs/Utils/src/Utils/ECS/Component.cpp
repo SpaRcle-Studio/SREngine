@@ -152,6 +152,8 @@ namespace SR_UTILS_NS {
             return nullptr;
         }
 
+        pComponent->SetEnabled(IsEnabled());
+
         /// TODO: non-optimized way
         SR_HTYPES_NS::Marshal marshal;
         GetComponentProperties().SaveProperty(marshal);

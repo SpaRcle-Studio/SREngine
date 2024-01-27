@@ -2,8 +2,8 @@
 // Created by Monika on 12.03.2022.
 //
 
-#ifndef SRENGINE_MARSHAL_H
-#define SRENGINE_MARSHAL_H
+#ifndef SR_ENGINE_MARSHAL_H
+#define SR_ENGINE_MARSHAL_H
 
 #include <Utils/Common/MarshalUtils.h>
 
@@ -141,4 +141,4 @@ namespace SR_HTYPES_NS {
     };
 }
 
-#endif //SRENGINE_MARSHAL_H
+#endif //SR_ENGINE_MARSHAL_H

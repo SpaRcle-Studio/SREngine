@@ -2,8 +2,8 @@
 // Created by Monika on 14.07.2022.
 //
 
-#ifndef SRENGINE_WIDGETPASS_H
-#define SRENGINE_WIDGETPASS_H
+#ifndef SR_ENGINE_WIDGETPASS_H
+#define SR_ENGINE_WIDGETPASS_H
 
 #include <Graphics/Pass/BasePass.h>
 
@@ -17,4 +17,4 @@ namespace SR_GRAPH_NS {
 }
 
 
-#endif //SRENGINE_WIDGETPASS_H
+#endif //SR_ENGINE_WIDGETPASS_H

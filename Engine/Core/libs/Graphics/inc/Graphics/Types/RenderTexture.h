@@ -2,8 +2,8 @@
 // Created by Monika on 18.07.2022.
 //
 
-#ifndef SRENGINE_RENDERTEXTURE_H
-#define SRENGINE_RENDERTEXTURE_H
+#ifndef SR_ENGINE_RENDERTEXTURE_H
+#define SR_ENGINE_RENDERTEXTURE_H
 
 #include <Utils/Settings.h>
 #include <Graphics/Pipeline/TextureHelper.h>
@@ -29,4 +29,4 @@ namespace SR_GTYPES_NS {
     };
 }
 
-#endif //SRENGINE_RENDERTEXTURE_H
+#endif //SR_ENGINE_RENDERTEXTURE_H

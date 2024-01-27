@@ -275,10 +275,10 @@ namespace SR_UTILS_NS {
         return nullptr;
     }
 
-    void IComponentable::OnPriorityDirty() {
+    void IComponentable::OnPriorityChanged() {
         for (uint32_t i = 0; i < m_components.size(); ++i) {
             auto&& pComponent = m_components[i];
-            pComponent->OnPriorityDirty();
+            pComponent->OnPriorityChanged();
         }
     }
 

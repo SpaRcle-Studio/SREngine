@@ -2,8 +2,8 @@
 // Created by Monika on 12.12.2022.
 //
 
-#ifndef SRENGINE_ICOMPONENTABLE_H
-#define SRENGINE_ICOMPONENTABLE_H
+#ifndef SR_ENGINE_ICOMPONENTABLE_H
+#define SR_ENGINE_ICOMPONENTABLE_H
 
 #include <Utils/Types/Marshal.h>
 #include <Utils/ECS/ISavable.h>
@@ -68,7 +68,7 @@ namespace SR_UTILS_NS {
             return dynamic_cast<T*>(GetComponent(T::COMPONENT_HASH_NAME));
         }
 
-        virtual void OnPriorityDirty();
+        virtual void OnPriorityChanged();
         virtual void OnMatrixDirty();
 
         SR_NODISCARD virtual ScenePtr GetScene() const;
@@ -86,4 +86,4 @@ namespace SR_UTILS_NS {
     };
 }
 
-#endif //SRENGINE_ICOMPONENTABLE_H
+#endif //SR_ENGINE_ICOMPONENTABLE_H

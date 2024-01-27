@@ -2,8 +2,8 @@
 // Created by Monika on 18.10.2023.
 //
 
-#ifndef SRENGINE_FLATCLUSTERPASS_H
-#define SRENGINE_FLATCLUSTERPASS_H
+#ifndef SR_ENGINE_FLATCLUSTERPASS_H
+#define SR_ENGINE_FLATCLUSTERPASS_H
 
 #include <Graphics/Pass/IMeshClusterPass.h>
 
@@ -22,4 +22,4 @@ namespace SR_GRAPH_NS {
     };
 }
 
-#endif //SRENGINE_FLATCLUSTERPASS_H
+#endif //SR_ENGINE_FLATCLUSTERPASS_H

@@ -79,9 +79,7 @@ namespace SR_GRAPH_NS {
 
             /// Как только уничтожается основная сцена, уничтожаем сцену рендера
             SR_LOG("RenderContext::Update() : destroy render scene...");
-            pRenderScene.AutoFree([](RenderScene* ptr) {
-                delete ptr;
-            });
+            pRenderScene.AutoFree();
             pIt = m_scenes.erase(pIt);
         }
     }

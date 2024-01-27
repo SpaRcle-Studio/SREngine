@@ -48,7 +48,7 @@ namespace SR_GRAPH_NS {
                 continue;
             }
 
-            m_context->SetCurrentShader(pShader);
+            GetContext()->SetCurrentShader(pShader);
 
             if (pCurrentShader != pShader) {
                 pCurrentShader = pShader;
@@ -64,7 +64,7 @@ namespace SR_GRAPH_NS {
             pShader->Flush();
         }
 
-        m_context->SetCurrentShader(nullptr);
+        GetContext()->SetCurrentShader(nullptr);
 
         Super::Update();
     }

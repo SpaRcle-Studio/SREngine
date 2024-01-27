@@ -2,8 +2,8 @@
 // Created by Monika on 25.08.2023.
 //
 
-#ifndef SRENGINE_SRLM_UTILS_H
-#define SRENGINE_SRLM_UTILS_H
+#ifndef SR_ENGINE_SRLM_UTILS_H
+#define SR_ENGINE_SRLM_UTILS_H
 
 #include <Utils/Common/HashManager.h>
 #include <Utils/Common/Singleton.h>
@@ -91,6 +91,7 @@ public:                                                                         
         SR_NODISCARD std::string GetNodeName() const noexcept override { return #name; }                                \
         SR_NODISCARD Hash GetNodeHashName() const noexcept override { return HASH_NAME; }                               \
         static SR_SRLM_NS::LogicalNode* AllocateNew() { return (new className())->GetBaseLogicalNode(); }               \
+private:                                                                                                                \
 
 #define SR_REGISTER_LOGICAL_NODE(className, name, category)                                                             \
 public:                                                                                                                 \
@@ -100,5 +101,6 @@ public:                                                                         
                 return AllocateNew();                                                                                   \
             }, std::vector<std::string> category                                                                        \
         );                                                                                                              \
+private:                                                                                                                \
 
-#endif //SRENGINE_SRLM_UTILS_H
+#endif //SR_ENGINE_SRLM_UTILS_H

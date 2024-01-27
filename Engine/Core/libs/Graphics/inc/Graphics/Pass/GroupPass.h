@@ -2,8 +2,8 @@
 // Created by Monika on 22.07.2022.
 //
 
-#ifndef SRENGINE_GROUPPASS_H
-#define SRENGINE_GROUPPASS_H
+#ifndef SR_ENGINE_GROUPPASS_H
+#define SR_ENGINE_GROUPPASS_H
 
 #include <Graphics/Pass/BasePass.h>
 
@@ -64,4 +64,4 @@ namespace SR_GRAPH_NS {
     }
 }
 
-#endif //SRENGINE_GROUPPASS_H
+#endif //SR_ENGINE_GROUPPASS_H

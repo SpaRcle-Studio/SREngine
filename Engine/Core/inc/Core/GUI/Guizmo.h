@@ -2,8 +2,8 @@
 // Created by Monika on 16.02.2022.
 //
 
-#ifndef SRENGINE_GUIZMO_H
-#define SRENGINE_GUIZMO_H
+#ifndef SR_ENGINE_GUIZMO_H
+#define SR_ENGINE_GUIZMO_H
 
 #include <Utils/ECS/GameObject.h>
 #include <Utils/ECS/Transform3D.h>
@@ -91,4 +91,4 @@ namespace SR_CORE_GUI_NS {
     };
 }
 
-#endif //SRENGINE_GUIZMO_H
+#endif //SR_ENGINE_GUIZMO_H

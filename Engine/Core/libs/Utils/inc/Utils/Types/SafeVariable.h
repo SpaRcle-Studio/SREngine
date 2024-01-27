@@ -2,23 +2,22 @@
 // Created by Monika on 03.08.2022.
 //
 
-#ifndef SRENGINE_SAFEVARIABLE_H
-#define SRENGINE_SAFEVARIABLE_H
+#ifndef SR_ENGINE_SAFE_VARIABLE_H
+#define SR_ENGINE_SAFE_VARIABLE_H
 
 #include <Utils/Types/Function.h>
 
 namespace SR_HTYPES_NS {
-    template<typename T> class SR_DLL_EXPORT SafeVar {
+    template<typename T> class SR_DLL_EXPORT SafeVar : public NonCopyable {
     public:
         SafeVar(const T& data);
         SafeVar() = default;
 
     public:
-        SafeVar<T> &operator=(const SafeVar<T> &var);
-        SafeVar<T> &operator=(const T& data);
+        SafeVar<T>& operator=(const T& data);
 
-        operator const T&() const noexcept { return m_data; }
-        operator bool() const noexcept { return m_data; }
+        operator const T&() const noexcept { return m_data; } /// NOLINT
+        operator bool() const noexcept { return m_data; } /// NOLINT
 
         T &operator*() const noexcept { return *m_data; }
         T operator->() const noexcept { return m_data; }
@@ -34,10 +33,11 @@ namespace SR_HTYPES_NS {
         SR_NODISCARD T& Get() noexcept { return m_data; }
         SR_NODISCARD const T& Get() const noexcept { return m_data; }
 
+        void Increment() noexcept;
+
         void Lock() const noexcept;
         void Unlock() const noexcept;
         void RecursiveLock() const noexcept;
-        void Replace(const T& data) noexcept;
 
         void Do(const std::function<void(T& data)>& func) noexcept;
         void Do(const std::function<void(const T& data)>& func) const noexcept;
@@ -52,6 +52,12 @@ namespace SR_HTYPES_NS {
         mutable std::atomic<std::thread::id> m_owner;
 
     };
+
+    template<typename T> void SafeVar<T>::Increment() noexcept {
+        RecursiveLock();
+        ++m_data;
+        Unlock();
+    }
 
     template<typename T> template<typename U> U SafeVar<T>::Do(const std::function<U(T& data)> &func) noexcept {
         RecursiveLock();
@@ -90,7 +96,7 @@ namespace SR_HTYPES_NS {
     }
 
     template<typename T> void SafeVar<T>::Unlock() const noexcept {
-        if(m_lockCount > 1) {
+        if (m_lockCount > 1) {
             /// recursive unlocking
             --(m_lockCount);
         }
@@ -110,7 +116,7 @@ namespace SR_HTYPES_NS {
     template<typename T> void SafeVar<T>::RecursiveLock() const noexcept {
         const std::thread::id this_id = std::this_thread::get_id();
 
-        if(m_owner.load() == this_id) {
+        if (m_owner.load() == this_id) {
             /// recursive locking
             ++(m_lockCount);
             SRAssert2(m_lockCount < 10000, "Lock count > 10000!");
@@ -125,45 +131,28 @@ namespace SR_HTYPES_NS {
         }
     }
 
-    template<typename T> SafeVar<T>::SafeVar(const T &data) {
+    template<typename T> SafeVar<T>::SafeVar(const T& data) {
         m_data = data;
     }
 
-    template<typename T> SafeVar<T> &SafeVar<T>::operator=(const SafeVar<T> &var) {
-        m_data = var.m_data;
-        m_lockCount = var.m_lockCount;
-        m_owner = var.m_owner;
-        m_lock = var.m_lock;
-        return *this;
-    }
-
-    template<typename T> SafeVar<T> &SafeVar<T>::operator=(const T &data) {
-        m_data = data;
-        m_lockCount = 0;
-        m_owner = std::thread::id();
-        m_lock = false;
-        return *this;
-    }
-
-    template<typename T> void SafeVar<T>::Replace(const T &data) noexcept {
-        if (m_data == data)
-            return;
-
+    template<typename T> SafeVar<T>& SafeVar<T>::operator=(const T& data) {
         RecursiveLock();
-        *this = data;
+        m_data = data;
+        Unlock();
+        return *this;
     }
 
-    template<typename T> void SafeVar<T>::Do(const std::function<void(T &)> &func) noexcept {
+    template<typename T> void SafeVar<T>::Do(const std::function<void(T &)>& func) noexcept {
         RecursiveLock();
         func(m_data);
         Unlock();
     }
 
-    template<typename T> void SafeVar<T>::Do(const std::function<void(const T &)> &func) const noexcept {
+    template<typename T> void SafeVar<T>::Do(const std::function<void(const T &)>& func) const noexcept {
         RecursiveLock();
         func(m_data);
         Unlock();
     }
 }
 
-#endif //SRENGINE_SAFEVARIABLE_H
+#endif //SR_ENGINE_SAFE_VARIABLE_H

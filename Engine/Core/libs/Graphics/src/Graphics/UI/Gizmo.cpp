@@ -39,7 +39,6 @@ namespace SR_GRAPH_UI_NS {
             return;
         }
 
-        pMeshComponent->SetIsDebugMesh(true);
         pMeshComponent->SetDontSave(true);
 
         if (operation & GizmoOperation::X) {
@@ -54,6 +53,11 @@ namespace SR_GRAPH_UI_NS {
         else if (operation & GizmoOperation::Center) {
             pMeshComponent->SetMaterial("Engine/Materials/Colors/gizmo-center.mat");
         }
+
+        //MaterialProperty& materialProperty = pMeshComponent->GetOverrideUniforms().emplace_back();
+        //materialProperty.SetData(SR_MATH_NS::FColor(1.f, 1.f, 0.f, 1.f));
+        //materialProperty.SetName("color");
+        //materialProperty.SetShaderVarType(ShaderVarType::Vec4);
 
         GetParent()->AddComponent(pMeshComponent);
 

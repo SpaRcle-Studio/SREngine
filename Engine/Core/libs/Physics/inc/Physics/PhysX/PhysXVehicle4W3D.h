@@ -2,8 +2,8 @@
 // Created by innerviewer on 2/28/2023.
 //
 
-#ifndef SRENGINE_PHYSXVEHICLE4W3D_H
-#define SRENGINE_PHYSXVEHICLE4W3D_H
+#ifndef SR_ENGINE_PHYSXVEHICLE4W3D_H
+#define SR_ENGINE_PHYSXVEHICLE4W3D_H
 
 #include <Physics/3D/Vehicle4W3D.h>
 
@@ -41,4 +41,4 @@ namespace SR_PTYPES_NS {
     };
 }
 
-#endif //SRENGINE_PHYSXVEHICLE4W3D_H
+#endif //SR_ENGINE_PHYSXVEHICLE4W3D_H

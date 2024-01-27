@@ -2,8 +2,8 @@
 // Created by innerviewer on 2/13/2023.
 //
 
-#ifndef SRENGINE_RAYCASTHIT_H
-#define SRENGINE_RAYCASTHIT_H
+#ifndef SR_ENGINE_RAYCASTHIT_H
+#define SR_ENGINE_RAYCASTHIT_H
 
 
 namespace SR_UTILS_NS {
@@ -15,4 +15,4 @@ namespace SR_UTILS_NS {
     };
 }
 
-#endif //SRENGINE_RAYCASTHIT_H
+#endif //SR_ENGINE_RAYCASTHIT_H

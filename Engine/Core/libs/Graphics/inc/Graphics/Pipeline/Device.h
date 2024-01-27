@@ -2,8 +2,8 @@
 // Created by Monika on 08.02.2023.
 //
 
-#ifndef SRENGINE_GRAPHICS_DEVICE_H
-#define SRENGINE_GRAPHICS_DEVICE_H
+#ifndef SR_ENGINE_GRAPHICS_DEVICE_H
+#define SR_ENGINE_GRAPHICS_DEVICE_H
 
 #include <Utils/Common/Enumerations.h>
 
@@ -13,4 +13,4 @@ namespace SR_GRAPH_NS {
     );
 }
 
-#endif //SRENGINE_GRAPHICS_DEVICE_H
+#endif //SR_ENGINE_GRAPHICS_DEVICE_H

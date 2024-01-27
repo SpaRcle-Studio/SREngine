@@ -2,8 +2,8 @@
 // Created by innerviewer on 8/26/2023.
 //
 
-#ifndef SRENGINE_DATAOPERATORS_H
-#define SRENGINE_DATAOPERATORS_H
+#ifndef SR_ENGINE_DATAOPERATORS_H
+#define SR_ENGINE_DATAOPERATORS_H
 
 namespace SR_SRLM_NS {
     class DataType;
@@ -75,4 +75,4 @@ namespace SR_SRLM_NS {
     };
 }
 
-#endif //SRENGINE_DATAOPERATORS_H
+#endif //SR_ENGINE_DATAOPERATORS_H

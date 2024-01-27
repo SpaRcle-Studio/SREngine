@@ -75,6 +75,8 @@ namespace SR_GRAPH_NS {
         bool FreeShader(int32_t* id) override;
         bool FreeTexture(int32_t* id) override;
 
+        bool IsSamplerValid(int32_t id) const override;
+
     public:
         void SetVSyncEnabled(bool enabled) override;
         SR_NODISCARD bool IsVSyncEnabled() const override;
@@ -123,6 +125,7 @@ namespace SR_GRAPH_NS {
         void BindFrameBuffer(FramebufferPtr pFBO) override;
 
         void ResetDescriptorSet() override;
+        void ResetLastShader() override;
 
     private:
         bool InitEvoVulkanHooks();
@@ -142,6 +145,7 @@ namespace SR_GRAPH_NS {
 
         EvoVulkan::Complexes::FrameBuffer* m_currentVkFrameBuffer = nullptr;
         EvoVulkan::Complexes::Shader* m_currentVkShader = nullptr;
+        EvoVulkan::Complexes::Shader* m_lastVkShader = nullptr;
         EvoVulkan::Core::VulkanKernel* m_kernel = nullptr;
 
         VulkanTools::MemoryManager* m_memory = nullptr;

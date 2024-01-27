@@ -2,8 +2,8 @@
 // Created by Monika on 23.08.2022.
 //
 
-#ifndef SRENGINE_SHAREDPTR_H
-#define SRENGINE_SHAREDPTR_H
+#ifndef SR_ENGINE_SHAREDPTR_H
+#define SR_ENGINE_SHAREDPTR_H
 
 #include <Libraries/Utils/Allocator.h>
 
@@ -178,4 +178,4 @@ template<class T> bool SharedPtr<T>::TryRecursiveLockIfValid() const noexcept {
     return m_data && m_data->m_valid;
 }
 
-#endif //SRENGINE_SHAREDPTR_H
+#endif //SR_ENGINE_SHAREDPTR_H

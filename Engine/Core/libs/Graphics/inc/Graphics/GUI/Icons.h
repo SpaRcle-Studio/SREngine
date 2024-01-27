@@ -2,8 +2,8 @@
 // Created by Monika on 28.12.2021.
 //
 
-#ifndef SRENGINE_ICONS_H
-#define SRENGINE_ICONS_H
+#ifndef SR_ENGINE_ICONS_H
+#define SR_ENGINE_ICONS_H
 
 #include <imgui.h>
 
@@ -106,4 +106,4 @@ namespace SR_GRAPH_NS::GUI {
     void Icon(const ImVec2& size, IconType type, bool filled, const ImVec4& color = ImVec4(1, 1, 1, 1), const ImVec4& innerColor = ImVec4(0, 0, 0, 0));
 }
 
-#endif //SRENGINE_ICONS_H
+#endif //SR_ENGINE_ICONS_H

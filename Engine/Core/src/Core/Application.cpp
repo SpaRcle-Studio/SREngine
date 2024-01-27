@@ -132,6 +132,10 @@ namespace SR_CORE_NS {
 
         SR_UTILS_NS::ResourceManager::Instance().Init(m_resourcesPath);
 
+        if (SR_UTILS_NS::Features::Instance().Enabled("ResourceUsePointStackTraceProfiling", false)) {
+            SR_UTILS_NS::ResourceManager::Instance().EnableStackTraceProfiling();
+        }
+
         if (!SR_UTILS_NS::ResourceManager::Instance().Run()) {
             SR_ERROR("Application::Init() : failed to initialize resources manager!");
             return false;
@@ -213,6 +217,7 @@ namespace SR_CORE_NS {
 
         SR_CORE_NS::EditorSettings::DestroySettings();
         SR_UTILS_NS::TagManager::DestroySettings();
+        SR_UTILS_NS::LayerManager::DestroySettings();
 
         SR_AUDIO_NS::SoundManager::DestroySingleton();
         SR_PHYSICS_NS::PhysicsLibrary::DestroySingleton();

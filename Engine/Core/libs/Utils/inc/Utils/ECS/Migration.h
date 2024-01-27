@@ -2,8 +2,8 @@
 // Created by Monika on 01.01.2023.
 //
 
-#ifndef SRENGINE_MIGRATION_H
-#define SRENGINE_MIGRATION_H
+#ifndef SR_ENGINE_MIGRATION_H
+#define SR_ENGINE_MIGRATION_H
 
 #include <Utils/Common/Singleton.h>
 #include <Utils/Types/Function.h>
@@ -30,4 +30,4 @@ namespace SR_UTILS_NS {
     };
 }
 
-#endif //SRENGINE_MIGRATION_H
+#endif //SR_ENGINE_MIGRATION_H
