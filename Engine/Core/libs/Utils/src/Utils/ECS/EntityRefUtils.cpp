@@ -222,9 +222,8 @@ namespace SR_UTILS_NS::EntityRefUtils {
 
         /// Вычитаем 2, так как один это конец массива, а второй это компонент
         for (int32_t i = fromPath.size() - 2; i >= offset; --i) {
-            PathItem item = {
-                .action = Action::Action_Parent
-            };
+            PathItem item;
+            item.action = Action::Action_Parent;
             refPath.emplace_back(item);
         }
 

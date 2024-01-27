@@ -87,7 +87,7 @@ namespace SR_UTILS_NS {
         UpdatePath();
     }
 
-    EntityRef& EntityRef::SetPathTo(Entity::Ptr pEntity) {
+    EntityRef& EntityRef::SetPathTo(const Entity::Ptr& pEntity) {
         if (!EntityRefUtils::IsOwnerValid(m_owner)) {
             SRHalt("Invalid owner!");
             return *this;
@@ -132,13 +132,29 @@ namespace SR_UTILS_NS {
 
     void EntityRef::Load(SR_HTYPES_NS::Marshal& marshal) {
         m_relative = marshal.Read<bool>();
-        m_path = marshal.Read<EntityRefUtils::RefPath>();
+        m_path.clear();
+
+        const auto length = marshal.Read<uint16_t>();
+
+        for (uint16_t i = 0; i < length; ++i) {
+            auto&& item = m_path.emplace_back();
+            item.index = marshal.Read<uint16_t>();
+            item.action = static_cast<EntityRefUtils::Action>(marshal.Read<uint8_t>());
+            item.name = marshal.Read<StringAtom>();
+        }
     }
 
     void EntityRef::Save(SR_HTYPES_NS::Marshal& marshal) const {
         UpdatePath();
+
         marshal.Write<bool>(IsRelative());
-        marshal.Write<EntityRefUtils::RefPath>(m_path);
+        marshal.Write<uint16_t>(m_path.size());
+
+        for (auto&& path : m_path) {
+            marshal.Write<uint16_t>(path.index);
+            marshal.Write<uint8_t>(static_cast<uint8_t>(path.action));
+            marshal.Write<StringAtom>(path.name);
+        }
     }
 
     EntityRef EntityRef::Copy(const EntityRefUtils::OwnerRef& owner) const {
