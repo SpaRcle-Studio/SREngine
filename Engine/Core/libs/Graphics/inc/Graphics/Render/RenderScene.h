@@ -80,6 +80,8 @@ namespace SR_GRAPH_NS {
         void Remove(WidgetManagerPtr pWidgetManager);
         void Remove(MeshPtr pMesh);
 
+        void ReRegister(const MeshRegistrationInfo& info);
+
         void SetOverlayEnabled(bool enabled);
         void SetCurrentSkeleton(SR_ANIMATIONS_NS::Skeleton* pSkeleton) { m_currentSkeleton = pSkeleton;}
 

@@ -50,7 +50,7 @@ namespace SR_GRAPH_NS {
 
     public:
         virtual bool RegisterMesh(const MeshRegistrationInfo& info) { return false; }
-        virtual void UnRegisterMesh(const MeshRegistrationInfo& info) { }
+        virtual bool UnRegisterMesh(const MeshRegistrationInfo& info) { return false; }
 
         SR_NODISCARD virtual bool IsRendered() const { return m_isRendered; }
         SR_NODISCARD virtual bool IsEmpty() const { return true; }
@@ -90,7 +90,7 @@ namespace SR_GRAPH_NS {
         void Update(ShaderPtr pShader);
 
         bool RegisterMesh(const MeshRegistrationInfo& info) override;
-        void UnRegisterMesh(const MeshRegistrationInfo& info) override;
+        bool UnRegisterMesh(const MeshRegistrationInfo& info) override;
 
         SR_NODISCARD bool IsEmpty() const override { return m_meshes.empty(); }
         SR_NODISCARD bool IsValid() const override { return m_VBO != SR_ID_INVALID; }
@@ -117,7 +117,7 @@ namespace SR_GRAPH_NS {
         void Update();
 
         bool RegisterMesh(const MeshRegistrationInfo& info) override;
-        void UnRegisterMesh(const MeshRegistrationInfo& info) override;
+        bool UnRegisterMesh(const MeshRegistrationInfo& info) override;
 
         SR_NODISCARD bool IsEmpty() const override { return m_VBOStages.empty(); }
         SR_NODISCARD bool IsValid() const override { return m_shader; }
@@ -153,7 +153,7 @@ namespace SR_GRAPH_NS {
         void Update();
 
         bool RegisterMesh(const MeshRegistrationInfo& info) override;
-        void UnRegisterMesh(const MeshRegistrationInfo& info) override;
+        bool UnRegisterMesh(const MeshRegistrationInfo& info) override;
 
         SR_NODISCARD int64_t GetPriority() const noexcept { return m_priority; }
 
@@ -185,7 +185,7 @@ namespace SR_GRAPH_NS {
         void Update();
 
         bool RegisterMesh(const MeshRegistrationInfo& info) override;
-        void UnRegisterMesh(const MeshRegistrationInfo& info) override;
+        bool UnRegisterMesh(const MeshRegistrationInfo& info) override;
 
         SR_NODISCARD int64_t FindPriorityStageIndex(int64_t priority, bool nearest) const;
 
@@ -231,7 +231,8 @@ namespace SR_GRAPH_NS {
         void BindPriorityCallback(PriorityCallback callback) { m_priorityCallback = std::move(callback); }
 
         void RegisterMesh(SR_GTYPES_NS::Mesh* pMesh);
-        void UnRegisterMesh(SR_GTYPES_NS::Mesh* pMesh);
+        bool UnRegisterMesh(SR_GTYPES_NS::Mesh* pMesh);
+        void ReRegisterMesh(const MeshRegistrationInfo& info);
 
         void OnResourceReloaded(SR_UTILS_NS::IResource* pResource) const;
 
@@ -258,7 +259,7 @@ namespace SR_GRAPH_NS {
 
     private:
         void RegisterMesh(const MeshRegistrationInfo& info);
-        void UnRegisterMesh(const MeshRegistrationInfo& info);
+        bool UnRegisterMesh(const MeshRegistrationInfo& info);
 
     private:
         FilterCallback m_layerFilter;
@@ -276,6 +277,8 @@ namespace SR_GRAPH_NS {
         std::set<SR_UTILS_NS::StringAtom> m_errors;
         std::set<SR_GTYPES_NS::Mesh*> m_problemMeshes;
         bool m_enableDebugMode = false;
+
+        std::list<MeshRegistrationInfo> m_reRegisterMeshes;
 
         uint32_t m_meshCount = 0;
 

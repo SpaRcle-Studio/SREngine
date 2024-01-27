@@ -187,12 +187,14 @@ namespace SR_GRAPH_NS::Types {
             if (pResource == m_material) {
                 m_dirtyMaterial = true;
                 m_hasErrors = false;
+                ReRegisterMesh();
                 return true;
             }
 
             if (m_material->GetShader() == pResource) {
                 m_dirtyMaterial = true;
                 m_hasErrors = false;
+                ReRegisterMesh();
                 return true;
             }
 
@@ -276,9 +278,7 @@ namespace SR_GRAPH_NS::Types {
     void Mesh::ReRegisterMesh() {
         if (m_registrationInfo.has_value()) {
             auto pRenderScene = m_registrationInfo.value().pScene;
-            pRenderScene->Remove(this);
-            pRenderScene->Register(this);
-            MarkPipelineUnBuild();
+            pRenderScene->ReRegister(m_registrationInfo.value());
         }
     }
 }

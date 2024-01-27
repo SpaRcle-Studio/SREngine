@@ -24,6 +24,14 @@ namespace SR_GRAPH_NS {
     bool RenderStrategy::Render() {
         SR_TRACY_ZONE;
 
+        while (!m_reRegisterMeshes.empty()) {
+            auto&& info = m_reRegisterMeshes.front();
+            if (UnRegisterMesh(info)) {
+                RegisterMesh(info);
+            }
+            m_reRegisterMeshes.pop_front();
+        }
+
         bool isRendered = false;
 
         SR_MAYBE_UNUSED auto&& guard = SR_UTILS_NS::LayerManager::Instance().ScopeLockSingleton();
@@ -101,7 +109,7 @@ namespace SR_GRAPH_NS {
         RegisterMesh(info);
     }
 
-    void RenderStrategy::UnRegisterMesh(SR_GTYPES_NS::Mesh* pMesh) {
+    bool RenderStrategy::UnRegisterMesh(SR_GTYPES_NS::Mesh* pMesh) {
         SR_TRACY_ZONE;
 
         if (IsDebugModeEnabled() && m_problemMeshes.count(pMesh) == 1) {
@@ -110,10 +118,12 @@ namespace SR_GRAPH_NS {
 
         if (!pMesh->IsMeshRegistered()) {
             SRHalt("Mesh is not registered!");
-            return;
+            return false;
         }
 
         UnRegisterMesh(pMesh->GetMeshRegistrationInfo());
+
+        return true;
     }
 
     bool RenderStrategy::IsPriorityAllowed(int64_t priority) const {
@@ -177,9 +187,11 @@ namespace SR_GRAPH_NS {
         ++m_meshCount;
     }
 
-    void RenderStrategy::UnRegisterMesh(const MeshRegistrationInfo& info) {
+    bool RenderStrategy::UnRegisterMesh(const MeshRegistrationInfo& info) {
+        bool unregistered = false;
+
         if (auto&& pLayerIt = m_layers.find(info.layer); pLayerIt != m_layers.end()) {
-            pLayerIt->second->UnRegisterMesh(info);
+            unregistered = pLayerIt->second->UnRegisterMesh(info);
             if (pLayerIt->second->IsEmpty()) {
                 delete pLayerIt->second;
                 m_layers.erase(pLayerIt);
@@ -187,12 +199,15 @@ namespace SR_GRAPH_NS {
         }
         else {
             SRHalt("Layer \"{}\" not found!", info.layer.c_str());
+            return false;
         }
 
         info.pMesh->SetMeshRegistrationInfo(std::nullopt);
 
         SRAssert(m_meshCount != 0);
         --m_meshCount;
+
+        return unregistered;
     }
 
     void RenderStrategy::ForEachMesh(const SR_HTYPES_NS::Function<void(MeshPtr)>& callback) const {
@@ -206,17 +221,9 @@ namespace SR_GRAPH_NS {
     void RenderStrategy::OnResourceReloaded(SR_UTILS_NS::IResource* pResource) const {
         SR_TRACY_ZONE;
 
-        std::list<MeshPtr> meshesToReRegister;
-
-        ForEachMesh([pResource, &meshesToReRegister](auto&& pMesh) {
-            if (pMesh->OnResourceReloaded(pResource)) {
-                meshesToReRegister.emplace_back(pMesh);
-            }
+        ForEachMesh([pResource](auto&& pMesh) {
+            pMesh->OnResourceReloaded(pResource);
         });
-
-        for (auto&& pMesh : meshesToReRegister) {
-            pMesh->ReRegisterMesh();
-        }
     }
 
     void RenderStrategy::SetDebugMode(bool value) {
@@ -232,6 +239,10 @@ namespace SR_GRAPH_NS {
     void RenderStrategy::ClearErrors() {
         m_problemMeshes.clear();
         m_errors.clear();
+    }
+
+    void RenderStrategy::ReRegisterMesh(const MeshRegistrationInfo& info) {
+        m_reRegisterMeshes.emplace_back(info);
     }
 
     /// ----------------------------------------------------------------------------------------------------------------
@@ -306,15 +317,15 @@ namespace SR_GRAPH_NS {
         return true;
     }
 
-    void LayerRenderStage::UnRegisterMesh(const MeshRegistrationInfo& info) {
+    bool LayerRenderStage::UnRegisterMesh(const MeshRegistrationInfo& info) {
         if (info.priority.has_value()) {
             const int64_t index = FindPriorityStageIndex(info.priority.value(), false);
             if (index == SR_ID_INVALID) {
                 SRHalt("Priority {} not found!", info.priority.value());
-                return;
+                return false;
             }
 
-            m_priorityStages[index]->UnRegisterMesh(info);
+            const bool result = m_priorityStages[index]->UnRegisterMesh(info);
 
             if (m_priorityStages[index]->IsEmpty()) {
                 delete m_priorityStages[index];
@@ -327,19 +338,24 @@ namespace SR_GRAPH_NS {
 
                 m_priorityStages.resize(m_priorityStages.size() - 1);
             }
+
+            return result;
         }
         else {
             if (auto&& pIt = m_shaderStages.find(info.pShader); pIt != m_shaderStages.end()) {
-                pIt->second->UnRegisterMesh(info);
+                const bool result = pIt->second->UnRegisterMesh(info);
                 if (pIt->second->IsEmpty()) {
                     delete pIt->second;
                     m_shaderStages.erase(pIt);
                 }
+                return result;
             }
             else {
                 SRHalt("Shader not found!");
+                return false;
             }
         }
+        SRHalt("Unresolved situation!");
     }
 
     int64_t LayerRenderStage::FindPriorityStageIndex(int64_t priority, bool nearest) const {
@@ -453,17 +469,18 @@ namespace SR_GRAPH_NS {
         return true;
     }
 
-    void PriorityRenderStage::UnRegisterMesh(const MeshRegistrationInfo& info) {
+    bool PriorityRenderStage::UnRegisterMesh(const MeshRegistrationInfo& info) {
         if (auto&& pIt = m_shaderStages.find(info.pShader); pIt != m_shaderStages.end()) {
-            pIt->second->UnRegisterMesh(info);
+            const bool result = pIt->second->UnRegisterMesh(info);
             if (pIt->second->IsEmpty()) {
                 delete pIt->second;
                 m_shaderStages.erase(pIt);
             }
+            return result;
         }
-        else {
-            SRHalt("Shader not found!");
-        }
+
+        SRHalt("Shader not found!");
+        return false;
     }
 
     void PriorityRenderStage::ForEachMesh(const SR_HTYPES_NS::Function<void(MeshPtr)>& callback) const {
@@ -603,17 +620,18 @@ namespace SR_GRAPH_NS {
         return true;
     }
 
-    void ShaderRenderStage::UnRegisterMesh(const MeshRegistrationInfo &info) {
+    bool ShaderRenderStage::UnRegisterMesh(const MeshRegistrationInfo &info) {
         if (auto&& pIt = m_VBOStages.find(info.VBO); pIt != m_VBOStages.end()) {
-            pIt->second->UnRegisterMesh(info);
+            const bool result = pIt->second->UnRegisterMesh(info);
             if (pIt->second->IsEmpty()) {
                 delete pIt->second;
                 m_VBOStages.erase(pIt);
             }
+            return result;
         }
-        else {
-            SRHalt("VBO {} not found!", info.VBO);
-        }
+
+        SRHalt("VBO {} not found!", info.VBO);
+        return false;
     }
 
     void ShaderRenderStage::ForEachMesh(const SR_HTYPES_NS::Function<void(MeshPtr)>& callback) const {
@@ -723,13 +741,14 @@ namespace SR_GRAPH_NS {
         return true;
     }
 
-    void VBORenderStage::UnRegisterMesh(const MeshRegistrationInfo& info) {
+    bool VBORenderStage::UnRegisterMesh(const MeshRegistrationInfo& info) {
         if (auto&& pIt = std::find(m_meshes.begin(), m_meshes.end(), info.pMesh); pIt != m_meshes.end()) {
             m_meshes.erase(pIt);
-            return;
+            return true;
         }
 
         SRHalt("VBO {} not found!", info.VBO);
+        return false;
     }
 
     void VBORenderStage::ForEachMesh(const SR_HTYPES_NS::Function<void(MeshPtr)>& callback) const {

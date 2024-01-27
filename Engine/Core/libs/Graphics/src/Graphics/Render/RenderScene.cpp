@@ -560,4 +560,9 @@ namespace SR_GRAPH_NS {
         m_renderStrategy->UnRegisterMesh(pMesh);
         SetDirty();
     }
+
+    void RenderScene::ReRegister(const MeshRegistrationInfo& info) {
+        m_renderStrategy->ReRegisterMesh(info);
+        SetDirty();
+    }
 }

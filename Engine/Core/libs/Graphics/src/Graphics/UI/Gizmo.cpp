@@ -96,4 +96,20 @@ namespace SR_GRAPH_UI_NS {
         ReleaseGizmo();
         Super::OnDisable();
     }
+
+    void Gizmo::Update(float_t dt) {
+        SR_MATH_NS::FVector3 cameraPosition;
+
+        if (auto&& pRenderScene = TryGetRenderScene()) {
+            if (auto&& pCamera = pRenderScene->GetMainCamera()) {
+                cameraPosition = pCamera->GetPosition();
+            }
+        }
+
+        const float_t distance = GetTransform()->GetTranslation().Distance(cameraPosition);
+
+        GetTransform()->SetScale(distance / 10.f);
+
+        Super::Update(dt);
+    }
 }
