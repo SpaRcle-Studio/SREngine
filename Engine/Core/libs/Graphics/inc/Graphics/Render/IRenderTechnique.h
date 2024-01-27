@@ -50,6 +50,7 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD RenderScenePtr GetRenderScene() const override;
         SR_NODISCARD bool IsEmpty() const;
 
+        SR_GTYPES_NS::Mesh* PickMeshAt(float_t x, float_t y) const;
         SR_GTYPES_NS::Mesh* PickMeshAt(float_t x, float_t y, SR_UTILS_NS::StringAtom passName) const;
         SR_GTYPES_NS::Mesh* PickMeshAt(float_t x, float_t y, const std::vector<SR_UTILS_NS::StringAtom>& passFilter) const;
         SR_NODISCARD const PassQueues& GetQueues() const { return m_queues; }

@@ -154,4 +154,9 @@ namespace SR_GRAPH_NS {
         }
         return nullptr;
     }
+
+    SR_GTYPES_NS::Mesh* IRenderTechnique::PickMeshAt(float_t x, float_t y) const {
+        static SR_UTILS_NS::StringAtom colorBufferPassName = "ColorBufferPass";
+        return PickMeshAt(x, y, colorBufferPassName);
+    }
 }

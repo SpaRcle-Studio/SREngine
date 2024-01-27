@@ -3,6 +3,7 @@
 //
 
 #include <Graphics/UI/Gizmo.h>
+#include <Graphics/Render/RenderTechnique.h>
 #include <Utils/ECS/ComponentManager.h>
 #include <Utils/ECS/GameObject.h>
 
@@ -99,10 +100,12 @@ namespace SR_GRAPH_UI_NS {
 
     void Gizmo::Update(float_t dt) {
         SR_MATH_NS::FVector3 cameraPosition;
+        IRenderTechnique* pTechnique = nullptr;
 
         if (auto&& pRenderScene = TryGetRenderScene()) {
             if (auto&& pCamera = pRenderScene->GetMainCamera()) {
                 cameraPosition = pCamera->GetPosition();
+                pTechnique = pCamera->GetRenderTechnique();
             }
         }
 

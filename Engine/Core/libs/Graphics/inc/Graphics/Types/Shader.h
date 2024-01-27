@@ -24,7 +24,6 @@ namespace SR_GTYPES_NS {
 namespace SR_GRAPH_NS {
     class Render;
     class RenderContext;
-    class Environment;
 }
 
 namespace SR_GTYPES_NS {

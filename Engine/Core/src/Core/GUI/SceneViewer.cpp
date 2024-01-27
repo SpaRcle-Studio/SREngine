@@ -261,7 +261,7 @@ namespace SR_CORE_NS::GUI {
 
         const auto size = m_window->GetSize();
 
-        auto&& pCamera = new EditorCamera(size.x, size.y);
+        auto&& pCamera = new EditorCamera(this, size.x, size.y);
 
         if (m_isPrefab) {
             pCamera->SetRenderTechnique(SR_CORE_NS::EditorSettings::Instance().GetPrefabEditorRenderTechnique());

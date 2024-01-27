@@ -9,6 +9,7 @@
 #include <Core/GUI/DragNDropHelper.h>
 #include <Core/GUI/PropertyDrawer.h>
 #include <Core/Settings/EditorSettings.h>
+#include <Core/Common/Importers.h>
 
 #include <Utils/Types/DataStorage.h>
 #include <Utils/Types/RawMesh.h>

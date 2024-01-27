@@ -20,8 +20,8 @@ namespace SR_CORE_GUI_NS {
     class Hierarchy;
     class Guizmo;
 
-    class SR_DLL_EXPORT SceneViewer : public Graphics::GUI::Widget {
-        using Super = Graphics::GUI::Widget;
+    class SR_DLL_EXPORT SceneViewer : public SR_GRAPH_GUI_NS::Widget {
+        using Super = SR_GRAPH_GUI_NS::Widget;
         using GameObjectPtr = SR_UTILS_NS::GameObject::Ptr;
         using WindowPtr = SR_HTYPES_NS::SafePtr<SR_GRAPH_NS::Window>;
         using EnginePtr = SR_HTYPES_NS::SharedPtr<Engine>;
