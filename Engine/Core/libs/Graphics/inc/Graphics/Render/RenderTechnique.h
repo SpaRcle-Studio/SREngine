@@ -25,6 +25,9 @@ namespace SR_GRAPH_NS {
         bool LoadSettings(const SR_XML_NS::Node &node) override;
         void ClearSettings() override;
 
+    private:
+        void LoadPass(const SR_XML_NS::Node& node);
+
     };
 }
 

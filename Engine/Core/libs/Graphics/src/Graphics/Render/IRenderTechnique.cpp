@@ -137,12 +137,19 @@ namespace SR_GRAPH_NS {
         m_passes.clear();
     }
 
+    SR_GTYPES_NS::Mesh* IRenderTechnique::PickMeshAt(float_t x, float_t y, SR_UTILS_NS::StringAtom passName) const {
+        if (auto&& pPass = dynamic_cast<SR_GRAPH_NS::IColorBufferPass*>(FindPass(passName))) {
+            if (auto&& pMesh = pPass->GetMesh(x, y)) {
+                return pMesh;
+            }
+        }
+        return nullptr;
+    }
+
     SR_GTYPES_NS::Mesh* IRenderTechnique::PickMeshAt(float_t x, float_t y, const std::vector<SR_UTILS_NS::StringAtom>& passFilter) const {
         for (auto&& filter : passFilter) {
-            if (auto&& pPass = dynamic_cast<SR_GRAPH_NS::IColorBufferPass*>(FindPass(filter))) {
-                if (auto&& pMesh = pPass->GetMesh(x, y)) {
-                    return pMesh;
-                }
+            if (auto&& pMesh = PickMeshAt(x, y, filter)) {
+                return pMesh;
             }
         }
         return nullptr;

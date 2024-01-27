@@ -31,6 +31,7 @@ namespace SR_GRAPH_NS {
             for (auto&& overrideNode : shaderOverrideNode.TryGetNodes("Override")) {
                 auto&& shaderPath = overrideNode.TryGetAttribute("Shader").ToString(std::string());
                 if (shaderPath.empty()) {
+                    SR_ERROR("MeshDrawerPass::Load() : override shader is not set!");
                     continue;
                 }
 
@@ -155,7 +156,7 @@ namespace SR_GRAPH_NS {
     }
 
     void MeshDrawerPass::UseUniforms(ShaderPtr pShader, MeshPtr pMesh) {
-        if (m_useMaterials) {
+        if (IsNeedUseMaterials()) {
             pMesh->UseMaterial();
         }
     }
@@ -280,7 +281,7 @@ namespace SR_GRAPH_NS {
                 }
             }
 
-            if (textureId == SR_ID_INVALID) {
+            if (textureId == SR_ID_INVALID && !sampler.depth) {
                 textureId = GetContext()->GetDefaultTexture()->GetId();
             }
 

@@ -36,8 +36,9 @@ namespace SR_GRAPH_NS {
         bool Render() override;
         void Update() override;
 
-        bool HasPreRender() const noexcept override { return false; }
-        bool HasPostRender() const noexcept override { return false; }
+        SR_NODISCARD bool HasPreRender() const noexcept override { return false; }
+        SR_NODISCARD bool HasPostRender() const noexcept override { return false; }
+        SR_NODISCARD virtual bool IsNeedUseMaterials() const noexcept { return m_useMaterials; }
 
     protected:
         virtual void UseUniforms(ShaderPtr pShader, MeshPtr pMesh);
