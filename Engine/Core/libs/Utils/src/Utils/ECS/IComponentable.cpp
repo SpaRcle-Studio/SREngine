@@ -50,12 +50,12 @@ namespace SR_UTILS_NS {
         return data.pMarshal;
     }
 
-    Component* IComponentable::GetOrCreateComponent(size_t hashName) {
-        if (auto&& pComponent = GetComponent(hashName)) {
+    Component* IComponentable::GetOrCreateComponent(StringAtom name) {
+        if (auto&& pComponent = GetComponent(name)) {
             return pComponent;
         }
 
-        if (auto&& pComponent = ComponentManager::Instance().CreateComponentOfName(hashName)) {
+        if (auto&& pComponent = ComponentManager::Instance().CreateComponentOfName(name)) {
             if (AddComponent(pComponent)) {
                 return pComponent;
             }
@@ -68,7 +68,7 @@ namespace SR_UTILS_NS {
     }
 
     Component* IComponentable::GetComponent(const std::string& name) {
-        return GetComponent(SR_HASH_STR(name));
+        return GetComponent(StringAtom(name));
     }
 
     bool IComponentable::ContainsComponent(const std::string& name) {
@@ -76,12 +76,12 @@ namespace SR_UTILS_NS {
     }
 
     Component* IComponentable::GetOrCreateComponent(const std::string& name) {
-        return GetOrCreateComponent(SR_HASH_STR(name));
+        return GetOrCreateComponent(StringAtom(name));
     }
 
-    Component* IComponentable::GetComponent(size_t hashName) {
+    Component* IComponentable::GetComponent(StringAtom name) {
         for (auto&& pComponent : m_components) {
-            if (pComponent->GetComponentHashName() != hashName) {
+            if (pComponent->GetComponentName() != name) {
                 continue;
             }
 
@@ -136,7 +136,7 @@ namespace SR_UTILS_NS {
             });
 
             if (pLoadedIt == m_loadedComponents.end()) {
-                SR_ERROR("IComponentable::RemoveComponent() : component \"" + pComponent->GetComponentName() + "\" not found!");
+                SR_ERROR("IComponentable::RemoveComponent() : component \"" + pComponent->GetComponentName().ToStringRef() + "\" not found!");
                 return false;
             }
             else {

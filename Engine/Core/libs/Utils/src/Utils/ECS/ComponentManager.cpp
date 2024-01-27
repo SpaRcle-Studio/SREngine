@@ -7,29 +7,15 @@
 #include <Utils/Common/ToString.h>
 
 namespace SR_UTILS_NS {
-    Component* ComponentManager::CreateComponentOfName(const std::string &name) {
+    Component* ComponentManager::CreateComponentOfName(StringAtom name) {
         SR_SCOPED_LOCK;
 
-        if (m_ids.count(name) == 0) {
-            SR_ERROR("ComponentManager::CreateComponentOfName() : component \"" + name + "\" not found!");
+        if (m_meta.count(name) == 0) {
+            SR_ERROR("ComponentManager::CreateComponentImpl() : component \"" + name.ToStringRef() + "\" not found!");
             return nullptr;
         }
 
-        return CreateComponentOfName(m_ids.at(name));
-    }
-
-    Component* ComponentManager::CreateComponentOfName(ComponentManager::Hash hashName) {
-        SR_SCOPED_LOCK;
-        return CreateComponentImpl(hashName);
-    }
-
-    Component* ComponentManager::CreateComponentImpl(size_t id) {
-        if (m_meta.count(id) == 0) {
-            SR_ERROR("ComponentManager::CreateComponentImpl() : component \"" + std::to_string(id) + "\" not found!");
-            return nullptr;
-        }
-
-        auto&& pComponent = m_meta.at(id).constructor();
+        auto&& pComponent = m_meta.at(name).constructor();
         if (pComponent) {
             if (!pComponent->InitializeEntity()) {
                 SR_ERROR("ComponentManager::CreateComponentImpl() : failed to initialize entity!");
@@ -48,22 +34,22 @@ namespace SR_UTILS_NS {
 
         ComponentLoadResult result = ComponentLoadResult::Success;
 
-        m_lastComponent = marshal.Read<uint64_t>(); /// name
+        m_lastComponent = SR_HASH_TO_STR_ATOM(marshal.Read<uint64_t>()); /// name
         auto&& enabled = marshal.Read<bool>();      /// enabled
         auto&& version = marshal.Read<uint16_t>();  /// version
 
-        const uint16_t newVersion = GetVersionById(m_lastComponent);
+        const uint16_t newVersion = GetVersionByName(m_lastComponent);
 
         if (version != newVersion) {
             result = ComponentLoadResult::Migrated;
 
             auto&& pMetadataIt = m_meta.find(m_lastComponent);
             if (pMetadataIt == m_meta.end()) {
-                SR_ERROR("ComponentManager::Load() : unknown component! Hash name: " + SR_UTILS_NS::ToString(m_lastComponent));
+                SR_ERROR("ComponentManager::Load() : unknown component! Name: {}", m_lastComponent.c_str());
                 return std::make_pair(nullptr, ComponentLoadResult::Error);
             }
 
-            SR_INFO("ComponentManager::Load() : \"" + pMetadataIt->second.name + "\" has different version! " +
+            SR_INFO("ComponentManager::Load() : \"" + pMetadataIt->first.ToStringRef() + "\" has different version! " +
                  "Trying to migrate from " + SR_UTILS_NS::ToString(version) + " to " + SR_UTILS_NS::ToString(newVersion) + "..."
             );
 
@@ -84,16 +70,15 @@ namespace SR_UTILS_NS {
         return std::make_pair(nullptr, ComponentLoadResult::Error);
     }
 
-    uint16_t ComponentManager::GetVersion(const Component *pComponent) const {
+    uint16_t ComponentManager::GetVersion(const Component* pComponent) const {
         SR_SCOPED_LOCK;
-
-        return GetVersionById(pComponent->GetComponentHashName());
+        return GetVersionByName(pComponent->GetComponentName());
     }
 
-    uint16_t ComponentManager::GetVersionById(uint64_t id) const {
+    uint16_t ComponentManager::GetVersionByName(SR_UTILS_NS::StringAtom name) const {
         SR_SCOPED_LOCK;
 
-        auto&& pIt = m_meta.find(id);
+        auto&& pIt = m_meta.find(name);
 
         if (pIt == m_meta.end()) {
             return 0;
@@ -110,17 +95,6 @@ namespace SR_UTILS_NS {
         m_context.Clear();
 
         return result;
-    }
-
-    std::string ComponentManager::GetLastComponentName() const {
-        SR_SCOPED_LOCK;
-
-        auto&& pMetadataIt = m_meta.find(m_lastComponent);
-        if (pMetadataIt == m_meta.end()) {
-            return "\"Unknown component\"";
-        }
-
-        return pMetadataIt->second.name;
     }
 
     std::vector<SR_UTILS_NS::Component*> ComponentManager::LoadComponents(SR_HTYPES_NS::Marshal &marshal) {
@@ -148,7 +122,7 @@ namespace SR_UTILS_NS {
                     components.emplace_back(pComponent);
                 }
                 else {
-                    SR_WARN("ComponentManager::LoadComponents() : failed to load \"" + GetLastComponentName() + "\" component!");
+                    SR_WARN("ComponentManager::LoadComponents() : failed to load \"" + m_lastComponent.ToStringRef() + "\" component!");
                 }
 
                 const uint64_t readBytes = marshal.GetPosition() - position;
@@ -179,8 +153,8 @@ namespace SR_UTILS_NS {
         m_contextInitializer = fn;
     }
 
-    bool ComponentManager::HasLoader(ComponentManager::Hash hashName) const {
-        auto&& pMetadataIt = m_meta.find(hashName);
+    bool ComponentManager::HasLoader(StringAtom name) const {
+        auto&& pMetadataIt = m_meta.find(name);
         if (pMetadataIt == m_meta.end()) {
             return false;
         }

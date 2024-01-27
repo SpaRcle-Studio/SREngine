@@ -183,9 +183,9 @@ namespace SR_CORE_GUI_NS {
 
         ImGui::PushItemWidth(width);
         if (ImGui::BeginCombo("Add component", nullptr, ImGuiComboFlags_NoArrowButton)) {
-            for (const auto&[name, id] : SR_UTILS_NS::ComponentManager::Instance().GetComponentsNames()) {
+            for (auto&& name : SR_UTILS_NS::ComponentManager::Instance().GetComponentsNames()) {
                 if (ImGui::Selectable(name.c_str(), false)) {
-                    auto &&pNewComponent = SR_UTILS_NS::ComponentManager::Instance().CreateComponentOfName(name);
+                    auto&& pNewComponent = SR_UTILS_NS::ComponentManager::Instance().CreateComponentOfName(name);
                     pIComponentable->AddComponent(pNewComponent);
                 }
             }

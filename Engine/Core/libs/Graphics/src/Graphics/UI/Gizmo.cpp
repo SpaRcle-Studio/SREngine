@@ -4,6 +4,7 @@
 
 #include <Graphics/UI/Gizmo.h>
 #include <Utils/ECS/ComponentManager.h>
+#include <Utils/ECS/GameObject.h>
 
 namespace SR_GRAPH_UI_NS {
     SR_REGISTER_COMPONENT(Gizmo);
@@ -13,6 +14,7 @@ namespace SR_GRAPH_UI_NS {
     }
 
     void Gizmo::OnAttached() {
+        GetGameObject()->SetLayer("Gizmo");
         Super::OnAttached();
     }
 

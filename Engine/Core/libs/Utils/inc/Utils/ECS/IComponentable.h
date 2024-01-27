@@ -52,9 +52,9 @@ namespace SR_UTILS_NS {
         };
 
         virtual Component* GetOrCreateComponent(const std::string& name);
-        virtual Component* GetOrCreateComponent(size_t hashName);
+        virtual Component* GetOrCreateComponent(StringAtom name);
         virtual Component* GetComponent(const std::string& name);
-        virtual Component* GetComponent(size_t hashName);
+        virtual Component* GetComponent(StringAtom name);
 
         virtual bool AddComponent(Component* component);
 
@@ -65,7 +65,7 @@ namespace SR_UTILS_NS {
         virtual void DestroyComponents();
 
         template<typename T> T* GetComponent() {
-            return dynamic_cast<T*>(GetComponent(T::COMPONENT_HASH_NAME));
+            return dynamic_cast<T*>(GetComponent(T::COMPONENT_NAME));
         }
 
         virtual void OnPriorityChanged();

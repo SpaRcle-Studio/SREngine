@@ -200,7 +200,10 @@ namespace SpaRcle {
         using namespace SR_HTYPES_NS;
 
         generator->RegisterNewClass("Component", "Component", { "Libraries/Math/Vector3.h", "string" });
-        ESRegisterMethodArg0(EvoScript::Public, generator, Component, GetComponentName, std::string)
+
+        ESRegisterCustomMethodArg0(EvoScript::Public, generator, Component, GetComponentName, std::string, {
+            return ptr->GetComponentName();
+        })
 
         ESRegisterMethodArg0(EvoScript::Public, generator, Component, BaseComponent, Component*)
         ESRegisterMethodArg0(EvoScript::Public, generator, Component, GetGameObject, SharedPtr<GameObject>)

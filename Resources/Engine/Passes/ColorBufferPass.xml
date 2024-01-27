@@ -14,11 +14,13 @@
             <Override Type="Skybox" Shader="Engine/Shaders/ColorBuffer/simple.srsl"/>
             <Override Type="Simple" Shader="Engine/Shaders/ColorBuffer/simple.srsl"/>
             <Override Type="Skinned" Shader="Engine/Shaders/ColorBuffer/skinned.srsl"/>
+            <Override Path="Engine/Shaders/gizmo.srsl" Shader="Engine/Shaders/ColorBuffer/gizmo.srsl"/>
         </Shaders>
         <AllowedLayers>
             <Default/>
             <Opaque/>
             <Transparent/>
+            <Gizmo/>
         </AllowedLayers>
     </ColorBufferPass>
 </Include>
