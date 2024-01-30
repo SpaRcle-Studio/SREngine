@@ -73,8 +73,8 @@ namespace SR_GRAPH_NS {
             return;
         }
 
-        pShader->SetMat4(SHADER_VIEW_NO_TRANSLATE_MATRIX, m_camera->GetViewRef());
-        pShader->SetMat4(SHADER_PROJECTION_MATRIX, m_camera->GetProjectionRef());
+        pShader->SetMat4(SHADER_VIEW_NO_TRANSLATE_MATRIX, m_camera->GetView());
+        pShader->SetMat4(SHADER_PROJECTION_MATRIX, m_camera->GetProjection());
 
         auto&& virtualUbo = m_skybox->GetVirtualUBO();
         if (virtualUbo == SR_ID_INVALID) {

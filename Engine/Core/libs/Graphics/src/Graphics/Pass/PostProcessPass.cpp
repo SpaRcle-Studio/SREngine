@@ -91,11 +91,11 @@ namespace SR_GRAPH_NS {
         }
 
         if (m_shader && m_camera) {
-            m_shader->SetVec3(SHADER_VIEW_POSITION, m_camera->GetPositionRef());
+            m_shader->SetVec3(SHADER_VIEW_POSITION, m_camera->GetPosition());
             m_shader->SetVec3(SHADER_VIEW_DIRECTION, m_camera->GetViewDirection());
-            m_shader->SetMat4(SHADER_PROJECTION_MATRIX, m_camera->GetProjectionRef());
-            m_shader->SetMat4(SHADER_VIEW_MATRIX, m_camera->GetViewTranslateRef());
-            m_shader->SetMat4(SHADER_VIEW_NO_TRANSLATE_MATRIX, m_camera->GetViewRef());
+            m_shader->SetMat4(SHADER_PROJECTION_MATRIX, m_camera->GetProjection());
+            m_shader->SetMat4(SHADER_VIEW_MATRIX, m_camera->GetViewTranslate());
+            m_shader->SetMat4(SHADER_VIEW_NO_TRANSLATE_MATRIX, m_camera->GetView());
         }
 
         if (m_uboManager.BindUBO(m_virtualUBO) == Memory::UBOManager::BindResult::Duplicated) {

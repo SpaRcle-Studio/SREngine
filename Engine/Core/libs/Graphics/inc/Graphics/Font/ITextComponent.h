@@ -2,8 +2,8 @@
 // Created by Monika on 14.02.2022.
 //
 
-#ifndef SR_ENGINE_ITEXTCOMPONENT_H
-#define SR_ENGINE_ITEXTCOMPONENT_H
+#ifndef SR_ENGINE_I_TEXT_COMPONENT_H
+#define SR_ENGINE_I_TEXT_COMPONENT_H
 
 #include <Graphics/Types/Vertices.h>
 #include <Graphics/Types/Mesh.h>
@@ -58,6 +58,8 @@ namespace SR_GTYPES_NS {
             return m_modelMatrix;
         }
 
+        SR_NODISCARD bool IsSupportVBO() const override { return false; }
+
         SR_NODISCARD uint32_t GetAtlasWidth() const noexcept { return m_width; }
         SR_NODISCARD uint32_t GetAtlasHeight() const noexcept { return m_height; }
 
@@ -101,4 +103,4 @@ namespace SR_GTYPES_NS {
     };
 }
 
-#endif //SR_ENGINE_ITEXTCOMPONENT_H
+#endif //SR_ENGINE_I_TEXT_COMPONENT_H

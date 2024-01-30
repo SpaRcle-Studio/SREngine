@@ -96,13 +96,30 @@ namespace SR_MATH_NS {
             return *this;
         }
 
-        template<typename U> SR_FORCE_INLINE Vector4 &operator*=(const Vector4<U> &p_v) {
+        template<typename U> SR_FORCE_INLINE Vector4& operator/=(U p_scalar) {
+            x /= p_scalar;
+            y /= p_scalar;
+            z /= p_scalar;
+            w /= p_scalar;
+            return *this;
+        }
+
+        template<typename U> SR_FORCE_INLINE Vector4& operator*=(const Vector4<U>& p_v) {
             x *= p_v.x;
             y *= p_v.y;
             z *= p_v.z;
             w *= p_v.w;
             return *this;
         }
+
+        template<typename U> SR_FORCE_INLINE Vector4& operator/=(const Vector4<U>& p_v) {
+            x /= p_v.x;
+            y /= p_v.y;
+            z /= p_v.z;
+            w /= p_v.w;
+            return *this;
+        }
+
         template<typename U> SR_FORCE_INLINE Vector4 &operator%=(const Vector4<U> &p_v) {
             x %= p_v.x;
             y %= p_v.y;
@@ -117,6 +134,14 @@ namespace SR_MATH_NS {
 
         template<typename U> SR_FORCE_INLINE Vector4 operator*(const Vector4<U> &p_v) const {
             return Vector4(x * p_v.x, y * p_v.y, z * p_v.z, w * p_v.w);
+        }
+
+        template<typename U> SR_FORCE_INLINE Vector4 operator+(const Vector4<U>& v) const {
+            return Vector4(x + v.x, y + v.y, z + v.z, w + v.w);
+        }
+
+        template<typename U> SR_FORCE_INLINE Vector4 operator-(const Vector4<U>& v) const {
+            return Vector4(x - v.x, y - v.y, z - v.z, w - v.w);
         }
 
         template<typename U> SR_FORCE_INLINE Vector4 operator*(U p_scalar) const {

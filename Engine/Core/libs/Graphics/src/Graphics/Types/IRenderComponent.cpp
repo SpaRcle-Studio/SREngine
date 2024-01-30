@@ -24,7 +24,14 @@ namespace SR_GTYPES_NS {
         Super::OnDisable();
     }
 
-    IRenderComponent::RenderScenePtr IRenderComponent::TryGetRenderScene() {
+    IRenderComponent::CameraPtr IRenderComponent::GetCamera() const {
+        if (auto&& pRenderScene = TryGetRenderScene()) {
+            return pRenderScene->GetMainCamera();
+        }
+        return CameraPtr();
+    }
+
+    IRenderComponent::RenderScenePtr IRenderComponent::TryGetRenderScene() const  {
         if (m_renderScene.Valid()) {
             return m_renderScene;
         }
@@ -41,7 +48,7 @@ namespace SR_GTYPES_NS {
         return m_renderScene;
     }
 
-    IRenderComponent::RenderScenePtr IRenderComponent::GetRenderScene() {
+    IRenderComponent::RenderScenePtr IRenderComponent::GetRenderScene() const {
         if (auto&& pRenderScene = TryGetRenderScene()) {
             return pRenderScene;
         }

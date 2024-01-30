@@ -25,6 +25,8 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD uint32_t GetIndicesCount() const { return m_countIndices; }
         SR_NODISCARD uint32_t GetVerticesCount() const { return m_countVertices; }
 
+        SR_NODISCARD bool IsSupportVBO() const override { return true; }
+
         bool Calculate() override;
 
         bool CalculateIBO();

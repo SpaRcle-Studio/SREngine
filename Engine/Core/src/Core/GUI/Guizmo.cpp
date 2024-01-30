@@ -159,7 +159,7 @@ namespace SR_CORE_GUI_NS {
 
         glm::mat4 transform = GetMatrix();
         glm::mat4 view;
-        glm::mat4 projection = camera->GetProjectionRef().ToGLM();
+        glm::mat4 projection = camera->GetProjection().ToGLM();
 
         ImGuizmo::OPERATION operation = m_operation;
 
@@ -170,7 +170,7 @@ namespace SR_CORE_GUI_NS {
                 break;
             case SR_UTILS_NS::Measurement::Space2D: {
                 ImGuizmo::SetOrthographic(true);
-                projection = camera->GetOrthogonalRef().ToGLM();
+                projection = camera->GetOrthogonal().ToGLM();
                 SR_MATH_NS::Matrix4x4 matrix = SR_MATH_NS::Matrix4x4::Identity();
                 matrix = matrix.RotateAxis(SR_MATH_NS::FVector3(0, 1, 0), 180);
                 matrix = matrix.RotateAxis(SR_MATH_NS::FVector3(0, 0, 1), 180);

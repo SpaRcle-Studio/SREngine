@@ -71,7 +71,7 @@ namespace SR_GRAPH_NS {
                 SR_MATH_NS::FVector3(-1.0f, -1.0f,  1.0f),
             };
 
-            auto&& invCamera = (m_camera->GetProjectionRef() * m_camera->GetViewTranslateRef()).Inverse();
+            auto&& invCamera = (m_camera->GetProjection() * m_camera->GetViewTranslate()).Inverse();
 
             for (auto&& frustumCorner : frustumCorners) {
                 SR_MATH_NS::FVector4 invCorner = invCamera * SR_MATH_NS::FVector4(frustumCorner, 1.0f);
@@ -108,7 +108,7 @@ namespace SR_GRAPH_NS {
 
             if (m_usePerspective) {
                 /// TODO: not works
-                m_cascadeMatrices[i] = m_camera->GetProjectionRef() * lightViewMatrix;
+                m_cascadeMatrices[i] = m_camera->GetProjection() * lightViewMatrix;
             }
             else {
                 auto&& lightOrthoMatrix = SR_MATH_NS::Matrix4x4::Ortho(minExtents.x, maxExtents.x, minExtents.y, maxExtents.y, 0.0f, maxExtents.z - minExtents.z);

@@ -97,14 +97,14 @@ namespace SR_GRAPH_NS {
         info.pMesh = pMesh;
         info.pShader = pMesh->GetShader();
         info.layer = pMesh->GetMeshLayer();
-        info.VBO = pMesh->GetVBO();
         info.pScene = GetRenderScene();
+
+        if (pMesh->IsSupportVBO()) {
+            info.VBO = pMesh->GetVBO();
+        }
 
         if (pMesh->HasSortingPriority()) {
             info.priority = pMesh->GetSortingPriority();
-        }
-        else {
-            info.priority = std::nullopt;
         }
 
         RegisterMesh(info);
@@ -212,6 +212,126 @@ namespace SR_GRAPH_NS {
 
     void RenderStrategy::ReRegisterMesh(const MeshRegistrationInfo& info) {
         m_reRegisterMeshes.emplace_back(info);
+    }
+
+    /// ----------------------------------------------------------------------------------------------------------------
+
+    MeshRenderStage::MeshRenderStage(RenderStrategy* pRenderStrategy)
+        : Super(pRenderStrategy)
+        , m_uboManager(SR_GRAPH_NS::Memory::UBOManager::Instance())
+    {
+        m_meshes.reserve(64);
+    }
+
+    bool MeshRenderStage::RegisterMesh(const MeshRegistrationInfo& info) {
+        SR_TRACY_ZONE;
+        m_meshes.emplace_back(info.pMesh);
+        return true;
+    }
+
+    bool MeshRenderStage::UnRegisterMesh(const MeshRegistrationInfo& info) {
+        if (auto&& pIt = std::find(m_meshes.begin(), m_meshes.end(), info.pMesh); pIt != m_meshes.end()) {
+            m_meshes.erase(pIt);
+            return true;
+        }
+
+        SRHalt("Mesh not found!");
+        return false;
+    }
+
+    void MeshRenderStage::ForEachMesh(const SR_HTYPES_NS::Function<void(MeshPtr)>& callback) const {
+        for (auto&& pMesh : m_meshes) {
+            if (!pMesh) {
+                continue;
+            }
+            callback(pMesh);
+        }
+    }
+
+    bool MeshRenderStage::HasActiveMesh() const {
+        SR_TRACY_ZONE;
+
+        for (auto&& pMesh : m_meshes) {
+            if (pMesh->IsMeshActive()) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    void MeshRenderStage::Update(ShaderPtr pShader) {
+        SR_TRACY_ZONE;
+
+        if (!IsRendered()) {
+            return;
+        }
+
+        SR_GTYPES_NS::Mesh** pMesh = m_meshes.data();
+        SR_GTYPES_NS::Mesh** pMeshEnd = m_meshes.data() + m_meshes.size();
+
+        for (; pMesh != pMeshEnd; ++pMesh) {
+            auto&& pMeshUnwrapped = *pMesh;
+
+            if (!pMeshUnwrapped->IsMeshActive()) {
+                continue;
+            }
+
+            auto&& virtualUbo = pMeshUnwrapped->GetVirtualUBO();
+            if (virtualUbo == SR_ID_INVALID) {
+                continue;
+            }
+
+            m_renderStrategy->GetMeshDrawerPass()->UseUniforms(pShader, pMeshUnwrapped);
+
+            if (m_uboManager.BindUBO(virtualUbo) == Memory::UBOManager::BindResult::Duplicated) {
+                SR_ERROR("VBORenderStage::Update() : memory has been duplicated!");
+            }
+
+            pShader->Flush();
+        }
+    }
+
+    bool MeshRenderStage::Render() {
+        SR_TRACY_ZONE;
+
+        m_isRendered = true;
+
+        for (auto&& pMesh : m_meshes) {
+            pMesh->Draw();
+        }
+
+        return true;
+    }
+
+    /// ----------------------------------------------------------------------------------------------------------------
+
+    VBORenderStage::VBORenderStage(RenderStrategy* pRenderStrategy, int32_t VBO)
+        : Super(pRenderStrategy)
+        , m_VBO(VBO)
+    { }
+
+    bool VBORenderStage::Render() {
+        SR_TRACY_ZONE;
+
+        m_isRendered = false;
+
+        if (!IsValid()) {
+            SetError("VBO is not valid!");
+            return false;
+        }
+
+        if ((m_isRendered = !m_meshes.empty())) {
+            if (!m_meshes[0]->BindMesh()) {
+                return false;
+            }
+        }
+
+        for (auto&& pMesh : m_meshes) {
+            pMesh->Draw();
+        }
+
+        return IsRendered();
     }
 
     /// ----------------------------------------------------------------------------------------------------------------
@@ -467,6 +587,7 @@ namespace SR_GRAPH_NS {
         if (m_shader) {
             m_shader->AddUsePoint();
         }
+        m_meshStage = new MeshRenderStage(pRenderStrategy);
     }
 
     ShaderRenderStage::~ShaderRenderStage() {
@@ -474,6 +595,7 @@ namespace SR_GRAPH_NS {
         if (m_shader) {
             m_shader->RemoveUsePoint();
         }
+        delete m_meshStage;
     }
 
     bool ShaderRenderStage::Render() {
@@ -521,6 +643,8 @@ namespace SR_GRAPH_NS {
             m_isRendered |= pStage->Render();
         }
 
+        m_isRendered |= m_meshStage->Render();
+
         pShader->UnUse();
 
         return IsRendered();
@@ -552,6 +676,8 @@ namespace SR_GRAPH_NS {
             pVBOStage->Update(pShader);
         }
 
+        m_meshStage->Update(pShader);
+
         GetRenderScene()->SetCurrentSkeleton(nullptr);
         GetRenderContext()->SetCurrentShader(nullptr);
     }
@@ -560,6 +686,10 @@ namespace SR_GRAPH_NS {
         SR_TRACY_ZONE;
 
         if (!m_renderStrategy->IsNeedCheckMeshActivity()) {
+            return true;
+        }
+
+        if (m_meshStage->HasActiveMesh()) {
             return true;
         }
 
@@ -575,23 +705,33 @@ namespace SR_GRAPH_NS {
     bool ShaderRenderStage::RegisterMesh(const MeshRegistrationInfo& info) {
         SR_TRACY_ZONE;
 
-        if (auto&& pIt = m_VBOStages.find(info.VBO); pIt != m_VBOStages.end()) {
+        if (!info.VBO.has_value()) {
+            return m_meshStage->RegisterMesh(info);
+        }
+
+        if (auto&& pIt = m_VBOStages.find(info.VBO.value()); pIt != m_VBOStages.end()) {
             return pIt->second->RegisterMesh(info);
         }
         else {
-            auto&& pStage = new VBORenderStage(m_renderStrategy, info.VBO);
+            auto&& pStage = new VBORenderStage(m_renderStrategy, info.VBO.value());
             if (!pStage->RegisterMesh(info)) {
                 delete pStage;
                 return false;
             }
-            m_VBOStages[info.VBO] = pStage;
+            m_VBOStages[info.VBO.value()] = pStage;
         }
 
         return true;
     }
 
-    bool ShaderRenderStage::UnRegisterMesh(const MeshRegistrationInfo &info) {
-        if (auto&& pIt = m_VBOStages.find(info.VBO); pIt != m_VBOStages.end()) {
+    bool ShaderRenderStage::UnRegisterMesh(const MeshRegistrationInfo& info) {
+        SR_TRACY_ZONE;
+
+        if (!info.VBO.has_value()) {
+            return m_meshStage->UnRegisterMesh(info);
+        }
+
+        if (auto&& pIt = m_VBOStages.find(info.VBO.value()); pIt != m_VBOStages.end()) {
             const bool result = pIt->second->UnRegisterMesh(info);
             if (pIt->second->IsEmpty()) {
                 delete pIt->second;
@@ -600,7 +740,7 @@ namespace SR_GRAPH_NS {
             return result;
         }
 
-        SRHalt("VBO {} not found!", info.VBO);
+        SRHalt("VBO {} not found!", info.VBO.value());
         return false;
     }
 
@@ -608,6 +748,8 @@ namespace SR_GRAPH_NS {
         for (auto&& [VBO, pStage] : m_VBOStages) {
             pStage->ForEachMesh(callback);
         }
+
+        m_meshStage->ForEachMesh(callback);
     }
 
     /// ----------------------------------------------------------------------------------------------------------------
@@ -630,108 +772,6 @@ namespace SR_GRAPH_NS {
                 }
                 m_renderStrategy->AddProblemMesh(pMesh);
             });
-        }
-    }
-
-    /// ----------------------------------------------------------------------------------------------------------------
-
-    VBORenderStage::VBORenderStage(RenderStrategy* pRenderStrategy, int32_t VBO)
-        : Super(pRenderStrategy)
-        , m_uboManager(SR_GRAPH_NS::Memory::UBOManager::Instance())
-        , m_VBO(VBO)
-    {
-        m_meshes.reserve(64);
-    }
-
-    bool VBORenderStage::HasActiveMesh() const {
-        SR_TRACY_ZONE;
-
-        for (auto&& pMesh : m_meshes) {
-            if (pMesh->IsMeshActive()) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    bool VBORenderStage::Render() {
-        SR_TRACY_ZONE;
-
-        m_isRendered = false;
-
-        if (!IsValid()) {
-            SetError("VBO is not valid!");
-            return false;
-        }
-
-        if ((m_isRendered = !m_meshes.empty())) {
-            if (!m_meshes[0]->BindMesh()) {
-                return false;
-            }
-        }
-
-        for (auto&& pMesh : m_meshes) {
-            pMesh->Draw();
-        }
-
-        return IsRendered();
-    }
-
-    void VBORenderStage::Update(ShaderPtr pShader) {
-        SR_TRACY_ZONE;
-
-        if (!IsRendered()) {
-            return;
-        }
-
-        SR_GTYPES_NS::Mesh** pMesh = m_meshes.data();
-        SR_GTYPES_NS::Mesh** pMeshEnd = m_meshes.data() + m_meshes.size();
-
-        for (; pMesh != pMeshEnd; ++pMesh) {
-            auto&& pMeshUnwrapped = *pMesh;
-
-            if (!pMeshUnwrapped->IsMeshActive()) {
-                continue;
-            }
-
-            auto&& virtualUbo = pMeshUnwrapped->GetVirtualUBO();
-            if (virtualUbo == SR_ID_INVALID) {
-                continue;
-            }
-
-            m_renderStrategy->GetMeshDrawerPass()->UseUniforms(pShader, pMeshUnwrapped);
-
-            if (m_uboManager.BindUBO(virtualUbo) == Memory::UBOManager::BindResult::Duplicated) {
-                SR_ERROR("VBORenderStage::Update() : memory has been duplicated!");
-            }
-
-            pShader->Flush();
-        }
-    }
-
-    bool VBORenderStage::RegisterMesh(const MeshRegistrationInfo& info) {
-        SR_TRACY_ZONE;
-        m_meshes.emplace_back(info.pMesh);
-        return true;
-    }
-
-    bool VBORenderStage::UnRegisterMesh(const MeshRegistrationInfo& info) {
-        if (auto&& pIt = std::find(m_meshes.begin(), m_meshes.end(), info.pMesh); pIt != m_meshes.end()) {
-            m_meshes.erase(pIt);
-            return true;
-        }
-
-        SRHalt("VBO {} not found!", info.VBO);
-        return false;
-    }
-
-    void VBORenderStage::ForEachMesh(const SR_HTYPES_NS::Function<void(MeshPtr)>& callback) const {
-        for (auto&& pMesh : m_meshes) {
-            if (!pMesh) {
-                continue;
-            }
-            callback(pMesh);
         }
     }
 }

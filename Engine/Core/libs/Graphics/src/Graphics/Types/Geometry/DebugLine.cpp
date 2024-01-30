@@ -69,7 +69,7 @@ namespace SR_GTYPES_NS {
             ));
         }
 
-        Mesh::UseMaterial();
+        Super::UseMaterial();
     }
 
     void DebugLine::SetEndPoint(const SR_MATH_NS::FVector3& endPoint) {

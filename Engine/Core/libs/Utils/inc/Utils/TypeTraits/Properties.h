@@ -119,7 +119,7 @@ namespace SR_UTILS_NS {
             return *dynamic_cast<StandardProperty*>(pProperty);
         }
 
-        auto &&pProperty = new StandardProperty();
+        auto&& pProperty = new StandardProperty();
 
         pProperty->SetName(name);
         pProperty->SetType(GetStandardType<T>());

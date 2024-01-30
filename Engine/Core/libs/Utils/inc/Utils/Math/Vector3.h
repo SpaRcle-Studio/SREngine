@@ -135,6 +135,24 @@ namespace SR_MATH_NS {
             return { static_cast<T>(SR_DEG(x)), static_cast<T>(SR_DEG(y)), static_cast<T>(SR_DEG(z)) };
         }
 
+        SR_NODISCARD T AngleCoefficient(const Vector3& vector3) const {
+            const T dot = Dot(vector3);
+            const T length1 = Length();
+            const T length2 = vector3.Length();
+
+            if (length1 == static_cast<T>(0) || length2 == static_cast<T>(0)) {
+                return 0.0;
+            }
+
+            /// Вычисление угла между векторами в радианах
+            const T angle = std::acos(dot / (length1 * length2));
+
+            /// Преобразование угла в коэффициент от -1 до 1
+            const T coefficient = std::cos(angle);
+
+            return coefficient;
+        }
+
         SR_NODISCARD Vector3 Angle(const Vector3& vector3) {
             Vector3 angle;
 
@@ -278,6 +296,10 @@ namespace SR_MATH_NS {
 
         SR_NODISCARD SR_FORCE_INLINE Vector3 SR_FASTCALL Lerp(const Vector3& vector3, Unit t) const noexcept {
             return (Vector3)(*this + (vector3 - *this) * t);
+        }
+
+        SR_NODISCARD Vector3 Normalized() const {
+            return Normalize();
         }
 
         SR_NODISCARD Vector3 Normalize() const {
@@ -514,11 +536,16 @@ namespace SR_MATH_NS {
     typedef Vector3<uint32_t> UVector3;
     typedef Vector3<bool> BVector3;
 
-    inline static const FVector3 InfinityFV3 = FVector3 { UnitMAX, UnitMAX, UnitMAX };
-    inline static const FVector3 CmpEpsilonFV3 = FVector3 {
+    SR_INLINE static const FVector3 InfinityFV3 = FVector3 { UnitMAX, UnitMAX, UnitMAX };
+    SR_INLINE static const FVector3 CmpEpsilonFV3 = FVector3 {
             static_cast<Unit>(CMP_EPSILON),
             static_cast<Unit>(CMP_EPSILON),
             static_cast<Unit>(CMP_EPSILON),
+    };
+
+    struct Ray {
+        FVector3 origin;
+        FVector3 direction;
     };
 }
 

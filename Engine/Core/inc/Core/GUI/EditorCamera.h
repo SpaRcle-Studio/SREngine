@@ -20,6 +20,7 @@ namespace SR_CORE_GUI_NS {
         SR_NODISCARD bool IsEditorCamera() const noexcept override { return true; }
 
         SR_NODISCARD SR_MATH_NS::FPoint GetMousePos() const override;
+        SR_NODISCARD SR_MATH_NS::FPoint GetActiveViewportSize() const override;
 
     private:
         SceneViewer* m_sceneViewer = nullptr;
