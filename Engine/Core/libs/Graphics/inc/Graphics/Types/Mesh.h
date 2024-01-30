@@ -24,7 +24,6 @@ namespace SR_HTYPES_NS {
 }
 
 namespace SR_GRAPH_NS {
-    class Environment;
     class RenderScene;
     class RenderContext;
 }
@@ -71,6 +70,7 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD virtual int64_t GetSortingPriority() const { return 0; }
         SR_NODISCARD virtual bool HasSortingPriority() const { return false; }
         SR_NODISCARD virtual SR_UTILS_NS::StringAtom GetMeshLayer() const { return SR_UTILS_NS::StringAtom(); }
+        SR_NODISCARD virtual bool IsSupportVBO() const = 0;
 
         SR_NODISCARD std::vector<MaterialProperty>& GetOverrideUniforms() noexcept { return m_overrideUniforms; }
         SR_NODISCARD ShaderPtr GetShader() const;

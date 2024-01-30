@@ -178,7 +178,7 @@ namespace SR_CORE_GUI_NS {
                 float_t value = pProperty->GetFloat();
 
                 const float_t lineHeight = GImGui->Font->FontSize + GImGui->Style.FramePadding.y * 2.0f;
-                const ImVec2 buttonSize = { lineHeight + 30.0f, lineHeight };
+                const ImVec2 buttonSize = { lineHeight + pProperty->GetWidth(), lineHeight };
 
                 if (SR_GRAPH_GUI_NS::DrawValueControl<SR_MATH_NS::Unit>(
                         label.c_str(), value, pProperty->GetResetValue(), buttonSize,

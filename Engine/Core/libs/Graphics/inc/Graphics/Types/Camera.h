@@ -48,17 +48,14 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD Component* CopyComponent() const override;
 
     public:
-        SR_NODISCARD SR_FORCE_INLINE const SR_MATH_NS::Matrix4x4& GetViewRef() const noexcept { return m_viewMat; }
-        SR_NODISCARD SR_FORCE_INLINE const SR_MATH_NS::Matrix4x4& GetOrthogonalRef() const noexcept { return m_orthogonal; }
-        SR_NODISCARD SR_FORCE_INLINE const SR_MATH_NS::Matrix4x4& GetViewTranslateRef() const noexcept { return m_viewTranslateMat; }
-        SR_NODISCARD SR_FORCE_INLINE SR_MATH_NS::Matrix4x4 GetViewTranslate() const { return m_viewTranslateMat; }
-        SR_NODISCARD SR_FORCE_INLINE SR_MATH_NS::Matrix4x4 GetProjection() const { return m_projection; }
-        SR_NODISCARD SR_FORCE_INLINE const SR_MATH_NS::Matrix4x4& GetProjectionRef() const noexcept { return m_projection; }
+        SR_NODISCARD SR_FORCE_INLINE const SR_MATH_NS::Matrix4x4& GetView() const noexcept { return m_viewMat; }
+        SR_NODISCARD SR_FORCE_INLINE const SR_MATH_NS::Matrix4x4& GetOrthogonal() const noexcept { return m_orthogonal; }
+        SR_NODISCARD SR_FORCE_INLINE const SR_MATH_NS::Matrix4x4& GetViewTranslate() const noexcept { return m_viewTranslateMat; }
+        SR_NODISCARD SR_FORCE_INLINE const SR_MATH_NS::Matrix4x4& GetProjection() const noexcept { return m_projection; }
         SR_NODISCARD SR_FORCE_INLINE const SR_MATH_NS::Quaternion& GetRotation() const noexcept { return m_rotation; }
         SR_NODISCARD SR_FORCE_INLINE SR_MATH_NS::UVector2 GetSize() const { return m_viewportSize; }
         SR_NODISCARD SR_FORCE_INLINE SR_MATH_NS::FVector3 GetViewPosition() const;
-        SR_NODISCARD SR_FORCE_INLINE SR_MATH_NS::FVector3 GetPosition() const { return m_position; }
-        SR_NODISCARD SR_FORCE_INLINE const SR_MATH_NS::FVector3& GetPositionRef() const { return m_position; }
+        SR_NODISCARD SR_FORCE_INLINE const SR_MATH_NS::FVector3& GetPosition() const { return m_position; }
         SR_NODISCARD SR_FORCE_INLINE glm::vec3 GetGLPosition() const { return m_position.ToGLM(); }
         SR_NODISCARD SR_FORCE_INLINE float_t GetFar() const { return m_far; }
         SR_NODISCARD SR_FORCE_INLINE float_t GetNear() const { return m_near; }
@@ -76,6 +73,13 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD const SR_UTILS_NS::Path& GetRenderTechniquePath();
 
         SR_NODISCARD virtual SR_MATH_NS::FPoint GetMousePos() const;
+        SR_NODISCARD virtual SR_MATH_NS::FPoint GetActiveViewportSize() const;
+
+        SR_NODISCARD SR_MATH_NS::Ray GetScreenRay(const SR_MATH_NS::FPoint& screenPos) const;
+        SR_NODISCARD SR_MATH_NS::Ray GetScreenRay(float_t x, float_t y) const;
+        SR_NODISCARD SR_MATH_NS::FVector3 ScreenToWorldPoint(const SR_MATH_NS::FVector3& screenPos) const;
+        SR_NODISCARD SR_MATH_NS::FVector3 ScreenToWorldPoint(const SR_MATH_NS::FVector2& screenPos) const;
+        SR_NODISCARD SR_MATH_NS::FVector3 ScreenToWorldPoint(const SR_MATH_NS::FVector2& screenPos, float_t depth) const;
 
         void SetFar(float_t value);
         void SetNear(float_t value);

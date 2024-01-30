@@ -215,6 +215,8 @@ namespace SR_MATH_NS {
     typedef Vector2<uint32_t> UPoint;
     typedef Vector2<bool> BVector2;
 
+    SR_INLINE static const FVector2 InfinityFV2 = FVector2 { UnitMAX, UnitMAX };
+
     constexpr IVector2 IVector2MAX = IVector2(SR_INT32_MAX);
 }
 

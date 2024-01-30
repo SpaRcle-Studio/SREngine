@@ -3,9 +3,15 @@
 //
 
 #include <Graphics/UI/Gizmo.h>
+#include <Graphics/Types/Camera.h>
 #include <Graphics/Render/RenderTechnique.h>
+#include <Graphics/GUI/ImGUI.h>
+
 #include <Utils/ECS/ComponentManager.h>
 #include <Utils/ECS/GameObject.h>
+#include <Utils/ECS/Transform3D.h>
+#include <Utils/Input/InputSystem.h>
+#include <Utils/DebugDraw.h>
 
 namespace SR_GRAPH_UI_NS {
     SR_REGISTER_COMPONENT(Gizmo);
@@ -105,6 +111,8 @@ namespace SR_GRAPH_UI_NS {
         LoadMesh(GizmoOperation::TranslateX, gizmoFile, "ArrowXSelection", GizmoMeshLoadMode::Selection);
         LoadMesh(GizmoOperation::TranslateY, gizmoFile, "ArrowYSelection", GizmoMeshLoadMode::Selection);
         LoadMesh(GizmoOperation::TranslateZ, gizmoFile, "ArrowZSelection", GizmoMeshLoadMode::Selection);
+
+        m_lastMousePos = SR_MATH_NS::FPoint(SR_FLOAT_MAX);
     }
 
     void Gizmo::ReleaseGizmo() {
@@ -124,34 +132,96 @@ namespace SR_GRAPH_UI_NS {
         Super::OnDisable();
     }
 
-    void Gizmo::Update(float_t dt) {
-        SR_TRACY_ZONE;
-
-        auto&& pRenderScene = TryGetRenderScene();
-        if (!pRenderScene) {
-            return;
+    float_t Gizmo::GetSegmentLengthClipSpace(const SR_MATH_NS::FVector4& start, const SR_MATH_NS::FVector4& end, const SR_MATH_NS::Matrix4x4& mvp)
+    {
+        SR_MATH_NS::FVector4 startOfSegment = start;
+        startOfSegment = mvp * startOfSegment;
+        if (fabsf(startOfSegment.w) > FLT_EPSILON) // check for axis aligned with camera direction
+        {
+            startOfSegment *= 1.f / startOfSegment.w;
         }
 
-        auto&& pCamera = pRenderScene->GetMainCamera();
+        SR_MATH_NS::FVector4 endOfSegment = end;
+        endOfSegment = mvp * endOfSegment;
+        if (fabsf(endOfSegment.w) > FLT_EPSILON) // check for axis aligned with camera direction
+        {
+            endOfSegment *= 1.f / endOfSegment.w;
+        }
+
+        //auto imgSize = GetCamera()->GetActiveViewportSize();
+        //const float_t displayRatio = imgSize.x / imgSize.y;
+
+        SR_MATH_NS::FVector4 clipSpaceAxis = endOfSegment - startOfSegment;
+
+        //if (displayRatio < 1.0) {
+        //    clipSpaceAxis.x *= displayRatio;
+        //}
+        //else {
+        //    clipSpaceAxis.y /= displayRatio;
+        //}
+
+        float segmentLengthInClipSpace = sqrtf(clipSpaceAxis.x * clipSpaceAxis.x + clipSpaceAxis.y * clipSpaceAxis.y);
+        return segmentLengthInClipSpace;
+    }
+
+    void Gizmo::FixedUpdate() {
+        SR_TRACY_ZONE;
+
+        auto&& pCamera = GetCamera();
         if (!pCamera) {
             return;
         }
+
+        /*if (SR_UTILS_NS::Input::Instance().GetMouseDown(Utils::MouseCode::MouseLeft)) {
+            auto&& worldPos = GetCamera()->ScreenToWorldPoint(GetCamera()->GetMousePos(), 10.f);
+            GetTransform()->SetTranslation(worldPos);
+
+            auto&& forward = GetCamera()->GetRotation() * SR_UTILS_NS::Transform3D::FORWARD;
+
+            auto&& ray = GetCamera()->GetScreenRay(GetCamera()->GetMousePos());
+            SR_UTILS_NS::DebugDraw::Instance().DrawLine(forward + GetCamera()->GetPosition(), worldPos, SR_MATH_NS::FColor(255, 0, 0, 255), 10.f);
+            SR_UTILS_NS::DebugDraw::Instance().DrawLine(forward + ray.origin, ray.origin + ray.direction, SR_MATH_NS::FColor(0, 255, 0, 255), 10.f);
+        }*/
 
         auto&& pTechnique = pCamera->GetRenderTechnique();
         if (!pTechnique) {
             return;
         }
 
-        const float_t distance = GetTransform()->GetTranslation().Distance(pCamera->GetPosition());
+        if (m_zoomFactor > 0.f) {
+            //auto&& mvp = GetTransform()->GetMatrix();
+            //auto&& mvp = GetCamera()->GetProjection() * GetCamera()->GetViewTranslate() * GetTransform()->GetMatrix();
 
-        GetTransform()->SetScale(distance / 10.f);
+            //auto&& rightViewInverse = GetCamera()->GetViewTranslate().Inverse().v.right;
+            //rightViewInverse = GetTransform()->GetMatrix() * rightViewInverse;
+            //const float_t rightLength = GetSegmentLengthClipSpace(SR_MATH_NS::FVector4(), rightViewInverse, mvp);
 
-        if (auto&& pMesh = pTechnique->PickMeshAt(pCamera->GetMousePos())) {
+            //GetTransform()->SetScale(screenFactor * m_zoomFactor);
+
+            //const float_t distance = mvp.GetTranslate().Distance(pCamera->GetPosition());
+
+            //const float_t rightLength = GetSegmentLengthClipSpace(SR_MATH_NS::FVector4(), rightViewInverse, mvp);
+            //const float_t screenFactor = 0.1f / rightLength;
+
+            //const float_t distance = GetTransform()->GetTranslation().Distance(pCamera->GetPosition());
+            //GetTransform()->SetScale(screenFactor * m_zoomFactor);
+        }
+
+        if (!SR_UTILS_NS::Input::Instance().GetMouse(SR_UTILS_NS::MouseCode::MouseLeft)) {
+            m_activeOperation = GizmoOperation::None;
+        }
+
+        if (m_activeOperation == GizmoOperation::None) {
+            auto&& pMesh = pTechnique->PickMeshAt(pCamera->GetMousePos());
             for (auto&& [flag, info] : m_meshes) {
                 if (pMesh == info.pSelection.Get()) {
                     info.pVisual->OverrideUniform("color")
                         .SetData(SR_MATH_NS::FColor(1.f, 1.f, 0.f, 1.f))
                         .SetShaderVarType(ShaderVarType::Vec4);
+
+                    if (SR_UTILS_NS::Input::Instance().GetMouseDown(SR_UTILS_NS::MouseCode::MouseLeft)) {
+                        m_activeOperation = flag;
+                    }
                 }
                 else {
                     info.pVisual->RemoveUniformOverride("color");
@@ -159,6 +229,65 @@ namespace SR_GRAPH_UI_NS {
             }
         }
 
-        Super::Update(dt);
+        ProcessGizmo();
+
+        Super::FixedUpdate();
+    }
+
+    bool Gizmo::InitializeEntity() noexcept {
+        GetComponentProperties()
+            .AddStandardProperty("Zoom factor", &m_zoomFactor)
+            .SetResetValue(0.1f)
+            .SetDrag(0.05f)
+            .SetWidth(60.f);
+
+        return Super::InitializeEntity();
+    }
+
+    void Gizmo::ProcessGizmo() {
+        if (m_activeOperation == GizmoOperation::None) {
+            m_lastMousePos = SR_MATH_NS::InfinityFV2;
+            return;
+        }
+
+        auto&& mousePos = GetCamera()->GetMousePos();
+        if (m_lastMousePos == SR_MATH_NS::InfinityFV2) {
+            m_lastMousePos = mousePos;
+            return;
+        }
+
+        if (m_activeOperation & GizmoOperation::TranslateZ) {
+            const float_t cameraDistance = GetCamera()->GetPosition().Distance(GetTransform()->GetTranslation());
+
+            auto&& lastPos = GetCamera()->ScreenToWorldPoint(m_lastMousePos, cameraDistance);
+            auto&& currentPos = GetCamera()->ScreenToWorldPoint(GetCamera()->GetMousePos(), cameraDistance);
+
+            const float_t distance = lastPos.Distance(currentPos);
+
+            auto&& forwardMouse = (currentPos - lastPos).Normalize();
+            auto&& forwardGizmo = (GetTransform()->GetQuaternion() * SR_UTILS_NS::Transform3D::FORWARD).Normalize();
+
+            SR_UTILS_NS::DebugDraw::Instance().DrawLine(lastPos, currentPos, SR_MATH_NS::FColor(255, 0, 0, 255), 10.f);
+            SR_UTILS_NS::DebugDraw::Instance().DrawLine(lastPos, lastPos + forwardGizmo, SR_MATH_NS::FColor(0, 255, 0, 255), 10.f);
+
+            const float_t angle = forwardGizmo.AngleCoefficient(forwardMouse);
+
+            GetTransform()->Translate(0, 0, angle * distance);
+
+            //auto&& forward = GetCamera()->GetRotation() * SR_UTILS_NS::Transform3D::FORWARD;
+
+            //SR_UTILS_NS::DebugDraw::Instance().DrawLine(forward + GetCamera()->GetPosition(), worldPos, SR_MATH_NS::FColor(255, 0, 0, 255), 10.f);
+
+            //GetTransform()->SetTranslation(worldPos);
+
+            //float_t deltaX = m_lastMousePos.x - mousePos.x;
+            //GetTransform()->Translate(deltaX, 0, 0);
+
+            //auto&& worldPos = GetCamera()->ScreenToWorldPoint(mousePos, 0.f);
+
+            //GetTransform()->SetTranslation(worldPos);
+        }
+
+        m_lastMousePos = mousePos;
     }
 }

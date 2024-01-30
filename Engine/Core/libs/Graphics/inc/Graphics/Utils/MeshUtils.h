@@ -19,8 +19,8 @@ namespace SR_GRAPH_NS {
     struct MeshRegistrationInfo {
         SR_GTYPES_NS::Mesh* pMesh = nullptr;
         SR_GTYPES_NS::Shader* pShader = nullptr;
-        int32_t VBO = -1;
         SR_UTILS_NS::StringAtom layer;
+        std::optional<int32_t> VBO;
         std::optional<int64_t> priority;
         SR_GRAPH_NS::RenderScene* pScene = nullptr;
     };
@@ -32,4 +32,4 @@ namespace SR_GRAPH_NS {
     uint16_t RoundBonesCount(uint16_t count);
 }
 
-#endif //SR_ENGINE_MESHUTILS_H
+#endif //SR_ENGINE_MESH_UTILS_H

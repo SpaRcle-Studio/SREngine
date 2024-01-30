@@ -20,4 +20,8 @@ namespace SR_CORE_GUI_NS {
         auto&& mousePos = SR_MATH_NS::FPoint(imMouseGuiPos.x, imMouseGuiPos.y) - m_sceneViewer->GetImagePosition();
         return mousePos / m_sceneViewer->GetTextureSize().Cast<SR_MATH_NS::Unit>();
     }
+
+    SR_MATH_NS::FPoint EditorCamera::GetActiveViewportSize() const {
+        return m_sceneViewer->GetTextureSize().Cast<SR_MATH_NS::Unit>();
+    }
 }

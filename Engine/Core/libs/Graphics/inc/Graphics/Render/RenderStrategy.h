@@ -61,7 +61,7 @@ namespace SR_GRAPH_NS {
 
         void SetError(SR_UTILS_NS::StringAtom error);
 
-        virtual bool IsValid() const { return true; }
+        SR_NODISCARD virtual bool IsValid() const { return true; }
 
         virtual void ForEachMesh(const SR_HTYPES_NS::Function<void(MeshPtr)>& callback) const { }
 
@@ -73,35 +73,52 @@ namespace SR_GRAPH_NS {
 
     /// ----------------------------------------------------------------------------------------------------------------
 
-    class VBORenderStage : public IRenderStage {
+    class MeshRenderStage : public IRenderStage {
         using Super = IRenderStage;
         using MeshList = std::vector<SR_GTYPES_NS::Mesh*>;
         using ShaderPtr = SR_GTYPES_NS::Shader*;
     public:
-        VBORenderStage(RenderStrategy* pRenderStrategy, int32_t VBO);
+        explicit MeshRenderStage(RenderStrategy* pRenderStrategy);
 
-        ~VBORenderStage() override {
+        ~MeshRenderStage() override {
             SRAssert(m_meshes.empty());
         }
 
     public:
         SR_NODISCARD bool HasActiveMesh() const;
 
-        bool Render();
+        virtual bool Render();
+
         void Update(ShaderPtr pShader);
 
         bool RegisterMesh(const MeshRegistrationInfo& info) override;
         bool UnRegisterMesh(const MeshRegistrationInfo& info) override;
 
         SR_NODISCARD bool IsEmpty() const override { return m_meshes.empty(); }
-        SR_NODISCARD bool IsValid() const override { return m_VBO != SR_ID_INVALID; }
 
         void ForEachMesh(const SR_HTYPES_NS::Function<void(MeshPtr)>& callback) const override;
 
-    private:
-        int32_t m_VBO = -1;
+    protected:
         Memory::UBOManager& m_uboManager;
         MeshList m_meshes;
+
+    };
+
+    /// ----------------------------------------------------------------------------------------------------------------
+
+    class VBORenderStage : public MeshRenderStage {
+        using Super = MeshRenderStage;
+        using ShaderPtr = SR_GTYPES_NS::Shader*;
+    public:
+        VBORenderStage(RenderStrategy* pRenderStrategy, int32_t VBO);
+
+    public:
+        bool Render() override;
+
+        SR_NODISCARD bool IsValid() const override { return m_VBO != SR_ID_INVALID; }
+
+    private:
+        int32_t m_VBO = -1;
 
     };
 
@@ -120,7 +137,7 @@ namespace SR_GRAPH_NS {
         bool RegisterMesh(const MeshRegistrationInfo& info) override;
         bool UnRegisterMesh(const MeshRegistrationInfo& info) override;
 
-        SR_NODISCARD bool IsEmpty() const override { return m_VBOStages.empty(); }
+        SR_NODISCARD bool IsEmpty() const override { return m_VBOStages.empty() && m_meshStage->IsEmpty(); }
         SR_NODISCARD bool IsValid() const override { return m_shader; }
 
         void ForEachMesh(const SR_HTYPES_NS::Function<void(MeshPtr)>& callback) const override;
@@ -131,6 +148,7 @@ namespace SR_GRAPH_NS {
     private:
         SR_GTYPES_NS::Shader* m_shader = nullptr;
 
+        MeshRenderStage* m_meshStage = nullptr;
         std::map<int32_t, VBORenderStage*> m_VBOStages;
 
     };

@@ -124,7 +124,7 @@ namespace SR_UTILS_NS {
     void Transform3D::SetScale(const SR_MATH_NS::FVector3& rawScale) {
         SR_MATH_NS::FVector3 scale = rawScale;
 
-        if (scale.ContainsNaN()) {
+        if (!scale.IsFinite()) {
             SR_WARN("Transform3D::SetScale() : scale contains NaN! Reset...");
             scale = SR_MATH_NS::FVector3::One();
         }
@@ -137,7 +137,7 @@ namespace SR_UTILS_NS {
     void Transform3D::SetSkew(const SR_MATH_NS::FVector3& rawSkew) {
         SR_MATH_NS::FVector3 skew = rawSkew;
 
-        if (skew.ContainsNaN()) {
+        if (!skew.IsFinite()) {
             SR_WARN("Transform3D::GlobalSkew() : skew contains NaN! Reset...");
             skew = SR_MATH_NS::FVector3::One();
         }

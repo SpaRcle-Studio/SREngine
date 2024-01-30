@@ -2,8 +2,8 @@
 // Created by Monika on 19.09.2022.
 //
 
-#ifndef SR_ENGINE_DEBUGLINE_H
-#define SR_ENGINE_DEBUGLINE_H
+#ifndef SR_ENGINE_DEBUG_LINE_H
+#define SR_ENGINE_DEBUG_LINE_H
 
 #include <Graphics/Types/Mesh.h>
 #include <Graphics/Types/Vertices.h>
@@ -29,6 +29,13 @@ namespace SR_GTYPES_NS {
 
         void UseMaterial() override;
 
+        SR_NODISCARD bool IsSupportVBO() const override { return false; }
+
+        SR_NODISCARD SR_UTILS_NS::StringAtom GetMeshLayer() const override {
+            const static SR_UTILS_NS::StringAtom debugLayer = "Debug";
+            return debugLayer;
+        }
+
     private:
         SR_MATH_NS::FVector3 m_startPoint;
         SR_MATH_NS::FVector3 m_endPoint;
@@ -37,4 +44,4 @@ namespace SR_GTYPES_NS {
     };
 }
 
-#endif //SR_ENGINE_DEBUGLINE_H
+#endif //SR_ENGINE_DEBUG_LINE_H

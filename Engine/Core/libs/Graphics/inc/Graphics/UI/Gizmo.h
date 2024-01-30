@@ -57,28 +57,39 @@ namespace SR_GRAPH_UI_NS {
         static Component* LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage);
 
     public:
+        bool InitializeEntity() noexcept override;
+
         void OnEnable() override;
         void OnDisable() override;
         void OnAttached() override;
         void OnDestroy() override;
-        void Update(float_t dt) override;
+        void FixedUpdate() override;
 
-        SR_NODISCARD SR_FORCE_INLINE virtual bool ExecuteInEditMode() const { return true; }
+        SR_NODISCARD SR_FORCE_INLINE bool ExecuteInEditMode() const override { return true; }
 
     protected:
+        void ProcessGizmo();
         void LoadGizmo();
         void ReleaseGizmo();
         void LoadMesh(GizmoOperationFlag operation, SR_UTILS_NS::StringAtom path, SR_UTILS_NS::StringAtom name, GizmoMeshLoadMode mode);
+
+        SR_NODISCARD float_t GetSegmentLengthClipSpace(const SR_MATH_NS::FVector4& start, const SR_MATH_NS::FVector4& end, const SR_MATH_NS::Matrix4x4& mvp);
 
     private:
         struct MeshInfo {
             SR_GTYPES_NS::MeshComponent::Ptr pVisual;
             SR_GTYPES_NS::MeshComponent::Ptr pSelection;
+            bool isHovered = false;
         };
         std::map<GizmoOperationFlag, MeshInfo> m_meshes;
 
+        float_t m_zoomFactor = 0.1f;
         GizmoMode m_mode = GizmoMode::Local;
         GizmoOperationFlag m_operation = GizmoOperation::Universal;
+
+        GizmoOperationFlag m_activeOperation = GizmoOperation::None;
+
+        SR_MATH_NS::FPoint m_lastMousePos;
 
     };
 }

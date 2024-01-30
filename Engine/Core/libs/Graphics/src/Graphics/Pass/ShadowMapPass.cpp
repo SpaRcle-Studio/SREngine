@@ -26,8 +26,8 @@ namespace SR_GRAPH_NS {
 
     void ShadowMapPass::UseSharedUniforms(IMeshClusterPass::ShaderPtr pShader) {
         if (m_camera) {
-            pShader->SetMat4(SHADER_VIEW_MATRIX, m_camera->GetViewTranslateRef());
-            pShader->SetMat4(SHADER_PROJECTION_MATRIX, m_camera->GetProjectionRef());
+            pShader->SetMat4(SHADER_VIEW_MATRIX, m_camera->GetViewTranslate());
+            pShader->SetMat4(SHADER_PROJECTION_MATRIX, m_camera->GetProjection());
 
             SR_MATH_NS::FVector3 lightPos = GetRenderScene()->GetLightSystem()->m_position;
 

@@ -17,6 +17,7 @@ namespace SR_GTYPES_NS {
         { {  1.000000, -1.000000,  0.000000 }, { 0.000000, 0.000000 } }
     };
 
+    /// TODO: не использовать VBO/IBO
     class Sprite : public SR_GTYPES_NS::MeshComponent {
         SR_REGISTER_NEW_COMPONENT(Sprite, 1001)
         using Super = SR_GTYPES_NS::MeshComponent;

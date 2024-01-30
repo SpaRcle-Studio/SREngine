@@ -25,6 +25,9 @@ namespace SR_MATH_NS {
         union {
             SR_MATH_NS::Vector4<float> value[4];
             glm::mat4 self;
+            struct {
+                SR_MATH_NS::Vector4<float> right, up, dir, position;
+            } v;
         };
 
         constexpr Matrix4x4() noexcept
