@@ -333,13 +333,23 @@ namespace SR_GRAPH_NS {
         }
 
         m_currentVkShader = m_memory->m_ShaderPrograms[shaderProgram];
+
         if (!m_currentVkShader) {
             SRHalt("Vulkan::UseShader() : shader is nullptr!");
             return;
         }
+
         m_currentLayout = m_currentVkShader->GetPipelineLayout();
 
+        if (m_currentVkShader == m_lastVkShader) {
+            m_isShaderChanged = false;
+            return;
+        }
+
         m_currentVkShader->Bind(m_currentCmd);
+
+        m_lastVkShader = m_currentVkShader;
+        m_isShaderChanged = true;
     }
 
     int32_t VulkanPipeline::AllocateShaderProgram(const SRShaderCreateInfo& createInfo, int32_t fbo) {
@@ -878,6 +888,9 @@ namespace SR_GRAPH_NS {
             return false;
         }
 
+        m_lastVkShader = nullptr;
+        m_isShaderChanged = true;
+
         vkBeginCommandBuffer(m_currentCmd, &m_cmdBufInfo);
         return Super::BeginCmdBuffer();
     }
@@ -1349,14 +1362,7 @@ namespace SR_GRAPH_NS {
     void VulkanPipeline::BindAttachment(uint8_t activeTexture, uint32_t textureId) {
         Super::BindAttachment(activeTexture, textureId);
 
-        if (textureId >= m_memory->m_countTextures.first) {
-            SRHalt("VulkanPipeline::BindAttachment() : incorrect range! (" + std::to_string(textureId) + ")");
-            return;
-        }
-
-        EvoVulkan::Types::Texture* texture = m_memory->m_textures[textureId];
-
-        if (!texture) {
+        if (!IsSamplerValid(static_cast<int32_t>(textureId))) {
             PipelineError("VulkanPipeline::BindAttachment() : texture is not exists!");
             return;
         }
@@ -1367,7 +1373,7 @@ namespace SR_GRAPH_NS {
             return;
         }
 
-        auto&& imageDescriptorRef = texture->GetDescriptorRef();
+        auto&& imageDescriptorRef = m_memory->m_textures[textureId]->GetDescriptorRef();
 
         const auto&& descriptorSetWrite = EvoVulkan::Tools::Initializers::WriteDescriptorSet(
                 descriptorSet.m_self,
@@ -1401,17 +1407,18 @@ namespace SR_GRAPH_NS {
         Super::BindUBO(UBO);
     }
 
+    bool VulkanPipeline::IsSamplerValid(int32_t id) const {
+        if (id >= m_memory->m_countTextures.first) {
+            return false;
+        }
+
+        return m_memory->m_textures[id];
+    }
+
     void VulkanPipeline::BindTexture(uint8_t activeTexture, uint32_t textureId) {
         Super::BindTexture(activeTexture, textureId);
 
-        if (textureId >= m_memory->m_countTextures.first) {
-            SRHalt("VulkanPipeline::BindTexture() : incorrect range! (" + std::to_string(textureId) + ")");
-            return;
-        }
-
-        EvoVulkan::Types::Texture* texture = m_memory->m_textures[textureId];
-
-        if (!texture) {
+        if (!IsSamplerValid(static_cast<int32_t>(textureId))) {
             PipelineError("VulkanPipeline::BindTexture() : texture is not exists!");
             return;
         }
@@ -1422,8 +1429,9 @@ namespace SR_GRAPH_NS {
             return;
         }
 
-        auto&& imageDescriptorRef = texture->GetDescriptorRef();
+        auto&& pTexture = m_memory->m_textures[textureId];
 
+        auto&& imageDescriptorRef = pTexture->GetDescriptorRef();
         const auto&& descriptorSetWrite = EvoVulkan::Tools::Initializers::WriteDescriptorSet(
                 descriptorSet.m_self,
                 VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, activeTexture,
@@ -1476,5 +1484,10 @@ namespace SR_GRAPH_NS {
         }
 
         return pSwapChain->IsVSyncEnabled();
+    }
+
+    void VulkanPipeline::ResetLastShader() {
+        m_lastVkShader = nullptr;
+        Super::ResetLastShader();
     }
 }

@@ -2,8 +2,8 @@
 // Created by Monika on 10.05.2022.
 //
 
-#ifndef SRENGINE_THREADUTILS_H
-#define SRENGINE_THREADUTILS_H
+#ifndef SR_ENGINE_THREADUTILS_H
+#define SR_ENGINE_THREADUTILS_H
 
 #include <Utils/Common/Enumerations.h>
 
@@ -36,4 +36,4 @@ namespace SR_UTILS_NS {
     }
 }
 
-#endif //SRENGINE_THREADUTILS_H
+#endif //SR_ENGINE_THREADUTILS_H

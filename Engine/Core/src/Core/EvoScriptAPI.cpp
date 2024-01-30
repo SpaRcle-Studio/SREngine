@@ -9,6 +9,8 @@
 
 #include <Utils/Input/InputSystem.h>
 #include <Utils/Math/Noise.h>
+#include <Utils/ECS/TransformZero.h>
+#include <Utils/ECS/Transform2D.h>
 #include <Utils/ResourceManager/ResourceManager.h>
 
 #include <Graphics/Loaders/ObjLoader.h>
@@ -200,7 +202,10 @@ namespace SpaRcle {
         using namespace SR_HTYPES_NS;
 
         generator->RegisterNewClass("Component", "Component", { "Libraries/Math/Vector3.h", "string" });
-        ESRegisterMethodArg0(EvoScript::Public, generator, Component, GetComponentName, std::string)
+
+        ESRegisterCustomMethodArg0(EvoScript::Public, generator, Component, GetComponentName, std::string, {
+            return ptr->GetComponentName();
+        })
 
         ESRegisterMethodArg0(EvoScript::Public, generator, Component, BaseComponent, Component*)
         ESRegisterMethodArg0(EvoScript::Public, generator, Component, GetGameObject, SharedPtr<GameObject>)

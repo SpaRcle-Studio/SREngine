@@ -2,8 +2,8 @@
 // Created by Monika on 20.01.2023.
 //
 
-#ifndef SRENGINE_RESOURCECONTAINER_H
-#define SRENGINE_RESOURCECONTAINER_H
+#ifndef SR_ENGINE_RESOURCECONTAINER_H
+#define SR_ENGINE_RESOURCECONTAINER_H
 
 #include <Utils/Common/NonCopyable.h>
 
@@ -31,4 +31,4 @@ namespace SR_UTILS_NS {
     };
 }
 
-#endif //SRENGINE_RESOURCECONTAINER_H
+#endif //SR_ENGINE_RESOURCECONTAINER_H

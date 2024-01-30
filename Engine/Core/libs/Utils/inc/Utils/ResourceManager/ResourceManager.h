@@ -24,6 +24,7 @@ namespace SR_UTILS_NS {
 
     public:
         SR_NODISCARD bool IsLastResource(IResource* resource);
+        SR_NODISCARD bool IsUsePointStackTraceProfilingEnabled() const { return m_usePointStackTraceProfiling; }
         SR_NODISCARD Path GetResPath() const { return m_folder; }
         SR_NODISCARD const Path& GetResPathRef() const { return m_folder; }
         SR_NODISCARD Path GetCachePath() const { return m_folder.Concat("Cache"); }
@@ -79,6 +80,7 @@ namespace SR_UTILS_NS {
         void UpdateWatchers(float_t dt);
 
         void PrintMemoryDump();
+        void EnableStackTraceProfiling();
 
     private:
         bool RegisterType(const std::string& name, uint64_t hashTypeName);
@@ -102,6 +104,7 @@ namespace SR_UTILS_NS {
         std::queue<SR_HTYPES_NS::SharedPtr<FileWatcher>> m_dirtyWatchers;
         std::queue<ResourceInfo::WeakPtr> m_dirtyResources;
 
+        std::atomic<bool> m_usePointStackTraceProfiling = false;
         std::atomic<bool> m_isWatchingEnabled = true;
         std::atomic<bool> m_isInit = false;
         std::atomic<bool> m_isRun = false;

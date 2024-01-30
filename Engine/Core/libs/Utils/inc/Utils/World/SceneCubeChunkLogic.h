@@ -2,8 +2,8 @@
 // Created by Monika on 22.12.2022.
 //
 
-#ifndef SRENGINE_SCENECUBECHUNKLOGIC_H
-#define SRENGINE_SCENECUBECHUNKLOGIC_H
+#ifndef SR_ENGINE_SCENECUBECHUNKLOGIC_H
+#define SR_ENGINE_SCENECUBECHUNKLOGIC_H
 
 #include <Utils/World/SceneLogic.h>
 #include <Utils/World/TensorKey.h>
@@ -72,4 +72,4 @@ namespace SR_WORLD_NS {
     };
 }
 
-#endif //SRENGINE_SCENECUBECHUNKLOGIC_H
+#endif //SR_ENGINE_SCENECUBECHUNKLOGIC_H

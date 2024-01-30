@@ -6,6 +6,7 @@
 #define SR_ENGINE_GRAPHICS_MANIPULATION_TOOL_H
 
 #include <Graphics/Types/Geometry/MeshComponent.h>
+#include <Graphics/Types/IRenderComponent.h>
 
 namespace SR_GRAPH_UI_NS {
     SR_ENUM_NS_CLASS_T(GizmoMode, uint8_t, Local, Global);
@@ -45,10 +46,13 @@ namespace SR_GRAPH_UI_NS {
         Universal = Translate | Rotate | Scale
     );
 
-    class Gizmo : public SR_UTILS_NS::Component {
+    class Gizmo : public SR_GTYPES_NS::IRenderComponent {
         SR_ENTITY_SET_VERSION(1000);
         SR_INITIALIZE_COMPONENT(Gizmo);
-        using Super = SR_UTILS_NS::Component;
+        using Super = SR_GTYPES_NS::IRenderComponent;
+        enum class GizmoMeshLoadMode {
+            Visual, Selection, All
+        };
     public:
         static Component* LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage);
 
@@ -57,16 +61,21 @@ namespace SR_GRAPH_UI_NS {
         void OnDisable() override;
         void OnAttached() override;
         void OnDestroy() override;
+        void Update(float_t dt) override;
 
         SR_NODISCARD SR_FORCE_INLINE virtual bool ExecuteInEditMode() const { return true; }
 
     protected:
         void LoadGizmo();
         void ReleaseGizmo();
-        void LoadMesh(GizmoOperationFlag operation, SR_UTILS_NS::StringAtom path, SR_UTILS_NS::StringAtom name);
+        void LoadMesh(GizmoOperationFlag operation, SR_UTILS_NS::StringAtom path, SR_UTILS_NS::StringAtom name, GizmoMeshLoadMode mode);
 
     private:
-        std::map<GizmoOperationFlag, SR_GTYPES_NS::MeshComponent::Ptr> m_meshes;
+        struct MeshInfo {
+            SR_GTYPES_NS::MeshComponent::Ptr pVisual;
+            SR_GTYPES_NS::MeshComponent::Ptr pSelection;
+        };
+        std::map<GizmoOperationFlag, MeshInfo> m_meshes;
 
         GizmoMode m_mode = GizmoMode::Local;
         GizmoOperationFlag m_operation = GizmoOperation::Universal;

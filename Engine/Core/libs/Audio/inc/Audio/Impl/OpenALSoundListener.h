@@ -2,8 +2,8 @@
 // Created by innerviewer on 10/11/2023.
 //
 
-#ifndef SRENGINE_OPENALSOUNDLISTENER_H
-#define SRENGINE_OPENALSOUNDLISTENER_H
+#ifndef SR_ENGINE_OPENALSOUNDLISTENER_H
+#define SR_ENGINE_OPENALSOUNDLISTENER_H
 
 #include <Audio/SoundListener.h>
 
@@ -25,4 +25,4 @@ namespace SR_AUDIO_NS {
         void SetOuterConeGain(float_t outerConeGain) override;
     };
 }
-#endif //SRENGINE_OPENALSOUNDLISTENER_H
+#endif //SR_ENGINE_OPENALSOUNDLISTENER_H

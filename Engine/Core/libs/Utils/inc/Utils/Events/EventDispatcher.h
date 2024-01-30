@@ -2,8 +2,8 @@
 // Created by Monika on 17.02.2022.
 //
 
-#ifndef SRENGINE_EVENTDISPATCHER_H
-#define SRENGINE_EVENTDISPATCHER_H
+#ifndef SR_ENGINE_EVENTDISPATCHER_H
+#define SR_ENGINE_EVENTDISPATCHER_H
 
 #include <Utils/Events/Event.h>
 
@@ -45,4 +45,4 @@ namespace SR_UTILS_NS {
     };
 }
 
-#endif //SRENGINE_EVENTDISPATCHER_H
+#endif //SR_ENGINE_EVENTDISPATCHER_H

@@ -2,8 +2,8 @@
 // Created by Monika on 07.01.2023.
 //
 
-#ifndef SRENGINE_INTERPOLATION_H
-#define SRENGINE_INTERPOLATION_H
+#ifndef SR_ENGINE_INTERPOLATION_H
+#define SR_ENGINE_INTERPOLATION_H
 
 #include <Utils/Common/Enumerations.h>
 #include <Utils/Math/Vector3.h>
@@ -25,4 +25,4 @@ namespace SR_ANIMATIONS_NS {
     };
 }
 
-#endif //SRENGINE_INTERPOLATION_H
+#endif //SR_ENGINE_INTERPOLATION_H

@@ -2,8 +2,8 @@
 // Created by Monika on 09.07.2022.
 //
 
-#ifndef SRENGINE_PLAYPARAMS_H
-#define SRENGINE_PLAYPARAMS_H
+#ifndef SR_ENGINE_PLAYPARAMS_H
+#define SR_ENGINE_PLAYPARAMS_H
 
 #include <Utils/Math/Vector3.h>
 #include <Utils/Math/Vector6.h>
@@ -44,4 +44,4 @@ namespace SR_AUDIO_NS {
     };
 }
 
-#endif //SRENGINE_PLAYPARAMS_H
+#endif //SR_ENGINE_PLAYPARAMS_H

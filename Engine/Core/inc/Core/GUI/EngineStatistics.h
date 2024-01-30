@@ -2,8 +2,8 @@
 // Created by Monika on 26.03.2022.
 //
 
-#ifndef SRENGINE_ENGINESTATISTICS_H
-#define SRENGINE_ENGINESTATISTICS_H
+#ifndef SR_ENGINE_ENGINESTATISTICS_H
+#define SR_ENGINE_ENGINESTATISTICS_H
 
 #include <Graphics/GUI/Widget.h>
 
@@ -24,7 +24,7 @@ namespace SR_CORE_NS::GUI {
         void WidgetsPage();
         void VideoMemoryPage();
         void SubmitQueuePage();
-        void FlatClusterPage();
+        void RenderStrategyPage();
 
         void DrawSubmitInfo(const EvoVulkan::SubmitInfo& submitInfo);
 
@@ -35,4 +35,4 @@ namespace SR_CORE_NS::GUI {
     };
 }
 
-#endif //SRENGINE_ENGINESTATISTICS_H
+#endif //SR_ENGINE_ENGINESTATISTICS_H

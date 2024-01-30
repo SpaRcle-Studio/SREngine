@@ -13,3 +13,4 @@
 #include "../../Graphics/src/Graphics/SRSL/TypeInfo.cpp"
 #include "../../Graphics/src/Graphics/SRSL/Evaluator.cpp"
 #include "../../Graphics/src/Graphics/SRSL/PreProcessor.cpp"
+#include "../../Graphics/src/Graphics/SRSL/ShaderVariables.cpp"

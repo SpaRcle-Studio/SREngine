@@ -2,8 +2,8 @@
 // Created by innerviewer on 3/4/2023.
 //
 
-#ifndef SRENGINE_PHYSICSMATERIAL_H
-#define SRENGINE_PHYSICSMATERIAL_H
+#ifndef SR_ENGINE_PHYSICSMATERIAL_H
+#define SR_ENGINE_PHYSICSMATERIAL_H
 
 #include <Utils/ResourceManager/IResource.h>
 #include <Utils/Common/Enumerations.h>
@@ -72,4 +72,4 @@ namespace SR_PTYPES_NS {
         std::map<LibraryType, PhysicsMaterialImpl*> m_implementations;
     };
 }
-#endif //SRENGINE_PHYSICSMATERIAL_H
+#endif //SR_ENGINE_PHYSICSMATERIAL_H

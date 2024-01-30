@@ -2,8 +2,8 @@
 // Created by Monika on 11.02.2022.
 //
 
-#ifndef SRENGINE_SCENEVIEWER_H
-#define SRENGINE_SCENEVIEWER_H
+#ifndef SR_ENGINE_SCENE_VIEWER_H
+#define SR_ENGINE_SCENE_VIEWER_H
 
 #include <Utils/ECS/GameObject.h>
 #include <Utils/World/Scene.h>
@@ -20,8 +20,8 @@ namespace SR_CORE_GUI_NS {
     class Hierarchy;
     class Guizmo;
 
-    class SR_DLL_EXPORT SceneViewer : public Graphics::GUI::Widget {
-        using Super = Graphics::GUI::Widget;
+    class SR_DLL_EXPORT SceneViewer : public SR_GRAPH_GUI_NS::Widget {
+        using Super = SR_GRAPH_GUI_NS::Widget;
         using GameObjectPtr = SR_UTILS_NS::GameObject::Ptr;
         using WindowPtr = SR_HTYPES_NS::SafePtr<SR_GRAPH_NS::Window>;
         using EnginePtr = SR_HTYPES_NS::SharedPtr<Engine>;
@@ -40,6 +40,9 @@ namespace SR_CORE_GUI_NS {
 
         void OnKeyDown(const SR_UTILS_NS::KeyboardInputData* data) override;
         void OnKeyPress(const SR_UTILS_NS::KeyboardInputData* data) override;
+
+        SR_NODISCARD SR_MATH_NS::FPoint GetImagePosition() const;
+        SR_NODISCARD SR_MATH_NS::IPoint GetTextureSize() const { return m_textureSize; }
 
     private:
         void SelectMesh(SR_GTYPES_NS::MeshComponent* pMesh);
@@ -82,4 +85,4 @@ namespace SR_CORE_GUI_NS {
     };
 }
 
-#endif //SRENGINE_SCENEVIEWER_H
+#endif //SR_ENGINE_SCENEVIEWER_H

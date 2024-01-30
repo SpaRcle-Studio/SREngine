@@ -2,8 +2,8 @@
 // Created by Monika on 11.07.2022.
 //
 
-#ifndef SRENGINE_SHADERPROGRAMMANAGER_H
-#define SRENGINE_SHADERPROGRAMMANAGER_H
+#ifndef SR_ENGINE_SHADERPROGRAMMANAGER_H
+#define SR_ENGINE_SHADERPROGRAMMANAGER_H
 
 #include <Utils/Common/Singleton.h>
 #include <Utils/Types/Map.h>
@@ -96,4 +96,4 @@ namespace SR_GRAPH_NS::Memory {
     };
 }
 
-#endif //SRENGINE_SHADERPROGRAMMANAGER_H
+#endif //SR_ENGINE_SHADERPROGRAMMANAGER_H

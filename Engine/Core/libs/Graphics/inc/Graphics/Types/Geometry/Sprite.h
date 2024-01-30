@@ -2,8 +2,8 @@
 // Created by Monika on 30.07.2022.
 //
 
-#ifndef SRENGINE_SPRITE_H
-#define SRENGINE_SPRITE_H
+#ifndef SR_ENGINE_SPRITE_H
+#define SR_ENGINE_SPRITE_H
 
 #include <Graphics/Types/Geometry/MeshComponent.h>
 
@@ -32,7 +32,7 @@ namespace SR_GTYPES_NS {
     public:
         void UseMaterial() override;
         void UseModelMatrix() override;
-        void OnPriorityDirty() override;
+        void OnPriorityChanged() override;
         SR_NODISCARD bool InitializeEntity() noexcept override;
 
         SR_NODISCARD bool IsFlatMesh() const noexcept override { return true; }
@@ -63,4 +63,4 @@ namespace SR_GTYPES_NS {
     };
 }
 
-#endif //SRENGINE_SPRITE_H
+#endif //SR_ENGINE_SPRITE_H

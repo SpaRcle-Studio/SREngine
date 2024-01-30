@@ -2,8 +2,8 @@
 // Created by Monika on 08.01.2022.
 //
 
-#ifndef SRENGINE_ENTITYMANAGER_H
-#define SRENGINE_ENTITYMANAGER_H
+#ifndef SR_ENGINE_ENTITYMANAGER_H
+#define SR_ENGINE_ENTITYMANAGER_H
 
 #include <Utils/ECS/Entity.h>
 #include <Utils/Common/Singleton.h>
@@ -37,4 +37,4 @@ namespace SR_UTILS_NS {
     };
 }
 
-#endif //SRENGINE_ENTITYMANAGER_H
+#endif //SR_ENGINE_ENTITYMANAGER_H

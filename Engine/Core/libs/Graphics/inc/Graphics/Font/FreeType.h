@@ -2,8 +2,8 @@
 // Created by mantsurov-n on 02.11.2022.
 //
 
-#ifndef SRENGINE_FREETYPE_H
-#define SRENGINE_FREETYPE_H
+#ifndef SR_ENGINE_FREETYPE_H
+#define SR_ENGINE_FREETYPE_H
 
 #include <Utils/macros.h>
 
@@ -44,4 +44,4 @@ namespace SR_GRAPH_NS {
 
 #define SRFreeTypeErrToString(err) (FreeTypeErrToString(err))
 
-#endif //SRENGINE_FREETYPE_H
+#endif //SR_ENGINE_FREETYPE_H

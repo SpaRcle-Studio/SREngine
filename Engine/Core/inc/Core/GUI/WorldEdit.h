@@ -2,8 +2,8 @@
 // Created by Monika on 14.02.2022.
 //
 
-#ifndef SRENGINE_WORLDEDIT_H
-#define SRENGINE_WORLDEDIT_H
+#ifndef SR_ENGINE_WORLDEDIT_H
+#define SR_ENGINE_WORLDEDIT_H
 
 #include <Utils/World/Scene.h>
 
@@ -28,4 +28,4 @@ namespace SR_CORE_GUI_NS {
     };
 }
 
-#endif //SRENGINE_WORLDEDIT_H
+#endif //SR_ENGINE_WORLDEDIT_H

@@ -110,7 +110,7 @@ namespace SR_GRAPH_NS {
             m_framebuffer->EndCmdBuffer();
         }
 
-        m_pipeline->SetCurrentFrameBuffer(nullptr);
+        GetPassPipeline()->SetCurrentFrameBuffer(nullptr);
 
         /// Независимо от того, отрисовали мы что-то в кадровый буффер или нет,
         /// все равно возвращаем false (hasDrawData), так как технически, кадровый буффер

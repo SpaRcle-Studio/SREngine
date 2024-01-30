@@ -2,8 +2,8 @@
 // Created by Monika on 18.10.2023.
 //
 
-#ifndef SRENGINE_LOCKGUARD_H
-#define SRENGINE_LOCKGUARD_H
+#ifndef SR_ENGINE_LOCKGUARD_H
+#define SR_ENGINE_LOCKGUARD_H
 
 #include <Utils/Common/NonCopyable.h>
 
@@ -29,4 +29,4 @@ namespace SR_HTYPES_NS {
     };
 }
 
-#endif //SRENGINE_LOCKGUARD_H
+#endif //SR_ENGINE_LOCKGUARD_H

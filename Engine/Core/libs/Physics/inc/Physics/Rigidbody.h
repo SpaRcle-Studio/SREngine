@@ -2,8 +2,8 @@
 // Created by Monika on 28.07.2022.
 //
 
-#ifndef SRENGINE_RIGIDBODY_H
-#define SRENGINE_RIGIDBODY_H
+#ifndef SR_ENGINE_RIGIDBODY_H
+#define SR_ENGINE_RIGIDBODY_H
 
 #include <Physics/PhysicsLib.h>
 #include <Physics/CollisionShape.h>
@@ -194,4 +194,4 @@ namespace SR_PTYPES_NS {
     };
 }
 
-#endif //SRENGINE_RIGIDBODY_H
+#endif //SR_ENGINE_RIGIDBODY_H

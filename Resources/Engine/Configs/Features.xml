@@ -1,6 +1,8 @@
 <?xml version="1.0"?>
 <Features>
    <Common>
+       <ResourceUsePointStackTraceProfiling Value="false"/>
+
        <EvoCompiler Value="true"/>
        <CompilePDB Value="false"/>
        <ScriptMultiInstances Value="false"/>

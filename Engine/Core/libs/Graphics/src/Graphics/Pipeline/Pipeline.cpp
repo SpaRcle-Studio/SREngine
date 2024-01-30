@@ -135,11 +135,13 @@ namespace SR_GRAPH_NS {
     void Pipeline::UpdateUBO(uint32_t UBO, void* pData, uint64_t size) {
         ++m_state.operations;
         m_state.transferredMemory += size;
+        ++m_state.transferredCount;
     }
 
-    void Pipeline::PushConstants(void *pData, uint64_t size) {
+    void Pipeline::PushConstants(void* pData, uint64_t size) {
         ++m_state.operations;
         m_state.transferredMemory += size;
+        ++m_state.transferredCount;
     }
 
     void Pipeline::BindTexture(uint8_t activeTexture, uint32_t textureId) {
@@ -297,6 +299,7 @@ namespace SR_GRAPH_NS {
     }
 
     SR_HTYPES_NS::SharedPtr<Overlay> Pipeline::GetOverlay(OverlayType overlayType) const {
+        SR_TRACY_ZONE;
         auto&& pIt = m_overlays.find(overlayType);
         if (pIt == m_overlays.end() || !pIt->second) {
             return SR_HTYPES_NS::SharedPtr<Overlay>();
@@ -312,6 +315,10 @@ namespace SR_GRAPH_NS {
     void Pipeline::ResetDescriptorSet() {
         ++m_state.operations;
         m_state.descriptorSetId = SR_ID_INVALID;
+    }
+
+    void Pipeline::ResetLastShader() {
+        ++m_state.operations;
     }
 
     void Pipeline::UnUseShader() {

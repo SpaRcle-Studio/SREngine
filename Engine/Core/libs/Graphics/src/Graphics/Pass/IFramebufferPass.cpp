@@ -7,6 +7,10 @@
 #include <Graphics/Types/Framebuffer.h>
 
 namespace SR_GRAPH_NS {
+    IFramebufferPass::IFramebufferPass()
+        : m_frameBufferUboManager(SR_GRAPH_NS::Memory::UBOManager::Instance())
+    { }
+
     IFramebufferPass::~IFramebufferPass() {
         if (m_framebuffer) {
             m_framebuffer->RemoveUsePoint();
@@ -14,15 +18,18 @@ namespace SR_GRAPH_NS {
         }
     }
 
-    void IFramebufferPass::LoadFramebufferSettings(const SR_XML_NS::Node& settingsNode) {
+    void IFramebufferPass::LoadFramebufferSettings(const SR_XML_NS::Node& passNode) {
+        auto&& settingsNode = passNode.TryGetNode("FramebufferSettings");
         if (!settingsNode) {
             return;
         }
 
+        m_isDirectional = settingsNode.TryGetAttribute("Directional").ToBool(false);
+
         m_dynamicResizing = settingsNode.TryGetAttribute("DynamicResizing").ToBool(true);
         m_depthEnabled = settingsNode.TryGetAttribute("DepthEnabled").ToBool(true);
         m_samples = settingsNode.TryGetAttribute("SmoothSamples").ToUInt(0);
-        m_layersCount = settingsNode.TryGetAttribute("Layers").ToUInt(1);
+        m_layersCount = SR_MAX(1, settingsNode.TryGetAttribute("Layers").ToUInt(1));
 
         m_depthAspect = ImageAspect::DepthStencil;
 
@@ -103,12 +110,100 @@ namespace SR_GRAPH_NS {
         return true;
     }
 
+    bool IFramebufferPass::RenderFrameBuffer(const PipelinePtr& pPipeline) {
+        if (!m_framebuffer && !IsDirectional()) {
+            return false;
+        }
+
+        m_framebuffer->Update();
+
+        /// установим кадровый буфер, чтобы BeginCmdBuffer понимал какие значение для очистки ставить
+        pPipeline->SetCurrentFrameBuffer(m_framebuffer);
+
+        if (m_layersCount > 1) {
+            return RenderFrameBuffer(pPipeline, m_layersCount);
+        }
+
+        auto&& pIdentifier = m_frameBufferUboManager.GetIdentifier();
+        m_frameBufferUboManager.SetIdentifier(this);
+
+        if (IsDirectional()) {
+            RenderFrameBufferInner();
+        }
+        else if (m_framebuffer->Bind()) {
+            m_framebuffer->BeginCmdBuffer(m_clearColors, m_depth);
+            {
+                m_framebuffer->BeginRender();
+                m_framebuffer->SetViewportScissor();
+
+                RenderFrameBufferInner();
+
+                m_framebuffer->EndRender();
+            }
+            m_framebuffer->EndCmdBuffer();
+        }
+
+        pPipeline->SetCurrentFrameBuffer(nullptr);
+
+        m_frameBufferUboManager.SetIdentifier(pIdentifier);
+
+        return IsDirectional();
+    }
+
+    bool IFramebufferPass::RenderFrameBuffer(const PipelinePtr& pPipeline, uint8_t layers) {
+        auto&& pIdentifier = m_frameBufferUboManager.GetIdentifier();
+        m_frameBufferUboManager.SetIdentifier(this);
+
+        m_framebuffer->BeginCmdBuffer(m_clearColors, m_depth);
+        m_framebuffer->SetViewportScissor();
+
+        for (uint32_t i = 0; i < layers; ++i) {
+            m_currentFrameBufferLayer = i;
+            pPipeline->SetFrameBufferLayer(i);
+
+            if (m_framebuffer->Bind()) {
+                m_framebuffer->BeginRender();
+                RenderFrameBufferInner();
+                m_framebuffer->EndRender();
+            }
+        }
+
+        m_frameBufferUboManager.SetIdentifier(pIdentifier);
+
+        m_framebuffer->EndCmdBuffer();
+
+        pPipeline->SetCurrentFrameBuffer(nullptr);
+
+        return IsDirectional();
+    }
+
     void IFramebufferPass::ResizeFrameBuffer(const SR_MATH_NS::UVector2 &size) {
         if (m_dynamicResizing && m_framebuffer) {
             m_framebuffer->SetSize(SR_MATH_NS::IVector2(
-                    static_cast<SR_MATH_NS::Unit>(size.x) * m_preScale.x,
-                    static_cast<SR_MATH_NS::Unit>(size.y) * m_preScale.y
+                    static_cast<int32_t>(static_cast<SR_MATH_NS::Unit>(size.x) * m_preScale.x),
+                    static_cast<int32_t>(static_cast<SR_MATH_NS::Unit>(size.y) * m_preScale.y)
             ));
         }
+    }
+
+    void IFramebufferPass::UpdateFrameBuffer(const PipelinePtr& pPipeline) {
+        if (!IsDirectional() && (!m_framebuffer || m_framebuffer->IsDirty())) {
+            return;
+        }
+
+        pPipeline->SetCurrentFrameBuffer(m_framebuffer);
+
+        auto&& pIdentifier = m_frameBufferUboManager.GetIdentifier();
+        m_frameBufferUboManager.SetIdentifier(this);
+
+        for (uint32_t i = 0; i < m_layersCount; ++i) {
+            m_currentFrameBufferLayer = i;
+            pPipeline->SetFrameBufferLayer(i);
+            UpdateFrameBufferInner();
+        }
+
+        m_frameBufferUboManager.SetIdentifier(pIdentifier);
+
+        pPipeline->SetCurrentFrameBuffer(nullptr);
     }
 }

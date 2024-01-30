@@ -2,8 +2,8 @@
 // Created by Monika on 06.05.2023.
 //
 
-#ifndef SRENGINE_ANIMATIONGRAPHNODE_H
-#define SRENGINE_ANIMATIONGRAPHNODE_H
+#ifndef SR_ENGINE_ANIMATIONGRAPHNODE_H
+#define SR_ENGINE_ANIMATIONGRAPHNODE_H
 
 #include <Graphics/Animations/AnimationCommon.h>
 
@@ -76,4 +76,4 @@ namespace SR_ANIMATIONS_NS {
     /// ----------------------------------------------------------------------------------------------------------------
 }
 
-#endif //SRENGINE_ANIMATIONGRAPHNODE_H
+#endif //SR_ENGINE_ANIMATIONGRAPHNODE_H

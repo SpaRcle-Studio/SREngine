@@ -2,8 +2,8 @@
 // Created by Monika on 23.10.2022.
 //
 
-#ifndef SRENGINE_UNICODESTRING_H
-#define SRENGINE_UNICODESTRING_H
+#ifndef SR_ENGINE_UNICODESTRING_H
+#define SR_ENGINE_UNICODESTRING_H
 
 #include <Utils/stdInclude.h>
 
@@ -63,4 +63,4 @@ namespace SR_HTYPES_NS {
     };
 }
 
-#endif //SRENGINE_UNICODESTRING_H
+#endif //SR_ENGINE_UNICODESTRING_H

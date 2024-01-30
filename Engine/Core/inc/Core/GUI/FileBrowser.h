@@ -2,8 +2,8 @@
 // Created by Monika on 27.12.2021.
 //
 
-#ifndef SRENGINE_FILEBROWSER_H
-#define SRENGINE_FILEBROWSER_H
+#ifndef SR_ENGINE_FILEBROWSER_H
+#define SR_ENGINE_FILEBROWSER_H
 
 #include <Utils/FileSystem/Path.h>
 
@@ -66,4 +66,4 @@ namespace SR_CORE_NS::GUI {
     };
 }
 
-#endif //SRENGINE_FILEBROWSER_H
+#endif //SR_ENGINE_FILEBROWSER_H

@@ -261,7 +261,7 @@ namespace SR_CORE_NS::GUI {
 
         const auto size = m_window->GetSize();
 
-        auto&& pCamera = new EditorCamera(size.x, size.y);
+        auto&& pCamera = new EditorCamera(this, size.x, size.y);
 
         if (m_isPrefab) {
             pCamera->SetRenderTechnique(SR_CORE_NS::EditorSettings::Instance().GetPrefabEditorRenderTechnique());
@@ -314,11 +314,6 @@ namespace SR_CORE_NS::GUI {
             return;
         }
 
-        auto&& mousePos = ImGui::GetMousePos() - m_imagePosition;
-
-        const float_t x = mousePos.x / static_cast<float_t>(m_textureSize.x);
-        const float_t y = mousePos.y / static_cast<float_t>(m_textureSize.y);
-
         auto&& pCamera = m_camera ? m_camera->GetComponent<SR_GTYPES_NS::Camera>() : nullptr;
         if (!pCamera) {
             return Super::OnMouseUp(data);
@@ -326,8 +321,7 @@ namespace SR_CORE_NS::GUI {
 
         auto&& pRenderTechnique = pCamera->GetRenderTechnique();
         if (pRenderTechnique && IsHovered()) {
-            static std::vector<SR_UTILS_NS::StringAtom> filter = { "FlatColorBufferPass", "ColorBufferPass" };
-            if (auto&& pMesh = dynamic_cast<SR_GTYPES_NS::MeshComponent*>(pRenderTechnique->PickMeshAt(x, y, filter))) {
+            if (auto&& pMesh = dynamic_cast<SR_GTYPES_NS::MeshComponent*>(pRenderTechnique->PickMeshAt(pCamera->GetMousePos()))) {
                 SelectMesh(pMesh);
             }
             else {
@@ -421,5 +415,9 @@ namespace SR_CORE_NS::GUI {
         }
 
         m_hierarchy->SelectGameObject(pMesh->GetRoot());
+    }
+
+    SR_MATH_NS::FPoint SceneViewer::GetImagePosition() const {
+        return SR_MATH_NS::FPoint(m_imagePosition.x, m_imagePosition.y);
     }
 }

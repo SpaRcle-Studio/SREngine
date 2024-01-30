@@ -208,8 +208,11 @@ namespace SR_MATH_NS {
     };
 
     typedef Vector2<Unit> FVector2;
+    typedef Vector2<Unit> FPoint;
     typedef Vector2<int32_t> IVector2;
+    typedef Vector2<int32_t> IPoint;
     typedef Vector2<uint32_t> UVector2;
+    typedef Vector2<uint32_t> UPoint;
     typedef Vector2<bool> BVector2;
 
     constexpr IVector2 IVector2MAX = IVector2(SR_INT32_MAX);

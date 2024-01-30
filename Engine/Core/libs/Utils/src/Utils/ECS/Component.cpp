@@ -22,11 +22,11 @@ namespace SR_UTILS_NS {
             return data.pMarshal;
         }
 
-        data.pMarshal->Write<uint64_t>(GetComponentHashName());
+        data.pMarshal->Write<uint64_t>(GetComponentName().GetHash());
         data.pMarshal->Write(IsEnabled());
         data.pMarshal->Write<uint16_t>(GetEntityVersion());
 
-        if (!SR_UTILS_NS::ComponentManager::Instance().HasLoader(GetComponentHashName())) {
+        if (!SR_UTILS_NS::ComponentManager::Instance().HasLoader(GetComponentName())) {
             GetComponentProperties().SaveProperty(*data.pMarshal);
         }
 
@@ -142,7 +142,7 @@ namespace SR_UTILS_NS {
     }
 
     std::string Component::GetEntityInfo() const {
-        return "Component: " + GetComponentName();
+        return "Component: " + GetComponentName().ToStringRef();
     }
 
     bool Component::IsUpdatable() const noexcept {
@@ -150,10 +150,12 @@ namespace SR_UTILS_NS {
     }
 
     Component* Component::CopyComponent() const {
-        auto&& pComponent = SR_UTILS_NS::ComponentManager::Instance().CreateComponentOfName(GetComponentHashName());
+        auto&& pComponent = SR_UTILS_NS::ComponentManager::Instance().CreateComponentOfName(GetComponentName());
         if (!pComponent) {
             return nullptr;
         }
+
+        pComponent->SetEnabled(IsEnabled());
 
         /// TODO: non-optimized way
         SR_HTYPES_NS::Marshal marshal;

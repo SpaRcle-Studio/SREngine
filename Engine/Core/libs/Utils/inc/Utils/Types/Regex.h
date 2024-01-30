@@ -2,8 +2,8 @@
 // Created by Monika on 22.01.2023.
 //
 
-#ifndef SRENGINE_REGEX_H
-#define SRENGINE_REGEX_H
+#ifndef SR_ENGINE_REGEX_H
+#define SR_ENGINE_REGEX_H
 
 #include <Utils/stdInclude.h>
 
@@ -32,4 +32,4 @@ namespace SR_HTYPES_NS {
     };
 }
 
-#endif //SRENGINE_REGEX_H
+#endif //SR_ENGINE_REGEX_H

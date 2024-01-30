@@ -2,8 +2,8 @@
 // Created by Monika on 14.01.2023.
 //
 
-#ifndef SRENGINE_ANIMATOREDITOR_H
-#define SRENGINE_ANIMATOREDITOR_H
+#ifndef SR_ENGINE_ANIMATOREDITOR_H
+#define SR_ENGINE_ANIMATOREDITOR_H
 
 #include <Graphics/GUI/NodeWidget.h>
 #include <Graphics/GUI/Node.h>
@@ -31,4 +31,4 @@ namespace SR_CORE_NS::GUI {
     };
 }
 
-#endif //SRENGINE_ANIMATOREDITOR_H
+#endif //SR_ENGINE_ANIMATOREDITOR_H

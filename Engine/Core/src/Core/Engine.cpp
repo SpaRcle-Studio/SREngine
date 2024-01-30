@@ -404,7 +404,7 @@ namespace SR_CORE_NS {
             return;
         }
 
-        SR_TRACY_ZONE_N("Main frame");
+        SR_TRACY_ZONE_N("Draw");
 
         SR_HTYPES_NS::Time::Instance().Update();
 

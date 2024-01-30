@@ -2,8 +2,8 @@
 // Created by Monika on 22.01.2023.
 //
 
-#ifndef SRENGINE_SRSL_SHADER_H
-#define SRENGINE_SRSL_SHADER_H
+#ifndef SR_ENGINE_SRSL_SHADER_H
+#define SR_ENGINE_SRSL_SHADER_H
 
 #include <Graphics/SRSL/RefAnalyzer.h>
 #include <Graphics/SRSL/ICodeGenerator.h>
@@ -107,4 +107,4 @@ namespace SR_SRSL_NS {
     };
 }
 
-#endif //SRENGINE_SRSL_SHADER_H
+#endif //SR_ENGINE_SRSL_SHADER_H

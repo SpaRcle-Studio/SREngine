@@ -8,7 +8,7 @@
 #include <Graphics/Pass/GroupPass.h>
 
 namespace SR_GRAPH_NS {
-    RenderTechnique* RenderTechnique::Load(const SR_UTILS_NS::Path &rawPath) {
+    RenderTechnique* RenderTechnique::Load(const SR_UTILS_NS::Path& rawPath) {
         SR_TRACY_ZONE;
 
         /// Данный ресурс может иметь копии
@@ -96,13 +96,23 @@ namespace SR_GRAPH_NS {
         return true;
     }
 
-    bool RenderTechnique::LoadSettings(const SR_XML_NS::Node &node) {
+    bool RenderTechnique::LoadSettings(const SR_XML_NS::Node& node) {
         SR_TRACY_ZONE;
 
-        m_name = node.GetAttribute("Name").ToString();
+        SetName(node.GetAttribute("Name").ToString());
 
         for (auto&& passNode : node.GetNodes()) {
-            if (passNode.NameView() == "Queues") {
+            if (passNode.NameView() == "Include") {
+                auto&& path = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat(passNode.GetAttribute("Path").ToString());
+                auto&& includeXml = SR_XML_NS::Document::Load(path);
+                if (includeXml) {
+                    for (auto&& includePassNode : includeXml.Root().GetNode("Include").GetNodes()) {
+                        LoadPass(includePassNode);
+                    }
+                }
+                continue;
+            }
+            else if (passNode.NameView() == "Queues") {
                 for (auto&& queueNode : passNode.GetNodes()) {
                     auto&& queue = m_queues.emplace_back();
                     for (auto&& queuePassNode : queueNode.GetNodes()) {
@@ -118,13 +128,7 @@ namespace SR_GRAPH_NS {
                 continue;
             }
 
-            if (auto&& pPass = SR_ALLOCATE_RENDER_PASS(passNode)) {
-                pPass->SetRenderTechnique(this);
-                m_passes.emplace_back(pPass);
-            }
-            else {
-                SR_ERROR("RenderTechnique::LoadSettings() : failed to load \"" + passNode.Name() + "\" pass!");
-            }
+            LoadPass(passNode);
         }
 
         if (!m_passes.empty() && m_queues.empty()) {
@@ -140,6 +144,16 @@ namespace SR_GRAPH_NS {
 
         DeInitPasses();
         m_queues.clear();
-        m_name.clear();
+        SetName(SR_UTILS_NS::StringAtom());
+    }
+
+    void RenderTechnique::LoadPass(const SR_XML_NS::Node& node) {
+        if (auto&& pPass = SR_ALLOCATE_RENDER_PASS(node)) {
+            pPass->SetRenderTechnique(this);
+            m_passes.emplace_back(pPass);
+        }
+        else {
+            SR_ERROR("RenderTechnique::LoadPass() : failed to load \"" + node.Name() + "\" pass!");
+        }
     }
 }

@@ -26,11 +26,13 @@ namespace SR_GTYPES_NS {
         void OnDestroy() override;
         void OnMatrixDirty() override;
 
-        void FreeMesh() override;
+        void OnLayerChanged() override;
 
         SR_NODISCARD bool ExecuteInEditMode() const override;
         SR_NODISCARD bool IsUpdatable() const noexcept override { return false; }
         SR_NODISCARD int64_t GetSortingPriority() const override;
+        SR_NODISCARD bool HasSortingPriority() const override;
+        SR_NODISCARD SR_UTILS_NS::StringAtom GetMeshLayer() const override;
 
         SR_NODISCARD SR_FORCE_INLINE bool IsMeshActive() const noexcept override {
             return SR_UTILS_NS::Component::IsActive() && IndexedMesh::IsMeshActive();
@@ -53,14 +55,13 @@ namespace SR_GTYPES_NS {
         }
 
     protected:
+        /// TODO: remove it 
         std::string m_geometryName;
 
         SR_MATH_NS::Matrix4x4 m_modelMatrix = SR_MATH_NS::Matrix4x4::Identity();
         SR_MATH_NS::FVector3 m_translation = SR_MATH_NS::FVector3::Zero();
 
         SR_MATH_NS::FVector3 m_barycenter = SR_MATH_NS::FVector3(SR_MATH_NS::UnitMAX);
-
-        SR_UTILS_NS::PropertyContainer* m_customMaterialProperties = nullptr;
 
     };
 }

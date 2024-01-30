@@ -348,7 +348,7 @@ namespace SR_UTILS_NS {
             return;
         }
 
-        m_gameObject->OnPriorityDirty();
+        m_gameObject->OnPriorityChanged();
 
         for (auto&& child : m_gameObject->GetChildrenRef()) {
             if (auto&& pTransform2D = dynamic_cast<Transform2D*>(child->GetTransform())) {

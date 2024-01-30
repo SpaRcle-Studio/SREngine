@@ -16,7 +16,6 @@
 #include <Utils/Types/Function.h>
 #include <Utils/Types/SafeGateArray.h>
 
-#include <Core/GUI/EditorGUI.h>
 #include <Core/EvoScriptAPI.h>
 #include <Core/EngineCommands.h>
 #include <Core/EngineResources.h>
@@ -39,6 +38,11 @@ namespace SR_GTYPES_NS {
 
 namespace SR_WORLD_NS {
     class Scene;
+    class SceneUpdater;
+}
+
+namespace SR_CORE_GUI_NS {
+    class EditorGUI;
 }
 
 namespace SR_CORE_NS {
@@ -70,17 +74,17 @@ namespace SR_CORE_NS {
         void FlushScene();
 
         SR_NODISCARD bool HasSceneInQueue() const { return !m_sceneQueue.Empty(); }
-        SR_NODISCARD SR_INLINE ScenePtr GetScene() const;
-        SR_NODISCARD SR_INLINE RenderContextPtr GetRenderContext() const { return m_renderContext; }
-        SR_NODISCARD SR_INLINE RenderScenePtr GetRenderScene() const;
-        SR_NODISCARD SR_INLINE WindowPtr GetWindow() const { return m_window; }
-        SR_NODISCARD SR_INLINE SR_WORLD_NS::SceneUpdater* GetSceneBuilder() const;
-        SR_NODISCARD SR_INLINE bool IsActive() const { return m_isActive; }
-        SR_NODISCARD SR_INLINE bool IsRun() const { return m_isRun; }
-        SR_NODISCARD SR_INLINE bool IsPaused() const { return m_isPaused; }
-        SR_NODISCARD SR_INLINE bool IsGameMode() const { return m_isGameMode; }
-        SR_NODISCARD SR_INLINE SR_CORE_GUI_NS::EditorGUI* GetEditor() const { return m_editor; }
-        SR_NODISCARD SR_INLINE SR_UTILS_NS::CmdManager* GetCmdManager() const { return m_cmdManager; }
+        SR_NODISCARD ScenePtr GetScene() const;
+        SR_NODISCARD RenderContextPtr GetRenderContext() const { return m_renderContext; }
+        SR_NODISCARD RenderScenePtr GetRenderScene() const;
+        SR_NODISCARD WindowPtr GetWindow() const { return m_window; }
+        SR_NODISCARD SR_WORLD_NS::SceneUpdater* GetSceneBuilder() const;
+        SR_NODISCARD bool IsActive() const { return m_isActive; }
+        SR_NODISCARD bool IsRun() const { return m_isRun; }
+        SR_NODISCARD bool IsPaused() const { return m_isPaused; }
+        SR_NODISCARD bool IsGameMode() const { return m_isGameMode; }
+        SR_NODISCARD SR_CORE_GUI_NS::EditorGUI* GetEditor() const { return m_editor; }
+        SR_NODISCARD SR_UTILS_NS::CmdManager* GetCmdManager() const { return m_cmdManager; }
 
     public:
         bool Create();

@@ -2,8 +2,8 @@
 // Created by Monika on 09.04.2022.
 //
 
-#ifndef SRENGINE_SRSL_H
-#define SRENGINE_SRSL_H
+#ifndef SR_ENGINE_SRSL_H
+#define SR_ENGINE_SRSL_H
 
 #include <Graphics/Pipeline/IShaderProgram.h>
 #include <Graphics/Loaders/ShaderProperties.h>
@@ -71,4 +71,4 @@ namespace SR_GRAPH_NS::SRSL {
     };
 }
 
-#endif //SRENGINE_SRSL_H
+#endif //SR_ENGINE_SRSL_H

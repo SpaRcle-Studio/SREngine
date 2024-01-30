@@ -2,8 +2,8 @@
 // Created by Monika on 30.01.2023.
 //
 
-#ifndef SRENGINE_ICODEGENERATOR_H
-#define SRENGINE_ICODEGENERATOR_H
+#ifndef SR_ENGINE_ICODEGENERATOR_H
+#define SR_ENGINE_ICODEGENERATOR_H
 
 #include <Graphics/SRSL/LexicalTree.h>
 #include <Graphics/Pipeline/IShaderProgram.h>
@@ -31,4 +31,4 @@ namespace SR_SRSL_NS {
     };
 }
 
-#endif //SRENGINE_ICODEGENERATOR_H
+#endif //SR_ENGINE_ICODEGENERATOR_H

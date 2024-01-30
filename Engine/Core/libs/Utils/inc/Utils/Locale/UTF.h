@@ -2,8 +2,8 @@
 // Created by Monika on 23.10.2022.
 //
 
-#ifndef SRENGINE_UTF_H
-#define SRENGINE_UTF_H
+#ifndef SR_ENGINE_UTF_H
+#define SR_ENGINE_UTF_H
 
 #include <Utils/stdInclude.h>
 
@@ -320,4 +320,4 @@ namespace SR_UTILS_NS::Locale::Utf {
     }; // utf32
 }
 
-#endif //SRENGINE_UTF_H
+#endif //SR_ENGINE_UTF_H

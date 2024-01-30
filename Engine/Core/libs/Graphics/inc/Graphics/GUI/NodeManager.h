@@ -2,8 +2,8 @@
 // Created by Monika on 16.01.2022.
 //
 
-#ifndef SRENGINE_NODEMANAGER_H
-#define SRENGINE_NODEMANAGER_H
+#ifndef SR_ENGINE_NODEMANAGER_H
+#define SR_ENGINE_NODEMANAGER_H
 
 #include <Utils/Common/Singleton.h>
 #include <Utils/Types/Thread.h>
@@ -36,4 +36,4 @@ namespace SR_GRAPH_NS::GUI {
     };
 }
 
-#endif //SRENGINE_NODEMANAGER_H
+#endif //SR_ENGINE_NODEMANAGER_H

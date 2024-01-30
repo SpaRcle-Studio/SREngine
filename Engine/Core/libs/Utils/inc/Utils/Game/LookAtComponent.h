@@ -2,8 +2,8 @@
 // Created by Monika on 03.05.2023.
 //
 
-#ifndef SRENGINE_LOOKATCOMPONENT_H
-#define SRENGINE_LOOKATCOMPONENT_H
+#ifndef SR_ENGINE_LOOKATCOMPONENT_H
+#define SR_ENGINE_LOOKATCOMPONENT_H
 
 #include <Utils/ECS/EntityRef.h>
 #include <Utils/ECS/Component.h>
@@ -65,4 +65,4 @@ namespace SR_UTILS_NS {
     };
 }
 
-#endif //SRENGINE_LOOKATCOMPONENT_H
+#endif //SR_ENGINE_LOOKATCOMPONENT_H

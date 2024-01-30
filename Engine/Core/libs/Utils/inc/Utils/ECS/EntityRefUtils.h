@@ -55,13 +55,13 @@ namespace SR_UTILS_NS::EntityRefUtils {
     );
 
     struct PathItem {
-        uint64_t hashName;
+        StringAtom name;
         uint16_t index;
         Action action;
 
         bool operator==(const PathItem& other) const noexcept {
             return
-                hashName == other.hashName &&
+                name == other.name &&
                 index == other.index &&
                 action == other.action;
         }

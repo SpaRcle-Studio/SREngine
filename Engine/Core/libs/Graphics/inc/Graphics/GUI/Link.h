@@ -2,8 +2,8 @@
 // Created by Monika on 18.01.2022.
 //
 
-#ifndef SRENGINE_LINK_H
-#define SRENGINE_LINK_H
+#ifndef SR_ENGINE_LINK_H
+#define SR_ENGINE_LINK_H
 
 #include <Utils/Common/Enumerations.h>
 #include <Graphics/GUI/Icons.h>
@@ -40,4 +40,4 @@ namespace SR_GRAPH_NS::GUI {
     };
 }
 
-#endif //SRENGINE_LINK_H
+#endif //SR_ENGINE_LINK_H

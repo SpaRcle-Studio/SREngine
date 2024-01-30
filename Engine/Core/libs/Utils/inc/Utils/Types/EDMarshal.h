@@ -2,8 +2,8 @@
 // Created by Monika on 29.06.2022.
 //
 
-#ifndef SRENGINE_EDMARSHAL_H
-#define SRENGINE_EDMARSHAL_H
+#ifndef SR_ENGINE_EDMARSHAL_H
+#define SR_ENGINE_EDMARSHAL_H
 
 #include <Utils/Common/MarshalUtils.h>
 
@@ -406,4 +406,4 @@ SR_INLINE size_t std::hash<SR_HTYPES_NS::MarshalDecodeNode>::operator()(const SR
 }
 #endif
 
-#endif //SRENGINE_EDMARSHAL_H
+#endif //SR_ENGINE_EDMARSHAL_H

@@ -2,8 +2,8 @@
 // Created by Monika on 07.01.2023.
 //
 
-#ifndef SRENGINE_ANIMATIONKEY_H
-#define SRENGINE_ANIMATIONKEY_H
+#ifndef SR_ENGINE_ANIMATIONKEY_H
+#define SR_ENGINE_ANIMATIONKEY_H
 
 #include <Graphics/Animations/Interpolation.h>
 #include <Graphics/Animations/AnimationPose.h>
@@ -120,4 +120,4 @@ namespace SR_ANIMATIONS_NS {
     };
 }
 
-#endif //SRENGINE_ANIMATIONKEY_H
+#endif //SR_ENGINE_ANIMATIONKEY_H

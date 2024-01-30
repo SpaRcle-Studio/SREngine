@@ -6,12 +6,19 @@
 
 #include <Utils/Debug.h>
 #include <Utils/Common/CmdOptions.h>
+#include <Utils/TaskManager/TaskManager.h>
 #include <Utils/World/SceneAllocator.h>
 #include <Utils/ResourceManager/ResourceManager.h>
 #include <Utils/SRLM/LogicalNodeManager.h>
 #include <Utils/SRLM/DataTypeManager.h>
+#include <Utils/Locale/Encoding.h>
+#include <Utils/Platform/Platform.h>
+#include <Utils/ECS/LayerManager.h>
+
+#include <Graphics/GUI/NodeManager.h>
 
 #include <Audio/Sound.h>
+#include <Audio/SoundManager.h>
 
 namespace SR_CORE_NS {
     Application::Application()
@@ -132,6 +139,10 @@ namespace SR_CORE_NS {
 
         SR_UTILS_NS::ResourceManager::Instance().Init(m_resourcesPath);
 
+        if (SR_UTILS_NS::Features::Instance().Enabled("ResourceUsePointStackTraceProfiling", false)) {
+            SR_UTILS_NS::ResourceManager::Instance().EnableStackTraceProfiling();
+        }
+
         if (!SR_UTILS_NS::ResourceManager::Instance().Run()) {
             SR_ERROR("Application::Init() : failed to initialize resources manager!");
             return false;
@@ -213,6 +224,7 @@ namespace SR_CORE_NS {
 
         SR_CORE_NS::EditorSettings::DestroySettings();
         SR_UTILS_NS::TagManager::DestroySettings();
+        SR_UTILS_NS::LayerManager::DestroySettings();
 
         SR_AUDIO_NS::SoundManager::DestroySingleton();
         SR_PHYSICS_NS::PhysicsLibrary::DestroySingleton();
@@ -220,7 +232,7 @@ namespace SR_CORE_NS {
         SR_SCRIPTING_NS::GlobalEvoCompiler::DestroySingleton();
         SR_SCRIPTING_NS::EvoScriptManager::DestroySingleton();
         SR_UTILS_NS::EntityManager::DestroySingleton();
-        SR_GRAPH_NS::GUI::NodeManager::DestroySingleton();
+        SR_GRAPH_GUI_NS::NodeManager::DestroySingleton();
         SR_UTILS_NS::TaskManager::DestroySingleton();
         SR_GRAPH_NS::Memory::MeshManager::DestroySingleton();
 

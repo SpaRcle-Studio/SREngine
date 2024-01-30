@@ -2,8 +2,8 @@
 // Created by Monika on 24.03.2022.
 //
 
-#ifndef SRENGINE_RAWMESH_H
-#define SRENGINE_RAWMESH_H
+#ifndef SR_ENGINE_RAWMESH_H
+#define SR_ENGINE_RAWMESH_H
 
 #include <Utils/ResourceManager/IResource.h>
 #include <Utils/Types/SafePointer.h>
@@ -116,4 +116,4 @@ template<> struct SR_UTILS_NS::SRHash<SR_HTYPES_NS::RawMeshParams> {
     }
 };
 
-#endif //SRENGINE_RAWMESH_H
+#endif //SR_ENGINE_RAWMESH_H

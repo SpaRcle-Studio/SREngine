@@ -18,13 +18,13 @@ namespace SR_UTILS_NS {
     Component* LookAtComponent::LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage) {
         auto&& pComponent = new LookAtComponent();
 
-        pComponent->GetTarget().Load(marshal);
+        //pComponent->GetTarget().Load(marshal);
 
-        pComponent->SetAxis(static_cast<LookAtAxis>(marshal.Read<uint8_t>()));
-        pComponent->SetExecuteInEditMode(marshal.Read<bool>());
-        pComponent->SetMirror(marshal.Read<bool>());
-        pComponent->SetDelay(marshal.Read<float_t>());
-        pComponent->SetOffset(marshal.Read<SR_MATH_NS::FVector3>());
+        //pComponent->SetAxis(static_cast<LookAtAxis>(marshal.Read<uint8_t>()));
+        //pComponent->SetExecuteInEditMode(marshal.Read<bool>());
+        //pComponent->SetMirror(marshal.Read<bool>());
+        //pComponent->SetDelay(marshal.Read<float_t>());
+        //pComponent->SetOffset(marshal.Read<SR_MATH_NS::FVector3>());
 
         return pComponent;
     }
@@ -94,13 +94,13 @@ namespace SR_UTILS_NS {
     SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr LookAtComponent::Save(SR_UTILS_NS::SavableContext data) const {
         auto&& pMarshal = Super::Save(data);
 
-        pMarshal = m_target.Save(pMarshal);
+        //pMarshal = m_target.Save(pMarshal);
 
-        pMarshal->Write<uint8_t>(static_cast<uint8_t>(m_axis));
-        pMarshal->Write<bool>(m_editMode);
-        pMarshal->Write<bool>(m_mirror);
-        pMarshal->Write<float_t>(m_delay);
-        pMarshal->Write<SR_MATH_NS::FVector3>(m_offset);
+        //pMarshal->Write<uint8_t>(static_cast<uint8_t>(m_axis));
+        //pMarshal->Write<bool>(m_editMode);
+        //pMarshal->Write<bool>(m_mirror);
+        //pMarshal->Write<float_t>(m_delay);
+        //pMarshal->Write<SR_MATH_NS::FVector3>(m_offset);
 
         return pMarshal;
     }

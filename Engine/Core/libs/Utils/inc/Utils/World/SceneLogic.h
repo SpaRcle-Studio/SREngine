@@ -2,8 +2,8 @@
 // Created by Monika on 22.12.2022.
 //
 
-#ifndef SRENGINE_SCENELOGIC_H
-#define SRENGINE_SCENELOGIC_H
+#ifndef SR_ENGINE_SCENELOGIC_H
+#define SR_ENGINE_SCENELOGIC_H
 
 #include <Utils/Common/NonCopyable.h>
 #include <Utils/Types/SafePointer.h>
@@ -49,4 +49,4 @@ namespace SR_WORLD_NS {
     };
 }
 
-#endif //SRENGINE_SCENELOGIC_H
+#endif //SR_ENGINE_SCENELOGIC_H

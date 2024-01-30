@@ -2,8 +2,8 @@
 // Created by Monika on 23.10.2022.
 //
 
-#ifndef SRENGINE_ICU_H
-#define SRENGINE_ICU_H
+#ifndef SR_ENGINE_ICU_H
+#define SR_ENGINE_ICU_H
 
 #include <Utils/Debug.h>
 
@@ -348,4 +348,4 @@ namespace SR_UTILS_NS::Locale::ICU {
     };
 }
 
-#endif //SRENGINE_ICU_H
+#endif //SR_ENGINE_ICU_H

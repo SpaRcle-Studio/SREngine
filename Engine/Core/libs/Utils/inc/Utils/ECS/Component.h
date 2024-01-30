@@ -2,8 +2,8 @@
 // Created by Nikita on 27.11.2020.
 //
 
-#ifndef GAMEENGINE_COMPONENT_H
-#define GAMEENGINE_COMPONENT_H
+#ifndef SR_ENGINE_UTILS_COMPONENT_H
+#define SR_ENGINE_UTILS_COMPONENT_H
 
 #include <Utils/ECS/EntityManager.h>
 #include <Utils/Math/Vector3.h>
@@ -28,10 +28,8 @@ namespace SR_HTYPES_NS {
 
 #define SR_INITIALIZE_COMPONENT(name)                                                                                   \
 public:                                                                                                                 \
-    SR_INLINE static const std::string COMPONENT_NAME = #name; /** NOLINT */                                            \
-    SR_INLINE static const uint64_t COMPONENT_HASH_NAME = SR_HASH_STR_REGISTER(name::COMPONENT_NAME); /** NOLINT */     \
-    SR_NODISCARD uint64_t GetComponentHashName() const override { return name::COMPONENT_HASH_NAME; }                   \
-    SR_NODISCARD const std::string& GetComponentName() const override { return name::COMPONENT_NAME; }                  \
+    SR_INLINE static const SR_UTILS_NS::StringAtom COMPONENT_NAME = #name; /** NOLINT */                                \
+    SR_NODISCARD const SR_UTILS_NS::StringAtom& GetComponentName() const override { return name::COMPONENT_NAME; }      \
 
 namespace SR_UTILS_NS {
     class ComponentManager;
@@ -55,7 +53,7 @@ namespace SR_UTILS_NS {
 
     public:
         virtual void OnMatrixDirty() { }
-        virtual void OnPriorityDirty() { }
+        virtual void OnPriorityChanged() { }
         virtual void OnTransformSet() { }
 
         /// Вызывается при загрузке компонента на игровой объект
@@ -76,6 +74,9 @@ namespace SR_UTILS_NS {
         virtual void FixedUpdate() { }
         virtual void LateUpdate() { }
 
+        virtual void OnBeforeLayerChanged() { }
+        virtual void OnLayerChanged() { }
+
         virtual void OnCollisionEnter(const CollisionData& data) { }
         virtual void OnCollisionStay(const CollisionData& data) { }
         virtual void OnCollisionExit(const CollisionData& data) { }
@@ -94,8 +95,7 @@ namespace SR_UTILS_NS {
 
         SR_NODISCARD virtual Component* CopyComponent() const;
 
-        SR_NODISCARD virtual uint64_t GetComponentHashName() const = 0;
-        SR_NODISCARD virtual const std::string& GetComponentName() const = 0;
+        SR_NODISCARD virtual const SR_UTILS_NS::StringAtom& GetComponentName() const = 0;
 
         SR_NODISCARD SR_FORCE_INLINE virtual bool IsComponentLoaded() const noexcept { return m_isComponentLoaded; }
         SR_NODISCARD SR_FORCE_INLINE virtual bool IsComponentValid() const noexcept { return m_parent; }
@@ -158,4 +158,4 @@ namespace SR_UTILS_NS {
 }
 
 
-#endif //GAMEENGINE_COMPONENT_H
+#endif //SR_ENGINE_UTILS_COMPONENT_H

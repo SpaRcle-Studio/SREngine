@@ -10,7 +10,7 @@ namespace SR_GRAPH_NS {
     SR_REGISTER_RENDER_PASS(FramebufferPass)
 
     bool FramebufferPass::Load(const SR_XML_NS::Node &passNode) {
-        LoadFramebufferSettings(passNode.TryGetNode("FramebufferSettings"));
+        LoadFramebufferSettings(passNode);
 
         bool result = GroupPass::Load(passNode.TryGetNode("Passes"));
 
@@ -47,7 +47,7 @@ namespace SR_GRAPH_NS {
             m_framebuffer->EndCmdBuffer();
         }
 
-        m_pipeline->SetCurrentFrameBuffer(nullptr);
+        GetPassPipeline()->SetCurrentFrameBuffer(nullptr);
 
         m_isFrameBufferRendered = true;
 
@@ -80,11 +80,11 @@ namespace SR_GRAPH_NS {
             return;
         }
 
-        m_pipeline->SetCurrentFrameBuffer(m_framebuffer);
+        GetPassPipeline()->SetCurrentFrameBuffer(m_framebuffer);
 
         GroupPass::Update();
 
-        m_pipeline->SetCurrentFrameBuffer(nullptr);
+        GetPassPipeline()->SetCurrentFrameBuffer(nullptr);
     }
 
     std::vector<SR_GTYPES_NS::Framebuffer*> FramebufferPass::GetFrameBuffers() const {

@@ -118,4 +118,4 @@ namespace SR_SCRIPTING_NS {
     };
 }
 
-#endif //SRENGINE_BEHAVIOUR_H
+#endif //SR_ENGINE_BEHAVIOUR_H

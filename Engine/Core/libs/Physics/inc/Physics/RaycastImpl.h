@@ -2,8 +2,8 @@
 // Created by innerviewer on 2/16/2023.
 //
 
-#ifndef SRENGINE_RAYCASTIMPL_H
-#define SRENGINE_RAYCASTIMPL_H
+#ifndef SR_ENGINE_RAYCASTIMPL_H
+#define SR_ENGINE_RAYCASTIMPL_H
 
 #include <Utils/Common/NonCopyable.h>
 #include <Utils/Common/RaycastHit.h>
@@ -27,4 +27,4 @@ namespace SR_PHYSICS_NS {
     };
 }
 
-#endif //SRENGINE_RAYCASTIMPL_H
+#endif //SR_ENGINE_RAYCASTIMPL_H

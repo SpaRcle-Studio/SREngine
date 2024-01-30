@@ -3,9 +3,17 @@
 //
 
 #include <Core/World/EngineScene.h>
+#include <Core/GUI/EditorGUI.h>
+
 #include <Physics/3D/Raycast3D.h>
+
 #include <Scripting/Impl/EvoScriptManager.h>
+
+#include <Graphics/Types/Camera.h>
+
 #include <Utils/DebugDraw.h>
+#include <Utils/Common/Features.h>
+#include <Utils/World/SceneCubeChunkLogic.h>
 
 namespace SR_CORE_NS {
     EngineScene::EngineScene(const EngineScene::ScenePtr& pScene, Engine* pEngine)

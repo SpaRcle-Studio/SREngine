@@ -2,8 +2,8 @@
 // Created by Monika on 09.07.2022.
 //
 
-#ifndef SRENGINE_SOUNDDATA_H
-#define SRENGINE_SOUNDDATA_H
+#ifndef SR_ENGINE_SOUNDDATA_H
+#define SR_ENGINE_SOUNDDATA_H
 
 #include <Audio/SoundFormat.h>
 
@@ -19,4 +19,4 @@ namespace SR_AUDIO_NS {
     };
 }
 
-#endif //SRENGINE_SOUNDDATA_H
+#endif //SR_ENGINE_SOUNDDATA_H

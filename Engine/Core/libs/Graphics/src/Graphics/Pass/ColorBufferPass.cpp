@@ -13,11 +13,7 @@ namespace SR_GRAPH_NS {
         Super::Update();
     }
 
-    MeshClusterTypeFlag ColorBufferPass::GetClusterType() const noexcept {
-        return static_cast<uint64_t>(MeshClusterType::Opaque) | static_cast<uint64_t>(MeshClusterType::Transparent);
-    }
-
-    void ColorBufferPass::UseUniforms(ColorBufferPass::ShaderPtr pShader, ColorBufferPass::MeshPtr pMesh) {
+    void ColorBufferPass::UseUniforms(ShaderPtr pShader, MeshPtr pMesh) {
         pMesh->UseModelMatrix();
 
         IncrementColorIndex();
@@ -25,10 +21,6 @@ namespace SR_GRAPH_NS {
 
         static const uint64_t colorHashName = SR_UTILS_NS::StringAtom("color").GetHash();
         pShader->SetVec3(colorHashName, GetMeshColor());
-    }
-
-    void ColorBufferPass::UseSharedUniforms(ColorBufferPass::ShaderPtr pShader) {
-        Super::UseSharedUniforms(pShader);
     }
 
     SR_GTYPES_NS::Framebuffer* ColorBufferPass::GetColorFrameBuffer() const noexcept {

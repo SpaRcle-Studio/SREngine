@@ -2,8 +2,8 @@
 // Created by Monika on 27.08.2022.
 //
 
-#ifndef SRENGINE_NOISE_H
-#define SRENGINE_NOISE_H
+#ifndef SR_ENGINE_NOISE_H
+#define SR_ENGINE_NOISE_H
 
 #include <Utils/Math/NoiseTable.h>
 
@@ -212,4 +212,4 @@ namespace SR_MATH_NS {
     }
 }
 
-#endif //SRENGINE_NOISE_H
+#endif //SR_ENGINE_NOISE_H

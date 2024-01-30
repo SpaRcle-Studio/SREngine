@@ -2,8 +2,8 @@
 // Created by Monika on 01.08.2022.
 //
 
-#ifndef SRENGINE_CANVAS_H
-#define SRENGINE_CANVAS_H
+#ifndef SR_ENGINE_CANVAS_H
+#define SR_ENGINE_CANVAS_H
 
 #include <Utils/ECS/Component.h>
 #include <Graphics/Render/RenderScene.h>
@@ -44,4 +44,4 @@ namespace SR_GRAPH_NS::UI {
     };
 }
 
-#endif //SRENGINE_CANVAS_H
+#endif //SR_ENGINE_CANVAS_H

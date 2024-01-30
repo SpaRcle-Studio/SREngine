@@ -2,8 +2,8 @@
 // Created by Monika on 14.01.2023.
 //
 
-#ifndef SRENGINE_NODEWIDGET_H
-#define SRENGINE_NODEWIDGET_H
+#ifndef SR_ENGINE_NODEWIDGET_H
+#define SR_ENGINE_NODEWIDGET_H
 
 #include <Graphics/GUI/NodeBuilder.h>
 #include <Graphics/GUI/Widget.h>
@@ -83,4 +83,4 @@ namespace SR_GRAPH_GUI_NS {
     };
 }
 
-#endif //SRENGINE_NODEWIDGET_H
+#endif //SR_ENGINE_NODEWIDGET_H

@@ -7,7 +7,9 @@
 #include <Utils/ECS/Transform3D.h>
 #include <Utils/ECS/Transform2D.h>
 #include <Utils/ECS/TransformZero.h>
+#include <Utils/ECS/LayerManager.h>
 #include <Utils/Types/SafePtrLockGuard.h>
+#include <Utils/World/ScenePrefabLogic.h>
 
 #include <Scripting/Base/Behaviour.h>
 
@@ -64,6 +66,11 @@ namespace SR_CORE_GUI_NS {
                 pEngine->GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
             }
 
+            if (m_gameObject->IsPrefab()) {
+                ImGui::SameLine();
+                ImGui::TextColored(ImVec4(0, 1, 1, 1), "(The changes will not be saved)");
+            }
+
             if (m_gameObject->IsDirty()) {
                 ImGui::SameLine();
                 ImGui::TextColored(ImVec4(1, 1, 0, 1), "(Is dirty)");
@@ -84,25 +91,12 @@ namespace SR_CORE_GUI_NS {
 
             /// --------------------------------------------------------------------------------------------------------
 
-            /// вызываем в потокобезопасном контексте, так как теги могут быть изменены извне
-            SR_UTILS_NS::TagManager::Instance().Do([&](auto&& pSettings) {
-                auto&& pTagManager = dynamic_cast<SR_UTILS_NS::TagManager*>(pSettings);
-                auto&& tags = pTagManager->GetTags();
-                auto&& tagIndex = static_cast<int>(pTagManager->GetTagIndex(m_gameObject->GetTag()));
-                auto&& pTags = const_cast<std::vector<std::string>*>(&tags);
+            InspectTag(m_gameObject->GetTag(), [this](auto&& tag){
+                m_gameObject->SetTag(tag);
+            });
 
-                if (ImGui::Combo("Tag", &tagIndex, [](void* vec, int idx, const char** out_text){
-                    auto&& vector = reinterpret_cast<std::vector<std::string>*>(vec);
-                    if (idx < 0 || idx >= vector->size())
-                        return false;
-
-                    *out_text = vector->at(idx).c_str();
-
-                    return true;
-                }, reinterpret_cast<void*>(pTags), tags.size())) {
-                    /// TODO: переделать на комманды
-                    m_gameObject->SetTag(pTagManager->GetTagByIndex(tagIndex));
-                }
+            InspectLayer(m_gameObject->GetLayer(), [this](auto&& tag) {
+                m_gameObject->SetLayer(tag);
             });
 
             /// --------------------------------------------------------------------------------------------------------
@@ -137,6 +131,18 @@ namespace SR_CORE_GUI_NS {
     void Inspector::InspectScene() {
         std::string gm_name = m_scene->GetName();
         ImGui::InputText("Name", &gm_name, ImGuiInputTextFlags_ReadOnly);
+
+        auto&& pLogic = m_scene->GetLogicBase().DynamicCast<SR_WORLD_NS::ScenePrefabLogic>();
+
+        if (pLogic) {
+            InspectTag(pLogic->GetTag(), [pLogic](auto &&tag) {
+                pLogic->SetTag(tag);
+            });
+
+            InspectLayer(pLogic->GetLayer(), [pLogic](auto &&tag) {
+                pLogic->SetLayer(tag);
+            });
+        }
 
         ImGui::Separator();
 
@@ -177,9 +183,9 @@ namespace SR_CORE_GUI_NS {
 
         ImGui::PushItemWidth(width);
         if (ImGui::BeginCombo("Add component", nullptr, ImGuiComboFlags_NoArrowButton)) {
-            for (const auto&[name, id] : SR_UTILS_NS::ComponentManager::Instance().GetComponentsNames()) {
+            for (auto&& name : SR_UTILS_NS::ComponentManager::Instance().GetComponentsNames()) {
                 if (ImGui::Selectable(name.c_str(), false)) {
-                    auto &&pNewComponent = SR_UTILS_NS::ComponentManager::Instance().CreateComponentOfName(name);
+                    auto&& pNewComponent = SR_UTILS_NS::ComponentManager::Instance().CreateComponentOfName(name);
                     pIComponentable->AddComponent(pNewComponent);
                 }
             }
@@ -395,5 +401,50 @@ namespace SR_CORE_GUI_NS {
             }
             ImGui::EndChild();
         }
+    }
+
+    void Inspector::InspectTag(SR_UTILS_NS::StringAtom tag, SR_HTYPES_NS::Function<void(SR_UTILS_NS::StringAtom)> callback) {
+        /// вызываем в потокобезопасном контексте, так как теги могут быть изменены извне
+        SR_UTILS_NS::TagManager::Instance().Do([&](auto&& pSettings) {
+            auto&& pTagManager = dynamic_cast<SR_UTILS_NS::TagManager*>(pSettings);
+            auto&& tags = pTagManager->GetTags();
+            auto&& tagIndex = static_cast<int>(pTagManager->GetTagIndex(tag));
+            auto&& pTags = const_cast<std::vector<SR_UTILS_NS::StringAtom>*>(&tags);
+
+            if (ImGui::Combo("Tag", &tagIndex, [](void* vec, int idx, const char** out_text){
+                auto&& vector = reinterpret_cast<std::vector<SR_UTILS_NS::StringAtom>*>(vec);
+                if (idx < 0 || idx >= vector->size())
+                    return false;
+
+                *out_text = vector->at(idx).c_str();
+
+                return true;
+            }, reinterpret_cast<void*>(pTags), tags.size())) {
+                /// TODO: переделать на комманды
+                callback(pTagManager->GetTagByIndex(tagIndex));
+            }
+        });
+    }
+
+    void Inspector::InspectLayer(SR_UTILS_NS::StringAtom layer, SR_HTYPES_NS::Function<void(SR_UTILS_NS::StringAtom)> callback) {
+        SR_UTILS_NS::LayerManager::Instance().Do([&](auto&& pSettings) {
+            auto&& pLayerManager = dynamic_cast<SR_UTILS_NS::LayerManager*>(pSettings);
+            auto&& layers = pLayerManager->GetLayers();
+            auto&& layerIndex = static_cast<int>(pLayerManager->GetLayerIndex(layer));
+            auto&& pLayers = const_cast<std::vector<SR_UTILS_NS::StringAtom>*>(&layers);
+
+            if (ImGui::Combo("Layer", &layerIndex, [](void* vec, int idx, const char** out_text){
+                auto&& vector = reinterpret_cast<std::vector<SR_UTILS_NS::StringAtom>*>(vec);
+                if (idx < 0 || idx >= vector->size())
+                    return false;
+
+                *out_text = vector->at(idx).c_str();
+
+                return true;
+            }, reinterpret_cast<void*>(pLayers), layers.size())) {
+                /// TODO: переделать на комманды
+                callback(layers[layerIndex]);
+            }
+        });
     }
 }

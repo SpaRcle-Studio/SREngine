@@ -11,6 +11,8 @@
 #include <Graphics/Memory/CameraManager.h>
 #include <Graphics/Render/RenderScene.h>
 #include <Graphics/Animations/Skeleton.h>
+#include <Graphics/Types/Geometry/SkinnedMesh.h>
+#include <Graphics/Types/Material.h>
 
 #include <Physics/PhysicsLib.h>
 #include <Physics/LibraryImpl.h>

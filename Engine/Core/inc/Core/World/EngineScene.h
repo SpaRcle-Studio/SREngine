@@ -2,8 +2,8 @@
 // Created by Monika on 25.12.2022.
 //
 
-#ifndef SRENGINE_ENGINESCENE_H
-#define SRENGINE_ENGINESCENE_H
+#ifndef SR_ENGINE_ENGINE_SCENE_H
+#define SR_ENGINE_ENGINE_SCENE_H
 
 #include <Utils/World/SceneUpdater.h>
 #include <Utils/World/Scene.h>
@@ -23,7 +23,7 @@ namespace SR_CORE_NS {
         using PhysicsScenePtr = SR_HTYPES_NS::SafePtr<SR_PHYSICS_NS::PhysicsScene>;
         using ScenePtr = SR_HTYPES_NS::SafePtr<SR_WORLD_NS::Scene>;
         using RenderScenePtr = SR_HTYPES_NS::SafePtr<SR_GRAPH_NS::RenderScene>;
-        using CameraPtr = SR_GTYPES_NS::Camera::Ptr;
+        using CameraPtr = SR_HTYPES_NS::SharedPtr<SR_GTYPES_NS::Camera>;
 
     public:
         EngineScene(const ScenePtr& scene, Engine* pEngine);
@@ -61,4 +61,4 @@ namespace SR_CORE_NS {
     };
 }
 
-#endif //SRENGINE_ENGINESCENE_H
+#endif //SR_ENGINE_ENGINESCENE_H

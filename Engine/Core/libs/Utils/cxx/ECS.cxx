@@ -16,3 +16,4 @@
 #include "../../Utils/src/Utils/ECS/Prefab.cpp"
 #include "../../Utils/src/Utils/ECS/Migration.cpp"
 #include "../../Utils/src/Utils/ECS/TagManager.cpp"
+#include "../../Utils/src/Utils/ECS/LayerManager.cpp"

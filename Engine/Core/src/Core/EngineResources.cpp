@@ -11,6 +11,9 @@
 #include <Graphics/Types/Shader.h>
 #include <Graphics/Font/Font.h>
 #include <Graphics/Types/Skybox.h>
+#include <Graphics/Types/Texture.h>
+#include <Graphics/Types/Framebuffer.h>
+#include <Graphics/Animations/AnimationClip.h>
 
 #include <Audio/RawSound.h>
 #include <Audio/Sound.h>

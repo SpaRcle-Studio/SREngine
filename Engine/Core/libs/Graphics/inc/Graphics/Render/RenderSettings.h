@@ -2,8 +2,8 @@
 // Created by Monika on 11.08.2023.
 //
 
-#ifndef SRENGINE_RENDERSETTINGS_H
-#define SRENGINE_RENDERSETTINGS_H
+#ifndef SR_ENGINE_RENDERSETTINGS_H
+#define SR_ENGINE_RENDERSETTINGS_H
 
 #include <Graphics/Render/RenderSettings.h>
 
@@ -25,4 +25,4 @@ namespace SR_GRAPH_NS {
     };
 }
 
-#endif //SRENGINE_RENDERSETTINGS_H
+#endif //SR_ENGINE_RENDERSETTINGS_H

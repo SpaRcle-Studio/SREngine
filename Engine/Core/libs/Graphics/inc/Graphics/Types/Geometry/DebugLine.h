@@ -2,8 +2,8 @@
 // Created by Monika on 19.09.2022.
 //
 
-#ifndef SRENGINE_DEBUGLINE_H
-#define SRENGINE_DEBUGLINE_H
+#ifndef SR_ENGINE_DEBUGLINE_H
+#define SR_ENGINE_DEBUGLINE_H
 
 #include <Graphics/Types/Mesh.h>
 #include <Graphics/Types/Vertices.h>
@@ -37,4 +37,4 @@ namespace SR_GTYPES_NS {
     };
 }
 
-#endif //SRENGINE_DEBUGLINE_H
+#endif //SR_ENGINE_DEBUGLINE_H

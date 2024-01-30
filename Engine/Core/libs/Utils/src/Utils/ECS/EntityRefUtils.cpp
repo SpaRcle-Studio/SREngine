@@ -71,7 +71,7 @@ namespace SR_UTILS_NS::EntityRefUtils {
                     uint16_t index = item.index;
                     bool found = false;
                     for (auto&& pChild : *tree) {
-                        if (pChild->GetHashName() != item.hashName) {
+                        if (pChild->GetName() != item.name) {
                             continue;
                         }
                         if (index > 0) {
@@ -99,7 +99,7 @@ namespace SR_UTILS_NS::EntityRefUtils {
                     for (auto&& pComponent : components) {
                         SRAssert1Once(pComponent->Valid());
 
-                        if (pComponent->GetComponentHashName() != item.hashName) {
+                        if (pComponent->GetComponentName() != item.name) {
                             continue;
                         }
                         if (index > 0) {
@@ -140,15 +140,15 @@ namespace SR_UTILS_NS::EntityRefUtils {
                         if (pComponent == pComponentIteration) {
                             break;
                         }
-                        if (pComponentIteration->GetComponentHashName() == pComponent->GetComponentHashName()) {
+                        if (pComponentIteration->GetComponentName() == pComponent->GetComponentName()) {
                             ++componentIndex;
                         }
                     }
 
                     PathItem item = {
-                            .hashName = pComponent->GetComponentHashName(),
-                            .index = componentIndex,
-                            .action = Action::Action_Component
+                        .name = pComponent->GetComponentName(),
+                        .index = componentIndex,
+                        .action = Action::Action_Component
                     };
 
                     refPath.emplace_back(item);
@@ -182,7 +182,7 @@ namespace SR_UTILS_NS::EntityRefUtils {
                 }
 
                 PathItem item = {
-                    .hashName = pGameObject->GetHashName(),
+                    .name = pGameObject->GetName(),
                     .index = objectIndex,
                     .action = Action::Action_Child
                 };
@@ -222,9 +222,8 @@ namespace SR_UTILS_NS::EntityRefUtils {
 
         /// Вычитаем 2, так как один это конец массива, а второй это компонент
         for (int32_t i = fromPath.size() - 2; i >= offset; --i) {
-            PathItem item = {
-                .action = Action::Action_Parent
-            };
+            PathItem item;
+            item.action = Action::Action_Parent;
             refPath.emplace_back(item);
         }
 

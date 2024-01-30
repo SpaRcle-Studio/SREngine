@@ -422,6 +422,8 @@ namespace SR_GRAPH_NS {
     }
 
     VkCommandBuffer VulkanImGuiOverlay::Render(uint32_t frame) {
+        SR_TRACY_ZONE_S("VulkanImGuiOverlay::Render");
+
         auto&& buffer = m_cmdBuffs[frame];
 
         vkResetCommandPool(*m_device, m_cmdPools[frame], 0);

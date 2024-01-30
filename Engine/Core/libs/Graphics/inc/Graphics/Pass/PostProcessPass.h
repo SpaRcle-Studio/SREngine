@@ -2,8 +2,8 @@
 // Created by Monika on 07.08.2022.
 //
 
-#ifndef SRENGINE_POSTPROCESSPASS_H
-#define SRENGINE_POSTPROCESSPASS_H
+#ifndef SR_ENGINE_POSTPROCESSPASS_H
+#define SR_ENGINE_POSTPROCESSPASS_H
 
 #include <Graphics/Pass/BasePass.h>
 #include <Graphics/Pipeline/IShaderProgram.h>
@@ -64,4 +64,4 @@ namespace SR_GRAPH_NS {
     };
 }
 
-#endif //SRENGINE_POSTPROCESSPASS_H
+#endif //SR_ENGINE_POSTPROCESSPASS_H

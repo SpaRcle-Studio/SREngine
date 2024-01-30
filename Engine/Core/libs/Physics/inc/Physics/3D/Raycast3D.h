@@ -2,8 +2,8 @@
 // Created by innerviewer on 2/13/2023.
 //
 
-#ifndef SRENGINE_RAYCAST3D_H
-#define SRENGINE_RAYCAST3D_H
+#ifndef SR_ENGINE_RAYCAST3D_H
+#define SR_ENGINE_RAYCAST3D_H
 
 #include <Physics/Raycast.h>
 #include <Utils/Math/Vector3.h>
@@ -18,4 +18,4 @@ namespace SR_PHYSICS_NS {
     };
 }
 
-#endif //SRENGINE_RAYCAST3D_H
+#endif //SR_ENGINE_RAYCAST3D_H

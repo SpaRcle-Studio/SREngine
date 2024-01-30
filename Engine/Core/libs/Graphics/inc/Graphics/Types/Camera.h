@@ -75,6 +75,8 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD RenderScenePtr TryGetRenderScene() const;
         SR_NODISCARD const SR_UTILS_NS::Path& GetRenderTechniquePath();
 
+        SR_NODISCARD virtual SR_MATH_NS::FPoint GetMousePos() const;
+
         void SetFar(float_t value);
         void SetNear(float_t value);
         void SetFOV(float_t value);

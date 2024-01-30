@@ -2,18 +2,17 @@
 // Created by Monika on 27.05.2022.
 //
 
-#ifndef SRENGINE_COMPONENTMANAGER_H
-#define SRENGINE_COMPONENTMANAGER_H
+#ifndef SR_ENGINE_COMPONENT_MANAGER_H
+#define SR_ENGINE_COMPONENT_MANAGER_H
 
 #include <Utils/ECS/EntityManager.h>
 #include <Utils/ECS/Component.h>
 #include <Utils/Types/Thread.h>
 #include <Utils/Types/Function.h>
-
-#include <Utils/Math/Vector3.h>
-#include <Utils/Types/SafePointer.h>
-#include <Utils/Common/StringUtils.h>
 #include <Utils/Types/DataStorage.h>
+#include <Utils/Types/SafePointer.h>
+#include <Utils/Math/Vector3.h>
+#include <Utils/Common/StringUtils.h>
 
 namespace SR_UTILS_NS {
     class Component;
@@ -37,7 +36,6 @@ namespace SR_UTILS_NS {
         struct MetaComponent {
             Construction constructor;
             Loader loader;
-            std::string name;
             uint16_t version;
         };
     public:
@@ -45,14 +43,13 @@ namespace SR_UTILS_NS {
             return false;
         }
 
-        Component* CreateComponentOfName(const std::string& name);
-        Component* CreateComponentOfName(Hash hashName);
+        Component* CreateComponentOfName(StringAtom name);
 
-        SR_NODISCARD bool HasLoader(Hash hashName) const;
+        SR_NODISCARD bool HasLoader(StringAtom name) const;
 
         template<typename T> T* CreateComponent() {
             SR_SCOPED_LOCK;
-            auto&& pComponent = CreateComponentImpl(T::COMPONENT_HASH_NAME);
+            auto&& pComponent = CreateComponentOfName(T::COMPONENT_NAME);
             if (!pComponent) {
                 return nullptr;
             }
@@ -68,11 +65,11 @@ namespace SR_UTILS_NS {
             return nullptr;
         }
 
-        SR_NODISCARD Component* LoadComponent(uint64_t hashName, SR_HTYPES_NS::Marshal& marshal) {
+        SR_NODISCARD Component* LoadComponent(StringAtom name, SR_HTYPES_NS::Marshal& marshal) {
             SR_SCOPED_LOCK;
             SR_TRACY_ZONE;
 
-            if (auto&& pComponent = CreateComponentOfName(hashName)) {
+            if (auto&& pComponent = CreateComponentOfName(name)) {
                 pComponent->GetComponentProperties().LoadProperty(marshal);
                 return pComponent;
             }
@@ -80,28 +77,25 @@ namespace SR_UTILS_NS {
             return nullptr;
         }
 
-        const std::unordered_map<std::string, Hash>& GetComponentsNames() const {
+        const std::vector<StringAtom>& GetComponentsNames() const {
             SR_SCOPED_LOCK;
-            return m_ids;
+            return m_names;
         }
 
-        uint16_t GetVersion(const Component* pComponent) const;
-        uint16_t GetVersionById(uint64_t id) const;
+        SR_NODISCARD uint16_t GetVersion(const Component* pComponent) const;
+        SR_NODISCARD uint16_t GetVersionByName(SR_UTILS_NS::StringAtom name) const;
 
         template<typename T> bool RegisterComponentLoader(const Construction& constructor) {
             SR_SCOPED_LOCK;
 
-            auto&& hashName = T::COMPONENT_HASH_NAME;
-
-            m_meta[hashName].loader = [](SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage) -> Component* {
+            m_meta[T::COMPONENT_NAME].loader = [](SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage) -> Component* {
                 return T::LoadComponent(marshal, dataStorage);
             };
 
-            m_meta[hashName].name = T::COMPONENT_NAME;
-            m_meta[hashName].constructor = constructor;
-            m_meta[hashName].version = T::VERSION;
+            m_meta[T::COMPONENT_NAME].constructor = constructor;
+            m_meta[T::COMPONENT_NAME].version = T::VERSION;
 
-            m_ids.insert(std::make_pair(T::COMPONENT_NAME, hashName));
+            m_names.emplace_back(T::COMPONENT_NAME);
 
             /// не логируем, так как вызывается до инициализации отладчика
             /// SR_SYSTEM_LOG("ComponentManager::RegisterComponent() : register \"" + T::COMPONENT_NAME + "\"...");
@@ -112,13 +106,10 @@ namespace SR_UTILS_NS {
         template<typename T> bool RegisterComponent(const Construction& constructor) {
             SR_SCOPED_LOCK;
 
-            auto&& hashName = T::COMPONENT_HASH_NAME;
+            m_meta[T::COMPONENT_NAME].constructor = constructor;
+            m_meta[T::COMPONENT_NAME].version = T::VERSION;
 
-            m_meta[hashName].name = T::COMPONENT_NAME;
-            m_meta[hashName].constructor = constructor;
-            m_meta[hashName].version = T::VERSION;
-
-            m_ids.insert(std::make_pair(T::COMPONENT_NAME, hashName));
+            m_names.emplace_back(T::COMPONENT_NAME);
 
             /// не логируем, так как вызывается до инициализации отладчика
             /// SR_SYSTEM_LOG("ComponentManager::RegisterComponent() : register \"" + T::COMPONENT_NAME + "\"...");
@@ -134,19 +125,15 @@ namespace SR_UTILS_NS {
         std::pair<Component*, ComponentLoadResult> Load(SR_HTYPES_NS::Marshal& marshal);
 
         SR_HTYPES_NS::DataStorage* GetContext() { return &m_context; }
-        SR_NODISCARD std::string GetLastComponentName() const;
-
-    private:
-        Component* CreateComponentImpl(size_t id);
 
     private:
         ContextInitializerFn m_contextInitializer;
 
-        std::unordered_map<size_t, MetaComponent> m_meta;
-        std::unordered_map<std::string, Hash> m_ids;
+        std::unordered_map<StringAtom, MetaComponent> m_meta;
+        std::vector<StringAtom> m_names;
 
         SR_HTYPES_NS::DataStorage m_context;
-        uint64_t m_lastComponent = 0;
+        SR_UTILS_NS::StringAtom m_lastComponent;
 
     };
 }
@@ -170,4 +157,4 @@ namespace SR_UTILS_NS {
         return AllocateNew();                                                                                                                             \
     });                                                                                                                                                   \
 
-#endif //SRENGINE_COMPONENTMANAGER_H
+#endif //SR_ENGINE_COMPONENTMANAGER_H

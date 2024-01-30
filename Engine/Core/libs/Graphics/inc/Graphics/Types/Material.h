@@ -32,11 +32,8 @@ namespace SR_GTYPES_NS {
     class Material : public SR_UTILS_NS::IResource {
         friend class Mesh;
         friend class Mesh3D;
-
         using Super = SR_UTILS_NS::IResource;
-        using PipelinePtr = Environment*;
         using RenderContextPtr = SR_HTYPES_NS::SafePtr<RenderContext>;
-
     private:
         Material();
         ~Material() override;

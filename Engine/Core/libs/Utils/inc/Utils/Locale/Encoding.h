@@ -2,8 +2,8 @@
 // Created by Monika on 23.10.2022.
 //
 
-#ifndef SRENGINE_ENCODING_H
-#define SRENGINE_ENCODING_H
+#ifndef SR_ENGINE_ENCODING_H
+#define SR_ENGINE_ENCODING_H
 
 #include <Utils/Locale/Convert.h>
 #include <Utils/Locale/UTF.h>
@@ -94,4 +94,4 @@ namespace SR_UTILS_NS::Locale {
     //}
 }
 
-#endif //SRENGINE_ENCODING_H
+#endif //SR_ENGINE_ENCODING_H

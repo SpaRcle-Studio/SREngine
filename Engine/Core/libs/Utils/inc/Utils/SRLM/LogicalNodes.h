@@ -2,8 +2,8 @@
 // Created by Monika on 05.09.2023.
 //
 
-#ifndef SRENGINE_LOGICALNODES_H
-#define SRENGINE_LOGICALNODES_H
+#ifndef SR_ENGINE_LOGICALNODES_H
+#define SR_ENGINE_LOGICALNODES_H
 
 #include <Utils/SRLM/LogicalNode.h>
 #include <Utils/SRLM/LogicalNodeManager.h>
@@ -133,4 +133,4 @@ namespace SR_SRLM_NS {
     };
 }
 
-#endif //SRENGINE_LOGICALNODES_H
+#endif //SR_ENGINE_LOGICALNODES_H

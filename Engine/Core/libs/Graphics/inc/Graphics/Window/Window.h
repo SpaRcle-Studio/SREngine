@@ -2,8 +2,8 @@
 // Created by Nikita on 18.11.2020.
 //
 
-#ifndef SRENGINE_WINDOW_H
-#define SRENGINE_WINDOW_H
+#ifndef SR_ENGINE_WINDOW_H
+#define SR_ENGINE_WINDOW_H
 
 #include <Utils/Math/Vector3.h>
 #include <Utils/Types/Thread.h>
@@ -92,4 +92,4 @@ namespace SR_GRAPH_NS {
     };
 }
 
-#endif //SRENGINE_WINDOW_H
+#endif //SR_ENGINE_WINDOW_H

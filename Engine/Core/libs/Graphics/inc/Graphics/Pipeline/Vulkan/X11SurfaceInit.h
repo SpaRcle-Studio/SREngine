@@ -2,8 +2,8 @@
 // Created by innerviewer on 07/11/23.
 //
 
-#ifndef SRENGINE_X11SURFACEINIT_H
-#define SRENGINE_X11SURFACEINIT_H
+#ifndef SR_ENGINE_X11SURFACEINIT_H
+#define SR_ENGINE_X11SURFACEINIT_H
 
 #include <EvoVulkan/macros.h>
 
@@ -17,4 +17,4 @@ namespace SR_GRAPH_NS {
     };
 }
 
-#endif //SRENGINE_X11SURFACEINIT_H
+#endif //SR_ENGINE_X11SURFACEINIT_H

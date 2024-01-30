@@ -8,11 +8,19 @@
             <Layer Format="RGBA8_UNORM" R="0.0" G="0.0" B="0.0" A="1.0"/>
         </FramebufferSettings>
         <Passes>
-            <OpaquePass/>
+            <MeshDrawerPass>
+                <AllowedLayers>
+                    <Default/>
+                    <Opaque/>
+                </AllowedLayers>
+            </MeshDrawerPass>
             <SkyboxPass Path="Engine/Skyboxes/Sun.png" Shader="Engine/Shaders/skybox.srsl"/>
-            <TransparentPass/>
-            <FlatClusterPass/>
-            <DebugPass/>
+            <MeshDrawerPass>
+                <DisallowedLayers>
+                    <Default/>
+                    <Opaque/>
+                </DisallowedLayers>
+            </MeshDrawerPass>
         </Passes>
     </FramebufferPass>
     <Queues>

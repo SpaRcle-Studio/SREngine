@@ -42,11 +42,12 @@ namespace SR_UTILS_NS {
         SR_NODISCARD bool IsRelative() const { return m_relative; }
 
         void SetRelative(bool relative);
-        EntityRef& SetPathTo(SR_HTYPES_NS::SharedPtr<Entity> pEntity);
+        EntityRef& SetPathTo(const SR_HTYPES_NS::SharedPtr<Entity>& pEntity);
         void SetOwner(const EntityRefUtils::OwnerRef& owner);
 
-    private:
         void UpdateTarget() const;
+
+    private:
         void UpdatePath() const;
 
     private:
@@ -60,7 +61,7 @@ namespace SR_UTILS_NS {
     };
 
     class EntityRefProperty : public SR_UTILS_NS::Property {
-        SR_REGISTER_TYPE_TRAITS_PROPERTY(EntityRefProperty, 1000)
+        SR_REGISTER_TYPE_TRAITS_PROPERTY(EntityRefProperty, 1001)
     public:
         void SaveProperty(MarshalRef marshal) const noexcept override;
         void LoadProperty(MarshalRef marshal) noexcept override;

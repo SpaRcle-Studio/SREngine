@@ -2,7 +2,7 @@
 // Created by Monika on 23.08.2022.
 //
 
-#ifndef SRENGINE_BASESCENE_H
-#define SRENGINE_BASESCENE_H
+#ifndef SR_ENGINE_BASESCENE_H
+#define SR_ENGINE_BASESCENE_H
 
-#endif //SRENGINE_BASESCENE_H
+#endif //SR_ENGINE_BASESCENE_H

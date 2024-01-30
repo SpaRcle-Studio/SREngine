@@ -2,8 +2,8 @@
 // Created by Monika on 19.09.2022.
 //
 
-#ifndef SRENGINE_DEBUGPASS_H
-#define SRENGINE_DEBUGPASS_H
+#ifndef SR_ENGINE_DEBUGPASS_H
+#define SR_ENGINE_DEBUGPASS_H
 
 #include <Graphics/Pass/IMesh3DClusterPass.h>
 
@@ -20,4 +20,4 @@ namespace SR_GRAPH_NS {
     };
 }
 
-#endif //SRENGINE_DEBUGPASS_H
+#endif //SR_ENGINE_DEBUGPASS_H

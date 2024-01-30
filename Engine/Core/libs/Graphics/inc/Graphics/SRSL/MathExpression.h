@@ -2,8 +2,8 @@
 // Created by Monika on 23.01.2023.
 //
 
-#ifndef SRENGINE_SRSL_MATHEXPRESSION_H
-#define SRENGINE_SRSL_MATHEXPRESSION_H
+#ifndef SR_ENGINE_SRSL_MATHEXPRESSION_H
+#define SR_ENGINE_SRSL_MATHEXPRESSION_H
 
 #include <Utils/Common/Singleton.h>
 #include <Graphics/SRSL/LexicalTree.h>
@@ -41,4 +41,4 @@ namespace SR_SRSL_NS {
     };
 }
 
-#endif //SRENGINE_SRSL_MATHEXPRESSION_H
+#endif //SR_ENGINE_SRSL_MATHEXPRESSION_H

@@ -2,8 +2,8 @@
 // Created by Monika on 07.12.2022.
 //
 
-#ifndef SRENGINE_PIPELINESTATE_H
-#define SRENGINE_PIPELINESTATE_H
+#ifndef SR_ENGINE_PIPELINE_STATE_H
+#define SR_ENGINE_PIPELINE_STATE_H
 
 #include <Graphics/Pipeline/PipelineType.h>
 #include <Graphics/Pipeline/TextureHelper.h>
@@ -98,6 +98,8 @@ namespace SR_GRAPH_NS {
 
         /// Объем данных, который был передан на видеокарту в процессе отрисовки
         mutable uint32_t transferredMemory = 0;
+        /// Количество обращений по передаче данных
+        mutable uint32_t transferredCount = 0;
         /// Объем выделенной памяти
         mutable uint32_t allocatedMemory = 0;
 
@@ -112,4 +114,4 @@ namespace SR_GRAPH_NS {
     };
 }
 
-#endif //SRENGINE_PIPELINESTATE_H
+#endif //SR_ENGINE_PIPELINE_STATE_H

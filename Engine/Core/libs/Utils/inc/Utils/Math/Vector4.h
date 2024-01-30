@@ -2,8 +2,8 @@
 // Created by Monika on 26.01.2022.
 //
 
-#ifndef SRENGINE_VECTOR4_H
-#define SRENGINE_VECTOR4_H
+#ifndef SR_ENGINE_VECTOR4_H
+#define SR_ENGINE_VECTOR4_H
 
 #include <Utils/Math/Mathematics.h>
 #include <Utils/Math/Vector3.h>
@@ -192,4 +192,4 @@ namespace SR_MATH_NS {
     }
 }
 
-#endif //SRENGINE_VECTOR4_H
+#endif //SR_ENGINE_VECTOR4_H

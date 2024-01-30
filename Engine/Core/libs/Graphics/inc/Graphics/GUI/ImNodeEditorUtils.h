@@ -2,8 +2,8 @@
 // Created by Monika on 14.01.2023.
 //
 
-#ifndef SRENGINE_IMNODEEDITORUTILS_H
-#define SRENGINE_IMNODEEDITORUTILS_H
+#ifndef SR_ENGINE_IMNODEEDITORUTILS_H
+#define SR_ENGINE_IMNODEEDITORUTILS_H
 
 #include <imgui-node-editor/imgui_node_editor.h>
 
@@ -27,4 +27,4 @@ namespace SR_GRAPH_GUI_NS {
     typedef std::map<ax::NodeEditor::NodeId, float, ImNodeIdLess> NodesTouchTimes;
 }
 
-#endif //SRENGINE_IMNODEEDITORUTILS_H
+#endif //SR_ENGINE_IMNODEEDITORUTILS_H

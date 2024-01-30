@@ -2,8 +2,8 @@
 // Created by Monika on 22.11.2022.
 //
 
-#ifndef SRENGINE_MEASUREMENT_H
-#define SRENGINE_MEASUREMENT_H
+#ifndef SR_ENGINE_MEASUREMENT_H
+#define SR_ENGINE_MEASUREMENT_H
 
 #include <Utils/Common/Enumerations.h>
 
@@ -19,4 +19,4 @@ namespace SR_UTILS_NS {
     );
 }
 
-#endif //SRENGINE_MEASUREMENT_H
+#endif //SR_ENGINE_MEASUREMENT_H

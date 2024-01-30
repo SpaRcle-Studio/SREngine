@@ -2,8 +2,8 @@
 // Created by Monika on 09.07.2022.
 //
 
-#ifndef SRENGINE_AUDIOLIBRARY_H
-#define SRENGINE_AUDIOLIBRARY_H
+#ifndef SR_ENGINE_AUDIOLIBRARY_H
+#define SR_ENGINE_AUDIOLIBRARY_H
 
 #include <Utils/Common/Enumerations.h>
 
@@ -13,4 +13,4 @@ namespace SR_AUDIO_NS {
    );
 }
 
-#endif //SRENGINE_AUDIOLIBRARY_H
+#endif //SR_ENGINE_AUDIOLIBRARY_H

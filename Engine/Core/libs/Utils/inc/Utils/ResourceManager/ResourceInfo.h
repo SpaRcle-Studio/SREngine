@@ -2,8 +2,8 @@
 // Created by Monika on 02.05.2022.
 //
 
-#ifndef SRENGINE_RESOURCEINFO_H
-#define SRENGINE_RESOURCEINFO_H
+#ifndef SR_ENGINE_RESOURCEINFO_H
+#define SR_ENGINE_RESOURCEINFO_H
 
 #include <Utils/Debug.h>
 #include <Utils/ResourceManager/IResource.h>
@@ -84,4 +84,4 @@ namespace SR_UTILS_NS {
     typedef ska::flat_hash_map<uint64_t, ResourceType*> ResourcesTypes;
 }
 
-#endif //SRENGINE_RESOURCEINFO_H
+#endif //SR_ENGINE_RESOURCEINFO_H

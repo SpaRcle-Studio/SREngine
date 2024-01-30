@@ -2,8 +2,8 @@
 // Created by Monika on 22.01.2023.
 //
 
-#ifndef SRENGINE_SRSL_PREPROCESSOR_H
-#define SRENGINE_SRSL_PREPROCESSOR_H
+#ifndef SR_ENGINE_SRSL_PREPROCESSOR_H
+#define SR_ENGINE_SRSL_PREPROCESSOR_H
 
 #include <Utils/Common/Singleton.h>
 #include <Graphics/SRSL/LexicalTree.h>
@@ -46,4 +46,4 @@ namespace SR_SRSL_NS {
     };
 }
 
-#endif //SRENGINE_SRSL_PREPROCESSOR_H
+#endif //SR_ENGINE_SRSL_PREPROCESSOR_H

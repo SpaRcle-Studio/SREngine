@@ -2,8 +2,8 @@
 // Created by Igor on 12/03/2023.
 //
 
-#ifndef SRENGINE_ABOUT_H
-#define SRENGINE_ABOUT_H
+#ifndef SR_ENGINE_ABOUT_H
+#define SR_ENGINE_ABOUT_H
 
 #include <Graphics/GUI/Widget.h>
 
@@ -19,4 +19,4 @@ namespace SR_CORE_GUI_NS {
     };
 }
 
-#endif //SRENGINE_ABOUT_H
+#endif //SR_ENGINE_ABOUT_H

@@ -21,9 +21,7 @@ namespace SR_GRAPH_NS {
     }
 
     bool ShaderOverridePass::Load(const SR_XML_NS::Node& passNode) {
-        LoadFramebufferSettings(passNode.TryGetNode("FramebufferSettings"));
-
-        m_isDirectional = passNode.GetAttribute("Directional").ToBool(false);
+        LoadFramebufferSettings(passNode);
 
         if (auto&& shadersNode = passNode.TryGetNode("Shaders")) {
             for (auto&& overrideNode : shadersNode.TryGetNodes("Override")) {
@@ -91,7 +89,7 @@ namespace SR_GRAPH_NS {
             return;
         }
 
-        m_pipeline->SetCurrentFrameBuffer(m_framebuffer);
+        GetPassPipeline()->SetCurrentFrameBuffer(m_framebuffer);
 
         auto&& pIdentifier = m_uboManager.GetIdentifier();
         m_uboManager.SetIdentifier(this);
@@ -100,7 +98,7 @@ namespace SR_GRAPH_NS {
 
         m_uboManager.SetIdentifier(pIdentifier);
 
-        m_pipeline->SetCurrentFrameBuffer(nullptr);
+        GetPassPipeline()->SetCurrentFrameBuffer(nullptr);
     }
 
     ShaderOverridePass::ShaderPtr ShaderOverridePass::GetShader(SR_SRSL_NS::ShaderType type) const {

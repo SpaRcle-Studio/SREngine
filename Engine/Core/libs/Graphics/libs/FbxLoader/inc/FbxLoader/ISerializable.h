@@ -2,8 +2,8 @@
 // Created by Monika on 31.01.2022.
 //
 
-#ifndef SRENGINE_ISERIALIZABLE_H
-#define SRENGINE_ISERIALIZABLE_H
+#ifndef SR_ENGINE_ISERIALIZABLE_H
+#define SR_ENGINE_ISERIALIZABLE_H
 
 #include <fstream>
 #include <iostream>
@@ -43,4 +43,4 @@ namespace FbxLoader::Tools {
     };
 }
 
-#endif //SRENGINE_ISERIALIZABLE_H
+#endif //SR_ENGINE_ISERIALIZABLE_H

@@ -89,6 +89,11 @@ namespace SR_GTYPES_NS {
         return Mesh::Calculate();
     }
 
+    void ITextComponent::OnLayerChanged() {
+        ReRegisterMesh();
+        IRenderComponent::OnLayerChanged();
+    }
+
     void ITextComponent::FreeVideoMemory() {
         if (m_id != SR_ID_INVALID) {
             SRVerifyFalse(!m_pipeline->FreeTexture(&m_id));
@@ -205,30 +210,15 @@ namespace SR_GTYPES_NS {
         Component::OnMatrixDirty();
     }
 
-    Mesh::RenderScenePtr ITextComponent::GetRenderScene() {
-        if (!m_renderScene.Valid()) {
-            auto&& pScene = TryGetScene();
-            if (!pScene) {
-                return m_renderScene;
-            }
-
-            m_renderScene = pScene->Do<RenderScenePtr>([](SR_WORLD_NS::Scene* ptr) {
-                return ptr->GetDataStorage().GetValue<RenderScenePtr>();
-            }, RenderScenePtr());
-        }
-
-        return m_renderScene;
-    }
-
     void ITextComponent::OnEnable() {
-        if (auto&& renderScene = GetRenderScene()) {
+        if (auto&& renderScene = TryGetRenderScene()) {
             renderScene->SetDirty();
         }
         Component::OnEnable();
     }
 
     void ITextComponent::OnDisable() {
-        if (auto&& renderScene = GetRenderScene()) {
+        if (auto&& renderScene = TryGetRenderScene()) {
             renderScene->SetDirty();
         }
         Component::OnDisable();
@@ -243,23 +233,8 @@ namespace SR_GTYPES_NS {
     }
 
     void ITextComponent::OnDestroy() {
-        RenderScene::Ptr renderScene = GetRenderScene();
-
         Component::OnDestroy();
-
-        /// если ресурс уничтожится сразу, то обрабатывать это нужно в контексте SharedPtr
-        if (!IsGraphicsResourceRegistered()) {
-            GetThis().DynamicCast<ITextComponent>().AutoFree([](auto&& pData) {
-                pData->MarkMeshDestroyed();
-            });
-        }
-        else {
-            MarkMeshDestroyed();
-        }
-
-        if (renderScene) {
-            renderScene->SetDirty();
-        }
+        UnRegisterMesh();
     }
 
     SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr ITextComponent::Save(SR_UTILS_NS::SavableContext data) const {
@@ -298,7 +273,7 @@ namespace SR_GTYPES_NS {
 
         m_isCalculated = false;
 
-        if (auto&& renderScene = GetRenderScene()) {
+        if (auto&& renderScene = TryGetRenderScene()) {
             renderScene->SetDirty();
         }
     }
@@ -307,7 +282,7 @@ namespace SR_GTYPES_NS {
     {
         m_fontSize = size;
         m_isCalculated = false;
-        if (auto&& renderScene = GetRenderScene()) {
+        if (auto&& renderScene = TryGetRenderScene()) {
             renderScene->SetDirty();
         }
     }
@@ -319,7 +294,7 @@ namespace SR_GTYPES_NS {
         }
         m_text = std::move(newText);
         m_isCalculated = false;
-        if (auto&& renderScene = GetRenderScene()) {
+        if (auto&& renderScene = TryGetRenderScene()) {
             renderScene->SetDirty();
         }
     }
@@ -331,7 +306,7 @@ namespace SR_GTYPES_NS {
         }
         m_text = std::move(newText);
         m_isCalculated = false;
-        if (auto&& renderScene = GetRenderScene()) {
+        if (auto&& renderScene = TryGetRenderScene()) {
             renderScene->SetDirty();
         }
     }
@@ -342,7 +317,7 @@ namespace SR_GTYPES_NS {
         }
         m_text = text;
         m_isCalculated = false;
-        if (auto&& renderScene = GetRenderScene()) {
+        if (auto&& renderScene = TryGetRenderScene()) {
             renderScene->SetDirty();
         }
     }
@@ -358,7 +333,7 @@ namespace SR_GTYPES_NS {
     void ITextComponent::SetKerning(bool enabled) {
         m_kerning = enabled;
         m_isCalculated = false;
-        if (auto&& renderScene = GetRenderScene()) {
+        if (auto&& renderScene = TryGetRenderScene()) {
             renderScene->SetDirty();
         }
     }
@@ -366,15 +341,9 @@ namespace SR_GTYPES_NS {
     void ITextComponent::SetDebug(bool enabled) {
         m_debug = enabled;
         m_isCalculated = false;
-        if (auto&& renderScene = GetRenderScene()) {
+        if (auto&& renderScene = TryGetRenderScene()) {
             renderScene->SetDirty();
         }
-    }
-
-    void ITextComponent::FreeMesh() {
-        AutoFree([](auto&& pData) {
-            delete pData;
-        });
     }
 
     void ITextComponent::SetFont(const SR_UTILS_NS::Path& path) {

@@ -2,33 +2,29 @@
 // Created by Monika on 13.08.2022.
 //
 
-#ifndef SRENGINE_EDITORCAMERA_H
-#define SRENGINE_EDITORCAMERA_H
+#ifndef SR_ENGINE_EDITOR_CAMERA_H
+#define SR_ENGINE_EDITOR_CAMERA_H
 
 #include <Graphics/Types/Camera.h>
 
-namespace SR_CORE_NS::GUI {
+namespace SR_CORE_GUI_NS {
+    class SceneViewer;
+
     class EditorCamera : public SR_GTYPES_NS::Camera {
         SR_ENTITY_SET_VERSION(1000);
     public:
-        explicit EditorCamera(uint32_t width = 0, uint32_t height = 0);
-        ~EditorCamera() override = default;
+        EditorCamera(SceneViewer* pSceneViewer, uint32_t width, uint32_t height);
 
     public:
         SR_NODISCARD bool ExecuteInEditMode() const override;
         SR_NODISCARD bool IsEditorCamera() const noexcept override { return true; }
 
+        SR_NODISCARD SR_MATH_NS::FPoint GetMousePos() const override;
+
+    private:
+        SceneViewer* m_sceneViewer = nullptr;
+
     };
 }
 
-namespace SR_CORE_NS::GUI {
-    EditorCamera::EditorCamera(uint32_t width, uint32_t height)
-        : Camera(width, height)
-    { }
-
-    bool EditorCamera::ExecuteInEditMode() const {
-        return true;
-    }
-}
-
-#endif //SRENGINE_EDITORCAMERA_H
+#endif //SR_ENGINE_EDITORCAMERA_H

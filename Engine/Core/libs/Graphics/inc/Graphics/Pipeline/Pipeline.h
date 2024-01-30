@@ -149,9 +149,12 @@ namespace SR_GRAPH_NS {
 
         virtual void SetVSyncEnabled(bool enabled) { }
 
+        SR_NODISCARD const PipelineState& GetPreviousState() const { return m_previousState; }
         SR_NODISCARD uint8_t GetSamplesCount() const;
         SR_NODISCARD bool IsMultiSamplingSupported() const noexcept { return m_isMultiSampleSupported; }
         SR_NODISCARD virtual bool IsVSyncEnabled() const { return false; }
+        /// Изменился ли текущий шейдер после UseShader. Даже если был вызван UnUseShader. Низкоуровневая проверка.
+        SR_NODISCARD bool IsShaderChanged() const noexcept { return m_isShaderChanged; }
 
         /// ------------------------------------------ Работа с памятью ------------------------------------------------
 
@@ -172,6 +175,8 @@ namespace SR_GRAPH_NS {
         virtual bool FreeCubeMap(int32_t* id) { return false; }
         virtual bool FreeShader(int32_t* id) { return false; }
         virtual bool FreeTexture(int32_t* id) { return false; }
+
+        virtual bool IsSamplerValid(int32_t id) const { return false; }
 
         /// ------------------------------------------ Вызовы отрисовки ------------------------------------------------
 
@@ -214,6 +219,7 @@ namespace SR_GRAPH_NS {
         virtual void BindDescriptorSet(uint32_t descriptorSet);
 
         virtual void ResetDescriptorSet();
+        virtual void ResetLastShader();
 
     protected:
         std::map<OverlayType, SR_HTYPES_NS::SharedPtr<Overlay>> m_overlays;
@@ -244,6 +250,8 @@ namespace SR_GRAPH_NS {
         uint8_t m_requiredSampleCount = 0;
         uint8_t m_supportedSampleCount = 0;
         bool m_isMultiSampleSupported = false;
+
+        bool m_isShaderChanged = true;
 
     };
 }

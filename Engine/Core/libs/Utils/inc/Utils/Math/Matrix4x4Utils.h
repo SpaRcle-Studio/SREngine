@@ -2,8 +2,8 @@
 // Created by Monika on 17.01.2023.
 //
 
-#ifndef SRENGINE_MATRIX4X4UTILS_H
-#define SRENGINE_MATRIX4X4UTILS_H
+#ifndef SR_ENGINE_MATRIX4X4UTILS_H
+#define SR_ENGINE_MATRIX4X4UTILS_H
 
 #include <Utils/Math/Mathematics.h>
 #include <Utils/Math/Vector3.h>
@@ -160,4 +160,4 @@ namespace SR_MATH_NS {
     }
 }
 
-#endif //SRENGINE_MATRIX4X4UTILS_H
+#endif //SR_ENGINE_MATRIX4X4UTILS_H

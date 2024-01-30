@@ -15,7 +15,7 @@ namespace SR_CORE_GUI_NS {
             preview = "[GMJ] " + pGameObject->GetName();
         }
         else if (auto&& pComponent = entityRef.GetComponent()) {
-            preview = "[CMP] " + pComponent->GetComponentName();
+            preview = "[CMP] " + pComponent->GetComponentName().ToStringRef();
         }
         else {
             preview = "[None]";
@@ -70,6 +70,12 @@ namespace SR_CORE_GUI_NS {
                 if (auto&& pGameObject = entityRef.GetGameObject(); pGameObject && pHierarchy) {
                     pHierarchy->SelectGameObject(pGameObject);
                 }
+            }
+
+            ImGui::SameLine();
+
+            if (ImGui::Button("Update")) {
+                entityRef.UpdateTarget();
             }
 
             ImGui::SameLine();

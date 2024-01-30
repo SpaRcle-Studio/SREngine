@@ -8,9 +8,7 @@
 namespace SR_GTYPES_NS {
     DebugWireframeMesh::DebugWireframeMesh()
         : Super(MeshType::Wireframe)
-    {
-        SetIsDebugMesh(true);
-    }
+    { }
 
     void DebugWireframeMesh::Draw() {
         if ((!IsCalculated() && !Calculate()) || m_hasErrors) {
@@ -87,12 +85,13 @@ namespace SR_GTYPES_NS {
         m_modelMatrix = matrix4X4;
     }
 
-    void DebugWireframeMesh::OnResourceReloaded(SR_UTILS_NS::IResource* pResource) {
+    bool DebugWireframeMesh::OnResourceReloaded(SR_UTILS_NS::IResource* pResource) {
+        bool changed = Mesh::OnResourceReloaded(pResource);
         if (GetRawMesh() == pResource) {
             OnRawMeshChanged();
-            return;
+            return true;
         }
-        Mesh::OnResourceReloaded(pResource);
+        return changed;
     }
 
     void DebugWireframeMesh::UseMaterial() {
@@ -116,5 +115,10 @@ namespace SR_GTYPES_NS {
         }
 
         return Super::GetMeshIdentifier();
+    }
+
+    void DebugWireframeMesh::OnRawMeshChanged() {
+        IRawMeshHolder::OnRawMeshChanged();
+        ReRegisterMesh();
     }
 }

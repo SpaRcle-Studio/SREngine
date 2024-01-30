@@ -2,8 +2,8 @@
 // Created by innerviewer on 21.01.2023.
 //
 
-#ifndef SRENGINE_COLLISIONDATA_H
-#define SRENGINE_COLLISIONDATA_H
+#ifndef SR_ENGINE_COLLISIONDATA_H
+#define SR_ENGINE_COLLISIONDATA_H
 
 #include <Utils/Math/Vector3.h>
 
@@ -15,4 +15,4 @@ namespace SR_UTILS_NS {
     };
 }
 
-#endif //SRENGINE_COLLISIONDATA_H
+#endif //SR_ENGINE_COLLISIONDATA_H

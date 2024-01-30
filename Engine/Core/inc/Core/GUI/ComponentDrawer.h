@@ -2,8 +2,8 @@
 // Created by Monika on 23.02.2022.
 //
 
-#ifndef SRENGINE_COMPONENTDRAWER_H
-#define SRENGINE_COMPONENTDRAWER_H
+#ifndef SR_ENGINE_COMPONENT_DRAWER_H
+#define SR_ENGINE_COMPONENT_DRAWER_H
 
 #include <Utils/stdInclude.h>
 
@@ -11,11 +11,11 @@ namespace SR_SCRIPTING_NS {
     class Behaviour;
 }
 
-namespace SR_AUDIO_NS{
-
+namespace SR_AUDIO_NS {
     class AudioSource;
     class AudioListener;
 }
+
 namespace SR_ANIMATIONS_NS {
     class Animator;
     class BoneComponent;
@@ -56,6 +56,10 @@ namespace SR_PTYPES_NS {
     class CollisionShape;
 }
 
+namespace SR_UTILS_NS {
+    class Component;
+}
+
 namespace SR_CORE_NS::GUI::ComponentDrawer {
     bool DrawComponentOld(SR_UTILS_NS::Component* pComponent, EditorGUI* context, int32_t index);
 
@@ -86,4 +90,4 @@ namespace SR_CORE_NS::GUI::ComponentDrawer {
     void DrawComponent(SR_AUDIO_NS::AudioListener*& pComponent,EditorGUI* context,int32_t index);
 }
 
-#endif //SRENGINE_COMPONENTDRAWER_H
+#endif //SR_ENGINE_COMPONENTDRAWER_H
