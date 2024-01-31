@@ -2,8 +2,8 @@
 // Created by Nikita on 02.03.2021.
 //
 
-#ifndef GAMEENGINE_MATRIX4X4_H
-#define GAMEENGINE_MATRIX4X4_H
+#ifndef SR_ENGINE_MATH_MATRIX4X4_H
+#define SR_ENGINE_MATH_MATRIX4X4_H
 
 #include <Utils/Math/Quaternion.h>
 #include <Utils/Math/Vector3.h>
@@ -16,18 +16,24 @@ namespace SR_MATH_NS {
         SR_INLINE_STATIC constexpr glm::mat4 GLM_IDENTITY_MAT4X4 = glm::mat4(1); /** NOLINT */
     public:
         static Matrix4x4 CreateViewMat(Unit pitch = 0, Unit yaw = 0, Unit roll = 0) {
-            auto matrix = glm::rotate(glm::mat4(1), (float)pitch, { 1, 0, 0 });
-            matrix = glm::rotate(matrix,            (float)yaw,   { 0, 1, 0 });
-            matrix = glm::rotate(matrix,            (float)roll,  { 0, 0, 1 });
+            auto matrix = glm::rotate(glm::mat4(1), (float_t)pitch, { 1, 0, 0 });
+            matrix = glm::rotate(matrix,            (float_t)yaw,   { 0, 1, 0 });
+            matrix = glm::rotate(matrix,            (float_t)roll,  { 0, 0, 1 });
             return Matrix4x4(glm::translate(matrix, { 0, 0, 0 }));
         }
 
         union {
-            SR_MATH_NS::Vector4<float> value[4];
+            SR_MATH_NS::Vector4<float_t> value[4];
             glm::mat4 self;
             struct {
-                SR_MATH_NS::Vector4<float> right, up, dir, position;
+                SR_MATH_NS::Vector4<float_t> right, up, dir, position;
             } v;
+            struct {
+                float m00, m01, m02, m03;
+                float m10, m11, m12, m13;
+                float m20, m21, m22, m23;
+                float m30, m31, m32, m33;
+            };
         };
 
         constexpr Matrix4x4() noexcept
@@ -257,6 +263,46 @@ namespace SR_MATH_NS {
             return false;
         }
 
+        SR_NODISCARD FVector4 TransformPoint(const FVector3& point) const {
+            FVector4 out;
+            out.x = point.x * m00 + point.y * m10 + point.z * m20 + m30;
+            out.y = point.x * m01 + point.y * m11 + point.z * m21 + m31;
+            out.z = point.x * m02 + point.y * m12 + point.z * m22 + m32;
+            out.w = point.x * m03 + point.y * m13 + point.z * m23 + m33;
+            return out;
+        }
+
+        SR_NODISCARD FVector4 TransformVector(const FVector3& point) const {
+            FVector4 out;
+            out.x = point.x * m00 + point.y * m10 + point.z * m20;
+            out.y = point.x * m01 + point.y * m11 + point.z * m21;
+            out.z = point.x * m02 + point.y * m12 + point.z * m22;
+            out.w = point.x * m03 + point.y * m13 + point.z * m23;
+            return out;
+        }
+
+        SR_NODISCARD SR_MATH_NS::Unit GetSegmentLengthClipSpace(
+            const SR_MATH_NS::FVector3& start,
+            const SR_MATH_NS::FVector3& end,
+            SR_MATH_NS::Unit displayRatio
+        ) const {
+            auto&& startOfSegment = TransformPoint(start);
+            if (fabsf(startOfSegment.w) > SR_FLT_EPSILON) {
+                startOfSegment *= 1.f / startOfSegment.w;
+            }
+
+            auto&& endOfSegment = TransformPoint(end);
+            if (fabsf(endOfSegment.w) > SR_FLT_EPSILON) {
+                endOfSegment *= 1.f / endOfSegment.w;
+            }
+
+            auto&& clipSpaceAxis = (endOfSegment - startOfSegment).XY();
+            clipSpaceAxis.y /= displayRatio;
+
+            const SR_MATH_NS::Unit segmentLengthInClipSpace = sqrtf(clipSpaceAxis.x * clipSpaceAxis.x + clipSpaceAxis.y * clipSpaceAxis.y);
+            return segmentLengthInClipSpace;
+        }
+
         SR_NODISCARD Quaternion GetQuat() const {
             glm::vec3 scale;
             glm::quat rotation;
@@ -389,4 +435,4 @@ namespace SR_MATH_NS {
     }
 }
 
-#endif //GAMEENGINE_MATRIX4X4_H
+#endif //SR_ENGINE_MATH_MATRIX4X4_H

@@ -9,6 +9,8 @@
 #include <Utils/Math/Vector3.h>
 
 namespace SR_MATH_NS {
+    class Matrix4x4;
+
     template<typename T> struct SR_DLL_EXPORT Vector4 {
     public:
         union {
@@ -149,6 +151,7 @@ namespace SR_MATH_NS {
         }
 
         SR_NODISCARD Vector3<T> XYZ() const noexcept { return Vector3<T>(x, y, z); }
+        SR_NODISCARD Vector2<T> XY() const noexcept { return Vector2<T>(x, y); }
 
         SR_NODISCARD glm::vec4 ToGLM() const { return { x, y, z, w }; }
 

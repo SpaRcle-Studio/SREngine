@@ -65,8 +65,13 @@ namespace SR_MATH_NS {
             );
         }
 
-        SR_NODISCARD T Distance(const Vector2 &vec) const noexcept {
-            return static_cast<T>(sqrt(pow(vec.x - x, 2) + pow(vec.y - y, 2)));
+        SR_NODISCARD T Distance(const Vector2& vec) const noexcept {
+            if constexpr (std::is_same_v<T, float_t> || std::is_same_v<T, float>) {
+                return static_cast<T>(sqrtf(powf(vec.x - x, 2) + powf(vec.y - y, 2)));
+            }
+            else {
+                return static_cast<T>(sqrt(pow(vec.x - x, 2) + pow(vec.y - y, 2)));
+            }
         }
 
         SR_NODISCARD T Length() const noexcept {

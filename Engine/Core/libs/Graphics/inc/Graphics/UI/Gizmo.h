@@ -83,7 +83,7 @@ namespace SR_GRAPH_UI_NS {
         };
         std::map<GizmoOperationFlag, MeshInfo> m_meshes;
 
-        float_t m_zoomFactor = 0.1f;
+        float_t m_zoomFactor = 0.65f;
         GizmoMode m_mode = GizmoMode::Local;
         GizmoOperationFlag m_operation = GizmoOperation::Universal;
 

@@ -164,6 +164,26 @@ namespace SR_GRAPH_UI_NS {
         return segmentLengthInClipSpace;
     }
 
+    float getScreenSpaceSize(const SR_MATH_NS::Matrix4x4& projectionMatrix, const SR_MATH_NS::Matrix4x4& viewMatrix, float objectSize, float distanceFromCamera) {
+        // Преобразование точки объекта в экранные координаты
+        SR_MATH_NS::FVector4 objectPoint(0.0f, 0.0f, -distanceFromCamera, 1.0f);
+
+        SR_MATH_NS::Matrix4x4 modelViewMatrix = viewMatrix.Inverse() * SR_MATH_NS::Matrix4x4(1.0f);  // Если у вас есть матрица модели, умножьте ее здесь
+        SR_MATH_NS::FVector4 transformedObjectPoint = modelViewMatrix * objectPoint;
+
+        // Преобразование точки в экранные координаты
+        SR_MATH_NS::FVector4 screenPoint = projectionMatrix * transformedObjectPoint;
+
+        // Получение глубины экранной точки
+        float depth = screenPoint.z / screenPoint.w;
+
+        // Размер в экранных координатах (подразумевается, что distanceFromCamera > 0)
+        float screenSize = objectSize * projectionMatrix[1][1] / depth;
+
+        return screenSize;
+    }
+
+
     void Gizmo::FixedUpdate() {
         SR_TRACY_ZONE;
 
@@ -189,22 +209,16 @@ namespace SR_GRAPH_UI_NS {
         }
 
         if (m_zoomFactor > 0.f) {
-            //auto&& mvp = GetTransform()->GetMatrix();
-            //auto&& mvp = GetCamera()->GetProjection() * GetCamera()->GetViewTranslate() * GetTransform()->GetMatrix();
+            auto&& mvp = GetCamera()->GetProjection() * GetCamera()->GetViewTranslate();
 
-            //auto&& rightViewInverse = GetCamera()->GetViewTranslate().Inverse().v.right;
-            //rightViewInverse = GetTransform()->GetMatrix() * rightViewInverse;
-            //const float_t rightLength = GetSegmentLengthClipSpace(SR_MATH_NS::FVector4(), rightViewInverse, mvp);
+            const float_t gizmoSizeClipSpace = 0.1f;
 
-            //GetTransform()->SetScale(screenFactor * m_zoomFactor);
+            SR_MATH_NS::FVector4 rightViewInverse = GetCamera()->GetViewTranslate().Inverse().v.right;
+            rightViewInverse = SR_MATH_NS::Matrix4x4::Identity().TransformVector(rightViewInverse.XYZ());
+            float rightLength = mvp.GetSegmentLengthClipSpace(SR_MATH_NS::FVector3(), rightViewInverse.XYZ(), GetCamera()->GetAspect());
 
-            //const float_t distance = mvp.GetTranslate().Distance(pCamera->GetPosition());
-
-            //const float_t rightLength = GetSegmentLengthClipSpace(SR_MATH_NS::FVector4(), rightViewInverse, mvp);
-            //const float_t screenFactor = 0.1f / rightLength;
-
-            //const float_t distance = GetTransform()->GetTranslation().Distance(pCamera->GetPosition());
-            //GetTransform()->SetScale(screenFactor * m_zoomFactor);
+            const float_t screenFactor = gizmoSizeClipSpace / rightLength;
+            GetTransform()->SetScale(screenFactor * m_zoomFactor);
         }
 
         if (!SR_UTILS_NS::Input::Instance().GetMouse(SR_UTILS_NS::MouseCode::MouseLeft)) {
