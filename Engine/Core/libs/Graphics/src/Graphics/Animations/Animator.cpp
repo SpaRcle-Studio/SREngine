@@ -25,7 +25,7 @@ namespace SR_ANIMATIONS_NS {
         return pController;
     }
 
-    SR_HTYPES_NS::Marshal::Ptr Animator::Save(SR_UTILS_NS::SavableSaveData data) const {
+    SR_HTYPES_NS::Marshal::Ptr Animator::Save(SR_UTILS_NS::SavableContext data) const {
         return Super::Save(data);
     }
 

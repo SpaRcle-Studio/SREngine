@@ -30,11 +30,11 @@ namespace SR_WORLD_NS {
         pMarshal->Write<uint64_t>(m_tag.GetHash());
         pMarshal->Write<uint64_t>(m_layer.GetHash());
 
-        auto&& pTransformMarshal = Transform3D().Save(SR_UTILS_NS::SavableSaveData(nullptr, SAVABLE_FLAG_ECS_NO_ID));
+        auto&& pTransformMarshal = Transform3D().Save(SR_UTILS_NS::SavableContext(nullptr, SAVABLE_FLAG_ECS_NO_ID));
         pMarshal->Write<uint64_t>(pTransformMarshal->Size());
         pMarshal->Append(pTransformMarshal);
 
-        pMarshal = m_scene->SaveComponents(SR_UTILS_NS::SavableSaveData(pMarshal, SAVABLE_FLAG_ECS_NO_ID));
+        pMarshal = m_scene->SaveComponents(SR_UTILS_NS::SavableContext(pMarshal, SAVABLE_FLAG_ECS_NO_ID));
 
         auto&& root = m_scene->GetRootGameObjects();
 
@@ -53,7 +53,7 @@ namespace SR_WORLD_NS {
                 continue;
             }
 
-            pMarshal = gameObject->Save(SR_UTILS_NS::SavableSaveData(pMarshal, SAVABLE_FLAG_ECS_NO_ID));
+            pMarshal = gameObject->Save(SR_UTILS_NS::SavableContext(pMarshal, SAVABLE_FLAG_ECS_NO_ID));
         }
 
         const bool result = pMarshal->Save(path);

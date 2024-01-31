@@ -22,7 +22,7 @@ namespace SR_ANIMATIONS_NS {
         return new BoneComponent();
     }
 
-    SR_HTYPES_NS::Marshal::Ptr BoneComponent::Save(SR_UTILS_NS::SavableSaveData data) const {
+    SR_HTYPES_NS::Marshal::Ptr BoneComponent::Save(SR_UTILS_NS::SavableContext data) const {
         return Super::Save(data);
     }
 

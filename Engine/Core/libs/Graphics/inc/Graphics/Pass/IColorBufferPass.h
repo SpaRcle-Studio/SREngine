@@ -19,6 +19,7 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD virtual SR_GTYPES_NS::Framebuffer* GetColorFrameBuffer() const noexcept = 0;
 
         SR_NODISCARD SR_GTYPES_NS::Mesh* GetMesh(float_t x, float_t y) const;
+        SR_NODISCARD SR_GTYPES_NS::Mesh* GetMesh(SR_MATH_NS::FVector2 pos) const;
         SR_NODISCARD SR_MATH_NS::FColor GetColor(float_t x, float_t y) const;
         SR_NODISCARD uint32_t GetIndex(float_t x, float_t y) const;
         SR_NODISCARD uint32_t GetColorIndex() const noexcept { return m_colorId; }

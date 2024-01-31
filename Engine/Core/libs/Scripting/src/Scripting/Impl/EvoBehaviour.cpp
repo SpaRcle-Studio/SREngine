@@ -232,7 +232,7 @@ namespace SR_SCRIPTING_NS {
     }
 
     void EvoBehaviour::SetGameObject() {
-        if (!m_component || !m_script || !m_component->GetParent()) {
+        if (!m_component || !m_script || !m_component->HasParent()) {
             return;
         }
 

@@ -277,7 +277,7 @@ namespace SR_CORE_GUI_NS {
 
         if (!m_isUsed && changed) {
             SR_SAFE_DELETE_PTR(m_oldTransformMarshal)
-            m_oldTransformMarshal = oldTransform->Save(SR_UTILS_NS::SavableSaveData(nullptr, SR_UTILS_NS::SavableFlagBits::SAVABLE_FLAG_NONE));
+            m_oldTransformMarshal = oldTransform->Save(SR_UTILS_NS::SavableContext(nullptr, SR_UTILS_NS::SavableFlagBits::SAVABLE_FLAG_NONE));
             m_isUsed = true;
         }
         if (m_isUsed && SR_UTILS_NS::Input::Instance().GetMouseUp(SR_UTILS_NS::MouseCode::MouseLeft)) {
@@ -399,8 +399,8 @@ namespace SR_CORE_GUI_NS {
                 }
                 ImGui::EndPopup();
             }
+            ImGui::EndChild();
         }
-        ImGui::EndChild();
     }
 
     void Inspector::InspectTag(SR_UTILS_NS::StringAtom tag, SR_HTYPES_NS::Function<void(SR_UTILS_NS::StringAtom)> callback) {

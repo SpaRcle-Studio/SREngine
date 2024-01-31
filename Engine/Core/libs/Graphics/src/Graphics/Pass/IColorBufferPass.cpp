@@ -79,4 +79,8 @@ namespace SR_GRAPH_NS {
     SR_MATH_NS::FVector3 IColorBufferPass::GetMeshColor() const noexcept {
         return SR_MATH_NS::HEXToBGR(GetColorIndex()).Cast<SR_MATH_NS::Unit>() / 255.f;
     }
+
+    SR_GTYPES_NS::Mesh* IColorBufferPass::GetMesh(SR_MATH_NS::FVector2 pos) const {
+        return GetMesh(pos.x, pos.y);
+    }
 }

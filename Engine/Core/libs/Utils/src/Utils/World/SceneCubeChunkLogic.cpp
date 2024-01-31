@@ -399,7 +399,7 @@ namespace SR_WORLD_NS {
             SaveRegion(path.Concat("regions"), pRegion, pContext);
         }
 
-        auto&& pSceneRootMarshal = m_scene->SaveComponents(SR_UTILS_NS::SavableSaveData(nullptr, SAVABLE_FLAG_NONE));
+        auto&& pSceneRootMarshal = m_scene->SaveComponents(SR_UTILS_NS::SavableContext(nullptr, SAVABLE_FLAG_NONE));
         if (!pSceneRootMarshal->Save(path.Concat("data/components.bin"))) {
             SR_ERROR("SceneCubeChunkLogic::Save() : failed to save scene components!");
         }

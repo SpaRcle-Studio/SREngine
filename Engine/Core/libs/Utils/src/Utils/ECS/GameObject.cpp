@@ -323,12 +323,12 @@ namespace SR_UTILS_NS {
          return true;
      }
 
-    SR_HTYPES_NS::Marshal::Ptr GameObject::Save(SavableSaveData data) const {
+    SR_HTYPES_NS::Marshal::Ptr GameObject::Save(SavableContext data) const {
         if (!(data.pMarshal = Entity::Save(data))) {
             return data.pMarshal;
         }
 
-        SavableSaveData transformSaveData;
+        SavableContext transformSaveData;
         transformSaveData.flags = data.flags;
         transformSaveData.pMarshal = nullptr;
 

@@ -12,7 +12,7 @@ namespace SR_PTYPES_NS {
         return nullptr;
     }
 
-    SR_HTYPES_NS::Marshal::Ptr Vehicle::Save(SR_UTILS_NS::SavableSaveData data) const {
+    SR_HTYPES_NS::Marshal::Ptr Vehicle::Save(SR_UTILS_NS::SavableContext data) const {
         return Super::Save(data);
     }
 

@@ -91,7 +91,7 @@ namespace SR_UTILS_NS {
         Super::Update(dt);
     }
 
-    SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr LookAtComponent::Save(SR_UTILS_NS::SavableSaveData data) const {
+    SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr LookAtComponent::Save(SR_UTILS_NS::SavableContext data) const {
         auto&& pMarshal = Super::Save(data);
 
         //pMarshal = m_target.Save(pMarshal);

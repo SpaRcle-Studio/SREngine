@@ -79,7 +79,7 @@ namespace SR_SCRIPTING_NS {
         return pBehaviour;
     }
 
-    SR_HTYPES_NS::Marshal::Ptr Behaviour::Save(SR_UTILS_NS::SavableSaveData data) const {
+    SR_HTYPES_NS::Marshal::Ptr Behaviour::Save(SR_UTILS_NS::SavableContext data) const {
         auto&& pMarshal = Component::Save(data);
 
         auto&& properties = m_rawBehaviour ? m_rawBehaviour->GetProperties() : Properties();
@@ -229,8 +229,8 @@ namespace SR_SCRIPTING_NS {
         m_isStarted = false;
         m_isAwake = false;
 
-        if (auto&& pParent = GetParent()) {
-            pParent->SetDirty(true);
+        if (HasParent()) {
+            GetParent()->SetDirty(true);
         }
     }
 }

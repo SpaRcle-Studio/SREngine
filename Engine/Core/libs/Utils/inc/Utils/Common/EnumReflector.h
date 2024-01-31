@@ -44,6 +44,7 @@ namespace SR_UTILS_NS {
         template<typename EnumType> SR_NODISCARD static EnumReflector* GetReflector();
         template<typename EnumType> SR_NODISCARD static uint64_t Count();
         template<typename EnumType> SR_NODISCARD static SR_UTILS_NS::StringAtom ToStringAtom(EnumType value);
+        template<typename EnumType> SR_NODISCARD static SR_UTILS_NS::StringAtom ToStringAtom(int64_t value);
         template<typename EnumType> SR_NODISCARD static EnumType FromString(const SR_UTILS_NS::StringAtom& value);
 
         template<typename EnumType> SR_NODISCARD static const std::vector<SR_UTILS_NS::StringAtom>& GetNames();
@@ -165,6 +166,16 @@ namespace SR_UTILS_NS {
         }
 
         ErrorInternal("EnumReflector::ToStringAtom() : unknown type! Value: " + std::to_string(static_cast<int64_t>(value)));
+
+        return SR_UTILS_NS::StringAtom(); /// NOLINT
+    }
+
+    template<typename EnumType> SR_UTILS_NS::StringAtom EnumReflector::ToStringAtom(int64_t value) {
+        if (auto&& result = GetReflector<EnumType>()->ToStringInternal(value); result.has_value()) {
+            return result.value();
+        }
+
+        ErrorInternal("EnumReflector::ToStringAtom() : unknown type! Value: " + std::to_string(value));
 
         return SR_UTILS_NS::StringAtom(); /// NOLINT
     }

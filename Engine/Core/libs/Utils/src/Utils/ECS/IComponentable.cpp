@@ -18,7 +18,7 @@ namespace SR_UTILS_NS {
         return m_dirty;
     }
 
-    SR_HTYPES_NS::Marshal::Ptr IComponentable::SaveComponents(SavableSaveData data) const {
+    SR_HTYPES_NS::Marshal::Ptr IComponentable::SaveComponents(SavableContext data) const {
         if (!data.pMarshal) {
             data.pMarshal = new SR_HTYPES_NS::Marshal();
         }
@@ -26,7 +26,7 @@ namespace SR_UTILS_NS {
         std::vector<SR_HTYPES_NS::Marshal::Ptr> components;
         components.reserve(m_components.size() + m_loadedComponents.size());
 
-        const auto componentSaveData = SR_UTILS_NS::SavableSaveData(nullptr, data.flags);
+        const auto componentSaveData = SR_UTILS_NS::SavableContext(nullptr, data.flags);
 
         for (auto&& pComponent : m_components) {
             if (auto&& pMarshalComponent = pComponent->Save(componentSaveData)) {
@@ -114,8 +114,9 @@ namespace SR_UTILS_NS {
 
         m_loadedComponents.emplace_back(pComponent);
 
-        /// Пока только загрузили, нет ни сцены ничего
-        /// pComponent->SetParent(this);
+        /// Definitely should be here. In other cases Parent is nullptr.
+        /// Scene may not exist.
+        pComponent->SetParent(this);
 
         pComponent->OnLoaded();
 
@@ -168,6 +169,7 @@ namespace SR_UTILS_NS {
                 auto&& pLoadedCmp = m_loadedComponents.front();
                 m_components.emplace_back(pLoadedCmp);
 
+                /// Scene should already exist.
                 pLoadedCmp->SetParent(this);
 
                 pLoadedCmp->OnAttached();

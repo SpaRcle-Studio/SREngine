@@ -34,7 +34,7 @@ namespace SR_AUDIO_NS{
         return pComponent;
     }
 
-    SR_HTYPES_NS::Marshal::Ptr AudioListener::Save(SR_UTILS_NS::SavableSaveData data) const {
+    SR_HTYPES_NS::Marshal::Ptr AudioListener::Save(SR_UTILS_NS::SavableContext data) const {
         data.pMarshal = Super::Save(data);
         return data.pMarshal;
     }

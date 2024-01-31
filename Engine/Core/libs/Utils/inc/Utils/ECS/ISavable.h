@@ -16,10 +16,10 @@ namespace SR_UTILS_NS {
         SAVABLE_FLAG_ECS_NO_ID = 1 << 1,
     };
 
-    struct SavableSaveData {
-        SavableSaveData() = default;
+    struct SavableContext {
+        SavableContext() = default;
 
-        SavableSaveData(SR_HTYPES_NS::Marshal::Ptr pMarshal, SavableFlags flags)
+        SavableContext(SR_HTYPES_NS::Marshal::Ptr pMarshal, SavableFlags flags)
             : pMarshal(pMarshal)
             , flags(flags)
         { }
@@ -42,7 +42,7 @@ namespace SR_UTILS_NS {
 
         SR_NODISCARD bool IsDontSave() const noexcept { return m_dontSave; }
 
-        SR_NODISCARD virtual SR_HTYPES_NS::Marshal::Ptr Save(SavableSaveData data) const {
+        SR_NODISCARD virtual SR_HTYPES_NS::Marshal::Ptr Save(SavableContext data) const {
             if (IsDontSave()) {
                 return nullptr;
             }
