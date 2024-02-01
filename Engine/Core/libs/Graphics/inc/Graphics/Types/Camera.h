@@ -73,7 +73,9 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD const SR_UTILS_NS::Path& GetRenderTechniquePath();
 
         SR_NODISCARD virtual SR_MATH_NS::FPoint GetMousePos() const;
-        SR_NODISCARD virtual SR_MATH_NS::FPoint GetActiveViewportSize() const;
+
+        SR_NODISCARD float_t CalculateScreenFactor(const SR_MATH_NS::Matrix4x4& modelMatrix, float_t sizeClipSpace) const;
+        SR_NODISCARD float_t CalculateScreenFactor(const SR_MATH_NS::Matrix4x4& modelMatrix, const SR_MATH_NS::Matrix4x4& viewMatrix, float_t sizeClipSpace) const;
 
         SR_NODISCARD SR_MATH_NS::Ray GetScreenRay(const SR_MATH_NS::FPoint& screenPos) const;
         SR_NODISCARD SR_MATH_NS::Ray GetScreenRay(float_t x, float_t y) const;

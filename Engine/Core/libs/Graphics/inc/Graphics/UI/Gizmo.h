@@ -73,8 +73,6 @@ namespace SR_GRAPH_UI_NS {
         void ReleaseGizmo();
         void LoadMesh(GizmoOperationFlag operation, SR_UTILS_NS::StringAtom path, SR_UTILS_NS::StringAtom name, GizmoMeshLoadMode mode);
 
-        SR_NODISCARD float_t GetSegmentLengthClipSpace(const SR_MATH_NS::FVector4& start, const SR_MATH_NS::FVector4& end, const SR_MATH_NS::Matrix4x4& mvp);
-
     private:
         struct MeshInfo {
             SR_GTYPES_NS::MeshComponent::Ptr pVisual;
@@ -83,13 +81,18 @@ namespace SR_GRAPH_UI_NS {
         };
         std::map<GizmoOperationFlag, MeshInfo> m_meshes;
 
-        float_t m_zoomFactor = 0.65f;
+        float_t m_zoomFactor = 0.0665f;
+        float_t m_moveFactor = 0.1f;
+
         GizmoMode m_mode = GizmoMode::Local;
         GizmoOperationFlag m_operation = GizmoOperation::Universal;
 
         GizmoOperationFlag m_activeOperation = GizmoOperation::None;
 
+        SR_MATH_NS::FVector3 m_relativeOrigin;
+        SR_MATH_NS::FVector4 m_translationPlan;
         SR_MATH_NS::FPoint m_lastMousePos;
+        SR_MATH_NS::Matrix4x4 m_modelMatrix;
 
     };
 }

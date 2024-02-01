@@ -114,6 +114,10 @@ namespace SR_MATH_NS {
             return *this;
         }
 
+        template<typename U> SR_FORCE_INLINE Vector4 operator-(const Vector4<U> &p_v) const {
+            return Vector4(x - p_v.x, y - p_v.y, z - p_v.z, w - p_v.w);
+        }
+
         template<typename U> SR_FORCE_INLINE Vector4& operator/=(const Vector4<U>& p_v) {
             x /= p_v.x;
             y /= p_v.y;
@@ -142,9 +146,16 @@ namespace SR_MATH_NS {
             return Vector4(x + v.x, y + v.y, z + v.z, w + v.w);
         }
 
-        template<typename U> SR_FORCE_INLINE Vector4 operator-(const Vector4<U>& v) const {
-            return Vector4(x - v.x, y - v.y, z - v.z, w - v.w);
+        SR_NODISCARD Vector4 Cross(const Vector4& v) const {
+            Vector4 res;
+            res.x = y * v.z - z * v.y;
+            res.y = z * v.x - x * v.z;
+            res.z = x * v.y - y * v.x;
+            res.w = 0.f;
+            return res;
         }
+
+        SR_FORCE_INLINE Vector4 operator-() const { return Vector4(-x, -y, -z, -w); }
 
         template<typename U> SR_FORCE_INLINE Vector4 operator*(U p_scalar) const {
             return Vector4(x * p_scalar, y * p_scalar, z * p_scalar, w * p_scalar);
@@ -155,12 +166,37 @@ namespace SR_MATH_NS {
 
         SR_NODISCARD glm::vec4 ToGLM() const { return { x, y, z, w }; }
 
+        SR_NODISCARD T Dot3(const Vector3<T>& v) const {
+            return (x * v.x) + (y * v.y) + (z * v.z);
+        }
+
         template<typename U> SR_NODISCARD Vector4<U> SR_FASTCALL Cast() const noexcept { return Vector4<U>(
                     static_cast<U>(x),
                     static_cast<U>(y),
                     static_cast<U>(z),
                     static_cast<U>(w)
             );
+        }
+
+        SR_NODISCARD Unit IntersectRayPlane(const SR_MATH_NS::FVector3& origin, const SR_MATH_NS::FVector3& vector) const {
+            const Unit numer = Dot3(origin) - w;
+            const Unit denom = Dot3(vector);
+
+            /// normal is orthogonal to vector, cant intersect
+            if (fabsf(denom) < FLT_EPSILON) {
+                return -1.0f;
+            }
+
+            return -(numer / denom);
+        }
+
+        SR_NODISCARD Unit DistanceToPlane(const SR_MATH_NS::FVector3& point) const {
+            return Dot3(point) + w;
+        }
+
+        SR_NODISCARD T Dot(const Vector4<T>& v) const
+        {
+            return (x * v.x) + (y * v.y) + (z * v.z) + (w * v.w);
         }
 
         SR_NODISCARD SR_FORCE_INLINE T Length() const {
@@ -190,6 +226,20 @@ namespace SR_MATH_NS {
     typedef Vector4<Unit>     FVector4;
     typedef Vector4<int32_t>  IVector4;
     typedef Vector4<uint32_t> UVector4;
+
+    static FVector4 BuildPlan(const FVector3& point, const FVector3& normal) {
+        return SR_MATH_NS::FVector4(normal, normal.Normalize().Dot(point));
+    }
+
+    static FVector4 BuildPlan(const FVector4& point, const FVector4& p_normal) {
+        FVector4 normal, res;
+        normal = p_normal.Normalize();
+        res.w = normal.Dot(point);
+        res.x = normal.x;
+        res.y = normal.y;
+        res.z = normal.z;
+        return res;
+    }
 
     static constexpr uint32_t RGBToHEX(const IVector3& color) {
         return ((color.x & 0xff) << 16) + ((color.y & 0xff) << 8) + (color.z & 0xff);

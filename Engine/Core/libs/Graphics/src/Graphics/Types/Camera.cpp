@@ -371,14 +371,17 @@ namespace SR_GTYPES_NS {
         const float_t x = 2.0f * screenPos.x - 1.0f;
         const float_t y = 2.0f * screenPos.y - 1.0f;
 
-        auto&& cameraNear = viewProjInverse * SR_MATH_NS::FVector4(x, y, 0.0f, 1.0f);
-        cameraNear /= cameraNear.w;
+        const float_t zNear = 0.f;
+        const float_t zFar = 1.f - SR_FLT_EPSILON;
 
-        auto&& cameraFar = viewProjInverse * SR_MATH_NS::FVector4(x, y, 1.0f, 1.0f);
-        cameraFar /= cameraFar.w;
+        auto&& rayOrigin = viewProjInverse * SR_MATH_NS::FVector4(x, y, zNear, 1.0f);
+        rayOrigin /= rayOrigin.w;
 
-        ray.origin = cameraNear.XYZ();
-        ray.direction = (cameraFar.XYZ() - ray.origin).Normalize();
+        auto&& rayEnd = viewProjInverse * SR_MATH_NS::FVector4(x, y, zFar, 1.0f);
+        rayEnd /= rayEnd.w;
+
+        ray.origin = rayOrigin.XYZ();
+        ray.direction = (rayEnd.XYZ() - ray.origin).Normalize();
 
         //ray.origin = (viewProjInverse * nearPlane).XYZ();
         //ray.direction = ((viewProjInverse * farPlane).XYZ() - ray.origin).Normalized();
@@ -401,7 +404,18 @@ namespace SR_GTYPES_NS {
         return ScreenToWorldPoint(SR_MATH_NS::FVector3(screenPos.x, screenPos.y, depth));
     }
 
-    SR_MATH_NS::FPoint Camera::GetActiveViewportSize() const {
-        return GetSize().Cast<SR_MATH_NS::Unit>();
+    float_t Camera::CalculateScreenFactor(const SR_MATH_NS::Matrix4x4& modelMatrix, float_t sizeClipSpace) const {
+        return CalculateScreenFactor(modelMatrix, GetViewTranslate(), sizeClipSpace);
+    }
+
+    float_t Camera::CalculateScreenFactor(const SR_MATH_NS::Matrix4x4& modelMatrix, const SR_MATH_NS::Matrix4x4& viewMatrix, float_t sizeClipSpace) const {
+        auto&& mvp = GetProjection() * viewMatrix * modelMatrix;
+
+        SR_MATH_NS::FVector4 rightViewInverse = viewMatrix.Inverse().v.right;
+        rightViewInverse = SR_MATH_NS::Matrix4x4::Identity().TransformVector(rightViewInverse.XYZ());
+        const float_t aspectRatio = GetAspect();
+        const float_t rightLength = mvp.GetSegmentLengthClipSpace(SR_MATH_NS::FVector3(), rightViewInverse.XYZ(), aspectRatio);
+
+        return sizeClipSpace / rightLength;
     }
 }

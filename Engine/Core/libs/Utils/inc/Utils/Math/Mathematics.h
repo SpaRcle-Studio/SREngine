@@ -134,6 +134,8 @@ namespace SR_MATH_NS {
         AXIS_XZ   = AXIS_X | AXIS_Z,
         AXIS_YZ   = AXIS_Y | AXIS_Z,
         AXIS_XYZ  = AXIS_X | AXIS_Y | AXIS_Z,
+
+        AXIS_SCREEN,
     };
 
     typedef float Unit; //! can broke render

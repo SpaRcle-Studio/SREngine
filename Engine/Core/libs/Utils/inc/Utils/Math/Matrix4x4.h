@@ -28,11 +28,12 @@ namespace SR_MATH_NS {
             struct {
                 SR_MATH_NS::Vector4<float_t> right, up, dir, position;
             } v;
+            float_t m[4][4];
             struct {
-                float m00, m01, m02, m03;
-                float m10, m11, m12, m13;
-                float m20, m21, m22, m23;
-                float m30, m31, m32, m33;
+                float_t m00, m01, m02, m03;
+                float_t m10, m11, m12, m13;
+                float_t m20, m21, m22, m23;
+                float_t m30, m31, m32, m33;
             };
         };
 
@@ -261,6 +262,45 @@ namespace SR_MATH_NS {
             }
 
             return false;
+        }
+
+        SR_NODISCARD FVector4 BuildTranslationPlan(Axis axis, const SR_MATH_NS::Matrix4x4& viewMatrix) const {
+            auto&& cameraEye = viewMatrix.v.position;
+            auto&& cameraDir = -viewMatrix.v.dir;
+
+            FVector4 movePlanNormal[] = {
+                v.right, v.up, v.dir,
+                v.right, v.up, v.dir,
+                -cameraDir
+            };
+
+            auto&& cameraToModelNormalized = (v.position - cameraEye).Normalize();
+
+            for (uint8_t i = 0; i < 3; ++i) {
+                auto&& orthoVector = movePlanNormal[i].Cross(cameraToModelNormalized);
+                movePlanNormal[i] = movePlanNormal[i].Cross(orthoVector).Normalize();
+            }
+
+            switch (axis) {
+                case AXIS_X:
+                    return SR_MATH_NS::BuildPlan(v.position, movePlanNormal[0]);
+                case AXIS_Y:
+                    return SR_MATH_NS::BuildPlan(v.position, movePlanNormal[1]);
+                case AXIS_Z:
+                    return SR_MATH_NS::BuildPlan(v.position, movePlanNormal[2]);
+                case AXIS_YZ:
+                    return SR_MATH_NS::BuildPlan(v.position, movePlanNormal[3]);
+                case AXIS_XZ:
+                    return SR_MATH_NS::BuildPlan(v.position, movePlanNormal[4]);
+                case AXIS_XY:
+                    return SR_MATH_NS::BuildPlan(v.position, movePlanNormal[5]);
+                case AXIS_SCREEN:
+                    return SR_MATH_NS::BuildPlan(v.position, movePlanNormal[6]);
+                default:
+                    break;
+            }
+
+            return SR_MATH_NS::FVector4();
         }
 
         SR_NODISCARD FVector4 TransformPoint(const FVector3& point) const {
