@@ -62,24 +62,8 @@ namespace SR_MATH_NS {
 
     public:
         SR_NODISCARD Vector4 Normalize() const {
-            auto&& value = x * x + y * y + z * z + w * w;
-
-            if (value > 0) {
-                T len = static_cast<T>(std::sqrt(value));
-
-                Vector4 vec4 = *this;
-
-                if (len != static_cast<T>(0.)) {
-                    vec4.x /= len;
-                    vec4.y /= len;
-                    vec4.z /= len;
-                    vec4.w /= len;
-                }
-
-                return vec4;
-            }
-
-            return *this;
+            const T length = Length();
+            return (*this) * (static_cast<T>(1) / (length > SR_FLT_EPSILON ? length : SR_FLT_EPSILON));
         }
 
         SR_FORCE_INLINE const T& operator[](int32_t axis) const {
@@ -178,18 +162,6 @@ namespace SR_MATH_NS {
             );
         }
 
-        SR_NODISCARD Unit IntersectRayPlane(const SR_MATH_NS::FVector3& origin, const SR_MATH_NS::FVector3& vector) const {
-            const Unit numer = Dot3(origin) - w;
-            const Unit denom = Dot3(vector);
-
-            /// normal is orthogonal to vector, cant intersect
-            if (fabsf(denom) < FLT_EPSILON) {
-                return -1.0f;
-            }
-
-            return -(numer / denom);
-        }
-
         SR_NODISCARD Unit DistanceToPlane(const SR_MATH_NS::FVector3& point) const {
             return Dot3(point) + w;
         }
@@ -200,7 +172,7 @@ namespace SR_MATH_NS {
         }
 
         SR_NODISCARD SR_FORCE_INLINE T Length() const {
-            return static_cast<T>(sqrt(pow(x, 2) + pow(y, 2) + pow(z, 2) + pow(w, 2)));
+            return static_cast<T>(sqrt(x * x + y * y + z * z + w * w));
         }
 
         template<typename U, typename Y> SR_NODISCARD Vector4 Clamp(U _max, Y _min) const {
@@ -226,6 +198,34 @@ namespace SR_MATH_NS {
     typedef Vector4<Unit>     FVector4;
     typedef Vector4<int32_t>  IVector4;
     typedef Vector4<uint32_t> UVector4;
+
+    SR_INLINE static const FVector4 InfinityFV4 = FVector4 { UnitMAX, UnitMAX, UnitMAX, UnitMAX };
+
+    struct Ray {
+        SR_NODISCARD Unit IntersectPlaneDistance(const SR_MATH_NS::FVector4& plane) const {
+            const Unit numer = plane.Dot3(origin) - plane.w;
+            const Unit denom = plane.Dot3(direction);
+
+            /// normal is orthogonal to vector, cant intersect
+            if (fabsf(denom) < SR_FLT_EPSILON) {
+                return -1.0f;
+            }
+
+            return -(numer / denom);
+        }
+
+        SR_NODISCARD SR_MATH_NS::FVector3 IntersectPlane(const SR_MATH_NS::FVector4& plane) const noexcept {
+            const float_t signedLength = IntersectPlaneDistance(plane);
+            const float_t len = fabsf(signedLength);
+            return origin + direction * len;
+        }
+
+        SR_NODISCARD SR_MATH_NS::FVector3 Origin3D() const { return origin; }
+        SR_NODISCARD SR_MATH_NS::FVector3 Direction3D() const { return direction; }
+
+        FVector3 origin;
+        FVector3 direction;
+    };
 
     static FVector4 BuildPlan(const FVector3& point, const FVector3& normal) {
         return SR_MATH_NS::FVector4(normal, normal.Normalize().Dot(point));

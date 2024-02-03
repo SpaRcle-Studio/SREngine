@@ -166,7 +166,9 @@ namespace SR_GRAPH_UI_NS {
             m_activeOperation = GizmoOperation::None;
         }
 
-        m_modelMatrix = SR_MATH_NS::Matrix4x4::FromTranslate(GetTransform()->GetTranslation());
+        auto&& mousePos = GetCamera()->GetMousePos();
+
+        m_modelMatrix = SR_MATH_NS::Matrix4x4::FromTranslate(GetTransform()->GetTranslation()).OrthogonalNormalize();
 
         if (m_activeOperation == GizmoOperation::None) {
             auto&& pMesh = pTechnique->PickMeshAt(pCamera->GetMousePos());
@@ -179,19 +181,26 @@ namespace SR_GRAPH_UI_NS {
                     if (SR_UTILS_NS::Input::Instance().GetMouseDown(SR_UTILS_NS::MouseCode::MouseLeft)) {
                         m_activeOperation = flag;
 
+                        m_oldModelMatrix = m_modelMatrix;
+
                         const float_t screenFactor = GetCamera()->CalculateScreenFactor(m_modelMatrix, m_moveFactor);
+                        auto&& screenRay = GetCamera()->GetScreenRay(mousePos);
 
-                        m_translationPlan = m_modelMatrix.BuildTranslationPlan(SR_MATH_NS::AXIS_Z, GetCamera()->GetViewTranslate());
-                        auto&& screenRay = GetCamera()->GetScreenRay(pCamera->GetMousePos());
-                        const float len = m_translationPlan.IntersectRayPlane(screenRay.origin, screenRay.direction);
-                        auto&& translationPlanOrigin = screenRay.origin + screenRay.direction * len;
+                        //m_translationPlan = m_modelMatrix.BuildTranslationPlan(SR_MATH_NS::AXIS_Z, GetCamera()->GetViewTranslate());
+                        //m_translationPlan = SR_MATH_NS::FVector4(0.5, -0.5, 0, 0);
 
-                        m_relativeOrigin = (translationPlanOrigin - m_modelMatrix.v.position.XYZ()) * (1.f / screenFactor);
+                        auto&& normal = SR_MATH_NS::CalcPlanNormal(
+                            m_modelMatrix,
+                            GetCamera()->GetViewTranslate().v.position.XYZ(),
+                            (GetCamera()->GetViewTranslate().v.position - m_modelMatrix.v.position).Normalize().XYZ(),
+                            SR_MATH_NS::AXIS_Z
+                        );
 
-                        SR_UTILS_NS::DebugDraw::Instance().DrawLine(m_translationPlan.x, m_translationPlan.y, SR_MATH_NS::FColor(0, 0, 255, 255), 20.f);
-                        SR_UTILS_NS::DebugDraw::Instance().DrawLine(m_translationPlan.y, m_translationPlan.z, SR_MATH_NS::FColor(0, 0, 255, 255), 20.f);
-                        SR_UTILS_NS::DebugDraw::Instance().DrawLine(m_translationPlan.z, m_translationPlan.w, SR_MATH_NS::FColor(0, 0, 255, 255), 20.f);
-                        SR_UTILS_NS::DebugDraw::Instance().DrawLine(m_translationPlan.w, m_translationPlan.x, SR_MATH_NS::FColor(0, 0, 255, 255), 20.f);
+                        m_translationPlan = SR_MATH_NS::BuildPlan(m_modelMatrix.v.position, normal);
+                        m_translationPlanOrigin = screenRay.IntersectPlane(m_translationPlan);
+                        m_relativeOrigin = (m_translationPlanOrigin - m_modelMatrix.v.position.XYZ()) * (1.f / screenFactor);
+
+                        //SR_UTILS_NS::DebugDraw::Instance().DrawLine(translationPlanOrigin, translationPlanOrigin + m_relativeOrigin, SR_MATH_NS::FColor(0, 255, 255, 255), 20.f);
 
                         SR_LOG("Gizmo selected!");
                     }
@@ -202,7 +211,7 @@ namespace SR_GRAPH_UI_NS {
             }
         }
 
-        ProcessGizmo();
+        ProcessGizmo(mousePos);
 
         Super::FixedUpdate();
     }
@@ -213,8 +222,8 @@ namespace SR_GRAPH_UI_NS {
             .SetResetValue(0.1f)
             .SetDrag(0.05f)
             .SetWidth(60.f);
-        GetComponentProperties()
 
+        GetComponentProperties()
             .AddStandardProperty("Move factor", &m_moveFactor)
             .SetResetValue(0.1f)
             .SetDrag(0.05f)
@@ -223,28 +232,28 @@ namespace SR_GRAPH_UI_NS {
         return Super::InitializeEntity();
     }
 
-    void Gizmo::ProcessGizmo() {
-        auto&& mousePos = GetCamera()->GetMousePos();
-        if (m_lastMousePos == SR_MATH_NS::InfinityFV2) {
-            m_lastMousePos = mousePos;
-            return;
-        }
+    void Gizmo::ProcessGizmo(const SR_MATH_NS::FPoint& mousePos) {
+        //if (m_lastMousePos == SR_MATH_NS::InfinityFV2) {
+        //    m_lastMousePos = mousePos;
+        //    return;
+        //}
 
         if (SR_UTILS_NS::Input::Instance().GetMouse(Utils::MouseCode::MouseLeft)) {
 
         }
 
+        const float_t cameraDistance = GetCamera()->GetPosition().Distance(GetTransform()->GetTranslation());
+
         if (SR_UTILS_NS::Input::Instance().GetMouse(Utils::MouseCode::MouseLeft)) {
-            const float_t cameraDistance = GetCamera()->GetPosition().Distance(GetTransform()->GetTranslation());
 
             //auto&& forward = GetCamera()->GetRotation() * SR_UTILS_NS::Transform3D::FORWARD * 10.f;
 
-            auto&& modelMatrix = SR_MATH_NS::Matrix4x4::FromTranslate(GetTransform()->GetTranslation());
-            auto&& viewMatrix = GetCamera()->GetView();
-            const float_t screenFactor = GetCamera()->CalculateScreenFactor(modelMatrix, viewMatrix, m_moveFactor);
+            //auto&& modelMatrix = SR_MATH_NS::Matrix4x4::FromTranslate(GetTransform()->GetTranslation());
+            //auto&& viewMatrix = GetCamera()->GetView();
+            //const float_t screenFactor = GetCamera()->CalculateScreenFactor(modelMatrix, viewMatrix, m_moveFactor);
 
-            auto&& worldDirection = GetCamera()->ScreenToWorldPoint(GetCamera()->GetMousePos(), screenFactor);
-            auto&& lastPos = GetCamera()->ScreenToWorldPoint(m_lastMousePos, screenFactor);
+            //auto&& worldDirection = GetCamera()->ScreenToWorldPoint(GetCamera()->GetMousePos(), screenFactor);
+            //auto&& lastPos = GetCamera()->ScreenToWorldPoint(m_lastMousePos, screenFactor);
 
             //SR_UTILS_NS::DebugDraw::Instance().DrawLine(lastPos, worldDirection, SR_MATH_NS::FColor(255, 0, 0, 255), 10.f);
 
@@ -252,7 +261,6 @@ namespace SR_GRAPH_UI_NS {
         }
 
         if (m_activeOperation == GizmoOperation::None) {
-            m_relativeOrigin = SR_MATH_NS::InfinityFV3;
             return;
         }
 
@@ -261,18 +269,22 @@ namespace SR_GRAPH_UI_NS {
 
             const float_t screenFactor = GetCamera()->CalculateScreenFactor(m_modelMatrix, m_moveFactor);
 
-            const float_t signedLength = m_translationPlan.IntersectRayPlane(screenRay.origin, screenRay.direction);
-            const float_t len = fabsf(signedLength); /// near plan
-            auto&& newPos = screenRay.origin + screenRay.direction * len;
-
+            auto&& newPos = screenRay.IntersectPlane(m_translationPlan);
             auto&& newOrigin = newPos - m_relativeOrigin * screenFactor;
             auto&& delta = newOrigin - m_modelMatrix.v.position.XYZ();
+
+            //const auto newPos = GetCamera()->GetScreenRay(mousePos).IntersectPlane(m_translationPlan);
+            //const auto newOrigin = m_oldModelMatrix.v.position.XYZ() + (newPos - m_translationPlanOrigin);
+            //auto delta = newOrigin - m_modelMatrix.v.position.XYZ();
 
             auto&& axisValue = m_modelMatrix.value[2 /** z */].XYZ();
             const float lengthOnAxis = axisValue.Dot(delta);
             delta = axisValue * lengthOnAxis;
 
-            //SR_UTILS_NS::DebugDraw::Instance().DrawLine(screenRay.origin, newPos, SR_MATH_NS::FColor(0, 255, 0, 255), 10.f);
+            SR_UTILS_NS::DebugDraw::Instance().DrawLine(screenRay.Origin3D(), screenRay.Origin3D() + screenRay.Direction3D(), SR_MATH_NS::FColor(255, 0, 0, 255), 10.f);
+            //SR_UTILS_NS::DebugDraw::Instance().DrawLine(screenRay.origin, screenRay.origin + m_translationPlan.XYZ(), SR_MATH_NS::FColor(255, 255, 255, 255), 10.f);
+            SR_UTILS_NS::DebugDraw::Instance().DrawLine(screenRay.Origin3D() + screenRay.Direction3D(), newPos, SR_MATH_NS::FColor(255, 255, 0, 255), 10.f);
+            SR_UTILS_NS::DebugDraw::Instance().DrawLine(screenRay.Origin3D() + screenRay.Direction3D(), newOrigin, SR_MATH_NS::FColor(0, 255, 0, 255), 10.f);
 
             GetTransform()->Translate(0, 0, delta.z);
             //GetTransform()->SetTranslation(0, 0, newPos.z);

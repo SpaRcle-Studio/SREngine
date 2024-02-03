@@ -68,7 +68,7 @@ namespace SR_GRAPH_UI_NS {
         SR_NODISCARD SR_FORCE_INLINE bool ExecuteInEditMode() const override { return true; }
 
     protected:
-        void ProcessGizmo();
+        void ProcessGizmo(const SR_MATH_NS::FPoint& mousePos);
         void LoadGizmo();
         void ReleaseGizmo();
         void LoadMesh(GizmoOperationFlag operation, SR_UTILS_NS::StringAtom path, SR_UTILS_NS::StringAtom name, GizmoMeshLoadMode mode);
@@ -89,10 +89,12 @@ namespace SR_GRAPH_UI_NS {
 
         GizmoOperationFlag m_activeOperation = GizmoOperation::None;
 
+        SR_MATH_NS::FVector3 m_translationPlanOrigin;
         SR_MATH_NS::FVector3 m_relativeOrigin;
         SR_MATH_NS::FVector4 m_translationPlan;
         SR_MATH_NS::FPoint m_lastMousePos;
         SR_MATH_NS::Matrix4x4 m_modelMatrix;
+        SR_MATH_NS::Matrix4x4 m_oldModelMatrix;
 
     };
 }

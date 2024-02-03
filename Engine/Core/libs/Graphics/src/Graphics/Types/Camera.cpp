@@ -357,15 +357,6 @@ namespace SR_GTYPES_NS {
     SR_MATH_NS::Ray Camera::GetScreenRay(const SR_MATH_NS::FPoint& screenPos) const {
         SR_MATH_NS::Matrix4x4 viewProjInverse = (GetProjection() * GetViewTranslate()).Inverse();
 
-        /// The parameters range from 0.0 to 1.0. Expand to normalized device coordinates (-1.0 to 1.0) & flip Y axis
-        //const auto x = 2.0f * screenPos.x - 1.0f;
-
-        //const auto x = 1.f - 2.0f * screenPos.x;
-        //const auto y = 1.f - 2.0f * screenPos.y;
-
-        //const SR_MATH_NS::FVector4 nearPlane(x, -y, 0.0f, 0.f);
-        //const SR_MATH_NS::FVector4 farPlane(x, -y, 1.0f, 0.f);
-
         SR_MATH_NS::Ray ray;
 
         const float_t x = 2.0f * screenPos.x - 1.0f;
@@ -374,26 +365,22 @@ namespace SR_GTYPES_NS {
         const float_t zNear = 0.f;
         const float_t zFar = 1.f - SR_FLT_EPSILON;
 
-        auto&& rayOrigin = viewProjInverse * SR_MATH_NS::FVector4(x, y, zNear, 1.0f);
-        rayOrigin /= rayOrigin.w;
+        auto&& origin = viewProjInverse.TransformVector(SR_MATH_NS::FVector4(x, y, zNear, 1.0f));
+        ray.origin = origin.XYZ() / origin.w;
 
-        auto&& rayEnd = viewProjInverse * SR_MATH_NS::FVector4(x, y, zFar, 1.0f);
+        auto&& rayEnd = viewProjInverse.TransformVector(SR_MATH_NS::FVector4(x, y, zFar, 1.0f));
         rayEnd /= rayEnd.w;
 
-        ray.origin = rayOrigin.XYZ();
         ray.direction = (rayEnd.XYZ() - ray.origin).Normalize();
-
-        //ray.origin = (viewProjInverse * nearPlane).XYZ();
-        //ray.direction = ((viewProjInverse * farPlane).XYZ() - ray.origin).Normalized();
 
         return ray;
     }
 
     SR_MATH_NS::FVector3 Camera::ScreenToWorldPoint(const SR_MATH_NS::FVector3& screenPos) const {
         auto&& ray = GetScreenRay(screenPos.x, screenPos.y);
-        auto&& viewSpaceDir = (GetViewTranslate() * SR_MATH_NS::FVector4(-ray.direction, 0.f));
+        auto&& viewSpaceDir = GetViewTranslate() * SR_MATH_NS::FVector4(-ray.direction, 1.f);
         const float_t rayDistance = (SR_MAX(screenPos.z - GetNear(), 0.0f) / viewSpaceDir.z);
-        return ray.origin + ray.direction * rayDistance;
+        return (ray.origin + ray.direction * rayDistance);
     }
 
     SR_MATH_NS::FVector3 Camera::ScreenToWorldPoint(const SR_MATH_NS::FPoint& screenPos) const {
@@ -411,8 +398,11 @@ namespace SR_GTYPES_NS {
     float_t Camera::CalculateScreenFactor(const SR_MATH_NS::Matrix4x4& modelMatrix, const SR_MATH_NS::Matrix4x4& viewMatrix, float_t sizeClipSpace) const {
         auto&& mvp = GetProjection() * viewMatrix * modelMatrix;
 
-        SR_MATH_NS::FVector4 rightViewInverse = viewMatrix.Inverse().v.right;
-        rightViewInverse = SR_MATH_NS::Matrix4x4::Identity().TransformVector(rightViewInverse.XYZ());
+        auto&& modelInverse = modelMatrix.Inverse();
+
+        auto&& rightViewInverse = viewMatrix.Inverse().v.right;
+        rightViewInverse = modelInverse.TransformVector(rightViewInverse.XYZ());
+
         const float_t aspectRatio = GetAspect();
         const float_t rightLength = mvp.GetSegmentLengthClipSpace(SR_MATH_NS::FVector3(), rightViewInverse.XYZ(), aspectRatio);
 

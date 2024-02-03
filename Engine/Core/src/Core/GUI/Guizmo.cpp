@@ -70,6 +70,9 @@ namespace SR_CORE_GUI_NS {
         const ImVec4 toggleNotActiveColor = ImVec4(0.32, 0.28, 0.25, 1);
 
         if (ImGui::BeginChild("GuizmoTools", ImVec2(0, 20))) {
+            SR_GRAPH_GUI_NS::CheckBox(m_isEnabled);
+
+            ImGui::SameLine();
             if (SR_GRAPH_NS::GUI::Button("T", IsTranslate() && m_active ? activeColor : notActiveColor))
                 SetOperation(ImGuizmo::OPERATION::TRANSLATE);
 
@@ -153,7 +156,7 @@ namespace SR_CORE_GUI_NS {
     }
 
     void Guizmo::DrawManipulation(SR_GTYPES_NS::Camera* camera) {
-        if (!m_transform) {
+        if (!m_transform || !m_isEnabled) {
             return;
         }
 

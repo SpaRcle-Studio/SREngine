@@ -542,11 +542,6 @@ namespace SR_MATH_NS {
             static_cast<Unit>(CMP_EPSILON),
             static_cast<Unit>(CMP_EPSILON),
     };
-
-    struct Ray {
-        FVector3 origin;
-        FVector3 direction;
-    };
 }
 
 namespace std {

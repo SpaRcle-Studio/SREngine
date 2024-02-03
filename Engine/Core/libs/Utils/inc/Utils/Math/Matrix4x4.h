@@ -123,6 +123,14 @@ namespace SR_MATH_NS {
             return Matrix4x4(*this * q.ToMat4x4());
         }
 
+        SR_NODISCARD Matrix4x4 OrthogonalNormalize() const {
+            Matrix4x4 copy = *this;
+            copy.v.right = copy.v.right.Normalize();
+            copy.v.up = copy.v.up.Normalize();
+            copy.v.dir = copy.v.dir.Normalize();
+            return copy;
+        }
+
         SR_NODISCARD const glm::mat4& ToGLM() const {
             return self;
         }
@@ -264,45 +272,6 @@ namespace SR_MATH_NS {
             return false;
         }
 
-        SR_NODISCARD FVector4 BuildTranslationPlan(Axis axis, const SR_MATH_NS::Matrix4x4& viewMatrix) const {
-            auto&& cameraEye = viewMatrix.v.position;
-            auto&& cameraDir = -viewMatrix.v.dir;
-
-            FVector4 movePlanNormal[] = {
-                v.right, v.up, v.dir,
-                v.right, v.up, v.dir,
-                -cameraDir
-            };
-
-            auto&& cameraToModelNormalized = (v.position - cameraEye).Normalize();
-
-            for (uint8_t i = 0; i < 3; ++i) {
-                auto&& orthoVector = movePlanNormal[i].Cross(cameraToModelNormalized);
-                movePlanNormal[i] = movePlanNormal[i].Cross(orthoVector).Normalize();
-            }
-
-            switch (axis) {
-                case AXIS_X:
-                    return SR_MATH_NS::BuildPlan(v.position, movePlanNormal[0]);
-                case AXIS_Y:
-                    return SR_MATH_NS::BuildPlan(v.position, movePlanNormal[1]);
-                case AXIS_Z:
-                    return SR_MATH_NS::BuildPlan(v.position, movePlanNormal[2]);
-                case AXIS_YZ:
-                    return SR_MATH_NS::BuildPlan(v.position, movePlanNormal[3]);
-                case AXIS_XZ:
-                    return SR_MATH_NS::BuildPlan(v.position, movePlanNormal[4]);
-                case AXIS_XY:
-                    return SR_MATH_NS::BuildPlan(v.position, movePlanNormal[5]);
-                case AXIS_SCREEN:
-                    return SR_MATH_NS::BuildPlan(v.position, movePlanNormal[6]);
-                default:
-                    break;
-            }
-
-            return SR_MATH_NS::FVector4();
-        }
-
         SR_NODISCARD FVector4 TransformPoint(const FVector3& point) const {
             FVector4 out;
             out.x = point.x * m00 + point.y * m10 + point.z * m20 + m30;
@@ -318,6 +287,15 @@ namespace SR_MATH_NS {
             out.y = point.x * m01 + point.y * m11 + point.z * m21;
             out.z = point.x * m02 + point.y * m12 + point.z * m22;
             out.w = point.x * m03 + point.y * m13 + point.z * m23;
+            return out;
+        }
+
+        SR_NODISCARD FVector4 TransformVector(const FVector4& point) const {
+            FVector4 out;
+            out.x = point.x * m00 + point.y * m10 + point.z * m20 + point.w * m30;
+            out.y = point.x * m01 + point.y * m11 + point.z * m21 + point.w * m31;
+            out.z = point.x * m02 + point.y * m12 + point.z * m22 + point.w * m32;
+            out.w = point.x * m03 + point.y * m13 + point.z * m23 + point.w * m33;
             return out;
         }
 
@@ -337,7 +315,13 @@ namespace SR_MATH_NS {
             }
 
             auto&& clipSpaceAxis = (endOfSegment - startOfSegment).XY();
-            clipSpaceAxis.y /= displayRatio;
+
+            if (displayRatio < 1.0) {
+                clipSpaceAxis.x *= displayRatio;
+            }
+            else {
+                clipSpaceAxis.y /= displayRatio;
+            }
 
             const SR_MATH_NS::Unit segmentLengthInClipSpace = sqrtf(clipSpaceAxis.x * clipSpaceAxis.x + clipSpaceAxis.y * clipSpaceAxis.y);
             return segmentLengthInClipSpace;
@@ -416,6 +400,39 @@ namespace SR_MATH_NS {
             return Matrix4x4(this->self - mat.self);
         }
     };
+
+    static FVector4 CalcPlanNormal(const Matrix4x4& model, const SR_MATH_NS::FVector3& cameraEye, const SR_MATH_NS::FVector3& cameraDir, Axis axis) {
+        SR_MATH_NS::FVector4 movePlanNormal[] = {
+            model.v.right, // x
+            model.v.up,    // y
+            model.v.dir,   // z
+            model.v.right, // yz
+            model.v.up,    // zx
+            model.v.dir,   // xy
+            SR_MATH_NS::FVector4(-cameraDir, 0.f)     // screen
+        };
+
+        auto&& cameraToModelNormalized = SR_MATH_NS::FVector4((model.v.position.XYZ() - cameraEye).Normalize(), 0.f);
+
+        for (uint8_t i = 0; i < 3; ++i) {
+            auto&& orthogonalVector = movePlanNormal[i].Cross(cameraToModelNormalized);
+            movePlanNormal[i] = (movePlanNormal[i].Cross(orthogonalVector)).Normalize();
+        }
+
+        switch (axis) {
+            case AXIS_X: return movePlanNormal[0];
+            case AXIS_Y: return movePlanNormal[1];
+            case AXIS_Z: return movePlanNormal[2];
+            case AXIS_YZ: return movePlanNormal[3];
+            case AXIS_XZ: return movePlanNormal[4];
+            case AXIS_XY: return movePlanNormal[5];
+            case AXIS_SCREEN: return movePlanNormal[6];
+            default:
+                break;
+        }
+
+        return SR_MATH_NS::FVector4();
+    }
 
     static bool DecomposeTransform(const glm::mat4& matrix, FVector3& translation, FVector3& rotation, FVector3& scale);
 

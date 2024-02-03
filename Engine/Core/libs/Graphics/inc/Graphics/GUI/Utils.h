@@ -737,8 +737,13 @@ namespace SR_GRAPH_GUI_NS {
         return result;
     }
 
+    SR_MAYBE_UNUSED static bool CheckBox(bool& value) {
+        const bool result = ImGui::Checkbox(SR_FORMAT_C("##{}", (void*)&value), &value);
+        return result;
+    }
+
     SR_MAYBE_UNUSED static bool CheckBox(const std::string& name, bool& value) {
-        const bool result = ImGui::Checkbox(name.c_str(), &value);
+        const bool result = ImGui::Checkbox(SR_FORMAT_C("{}##{}", name, (void*)&value), &value);
         return result;
     }
 

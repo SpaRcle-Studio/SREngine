@@ -67,6 +67,7 @@ namespace SR_CORE_GUI_NS {
         SR_UTILS_NS::Transform*   m_transform     = nullptr;
 
         bool                      m_isUse         = false;
+        bool                      m_isEnabled     = true;
 
         float_t                   m_cameraVelocityFactor = 1.f;
 
