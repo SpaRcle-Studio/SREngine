@@ -57,6 +57,7 @@ namespace SR_CORE_GUI_NS {
         bool UpdateViewSize();
 
         void SetCameraEnabled(bool enabled);
+        void SetGizmoEnabled(bool enabled);
         void DrawTexture(SR_MATH_NS::IVector2 winSize, SR_MATH_NS::IVector2 texSize, uint32_t id, bool centralize);
 
     private:

@@ -49,15 +49,11 @@ namespace SR_GRAPH_UI_NS {
     );
 
     class Gizmo : public SR_GTYPES_NS::IRenderComponent {
-        SR_ENTITY_SET_VERSION(1000);
-        SR_INITIALIZE_COMPONENT(Gizmo);
+        SR_REGISTER_NEW_COMPONENT(Gizmo, 1001);
         using Super = SR_GTYPES_NS::IRenderComponent;
         enum class GizmoMeshLoadMode {
             Visual, Selection, All
         };
-    public:
-        static Component* LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage);
-
     public:
         bool InitializeEntity() noexcept override;
 
@@ -67,11 +63,19 @@ namespace SR_GRAPH_UI_NS {
         void OnDestroy() override;
         void FixedUpdate() override;
 
+        SR_NODISCARD bool IsGizmoActive() const { return m_activeOperation != GizmoOperation::None; }
+        SR_NODISCARD bool IsGizmoHovered() const { return m_hoveredOperation != GizmoOperation::None; }
+
     protected:
         void ProcessGizmo(const SR_MATH_NS::FPoint& mousePos);
         void LoadGizmo();
         void ReleaseGizmo();
         void LoadMesh(GizmoOperationFlag operation, SR_UTILS_NS::StringAtom path, SR_UTILS_NS::StringAtom name, GizmoMeshLoadMode mode);
+
+        virtual void OnGizmoTranslated(const SR_MATH_NS::FVector3& delta);
+
+        SR_NODISCARD virtual bool IsHandledAnotherObject() const { return false; }
+        SR_NODISCARD virtual SR_MATH_NS::Matrix4x4 GetGizmoMatrix() const;
 
         SR_NODISCARD SR_MATH_NS::AxisFlag GetAxis() const;
 
@@ -92,6 +96,7 @@ namespace SR_GRAPH_UI_NS {
         GizmoOperationFlag m_operation = GizmoOperation::Universal;
 
         GizmoOperationFlag m_activeOperation = GizmoOperation::None;
+        GizmoOperationFlag m_hoveredOperation = GizmoOperation::None;
 
         SR_MATH_NS::FVector3 m_translationPlanOrigin;
         SR_MATH_NS::FVector3 m_relativeOrigin;

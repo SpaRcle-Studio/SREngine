@@ -138,7 +138,10 @@ namespace SR_CORE_GUI_NS {
             ++prefabIndex;
         }
 
-        if (root->GetPrefab()) {
+        if (root->IsDontSave()) {
+            ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(220.f / 255.f, 199.f / 255.f, 0.f / 255.f, 1.f));
+        }
+        else if (root->GetPrefab()) {
             ImGui::PushStyleColor(ImGuiCol_Text, prefabIndex % 2 == 0 ? SR_PREFAB_COLOR_FIRST : SR_PREFAB_COLOR_SECOND);
         }
 
@@ -152,7 +155,7 @@ namespace SR_CORE_GUI_NS {
 
         const bool open = ImGui::TreeNodeEx((void*)(intptr_t)id, flags, "%s", name.c_str());
 
-        if (root->GetPrefab()) {
+        if (root->GetPrefab() || root->IsDontSave()) {
             ImGui::PopStyleColor();
         }
 

@@ -5,6 +5,7 @@
 #include <Core/GUI/SceneViewer.h>
 #include <Core/GUI/Hierarchy.h>
 #include <Core/GUI/EditorCamera.h>
+#include <Core/GUI/EditorGizmo.h>
 #include <Core/GUI/Guizmo.h>
 
 #include <Utils/Input/InputSystem.h>
@@ -19,7 +20,7 @@
 #include <Graphics/Pass/ColorBufferPass.h>
 #include <Graphics/Pass/FlatColorBufferPass.h>
 
-namespace SR_CORE_NS::GUI {
+namespace SR_CORE_GUI_NS {
     SceneViewer::SceneViewer(const EnginePtr& pEngine, Hierarchy* hierarchy)
         : Widget("Scene")
         , m_engine(pEngine)
@@ -44,6 +45,7 @@ namespace SR_CORE_NS::GUI {
         /// что-то пошло не так, потеряли камеру
         if (m_enabled && !m_camera) {
             SetCameraEnabled(true);
+            SetGizmoEnabled(true);
         }
 
         if (m_enabled && !m_platform && m_isPrefab) {
@@ -121,11 +123,13 @@ namespace SR_CORE_NS::GUI {
         /// если сцена сломана, или это "пустышка", то не создаем камеру, т.к. рендерить нет смыла 
         if (!pLogic || pLogic->IsDefault() || !m_enabled) {
             SetCameraEnabled(false);
+            SetGizmoEnabled(false);
             return;
         }
 
         if (!m_camera.Valid()) {
             SetCameraEnabled(true);
+            SetGizmoEnabled(true);
         }
     }
 
@@ -231,6 +235,7 @@ namespace SR_CORE_NS::GUI {
             /// сцена может быть уже заблокирована до Engine::SetScene
             if (SR_UTILS_NS::Features::Instance().Enabled("EditorCamera", true) && m_scene.RecursiveLockIfValid()) {
                 camera = m_scene->Instance("Editor camera");
+                camera->SetDontSave(true);
                 m_isPrefab = m_scene->IsPrefab();
                 m_scene.Unlock();
             }
@@ -305,8 +310,10 @@ namespace SR_CORE_NS::GUI {
             return Super::OnMouseUp(data);
         }
 
+        auto&& pGizmo = m_gizmo ? m_gizmo->GetComponent<EditorGizmo>() : nullptr;
         auto&& pRenderTechnique = pCamera->GetRenderTechnique();
-        if (pRenderTechnique && IsHovered()) {
+
+        if (pRenderTechnique && IsHovered() && (!pGizmo || (!pGizmo->IsGizmoActive() && !pGizmo->IsGizmoHovered()))) {
             if (auto&& pMesh = dynamic_cast<SR_GTYPES_NS::MeshComponent*>(pRenderTechnique->PickMeshAt(pCamera->GetMousePos()))) {
                 SelectMesh(pMesh);
             }
@@ -405,5 +412,30 @@ namespace SR_CORE_NS::GUI {
 
     SR_MATH_NS::FPoint SceneViewer::GetImagePosition() const {
         return SR_MATH_NS::FPoint(m_imagePosition.x, m_imagePosition.y);
+    }
+
+    void SceneViewer::SetGizmoEnabled(bool enabled) {
+        SR_UTILS_NS::GameObject::Ptr gizmo;
+
+        if (enabled) {
+            if (m_scene.RecursiveLockIfValid()) {
+                gizmo = m_scene->Instance("Editor gizmo");
+                gizmo->SetDontSave(true);
+                m_scene.Unlock();
+            }
+            else {
+                return;
+            }
+
+            auto&& pComponent = SR_UTILS_NS::ComponentManager::Instance().CreateComponent<EditorGizmo>();
+            pComponent->SetHierarchy(m_hierarchy);
+            gizmo->AddComponent(pComponent);
+        }
+
+        if (m_gizmo) {
+            m_gizmo->Destroy();
+        }
+
+        m_gizmo.Replace(gizmo);
     }
 }
