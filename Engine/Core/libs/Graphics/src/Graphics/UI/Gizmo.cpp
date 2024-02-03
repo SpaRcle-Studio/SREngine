@@ -191,8 +191,8 @@ namespace SR_GRAPH_UI_NS {
 
                         auto&& normal = SR_MATH_NS::CalcPlanNormal(
                             m_modelMatrix,
-                            GetCamera()->GetViewTranslate().v.position.XYZ(),
-                            (GetCamera()->GetViewTranslate().v.position - m_modelMatrix.v.position).Normalize().XYZ(),
+                            GetCamera()->GetCameraEye(),
+                            GetCamera()->GetCameraDir(),
                             SR_MATH_NS::AXIS_Z
                         );
 

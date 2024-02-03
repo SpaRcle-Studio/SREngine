@@ -408,4 +408,12 @@ namespace SR_GTYPES_NS {
 
         return sizeClipSpace / rightLength;
     }
+
+    SR_MATH_NS::FVector3 Camera::GetCameraEye() const {
+        return GetViewTranslate().Inverse().v.position.XYZ();
+    }
+
+    SR_MATH_NS::FVector3 Camera::GetCameraDir() const {
+        return GetViewTranslate().Inverse().v.dir.XYZ();
+    }
 }
