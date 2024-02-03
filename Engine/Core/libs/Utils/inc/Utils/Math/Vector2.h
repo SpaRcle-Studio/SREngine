@@ -6,6 +6,7 @@
 #define GAMEENGINE_VECTOR2_H
 
 #include <Utils/Math/Mathematics.h>
+#include <Utils/Math/Axis.h>
 
 namespace SR_MATH_NS {
     template<typename T> struct SR_DLL_EXPORT Vector2 {

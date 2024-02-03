@@ -227,29 +227,29 @@ namespace SR_MATH_NS {
             return Vector3(-x, -y, -z);
         }
 
-        SR_NODISCARD Vector3 SR_FASTCALL InverseAxis(Axis axis) const {
+        SR_NODISCARD Vector3 SR_FASTCALL InverseAxis(AxisFlag axis) const {
             Vector3 v = *this;
 
             switch (axis) {
-                case Axis::AXIS_X: v[0] = -v[0]; break;
-                case Axis::AXIS_Y: v[1] = -v[1]; break;
-                case Axis::AXIS_Z: v[2] = -v[2]; break;
-                case Axis::AXIS_XY: {
+                case Axis::X: v[0] = -v[0]; break;
+                case Axis::Y: v[1] = -v[1]; break;
+                case Axis::Z: v[2] = -v[2]; break;
+                case Axis::XY: {
                     v[0] = -v[0];
                     v[1] = -v[1];
                     break;
                 }
-                case Axis::AXIS_YZ: {
+                case Axis::YZ: {
                     v[1] = -v[1];
                     v[2] = -v[2];
                     break;
                 }
-                case Axis::AXIS_XZ: {
+                case Axis::XZ: {
                     v[0] = -v[0];
                     v[2] = -v[2];
                     break;
                 }
-                case Axis::AXIS_XYZ: {
+                case Axis::XYZ: {
                     v[0] = -v[0];
                     v[1] = -v[1];
                     v[2] = -v[2];
@@ -266,9 +266,9 @@ namespace SR_MATH_NS {
             Vector3 v = *this;
 
             switch (axis) {
-                case Axis::AXIS_XY: std::swap(v.x, v.y); break;
-                case Axis::AXIS_YZ: std::swap(v.y, v.z); break;
-                case Axis::AXIS_XZ: std::swap(v.x, v.z); break;
+                case Axis::XY: std::swap(v.x, v.y); break;
+                case Axis::YZ: std::swap(v.y, v.z); break;
+                case Axis::XZ: std::swap(v.x, v.z); break;
                 default:
                     break;
             }
@@ -276,17 +276,17 @@ namespace SR_MATH_NS {
             return v;
         }
 
-        SR_NODISCARD Vector3 ZeroAxis(Axis axis) const {
+        SR_NODISCARD Vector3 ZeroAxis(AxisFlag axis) const {
             Vector3 v = *this;
 
             switch (axis) {
-                case Axis::AXIS_X: v[0] = 0; break;
-                case Axis::AXIS_Y: v[1] = 0; break;
-                case Axis::AXIS_Z: v[2] = 0; break;
-                case Axis::AXIS_XY: v[0] = v[1] = 0; break;
-                case Axis::AXIS_XZ: v[0] = v[1] = 0; break;
-                case Axis::AXIS_YZ: v[1] = v[2] = 0; break;
-                case Axis::AXIS_XYZ: v[0] = v[1] = v[2] = 0; break;
+                case Axis::X: v[0] = 0; break;
+                case Axis::Y: v[1] = 0; break;
+                case Axis::Z: v[2] = 0; break;
+                case Axis::XY: v[0] = v[1] = 0; break;
+                case Axis::XZ: v[0] = v[1] = 0; break;
+                case Axis::YZ: v[1] = v[2] = 0; break;
+                case Axis::XYZ: v[0] = v[1] = v[2] = 0; break;
                 default:
                     break;
             }

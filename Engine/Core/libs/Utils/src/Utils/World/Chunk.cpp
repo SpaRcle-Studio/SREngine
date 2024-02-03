@@ -233,16 +233,16 @@ namespace SR_WORLD_NS {
         return pMarshal;
     }
 
-    SR_MATH_NS::FVector3 Chunk::GetWorldPosition(SR_MATH_NS::Axis center) const {
+    SR_MATH_NS::FVector3 Chunk::GetWorldPosition(SR_MATH_NS::AxisFlag center) const {
         auto fPos = SR_UTILS_NS::World::AddOffset(
                 ((m_region->GetWorldPosition()) + (m_position - SR_MATH_NS::FVector3(1, 1, 1))).Cast<SR_MATH_NS::Unit>(),
                 m_observer->m_offset.m_chunk.Cast<SR_MATH_NS::Unit>()
         );
 
         fPos = SR_MATH_NS::FVector3(
-                fPos.x * m_size.x + (center & SR_MATH_NS::AXIS_X ? (SR_MATH_NS::Unit) m_size.x / 2 : 0),
-                fPos.y * m_size.y + (center & SR_MATH_NS::AXIS_Y ? (SR_MATH_NS::Unit) m_size.y / 2 : 0),
-                fPos.z * m_size.x + (center & SR_MATH_NS::AXIS_Z ? (SR_MATH_NS::Unit) m_size.x / 2 : 0)
+                fPos.x * m_size.x + (center & SR_MATH_NS::Axis::X ? (SR_MATH_NS::Unit) m_size.x / 2 : 0),
+                fPos.y * m_size.y + (center & SR_MATH_NS::Axis::Y ? (SR_MATH_NS::Unit) m_size.y / 2 : 0),
+                fPos.z * m_size.x + (center & SR_MATH_NS::Axis::Z ? (SR_MATH_NS::Unit) m_size.x / 2 : 0)
         );
 
         fPos = fPos.DeSingular(SR_MATH_NS::FVector3(m_size.x, m_size.y, m_size.x));

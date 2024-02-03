@@ -222,8 +222,8 @@ namespace SR_CORE_GUI_NS {
                 case SR_UTILS_NS::Measurement::Space2D:
                     break;
                 case SR_UTILS_NS::Measurement::Space3D:
-                    translation = translation.InverseAxis(SR_MATH_NS::Axis::AXIS_X);
-                    rotation = rotation.Degrees().InverseAxis(SR_MATH_NS::Axis::AXIS_YZ);
+                    translation = translation.InverseAxis(SR_MATH_NS::Axis::X);
+                    rotation = rotation.Degrees().InverseAxis(SR_MATH_NS::Axis::YZ);
                     break;
                 default:
                     break;
@@ -294,8 +294,8 @@ namespace SR_CORE_GUI_NS {
                 break;
             }
             case SR_UTILS_NS::Measurement::Space3D: {
-                const SR_MATH_NS::FVector3 translation = transformation.GetTranslate().InverseAxis(SR_MATH_NS::Axis::AXIS_X);
-                const SR_MATH_NS::FVector3 rotation = transformation.GetQuat().EulerAngle().InverseAxis(SR_MATH_NS::Axis::AXIS_YZ);
+                const SR_MATH_NS::FVector3 translation = transformation.GetTranslate().InverseAxis(SR_MATH_NS::Axis::X);
+                const SR_MATH_NS::FVector3 rotation = transformation.GetQuat().EulerAngle().InverseAxis(SR_MATH_NS::Axis::YZ);
                 const SR_MATH_NS::FVector3 scale = m_transform->GetScale();
 
                 matrix = glm::translate(glm::mat4(1), translation.ToGLM());

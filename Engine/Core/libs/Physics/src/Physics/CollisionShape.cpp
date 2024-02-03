@@ -45,7 +45,7 @@ namespace SR_PTYPES_NS {
             );
         }
         else if (SR_PHYSICS_UTILS_NS::IsCapsule(GetType())) {
-            SR_MATH_NS::Unit width = (m_rigidbody->GetScale() * GetRadius()).ZeroAxis(SR_MATH_NS::AXIS_Y).Max();
+            SR_MATH_NS::Unit width = (m_rigidbody->GetScale() * GetRadius()).ZeroAxis(SR_MATH_NS::Axis::Y).Max();
             SR_MATH_NS::FVector3 size = SR_MATH_NS::FVector3(width, GetHeight() * m_rigidbody->GetScale().y, width);
             m_debugId = SR_UTILS_NS::DebugDraw::Instance().DrawCapsule(
                     m_debugId,

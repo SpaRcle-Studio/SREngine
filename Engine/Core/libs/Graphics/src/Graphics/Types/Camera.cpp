@@ -220,7 +220,7 @@ namespace SR_GTYPES_NS {
         matrix = matrix.RotateAxis(SR_MATH_NS::FVector3(0, 1, 0), eulerAngles.y + 180);
         matrix = matrix.RotateAxis(SR_MATH_NS::FVector3(0, 0, 1), eulerAngles.z);
 
-        matrix = matrix.Translate(m_position.InverseAxis(SR_MATH_NS::AXIS_YZ));
+        matrix = matrix.Translate(m_position.InverseAxis(SR_MATH_NS::Axis::YZ));
 
         return matrix;
     }

@@ -586,7 +586,7 @@ namespace SR_WORLD_NS {
                 }
 
                 m_planesIds.emplace_back(SR_UTILS_NS::DebugDraw::Instance().DrawPlane(
-                    pChunk->GetWorldPosition(SR_MATH_NS::AXIS_XZ),
+                    pChunk->GetWorldPosition(SR_MATH_NS::Axis::XZ),
                     SR_MATH_NS::Quaternion::Identity(),
                     SR_MATH_NS::FVector3(m_chunkSize.x, m_chunkSize.y, m_chunkSize.x) / 2,
                     SR_MATH_NS::FColor(255, 255, 0, 255),
@@ -597,7 +597,7 @@ namespace SR_WORLD_NS {
 
         if (m_currentChunk) {
             m_cubesIds.emplace_back(SR_UTILS_NS::DebugDraw::Instance().DrawCube(
-                m_currentChunk->GetWorldPosition(SR_MATH_NS::AXIS_XYZ),
+                m_currentChunk->GetWorldPosition(SR_MATH_NS::Axis::XYZ),
                 SR_MATH_NS::Quaternion::Identity(),
                 SR_MATH_NS::FVector3(m_chunkSize.x, m_chunkSize.y, m_chunkSize.x) / 2,
                 SR_MATH_NS::FColor(0, 255, 0, 255),

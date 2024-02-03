@@ -24,3 +24,4 @@
 #include "../src/Core/GUI/RenderTechniqueEditor.cpp"
 #include "../src/Core/GUI/PropertyDrawer.cpp"
 #include "../src/Core/GUI/EditorCamera.cpp"
+#include "../src/Core/GUI/EditorGizmo.cpp"

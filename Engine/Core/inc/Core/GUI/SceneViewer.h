@@ -56,8 +56,7 @@ namespace SR_CORE_GUI_NS {
 
         bool UpdateViewSize();
 
-        void InitCamera();
-        void SetCamera(const GameObjectPtr& camera);
+        void SetCameraEnabled(bool enabled);
         void DrawTexture(SR_MATH_NS::IVector2 winSize, SR_MATH_NS::IVector2 texSize, uint32_t id, bool centralize);
 
     private:
@@ -68,14 +67,15 @@ namespace SR_CORE_GUI_NS {
         EnginePtr m_engine;
 
         SR_MATH_NS::FVector3 m_velocity;
-        SR_MATH_NS::FVector3 m_rotation;
-        SR_MATH_NS::FVector3 m_translation;
+        SR_MATH_NS::FVector3 m_cameraRotation;
+        SR_MATH_NS::FVector3 m_cameraTranslation;
 
         bool m_isPrefab = false;
         Hierarchy* m_hierarchy = nullptr;
         Guizmo* m_guizmo = nullptr;
         int32_t m_id = SR_ID_INVALID;
         GameObjectPtr m_camera;
+        GameObjectPtr m_gizmo;
         GameObjectPtr m_platform;
         SR_WORLD_NS::Scene::Ptr m_scene;
         std::atomic<bool> m_enabled = true;

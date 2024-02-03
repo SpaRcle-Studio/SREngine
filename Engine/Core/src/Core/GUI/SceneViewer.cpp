@@ -36,16 +36,6 @@ namespace SR_CORE_NS::GUI {
         SR_SAFE_DELETE_PTR(m_guizmo);
     }
 
-    void SceneViewer::SetCamera(const GameObjectPtr& camera) {
-        if (m_camera) {
-            m_camera->Destroy();
-        }
-
-        m_camera.Replace(camera);
-
-        BackupCameraSettings();
-    }
-
     void SceneViewer::Draw() {
         if (!m_scene.RecursiveLockIfValid()) {
             return;
@@ -53,7 +43,7 @@ namespace SR_CORE_NS::GUI {
 
         /// что-то пошло не так, потеряли камеру
         if (m_enabled && !m_camera) {
-            InitCamera();
+            SetCameraEnabled(true);
         }
 
         if (m_enabled && !m_platform && m_isPrefab) {
@@ -69,8 +59,8 @@ namespace SR_CORE_NS::GUI {
         }
 
         if (m_camera.RecursiveLockIfValid()) {
-            m_translation = m_camera->GetTransform()->GetTranslation();
-            m_rotation = m_camera->GetTransform()->GetRotation();
+            m_cameraTranslation = m_camera->GetTransform()->GetTranslation();
+            m_cameraRotation = m_camera->GetTransform()->GetRotation();
 
             auto pCamera = m_camera->GetComponent<SR_GTYPES_NS::Camera>();
 
@@ -119,7 +109,6 @@ namespace SR_CORE_NS::GUI {
     }
 
     void SceneViewer::SetScene(const SR_WORLD_NS::Scene::Ptr& scene) {
-        SetCamera(GameObjectPtr());
         m_scene.Replace(scene);
         Enable(m_enabled);
     }
@@ -127,26 +116,16 @@ namespace SR_CORE_NS::GUI {
     void SceneViewer::Enable(bool value) {
         m_enabled = value;
 
-        if (!m_scene) {
-            SetCamera(GameObjectPtr());
-            return;
-        }
-
-        auto&& pLogic = m_scene->GetLogicBase();
+        auto&& pLogic = m_scene ? m_scene->GetLogicBase() : SR_WORLD_NS::SceneLogic::Ptr();
 
         /// если сцена сломана, или это "пустышка", то не создаем камеру, т.к. рендерить нет смыла 
-        if (!pLogic || pLogic->IsDefault()) {
-            SetCamera(GameObjectPtr());
+        if (!pLogic || pLogic->IsDefault() || !m_enabled) {
+            SetCameraEnabled(false);
             return;
         }
 
-        if (m_enabled) {
-            if (!m_camera.Valid()) {
-                InitCamera();
-            }
-        }
-        else {
-            SetCamera(GameObjectPtr());
+        if (!m_camera.Valid()) {
+            SetCameraEnabled(true);
         }
     }
 
@@ -245,40 +224,47 @@ namespace SR_CORE_NS::GUI {
         m_imagePosition = SR_GRAPH_GUI_NS::DrawTexture(pPipeline.Get(), id, m_textureSize, false);
     }
 
-    void SceneViewer::InitCamera() {
+    void SceneViewer::SetCameraEnabled(bool enabled) {
         SR_UTILS_NS::GameObject::Ptr camera;
 
-        /// сцена может быть уже заблокирована до Engine::SetScene
-        if (SR_UTILS_NS::Features::Instance().Enabled("EditorCamera", true) && m_scene.RecursiveLockIfValid()) {
-            camera = m_scene->Instance("Editor camera");
-            camera->SetDontSave(true);
-            m_isPrefab = m_scene->IsPrefab();
-            m_scene.Unlock();
+        if (enabled) {
+            /// сцена может быть уже заблокирована до Engine::SetScene
+            if (SR_UTILS_NS::Features::Instance().Enabled("EditorCamera", true) && m_scene.RecursiveLockIfValid()) {
+                camera = m_scene->Instance("Editor camera");
+                m_isPrefab = m_scene->IsPrefab();
+                m_scene.Unlock();
+            }
+            else {
+                return;
+            }
+
+            const auto size = m_window->GetSize();
+
+            auto&& pCamera = new EditorCamera(this, size.x, size.y);
+
+            if (m_isPrefab) {
+                pCamera->SetRenderTechnique(SR_CORE_NS::EditorSettings::Instance().GetPrefabEditorRenderTechnique());
+            }
+            else {
+                pCamera->SetRenderTechnique(SR_CORE_NS::EditorSettings::Instance().GetRenderTechnique());
+            }
+
+            camera->AddComponent(pCamera);
+
+            /// Камера редактора имеет наивысшый закадровый приоритет
+            pCamera->SetPriority(SR_INT32_MIN);
+
+            camera->GetTransform()->GlobalTranslate(m_cameraTranslation);
+            camera->GetTransform()->GlobalRotate(m_cameraRotation);
         }
-        else {
-            return;
+
+        if (m_camera) {
+            m_camera->Destroy();
         }
 
-        const auto size = m_window->GetSize();
+        m_camera.Replace(camera);
 
-        auto&& pCamera = new EditorCamera(this, size.x, size.y);
-
-        if (m_isPrefab) {
-            pCamera->SetRenderTechnique(SR_CORE_NS::EditorSettings::Instance().GetPrefabEditorRenderTechnique());
-        }
-        else {
-            pCamera->SetRenderTechnique(SR_CORE_NS::EditorSettings::Instance().GetRenderTechnique());
-        }
-
-        camera->AddComponent(pCamera);
-
-        /// Камера редактора имеет наивысшый закадровый приоритет
-        pCamera->SetPriority(SR_INT32_MIN);
-
-        camera->GetTransform()->GlobalTranslate(m_translation);
-        camera->GetTransform()->GlobalRotate(m_rotation);
-
-        SetCamera(camera);
+        BackupCameraSettings();
     }
 
     void SceneViewer::OnClose() {
@@ -350,16 +336,16 @@ namespace SR_CORE_NS::GUI {
             return;
         }
 
-        m_translation = settings.GetNode("Translation").GetAttribute<SR_MATH_NS::FVector3>();
-        m_rotation = settings.GetNode("Rotation").GetAttribute<SR_MATH_NS::FVector3>();
+        m_cameraTranslation = settings.GetNode("Translation").GetAttribute<SR_MATH_NS::FVector3>();
+        m_cameraRotation = settings.GetNode("Rotation").GetAttribute<SR_MATH_NS::FVector3>();
     }
 
     void SceneViewer::BackupCameraSettings() {
         auto&& xmlDocument = SR_XML_NS::Document::New();
         auto&& settings = xmlDocument.Root().AppendNode("Settings");
 
-        settings.AppendNode("Translation").AppendAttribute<SR_MATH_NS::FVector3>(m_translation);
-        settings.AppendNode("Rotation").AppendAttribute<SR_MATH_NS::FVector3>(m_rotation);
+        settings.AppendNode("Translation").AppendAttribute<SR_MATH_NS::FVector3>(m_cameraTranslation);
+        settings.AppendNode("Rotation").AppendAttribute<SR_MATH_NS::FVector3>(m_cameraRotation);
 
         if (!xmlDocument.Save(SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat(CAMERA_XML))) {
             SR_ERROR("SceneViewer::BackupCameraSettings() : failed to save camera settings!");

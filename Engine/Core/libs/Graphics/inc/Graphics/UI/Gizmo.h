@@ -12,36 +12,38 @@ namespace SR_GRAPH_UI_NS {
     SR_ENUM_NS_CLASS_T(GizmoMode, uint8_t, Local, Global);
 
     SR_ENUM_NS_STRUCT_T(GizmoOperation, uint64_t,
-        None = 1 << 0,
-        Center = 1 << 1,
-        Alternative = 1 << 2,
+        None = 0,
+        Center = 1 << 0,
+        Alternative = 1 << 1,
 
-        X = 1 << 3,
-        Y = 1 << 4,
-        Z = 1 << 5,
+        X = 1 << 2,
+        Y = 1 << 3,
+        Z = 1 << 4,
 
-        TranslateX = X | 1 << 6,
-        TranslateY = Y | 1 << 7,
-        TranslateZ = Z | 1 << 8,
-        TranslateAltX = X | Alternative,
-        TranslateAltY = Y | Alternative,
-        TranslateAltZ = Z | Alternative,
-        Translate = TranslateX | TranslateAltX | TranslateY | TranslateAltY | TranslateZ | TranslateAltZ,
+        Translate = 1 << 5,
+        Rotate = 1 << 6,
+        Scale = 1 << 7,
+        Bounds = 1 << 8,
 
-        RotateX = X | 1 << 9,
-        RotateY = Y | 1 << 10,
-        RotateZ = Z | 1 << 11,
-        Rotate = RotateX | RotateY | RotateZ,
+        TranslateX = X | Translate,
+        TranslateY = Y | Translate,
+        TranslateZ = Z | Translate,
+        TranslateAltX = Y | Z | Translate | Alternative,
+        TranslateAltY = X | Z | Translate | Alternative,
+        TranslateAltZ = X | Y | Translate | Alternative,
+        TranslateCenter = Translate | Center,
 
-        ScaleX = X | 1 << 12,
-        ScaleY = Y | 1 << 13,
-        ScaleZ = Z | 1 << 14,
-        Scale = ScaleX | ScaleY | ScaleZ,
+        RotateX = X | Rotate,
+        RotateY = Y | Rotate,
+        RotateZ = Z | Rotate,
 
-        BoundsX = X | 1 << 15,
-        BoundsY = Y | 1 << 16,
-        BoundsZ = Z | 1 << 17,
-        Bounds = BoundsX | BoundsY | BoundsZ,
+        ScaleX = X | Rotate,
+        ScaleY = Y | Rotate,
+        ScaleZ = Z | Rotate,
+
+        BoundsX = X | Bounds,
+        BoundsY = Y | Bounds,
+        BoundsZ = Z | Bounds,
 
         Universal = Translate | Rotate | Scale
     );
@@ -65,13 +67,15 @@ namespace SR_GRAPH_UI_NS {
         void OnDestroy() override;
         void FixedUpdate() override;
 
-        SR_NODISCARD SR_FORCE_INLINE bool ExecuteInEditMode() const override { return true; }
-
     protected:
         void ProcessGizmo(const SR_MATH_NS::FPoint& mousePos);
         void LoadGizmo();
         void ReleaseGizmo();
         void LoadMesh(GizmoOperationFlag operation, SR_UTILS_NS::StringAtom path, SR_UTILS_NS::StringAtom name, GizmoMeshLoadMode mode);
+
+        SR_NODISCARD SR_MATH_NS::AxisFlag GetAxis() const;
+
+        SR_NODISCARD SR_FORCE_INLINE bool ExecuteInEditMode() const override { return true; }
 
     private:
         struct MeshInfo {
@@ -92,9 +96,7 @@ namespace SR_GRAPH_UI_NS {
         SR_MATH_NS::FVector3 m_translationPlanOrigin;
         SR_MATH_NS::FVector3 m_relativeOrigin;
         SR_MATH_NS::FVector4 m_translationPlan;
-        SR_MATH_NS::FPoint m_lastMousePos;
         SR_MATH_NS::Matrix4x4 m_modelMatrix;
-        SR_MATH_NS::Matrix4x4 m_oldModelMatrix;
 
     };
 }

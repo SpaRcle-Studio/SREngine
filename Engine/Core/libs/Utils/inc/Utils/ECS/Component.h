@@ -30,6 +30,7 @@ namespace SR_HTYPES_NS {
 public:                                                                                                                 \
     SR_INLINE static const SR_UTILS_NS::StringAtom COMPONENT_NAME = #name; /** NOLINT */                                \
     SR_NODISCARD const SR_UTILS_NS::StringAtom& GetComponentName() const override { return name::COMPONENT_NAME; }      \
+private:                                                                                                                \
 
 namespace SR_UTILS_NS {
     class ComponentManager;

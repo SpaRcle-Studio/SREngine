@@ -24,9 +24,11 @@ namespace SR_GTYPES_NS {
             SR_UTILS_NS::Path path;
             SR_GRAPH_NS::IRenderTechnique* pTechnique = nullptr;
         };
-        using Ptr = SR_HTYPES_NS::SharedPtr<Camera>;
         using RenderScenePtr = SR_HTYPES_NS::SafePtr<RenderScene>;
         using Super = SR_UTILS_NS::Component;
+    public:
+        using Ptr = SR_HTYPES_NS::SharedPtr<Camera>;
+
     public:
         explicit Camera(uint32_t width = 0, uint32_t height = 0);
         ~Camera() override;

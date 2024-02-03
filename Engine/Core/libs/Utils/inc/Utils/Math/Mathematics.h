@@ -2,8 +2,8 @@
 // Created by Nikita on 17.11.2020.
 //
 
-#ifndef GAMEENGINE_MATHEMATICS_H
-#define GAMEENGINE_MATHEMATICS_H
+#ifndef SR_ENGINE_UTILS_MATHEMATICS_H
+#define SR_ENGINE_UTILS_MATHEMATICS_H
 
 #include <Utils/stdInclude.h>
 
@@ -124,20 +124,6 @@ namespace SR_MATH_NS {
         return true;
     }
 
-    enum Axis {
-        AXIS_NONE = 1 << 0,
-        AXIS_X    = 1 << 1,
-        AXIS_Y    = 1 << 2,
-        AXIS_Z    = 1 << 3,
-
-        AXIS_XY   = AXIS_X | AXIS_Y,
-        AXIS_XZ   = AXIS_X | AXIS_Z,
-        AXIS_YZ   = AXIS_Y | AXIS_Z,
-        AXIS_XYZ  = AXIS_X | AXIS_Y | AXIS_Z,
-
-        AXIS_SCREEN,
-    };
-
     typedef float Unit; //! can broke render
 
     const double_t DoubleMAX = DBL_MAX;
@@ -212,4 +198,4 @@ namespace SR_MATH_NS {
 #define Deg180InRad ((SR_MATH_NS::Unit)M_PI)
 #define Deg90InRad  ((SR_MATH_NS::Unit)RAD(90.0))
 
-#endif //GAMEENGINE_MATHEMATICS_H
+#endif //SR_ENGINE_UTILS_MATHEMATICS_H

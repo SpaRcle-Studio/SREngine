@@ -15,6 +15,7 @@
     public:                                                                                  \
         SR_INLINE static const uint16_t VERSION = version;                                   \
         SR_NODISCARD uint16_t GetEntityVersion() const noexcept override { return VERSION; } \
+    private:                                                                                 \
 
 namespace SR_UTILS_NS {
     class Entity;

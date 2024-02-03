@@ -95,7 +95,11 @@ namespace SR_MATH_NS {
             return Matrix4x4(glm::lookAtRH(eye.ToGLM(), center.ToGLM(), up.ToGLM()));
         }
 
-        static Matrix4x4 FromEulers(const Quaternion& quaternion) {
+        SR_DEPRECATED_EX("FromQuaternion") static Matrix4x4 FromEulers(const Quaternion& quaternion) {
+            return Matrix4x4(0.f, quaternion, 1.f);
+        }
+
+        static Matrix4x4 FromQuaternion(const Quaternion& quaternion) {
             return Matrix4x4(0.f, quaternion, 1.f);
         }
 
@@ -137,6 +141,17 @@ namespace SR_MATH_NS {
 
         SR_NODISCARD Matrix4x4 Translate(const FVector3& vec3) const {
             return Matrix4x4(glm::translate(self, vec3.ToGLM()));
+        }
+
+        SR_NODISCARD FVector4 GetAxis(AxisFlag axis) const {
+            switch (axis) {
+                case Axis::X: return value[0];
+                case Axis::Y: return value[1];
+                case Axis::Z: return value[2];
+                default:
+                    SRHalt("Wrong axis!");
+                    return SR_MATH_NS::FVector4();
+            }
         }
 
         SR_NODISCARD FVector3 GetTranslate() const {
@@ -401,7 +416,7 @@ namespace SR_MATH_NS {
         }
     };
 
-    static FVector4 CalcPlanNormal(const Matrix4x4& model, const SR_MATH_NS::FVector3& cameraEye, const SR_MATH_NS::FVector3& cameraDir, Axis axis) {
+    static FVector4 CalcPlanNormal(const Matrix4x4& model, const SR_MATH_NS::FVector3& cameraEye, const SR_MATH_NS::FVector3& cameraDir, AxisFlag axis) {
         SR_MATH_NS::FVector4 movePlanNormal[] = {
             model.v.right, // x
             model.v.up,    // y
@@ -409,7 +424,7 @@ namespace SR_MATH_NS {
             model.v.right, // yz
             model.v.up,    // zx
             model.v.dir,   // xy
-            SR_MATH_NS::FVector4(-cameraDir, 0.f)     // screen
+            SR_MATH_NS::FVector4(-cameraDir, 0.f) // screen (xyz)
         };
 
         auto&& cameraToModelNormalized = SR_MATH_NS::FVector4((model.v.position.XYZ() - cameraEye).Normalize(), 0.f);
@@ -420,16 +435,18 @@ namespace SR_MATH_NS {
         }
 
         switch (axis) {
-            case AXIS_X: return movePlanNormal[0];
-            case AXIS_Y: return movePlanNormal[1];
-            case AXIS_Z: return movePlanNormal[2];
-            case AXIS_YZ: return movePlanNormal[3];
-            case AXIS_XZ: return movePlanNormal[4];
-            case AXIS_XY: return movePlanNormal[5];
-            case AXIS_SCREEN: return movePlanNormal[6];
+            case Axis::XYZ: return movePlanNormal[6];
+            case Axis::YZ: return movePlanNormal[3];
+            case Axis::XZ: return movePlanNormal[4];
+            case Axis::XY: return movePlanNormal[5];
+            case Axis::X: return movePlanNormal[0];
+            case Axis::Y: return movePlanNormal[1];
+            case Axis::Z: return movePlanNormal[2];
             default:
                 break;
         }
+
+        SRHalt("Unknown axis!");
 
         return SR_MATH_NS::FVector4();
     }

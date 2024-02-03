@@ -9,7 +9,9 @@ namespace SR_CORE_GUI_NS {
     EditorCamera::EditorCamera(SceneViewer* pSceneViewer, uint32_t width, uint32_t height)
         : Camera(width, height)
         , m_sceneViewer(pSceneViewer)
-    { }
+    {
+        SetDontSave(true);
+    }
 
     bool EditorCamera::ExecuteInEditMode() const {
         return true;
