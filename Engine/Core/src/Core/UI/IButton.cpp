@@ -10,7 +10,7 @@
 #include <Graphics/Render/RenderScene.h>
 #include <Graphics/Render/IRenderTechnique.h>
 
-#include <Graphics/Pass/IColorBufferPass.h.>
+#include <Graphics/Pass/IColorBufferPass.h>
 
 #include <Utils/Input/InputSystem.h>
 
