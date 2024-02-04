@@ -43,6 +43,7 @@ namespace SR_CORE_GUI_NS {
 
         SR_NODISCARD SR_MATH_NS::FPoint GetImagePosition() const;
         SR_NODISCARD SR_MATH_NS::IPoint GetTextureSize() const { return m_textureSize; }
+        SR_NODISCARD GameObjectPtr GetGizmo() const { return m_gizmo; }
 
     private:
         void SelectMesh(SR_GTYPES_NS::MeshComponent* pMesh);

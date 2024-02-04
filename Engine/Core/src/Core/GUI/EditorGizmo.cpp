@@ -14,7 +14,8 @@ namespace SR_CORE_GUI_NS {
             return SR_MATH_NS::Matrix4x4::Identity();
         }
 
-        return (*m_hierarchy->GetSelected().begin())->GetTransform()->GetMatrix();
+        auto&& pTransform = (*m_hierarchy->GetSelected().begin())->GetTransform();
+        return pTransform->GetMatrix();
     }
 
     void EditorGizmo::OnGizmoTranslated(const SR_MATH_NS::FVector3& delta) {

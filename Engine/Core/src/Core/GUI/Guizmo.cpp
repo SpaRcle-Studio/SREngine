@@ -94,10 +94,15 @@ namespace SR_CORE_GUI_NS {
 
             ImGui::SameLine();
             if (SR_GRAPH_NS::GUI::Button("L", IsLocal() ? toggleActiveColor : toggleNotActiveColor)) {
-                if (IsLocal())
+                auto&& pGizmo = m_engine->GetEditor()->GetWidget<SceneViewer>()->GetGizmo()->GetComponent<EditorGizmo>();
+                if (IsLocal()) {
                     SetMode(ImGuizmo::MODE::WORLD);
-                else
+                    pGizmo->SetMode(SR_GRAPH_UI_NS::GizmoMode::Global);
+                }
+                else {
                     SetMode(ImGuizmo::MODE::LOCAL);
+                    pGizmo->SetMode(SR_GRAPH_UI_NS::GizmoMode::Local);
+                }
             }
 
             ImGui::SameLine();

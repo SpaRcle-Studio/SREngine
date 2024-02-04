@@ -136,18 +136,7 @@ namespace SR_GRAPH_UI_NS {
             return;
         }
 
-        m_modelMatrix = GetGizmoMatrix();
-
-        if (IsHandledAnotherObject()) {
-            GetTransform()->SetTranslation(m_modelMatrix.GetTranslate());
-            GetTransform()->SetRotation(m_modelMatrix.GetQuat());
-        }
-
-        if (m_zoomFactor > 0.f) {
-            auto&& modelMatrix = SR_MATH_NS::Matrix4x4::FromTranslate(GetTransform()->GetTranslation());
-            const float_t screenFactor = GetCamera()->CalculateScreenFactor(modelMatrix, m_zoomFactor);
-            GetTransform()->SetScale(screenFactor);
-        }
+        UpdateGizmoTransform();
 
         if (!SR_UTILS_NS::Input::Instance().GetMouse(SR_UTILS_NS::MouseCode::MouseLeft)) {
             m_activeOperation = GizmoOperation::None;
@@ -155,8 +144,9 @@ namespace SR_GRAPH_UI_NS {
 
         auto&& mousePos = GetCamera()->GetMousePos();
 
-        /// normalized for local scape
-        m_modelMatrix = m_modelMatrix.OrthogonalNormalize();
+        if (GetMode() == GizmoMode::Local) {
+            m_modelMatrix = m_modelMatrix.OrthogonalNormalize(); /// normalized for local scape
+        }
 
         m_hoveredOperation = GizmoOperation::None;
 
@@ -234,7 +224,9 @@ namespace SR_GRAPH_UI_NS {
                 delta = axisValue * lengthOnAxis;
             }
 
-            OnGizmoTranslated(m_modelMatrix.GetQuat().Inverse() * delta);
+            OnGizmoTranslated(m_localMatrix.GetQuat().Inverse() * delta);
+
+            UpdateGizmoTransform();
         }
     }
 
@@ -256,5 +248,26 @@ namespace SR_GRAPH_UI_NS {
 
     void Gizmo::OnGizmoTranslated(const SR_MATH_NS::FVector3& delta) {
         GetTransform()->Translate(delta);
+    }
+
+    void Gizmo::UpdateGizmoTransform() {
+        m_localMatrix = GetGizmoMatrix();
+
+        m_modelMatrix = SR_MATH_NS::Matrix4x4(
+                m_localMatrix.GetTranslate(),
+                GetMode() == GizmoMode::Local ? m_localMatrix.GetQuat() : SR_MATH_NS::Quaternion::Identity(),
+                m_localMatrix.GetScale()
+        );
+
+        if (IsHandledAnotherObject()) {
+            GetTransform()->SetTranslation(m_modelMatrix.GetTranslate());
+            GetTransform()->SetRotation(m_modelMatrix.GetQuat());
+        }
+
+        if (m_zoomFactor > 0.f) {
+            auto&& modelMatrix = SR_MATH_NS::Matrix4x4::FromTranslate(GetTransform()->GetTranslation());
+            const float_t screenFactor = GetCamera()->CalculateScreenFactor(modelMatrix, m_zoomFactor);
+            GetTransform()->SetScale(screenFactor);
+        }
     }
 }

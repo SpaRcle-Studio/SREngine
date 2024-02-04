@@ -66,11 +66,16 @@ namespace SR_GRAPH_UI_NS {
         SR_NODISCARD bool IsGizmoActive() const { return m_activeOperation != GizmoOperation::None; }
         SR_NODISCARD bool IsGizmoHovered() const { return m_hoveredOperation != GizmoOperation::None; }
 
+        void SetMode(GizmoMode mode) { m_mode = mode; }
+
+        SR_NODISCARD GizmoMode GetMode() const { return m_mode; }
+
     protected:
         void ProcessGizmo(const SR_MATH_NS::FPoint& mousePos);
         void LoadGizmo();
         void ReleaseGizmo();
         void LoadMesh(GizmoOperationFlag operation, SR_UTILS_NS::StringAtom path, SR_UTILS_NS::StringAtom name, GizmoMeshLoadMode mode);
+        void UpdateGizmoTransform();
 
         virtual void OnGizmoTranslated(const SR_MATH_NS::FVector3& delta);
 
@@ -102,6 +107,7 @@ namespace SR_GRAPH_UI_NS {
         SR_MATH_NS::FVector3 m_relativeOrigin;
         SR_MATH_NS::FVector4 m_translationPlan;
         SR_MATH_NS::Matrix4x4 m_modelMatrix;
+        SR_MATH_NS::Matrix4x4 m_localMatrix;
 
     };
 }
