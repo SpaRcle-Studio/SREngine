@@ -159,16 +159,11 @@ namespace SR_MATH_NS {
         }
 
         SR_NODISCARD FVector3 GetScale() const {
-            glm::vec3 scale;
-            glm::quat rotation;
-            glm::vec3 translation;
-
-            glm::vec3 skew;
-            glm::vec4 perspective;
-
-            glm::decompose(self, scale, rotation, translation, skew, perspective);
-
-            return FVector3(scale);
+            SR_MATH_NS::FVector3 scale;
+            scale.x = value[0].XYZ().Length();
+            scale.y = value[1].XYZ().Length();
+            scale.z = value[2].XYZ().Length();
+            return scale;
         }
 
         bool Decompose(FVector3& translation, Quaternion& quaternion, FVector3& scale) const {
@@ -334,7 +329,15 @@ namespace SR_MATH_NS {
         }
 
         SR_NODISCARD Quaternion GetQuat() const {
-            return glm::quat_cast(self);
+            auto&& upperLeft = glm::mat3(self);  // Верхний левый 3x3 подматрица матрицы
+
+            // Нормализация столбцов матрицы (избегаем влияния масштабирования)
+            glm::vec3 col1 = glm::normalize(upperLeft[0]);
+            glm::vec3 col2 = glm::normalize(upperLeft[1]);
+            glm::vec3 col3 = glm::normalize(upperLeft[2]);
+
+            // Создание кватерниона из верхней левой 3x3 подматрицы
+            return glm::quat_cast(glm::mat3(col1, col2, col3));
         }
 
         SR_NODISCARD FVector3 GetEulers() const {

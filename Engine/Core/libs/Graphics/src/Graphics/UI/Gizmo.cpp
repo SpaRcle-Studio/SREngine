@@ -151,7 +151,7 @@ namespace SR_GRAPH_UI_NS {
         m_hoveredOperation = GizmoOperation::None;
 
         if (m_activeOperation == GizmoOperation::None) {
-            auto&& pMesh = pTechnique->PickMeshAt(pCamera->GetMousePos());
+            auto&& pMesh = pTechnique->PickMeshAt(mousePos);
             for (auto&& [flag, info] : m_meshes) {
                 if (pMesh == info.pSelection.Get()) {
                     info.pVisual->OverrideUniform("color")
@@ -254,13 +254,13 @@ namespace SR_GRAPH_UI_NS {
     void Gizmo::UpdateGizmoTransform() {
         m_modelMatrix = GetGizmoMatrix();
 
-        if (GetMode() == GizmoMode::Global) {
-            m_modelMatrix = SR_MATH_NS::Matrix4x4(
-                    m_modelMatrix.GetTranslate(),
-                    SR_MATH_NS::Quaternion::Identity(),
-                    m_modelMatrix.GetScale()
-            );
-        }
+        const bool isScaleOperation = m_activeOperation & GizmoOperation::Scale;
+
+        m_modelMatrix = SR_MATH_NS::Matrix4x4(
+                m_modelMatrix.GetTranslate(),
+                GetMode() == GizmoMode::Local ? m_modelMatrix.GetQuat() : SR_MATH_NS::Quaternion::Identity(),
+                isScaleOperation ? m_modelMatrix.GetScale() : SR_MATH_NS::FVector3(1.f)
+        );
 
         if (IsHandledAnotherObject()) {
             GetTransform()->SetTranslation(m_modelMatrix.GetTranslate());

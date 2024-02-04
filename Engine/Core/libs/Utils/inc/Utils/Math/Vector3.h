@@ -345,7 +345,12 @@ namespace SR_MATH_NS {
         }
 
         SR_NODISCARD SR_FORCE_INLINE T Length() const {
-            return static_cast<T>(sqrt(pow(x, 2) + pow(y, 2) + pow(z, 2)));
+            if constexpr (std::is_same_v<T, float_t> || std::is_same_v<T, float>) {
+                return static_cast<T>(sqrtf(x * x + y * y + z * z));
+            }
+            else {
+                return static_cast<T>(sqrt(x * x + y * y + z * z));
+            }
         }
 
         SR_NODISCARD Vector3 Replace(int from, int to) const {
