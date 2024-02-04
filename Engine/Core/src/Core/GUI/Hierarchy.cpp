@@ -406,7 +406,7 @@ namespace SR_CORE_GUI_NS {
         }
     }
 
-    std::set<SR_UTILS_NS::GameObject::Ptr> Hierarchy::GetSelected() const {
+    const std::set<SR_UTILS_NS::GameObject::Ptr>& Hierarchy::GetSelected() const {
         SR_LOCK_GUARD;
         return m_selected;
     }

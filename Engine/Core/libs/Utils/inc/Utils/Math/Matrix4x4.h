@@ -155,16 +155,7 @@ namespace SR_MATH_NS {
         }
 
         SR_NODISCARD FVector3 GetTranslate() const {
-            glm::vec3 scale;
-            glm::quat rotation;
-            glm::vec3 translation;
-
-            glm::vec3 skew;
-            glm::vec4 perspective;
-
-            glm::decompose(self, scale, rotation, translation, skew, perspective);
-
-            return FVector3(translation);
+            return value[3].XYZ();
         }
 
         SR_NODISCARD FVector3 GetScale() const {
@@ -343,16 +334,7 @@ namespace SR_MATH_NS {
         }
 
         SR_NODISCARD Quaternion GetQuat() const {
-            glm::vec3 scale;
-            glm::quat rotation;
-            glm::vec3 translation;
-
-            glm::vec3 skew;
-            glm::vec4 perspective;
-
-            glm::decompose(self, scale, rotation, translation, skew, perspective);
-
-            return Quaternion(rotation);
+            return glm::quat_cast(self);
         }
 
         SR_NODISCARD FVector3 GetEulers() const {

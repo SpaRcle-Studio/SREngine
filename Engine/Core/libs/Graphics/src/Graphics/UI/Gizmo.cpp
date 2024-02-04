@@ -224,7 +224,7 @@ namespace SR_GRAPH_UI_NS {
                 delta = axisValue * lengthOnAxis;
             }
 
-            OnGizmoTranslated(m_localMatrix.GetQuat().Inverse() * delta);
+            OnGizmoTranslated(delta);
 
             UpdateGizmoTransform();
         }
@@ -243,21 +243,24 @@ namespace SR_GRAPH_UI_NS {
         return SR_MATH_NS::Matrix4x4(
             GetTransform()->GetTranslation(),
             GetTransform()->GetQuaternion()
+            /// ignore the scale, because gizmo automatically changes its own scale
         );
     }
 
     void Gizmo::OnGizmoTranslated(const SR_MATH_NS::FVector3& delta) {
-        GetTransform()->Translate(delta);
+        GetTransform()->Translate(GetTransform()->GetMatrix().GetQuat().Inverse() * delta);
     }
 
     void Gizmo::UpdateGizmoTransform() {
-        m_localMatrix = GetGizmoMatrix();
+        m_modelMatrix = GetGizmoMatrix();
 
-        m_modelMatrix = SR_MATH_NS::Matrix4x4(
-                m_localMatrix.GetTranslate(),
-                GetMode() == GizmoMode::Local ? m_localMatrix.GetQuat() : SR_MATH_NS::Quaternion::Identity(),
-                m_localMatrix.GetScale()
-        );
+        if (GetMode() == GizmoMode::Global) {
+            m_modelMatrix = SR_MATH_NS::Matrix4x4(
+                    m_modelMatrix.GetTranslate(),
+                    SR_MATH_NS::Quaternion::Identity(),
+                    m_modelMatrix.GetScale()
+            );
+        }
 
         if (IsHandledAnotherObject()) {
             GetTransform()->SetTranslation(m_modelMatrix.GetTranslate());

@@ -68,7 +68,7 @@ namespace SR_GRAPH_UI_NS {
 
         void SetMode(GizmoMode mode) { m_mode = mode; }
 
-        SR_NODISCARD GizmoMode GetMode() const { return m_mode; }
+        SR_NODISCARD virtual GizmoMode GetMode() const { return m_mode; }
 
     protected:
         void ProcessGizmo(const SR_MATH_NS::FPoint& mousePos);
@@ -107,7 +107,6 @@ namespace SR_GRAPH_UI_NS {
         SR_MATH_NS::FVector3 m_relativeOrigin;
         SR_MATH_NS::FVector4 m_translationPlan;
         SR_MATH_NS::Matrix4x4 m_modelMatrix;
-        SR_MATH_NS::Matrix4x4 m_localMatrix;
 
     };
 }

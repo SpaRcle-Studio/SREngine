@@ -28,7 +28,7 @@ namespace SR_CORE_GUI_NS {
         void OnKeyDown(const SR_UTILS_NS::KeyboardInputData* data) override;
         void OnKeyUp(const SR_UTILS_NS::KeyboardInputData* data) override;
 
-        SR_NODISCARD std::set<SR_UTILS_NS::GameObject::Ptr> GetSelected() const;
+        SR_NODISCARD const std::set<SR_UTILS_NS::GameObject::Ptr>& GetSelected() const;
 
         void ClearSelected();
         void SelectGameObject(const SR_UTILS_NS::GameObject::Ptr& ptr);
