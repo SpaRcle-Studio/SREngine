@@ -39,6 +39,11 @@ namespace SR_CORE_UI_NS {
     }
 
     void IButton::Update(float_t dt) {
+        if (!GetCamera()) {
+            m_state = ButtonState::Idle;
+            return;
+        }
+
         auto&& mousePosition = GetCamera()->GetMousePos();
         auto&& pHoveredMesh = GetCamera()->GetRenderTechnique()->PickMeshAt(mousePosition);
         auto&& isPressed = SR_UTILS_NS::Input::Instance().GetMouse(SR_UTILS_NS::MouseCode::MouseLeft);
@@ -62,8 +67,9 @@ namespace SR_CORE_UI_NS {
         }
         else {
             m_state = ButtonState::Idle;
-            OnKeyDown();
         }
+
+        Super::Update(dt);
     }
 
     bool IButton::InitializeEntity() noexcept {

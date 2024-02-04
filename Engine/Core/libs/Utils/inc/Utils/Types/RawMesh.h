@@ -24,12 +24,16 @@ namespace SR_WORLD_NS {
 }
 
 namespace SR_HTYPES_NS {
+    struct ConvexRawMesh {
+        std::vector<SR_MATH_NS::FVector3> vertices;
+        std::vector<uint32_t> indices;
+    };
+
     struct RawMeshParams {
         bool animation = false;
-        bool convexHull = false;
 
         bool operator==(const RawMeshParams& rhs) const {
-            return animation == rhs.animation && convexHull == rhs.convexHull;
+            return animation == rhs.animation;
         }
     };
 
@@ -52,7 +56,9 @@ namespace SR_HTYPES_NS {
         SR_NODISCARD std::string GetGeometryName(uint32_t id) const;
 
         SR_NODISCARD std::vector<SR_UTILS_NS::Vertex> GetVertices(uint32_t id) const;
+        SR_NODISCARD std::vector<SR_MATH_NS::FVector3> GetConvexVertices(uint32_t id) const;
         SR_NODISCARD std::vector<uint32_t> GetIndices(uint32_t id) const;
+        SR_NODISCARD std::vector<uint32_t> GetConvexIndices(uint32_t id) const;
         SR_NODISCARD const ska::flat_hash_map<uint64_t, uint32_t>& GetBones(uint32_t id) const;
         SR_NODISCARD const ska::flat_hash_map<Hash, uint16_t>& GetOptimizedBones() const { return m_optimizedBones; }
         SR_NODISCARD const SR_MATH_NS::Matrix4x4& GetBoneOffset(uint64_t hashName) const;
@@ -88,6 +94,8 @@ namespace SR_HTYPES_NS {
     private:
         ska::flat_hash_map<Hash, aiAnimation*> m_animations;
 
+        ska::flat_hash_map<StringAtom, ConvexRawMesh> m_convexMeshes;
+
         std::vector<ska::flat_hash_map<Hash, uint32_t>> m_bones;
         ska::flat_hash_map<Hash, uint16_t> m_optimizedBones;
 
@@ -110,7 +118,6 @@ template<> struct SR_UTILS_NS::SRHash<SR_HTYPES_NS::RawMeshParams> {
         std::hash<bool> hBool;
 
         res ^= hBool(params.animation) + 0x9e3779b9 + (res << 6u) + (res >> 2u);
-        res ^= hBool(params.convexHull) + 0x9e3779b9 + (res << 6u) + (res >> 2u);
 
         return res;
     }

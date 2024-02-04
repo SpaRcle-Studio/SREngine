@@ -9,7 +9,7 @@
 #include <QuickHull/FastQuickHull.h>
 
 namespace SR_UTILS_NS {
-    std::vector<Vertex> ComputeConvexHull(const std::vector<Vertex>& vertices) {
+    std::vector<SR_MATH_NS::FVector3> ComputeConvexHull(const std::vector<Vertex>& vertices) {
         std::vector<hull::Coordinate> coordinates;
         coordinates.reserve(vertices.size());
 
@@ -19,15 +19,12 @@ namespace SR_UTILS_NS {
 
         auto&& hullCoordinates = qh::convex_hull(coordinates);
 
-        std::vector<Vertex> hullVertices;
+        std::vector<SR_MATH_NS::FVector3> hullVertices;
         hullVertices.reserve(hullCoordinates.size() * 3);
 
         for (uint16_t i = 0; i <= hullCoordinates.size(); ++i) {
             auto&& face = hullCoordinates[i];
-
-            hullVertices.emplace_back(vertices[face[0]]);
-            hullVertices.emplace_back(vertices[face[1]]);
-            hullVertices.emplace_back(vertices[face[2]]);
+            hullVertices.emplace_back(face[0], face[1], face[2]);
         }
 
         return hullVertices;

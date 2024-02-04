@@ -33,6 +33,9 @@ namespace SR_GTYPES_NS {
 
         void OnRawMeshChanged() override;
 
+        void SetConvex(bool isConvex) { m_isConvex = isConvex; }
+
+        SR_NODISCARD std::vector<SR_MATH_NS::FVector3> GetConvexVertices() const;
         SR_NODISCARD std::vector<uint32_t> GetIndices() const override;
         SR_NODISCARD std::string GetMeshIdentifier() const override;
         SR_NODISCARD const SR_MATH_NS::Matrix4x4& GetModelMatrix() const override;
@@ -49,6 +52,8 @@ namespace SR_GTYPES_NS {
     private:
         SR_MATH_NS::Matrix4x4 m_modelMatrix = SR_MATH_NS::Matrix4x4::Identity();
         SR_MATH_NS::FVector4 m_color;
+
+        bool m_isConvex = false;
 
     };
 }

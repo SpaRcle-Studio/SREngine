@@ -142,10 +142,6 @@ namespace SR_HTYPES_NS {
                 return false;
             }
 
-            if (m_params.convexHull) {
-                ComputeConvexHull();
-            }
-
             NormalizeWeights();
 
             if (needFastLoad) {
@@ -492,7 +488,7 @@ namespace SR_HTYPES_NS {
 
         struct BoneWeight {
             uint32_t mBoneIndex; /// index of a bone in current mesh
-            aiVertexWeight* mVertexWeight; /// a pointer to mVertexWeight in meshs[x]->mBones[x]->mWeight for quick visit
+            aiVertexWeight* mVertexWeight; /// a pointer to mVertexWeight in meshes[x]->mBones[x]->mWeight for quick visit
         };
 
         struct VertexBoneWeights {
@@ -545,18 +541,31 @@ namespace SR_HTYPES_NS {
     }
 
     void RawMesh::ComputeConvexHull() {
-        if (!m_params.convexHull) {
-            return;
-        }
-
-        //std::vector<>
-
         for (uint16_t i = 0; i <= static_cast<uint16_t>(GetMeshesCount()); ++i) {
-            auto&& computedVertices = SR_UTILS_NS::ComputeConvexHull(GetVertices(i));
-            SR_NOOP;
+            ConvexRawMesh convexRawMesh;
+            auto &&vertices = SR_UTILS_NS::ComputeConvexHull(GetVertices(i));
 
+            std::vector<uint32_t> indices;
+            std::map<SR_MATH_NS::FVector3, uint32_t> vertexIndexMap;
+            for (auto &vertex: vertices) {
+                // Check if the vertex is already in the map
+                auto &&it = vertexIndexMap.find(vertex);
+
+                if (it != vertexIndexMap.end()) {
+                    // Vertex already in the map, use its index
+                    indices.push_back(it->second);
+                } else {
+                    // Vertex not in the map, add it to the map and use the new index
+                    vertexIndexMap[vertex] = static_cast<int>(indices.size());
+                    indices.push_back(static_cast<int>(indices.size()));
+                }
+            }
+
+            convexRawMesh.vertices = vertices;
+            convexRawMesh.indices = indices;
+
+            m_convexMeshes[GetGeometryName(i)] = convexRawMesh;
         }
-
     }
 
     int32_t RawMesh::GetMeshId(SR_UTILS_NS::StringAtom name) const {
@@ -572,5 +581,23 @@ namespace SR_HTYPES_NS {
         }
 
         return SR_ID_INVALID;
+    }
+
+    std::vector<SR_MATH_NS::FVector3> RawMesh::GetConvexVertices(uint32_t id) const {
+        if (!m_scene || id >= m_scene->mNumMeshes) {
+            SRAssert2(false, "Out of range or invalid scene!");
+            return {};
+        }
+
+        return m_convexMeshes.find(GetGeometryName(id))->second.vertices;
+    }
+
+    std::vector<uint32_t> RawMesh::GetConvexIndices(uint32_t id) const {
+        if (!m_scene || id >= m_scene->mNumMeshes) {
+            SRAssert2(false, "Out of range or invalid scene!");
+            return {};
+        }
+
+        return m_convexMeshes.find(GetGeometryName(id))->second.indices;
     }
 }

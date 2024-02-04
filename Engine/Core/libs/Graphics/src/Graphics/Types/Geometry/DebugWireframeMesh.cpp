@@ -69,6 +69,9 @@ namespace SR_GTYPES_NS {
         }
 
         if (!CalculateVBO<Vertices::VertexType::SimpleVertex, Vertices::SimpleVertex>([this]() {
+            if (m_isConvex) {
+                return Vertices::FVector3toSimpleVertex(GetConvexVertices());
+            }
             return Vertices::CastVertices<Vertices::SimpleVertex>(GetVertices());
         })) {
             return false;
@@ -78,6 +81,9 @@ namespace SR_GTYPES_NS {
     }
 
     std::vector<uint32_t> DebugWireframeMesh::GetIndices() const {
+        if (m_isConvex) {
+            return GetRawMesh()->GetConvexIndices(GetMeshId());
+        }
         return GetRawMesh()->GetIndices(GetMeshId());
     }
 
@@ -120,5 +126,9 @@ namespace SR_GTYPES_NS {
     void DebugWireframeMesh::OnRawMeshChanged() {
         IRawMeshHolder::OnRawMeshChanged();
         ReRegisterMesh();
+    }
+
+    std::vector<SR_MATH_NS::FVector3> DebugWireframeMesh::GetConvexVertices() const {
+        return GetRawMesh()->GetConvexVertices(GetMeshId());
     }
 }

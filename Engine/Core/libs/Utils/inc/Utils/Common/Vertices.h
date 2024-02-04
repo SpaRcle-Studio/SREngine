@@ -57,7 +57,7 @@ namespace SR_UTILS_NS {
             Vertex(1, 1, -1),
     };
 
-    std::vector<Vertex> ComputeConvexHull(const std::vector<Vertex>& vertices);
+    std::vector<SR_MATH_NS::FVector3> ComputeConvexHull(const std::vector<Vertex>& vertices);
 
     template<typename T> static std::vector<T> IndexedVerticesToNonIndexed(
             const std::vector<T>& vertices,

@@ -24,7 +24,7 @@ namespace SR_GRAPH_NS {
         callbacks.drawPlaneCallback = std::bind(&DebugRenderer::DrawGeometry, this, "Engine/Models/planeWireframe.obj", _1, _2, _3, _4, _5, _6);
         callbacks.drawSphereCallback = std::bind(&DebugRenderer::DrawGeometry, this, "Engine/Models/sphere_circle.obj", _1, _2, _3, _4, _5, _6);
         callbacks.drawCapsuleCallback = std::bind(&DebugRenderer::DrawGeometry, this, "Engine/Models/capsule_circle.obj", _1, _2, _3, _4, _5, _6);
-        callbacks.drawMeshCallback = std::bind(&DebugRenderer::DrawMesh, this, _1, _2, _3, _4, _5, _6, _7, _8);
+        callbacks.drawMeshCallback = std::bind(&DebugRenderer::DrawMesh, this, _1, _2, _3, _4, _5, _6, _7, _8, _9);
 
         SR_UTILS_NS::DebugDraw::Instance().SetCallbacks(this, std::move(callbacks));
     }
@@ -147,7 +147,7 @@ namespace SR_GRAPH_NS {
         SR_LOCK_GUARD;
 
         if (auto&& pRawMesh = SR_HTYPES_NS::RawMesh::Load(SR_UTILS_NS::Path(path, true /** fast */))) {
-            return DrawMesh(pRawMesh, 0, id, pos, rot, scale, color, time);
+            return DrawMesh(false, pRawMesh, 0, id, pos, rot, scale, color, time);
         }
 
         return SR_ID_INVALID;
@@ -216,7 +216,7 @@ namespace SR_GRAPH_NS {
         return m_timedObjects.size() == m_emptyIds.size();
     }
 
-    uint64_t DebugRenderer::DrawMesh(SR_HTYPES_NS::RawMesh* pRawMesh, int32_t meshId, uint64_t id, const SR_MATH_NS::FVector3& pos,
+    uint64_t DebugRenderer::DrawMesh(bool isConvex, SR_HTYPES_NS::RawMesh* pRawMesh, int32_t meshId, uint64_t id, const SR_MATH_NS::FVector3& pos,
         const SR_MATH_NS::Quaternion& rot, const SR_MATH_NS::FVector3& scale,
         const SR_MATH_NS::FColor& color, float_t time
     ) {
@@ -228,6 +228,7 @@ namespace SR_GRAPH_NS {
             );
 
             if (pMesh) {
+                pMesh->SetConvex(isConvex);
                 pMesh->SetColor(color);
                 pMesh->SetMaterial(m_wireFrameMaterial);
                 pMesh->SetMatrix(SR_MATH_NS::Matrix4x4(pos, rot, scale));
@@ -243,7 +244,7 @@ namespace SR_GRAPH_NS {
         }
         else {
             if (!m_timedObjects[id].pMesh) {
-                return DrawMesh(pRawMesh, meshId, SR_ID_INVALID, pos, rot, scale, color, time);
+                return DrawMesh(isConvex, pRawMesh, meshId, SR_ID_INVALID, pos, rot, scale, color, time);
             }
 
             auto&& pMesh = dynamic_cast<SR_GTYPES_NS::DebugWireframeMesh*>(m_timedObjects[id].pMesh);

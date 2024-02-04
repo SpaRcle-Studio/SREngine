@@ -428,7 +428,7 @@ namespace SR_UTILS_NS {
 
     /// ---------------------------------------------------- CAPSULE DRAWING ----------------------------------------------
 
-    uint64_t DebugDraw::DrawMesh(SR_HTYPES_NS::RawMesh* pRawMesh, int32_t meshId, uint64_t id, const SR_MATH_NS::FVector3& pos, const SR_MATH_NS::Quaternion& rot, const SR_MATH_NS::FVector3& scale, const SR_MATH_NS::FColor& color, float_t time) {
+    uint64_t DebugDraw::DrawMesh(bool isConvex, SR_HTYPES_NS::RawMesh* pRawMesh, int32_t meshId, uint64_t id, const SR_MATH_NS::FVector3& pos, const SR_MATH_NS::Quaternion& rot, const SR_MATH_NS::FVector3& scale, const SR_MATH_NS::FColor& color, float_t time) {
         SR_LOCK_GUARD;
 
         if (!pRawMesh) {
@@ -436,78 +436,82 @@ namespace SR_UTILS_NS {
         }
 
         if (m_currentCallbacks && m_currentCallbacks->drawMeshCallback) {
-            return m_currentCallbacks->drawMeshCallback(pRawMesh, meshId, id, pos, rot, scale, color, time);
+            return m_currentCallbacks->drawMeshCallback(isConvex, pRawMesh, meshId, id, pos, rot, scale, color, time);
         }
 
         return SR_ID_INVALID;
     }
 
-    uint64_t DebugDraw::DrawMesh(SR_HTYPES_NS::RawMesh* pRawMesh, int32_t meshId, uint64_t id, const SR_MATH_NS::FVector3 &pos, const SR_MATH_NS::Quaternion &rot, const SR_MATH_NS::FVector3 &scale, const SR_MATH_NS::FColor &color) {
-        return DrawMesh(pRawMesh, meshId, id, pos, rot, scale, color, DEFAULT_DURATION);
+    uint64_t DebugDraw::DrawMesh(bool isConvex, SR_HTYPES_NS::RawMesh* pRawMesh, int32_t meshId, uint64_t id, const SR_MATH_NS::FVector3 &pos, const SR_MATH_NS::Quaternion &rot, const SR_MATH_NS::FVector3 &scale, const SR_MATH_NS::FColor &color) {
+        return DrawMesh(isConvex, pRawMesh, meshId, id, pos, rot, scale, color, DEFAULT_DURATION);
     }
 
-    uint64_t DebugDraw::DrawMesh(SR_HTYPES_NS::RawMesh* pRawMesh, int32_t meshId, uint64_t id, const SR_MATH_NS::FVector3 &pos, const SR_MATH_NS::Quaternion &rot, const SR_MATH_NS::FVector3 &scale) {
-        return DrawMesh(pRawMesh, meshId, id, pos, rot, scale, DEFAULT_COLOR, DEFAULT_DURATION);
+    uint64_t DebugDraw::DrawMesh(bool isConvex, SR_HTYPES_NS::RawMesh* pRawMesh, int32_t meshId, uint64_t id, const SR_MATH_NS::FVector3 &pos, const SR_MATH_NS::Quaternion &rot, const SR_MATH_NS::FVector3 &scale) {
+        return DrawMesh(isConvex, pRawMesh, meshId, id, pos, rot, scale, DEFAULT_COLOR, DEFAULT_DURATION);
     }
 
-    uint64_t DebugDraw::DrawMesh(SR_HTYPES_NS::RawMesh* pRawMesh, int32_t meshId, uint64_t id, const SR_MATH_NS::FVector3 &pos, const SR_MATH_NS::Quaternion &rot) {
-        return DrawMesh(pRawMesh, meshId, id, pos, rot, DEFAULT_SCALE, DEFAULT_COLOR, DEFAULT_DURATION);
+    uint64_t DebugDraw::DrawMesh(bool isConvex, SR_HTYPES_NS::RawMesh* pRawMesh, int32_t meshId, uint64_t id, const SR_MATH_NS::FVector3 &pos, const SR_MATH_NS::Quaternion &rot) {
+        return DrawMesh(isConvex, pRawMesh, meshId, id, pos, rot, DEFAULT_SCALE, DEFAULT_COLOR, DEFAULT_DURATION);
     }
 
-    uint64_t DebugDraw::DrawMesh(SR_HTYPES_NS::RawMesh* pRawMesh, int32_t meshId, uint64_t id, const SR_MATH_NS::FVector3 &pos) {
-        return DrawMesh(pRawMesh, meshId, id, pos, DEFAULT_QUATERNION, DEFAULT_SCALE, DEFAULT_COLOR, DEFAULT_DURATION);
+    uint64_t DebugDraw::DrawMesh(bool isConvex, SR_HTYPES_NS::RawMesh* pRawMesh, int32_t meshId, uint64_t id, const SR_MATH_NS::FVector3 &pos) {
+        return DrawMesh(isConvex, pRawMesh, meshId, id, pos, DEFAULT_QUATERNION, DEFAULT_SCALE, DEFAULT_COLOR, DEFAULT_DURATION);
     }
 
-    uint64_t DebugDraw::DrawMesh(SR_HTYPES_NS::RawMesh* pRawMesh, int32_t meshId, uint64_t id, const SR_MATH_NS::FVector3 &pos, const SR_MATH_NS::FColor &color, float_t time) {
-        return DrawMesh(pRawMesh, meshId, id, pos, DEFAULT_QUATERNION, DEFAULT_SCALE, color, time);
+    uint64_t DebugDraw::DrawMesh(bool isConvex, SR_HTYPES_NS::RawMesh* pRawMesh, int32_t meshId, uint64_t id, const SR_MATH_NS::FVector3 &pos, const SR_MATH_NS::FColor &color, float_t time) {
+        return DrawMesh(isConvex, pRawMesh, meshId, id, pos, DEFAULT_QUATERNION, DEFAULT_SCALE, color, time);
     }
 
-    uint64_t DebugDraw::DrawMesh(SR_HTYPES_NS::RawMesh* pRawMesh, int32_t meshId, const SR_MATH_NS::FVector3 &pos, const SR_MATH_NS::Quaternion &rot, const SR_MATH_NS::FVector3 &scale, const SR_MATH_NS::FColor &color) {
-        return DrawMesh(pRawMesh, meshId, SR_ID_INVALID, pos, rot, scale, color, DEFAULT_DURATION);
+    uint64_t DebugDraw::DrawMesh(bool isConvex, SR_HTYPES_NS::RawMesh* pRawMesh, int32_t meshId, const SR_MATH_NS::FVector3 &pos, const SR_MATH_NS::Quaternion &rot, const SR_MATH_NS::FVector3 &scale, const SR_MATH_NS::FColor &color) {
+        return DrawMesh(isConvex, pRawMesh, meshId, SR_ID_INVALID, pos, rot, scale, color, DEFAULT_DURATION);
     }
 
-    uint64_t DebugDraw::DrawMesh(SR_HTYPES_NS::RawMesh* pRawMesh, int32_t meshId, const SR_MATH_NS::FVector3 &pos, const SR_MATH_NS::Quaternion &rot, const SR_MATH_NS::FVector3 &scale) {
-        return DrawMesh(pRawMesh, meshId, SR_ID_INVALID, pos, rot, scale, DEFAULT_COLOR, DEFAULT_DURATION);
+    uint64_t DebugDraw::DrawMesh(bool isConvex, SR_HTYPES_NS::RawMesh* pRawMesh, int32_t meshId, const SR_MATH_NS::FVector3 &pos, const SR_MATH_NS::Quaternion &rot, const SR_MATH_NS::FVector3 &scale) {
+        return DrawMesh(isConvex, pRawMesh, meshId, SR_ID_INVALID, pos, rot, scale, DEFAULT_COLOR, DEFAULT_DURATION);
     }
 
-    uint64_t DebugDraw::DrawMesh(SR_HTYPES_NS::RawMesh* pRawMesh, int32_t meshId, const SR_MATH_NS::FVector3 &pos, const SR_MATH_NS::Quaternion &rot) {
-        return DrawMesh(pRawMesh, meshId, SR_ID_INVALID, pos, rot, DEFAULT_SCALE, DEFAULT_COLOR, DEFAULT_DURATION);
+    uint64_t DebugDraw::DrawMesh(bool isConvex, SR_HTYPES_NS::RawMesh* pRawMesh, int32_t meshId, const SR_MATH_NS::FVector3 &pos, const SR_MATH_NS::Quaternion &rot) {
+        return DrawMesh(isConvex, pRawMesh, meshId, SR_ID_INVALID, pos, rot, DEFAULT_SCALE, DEFAULT_COLOR, DEFAULT_DURATION);
     }
 
-    uint64_t DebugDraw::DrawMesh(SR_HTYPES_NS::RawMesh* pRawMesh, int32_t meshId, const SR_MATH_NS::FVector3 &pos) {
-        return DrawMesh(pRawMesh, meshId, SR_ID_INVALID, pos, DEFAULT_QUATERNION, DEFAULT_SCALE, DEFAULT_COLOR, DEFAULT_DURATION);
+    uint64_t DebugDraw::DrawMesh(bool isConvex, SR_HTYPES_NS::RawMesh* pRawMesh, int32_t meshId, const SR_MATH_NS::FVector3 &pos) {
+        return DrawMesh(isConvex, pRawMesh, meshId, SR_ID_INVALID, pos, DEFAULT_QUATERNION, DEFAULT_SCALE, DEFAULT_COLOR, DEFAULT_DURATION);
     }
 
-    uint64_t DebugDraw::DrawMesh(SR_HTYPES_NS::RawMesh* pRawMesh, int32_t meshId, uint64_t id, const SR_MATH_NS::FVector3 &pos, const SR_MATH_NS::FColor &color) {
-        return DrawMesh(pRawMesh, meshId, id, pos, DEFAULT_QUATERNION, DEFAULT_SCALE, color, DEFAULT_DURATION);
+    uint64_t DebugDraw::DrawMesh(bool isConvex, SR_HTYPES_NS::RawMesh* pRawMesh, int32_t meshId, uint64_t id, const SR_MATH_NS::FVector3 &pos, const SR_MATH_NS::FColor &color) {
+        return DrawMesh(isConvex, pRawMesh, meshId, id, pos, DEFAULT_QUATERNION, DEFAULT_SCALE, color, DEFAULT_DURATION);
     }
 
-    uint64_t DebugDraw::DrawMesh(SR_HTYPES_NS::RawMesh* pRawMesh, int32_t meshId, uint64_t id, const SR_MATH_NS::FVector3 &pos, float_t time) {
-        return DrawMesh(pRawMesh, meshId, id, pos, DEFAULT_QUATERNION, DEFAULT_SCALE, DEFAULT_COLOR, time);
+    uint64_t DebugDraw::DrawMesh(bool isConvex, SR_HTYPES_NS::RawMesh* pRawMesh, int32_t meshId, uint64_t id, const SR_MATH_NS::FVector3 &pos, float_t time) {
+        return DrawMesh(isConvex, pRawMesh, meshId, id, pos, DEFAULT_QUATERNION, DEFAULT_SCALE, DEFAULT_COLOR, time);
     }
 
-    uint64_t DebugDraw::DrawMesh(SR_HTYPES_NS::RawMesh* pRawMesh, int32_t meshId, const SR_MATH_NS::FVector3 &pos, const SR_MATH_NS::Quaternion &rot, const SR_MATH_NS::FVector3 &scale, const SR_MATH_NS::FColor &color, float_t time) {
-        return DrawMesh(pRawMesh, meshId, SR_ID_INVALID, pos, rot, scale, color, time);
+    uint64_t DebugDraw::DrawMesh(bool isConvex, SR_HTYPES_NS::RawMesh* pRawMesh, int32_t meshId, const SR_MATH_NS::FVector3 &pos, const SR_MATH_NS::Quaternion &rot, const SR_MATH_NS::FVector3 &scale, const SR_MATH_NS::FColor &color, float_t time) {
+        return DrawMesh(isConvex, pRawMesh, meshId, SR_ID_INVALID, pos, rot, scale, color, time);
     }
 
-    uint64_t DebugDraw::DrawMesh(SR_HTYPES_NS::RawMesh* pRawMesh, int32_t meshId, const SR_MATH_NS::FVector3& pos, const SR_MATH_NS::FColor& color, float_t time) {
-        return DrawMesh(pRawMesh, meshId, SR_ID_INVALID, pos, DEFAULT_QUATERNION, DEFAULT_SCALE, color, time);
+    uint64_t DebugDraw::DrawMesh(bool isConvex, SR_HTYPES_NS::RawMesh* pRawMesh, int32_t meshId, const SR_MATH_NS::FVector3& pos, const SR_MATH_NS::FColor& color, float_t time) {
+        return DrawMesh(isConvex, pRawMesh, meshId, SR_ID_INVALID, pos, DEFAULT_QUATERNION, DEFAULT_SCALE, color, time);
     }
 
-    uint64_t DebugDraw::DrawMesh(SR_HTYPES_NS::RawMesh* pRawMesh, int32_t meshId, const SR_MATH_NS::FVector3& pos, const SR_MATH_NS::FColor& color) {
-        return DrawMesh(pRawMesh, meshId, SR_ID_INVALID, pos, DEFAULT_QUATERNION, DEFAULT_SCALE, color, DEFAULT_DURATION);
+    uint64_t DebugDraw::DrawMesh(bool isConvex, SR_HTYPES_NS::RawMesh* pRawMesh, int32_t meshId, const SR_MATH_NS::FVector3& pos, const SR_MATH_NS::FColor& color) {
+        return DrawMesh(isConvex, pRawMesh, meshId, SR_ID_INVALID, pos, DEFAULT_QUATERNION, DEFAULT_SCALE, color, DEFAULT_DURATION);
     }
 
-    uint64_t DebugDraw::DrawMesh(SR_HTYPES_NS::RawMesh* pRawMesh, int32_t meshId, const SR_MATH_NS::FVector3& pos, float_t time) {
-        return DrawMesh(pRawMesh, meshId, SR_ID_INVALID, pos, DEFAULT_QUATERNION, DEFAULT_SCALE, DEFAULT_COLOR, time);
+    uint64_t DebugDraw::DrawMesh(bool isConvex, SR_HTYPES_NS::RawMesh* pRawMesh, int32_t meshId, const SR_MATH_NS::FVector3& pos, float_t time) {
+        return DrawMesh(isConvex, pRawMesh, meshId, SR_ID_INVALID, pos, DEFAULT_QUATERNION, DEFAULT_SCALE, DEFAULT_COLOR, time);
     }
 
-    uint64_t DebugDraw::DrawMesh(SR_HTYPES_NS::RawMesh* pRawMesh, int32_t meshId, uint64_t id) {
-        return DrawMesh(pRawMesh, meshId, id, DEFAULT_POSITION, DEFAULT_QUATERNION, DEFAULT_SCALE, DEFAULT_COLOR, 0.f);
+    uint64_t DebugDraw::DrawMesh(bool isConvex, SR_HTYPES_NS::RawMesh* pRawMesh, int32_t meshId, uint64_t id) {
+        return DrawMesh(isConvex, pRawMesh, meshId, id, DEFAULT_POSITION, DEFAULT_QUATERNION, DEFAULT_SCALE, DEFAULT_COLOR, 0.f);
+    }
+
+    uint64_t DebugDraw::DrawMesh(bool isConvex, SR_HTYPES_NS::RawMesh* pRawMesh, int32_t meshId) {
+        return DrawMesh(isConvex, pRawMesh, meshId, SR_ID_INVALID, DEFAULT_POSITION, DEFAULT_QUATERNION, DEFAULT_SCALE, DEFAULT_COLOR, DEFAULT_DURATION);
     }
 
     uint64_t DebugDraw::DrawMesh(SR_HTYPES_NS::RawMesh* pRawMesh, int32_t meshId) {
-        return DrawMesh(pRawMesh, meshId, SR_ID_INVALID, DEFAULT_POSITION, DEFAULT_QUATERNION, DEFAULT_SCALE, DEFAULT_COLOR, DEFAULT_DURATION);
+        return DrawMesh(false, pRawMesh, meshId, SR_ID_INVALID, DEFAULT_POSITION, DEFAULT_QUATERNION, DEFAULT_SCALE, DEFAULT_COLOR, DEFAULT_DURATION);
     }
 
     /// ---------------------------------------------------- MESH DRAWING ----------------------------------------------

@@ -289,6 +289,16 @@ namespace SR_GRAPH_NS::Vertices {
         return info;
     }
 
+    static std::vector<Vertices::SimpleVertex> FVector3toSimpleVertex(std::vector<SR_MATH_NS::FVector3> vertices) {
+        auto&& simpleVertices = std::vector<Vertices::SimpleVertex>();
+
+        for (auto& vertex : vertices) {
+            simpleVertices.emplace_back(glm::vec3(vertex.x, vertex.y, vertex.z));
+        }
+
+        return simpleVertices;
+    }
+
     template<typename T> static std::vector<T> CastVertices(const std::vector<SR_UTILS_NS::Vertex>& raw) {
         SR_TRACY_ZONE;
 
