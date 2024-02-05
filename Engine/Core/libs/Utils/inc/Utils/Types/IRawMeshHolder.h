@@ -25,6 +25,7 @@ namespace SR_HTYPES_NS {
         SR_NODISCARD std::string GetMeshStringPath() const noexcept;
         SR_NODISCARD bool IsValidMeshId() const noexcept;
         SR_NODISCARD std::vector<SR_UTILS_NS::Vertex> GetVertices() const noexcept;
+        SR_NODISCARD std::vector<SR_UTILS_NS::Vertex> GetConvexVertices() const noexcept;
 
         virtual void OnRawMeshChanged() { }
 

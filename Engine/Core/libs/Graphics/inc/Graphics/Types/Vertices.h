@@ -302,6 +302,10 @@ namespace SR_GRAPH_NS::Vertices {
     template<typename T> static std::vector<T> CastVertices(const std::vector<SR_UTILS_NS::Vertex>& raw) {
         SR_TRACY_ZONE;
 
+        if constexpr (std::is_same<SR_UTILS_NS::Vertex, T>::value) {
+            return raw;
+        }
+
         auto vertices = std::vector<T>();
 
         vertices.reserve(raw.size());

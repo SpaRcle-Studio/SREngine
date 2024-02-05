@@ -7,6 +7,10 @@
 
 #include <Utils/Debug.h>
 
+namespace SR_HTYPES_NS {
+    struct ConvexRawMesh;
+}
+
 namespace SR_UTILS_NS {
     /// TODO: use glm?
 
@@ -57,7 +61,7 @@ namespace SR_UTILS_NS {
             Vertex(1, 1, -1),
     };
 
-    std::vector<SR_MATH_NS::FVector3> ComputeConvexHull(const std::vector<Vertex>& vertices);
+    SR_HTYPES_NS::ConvexRawMesh ComputeConvexHull(const std::vector<Vertex>& rawVertices);
 
     template<typename T> static std::vector<T> IndexedVerticesToNonIndexed(
             const std::vector<T>& vertices,

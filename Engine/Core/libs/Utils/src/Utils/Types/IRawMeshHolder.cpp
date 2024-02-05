@@ -80,6 +80,27 @@ namespace SR_HTYPES_NS {
         return defaultVertices;
     }
 
+    std::vector<SR_UTILS_NS::Vertex> IRawMeshHolder::GetConvexVertices() const noexcept {
+        static std::vector<SR_UTILS_NS::Vertex> defaultVertices;
+
+        if (!IsValidMeshId()) {
+            return defaultVertices;
+        }
+
+        if (auto&& pRawMesh = GetRawMesh()) {
+            auto&& rawVertices = pRawMesh->GetConvexVertices(GetMeshId());
+            std::vector<SR_UTILS_NS::Vertex> vertices;
+
+            for (auto&& rawVertex : rawVertices) {
+                vertices.emplace_back(rawVertex.x, rawVertex.y, rawVertex.z);
+            }
+
+            return vertices;
+        }
+
+        return defaultVertices;
+    }
+
     void IRawMeshHolder::SetRawMesh(const SR_UTILS_NS::Path& path) {
         if (path.empty()) {
             SetRawMesh(nullptr);

@@ -57,8 +57,7 @@ namespace SR_PTYPES_NS {
             );
         }
         else if (SR_PHYSICS_UTILS_NS::IsConvex(GetType())) {
-            m_debugId = SR_UTILS_NS::DebugDraw::Instance().DrawMesh(
-                    true,
+            m_debugId = SR_UTILS_NS::DebugDraw::Instance().DrawConvexMesh(
                     m_rigidbody->GetRawMesh(),
                     m_rigidbody->GetMeshId(),
                     m_debugId,

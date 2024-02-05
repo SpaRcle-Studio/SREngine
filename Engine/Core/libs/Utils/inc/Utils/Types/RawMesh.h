@@ -50,7 +50,7 @@ namespace SR_HTYPES_NS {
         static RawMesh* Load(const SR_UTILS_NS::Path &path);
 
     public:
-        void ComputeConvexHull();
+        void ComputeConvexHull() const;
 
         SR_NODISCARD uint32_t GetMeshesCount() const;
         SR_NODISCARD std::string GetGeometryName(uint32_t id) const;
@@ -94,7 +94,7 @@ namespace SR_HTYPES_NS {
     private:
         ska::flat_hash_map<Hash, aiAnimation*> m_animations;
 
-        ska::flat_hash_map<StringAtom, ConvexRawMesh> m_convexMeshes;
+        mutable ska::flat_hash_map<StringAtom, ConvexRawMesh> m_convexMeshes;
 
         std::vector<ska::flat_hash_map<Hash, uint32_t>> m_bones;
         ska::flat_hash_map<Hash, uint16_t> m_optimizedBones;

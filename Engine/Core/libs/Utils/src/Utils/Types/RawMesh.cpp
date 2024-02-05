@@ -540,30 +540,14 @@ namespace SR_HTYPES_NS {
         return count;
     }
 
-    void RawMesh::ComputeConvexHull() {
-        for (uint16_t i = 0; i <= static_cast<uint16_t>(GetMeshesCount()); ++i) {
-            ConvexRawMesh convexRawMesh;
-            auto &&vertices = SR_UTILS_NS::ComputeConvexHull(GetVertices(i));
-
-            std::vector<uint32_t> indices;
-            std::map<SR_MATH_NS::FVector3, uint32_t> vertexIndexMap;
-            for (auto &vertex: vertices) {
-                // Check if the vertex is already in the map
-                auto &&it = vertexIndexMap.find(vertex);
-
-                if (it != vertexIndexMap.end()) {
-                    // Vertex already in the map, use its index
-                    indices.push_back(it->second);
-                } else {
-                    // Vertex not in the map, add it to the map and use the new index
-                    vertexIndexMap[vertex] = static_cast<int>(indices.size());
-                    indices.push_back(static_cast<int>(indices.size()));
-                }
+    void RawMesh::ComputeConvexHull() const {
+        for (uint16_t i = 0; i < static_cast<uint16_t>(GetMeshesCount()); ++i) {
+            /*ConvexRawMesh convexRawMesh;
+            for (auto&& vertex : GetVertices(i)) {
+                convexRawMesh.vertices.emplace_back(vertex.position.x, vertex.position.y, vertex.position.z);
             }
-
-            convexRawMesh.vertices = vertices;
-            convexRawMesh.indices = indices;
-
+            convexRawMesh.indices = GetIndices(i);*/
+            auto&& convexRawMesh = SR_UTILS_NS::ComputeConvexHull(GetVertices(i));
             m_convexMeshes[GetGeometryName(i)] = convexRawMesh;
         }
     }
@@ -589,6 +573,10 @@ namespace SR_HTYPES_NS {
             return {};
         }
 
+        if (m_convexMeshes.empty()) {
+            ComputeConvexHull();
+        }
+
         return m_convexMeshes.find(GetGeometryName(id))->second.vertices;
     }
 
@@ -596,6 +584,10 @@ namespace SR_HTYPES_NS {
         if (!m_scene || id >= m_scene->mNumMeshes) {
             SRAssert2(false, "Out of range or invalid scene!");
             return {};
+        }
+
+        if (m_convexMeshes.empty()) {
+            ComputeConvexHull();
         }
 
         return m_convexMeshes.find(GetGeometryName(id))->second.indices;
