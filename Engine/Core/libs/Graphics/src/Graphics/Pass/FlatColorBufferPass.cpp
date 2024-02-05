@@ -8,7 +8,7 @@
 #include <Graphics/Pipeline/Pipeline.h>
 
 namespace SR_GRAPH_NS {
-    SR_REGISTER_RENDER_PASS(FlatColorBufferPass)
+    //SR_REGISTER_RENDER_PASS(FlatColorBufferPass)
 
     void FlatColorBufferPass::UseConstants(SR_GTYPES_NS::Shader* pShader) {
         Super::UseConstants(pShader);
@@ -21,18 +21,17 @@ namespace SR_GRAPH_NS {
     }
 
     void FlatColorBufferPass::OnResize(const SR_MATH_NS::UVector2& size) {
-        IFramebufferPass::ResizeFrameBuffer(size);
         FlatClusterPass::OnResize(size);
     }
 
     void FlatColorBufferPass::Update() {
-        if (!m_framebuffer || m_framebuffer->IsDirty() || !m_isFrameBufferRendered) {
+        if (!GetFramebuffer() || GetFramebuffer()->IsDirty() || !m_isFrameBufferRendered) {
             return;
         }
 
         ResetColorIndex();
 
-        GetPassPipeline()->SetCurrentFrameBuffer(m_framebuffer);
+        GetPassPipeline()->SetCurrentFrameBuffer(GetFramebuffer());
 
         auto&& pIdentifier = m_uboManager.GetIdentifier();
         m_uboManager.SetIdentifier(this);
@@ -47,24 +46,24 @@ namespace SR_GRAPH_NS {
     bool FlatColorBufferPass::Render() {
         m_isFrameBufferRendered = false;
 
-        if (!m_framebuffer) {
+        if (!GetFramebuffer()) {
             return false;
         }
 
         auto&& pIdentifier = m_uboManager.GetIdentifier();
         m_uboManager.SetIdentifier(this);
 
-        if (m_framebuffer->Bind())
+        if (GetFramebuffer()->Bind())
         {
-            if (m_framebuffer->BeginCmdBuffer(m_clearColors, m_depth))
+            if (GetFramebuffer()->BeginCmdBuffer(GetClearColors(), GetClearDepth()))
             {
-                m_framebuffer->BeginRender();
-                m_framebuffer->SetViewportScissor();
+                GetFramebuffer()->BeginRender();
+                GetFramebuffer()->SetViewportScissor();
 
                 FlatClusterPass::Render();
 
-                m_framebuffer->EndRender();
-                m_framebuffer->EndCmdBuffer();
+                GetFramebuffer()->EndRender();
+                GetFramebuffer()->EndCmdBuffer();
 
                 m_isFrameBufferRendered = true;
             }
@@ -76,7 +75,7 @@ namespace SR_GRAPH_NS {
     }
 
     bool FlatColorBufferPass::Init() {
-        return FlatClusterPass::Init() && InitializeFramebuffer(GetContext());
+        return FlatClusterPass::Init();
     }
 
     bool FlatColorBufferPass::Load(const SR_XML_NS::Node& passNode) {
@@ -85,10 +84,10 @@ namespace SR_GRAPH_NS {
     }
 
     std::vector<SR_GTYPES_NS::Framebuffer *> FlatColorBufferPass::GetFrameBuffers() const {
-        if (!m_framebuffer) {
+        if (!GetFramebuffer()) {
             return std::vector<SR_GTYPES_NS::Framebuffer*>(); /// NOLINT
         }
-        return { m_framebuffer };
+        return { GetFramebuffer() };
     }
 
     void FlatColorBufferPass::UseUniforms(SR_GTYPES_NS::Shader* pShader, MeshPtr pMesh) {

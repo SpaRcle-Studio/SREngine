@@ -47,16 +47,15 @@ namespace SR_GRAPH_NS {
     }
 
     void ShaderOverridePass::OnResize(const SR_MATH_NS::UVector2 &size) {
-        IFramebufferPass::ResizeFrameBuffer(size);
         IMesh3DClusterPass::OnResize(size);
     }
 
     bool ShaderOverridePass::Init() {
-        return IMesh3DClusterPass::Init() && (IsDirectional() || InitializeFramebuffer(GetContext()));
+        return IMesh3DClusterPass::Init();
     }
 
     bool ShaderOverridePass::Render() {
-        if (!m_framebuffer && !IsDirectional()) {
+        /*if (!m_framebuffer && !IsDirectional()) {
             return false;
         }
 
@@ -80,12 +79,12 @@ namespace SR_GRAPH_NS {
         }
 
         m_uboManager.SetIdentifier(pIdentifier);
-
+    */
         return IsDirectional();
     }
 
     void ShaderOverridePass::Update() {
-        if (!IsDirectional() && (!m_framebuffer || m_framebuffer->IsDirty())) {
+       /* if (!IsDirectional() && (!m_framebuffer || m_framebuffer->IsDirty())) {
             return;
         }
 
@@ -98,7 +97,7 @@ namespace SR_GRAPH_NS {
 
         m_uboManager.SetIdentifier(pIdentifier);
 
-        GetPassPipeline()->SetCurrentFrameBuffer(nullptr);
+        GetPassPipeline()->SetCurrentFrameBuffer(nullptr);*/
     }
 
     ShaderOverridePass::ShaderPtr ShaderOverridePass::GetShader(SR_SRSL_NS::ShaderType type) const {
@@ -122,9 +121,9 @@ namespace SR_GRAPH_NS {
     }
 
     std::vector<SR_GTYPES_NS::Framebuffer*> ShaderOverridePass::GetFrameBuffers() const {
-        if (!m_framebuffer) {
+        if (!GetFramebuffer()) {
             return std::vector<SR_GTYPES_NS::Framebuffer*>(); /// NOLINT
         }
-        return { m_framebuffer };
+        return { GetFramebuffer() };
     }
 }

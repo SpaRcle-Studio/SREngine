@@ -31,7 +31,7 @@ namespace SR_GRAPH_NS {
         void OnResize(const SR_MATH_NS::UVector2& size) override;
         void OnSamplesChanged() override;
 
-        void SetRenderTechnique(RenderTechnique* pRenderTechnique) override;
+        void SetRenderTechnique(IRenderTechnique* pRenderTechnique) override;
 
         SR_NODISCARD BasePass* FindPass(const SR_UTILS_NS::StringAtom& name) const;
 

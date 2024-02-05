@@ -110,7 +110,7 @@ namespace SR_GRAPH_NS {
         ++m_state.operations;
     }
 
-    void Pipeline::ClearBuffers(const std::vector<SR_MATH_NS::FColor>& colors, float_t depth) {
+    void Pipeline::ClearBuffers(const ClearColors& clearColors, std::optional<float_t> depth) {
         ++m_state.operations;
     }
 

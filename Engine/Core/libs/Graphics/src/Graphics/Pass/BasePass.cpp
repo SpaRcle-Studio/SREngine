@@ -49,7 +49,7 @@ namespace SR_GRAPH_NS {
         return m_name;
     }
 
-    void BasePass::SetRenderTechnique(RenderTechnique* pRenderTechnique) {
+    void BasePass::SetRenderTechnique(IRenderTechnique* pRenderTechnique) {
         SRAssert(pRenderTechnique);
         m_technique = pRenderTechnique;
         if (!m_pipeline) {

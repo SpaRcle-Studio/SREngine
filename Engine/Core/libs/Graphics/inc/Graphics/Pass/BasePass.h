@@ -30,10 +30,11 @@ namespace SR_GRAPH_NS {
     class RenderScene;
     class RenderContext;
     class RenderTechnique;
+    class IRenderTechnique;
     class Pipeline;
     class BasePass;
 
-    typedef std::map<std::string, SR_HTYPES_NS::Function<BasePass*(const SR_XML_NS::Node&)>> RenderPassMap;
+    typedef std::map<std::string, SR_HTYPES_NS::Function<BasePass*(const SR_XML_NS::Node&, IRenderTechnique*)>> RenderPassMap;
     RenderPassMap& GetRenderPassMap();
 
     class BasePass : public SR_UTILS_NS::ResourceContainer, public SR_SRLM_NS::IExecutableNode {
@@ -87,14 +88,14 @@ namespace SR_GRAPH_NS {
 
         SR_NODISCARD virtual std::vector<SR_GTYPES_NS::Framebuffer*> GetFrameBuffers() const { return { }; }
 
-        virtual void SetRenderTechnique(RenderTechnique* pRenderTechnique);
+        virtual void SetRenderTechnique(IRenderTechnique* pRenderTechnique);
         void SetName(SR_UTILS_NS::StringAtom name);
         void SetContext(Context pContext);
 
         SR_NODISCARD virtual RenderScenePtr GetRenderScene() const;
         SR_NODISCARD Context GetContext() const { return m_context; }
         SR_NODISCARD PipelinePtr GetPassPipeline() const { return m_pipeline; }
-        SR_NODISCARD RenderTechnique* GetTechnique() const { return m_technique; }
+        SR_NODISCARD IRenderTechnique* GetTechnique() const { return m_technique; }
         SR_NODISCARD bool IsInit() const { return m_isInit; }
         SR_NODISCARD SR_UTILS_NS::StringAtom GetName() const;
 
@@ -108,7 +109,7 @@ namespace SR_GRAPH_NS {
 
         SR_UTILS_NS::StringAtom m_name;
 
-        RenderTechnique* m_technique = nullptr;
+        IRenderTechnique* m_technique = nullptr;
         bool m_isInit = false;
 
     };
@@ -126,8 +127,9 @@ namespace SR_GRAPH_NS {
     static bool SR_CODEGEN_##name##_render_pass_register_result =                                                       \
         SR_GRAPH_NS::GetRenderPassMap().insert(std::make_pair(                                                          \
             std::move(#name),                                                                                           \
-            [](const SR_XML_NS::Node& node) -> SR_GRAPH_NS::BasePass* {                                                 \
+            [](const SR_XML_NS::Node& node, IRenderTechnique* pTechnique) -> SR_GRAPH_NS::BasePass* {                   \
                 BasePass* pPass = new name();                                                                           \
+                pPass->SetRenderTechnique(pTechnique);                                                                  \
                 if (!pPass->Load(node)) {                                                                               \
                     delete pPass;                                                                                       \
                     pPass = nullptr;                                                                                    \
@@ -136,9 +138,9 @@ namespace SR_GRAPH_NS {
             }                                                                                                           \
         )).second;                                                                                                      \
 
-#define SR_ALLOCATE_RENDER_PASS(passNode)                                                                               \
+#define SR_ALLOCATE_RENDER_PASS(passNode, pTechnique)                                                                   \
     (SR_GRAPH_NS::GetRenderPassMap().count(passNode.Name()) == 0 ? nullptr :                                            \
-        SR_GRAPH_NS::GetRenderPassMap().at(passNode.Name())(passNode))                                                  \
+        SR_GRAPH_NS::GetRenderPassMap().at(passNode.Name())(passNode, pTechnique))                                      \
 
 
 #endif //SR_ENGINE_BASEPASS_H

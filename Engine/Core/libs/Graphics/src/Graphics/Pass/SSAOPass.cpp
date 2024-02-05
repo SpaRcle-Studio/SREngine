@@ -23,7 +23,7 @@ namespace SR_GRAPH_NS {
             return false;
         }
 
-        return PostProcessPass::Init() && InitializeFramebuffer(GetContext());
+        return PostProcessPass::Init();
     }
 
     void SSAOPass::DeInit() {
@@ -91,23 +91,24 @@ namespace SR_GRAPH_NS {
     bool SSAOPass::Render() {
         SR_TRACY_ZONE_N("SSAO render");
 
-        if (!m_framebuffer) {
+        auto&& pFramebuffer = GetFramebuffer();
+        if (!pFramebuffer) {
             return false;
         }
 
-        if (!m_framebuffer->Bind()) {
+        if (!pFramebuffer->Bind()) {
             return false;
         }
 
-        if (!m_framebuffer->BeginCmdBuffer(m_clearColors, m_depth)) {
+        if (!pFramebuffer->BeginCmdBuffer(GetClearColors(), GetClearDepth())) {
             return false;
         }
 
-        if (m_framebuffer->BeginRender()) {
-            m_framebuffer->SetViewportScissor();
+        if (pFramebuffer->BeginRender()) {
+            pFramebuffer->SetViewportScissor();
             PostProcessPass::Render();
-            m_framebuffer->EndRender();
-            m_framebuffer->EndCmdBuffer();
+            pFramebuffer->EndRender();
+            pFramebuffer->EndCmdBuffer();
         }
 
         GetPassPipeline()->SetCurrentFrameBuffer(nullptr);
@@ -132,14 +133,17 @@ namespace SR_GRAPH_NS {
     }
 
     void SSAOPass::OnResize(const SR_MATH_NS::UVector2 &size) {
-        IFramebufferPass::ResizeFrameBuffer(size);
         PostProcessPass::OnResize(size);
     }
 
     std::vector<SR_GTYPES_NS::Framebuffer *> SSAOPass::GetFrameBuffers() const {
-        if (!m_framebuffer) {
+        if (!GetFramebuffer()) {
             return std::vector<SR_GTYPES_NS::Framebuffer*>();
         }
-        return { m_framebuffer };
+        return { GetFramebuffer() };
+    }
+
+    IRenderTechnique* SSAOPass::GetFrameBufferRenderTechnique() const {
+        return GetTechnique();
     }
 }

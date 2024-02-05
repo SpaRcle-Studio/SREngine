@@ -34,7 +34,7 @@ namespace SR_GRAPH_NS {
         const auto lightPos = GetRenderScene()->GetLightSystem()->m_position;
 
         std::vector<float_t> cascadeSplits;
-        cascadeSplits.resize(m_layersCount);
+        cascadeSplits.resize(GetLayersCount());
 
         m_cascadeMatrices.resize(4);
         m_cascadeSplitDepths.resize(4);
@@ -47,8 +47,8 @@ namespace SR_GRAPH_NS {
         const float_t range = maxZ - minZ;
         const float_t ratio = maxZ / minZ;
 
-        for (uint32_t i = 0; i < m_layersCount; i++) {
-            const float_t p = static_cast<float_t>(i + 1) / static_cast<float_t>(m_layersCount);
+        for (uint32_t i = 0; i < GetLayersCount(); i++) {
+            const float_t p = static_cast<float_t>(i + 1) / static_cast<float_t>(GetLayersCount());
             const float_t log = minZ * std::pow(ratio, p);
             const float_t uniform = minZ + range * p;
             const float_t d = m_cascadeSplitLambda * (log - uniform) + uniform;
@@ -57,7 +57,7 @@ namespace SR_GRAPH_NS {
 
         float_t lastSplitDist = 0.0;
 
-        for (uint32_t i = 0; i < m_layersCount; i++) {
+        for (uint32_t i = 0; i < GetLayersCount(); i++) {
             const float_t splitDist = cascadeSplits[i];
 
             SR_MATH_NS::FVector3 frustumCorners[8] = {
@@ -120,7 +120,7 @@ namespace SR_GRAPH_NS {
     }
 
     void CascadedShadowMapPass::UseConstants(IMeshClusterPass::ShaderPtr pShader) {
-        pShader->SetConstInt(SHADER_SHADOW_CASCADE_INDEX, m_currentFrameBufferLayer);
+        pShader->SetConstInt(SHADER_SHADOW_CASCADE_INDEX, GetCurrentFrameBufferLayer());
         Super::UseConstants(pShader);
     }
 

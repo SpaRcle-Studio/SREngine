@@ -34,6 +34,7 @@ namespace SR_GRAPH_NS {
     protected:
         SR_NODISCARD SSAOKernel CreateKernel() const;
         SR_NODISCARD SR_GTYPES_NS::Texture* CreateNoise() const;
+        SR_NODISCARD IRenderTechnique* GetFrameBufferRenderTechnique() const override;
 
     private:
         SSAOKernel m_kernel;

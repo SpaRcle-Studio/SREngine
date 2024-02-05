@@ -38,6 +38,8 @@ namespace SR_GRAPH_NS {
 
         void UseSharedUniforms(ShaderPtr pShader) override;
 
+        SR_NODISCARD IRenderTechnique* GetFrameBufferRenderTechnique() const override { return GetTechnique(); }
+
     private:
         std::vector<std::pair<SR_SRSL_NS::ShaderType, ShaderPtr>> m_shaders;
 

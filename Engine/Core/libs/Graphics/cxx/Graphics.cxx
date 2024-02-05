@@ -56,6 +56,7 @@
 #include "../../Graphics/src/Graphics/Render/DebugRenderer.cpp"
 #include "../../Graphics/src/Graphics/Render/RenderSettings.cpp"
 #include "../../Graphics/src/Graphics/Render/RenderStrategy.cpp"
+#include "../../Graphics/src/Graphics/Render/FrameBufferController.cpp"
 
 #include "../../Graphics/src/Graphics/Types/Geometry/DebugWireframeMesh.cpp"
 #include "../../Graphics/src/Graphics/Types/Geometry/DebugLine.cpp"

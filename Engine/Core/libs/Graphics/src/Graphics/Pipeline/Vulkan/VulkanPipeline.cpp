@@ -986,18 +986,20 @@ namespace SR_GRAPH_NS {
         m_renderPassBI.pClearValues    = m_clearValues.data();
     }
 
-    void VulkanPipeline::ClearBuffers(const std::vector<SR_MATH_NS::FColor>& colors, float_t depth) {
-        Super::ClearBuffers(colors, depth);
+    void VulkanPipeline::ClearBuffers(const ClearColors& clearColors, std::optional<float_t> depth) {
+        Super::ClearBuffers(clearColors, depth);
 
         const uint8_t sampleCount = GetFrameBufferSampleCount();
 
-        auto colorCount = static_cast<uint8_t>(colors.size());
+        auto colorCount = static_cast<uint8_t>(clearColors.size());
         colorCount *= sampleCount > 1 ? 2 : 1;
 
-        m_clearValues.resize(colorCount + 1); /// TODO: а если буфера глубины нет??????
+        const bool hasDepth = depth.has_value();
+
+        m_clearValues.resize(colorCount + static_cast<uint8_t>(hasDepth));
 
         for (uint8_t i = 0; i < colorCount; ++i) {
-            auto&& color = colors[i / (sampleCount > 1 ? 2 : 1)];
+            auto&& color = clearColors[i / (sampleCount > 1 ? 2 : 1)];
 
             m_clearValues[i] = {
                 .color = { {
@@ -1010,10 +1012,12 @@ namespace SR_GRAPH_NS {
             };
         }
 
-        m_clearValues[colorCount] = VkClearValue { .depthStencil = { depth, 0 } };
+        if (hasDepth) {
+            m_clearValues[colorCount] = VkClearValue { .depthStencil = { depth.value(), 0 } };
+        }
 
-        m_renderPassBI.clearValueCount = colorCount + 1;
-        m_renderPassBI.pClearValues  = m_clearValues.data();
+        m_renderPassBI.clearValueCount = colorCount + static_cast<uint8_t>(hasDepth);
+        m_renderPassBI.pClearValues = m_clearValues.data();
     }
 
     void VulkanPipeline::OnResize(const SR_MATH_NS::UVector2& size) {

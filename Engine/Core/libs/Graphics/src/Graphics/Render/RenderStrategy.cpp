@@ -37,7 +37,8 @@ namespace SR_GRAPH_NS {
 
         SR_MAYBE_UNUSED auto&& guard = SR_UTILS_NS::LayerManager::Instance().ScopeLockSingleton();
 
-        auto&& layers = SR_UTILS_NS::LayerManager::Instance().GetLayers();
+        auto&& layerManager = SR_UTILS_NS::LayerManager::Instance();
+        auto&& layers = layerManager.GetLayers();
 
         for (auto&& layer : layers) {
             SR_TRACY_ZONE_S(layer.c_str());

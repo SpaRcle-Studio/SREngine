@@ -27,6 +27,7 @@ namespace SR_GRAPH_NS {
 
     private:
         void LoadPass(const SR_XML_NS::Node& node);
+        void ProcessNode(const SR_XML_NS::Node& passNode);
 
     };
 }

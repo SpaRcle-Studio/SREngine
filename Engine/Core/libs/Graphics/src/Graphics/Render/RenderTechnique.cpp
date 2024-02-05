@@ -5,6 +5,7 @@
 #include <Graphics/Render/RenderTechnique.h>
 #include <Graphics/Render/RenderScene.h>
 #include <Graphics/Render/RenderContext.h>
+#include <Graphics/Render/FrameBufferController.h>
 #include <Graphics/Pass/GroupPass.h>
 
 namespace SR_GRAPH_NS {
@@ -86,9 +87,7 @@ namespace SR_GRAPH_NS {
         SR_GRAPH_LOG("RenderTechnique::Build() : building \"" + std::string(GetName()) + "\" render technique...");
 
         /// Инициализируем все успешно загруженнеы проходы
-        for (auto&& pPass : m_passes) {
-            pPass->Init();
-        }
+        IRenderTechnique::Init();
 
         m_loadState = LoadState::Loaded;
         m_dirty = false;
@@ -102,33 +101,7 @@ namespace SR_GRAPH_NS {
         SetName(node.GetAttribute("Name").ToString());
 
         for (auto&& passNode : node.GetNodes()) {
-            if (passNode.NameView() == "Include") {
-                auto&& path = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat(passNode.GetAttribute("Path").ToString());
-                auto&& includeXml = SR_XML_NS::Document::Load(path);
-                if (includeXml) {
-                    for (auto&& includePassNode : includeXml.Root().GetNode("Include").GetNodes()) {
-                        LoadPass(includePassNode);
-                    }
-                }
-                continue;
-            }
-            else if (passNode.NameView() == "Queues") {
-                for (auto&& queueNode : passNode.GetNodes()) {
-                    auto&& queue = m_queues.emplace_back();
-                    for (auto&& queuePassNode : queueNode.GetNodes()) {
-                        auto&& name = queuePassNode.GetAttribute("Name").ToString();
-                        if (auto&& pPass = FindPass(name)) {
-                            queue.emplace_back(pPass);
-                        }
-                        else {
-                            SR_ERROR("RenderTechnique::LoadSettings() : pass \"" + name + "\" for queue not found!");
-                        }
-                    }
-                }
-                continue;
-            }
-
-            LoadPass(passNode);
+            ProcessNode(passNode);
         }
 
         if (!m_passes.empty() && m_queues.empty()) {
@@ -148,12 +121,55 @@ namespace SR_GRAPH_NS {
     }
 
     void RenderTechnique::LoadPass(const SR_XML_NS::Node& node) {
-        if (auto&& pPass = SR_ALLOCATE_RENDER_PASS(node)) {
-            pPass->SetRenderTechnique(this);
+        if (auto&& pPass = SR_ALLOCATE_RENDER_PASS(node, this)) {
             m_passes.emplace_back(pPass);
         }
         else {
             SR_ERROR("RenderTechnique::LoadPass() : failed to load \"" + node.Name() + "\" pass!");
         }
+    }
+
+    void RenderTechnique::ProcessNode(const SR_XML_NS::Node& passNode) {
+        if (passNode.NameView() == "Include") {
+            auto&& path = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat(passNode.GetAttribute("Path").ToString());
+            auto&& includeXml = SR_XML_NS::Document::Load(path);
+            if (includeXml) {
+                for (auto&& includePassNode : includeXml.Root().GetNode("Include").GetNodes()) {
+                    ProcessNode(includePassNode);
+                }
+            }
+            return;
+        }
+
+        if (passNode.NameView() == "FrameBufferController") {
+            auto&& name = passNode.GetAttribute("Name").ToString();
+            auto&& pFrameBufferController = FrameBufferController::MakeShared();
+            if (pFrameBufferController->LoadFramebufferSettings(passNode)) {
+                m_frameBufferControllers[name] = pFrameBufferController;
+            }
+            else {
+                SR_ERROR("RenderTechnique::ProcessNode() : failed to load \"" + name + "\" framebuffer controller!");
+                pFrameBufferController.AutoFree();
+            }
+            return;
+        }
+
+        if (passNode.NameView() == "Queues") {
+            for (auto&& queueNode : passNode.GetNodes()) {
+                auto&& queue = m_queues.emplace_back();
+                for (auto&& queuePassNode : queueNode.GetNodes()) {
+                    auto&& name = queuePassNode.GetAttribute("Name").ToString();
+                    if (auto&& pPass = FindPass(name)) {
+                        queue.emplace_back(pPass);
+                    }
+                    else {
+                        SR_ERROR("RenderTechnique::ProcessNode() : pass \"" + name + "\" for queue not found!");
+                    }
+                }
+            }
+            return;
+        }
+
+        LoadPass(passNode);
     }
 }

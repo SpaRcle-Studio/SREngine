@@ -26,6 +26,8 @@ namespace SR_GRAPH_NS {
 
         void Update() override;
 
+    public:
+        SR_NODISCARD IRenderTechnique* GetFrameBufferRenderTechnique() const override;
         SR_NODISCARD std::vector<SR_GTYPES_NS::Framebuffer*> GetFrameBuffers() const override;
 
     };

@@ -320,7 +320,7 @@ namespace SR_GRAPH_NS {
         return m_window->GetSize();
     }
 
-    RenderContext::FramebufferPtr RenderContext::FindFramebuffer(const std::string &name, CameraPtr pCamera) const {
+    RenderContext::FramebufferPtr RenderContext::FindFramebuffer(SR_UTILS_NS::StringAtom name, CameraPtr pCamera) const {
         SR_TRACY_ZONE;
 
         for (auto&& pTechnique : m_techniques) {
@@ -328,24 +328,22 @@ namespace SR_GRAPH_NS {
                 continue;
             }
 
-            auto&& pPass = pTechnique->FindPass(name);
-
-            if (auto&& pFbPass = dynamic_cast<FramebufferPass*>(pPass)) {
-                return pFbPass->GetFramebuffer();
+            auto&& pController = pTechnique->GetFrameBufferController(name);
+            if (pController) {
+                return pController->GetFramebuffer();
             }
         }
 
         return nullptr;
     }
 
-    RenderContext::FramebufferPtr RenderContext::FindFramebuffer(const std::string &name) const {
+    RenderContext::FramebufferPtr RenderContext::FindFramebuffer(SR_UTILS_NS::StringAtom name) const {
         SR_TRACY_ZONE;
 
         for (auto&& pTechnique : m_techniques) {
-            auto&& pPass = pTechnique->FindPass(name);
-
-            if (auto&& pFbPass = dynamic_cast<FramebufferPass*>(pPass)) {
-                return pFbPass->GetFramebuffer();
+            auto&& pController = pTechnique->GetFrameBufferController(name);
+            if (pController) {
+                return pController->GetFramebuffer();
             }
         }
 

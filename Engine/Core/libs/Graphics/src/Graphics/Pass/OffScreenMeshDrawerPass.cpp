@@ -12,18 +12,17 @@ namespace SR_GRAPH_NS {
     }
 
     std::vector<SR_GTYPES_NS::Framebuffer*> OffScreenMeshDrawerPass::GetFrameBuffers() const {
-        if (!m_framebuffer) {
+        if (!GetFramebuffer()) {
             return std::vector<SR_GTYPES_NS::Framebuffer*>(); /// NOLINT
         }
-        return { m_framebuffer };
+        return { GetFramebuffer() };
     }
 
     bool OffScreenMeshDrawerPass::Init() {
-        return MeshDrawerPass::Init() && (IsDirectional() || InitializeFramebuffer(GetContext()));
+        return MeshDrawerPass::Init();
     }
 
     void OffScreenMeshDrawerPass::OnResize(const SR_MATH_NS::UVector2& size) {
-        IFramebufferPass::ResizeFrameBuffer(size);
         MeshDrawerPass::OnResize(size);
     }
 

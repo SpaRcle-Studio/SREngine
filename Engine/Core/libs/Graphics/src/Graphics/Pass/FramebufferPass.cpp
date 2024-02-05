@@ -25,26 +25,28 @@ namespace SR_GRAPH_NS {
     }
 
     bool FramebufferPass::Render() {
-        if (!m_framebuffer) {
+        auto&& pFrameBuffer = GetFramebuffer();
+
+        if (!pFrameBuffer) {
             m_isFrameBufferRendered = false;
             return false;
         }
 
-        if (!m_framebuffer->Bind()) {
+        if (!pFrameBuffer->Bind()) {
             m_isFrameBufferRendered = false;
             return false;
         }
 
-        if (!m_framebuffer->BeginCmdBuffer(m_clearColors, m_depth)) {
+        if (!pFrameBuffer->BeginCmdBuffer(GetClearColors(), GetClearDepth())) {
             m_isFrameBufferRendered = false;
             return false;
         }
 
-        if (m_framebuffer->BeginRender()) {
-            m_framebuffer->SetViewportScissor();
+        if (pFrameBuffer->BeginRender()) {
+            pFrameBuffer->SetViewportScissor();
             GroupPass::Render();
-            m_framebuffer->EndRender();
-            m_framebuffer->EndCmdBuffer();
+            pFrameBuffer->EndRender();
+            pFrameBuffer->EndCmdBuffer();
         }
 
         GetPassPipeline()->SetCurrentFrameBuffer(nullptr);
@@ -63,16 +65,16 @@ namespace SR_GRAPH_NS {
     }
 
     void FramebufferPass::OnResize(const SR_MATH_NS::UVector2 &size) {
-        IFramebufferPass::ResizeFrameBuffer(size);
         GroupPass::OnResize(size);
     }
 
     bool FramebufferPass::Init() {
-        return GroupPass::Init() && InitializeFramebuffer(GetContext());
+        return GroupPass::Init();
     }
 
     void FramebufferPass::Update() {
-        if (!m_framebuffer || m_framebuffer->IsDirty()) {
+        auto&& pFrameBuffer = GetFramebuffer();
+        if (!pFrameBuffer || pFrameBuffer->IsDirty()) {
             return;
         }
 
@@ -80,7 +82,7 @@ namespace SR_GRAPH_NS {
             return;
         }
 
-        GetPassPipeline()->SetCurrentFrameBuffer(m_framebuffer);
+        GetPassPipeline()->SetCurrentFrameBuffer(pFrameBuffer);
 
         GroupPass::Update();
 
@@ -88,9 +90,13 @@ namespace SR_GRAPH_NS {
     }
 
     std::vector<SR_GTYPES_NS::Framebuffer*> FramebufferPass::GetFrameBuffers() const {
-        if (!m_framebuffer) {
+        if (!GetFramebuffer()) {
             return std::vector<SR_GTYPES_NS::Framebuffer*>(); /// NOLINT
         }
-        return { m_framebuffer };
+        return { GetFramebuffer() };
+    }
+
+    IRenderTechnique* FramebufferPass::GetFrameBufferRenderTechnique() const {
+        return GetTechnique();
     }
 }

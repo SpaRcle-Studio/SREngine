@@ -21,6 +21,10 @@ namespace SR_GRAPH_NS {
     }
 
     bool FrameBufferQueue::Contains(FrameBufferQueue::FrameBuffer pFrameBuffer, uint32_t layer) {
+        if (IsAllowMultiFrameBuffers()) {
+            return false;
+        }
+
         if (auto&& pIt = m_used.find(pFrameBuffer); pIt != m_used.end()) {
             return pIt->second.count(layer) == 1;
         }
@@ -29,6 +33,9 @@ namespace SR_GRAPH_NS {
     }
 
     bool FrameBufferQueue::Contains(FrameBufferQueue::FrameBuffer pFrameBuffer) {
+        if (IsAllowMultiFrameBuffers()) {
+            return false;
+        }
         return m_used.find(pFrameBuffer) != m_used.end();
     }
 
@@ -42,5 +49,9 @@ namespace SR_GRAPH_NS {
             m_levels.resize(queueIndex + 1);
         }
         m_levels[queueIndex].emplace_back(pFrameBuffer);
+    }
+
+    bool FrameBufferQueue::IsAllowMultiFrameBuffers() const {
+        return true;
     }
 }

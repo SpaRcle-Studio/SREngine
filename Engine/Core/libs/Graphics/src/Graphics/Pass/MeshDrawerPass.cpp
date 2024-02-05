@@ -10,6 +10,7 @@
 #include <Graphics/Render/RenderScene.h>
 #include <Graphics/Render/RenderContext.h>
 #include <Graphics/Render/RenderTechnique.h>
+#include <Graphics/Render/FrameBufferController.h>
 #include <Graphics/Lighting/LightSystem.h>
 #include <Graphics/Types/Shader.h>
 #include <Graphics/Types/Framebuffer.h>
@@ -263,9 +264,9 @@ namespace SR_GRAPH_NS {
             sampler.fboId = SR_ID_INVALID;
 
             if (!sampler.fboName.Empty()) {
-                auto&& pFBOPass = dynamic_cast<IFramebufferPass*>(GetTechnique()->FindPass(sampler.fboName));
-                if (pFBOPass && pFBOPass->GetFramebuffer()) {
-                    auto&& pFBO = pFBOPass->GetFramebuffer();
+                auto&& pFrameBufferController = GetTechnique()->GetFrameBufferController(sampler.fboName);
+                if (pFrameBufferController) {
+                    auto&& pFBO = pFrameBufferController->GetFramebuffer();
 
                     sampler.fboId = pFBO->GetId();
 

@@ -1,11 +1,15 @@
 <?xml version="1.0"?>
 <Include>
+    <FrameBufferController Name="ColorBufferFBO" DynamicResizing="true" DepthEnabled="true" SmoothSamples="1">
+        <Size X="0" Y="0"/>
+        <PreScale X="0.85" Y="0.85"/>
+        <Depth Format="Auto"/>
+        <Layer Format="RGBA8_UNORM"/>
+    </FrameBufferController>
     <ColorBufferPass>
-        <FramebufferSettings DynamicResizing="true" DepthEnabled="true" SmoothSamples="1" Directional="false">
-            <Size X="0" Y="0"/>
-            <PreScale X="0.85" Y="0.85"/>
-            <Depth Format="Auto" ClearValue="1.0"/>
-            <Layer Format="RGBA8_UNORM" R="0.0" G="0.0" B="0.0" A="1.0"/>
+        <FramebufferSettings Name="ColorBufferFBO">
+            <Depth ClearValue="1.0"/>
+            <Layer R="0.0" G="0.0" B="0.0" A="1.0"/>
         </FramebufferSettings>
         <Shaders>
             <Override Type="Canvas" Shader="Engine/Shaders/ColorBuffer/canvas.srsl"/>

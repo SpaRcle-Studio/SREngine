@@ -49,7 +49,7 @@ namespace SR_GTYPES_NS {
         bool Bind();
 
         bool BeginCmdBuffer();
-        bool BeginCmdBuffer(const ClearColors& clearColors, float_t depth);
+        bool BeginCmdBuffer(const ClearColors& clearColors, std::optional<float_t> depth);
         bool BeginCmdBuffer(const SR_MATH_NS::FColor& clearColor, float_t depth);
 
         void SetViewportScissor();

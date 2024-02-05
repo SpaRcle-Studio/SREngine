@@ -18,7 +18,7 @@ namespace SR_UTILS_NS {
         Super::ClearSettings();
     }
 
-    bool LayerManager::LoadSettings(const Xml::Node &node) {
+    bool LayerManager::LoadSettings(const SR_XML_NS::Node& node) {
         SR_LOCK_GUARD;
 
         m_layers.clear();

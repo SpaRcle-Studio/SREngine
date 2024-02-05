@@ -17,15 +17,18 @@
 
 namespace SR_GTYPES_NS {
     class Camera;
+    class Framebuffer;
 }
 
 namespace SR_GRAPH_NS {
     class RenderScene;
+    class FrameBufferController;
     class RenderContext;
     class BasePass;
 
     class IRenderTechnique : public Memory::IGraphicsResource, public GroupPass {
     public:
+        using FrameBufferControllerPtr = SR_HTYPES_NS::SharedPtr<FrameBufferController>;
         using CameraPtr = Types::Camera*;
         using Super = Memory::IGraphicsResource;
         using RenderScenePtr = SR_HTYPES_NS::SafePtr<RenderScene>;
@@ -41,6 +44,8 @@ namespace SR_GRAPH_NS {
         bool Render() override;
         void Update() override;
 
+        bool Init() override;
+
         void FreeVideoMemory() override;
 
         void SetCamera(CameraPtr pCamera);
@@ -49,6 +54,11 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD CameraPtr GetCamera() const noexcept { return m_camera; }
         SR_NODISCARD RenderScenePtr GetRenderScene() const override;
         SR_NODISCARD bool IsEmpty() const;
+
+        void OnResize(const SR_MATH_NS::UVector2& size) override;
+        void OnSamplesChanged() override;
+
+        SR_NODISCARD FrameBufferControllerPtr GetFrameBufferController(SR_UTILS_NS::StringAtom name) const;
 
         SR_GTYPES_NS::Mesh* PickMeshAt(const SR_MATH_NS::FPoint& pos) const;
         SR_GTYPES_NS::Mesh* PickMeshAt(float_t x, float_t y) const;
@@ -60,6 +70,7 @@ namespace SR_GRAPH_NS {
         virtual bool Build() { return true; }
         void SetDirty();
         void DeInitPasses();
+        void ReleaseFrameBufferControllers();
 
         SR_NODISCARD uint64_t GetNodeHashName() const noexcept override { return 0; }
         SR_NODISCARD std::string GetNodeName() const noexcept override { return std::string(); }
@@ -68,6 +79,8 @@ namespace SR_GRAPH_NS {
         RenderScenePtr m_renderScene;
         std::atomic<bool> m_dirty = false;
         std::atomic<bool> m_hasErrors = false;
+
+        std::map<SR_UTILS_NS::StringAtom, FrameBufferControllerPtr> m_frameBufferControllers;
 
         PassQueues m_queues;
 

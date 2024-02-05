@@ -103,7 +103,7 @@ namespace SR_GRAPH_NS {
 
         void ClearBuffers() override;
         void ClearBuffers(float_t r, float_t g, float_t b, float_t a, float_t depth, uint8_t colorCount) override;
-        void ClearBuffers(const std::vector<SR_MATH_NS::FColor>& colors, float_t depth) override;
+        void ClearBuffers(const ClearColors& clearColors, std::optional<float_t> depth) override;
 
         void UpdateDescriptorSets(uint32_t descriptorSet, const SRDescriptorUpdateInfos& updateInfo) override;
         void UpdateUBO(uint32_t UBO, void* pData, uint64_t size) override;

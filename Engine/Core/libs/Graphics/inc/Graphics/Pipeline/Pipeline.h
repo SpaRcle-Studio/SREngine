@@ -26,6 +26,7 @@ namespace SR_GRAPH_NS {
     class Pipeline : public SR_HTYPES_NS::SharedPtr<Pipeline> {
     public:
         using Super = SR_HTYPES_NS::SharedPtr<Pipeline>;
+        using ClearColors = std::vector<SR_MATH_NS::FColor>;
         using Ptr = SR_HTYPES_NS::SharedPtr<Pipeline>;
         using ShaderPtr = SR_GTYPES_NS::Shader*;
         using FramebufferPtr = SR_GTYPES_NS::Framebuffer*;
@@ -131,7 +132,7 @@ namespace SR_GRAPH_NS {
         /// то в colorCount нужно задать их количество
         virtual void ClearBuffers();
         virtual void ClearBuffers(float_t r, float_t g, float_t b, float_t a, float_t depth, uint8_t colorCount);
-        virtual void ClearBuffers(const std::vector<SR_MATH_NS::FColor>& colors, float_t depth);
+        virtual void ClearBuffers(const ClearColors& clearColors, std::optional<float_t> depth);
 
         /// Устанавливает состояние графического конвейера.
         /// Если грязный, то будет перестроена сцена

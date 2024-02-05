@@ -12,11 +12,11 @@ namespace SR_GRAPH_NS {
         m_passes.clear();
     }
 
-    bool GroupPass::Load(const SR_XML_NS::Node &passNode) {
+    bool GroupPass::Load(const SR_XML_NS::Node& passNode) {
         SR_TRACY_ZONE;
 
         for (auto&& subPassNode : passNode.TryGetNodes()) {
-            if (auto&& pPass = SR_ALLOCATE_RENDER_PASS(subPassNode)) {
+            if (auto&& pPass = SR_ALLOCATE_RENDER_PASS(subPassNode, GetTechnique())) {
                 m_passes.emplace_back(pPass);
             }
             else {
@@ -188,7 +188,7 @@ namespace SR_GRAPH_NS {
         BasePass::OnSamplesChanged();
     }
 
-    void GroupPass::SetRenderTechnique(RenderTechnique* pRenderTechnique) {
+    void GroupPass::SetRenderTechnique(IRenderTechnique* pRenderTechnique) {
         for (auto&& pPass : m_passes) {
             pPass->SetRenderTechnique(pRenderTechnique);
         }

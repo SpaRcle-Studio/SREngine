@@ -97,8 +97,8 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD TexturePtr GetDefaultTexture() const;
         SR_NODISCARD TexturePtr GetNoneTexture() const;
         SR_NODISCARD ShaderPtr GetCurrentShader() const noexcept;
-        SR_NODISCARD FramebufferPtr FindFramebuffer(const std::string& name) const;
-        SR_NODISCARD FramebufferPtr FindFramebuffer(const std::string& name, CameraPtr pCamera) const;
+        SR_NODISCARD FramebufferPtr FindFramebuffer(SR_UTILS_NS::StringAtom name) const;
+        SR_NODISCARD FramebufferPtr FindFramebuffer(SR_UTILS_NS::StringAtom name, CameraPtr pCamera) const;
         SR_NODISCARD SR_MATH_NS::UVector2 GetWindowSize() const;
         SR_NODISCARD const std::vector<SR_GTYPES_NS::Shader*>& GetShaders() const noexcept;
         SR_NODISCARD const std::vector<SR_GTYPES_NS::Framebuffer*>& GetFramebuffers() const noexcept;

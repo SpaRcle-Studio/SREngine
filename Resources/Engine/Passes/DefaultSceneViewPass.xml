@@ -1,7 +1,5 @@
 <?xml version="1.0"?>
-<Technique Name="CascadedShadowMap">
-    <Include Path="Engine/Passes/ColorBufferPass.xml"/>
-    <Include Path="Engine/Passes/CascadedShadowMapPass.xml"/>
+<Include>
     <FrameBufferController Name="SceneViewFBO" DynamicResizing="true" DepthEnabled="true" SmoothSamples="0">
         <Size X="0" Y="0"/>
         <PreScale X="1.0" Y="1.0"/>
@@ -15,7 +13,6 @@
         </FramebufferSettings>
         <Passes>
             <MeshDrawerPass>
-                <Sampler FBO="ShadowMapFBO" Id="shadowMap" Depth="true" />
                 <AllowedLayers>
                     <Default/>
                     <Opaque/>
@@ -23,35 +20,11 @@
             </MeshDrawerPass>
             <SkyboxPass Path="Engine/Skyboxes/Sun.png" Shader="Engine/Shaders/skybox.srsl"/>
             <MeshDrawerPass>
-                <Sampler FBO="ShadowMapFBO" Id="shadowMap" Depth="true" />
                 <DisallowedLayers>
                     <Default/>
-                    <Opaque/>
                     <GizmoSelection/>
                 </DisallowedLayers>
             </MeshDrawerPass>
         </Passes>
     </FramebufferPass>
-    <!--<FramebufferPass Name="SceneViewOverlay">
-        <FramebufferSettings Name="SceneViewFBO">
-            <Depth ClearValue="1.0"/>
-            <Layer R="0.0" G="0.0" B="0.0" A="0.0"/>
-        </FramebufferSettings>
-        <Passes>
-            <MeshDrawerPass>
-                <AllowedLayers>
-                    <Gizmo/>
-                </AllowedLayers>
-            </MeshDrawerPass>
-        </Passes>
-    </FramebufferPass>-->
-    <Queues>
-        <Queue>
-            <Pass Name="ShadowMap"/>
-        </Queue>
-        <Queue>
-            <Pass Name="ColorBufferPass"/>
-            <Pass Name="SceneView"/>
-        </Queue>
-    </Queues>
-</Technique>
+</Include>

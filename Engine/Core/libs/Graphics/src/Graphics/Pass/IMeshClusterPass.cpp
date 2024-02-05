@@ -46,7 +46,6 @@ namespace SR_GRAPH_NS {
             auto&& clusterType = SR_UTILS_NS::EnumReflector::FromString<MeshClusterType::MeshClusterTypeT>(meshClusterNode.Name());
             m_meshClusters |= static_cast<MeshClusterTypeFlag>(clusterType);
         }
-
         m_samplers.clear();
 
         for (auto&& samplerNode : passNode.TryGetNodes("Sampler")) {
@@ -101,15 +100,16 @@ namespace SR_GRAPH_NS {
 
         SR_TRACY_ZONE;
 
-        for (auto&& sampler : m_samplers) {
+        for (auto&& sampler : m_samplers
+) {
             int32_t textureId = SR_ID_INVALID;
 
             sampler.fboId = SR_ID_INVALID;
 
             if (!sampler.fboName.Empty()) {
-                auto&& pFBOPass = dynamic_cast<IFramebufferPass*>(GetTechnique()->FindPass(sampler.fboName));
-                if (pFBOPass && pFBOPass->GetFramebuffer()) {
-                    auto&& pFBO = pFBOPass->GetFramebuffer();
+                auto&& pFrameBufferController = GetTechnique()->GetFrameBufferController(sampler.fboName);
+                if (pFrameBufferController) {
+                    auto&& pFBO = pFrameBufferController->GetFramebuffer();
 
                     sampler.fboId = pFBO->GetId();
 

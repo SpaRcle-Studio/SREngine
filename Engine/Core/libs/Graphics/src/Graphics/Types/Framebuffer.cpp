@@ -175,7 +175,7 @@ namespace SR_GTYPES_NS {
         SetDirty();
     }
 
-    bool Framebuffer::BeginCmdBuffer(const Framebuffer::ClearColors &clearColors, float_t depth) {
+    bool Framebuffer::BeginCmdBuffer(const ClearColors& clearColors, std::optional<float_t> depth) {
         m_pipeline->ClearBuffers(clearColors, depth);
 
         if (!m_pipeline->BeginCmdBuffer()) {

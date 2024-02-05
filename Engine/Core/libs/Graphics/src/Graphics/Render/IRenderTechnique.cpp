@@ -4,6 +4,7 @@
 
 #include <Graphics/Render/IRenderTechnique.h>
 #include <Graphics/Render/RenderScene.h>
+#include <Graphics/Render/FrameBufferController.h>
 #include <Graphics/Render/RenderContext.h>
 #include <Graphics/Pass/GroupPass.h>
 #include <Graphics/Pass/IColorBufferPass.h>
@@ -19,6 +20,7 @@ namespace SR_GRAPH_NS {
             delete pPass;
         }
         m_passes.clear();
+        ReleaseFrameBufferControllers();
     }
 
     bool IRenderTechnique::Render() {
@@ -119,12 +121,13 @@ namespace SR_GRAPH_NS {
 
             pPass->DeInit();
         }
+        ReleaseFrameBufferControllers();
     }
 
     bool IRenderTechnique::IsEmpty() const {
         /// Не делаем блокировки, так как взаимодействие
         /// идет только из графического потока
-        return m_passes.empty();
+        return m_passes.empty() && m_frameBufferControllers.empty();
     }
 
     void IRenderTechnique::DeInitPasses() {
@@ -135,6 +138,7 @@ namespace SR_GRAPH_NS {
             delete pPass;
         }
         m_passes.clear();
+        ReleaseFrameBufferControllers();
     }
 
     SR_GTYPES_NS::Mesh* IRenderTechnique::PickMeshAt(float_t x, float_t y, SR_UTILS_NS::StringAtom passName) const {
@@ -164,5 +168,50 @@ namespace SR_GRAPH_NS {
 
     SR_GTYPES_NS::Mesh* IRenderTechnique::PickMeshAt(const SR_MATH_NS::FPoint& pos) const {
         return PickMeshAt(pos.x, pos.y);
+    }
+
+    void IRenderTechnique::OnResize(const SR_MATH_NS::UVector2& size) {
+        for (auto&& [name, pController] : m_frameBufferControllers) {
+            pController->OnResize(size);
+        }
+
+        GroupPass::OnResize(size);
+    }
+
+    void IRenderTechnique::OnSamplesChanged() {
+        GroupPass::OnSamplesChanged();
+    }
+
+    IRenderTechnique::FrameBufferControllerPtr IRenderTechnique::GetFrameBufferController(SR_UTILS_NS::StringAtom name) const {
+        auto&& pIt = m_frameBufferControllers.find(name);
+        if (pIt != m_frameBufferControllers.end()) {
+            return pIt->second;
+        }
+
+        return nullptr;
+    }
+
+    bool IRenderTechnique::Init() {
+        for (auto&& [name, pController] : m_frameBufferControllers) {
+            if (!pController->InitializeFramebuffer(GetRenderContext())) {
+                SR_ERROR("RenderTechnique::Init() : failed to initialize \"" + name.ToStringRef() + "\" framebuffer controller!");
+            }
+        }
+
+        for (auto&& pPass : m_passes) {
+            if (!pPass->Init()) {
+                SR_ERROR("RenderTechnique::Init() : failed to initialize \"" + pPass->GetName().ToStringRef() + "\" pass!");
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    void IRenderTechnique::ReleaseFrameBufferControllers() {
+        for (auto&& [name, pController] : m_frameBufferControllers) {
+            pController.AutoFree();
+        }
+        m_frameBufferControllers.clear();
     }
 }
