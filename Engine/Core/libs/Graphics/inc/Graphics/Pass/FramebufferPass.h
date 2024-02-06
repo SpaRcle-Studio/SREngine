@@ -31,6 +31,14 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD std::vector<SR_GTYPES_NS::Framebuffer*> GetFrameBuffers() const override;
 
     };
+
+    class ClearDepthPass : public BasePass {
+        SR_REGISTER_LOGICAL_NODE(ClearDepthPass, Clear Depth Pass, { "Passes" })
+        using Super = BasePass;
+    public:
+        bool Render() override;
+
+    };
 }
 
 #endif //SR_ENGINE_FRAMEBUFFERPASS_H

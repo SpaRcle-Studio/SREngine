@@ -368,4 +368,12 @@ namespace SR_GRAPH_NS {
         ++m_state.operations;
         m_newSampleCount = m_requiredSampleCount = count;
     }
+
+    void Pipeline::ClearDepthBuffer(float_t depth) {
+        ++m_state.operations;
+    }
+
+    void Pipeline::ClearColorBuffer(const ClearColors& clearColors) {
+        ++m_state.operations;
+    }
 }

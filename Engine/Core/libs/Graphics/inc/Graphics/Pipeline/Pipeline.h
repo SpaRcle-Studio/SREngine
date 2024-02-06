@@ -134,6 +134,9 @@ namespace SR_GRAPH_NS {
         virtual void ClearBuffers(float_t r, float_t g, float_t b, float_t a, float_t depth, uint8_t colorCount);
         virtual void ClearBuffers(const ClearColors& clearColors, std::optional<float_t> depth);
 
+        virtual void ClearDepthBuffer(float_t depth);
+        virtual void ClearColorBuffer(const ClearColors& clearColors);
+
         /// Устанавливает состояние графического конвейера.
         /// Если грязный, то будет перестроена сцена
         /// Если чистый, то считаем, что постороение сцены завершено

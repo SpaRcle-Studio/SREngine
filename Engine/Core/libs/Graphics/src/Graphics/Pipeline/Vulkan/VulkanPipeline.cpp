@@ -1494,4 +1494,150 @@ namespace SR_GRAPH_NS {
         m_lastVkShader = nullptr;
         Super::ResetLastShader();
     }
+
+    void VulkanPipeline::ClearDepthBuffer(float_t depth) {
+        SR_TRACY_ZONE;
+
+        const uint32_t layer = m_state.frameBufferLayer == SR_ID_INVALID ? 0 : m_state.frameBufferLayer;
+        auto&& pLayer = m_currentVkFrameBuffer->GetLayers()[layer];
+        auto&& depthImage = pLayer->GetDepthAttachment()->GetImage();
+
+        SRAssert2(depthImage.GetLayout() != VK_IMAGE_LAYOUT_UNDEFINED, "VulkanPipeline::ClearDepthBuffer() : image layout is VK_IMAGE_LAYOUT_UNDEFINED!");
+
+        VkImageMemoryBarrier barrier = {};
+        barrier.sType = VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER;
+        barrier.oldLayout = depthImage.GetLayout();
+        barrier.newLayout = VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL;
+        barrier.srcQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
+        barrier.dstQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
+        barrier.image = depthImage;
+        barrier.subresourceRange.aspectMask = VK_IMAGE_ASPECT_DEPTH_BIT | VK_IMAGE_ASPECT_STENCIL_BIT;
+        barrier.subresourceRange.baseMipLevel = 0;
+        barrier.subresourceRange.levelCount = 1;
+        barrier.subresourceRange.baseArrayLayer = 0;
+        barrier.subresourceRange.layerCount = 1;
+        barrier.srcAccessMask = 0;
+        barrier.dstAccessMask = VK_ACCESS_TRANSFER_WRITE_BIT;
+
+        vkCmdPipelineBarrier(
+                m_currentCmd,
+                VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT, VK_PIPELINE_STAGE_TRANSFER_BIT,
+                0,
+                0, nullptr,
+                0, nullptr,
+                1, &barrier
+        );
+
+        VkClearDepthStencilValue depthStencilValue;
+        depthStencilValue.depth = depth;
+        depthStencilValue.stencil = 0;
+
+        vkCmdClearDepthStencilImage(
+                m_currentCmd,
+                depthImage,
+                VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
+                &depthStencilValue,
+                1,
+                &barrier.subresourceRange
+        );
+
+        barrier.oldLayout = VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL;
+        barrier.newLayout = depthImage.GetLayout();
+        barrier.srcAccessMask = VK_ACCESS_TRANSFER_WRITE_BIT;
+        barrier.dstAccessMask = 0;
+
+        vkCmdPipelineBarrier(
+                m_currentCmd,
+                VK_PIPELINE_STAGE_TRANSFER_BIT, VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT,
+                0,
+                0, nullptr,
+                0, nullptr,
+                1, &barrier
+        );
+
+        Super::ClearDepthBuffer(depth);
+    }
+
+    void VulkanPipeline::ClearColorBuffer(const ClearColors& clearColors) {
+        SR_TRACY_ZONE;
+
+        const uint32_t layer = m_state.frameBufferLayer == SR_ID_INVALID ? 0 : m_state.frameBufferLayer;
+        auto&& pLayer = m_currentVkFrameBuffer->GetLayers()[layer];
+
+        auto&& clearBufferFunction = [this](const EvoVulkan::Types::Image& image, VkClearColorValue clearColor) {
+            SRAssert2(image.GetLayout() != VK_IMAGE_LAYOUT_UNDEFINED, "VulkanPipeline::ClearColorBuffer() : image layout is VK_IMAGE_LAYOUT_UNDEFINED!");
+
+            VkImageMemoryBarrier barrier = {};
+            barrier.sType = VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER;
+            barrier.oldLayout = image.GetLayout();
+            barrier.newLayout = VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL;
+            barrier.srcQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
+            barrier.dstQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
+            barrier.image = image;
+            barrier.subresourceRange.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
+            barrier.subresourceRange.baseMipLevel = 0;
+            barrier.subresourceRange.levelCount = 1;
+            barrier.subresourceRange.baseArrayLayer = 0;
+            barrier.subresourceRange.layerCount = 1;
+            barrier.srcAccessMask = 0;
+            barrier.dstAccessMask = VK_ACCESS_TRANSFER_WRITE_BIT;
+
+            vkCmdPipelineBarrier(
+                    m_currentCmd,
+                    VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT, VK_PIPELINE_STAGE_TRANSFER_BIT,
+                    0,
+                    0, nullptr,
+                    0, nullptr,
+                    1, &barrier
+            );
+
+            vkCmdClearColorImage(
+                    m_currentCmd,
+                    image,
+                    VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
+                    &clearColor,
+                    1,
+                    &barrier.subresourceRange
+            );
+
+            barrier.oldLayout = VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL;
+            barrier.newLayout = image.GetLayout();
+            barrier.srcAccessMask = VK_ACCESS_TRANSFER_WRITE_BIT;
+            barrier.dstAccessMask = 0;
+
+            vkCmdPipelineBarrier(
+                    m_currentCmd,
+                    VK_PIPELINE_STAGE_TRANSFER_BIT, VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT,
+                    0,
+                    0, nullptr,
+                    0, nullptr,
+                    1, &barrier
+                );
+        };
+
+        for (uint32_t i = 0; i < clearColors.size(); ++i) {
+            auto&& color = clearColors[i];
+
+            auto&& pColorAttachment = pLayer->GetColorAttachments()[i];
+            if (!pColorAttachment) {
+                PipelineError("VulkanPipeline::ClearColorBuffer() : color attachment is nullptr!");
+                continue;
+            }
+
+            //clearBufferFunction(pColorAttachment->GetImage(), VkClearColorValue {
+            //    .float32 = { color.r, color.g, color.b, color.a }
+            //});
+
+            // if (!pLayer->GetResolveAttachments().empty()) {
+            //     auto&& pResolveAttachment = pLayer->GetResolveAttachments()[i];
+            //     if (pResolveAttachment) {
+            //         clearBufferFunction(pResolveAttachment->GetImage(), VkClearColorValue{
+            //                 .float32 = {color.r, color.g, color.b, color.a}
+            //         });
+            //     }
+            // }
+        }
+
+        Super::ClearColorBuffer(clearColors);
+    }
 }

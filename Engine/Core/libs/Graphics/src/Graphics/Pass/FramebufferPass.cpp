@@ -8,6 +8,7 @@
 
 namespace SR_GRAPH_NS {
     SR_REGISTER_RENDER_PASS(FramebufferPass)
+    SR_REGISTER_RENDER_PASS(ClearDepthPass)
 
     bool FramebufferPass::Load(const SR_XML_NS::Node &passNode) {
         LoadFramebufferSettings(passNode);
@@ -42,8 +43,12 @@ namespace SR_GRAPH_NS {
             return false;
         }
 
+        GetPassPipeline()->ClearDepthBuffer(1.f);
+        GetPassPipeline()->ClearColorBuffer(GetClearColors());
+
+        pFrameBuffer->SetViewportScissor();
+
         if (pFrameBuffer->BeginRender()) {
-            pFrameBuffer->SetViewportScissor();
             GroupPass::Render();
             pFrameBuffer->EndRender();
             pFrameBuffer->EndCmdBuffer();
@@ -98,5 +103,14 @@ namespace SR_GRAPH_NS {
 
     IRenderTechnique* FramebufferPass::GetFrameBufferRenderTechnique() const {
         return GetTechnique();
+    }
+
+    /// ----------------------------------------------------------------------------------------------------------------
+
+    bool ClearDepthPass::Render() {
+        GetPassPipeline()->EndRender();
+        GetPassPipeline()->ClearDepthBuffer(1.f);
+        GetPassPipeline()->BeginRender();
+        return Super::Render();
     }
 }

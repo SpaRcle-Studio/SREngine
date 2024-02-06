@@ -23,7 +23,14 @@
                 <DisallowedLayers>
                     <Default/>
                     <GizmoSelection/>
+                    <Gizmo/>
                 </DisallowedLayers>
+            </MeshDrawerPass>
+            <ClearDepthPass/>
+            <MeshDrawerPass>
+                <AllowedLayers>
+                    <Gizmo/>
+                </AllowedLayers>
             </MeshDrawerPass>
         </Passes>
     </FramebufferPass>
