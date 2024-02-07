@@ -104,10 +104,10 @@ namespace SR_GRAPH_NS {
                 m_features.colorShaderRead = subNode.TryGetAttribute("ColorShaderRead").ToBool(m_features.colorShaderRead);
                 m_features.depthLoad = subNode.TryGetAttribute("DepthLoad").ToBool(m_features.depthLoad);
                 m_features.colorLoad = subNode.TryGetAttribute("ColorLoad").ToBool(m_features.colorLoad);
-                m_features.transferSrcDepth = subNode.TryGetAttribute("TransferSrcDepth").ToBool(m_features.transferSrcDepth);
-                m_features.transferSrcColor = subNode.TryGetAttribute("TransferSrcColor").ToBool(m_features.transferSrcColor);
-                m_features.transferDstDepth = subNode.TryGetAttribute("TransferDstDepth").ToBool(m_features.transferDstDepth);
-                m_features.transferDstColor = subNode.TryGetAttribute("TransferDstColor").ToBool(m_features.transferDstColor);
+                m_features.depthTransferSrc = subNode.TryGetAttribute("DepthTransferSrc").ToBool(m_features.depthTransferSrc);
+                m_features.colorTransferSrc = subNode.TryGetAttribute("ColorTransferSrc").ToBool(m_features.colorTransferSrc);
+                m_features.depthTransferDst = subNode.TryGetAttribute("DepthTransferDst").ToBool(m_features.depthTransferDst);
+                m_features.colorTransferDst = subNode.TryGetAttribute("ColorTransferDst").ToBool(m_features.colorTransferDst);
             }
         }
 

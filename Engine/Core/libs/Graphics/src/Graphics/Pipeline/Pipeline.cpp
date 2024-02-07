@@ -348,6 +348,9 @@ namespace SR_GRAPH_NS {
         if (m_state.pFrameBuffer) {
             SRAssert(!m_state.pFrameBuffer->IsDirty());
         }
+        else {
+            SetFrameBufferLayer(0);
+        }
     }
 
     void Pipeline::BindFrameBuffer(Pipeline::FramebufferPtr pFBO) {

@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<Include>
+    <FrameBufferController Name="ShadowMapFBO" DynamicResizing="false" DepthEnabled="true" SmoothSamples="1" Layers="4">
+        <Size X="4096" Y="4096"/>
+        <PreScale X="1.0" Y="1.0"/>
+        <Depth Format="Auto" Aspect="Depth" />
+        <Features DepthShaderRead="true" ColorShaderRead="false"/>
+    </FrameBufferController>
+</Include>

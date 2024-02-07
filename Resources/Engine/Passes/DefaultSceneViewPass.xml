@@ -9,6 +9,7 @@
         <Passes>
             <ClearBuffersPass/>
             <MeshDrawerPass>
+                <Sampler FBO="ShadowMapFBO" Id="shadowMap" Depth="true" Optional="true" />
                 <AllowedLayers>
                     <Default/>
                     <Opaque/>
@@ -16,6 +17,7 @@
             </MeshDrawerPass>
             <SkyboxPass Path="Engine/Skyboxes/Sun.png" Shader="Engine/Shaders/skybox.srsl"/>
             <MeshDrawerPass>
+                <Sampler FBO="ShadowMapFBO" Id="shadowMap" Depth="true" Optional="true" />
                 <DisallowedLayers>
                     <Default/>
                     <GizmoSelection/>

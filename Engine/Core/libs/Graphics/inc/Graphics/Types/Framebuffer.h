@@ -74,6 +74,7 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD ImageAspect GetDepthAspect() const noexcept { return m_depth.aspect; }
         SR_NODISCARD bool IsDepthEnabled() const { return m_depthEnabled; }
         SR_NODISCARD bool IsDirty() const { return m_dirty; }
+        SR_NODISCARD bool IsValid() const { return m_frameBuffer != SR_ID_INVALID; }
         SR_NODISCARD const FrameBufferFeatures& GetFeatures() const { return m_features; }
 
         SR_NODISCARD int32_t GetId();

@@ -59,7 +59,9 @@ namespace SR_GRAPH_NS {
             return false;
         }
 
-        pFrameBuffer->Update();
+        if (!pFrameBuffer->Update()) {
+            return false;
+        }
 
         /// установим кадровый буфер, чтобы BeginCmdBuffer понимал какие значение для очистки ставить
         pPipeline->SetCurrentFrameBuffer(pFrameBuffer);

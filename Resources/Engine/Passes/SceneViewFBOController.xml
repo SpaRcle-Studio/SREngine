@@ -5,6 +5,6 @@
         <PreScale X="1.0" Y="1.0"/>
         <Depth Format="Auto"/>
         <Layer Format="RGBA8_UNORM"/>
-        <Features DepthLoad="true" ColorLoad="true" TransferDstDepth="true" TransferDstColor="true" />
+        <Features DepthLoad="true" ColorLoad="true" DepthTransferDst="true" ColorTransferDst="true" />
     </FrameBufferController>
 </Include>

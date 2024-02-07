@@ -1256,10 +1256,12 @@ namespace SR_GRAPH_NS {
 
         for (auto&& queue : queues) {
             for (auto&& pFrameBuffer : queue) {
-                auto&& fboId = pFrameBuffer->GetId();
-                auto&& vkFrameBuffer = m_memory->m_FBOs[fboId - 1];
-                vkFrameBuffer->ClearWaitSemaphores();
-                vkFrameBuffer->ClearSignalSemaphores();
+                if (pFrameBuffer->IsValid()) {
+                    auto&& fboId = pFrameBuffer->GetId();
+                    auto&& vkFrameBuffer = m_memory->m_FBOs[fboId - 1];
+                    vkFrameBuffer->ClearWaitSemaphores();
+                    vkFrameBuffer->ClearSignalSemaphores();
+                }
             }
         }
 
@@ -1268,14 +1270,18 @@ namespace SR_GRAPH_NS {
         if (!queues.empty()) {
             /// Если являемся началом цепочки, то должны дождаться предыдущего кадра
             for (auto&& pFrameBuffer : queues.front()) {
-                auto&& vkFrameBuffer = m_memory->m_FBOs[pFrameBuffer->GetId() - 1];
-                vkFrameBuffer->GetWaitSemaphores().emplace_back(m_kernel->GetPresentCompleteSemaphore());
+                if (pFrameBuffer->IsValid()) {
+                    auto&& vkFrameBuffer = m_memory->m_FBOs[pFrameBuffer->GetId() - 1];
+                    vkFrameBuffer->GetWaitSemaphores().emplace_back(m_kernel->GetPresentCompleteSemaphore());
+                }
             }
 
             /// Если являемся концом цепочки, то нужно чтобы нас дождался рендер
             for (auto&& pFrameBuffer : queues.back()) {
-                auto&& vkFrameBuffer = m_memory->m_FBOs[pFrameBuffer->GetId() - 1];
-                m_kernel->GetWaitSemaphores().emplace_back(vkFrameBuffer->GetSemaphore());
+                if (pFrameBuffer->IsValid()) {
+                    auto&& vkFrameBuffer = m_memory->m_FBOs[pFrameBuffer->GetId() - 1];
+                    m_kernel->GetWaitSemaphores().emplace_back(vkFrameBuffer->GetSemaphore());
+                }
             }
         }
         else {
@@ -1285,6 +1291,10 @@ namespace SR_GRAPH_NS {
         for (uint32_t queueIndex = 1; queueIndex < queues.size(); ++queueIndex) {
             for (auto&& pFrameBuffer : queues[queueIndex]) {
                 for (auto&& pDependency : queues[queueIndex - 1]) {
+                    if (!pFrameBuffer->IsValid() || !pDependency->IsValid()) {
+                        continue;
+                    }
+
                     auto&& vkFrameBuffer = m_memory->m_FBOs[pFrameBuffer->GetId() - 1];
                     auto&& vkDependency = m_memory->m_FBOs[pDependency->GetId() - 1];
                     vkFrameBuffer->GetWaitSemaphores().emplace_back(vkDependency->GetSemaphore());
@@ -1300,6 +1310,10 @@ namespace SR_GRAPH_NS {
             submitInfo.SetWaitDstStageMask(m_kernel->GetSubmitPipelineStages());
 
             for (auto&& pFrameBuffer : queue) {
+                if (!pFrameBuffer->IsValid()) {
+                    continue;
+                }
+
                 auto&& vkFrameBuffer = m_memory->m_FBOs[pFrameBuffer->GetId() - 1];
 
                 submitInfo.commandBuffers.emplace_back(vkFrameBuffer->GetCmd());
