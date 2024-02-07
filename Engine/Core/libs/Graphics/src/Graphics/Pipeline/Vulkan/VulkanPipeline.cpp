@@ -896,6 +896,8 @@ namespace SR_GRAPH_NS {
     }
 
     bool VulkanPipeline::BeginCmdBuffer() {
+        SR_TRACY_ZONE;
+
         if (!m_currentCmd) {
             PipelineError("VulkanPipeline::BeginCmdBuffer() : cmd buffer is nullptr!");
             return false;
@@ -909,6 +911,8 @@ namespace SR_GRAPH_NS {
     }
 
     void VulkanPipeline::EndCmdBuffer() {
+        SR_TRACY_ZONE;
+
         if (!m_currentCmd) {
             PipelineError("VulkanPipeline::EndCmdBuffer() : cmd buffer is nullptr!");
             return;
@@ -919,6 +923,8 @@ namespace SR_GRAPH_NS {
     }
 
     bool VulkanPipeline::BeginRender() {
+        SR_TRACY_ZONE;
+
         if (!Super::BeginRender()) {
             return false;
         }
@@ -933,6 +939,8 @@ namespace SR_GRAPH_NS {
     }
 
     void VulkanPipeline::EndRender() {
+        SR_TRACY_ZONE;
+
         Super::EndRender();
 
         if (!m_currentCmd) {
