@@ -32,11 +32,17 @@ namespace SR_GRAPH_NS {
 
     };
 
-    class ClearDepthPass : public BasePass {
-        SR_REGISTER_LOGICAL_NODE(ClearDepthPass, Clear Depth Pass, { "Passes" })
+    class ClearBuffersPass : public BasePass {
+        SR_REGISTER_LOGICAL_NODE(ClearBuffersPass, Clear Depth Pass, { "Passes" })
         using Super = BasePass;
     public:
+        bool Load(const SR_XML_NS::Node& passNode) override;
+
         bool Render() override;
+
+    private:
+        bool m_clearDepth = true;
+        bool m_clearColor = true;
 
     };
 }

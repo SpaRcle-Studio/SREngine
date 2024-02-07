@@ -1,17 +1,13 @@
 <?xml version="1.0"?>
 <Include>
-    <FrameBufferController Name="SceneViewFBO" DynamicResizing="true" DepthEnabled="true" SmoothSamples="0">
-        <Size X="0" Y="0"/>
-        <PreScale X="1.0" Y="1.0"/>
-        <Depth Format="Auto"/>
-        <Layer Format="RGBA8_UNORM"/>
-    </FrameBufferController>
+    <Include Path="Engine/Passes/SceneViewFBOController.xml"/>
     <FramebufferPass Name="SceneView">
         <FramebufferSettings Name="SceneViewFBO">
             <Depth ClearValue="1.0"/>
             <Layer R="0.0" G="0.0" B="0.0" A="1.0"/>
         </FramebufferSettings>
         <Passes>
+            <ClearBuffersPass/>
             <MeshDrawerPass>
                 <AllowedLayers>
                     <Default/>
@@ -26,7 +22,7 @@
                     <Gizmo/>
                 </DisallowedLayers>
             </MeshDrawerPass>
-            <ClearDepthPass/>
+            <ClearBuffersPass ClearColor="false"/>
             <MeshDrawerPass>
                 <AllowedLayers>
                     <Gizmo/>

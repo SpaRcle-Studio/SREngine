@@ -6,6 +6,7 @@
 #define SR_ENGINE_PIPELINE_STATE_H
 
 #include <Graphics/Pipeline/PipelineType.h>
+#include <Graphics/Pipeline/FrameBufferFeatures.h>
 #include <Graphics/Pipeline/TextureHelper.h>
 #include <Graphics/Types/Descriptors.h>
 
@@ -22,6 +23,8 @@ namespace SR_GRAPH_NS {
         std::vector<ColorLayer>* colors = nullptr;
         uint8_t sampleCount = 0;
         uint32_t layersCount = 0;
+        FrameBufferFeatures features;
+
     };
 
     struct SRTextureCreateInfo {

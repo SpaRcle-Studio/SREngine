@@ -8,7 +8,7 @@
 
 namespace SR_GRAPH_NS {
     SR_REGISTER_RENDER_PASS(FramebufferPass)
-    SR_REGISTER_RENDER_PASS(ClearDepthPass)
+    SR_REGISTER_RENDER_PASS(ClearBuffersPass)
 
     bool FramebufferPass::Load(const SR_XML_NS::Node &passNode) {
         LoadFramebufferSettings(passNode);
@@ -42,9 +42,6 @@ namespace SR_GRAPH_NS {
             m_isFrameBufferRendered = false;
             return false;
         }
-
-        GetPassPipeline()->ClearDepthBuffer(1.f);
-        GetPassPipeline()->ClearColorBuffer(GetClearColors());
 
         pFrameBuffer->SetViewportScissor();
 
@@ -107,10 +104,26 @@ namespace SR_GRAPH_NS {
 
     /// ----------------------------------------------------------------------------------------------------------------
 
-    bool ClearDepthPass::Render() {
+    bool ClearBuffersPass::Render() {
         GetPassPipeline()->EndRender();
-        GetPassPipeline()->ClearDepthBuffer(1.f);
+
+        auto&& pFrameBufferPass = dynamic_cast<FramebufferPass*>(GetParent());
+
+        if (m_clearColor && pFrameBufferPass) {
+            GetPassPipeline()->ClearColorBuffer(pFrameBufferPass->GetClearColors());
+        }
+
+        if (m_clearDepth) {
+            GetPassPipeline()->ClearDepthBuffer(1.f);
+        }
+
         GetPassPipeline()->BeginRender();
         return Super::Render();
+    }
+
+    bool ClearBuffersPass::Load(const SR_XML_NS::Node& passNode) {
+        m_clearDepth = passNode.TryGetAttribute("ClearDepth").ToBool(true);
+        m_clearColor = passNode.TryGetAttribute("ClearColor").ToBool(true);
+        return Super::Load(passNode);
     }
 }

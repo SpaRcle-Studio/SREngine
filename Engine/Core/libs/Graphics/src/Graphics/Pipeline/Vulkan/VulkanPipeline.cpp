@@ -749,15 +749,28 @@ namespace SR_GRAPH_NS {
 
         EVK_PUSH_LOG_LEVEL(EvoVulkan::Tools::LogLevel::ErrorsOnly);
 
+        VulkanTools::VulkanFrameBufferAllocInfo info = {
+            .FBO = *createInfo.pFBO - 1,
+            .width = static_cast<uint32_t>(createInfo.size.x),
+            .height = static_cast<uint32_t>(createInfo.size.y),
+            .pDepth = createInfo.pDepth,
+            .sampleCount = createInfo.sampleCount,
+            .layersCount = createInfo.layersCount,
+            .oldColorAttachments = colorBuffers,
+            .inputColorAttachments = formats,
+            .pOutputColorAttachments = &colorBuffers,
+            .features = *reinterpret_cast<EvoVulkan::Complexes::FrameBufferFeatures*>((void*)&createInfo.features)
+        };
+
         if (*createInfo.pFBO > 0) {
-            if (!m_memory->ReAllocateFBO(*createInfo.pFBO - 1, createInfo.size.x, createInfo.size.y, colorBuffers, createInfo.pDepth, createInfo.sampleCount, createInfo.layersCount)) {
+            if (!m_memory->ReAllocateFBO(info)) {
                 PipelineError("VulkanPipeline::AllocateFrameBuffer() : failed to re-allocate frame buffer object!");
             }
             EVK_POP_LOG_LEVEL();
             goto success;
         }
 
-        *createInfo.pFBO = m_memory->AllocateFBO(createInfo.size.x, createInfo.size.y, formats, colorBuffers, createInfo.pDepth, createInfo.sampleCount, createInfo.layersCount) + 1;
+        *createInfo.pFBO = m_memory->AllocateFBO(info) + 1;
         if (*createInfo.pFBO <= 0) {
             *createInfo.pFBO = SR_ID_INVALID;
             PipelineError("VulkanPipeline::AllocateFrameBuffer() : failed to allocate FBO!");
@@ -1500,17 +1513,25 @@ namespace SR_GRAPH_NS {
 
         const uint32_t layer = m_state.frameBufferLayer == SR_ID_INVALID ? 0 : m_state.frameBufferLayer;
         auto&& pLayer = m_currentVkFrameBuffer->GetLayers()[layer];
-        auto&& depthImage = pLayer->GetDepthAttachment()->GetImage();
+        auto&& image = pLayer->GetDepthAttachment()->GetImage();
 
-        SRAssert2(depthImage.GetLayout() != VK_IMAGE_LAYOUT_UNDEFINED, "VulkanPipeline::ClearDepthBuffer() : image layout is VK_IMAGE_LAYOUT_UNDEFINED!");
+        if (image.GetLayout() == VK_IMAGE_LAYOUT_UNDEFINED) {
+            SR_ERROR("VulkanPipeline::ClearDepthBuffer() : image layout is VK_IMAGE_LAYOUT_UNDEFINED!");
+            return;
+        }
+
+        if (!(image.GetInfo().usage & VK_IMAGE_USAGE_TRANSFER_DST_BIT)) {
+            SR_ERROR("VulkanPipeline::ClearDepthBuffer() : image usage don't contain VK_IMAGE_USAGE_TRANSFER_DST_BIT!");
+            return;
+        }
 
         VkImageMemoryBarrier barrier = {};
         barrier.sType = VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER;
-        barrier.oldLayout = depthImage.GetLayout();
+        barrier.oldLayout = image.GetLayout();
         barrier.newLayout = VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL;
         barrier.srcQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
         barrier.dstQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
-        barrier.image = depthImage;
+        barrier.image = image;
         barrier.subresourceRange.aspectMask = VK_IMAGE_ASPECT_DEPTH_BIT | VK_IMAGE_ASPECT_STENCIL_BIT;
         barrier.subresourceRange.baseMipLevel = 0;
         barrier.subresourceRange.levelCount = 1;
@@ -1534,7 +1555,7 @@ namespace SR_GRAPH_NS {
 
         vkCmdClearDepthStencilImage(
                 m_currentCmd,
-                depthImage,
+                image,
                 VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
                 &depthStencilValue,
                 1,
@@ -1542,7 +1563,7 @@ namespace SR_GRAPH_NS {
         );
 
         barrier.oldLayout = VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL;
-        barrier.newLayout = depthImage.GetLayout();
+        barrier.newLayout = image.GetLayout();
         barrier.srcAccessMask = VK_ACCESS_TRANSFER_WRITE_BIT;
         barrier.dstAccessMask = 0;
 
@@ -1565,7 +1586,15 @@ namespace SR_GRAPH_NS {
         auto&& pLayer = m_currentVkFrameBuffer->GetLayers()[layer];
 
         auto&& clearBufferFunction = [this](const EvoVulkan::Types::Image& image, VkClearColorValue clearColor) {
-            SRAssert2(image.GetLayout() != VK_IMAGE_LAYOUT_UNDEFINED, "VulkanPipeline::ClearColorBuffer() : image layout is VK_IMAGE_LAYOUT_UNDEFINED!");
+            if (image.GetLayout() == VK_IMAGE_LAYOUT_UNDEFINED) {
+                SR_ERROR("VulkanPipeline::ClearColorBuffer() : image layout is VK_IMAGE_LAYOUT_UNDEFINED!");
+                return;
+            }
+
+            if (!(image.GetInfo().usage & VK_IMAGE_USAGE_TRANSFER_DST_BIT)) {
+                SR_ERROR("VulkanPipeline::ClearColorBuffer() : image usage don't contain VK_IMAGE_USAGE_TRANSFER_DST_BIT!");
+                return;
+            }
 
             VkImageMemoryBarrier barrier = {};
             barrier.sType = VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER;
@@ -1624,18 +1653,18 @@ namespace SR_GRAPH_NS {
                 continue;
             }
 
-            //clearBufferFunction(pColorAttachment->GetImage(), VkClearColorValue {
-            //    .float32 = { color.r, color.g, color.b, color.a }
-            //});
+            clearBufferFunction(pColorAttachment->GetImage(), VkClearColorValue {
+                .float32 = { color.r, color.g, color.b, color.a }
+            });
 
-            // if (!pLayer->GetResolveAttachments().empty()) {
-            //     auto&& pResolveAttachment = pLayer->GetResolveAttachments()[i];
-            //     if (pResolveAttachment) {
-            //         clearBufferFunction(pResolveAttachment->GetImage(), VkClearColorValue{
-            //                 .float32 = {color.r, color.g, color.b, color.a}
-            //         });
-            //     }
-            // }
+            if (!pLayer->GetResolveAttachments().empty()) {
+                auto&& pResolveAttachment = pLayer->GetResolveAttachments()[i];
+                if (pResolveAttachment) {
+                    clearBufferFunction(pResolveAttachment->GetImage(), VkClearColorValue{
+                            .float32 = {color.r, color.g, color.b, color.a}
+                    });
+                }
+            }
         }
 
         Super::ClearColorBuffer(clearColors);

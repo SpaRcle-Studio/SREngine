@@ -8,6 +8,7 @@
 #include <Utils/Math/Vector3.h>
 #include <Utils/Math/Vector2.h>
 #include <Utils/Types/SharedPtr.h>
+#include <Graphics/Pipeline/FrameBufferFeatures.h>
 
 namespace SR_GTYPES_NS {
     class Framebuffer;
@@ -42,6 +43,7 @@ namespace SR_GRAPH_NS {
 
         ColorFormats m_colorFormats;
 
+        FrameBufferFeatures m_features;
         uint8_t m_samples = 0;
         uint32_t m_layersCount = 1;
         ImageFormat m_depthFormat = ImageFormat::Unknown;

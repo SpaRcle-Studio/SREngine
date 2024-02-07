@@ -25,6 +25,19 @@
 }                                                        \
 
 namespace SR_GRAPH_NS::VulkanTools {
+    struct VulkanFrameBufferAllocInfo {
+        int32_t FBO = SR_ID_INVALID;
+        uint32_t width = 0;
+        uint32_t height = 0;
+        DepthLayer* pDepth = nullptr;
+        uint8_t sampleCount = 0;
+        uint32_t layersCount = 0;
+        std::vector<int32_t> oldColorAttachments;
+        std::vector<VkFormat> inputColorAttachments;
+        std::vector<int32_t>* pOutputColorAttachments = nullptr;
+        EvoVulkan::Complexes::FrameBufferFeatures features;
+    };
+
     class MemoryManager : SR_UTILS_NS::NonCopyable {
     private:
         MemoryManager() = default;
@@ -40,7 +53,7 @@ namespace SR_GRAPH_NS::VulkanTools {
             m_descriptorManager = m_kernel->GetDescriptorManager();
             m_allocator = m_kernel->GetAllocator();
             m_device = m_kernel->GetDevice();
-            m_pool   = m_kernel->GetCmdPool();
+            m_pool = m_kernel->GetCmdPool();
 
             if (!m_descriptorManager || !m_device || !m_pool) {
                 SR_ERROR("MemoryManager::Initialize() : failed to get a (descriptor manager/device/cmd pool)!");
@@ -120,21 +133,9 @@ namespace SR_GRAPH_NS::VulkanTools {
         SR_NODISCARD int32_t AllocateUBO(uint32_t UBOSize);
         SR_NODISCARD int32_t AllocateIBO(uint32_t buffSize, void* data);
 
-        SR_NODISCARD bool ReAllocateFBO(
-                uint32_t FBO,
-                uint32_t w, uint32_t h,
-                const std::vector<int32_t>& oldColorAttachments,
-                DepthLayer* pDepth,
-                uint8_t sampleCount,
-                uint32_t layersCount);
+        SR_NODISCARD bool ReAllocateFBO(const VulkanFrameBufferAllocInfo& info);
 
-        SR_NODISCARD int32_t AllocateFBO(
-                uint32_t w, uint32_t h,
-                const std::vector<VkFormat>& inputColorAttachments,
-                std::vector<int32_t>& outputColorAttachments,
-                DepthLayer* pDepth,
-                uint8_t sampleCount,
-                uint32_t layersCount);
+        SR_NODISCARD int32_t AllocateFBO(const VulkanFrameBufferAllocInfo& info);
 
         SR_NODISCARD int32_t AllocateTexture(
                 uint8_t* pixels,
