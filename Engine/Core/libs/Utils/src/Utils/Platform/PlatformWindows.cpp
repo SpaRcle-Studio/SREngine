@@ -477,7 +477,7 @@ namespace SR_UTILS_NS::Platform {
     }
 
     FileMetadata GetFileMetadata(const Path& file) {
-        FileMetadata fileMetadata {0};
+        FileMetadata fileMetadata;
         WIN32_FIND_DATA fd;
         HANDLE hFind = ::FindFirstFile(file.c_str(), &fd);
         if(hFind != INVALID_HANDLE_VALUE) {

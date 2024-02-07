@@ -17,7 +17,7 @@ namespace SR_UTILS_NS {
 
 namespace SR_UTILS_NS::Platform {
     struct FileMetadata {
-        uint64_t lastWriteTime;
+        uint64_t lastWriteTime = SR_UINT64_MAX;
     };
 
     SR_DLL_EXPORT extern void InitSegmentationHandler();

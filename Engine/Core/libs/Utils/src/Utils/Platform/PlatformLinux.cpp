@@ -8,14 +8,17 @@
 
 #include <X11/Xlib.h>
 #include <X11/extensions/Xrandr.h>
+#include <X11/Xlib-xcb.h>
+
+#include <xcb/randr.h>
 
 #include <filesystem>
 
-#include <sys/sendfile.h>
+#include <spawn.h>
 #include <fcntl.h>
 #include <unistd.h>
-#include <xcb/randr.h>
-#include <X11/Xlib-xcb.h>
+
+#include <sys/sendfile.h>
 
 namespace SR_UTILS_NS::Platform {
     void SegmentationHandler(int sig) {
@@ -260,13 +263,26 @@ namespace SR_UTILS_NS::Platform {
     }
 
     FileMetadata GetFileMetadata(const Path& file) {
-        FileMetadata fm {0};
-        SRHaltOnce("GetFileMetadata::Not implemented!");
-        return fm;
+        FileMetadata fileMetadata;
+        struct stat result{};
+        if (stat(file.c_str(), &result) == 0) {
+            fileMetadata.lastWriteTime = result.st_mtime;
+        }
+        return fileMetadata;
     }
 
     void SelfOpen() {
-        SRHaltOnce("Not implemented!");
+        auto&& applicationPath = GetApplicationPath();
+
+        pid_t pid;
+        pid = fork();
+
+        if (pid == 0) {
+            execl(applicationPath.c_str(), nullptr);
+        }
+        else {
+            SR_WARN("Platform::SelfOpen() : failed to create a new process.");
+        }
     }
 
     bool IsAbsolutePath(const Path &path) {
@@ -282,7 +298,7 @@ namespace SR_UTILS_NS::Platform {
     }
 
     bool IsExists(const Path &path) {
-        struct stat buffer;
+        struct stat buffer{};
         return (stat(path.c_str(), &buffer) == 0);
     }
 
