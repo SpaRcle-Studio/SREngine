@@ -749,15 +749,28 @@ namespace SR_GRAPH_NS {
 
         EVK_PUSH_LOG_LEVEL(EvoVulkan::Tools::LogLevel::ErrorsOnly);
 
+        VulkanTools::VulkanFrameBufferAllocInfo info = {
+            .FBO = *createInfo.pFBO - 1,
+            .width = static_cast<uint32_t>(createInfo.size.x),
+            .height = static_cast<uint32_t>(createInfo.size.y),
+            .pDepth = createInfo.pDepth,
+            .sampleCount = createInfo.sampleCount,
+            .layersCount = createInfo.layersCount,
+            .oldColorAttachments = colorBuffers,
+            .inputColorAttachments = formats,
+            .pOutputColorAttachments = &colorBuffers,
+            .features = *reinterpret_cast<EvoVulkan::Complexes::FrameBufferFeatures*>((void*)&createInfo.features)
+        };
+
         if (*createInfo.pFBO > 0) {
-            if (!m_memory->ReAllocateFBO(*createInfo.pFBO - 1, createInfo.size.x, createInfo.size.y, colorBuffers, createInfo.pDepth, createInfo.sampleCount, createInfo.layersCount)) {
+            if (!m_memory->ReAllocateFBO(info)) {
                 PipelineError("VulkanPipeline::AllocateFrameBuffer() : failed to re-allocate frame buffer object!");
             }
             EVK_POP_LOG_LEVEL();
             goto success;
         }
 
-        *createInfo.pFBO = m_memory->AllocateFBO(createInfo.size.x, createInfo.size.y, formats, colorBuffers, createInfo.pDepth, createInfo.sampleCount, createInfo.layersCount) + 1;
+        *createInfo.pFBO = m_memory->AllocateFBO(info) + 1;
         if (*createInfo.pFBO <= 0) {
             *createInfo.pFBO = SR_ID_INVALID;
             PipelineError("VulkanPipeline::AllocateFrameBuffer() : failed to allocate FBO!");
@@ -883,6 +896,8 @@ namespace SR_GRAPH_NS {
     }
 
     bool VulkanPipeline::BeginCmdBuffer() {
+        SR_TRACY_ZONE;
+
         if (!m_currentCmd) {
             PipelineError("VulkanPipeline::BeginCmdBuffer() : cmd buffer is nullptr!");
             return false;
@@ -896,6 +911,8 @@ namespace SR_GRAPH_NS {
     }
 
     void VulkanPipeline::EndCmdBuffer() {
+        SR_TRACY_ZONE;
+
         if (!m_currentCmd) {
             PipelineError("VulkanPipeline::EndCmdBuffer() : cmd buffer is nullptr!");
             return;
@@ -906,6 +923,8 @@ namespace SR_GRAPH_NS {
     }
 
     bool VulkanPipeline::BeginRender() {
+        SR_TRACY_ZONE;
+
         if (!Super::BeginRender()) {
             return false;
         }
@@ -920,6 +939,8 @@ namespace SR_GRAPH_NS {
     }
 
     void VulkanPipeline::EndRender() {
+        SR_TRACY_ZONE;
+
         Super::EndRender();
 
         if (!m_currentCmd) {
@@ -1243,10 +1264,12 @@ namespace SR_GRAPH_NS {
 
         for (auto&& queue : queues) {
             for (auto&& pFrameBuffer : queue) {
-                auto&& fboId = pFrameBuffer->GetId();
-                auto&& vkFrameBuffer = m_memory->m_FBOs[fboId - 1];
-                vkFrameBuffer->ClearWaitSemaphores();
-                vkFrameBuffer->ClearSignalSemaphores();
+                if (pFrameBuffer->IsValid()) {
+                    auto&& fboId = pFrameBuffer->GetId();
+                    auto&& vkFrameBuffer = m_memory->m_FBOs[fboId - 1];
+                    vkFrameBuffer->ClearWaitSemaphores();
+                    vkFrameBuffer->ClearSignalSemaphores();
+                }
             }
         }
 
@@ -1255,14 +1278,18 @@ namespace SR_GRAPH_NS {
         if (!queues.empty()) {
             /// Если являемся началом цепочки, то должны дождаться предыдущего кадра
             for (auto&& pFrameBuffer : queues.front()) {
-                auto&& vkFrameBuffer = m_memory->m_FBOs[pFrameBuffer->GetId() - 1];
-                vkFrameBuffer->GetWaitSemaphores().emplace_back(m_kernel->GetPresentCompleteSemaphore());
+                if (pFrameBuffer->IsValid()) {
+                    auto&& vkFrameBuffer = m_memory->m_FBOs[pFrameBuffer->GetId() - 1];
+                    vkFrameBuffer->GetWaitSemaphores().emplace_back(m_kernel->GetPresentCompleteSemaphore());
+                }
             }
 
             /// Если являемся концом цепочки, то нужно чтобы нас дождался рендер
             for (auto&& pFrameBuffer : queues.back()) {
-                auto&& vkFrameBuffer = m_memory->m_FBOs[pFrameBuffer->GetId() - 1];
-                m_kernel->GetWaitSemaphores().emplace_back(vkFrameBuffer->GetSemaphore());
+                if (pFrameBuffer->IsValid()) {
+                    auto&& vkFrameBuffer = m_memory->m_FBOs[pFrameBuffer->GetId() - 1];
+                    m_kernel->GetWaitSemaphores().emplace_back(vkFrameBuffer->GetSemaphore());
+                }
             }
         }
         else {
@@ -1272,6 +1299,10 @@ namespace SR_GRAPH_NS {
         for (uint32_t queueIndex = 1; queueIndex < queues.size(); ++queueIndex) {
             for (auto&& pFrameBuffer : queues[queueIndex]) {
                 for (auto&& pDependency : queues[queueIndex - 1]) {
+                    if (!pFrameBuffer->IsValid() || !pDependency->IsValid()) {
+                        continue;
+                    }
+
                     auto&& vkFrameBuffer = m_memory->m_FBOs[pFrameBuffer->GetId() - 1];
                     auto&& vkDependency = m_memory->m_FBOs[pDependency->GetId() - 1];
                     vkFrameBuffer->GetWaitSemaphores().emplace_back(vkDependency->GetSemaphore());
@@ -1287,6 +1318,10 @@ namespace SR_GRAPH_NS {
             submitInfo.SetWaitDstStageMask(m_kernel->GetSubmitPipelineStages());
 
             for (auto&& pFrameBuffer : queue) {
+                if (!pFrameBuffer->IsValid()) {
+                    continue;
+                }
+
                 auto&& vkFrameBuffer = m_memory->m_FBOs[pFrameBuffer->GetId() - 1];
 
                 submitInfo.commandBuffers.emplace_back(vkFrameBuffer->GetCmd());
@@ -1493,5 +1528,167 @@ namespace SR_GRAPH_NS {
     void VulkanPipeline::ResetLastShader() {
         m_lastVkShader = nullptr;
         Super::ResetLastShader();
+    }
+
+    void VulkanPipeline::ClearDepthBuffer(float_t depth) {
+        SR_TRACY_ZONE;
+
+        const uint32_t layer = m_state.frameBufferLayer == SR_ID_INVALID ? 0 : m_state.frameBufferLayer;
+        auto&& pLayer = m_currentVkFrameBuffer->GetLayers()[layer];
+        auto&& image = pLayer->GetDepthAttachment()->GetImage();
+
+        if (image.GetLayout() == VK_IMAGE_LAYOUT_UNDEFINED) {
+            SR_ERROR("VulkanPipeline::ClearDepthBuffer() : image layout is VK_IMAGE_LAYOUT_UNDEFINED!");
+            return;
+        }
+
+        if (!(image.GetInfo().usage & VK_IMAGE_USAGE_TRANSFER_DST_BIT)) {
+            SR_ERROR("VulkanPipeline::ClearDepthBuffer() : image usage don't contain VK_IMAGE_USAGE_TRANSFER_DST_BIT!");
+            return;
+        }
+
+        VkImageMemoryBarrier barrier = {};
+        barrier.sType = VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER;
+        barrier.oldLayout = image.GetLayout();
+        barrier.newLayout = VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL;
+        barrier.srcQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
+        barrier.dstQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
+        barrier.image = image;
+        barrier.subresourceRange.aspectMask = VK_IMAGE_ASPECT_DEPTH_BIT | VK_IMAGE_ASPECT_STENCIL_BIT;
+        barrier.subresourceRange.baseMipLevel = 0;
+        barrier.subresourceRange.levelCount = 1;
+        barrier.subresourceRange.baseArrayLayer = 0;
+        barrier.subresourceRange.layerCount = 1;
+        barrier.srcAccessMask = 0;
+        barrier.dstAccessMask = VK_ACCESS_TRANSFER_WRITE_BIT;
+
+        vkCmdPipelineBarrier(
+                m_currentCmd,
+                VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT, VK_PIPELINE_STAGE_TRANSFER_BIT,
+                0,
+                0, nullptr,
+                0, nullptr,
+                1, &barrier
+        );
+
+        VkClearDepthStencilValue depthStencilValue;
+        depthStencilValue.depth = depth;
+        depthStencilValue.stencil = 0;
+
+        vkCmdClearDepthStencilImage(
+                m_currentCmd,
+                image,
+                VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
+                &depthStencilValue,
+                1,
+                &barrier.subresourceRange
+        );
+
+        barrier.oldLayout = VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL;
+        barrier.newLayout = image.GetLayout();
+        barrier.srcAccessMask = VK_ACCESS_TRANSFER_WRITE_BIT;
+        barrier.dstAccessMask = 0;
+
+        vkCmdPipelineBarrier(
+                m_currentCmd,
+                VK_PIPELINE_STAGE_TRANSFER_BIT, VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT,
+                0,
+                0, nullptr,
+                0, nullptr,
+                1, &barrier
+        );
+
+        Super::ClearDepthBuffer(depth);
+    }
+
+    void VulkanPipeline::ClearColorBuffer(const ClearColors& clearColors) {
+        SR_TRACY_ZONE;
+
+        const uint32_t layer = m_state.frameBufferLayer == SR_ID_INVALID ? 0 : m_state.frameBufferLayer;
+        auto&& pLayer = m_currentVkFrameBuffer->GetLayers()[layer];
+
+        auto&& clearBufferFunction = [this](const EvoVulkan::Types::Image& image, VkClearColorValue clearColor) {
+            if (image.GetLayout() == VK_IMAGE_LAYOUT_UNDEFINED) {
+                SR_ERROR("VulkanPipeline::ClearColorBuffer() : image layout is VK_IMAGE_LAYOUT_UNDEFINED!");
+                return;
+            }
+
+            if (!(image.GetInfo().usage & VK_IMAGE_USAGE_TRANSFER_DST_BIT)) {
+                SR_ERROR("VulkanPipeline::ClearColorBuffer() : image usage don't contain VK_IMAGE_USAGE_TRANSFER_DST_BIT!");
+                return;
+            }
+
+            VkImageMemoryBarrier barrier = {};
+            barrier.sType = VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER;
+            barrier.oldLayout = image.GetLayout();
+            barrier.newLayout = VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL;
+            barrier.srcQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
+            barrier.dstQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
+            barrier.image = image;
+            barrier.subresourceRange.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
+            barrier.subresourceRange.baseMipLevel = 0;
+            barrier.subresourceRange.levelCount = 1;
+            barrier.subresourceRange.baseArrayLayer = 0;
+            barrier.subresourceRange.layerCount = 1;
+            barrier.srcAccessMask = 0;
+            barrier.dstAccessMask = VK_ACCESS_TRANSFER_WRITE_BIT;
+
+            vkCmdPipelineBarrier(
+                    m_currentCmd,
+                    VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT, VK_PIPELINE_STAGE_TRANSFER_BIT,
+                    0,
+                    0, nullptr,
+                    0, nullptr,
+                    1, &barrier
+            );
+
+            vkCmdClearColorImage(
+                    m_currentCmd,
+                    image,
+                    VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
+                    &clearColor,
+                    1,
+                    &barrier.subresourceRange
+            );
+
+            barrier.oldLayout = VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL;
+            barrier.newLayout = image.GetLayout();
+            barrier.srcAccessMask = VK_ACCESS_TRANSFER_WRITE_BIT;
+            barrier.dstAccessMask = 0;
+
+            vkCmdPipelineBarrier(
+                    m_currentCmd,
+                    VK_PIPELINE_STAGE_TRANSFER_BIT, VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT,
+                    0,
+                    0, nullptr,
+                    0, nullptr,
+                    1, &barrier
+                );
+        };
+
+        for (uint32_t i = 0; i < clearColors.size(); ++i) {
+            auto&& color = clearColors[i];
+
+            auto&& pColorAttachment = pLayer->GetColorAttachments()[i];
+            if (!pColorAttachment) {
+                PipelineError("VulkanPipeline::ClearColorBuffer() : color attachment is nullptr!");
+                continue;
+            }
+
+            clearBufferFunction(pColorAttachment->GetImage(), VkClearColorValue {
+                .float32 = { color.r, color.g, color.b, color.a }
+            });
+
+            if (!pLayer->GetResolveAttachments().empty()) {
+                auto&& pResolveAttachment = pLayer->GetResolveAttachments()[i];
+                if (pResolveAttachment) {
+                    clearBufferFunction(pResolveAttachment->GetImage(), VkClearColorValue{
+                            .float32 = {color.r, color.g, color.b, color.a}
+                    });
+                }
+            }
+        }
+
+        Super::ClearColorBuffer(clearColors);
     }
 }

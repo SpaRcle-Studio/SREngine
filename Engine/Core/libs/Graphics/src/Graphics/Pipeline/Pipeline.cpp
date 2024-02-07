@@ -348,6 +348,9 @@ namespace SR_GRAPH_NS {
         if (m_state.pFrameBuffer) {
             SRAssert(!m_state.pFrameBuffer->IsDirty());
         }
+        else {
+            SetFrameBufferLayer(0);
+        }
     }
 
     void Pipeline::BindFrameBuffer(Pipeline::FramebufferPtr pFBO) {
@@ -367,5 +370,13 @@ namespace SR_GRAPH_NS {
     void Pipeline::SetSampleCount(uint8_t count) {
         ++m_state.operations;
         m_newSampleCount = m_requiredSampleCount = count;
+    }
+
+    void Pipeline::ClearDepthBuffer(float_t depth) {
+        ++m_state.operations;
+    }
+
+    void Pipeline::ClearColorBuffer(const ClearColors& clearColors) {
+        ++m_state.operations;
     }
 }

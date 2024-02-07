@@ -5,6 +5,7 @@
         <PreScale X="0.85" Y="0.85"/>
         <Depth Format="Auto"/>
         <Layer Format="RGBA8_UNORM"/>
+        <Features ColorTransferSrc="true" />
     </FrameBufferController>
     <ColorBufferPass>
         <FramebufferSettings Name="ColorBufferFBO">

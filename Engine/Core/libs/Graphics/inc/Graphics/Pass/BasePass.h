@@ -91,6 +91,7 @@ namespace SR_GRAPH_NS {
         virtual void SetRenderTechnique(IRenderTechnique* pRenderTechnique);
         void SetName(SR_UTILS_NS::StringAtom name);
         void SetContext(Context pContext);
+        void SetParent(BasePass* pParent) { m_parent = pParent; }
 
         SR_NODISCARD virtual RenderScenePtr GetRenderScene() const;
         SR_NODISCARD Context GetContext() const { return m_context; }
@@ -98,12 +99,15 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD IRenderTechnique* GetTechnique() const { return m_technique; }
         SR_NODISCARD bool IsInit() const { return m_isInit; }
         SR_NODISCARD SR_UTILS_NS::StringAtom GetName() const;
+        SR_NODISCARD BasePass* GetParent() const { return m_parent; }
 
     protected:
         CameraPtr m_camera = nullptr;
         Memory::UBOManager& m_uboManager;
 
     private:
+        BasePass* m_parent = nullptr;
+
         Context m_context = nullptr;
         PipelinePtr m_pipeline = nullptr;
 

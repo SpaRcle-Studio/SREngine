@@ -125,6 +125,7 @@ namespace SR_GTYPES_NS {
         createInfo.colors = &m_colors;
         createInfo.sampleCount = m_currentSampleCount;
         createInfo.layersCount = m_layersCount;
+        createInfo.features = m_features;
 
         if (!m_pipeline->AllocateFrameBuffer(createInfo)) {
             SR_ERROR("FrameBuffer::Update() : failed to allocate frame buffer!");
@@ -315,5 +316,10 @@ namespace SR_GTYPES_NS {
     void Framebuffer::SetViewportScissor() {
         m_pipeline->SetViewport(m_size.x, m_size.y);
         m_pipeline->SetScissor(m_size.x, m_size.y);
+    }
+
+    void Framebuffer::SetFeatures(const FrameBufferFeatures& features) {
+        m_features = features;
+        m_dirty = true;
     }
 }

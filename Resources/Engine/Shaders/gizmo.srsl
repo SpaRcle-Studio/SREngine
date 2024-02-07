@@ -4,9 +4,9 @@ PolygonMode Fill;
 CullMode None;
 DepthCompare LessOrEqual;
 PrimitiveTopology TriangleList;
-BlendEnabled true;
+BlendEnabled false;
 DepthWrite true;
-DepthTest false;
+DepthTest true;
 
 [[uniform], [public]] vec4 color;
 

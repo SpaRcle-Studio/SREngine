@@ -18,6 +18,7 @@ namespace SR_GRAPH_NS {
         for (auto&& subPassNode : passNode.TryGetNodes()) {
             if (auto&& pPass = SR_ALLOCATE_RENDER_PASS(subPassNode, GetTechnique())) {
                 m_passes.emplace_back(pPass);
+                pPass->SetParent(this);
             }
             else {
                 SR_ERROR("GroupPass::Load() : failed to load \"" + subPassNode.Name() + "\" pass!");

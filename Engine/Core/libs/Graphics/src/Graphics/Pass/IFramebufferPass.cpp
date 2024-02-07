@@ -23,6 +23,9 @@ namespace SR_GRAPH_NS {
         if (!m_isDirectional) {
             m_frameBufferName = settingsNode.GetAttribute("Name").ToString();
             m_frameBufferController = GetFrameBufferRenderTechnique()->GetFrameBufferController(m_frameBufferName);
+            if (!m_frameBufferController) {
+                SR_ERROR("IFramebufferPass::LoadFramebufferSettings() : failed to find frame buffer controller!\n\tName: " + m_frameBufferName.ToStringRef());
+            }
         }
 
         for (auto&& subNode : settingsNode.GetNodes()) {
@@ -56,7 +59,9 @@ namespace SR_GRAPH_NS {
             return false;
         }
 
-        pFrameBuffer->Update();
+        if (!pFrameBuffer->Update()) {
+            return false;
+        }
 
         /// установим кадровый буфер, чтобы BeginCmdBuffer понимал какие значение для очистки ставить
         pPipeline->SetCurrentFrameBuffer(pFrameBuffer);

@@ -170,8 +170,9 @@ namespace SR_GRAPH_NS {
     void PostProcessPass::UseTextures() {
         for (auto&& attachment : m_attachments) {
             if (!attachment.pFBO) {
-                if (auto&& pFBOPass = dynamic_cast<IFramebufferPass*>(GetTechnique()->FindPass(attachment.fboName))) {
-                    attachment.pFBO = pFBOPass->GetFramebuffer();
+                auto&& pFrameBufferController = GetTechnique()->GetFrameBufferController(attachment.fboName);
+                if (pFrameBufferController) {
+                    attachment.pFBO = pFrameBufferController->GetFramebuffer();
                 }
             }
 

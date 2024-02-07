@@ -7,26 +7,19 @@
 
 #include <EvoVulkan/Types/VmaBuffer.h>
 
-int32_t SR_GRAPH_NS::VulkanTools::MemoryManager::AllocateFBO(
-    uint32_t w, uint32_t h,
-    const std::vector<VkFormat>& inputColorAttachments,
-    std::vector<int32_t>& outputColorAttachments,
-    DepthLayer* pDepth,
-    uint8_t sampleCount,
-    uint32_t layersCount
-) {
-    if (inputColorAttachments.size() != outputColorAttachments.size()) {
+int32_t SR_GRAPH_NS::VulkanTools::MemoryManager::AllocateFBO(const VulkanFrameBufferAllocInfo& info) {
+    if (info.inputColorAttachments.size() != info.pOutputColorAttachments->size()) {
         SR_WARN("MemoryManager::AllocateFBO() : input colors not equal output colors count! Something went wrong...");
     }
 
-    outputColorAttachments.clear();
+    info.pOutputColorAttachments->clear();
 
     for (uint32_t i = 0; i < m_countFBO.first; ++i) {
-        VkImageAspectFlags vkImageAspect = VulkanTools::AbstractImageAspectToVkAspect(pDepth->aspect);
+        VkImageAspectFlags vkImageAspect = VulkanTools::AbstractImageAspectToVkAspect(info.pDepth->aspect);
         VkFormat vkDepthFormat = m_device->GetDepthFormat();
 
-        if (pDepth->format != ImageFormat::Auto) {
-            vkDepthFormat = VulkanTools::AbstractTextureFormatToVkFormat(pDepth->format);
+        if (info.pDepth->format != ImageFormat::Auto) {
+            vkDepthFormat = VulkanTools::AbstractTextureFormatToVkFormat(info.pDepth->format);
         }
 
         if (m_FBOs[i] == nullptr) {
@@ -36,11 +29,12 @@ int32_t SR_GRAPH_NS::VulkanTools::MemoryManager::AllocateFBO(
                 m_kernel->GetDescriptorManager(),
                 m_kernel->GetSwapchain(),
                 m_kernel->GetCmdPool(),
-                inputColorAttachments,
-                w, h,
-                layersCount,
+                info.features,
+                info.inputColorAttachments,
+                info.width, info.height,
+                info.layersCount,
                 1.f /** scale */,
-                sampleCount,
+                info.sampleCount,
                 vkImageAspect,
                 vkDepthFormat
             );
@@ -59,11 +53,11 @@ int32_t SR_GRAPH_NS::VulkanTools::MemoryManager::AllocateFBO(
                 else {
                     m_textures[id] = texture;
                     ++m_countTextures.second;
-                    outputColorAttachments.push_back(id);
+                    info.pOutputColorAttachments->push_back(id);
                 }
             }
 
-            if (pDepth->format != ImageFormat::None && pDepth->aspect != ImageAspect::None) {
+            if (info.pDepth->format != ImageFormat::None && info.pDepth->aspect != ImageAspect::None) {
                 if (auto&& depthTexture = m_FBOs[i]->AllocateDepthTextureReference(-1)) {
                     int32_t id = FindFreeTextureIndex();
                     if (id < 0) {
@@ -72,7 +66,7 @@ int32_t SR_GRAPH_NS::VulkanTools::MemoryManager::AllocateFBO(
                     }
                     else {
                         m_textures[id] = depthTexture;
-                        pDepth->texture = id;
+                        info.pDepth->texture = id;
                         ++m_countTextures.second;
                     }
                 }
@@ -87,7 +81,7 @@ int32_t SR_GRAPH_NS::VulkanTools::MemoryManager::AllocateFBO(
                 else {
                     m_textures[id] = texture;
                     ++m_countTextures.second;
-                    pDepth->subLayers.emplace_back(id);
+                    info.pDepth->subLayers.emplace_back(id);
                 }
             }
 
@@ -102,80 +96,75 @@ int32_t SR_GRAPH_NS::VulkanTools::MemoryManager::AllocateFBO(
     return SR_ID_INVALID;
 }
 
-bool SR_GRAPH_NS::VulkanTools::MemoryManager::ReAllocateFBO(
-    uint32_t FBO, uint32_t w, uint32_t h,
-    const std::vector<int32_t> &oldColorAttachments,
-    DepthLayer* pDepth,
-    uint8_t sampleCount,
-    uint32_t layersCount
-) {
-    if (FBO >= m_countFBO.first || m_FBOs[FBO] == nullptr) {
+bool SR_GRAPH_NS::VulkanTools::MemoryManager::ReAllocateFBO(const VulkanFrameBufferAllocInfo& info) {
+    if (info.FBO >= m_countFBO.first || m_FBOs[info.FBO] == nullptr) {
         SR_ERROR("MemoryManager::ReAllocateFBO() : incorrect FBO index!");
         return false;
     }
 
-    auto&& vkImageAspect = VulkanTools::AbstractImageAspectToVkAspect(pDepth->aspect);
+    auto&& vkImageAspect = VulkanTools::AbstractImageAspectToVkAspect(info.pDepth->aspect);
 
-    m_FBOs[FBO]->SetSampleCount(sampleCount);
-    m_FBOs[FBO]->SetLayersCount(layersCount);
-    m_FBOs[FBO]->SetDepthAspect(vkImageAspect);
+    m_FBOs[info.FBO]->SetSampleCount(info.sampleCount);
+    m_FBOs[info.FBO]->SetLayersCount(info.layersCount);
+    m_FBOs[info.FBO]->SetDepthAspect(vkImageAspect);
+    m_FBOs[info.FBO]->SetFeatures(info.features);
 
-    if (!m_FBOs[FBO]->ReCreate(w, h)) {
+    if (!m_FBOs[info.FBO]->ReCreate(info.width, info.height)) {
         SR_ERROR("MemoryManager::ReAllocateFBO() : failed to re-create frame buffer object!");
         return false;
     }
 
     /// Texture attachments
 
-    auto textures = m_FBOs[FBO]->AllocateColorTextureReferences();
-    if (textures.size() != oldColorAttachments.size()) {
+    auto textures = m_FBOs[info.FBO]->AllocateColorTextureReferences();
+    if (textures.size() != info.oldColorAttachments.size()) {
         SR_ERROR("MemoryManager::ReAllocateFBO() : incorrect old color attachments!");
         return false;
     }
 
     for (uint32_t i = 0; i < textures.size(); ++i) {
-        if (oldColorAttachments[i] < 0 || oldColorAttachments[i] >= m_countTextures.first) {
+        if (info.oldColorAttachments[i] < 0 || info.oldColorAttachments[i] >= m_countTextures.first) {
             SR_ERROR("MemoryManager::ReAllocateFBO() : incorrect old color attachment at index " + std::to_string(i) + ", range problem!");
             return false;
         }
 
-        if (m_textures[oldColorAttachments[i]] == nullptr) {
+        if (m_textures[info.oldColorAttachments[i]] == nullptr) {
             SR_ERROR("MemoryManager::ReAllocateFBO() : incorrect old color attachment at index " + std::to_string(i) + ", texture not exists!");
             return false;
         }
 
-        delete m_textures[oldColorAttachments[i]];
-        m_textures[oldColorAttachments[i]] = textures[i];
+        delete m_textures[info.oldColorAttachments[i]];
+        m_textures[info.oldColorAttachments[i]] = textures[i];
     }
 
     /// Depth attachments
 
-    auto depthTextures = m_FBOs[FBO]->AllocateDepthTextureReferences();
-    if (depthTextures.size() != pDepth->subLayers.size()) {
+    auto depthTextures = m_FBOs[info.FBO]->AllocateDepthTextureReferences();
+    if (depthTextures.size() != info.pDepth->subLayers.size()) {
         SR_ERROR("MemoryManager::ReAllocateFBO() : incorrect old depth attachments!");
         return false;
     }
 
     for (uint32_t i = 0; i < depthTextures.size(); ++i) {
-        if (pDepth->subLayers[i] < 0 || pDepth->subLayers[i] >= m_countTextures.first) {
+        if (info.pDepth->subLayers[i] < 0 || info.pDepth->subLayers[i] >= m_countTextures.first) {
             SR_ERROR("MemoryManager::ReAllocateFBO() : incorrect old depth attachment at index " + std::to_string(i) + ", range problem!");
             return false;
         }
 
-        if (m_textures[pDepth->subLayers[i]] == nullptr) {
+        if (m_textures[info.pDepth->subLayers[i]] == nullptr) {
             SR_ERROR("MemoryManager::ReAllocateFBO() : incorrect old depth attachment at index " + std::to_string(i) + ", texture not exists!");
             return false;
         }
 
-        delete m_textures[pDepth->subLayers[i]];
-        m_textures[pDepth->subLayers[i]] = depthTextures[i];
+        delete m_textures[info.pDepth->subLayers[i]];
+        m_textures[info.pDepth->subLayers[i]] = depthTextures[i];
     }
 
     /// Depth attachment
 
-    if (pDepth->texture != SR_ID_INVALID) {
-        delete m_textures[pDepth->texture];
-        m_textures[pDepth->texture] = m_FBOs[FBO]->AllocateDepthTextureReference(-1);
+    if (info.pDepth->texture != SR_ID_INVALID) {
+        delete m_textures[info.pDepth->texture];
+        m_textures[info.pDepth->texture] = m_FBOs[info.FBO]->AllocateDepthTextureReference(-1);
     }
 
     return true;

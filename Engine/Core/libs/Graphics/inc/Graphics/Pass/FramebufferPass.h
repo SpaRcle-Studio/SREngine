@@ -31,6 +31,20 @@ namespace SR_GRAPH_NS {
         SR_NODISCARD std::vector<SR_GTYPES_NS::Framebuffer*> GetFrameBuffers() const override;
 
     };
+
+    class ClearBuffersPass : public BasePass {
+        SR_REGISTER_LOGICAL_NODE(ClearBuffersPass, Clear Depth Pass, { "Passes" })
+        using Super = BasePass;
+    public:
+        bool Load(const SR_XML_NS::Node& passNode) override;
+
+        bool Render() override;
+
+    private:
+        bool m_clearDepth = true;
+        bool m_clearColor = true;
+
+    };
 }
 
 #endif //SR_ENGINE_FRAMEBUFFERPASS_H

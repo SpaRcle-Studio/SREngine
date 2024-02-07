@@ -50,6 +50,7 @@ namespace SR_GRAPH_NS {
             m_framebuffer->SetSampleCount(m_samples);
             m_framebuffer->SetDepthEnabled(m_depthEnabled);
             m_framebuffer->SetDepthAspect(m_depthAspect);
+            m_framebuffer->SetFeatures(m_features);
             m_framebuffer->AddUsePoint();
         }
         else {
@@ -80,7 +81,7 @@ namespace SR_GRAPH_NS {
                         "RGBA8_UNORM"
                 )));
             }
-                /// depth layer
+            /// depth layer
             else if (subNode.NameView() == "Depth") {
                 m_depthFormat = SR_UTILS_NS::EnumReflector::FromString<ImageFormat>(subNode.TryGetAttribute("DepthFormat").ToString(
                         "Auto"
@@ -97,6 +98,16 @@ namespace SR_GRAPH_NS {
             else if (subNode.NameView() == "PreScale") {
                 m_preScale.x = subNode.TryGetAttribute("X").ToFloat(1.f);
                 m_preScale.y = subNode.TryGetAttribute("Y").ToFloat(1.f);
+            }
+            else if (subNode.NameView() == "Features") {
+                m_features.depthShaderRead = subNode.TryGetAttribute("DepthShaderRead").ToBool(m_features.depthShaderRead);
+                m_features.colorShaderRead = subNode.TryGetAttribute("ColorShaderRead").ToBool(m_features.colorShaderRead);
+                m_features.depthLoad = subNode.TryGetAttribute("DepthLoad").ToBool(m_features.depthLoad);
+                m_features.colorLoad = subNode.TryGetAttribute("ColorLoad").ToBool(m_features.colorLoad);
+                m_features.depthTransferSrc = subNode.TryGetAttribute("DepthTransferSrc").ToBool(m_features.depthTransferSrc);
+                m_features.colorTransferSrc = subNode.TryGetAttribute("ColorTransferSrc").ToBool(m_features.colorTransferSrc);
+                m_features.depthTransferDst = subNode.TryGetAttribute("DepthTransferDst").ToBool(m_features.depthTransferDst);
+                m_features.colorTransferDst = subNode.TryGetAttribute("ColorTransferDst").ToBool(m_features.colorTransferDst);
             }
         }
 

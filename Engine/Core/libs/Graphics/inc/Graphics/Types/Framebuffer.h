@@ -11,6 +11,7 @@
 
 #include <Graphics/Memory/IGraphicsResource.h>
 #include <Graphics/Pipeline/TextureHelper.h>
+#include <Graphics/Pipeline/FrameBufferFeatures.h>
 
 namespace SR_GRAPH_NS {
     class Pipeline;
@@ -64,6 +65,7 @@ namespace SR_GTYPES_NS {
         void SetSampleCount(uint8_t samples);
         void SetLayersCount(uint32_t layersCount);
         void SetDepthAspect(ImageAspect depthAspect);
+        void SetFeatures(const FrameBufferFeatures& features);
 
         SR_NODISCARD bool IsFileResource() const noexcept override { return false; }
         SR_NODISCARD uint8_t GetSamplesCount() const;
@@ -72,6 +74,8 @@ namespace SR_GTYPES_NS {
         SR_NODISCARD ImageAspect GetDepthAspect() const noexcept { return m_depth.aspect; }
         SR_NODISCARD bool IsDepthEnabled() const { return m_depthEnabled; }
         SR_NODISCARD bool IsDirty() const { return m_dirty; }
+        SR_NODISCARD bool IsValid() const { return m_frameBuffer != SR_ID_INVALID; }
+        SR_NODISCARD const FrameBufferFeatures& GetFeatures() const { return m_features; }
 
         SR_NODISCARD int32_t GetId();
         SR_NODISCARD int32_t GetColorTexture(uint32_t layer);
@@ -85,6 +89,8 @@ namespace SR_GTYPES_NS {
         uint64_t GetFileHash() const override;
 
     private:
+        FrameBufferFeatures m_features;
+
         std::atomic<bool> m_dirty = true;
         std::atomic<bool> m_hasErrors = false;
 

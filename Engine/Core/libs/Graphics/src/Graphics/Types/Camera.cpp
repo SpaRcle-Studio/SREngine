@@ -27,7 +27,7 @@ namespace SR_GTYPES_NS {
 
     Camera::~Camera() {
         if (m_renderTechnique.pTechnique) {
-            if (auto&& pResource = dynamic_cast<SR_UTILS_NS::IResource*>( m_renderTechnique.pTechnique)) {
+            if (auto&& pResource = dynamic_cast<SR_UTILS_NS::IResource*>(m_renderTechnique.pTechnique)) {
                 pResource->RemoveUsePoint();
             }
             else {

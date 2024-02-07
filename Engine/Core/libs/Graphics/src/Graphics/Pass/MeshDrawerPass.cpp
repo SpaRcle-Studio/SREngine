@@ -108,6 +108,14 @@ namespace SR_GRAPH_NS {
             if (auto&& fboNameNode = samplerNode.TryGetAttribute("FBO")) {
                 sampler.fboName = fboNameNode.ToString();
 
+                auto&& pFrameBufferController = GetTechnique()->GetFrameBufferController(sampler.fboName);
+                if (!pFrameBufferController) {
+                    if (!samplerNode.TryGetAttribute("Optional").ToBool(false)) {
+                        SR_ERROR("MeshDrawerPass::Load() : failed to find frame buffer controller!\n\tName: " + sampler.fboName.ToStringRef());
+                    }
+                    continue;
+                }
+
                 if (auto&& depthAttribute = samplerNode.TryGetAttribute("Depth")) {
                     sampler.depth = depthAttribute.ToBool();
                 }
