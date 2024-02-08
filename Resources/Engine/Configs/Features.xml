@@ -15,8 +15,6 @@
 
        <Tracy Value="false"/>
 
-       <DebugChunks Value="true"/>
-       <DebugRegions Value="true"/>
        <ChunkSystem Value="true"/>
 
        <EditorOnStartup Value="true"/>

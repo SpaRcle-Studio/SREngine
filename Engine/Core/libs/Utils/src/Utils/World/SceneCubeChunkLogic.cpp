@@ -567,7 +567,7 @@ namespace SR_WORLD_NS {
             fPos += offset.m_chunk * m_chunkSize.x;
 
             const uint64_t id = SR_UTILS_NS::DebugDraw::Instance().DrawPlane(
-                    SR_MATH_NS::FVector3(fPos.x, static_cast<SR_MATH_NS::Unit>(0.01), fPos.z),
+                    SR_MATH_NS::FVector3(fPos.x, static_cast<SR_MATH_NS::Unit>(0.1), fPos.z),
                     SR_MATH_NS::Quaternion::Identity(),
                     SR_MATH_NS::FVector3(size.x / 2.f, 1.f, size.y / 2.f),
                     SR_MATH_NS::FColor(255, 0, 0, 255),
