@@ -2,6 +2,7 @@
 <Technique Name="CascadedShadowMap">
     <Include Path="Engine/Passes/ColorBufferPass.xml"/>
     <Include Path="Engine/Passes/CascadedShadowMapPass.xml"/>
+    <Include Path="Engine/Passes/DefaultSceneViewPass.xml"/>
     <FramebufferPass Name="SceneViewFBO">
         <FramebufferSettings DynamicResizing="true" DepthEnabled="true" SmoothSamples="1">
             <Size X="0" Y="0"/>
@@ -10,8 +11,9 @@
             <Layer Format="RGBA8_UNORM" R="0.0" G="0.0" B="0.0" A="1.0"/>
         </FramebufferSettings>
         <Passes>
+            <ClearBuffersPass/>
             <MeshDrawerPass>
-                <Sampler FBO="ShadowMapFBO" Id="shadowMap" Depth="true" />
+                <Sampler FBO="ShadowMapFBO" Id="shadowMap" Depth="true" Optional="true" />
                 <AllowedLayers>
                     <Default/>
                     <Opaque/>
@@ -19,12 +21,18 @@
             </MeshDrawerPass>
             <SkyboxPass Path="Engine/Skyboxes/Gray.png" Shader="Engine/Shaders/skybox.srsl"/>
             <MeshDrawerPass>
-                <Sampler FBO="ShadowMapFBO" Id="shadowMap" Depth="true" />
+                <Sampler FBO="ShadowMapFBO" Id="shadowMap" Depth="true" Optional="true" />
                 <DisallowedLayers>
                     <Default/>
                     <Opaque/>
                     <GizmoSelection/>
                 </DisallowedLayers>
+            </MeshDrawerPass>
+            <ClearBuffersPass ClearDepth="false"/>
+            <MeshDrawerPass>
+                <AllowedLayers>
+                    <Gizmo/>
+                </AllowedLayers>
             </MeshDrawerPass>
         </Passes>
     </FramebufferPass>
