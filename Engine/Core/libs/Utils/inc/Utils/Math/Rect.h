@@ -55,6 +55,11 @@ namespace SR_MATH_NS {
         SR_NODISCARD constexpr SR_MATH_NS::Vector2<T> XY() const noexcept { return SR_MATH_NS::Vector2<T>(x, y); }
         SR_NODISCARD constexpr SR_MATH_NS::Vector2<T> WH() const noexcept { return SR_MATH_NS::Vector2<T>(w, h); }
 
+        template<typename U> SR_NODISCARD constexpr bool IsInside(const SR_MATH_NS::Vector2<U>& point) const noexcept {
+            return point.x >= static_cast<U>(x) && point.x <= static_cast<U>(x + w) &&
+                   point.y >= static_cast<U>(y) && point.y <= static_cast<U>(y + h);
+        }
+
     public:
         SR_NODISCARD static Rect<Unit> FromTranslationAndScale(const SR_MATH_NS::FVector2& translation, const SR_MATH_NS::FVector2& scale);
 
