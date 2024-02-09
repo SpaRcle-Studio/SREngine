@@ -3,7 +3,7 @@
 //
 
 #include <Utils/Types/UnicodeString.h>
-#include <Utils/Locale/Encoding.h>
+#include <Utils/Localization/Encoding.h>
 
 namespace SR_HTYPES_NS {
     UnicodeString::UnicodeString(const UnicodeString& other)

@@ -7,7 +7,7 @@
 
 #include <Utils/stdInclude.h>
 
-namespace SR_UTILS_NS::Locale::Utf {
+namespace SR_UTILS_NS::Localization::Utf {
     typedef uint32_t CodePoint;
 
     static const CodePoint Illegal = 0xFFFFFFFFu;

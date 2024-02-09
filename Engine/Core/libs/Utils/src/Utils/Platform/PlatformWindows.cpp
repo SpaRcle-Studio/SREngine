@@ -20,16 +20,6 @@
     #include <ShObjIdl.h>
 #endif
 
-/// убираем проклятые min и max после инклуда Windows.h
-
-#ifdef min
-    #undef min
-#endif
-
-#ifdef max
-    #undef max
-#endif
-
 namespace SR_UTILS_NS::Platform {
     void WriteConsoleLog(const std::string& msg) {
         std::cout << msg << std::flush;

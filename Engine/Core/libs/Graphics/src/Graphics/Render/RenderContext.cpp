@@ -17,8 +17,6 @@
 #include <Graphics/Types/RenderTexture.h>
 #include <Graphics/Types/Skybox.h>
 
-#include <Utils/Locale/Encoding.h>
-
 namespace SR_GRAPH_NS {
     RenderContext::RenderContext(const RenderContext::WindowPtr& pWindow)
         : Super(this)

@@ -20,7 +20,7 @@
 #include <unicode/utf.h>
 #include <unicode/utf16.h>
 
-namespace SR_UTILS_NS::Locale {
+namespace SR_UTILS_NS::Localization {
     enum class EncMethodType {
         Skip = 0,    ///< Skip illegal/unconvertable characters
         Stop = 1,    ///< Stop conversion and throw conversion_error
@@ -31,7 +31,7 @@ namespace SR_UTILS_NS::Locale {
 #define SR_UCNV_GET_MAX_BYTES_FOR_STRING(length, maxCharSize) \
      (((int32_t)(length)+10)*(int32_t)(maxCharSize))
 
-namespace SR_UTILS_NS::Locale::ICU {
+namespace SR_UTILS_NS::Localization::ICU {
     template<typename CharType, int char_size = sizeof(CharType)> class IcuStdConverter {
     public:
         typedef CharType char_type;

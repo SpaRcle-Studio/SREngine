@@ -6,7 +6,7 @@
 
 #include <Utils/ECS/Transform.h>
 #include <Utils/ECS/ComponentManager.h>
-#include <Utils/Locale/Encoding.h>
+#include <Utils/Localization/Encoding.h>
 
 #include <Graphics/Font/Font.h>
 #include <Graphics/Font/TextBuilder.h>
@@ -313,7 +313,7 @@ namespace SR_GTYPES_NS {
     }
 
     void ITextComponent::SetText(const std::string& text) {
-        auto&& newText = SR_UTILS_NS::Locale::UtfToUtf<char32_t, char>(text);
+        auto&& newText = SR_UTILS_NS::Localization::UtfToUtf<char32_t, char>(text);
         if (m_text == newText) {
             return;
         }
@@ -325,7 +325,7 @@ namespace SR_GTYPES_NS {
     }
 
     void ITextComponent::SetText(const std::u16string& text) {
-        auto&& newText = SR_UTILS_NS::Locale::UtfToUtf<char32_t, char16_t>(text);
+        auto&& newText = SR_UTILS_NS::Localization::UtfToUtf<char32_t, char16_t>(text);
         if (m_text == newText) {
             return;
         }

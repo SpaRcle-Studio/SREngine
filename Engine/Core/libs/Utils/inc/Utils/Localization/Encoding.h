@@ -5,10 +5,10 @@
 #ifndef SRENGINE_ENCODING_H
 #define SRENGINE_ENCODING_H
 
-#include <Utils/Locale/Convert.h>
-#include <Utils/Locale/UTF.h>
+#include <Utils/Localization/Convert.h>
+#include <Utils/Localization/UTF.h>
 
-namespace SR_UTILS_NS::Locale {
+namespace SR_UTILS_NS::Localization {
     SR_MAYBE_UNUSED static void SetLocale() {
         setlocale(LC_ALL, "rus");
         setlocale(LC_NUMERIC, "C");

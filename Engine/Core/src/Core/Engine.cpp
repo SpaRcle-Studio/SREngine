@@ -13,6 +13,7 @@
 #include <Utils/World/SceneUpdater.h>
 #include <Utils/Common/Features.h>
 #include <Utils/ECS/ComponentManager.h>
+#include <Utils/Localization/LocalizationManager.h>
 
 #include <Graphics/GUI/WidgetManager.h>
 #include <Graphics/Render/RenderScene.h>
@@ -79,6 +80,12 @@ namespace SR_CORE_NS {
 
         SpaRcle::API::RegisterEvoScriptClasses(this);
 
+        m_localizationManager = new SR_UTILS_NS::Localization::LocalizationManager();
+        ///TEST
+        SR_UTILS_NS::Path configPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
+        configPath = configPath.Concat(R"(Localization\Editor\loc_config.yml)");
+        m_localizationManager->LoadInfoAsConfigFile(configPath);
+        ///TEST
         m_cmdManager = new SR_UTILS_NS::CmdManager();
         m_input      = new SR_UTILS_NS::InputDispatcher();
         m_editor     = new SR_CORE_GUI_NS::EditorGUI(GetThis());

@@ -34,7 +34,7 @@ add_subdirectory(libs/glm)
 add_subdirectory(libs/assimp)
 add_subdirectory(libs/FQHSA)
 add_subdirectory(libs/fmt)
-
+add_subdirectory(libs/rapidyaml)
 if (SR_TRACY_ENABLE)
     add_subdirectory(libs/tracy)
 endif()
@@ -66,6 +66,7 @@ SR_UTILS_INCLUDE_DIRECTORIES_APPEND(${CMAKE_CURRENT_SOURCE_DIR}/libs/assimp/incl
 SR_UTILS_INCLUDE_DIRECTORIES_APPEND(${CMAKE_CURRENT_SOURCE_DIR}/libs/glm)
 SR_UTILS_INCLUDE_DIRECTORIES_APPEND(${CMAKE_CURRENT_SOURCE_DIR}/libs/FQHSA/header)
 SR_UTILS_INCLUDE_DIRECTORIES_APPEND(${CMAKE_CURRENT_SOURCE_DIR}/libs/fmt/include)
+SR_UTILS_INCLUDE_DIRECTORIES_APPEND(${CMAKE_CURRENT_SOURCE_DIR}/libs/rapidyaml/src)
 
 if (SR_ICU)
     SR_UTILS_INCLUDE_DIRECTORIES_APPEND(${CMAKE_CURRENT_BINARY_DIR}/include/icu)
@@ -89,7 +90,6 @@ if (SR_UTILS_STATIC_LIBRARY)
 
     endif()
 else()
-    add_library(Utils SHARED ${SR_UTILS_LINK_LIBRARIES})
     add_library(Utils::lib ALIAS Utils)
 endif()
 
@@ -121,6 +121,7 @@ if (MSVC)
 endif()
 
 target_link_libraries(Utils Fast-Quick-Hull fmt)
+target_link_libraries(Utils ryml::ryml)
 
 get_property(SR_UTILS_INCLUDE_DIRECTORIES_CONTENT GLOBAL PROPERTY SR_UTILS_INCLUDE_DIRECTORIES)
 message("SpaRcle utils include directories: ${SR_UTILS_INCLUDE_DIRECTORIES_CONTENT}")
