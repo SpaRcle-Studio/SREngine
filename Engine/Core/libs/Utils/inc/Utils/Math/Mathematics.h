@@ -21,6 +21,9 @@
 #define RAD(x) (x * (SR_PI / 180.0))
 #define DEG(x) (x * (180.0 / SR_PI))
 
+#define SR_DEG_2_RAD (SR_PI * 2.f / 360.f)
+#define SR_RAD_2_DEG (1.f / SR_DEG_2_RAD)
+
 //#define _FORCE_INLINE_ __attribute__((always_inline))
 //#define _ALWAYS_INLINE_ inline __attribute__((always_inline))
 
@@ -33,6 +36,7 @@
 #define SR_EPSILON 0.00001
 #define SR_BIG_EPSILON 0.001
 #define SR_LARGE_EPSILON 0.00005
+#define SR_EPSILON_NORMAL_SQRT 1e-15
 
 #define CMP_EPSILON2 (CMP_EPSILON * CMP_EPSILON)
 #define UNIT_EPSILON 0.00001
@@ -132,7 +136,11 @@ namespace SR_MATH_NS {
 
     const Unit UnitMAX = DoubleMAX;
 
-    SR_FORCE_INLINE double_t Lerp(double_t t, double_t a, double_t b) {
+    static SR_FORCE_INLINE Unit Sign(Unit value) {
+        return value >= static_cast<Unit>(0) ? static_cast<Unit>(1) : static_cast<Unit>(-1);
+    }
+
+    static SR_FORCE_INLINE double_t Lerp(double_t t, double_t a, double_t b) {
         return a + (b + -a) * t;
     }
 

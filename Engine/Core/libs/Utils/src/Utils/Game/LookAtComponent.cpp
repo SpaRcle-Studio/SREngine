@@ -77,7 +77,7 @@ namespace SR_UTILS_NS {
 
             const SR_MATH_NS::FVector3 up = GetUp();
 
-            SR_MATH_NS::Quaternion q = SR_MATH_NS::Quaternion::LookAt(m_direction.Normalize(), up);
+            SR_MATH_NS::Quaternion q = SR_MATH_NS::Quaternion::LookAt(m_direction, up);
 
             if (!SR_EQUALS(m_delay, 0.f)) {
                 auto&& sourceQ = pTransform->GetQuaternion();

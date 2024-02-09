@@ -14,8 +14,6 @@
 
 namespace SR_GRAPH_UI_NS {
     void Gizmo::OnAttached() {
-        GetGameObject()->SetLayer("Gizmo");
-        GetGameObject()->GetOrAddChild("Selection")->SetLayer("GizmoSelection");
         Super::OnAttached();
     }
 
@@ -68,7 +66,14 @@ namespace SR_GRAPH_UI_NS {
         }
 
         if (mode == GizmoMeshLoadMode::Visual) {
-            GetGameObject()->AddComponent(pMeshComponent);
+            if (operation & GizmoOperation::Rotate) {
+                auto&& gameObject = GetGameObjectByOperation(operation);
+                gameObject->AddComponent(pMeshComponent);
+                gameObject->SetLayer("Gizmo");
+            }
+            else {
+                GetGameObject()->AddComponent(pMeshComponent);
+            }
             m_meshes[operation].pVisual = pMeshComponent;
         }
         else if (mode == GizmoMeshLoadMode::Selection) {
@@ -88,9 +93,12 @@ namespace SR_GRAPH_UI_NS {
     void Gizmo::LoadGizmo() {
         SRAssert(m_meshes.empty());
 
+        GetGameObject()->SetLayer("Gizmo");
+        GetGameObject()->GetOrAddChild("Selection")->SetLayer("GizmoSelection");
+
         static const SR_UTILS_NS::StringAtom gizmoFile = "Engine/Models/gizmo-translation.fbx";
 
-        LoadMesh(GizmoOperation::TranslateCenter, gizmoFile, "Center", GizmoMeshLoadMode::Visual);
+        /*LoadMesh(GizmoOperation::TranslateCenter, gizmoFile, "Center", GizmoMeshLoadMode::Visual);
         LoadMesh(GizmoOperation::TranslateCenter, gizmoFile, "CenterSelection", GizmoMeshLoadMode::Selection);
 
         LoadMesh(GizmoOperation::TranslateAltX, gizmoFile, "PlaneX", GizmoMeshLoadMode::All);
@@ -103,7 +111,13 @@ namespace SR_GRAPH_UI_NS {
 
         LoadMesh(GizmoOperation::TranslateX, gizmoFile, "ArrowXSelection", GizmoMeshLoadMode::Selection);
         LoadMesh(GizmoOperation::TranslateY, gizmoFile, "ArrowYSelection", GizmoMeshLoadMode::Selection);
-        LoadMesh(GizmoOperation::TranslateZ, gizmoFile, "ArrowZSelection", GizmoMeshLoadMode::Selection);
+        LoadMesh(GizmoOperation::TranslateZ, gizmoFile, "ArrowZSelection", GizmoMeshLoadMode::Selection);*/
+
+        LoadMesh(GizmoOperation::RotateX, gizmoFile, "RotateX", GizmoMeshLoadMode::Visual);
+        LoadMesh(GizmoOperation::RotateY, gizmoFile, "RotateY", GizmoMeshLoadMode::Visual);
+        LoadMesh(GizmoOperation::RotateZ, gizmoFile, "RotateZ", GizmoMeshLoadMode::Visual);
+
+        LoadMesh(GizmoOperation::RotateCenter, gizmoFile, "RotateCenter", GizmoMeshLoadMode::All);
     }
 
     void Gizmo::ReleaseGizmo() {
@@ -115,7 +129,14 @@ namespace SR_GRAPH_UI_NS {
                 info.pVisual->Detach();
             }
         }
+
         m_meshes.clear();
+
+        if (auto&& pGameObject = GetGameObject()) {
+            for (auto&& pChild : pGameObject->GetChildren()) {
+                pChild->Destroy();
+            }
+        }
     }
 
     void Gizmo::OnDisable() {
@@ -153,7 +174,11 @@ namespace SR_GRAPH_UI_NS {
         if (m_activeOperation == GizmoOperation::None) {
             auto&& pMesh = pTechnique->PickMeshAt(mousePos);
             for (auto&& [flag, info] : m_meshes) {
-                if (pMesh == info.pSelection.Get()) {
+                if (!info.pVisual) {
+                    continue;
+                }
+
+                if (pMesh == info.pSelection.Get() && info.pSelection.Get()) {
                     info.pVisual->OverrideUniform("color")
                         .SetData(SR_MATH_NS::FColor(1.f, 1.f, 0.f, 1.f))
                         .SetShaderVarType(ShaderVarType::Vec4);
@@ -272,5 +297,66 @@ namespace SR_GRAPH_UI_NS {
             const float_t screenFactor = GetCamera()->CalculateScreenFactor(modelMatrix, m_zoomFactor);
             GetTransform()->SetScale(screenFactor);
         }
+
+        for (auto&& [flag, info] : m_meshes) {
+            if (!info.pVisual) {
+                continue;
+            }
+
+            if (!(flag & GizmoOperation::Rotate)) {
+                continue;
+            }
+
+            //auto&& target = GetTransform()->GetTranslation();
+
+            //auto&& quaternionX = GetCamera()->GetPosition().AngleAxis(target, SR_MATH_NS::FVector3::UnitZ());
+            //auto&& quaternionZ = GetCamera()->GetPosition().AngleAxis(target, SR_MATH_NS::FVector3::UnitX());
+
+            //auto&& angleX = quaternionX.EulerAngle().x;
+            //auto&& angleZ = quaternionZ.EulerAngle().z;
+
+            //auto&& lookAtQuaternion = GetTransform()->GetTranslation().LookAt(GetCamera()->GetPosition());
+            //auto&& lookAtQuaternion = SR_MATH_NS::Quaternion::LookAt(GetTransform()->GetTranslation() - GetCamera()->GetPosition());
+            //auto&& eulerAngle = lookAtQuaternion.EulerAngle();
+
+            auto&& direction = GetCamera()->GetPosition() - GetTransform()->GetTranslation();
+
+            if (flag & GizmoOperation::X) {
+                direction = direction.ProjectOnPlane(direction, SR_MATH_NS::FVector3::Right());
+                auto&& signedAngle = SR_MATH_NS::FVector3::Forward().SignedAngle(direction, SR_MATH_NS::FVector3::Right());
+                info.pVisual->GetTransform()->SetGlobalRotation(SR_MATH_NS::FVector3(signedAngle, 0, 0));
+            }
+
+            if (flag & GizmoOperation::Y) {
+                direction = direction.ProjectOnPlane(direction, SR_MATH_NS::FVector3::Up());
+                auto&& signedAngle = SR_MATH_NS::FVector3::Forward().SignedAngle(direction, SR_MATH_NS::FVector3::Up());
+                info.pVisual->GetTransform()->SetGlobalRotation(SR_MATH_NS::FVector3(0, signedAngle, 0));
+            }
+
+            if (flag & GizmoOperation::Z) {
+                direction = direction.ProjectOnPlane(direction, SR_MATH_NS::FVector3::Forward());
+                auto&& signedAngle = SR_MATH_NS::FVector3::Right().SignedAngle(direction, SR_MATH_NS::FVector3::Forward());
+                info.pVisual->GetTransform()->SetGlobalRotation(SR_MATH_NS::FVector3(0, 0, signedAngle));
+            }
+        }
+    }
+
+    Utils::Component::GameObjectPtr Gizmo::GetGameObjectByOperation(GizmoOperationFlag operation) const {
+        if (operation & GizmoOperation::Center) {
+            return GetGameObject()->GetOrAddChild("RotateCenter");
+        }
+        else if (operation & GizmoOperation::X) {
+            return GetGameObject()->GetOrAddChild("RotateX");
+        }
+        else if (operation & GizmoOperation::Y) {
+            return GetGameObject()->GetOrAddChild("RotateY");
+        }
+        else if (operation & GizmoOperation::Z) {
+            return GetGameObject()->GetOrAddChild("RotateZ");
+        }
+
+        SR_ERROR("Gizmo::GetGameObjectByOperation() : unknown operation!");
+
+        return nullptr;
     }
 }

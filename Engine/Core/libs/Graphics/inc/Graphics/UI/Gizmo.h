@@ -36,6 +36,7 @@ namespace SR_GRAPH_UI_NS {
         RotateX = X | Rotate,
         RotateY = Y | Rotate,
         RotateZ = Z | Rotate,
+        RotateCenter = Rotate | Center,
 
         ScaleX = X | Rotate,
         ScaleY = Y | Rotate,
@@ -81,6 +82,8 @@ namespace SR_GRAPH_UI_NS {
 
         SR_NODISCARD virtual bool IsHandledAnotherObject() const { return false; }
         SR_NODISCARD virtual SR_MATH_NS::Matrix4x4 GetGizmoMatrix() const;
+
+        SR_NODISCARD GameObjectPtr GetGameObjectByOperation(GizmoOperationFlag operation) const;
 
         SR_NODISCARD SR_MATH_NS::AxisFlag GetAxis() const;
 

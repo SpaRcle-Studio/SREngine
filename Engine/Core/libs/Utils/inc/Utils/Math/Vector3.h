@@ -72,6 +72,14 @@ namespace SR_MATH_NS {
         static constexpr Vector3<T> Zero() { return Vector3(static_cast<T>(0)); }
         static constexpr Vector3<T> One() { return Vector3(static_cast<T>(1)); }
 
+        static constexpr Vector3<T> UnitX() { return Vector3(static_cast<T>(1), static_cast<T>(0), static_cast<T>(0)); }
+        static constexpr Vector3<T> UnitY() { return Vector3(static_cast<T>(0), static_cast<T>(1), static_cast<T>(0)); }
+        static constexpr Vector3<T> UnitZ() { return Vector3(static_cast<T>(0), static_cast<T>(0), static_cast<T>(1)); }
+
+        static constexpr Vector3<T> Right() { return Vector3(static_cast<T>(1), static_cast<T>(0), static_cast<T>(0)); }
+        static constexpr Vector3<T> Up() { return Vector3(static_cast<T>(0), static_cast<T>(1), static_cast<T>(0)); }
+        static constexpr Vector3<T> Forward() { return Vector3(static_cast<T>(0), static_cast<T>(0), static_cast<T>(1)); }
+
         template<typename U> static Vector3<T> XY(const Vector2<U>& v) { return XY(v, 0); }
         template<typename U> static Vector3<T> XZ(const Vector2<U>& v) { return XZ(v, 0); }
         template<typename U> static Vector3<T> YZ(const Vector2<U>& v) { return YZ(v, 0); }
@@ -135,7 +143,7 @@ namespace SR_MATH_NS {
             return { static_cast<T>(SR_DEG(x)), static_cast<T>(SR_DEG(y)), static_cast<T>(SR_DEG(z)) };
         }
 
-        SR_NODISCARD T AngleCoefficient(const Vector3& vector3) const {
+        SR_NODISCARD T AngleCoefficientRadians(const Vector3& vector3) const {
             const T dot = Dot(vector3);
             const T length1 = Length();
             const T length2 = vector3.Length();
@@ -146,11 +154,85 @@ namespace SR_MATH_NS {
 
             /// Вычисление угла между векторами в радианах
             const T angle = std::acos(dot / (length1 * length2));
+            return angle;
+        }
 
+        SR_NODISCARD T AngleCoefficientEuler(const Vector3& vector3) const {
+            return SR_DEG(AngleCoefficientRadians(vector3));
+        }
+
+        SR_NODISCARD T AngleCoefficient(const Vector3& vector3) const {
             /// Преобразование угла в коэффициент от -1 до 1
-            const T coefficient = std::cos(angle);
-
+            const T coefficient = std::cos(AngleCoefficientRadians(vector3));
             return coefficient;
+        }
+
+        SR_NODISCARD Quaternion LookAt(const Vector3& target) const {
+            const auto&& direction = (target - *this).Normalized();
+            const auto&& cosAngle = UnitZ().Dot(direction);
+
+            if (cosAngle >= 1.0 - static_cast<T>(SR_EPSILON)) {
+                return Quaternion::Identity();
+            }
+
+            else if (cosAngle <= -1.0 + static_cast<T>(SR_EPSILON)) {
+                return Quaternion(UnitY(), SR_PI);
+            }
+
+            const auto&& axis = UnitZ().Cross(direction);
+            const auto&& angle = std::acos(cosAngle);
+
+            return Quaternion(axis, angle);
+        }
+
+        SR_NODISCARD T SqrMagnitude() const { return x * x + y * y + z * z; }
+
+        SR_NODISCARD T Angle(const Vector3& to) const {
+            /// sqrt(a) * sqrt(b) = sqrt(a * b) -- valid for real numbers
+
+            const T denominator = static_cast<T>(sqrt(SqrMagnitude() * to.SqrMagnitude()));
+            if (denominator < static_cast<T>(SR_EPSILON_NORMAL_SQRT)) {
+                return static_cast<T>(0);
+            }
+
+            const T dot = SR_CLAMP(Dot(to) / denominator, static_cast<T>(1), static_cast<T>(-1));
+            return static_cast<T>(std::acos(dot) * SR_RAD_2_DEG);
+        }
+
+        SR_NODISCARD Vector3 ProjectOnPlane(const Vector3& vector, const Vector3& planeNormal) const {
+            const T sqrMag = planeNormal.Dot(planeNormal);
+
+            if (sqrMag < SR_EPSILON) {
+                return vector;
+            }
+
+            auto&& dot = vector.Dot(planeNormal);
+
+            return Vector3(
+                vector.x - planeNormal.x * dot / sqrMag,
+                vector.y - planeNormal.y * dot / sqrMag,
+                vector.z - planeNormal.z * dot / sqrMag
+           );
+        }
+
+        SR_NODISCARD T SignedAngle(const Vector3& to, const Vector3& axis) const {
+            const T unsignedAngle = Angle(to);
+
+            const T cross_x = y * to.z - z * to.y;
+            const T cross_y = z * to.x - x * to.z;
+            const T cross_z = x * to.y - y * to.x;
+            const T sign = SR_MATH_NS::Sign(axis.x * cross_x + axis.y * cross_y + axis.z * cross_z);
+
+            return unsignedAngle * sign;
+        }
+
+        SR_NODISCARD Quaternion AngleAxis(const Vector3& target, const Vector3& axis = Vector3::UnitZ()) const {
+            auto&& direction = (target - *this).Normalized();
+
+            auto&& crossAxis = axis.Cross(direction);
+            const Unit angle = acos(axis.Dot(direction));
+
+            return Quaternion(crossAxis, angle);
         }
 
         SR_NODISCARD Vector3 Angle(const Vector3& vector3) {

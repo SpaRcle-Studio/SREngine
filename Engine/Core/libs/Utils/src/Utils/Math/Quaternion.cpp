@@ -16,9 +16,11 @@ namespace SR_MATH_NS {
         const Unit halfAngle = angle * static_cast<Unit>(.5f);
         const Unit s = (Unit)SR_SIN(halfAngle);
 
-        x = axis.x * s;
-        y = axis.y * s;
-        z = axis.z * s;
+        auto&& normalized = axis.Normalized();
+
+        x = normalized.x * s;
+        y = normalized.y * s;
+        z = normalized.z * s;
         w = (Unit)SR_COS(halfAngle);
     }
 
@@ -116,7 +118,7 @@ namespace SR_MATH_NS {
     }
 
     Quaternion Quaternion::LookAt(const Vector3<Unit>& direction, const Vector3<Unit>& up) {
-        Quaternion q = glm::quatLookAt(direction.ToGLM(), up.ToGLM());
+        Quaternion q = glm::quatLookAt(direction.Normalize().ToGLM(), up.ToGLM());
 
         /// чиним возможные аффинные преобразования
         q = q.EulerAngle().Radians().ToQuat();
