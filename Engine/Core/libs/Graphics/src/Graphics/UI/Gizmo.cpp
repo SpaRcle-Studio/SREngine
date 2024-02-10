@@ -67,7 +67,7 @@ namespace SR_GRAPH_UI_NS {
 
         if (mode == GizmoMeshLoadMode::Visual) {
             if (operation & GizmoOperation::Rotate) {
-                auto&& gameObject = GetGameObjectByOperation(operation);
+                auto&& gameObject = GetGameObjectByOperation(mode, operation);
                 gameObject->AddComponent(pMeshComponent);
                 gameObject->SetLayer("Gizmo");
             }
@@ -77,7 +77,14 @@ namespace SR_GRAPH_UI_NS {
             m_meshes[operation].pVisual = pMeshComponent;
         }
         else if (mode == GizmoMeshLoadMode::Selection) {
-            GetGameObject()->GetOrAddChild("Selection")->AddComponent(pMeshComponent);
+            if (operation & GizmoOperation::Rotate) {
+                auto&& gameObject = GetGameObjectByOperation(mode, operation);
+                gameObject->AddComponent(pMeshComponent);
+                gameObject->SetLayer("GizmoSelection");
+            }
+            else {
+                GetGameObject()->GetOrAddChild("Selection")->AddComponent(pMeshComponent);
+            }
             m_meshes[operation].pSelection = pMeshComponent;
         }
         else {
@@ -113,9 +120,9 @@ namespace SR_GRAPH_UI_NS {
         LoadMesh(GizmoOperation::TranslateY, gizmoFile, "ArrowYSelection", GizmoMeshLoadMode::Selection);
         LoadMesh(GizmoOperation::TranslateZ, gizmoFile, "ArrowZSelection", GizmoMeshLoadMode::Selection);*/
 
-        LoadMesh(GizmoOperation::RotateX, gizmoFile, "RotateX", GizmoMeshLoadMode::Visual);
-        LoadMesh(GizmoOperation::RotateY, gizmoFile, "RotateY", GizmoMeshLoadMode::Visual);
-        LoadMesh(GizmoOperation::RotateZ, gizmoFile, "RotateZ", GizmoMeshLoadMode::Visual);
+        LoadMesh(GizmoOperation::RotateX, gizmoFile, "RotateX", GizmoMeshLoadMode::All);
+        LoadMesh(GizmoOperation::RotateY, gizmoFile, "RotateY", GizmoMeshLoadMode::All);
+        LoadMesh(GizmoOperation::RotateZ, gizmoFile, "RotateZ", GizmoMeshLoadMode::All);
 
         LoadMesh(GizmoOperation::RotateCenter, gizmoFile, "RotateCenter", GizmoMeshLoadMode::All);
     }
@@ -299,7 +306,7 @@ namespace SR_GRAPH_UI_NS {
         }
 
         for (auto&& [flag, info] : m_meshes) {
-            if (!info.pVisual) {
+            if (!info.pVisual || !info.pSelection) {
                 continue;
             }
 
@@ -307,52 +314,52 @@ namespace SR_GRAPH_UI_NS {
                 continue;
             }
 
-            //auto&& target = GetTransform()->GetTranslation();
-
-            //auto&& quaternionX = GetCamera()->GetPosition().AngleAxis(target, SR_MATH_NS::FVector3::UnitZ());
-            //auto&& quaternionZ = GetCamera()->GetPosition().AngleAxis(target, SR_MATH_NS::FVector3::UnitX());
-
-            //auto&& angleX = quaternionX.EulerAngle().x;
-            //auto&& angleZ = quaternionZ.EulerAngle().z;
-
-            //auto&& lookAtQuaternion = GetTransform()->GetTranslation().LookAt(GetCamera()->GetPosition());
-            //auto&& lookAtQuaternion = SR_MATH_NS::Quaternion::LookAt(GetTransform()->GetTranslation() - GetCamera()->GetPosition());
-            //auto&& eulerAngle = lookAtQuaternion.EulerAngle();
-
             auto&& direction = GetCamera()->GetPosition() - GetTransform()->GetTranslation();
 
+            auto&& directionRight = direction.ProjectOnPlane(SR_MATH_NS::FVector3::Right());
+            auto&& directionUp = direction.ProjectOnPlane(SR_MATH_NS::FVector3::Up());
+            auto&& directionForward = direction.ProjectOnPlane(SR_MATH_NS::FVector3::Forward());
+
             if (flag & GizmoOperation::X) {
-                direction = direction.ProjectOnPlane(direction, SR_MATH_NS::FVector3::Right());
-                auto&& signedAngle = SR_MATH_NS::FVector3::Forward().SignedAngle(direction, SR_MATH_NS::FVector3::Right());
-                info.pVisual->GetTransform()->SetGlobalRotation(SR_MATH_NS::FVector3(signedAngle, 0, 0));
+                auto&& signedAngleRight = SR_MATH_NS::FVector3::Forward().SignedAngle(directionRight, SR_MATH_NS::FVector3::Right());
+                info.pVisual->GetTransform()->SetGlobalRotation(SR_MATH_NS::FVector3(signedAngleRight, 0, 0));
+                info.pSelection->GetTransform()->SetGlobalRotation(SR_MATH_NS::FVector3(signedAngleRight, 0, 0));
             }
 
             if (flag & GizmoOperation::Y) {
-                direction = direction.ProjectOnPlane(direction, SR_MATH_NS::FVector3::Up());
-                auto&& signedAngle = SR_MATH_NS::FVector3::Forward().SignedAngle(direction, SR_MATH_NS::FVector3::Up());
-                info.pVisual->GetTransform()->SetGlobalRotation(SR_MATH_NS::FVector3(0, signedAngle, 0));
+                auto&& signedAngleUp = SR_MATH_NS::FVector3::Forward().SignedAngle(directionUp, SR_MATH_NS::FVector3::Up());
+                info.pVisual->GetTransform()->SetGlobalRotation(SR_MATH_NS::FVector3(0, signedAngleUp, 0));
+                info.pSelection->GetTransform()->SetGlobalRotation(SR_MATH_NS::FVector3(0, signedAngleUp, 0));
             }
 
             if (flag & GizmoOperation::Z) {
-                direction = direction.ProjectOnPlane(direction, SR_MATH_NS::FVector3::Forward());
-                auto&& signedAngle = SR_MATH_NS::FVector3::Right().SignedAngle(direction, SR_MATH_NS::FVector3::Forward());
-                info.pVisual->GetTransform()->SetGlobalRotation(SR_MATH_NS::FVector3(0, 0, signedAngle));
+                auto&& signedAngleForward = SR_MATH_NS::FVector3::Right().SignedAngle(directionForward, SR_MATH_NS::FVector3::Forward());
+                info.pVisual->GetTransform()->SetGlobalRotation(SR_MATH_NS::FVector3(0, 0, signedAngleForward));
+                info.pSelection->GetTransform()->SetGlobalRotation(SR_MATH_NS::FVector3(0, 0, signedAngleForward));
+            }
+
+            if (flag & GizmoOperation::Center) {
+                auto&& rotation = SR_MATH_NS::Quaternion::LookAt(-direction, SR_MATH_NS::FVector3::One());
+                info.pVisual->GetTransform()->SetGlobalRotation(rotation.EulerAngle());
+                info.pSelection->GetTransform()->SetGlobalRotation(rotation.EulerAngle());
             }
         }
     }
 
-    Utils::Component::GameObjectPtr Gizmo::GetGameObjectByOperation(GizmoOperationFlag operation) const {
+    Utils::Component::GameObjectPtr Gizmo::GetGameObjectByOperation(GizmoMeshLoadMode mode, GizmoOperationFlag operation) const {
+        auto&& root = mode == GizmoMeshLoadMode::Visual ? GetGameObject() : GetGameObject()->GetOrAddChild("Selection");
+
         if (operation & GizmoOperation::Center) {
-            return GetGameObject()->GetOrAddChild("RotateCenter");
+            return root->GetOrAddChild("RotateCenter");
         }
         else if (operation & GizmoOperation::X) {
-            return GetGameObject()->GetOrAddChild("RotateX");
+            return root->GetOrAddChild("RotateX");
         }
         else if (operation & GizmoOperation::Y) {
-            return GetGameObject()->GetOrAddChild("RotateY");
+            return root->GetOrAddChild("RotateY");
         }
         else if (operation & GizmoOperation::Z) {
-            return GetGameObject()->GetOrAddChild("RotateZ");
+            return root->GetOrAddChild("RotateZ");
         }
 
         SR_ERROR("Gizmo::GetGameObjectByOperation() : unknown operation!");

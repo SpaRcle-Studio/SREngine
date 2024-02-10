@@ -199,19 +199,19 @@ namespace SR_MATH_NS {
             return static_cast<T>(std::acos(dot) * SR_RAD_2_DEG);
         }
 
-        SR_NODISCARD Vector3 ProjectOnPlane(const Vector3& vector, const Vector3& planeNormal) const {
+        SR_NODISCARD Vector3 ProjectOnPlane(const Vector3& planeNormal) const {
             const T sqrMag = planeNormal.Dot(planeNormal);
 
             if (sqrMag < SR_EPSILON) {
-                return vector;
+                return *this;
             }
 
-            auto&& dot = vector.Dot(planeNormal);
+            auto&& dot = Dot(planeNormal);
 
             return Vector3(
-                vector.x - planeNormal.x * dot / sqrMag,
-                vector.y - planeNormal.y * dot / sqrMag,
-                vector.z - planeNormal.z * dot / sqrMag
+                x - planeNormal.x * dot / sqrMag,
+                y - planeNormal.y * dot / sqrMag,
+                z - planeNormal.z * dot / sqrMag
            );
         }
 
