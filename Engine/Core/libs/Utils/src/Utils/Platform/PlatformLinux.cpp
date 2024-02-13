@@ -308,31 +308,15 @@ namespace SR_UTILS_NS::Platform {
             XRRScreenResources *screen;
             XRRCrtcInfo *crtc_info;
 
-            pDisplay = XOpenDisplay(":0");
             screen = XRRGetScreenResources (pDisplay, DefaultRootWindow(pDisplay));
-            crtc_info = XRRGetCrtcInfo (pDisplay, screen, screen->crtcs[0]);
 
             for (int32_t i = 0; i < ScreenCount(pDisplay); ++i) {
-                auto&& screen = XRRGetScreenResources(pDisplay, DefaultRootWindow(pDisplay));
-                auto&& crtc_info = XRRGetCrtcInfo (pDisplay, screen, screen->crtcs[0]);
+                crtc_info = XRRGetCrtcInfo (pDisplay, screen, screen->crtcs[i]);
                 resolutions.emplace_back(crtc_info->width, crtc_info->height);
             }
 
             XCloseDisplay(pDisplay);
         }
-
-        /*Display* pDisplay = XOpenDisplay(nullptr);
-        xcb_connection_t* pConnection = XGetXCBConnection(pDisplay);
-        if (!pConnection) {
-            SR_ERROR("GetScreenResolutions() : failed to create X11 connection!");
-            return resolutions;
-        }
-
-        //auto&& screenInfoCookie = xcb_randr_get_screen_info_reply(pConnection, );
-        auto&& screenInfoReply = xcb_randr_get_screen_info()
-        //xcb_randr_get_screen_info_reply(pConnection, screenInfoReply, nullptr);
-        xcb_randr_get_screen_info_reply(pConnection, screenInfoReply, nullptr);*/
-
         return resolutions;
     }
 

@@ -323,7 +323,7 @@ static void InitFailure( const char* msg )
 #else
     fprintf( stderr, "Tracy Profiler initialization failure: %s\n", msg );
 #endif
-    exit( 1 );
+    //exit( 1 );
 }
 
 static bool CheckHardwareSupportsInvariantTSC()
