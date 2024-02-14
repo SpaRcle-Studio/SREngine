@@ -36,7 +36,14 @@ namespace SR_CORE_GUI_NS {
         }
 
         for (auto&& pGameObject : m_hierarchy->GetSelected()) {
-            pGameObject->GetTransform()->Translate(pGameObject->GetTransform()->GetMatrix().GetQuat().Inverse() * delta);
+            auto&& scale = SR_MATH_NS::FVector3::One();
+
+            auto&& pParentTransform = pGameObject->GetTransform()->GetParentTransform();
+            if (pParentTransform) {
+                scale = pParentTransform->GetMatrix().GetScale();
+            }
+
+            pGameObject->GetTransform()->Translate(pGameObject->GetTransform()->GetMatrix().GetQuat().Inverse() * (delta / scale));
         }
     }
 
@@ -46,5 +53,9 @@ namespace SR_CORE_GUI_NS {
         }
 
         return Super::GetMode();
+    }
+
+    bool EditorGizmo::IsGizmoAvailable() const {
+        return m_hierarchy && !m_hierarchy->GetSelected().empty();
     }
 }

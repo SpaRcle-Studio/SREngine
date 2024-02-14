@@ -145,6 +145,10 @@ namespace SR_CORE_GUI_NS {
             return;
         }
 
+        if (m_camera && !m_gizmo) {
+            SetGizmoEnabled(true); /// если пропал, вернем
+        }
+
         constexpr float_t seekSpeed = 0.1f / 10.f;
         constexpr float_t wheelSpeed = 4.0f / 10.f;
         constexpr float_t rotateSpeed = 1.5f / 10.f;

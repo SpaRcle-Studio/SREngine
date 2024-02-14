@@ -125,15 +125,7 @@ namespace SR_CORE_NS {
             {
                 while (m_accumulator >= m_updateFrequency)
                 {
-                    if (!isPaused && pPhysicsScene.RecursiveLockIfValid()) {
-                        pPhysicsScene->FixedUpdate();
-                        pPhysicsScene.Unlock();
-                    }
-
-                    pEngine->FixedUpdate();
-
-                    pSceneUpdater->FixedUpdate();
-
+                    FixedStep(isPaused);
                     m_accumulator -= m_updateFrequency;
                 }
             }
@@ -224,5 +216,19 @@ namespace SR_CORE_NS {
     void EngineScene::UpdateFrequency() {
         const uint32_t framesPerSecond = 60;
         m_updateFrequency = (1.f / (static_cast<float_t>(framesPerSecond) * m_speed));
+    }
+
+    void EngineScene::FixedStep(bool isPaused) {
+        SR_TRACY_ZONE;
+        SR_TRACY_ZONE_TEXT(SR_UTILS_NS::ToString(m_accumulator));
+
+        if (!isPaused && pPhysicsScene.RecursiveLockIfValid()) {
+            pPhysicsScene->FixedUpdate();
+            pPhysicsScene.Unlock();
+        }
+
+        pEngine->FixedUpdate();
+
+        pSceneUpdater->FixedUpdate();
     }
 }

@@ -34,7 +34,7 @@ namespace SR_UTILS_NS {
         std::cout << std::flush;
 
         if (m_file.is_open()) {
-            m_file << (memoryUsage + prefix + " " + msg);
+            m_file << (memoryUsage + prefix + " " + msg) << std::flush;
         }
 
         volatile static bool enableBreakPoints = true;

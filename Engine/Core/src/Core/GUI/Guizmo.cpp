@@ -73,12 +73,22 @@ namespace SR_CORE_GUI_NS {
             SR_GRAPH_GUI_NS::CheckBox(m_isEnabled);
 
             ImGui::SameLine();
-            if (SR_GRAPH_NS::GUI::Button("T", IsTranslate() && m_active ? activeColor : notActiveColor))
+            if (SR_GRAPH_NS::GUI::Button("T", IsTranslate() && m_active ? activeColor : notActiveColor)) {
                 SetOperation(ImGuizmo::OPERATION::TRANSLATE);
 
+                if (auto&& pGizmo = m_engine->GetEditor()->GetWidget<SceneViewer>()->GetGizmo()->GetComponent<EditorGizmo>()) {
+                    pGizmo->SetOperation(SR_GRAPH_UI_NS::GizmoOperation::TranslateAll);
+                }
+            }
+
             ImGui::SameLine();
-            if (SR_GRAPH_NS::GUI::Button("R", IsRotate() && m_active ? activeColor : notActiveColor))
+            if (SR_GRAPH_NS::GUI::Button("R", IsRotate() && m_active ? activeColor : notActiveColor)) {
                 SetOperation(ImGuizmo::OPERATION::ROTATE);
+
+                if (auto&& pGizmo = m_engine->GetEditor()->GetWidget<SceneViewer>()->GetGizmo()->GetComponent<EditorGizmo>()) {
+                    pGizmo->SetOperation(SR_GRAPH_UI_NS::GizmoOperation::RotateAll);
+                }
+            }
 
             ImGui::SameLine();
             if (SR_GRAPH_NS::GUI::Button(IsBounds() && m_active ? "S+" : "S", ((IsScale() || IsBounds()) && m_active) ? activeColor : notActiveColor)) {
@@ -86,6 +96,10 @@ namespace SR_CORE_GUI_NS {
                     SetOperation(ImGuizmo::OPERATION::BOUNDS);
                 else
                     SetOperation(ImGuizmo::OPERATION::SCALE);
+
+                if (auto&& pGizmo = m_engine->GetEditor()->GetWidget<SceneViewer>()->GetGizmo()->GetComponent<EditorGizmo>()) {
+                    pGizmo->SetOperation(SR_GRAPH_UI_NS::GizmoOperation::ScaleAll);
+                }
             }
 
             ImGui::SameLine();

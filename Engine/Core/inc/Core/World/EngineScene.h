@@ -44,6 +44,7 @@ namespace SR_CORE_NS {
     private:
         void DrawChunkDebug();
         void UpdateFrequency();
+        void FixedStep(bool isPaused);
 
     public:
         ScenePtr pScene;

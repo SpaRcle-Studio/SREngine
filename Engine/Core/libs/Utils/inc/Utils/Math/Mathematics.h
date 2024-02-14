@@ -144,6 +144,10 @@ namespace SR_MATH_NS {
         return a + (b + -a) * t;
     }
 
+    template<typename Mask> static SR_FORCE_INLINE bool IsMaskIncludedSubMask(Mask mask, Mask subMask) {
+        return (subMask & mask) == subMask;
+    }
+
     static SR_FORCE_INLINE double_t SR_FASTCALL FastSqrt(double_t value) {
         return std::sqrt(value);
     }

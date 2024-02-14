@@ -28,6 +28,12 @@ namespace SR_GRAPH_UI_NS {
     }
 
     void Gizmo::LoadMesh(GizmoOperationFlag operation, SR_UTILS_NS::StringAtom path, SR_UTILS_NS::StringAtom name, GizmoMeshLoadMode mode) { /// NOLINT
+        SR_TRACY_ZONE;
+
+        if (!SR_MATH_NS::IsMaskIncludedSubMask(m_operation, operation)) {
+            return;
+        }
+
         if (mode == GizmoMeshLoadMode::All) {
             LoadMesh(operation, path, name, GizmoMeshLoadMode::Visual);
             LoadMesh(operation, path, name, GizmoMeshLoadMode::Selection);
@@ -93,11 +99,17 @@ namespace SR_GRAPH_UI_NS {
     }
 
     void Gizmo::OnEnable() {
-        LoadGizmo();
+        m_isGizmoDirty = true;
         Super::OnEnable();
     }
 
     void Gizmo::LoadGizmo() {
+        if (!m_isGizmoDirty) {
+            return;
+        }
+
+        ReleaseGizmo();
+
         SRAssert(m_meshes.empty());
 
         GetGameObject()->SetLayer("Gizmo");
@@ -105,7 +117,7 @@ namespace SR_GRAPH_UI_NS {
 
         static const SR_UTILS_NS::StringAtom gizmoFile = "Engine/Models/gizmo-translation.fbx";
 
-        /*LoadMesh(GizmoOperation::TranslateCenter, gizmoFile, "Center", GizmoMeshLoadMode::Visual);
+        LoadMesh(GizmoOperation::TranslateCenter, gizmoFile, "Center", GizmoMeshLoadMode::Visual);
         LoadMesh(GizmoOperation::TranslateCenter, gizmoFile, "CenterSelection", GizmoMeshLoadMode::Selection);
 
         LoadMesh(GizmoOperation::TranslateAltX, gizmoFile, "PlaneX", GizmoMeshLoadMode::All);
@@ -118,13 +130,15 @@ namespace SR_GRAPH_UI_NS {
 
         LoadMesh(GizmoOperation::TranslateX, gizmoFile, "ArrowXSelection", GizmoMeshLoadMode::Selection);
         LoadMesh(GizmoOperation::TranslateY, gizmoFile, "ArrowYSelection", GizmoMeshLoadMode::Selection);
-        LoadMesh(GizmoOperation::TranslateZ, gizmoFile, "ArrowZSelection", GizmoMeshLoadMode::Selection);*/
+        LoadMesh(GizmoOperation::TranslateZ, gizmoFile, "ArrowZSelection", GizmoMeshLoadMode::Selection);
 
         LoadMesh(GizmoOperation::RotateX, gizmoFile, "RotateX", GizmoMeshLoadMode::All);
         LoadMesh(GizmoOperation::RotateY, gizmoFile, "RotateY", GizmoMeshLoadMode::All);
         LoadMesh(GizmoOperation::RotateZ, gizmoFile, "RotateZ", GizmoMeshLoadMode::All);
 
         LoadMesh(GizmoOperation::RotateCenter, gizmoFile, "RotateCenter", GizmoMeshLoadMode::All);
+
+        m_isGizmoDirty = false;
     }
 
     void Gizmo::ReleaseGizmo() {
@@ -144,6 +158,8 @@ namespace SR_GRAPH_UI_NS {
                 pChild->Destroy();
             }
         }
+
+        m_isGizmoDirty = true;
     }
 
     void Gizmo::OnDisable() {
@@ -153,6 +169,13 @@ namespace SR_GRAPH_UI_NS {
 
     void Gizmo::FixedUpdate() {
         SR_TRACY_ZONE;
+
+        if (!IsGizmoAvailable()) {
+            ReleaseGizmo();
+            return;
+        }
+
+        LoadGizmo();
 
         auto&& pCamera = GetCamera();
         if (!pCamera) {
@@ -172,7 +195,7 @@ namespace SR_GRAPH_UI_NS {
 
         auto&& mousePos = GetCamera()->GetMousePos();
 
-        if (GetMode() == GizmoMode::Local) {
+        if (IsLocal()) {
             m_modelMatrix = m_modelMatrix.OrthogonalNormalize(); /// normalized for local scape
         }
 
@@ -292,7 +315,7 @@ namespace SR_GRAPH_UI_NS {
 
         m_modelMatrix = SR_MATH_NS::Matrix4x4(
                 m_modelMatrix.GetTranslate(),
-                GetMode() == GizmoMode::Local ? m_modelMatrix.GetQuat() : SR_MATH_NS::Quaternion::Identity(),
+                IsLocal() ? m_modelMatrix.GetQuat() : SR_MATH_NS::Quaternion::Identity(),
                 isScaleOperation ? m_modelMatrix.GetScale() : SR_MATH_NS::FVector3(1.f)
         );
 
@@ -318,9 +341,9 @@ namespace SR_GRAPH_UI_NS {
 
             auto&& direction = GetCamera()->GetPosition() - GetTransform()->GetTranslation();
 
-            auto&& right = GetTransform()->Right();
-            auto&& up = GetTransform()->Up();
-            auto&& forward = GetTransform()->Forward();
+            auto&& right = IsLocal() ? GetTransform()->Right() : SR_MATH_NS::FVector3::Right();
+            auto&& up = IsLocal() ? GetTransform()->Up() : SR_MATH_NS::FVector3::Up();
+            auto&& forward = IsLocal() ? GetTransform()->Forward() : SR_MATH_NS::FVector3::Forward();
 
             auto&& directionRight = direction.ProjectOnPlane(right);
             auto&& directionUp = direction.ProjectOnPlane(up);
@@ -367,5 +390,10 @@ namespace SR_GRAPH_UI_NS {
         SR_ERROR("Gizmo::GetGameObjectByOperation() : unknown operation!");
 
         return nullptr;
+    }
+
+    void Gizmo::SetOperation(GizmoOperationFlag operation) {
+        m_operation = operation;
+        m_isGizmoDirty = true;
     }
 }
