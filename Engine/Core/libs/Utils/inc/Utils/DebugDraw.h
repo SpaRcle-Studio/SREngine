@@ -166,6 +166,8 @@ namespace SR_UTILS_NS {
         uint64_t DrawCapsule(uint64_t id);
         uint64_t DrawCapsule();
 
+        void DrawQuaternion(const SR_MATH_NS::FVector3& pos, const SR_MATH_NS::Quaternion& q, const SR_MATH_NS::FColor& color, float_t time);
+
     private:
         void* m_currentSwitcher = nullptr;
         Callbacks* m_currentCallbacks = nullptr;

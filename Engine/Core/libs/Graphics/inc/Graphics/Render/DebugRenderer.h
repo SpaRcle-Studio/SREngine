@@ -24,6 +24,8 @@ namespace SR_GRAPH_NS {
 
         SR_NODISCARD bool IsEmpty() const;
         SR_NODISCARD RenderScene* GetRenderScene() const noexcept { return m_renderScene; }
+        SR_NODISCARD uint64_t GetTimedObjectPoolSize() const noexcept { return m_timedObjects.size(); }
+        SR_NODISCARD uint64_t GetEmptyIdsPoolSize() const noexcept { return m_emptyIds.size(); }
 
     private:
         void Remove(uint64_t id);

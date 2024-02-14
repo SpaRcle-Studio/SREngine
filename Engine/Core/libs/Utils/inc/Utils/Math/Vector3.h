@@ -418,11 +418,11 @@ namespace SR_MATH_NS {
 
         SR_NODISCARD Quaternion ToQuat() const;
 
-        SR_FORCE_INLINE const T &operator[](int p_axis) const {
+        SR_FORCE_INLINE constexpr const T &operator[](int p_axis) const {
             return coord[p_axis];
         }
 
-        SR_FORCE_INLINE T &operator[](int p_axis) {
+        SR_FORCE_INLINE constexpr T &operator[](int p_axis) {
             return coord[p_axis];
         }
 

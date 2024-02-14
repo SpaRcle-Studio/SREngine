@@ -284,6 +284,8 @@ namespace SR_GRAPH_UI_NS {
     }
 
     void Gizmo::UpdateGizmoTransform() {
+        SR_TRACY_ZONE;
+
         m_modelMatrix = GetGizmoMatrix();
 
         const bool isScaleOperation = m_activeOperation & GizmoOperation::Scale;
@@ -316,33 +318,33 @@ namespace SR_GRAPH_UI_NS {
 
             auto&& direction = GetCamera()->GetPosition() - GetTransform()->GetTranslation();
 
-            auto&& directionRight = direction.ProjectOnPlane(SR_MATH_NS::FVector3::Right());
-            auto&& directionUp = direction.ProjectOnPlane(SR_MATH_NS::FVector3::Up());
-            auto&& directionForward = direction.ProjectOnPlane(SR_MATH_NS::FVector3::Forward());
+            auto&& right = GetTransform()->Right();
+            auto&& up = GetTransform()->Up();
+            auto&& forward = GetTransform()->Forward();
+
+            auto&& directionRight = direction.ProjectOnPlane(right);
+            auto&& directionUp = direction.ProjectOnPlane(up);
+            auto&& directionForward = direction.ProjectOnPlane(forward);
+
+            SR_MATH_NS::Quaternion quaternion;
 
             if (flag & GizmoOperation::X) {
-                auto&& signedAngleRight = SR_MATH_NS::FVector3::Forward().SignedAngle(directionRight, SR_MATH_NS::FVector3::Right());
-                info.pVisual->GetTransform()->SetGlobalRotation(SR_MATH_NS::FVector3(signedAngleRight, 0, 0));
-                info.pSelection->GetTransform()->SetGlobalRotation(SR_MATH_NS::FVector3(signedAngleRight, 0, 0));
+                auto&& axis = directionRight.Cross(up).Normalize();
+                quaternion = SR_MATH_NS::Quaternion::LookAt(-directionRight, axis).RotateZ(90);
+            }
+            else if (flag & GizmoOperation::Y) {
+                quaternion = SR_MATH_NS::Quaternion::LookAt(-directionUp, up);
+            }
+            else if (flag & GizmoOperation::Z) {
+                auto&& axis = directionForward.Cross(up).Normalize();
+                quaternion = SR_MATH_NS::Quaternion::LookAt(directionForward, axis).RotateY(90).RotateX(-90);
+            }
+            else if (flag & GizmoOperation::Center) {
+                quaternion = SR_MATH_NS::Quaternion::LookAt(-direction, SR_MATH_NS::FVector3::One());
             }
 
-            if (flag & GizmoOperation::Y) {
-                auto&& signedAngleUp = SR_MATH_NS::FVector3::Forward().SignedAngle(directionUp, SR_MATH_NS::FVector3::Up());
-                info.pVisual->GetTransform()->SetGlobalRotation(SR_MATH_NS::FVector3(0, signedAngleUp, 0));
-                info.pSelection->GetTransform()->SetGlobalRotation(SR_MATH_NS::FVector3(0, signedAngleUp, 0));
-            }
-
-            if (flag & GizmoOperation::Z) {
-                auto&& signedAngleForward = SR_MATH_NS::FVector3::Right().SignedAngle(directionForward, SR_MATH_NS::FVector3::Forward());
-                info.pVisual->GetTransform()->SetGlobalRotation(SR_MATH_NS::FVector3(0, 0, signedAngleForward));
-                info.pSelection->GetTransform()->SetGlobalRotation(SR_MATH_NS::FVector3(0, 0, signedAngleForward));
-            }
-
-            if (flag & GizmoOperation::Center) {
-                auto&& rotation = SR_MATH_NS::Quaternion::LookAt(-direction, SR_MATH_NS::FVector3::One());
-                info.pVisual->GetTransform()->SetGlobalRotation(rotation.EulerAngle());
-                info.pSelection->GetTransform()->SetGlobalRotation(rotation.EulerAngle());
-            }
+            info.pVisual->GetTransform()->SetGlobalRotation(quaternion);
+            info.pSelection->GetTransform()->SetGlobalRotation(quaternion);
         }
     }
 

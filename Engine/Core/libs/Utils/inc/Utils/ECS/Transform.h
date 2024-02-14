@@ -66,7 +66,12 @@ namespace SR_UTILS_NS {
         virtual void SetMatrix(const SR_MATH_NS::Matrix4x4& matrix) { }
 
         virtual void SetGlobalTranslation(const SR_MATH_NS::FVector3& translation) { }
-        virtual void SetGlobalRotation(const SR_MATH_NS::FVector3& eulers) { }
+
+        virtual void SetGlobalRotation(const SR_MATH_NS::FVector3& eulers) {
+            SetGlobalRotation(eulers.Radians().ToQuat());
+        }
+
+        virtual void SetGlobalRotation(const SR_MATH_NS::Quaternion& quaternion) { }
 
         virtual void SetTranslation(const SR_MATH_NS::FVector3& translation) { }
         virtual void SetTranslation(SR_MATH_NS::Unit x, SR_MATH_NS::Unit y, SR_MATH_NS::Unit z);
@@ -82,9 +87,13 @@ namespace SR_UTILS_NS {
         virtual void LookAt(const SR_MATH_NS::FVector3& position) { }
         virtual void LookAt(const SR_MATH_NS::FVector3& position, LookAtAxis axis) { }
 
-        SR_NODISCARD virtual const SR_MATH_NS::Matrix4x4& GetMatrix();
+        SR_NODISCARD virtual const SR_MATH_NS::Matrix4x4& GetMatrix() const;
 
         SR_NODISCARD virtual SR_MATH_NS::Quaternion GetQuaternion() const { return SR_MATH_NS::Quaternion::Identity(); }
+
+        SR_NODISCARD virtual SR_MATH_NS::FVector3 Right() const;
+        SR_NODISCARD virtual SR_MATH_NS::FVector3 Up() const;
+        SR_NODISCARD virtual SR_MATH_NS::FVector3 Forward() const;
 
         SR_NODISCARD virtual SR_MATH_NS::FVector3 GetTranslation() const { return SR_MATH_NS::FVector3(); }
         SR_NODISCARD virtual SR_MATH_NS::FVector3 GetRotation() const { return SR_MATH_NS::FVector3(); }
@@ -105,13 +114,13 @@ namespace SR_UTILS_NS {
 
     protected:
         SR_NODISCARD virtual bool IsDirty() const noexcept;
-        virtual void UpdateMatrix() { m_dirtyMatrix = false; }
+        virtual void UpdateMatrix() const { m_dirtyMatrix = false; }
 
     protected:
         GameObject* m_gameObject = nullptr;
 
     private:
-        bool m_dirtyMatrix = true;
+        mutable bool m_dirtyMatrix = true;
 
     };
 }

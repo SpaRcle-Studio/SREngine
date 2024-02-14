@@ -106,6 +106,11 @@ namespace SR_GRAPH_NS {
 
     retry:
         if (id == SR_ID_INVALID) {
+            if (m_timedObjects.size() == SR_UINT16_MAX) {
+                SRHaltOnce("Too many debug objects!");
+                return SR_ID_INVALID;
+            }
+
             auto&& pDebugLine = new SR_GTYPES_NS::DebugLine(start, end, color);
             pDebugLine->SetMaterial(m_lineMaterial);
             return AddTimedObject(time, pDebugLine);
@@ -223,6 +228,11 @@ namespace SR_GRAPH_NS {
         SR_LOCK_GUARD;
 
         if (id == SR_ID_INVALID) {
+            if (m_timedObjects.size() == SR_UINT16_MAX) {
+                SRHaltOnce("Too many debug objects!");
+                return SR_ID_INVALID;
+            }
+
             SR_GTYPES_NS::DebugWireframeMesh* pMesh = dynamic_cast<SR_GTYPES_NS::DebugWireframeMesh *>(
                     SR_GTYPES_NS::Mesh::TryLoad(pRawMesh, MeshType::Wireframe, meshId)
             );

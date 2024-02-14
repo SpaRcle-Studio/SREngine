@@ -41,6 +41,13 @@ namespace SR_MATH_NS {
             : self(GLM_IDENTITY_MAT4X4)
         { }
 
+        constexpr Matrix4x4(FVector4 rows[4]) noexcept { /// NOLINT
+            value[0] = rows[0];
+            value[1] = rows[1];
+            value[2] = rows[2];
+            value[3] = rows[3];
+        }
+
         constexpr Matrix4x4(const Unit& scalar) noexcept /// NOLINT
             : self(glm::mat4(static_cast<float_t>(scalar)))
         { }

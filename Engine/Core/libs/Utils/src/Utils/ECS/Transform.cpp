@@ -194,7 +194,7 @@ namespace SR_UTILS_NS {
         return GetScale().XY();
     }
 
-    const SR_MATH_NS::Matrix4x4& Transform::GetMatrix() {
+    const SR_MATH_NS::Matrix4x4& Transform::GetMatrix() const {
         static SR_MATH_NS::Matrix4x4 matrix4X4 = SR_MATH_NS::Matrix4x4::Identity();
         return matrix4X4;
     }
@@ -224,5 +224,17 @@ namespace SR_UTILS_NS {
 
     void Transform::OnHierarchyChanged() {
         UpdateTree();
+    }
+
+    SR_MATH_NS::FVector3 Transform::Right() const {
+        return GetMatrix().GetQuat() * SR_MATH_NS::FVector3::Right();
+    }
+
+    SR_MATH_NS::FVector3 Transform::Up() const {
+        return GetMatrix().GetQuat() * SR_MATH_NS::FVector3::Up();
+    }
+
+    SR_MATH_NS::FVector3 Transform::Forward() const {
+        return GetMatrix().GetQuat() * SR_MATH_NS::FVector3::Forward();
     }
 }

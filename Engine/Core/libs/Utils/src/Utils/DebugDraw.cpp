@@ -511,4 +511,35 @@ namespace SR_UTILS_NS {
     }
 
     /// ---------------------------------------------------- MESH DRAWING ----------------------------------------------
+
+    void DebugDraw::DrawQuaternion(const SR_MATH_NS::FVector3& pos, const SR_MATH_NS::Quaternion& q, const SR_MATH_NS::FColor& color, float_t time) {
+        auto&& axis = q.Vector().XYZ().Normalize();
+
+        const SR_MATH_NS::FVector3 axisEndPoint(
+        pos.x + axis.x,
+        pos.y + axis.y,
+        pos.z + axis.z
+        );
+
+        DrawLine(pos, axisEndPoint, color, time);
+
+        const float_t angle = 2 * std::acos(q.w);
+
+        if (std::abs(angle) < SR_EPSILON) {
+            return;
+        }
+
+        auto&& perpVector = SR_MATH_NS::FVector3(1, 0, 0);
+        if (std::abs(axis.Dot(perpVector)) > 0.99f) {
+            perpVector = SR_MATH_NS::FVector3(0, 1, 0);
+        }
+
+        const SR_MATH_NS::FVector3 lineDirection = axis.Cross(perpVector).Normalize();
+
+        const SR_MATH_NS::FVector3 lineEndPoint(pos.x + lineDirection.x * std::sin(angle / 2),
+                                                pos.y + lineDirection.y * std::sin(angle / 2),
+                                                pos.z + lineDirection.z * std::sin(angle / 2));
+
+        DrawLine(axisEndPoint, lineEndPoint, color / 2.f, time);
+    }
 }

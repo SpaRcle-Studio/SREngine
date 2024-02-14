@@ -74,46 +74,46 @@ namespace glm
 	template<typename T, qualifier Q>
 	GLM_FUNC_QUALIFIER qua<T, Q> quat_cast(mat<3, 3, T, Q> const& m)
 	{
-		T fourXSquaredMinus1 = m[0][0] - m[1][1] - m[2][2];
-		T fourYSquaredMinus1 = m[1][1] - m[0][0] - m[2][2];
-		T fourZSquaredMinus1 = m[2][2] - m[0][0] - m[1][1];
-		T fourWSquaredMinus1 = m[0][0] + m[1][1] + m[2][2];
+        T fourXSquaredMinus1 = m[0][0] - m[1][1] - m[2][2];
+        T fourYSquaredMinus1 = m[1][1] - m[0][0] - m[2][2];
+        T fourZSquaredMinus1 = m[2][2] - m[0][0] - m[1][1];
+        T fourWSquaredMinus1 = m[0][0] + m[1][1] + m[2][2];
 
-		int biggestIndex = 0;
-		T fourBiggestSquaredMinus1 = fourWSquaredMinus1;
-		if(fourXSquaredMinus1 > fourBiggestSquaredMinus1)
-		{
-			fourBiggestSquaredMinus1 = fourXSquaredMinus1;
-			biggestIndex = 1;
-		}
-		if(fourYSquaredMinus1 > fourBiggestSquaredMinus1)
-		{
-			fourBiggestSquaredMinus1 = fourYSquaredMinus1;
-			biggestIndex = 2;
-		}
-		if(fourZSquaredMinus1 > fourBiggestSquaredMinus1)
-		{
-			fourBiggestSquaredMinus1 = fourZSquaredMinus1;
-			biggestIndex = 3;
-		}
+        int biggestIndex = 0;
+        T fourBiggestSquaredMinus1 = fourWSquaredMinus1;
+        if(fourXSquaredMinus1 > fourBiggestSquaredMinus1)
+        {
+            fourBiggestSquaredMinus1 = fourXSquaredMinus1;
+            biggestIndex = 1;
+        }
+        if(fourYSquaredMinus1 > fourBiggestSquaredMinus1)
+        {
+            fourBiggestSquaredMinus1 = fourYSquaredMinus1;
+            biggestIndex = 2;
+        }
+        if(fourZSquaredMinus1 > fourBiggestSquaredMinus1)
+        {
+            fourBiggestSquaredMinus1 = fourZSquaredMinus1;
+            biggestIndex = 3;
+        }
 
-		T biggestVal = sqrt(fourBiggestSquaredMinus1 + static_cast<T>(1)) * static_cast<T>(0.5);
-		T mult = static_cast<T>(0.25) / biggestVal;
+        T biggestVal = sqrt(fourBiggestSquaredMinus1 + static_cast<T>(1)) * static_cast<T>(0.5);
+        T mult = static_cast<T>(0.25) / biggestVal;
 
-		switch(biggestIndex)
-		{
-		case 0:
-			return qua<T, Q>(biggestVal, (m[1][2] - m[2][1]) * mult, (m[2][0] - m[0][2]) * mult, (m[0][1] - m[1][0]) * mult);
-		case 1:
-			return qua<T, Q>((m[1][2] - m[2][1]) * mult, biggestVal, (m[0][1] + m[1][0]) * mult, (m[2][0] + m[0][2]) * mult);
-		case 2:
-			return qua<T, Q>((m[2][0] - m[0][2]) * mult, (m[0][1] + m[1][0]) * mult, biggestVal, (m[1][2] + m[2][1]) * mult);
-		case 3:
-			return qua<T, Q>((m[0][1] - m[1][0]) * mult, (m[2][0] + m[0][2]) * mult, (m[1][2] + m[2][1]) * mult, biggestVal);
-		default: // Silence a -Wswitch-default warning in GCC. Should never actually get here. Assert is just for sanity.
-			assert(false);
-			return qua<T, Q>(1, 0, 0, 0);
-		}
+        switch(biggestIndex)
+        {
+            case 0:
+                return qua<T, Q>::wxyz(biggestVal, (m[1][2] - m[2][1]) * mult, (m[2][0] - m[0][2]) * mult, (m[0][1] - m[1][0]) * mult);
+            case 1:
+                return qua<T, Q>::wxyz((m[1][2] - m[2][1]) * mult, biggestVal, (m[0][1] + m[1][0]) * mult, (m[2][0] + m[0][2]) * mult);
+            case 2:
+                return qua<T, Q>::wxyz((m[2][0] - m[0][2]) * mult, (m[0][1] + m[1][0]) * mult, biggestVal, (m[1][2] + m[2][1]) * mult);
+            case 3:
+                return qua<T, Q>::wxyz((m[0][1] - m[1][0]) * mult, (m[2][0] + m[0][2]) * mult, (m[1][2] + m[2][1]) * mult, biggestVal);
+            default: // Silence a -Wswitch-default warning in GCC. Should never actually get here. Assert is just for sanity.
+                assert(false);
+                return qua<T, Q>::wxyz(1, 0, 0, 0);
+        }
 	}
 
 	template<typename T, qualifier Q>
@@ -172,25 +172,27 @@ namespace glm
 	template<typename T, qualifier Q>
 	GLM_FUNC_QUALIFIER qua<T, Q> quatLookAtRH(vec<3, T, Q> const& direction, vec<3, T, Q> const& up)
 	{
-		mat<3, 3, T, Q> Result;
+        mat<3, 3, T, Q> Result;
 
-		Result[2] = -direction;
-		Result[0] = normalize(cross(up, Result[2]));
-		Result[1] = cross(Result[2], Result[0]);
+        Result[2] = -direction;
+        vec<3, T, Q> const& Right = cross(up, Result[2]);
+        Result[0] = Right * inversesqrt(max(static_cast<T>(0.00001), dot(Right, Right)));
+        Result[1] = cross(Result[2], Result[0]);
 
-		return quat_cast(Result);
+        return quat_cast(Result);
 	}
 
 	template<typename T, qualifier Q>
 	GLM_FUNC_QUALIFIER qua<T, Q> quatLookAtLH(vec<3, T, Q> const& direction, vec<3, T, Q> const& up)
 	{
-		mat<3, 3, T, Q> Result;
+        mat<3, 3, T, Q> Result;
 
-		Result[2] = direction;
-		Result[0] = normalize(cross(up, Result[2]));
-		Result[1] = cross(Result[2], Result[0]);
+        Result[2] = direction;
+        vec<3, T, Q> const& Right = cross(up, Result[2]);
+        Result[0] = Right * inversesqrt(max(static_cast<T>(0.00001), dot(Right, Right)));
+        Result[1] = cross(Result[2], Result[0]);
 
-		return quat_cast(Result);
+        return quat_cast(Result);
 	}
 }//namespace glm
 

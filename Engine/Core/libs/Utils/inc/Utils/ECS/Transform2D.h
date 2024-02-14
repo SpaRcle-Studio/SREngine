@@ -49,7 +49,7 @@ namespace SR_UTILS_NS {
         void SetSkew(const SR_MATH_NS::FVector3& skew) override;
 
         void SetGlobalTranslation(const SR_MATH_NS::FVector3& translation) override;
-        void SetGlobalRotation(const SR_MATH_NS::FVector3& eulers) override;
+        void SetGlobalRotation(const SR_MATH_NS::Quaternion& quaternion) override;
 
         void SetAnchor(Anchor anchorType);
         void SetStretch(Stretch stretch);
@@ -67,7 +67,7 @@ namespace SR_UTILS_NS {
 
         SR_NODISCARD Transform* Copy() const override;
 
-        SR_NODISCARD const SR_MATH_NS::Matrix4x4& GetMatrix() override;
+        SR_NODISCARD const SR_MATH_NS::Matrix4x4& GetMatrix() const override;
 
         SR_NODISCARD Anchor GetAnchor() const { return m_anchor; }
         SR_NODISCARD Stretch GetStretch() const { return m_stretch; }
@@ -81,7 +81,7 @@ namespace SR_UTILS_NS {
         void OnHierarchyChanged() override;
 
     protected:
-        void UpdateMatrix() override;
+        void UpdateMatrix() const override;
         SR_NODISCARD SR_MATH_NS::FVector3 CalculateStretch() const;
         SR_NODISCARD SR_MATH_NS::FVector3 CalculateAnchor(const SR_MATH_NS::FVector3& position, const SR_MATH_NS::FVector3& scale) const;
         SR_NODISCARD SR_MATH_NS::BVector2 CalculatePositionMode() const noexcept;
@@ -103,8 +103,8 @@ namespace SR_UTILS_NS {
         bool m_relativePriority = true;
         bool m_isDirtyPriority = true;
 
-        SR_MATH_NS::Matrix4x4 m_localMatrix = SR_MATH_NS::Matrix4x4::Identity();
-        SR_MATH_NS::Matrix4x4 m_matrix = SR_MATH_NS::Matrix4x4::Identity();
+        mutable SR_MATH_NS::Matrix4x4 m_localMatrix = SR_MATH_NS::Matrix4x4::Identity();
+        mutable SR_MATH_NS::Matrix4x4 m_matrix = SR_MATH_NS::Matrix4x4::Identity();
 
         SR_MATH_NS::FVector3 m_translation = SR_MATH_NS::FVector3::Zero();
         SR_MATH_NS::FVector3 m_rotation = SR_MATH_NS::FVector3::Zero();

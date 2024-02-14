@@ -51,6 +51,8 @@ namespace SR_MATH_NS {
             , w(p_q.w)
         { }
 
+        constexpr explicit Quaternion(const Matrix4x4& matrix);
+
         constexpr Quaternion() {
             x = y = z = static_cast<T>(0);
             w = static_cast<T>(1);
@@ -89,6 +91,10 @@ namespace SR_MATH_NS {
 
         SR_NODISCARD static Quaternion LookAt(const Vector3<Unit>& direction);
         SR_NODISCARD static Quaternion LookAt(const Vector3<Unit>& direction, const Vector3<Unit>& up);
+
+        SR_NODISCARD Quaternion Normalized() const {
+            return Normalize();
+        }
 
         SR_NODISCARD Quaternion Normalize() const {
             return Quaternion(glm::normalize(self));

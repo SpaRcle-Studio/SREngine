@@ -139,14 +139,19 @@ namespace SR_MATH_NS {
             return res;
         }
 
+        static constexpr Vector4<T> UnitX() { return Vector4(static_cast<T>(1), static_cast<T>(0), static_cast<T>(0), static_cast<T>(0)); }
+        static constexpr Vector4<T> UnitY() { return Vector4(static_cast<T>(0), static_cast<T>(1), static_cast<T>(0), static_cast<T>(0)); }
+        static constexpr Vector4<T> UnitZ() { return Vector4(static_cast<T>(0), static_cast<T>(0), static_cast<T>(1), static_cast<T>(0)); }
+        static constexpr Vector4<T> UnitW() { return Vector4(static_cast<T>(0), static_cast<T>(0), static_cast<T>(0), static_cast<T>(1)); }
+
         SR_FORCE_INLINE Vector4 operator-() const { return Vector4(-x, -y, -z, -w); }
 
         template<typename U> SR_FORCE_INLINE Vector4 operator*(U p_scalar) const {
             return Vector4(x * p_scalar, y * p_scalar, z * p_scalar, w * p_scalar);
         }
 
-        SR_NODISCARD Vector3<T> XYZ() const noexcept { return Vector3<T>(x, y, z); }
-        SR_NODISCARD Vector2<T> XY() const noexcept { return Vector2<T>(x, y); }
+        SR_NODISCARD constexpr Vector3<T> XYZ() const noexcept { return Vector3<T>(x, y, z); }
+        SR_NODISCARD constexpr Vector2<T> XY() const noexcept { return Vector2<T>(x, y); }
 
         SR_NODISCARD glm::vec4 ToGLM() const { return { x, y, z, w }; }
 
@@ -190,9 +195,20 @@ namespace SR_MATH_NS {
         SR_FAST_CONSTRUCTOR FColor() : Vector4<Unit>() { }
         SR_FAST_CONSTRUCTOR FColor (Unit scalar) : Vector4<Unit>(scalar) { }
         SR_FAST_CONSTRUCTOR FColor(const glm::vec4& vec4) : Vector4<Unit>(vec4) { }
+        SR_FAST_CONSTRUCTOR FColor(const Vector4<Unit>& v) : Vector4<Unit>(v) { }
         SR_FAST_CONSTRUCTOR FColor(double_t _x, double_t _y, double_t _z, double_t _w) : Vector4<Unit>(_x, _y, _z, _w) { }
         SR_FAST_CONSTRUCTOR FColor(float_t _x, float_t _y, float_t _z, float_t _w) : Vector4<Unit>(_x, _y, _z, _w) { }
         SR_FAST_CONSTRUCTOR FColor(int32_t _x, int32_t _y, int32_t _z, int32_t _w) : Vector4<Unit>(_x, _y, _z, _w) { }
+
+        static constexpr FColor Red() { return FColor(255.f, 0.f, 0.f, 255.f); }
+        static constexpr FColor Green() { return FColor(0.f, 255.f, 0.f, 255.f); }
+        static constexpr FColor Blue() { return FColor(0.f, 0.f, 255.f, 255.f); }
+        static constexpr FColor White() { return FColor(255.f, 255.f, 255.f, 255.f); }
+        static constexpr FColor Black() { return FColor(0.f, 0.f, 0.f, 255.f); }
+        static constexpr FColor Yellow() { return FColor(255.f, 255.f, 0.f, 255.f); }
+        static constexpr FColor Cyan() { return FColor(0.f, 255.f, 255.f, 255.f); }
+        static constexpr FColor Magenta() { return FColor(255.f, 0.f, 255.f, 255.f); }
+
     };
 
     typedef Vector4<Unit>     FVector4;

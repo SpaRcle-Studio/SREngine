@@ -6,7 +6,7 @@
 #include <Utils/ECS/GameObject.h>
 
 namespace SR_UTILS_NS {
-    void Transform3D::UpdateMatrix() {
+    void Transform3D::UpdateMatrix() const {
         m_localMatrix = SR_MATH_NS::Matrix4x4(
                 m_translation,
                 m_quaternion,
@@ -25,7 +25,7 @@ namespace SR_UTILS_NS {
         SetRotation((m_quaternion * q).EulerAngle());
     }
 
-    const SR_MATH_NS::Matrix4x4& Transform3D::GetMatrix() {
+    const SR_MATH_NS::Matrix4x4& Transform3D::GetMatrix() const {
         if (IsDirty()) {
             SR_TRACY_ZONE;
 
@@ -188,10 +188,10 @@ namespace SR_UTILS_NS {
         }
     }
 
-    void Transform3D::SetGlobalRotation(const SR_MATH_NS::FVector3 &eulers) {
+    void Transform3D::SetGlobalRotation(const SR_MATH_NS::Quaternion& quaternion) {
         if (auto&& pParent = GetParentTransform()) {
             auto&& matrix = SR_MATH_NS::Matrix4x4::FromScale(SR_MATH_NS::FVector3(1) / m_skew);
-            matrix *= SR_MATH_NS::Matrix4x4::FromEulers(eulers);
+            matrix *= SR_MATH_NS::Matrix4x4::FromQuaternion(quaternion);
             matrix *= SR_MATH_NS::Matrix4x4::FromScale(m_scale);
 
             matrix = pParent->GetMatrix().Inverse() * matrix;
@@ -200,7 +200,7 @@ namespace SR_UTILS_NS {
         }
         else {
             auto&& matrix = SR_MATH_NS::Matrix4x4::FromScale(SR_MATH_NS::FVector3(1) / m_skew);
-            matrix *= SR_MATH_NS::Matrix4x4::FromEulers(eulers);
+            matrix *= SR_MATH_NS::Matrix4x4::FromQuaternion(quaternion);
             matrix *= SR_MATH_NS::Matrix4x4::FromScale(m_scale);
 
             SetRotation(matrix.GetEulers());

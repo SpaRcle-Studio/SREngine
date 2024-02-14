@@ -64,12 +64,14 @@ namespace SR_GRAPH_NS {
         SR_PIPELINE_RENDER_GUARD(void())
         ++m_state.operations;
         ++m_state.drawCalls;
+        m_state.vertices += count;
     }
 
     void Pipeline::Draw(uint32_t count) {
         SR_PIPELINE_RENDER_GUARD(void())
         ++m_state.operations;
         ++m_state.drawCalls;
+        m_state.vertices += count;
     }
 
     bool Pipeline::BeginCmdBuffer() {

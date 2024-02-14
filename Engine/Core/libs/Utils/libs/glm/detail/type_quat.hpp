@@ -81,6 +81,7 @@ namespace glm
 
 		GLM_FUNC_DECL GLM_CONSTEXPR qua(T s, vec<3, T, Q> const& v);
 		GLM_FUNC_DECL GLM_CONSTEXPR qua(T w, T x, T y, T z);
+        GLM_FUNC_DECL static GLM_CONSTEXPR qua<T, Q> wxyz(T w, T x, T y, T z);
 
 		// -- Conversion constructors --
 
@@ -171,6 +172,15 @@ namespace glm
 
 	template<typename T, qualifier Q>
 	GLM_FUNC_DECL GLM_CONSTEXPR bool operator!=(qua<T, Q> const& q1, qua<T, Q> const& q2);
+
+    template <typename T, qualifier Q>
+    GLM_CONSTEXPR qua<T, Q> qua<T, Q>::wxyz(T w, T x, T y, T z) {
+#	ifdef GLM_FORCE_QUAT_DATA_XYZW
+        return qua<T, Q>(x, y, z, w);
+#	else
+        return qua<T, Q>(w, x, y, z);
+#	endif
+    }
 } //namespace glm
 
 #ifndef GLM_EXTERNAL_TEMPLATE

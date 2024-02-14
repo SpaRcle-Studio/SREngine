@@ -25,6 +25,16 @@ namespace SR_HTYPES_NS {
             , policy(policy)
         { }
 
+        void IncrementStrong() {
+            SRAssert2(strongCount != SR_UINT16_MAX, "Strong count overflow!");
+            ++strongCount;
+        }
+
+        void DecrementStrong() {
+            SRAssert2(strongCount != 0, "Strong count underflow!");
+            --strongCount;
+        }
+
         uint16_t strongCount = 0;
         uint16_t weakCount = 0;
         bool valid = false;
@@ -39,8 +49,8 @@ namespace SR_HTYPES_NS {
         SharedPtr(const T* constPtr, SharedPtrPolicy policy); /** NOLINT */
         SharedPtr(SharedPtr const &ptr);
         SharedPtr(SharedPtr&& ptr) noexcept
-            : m_data(SR_UTILS_NS::Exchange(ptr.m_data, { }))
-            , m_ptr(SR_UTILS_NS::Exchange(ptr.m_ptr, { }))
+            : m_data(SR_UTILS_NS::Exchange(ptr.m_data, nullptr))
+            , m_ptr(SR_UTILS_NS::Exchange(ptr.m_ptr, nullptr))
         { }
         ~SharedPtr(); /// не должен быть виртуальным
 
@@ -55,15 +65,15 @@ namespace SR_HTYPES_NS {
         SharedPtr<T>& operator=(T *ptr);
         SharedPtr<T>& operator=(SharedPtr<T>&& ptr) noexcept {
             if (m_data) {
-                SRAssert(m_data->strongCount > 0);
-                --m_data->strongCount;
+                m_data->DecrementStrong();
             }
 
             m_data = SR_UTILS_NS::Exchange(ptr.m_data, {});
 
-            if (m_data) {
-                ++m_data->strongCount;
-            }
+            /// не делаем инкремент, так как переместили!
+            /// if (m_data) {
+            ///     m_data->IncrementStrong();
+            /// }
 
             m_ptr = SR_UTILS_NS::Exchange(ptr.m_ptr, {});
 
@@ -125,7 +135,7 @@ namespace SR_HTYPES_NS {
 
         if constexpr (IsDerivedFrom<SharedPtr, T>::value) {
             if (ptr && (m_data = ptr->GetPtrData())) {
-                ++(m_data->strongCount);
+                m_data->IncrementStrong();
                 needAlloc = false;
                 m_ptr = ptr;
             }
@@ -144,7 +154,7 @@ namespace SR_HTYPES_NS {
     template<class T> SharedPtr<T>::SharedPtr(const SharedPtr &ptr) {
         m_ptr = ptr.m_ptr;
         if ((m_data = ptr.m_data)) {
-            ++(m_data->strongCount);
+            m_data->IncrementStrong();
         }
     }
 
@@ -159,7 +169,7 @@ namespace SR_HTYPES_NS {
 
         if ((m_data = ptr.m_data)) {
             m_data->valid = bool(m_ptr);
-            ++(m_data->strongCount);
+            m_data->IncrementStrong();
         }
 
         return *this;
@@ -173,7 +183,7 @@ namespace SR_HTYPES_NS {
 
             if constexpr (IsDerivedFrom<SharedPtr, T>::value) {
                 if (ptr && (m_data = ptr->GetPtrData())) {
-                    ++(m_data->strongCount);
+                    m_data->IncrementStrong();
                     needAlloc = false;
                     m_ptr = ptr;
                 }
@@ -248,7 +258,7 @@ namespace SR_HTYPES_NS {
         /// Делаем копию, так как в процессе удаления можем потярять this,
         /// а так же зануляем m_data, чтобы не войти в рекурсию
         SharedPtrDynamicData* pData = m_data;
-        T* pPtr = m_ptr;
+        T* pPtr = m_ptr; /// тут может быть потенциально висячий указатель.
         m_data = nullptr;
         m_ptr = nullptr;
 
@@ -256,7 +266,8 @@ namespace SR_HTYPES_NS {
             return;
         }
 
-        if (pData->strongCount <= 1) {
+        const auto strongCount = pData->strongCount;
+        if (strongCount <= 1) {
             pData->strongCount = 0;
 
             if (pData->policy == SharedPtrPolicy::Manually) {
@@ -274,7 +285,7 @@ namespace SR_HTYPES_NS {
             }
         }
         else {
-            --(pData->strongCount);
+            pData->DecrementStrong();
         }
     }
 }

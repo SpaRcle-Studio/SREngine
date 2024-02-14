@@ -96,6 +96,8 @@ namespace SR_GRAPH_NS {
 
         /// Количество вызовов Draw и подобное
         mutable uint32_t drawCalls = 0;
+        /// Количество вершин, которые были отрисованы
+        mutable uint32_t vertices = 0;
         /// Количество всех обращений к API в процессе отрисовки
         mutable uint32_t operations = 0;
 
