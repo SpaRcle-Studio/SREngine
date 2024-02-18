@@ -1,8 +1,0 @@
-//
-// Created by Monika on 16.05.2022.
-//
-
-#ifndef SR_ENGINE_COMMANDBUFFER_H
-#define SR_ENGINE_COMMANDBUFFER_H
-
-#endif //SR_ENGINE_COMMANDBUFFER_H

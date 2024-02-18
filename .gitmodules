@@ -13,12 +13,6 @@
 [submodule "Engine/Core/Dependences/Framework/Depends/imgui"]
 	path = Engine/Core/libs/Graphics/libs/imgui
 	url = https://github.com/Monika0000/imgui
-[submodule "Engine/Core/libs/Utils/libs/assimp"]
-	path = Engine/Core/libs/Utils/libs/assimp
-	url = https://github.com/Monika0000/assimp
-[submodule "Engine/Core/libs/Utils/libs/nativefiledialog"]
-	path = Engine/Core/libs/Utils/libs/nativefiledialog
-	url = https://github.com/Monika0000/nativefiledialog-extended
 [submodule "Engine/Core/libs/Audio/libs/OpenAL"]
 	path = Engine/Core/libs/Audio/libs/OpenAL
 	url = https://github.com/kcat/openal-soft
@@ -52,9 +46,3 @@
 [submodule "Engine/Core/libs/Utils/libs/libpng"]
 	path = Engine/Core/libs/Utils/libs/libpng
 	url = https://github.com/libpng/libpng
-[submodule "Engine/Core/libs/Utils/libs/FQHSA"]
-	path = Engine/Core/libs/Utils/libs/FQHSA
-	url = https://github.com/SpaRcle-Studio/FQHSA.git
-[submodule "Engine/Core/libs/Utils/libs/fmt"]
-	path = Engine/Core/libs/Utils/libs/fmt
-	url = https://github.com/SpaRcle-Studio/fmt
