@@ -46,3 +46,6 @@
 [submodule "Engine/Core/libs/Utils/libs/libpng"]
 	path = Engine/Core/libs/Utils/libs/libpng
 	url = https://github.com/libpng/libpng
+[submodule "Engine/Core/libs/Utils"]
+	path = Engine/Core/libs/Utils
+	url = https://github.com/SpaRcle-Studio/SRCommon.git
