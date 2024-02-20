@@ -32,5 +32,10 @@ int main(int argc, char** argv) {
         delete pData;
     });
 
+    auto&& pointersCount = SR_HTYPES_NS::SharedPtrDynamicDataCounter::Instance().GetCount();
+    if (pointersCount != 0) {
+        SR_PLATFORM_NS::WriteConsoleError(SR_FORMAT("Memory leaks detected! Count: {}", pointersCount));
+    }
+
     return code;
 }
