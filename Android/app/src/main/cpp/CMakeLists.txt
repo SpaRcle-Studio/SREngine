@@ -27,7 +27,6 @@ add_definitions(
     -DSR_USE_IMGUI_NODE_EDITOR
     -DSR_USE_VULKAN
     -DSR_SUPPORT_PARALLEL
-    -DSR_DLL_EXPORTS=1
     -DSR_CXX_20
 )
 
