@@ -28,6 +28,7 @@ namespace SR_CORE_GUI_NS {
         SR_NODISCARD SR_GRAPH_UI_NS::GizmoMode GetMode() const override;
 
         void OnGizmoTranslated(const SR_MATH_NS::FVector3& delta) override;
+        void OnGizmoRotated(const SR_MATH_NS::Quaternion& delta) override;
 
     private:
         Hierarchy* m_hierarchy = nullptr;

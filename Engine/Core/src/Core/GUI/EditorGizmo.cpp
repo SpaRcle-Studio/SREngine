@@ -47,6 +47,16 @@ namespace SR_CORE_GUI_NS {
         }
     }
 
+    void EditorGizmo::OnGizmoRotated(const SR_MATH_NS::Quaternion& delta) {
+        if (!m_hierarchy) {
+            return;
+        }
+
+        for (auto&& pGameObject : m_hierarchy->GetSelected()) {
+            pGameObject->GetTransform()->Rotate(delta);
+        }
+    }
+
     SR_GRAPH_UI_NS::GizmoMode EditorGizmo::GetMode() const {
         if (m_hierarchy->GetSelected().size() > 1) {
             return SR_GRAPH_UI_NS::GizmoMode::Global;

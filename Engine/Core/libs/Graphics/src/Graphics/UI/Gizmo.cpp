@@ -224,19 +224,32 @@ namespace SR_GRAPH_UI_NS {
         if (m_hoveredOperation != GizmoOperation::None && SR_UTILS_NS::Input::Instance().GetMouseDown(SR_UTILS_NS::MouseCode::MouseLeft)) {
             m_activeOperation = m_hoveredOperation;
 
-            auto&& normal = SR_MATH_NS::CalcPlanNormal(
+            auto&& translationNormal = SR_MATH_NS::CalcTranslationPlanNormal(
                     m_modelMatrix,
                     GetCamera()->GetCameraEye(),
                     GetCamera()->GetCameraDir(),
                     GetAxis()
             );
+            m_translationPlan = SR_MATH_NS::BuildPlan(m_modelMatrix.v.position, translationNormal);
+
+            if (SR_MATH_NS::IsMaskIncludedSubMask(m_activeOperation, GizmoOperation::Rotate)) {
+                auto&& rotationNormal = IsLocal() ? SR_MATH_NS::CalcRotationPlanNormal(
+                        m_modelMatrix,
+                        GetCamera()->GetCameraDir(),
+                        GetAxis()
+                ) : SR_MATH_NS::CalcRotationPlanNormal(GetCamera()->GetCameraDir(), GetAxis());
+
+                m_rotationPlan = SR_MATH_NS::BuildPlan(m_modelMatrix.v.position, rotationNormal);
+            }
 
             auto&& screenRay = GetCamera()->GetScreenRay(mousePos);
             const float_t screenFactor = GetCamera()->CalculateScreenFactor(m_modelMatrix, m_moveFactor);
 
-            m_translationPlan = SR_MATH_NS::BuildPlan(m_modelMatrix.v.position, normal);
             m_translationPlanOrigin = screenRay.IntersectPlane(m_translationPlan);
             m_relativeOrigin = (m_translationPlanOrigin - m_modelMatrix.v.position.XYZ()) * (1.f / screenFactor);
+
+            m_rotationVectorSource = screenRay.RotationVector(m_rotationPlan, m_modelMatrix.v.position.XYZ());
+            m_rotationAngleOrigin = screenRay.ComputeAngleOnPlan(m_rotationPlan, m_modelMatrix.v.position.XYZ(), m_rotationVectorSource);
         }
 
         ProcessGizmo(mousePos);
@@ -283,6 +296,20 @@ namespace SR_GRAPH_UI_NS {
 
             UpdateGizmoTransform();
         }
+
+        if (m_activeOperation & GizmoOperation::Rotate) {
+            const SR_MATH_NS::Unit rotationAngle = screenRay.ComputeAngleOnPlan(m_rotationPlan, m_modelMatrix.v.position.XYZ(), m_rotationVectorSource);
+            const SR_MATH_NS::Unit deltaAngle = rotationAngle - m_rotationAngleOrigin;
+
+            auto&& rotationAxisLocalSpace = m_modelMatrix.Inverse().TransformVector(m_rotationPlan.XYZ()).Normalize();
+
+            m_rotationVectorSource = screenRay.RotationVector(m_rotationPlan, m_modelMatrix.v.position.XYZ());
+            m_rotationAngleOrigin = screenRay.ComputeAngleOnPlan(m_rotationPlan, m_modelMatrix.v.position.XYZ(), m_rotationVectorSource);
+
+            OnGizmoRotated(SR_MATH_NS::Quaternion(rotationAxisLocalSpace.XYZ(), deltaAngle));
+
+            UpdateGizmoTransform();
+        }
     }
 
     SR_MATH_NS::AxisFlag Gizmo::GetAxis() const {
@@ -304,6 +331,10 @@ namespace SR_GRAPH_UI_NS {
 
     void Gizmo::OnGizmoTranslated(const SR_MATH_NS::FVector3& delta) {
         GetTransform()->Translate(GetTransform()->GetMatrix().GetQuat().Inverse() * delta);
+    }
+
+    void Gizmo::OnGizmoRotated(const SR_MATH_NS::Quaternion& delta) {
+        GetTransform()->Rotate(delta);
     }
 
     void Gizmo::UpdateGizmoTransform() {

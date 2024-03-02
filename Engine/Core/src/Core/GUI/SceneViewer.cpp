@@ -440,6 +440,6 @@ namespace SR_CORE_GUI_NS {
             m_gizmo->Destroy();
         }
 
-        m_gizmo.Replace(gizmo);
+        m_gizmo = gizmo;
     }
 }

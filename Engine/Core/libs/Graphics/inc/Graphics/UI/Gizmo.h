@@ -85,6 +85,7 @@ namespace SR_GRAPH_UI_NS {
         void UpdateGizmoTransform();
 
         virtual void OnGizmoTranslated(const SR_MATH_NS::FVector3& delta);
+        virtual void OnGizmoRotated(const SR_MATH_NS::Quaternion& delta);
 
         SR_NODISCARD virtual bool IsGizmoAvailable() const { return true; }
         SR_NODISCARD virtual bool IsHandledAnotherObject() const { return false; }
@@ -118,8 +119,12 @@ namespace SR_GRAPH_UI_NS {
 
         SR_MATH_NS::FVector3 m_translationPlanOrigin;
         SR_MATH_NS::FVector3 m_relativeOrigin;
+        SR_MATH_NS::FVector3 m_rotationVectorSource;
         SR_MATH_NS::FVector4 m_translationPlan;
+        SR_MATH_NS::FVector4 m_rotationPlan;
         SR_MATH_NS::Matrix4x4 m_modelMatrix;
+
+        SR_MATH_NS::Unit m_rotationAngleOrigin = 0.f;
 
     };
 }

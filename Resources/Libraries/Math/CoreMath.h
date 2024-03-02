@@ -27,7 +27,7 @@
 #define SR_ABS(x) (std::abs(x))
 #define SR_MAX(a, b) (a > b ? a : b)
 #define SR_MIN(a, b) (a < b ? a : b)
-#define SR_CLAMP(x, upper, lower) (SR_MIN(upper, SR_MAX(x, lower)))
+#define SR_CLAMP(x, lower, upper) (SR_MIN(upper, SR_MAX(x, lower)))
 #define SR_NOOP (void)0
 
 typedef float Unit;

@@ -133,7 +133,7 @@ namespace SR_GRAPH_GUI_NS {
         int32_t temp = value;
         bool changed = false;
 
-        auto&& textWidth = SR_CLAMP(ImGui::CalcTextSize(std::to_string(value).c_str()).x, 300, 150);
+        auto&& textWidth = SR_CLAMP(ImGui::CalcTextSize(std::to_string(value).c_str()).x, 150, 300);
 
         ImGui::PushItemWidth(textWidth);
 
@@ -151,7 +151,7 @@ namespace SR_GRAPH_GUI_NS {
         int32_t temp = static_cast<int32_t>(value); /// NOLINT
         bool changed = false;
 
-        auto&& textWidth = SR_CLAMP(ImGui::CalcTextSize(std::to_string(value).c_str()).x, 300, 150);
+        auto&& textWidth = SR_CLAMP(ImGui::CalcTextSize(std::to_string(value).c_str()).x, 150, 300);
 
         ImGui::PushItemWidth(textWidth);
 
@@ -193,7 +193,7 @@ namespace SR_GRAPH_GUI_NS {
             SRHalt("Unknown type!");
         }
 
-        auto&& textWidth = SR_CLAMP(ImGui::CalcTextSize(string.c_str()).x, 300, 150);
+        auto&& textWidth = SR_CLAMP(ImGui::CalcTextSize(string.c_str()).x, 150, 300);
 
         ImGui::PushItemFlag(ImGuiItemFlags_::ImGuiItemFlags_Disabled, true);
         ImGui::PushItemWidth(textWidth);
