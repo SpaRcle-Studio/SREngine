@@ -53,7 +53,13 @@ namespace SR_CORE_GUI_NS {
         }
 
         for (auto&& pGameObject : m_hierarchy->GetSelected()) {
-            pGameObject->GetTransform()->Rotate(delta);
+            if (IsLocal()) {
+                pGameObject->GetTransform()->Rotate(delta);
+            }
+            else {
+                auto&& quaternion = pGameObject->GetTransform()->GetMatrix().GetQuat();
+                pGameObject->GetTransform()->Rotate(quaternion.Inverse() * delta * quaternion);
+            }
         }
     }
 
