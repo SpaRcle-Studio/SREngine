@@ -1,8 +1,0 @@
-//
-// Created by Monika on 10.10.2022.
-//
-
-#ifndef SR_ENGINE_EDITORMASKPASS_H
-#define SR_ENGINE_EDITORMASKPASS_H
-
-#endif //SR_ENGINE_EDITORMASKPASS_H

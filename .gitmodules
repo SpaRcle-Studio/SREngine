@@ -1,15 +1,6 @@
 [submodule "Engine/Core/libs/Scripting/libs/EvoScript"]
 	path = Engine/Core/libs/Scripting/libs/EvoScript
 	url = https://github.com/Monika0000/EvoScript.git
-[submodule "Engine/Core/libs/Graphics/libs/imgui-node-editor"]
-	path = Engine/Core/libs/Graphics/libs/imgui-node-editor
-	url = https://github.com/Monika0000/imgui-node-editor
-[submodule "Engine/Core/libs/Graphics/libs/ImGuizmo"]
-	path = Engine/Core/libs/Graphics/libs/ImGuizmo
-	url = https://github.com/SpaRcle-Studio/ImGuizmo
-[submodule "Engine/Core/libs/Graphics/libs/EvoVulkan"]
-	path = Engine/Core/libs/Graphics/libs/EvoVulkan
-	url = https://github.com/Monika0000/EvoVulkan
 [submodule "Engine/Core/Dependences/Framework/Depends/imgui"]
 	path = Engine/Core/libs/Graphics/libs/imgui
 	url = https://github.com/Monika0000/imgui
@@ -25,12 +16,6 @@
 [submodule "Engine/Core/libs/Physics/libs/bullet3"]
 	path = Engine/Core/libs/Physics/libs/bullet3
 	url = https://github.com/bulletphysics/bullet3
-[submodule "Engine/Core/libs/Graphics/libs/freetype"]
-	path = Engine/Core/libs/Graphics/libs/freetype
-	url = https://github.com/SpaRcle-Studio/freetype
-[submodule "Engine/Core/libs/Graphics/libs/harfbuzz"]
-	path = Engine/Core/libs/Graphics/libs/harfbuzz
-	url = https://github.com/harfbuzz/harfbuzz
 [submodule "Engine/Core/libs/Utils/libs/icu"]
 	path = Engine/Core/libs/Utils/libs/icu
 	url = https://github.com/Monika0000/icu-cmake
@@ -40,12 +25,12 @@
 [submodule "Engine/Core/libs/Physics/libs/box2d"]
 	path = Engine/Core/libs/Physics/libs/box2d
 	url = https://github.com/Monika0000/box2d
-[submodule "Engine/Core/libs/Graphics/libs/imgui"]
-	path = Engine/Core/libs/Graphics/libs/imgui
-	url = https://github.com/Monika0000/imgui
 [submodule "Engine/Core/libs/Utils/libs/libpng"]
 	path = Engine/Core/libs/Utils/libs/libpng
 	url = https://github.com/libpng/libpng
 [submodule "Engine/Core/libs/Utils"]
 	path = Engine/Core/libs/Utils
 	url = https://github.com/SpaRcle-Studio/SRCommon.git
+[submodule "Engine/Core/libs/Graphics"]
+	path = Engine/Core/libs/Graphics
+	url = https://github.com/SpaRcle-Studio/SRRender
