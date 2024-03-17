@@ -74,4 +74,52 @@ namespace SR_CORE_GUI_NS {
     bool EditorGizmo::IsGizmoAvailable() const {
         return m_hierarchy && !m_hierarchy->GetSelected().empty();
     }
+
+    void EditorGizmo::OnGizmoScaled(const SR_MATH_NS::FVector3& delta) {
+        if (!m_hierarchy) {
+            return;
+        }
+
+        for (auto&& pGameObject : m_hierarchy->GetSelected()) {
+            auto&& pTransform = pGameObject->GetTransform();
+            if (IsLocal()) {
+                pTransform->Scale(delta);
+
+                if (pTransform->GetScale().x <= SR_BIG_EPSILON) {
+                    pTransform->SetScale(SR_MATH_NS::FVector3(SR_BIG_EPSILON, pTransform->GetScale().y, pTransform->GetScale().z));
+                }
+
+                if (pTransform->GetScale().y <= SR_BIG_EPSILON) {
+                    pTransform->SetScale(SR_MATH_NS::FVector3(pTransform->GetScale().x, SR_BIG_EPSILON, pTransform->GetScale().z));
+                }
+
+                if (pTransform->GetScale().z <= SR_BIG_EPSILON) {
+                    pTransform->SetScale(SR_MATH_NS::FVector3(pTransform->GetScale().x, pTransform->GetScale().y, SR_BIG_EPSILON));
+                }
+            }
+            else {
+                pGameObject->GetTransform()->GlobalSkew(delta);
+
+                if (pTransform->GetSkew().x <= SR_BIG_EPSILON) {
+                    pTransform->SetSkew(SR_MATH_NS::FVector3(SR_BIG_EPSILON, pTransform->GetSkew().y, pTransform->GetSkew().z));
+                }
+
+                if (pTransform->GetSkew().y <= SR_BIG_EPSILON) {
+                    pTransform->SetSkew(SR_MATH_NS::FVector3(pTransform->GetSkew().x, SR_BIG_EPSILON, pTransform->GetSkew().z));
+                }
+
+                if (pTransform->GetSkew().z <= SR_BIG_EPSILON) {
+                    pTransform->SetSkew(SR_MATH_NS::FVector3(pTransform->GetSkew().x, pTransform->GetSkew().y, SR_BIG_EPSILON));
+                }
+            }
+        }
+    }
+
+    void EditorGizmo::BeginGizmo() {
+        Gizmo::BeginGizmo();
+    }
+
+    void EditorGizmo::EndGizmo() {
+        Gizmo::EndGizmo();
+    }
 }
