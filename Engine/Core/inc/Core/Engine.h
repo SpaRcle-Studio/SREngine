@@ -20,6 +20,7 @@
 #include <Core/EngineCommands.h>
 #include <Core/EngineResources.h>
 #include <Utils/Types/SafeQueue.h>
+#include <Utils/Localization/LocalizationManager.h>
 
 namespace SR_GRAPH_NS {
     class Window;
@@ -124,6 +125,8 @@ namespace SR_CORE_NS {
 
         EngineScene* m_engineScene = nullptr;
         Application* m_application = nullptr;
+
+        SR_UTILS_NS::Localization::LocalizationManager* m_localizationManager = nullptr;
 
         SR_CORE_GUI_NS::EditorGUI* m_editor = nullptr;
 

@@ -16,7 +16,7 @@
 #include <Utils/ResourceManager/ResourceManager.h>
 #include <Utils/Common/AnyVisitor.h>
 #include <Utils/Game/LookAtComponent.h>
-#include <Utils/Locale/Encoding.h>
+#include <Utils/Localization/Encoding.h>
 #include <Utils/FileSystem/FileDialog.h>
 
 #include <Scripting/Base/Behaviour.h>
@@ -438,7 +438,7 @@ namespace SR_CORE_NS::GUI {
             pComponent->SetDebug(debug);
         }
 
-        auto&& text = SR_UTILS_NS::Locale::UtfToUtf<char, char32_t>(pComponent->GetText());
+        auto&& text = SR_UTILS_NS::Localization::UtfToUtf<char, char32_t>(pComponent->GetText());
 
         if (ImGui::InputTextMultiline(SR_FORMAT_C("##textBox{}", index), &text, ImVec2(ImGui::GetWindowWidth() - 10, 100))) {
             pComponent->SetText(text);

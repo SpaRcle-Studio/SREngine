@@ -11,7 +11,7 @@
 #include <Utils/ResourceManager/ResourceManager.h>
 #include <Utils/SRLM/LogicalNodeManager.h>
 #include <Utils/SRLM/DataTypeManager.h>
-#include <Utils/Locale/Encoding.h>
+#include <Utils/Localization/Encoding.h>
 #include <Utils/Platform/Platform.h>
 #include <Utils/ECS/LayerManager.h>
 
@@ -31,7 +31,7 @@ namespace SR_CORE_NS {
     }
 
     bool Application::PreInit(int argc, char** argv) {
-        SR_UTILS_NS::Locale::SetLocale();
+        SR_UTILS_NS::Localization::SetLocale();
         SR_UTILS_NS::Random::Initialize();
         SR_PLATFORM_NS::InitSegmentationHandler();
 

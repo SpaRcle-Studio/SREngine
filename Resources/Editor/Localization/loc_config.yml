@@ -1,0 +1,7 @@
+editor: #LocalizationGroup id
+    main: #LocalizationFile
+        en: "Localization/english/editor.yml" #english locale path
+        ru: "Localization/russian/editor.yml"
+    test:
+        en: "Localization/english/test.yml"
+        ru: "Localization/russian/test.yml"
