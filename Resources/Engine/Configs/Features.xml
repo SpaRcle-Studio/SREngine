@@ -12,7 +12,7 @@
        <ColorBufferPick Value="true"/>
 
        <CrashHandler Value="false"/>
-       <SegmentationHandler Value="true"/>
+       <SegmentationHandler Value="false"/>
 
        <Gizmo Value="true"/>
        <Tracy Value="false"/>

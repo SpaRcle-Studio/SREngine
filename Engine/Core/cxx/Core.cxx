@@ -26,4 +26,6 @@
 #include "../src/Core/EngineResources.cpp"
 #include "../src/Core/EngineMigrators.cpp"
 
+#include "../src/Core/Tests/TestManager.cpp"
+
 #include "../src/Core/Utils/GraphicsResourceReloader.cpp"
