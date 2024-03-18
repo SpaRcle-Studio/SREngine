@@ -51,7 +51,7 @@ namespace SR_CORE_NS {
                 pContext.Unlock();
             }
             else {
-                SR_ERROR("InitializeScene() : failed to get window context!");
+                SR_ERROR("InitializeScene() : failed to get render context!");
                 return false;
             }
 

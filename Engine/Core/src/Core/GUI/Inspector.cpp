@@ -156,11 +156,11 @@ namespace SR_CORE_GUI_NS {
             if (*selected.begin() != m_gameObject) {
                 ResetWeakStorage();
             }
-            m_gameObject.Replace(*selected.begin());
+            m_gameObject = *selected.begin();
             SRAssert(m_gameObject);
         }
         else {
-            m_gameObject.Replace(SR_UTILS_NS::GameObject::Ptr());
+            m_gameObject = SR_UTILS_NS::GameObject::Ptr();
         }
     }
 

@@ -36,7 +36,7 @@
 
 namespace SR_CORE_NS {
     Engine::Engine(Application* pApplication)
-        : Super(this)
+        : Super(this, SR_UTILS_NS::SharedPtrPolicy::Automatic)
         , m_application(pApplication)
     { }
 
@@ -88,8 +88,11 @@ namespace SR_CORE_NS {
         ///TEST
 
         m_cmdManager = new SR_UTILS_NS::CmdManager();
-        m_input      = new SR_UTILS_NS::InputDispatcher();
-        m_editor     = new SR_CORE_GUI_NS::EditorGUI(GetThis());
+        m_input = new SR_UTILS_NS::InputDispatcher();
+
+        if (SR_UTILS_NS::Features::Instance().Enabled("Editor")) {
+            m_editor = new SR_CORE_GUI_NS::EditorGUI(GetThis());
+        }
 
         m_worldTimer = SR_HTYPES_NS::Timer(1u);
 
@@ -101,13 +104,16 @@ namespace SR_CORE_NS {
         SR_INFO("Engine::Create() : creating game engine...");
 
         m_input->Register(&Graphics::GUI::GlobalWidgetManager::Instance());
-        m_input->Register(m_editor);
+
+        if (m_editor) {
+            m_input->Register(m_editor);
+        }
 
         SetGameMode(!SR_UTILS_NS::Features::Instance().Enabled("EditorOnStartup", false));
 
         m_autoReloadResources = SR_UTILS_NS::Features::Instance().Enabled("AutoReloadResources", false);
 
-        if (!m_engineScene && !m_editor->LoadSceneFromCachedPath()) {
+        if (!m_engineScene && (m_editor && !m_editor->LoadSceneFromCachedPath())) {
             auto&& scenePath = SR_WORLD_NS::Scene::NewScenePath.ConcatExt("scene");
 
             if (SR_WORLD_NS::Scene::IsExists(scenePath)) {
@@ -248,7 +254,7 @@ namespace SR_CORE_NS {
 
             SR_UTILS_NS::ResourceManager::Instance().Synchronize(true);
 
-            while (!m_renderContext->IsEmpty()) {
+            while (m_renderContext && !m_renderContext->IsEmpty()) {
                 SR_TRACY_ZONE_N("Sync free resources iteration");
 
                 SR_SYSTEM_LOG("Engine::SynchronizeFreeResources() : synchronizing resources (step " + std::to_string(++syncStep) + ")");
@@ -605,18 +611,22 @@ namespace SR_CORE_NS {
     void Engine::SetGameMode(bool enabled) {
         m_isGameMode = enabled;
 
-        if (m_isGameMode) {
-            m_editor->HideAll();
-        }
-        else {
-            m_editor->ShowAll();
+        if (m_editor) {
+            if (m_isGameMode) {
+                m_editor->HideAll();
+            }
+            else {
+                m_editor->ShowAll();
+            }
         }
 
         if (m_engineScene) {
             m_engineScene->SetGameMode(m_isGameMode);
         }
 
-        m_editor->Enable(!m_isGameMode);
+        if (m_editor) {
+            m_editor->Enable(!m_isGameMode);
+        }
     }
 
     bool Engine::IsNeedReloadResources() {

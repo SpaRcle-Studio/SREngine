@@ -137,6 +137,13 @@ namespace SR_CORE_GUI_NS {
         float_t velocityFactor = m_guizmo->GetCameraVelocityFactor();
         m_velocity *= 0.8f;
 
+        /// if (SR_UTILS_NS::Input::Instance().GetKeyUp(SR_UTILS_NS::KeyCode::F)) {
+        ///     if (m_camera) {
+        ///         const auto pCamera = m_camera;
+        ///         pCamera->Destroy();
+        ///     }
+        /// }
+
         if (!m_velocity.Empty() && m_camera) {
             m_camera->GetTransform()->Translate(m_velocity);
         }
@@ -271,7 +278,7 @@ namespace SR_CORE_GUI_NS {
             m_camera->Destroy();
         }
 
-        m_camera.Replace(camera);
+        m_camera = camera;
 
         BackupCameraSettings();
     }
@@ -419,6 +426,10 @@ namespace SR_CORE_GUI_NS {
     }
 
     void SceneViewer::SetGizmoEnabled(bool enabled) {
+        if (!SR_UTILS_NS::Features::Instance().Enabled("Gizmo", true)) {
+            return;
+        }
+
         SR_UTILS_NS::GameObject::Ptr gizmo;
 
         if (enabled) {

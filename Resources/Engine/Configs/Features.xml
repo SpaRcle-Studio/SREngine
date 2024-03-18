@@ -12,11 +12,15 @@
        <ColorBufferPick Value="true"/>
 
        <CrashHandler Value="false"/>
+       <SegmentationHandler Value="true"/>
 
+       <Gizmo Value="true"/>
        <Tracy Value="false"/>
+       <FileWatching Value="true"/>
 
        <ChunkSystem Value="true"/>
 
+       <Editor Value="true"/>
        <EditorOnStartup Value="true"/>
        <EditorCamera Value="true"/>
        <EditorWidgetsDocking Value="true"/>

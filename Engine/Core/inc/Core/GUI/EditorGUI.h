@@ -101,7 +101,7 @@ namespace SR_CORE_GUI_NS {
         SR_NODISCARD bool IsDockingEnabled() const { return m_useDocking; }
         SR_NODISCARD void* GetIconDescriptor(EditorIcon icon) const;
         SR_NODISCARD SR_GTYPES_NS::Texture* GetIcon(EditorIcon icon) const;
-        SR_NODISCARD EnginePtr GetEngine() const { return m_engine; }
+        SR_NODISCARD const EnginePtr& GetEngine() const { return m_engine; }
 
         void SetDockingEnabled(bool value) { m_useDocking = value; }
 

@@ -14,6 +14,7 @@
 #include <Utils/Localization/Encoding.h>
 #include <Utils/Platform/Platform.h>
 #include <Utils/ECS/LayerManager.h>
+#include <Utils/Tests/SharedPtrAutotests.h>
 
 #include <Graphics/GUI/NodeManager.h>
 
@@ -33,7 +34,6 @@ namespace SR_CORE_NS {
     bool Application::PreInit(int argc, char** argv) {
         SR_UTILS_NS::Localization::SetLocale();
         SR_UTILS_NS::Random::Initialize();
-        SR_PLATFORM_NS::InitSegmentationHandler();
 
         m_applicationPath = SR_PLATFORM_NS::GetApplicationPath().GetFolder();
 
@@ -133,6 +133,10 @@ namespace SR_CORE_NS {
         SR_UTILS_NS::Features::Instance().SetPath(m_resourcesPath.Concat("Engine/Configs/Features.xml"));
         SR_UTILS_NS::Features::Instance().Reload();
 
+        if (SR_UTILS_NS::Features::Instance().Enabled("SegmentationHandler", false)) {
+            SR_PLATFORM_NS::InitSegmentationHandler();
+        }
+
         if (SR_UTILS_NS::Features::Instance().Enabled("DisableStackTrace", false)) {
             SR_UTILS_NS::DisableStacktrace();
         }
@@ -219,6 +223,8 @@ namespace SR_CORE_NS {
             pEngine->Close();
             delete pEngine;
         });
+
+        SR_UTILS_NS::ComponentManager::Instance().SetContextInitializer(SR_HTYPES_NS::Function<void(SR_HTYPES_NS::DataStorage&)>());
 
         SR_SRLM_NS::DataTypeManager::DestroySingleton();
 

@@ -367,6 +367,10 @@ namespace SR_CORE_GUI_NS {
             return;
         }
 
+        if (scenePath.Empty()) {
+            return;
+        }
+
         auto&& pMarshal = new SR_HTYPES_NS::Marshal();
 
         pMarshal->Write<std::string>(scenePath.ToString());
@@ -385,6 +389,10 @@ namespace SR_CORE_GUI_NS {
 
         auto&& marshal = SR_HTYPES_NS::Marshal::Load(m_cachedScenePath);
         SR_UTILS_NS::Path scenePath = marshal.Read<std::string>();
+
+        if (scenePath.Empty()) {
+            return false;
+        }
 
         if (scenePath.ToStringView() == "NONE") {
             SR_LOG("EditorGUI::LoadSceneFromCachedPath() : cached scene path is \"NONE\". No scene to load.");

@@ -13,7 +13,9 @@ namespace SR_PTYPES_NS {
         , m_bounds(SR_MATH_NS::FVector3::One())
     { }
 
-    CollisionShape::~CollisionShape() = default;
+    CollisionShape::~CollisionShape() {
+        m_properties.ClearContainer();
+    }
 
     void CollisionShape::UpdateDebugShape() {
         if (!m_rigidbody || !m_rigidbody->IsDebugEnabled()) {

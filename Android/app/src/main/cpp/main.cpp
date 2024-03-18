@@ -304,7 +304,7 @@ void android_main(struct android_app* state) {
         code = -3;
     }
 
-    pApplication->AutoFree([](auto&& pData) {
+    pApplication.AutoFree([](auto&& pData) {
         delete pData;
     });
 
