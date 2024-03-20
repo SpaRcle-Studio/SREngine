@@ -39,6 +39,7 @@ It aims to establish a strong base for game creation and is currently in the ear
  * dev - active development branch 
  * features/* - branches for new features
  * tmp/* - temporary branches for dangerous experiments
+ * release/* - branches for release candidates
 
 ## Building  
  > [!IMPORTANT]
