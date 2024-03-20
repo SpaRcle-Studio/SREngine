@@ -219,8 +219,11 @@ namespace SR_CORE_NS {
     }
 
     void Application::Close() {
+        if (m_engine) {
+            m_engine->Close();
+        }
+
         m_engine.AutoFree([](auto&& pEngine) {
-            pEngine->Close();
             delete pEngine;
         });
 
