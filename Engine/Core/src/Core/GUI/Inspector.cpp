@@ -95,7 +95,7 @@ namespace SR_CORE_GUI_NS {
                 m_gameObject->SetTag(tag);
             });
 
-            InspectLayer(m_gameObject->GetLayer(), [this](auto&& tag) {
+            InspectLayer(m_gameObject->GetLocalLayer(), [this](auto&& tag) {
                 m_gameObject->SetLayer(tag);
             });
 

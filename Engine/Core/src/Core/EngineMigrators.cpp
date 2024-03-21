@@ -231,7 +231,7 @@ namespace SR_CORE_NS {
             migrated.Write<bool>(marshal.Read<bool>()); /// enabled
             migrated.Write<std::string>(marshal.Read<std::string>()); /// name
             migrated.Write<uint64_t>(marshal.Read<uint64_t>()); /// tag
-            migrated.Write<uint64_t>(SR_UTILS_NS::LayerManager::Instance().GetDefaultLayer().GetHash()); /// layer
+            migrated.Write<uint64_t>(SR_UTILS_NS::LayerManager::GetDefaultLayer().GetHash()); /// layer
 
             /// -------------------- меня наняли дублировать длинные строки потому что я люблю большие длинные прямые комментарии, состоящие исключительно из тире.
             migrated.Stream::Write(marshal.Stream::View() + marshal.GetPosition(), marshal.Size() - marshal.GetPosition());
