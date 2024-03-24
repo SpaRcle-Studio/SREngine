@@ -2,9 +2,12 @@
 // Created by Nikita on 19.07.2021.
 //
 
+#include <Core/Engine.h>
+
+#include <Core/Settings/EditorSettings.h>
+
 #include <Core/GUI/EditorGUI.h>
 #include <Core/GUI/AnimatorEditor.h>
-#include <Core/Engine.h>
 #include <Core/GUI/Inspector.h>
 #include <Core/GUI/VisualScriptEditor.h>
 #include <Core/GUI/WorldEdit.h>
@@ -16,7 +19,7 @@
 #include <Core/GUI/RenderTechniqueEditor.h>
 #include <Core/GUI/FileBrowser.h>
 #include <Core/GUI/About.h>
-#include <Core/Settings/EditorSettings.h>
+#include <Core/GUI/SceneTools.h>
 
 #include <Utils/Common/Features.h>
 #include <Utils/ECS/Prefab.h>
@@ -73,6 +76,7 @@ namespace SR_CORE_GUI_NS {
 		AddWidget(new PhysicsMaterialEditor());
 		AddWidget(new About());
         AddWidget(new RenderTechniqueEditor());
+        AddWidget(new SceneTools());
 
         for (auto& [id, widget] : m_widgets) {
             Register(widget);
@@ -135,6 +139,10 @@ namespace SR_CORE_GUI_NS {
         }
         else {
             m_dragWindow = false;
+        }
+
+        if (m_imGuiDemo) {
+            ImGui::ShowDemoWindow(&m_imGuiDemo);
         }
 
         WidgetManager::Draw();
@@ -222,7 +230,7 @@ namespace SR_CORE_GUI_NS {
             }
         }
 
-        ImGui::DockSpace(dockMain);
+        ImGui::DockSpace(dockMain, ImVec2(0.0f, 0.0f), ImGuiDockNodeFlags_None);
         ImGui::End();
         ImGui::PopStyleVar(3);
     }
@@ -656,8 +664,20 @@ namespace SR_CORE_GUI_NS {
 
             ImGui::Separator();
 
+            if (ImGui::MenuItem("Scene tools")) {
+                OpenWidget<SceneTools>();
+            }
+
+            ImGui::Separator();
+
             if (ImGui::MenuItem("Render Technique")) {
                 OpenWidget<RenderTechniqueEditor>();
+            }
+
+            ImGui::Separator();
+
+            if (ImGui::MenuItem("ImGui Demo Window")) {
+                m_imGuiDemo = true;
             }
 
             ImGui::Separator();

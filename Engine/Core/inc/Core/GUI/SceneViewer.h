@@ -74,7 +74,6 @@ namespace SR_CORE_GUI_NS {
 
         bool m_isPrefab = false;
         Hierarchy* m_hierarchy = nullptr;
-        Guizmo* m_guizmo = nullptr;
         int32_t m_id = SR_ID_INVALID;
         GameObjectPtr m_camera;
         GameObjectPtr m_gizmo;

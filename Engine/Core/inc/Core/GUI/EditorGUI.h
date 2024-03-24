@@ -151,6 +151,8 @@ namespace SR_CORE_GUI_NS {
         std::atomic<bool> m_useDocking = true;
         std::atomic<bool> m_dragWindow = false;
 
+        bool m_imGuiDemo = false;
+
     };
 }
 

@@ -26,31 +26,6 @@ namespace SR_CORE_NS::Resources {
     bool RegisterResources(const SR_HTYPES_NS::SharedPtr<Engine>& pEngine) {
         auto&& resourcesManager = SR_UTILS_NS::ResourceManager::Instance();
 
-        resourcesManager.RegisterType<SR_HTYPES_NS::RawMesh>();
-        resourcesManager.RegisterType<SR_UTILS_NS::Settings>();
-        resourcesManager.RegisterType<SR_UTILS_NS::Prefab>();
-
-        resourcesManager.RegisterType<SR_SRLM_NS::LogicalMachine>();
-
-        resourcesManager.RegisterType<SR_GTYPES_NS::Mesh>();
-        resourcesManager.RegisterType<SR_GTYPES_NS::Texture>();
-        resourcesManager.RegisterType<SR_GTYPES_NS::Material>();
-        resourcesManager.RegisterType<SR_GTYPES_NS::Shader>();
-        resourcesManager.RegisterType<SR_GTYPES_NS::Skybox>();
-        resourcesManager.RegisterType<SR_GTYPES_NS::Framebuffer>();
-        resourcesManager.RegisterType<SR_GTYPES_NS::Font>();
-
-        resourcesManager.RegisterType<SR_SCRIPTING_NS::EvoBehaviour>();
-
-        resourcesManager.RegisterType<SR_AUDIO_NS::Sound>();
-        resourcesManager.RegisterType<SR_AUDIO_NS::RawSound>();
-
-        resourcesManager.RegisterType<SR_ANIMATIONS_NS::AnimationClip>();
-
-        resourcesManager.RegisterType<SR_PTYPES_NS::PhysicsMaterial>();
-
-        /// ------------------------------------------------------------------------------------------------------------
-
         resourcesManager.RegisterReloader<SR_SCRIPTING_NS::EvoBehaviour, SR_SCRIPTING_NS::EvoScriptResourceReloader>();
 
         const auto contextGetter = [pEngine]() -> SR_GRAPH_NS::RenderContext::Ptr {

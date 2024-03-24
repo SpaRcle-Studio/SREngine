@@ -26,15 +26,13 @@ namespace SR_CORE_GUI_NS {
         , m_engine(pEngine)
         , m_window(pEngine->GetWindow())
         , m_hierarchy(hierarchy)
-        , m_guizmo(new Guizmo(pEngine))
-        , m_id(-1)
+        , m_id(SR_ID_INVALID)
     {
         LoadCameraSettings();
     }
 
     SceneViewer::~SceneViewer() {
         Enable(false);
-        SR_SAFE_DELETE_PTR(m_guizmo);
     }
 
     void SceneViewer::Draw() {
@@ -66,11 +64,7 @@ namespace SR_CORE_GUI_NS {
 
             auto pCamera = m_camera->GetComponent<SR_GTYPES_NS::Camera>();
 
-            if (auto&& pFrameBuffer = GetContext()->FindFramebuffer("SceneViewFBO", pCamera)) {
-                m_id = pFrameBuffer->GetColorTexture(0);
-            }
-
-            m_guizmo->DrawTools(); /// Отрисовка панели с переключателями
+            ///////////////////////////////////////// m_guizmo->DrawTools(); /// Отрисовка панели с переключателями
 
             ImGui::BeginGroup();
 
@@ -82,16 +76,17 @@ namespace SR_CORE_GUI_NS {
 
                 if (!UpdateViewSize() && pCamera && m_id != SR_ID_INVALID && pCamera->IsActive())
                 {
-                    if (m_guizmo->GetViewMode() == EditorSceneViewMode::WindowSize) {
-                        DrawTexture(m_windowSize, m_window->GetSize().Cast<int32_t>(), m_id, true);
-                    }
-                    else {
-                        DrawTexture(m_windowSize, m_windowSize, m_id, true);
-                    }
+                    DrawTexture(m_windowSize, m_windowSize, m_id, true);
+                    /// if (m_guizmo->GetViewMode() == EditorSceneViewMode::WindowSize) {
+                    ///     DrawTexture(m_windowSize, m_window->GetSize().Cast<int32_t>(), m_id, true);
+                    /// }
+                    /// else {
+                    ///     DrawTexture(m_windowSize, m_windowSize, m_id, true);
+                    /// }
 
-                    if (auto&& selected = m_hierarchy->GetSelected(); selected.size() == 1) {
-                        m_guizmo->Draw(*selected.begin(), m_camera);
-                    }
+                    /// if (auto&& selected = m_hierarchy->GetSelected(); selected.size() == 1) {
+                    ///     m_guizmo->Draw(*selected.begin(), m_camera);
+                    /// }
 
                     CheckFocused();
                     CheckHovered();
@@ -100,6 +95,10 @@ namespace SR_CORE_GUI_NS {
             }
 
             ImGui::EndGroup();
+
+            if (auto&& pFrameBuffer = GetContext()->FindFramebuffer("SceneViewFBO", pCamera)) {
+                m_id = pFrameBuffer->GetColorTexture(0);
+            }
 
             m_camera.Unlock();
         }
@@ -134,7 +133,7 @@ namespace SR_CORE_GUI_NS {
     }
 
     void SceneViewer::FixedUpdate() {
-        float_t velocityFactor = m_guizmo->GetCameraVelocityFactor();
+        float_t velocityFactor = 1.f; ////////////////////////////////////////////////////////////////// m_guizmo->GetCameraVelocityFactor();
         m_velocity *= 0.8f;
 
         /// if (SR_UTILS_NS::Input::Instance().GetKeyUp(SR_UTILS_NS::KeyCode::F)) {
@@ -292,12 +291,12 @@ namespace SR_CORE_GUI_NS {
     }
 
     void SceneViewer::OnKeyDown(const SR_UTILS_NS::KeyboardInputData* data) {
-        m_guizmo->OnKeyDown(data);
+        ////////////////// m_guizmo->OnKeyDown(data);
         Widget::OnKeyDown(data);
     }
 
     void SceneViewer::OnKeyPress(const SR_UTILS_NS::KeyboardInputData* data) {
-        m_guizmo->OnKeyPress(data);
+        ////////////////////// m_guizmo->OnKeyPress(data);
         Widget::OnKeyPress(data);
     }
 
@@ -311,7 +310,7 @@ namespace SR_CORE_GUI_NS {
             return;
         }
 
-        if (data->m_code != SR_UTILS_NS::MouseCode::MouseLeft || m_guizmo->IsUse()) {
+        if (data->m_code != SR_UTILS_NS::MouseCode::MouseLeft) { //////////////////////////////////////  || m_guizmo->IsUse()
             Super::OnMouseUp(data);
             return;
         }
@@ -371,28 +370,32 @@ namespace SR_CORE_GUI_NS {
     }
 
     bool SceneViewer::UpdateViewSize() {
-        if (!m_guizmo) {
-            return false;
-        }
+        ///////////////////////////////////////////////////// if (!m_guizmo) {
+        /////////////////////////////////////////////////////     return false;
+        ///////////////////////////////////////////////////// }
 
-        auto pCamera = m_camera->GetComponent<SR_GTYPES_NS::Camera>();
+        auto&& pCamera = m_camera->GetComponent<SR_GTYPES_NS::Camera>();
         if (!pCamera) {
             return false;
         }
 
-        if (m_guizmo->GetViewMode() == EditorSceneViewMode::WindowSize) {
+        EditorSceneViewMode viewMode = EditorSceneViewMode::FreeAspect; ////////////// m_guizmo->GetViewMode();
+
+        if (viewMode == EditorSceneViewMode::WindowSize) {
             if (pCamera->GetSize() == GetContext()->GetWindowSize()) {
                 return false;
             }
 
+            m_id = SR_ID_INVALID;
             pCamera->UpdateProjection(GetContext()->GetWindowSize().x, GetContext()->GetWindowSize().y);
             return true;
         }
-        else if (m_guizmo->GetViewMode() == EditorSceneViewMode::FreeAspect) {
+        else if (viewMode == EditorSceneViewMode::FreeAspect) {
             if (pCamera->GetSize() == m_windowSize) {
                 return false;
             }
 
+            m_id = SR_ID_INVALID;
             pCamera->UpdateProjection(m_windowSize.x, m_windowSize.y);
             return true;
         }

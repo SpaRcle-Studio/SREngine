@@ -43,6 +43,7 @@
        <Vehicles Value="true"/>
 
        <LoadSkybox Value="false"/>
+       <Multisampling Value="true"/>
        <SkyboxCPUUsage Value="false"/>
        <VulkanValidation Value="true"/>
        <MultiRenderTargets Value="false"/>

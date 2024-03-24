@@ -26,6 +26,7 @@ namespace SR_CORE_NS {
         void Reload();
 
     private:
+        bool InitResourceTypes();
         bool InitLogger();
         bool FindResourcesFolder();
         void TryPlayStartSound();

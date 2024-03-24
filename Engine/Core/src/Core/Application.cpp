@@ -15,11 +15,26 @@
 #include <Utils/Platform/Platform.h>
 #include <Utils/ECS/LayerManager.h>
 #include <Utils/Tests/SharedPtrAutotests.h>
+#include <Utils/Types/RawMesh.h>
+#include <Utils/SRLM/LogicalMachine.h>
 
 #include <Graphics/GUI/NodeManager.h>
+#include <Graphics/Types/Shader.h>
+#include <Graphics/Font/Font.h>
+#include <Graphics/Types/Skybox.h>
+#include <Graphics/Types/Texture.h>
+#include <Graphics/Types/Framebuffer.h>
+#include <Graphics/Animations/AnimationClip.h>
 
 #include <Audio/Sound.h>
 #include <Audio/SoundManager.h>
+#include <Audio/RawSound.h>
+
+#include <Scripting/Base/Behaviour.h>
+#include <Scripting/Impl/EvoScriptResourceReloader.h>
+#include <Scripting/Impl/EvoBehaviour.h>
+
+#include <Physics/PhysicsMaterial.h>
 
 namespace SR_CORE_NS {
     Application::Application()
@@ -152,6 +167,13 @@ namespace SR_CORE_NS {
             return false;
         }
 
+        if (!InitResourceTypes()) {
+            SR_ERROR("Application::Init() : failed to initialize resource types!");
+            return false;
+        }
+
+        SR_LOG("Application::Init() : loaded {} tags.", SR_UTILS_NS::TagManager::Instance().GetTags().size());
+
         SR_SRLM_NS::LogicalNodeManager::Instance().InitializeTypes();
 
         SR_WORLD_NS::SceneAllocator::Instance().Init([]() -> SR_WORLD_NS::Scene* {
@@ -261,5 +283,34 @@ namespace SR_CORE_NS {
     void Application::Reload() {
         m_isNeedReload = true;
         m_isNeedPlaySound = true;
+    }
+
+    bool Application::InitResourceTypes() {
+        auto&& resourcesManager = SR_UTILS_NS::ResourceManager::Instance();
+
+        resourcesManager.RegisterType<SR_HTYPES_NS::RawMesh>();
+        resourcesManager.RegisterType<SR_UTILS_NS::Settings>();
+        resourcesManager.RegisterType<SR_UTILS_NS::Prefab>();
+
+        resourcesManager.RegisterType<SR_SRLM_NS::LogicalMachine>();
+
+        resourcesManager.RegisterType<SR_GTYPES_NS::Mesh>();
+        resourcesManager.RegisterType<SR_GTYPES_NS::Texture>();
+        resourcesManager.RegisterType<SR_GTYPES_NS::Material>();
+        resourcesManager.RegisterType<SR_GTYPES_NS::Shader>();
+        resourcesManager.RegisterType<SR_GTYPES_NS::Skybox>();
+        resourcesManager.RegisterType<SR_GTYPES_NS::Framebuffer>();
+        resourcesManager.RegisterType<SR_GTYPES_NS::Font>();
+
+        resourcesManager.RegisterType<SR_SCRIPTING_NS::EvoBehaviour>();
+
+        resourcesManager.RegisterType<SR_AUDIO_NS::Sound>();
+        resourcesManager.RegisterType<SR_AUDIO_NS::RawSound>();
+
+        resourcesManager.RegisterType<SR_ANIMATIONS_NS::AnimationClip>();
+
+        resourcesManager.RegisterType<SR_PTYPES_NS::PhysicsMaterial>();
+
+        return true;
     }
 }
