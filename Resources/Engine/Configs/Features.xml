@@ -20,6 +20,7 @@
 
        <ChunkSystem Value="true"/>
 
+       <ImGUI Value="true"/>
        <Editor Value="true"/>
        <EditorOnStartup Value="true"/>
        <EditorCamera Value="true"/>
@@ -49,6 +50,5 @@
        <MultiRenderTargets Value="false"/>
        <SingleUBOIdentifierMode Value="false"/>
        <Undocking Value="true"/>
-       <ImGUI Value="true"/>
    </Common>
 </Features>
