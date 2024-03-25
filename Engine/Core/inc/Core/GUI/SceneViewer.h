@@ -8,7 +8,7 @@
 #include <Utils/ECS/GameObject.h>
 #include <Utils/World/Scene.h>
 
-namespace SR_GRAPH_NS::Types {
+namespace SR_GTYPES_NS {
     class Camera;
 }
 
@@ -19,6 +19,7 @@ namespace SR_GRAPH_NS {
 namespace SR_CORE_GUI_NS {
     class Hierarchy;
     class Guizmo;
+    class SceneTools;
 
     class SR_DLL_EXPORT SceneViewer : public SR_GRAPH_GUI_NS::Widget {
         using Super = SR_GRAPH_GUI_NS::Widget;
@@ -27,7 +28,8 @@ namespace SR_CORE_GUI_NS {
         using EnginePtr = SR_HTYPES_NS::SharedPtr<Engine>;
         SR_INLINE_STATIC const std::string CAMERA_XML = "Editor/Camera.xml";
     public:
-        explicit SceneViewer(const EnginePtr& pEngine, Hierarchy* hierarchy);
+        SceneViewer() = default;
+        SceneViewer(const EnginePtr& pEngine, Hierarchy* hierarchy);
         ~SceneViewer() override;
 
     public:
@@ -46,6 +48,8 @@ namespace SR_CORE_GUI_NS {
         SR_NODISCARD GameObjectPtr GetGizmo() const { return m_gizmo; }
 
     private:
+        SR_NODISCARD SR_CORE_GUI_NS::SceneTools* GetSceneTools() const;
+
         void SelectMesh(SR_GTYPES_NS::MeshComponent* pMesh);
 
         void LoadCameraSettings();

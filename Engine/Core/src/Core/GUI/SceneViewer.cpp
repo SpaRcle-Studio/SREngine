@@ -29,6 +29,7 @@ namespace SR_CORE_GUI_NS {
         , m_id(SR_ID_INVALID)
     {
         LoadCameraSettings();
+        AddSubWidget(new SceneTools());
     }
 
     SceneViewer::~SceneViewer() {
@@ -64,9 +65,11 @@ namespace SR_CORE_GUI_NS {
 
             auto pCamera = m_camera->GetComponent<SR_GTYPES_NS::Camera>();
 
-            ///////////////////////////////////////// m_guizmo->DrawTools(); /// Отрисовка панели с переключателями
-
             ImGui::BeginGroup();
+
+            for (auto&& pSubWidget : m_subWidgets) {
+                pSubWidget->DrawAsSubWindow();
+            }
 
             ImGui::Separator();
 
@@ -76,17 +79,12 @@ namespace SR_CORE_GUI_NS {
 
                 if (!UpdateViewSize() && pCamera && m_id != SR_ID_INVALID && pCamera->IsActive())
                 {
-                    DrawTexture(m_windowSize, m_windowSize, m_id, true);
-                    /// if (m_guizmo->GetViewMode() == EditorSceneViewMode::WindowSize) {
-                    ///     DrawTexture(m_windowSize, m_window->GetSize().Cast<int32_t>(), m_id, true);
-                    /// }
-                    /// else {
-                    ///     DrawTexture(m_windowSize, m_windowSize, m_id, true);
-                    /// }
-
-                    /// if (auto&& selected = m_hierarchy->GetSelected(); selected.size() == 1) {
-                    ///     m_guizmo->Draw(*selected.begin(), m_camera);
-                    /// }
+                    if (GetSceneTools()->GetViewMode() == EditorSceneViewMode::WindowSize) {
+                        DrawTexture(m_windowSize, m_window->GetSize().Cast<int32_t>(), m_id, true);
+                    }
+                    else {
+                        DrawTexture(m_windowSize, m_windowSize, m_id, true);
+                    }
 
                     CheckFocused();
                     CheckHovered();
@@ -133,15 +131,8 @@ namespace SR_CORE_GUI_NS {
     }
 
     void SceneViewer::FixedUpdate() {
-        float_t velocityFactor = 1.f; ////////////////////////////////////////////////////////////////// m_guizmo->GetCameraVelocityFactor();
+        float_t velocityFactor = GetSceneTools()->GetCameraVelocityFactor();
         m_velocity *= 0.8f;
-
-        /// if (SR_UTILS_NS::Input::Instance().GetKeyUp(SR_UTILS_NS::KeyCode::F)) {
-        ///     if (m_camera) {
-        ///         const auto pCamera = m_camera;
-        ///         pCamera->Destroy();
-        ///     }
-        /// }
 
         if (!m_velocity.Empty() && m_camera) {
             m_camera->GetTransform()->Translate(m_velocity);
@@ -370,16 +361,12 @@ namespace SR_CORE_GUI_NS {
     }
 
     bool SceneViewer::UpdateViewSize() {
-        ///////////////////////////////////////////////////// if (!m_guizmo) {
-        /////////////////////////////////////////////////////     return false;
-        ///////////////////////////////////////////////////// }
-
         auto&& pCamera = m_camera->GetComponent<SR_GTYPES_NS::Camera>();
         if (!pCamera) {
             return false;
         }
 
-        EditorSceneViewMode viewMode = EditorSceneViewMode::FreeAspect; ////////////// m_guizmo->GetViewMode();
+        EditorSceneViewMode viewMode = GetSceneTools()->GetViewMode();
 
         if (viewMode == EditorSceneViewMode::WindowSize) {
             if (pCamera->GetSize() == GetContext()->GetWindowSize()) {
@@ -446,6 +433,8 @@ namespace SR_CORE_GUI_NS {
             }
 
             auto&& pComponent = SR_UTILS_NS::ComponentManager::Instance().CreateComponent<EditorGizmo>();
+            pComponent->SetOperation(GetSceneTools()->GetGizmoOperation());
+            pComponent->SetMode(GetSceneTools()->GetGizmoMode());
             pComponent->SetHierarchy(m_hierarchy);
             gizmo->AddComponent(pComponent);
         }
@@ -455,5 +444,15 @@ namespace SR_CORE_GUI_NS {
         }
 
         m_gizmo = gizmo;
+    }
+
+    SR_CORE_GUI_NS::SceneTools* SceneViewer::GetSceneTools() const {
+        for (auto&& pSubWidget : m_subWidgets) {
+            if (auto&& pSceneTools = dynamic_cast<SceneTools*>(pSubWidget)) {
+                return pSceneTools;
+            }
+        }
+
+        return nullptr;
     }
 }

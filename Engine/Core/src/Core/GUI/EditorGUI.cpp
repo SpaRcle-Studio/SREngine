@@ -67,7 +67,6 @@ namespace SR_CORE_GUI_NS {
         AddWidget(new FileBrowser());
         AddWidget(new Hierarchy());
         AddWidget(new VisualScriptEditor());
-        AddWidget(new SceneViewer(m_engine, GetWidget<Hierarchy>()));
         AddWidget(new Inspector(GetWidget<Hierarchy>()));
         AddWidget(new WorldEdit());
         AddWidget(new EngineSettings());
@@ -76,7 +75,7 @@ namespace SR_CORE_GUI_NS {
 		AddWidget(new PhysicsMaterialEditor());
 		AddWidget(new About());
         AddWidget(new RenderTechniqueEditor());
-        AddWidget(new SceneTools());
+        AddWidget(new SceneViewer(m_engine, GetWidget<Hierarchy>()));
 
         for (auto& [id, widget] : m_widgets) {
             Register(widget);
@@ -224,6 +223,7 @@ namespace SR_CORE_GUI_NS {
                 ImGuiContext& g = *GImGui;
                 if (g.CurrentWindow == g.NavWindow && g.NavLayer == ImGuiNavLayer_Main && !g.NavAnyRequest) {
                     ImGui::FocusTopMostWindowUnderOne(g.NavWindow, nullptr);
+                    //ImGui::FocusTopMostWindowUnderOne(g.NavWindow, nullptr, nullptr, ImGuiFocusedFlags_None);
                 }
 
                 ImGui::End();
@@ -660,12 +660,6 @@ namespace SR_CORE_GUI_NS {
 
             if (ImGui::MenuItem("Scene")) {
                 OpenWidget<SceneViewer>();
-            }
-
-            ImGui::Separator();
-
-            if (ImGui::MenuItem("Scene tools")) {
-                OpenWidget<SceneTools>();
             }
 
             ImGui::Separator();

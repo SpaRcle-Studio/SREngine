@@ -24,6 +24,7 @@ namespace SR_CORE_GUI_NS {
 
     class Inspector : public SR_GRAPH_GUI_NS::Widget {
     public:
+        Inspector() = default;
         explicit Inspector(Hierarchy* hierarchy);
         ~Inspector() override = default;
 

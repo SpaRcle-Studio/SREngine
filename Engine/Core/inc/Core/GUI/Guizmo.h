@@ -16,9 +16,7 @@ namespace SR_GTYPES_NS {
 }
 
 namespace SR_CORE_GUI_NS {
-    SR_ENUM_NS_CLASS_T(EditorSceneViewMode, uint8_t,
-        FreeAspect, WindowSize
-    );
+    enum class EditorSceneViewMode : uint8_t;
 
     class Guizmo : public SR_UTILS_NS::NonCopyable, public SR_UTILS_NS::InputHandler {
         using GameObjectPtr = SR_UTILS_NS::GameObject::Ptr;
@@ -85,7 +83,7 @@ namespace SR_CORE_GUI_NS {
         ImGuizmo::OPERATION       m_operation     = ImGuizmo::OPERATION::TRANSLATE;
         ImGuizmo::MODE            m_mode          = ImGuizmo::MODE::LOCAL;
 
-        EditorSceneViewMode m_viewMode = EditorSceneViewMode::FreeAspect;
+        EditorSceneViewMode m_viewMode;
 
         EnginePtr m_engine;
 

@@ -61,13 +61,15 @@ namespace SR_CORE_GUI_NS {
             m_widgets.insert(std::make_pair(typeid(T).hash_code(), widget));
         }
 
-        template<typename T> void AddWidget(T* widget) {
+        template<typename T> T& AddWidget(T* pWidget) {
             if (m_widgets.count(typeid(T).hash_code()) == 1) {
                 SRHalt("Widget already was added!");
-                return;
+                static T empty;
+                return empty;
             }
 
-            m_widgets.insert(std::make_pair(typeid(T).hash_code(), widget));
+            m_widgets.insert(std::make_pair(typeid(T).hash_code(), pWidget));
+            return *pWidget;
         }
 
         template<typename T> SR_DEPRECATED T* GetWindow() {
