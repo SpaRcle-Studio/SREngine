@@ -38,7 +38,6 @@ namespace SR_CORE_GUI_NS {
 
     private:
         void SetGizmoOperation(SR_GRAPH_UI_NS::GizmoOperationFlag operation);
-        void SetGizmo2D(bool isActive);
         void SetGizmoMode(SR_GRAPH_UI_NS::GizmoMode mode);
 
         SR_HTYPES_NS::SharedPtr<SR_CORE_GUI_NS::EditorGizmo> FindGizmo() const;

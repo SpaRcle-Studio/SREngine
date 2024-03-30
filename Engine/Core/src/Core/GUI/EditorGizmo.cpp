@@ -47,7 +47,7 @@ namespace SR_CORE_GUI_NS {
 
             if (IsGizmo2DSpace()) {
                 const auto scale = pGameObject->GetTransform()->GetMatrix().GetScale();
-                pGameObject->GetTransform()->Translate(invQuaternion * (delta / scale));
+                pGameObject->GetTransform()->Translate((delta / scale));
             }
             else {
                 auto&& parentScale = SR_MATH_NS::FVector3::One();
@@ -56,7 +56,7 @@ namespace SR_CORE_GUI_NS {
                 if (pParentTransform) {
                     parentScale = pParentTransform->GetMatrix().GetScale();
                 }
-                
+
                 pGameObject->GetTransform()->Translate(invQuaternion * (delta / parentScale));
             }
         }
@@ -72,7 +72,7 @@ namespace SR_CORE_GUI_NS {
                 continue;
             }
 
-            if (IsLocal()) {
+            if (IsLocal() || IsGizmo2DSpace()) {
                 pGameObject->GetTransform()->Rotate(delta);
             }
             else {
@@ -177,10 +177,30 @@ namespace SR_CORE_GUI_NS {
         }
 
         if (pGameObject->GetTransform()->GetMeasurement() == SR_UTILS_NS::Measurement::Space2D) {
-            SetOperation(GetOperation() & ~SR_GRAPH_UI_NS::GizmoOperation::Z);
+            if (SR_MATH_NS::IsMaskIncludedSubMask(GetOperation(), SR_GRAPH_UI_NS::GizmoOperation::Rotate)) {
+                SetOperation(GetOperation()
+                    & ~SR_GRAPH_UI_NS::GizmoOperation::X
+                    & ~SR_GRAPH_UI_NS::GizmoOperation::Y
+                    & ~SR_GRAPH_UI_NS::GizmoOperation::Center
+                    | SR_GRAPH_UI_NS::GizmoOperation::Rotate2D
+                );
+
+                SRAssert2(SR_MATH_NS::IsMaskIncludedSubMask(GetOperation(), SR_GRAPH_UI_NS::GizmoOperation::Rotate), "Rotate operation is not set");
+                SRAssert2(SR_MATH_NS::IsMaskIncludedSubMask(GetOperation(), SR_GRAPH_UI_NS::GizmoOperation::Rotate2D), "Rotate2D operation is not set");
+                SRAssert2(SR_MATH_NS::IsMaskIncludedSubMask(GetOperation(), SR_GRAPH_UI_NS::GizmoOperation::Z), "Z operation is not set");
+            }
+            else {
+                SetOperation(GetOperation() & ~SR_GRAPH_UI_NS::GizmoOperation::Z | SR_GRAPH_UI_NS::GizmoOperation::Space2D);
+            }
         }
         else {
-            SetOperation(GetOperation() | SR_GRAPH_UI_NS::GizmoOperation::Z);
+            SetOperation(GetOperation()
+                & ~SR_GRAPH_UI_NS::GizmoOperation::Space2D
+                | SR_GRAPH_UI_NS::GizmoOperation::Z
+                | SR_GRAPH_UI_NS::GizmoOperation::X
+                | SR_GRAPH_UI_NS::GizmoOperation::Y
+                | SR_GRAPH_UI_NS::GizmoOperation::Center
+            );
         }
 
         Super::PrepareGizmo();

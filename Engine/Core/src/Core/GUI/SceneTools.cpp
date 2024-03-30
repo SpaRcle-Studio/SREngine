@@ -86,19 +86,6 @@ namespace SR_CORE_GUI_NS {
         }
     }
 
-    void SceneTools::SetGizmo2D(bool isActive) {
-        if (isActive) {
-            m_gizmoOperationFlag &= ~SR_GRAPH_UI_NS::GizmoOperation::Z;
-        }
-        else {
-            m_gizmoOperationFlag |= SR_GRAPH_UI_NS::GizmoOperation::Z;
-        }
-
-        if (auto&& pGizmo = FindGizmo()) {
-            pGizmo->SetOperation(m_gizmoOperationFlag);
-        }
-    }
-
     void SceneTools::SetGizmoMode(SR_GRAPH_UI_NS::GizmoMode mode) {
         m_gizmoMode = mode;
 
