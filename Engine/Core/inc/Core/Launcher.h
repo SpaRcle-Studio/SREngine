@@ -17,7 +17,7 @@ namespace SR_CORE_NS {
         bool InitializeResourcesFolder(int argc, char** argv) override { return true; }
 
     private:
-        void ExportResources();
+        static void ExportResources();
     };
 }
 

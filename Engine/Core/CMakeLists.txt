@@ -58,7 +58,18 @@ add_subdirectory(libs/Graphics)
 message(STATUS "CONFIGURING Scripting -----------------")
 add_subdirectory(libs/Scripting)
 
+list(APPEND SR_EMBED_RESOURCES_LIST "${CMAKE_SOURCE_DIR}/Resources/Engine/Configs/Features.xml")
+list(APPEND SR_EMBED_RESOURCES_LIST "${CMAKE_SOURCE_DIR}/Resources/Engine/Configs/Layers.xml")
+list(APPEND SR_EMBED_RESOURCES_LIST "${CMAKE_SOURCE_DIR}/Resources/Engine/Configs/SSAORenderTechnique.xml")
+
+set(SR_EMBED_RESOURCES "${CMAKE_SOURCE_DIR}/Resources/Engine/Configs/Features.xml")
+set(SR_EMBED_RESOURCES "${SR_EMBED_RESOURCES} ${CMAKE_SOURCE_DIR}/Resources/Engine/Configs/Layers.xml")
+set(SR_EMBED_RESOURCES "${SR_EMBED_RESOURCES} ${CMAKE_SOURCE_DIR}/Resources/Engine/Configs/TagManagerSettings.xml")
+
 add_library(Core STATIC ${CORE_ROOT_DIR}/cxx/Core.cxx ${CORE_ROOT_DIR}/cxx/GUI.cxx)
+
+EmbedResources(${SR_EMBED_RESOURCES})
+add_dependencies(Core EmbedResourcesTarget)
 
 if (SR_UTILS_STATIC_LIBRARY)
     list(APPEND SR_CORE_LINK_LIBRARIES Utils)
@@ -93,8 +104,10 @@ endif()
 target_link_libraries(Core ${SR_CORE_LINK_LIBRARIES})
 
 target_include_directories(Core PUBLIC ${CORE_ROOT_DIR}/inc)
+
 target_include_directories(Core PUBLIC ${CMAKE_CURRENT_BINARY_DIR}/Utils/include)
-target_include_directories(Core PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/Utils/libs)
-target_include_directories(Core PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/Utils/libs/assimp/include)
 target_include_directories(Core PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/Utils/libs/assimp/include)
 target_include_directories(Core PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/Utils/libs/FQHSA/header)
+
+target_include_directories(Core PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/Utils/libs)
+target_include_directories(Core PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/Utils/libs/assimp/include)
