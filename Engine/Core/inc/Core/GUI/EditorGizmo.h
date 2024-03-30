@@ -31,6 +31,7 @@ namespace SR_CORE_GUI_NS {
         void OnGizmoScaled(const SR_MATH_NS::FVector3& delta) override;
         void OnGizmoRotated(const SR_MATH_NS::Quaternion& delta) override;
 
+        void PrepareGizmo() override;
         void BeginGizmo() override;
         void EndGizmo() override;
 

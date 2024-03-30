@@ -9,11 +9,17 @@ DepthWrite true;
 DepthTest false;
 
 [[uniform], [public]] vec3 color;
+[[uniform], [public]] bool useOrthogonal;
 
 void fragment() {
 	COLOR = vec4(color, 1.0);
 }
 
 void vertex() {
-    OUT_POSITION = PROJECTION_MATRIX * VIEW_MATRIX * MODEL_MATRIX * vec4(VERTEX, 1.0);
+    if (useOrthogonal == 1) {
+        OUT_POSITION = ORTHOGONAL_MATRIX * MODEL_MATRIX * vec4(VERTEX + vec3(0, 0, 5), 1.0);
+    }
+    else {
+        OUT_POSITION = PROJECTION_MATRIX * VIEW_MATRIX * MODEL_MATRIX * vec4(VERTEX, 1.0);
+    }
 }

@@ -34,6 +34,7 @@ namespace SR_CORE_GUI_NS {
         SR_NODISCARD SR_GRAPH_UI_NS::GizmoMode GetGizmoMode() const noexcept { return m_gizmoMode; }
         SR_NODISCARD float_t GetCameraVelocityFactor() const noexcept { return m_cameraVelocityFactor; }
         SR_NODISCARD EditorSceneViewMode GetViewMode() const noexcept { return m_viewMode; }
+        SR_NODISCARD bool IsGizmo3D() const noexcept { return m_gizmoOperationFlag & SR_GRAPH_UI_NS::GizmoOperation::Z; }
 
     private:
         void SetGizmoOperation(SR_GRAPH_UI_NS::GizmoOperationFlag operation);

@@ -15,6 +15,9 @@ namespace SR_CORE_GUI_NS {
         }
 
         if (m_hierarchy->GetSelected().size() == 1) {
+            if (!(*m_hierarchy->GetSelected().begin())) {
+                return SR_MATH_NS::Matrix4x4::Identity();
+            }
             auto&& pTransform = (*m_hierarchy->GetSelected().begin())->GetTransform();
             return pTransform->GetMatrix();
         }
@@ -36,14 +39,26 @@ namespace SR_CORE_GUI_NS {
         }
 
         for (auto&& pGameObject : m_hierarchy->GetSelected()) {
-            auto&& scale = SR_MATH_NS::FVector3::One();
-
-            auto&& pParentTransform = pGameObject->GetTransform()->GetParentTransform();
-            if (pParentTransform) {
-                scale = pParentTransform->GetMatrix().GetScale();
+            if (!pGameObject) {
+                continue;
             }
 
-            pGameObject->GetTransform()->Translate(pGameObject->GetTransform()->GetMatrix().GetQuat().Inverse() * (delta / scale));
+            const auto invQuaternion = pGameObject->GetTransform()->GetMatrix().GetQuat().Inverse();
+
+            if (IsGizmo2DSpace()) {
+                const auto scale = pGameObject->GetTransform()->GetMatrix().GetScale();
+                pGameObject->GetTransform()->Translate(invQuaternion * (delta / scale));
+            }
+            else {
+                auto&& parentScale = SR_MATH_NS::FVector3::One();
+
+                auto&& pParentTransform = pGameObject->GetTransform()->GetParentTransform();
+                if (pParentTransform) {
+                    parentScale = pParentTransform->GetMatrix().GetScale();
+                }
+                
+                pGameObject->GetTransform()->Translate(invQuaternion * (delta / parentScale));
+            }
         }
     }
 
@@ -53,6 +68,10 @@ namespace SR_CORE_GUI_NS {
         }
 
         for (auto&& pGameObject : m_hierarchy->GetSelected()) {
+            if (!pGameObject) {
+                continue;
+            }
+
             if (IsLocal()) {
                 pGameObject->GetTransform()->Rotate(delta);
             }
@@ -72,7 +91,30 @@ namespace SR_CORE_GUI_NS {
     }
 
     bool EditorGizmo::IsGizmoAvailable() const {
-        return m_hierarchy && !m_hierarchy->GetSelected().empty();
+        if (!m_hierarchy || m_hierarchy->GetSelected().empty()) {
+            return false;
+        }
+
+        std::optional<bool> is2D;
+
+        for (auto pGameObject : m_hierarchy->GetSelected()) {
+            if (!pGameObject) {
+                continue;
+            }
+
+            if (pGameObject == GetGameObject()) {
+                return false;
+            }
+
+            if (!is2D.has_value()) {
+                is2D = pGameObject->GetTransform()->GetMeasurement() == SR_UTILS_NS::Measurement::Space2D;
+            }
+            else if (is2D.value() != (pGameObject->GetTransform()->GetMeasurement() == SR_UTILS_NS::Measurement::Space2D)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     void EditorGizmo::OnGizmoScaled(const SR_MATH_NS::FVector3& delta) {
@@ -81,6 +123,10 @@ namespace SR_CORE_GUI_NS {
         }
 
         for (auto&& pGameObject : m_hierarchy->GetSelected()) {
+            if (!pGameObject) {
+                continue;
+            }
+
             auto&& pTransform = pGameObject->GetTransform();
             if (IsLocal()) {
                 pTransform->Scale(delta);
@@ -116,10 +162,27 @@ namespace SR_CORE_GUI_NS {
     }
 
     void EditorGizmo::BeginGizmo() {
-        Gizmo::BeginGizmo();
+        Super::BeginGizmo();
     }
 
     void EditorGizmo::EndGizmo() {
-        Gizmo::EndGizmo();
+        Super::EndGizmo();
+    }
+
+    void EditorGizmo::PrepareGizmo() {
+        auto&& pGameObject = *m_hierarchy->GetSelected().begin();
+
+        if (!pGameObject) {
+            return;
+        }
+
+        if (pGameObject->GetTransform()->GetMeasurement() == SR_UTILS_NS::Measurement::Space2D) {
+            SetOperation(GetOperation() & ~SR_GRAPH_UI_NS::GizmoOperation::Z);
+        }
+        else {
+            SetOperation(GetOperation() | SR_GRAPH_UI_NS::GizmoOperation::Z);
+        }
+
+        Super::PrepareGizmo();
     }
 }

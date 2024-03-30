@@ -8,10 +8,6 @@ namespace SR_CORE_GUI_NS {
     void SceneTools::Init() {
         m_gizmoOperationFlag = SR_GRAPH_UI_NS::GizmoOperation::TranslateAll;
 
-        AddElement("2D")
-            .SetIsActive([this]() { return m_gizmoOperationFlag & SR_GRAPH_UI_NS::GizmoOperation::Z; })
-            .SetOnClick([this](bool isActive) { SetGizmo2D(!isActive); });
-
         AddElement("L")
             .SetIsActive([this]() { return m_gizmoMode == SR_GRAPH_UI_NS::GizmoMode::Local; })
             .SetOnClick([this](bool isActive) {
@@ -92,10 +88,10 @@ namespace SR_CORE_GUI_NS {
 
     void SceneTools::SetGizmo2D(bool isActive) {
         if (isActive) {
-            m_gizmoOperationFlag |= SR_GRAPH_UI_NS::GizmoOperation::Z;
+            m_gizmoOperationFlag &= ~SR_GRAPH_UI_NS::GizmoOperation::Z;
         }
         else {
-            m_gizmoOperationFlag &= ~SR_GRAPH_UI_NS::GizmoOperation::Z;
+            m_gizmoOperationFlag |= SR_GRAPH_UI_NS::GizmoOperation::Z;
         }
 
         if (auto&& pGizmo = FindGizmo()) {
