@@ -47,6 +47,14 @@ else()
     endif()
 endif()
 
+include(libs/Utils/cmake/ResourceEmbedder.cmake)
+
+AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Engine/Configs/Features.xml")
+AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Engine/Configs/Layers.xml")
+AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Engine/Configs/SSAORenderTechnique.xml")
+
+EmbedResources("${CMAKE_CURRENT_BINARY_DIR}/libs/Utils/include/Utils" "SREngine/Resources" ${EMBED_RESOURCES_LIST})
+
 message(STATUS "CONFIGURING Utils -----------------")
 add_subdirectory(libs/Utils)
 message(STATUS "CONFIGURING Audio -----------------")
@@ -58,17 +66,8 @@ add_subdirectory(libs/Graphics)
 message(STATUS "CONFIGURING Scripting -----------------")
 add_subdirectory(libs/Scripting)
 
-list(APPEND SR_EMBED_RESOURCES_LIST "${CMAKE_SOURCE_DIR}/Resources/Engine/Configs/Features.xml")
-list(APPEND SR_EMBED_RESOURCES_LIST "${CMAKE_SOURCE_DIR}/Resources/Engine/Configs/Layers.xml")
-list(APPEND SR_EMBED_RESOURCES_LIST "${CMAKE_SOURCE_DIR}/Resources/Engine/Configs/SSAORenderTechnique.xml")
-
-set(SR_EMBED_RESOURCES "${CMAKE_SOURCE_DIR}/Resources/Engine/Configs/Features.xml")
-set(SR_EMBED_RESOURCES "${SR_EMBED_RESOURCES} ${CMAKE_SOURCE_DIR}/Resources/Engine/Configs/Layers.xml")
-set(SR_EMBED_RESOURCES "${SR_EMBED_RESOURCES} ${CMAKE_SOURCE_DIR}/Resources/Engine/Configs/TagManagerSettings.xml")
-
 add_library(Core STATIC ${CORE_ROOT_DIR}/cxx/Core.cxx ${CORE_ROOT_DIR}/cxx/GUI.cxx)
 
-EmbedResources(${SR_EMBED_RESOURCES})
 add_dependencies(Core EmbedResourcesTarget)
 
 if (SR_UTILS_STATIC_LIBRARY)
