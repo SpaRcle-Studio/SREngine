@@ -5,7 +5,7 @@
 #include <Audio/Sound.h>
 #include <Audio/SoundManager.h>
 #include <Audio/SoundData.h>
-#include <Utils/ResourceManager/ResourceManager.h>
+#include <Utils/Resources/ResourceManager.h>
 
 namespace SR_AUDIO_NS {
     Sound::Sound()

@@ -5,7 +5,7 @@
 #ifndef SR_ENGINE_SOUND_H
 #define SR_ENGINE_SOUND_H
 
-#include <Utils/ResourceManager/IResource.h>
+#include <Utils/Resources/IResource.h>
 #include <Audio/PlayParams.h>
 
 namespace SR_AUDIO_NS {

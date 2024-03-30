@@ -3,7 +3,7 @@
 //
 
 #include <Physics/PhysicsLib.h>
-#include <Utils/ResourceManager/ResourceManager.h>
+#include <Utils/Resources/ResourceManager.h>
 
 #ifdef SR_PHYSICS_USE_BULLET3
     #include <Physics/Bullet3/Bullet3LibraryImpl.h>

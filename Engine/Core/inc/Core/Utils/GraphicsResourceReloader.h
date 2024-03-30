@@ -5,7 +5,7 @@
 #ifndef SR_ENGINE_GRAPHICSRESOURCERELOADER_H
 #define SR_ENGINE_GRAPHICSRESOURCERELOADER_H
 
-#include <Utils/ResourceManager/IResourceReloader.h>
+#include <Utils/Resources/IResourceReloader.h>
 
 #include <utility>
 

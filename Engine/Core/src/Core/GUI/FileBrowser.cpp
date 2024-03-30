@@ -7,7 +7,7 @@
 #include <Utils/FileSystem/Path.h>
 #include <Utils/Common/VectorUtils.h>
 #include <Utils/Debug.h>
-#include <Utils/ResourceManager/ResourceManager.h>
+#include <Utils/Resources/ResourceManager.h>
 
 #include <Graphics/GUI/Icons.h>
 #include <Graphics/Animations/AnimationClip.h>

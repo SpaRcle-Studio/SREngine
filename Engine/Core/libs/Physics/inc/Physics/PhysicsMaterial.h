@@ -5,7 +5,7 @@
 #ifndef SR_ENGINE_PHYSICSMATERIAL_H
 #define SR_ENGINE_PHYSICSMATERIAL_H
 
-#include <Utils/ResourceManager/IResource.h>
+#include <Utils/Resources/IResource.h>
 #include <Utils/Common/Enumerations.h>
 
 #include <Physics/Utils/Utils.h>

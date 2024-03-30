@@ -4,7 +4,7 @@
 
 #include <Scripting/Base/Script.h>
 #include <Scripting/Impl/EvoScriptImpl.h>
-#include <Utils/ResourceManager/ResourceManager.h>
+#include <Utils/Resources/ResourceManager.h>
 
 namespace SR_SCRIPTING_NS {
     bool Script::IsAutoFree() const {

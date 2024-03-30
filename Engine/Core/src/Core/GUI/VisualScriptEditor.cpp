@@ -5,7 +5,7 @@
 #include <Core/GUI/VisualScriptEditor.h>
 #include <Core/Parsers/BlueprintParser.h>
 
-#include <Utils/ResourceManager/ResourceManager.h>
+#include <Utils/Resources/ResourceManager.h>
 #include <Utils/FileSystem/FileSystem.h>
 #include <Utils/Xml.h>
 

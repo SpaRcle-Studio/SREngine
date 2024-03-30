@@ -5,7 +5,7 @@
 #ifndef SR_ENGINE_EVOSCRIPTRESOURCERELOADER_H
 #define SR_ENGINE_EVOSCRIPTRESOURCERELOADER_H
 
-#include <Utils/ResourceManager/IResourceReloader.h>
+#include <Utils/Resources/IResourceReloader.h>
 
 namespace SR_SCRIPTING_NS {
     class SR_DLL_EXPORT EvoScriptResourceReloader final : public SR_UTILS_NS::IResourceReloader {

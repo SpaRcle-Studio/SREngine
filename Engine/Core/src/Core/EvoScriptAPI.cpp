@@ -11,7 +11,7 @@
 #include <Utils/Math/Noise.h>
 #include <Utils/ECS/TransformZero.h>
 #include <Utils/ECS/Transform2D.h>
-#include <Utils/ResourceManager/ResourceManager.h>
+#include <Utils/Resources/ResourceManager.h>
 
 #include <Graphics/Loaders/ObjLoader.h>
 #include <Graphics/Types/Skybox.h>

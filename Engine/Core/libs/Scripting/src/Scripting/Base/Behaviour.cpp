@@ -4,7 +4,7 @@
 
 #include <Utils/ECS/GameObject.h>
 #include <Utils/ECS/ComponentManager.h>
-#include <Utils/ResourceManager/ResourceManager.h>
+#include <Utils/Resources/ResourceManager.h>
 
 #include <Scripting/Base/Behaviour.h>
 #include <Scripting/Impl/EvoBehaviour.h>

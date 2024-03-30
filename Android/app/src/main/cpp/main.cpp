@@ -18,7 +18,7 @@
 #include <Utils/Debug.h>
 #include <Utils/Types/Thread.h>
 #include <Utils/Types/Time.h>
-#include <Utils/ResourceManager/ResourceManager.h>
+#include <Utils/Resources/ResourceManager.h>
 #include <Utils/Common/Features.h>
 #include <Utils/World/SceneAllocator.h>
 #include <Utils/World/Scene.h>

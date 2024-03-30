@@ -13,7 +13,7 @@
 
 #include <Utils/Types/DataStorage.h>
 #include <Utils/Types/RawMesh.h>
-#include <Utils/ResourceManager/ResourceManager.h>
+#include <Utils/Resources/ResourceManager.h>
 #include <Utils/Common/AnyVisitor.h>
 #include <Utils/Game/LookAtComponent.h>
 #include <Utils/Localization/Encoding.h>

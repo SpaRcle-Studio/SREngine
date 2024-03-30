@@ -4,7 +4,7 @@
 
 #include <Physics/PhysicsMaterial.h>
 #include <Physics/PhysicsMaterialImpl.h>
-#include <Utils/ResourceManager/ResourceManager.h>
+#include <Utils/Resources/ResourceManager.h>
 
 namespace SR_PTYPES_NS {
     PhysicsMaterial::PhysicsMaterial()

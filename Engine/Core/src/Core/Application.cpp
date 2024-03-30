@@ -8,7 +8,7 @@
 #include <Utils/Common/CmdOptions.h>
 #include <Utils/TaskManager/TaskManager.h>
 #include <Utils/World/SceneAllocator.h>
-#include <Utils/ResourceManager/ResourceManager.h>
+#include <Utils/Resources/ResourceManager.h>
 #include <Utils/SRLM/LogicalNodeManager.h>
 #include <Utils/SRLM/DataTypeManager.h>
 #include <Utils/Localization/Encoding.h>
@@ -57,16 +57,7 @@ namespace SR_CORE_NS {
             return false;
         }
 
-        if (auto&& folder = SR_UTILS_NS::GetCmdOption(argv, argv + argc, "-resources"); !folder.empty()) {
-            m_resourcesPath = folder;
-        }
-
-        if (!m_resourcesPath.Exists(SR_UTILS_NS::Path::Type::Folder) && !FindResourcesFolder()) {
-            SR_ERROR("Application::PreInit() : failed to find resources folder!");
-            return false;
-        }
-
-        return true;
+        return InitializeResourcesFolder(argc, argv);
     }
 
     void Application::TryPlayStartSound() {
@@ -274,6 +265,19 @@ namespace SR_CORE_NS {
         SR_HTYPES_NS::Thread::Factory::Instance().PrintThreads();
 
         SR_UTILS_NS::GetSingletonManager()->DestroyAll();
+    }
+
+    bool Application::InitializeResourcesFolder(int argc, char** argv) {
+        if (auto&& folder = SR_UTILS_NS::GetCmdOption(argv, argv + argc, "-resources"); !folder.empty()) {
+            m_resourcesPath = folder;
+        }
+
+        if (!m_resourcesPath.Exists(SR_UTILS_NS::Path::Type::Folder) && !FindResourcesFolder()) {
+            SR_ERROR("Application::InitializeResourcesFolder() : failed to find resources folder!");
+            return false;
+        }
+
+        return true;
     }
 
     void Application::SwitchResourcesFolder(const SR_UTILS_NS::Path& path) {

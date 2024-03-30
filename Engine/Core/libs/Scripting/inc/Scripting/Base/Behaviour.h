@@ -6,7 +6,7 @@
 #define SR_ENGINE_SCRIPTING_BEHAVIOUR_H
 
 #include <Utils/ECS/Component.h>
-#include <Utils/ResourceManager/IResource.h>
+#include <Utils/Resources/IResource.h>
 
 namespace SR_UTILS_NS {
     class GameObject;

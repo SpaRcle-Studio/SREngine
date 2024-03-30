@@ -4,7 +4,7 @@
 
 #include <Core/GUI/EngineStatistics.h>
 
-#include <Utils/ResourceManager/ResourceManager.h>
+#include <Utils/Resources/ResourceManager.h>
 
 #include <Graphics/Types/Framebuffer.h>
 #include <Graphics/Types/Skybox.h>

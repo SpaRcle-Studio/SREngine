@@ -3,7 +3,7 @@
 //
 
 #include <Audio/RawSound.h>
-#include <Utils/ResourceManager/ResourceManager.h>
+#include <Utils/Resources/ResourceManager.h>
 #include <Utils/FileSystem/FileSystem.h>
 #include <Audio/Decoders/IWaveDataProvider.h>
 

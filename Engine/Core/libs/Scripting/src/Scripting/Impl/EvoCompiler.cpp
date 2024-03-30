@@ -2,7 +2,7 @@
 // Created by Nikita on 11.07.2021.
 //
 
-#include <Utils/ResourceManager/ResourceManager.h>
+#include <Utils/Resources/ResourceManager.h>
 #include <Utils/FileSystem/FileSystem.h>
 #include <Utils/FileSystem/Path.h>
 #include <Utils/Platform/Platform.h>
