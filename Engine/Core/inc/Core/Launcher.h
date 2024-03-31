@@ -10,6 +10,7 @@
 
 namespace SR_CORE_NS {
     class Launcher : public SR_CORE_NS::Application {
+        using Super = SR_CORE_NS::Launcher;
     public:
         void Init(int argc, char** argv);
 

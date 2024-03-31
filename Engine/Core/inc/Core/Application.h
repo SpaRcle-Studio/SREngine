@@ -15,7 +15,7 @@ namespace SR_CORE_NS {
         using Super = SR_HTYPES_NS::SharedPtr<Application>;
     public:
         Application();
-        ~Application();
+        virtual ~Application();
 
     public:
         bool PreInit(int argc, char** argv);
