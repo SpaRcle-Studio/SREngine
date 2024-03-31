@@ -272,6 +272,42 @@ namespace SR_CORE_NS {
             return true;
         });
 
+        static const auto TRANSFORM_HASH_NAME = SR_HASH_STR("Transform");
+        SR_UTILS_NS::Migration::Instance().RegisterMigrator(TRANSFORM_HASH_NAME, 1000, 1001, [](SR_HTYPES_NS::Marshal& marshal) -> bool {
+            SR_HTYPES_NS::Marshal migrated;
+
+            uint64_t position = marshal.GetPosition();
+
+            migrated.Stream::Write(marshal.Stream::View(), marshal.GetPosition());
+            /// --------------------------------------------------------------------------------------------------------
+
+            const auto measurement = marshal.Read<uint8_t>();
+            migrated.Write(static_cast<uint8_t>(measurement)); /// measurement
+
+            switch (static_cast<SR_UTILS_NS::Measurement>(measurement)) {
+                case SR_UTILS_NS::Measurement::SpaceZero:
+                    break;
+                case SR_UTILS_NS::Measurement::Space2D: {
+                    migrated.Write<uint8_t>(static_cast<uint8_t>(marshal.Read<uint8_t>())); /// stretch
+                    migrated.Write<uint8_t>(static_cast<uint8_t>(marshal.Read<uint8_t>())); /// anchor
+                    migrated.Write<uint8_t>(static_cast<uint8_t>(SR_UTILS_NS::PositionMode::ProportionalXY)); /// positionMode
+                    migrated.Write<bool>(static_cast<bool>(true)); /// isRelativePriority
+                    migrated.Write<int32_t>(static_cast<int32_t>(0)); /// localPriority
+                    break;
+                }
+                default:
+                    break;
+            }
+
+            /// -------------------- меня наняли дублировать длинные строки потому что я люблю большие длинные прямые комментарии, состоящие исключительно из тире.
+            migrated.Stream::Write(marshal.Stream::View() + marshal.GetPosition(), marshal.Size() - marshal.GetPosition());
+
+            marshal.SetData(migrated.Stream::View(), migrated.Size());
+            marshal.SetPosition(position);
+
+            return true;
+        });
+
         static const auto SKINNED_MESH_HASH_NAME = SR_HASH_STR("SkinnedMesh");
         SR_UTILS_NS::Migration::Instance().RegisterMigrator(SKINNED_MESH_HASH_NAME, 1001, 1002, [](SR_HTYPES_NS::Marshal& marshal) -> bool {
             SR_HTYPES_NS::Marshal migrated;
