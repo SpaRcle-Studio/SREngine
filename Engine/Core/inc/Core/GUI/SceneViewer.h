@@ -50,7 +50,7 @@ namespace SR_CORE_GUI_NS {
     private:
         SR_NODISCARD SR_CORE_GUI_NS::SceneTools* GetSceneTools() const;
 
-        void SelectMesh(SR_GTYPES_NS::MeshComponent* pMesh);
+        void SelectMesh(SR_GTYPES_NS::IRenderComponent* pMesh);
 
         void LoadCameraSettings();
         void BackupCameraSettings();

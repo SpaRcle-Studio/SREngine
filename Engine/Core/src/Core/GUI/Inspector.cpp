@@ -132,7 +132,7 @@ namespace SR_CORE_GUI_NS {
             }
 
             if (m_isUsed && SR_UTILS_NS::Input::Instance().GetMouseUp(SR_UTILS_NS::MouseCode::MouseLeft)) {
-                auto&& cmd = new SR_CORE_NS::Commands::GameObjectTransform(pEngine, pTransform->GetGameObject(), m_oldTransformMarshal->CopyPtr());
+                auto&& cmd = new SR_CORE_NS::Commands::GameObjectTransform(pEngine, m_gameObject, m_oldTransformMarshal->CopyPtr());
                 pEngine->GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
 
                 SR_SAFE_DELETE_PTR(m_oldTransformMarshal)

@@ -320,8 +320,9 @@ namespace SR_CORE_GUI_NS {
         auto&& pRenderTechnique = pCamera->GetRenderTechnique();
 
         if (pRenderTechnique && IsHovered() && (!pGizmo || (!pGizmo->IsGizmoActive() && !pGizmo->IsGizmoHovered()))) {
-            if (auto&& pMesh = dynamic_cast<SR_GTYPES_NS::MeshComponent*>(pRenderTechnique->PickMeshAt(pCamera->GetMousePos()))) {
-                SelectMesh(pMesh);
+            auto&& pMesh = pRenderTechnique->PickMeshAt(pCamera->GetMousePos());
+            if (auto&& pRenderComponent = dynamic_cast<SR_GTYPES_NS::IRenderComponent*>(pMesh)) {
+                SelectMesh(pRenderComponent);
             }
             else {
                 m_hierarchy->ClearSelected();
@@ -395,7 +396,7 @@ namespace SR_CORE_GUI_NS {
         return false;
     }
 
-    void SceneViewer::SelectMesh(SR_GTYPES_NS::MeshComponent* pMesh) {
+    void SceneViewer::SelectMesh(SR_GTYPES_NS::IRenderComponent* pMesh) {
         if (m_hierarchy->GetSelected().size() != 1) {
             m_hierarchy->SelectGameObject(pMesh->GetRoot());
             return;
