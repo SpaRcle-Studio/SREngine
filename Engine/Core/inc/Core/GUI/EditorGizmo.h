@@ -15,6 +15,7 @@ namespace SR_CORE_GUI_NS {
         using Super = SR_GRAPH_UI_NS::Gizmo;
     public:
         EditorGizmo();
+        ~EditorGizmo() override;
 
     public:
         SR_NODISCARD SR_FORCE_INLINE bool ExecuteInEditMode() const override { return true; }
@@ -37,6 +38,7 @@ namespace SR_CORE_GUI_NS {
 
     private:
         Hierarchy* m_hierarchy = nullptr;
+        SR_HTYPES_NS::Marshal* m_marshal = nullptr;
 
     };
 }

@@ -9,6 +9,10 @@ namespace SR_CORE_GUI_NS {
         : Super()
     { }
 
+    EditorGizmo::~EditorGizmo() {
+        SR_SAFE_DELETE_PTR(m_marshal);
+    }
+
     SR_MATH_NS::Matrix4x4 EditorGizmo::GetGizmoMatrix() const {
         if (!m_hierarchy || m_hierarchy->GetSelected().empty()) {
             return SR_MATH_NS::Matrix4x4::Identity();
@@ -162,10 +166,43 @@ namespace SR_CORE_GUI_NS {
     }
 
     void EditorGizmo::BeginGizmo() {
+        /// TODO: multiple selection
+
+        if (!m_hierarchy || m_hierarchy->GetSelected().empty()) {
+            return;
+        }
+
+        if (!*m_hierarchy->GetSelected().begin()) {
+            return;
+        }
+
+        auto&& pGameObject = *m_hierarchy->GetSelected().begin();
+
+        SR_SAFE_DELETE_PTR(m_marshal)
+        m_marshal = pGameObject->GetTransform()->Save(SR_UTILS_NS::SavableContext(nullptr, SR_UTILS_NS::SavableFlagBits::SAVABLE_FLAG_NONE));
+
         Super::BeginGizmo();
     }
 
     void EditorGizmo::EndGizmo() {
+        /// TODO: multiple selection
+
+        if (!m_hierarchy || m_hierarchy->GetSelected().empty()) {
+            return;
+        }
+
+        if (!*m_hierarchy->GetSelected().begin()) {
+            return;
+        }
+
+        auto&& pGameObject = *m_hierarchy->GetSelected().begin();
+        auto&& pEngine = dynamic_cast<EditorGUI*>(m_hierarchy->GetManager())->GetEngine();
+
+        auto&& cmd = new SR_CORE_NS::Commands::GameObjectTransform(pEngine, pGameObject, m_marshal->CopyPtr());
+        pEngine->GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
+
+        SR_SAFE_DELETE_PTR(m_marshal)
+
         Super::EndGizmo();
     }
 

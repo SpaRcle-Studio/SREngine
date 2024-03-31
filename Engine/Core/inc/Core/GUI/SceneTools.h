@@ -36,6 +36,8 @@ namespace SR_CORE_GUI_NS {
         SR_NODISCARD EditorSceneViewMode GetViewMode() const noexcept { return m_viewMode; }
         SR_NODISCARD bool IsGizmo3D() const noexcept { return m_gizmoOperationFlag & SR_GRAPH_UI_NS::GizmoOperation::Z; }
 
+        void OnKeyDown(const SR_UTILS_NS::KeyboardInputData* pData) override;
+
     private:
         void SetGizmoOperation(SR_GRAPH_UI_NS::GizmoOperationFlag operation);
         void SetGizmoMode(SR_GRAPH_UI_NS::GizmoMode mode);

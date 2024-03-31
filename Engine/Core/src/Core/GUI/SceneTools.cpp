@@ -38,8 +38,6 @@ namespace SR_CORE_GUI_NS {
 
         AddElement()
             .SetCustomDraw([this](auto&& pElement) {
-                ImGui::Dummy(ImVec2(10, 0));
-                ImGui::SameLine();
                 ImGui::Text("Camera Speed");
                 ImGui::SameLine();
                 ImGui::Dummy(ImVec2(10, 0));
@@ -47,12 +45,22 @@ namespace SR_CORE_GUI_NS {
                 ImGui::PushItemWidth(200.f);
                 ImGui::SliderFloat("##", &m_cameraVelocityFactor, 0.01f, 10.f);
                 ImGui::PopItemWidth();
-            });
+            })
+            .SetItemSpacing(SR_MATH_NS::FVector2(10.f, 0.f));
+
+        AddElement("Connect PVD")
+            .SetIsActive([]() { return false; })
+            .SetOnClick([](bool isActive) {
+                auto&& pLibrary = SR_PHYSICS_NS::PhysicsLibrary::Instance().GetActiveLibrary(SR_UTILS_NS::Measurement::Space3D);
+                if (pLibrary) {
+                    pLibrary->ConnectPVD();
+                }
+            })
+            .SetWidth(100.f)
+            .SetItemSpacing(SR_MATH_NS::FVector2(10.f, 0.f));
 
         AddElement()
             .SetCustomDraw([this](auto&& pElement) {
-                ImGui::Dummy(ImVec2(10, 0));
-                ImGui::SameLine();
                 ImGui::PushItemWidth(150.f);
 
                 if (ImGui::BeginCombo("View Mode", SR_UTILS_NS::EnumReflector::ToStringAtom(m_viewMode).c_str())) {
@@ -66,7 +74,8 @@ namespace SR_CORE_GUI_NS {
 
                     ImGui::EndCombo();
                 }
-            });
+            })
+            .SetItemSpacing(SR_MATH_NS::FVector2(10.f, 0.f));
 
         Super::Init();
     }
@@ -111,5 +120,17 @@ namespace SR_CORE_GUI_NS {
         }
 
         return pGizmoGameObject->GetComponent<SR_CORE_GUI_NS::EditorGizmo>();
+    }
+
+    void SceneTools::OnKeyDown(const SR_UTILS_NS::KeyboardInputData* pData) {
+        switch (pData->GetKeyCode()) {
+            case SR_UTILS_NS::KeyCode::_1: SetGizmoOperation(SR_GRAPH_UI_NS::GizmoOperation::None); break;
+            case SR_UTILS_NS::KeyCode::_2: SetGizmoOperation(SR_GRAPH_UI_NS::GizmoOperation::Translate); break;
+            case SR_UTILS_NS::KeyCode::_3: SetGizmoOperation(SR_GRAPH_UI_NS::GizmoOperation::Rotate); break;
+            case SR_UTILS_NS::KeyCode::_4: SetGizmoOperation(SR_GRAPH_UI_NS::GizmoOperation::Scale); break;
+            default:
+                break;
+        }
+        Super::OnKeyDown(pData);
     }
 }
