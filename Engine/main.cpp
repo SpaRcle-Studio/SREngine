@@ -5,8 +5,7 @@
 // Approved and improved by innerviewer on 2023-03-09.
 //
 
-#include <Core/Application.h>
-#include <Utils/Platform/Platform.h>
+#include <Core/Launcher.h>
 
 #include <Utils/Common/CmdOptions.h>
 #include <Core/Tests/TestManager.h>
@@ -35,24 +34,29 @@ int main(int argc, char** argv) {
     int32_t code = 0;
 
     {
-        auto&& pApplication = SR_CORE_NS::Application::MakeShared();
+        SR_HTYPES_NS::SharedPtr pLauncher = new SR_CORE_NS::Launcher();
 
-        if (!pApplication->PreInit(argc, argv)) {
-            SR_PLATFORM_NS::WriteConsoleError("Failed to pre-initialize application!\n");
+        auto&& launcherInitStatus = pLauncher->InitLauncher(argc, argv);
+
+        if (launcherInitStatus == SR_CORE_NS::LauncherInitStatus::Error) {
+            SR_PLATFORM_NS::WriteConsoleError("Failed to initialize launcher!\n");
             code = 1;
         }
-
-        if (code == 0 && !pApplication->Init()) {
-            SR_ERROR("Failed to initialize application!");
-            code = 2;
+        else if (launcherInitStatus == SR_CORE_NS::LauncherInitStatus::Unpacking) {
+            return code;
         }
 
-        if (code == 0 && !pApplication->Execute()) {
-            SR_ERROR("Failed to execute application!");
+        if (code == 0 && !pLauncher->Init()) {
+            SR_ERROR("Failed to initialize application!");
             code = 3;
         }
 
-        pApplication.AutoFree([](auto&& pData) {
+        if (code == 0 && !pLauncher->Execute()) {
+            SR_ERROR("Failed to execute application!");
+            code = 4;
+        }
+
+        pLauncher.AutoFree([](auto&& pData) {
             delete pData;
         });
     }

@@ -9,13 +9,23 @@
 #include <Core/Application.h>
 
 namespace SR_CORE_NS {
+    SR_ENUM_NS_CLASS_T(LauncherInitStatus, uint8_t,
+        Success,
+        Error,
+        Unpacking
+    )
+
     class Launcher : public SR_CORE_NS::Application {
-        using Super = SR_CORE_NS::Launcher;
+        using Super = SR_CORE_NS::Application;
     public:
-        void Init(int argc, char** argv);
+        LauncherInitStatus InitLauncher(int argc, char** argv);
 
     protected:
         bool InitializeResourcesFolder(int argc, char** argv) override { return true; }
+
+    private:
+        bool UnpackAndExecute();
+        void DeleteOldApplication();
     };
 }
 

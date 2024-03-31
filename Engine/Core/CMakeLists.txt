@@ -51,7 +51,40 @@ include(libs/Utils/cmake/ResourceEmbedder.cmake)
 
 AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Engine/Configs/Features.xml")
 AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Engine/Configs/Layers.xml")
-AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Engine/Configs/SSAORenderTechnique.xml")
+AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Engine/Configs/TagManagerSettings.xml")
+AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Engine/Configs/EvoScript.xml")
+AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Engine/Configs/SRLMTypes.xml")
+AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Engine/Configs/World.xml")
+AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Engine/Configs/Physics.xml")
+AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Engine/Configs/MainRenderTechnique.xml")
+AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Engine/Configs/Themes/Dark.xml")
+
+
+AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Engine/PhysicsMaterials/DefaultMaterial.physmat")
+
+AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Engine/Textures/default_improved.png")
+
+AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Engine/Shaders/SSAO/ssao_geometry.srsl")
+AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Engine/Shaders/ui.srsl")
+AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Engine/Shaders/wireframe.srsl")
+AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Engine/Shaders/line.srsl")
+
+
+AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Engine/Materials/default.mat")
+AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Engine/Materials/UI/ui.mat")
+AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Engine/Materials/Debug/wireframe.mat")
+AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Engine/Materials/Debug/line.mat")
+
+
+AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Engine/Fonts/tahoma.ttf")
+AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Engine/Fonts/fa-solid-900.ttf")
+
+
+AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Editor/Configs/ImGuiEditor.config")
+AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Editor/Configs/EditorWidgets.xml")
+AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Editor/Configs/OverlayRenderTechnique.xml")
+AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Editor/Configs/EditorSettings.xml")
+AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Editor/Configs/EditorCascadedShadowMapRenderTechnique.xml")
 
 EmbedResources("${CMAKE_CURRENT_BINARY_DIR}/libs/Utils/include/Utils" "SREngine/Resources" ${EMBED_RESOURCES_LIST})
 
