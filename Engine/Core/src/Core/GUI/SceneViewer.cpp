@@ -283,12 +283,12 @@ namespace SR_CORE_GUI_NS {
 
     void SceneViewer::OnKeyDown(const SR_UTILS_NS::KeyboardInputData* data) {
         ////////////////// m_guizmo->OnKeyDown(data);
-        Widget::OnKeyDown(data);
+        Super::OnKeyDown(data);
     }
 
     void SceneViewer::OnKeyPress(const SR_UTILS_NS::KeyboardInputData* data) {
         ////////////////////// m_guizmo->OnKeyPress(data);
-        Widget::OnKeyPress(data);
+        Super::OnKeyPress(data);
     }
 
     void SceneViewer::OnMouseDown(const SR_UTILS_NS::MouseInputData *data) {
@@ -301,7 +301,13 @@ namespace SR_CORE_GUI_NS {
             return;
         }
 
-        if (data->m_code != SR_UTILS_NS::MouseCode::MouseLeft) { //////////////////////////////////////  || m_guizmo->IsUse()
+        auto&& pGizmo = m_gizmo ? m_gizmo->GetComponent<EditorGizmo>() : nullptr;
+        if (pGizmo && !pGizmo->IsGizmoEnabled()) {
+            Super::OnMouseUp(data);
+            return;
+        }
+
+        if (data->m_code != SR_UTILS_NS::MouseCode::MouseLeft) {
             Super::OnMouseUp(data);
             return;
         }
@@ -311,7 +317,6 @@ namespace SR_CORE_GUI_NS {
             return Super::OnMouseUp(data);
         }
 
-        auto&& pGizmo = m_gizmo ? m_gizmo->GetComponent<EditorGizmo>() : nullptr;
         auto&& pRenderTechnique = pCamera->GetRenderTechnique();
 
         if (pRenderTechnique && IsHovered() && (!pGizmo || (!pGizmo->IsGizmoActive() && !pGizmo->IsGizmoHovered()))) {

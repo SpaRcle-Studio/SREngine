@@ -11,26 +11,26 @@ DepthTest true;
 [[uniform], [public]] vec4 color;
 [[uniform], [public]] sampler2D diffuse;
 
-float map(float value, float originalMin, float originalMax, float newMin, float newMax) {
+float sliced_map(float value, float originalMin, float originalMax, float newMin, float newMax) {
     return (value - originalMin) / (originalMax - originalMin) * (newMax - newMin) + newMin;
 }
 
-float processAxis(float coord, float textureBorder, float windowBorder) {
+float sliced_processAxis(float coord, float textureBorder, float windowBorder) {
     if (coord < windowBorder) {
-        return map(coord, 0, windowBorder, 0, textureBorder);
+        return sliced_map(coord, 0, windowBorder, 0, textureBorder);
     }
 
     if (coord < 1 - windowBorder) {
-        return map(coord, windowBorder, 1 - windowBorder, textureBorder, 1 - textureBorder);
+        return sliced_map(coord, windowBorder, 1 - windowBorder, textureBorder, 1 - textureBorder);
     }
 
-    return map(coord, 1 - windowBorder, 1, 1 - textureBorder, 1);
+    return sliced_map(coord, 1 - windowBorder, 1, 1 - textureBorder, 1);
 }
 
 void fragment() {
     vec2 newUV = vec2(
-        1.0 - processAxis(UV.x, SLICED_TEXTURE_BORDER.x, SLICED_WINDOW_BORDER.x),
-        1.0 - processAxis(UV.y, SLICED_TEXTURE_BORDER.y, SLICED_WINDOW_BORDER.y)
+        1.0 - sliced_processAxis(UV.x, SLICED_TEXTURE_BORDER.x, SLICED_WINDOW_BORDER.x),
+        1.0 - sliced_processAxis(UV.y, SLICED_TEXTURE_BORDER.y, SLICED_WINDOW_BORDER.y)
     );
 
     if (COLOR_BUFFER_MODE == 1) {

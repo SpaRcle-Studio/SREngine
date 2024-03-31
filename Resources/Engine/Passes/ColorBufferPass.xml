@@ -13,6 +13,7 @@
             <Layer R="0.0" G="0.0" B="0.0" A="1.0"/>
         </FramebufferSettings>
         <Shaders>
+            <Override Path="Engine/Shaders/UI/sliced.srsl" Ignore="true" UseMaterial="true"/>
             <Override Type="Canvas" Shader="Engine/Shaders/ColorBuffer/canvas.srsl"/>
             <Override Type="Spatial" Shader="Engine/Shaders/ColorBuffer/spatial.srsl"/>
             <Override Type="SpatialCustom" Shader="Engine/Shaders/ColorBuffer/spatial.srsl"/>
@@ -25,6 +26,7 @@
             <Default/>
             <Opaque/>
             <Transparent/>
+            <UI/>
             <GizmoSelection/>
         </AllowedLayers>
     </ColorBufferPass>

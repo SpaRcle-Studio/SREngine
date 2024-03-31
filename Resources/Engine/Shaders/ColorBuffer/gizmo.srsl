@@ -8,11 +8,10 @@ BlendEnabled true;
 DepthWrite true;
 DepthTest false;
 
-[[uniform], [public]] vec3 color;
 [[uniform], [public]] bool useOrthogonal;
 
 void fragment() {
-	COLOR = vec4(color, 1.0);
+	COLOR = vec4(COLOR_BUFFER_VALUE, 1.0);
 }
 
 void vertex() {
