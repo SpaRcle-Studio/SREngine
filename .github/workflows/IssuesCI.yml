@@ -55,12 +55,19 @@ jobs:
 
       - name: Closing the issues.
         if: inputs.linuxBuildState != 'failure' && inputs.windowsBuildState != 'failure'
-        id: script
-        shell: bash
-        working-directory: ${{github.workspace}}/CI/scripts
-        run: | 
-          python ./Issues.py
+        uses: bdougie/close-issues-based-on-label@v1.2
         env:
-          commitMessage: ${{ inputs.commitMessage }}
-          ciToken: ${{ secrets.CITOKEN }}
-          commitSha: ${{ inputs.commitSha }}
+          LABEL: build-failed
+          GITHUB_TOKEN: ${{ secrets.CITOKEN }}
+
+      #- name: Closing the issues.
+      #  if: inputs.linuxBuildState != 'failure' && inputs.windowsBuildState != 'failure'
+      #  id: script
+      #  shell: bash
+      #  working-directory: ${{github.workspace}}/CI/scripts
+      # run: | 
+      #    python ./Issues.py
+      #  env:
+      #    commitMessage: ${{ inputs.commitMessage }}
+      #    ciToken: ${{ secrets.CITOKEN }}
+      #    commitSha: ${{ inputs.commitSha }}
