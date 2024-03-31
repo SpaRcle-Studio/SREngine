@@ -553,7 +553,7 @@ namespace SR_CORE_NS::GUI {
         }
 
         auto&& offset = pComponent->GetOffset();
-        if (Graphics::GUI::DrawVec3Control("Offset", offset, 0.f, 70.f, 0.01f, index)) {
+        if (Graphics::GUI::DrawVec3Control("Offset", offset, 0.f, 0.01f, 70.f, index)) {
             pComponent->SetOffset(offset);
         }
 

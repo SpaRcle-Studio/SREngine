@@ -44,9 +44,9 @@ namespace SR_CORE_GUI_NS {
         void InspectTag(SR_UTILS_NS::StringAtom tag, SR_HTYPES_NS::Function<void(SR_UTILS_NS::StringAtom)> callback);
         void InspectLayer(SR_UTILS_NS::StringAtom layer, SR_HTYPES_NS::Function<void(SR_UTILS_NS::StringAtom)> callback);
 
-        void DrawSwitchTransform();
-        void DrawTransform2D(SR_UTILS_NS::Transform2D* transform) const;
-        void DrawTransform3D(SR_UTILS_NS::Transform3D* transform);
+        bool DrawSwitchTransform();
+        bool DrawTransform2D(SR_UTILS_NS::Transform2D* transform) const;
+        bool DrawTransform3D(SR_UTILS_NS::Transform3D* transform);
 
         void DrawComponentProperties(SR_UTILS_NS::Component* pComponent);
 

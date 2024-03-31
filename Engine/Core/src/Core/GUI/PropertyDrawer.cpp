@@ -25,7 +25,7 @@ namespace SR_CORE_GUI_NS {
             }
             else if (std::holds_alternative<SR_MATH_NS::FVector3>(arg)) {
                 auto&& value = std::get<SR_MATH_NS::FVector3>(arg);
-                if (Graphics::GUI::DrawVec3Control(pProperty->GetName(), value, 0.f, 70.f, 0.01f)) {
+                if (Graphics::GUI::DrawVec3Control(pProperty->GetName(), value, 0.f, 0.01f)) {
                     pProperty->SetData(value);
                 }
             }
@@ -162,7 +162,7 @@ namespace SR_CORE_GUI_NS {
             }
             case SR_UTILS_NS::StandardType::FVector3: {
                 auto&& value = pProperty->GetFVector3();
-                if (SR_GRAPH_GUI_NS::DrawVec3Control(label, value, pProperty->GetResetValue(), pProperty->GetWidth(), pProperty->GetDrag())) {
+                if (SR_GRAPH_GUI_NS::DrawVec3Control(label, value, pProperty->GetResetValue(), pProperty->GetDrag(), pProperty->GetWidth())) {
                     pProperty->SetFVector3(value);
                 }
                 break;

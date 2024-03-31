@@ -105,14 +105,17 @@ namespace SR_CORE_GUI_NS {
 
             ImGui::Separator();
 
-            auto pTransform = m_gameObject->GetTransform();
+            auto&& pTransform = m_gameObject->GetTransform();
+            auto&& pOldTransform = pTransform->Copy();
+
+            bool changed = false;
 
             switch (pTransform->GetMeasurement()) {
                 case SR_UTILS_NS::Measurement::Space2D:
-                    DrawTransform2D(dynamic_cast<SR_UTILS_NS::Transform2D*>(pTransform));
+                    changed |= DrawTransform2D(dynamic_cast<SR_UTILS_NS::Transform2D*>(pTransform));
                     break;
                 case SR_UTILS_NS::Measurement::Space3D:
-                    DrawTransform3D(dynamic_cast<SR_UTILS_NS::Transform3D*>(pTransform));
+                    changed |= DrawTransform3D(dynamic_cast<SR_UTILS_NS::Transform3D*>(pTransform));
                     break;
                 case SR_UTILS_NS::Measurement::SpaceZero:
                 case SR_UTILS_NS::Measurement::Space4D:
@@ -120,7 +123,23 @@ namespace SR_CORE_GUI_NS {
                     break;
             }
 
-            DrawSwitchTransform();
+            changed |= DrawSwitchTransform();
+
+            if (!m_isUsed && changed) {
+                SR_SAFE_DELETE_PTR(m_oldTransformMarshal)
+                m_oldTransformMarshal = pOldTransform->Save(SR_UTILS_NS::SavableContext(nullptr, SR_UTILS_NS::SavableFlagBits::SAVABLE_FLAG_NONE));
+                m_isUsed = true;
+            }
+
+            if (m_isUsed && SR_UTILS_NS::Input::Instance().GetMouseUp(SR_UTILS_NS::MouseCode::MouseLeft)) {
+                auto&& cmd = new SR_CORE_NS::Commands::GameObjectTransform(pEngine, pTransform->GetGameObject(), m_oldTransformMarshal->CopyPtr());
+                pEngine->GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
+
+                SR_SAFE_DELETE_PTR(m_oldTransformMarshal)
+                m_isUsed = false;
+            }
+
+            SR_SAFE_DELETE_PTR(pOldTransform)
 
             DrawComponents(dynamic_cast<SR_UTILS_NS::IComponentable*>(m_gameObject.Get()));
 
@@ -201,35 +220,48 @@ namespace SR_CORE_GUI_NS {
         });
     }
 
-    void Inspector::DrawTransform2D(SR_UTILS_NS::Transform2D *pTransform) const {
+    bool Inspector::DrawTransform2D(SR_UTILS_NS::Transform2D *pTransform) const {
         TextCenter("Transform 2D");
 
+        bool changed = false;
+
         auto&& translation = pTransform->GetTranslation();
-        if (Graphics::GUI::DrawVec3Control("Translation", translation, 0.f, 70.f, 0.01f))
+        if (SR_GRAPH_GUI_NS::DrawVec3Control("Translation", translation, 0.f, 0.01f)) {
             pTransform->SetTranslation(translation);
+            changed = true;
+        }
 
         auto&& rotation = pTransform->GetRotation();
-        if (Graphics::GUI::DrawVec3Control("Rotation", rotation))
+        if (SR_GRAPH_GUI_NS::DrawVec3Control("Rotation", rotation)) {
             pTransform->SetRotation(rotation);
+            changed = true;
+        }
 
         auto&& scale = pTransform->GetScale();
-        if (Graphics::GUI::DrawVec3Control("Scale", scale, 1.f) && !scale.HasZero())
+        if (SR_GRAPH_GUI_NS::DrawVec3Control("Scale", scale, 1.f, 0.01f) && !scale.HasZero()) {
             pTransform->SetScale(scale);
+            changed = true;
+        }
 
         auto&& skew = pTransform->GetSkew();
-        if (Graphics::GUI::DrawVec3Control("Skew", skew, 1.f) && !skew.HasZero())
+        if (SR_GRAPH_GUI_NS::DrawVec3Control("Skew", skew, 1.f, 0.01f) && !skew.HasZero()) {
             pTransform->SetSkew(skew);
+            changed = true;
+        }
 
-        SR_GRAPH_GUI_NS::EnumCombo<SR_UTILS_NS::Anchor>("Anchor", pTransform->GetAnchor(), [pTransform](auto&& value) {
+        SR_GRAPH_GUI_NS::EnumCombo<SR_UTILS_NS::Anchor>("Anchor", pTransform->GetAnchor(), [&changed, pTransform](auto&& value) {
             pTransform->SetAnchor(value);
+            changed = true;
         });
 
-        SR_GRAPH_GUI_NS::EnumCombo<SR_UTILS_NS::Stretch>("Stretch", pTransform->GetStretch(), [pTransform](auto&& value) {
+        SR_GRAPH_GUI_NS::EnumCombo<SR_UTILS_NS::Stretch>("Stretch", pTransform->GetStretch(), [&changed, pTransform](auto&& value) {
             pTransform->SetStretch(value);
+            changed = true;
         });
 
-        SR_GRAPH_GUI_NS::EnumCombo<SR_UTILS_NS::PositionMode>("Position mode", pTransform->GetPositionMode(), [pTransform](auto&& value) {
+        SR_GRAPH_GUI_NS::EnumCombo<SR_UTILS_NS::PositionMode>("Position mode", pTransform->GetPositionMode(), [&changed, pTransform](auto&& value) {
             pTransform->SetPositionMode(value);
+            changed = true;
         });
 
         ImGui::Separator();
@@ -239,57 +271,50 @@ namespace SR_CORE_GUI_NS {
         int32_t priority = pTransform->GetLocalPriority();
         if (ImGui::InputInt("Priority", &priority)) {
             pTransform->SetLocalPriority(priority);
+            changed = true;
         }
 
         bool isRelativePriority = pTransform->IsRelativePriority();
         if (ImGui::Checkbox("Relative", &isRelativePriority)) {
             pTransform->SetRelativePriority(isRelativePriority);
+            changed = true;
         }
 
         ImGui::Separator();
+
+        return changed;
     }
 
-    void Inspector::DrawTransform3D(SR_UTILS_NS::Transform3D *transform) {
+    bool Inspector::DrawTransform3D(SR_UTILS_NS::Transform3D *transform) {
         TextCenter("Transform 3D");
 
-        auto&& oldTransform = transform->Copy();
         bool changed = false;
+
         auto&& translation = transform->GetTranslation();
-        if (Graphics::GUI::DrawVec3Control("Translation", translation, 0.f, 70.f, 0.01f)) {
+        if (SR_GRAPH_GUI_NS::DrawVec3Control("Translation", translation, 0.f, 0.01f)) {
             transform->SetTranslation(translation);
             changed = true;
         }
+
         auto&& rotation = transform->GetRotation();  
-        if (Graphics::GUI::DrawVec3Control("Rotation", rotation)) {
+        if (SR_GRAPH_GUI_NS::DrawVec3Control("Rotation", rotation)) {
             transform->SetRotation(rotation);
             changed = true;
         }
+
         auto&& scale = transform->GetScale();
-        if (Graphics::GUI::DrawVec3Control("Scale", scale, 1.f) && !scale.HasZero()) {
+        if (SR_GRAPH_GUI_NS::DrawVec3Control("Scale", scale, 1.f, 0.01f) && !scale.HasZero()) {
             transform->SetScale(scale);
             changed = true;
         }
+
         auto&& skew = transform->GetSkew();
-        if (Graphics::GUI::DrawVec3Control("Skew", skew, 1.f) && !skew.HasZero()) {
+        if (SR_GRAPH_GUI_NS::DrawVec3Control("Skew", skew, 1.f, 0.01f) && !skew.HasZero()) {
             transform->SetSkew(skew);
             changed = true;
         }
 
-        if (!m_isUsed && changed) {
-            SR_SAFE_DELETE_PTR(m_oldTransformMarshal)
-            m_oldTransformMarshal = oldTransform->Save(SR_UTILS_NS::SavableContext(nullptr, SR_UTILS_NS::SavableFlagBits::SAVABLE_FLAG_NONE));
-            m_isUsed = true;
-        }
-        if (m_isUsed && SR_UTILS_NS::Input::Instance().GetMouseUp(SR_UTILS_NS::MouseCode::MouseLeft)) {
-            auto&& pEngine = dynamic_cast<EditorGUI*>(GetManager())->GetEngine();
-            auto&& cmd = new SR_CORE_NS::Commands::GameObjectTransform(pEngine, transform->GetGameObject(), m_oldTransformMarshal->CopyPtr());
-            pEngine->GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
-
-            SR_SAFE_DELETE_PTR(m_oldTransformMarshal)
-            m_isUsed = false;
-        }
-
-        SR_SAFE_DELETE_PTR(oldTransform)
+        return changed;
     }
 
     void SR_CORE_NS::GUI::Inspector::BackupTransform(const SR_UTILS_NS::GameObject::Ptr& ptr, const std::function<void()>& operation) const
@@ -302,7 +327,7 @@ namespace SR_CORE_GUI_NS {
         ///Engine::Instance().GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
     }
 
-    void Inspector::DrawSwitchTransform() {
+    bool Inspector::DrawSwitchTransform() {
         auto&& pTransform = m_gameObject->GetTransform();
 
         const char* space_types[] = { "Zero (Holder)", "1D", "2D", "3D", "4D" };
@@ -311,18 +336,20 @@ namespace SR_CORE_GUI_NS {
             switch (static_cast<SR_UTILS_NS::Measurement>(item_current)) {
                 case SR_UTILS_NS::Measurement::SpaceZero:
                     m_gameObject->SetTransform(new SR_UTILS_NS::TransformZero());
-                    break;
+                    return true;
                 case SR_UTILS_NS::Measurement::Space2D:
                     m_gameObject->SetTransform(new SR_UTILS_NS::Transform2D());
-                    break;
+                    return true;
                 case SR_UTILS_NS::Measurement::Space3D:
                     m_gameObject->SetTransform(new SR_UTILS_NS::Transform3D());
-                    break;
+                    return true;
                 case SR_UTILS_NS::Measurement::Space4D:
                 default:
                     break;
             }
         }
+
+        return false;
     }
 
     void Inspector::DrawComponentProperties(SR_UTILS_NS::Component* pComponent) {
