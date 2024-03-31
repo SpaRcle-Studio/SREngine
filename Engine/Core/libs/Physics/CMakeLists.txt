@@ -81,11 +81,8 @@ if (SR_PHYSICS_USE_PHYSX)
     set(PX_USE_PLATFORM_MAP_FLAG OFF CACHE BOOL "Use platform MAP flag")
     set(PX_BUILDPUBLICSAMPLES OFF CACHE BOOL "Generate the samples projects")
 
-    if (ANDROID_NDK)
-        set(PX_GENERATE_STATIC_LIBRARIES ON CACHE BOOL "Generate static libraries")
-    else()
-        set(PX_GENERATE_STATIC_LIBRARIES OFF CACHE BOOL "Generate static libraries")
-    endif()
+    set(PX_GENERATE_STATIC_LIBRARIES ON CACHE BOOL "Generate static libraries")
+    set(PX_GENERATE_GPU_STATIC_LIBRARIES ON CACHE BOOL "Generate static libraries")
 
     set(PX_FLOAT_POINT_PRECISE_MATH OFF CACHE BOOL "Float point precise math")
     set(NV_USE_STATIC_WINCRT OFF CACHE BOOL "Use the statically linked windows CRT")
