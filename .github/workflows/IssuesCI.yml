@@ -43,7 +43,7 @@ jobs:
             Linux Build State: ${{inputs.linuxBuildState}}
             Windows Build State: ${{inputs.windowsBuildState}}
             Commit: ${{inputs.commitSha}}
-            Commit Branch: ${{inputs.commitBranch}}
+            Commit Branch: `${{inputs.commitBranch}}`
             Commit Author: ${{inputs.commitActor}}
           assignees: ${{inputs.commitActor}}
           labels: build-failed

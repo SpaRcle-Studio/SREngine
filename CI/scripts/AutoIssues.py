@@ -17,7 +17,7 @@ def getIssueBranch(issue):
     if body == None:
         return None
 
-    regex = re.search('Commit Branch: <(.*)>', body)
+    regex = re.search('Commit Branch: `(.*)`', body)
     if regex != None:
         return regex.group(1)
     return None
