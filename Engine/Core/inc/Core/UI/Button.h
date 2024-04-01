@@ -9,16 +9,11 @@
 
 namespace SR_CORE_UI_NS {
     class Button : public IButton {
-        SR_ENTITY_SET_VERSION(1000);
-        SR_INITIALIZE_COMPONENT(Button);
-        using Super = SR_UTILS_NS::Component;
+        SR_REGISTER_NEW_COMPONENT(Button, 1001);
+        using Super = IButton;
     public:
-        static Component* LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage);
-
+        bool InitializeEntity() noexcept override;
         void OnDestroy() override;
-
-    public:
-        SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save(SR_UTILS_NS::SavableContext data) const override;
 
     };
 }

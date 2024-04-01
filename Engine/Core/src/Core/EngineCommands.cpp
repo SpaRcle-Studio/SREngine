@@ -93,7 +93,7 @@ namespace SR_CORE_NS::Commands {
         }
 
         SR_HTYPES_NS::Marshal copy = m_newMarshal->Copy();
-        pObject->SetTransform(SR_UTILS_NS::Transform::Load(copy, pObject.Get()));
+        pObject->SetTransform(SR_UTILS_NS::Transform::Load(copy));
         return true;
     }
 
@@ -106,7 +106,7 @@ namespace SR_CORE_NS::Commands {
         }
 
         SR_HTYPES_NS::Marshal copy = m_oldMarshal->Copy();
-        pObject->SetTransform(SR_UTILS_NS::Transform::Load(copy, pObject.Get()));
+        pObject->SetTransform(SR_UTILS_NS::Transform::Load(copy));
         return true;
     }
 
