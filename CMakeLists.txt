@@ -21,6 +21,19 @@ if (WIN32)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DNOMINMAX")
 endif()
 
+if (SR_DISABLE_EXCEPTIONS)
+    # TODO: not working
+    if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-exceptions")
+        message(STATUS "Using GNU compiler: -fno-exceptions enabled")
+    elseif(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /EHs")
+        message(STATUS "Using MSVC compiler: /EHs enabled")
+    else()
+        message(WARNING "Unknown compiler, exceptions handling settings may not be correct")
+    endif()
+endif()
+
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DSR_DLL_EXPORTS -DSR_UTILS_ASSIMP")
 
 set(SR_PHYSICS_USE_BULLET3 OFF)

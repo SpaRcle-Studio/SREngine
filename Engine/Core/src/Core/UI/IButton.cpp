@@ -39,8 +39,13 @@ namespace SR_CORE_UI_NS {
     }
 
     void IButton::Update(float_t dt) {
-        auto&& mousePosition = GetCamera()->GetMousePos();
-        auto&& pHoveredMesh = GetCamera()->GetRenderTechnique()->PickMeshAt(mousePosition);
+        auto&& pCamera = GetCamera();
+        if (!pCamera) {
+            return;
+        }
+
+        auto&& mousePosition = pCamera->GetMousePos();
+        auto&& pHoveredMesh = pCamera->GetRenderTechnique()->PickMeshAt(mousePosition);
         auto&& isPressed = SR_UTILS_NS::Input::Instance().GetMouse(SR_UTILS_NS::MouseCode::MouseLeft);
         bool isHovered = false;
 

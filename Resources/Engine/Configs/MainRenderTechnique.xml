@@ -28,6 +28,7 @@
                     <Default/>
                     <GizmoSelection/>
                     <Gizmo/>
+                    <Debug/>
                 </DisallowedLayers>
             </MeshDrawerPass>
         </Passes>
