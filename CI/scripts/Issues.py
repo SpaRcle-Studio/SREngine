@@ -1,3 +1,5 @@
+print("Issues.py script is running...")
+
 try:
     import os
     import re
