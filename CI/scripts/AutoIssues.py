@@ -14,6 +14,9 @@ except ImportError:
 
 def getIssueBranch(issue):
     body = issue.body
+    if body == None:
+        return None
+
     regex = re.search('Commit Branch: <(.*)>', body)
     if regex != None:
         return regex.group(1)
