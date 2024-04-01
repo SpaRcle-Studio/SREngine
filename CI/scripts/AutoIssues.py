@@ -1,13 +1,16 @@
-print("AutoIssues.py script is running..."
+print("AutoIssues.py script is running...")
+
+import os
+import re
 
 try:
-    import os
-    import re
     from github import Github
     from github import Auth
 except ImportError:
-    print("Import exception occurred!")
-    exit(0)
+    subprocess.run([sys.executable, 'pip', 'install', 'pygithub'])
+    subprocess.run([sys.executable, '-m', 'pip', 'install', 'pygithub'])
+    from github import Github
+    from github import Auth
 
 def getIssueBranch(issue):
     body = issue.body
