@@ -38,8 +38,7 @@ for issue in issues:
     if issue.state == 'closed':
         continue
 
-    body = issue.body
-    issueBranch = getIssueBranch(body)
+    issueBranch = getIssueBranch(issue)
 
     if issueBranch == None:
         print(f"Branch information is not found for issue: {issue.number}")
