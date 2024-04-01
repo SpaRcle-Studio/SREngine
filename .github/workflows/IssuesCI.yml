@@ -62,7 +62,7 @@ jobs:
 
       - name: Auto-closing the issues.
         if: inputs.linuxBuildState != 'failure' && inputs.windowsBuildState != 'failure'
-        id: script
+        id: auto-issue-script
         shell: bash
         working-directory: ${{github.workspace}}/CI/scripts
         run: |
@@ -74,7 +74,7 @@ jobs:
 
       - name: Handling "#SR_CLOSE()" argument.
         if: inputs.linuxBuildState != 'failure' && inputs.windowsBuildState != 'failure'
-        id: script
+        id: issue-script
         shell: bash
         working-directory: ${{github.workspace}}/CI/scripts
         run: | 
