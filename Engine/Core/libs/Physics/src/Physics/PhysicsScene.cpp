@@ -120,6 +120,8 @@ namespace SR_PHYSICS_NS {
     }
 
     bool PhysicsScene::Flush() {
+        SR_TRACY_ZONE;
+
         const bool needFlush = !m_rigidbodyToRemove.empty();
 
         for (auto&& pRigidbody : m_rigidbodyToRegister) {
@@ -177,6 +179,8 @@ namespace SR_PHYSICS_NS {
     }
 
     void PhysicsScene::FixedUpdate() {
+        SR_TRACY_ZONE;
+
         if (Flush()) {
             m_2DWorld->Flush();
             m_3DWorld->Flush();
