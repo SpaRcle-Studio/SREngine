@@ -137,6 +137,7 @@ endif()
 # ----------------------------------------------------------------------------------------------------------------------
 
 if (SR_PHYSICS_STATIC_LIBRARY)
+    add_compile_definitions(PX_PHYSX_STATIC_LIB)
     add_library(Physics STATIC Physics.cxx)
 
     if (CYGWIN)
