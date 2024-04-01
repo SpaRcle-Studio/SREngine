@@ -53,21 +53,33 @@ jobs:
         with:
           fetch-depth: 1
 
-      - name: Closing the issues.
-        if: inputs.linuxBuildState != 'failure' && inputs.windowsBuildState != 'failure'
-        uses: bdougie/close-issues-based-on-label@v1.1
-        env:
-          LABEL: build-failed
-          GITHUB_TOKEN: ${{ secrets.CITOKEN }}
-
       #- name: Closing the issues.
       #  if: inputs.linuxBuildState != 'failure' && inputs.windowsBuildState != 'failure'
-      #  id: script
-      #  shell: bash
-      #  working-directory: ${{github.workspace}}/CI/scripts
-      # run: | 
-      #    python ./Issues.py
+      #  uses: bdougie/close-issues-based-on-label@v1.1
       #  env:
-      #    commitMessage: ${{ inputs.commitMessage }}
-      #    ciToken: ${{ secrets.CITOKEN }}
-      #    commitSha: ${{ inputs.commitSha }}
+      #    LABEL: build-failed
+      #    GITHUB_TOKEN: ${{ secrets.CITOKEN }}
+
+      - name: Auto-closing the issues.
+        if: inputs.linuxBuildState != 'failure' && inputs.windowsBuildState != 'failure'
+        id: script
+        shell: bash
+        working-directory: ${{github.workspace}}/CI/scripts
+        run: |
+          python ./AutoIssues.py
+        env:
+          commitBranch: ${{ inputs.commitBranch }}
+          ciToken: ${{ secrets.CITOKEN }}
+          commitSha: ${{ inputs.commitSha }}
+
+      - name: Handling "#SR_CLOSE()" argument.
+        if: inputs.linuxBuildState != 'failure' && inputs.windowsBuildState != 'failure'
+        id: script
+        shell: bash
+        working-directory: ${{github.workspace}}/CI/scripts
+        run: | 
+          python ./Issues.py
+        env:
+          commitMessage: ${{ inputs.commitMessage }}
+          ciToken: ${{ secrets.CITOKEN }}
+          commitSha: ${{ inputs.commitSha }}
