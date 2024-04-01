@@ -55,7 +55,7 @@ jobs:
 
       - name: Closing the issues.
         if: inputs.linuxBuildState != 'failure' && inputs.windowsBuildState != 'failure'
-        uses: bdougie/close-issues-based-on-label@v1.2
+        uses: bdougie/close-issues-based-on-label@v1.1
         env:
           LABEL: build-failed
           GITHUB_TOKEN: ${{ secrets.CITOKEN }}
