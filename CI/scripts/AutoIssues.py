@@ -50,7 +50,7 @@ for issue in issues:
     if issueBranch == commitBranch:
         try:
             print(f"Creating comment and closing issue: {issue.number}")
-            issue.create_comment(f"Build is successful now. Commit: {commitSha}")
+            issue.create_comment(f"Auto-closing as build in this branch is successful now. Commit: {commitSha}")
             issue.edit(state='closed')
             print(f"Success for issue: {issue.number}")
         except Exception as e:
