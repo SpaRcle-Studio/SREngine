@@ -58,9 +58,9 @@ namespace SR_CORE_NS {
             return;
         }
 
-        while (oldApplicationPath.Exists()) {
-            SR_PLATFORM_NS::Delete(oldApplicationPath);
-        }
+        SR_PLATFORM_NS::WaitAndDelete(oldApplicationPath);
+        SR_PLATFORM_NS::WaitAndDelete(applicationPath.GetFolder().Concat("../srengine-log.txt"));
+        SR_PLATFORM_NS::WaitAndDelete(applicationPath.GetFolder().Concat("../successful"));
 
         SR_LOG("Launcher::DeleteOldApplication() : old application deleted successfully.");
     }
