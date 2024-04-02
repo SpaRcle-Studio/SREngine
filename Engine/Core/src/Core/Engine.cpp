@@ -525,6 +525,7 @@ namespace SR_CORE_NS {
 
             if (m_editor && IsActive() && SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::F2)) {
                 SetGameMode(!IsGameMode());
+                SR_UTILS_NS::Input::Instance().LockCursor(IsGameMode());
             }
 
             if (SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::F3) && lShiftPressed) {
