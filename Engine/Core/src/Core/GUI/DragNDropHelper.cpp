@@ -83,6 +83,7 @@ namespace SR_CORE_GUI_NS {
             bool relative = entityRef.IsRelative();
             if (ImGui::Checkbox(SR_FORMAT_C("Relative##{}-{}", id, (void*)&entityRef), &relative)) {
                 entityRef.SetRelative(relative);
+                entityRef.UpdateTarget();
                 changed = true;
             }
 

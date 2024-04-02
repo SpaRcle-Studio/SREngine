@@ -40,6 +40,8 @@ namespace SR_CORE_UI_NS {
         void SetKeyUpCallback(Callback keyUpCallback) { m_onKeyUp = std::move(keyUpCallback);}
 
     protected:
+        bool CompareObject(GameObjectPtr pObject) const;
+
         virtual void OnIdle();
         virtual void OnHover();
         virtual void OnKeyDown();
