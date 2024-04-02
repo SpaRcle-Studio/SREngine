@@ -45,17 +45,9 @@ namespace SR_CORE_UI_NS {
         }
 
         auto&& mousePosition = pCamera->GetMousePos();
-        auto&& pHoveredMesh = pCamera->GetRenderTechnique()->PickMeshAt(mousePosition);
+        auto&& pHoveredMesh = dynamic_cast<IRenderComponent*>(pCamera->GetRenderTechnique()->PickMeshAt(mousePosition));
         auto&& isPressed = SR_UTILS_NS::Input::Instance().GetMouse(SR_UTILS_NS::MouseCode::MouseLeft);
-        bool isHovered = false;
-
-        /*if (auto&& pMesh = reinterpret_cast<SR_GTYPES_NS::Mesh3D *>(m_properties.Find("Mesh"))) {
-            isHovered = pHoveredMesh == pMesh;
-        }*/
-
-        if (auto&& pMesh = GetParent()->GetComponent<SR_GTYPES_NS::Mesh3D>()) {
-            isHovered = pHoveredMesh == pMesh;
-        }
+        bool isHovered = pHoveredMesh ? CompareObject(pHoveredMesh->GetGameObject()) : false;
 
         if (isHovered) {
             m_state = ButtonState::Hovered;
@@ -104,5 +96,16 @@ namespace SR_CORE_UI_NS {
             m_onKeyUp();
             m_onKeyUp = Callback();
         }
+    }
+
+    bool IButton::CompareObject(GameObjectPtr pObject) const {
+        while (pObject) {
+            if (pObject == GetGameObject()) {
+                return true;
+            }
+            pObject = pObject->GetParent();
+        }
+
+        return false;
     }
 }
