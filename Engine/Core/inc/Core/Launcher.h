@@ -24,8 +24,8 @@ namespace SR_CORE_NS {
         bool InitializeResourcesFolder(int argc, char** argv) override { return true; }
 
     private:
-        bool UnpackAndExecute();
-        void DeleteOldApplication();
+        static bool UnpackAndExecute();
+        static void DeleteOldApplication();
     };
 }
 

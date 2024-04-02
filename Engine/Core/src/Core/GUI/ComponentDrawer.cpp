@@ -91,7 +91,15 @@ namespace SR_CORE_NS::GUI {
                 }
             }
 
-            Graphics::GUI::DrawValue("Script", pBehaviour->GetRawBehaviour() ? pBehaviour->GetRawBehaviour()->GetResourcePath().ToStringRef() : "");
+            SR_UTILS_NS::Path path = "";
+            if (pBehaviour->GetRawBehaviour()) {
+                path = pBehaviour->GetRawBehaviour()->GetResourcePath();
+            }
+
+            if (SR_GRAPH_GUI_NS::Button(path.ToStringRef(), index) && !path.Empty()) {
+                auto&& resourceDirectory = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
+                SR_PLATFORM_NS::OpenWithAssociatedApp(resourceDirectory.Concat(path));
+            }
         }
         ImGui::EndGroup();
 
