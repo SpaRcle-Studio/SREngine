@@ -98,7 +98,10 @@ namespace SR_CORE_NS::GUI {
 
             if (SR_GRAPH_GUI_NS::Button(path.ToStringRef(), index) && !path.Empty()) {
                 auto&& resourceDirectory = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
-                SR_PLATFORM_NS::OpenWithAssociatedApp(resourceDirectory.Concat(path));
+                auto&& scriptPath = resourceDirectory.Concat(path);
+                if (!scriptPath.IsEmpty()) {
+                    SR_PLATFORM_NS::OpenWithAssociatedApp(scriptPath);
+                }
             }
         }
         ImGui::EndGroup();
