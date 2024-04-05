@@ -48,6 +48,9 @@ else()
 endif()
 
 include(libs/Utils/cmake/ResourceEmbedder.cmake)
+#include(libs/Utils/cmake/Codegen.cmake)
+
+#SRUtilsCodegen("${CMAKE_CURRENT_SOURCE_DIR}/../../" "${CMAKE_CURRENT_SOURCE_DIR}/config/codegen.xml" "${CMAKE_CURRENT_BINARY_DIR}/Codegen/")
 
 AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Engine/Configs/Features.xml")
 AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Engine/Configs/Layers.xml")
@@ -99,7 +102,7 @@ add_subdirectory(libs/Graphics)
 message(STATUS "CONFIGURING Scripting -----------------")
 add_subdirectory(libs/Scripting)
 
-add_library(Core STATIC ${CORE_ROOT_DIR}/cxx/Core.cxx ${CORE_ROOT_DIR}/cxx/GUI.cxx)
+add_library(Core STATIC ${CORE_ROOT_DIR}/cxx/Core.cxx ${CORE_ROOT_DIR}/cxx/GUI.cxx ${CORE_ROOT_DIR}/cxx/Codegen.cxx)
 
 if (SR_UTILS_STATIC_LIBRARY)
     list(APPEND SR_CORE_LINK_LIBRARIES Utils)
@@ -135,6 +138,7 @@ target_link_libraries(Core ${SR_CORE_LINK_LIBRARIES})
 
 target_include_directories(Core PUBLIC ${CORE_ROOT_DIR}/inc)
 
+target_include_directories(Core PUBLIC ${CMAKE_CURRENT_BINARY_DIR})
 target_include_directories(Core PUBLIC ${CMAKE_CURRENT_BINARY_DIR}/Utils/include)
 target_include_directories(Core PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/Utils/libs/assimp/include)
 target_include_directories(Core PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/Utils/libs/FQHSA/header)
