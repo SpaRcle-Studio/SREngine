@@ -109,7 +109,7 @@ namespace SR_CORE_GUI_NS {
             auto&& resourcesFolder = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
             auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesFolder, pProperty->GetFileFilter());
 
-            if (!path.Empty()) {
+            if (!path.IsEmpty()) {
                 pProperty->SetPath(path);
             }
         }

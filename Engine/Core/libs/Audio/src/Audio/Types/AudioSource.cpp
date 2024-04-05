@@ -88,7 +88,7 @@ namespace SR_AUDIO_NS {
     }
 
     void AudioSource::OnEnable() {
-        if (!m_path.Empty()) {
+        if (!m_path.IsEmpty()) {
             m_handle = SoundManager::Instance().Play(m_path.ToString(),m_params);
         }
         Component::OnEnable();

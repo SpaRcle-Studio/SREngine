@@ -128,7 +128,7 @@ namespace SR_CORE_NS {
 
         SR_SYSTEM_LOG("Application::Init() : initializing application...");
 
-        if (m_resourcesPath.Empty()) {
+        if (m_resourcesPath.IsEmpty()) {
             SR_ERROR("Application::Init() : resources path is empty!");
             return false;
         }

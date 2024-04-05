@@ -375,7 +375,7 @@ namespace SR_CORE_GUI_NS {
             return;
         }
 
-        if (scenePath.Empty()) {
+        if (scenePath.IsEmpty()) {
             return;
         }
 
@@ -398,7 +398,7 @@ namespace SR_CORE_GUI_NS {
         auto&& marshal = SR_HTYPES_NS::Marshal::Load(m_cachedScenePath);
         SR_UTILS_NS::Path scenePath = marshal.Read<std::string>();
 
-        if (scenePath.Empty()) {
+        if (scenePath.IsEmpty()) {
             return false;
         }
 
@@ -490,7 +490,7 @@ namespace SR_CORE_GUI_NS {
             if (ImGui::MenuItem("Load")) {
                 auto&& scenesPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
 
-                if (auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(scenesPath.ToString(), { { "Scene", "scene,prefab" } }); !path.Empty()) {
+                if (auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(scenesPath.ToString(), { { "Scene", "scene,prefab" } }); !path.IsEmpty()) {
                     path = path.RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetCachePath());
                     path = path.RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetResPath());
 
@@ -527,7 +527,7 @@ namespace SR_CORE_GUI_NS {
                 {
                     const auto scenesPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
 
-                    if (auto&& path = SR_UTILS_NS::FileDialog::Instance().SaveDialog(scenesPath.ToString(), { { "Scene", "scene,prefab" } }); !path.Empty())
+                    if (auto&& path = SR_UTILS_NS::FileDialog::Instance().SaveDialog(scenesPath.ToString(), { { "Scene", "scene,prefab" } }); !path.IsEmpty())
                     {
                         path = path.RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetCachePath());
                         path = path.RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetResPath());
@@ -595,7 +595,7 @@ namespace SR_CORE_GUI_NS {
             if (ImGui::MenuItem("Instance from file")) {
                 if (auto&& pScene = m_engine->GetScene(); pScene.RecursiveLockIfValid()) {
                     auto&& resourcesPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
-                    if (auto path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesPath.ToString(), { { "Any model", "prefab,pmx,fbx,obj,blend,dae,abc,stl,ply,glb,gltf,x3d,sfg,bvh,3ds,gltf" } }); !path.Empty()) {
+                    if (auto path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesPath.ToString(), { { "Any model", "prefab,pmx,fbx,obj,blend,dae,abc,stl,ply,glb,gltf,x3d,sfg,bvh,3ds,gltf" } }); !path.IsEmpty()) {
                         /// TODO:Сделать обратимость
                         pScene->InstanceFromFile(path);
                     }

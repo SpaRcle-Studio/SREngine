@@ -25,7 +25,7 @@ namespace SR_PTYPES_NS {
     }
 
     PhysicsMaterial* PhysicsMaterial::Load(const SR_UTILS_NS::Path& rawPath) {
-        if (rawPath.Empty()) {
+        if (rawPath.IsEmpty()) {
             SRHalt("PhysicsMaterial::Load() : path is empty!");
             return nullptr;
         }

@@ -75,7 +75,7 @@ namespace SR_CORE_NS::GUI {
                 if (path.Exists()) {
                     pBehaviour->SetRawBehaviour(path);
                 }
-                else if (!path.Empty()) {
+                else if (!path.IsEmpty()) {
                     SR_WARN("ComponentDrawer::DrawComponent() : behaviour is not found!\n\tPath: " + path.ToString());
                 }
             }
@@ -96,7 +96,7 @@ namespace SR_CORE_NS::GUI {
                 path = pBehaviour->GetRawBehaviour()->GetResourcePath();
             }
 
-            if (SR_GRAPH_GUI_NS::Button(path.ToStringRef(), index) && !path.Empty()) {
+            if (SR_GRAPH_GUI_NS::Button(path.ToStringRef(), index) && !path.IsEmpty()) {
                 auto&& resourceDirectory = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
                 auto&& scriptPath = resourceDirectory.Concat(path);
                 if (!scriptPath.IsEmpty()) {
