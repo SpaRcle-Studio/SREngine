@@ -91,6 +91,8 @@ AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Editor/Configs/EditorCascadedSha
 
 EmbedResources("${CMAKE_CURRENT_BINARY_DIR}/libs/Utils/include/Utils" "SREngine/Resources" ${EMBED_RESOURCES_LIST})
 
+set(SR_UTILS_CI_BUILD OFF)
+
 message(STATUS "CONFIGURING Utils -----------------")
 add_subdirectory(libs/Utils)
 message(STATUS "CONFIGURING Audio -----------------")
