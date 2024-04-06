@@ -30,6 +30,7 @@ jobs:
           sudo apt update
           sudo apt-get install -y ${{ env.dependencies }}
           sudo pip install numpy
+          sudo pip install clang
         env:
           dependencies: ${{ vars.UBUNTU_DEPENDENCIES }}
 
