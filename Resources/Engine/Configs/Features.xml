@@ -30,7 +30,7 @@
 
        <AutoReloadResources Value="true"/>
 
-       <RayTracing Value="true"/>
+       <RayTracing Value="false"/>
 
        <AccumulateDt Value="true"/>
 
