@@ -24,8 +24,8 @@ on:
         required: true
 
 jobs:
-  Manager:
-    name: Manager.
+  PostBuild:
+    name: PostBuild.
     runs-on: ubuntu-latest
     steps:
       - run: |

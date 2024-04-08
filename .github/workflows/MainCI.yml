@@ -117,11 +117,11 @@ jobs:
       buildDebug: ${{needs.manage.outputs.buildDebug}}
       artifactPush: ${{needs.manage.outputs.artifactPush}}
 
-  HandleIssues:
-    name: Issues.
+  PostBuild:
+    name: PostBuild.
     needs: [BuildWindowsJob, BuildLinuxJob]
     if: ${{ always() }}
-    uses: ./.github/workflows/IssuesCI.yml
+    uses: ./.github/workflows/PostBuild.yml
     with:
       windowsBuildState: ${{needs.BuildWindowsJob.result}}
       linuxBuildState: ${{needs.BuildLinuxJob.result}}
