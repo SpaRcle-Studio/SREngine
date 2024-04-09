@@ -469,12 +469,12 @@ namespace SR_CORE_NS {
                 continue;
             }
 
-            m_engineScene->UpdateMainCamera();
-
             auto&& pScene = m_engineScene->pScene;
 
+            m_engineScene->UpdateMainCamera();
+
             if (m_worldTimer.Update() && pScene.LockIfValid()) {
-                auto&& pMainCamera = m_engineScene->pMainCamera;
+                auto pMainCamera = m_engineScene->pMainCamera;
 
                 if (!pMainCamera) {
                     SR_NOOP;

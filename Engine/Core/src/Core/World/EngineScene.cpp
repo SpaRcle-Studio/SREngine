@@ -43,6 +43,8 @@ namespace SR_CORE_NS {
 
         SRAssert(pScene);
 
+        pScene->Init();
+
         m_accumulateDt = SR_UTILS_NS::Features::Instance().Enabled("AccumulateDt", true);
 
         if (SR_UTILS_NS::Features::Instance().Enabled("Renderer", true)) {
