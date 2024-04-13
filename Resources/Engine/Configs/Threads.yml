@@ -1,0 +1,74 @@
+# The order of the threads and states is important.
+# Change this file only if you know what you are doing! :D
+
+#threads:
+#  - name: "PhysicsSimulation"
+#    states:
+#      - name: "PhysicsSimulation"
+#        start_condition:
+#          idle: ["PhysicsSynchronization"]
+#
+#  - name: "ResourceLoading"
+#    states:
+#      - name: "ResourceLoading"
+#        start_condition:
+#          idle: ["ResourceSynchronization"]
+#
+#  - name: "ChunkLoadingAndGeneration"
+#    states:
+#      - name: "ChunkLoadingAndGeneration"
+#        start_condition:
+#          idle: ["ChunkSystem", "ChunkInstantiate"]
+#
+#  - name: "Engine"
+#    states:
+#      - name: "ResourceSynchronization"
+#        start_condition:
+#          ready: ["ResourceLoading"]
+#
+#      - name: "PhysicsSynchronization"
+#        start_condition:
+#          ready: ["PhysicsSimulation"]
+#
+#      - name: "ChunkSystem"
+#
+#      - name: "ChunkInstantiate"
+#        start_condition:
+#          ready: ["ChunkLoadingAndGeneration"]
+#
+#      - name: "SceneUpdate"
+#
+#      - name: "ImGuiEditor"
+#        start_condition:
+#          idle: ["Submit"]
+#
+#      - name: "RenderUpdate"
+#
+#      - name: "Draw"
+#        finish_condition:
+#          ready: ["Submit"]
+#
+#  - name: "Submit"
+#    states:
+#      - name: "Submit"
+#        start_condition:
+#          ready: ["Draw"]
+#        finish_condition:
+#          idle: ["Draw"]
+
+threads:
+  - name: "Engine"
+    states:
+      - name: "DeltaTime"
+      - name: "Prepare"
+      - name: "SceneUpdate"
+        finish_condition:
+          ready: [ "Submit" ]
+
+  - name: "Submit"
+    states:
+      - name: "Submit"
+        start_condition:
+          ready: ["SceneUpdate"]
+        finish_condition:
+          idle: ["SceneUpdate"]

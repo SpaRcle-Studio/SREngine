@@ -5,7 +5,8 @@
 #include <Scripting/Impl/EvoScriptManager.h>
 
 namespace SR_SCRIPTING_NS {
-    void EvoScriptManager::Update(float_t dt, bool force) {
+    void EvoScriptManager::Update(bool force) {
+        SR_TRACY_ZONE;
         SR_LOCK_GUARD;
 
         if (force) {

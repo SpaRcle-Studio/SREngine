@@ -17,6 +17,7 @@
 #include <Utils/Tests/SharedPtrAutotests.h>
 #include <Utils/Types/RawMesh.h>
 #include <Utils/SRLM/LogicalMachine.h>
+#include <Utils/TaskManager/ThreadWorker.h>
 
 #include <Graphics/GUI/NodeManager.h>
 #include <Graphics/Types/Shader.h>
@@ -199,6 +200,8 @@ namespace SR_CORE_NS {
         volatile bool hasErrors = false;
 
         while (!hasErrors) {
+            SR_TRACY_ZONE;
+
             if (m_isNeedReload) {
                 Close();
                 hasErrors |= !Init();

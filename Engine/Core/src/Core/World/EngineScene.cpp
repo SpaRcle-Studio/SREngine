@@ -102,9 +102,7 @@ namespace SR_CORE_NS {
         if (pScene.LockIfValid()) {
             pEngine->GetCmdManager()->Update();
 
-            pScene->GetLogicBase()->PostLoad();
-
-            SR_SCRIPTING_NS::EvoScriptManager::Instance().Update(dt, false);
+            SR_SCRIPTING_NS::EvoScriptManager::Instance().Update(false);
 
             pScene->Prepare();
 
@@ -232,5 +230,36 @@ namespace SR_CORE_NS {
         pEngine->FixedUpdate();
 
         pSceneUpdater->FixedUpdate();
+    }
+
+    void EngineScene::Update(float_t dt) {
+        SR_TRACY_ZONE;
+
+        pScene->GetLogicBase()->PostLoad();
+        pScene->Prepare();
+
+        const bool isPaused = pEngine->IsPaused() || !pEngine->IsActive() || pEngine->HasSceneInQueue();
+
+        pSceneUpdater->Build(isPaused);
+        pSceneUpdater->Update(dt);
+
+        UpdateFrequency();
+
+        if (m_accumulateDt) {
+            m_accumulator += dt;
+        }
+        else {
+            m_accumulator += SR_MIN(dt, m_updateFrequency);
+        }
+
+        /// fixed update
+        if (m_accumulator >= m_updateFrequency)
+        {
+            while (m_accumulator >= m_updateFrequency)
+            {
+                FixedStep(isPaused);
+                m_accumulator -= m_updateFrequency;
+            }
+        }
     }
 }

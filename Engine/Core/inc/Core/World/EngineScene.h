@@ -37,6 +37,7 @@ namespace SR_CORE_NS {
         void SetGameMode(bool gameMode);
 
         void UpdateMainCamera();
+        void Update(float_t dt);
         void Draw(float_t dt);
         void SkipDraw();
         void SetSpeed(float_t speed);

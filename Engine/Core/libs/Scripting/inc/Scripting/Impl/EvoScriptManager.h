@@ -25,7 +25,7 @@ namespace SR_SCRIPTING_NS {
         SR_NODISCARD ScriptPtr Load(const SR_UTILS_NS::Path& localPath);
         SR_NODISCARD bool ReloadScript(const SR_UTILS_NS::Path& localPath);
 
-        void Update(float_t dt, bool force);
+        void Update(bool force);
 
         void OnSingletonDestroy() override;
 

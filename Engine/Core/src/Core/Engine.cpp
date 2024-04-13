@@ -126,6 +126,14 @@ namespace SR_CORE_NS {
             }
         }
 
+        m_threadsWorker = SR_UTILS_NS::ThreadsWorker::Load("Engine/Configs/Threads.yml");
+        if (!m_threadsWorker) {
+            SR_ERROR("Engine::Create() : failed to load threads worker!");
+            return false;
+        }
+
+        m_threadsWorker->GetContext().SetPointer(this);
+
         FlushScene();
 
         m_timeStart = Clock::now();
@@ -348,6 +356,10 @@ namespace SR_CORE_NS {
 
         m_isRun = true;
 
+        //if (m_threadsWorker) {
+        //    m_threadsWorker->Start();
+        //}
+
         if (SR_UTILS_NS::Features::Instance().Enabled("ChunkSystem", true)) {
             SR_INFO("Engine::Run() : running world thread...");
 
@@ -362,6 +374,13 @@ namespace SR_CORE_NS {
         SR_INFO("Engine::Close() : closing game engine...");
 
         m_isRun = false;
+
+        if (m_threadsWorker) {
+            if (m_threadsWorker->IsActive()) {
+                m_threadsWorker->Stop();
+            }
+            m_threadsWorker.Reset();
+        }
 
         while (!m_sceneQueue.Empty()) {
             FlushScene();
@@ -405,7 +424,7 @@ namespace SR_CORE_NS {
             delete pWindow;
         });
 
-        SR_SCRIPTING_NS::EvoScriptManager::Instance().Update(0.f, true);
+        SR_SCRIPTING_NS::EvoScriptManager::Instance().Update(true);
 
         return true;
     }
@@ -645,5 +664,9 @@ namespace SR_CORE_NS {
 
     Engine::RenderScenePtr Engine::GetRenderScene() const {
         return m_engineScene ? m_engineScene->pRenderScene : RenderScenePtr();
+    }
+
+    Engine::PhysicsScenePtr Engine::GetPhysicsScene() const {
+        return m_engineScene ? m_engineScene->pPhysicsScene : PhysicsScenePtr();
     }
 }

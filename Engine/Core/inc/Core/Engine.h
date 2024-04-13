@@ -15,6 +15,7 @@
 #include <Utils/Input/InputHandler.h>
 #include <Utils/Types/Function.h>
 #include <Utils/Types/SafeGateArray.h>
+#include <Utils/TaskManager/ThreadWorker.h>
 
 #include <Core/EvoScriptAPI.h>
 #include <Core/EngineCommands.h>
@@ -71,6 +72,8 @@ namespace SR_CORE_NS {
         void SetSpeed(float_t speed);
         void SetGameMode(bool enabled);
 
+        bool IsNeedReloadResources();
+
         void FixedUpdate();
         void FlushScene();
 
@@ -78,6 +81,7 @@ namespace SR_CORE_NS {
         SR_NODISCARD ScenePtr GetScene() const;
         SR_NODISCARD RenderContextPtr GetRenderContext() const { return m_renderContext; }
         SR_NODISCARD RenderScenePtr GetRenderScene() const;
+        SR_NODISCARD PhysicsScenePtr GetPhysicsScene() const;
         SR_NODISCARD WindowPtr GetWindow() const { return m_window; }
         SR_NODISCARD SR_WORLD_NS::SceneUpdater* GetSceneBuilder() const;
         SR_NODISCARD bool IsActive() const { return m_isActive; }
@@ -86,6 +90,7 @@ namespace SR_CORE_NS {
         SR_NODISCARD bool IsGameMode() const { return m_isGameMode; }
         SR_NODISCARD SR_CORE_GUI_NS::EditorGUI* GetEditor() const { return m_editor; }
         SR_NODISCARD SR_UTILS_NS::CmdManager* GetCmdManager() const { return m_cmdManager; }
+        SR_NODISCARD EngineScene* GetEngineScene() const { return m_engineScene; }
 
     public:
         bool Create();
@@ -95,7 +100,6 @@ namespace SR_CORE_NS {
 
     private:
         bool CreateMainWindow();
-        bool IsNeedReloadResources();
         bool InitializeRender();
         void SynchronizeFreeResources();
 
@@ -115,6 +119,8 @@ namespace SR_CORE_NS {
         float_t m_speed = 1.f;
         SR_UTILS_NS::TimePointType m_timeStart;
         SR_HTYPES_NS::Timer m_worldTimer;
+
+        SR_UTILS_NS::ThreadsWorker::Ptr m_threadsWorker = nullptr;
 
         SR_UTILS_NS::CmdManager* m_cmdManager  = nullptr;
         SR_UTILS_NS::InputDispatcher* m_input = nullptr;
