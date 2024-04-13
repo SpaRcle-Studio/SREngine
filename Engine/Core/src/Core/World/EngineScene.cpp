@@ -87,7 +87,7 @@ namespace SR_CORE_NS {
     void EngineScene::Draw(float_t dt) {
         SR_TRACY_ZONE;
 
-        DrawChunkDebug();
+        UpdateChunkDebug();
 
         if (pRenderScene.RecursiveLockIfValid()) {
             SR_UTILS_NS::DebugDraw::Instance().SwitchCallbacks(pRenderScene->GetDebugRenderer());
@@ -172,6 +172,7 @@ namespace SR_CORE_NS {
     }
 
     void EngineScene::UpdateMainCamera() {
+        SR_TRACY_ZONE;
         pMainCamera = pRenderScene.Do<SR_GTYPES_NS::Camera::Ptr>([](SR_GRAPH_NS::RenderScene* ptr) -> SR_GTYPES_NS::Camera::Ptr {
             return ptr->GetMainCamera();
         }, SR_GTYPES_NS::Camera::Ptr());
@@ -191,7 +192,7 @@ namespace SR_CORE_NS {
         });
     }
 
-    void EngineScene::DrawChunkDebug() {
+    void EngineScene::UpdateChunkDebug() {
         SR_TRACY_ZONE;
 
         if (auto&& pEditor = pEngine->GetEditor(); !pEditor || !pEditor->Enabled()) {

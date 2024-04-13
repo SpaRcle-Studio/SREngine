@@ -4,6 +4,7 @@
 
 #include <Core/States/SceneUpdateState.h>
 #include <Core/Engine.h>
+#include <Core/World/EngineScene.h>
 
 #include <Graphics/Render/RenderScene.h>
 

@@ -4,6 +4,13 @@
 
 #include <Utils/macros.h>
 
+#include "../src/Core/States/DrawState.cpp"
+#include "../src/Core/States/ChunkSystemState.cpp"
+#include "../src/Core/States/SubmitState.cpp"
+#include "../src/Core/States/PrepareState.cpp"
+#include "../src/Core/States/SceneUpdateState.cpp"
+#include "../src/Core/States/DeltaTimeState.cpp"
+
 #include "../src/Core/Common/Importers.cpp"
 
 #include "../src/Core/Parsers/BlueprintParser.cpp"
@@ -29,8 +36,3 @@
 #include "../src/Core/Tests/TestManager.cpp"
 
 #include "../src/Core/Utils/GraphicsResourceReloader.cpp"
-
-#include "../src/Core/States/SceneUpdateState.cpp"
-#include "../src/Core/States/SubmitState.cpp"
-#include "../src/Core/States/PrepareState.cpp"
-#include "../src/Core/States/DeltaTimeState.cpp"

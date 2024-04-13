@@ -61,14 +61,7 @@ threads:
     states:
       - name: "DeltaTime"
       - name: "Prepare"
+      - name: "ChunkSystem"
       - name: "SceneUpdate"
-        finish_condition:
-          ready: [ "Submit" ]
-
-  - name: "Submit"
-    states:
+      - name: "Draw"
       - name: "Submit"
-        start_condition:
-          ready: ["SceneUpdate"]
-        finish_condition:
-          idle: ["SceneUpdate"]

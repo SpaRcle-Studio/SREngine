@@ -6,8 +6,6 @@
 
 namespace SR_CORE_NS {
     SR_UTILS_NS::ThreadWorkerResult DeltaTimeState::ExecuteImpl() {
-        SR_TRACY_ZONE_N("DeltaTimeState");
-
         SR_HTYPES_NS::Time::Instance().Update();
 
         const auto now = SR_HTYPES_NS::Time::Instance().Now();

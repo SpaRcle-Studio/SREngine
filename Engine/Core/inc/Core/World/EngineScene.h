@@ -32,6 +32,8 @@ namespace SR_CORE_NS {
     public:
         SR_NODISCARD bool Init();
 
+        SR_NODISCARD CameraPtr GetMainCamera() const { return pMainCamera; }
+
         void SetActive(bool active);
         void SetPaused(bool pause);
         void SetGameMode(bool gameMode);
@@ -41,9 +43,9 @@ namespace SR_CORE_NS {
         void Draw(float_t dt);
         void SkipDraw();
         void SetSpeed(float_t speed);
+        void UpdateChunkDebug();
 
     private:
-        void DrawChunkDebug();
         void UpdateFrequency();
         void FixedStep(bool isPaused);
 
