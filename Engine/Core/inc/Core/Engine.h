@@ -54,7 +54,7 @@ namespace SR_CORE_NS {
     class Engine : public SR_HTYPES_NS::SharedPtr<Engine> {
         using Super = SR_HTYPES_NS::SharedPtr<Engine>;
         using Ptr = SR_HTYPES_NS::SharedPtr<Engine>;
-        using WindowPtr = SR_HTYPES_NS::SafePtr<SR_GRAPH_NS::Window>;
+        using WindowPtr = SR_HTYPES_NS::SharedPtr<SR_GRAPH_NS::Window>;
         using RenderContextPtr = SR_HTYPES_NS::SafePtr<SR_GRAPH_NS::RenderContext>;
         using CameraPtr = SR_GTYPES_NS::Camera*;
         using Clock = std::chrono::high_resolution_clock;
@@ -63,6 +63,9 @@ namespace SR_CORE_NS {
         using RenderScenePtr = SR_HTYPES_NS::SafePtr<SR_GRAPH_NS::RenderScene>;
     public:
         explicit Engine(Application* pApplication);
+        ~Engine();
+
+        SR_NODISCARD bool Execute();
 
         void Reload();
 
@@ -75,14 +78,16 @@ namespace SR_CORE_NS {
         bool IsNeedReloadResources();
 
         void FixedUpdate();
-        void FlushScene();
+        bool FlushScene();
+
+        void AddWindow(WindowPtr pWindow);
 
         SR_NODISCARD bool HasSceneInQueue() const { return !m_sceneQueue.Empty(); }
         SR_NODISCARD ScenePtr GetScene() const;
         SR_NODISCARD RenderContextPtr GetRenderContext() const { return m_renderContext; }
         SR_NODISCARD RenderScenePtr GetRenderScene() const;
         SR_NODISCARD PhysicsScenePtr GetPhysicsScene() const;
-        SR_NODISCARD WindowPtr GetWindow() const { return m_window; }
+        SR_NODISCARD WindowPtr GetMainWindow() const { return m_windows.empty() ? nullptr : m_windows.front(); }
         SR_NODISCARD SR_WORLD_NS::SceneUpdater* GetSceneBuilder() const;
         SR_NODISCARD bool IsActive() const { return m_isActive; }
         SR_NODISCARD bool IsRun() const { return m_isRun; }
@@ -91,6 +96,7 @@ namespace SR_CORE_NS {
         SR_NODISCARD SR_CORE_GUI_NS::EditorGUI* GetEditor() const { return m_editor; }
         SR_NODISCARD SR_UTILS_NS::CmdManager* GetCmdManager() const { return m_cmdManager; }
         SR_NODISCARD EngineScene* GetEngineScene() const { return m_engineScene; }
+        SR_NODISCARD bool IsApplicationFocused() const;
 
     public:
         bool Create();
@@ -99,14 +105,12 @@ namespace SR_CORE_NS {
         bool Close();
 
     private:
-        bool CreateMainWindow();
-        bool InitializeRender();
-        void SynchronizeFreeResources();
-
+        static WindowPtr CreateMainWindow();
         void DrawCallback();
-        void WorldThread();
 
     private:
+        mutable std::recursive_mutex m_mutex;
+
         std::atomic<bool> m_isCreate  = false;
         std::atomic<bool> m_isInit = false;
         std::atomic<bool> m_isRun = false;
@@ -118,14 +122,11 @@ namespace SR_CORE_NS {
 
         float_t m_speed = 1.f;
         SR_UTILS_NS::TimePointType m_timeStart;
-        SR_HTYPES_NS::Timer m_worldTimer;
 
         SR_UTILS_NS::ThreadsWorker::Ptr m_threadsWorker = nullptr;
 
         SR_UTILS_NS::CmdManager* m_cmdManager  = nullptr;
         SR_UTILS_NS::InputDispatcher* m_input = nullptr;
-
-        SR_HTYPES_NS::Thread::Ptr m_worldThread = nullptr;
 
         SR_HTYPES_NS::SafeQueue<ScenePtr> m_sceneQueue;
 
@@ -138,7 +139,7 @@ namespace SR_CORE_NS {
 
         RenderContextPtr m_renderContext = { };
 
-        WindowPtr m_window;
+        std::vector<WindowPtr> m_windows;
 
     };
 }

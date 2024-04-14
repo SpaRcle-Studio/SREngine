@@ -34,6 +34,7 @@ namespace SR_PHYSICS_NS {
         virtual ~PhysicsScene();
 
     public:
+        virtual void Update(float_t dt);
         virtual void FixedUpdate();
         virtual bool Init();
 

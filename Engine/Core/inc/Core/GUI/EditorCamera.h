@@ -13,7 +13,7 @@ namespace SR_CORE_GUI_NS {
     class EditorCamera : public SR_GTYPES_NS::Camera {
         SR_ENTITY_SET_VERSION(1000);
     public:
-        EditorCamera(SceneViewer* pSceneViewer, uint32_t width, uint32_t height);
+        explicit EditorCamera(SceneViewer* pSceneViewer);
 
     public:
         SR_NODISCARD bool ExecuteInEditMode() const override;

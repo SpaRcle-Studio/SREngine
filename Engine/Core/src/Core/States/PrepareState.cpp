@@ -17,6 +17,7 @@
 #include <Utils/CommandManager/CmdManager.h>
 #include <Utils/Resources/ResourceManager.h>
 #include <Utils/DebugDraw.h>
+#include <Utils/Common/Features.h>
 
 namespace SR_CORE_NS {
     SR_UTILS_NS::ThreadWorkerResult PrepareState::ExecuteImpl() {

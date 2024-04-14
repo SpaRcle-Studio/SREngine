@@ -61,7 +61,7 @@ namespace SR_CORE_NS {
         return InitializeResourcesFolder(argc, argv);
     }
 
-    void Application::TryPlayStartSound() {
+    /*void Application::TryPlayStartSound() {
         auto&& pEditor = m_engine->GetEditor();
         if (!pEditor || !pEditor->Enabled()) {
             m_isNeedPlaySound = false;
@@ -69,6 +69,10 @@ namespace SR_CORE_NS {
         }
 
         if (auto&& pRenderScene = m_engine->GetRenderScene()) {
+            if (!pRenderScene->GetPipeline()) {
+                return;
+            }
+
             if (pRenderScene->GetPipeline()->IsDirty()) {
                 return;
             }
@@ -79,7 +83,7 @@ namespace SR_CORE_NS {
 
             m_isNeedPlaySound = false;
         }
-    }
+    }*/
 
     bool Application::FindResourcesFolder() {
         m_resourcesPath = m_applicationPath.Concat("Resources");
@@ -213,28 +217,18 @@ namespace SR_CORE_NS {
                 hasErrors = true;
             }
 
-            if (!m_engine->IsRun()) {
+            if (!m_engine->Execute()) {
+                SR_SYSTEM_LOG("Application::Execute() : engine is not alive!");
                 break;
             }
-
-            if (m_engine->GetWindow() && !m_engine->GetWindow()->IsValid()) {
-                SR_SYSTEM_LOG("Application::Execute() : window has been closed!");
-                break;
-            }
-
-            m_engine->FlushScene();
-
-            if (m_isNeedPlaySound) {
-                TryPlayStartSound();
-            }
-
-            SR_HTYPES_NS::Thread::Sleep(50);
         }
 
         return !hasErrors;
     }
 
     void Application::Close() {
+        SR_TRACY_ZONE;
+
         if (m_engine) {
             m_engine->Close();
         }
@@ -289,7 +283,6 @@ namespace SR_CORE_NS {
 
     void Application::Reload() {
         m_isNeedReload = true;
-        m_isNeedPlaySound = true;
     }
 
     bool Application::InitResourceTypes() {

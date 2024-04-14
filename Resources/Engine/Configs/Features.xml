@@ -43,6 +43,8 @@
 
        <Vehicles Value="true"/>
 
+       <MainWindow Value="true"/>
+
        <LoadSkybox Value="false"/>
        <Multisampling Value="true"/>
        <SkyboxCPUUsage Value="false"/>

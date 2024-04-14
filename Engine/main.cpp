@@ -6,9 +6,9 @@
 //
 
 #include <Core/Launcher.h>
+#include <Core/Tests/TestManager.h>
 
 #include <Utils/Common/CmdOptions.h>
-#include <Core/Tests/TestManager.h>
 #include <Utils/Tests/SharedPtrAutotests.h>
 
 int main(int argc, char** argv) {

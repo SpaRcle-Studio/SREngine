@@ -44,7 +44,7 @@ namespace SR_CORE_GUI_NS {
         using Widgets = std::unordered_map<size_t, SR_GRAPH_NS::GUI::Widget*>;
         using Icons = std::map<EditorIcon, SR_GTYPES_NS::Texture*>;
         using RenderContextPtr = SR_HTYPES_NS::SafePtr<SR_GRAPH_NS::RenderContext>;
-        using WindowPtr = SR_HTYPES_NS::SafePtr<SR_GRAPH_NS::Window>;
+        using WindowPtr = SR_HTYPES_NS::SharedPtr<SR_GRAPH_NS::Window>;
         using ScenePtr = SR_HTYPES_NS::SafePtr<SR_WORLD_NS::Scene>;
         using EnginePtr = SR_HTYPES_NS::SharedPtr<SR_CORE_NS::Engine>;
         enum class Click {
@@ -104,6 +104,7 @@ namespace SR_CORE_GUI_NS {
         SR_NODISCARD void* GetIconDescriptor(EditorIcon icon) const;
         SR_NODISCARD SR_GTYPES_NS::Texture* GetIcon(EditorIcon icon) const;
         SR_NODISCARD const EnginePtr& GetEngine() const { return m_engine; }
+        SR_NODISCARD bool IsInitialized() const { return m_isInit; }
 
         void SetDockingEnabled(bool value) { m_useDocking = value; }
 
@@ -111,6 +112,9 @@ namespace SR_CORE_GUI_NS {
         void Update(float_t dt);
         void FixedUpdate();
         void Save();
+
+        bool Init();
+        void DeInit();
 
         void CacheScenePath(const SR_UTILS_NS::Path& scenePath);
         bool LoadSceneFromCachedPath();
@@ -127,7 +131,6 @@ namespace SR_CORE_GUI_NS {
         void OnKeyUp(const SR_UTILS_NS::KeyboardInputData* data) override;
 
     private:
-        bool Init();
         void Load();
 
         void DrawDockingSpace();

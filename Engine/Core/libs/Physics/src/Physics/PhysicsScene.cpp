@@ -181,6 +181,12 @@ namespace SR_PHYSICS_NS {
     void PhysicsScene::FixedUpdate() {
         SR_TRACY_ZONE;
 
+        Update(1.f / 60.f);
+    }
+
+    void PhysicsScene::Update(float_t dt) {
+        SR_TRACY_ZONE;
+
         if (Flush()) {
             m_2DWorld->Flush();
             m_3DWorld->Flush();
@@ -192,8 +198,8 @@ namespace SR_PHYSICS_NS {
             m_needClearForces = false;
         }
 
-        m_2DWorld->StepSimulation(1.f / 60.f);
-        m_3DWorld->StepSimulation(1.f / 60.f);
+        m_2DWorld->StepSimulation(dt);
+        m_3DWorld->StepSimulation(dt);
 
         m_2DWorld->Synchronize();
         m_3DWorld->Synchronize();

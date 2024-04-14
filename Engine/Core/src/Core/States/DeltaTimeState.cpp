@@ -9,7 +9,12 @@ namespace SR_CORE_NS {
         SR_HTYPES_NS::Time::Instance().Update();
 
         const auto now = SR_HTYPES_NS::Time::Instance().Now();
-        const auto deltaTime = now - m_timeStart; /// nanoseconds
+
+        if (!m_timeStart.has_value()) {
+            m_timeStart = now;
+        }
+
+        const auto deltaTime = now - m_timeStart.value(); /// nanoseconds
         const auto dt = static_cast<float_t>(deltaTime.count()) / SR_CLOCKS_PER_SEC / SR_CLOCKS_PER_SEC / SR_CLOCKS_PER_SEC; /// Seconds
         m_timeStart = now;
 

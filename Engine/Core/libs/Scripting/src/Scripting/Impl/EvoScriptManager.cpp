@@ -115,6 +115,8 @@ namespace SR_SCRIPTING_NS {
     void EvoScriptManager::OnSingletonDestroy() {
         SR_LOCK_GUARD;
 
+        Update(true);
+
         if (!m_scripts.empty()) {
             SR_ERROR("EvoScriptManager::OnSingletonDestroy() : not all scripts were deleted!\n\tCount: " + std::to_string(m_scripts.size()));
         }

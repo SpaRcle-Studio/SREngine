@@ -5,6 +5,9 @@
 #include <Utils/macros.h>
 
 #include "../src/Core/States/DrawState.cpp"
+#include "../src/Core/States/PollEventsState.cpp"
+#include "../src/Core/States/StopState.cpp"
+#include "../src/Core/States/InitializeState.cpp"
 #include "../src/Core/States/ChunkSystemState.cpp"
 #include "../src/Core/States/SubmitState.cpp"
 #include "../src/Core/States/PrepareState.cpp"

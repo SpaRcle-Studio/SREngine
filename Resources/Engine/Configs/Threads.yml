@@ -59,9 +59,15 @@
 threads:
   - name: "Engine"
     states:
+      - name: "Initialize"
       - name: "DeltaTime"
       - name: "Prepare"
       - name: "ChunkSystem"
       - name: "SceneUpdate"
+      - name: "PollEvents"
       - name: "Draw"
       - name: "Submit"
+      #- name: "Stop"
+
+finalize:
+  - name: "Initialize"

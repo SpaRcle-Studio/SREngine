@@ -32,7 +32,7 @@ namespace SR_CORE_NS {
         bool InitResourceTypes();
         bool InitLogger();
         bool FindResourcesFolder();
-        void TryPlayStartSound();
+        //void TryPlayStartSound();
         void Close();
 
     private:
@@ -40,7 +40,6 @@ namespace SR_CORE_NS {
         SR_UTILS_NS::Path m_resourcesPath;
 
         std::atomic<bool> m_isNeedReload = false;
-        std::atomic<bool> m_isNeedPlaySound = true;
 
         SR_HTYPES_NS::SharedPtr<Engine> m_engine;
 

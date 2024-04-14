@@ -53,7 +53,7 @@ namespace SR_CORE_NS {
                 pContext.Unlock();
             }
             else {
-                SR_ERROR("InitializeScene() : failed to get render context!");
+                SR_ERROR("EngineScene::Init() : failed to get render context!");
                 return false;
             }
 
@@ -139,7 +139,7 @@ namespace SR_CORE_NS {
             pRenderContext.Unlock();
         }
 
-        auto&& pWindow = pEngine->GetWindow();
+        auto&& pWindow = pEngine->GetMainWindow();
 
         if (pWindow->IsVisible() && pRenderScene.RecursiveLockIfValid()) {
             if (auto&& pWin = pWindow->GetImplementation<SR_GRAPH_NS::BasicWindowImpl>()) {
@@ -223,9 +223,8 @@ namespace SR_CORE_NS {
         SR_TRACY_ZONE;
         SR_TRACY_ZONE_TEXT(SR_UTILS_NS::ToString(m_accumulator));
 
-        if (!isPaused && pPhysicsScene.RecursiveLockIfValid()) {
+        if (!isPaused && pPhysicsScene) {
             pPhysicsScene->FixedUpdate();
-            pPhysicsScene.Unlock();
         }
 
         pEngine->FixedUpdate();

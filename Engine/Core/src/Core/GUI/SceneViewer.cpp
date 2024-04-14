@@ -24,7 +24,7 @@ namespace SR_CORE_GUI_NS {
     SceneViewer::SceneViewer(const EnginePtr& pEngine, Hierarchy* hierarchy)
         : Widget("Scene")
         , m_engine(pEngine)
-        , m_window(pEngine->GetWindow())
+        , m_window(pEngine->GetMainWindow())
         , m_hierarchy(hierarchy)
         , m_id(SR_ID_INVALID)
     {
@@ -244,9 +244,7 @@ namespace SR_CORE_GUI_NS {
                 return;
             }
 
-            const auto size = m_window->GetSize();
-
-            auto&& pCamera = new EditorCamera(this, size.x, size.y);
+            auto&& pCamera = new EditorCamera(this);
 
             if (m_isPrefab) {
                 pCamera->SetRenderTechnique(SR_CORE_NS::EditorSettings::Instance().GetPrefabEditorRenderTechnique());

@@ -85,12 +85,9 @@ namespace SR_CORE_GUI_NS {
     }
 
     EditorGUI::~EditorGUI() {
-        for (auto&& [icon, pTexture] : m_icons) {
-            pTexture->RemoveUsePoint();
+        if (IsInitialized()) {
+            DeInit();
         }
-        m_icons.clear();
-
-        m_isInit = false;
 
         for (auto& [id, widget] : m_widgets) {
             Remove(widget);
@@ -121,6 +118,24 @@ namespace SR_CORE_GUI_NS {
         return true;
     }
 
+    void EditorGUI::DeInit() {
+        SR_TRACY_ZONE;
+
+        if (!m_isInit) {
+            SR_ERROR("EditorGUI::DeInit() : editor gui is not initialized!");
+            return;
+        }
+
+        SR_INFO("EditorGUI::DeInit() : deinitializing editor gui...");
+
+        for (auto&& [icon, pTexture] : m_icons) {
+            pTexture->RemoveUsePoint();
+        }
+        m_icons.clear();
+
+        m_isInit = false;
+    }
+
     void EditorGUI::Draw() {
         SR_TRACY_ZONE;
         SR_LOCK_GUARD;
@@ -129,8 +144,8 @@ namespace SR_CORE_GUI_NS {
             return;
 
         if (!m_isInit) {
-            if (!Init())
-                return;
+            SR_ERROR("EditorGUI::Draw() : editor gui is not initialized!");
+            return;
         }
 
         if (m_useDocking) {
@@ -196,7 +211,7 @@ namespace SR_CORE_GUI_NS {
             ImGui::SetCursorPosX(ImGui::GetWindowSize().x - 20);
             ImGui::SetCursorPosY(0);
 
-            auto&& pWindow = m_engine->GetWindow()->GetBaseWindow();
+            auto&& pWindow = m_engine->GetMainWindow()->GetBaseWindow();
 
             if (ImGui::SmallButton("×")) {
                 pWindow->Close();
@@ -312,7 +327,7 @@ namespace SR_CORE_GUI_NS {
 
     void EditorGUI::OnMouseMove(const SR_UTILS_NS::MouseInputData* data) {
         if (m_dragWindow) {
-            if (auto&& pWin = m_engine->GetWindow()->GetImplementation<SR_GRAPH_NS::BasicWindowImpl>()) {
+            if (auto&& pWin = m_engine->GetMainWindow()->GetImplementation<SR_GRAPH_NS::BasicWindowImpl>()) {
                 auto&& drag = data->GetDrag();
                 auto &&pos = pWin->GetPosition();
                 pos += drag;
@@ -577,7 +592,7 @@ namespace SR_CORE_GUI_NS {
             ImGui::Separator();
 
             if (ImGui::MenuItem("Exit")) {
-                m_engine->GetWindow()->GetBaseWindow()->Close();
+                m_engine->GetMainWindow()->GetBaseWindow()->Close();
             }
 
             ImGui::EndMenu();

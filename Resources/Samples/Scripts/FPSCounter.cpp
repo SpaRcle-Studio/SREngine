@@ -19,10 +19,7 @@ public:
 			return;
 		}
 
-		auto&& pWindow = Engine::Instance().GetWindow();
-        if (pWindow) {
-            pText->SetText(std::to_string(pWindow->GetFramesPerSecond()));
-        }
+        pText->SetText(std::to_string(Engine::Instance().GetFramesPerSecond()));
     }
 };
 

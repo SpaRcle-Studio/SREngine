@@ -23,6 +23,10 @@ namespace SR_CORE_NS {
             pEngineScene->Update(dt);
         }
 
+        if (auto&& pEditor = pEngine->GetEditor(); pEditor && pEngine->IsApplicationFocused()) {
+            pEditor->Update(dt);
+        }
+
         return SR_UTILS_NS::ThreadWorkerResult::Success;
     }
 }

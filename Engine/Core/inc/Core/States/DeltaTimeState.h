@@ -16,7 +16,7 @@ namespace SR_CORE_NS {
         SR_UTILS_NS::ThreadWorkerResult ExecuteImpl() override;
 
     private:
-        SR_UTILS_NS::TimePointType m_timeStart;
+        std::optional<SR_UTILS_NS::TimePointType> m_timeStart;
 
     };
 }

@@ -6,8 +6,8 @@
 #include <Core/GUI/SceneViewer.h>
 
 namespace SR_CORE_GUI_NS {
-    EditorCamera::EditorCamera(SceneViewer* pSceneViewer, uint32_t width, uint32_t height)
-        : Camera(width, height)
+    EditorCamera::EditorCamera(SceneViewer* pSceneViewer)
+        : Camera()
         , m_sceneViewer(pSceneViewer)
     { }
 

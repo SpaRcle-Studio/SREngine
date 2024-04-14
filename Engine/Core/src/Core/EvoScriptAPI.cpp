@@ -132,9 +132,9 @@ namespace SpaRcle {
         using namespace SR_GRAPH_NS;
         using namespace SR_CORE_NS;
 
-        generator->RegisterNewClass("Engine", "Engine", { "Libraries/Window.h", "Libraries/Types/SafePointer.h" });
+        generator->RegisterNewClass("Engine", "Engine", { "Libraries/Window.h", "Libraries/Types/SharedPtr.h" });
 
-        auto&& pEngine = generator->GetPointer<Engine>();
+        auto pEngine = generator->GetPointer<Engine>();
 
         ESRegisterCustomStaticMethodPassArg0(EvoScript::Public, generator, Engine, Instance, Engine&, pEngine, {
             return *pEngine;
@@ -146,7 +146,13 @@ namespace SpaRcle {
         //ESRegisterMethodArg0(EvoScript::Public, generator, Engine, IsRun, bool)
         //ESRegisterMethod(EvoScript::Public, generator, Engine, SetScene, bool, ESArg1(const SafePtr<Scene>& scene), ESArg1(scene))
 
-        ESRegisterMethodArg0(EvoScript::Public, generator, Engine, GetWindow, SafePtr<Window>);
+        ESRegisterCustomMethodArg0(EvoScript::Public, generator, Engine, GetMainWindow, Window*, {
+            return ptr->GetMainWindow().Get();
+        })
+
+        ESRegisterCustomMethodArg0(EvoScript::Public, generator, Engine, GetFramesPerSecond, uint32_t, {
+            return ptr->GetRenderContext()->GetPipeline()->GetFramesPerSecond();
+        })
 
         generator->RegisterTypedef("Time", "Engine", "void");
         generator->RegisterTypedef("PhysEngine", "Engine", "void");
@@ -370,7 +376,7 @@ namespace SpaRcle {
         ////ESRegisterMethodArg0(EvoScript::Public, generator, Window, GetWindowSize, IVector2)
         //ESRegisterMethodArg0(EvoScript::Public, generator, Window, IsGUIEnabled, bool)
 
-        ESRegisterMethodArg0(EvoScript::Public, generator, Window, GetFramesPerSecond, uint32_t)
+        //ESRegisterMethodArg0(EvoScript::Public, generator, Window, GetFramesPerSecond, uint32_t)
 
         generator->AddIncompleteType("Camera", "Window");
         generator->AddIncompleteType("Mesh", "Window");
