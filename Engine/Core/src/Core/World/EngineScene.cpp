@@ -229,7 +229,7 @@ namespace SR_CORE_NS {
 
         pEngine->FixedUpdate();
 
-        pSceneUpdater->FixedUpdate();
+        pSceneUpdater->FixedUpdate(); /// TODO: скрипты игнорируют скорость и паузу
     }
 
     void EngineScene::Update(float_t dt) {
@@ -241,7 +241,7 @@ namespace SR_CORE_NS {
         const bool isPaused = pEngine->IsPaused() || !pEngine->IsActive() || pEngine->HasSceneInQueue();
 
         pSceneUpdater->Build(isPaused);
-        pSceneUpdater->Update(dt);
+        pSceneUpdater->Update(dt); /// TODO: скрипты игнорируют скорость и паузу
 
         UpdateFrequency();
 
