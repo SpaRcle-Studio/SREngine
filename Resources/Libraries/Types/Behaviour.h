@@ -13,7 +13,7 @@
 class Behaviour : public NonCopyable {
 public:
     using GameObjectPtr = SharedPtr<GameObject>;
-    using ScenePtr = SafePtr<Scene>;
+    using ScenePtr = Scene*;
     using Any = std::any;
     using Property = std::pair<
         std::function<Any(void)>, /// getter

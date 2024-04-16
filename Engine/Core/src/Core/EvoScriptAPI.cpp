@@ -303,8 +303,8 @@ namespace SpaRcle {
         ESRegisterMethodArg0(EvoScript::Public, generator, GameObject, GetName, std::string)
         ESRegisterMethodArg0(EvoScript::Public, generator, GameObject, GetTagString, std::string)
         ESRegisterMethodArg0(EvoScript::Public, generator, GameObject, GetTransform, Transform*)
-        ESRegisterCustomMethodArg0(EvoScript::Public, generator, GameObject, GetScene, SafePtr<Scene>, {
-            return ptr->GetScene()->GetThis();
+        ESRegisterCustomMethodArg0(EvoScript::Public, generator, GameObject, GetScene, Scene*, {
+            return ptr->GetScene();
         })
         ESRegisterMethodArg0(EvoScript::Public, generator, GameObject, GetChildrenRef, std::vector<SharedPtr<GameObject>>&)
 

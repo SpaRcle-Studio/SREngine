@@ -239,7 +239,7 @@ namespace SR_SCRIPTING_NS {
         SwitchContext();
 
         typedef void(*SetGameObjectFnPtr)(SR_UTILS_NS::GameObject::Ptr);
-        typedef void(*SetSceneFnPtr)(SR_WORLD_NS::Scene::Ptr);
+        typedef void(*SetSceneFnPtr)(SR_WORLD_NS::Scene*);
 
         if (auto&& gameObject = m_component->GetGameObject()) {
             if (auto&& setter = GetFunction<SetGameObjectFnPtr>("SetGameObject")) {
@@ -248,7 +248,7 @@ namespace SR_SCRIPTING_NS {
         }
         else if (auto&& pScene = m_component->GetScene()) {
             if (auto&& setter = GetFunction<SetSceneFnPtr>("SetScene")) {
-                setter(pScene->GetThis());
+                setter(pScene);
             }
         }
     }

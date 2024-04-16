@@ -50,7 +50,6 @@
        <SkyboxCPUUsage Value="false"/>
        <VulkanValidation Value="true"/>
        <MultiRenderTargets Value="false"/>
-       <SingleUBOIdentifierMode Value="false"/>
        <Undocking Value="true"/>
    </Common>
 </Features>

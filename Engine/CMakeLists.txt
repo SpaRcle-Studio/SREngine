@@ -1,6 +1,10 @@
 cmake_minimum_required(VERSION 3.16)
 project(SpaRcleEngine)
 
+# TODO!
+#add_compile_definitions(_CONTAINER_DEBUG_LEVEL=0)
+#add_compile_definitions(_ITERATOR_DEBUG_LEVEL=0)
+
 add_definitions(
     -DSR_ICU
     -DSR_USE_IMGUI

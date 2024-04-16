@@ -35,7 +35,7 @@ struct RaycastHit {
 class Behaviour;
 
 struct BehaviourContext {
-    SharedPtr<void> pBehaviour;
+    SharedPtr<uint64_t> pBehaviour;
     std::vector<std::function<void()>> propertiesRegistrations;
 };
 
