@@ -52,6 +52,7 @@ include(libs/Utils/cmake/ResourceEmbedder.cmake)
 
 #SRUtilsCodegen("${CMAKE_CURRENT_SOURCE_DIR}/../../" "${CMAKE_CURRENT_SOURCE_DIR}/config/codegen.xml" "${CMAKE_CURRENT_BINARY_DIR}/Codegen/")
 
+AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Engine/Configs/Threads.yml")
 AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Engine/Configs/Features.xml")
 AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Engine/Configs/Layers.xml")
 AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Engine/Configs/TagManagerSettings.xml")
