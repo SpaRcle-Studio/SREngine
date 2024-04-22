@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<Material ReadOnly="false">
+    <Shader Path="Engine/Shaders/ui_transparent.srsl"/>
+    <Properties>
+        <Property Id="diffuse" Type="Sampler2D" String="Engine/Textures/uv.png"/>
+        <Property Id="color" Type="Vec4" X="1.0" Y="1.0" Z="1.0" W="0.5"/>
+    </Properties>
+</Material>

@@ -1,0 +1,85 @@
+on:
+  workflow_call:
+    inputs:
+      windowsBuildState:
+        required: true
+        type: string
+      linuxBuildState:
+        required: true
+        type: string
+      commitActor:
+        required: true
+        type: string
+      commitSha:
+        required: true
+        type: string
+      commitBranch:
+        required: true
+        type: string
+      commitMessage:
+        required: true
+        type: string
+    secrets:
+      CITOKEN:
+        required: true
+
+jobs:
+  PostBuild:
+    name: PostBuild.
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          pip install PyGithub
+        name: Installing dependencies.
+
+      - if: inputs.linuxBuildState == 'failure' || inputs.windowsBuildState == 'failure'
+        name: Creating an issue.
+        uses: dacbd/create-issue-action@main
+        with:
+          token: ${{ secrets.CITOKEN }}
+          title: (Build) Fail on ${{inputs.commitBranch}} branch.
+          body: |
+            This issue is created automatically by CI.
+            Linux Build State: ${{inputs.linuxBuildState}}
+            Windows Build State: ${{inputs.windowsBuildState}}
+            Commit: ${{inputs.commitSha}}
+            Commit Branch: `${{inputs.commitBranch}}`
+            Commit Author: ${{inputs.commitActor}}
+          assignees: ${{inputs.commitActor}}
+          labels: build-failed
+
+      - name: Fetching repository.
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+
+      #- name: Closing the issues.
+      #  if: inputs.linuxBuildState != 'failure' && inputs.windowsBuildState != 'failure'
+      #  uses: bdougie/close-issues-based-on-label@v1.1
+      #  env:
+      #    LABEL: build-failed
+      #    GITHUB_TOKEN: ${{ secrets.CITOKEN }}
+
+      - name: Auto-closing the issues.
+        if: inputs.linuxBuildState != 'failure' && inputs.windowsBuildState != 'failure'
+        id: auto-issue-script
+        shell: bash
+        working-directory: ${{github.workspace}}/CI/scripts
+        run: |
+          python ./AutoIssues.py
+        env:
+          commitBranch: ${{ inputs.commitBranch }}
+          ciToken: ${{ secrets.CITOKEN }}
+          commitSha: ${{ inputs.commitSha }}
+
+      - name: Handling "#SR_CLOSE()" argument.
+        if: inputs.linuxBuildState != 'failure' && inputs.windowsBuildState != 'failure'
+        id: issue-script
+        shell: bash
+        working-directory: ${{github.workspace}}/CI/scripts
+        run: | 
+          python ./Issues.py
+        env:
+          commitMessage: ${{ inputs.commitMessage }}
+          ciToken: ${{ secrets.CITOKEN }}
+          commitSha: ${{ inputs.commitSha }}

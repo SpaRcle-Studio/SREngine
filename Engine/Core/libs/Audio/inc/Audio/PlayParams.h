@@ -2,11 +2,12 @@
 // Created by Monika on 09.07.2022.
 //
 
-#ifndef SRENGINE_PLAYPARAMS_H
-#define SRENGINE_PLAYPARAMS_H
+#ifndef SR_ENGINE_PLAYPARAMS_H
+#define SR_ENGINE_PLAYPARAMS_H
 
 #include <Utils/Math/Vector3.h>
 #include <Utils/Math/Vector6.h>
+
 #include <Audio/AudioLibrary.h>
 #include <Audio/SoundFormat.h>
 
@@ -20,6 +21,10 @@ namespace SR_AUDIO_NS {
     );
 
     struct PlayParams {
+    public:
+        static PlayParams GetDefault();
+
+    public:
         std::optional<bool> async;
         std::optional<bool> loop;
         std::optional<AudioLibrary> library;
@@ -34,12 +39,9 @@ namespace SR_AUDIO_NS {
         std::optional<SR_MATH_NS::FVector3> direction;
         std::optional<SR_MATH_NS::FVector3> velocity;
         std::optional<SR_MATH_NS::FVector6> orientation;
-        std::optional<std::string> device = "";
-    public:
-        static PlayParams GetDefault();
+        std::optional<std::string> device;
+
     };
-
-
 }
 
-#endif //SRENGINE_PLAYPARAMS_H
+#endif //SR_ENGINE_PLAYPARAMS_H

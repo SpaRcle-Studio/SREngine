@@ -44,7 +44,7 @@ namespace SR_CORE_GUI_NS {
         using Widgets = std::unordered_map<size_t, SR_GRAPH_NS::GUI::Widget*>;
         using Icons = std::map<EditorIcon, SR_GTYPES_NS::Texture*>;
         using RenderContextPtr = SR_HTYPES_NS::SafePtr<SR_GRAPH_NS::RenderContext>;
-        using WindowPtr = SR_HTYPES_NS::SafePtr<SR_GRAPH_NS::Window>;
+        using WindowPtr = SR_HTYPES_NS::SharedPtr<SR_GRAPH_NS::Window>;
         using ScenePtr = SR_HTYPES_NS::SafePtr<SR_WORLD_NS::Scene>;
         using EnginePtr = SR_HTYPES_NS::SharedPtr<SR_CORE_NS::Engine>;
         enum class Click {
@@ -61,18 +61,22 @@ namespace SR_CORE_GUI_NS {
             m_widgets.insert(std::make_pair(typeid(T).hash_code(), widget));
         }
 
-        template<typename T> void AddWidget(T* widget) {
+        template<typename T> T& AddWidget(T* pWidget) {
             if (m_widgets.count(typeid(T).hash_code()) == 1) {
                 SRHalt("Widget already was added!");
-                return;
+                static T empty;
+                return empty;
             }
 
-            m_widgets.insert(std::make_pair(typeid(T).hash_code(), widget));
+            m_widgets.insert(std::make_pair(typeid(T).hash_code(), pWidget));
+            return *pWidget;
         }
 
         template<typename T> SR_DEPRECATED T* GetWindow() {
             return GetWidget<T>();
         }
+
+        SR_NODISCARD SR_GRAPH_GUI_NS::Widget* GetWidget(const SR_UTILS_NS::StringAtom& name) const;
 
         template<typename T> T* GetWidget() {
             if (auto&& pIt = m_widgets.find(typeid(T).hash_code()); pIt != m_widgets.end()) {
@@ -99,7 +103,8 @@ namespace SR_CORE_GUI_NS {
         SR_NODISCARD bool IsDockingEnabled() const { return m_useDocking; }
         SR_NODISCARD void* GetIconDescriptor(EditorIcon icon) const;
         SR_NODISCARD SR_GTYPES_NS::Texture* GetIcon(EditorIcon icon) const;
-        SR_NODISCARD EnginePtr GetEngine() const { return m_engine; }
+        SR_NODISCARD const EnginePtr& GetEngine() const { return m_engine; }
+        SR_NODISCARD bool IsInitialized() const { return m_isInit; }
 
         void SetDockingEnabled(bool value) { m_useDocking = value; }
 
@@ -107,6 +112,9 @@ namespace SR_CORE_GUI_NS {
         void Update(float_t dt);
         void FixedUpdate();
         void Save();
+
+        bool Init();
+        void DeInit();
 
         void CacheScenePath(const SR_UTILS_NS::Path& scenePath);
         bool LoadSceneFromCachedPath();
@@ -123,7 +131,6 @@ namespace SR_CORE_GUI_NS {
         void OnKeyUp(const SR_UTILS_NS::KeyboardInputData* data) override;
 
     private:
-        bool Init();
         void Load();
 
         void DrawDockingSpace();
@@ -148,6 +155,8 @@ namespace SR_CORE_GUI_NS {
 
         std::atomic<bool> m_useDocking = true;
         std::atomic<bool> m_dragWindow = false;
+
+        bool m_imGuiDemo = false;
 
     };
 }

@@ -1,0 +1,25 @@
+ShaderType Spatial;
+
+PolygonMode Fill;
+CullMode Back;
+DepthCompare LessOrEqual;
+PrimitiveTopology TriangleList;
+BlendEnabled false;
+DepthWrite true;
+DepthTest true;
+
+[[uniform], [public]] vec4 color;
+[[uniform], [public]] bool useOrthogonal;
+
+void fragment() {
+	COLOR = color;
+}
+
+void vertex() {
+    if (useOrthogonal == 1) {
+        OUT_POSITION = ORTHOGONAL_MATRIX * MODEL_MATRIX * vec4(VERTEX + vec3(0, 0, 5), 1.0);
+    }
+    else {
+        OUT_POSITION = PROJECTION_MATRIX * VIEW_MATRIX * MODEL_MATRIX * vec4(VERTEX, 1.0);
+    }
+}

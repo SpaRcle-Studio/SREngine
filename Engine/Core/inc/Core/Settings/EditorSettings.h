@@ -2,8 +2,8 @@
 // Created by Monika on 17.06.2022.
 //
 
-#ifndef SRENGINE_EDITORSETTINGS_H
-#define SRENGINE_EDITORSETTINGS_H
+#ifndef SR_ENGINE_EDITORSETTINGS_H
+#define SR_ENGINE_EDITORSETTINGS_H
 
 #include <Utils/Settings.h>
 
@@ -30,12 +30,13 @@ namespace SR_CORE_NS {
           XML,
           PNG,
           DLL,
-          Font
+          Font,
+          Audio
     );
 
     class EditorSettings : public SR_UTILS_NS::GlobalSettings<EditorSettings> {
+        SR_REGISTER_SINGLETON(EditorSettings)
         friend class SR_UTILS_NS::GlobalSettings<EditorSettings>;
-        friend class SR_UTILS_NS::Singleton<EditorSettings>;
         using Icons = std::map<EditorIcon, SR_UTILS_NS::Path>;
         using Super = SR_UTILS_NS::GlobalSettings<EditorSettings>;
     protected:
@@ -64,4 +65,4 @@ namespace SR_CORE_NS {
     };
 }
 
-#endif //SRENGINE_EDITORSETTINGS_H
+#endif //SR_ENGINE_EDITORSETTINGS_H

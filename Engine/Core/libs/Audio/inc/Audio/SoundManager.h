@@ -2,8 +2,8 @@
 // Created by Monika on 07.07.2022.
 //
 
-#ifndef SRENGINE_SOUNDMANAGER_H
-#define SRENGINE_SOUNDMANAGER_H
+#ifndef SR_ENGINE_SOUNDMANAGER_H
+#define SR_ENGINE_SOUNDMANAGER_H
 
 #include <Utils/Common/Singleton.h>
 #include <Utils/Types/Thread.h>
@@ -15,6 +15,9 @@ namespace SR_AUDIO_NS {
     class SoundDevice;
     class SoundData;
     class SoundContext;
+    class SoundListener;
+
+    using AudioDeviceName = std::string;
 
     struct PlayData : public SR_UTILS_NS::NonCopyable {
         SoundData* pData = nullptr;
@@ -26,7 +29,7 @@ namespace SR_AUDIO_NS {
     };
 
     class SoundManager : public SR_UTILS_NS::Singleton<SoundManager> {
-        friend class SR_UTILS_NS::Singleton<SoundManager>;
+        SR_REGISTER_SINGLETON(SoundManager)
     public:
         enum class State : uint8_t {
             Stopped, Active, Paused
@@ -54,9 +57,13 @@ namespace SR_AUDIO_NS {
         SoundData* Register(Sound* pSound);
         bool Unregister(SoundData** pSoundData);
 
+        SR_NODISCARD SoundListener* CreateListener();
+        SR_NODISCARD SoundListener* CreateListener(AudioLibrary library);
+        void DestroyListener(SoundListener* pListener);
+
     protected:
-        SR_NODISCARD SoundContext* GetContext(const PlayParams& params);
-        SR_NODISCARD AudioLibrary GetRelevantLibrary() const;
+        SR_NODISCARD SoundContext* GetSoundContext(const PlayParams& params) noexcept;
+        SR_NODISCARD AudioLibrary GetRelevantLibrary() const noexcept;
 
         void DestroyPlayData(PlayData* pPlayData);
 
@@ -73,9 +80,9 @@ namespace SR_AUDIO_NS {
         SR_HTYPES_NS::Thread::Ptr m_thread = nullptr;
         std::atomic<State> m_state = State::Stopped;
         std::list<PlayData*> m_playStack;
-        std::map<AudioLibrary, std::map<std::string, SoundContext*>> m_contexts;
+        std::map<AudioLibrary, std::map<AudioDeviceName, SoundContext*>> m_contexts;
 
     };
 }
 
-#endif //SRENGINE_SOUNDMANAGER_H
+#endif //SR_ENGINE_SOUNDMANAGER_H

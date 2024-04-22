@@ -11,6 +11,7 @@ namespace SR_CORE_GUI_NS {
     { }
 
     void RenderTechniqueEditor::OnOpen() {
+    #ifdef SR_USE_IMGUI_NODE_EDITOR
         ax::NodeEditor::Config config;
 
         static const SR_UTILS_NS::Path settings = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Editor/RenderTechniqueEditor.json");
@@ -27,6 +28,7 @@ namespace SR_CORE_GUI_NS {
         };
 
         m_editor = ax::NodeEditor::CreateEditor(&config);
+    #endif
 
         Super::OnOpen();
     }
@@ -51,5 +53,9 @@ namespace SR_CORE_GUI_NS {
         });*/
 
         Super::InitCreationPopup();
+    }
+
+    void RenderTechniqueEditor::DrawLeftPanel() {
+        Super::DrawLeftPanel();
     }
 }

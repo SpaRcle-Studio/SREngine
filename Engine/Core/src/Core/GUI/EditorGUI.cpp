@@ -2,9 +2,12 @@
 // Created by Nikita on 19.07.2021.
 //
 
+#include <Core/Engine.h>
+
+#include <Core/Settings/EditorSettings.h>
+
 #include <Core/GUI/EditorGUI.h>
 #include <Core/GUI/AnimatorEditor.h>
-#include <Core/Engine.h>
 #include <Core/GUI/Inspector.h>
 #include <Core/GUI/VisualScriptEditor.h>
 #include <Core/GUI/WorldEdit.h>
@@ -16,13 +19,13 @@
 #include <Core/GUI/RenderTechniqueEditor.h>
 #include <Core/GUI/FileBrowser.h>
 #include <Core/GUI/About.h>
-#include <Core/Settings/EditorSettings.h>
+#include <Core/GUI/SceneTools.h>
 
 #include <Utils/Common/Features.h>
 #include <Utils/ECS/Prefab.h>
 #include <Utils/Platform/Platform.h>
 #include <Utils/Profile/TracyContext.h>
-#include <Utils/World/SceneBuilder.h>
+#include <Utils/World/SceneUpdater.h>
 
 #include <Graphics/Types/Texture.h>
 #include <Graphics/Render/RenderContext.h>
@@ -35,7 +38,7 @@ namespace SR_CORE_GUI_NS {
 
         uint64_t index = 0;
         while (SR_WORLD_NS::Scene::IsExists(scenePath)) {
-            scenePath = SR_FORMAT("%s-%u.scene", SR_WORLD_NS::Scene::NewScenePath.CStr(), index);
+            scenePath = SR_FORMAT("{}-{}.scene", SR_WORLD_NS::Scene::NewScenePath.CStr(), index);
             ++index;
         }
 
@@ -47,7 +50,7 @@ namespace SR_CORE_GUI_NS {
 
         uint64_t index = 0;
         while (SR_WORLD_NS::Scene::IsExists(scenePath)) {
-            scenePath = SR_FORMAT("%s-%u.prefab", SR_WORLD_NS::Scene::NewPrefabPath.CStr(), index);
+            scenePath = SR_FORMAT("{}-{}.prefab", SR_WORLD_NS::Scene::NewPrefabPath.CStr(), index);
             ++index;
         }
 
@@ -64,7 +67,6 @@ namespace SR_CORE_GUI_NS {
         AddWidget(new FileBrowser());
         AddWidget(new Hierarchy());
         AddWidget(new VisualScriptEditor());
-        AddWidget(new SceneViewer(m_engine, GetWidget<Hierarchy>()));
         AddWidget(new Inspector(GetWidget<Hierarchy>()));
         AddWidget(new WorldEdit());
         AddWidget(new EngineSettings());
@@ -73,6 +75,7 @@ namespace SR_CORE_GUI_NS {
 		AddWidget(new PhysicsMaterialEditor());
 		AddWidget(new About());
         AddWidget(new RenderTechniqueEditor());
+        AddWidget(new SceneViewer(m_engine, GetWidget<Hierarchy>()));
 
         for (auto& [id, widget] : m_widgets) {
             Register(widget);
@@ -82,12 +85,9 @@ namespace SR_CORE_GUI_NS {
     }
 
     EditorGUI::~EditorGUI() {
-        for (auto&& [icon, pTexture] : m_icons) {
-            pTexture->RemoveUsePoint();
+        if (IsInitialized()) {
+            DeInit();
         }
-        m_icons.clear();
-
-        m_isInit = false;
 
         for (auto& [id, widget] : m_widgets) {
             Remove(widget);
@@ -118,16 +118,34 @@ namespace SR_CORE_GUI_NS {
         return true;
     }
 
+    void EditorGUI::DeInit() {
+        SR_TRACY_ZONE;
+
+        if (!m_isInit) {
+            SR_ERROR("EditorGUI::DeInit() : editor gui is not initialized!");
+            return;
+        }
+
+        SR_INFO("EditorGUI::DeInit() : deinitializing editor gui...");
+
+        for (auto&& [icon, pTexture] : m_icons) {
+            pTexture->RemoveUsePoint();
+        }
+        m_icons.clear();
+
+        m_isInit = false;
+    }
+
     void EditorGUI::Draw() {
         SR_TRACY_ZONE;
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         if (m_hasErrors || !m_enabled)
             return;
 
         if (!m_isInit) {
-            if (!Init())
-                return;
+            SR_ERROR("EditorGUI::Draw() : editor gui is not initialized!");
+            return;
         }
 
         if (m_useDocking) {
@@ -135,6 +153,10 @@ namespace SR_CORE_GUI_NS {
         }
         else {
             m_dragWindow = false;
+        }
+
+        if (m_imGuiDemo) {
+            ImGui::ShowDemoWindow(&m_imGuiDemo);
         }
 
         WidgetManager::Draw();
@@ -189,7 +211,7 @@ namespace SR_CORE_GUI_NS {
             ImGui::SetCursorPosX(ImGui::GetWindowSize().x - 20);
             ImGui::SetCursorPosY(0);
 
-            auto&& pWindow = m_engine->GetWindow()->GetBaseWindow();
+            auto&& pWindow = m_engine->GetMainWindow()->GetBaseWindow();
 
             if (ImGui::SmallButton("×")) {
                 pWindow->Close();
@@ -216,13 +238,14 @@ namespace SR_CORE_GUI_NS {
                 ImGuiContext& g = *GImGui;
                 if (g.CurrentWindow == g.NavWindow && g.NavLayer == ImGuiNavLayer_Main && !g.NavAnyRequest) {
                     ImGui::FocusTopMostWindowUnderOne(g.NavWindow, nullptr);
+                    //ImGui::FocusTopMostWindowUnderOne(g.NavWindow, nullptr, nullptr, ImGuiFocusedFlags_None);
                 }
 
                 ImGui::End();
             }
         }
 
-        ImGui::DockSpace(dockMain);
+        ImGui::DockSpace(dockMain, ImVec2(0.0f, 0.0f), ImGuiDockNodeFlags_None);
         ImGui::End();
         ImGui::PopStyleVar(3);
     }
@@ -304,7 +327,7 @@ namespace SR_CORE_GUI_NS {
 
     void EditorGUI::OnMouseMove(const SR_UTILS_NS::MouseInputData* data) {
         if (m_dragWindow) {
-            if (auto&& pWin = m_engine->GetWindow()->GetImplementation<SR_GRAPH_NS::BasicWindowImpl>()) {
+            if (auto&& pWin = m_engine->GetMainWindow()->GetImplementation<SR_GRAPH_NS::BasicWindowImpl>()) {
                 auto&& drag = data->GetDrag();
                 auto &&pos = pWin->GetPosition();
                 pos += drag;
@@ -367,6 +390,10 @@ namespace SR_CORE_GUI_NS {
             return;
         }
 
+        if (scenePath.IsEmpty()) {
+            return;
+        }
+
         auto&& pMarshal = new SR_HTYPES_NS::Marshal();
 
         pMarshal->Write<std::string>(scenePath.ToString());
@@ -385,6 +412,10 @@ namespace SR_CORE_GUI_NS {
 
         auto&& marshal = SR_HTYPES_NS::Marshal::Load(m_cachedScenePath);
         SR_UTILS_NS::Path scenePath = marshal.Read<std::string>();
+
+        if (scenePath.IsEmpty()) {
+            return false;
+        }
 
         if (scenePath.ToStringView() == "NONE") {
             SR_LOG("EditorGUI::LoadSceneFromCachedPath() : cached scene path is \"NONE\". No scene to load.");
@@ -474,7 +505,7 @@ namespace SR_CORE_GUI_NS {
             if (ImGui::MenuItem("Load")) {
                 auto&& scenesPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
 
-                if (auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(scenesPath.ToString(), { { "Scene", "scene,prefab" } }); !path.Empty()) {
+                if (auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(scenesPath.ToString(), { { "Scene", "scene,prefab" } }); !path.IsEmpty()) {
                     path = path.RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetCachePath());
                     path = path.RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetResPath());
 
@@ -511,7 +542,7 @@ namespace SR_CORE_GUI_NS {
                 {
                     const auto scenesPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
 
-                    if (auto&& path = SR_UTILS_NS::FileDialog::Instance().SaveDialog(scenesPath.ToString(), { { "Scene", "scene,prefab" } }); !path.Empty())
+                    if (auto&& path = SR_UTILS_NS::FileDialog::Instance().SaveDialog(scenesPath.ToString(), { { "Scene", "scene,prefab" } }); !path.IsEmpty())
                     {
                         path = path.RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetCachePath());
                         path = path.RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetResPath());
@@ -561,7 +592,7 @@ namespace SR_CORE_GUI_NS {
             ImGui::Separator();
 
             if (ImGui::MenuItem("Exit")) {
-                m_engine->GetWindow()->Close();
+                m_engine->GetMainWindow()->GetBaseWindow()->Close();
             }
 
             ImGui::EndMenu();
@@ -579,7 +610,7 @@ namespace SR_CORE_GUI_NS {
             if (ImGui::MenuItem("Instance from file")) {
                 if (auto&& pScene = m_engine->GetScene(); pScene.RecursiveLockIfValid()) {
                     auto&& resourcesPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
-                    if (auto path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesPath.ToString(), { { "Any model", "prefab,pmx,fbx,obj,blend,dae,abc,stl,ply,glb,gltf,x3d,sfg,bvh,3ds" } }); !path.Empty()) {
+                    if (auto path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesPath.ToString(), { { "Any model", "prefab,pmx,fbx,obj,blend,dae,abc,stl,ply,glb,gltf,x3d,sfg,bvh,3ds,gltf" } }); !path.IsEmpty()) {
                         /// TODO:Сделать обратимость
                         pScene->InstanceFromFile(path);
                     }
@@ -652,6 +683,14 @@ namespace SR_CORE_GUI_NS {
                 OpenWidget<RenderTechniqueEditor>();
             }
 
+            ImGui::Separator();
+
+            if (ImGui::MenuItem("ImGui Demo Window")) {
+                m_imGuiDemo = true;
+            }
+
+            ImGui::Separator();
+
             /// if (ImGui::MenuItem("Animator")) {
             ///    OpenWidget<AnimatorEditor>();
             /// }
@@ -694,5 +733,14 @@ namespace SR_CORE_GUI_NS {
 
             ImGui::EndMenu();
         }
+    }
+
+    SR_GRAPH_GUI_NS::Widget* EditorGUI::GetWidget(const SR_UTILS_NS::StringAtom& name) const {
+        for (auto&& [hashCode, pWidget] : m_widgets) {
+            if (pWidget->GetName() == name) {
+                return pWidget;
+            }
+        }
+        return nullptr;
     }
 }

@@ -25,7 +25,7 @@ namespace SR_CORE_NS {
     class VisualRegion : public SR_WORLD_NS::Region {
         using RenderScenePtr = SR_HTYPES_NS::SafePtr<SR_GRAPH_NS::RenderScene>;
     public:
-        explicit VisualRegion(SRRegionAllocArgs) : Helper::World::Region(SRRegionAllocVArgs) { }
+        explicit VisualRegion(SRRegionAllocArgs) : SR_UTILS_NS::World::Region(SRRegionAllocVArgs) { }
         ~VisualRegion() override = default;
 
     private:

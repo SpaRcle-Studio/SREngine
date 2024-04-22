@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<Include>
+    <FrameBufferController Name="SceneViewFBO" DynamicResizing="true" DepthEnabled="true" SmoothSamples="0">
+        <Size X="0" Y="0"/>
+        <PreScale X="1.0" Y="1.0"/>
+        <Depth Format="Auto"/>
+        <Layer Format="RGBA8_UNORM"/>
+        <Features DepthLoad="true" ColorLoad="true" DepthTransferDst="true" ColorTransferDst="true" />
+    </FrameBufferController>
+</Include>

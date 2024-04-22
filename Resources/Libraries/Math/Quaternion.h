@@ -80,7 +80,7 @@ public:
     }
 
     T Yaw() const noexcept {
-        return asin(SR_CLAMP(static_cast<T>(-2) * (x * z - w * y), static_cast<T>(1), static_cast<T>(-1)));
+        return asin(SR_CLAMP(static_cast<T>(-2) * (x * z - w * y), static_cast<T>(-1), static_cast<T>(1)));
     }
 
     /*Quaternion Normalize() const noexcept {

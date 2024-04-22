@@ -2,8 +2,8 @@
 // Created by innerviewer on 2/28/2023.
 //
 
-#ifndef SRENGINE_VEHICLE_H
-#define SRENGINE_VEHICLE_H
+#ifndef SR_ENGINE_VEHICLE_H
+#define SR_ENGINE_VEHICLE_H
 
 #include <Physics/PhysicsLib.h>
 #include <Physics/VehicleInternalData.h>
@@ -25,7 +25,7 @@ namespace SR_PTYPES_NS {
     public:
         static Component* LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage);
 
-        SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SR_UTILS_NS::SavableFlags flags) const override;
+        SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save(SR_UTILS_NS::SavableContext data) const override;
 
         SR_NODISCARD virtual SR_UTILS_NS::Measurement GetMeasurement() const;
 
@@ -40,4 +40,4 @@ namespace SR_PTYPES_NS {
     };
 }
 
-#endif //SRENGINE_VEHICLE_H
+#endif //SR_ENGINE_VEHICLE_H

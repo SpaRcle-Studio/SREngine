@@ -2,8 +2,8 @@
 // Created by Monika on 12.08.2023.
 //
 
-#ifndef SRENGINE_RENDERTECHNIQUEEDITOR_H
-#define SRENGINE_RENDERTECHNIQUEEDITOR_H
+#ifndef SR_ENGINE_RENDERTECHNIQUEEDITOR_H
+#define SR_ENGINE_RENDERTECHNIQUEEDITOR_H
 
 #include <Utils/Common/Enumerations.h>
 
@@ -19,8 +19,9 @@ namespace SR_CORE_GUI_NS {
     public:
         void OnOpen() override;
         void InitCreationPopup() override;
+        void DrawLeftPanel() override;
 
     };
 }
 
-#endif //SRENGINE_RENDERTECHNIQUEEDITOR_H
+#endif //SR_ENGINE_RENDERTECHNIQUEEDITOR_H

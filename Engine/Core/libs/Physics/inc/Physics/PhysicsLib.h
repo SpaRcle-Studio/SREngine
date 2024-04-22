@@ -2,8 +2,8 @@
 // Created by Monika on 28.07.2022.
 //
 
-#ifndef SRENGINE_PHYSICSLIB_H
-#define SRENGINE_PHYSICSLIB_H
+#ifndef SR_ENGINE_PHYSICSLIB_H
+#define SR_ENGINE_PHYSICSLIB_H
 
 #include <Utils/Common/Measurement.h>
 #include <Utils/Common/Singleton.h>
@@ -19,7 +19,7 @@ namespace SR_PHYSICS_NS {
     class LibraryImpl;
 
     class PhysicsLibrary : public SR_UTILS_NS::Singleton<PhysicsLibrary> {
-        friend class SR_UTILS_NS::Singleton<PhysicsLibrary>;
+        SR_REGISTER_SINGLETON(PhysicsLibrary)
         using Super = SR_UTILS_NS::Singleton<PhysicsLibrary>;
         using Space = SR_UTILS_NS::Measurement;
         using LibraryTypes = std::vector<LibraryType>;
@@ -47,4 +47,4 @@ namespace SR_PHYSICS_NS {
     };
 }
 
-#endif //SRENGINE_PHYSICSLIB_H
+#endif //SR_ENGINE_PHYSICSLIB_H

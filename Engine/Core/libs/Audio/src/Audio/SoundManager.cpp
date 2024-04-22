@@ -6,6 +6,7 @@
 #include <Audio/SoundData.h>
 #include <Audio/SoundDevice.h>
 #include <Audio/SoundContext.h>
+#include <Audio/SoundListener.h>
 
 namespace SR_AUDIO_NS {
     void SoundManager::OnSingletonDestroy() {
@@ -38,7 +39,7 @@ namespace SR_AUDIO_NS {
     }
 
     void SoundManager::StopAll() {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         for (auto&& pPlayData : m_playStack) {
             DestroyPlayData(pPlayData);
@@ -48,7 +49,7 @@ namespace SR_AUDIO_NS {
     }
 
     void SoundManager::Update() {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         for (auto pIt = m_playStack.begin(); pIt != m_playStack.end(); ) {
             auto&& pPlayData = *pIt;
@@ -72,7 +73,7 @@ namespace SR_AUDIO_NS {
             return true;
         }
 
-        auto&& pContext = pPlayData->pData->pContext = GetContext(pPlayData->params);
+        auto&& pContext = pPlayData->pData->pContext = GetSoundContext(pPlayData->params);
         auto&& pSound = pPlayData->pData->pSound;
 
         if (!pContext) {
@@ -125,7 +126,7 @@ namespace SR_AUDIO_NS {
         ///// синхронно добавляем звук в стек
         Handle pHandle = nullptr;
         {
-            SR_LOCK_GUARD
+            SR_LOCK_GUARD;
 
             if (m_playStack.size() >= 256) {
                 SR_WARN("SoundManager::Play() : stack overflow!");
@@ -148,7 +149,7 @@ namespace SR_AUDIO_NS {
         bool async = params.async.has_value() ? params.async.value() : true; /// NOLINT
 
         while (!async) {
-            SR_LOCK_GUARD
+            SR_LOCK_GUARD;
 
             if (!IsExists(pHandle) || IsFailed(pHandle)) {
                 break;
@@ -167,7 +168,7 @@ namespace SR_AUDIO_NS {
     }
 
     bool SoundManager::IsPlaying(Handle pHandle) const {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         for (auto&& pPlayData : m_playStack) {
             if (pHandle == pPlayData) {
@@ -226,7 +227,7 @@ namespace SR_AUDIO_NS {
     }
 
     bool SoundManager::IsInitialized(SoundManager::Handle pHandle) const {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         for (auto&& pPlayData : m_playStack) {
             if (pHandle == pPlayData) {
@@ -240,7 +241,7 @@ namespace SR_AUDIO_NS {
     }
 
     bool SoundManager::IsExists(SoundManager::Handle pHandle) const {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         for (auto&& pPlayData : m_playStack) {
             if (pHandle == pPlayData) {
@@ -252,7 +253,7 @@ namespace SR_AUDIO_NS {
     }
 
     bool SoundManager::IsFailed(SoundManager::Handle pHandle) const {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         for (auto&& pPlayData : m_playStack) {
             if (pHandle == pPlayData) {
@@ -266,61 +267,76 @@ namespace SR_AUDIO_NS {
     }
 
 
-    SoundContext* SoundManager::GetContext(const PlayParams& params) {
+    SoundContext* SoundManager::GetSoundContext(const PlayParams& params) noexcept {
+        SR_LOCK_GUARD;
+
         AudioLibrary library = params.library.has_value() ? params.library.value() : GetRelevantLibrary();
         auto&& device = params.device.has_value() ? params.device.value() : std::string();
 
         if (auto&& pLibIt = m_contexts.find(library); pLibIt != m_contexts.end()) {
-            if (device.empty() && !pLibIt->second.empty()) {
-                return pLibIt->second.begin()->second;
+            auto&& deviceContexts = pLibIt->second;
+
+            if (device.empty() && !deviceContexts.empty()) {
+                return deviceContexts.begin()->second;
             }
 
             if (!device.empty()) {
-                if (auto&& pDeviceIt = pLibIt->second.find(device); pDeviceIt != pLibIt->second.end()) {
+                if (auto&& pDeviceIt = deviceContexts.find(device); pDeviceIt != deviceContexts.end()) {
                     return pDeviceIt->second;
                 }
             }
         }
+        else {
+            SR_INFO("SoundManager::GetSoundContext() : initializing \"" + SR_UTILS_NS::EnumReflector::ToStringAtom(library).ToStringRef() + "\" library...");
+        }
 
-        auto&& pDevice = SoundDevice::Allocate(library, params.device.value());
+        auto&& pDevice = SoundDevice::Allocate(library, device);
         if (!pDevice) {
-            SR_ERROR("SoundManager::PrepareData() : failed to allocate sound device!");
+            SR_ERROR("SoundManager::GetSoundContext() : failed to allocate sound device!");
             return nullptr;
         }
 
         if (!pDevice->Init()) {
-            SR_ERROR("SoundManager::PrepareData() : failed to initialize sound device!");
+            SR_ERROR("SoundManager::GetSoundContext() : failed to initialize sound device!");
             delete pDevice;
             return nullptr;
         }
 
         auto&& pContext = SoundContext::Allocate(pDevice);
         if (!pContext->Init()) {
-            SR_ERROR("SoundManager::PrepareData() : failed to initialize sound context!");
+            SR_ERROR("SoundManager::GetSoundContext() : failed to initialize sound context!");
             delete pContext;
             return nullptr;
         }
 
-        m_contexts[library].insert(std::make_pair(pDevice->GetName(), pContext));
+        m_contexts[library][pDevice->GetName()] = pContext;
 
         return pContext;
     }
 
     void SoundManager::Destroy() {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
+
+        SR_INFO("SoundManager::Destroy() : destroy all sound libraries...");
 
         StopAll();
 
         for (auto&& [libraryType, contexts] : m_contexts) {
-            for (auto&& [deviceName, pContext] : contexts) {
-                delete pContext;
+            for (auto&& [deviceName, pSoundContext] : contexts) {
+                delete pSoundContext;
             }
         }
+
         m_contexts.clear();
     }
 
     SoundManager::Handle SoundManager::Play(const std::string& path, const PlayParams& params) {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
+
+        if (path.empty()) {
+            SRHalt("Empty sound path!");
+            return nullptr;
+        }
 
         if (auto&& pSound = SR_AUDIO_NS::Sound::Load(path)) {
             return pSound->Play(params);
@@ -333,7 +349,7 @@ namespace SR_AUDIO_NS {
         return Play(path, PlayParams::GetDefault());
     }
 
-    AudioLibrary SoundManager::GetRelevantLibrary() const {
+    AudioLibrary SoundManager::GetRelevantLibrary() const noexcept {
         if (m_contexts.empty()) {
             return AudioLibrary::OpenAL;
         }
@@ -342,7 +358,7 @@ namespace SR_AUDIO_NS {
     }
 
     void SoundManager::ApplyParams(SoundManager::Handle pHandle, const PlayParams& params) {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         for (auto&& pPlayData : m_playStack) {
             if (pHandle == pPlayData) {
@@ -356,7 +372,7 @@ namespace SR_AUDIO_NS {
     }
 
     void SoundManager::Stop(Handle pHandle) {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         for (auto pIt = m_playStack.begin(); pIt != m_playStack.end(); ) {
             if (pHandle == *pIt) {
@@ -366,6 +382,45 @@ namespace SR_AUDIO_NS {
             }
             else {
                 ++pIt;
+            }
+        }
+    }
+
+    SoundListener* SoundManager::CreateListener() {
+        return CreateListener(AudioLibrary::Unknown);
+    }
+
+    SoundListener* SoundManager::CreateListener(AudioLibrary audioLibrary) {
+        SR_LOCK_GUARD;
+
+        if (audioLibrary == AudioLibrary::Unknown) {
+            if (m_contexts.empty()) {
+                audioLibrary = GetRelevantLibrary();
+            }
+            else {
+                audioLibrary = m_contexts.begin()->first;
+            }
+        }
+
+        PlayParams params = PlayParams::GetDefault();
+        params.library = audioLibrary;
+        auto&& pSoundContext = GetSoundContext(params);
+        if (!pSoundContext) {
+            SR_ERROR("SoundManager::CreateListenerContext() : failed to create sound context!");
+            return nullptr;
+        }
+
+        return pSoundContext->AllocateListener();
+    }
+
+    void SoundManager::DestroyListener(SoundListener* pListener) {
+        SR_LOCK_GUARD;
+
+        for (auto&& [libraryType, deviceContexts] : m_contexts) {
+            for (auto&& [deviceName, pSoundContext] : deviceContexts) {
+                if (pSoundContext->FreeListener(pListener)) {
+                    return;
+                }
             }
         }
     }

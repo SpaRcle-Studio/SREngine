@@ -1,8 +1,0 @@
-//
-// Created by Monika on 15.11.2021.
-//
-
-#ifndef GAMEENGINE_FBXLOADER_H
-#define GAMEENGINE_FBXLOADER_H
-
-#endif //GAMEENGINE_FBXLOADER_H

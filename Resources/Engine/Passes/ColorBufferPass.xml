@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<Include>
+    <FrameBufferController Name="ColorBufferFBO" DynamicResizing="true" DepthEnabled="true" SmoothSamples="1">
+        <Size X="0" Y="0"/>
+        <PreScale X="0.85" Y="0.85"/>
+        <Depth Format="Auto"/>
+        <Layer Format="RGBA8_UNORM"/>
+        <Features ColorTransferSrc="true" />
+    </FrameBufferController>
+    <ColorBufferPass>
+        <FramebufferSettings Name="ColorBufferFBO">
+            <Depth ClearValue="1.0"/>
+            <Layer R="0.0" G="0.0" B="0.0" A="1.0"/>
+        </FramebufferSettings>
+        <Shaders>
+            <Override Path="Engine/Shaders/UI/sliced.srsl" Ignore="true" UseMaterial="true"/>
+            <Override Type="Canvas" Shader="Engine/Shaders/ColorBuffer/canvas.srsl"/>
+            <Override Type="Spatial" Shader="Engine/Shaders/ColorBuffer/spatial.srsl"/>
+            <Override Type="SpatialCustom" Shader="Engine/Shaders/ColorBuffer/spatial.srsl"/>
+            <Override Type="Skybox" Shader="Engine/Shaders/ColorBuffer/simple.srsl"/>
+            <Override Type="Simple" Shader="Engine/Shaders/ColorBuffer/simple.srsl"/>
+            <Override Type="Skinned" Shader="Engine/Shaders/ColorBuffer/skinned.srsl"/>
+            <Override Path="Engine/Shaders/Gizmo/gizmo.srsl" Shader="Engine/Shaders/ColorBuffer/gizmo.srsl"/>
+        </Shaders>
+        <AllowedLayers>
+            <Default/>
+            <Opaque/>
+            <Transparent/>
+            <UI/>
+            <GizmoSelection/>
+        </AllowedLayers>
+    </ColorBufferPass>
+</Include>

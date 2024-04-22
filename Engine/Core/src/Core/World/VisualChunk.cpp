@@ -12,7 +12,7 @@
 
 namespace SR_CORE_NS {
     VisualChunk::VisualChunk(SRChunkAllocArgs)
-        : Helper::World::Chunk(SRChunkAllocVArgs)
+        : SR_UTILS_NS::World::Chunk(SRChunkAllocVArgs)
     { }
 
     VisualChunk::~VisualChunk() {
@@ -27,7 +27,7 @@ namespace SR_CORE_NS {
     void VisualChunk::UpdateFacesPos() {
         if (m_stayMesh) {
             auto&& matrix = SR_MATH_NS::Matrix4x4(
-                    GetWorldPosition(SR_MATH_NS::AXIS_XYZ),
+                    GetWorldPosition(SR_MATH_NS::Axis::XYZ),
                     SR_MATH_NS::Quaternion::Identity(),
                     SR_MATH_NS::FVector3(m_size.x, m_size.y, m_size.x) / 2
             );
@@ -39,7 +39,7 @@ namespace SR_CORE_NS {
     void VisualChunk::UpdateLoadPos() {
         if (m_loadMesh) {
             auto&& matrix = SR_MATH_NS::Matrix4x4(
-                    GetWorldPosition(SR_MATH_NS::AXIS_XZ),
+                    GetWorldPosition(SR_MATH_NS::Axis::XZ),
                     SR_MATH_NS::Quaternion::Identity(),
                     SR_MATH_NS::FVector3(m_size.x, m_size.y, m_size.x) / 2
             );

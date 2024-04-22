@@ -3,11 +3,16 @@
 //
 
 #include <Physics/PhysX/PhysXCollisionShape.h>
+#include <Physics/PhysX/PhysXRigidbody3D.h>
 
 namespace SR_PTYPES_NS {
     PhysXCollisionShape::PhysXCollisionShape(Super::LibraryPtr pLibrary)
         : Super(pLibrary)
-    { }
+    {
+        if (pLibrary) {
+            SetType(pLibrary->GetDefaultShape());
+        }
+    }
 
     PhysXCollisionShape::~PhysXCollisionShape() {
         if (m_shape) {
@@ -18,6 +23,10 @@ namespace SR_PTYPES_NS {
     }
 
     bool PhysXCollisionShape::UpdateShape() {
+        if (!m_rigidbody->IsUpdatable()) {
+            return false;
+        }
+
         auto&& pPhysics = GetLibrary<PhysXLibraryImpl>()->GetPxPhysics();
 
         if (m_shape) {
@@ -84,7 +93,7 @@ namespace SR_PTYPES_NS {
                 break;
             }
             default:
-                SR_ERROR("PhysXCollisionShape::UpdateShape() : unsupported shape! Type: " + SR_UTILS_NS::EnumReflector::ToString(m_type));
+                SR_ERROR("PhysXCollisionShape::UpdateShape() : unsupported shape! Type: " + SR_UTILS_NS::EnumReflector::ToStringAtom(m_type).ToStringRef());
 
                 if (isDefaultMaterial) {
                     pMaterial->release();
@@ -124,9 +133,7 @@ namespace SR_PTYPES_NS {
             case ShapeType::Sphere3D:
                 m_shape->setGeometry(physx::PxSphereGeometry(GetRadius() * GetScale().Max()));
                 break;
-            case ShapeType::Convex3D:
-                SR_NOOP;
-                break; /// TODO:
+            case ShapeType::Convex3D: /// кейс не нужен, геометрия обновляется при создании меша в UpdateShape()
             default:
                 break;
         }
@@ -152,6 +159,11 @@ namespace SR_PTYPES_NS {
             pxVertices[i] = *reinterpret_cast<physx::PxVec3*>(&vertices[vertexIndex].position);
         }
 
+        auto&& pPhysics = GetLibrary<PhysXLibraryImpl>()->GetPxPhysics();
+
+        physx::PxTolerancesScale scale = pPhysics->getTolerancesScale();
+        physx::PxCooking* cooking = PxCreateCooking(0, pPhysics->getFoundation(), physx::PxCookingParams(scale)); /// PxU32 /*version*/
+
         physx::PxConvexMeshDesc convexDesc;
         convexDesc.points.count = pRawMesh->GetIndicesCount(meshId);
         convexDesc.points.stride = sizeof(physx::PxVec3);
@@ -159,18 +171,10 @@ namespace SR_PTYPES_NS {
         convexDesc.flags = physx::PxConvexFlag::eCOMPUTE_CONVEX;
 
         physx::PxConvexMesh* convexMesh = nullptr;
-        physx::PxDefaultMemoryOutputStream buffer;
-
-        auto&& pPhysics = GetLibrary<PhysXLibraryImpl>()->GetPxPhysics();
-
-        physx::PxTolerancesScale scale = pPhysics->getTolerancesScale();
-
-        //physx::PxCooking* cooking = PxCreateCooking(0, pPhysics->getFoundation(), physx::PxCookingParams(pPhysics->getTolerancesScale())); /// PxU32 /*version*/
-        physx::PxCooking* cooking = PxCreateCooking(0, pPhysics->getFoundation(), physx::PxCookingParams(scale)); /// PxU32 /*version*/
-
-        if (cooking->cookConvexMesh(convexDesc, buffer))
+        physx::PxDefaultMemoryOutputStream buf;
+        if (cooking->cookConvexMesh(convexDesc, buf))
         {
-            physx::PxDefaultMemoryInputData id(buffer.getData(), buffer.getSize());
+            physx::PxDefaultMemoryInputData id(buf.getData(), buf.getSize());
             convexMesh = pPhysics->createConvexMesh(id);
         }
 

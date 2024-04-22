@@ -29,7 +29,7 @@ namespace SR_CORE_NS::Commands {
     }
 
     bool ChangeHierarchySelected::Redo() {
-        std::set<SR_UTILS_NS::GameObject::Ptr> changeSelected;
+        Selection changeSelected;
         for (SR_UTILS_NS::EntityId gmId:m_newSelected) {
             auto entity = SR_UTILS_NS::EntityManager::Instance().FindById(gmId);
             auto pObject = entity.DynamicCast<SR_UTILS_NS::GameObject>();
@@ -52,7 +52,7 @@ namespace SR_CORE_NS::Commands {
     }
 
     bool ChangeHierarchySelected::Undo() {
-        std::set<SR_UTILS_NS::GameObject::Ptr> changeSelected;
+        Selection changeSelected;
         for (SR_UTILS_NS::EntityId gmId:m_oldSelected) {
             auto entity = SR_UTILS_NS::EntityManager::Instance().FindById(gmId);
             auto pObject = entity.DynamicCast<SR_UTILS_NS::GameObject>();
@@ -74,7 +74,7 @@ namespace SR_CORE_NS::Commands {
         : Base(pEngine)
     {
         m_path = ptr->GetEntityPath();
-        m_newMarshal = ptr->GetTransform()->Save(SR_UTILS_NS::SavableFlagBits::SAVABLE_FLAG_NONE);
+        m_newMarshal = ptr->GetTransform()->Save(SR_UTILS_NS::SavableContext(nullptr, SR_UTILS_NS::SavableFlagBits::SAVABLE_FLAG_NONE));
         m_oldMarshal = pOldMarshal;
     }
 
@@ -93,7 +93,7 @@ namespace SR_CORE_NS::Commands {
         }
 
         SR_HTYPES_NS::Marshal copy = m_newMarshal->Copy();
-        pObject->SetTransform(SR_UTILS_NS::Transform::Load(copy, pObject.Get()));
+        pObject->SetTransform(SR_UTILS_NS::Transform::Load(copy));
         return true;
     }
 
@@ -106,7 +106,7 @@ namespace SR_CORE_NS::Commands {
         }
 
         SR_HTYPES_NS::Marshal copy = m_oldMarshal->Copy();
-        pObject->SetTransform(SR_UTILS_NS::Transform::Load(copy, pObject.Get()));
+        pObject->SetTransform(SR_UTILS_NS::Transform::Load(copy));
         return true;
     }
 
@@ -218,7 +218,7 @@ namespace SR_CORE_NS::Commands {
             /// резервируем все дерево сущностей, чтобы после отмены команды его можно было восстановить
             m_reserved.Reserve();
             SR_SAFE_DELETE_PTR(m_backup)
-            if ((m_backup = pObject->Save(nullptr, SR_UTILS_NS::SAVABLE_FLAG_NONE))) {
+            if ((m_backup = pObject->Save(SR_UTILS_NS::SavableContext(nullptr, SR_UTILS_NS::SAVABLE_FLAG_NONE)))) {
                 m_backup->SetPosition(0);
             }
             pObject->Destroy();
@@ -327,7 +327,7 @@ namespace SR_CORE_NS::Commands {
             // резервируем все дерево сущностей, чтобы после отмены команды его можно было восстановить
             m_reserved.Reserve();
             SR_SAFE_DELETE_PTR(m_marshal)
-            if ((m_marshal = pObject->Save(nullptr, SR_UTILS_NS::SAVABLE_FLAG_NONE))) {
+            if ((m_marshal = pObject->Save(SR_UTILS_NS::SavableContext(nullptr, SR_UTILS_NS::SAVABLE_FLAG_NONE)))) {
                 m_marshal->SetPosition(0);
             }
             pObject->Destroy();
@@ -368,7 +368,7 @@ namespace SR_CORE_NS::Commands {
         if (m_scene.RecursiveLockIfValid()) {
             auto &&count = m_marshal->Read<uint64_t>();
             if (count > 1000) {
-                SR_WARN("Hierarchy::Paste() : attempting to insert a large number of objects! Count: " + SR_UTILS_NS::ToString(count))
+                SR_WARN("Hierarchy::Paste() : attempting to insert a large number of objects! Count: " + SR_UTILS_NS::ToString(count));
             }
 
             std::set<SR_UTILS_NS::GameObject::Ptr> newSelected;
@@ -398,7 +398,7 @@ namespace SR_CORE_NS::Commands {
                 }
             }
 
-            m_hierarchy->SetSelectedImpl(newSelected);
+            m_hierarchy->SetSelectedImpl(newSelected); ///TODO: HierarchyPaste::Undo() тоже должен иметь смену выделенных в иерархии объектов
 
             m_scene.Unlock();
             return true;
@@ -421,7 +421,7 @@ namespace SR_CORE_NS::Commands {
             for (auto &&path : m_paths) {
                 auto entity = SR_UTILS_NS::EntityManager::Instance().FindById(path.Last());
                 auto pObject = entity.DynamicCast<SR_UTILS_NS::GameObject>();
-                if (m_marshal = pObject->Save(m_marshal, SR_UTILS_NS::SAVABLE_FLAG_NONE); !m_marshal) {
+                if (m_marshal = pObject->Save(SR_UTILS_NS::SavableContext(m_marshal, SR_UTILS_NS::SAVABLE_FLAG_NONE)); !m_marshal) {
                     return false;
                 }
                 pObject->Destroy();

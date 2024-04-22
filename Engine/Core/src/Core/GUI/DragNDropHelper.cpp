@@ -8,14 +8,14 @@
 #include <Utils/ECS/Component.h>
 
 namespace SR_CORE_GUI_NS {
-    bool DragDropTargetEntityRef(EditorGUI* pContext, SR_UTILS_NS::EntityRef& entityRef, const char* id, int32_t index, float_t width) {
+    bool DragDropTargetEntityRef(EditorGUI* pContext, SR_UTILS_NS::EntityRef& entityRef, const char* id, float_t width) {
         std::string preview;
 
         if (auto&& pGameObject = entityRef.GetGameObject()) {
             preview = "[GMJ] " + pGameObject->GetName();
         }
         else if (auto&& pComponent = entityRef.GetComponent()) {
-            preview = "[CMP] " + pComponent->GetComponentName();
+            preview = "[CMP] " + pComponent->GetComponentName().ToStringRef();
         }
         else {
             preview = "[None]";
@@ -23,12 +23,16 @@ namespace SR_CORE_GUI_NS {
 
         bool changed = false;
 
-        if (ImGui::BeginChild(SR_FORMAT_C("%s-%i", id, index), ImVec2(width, 50), true)) {
+        ImGui::PushStyleColor(ImGuiCol_Border, (ImVec4)ImColor(247, 84, 225));
+
+        if (ImGui::BeginChild(SR_FORMAT_C("{}-{}", id, (void*)&entityRef), ImVec2(width, 50), true)) {
+            ImGui::PopStyleColor();
+
             ImGui::Text("%s:", id);
 
             ImGui::SameLine();
 
-            if (ImGui::BeginChild(SR_FORMAT_C("%s-%i-1", id, index), ImVec2(200, 20), true)) {
+            if (ImGui::BeginChild(SR_FORMAT_C("{}-{}-1", id, (void*)&entityRef), ImVec2(200, 20), true)) {
                 ImGui::Text("%s", preview.c_str());
 
                 if (ImGui::BeginDragDropTarget()) {
@@ -70,13 +74,23 @@ namespace SR_CORE_GUI_NS {
 
             ImGui::SameLine();
 
+            if (ImGui::Button("Update")) {
+                entityRef.UpdateTarget();
+            }
+
+            ImGui::SameLine();
+
             bool relative = entityRef.IsRelative();
-            if (ImGui::Checkbox(SR_FORMAT_C("Relative##%s-%i", id, index), &relative)) {
+            if (ImGui::Checkbox(SR_FORMAT_C("Relative##{}-{}", id, (void*)&entityRef), &relative)) {
                 entityRef.SetRelative(relative);
+                entityRef.UpdateTarget();
                 changed = true;
             }
 
             ImGui::EndChild();
+        }
+        else {
+            ImGui::PopStyleColor();
         }
 
         return changed;

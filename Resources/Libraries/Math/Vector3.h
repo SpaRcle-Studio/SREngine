@@ -116,9 +116,9 @@ public:
 
     SR_NODISCARD Vector3<T> Clamp(const Vector3<T>& upper, const Vector3<T>& lover) const {
         return Vector3<T>(
-                SR_CLAMP(x, upper.x, lover.x),
-                SR_CLAMP(y, upper.y, lover.y),
-                SR_CLAMP(z, upper.z, lover.z)
+                SR_CLAMP(x, lover.x, upper.x),
+                SR_CLAMP(y, lover.y, upper.y),
+                SR_CLAMP(z, lover.z, upper.z)
         );
     }
 

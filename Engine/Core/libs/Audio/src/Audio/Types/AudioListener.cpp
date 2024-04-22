@@ -3,27 +3,63 @@
 //
 
 #include <Audio/Types/AudioListener.h>
+#include <Audio/SoundListener.h>
+#include <Audio/Impl/OpenALSoundListener.h>
+
+#include <Utils/ECS/GameObject.h>
+#include <Utils/ECS/Transform.h>
 
 namespace SR_AUDIO_NS{
     SR_REGISTER_COMPONENT(AudioListener);
 
     AudioListener::AudioListener()
         : SR_UTILS_NS::Component()
-    { }
+    {
+        m_listenerContext = SR_AUDIO_NS ::SoundManager::Instance().CreateListener();
+    }
 
     void AudioListener::OnDestroy() {
+        SR_AUDIO_NS ::SoundManager::Instance().DestroyListener(m_listenerContext);
+        m_listenerContext = nullptr;
+
         Super::OnDestroy();
-        delete this;
+
+        GetThis().AutoFree([](auto&& pData) {
+            delete pData;
+        });
     }
 
-    SR_UTILS_NS::Component* AudioListener::LoadComponent(SR_HTYPES_NS::Marshal &marshal, const SR_HTYPES_NS::DataStorage *dataStorage) {
+    SR_UTILS_NS::Component* AudioListener::LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage) {
         auto&& pComponent = new AudioListener();
-        return dynamic_cast<Component*>(pComponent);
+        return pComponent;
     }
 
-    SR_HTYPES_NS::Marshal::Ptr AudioListener::Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SR_UTILS_NS::SavableFlags flags) const {
-        pMarshal = Component::Save(pMarshal, flags);
-        return pMarshal;
+    SR_HTYPES_NS::Marshal::Ptr AudioListener::Save(SR_UTILS_NS::SavableContext data) const {
+        data.pMarshal = Super::Save(data);
+        return data.pMarshal;
     }
 
+    void AudioListener::OnAttached() {
+        Component::OnAttached();
+    }
+
+    void AudioListener::OnMatrixDirty() {
+        if (!m_listenerContext) {
+            SRHalt("AudioListener::OnMatrixDirty() : listener context is nullptr!");
+            return;
+        }
+
+        auto&& matrix = GetTransform()->GetMatrix();
+        SR_MATH_NS::Quaternion q;
+        SR_MATH_NS::FVector3 pos;
+
+        if (!matrix.Decompose(pos, q)) {
+            SR_ERROR("AudioListener::OnMatrixDirty() : failed to decompose matrix!");
+            return;
+        }
+
+        m_listenerContext->Update(pos, q);
+
+        Component::OnMatrixDirty();
+    }
 }

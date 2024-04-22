@@ -5,7 +5,7 @@
 #include <Core/GUI/PhysicsMaterialEditor.h>
 
 #include <Utils/Xml.h>
-#include <Utils/ResourceManager/IResourceReloader.h>
+#include <Utils/Resources/IResourceReloader.h>
 
 namespace SR_CORE_GUI_NS {
     PhysicsMaterialEditor::PhysicsMaterialEditor()
@@ -40,7 +40,8 @@ namespace SR_CORE_GUI_NS {
             SetBounciness(m_materialData.bounciness);
         }
 
-        if (ImGui::BeginCombo("Friction Combine", SR_UTILS_NS::EnumReflector::ToString(m_materialData.frictionCombine).c_str())) {
+        if (ImGui::BeginCombo("Friction Combine",
+                              SR_UTILS_NS::EnumReflector::ToStringAtom(m_materialData.frictionCombine).c_str())) {
             auto&& selectables = SR_UTILS_NS::EnumReflector::GetNames<SR_PHYSICS_NS::Combine>();
             for (auto&& selectable : selectables) {
                 if (ImGui::Selectable(selectable.c_str())) {
@@ -52,7 +53,7 @@ namespace SR_CORE_GUI_NS {
             ImGui::EndCombo();
         }
 
-        if (ImGui::BeginCombo("Bounce Combine", SR_UTILS_NS::EnumReflector::ToString(m_materialData.bounceCombine).c_str())) {
+        if (ImGui::BeginCombo("Bounce Combine", SR_UTILS_NS::EnumReflector::ToStringAtom(m_materialData.bounceCombine).c_str())) {
             auto&& selectables = SR_UTILS_NS::EnumReflector::GetNames<SR_PHYSICS_NS::Combine>();
             for (auto&& selectable : selectables) {
                 if (ImGui::Selectable(selectable.c_str())) {
@@ -65,16 +66,8 @@ namespace SR_CORE_GUI_NS {
         }
 
         if (ImGui::Button("Save")) {
-            SR_PTYPES_NS::PhysicsMaterial::Save(m_materialPath, m_materialData);
+            SR_PTYPES_NS::PhysicsMaterial::Save(SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat(m_materialPath), m_materialData);
         }
-    }
-
-    void PhysicsMaterialEditor::Edit(const SR_UTILS_NS::Path& path) {
-        m_materialPath = path;
-
-        ReadData();
-
-        Super::Open();
     }
 
     void PhysicsMaterialEditor::ChooseMaterial() {
@@ -105,5 +98,12 @@ namespace SR_CORE_GUI_NS {
         SetBounciness(matXml.TryGetNode("Bounciness").TryGetAttribute<float_t>(0.6f));
         SetFrictionCombine(SR_UTILS_NS::EnumReflector::FromString<SR_PHYSICS_NS::Combine>(matXml.TryGetNode("FrictionCombine").TryGetAttribute<std::string>("Average")));
         SetBounceCombine(SR_UTILS_NS::EnumReflector::FromString<SR_PHYSICS_NS::Combine>(matXml.TryGetNode("BounceCombine").TryGetAttribute<std::string>("Average")));
+    }
+
+    bool PhysicsMaterialEditor::OpenFile(const SR_UTILS_NS::Path& path) {
+        m_materialPath = path;
+        ReadData();
+        Super::Open();
+        return true;
     }
 }

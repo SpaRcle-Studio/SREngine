@@ -1,0 +1,132 @@
+name: SpaRcle Engine Main CI
+
+on:
+  push:
+    paths-ignore:
+      - 'Documentation/**'
+      - '**.md'
+    branches:
+      - master
+      - dev
+      - features/*
+
+  pull_request:
+    paths-ignore:
+      - 'Documentation/**'
+      - '**.md'
+    branches:
+      - master
+      - dev
+      - features/*
+
+jobs:
+  manage:
+    name: Choose platforms.
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '#SR_CI_NONE')"
+    outputs:
+      buildRelease: ${{ steps.globals.outputs.buildRelease }}
+      buildDebug: ${{ steps.globals.outputs.buildDebug }}
+      artifactPush: ${{ steps.globals.outputs.artifactPush }}
+      buildWindows: ${{ steps.globals.outputs.buildWindows }}
+      buildLinux: ${{ steps.globals.outputs.buildLinux }}
+
+    steps:
+      - name: Fetching repository.
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+
+      - if: "contains(github.event.head_commit.message, '#SR_CI_RELEASE')"
+        name: Handling "#SR_CI_RELEASE" argument.
+        shell: bash
+        run: |
+          echo "buildRelease=true" >> "$GITHUB_ENV"
+
+      - if: "contains(github.event.head_commit.message, '#SR_CI_DEBUG')"
+        name: Handling "#SR_CI_DEBUG" argument.
+        shell: bash
+        run: |
+          echo "buildDebug=true" >> "$GITHUB_ENV"
+
+      - if: "contains(github.event.head_commit.message, '#SR_CI_ALL')"
+        name: Handling "#SR_CI_ALL" argument.
+        shell: bash
+        run: |
+          echo "buildRelease=true" >> "$GITHUB_ENV"
+          echo "buildDebug=true" >> "$GITHUB_ENV"
+
+      - if: "contains(github.event.head_commit.message, '#SR_CI_ARTIFACT')"
+        name: Handling "#SR_CI_ARTIFACT" argument.
+        shell: bash
+        run: |
+          echo "artifactPush=true" >> $GITHUB_ENV
+
+      - if: "contains(github.event.head_commit.message, '#SR_CI_LINUX')"
+        name: Handling "#SR_CI_LINUX" argument.
+        shell: bash
+        run: |
+          echo "buildLinux=true" >> "$GITHUB_ENV"
+
+      - if: "contains(github.event.head_commit.message, '#SR_CI_WINDOWS')"
+        name: Handling "#SR_CI_WINDOWS" argument.
+        shell: bash
+        run: |
+          echo "buildWindows=true" >> "$GITHUB_ENV"
+
+      - if: env.buildRelease != 'true' && env.buildDebug != 'true'
+        name: Setting default build type.
+        shell: bash
+        run: |
+          echo "buildDebug=true" >> "$GITHUB_ENV"
+
+      - if: env.buildWindows != 'true' && env.buildLinux != 'true'
+        name: Setting default platform type.
+        shell: bash
+        run: |
+          echo "buildWindows=true" >> "$GITHUB_ENV"
+          echo "buildLinux=true" >> "$GITHUB_ENV"
+          
+      - name: Set global variables.
+        id: globals
+        run: |
+          echo "buildDebug=${{env.buildDebug}}" >> $GITHUB_OUTPUT
+          echo "buildRelease=${{env.buildRelease}}" >> $GITHUB_OUTPUT
+          echo "buildWindows=${{env.buildWindows}}" >> $GITHUB_OUTPUT
+          echo "buildLinux=${{env.buildLinux}}" >> $GITHUB_OUTPUT
+          echo "artifactPush=${{env.artifactPush}}" >> $GITHUB_OUTPUT  
+
+
+  BuildWindowsJob:
+    name: Windows.
+    needs: [manage]
+    if: needs.manage.outputs.buildWindows == 'true'
+    uses: ./.github/workflows/WindowsCI.yml
+    with:
+      buildRelease: ${{needs.manage.outputs.buildRelease}}
+      buildDebug: ${{needs.manage.outputs.buildDebug}}
+      artifactPush: ${{needs.manage.outputs.artifactPush}}
+
+  BuildLinuxJob:
+    name: Linux.
+    needs: [manage]
+    if: needs.manage.outputs.buildLinux == 'true'
+    uses: ./.github/workflows/LinuxCI.yml
+    with:
+      buildRelease: ${{needs.manage.outputs.buildRelease}}
+      buildDebug: ${{needs.manage.outputs.buildDebug}}
+      artifactPush: ${{needs.manage.outputs.artifactPush}}
+
+  PostBuild:
+    name: PostBuild.
+    needs: [BuildWindowsJob, BuildLinuxJob]
+    if: ${{ always() }}
+    uses: ./.github/workflows/PostBuild.yml
+    with:
+      windowsBuildState: ${{needs.BuildWindowsJob.result}}
+      linuxBuildState: ${{needs.BuildLinuxJob.result}}
+      commitActor: ${{github.actor}}
+      commitSha: ${{github.sha}}
+      commitBranch: ${{github.ref_name}}
+      commitMessage: ${{github.event.head_commit.message}}
+    secrets: inherit

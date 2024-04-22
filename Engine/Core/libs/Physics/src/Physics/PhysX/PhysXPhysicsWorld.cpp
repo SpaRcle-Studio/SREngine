@@ -51,6 +51,8 @@ namespace SR_PHYSICS_NS {
     }
 
     bool PhysXPhysicsWorld::Initialize() {
+        SR_TRACY_ZONE;
+
         auto&& pPhysics = GetLibrary<PhysXLibraryImpl>()->GetPxPhysics();
 
         m_raycast3dImpl = new PhysXRaycast3DImpl(this);
@@ -95,14 +97,18 @@ namespace SR_PHYSICS_NS {
     }
 
     bool PhysXPhysicsWorld::ClearForces() {
+        SR_TRACY_ZONE;
         return PhysicsWorld::ClearForces();
     }
 
     bool PhysXPhysicsWorld::Synchronize() {
+        SR_TRACY_ZONE;
         return SynchronizeDynamic() && SynchronizeStatic();
     }
 
     bool PhysXPhysicsWorld::StepSimulation(float_t step) {
+        SR_TRACY_ZONE;
+
         if (!m_scene) {
             return false;
         }
@@ -148,11 +154,15 @@ namespace SR_PHYSICS_NS {
     }
 
     void PhysXPhysicsWorld::Flush() {
+        SR_TRACY_ZONE;
+
         m_scene->flushSimulation();
         PhysicsWorld::Flush();
     }
 
     bool PhysXPhysicsWorld::SynchronizeStatic() {
+        SR_TRACY_ZONE;
+
         const uint32_t count = m_scene->getNbActors(physx::PxActorTypeFlag::Enum::eRIGID_STATIC);
         if (count == 0) {
             return true;
@@ -195,6 +205,8 @@ namespace SR_PHYSICS_NS {
     }
 
     bool PhysXPhysicsWorld::SynchronizeDynamic() {
+        SR_TRACY_ZONE;
+
         const uint32_t count = m_scene->getNbActors(physx::PxActorTypeFlag::Enum::eRIGID_DYNAMIC);
         if (count == 0) {
             return true;

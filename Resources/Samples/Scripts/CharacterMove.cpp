@@ -35,7 +35,7 @@ public:
         velocity = FVector3(velocity.x * 0.8, velocity.y, velocity.z * 0.8);
 
         auto&& q = Quaternion(transform->GetRotation().Radians());
-        float_t speed = Input::GetKey(KeyCode::LShift) ? 1.75f : 1.5f;
+        float_t speed = Input::GetKey(KeyCode::LShift) ? 2.5f : 1.5f;
 
         if (Input::GetKey(KeyCode::W)) {
             velocity += q * FVector3(0, 0, speed);
@@ -57,14 +57,18 @@ public:
 
         pRigidbody3D->SetLinearVelocity(velocity);
 
+        RaycastHit hit;
+
         if (Input::GetMouseDown(MouseCode::MouseLeft)) {
             auto&& rotate = transform->GetRotation().Radians();
             auto&& q = Quaternion(rotate);
 
             if (std::vector<RaycastHit> hits = Raycast3D::Cast(transform->GetTranslation(), (q * FVector3(0, 0, 1)), 100, 5); !hits.empty()) {
-                for (int i = 0; i < hits.size(); i++){
+                /*for (int i = 0; i < hits.size(); i++){
                     std::cout << "Ray (" << i + 1 << ") hits something. Distance = "  << hits[i].distance << "\t Total hits = " << hits.size() << std::endl;
-                }
+                }*/
+                hit = hits[0];
+                std::cout << "Ray hits something. Distance = "  << hit.distance << std::endl;
             }
         }
 
@@ -76,6 +80,12 @@ public:
         if (drag.x != 0.f) {
             transform->Rotate(FVector3(0, drag.x / 10, 0));
         }
+
+/*        if (auto&& pRigidbody = (Rigidbody*)hit.pHandler) {
+            if (auto&& pGameObject = pRigidbody->GetGameObject()) {
+                std::cout << "HIT on GameObject: '" << pGameObject->GetName() << "'\n";
+            }
+        }*/
     }
 
     void OnCollisionEnter(const CollisionData& data) override {

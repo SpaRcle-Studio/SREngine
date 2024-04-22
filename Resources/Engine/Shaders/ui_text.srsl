@@ -12,13 +12,18 @@ DepthTest true;
 [[uniform], [public]] vec3 color;
 
 void fragment() {
-    COLOR = texture(TEXT_ATLAS_TEXTURE, uv);
-
-    if (COLOR.a < 0.8) {
-        discard;
+    if (COLOR_BUFFER_MODE == 1) {
+        COLOR = vec4(COLOR_BUFFER_VALUE, 1.0);
     }
     else {
-        COLOR.rgb += color;
+        COLOR = texture(TEXT_ATLAS_TEXTURE, uv);
+
+        if (COLOR.a < 0.8) {
+            discard;
+        }
+        else {
+            COLOR.rgb += color;
+        }
     }
 }
 

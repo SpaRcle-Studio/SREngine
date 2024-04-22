@@ -1,6 +1,8 @@
 <?xml version="1.0"?>
 <Features>
    <Common>
+       <ResourceUsePointStackTraceProfiling Value="false"/>
+
        <EvoCompiler Value="true"/>
        <CompilePDB Value="false"/>
        <ScriptMultiInstances Value="false"/>
@@ -10,13 +12,16 @@
        <ColorBufferPick Value="true"/>
 
        <CrashHandler Value="false"/>
+       <SegmentationHandler Value="false"/>
 
+       <Gizmo Value="true"/>
        <Tracy Value="false"/>
+       <FileWatching Value="true"/>
 
-       <DebugChunks Value="true"/>
-       <DebugRegions Value="true"/>
        <ChunkSystem Value="true"/>
 
+       <ImGUI Value="true"/>
+       <Editor Value="true"/>
        <EditorOnStartup Value="true"/>
        <EditorCamera Value="true"/>
        <EditorWidgetsDocking Value="true"/>
@@ -25,7 +30,7 @@
 
        <AutoReloadResources Value="true"/>
 
-       <RayTracing Value="true"/>
+       <RayTracing Value="false"/>
 
        <AccumulateDt Value="true"/>
 
@@ -38,12 +43,13 @@
 
        <Vehicles Value="true"/>
 
+       <MainWindow Value="true"/>
+
        <LoadSkybox Value="false"/>
+       <Multisampling Value="true"/>
        <SkyboxCPUUsage Value="false"/>
        <VulkanValidation Value="true"/>
        <MultiRenderTargets Value="false"/>
-       <SingleUBOIdentifierMode Value="false"/>
        <Undocking Value="true"/>
-       <ImGUI Value="true"/>
    </Common>
 </Features>

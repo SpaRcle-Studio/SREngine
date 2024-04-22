@@ -73,30 +73,30 @@
     }                                                                                                                   \
 
 #define REGISTER_BEHAVIOUR(className)                                                                                   \
-    EXTERN void* InitBehaviour() {                                                                                      \
+    EXTERN uint64_t* InitBehaviour() {                                                                                  \
         if (!gBehaviourContext) {                                                                                       \
             gBehaviourContext = new BehaviourContext();                                                                 \
             ++gBehavioursCount;                                                                                         \
-            gBehaviourContext->pBehaviour = new className();                                                            \
+            gBehaviourContext->pBehaviour = (uint64_t*)(new className());                                               \
                                                                                                                         \
             for (auto&& propertyReg : gBehaviourContext->propertiesRegistrations) {                                     \
                 propertyReg();                                                                                          \
             }                                                                                                           \
                                                                                                                         \
-            return (void*)gBehaviourContext;                                                                            \
+            return (uint64_t*)gBehaviourContext;                                                                        \
         }                                                                                                               \
                                                                                                                         \
         return nullptr;                                                                                                 \
     }                                                                                                                   \
                                                                                                                         \
-    EXTERN void SwitchContext(void* pContext) {                                                                         \
+    EXTERN void SwitchContext(uint64_t* pContext) {                                                                     \
         gBehaviourContext = (BehaviourContext*)pContext;                                                                \
     }                                                                                                                   \
                                                                                                                         \
     EXTERN void ReleaseBehaviour() {                                                                                    \
         if (gBehaviourContext) {                                                                                        \
-            gBehaviourContext->pBehaviour.AutoFree([](void* ptr) {                                                      \
-				delete reinterpret_cast<className*>(ptr);                                                               \
+            gBehaviourContext->pBehaviour.AutoFree([](auto&& pPtr) {                                                    \
+				delete reinterpret_cast<className*>(pPtr);                                                              \
 			});                                                                                                         \
                                                                                                                         \
             if (gBehaviourContext->pBehaviour.Valid()) {                                                                \
@@ -110,8 +110,8 @@
         }                                                                                                               \
     }                                                                                                                   \
                                                                                                                         \
-    EXTERN SharedPtr<void> GetBehaviourPtr() {                                                                          \
-        return gBehaviourContext ? gBehaviourContext->pBehaviour : SharedPtr<void>(nullptr);                            \
+    EXTERN SharedPtr<uint64_t> GetBehaviourPtr() {                                                                      \
+        return gBehaviourContext ? gBehaviourContext->pBehaviour : SharedPtr<uint64_t>(nullptr);                        \
     }                                                                                                                   \
                                                                                                                         \
     REGISTER_BEHAVIOUR_BASE(className)                                                                                  \

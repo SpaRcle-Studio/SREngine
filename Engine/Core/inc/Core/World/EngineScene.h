@@ -2,10 +2,10 @@
 // Created by Monika on 25.12.2022.
 //
 
-#ifndef SRENGINE_ENGINESCENE_H
-#define SRENGINE_ENGINESCENE_H
+#ifndef SR_ENGINE_ENGINE_SCENE_H
+#define SR_ENGINE_ENGINE_SCENE_H
 
-#include <Utils/World/SceneBuilder.h>
+#include <Utils/World/SceneUpdater.h>
 #include <Utils/World/Scene.h>
 
 #include <Graphics/Render/RenderScene.h>
@@ -23,7 +23,7 @@ namespace SR_CORE_NS {
         using PhysicsScenePtr = SR_HTYPES_NS::SafePtr<SR_PHYSICS_NS::PhysicsScene>;
         using ScenePtr = SR_HTYPES_NS::SafePtr<SR_WORLD_NS::Scene>;
         using RenderScenePtr = SR_HTYPES_NS::SafePtr<SR_GRAPH_NS::RenderScene>;
-        using CameraPtr = SR_GTYPES_NS::Camera::Ptr;
+        using CameraPtr = SR_HTYPES_NS::SharedPtr<SR_GTYPES_NS::Camera>;
 
     public:
         EngineScene(const ScenePtr& scene, Engine* pEngine);
@@ -32,23 +32,28 @@ namespace SR_CORE_NS {
     public:
         SR_NODISCARD bool Init();
 
+        SR_NODISCARD CameraPtr GetMainCamera() const { return pMainCamera; }
+
         void SetActive(bool active);
         void SetPaused(bool pause);
         void SetGameMode(bool gameMode);
 
         void UpdateMainCamera();
+        void Update(float_t dt);
         void Draw(float_t dt);
         void SkipDraw();
         void SetSpeed(float_t speed);
+        void UpdateChunkDebug();
 
     private:
-        void DrawChunkDebug();
+        void UpdateFrequency();
+        void FixedStep(bool isPaused);
 
     public:
         ScenePtr pScene;
         RenderScenePtr pRenderScene;
         PhysicsScenePtr pPhysicsScene;
-        SR_WORLD_NS::SceneBuilder* pSceneBuilder = nullptr;
+        SR_WORLD_NS::SceneUpdater* pSceneUpdater = nullptr;
         CameraPtr pMainCamera;
         Engine* pEngine = nullptr;
 
@@ -60,4 +65,4 @@ namespace SR_CORE_NS {
     };
 }
 
-#endif //SRENGINE_ENGINESCENE_H
+#endif //SR_ENGINE_ENGINESCENE_H

@@ -6,6 +6,7 @@
 
 #include <Utils/ECS/GameObject.h>
 #include <Utils/ECS/Migration.h>
+#include <Utils/ECS/LayerManager.h>
 
 namespace SR_CORE_NS {
     bool RegisterMigrators() {
@@ -198,6 +199,48 @@ namespace SR_CORE_NS {
 
             return true;
         });
+        SR_UTILS_NS::Migration::Instance().RegisterMigrator(GAME_OBJECT_HASH_NAME, 1008, 1009, [](SR_HTYPES_NS::Marshal& marshal) -> bool {
+            SR_HTYPES_NS::Marshal migrated;
+
+            uint64_t position = marshal.GetPosition();
+
+            migrated.Stream::Write(marshal.Stream::View(), marshal.GetPosition());
+            /// --------------------------------------------------------------------------------------------------------
+
+            if (marshal.Read<bool>()) { /// is prefab
+                migrated.Write<bool>(true);  /// is prefab
+
+                migrated.Write(marshal.Read<std::string>()); /// prefabPath
+                migrated.Write(marshal.Read<std::string>()); /// objectName
+                marshal.Read<uint64_t>(); /// tag
+                //migrated.Write(marshal.Read<uint64_t>()); /// tag
+                //migrated.Write<uint64_t>(SR_UTILS_NS::LayerManager::Instance().GetDefaultLayer().GetHash()); /// layer
+
+                /// -------------------- меня наняли дублировать длинные строки потому что я люблю большие длинные прямые комментарии, состоящие исключительно из тире.
+                migrated.Stream::Write(marshal.Stream::View() + marshal.GetPosition(), marshal.Size() - marshal.GetPosition());
+
+                marshal.SetData(migrated.Stream::View(), migrated.Size());
+                marshal.SetPosition(position);
+
+                return true;
+            }
+            else {
+                migrated.Write<bool>(false);  /// is prefab
+            }
+
+            migrated.Write<bool>(marshal.Read<bool>()); /// enabled
+            migrated.Write<std::string>(marshal.Read<std::string>()); /// name
+            migrated.Write<uint64_t>(marshal.Read<uint64_t>()); /// tag
+            migrated.Write<uint64_t>(SR_UTILS_NS::LayerManager::GetDefaultLayer().GetHash()); /// layer
+
+            /// -------------------- меня наняли дублировать длинные строки потому что я люблю большие длинные прямые комментарии, состоящие исключительно из тире.
+            migrated.Stream::Write(marshal.Stream::View() + marshal.GetPosition(), marshal.Size() - marshal.GetPosition());
+
+            marshal.SetData(migrated.Stream::View(), migrated.Size());
+            marshal.SetPosition(position);
+
+            return true;
+        });
 
         static const auto RIGID_BODY_3D_HASH_NAME = SR_HASH_STR("Rigidbody3D");
         SR_UTILS_NS::Migration::Instance().RegisterMigrator(RIGID_BODY_3D_HASH_NAME, 1004, 1005, [](SR_HTYPES_NS::Marshal& marshal) -> bool {
@@ -229,6 +272,42 @@ namespace SR_CORE_NS {
             return true;
         });
 
+        static const auto TRANSFORM_HASH_NAME = SR_HASH_STR("Transform");
+        SR_UTILS_NS::Migration::Instance().RegisterMigrator(TRANSFORM_HASH_NAME, 1000, 1001, [](SR_HTYPES_NS::Marshal& marshal) -> bool {
+            SR_HTYPES_NS::Marshal migrated;
+
+            uint64_t position = marshal.GetPosition();
+
+            migrated.Stream::Write(marshal.Stream::View(), marshal.GetPosition());
+            /// --------------------------------------------------------------------------------------------------------
+
+            const auto measurement = marshal.Read<uint8_t>();
+            migrated.Write(static_cast<uint8_t>(measurement)); /// measurement
+
+            switch (static_cast<SR_UTILS_NS::Measurement>(measurement)) {
+                case SR_UTILS_NS::Measurement::SpaceZero:
+                    break;
+                case SR_UTILS_NS::Measurement::Space2D: {
+                    migrated.Write<uint8_t>(static_cast<uint8_t>(marshal.Read<uint8_t>())); /// stretch
+                    migrated.Write<uint8_t>(static_cast<uint8_t>(marshal.Read<uint8_t>())); /// anchor
+                    migrated.Write<uint8_t>(static_cast<uint8_t>(SR_UTILS_NS::PositionMode::ProportionalXY)); /// positionMode
+                    migrated.Write<bool>(static_cast<bool>(true)); /// isRelativePriority
+                    migrated.Write<int32_t>(static_cast<int32_t>(0)); /// localPriority
+                    break;
+                }
+                default:
+                    break;
+            }
+
+            /// -------------------- меня наняли дублировать длинные строки потому что я люблю большие длинные прямые комментарии, состоящие исключительно из тире.
+            migrated.Stream::Write(marshal.Stream::View() + marshal.GetPosition(), marshal.Size() - marshal.GetPosition());
+
+            marshal.SetData(migrated.Stream::View(), migrated.Size());
+            marshal.SetPosition(position);
+
+            return true;
+        });
+
         static const auto SKINNED_MESH_HASH_NAME = SR_HASH_STR("SkinnedMesh");
         SR_UTILS_NS::Migration::Instance().RegisterMigrator(SKINNED_MESH_HASH_NAME, 1001, 1002, [](SR_HTYPES_NS::Marshal& marshal) -> bool {
             SR_HTYPES_NS::Marshal migrated;
@@ -246,6 +325,26 @@ namespace SR_CORE_NS {
 
             SR_UTILS_NS::EntityRef ref;
             ref.Save(migrated);
+
+            /// -------------------- меня наняли дублировать длинные строки потому что я люблю большие длинные прямые комментарии, состоящие исключительно из тире.
+            migrated.Stream::Write(marshal.Stream::View() + marshal.GetPosition(), marshal.Size() - marshal.GetPosition());
+
+            marshal.SetData(migrated.Stream::View(), migrated.Size());
+            marshal.SetPosition(position);
+
+            return true;
+        });
+
+        static const auto CAMERA_HASH_NAME = SR_HASH_STR("Camera");
+        SR_UTILS_NS::Migration::Instance().RegisterMigrator(CAMERA_HASH_NAME, 1001, 1002, [](SR_HTYPES_NS::Marshal& marshal) -> bool {
+            SR_HTYPES_NS::Marshal migrated;
+
+            uint64_t position = marshal.GetPosition();
+
+            migrated.Stream::Write(marshal.Stream::View(), marshal.GetPosition());
+            /// --------------------------------------------------------------------------------------------------------
+
+            migrated.Write<std::string>(std::string()); /// render technique path
 
             /// -------------------- меня наняли дублировать длинные строки потому что я люблю большие длинные прямые комментарии, состоящие исключительно из тире.
             migrated.Stream::Write(marshal.Stream::View() + marshal.GetPosition(), marshal.Size() - marshal.GetPosition());

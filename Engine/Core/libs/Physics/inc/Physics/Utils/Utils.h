@@ -2,8 +2,8 @@
 // Created by Monika on 22.11.2022.
 //
 
-#ifndef SRENGINE_PHYSICS_UTILS_H
-#define SRENGINE_PHYSICS_UTILS_H
+#ifndef SR_ENGINE_PHYSICS_UTILS_H
+#define SR_ENGINE_PHYSICS_UTILS_H
 
 #include <Utils/Common/Measurement.h>
 
@@ -103,6 +103,15 @@ namespace SR_PHYSICS_UTILS_NS {
         }
     }
 
+    SR_MAYBE_UNUSED static constexpr bool IsConvex(ShapeType type) {
+        switch (type) {
+            case ShapeType::Convex3D:
+                return true;
+            default:
+                return false;
+        }
+    }
+
     SR_MAYBE_UNUSED static constexpr bool IsCylinder(ShapeType type) {
         switch (type) {
             case ShapeType::Cylinder2D:
@@ -122,8 +131,8 @@ namespace SR_PHYSICS_UTILS_NS {
     }
 
     SR_MAYBE_UNUSED static constexpr bool IsShapeHasSize(ShapeType type) {
-        return IsBox(type) || type == ShapeType::Plane3D;
+        return IsBox(type) || type == ShapeType::Plane3D || IsConvex(type);
     }
 }
 
-#endif //SRENGINE_PHYSICS_UTILS_H
+#endif //SR_ENGINE_PHYSICS_UTILS_H

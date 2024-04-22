@@ -11,6 +11,8 @@
 #include <Graphics/Memory/CameraManager.h>
 #include <Graphics/Render/RenderScene.h>
 #include <Graphics/Animations/Skeleton.h>
+#include <Graphics/Types/Geometry/SkinnedMesh.h>
+#include <Graphics/Types/Material.h>
 
 #include <Physics/PhysicsLib.h>
 #include <Physics/LibraryImpl.h>
@@ -31,7 +33,7 @@ namespace SR_CORE_NS {
                 const int64_t countBones = pRawMesh->GetAssimpScene()->mMeshes[meshId]->mNumBones;
                 const SR_GRAPH_NS::MeshType meshType = countBones > 0 ? SR_GRAPH_NS::MeshType::Skinned : SR_GRAPH_NS::MeshType::Static;
 
-                if (auto&& pMesh = SR_GTYPES_NS::Mesh::Load(pRawMesh->GetResourceId(), meshType, node->mMeshes[i])) {
+                if (auto&& pMesh = SR_GTYPES_NS::Mesh::Load(pRawMesh->GetResourcePath(), meshType, node->mMeshes[i])) {
                     if (countBones > 256) {
                         pMesh->SetMaterial(SR_GTYPES_NS::Material::Load("Engine/Materials/skinned-384.mat"));
                     }

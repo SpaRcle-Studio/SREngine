@@ -63,7 +63,7 @@ namespace SR_CORE_GUI_NS {
 
                 auto scope = observer->GetScope();
                 if (ImGui::InputInt("Scope", &scope)) {
-                    observer->SetScope(SR_CLAMP(scope, 32, 0));
+                    observer->SetScope(SR_CLAMP(scope, 0, 32));
                 }
 
                 if (ImGui::Button("Reload chunks")) {

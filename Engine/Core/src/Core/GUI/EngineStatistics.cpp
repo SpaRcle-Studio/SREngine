@@ -4,13 +4,15 @@
 
 #include <Core/GUI/EngineStatistics.h>
 
-#include <Utils/ResourceManager/ResourceManager.h>
+#include <Utils/Resources/ResourceManager.h>
 
 #include <Graphics/Types/Framebuffer.h>
 #include <Graphics/Types/Skybox.h>
+#include <Graphics/Pass/IFramebufferPass.h>
 
 #include <Graphics/Memory/ShaderProgramManager.h>
 #include <Graphics/Render/RenderTechnique.h>
+#include <Graphics/Render/DebugRenderer.h>
 #include <Graphics/Pipeline/Vulkan/VulkanPipeline.h>
 #include <Graphics/Pipeline/Vulkan/VulkanKernel.h>
 
@@ -28,6 +30,7 @@ namespace SR_CORE_GUI_NS {
             WidgetsPage();
             VideoMemoryPage();
             SubmitQueuePage();
+            RenderStrategyPage();
 
             ImGui::EndTabBar();
         }
@@ -38,7 +41,7 @@ namespace SR_CORE_GUI_NS {
             auto&& drawResource = [=](SR_UTILS_NS::IResource* pRes, uint32_t index) {
                 const bool isDestroyed = pRes->IsDestroyed();
 
-                std::string node = Helper::Format("[%u] %s = %u", index, pRes->GetResourceId().data(), pRes->GetCountUses());
+                std::string node = SR_FORMAT("[{}] {} = {}", index, pRes->GetResourceId().data(), pRes->GetCountUses());
 
                 if (isDestroyed) {
                     ImGui::PushStyleColor(ImGuiCol_::ImGuiCol_Text, ImVec4(255, 0, 0, 255));
@@ -63,7 +66,7 @@ namespace SR_CORE_GUI_NS {
             auto&& drawResources = [=](const std::unordered_set<SR_UTILS_NS::IResource*>& resources, uint32_t index) {
                 uint32_t subIndex = 0;
 
-                const auto node = Helper::Format("[%u] %s (%u)", index, (*resources.begin())->GetResourceId().data(), resources.size());
+                const auto node = SR_FORMAT("[{}] {} ({})", index, (*resources.begin())->GetResourceId().data(), resources.size());
 
                 if (ImGui::TreeNodeEx(node.c_str(), m_nodeFlagsWithChild)) {
                     for (auto &&pRes : resources)
@@ -205,7 +208,48 @@ namespace SR_CORE_GUI_NS {
                         ImGui::TableNextRow();
 
                         ImGui::TableSetColumnIndex(0);
-                        ImGui::Text("%s", pRenderTechnique->GetResourceId().c_str());
+
+                        if (auto&& pResource = dynamic_cast<SR_UTILS_NS::IResource*>(pRenderTechnique)) {
+                            ImGui::Text("%s", pResource->GetResourceId().c_str());
+                        }
+                        else {
+                            ImGui::Text("%s", pRenderTechnique->GetName().data());
+                        }
+
+                        pRenderTechnique->ForEachPass([this](auto&& pPass) -> bool {
+                            //if (pPass->GetName() != "SceneViewFBO") {
+                            //    return;
+                            //}
+
+                            auto&& pFramebufferPass = dynamic_cast<SR_GRAPH_NS::IFramebufferPass*>(pPass);
+                            if (!pFramebufferPass) {
+                                return true;
+                            }
+
+                            auto&& pFramebuffer = pFramebufferPass->GetFramebuffer();
+                            if (!pFramebuffer) {
+                                return true;
+                            }
+
+                            for (uint32_t i = 0; i < pFramebuffer->GetColorLayersCount(); ++i) {
+                                if (auto&& textureId = pFramebuffer->GetColorTexture(i); textureId != SR_ID_INVALID) {
+                                    auto&& pPipeline = GetContext()->GetPipeline();
+                                    SR_GRAPH_GUI_NS::DrawTexture(pPipeline.Get(), textureId, 256, false);
+                                }
+                            }
+
+                            if (pFramebuffer->GetDepthAspect() == SR_GRAPH_NS::ImageAspect::Depth) {
+                                for (uint32_t i = 0; i < pFramebuffer->GetLayersCount(); ++i) {
+                                    if (auto&& textureId = pFramebuffer->GetDepthTexture(i); textureId != SR_ID_INVALID) {
+                                        auto&& pPipeline = GetContext()->GetPipeline();
+                                        SR_GRAPH_GUI_NS::DrawTexture(pPipeline.Get(), textureId, 256, false);
+                                    }
+                                }
+                            }
+
+                            return true;
+                        });
+
                         ImGui::Separator();
                     }
 
@@ -261,13 +305,13 @@ namespace SR_CORE_GUI_NS {
                 return;
             }
 
-            ImGui::CollapsingHeader(SR_FORMAT_C("Present complete semaphore [%p]", pKernel->GetPresentCompleteSemaphore()));
+            ImGui::CollapsingHeader(SR_FORMAT_C("Present complete semaphore [{}]", (void*)pKernel->GetPresentCompleteSemaphore()));
 
             auto&& queue = pKernel->GetSubmitQueue();
 
             uint32_t index = 0;
             for (auto&& submitInfo : queue) {
-                if (ImGui::CollapsingHeader(SR_FORMAT_C("Queue %i", index))) {
+                if (ImGui::CollapsingHeader(SR_FORMAT_C("Queue {}", index))) {
                     DrawSubmitInfo(submitInfo);
                 }
                 ++index;
@@ -277,7 +321,7 @@ namespace SR_CORE_GUI_NS {
                 DrawSubmitInfo(pKernel->GetSubmitInfo());
             }
 
-            ImGui::CollapsingHeader(SR_FORMAT_C("Render complete semaphore [%p]", pKernel->GetRenderCompleteSemaphore()));
+            ImGui::CollapsingHeader(SR_FORMAT_C("Render complete semaphore [{}]", (void*)pKernel->GetRenderCompleteSemaphore()));
 
             ImGui::EndTabItem();
         }
@@ -309,5 +353,126 @@ namespace SR_CORE_GUI_NS {
         }
 
         ImGui::Separator();
+    }
+
+    void EngineStatistics::RenderStrategyPage() {
+        auto&& pRenderScene = GetRenderScene();
+        if (!pRenderScene) {
+            return;
+        }
+
+        if (!ImGui::BeginTabItem("Render strategy")) {
+            return;
+        }
+
+        auto&& pRenderStrategy = pRenderScene->GetRenderStrategy();
+        auto&& pPipeline = pRenderScene->GetPipeline();
+
+        const uint32_t transferredKBytes = pPipeline->GetPreviousState().transferredMemory / 1024;
+
+        SR_GRAPH_GUI_NS::Text(SR_FORMAT_C("Transferred memory: {}Kb", transferredKBytes));
+        SR_GRAPH_GUI_NS::Text(SR_FORMAT_C("Transferred count: {}", pPipeline->GetPreviousState().transferredCount));
+        SR_GRAPH_GUI_NS::Text(SR_FORMAT_C("Vertices count: {}", pPipeline->GetBuildState().vertices));
+        SR_GRAPH_GUI_NS::Text(SR_FORMAT_C("Triangles count: {}", static_cast<uint32_t>(pPipeline->GetBuildState().vertices / 3)));
+        SR_GRAPH_GUI_NS::Text(SR_FORMAT_C("Draw calls: {}", pPipeline->GetBuildState().drawCalls));
+        SR_GRAPH_GUI_NS::Text(SR_FORMAT_C("Timed objects pool size: {}", pRenderScene->GetDebugRenderer()->GetTimedObjectPoolSize()));
+        SR_GRAPH_GUI_NS::Text(SR_FORMAT_C("Timed empty ids pool size: {}", pRenderScene->GetDebugRenderer()->GetEmptyIdsPoolSize()));
+        SR_GRAPH_GUI_NS::Text(SR_FORMAT_C("Pipeline use count: {}", pRenderScene->GetPipeline()->GetPtrData()->strongCount));
+
+        SR_GRAPH_GUI_NS::Text("Status:");
+        ImGui::SameLine();
+
+        if (!pRenderStrategy->GetErrors().empty()) {
+            ImGui::TextColored(ImVec4(1, 0, 0, 1), "Error");
+
+            if (ImGui::BeginListBox("Render errors")) {
+                for (auto&& error : pRenderScene->GetRenderStrategy()->GetErrors()) {
+                    ImGui::Selectable(error.c_str());
+                }
+                ImGui::EndListBox();
+            }
+        }
+        else {
+            ImGui::TextColored(ImVec4(0, 1, 0, 1), "Ok");
+        }
+
+        bool debugMode = pRenderStrategy->IsDebugModeEnabled();
+        if (SR_GRAPH_GUI_NS::CheckBox("Debug mode", debugMode)) {
+            pRenderStrategy->SetDebugMode(debugMode);
+        }
+
+        auto&& pHierarchy = GetManager()->GetWidget<Hierarchy>();
+
+        if (ImGui::BeginListBox("Invalid meshes")) {
+            for (auto&& pMesh : pRenderStrategy->GetProblemMeshes()) {
+                auto&& pRenderComponent = dynamic_cast<SR_GTYPES_NS::IRenderComponent*>(pMesh);
+                auto&& pRawMeshHolder = dynamic_cast<SR_HTYPES_NS::IRawMeshHolder*>(pMesh);
+
+                SR_UTILS_NS::StringAtom name;
+
+                if (pRenderComponent && pRenderComponent->GetGameObject()) {
+                    name = pRenderComponent->GetGameObject()->GetName();
+                }
+
+                if (name.empty() && pRawMeshHolder) {
+                    name = pRawMeshHolder->GetMeshPath().ToStringView();
+                }
+
+                if (name.empty()) {
+                    name = pMesh->GetGeometryName();
+                }
+
+                if (name.empty()) {
+                    name = SR_UTILS_NS::EnumReflector::ToStringAtom(pMesh->GetMeshType());
+                }
+
+                if (ImGui::Selectable(name.c_str())) {
+                    if (pHierarchy && pRenderComponent) {
+                        pHierarchy->SelectGameObject(pRenderComponent->GetGameObject());
+                    }
+                }
+            }
+
+            ImGui::EndListBox();
+        }
+        /*if (ImGui::BeginTable("##FlatCluster", 4))
+        {
+            uint32_t index = 0;
+
+            for (auto&& pMesh : pRenderScene->GetFlatCluster()) {
+                ++index;
+
+                if (!pMesh) {
+                    continue;
+                }
+
+                ImGui::TableNextRow();
+
+                ImGui::TableSetColumnIndex(0);
+                ImGui::Text("Index: %i", index);
+                ImGui::Separator();
+
+                ImGui::TableSetColumnIndex(1);
+                if (auto&& pMeshComponent = dynamic_cast<SR_GTYPES_NS::MeshComponent*>(pMesh); pMeshComponent && pMeshComponent->GetGameObject()) {
+                    ImGui::Text("GameObject: %s", pMeshComponent->GetGameObject()->GetName().c_str());
+                }
+                else {
+                    ImGui::Text("Geometry: %s", pMesh->GetGeometryName().c_str());
+                }
+                ImGui::Separator();
+
+                ImGui::TableSetColumnIndex(2);
+                ImGui::Text("Priority: %lli", pMesh->GetSortingPriority());
+                ImGui::Separator();
+
+                ImGui::TableSetColumnIndex(3);
+                ImGui::Text("%s", pMesh->GetShader() ? pMesh->GetShader()->GetResourceId().data() : "[no shader]");
+                ImGui::Separator();
+            }
+
+            ImGui::EndTable();
+        }*/
+
+        ImGui::EndTabItem();
     }
 }

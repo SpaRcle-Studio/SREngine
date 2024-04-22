@@ -2,8 +2,8 @@
 // Created by Monika on 16.02.2022.
 //
 
-#ifndef SRENGINE_GUIZMO_H
-#define SRENGINE_GUIZMO_H
+#ifndef SR_ENGINE_GUIZMO_H
+#define SR_ENGINE_GUIZMO_H
 
 #include <Utils/ECS/GameObject.h>
 #include <Utils/ECS/Transform3D.h>
@@ -16,9 +16,7 @@ namespace SR_GTYPES_NS {
 }
 
 namespace SR_CORE_GUI_NS {
-    SR_ENUM_NS_CLASS_T(EditorSceneViewMode, uint8_t,
-        FreeAspect, WindowSize
-    );
+    enum class EditorSceneViewMode : uint8_t;
 
     class Guizmo : public SR_UTILS_NS::NonCopyable, public SR_UTILS_NS::InputHandler {
         using GameObjectPtr = SR_UTILS_NS::GameObject::Ptr;
@@ -67,6 +65,7 @@ namespace SR_CORE_GUI_NS {
         SR_UTILS_NS::Transform*   m_transform     = nullptr;
 
         bool                      m_isUse         = false;
+        bool                      m_isEnabled     = true;
 
         float_t                   m_cameraVelocityFactor = 1.f;
 
@@ -84,11 +83,11 @@ namespace SR_CORE_GUI_NS {
         ImGuizmo::OPERATION       m_operation     = ImGuizmo::OPERATION::TRANSLATE;
         ImGuizmo::MODE            m_mode          = ImGuizmo::MODE::LOCAL;
 
-        EditorSceneViewMode m_viewMode = EditorSceneViewMode::FreeAspect;
+        EditorSceneViewMode m_viewMode;
 
         EnginePtr m_engine;
 
     };
 }
 
-#endif //SRENGINE_GUIZMO_H
+#endif //SR_ENGINE_GUIZMO_H

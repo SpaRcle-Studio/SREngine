@@ -2,8 +2,8 @@
 // Created by innerviewer on 6/6/2023.
 //
 
-#ifndef SRENGINE_PHYSICSMATERIALEDITOR_H
-#define SRENGINE_PHYSICSMATERIALEDITOR_H
+#ifndef SR_ENGINE_PHYSICSMATERIALEDITOR_H
+#define SR_ENGINE_PHYSICSMATERIALEDITOR_H
 
 #include <Physics/PhysicsMaterial.h>
 
@@ -17,7 +17,7 @@ namespace SR_CORE_GUI_NS {
         ~PhysicsMaterialEditor() override = default;
 
     public:
-        void Edit(const SR_UTILS_NS::Path& path);
+        bool OpenFile(const SR_UTILS_NS::Path& path) override;
 
         void SetMaterialPath(const SR_UTILS_NS::Path& path) { m_materialPath = path; ReadData(); }
 
@@ -40,4 +40,4 @@ namespace SR_CORE_GUI_NS {
     };
 }
 
-#endif //SRENGINE_PHYSICSMATERIALEDITOR_H
+#endif //SR_ENGINE_PHYSICSMATERIALEDITOR_H

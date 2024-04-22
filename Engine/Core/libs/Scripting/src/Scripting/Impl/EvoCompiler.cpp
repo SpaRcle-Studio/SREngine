@@ -2,7 +2,7 @@
 // Created by Nikita on 11.07.2021.
 //
 
-#include <Utils/ResourceManager/ResourceManager.h>
+#include <Utils/Resources/ResourceManager.h>
 #include <Utils/FileSystem/FileSystem.h>
 #include <Utils/FileSystem/Path.h>
 #include <Utils/Platform/Platform.h>
@@ -61,7 +61,7 @@ namespace SR_SCRIPTING_NS {
         return false;
     }
 
-    std::string Framework::Scripting::EvoCompiler::GetGeneratorName(const SR_XML_NS::Node &config) const {
+    std::string SR_SCRIPTING_NS::EvoCompiler::GetGeneratorName(const SR_XML_NS::Node &config) const {
         if (!SR_UTILS_NS::Features::Instance().Enabled("EvoCompiler", true)) {
             SR_INFO("EvoCompiler::GetGenerator() : cmake generator is disabled.");
             return "Disabled";
@@ -88,7 +88,8 @@ namespace SR_SCRIPTING_NS {
     }
 
     GlobalEvoCompiler::GlobalEvoCompiler()
-        : SR_SCRIPTING_NS::EvoCompiler(SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Scripts"))
+        : SR_UTILS_NS::Singleton<GlobalEvoCompiler>()
+        , SR_SCRIPTING_NS::EvoCompiler(SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Scripts"))
     {
         Init();
     }

@@ -2,8 +2,8 @@
 // Created by Monika on 24.11.2022.
 //
 
-#ifndef SRENGINE_PHYSXUTILS_H
-#define SRENGINE_PHYSXUTILS_H
+#ifndef SR_ENGINE_PHYSXUTILS_H
+#define SR_ENGINE_PHYSXUTILS_H
 
 #include <Utils/stdInclude.h>
 #include <Utils/Math/Vector3.h>
@@ -62,4 +62,4 @@ namespace SR_PHYSICS_UTILS_NS {
     }
 }
 
-#endif //SRENGINE_PHYSXUTILS_H
+#endif //SR_ENGINE_PHYSXUTILS_H

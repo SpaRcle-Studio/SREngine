@@ -13,7 +13,12 @@ namespace SR_AUDIO_NS {
     { }
 
     SoundDevice* SoundDevice::Allocate(AudioLibrary audioLibrary, const std::string& name) {
-        SR_LOG("SoundDevice::Allocate() : allocating a sound device...");
+        if (name.empty()) {
+            SR_LOG("SoundDevice::Allocate() : allocating a sound device...");
+        }
+        else {
+            SR_LOG("SoundDevice::Allocate() : allocating a sound device with name \"" + name + "\"...");
+        }
 
         switch (audioLibrary) {
             case AudioLibrary::OpenAL:

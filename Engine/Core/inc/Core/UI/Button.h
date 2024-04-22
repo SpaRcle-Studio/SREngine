@@ -2,29 +2,24 @@
 // Created by Monika on 20.11.2022.
 //
 
-#ifndef SRENGINE_UI_BUTTON_H
-#define SRENGINE_UI_BUTTON_H
+#ifndef SR_ENGINE_UI_BUTTON_H
+#define SR_ENGINE_UI_BUTTON_H
 
-#include <Utils/ECS/Component.h>
+#include <Core/UI/IButton.h>
 
 namespace SR_CORE_UI_NS {
-    class Button : public SR_UTILS_NS::Component {
-        SR_ENTITY_SET_VERSION(1000);
-        SR_INITIALIZE_COMPONENT(Button);
-        using Super = SR_UTILS_NS::Component;
+    class Button : public IButton {
+        SR_REGISTER_NEW_COMPONENT(Button, 1001);
+        using Super = IButton;
+        SR_INLINE_STATIC SR_UTILS_NS::StringAtom SR_BUTTON_IDLE_PROP_NAME = "Idle";
+        SR_INLINE_STATIC SR_UTILS_NS::StringAtom SR_BUTTON_HOVERED_PROP_NAME = "Hovered";
+        SR_INLINE_STATIC SR_UTILS_NS::StringAtom SR_BUTTON_PRESSED_PROP_NAME = "Pressed";
     public:
-        Button();
-
-    protected:
-        ~Button() override = default;
-
-    public:
-        static Component* LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage);
-
-    public:
-        SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SR_UTILS_NS::SavableFlags flags) const override;
+        bool InitializeEntity() noexcept override;
+        void OnDestroy() override;
+        void Update(float_t dt) override;
 
     };
 }
 
-#endif //SRENGINE_UI_BUTTON_H
+#endif //SR_ENGINE_UI_BUTTON_H

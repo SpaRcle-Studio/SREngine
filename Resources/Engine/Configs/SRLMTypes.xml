@@ -19,6 +19,12 @@
         <Float Name="X"/>
         <Float Name="Y"/>
     </Struct>
+    <Struct Name="FVector4">
+        <Float Name="X"/>
+        <Float Name="Y"/>
+        <Float Name="Z"/>
+        <Float Name="W"/>
+    </Struct>
     <Struct Name="FrameBufferSettings">
         <Bool Name="DynamicResizing"/>
         <Bool Name="DepthEnabled"/>

@@ -3,7 +3,7 @@
 //
 
 #include <Physics/PhysicsLib.h>
-#include <Utils/ResourceManager/ResourceManager.h>
+#include <Utils/Resources/ResourceManager.h>
 
 #ifdef SR_PHYSICS_USE_BULLET3
     #include <Physics/Bullet3/Bullet3LibraryImpl.h>
@@ -76,7 +76,7 @@ namespace SR_PHYSICS_NS {
             return pLibrary;
         }
 
-        SR_INFO("PhysicsLibrary::GetLibrary() : initializing \"" + SR_UTILS_NS::EnumReflector::ToString(type) +
+        SR_INFO("PhysicsLibrary::GetLibrary() : initializing \"" + SR_UTILS_NS::EnumReflector::ToStringAtom(type).ToStringRef() +
                 "\" physics library...");
 
         switch (type) {
@@ -102,7 +102,7 @@ namespace SR_PHYSICS_NS {
 
         if (!m_libraries[index]->Initialize()) {
             SR_ERROR("PhysicsLibrary::GetLibrary() : failed to initialize physics library!\n\tType: "
-                 + SR_UTILS_NS::EnumReflector::ToString(type)
+                 + SR_UTILS_NS::EnumReflector::ToStringAtom(type).ToStringRef()
             );
             delete m_libraries[index];
             m_libraries[index] = nullptr;
@@ -118,7 +118,7 @@ namespace SR_PHYSICS_NS {
         }
 
         SR_WARN("PhysicsLibrary::GetActiveLibrary() : not found active library for \"" +
-            SR_UTILS_NS::EnumReflector::ToString(space) + "\", use default...");
+            SR_UTILS_NS::EnumReflector::ToStringAtom(space).ToStringRef() + "\", use default...");
 
         switch (space) {
             case Space::Space2D:

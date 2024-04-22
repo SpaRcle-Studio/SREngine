@@ -2,8 +2,8 @@
 // Created by Monika on 07.07.2022.
 //
 
-#ifndef SRENGINE_MP3DATAPROVIDER_H
-#define SRENGINE_MP3DATAPROVIDER_H
+#ifndef SR_ENGINE_MP3DATAPROVIDER_H
+#define SR_ENGINE_MP3DATAPROVIDER_H
 
 #include <Audio/Decoders/IWaveDataProvider.h>
 
@@ -15,15 +15,15 @@ namespace SR_AUDIO_NS {
         explicit MP3DataProvider(const RawSoundDataPtr& data);
         ~MP3DataProvider() override;
 
-        virtual const WaveDataFormat& GetWaveDataFormat() const override { return m_format; }
+        SR_NODISCARD const WaveDataFormat& GetWaveDataFormat() const override { return m_format; }
 
-        virtual const uint8_t* GetWaveData() const override;
-        virtual size_t GetWaveDataSize() const override;
+        const uint8_t* GetWaveData() const override;
+        size_t GetWaveDataSize() const override;
 
-        virtual size_t StreamWaveData(size_t size) override;
-        virtual bool IsStreaming() const override { return true; }
-        virtual bool IsEndOfStream() const override { return m_isEndOfStream; }
-        virtual void Seek(float_t seconds) override;
+        size_t StreamWaveData(size_t size) override;
+        bool IsStreaming() const override { return true; }
+        bool IsEndOfStream() const override { return m_isEndOfStream; }
+        void Seek(float_t seconds) override;
 
     private:
         RawSoundDataPtr m_data;
@@ -42,4 +42,4 @@ namespace SR_AUDIO_NS {
     };
 }
 
-#endif //SRENGINE_MP3DATAPROVIDER_H
+#endif //SR_ENGINE_MP3DATAPROVIDER_H

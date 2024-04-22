@@ -7,14 +7,16 @@
 #include <Core/GUI/FileBrowser.h>
 #include <Core/GUI/PhysicsMaterialEditor.h>
 #include <Core/GUI/DragNDropHelper.h>
+#include <Core/GUI/PropertyDrawer.h>
 #include <Core/Settings/EditorSettings.h>
+#include <Core/Common/Importers.h>
 
 #include <Utils/Types/DataStorage.h>
 #include <Utils/Types/RawMesh.h>
-#include <Utils/ResourceManager/ResourceManager.h>
+#include <Utils/Resources/ResourceManager.h>
 #include <Utils/Common/AnyVisitor.h>
 #include <Utils/Game/LookAtComponent.h>
-#include <Utils/Locale/Encoding.h>
+#include <Utils/Localization/Encoding.h>
 #include <Utils/FileSystem/FileDialog.h>
 
 #include <Scripting/Base/Behaviour.h>
@@ -25,6 +27,7 @@
 #include <Physics/PhysicsMaterial.h>
 
 #include <Graphics/Animations/Skeleton.h>
+#include <Graphics/Animations/BoneComponent.h>
 #include <Graphics/Animations/Animator.h>
 #include <Graphics/Types/Geometry/Mesh3D.h>
 #include <Graphics/Types/Shader.h>
@@ -37,171 +40,26 @@
 #include <Graphics/Types/Camera.h>
 #include <Graphics/UI/Anchor.h>
 #include <Graphics/UI/Canvas.h>
-#include <Graphics/Font/Text.h>
+#include <Graphics/Font/ITextComponent.h>
+#include <Graphics/Font/Text2D.h>
+#include <Graphics/Font/Text3D.h>
 #include <Graphics/Font/Font.h>
+#include <Graphics/Utils/MeshUtils.h>
 
 #include <Audio/Types/AudioSource.h>
 #include <Audio/Types/AudioListener.h>
 
-#include <imgui_internal.h>
 namespace SR_CORE_NS::GUI {
-
     void ComponentDrawer::DrawComponent(SR_PTYPES_NS::Rigidbody3D*& pComponent, EditorGUI* context, int32_t index) {
-        auto pCopy = dynamic_cast<SR_PTYPES_NS::Rigidbody*>(pComponent);
-        DrawComponent(pCopy, context, index);
 
-        auto&& linearLock = pComponent->GetLinearLock();
-        if (SR_GRAPH_NS::GUI::DrawBVec3Control("Linear lock", linearLock, false, 70.f, ++index)) {
-            pComponent->SetLinearLock(linearLock);
-        }
-
-        auto&& angularLock = pComponent->GetAngularLock();
-        if (SR_GRAPH_NS::GUI::DrawBVec3Control("Angular lock", angularLock, false, 70.f, ++index)) {
-            pComponent->SetAngularLock(angularLock);
-        }
-
-        const bool hasMesh =
-                pComponent->GetCollisionShape()->GetType() == SR_PHYSICS_NS::ShapeType::Convex3D ||
-                pComponent->GetCollisionShape()->GetType() == SR_PHYSICS_NS::ShapeType::TriangleMesh3D;
-
-        if (hasMesh) {
-            if (auto&& pDescriptor = context->GetIconDescriptor(EditorIcon::Shapes)) {
-                if (SR_GRAPH_GUI_NS::ImageButton(SR_FORMAT("##imgMeshBtn%i", index), pDescriptor, SR_MATH_NS::IVector2(50), 5)) {
-                    auto&& resourcesFolder = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
-                    auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesFolder, { { "Mesh", "obj,pmx,fbx,blend,stl,dae" } });
-
-                    if (path.Exists()) {
-                        if (auto&& pRawMesh = SR_HTYPES_NS::RawMesh::Load(path)){
-                            pComponent->SetRawMesh(pRawMesh);
-                            pComponent->SetShapeDirty(true);
-                        }
-                        else {
-                            SR_ERROR("ComponentDrawer::DrawComponent() : mesh is nullptr!");
-                        }
-                    }
-                }
-            }
-
-            int32_t meshId = pComponent->GetMeshId();
-            if (Graphics::GUI::InputInt("Id", meshId, 1, true, index) && meshId >= 0) {
-                pComponent->SetMeshId(meshId);
-                pComponent->SetShapeDirty(true);
-            }
-        }
-
-        if ((void*)pComponent != (void*)pCopy) {
-            pComponent = dynamic_cast<SR_PTYPES_NS::Rigidbody3D*>(pCopy);
-        }
     }
 
     void ComponentDrawer::DrawComponent(SR_PTYPES_NS::Rigidbody*& pComponent, EditorGUI* context, int32_t index) {
-        if (!pComponent) {
-            return;
-        }
 
-        auto&& shapes = SR_UTILS_NS::EnumReflector::GetNames<SR_PHYSICS_NS::ShapeType>();
-        auto shape = static_cast<int>(SR_UTILS_NS::EnumReflector::GetIndex(pComponent->GetType()));
-
-        if (ImGui::Combo(SR_FORMAT_C("Shape##rgbd%i", index), &shape, [](void* vec, int idx, const char** out_text){
-            auto&& vector = reinterpret_cast<std::vector<std::string>*>(vec);
-            if (idx < 0 || idx >= vector->size())
-                return false;
-
-            *out_text = vector->at(idx).c_str();
-
-            return true;
-        }, const_cast<void*>(reinterpret_cast<const void*>(&shapes)), shapes.size())) {
-            pComponent->SetType(SR_UTILS_NS::EnumReflector::At<SR_PHYSICS_NS::ShapeType>(shape));
-        }
-
-        ComponentDrawer::DrawCollisionShape(pComponent->GetCollisionShape(), context, index);
-
-        auto&& center = pComponent->GetCenter();
-        if (Graphics::GUI::DrawVec3Control("Center", center, 0.f, 70.f, 0.01f, index)) {
-            pComponent->SetCenter(center);
-        }
-
-        auto&& isTrigger = pComponent->IsTrigger();
-        if (ImGui::Checkbox(SR_FORMAT_C("Is trigger##rgbd%i", index), &isTrigger)) {
-            pComponent->SetIsTrigger(isTrigger);
-        }
-
-        ImGui::SameLine();
-
-        auto&& isStatic = pComponent->IsStatic();
-        if (ImGui::Checkbox(SR_FORMAT_C("Is static##rgbd%i", index), &isStatic)) {
-            pComponent->SetIsStatic(isStatic);
-        }
-
-        if (!pComponent->IsStatic()) {
-            auto &&mass = pComponent->GetMass();
-            if (ImGui::DragFloat(SR_FORMAT_C("Mass##rgbd%i", index), &mass, 0.01f)) {
-                pComponent->SetMass(mass);
-            }
-        }
-
-        SR_UTILS_NS::Path materialPath;
-        auto&& pMaterial = pComponent->GetPhysicsMaterial();
-
-        if (pMaterial) {
-            materialPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat(pMaterial->GetResourcePath());
-        }
-
-        if (materialPath.empty()) {
-            materialPath = "None";
-        }
-
-        if (ImGui::Button(materialPath.c_str())) {
-            if (auto&& pFileBrowser = context->GetWidget<FileBrowser>()) {
-                pFileBrowser->Open();
-
-                pFileBrowser->SetCallback([pComponent](const SR_UTILS_NS::Path& path){
-                    if (pComponent) {
-                        pComponent->SetMaterial(path);
-                    }
-                });
-            }
-        }
-
-        ImGui::SameLine();
-
-        if (ImGui::Button("Edit")) {
-            if (materialPath.IsFile()) {
-                context->GetWidget<PhysicsMaterialEditor>()->Edit(materialPath);
-            }
-        }
-
-        ImGui::SameLine();
-        ImGui::Text("Physics Material");
     }
 
     void ComponentDrawer::DrawCollisionShape(SR_PTYPES_NS::CollisionShape* pCollisionShape, EditorGUI* context, int32_t index){
-        if (!pCollisionShape){
-            return;
-        }
 
-        const float_t lineHeight = GImGui->Font->FontSize + GImGui->Style.FramePadding.y * 2.0f;
-        const ImVec2 buttonSize = { lineHeight + 30.0f, lineHeight };
-
-        if (SR_PHYSICS_UTILS_NS::IsShapeHasSize(pCollisionShape->GetType())) {
-            auto&& size = pCollisionShape->GetSize();
-
-            if (Graphics::GUI::DrawVec3Control("Size", size, 0.f, 70.f, 0.1, index)) {
-                pCollisionShape->SetSize(size);
-            }
-        }
-
-        if (SR_PHYSICS_UTILS_NS::IsShapeHasHeight(pCollisionShape->GetType())) {
-            auto&& height = pCollisionShape->GetHeight();
-            if (Graphics::GUI::DrawValueControl<SR_MATH_NS::Unit>(
-                        "Height", height, 0.f, buttonSize,
-                        ImVec4{ 0.2f, 0.7f, 0.2f, 1.0f },
-                        ImVec4{ 0.3f, 0.8f, 0.3f, 1.0f },
-                        ImVec4{ 0.2f, 0.7f, 0.2f, 1.0f }, nullptr, true, 0.1f, index
-            )){
-                pCollisionShape->SetHeight(height);
-            }
-        }
     }
 
     void ComponentDrawer::DrawComponent(Scripting::Behaviour *&pBehaviour, EditorGUI* context, int32_t index) {
@@ -210,16 +68,14 @@ namespace SR_CORE_NS::GUI {
         }
 
         if (auto&& pDescriptor = context->GetIconDescriptor(EditorIcon::Script)) {
-            if (SR_GRAPH_GUI_NS::ImageButton(SR_FORMAT("##BehSelectBtn%i", index), pDescriptor, SR_MATH_NS::IVector2(50), 5)) {
+            if (SR_GRAPH_GUI_NS::ImageButton(SR_FORMAT("##BehSelectBtn{}", index), pDescriptor, SR_MATH_NS::IVector2(50), 5)) {
                 auto &&scriptsPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
                 auto &&path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(scriptsPath, { { "Source file", "cpp" } });
 
                 if (path.Exists()) {
-                    if (auto &&newBehaviour = Scripting::Behaviour::Load(path)) {
-                        pBehaviour = newBehaviour;
-                    }
+                    pBehaviour->SetRawBehaviour(path);
                 }
-                else if (!path.Empty()) {
+                else if (!path.IsEmpty()) {
                     SR_WARN("ComponentDrawer::DrawComponent() : behaviour is not found!\n\tPath: " + path.ToString());
                 }
             }
@@ -230,20 +86,32 @@ namespace SR_CORE_NS::GUI {
         ImGui::BeginGroup();
         {
             if (auto&& pDescriptor = context->GetIconDescriptor(EditorIcon::Reset)) {
-                if (SR_GRAPH_GUI_NS::ImageButton(SR_FORMAT("##BehResetBtn%i", index), pDescriptor, SR_MATH_NS::IVector2(25), 5)) {
+                if (SR_GRAPH_GUI_NS::ImageButton(SR_FORMAT("##BehResetBtn{}", index), pDescriptor, SR_MATH_NS::IVector2(25), 5)) {
                     pBehaviour = new SR_SCRIPTING_NS::Behaviour();
                 }
             }
 
-            Graphics::GUI::DrawValue("Script", pBehaviour->GetResourceId());
+            SR_UTILS_NS::Path path = "";
+            if (pBehaviour->GetRawBehaviour()) {
+                path = pBehaviour->GetRawBehaviour()->GetResourcePath();
+            }
+
+            if (SR_GRAPH_GUI_NS::Button(path.ToStringRef(), index) && !path.IsEmpty()) {
+                auto&& resourceDirectory = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
+                auto&& scriptPath = resourceDirectory.Concat(path);
+                if (!scriptPath.IsEmpty()) {
+                    SR_PLATFORM_NS::OpenWithAssociatedApp(scriptPath);
+                }
+            }
         }
         ImGui::EndGroup();
 
-        if (pBehaviour->IsEmpty()) {
+        auto&& pRawBehaviour = pBehaviour->GetRawBehaviour();
+        if (!pRawBehaviour) {
             return;
         }
 
-        auto&& properties = pBehaviour->GetProperties();
+        auto&& properties = pRawBehaviour->GetProperties();
 
         if (!properties.empty()) {
             ImGui::Separator();
@@ -251,27 +119,27 @@ namespace SR_CORE_NS::GUI {
         }
 
         for (auto&& property : properties) {
-            std::any&& value = pBehaviour->GetProperty(property);
+            std::any&& value = pRawBehaviour->GetProperty(property);
 
             auto&& visitor = SR_UTILS_NS::Overloaded {
                 [&](int value) {
-                    if (ImGui::InputInt(SR_FORMAT_C("%s##BehProp%i", property.c_str(), index), &value)) {
-                        pBehaviour->SetProperty(property, value);
+                    if (ImGui::InputInt(SR_FORMAT_C("{}##BehProp{}", property.c_str(), index), &value)) {
+                        pRawBehaviour->SetProperty(property, value);
                     }
                 },
                 [&](bool value) {
-                    if (ImGui::Checkbox(SR_FORMAT_C("%s##BehProp%i", property.c_str(), index), &value)) {
-                        pBehaviour->SetProperty(property, value);
+                    if (ImGui::Checkbox(SR_FORMAT_C("{}##BehProp{}", property.c_str(), index), &value)) {
+                        pRawBehaviour->SetProperty(property, value);
                     }
                 },
                 [&](float value) {
-                    if (ImGui::DragFloat(SR_FORMAT_C("%s##BehProp%i", property.c_str(), index), &value, 0.01f)) {
-                        pBehaviour->SetProperty(property, value);
+                    if (ImGui::DragFloat(SR_FORMAT_C("{}##BehProp{}", property.c_str(), index), &value, 0.01f)) {
+                        pRawBehaviour->SetProperty(property, value);
                     }
                 },
                 [&](double value) {
-                    if (ImGui::InputDouble(SR_FORMAT_C("%s##BehProp%i", property.c_str(), index), &value)) {
-                        pBehaviour->SetProperty(property, value);
+                    if (ImGui::InputDouble(SR_FORMAT_C("{}##BehProp{}", property.c_str(), index), &value)) {
+                        pRawBehaviour->SetProperty(property, value);
                     }
                 },
                 [&](auto&&) {
@@ -282,25 +150,30 @@ namespace SR_CORE_NS::GUI {
         }
     }
 
-    void ComponentDrawer::DrawComponent(SR_GRAPH_NS::Types::Camera*& camera, EditorGUI* context, int32_t index) {
-        float_t cameraFar  = camera->GetFar();
-        if (ImGui::InputFloat("Far", &cameraFar, 5) && cameraFar >= 0) {
-            camera->SetFar(cameraFar);
+    void ComponentDrawer::DrawComponent(SR_GRAPH_NS::Types::Camera*& pComponent, EditorGUI* pContext, int32_t index) {
+        std::string renderTechnique = pComponent->GetRenderTechniquePath().ToStringRef();
+        if (ImGui::InputText(SR_FORMAT_C("Render technique##{}{}", (void*)pContext, index), &renderTechnique)) {
+            pComponent->SetRenderTechnique(renderTechnique);
         }
 
-        float_t cameraNear = camera->GetNear();
-        if (ImGui::InputFloat("Near", &cameraNear, 0.01) && cameraNear >= 0) {
-            camera->SetNear(cameraNear);
+        float_t cameraFar = pComponent->GetFar();
+        if (ImGui::InputFloat(SR_FORMAT_C("Far##{}{}", (void*)pContext, index), &cameraFar, 5) && cameraFar >= 0) {
+            pComponent->SetFar(cameraFar);
         }
 
-        float_t cameraFOV = camera->GetFOV();
-        if (ImGui::InputFloat("FOV", &cameraFOV, 0.5) && cameraFOV >= 0) {
-            camera->SetFOV(cameraFOV);
+        float_t cameraNear = pComponent->GetNear();
+        if (ImGui::InputFloat(SR_FORMAT_C("Near##{}{}", (void*)pContext, index), &cameraNear, 0.01) && cameraNear >= 0) {
+            pComponent->SetNear(cameraNear);
         }
 
-        int32_t priority = camera->GetPriority();
-        if (ImGui::InputInt("Priority", &priority, 1)) {
-            camera->SetPriority(priority);
+        float_t cameraFOV = pComponent->GetFOV();
+        if (ImGui::InputFloat(SR_FORMAT_C("FOV##{}{}", (void*)pContext, index), &cameraFOV, 0.5) && cameraFOV >= 0) {
+            pComponent->SetFOV(cameraFOV);
+        }
+
+        int32_t priority = pComponent->GetPriority();
+        if (ImGui::InputInt(SR_FORMAT_C("Priority##{}{}", (void*)pContext, index), &priority, 1)) {
+            pComponent->SetPriority(priority);
         }
     }
 
@@ -317,9 +190,9 @@ namespace SR_CORE_NS::GUI {
         auto&& pMaterial = pComponent->GetMaterial();
 
         if (auto&& pDescriptor = context->GetIconDescriptor(EditorIcon::Shapes)) {
-            if (SR_GRAPH_GUI_NS::ImageButton(SR_FORMAT("##imgMeshBtn%i", index), pDescriptor, SR_MATH_NS::IVector2(50), 5)) {
+            if (SR_GRAPH_GUI_NS::ImageButton(SR_FORMAT("##imgMeshBtn{}", index), pDescriptor, SR_MATH_NS::IVector2(50), 5)) {
                 auto&& resourcesFolder = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
-                auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesFolder, { { "Mesh", "obj,pmx,fbx,blend,stl,dae" } });
+                auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesFolder, { { "Mesh", SR_GRAPH_NS::SR_SUPPORTED_MESH_FORMATS } });
 
                 if (path.Exists()) {
                     pComponent->SetRawMesh(path);
@@ -336,7 +209,7 @@ namespace SR_CORE_NS::GUI {
         Graphics::GUI::DrawValue("Name", pComponent->GetGeometryName(), index);
 
         int32_t meshId = pComponent->GetMeshId();
-        if (Graphics::GUI::InputInt("Id", meshId, 1, true, index) && meshId >= 0) {
+        if (Graphics::GUI::InputInt("Id", meshId, 1) && meshId >= 0) {
             pComponent->SetMeshId(meshId);
         }
 
@@ -375,7 +248,7 @@ namespace SR_CORE_NS::GUI {
         auto&& pMaterial = pComponent->GetMaterial();
 
         if (auto&& pDescriptor = context->GetIconDescriptor(EditorIcon::Shapes)) {
-            if (SR_GRAPH_GUI_NS::ImageButton(SR_FORMAT("##imgMeshBtn%i", index), pDescriptor, SR_MATH_NS::IVector2(50), 5)) {
+            if (SR_GRAPH_GUI_NS::ImageButton(SR_FORMAT("##imgMeshBtn{}", index), pDescriptor, SR_MATH_NS::IVector2(50), 5)) {
                 auto&& resourcesFolder = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
                 auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesFolder, { { "Mesh", "obj,fbx,pmx,blend,stl,dae" } });
 
@@ -395,7 +268,7 @@ namespace SR_CORE_NS::GUI {
         Graphics::GUI::DrawValue("Name", pComponent->GetGeometryName(), index);
 
         int32_t meshId = pComponent->GetMeshId();
-        if (Graphics::GUI::InputInt("Id", meshId, 1, true, index) && meshId >= 0) {
+        if (Graphics::GUI::InputInt("Id", meshId, 1) && meshId >= 0) {
            pComponent->SetMeshId(meshId);
         }
 
@@ -404,7 +277,7 @@ namespace SR_CORE_NS::GUI {
         Graphics::GUI::DrawValue("Vertices count", pComponent->GetVerticesCount(), index);
         Graphics::GUI::DrawValue("Indices count", pComponent->GetIndicesCount(), index);
 
-        SR_CORE_GUI_NS::DragDropTargetEntityRef(context, pComponent->GetSkeleton(), "Skeleton", index, 260.f);
+        SR_CORE_GUI_NS::DragDropTargetEntityRef(context, pComponent->GetSkeleton(), "Skeleton", 260.f);
 
         ImGui::Separator();
 
@@ -424,7 +297,7 @@ namespace SR_CORE_NS::GUI {
             SR_GRAPH_GUI_NS::DrawTextOnCenter("Material");
 
             if (auto&& pDescriptor = context->GetIconDescriptor(EditorIcon::Material)) {
-                if (SR_GRAPH_GUI_NS::ImageButton(SR_FORMAT("##imgMatBtn%i", index), pDescriptor, SR_MATH_NS::IVector2(75), 5)) {
+                if (SR_GRAPH_GUI_NS::ImageButton(SR_FORMAT("##imgMatBtn{}", index), pDescriptor, SR_MATH_NS::IVector2(75), 5)) {
                     auto&& resourcesFolder = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
                     auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesFolder, { { "Material", "mat" } });
 
@@ -452,141 +325,92 @@ namespace SR_CORE_NS::GUI {
         }
     }
 
-    void ComponentDrawer::DrawMaterialProps(SR_GTYPES_NS::Material* material, EditorGUI *context, int32_t index) {
-        for (auto&& property : material->GetProperties()) {
-            std::visit([&property, &material, index, context](SR_GRAPH_NS::ShaderPropertyVariant&& arg){
-                if (std::holds_alternative<int32_t>(arg)) {
-                    auto&& value = std::get<int32_t>(arg);
-                    if (ImGui::InputInt(SR_FORMAT_C("%i##%s", property.displayName.c_str(), index), &value)) {
-                        property.data = value;
-                    }
-                }
-                else if (std::holds_alternative<float_t>(arg)) {
-                    float_t value = std::get<float_t>(arg);
-                    if (ImGui::InputFloat(property.displayName.c_str(), &value)) {
-                        property.data = value;
-                    }
-                }
-                else if (std::holds_alternative<SR_MATH_NS::FVector3>(arg)) {
-                    auto&& value = std::get<SR_MATH_NS::FVector3>(arg);
-                    if (Graphics::GUI::DrawVec3Control(property.displayName, value, 0.f, 70.f, 0.01f, index)) {
-                        property.data = value;
-                    }
-                }
-                else if (std::holds_alternative<SR_MATH_NS::FVector4>(arg)) {
-                    auto&& value = std::get<SR_MATH_NS::FVector4>(arg);
-                    if (Graphics::GUI::DrawColorControl(property.displayName, value, 0.f, true, 70.f)) {
-                        property.data = value;
-                    }
-                }
-                else if (std::holds_alternative<SR_GTYPES_NS::Texture*>(arg)) {
-                    auto&& value = std::get<SR_GTYPES_NS::Texture*>(arg);
-
-                    ImGui::Separator();
-
-                    void* pDescriptor = value ? value->GetDescriptor() : nullptr;
-
-                    /// пробуем взять иконку из редактора
-                    if (!pDescriptor) {
-                        pDescriptor = context->GetIconDescriptor(EditorIcon::Unknown);
-                    }
-
-                    /// если нашли хоть какой-то дескриптор
-                    if (pDescriptor) {
-                        if (SR_GRAPH_GUI_NS::ImageButton(SR_FORMAT("##imgBtnTex%i", index), pDescriptor, SR_MATH_NS::IVector2(55), 3)) {
-                            auto&& texturesPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
-                            auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(texturesPath, { { "Images", "png,jpg,bmp,tga" } });
-
-                            if (path.Exists()) {
-                                if (auto&& texture = SR_GTYPES_NS::Texture::Load(path)) {
-                                    material->SetTexture(&property, texture);
-                                }
-                            }
-                        }
-                    }
-
-                    /// -------------------------
-
-                    ImGui::SameLine();
-                    ImGui::BeginGroup();
-
-                    ImGui::Text("Property: %s", property.displayName.c_str());
-
-                    if (value) {
-                        ImGui::Text("Size: %ix%i\nChannels: %i", value->GetWidth(), value->GetHeight(), value->GetChannels());
-                    }
-                    else {
-                        ImGui::Text("Size: None\nChannels: None");
-                    }
-
-                    std::string id = value ? std::string(value->GetResourceId()) : std::string();
-
-                    auto&& inputLabel = SR_UTILS_NS::Format("##%s-%i-mat-tex", property.displayName.c_str(), index);
-                    if (ImGui::InputText(inputLabel.c_str(), &id, ImGuiInputTextFlags_EnterReturnsTrue | ImGuiInputTextFlags_NoUndoRedo)) {
-                        auto&& texture = SR_GTYPES_NS::Texture::Load(id);
-                        material->SetTexture(&property, texture);
-                        value = texture;
-                    }
-
-                    ImGui::EndGroup();
-
-                    ImGui::Separator();
-                }
-            }, property.data);
-        }
+    void ComponentDrawer::DrawMaterialProps(SR_GTYPES_NS::Material* material, EditorGUI* pEditor, int32_t index) {
+        SR_CORE_GUI_NS::DrawPropertyContext context;
+        context.pEditor = pEditor;
+        SR_CORE_GUI_NS::DrawPropertyContainer(context, &material->GetProperties());
     }
 
     void ComponentDrawer::DrawComponent(SR_GRAPH_NS::UI::Anchor *&anchor, EditorGUI *context, int32_t index) {
 
     }
 
-    void ComponentDrawer::DrawComponent(Framework::Audio::AudioSource *&pComponent, EditorGUI *context, int32_t index) {
-        float volume = pComponent->GetVolume();
+    void ComponentDrawer::DrawComponent(SR_AUDIO_NS::AudioSource *&pComponent, EditorGUI *context, int32_t index) {
+        float_t volume = pComponent->GetVolume();
+        float_t pitch = pComponent->GetPitch();
+        float_t coneInnerAngle = pComponent->GetConeInnerAngle();
+        bool loop = pComponent->GetLoop();
 
-        if(ImGui::SliderFloat("Volume",&volume,0.f,1.f,"%.1f"))
-        {
+        if (ImGui::SliderFloat(SR_FORMAT_C("Volume##SliderVolume{}", index), &volume, 0.f, 1.f, "%.1f")) {
             pComponent->SetVolume(volume);
         }
 
-        std::string m_path = pComponent->GetPath().ToString();
-        if (ImGui::InputText("Path to Audio",&m_path))
-        {
-           pComponent->SetPath(m_path);
+        if (ImGui::SliderFloat(SR_FORMAT_C("Pitch##SliderPitch{}", index), &pitch, 0.f, 10.f, "%.1f")) {
+            pComponent->SetPitch(pitch);
         }
 
+        if (ImGui::SliderFloat(SR_FORMAT_C("coneInnerAngle##SliderConeInnerAngle{}", index), &coneInnerAngle, 0.f,360.f, "%.1f")) {
+            pComponent->SetConeInnerAngle(coneInnerAngle);
+        }
+
+        if (ImGui::Checkbox(SR_FORMAT_C("Loop##CheckBoxLoop{}", index), &loop)) {
+            pComponent->SetLoop(loop);
+        }
+
+        if (auto&& pDescriptor = context->GetIconDescriptor(EditorIcon::Audio)) {
+            if (SR_GRAPH_GUI_NS::ImageButton(SR_FORMAT("##ButtonPath%i", index), pDescriptor, SR_MATH_NS::IVector2(50),5)) {
+                auto&& resourcesFolder = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
+                auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesFolder,{{"Audio", "mp3"}});
+
+                if (path.Exists()) {
+                    pComponent->SetPath(path.RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetResPath()));
+                }
+            }
+        }
+        SR_GRAPH_GUI_NS::DrawValue("Path", pComponent->GetPath().c_str(), index);
     }
-    void ComponentDrawer::DrawComponent(Framework::Audio::AudioListener *&pComponent, EditorGUI *context, int32_t index){
+
+    void ComponentDrawer::DrawComponent(SR_AUDIO_NS::AudioListener *&pComponent, EditorGUI *context, int32_t index){
 
     }
-
-
-
 
     void ComponentDrawer::DrawComponent(SR_GRAPH_NS::UI::Canvas *&canvas, EditorGUI *context, int32_t index) {
 
     }
 
-    void ComponentDrawer::DrawComponent(SR_GTYPES_NS::Sprite *&sprite, EditorGUI *context, int32_t index) {
-        if (!sprite->IsCalculatable())
+    void ComponentDrawer::DrawComponent(SR_GTYPES_NS::Sprite*& pComponent, EditorGUI *context, int32_t index) {
+        /*if (!pComponent->IsCalculatable())
             ImGui::TextColored(ImVec4(1, 0, 0, 1), "Invalid mesh!");
 
-        if (!sprite->IsCalculated())
+        if (!pComponent->IsCalculated())
             ImGui::TextColored(ImVec4(1, 1, 0, 1), "Mesh isn't calculated!");
 
-        if (!sprite->GetRenderContext())
+        if (!pComponent->GetRenderContext())
             ImGui::TextColored(ImVec4(1, 1, 0, 1), "Mesh isn't registered!");
 
         ImGui::Separator();
 
-        auto&& pMaterial = sprite->GetMaterial();
+        auto&& textureBorder = pComponent->GetTextureBorder();
+        if (Graphics::GUI::DrawVec2Control("Texture border", textureBorder, 0.15f, 80.f, 0.01f)) {
+            pComponent->SetTextureBorder(textureBorder);
+        }
+
+        auto&& windowBorder = pComponent->GetWindowBorder();
+        if (Graphics::GUI::DrawVec2Control("Window border", windowBorder, 0.15f, 80.f, 0.01f)) {
+            pComponent->SetWindowBorder(windowBorder);
+        }
+
+        ImGui::Separator();
+
+        auto&& pMaterial = pComponent->GetMaterial();
 
         SR_GTYPES_NS::Material* copy = pMaterial;
         DrawComponent(copy, context, index);
 
         /// компилятор считает, что это недостижимый код (он ошибается)
         if (copy != pMaterial) {
-            sprite->SetMaterial(copy);
-        }
+            pComponent->SetMaterial(copy);
+        }*/
     }
 
     void ComponentDrawer::DrawComponent(SR_GTYPES_NS::ProceduralMesh *&pComponent, EditorGUI *context, int32_t index) {
@@ -603,7 +427,7 @@ namespace SR_CORE_NS::GUI {
         Graphics::GUI::DrawValue("Indices count", pComponent->GetIndicesCount(), index);
     }
 
-    void ComponentDrawer::DrawComponent(SR_GTYPES_NS::Text *&pComponent, EditorGUI *context, int32_t index) {
+    void ComponentDrawer::DrawComponent(SR_GTYPES_NS::ITextComponent* pComponent, EditorGUI *context, int32_t index) {
         if (!pComponent->IsCalculatable())
             ImGui::TextColored(ImVec4(1, 0, 0, 1), "Invalid mesh!");
 
@@ -616,18 +440,18 @@ namespace SR_CORE_NS::GUI {
         ImGui::Text("Atlas size: %ix%i", pComponent->GetAtlasWidth(), pComponent->GetAtlasHeight());
 
         bool kerning = pComponent->GetKerning();
-        if (ImGui::Checkbox(SR_FORMAT_C("Kerning##textK%i", index), &kerning)) {
+        if (ImGui::Checkbox(SR_FORMAT_C("Kerning##textK{}", index), &kerning)) {
             pComponent->SetKerning(kerning);
         }
 
         bool debug = pComponent->IsDebugEnabled();
-        if (ImGui::Checkbox(SR_FORMAT_C("Debug##textD%i", index), &debug)) {
+        if (ImGui::Checkbox(SR_FORMAT_C("Debug##textD{}", index), &debug)) {
             pComponent->SetDebug(debug);
         }
 
-        auto&& text = SR_UTILS_NS::Locale::UtfToUtf<char, char32_t>(pComponent->GetText());
+        auto&& text = SR_UTILS_NS::Localization::UtfToUtf<char, char32_t>(pComponent->GetText());
 
-        if (ImGui::InputTextMultiline(SR_FORMAT_C("##textBox%i", index), &text, ImVec2(ImGui::GetWindowWidth() - 10, 100))) {
+        if (ImGui::InputTextMultiline(SR_FORMAT_C("##textBox{}", index), &text, ImVec2(ImGui::GetWindowWidth() - 10, 100))) {
             pComponent->SetText(text);
         }
 
@@ -671,13 +495,13 @@ namespace SR_CORE_NS::GUI {
 
     void ComponentDrawer::DrawComponent(SR_ANIMATIONS_NS::Skeleton *&pComponent, EditorGUI *context, int32_t index) {
         bool debug = pComponent->IsDebugEnabled();
-        if (Graphics::GUI::CheckBox("Debug", debug, index)) {
+        if (Graphics::GUI::CheckBox("Debug", debug)) {
             pComponent->SetDebugEnabled(debug);
         }
 
         if (Graphics::GUI::Button("Import", index)) {
             auto&& resourcesFolder = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
-            auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesFolder, { { "Mesh with skeleton", "fbx,pmx,blend" } });
+            auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesFolder, { { "Mesh with skeleton", "fbx,pmx,blend,gltf" } });
 
             if (!path.Exists()) {
                 return;
@@ -722,12 +546,12 @@ namespace SR_CORE_NS::GUI {
         auto&& angle = pComponent->GetAngle();
         Graphics::GUI::DrawIVec3Control("Angle", angle, 0, 70, 0, index, false);
 
-        SR_CORE_GUI_NS::DragDropTargetEntityRef(context, pComponent->GetTarget(), "Target", index, 260.f);
+        SR_CORE_GUI_NS::DragDropTargetEntityRef(context, pComponent->GetTarget(), "Target", 260.f);
 
         auto&& axises = SR_UTILS_NS::EnumReflector::GetNames<SR_UTILS_NS::LookAtAxis>();
         auto axis = static_cast<int>(SR_UTILS_NS::EnumReflector::GetIndex(pComponent->GetAxis()));
 
-        if (ImGui::Combo(SR_FORMAT_C("Axis##lookAtCmp%i", index), &axis, [](void* vec, int idx, const char** out_text) {
+        if (ImGui::Combo(SR_FORMAT_C("Axis##lookAtCmp{}", index), &axis, [](void* vec, int idx, const char** out_text) {
             auto&& vector = reinterpret_cast<std::vector<std::string>*>(vec);
             if (idx < 0 || idx >= vector->size())
                 return false;
@@ -740,7 +564,7 @@ namespace SR_CORE_NS::GUI {
         }
 
         auto&& offset = pComponent->GetOffset();
-        if (Graphics::GUI::DrawVec3Control("Offset", offset, 0.f, 70.f, 0.01f, index)) {
+        if (Graphics::GUI::DrawVec3Control("Offset", offset, 0.f, 0.01f, 70.f, index)) {
             pComponent->SetOffset(offset);
         }
 
@@ -758,5 +582,37 @@ namespace SR_CORE_NS::GUI {
         if (ImGui::Checkbox("Mirror", &mirror)) {
             pComponent->SetMirror(mirror);
         }
+    }
+
+    void ComponentDrawer::DrawComponent(SR_GTYPES_NS::Text2D*& pComponent, EditorGUI* context, int32_t index) {
+        DrawComponent(dynamic_cast<SR_GTYPES_NS::ITextComponent*>(pComponent), context, index);
+    }
+
+    void ComponentDrawer::DrawComponent(SR_GTYPES_NS::Text3D*& pComponent, EditorGUI* context, int32_t index) {
+        DrawComponent(dynamic_cast<SR_GTYPES_NS::ITextComponent*>(pComponent), context, index);
+    }
+
+    bool ComponentDrawer::DrawComponentOld(SR_UTILS_NS::Component* pComponent, EditorGUI* pContext, int32_t index) {
+        #define SR_OLD_DRAW_COMPONENT(class, cmpName)                 \
+        if (pComponent->GetComponentName() == (cmpName)) {            \
+            auto&& pCasted = dynamic_cast<class*>(pComponent);        \
+            ComponentDrawer::DrawComponent(pCasted, pContext, index); \
+            return true;                                              \
+        }                                                             \
+
+        SR_OLD_DRAW_COMPONENT(SR_SCRIPTING_NS::Behaviour, "Behaviour")
+        SR_OLD_DRAW_COMPONENT(SR_GTYPES_NS::Camera, "Camera")
+        SR_OLD_DRAW_COMPONENT(SR_GTYPES_NS::Text2D, "Text2D")
+        SR_OLD_DRAW_COMPONENT(SR_GTYPES_NS::Text3D, "Text3D")
+        SR_OLD_DRAW_COMPONENT(SR_ANIMATIONS_NS::Animator, "Animator")
+        SR_OLD_DRAW_COMPONENT(SR_ANIMATIONS_NS::Skeleton, "Skeleton")
+        SR_OLD_DRAW_COMPONENT(SR_ANIMATIONS_NS::BoneComponent, "Bone")
+        SR_OLD_DRAW_COMPONENT(SR_UTILS_NS::LookAtComponent, "LookAtComponent")
+        SR_OLD_DRAW_COMPONENT(SR_AUDIO_NS::AudioSource, "AudioSource")
+        SR_OLD_DRAW_COMPONENT(SR_AUDIO_NS::AudioListener, "AudioListener")
+        SR_OLD_DRAW_COMPONENT(SR_GRAPH_UI_NS::Anchor, "Anchor")
+        SR_OLD_DRAW_COMPONENT(SR_GRAPH_UI_NS::Canvas, "Canvas")
+
+        return false;
     }
 }

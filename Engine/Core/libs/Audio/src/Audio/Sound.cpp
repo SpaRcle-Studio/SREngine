@@ -5,7 +5,7 @@
 #include <Audio/Sound.h>
 #include <Audio/SoundManager.h>
 #include <Audio/SoundData.h>
-#include <Utils/ResourceManager/ResourceManager.h>
+#include <Utils/Resources/ResourceManager.h>
 
 namespace SR_AUDIO_NS {
     Sound::Sound()
@@ -38,11 +38,11 @@ namespace SR_AUDIO_NS {
         auto&& pSound = new Sound();
 
         pSound->SetRawSound(pRawSound);
-        pSound->SetId(path, false);
+        pSound->SetId(path.ToStringRef(), false);
 
         if (!pSound->Reload()) {
             SR_ERROR("Sound::Load() : failed to reload sound!");
-            delete pSound;
+            pSound->DeleteResource();
             return nullptr;
         }
 

@@ -2,8 +2,8 @@
 // Created by Monika on 24.05.2022.
 //
 
-#ifndef SRENGINE_EVOBEHAVIOUR_H
-#define SRENGINE_EVOBEHAVIOUR_H
+#ifndef SR_ENGINE_EVOBEHAVIOUR_H
+#define SR_ENGINE_EVOBEHAVIOUR_H
 
 #include <Scripting/Base/Behaviour.h>
 #include <Scripting/ScriptHolder.h>
@@ -12,17 +12,30 @@
 namespace SR_SCRIPTING_NS {
     typedef void(*CollisionFnPtr)(const SR_UTILS_NS::CollisionData& data);
 
-    class EvoBehaviour : public SR_SCRIPTING_NS::Behaviour {
+    class EvoBehaviour : public SR_SCRIPTING_NS::IRawBehaviour {
         using Properties = std::vector<std::string>;
+        using Super = SR_SCRIPTING_NS::IRawBehaviour;
+    public:
+        EvoBehaviour()
+            : Super(SR_COMPILE_TIME_CRC32_TYPE_NAME(EvoBehaviour))
+        { }
+
     public:
         Properties GetProperties() const override;
         std::any GetProperty(const std::string& id) const override;
         void SetProperty(const std::string& id, const std::any& val) override;
 
+        void SetComponent(Behaviour* pBehaviour) override {
+            Super::SetComponent(pBehaviour);
+            SetGameObject();
+        }
+
     protected:
         void Awake() override;
         void OnEnable() override;
         void OnDisable() override;
+        void OnAttached() override;
+        void OnDetached() override;
         void Start() override;
         void Update(float_t dt) override;
         void FixedUpdate() override;
@@ -35,11 +48,11 @@ namespace SR_SCRIPTING_NS {
         void OnTriggerExit(const SR_UTILS_NS::CollisionData& data) override;
         void OnTriggerStay(const SR_UTILS_NS::CollisionData& data) override;
 
+        void OnTransformSet() override;
+
         bool Load() override;
         bool Unload() override;
         SR_NODISCARD uint64_t GetFileHash() const override;
-
-        void OnAttached() override;
 
     private:
         template<typename T, typename ...Args> void CallFunction(T function, bool ignoreLoadState, Args&&... args) {
@@ -61,8 +74,6 @@ namespace SR_SCRIPTING_NS {
         void SetGameObject();
         void DestroyScript();
         void SwitchContext() const;
-
-        void OnTransformSet() override;
 
         template<typename T> T GetFunction(const char* name) const {
             return m_script->GetScript<EvoScript::Script>()->GetFunction<T>(name);
@@ -96,4 +107,4 @@ namespace SR_SCRIPTING_NS {
     };
 }
 
-#endif //SRENGINE_EVOBEHAVIOUR_H
+#endif //SR_ENGINE_EVOBEHAVIOUR_H

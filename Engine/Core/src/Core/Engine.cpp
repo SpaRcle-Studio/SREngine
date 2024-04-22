@@ -10,9 +10,10 @@
 
 #include <Utils/Events/EventManager.h>
 #include <Utils/World/Scene.h>
-#include <Utils/World/SceneBuilder.h>
+#include <Utils/World/SceneUpdater.h>
 #include <Utils/Common/Features.h>
 #include <Utils/ECS/ComponentManager.h>
+#include <Utils/Localization/LocalizationManager.h>
 
 #include <Graphics/GUI/WidgetManager.h>
 #include <Graphics/Render/RenderScene.h>
@@ -35,9 +36,15 @@
 
 namespace SR_CORE_NS {
     Engine::Engine(Application* pApplication)
-        : Super(this)
+        : Super(this, SR_UTILS_NS::SharedPtrPolicy::Automatic)
         , m_application(pApplication)
     { }
+
+    Engine::~Engine() {
+        m_renderContext.AutoFree([](auto&& pContext) {
+            delete pContext;
+        });
+    }
 
     bool Engine::Create() {
         SR_INFO("Engine::Create() : register all resources...");
@@ -54,14 +61,8 @@ namespace SR_CORE_NS {
 
         SR_INFO("Engine::Create() : create main window...");
 
-        if (!CreateMainWindow()) {
-            SR_ERROR("Engine::Create() : failed to create main window!");
-            return false;
-        }
-
-        if (!InitializeRender()) {
-            SR_ERROR("Engine::Create() : failed to initialize render!");
-            return false;
+        if (SR_UTILS_NS::Features::Instance().Enabled("MainWindow", true)) {
+            AddWindow(CreateMainWindow());
         }
 
         SR_UTILS_NS::ComponentManager::Instance().SetContextInitializer([pEngine = GetThis()](auto&& context) {
@@ -69,7 +70,7 @@ namespace SR_CORE_NS {
                 SRHalt("Engine is nullptr!");
                 return;
             }
-            context.SetValue(pEngine->GetWindow());
+            context.SetValue(pEngine->GetMainWindow());
 
             context.template SetPointer<SR_PHYSICS_NS::LibraryImpl>("2DPLib", SR_PHYSICS_NS::PhysicsLibrary::Instance().GetActiveLibrary(SR_UTILS_NS::Measurement::Space2D));
             context.template SetPointer<SR_PHYSICS_NS::LibraryImpl>("3DPLib", SR_PHYSICS_NS::PhysicsLibrary::Instance().GetActiveLibrary(SR_UTILS_NS::Measurement::Space3D));
@@ -77,13 +78,24 @@ namespace SR_CORE_NS {
 
         SR_LOG("Engine::RegisterLibraries() : registering all libraries...");
 
-        API::RegisterEvoScriptClasses();
+        SpaRcle::API::RegisterEvoScriptClasses(this);
+
+        m_localizationManager = new SR_UTILS_NS::Localization::LocalizationManager();
+
+        ///TEST
+        /// SR_UTILS_NS::Path configPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
+        /// configPath = configPath.Concat(R"(Localization\Editor\loc_config.yml)");
+        /// m_localizationManager->LoadInfoAsConfigFile(configPath);
+        ///TEST
+
+        m_renderContext = new SR_GRAPH_NS::RenderContext();
 
         m_cmdManager = new SR_UTILS_NS::CmdManager();
-        m_input      = new SR_UTILS_NS::InputDispatcher();
-        m_editor     = new SR_CORE_GUI_NS::EditorGUI(GetThis());
+        m_input = new SR_UTILS_NS::InputDispatcher();
 
-        m_worldTimer = SR_HTYPES_NS::Timer(1u);
+        if (SR_UTILS_NS::Features::Instance().Enabled("Editor")) {
+            m_editor = new SR_CORE_GUI_NS::EditorGUI(GetThis());
+        }
 
         if (m_isCreate) {
             SR_ERROR("Engine::Create() : game engine is already created!");
@@ -93,26 +105,35 @@ namespace SR_CORE_NS {
         SR_INFO("Engine::Create() : creating game engine...");
 
         m_input->Register(&Graphics::GUI::GlobalWidgetManager::Instance());
-        m_input->Register(m_editor);
+
+        if (m_editor) {
+            m_input->Register(m_editor);
+        }
 
         SetGameMode(!SR_UTILS_NS::Features::Instance().Enabled("EditorOnStartup", false));
 
         m_autoReloadResources = SR_UTILS_NS::Features::Instance().Enabled("AutoReloadResources", false);
 
-        if (!m_engineScene && !m_editor->LoadSceneFromCachedPath()) {
+        if (!m_engineScene && (m_editor && !m_editor->LoadSceneFromCachedPath())) {
             auto&& scenePath = SR_WORLD_NS::Scene::NewScenePath.ConcatExt("scene");
 
             if (SR_WORLD_NS::Scene::IsExists(scenePath)) {
                 if (!SetScene(SR_WORLD_NS::Scene::Load(scenePath))) {
-                    SR_ERROR("Engine::Create() : failed to load scene!\n\tPath: " + scenePath.ToString())
+                    SR_ERROR("Engine::Create() : failed to load scene!\n\tPath: " + scenePath.ToString());
                 }
             }
             else if (!SetScene(SR_WORLD_NS::Scene::New(scenePath))) {
-                SR_ERROR("Engine::Create() : failed to create new scene!\n\tPath: " + scenePath.ToString())
+                SR_ERROR("Engine::Create() : failed to create new scene!\n\tPath: " + scenePath.ToString());
             }
         }
 
-        FlushScene();
+        m_threadsWorker = SR_UTILS_NS::ThreadsWorker::Load("Engine/Configs/Threads.yml");
+        if (!m_threadsWorker) {
+            SR_ERROR("Engine::Create() : failed to load threads worker!");
+            return false;
+        }
+
+        m_threadsWorker->GetContext().SetPointer(this);
 
         m_timeStart = Clock::now();
 
@@ -121,171 +142,45 @@ namespace SR_CORE_NS {
         return true;
     }
 
-    bool Engine::CreateMainWindow() {
+    Engine::WindowPtr Engine::CreateMainWindow() {
         SR_LOG("Engine::CreateMainWindow() : try found screen resolution...");
 
-        SR_MATH_NS::UVector2 resolution;
-        SR_MATH_NS::IVector2 position;
-        bool isMaximized = true;
+        auto&& resolutions = SR_PLATFORM_NS::GetScreenResolutions();
 
-        auto&& cachePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath();
-        auto&& windowSettingsPath = cachePath.Concat("WindowSettings.xml");
-
-        const bool windowSettingsExist = windowSettingsPath.Exists();
-
-        if (windowSettingsExist) {
-            auto&& windowSettings = SR_XML_NS::Document::Load(windowSettingsPath);
-
-            auto&& rootNode = windowSettings.Root().TryGetNode("Settings");
-
-            resolution = rootNode.TryGetNode("Size").GetAttribute<SR_MATH_NS::UVector2>();
-            position = rootNode.TryGetNode("Position").GetAttribute<SR_MATH_NS::IVector2>();
-            isMaximized = rootNode.GetAttribute("IsMaximized").ToBool();
+        if (resolutions.empty()) {
+            SR_ERROR("Engine::CreateMainWindow() : not found supported resolutions!");
+            return nullptr;
         }
         else {
-            auto&& resolutions = SR_PLATFORM_NS::GetScreenResolutions();
-
-            if (resolutions.empty()) {
-                SR_ERROR("Engine::CreateMainWindow() : not found supported resolutions!");
-                return false;
-            }
-            else {
-                SR_LOG("Engine::CreateMainWindow() : found " + std::to_string(resolutions.size()) + " resolutions");
-            }
-
-            resolution = resolutions[SR_MAX(static_cast<uint32_t>(resolutions.size() / 2), 0)];
+            SR_LOG("Engine::CreateMainWindow() : found " + std::to_string(resolutions.size()) + " resolutions");
         }
 
-        m_window = new SR_GRAPH_NS::Window();
-        if (!m_window->Initialize("SpaRcle Engine", resolution)) {
+        SR_MATH_NS::UVector2 resolution = resolutions[SR_MAX(static_cast<uint32_t>(resolutions.size() / 2), 0)];
+
+        if (resolution.HasZero()) {
+            SR_ERROR("Engine::CreateMainWindow() : resolution can not be {}x{}!", resolution.x, resolution.y);
+            return nullptr;
+        }
+
+        SR_GRAPH_NS::Window::Ptr pWindow = new SR_GRAPH_NS::Window();
+
+        if (!pWindow->Initialize("SpaRcle Engine", resolution)) {
             SR_ERROR("Engine::CreateMainWindow() : failed to initialize window!");
-            return false;
-        }
-
-        if (auto&& pWin = m_window->GetImplementation<SR_GRAPH_NS::BasicWindowImpl>()) {
-            if (windowSettingsExist) {
-                pWin->Move(position.x, position.y);
-            }
-            else {
-                pWin->Centralize();
-            }
-
-            if (isMaximized) {
-                pWin->Maximize();
-            }
+            return nullptr;
         }
 
         SR_LOG("Engine::CreateMainWindow() : initializing window callbacks...");
 
-        m_window->SetDrawCallback([this]() {
-            DrawCallback();
-        });
-
-        m_window->SetFocusCallback([](bool focus) {
-            SR_SYSTEM_LOG(SR_UTILS_NS::Format("Window focus state: %s", focus ? "True" : "False"));
+        pWindow->SetFocusCallback([](bool focus) {
+            SR_SYSTEM_LOG("Window focus state: {}", focus ? "True" : "False");
             SR_UTILS_NS::Input::Instance().Reload();
         });
 
-        m_window->SetResizeCallback([this](auto&& size) {
-            if (m_renderContext) {
-                m_renderContext->OnResize(size);
-            }
-        });
-
-        m_window->SetScrollCallback([](double_t xOffset, double_t yOffset) {
+        pWindow->SetScrollCallback([](double_t xOffset, double_t yOffset) {
             SR_UTILS_NS::Input::Instance().SetMouseScroll(xOffset, yOffset);
         });
 
-        m_window->SetCloseCallback([this]() {
-            m_renderContext.Do([](auto&& pContext) {
-                pContext->Close();
-            });
-
-            SynchronizeFreeResources();
-
-            m_renderContext.AutoFree([](auto&& pContext) {
-                delete pContext;
-            });
-        });
-
-        return true;
-    }
-
-    void Engine::SynchronizeFreeResources() {
-        SR_TRACY_ZONE;
-
-        SR_SYSTEM_LOG("Engine::SynchronizeFreeResources() : synchronizing resources...");
-
-        SR_UTILS_NS::ResourceManager::Instance().SetWatchingEnabled(false);
-
-        std::atomic<bool> syncComplete = false;
-
-        /** Ждем, пока все графические ресурсы не освободятся */
-        auto&& thread = SR_HTYPES_NS::Thread::Factory::Instance().Create([&syncComplete, this]() {
-            SR_TRACY_ZONE_N("Sync free resources thread");
-
-            uint32_t syncStep = 0;
-            const uint32_t maxErrStep = 50;
-
-            SR_UTILS_NS::ResourceManager::Instance().UpdateWatchers(0.f);
-            SR_UTILS_NS::ResourceManager::Instance().ReloadResources(0.f);
-
-            SR_UTILS_NS::ResourceManager::Instance().Synchronize(true);
-
-            while (!m_renderContext->IsEmpty()) {
-                SR_TRACY_ZONE_N("Sync free resources iteration");
-
-                SR_SYSTEM_LOG("Engine::SynchronizeFreeResources() : synchronizing resources (step " + std::to_string(++syncStep) + ")");
-
-                SR_UTILS_NS::ResourceManager::Instance().Synchronize(true);
-
-                if (maxErrStep == syncStep) {
-                    SR_ERROR("Engine::SynchronizeFreeResources() : [FATAL] resources can not be released!");
-                    SR_UTILS_NS::ResourceManager::Instance().PrintMemoryDump();
-                    SR_PLATFORM_NS::Terminate();
-                    break;
-                }
-
-                SR_HTYPES_NS::Thread::Sleep(50);
-            }
-
-            SR_SYSTEM_LOG("Engine::SynchronizeFreeResources() : close synchronization thread...");
-
-            syncComplete = true;
-        });
-
-        thread->SetName("Synchronize");
-
-        /** Так как некоторые ресурсы, такие как материалы, имеют вложенные ресурсы,
-         * то они могут ожидать пока графический поток уберет метку использования с них */
-        while (!syncComplete) {
-            m_renderContext.Do([](auto&& pContext) {
-                pContext->Update();
-            });
-        }
-
-        SR_UTILS_NS::ResourceManager::Instance().Synchronize(true);
-
-        thread->TryJoin();
-        thread->Free();
-
-        SR_SYSTEM_LOG("Engine::SynchronizeFreeResources() : synchronizing is complete!");
-    }
-
-    bool Engine::InitializeRender() {
-        m_renderContext = new SR_GRAPH_NS::RenderContext(m_window);
-
-        return m_window->GetThread()->Execute([this]() -> bool {
-            if (!m_renderContext->Init()) {
-                SR_ERROR("Engine::InitializeRender() : failed to initialize the render context!");
-                return false;
-            }
-
-            SR_THIS_THREAD->GetContext()->SetValue<RenderContextPtr>(m_renderContext);
-            SR_THIS_THREAD->GetContext()->SetValue<WindowPtr>(m_window);
-
-            return true;
-        });
+        return pWindow;
     }
 
     bool Engine::Init() {
@@ -321,103 +216,54 @@ namespace SR_CORE_NS {
 
         m_isRun = true;
 
-        if (SR_UTILS_NS::Features::Instance().Enabled("ChunkSystem", true)) {
-            SR_INFO("Engine::Run() : running world thread...");
-
-            m_worldThread = SR_HTYPES_NS::Thread::Factory::Instance().Create(&Engine::WorldThread, this);
-            m_worldThread->SetName("World");
+        if (m_threadsWorker) {
+            m_threadsWorker->Start();
         }
 
         return true;
     }
 
     bool Engine::Close() {
+        SR_TRACY_ZONE;
+
         SR_INFO("Engine::Close() : closing game engine...");
 
         m_isRun = false;
 
-        while (!m_sceneQueue.Empty()) {
-            FlushScene();
+        if (m_threadsWorker) {
+            if (m_threadsWorker->IsActive()) {
+                m_threadsWorker->Stop();
+            }
+            m_threadsWorker.Reset();
         }
+
+        SR_INFO("Engine::Close() : destroying the editor...");
 
         if (m_editor && m_editor->Enabled()) {
             SR_SYSTEM_LOG("Engine::Await() : disabling editor gui...");
             m_editor->Save();
             m_editor->Enable(false);
+            m_input->Unregister(m_editor);
         }
+        SR_SAFE_DELETE_PTR(m_editor);
 
         if (m_input) {
             m_input->UnregisterAll();
         }
         SR_SAFE_DELETE_PTR(m_input);
 
-        if (m_engineScene) {
-            SetScene(ScenePtr());
-        }
-
-        FlushScene();
-
-        SR_INFO("Engine::Close() : destroying the editor...");
-        SR_SAFE_DELETE_PTR(m_editor);
-
-        if (m_cmdManager) {
-            SR_INFO("Engine::Close() : close the command manager...");
-            m_cmdManager->Close();
-        }
         SR_SAFE_DELETE_PTR(m_cmdManager);
 
-        if (m_worldThread) {
-            SR_INFO("Engine::Close() : destroying world thread...");
-            m_worldThread->TryJoin();
-            m_worldThread->Free();
-            m_worldThread = nullptr;
+        for (auto&& pWindow : m_windows) {
+            pWindow.AutoFree([](auto&& pWindow) {
+                pWindow->Close();
+                delete pWindow;
+            });
         }
 
-        m_window.AutoFree([](auto&& pWindow) {
-            pWindow->Close();
-            delete pWindow;
-        });
-
-        SR_SCRIPTING_NS::EvoScriptManager::Instance().Update(0.f, true);
+        SR_SCRIPTING_NS::EvoScriptManager::Instance().Update(true);
 
         return true;
-    }
-
-    void Engine::DrawCallback() {
-        if (!m_isRun || !m_window || m_window->IsWindowCollapsed()) {
-            if (m_engineScene) {
-                m_engineScene->SkipDraw();
-            }
-            return;
-        }
-
-        SR_TRACY_ZONE_N("Main frame");
-
-        SR_HTYPES_NS::Time::Instance().Update();
-
-        const auto now = SR_HTYPES_NS::Time::Instance().Now();
-        const auto deltaTime = now - m_timeStart; /// nanoseconds
-        const auto dt = static_cast<float_t>(deltaTime.count()) / SR_CLOCKS_PER_SEC / SR_CLOCKS_PER_SEC / SR_CLOCKS_PER_SEC; /// Seconds
-        m_timeStart = now;
-
-        SR_UTILS_NS::ResourceManager::Instance().UpdateWatchers(dt);
-
-        if (IsNeedReloadResources()) {
-            SR_UTILS_NS::ResourceManager::Instance().ReloadResources(dt);
-        }
-
-        /// синхронно отрисовываем сцену
-        {
-            auto&& readLock = m_sceneQueue.ReadLock();
-
-            if (m_engineScene) {
-                m_engineScene->Draw(dt);
-            }
-        }
-
-        if (m_editor && m_window->IsWindowFocus()) {
-            m_editor->Update(dt);
-        }
     }
 
     bool Engine::SetScene(const SR_HTYPES_NS::SafePtr<SR_WORLD_NS::Scene> &scene)  {
@@ -430,49 +276,11 @@ namespace SR_CORE_NS {
         m_application->Reload();
     }
 
-    void Engine::WorldThread() {
-        while (m_isRun) {
-            SR_HTYPES_NS::Thread::Sleep(250);
-
-            SR_TRACY_ZONE_N("World");
-
-            SR_MAYBE_UNUSED auto&& readLock = m_sceneQueue.ReadLock();
-
-            if (!m_engineScene) {
-                continue;
-            }
-
-            m_engineScene->UpdateMainCamera();
-
-            auto&& pScene = m_engineScene->pScene;
-
-            if (m_worldTimer.Update() && pScene.LockIfValid()) {
-                auto&& pMainCamera = m_engineScene->pMainCamera;
-
-                if (!pMainCamera) {
-                    SR_NOOP;
-                }
-
-                else if (auto&& gameObject = dynamic_cast<SR_UTILS_NS::GameObject*>(pMainCamera->GetParent())) {
-                    auto&& pLogic = pScene->GetLogicBase().DynamicCast<SR_WORLD_NS::SceneCubeChunkLogic>();
-                    if (pLogic && gameObject) {
-                        pLogic->SetObserver(gameObject);
-                    }
-                }
-
-                pScene->GetLogicBase()->Update(m_worldTimer.GetDeltaTime());
-                pScene.Unlock();
-            }
-        }
-
-        SR_SYSTEM_LOG("Engine::WorldThread() : world thread completed!");
-    }
-
     void Engine::FixedUpdate() {
         SR_TRACY_ZONE;
 
         ///В этом блоке находится обработка нажатия клавиш, которая не должна срабатывать, если окно не сфокусированно
-        if (m_window->IsWindowFocus())
+        if (IsApplicationFocused())
         {
             SR_UTILS_NS::Input::Instance().Check();
             m_input->Check();
@@ -480,12 +288,15 @@ namespace SR_CORE_NS {
             bool lShiftPressed = SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::LShift);
 
             if (!IsGameMode() && SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::Ctrl)) {
-                if (SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::Z))
+                if (SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::Z)) {
                     m_cmdManager->Cancel();
+                }
 
-                if (SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::Y))
-                    if (!m_cmdManager->Redo())
-                        SR_WARN("Engine::Await() : failed to redo \"" + m_cmdManager->GetLastCmdName() + "\" command!");
+                if (SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::Y)) {
+                    if (!m_cmdManager->Redo()) {
+                        SR_WARN("Engine::FixedUpdate() : failed to redo \"" + m_cmdManager->GetLastCmdName() + "\" command!");
+                    }
+                }
             }
 
             if (!IsGameMode() && m_editor && SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::F1)) {
@@ -498,6 +309,8 @@ namespace SR_CORE_NS {
 
             if (m_editor && IsActive() && SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::F2)) {
                 SetGameMode(!IsGameMode());
+                SR_UTILS_NS::Input::Instance().LockCursor(IsGameMode());
+                SR_UTILS_NS::Input::Instance().SetCursorVisible(!IsGameMode());
             }
 
             if (SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::F3) && lShiftPressed) {
@@ -505,15 +318,17 @@ namespace SR_CORE_NS {
                 return;
             }
 
-            if (IsGameMode() && SR_UTILS_NS::Input::Instance().IsMouseMoved() && SR_UTILS_NS::Input::Instance().IsCursorLocked()) {
-                auto&& resolution = m_window->GetSize();
+            auto&& pMainWindow = GetMainWindow();
+
+            if (pMainWindow && IsGameMode() && SR_UTILS_NS::Input::Instance().IsMouseMoved() && SR_UTILS_NS::Input::Instance().IsCursorLocked()) {
+                auto&& resolution = pMainWindow->GetSize();
                 resolution /= 2;
-                SR_PLATFORM_NS::SetMousePos(m_window->GetPosition() + resolution.Cast<int32_t>());
+                SR_PLATFORM_NS::SetMousePos(pMainWindow->GetPosition() + resolution.Cast<int32_t>());
                 SR_UTILS_NS::Input::Instance().ResetMouse();
             }
         }
 
-        if (m_editor && m_window->IsWindowFocus()) {
+        if (m_editor && IsApplicationFocused()) {
             m_editor->FixedUpdate();
         }
     }
@@ -546,11 +361,11 @@ namespace SR_CORE_NS {
         }
     }
 
-    void Engine::FlushScene() {
+    bool Engine::FlushScene() {
         SR_TRACY_ZONE;
 
         if (m_sceneQueue.Empty()) {
-            return;
+            return false;
         }
 
         m_sceneQueue.Flush([this](auto&& newScene) {
@@ -579,23 +394,29 @@ namespace SR_CORE_NS {
         if (m_editor && m_engineScene) {
             m_editor->SetScene(m_engineScene->pScene);
         }
+
+        return true;
     }
 
     void Engine::SetGameMode(bool enabled) {
         m_isGameMode = enabled;
 
-        if (m_isGameMode) {
-            m_editor->HideAll();
-        }
-        else {
-            m_editor->ShowAll();
+        if (m_editor) {
+            if (m_isGameMode) {
+                m_editor->HideAll();
+            }
+            else {
+                m_editor->ShowAll();
+            }
         }
 
         if (m_engineScene) {
             m_engineScene->SetGameMode(m_isGameMode);
         }
 
-        m_editor->Enable(!m_isGameMode);
+        if (m_editor) {
+            m_editor->Enable(!m_isGameMode);
+        }
     }
 
     bool Engine::IsNeedReloadResources() {
@@ -606,11 +427,63 @@ namespace SR_CORE_NS {
         return m_engineScene ? m_engineScene->pScene : ScenePtr();
     }
 
-    SR_WORLD_NS::SceneBuilder* Engine::GetSceneBuilder() const {
-        return m_engineScene ? m_engineScene->pSceneBuilder : nullptr;
+    SR_WORLD_NS::SceneUpdater* Engine::GetSceneBuilder() const {
+        return m_engineScene ? m_engineScene->pSceneUpdater : nullptr;
     }
 
     Engine::RenderScenePtr Engine::GetRenderScene() const {
         return m_engineScene ? m_engineScene->pRenderScene : RenderScenePtr();
+    }
+
+    Engine::PhysicsScenePtr Engine::GetPhysicsScene() const {
+        return m_engineScene ? m_engineScene->pPhysicsScene : PhysicsScenePtr();
+    }
+
+    bool Engine::Execute() {
+        SR_TRACY_ZONE;
+        SR_LOCK_GUARD;
+
+        bool isAlive = true;
+
+        if (!IsRun()) {
+            SR_SYSTEM_LOG("Engine::Execute() : engine is not running!");
+            isAlive = false;
+        }
+
+        if (!m_threadsWorker->IsAlive()) {
+            SR_SYSTEM_LOG("Engine::Execute() : threads worker is not alive!");
+            isAlive = false;
+        }
+
+        if (m_threadsWorker && !isAlive && m_threadsWorker->IsActive()) {
+            m_threadsWorker->Stop();
+            m_threadsWorker.Reset();
+        }
+
+        return isAlive;
+    }
+
+    void Engine::AddWindow(Engine::WindowPtr pWindow) {
+        pWindow->SetResizeCallback([this](auto&& size) {
+            if (m_renderContext) {
+                m_renderContext->OnResize(size);
+            }
+        });
+
+        m_windows.emplace_back(std::move(pWindow));
+    }
+
+    bool Engine::IsApplicationFocused() const {
+        if (m_windows.empty()) {
+            return true;
+        }
+
+        for (auto&& pWindow : m_windows) {
+            if (pWindow->IsWindowFocus()) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

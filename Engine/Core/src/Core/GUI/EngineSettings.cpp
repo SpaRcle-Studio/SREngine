@@ -14,6 +14,8 @@ namespace SR_CORE_GUI_NS {
     void EngineSettings::Draw() {
         DrawMultiSampling();
         ImGui::Separator();
+        DrawVSync();
+        ImGui::Separator();
         DrawLighting();
     }
 
@@ -53,5 +55,17 @@ namespace SR_CORE_GUI_NS {
     void EngineSettings::DrawLighting() {
         auto&& position = GetRenderScene()->GetLightSystem()->m_position;
         SR_GRAPH_NS::GUI::DrawVec3Control("Directional light position", position);
+    }
+
+    void EngineSettings::DrawVSync() {
+        auto&& pPipeline = GetContext()->GetPipeline();
+        if (!pPipeline) {
+            return;
+        }
+
+        bool vsync = pPipeline->IsVSyncEnabled();
+        if (ImGui::Checkbox("VSync", &vsync)) {
+            pPipeline->SetVSyncEnabled(vsync);
+        }
     }
 }

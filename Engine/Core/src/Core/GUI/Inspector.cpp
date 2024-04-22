@@ -7,7 +7,9 @@
 #include <Utils/ECS/Transform3D.h>
 #include <Utils/ECS/Transform2D.h>
 #include <Utils/ECS/TransformZero.h>
+#include <Utils/ECS/LayerManager.h>
 #include <Utils/Types/SafePtrLockGuard.h>
+#include <Utils/World/ScenePrefabLogic.h>
 
 #include <Scripting/Base/Behaviour.h>
 
@@ -17,21 +19,22 @@
 #include <Graphics/Types/Geometry/Sprite.h>
 #include <Audio/Types/AudioSource.h>
 #include <Graphics/UI/Canvas.h>
+#include <Graphics/UI/Gizmo.h>
 #include <Graphics/Types/Geometry/ProceduralMesh.h>
 #include <Graphics/GUI/Utils.h>
-#include <Graphics/Font/Text.h>
+#include <Graphics/Font/ITextComponent.h>
 #include <Graphics/Types/Geometry/SkinnedMesh.h>
 #include <Graphics/Animations/Animator.h>
 #include <Graphics/Animations/BoneComponent.h>
 
-namespace Framework::Core::GUI {
+namespace SR_CORE_GUI_NS {
     Inspector::Inspector(Hierarchy* hierarchy)
-        : Graphics::GUI::Widget("Inspector")
+        : SR_GRAPH_GUI_NS::Widget("Inspector")
         , m_hierarchy(hierarchy)
     { }
 
     void Inspector::Draw() {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         if (!m_scene.RecursiveLockIfValid()) {
             return;
@@ -63,6 +66,21 @@ namespace Framework::Core::GUI {
                 pEngine->GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
             }
 
+            if (m_gameObject->IsPrefab()) {
+                ImGui::SameLine();
+                ImGui::TextColored(ImVec4(0, 1, 1, 1), "(The changes will not be saved)");
+            }
+
+            if (m_gameObject->IsDirty()) {
+                ImGui::SameLine();
+                ImGui::TextColored(ImVec4(1, 1, 0, 1), "(Is dirty)");
+            }
+
+            if (m_gameObject->IsDontSave()) {
+                ImGui::SameLine();
+                ImGui::TextColored(ImVec4(1, 1, 0, 1), "(Dont Save)");
+            }
+
             /// --------------------------------------------------------------------------------------------------------
 
             std::string gm_name = m_gameObject->GetName();
@@ -73,25 +91,12 @@ namespace Framework::Core::GUI {
 
             /// --------------------------------------------------------------------------------------------------------
 
-            /// вызываем в потокобезопасном контексте, так как теги могут быть изменены извне
-            SR_UTILS_NS::TagManager::Instance().Do([&](auto&& pSettings) {
-                auto&& pTagManager = dynamic_cast<SR_UTILS_NS::TagManager*>(pSettings);
-                auto&& tags = pTagManager->GetTags();
-                auto&& tagIndex = static_cast<int>(pTagManager->GetTagIndex(m_gameObject->GetTag()));
-                auto&& pTags = const_cast<std::vector<std::string>*>(&tags);
+            InspectTag(m_gameObject->GetTag(), [this](auto&& tag){
+                m_gameObject->SetTag(tag);
+            });
 
-                if (ImGui::Combo("Tag", &tagIndex, [](void* vec, int idx, const char** out_text){
-                    auto&& vector = reinterpret_cast<std::vector<std::string>*>(vec);
-                    if (idx < 0 || idx >= vector->size())
-                        return false;
-
-                    *out_text = vector->at(idx).c_str();
-
-                    return true;
-                }, reinterpret_cast<void*>(pTags), tags.size())) {
-                    /// TODO: переделать на комманды
-                    m_gameObject->SetTag(pTagManager->GetTagByIndex(tagIndex));
-                }
+            InspectLayer(m_gameObject->GetLocalLayer(), [this](auto&& tag) {
+                m_gameObject->SetLayer(tag);
             });
 
             /// --------------------------------------------------------------------------------------------------------
@@ -100,14 +105,17 @@ namespace Framework::Core::GUI {
 
             ImGui::Separator();
 
-            auto pTransform = m_gameObject->GetTransform();
+            auto&& pTransform = m_gameObject->GetTransform();
+            auto&& pOldTransform = pTransform->Copy();
+
+            bool changed = false;
 
             switch (pTransform->GetMeasurement()) {
                 case SR_UTILS_NS::Measurement::Space2D:
-                    DrawTransform2D(dynamic_cast<SR_UTILS_NS::Transform2D*>(pTransform));
+                    changed |= DrawTransform2D(dynamic_cast<SR_UTILS_NS::Transform2D*>(pTransform));
                     break;
                 case SR_UTILS_NS::Measurement::Space3D:
-                    DrawTransform3D(dynamic_cast<SR_UTILS_NS::Transform3D*>(pTransform));
+                    changed |= DrawTransform3D(dynamic_cast<SR_UTILS_NS::Transform3D*>(pTransform));
                     break;
                 case SR_UTILS_NS::Measurement::SpaceZero:
                 case SR_UTILS_NS::Measurement::Space4D:
@@ -115,7 +123,23 @@ namespace Framework::Core::GUI {
                     break;
             }
 
-            DrawSwitchTransform();
+            changed |= DrawSwitchTransform();
+
+            if (!m_isUsed && changed) {
+                SR_SAFE_DELETE_PTR(m_oldTransformMarshal)
+                m_oldTransformMarshal = pOldTransform->Save(SR_UTILS_NS::SavableContext(nullptr, SR_UTILS_NS::SavableFlagBits::SAVABLE_FLAG_NONE));
+                m_isUsed = true;
+            }
+
+            if (m_isUsed && SR_UTILS_NS::Input::Instance().GetMouseUp(SR_UTILS_NS::MouseCode::MouseLeft)) {
+                auto&& cmd = new SR_CORE_NS::Commands::GameObjectTransform(pEngine, m_gameObject, m_oldTransformMarshal->CopyPtr());
+                pEngine->GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
+
+                SR_SAFE_DELETE_PTR(m_oldTransformMarshal)
+                m_isUsed = false;
+            }
+
+            SR_SAFE_DELETE_PTR(pOldTransform)
 
             DrawComponents(dynamic_cast<SR_UTILS_NS::IComponentable*>(m_gameObject.Get()));
 
@@ -127,34 +151,48 @@ namespace Framework::Core::GUI {
         std::string gm_name = m_scene->GetName();
         ImGui::InputText("Name", &gm_name, ImGuiInputTextFlags_ReadOnly);
 
+        auto&& pLogic = m_scene->GetLogicBase().DynamicCast<SR_WORLD_NS::ScenePrefabLogic>();
+
+        if (pLogic) {
+            InspectTag(pLogic->GetTag(), [pLogic](auto &&tag) {
+                pLogic->SetTag(tag);
+            });
+
+            InspectLayer(pLogic->GetLayer(), [pLogic](auto &&tag) {
+                pLogic->SetLayer(tag);
+            });
+        }
+
         ImGui::Separator();
 
         DrawComponents(dynamic_cast<SR_UTILS_NS::IComponentable*>(m_scene.Get()));
     }
 
     void Inspector::Update(float_t dt) {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         if (auto&& selected = m_hierarchy->GetSelected(); selected.size() == 1) {
             if (*selected.begin() != m_gameObject) {
                 ResetWeakStorage();
             }
-            m_gameObject.Replace(*selected.begin());
+            m_gameObject = *selected.begin();
             SRAssert(m_gameObject);
         }
         else {
-            m_gameObject.Replace(SR_UTILS_NS::GameObject::Ptr());
+            m_gameObject = SR_UTILS_NS::GameObject::Ptr();
         }
     }
 
     void Inspector::SetScene(const SR_WORLD_NS::Scene::Ptr& scene) {
-        SR_LOCK_GUARD
+        SR_LOCK_GUARD;
 
         m_scene = scene;
     }
 
     void Inspector::DrawComponents(SR_UTILS_NS::IComponentable* pIComponentable) {
         ImGui::Separator();
+
+        SR_GRAPH_GUI_NS::DrawTextOnCenter("Components");
 
         ImGuiStyle& style = ImGui::GetStyle();
 
@@ -164,9 +202,9 @@ namespace Framework::Core::GUI {
 
         ImGui::PushItemWidth(width);
         if (ImGui::BeginCombo("Add component", nullptr, ImGuiComboFlags_NoArrowButton)) {
-            for (const auto&[name, id] : SR_UTILS_NS::ComponentManager::Instance().GetComponentsNames()) {
+            for (auto&& name : SR_UTILS_NS::ComponentManager::Instance().GetComponentsNames()) {
                 if (ImGui::Selectable(name.c_str(), false)) {
-                    auto &&pNewComponent = SR_UTILS_NS::ComponentManager::Instance().CreateComponentOfName(name);
+                    auto&& pNewComponent = SR_UTILS_NS::ComponentManager::Instance().CreateComponentOfName(name);
                     pIComponentable->AddComponent(pNewComponent);
                 }
             }
@@ -174,132 +212,109 @@ namespace Framework::Core::GUI {
         }
         ImGui::PopItemWidth();
 
-        ImGui::Separator();
-
         uint32_t index = 0;
-        pIComponentable->ForEachComponent([&](SR_UTILS_NS::Component* component) -> bool {
-            SR_UTILS_NS::Component* copyPtrComponent = component;
 
-            SRAssert1Once(copyPtrComponent->GetParent());
-
-            copyPtrComponent = DrawComponent<SR_SCRIPTING_NS::Behaviour>(copyPtrComponent, "Behaviour", index);
-            copyPtrComponent = DrawComponent<SR_GTYPES_NS::Camera>(copyPtrComponent, "Camera", index);
-            copyPtrComponent = DrawComponent<SR_GTYPES_NS::Mesh3D>(copyPtrComponent, "Mesh3D", index);
-            copyPtrComponent = DrawComponent<SR_GTYPES_NS::SkinnedMesh>(copyPtrComponent, "SkinnedMesh", index);
-            copyPtrComponent = DrawComponent<SR_GTYPES_NS::ProceduralMesh>(copyPtrComponent, "ProceduralMesh", index);
-            copyPtrComponent = DrawComponent<SR_GTYPES_NS::Sprite>(copyPtrComponent, "Sprite", index);
-            copyPtrComponent = DrawComponent<SR_GRAPH_NS::UI::Anchor>(copyPtrComponent, "Anchor", index);
-            copyPtrComponent = DrawComponent<SR_GRAPH_NS::UI::Canvas>(copyPtrComponent, "Canvas", index);
-            copyPtrComponent = DrawComponent<SR_PTYPES_NS::Rigidbody3D>(copyPtrComponent, "Rigidbody3D", index);
-            copyPtrComponent = DrawComponent<SR_GTYPES_NS::Text>(copyPtrComponent, "Text", index);
-            copyPtrComponent = DrawComponent<SR_ANIMATIONS_NS::Animator>(copyPtrComponent, "Animator", index);
-            copyPtrComponent = DrawComponent<SR_ANIMATIONS_NS::Skeleton>(copyPtrComponent, "Skeleton", index);
-            copyPtrComponent = DrawComponent<SR_ANIMATIONS_NS::BoneComponent>(copyPtrComponent, "Bone", index);
-            copyPtrComponent = DrawComponent<SR_UTILS_NS::LookAtComponent>(copyPtrComponent, "LookAtComponent", index);
-            copyPtrComponent = DrawComponent<SR_AUDIO_NS::AudioSource>(copyPtrComponent, "AudioSource", index);
-
-            if (copyPtrComponent != component && copyPtrComponent) {
-                SR_LOG("Inspector::DrawComponents() : component \"" + component->GetComponentName() + "\" has been replaced.");
-
-                pIComponentable->RemoveComponent(component);
-                pIComponentable->AddComponent(copyPtrComponent);
-
-                return false;
-            }
-
+        pIComponentable->ForEachComponent([&](SR_UTILS_NS::Component* pComponent) -> bool {
+            DrawComponent(pComponent, index);
             return true;
         });
     }
 
-    void Inspector::DrawTransform2D(SR_UTILS_NS::Transform2D *pTransform) const {
+    bool Inspector::DrawTransform2D(SR_UTILS_NS::Transform2D *pTransform) const {
         TextCenter("Transform 2D");
 
+        bool changed = false;
+
         auto&& translation = pTransform->GetTranslation();
-        if (Graphics::GUI::DrawVec3Control("Translation", translation, 0.f, 70.f, 0.01f))
+        if (SR_GRAPH_GUI_NS::DrawVec3Control("Translation", translation, 0.f, 0.01f)) {
             pTransform->SetTranslation(translation);
+            changed = true;
+        }
 
         auto&& rotation = pTransform->GetRotation();
-        if (Graphics::GUI::DrawVec3Control("Rotation", rotation))
+        if (SR_GRAPH_GUI_NS::DrawVec3Control("Rotation", rotation)) {
             pTransform->SetRotation(rotation);
+            changed = true;
+        }
 
         auto&& scale = pTransform->GetScale();
-        if (Graphics::GUI::DrawVec3Control("Scale", scale, 1.f) && !scale.HasZero())
+        if (SR_GRAPH_GUI_NS::DrawVec3Control("Scale", scale, 1.f, 0.01f) && !scale.HasZero()) {
             pTransform->SetScale(scale);
+            changed = true;
+        }
 
         auto&& skew = pTransform->GetSkew();
-        if (Graphics::GUI::DrawVec3Control("Skew", skew, 1.f) && !skew.HasZero())
+        if (SR_GRAPH_GUI_NS::DrawVec3Control("Skew", skew, 1.f, 0.01f) && !skew.HasZero()) {
             pTransform->SetSkew(skew);
-
-        if (ImGui::BeginCombo("Anchor", SR_UTILS_NS::EnumReflector::ToString(pTransform->GetAnchor()).c_str())) {
-            auto&& selectables = SR_UTILS_NS::EnumReflector::GetNames<SR_UTILS_NS::Anchor>();
-            for (auto&& selectable : selectables) {
-                if (ImGui::Selectable(selectable.c_str())) {
-                    ImGui::SetItemDefaultFocus();
-                    pTransform->SetAnchor(SR_UTILS_NS::EnumReflector::FromString<SR_UTILS_NS::Anchor>(selectable));
-                }
-            }
-
-            ImGui::EndCombo();
+            changed = true;
         }
 
-        auto&& stretchTypes = SR_UTILS_NS::EnumReflector::GetNames<SR_UTILS_NS::Stretch>();
+        SR_GRAPH_GUI_NS::EnumCombo<SR_UTILS_NS::Anchor>("Anchor", pTransform->GetAnchor(), [&changed, pTransform](auto&& value) {
+            pTransform->SetAnchor(value);
+            changed = true;
+        });
 
-        auto stretch = static_cast<int32_t>(SR_UTILS_NS::EnumReflector::GetIndex<SR_UTILS_NS::Stretch>(pTransform->GetStretch()));
+        SR_GRAPH_GUI_NS::EnumCombo<SR_UTILS_NS::Stretch>("Stretch", pTransform->GetStretch(), [&changed, pTransform](auto&& value) {
+            pTransform->SetStretch(value);
+            changed = true;
+        });
 
-        if (ImGui::Combo("Stretch", &stretch, [](void* vec, int idx, const char** out_text){
-            auto&& vector = reinterpret_cast<std::vector<std::string>*>(vec);
-            if (idx < 0 || idx >= vector ->size())
-                  return false;
+        SR_GRAPH_GUI_NS::EnumCombo<SR_UTILS_NS::PositionMode>("Position mode", pTransform->GetPositionMode(), [&changed, pTransform](auto&& value) {
+            pTransform->SetPositionMode(value);
+            changed = true;
+        });
 
-            *out_text = vector->at(idx).c_str();
+        ImGui::Separator();
 
-            return true;
-        }, const_cast<void*>(reinterpret_cast<const void*>(&stretchTypes)), stretchTypes.size())) {
-            pTransform->SetStretch(SR_UTILS_NS::EnumReflector::At<SR_UTILS_NS::Stretch>(stretch));
+        SR_GRAPH_GUI_NS::DrawTextOnCenter("Sorting");
+
+        int32_t priority = pTransform->GetLocalPriority();
+        if (ImGui::InputInt("Priority", &priority)) {
+            pTransform->SetLocalPriority(priority);
+            changed = true;
         }
+
+        bool isRelativePriority = pTransform->IsRelativePriority();
+        if (ImGui::Checkbox("Relative", &isRelativePriority)) {
+            pTransform->SetRelativePriority(isRelativePriority);
+            changed = true;
+        }
+
+        ImGui::Separator();
+
+        return changed;
     }
 
-    void Inspector::DrawTransform3D(SR_UTILS_NS::Transform3D *transform) {
+    bool Inspector::DrawTransform3D(SR_UTILS_NS::Transform3D *transform) {
         TextCenter("Transform 3D");
 
-        auto&& oldTransform = transform->Copy();
         bool changed = false;
+
         auto&& translation = transform->GetTranslation();
-        if (Graphics::GUI::DrawVec3Control("Translation", translation, 0.f, 70.f, 0.01f)) {
+        if (SR_GRAPH_GUI_NS::DrawVec3Control("Translation", translation, 0.f, 0.01f)) {
             transform->SetTranslation(translation);
             changed = true;
         }
+
         auto&& rotation = transform->GetRotation();  
-        if (Graphics::GUI::DrawVec3Control("Rotation", rotation)) {
+        if (SR_GRAPH_GUI_NS::DrawVec3Control("Rotation", rotation)) {
             transform->SetRotation(rotation);
             changed = true;
         }
+
         auto&& scale = transform->GetScale();
-        if (Graphics::GUI::DrawVec3Control("Scale", scale, 1.f) && !scale.HasZero()) {
+        if (SR_GRAPH_GUI_NS::DrawVec3Control("Scale", scale, 1.f, 0.01f) && !scale.HasZero()) {
             transform->SetScale(scale);
             changed = true;
         }
+
         auto&& skew = transform->GetSkew();
-        if (Graphics::GUI::DrawVec3Control("Skew", skew, 1.f) && !skew.HasZero()) {
+        if (SR_GRAPH_GUI_NS::DrawVec3Control("Skew", skew, 1.f, 0.01f) && !skew.HasZero()) {
             transform->SetSkew(skew);
             changed = true;
         }
 
-        if (!m_isUsed && changed) {
-            SR_SAFE_DELETE_PTR(m_oldTransformMarshal)
-            m_oldTransformMarshal = oldTransform->Save(SR_UTILS_NS::SavableFlagBits::SAVABLE_FLAG_NONE);
-            m_isUsed = true;
-        }
-        if (m_isUsed && SR_UTILS_NS::Input::Instance().GetMouseUp(SR_UTILS_NS::MouseCode::MouseLeft)) {
-            auto&& pEngine = dynamic_cast<EditorGUI*>(GetManager())->GetEngine();
-            auto&& cmd = new SR_CORE_NS::Commands::GameObjectTransform(pEngine, transform->GetGameObject(), m_oldTransformMarshal->CopyPtr());
-            pEngine->GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
-
-            SR_SAFE_DELETE_PTR(m_oldTransformMarshal)
-            m_isUsed = false;
-        }
-
-        SR_SAFE_DELETE_PTR(oldTransform)
+        return changed;
     }
 
     void SR_CORE_NS::GUI::Inspector::BackupTransform(const SR_UTILS_NS::GameObject::Ptr& ptr, const std::function<void()>& operation) const
@@ -312,26 +327,151 @@ namespace Framework::Core::GUI {
         ///Engine::Instance().GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
     }
 
-    void Inspector::DrawSwitchTransform() {
+    bool Inspector::DrawSwitchTransform() {
         auto&& pTransform = m_gameObject->GetTransform();
 
-        const char* space_types[] = { "Zero", "1D", "2D", "3D", "4D" };
+        const char* space_types[] = { "Zero (Holder)", "1D", "2D", "3D", "4D" };
         auto item_current = static_cast<int32_t>(pTransform->GetMeasurement());
-        if (ImGui::Combo("Measurement", &item_current, space_types, IM_ARRAYSIZE(space_types))) {
+        if (ImGui::Combo("Transform type", &item_current, space_types, IM_ARRAYSIZE(space_types))) {
             switch (static_cast<SR_UTILS_NS::Measurement>(item_current)) {
                 case SR_UTILS_NS::Measurement::SpaceZero:
                     m_gameObject->SetTransform(new SR_UTILS_NS::TransformZero());
-                    break;
+                    return true;
                 case SR_UTILS_NS::Measurement::Space2D:
                     m_gameObject->SetTransform(new SR_UTILS_NS::Transform2D());
-                    break;
+                    return true;
                 case SR_UTILS_NS::Measurement::Space3D:
                     m_gameObject->SetTransform(new SR_UTILS_NS::Transform3D());
-                    break;
+                    return true;
                 case SR_UTILS_NS::Measurement::Space4D:
                 default:
                     break;
             }
         }
+
+        return false;
+    }
+
+    void Inspector::DrawComponentProperties(SR_UTILS_NS::Component* pComponent) {
+        auto&& properties = pComponent->GetComponentProperties();
+        SR_CORE_GUI_NS::DrawPropertyContext context;
+        context.pEditor = dynamic_cast<EditorGUI*>(GetManager());
+        SR_CORE_GUI_NS::DrawPropertyContainer(context, &properties);
+    }
+
+    void Inspector::DrawComponent(SR_UTILS_NS::Component* pComponent, uint32_t &index) {
+        auto&& pContext = dynamic_cast<EditorGUI*>(GetManager());
+
+        if (!pComponent || !pContext) {
+            return;
+        }
+
+        SRAssert1Once(pComponent->Valid());
+
+        ++index;
+
+        if (ImGui::BeginChild("InspectorComponent")) {
+            bool enabled = pComponent->IsEnabled();
+            if (ImGui::Checkbox(SR_FORMAT("##{}{}ckb", pComponent->GetComponentName().c_str(), (void*)pComponent).c_str(), &enabled)) {
+                pComponent->SetEnabled(enabled);
+            }
+
+            ImGui::SameLine();
+
+            const bool isOpened = ImGui::CollapsingHeader(SR_FORMAT("[{}] {}", index, pComponent->GetComponentName().c_str()).c_str());
+
+            if (!ImGui::GetDragDropPayload() && ImGui::BeginDragDropSource(ImGuiDragDropFlags_SourceAllowNullID)) {
+                m_pointersHolder = { pComponent->DynamicCast<SR_UTILS_NS::Component>() };
+                ImGui::SetDragDropPayload("InspectorComponent##Payload", &m_pointersHolder, sizeof(std::vector<SR_UTILS_NS::Component::Ptr>), ImGuiCond_Once);
+                ImGui::Text("%s ->", pComponent->GetComponentName().c_str());
+                ImGui::EndDragDropSource();
+            }
+
+            ImGui::SameLine(); ImGui::Text(" ");
+
+            if (pComponent->ExecuteInEditMode()) {
+                ImGui::SameLine();
+                ImGui::TextColored(ImVec4(0, 1, 0, 1), "[Editor mode]");
+            }
+
+            if (pComponent->IsDontSave()) {
+                ImGui::SameLine();
+                ImGui::TextColored(ImVec4(1, 1, 0, 1), "[Dont save]");
+            }
+
+            if (!pComponent->IsAttached()) {
+                ImGui::SameLine();
+                ImGui::TextColored(ImVec4(1, 1, 0, 1), "[Loaded]");
+            }
+
+            if (isOpened) {
+                SR_CORE_GUI_NS::DrawPropertyContext context;
+                context.pEditor = pContext;
+
+                if (SR_CORE_GUI_NS::DrawPropertyContainer(context, &pComponent->GetEntityMessages())) {
+                    ImGui::Separator();
+                }
+
+                if (!ComponentDrawer::DrawComponentOld(pComponent, pContext, index)) {
+                    DrawComponentProperties(pComponent);
+                }
+            }
+
+            if (ImGui::BeginPopupContextWindow("InspectorMenu")) {
+                if (ImGui::BeginMenu("Remove component")) {
+                    if (ImGui::MenuItem(pComponent->GetComponentName().c_str())) {
+                        pComponent->GetParent()->RemoveComponent(pComponent);
+                    }
+                    ImGui::EndMenu();
+                }
+                ImGui::EndPopup();
+            }
+            ImGui::EndChild();
+        }
+    }
+
+    void Inspector::InspectTag(SR_UTILS_NS::StringAtom tag, SR_HTYPES_NS::Function<void(SR_UTILS_NS::StringAtom)> callback) {
+        /// вызываем в потокобезопасном контексте, так как теги могут быть изменены извне
+        SR_UTILS_NS::TagManager::Instance().Do([&](auto&& pSettings) {
+            auto&& pTagManager = dynamic_cast<SR_UTILS_NS::TagManager*>(pSettings);
+            auto&& tags = pTagManager->GetTags();
+            auto&& tagIndex = static_cast<int>(pTagManager->GetTagIndex(tag));
+            auto&& pTags = const_cast<std::vector<SR_UTILS_NS::StringAtom>*>(&tags);
+
+            if (ImGui::Combo("Tag", &tagIndex, [](void* vec, int idx, const char** out_text){
+                auto&& vector = reinterpret_cast<std::vector<SR_UTILS_NS::StringAtom>*>(vec);
+                if (idx < 0 || idx >= vector->size())
+                    return false;
+
+                *out_text = vector->at(idx).c_str();
+
+                return true;
+            }, reinterpret_cast<void*>(pTags), tags.size())) {
+                /// TODO: переделать на комманды
+                callback(pTagManager->GetTagByIndex(tagIndex));
+            }
+        });
+    }
+
+    void Inspector::InspectLayer(SR_UTILS_NS::StringAtom layer, SR_HTYPES_NS::Function<void(SR_UTILS_NS::StringAtom)> callback) {
+        SR_UTILS_NS::LayerManager::Instance().Do([&](auto&& pSettings) {
+            auto&& pLayerManager = dynamic_cast<SR_UTILS_NS::LayerManager*>(pSettings);
+            auto&& layers = pLayerManager->GetLayers();
+            auto&& layerIndex = static_cast<int>(pLayerManager->GetLayerIndex(layer));
+            auto&& pLayers = const_cast<std::vector<SR_UTILS_NS::StringAtom>*>(&layers);
+
+            if (ImGui::Combo("Layer", &layerIndex, [](void* vec, int idx, const char** out_text){
+                auto&& vector = reinterpret_cast<std::vector<SR_UTILS_NS::StringAtom>*>(vec);
+                if (idx < 0 || idx >= vector->size())
+                    return false;
+
+                *out_text = vector->at(idx).c_str();
+
+                return true;
+            }, reinterpret_cast<void*>(pLayers), layers.size())) {
+                /// TODO: переделать на комманды
+                callback(layers[layerIndex]);
+            }
+        });
     }
 }

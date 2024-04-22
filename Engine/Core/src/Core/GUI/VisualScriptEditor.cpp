@@ -5,7 +5,7 @@
 #include <Core/GUI/VisualScriptEditor.h>
 #include <Core/Parsers/BlueprintParser.h>
 
-#include <Utils/ResourceManager/ResourceManager.h>
+#include <Utils/Resources/ResourceManager.h>
 #include <Utils/FileSystem/FileSystem.h>
 #include <Utils/Xml.h>
 
@@ -14,8 +14,8 @@
 #include <Graphics/GUI/Node.h>
 #include <Graphics/GUI/Pin.h>
 
-Framework::Core::GUI::VisualScriptEditor::VisualScriptEditor()
-    : Framework::Graphics::GUI::Widget("Evo Script Editor")
+SR_CORE_GUI_NS::VisualScriptEditor::VisualScriptEditor()
+    : SR_GRAPH_GUI_NS::Widget("Evo Script Editor")
 {
     /*auto config = new ax::NodeEditor::Config();
     static std::string settingsFile = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("/NodeEditor.json");
@@ -46,7 +46,7 @@ Framework::Core::GUI::VisualScriptEditor::VisualScriptEditor()
             .AddOutput(Pin("Pin A", PinType::Flow)));*/
 }
 
-Framework::Core::GUI::VisualScriptEditor::~VisualScriptEditor() {
+SR_CORE_GUI_NS::VisualScriptEditor::~VisualScriptEditor() {
     //if (m_editor) {
     //    ax::NodeEditor::DestroyEditor(m_editor);
     //    m_editor = nullptr;
@@ -66,7 +66,7 @@ Framework::Core::GUI::VisualScriptEditor::~VisualScriptEditor() {
     m_blueprints.clear();
 }
 
-void Framework::Core::GUI::VisualScriptEditor::AddNode(Framework::Graphics::GUI::Node* node) {
+void SR_CORE_GUI_NS::VisualScriptEditor::AddNode(SR_GRAPH_GUI_NS::Node* node) {
     if (!node) {
         SRAssert(false);
         return;
@@ -76,7 +76,7 @@ void Framework::Core::GUI::VisualScriptEditor::AddNode(Framework::Graphics::GUI:
     m_nodes.insert(std::make_pair(node->GetId(), node));
 }
 
-void Framework::Core::GUI::VisualScriptEditor::Draw() {
+void SR_CORE_GUI_NS::VisualScriptEditor::Draw() {
   //  ax::NodeEditor::SetCurrentEditor(m_editor);
 
     //ax::NodeEditor::Begin("Evo Visual Script");
@@ -105,12 +105,12 @@ void Framework::Core::GUI::VisualScriptEditor::Draw() {
     ax::NodeEditor::End();*/
 }
 
-void Framework::Core::GUI::VisualScriptEditor::AddLink(Framework::Graphics::GUI::Link* link) {
+void SR_CORE_GUI_NS::VisualScriptEditor::AddLink(SR_GRAPH_GUI_NS::Link* link) {
     SRAssert(m_links.count(link->GetId()) == 0);
     m_links.insert(std::make_pair(link->GetId(), link));
 }
 
-void Framework::Core::GUI::VisualScriptEditor::LoadConfig() {
+void SR_CORE_GUI_NS::VisualScriptEditor::LoadConfig() {
     /*SR_LOG("VisualScriptEditor::LoadConfig() : loading config...");
 
     const auto& resManager = Helper::ResourceManager::Instance();
@@ -120,7 +120,7 @@ void Framework::Core::GUI::VisualScriptEditor::LoadConfig() {
     if (Helper::FileSystem::FileExists(strPath)) {
         auto xml = SR_XML_NS::Document::Load(strPath);
         for (const SR_XML_NS::Node& blueprintPath : xml.Root().GetNode("Configs").GetNode("BlueprintRefs").GetNodes()) {
-            auto nodes = Core::BlueprintParser::Instance().Parse(resManager.GetResPath().Concat(blueprintPath.GetAttribute("Value").ToString()));
+            auto nodes = Core::BlueprintParser::Instance().Parse(resManager.GetResPath().Concat(blueprintPath.GetAttribute("Value").ToStringAtom()));
             for (auto&& node : nodes) {
                 RegisterBlueprint(node);
             }

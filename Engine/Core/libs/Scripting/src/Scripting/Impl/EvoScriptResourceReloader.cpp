@@ -12,7 +12,7 @@
 namespace SR_SCRIPTING_NS {
     bool EvoScriptResourceReloader::Reload(const SR_UTILS_NS::Path& path, SR_UTILS_NS::ResourceInfo* pResourceInfo) {
         SR_TRACY_ZONE;
-        SR_SCOPED_LOCK
+        SR_SCOPED_LOCK;
 
         if (SR_UTILS_NS::Features::Instance().Enabled("CompilePDB", false)) {
             SR_WARN("EvoScriptResourceReloader::Reload() : PDB compilation enabled! Script reloading impossible.");
@@ -28,7 +28,7 @@ namespace SR_SCRIPTING_NS {
                 continue;
             }
 
-            if (auto&& pBehaviour = dynamic_cast<Behaviour*>(pResource)) {
+            if (auto&& pBehaviour = dynamic_cast<IRawBehaviour*>(pResource)) {
                 auto&& pMarshal = new SR_HTYPES_NS::Marshal();
                 auto&& properties = pBehaviour->GetProperties();
 
@@ -64,7 +64,7 @@ namespace SR_SCRIPTING_NS {
                 pBehaviour->SetProperty(name, value);
             }
 
-            pBehaviour->PostLoad();
+            pBehaviour->OnReloadDone();
         }
 
         FreeStashedProperties(stashedProps);

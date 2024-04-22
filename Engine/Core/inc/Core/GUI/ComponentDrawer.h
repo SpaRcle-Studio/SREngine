@@ -2,8 +2,8 @@
 // Created by Monika on 23.02.2022.
 //
 
-#ifndef SRENGINE_COMPONENTDRAWER_H
-#define SRENGINE_COMPONENTDRAWER_H
+#ifndef SR_ENGINE_COMPONENT_DRAWER_H
+#define SR_ENGINE_COMPONENT_DRAWER_H
 
 #include <Utils/stdInclude.h>
 
@@ -11,11 +11,11 @@ namespace SR_SCRIPTING_NS {
     class Behaviour;
 }
 
-namespace SR_AUDIO_NS{
-
+namespace SR_AUDIO_NS {
     class AudioSource;
     class AudioListener;
 }
+
 namespace SR_ANIMATIONS_NS {
     class Animator;
     class BoneComponent;
@@ -35,11 +35,13 @@ namespace SR_GTYPES_NS {
     class SkinnedMesh;
     class Material;
     class ProceduralMesh;
-    class Text;
+    class ITextComponent;
     class Sprite;
+    class Text2D;
+    class Text3D;
 }
 
-namespace SR_CORE_NS::GUI {
+namespace SR_CORE_GUI_NS {
     class EditorGUI;
 }
 
@@ -54,9 +56,16 @@ namespace SR_PTYPES_NS {
     class CollisionShape;
 }
 
+namespace SR_UTILS_NS {
+    class Component;
+}
+
 namespace SR_CORE_NS::GUI::ComponentDrawer {
+    bool DrawComponentOld(SR_UTILS_NS::Component* pComponent, EditorGUI* context, int32_t index);
+
     void DrawComponent(SR_SCRIPTING_NS::Behaviour*& behaviour, EditorGUI* context, int32_t index);
-    void DrawComponent(SR_GTYPES_NS::Text*& pComponent, EditorGUI* context, int32_t index);
+    void DrawComponent(SR_GTYPES_NS::Text2D*& pComponent, EditorGUI* context, int32_t index);
+    void DrawComponent(SR_GTYPES_NS::Text3D*& pComponent, EditorGUI* context, int32_t index);
     void DrawComponent(SR_GRAPH_NS::Types::Camera*& camera, EditorGUI* context, int32_t index);
     void DrawComponent(SR_GRAPH_NS::Types::Mesh3D*& mesh3d, EditorGUI* context, int32_t index);
     void DrawComponent(SR_GRAPH_NS::Types::SkinnedMesh*& pComponent, EditorGUI* context, int32_t index);
@@ -75,8 +84,10 @@ namespace SR_CORE_NS::GUI::ComponentDrawer {
     void DrawCollisionShape(SR_PTYPES_NS::CollisionShape* pCollisionShape, EditorGUI* context, int32_t index);
     void DrawMaterialProps(SR_GRAPH_NS::Types::Material* material, EditorGUI* context, int32_t index);
 
+    void DrawComponent(SR_GTYPES_NS::ITextComponent* pComponent, EditorGUI* context, int32_t index);
+
     void DrawComponent(SR_AUDIO_NS::AudioSource*& pComponent, EditorGUI* context, int32_t index);
     void DrawComponent(SR_AUDIO_NS::AudioListener*& pComponent,EditorGUI* context,int32_t index);
 }
 
-#endif //SRENGINE_COMPONENTDRAWER_H
+#endif //SR_ENGINE_COMPONENTDRAWER_H

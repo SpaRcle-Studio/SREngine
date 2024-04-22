@@ -2,8 +2,8 @@
 // Created by Monika on 08.01.2022.
 //
 
-#ifndef SRENGINE_ENGINECOMMANDS_H
-#define SRENGINE_ENGINECOMMANDS_H
+#ifndef SR_ENGINE_ENGINECOMMANDS_H
+#define SR_ENGINE_ENGINECOMMANDS_H
 
 #include <Utils/Types/SafePointer.h>
 #include <Utils/CommandManager/CmdManager.h>
@@ -131,7 +131,7 @@ namespace SR_CORE_NS::Commands {
         SR_UTILS_NS::EntityPath m_path;
         SR_UTILS_NS::EntityBranch m_reserved;
         SR_HTYPES_NS::Marshal::Ptr m_backup = nullptr;
-        SR_HTYPES_NS::SafePtr<Helper::World::Scene> m_scene;
+        SR_HTYPES_NS::SafePtr<SR_UTILS_NS::World::Scene> m_scene;
         SR_UTILS_NS::EntityId m_parent = { };
 
     };
@@ -153,7 +153,7 @@ namespace SR_CORE_NS::Commands {
         SR_UTILS_NS::EntityPath m_path;
         SR_UTILS_NS::EntityBranch m_reserved;
         SR_HTYPES_NS::Marshal::Ptr m_marshal = nullptr;
-        SR_HTYPES_NS::SafePtr<Helper::World::Scene> m_scene;
+        SR_HTYPES_NS::SafePtr<SR_UTILS_NS::World::Scene> m_scene;
         SR_UTILS_NS::EntityId m_parent = { };
 
     };
@@ -201,4 +201,4 @@ namespace SR_CORE_NS::Commands {
     };
 }
 
-#endif //SRENGINE_ENGINECOMMANDS_H
+#endif //SR_ENGINE_ENGINECOMMANDS_H

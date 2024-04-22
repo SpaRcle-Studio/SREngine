@@ -2,8 +2,8 @@
 // Created by Monika on 28.07.2022.
 //
 
-#ifndef SRENGINE_PHYSICSSCENE_H
-#define SRENGINE_PHYSICSSCENE_H
+#ifndef SR_ENGINE_PHYSICSSCENE_H
+#define SR_ENGINE_PHYSICSSCENE_H
 
 #include <Physics/PhysicsLib.h>
 #include <Utils/Types/SafePointer.h>
@@ -34,6 +34,7 @@ namespace SR_PHYSICS_NS {
         virtual ~PhysicsScene();
 
     public:
+        virtual void Update(float_t dt);
         virtual void FixedUpdate();
         virtual bool Init();
 
@@ -68,4 +69,4 @@ namespace SR_PHYSICS_NS {
     };
 }
 
-#endif //SRENGINE_PHYSICSSCENE_H
+#endif //SR_ENGINE_PHYSICSSCENE_H

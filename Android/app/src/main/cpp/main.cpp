@@ -12,12 +12,13 @@
 
 #include <android/sensor.h>
 
+#include <Core/Application.h>
 #include <Utils/Platform/Platform.h>
 #include <Utils/Platform/AndroidNativeAppGlue.h>
 #include <Utils/Debug.h>
 #include <Utils/Types/Thread.h>
 #include <Utils/Types/Time.h>
-#include <Utils/ResourceManager/ResourceManager.h>
+#include <Utils/Resources/ResourceManager.h>
 #include <Utils/Common/Features.h>
 #include <Utils/World/SceneAllocator.h>
 #include <Utils/World/Scene.h>
@@ -26,8 +27,6 @@
 #include <Core/World/World.h>
 
 #include <android/log.h>
-#include <Graphics/Pipeline/OpenGL.h>
-#include <Graphics/Pipeline/Vulkan.h>
 
 
 #define LOGI(...) ((void)__android_log_print(ANDROID_LOG_INFO, "SREngine", __VA_ARGS__))
@@ -176,9 +175,14 @@ static void engine_term_display(struct engine* engine) {
 static int32_t engine_handle_input(struct android_app* app, AInputEvent* event) {
     auto* engine = (struct engine*)app->userData;
     if (AInputEvent_getType(event) == AINPUT_EVENT_TYPE_MOTION) {
-        engine->animating = 1;
-        engine->state.x = AMotionEvent_getX(event, 0);
-        engine->state.y = AMotionEvent_getY(event, 0);
+        if (engine) {
+            engine->animating = 1;
+            engine->state.x = AMotionEvent_getX(event, 0);
+            engine->state.y = AMotionEvent_getY(event, 0);
+        }
+        else {
+            app->onInputEvent = nullptr;
+        }
         return 1;
     }
     return 0;
@@ -270,49 +274,43 @@ ASensorManager* AcquireASensorManagerInstance(android_app* app) {
     return getInstanceFunc();
 }
 
+#include <unistd.h>
+
 void android_main(struct android_app* state) {
-    SR_PLATFORM_NS::SetInstance(state);
 
-    auto&& applicationPath = SR_PLATFORM_NS::GetApplicationPath().GetFolder();
-    SR_UTILS_NS::Debug::Instance().Init(applicationPath, true, SR_UTILS_NS::Debug::Theme::Dark);
-    SR_UTILS_NS::Debug::Instance().SetLevel(SR_UTILS_NS::Debug::Level::Low);
+    state->onInputEvent = engine_handle_input;
 
-    SR_SYSTEM_LOG("Run SpaRcle Engine on android...");
+    /*//SREngine
 
-    SR_HTYPES_NS::Thread::Factory::Instance().SetMainThread();
-    SR_HTYPES_NS::Time::Instance().Update();
+    auto&& pApplication = SR_CORE_NS::Application::MakeShared();
 
-    SR_UTILS_NS::ResourceManager::Instance().Init("");
+    int32_t code = 0;
 
-    SR_UTILS_NS::Features::Instance().Reload(SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Engine/Configs/Features.xml"));
+    char **argv = nullptr;
+    int argc = 1;
 
-    SR_WORLD_NS::SceneAllocator::Instance().Init([]() -> SR_WORLD_NS::Scene* {
-        return new SR_CORE_NS::World();
+    if (!pApplication->PreInit(argc, argv)) {
+        SR_PLATFORM_NS::WriteConsoleError("Failed to pre-initialize application!\n");
+        code = -1;
+    }
+
+    if (code == 0 && !pApplication->Init()) {
+        SR_ERROR("Failed to initialize application!");
+        code = -2;
+    }
+
+    if (code == 0 && !pApplication->Execute()) {
+        SR_ERROR("Failed to execute application!");
+        code = -3;
+    }
+
+    pApplication.AutoFree([](auto&& pData) {
+        delete pData;
     });
 
-    /*auto&& engine = SR_CORE_NS::Engine::Instance();
+    //return code;
 
-    if (engine.Create()) {
-        if (engine.Init()) {
-            if (!engine.Run()) {
-                SR_ERROR("Failed to run game engine!");
-            }
-        }
-        else {
-            SR_ERROR("Failed to initialize game engine!");
-        }
-    }
-    else {
-        SR_ERROR("Failed to create game engine!");
-    }
-
-    if (engine.IsRun()) {
-        SR_SYSTEM_LOG("All systems are successfully running!");
-
-        engine.Await(); /// await close engine
-    }
-
-    engine.Close();*/
+    //SREngine*/
 
     struct engine engineAndroid{};
 

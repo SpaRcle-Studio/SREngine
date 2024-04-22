@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<Codegen>
+    <!--<IncludeDirectory Path="Engine/Core/libs/Utils/inc"/>
+    <File Path="Engine/Core/libs/Utils/inc/Utils/ECS/test.cpp"/>
+    <File Path="Engine/Core/libs/Utils/inc/Utils/ECS/test.h"/>-->
+    <File Path="Engine/Core/libs/Utils/inc/Utils/ECS/Entity.h"/>
+</Codegen>

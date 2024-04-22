@@ -7,7 +7,7 @@
 #include <Utils/FileSystem/Path.h>
 #include <Utils/Common/VectorUtils.h>
 #include <Utils/Debug.h>
-#include <Utils/ResourceManager/ResourceManager.h>
+#include <Utils/Resources/ResourceManager.h>
 
 #include <Graphics/GUI/Icons.h>
 #include <Graphics/Animations/AnimationClip.h>
@@ -34,7 +34,7 @@ namespace SR_CORE_NS::GUI {
                 m_dirtySelectedDir = true;
             }
             if (ImGui::Selectable("Open in native Explorer")) {
-                SR_UTILS_NS::Platform::OpenInNativeFileExplorer(m_selectedDir);
+                SR_UTILS_NS::Platform::OpenWithAssociatedApp(m_selectedDir);
             }
             if (ImGui::Selectable("Refresh")) {
                 m_dirtySelectedDir = true;

@@ -5,7 +5,9 @@
     <img alt="Project Status: Active – The project is under active delopment!." src="https://www.repostatus.org/badges/latest/active.svg" />
     <img alt="CodeFactor." src="https://www.codefactor.io/repository/github/sparcle-studio/srengine/badge/dev" />
     <img alt="GitHub Contributors." src="https://img.shields.io/github/contributors/SpaRcle-Studio/SREngine" />
-    <img alt="Issues" src="https://img.shields.io/github/issues/SpaRcle-Studio/SREngine?color=0088ff" />
+    <img alt="Issues." src="https://img.shields.io/github/issues/SpaRcle-Studio/SREngine?color=0088ff" />
+    <img alt="Commit Activity." src="https://img.shields.io/github/commit-activity/m/SpaRcle-Studio/SREngine/dev" />
+    <a href="https://discord.gg/NHuhNwFtYQ"><img alt="Discord server." src="https://img.shields.io/discord/768652124204433429?logo=discord&link=https%3A%2F%2Fdiscord.gg%2FqAr7Grz3RD" /></a>
   </p>
   <p align="center">
     <img alt="Build statistics." src="https://buildstats.info/github/chart/SpaRcle-Studio/SREngine?buildCount=50&branch=dev" />
@@ -24,14 +26,12 @@ It aims to establish a strong base for game creation and is currently in the ear
 - [x] MinGW
 - [ ] Cygwin
 - [x] Clang
-- [ ] GCC
+- [x] GCC
 
 ## Supported platforms
 - [x] Windows 10
-- [ ] Manjaro (in development)
-- [ ] Ubuntu
-- [ ] Arch
-- [ ] Redhat
+- [ ] Linux X11 (in development)
+- [ ] Linux Wayland
 - [ ] Android
 
 ## Branches 
@@ -39,6 +39,7 @@ It aims to establish a strong base for game creation and is currently in the ear
  * dev - active development branch 
  * features/* - branches for new features
  * tmp/* - temporary branches for dangerous experiments
+ * release/* - branches for release candidates
 
 ## Building  
  > [!IMPORTANT]
@@ -53,13 +54,22 @@ It aims to establish a strong base for game creation and is currently in the ear
  <details>
  <summary> 4. Working with CMake (if you're using Visual Studio): </summary>
   
-    - 4.1 Choose the path to the SREngine folder (where the source code is located).
+    - 4.1 Open CMake GUI
   
-    - 4.2 Choose the path where to build the binaries (SREngine/Build).
+    - 4.2 Choose the path to the SREngine folder (where the source code is located).
+  
+    - 4.3 Choose the path where to build the binaries (SREngine/Build).
      
-    - 4.3 Press "Configure" and choose your VS version.
+    - 4.4 Press "Configure" and choose your VS version.
     
-    - 4.4 Press "Generate"
+    - 4.5 Press "Generate"
+
+    - 4.6 Open Visual Studio solution
+
+    - 4.7 Set as startap project SREngine 
+
+    - 4.8 Run build 
+    
  </details>
  <details>
  <summary> 5. Working with CLion: </summary>

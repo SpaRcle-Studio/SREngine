@@ -2,17 +2,16 @@
 // Created by Monika on 25.11.2022.
 //
 
-#ifndef SRENGINE_PHYSXRIGIDBODY3D_H
-#define SRENGINE_PHYSXRIGIDBODY3D_H
+#ifndef SR_ENGINE_PHYSXRIGIDBODY3D_H
+#define SR_ENGINE_PHYSXRIGIDBODY3D_H
 
 #include <Physics/3D/Rigidbody3D.h>
 
 namespace SR_PTYPES_NS {
-    class PhysXRigidbody3D : public Rigidbody3D {
-        using Super = Rigidbody3D;
+    class PhysXRigidbody3DImpl : public Rigidbody3DImpl {
+        using Super = Rigidbody3DImpl;
     public:
-        explicit PhysXRigidbody3D(LibraryPtr pLibrary);
-        ~PhysXRigidbody3D() override;
+        ~PhysXRigidbody3DImpl() override;
 
     public:
         SR_NODISCARD void* GetHandle() const noexcept override;
@@ -48,4 +47,4 @@ namespace SR_PTYPES_NS {
     };
 }
 
-#endif //SRENGINE_PHYSXRIGIDBODY3D_H
+#endif //SR_ENGINE_PHYSXRIGIDBODY3D_H

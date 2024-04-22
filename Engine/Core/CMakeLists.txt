@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 3.16) #Следует перейти на 3.21 для лучшей работы с Android NDK
 project(Core)
 
 set(CMAKE_CXX_STANDARD 20)
@@ -29,18 +29,36 @@ endif()
 if (MINGW)
 else()
     if (ANDROID_NDK)
-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror -Wc++17-extensions -Wimplicit-fallthrough -Wc++17-attribute-extensions -Wunused-variable -Wno-unused-variable -Wno-unused-parameter -Wno-unused-function -Wdeprecated-volatile -Wunused-function")
-        set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Werror -Wc++17-extensions -Wimplicit-fallthrough -Wc++17-attribute-extensions -Wunused-variable -Wno-unused-variable -Wno-unused-parameter -Wno-unused-function -Wdeprecated-volatile -Wunused-function")
+		#TODO: Закомментировано для простоты сборки, чтобы не разбираться с ошибками из-за неиспользованных переменных (НЕ ПИШИТЕ ПЕРЕМЕННЫЕ, НЕ ИСПОЛЬЗУЯ ИХ)
+        #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror -Wc++17-extensions -Wimplicit-fallthrough -Wc++17-attribute-extensions -Wunused-variable -Wno-unused-variable -Wno-unused-parameter -Wno-unused-function -Wdeprecated-volatile -Wunused-function")
+        #set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Werror -Wc++17-extensions -Wimplicit-fallthrough -Wc++17-attribute-extensions -Wunused-variable -Wno-unused-variable -Wno-unused-parameter -Wno-unused-function -Wdeprecated-volatile -Wunused-function")
 
-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror -Wreorder-ctor -Wno-reorder -Wmissing-field-initializers -Wunused-value")
-        set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Werror -Wreorder-ctor -Wno-reorder -Wmissing-field-initializers -Wunused-value")
+        #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror -Wreorder-ctor -Wno-reorder -Wmissing-field-initializers -Wunused-value")
+        #set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Werror -Wreorder-ctor -Wno-reorder -Wmissing-field-initializers -Wunused-value")
 
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wcomment -Wno-comment -Woverloaded-virtual -Wno-everything -Wmissing-braces -Wunused-private-field -Wno-unused-private-field")
         set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wcomment -Wno-comment -Woverloaded-virtual -Wno-everything -Wmissing-braces -Wunused-private-field -Wno-unused-private-field")
     else()
-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /bigobj /utf-8")
+        if (MSVC)
+            set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /bigobj /utf-8")
+        else ()
+            add_compile_options(-fexec-charset=UTF-8)
+        endif ()
     endif()
 endif()
+
+include(libs/Utils/cmake/ResourceEmbedder.cmake)
+#include(libs/Utils/cmake/Codegen.cmake)
+
+#SRUtilsCodegen("${CMAKE_CURRENT_SOURCE_DIR}/../../" "${CMAKE_CURRENT_SOURCE_DIR}/config/codegen.xml" "${CMAKE_CURRENT_BINARY_DIR}/Codegen/")
+
+AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Engine/Configs/Threads.yml")
+AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Engine/Configs/Features.xml")
+AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Engine/Utilities/git2.exe")
+
+EmbedResources("${CMAKE_CURRENT_BINARY_DIR}/libs/Utils/include/Utils" "SREngine/Resources" ${EMBED_RESOURCES_LIST})
+
+set(SR_UTILS_CI_BUILD OFF)
 
 message(STATUS "CONFIGURING Utils -----------------")
 add_subdirectory(libs/Utils)
@@ -53,7 +71,7 @@ add_subdirectory(libs/Graphics)
 message(STATUS "CONFIGURING Scripting -----------------")
 add_subdirectory(libs/Scripting)
 
-add_library(Core STATIC ${CORE_ROOT_DIR}/Core.cxx)
+add_library(Core STATIC ${CORE_ROOT_DIR}/cxx/Core.cxx ${CORE_ROOT_DIR}/cxx/GUI.cxx ${CORE_ROOT_DIR}/cxx/Codegen.cxx ${CORE_ROOT_DIR}/cxx/States.cxx)
 
 if (SR_UTILS_STATIC_LIBRARY)
     list(APPEND SR_CORE_LINK_LIBRARIES Utils)
@@ -88,7 +106,11 @@ endif()
 target_link_libraries(Core ${SR_CORE_LINK_LIBRARIES})
 
 target_include_directories(Core PUBLIC ${CORE_ROOT_DIR}/inc)
+
+target_include_directories(Core PUBLIC ${CMAKE_CURRENT_BINARY_DIR})
 target_include_directories(Core PUBLIC ${CMAKE_CURRENT_BINARY_DIR}/Utils/include)
+target_include_directories(Core PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/Utils/libs/assimp/include)
+target_include_directories(Core PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/Utils/libs/FQHSA/header)
+
 target_include_directories(Core PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/Utils/libs)
 target_include_directories(Core PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/Utils/libs/assimp/include)
-target_include_directories(Core PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/Utils/libs/assimp/include)

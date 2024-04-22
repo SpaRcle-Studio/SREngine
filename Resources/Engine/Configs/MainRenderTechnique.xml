@@ -1,28 +1,36 @@
 <?xml version="1.0"?>
 <Technique Name="ShadowMap">
-    <CascadedShadowMapPass Name="DepthFBO" Directional="false" Cascades="4" SplitLambda="0.95" Near="10.0" Far="750.0">
-        <FramebufferSettings DynamicResizing="false" DepthEnabled="true" SmoothSamples="1" Layers="4">
-            <Size X="4096" Y="4096"/>
-            <PreScale X="1.0" Y="1.0"/>
-            <Depth Format="Auto" ClearValue="1.0" Aspect="Depth" />
-        </FramebufferSettings>
-        <Shaders>
-            <Override Type="Spatial" Path="Engine/Shaders/CascadedShadowMap/depth-spatial.srsl"/>
-        </Shaders>
-    </CascadedShadowMapPass>
-    <FramebufferPass Name="SceneViewFBO">
-        <FramebufferSettings DynamicResizing="true" DepthEnabled="true" SmoothSamples="8">
-            <Size X="0" Y="0"/>
-            <PreScale X="1.0" Y="1.0"/>
-            <Depth Format="Auto" ClearValue="1.0"/>
-            <Layer Format="RGBA8_UNORM" R="0.0" G="0.0" B="0.0" A="1.0"/>
+    <Include Path="Engine/Passes/CascadedShadowMapPass.xml"/>
+    <FrameBufferController Name="SceneViewFBO" DynamicResizing="true" DepthEnabled="true" SmoothSamples="0">
+        <Size X="0" Y="0"/>
+        <PreScale X="1.0" Y="1.0"/>
+        <Depth Format="Auto"/>
+        <Layer Format="RGBA8_UNORM"/>
+        <Features />
+    </FrameBufferController>
+    <FramebufferPass Name="SceneView">
+        <FramebufferSettings Name="SceneViewFBO">
+            <Depth ClearValue="1.0"/>
+            <Layer R="0.0" G="0.0" B="0.0" A="1.0"/>
         </FramebufferSettings>
         <Passes>
-            <OpaquePass>
-                <Sampler FBO="DepthFBO" Id="shadowMap" Depth="true" />
-            </OpaquePass>
+            <MeshDrawerPass>
+                <Sampler FBO="ShadowMapFBO" Id="shadowMap" Depth="true" Optional="true" />
+                <AllowedLayers>
+                    <Default/>
+                    <Opaque/>
+                </AllowedLayers>
+            </MeshDrawerPass>
             <SkyboxPass Path="Engine/Skyboxes/Sun.png" Shader="Engine/Shaders/skybox.srsl"/>
-            <TransparentPass/>
+            <MeshDrawerPass>
+                <Sampler FBO="ShadowMapFBO" Id="shadowMap" Depth="true" Optional="true" />
+                <DisallowedLayers>
+                    <Default/>
+                    <GizmoSelection/>
+                    <Gizmo/>
+                    <Debug/>
+                </DisallowedLayers>
+            </MeshDrawerPass>
         </Passes>
     </FramebufferPass>
     <SwapchainPass R="0.0" G="0.0" B="0.0" A="1.0" Depth="1.0">
@@ -34,10 +42,10 @@
     </SwapchainPass>
     <Queues>
         <Queue>
-            <Pass Name="DepthFBO"/>
+            <Pass Name="ShadowMap"/>
         </Queue>
         <Queue>
-            <Pass Name="SceneViewFBO"/>
+            <Pass Name="SceneView"/>
         </Queue>
         <Queue>
             <Pass Name="SwapchainPass"/>

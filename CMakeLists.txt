@@ -9,9 +9,36 @@ message(STATUS "SpaRcle Engine: cmake version is ${CMAKE_VERSION}")
 
 set(CMAKE_CXX_STANDARD 20)
 
+if (UNIX)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fcompare-debug-second -w -Wno-deprecated")
+endif()
+
+if (UNIX AND CMAKE_BUILD_TYPE STREQUAL "Debug")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-pie -no-pie -g3")
+endif()
+
+if (WIN32)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DNOMINMAX")
+endif()
+
+if (SR_DISABLE_EXCEPTIONS)
+    # TODO: not working
+    if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-exceptions")
+        message(STATUS "Using GNU compiler: -fno-exceptions enabled")
+    elseif(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /EHs")
+        message(STATUS "Using MSVC compiler: /EHs enabled")
+    else()
+        message(WARNING "Unknown compiler, exceptions handling settings may not be correct")
+    endif()
+endif()
+
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DSR_DLL_EXPORTS -DSR_UTILS_ASSIMP")
+
 set(SR_PHYSICS_USE_BULLET3 OFF)
 set(SR_PHYSICS_USE_PHYSX ON)
-set(SR_PHYSICS_USE_BOX2D ON)
+set(SR_PHYSICS_USE_BOX2D OFF)
 
 set(SR_UTILS_STATIC_LIBRARY ON)
 set(SR_AUDIO_STATIC_LIBRARY ON)
@@ -19,11 +46,11 @@ set(SR_PHYSICS_STATIC_LIBRARY ON)
 set(SR_GRAPHICS_STATIC_LIBRARY ON)
 set(SR_SCRIPTING_STATIC_LIBRARY ON)
 
-set(SR_TRACY_ENABLE OM)
-set(SR_ICU ON)
-
 set(EVO_VULKAN_STATIC_LIBRARY ON)
 set(EVO_SCRIPT_STATIC_LIBRARY ON)
+
+set(SR_TRACY_ENABLE ON)
+set(SR_ICU ON)
 
 set(CMAKE_BUILD_PARALLEL_LEVEL 0)
 

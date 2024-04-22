@@ -4,12 +4,13 @@
 
 #include <Core/GUI/AnimatorEditor.h>
 
-namespace SR_CORE_NS::GUI {
+namespace SR_CORE_GUI_NS {
     AnimatorEditor::AnimatorEditor()
         : Super("Animator")
     { }
 
     void AnimatorEditor::OnOpen() {
+    #ifdef SR_USE_IMGUI_NODE_EDITOR
         ax::NodeEditor::Config config;
 
         static const SR_UTILS_NS::Path settings = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Editor/Animator.json");
@@ -26,6 +27,7 @@ namespace SR_CORE_NS::GUI {
         };
 
         m_editor = ax::NodeEditor::CreateEditor(&config);
+    #endif
 
         ///AddNode(new SR_GRAPH_NS::GUI::Node("Node A", SR_GRAPH_NS::GUI::NodeType::Blueprint))
         ///  .AddInput("Pin AAAA", SR_GRAPH_NS::GUI::PinType::Flow)
@@ -54,6 +56,7 @@ namespace SR_CORE_NS::GUI {
     }
 
     void AnimatorEditor::DrawPopupMenu() {
+    #ifdef SR_USE_IMGUI_NODE_EDITOR
         auto&& openPopupPosition = ImGui::GetMousePos();
 
         ax::NodeEditor::Suspend();
@@ -76,5 +79,6 @@ namespace SR_CORE_NS::GUI {
         ImGui::PopStyleVar();
 
         ax::NodeEditor::Resume();
+    #endif
     }
 }

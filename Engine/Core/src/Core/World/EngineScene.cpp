@@ -3,9 +3,17 @@
 //
 
 #include <Core/World/EngineScene.h>
+#include <Core/GUI/EditorGUI.h>
+
 #include <Physics/3D/Raycast3D.h>
+
 #include <Scripting/Impl/EvoScriptManager.h>
+
+#include <Graphics/Types/Camera.h>
+
 #include <Utils/DebugDraw.h>
+#include <Utils/Common/Features.h>
+#include <Utils/World/SceneCubeChunkLogic.h>
 
 namespace SR_CORE_NS {
     EngineScene::EngineScene(const EngineScene::ScenePtr& pScene, Engine* pEngine)
@@ -35,6 +43,8 @@ namespace SR_CORE_NS {
 
         SRAssert(pScene);
 
+        pScene->Init();
+
         m_accumulateDt = SR_UTILS_NS::Features::Instance().Enabled("AccumulateDt", true);
 
         if (SR_UTILS_NS::Features::Instance().Enabled("Renderer", true)) {
@@ -43,7 +53,7 @@ namespace SR_CORE_NS {
                 pContext.Unlock();
             }
             else {
-                SR_ERROR("InitializeScene() : failed to get window context!");
+                SR_ERROR("EngineScene::Init() : failed to get render context!");
                 return false;
             }
 
@@ -69,7 +79,7 @@ namespace SR_CORE_NS {
         pScene->GetDataStorage().SetValue(pRenderScene);
         pScene->GetDataStorage().SetValue(pPhysicsScene);
 
-        pSceneBuilder = pScene->GetSceneBuilder();
+        pSceneUpdater = pScene->GetSceneUpdater();
 
         return true;
     }
@@ -77,7 +87,7 @@ namespace SR_CORE_NS {
     void EngineScene::Draw(float_t dt) {
         SR_TRACY_ZONE;
 
-        DrawChunkDebug();
+        UpdateChunkDebug();
 
         if (pRenderScene.RecursiveLockIfValid()) {
             SR_UTILS_NS::DebugDraw::Instance().SwitchCallbacks(pRenderScene->GetDebugRenderer());
@@ -92,16 +102,16 @@ namespace SR_CORE_NS {
         if (pScene.LockIfValid()) {
             pEngine->GetCmdManager()->Update();
 
-            pScene->GetLogicBase()->PostLoad();
-
-            SR_SCRIPTING_NS::EvoScriptManager::Instance().Update(dt, false);
+            SR_SCRIPTING_NS::EvoScriptManager::Instance().Update(false);
 
             pScene->Prepare();
 
-            const bool isPaused = pEngine->IsPaused() || !pEngine->IsActive();
+            const bool isPaused = pEngine->IsPaused() || !pEngine->IsActive() || pEngine->HasSceneInQueue();
 
-            pSceneBuilder->Build(isPaused);
-            pSceneBuilder->Update(dt);
+            pSceneUpdater->Build(isPaused);
+            pSceneUpdater->Update(dt);
+
+            UpdateFrequency();
 
             if (m_accumulateDt) {
                 m_accumulator += dt;
@@ -115,15 +125,7 @@ namespace SR_CORE_NS {
             {
                 while (m_accumulator >= m_updateFrequency)
                 {
-                    if (!isPaused && pPhysicsScene.RecursiveLockIfValid()) {
-                        pPhysicsScene->FixedUpdate();
-                        pPhysicsScene.Unlock();
-                    }
-
-                    pEngine->FixedUpdate();
-
-                    pSceneBuilder->FixedUpdate();
-
+                    FixedStep(isPaused);
                     m_accumulator -= m_updateFrequency;
                 }
             }
@@ -137,7 +139,7 @@ namespace SR_CORE_NS {
             pRenderContext.Unlock();
         }
 
-        auto&& pWindow = pEngine->GetWindow();
+        auto&& pWindow = pEngine->GetMainWindow();
 
         if (pWindow->IsVisible() && pRenderScene.RecursiveLockIfValid()) {
             if (auto&& pWin = pWindow->GetImplementation<SR_GRAPH_NS::BasicWindowImpl>()) {
@@ -161,7 +163,7 @@ namespace SR_CORE_NS {
 
     void EngineScene::SetSpeed(float_t speed) {
         m_speed = speed;
-        m_updateFrequency = (1.f / (60.f * m_speed));
+        UpdateFrequency();
         m_accumulator = m_updateFrequency;
     }
 
@@ -170,17 +172,18 @@ namespace SR_CORE_NS {
     }
 
     void EngineScene::UpdateMainCamera() {
+        SR_TRACY_ZONE;
         pMainCamera = pRenderScene.Do<SR_GTYPES_NS::Camera::Ptr>([](SR_GRAPH_NS::RenderScene* ptr) -> SR_GTYPES_NS::Camera::Ptr {
             return ptr->GetMainCamera();
         }, SR_GTYPES_NS::Camera::Ptr());
     }
 
     void EngineScene::SetActive(bool active) {
-        pSceneBuilder->SetDirty();
+        pSceneUpdater->SetDirty();
     }
 
     void EngineScene::SetPaused(bool pause) {
-        pSceneBuilder->SetDirty();
+        pSceneUpdater->SetDirty();
     }
 
     void EngineScene::SetGameMode(bool gameMode) {
@@ -189,7 +192,7 @@ namespace SR_CORE_NS {
         });
     }
 
-    void EngineScene::DrawChunkDebug() {
+    void EngineScene::UpdateChunkDebug() {
         SR_TRACY_ZONE;
 
         if (auto&& pEditor = pEngine->GetEditor(); !pEditor || !pEditor->Enabled()) {
@@ -209,5 +212,54 @@ namespace SR_CORE_NS {
         }
 
         pScene.Unlock();
+    }
+
+    void EngineScene::UpdateFrequency() {
+        const uint32_t framesPerSecond = 60;
+        m_updateFrequency = (1.f / (static_cast<float_t>(framesPerSecond) * m_speed));
+    }
+
+    void EngineScene::FixedStep(bool isPaused) {
+        SR_TRACY_ZONE;
+        SR_TRACY_ZONE_TEXT(SR_UTILS_NS::ToString(m_accumulator));
+
+        if (!isPaused && pPhysicsScene) {
+            pPhysicsScene->FixedUpdate();
+        }
+
+        pEngine->FixedUpdate();
+
+        pSceneUpdater->FixedUpdate(); /// TODO: скрипты игнорируют скорость и паузу
+    }
+
+    void EngineScene::Update(float_t dt) {
+        SR_TRACY_ZONE;
+
+        pScene->GetLogicBase()->PostLoad();
+        pScene->Prepare();
+
+        const bool isPaused = pEngine->IsPaused() || !pEngine->IsActive() || pEngine->HasSceneInQueue();
+
+        pSceneUpdater->Build(isPaused);
+        pSceneUpdater->Update(dt); /// TODO: скрипты игнорируют скорость и паузу
+
+        UpdateFrequency();
+
+        if (m_accumulateDt) {
+            m_accumulator += dt;
+        }
+        else {
+            m_accumulator += SR_MIN(dt, m_updateFrequency);
+        }
+
+        /// fixed update
+        if (m_accumulator >= m_updateFrequency)
+        {
+            while (m_accumulator >= m_updateFrequency)
+            {
+                FixedStep(isPaused);
+                m_accumulator -= m_updateFrequency;
+            }
+        }
     }
 }

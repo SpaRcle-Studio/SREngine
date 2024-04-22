@@ -11,14 +11,18 @@ namespace EvoScript {
     class AddressTableGen;
 }
 
-namespace Framework {
+namespace SR_CORE_NS {
+    class Engine;
+}
+
+namespace SpaRcle {
     class API {
     public:
         API() = delete;
         API(const API &) = delete;
         ~API() = delete;
     public:
-        static void RegisterEvoScriptClasses();
+        static void RegisterEvoScriptClasses(SR_CORE_NS::Engine* pEngine);
         static void Initialize();
         static void RegisterDebug(EvoScript::AddressTableGen* generator);
         static void RegisterRaycast(EvoScript::AddressTableGen* generator);
@@ -46,6 +50,7 @@ namespace Framework {
         static void RegisterBehaviour(EvoScript::AddressTableGen* generator);
         static void RegisterObserver(EvoScript::AddressTableGen* generator);
         static void RegisterMath(EvoScript::AddressTableGen* generator);
+        static void RegisterText(EvoScript::AddressTableGen* generator);
 
         static void RegisterCasts(EvoScript::CastingGen* generator);
     };

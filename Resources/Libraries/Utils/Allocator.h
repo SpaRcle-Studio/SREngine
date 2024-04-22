@@ -2,8 +2,8 @@
 // Created by Monika on 09.08.2022.
 //
 
-#ifndef SRENGINE_ALLOCATOR_H
-#define SRENGINE_ALLOCATOR_H
+#ifndef SR_ENGINE_ALLOCATOR_H
+#define SR_ENGINE_ALLOCATOR_H
 
 #include <Libraries/MemoryAllocator.h>
 
@@ -40,6 +40,17 @@ void operator delete[](void* ptr) {
 #include <memory>
 #include <ctype.h>
 
+#if defined(SR_ANDROID)
+    #define SR_FASTCALL
+    #define SR_FORCE_INLINE SR_INLINE
+#elif defined(SR_GCC)
+    #define SR_FASTCALL
+    #define SR_FORCE_INLINE SR_INLINE
+#else
+    #define SR_FASTCALL __fastcall
+    #define SR_FORCE_INLINE __forceinline
+#endif
+
 #define SR_SAFE_PTR_ASSERT(expr, msg)                                                                                  \
     if (!(expr)) {                                                                                                     \
         fprintf(stderr, "[SafePtr<%s>] %s\n\tLine: %i\n\tPtr: %p\n", typeid(T).name(), msg, __LINE__, (void *) m_ptr); \
@@ -57,4 +68,39 @@ void operator delete[](void* ptr) {
     #define EVK_DEBUG
 #endif
 
-#endif //SRENGINE_ALLOCATOR_H
+#define SR_INF INFINITY
+#define SR_NAN NAN
+#define SR_INT16_MAX INT16_MAX
+#define SR_UINT16_MAX UINT16_MAX
+#define SR_UINT8_MAX UINT8_MAX
+#define SR_INT8_MAX INT8_MAX
+#define SR_INT32_MAX INT32_MAX
+#define SR_INT32_MIN INT32_MIN
+#define SR_UINT32_MAX UINT32_MAX
+#define SR_INT64_MAX INT64_MAX
+#define SR_UINT64_MAX UINT64_MAX
+#define SR_UINTPTR_MAX UINTPTR_MAX
+#define SR_DOUBLE_MAX DBL_MAX
+#define SR_FLOAT_MAX FLT_MAX
+
+namespace SR_UTILS_NS {
+    template<class T, class U = T> SR_NODISCARD static SR_FORCE_INLINE T SR_FASTCALL Exchange(T& obj, U&& new_value) noexcept {
+        T old_value = std::move(obj);
+        obj = std::forward<U>(new_value);
+        return old_value;
+    }
+
+    template<template<class> class T, class U>
+    struct IsDerivedFrom {
+    private:
+        template<class V> static decltype(static_cast<const T<V>&>(std::declval<U>()), std::true_type{}) test(const T<V>&); /// NOLINT
+        static std::false_type test(...);                                                                                   /// NOLINT
+
+    public:
+        static constexpr bool value = decltype(IsDerivedFrom::test(std::declval<U>()))::value;
+
+    };
+}
+
+
+#endif //SR_ENGINE_ALLOCATOR_H

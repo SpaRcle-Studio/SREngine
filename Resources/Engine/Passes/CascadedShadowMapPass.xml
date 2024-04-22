@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<Include>
+    <Include Path="Engine/Passes/CascadedShadowMapFBOController.xml"/>
+    <CascadedShadowMapPass Name="ShadowMap" SplitLambda="0.95" Near="10.0" Far="750.0" UseMaterials="false">
+        <FramebufferSettings Name="ShadowMapFBO">
+            <Depth ClearValue="1.0" />
+        </FramebufferSettings>
+        <Shaders>
+            <Override Type="Spatial" Shader="Engine/Shaders/CascadedShadowMap/depth-spatial.srsl"/>
+        </Shaders>
+        <AllowedLayers>
+            <Default/>
+            <Opaque/>
+            <Transparent/>
+        </AllowedLayers>
+    </CascadedShadowMapPass>
+</Include>

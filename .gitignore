@@ -10,6 +10,7 @@ compile_commands.json
 CTestTestfile.cmake
 cmake-build-debug
 .idea
+*.blend1
 _deps
 /cmake-build-release/
 /Resources/Cache/
@@ -23,3 +24,5 @@ out
 .vs
 Build
 /CMakeSettings.json
+/Android/app/src/main/assets
+/Android/local.properties

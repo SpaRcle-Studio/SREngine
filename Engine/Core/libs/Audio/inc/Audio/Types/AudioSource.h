@@ -2,8 +2,8 @@
 // Created by Danilka000novishok on 08.08.2023.
 //
 
-#ifndef SRENGINE_AUDIOSOURCE_H
-#define SRENGINE_AUDIOSOURCE_H
+#ifndef SR_ENGINE_AUDIOSOURCE_H
+#define SR_ENGINE_AUDIOSOURCE_H
 
 #include <Utils/ECS/Component.h>
 #include <Utils/FileSystem/Path.h>
@@ -12,7 +12,7 @@
 namespace SR_AUDIO_NS
 {
     class AudioSource : public SR_UTILS_NS::Component {
-        SR_ENTITY_SET_VERSION(1001);
+        SR_ENTITY_SET_VERSION(1004);
         SR_INITIALIZE_COMPONENT(AudioSource);
         using Super = SR_UTILS_NS::Component;
         using Handle = void*;
@@ -22,11 +22,17 @@ namespace SR_AUDIO_NS
     public:
         static SR_UTILS_NS::Component* LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage);
 
-        SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save(SR_HTYPES_NS::Marshal::Ptr pMarshal, SR_UTILS_NS::SavableFlags flags) const override;
+        SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save(SR_UTILS_NS::SavableContext data) const override;
 
+        void SetLoop(bool loop);
+        void SetConeInnerAngle(float_t Angle);
+        void SetPitch(float_t pitch);
         void SetPath(const SR_UTILS_NS::Path& path);
         void SetVolume(float_t volume);
 
+        SR_NODISCARD bool GetLoop() const;
+        SR_NODISCARD float_t GetConeInnerAngle() const;
+        SR_NODISCARD float_t GetPitch() const;
         SR_NODISCARD SR_UTILS_NS::Path GetPath() const;
         SR_NODISCARD float_t GetVolume() const;
 
@@ -45,4 +51,4 @@ namespace SR_AUDIO_NS
     };
 }
 
-#endif //SRENGINE_AUDIOSOURCE_H
+#endif //SR_ENGINE_AUDIOSOURCE_H

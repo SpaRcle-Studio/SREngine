@@ -3,7 +3,7 @@
 //
 
 #include <Audio/RawSound.h>
-#include <Utils/ResourceManager/ResourceManager.h>
+#include <Utils/Resources/ResourceManager.h>
 #include <Utils/FileSystem/FileSystem.h>
 #include <Audio/Decoders/IWaveDataProvider.h>
 
@@ -24,7 +24,7 @@ namespace SR_AUDIO_NS {
 
         auto&& pRawSound = new RawSound();
 
-        pRawSound->SetId(path, false);
+        pRawSound->SetId(path.ToStringRef(), false);
 
         if (!pRawSound->Reload()) {
             delete pRawSound;
@@ -59,18 +59,18 @@ namespace SR_AUDIO_NS {
         auto&& dataBlob = SR_UTILS_NS::FileSystem::ReadFileAsBlob(path);
         if (!dataBlob || dataBlob->empty())
         {
-            SR_ERROR("RawSound::Load() : cannot read file!\n\t" + path.ToString());
+            SR_ERROR("RawSound::Load() : cannot read file!\n\tPath: {}", path.ToString());
             return false;
         }
 
         if (!(m_dataProvider = CreateWaveDataProvider(path.CStr(), dataBlob)))
         {
-            SR_ERROR("RawSound::Load() : cannot parse file!\n\t" + path.ToString());
+            SR_ERROR("RawSound::Load() : cannot parse file!\n\tPath: ", path.ToString());
             return false;
         }
 
         if (!m_dataProvider->IsValid()) {
-            SR_ERROR("RawSound::Load() : data provider is invalid!\n\t" + path.ToString());
+            SR_ERROR("RawSound::Load() : data provider is invalid!\n\tPath: ", path.ToString());
             return false;
         }
 
@@ -78,7 +78,7 @@ namespace SR_AUDIO_NS {
     }
 
     bool RawSound::Reload() {
-        SR_LOG("RawSound::Reload() : reloading \"" + std::string(GetResourceId()) + "\" audio...");
+        SR_LOG("RawSound::Reload() : reloading \"{}\" audio...", GetResourceId().ToStringRef());
 
         m_loadState = LoadState::Reloading;
 
