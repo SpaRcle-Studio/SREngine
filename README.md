@@ -111,7 +111,7 @@ It aims to establish a strong base for game creation and is currently in the ear
   * [Box2D](https://github.com/erincatto/box2d)
   * [json](https://github.com/nlohmann/json)
   
-  ## Features
+## Features
   * SpaRcle Shader Language (SRSL)
   * SpaRcle Logical Machine (SRLM) aka Blueprints 
   * Chunk system 
@@ -128,3 +128,17 @@ It aims to establish a strong base for game creation and is currently in the ear
   * Multi-cameras renderer 
   * Geometry loader
   * Texture loader
+
+## FAQ
+ <details>
+ <summary> Why SpaRcle Engine? </summary>
+  
+    It's a lightweight and simple Unity-like game engine that maximizes cross-platform 
+    compatibility and utilizes fast and efficient C++ for scripting. 
+    
+    The engine offers the flexibility to customize the graphics pipeline 
+    according to specific requirements.
+
+    The ability to create endless procedurally generated worlds is provided 
+    wtih a system that divides the world into regions and chunks.
+ </details>
