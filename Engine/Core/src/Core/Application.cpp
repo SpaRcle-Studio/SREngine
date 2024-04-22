@@ -270,7 +270,7 @@ namespace SR_CORE_NS {
         }
 
         if (!m_resourcesPath.Exists(SR_UTILS_NS::Path::Type::Folder) && !FindResourcesFolder()) {
-            SR_ERROR("Application::InitializeResourcesFolder() : failed to find resources folder!");
+            SR_LOG("Application::InitializeResourcesFolder() : failed to find resources folder!");
             return false;
         }
 

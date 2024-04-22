@@ -15,9 +15,10 @@ namespace SR_CORE_NS {
         }
 
         if (Super::InitializeResourcesFolder(argc, argv)) {
-            SR_LOG("Launcher::InitLauncher() : resources folder found, trying to detect old application.");
+            SR_LOG("Launcher::InitLauncher() : resources folder found.");
             if (SR_UTILS_NS::HasCmdOption(argv, argv + argc, "--delete-old-app")) {
                 DeleteOldApplication();
+                CloneResources();
             }
 
             return LauncherInitStatus::Success;
@@ -71,7 +72,16 @@ namespace SR_CORE_NS {
     }
 
     bool Launcher::CloneResources() {
+        //system("curl -OL https://raw.githubusercontent.com/SpaRcle-Studio/SRE2R/master/Resources.zip");
 
+        auto&& applicationDirectory = SR_PLATFORM_NS::GetApplicationPath().GetFolder();
+        SR_UTILS_NS::Path zipPath = applicationDirectory.Concat("Resources.zip");
+        std::string command = "curl -o " + zipPath.ToString() + " -L https://raw.githubusercontent.com/SpaRcle-Studio/SRE2R/master/Resources.zip";
+        system(command.c_str());
+        SR_PLATFORM_NS::Unzip(zipPath, applicationDirectory);
+        SR_PLATFORM_NS::WaitAndDelete(zipPath);
+
+        //SR_UTILS_NS::Compression::Unzip(resourcePath, applicationDirectory);
 
         return false;
     }
