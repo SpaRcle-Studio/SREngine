@@ -3,7 +3,9 @@
 //
 
 #include <Core/Launcher.h>
+
 #include <Utils/Resources/ResourceEmbedder.h>
+#include <Utils/Common/Compression.h>
 
 namespace SR_CORE_NS {
     LauncherInitStatus Launcher::InitLauncher(int argc, char** argv) {
@@ -14,7 +16,10 @@ namespace SR_CORE_NS {
 
         if (Super::InitializeResourcesFolder(argc, argv)) {
             SR_LOG("Launcher::InitLauncher() : resources folder found, trying to detect old application.");
-            DeleteOldApplication();
+            if (SR_UTILS_NS::HasCmdOption(argv, argv + argc, "--delete-old-app")) {
+                DeleteOldApplication();
+            }
+
             return LauncherInitStatus::Success;
         }
 
@@ -40,7 +45,7 @@ namespace SR_CORE_NS {
         bool exportResult = SR_UTILS_NS::ResourceEmbedder::Instance().ExportAllResources(unpackDirectory.Concat("Resources"));
 
         if (copyResult && exportResult) {
-            SR_PLATFORM_NS::OpenFile(newApplicationPath);
+            SR_PLATFORM_NS::OpenFile(newApplicationPath, "--delete-old-app");
         }
 
         return true;
@@ -63,5 +68,11 @@ namespace SR_CORE_NS {
         SR_PLATFORM_NS::WaitAndDelete(applicationPath.GetFolder().Concat("../successful"));
 
         SR_LOG("Launcher::DeleteOldApplication() : old application deleted successfully.");
+    }
+
+    bool Launcher::CloneResources() {
+
+
+        return false;
     }
 }

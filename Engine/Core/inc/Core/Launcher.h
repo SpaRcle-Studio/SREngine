@@ -26,6 +26,7 @@ namespace SR_CORE_NS {
     private:
         static bool UnpackAndExecute();
         static void DeleteOldApplication();
+        static bool CloneResources();
     };
 }
 
