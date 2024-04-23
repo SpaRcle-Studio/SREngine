@@ -63,6 +63,7 @@ AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Engine/Configs/Physics.xml")
 AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Engine/Configs/MainRenderTechnique.xml")
 AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Engine/Configs/Themes/Dark.xml")
 
+AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Engine/Utilities/git2.exe")
 
 AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Engine/PhysicsMaterials/DefaultMaterial.physmat")
 
@@ -73,12 +74,10 @@ AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Engine/Shaders/ui.srsl")
 AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Engine/Shaders/wireframe.srsl")
 AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Engine/Shaders/line.srsl")
 
-
 AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Engine/Materials/default.mat")
 AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Engine/Materials/UI/ui.mat")
 AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Engine/Materials/Debug/wireframe.mat")
 AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Engine/Materials/Debug/line.mat")
-
 
 AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Engine/Fonts/tahoma.ttf")
 AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Engine/Fonts/fa-solid-900.ttf")

@@ -72,17 +72,22 @@ namespace SR_CORE_NS {
     }
 
     bool Launcher::CloneResources() {
-        //system("curl -OL https://raw.githubusercontent.com/SpaRcle-Studio/SRE2R/master/Resources.zip");
+        auto&& git2path = GetResourcesPath().Concat("Engine/Utilities/git2.exe");
+        auto&& cachePath = GetResourcesPath().Concat("Cache");
 
-        auto&& applicationDirectory = SR_PLATFORM_NS::GetApplicationPath().GetFolder();
-        SR_UTILS_NS::Path zipPath = applicationDirectory.Concat("Resources.zip");
-        std::string command = "curl -o " + zipPath.ToString() + " -L https://raw.githubusercontent.com/SpaRcle-Studio/SRE2R/master/Resources.zip";
+        cachePath.Create();
+
+        std::string command =
+                "cd " + cachePath.ToStringRef() + " && " +
+                git2path.ToStringRef() + " clone https://github.com/SpaRcle-Studio/SRE2R -b release/0.0.7 --depth 1";
+
+        SR_SYSTEM_LOG("Launcher::CloneResources() : cloning repository...\n" + command);
+
         system(command.c_str());
-        SR_PLATFORM_NS::Unzip(zipPath, applicationDirectory);
-        SR_PLATFORM_NS::WaitAndDelete(zipPath);
 
-        //SR_UTILS_NS::Compression::Unzip(resourcePath, applicationDirectory);
+        SR_UTILS_NS::Path zipPath = cachePath.Concat("SRE2R/Resources.zip");
+        SR_PLATFORM_NS::Unzip(zipPath, GetResourcesPath());
 
-        return false;
+        return true;
     }
 }

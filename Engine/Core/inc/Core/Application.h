@@ -25,6 +25,8 @@ namespace SR_CORE_NS {
         void SwitchResourcesFolder(const SR_UTILS_NS::Path& path);
         void Reload();
 
+        SR_NODISCARD const SR_UTILS_NS::Path& GetResourcesPath() const { return m_resourcesPath; }
+
     protected:
         virtual bool InitializeResourcesFolder(int argc, char** argv);
 
