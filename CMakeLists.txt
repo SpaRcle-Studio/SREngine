@@ -10,7 +10,7 @@ message(STATUS "SpaRcle Engine: cmake version is ${CMAKE_VERSION}")
 set(CMAKE_CXX_STANDARD 20)
 
 if (UNIX)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fcompare-debug-second -w -Wno-deprecated")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fcompare-debug-second -w -Wno-deprecated -fPIC")
 endif()
 
 if (UNIX AND CMAKE_BUILD_TYPE STREQUAL "Debug")
