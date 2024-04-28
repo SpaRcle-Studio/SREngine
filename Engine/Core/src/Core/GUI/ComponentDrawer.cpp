@@ -87,7 +87,7 @@ namespace SR_CORE_NS::GUI {
         {
             if (auto&& pDescriptor = context->GetIconDescriptor(EditorIcon::Reset)) {
                 if (SR_GRAPH_GUI_NS::ImageButton(SR_FORMAT("##BehResetBtn{}", index), pDescriptor, SR_MATH_NS::IVector2(25), 5)) {
-                    pBehaviour = new SR_SCRIPTING_NS::Behaviour();
+                    pBehaviour->Reload();
                 }
             }
 

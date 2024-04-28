@@ -233,4 +233,8 @@ namespace SR_SCRIPTING_NS {
             GetParent()->SetDirty(true);
         }
     }
+
+    void Behaviour::Reload() {
+        SetRawBehaviour(m_rawBehaviour->GetResourcePath());
+    }
 }

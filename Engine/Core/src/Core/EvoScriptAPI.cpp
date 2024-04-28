@@ -5,6 +5,8 @@
 #include <Core/EvoScriptAPI.h>
 #include <Core/Engine.h>
 
+#include <Core/UI/Button.h>
+
 #include <EvoScript/Compilation/CMakeCodeGen.h>
 
 #include <Utils/Input/InputSystem.h>
@@ -53,6 +55,7 @@ namespace SpaRcle {
             RegisterMaterial(generator);
             RegisterGUISystem(generator);
             RegisterRigidbody(generator);
+            RegisterButton(generator);
             RegisterPostProcessing(generator);
             RegisterISavable(generator);
             RegisterObserver(generator);
@@ -325,6 +328,24 @@ namespace SpaRcle {
 
         //ESRegisterMethod(EvoScript::Private, generator, Camera, OnRotate, void, ESArg1(const FVector3& v), ESArg1(v)) // Component
         //ESRegisterMethod(EvoScript::Private, generator, Camera, OnMove, void, ESArg1(const FVector3& v), ESArg1(v)) // Component
+    }
+
+
+    void API::RegisterButton(EvoScript::AddressTableGen *generator) {
+        using namespace SR_CORE_UI_NS;
+        using ButtonCallback = std::function<void()>;
+
+        generator->RegisterNewClass("Button", "Button");
+        generator->RegisterUsing("ButtonCallback", "Button", "std::function<void()>");
+
+        ESRegisterMethod(EvoScript::Public, generator, Button, SetIdleCallback, void, ESArg1(ButtonCallback idleCallback), ESArg1(idleCallback))
+        ESRegisterMethod(EvoScript::Public, generator, Button, SetHoverCallback, void, ESArg1(ButtonCallback hoverCallback), ESArg1(hoverCallback))
+        ESRegisterMethod(EvoScript::Public, generator, Button, SetKeyDownCallback, void, ESArg1(ButtonCallback keyDownCallback), ESArg1(keyDownCallback))
+        ESRegisterMethod(EvoScript::Public, generator, Button, SetKeyUpCallback, void, ESArg1(ButtonCallback keyUpCallback), ESArg1(keyUpCallback))
+
+        ESRegisterMethodArg0(EvoScript::Public, generator, Button, IsIdle, bool)
+        ESRegisterMethodArg0(EvoScript::Public, generator, Button, IsHovered, bool)
+        ESRegisterMethodArg0(EvoScript::Public, generator, Button, IsPressed, bool)
     }
 
     void API::RegisterRigidbody(EvoScript::AddressTableGen *generator) {
@@ -600,6 +621,7 @@ namespace SpaRcle {
         using namespace SR_WORLD_NS;
         using namespace SR_MATH_NS;
         using namespace SR_GTYPES_NS;
+        using namespace SR_CORE_UI_NS;
         using namespace SR_PHYSICS_NS::Types;
 
         ESRegisterDynamicCast(generator, ProceduralMesh, Component)
@@ -607,6 +629,7 @@ namespace SpaRcle {
         ESRegisterDynamicCast(generator, Rigidbody, Component)
         ESRegisterDynamicCast(generator, Text2D, Component)
         ESRegisterDynamicCast(generator, Text3D, Component)
+        ESRegisterDynamicCast(generator, Button, Component)
         ESRegisterDynamicCast(generator, SceneLogic, SceneCubeChunkLogic)
     }
 

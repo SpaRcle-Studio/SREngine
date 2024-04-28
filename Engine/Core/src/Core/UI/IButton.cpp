@@ -73,28 +73,24 @@ namespace SR_CORE_UI_NS {
     void IButton::OnIdle() {
         if (m_onIdle) {
             m_onIdle();
-            m_onIdle = Callback();
         }
     }
 
     void IButton::OnHover() {
         if (m_onHover) {
             m_onHover();
-            m_onHover = Callback();
         }
     }
 
     void IButton::OnKeyDown() {
         if (m_onKeyDown) {
             m_onKeyDown();
-            m_onKeyDown = Callback();
         }
     }
 
     void IButton::OnKeyUp() {
         if (m_onKeyUp) {
             m_onKeyUp();
-            m_onKeyUp = Callback();
         }
     }
 
