@@ -368,13 +368,21 @@ namespace SR_CORE_GUI_NS {
         auto&& pRenderStrategy = pRenderScene->GetRenderStrategy();
         auto&& pPipeline = pRenderScene->GetPipeline();
 
-        const uint32_t transferredKBytes = pPipeline->GetPreviousState().transferredMemory / 1024;
+        if (pPipeline->GetPreviousState().transferredMemory >= 1024) {
+            const uint32_t transferredKBytes = pPipeline->GetPreviousState().transferredMemory / 1024;
+            SR_GRAPH_GUI_NS::Text(SR_FORMAT_C("Transferred memory: {}Kb", transferredKBytes));
+        }
+        else {
+            const uint32_t transferredBytes = pPipeline->GetPreviousState().transferredMemory;
+            SR_GRAPH_GUI_NS::Text(SR_FORMAT_C("Transferred memory: {}B", transferredBytes));
+        }
 
-        SR_GRAPH_GUI_NS::Text(SR_FORMAT_C("Transferred memory: {}Kb", transferredKBytes));
         SR_GRAPH_GUI_NS::Text(SR_FORMAT_C("Transferred count: {}", pPipeline->GetPreviousState().transferredCount));
         SR_GRAPH_GUI_NS::Text(SR_FORMAT_C("Vertices count: {}", pPipeline->GetBuildState().vertices));
         SR_GRAPH_GUI_NS::Text(SR_FORMAT_C("Triangles count: {}", static_cast<uint32_t>(pPipeline->GetBuildState().vertices / 3)));
         SR_GRAPH_GUI_NS::Text(SR_FORMAT_C("Draw calls: {}", pPipeline->GetBuildState().drawCalls));
+        SR_GRAPH_GUI_NS::Text(SR_FORMAT_C("Used textures: {}", pPipeline->GetBuildState().usedTextures));
+        SR_GRAPH_GUI_NS::Text(SR_FORMAT_C("Used shaders: {}", pPipeline->GetBuildState().usedShaders));
         SR_GRAPH_GUI_NS::Text(SR_FORMAT_C("Timed objects pool size: {}", pRenderScene->GetDebugRenderer()->GetTimedObjectPoolSize()));
         SR_GRAPH_GUI_NS::Text(SR_FORMAT_C("Timed empty ids pool size: {}", pRenderScene->GetDebugRenderer()->GetEmptyIdsPoolSize()));
         SR_GRAPH_GUI_NS::Text(SR_FORMAT_C("Pipeline use count: {}", pRenderScene->GetPipeline()->GetPtrData()->strongCount));
