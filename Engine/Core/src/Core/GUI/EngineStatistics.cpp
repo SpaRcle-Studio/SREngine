@@ -15,6 +15,7 @@
 #include <Graphics/Render/DebugRenderer.h>
 #include <Graphics/Pipeline/Vulkan/VulkanPipeline.h>
 #include <Graphics/Pipeline/Vulkan/VulkanKernel.h>
+#include <Graphics/Pipeline/Vulkan/VulkanMemory.h>
 
 namespace SR_CORE_GUI_NS {
     EngineStatistics::EngineStatistics()
@@ -368,6 +369,8 @@ namespace SR_CORE_GUI_NS {
         auto&& pRenderStrategy = pRenderScene->GetRenderStrategy();
         auto&& pPipeline = pRenderScene->GetPipeline();
 
+        SR_GRAPH_GUI_NS::Text(SR_FORMAT_C("Pipeline use count: {}", pPipeline->GetPtrData()->strongCount));
+
         if (pPipeline->GetPreviousState().transferredMemory >= 1024) {
             const uint32_t transferredKBytes = pPipeline->GetPreviousState().transferredMemory / 1024;
             SR_GRAPH_GUI_NS::Text(SR_FORMAT_C("Transferred memory: {}Kb", transferredKBytes));
@@ -378,6 +381,10 @@ namespace SR_CORE_GUI_NS {
         }
 
         SR_GRAPH_GUI_NS::Text(SR_FORMAT_C("Transferred count: {}", pPipeline->GetPreviousState().transferredCount));
+
+        ImGui::Separator();
+        SR_GRAPH_GUI_NS::Text("Draw info:");
+
         SR_GRAPH_GUI_NS::Text(SR_FORMAT_C("Vertices count: {}", pPipeline->GetBuildState().vertices));
         SR_GRAPH_GUI_NS::Text(SR_FORMAT_C("Triangles count: {}", static_cast<uint32_t>(pPipeline->GetBuildState().vertices / 3)));
         SR_GRAPH_GUI_NS::Text(SR_FORMAT_C("Draw calls: {}", pPipeline->GetBuildState().drawCalls));
@@ -385,7 +392,21 @@ namespace SR_CORE_GUI_NS {
         SR_GRAPH_GUI_NS::Text(SR_FORMAT_C("Used shaders: {}", pPipeline->GetBuildState().usedShaders));
         SR_GRAPH_GUI_NS::Text(SR_FORMAT_C("Timed objects pool size: {}", pRenderScene->GetDebugRenderer()->GetTimedObjectPoolSize()));
         SR_GRAPH_GUI_NS::Text(SR_FORMAT_C("Timed empty ids pool size: {}", pRenderScene->GetDebugRenderer()->GetEmptyIdsPoolSize()));
-        SR_GRAPH_GUI_NS::Text(SR_FORMAT_C("Pipeline use count: {}", pRenderScene->GetPipeline()->GetPtrData()->strongCount));
+
+        if (auto&& pVulkanPipeline = pPipeline.DynamicCast<SR_GRAPH_NS::VulkanPipeline>()) {
+            ImGui::Separator();
+            SR_GRAPH_GUI_NS::Text("Vulkan memory:");
+            SR_GRAPH_GUI_NS::Text(SR_FORMAT_C("Descriptor sets count: {}", pVulkanPipeline->GetMemoryManager()->GetDescriptorSetsCount()));
+            SR_GRAPH_GUI_NS::Text(SR_FORMAT_C("Shader programs count: {}", pVulkanPipeline->GetMemoryManager()->GetShaderProgramsCount()));
+            SR_GRAPH_GUI_NS::Text(SR_FORMAT_C("UBOs count: {}", pVulkanPipeline->GetMemoryManager()->GetUBOsCount()));
+            SR_GRAPH_GUI_NS::Text(SR_FORMAT_C("VBOs count: {}", pVulkanPipeline->GetMemoryManager()->GetVBOsCount()));
+            SR_GRAPH_GUI_NS::Text(SR_FORMAT_C("IBOs count: {}", pVulkanPipeline->GetMemoryManager()->GetIBOsCount()));
+            SR_GRAPH_GUI_NS::Text(SR_FORMAT_C("SSBOs count: {}", pVulkanPipeline->GetMemoryManager()->GetSSBOsCount()));
+            SR_GRAPH_GUI_NS::Text(SR_FORMAT_C("FBOs count: {}", pVulkanPipeline->GetMemoryManager()->GetFBOsCount()));
+            SR_GRAPH_GUI_NS::Text(SR_FORMAT_C("Textures count: {}", pVulkanPipeline->GetMemoryManager()->GetTexturesCount()));
+        }
+
+        ImGui::Separator();
 
         SR_GRAPH_GUI_NS::Text("Status:");
         ImGui::SameLine();
