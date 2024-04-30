@@ -73,6 +73,10 @@ namespace SR_CORE_GUI_NS {
 
             ImGui::Separator();
 
+            if (auto&& pFrameBuffer = GetContext()->FindFramebuffer("SceneViewFBO", pCamera)) {
+                m_id = pFrameBuffer->GetColorTexture(0);
+            }
+
             if (ImGui::BeginChild("ViewerTexture"))
             {
                 m_windowSize = SR_MATH_NS::Vector2(static_cast<int32_t>(ImGui::GetWindowSize().x), static_cast<int32_t>(ImGui::GetWindowSize().y));
@@ -93,10 +97,6 @@ namespace SR_CORE_GUI_NS {
             }
 
             ImGui::EndGroup();
-
-            if (auto&& pFrameBuffer = GetContext()->FindFramebuffer("SceneViewFBO", pCamera)) {
-                m_id = pFrameBuffer->GetColorTexture(0);
-            }
 
             m_camera.Unlock();
         }

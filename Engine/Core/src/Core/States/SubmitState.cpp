@@ -6,6 +6,7 @@
 
 #include <Graphics/Window/Window.h>
 #include <Graphics/Render/RenderScene.h>
+#include <Graphics/Pipeline/Pipeline.h>
 
 #include <Core/Engine.h>
 #include <Core/World/EngineScene.h>
@@ -25,6 +26,8 @@ namespace SR_CORE_NS {
         }
 
         pRenderScene->Submit();
+
+        SR_TRACY_PLOT("Draw calls", static_cast<int64_t>(pRenderScene->GetPipeline()->GetBuildState().drawCalls));
 
         return SR_UTILS_NS::ThreadWorkerResult::Success;
     }

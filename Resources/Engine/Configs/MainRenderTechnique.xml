@@ -26,6 +26,7 @@
                 <Sampler FBO="ShadowMapFBO" Id="shadowMap" Depth="true" Optional="true" />
                 <DisallowedLayers>
                     <Default/>
+                    <Opaque/>
                     <GizmoSelection/>
                     <Gizmo/>
                     <Debug/>
