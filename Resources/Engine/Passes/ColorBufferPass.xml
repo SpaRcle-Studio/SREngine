@@ -7,7 +7,7 @@
         <Layer Format="RGBA8_UNORM"/>
         <Features ColorTransferSrc="true" />
     </FrameBufferController>
-    <ColorBufferPass>
+    <ColorBufferPass ColorMultiplier="5000">
         <FramebufferSettings Name="ColorBufferFBO">
             <Depth ClearValue="1.0"/>
             <Layer R="0.0" G="0.0" B="0.0" A="1.0"/>

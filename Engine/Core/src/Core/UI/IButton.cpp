@@ -45,7 +45,9 @@ namespace SR_CORE_UI_NS {
         }
 
         auto&& mousePosition = pCamera->GetMousePos();
-        auto&& pHoveredMesh = dynamic_cast<IRenderComponent*>(pCamera->GetRenderTechnique()->PickMeshAt(mousePosition));
+        auto&& pRenderTechnique = pCamera->GetRenderTechnique();
+        auto&& pMesh = pRenderTechnique->PickMeshAt(mousePosition);
+        auto&& pHoveredMesh = dynamic_cast<IRenderComponent*>(pMesh);
         auto&& isPressed = SR_UTILS_NS::Input::Instance().GetMouse(SR_UTILS_NS::MouseCode::MouseLeft);
         bool isHovered = pHoveredMesh ? CompareObject(pHoveredMesh->GetGameObject()) : false;
 
