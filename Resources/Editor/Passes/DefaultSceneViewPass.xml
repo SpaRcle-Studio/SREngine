@@ -16,6 +16,7 @@
                 </AllowedLayers>
             </MeshDrawerPass>
             <SkyboxPass Path="Engine/Skyboxes/Sun.png" Shader="Engine/Shaders/skybox.srsl"/>
+            <PostProcessPass Shader="Editor/Shaders/grid.srsl" Vertices="4"/>
             <MeshDrawerPass>
                 <Sampler FBO="ShadowMapFBO" Id="shadowMap" Depth="true" Optional="true" />
                 <DisallowedLayers>

@@ -2,7 +2,7 @@
 <Technique Name="CascadedShadowMap">
     <Include Path="Engine/Passes/ColorBufferPass.xml"/>
     <Include Path="Engine/Passes/CascadedShadowMapPass.xml"/>
-    <Include Path="Engine/Passes/DefaultSceneViewPass.xml"/>
+    <Include Path="Editor/Passes/DefaultSceneViewPass.xml"/>
     <FramebufferPass Name="SceneViewFBO">
         <FramebufferSettings DynamicResizing="true" DepthEnabled="true" SmoothSamples="1">
             <Size X="0" Y="0"/>

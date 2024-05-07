@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <Technique Name="Editor">
     <Include Path="Engine/Passes/ColorBufferPass.xml"/>
-    <Include Path="Engine/Passes/DefaultSceneViewPass.xml"/>
+    <Include Path="Editor/Passes/DefaultSceneViewPass.xml"/>
     <Queues>
         <Queue>
             <Pass Name="ColorBufferPass"/>
