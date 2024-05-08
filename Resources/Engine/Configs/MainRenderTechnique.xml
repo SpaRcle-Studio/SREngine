@@ -36,9 +36,8 @@
     </FramebufferPass>
     <SwapchainPass R="0.0" G="0.0" B="0.0" A="1.0" Depth="1.0">
         <PostProcessPass Shader="Engine/Shaders/CascadedShadowMap/post_process.srsl">
-            <Attachments>
-                <Attachment FBO="SceneViewFBO" Id="gAlbedo" Index="0"/>
-            </Attachments>
+            <Sampler FBO="SceneViewFBO" Id="gAlbedo" Index="0"/>
+            <!--<Sampler Texture="Engine/Textures/uv.png" Id="gAlbedo"/>-->
         </PostProcessPass>
     </SwapchainPass>
     <Queues>
