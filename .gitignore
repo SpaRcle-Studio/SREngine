@@ -13,6 +13,7 @@ cmake-build-debug
 *.blend1
 _deps
 /cmake-build-release/
+/build/
 /Resources/Cache/
 /Resources/Scripts/Libraries/Standard/
 /Resources/Scripts/Libraries/
