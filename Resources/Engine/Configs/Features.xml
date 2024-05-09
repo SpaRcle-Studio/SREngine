@@ -52,6 +52,6 @@
        <SkyboxCPUUsage Value="false"/>
        <VulkanValidation Value="true"/>
        <MultiRenderTargets Value="false"/>
-       <Undocking Value="true"/>
+       <Undocking Value="false"/>
    </Common>
 </Features>
