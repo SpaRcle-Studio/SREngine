@@ -54,7 +54,12 @@ include(libs/Utils/cmake/ResourceEmbedder.cmake)
 
 AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Engine/Configs/Threads.yml")
 AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Engine/Configs/Features.xml")
-AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Engine/Utilities/git2.exe")
+
+if (WIN32)
+    AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Engine/Utilities/git2.exe")
+elseif (UNIX)
+    AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Engine/Utilities/git2")
+endif()
 
 EmbedResources("${CMAKE_CURRENT_BINARY_DIR}/libs/Utils/include/Utils" "SREngine/Resources" ${EMBED_RESOURCES_LIST})
 
