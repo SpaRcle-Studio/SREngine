@@ -1,6 +1,22 @@
 cmake_minimum_required(VERSION 3.16)
 project(SpaRcleEngine)
 
+include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/TargetArchitecture.cmake)
+target_architecture(CURRENT_TARGET_ARCHITECTURE)
+message("-- SpaRcle Engine: current build target architecture: ${CURRENT_TARGET_ARCHITECTURE}")
+
+#set_property(GLOBAL PROPERTY SR_ENGINE_VERSION "0.0.0")
+#set_property(GLOBAL PROPERTY SR_ENGINE_MAJOR_VERSION 0)
+#set_property(GLOBAL PROPERTY SR_ENGINE_MINOR_VERSION 0)
+#set_property(GLOBAL PROPERTY SR_ENGINE_PATCH_VERSION 0)
+
+get_property(SR_ENGINE_VERSION GLOBAL PROPERTY SR_ENGINE_VERSION_PROPERTY)
+get_property(SR_ENGINE_VERSION GLOBAL PROPERTY SR_ENGINE_VERSION_PROPERTY)
+get_property(SR_ENGINE_VERSION GLOBAL PROPERTY SR_ENGINE_VERSION_PROPERTY)
+get_property(SR_ENGINE_VERSION GLOBAL PROPERTY SR_ENGINE_VERSION_PROPERTY)
+
+message("-- SpaRcle Engine: current version is ${SR_ENGINE_VERSION}")
+
 # TODO!
 #add_compile_definitions(_CONTAINER_DEBUG_LEVEL=0)
 #add_compile_definitions(_ITERATOR_DEBUG_LEVEL=0)
@@ -52,3 +68,9 @@ add_custom_command(TARGET SREngine
 
 target_link_libraries(SREngine Core)
 
+# TODO: implement an easy way to set if a build is 'stable' or 'latest'
+if (UNIX AND NOT APPLE)
+    set_target_properties(SREngine PROPERTIES OUTPUT_NAME "SREngine_v${SR_ENGINE_VERSION}-latest_linux.${CURRENT_TARGET_ARCHITECTURE}")
+elseif (WIN32)
+    set_target_properties(SREngine PROPERTIES OUTPUT_NAME "SREngine_v${SR_ENGINE_VERSION}-latest_windows.${CURRENT_TARGET_ARCHITECTURE}.exe")
+endif()
