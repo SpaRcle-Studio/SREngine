@@ -49,16 +49,16 @@ namespace SR_CORE_NS {
 
         if (copyResult && exportResult) {
             /*char *c_path = const_cast<char*>(newApplicationPath.c_str());
-            char *c_arg = const_cast<char*>("--delete-old-app");
-            char *const argv[] = {c_path, c_arg, nullptr};
+            const char *c_arg = "--delete-old-app";
+            char *const argv[] = {c_path, const_cast<char*>(c_arg), nullptr};
             char *const envp[] = { nullptr };
-            execve(newApplicationPath.c_str(), argv, envp);
-            */
+            execve(newApplicationPath.c_str(), argv, envp);*/
 
             SR_LOG("Launcher::UnpackAndExecute() : successfully copied the current executable and exported embedded resources.");
             SR_LOG("Launcher::UnpackAndExecute() : trying to execute the copied application.");
 
-            // TODO: Should we use execve/smth else for Linux here?
+            /// TODO: Should we use execve/smth else for Linux here?
+            /// P.S. The current process waits till the new one is finished, so we should come up with something else.
             SR_PLATFORM_NS::OpenFile(newApplicationPath, "--delete-old-app");
         }
 
