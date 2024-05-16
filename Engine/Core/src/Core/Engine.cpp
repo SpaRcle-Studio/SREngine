@@ -47,7 +47,7 @@ namespace SR_CORE_NS {
     }
 
     bool Engine::Create() {
-        SR_INFO("Engine::Create() : register all resources...");
+        SR_INFO("Engine::Create() : registering all resources...");
 
         if (!Resources::RegisterResources(GetThis())) {
             SR_ERROR("Engine::Create() : failed to register engine resources!");
@@ -59,7 +59,7 @@ namespace SR_CORE_NS {
             return false;
         }
 
-        SR_INFO("Engine::Create() : create main window...");
+        SR_INFO("Engine::Create() : creating main window...");
 
         if (SR_UTILS_NS::Features::Instance().Enabled("MainWindow", true)) {
             AddWindow(CreateMainWindow());
@@ -143,12 +143,12 @@ namespace SR_CORE_NS {
     }
 
     Engine::WindowPtr Engine::CreateMainWindow() {
-        SR_LOG("Engine::CreateMainWindow() : try found screen resolution...");
+        SR_LOG("Engine::CreateMainWindow() : trying to find screen resolution...");
 
         auto&& resolutions = SR_PLATFORM_NS::GetScreenResolutions();
 
         if (resolutions.empty()) {
-            SR_ERROR("Engine::CreateMainWindow() : not found supported resolutions!");
+            SR_ERROR("Engine::CreateMainWindow() : supported resolutions are not found!");
             return nullptr;
         }
         else {
@@ -208,7 +208,7 @@ namespace SR_CORE_NS {
         }
 
         if (m_isRun) {
-            SR_ERROR("Engine::Run() : engine already running!");
+            SR_ERROR("Engine::Run() : engine is already running!");
             return false;
         }
 

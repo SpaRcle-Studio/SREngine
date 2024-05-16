@@ -64,8 +64,14 @@ add_custom_command(TARGET SREngine
 target_link_libraries(SREngine Core)
 
 # TODO: implement an easy way to set if a build is 'stable' or 'latest'
+if (${CMAKE_BUILD_TYPE} STREQUAL "Release")
+    set(executableType "stable")
+else()
+    set(executableType "latest")
+endif()
+
 if (UNIX AND NOT APPLE)
-    set_target_properties(SREngine PROPERTIES OUTPUT_NAME "SREngine_v${SR_ENGINE_VERSION}-latest_linux.${CURRENT_TARGET_ARCHITECTURE}")
+    set_target_properties(SREngine PROPERTIES OUTPUT_NAME "SREngine_v${SR_ENGINE_VERSION}-${executableType}_linux.${CURRENT_TARGET_ARCHITECTURE}")
 elseif (WIN32)
-    set_target_properties(SREngine PROPERTIES OUTPUT_NAME "SREngine_v${SR_ENGINE_VERSION}-latest_windows.${CURRENT_TARGET_ARCHITECTURE}.exe")
+    set_target_properties(SREngine PROPERTIES OUTPUT_NAME "SREngine_v${SR_ENGINE_VERSION}-${executableType}_windows.${CURRENT_TARGET_ARCHITECTURE}.exe")
 endif()
