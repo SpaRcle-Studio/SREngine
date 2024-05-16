@@ -97,16 +97,22 @@ jobs:
       - if: env.debugSuccessful == 'true'
         name: Creating Debug artifact.
         working-directory: ${{github.workspace}}/build-debug/Engine
-        shell: cmd
+        shell: bash
         run: |
-          mkdir SREngineReleaseBuild & for /f "delims=" %i in ('dir /b ^| findstr "SREngine_"') do copy "%i" SREngineDebugBuild
+          ls | grep "SREngine_" | xargs -I '{}' cp '{}' SREngineDebugBuild
+        #shell: cmd
+        #run: |
+        #  mkdir SREngineReleaseBuild & for /f "delims=" %i in ('dir /b ^| findstr "SREngine_"') do copy "%i" SREngineDebugBuild
 
       - if: env.releaseSuccessful == 'true'
         name: Creating Release artifact.
         working-directory: ${{github.workspace}}/build-release/Engine
-        shell: cmd
+        shell: bash
         run: |
-          mkdir SREngineReleaseBuild & for /f "delims=" %i in ('dir /b ^| findstr "SREngine_"') do copy "%i" SREngineReleaseBuild      
+          ls | grep "SREngine_" | xargs -I '{}' cp '{}' SREngineReleaseBuild
+        #shell: cmd
+        #run: |
+        #  mkdir SREngineReleaseBuild & for /f "delims=" %i in ('dir /b ^| findstr "SREngine_"') do copy "%i" SREngineReleaseBuild
 
       - if: env.debugSuccessful == 'true'
         name: Uploading a successful Debug build artifact.
