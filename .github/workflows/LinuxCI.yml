@@ -68,78 +68,71 @@ jobs:
           cmake --build . -j 4
           echo "debugSuccessful=true" >> "$GITHUB_ENV"
           
-      #- if: inputs.buildDebug == 'true'
-      #  name: Creating a Debug build trace.
-      #  shell: bash 
-      #  working-directory: ${{github.workspace}}/CI
-      #  run: python ninjatracing.py ../build-debug/.ninja_log > trace-debug.json
+      - if: inputs.buildDebug == 'true'
+        name: Creating a Debug build trace.
+        shell: bash
+        working-directory: ${{github.workspace}}/CI
+        run: python ninjatracing.py ../build-debug/.ninja_log > trace-debug.json
         
-      #- if: inputs.buildRelease == 'true'
-      #  name: Creating a Release build trace.
-      #  shell: bash 
-      #  working-directory: ${{github.workspace}}/CI
-      #  run: python ninjatracing.py ../build-release/.ninja_log > trace-release.json
+      - if: inputs.buildRelease == 'true'
+        name: Creating a Release build trace.
+        shell: bash
+        working-directory: ${{github.workspace}}/CI
+        run: python ninjatracing.py ../build-release/.ninja_log > trace-release.json
         
-      #- if: inputs.buildDebug == 'true'
-      #  name: Uploading a Debug build trace artifact.
-      #  uses: actions/upload-artifact@v3
-      #  with:
-      #    name: 'SREngine Debug Linux Build Trace Artifact'
-      #    path: '${{github.workspace}}/CI/trace-debug.json'
+      - if: inputs.buildDebug == 'true'
+        name: Uploading a Debug build trace artifact.
+        uses: actions/upload-artifact@v3
+        with:
+          name: 'SREngine Debug Linux Build Trace Artifact'
+          path: '${{github.workspace}}/CI/trace-debug.json'
          
-      #- if: inputs.buildRelease == 'true'
-      #  name: Uploading a Release build trace artifact.
-      #  uses: actions/upload-artifact@v3
-      #  with:
-      #    name: 'SREngine Release Linux Build Trace Artifact'
-      #    path: '${{github.workspace}}/CI/trace-release.json'
+      - if: inputs.buildRelease == 'true'
+        name: Uploading a Release build trace artifact.
+        uses: actions/upload-artifact@v3
+        with:
+          name: 'SREngine Release Linux Build Trace Artifact'
+          path: '${{github.workspace}}/CI/trace-release.json'
 
-      #- if: env.debugSuccessful == 'true'
-      #  name: Creating Debug artifact.
-      #  working-directory: ${{github.workspace}}/build-debug/Engine
-      #  shell: bash
-      #  run: | 
-      #    mkdir SREngineDebugBuild
-      #    mkdir SREngineDebugBuild/Bin
-      #    cp SREngine SREngineDebugBuild/Bin
-      #    cd ../../
-      #    cp -r Resources build-debug/Engine/SREngineDebugBuild
+      - if: env.debugSuccessful == 'true'
+        name: Creating Debug artifact.
+        working-directory: ${{github.workspace}}/build-debug/Engine
+        shell: bash
+        run: |
+          mkdir SREngineDebugBuild
+          ls | grep "SREngine_" | xargs -I '{}' cp '{}' SREngineDebugBuild
 
-      #- if: env.releaseSuccessful == 'true'
-      #  name: Creating Release artifact.
-      #  working-directory: ${{github.workspace}}/build-release/Engine
-      #  shell: bash
-      #  run: | 
-      #    mkdir SREngineReleaseBuild
-      #    mkdir SREngineReleaseBuild/Bin
-      #    cp SREngine SREngineDebugBuild/Bin
-      #    cd ../../
-      #    cp -r Resources build-release/Engine/SREngineReleaseBuild
-      #  
-      #- if: env.debugSuccessful == 'true'
-      #  name: Uploading a successful Debug build artifact.
-      #  uses: actions/upload-artifact@v3
-      #  with:
-      #    name: SREngine Linux Debug
-      #    path: '${{github.workspace}}/build-debug/Engine/SREngineDebugBuild'
+      - if: env.releaseSuccessful == 'true'
+        name: Creating Release artifact.
+        working-directory: ${{github.workspace}}/build-release/Engine
+        shell: bash
+        run: |
+          mkdir SREngineReleaseBuild
+          ls | grep "SREngine_" | xargs -I '{}' cp '{}' SREngineReleaseBuild
 
-      #- if: env.releaseSuccessful == 'true'
-      #  name: Uploading a successful Release build artifact.
-      #  uses: actions/upload-artifact@v3
-      #  with:
-      #    name: SREngine Linux Release
-      #    path: '${{github.workspace}}/build-release/Engine/SREngineReleaseBuild'
+      - if: env.debugSuccessful == 'true'
+        name: Uploading a successful Debug build artifact.
+        uses: actions/upload-artifact@v3
+        with:
+          name: SREngine Linux Debug
+          path: '${{github.workspace}}/build-debug/Engine/SREngineDebugBuild'
+      - if: env.releaseSuccessful == 'true'
+        name: Uploading a successful Release build artifact.
+        uses: actions/upload-artifact@v3
+        with:
+          name: SREngine Linux Release
+          path: '${{github.workspace}}/build-release/Engine/SREngineReleaseBuild'
 
-      #- if: env.debugSuccessful == 'false' || inputs.artifactPush == 'true'
-      #  name: Uploading a failed Debug build artifact.
-      #  uses: actions/upload-artifact@v3
-      #  with:
-      #    name: 'SREngine Linux Failed Debug'
-      #   path: '${{github.workspace}}/build-debug'
+      - if: env.debugSuccessful == 'false' || inputs.artifactPush == 'true'
+        name: Uploading a failed Debug build artifact.
+        uses: actions/upload-artifact@v3
+        with:
+          name: 'SREngine Linux Failed Debug'
+          path: '${{github.workspace}}/build-debug'
 
-      #- if: env.releaseSuccessful == 'false' || inputs.artifactPush == 'true'
-      #  name: Uploading a failed Release build artifact.
-      #  uses: actions/upload-artifact@v3
-      #  with:
-      #    name: 'SREngine Linux Failed Release'
-      #    path: '${{github.workspace}}/build-release'
+      - if: env.releaseSuccessful == 'false' || inputs.artifactPush == 'true'
+        name: Uploading a failed Release build artifact.
+        uses: actions/upload-artifact@v3
+        with:
+          name: 'SREngine Linux Failed Release'
+          path: '${{github.workspace}}/build-release'

@@ -98,30 +98,16 @@ jobs:
         name: Creating Debug artifact.
         working-directory: ${{github.workspace}}/build-debug/Engine
         shell: cmd
-        run: | 
-          rename debug Bin
-          md SREngineDebugBuild
-          md SREngineDebugBuild/Resources
-          md SREngineDebugBuild/Bin
-          move Bin SREngineDebugBuild
-          copy SREngine.exe SREngineDebugBuild/Bin
-          cd ../../
-          move Resources build-debug/Engine/SREngineDebugBuild
+        run: |
+          mkdir SREngineReleaseBuild & for /f "delims=" %i in ('dir /b ^| findstr "SREngine_"') do copy "%i" SREngineDebugBuild
 
       - if: env.releaseSuccessful == 'true'
         name: Creating Release artifact.
         working-directory: ${{github.workspace}}/build-release/Engine
         shell: cmd
-        run: | 
-          rename release Bin
-          md SREngineReleaseBuild
-          md SREngineReleaseBuild/Resources
-          md SREngineReleaseBuild/Bin
-          move Bin SREngineReleaseBuild
-          copy SREngine.exe SREngineDebugBuild/Bin
-          cd ../../
-          move Resources build-release/Engine/SREngineReleaseBuild
-        
+        run: |
+          mkdir SREngineReleaseBuild & for /f "delims=" %i in ('dir /b ^| findstr "SREngine_"') do copy "%i" SREngineReleaseBuild      
+
       - if: env.debugSuccessful == 'true'
         name: Uploading a successful Debug build artifact.
         uses: actions/upload-artifact@v3
