@@ -34,8 +34,8 @@ namespace SR_CORE_NS::Resources {
 
         resourcesManager.RegisterReloader<SR_HTYPES_NS::RawMesh, SR_CORE_NS::GraphicsResourceReloader>(contextGetter);
         resourcesManager.RegisterReloader<SR_GTYPES_NS::Texture, SR_CORE_NS::GraphicsResourceReloader>(contextGetter);
-        resourcesManager.RegisterReloader<SR_GTYPES_NS::Material, SR_CORE_NS::GraphicsResourceReloader>(contextGetter);
         resourcesManager.RegisterReloader<SR_GTYPES_NS::Shader, SR_CORE_NS::GraphicsResourceReloader>(contextGetter);
+        resourcesManager.RegisterReloader<SR_GRAPH_NS::FileMaterial, SR_CORE_NS::GraphicsResourceReloader>(contextGetter);
 
         return true;
     }

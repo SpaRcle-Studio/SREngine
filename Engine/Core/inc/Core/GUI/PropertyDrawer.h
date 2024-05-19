@@ -5,7 +5,7 @@
 #ifndef SR_ENGINE_CORE_PROPERTY_DRAWER_H
 #define SR_ENGINE_CORE_PROPERTY_DRAWER_H
 
-#include <Graphics/Types/Material.h>
+#include <Graphics/Material/BaseMaterial.h>
 
 namespace SR_CORE_GUI_NS {
     class EditorGUI;

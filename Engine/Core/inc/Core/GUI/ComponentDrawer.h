@@ -23,6 +23,7 @@ namespace SR_ANIMATIONS_NS {
 }
 
 namespace SR_GRAPH_NS {
+    class BaseMaterial;
     namespace UI {
         class Anchor;
         class Canvas;
@@ -33,7 +34,6 @@ namespace SR_GTYPES_NS {
     class Camera;
     class Mesh3D;
     class SkinnedMesh;
-    class Material;
     class ProceduralMesh;
     class ITextComponent;
     class Sprite;
@@ -70,7 +70,7 @@ namespace SR_CORE_NS::GUI::ComponentDrawer {
     void DrawComponent(SR_GRAPH_NS::Types::Mesh3D*& mesh3d, EditorGUI* context, int32_t index);
     void DrawComponent(SR_GRAPH_NS::Types::SkinnedMesh*& pComponent, EditorGUI* context, int32_t index);
     void DrawComponent(SR_GRAPH_NS::Types::ProceduralMesh*& proceduralMesh, EditorGUI* context, int32_t index);
-    void DrawComponent(SR_GRAPH_NS::Types::Material*& material, EditorGUI* context, int32_t index);
+    void DrawComponent(SR_GRAPH_NS::BaseMaterial*& material, EditorGUI* context, int32_t index);
     void DrawComponent(SR_GTYPES_NS::Sprite*& sprite, EditorGUI* context, int32_t index);
     void DrawComponent(SR_GRAPH_NS::UI::Anchor*& anchor, EditorGUI* context, int32_t index);
     void DrawComponent(SR_GRAPH_NS::UI::Canvas*& canvas, EditorGUI* context, int32_t index);
@@ -82,7 +82,7 @@ namespace SR_CORE_NS::GUI::ComponentDrawer {
 
     void DrawComponent(SR_PTYPES_NS::Rigidbody*& pComponent, EditorGUI* context, int32_t index);
     void DrawCollisionShape(SR_PTYPES_NS::CollisionShape* pCollisionShape, EditorGUI* context, int32_t index);
-    void DrawMaterialProps(SR_GRAPH_NS::Types::Material* material, EditorGUI* context, int32_t index);
+    void DrawMaterialProps(SR_GRAPH_NS::BaseMaterial* material, EditorGUI* context, int32_t index);
 
     void DrawComponent(SR_GTYPES_NS::ITextComponent* pComponent, EditorGUI* context, int32_t index);
 

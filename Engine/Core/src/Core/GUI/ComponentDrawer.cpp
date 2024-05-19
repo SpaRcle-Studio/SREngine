@@ -36,7 +36,7 @@
 #include <Graphics/GUI/Utils.h>
 #include <Graphics/Types/Texture.h>
 #include <Graphics/Types/Geometry/Sprite.h>
-#include <Graphics/Types/Material.h>
+#include <Graphics/Material/FileMaterial.h>
 #include <Graphics/Types/Camera.h>
 #include <Graphics/UI/Anchor.h>
 #include <Graphics/UI/Canvas.h>
@@ -220,7 +220,7 @@ namespace SR_CORE_NS::GUI {
 
         ImGui::Separator();
 
-        SR_GTYPES_NS::Material* copy = pMaterial;
+        SR_GRAPH_NS::BaseMaterial* copy = pMaterial;
         DrawComponent(copy, context, index);
 
         /// компилятор считает, что это недостижимый код (он ошибается)
@@ -281,16 +281,15 @@ namespace SR_CORE_NS::GUI {
 
         ImGui::Separator();
 
-        SR_GTYPES_NS::Material* copy = pMaterial;
+        SR_GRAPH_NS::BaseMaterial* copy = pMaterial;
         DrawComponent(copy, context, index);
 
-        /// компилятор считает, что это недостижимый код (он ошибается)
         if (copy != pMaterial) {
             pComponent->SetMaterial(copy);
         }
     }
 
-    void ComponentDrawer::DrawComponent(SR_GTYPES_NS::Material *&material, EditorGUI* context, int32_t index) {
+    void ComponentDrawer::DrawComponent(SR_GRAPH_NS::BaseMaterial*& material, EditorGUI* context, int32_t index) {
         if (material) {
             ImGui::Separator();
 
@@ -302,7 +301,7 @@ namespace SR_CORE_NS::GUI {
                     auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesFolder, { { "Material", "mat" } });
 
                     if (path.Exists()) {
-                        if (auto&& pMaterial = SR_GTYPES_NS::Material::Load(path)) {
+                        if (auto&& pMaterial = SR_GRAPH_NS::FileMaterial::Load(path)) {
                             material = pMaterial;
                             return;
                         }
@@ -313,11 +312,13 @@ namespace SR_CORE_NS::GUI {
             ImGui::SameLine();
             ImGui::BeginGroup();
 
-            Graphics::GUI::DrawValue("Material", material->GetResourceId(), index);
-
-            if (auto &&shader = material->GetShader()) {
-                //Graphics::GUI::DrawValue("Shader", shader->GetName());
+            if (auto&& pFileMaterial = dynamic_cast<SR_GRAPH_NS::FileMaterial*>(material)) {
+                Graphics::GUI::DrawValue("Material", pFileMaterial->GetResourceId(), index);
             }
+
+            //if (auto &&shader = material->GetShader()) {
+                //Graphics::GUI::DrawValue("Shader", shader->GetName());
+            //}
 
             ImGui::EndGroup();
 
@@ -325,7 +326,7 @@ namespace SR_CORE_NS::GUI {
         }
     }
 
-    void ComponentDrawer::DrawMaterialProps(SR_GTYPES_NS::Material* material, EditorGUI* pEditor, int32_t index) {
+    void ComponentDrawer::DrawMaterialProps(SR_GRAPH_NS::BaseMaterial* material, EditorGUI* pEditor, int32_t index) {
         SR_CORE_GUI_NS::DrawPropertyContext context;
         context.pEditor = pEditor;
         SR_CORE_GUI_NS::DrawPropertyContainer(context, &material->GetProperties());
@@ -407,7 +408,6 @@ namespace SR_CORE_NS::GUI {
         SR_GTYPES_NS::Material* copy = pMaterial;
         DrawComponent(copy, context, index);
 
-        /// компилятор считает, что это недостижимый код (он ошибается)
         if (copy != pMaterial) {
             pComponent->SetMaterial(copy);
         }*/
@@ -480,7 +480,7 @@ namespace SR_CORE_NS::GUI {
 
         auto&& pMaterial = pComponent->GetMaterial();
 
-        SR_GTYPES_NS::Material* copy = pMaterial;
+        SR_GRAPH_NS::BaseMaterial* copy = pMaterial;
         DrawComponent(copy, context, index);
 
         /// компилятор считает, что это недостижимый код (он ошибается)

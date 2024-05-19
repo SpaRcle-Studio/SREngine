@@ -12,7 +12,7 @@
 #include <Graphics/Render/RenderScene.h>
 #include <Graphics/Animations/Skeleton.h>
 #include <Graphics/Types/Geometry/SkinnedMesh.h>
-#include <Graphics/Types/Material.h>
+#include <Graphics/Material/FileMaterial.h>
 
 #include <Physics/PhysicsLib.h>
 #include <Physics/LibraryImpl.h>
@@ -35,13 +35,13 @@ namespace SR_CORE_NS {
 
                 if (auto&& pMesh = SR_GTYPES_NS::Mesh::Load(pRawMesh->GetResourcePath(), meshType, node->mMeshes[i])) {
                     if (countBones > 256) {
-                        pMesh->SetMaterial(SR_GTYPES_NS::Material::Load("Engine/Materials/skinned-384.mat"));
+                        pMesh->SetMaterial(SR_GRAPH_NS::FileMaterial::Load("Engine/Materials/skinned-384.mat"));
                     }
                     else if (countBones > 128) {
-                        pMesh->SetMaterial(SR_GTYPES_NS::Material::Load("Engine/Materials/skinned-256.mat"));
+                        pMesh->SetMaterial(SR_GRAPH_NS::FileMaterial::Load("Engine/Materials/skinned-256.mat"));
                     }
                     else if (countBones > 0) {
-                        pMesh->SetMaterial(SR_GTYPES_NS::Material::Load("Engine/Materials/skinned.mat"));
+                        pMesh->SetMaterial(SR_GRAPH_NS::FileMaterial::Load("Engine/Materials/skinned.mat"));
                     }
 
                     ptr->AddComponent(dynamic_cast<SR_UTILS_NS::Component*>(pMesh));
