@@ -57,7 +57,7 @@ jobs:
         working-directory: ${{github.workspace}}/build-release
         run: |
           echo "releaseSuccessful=false" >> "$GITHUB_ENV"
-          cmake -G "Ninja" ../ -DCMAKE_BUILD_TYPE=Release "-DCMAKE_MAKE_PROGRAM=${{github.workspace}}/../ninja/ninja.exe" 
+          cmake -G "Ninja" ../ -DCMAKE_BUILD_TYPE=Release "-DCMAKE_MAKE_PROGRAM=${{github.workspace}}/ninja-build/ninja.exe" 
           cmake --build . -j 4
           echo "releaseSuccessful=true" >> "$GITHUB_ENV"
 
@@ -67,7 +67,7 @@ jobs:
         working-directory: ${{github.workspace}}/build-debug
         run: |
           echo "debugSuccessful=false" >> "$GITHUB_ENV"
-          cmake -G "Ninja" ../ -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=${{github.workspace}}/../ninja/ninja.exe" 
+          cmake -G "Ninja" ../ -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=${{github.workspace}}/ninja-build/ninja.exe" 
           cmake --build . -j 4
           echo "debugSuccessful=true" >> "$GITHUB_ENV"
           
