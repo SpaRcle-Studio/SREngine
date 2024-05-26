@@ -38,10 +38,13 @@ jobs:
         run: git submodule --quiet update --init --recursive --depth 1 --jobs 4
 
       - name: Installing Ninja.
-        uses: ashutoshvarma/setup-ninja@v1.1
-        with:
-          version: '1.10.2'
-          dest: '${{github.workspace}}/../ninja'
+        uses: seanmiddleditch/gha-setup-ninja@master
+
+      #- name: Installing Ninja.
+      #  uses: ashutoshvarma/setup-ninja@v1.1
+      #  with:
+      #    version: '1.10.2'
+      #    dest: '${{github.workspace}}/../ninja'
 
       - name: Creating Building Environment.
         run: |
