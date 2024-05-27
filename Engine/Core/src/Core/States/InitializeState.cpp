@@ -45,6 +45,10 @@ namespace SR_CORE_NS {
 
                 pWindowImpl->Move(position.x, position.y);
 
+                if (!resolution.HasZero()) {
+                    pWindowImpl->Resize(resolution.x, resolution.y);
+                }
+
                 if (isMaximized) {
                     pWindowImpl->Maximize();
                 }

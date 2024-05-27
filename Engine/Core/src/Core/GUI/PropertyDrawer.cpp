@@ -3,6 +3,7 @@
 //
 
 #include <Core/GUI/PropertyDrawer.h>
+#include <Graphics/Material/UniqueMaterial.h>
 
 namespace SR_CORE_GUI_NS {
     bool DrawMaterialProperty(const DrawPropertyContext& context, SR_GRAPH_NS::MaterialProperty* pProperty) {
@@ -88,6 +89,121 @@ namespace SR_CORE_GUI_NS {
                 ImGui::Separator();
             }
         }, data);
+
+        return true;
+    }
+
+    bool DrawMeshMaterialProperty(const DrawPropertyContext& context, SR_GRAPH_NS::MeshMaterialProperty* pProperty) {
+        ImGui::Separator();
+        SR_GRAPH_GUI_NS::DrawTextOnCenter("Material");
+        ImGui::Separator();
+
+        static auto pickFileMaterialFn = []() -> SR_GRAPH_NS::FileMaterial* {
+            auto&& resourcesFolder = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
+            auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesFolder,  { { "Material", "mat" } });
+
+            if (!path.IsEmpty()) {
+                return SR_GRAPH_NS::FileMaterial::Load(path);
+            }
+            return nullptr;
+        };
+
+        static auto pickShaderFn = []() -> SR_GTYPES_NS::Shader* {
+            auto&& resourcesFolder = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
+            auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesFolder,  { { "Shader", "srsl" } });
+
+            if (!path.IsEmpty()) {
+                return SR_GTYPES_NS::Shader::Load(path);
+            }
+            return nullptr;
+        };
+
+        static const std::string materialClipboard = "SR_MATERIAL_CLIPBOARD";
+
+        if (SR_GRAPH_GUI_NS::Button("Copy", (void*)pProperty)) {
+            SR_HTYPES_NS::Marshal marshal;
+            pProperty->SaveProperty(marshal);
+            SR_PLATFORM_NS::TextToClipboard(materialClipboard + marshal.ToBase64());
+        }
+
+        ImGui::SameLine();
+
+        if (SR_GRAPH_GUI_NS::Button("Paste", (void*)pProperty)) {
+            if (std::string text = SR_PLATFORM_NS::GetClipboardText(); text.find(materialClipboard) == 0) {
+                text.erase(0, materialClipboard.size());
+                auto&& marshal = SR_HTYPES_NS::Marshal::LoadFromBase64(text);
+                pProperty->LoadProperty(marshal);
+            }
+        }
+
+        SR_GRAPH_GUI_NS::EnumCombo<SR_GRAPH_NS::MaterialType>("Type", pProperty->GetMaterialType(), [pProperty](auto&& value) {
+            switch (value) {
+                case SR_GRAPH_NS::MaterialType::File: {
+                    pProperty->SetMaterial(pickFileMaterialFn());
+                    break;
+                }
+                case SR_GRAPH_NS::MaterialType::Unique: {
+                    pProperty->SetMaterial(new SR_GRAPH_NS::UniqueMaterial());
+                    break;
+                }
+                case SR_GRAPH_NS::MaterialType::None:
+                default:
+                    pProperty->SetMaterial(nullptr);
+                    break;
+            }
+        }, (void*)pProperty);
+
+        switch (pProperty->GetMaterialType()) {
+            case Graphics::MaterialType::None:
+                break;
+            case Graphics::MaterialType::File: {
+                if (ImGui::Button(SR_FORMAT_C("Pick##Material{}", static_cast<void*>(pProperty)))) {
+                    if (auto&& pNewMaterial = pickFileMaterialFn()) {
+                        pProperty->SetMaterial(pNewMaterial);
+                    }
+                    return true;
+                }
+
+                ImGui::SameLine();
+
+                auto&& pFileMaterial = SR_UTILS_NS::PolymorphicCast<SR_GRAPH_NS::FileMaterial>(pProperty->GetMaterial());
+                std::string path = pFileMaterial->GetResourcePath().ToStringRef();
+                if (ImGui::InputText(SR_FORMAT_C("Material##{}", static_cast<void*>(pProperty)), &path, ImGuiInputTextFlags_EnterReturnsTrue)) {
+                    pProperty->SetMaterial(path);
+                }
+                break;
+            }
+            default:
+                break;
+        }
+
+        if (auto&& pMaterial = pProperty->GetMaterial()) {
+            static auto setShaderFn = [](SR_GRAPH_NS::BaseMaterial* pMaterial, SR_GTYPES_NS::Shader* pShader) {
+                if (pMaterial && pShader) {
+                    SR_HTYPES_NS::Marshal marshal;
+                    pMaterial->GetProperties().SaveProperty(marshal);
+                    marshal.SetPosition(0);
+                    pMaterial->SetShader(pShader);
+                    pMaterial->GetProperties().LoadProperty(marshal);
+                }
+            };
+
+            if (ImGui::Button(SR_FORMAT_C("Pick##Shader{}", static_cast<void*>(pProperty)))) {
+                setShaderFn(pMaterial, pickShaderFn());
+            }
+
+            ImGui::SameLine();
+
+            auto pShader = pProperty->GetMaterial()->GetShader();
+            std::string shaderPath = pShader ? pShader->GetResourcePath().ToStringRef() : "";
+            if (ImGui::InputText(SR_FORMAT_C("Shader##{}", "Shader", static_cast<void*>(pProperty)), &shaderPath, ImGuiInputTextFlags_EnterReturnsTrue)) {
+                if (pShader = SR_GTYPES_NS::Shader::Load(shaderPath); pShader) {
+                    setShaderFn(pMaterial, pShader);
+                }
+            }
+
+            DrawProperty(context, &pMaterial->GetProperties());
+        }
 
         return true;
     }
@@ -266,6 +382,9 @@ namespace SR_CORE_GUI_NS {
         else if (auto&& pLabelProperty = dynamic_cast<SR_UTILS_NS::LabelProperty*>(pProperty)) {
             return DrawLabelProperty(context, pLabelProperty);
         }
+        else if (auto&& pMeshMaterialProperty = dynamic_cast<SR_GRAPH_NS::MeshMaterialProperty*>(pProperty)) {
+            return DrawMeshMaterialProperty(context, pMeshMaterialProperty);
+        }
         else if (auto&& pExternalProperty = dynamic_cast<SR_UTILS_NS::ExternalProperty*>(pProperty)) {
             if (auto&& getter = pExternalProperty->GetPropertyGetter()) {
                 return DrawProperty(context, getter());
@@ -284,8 +403,8 @@ namespace SR_CORE_GUI_NS {
 
     bool DrawPropertyContainer(const DrawPropertyContext& context, const SR_UTILS_NS::PropertyContainer* pProperties) {
         bool isRendered = false;
-        for (auto&& pProperty : pProperties->GetProperties()) {
-            isRendered |= DrawProperty(context, pProperty);
+        for (auto&& propertyInfo : pProperties->GetProperties()) {
+            isRendered |= DrawProperty(context, propertyInfo.pProperty);
         }
         return isRendered;
     }

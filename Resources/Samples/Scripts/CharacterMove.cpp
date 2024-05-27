@@ -25,6 +25,10 @@ public:
     }
 
     void FixedUpdate() override {
+        if (!gameObject) {
+            return;
+        }
+
         auto&& pRigidbody3D = DynamicCastComponentToRigidbody3D(gameObject->GetComponent("Rigidbody3D"));
 
         if (!transform || !pRigidbody3D) {

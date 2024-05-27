@@ -96,7 +96,7 @@ namespace SR_CORE_NS::GUI {
                 path = pBehaviour->GetRawBehaviour()->GetResourcePath();
             }
 
-            if (SR_GRAPH_GUI_NS::Button(path.ToStringRef(), index) && !path.IsEmpty()) {
+            if (SR_GRAPH_GUI_NS::Button(path.ToStringRef(), (void*)pBehaviour) && !path.IsEmpty()) {
                 auto&& resourceDirectory = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
                 auto&& scriptPath = resourceDirectory.Concat(path);
                 if (!scriptPath.IsEmpty()) {
@@ -499,7 +499,7 @@ namespace SR_CORE_NS::GUI {
             pComponent->SetDebugEnabled(debug);
         }
 
-        if (Graphics::GUI::Button("Import", index)) {
+        if (Graphics::GUI::Button("Import", (void*)pComponent)) {
             auto&& resourcesFolder = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
             auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesFolder, { { "Mesh with skeleton", "fbx,pmx,blend,gltf" } });
 
