@@ -55,8 +55,8 @@ namespace SR_CORE_GUI_NS {
                         auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(texturesPath, { { "Images", "png,jpg,bmp,tga" } });
 
                         if (path.Exists()) {
-                            if (auto&& texture = SR_GTYPES_NS::Texture::Load(path)) {
-                                pProperty->GetMaterial()->SetTexture(pProperty, texture);
+                            if (auto&& pTexture = SR_GTYPES_NS::Texture::Load(path)) {
+                                pProperty->SetData(pTexture);
                             }
                         }
                     }
@@ -79,9 +79,10 @@ namespace SR_CORE_GUI_NS {
                 std::string id = value ? std::string(value->GetResourceId()) : std::string();
 
                 if (ImGui::InputText(SR_FORMAT_C("##texture{}", (void*)pProperty), &id, ImGuiInputTextFlags_EnterReturnsTrue | ImGuiInputTextFlags_NoUndoRedo)) {
-                    auto&& texture = SR_GTYPES_NS::Texture::Load(id);
-                    pProperty->GetMaterial()->SetTexture(pProperty, texture);
-                    value = texture;
+                    if (auto&& pTexture = SR_GTYPES_NS::Texture::Load(id)) {
+                        pProperty->SetData(pTexture);
+                        value = pTexture;
+                    }
                 }
 
                 ImGui::EndGroup();
