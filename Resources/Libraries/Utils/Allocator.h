@@ -13,7 +13,7 @@ void* operator new(size_t sz) {
     return ESMemoryAlloc(sz);
 }
 
-void operator delete(void* ptr) {
+void operator delete(void* ptr) noexcept {
     ESMemoryFree(ptr);
 }
 
@@ -21,7 +21,7 @@ void* operator new[](size_t sz) {
     return ESMemoryAlloc(sz);
 }
 
-void operator delete[](void* ptr) {
+void operator delete[](void* ptr) noexcept {
     ESMemoryFree(ptr);
 }
 
@@ -40,10 +40,12 @@ void operator delete[](void* ptr) {
 #include <memory>
 #include <ctype.h>
 
+#define SR_INLINE inline
+
 #if defined(SR_ANDROID)
     #define SR_FASTCALL
     #define SR_FORCE_INLINE SR_INLINE
-#elif defined(SR_GCC)
+#elif defined(SR_LINUX)
     #define SR_FASTCALL
     #define SR_FORCE_INLINE SR_INLINE
 #else
@@ -58,8 +60,6 @@ void operator delete[](void* ptr) {
 
 #define SR_DLL_EXPORT
 #define SR_NODISCARD [[nodiscard]]
-#define SR_INLINE inline
-#define SR_FORCE_INLINE __forceinline
 
 #define SR_NEW_SAFE_PTR() { }
 #define SR_DEL_SAFE_PTR() { }
