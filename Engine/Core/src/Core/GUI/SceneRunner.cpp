@@ -114,7 +114,7 @@ namespace SR_CORE_NS::GUI {
     bool SceneRunner::PlayScene() {
         SR_LOCK_GUARD;
 
-        SR_LOG("SceneRunner::PlayScene() : play scene \"" + m_lastPath.ToString() + "\"");
+        SR_LOG("SceneRunner::PlayScene() : playing scene \"" + m_lastPath.ToString() + "\"");
 
         if (!m_scene->Save()) {
             SR_ERROR("SceneRunner::PlayScene() : failed to save scene!");
@@ -133,7 +133,7 @@ namespace SR_CORE_NS::GUI {
             }
         }
 
-        SR_LOG("SceneRunner::PlayScene() : copy scene: \n\tFrom: " + m_scene->GetPath().ToString() + "\n\tTo: " + runtimePath.ToString());
+        SR_LOG("SceneRunner::PlayScene() : copying scene: \n\tFrom: " + m_scene->GetAbsPath().ToString() + "\n\tTo: " + runtimePath.ToString());
 
         if (!m_scene->GetAbsPath().GetFolder().Copy(runtimePath)) {
             SR_ERROR("SceneRunner::PlayScene() : failed to copy scene!\n\tSource: "
@@ -150,7 +150,7 @@ namespace SR_CORE_NS::GUI {
     }
 
     void SceneRunner::ReturnScene() {
-        SR_LOG("SceneRunner::ReturnScene() : stop scene \"" + m_lastPath.ToString() + "\"");
+        SR_LOG("SceneRunner::ReturnScene() : stopping scene \"" + m_lastPath.ToString() + "\"");
 
         auto&& originalScene = SR_WORLD_NS::Scene::Load(m_scenePath);
         auto&& pEngine = dynamic_cast<EditorGUI*>(GetManager())->GetEngine();
