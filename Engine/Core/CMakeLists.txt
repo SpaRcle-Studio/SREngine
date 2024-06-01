@@ -57,6 +57,7 @@ AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Engine/Configs/Features.xml")
 
 if (WIN32)
     AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Engine/Utilities/git2.exe")
+    AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Engine/Utilities/vswhere.exe")
 elseif (UNIX)
     AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Engine/Utilities/git2")
 endif()
