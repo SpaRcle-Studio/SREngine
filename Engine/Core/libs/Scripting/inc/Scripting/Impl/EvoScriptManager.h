@@ -29,9 +29,13 @@ namespace SR_SCRIPTING_NS {
 
         void OnSingletonDestroy() override;
 
+        void FindMSVCCompiler();
+
     private:
         ScirptsMap m_scripts;
         std::optional<ScirptsMap::iterator> m_checkIterator;
+
+        std::string m_compilerPath = "";
 
     };
 }
