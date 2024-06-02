@@ -55,6 +55,9 @@ float filterPCF(vec4 sc, uint cascadeIndex) {
 
 void fragment() {
     vec3 diffuseColor = texture(diffuse, UV).rgb * color.rgb;
+    if (texture(diffuse, UV).a == 0.0) {
+        discard;
+    }
 
     uint cascadeIndex = 0;
 
