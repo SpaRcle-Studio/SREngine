@@ -136,7 +136,7 @@ namespace SR_SCRIPTING_NS {
         Singleton::OnSingletonDestroy();
     }
 
-    std::string& EvoScriptManager::FindMSVCCompiler() {
+    std::string EvoScriptManager::FindMSVCCompiler() {
         auto&& resourceDirectory = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
         auto&& vswherePath = resourceDirectory.Concat("Engine/Utilities/vswhere.exe");
         std::string command = vswherePath.ToStringRef() + " -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -find VC/Tools/MSVC/**/bin/Hostx64/x64/cl.exe";
