@@ -29,7 +29,7 @@ namespace SR_SCRIPTING_NS {
 
         void OnSingletonDestroy() override;
 
-        void FindMSVCCompiler();
+        std::string& FindMSVCCompiler();
 
     private:
         ScirptsMap m_scripts;
