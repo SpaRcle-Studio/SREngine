@@ -28,12 +28,12 @@ jobs:
           wget -qO- https://packages.lunarg.com/lunarg-signing-key-pub.asc | sudo tee /etc/apt/trusted.gpg.d/lunarg.asc
           sudo wget -qO /etc/apt/sources.list.d/lunarg-vulkan-jammy.list http://packages.lunarg.com/vulkan/lunarg-vulkan-jammy.list
           sudo apt update
-          sudo apt-get install -y ${{ env.dependencies }}
+          sudo apt-get install -y $DEPENDENCIES
           sudo apt-get install -y ninja-build
           sudo pip install numpy
           sudo pip install clang
         env:
-          dependencies: ${{ vars.UBUNTU_DEPENDENCIES }}
+          DEPENDENCIES: ${{ vars.UBUNTU_DEPENDENCIES }}
 
       - name: Updating submodules.
         run: git submodule --quiet update --init --recursive --depth 1 --jobs 4
