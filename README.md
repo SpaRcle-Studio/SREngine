@@ -142,3 +142,13 @@ It aims to establish a strong base for game creation and is currently in the ear
     The ability to create endless procedurally generated worlds is provided 
     wtih a system that divides the world into regions and chunks.
  </details>
+
+
+ # Contributors 
+ <a href="https://github.com/SpaRcle-Studio/SREngine/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=SpaRcle-Studio/SREngine" />
+</a>
+
+## Star History 📈
+
+[![Star History Chart](https://api.star-history.com/svg?repos=SpaRcle-Studio/SREngine&type=Date)](https://star-history.com/#SpaRcle-Studio/SREngine&Date)
