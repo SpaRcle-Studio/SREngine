@@ -1,4 +1,4 @@
-print("Issues.py script is running...")
+print("CloseMacro.py script is running...")
 
 try:
     import os
