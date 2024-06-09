@@ -28,6 +28,10 @@ namespace SR_SCRIPTING_NS {
         }
     }
 
+    EvoScript::AddressTableGen* EvoCompiler::GetGenerator() const {
+        return m_generator;
+    }
+
     bool EvoCompiler::Init() {
         SR_INFO("EvoCompiler::Init() : initializing compiler...");
 
