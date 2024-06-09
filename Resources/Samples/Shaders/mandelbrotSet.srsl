@@ -1,0 +1,103 @@
+ShaderType PostProcessing;
+
+PolygonMode Fill;
+CullMode Back;
+DepthCompare LessOrEqual;
+PrimitiveTopology TriangleStrip;
+BlendEnabled true;
+DepthWrite false;
+DepthTest true;
+
+[[shared]] vec2 UV;
+[[shared]] vec3 VERTEX;
+
+[[const]] float speed = 0.001;
+
+float mandelbrot(vec2 c) {
+    float B = 256.0;
+    float l = 0.0;
+    //c = vec2(50.0, 100.0)
+    vec2 z  = vec2(0.0);
+    for (int i=0; i<512; i++ ) {
+        z = vec2( z.x*z.x - z.y*z.y, 2.0*z.x*z.y ) + c;
+
+        if( dot(z,z)>(B*B) ) {
+            break;
+        }
+
+        l += 1.0;
+    }
+
+    if( l>511.0 ) {
+        return 0.0;
+    }
+
+    float sl = l - log2(log2(dot(z,z))) + 4.0;
+
+    float al = smoothstep( -0.1, 0.0, sin(0.5*6.2831* TIME * speed ) );
+    l = mix( l, sl, al );
+
+    return l;
+}
+
+void fragment() {
+    vec3 col = vec3(0.0);
+
+    //vec2 res = vec2(RESOLUTION / 1000);
+    //vec2 scale = vec2(1.0);
+    //vec2 res = vec2(1.0 * (1.0 / aspect), 1.0);
+
+    vec2 res;
+    float aspect = RESOLUTION.x / RESOLUTION.y;
+
+    if (aspect > 1.0) {
+        res = vec2(aspect, 1.0);
+    } else {
+        res = vec2(1.0, 1.0 / aspect);
+    }
+
+    vec2 p = (-res.xy + 2.0*UV.xy)/res.y;
+    //float time = 1.0;
+    float time = TIME * speed;
+
+    float zoo = 0.62 + 0.38*cos(0.07*time);
+    float coa = cos( 0.15*(1.0-zoo)*time );
+    float sia = sin( 0.15*(1.0-zoo)*time );
+    zoo = pow( zoo,8.0);
+    vec2 xy = vec2( p.x*coa-p.y*sia, p.x*sia+p.y*coa);
+    vec2 c = vec2(-0.745, 0.186) + xy*zoo;
+
+    float l = mandelbrot(c);
+
+    col += 0.5 + 0.5 *  cos(3.0 + l*0.15 + vec3(0.0,0.6,1.0));
+
+    COLOR = vec4(col, 1.0);
+}
+
+void vertex() {
+    vec3 vertices[4] = {
+        vec3(-1.0,  1.0, 0.0),
+        vec3(-1.0, -1.0, 0.0),
+        vec3( 1.0,  1.0, 0.0),
+        vec3( 1.0, -1.0, 0.0),
+    };
+
+    /*vec2 uv[4] = {
+        vec2(0.0, 1.0),
+        vec2(0.0, 0.0),
+        vec2(1.0, 1.0),
+        vec2(1.0, 0.0),
+    };*/
+
+    vec2 uv[4] = {
+            vec2(1.0, 0.0),
+            vec2(1.0, 1.0),
+            vec2(0.0, 0.0),
+            vec2(0.0, 1.0),
+    };
+
+    UV = uv[VERTEX_INDEX];
+    VERTEX = vertices[VERTEX_INDEX];
+
+    OUT_POSITION = vec4(VERTEX, 1.0);
+}

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<Technique Name="RayMarching">
+    <Include Path="Engine/Passes/SceneViewFBOController.xml"/>
+    <FramebufferPass Name="SceneView">
+        <FramebufferSettings Name="SceneViewFBO">
+            <Layer R="0.0" G="0.0" B="0.0" A="0.0"/>
+        </FramebufferSettings>
+        <Passes>
+            <ClearBuffersPass/>
+            <PostProcessPass Shader="Samples/Shaders/srsl-test.srsl" Vertices="4"/>
+        </Passes>
+    </FramebufferPass>
+    <Queues>
+        <Queue>
+            <Pass Name="SceneView"/>
+        </Queue>
+    </Queues>
+</Technique>
