@@ -7,7 +7,7 @@
 
 #include <Scripting/Base/Compiler.h>
 
-#include <Utils/Xml.h>
+#include <Utils/Resources/Xml.h>
 #include <EvoScript/Script.h>
 #include <EvoScript/Compilation/Compiler.h>
 #include <EvoScript/Compilation/AddressTableGen.h>

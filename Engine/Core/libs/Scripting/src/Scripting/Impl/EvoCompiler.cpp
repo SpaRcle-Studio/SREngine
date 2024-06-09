@@ -6,7 +6,7 @@
 #include <Utils/FileSystem/FileSystem.h>
 #include <Utils/FileSystem/Path.h>
 #include <Utils/Platform/Platform.h>
-#include <Utils/Xml.h>
+#include <Utils/Resources/Xml.h>
 #include <Utils/Common/Features.h>
 
 #include <Scripting/Impl/EvoCompiler.h>

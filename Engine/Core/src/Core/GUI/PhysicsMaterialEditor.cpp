@@ -4,7 +4,7 @@
 
 #include <Core/GUI/PhysicsMaterialEditor.h>
 
-#include <Utils/Xml.h>
+#include <Utils/Resources/Xml.h>
 #include <Utils/Resources/IResourceReloader.h>
 
 namespace SR_CORE_GUI_NS {
