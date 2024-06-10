@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<Technique Name="CascadedShadowMap">
+<Technique Name="Prefab">
     <Include Path="Engine/Passes/ColorBufferPass.xml"/>
     <Include Path="Engine/Passes/CascadedShadowMapPass.xml"/>
     <Include Path="Editor/Passes/DefaultSceneViewPass.xml"/>

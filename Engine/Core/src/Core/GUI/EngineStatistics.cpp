@@ -373,6 +373,9 @@ namespace SR_CORE_GUI_NS {
         int64_t priority = 0;
         SR_GTYPES_NS::Shader* pShader = nullptr;
 
+        ImGui::Separator();
+        ImGui::Text("Queue:");
+
         for (auto&& [layer, queue] : pRenderQueue->GetQueues()) {
             ImGui::Text("* Layer: %s", layer.c_str());
 
@@ -425,16 +428,6 @@ namespace SR_CORE_GUI_NS {
                 else if (SR_UTILS_NS::Math::IsMaskIncludedSubMask(meshInfo.state, SR_GRAPH_NS::RenderQueue::QUEUE_STATE_ERROR)) {
                     ImGui::SameLine();
                     ImGui::TextColored(ImVec4(1, 0, 1, 1), "Inactive");
-                }
-
-                if (SR_UTILS_NS::Math::IsMaskIncludedSubMask(meshInfo.state, SR_GRAPH_NS::RenderQueue::MESH_STATE_VBO_UPDATED)) {
-                    ImGui::SameLine();
-                    ImGui::TextColored(ImVec4(0, 0, 1, 1), "VBO");
-                }
-
-                if (SR_UTILS_NS::Math::IsMaskIncludedSubMask(meshInfo.state, SR_GRAPH_NS::RenderQueue::MESH_STATE_SHADER_UPDATED)) {
-                    ImGui::SameLine();
-                    ImGui::TextColored(ImVec4(0, 0, 1, 1), "Shader");
                 }
 
                 if (meshInfo.state == SR_GRAPH_NS::RenderQueue::QUEUE_STATE_OK) {
