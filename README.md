@@ -29,7 +29,7 @@ It aims to establish a strong base for game creation and is currently in the ear
 - [ ] Clang
 
 ## Supported platforms
-- [x] Windows 10
+- [x] Windows 10/11
 - [x] Linux X11
 - [ ] Linux Wayland
 - [ ] Android
