@@ -22,15 +22,15 @@ It aims to establish a strong base for game creation and is currently in the ear
 <img width="1920" alt="image_2023-05-31_21-40-59" src="https://github.com/Monika0000/SREngine/assets/47291246/32cfdbcb-5a0d-4a74-9501-539da40379e2">
 
 ## Supported compilers
-- [x] MSVC (Stable)
+- [x] MSVC (stable)
+- [x] GCC (stable)
 - [ ] MinGW
 - [ ] Cygwin
-- [x] Clang
-- [x] GCC (Stable)
+- [ ] Clang
 
 ## Supported platforms
 - [x] Windows 10
-- [ ] Linux X11 (in development)
+- [x] Linux X11
 - [ ] Linux Wayland
 - [ ] Android
 
