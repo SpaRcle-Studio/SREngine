@@ -101,4 +101,10 @@ It aims to establish a strong base for game creation and is currently in the ear
 
 ## Star History 📈
 
-[![Star History Chart](https://api.star-history.com/svg?repos=SpaRcle-Studio/SREngine&type=Date)](https://star-history.com/#SpaRcle-Studio/SREngine&Date)
+<a href="https://star-history.com/#SpaRcle-Studio/SREngine&Date">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=SpaRcle-Studio/SREngine&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=SpaRcle-Studio/SREngine&type=Date" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=SpaRcle-Studio/SREngine&type=Date" />
+ </picture>
+</a>
