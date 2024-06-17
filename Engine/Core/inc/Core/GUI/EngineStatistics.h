@@ -34,6 +34,7 @@ namespace SR_CORE_NS::GUI {
         void DrawSubmitInfo(const EvoVulkan::SubmitInfo& submitInfo);
         void DrawRenderTechnique(SR_GRAPH_NS::IRenderTechnique* pRenderTechnique);
         void DrawMeshDrawerPass(SR_GRAPH_NS::MeshDrawerPass* pMeshDrawerPass);
+        void DrawRenderQueue(const SR_GRAPH_NS::RenderQueue* pRenderQueue);
 
     private:
         const ImGuiTreeNodeFlags m_nodeFlagsWithChild = ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_OpenOnDoubleClick;

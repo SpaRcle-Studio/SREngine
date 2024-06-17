@@ -1,15 +1,15 @@
 <?xml version="1.0"?>
 <Technique Name="ShadowMap">
     <Include Path="Engine/Passes/CascadedShadowMapPass.xml"/>
-    <FrameBufferController Name="SceneViewFBO" DynamicResizing="true" DepthEnabled="true" SmoothSamples="0">
+    <FrameBufferController Name="GameSceneViewFBO" DynamicResizing="true" DepthEnabled="true" SmoothSamples="0">
         <Size X="0" Y="0"/>
         <PreScale X="1.0" Y="1.0"/>
         <Depth Format="Auto"/>
         <Layer Format="RGBA8_UNORM"/>
         <Features />
     </FrameBufferController>
-    <FramebufferPass Name="SceneView">
-        <FramebufferSettings Name="SceneViewFBO">
+    <FramebufferPass Name="GameSceneView">
+        <FramebufferSettings Name="GameSceneViewFBO">
             <Depth ClearValue="1.0"/>
             <Layer R="0.0" G="0.0" B="0.0" A="1.0"/>
         </FramebufferSettings>
@@ -36,8 +36,7 @@
     </FramebufferPass>
     <SwapchainPass R="0.0" G="0.0" B="0.0" A="1.0" Depth="1.0">
         <PostProcessPass Shader="Engine/Shaders/CascadedShadowMap/post_process.srsl">
-            <Sampler FBO="SceneViewFBO" Id="gAlbedo" Index="0"/>
-            <!--<Sampler Texture="Engine/Textures/uv.png" Id="gAlbedo"/>-->
+            <Sampler FBO="GameSceneViewFBO" Id="gAlbedo" Index="0"/>
         </PostProcessPass>
     </SwapchainPass>
     <Queues>
@@ -45,10 +44,12 @@
             <Pass Name="ShadowMap"/>
         </Queue>
         <Queue>
-            <Pass Name="SceneView"/>
+            <Pass Name="GameSceneView"/>
         </Queue>
         <Queue>
             <Pass Name="SwapchainPass"/>
         </Queue>
     </Queues>
 </Technique>
+<!--<Sampler Texture="Engine/Textures/uv.png" Id="gAlbedo"/>-->
+<!--<Sampler FBO="GameSceneViewFBO" Id="gAlbedo" Index="0"/>-->

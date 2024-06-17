@@ -363,11 +363,12 @@ namespace SR_CORE_GUI_NS {
     }
 
     void EngineStatistics::DrawMeshDrawerPass(SR_GRAPH_NS::MeshDrawerPass* pMeshDrawerPass) {
-        auto&& pRenderQueue = pMeshDrawerPass->GetRenderQueue();
-        if (!pRenderQueue) {
-            return;
+        for (auto&& pRenderQueue : pMeshDrawerPass->GetRenderQueues()) {
+            DrawRenderQueue(pRenderQueue.Get());
         }
+    }
 
+    void EngineStatistics::DrawRenderQueue(const SR_GRAPH_NS::RenderQueue* pRenderQueue) {
         bool first = true;
         uint32_t vbo = SR_ID_INVALID;
         int64_t priority = 0;
@@ -380,7 +381,6 @@ namespace SR_CORE_GUI_NS {
             ImGui::Text("* Layer: %s", layer.c_str());
 
             for (auto&& meshInfo : queue) {
-
                 if (first || priority != meshInfo.priority) {
                     priority = meshInfo.priority;
                     ImGui::Text("\t* Priority: %lli", priority);

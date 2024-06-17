@@ -151,7 +151,7 @@ namespace SR_PHYSICS_NS {
                 SRHalt("Unknown measurement of rigidbody!");
             }
 
-            if (!pRigidbody->GetParent()) {
+            if (!pRigidbody->HasParent()) {
                 pRigidbody->AutoFree([](auto&& pData) {
                     delete pData;
                 });
