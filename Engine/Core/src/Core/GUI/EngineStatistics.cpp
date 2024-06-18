@@ -401,7 +401,7 @@ namespace SR_CORE_GUI_NS {
                     ImGui::Text("\t\t\t* VBO: %i", vbo);
                 }
 
-                if (auto&& pMeshComponent = dynamic_cast<SR_GTYPES_NS::MeshComponent*>(meshInfo.pMesh); pMeshComponent && pMeshComponent->GetGameObject()) {
+                if (auto&& pMeshComponent = dynamic_cast<SR_GTYPES_NS::IMeshComponent*>(meshInfo.pMesh); pMeshComponent && pMeshComponent->GetGameObject()) {
                     ImGui::Text("\t\t\t\t* GameObject: %s", pMeshComponent->GetGameObject()->GetName().c_str());
                 }
                 else {
