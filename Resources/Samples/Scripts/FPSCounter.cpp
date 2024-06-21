@@ -14,7 +14,7 @@
 class FPSCounter : public Behaviour {
 public:
     void Update(float_t dt) override {
-		auto&& pText = DynamicCastComponentToText2D(gameObject->GetComponent("Text2D"));
+		auto&& pText = DynamicCastComponentToText(gameObject->GetComponent("Text"));
 		if (!pText) {
 			return;
 		}
