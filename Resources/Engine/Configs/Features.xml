@@ -4,7 +4,7 @@
        <ResourceUsePointStackTraceProfiling Value="false"/>
 
        <EvoCompiler Value="true"/>
-       <CompilePDB Value="false"/>
+       <CompilePDB Value="true"/>
        <ScriptMultiInstances Value="false"/>
 
        <UpdateScripts Value="false"/>
