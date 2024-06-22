@@ -25,9 +25,9 @@ It aims to establish a strong base for game creation and is currently in the ear
 ## Supported compilers
 - [x] MSVC (stable)
 - [x] GCC (stable)
+- [x] Clang
 - [ ] MinGW
 - [ ] Cygwin
-- [ ] Clang
 
 ## Supported platforms
 - [x] Windows 10/11
