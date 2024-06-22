@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<Include>
+    <Include Path="Engine/Passes/SceneViewFBOController.xml"/>
+    <FramebufferPass Name="SceneView">
+        <FramebufferSettings Name="SceneViewFBO">
+            <Depth ClearValue="1.0"/>
+            <Layer R="0.0" G="0.0" B="0.0" A="1.0"/>
+        </FramebufferSettings>
+        <Passes>
+            <ClearBuffersPass/>
+            <MeshDrawerPass>
+                <AllowedLayers>
+                    <Default/>
+                    <Opaque/>
+                </AllowedLayers>
+            </MeshDrawerPass>
+        </Passes>
+    </FramebufferPass>
+</Include>

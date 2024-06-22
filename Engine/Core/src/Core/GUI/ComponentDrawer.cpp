@@ -41,8 +41,6 @@
 #include <Graphics/UI/Anchor.h>
 #include <Graphics/UI/Canvas.h>
 #include <Graphics/Font/ITextComponent.h>
-#include <Graphics/Font/Text2D.h>
-#include <Graphics/Font/Text3D.h>
 #include <Graphics/Font/Font.h>
 #include <Graphics/Utils/MeshUtils.h>
 
@@ -584,14 +582,6 @@ namespace SR_CORE_NS::GUI {
         }
     }
 
-    void ComponentDrawer::DrawComponent(SR_GTYPES_NS::Text2D*& pComponent, EditorGUI* context, int32_t index) {
-        DrawComponent(dynamic_cast<SR_GTYPES_NS::ITextComponent*>(pComponent), context, index);
-    }
-
-    void ComponentDrawer::DrawComponent(SR_GTYPES_NS::Text3D*& pComponent, EditorGUI* context, int32_t index) {
-        DrawComponent(dynamic_cast<SR_GTYPES_NS::ITextComponent*>(pComponent), context, index);
-    }
-
     bool ComponentDrawer::DrawComponentOld(SR_UTILS_NS::Component* pComponent, EditorGUI* pContext, int32_t index) {
         #define SR_OLD_DRAW_COMPONENT(class, cmpName)                 \
         if (pComponent->GetComponentName() == (cmpName)) {            \
@@ -602,8 +592,6 @@ namespace SR_CORE_NS::GUI {
 
         SR_OLD_DRAW_COMPONENT(SR_SCRIPTING_NS::Behaviour, "Behaviour")
         SR_OLD_DRAW_COMPONENT(SR_GTYPES_NS::Camera, "Camera")
-        SR_OLD_DRAW_COMPONENT(SR_GTYPES_NS::Text2D, "Text2D")
-        SR_OLD_DRAW_COMPONENT(SR_GTYPES_NS::Text3D, "Text3D")
         SR_OLD_DRAW_COMPONENT(SR_ANIMATIONS_NS::Animator, "Animator")
         SR_OLD_DRAW_COMPONENT(SR_ANIMATIONS_NS::Skeleton, "Skeleton")
         SR_OLD_DRAW_COMPONENT(SR_ANIMATIONS_NS::BoneComponent, "Bone")

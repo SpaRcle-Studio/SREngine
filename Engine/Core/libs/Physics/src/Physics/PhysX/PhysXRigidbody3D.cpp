@@ -278,7 +278,7 @@ namespace SR_PTYPES_NS {
             pTransform->GlobalTranslate(deltaTranslation);
         }
 
-       if (deltaQuaternion != SR_MATH_NS::Quaternion::Identity()) {
+       if (!deltaQuaternion.IsEquals(SR_MATH_NS::FVector3(SR_MATH_NS::Unit(0)), SR_MATH_NS::Unit(0.0001))) {
            pTransform->SetRotation(rigidbodyRotation);
            // TODO: maybe use? pTransform->Rotate(deltaQuaternion);
        }

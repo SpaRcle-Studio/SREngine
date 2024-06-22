@@ -11,11 +11,13 @@
 #include <Graphics/Pass/IFramebufferPass.h>
 
 #include <Graphics/Memory/ShaderProgramManager.h>
+#include <Graphics/Pass/MeshDrawerPass.h>
 #include <Graphics/Render/RenderTechnique.h>
 #include <Graphics/Render/DebugRenderer.h>
 #include <Graphics/Pipeline/Vulkan/VulkanPipeline.h>
 #include <Graphics/Pipeline/Vulkan/VulkanKernel.h>
 #include <Graphics/Pipeline/Vulkan/VulkanMemory.h>
+#include <Graphics/Render/RenderQueue.h>
 
 namespace SR_CORE_GUI_NS {
     EngineStatistics::EngineStatistics()
@@ -217,39 +219,7 @@ namespace SR_CORE_GUI_NS {
                             ImGui::Text("%s", pRenderTechnique->GetName().data());
                         }
 
-                        pRenderTechnique->ForEachPass([this](auto&& pPass) -> bool {
-                            //if (pPass->GetName() != "SceneViewFBO") {
-                            //    return;
-                            //}
-
-                            auto&& pFramebufferPass = dynamic_cast<SR_GRAPH_NS::IFramebufferPass*>(pPass);
-                            if (!pFramebufferPass) {
-                                return true;
-                            }
-
-                            auto&& pFramebuffer = pFramebufferPass->GetFramebuffer();
-                            if (!pFramebuffer) {
-                                return true;
-                            }
-
-                            for (uint32_t i = 0; i < pFramebuffer->GetColorLayersCount(); ++i) {
-                                if (auto&& textureId = pFramebuffer->GetColorTexture(i); textureId != SR_ID_INVALID) {
-                                    auto&& pPipeline = GetContext()->GetPipeline();
-                                    SR_GRAPH_GUI_NS::DrawTexture(pPipeline.Get(), textureId, 256, false);
-                                }
-                            }
-
-                            if (pFramebuffer->GetDepthAspect() == SR_GRAPH_NS::ImageAspect::Depth) {
-                                for (uint32_t i = 0; i < pFramebuffer->GetLayersCount(); ++i) {
-                                    if (auto&& textureId = pFramebuffer->GetDepthTexture(i); textureId != SR_ID_INVALID) {
-                                        auto&& pPipeline = GetContext()->GetPipeline();
-                                        SR_GRAPH_GUI_NS::DrawTexture(pPipeline.Get(), textureId, 256, false);
-                                    }
-                                }
-                            }
-
-                            return true;
-                        });
+                        DrawRenderTechnique(pRenderTechnique);
 
                         ImGui::Separator();
                     }
@@ -354,6 +324,120 @@ namespace SR_CORE_GUI_NS {
         }
 
         ImGui::Separator();
+    }
+
+    void EngineStatistics::DrawRenderTechnique(SR_GRAPH_NS::IRenderTechnique* pRenderTechnique) {
+        pRenderTechnique->ForEachPass([this](auto&& pPass) -> bool {
+            if (auto&& pMeshDrawerPass = dynamic_cast<SR_GRAPH_NS::MeshDrawerPass*>(pPass)) {
+                DrawMeshDrawerPass(pMeshDrawerPass);
+            }
+
+            auto&& pFramebufferPass = dynamic_cast<SR_GRAPH_NS::IFramebufferPass*>(pPass);
+            if (!pFramebufferPass) {
+                return true;
+            }
+
+            auto&& pFramebuffer = pFramebufferPass->GetFramebuffer();
+            if (!pFramebuffer) {
+                return true;
+            }
+
+            for (uint32_t i = 0; i < pFramebuffer->GetColorLayersCount(); ++i) {
+                if (auto&& textureId = pFramebuffer->GetColorTexture(i); textureId != SR_ID_INVALID) {
+                    auto&& pPipeline = GetContext()->GetPipeline();
+                    SR_GRAPH_GUI_NS::DrawTexture(pPipeline.Get(), textureId, 256, false);
+                }
+            }
+
+            if (pFramebuffer->GetDepthAspect() == SR_GRAPH_NS::ImageAspect::Depth) {
+                for (uint32_t i = 0; i < pFramebuffer->GetLayersCount(); ++i) {
+                    if (auto&& textureId = pFramebuffer->GetDepthTexture(i); textureId != SR_ID_INVALID) {
+                        auto&& pPipeline = GetContext()->GetPipeline();
+                        SR_GRAPH_GUI_NS::DrawTexture(pPipeline.Get(), textureId, 256, false);
+                    }
+                }
+            }
+
+            return true;
+        });
+    }
+
+    void EngineStatistics::DrawMeshDrawerPass(SR_GRAPH_NS::MeshDrawerPass* pMeshDrawerPass) {
+        for (auto&& pRenderQueue : pMeshDrawerPass->GetRenderQueues()) {
+            DrawRenderQueue(pRenderQueue.Get());
+        }
+    }
+
+    void EngineStatistics::DrawRenderQueue(const SR_GRAPH_NS::RenderQueue* pRenderQueue) {
+        bool first = true;
+        uint32_t vbo = SR_ID_INVALID;
+        int64_t priority = 0;
+        SR_GTYPES_NS::Shader* pShader = nullptr;
+
+        ImGui::Separator();
+        ImGui::Text("Queue:");
+
+        for (auto&& [layer, queue] : pRenderQueue->GetQueues()) {
+            ImGui::Text("* Layer: %s", layer.c_str());
+
+            for (auto&& meshInfo : queue) {
+                if (first || priority != meshInfo.priority) {
+                    priority = meshInfo.priority;
+                    ImGui::Text("\t* Priority: %lli", priority);
+                }
+
+                if (first || pShader != meshInfo.shaderUseInfo.pShader) {
+                    pShader = meshInfo.shaderUseInfo.pShader;
+                    if (meshInfo.shaderUseInfo.pShader) {
+                        ImGui::Text("\t\t* Shader: %s", meshInfo.shaderUseInfo.pShader->GetResourceId().c_str());
+                    }
+                    else {
+                        ImGui::Text("\t\t* Shader: [no shader]");
+                    }
+                }
+
+                if (first || vbo != meshInfo.vbo) {
+                    vbo = meshInfo.vbo;
+                    ImGui::Text("\t\t\t* VBO: %i", vbo);
+                }
+
+                if (auto&& pMeshComponent = dynamic_cast<SR_GTYPES_NS::IMeshComponent*>(meshInfo.pMesh); pMeshComponent && pMeshComponent->GetGameObject()) {
+                    ImGui::Text("\t\t\t\t* GameObject: %s", pMeshComponent->GetGameObject()->GetName().c_str());
+                }
+                else {
+                    ImGui::Text("\t\t\t\t* Geometry: %s", meshInfo.pMesh->GetGeometryName().c_str());
+                }
+
+                ImGui::SameLine();
+                ImGui::Text(" : ");
+
+                const bool vboError = SR_UTILS_NS::Math::IsMaskIncludedSubMask(meshInfo.state, SR_GRAPH_NS::RenderQueue::QUEUE_STATE_VBO_ERROR);
+                const bool shaderError = SR_UTILS_NS::Math::IsMaskIncludedSubMask(meshInfo.state, SR_GRAPH_NS::RenderQueue::QUEUE_STATE_SHADER_ERROR);
+
+                if (vboError || shaderError) {
+                    if (vboError) {
+                        ImGui::SameLine();
+                        ImGui::TextColored(ImVec4(1, 0, 0, 1), "VBO");
+                    }
+
+                    if (shaderError) {
+                        ImGui::SameLine();
+                        ImGui::TextColored(ImVec4(1, 0, 0, 1), "Shader");
+                    }
+                }
+                else if (SR_UTILS_NS::Math::IsMaskIncludedSubMask(meshInfo.state, SR_GRAPH_NS::RenderQueue::QUEUE_STATE_ERROR)) {
+                    ImGui::SameLine();
+                    ImGui::TextColored(ImVec4(1, 0, 1, 1), "Inactive");
+                }
+
+                if (meshInfo.state == SR_GRAPH_NS::RenderQueue::QUEUE_STATE_OK) {
+                    ImGui::SameLine();
+                    ImGui::TextColored(ImVec4(0, 1, 0, 1), "Ok");
+                }
+
+                first = false;
+            }
+        }
     }
 
     void EngineStatistics::RenderStrategyPage() {

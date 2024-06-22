@@ -1,15 +1,17 @@
 ShaderType Canvas;
 
 PolygonMode Fill;
-CullMode None;
+CullMode Back;
 DepthCompare LessOrEqual;
-PrimitiveTopology TriangleList;
+PrimitiveTopology TriangleStrip;
 BlendEnabled true;
 DepthWrite true;
 DepthTest true;
 
-[[uniform], [public]] vec4 color;
+[[uniform], [public]] vec4 color = vec4(1.0, 1.0, 1.0, 1.0);
 [[uniform], [public]] sampler2D diffuse;
+
+[[shared]] vec2 UV;
 
 float sliced_map(float value, float originalMin, float originalMax, float newMin, float newMax) {
     return (value - originalMin) / (originalMax - originalMin) * (newMax - newMin) + newMin;
@@ -42,5 +44,7 @@ void fragment() {
 }
 
 void vertex() {
-    OUT_POSITION = ORTHOGONAL_MATRIX * MODEL_MATRIX * vec4(VERTEX, 1.0);
+    #include <Engine/Shaders/UI/sprite-vertices.inl.srsl>
+    UV = uv[VERTEX_INDEX];
+    OUT_POSITION = ORTHOGONAL_MATRIX * MODEL_MATRIX * vec4(vertices[VERTEX_INDEX], 1.0);
 }

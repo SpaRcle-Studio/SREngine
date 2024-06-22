@@ -277,6 +277,13 @@ namespace SR_CORE_GUI_NS {
                 }
                 break;
             }
+            case SR_UTILS_NS::StandardType::UVector2: {
+                auto&& value = pProperty->GetUVector2();
+                if (SR_GRAPH_GUI_NS::DrawUVec2Control(label, value, pProperty->GetResetValue(), pProperty->GetWidth(), pProperty->GetDrag())) {
+                    pProperty->SetUVector2(value);
+                }
+                break;
+            }
             case SR_UTILS_NS::StandardType::FVector3: {
                 auto&& value = pProperty->GetFVector3();
                 if (SR_GRAPH_GUI_NS::DrawVec3Control(label, value, pProperty->GetResetValue(), pProperty->GetDrag(), pProperty->GetWidth())) {
@@ -288,6 +295,22 @@ namespace SR_CORE_GUI_NS {
                 auto&& value = pProperty->GetBVector3();
                 if (SR_GRAPH_GUI_NS::DrawBVec3Control(label, value, false, pProperty->GetWidth())) {
                     pProperty->SetBVector3(value);
+                }
+                break;
+            }
+            case SR_UTILS_NS::StandardType::UnicodeString: {
+                auto&& value = pProperty->GetUnicodeString();
+                auto&& text = SR_UTILS_NS::Localization::UtfToUtf<char, char32_t>(value);
+
+                if (pProperty->IsMultiline()) {
+                    if (ImGui::InputTextMultiline(SR_FORMAT_C("##textBox{}", static_cast<void*>(pProperty)), &text, ImVec2(ImGui::GetWindowWidth() - 10, 100))) {
+                        pProperty->SetUnicodeString(text);
+                    }
+                }
+                else {
+                    if (ImGui::InputText(SR_FORMAT_C("##textBox{}", static_cast<void*>(pProperty)), &text)) {
+                        pProperty->SetUnicodeString(text);
+                    }
                 }
                 break;
             }
