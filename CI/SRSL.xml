@@ -11,9 +11,9 @@
       <option name="HAS_PARENS" value="true" />
       <option name="HAS_STRING_ESCAPES" value="true" />
     </options>
-    <keywords keywords="discard;elif;else;false;if;public;return;shared;true;uniform;void" ignore_case="false" />
+    <keywords keywords="discard;ssbo;elif;else;false;if;public;return;shared;true;uniform;void" ignore_case="false" />
     <keywords2 keywords="compute;fragment;texture;vertex" />
-    <keywords3 keywords="BlendEnabled;CullMode;DepthCompare;DepthTest;DepthWrite;PolygonMode;PrimitiveTopology;ShaderType;bool;float;int;sampler2D;sampler3D;samplerCube;vec2;vec3;vec4" />
+    <keywords3 keywords="BlendEnabled;CullMode;DepthCompare;DepthTest;DepthWrite;PolygonMode;PrimitiveTopology;ShaderType;bool;float;int;sampler2D;sampler3D;samplerCube;vec2;vec3;vec4;mat4" />
     <keywords4 keywords="Back;COLOR;Canvas;Fill;Front;LessOrEqual;MODEL_MATRIX;NORMAL;None;ORTHOGONAL_MATRIX;OUT_POSITION;PROJECTION_MATRIX;SLICED_RECT;Skinned;TriangleList;UV;VERTEX" />
   </highlighting>
   <extensionMap>
