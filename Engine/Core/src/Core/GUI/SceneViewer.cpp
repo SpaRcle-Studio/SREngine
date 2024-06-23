@@ -290,11 +290,21 @@ namespace SR_CORE_GUI_NS {
     }
 
     void SceneViewer::OnMouseDown(const SR_UTILS_NS::MouseInputData *data) {
-        Super::OnMouseDown(data);
+        if(data->m_code == SR_UTILS_NS::MouseCode::MouseRight) {
+            m_cursorLockOpt.emplace();
+            m_mousePos = data->m_position;
+        }
     }
 
     void SceneViewer::OnMouseUp(const SR_UTILS_NS::MouseInputData *data) {
         if (!SR_UTILS_NS::Features::Instance().Enabled("ColorBufferPick", false)) {
+            Super::OnMouseUp(data);
+            return;
+        }
+
+        if (data->m_code == SR_UTILS_NS::MouseCode::MouseRight) {
+            m_cursorLockOpt = std::nullopt;
+            SR_PLATFORM_NS::SetMousePos({ static_cast<int32_t>(m_mousePos.x), static_cast<int32_t>(m_mousePos.y) });
             Super::OnMouseUp(data);
             return;
         }
@@ -381,7 +391,7 @@ namespace SR_CORE_GUI_NS {
             pCamera->UpdateProjection(GetContext()->GetWindowSize().x, GetContext()->GetWindowSize().y);
             return true;
         }
-        else if (viewMode == EditorSceneViewMode::FreeAspect) {
+         if (viewMode == EditorSceneViewMode::FreeAspect) {
             if (pCamera->GetSize() == m_windowSize) {
                 return false;
             }

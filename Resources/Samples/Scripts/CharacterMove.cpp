@@ -16,14 +16,6 @@
 
 class CharacterMove : public Behaviour {
 public:
-    void Awake() override {
-        Input::LockCursor(true);
-    }
-
-    void Close() override {
-        Input::LockCursor(false);
-    }
-
     void FixedUpdate() override {
         if (!gameObject) {
             return;

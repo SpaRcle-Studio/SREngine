@@ -448,10 +448,6 @@ namespace SpaRcle {
             return SR_UTILS_NS::Input::Instance().GetKey(key);
         });
 
-        ESRegisterCustomStaticMethod(EvoScript::Public, generator, Input, LockCursor, void, ESArg1(bool lock), {
-            SR_UTILS_NS::Input::Instance().LockCursor(lock);
-        });
-
         ESRegisterCustomStaticMethod(EvoScript::Public, generator, Input, GetKeyDown, bool, ESArg1(KeyCode key), {
             return SR_UTILS_NS::Input::Instance().GetKeyDown(key);
         });

@@ -196,6 +196,14 @@ namespace SR_CORE_NS {
 
         SR_INFO("Engine::Init() : initializing game engine...");
 
+        SR_UTILS_NS::Input::Instance().SetCursorLockCallback([this](){
+            auto&& pMainWindow = GetMainWindow();
+            auto&& resolution = pMainWindow->GetSize();
+            resolution /= 2;
+            SR_PLATFORM_NS::SetMousePos(pMainWindow->GetPosition() + resolution.Cast<int32_t>());
+            SR_UTILS_NS::Input::Instance().ResetMouse();
+        });
+
         m_isInit = true;
 
         return true;
@@ -303,28 +311,24 @@ namespace SR_CORE_NS {
                 m_editor->SetDockingEnabled(!m_editor->IsDockingEnabled());
             }
 
-            if (m_editor && SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::F9)) {
-                SR_UTILS_NS::Input::Instance().LockCursor(!SR_UTILS_NS::Input::Instance().IsCursorLocked());
-            }
+            // if (m_editor && SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::F9)) {
+            //     SR_UTILS_NS::Input::Instance().LockCursor(!SR_UTILS_NS::Input::Instance().IsCursorLocked());
+            // }
 
             if (m_editor && IsActive() && SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::F2)) {
                 SetGameMode(!IsGameMode());
-                SR_UTILS_NS::Input::Instance().LockCursor(IsGameMode());
-                SR_UTILS_NS::Input::Instance().SetCursorVisible(!IsGameMode());
+
+                if(IsGameMode()) {
+                    m_cursorLockOpt.emplace();
+                }
+                else {
+                    m_cursorLockOpt = std::nullopt;
+                }
             }
 
             if (SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::F3) && lShiftPressed) {
                 Reload();
                 return;
-            }
-
-            auto&& pMainWindow = GetMainWindow();
-
-            if (pMainWindow && IsGameMode() && SR_UTILS_NS::Input::Instance().IsMouseMoved() && SR_UTILS_NS::Input::Instance().IsCursorLocked()) {
-                auto&& resolution = pMainWindow->GetSize();
-                resolution /= 2;
-                SR_PLATFORM_NS::SetMousePos(pMainWindow->GetPosition() + resolution.Cast<int32_t>());
-                SR_UTILS_NS::Input::Instance().ResetMouse();
             }
         }
 
@@ -404,9 +408,11 @@ namespace SR_CORE_NS {
         if (m_editor) {
             if (m_isGameMode) {
                 m_editor->HideAll();
+                m_cursorLockOpt.emplace();
             }
             else {
                 m_editor->ShowAll();
+                m_cursorLockOpt = std::nullopt;
             }
         }
 
