@@ -76,7 +76,7 @@ namespace SR_SCRIPTING_NS {
         }
     #elif defined(SR_LINUX)
         if (m_compilerPath.empty()) {
-            m_compilerPath = "usr/bin/g++";
+            m_compilerPath = "/usr/bin/g++";
         }
     #endif
 
