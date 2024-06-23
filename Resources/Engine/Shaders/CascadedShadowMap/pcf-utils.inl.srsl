@@ -1,0 +1,101 @@
+[[uniform]] sampler2DArray shadowMap;
+
+[[shared]] vec3 pcf_normal;
+[[shared]] vec3 pcf_lightDir;
+[[shared]] vec3 pcf_viewPos;
+[[shared]] vec3 pcf_viewDir;
+[[shared]] mat4 pcf_modelMatrix;
+
+[[const]] mat4 biasMat = mat4(
+    0.5, 0.0, 0.0, 0.0,
+    0.0, 0.5, 0.0, 0.0,
+    0.0, 0.0, 1.0, 0.0,
+    0.5, 0.5, 0.0, 1.0
+);
+
+float textureProj(vec4 shadowCoord, vec2 offset, uint cascadeIndex) {
+	float shadow = 1.0;
+
+	float bias = max(0.05 * (1.0 - dot(pcf_normal, normalize(pcf_lightDir))), 0.005);
+
+	if (shadowCoord.z > -1.0 && shadowCoord.z < 1.0) {
+		float dist = texture(shadowMap, vec3(shadowCoord.st + offset, cascadeIndex)).r;
+		if (shadowCoord.w > 0 && dist < shadowCoord.z - bias) {
+			shadow = 0.2;
+		}
+	}
+
+	return shadow;
+}
+
+float filterPCF(vec4 sc, uint cascadeIndex) {
+	ivec2 texDim = textureSize(shadowMap, 0).xy;
+	float scale = 0.75;
+	float dx = scale * 1.0 / float(texDim.x);
+	float dy = scale * 1.0 / float(texDim.y);
+
+	float shadowFactor = 0.0;
+	int count = 0;
+	int range = 1;
+
+	for (int x = -range; x <= range; x++)
+	{
+		for (int y = -range; y <= range; y++)
+		{
+			shadowFactor += textureProj(sc, vec2(dx * x, dy * y), cascadeIndex);
+			count++;
+		}
+	}
+
+	return shadowFactor / count;
+}
+
+vec4 DebugColorCascade(vec4 color, uint cascadeIndex) {
+    if (cascadeIndex == 0) {
+        color.rgb *= vec3(1.0, 0.25, 0.25);
+    }
+    else if (cascadeIndex == 1) {
+        color.rgb *= vec3(0.25, 1.0, 0.25);
+    }
+    else if (cascadeIndex == 2) {
+        color.rgb *= vec3(0.25, 0.25, 1.0);
+    }
+    else if (cascadeIndex == 3) {
+        color.rgb *= vec3(1.0, 1.0, 0.25);
+    }
+
+    return color;
+}
+
+vec4 CalculateShadow(vec3 diffuseColor, vec3 lightColor) {
+    uint cascadeIndex = 0;
+
+    for (uint i = 0; i < 3; ++i) {
+        if (pcf_viewPos.z < CASCADE_SPLITS[i]) {
+            cascadeIndex = i + 1;
+        }
+    }
+
+    vec4 shadowCoord = (biasMat * CASCADE_LIGHT_SPACE_MATRICES[cascadeIndex]) * pcf_modelMatrix * vec4(VERTEX, 1.0);
+
+	float shadow = filterPCF(shadowCoord / shadowCoord.w, cascadeIndex);
+
+    vec3 ambient = 0.15 * diffuseColor;
+    vec3 diff = max(dot(normalize(pcf_lightDir), normalize(pcf_normal)), 0.0) * lightColor;
+
+    vec3 halfwayDir = normalize(pcf_lightDir + normalize(pcf_viewDir));
+    float spec = pow(max(dot(normalize(pcf_normal), halfwayDir), 0.0), 64.0);
+    vec3 specular = spec * lightColor;
+
+    vec4 color = vec4(ambient + shadow * (diff + specular) * diffuseColor, 1.0);
+    //return DebugColorCascade(color, cascadeIndex);
+    return color;
+}
+
+void PreparePCF(mat4 modelMatrix) {
+    pcf_modelMatrix = modelMatrix;
+    pcf_normal = mat3(modelMatrix) * NORMAL;
+    pcf_lightDir = DIRECTIONAL_LIGHT_POSITION - VERTEX;
+    pcf_viewDir = VIEW_POSITION - VERTEX;
+    pcf_viewPos = (VIEW_MATRIX * modelMatrix * vec4(VERTEX, 1.0)).xyz;
+}

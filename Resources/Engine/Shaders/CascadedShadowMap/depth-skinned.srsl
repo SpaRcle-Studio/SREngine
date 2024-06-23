@@ -4,18 +4,15 @@ PolygonMode Fill;
 CullMode Back;
 DepthCompare LessOrEqual;
 PrimitiveTopology TriangleList;
-BlendEnabled true;
-DepthWrite false;
+BlendEnabled false;
+DepthWrite true;
 DepthTest true;
-
-[[uniform], [public]] vec4 color;
-[[uniform], [public]] sampler2D diffuse;
 
 [[ssbo(bones)]] mat4[] bones;
 [[ssbo(offsets)]] mat4[] boneOffsets;
 
 void fragment() {
-	COLOR = texture(diffuse, UV) * color;
+    /// depth write
 }
 
 void vertex() {
@@ -29,5 +26,5 @@ void vertex() {
     boneTransform     += (bones[int(WEIGHT7[0])] * boneOffsets[int(WEIGHT7[0])]) * WEIGHT7[1];
 
     VERTEX = (boneTransform * vec4(VERTEX, 1.0)).xyz;
-    OUT_POSITION = PROJECTION_MATRIX * VIEW_MATRIX * vec4(VERTEX, 1.0);
+    OUT_POSITION = CASCADE_LIGHT_SPACE_MATRICES[SHADOW_CASCADE_INDEX] * vec4(VERTEX, 1.0);
 }

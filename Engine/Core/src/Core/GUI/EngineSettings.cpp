@@ -58,8 +58,10 @@ namespace SR_CORE_GUI_NS {
     }
 
     void EngineSettings::DrawLighting() {
-        auto&& position = GetRenderScene()->GetLightSystem()->m_position;
-        SR_GRAPH_NS::GUI::DrawVec3Control("Directional light position", position);
+        SR_MATH_NS::FVector3 position = GetRenderScene()->GetLightSystem()->GetDirectionalLightPosition();
+        if (SR_GRAPH_NS::GUI::DrawVec3Control("Directional light position", position)) {
+            GetRenderScene()->GetLightSystem()->SetDirectionalLightPosition(position);
+        }
     }
 
     void EngineSettings::DrawVSync() {

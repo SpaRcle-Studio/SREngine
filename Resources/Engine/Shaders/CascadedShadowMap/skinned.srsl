@@ -4,8 +4,8 @@ PolygonMode Fill;
 CullMode Back;
 DepthCompare LessOrEqual;
 PrimitiveTopology TriangleList;
-BlendEnabled true;
-DepthWrite false;
+BlendEnabled false; 
+DepthWrite true;
 DepthTest true;
 
 [[uniform], [public]] vec4 color;
@@ -14,8 +14,13 @@ DepthTest true;
 [[ssbo(bones)]] mat4[] bones;
 [[ssbo(offsets)]] mat4[] boneOffsets;
 
+#include <Engine/Shaders/CascadedShadowMap/pcf-utils.inl.srsl>
+
 void fragment() {
-	COLOR = texture(diffuse, UV) * color;
+    vec3 diffuseColor = texture(diffuse, UV).rgb * color.rgb;
+    vec3 lightColor = vec3(1.0);
+
+    COLOR = CalculateShadow(diffuseColor, lightColor);
 }
 
 void vertex() {
@@ -28,6 +33,11 @@ void vertex() {
     boneTransform     += (bones[int(WEIGHT6[0])] * boneOffsets[int(WEIGHT6[0])]) * WEIGHT6[1];
     boneTransform     += (bones[int(WEIGHT7[0])] * boneOffsets[int(WEIGHT7[0])]) * WEIGHT7[1];
 
-    VERTEX = (boneTransform * vec4(VERTEX, 1.0)).xyz;
-    OUT_POSITION = PROJECTION_MATRIX * VIEW_MATRIX * vec4(VERTEX, 1.0);
+    pcf_modelMatrix = boneTransform;
+    pcf_normal = mat3(boneTransform) * NORMAL;
+    pcf_lightDir = DIRECTIONAL_LIGHT_POSITION - VERTEX;
+    pcf_viewDir = VIEW_POSITION - VERTEX;
+    pcf_viewPos = (VIEW_MATRIX * boneTransform * vec4(VERTEX, 1.0)).xyz;
+
+    OUT_POSITION = PROJECTION_MATRIX * VIEW_MATRIX * boneTransform * vec4(VERTEX, 1.0);
 }
