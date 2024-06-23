@@ -487,10 +487,6 @@ namespace SR_CORE_NS::GUI {
         }
     }
 
-    void ComponentDrawer::DrawComponent(SR_ANIMATIONS_NS::Animator *&pComponent, EditorGUI *context, int32_t index) {
-        ImGui::SliderFloat("Weight", &pComponent->m_weight, 0.f, 1.f);
-    }
-
     void ComponentDrawer::DrawComponent(SR_ANIMATIONS_NS::Skeleton *&pComponent, EditorGUI *context, int32_t index) {
         bool debug = pComponent->IsDebugEnabled();
         if (Graphics::GUI::CheckBox("Debug", debug)) {
@@ -592,7 +588,6 @@ namespace SR_CORE_NS::GUI {
 
         SR_OLD_DRAW_COMPONENT(SR_SCRIPTING_NS::Behaviour, "Behaviour")
         SR_OLD_DRAW_COMPONENT(SR_GTYPES_NS::Camera, "Camera")
-        SR_OLD_DRAW_COMPONENT(SR_ANIMATIONS_NS::Animator, "Animator")
         SR_OLD_DRAW_COMPONENT(SR_ANIMATIONS_NS::Skeleton, "Skeleton")
         SR_OLD_DRAW_COMPONENT(SR_ANIMATIONS_NS::BoneComponent, "Bone")
         SR_OLD_DRAW_COMPONENT(SR_UTILS_NS::LookAtComponent, "LookAtComponent")

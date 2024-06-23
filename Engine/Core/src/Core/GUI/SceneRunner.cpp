@@ -46,40 +46,31 @@ namespace SR_CORE_NS::GUI {
 
         ImGui::Separator();
 
-        if (m_scene->IsPrefab())
-        {
-            if (auto&& pDescriptor = GetEditor()->GetIconDescriptor(EditorIcon::Back)) {
-                if (SR_GRAPH_GUI_NS::ImageButton("##imgSceneBackBtn", pDescriptor, SR_MATH_NS::IVector2(32), 3)) {
-                    pEngine->GetEditor()->LoadSceneFromCachedPath();
+        const EditorIcon playIcon = active ? EditorIcon::Stop : EditorIcon::Play;
+        if (auto&& pDescriptor = GetEditor()->GetIconDescriptor(playIcon)) {
+            if (SR_GRAPH_GUI_NS::ImageButton("##imgScenePlayBtn", pDescriptor, SR_MATH_NS::IVector2(32), 3) && locked) {
+                active = !active;
+
+                if (active) {
+                    active = PlayScene();
+                }
+                else {
+                    paused = false;
+                    ReturnScene();
                 }
             }
         }
-        else 
-        {
-            const EditorIcon playIcon = active ? EditorIcon::Stop : EditorIcon::Play;
-            if (auto&& pDescriptor = GetEditor()->GetIconDescriptor(playIcon)) {
-                if (SR_GRAPH_GUI_NS::ImageButton("##imgScenePlayBtn", pDescriptor, SR_MATH_NS::IVector2(32), 3) && locked) {
-                    active = !active;
 
-                    if (active) {
-                        active = PlayScene();
-                    }
-                    else {
-                        paused = false;
-                        ReturnScene();
-                    }
-                }
+        ImGui::SameLine();
+
+        if (auto&& pDescriptor = GetEditor()->GetIconDescriptor(paused ? EditorIcon::Pause : EditorIcon::PauseActive)) {
+            if (SR_GRAPH_GUI_NS::ImageButton("##imgScenePauseBtn", pDescriptor, SR_MATH_NS::IVector2(32), 3)) {
+                SR_AUDIO_NS::SoundManager::Instance().Play("Editor/Audio/Heavy-popping.wav");
+                paused = !paused;
             }
+        }
 
-            ImGui::SameLine();
-
-            if (auto&& pDescriptor = GetEditor()->GetIconDescriptor(paused ? EditorIcon::Pause : EditorIcon::PauseActive)) {
-                if (SR_GRAPH_GUI_NS::ImageButton("##imgScenePauseBtn", pDescriptor, SR_MATH_NS::IVector2(32), 3)) {
-                    SR_AUDIO_NS::SoundManager::Instance().Play("Editor/Audio/Heavy-popping.wav");
-                    paused = !paused;
-                }
-            }
-
+        if (!m_scene->IsPrefab()) {
             ImGui::SameLine();
 
             if (auto&& pDescriptor = GetEditor()->GetIconDescriptor(EditorIcon::Game)) {
@@ -89,6 +80,17 @@ namespace SR_CORE_NS::GUI {
                     }
 
                     pEngine->SetGameMode(true);
+                }
+            }
+        }
+
+        if (m_scene->IsPrefab()) {
+            ImGui::SameLine();
+
+            if (auto&& pDescriptor = GetEditor()->GetIconDescriptor(EditorIcon::Back)) {
+                if (SR_GRAPH_GUI_NS::ImageButton("##imgSceneBackBtn", pDescriptor, SR_MATH_NS::IVector2(32), 3)) {
+                    pEngine->SetActive((active = false));
+                    pEngine->GetEditor()->LoadSceneFromCachedPath();
                 }
             }
         }
@@ -123,7 +125,9 @@ namespace SR_CORE_NS::GUI {
 
         m_scenePath = m_lastPath;
 
-        auto&& runtimePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat(SR_WORLD_NS::Scene::RuntimeScenePath.ConcatExt("scene"));
+        const std::string extension = m_scene->GetPath().GetExtension();
+
+        auto&& runtimePath = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat(SR_WORLD_NS::Scene::RuntimeScenePath.ConcatExt(extension));
         auto&& pEngine = dynamic_cast<EditorGUI*>(GetManager())->GetEngine();
 
         if (runtimePath.Exists(SR_UTILS_NS::Path::Type::Folder)) {
@@ -135,13 +139,22 @@ namespace SR_CORE_NS::GUI {
 
         SR_LOG("SceneRunner::PlayScene() : copying scene: \n\tFrom: " + m_scene->GetAbsPath().ToString() + "\n\tTo: " + runtimePath.ToString());
 
-        if (!m_scene->GetAbsPath().GetFolder().Copy(runtimePath)) {
-            SR_ERROR("SceneRunner::PlayScene() : failed to copy scene!\n\tSource: "
-                + m_scene->GetPath().ToString() + "\n\tDestination: " + runtimePath.ToString());
-            return false;
+        if (m_scene->IsPrefab()) {
+            if (!m_scene->GetAbsPath().Copy(runtimePath)) {
+                SR_ERROR("SceneRunner::PlayScene() : failed to copy scene!\n\tSource: "
+                    + m_scene->GetPath().ToString() + "\n\tDestination: " + runtimePath.ToString());
+                return false;
+            }
+        }
+        else {
+            if (!m_scene->GetAbsPath().GetFolder().Copy(runtimePath)) {
+                SR_ERROR("SceneRunner::PlayScene() : failed to copy scene!\n\tSource: "
+                    + m_scene->GetPath().ToString() + "\n\tDestination: " + runtimePath.ToString());
+                return false;
+            }
         }
 
-        if (auto&& runtimeScene = SR_WORLD_NS::Scene::Load(SR_WORLD_NS::Scene::RuntimeScenePath.ConcatExt("scene"))) {
+        if (auto&& runtimeScene = SR_WORLD_NS::Scene::Load(SR_WORLD_NS::Scene::RuntimeScenePath.ConcatExt(extension))) {
             return pEngine->SetScene(runtimeScene);
         }
         else {
