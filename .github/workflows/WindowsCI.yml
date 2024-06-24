@@ -102,7 +102,8 @@ jobs:
         working-directory: ${{github.workspace}}/build-debug/Engine
         shell: bash
         run: |
-          ls | grep "SREngine_" | xargs -I '{}' cp '{}' SREngineDebugBuild
+          mkdir SREngineDebugBuild
+          ls | grep "SREngine_" | xargs -I '{}' cp '{}' ./SREngineDebugBuild/
         #shell: cmd
         #run: |
         #  mkdir SREngineReleaseBuild & for /f "delims=" %i in ('dir /b ^| findstr "SREngine_"') do copy "%i" SREngineDebugBuild
@@ -112,7 +113,8 @@ jobs:
         working-directory: ${{github.workspace}}/build-release/Engine
         shell: bash
         run: |
-          ls | grep "SREngine_" | xargs -I '{}' cp '{}' SREngineReleaseBuild
+          mkdir SREngineReleaseBuild
+          ls | grep "SREngine_" | xargs -I '{}' cp '{}' ./SREngineReleaseBuild/
         #shell: cmd
         #run: |
         #  mkdir SREngineReleaseBuild & for /f "delims=" %i in ('dir /b ^| findstr "SREngine_"') do copy "%i" SREngineReleaseBuild
