@@ -66,6 +66,7 @@ EmbedResources("${CMAKE_CURRENT_BINARY_DIR}/libs/Utils/include/Utils" "SREngine/
 
 set(SR_COMMON_CI_BUILD OFF)
 set(SR_COMMON_EMBED_RESOURCES ON)
+set(SR_COMMON_OPENSSL ON)
 
 message(STATUS "CONFIGURING Utils -----------------")
 add_subdirectory(libs/Utils)
