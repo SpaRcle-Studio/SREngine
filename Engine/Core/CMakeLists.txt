@@ -64,7 +64,8 @@ endif()
 
 EmbedResources("${CMAKE_CURRENT_BINARY_DIR}/libs/Utils/include/Utils" "SREngine/Resources" ${EMBED_RESOURCES_LIST})
 
-set(SR_UTILS_CI_BUILD OFF)
+set(SR_COMMON_CI_BUILD OFF)
+set(SR_COMMON_EMBED_RESOURCES ON)
 
 message(STATUS "CONFIGURING Utils -----------------")
 add_subdirectory(libs/Utils)
