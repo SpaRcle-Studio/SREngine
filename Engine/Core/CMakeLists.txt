@@ -62,7 +62,7 @@ elseif (UNIX)
     AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Engine/Utilities/git2")
 endif()
 
-EmbedResources("${CMAKE_CURRENT_BINARY_DIR}/libs/Utils/include/Utils" "SREngine/Resources" ${EMBED_RESOURCES_LIST})
+EmbedResources("${CMAKE_CURRENT_BINARY_DIR}/libs/Utils/include/Utils" "Resources" ${EMBED_RESOURCES_LIST})
 
 set(SR_COMMON_CI_BUILD OFF)
 set(SR_COMMON_EMBED_RESOURCES ON)
