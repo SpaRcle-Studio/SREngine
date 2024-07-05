@@ -52,7 +52,7 @@ namespace SR_CORE_GUI_NS {
                 if (pDescriptor) {
                     if (SR_GRAPH_GUI_NS::ImageButton(SR_FORMAT("##{}", (void*)pProperty), (void*)pDescriptor, SR_MATH_NS::IVector2(55), 3)) {
                         auto&& texturesPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
-                        auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(texturesPath, { { "Images", "png,jpg,bmp,tga" } });
+                        auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(texturesPath, { { "Images", "jpeg,png,jpg,bmp,tga" } });
 
                         if (path.Exists()) {
                             if (auto&& pTexture = SR_GTYPES_NS::Texture::Load(path)) {
