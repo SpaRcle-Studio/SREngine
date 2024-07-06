@@ -283,6 +283,7 @@ namespace SR_CORE_GUI_NS {
                     auto&& pEngine = dynamic_cast<EditorGUI*>(GetManager())->GetEngine();
                     auto&& prefabPath = gm->GetPrefab()->GetResourcePath();
                     if (auto&& pScene = SR_WORLD_NS::Scene::Load(prefabPath)) {
+                        pEngine->SetActive(false);
                         pEngine->SetScene(pScene);
                         pEngine->GetEditor()->CacheScenePath(prefabPath);
                     }
