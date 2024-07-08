@@ -270,6 +270,13 @@ namespace SR_CORE_GUI_NS {
                 }
                 break;
             }
+            case SR_UTILS_NS::StandardType::String: {
+                std::string value = pProperty->GetString();
+                if (ImGui::InputText(SR_FORMAT_C("{}##textBox{}", pProperty->GetName().c_str(), static_cast<void*>(pProperty)), &value)) {
+                    pProperty->SetString(value);
+                }
+                break;
+            }
             case SR_UTILS_NS::StandardType::FVector2: {
                 auto&& value = pProperty->GetFVector2();
                 if (SR_GRAPH_GUI_NS::DrawVec2Control(label, value, pProperty->GetResetValue(), pProperty->GetWidth(), pProperty->GetDrag())) {

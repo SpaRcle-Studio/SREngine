@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Animator>
+    <Node Type="StateMachine">
+        <State Type="Clip" Path="Samples/Raptoid/Prop2.fbx" Name="Dummy058|Dummy058|idle"/>
+        <State Type="Clip" Path="Samples/Raptoid/Prop2.fbx" Name="Dummy058|Dummy058|Threaten"/>
+        <Transition From="SR_ENGINE_ENTRY_POINT" To="Dummy058|Dummy058|idle"/>
+        <Transition From="Dummy058|Dummy058|idle" To="Dummy058|Dummy058|Threaten">
+            <Condition Type="ExitTime" Duration="0.25" ExitTime="0.75" HasExitTime="true"/>
+        </Transition>
+        <Transition From="Dummy058|Dummy058|Threaten" To="Dummy058|Dummy058|idle">
+            <Condition Type="ExitTime" Duration="0.25" ExitTime="0.75" HasExitTime="true"/>
+        </Transition>
+    </Node>
+    <Connection FromNode="1" FromPin="0" ToNode="0" ToPin="0"/>
+</Animator>
