@@ -7,6 +7,7 @@
 #include <Core/GUI/EditorCamera.h>
 #include <Core/GUI/EditorGizmo.h>
 #include <Core/GUI/Guizmo.h>
+#include <Graphics/Material/UniqueMaterial.h>
 
 #include <Utils/Input/InputSystem.h>
 #include <Utils/Common/Features.h>
@@ -55,6 +56,14 @@ namespace SR_CORE_GUI_NS {
             if (m_platform) {
                 m_platform->SetName("PREFAB_PLATFORM");
                 m_platform->SetDontSave(true);
+                if (!m_platform->GetChildren().empty()) {
+                    if (auto&& pMesh = m_platform->GetChildren()[0]->GetComponent<SR_GTYPES_NS::Mesh3D>()) {
+                        auto&& pMaterial = new SR_GRAPH_NS::UniqueMaterial();
+                        pMaterial->SetShader("Engine/Shaders/CascadedShadowMap/spatial.srsl");
+                        pMaterial->SetTexture("diffuse", GetRenderScene()->GetRenderStrategy()->GetRenderContext()->GetDefaultTexture());
+                        pMesh->SetMaterial(pMaterial);
+                    }
+                }
                 m_platform->GetTransform()->SetScale(2.5, 1.f, 2.5);
             }
         }

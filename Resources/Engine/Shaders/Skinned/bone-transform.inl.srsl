@@ -1,0 +1,4 @@
+mat4 boneTransform = mat4(0);
+for (int i = 0; i < WEIGHTS_COUNT; i++) {
+    boneTransform += (bones[int(WEIGHTS[i][0])] * boneOffsets[int(WEIGHTS[i][0])]) * WEIGHTS[i][1];
+}

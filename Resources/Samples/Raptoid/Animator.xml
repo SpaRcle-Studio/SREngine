@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Animator>
+    <Node Type="StateMachine">
+        <State Type="Clip" Path="Samples/Raptoid/Prop2.fbx" Name="Dummy058|Dummy058|idle" ResetOnPlay="true"/>
+        <State Type="Clip" Path="Samples/Raptoid/Prop2.fbx" Name="Dummy058|Dummy058|Run_L" ResetOnPlay="true" />
+        <State Type="Clip" Path="Samples/Raptoid/Prop2.fbx" Name="Dummy058|Dummy058|Threaten"/>
+        <Transition From="0" To="1"/>
+
+        <Transition From="1" To="2">
+            <Condition Type="And">
+                <Condition Type="Bool" Variable="IsRunning" Value="true"/>
+                <Condition Type="ExitTime" ExitTime="0.15" Duration="0.05" HasExitTime="false"/>
+            </Condition>
+        </Transition>
+        <Transition From="2" To="1">
+            <Condition Type="And">
+                <Condition Type="Bool" Variable="IsRunning" Value="false"/>
+                <Condition Type="ExitTime" ExitTime="1.0" Duration="0.75" HasExitTime="false"/>
+            </Condition>
+        </Transition>
+
+        <!--<Transition From="2" To="3">
+            <Condition Type="ExitTime" ExitTime="5.0" Duration="0.5" HasExitTime="true"/>
+        </Transition>
+        <Transition From="3" To="1">
+            <Condition Type="ExitTime" ExitTime="0.75" Duration="0.25" HasExitTime="true"/>
+        </Transition>
+        <Transition From="2" To="1">
+            <Condition Type="ExitTime" ExitTime="2.0" Duration="0.75" HasExitTime="true"/>
+        </Transition>-->
+        <!--<Transition From="2" To="1"/>-->
+    </Node>
+    <Connection FromNode="1" FromPin="0" ToNode="0" ToPin="0"/>
+    <Variable Name="IsRunning" Type="Bool" Value="false"/>
+</Animator>

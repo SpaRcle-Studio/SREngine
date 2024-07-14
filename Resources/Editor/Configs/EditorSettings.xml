@@ -38,5 +38,6 @@
         <Pair First="Back" Second="Editor/Textures/back.png"/>
         <Pair First="Font" Second="Editor/Textures/font.png"/>
         <Pair First="Audio" Second="Editor/Textures/audio.png"/>
+        <Pair First="FrameSkip" Second="Editor/Textures/frame-skip.png"/>
     </Icons>
 </Settings>

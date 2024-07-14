@@ -24,14 +24,7 @@ void fragment() {
 }
 
 void vertex() {
-    mat4 boneTransform = (bones[int(WEIGHT0[0])] * boneOffsets[int(WEIGHT0[0])]) * WEIGHT0[1];
-    boneTransform     += (bones[int(WEIGHT1[0])] * boneOffsets[int(WEIGHT1[0])]) * WEIGHT1[1];
-    boneTransform     += (bones[int(WEIGHT2[0])] * boneOffsets[int(WEIGHT2[0])]) * WEIGHT2[1];
-    boneTransform     += (bones[int(WEIGHT3[0])] * boneOffsets[int(WEIGHT3[0])]) * WEIGHT3[1];
-    boneTransform     += (bones[int(WEIGHT4[0])] * boneOffsets[int(WEIGHT4[0])]) * WEIGHT4[1];
-    boneTransform     += (bones[int(WEIGHT5[0])] * boneOffsets[int(WEIGHT5[0])]) * WEIGHT5[1];
-    boneTransform     += (bones[int(WEIGHT6[0])] * boneOffsets[int(WEIGHT6[0])]) * WEIGHT6[1];
-    boneTransform     += (bones[int(WEIGHT7[0])] * boneOffsets[int(WEIGHT7[0])]) * WEIGHT7[1];
+    #include <Engine/Shaders/Skinned/bone-transform.inl.srsl>
 
     pcf_modelMatrix = boneTransform;
     pcf_normal = mat3(boneTransform) * NORMAL;

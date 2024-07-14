@@ -52,7 +52,7 @@ namespace SR_CORE_GUI_NS {
                 if (pDescriptor) {
                     if (SR_GRAPH_GUI_NS::ImageButton(SR_FORMAT("##{}", (void*)pProperty), (void*)pDescriptor, SR_MATH_NS::IVector2(55), 3)) {
                         auto&& texturesPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
-                        auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(texturesPath, { { "Images", "png,jpg,bmp,tga" } });
+                        auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(texturesPath, { { "Images", "jpeg,png,jpg,bmp,tga" } });
 
                         if (path.Exists()) {
                             if (auto&& pTexture = SR_GTYPES_NS::Texture::Load(path)) {
@@ -267,6 +267,13 @@ namespace SR_CORE_GUI_NS {
                 bool value = pProperty->GetBool();
                 if (SR_GRAPH_GUI_NS::CheckBox(label, value)) {
                     pProperty->SetBool(value);
+                }
+                break;
+            }
+            case SR_UTILS_NS::StandardType::String: {
+                std::string value = pProperty->GetString();
+                if (ImGui::InputText(SR_FORMAT_C("{}##textBox{}", pProperty->GetName().c_str(), static_cast<void*>(pProperty)), &value)) {
+                    pProperty->SetString(value);
                 }
                 break;
             }

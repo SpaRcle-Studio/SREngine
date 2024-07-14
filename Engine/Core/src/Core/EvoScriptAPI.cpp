@@ -19,6 +19,8 @@
 #include <Graphics/Types/Skybox.h>
 #include <Graphics/Font/ITextComponent.h>
 #include <Graphics/Types/Geometry/ProceduralMesh.h>
+#include <Graphics/Animations/Animator.h>
+#include <Graphics/Animations/AnimationGraph.h>
 
 #include <Physics/3D/Rigidbody3D.h>
 #include <Physics/3D/Raycast3D.h>
@@ -61,6 +63,7 @@ namespace SpaRcle {
             RegisterText(generator);
             RegisterMath(generator);
             RegisterRaycast(generator);
+            RegisterAnimator(generator);
 
             generator->Save(SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Scripts/Libraries/"));
         }
@@ -616,6 +619,7 @@ namespace SpaRcle {
         using namespace SR_MATH_NS;
         using namespace SR_GTYPES_NS;
         using namespace SR_CORE_UI_NS;
+        using namespace SR_ANIMATIONS_NS;
         using namespace SR_PHYSICS_NS::Types;
 
         ESRegisterDynamicCast(generator, ProceduralMesh, Component)
@@ -623,6 +627,7 @@ namespace SpaRcle {
         ESRegisterDynamicCast(generator, Rigidbody, Component)
         ESRegisterDynamicCast(generator, Text, Component)
         ESRegisterDynamicCast(generator, Button, Component)
+        ESRegisterDynamicCast(generator, Animator, Component)
         ESRegisterDynamicCast(generator, SceneLogic, SceneCubeChunkLogic)
     }
 
@@ -663,6 +668,23 @@ namespace SpaRcle {
         }, { { "Component", EvoScript::Public }, { "Mesh", EvoScript::Public  } });
 
         ESRegisterMethod(EvoScript::Public, generator, Text, SetText, void, ESArg1(const std::string& text), ESArg1(text))
+    }
+
+    void API::RegisterAnimator(EvoScript::AddressTableGen* generator) {
+        using namespace SR_UTILS_NS;
+        using namespace SR_ANIMATIONS_NS;
+
+        generator->RegisterNewClass("AnimationGraph", "Animator", { }, { });
+
+        ESRegisterCustomMethod(EvoScript::Public, generator, AnimationGraph, SetBool, void, ESArg2(const std::string& name, bool value), {
+            return ptr->SetBool(name, value);
+        });
+
+        generator->RegisterNewClass("Animator", "Animator", {
+            "Libraries/Component.h"
+        }, { { "Component", EvoScript::Public } });
+
+        ESRegisterMethodArg0(EvoScript::Public, generator, Animator, GetGraph, AnimationGraph*)
     }
 
     void API::RegisterMath(EvoScript::AddressTableGen *generator) {
