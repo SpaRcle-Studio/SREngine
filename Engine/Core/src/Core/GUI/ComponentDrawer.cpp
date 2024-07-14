@@ -48,14 +48,6 @@
 #include <Audio/Types/AudioListener.h>
 
 namespace SR_CORE_NS::GUI {
-    void ComponentDrawer::DrawComponent(SR_PTYPES_NS::Rigidbody3D*& pComponent, EditorGUI* context, int32_t index) {
-
-    }
-
-    void ComponentDrawer::DrawComponent(SR_PTYPES_NS::Rigidbody*& pComponent, EditorGUI* context, int32_t index) {
-
-    }
-
     void ComponentDrawer::DrawCollisionShape(SR_PTYPES_NS::CollisionShape* pCollisionShape, EditorGUI* context, int32_t index){
 
     }

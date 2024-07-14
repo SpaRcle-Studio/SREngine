@@ -100,119 +100,13 @@ namespace SR_PTYPES_NS {
                 return IsShapeSupported(SR_UTILS_NS::EnumReflector::FromString<ShapeType>(value));
             });
 
-        m_properties.AddCustomProperty<SR_UTILS_NS::ExternalProperty>("Collision shape")
-            .SetPropertyGetter([this]() -> SR_UTILS_NS::Property* { return m_shape->GetProperties(); });
+        m_properties.AddExternalProperty(m_shape->GetProperties());
 
         return Entity::InitializeEntity();
     }
 
     std::string Rigidbody::GetEntityInfo() const {
         return Super::GetEntityInfo() + " | " + SR_UTILS_NS::EnumReflector::ToStringAtom(m_shape->GetType()).ToStringRef();
-    }
-
-    SR_UTILS_NS::Component* Rigidbody::LoadComponent(SR_UTILS_NS::Measurement measurement, SR_HTYPES_NS::Marshal &marshal, const SR_HTYPES_NS::DataStorage* pDataStorage) {
-        const auto&& type = static_cast<ShapeType>(marshal.Read<int32_t>());
-
-        const auto&& center = marshal.Read<SR_MATH_NS::FVector3>(SR_MATH_NS::FVector3(0.f));
-        const auto&& size = marshal.Read<SR_MATH_NS::FVector3>(SR_MATH_NS::FVector3(1.f));
-
-        const auto&& mass = marshal.Read<float_t>();
-        const auto&& isTrigger = marshal.Read<bool>();
-        const auto&& isStatic = marshal.Read<bool>();
-
-        const auto&& material = marshal.Read<std::string>();
-        const auto&& rawMesh = marshal.Read<std::string>();
-        const auto&& meshId = marshal.Read<int32_t>();
-
-        static auto&& verifyType = [](LibraryImpl* pLibrary, ShapeType shapeType) -> ShapeType {
-            if (!pLibrary->IsShapeSupported(shapeType)) {
-                SR_WARN("Rigidbody::LoadComponent() : rigidbody has unsupported shape! Replace to default...");
-                shapeType = pLibrary->GetDefaultShape();
-            }
-
-            return shapeType;
-        };
-
-        Rigidbody* pComponent = nullptr;
-
-        switch (measurement) {
-            case SR_UTILS_NS::Measurement::Space2D: {
-                pComponent = SR_UTILS_NS::ComponentManager::Instance().CreateComponent<Rigidbody2D>();
-                break;
-            }
-            case SR_UTILS_NS::Measurement::Space3D: {
-                pComponent = SR_UTILS_NS::ComponentManager::Instance().CreateComponent<Rigidbody3D>();
-                break;
-            }
-            default:
-                SRHalt("Unsupported measurement!");
-                return pComponent;
-        }
-
-        if (!pComponent) {
-            SR_ERROR("Rigidbody::LoadComponent() : failed to create rigidbody!");
-            return nullptr;
-        }
-
-        if (!pComponent->GetCollisionShape()) {
-            SR_ERROR("Rigidbody::LoadComponent() : rigidbody have not collision shape!");
-            pComponent->AutoFree([](auto&& pData) {
-                delete pData;
-            });
-            return nullptr;
-        }
-
-        if (!rawMesh.empty()) {
-            pComponent->SetRawMesh(SR_HTYPES_NS::RawMesh::Load(rawMesh));
-        }
-
-        if (material.empty()) {
-            pComponent->SetMaterial(SR_PHYSICS_NS::PhysicsLibrary::Instance().GetDefaultMaterial());
-        }
-        else {
-            pComponent->SetMaterial(PhysicsMaterial::Load(material));
-        }
-
-        pComponent->SetType(verifyType(pComponent->GetLibrary(), type));
-        pComponent->SetCenter(center);
-        pComponent->GetCollisionShape()->SetSize(size);
-        pComponent->SetMass(mass);
-        pComponent->SetIsTrigger(isTrigger);
-        pComponent->SetIsStatic(isStatic);
-        pComponent->SetMeshId(meshId);
-
-        return pComponent;
-    }
-
-    SR_HTYPES_NS::Marshal::Ptr Rigidbody::Save(SR_UTILS_NS::SavableContext data) const {
-        auto&& pMarshal = Super::Save(data);
-
-        pMarshal->Write<int32_t>(static_cast<int32_t>(m_shape->GetType()));
-
-        pMarshal->Write<SR_MATH_NS::FVector3>(m_center, SR_MATH_NS::FVector3(0.f));
-        pMarshal->Write<SR_MATH_NS::FVector3>(m_shape->GetSize(), SR_MATH_NS::FVector3(1.f));
-
-        pMarshal->Write<float_t>(m_mass);
-        pMarshal->Write<bool>(IsTrigger());
-        pMarshal->Write<bool>(IsStatic());
-
-        if (m_material) {
-            pMarshal->Write<std::string>(m_material->GetResourcePath().ToStringRef());
-        }
-        else {
-            pMarshal->Write<std::string>("");
-        }
-
-        if (m_rawMesh) {
-            pMarshal->Write<std::string>(m_rawMesh->GetResourcePath().ToStringRef());
-        }
-        else {
-            pMarshal->Write<std::string>("");
-        }
-
-        pMarshal->Write<int32_t>(m_meshId);
-
-        return pMarshal;
     }
 
     void Rigidbody::OnDestroy() {
@@ -467,6 +361,10 @@ namespace SR_PTYPES_NS {
     }
 
     void Rigidbody::SetMaterial(const SR_UTILS_NS::Path& path) {
+        if (path.IsEmpty()) {
+            SetMaterial(nullptr);
+            return;
+        }
         SR_PTYPES_NS::PhysicsMaterial* pMaterial = SR_PTYPES_NS::PhysicsMaterial::Load(path);
         SetMaterial(pMaterial);
     }

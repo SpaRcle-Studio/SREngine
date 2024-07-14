@@ -79,10 +79,6 @@ namespace SR_PTYPES_NS {
         ~Rigidbody() override;
 
     public:
-        static Component* LoadComponent(SR_UTILS_NS::Measurement measurement, SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage);
-
-        SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save(SR_UTILS_NS::SavableContext data) const override;
-
         bool UpdateMatrix(bool force = false);
         void Synchronize();
 

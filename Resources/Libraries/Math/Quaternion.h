@@ -7,6 +7,7 @@
 
 #include <Libraries/Math/CoreMath.h>
 #include <Libraries/Math/Vector3.h>
+#include <Libraries/Math/Vector2.h>
 
 class Quaternion {
     friend Vector3<Unit>;

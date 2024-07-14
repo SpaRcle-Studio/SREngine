@@ -300,6 +300,7 @@ namespace SpaRcle {
         ESRegisterMethod(EvoScript::Public, generator, GameObject, AddChild, bool, ESArg1(const SharedPtr<GameObject>& child), ESArg1(child))
         ESRegisterMethod(EvoScript::Public, generator, GameObject, GetComponent, Component*, ESArg1(const std::string& name), ESArg1(name))
         ESRegisterMethod(EvoScript::Public, generator, GameObject, Find, SharedPtr<GameObject>, ESArg1(const std::string& name), ESArg1(name))
+        ESRegisterMethodArg0(EvoScript::Public, generator, GameObject, GetParent, SharedPtr<GameObject>)
         ESRegisterMethod(EvoScript::Public, generator, GameObject, SetName, void, ESArg1(const std::string& name), ESArg1(name))
         ESRegisterMethod(EvoScript::Public, generator, GameObject, GetOrCreateComponent, Component*, ESArg1(const std::string& name), ESArg1(name))
         ESRegisterMethod(EvoScript::Public, generator, GameObject, SetTransform, void, ESArg1(Transform* pTransform), ESArg1(pTransform))
@@ -405,7 +406,7 @@ namespace SpaRcle {
     }
 
     void API::RegisterTransform(EvoScript::AddressTableGen *generator) {
-        generator->RegisterNewClass("Transform", "Transform", { "vector", "mutex", "stdint.h", "Libraries/Math/Vector3.h", "Libraries/Math/Vector2.h" });
+        generator->RegisterNewClass("Transform", "Transform", { "vector", "mutex", "stdint.h", "Libraries/Math/Vector3.h", "Libraries/Math/Quaternion.h", "Libraries/Math/Vector2.h" });
 
         using namespace SR_MATH_NS;
         using namespace SR_UTILS_NS;
@@ -416,6 +417,7 @@ namespace SpaRcle {
         ESRegisterMethod(EvoScript::Public, generator, Transform, SetTranslation, void, ESArg1(const FVector3& translation), ESArg1(translation))
         ESRegisterMethod(EvoScript::Public, generator, Transform, SetRotation, void, ESArg1(const FVector3& eulerAngles), ESArg1(eulerAngles))
         ESRegisterMethodArg0(EvoScript::Public, generator, Transform, GetRotation, FVector3)
+        ESRegisterMethodArg0(EvoScript::Public, generator, Transform, GetQuaternion, Quaternion)
 
         ESRegisterMethodArg0(EvoScript::Public, generator, Transform, GetTranslation, FVector3)
 
@@ -678,6 +680,9 @@ namespace SpaRcle {
 
         ESRegisterCustomMethod(EvoScript::Public, generator, AnimationGraph, SetBool, void, ESArg2(const std::string& name, bool value), {
             return ptr->SetBool(name, value);
+        });
+        ESRegisterCustomMethod(EvoScript::Public, generator, AnimationGraph, IsStateActive, bool, ESArg1(const std::string& name), {
+            return ptr->IsStateActive(name);
         });
 
         generator->RegisterNewClass("Animator", "Animator", {

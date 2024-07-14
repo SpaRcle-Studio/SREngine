@@ -52,7 +52,6 @@ namespace SR_UTILS_NS {
 namespace SR_PTYPES_NS {
     class Rigidbody;
     class Rigidbody2D;
-    class Rigidbody3D;
     class CollisionShape;
 }
 
@@ -72,7 +71,6 @@ namespace SR_CORE_NS::GUI::ComponentDrawer {
     void DrawComponent(SR_GTYPES_NS::Sprite*& sprite, EditorGUI* context, int32_t index);
     void DrawComponent(SR_GRAPH_NS::UI::Anchor*& anchor, EditorGUI* context, int32_t index);
     void DrawComponent(SR_GRAPH_NS::UI::Canvas*& canvas, EditorGUI* context, int32_t index);
-    void DrawComponent(SR_PTYPES_NS::Rigidbody3D*& pComponent, EditorGUI* context, int32_t index);
     void DrawComponent(SR_ANIMATIONS_NS::Skeleton*& pComponent, EditorGUI* context, int32_t index);
     void DrawComponent(SR_ANIMATIONS_NS::BoneComponent*& pComponent, EditorGUI* context, int32_t index) { }
     void DrawComponent(SR_UTILS_NS::LookAtComponent*& pComponent, EditorGUI* context, int32_t index);

@@ -122,6 +122,25 @@ public:
         );
     }
 
+    SR_NODISCARD SR_FORCE_INLINE Vector3 SR_FASTCALL Lerp(const Vector3& vector3, Unit t) const noexcept {
+#if SR_SIMD_SUPPORT
+        const __m128 t_vec = _mm_set1_ps(t);
+        const __m128 this_vec = _mm_set_ps(0.0f, z, y, x); // Вектор this, добавляем 0.0f для выравнивания
+        const __m128 other_vec = _mm_set_ps(0.0f, vector3.z, vector3.y, vector3.x); // Вектор vector3, добавляем 0.0f для выравнивания
+
+        const __m128 diff_vec = _mm_sub_ps(other_vec, this_vec); // vector3 - *this
+        const __m128 mul_vec = _mm_mul_ps(diff_vec, t_vec); // (vector3 - *this) * t
+        const __m128 result_vec = _mm_add_ps(this_vec, mul_vec); // *this + ((vector3 - *this) * t)
+
+        alignas(16) float result_array[4];
+        _mm_store_ps(result_array, result_vec); // Сохраняем результат в массив
+
+        return { result_array[0], result_array[1], result_array[2] }; // Извлекаем значения из массива
+#else
+        return static_cast<Vector3>(*this + (vector3 - *this) * t);
+#endif
+    }
+
     SR_NODISCARD Vector3 Normalize() const {
         T len = static_cast<T>(std::sqrt(x * x + y * y + z * z));
 

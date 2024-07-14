@@ -183,6 +183,7 @@ namespace SR_PTYPES_NS {
                     .SetType(SR_UTILS_NS::StandardType::Float)
                     .SetResetValue(1.f)
                     .SetDrag(0.1f);
+                SR_FALLTHROUGH;
             case ShapeType::Sphere3D:
                 m_properties.AddCustomProperty<SR_UTILS_NS::StandardProperty>("Radius")
                     .SetGetter([this](void* pValue) { *reinterpret_cast<float_t*>(pValue) = GetRadius(); })

@@ -29,14 +29,8 @@ namespace SR_PTYPES_NS {
 
     class Rigidbody3D final : public Rigidbody {
         using Super = Rigidbody;
-        SR_ENTITY_SET_VERSION(1006);
-        SR_INITIALIZE_COMPONENT(Rigidbody3D);
+        SR_REGISTER_NEW_COMPONENT(Rigidbody3D, 1013);
     public:
-        static Component* LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage);
-
-    public:
-        SR_HTYPES_NS::Marshal::Ptr Save(SR_UTILS_NS::SavableContext data) const override;
-
         SR_NODISCARD SR_UTILS_NS::Measurement GetMeasurement() const override;
 
         SR_NODISCARD SR_MATH_NS::BVector3 GetLinearLock() const noexcept { return m_linearLock; }
@@ -55,8 +49,6 @@ namespace SR_PTYPES_NS {
 
         void SetLinearVelocity(const SR_MATH_NS::FVector3& velocity);
         void SetAngularVelocity(const SR_MATH_NS::FVector3& velocity);
-
-        SR_NODISCARD SR_UTILS_NS::Component* CopyComponent() const override;
 
     protected:
         SR_MATH_NS::BVector3 m_linearLock;

@@ -186,6 +186,8 @@ namespace SR_CORE_NS {
             }
         }
 
+        pSceneUpdater->LateUpdate(isPaused);
+
         pEngine->SetOneFramePauseSkip(false);
     }
 }
