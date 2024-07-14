@@ -1,6 +1,7 @@
 name: SpaRcle Engine Main CI
 
 on:
+  workflow_dispatch:
   push:
     paths-ignore:
       - 'Documentation/**'
