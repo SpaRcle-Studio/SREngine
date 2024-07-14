@@ -685,6 +685,12 @@ namespace SR_CORE_GUI_NS {
 
             ImGui::Separator();
 
+            if (ImGui::MenuItem("Animator")) {
+                OpenWidget<AnimatorEditor>();
+            }
+
+            ImGui::Separator();
+
             if (ImGui::MenuItem("ImGui Demo Window")) {
                 m_imGuiDemo = true;
             }
