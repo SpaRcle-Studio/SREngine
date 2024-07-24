@@ -11,11 +11,6 @@ namespace SR_SCRIPTING_NS {
     class Behaviour;
 }
 
-namespace SR_AUDIO_NS {
-    class AudioSource;
-    class AudioListener;
-}
-
 namespace SR_ANIMATIONS_NS {
     class Animator;
     class BoneComponent;
@@ -80,9 +75,6 @@ namespace SR_CORE_NS::GUI::ComponentDrawer {
     void DrawMaterialProps(SR_GRAPH_NS::BaseMaterial* material, EditorGUI* context, int32_t index);
 
     void DrawComponent(SR_GTYPES_NS::ITextComponent* pComponent, EditorGUI* context, int32_t index);
-
-    void DrawComponent(SR_AUDIO_NS::AudioSource*& pComponent, EditorGUI* context, int32_t index);
-    void DrawComponent(SR_AUDIO_NS::AudioListener*& pComponent,EditorGUI* context,int32_t index);
 }
 
 #endif //SR_ENGINE_COMPONENTDRAWER_H

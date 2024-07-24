@@ -15,37 +15,39 @@ namespace SR_AUDIO_NS{
 
     class SoundListener : public SR_UTILS_NS::NonCopyable {
     public:
+        explicit SoundListener(SoundDevice* pDevice)
+            : m_pDevice(pDevice)
+        { }
+
         SoundListener* Allocate(SoundDevice* pDevice);
 
     public:
-        virtual bool Init() { return true; };
+        virtual bool Init() { return true; }
         virtual bool Update(const SR_MATH_NS::FVector3& position, const SR_MATH_NS::Quaternion& quaternion) { return true; }
 
     public:
-        SR_NODISCARD ListenerData* GetData() const noexcept { return m_data; }
+        SR_NODISCARD const ListenerData& GetData() const noexcept { return m_data; }
+        SR_NODISCARD ListenerData& GetData() noexcept { return m_data; }
 
-        SR_NODISCARD ListenerDistanceModel GetDistanceModel() const noexcept { return m_data->distanceModel; }
-        SR_NODISCARD float_t GetRolloffFactor() const noexcept { return m_data->rolloffFactor; }
-        SR_NODISCARD float_t GetReferenceDistance() const noexcept { return m_data->referenceDistance; }
-        SR_NODISCARD float_t GetMaxDistance() const noexcept { return m_data->maxDistance; }
-        SR_NODISCARD SR_MATH_NS::FVector3 GetVelocity() const noexcept { return m_data->velocity; }
-        SR_NODISCARD float_t GetDopplerFactor() const noexcept { return m_data->dopplerFactor; }
-        SR_NODISCARD float_t GetGain() const noexcept { return m_data->gain; }
-        SR_NODISCARD float_t GetOuterConeGain() const noexcept { return m_data->outerConeGain; }
+        SR_NODISCARD virtual ListenerDistanceModel GetDistanceModel() const noexcept { return m_data.distanceModel; }
+        SR_NODISCARD virtual SR_MATH_NS::FVector3 GetVelocity() const noexcept { return m_data.velocity; }
+        SR_NODISCARD virtual SR_MATH_NS::FVector3 GetPosition() const noexcept { return m_data.position; }
+        SR_NODISCARD virtual SR_MATH_NS::FVector6 GetOrientation() const noexcept { return m_data.orientation; }
+        SR_NODISCARD virtual float_t GetGain() const noexcept { return m_data.gain; }
 
-        void SetData(ListenerData* data) { m_data = data; }
+        SR_NODISCARD SoundDevice* GetDevice() const noexcept { return m_pDevice; }
 
-        virtual void SetDistanceModel(ListenerDistanceModel distanceModel) { m_data->distanceModel = distanceModel; }
-        virtual void SetRolloffFactor(float_t rolloffFactor) { m_data->rolloffFactor = rolloffFactor; }
-        virtual void SetReferenceDistance(float_t referenceDistance) { m_data->referenceDistance = referenceDistance; }
-        virtual void SetMaxDistance(float_t maxDistance) { m_data->maxDistance = maxDistance; }
-        virtual void SetVelocity(SR_MATH_NS::FVector3 velocity) { m_data->velocity = velocity; }
-        virtual void SetDopplerFactor(float_t dopplerFactor) { m_data->dopplerFactor = dopplerFactor; }
-        virtual void SetGain(float_t gain) { m_data->gain = gain; }
-        virtual void SetOuterConeGain(float_t outerConeGain) { m_data->outerConeGain = outerConeGain; }
+        void SetData(const ListenerData& data) { m_data = data; }
+
+        virtual void SetDistanceModel(ListenerDistanceModel distanceModel) { m_data.distanceModel = distanceModel; }
+        virtual void SetVelocity(SR_MATH_NS::FVector3 velocity) { m_data.velocity = velocity; }
+        virtual void SetGain(float_t gain) { m_data.gain = gain; }
 
     protected:
-        ListenerData* m_data = nullptr;
+        ListenerData m_data;
+
+    private:
+        SoundDevice* m_pDevice = nullptr;
 
     };
 }

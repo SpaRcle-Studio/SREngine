@@ -12,6 +12,9 @@
 #include <Physics/LibraryImpl.h>
 #include <Physics/PhysicsScene.h>
 #include <Physics/PhysicsMaterial.h>
+#include <Physics/Utils/Utils.h>
+#include <Physics/2D/Rigidbody2D.h>
+#include <Physics/3D/Rigidbody3D.h>
 
 namespace SR_PTYPES_NS {
     Rigidbody::~Rigidbody() {

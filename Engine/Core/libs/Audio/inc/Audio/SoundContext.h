@@ -28,6 +28,8 @@ namespace SR_AUDIO_NS {
         SR_NODISCARD virtual bool IsPaused(SoundSource pSource) const = 0;
         SR_NODISCARD virtual bool IsStopped(SoundSource pSource) const = 0;
 
+        SR_NODISCARD virtual bool MakeContextCurrent() = 0;
+
         SR_NODISCARD virtual SoundListener* AllocateListener();
 
         SR_NODISCARD virtual SoundSource AllocateSource(SoundBuffer buffer) = 0;
@@ -37,6 +39,8 @@ namespace SR_AUDIO_NS {
                 uint64_t dataSize,
                 int32_t sampleRate,
                 SoundFormat format) = 0;
+
+        SR_NODISCARD virtual PlayParams GetSourceParams(SoundSource pSource) const = 0;
 
         template <typename T> void ApplyParam(SoundSource pSource, const T& newParam, T& currentParam, PlayParamType paramType) {
             if (newParam.has_value()) { /// Данил, мы тебя любим! (с) SpaRcle Team <3
@@ -50,6 +54,14 @@ namespace SR_AUDIO_NS {
                     currentParam = newParam;
                     ApplyParamImpl(pSource, paramType, (void*)&currentParam.value());
                 }
+            }
+        }
+
+        template <typename T> void ApplyParam(SoundSource pSource, const T& newParam, PlayParamType paramType) {
+            SR_TRACY_ZONE;
+            if (newParam.has_value() && newParam.is_changed()) { /// Данил, мы тебя любим! (с) SpaRcle Team <3
+                ApplyParamImpl(pSource, paramType, (void*)&newParam.value());
+                newParam.reset_changed();
             }
         }
 
@@ -67,9 +79,6 @@ namespace SR_AUDIO_NS {
     protected:
         SoundDevice* m_device = nullptr;
         std::list<SoundListener*> m_listeners;
-
-    private:
-        PlayParams m_params;
 
     };
 }

@@ -182,9 +182,10 @@ namespace SR_CORE_GUI_NS {
                 m_velocity += SR_UTILS_NS::Transform3D::RIGHT * velocitySpeed;
             }
 
-            if (SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::Space)) {
-                m_velocity += SR_UTILS_NS::Transform3D::UP * velocitySpeed;
-            }
+            /// !!!!! НЕ ВОЗВОРАЩАТЬ ЭТОТ КОД !!!!!
+            /// if (SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::Space)) {
+            ///     m_velocity += SR_UTILS_NS::Transform3D::UP * velocitySpeed;
+            /// }
 
             /// TODO: странное управление. Нет подходящей удобной комбинации клавиши
             /// if (SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::Space) && SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::Z)) {

@@ -114,6 +114,9 @@ namespace SR_CORE_NS {
         pRenderScene.Do([gameMode](SR_GRAPH_NS::RenderScene *ptr) {
             ptr->SetOverlayEnabled(!gameMode);
         });
+        if (pPhysicsScene) {
+            pPhysicsScene->SetIsGameMode(gameMode);
+        }
     }
 
     void EngineScene::UpdateChunkDebug() {

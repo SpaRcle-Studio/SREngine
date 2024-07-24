@@ -8,6 +8,7 @@
 #include <Utils/Common/Singleton.h>
 #include <Utils/Types/Thread.h>
 
+#include <Audio/ListenerData.h>
 #include <Audio/PlayParams.h>
 
 namespace SR_AUDIO_NS {
@@ -20,6 +21,7 @@ namespace SR_AUDIO_NS {
     using AudioDeviceName = std::string;
 
     struct PlayData : public SR_UTILS_NS::NonCopyable {
+        Sound* pSound = nullptr;
         SoundData* pData = nullptr;
         SoundSource pSource = nullptr;
         PlayParams params;
@@ -42,6 +44,9 @@ namespace SR_AUDIO_NS {
     public:
         void StopAll();
 
+        SR_NODISCARD std::optional<PlayParams> GetSourceParams(const PlayData* pPlayData) const;
+        SR_NODISCARD std::optional<ListenerData> GetListenerParams(const SoundListener* pListener) const;
+
         Handle Play(const std::string& path);
         Handle Play(const std::string& path, const PlayParams& params);
         Handle Play(Sound* pSound, const PlayParams& params);
@@ -57,6 +62,15 @@ namespace SR_AUDIO_NS {
         SoundData* Register(Sound* pSound);
         bool Unregister(SoundData** pSoundData);
 
+        void SetListenerDistanceModel(SoundListener* pListenerContext, ListenerDistanceModel distanceModel);
+        void SetListenerGain(SoundListener* pListenerContext, float_t gain);
+        void SetListenerVelocity(SoundListener* pListenerContext, SR_MATH_NS::FVector3 velocity);
+        void SetListenerTransform(SoundListener* pListenerContext, const SR_MATH_NS::FVector3& position, const SR_MATH_NS::Quaternion& quaternion);
+
+        SR_NODISCARD const std::set<SoundListener*>& GetListeners() const noexcept { return m_listeners; }
+        SR_NODISCARD const std::list<PlayData*>& GetPlayStack() const noexcept { return m_playStack; }
+
+        SR_NODISCARD SR_HTYPES_NS::Thread::ThreadId GetThreadId() const noexcept { return m_threadId; }
         SR_NODISCARD SoundListener* CreateListener();
         SR_NODISCARD SoundListener* CreateListener(AudioLibrary library);
         void DestroyListener(SoundListener* pListener);
@@ -77,9 +91,15 @@ namespace SR_AUDIO_NS {
         void Destroy();
 
     private:
+        void Sleep();
+
+    private:
+        std::atomic<SR_HTYPES_NS::Thread::ThreadId> m_threadId = SR_HTYPES_NS::Thread::EmptyThreadId();
+        std::set<SoundListener*> m_listeners;
         SR_HTYPES_NS::Thread::Ptr m_thread = nullptr;
         std::atomic<State> m_state = State::Stopped;
         std::list<PlayData*> m_playStack;
+        std::set<PlayData*> m_playing;
         std::map<AudioLibrary, std::map<AudioDeviceName, SoundContext*>> m_contexts;
 
     };

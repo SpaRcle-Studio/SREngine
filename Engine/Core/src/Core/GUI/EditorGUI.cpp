@@ -74,6 +74,7 @@ namespace SR_CORE_GUI_NS {
         AddWidget(new EngineStatistics());
 		AddWidget(new PhysicsMaterialEditor());
 		AddWidget(new About());
+		AddWidget(new SoundDebug());
         AddWidget(new RenderTechniqueEditor());
         AddWidget(new SceneViewer(m_engine, GetWidget<Hierarchy>()));
 
@@ -675,6 +676,13 @@ namespace SR_CORE_GUI_NS {
 
             if (ImGui::MenuItem("Scene")) {
                 OpenWidget<SceneViewer>();
+            }
+
+
+            ImGui::Separator();
+
+            if (ImGui::MenuItem("Sound debug")) {
+                OpenWidget<SoundDebug>();
             }
 
             ImGui::Separator();

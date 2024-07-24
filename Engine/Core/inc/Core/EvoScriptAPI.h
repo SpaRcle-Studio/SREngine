@@ -53,6 +53,7 @@ namespace SpaRcle {
         static void RegisterMath(EvoScript::AddressTableGen* generator);
         static void RegisterText(EvoScript::AddressTableGen* generator);
         static void RegisterAnimator(EvoScript::AddressTableGen* generator);
+        static void RegisterAudioSource(EvoScript::AddressTableGen* generator);
 
         static void RegisterCasts(EvoScript::CastingGen* generator);
     };

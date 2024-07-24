@@ -25,6 +25,8 @@
 #include <Physics/3D/Rigidbody3D.h>
 #include <Physics/3D/Raycast3D.h>
 
+#include <Audio/Types/AudioSource.h>
+
 namespace SpaRcle {
     void API::RegisterEvoScriptClasses(SR_CORE_NS::Engine* pEngine) {
         Initialize();
@@ -64,6 +66,7 @@ namespace SpaRcle {
             RegisterMath(generator);
             RegisterRaycast(generator);
             RegisterAnimator(generator);
+            RegisterAudioSource(generator);
 
             generator->Save(SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Scripts/Libraries/"));
         }
@@ -165,6 +168,16 @@ namespace SpaRcle {
         generator->AddIncompleteType("Scene", "Engine");
         generator->AddIncompleteType("Render", "Engine");
         generator->AddIncompleteType("Camera", "Engine");
+    }
+
+    void API::RegisterAudioSource(EvoScript::AddressTableGen* generator) {
+        using namespace SR_AUDIO_NS;
+
+        generator->RegisterNewClass("AudioSource", "AudioSource", { "Libraries/Component.h" }, {
+            { "Component", EvoScript::Public }
+        });
+
+        //ESRegisterMethod(EvoScript::Public, generator, AudioSource, Play, void, ESArg0())
     }
 
     void API::RegisterScene(EvoScript::AddressTableGen *generator) {

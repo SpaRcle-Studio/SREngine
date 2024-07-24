@@ -100,26 +100,6 @@ public:
 
         rotateY += drag.x * rotateSpeed;
         rotateYLim += abs(drag.x) * rotateSpeed;
-
-       ///if (rotateState && abs(rotateY) < 1.f) {
-       ///    rotateState = false;
-       ///}
-
-       ///if (abs(rotateYLim) >= 40.f || rotateState) {
-       ///    rotateState = true;
-       ///    float_t value = rotateY / 10.f;
-       ///    rotateY -= value;
-       ///    rotateYLim /= 5.f;
-       ///    pParent->GetTransform()->Rotate(FVector3(0.f, value, 0.f));
-       ///    pGraph->SetBool("IsRunning", true);
-       ///}
-
-       ///FVector2 drag = Input::GetMouseDrag();
-       ///if (drag.x == 0 || (rotateState && abs(rotateYLim > 15.f))) {
-       ///    return;
-       ///}
-       ///rotateY += drag.x * rotateSpeed;
-       ///rotateYLim += abs(drag.x * rotateSpeed);
     }
 
     void AnimateCamera() {
@@ -154,7 +134,7 @@ public:
             return;
         }
 
-        pGraph->SetBool("IsThreaten", Input::GetKey(KeyCode::F));
+        pGraph->SetBool("IsThreaten", Input::GetKeyDown(KeyCode::F));
 
         if (!pGraph->IsStateActive("Dummy058|Dummy058|Threaten")) {
             MoveControl(pGraph);

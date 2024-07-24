@@ -20,6 +20,8 @@ namespace SR_AUDIO_NS {
         bool Init() override;
         void Play(SoundSource source) override;
 
+        bool MakeContextCurrent() override;
+
         void ApplyParamImpl(SoundSource pSource, PlayParamType paramType, const void* pValue) override;
 
     public:
@@ -29,6 +31,8 @@ namespace SR_AUDIO_NS {
 
     public:
         SR_NODISCARD SoundSource AllocateSource(SoundBuffer buffer) override;
+
+        SR_NODISCARD PlayParams GetSourceParams(SoundSource pSource) const override;
 
         SR_NODISCARD SoundBuffer AllocateBuffer(
                 void* data,

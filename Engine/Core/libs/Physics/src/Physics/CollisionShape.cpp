@@ -18,6 +18,8 @@ namespace SR_PTYPES_NS {
     }
 
     void CollisionShape::UpdateDebugShape() {
+        SR_TRACY_ZONE;
+
         if (!m_rigidbody || !m_rigidbody->IsDebugEnabled()) {
             return;
         }

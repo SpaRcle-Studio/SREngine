@@ -10,19 +10,24 @@
 namespace SR_AUDIO_NS {
     class OpenALSoundListener : public SoundListener {
         using Super = SoundListener;
-    public: /// TODO: AL_VELOCITY, AL_GAIN, AL_CONE_OUTER_GAIN, AL_DOPPLER_FACTOR
+    public:
+        explicit OpenALSoundListener(SoundDevice* pDevice)
+            : Super(pDevice)
+        { }
+
         bool Init() override;
         bool Update(const SR_MATH_NS::FVector3& position, const SR_MATH_NS::Quaternion& quaternion) override;
 
+        SR_NODISCARD ListenerDistanceModel GetDistanceModel() const noexcept override;
+        SR_NODISCARD SR_MATH_NS::FVector3 GetVelocity() const noexcept override;
+        SR_NODISCARD SR_MATH_NS::FVector3 GetPosition() const noexcept override;
+        SR_NODISCARD SR_MATH_NS::FVector6 GetOrientation() const noexcept override;
+        SR_NODISCARD float_t GetGain() const noexcept override;
+
     public:
         void SetDistanceModel(ListenerDistanceModel distanceModel) override;
-        void SetRolloffFactor(float_t rolloffFactor) override;
-        void SetReferenceDistance(float_t referenceDistance) override;
-        void SetMaxDistance(float_t maxDistance) override;
         void SetVelocity(SR_MATH_NS::FVector3 velocity) override;
-        void SetDopplerFactor(float_t dopplerFactor) override;
         void SetGain(float_t gain) override;
-        void SetOuterConeGain(float_t outerConeGain) override;
     };
 }
 #endif //SR_ENGINE_OPENALSOUNDLISTENER_H

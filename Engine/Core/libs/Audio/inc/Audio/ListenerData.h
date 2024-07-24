@@ -8,23 +8,20 @@
 namespace SR_AUDIO_NS {
     SR_ENUM_NS_CLASS_T(ListenerDistanceModel, uint8_t,
        None,
-       InverseDistance,
-       InverseDistanceClamped,
-       LinearDistance,
-       LinearDistanceClamped,
-       ExponentDistance,
-       ExponentDistanceClamped
+       Inverse,
+       InverseClamped,
+       Linear,
+       LinearClamped,
+       Exponent,
+       ExponentClamped
     );
 
-    struct ListenerData : public SR_UTILS_NS::NonCopyable {
-        ListenerDistanceModel distanceModel = ListenerDistanceModel::InverseDistanceClamped;
-        float_t rolloffFactor = 1.0f;
-        float_t referenceDistance = 1.0f;
-        float_t maxDistance = SR_FLOAT_MAX;
-        SR_MATH_NS::FVector3 velocity = SR_MATH_NS::FVector3(0.f, 0.f, 0.f);
-        float_t dopplerFactor = 1.0f;
+    struct ListenerData {
+        ListenerDistanceModel distanceModel = ListenerDistanceModel::InverseClamped;
+        SR_MATH_NS::FVector3 velocity;
         float_t gain = 1.0f;
-        float_t outerConeGain = 0.0f;
+        SR_MATH_NS::FVector3 position;
+        SR_MATH_NS::FVector6 orientation;
     };
 }
 
