@@ -17,7 +17,7 @@
 <details>
 <summary>Arch Linux Dependencies.</summary>
 
-    Not yet added. If you can help, please create a pull request.
+    cmake git ninja gcc xorg pkgconf gtk3 vulkan-headers vulkan-validation-layers vulkan-tools xcb-util-cursor python python-pip python-numpy
 </details>
 
 ## Building with Ninja.
