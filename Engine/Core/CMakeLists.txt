@@ -3,7 +3,8 @@ project(Core)
 
 set(CMAKE_CXX_STANDARD 20)
 
-message(STATUS "SpaRcle Engine compiler: ${CMAKE_C_COMPILER}")
+message(STATUS "SpaRcle Engine C compiler: ${CMAKE_C_COMPILER}")
+message(STATUS "SpaRcle Engine C++ compiler: ${CMAKE_CXX_COMPILER}")
 
 set(CORE_ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
