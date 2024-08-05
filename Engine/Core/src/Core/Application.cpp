@@ -54,10 +54,12 @@ namespace SR_CORE_NS {
 
         m_applicationPath = SR_PLATFORM_NS::GetApplicationPath().GetFolder();
 
-        if (!InitLogger()) {
-            SR_PLATFORM_NS::WriteConsoleError("Failed to initialize logger!\n");
-            return false;
+        auto&& logDir = SR_UTILS_NS::Path(m_applicationPath);
+        if (auto&& folder = SR_UTILS_NS::GetCmdOption(argv, argc + argv, "-logdir"); !folder.empty()) {
+            logDir = folder;
         }
+
+        InitLogger(logDir);
 
         return InitializeResourcesFolder(argc, argv);
     }
@@ -115,12 +117,12 @@ namespace SR_CORE_NS {
         return false;
     }
 
-    bool Application::InitLogger() {
+    bool Application::InitLogger(const SR_UTILS_NS::Path& logDir) {
         if (SR_UTILS_NS::Debug::Instance().IsInitialized()) {
             return true;
         }
 
-        auto&& logPath = m_applicationPath.Concat("srengine-log.txt");
+        auto&& logPath = logDir.Concat("srengine-log.txt");
         SR_UTILS_NS::Debug::Instance().Init(logPath, true, SR_UTILS_NS::Debug::Theme::Dark);
         SR_UTILS_NS::Debug::Instance().SetLevel(SR_UTILS_NS::Debug::Level::Low);
 
@@ -128,8 +130,8 @@ namespace SR_CORE_NS {
     }
 
     bool Application::Init() {
-        if (!InitLogger()) {
-            SR_PLATFORM_NS::WriteConsoleError("Failed to initialize logger!\n");
+        if (!SR_UTILS_NS::Debug::Instance().IsInitialized()) {
+            SR_PLATFORM_NS::WriteConsoleError("Logger is not initialized!\n");
             return false;
         }
 

@@ -32,7 +32,7 @@ namespace SR_CORE_NS {
 
     private:
         bool InitResourceTypes();
-        bool InitLogger();
+        bool InitLogger(const SR_UTILS_NS::Path& logDir);
         bool FindResourcesFolder();
         //void TryPlayStartSound();
         void Close();
