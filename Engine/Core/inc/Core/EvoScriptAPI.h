@@ -35,6 +35,7 @@ namespace SpaRcle {
         static void RegisterGameObject(EvoScript::AddressTableGen* generator);
         static void RegisterCamera(EvoScript::AddressTableGen* generator);
         static void RegisterRigidbody(EvoScript::AddressTableGen* generator);
+        static void RegisterButton(EvoScript::AddressTableGen* generator);
         static void RegisterRender(EvoScript::AddressTableGen* generator);
         static void RegisterUtils(EvoScript::AddressTableGen* generator);
         static void RegisterWindow(EvoScript::AddressTableGen* generator);
@@ -51,6 +52,8 @@ namespace SpaRcle {
         static void RegisterObserver(EvoScript::AddressTableGen* generator);
         static void RegisterMath(EvoScript::AddressTableGen* generator);
         static void RegisterText(EvoScript::AddressTableGen* generator);
+        static void RegisterAnimator(EvoScript::AddressTableGen* generator);
+        static void RegisterAudioSource(EvoScript::AddressTableGen* generator);
 
         static void RegisterCasts(EvoScript::CastingGen* generator);
     };

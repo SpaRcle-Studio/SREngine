@@ -18,6 +18,7 @@ namespace SR_CORE_NS {
           Stop,
           PauseActive,
           Pause,
+          FrameSkip,
           EmptyFolder,
           Folder,
           Script,

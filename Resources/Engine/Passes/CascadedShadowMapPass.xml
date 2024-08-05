@@ -7,6 +7,7 @@
         </FramebufferSettings>
         <Shaders>
             <Override Type="Spatial" Shader="Engine/Shaders/CascadedShadowMap/depth-spatial.srsl"/>
+            <Override Type="Skinned" Shader="Engine/Shaders/CascadedShadowMap/depth-skinned.srsl"/>
         </Shaders>
         <AllowedLayers>
             <Default/>

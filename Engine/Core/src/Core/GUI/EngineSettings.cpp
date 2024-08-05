@@ -50,11 +50,18 @@ namespace SR_CORE_GUI_NS {
         if (ImGui::Combo("Multi-sampling", &currentItem, SR_SAMPLE_COUNT_NAME_LIST)) {
             pPipeline->SetSampleCount(SR_SAMPLE_COUNT_VALUE_LIST.at(currentItem));
         }
+
+        bool optimizedRenderUpdate = GetContext()->IsOptimizedRenderUpdateEnabled();
+        if (ImGui::Checkbox("Optimized render update", &optimizedRenderUpdate)) {
+            GetContext()->SetOptimizedRenderUpdateEnabled(optimizedRenderUpdate);
+        }
     }
 
     void EngineSettings::DrawLighting() {
-        auto&& position = GetRenderScene()->GetLightSystem()->m_position;
-        SR_GRAPH_NS::GUI::DrawVec3Control("Directional light position", position);
+        SR_MATH_NS::FVector3 position = GetRenderScene()->GetLightSystem()->GetDirectionalLightPosition();
+        if (SR_GRAPH_NS::GUI::DrawVec3Control("Directional light position", position)) {
+            GetRenderScene()->GetLightSystem()->SetDirectionalLightPosition(position);
+        }
     }
 
     void EngineSettings::DrawVSync() {

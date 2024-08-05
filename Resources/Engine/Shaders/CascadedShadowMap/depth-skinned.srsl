@@ -1,0 +1,23 @@
+ShaderType Skinned;
+
+PolygonMode Fill;
+CullMode Back;
+DepthCompare LessOrEqual;
+PrimitiveTopology TriangleList;
+BlendEnabled false;
+DepthWrite true;
+DepthTest true;
+
+[[ssbo(bones)]] mat4[] bones;
+[[ssbo(offsets)]] mat4[] boneOffsets;
+
+void fragment() {
+    /// depth write
+}
+
+void vertex() {
+    #include <Engine/Shaders/Skinned/bone-transform.inl.srsl>
+
+    VERTEX = (boneTransform * vec4(VERTEX, 1.0)).xyz;
+    OUT_POSITION = CASCADE_LIGHT_SPACE_MATRICES[SHADOW_CASCADE_INDEX] * vec4(VERTEX, 1.0);
+}

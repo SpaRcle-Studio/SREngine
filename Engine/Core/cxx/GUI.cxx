@@ -4,6 +4,7 @@
 
 #include <Utils/macros.h>
 
+#include "../src/Core/GUI/SoundDebug.cpp"
 #include "../src/Core/GUI/ComponentDrawer.cpp"
 #include "../src/Core/GUI/EditorGUI.cpp"
 #include "../src/Core/GUI/Inspector.cpp"

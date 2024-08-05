@@ -74,6 +74,7 @@ namespace SR_CORE_NS {
         void SetPaused(bool isPaused);
         void SetSpeed(float_t speed);
         void SetGameMode(bool enabled);
+        void SetOneFramePauseSkip(bool enabled) { m_oneFramePauseSkip = enabled; }
 
         bool IsNeedReloadResources();
 
@@ -91,7 +92,7 @@ namespace SR_CORE_NS {
         SR_NODISCARD SR_WORLD_NS::SceneUpdater* GetSceneBuilder() const;
         SR_NODISCARD bool IsActive() const { return m_isActive; }
         SR_NODISCARD bool IsRun() const { return m_isRun; }
-        SR_NODISCARD bool IsPaused() const { return m_isPaused; }
+        SR_NODISCARD bool IsPaused() const { return m_isPaused && !m_oneFramePauseSkip; }
         SR_NODISCARD bool IsGameMode() const { return m_isGameMode; }
         SR_NODISCARD SR_CORE_GUI_NS::EditorGUI* GetEditor() const { return m_editor; }
         SR_NODISCARD SR_UTILS_NS::CmdManager* GetCmdManager() const { return m_cmdManager; }
@@ -118,6 +119,7 @@ namespace SR_CORE_NS {
         std::atomic<bool> m_isGameMode = false;
         std::atomic<bool> m_isActive = false;
         std::atomic<bool> m_isPaused = false;
+        std::atomic<bool> m_oneFramePauseSkip = false;
         std::atomic<bool> m_autoReloadResources = false;
 
         float_t m_speed = 1.f;
@@ -140,6 +142,7 @@ namespace SR_CORE_NS {
         RenderContextPtr m_renderContext = { };
 
         std::vector<WindowPtr> m_windows;
+        std::optional<Utils::CursorLock> m_cursorLockOpt = std::nullopt;
 
     };
 }

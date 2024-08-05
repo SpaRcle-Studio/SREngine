@@ -477,15 +477,24 @@ namespace SR_AUDIO_NS {
                         Offset += ChunkHeaderSize;
                         Offset += LocalChunkHeader->Size;
                     }
-                    else
-                    {
-                        printf( "Unknown chunk ID: %c%c%c%c\n", LocalChunkHeader->ID[0], LocalChunkHeader->ID[1], LocalChunkHeader->ID[2], LocalChunkHeader->ID[3] );
+                    else {
+                        std::string chunkID;
+                        for (unsigned char i : LocalChunkHeader->ID) {
+                            chunkID += static_cast<char>(i);
+                        }
+
+                        SR_ERROR("WAVDataProvider::WAVDataProvider() : unknown chunk ID: {}{}{}{}\n\tFormated chunk id: {}", LocalChunkHeader->ID[0], LocalChunkHeader->ID[1], LocalChunkHeader->ID[2], LocalChunkHeader->ID[3], chunkID);
+
                         m_dataSize = 0;
                         break;
                     }
                 }
 
                 m_dataSize = ChunkHeader ? ChunkHeader->Size : 0;
+                if (m_dataSize == 0) {
+                    SR_ERROR("WAVDataProvider::WAVDataProvider() : no data chunk found in WAV");
+                    return;
+                }
 
                 if ( IsALaw )
                 {

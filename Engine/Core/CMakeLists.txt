@@ -3,8 +3,6 @@ project(Core)
 
 set(CMAKE_CXX_STANDARD 20)
 
-message(STATUS "SpaRcle Engine compiler: ${CMAKE_C_COMPILER}")
-
 set(CORE_ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 
@@ -47,18 +45,29 @@ else()
     endif()
 endif()
 
-include(libs/Utils/cmake/ResourceEmbedder.cmake)
 #include(libs/Utils/cmake/Codegen.cmake)
 
 #SRUtilsCodegen("${CMAKE_CURRENT_SOURCE_DIR}/../../" "${CMAKE_CURRENT_SOURCE_DIR}/config/codegen.xml" "${CMAKE_CURRENT_BINARY_DIR}/Codegen/")
 
-AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Engine/Configs/Threads.yml")
-AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Engine/Configs/Features.xml")
-AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Engine/Utilities/git2.exe")
+if (NOT SR_ENGINE_FLATPAK_BUILD)
+    include(libs/Utils/cmake/ResourceEmbedder.cmake)
 
-EmbedResources("${CMAKE_CURRENT_BINARY_DIR}/libs/Utils/include/Utils" "SREngine/Resources" ${EMBED_RESOURCES_LIST})
+    AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Engine/Configs/Threads.yml")
+    AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Engine/Configs/Features.xml")
 
-set(SR_UTILS_CI_BUILD OFF)
+    if (WIN32)
+        AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Engine/Utilities/git2.exe")
+        AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Engine/Utilities/vswhere.exe")
+    elseif (UNIX)
+        AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Engine/Utilities/git2")
+    endif()
+
+    EmbedResources("${CMAKE_CURRENT_BINARY_DIR}/libs/Utils/include/Utils" "Resources" ${EMBED_RESOURCES_LIST})
+
+    set(SR_COMMON_EMBED_RESOURCES ON)
+endif()
+
+set(SR_COMMON_OPENSSL ON)
 
 message(STATUS "CONFIGURING Utils -----------------")
 add_subdirectory(libs/Utils)

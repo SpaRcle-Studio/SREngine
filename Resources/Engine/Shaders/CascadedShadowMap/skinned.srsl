@@ -1,0 +1,36 @@
+ShaderType Skinned;
+
+PolygonMode Fill;
+CullMode Back;
+DepthCompare LessOrEqual;
+PrimitiveTopology TriangleList;
+BlendEnabled false; 
+DepthWrite true;
+DepthTest true;
+
+[[uniform], [public]] vec4 color;
+[[uniform], [public]] sampler2D diffuse;
+
+[[ssbo(bones)]] mat4[] bones;
+[[ssbo(offsets)]] mat4[] boneOffsets;
+
+#include <Engine/Shaders/CascadedShadowMap/pcf-utils.inl.srsl>
+
+void fragment() {
+    vec3 diffuseColor = texture(diffuse, UV).rgb * color.rgb;
+    vec3 lightColor = vec3(1.0);
+
+    COLOR = CalculateShadow(diffuseColor, lightColor);
+}
+
+void vertex() {
+    #include <Engine/Shaders/Skinned/bone-transform.inl.srsl>
+
+    pcf_modelMatrix = boneTransform;
+    pcf_normal = mat3(boneTransform) * NORMAL;
+    pcf_lightDir = DIRECTIONAL_LIGHT_POSITION - VERTEX;
+    pcf_viewDir = VIEW_POSITION - VERTEX;
+    pcf_viewPos = (VIEW_MATRIX * boneTransform * vec4(VERTEX, 1.0)).xyz;
+
+    OUT_POSITION = PROJECTION_MATRIX * VIEW_MATRIX * boneTransform * vec4(VERTEX, 1.0);
+}

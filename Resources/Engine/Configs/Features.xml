@@ -20,6 +20,8 @@
 
        <ChunkSystem Value="true"/>
 
+       <OptimizedRenderUpdate Value="true"/>
+
        <ImGUI Value="true"/>
        <Editor Value="true"/>
        <EditorOnStartup Value="true"/>
@@ -50,6 +52,6 @@
        <SkyboxCPUUsage Value="false"/>
        <VulkanValidation Value="true"/>
        <MultiRenderTargets Value="false"/>
-       <Undocking Value="true"/>
+       <Undocking Value="false"/>
    </Common>
 </Features>

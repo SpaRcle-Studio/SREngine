@@ -16,15 +16,11 @@
 
 class CharacterMove : public Behaviour {
 public:
-    void Awake() override {
-        Input::LockCursor(true);
-    }
-
-    void Close() override {
-        Input::LockCursor(false);
-    }
-
     void FixedUpdate() override {
+        if (!gameObject) {
+            return;
+        }
+
         auto&& pRigidbody3D = DynamicCastComponentToRigidbody3D(gameObject->GetComponent("Rigidbody3D"));
 
         if (!transform || !pRigidbody3D) {

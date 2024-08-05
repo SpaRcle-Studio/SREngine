@@ -1,0 +1,89 @@
+settings:
+  - name: "RenderTechnique"
+    path: "Samples/RenderTechniques/RayMarchingRenderTechnique.xml"
+          #"Editor/Configs/EditorCascadedShadowMapRenderTechnique.xml"
+          #"Editor/Configs/EditorColorBufferRenderTechnique.xml"
+          #"Editor/Configs/EditorVarianceShadowMapRenderTechnique.xml"
+          #"Editor/Configs/EditorCascadedShadowMapRenderTechnique.xml"
+          #"Editor/Configs/EditorShadowMapRenderTechnique.xml"
+          #"Editor/Configs/EditorSimpleRenderTechnique.xml"
+          #"Editor/Configs/EditorVignetteRenderTechnique.xml"
+          #"Editor/Configs/EditorSSAORenderTechnique.xml"
+          #"Editor/Configs/EditorEmptySwapchainRenderTechnique.xml"
+          #"Editor/Configs/EditorRenderTechnique.xml"
+          #"Editor/Configs/EditorRayMarchingRenderTechnique.xml"
+          #"Editor/Configs/EditorRenderTechnique.xml"
+
+  - name: "PrefabRenderTechnique"
+    path: "Editor/Configs/EditorCascadedShadowMapRenderTechnique.xml"
+
+  - name: "DebugChunks"
+    value: Off
+
+  - name: "Icons"
+    values:
+        - name: "Unknown"
+          path: "Editor/Textures/unknown.png"
+
+        - name: "Material"
+          path: "Editor/Textures/material.png"
+
+        - name: "File"
+          path: "Editor/Textures/file.png"
+
+        - name: "Folder"
+          path: "Editor/Textures/folder.png"
+
+        - name: "EmptyFolder"
+          path: "Editor/Textures/empty_folder.png"
+
+        - name: "Script"
+          path: "Editor/Textures/script.png"
+
+        - name: "Reset"
+          path: "Editor/Textures/reset.png"
+
+        - name: "Shapes"
+          path: "Editor/Textures/shapes.png"
+
+        - name: "ZIP"
+          path: "Editor/Textures/zip.png"
+
+        - name: "JPG"
+          path: "Editor/Textures/jpg.png"
+
+        - name: "TXT"
+          path: "Editor/Textures/txt.png"
+
+        - name: "XML"
+          path: "Editor/Textures/xml.png"
+
+        - name: "PNG"
+          path: "Editor/Textures/png.png"
+
+        - name: "DLL"
+          path: "Editor/Textures/dll.png"
+
+        - name: "Game"
+          path: "Editor/Textures/game.png"
+
+        - name: "Play"
+          path: "Editor/Textures/play-colored.png"
+
+        - name: "Stop"
+          path: "Editor/Textures/stop.png"
+
+        - name: "Pause"
+          path: "Editor/Textures/pause-active.png"
+
+        - name: "PauseActive"
+          path: "Editor/Textures/pause.png"
+
+        - name: "Back"
+          path: "Editor/Textures/back.png"
+
+        - name: "Font"
+          path: "Editor/Textures/font.png"
+
+        - name: "Audio"
+          path: "Editor/Textures/audio.png"

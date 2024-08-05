@@ -56,21 +56,24 @@ namespace SR_AUDIO_NS {
             path = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat(path);
         }
 
+        if (!path.Exists(SR_UTILS_NS::Path::Type::File)) {
+            SR_ERROR("RawSound::Load() : file not found!\n\tPath: {}", path.ToString());
+            return false;
+        }
+
         auto&& dataBlob = SR_UTILS_NS::FileSystem::ReadFileAsBlob(path);
-        if (!dataBlob || dataBlob->empty())
-        {
+        if (!dataBlob || dataBlob->empty()) {
             SR_ERROR("RawSound::Load() : cannot read file!\n\tPath: {}", path.ToString());
             return false;
         }
 
-        if (!(m_dataProvider = CreateWaveDataProvider(path.CStr(), dataBlob)))
-        {
-            SR_ERROR("RawSound::Load() : cannot parse file!\n\tPath: ", path.ToString());
+        if (!((m_dataProvider = CreateWaveDataProvider(path.CStr(), dataBlob)))) {
+            SR_ERROR("RawSound::Load() : cannot parse file!\n\tPath: {}", path.ToString());
             return false;
         }
 
         if (!m_dataProvider->IsValid()) {
-            SR_ERROR("RawSound::Load() : data provider is invalid!\n\tPath: ", path.ToString());
+            SR_ERROR("RawSound::Load() : data provider is invalid!\n\tPath: {}", path.ToString());
             return false;
         }
 

@@ -120,7 +120,8 @@ namespace SR_CORE_NS {
             return true;
         }
 
-        SR_UTILS_NS::Debug::Instance().Init(m_applicationPath, true, SR_UTILS_NS::Debug::Theme::Dark);
+        auto&& logPath = m_applicationPath.Concat("srengine-log.txt");
+        SR_UTILS_NS::Debug::Instance().Init(logPath, true, SR_UTILS_NS::Debug::Theme::Dark);
         SR_UTILS_NS::Debug::Instance().SetLevel(SR_UTILS_NS::Debug::Level::Low);
 
         return true;
@@ -295,9 +296,9 @@ namespace SR_CORE_NS {
 
         resourcesManager.RegisterType<SR_SRLM_NS::LogicalMachine>();
 
+        resourcesManager.RegisterType<SR_GRAPH_NS::FileMaterial>();
         resourcesManager.RegisterType<SR_GTYPES_NS::Mesh>();
         resourcesManager.RegisterType<SR_GTYPES_NS::Texture>();
-        resourcesManager.RegisterType<SR_GTYPES_NS::Material>();
         resourcesManager.RegisterType<SR_GTYPES_NS::Shader>();
         resourcesManager.RegisterType<SR_GTYPES_NS::Skybox>();
         resourcesManager.RegisterType<SR_GTYPES_NS::Framebuffer>();

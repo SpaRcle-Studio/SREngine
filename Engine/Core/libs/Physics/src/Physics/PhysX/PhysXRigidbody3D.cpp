@@ -263,6 +263,8 @@ namespace SR_PTYPES_NS {
 
         /// ------------------------------------------------------------------------------------------------------------
 
+        auto&& pRigidbody3D = static_cast<Rigidbody3D*>(m_rigidbody);
+
         SR_MATH_NS::FVector3 deltaTranslation(SR_MATH_NS::Unit(0));
         SR_MATH_NS::Quaternion deltaQuaternion(SR_MATH_NS::Quaternion::Identity());
 
@@ -270,18 +272,20 @@ namespace SR_PTYPES_NS {
             deltaTranslation = (rigidbodyTranslation - m_rigidbody->GetCenterDirection()) - m_rigidbodyTranslation;
         }
 
-        if (m_rigidbodyRotation.IsFinite()) {
-            deltaQuaternion = rigidbodyRotation * m_rigidbodyRotation.Inverse();
-        }
-
         if (!deltaTranslation.IsEquals(SR_MATH_NS::FVector3(SR_MATH_NS::Unit(0)), SR_MATH_NS::Unit(0.001))) {
             pTransform->GlobalTranslate(deltaTranslation);
         }
 
-       if (deltaQuaternion != SR_MATH_NS::Quaternion::Identity()) {
-           pTransform->SetRotation(rigidbodyRotation);
-           // TODO: maybe use? pTransform->Rotate(deltaQuaternion);
-       }
+        if (pRigidbody3D->GetAngularLock() != SR_MATH_NS::BVector3(true)) {
+            if (m_rigidbodyRotation.IsFinite()) {
+                deltaQuaternion = rigidbodyRotation * m_rigidbodyRotation.Inverse();
+            }
+
+            if (!deltaQuaternion.IsEquals(SR_MATH_NS::FVector3(SR_MATH_NS::Unit(0)), SR_MATH_NS::Unit(0.0001))) {
+                pTransform->SetRotation(rigidbodyRotation);
+                // TODO: maybe use? pTransform->Rotate(deltaQuaternion);
+            }
+        }
 
         m_rigidbody->UpdateMatrix(true);
 

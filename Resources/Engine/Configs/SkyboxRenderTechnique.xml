@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<Technique Name="Skybox">
+    <SwapchainPass R="0.0" G="0.0" B="0.0" A="1.0" Depth="1.0">
+        <SkyboxPass Path="Engine/Skyboxes/Sun.png" Shader="Engine/Shaders/skybox.srsl"/>
+    </SwapchainPass>
+    <Queues>
+        <Queue>
+            <Pass Name="SwapchainPass"/>
+        </Queue>
+    </Queues>
+</Technique>

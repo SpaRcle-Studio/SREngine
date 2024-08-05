@@ -84,6 +84,7 @@ namespace SR_SCRIPTING_NS {
 
     public:
         void SetRawBehaviour(const SR_UTILS_NS::Path& path);
+        void Reload();
         void OnBehaviourChanged();
 
         SR_NODISCARD IRawBehaviour* GetRawBehaviour() const noexcept { return m_rawBehaviour; }

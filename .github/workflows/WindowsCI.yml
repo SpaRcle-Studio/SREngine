@@ -19,7 +19,7 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: Fetching repository.
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4.1.6
         with:
           fetch-depth: 1
 
@@ -38,10 +38,13 @@ jobs:
         run: git submodule --quiet update --init --recursive --depth 1 --jobs 4
 
       - name: Installing Ninja.
-        uses: ashutoshvarma/setup-ninja@v1.1
-        with:
-          version: '1.10.2'
-          dest: '${{github.workspace}}/../ninja'
+        uses: seanmiddleditch/gha-setup-ninja@master
+
+      #- name: Installing Ninja.
+      #  uses: ashutoshvarma/setup-ninja@v1.1
+      #  with:
+      #    version: '1.10.2'
+      #    dest: '${{github.workspace}}/../ninja'
 
       - name: Creating Building Environment.
         run: |
@@ -54,7 +57,7 @@ jobs:
         working-directory: ${{github.workspace}}/build-release
         run: |
           echo "releaseSuccessful=false" >> "$GITHUB_ENV"
-          cmake -G "Ninja" ../ -DCMAKE_BUILD_TYPE=Release "-DCMAKE_MAKE_PROGRAM=${{github.workspace}}/../ninja/ninja.exe" 
+          cmake -G "Ninja" ../ -DCMAKE_BUILD_TYPE=Release "-DCMAKE_MAKE_PROGRAM=${{github.workspace}}/ninja-build/ninja.exe" 
           cmake --build . -j 4
           echo "releaseSuccessful=true" >> "$GITHUB_ENV"
 
@@ -64,7 +67,7 @@ jobs:
         working-directory: ${{github.workspace}}/build-debug
         run: |
           echo "debugSuccessful=false" >> "$GITHUB_ENV"
-          cmake -G "Ninja" ../ -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=${{github.workspace}}/../ninja/ninja.exe" 
+          cmake -G "Ninja" ../ -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=${{github.workspace}}/ninja-build/ninja.exe" 
           cmake --build . -j 4
           echo "debugSuccessful=true" >> "$GITHUB_ENV"
           
@@ -97,55 +100,49 @@ jobs:
       - if: env.debugSuccessful == 'true'
         name: Creating Debug artifact.
         working-directory: ${{github.workspace}}/build-debug/Engine
-        shell: cmd
-        run: | 
-          rename debug Bin
-          md SREngineDebugBuild
-          md SREngineDebugBuild/Resources
-          md SREngineDebugBuild/Bin
-          move Bin SREngineDebugBuild
-          copy SREngine.exe SREngineDebugBuild/Bin
-          cd ../../
-          move Resources build-debug/Engine/SREngineDebugBuild
+        shell: bash
+        run: |
+          mkdir SREngineDebugBuild
+          ls | grep "SREngine_" | xargs -I '{}' cp '{}' ./SREngineDebugBuild/
+        #shell: cmd
+        #run: |
+        #  mkdir SREngineReleaseBuild & for /f "delims=" %i in ('dir /b ^| findstr "SREngine_"') do copy "%i" SREngineDebugBuild
 
       - if: env.releaseSuccessful == 'true'
         name: Creating Release artifact.
         working-directory: ${{github.workspace}}/build-release/Engine
-        shell: cmd
-        run: | 
-          rename release Bin
-          md SREngineReleaseBuild
-          md SREngineReleaseBuild/Resources
-          md SREngineReleaseBuild/Bin
-          move Bin SREngineReleaseBuild
-          copy SREngine.exe SREngineDebugBuild/Bin
-          cd ../../
-          move Resources build-release/Engine/SREngineReleaseBuild
-        
+        shell: bash
+        run: |
+          mkdir SREngineReleaseBuild
+          ls | grep "SREngine_" | xargs -I '{}' cp '{}' ./SREngineReleaseBuild/
+        #shell: cmd
+        #run: |
+        #  mkdir SREngineReleaseBuild & for /f "delims=" %i in ('dir /b ^| findstr "SREngine_"') do copy "%i" SREngineReleaseBuild
+
       - if: env.debugSuccessful == 'true'
         name: Uploading a successful Debug build artifact.
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4.3.3
         with:
           name: SREngine Windows Debug
           path: '${{github.workspace}}/build-debug/Engine/SREngineDebugBuild'
 
       - if: env.releaseSuccessful == 'true'
         name: Uploading a successful Release build artifact.
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4.3.3
         with:
           name: SREngine Windows Release
           path: '${{github.workspace}}/build-release/Engine/SREngineReleaseBuild'
 
       - if: env.debugSuccessful == 'false' || inputs.artifactPush == 'true'
         name: Uploading a failed Debug build artifact.
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4.3.3
         with:
           name: 'SREngine Windows Failed Debug'
           path: '${{github.workspace}}/build-debug'
 
       - if: env.releaseSuccessful == 'false' || inputs.artifactPush == 'true'
         name: Uploading a failed Release build artifact.
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4.3.3
         with:
           name: 'SREngine Windows Failed Release'
           path: '${{github.workspace}}/build-release'

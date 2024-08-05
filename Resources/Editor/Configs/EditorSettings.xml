@@ -1,7 +1,8 @@
 <?xml version="1.0"?>
 <Settings>
+    <!--<RenderTechnique Path="Editor/Configs/EditorCascadedShadowMapRenderTechnique.xml"/>-->
     <RenderTechnique Path="Editor/Configs/EditorCascadedShadowMapRenderTechnique.xml"/>
-	<PrefabRenderTechnique Path="Editor/Configs/EditorCascadedShadowMapRenderTechnique.xml"/>
+	<PrefabRenderTechnique Path="Editor/Configs/EditorPrefabRenderTechnique.xml"/>
     <!--<RenderTechnique Path="Editor/Configs/EditorColorBufferRenderTechnique.xml"/>-->
     <!--<RenderTechnique Path="Editor/Configs/EditorVarianceShadowMapRenderTechnique.xml"/>-->
     <!--<RenderTechnique Path="Editor/Configs/EditorCascadedShadowMapRenderTechnique.xml"/>-->
@@ -37,5 +38,6 @@
         <Pair First="Back" Second="Editor/Textures/back.png"/>
         <Pair First="Font" Second="Editor/Textures/font.png"/>
         <Pair First="Audio" Second="Editor/Textures/audio.png"/>
+        <Pair First="FrameSkip" Second="Editor/Textures/frame-skip.png"/>
     </Icons>
 </Settings>

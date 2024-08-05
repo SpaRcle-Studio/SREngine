@@ -2,7 +2,7 @@
 <Technique Name="CascadedShadowMap">
     <Include Path="Engine/Passes/ColorBufferPass.xml"/>
     <Include Path="Engine/Passes/CascadedShadowMapPass.xml"/>
-    <Include Path="Engine/Passes/DefaultSceneViewPass.xml"/>
+    <Include Path="Editor/Passes/DefaultSceneViewPass.xml"/>
     <Queues>
         <Queue>
             <Pass Name="ShadowMap"/>

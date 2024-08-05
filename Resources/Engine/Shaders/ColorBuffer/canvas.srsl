@@ -3,7 +3,7 @@ ShaderType Canvas;
 PolygonMode Fill;
 CullMode Back;
 DepthCompare LessOrEqual;
-PrimitiveTopology TriangleList;
+PrimitiveTopology TriangleStrip;
 BlendEnabled false;
 DepthWrite true;
 DepthTest true;
@@ -13,5 +13,6 @@ void fragment() {
 }
 
 void vertex() {
-    OUT_POSITION = PROJECTION_MATRIX * VIEW_MATRIX * MODEL_MATRIX * vec4(VERTEX, 1.0);
+    #include <Engine/Shaders/UI/sprite-vertices.inl.srsl>
+    OUT_POSITION = PROJECTION_MATRIX * VIEW_MATRIX * MODEL_MATRIX * vec4(vertices[VERTEX_INDEX], 1.0);
 }

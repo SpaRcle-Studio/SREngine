@@ -70,6 +70,18 @@ namespace SR_SCRIPTING_NS {
 
         auto&& compiler = GlobalEvoCompiler::Instance();
 
+    #ifdef SR_WIN32
+        if (m_compilerPath.empty()) {
+            m_compilerPath = FindMSVCCompiler();
+        }
+    #elif defined(SR_LINUX)
+        if (m_compilerPath.empty()) {
+            m_compilerPath = "/usr/bin/g++";
+        }
+    #endif
+
+        compiler.SetCompilerPath(m_compilerPath.ToStringRef());
+
         m_checkIterator = std::nullopt;
 
         m_scripts[localPath.ToStringRef()].AutoFree([](ScriptHolder* pHolder) {
@@ -122,5 +134,19 @@ namespace SR_SCRIPTING_NS {
         }
 
         Singleton::OnSingletonDestroy();
+    }
+
+    SR_UTILS_NS::Path EvoScriptManager::FindMSVCCompiler() const {
+        auto&& resourceDirectory = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
+        auto&& vswherePath = resourceDirectory.Concat("Engine/Utilities/vswhere.exe");
+        std::string command = vswherePath.ToStringRef() + " -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -find VC/Tools/MSVC/**/bin/Hostx64/x64/cl.exe";
+        command += " > vswhereOutput.txt";
+        system(command.c_str());
+
+        std::ifstream vswhereOutput("vswhereOutput.txt");
+        std::string result;
+        getline(vswhereOutput, result);
+        vswhereOutput.close();
+        return result;
     }
 }

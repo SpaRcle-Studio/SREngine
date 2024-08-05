@@ -8,7 +8,7 @@ BlendEnabled false;
 DepthWrite true;
 DepthTest true;
 
-[[uniform], [public]] vec4 color;
+[[uniform], [public]] vec4 color = vec4(1, 1, 1, 1);
 [[uniform], [public]] sampler2D diffuse;
 
 [[uniform]] sampler2DArray shadowMap;
@@ -55,6 +55,9 @@ float filterPCF(vec4 sc, uint cascadeIndex) {
 
 void fragment() {
     vec3 diffuseColor = texture(diffuse, UV).rgb * color.rgb;
+    if (texture(diffuse, UV).a == 0.0) {
+        discard;
+    }
 
     uint cascadeIndex = 0;
 

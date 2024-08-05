@@ -4,30 +4,80 @@
 
 #include <Core/GUI/AnimatorEditor.h>
 
+#include <Graphics/Animations/Animator.h>
+
 namespace SR_CORE_GUI_NS {
     AnimatorEditor::AnimatorEditor()
         : Super("Animator")
     { }
 
-    void AnimatorEditor::OnOpen() {
-    #ifdef SR_USE_IMGUI_NODE_EDITOR
-        ax::NodeEditor::Config config;
+    void AnimatorEditor::SetAnimator(const AnimatorPtr& pAnimator) noexcept {
+        m_pAnimator = pAnimator;
+    }
 
-        static const SR_UTILS_NS::Path settings = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Editor/Animator.json");
-        config.SettingsFile = settings.c_str();
+    void AnimatorEditor::Draw() {
+        if (auto&& pHierarchy = GetManager()->GetWidget<Hierarchy>()) {
+            if (auto&& selected = pHierarchy->GetSelected(); !selected.empty()) {
+                if (auto&& pAnimator = (*selected.begin())->GetComponent<SR_ANIMATIONS_NS::Animator>()) {
+                    SetAnimator(pAnimator);
+                }
+            }
+        }
 
-        config.UserPointer = this;
+        if (!m_pAnimator) {
+            ImGui::TextColored(ImVec4(1.f, 0.f, 0.f, 1.f), "No animator selected!");
+            return;
+        }
 
-        config.LoadNodeSettings = [](ax::NodeEditor::NodeId nodeId, char* data, void* userPointer) -> size_t {
-            return 0;
-        };
+        auto&& pGraph = m_pAnimator->GetGraph();
+        if (!pGraph) {
+            ImGui::TextColored(ImVec4(1.f, 0.f, 0.f, 1.f), "Animator has no graph!");
+            return;
+        }
 
-        config.SaveNodeSettings = [](ax::NodeEditor::NodeId nodeId, const char* data, size_t size, ax::NodeEditor::SaveReasonFlags reason, void* userPointer) -> bool {
-            return true;
-        };
+        for (auto&& pNode : pGraph->GetNodes()) {
+            ImGui::Separator();
+            ImGui::Text("Node: %s", SR_UTILS_NS::EnumReflector::ToStringAtom(pNode->GetType()).c_str());
 
-        m_editor = ax::NodeEditor::CreateEditor(&config);
-    #endif
+            if (auto&& pStateMachineNode = dynamic_cast<SR_ANIMATIONS_NS::AnimationGraphNodeStateMachine*>(pNode)) {
+                auto&& pStateMachine = pStateMachineNode->GetMachine();
+                if (!pStateMachine) {
+                    ImGui::TextColored(ImVec4(1.f, 0.f, 0.f, 1.f), "State machine is null!");
+                    continue;
+                }
+
+                for (auto&& pState : pStateMachine->GetStates()) {
+                    ImGui::Text("\tState: %s", pState->GetName().c_str());
+                    ImGui::Text("\t\tProgress: %f", pState->GetProgress());
+
+                    for (auto&& pTransition : pState->GetTransitions()) {
+                        ImGui::Text("\t\tTransition from %s to %s", pTransition->GetSource()->GetName().c_str(), pTransition->GetDestination()->GetName().c_str());
+                        ImGui::Text("\t\t\tProgress: %f", pTransition->GetProgress());
+                    }
+                }
+            }
+        }
+    }
+
+    //void AnimatorEditor::OnOpen() {
+    //#ifdef SR_USE_IMGUI_NODE_EDITOR
+    //    ax::NodeEditor::Config config;
+//
+    //    static const SR_UTILS_NS::Path settings = SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Editor/Animator.json");
+    //    config.SettingsFile = settings.c_str();
+//
+    //    config.UserPointer = this;
+//
+    //    config.LoadNodeSettings = [](ax::NodeEditor::NodeId nodeId, char* data, void* userPointer) -> size_t {
+    //        return 0;
+    //    };
+//
+    //    config.SaveNodeSettings = [](ax::NodeEditor::NodeId nodeId, const char* data, size_t size, ax::NodeEditor::SaveReasonFlags reason, void* userPointer) -> bool {
+    //        return true;
+    //    };
+//
+    //    m_editor = ax::NodeEditor::CreateEditor(&config);
+    //#endif
 
         ///AddNode(new SR_GRAPH_NS::GUI::Node("Node A", SR_GRAPH_NS::GUI::NodeType::Blueprint))
         ///  .AddInput("Pin AAAA", SR_GRAPH_NS::GUI::PinType::Flow)
@@ -52,20 +102,20 @@ namespace SR_CORE_GUI_NS {
         ///  .AddInput("Second", SR_GRAPH_NS::GUI::PinType::Flow)
         ///  .AddOutput("Output", SR_GRAPH_NS::GUI::PinType::Flow);
 
-       Super::OnOpen();
-    }
-
-    void AnimatorEditor::DrawPopupMenu() {
-    #ifdef SR_USE_IMGUI_NODE_EDITOR
-        auto&& openPopupPosition = ImGui::GetMousePos();
-
-        ax::NodeEditor::Suspend();
-
-        ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(8, 8));
-
-        if (ax::NodeEditor::ShowBackgroundContextMenu()) {
-            ImGui::OpenPopup("Create New Node");
-        }
+   //    Super::OnOpen();
+   // }
+//
+   // void AnimatorEditor::DrawPopupMenu() {
+   // #ifdef SR_USE_IMGUI_NODE_EDITOR
+   //     auto&& openPopupPosition = ImGui::GetMousePos();
+//
+   //     ax::NodeEditor::Suspend();
+//
+   //     ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(8, 8));
+//
+   //     if (ax::NodeEditor::ShowBackgroundContextMenu()) {
+   //         ImGui::OpenPopup("Create New Node");
+   //     }
 
         //if (ImGui::BeginPopup("Create New Node")) {
         //    if (ImGui::MenuItem("Add animation")) {
@@ -76,9 +126,10 @@ namespace SR_CORE_GUI_NS {
         //    ImGui::EndPopup();
         //}
 
-        ImGui::PopStyleVar();
+  //     ImGui::PopStyleVar();
 
-        ax::NodeEditor::Resume();
-    #endif
-    }
+  //     ax::NodeEditor::Resume();
+  // #endif
+  // }
 }
+

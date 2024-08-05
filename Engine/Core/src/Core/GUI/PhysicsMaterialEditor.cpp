@@ -4,41 +4,40 @@
 
 #include <Core/GUI/PhysicsMaterialEditor.h>
 
-#include <Utils/Xml.h>
+#include <Utils/Resources/Xml.h>
 #include <Utils/Resources/IResourceReloader.h>
 
 namespace SR_CORE_GUI_NS {
     PhysicsMaterialEditor::PhysicsMaterialEditor()
-        : Super("Physics Material Editor")
-    { }
+        : Super("Physics Material Editor") {
+        InitializeButtonActions();
+    }
+
+    void PhysicsMaterialEditor::InitializeButtonActions() {
+        m_buttonActions[static_cast<uint32_t>(ButtonType::ChooseMaterial)] = [this](){ ChooseMaterial(); };
+        m_buttonActions[static_cast<uint32_t>(ButtonType::Discard)] = [this](){ ReadData(); };
+        m_buttonActions[static_cast<uint32_t>(ButtonType::Save)] = [this](){ SaveMaterial(); };
+    }
 
     void PhysicsMaterialEditor::Draw() {
         if (m_materialPath.GetExtensionView() == "physmat") {
-            if (ImGui::Button(m_materialPath.c_str())) {
-                ChooseMaterial();
-            }
+            ImGui::Text("%s", m_materialPath.c_str());
         }
         else {
-            if (ImGui::Button("Choose material.")) {
-                ChooseMaterial();
-            }
-
+            DrawButton(ButtonType::ChooseMaterial);
             return;
         }
 
         ImGui::Separator();
 
-        if (ImGui::DragFloat("Dynamic Friction", &m_materialData.dynamicFriction, 0.01f)) {
-            SetDynamicFriction(m_materialData.dynamicFriction);
-        }
+        SetMaterialProperty("Dynamic Friction", &m_materialData.dynamicFriction, 0.01f,
+                            [this](){ SetDynamicFriction(m_materialData.dynamicFriction); });
 
-        if (ImGui::DragFloat("Static Friction", &m_materialData.staticFriction, 0.01f)) {
-            SetStaticFriction(m_materialData.staticFriction);
-        }
+        SetMaterialProperty("Static Friction", &m_materialData.staticFriction, 0.01f,
+                            [this](){ SetStaticFriction(m_materialData.staticFriction); });
 
-        if (ImGui::DragFloat("Bounciness", &m_materialData.bounciness, 0.01f)) {
-            SetBounciness(m_materialData.bounciness);
-        }
+        SetMaterialProperty("Bounciness", &m_materialData.bounciness, 0.01f,
+                            [this](){ SetBounciness(m_materialData.bounciness); });
 
         if (ImGui::BeginCombo("Friction Combine",
                               SR_UTILS_NS::EnumReflector::ToStringAtom(m_materialData.frictionCombine).c_str())) {
@@ -65,8 +64,23 @@ namespace SR_CORE_GUI_NS {
             ImGui::EndCombo();
         }
 
-        if (ImGui::Button("Save")) {
-            SR_PTYPES_NS::PhysicsMaterial::Save(SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat(m_materialPath), m_materialData);
+        DrawButton(ButtonType::Save);
+        ImGui::SameLine();
+        DrawButton(ButtonType::Discard);
+        ImGui::SameLine();
+        DrawButton(ButtonType::ChooseMaterial);
+    }
+
+    void PhysicsMaterialEditor::DrawButton(ButtonType buttonType) {
+        const SR_UTILS_NS::StringAtom& name = SR_UTILS_NS::EnumReflector::ToStringAtom(buttonType);
+        if (ImGui::Button(name.c_str())) {
+            m_buttonActions[static_cast<uint32_t>(buttonType)]();
+        }
+    }
+
+     void PhysicsMaterialEditor::SetMaterialProperty(const std::string &label, float_t* value, float speed, const std::function<void()>& func) {
+        if (ImGui::DragFloat(label.c_str(), value, speed)) {
+            func();
         }
     }
 
@@ -74,10 +88,16 @@ namespace SR_CORE_GUI_NS {
         if (auto&& pFileBrowser = GetManager()->GetWidget<FileBrowser>()) {
             pFileBrowser->Open();
 
-            pFileBrowser->SetCallback([this](const SR_UTILS_NS::Path& path){
+            pFileBrowser->SetCallback([this,pFileBrowser](const SR_UTILS_NS::Path& path){
                 this->SetMaterialPath(path);
+                pFileBrowser->Close();
             });
         }
+    }
+
+    //SR_PTYPES_NS::PhysicsMaterial::Save(SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat(m_materialPath), m_materialData);
+    void PhysicsMaterialEditor::SaveMaterial() {
+        SR_PTYPES_NS::PhysicsMaterial::Save(m_materialPath, m_materialData);
     }
 
     void PhysicsMaterialEditor::ReadData() {

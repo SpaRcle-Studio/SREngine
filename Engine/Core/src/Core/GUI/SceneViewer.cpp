@@ -7,6 +7,7 @@
 #include <Core/GUI/EditorCamera.h>
 #include <Core/GUI/EditorGizmo.h>
 #include <Core/GUI/Guizmo.h>
+#include <Graphics/Material/UniqueMaterial.h>
 
 #include <Utils/Input/InputSystem.h>
 #include <Utils/Common/Features.h>
@@ -55,6 +56,14 @@ namespace SR_CORE_GUI_NS {
             if (m_platform) {
                 m_platform->SetName("PREFAB_PLATFORM");
                 m_platform->SetDontSave(true);
+                if (!m_platform->GetChildren().empty()) {
+                    if (auto&& pMesh = m_platform->GetChildren()[0]->GetComponent<SR_GTYPES_NS::Mesh3D>()) {
+                        auto&& pMaterial = new SR_GRAPH_NS::UniqueMaterial();
+                        pMaterial->SetShader("Engine/Shaders/CascadedShadowMap/spatial.srsl");
+                        pMaterial->SetTexture("diffuse", GetRenderScene()->GetRenderStrategy()->GetRenderContext()->GetDefaultTexture());
+                        pMesh->SetMaterial(pMaterial);
+                    }
+                }
                 m_platform->GetTransform()->SetScale(2.5, 1.f, 2.5);
             }
         }
@@ -72,6 +81,10 @@ namespace SR_CORE_GUI_NS {
             }
 
             ImGui::Separator();
+
+            if (auto&& pFrameBuffer = GetContext()->FindFramebuffer("SceneViewFBO", pCamera)) {
+                m_id = pFrameBuffer->GetColorTexture(0);
+            }
 
             if (ImGui::BeginChild("ViewerTexture"))
             {
@@ -93,10 +106,6 @@ namespace SR_CORE_GUI_NS {
             }
 
             ImGui::EndGroup();
-
-            if (auto&& pFrameBuffer = GetContext()->FindFramebuffer("SceneViewFBO", pCamera)) {
-                m_id = pFrameBuffer->GetColorTexture(0);
-            }
 
             m_camera.Unlock();
         }
@@ -173,9 +182,10 @@ namespace SR_CORE_GUI_NS {
                 m_velocity += SR_UTILS_NS::Transform3D::RIGHT * velocitySpeed;
             }
 
-            if (SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::Space)) {
-                m_velocity += SR_UTILS_NS::Transform3D::UP * velocitySpeed;
-            }
+            /// !!!!! НЕ ВОЗВОРАЩАТЬ ЭТОТ КОД !!!!!
+            /// if (SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::Space)) {
+            ///     m_velocity += SR_UTILS_NS::Transform3D::UP * velocitySpeed;
+            /// }
 
             /// TODO: странное управление. Нет подходящей удобной комбинации клавиши
             /// if (SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::Space) && SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::Z)) {
@@ -290,11 +300,21 @@ namespace SR_CORE_GUI_NS {
     }
 
     void SceneViewer::OnMouseDown(const SR_UTILS_NS::MouseInputData *data) {
-        Super::OnMouseDown(data);
+        if(data->m_code == SR_UTILS_NS::MouseCode::MouseRight) {
+            m_cursorLockOpt.emplace();
+            m_mousePos = data->m_position;
+        }
     }
 
     void SceneViewer::OnMouseUp(const SR_UTILS_NS::MouseInputData *data) {
         if (!SR_UTILS_NS::Features::Instance().Enabled("ColorBufferPick", false)) {
+            Super::OnMouseUp(data);
+            return;
+        }
+
+        if (data->m_code == SR_UTILS_NS::MouseCode::MouseRight) {
+            m_cursorLockOpt = std::nullopt;
+            SR_PLATFORM_NS::SetMousePos({ static_cast<int32_t>(m_mousePos.x), static_cast<int32_t>(m_mousePos.y) });
             Super::OnMouseUp(data);
             return;
         }
@@ -381,7 +401,7 @@ namespace SR_CORE_GUI_NS {
             pCamera->UpdateProjection(GetContext()->GetWindowSize().x, GetContext()->GetWindowSize().y);
             return true;
         }
-        else if (viewMode == EditorSceneViewMode::FreeAspect) {
+         if (viewMode == EditorSceneViewMode::FreeAspect) {
             if (pCamera->GetSize() == m_windowSize) {
                 return false;
             }

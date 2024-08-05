@@ -36,13 +36,11 @@
 #include <Graphics/GUI/Utils.h>
 #include <Graphics/Types/Texture.h>
 #include <Graphics/Types/Geometry/Sprite.h>
-#include <Graphics/Types/Material.h>
+#include <Graphics/Material/FileMaterial.h>
 #include <Graphics/Types/Camera.h>
 #include <Graphics/UI/Anchor.h>
 #include <Graphics/UI/Canvas.h>
 #include <Graphics/Font/ITextComponent.h>
-#include <Graphics/Font/Text2D.h>
-#include <Graphics/Font/Text3D.h>
 #include <Graphics/Font/Font.h>
 #include <Graphics/Utils/MeshUtils.h>
 
@@ -50,14 +48,6 @@
 #include <Audio/Types/AudioListener.h>
 
 namespace SR_CORE_NS::GUI {
-    void ComponentDrawer::DrawComponent(SR_PTYPES_NS::Rigidbody3D*& pComponent, EditorGUI* context, int32_t index) {
-
-    }
-
-    void ComponentDrawer::DrawComponent(SR_PTYPES_NS::Rigidbody*& pComponent, EditorGUI* context, int32_t index) {
-
-    }
-
     void ComponentDrawer::DrawCollisionShape(SR_PTYPES_NS::CollisionShape* pCollisionShape, EditorGUI* context, int32_t index){
 
     }
@@ -87,7 +77,7 @@ namespace SR_CORE_NS::GUI {
         {
             if (auto&& pDescriptor = context->GetIconDescriptor(EditorIcon::Reset)) {
                 if (SR_GRAPH_GUI_NS::ImageButton(SR_FORMAT("##BehResetBtn{}", index), pDescriptor, SR_MATH_NS::IVector2(25), 5)) {
-                    pBehaviour = new SR_SCRIPTING_NS::Behaviour();
+                    pBehaviour->Reload();
                 }
             }
 
@@ -96,7 +86,7 @@ namespace SR_CORE_NS::GUI {
                 path = pBehaviour->GetRawBehaviour()->GetResourcePath();
             }
 
-            if (SR_GRAPH_GUI_NS::Button(path.ToStringRef(), index) && !path.IsEmpty()) {
+            if (SR_GRAPH_GUI_NS::Button(path.ToStringRef(), (void*)pBehaviour) && !path.IsEmpty()) {
                 auto&& resourceDirectory = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
                 auto&& scriptPath = resourceDirectory.Concat(path);
                 if (!scriptPath.IsEmpty()) {
@@ -178,55 +168,7 @@ namespace SR_CORE_NS::GUI {
     }
 
     void ComponentDrawer::DrawComponent(SR_GTYPES_NS::Mesh3D*& pComponent, EditorGUI* context, int32_t index) {
-        if (!pComponent->IsCalculatable())
-            ImGui::TextColored(ImVec4(1, 0, 0, 1), "Invalid mesh!");
 
-        if (!pComponent->IsCalculated())
-            ImGui::TextColored(ImVec4(1, 1, 0, 1), "Mesh isn't calculated!");
-
-        if (!pComponent->GetRenderContext())
-            ImGui::TextColored(ImVec4(1, 1, 0, 1), "Mesh isn't registered!");
-
-        auto&& pMaterial = pComponent->GetMaterial();
-
-        if (auto&& pDescriptor = context->GetIconDescriptor(EditorIcon::Shapes)) {
-            if (SR_GRAPH_GUI_NS::ImageButton(SR_FORMAT("##imgMeshBtn{}", index), pDescriptor, SR_MATH_NS::IVector2(50), 5)) {
-                auto&& resourcesFolder = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
-                auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesFolder, { { "Mesh", SR_GRAPH_NS::SR_SUPPORTED_MESH_FORMATS } });
-
-                if (path.Exists()) {
-                    pComponent->SetRawMesh(path);
-                }
-            }
-        }
-
-        ImGui::SameLine();
-        ImGui::BeginGroup();
-
-        if (auto&& pRawMesh = pComponent->GetRawMesh()) {
-            Graphics::GUI::DrawValue("Path", pRawMesh->GetResourcePath().c_str(), index);
-        }
-        Graphics::GUI::DrawValue("Name", pComponent->GetGeometryName(), index);
-
-        int32_t meshId = pComponent->GetMeshId();
-        if (Graphics::GUI::InputInt("Id", meshId, 1) && meshId >= 0) {
-            pComponent->SetMeshId(meshId);
-        }
-
-        ImGui::EndGroup();
-
-        Graphics::GUI::DrawValue("Vertices count", pComponent->GetVerticesCount(), index);
-        Graphics::GUI::DrawValue("Indices count", pComponent->GetIndicesCount(), index);
-
-        ImGui::Separator();
-
-        SR_GTYPES_NS::Material* copy = pMaterial;
-        DrawComponent(copy, context, index);
-
-        /// компилятор считает, что это недостижимый код (он ошибается)
-        if (copy != pMaterial) {
-            pComponent->SetMaterial(copy);
-        }
     }
 
     void ComponentDrawer::DrawComponent(SR_GTYPES_NS::SkinnedMesh*& pComponent, EditorGUI* context, int32_t index) {
@@ -281,16 +223,15 @@ namespace SR_CORE_NS::GUI {
 
         ImGui::Separator();
 
-        SR_GTYPES_NS::Material* copy = pMaterial;
+        SR_GRAPH_NS::BaseMaterial* copy = pMaterial;
         DrawComponent(copy, context, index);
 
-        /// компилятор считает, что это недостижимый код (он ошибается)
         if (copy != pMaterial) {
             pComponent->SetMaterial(copy);
         }
     }
 
-    void ComponentDrawer::DrawComponent(SR_GTYPES_NS::Material *&material, EditorGUI* context, int32_t index) {
+    void ComponentDrawer::DrawComponent(SR_GRAPH_NS::BaseMaterial*& material, EditorGUI* context, int32_t index) {
         if (material) {
             ImGui::Separator();
 
@@ -302,7 +243,7 @@ namespace SR_CORE_NS::GUI {
                     auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesFolder, { { "Material", "mat" } });
 
                     if (path.Exists()) {
-                        if (auto&& pMaterial = SR_GTYPES_NS::Material::Load(path)) {
+                        if (auto&& pMaterial = SR_GRAPH_NS::FileMaterial::Load(path)) {
                             material = pMaterial;
                             return;
                         }
@@ -313,11 +254,13 @@ namespace SR_CORE_NS::GUI {
             ImGui::SameLine();
             ImGui::BeginGroup();
 
-            Graphics::GUI::DrawValue("Material", material->GetResourceId(), index);
-
-            if (auto &&shader = material->GetShader()) {
-                //Graphics::GUI::DrawValue("Shader", shader->GetName());
+            if (auto&& pFileMaterial = dynamic_cast<SR_GRAPH_NS::FileMaterial*>(material)) {
+                Graphics::GUI::DrawValue("Material", pFileMaterial->GetResourceId(), index);
             }
+
+            //if (auto &&shader = material->GetShader()) {
+                //Graphics::GUI::DrawValue("Shader", shader->GetName());
+            //}
 
             ImGui::EndGroup();
 
@@ -325,52 +268,13 @@ namespace SR_CORE_NS::GUI {
         }
     }
 
-    void ComponentDrawer::DrawMaterialProps(SR_GTYPES_NS::Material* material, EditorGUI* pEditor, int32_t index) {
+    void ComponentDrawer::DrawMaterialProps(SR_GRAPH_NS::BaseMaterial* material, EditorGUI* pEditor, int32_t index) {
         SR_CORE_GUI_NS::DrawPropertyContext context;
         context.pEditor = pEditor;
         SR_CORE_GUI_NS::DrawPropertyContainer(context, &material->GetProperties());
     }
 
     void ComponentDrawer::DrawComponent(SR_GRAPH_NS::UI::Anchor *&anchor, EditorGUI *context, int32_t index) {
-
-    }
-
-    void ComponentDrawer::DrawComponent(SR_AUDIO_NS::AudioSource *&pComponent, EditorGUI *context, int32_t index) {
-        float_t volume = pComponent->GetVolume();
-        float_t pitch = pComponent->GetPitch();
-        float_t coneInnerAngle = pComponent->GetConeInnerAngle();
-        bool loop = pComponent->GetLoop();
-
-        if (ImGui::SliderFloat(SR_FORMAT_C("Volume##SliderVolume{}", index), &volume, 0.f, 1.f, "%.1f")) {
-            pComponent->SetVolume(volume);
-        }
-
-        if (ImGui::SliderFloat(SR_FORMAT_C("Pitch##SliderPitch{}", index), &pitch, 0.f, 10.f, "%.1f")) {
-            pComponent->SetPitch(pitch);
-        }
-
-        if (ImGui::SliderFloat(SR_FORMAT_C("coneInnerAngle##SliderConeInnerAngle{}", index), &coneInnerAngle, 0.f,360.f, "%.1f")) {
-            pComponent->SetConeInnerAngle(coneInnerAngle);
-        }
-
-        if (ImGui::Checkbox(SR_FORMAT_C("Loop##CheckBoxLoop{}", index), &loop)) {
-            pComponent->SetLoop(loop);
-        }
-
-        if (auto&& pDescriptor = context->GetIconDescriptor(EditorIcon::Audio)) {
-            if (SR_GRAPH_GUI_NS::ImageButton(SR_FORMAT("##ButtonPath%i", index), pDescriptor, SR_MATH_NS::IVector2(50),5)) {
-                auto&& resourcesFolder = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
-                auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesFolder,{{"Audio", "mp3"}});
-
-                if (path.Exists()) {
-                    pComponent->SetPath(path.RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetResPath()));
-                }
-            }
-        }
-        SR_GRAPH_GUI_NS::DrawValue("Path", pComponent->GetPath().c_str(), index);
-    }
-
-    void ComponentDrawer::DrawComponent(SR_AUDIO_NS::AudioListener *&pComponent, EditorGUI *context, int32_t index){
 
     }
 
@@ -407,7 +311,6 @@ namespace SR_CORE_NS::GUI {
         SR_GTYPES_NS::Material* copy = pMaterial;
         DrawComponent(copy, context, index);
 
-        /// компилятор считает, что это недостижимый код (он ошибается)
         if (copy != pMaterial) {
             pComponent->SetMaterial(copy);
         }*/
@@ -480,7 +383,7 @@ namespace SR_CORE_NS::GUI {
 
         auto&& pMaterial = pComponent->GetMaterial();
 
-        SR_GTYPES_NS::Material* copy = pMaterial;
+        SR_GRAPH_NS::BaseMaterial* copy = pMaterial;
         DrawComponent(copy, context, index);
 
         /// компилятор считает, что это недостижимый код (он ошибается)
@@ -489,17 +392,13 @@ namespace SR_CORE_NS::GUI {
         }
     }
 
-    void ComponentDrawer::DrawComponent(SR_ANIMATIONS_NS::Animator *&pComponent, EditorGUI *context, int32_t index) {
-        ImGui::SliderFloat("Weight", &pComponent->m_weight, 0.f, 1.f);
-    }
-
     void ComponentDrawer::DrawComponent(SR_ANIMATIONS_NS::Skeleton *&pComponent, EditorGUI *context, int32_t index) {
         bool debug = pComponent->IsDebugEnabled();
         if (Graphics::GUI::CheckBox("Debug", debug)) {
             pComponent->SetDebugEnabled(debug);
         }
 
-        if (Graphics::GUI::Button("Import", index)) {
+        if (Graphics::GUI::Button("Import", (void*)pComponent)) {
             auto&& resourcesFolder = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
             auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesFolder, { { "Mesh with skeleton", "fbx,pmx,blend,gltf" } });
 
@@ -584,14 +483,6 @@ namespace SR_CORE_NS::GUI {
         }
     }
 
-    void ComponentDrawer::DrawComponent(SR_GTYPES_NS::Text2D*& pComponent, EditorGUI* context, int32_t index) {
-        DrawComponent(dynamic_cast<SR_GTYPES_NS::ITextComponent*>(pComponent), context, index);
-    }
-
-    void ComponentDrawer::DrawComponent(SR_GTYPES_NS::Text3D*& pComponent, EditorGUI* context, int32_t index) {
-        DrawComponent(dynamic_cast<SR_GTYPES_NS::ITextComponent*>(pComponent), context, index);
-    }
-
     bool ComponentDrawer::DrawComponentOld(SR_UTILS_NS::Component* pComponent, EditorGUI* pContext, int32_t index) {
         #define SR_OLD_DRAW_COMPONENT(class, cmpName)                 \
         if (pComponent->GetComponentName() == (cmpName)) {            \
@@ -602,14 +493,9 @@ namespace SR_CORE_NS::GUI {
 
         SR_OLD_DRAW_COMPONENT(SR_SCRIPTING_NS::Behaviour, "Behaviour")
         SR_OLD_DRAW_COMPONENT(SR_GTYPES_NS::Camera, "Camera")
-        SR_OLD_DRAW_COMPONENT(SR_GTYPES_NS::Text2D, "Text2D")
-        SR_OLD_DRAW_COMPONENT(SR_GTYPES_NS::Text3D, "Text3D")
-        SR_OLD_DRAW_COMPONENT(SR_ANIMATIONS_NS::Animator, "Animator")
         SR_OLD_DRAW_COMPONENT(SR_ANIMATIONS_NS::Skeleton, "Skeleton")
         SR_OLD_DRAW_COMPONENT(SR_ANIMATIONS_NS::BoneComponent, "Bone")
         SR_OLD_DRAW_COMPONENT(SR_UTILS_NS::LookAtComponent, "LookAtComponent")
-        SR_OLD_DRAW_COMPONENT(SR_AUDIO_NS::AudioSource, "AudioSource")
-        SR_OLD_DRAW_COMPONENT(SR_AUDIO_NS::AudioListener, "AudioListener")
         SR_OLD_DRAW_COMPONENT(SR_GRAPH_UI_NS::Anchor, "Anchor")
         SR_OLD_DRAW_COMPONENT(SR_GRAPH_UI_NS::Canvas, "Canvas")
 

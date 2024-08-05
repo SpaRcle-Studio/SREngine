@@ -9,6 +9,11 @@
 
 #include <EvoVulkan/Tools/SubmitInfo.h>
 
+namespace SR_GRAPH_NS {
+    class IRenderTechnique;
+    class MeshDrawerPass;
+}
+
 namespace SR_CORE_NS::GUI {
     class EngineStatistics : public SR_GRAPH_GUI_NS::Widget {
     public:
@@ -27,6 +32,9 @@ namespace SR_CORE_NS::GUI {
         void RenderStrategyPage();
 
         void DrawSubmitInfo(const EvoVulkan::SubmitInfo& submitInfo);
+        void DrawRenderTechnique(SR_GRAPH_NS::IRenderTechnique* pRenderTechnique);
+        void DrawMeshDrawerPass(SR_GRAPH_NS::MeshDrawerPass* pMeshDrawerPass);
+        void DrawRenderQueue(const SR_GRAPH_NS::RenderQueue* pRenderQueue);
 
     private:
         const ImGuiTreeNodeFlags m_nodeFlagsWithChild = ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_OpenOnDoubleClick;

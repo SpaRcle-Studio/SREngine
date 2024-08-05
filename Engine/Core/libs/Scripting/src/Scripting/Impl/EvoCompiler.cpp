@@ -6,7 +6,7 @@
 #include <Utils/FileSystem/FileSystem.h>
 #include <Utils/FileSystem/Path.h>
 #include <Utils/Platform/Platform.h>
-#include <Utils/Xml.h>
+#include <Utils/Resources/Xml.h>
 #include <Utils/Common/Features.h>
 
 #include <Scripting/Impl/EvoCompiler.h>
@@ -28,8 +28,12 @@ namespace SR_SCRIPTING_NS {
         }
     }
 
+    EvoScript::AddressTableGen* EvoCompiler::GetGenerator() const {
+        return m_generator;
+    }
+
     bool EvoCompiler::Init() {
-        SR_INFO("EvoCompiler::Init() : initialization of the compiler...");
+        SR_INFO("EvoCompiler::Init() : initializing compiler...");
 
         auto&& configPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Engine/Configs/EvoScript.xml");
 
@@ -82,7 +86,7 @@ namespace SR_SCRIPTING_NS {
         }
     #endif
 
-        SR_INFO("EvoCompiler::GetGenerator() : use \"" + generator + "\" generator...");
+        SR_INFO("EvoCompiler::GetGenerator() : using \"" + generator + "\" generator...");
 
         return std::move(generator);
     }

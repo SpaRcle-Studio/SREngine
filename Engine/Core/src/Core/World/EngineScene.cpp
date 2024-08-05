@@ -77,88 +77,12 @@ namespace SR_CORE_NS {
         }
 
         pScene->GetDataStorage().SetValue(pRenderScene);
+        pScene->GetDataStorage().SetPointer(pRenderScene.Get());
         pScene->GetDataStorage().SetValue(pPhysicsScene);
 
         pSceneUpdater = pScene->GetSceneUpdater();
 
         return true;
-    }
-
-    void EngineScene::Draw(float_t dt) {
-        SR_TRACY_ZONE;
-
-        UpdateChunkDebug();
-
-        if (pRenderScene.RecursiveLockIfValid()) {
-            SR_UTILS_NS::DebugDraw::Instance().SwitchCallbacks(pRenderScene->GetDebugRenderer());
-            pRenderScene.Unlock();
-        }
-
-        if (pPhysicsScene.LockIfValid()) {
-            SR_PHYSICS_NS::Raycast3D::Instance().SwitchPhysics(pPhysicsScene->Get3DWorld());
-            pPhysicsScene.Unlock();
-        }
-
-        if (pScene.LockIfValid()) {
-            pEngine->GetCmdManager()->Update();
-
-            SR_SCRIPTING_NS::EvoScriptManager::Instance().Update(false);
-
-            pScene->Prepare();
-
-            const bool isPaused = pEngine->IsPaused() || !pEngine->IsActive() || pEngine->HasSceneInQueue();
-
-            pSceneUpdater->Build(isPaused);
-            pSceneUpdater->Update(dt);
-
-            UpdateFrequency();
-
-            if (m_accumulateDt) {
-                m_accumulator += dt;
-            }
-            else {
-                m_accumulator += SR_MIN(dt, m_updateFrequency);
-            }
-
-            /// fixed update
-            if (m_accumulator >= m_updateFrequency)
-            {
-                while (m_accumulator >= m_updateFrequency)
-                {
-                    FixedStep(isPaused);
-                    m_accumulator -= m_updateFrequency;
-                }
-            }
-
-            pScene.Unlock();
-        }
-
-        auto&& pRenderContext = pEngine->GetRenderContext();
-        if (pRenderContext.LockIfValid()) {
-            pRenderContext->Update();
-            pRenderContext.Unlock();
-        }
-
-        auto&& pWindow = pEngine->GetMainWindow();
-
-        if (pWindow->IsVisible() && pRenderScene.RecursiveLockIfValid()) {
-            if (auto&& pWin = pWindow->GetImplementation<SR_GRAPH_NS::BasicWindowImpl>()) {
-                const bool isOverlay = pRenderScene->IsOverlayEnabled();
-                const bool isMaximized = pWin->IsMaximized();
-                const bool isHeaderEnabled = pWin->IsHeaderEnabled();
-
-                if (isHeaderEnabled != !isOverlay) {
-                    pWin->SetHeaderEnabled(!isOverlay);
-                    if (isMaximized) {
-                        pWin->Maximize();
-                    }
-                }
-            }
-
-            pRenderScene->Render();
-            /// В процессе отрисовки сцена могла быть заменена
-            pRenderScene.TryUnlock();
-        }
     }
 
     void EngineScene::SetSpeed(float_t speed) {
@@ -190,6 +114,9 @@ namespace SR_CORE_NS {
         pRenderScene.Do([gameMode](SR_GRAPH_NS::RenderScene *ptr) {
             ptr->SetOverlayEnabled(!gameMode);
         });
+        if (pPhysicsScene) {
+            pPhysicsScene->SetIsGameMode(gameMode);
+        }
     }
 
     void EngineScene::UpdateChunkDebug() {
@@ -229,7 +156,7 @@ namespace SR_CORE_NS {
 
         pEngine->FixedUpdate();
 
-        pSceneUpdater->FixedUpdate(); /// TODO: скрипты игнорируют скорость и паузу
+        pSceneUpdater->FixedUpdate(isPaused);
     }
 
     void EngineScene::Update(float_t dt) {
@@ -241,7 +168,7 @@ namespace SR_CORE_NS {
         const bool isPaused = pEngine->IsPaused() || !pEngine->IsActive() || pEngine->HasSceneInQueue();
 
         pSceneUpdater->Build(isPaused);
-        pSceneUpdater->Update(dt); /// TODO: скрипты игнорируют скорость и паузу
+        pSceneUpdater->Update(dt, isPaused);
 
         UpdateFrequency();
 
@@ -261,5 +188,9 @@ namespace SR_CORE_NS {
                 m_accumulator -= m_updateFrequency;
             }
         }
+
+        pSceneUpdater->LateUpdate(isPaused);
+
+        pEngine->SetOneFramePauseSkip(false);
     }
 }

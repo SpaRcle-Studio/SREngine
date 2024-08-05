@@ -7,7 +7,14 @@
 
 namespace SR_AUDIO_NS {
     void OpenALSoundListener::SetDistanceModel(ListenerDistanceModel distanceModel) {
-        if (!SR_AL_CALL(alListenerf, AL_DISTANCE_MODEL, DistanceModelToALDistanceModel(distanceModel))) {
+        auto&& pOpenALDevice = dynamic_cast<OpenALDevice*>(GetDevice())->GetALDevice();
+
+        if (!pOpenALDevice) {
+            SR_ERROR("OpenALSoundListener::SetDistanceModel() : invalid device!");
+            return;
+        }
+
+        if (!SR_ALC_CALL(alDistanceModel, pOpenALDevice, DistanceModelToALDistanceModel(distanceModel))) {
             SR_ERROR("OpenALListenerContext::SetDistanceModel() : failed to set distance model!");
             return;
         }
@@ -15,62 +22,67 @@ namespace SR_AUDIO_NS {
         Super::SetDistanceModel(distanceModel);
     }
 
-    void OpenALSoundListener::SetRolloffFactor(float_t rolloffFactor) {
-        if (!SR_AL_CALL(alListenerf, AL_ROLLOFF_FACTOR, rolloffFactor)) {
-            SR_ERROR("OpenALListenerContext::SetRolloffFactor() : failed to set rolloff factor!");
-            return;
-        }
-
-        Super::SetRolloffFactor(rolloffFactor);
-    }
-
-    void OpenALSoundListener::SetReferenceDistance(float_t referenceDistance) {
-        if (!SR_AL_CALL(alListenerf, AL_REFERENCE_DISTANCE, referenceDistance)) {
-            SR_ERROR("OpenALListenerContext::SetReferenceDistance() : failed to set reference distance!");
-            return;
-        }
-
-        Super::SetReferenceDistance(referenceDistance);
-    }
-
-    void OpenALSoundListener::SetMaxDistance(float_t maxDistance) {
-        if (!SR_AL_CALL(alListenerf, AL_MAX_DISTANCE, maxDistance)) {
-            SR_ERROR("OpenALListenerContext::SetMaxDistance() : failed to set max distance!");
-            return;
-        }
-
-        Super::SetMaxDistance(maxDistance);
-    }
-
     bool OpenALSoundListener::Init() {
-        SetDistanceModel(ListenerDistanceModel::InverseDistanceClamped);
+        /*SetDistanceModel(ListenerDistanceModel::InverseClamped);
         SetRolloffFactor(1.0f);
         SetReferenceDistance(1.0f);
-        SetMaxDistance(SR_FLOAT_MAX);
+        SetMaxDistance(SR_FLOAT_MAX);*/
 
         return true;
     }
 
     bool OpenALSoundListener::Update(const SR_MATH_NS::FVector3& position, const SR_MATH_NS::Quaternion& quaternion) {
-        SR_MATH_NS::FVector3 up = { 0.0f, 1.0f, 0.0f };
-        SR_MATH_NS::FVector3 forward = { 0.0f, 0.0f, -1.0f };
-
-        const SR_MATH_NS::FVector3 pos = position * SR_MATH_NS::FVector3(1.f, 1.f, -1.f);
+        SR_MATH_NS::FVector3 up = SR_MATH_NS::FVector3::Up();
+        SR_MATH_NS::FVector3 forward = -SR_MATH_NS::FVector3::Forward();
 
         up = quaternion * up;
         forward = quaternion * forward;
+
+        m_data.position = position;
+        m_data.orientation = SR_MATH_NS::FVector6(forward, up);
+
+        if (!SR_AL_CALL(alListenerfv, AL_POSITION, FV3ToALV3(position).vec3)) {
+            SR_ERROR("OpenALListenerContext::Update() : failed to set listener position!");
+            return false;
+        }
 
         if (!SR_AL_CALL(alListenerfv, AL_ORIENTATION, FV6ToALV6(SR_MATH_NS::FVector6(forward, up)).vec6)) {
             SR_ERROR("OpenALListenerContext::Update() : failed to set orientation!");
             return false;
         }
 
-        if (!SR_AL_CALL(alListenerfv, AL_POSITION, FV3ToALV3(pos).vec3)) {
-            SR_ERROR("OpenALListenerContext::Update() : failed to set listener position!");
-            return false;
-        }
-
         return true;
+    }
+
+    ListenerDistanceModel OpenALSoundListener::GetDistanceModel() const noexcept {
+        auto&& pOpenALDevice = dynamic_cast<OpenALDevice*>(GetDevice())->GetALDevice();
+        ALenum distanceModel;
+        SR_ALC_CALL(alGetIntegerv, pOpenALDevice, AL_DISTANCE_MODEL, &distanceModel);
+        return ALDistanceModelToDistanceModel(distanceModel);
+    }
+
+    SR_MATH_NS::FVector3 OpenALSoundListener::GetVelocity() const noexcept {
+        SR_MATH_NS::FVector3 velocity;
+        SR_AL_CALL(alGetListener3f, AL_VELOCITY, &velocity.x, &velocity.y, &velocity.z);
+        return velocity;
+    }
+
+    SR_MATH_NS::FVector3 OpenALSoundListener::GetPosition() const noexcept {
+        SR_MATH_NS::FVector3 position;
+        SR_AL_CALL(alGetListener3f, AL_POSITION, &position.x, &position.y, &position.z);
+        return position;
+    }
+
+    SR_MATH_NS::FVector6 OpenALSoundListener::GetOrientation() const noexcept {
+        SR_MATH_NS::FVector6 orientation;
+        SR_AL_CALL(alGetListenerfv, AL_ORIENTATION, &orientation.x);
+        return orientation;
+    }
+
+    float_t OpenALSoundListener::GetGain() const noexcept {
+        float_t gain = 0.0f;
+        SR_AL_CALL(alGetListenerf, AL_GAIN, &gain);
+        return gain;
     }
 
     void OpenALSoundListener::SetVelocity(SR_MATH_NS::FVector3 velocity) {
@@ -82,15 +94,6 @@ namespace SR_AUDIO_NS {
         Super::SetVelocity(velocity);
     }
 
-    void OpenALSoundListener::SetDopplerFactor(float_t dopplerFactor) {
-        if (!SR_AL_CALL(alListenerf, AL_DOPPLER_FACTOR, dopplerFactor)) {
-            SR_ERROR("OpenALListenerContext::SetDopplerFactor() : failed to set doppler factor!");
-            return;
-        }
-
-        Super::SetDopplerFactor(dopplerFactor);
-    }
-
     void OpenALSoundListener::SetGain(float_t gain) {
         if (!SR_AL_CALL(alListenerf, AL_GAIN, gain)) {
             SR_ERROR("OpenALListenerContext::SetDopplerFactor() : failed to set gain!");
@@ -98,14 +101,5 @@ namespace SR_AUDIO_NS {
         }
 
         Super::SetGain(gain);
-    }
-
-    void OpenALSoundListener::SetOuterConeGain(float_t outerConeGain) {
-        if (!SR_AL_CALL(alListenerf, AL_CONE_OUTER_GAIN, outerConeGain)) {
-            SR_ERROR("OpenALListenerContext::SetOuterConeGain() : failed to set outer cone gain!");
-            return;
-        }
-
-        Super::SetOuterConeGain(outerConeGain);
     }
 }

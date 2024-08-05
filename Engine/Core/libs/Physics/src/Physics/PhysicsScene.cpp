@@ -119,6 +119,10 @@ namespace SR_PHYSICS_NS {
         return true;
     }
 
+    bool PhysicsScene::IsDebugEnabled() const noexcept {
+        return m_debugEnabled && !m_isGameMode;
+    }
+
     bool PhysicsScene::Flush() {
         SR_TRACY_ZONE;
 
@@ -151,7 +155,7 @@ namespace SR_PHYSICS_NS {
                 SRHalt("Unknown measurement of rigidbody!");
             }
 
-            if (!pRigidbody->GetParent()) {
+            if (!pRigidbody->HasParent()) {
                 pRigidbody->AutoFree([](auto&& pData) {
                     delete pData;
                 });

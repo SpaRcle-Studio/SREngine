@@ -4,17 +4,26 @@
 
 #include <Core/Tests/TestManager.h>
 #include <Utils/Platform/Platform.h>
-#include <Core/Application.h>
+#include <Core/Launcher.h>
 
 namespace SR_CORE_NS {
     void TestManager::RunAll(int argc, char** argv) {
-        auto&& pApplication = SR_CORE_NS::Application::MakeShared();
+        SR_HTYPES_NS::SharedPtr pLauncher = new SR_CORE_NS::Launcher();
+        auto&& launcherInitStatus = pLauncher->InitLauncher(argc, argv);
 
-        int32_t code = 0;
+        if (launcherInitStatus == SR_CORE_NS::LauncherInitStatus::Error) {
+            SR_PLATFORM_NS::WriteConsoleError("TestManager::RunAll() : failed to initialize launcher!\n");
+            return;
+        }
 
-        if (!pApplication->PreInit(argc, argv)) {
-            SR_PLATFORM_NS::WriteConsoleError("Failed to pre-initialize application!\n");
-            code = 1;
+        if (launcherInitStatus == SR_CORE_NS::LauncherInitStatus::Unpacking) {
+            SR_PLATFORM_NS::WriteConsoleError("TestManager::RunAll() : run the application at least once without tests!\n");
+            return;
+        }
+
+        if (!pLauncher->Init()) {
+            SR_ERROR("TestManager::RunAll() : failed to initialize application!");
+            return;
         }
 
         SR_LOG("TestManager::RunAll() : SpaRcle Engine is being run in unit test mode!");
@@ -30,7 +39,12 @@ namespace SR_CORE_NS {
             }
         }
 
-        SR_LOG("Unit tests passed: {}/{}.", successes, m_tests.size());
+        SR_LOG("TestManager::RunAll() : unit tests passed: {}/{}.", successes, m_tests.size());
+        SR_LOG("TestManager::RunAll() : destroying test instances...");
+
+        pLauncher.AutoFree([](auto&& pData) {
+            delete pData;
+        });
     }
 
     bool TestManager::RunTest(const TestManager::TestFn &test) {

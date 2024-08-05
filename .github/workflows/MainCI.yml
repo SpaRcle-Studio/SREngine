@@ -1,6 +1,7 @@
 name: SpaRcle Engine Main CI
 
 on:
+  workflow_dispatch:
   push:
     paths-ignore:
       - 'Documentation/**'
@@ -33,7 +34,7 @@ jobs:
 
     steps:
       - name: Fetching repository.
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4.1.6
         with:
           fetch-depth: 1
 

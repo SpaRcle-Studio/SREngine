@@ -26,9 +26,12 @@ namespace SR_AUDIO_NS {
 
         m_state = State::Active;
 
-        m_thread = SR_HTYPES_NS::Thread::Factory::Instance().Create([this]() {
+        SR_HTYPES_NS::Thread::Factory::Instance().Create(m_thread, [this]() {
+            m_threadId = m_thread->GetId();
             while (m_state != State::Stopped) {
-                while (m_state == State::Paused);
+                while (m_state == State::Paused) {
+                    SR_NOOP;
+                }
                 Update();
             }
             Destroy();
@@ -39,27 +42,84 @@ namespace SR_AUDIO_NS {
     }
 
     void SoundManager::StopAll() {
-        SR_LOCK_GUARD;
+        SR_TRACY_ZONE;
 
-        for (auto&& pPlayData : m_playStack) {
-            DestroyPlayData(pPlayData);
-        }
+        m_thread->Execute([this]() {
+            for (auto&& pPlayData : m_playStack) {
+                DestroyPlayData(pPlayData);
+            }
+            return true;
+        });
 
         m_playStack.clear();
+        m_playing.clear();
+    }
+
+    std::optional<PlayParams> SoundManager::GetSourceParams(const PlayData* pPlayData) const {
+        SR_TRACY_ZONE;
+
+        std::optional<PlayParams> result;
+
+        m_thread->Execute([this, &result, pPlayData]() {
+            if (m_playing.count(const_cast<PlayData*>(pPlayData)) == 0) {
+                return false;
+            }
+
+            auto&& pContext = pPlayData->pData->pContext;
+            if (!pContext) {
+                SR_ERROR("SoundManager::GetSourceParams() : sound context is nullptr!");
+                return false;
+            }
+
+            if (!pPlayData->pData->initialized || !pPlayData->pSource) {
+                return false;
+            }
+
+            result = pContext->GetSourceParams(pPlayData->pSource);
+            return true;
+        });
+
+        return result;
+    }
+
+    std::optional<ListenerData> SoundManager::GetListenerParams(const SoundListener* pListener) const {
+        SR_TRACY_ZONE;
+
+        std::optional<ListenerData> result;
+
+        m_thread->Execute([this, &result, pListener]() {
+            if (m_listeners.count(const_cast<SoundListener*>(pListener)) == 0) {
+                return false;
+            }
+            result = ListenerData();
+            result->position = pListener->GetPosition();
+            result->orientation = pListener->GetOrientation();
+            result->velocity = pListener->GetVelocity();
+            result->gain = pListener->GetGain();
+            result->distanceModel = pListener->GetDistanceModel();
+            return true;
+        });
+
+        return result;
     }
 
     void SoundManager::Update() {
+        SR_TRACY_ZONE;
         SR_LOCK_GUARD;
+
+        m_thread->Synchronize();
 
         for (auto pIt = m_playStack.begin(); pIt != m_playStack.end(); ) {
             auto&& pPlayData = *pIt;
 
             if (!PrepareData(pPlayData) || !PlayInternal(pPlayData)) {
                 DestroyPlayData(pPlayData);
+                m_playing.erase(pPlayData);
                 pIt = m_playStack.erase(pIt);
             }
             else if (pPlayData->pData->pContext->IsStopped(pPlayData->pSource)) {
                 DestroyPlayData(pPlayData);
+                m_playing.erase(pPlayData);
                 pIt = m_playStack.erase(pIt);
             }
             else {
@@ -69,6 +129,8 @@ namespace SR_AUDIO_NS {
     }
 
     bool SoundManager::PrepareData(PlayData* pPlayData) {
+        SR_TRACY_ZONE;
+
         if (pPlayData->pData->initialized) {
             return true;
         }
@@ -99,16 +161,17 @@ namespace SR_AUDIO_NS {
     }
 
     bool SoundManager::PlayInternal(PlayData* pPlayData) {
+        SR_TRACY_ZONE;
+
         if (!pPlayData->isPlaying) {
             auto&& pContext = pPlayData->pData->pContext;
 
-            if (!(pPlayData->pSource = pContext->AllocateSource(pPlayData->pData->pBuffer))) {
+            if (!((pPlayData->pSource = pContext->AllocateSource(pPlayData->pData->pBuffer)))) {
                 SR_ERROR("SoundManager::PlayInternal() : failed to allocate source!");
                 return false;
             }
 
             pContext->ApplyParams(pPlayData->pSource, pPlayData->params);
-
             pContext->Play(pPlayData->pSource);
 
             pPlayData->isPlaying = true;
@@ -117,7 +180,9 @@ namespace SR_AUDIO_NS {
         return !pPlayData->isFailed;
     }
 
-    SoundManager::Handle SoundManager::Play(Sound* pSound, const PlayParams &params) {
+    SoundManager::Handle SoundManager::Play(Sound* pSound, const PlayParams& params) {
+        SR_TRACY_ZONE;
+
         if (!pSound) {
             SR_ERROR("SoundManager::Play() : sound is nullptr!");
             return nullptr;
@@ -137,13 +202,14 @@ namespace SR_AUDIO_NS {
 
             pHandle = pPlayData;
 
+            pPlayData->pSound = pSound;
             pPlayData->pData = pSound->GetData();
-
             pPlayData->params = params;
 
             pSound->AddUsePoint();
 
             m_playStack.emplace_back(pPlayData);
+            m_playing.emplace(pPlayData);
         }
 
         bool async = params.async.has_value() ? params.async.value() : true; /// NOLINT
@@ -168,6 +234,7 @@ namespace SR_AUDIO_NS {
     }
 
     bool SoundManager::IsPlaying(Handle pHandle) const {
+        SR_TRACY_ZONE;
         SR_LOCK_GUARD;
 
         for (auto&& pPlayData : m_playStack) {
@@ -183,6 +250,9 @@ namespace SR_AUDIO_NS {
     }
 
     SoundData* SoundManager::Register(Sound *pSound) {
+        SR_TRACY_ZONE;
+        SR_LOCK_GUARD;
+
         if (!pSound) {
             SR_ERROR("SoundManager::Register() : sound is nullptr!");
             return nullptr;
@@ -196,23 +266,57 @@ namespace SR_AUDIO_NS {
     }
 
     bool SoundManager::Unregister(SoundData** pSoundData) {
-        if (!pSoundData || !(*pSoundData) || !(*pSoundData)->pSound) {
-            SR_ERROR("SoundManager::Unregister() : sound data is invalid!");
-            return false;
-        }
+        SR_TRACY_ZONE;
 
-        if ((*pSoundData)->pBuffer) {
-            (*pSoundData)->pContext->FreeBuffer(&(*pSoundData)->pBuffer);
-        }
+        return m_thread->Execute([this, pSoundData]() {
+            if (!pSoundData || !(*pSoundData) || !(*pSoundData)->pSound) {
+                SR_ERROR("SoundManager::Unregister() : sound data is invalid!");
+                return false;
+            }
 
-        delete *pSoundData;
+            if ((*pSoundData)->pBuffer) {
+                (*pSoundData)->pContext->FreeBuffer(&(*pSoundData)->pBuffer);
+            }
 
-        (*pSoundData) = nullptr;
+            delete *pSoundData;
 
-        return true;
+            (*pSoundData) = nullptr;
+
+            return true;
+        });
+    }
+
+    void SoundManager::SetListenerDistanceModel(SoundListener* pListenerContext, ListenerDistanceModel distanceModel) {
+        m_thread->Execute([pListenerContext, distanceModel]() {
+            pListenerContext->SetDistanceModel(distanceModel);
+            return true;
+        });
+    }
+
+    void SoundManager::SetListenerGain(SoundListener* pListenerContext, float_t gain) {
+        m_thread->Execute([pListenerContext, gain]() {
+            pListenerContext->SetGain(gain);
+            return true;
+        });
+    }
+
+    void SoundManager::SetListenerVelocity(SoundListener* pListenerContext, SR_MATH_NS::FVector3 velocity) {
+        m_thread->Execute([pListenerContext, velocity]() {
+            pListenerContext->SetVelocity(velocity);
+            return true;
+        });
+    }
+
+    void SoundManager::SetListenerTransform(SoundListener* pListenerContext, const SR_MATH_NS::FVector3& position, const SR_MATH_NS::Quaternion& quaternion) {
+        m_thread->Execute([pListenerContext, position, quaternion]() {
+            pListenerContext->Update(position, quaternion);
+            return true;
+        });
     }
 
     void SoundManager::DestroyPlayData(PlayData* pPlayData) {
+        SR_TRACY_ZONE;
+
         auto&& pSoundData = pPlayData->pData;
 
         if (pSoundData->pSound) {
@@ -227,6 +331,7 @@ namespace SR_AUDIO_NS {
     }
 
     bool SoundManager::IsInitialized(SoundManager::Handle pHandle) const {
+        SR_TRACY_ZONE;
         SR_LOCK_GUARD;
 
         for (auto&& pPlayData : m_playStack) {
@@ -241,6 +346,7 @@ namespace SR_AUDIO_NS {
     }
 
     bool SoundManager::IsExists(SoundManager::Handle pHandle) const {
+        SR_TRACY_ZONE;
         SR_LOCK_GUARD;
 
         for (auto&& pPlayData : m_playStack) {
@@ -253,6 +359,7 @@ namespace SR_AUDIO_NS {
     }
 
     bool SoundManager::IsFailed(SoundManager::Handle pHandle) const {
+        SR_TRACY_ZONE;
         SR_LOCK_GUARD;
 
         for (auto&& pPlayData : m_playStack) {
@@ -268,6 +375,7 @@ namespace SR_AUDIO_NS {
 
 
     SoundContext* SoundManager::GetSoundContext(const PlayParams& params) noexcept {
+        SR_TRACY_ZONE;
         SR_LOCK_GUARD;
 
         AudioLibrary library = params.library.has_value() ? params.library.value() : GetRelevantLibrary();
@@ -315,6 +423,7 @@ namespace SR_AUDIO_NS {
     }
 
     void SoundManager::Destroy() {
+        SR_TRACY_ZONE;
         SR_LOCK_GUARD;
 
         SR_INFO("SoundManager::Destroy() : destroy all sound libraries...");
@@ -330,7 +439,13 @@ namespace SR_AUDIO_NS {
         m_contexts.clear();
     }
 
+    void SoundManager::Sleep() {
+        SR_TRACY_ZONE;
+        SR_PLATFORM_NS::Sleep(1);
+    }
+
     SoundManager::Handle SoundManager::Play(const std::string& path, const PlayParams& params) {
+        SR_TRACY_ZONE;
         SR_LOCK_GUARD;
 
         if (path.empty()) {
@@ -346,6 +461,7 @@ namespace SR_AUDIO_NS {
     }
 
     SoundManager::Handle SoundManager::Play(const std::string& path) {
+        SR_TRACY_ZONE;
         return Play(path, PlayParams::GetDefault());
     }
 
@@ -358,70 +474,100 @@ namespace SR_AUDIO_NS {
     }
 
     void SoundManager::ApplyParams(SoundManager::Handle pHandle, const PlayParams& params) {
-        SR_LOCK_GUARD;
+        SR_TRACY_ZONE;
 
-        for (auto&& pPlayData : m_playStack) {
-            if (pHandle == pPlayData) {
-                if (!pPlayData->pData->initialized) {
+        m_thread->Execute([this, pHandle, params]() {
+            for (auto&& pPlayData : m_playStack) {
+                if (pHandle == pPlayData) {
+                    if (!pPlayData->pData->initialized) {
+                        break;
+                    }
+                    pPlayData->pData->pContext->ApplyParams(pPlayData->pSource, params);
                     break;
                 }
-                pPlayData->pData->pContext->ApplyParams(pPlayData->pSource, params);
-                break;
             }
-        }
+            return true;
+        });
     }
 
     void SoundManager::Stop(Handle pHandle) {
-        SR_LOCK_GUARD;
+        SR_TRACY_ZONE;
 
-        for (auto pIt = m_playStack.begin(); pIt != m_playStack.end(); ) {
-            if (pHandle == *pIt) {
-                DestroyPlayData(*pIt);
-                m_playStack.erase(pIt);
-                break;
+        m_thread->Execute([this, pHandle]() {
+            for (auto pIt = m_playStack.begin(); pIt != m_playStack.end(); ) {
+                if (pHandle == *pIt) {
+                    DestroyPlayData(*pIt);
+                    m_playing.erase(*pIt);
+                    m_playStack.erase(pIt);
+                    break;
+                }
+                else {
+                    ++pIt;
+                }
             }
-            else {
-                ++pIt;
-            }
-        }
+            return true;
+        });
     }
 
     SoundListener* SoundManager::CreateListener() {
+        SR_TRACY_ZONE;
         return CreateListener(AudioLibrary::Unknown);
     }
 
     SoundListener* SoundManager::CreateListener(AudioLibrary audioLibrary) {
-        SR_LOCK_GUARD;
+        SR_TRACY_ZONE;
 
-        if (audioLibrary == AudioLibrary::Unknown) {
-            if (m_contexts.empty()) {
-                audioLibrary = GetRelevantLibrary();
+        SoundListener* pListener = nullptr;
+        m_thread->Execute([&]() {
+            if (audioLibrary == AudioLibrary::Unknown) {
+                if (m_contexts.empty()) {
+                    audioLibrary = GetRelevantLibrary();
+                }
+                else {
+                    audioLibrary = m_contexts.begin()->first;
+                }
             }
-            else {
-                audioLibrary = m_contexts.begin()->first;
+
+            PlayParams params = PlayParams::GetDefault();
+            params.library = audioLibrary;
+            auto&& pSoundContext = GetSoundContext(params);
+            if (!pSoundContext) {
+                SR_ERROR("SoundManager::CreateListenerContext() : failed to create sound context!");
+                return false;
             }
-        }
 
-        PlayParams params = PlayParams::GetDefault();
-        params.library = audioLibrary;
-        auto&& pSoundContext = GetSoundContext(params);
-        if (!pSoundContext) {
-            SR_ERROR("SoundManager::CreateListenerContext() : failed to create sound context!");
-            return nullptr;
-        }
+            pListener = pSoundContext->AllocateListener();
+            if (!pListener) {
+                SR_ERROR("SoundManager::CreateListenerContext() : failed to allocate listener!");
+                return false;
+            }
 
-        return pSoundContext->AllocateListener();
+            m_listeners.insert(pListener);
+            return true;
+        });
+
+        return pListener;
     }
 
     void SoundManager::DestroyListener(SoundListener* pListener) {
-        SR_LOCK_GUARD;
+        SR_TRACY_ZONE;
 
-        for (auto&& [libraryType, deviceContexts] : m_contexts) {
-            for (auto&& [deviceName, pSoundContext] : deviceContexts) {
-                if (pSoundContext->FreeListener(pListener)) {
-                    return;
+        m_thread->Execute([&]() {
+            for (auto&& [libraryType, deviceContexts] : m_contexts) {
+                for (auto&& [deviceName, pSoundContext] : deviceContexts) {
+                    if (pSoundContext->FreeListener(pListener)) {
+                        if (m_listeners.erase(pListener) == 0) {
+                            SR_ERROR("SoundManager::DestroyListenerContext() : failed to erase listener!");
+                            return false;
+                        }
+                        return true;
+                    }
+                    SR_ERROR("SoundManager::DestroyListenerContext() : failed to free listener!");
+                    return false;
                 }
             }
-        }
+            SR_ERROR("SoundManager::DestroyListenerContext() : listener not found!");
+            return false;
+        });
     }
 }

@@ -45,7 +45,9 @@ namespace SR_CORE_UI_NS {
         }
 
         auto&& mousePosition = pCamera->GetMousePos();
-        auto&& pHoveredMesh = dynamic_cast<IRenderComponent*>(pCamera->GetRenderTechnique()->PickMeshAt(mousePosition));
+        auto&& pRenderTechnique = pCamera->GetRenderTechnique();
+        auto&& pMesh = pRenderTechnique->PickMeshAt(mousePosition);
+        auto&& pHoveredMesh = dynamic_cast<IRenderComponent*>(pMesh);
         auto&& isPressed = SR_UTILS_NS::Input::Instance().GetMouse(SR_UTILS_NS::MouseCode::MouseLeft);
         bool isHovered = pHoveredMesh ? CompareObject(pHoveredMesh->GetGameObject()) : false;
 
@@ -73,28 +75,24 @@ namespace SR_CORE_UI_NS {
     void IButton::OnIdle() {
         if (m_onIdle) {
             m_onIdle();
-            m_onIdle = Callback();
         }
     }
 
     void IButton::OnHover() {
         if (m_onHover) {
             m_onHover();
-            m_onHover = Callback();
         }
     }
 
     void IButton::OnKeyDown() {
         if (m_onKeyDown) {
             m_onKeyDown();
-            m_onKeyDown = Callback();
         }
     }
 
     void IButton::OnKeyUp() {
         if (m_onKeyUp) {
             m_onKeyUp();
-            m_onKeyUp = Callback();
         }
     }
 

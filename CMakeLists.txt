@@ -1,5 +1,10 @@
 cmake_minimum_required(VERSION 3.16...3.16.2)
-project(SREngine)
+project(SREngine VERSION 0.0.7 LANGUAGES CXX DESCRIPTION "SpaRcle Engine - cross-platform 2D/3D game engine in C++.")
+
+set_property(GLOBAL PROPERTY SR_ENGINE_VERSION_PROPERTY ${PROJECT_VERSION})
+set_property(GLOBAL PROPERTY SR_ENGINE_MAJOR_VERSION_PROPERTY ${PROJECT_VERSION_MAJOR})
+set_property(GLOBAL PROPERTY SR_ENGINE_MINOR_VERSION_PROPERTY ${PROJECT_VERSION_MINOR})
+set_property(GLOBAL PROPERTY SR_ENGINE_PATCH_VERSION_PROPERTY ${PROJECT_VERSION_PATCH})
 
 if (CMAKE_SIZEOF_VOID_P EQUAL 4)
     message(FATAL_ERROR "SpaRcle Engine supports only x64 systems!")
@@ -10,7 +15,7 @@ message(STATUS "SpaRcle Engine: cmake version is ${CMAKE_VERSION}")
 set(CMAKE_CXX_STANDARD 20)
 
 if (UNIX)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fcompare-debug-second -w -Wno-deprecated")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fcompare-debug-second -w -Wno-deprecated -fPIC")
 endif()
 
 if (UNIX AND CMAKE_BUILD_TYPE STREQUAL "Debug")

@@ -5,6 +5,8 @@
 #include <Core/EvoScriptAPI.h>
 #include <Core/Engine.h>
 
+#include <Core/UI/Button.h>
+
 #include <EvoScript/Compilation/CMakeCodeGen.h>
 
 #include <Utils/Input/InputSystem.h>
@@ -15,12 +17,15 @@
 
 #include <Graphics/Loaders/ObjLoader.h>
 #include <Graphics/Types/Skybox.h>
-#include <Graphics/Font/Text2D.h>
-#include <Graphics/Font/Text3D.h>
+#include <Graphics/Font/ITextComponent.h>
 #include <Graphics/Types/Geometry/ProceduralMesh.h>
+#include <Graphics/Animations/Animator.h>
+#include <Graphics/Animations/AnimationGraph.h>
 
 #include <Physics/3D/Rigidbody3D.h>
 #include <Physics/3D/Raycast3D.h>
+
+#include <Audio/Types/AudioSource.h>
 
 namespace SpaRcle {
     void API::RegisterEvoScriptClasses(SR_CORE_NS::Engine* pEngine) {
@@ -53,12 +58,15 @@ namespace SpaRcle {
             RegisterMaterial(generator);
             RegisterGUISystem(generator);
             RegisterRigidbody(generator);
+            RegisterButton(generator);
             RegisterPostProcessing(generator);
             RegisterISavable(generator);
             RegisterObserver(generator);
             RegisterText(generator);
             RegisterMath(generator);
             RegisterRaycast(generator);
+            RegisterAnimator(generator);
+            RegisterAudioSource(generator);
 
             generator->Save(SR_UTILS_NS::ResourceManager::Instance().GetCachePath().Concat("Scripts/Libraries/"));
         }
@@ -162,6 +170,16 @@ namespace SpaRcle {
         generator->AddIncompleteType("Camera", "Engine");
     }
 
+    void API::RegisterAudioSource(EvoScript::AddressTableGen* generator) {
+        using namespace SR_AUDIO_NS;
+
+        generator->RegisterNewClass("AudioSource", "AudioSource", { "Libraries/Component.h" }, {
+            { "Component", EvoScript::Public }
+        });
+
+        //ESRegisterMethod(EvoScript::Public, generator, AudioSource, Play, void, ESArg0())
+    }
+
     void API::RegisterScene(EvoScript::AddressTableGen *generator) {
         using namespace SR_UTILS_NS;
         using namespace SR_MATH_NS;
@@ -215,7 +233,6 @@ namespace SpaRcle {
 
         ESRegisterMethodArg0(EvoScript::Public, generator, Component, BaseComponent, Component*)
         ESRegisterMethodArg0(EvoScript::Public, generator, Component, GetGameObject, SharedPtr<GameObject>)
-        ESRegisterMethodArg0(EvoScript::Public, generator, Component, GetBarycenter, FVector3)
 
         ESRegisterMethodArg0(EvoScript::Public, generator, Component, IsActive, bool)
 
@@ -259,9 +276,9 @@ namespace SpaRcle {
 
         ESRegisterStaticMethod(EvoScript::Public, generator, Mesh, Load, std::vector<Mesh*>, ESArg2(const std::string& path, MeshType type), ESArg2(path, type))
 
-        ESRegisterMethod(EvoScript::Public, generator, Mesh, SetMaterial, void, ESArg1(Material* material), ESArg1(material))
+        //ESRegisterMethod(EvoScript::Public, generator, Mesh, SetMaterial, void, ESArg1(Material* material), ESArg1(material))
         ESRegisterMethodArg0(EvoScript::Public, generator, Mesh, GetGeometryName, std::string)
-        ESRegisterMethodArg0(EvoScript::Public, generator, Mesh, GetMaterial, Material*)
+        //ESRegisterMethodArg0(EvoScript::Public, generator, Mesh, GetMaterial, Material*)
     }
 
     void API::RegisterProceduralMesh(EvoScript::AddressTableGen *generator) {
@@ -274,9 +291,9 @@ namespace SpaRcle {
             "Libraries/ResourceManager.h", "Libraries/Component.h", "Libraries/Math/Vector3.h", "Libraries/Material.h", "Libraries/Math/Vertices.h"
         }, { { "IResource", EvoScript::Public }, { "Component", EvoScript::Public } });
 
-        ESRegisterMethod(EvoScript::Public, generator, ProceduralMesh, SetMaterial, void, ESArg1(Material* material), ESArg1(material))
+        //ESRegisterMethod(EvoScript::Public, generator, ProceduralMesh, SetMaterial, void, ESArg1(Material* material), ESArg1(material))
         ESRegisterMethodArg0(EvoScript::Public, generator, ProceduralMesh, GetGeometryName, std::string)
-        ESRegisterMethodArg0(EvoScript::Public, generator, ProceduralMesh, GetMaterial, Material*)
+        //ESRegisterMethodArg0(EvoScript::Public, generator, ProceduralMesh, GetMaterial, Material*)
         ESRegisterMethod(EvoScript::Public, generator, ProceduralMesh, SetVertices, void, ESArg1(const std::vector<StaticMeshVertex>& vertices), ESArg1(vertices))
         ESRegisterMethod(EvoScript::Public, generator, ProceduralMesh, SetIndexedVertices, void, ESArg2(void* pData, uint64_t count), ESArg2(pData, count))
         ESRegisterMethod(EvoScript::Public, generator, ProceduralMesh, SetIndices, void, ESArg2(void* pData, uint64_t count), ESArg2(pData, count))
@@ -296,6 +313,7 @@ namespace SpaRcle {
         ESRegisterMethod(EvoScript::Public, generator, GameObject, AddChild, bool, ESArg1(const SharedPtr<GameObject>& child), ESArg1(child))
         ESRegisterMethod(EvoScript::Public, generator, GameObject, GetComponent, Component*, ESArg1(const std::string& name), ESArg1(name))
         ESRegisterMethod(EvoScript::Public, generator, GameObject, Find, SharedPtr<GameObject>, ESArg1(const std::string& name), ESArg1(name))
+        ESRegisterMethodArg0(EvoScript::Public, generator, GameObject, GetParent, SharedPtr<GameObject>)
         ESRegisterMethod(EvoScript::Public, generator, GameObject, SetName, void, ESArg1(const std::string& name), ESArg1(name))
         ESRegisterMethod(EvoScript::Public, generator, GameObject, GetOrCreateComponent, Component*, ESArg1(const std::string& name), ESArg1(name))
         ESRegisterMethod(EvoScript::Public, generator, GameObject, SetTransform, void, ESArg1(Transform* pTransform), ESArg1(pTransform))
@@ -325,6 +343,24 @@ namespace SpaRcle {
 
         //ESRegisterMethod(EvoScript::Private, generator, Camera, OnRotate, void, ESArg1(const FVector3& v), ESArg1(v)) // Component
         //ESRegisterMethod(EvoScript::Private, generator, Camera, OnMove, void, ESArg1(const FVector3& v), ESArg1(v)) // Component
+    }
+
+
+    void API::RegisterButton(EvoScript::AddressTableGen *generator) {
+        using namespace SR_CORE_UI_NS;
+        using ButtonCallback = std::function<void()>;
+
+        generator->RegisterNewClass("Button", "Button");
+        generator->RegisterUsing("ButtonCallback", "Button", "std::function<void()>");
+
+        ESRegisterMethod(EvoScript::Public, generator, Button, SetIdleCallback, void, ESArg1(ButtonCallback idleCallback), ESArg1(idleCallback))
+        ESRegisterMethod(EvoScript::Public, generator, Button, SetHoverCallback, void, ESArg1(ButtonCallback hoverCallback), ESArg1(hoverCallback))
+        ESRegisterMethod(EvoScript::Public, generator, Button, SetKeyDownCallback, void, ESArg1(ButtonCallback keyDownCallback), ESArg1(keyDownCallback))
+        ESRegisterMethod(EvoScript::Public, generator, Button, SetKeyUpCallback, void, ESArg1(ButtonCallback keyUpCallback), ESArg1(keyUpCallback))
+
+        ESRegisterMethodArg0(EvoScript::Public, generator, Button, IsIdle, bool)
+        ESRegisterMethodArg0(EvoScript::Public, generator, Button, IsHovered, bool)
+        ESRegisterMethodArg0(EvoScript::Public, generator, Button, IsPressed, bool)
     }
 
     void API::RegisterRigidbody(EvoScript::AddressTableGen *generator) {
@@ -383,7 +419,7 @@ namespace SpaRcle {
     }
 
     void API::RegisterTransform(EvoScript::AddressTableGen *generator) {
-        generator->RegisterNewClass("Transform", "Transform", { "vector", "mutex", "stdint.h", "Libraries/Math/Vector3.h", "Libraries/Math/Vector2.h" });
+        generator->RegisterNewClass("Transform", "Transform", { "vector", "mutex", "stdint.h", "Libraries/Math/Vector3.h", "Libraries/Math/Quaternion.h", "Libraries/Math/Vector2.h" });
 
         using namespace SR_MATH_NS;
         using namespace SR_UTILS_NS;
@@ -394,6 +430,7 @@ namespace SpaRcle {
         ESRegisterMethod(EvoScript::Public, generator, Transform, SetTranslation, void, ESArg1(const FVector3& translation), ESArg1(translation))
         ESRegisterMethod(EvoScript::Public, generator, Transform, SetRotation, void, ESArg1(const FVector3& eulerAngles), ESArg1(eulerAngles))
         ESRegisterMethodArg0(EvoScript::Public, generator, Transform, GetRotation, FVector3)
+        ESRegisterMethodArg0(EvoScript::Public, generator, Transform, GetQuaternion, Quaternion)
 
         ESRegisterMethodArg0(EvoScript::Public, generator, Transform, GetTranslation, FVector3)
 
@@ -427,10 +464,6 @@ namespace SpaRcle {
 
         ESRegisterCustomStaticMethod(EvoScript::Public, generator, Input, GetKey, bool, ESArg1(KeyCode key), {
             return SR_UTILS_NS::Input::Instance().GetKey(key);
-        });
-
-        ESRegisterCustomStaticMethod(EvoScript::Public, generator, Input, LockCursor, void, ESArg1(bool lock), {
-            SR_UTILS_NS::Input::Instance().LockCursor(lock);
         });
 
         ESRegisterCustomStaticMethod(EvoScript::Public, generator, Input, GetKeyDown, bool, ESArg1(KeyCode key), {
@@ -600,13 +633,16 @@ namespace SpaRcle {
         using namespace SR_WORLD_NS;
         using namespace SR_MATH_NS;
         using namespace SR_GTYPES_NS;
+        using namespace SR_CORE_UI_NS;
+        using namespace SR_ANIMATIONS_NS;
         using namespace SR_PHYSICS_NS::Types;
 
         ESRegisterDynamicCast(generator, ProceduralMesh, Component)
         ESRegisterDynamicCast(generator, Rigidbody3D, Component)
         ESRegisterDynamicCast(generator, Rigidbody, Component)
-        ESRegisterDynamicCast(generator, Text2D, Component)
-        ESRegisterDynamicCast(generator, Text3D, Component)
+        ESRegisterDynamicCast(generator, Text, Component)
+        ESRegisterDynamicCast(generator, Button, Component)
+        ESRegisterDynamicCast(generator, Animator, Component)
         ESRegisterDynamicCast(generator, SceneLogic, SceneCubeChunkLogic)
     }
 
@@ -642,17 +678,31 @@ namespace SpaRcle {
         using namespace SR_GTYPES_NS;
         using namespace SR_GRAPH_NS;
 
-       generator->RegisterNewClass("Text2D", "Text", {
+        generator->RegisterNewClass("Text", "Text", {
            "Libraries/Component.h", "Libraries/Mesh.h"
-       }, { { "Component", EvoScript::Public }, { "Mesh", EvoScript::Public  } });
+        }, { { "Component", EvoScript::Public }, { "Mesh", EvoScript::Public  } });
 
-        ESRegisterMethod(EvoScript::Public, generator, Text2D, SetText, void, ESArg1(const std::string& text), ESArg1(text))
+        ESRegisterMethod(EvoScript::Public, generator, Text, SetText, void, ESArg1(const std::string& text), ESArg1(text))
+    }
 
-       generator->RegisterNewClass("Text3D", "Text", {
-           "Libraries/Component.h", "Libraries/Mesh.h"
-       }, { { "Component", EvoScript::Public }, { "Mesh", EvoScript::Public  } });
+    void API::RegisterAnimator(EvoScript::AddressTableGen* generator) {
+        using namespace SR_UTILS_NS;
+        using namespace SR_ANIMATIONS_NS;
 
-       ESRegisterMethod(EvoScript::Public, generator, Text3D, SetText, void, ESArg1(const std::string& text), ESArg1(text))
+        generator->RegisterNewClass("AnimationGraph", "Animator", { }, { });
+
+        ESRegisterCustomMethod(EvoScript::Public, generator, AnimationGraph, SetBool, void, ESArg2(const std::string& name, bool value), {
+            return ptr->SetBool(name, value);
+        });
+        ESRegisterCustomMethod(EvoScript::Public, generator, AnimationGraph, IsStateActive, bool, ESArg1(const std::string& name), {
+            return ptr->IsStateActive(name);
+        });
+
+        generator->RegisterNewClass("Animator", "Animator", {
+            "Libraries/Component.h"
+        }, { { "Component", EvoScript::Public } });
+
+        ESRegisterMethodArg0(EvoScript::Public, generator, Animator, GetGraph, AnimationGraph*)
     }
 
     void API::RegisterMath(EvoScript::AddressTableGen *generator) {

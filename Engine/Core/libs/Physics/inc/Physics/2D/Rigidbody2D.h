@@ -14,11 +14,7 @@ namespace SR_PTYPES_NS {
 
     class Rigidbody2D : public Rigidbody {
         using Super = Rigidbody;
-        SR_ENTITY_SET_VERSION(1006);
-        SR_INITIALIZE_COMPONENT(Rigidbody2D);
-    public:
-        static Component* LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage);
-
+        SR_REGISTER_NEW_COMPONENT(Rigidbody2D, 1007);
     public:
         SR_NODISCARD SR_UTILS_NS::Measurement GetMeasurement() const override;
 

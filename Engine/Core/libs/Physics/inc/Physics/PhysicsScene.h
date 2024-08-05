@@ -45,7 +45,9 @@ namespace SR_PHYSICS_NS {
 
         SR_NODISCARD SR_PHYSICS_NS::PhysicsWorld* Get2DWorld() const noexcept { return m_2DWorld; }
         SR_NODISCARD SR_PHYSICS_NS::PhysicsWorld* Get3DWorld() const noexcept { return m_3DWorld; }
-        SR_NODISCARD bool IsDebugEnabled() const noexcept { return m_debugEnabled; };
+        SR_NODISCARD bool IsDebugEnabled() const noexcept;
+
+        void SetIsGameMode(bool enabled) noexcept { m_isGameMode = enabled; }
 
     private:
         virtual bool Flush();
@@ -65,6 +67,7 @@ namespace SR_PHYSICS_NS {
 
         bool m_needClearForces = false;
         bool m_debugEnabled = true;
+        bool m_isGameMode = false;
 
     };
 }

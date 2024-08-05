@@ -5,32 +5,41 @@
 #ifndef SR_ENGINE_AUDIOLSTENER_H
 #define SR_ENGINE_AUDIOLSTENER_H
 
+#include <Audio/ListenerData.h>
 #include <Utils/ECS/Component.h>
 
 namespace SR_AUDIO_NS
 {
     class SoundListener;
 
-    class AudioListener : public SR_UTILS_NS::Component{
-        SR_ENTITY_SET_VERSION(1000);
-        SR_INITIALIZE_COMPONENT(AudioListener);
+    class AudioListener : public SR_UTILS_NS::Component {
+        SR_REGISTER_NEW_COMPONENT(AudioListener, 1001);
         using Super = SR_UTILS_NS::Component;
         using Handle = void*;
     public:
         AudioListener();
 
     public:
-        static SR_UTILS_NS::Component* LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage);
-        SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save(SR_UTILS_NS::SavableContext data) const override;
+        void OnEnable() override;
+        void OnDisable() override;
 
+        bool InitializeEntity() noexcept override;
         void OnMatrixDirty() override;
-
         void OnAttached() override;
+
+        void SetDistanceModel(ListenerDistanceModel distanceModel);
+        void SetVelocity(const SR_MATH_NS::FVector3& velocity);
+        void SetGain(float_t gain);
+
     protected:
         void OnDestroy() override;
 
     private:
         SoundListener* m_listenerContext = nullptr;
+
+        ListenerDistanceModel m_distanceModel = ListenerDistanceModel::InverseClamped;
+        SR_MATH_NS::FVector3 m_velocity;
+        float_t m_gain = 1.0f;
     };
 }
 

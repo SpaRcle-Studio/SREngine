@@ -10,6 +10,7 @@ namespace SR_SCRIPTING_NS {
 
         if (m_script) {
             SR_ERROR("EvoBehaviour::Load() : script is already loaded!");
+            m_hasErrors = true;
             return false;
         }
 
@@ -21,6 +22,7 @@ namespace SR_SCRIPTING_NS {
 
         if (!m_script) {
             SR_ERROR("EvoBehaviour::Load() : failed to load script!");
+            m_hasErrors = true;
             return false;
         }
 
@@ -35,6 +37,7 @@ namespace SR_SCRIPTING_NS {
 
         if (!m_behaviourContext) {
             SR_ERROR("EvoBehaviour::Load() : failed to initialize behaviour context!");
+            m_hasErrors = true;
             return false;
         }
 

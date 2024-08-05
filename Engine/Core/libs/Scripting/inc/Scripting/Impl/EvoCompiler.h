@@ -7,7 +7,7 @@
 
 #include <Scripting/Base/Compiler.h>
 
-#include <Utils/Xml.h>
+#include <Utils/Resources/Xml.h>
 #include <EvoScript/Script.h>
 #include <EvoScript/Compilation/Compiler.h>
 #include <EvoScript/Compilation/AddressTableGen.h>
@@ -21,7 +21,7 @@ namespace SR_SCRIPTING_NS {
 
     public:
         SR_NODISCARD EvoScript::CastingGen* GetCasting() const { return m_casting; }
-        SR_NODISCARD EvoScript::AddressTableGen* GetGenerator() const { return m_generator; }
+        SR_NODISCARD EvoScript::AddressTableGen* GetGenerator() const;
 
     public:
         bool Init() override;

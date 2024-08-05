@@ -14,7 +14,7 @@ namespace SR_AUDIO_NS {
 
         switch (pDevice->GetLibrary()) {
             case AudioLibrary::OpenAL:
-                return new OpenALSoundListener();
+                return new OpenALSoundListener(pDevice);
             case AudioLibrary::FMOD:
             case AudioLibrary::Wwise:
             case AudioLibrary::Allegro:

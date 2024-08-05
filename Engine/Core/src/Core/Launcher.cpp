@@ -33,6 +33,8 @@ namespace SR_CORE_NS {
     }
 
     bool Launcher::UnpackAndExecute() {
+        SR_LOG("Launcher::UnpackAndExecute() : trying to unpack the application.");
+
         auto&& applicationPath = SR_PLATFORM_NS::GetApplicationPath();
         SR_UTILS_NS::Path unpackDirectory = applicationPath.GetFolder().Concat( "SREngine");
 
@@ -46,6 +48,17 @@ namespace SR_CORE_NS {
         bool exportResult = SR_UTILS_NS::ResourceEmbedder::Instance().ExportAllResources(unpackDirectory.Concat("Resources"));
 
         if (copyResult && exportResult) {
+            /*char *c_path = const_cast<char*>(newApplicationPath.c_str());
+            const char *c_arg = "--delete-old-app";
+            char *const argv[] = {c_path, const_cast<char*>(c_arg), nullptr};
+            char *const envp[] = { nullptr };
+            execve(newApplicationPath.c_str(), argv, envp);*/
+
+            SR_LOG("Launcher::UnpackAndExecute() : successfully copied the current executable and exported embedded resources.");
+            SR_LOG("Launcher::UnpackAndExecute() : trying to execute the copied application.");
+
+            /// TODO: Should we use execve/smth else for Linux here?
+            /// P.S. The current process waits till the new one is finished, so we should come up with something else.
             SR_PLATFORM_NS::OpenFile(newApplicationPath, "--delete-old-app");
         }
 
@@ -72,10 +85,18 @@ namespace SR_CORE_NS {
     }
 
     bool Launcher::CloneResources() {
+    #ifdef SR_LINUX
+        auto&& git2path = GetResourcesPath().Concat("Engine/Utilities/git2");
+    #elif defined (SR_WIN32)
         auto&& git2path = GetResourcesPath().Concat("Engine/Utilities/git2.exe");
+    #endif
+
         auto&& cachePath = GetResourcesPath().Concat("Cache");
 
-        cachePath.Create();
+        if (!cachePath.Create()) {
+            SR_ERROR("Launcher::CloneResources() : failed to create cache directory.");
+            return false;
+        }
 
         std::string command =
                 "cd " + cachePath.ToStringRef() + " && " +

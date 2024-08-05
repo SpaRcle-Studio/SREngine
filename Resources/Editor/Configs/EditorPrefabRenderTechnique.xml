@@ -1,14 +1,12 @@
 <?xml version="1.0"?>
-<Technique Name="CascadedShadowMap">
+<Technique Name="Prefab">
     <Include Path="Engine/Passes/ColorBufferPass.xml"/>
     <Include Path="Engine/Passes/CascadedShadowMapPass.xml"/>
-    <Include Path="Engine/Passes/DefaultSceneViewPass.xml"/>
-    <FramebufferPass Name="SceneViewFBO">
-        <FramebufferSettings DynamicResizing="true" DepthEnabled="true" SmoothSamples="1">
-            <Size X="0" Y="0"/>
-            <PreScale X="1.0" Y="1.0"/>
-            <Depth Format="Auto" ClearValue="1.0"/>
-            <Layer Format="RGBA8_UNORM" R="0.0" G="0.0" B="0.0" A="1.0"/>
+    <Include Path="Engine/Passes/SceneViewFBOController.xml"/>
+    <FramebufferPass Name="SceneView">
+        <FramebufferSettings Name="SceneViewFBO">
+            <Depth ClearValue="1.0"/>
+            <Layer R="0.0" G="0.0" B="0.0" A="1.0"/>
         </FramebufferSettings>
         <Passes>
             <ClearBuffersPass/>
@@ -20,15 +18,17 @@
                 </AllowedLayers>
             </MeshDrawerPass>
             <SkyboxPass Path="Engine/Skyboxes/Gray.png" Shader="Engine/Shaders/skybox.srsl"/>
+            <PostProcessPass Shader="Editor/Shaders/grid.srsl" Vertices="4"/>
             <MeshDrawerPass>
                 <Sampler FBO="ShadowMapFBO" Id="shadowMap" Depth="true" Optional="true" />
                 <DisallowedLayers>
                     <Default/>
                     <Opaque/>
                     <GizmoSelection/>
+                    <Gizmo/>
                 </DisallowedLayers>
             </MeshDrawerPass>
-            <ClearBuffersPass ClearDepth="false"/>
+            <ClearBuffersPass ClearColor="false"/>
             <MeshDrawerPass>
                 <AllowedLayers>
                     <Gizmo/>
@@ -38,11 +38,11 @@
     </FramebufferPass>
     <Queues>
         <Queue>
-            <Pass Name="ShadowMapFBO"/>
+            <Pass Name="ShadowMap"/>
         </Queue>
         <Queue>
             <Pass Name="ColorBufferPass"/>
-            <Pass Name="SceneViewFBO"/>
+            <Pass Name="SceneView"/>
         </Queue>
     </Queues>
 </Technique>

@@ -10,17 +10,53 @@
 #include <Utils/ECS/Transform.h>
 
 namespace SR_AUDIO_NS{
-    SR_REGISTER_COMPONENT(AudioListener);
-
     AudioListener::AudioListener()
         : SR_UTILS_NS::Component()
-    {
-        m_listenerContext = SR_AUDIO_NS ::SoundManager::Instance().CreateListener();
+    { }
+
+    void AudioListener::OnEnable() {
+        SR_TRACY_ZONE;
+
+        if (!m_listenerContext) {
+            m_listenerContext = SR_AUDIO_NS::SoundManager::Instance().CreateListener();
+            if (!m_listenerContext) {
+                SR_ERROR("AudioListener::OnEnable() : failed to create listener!");
+                return;
+            }
+
+            SR_AUDIO_NS::SoundManager::Instance().SetListenerDistanceModel(m_listenerContext, m_distanceModel);
+            SR_AUDIO_NS::SoundManager::Instance().SetListenerGain(m_listenerContext, m_gain);
+            SR_AUDIO_NS::SoundManager::Instance().SetListenerVelocity(m_listenerContext, m_velocity);
+        }
+        Super::OnEnable();
+    }
+
+    void AudioListener::OnDisable() {
+        if (m_listenerContext) {
+            SR_AUDIO_NS::SoundManager::Instance().DestroyListener(m_listenerContext);
+            m_listenerContext = nullptr;
+        }
+        Super::OnEnable();
+    }
+
+    bool AudioListener::InitializeEntity() noexcept {
+        GetComponentProperties().AddEnumProperty("Distance model", &m_distanceModel)
+            .SetSetter([this](const SR_UTILS_NS::StringAtom& value) { SetDistanceModel(SR_UTILS_NS::EnumReflector::FromString<ListenerDistanceModel>(value)); });
+
+        GetComponentProperties().AddStandardProperty("Gain", &m_gain)
+            .SetSetter([this](void* pData) { SetGain(*static_cast<float_t*>(pData)); });
+
+        GetComponentProperties().AddStandardProperty<SR_MATH_NS::FVector3>("Velocity", &m_velocity)
+            .SetSetter([this](void* pData) { SetVelocity(*static_cast<SR_MATH_NS::FVector3*>(pData)); });
+
+        return Super::InitializeEntity();
     }
 
     void AudioListener::OnDestroy() {
-        SR_AUDIO_NS ::SoundManager::Instance().DestroyListener(m_listenerContext);
-        m_listenerContext = nullptr;
+        if (m_listenerContext) {
+            SR_AUDIO_NS::SoundManager::Instance().DestroyListener(m_listenerContext);
+            m_listenerContext = nullptr;
+        }
 
         Super::OnDestroy();
 
@@ -29,23 +65,44 @@ namespace SR_AUDIO_NS{
         });
     }
 
-    SR_UTILS_NS::Component* AudioListener::LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage) {
-        auto&& pComponent = new AudioListener();
-        return pComponent;
-    }
-
-    SR_HTYPES_NS::Marshal::Ptr AudioListener::Save(SR_UTILS_NS::SavableContext data) const {
-        data.pMarshal = Super::Save(data);
-        return data.pMarshal;
-    }
-
     void AudioListener::OnAttached() {
-        Component::OnAttached();
+        Super::OnAttached();
+    }
+
+    void AudioListener::SetDistanceModel(ListenerDistanceModel distanceModel) {
+        if (m_distanceModel == distanceModel) {
+            return;
+        }
+        m_distanceModel = distanceModel;
+        if (m_listenerContext) {
+            SR_AUDIO_NS::SoundManager::Instance().SetListenerDistanceModel(m_listenerContext, m_distanceModel);
+        }
+    }
+
+    void AudioListener::SetVelocity(const SR_MATH_NS::FVector3& velocity) {
+        if (m_velocity == velocity) {
+            return;
+        }
+        m_velocity = velocity;
+        if (m_listenerContext) {
+            SR_AUDIO_NS::SoundManager::Instance().SetListenerVelocity(m_listenerContext, m_velocity);
+        }
+    }
+
+    void AudioListener::SetGain(float_t gain) {
+        if (m_gain == gain) {
+            return;
+        }
+        m_gain = gain;
+        if (m_listenerContext) {
+            SR_AUDIO_NS::SoundManager::Instance().SetListenerGain(m_listenerContext, m_gain);
+        }
     }
 
     void AudioListener::OnMatrixDirty() {
+        SR_TRACY_ZONE;
+
         if (!m_listenerContext) {
-            SRHalt("AudioListener::OnMatrixDirty() : listener context is nullptr!");
             return;
         }
 
@@ -58,7 +115,7 @@ namespace SR_AUDIO_NS{
             return;
         }
 
-        m_listenerContext->Update(pos, q);
+        SR_AUDIO_NS::SoundManager::Instance().SetListenerTransform(m_listenerContext, pos, q);
 
         Component::OnMatrixDirty();
     }

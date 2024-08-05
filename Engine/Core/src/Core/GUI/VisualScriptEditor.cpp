@@ -7,7 +7,7 @@
 
 #include <Utils/Resources/ResourceManager.h>
 #include <Utils/FileSystem/FileSystem.h>
-#include <Utils/Xml.h>
+#include <Utils/Resources/Xml.h>
 
 #include <Graphics/GUI/NodeManager.h>
 #include <Graphics/GUI/Link.h>

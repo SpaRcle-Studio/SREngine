@@ -10,6 +10,7 @@
 namespace SR_AUDIO_NS {
     class Sound;
     class SoundManager;
+    class SoundContext;
 
     struct SoundData : public SR_UTILS_NS::NonCopyable {
         SoundContext* pContext = nullptr;

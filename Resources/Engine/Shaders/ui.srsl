@@ -1,15 +1,17 @@
 ShaderType Canvas;
 
 PolygonMode Fill;
-CullMode None;
+CullMode Back;
 DepthCompare LessOrEqual;
-PrimitiveTopology TriangleList;
+PrimitiveTopology TriangleStrip;
 BlendEnabled false;
 DepthWrite true;
 DepthTest true;
 
-[[uniform], [public]] vec4 color;
+[[uniform], [public]] vec4 color = vec4(1.0, 1.0, 1.0, 1.0);
 [[uniform], [public]] sampler2D diffuse;
+
+[[shared]] vec2 UV;
 
 void fragment() {
 	COLOR = texture(diffuse, vec2(1.0 - UV.x, 1.0 - UV.y)) * color;
@@ -20,5 +22,7 @@ void fragment() {
 }
 
 void vertex() {
-    OUT_POSITION = ORTHOGONAL_MATRIX * MODEL_MATRIX * vec4(VERTEX, 1.0);
+    #include <Engine/Shaders/UI/sprite-vertices.inl.srsl>
+    UV = uv[VERTEX_INDEX];
+    OUT_POSITION = ORTHOGONAL_MATRIX * MODEL_MATRIX * vec4(vertices[VERTEX_INDEX], 1.0);
 }

@@ -11,6 +11,8 @@
 #include <Utils/Common/CmdOptions.h>
 #include <Utils/Tests/SharedPtrAutotests.h>
 
+#include <Core/Tests/AtlasBuilderTest.h>
+
 int main(int argc, char** argv) {
     if (!SR_UTILS_NS::RunTestSharedPtr()) {
         SR_PLATFORM_NS::WriteConsoleError("Application::PreInit() : shared pointer autotests failed!\n");
@@ -19,13 +21,8 @@ int main(int argc, char** argv) {
 
     if (SR_UTILS_NS::HasCmdOption(argv, argv + argc, "--unit-tests")) {
         SR_CORE_NS::TestManager::Instance().AddTest([]() {
-            SR_LOG("Test1 ------------------------------------------");
-            return true;
-        }, "Test1");
-        SR_CORE_NS::TestManager::Instance().AddTest([]() {
-            SR_LOG("Test2 ------------------------------------------");
-            return true;
-        }, "Test2");
+            return SR_CORE_NS::Tests::AtlasBuilderTest::Run();
+        }, "Atlas Builder Test");
 
         SR_CORE_NS::TestManager::Instance().RunAll(argc, argv);
         return 0;
