@@ -123,6 +123,11 @@ namespace SR_CORE_NS {
         }
 
         auto&& logPath = logDir.Concat("srengine-log.txt");
+        if (!logPath.GetFolder().CreateIfNotExists()) {
+            SR_PLATFORM_NS::WriteConsoleError("Failed to create log file!\n");
+            return false;
+        }
+
         SR_UTILS_NS::Debug::Instance().Init(logPath, true, SR_UTILS_NS::Debug::Theme::Dark);
         SR_UTILS_NS::Debug::Instance().SetLevel(SR_UTILS_NS::Debug::Level::Low);
 
