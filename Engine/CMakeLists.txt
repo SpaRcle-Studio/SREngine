@@ -80,6 +80,11 @@ else()
     set(executableType "latest")
 endif()
 
+if (SR_ENGINE_FLATPAK_BUILD)
+    install(SREngine DESTINATION /app/bin)
+    install(SREngine PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
+endif()
+
 if (SR_ENGINE_EXTENDED_NAME)
     if (UNIX AND NOT APPLE)
         set_target_properties(SREngine PROPERTIES OUTPUT_NAME "SREngine_v${SR_ENGINE_VERSION}-${executableType}_linux.${CURRENT_TARGET_ARCHITECTURE}")
