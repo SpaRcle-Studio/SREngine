@@ -14,6 +14,23 @@ namespace SR_CORE_NS {
             return LauncherInitStatus::Error;
         }
 
+    #ifdef SR_ENGINE_FLATPAK_BUILD
+        if (Super::InitializeResourcesFolder(argc, argv)) {
+            SR_LOG("Launcher::InitLauncher() : resources folder found.");
+            return LauncherInitStatus::Success;
+        }
+
+        if (CloneResources()) {
+            SR_LOG("Launcher::InitLauncher() : resources cloned successfully.");
+            return LauncherInitStatus::Success;
+        }
+        else {
+            SR_ERROR("Launcher::InitLauncher() : failed to clone resources.");
+            return LauncherInitStatus::Error;
+        }
+
+        if (Super::InitializeResourcesFolder(argc, argv))
+    #else
         if (Super::InitializeResourcesFolder(argc, argv)) {
             SR_LOG("Launcher::InitLauncher() : resources folder found.");
             if (SR_UTILS_NS::HasCmdOption(argv, argv + argc, "--delete-old-app")) {
@@ -30,6 +47,7 @@ namespace SR_CORE_NS {
         }
 
         return LauncherInitStatus::Unpacking;
+    #endif
     }
 
     bool Launcher::UnpackAndExecute() {
@@ -94,7 +112,6 @@ namespace SR_CORE_NS {
     #endif
 
         auto&& cachePath = GetResourcesPath().Concat("Cache");
-
         if (!cachePath.Create()) {
             SR_ERROR("Launcher::CloneResources() : failed to create cache directory.");
             return false;

@@ -59,9 +59,7 @@ namespace SR_CORE_NS {
             logDir = folder;
         }
 
-        InitLogger(logDir);
-
-        return InitializeResourcesFolder(argc, argv);
+        return InitLogger(logDir);
     }
 
     /*void Application::TryPlayStartSound() {
@@ -274,11 +272,17 @@ namespace SR_CORE_NS {
     }
 
     bool Application::InitializeResourcesFolder(int argc, char** argv) {
-        if (auto&& folder = SR_UTILS_NS::GetCmdOption(argv, argv + argc, "-resources"); !folder.empty()) {
-            m_resourcesPath = folder;
+        if (SR_UTILS_NS::Path folder = SR_UTILS_NS::GetCmdOption(argv, argv + argc, "-resources"); !folder.empty()) {
+            if (!folder.Exists(SR_UTILS_NS::Path::Type::Folder)) {
+                SR_INFO("Application::InitializeResourcesFolder() : specified resources folder does not exist!");
+            }
+            else {
+                m_resourcesPath = folder;
+                return true;
+            }
         }
 
-        if (!m_resourcesPath.Exists(SR_UTILS_NS::Path::Type::Folder) && !FindResourcesFolder()) {
+        if (!FindResourcesFolder()) {
             SR_LOG("Application::InitializeResourcesFolder() : failed to find resources folder!");
             return false;
         }
@@ -287,7 +291,7 @@ namespace SR_CORE_NS {
     }
 
     void Application::SwitchResourcesFolder(const SR_UTILS_NS::Path& path) {
-
+        SR_STATIC_ASSERT("Not yet implemented.");
     }
 
     void Application::Reload() {
