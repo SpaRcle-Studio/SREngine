@@ -18,6 +18,10 @@ message(STATUS "SpaRcle Engine: C++ compiler is '${CMAKE_CXX_COMPILER}'")
 option(SR_ENGINE_FLATPAK_BUILD "" OFF)
 option(SR_ENGINE_EXTENDED_NAME "" ON)
 
+if (SR_ENGINE_FLATPAK_BUILD)
+    add_compile_definitions(SR_ENGINE_FLATPAK_BUILD)
+endif()
+
 # TODO!
 #add_compile_definitions(_CONTAINER_DEBUG_LEVEL=0)
 #add_compile_definitions(_ITERATOR_DEBUG_LEVEL=0)

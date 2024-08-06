@@ -85,9 +85,11 @@ namespace SR_CORE_NS {
     }
 
     bool Launcher::CloneResources() {
-    #ifdef SR_LINUX
+    #ifdef SR_ENGINE_FLATPAK_BUILD
+        auto&& git2path = "/usr/bin/git";
+    #elif defined(SR_LINUX)
         auto&& git2path = GetResourcesPath().Concat("Engine/Utilities/git2");
-    #elif defined (SR_WIN32)
+    #elif defined(SR_WIN32)
         auto&& git2path = GetResourcesPath().Concat("Engine/Utilities/git2.exe");
     #endif
 
