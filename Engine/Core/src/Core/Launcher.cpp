@@ -29,7 +29,6 @@ namespace SR_CORE_NS {
             return LauncherInitStatus::Error;
         }
 
-        if (Super::InitializeResourcesFolder(argc, argv))
     #else
         if (Super::InitializeResourcesFolder(argc, argv)) {
             SR_LOG("Launcher::InitLauncher() : resources folder found.");
