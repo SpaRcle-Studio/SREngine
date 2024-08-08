@@ -279,6 +279,7 @@ namespace SR_CORE_NS {
                     SR_ERROR("Application::InitializeResourcesFolder() : failed to create resources folder!");
                 }
 
+                m_resourcesPath = folder;
                 return false;
             #else
                 SR_INFO("Application::InitializeResourcesFolder() : specified resources folder does not exist!");

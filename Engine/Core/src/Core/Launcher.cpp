@@ -117,8 +117,9 @@ namespace SR_CORE_NS {
         }
 
         std::string command =
-                "cd " + cachePath.ToStringRef() + " && " +
-                git2path.ToStringRef() + " clone https://github.com/SpaRcle-Studio/SRE2R -b release/0.0.7 --depth 1";
+                git2path.ToStringRef() + " clone https://github.com/SpaRcle-Studio/SRE2R " +
+                cachePath.Concat("SRE2R").ToStringRef() +
+                " -b release/0.0.7 --depth 1";
 
         SR_SYSTEM_LOG("Launcher::CloneResources() : cloning repository...\n" + command);
 
