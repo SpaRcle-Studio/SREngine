@@ -277,8 +277,9 @@ namespace SR_CORE_NS {
             #ifdef SR_ENGINE_FLATPAK_BUILD
                 if (!folder.Create()) {
                     SR_ERROR("Application::InitializeResourcesFolder() : failed to create resources folder!");
-                    return false;
                 }
+
+                return false;
             #else
                 SR_INFO("Application::InitializeResourcesFolder() : specified resources folder does not exist!");
             #endif
