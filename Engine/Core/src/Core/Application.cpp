@@ -275,10 +275,6 @@ namespace SR_CORE_NS {
         if (SR_UTILS_NS::Path folder = SR_UTILS_NS::GetCmdOption(argv, argv + argc, "-resources"); !folder.empty()) {
             if (!folder.Exists(SR_UTILS_NS::Path::Type::Folder)) {
             #ifdef SR_ENGINE_FLATPAK_BUILD
-                if (!folder.Create()) {
-                    SR_ERROR("Application::InitializeResourcesFolder() : failed to create resources folder!");
-                }
-
                 m_resourcesPath = folder;
                 return false;
             #else
