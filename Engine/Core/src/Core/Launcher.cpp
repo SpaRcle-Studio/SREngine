@@ -13,26 +13,14 @@ namespace SR_CORE_NS {
             SR_PLATFORM_NS::WriteConsoleError("Launcher::Init() : failed to pre-initialize application!\n");
             return LauncherInitStatus::Error;
         }
-#define SR_ENGINE_FLATPAK_BUILD
+
     #ifdef SR_ENGINE_FLATPAK_BUILD
-        if (Super::InitializeResourcesFolder(argc, argv)) {
-            SR_LOG("Launcher::InitLauncher() : resources folder found.");
+        if (InitializeResourcesFolder(argc, argv)) {
             return LauncherInitStatus::Success;
         }
 
-        auto&& flatpakResourcesPath = SR_UTILS_NS::Path("/app/share/SREngine/Resources");
-        if (!flatpakResourcesPath.Exists()) {
-            SR_ERROR("Launcher::InitLauncher() : necessary resources were not found. Please try reinstalling the application.");
-            return LauncherInitStatus::Error;
-        }
-
-        if (flatpakResourcesPath.Copy(SR_UTILS_NS::ResourceManager::Instance().GetResPathRef())) {
-            SR_LOG("Launcher::InitLauncher() : successfully copied resources from Flatpak sandbox.");
-            return LauncherInitStatus::Success;
-        }
-
+        SR_ERROR("Launcher::InitLauncher() : failed to initialize resources folder!\n");
         return LauncherInitStatus::Error;
-
     #else
         if (Super::InitializeResourcesFolder(argc, argv)) {
             SR_LOG("Launcher::InitLauncher() : resources folder found.");
