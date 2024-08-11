@@ -278,8 +278,9 @@ namespace SR_CORE_NS {
         }
 
         if (SR_UTILS_NS::Path folder = SR_UTILS_NS::GetCmdOption(argv, argv + argc, "-resources"); !folder.empty()) {
+            m_resourcesPath = folder;
+
             if (folder.Exists()) {
-                m_resourcesPath = folder;
                 return true;
             }
 
