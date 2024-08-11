@@ -59,9 +59,7 @@ namespace SR_CORE_NS {
             logDir = folder;
         }
 
-        InitLogger(logDir);
-
-        return InitializeResourcesFolder(argc, argv);
+        return InitLogger(logDir);
     }
 
     /*void Application::TryPlayStartSound() {
@@ -89,29 +87,27 @@ namespace SR_CORE_NS {
     }*/
 
     bool Application::FindResourcesFolder() {
-        m_resourcesPath = m_applicationPath.Concat("Resources");
-        if (m_resourcesPath.Exists(SR_UTILS_NS::Path::Type::Folder)) {
-            return true;
-        }
+        static const std::vector<std::string> potentialPaths = {
+            "",
+            "..",
+            "../..",
+            "../../..",
+            "../../../.."
+        };
 
-        m_resourcesPath = m_applicationPath.Concat("../Resources");
-        if (m_resourcesPath.Exists(SR_UTILS_NS::Path::Type::Folder)) {
-            return true;
-        }
+        for (auto&& relativePath : potentialPaths) {
+            auto fullPath = m_applicationPath.Concat(relativePath);
 
-        m_resourcesPath = m_applicationPath.Concat("../../Resources");
-        if (m_resourcesPath.Exists(SR_UTILS_NS::Path::Type::Folder)) {
-            return true;
-        }
+    #ifdef SR_LINUX
+            if (fullPath.View().size() == 1) {
+                return false;
+            }
+    #endif
 
-        m_resourcesPath = m_applicationPath.Concat("../../../Resources");
-        if (m_resourcesPath.Exists(SR_UTILS_NS::Path::Type::Folder)) {
-            return true;
-        }
-
-        m_resourcesPath = m_applicationPath.Concat("../../../../Resources");
-        if (m_resourcesPath.Exists(SR_UTILS_NS::Path::Type::Folder)) {
-            return true;
+            if (fullPath.Concat("Resources").Exists(SR_UTILS_NS::Path::Type::Folder)) {
+                m_resourcesPath = fullPath;
+                return true;
+            }
         }
 
         return false;
@@ -130,7 +126,6 @@ namespace SR_CORE_NS {
 
         SR_UTILS_NS::Debug::Instance().Init(logPath, true, SR_UTILS_NS::Debug::Theme::Dark);
         SR_UTILS_NS::Debug::Instance().SetLevel(SR_UTILS_NS::Debug::Level::Low);
-
         return true;
     }
 
@@ -274,20 +269,47 @@ namespace SR_CORE_NS {
     }
 
     bool Application::InitializeResourcesFolder(int argc, char** argv) {
-        if (auto&& folder = SR_UTILS_NS::GetCmdOption(argv, argv + argc, "-resources"); !folder.empty()) {
-            m_resourcesPath = folder;
+    #ifdef SR_ENGINE_FLATPAK_BUILD
+        if (FindResourcesFolder()) {
+            return true;
         }
 
-        if (!m_resourcesPath.Exists(SR_UTILS_NS::Path::Type::Folder) && !FindResourcesFolder()) {
+        if (SR_UTILS_NS::Path folder = SR_UTILS_NS::GetCmdOption(argv, argv + argc, "-resources"); !folder.empty()) {
+            m_resourcesPath = folder;
+
+            if (folder.Exists()) {
+                return true;
+            }
+
+            SR_UTILS_NS::Path defaultFlatpakPath = "/app/share/SREngine/Resources";
+            if (defaultFlatpakPath.Exists() && defaultFlatpakPath.Copy(folder)) {
+                return true;
+            }
+        }
+
+        SR_ERROR("Application::InitializeResourcesFolder() : necessary resources were not found. Please try reinstalling the application.");
+        return false;
+    #else
+        if (SR_UTILS_NS::Path folder = SR_UTILS_NS::GetCmdOption(argv, argv + argc, "-resources"); !folder.empty()) {
+            if (!folder.Exists(SR_UTILS_NS::Path::Type::Folder)) {
+                SR_INFO("Application::InitializeResourcesFolder() : specified resources folder does not exist!");
+            }
+            else {
+                m_resourcesPath = folder;
+                return true;
+            }
+        }
+        if (!FindResourcesFolder()) {
             SR_LOG("Application::InitializeResourcesFolder() : failed to find resources folder!");
             return false;
         }
 
         return true;
+    #endif
     }
 
     void Application::SwitchResourcesFolder(const SR_UTILS_NS::Path& path) {
-
+        SR_STATIC_ASSERT("Not yet implemented.");
     }
 
     void Application::Reload() {

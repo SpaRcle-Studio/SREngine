@@ -14,6 +14,14 @@ namespace SR_CORE_NS {
             return LauncherInitStatus::Error;
         }
 
+    #ifdef SR_ENGINE_FLATPAK_BUILD
+        if (Super::InitializeResourcesFolder(argc, argv)) {
+            return LauncherInitStatus::Success;
+        }
+
+        SR_ERROR("Launcher::InitLauncher() : failed to initialize resources folder!\n");
+        return LauncherInitStatus::Error;
+    #else
         if (Super::InitializeResourcesFolder(argc, argv)) {
             SR_LOG("Launcher::InitLauncher() : resources folder found.");
             if (SR_UTILS_NS::HasCmdOption(argv, argv + argc, "--delete-old-app")) {
@@ -30,6 +38,7 @@ namespace SR_CORE_NS {
         }
 
         return LauncherInitStatus::Unpacking;
+    #endif
     }
 
     bool Launcher::UnpackAndExecute() {
@@ -87,20 +96,20 @@ namespace SR_CORE_NS {
     bool Launcher::CloneResources() {
     #ifdef SR_LINUX
         auto&& git2path = GetResourcesPath().Concat("Engine/Utilities/git2");
-    #elif defined (SR_WIN32)
+    #elif defined(SR_WIN32)
         auto&& git2path = GetResourcesPath().Concat("Engine/Utilities/git2.exe");
     #endif
 
         auto&& cachePath = GetResourcesPath().Concat("Cache");
-
         if (!cachePath.Create()) {
             SR_ERROR("Launcher::CloneResources() : failed to create cache directory.");
             return false;
         }
 
         std::string command =
-                "cd " + cachePath.ToStringRef() + " && " +
-                git2path.ToStringRef() + " clone https://github.com/SpaRcle-Studio/SRE2R -b release/0.0.7 --depth 1";
+                git2path.ToStringRef() + " clone https://github.com/SpaRcle-Studio/SRE2R " +
+                cachePath.Concat("SRE2R").ToStringRef() +
+                " -b release/0.0.7 --depth 1";
 
         SR_SYSTEM_LOG("Launcher::CloneResources() : cloning repository...\n" + command);
 

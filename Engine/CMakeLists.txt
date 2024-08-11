@@ -18,6 +18,10 @@ message(STATUS "SpaRcle Engine: C++ compiler is '${CMAKE_CXX_COMPILER}'")
 option(SR_ENGINE_FLATPAK_BUILD "" OFF)
 option(SR_ENGINE_EXTENDED_NAME "" ON)
 
+if (SR_ENGINE_FLATPAK_BUILD)
+    add_compile_definitions(SR_ENGINE_FLATPAK_BUILD)
+endif()
+
 # TODO!
 #add_compile_definitions(_CONTAINER_DEBUG_LEVEL=0)
 #add_compile_definitions(_ITERATOR_DEBUG_LEVEL=0)
@@ -74,6 +78,11 @@ if (${CMAKE_BUILD_TYPE} STREQUAL "Release")
     set(executableType "stable")
 else()
     set(executableType "latest")
+endif()
+
+if (SR_ENGINE_FLATPAK_BUILD)
+    install(TARGETS SREngine DESTINATION /app/bin)
+    install(TARGETS SREngine PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
 endif()
 
 if (SR_ENGINE_EXTENDED_NAME)
