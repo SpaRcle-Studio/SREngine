@@ -87,29 +87,27 @@ namespace SR_CORE_NS {
     }*/
 
     bool Application::FindResourcesFolder() {
-        m_resourcesPath = m_applicationPath.Concat("Resources");
-        if (m_resourcesPath.Exists(SR_UTILS_NS::Path::Type::Folder)) {
-            return true;
-        }
+        static const std::vector<std::string> potentialPaths = {
+            "",
+            "..",
+            "../..",
+            "../../..",
+            "../../../.."
+        };
 
-        m_resourcesPath = m_applicationPath.Concat("../Resources");
-        if (m_resourcesPath.Exists(SR_UTILS_NS::Path::Type::Folder)) {
-            return true;
-        }
+        for (auto&& relativePath : potentialPaths) {
+            auto fullPath = m_applicationPath.Concat(relativePath);
 
-        m_resourcesPath = m_applicationPath.Concat("../../Resources");
-        if (m_resourcesPath.Exists(SR_UTILS_NS::Path::Type::Folder)) {
-            return true;
-        }
+    #ifdef SR_LINUX
+            if (fullPath.View().size() == 1) {
+                return false;
+            }
+    #endif
 
-        m_resourcesPath = m_applicationPath.Concat("../../../Resources");
-        if (m_resourcesPath.Exists(SR_UTILS_NS::Path::Type::Folder)) {
-            return true;
-        }
-
-        m_resourcesPath = m_applicationPath.Concat("../../../../Resources");
-        if (m_resourcesPath.Exists(SR_UTILS_NS::Path::Type::Folder)) {
-            return true;
+            if (fullPath.Concat("Resources").Exists(SR_UTILS_NS::Path::Type::Folder)) {
+                m_resourcesPath = fullPath;
+                return true;
+            }
         }
 
         return false;
@@ -128,7 +126,6 @@ namespace SR_CORE_NS {
 
         SR_UTILS_NS::Debug::Instance().Init(logPath, true, SR_UTILS_NS::Debug::Theme::Dark);
         SR_UTILS_NS::Debug::Instance().SetLevel(SR_UTILS_NS::Debug::Level::Low);
-
         return true;
     }
 
