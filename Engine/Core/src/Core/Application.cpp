@@ -96,7 +96,7 @@ namespace SR_CORE_NS {
         };
 
         for (auto&& relativePath : potentialPaths) {
-            auto fullPath = m_applicationPath.Concat(relativePath);
+            auto&& fullPath = m_applicationPath.Concat(relativePath);
 
     #ifdef SR_LINUX
             if (fullPath.View().size() == 1) {
@@ -104,7 +104,8 @@ namespace SR_CORE_NS {
             }
     #endif
 
-            if (fullPath.Concat("Resources").Exists(SR_UTILS_NS::Path::Type::Folder)) {
+            fullPath = fullPath.Concat("Resources");
+            if (fullPath.Exists(SR_UTILS_NS::Path::Type::Folder)) {
                 m_resourcesPath = fullPath;
                 return true;
             }

@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+
+Name=SpaRcle Engine
+Comment=Cross-platform 2D/3D game engine in C++.
+Categories=Developer Tools;
+
+Icon=dev.sparcles.SREngine
+Exec=srengine-run.sh
