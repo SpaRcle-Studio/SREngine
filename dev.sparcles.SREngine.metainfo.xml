@@ -27,8 +27,14 @@
   <url type="homepage">https://sparcles.dev</url>
 
   <screenshots>
-    <screenshot type="default"><image>https://sparcles.dev/engine-editor-raptoid.png</image></screenshot>
-    <screenshot><image>https://sparcles.dev/engine-demo-scene.png</image></screenshot>
+    <screenshot type="default">
+      <image>https://sparcles.dev/engine-editor-raptoid.png</image>
+      <caption>SpaRcle Engine's editor and animated prefab</caption>
+    </screenshot>
+    <screenshot>
+      <image>https://sparcles.dev/engine-demo-scene.png</image>
+      <caption>SpaRcle Engine's demo scene</caption>
+    </screenshot>
   </screenshots>
   
   <content_rating type="oars-1.1"></content_rating>
