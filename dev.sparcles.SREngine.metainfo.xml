@@ -17,6 +17,9 @@
   </description>
 
   <launchable type="desktop-id">dev.sparcles.SREngine.desktop</launchable>
+  <categories>
+    <category>Development</category>
+  </categories>
   
   <developer id="dev.sparcles">
     <name>SpaRcle Studio</name>
