@@ -17,13 +17,14 @@
   </description>
 
   <launchable type="desktop-id">dev.sparcles.SREngine.desktop</launchable>
+  <categories>
+    <category>Development</category>
+  </categories>
   
   <developer id="dev.sparcles">
     <name>SpaRcle Studio</name>
   </developer>
   
-  <icon type="stock">dev.sparcles.SREngine</icon>
-
   <url type="homepage">https://sparcles.dev</url>
 
   <screenshots>
