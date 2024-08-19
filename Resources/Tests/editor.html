@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style type="text/css" media="screen">
+        .window {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            overflow: hidden;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docking Windows</title>
+    <!-- some styles to make the windows look better -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<some-tag id="someId">sometext</some-tag>
+<div class="window" id="window1">
+    <img src="https://www.w3schools.com/images/w3schools_green.jpg" alt="W3Schools.com" width="104" height="142">
+    <div class="header">Window 1</div>
+    <div class="content">Content 1</div>
+    <div class="resizer resizer-se"></div>
+</div>
+<div class="separator"></div>
+<div class="window" id="window2">
+    <div class="header">Window 2</div>
+    <div class="content">Content 2</div>
+    <div class="resizer resizer-se"></div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>

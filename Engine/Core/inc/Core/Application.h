@@ -19,23 +19,23 @@ namespace SR_CORE_NS {
 
     public:
         bool PreInit(int argc, char** argv);
+        bool EarlyInit();
         bool Init();
         bool Execute();
+        void Close();
 
         void SwitchResourcesFolder(const SR_UTILS_NS::Path& path);
         void Reload();
 
-        SR_NODISCARD const SR_UTILS_NS::Path& GetResourcesPath() const { return m_resourcesPath; }
-
-    protected:
         virtual bool InitializeResourcesFolder(int argc, char** argv);
+
+        SR_NODISCARD const SR_UTILS_NS::Path& GetResourcesPath() const { return m_resourcesPath; }
 
     private:
         bool InitResourceTypes();
         bool InitLogger(const SR_UTILS_NS::Path& logDir);
         bool FindResourcesFolder();
-        //void TryPlayStartSound();
-        void Close();
+        //void TryPlayStartSound()
 
     private:
         SR_UTILS_NS::Path m_applicationPath;

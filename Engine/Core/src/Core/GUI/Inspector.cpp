@@ -254,6 +254,11 @@ namespace SR_CORE_GUI_NS {
             changed = true;
         });
 
+        SR_GRAPH_GUI_NS::EnumCombo<SR_UTILS_NS::FixedSize>("Fixed size", pTransform->GetFixedSize(), [&changed, pTransform](auto&& value) {
+            pTransform->SetFixedSize(value);
+            changed = true;
+        });
+
         SR_GRAPH_GUI_NS::EnumCombo<SR_UTILS_NS::Stretch>("Stretch", pTransform->GetStretch(), [&changed, pTransform](auto&& value) {
             pTransform->SetStretch(value);
             changed = true;

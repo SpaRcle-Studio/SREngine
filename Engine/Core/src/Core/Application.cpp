@@ -62,6 +62,52 @@ namespace SR_CORE_NS {
         return InitLogger(logDir);
     }
 
+    bool Application::EarlyInit() {
+        if (!SR_UTILS_NS::Debug::Instance().IsInitialized()) {
+            SR_PLATFORM_NS::WriteConsoleError("Logger is not initialized!\n");
+            return false;
+        }
+
+        SR_SYSTEM_LOG("Application::EarlyInit() : early initializing application...");
+
+        if (m_resourcesPath.IsEmpty()) {
+            SR_ERROR("Application::EarlyInit() : resources path is empty!");
+            return false;
+        }
+
+        SR_HTYPES_NS::Thread::Factory::Instance().SetMainThread();
+        SR_HTYPES_NS::Time::Instance().Update();
+
+        SR_UTILS_NS::Features::Instance().SetPath(m_resourcesPath.Concat("Engine/Configs/Features.xml"));
+        SR_UTILS_NS::Features::Instance().Reload();
+
+        if (SR_UTILS_NS::Features::Instance().Enabled("SegmentationHandler", false)) {
+            SR_PLATFORM_NS::InitSegmentationHandler();
+        }
+
+        if (SR_UTILS_NS::Features::Instance().Enabled("DisableStackTrace", false)) {
+            SR_UTILS_NS::DisableStacktrace();
+        }
+
+        SR_UTILS_NS::ResourceManager::Instance().Init(m_resourcesPath);
+
+        if (SR_UTILS_NS::Features::Instance().Enabled("ResourceUsePointStackTraceProfiling", false)) {
+            SR_UTILS_NS::ResourceManager::Instance().EnableStackTraceProfiling();
+        }
+
+        if (!SR_UTILS_NS::ResourceManager::Instance().Run()) {
+            SR_ERROR("Application::EarlyInit() : failed to initialize resources manager!");
+            return false;
+        }
+
+        if (!InitResourceTypes()) {
+            SR_ERROR("Application::EarlyInit() : failed to initialize resource types!");
+            return false;
+        }
+
+        return true;
+    }
+
     /*void Application::TryPlayStartSound() {
         auto&& pEditor = m_engine->GetEditor();
         if (!pEditor || !pEditor->Enabled()) {
@@ -131,47 +177,7 @@ namespace SR_CORE_NS {
     }
 
     bool Application::Init() {
-        if (!SR_UTILS_NS::Debug::Instance().IsInitialized()) {
-            SR_PLATFORM_NS::WriteConsoleError("Logger is not initialized!\n");
-            return false;
-        }
-
         SR_SYSTEM_LOG("Application::Init() : initializing application...");
-
-        if (m_resourcesPath.IsEmpty()) {
-            SR_ERROR("Application::Init() : resources path is empty!");
-            return false;
-        }
-
-        SR_HTYPES_NS::Thread::Factory::Instance().SetMainThread();
-        SR_HTYPES_NS::Time::Instance().Update();
-
-        SR_UTILS_NS::Features::Instance().SetPath(m_resourcesPath.Concat("Engine/Configs/Features.xml"));
-        SR_UTILS_NS::Features::Instance().Reload();
-
-        if (SR_UTILS_NS::Features::Instance().Enabled("SegmentationHandler", false)) {
-            SR_PLATFORM_NS::InitSegmentationHandler();
-        }
-
-        if (SR_UTILS_NS::Features::Instance().Enabled("DisableStackTrace", false)) {
-            SR_UTILS_NS::DisableStacktrace();
-        }
-
-        SR_UTILS_NS::ResourceManager::Instance().Init(m_resourcesPath);
-
-        if (SR_UTILS_NS::Features::Instance().Enabled("ResourceUsePointStackTraceProfiling", false)) {
-            SR_UTILS_NS::ResourceManager::Instance().EnableStackTraceProfiling();
-        }
-
-        if (!SR_UTILS_NS::ResourceManager::Instance().Run()) {
-            SR_ERROR("Application::Init() : failed to initialize resources manager!");
-            return false;
-        }
-
-        if (!InitResourceTypes()) {
-            SR_ERROR("Application::Init() : failed to initialize resource types!");
-            return false;
-        }
 
         SR_LOG("Application::Init() : loaded {} tags.", SR_UTILS_NS::TagManager::Instance().GetTags().size());
 

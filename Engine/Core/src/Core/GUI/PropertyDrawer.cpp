@@ -144,7 +144,18 @@ namespace SR_CORE_GUI_NS {
                     break;
                 }
                 case SR_GRAPH_NS::MaterialType::Unique: {
-                    pProperty->SetMaterial(new SR_GRAPH_NS::UniqueMaterial());
+                    auto&& pUnique = new SR_GRAPH_NS::UniqueMaterial();
+                    if (auto&& pMaterial = pProperty->GetMaterial()) {
+                        pUnique->SetShader(pProperty->GetMaterial()->GetShader());
+                        SR_HTYPES_NS::Marshal marshal;
+                        pMaterial->GetProperties().SaveProperty(marshal);
+                        marshal.SetPosition(0);
+                        pUnique->GetProperties().SetShowErrors(false);
+                        pUnique->GetProperties().LoadProperty(marshal);
+                        pUnique->GetProperties().SetShowErrors(true);
+                    }
+
+                    pProperty->SetMaterial(pUnique);
                     break;
                 }
                 case SR_GRAPH_NS::MaterialType::None:

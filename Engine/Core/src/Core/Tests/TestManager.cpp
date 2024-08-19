@@ -8,6 +8,23 @@
 
 namespace SR_CORE_NS {
     void TestManager::RunAll(int argc, char** argv) {
+        int32_t successes = 0;
+
+        for (auto&& test : m_tests) {
+            if (RunTest(test)) {
+                successes++;
+            }
+        }
+
+        if (m_engineTests.empty()) {
+            if (m_tests.empty()) {
+                SR_PLATFORM_NS::WriteConsoleLog("TestManager::RunAll() : no tests to run!\n");
+            } else {
+                SR_PLATFORM_NS::WriteConsoleLog(SR_FORMAT("TestManager::RunAll() : unit tests passed: {}/{}.", successes, m_tests.size()));
+            }
+            return;
+        }
+
         SR_HTYPES_NS::SharedPtr pLauncher = new SR_CORE_NS::Launcher();
         auto&& launcherInitStatus = pLauncher->InitLauncher(argc, argv);
 
@@ -21,6 +38,11 @@ namespace SR_CORE_NS {
             return;
         }
 
+        if (!pLauncher->EarlyInit()) {
+            SR_ERROR("TestManager::RunAll() : failed to early initialize application!");
+            return;
+        }
+
         if (!pLauncher->Init()) {
             SR_ERROR("TestManager::RunAll() : failed to initialize application!");
             return;
@@ -31,10 +53,8 @@ namespace SR_CORE_NS {
         m_argc = argc;
         m_argv = argv;
 
-        int32_t successes = 0;
-        for (auto&& test : m_tests) {
-            SR_LOG("TestManager::RunAll() : Running test '{}()'.", test.first);
-            if (RunTest(test.second)) {
+        for (auto&& test : m_engineTests) {
+            if (RunEngineTest(test)) {
                 successes++;
             }
         }
@@ -47,7 +67,7 @@ namespace SR_CORE_NS {
         });
     }
 
-    bool TestManager::RunTest(const TestManager::TestFn &test) {
+    bool TestManager::RunTest(const TestManager::Test& test) {
         auto&& pApplication = SR_CORE_NS::Application::MakeShared();
 
         if (!pApplication->PreInit(m_argc, m_argv)) {
@@ -55,12 +75,31 @@ namespace SR_CORE_NS {
             return false;
         }
 
-        auto&& result = test();
+        if (!pApplication->InitializeResourcesFolder(m_argc, m_argv)) {
+            SR_ERROR("Failed to initialize resources folder!");
+            return false;
+        }
+
+        if (!pApplication->EarlyInit()) {
+            SR_ERROR("Failed to early initialize application!");
+            return false;
+        }
+
+        SR_LOG("TestManager::RunTest() : running test '{}'.", test.first);
+
+        auto&& result = test.second();
 
         pApplication->AutoFree([](auto&& pData) {
             delete pData;
         });
 
+        return result;
+    }
+
+    bool TestManager::RunEngineTest(const TestManager::Test& test) {
+        SR_LOG("TestManager::RunEngineTest() : running test '{}'.", test.first);
+
+        auto&& result = test.second();
         return result;
     }
 }

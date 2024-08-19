@@ -12,6 +12,7 @@
 #include <Utils/Tests/SharedPtrAutotests.h>
 
 #include <Core/Tests/AtlasBuilderTest.h>
+#include <Core/Tests/HTMLTest.h>
 
 int main(int argc, char** argv) {
     if (!SR_UTILS_NS::RunTestSharedPtr()) {
@@ -23,6 +24,10 @@ int main(int argc, char** argv) {
         SR_CORE_NS::TestManager::Instance().AddTest([]() {
             return SR_CORE_NS::Tests::AtlasBuilderTest::Run();
         }, "Atlas Builder Test");
+
+        SR_CORE_NS::TestManager::Instance().AddTest([]() {
+            return SR_CORE_NS::Tests::HTMLTest::Run();
+        }, "HTML Test");
 
         SR_CORE_NS::TestManager::Instance().RunAll(argc, argv);
         return 0;
@@ -41,6 +46,11 @@ int main(int argc, char** argv) {
         }
         else if (launcherInitStatus == SR_CORE_NS::LauncherInitStatus::Unpacking) {
             return code;
+        }
+
+        if (code == 0 && !pLauncher->EarlyInit()) {
+            SR_ERROR("Failed to early initialize application!");
+            code = 3;
         }
 
         if (code == 0 && !pLauncher->Init()) {
