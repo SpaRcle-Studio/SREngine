@@ -29,6 +29,10 @@ int main(int argc, char** argv) {
             return SR_CORE_NS::Tests::HTMLTest::Run();
         }, "HTML Test");
 
+        SR_CORE_NS::TestManager::Instance().AddTest([]() {
+            return SR_CORE_NS::Tests::CSSTest::Run();
+        }, "CSS Test");
+
         SR_CORE_NS::TestManager::Instance().RunAll(argc, argv);
         return 0;
     }

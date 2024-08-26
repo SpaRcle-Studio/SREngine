@@ -1,0 +1,26 @@
+@media (max-width: 1050px) {
+    .footer__container {
+        display: flex;
+        width: 100%;
+        color: blue;
+        background: RGBA(255, 128, 228, 2);
+    }
+
+    .test {
+        color: #FF0020EE;
+        background: #00b3ee;
+    }
+
+
+    .test2 {
+        color: linear-gradient(to bottom right, #FFC107 0%, #FFC107 100%);
+    }
+
+    .form__down {
+        margin-bottom: 50px;
+        /*color: linear-gradient(90deg, #FFC107 0%, #FFC107 100%);
+        background: linear-gradient(to bottom right, blue, pink);*/
+        background: linear-gradient(70deg, blue, pink 10px, yellow);
+        color: radial-gradient(at 0% 30%, red 10px, yellow 30%, #1e90ff 50%);
+    }
+}

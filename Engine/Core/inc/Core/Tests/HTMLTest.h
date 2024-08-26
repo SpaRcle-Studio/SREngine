@@ -7,6 +7,7 @@
 
 #include <Utils/Resources/ResourceManager.h>
 #include <Utils/Web/HTML/HTMLParser.h>
+#include <Utils/Web/CSS/CSSParser.h>
 
 namespace SR_CORE_NS::Tests {
     class HTMLTest {
@@ -15,6 +16,17 @@ namespace SR_CORE_NS::Tests {
             auto&& path = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Tests/editor.html");
             auto&& pPage = SR_UTILS_NS::Web::HTMLParser::Instance().Parse(path);
             const std::string text = SR_UTILS_NS::Web::HTMLParser::Instance().DebugPageTostring(pPage);
+            SR_DEBUG_LOG("{}", text);
+            return true;
+        }
+    };
+
+    class CSSTest {
+    public:
+        static bool Run() {
+            auto&& path = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Tests/editor.css");
+            auto&& pCSS = SR_UTILS_NS::Web::CSSParser::Instance().Parse(path);
+            const std::string text = pCSS->ToString();
             SR_DEBUG_LOG("{}", text);
             return true;
         }

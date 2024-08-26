@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<Technique Name="HTML">
+    <Include Path="Engine/Passes/SceneViewFBOController.xml"/>
+    <FramebufferPass Name="SceneView">
+        <FramebufferSettings Name="SceneViewFBO">
+            <Depth ClearValue="1.0"/>
+            <Layer R="0.1" G="0.1" B="0.1" A="1.0"/>
+        </FramebufferSettings>
+        <Passes>
+            <ClearBuffersPass/>
+            <!--<SkyboxPass Path="Engine/Skyboxes/Sun.png" Shader="Engine/Shaders/skybox.srsl"/>-->
+            <HTMLDrawerPass Path="Tests/HTML/simple-test.html"/>
+        </Passes>
+    </FramebufferPass>
+    <Queues>
+        <Queue>
+            <Pass Name="SceneView"/>
+        </Queue>
+    </Queues>
+</Technique>
