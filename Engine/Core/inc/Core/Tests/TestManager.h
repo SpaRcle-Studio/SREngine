@@ -2,8 +2,8 @@
 // Created by innerviewer on 2024-03-18.
 //
 
-#ifndef SRENGINE_TESTMANAGER_H
-#define SRENGINE_TESTMANAGER_H
+#ifndef SR_ENGINE_TESTMANAGER_H
+#define SR_ENGINE_TESTMANAGER_H
 
 #include <Utils/Common/Singleton.h>
 #include <Utils/Common/Coroutine.h>
@@ -35,4 +35,4 @@ namespace SR_CORE_NS {
     };
 }
 
-#endif //SRENGINE_TESTMANAGER_H
+#endif //SR_ENGINE_TESTMANAGER_H

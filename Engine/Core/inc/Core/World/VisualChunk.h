@@ -2,8 +2,8 @@
 // Created by Monika on 16.11.2021.
 //
 
-#ifndef GAMEENGINE_VISUALCHUNK_H
-#define GAMEENGINE_VISUALCHUNK_H
+#ifndef SR_ENGINE_VISUALCHUNK_H
+#define SR_ENGINE_VISUALCHUNK_H
 
 #include <Utils/World/Chunk.h>
 #include <Utils/Math/Vector3.h>
@@ -48,4 +48,4 @@ namespace SR_CORE_NS {
     };
 }
 
-#endif //GAMEENGINE_VISUALCHUNK_H
+#endif //SR_ENGINE_VISUALCHUNK_H

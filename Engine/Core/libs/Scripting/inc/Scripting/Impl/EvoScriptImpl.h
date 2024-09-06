@@ -2,8 +2,8 @@
 // Created by Nikita on 11.07.2021.
 //
 
-#ifndef GAMEENGINE_SREVOSCRIPT_H
-#define GAMEENGINE_SREVOSCRIPT_H
+#ifndef SR_ENGINE_SREVOSCRIPT_H
+#define SR_ENGINE_SREVOSCRIPT_H
 
 #include <Scripting/Base/Script.h>
 #include <EvoScript/Script.h>
@@ -30,4 +30,4 @@ namespace SR_SCRIPTING_NS {
     };
 }
 
-#endif //GAMEENGINE_SREVOSCRIPT_H
+#endif //SR_ENGINE_SREVOSCRIPT_H

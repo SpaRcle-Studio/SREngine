@@ -2,8 +2,8 @@
 // Created by Nikita on 11.07.2021.
 //
 
-#ifndef GAMEENGINE_EVOCOMPILER_H
-#define GAMEENGINE_EVOCOMPILER_H
+#ifndef SR_ENGINE_EVOCOMPILER_H
+#define SR_ENGINE_EVOCOMPILER_H
 
 #include <Scripting/Base/Compiler.h>
 
@@ -49,4 +49,4 @@ namespace SR_SCRIPTING_NS {
     };
 }
 
-#endif //GAMEENGINE_EVOCOMPILER_H
+#endif //SR_ENGINE_EVOCOMPILER_H
