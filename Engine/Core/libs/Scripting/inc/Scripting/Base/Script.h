@@ -2,8 +2,8 @@
 // Created by Nikita on 11.07.2021.
 //
 
-#ifndef GAMEENGINE_SCRIPT_H
-#define GAMEENGINE_SCRIPT_H
+#ifndef SR_ENGINE_SCRIPT_H
+#define SR_ENGINE_SCRIPT_H
 
 #include <Utils/Debug.h>
 
@@ -45,4 +45,4 @@ namespace SR_SCRIPTING_NS {
     };
 }
 
-#endif //GAMEENGINE_SCRIPT_H
+#endif //SR_ENGINE_SCRIPT_H

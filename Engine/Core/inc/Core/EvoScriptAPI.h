@@ -2,8 +2,8 @@
 // Created by Nikita on 11.07.2021.
 //
 
-#ifndef GAMEENGINE_EVOSCRIPTAPI_H
-#define GAMEENGINE_EVOSCRIPTAPI_H
+#ifndef SR_ENGINE_EVOSCRIPTAPI_H
+#define SR_ENGINE_EVOSCRIPTAPI_H
 
 #include <Scripting/Impl/EvoCompiler.h>
 
@@ -59,4 +59,4 @@ namespace SpaRcle {
     };
 }
 
-#endif //GAMEENGINE_EVOSCRIPTAPI_H
+#endif //SR_ENGINE_EVOSCRIPTAPI_H

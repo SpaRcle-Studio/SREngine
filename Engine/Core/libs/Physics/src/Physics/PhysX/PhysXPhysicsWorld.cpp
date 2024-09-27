@@ -83,7 +83,7 @@ namespace SR_PHYSICS_NS {
             return false;
         }
 
-        m_scene->setGravity(physx::PxVec3(0.f, -SR_EARTH_GRAVITY, 0.f));
+        m_scene->setGravity(physx::PxVec3(0.f, -SR_GRAV_CONST, 0.f));
 
         physx::PxPvdSceneClient* pPvdClient = m_scene->getScenePvdClient();
         

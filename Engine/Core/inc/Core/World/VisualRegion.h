@@ -2,8 +2,8 @@
 // Created by Monika on 29.11.2021.
 //
 
-#ifndef GAMEENGINE_VISUALREGION_H
-#define GAMEENGINE_VISUALREGION_H
+#ifndef SR_ENGINE_VISUALREGION_H
+#define SR_ENGINE_VISUALREGION_H
 
 #include <Utils/World/Region.h>
 #include <Utils/Math/Vector3.h>
@@ -44,4 +44,4 @@ namespace SR_CORE_NS {
     };
 }
 
-#endif //GAMEENGINE_VISUALREGION_H
+#endif //SR_ENGINE_VISUALREGION_H
