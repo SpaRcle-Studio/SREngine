@@ -650,7 +650,7 @@ namespace SR_CORE_GUI_NS {
 
             const float_t timeLeft = (float_t)std::chrono::duration_cast<ms>(time).count() / (float_t)SR_CLOCKS_PER_SEC;
 
-            ImGui::Text("|   Last build: %.2f sec", timeLeft);
+            ImGui::Text("|   Last scene build: %.2f sec", timeLeft);
         }
     }
 
