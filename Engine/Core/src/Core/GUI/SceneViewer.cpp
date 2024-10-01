@@ -401,7 +401,7 @@ namespace SR_CORE_GUI_NS {
             pCamera->UpdateProjection(GetContext()->GetWindowSize().x, GetContext()->GetWindowSize().y);
             return true;
         }
-         if (viewMode == EditorSceneViewMode::FreeAspect) {
+        if (viewMode == EditorSceneViewMode::FreeAspect) {
             if (pCamera->GetSize() == m_windowSize) {
                 return false;
             }

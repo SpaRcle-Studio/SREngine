@@ -178,7 +178,7 @@ namespace SR_CORE_GUI_NS {
 
                 ImGui::SameLine();
 
-                auto&& pFileMaterial = SR_UTILS_NS::PolymorphicCast<SR_GRAPH_NS::FileMaterial>(pProperty->GetMaterial());
+                auto&& pFileMaterial = SR_UTILS_NS::PolymorphicCast<SR_GRAPH_NS::FileMaterial*>(pProperty->GetMaterial());
                 std::string path = pFileMaterial->GetResourcePath().ToStringRef();
                 if (ImGui::InputText(SR_FORMAT_C("Material##{}", static_cast<void*>(pProperty)), &path, ImGuiInputTextFlags_EnterReturnsTrue)) {
                     pProperty->SetMaterial(path);
