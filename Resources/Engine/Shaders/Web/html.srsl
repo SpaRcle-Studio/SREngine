@@ -8,14 +8,15 @@ BlendEnabled true;
 DepthWrite false;
 DepthTest false;
 
-[[uniform], [public]] vec4 color = vec4(1.0, 1.0, 1.0, 1.0);
+[[uniform], [public]] vec4 backgroundColor = vec4(1.0, 1.0, 1.0, 1.0);
 [[uniform], [public]] vec2 position = vec2(0.0, 0.0);
 [[uniform], [public]] vec2 size = vec2(0.75, 0.75); // vec2(1.0, 1.0)
 
 [[shared]] vec2 UV;
 
 void fragment() {
-	COLOR = vec4(UV / 2, 0.5, 1);
+	//COLOR = vec4(UV / 2, 0.5, 1);
+	COLOR = backgroundColor;
 
     float borderThicknessX = 1.0 / RESOLUTION.x;
     float borderThicknessY = 1.0 / RESOLUTION.y;

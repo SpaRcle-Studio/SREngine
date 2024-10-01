@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Простой макет страницы</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            height: 100%; /* Делаем тело и HTML элемент на всю высоту окна */
+            margin: 0;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column; /* Делаем тело страницы колонкой */
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f0f0f0;
+            color: #333;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        nav {
+            background-color: #333;
+            padding: 15px;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            display: flex;
+            margin: 20px;
+            flex: 1; /* Контейнер будет занимать все оставшееся место */
+        }
+
+        .sidebar {
+            background-color: #f4f4f4;
+            width: 25%;
+            padding: 20px;
+        }
+
+        .main {
+            background-color: #fff;
+            width: 75%;
+            padding: 20px;
+            margin-left: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            margin-top: auto; /* Футер будет прижат к низу страницы */
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Заголовок страницы</h1>
+</header>
+
+<nav>
+    <a href="#">Главная</a>
+    <a href="#">О нас</a>
+    <a href="#">Услуги</a>
+    <a href="#">Контакты</a>
+</nav>
+
+<div class="container">
+    <aside class="sidebar">
+        <h2>Боковая панель</h2>
+        <ul>
+            <li><a href="#">Пункт 1</a></li>
+            <li><a href="#">Пункт 2</a></li>
+            <li><a href="#">Пункт 3</a></li>
+        </ul>
+    </aside>
+
+    <section class="main">
+        <h2>Основной контент</h2>
+        <p>Это основной блок страницы, где можно разместить любой контент. Используются простые стили, и вместо изображений применяются цвета для фона различных секций.</p>
+    </section>
+</div>
+
+<footer>
+    <p>Все права защищены &copy; 2024</p>
+</footer>
+
+</body>
+</html>
