@@ -6,55 +6,11 @@
     <title>Тестирование Margin и Padding с Размером и Иерархией</title>
     <style>
         body {
-            margin: 10px;
-            padding: 20px 20px 20px 100px;
-            background-image: url('uv.png');
-        }
-        .box {
-            background-color: #4CAF50;
-            width: 80%;
-            height: 200px;
-            padding: 20px;
-            margin: 20px;
-            /*
-            padding: 20px;
-            margin: 20px;
-            width: 80%;
-            height: 200px;*/
-        }
-        .nested {
-            background-color: #8BC34A;
-            width: 70%;
-            height: 100px;
+            margin: 0;
             padding: 0;
-
+            color: #dcdcae;
+            background-color: #8d6b6b;
         }
-        .nested-small {
-            background-color: #FFC107;
-            margin: 5px;
-            padding: 5px;
-            width: 40%;
-            height: 70px;
-        }
-        .box-small {
-            background-color: #FF5722;
-            margin: 15px;
-            padding: 15px;
-            width: 50%;
-            height: 150px;
-        }
-    </style>
-</head>
-<body>
-    <div class="box">
-        <div class="nested"></div>
-        <div class="nested-small"></div>
-    </div>
-</body>
-</html>
-<!--
-
-
         .box {
             background-color: #4CAF50;
             margin: 20px;
@@ -95,22 +51,26 @@
             width: 90%;
             height: 250px;
         }
-    <div class="box">
-        <div class="nested"></div>
-        <div class="nested-small"></div>
-    </div>
+    </style>
+</head>
+<body>
+<div class="box">
+    <div class="nested"></div>
+    <div class="nested-small"></div>
+</div>
 
-    <div class="box-small">
-        <div class="nested"></div>
-        <div class="nested-small"></div>
-    </div>
+<div class="box-small">
+    <div class="nested"></div>
+    <div class="nested-small"></div>
+</div>
 
-    <div class="box-no-margin-padding">
-        <div class="nested-small"></div>
-    </div>
+<div class="box-no-margin-padding">
+    <div class="nested-small"></div>
+</div>
 
-    <div class="box-large">
-        <div class="nested"></div>
-        <div class="nested-small"></div>
-    </div>
--->
+<div class="box-large">
+    <div class="nested"></div>
+    <div class="nested-small"></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,34 @@
+ShaderType Canvas;
+
+PolygonMode Fill;
+CullMode Back;
+DepthCompare LessOrEqual;
+PrimitiveTopology TriangleStrip;
+BlendEnabled true;
+DepthWrite false;
+DepthTest false;
+
+[[uniform], [public]] vec4 color = vec4(1.0, 1.0, 1.0, 1.0);
+[[uniform], [public]] vec2 position = vec2(0.0, 0.0);
+[[uniform], [public]] vec2 size = vec2(0.75, 0.75);
+
+[[shared]] vec2 UV;
+
+void fragment() {
+	COLOR = color;
+    if (COLOR.a == 0) {
+        discard;
+    }
+}
+
+void vertex() {
+    #include <Engine/Shaders/UI/sprite-vertices.inl.srsl>
+    UV = uv[VERTEX_INDEX];
+
+    float aspect = RESOLUTION.x / RESOLUTION.y;
+
+    vec3 pos = vec3(position.x * aspect, position.y, 1.0);
+    vec3 scaledPosition = pos + vec3(size.x * aspect, size.y, 1.0) * vertices[VERTEX_INDEX];
+
+    OUT_POSITION = ORTHOGONAL_MATRIX * vec4(scaledPosition, 1.0);
+}
