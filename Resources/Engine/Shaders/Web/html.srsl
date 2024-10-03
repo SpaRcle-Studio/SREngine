@@ -11,20 +11,21 @@ DepthTest false;
 [[uniform], [public]] vec4 backgroundColor = vec4(1.0, 1.0, 1.0, 1.0);
 [[uniform], [public]] vec2 position = vec2(0.0, 0.0);
 [[uniform], [public]] vec2 size = vec2(0.75, 0.75); // vec2(1.0, 1.0)
+[[uniform], [public]] sampler2D debugImage = "Engine/Textures/uv.png";
 
 [[shared]] vec2 UV;
 
 void fragment() {
 	//COLOR = vec4(UV / 2, 0.5, 1);
 	COLOR = backgroundColor;
+	//COLOR = mix(backgroundColor, texture(debugImage, vec2(UV.x - 1.0, UV.y - 1.0)), 0.2);
 
-    float borderThicknessX = 1.0 / RESOLUTION.x;
-    float borderThicknessY = 1.0 / RESOLUTION.y;
-
-    if (UV.x < borderThicknessX || UV.x > (1.0 - borderThicknessX) ||
-        UV.y < borderThicknessY || UV.y > (1.0 - borderThicknessY)) {
-        COLOR = vec4(1.0, 0.0, 0.0, 1.0); // Цвет границы
-    }
+    //float borderThicknessX = 1.0 / RESOLUTION.x;
+    //float borderThicknessY = 1.0 / RESOLUTION.y;
+    //if (UV.x < borderThicknessX || UV.x > (1.0 - borderThicknessX) ||
+    //    UV.y < borderThicknessY || UV.y > (1.0 - borderThicknessY)) {
+    //    COLOR = vec4(1.0, 0.0, 0.0, 1.0); // Цвет границы
+    //}
 
     if (COLOR.a == 0) {
         discard;

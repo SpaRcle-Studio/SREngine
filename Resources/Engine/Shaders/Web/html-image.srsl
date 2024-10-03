@@ -17,13 +17,12 @@ DepthTest false;
 void fragment() {
 	COLOR = texture(image, vec2(UV.x - 1.0, UV.y - 1.0)) * color;
 
-    float borderThicknessX = 1.0 / RESOLUTION.x;
-    float borderThicknessY = 1.0 / RESOLUTION.y;
-
-    if (UV.x < borderThicknessX || UV.x > (1.0 - borderThicknessX) ||
-        UV.y < borderThicknessY || UV.y > (1.0 - borderThicknessY)) {
-        COLOR = vec4(1.0, 0.0, 0.0, 1.0); // Цвет границы
-    }
+    //float borderThicknessX = 1.0 / RESOLUTION.x;
+    //float borderThicknessY = 1.0 / RESOLUTION.y;
+    //if (UV.x < borderThicknessX || UV.x > (1.0 - borderThicknessX) ||
+    //    UV.y < borderThicknessY || UV.y > (1.0 - borderThicknessY)) {
+    //    COLOR = vec4(1.0, 0.0, 0.0, 1.0); // Цвет границы
+    //}
 
     if (COLOR.a == 0) {
         discard;

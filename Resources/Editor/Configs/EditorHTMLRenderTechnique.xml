@@ -10,7 +10,8 @@
             <ClearBuffersPass/>
             <!--<SkyboxPass Path="Engine/Skyboxes/Sun.png" Shader="Engine/Shaders/skybox.srsl"/>-->
             <!--<HTMLDrawerPass Path="Tests/HTML/test-page.html"/>-->
-            <HTMLDrawerPass Path="Tests/HTML/simple-test.html"/>
+            <!--<HTMLDrawerPass Path="Tests/HTML/simple-test.html"/>-->
+            <HTMLDrawerPass Path="Tests/HTML/margin-padding-test.html"/>
         </Passes>
     </FramebufferPass>
     <Queues>

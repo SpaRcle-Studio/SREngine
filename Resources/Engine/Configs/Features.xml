@@ -34,6 +34,8 @@
 
        <RayTracing Value="false"/>
 
+       <LoadDefaultGraphicsResources Value="true"/>
+
        <AccumulateDt Value="true"/>
 
        <FastModelsLoad Value="true"/>
