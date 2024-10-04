@@ -18,12 +18,13 @@
         }
 
         body {
-            display: flex;
-            flex-direction: column; /* Делаем тело страницы колонкой */
             font-family: Arial, sans-serif;
             line-height: 1.6;
             background-color: #f0f0f0;
             color: #333;
+            position: relative;
+            min-height: 100%;
+            padding-bottom: 50px; /* Высота футера */
         }
 
         header {
@@ -51,7 +52,6 @@
         .container {
             display: flex;
             margin: 20px;
-            flex: 1; /* Контейнер будет занимать все оставшееся место */
         }
 
         .sidebar {
@@ -73,7 +73,10 @@
             color: white;
             text-align: center;
             padding: 10px 0;
-            margin-top: auto; /* Футер будет прижат к низу страницы */
+            width: 100%;
+            position: absolute;
+            bottom: 0;
+            left: 0;
         }
     </style>
 </head>

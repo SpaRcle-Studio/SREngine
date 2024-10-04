@@ -10,21 +10,13 @@ DepthTest false;
 
 [[uniform], [public]] vec4 color = vec4(1.0, 1.0, 1.0, 1.0);
 [[uniform], [public]] vec2 position = vec2(0.0, 0.0);
-[[uniform], [public]] vec2 size = vec2(0.75, 0.75); // vec2(1.0, 1.0)
-[[uniform], [public]] sampler2D image;
+[[uniform], [public]] vec2 size = vec2(0.75, 0.75);
+[[uniform], [public]] sampler2D textAtlas;
+
 [[shared]] vec2 UV;
 
 void fragment() {
-	COLOR = texture(image, vec2(UV.x - 1.0, UV.y - 1.0)) * color;
-    COLOR = vec4(UV / 2, 0.5, 1);
-
-    //float borderThicknessX = 1.0 / RESOLUTION.x;
-    //float borderThicknessY = 1.0 / RESOLUTION.y;
-    //if (UV.x < borderThicknessX || UV.x > (1.0 - borderThicknessX) ||
-    //    UV.y < borderThicknessY || UV.y > (1.0 - borderThicknessY)) {
-    //    COLOR = vec4(1.0, 0.0, 0.0, 1.0); // Цвет границы
-    //}
-
+	COLOR = texture(textAtlas, vec2(UV.x - 1.0, UV.y - 1.0)) * color;
     if (COLOR.a == 0) {
         discard;
     }

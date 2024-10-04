@@ -13,7 +13,9 @@
             <!--<HTMLDrawerPass Path="Tests/HTML/simple-test.html"/>-->
             <!--<HTMLDrawerPass Path="Tests/HTML/margin-padding-test.html"/>-->
             <!--<HTMLDrawerPass Path="Tests/HTML/perfect-page.html"/>-->
-            <HTMLDrawerPass Path="Tests/HTML/margin-padding-test.html"/>
+            <!--<HTMLDrawerPass Path="Tests/HTML/litehtml-scroll-bug.html"/>-->
+            <!--<HTMLDrawerPass Path="Tests/HTML/perfect-page-no-flex.html"/>-->
+            <HTMLDrawerPass Path="Tests/HTML/perfect-page-no-flex.html"/>
         </Passes>
     </FramebufferPass>
     <Queues>
