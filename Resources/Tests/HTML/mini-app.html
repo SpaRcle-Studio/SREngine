@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Минималистичное приложение</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #e0e0e0;
+        }
+
+        .app-container {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            grid-template-rows: 50px 1fr 50px;
+            height: 100%;
+        }
+
+        .header {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            grid-column: 1 / 3;
+        }
+
+        .sidebar {
+            background-color: #4CAF50;
+            padding: 20px;
+        }
+
+        .main-content {
+            background-color: #fff;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 20px;
+        }
+
+        .window {
+            background-color: #f0f0f0;
+            padding: 20px;
+            border: 1px solid #ccc;
+        }
+
+        .footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            grid-column: 1 / 3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="app-container">
+    <header class="header">
+        <h1>Заголовок приложения</h1>
+    </header>
+
+    <aside class="sidebar">
+        <nav>
+            <ul>
+                <li><a href="#" style="color: white;">Пункт меню 1</a></li>
+                <li><a href="#" style="color: white;">Пункт меню 2</a></li>
+                <li><a href="#" style="color: white;">Пункт меню 3</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <div class="window">Окно 1</div>
+        <div class="window">Окно 2</div>
+        <div class="window">Окно 3</div>
+        <div class="window">Окно 4</div>
+        <div class="window">Окно 5</div>
+        <div class="window">Окно 6</div>
+    </main>
+
+    <footer class="footer">
+        <p>Все права защищены &copy; 2024</p>
+    </footer>
+</div>
+
+</body>
+</html>
