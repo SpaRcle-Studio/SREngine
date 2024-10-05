@@ -97,12 +97,12 @@ namespace SR_CORE_UI_NS {
     }
 
     bool IButton::CompareObject(GameObjectPtr pObject) const {
-        while (pObject) {
-            if (pObject == GetGameObject()) {
-                return true;
-            }
-            pObject = pObject->GetParent();
-        }
+        //while (pObject) {
+        //    if (pObject == GetGameObject()) {
+        //        return true;
+        //    }
+        //    pObject = pObject->GetParent();
+        //}
 
         return false;
     }

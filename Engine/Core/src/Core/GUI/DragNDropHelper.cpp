@@ -37,7 +37,7 @@ namespace SR_CORE_GUI_NS {
 
                 if (ImGui::BeginDragDropTarget()) {
                     if (auto&& payload = ImGui::AcceptDragDropPayload("Hierarchy##Payload"); payload != nullptr && payload->Data) {
-                        std::list<SR_UTILS_NS::GameObject::Ptr> gameObjects = *(std::list<SR_UTILS_NS::GameObject::Ptr>*)(payload->Data);
+                        std::list<SR_UTILS_NS::SceneObject::Ptr> gameObjects = *(std::list<SR_UTILS_NS::SceneObject::Ptr>*)(payload->Data);
                         if (!gameObjects.empty()) {
                             entityRef.SetPathTo(gameObjects.front().DynamicCast<SR_UTILS_NS::Entity>());
                             changed = true;
@@ -67,8 +67,8 @@ namespace SR_CORE_GUI_NS {
             if (ImGui::Button("Show")) {
                 auto&& pHierarchy = pContext->GetWidget<Hierarchy>();
 
-                if (auto&& pGameObject = entityRef.GetGameObject(); pGameObject && pHierarchy) {
-                    pHierarchy->SelectGameObject(pGameObject);
+                if (auto&& pSceneObject = entityRef.GetSceneObject(); pSceneObject && pHierarchy) {
+                    pHierarchy->SelectGameObject(pSceneObject);
                 }
             }
 

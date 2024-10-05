@@ -199,11 +199,15 @@ namespace SpaRcle {
         );
 
         ESRegisterMethodArg0(EvoScript::Public, generator, Scene, GetName, std::string)
-        ESRegisterMethod(EvoScript::Public, generator, Scene, Instance, SharedPtr<GameObject>, ESArg1(const std::string& name), ESArg1(name))
-        ESRegisterMethod(EvoScript::Public, generator, Scene, InstanceFromFile, SharedPtr<GameObject>, ESArg1(const std::string& name), ESArg1(name))
-        ESRegisterMethod(EvoScript::Public, generator, Scene, FindByComponent,  SharedPtr<GameObject>, ESArg1(const std::string& name), ESArg1(name))
-        ESRegisterMethod(EvoScript::Public, generator, Scene, Find, SharedPtr<GameObject>, ESArg1(const std::string& name), ESArg1(name))
-        ESRegisterMethod(EvoScript::Public, generator, Scene, FindOrInstance, SharedPtr<GameObject>, ESArg1(const std::string& name), ESArg1(name))
+        ESRegisterMethod(EvoScript::Public, generator, Scene, InstanceGameObject, SharedPtr<GameObject>, ESArg1(const std::string& name), ESArg1(name));
+
+        ESRegisterCustomMethod(EvoScript::Public, generator, Scene, InstanceFromFile, SharedPtr<GameObject>, ESArg1(const std::string& path), {
+            return ptr->InstanceFromFile(path).DynamicCast<GameObject>();
+        });
+
+        //ESRegisterMethod(EvoScript::Public, generator, Scene, FindByComponent,  SharedPtr<GameObject>, ESArg1(const std::string& name), ESArg1(name))
+        //ESRegisterMethod(EvoScript::Public, generator, Scene, Find, SharedPtr<GameObject>, ESArg1(const std::string& name), ESArg1(name))
+        //ESRegisterMethod(EvoScript::Public, generator, Scene, FindOrInstance, SharedPtr<GameObject>, ESArg1(const std::string& name), ESArg1(name))
         ESRegisterMethodArg0(EvoScript::Public, generator, Scene, GetLogicBase, SafePtr<SceneLogic>)
         ESRegisterStaticMethod(EvoScript::Public, generator, Scene, New, SafePtr<Scene>, ESArg1(const std::string& name), ESArg1(name))
 
@@ -310,21 +314,43 @@ namespace SpaRcle {
         { { "SharedPtr<GameObject>", EvoScript::Public } });
 
         ESRegisterMethod(EvoScript::Public, generator, GameObject, AddComponent, bool, ESArg1(Component* comp), ESArg1(comp))
-        ESRegisterMethod(EvoScript::Public, generator, GameObject, AddChild, bool, ESArg1(const SharedPtr<GameObject>& child), ESArg1(child))
+
+        ESRegisterCustomMethod(EvoScript::Public, generator, GameObject, AddChild, bool, ESArg1(const SharedPtr<GameObject>& pChild), {
+            return ptr->AddChild(pChild.StaticCast<SceneObject>());
+        });
+
+        ESRegisterCustomMethod(EvoScript::Public, generator, GameObject, Find, SharedPtr<GameObject>, ESArg1(const std::string& name), {
+            return ptr->Find(name).DynamicCast<GameObject>();
+        });
+
+        ESRegisterCustomMethodArg0(EvoScript::Public, generator, GameObject, GetParent, SharedPtr<GameObject>, {
+            return ptr->GetParent().DynamicCast<GameObject>();
+        })
+
         ESRegisterMethod(EvoScript::Public, generator, GameObject, GetComponent, Component*, ESArg1(const std::string& name), ESArg1(name))
-        ESRegisterMethod(EvoScript::Public, generator, GameObject, Find, SharedPtr<GameObject>, ESArg1(const std::string& name), ESArg1(name))
-        ESRegisterMethodArg0(EvoScript::Public, generator, GameObject, GetParent, SharedPtr<GameObject>)
         ESRegisterMethod(EvoScript::Public, generator, GameObject, SetName, void, ESArg1(const std::string& name), ESArg1(name))
         ESRegisterMethod(EvoScript::Public, generator, GameObject, GetOrCreateComponent, Component*, ESArg1(const std::string& name), ESArg1(name))
         ESRegisterMethod(EvoScript::Public, generator, GameObject, SetTransform, void, ESArg1(Transform* pTransform), ESArg1(pTransform))
-        ESRegisterMethodArg0(EvoScript::Public, generator, GameObject, GetBarycenter, FVector3)
         ESRegisterMethodArg0(EvoScript::Public, generator, GameObject, GetName, std::string)
-        ESRegisterMethodArg0(EvoScript::Public, generator, GameObject, GetTagString, std::string)
+        ESRegisterCustomMethodArg0(EvoScript::Public, generator, GameObject, GetTag, std::string, {
+            return ptr->GetTag().ToString();
+        })
         ESRegisterMethodArg0(EvoScript::Public, generator, GameObject, GetTransform, Transform*)
         ESRegisterCustomMethodArg0(EvoScript::Public, generator, GameObject, GetScene, Scene*, {
             return ptr->GetScene();
         })
-        ESRegisterMethodArg0(EvoScript::Public, generator, GameObject, GetChildrenRef, std::vector<SharedPtr<GameObject>>&)
+
+        ESRegisterCustomMethodArg0(EvoScript::Public, generator, GameObject, GetChildren, std::vector<SharedPtr<GameObject>>, {
+            auto&& children = ptr->GetChildren();
+            std::vector<SharedPtr<GameObject>> result;
+            result.reserve(children.size());
+            for (auto&& pChild : children) {
+                if (auto&& pGameObject = pChild.DynamicCast<GameObject>()) {
+                    result.emplace_back(pGameObject);
+                }
+            }
+            return result;
+        });
 
         using namespace Xml;
 

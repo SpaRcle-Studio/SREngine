@@ -4,6 +4,8 @@
 
 #include <Core/GUI/EditorGizmo.h>
 
+#include <Utils/ECS/GameObject.h>
+
 namespace SR_CORE_GUI_NS {
     EditorGizmo::EditorGizmo()
         : Super()
@@ -22,14 +24,18 @@ namespace SR_CORE_GUI_NS {
             if (!(*m_hierarchy->GetSelected().begin())) {
                 return SR_MATH_NS::Matrix4x4::Identity();
             }
-            auto&& pTransform = (*m_hierarchy->GetSelected().begin())->GetTransform();
-            return pTransform->GetMatrix();
+            if (auto&& pGameObject = m_hierarchy->GetSelected().begin()->DynamicCast<SR_UTILS_NS::GameObject>()) {
+                auto&& pTransform = pGameObject->GetTransform();
+                return pTransform->GetMatrix();
+            }
         }
 
         SR_MATH_NS::FVector3 center;
 
-        for (auto&& pGameObject : m_hierarchy->GetSelected()) {
-            center += pGameObject->GetTransform()->GetMatrix().GetTranslate();
+        for (auto&& pSceneObject : m_hierarchy->GetSelected()) {
+            if (auto&& pGameObject = m_hierarchy->GetSelected().begin()->DynamicCast<SR_UTILS_NS::GameObject>()) {
+                center += pGameObject->GetTransform()->GetMatrix().GetTranslate();
+            }
         }
 
         center /= m_hierarchy->GetSelected().size();
@@ -42,7 +48,12 @@ namespace SR_CORE_GUI_NS {
             return;
         }
 
-        for (auto&& pGameObject : m_hierarchy->GetSelected()) {
+        for (auto&& pSceneObject : m_hierarchy->GetSelected()) {
+            if (!pSceneObject) {
+                continue;
+            }
+
+            auto&& pGameObject = pSceneObject.DynamicCast<SR_UTILS_NS::GameObject>();
             if (!pGameObject) {
                 continue;
             }
@@ -71,7 +82,12 @@ namespace SR_CORE_GUI_NS {
             return;
         }
 
-        for (auto&& pGameObject : m_hierarchy->GetSelected()) {
+        for (auto&& pSceneObject : m_hierarchy->GetSelected()) {
+            if (!pSceneObject) {
+                continue;
+            }
+
+            auto&& pGameObject = pSceneObject.DynamicCast<SR_UTILS_NS::GameObject>();
             if (!pGameObject) {
                 continue;
             }
@@ -101,7 +117,12 @@ namespace SR_CORE_GUI_NS {
 
         std::optional<bool> is2D;
 
-        for (auto pGameObject : m_hierarchy->GetSelected()) {
+        for (auto pSceneObject : m_hierarchy->GetSelected()) {
+            if (!pSceneObject) {
+                continue;
+            }
+
+            auto&& pGameObject = pSceneObject.DynamicCast<SR_UTILS_NS::GameObject>();
             if (!pGameObject) {
                 continue;
             }
@@ -126,7 +147,12 @@ namespace SR_CORE_GUI_NS {
             return;
         }
 
-        for (auto&& pGameObject : m_hierarchy->GetSelected()) {
+        for (auto pSceneObject : m_hierarchy->GetSelected()) {
+            if (!pSceneObject) {
+                continue;
+            }
+
+            auto&& pGameObject = pSceneObject.DynamicCast<SR_UTILS_NS::GameObject>();
             if (!pGameObject) {
                 continue;
             }
@@ -176,7 +202,11 @@ namespace SR_CORE_GUI_NS {
             return;
         }
 
-        auto&& pGameObject = *m_hierarchy->GetSelected().begin();
+        auto&& pSceneObject = *m_hierarchy->GetSelected().begin();
+        auto&& pGameObject = pSceneObject.DynamicCast<SR_UTILS_NS::GameObject>();
+        if (!pGameObject) {
+            return;
+        }
 
         SR_SAFE_DELETE_PTR(m_marshal)
         m_marshal = pGameObject->GetTransform()->Save(SR_UTILS_NS::SavableContext(nullptr, SR_UTILS_NS::SavableFlagBits::SAVABLE_FLAG_NONE));
@@ -195,7 +225,12 @@ namespace SR_CORE_GUI_NS {
             return;
         }
 
-        auto&& pGameObject = *m_hierarchy->GetSelected().begin();
+        auto&& pSceneObject = *m_hierarchy->GetSelected().begin();
+        auto&& pGameObject = pSceneObject.DynamicCast<SR_UTILS_NS::GameObject>();
+        if (!pGameObject) {
+            return;
+        }
+
         auto&& pEngine = dynamic_cast<EditorGUI*>(m_hierarchy->GetManager())->GetEngine();
 
         auto&& cmd = new SR_CORE_NS::Commands::GameObjectTransform(pEngine, pGameObject, m_marshal->CopyPtr());
@@ -207,8 +242,12 @@ namespace SR_CORE_GUI_NS {
     }
 
     void EditorGizmo::PrepareGizmo() {
-        auto&& pGameObject = *m_hierarchy->GetSelected().begin();
+        auto&& pSceneObject = *m_hierarchy->GetSelected().begin();
+        if (!pSceneObject) {
+            return;
+        }
 
+        auto&& pGameObject = pSceneObject.DynamicCast<SR_UTILS_NS::GameObject>();
         if (!pGameObject) {
             return;
         }

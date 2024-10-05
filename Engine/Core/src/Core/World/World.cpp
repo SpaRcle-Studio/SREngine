@@ -20,13 +20,13 @@
 #include <assimp/scene.h>
 
 namespace SR_CORE_NS {
-    SR_UTILS_NS::GameObject::Ptr World::Instance(const SR_HTYPES_NS::RawMesh* pRawMesh) {
+    SR_UTILS_NS::SceneObject::Ptr World::Instance(const SR_HTYPES_NS::RawMesh* pRawMesh) {
         GameObjectPtr root;
 
         std::list<SR_GTYPES_NS::SkinnedMesh*> skinnedMeshes;
 
         const std::function<GameObjectPtr(aiNode*)> processNode = [&processNode, &skinnedMeshes, this, pRawMesh](aiNode* node) -> GameObjectPtr {
-            GameObjectPtr ptr = Scene::Instance(node->mName.C_Str());
+            GameObjectPtr ptr = Scene::InstanceGameObject(node->mName.C_Str());
 
             for (uint32_t i = 0; i < node->mNumMeshes; ++i) {
                 const uint64_t meshId = node->mMeshes[i];
@@ -57,7 +57,7 @@ namespace SR_CORE_NS {
             }
 
             for (uint32_t i = 0; i < node->mNumChildren; ++i) {
-                ptr->AddChild(processNode(node->mChildren[i]));
+                ptr->AddChild(processNode(node->mChildren[i]).StaticCast<SR_UTILS_NS::SceneObject>());
             }
 
             aiVector3D scaling, rotation, translation;
@@ -87,7 +87,7 @@ namespace SR_CORE_NS {
         });
 
         if (!root) {
-            return SR_UTILS_NS::GameObject::Ptr();
+            return SR_UTILS_NS::SceneObject::Ptr();
         }
 
         root->SetName(SR_UTILS_NS::StringUtils::GetBetween(std::string(pRawMesh->GetResourceId()), "/", "."));
@@ -99,7 +99,7 @@ namespace SR_CORE_NS {
             }
         }
 
-        return root;
+        return root.StaticCast<SR_UTILS_NS::SceneObject>();
     }
 
     World::RenderScenePtr World::GetRenderScene() const {

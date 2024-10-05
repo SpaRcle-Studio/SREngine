@@ -31,7 +31,7 @@ namespace SR_CORE_GUI_NS {
         m_shiftPressed = SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::LShift);
 
         if (m_scene.TryRecursiveLockIfValid()) {
-            m_tree = m_scene->GetRootGameObjects();
+            m_tree = m_scene->GetRootSceneObjects();
             m_scene.Unlock();
         }
         else {
@@ -59,9 +59,9 @@ namespace SR_CORE_GUI_NS {
 
                     std::vector<SR_UTILS_NS::ReversibleCommand*> commands;
                     commands.emplace_back(new SR_CORE_NS::Commands::ChangeHierarchySelected(pEngine, this, m_selected, { }));
-                    for (auto&& ptr : *(std::list<SR_UTILS_NS::GameObject::Ptr>*)(pPayload->Data)) {
+                    for (auto&& ptr : *(std::list<SR_UTILS_NS::SceneObject::Ptr>*)(pPayload->Data)) {
                         if (ptr.RecursiveLockIfValid()) {
-                            commands.emplace_back(new SR_CORE_NS::Commands::GameObjectMove(pEngine, ptr, SR_UTILS_NS::GameObject::Ptr()));
+                            commands.emplace_back(new SR_CORE_NS::Commands::GameObjectMove(pEngine, ptr, SR_UTILS_NS::SceneObject::Ptr()));
                             ptr.Unlock();
                         }
                     }
@@ -108,7 +108,7 @@ namespace SR_CORE_GUI_NS {
         if (ImGui::BeginPopupContextWindow("HierarchyContextMenu")) {
             if (ImGui::Selectable("Add New GameObject")) {
                 auto&& pEngine = dynamic_cast<EditorGUI*>(GetManager())->GetEngine();
-                pEngine->GetScene()->Instance("New GameObject");
+                pEngine->GetScene()->InstanceGameObject("New GameObject"_atom);
             }
 
             ImGui::Separator();
@@ -127,7 +127,7 @@ namespace SR_CORE_GUI_NS {
         }
     }
 
-    void Hierarchy::DrawChild(const SR_UTILS_NS::GameObject::Ptr& root, uint32_t prefabIndex) {
+    void Hierarchy::DrawChild(const SR_UTILS_NS::SceneObject::Ptr& root, uint32_t prefabIndex) {
         const auto& name = root->GetName();
         const bool hasChild = root->HasChildren();
 
@@ -189,7 +189,7 @@ namespace SR_CORE_GUI_NS {
                 m_pointersHolder.emplace_back(root);
             }
 
-            ImGui::SetDragDropPayload("Hierarchy##Payload", &m_pointersHolder, sizeof(std::list<SR_UTILS_NS::GameObject::Ptr>), ImGuiCond_Once);
+            ImGui::SetDragDropPayload("Hierarchy##Payload", &m_pointersHolder, sizeof(std::list<SR_UTILS_NS::SceneObject::Ptr>), ImGuiCond_Once);
             ImGui::Text("%s ->", name.c_str());
             ImGui::EndDragDropSource();
         }
@@ -215,7 +215,7 @@ namespace SR_CORE_GUI_NS {
 
                     std::vector<SR_UTILS_NS::ReversibleCommand*> commands;
                     commands.emplace_back(new SR_CORE_NS::Commands::ChangeHierarchySelected(pEngine, this, m_selected, {}));
-                    for (auto&& ptr : *(std::list<SR_UTILS_NS::GameObject::Ptr>*)(payload->Data)) {
+                    for (auto&& ptr : *(std::list<SR_UTILS_NS::SceneObject::Ptr>*)(payload->Data)) {
                         if (ptr.RecursiveLockIfValid()) {
                             commands.emplace_back(new SR_CORE_NS::Commands::GameObjectMove(pEngine, ptr, root));
                             ptr.Unlock();
@@ -232,7 +232,7 @@ namespace SR_CORE_GUI_NS {
 
         if (open && hasChild) {
             if (root) {
-                root->ForEachChild([&](const SR_UTILS_NS::GameObject::Ptr &child) {
+                root->ForEachChild([&](const SR_UTILS_NS::SceneObject::Ptr &child) {
                     DrawChild(child, prefabIndex);
                 });
             }
@@ -240,11 +240,11 @@ namespace SR_CORE_GUI_NS {
         }
     }
 
-    void Hierarchy::ChildContextMenu(const SR_UTILS_NS::GameObject::Ptr& gm, uint64_t id) {
+    void Hierarchy::ChildContextMenu(const SR_UTILS_NS::SceneObject::Ptr& pSceneObject, uint64_t id) {
         ImGui::PushID((void*)(intptr_t)id);
         if (ImGui::BeginPopupContextItem("HierarchyChildContextMenu")) {
-            if (m_selected.count(gm) == 0) {
-                SelectGameObject(gm);
+            if (m_selected.count(pSceneObject) == 0) {
+                SelectGameObject(pSceneObject);
             }
 
             if (ImGui::Selectable("Copy")) {
@@ -270,18 +270,18 @@ namespace SR_CORE_GUI_NS {
                 Delete();
             }
 
-            if (gm->GetPrefab()) {
+            if (pSceneObject->GetPrefab()) {
                 ImGui::Separator();
 
                 if (ImGui::Selectable("Break link")) {
-                    gm->UnlinkPrefab();
+                    pSceneObject->UnlinkPrefab();
                 }
 
                 ImGui::Separator();
 
                 if (ImGui::Selectable("Edit")) {
                     auto&& pEngine = dynamic_cast<EditorGUI*>(GetManager())->GetEngine();
-                    auto&& prefabPath = gm->GetPrefab()->GetResourcePath();
+                    auto&& prefabPath = pSceneObject->GetPrefab()->GetResourcePath();
                     if (auto&& pScene = SR_WORLD_NS::Scene::Load(prefabPath)) {
                         pEngine->SetActive(false);
                         pEngine->SetScene(pScene);
@@ -290,10 +290,11 @@ namespace SR_CORE_GUI_NS {
                 }
             }
 
-            ImGui::Separator();
-
-            if (ImGui::Selectable("Add child")) {
-                gm->AddChild(gm->GetScene()->Instance("New GameObject"));
+            if (pSceneObject->GetSceneObjectType() == SR_UTILS_NS::SceneObjectType::GameObject) {
+                ImGui::Separator();
+                if (ImGui::Selectable("Add child game object")) {
+                    pSceneObject->AddChild(pSceneObject->GetScene()->InstanceGameObject("New GameObject"_atom).StaticCast<SR_UTILS_NS::SceneObject>());
+                }
             }
 
             ImGui::EndPopup();
@@ -301,7 +302,7 @@ namespace SR_CORE_GUI_NS {
         ImGui::PopID();
     }
 
-    void Hierarchy::CheckSelected(const SR_UTILS_NS::GameObject::Ptr& gm) {
+    void Hierarchy::CheckSelected(const SR_UTILS_NS::SceneObject::Ptr& gm) {
         if (ImGui::IsItemHovered() && ImGui::IsMouseReleased(ImGuiMouseButton_Left)) {
             SelectGameObject(gm);
         }
@@ -368,7 +369,7 @@ namespace SR_CORE_GUI_NS {
         SR_SAFE_DELETE_PTR(pMarshal)
     }
 
-    void Hierarchy::Paste(const SR_UTILS_NS::GameObject::Ptr& pParent) {
+    void Hierarchy::Paste(const SR_UTILS_NS::SceneObject::Ptr& pParent) {
         auto&& base64 = SR_UTILS_NS::Platform::GetClipboardText();
         auto marshal = SR_HTYPES_NS::Marshal::LoadFromBase64(base64);
         if (!marshal.Valid()) {
@@ -407,7 +408,7 @@ namespace SR_CORE_GUI_NS {
         }
     }
 
-    const std::set<SR_UTILS_NS::GameObject::Ptr>& Hierarchy::GetSelected() const {
+    const std::set<SR_UTILS_NS::SceneObject::Ptr>& Hierarchy::GetSelected() const {
         SR_LOCK_GUARD;
         return m_selected;
     }
@@ -422,7 +423,7 @@ namespace SR_CORE_GUI_NS {
         }
     }
 
-    void Hierarchy::SelectGameObject(const SR_UTILS_NS::GameObject::Ptr& ptr) {
+    void Hierarchy::SelectGameObject(const SR_UTILS_NS::SceneObject::Ptr& ptr) {
         SR_LOCK_GUARD;
 
         if (!ptr) {
@@ -440,7 +441,7 @@ namespace SR_CORE_GUI_NS {
             }
         }
 
-        std::set<SR_UTILS_NS::GameObject::Ptr> newSelected;
+        std::set<SR_UTILS_NS::SceneObject::Ptr> newSelected;
         if (m_shiftPressed) {
             newSelected = m_selected;
         }
@@ -452,7 +453,7 @@ namespace SR_CORE_GUI_NS {
         pEngine->GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Sync);
     }
 
-    void Hierarchy::SetSelectedImpl(const std::set<SR_UTILS_NS::GameObject::Ptr>& changeSelected){
+    void Hierarchy::SetSelectedImpl(const std::set<SR_UTILS_NS::SceneObject::Ptr>& changeSelected){
         SR_LOCK_GUARD;
         m_selected = changeSelected;
 #ifdef SR_DEBUG
@@ -462,7 +463,7 @@ namespace SR_CORE_GUI_NS {
 #endif
     }
 
-    void Hierarchy::ExpandPath(const SR_UTILS_NS::GameObject::Ptr& gm) { /** NOLINT */
+    void Hierarchy::ExpandPath(const SR_UTILS_NS::SceneObject::Ptr& gm) { /** NOLINT */
         if (!gm) {
             return;
         }

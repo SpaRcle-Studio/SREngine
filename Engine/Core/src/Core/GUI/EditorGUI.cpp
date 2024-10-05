@@ -26,6 +26,7 @@
 #include <Utils/Platform/Platform.h>
 #include <Utils/Profile/TracyContext.h>
 #include <Utils/World/SceneUpdater.h>
+#include <Utils/Common/StringAtomLiterals.h>
 
 #include <Graphics/Types/Texture.h>
 #include <Graphics/Render/RenderContext.h>
@@ -602,7 +603,7 @@ namespace SR_CORE_GUI_NS {
         if (ImGui::BeginMenu("Editor")) {
             if (ImGui::MenuItem("Empty GameObject")) {
                 if (auto&& pScene = m_engine->GetScene()) {
-                    pScene->Instance("New GameObject");
+                    pScene->InstanceGameObject("New GameObject"_atom);
                 }
             }
 

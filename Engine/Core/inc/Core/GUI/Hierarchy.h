@@ -28,22 +28,22 @@ namespace SR_CORE_GUI_NS {
         void OnKeyDown(const SR_UTILS_NS::KeyboardInputData* data) override;
         void OnKeyUp(const SR_UTILS_NS::KeyboardInputData* data) override;
 
-        SR_NODISCARD const std::set<SR_UTILS_NS::GameObject::Ptr>& GetSelected() const;
+        SR_NODISCARD const std::set<SR_UTILS_NS::SceneObject::Ptr>& GetSelected() const;
 
         void ClearSelected();
-        void SelectGameObject(const SR_UTILS_NS::GameObject::Ptr& ptr);
+        void SelectGameObject(const SR_UTILS_NS::SceneObject::Ptr& ptr);
 
-        void SetSelectedImpl(const std::set<SR_UTILS_NS::GameObject::Ptr>& changeSelected);
+        void SetSelectedImpl(const std::set<SR_UTILS_NS::SceneObject::Ptr>& changeSelected);
 
     private:
-        void ExpandPath(const SR_UTILS_NS::GameObject::Ptr& gm);
+        void ExpandPath(const SR_UTILS_NS::SceneObject::Ptr& gm);
         void Draw() override;
-        void CheckSelected(const SR_UTILS_NS::GameObject::Ptr& gm);
+        void CheckSelected(const SR_UTILS_NS::SceneObject::Ptr& gm);
         void SR_INLINE ContextMenu();
-        void ChildContextMenu(const SR_UTILS_NS::GameObject::Ptr& gm, uint64_t id);
-        void DrawChild(const SR_UTILS_NS::GameObject::Ptr& root, uint32_t prefabIndex);
+        void ChildContextMenu(const SR_UTILS_NS::SceneObject::Ptr& gm, uint64_t id);
+        void DrawChild(const SR_UTILS_NS::SceneObject::Ptr& root, uint32_t prefabIndex);
         void SR_INLINE Copy() const;
-        void SR_INLINE Paste(const SR_UTILS_NS::GameObject::Ptr& pParent = nullptr);
+        void SR_INLINE Paste(const SR_UTILS_NS::SceneObject::Ptr& pParent = nullptr);
         void SR_INLINE Delete();
 
     private:
@@ -51,9 +51,9 @@ namespace SR_CORE_GUI_NS {
         const ImGuiTreeNodeFlags m_nodeFlagsWithoutChild = ImGuiTreeNodeFlags_NoTreePushOnOpen | ImGuiTreeNodeFlags_Leaf;
 
         SR_WORLD_NS::Scene::Ptr m_scene;
-        std::list<SR_UTILS_NS::GameObject::Ptr> m_pointersHolder;
-        std::set<SR_UTILS_NS::GameObject::Ptr> m_selected;
-        SR_UTILS_NS::GameObject::GameObjects m_tree;
+        std::list<SR_UTILS_NS::SceneObject::Ptr> m_pointersHolder;
+        std::set<SR_UTILS_NS::SceneObject::Ptr> m_selected;
+        std::vector<SR_UTILS_NS::SceneObject::Ptr> m_tree;
 
         std::atomic<bool> m_shiftPressed;
 

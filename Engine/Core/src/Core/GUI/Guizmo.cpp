@@ -43,7 +43,6 @@ namespace SR_CORE_GUI_NS {
             /// камера может быть выбранным объектом, поэтому может произойти двойная блокировка
             if (m_active && gameObject.RecursiveLockIfValid()) {
                 m_transform = gameObject->GetTransform();
-                m_barycenter = gameObject->GetBarycenter();
 
                 DrawManipulation(pCamera);
 

@@ -541,7 +541,7 @@ namespace SR_CORE_GUI_NS {
 
                 if (ImGui::Selectable(name.c_str())) {
                     if (pHierarchy && pRenderComponent) {
-                        pHierarchy->SelectGameObject(pRenderComponent->GetGameObject());
+                        pHierarchy->SelectGameObject(pRenderComponent->GetSceneObject());
                     }
                 }
             }

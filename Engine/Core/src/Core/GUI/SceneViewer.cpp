@@ -49,9 +49,9 @@ namespace SR_CORE_GUI_NS {
         }
 
         if (m_enabled && !m_platform && m_isPrefab) {
-            m_platform = m_scene->Find("PREFAB_PLATFORM");
+            m_platform = m_scene->Find("PREFAB_PLATFORM"_atom).DynamicCast<SR_UTILS_NS::GameObject>();
             if (!m_platform) {
-                m_platform = m_scene->InstanceFromFile("Engine/Models/plane_extended.obj");
+                m_platform = m_scene->InstanceFromFile("Engine/Models/plane_extended.obj").DynamicCast<SR_UTILS_NS::GameObject>();
             }
             if (m_platform) {
                 m_platform->SetName("PREFAB_PLATFORM");
@@ -60,7 +60,7 @@ namespace SR_CORE_GUI_NS {
                     if (auto&& pMesh = m_platform->GetChildren()[0]->GetComponent<SR_GTYPES_NS::Mesh3D>()) {
                         auto&& pMaterial = new SR_GRAPH_NS::UniqueMaterial();
                         pMaterial->SetShader("Engine/Shaders/CascadedShadowMap/spatial.srsl");
-                        pMaterial->SetTexture("diffuse", GetRenderScene()->GetRenderStrategy()->GetRenderContext()->GetDefaultTexture());
+                        pMaterial->SetTexture("diffuse"_atom, GetRenderScene()->GetRenderStrategy()->GetRenderContext()->GetDefaultTexture());
                         pMesh->SetMaterial(pMaterial);
                     }
                 }
@@ -82,7 +82,7 @@ namespace SR_CORE_GUI_NS {
 
             ImGui::Separator();
 
-            if (auto&& pFrameBuffer = GetContext()->FindFramebuffer("SceneViewFBO", pCamera)) {
+            if (auto&& pFrameBuffer = GetContext()->FindFramebuffer("SceneViewFBO"_atom, pCamera)) {
                 m_id = pFrameBuffer->GetColorTexture(0);
             }
 
@@ -110,7 +110,7 @@ namespace SR_CORE_GUI_NS {
             m_camera.Unlock();
         }
         else {
-            m_camera = m_scene->Find("Editor camera");
+            m_camera = m_scene->Find("Editor camera"_atom).DynamicCast<SR_UTILS_NS::GameObject>();
         }
 
         m_scene.Unlock();
@@ -245,7 +245,7 @@ namespace SR_CORE_GUI_NS {
         if (enabled) {
             /// сцена может быть уже заблокирована до Engine::SetScene
             if (SR_UTILS_NS::Features::Instance().Enabled("EditorCamera", true) && m_scene.RecursiveLockIfValid()) {
-                camera = m_scene->Instance("Editor camera");
+                camera = m_scene->InstanceGameObject("Editor camera"_atom);
                 camera->SetDontSave(true);
                 m_isPrefab = m_scene->IsPrefab();
                 m_scene.Unlock();
@@ -420,10 +420,10 @@ namespace SR_CORE_GUI_NS {
             return;
         }
 
-        SR_UTILS_NS::GameObject::Ptr pGameObject = *m_hierarchy->GetSelected().begin();
+        SR_UTILS_NS::SceneObject::Ptr pGameObject = *m_hierarchy->GetSelected().begin();
 
         if (pGameObject == pMesh->GetRoot()) {
-            m_hierarchy->SelectGameObject(pMesh->GetGameObject());
+            m_hierarchy->SelectGameObject(pMesh->GetSceneObject());
             return;
         }
 
@@ -448,7 +448,7 @@ namespace SR_CORE_GUI_NS {
 
         if (enabled) {
             if (m_scene.RecursiveLockIfValid()) {
-                gizmo = m_scene->Instance("Editor gizmo");
+                gizmo = m_scene->InstanceGameObject("Editor gizmo"_atom);
                 gizmo->SetDontSave(true);
                 m_scene.Unlock();
             }

@@ -14,6 +14,7 @@
 
 namespace SR_UTILS_NS {
     class GameObject;
+    class SceneObject;
 
     namespace World {
         class Scene;
@@ -43,7 +44,7 @@ namespace SR_CORE_NS::Commands {
     //! ----------------------------------------------------------------------------------------------------------------
 
     class ChangeHierarchySelected : public IEngineReversibleCommand {
-        using Selection = std::set<SR_UTILS_NS::GameObject::Ptr>;
+        using Selection = std::set<SR_UTILS_NS::SceneObject::Ptr>;
     public:
         ChangeHierarchySelected(const EnginePtr& pEngine, SR_CORE_GUI_NS::Hierarchy* pHierarchy, const Selection& oldSelected, const Selection& newSelected);
 
@@ -82,7 +83,7 @@ namespace SR_CORE_NS::Commands {
 
     class GameObjectRename : public IEngineReversibleCommand {
     public:
-        GameObjectRename(const EnginePtr& pEngine, const SR_UTILS_NS::GameObject::Ptr& ptr, SR_UTILS_NS::GameObject::Name newName);
+        GameObjectRename(const EnginePtr& pEngine, const SR_UTILS_NS::SceneObject::Ptr& ptr, SR_UTILS_NS::SceneObject::ObjectNameT newName);
 
         bool Redo() override;
         bool Undo() override;
@@ -91,8 +92,8 @@ namespace SR_CORE_NS::Commands {
 
     private:
         SR_UTILS_NS::EntityPath m_path;
-        SR_UTILS_NS::GameObject::Name m_previousName;
-        SR_UTILS_NS::GameObject::Name m_newName;
+        SR_UTILS_NS::GameObject::ObjectNameT m_previousName;
+        SR_UTILS_NS::GameObject::ObjectNameT m_newName;
 
     };
 
@@ -100,7 +101,7 @@ namespace SR_CORE_NS::Commands {
 
     class GameObjectEnable : public IEngineReversibleCommand {
     public:
-        GameObjectEnable(const EnginePtr& pEngine, const SR_UTILS_NS::GameObject::Ptr& ptr, bool newEnabled);
+        GameObjectEnable(const EnginePtr& pEngine, const SR_UTILS_NS::SceneObject::Ptr& ptr, bool newEnabled);
 
         bool Redo() override;
         bool Undo() override;
@@ -119,7 +120,7 @@ namespace SR_CORE_NS::Commands {
     /// TODO: подумать над удалением нескольких объектов за раз
     class GameObjectDelete : public IEngineReversibleCommand {
     public:
-        GameObjectDelete(const EnginePtr& pEngine, const SR_UTILS_NS::GameObject::Ptr& ptr);
+        GameObjectDelete(const EnginePtr& pEngine, const SR_UTILS_NS::SceneObject::Ptr& ptr);
         ~GameObjectDelete() override;
 
         bool Redo() override;
@@ -141,7 +142,7 @@ namespace SR_CORE_NS::Commands {
     /// TODO: Нужно сильно переработать, в частности для GUISystem
     class GameObjectInstance : public IEngineReversibleCommand {
     public:
-        GameObjectInstance(const EnginePtr& pEngine, SR_HTYPES_NS::Marshal::Ptr pMarshal, const SR_UTILS_NS::GameObject::Ptr& pParent = nullptr);
+        GameObjectInstance(const EnginePtr& pEngine, SR_HTYPES_NS::Marshal::Ptr pMarshal, const SR_UTILS_NS::SceneObject::Ptr& pParent = nullptr);
         ~GameObjectInstance() override;
 
         bool Redo() override;
@@ -163,7 +164,7 @@ namespace SR_CORE_NS::Commands {
     class HierarchyPaste : public IEngineReversibleCommand {
     public:
         HierarchyPaste(const EnginePtr& pEngine, SR_CORE_GUI_NS::Hierarchy* hierarchy,
-                       SR_HTYPES_NS::Marshal::Ptr marshal, const SR_UTILS_NS::GameObject::Ptr& pParent);
+                       SR_HTYPES_NS::Marshal::Ptr marshal, const SR_UTILS_NS::SceneObject::Ptr& pParent);
         ~HierarchyPaste() override;
 
         bool Redo() override;
@@ -185,7 +186,7 @@ namespace SR_CORE_NS::Commands {
 
     class GameObjectMove : public IEngineReversibleCommand {
     public:
-        GameObjectMove(const EnginePtr& pEngine, const SR_UTILS_NS::GameObject::Ptr& ptr, const SR_UTILS_NS::GameObject::Ptr& newDestination);
+        GameObjectMove(const EnginePtr& pEngine, const SR_UTILS_NS::SceneObject::Ptr& ptr, const SR_UTILS_NS::SceneObject::Ptr& newDestination);
         ~GameObjectMove() override;
 
         bool Redo() override;

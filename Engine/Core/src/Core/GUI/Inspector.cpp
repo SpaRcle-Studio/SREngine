@@ -58,92 +58,94 @@ namespace SR_CORE_GUI_NS {
     }
 
     void Inspector::InspectGameObject() {
-        if (m_gameObject.TryRecursiveLockIfValid()) {
+        if (m_sceneObject.TryRecursiveLockIfValid()) {
             auto&& pEngine = dynamic_cast<EditorGUI*>(GetManager())->GetEngine();
 
-            if (bool v = m_gameObject->IsEnabled(); ImGui::Checkbox("Enabled", &v)) {
-                auto&& cmd = new SR_CORE_NS::Commands::GameObjectEnable(pEngine, m_gameObject, v);
+            if (bool v = m_sceneObject->IsEnabled(); ImGui::Checkbox("Enabled", &v)) {
+                auto&& cmd = new SR_CORE_NS::Commands::GameObjectEnable(pEngine, m_sceneObject, v);
                 pEngine->GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
             }
 
-            if (m_gameObject->IsPrefab()) {
+            if (m_sceneObject->IsPrefab()) {
                 ImGui::SameLine();
                 ImGui::TextColored(ImVec4(0, 1, 1, 1), "(The changes will not be saved)");
             }
 
-            if (m_gameObject->IsDirty()) {
+            if (m_sceneObject->IsDirty()) {
                 ImGui::SameLine();
                 ImGui::TextColored(ImVec4(1, 1, 0, 1), "(Is dirty)");
             }
 
-            if (m_gameObject->IsDontSave()) {
+            if (m_sceneObject->IsDontSave()) {
                 ImGui::SameLine();
                 ImGui::TextColored(ImVec4(1, 1, 0, 1), "(Dont Save)");
             }
 
             /// --------------------------------------------------------------------------------------------------------
 
-            std::string gm_name = m_gameObject->GetName();
+            std::string gm_name = m_sceneObject->GetName();
             if (ImGui::InputText("Name", &gm_name, ImGuiInputTextFlags_NoUndoRedo | ImGuiInputTextFlags_EnterReturnsTrue)) {
-                auto&& cmd = new SR_CORE_NS::Commands::GameObjectRename(pEngine, m_gameObject, gm_name);
+                auto&& cmd = new SR_CORE_NS::Commands::GameObjectRename(pEngine, m_sceneObject, gm_name);
                 pEngine->GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
             }
 
             /// --------------------------------------------------------------------------------------------------------
 
-            InspectTag(m_gameObject->GetTag(), [this](auto&& tag){
-                m_gameObject->SetTag(tag);
+            InspectTag(m_sceneObject->GetTag(), [this](auto&& tag){
+                m_sceneObject->SetTag(tag);
             });
 
-            InspectLayer(m_gameObject->GetLocalLayer(), [this](auto&& tag) {
-                m_gameObject->SetLayer(tag);
+            InspectLayer(m_sceneObject->GetLocalLayer(), [this](auto&& tag) {
+                m_sceneObject->SetLayer(tag);
             });
 
             /// --------------------------------------------------------------------------------------------------------
 
-            ImGui::Text("Entity id: %llu", m_gameObject->GetEntityId());
+            ImGui::Text("Entity id: %llu", m_sceneObject->GetEntityId());
 
             ImGui::Separator();
 
-            auto&& pTransform = m_gameObject->GetTransform();
-            auto&& pOldTransform = pTransform->Copy();
+            if (auto&& pGameObject = m_sceneObject.DynamicCast<SR_UTILS_NS::GameObject>()) {
+                auto&& pTransform = pGameObject->GetTransform();
+                auto&& pOldTransform = pTransform->Copy();
 
-            bool changed = false;
+                bool changed = false;
 
-            switch (pTransform->GetMeasurement()) {
-                case SR_UTILS_NS::Measurement::Space2D:
-                    changed |= DrawTransform2D(dynamic_cast<SR_UTILS_NS::Transform2D*>(pTransform));
+                switch (pTransform->GetMeasurement()) {
+                    case SR_UTILS_NS::Measurement::Space2D:
+                        changed |= DrawTransform2D(dynamic_cast<SR_UTILS_NS::Transform2D*>(pTransform));
                     break;
-                case SR_UTILS_NS::Measurement::Space3D:
-                    changed |= DrawTransform3D(dynamic_cast<SR_UTILS_NS::Transform3D*>(pTransform));
+                    case SR_UTILS_NS::Measurement::Space3D:
+                        changed |= DrawTransform3D(dynamic_cast<SR_UTILS_NS::Transform3D*>(pTransform));
                     break;
-                case SR_UTILS_NS::Measurement::SpaceZero:
-                case SR_UTILS_NS::Measurement::Space4D:
-                default:
-                    break;
+                    case SR_UTILS_NS::Measurement::SpaceZero:
+                    case SR_UTILS_NS::Measurement::Space4D:
+                    default:
+                        break;
+                }
+
+                changed |= DrawSwitchTransform();
+
+                if (!m_isUsed && changed) {
+                    SR_SAFE_DELETE_PTR(m_oldTransformMarshal)
+                    m_oldTransformMarshal = pOldTransform->Save(SR_UTILS_NS::SavableContext(nullptr, SR_UTILS_NS::SavableFlagBits::SAVABLE_FLAG_NONE));
+                    m_isUsed = true;
+                }
+
+                if (m_isUsed && SR_UTILS_NS::Input::Instance().GetMouseUp(SR_UTILS_NS::MouseCode::MouseLeft)) {
+                    auto&& cmd = new SR_CORE_NS::Commands::GameObjectTransform(pEngine, pGameObject, m_oldTransformMarshal->CopyPtr());
+                    pEngine->GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
+
+                    SR_SAFE_DELETE_PTR(m_oldTransformMarshal)
+                    m_isUsed = false;
+                }
+
+                SR_SAFE_DELETE_PTR(pOldTransform)
             }
 
-            changed |= DrawSwitchTransform();
+            DrawComponents(dynamic_cast<SR_UTILS_NS::IComponentable*>(m_sceneObject.Get()));
 
-            if (!m_isUsed && changed) {
-                SR_SAFE_DELETE_PTR(m_oldTransformMarshal)
-                m_oldTransformMarshal = pOldTransform->Save(SR_UTILS_NS::SavableContext(nullptr, SR_UTILS_NS::SavableFlagBits::SAVABLE_FLAG_NONE));
-                m_isUsed = true;
-            }
-
-            if (m_isUsed && SR_UTILS_NS::Input::Instance().GetMouseUp(SR_UTILS_NS::MouseCode::MouseLeft)) {
-                auto&& cmd = new SR_CORE_NS::Commands::GameObjectTransform(pEngine, m_gameObject, m_oldTransformMarshal->CopyPtr());
-                pEngine->GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
-
-                SR_SAFE_DELETE_PTR(m_oldTransformMarshal)
-                m_isUsed = false;
-            }
-
-            SR_SAFE_DELETE_PTR(pOldTransform)
-
-            DrawComponents(dynamic_cast<SR_UTILS_NS::IComponentable*>(m_gameObject.Get()));
-
-            m_gameObject.Unlock();
+            m_sceneObject.Unlock();
         }
     }
 
@@ -172,14 +174,14 @@ namespace SR_CORE_GUI_NS {
         SR_LOCK_GUARD;
 
         if (auto&& selected = m_hierarchy->GetSelected(); selected.size() == 1) {
-            if (*selected.begin() != m_gameObject) {
+            if (*selected.begin() != m_sceneObject) {
                 ResetWeakStorage();
             }
-            m_gameObject = *selected.begin();
-            SRAssert(m_gameObject);
+            m_sceneObject = *selected.begin();
+            SRAssert(m_sceneObject);
         }
         else {
-            m_gameObject = SR_UTILS_NS::GameObject::Ptr();
+            m_sceneObject = SR_UTILS_NS::SceneObject::Ptr();
         }
     }
 
@@ -333,20 +335,24 @@ namespace SR_CORE_GUI_NS {
     }
 
     bool Inspector::DrawSwitchTransform() {
-        auto&& pTransform = m_gameObject->GetTransform();
+        auto&& pGameObject = m_sceneObject.DynamicCast<SR_UTILS_NS::GameObject>();
+        if (!pGameObject) {
+            return false;
+        }
+        auto&& pTransform = pGameObject->GetTransform();
 
         const char* space_types[] = { "Zero (Holder)", "1D", "2D", "3D", "4D" };
         auto item_current = static_cast<int32_t>(pTransform->GetMeasurement());
         if (ImGui::Combo("Transform type", &item_current, space_types, IM_ARRAYSIZE(space_types))) {
             switch (static_cast<SR_UTILS_NS::Measurement>(item_current)) {
                 case SR_UTILS_NS::Measurement::SpaceZero:
-                    m_gameObject->SetTransform(new SR_UTILS_NS::TransformZero());
+                    pGameObject->SetTransform(new SR_UTILS_NS::TransformZero());
                     return true;
                 case SR_UTILS_NS::Measurement::Space2D:
-                    m_gameObject->SetTransform(new SR_UTILS_NS::Transform2D());
+                    pGameObject->SetTransform(new SR_UTILS_NS::Transform2D());
                     return true;
                 case SR_UTILS_NS::Measurement::Space3D:
-                    m_gameObject->SetTransform(new SR_UTILS_NS::Transform3D());
+                    pGameObject->SetTransform(new SR_UTILS_NS::Transform3D());
                     return true;
                 case SR_UTILS_NS::Measurement::Space4D:
                 default:

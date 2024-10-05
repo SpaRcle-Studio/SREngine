@@ -26,7 +26,7 @@ namespace SR_PHYSICS_NS {
 
             if (!pShape) {
                 if (auto&& gameObject = pRigidbody->GetGameObject()) {
-                    SRHaltOnce("PhysXRaycast3DImpl::Cast() : " + gameObject->GetName() + " does not have a collision shape!");
+                    SRHaltOnce("PhysXRaycast3DImpl::Cast() : " + gameObject->GetName().ToStringRef() + " does not have a collision shape!");
                 }
                 else {
                     SRHaltOnce("PhysXRaycast3DImpl::Cast() : rigidbody does not have a collision shape!");

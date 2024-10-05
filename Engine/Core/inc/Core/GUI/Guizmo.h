@@ -79,7 +79,6 @@ namespace SR_CORE_GUI_NS {
         std::atomic<bool>         m_center        = false;
         std::atomic<bool>         m_active        = true;
 
-        SR_MATH_NS::FVector3      m_barycenter    = SR_MATH_NS::FVector3();
         ImGuizmo::OPERATION       m_operation     = ImGuizmo::OPERATION::TRANSLATE;
         ImGuizmo::MODE            m_mode          = ImGuizmo::MODE::LOCAL;
 

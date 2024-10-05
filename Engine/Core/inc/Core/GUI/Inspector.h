@@ -56,7 +56,7 @@ namespace SR_CORE_GUI_NS {
 
     private:
         std::list<SR_UTILS_NS::Component::Ptr> m_pointersHolder;
-        SR_UTILS_NS::GameObject::Ptr m_gameObject;
+        SR_UTILS_NS::SceneObject::Ptr m_sceneObject;
         Hierarchy* m_hierarchy = nullptr;
         SR_WORLD_NS::Scene::Ptr m_scene;
 

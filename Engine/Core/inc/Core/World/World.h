@@ -30,7 +30,7 @@ namespace SR_CORE_NS {
         ~World() override = default;
 
     public:
-        SR_UTILS_NS::GameObject::Ptr Instance(const SR_HTYPES_NS::RawMesh* rawMesh) override;
+        SR_UTILS_NS::SceneObject::Ptr Instance(const SR_HTYPES_NS::RawMesh* rawMesh) override;
 
     private:
         SR_NODISCARD RenderScenePtr GetRenderScene() const;
