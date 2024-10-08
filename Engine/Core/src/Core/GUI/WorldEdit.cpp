@@ -11,8 +11,8 @@ namespace SR_CORE_GUI_NS {
         : Super("World edit")
     { }
 
-    void WorldEdit::SetScene(const SR_WORLD_NS::Scene::Ptr& scene) {
-        m_scene.Replace(scene);
+    void WorldEdit::SetScene(const SR_WORLD_NS::Scene::Ptr& pScene) {
+        m_scene = pScene;
     }
 
     void WorldEdit::Draw() {

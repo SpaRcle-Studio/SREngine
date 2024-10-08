@@ -21,9 +21,9 @@ namespace SR_CORE_NS {
         using namespace Graphics::Types;
         using namespace Graphics;
 
-        auto&& renderScene = GetScene().Do<RenderScenePtr>([](SR_WORLD_NS::Scene* ptr) -> RenderScenePtr {
-            return ptr->GetDataStorage().GetValue<RenderScenePtr>();
-        }, RenderScenePtr());
+        //auto&& renderScene = GetScene().Do<RenderScenePtr>([](SR_WORLD_NS::Scene* ptr) -> RenderScenePtr {
+        //    return ptr->GetDataStorage().GetValue<RenderScenePtr>();
+        //}, RenderScenePtr());
 
         if (value && !m_mesh && m_position.y == 1) {
             //if (auto&& pMesh = SR_GTYPES_NS::Mesh::Load("Engine/Models/planeWireframe.obj", SR_GTYPES_NS::MeshType::Wireframe, 0)) {

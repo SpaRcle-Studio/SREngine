@@ -76,7 +76,7 @@ namespace SR_CORE_GUI_NS {
                 ImGui::TextColored(ImVec4(1, 1, 0, 1), "(Is dirty)");
             }
 
-            if (m_sceneObject->IsDontSave()) {
+            if (m_sceneObject->HasSerializationFlags(SR_UTILS_NS::ObjectSerializationFlags::DontSave)) {
                 ImGui::SameLine();
                 ImGui::TextColored(ImVec4(1, 1, 0, 1), "(Dont Save)");
             }
@@ -128,7 +128,7 @@ namespace SR_CORE_GUI_NS {
 
                 if (!m_isUsed && changed) {
                     SR_SAFE_DELETE_PTR(m_oldTransformMarshal)
-                    m_oldTransformMarshal = pOldTransform->Save(SR_UTILS_NS::SavableContext(nullptr, SR_UTILS_NS::SavableFlagBits::SAVABLE_FLAG_NONE));
+                    m_oldTransformMarshal = pOldTransform->SaveLegacy(SR_UTILS_NS::SavableContext(nullptr, SR_UTILS_NS::SavableFlagBits::SAVABLE_FLAG_NONE));
                     m_isUsed = true;
                 }
 
@@ -405,7 +405,7 @@ namespace SR_CORE_GUI_NS {
                 ImGui::TextColored(ImVec4(0, 1, 0, 1), "[Editor mode]");
             }
 
-            if (pComponent->IsDontSave()) {
+            if (pComponent->HasSerializationFlags(SR_UTILS_NS::ObjectSerializationFlags::DontSave)) {
                 ImGui::SameLine();
                 ImGui::TextColored(ImVec4(1, 1, 0, 1), "[Dont save]");
             }

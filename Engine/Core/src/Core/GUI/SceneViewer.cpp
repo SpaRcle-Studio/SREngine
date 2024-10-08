@@ -55,7 +55,7 @@ namespace SR_CORE_GUI_NS {
             }
             if (m_platform) {
                 m_platform->SetName("PREFAB_PLATFORM");
-                m_platform->SetDontSave(true);
+                m_platform->AddSerializationFlags(SR_UTILS_NS::ObjectSerializationFlags::DontSave);
                 if (!m_platform->GetChildren().empty()) {
                     if (auto&& pMesh = m_platform->GetChildren()[0]->GetComponent<SR_GTYPES_NS::Mesh3D>()) {
                         auto&& pMaterial = new SR_GRAPH_NS::UniqueMaterial();
@@ -117,7 +117,7 @@ namespace SR_CORE_GUI_NS {
     }
 
     void SceneViewer::SetScene(const SR_WORLD_NS::Scene::Ptr& scene) {
-        m_scene.Replace(scene);
+        m_scene = scene;
         Enable(m_enabled);
     }
 
@@ -246,7 +246,7 @@ namespace SR_CORE_GUI_NS {
             /// сцена может быть уже заблокирована до Engine::SetScene
             if (SR_UTILS_NS::Features::Instance().Enabled("EditorCamera", true) && m_scene.RecursiveLockIfValid()) {
                 camera = m_scene->InstanceGameObject("Editor camera"_atom);
-                camera->SetDontSave(true);
+                camera->AddSerializationFlags(SR_UTILS_NS::ObjectSerializationFlags::DontSave);
                 m_isPrefab = m_scene->IsPrefab();
                 m_scene.Unlock();
             }
@@ -449,7 +449,7 @@ namespace SR_CORE_GUI_NS {
         if (enabled) {
             if (m_scene.RecursiveLockIfValid()) {
                 gizmo = m_scene->InstanceGameObject("Editor gizmo"_atom);
-                gizmo->SetDontSave(true);
+                gizmo->AddSerializationFlags(SR_UTILS_NS::ObjectSerializationFlags::DontSave);
                 m_scene.Unlock();
             }
             else {

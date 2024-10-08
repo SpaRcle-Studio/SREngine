@@ -138,7 +138,7 @@ namespace SR_CORE_GUI_NS {
             ++prefabIndex;
         }
 
-        if (root->IsDontSave()) {
+        if (root->HasSerializationFlags(SR_UTILS_NS::ObjectSerializationFlags::DontSave)) {
             ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(220.f / 255.f, 199.f / 255.f, 0.f / 255.f, 1.f));
         }
         else if (root->GetPrefab()) {
@@ -155,7 +155,7 @@ namespace SR_CORE_GUI_NS {
 
         const bool open = ImGui::TreeNodeEx((void*)(intptr_t)id, flags, "%s", name.c_str());
 
-        if (root->GetPrefab() || root->IsDontSave()) {
+        if (root->GetPrefab() || root->HasSerializationFlags(SR_UTILS_NS::ObjectSerializationFlags::DontSave)) {
             ImGui::PopStyleColor();
         }
 
@@ -357,7 +357,7 @@ namespace SR_CORE_GUI_NS {
 
         for (auto&& ptr : m_selected) {
             if (ptr.RecursiveLockIfValid()) {
-                pMarshal = ptr->Save(SR_UTILS_NS::SavableContext(pMarshal, SR_UTILS_NS::SAVABLE_FLAG_ECS_NO_ID));
+                pMarshal = ptr->SaveLegacy(SR_UTILS_NS::SavableContext(pMarshal, SR_UTILS_NS::SAVABLE_FLAG_ECS_NO_ID));
                 ptr.Unlock();
             }
         }

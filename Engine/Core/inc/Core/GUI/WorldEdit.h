@@ -23,7 +23,7 @@ namespace SR_CORE_GUI_NS {
         void Draw() override;
 
     private:
-        SR_HTYPES_NS::SafePtr<SR_WORLD_NS::Scene> m_scene;
+        SR_HTYPES_NS::SharedPtr<SR_WORLD_NS::Scene> m_scene;
 
     };
 }

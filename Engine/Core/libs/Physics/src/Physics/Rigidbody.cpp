@@ -143,9 +143,7 @@ namespace SR_PTYPES_NS {
                 return empty;
             }
 
-            m_physicsScene = pScene->Do<PhysicsScenePtr>([](SR_WORLD_NS::Scene* ptr) {
-                return ptr->GetDataStorage().GetValue<PhysicsScenePtr>();
-            }, PhysicsScenePtr());
+            m_physicsScene = pScene->GetDataStorage().GetValue<PhysicsScenePtr>();
         }
 
         return m_physicsScene;

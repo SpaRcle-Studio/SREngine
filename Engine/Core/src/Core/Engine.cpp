@@ -274,9 +274,8 @@ namespace SR_CORE_NS {
         return true;
     }
 
-    bool Engine::SetScene(const SR_HTYPES_NS::SafePtr<SR_WORLD_NS::Scene> &scene)  {
-        SRAssert(!scene.IsLocked());
-        m_sceneQueue.Push(scene);
+    bool Engine::SetScene(const SR_HTYPES_NS::SharedPtr<SR_WORLD_NS::Scene>& pScene)  {
+        m_sceneQueue.Push(pScene);
         return true;
     }
 

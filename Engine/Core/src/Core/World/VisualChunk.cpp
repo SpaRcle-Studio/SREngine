@@ -49,9 +49,9 @@ namespace SR_CORE_NS {
     }
 
     void VisualChunk::SetFacesVisible(bool value) {
-        auto&& renderScene = GetScene().Do<RenderScenePtr>([](SR_WORLD_NS::Scene* ptr) -> RenderScenePtr {
-            return ptr->GetDataStorage().GetValue<RenderScenePtr>();
-        }, RenderScenePtr());
+        //auto&& renderScene = GetScene().Do<RenderScenePtr>([](SR_WORLD_NS::Scene* ptr) -> RenderScenePtr {
+        //    return ptr->GetDataStorage().GetValue<RenderScenePtr>();
+        //}, RenderScenePtr());
 
         if (value && !m_stayMesh) {
             //if (auto&& pMesh = SR_GTYPES_NS::Mesh::Load("Engine/Models/cubeWireframe.obj", SR_GTYPES_NS::MeshType::Wireframe, 0)) {
@@ -77,9 +77,9 @@ namespace SR_CORE_NS {
     }
 
     void VisualChunk::SetLoadVisible(bool value) {
-        auto&& renderScene = GetScene().Do<RenderScenePtr>([](SR_WORLD_NS::Scene* ptr) -> RenderScenePtr {
-            return ptr->GetDataStorage().GetValue<RenderScenePtr>();
-        }, RenderScenePtr());
+        //auto&& renderScene = GetScene().Do<RenderScenePtr>([](SR_WORLD_NS::Scene* ptr) -> RenderScenePtr {
+        //    return ptr->GetDataStorage().GetValue<RenderScenePtr>();
+        //}, RenderScenePtr());
 
         if (value && !m_loadMesh && m_position.y == 1 && m_regionPosition.y == 1) {
             //if (auto&& pMesh = SR_GTYPES_NS::Mesh::Load("Engine/Models/planeWireframe.obj", SR_GTYPES_NS::MeshType::Wireframe, 0)) {

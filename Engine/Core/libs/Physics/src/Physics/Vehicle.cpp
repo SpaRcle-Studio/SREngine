@@ -12,8 +12,8 @@ namespace SR_PTYPES_NS {
         return nullptr;
     }
 
-    SR_HTYPES_NS::Marshal::Ptr Vehicle::Save(SR_UTILS_NS::SavableContext data) const {
-        return Super::Save(data);
+    SR_HTYPES_NS::Marshal::Ptr Vehicle::SaveLegacy(SR_UTILS_NS::SavableContext data) const {
+        return Super::SaveLegacy(data);
     }
 
     SR_UTILS_NS::Measurement Vehicle::GetMeasurement() const {

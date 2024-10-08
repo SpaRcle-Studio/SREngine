@@ -154,7 +154,7 @@ namespace SR_CORE_NS::Commands {
         SR_UTILS_NS::EntityPath m_path;
         SR_UTILS_NS::EntityBranch m_reserved;
         SR_HTYPES_NS::Marshal::Ptr m_marshal = nullptr;
-        SR_HTYPES_NS::SafePtr<SR_UTILS_NS::World::Scene> m_scene;
+        SR_HTYPES_NS::SharedPtr<SR_UTILS_NS::World::Scene> m_scene;
         SR_UTILS_NS::EntityId m_parent = { };
 
     };

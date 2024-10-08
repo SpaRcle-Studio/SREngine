@@ -194,8 +194,8 @@ namespace SpaRcle {
 
         generator->RegisterNewClass(
                 "Scene", "Scene",
-                { "map", "string", "mutex", "vector", "stdint.h", "set", "unordered_set", "Libraries/GameObject.h", "Libraries/Types/SafePointer.h", "Libraries/Observer.h" },
-                { {"SafePtr<Scene>", EvoScript::Public } }
+                { "map", "string", "mutex", "vector", "stdint.h", "set", "unordered_set", "Libraries/GameObject.h", "Libraries/Types/SharedPtr.h", "Libraries/Observer.h" },
+                { {"SharedPtr<Scene>", EvoScript::Public } }
         );
 
         ESRegisterMethodArg0(EvoScript::Public, generator, Scene, GetName, std::string)
@@ -209,7 +209,7 @@ namespace SpaRcle {
         //ESRegisterMethod(EvoScript::Public, generator, Scene, Find, SharedPtr<GameObject>, ESArg1(const std::string& name), ESArg1(name))
         //ESRegisterMethod(EvoScript::Public, generator, Scene, FindOrInstance, SharedPtr<GameObject>, ESArg1(const std::string& name), ESArg1(name))
         ESRegisterMethodArg0(EvoScript::Public, generator, Scene, GetLogicBase, SafePtr<SceneLogic>)
-        ESRegisterStaticMethod(EvoScript::Public, generator, Scene, New, SafePtr<Scene>, ESArg1(const std::string& name), ESArg1(name))
+        ESRegisterStaticMethod(EvoScript::Public, generator, Scene, New, SharedPtr<Scene>, ESArg1(const std::string& name), ESArg1(name))
 
         generator->RegisterNewClass("SceneCubeChunkLogic", "Scene");
 

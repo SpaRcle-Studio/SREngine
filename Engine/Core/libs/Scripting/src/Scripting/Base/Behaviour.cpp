@@ -79,8 +79,8 @@ namespace SR_SCRIPTING_NS {
         return pBehaviour;
     }
 
-    SR_HTYPES_NS::Marshal::Ptr Behaviour::Save(SR_UTILS_NS::SavableContext data) const {
-        auto&& pMarshal = Component::Save(data);
+    SR_HTYPES_NS::Marshal::Ptr Behaviour::SaveLegacy(SR_UTILS_NS::SavableContext data) const {
+        auto&& pMarshal = Component::SaveLegacy(data);
 
         auto&& properties = m_rawBehaviour ? m_rawBehaviour->GetProperties() : Properties();
 

@@ -209,7 +209,7 @@ namespace SR_CORE_GUI_NS {
         }
 
         SR_SAFE_DELETE_PTR(m_marshal)
-        m_marshal = pGameObject->GetTransform()->Save(SR_UTILS_NS::SavableContext(nullptr, SR_UTILS_NS::SavableFlagBits::SAVABLE_FLAG_NONE));
+        m_marshal = pGameObject->GetTransform()->SaveLegacy(SR_UTILS_NS::SavableContext(nullptr, SR_UTILS_NS::SavableFlagBits::SAVABLE_FLAG_NONE));
 
         Super::BeginGizmo();
     }

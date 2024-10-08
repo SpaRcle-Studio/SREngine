@@ -130,7 +130,7 @@ namespace SR_CORE_NS {
             return;
         }
 
-        if (!pScene.LockIfValid()) {
+        if (!pScene) {
             return;
         }
 

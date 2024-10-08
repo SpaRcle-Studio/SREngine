@@ -218,7 +218,7 @@ namespace SR_CORE_GUI_NS {
         )) {
             if (!IsUse()) {
                 SR_SAFE_DELETE_PTR(m_marshal)
-                m_marshal = m_transform->Save(SR_UTILS_NS::SavableContext(nullptr, SR_UTILS_NS::SavableFlagBits::SAVABLE_FLAG_NONE));
+                m_marshal = m_transform->SaveLegacy(SR_UTILS_NS::SavableContext(nullptr, SR_UTILS_NS::SavableFlagBits::SAVABLE_FLAG_NONE));
                 m_isUse = true;
             }
         }

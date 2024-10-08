@@ -90,7 +90,7 @@ namespace SR_SCRIPTING_NS {
         SR_NODISCARD IRawBehaviour* GetRawBehaviour() const noexcept { return m_rawBehaviour; }
 
     protected:
-        SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr Save(SR_UTILS_NS::SavableContext data) const override;
+        SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr SaveLegacy(SR_UTILS_NS::SavableContext data) const override;
 
         SR_NODISCARD Component* CopyComponent() const override;
 

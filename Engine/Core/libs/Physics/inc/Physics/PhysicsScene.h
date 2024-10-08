@@ -27,7 +27,7 @@ namespace SR_PHYSICS_NS {
         using RigidbodyPtr = SR_PTYPES_NS::Rigidbody*;
         using PhysicsWorldPtr = SR_PHYSICS_NS::PhysicsWorld*;
         using LibraryPtr = SR_PHYSICS_NS::LibraryImpl*;
-        using ScenePtr = SR_HTYPES_NS::SafePtr<SR_WORLD_NS::Scene>;
+        using ScenePtr = SR_HTYPES_NS::SharedPtr<SR_WORLD_NS::Scene>;
         using Space = SR_UTILS_NS::Measurement;
     public:
         explicit PhysicsScene(const ScenePtr& scene);

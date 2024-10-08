@@ -59,7 +59,7 @@ namespace SR_CORE_NS {
         using CameraPtr = SR_GTYPES_NS::Camera*;
         using Clock = std::chrono::high_resolution_clock;
         using PhysicsScenePtr = SR_HTYPES_NS::SafePtr<SR_PHYSICS_NS::PhysicsScene>;
-        using ScenePtr = SR_HTYPES_NS::SafePtr<SR_WORLD_NS::Scene>;
+        using ScenePtr = SR_HTYPES_NS::SharedPtr<SR_WORLD_NS::Scene>;
         using RenderScenePtr = SR_HTYPES_NS::SafePtr<SR_GRAPH_NS::RenderScene>;
     public:
         explicit Engine(Application* pApplication);
