@@ -2,6 +2,9 @@ cmake_minimum_required(VERSION 3.16)
 project(SpaRcleEngine)
 
 include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/TargetArchitecture.cmake)
+include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/InstallPython.cmake)
+include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/Codegen.cmake)
+
 target_architecture(CURRENT_TARGET_ARCHITECTURE)
 message(STATUS "SpaRcle Engine: current build target architecture: ${CURRENT_TARGET_ARCHITECTURE}")
 message(STATUS "SpaRcle Engine: current build type: ${CMAKE_BUILD_TYPE}")

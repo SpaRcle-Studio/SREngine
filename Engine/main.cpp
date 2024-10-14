@@ -10,11 +10,14 @@
 
 #include <Utils/Common/CmdOptions.h>
 #include <Utils/Tests/SharedPtrAutotests.h>
+#include <Utils/TypeTraits/ClassDB.h>
 
 #include <Core/Tests/AtlasBuilderTest.h>
 #include <Core/Tests/HTMLTest.h>
 
 int main(int argc, char** argv) {
+    SR_UTILS_NS::ClassDB::Instance().ResolveInheritance();
+
     if (!SR_UTILS_NS::RunTestSharedPtr()) {
         SR_PLATFORM_NS::WriteConsoleError("Application::PreInit() : shared pointer autotests failed!\n");
         return 10;

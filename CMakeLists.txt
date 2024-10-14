@@ -12,6 +12,9 @@ endif()
 
 message(STATUS "SpaRcle Engine: cmake version is ${CMAKE_VERSION}")
 
+set(SR_CMAKE_ROOT_BUILD_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}")
+message(STATUS "SpaRcle Engine: root build directory is ${SR_CMAKE_ROOT_BUILD_DIRECTORY}")
+
 set(CMAKE_CXX_STANDARD 20)
 
 if (UNIX)

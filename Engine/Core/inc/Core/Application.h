@@ -38,9 +38,12 @@ namespace SR_CORE_NS {
         //void TryPlayStartSound()
 
     private:
+        /// @property
         SR_UTILS_NS::Path m_applicationPath;
+        /// @property
         SR_UTILS_NS::Path m_resourcesPath;
 
+        /// @property
         std::atomic<bool> m_isNeedReload = false;
 
         SR_HTYPES_NS::SharedPtr<Engine> m_engine;
