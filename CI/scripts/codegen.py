@@ -176,28 +176,56 @@ def parse_header_file(file_path):
     return class_structures
 
 
+def generate_class_meta_save(f, class_obj, tabs):
+    f.write('\t' * tabs + f'void Save(SR_UTILS_NS::ISerializer& serializer) const override {{\n')
+    tabs += 1
+
+
+    tabs -= 1
+    f.write('\t' * tabs + '}\n\n')
+    pass
+
+def generate_class_meta_load(f, class_obj, tabs):
+    f.write('\t' * tabs + f'void Load(SR_UTILS_NS::IDeserializer& deserializer) const override {{\n')
+    tabs += 1
+
+
+    tabs -= 1
+    f.write('\t' * tabs + '}\n\n')
+    pass
+
 def generate_class_meta(f, class_obj, tabs):
     f.write('\t' * tabs + f'namespace Codegen {{\n')
     tabs += 1
 
     if len(class_obj.namespaces) > 0:
-        f.write('\t' * tabs + f'using namespace {'::'.join(class_obj.namespaces)};\n\n')
+        f.write('\t' * tabs + f"using namespace {'::'.join(class_obj.namespaces)};\n\n")
 
     class_name = '::'.join(class_obj.namespaces) + '::' + class_obj.name
-    f.write('\t' * tabs + f'template<> struct SRClassMeta<{class_name}> final {{\n')
+    f.write('\t' * tabs + f'template<> struct SRClassMetaTemplate<{class_name}> final : public SR_UTILS_NS::SRClassMeta {{\n')
     tabs += 1
+
+    f.write('\t' * tabs + f'static SRClassMetaTemplate<{class_name}>& Instance() {{ \n')
+    f.write('\t' * (tabs + 1) + f'static SRClassMetaTemplate<{class_name}> instance;\n')
+    f.write('\t' * (tabs + 1) + 'return instance;\n')
+    f.write('\t' * tabs + '}\n\n')
 
     for prop in class_obj.variables:
         f.write('\t' * tabs + f'// {prop}\n')
         f.write('\t' * tabs + f'const {prop.type_name}& Get_{prop.name}({class_name}* pClass) {{ return pClass->{prop.name}; }}\n')
         f.write('\t' * tabs + f'void Set_{prop.name}({class_name}* pClass, const {prop.type_name}& value) {{ pClass->{prop.name} = value; }}\n\n')
+
+    generate_class_meta_save(f, class_obj, tabs)
+    generate_class_meta_load(f, class_obj, tabs)
+
     tabs -= 1
     f.write('\t' * tabs + '};\n\n')
 
     for inherited_class in class_obj.inherited_classes:
+        inherited_class_formated = inherited_class.split('::')[-1]
         f.write('\t' * tabs + f'// class {class_obj.name} inherits from {inherited_class}\n')
-        f.write('\t' * tabs + f'inline static bool SR_CODEGEN_REGISTER_INHERITANCE_{class_obj.name}_{inherited_class} '
-                              f'= SR_UTILS_NS::ClassDB::Instance().RegisterInheritance(\"{class_obj.name}\", \"{inherited_class}\");\n\n')
+        f.write('\t' * tabs + f'inline static bool SR_CODEGEN_REGISTER_INHERITANCE_{class_obj.name}_{inherited_class_formated} '
+                              f'= SR_UTILS_NS::ClassDB::Instance().RegisterInheritance(\"{class_obj.name}\", \"{inherited_class_formated}\");\n\n')
 
     tabs -= 1
     f.write('\t' * tabs + '}\n\n')
@@ -206,8 +234,14 @@ def generate_class_meta(f, class_obj, tabs):
 def generate_code(codegen_directory, class_structures):
     file_map = {}
     for class_obj in class_structures:
-        file_name = str(class_obj.path.split('/')[-1]) # get file name
+        file_name = class_obj.path.replace('\\', '/')
+        file_name = str(file_name.split('/')[-1]) # get file name
+
+        if os.path.exists(file_name):
+            raise Exception(f'Absolute path is not allowed: {file_name}, source: {class_obj.path}')
+
         file_name = file_name[:-2] # remove .h
+
         if file_name not in file_map:
             file_map[file_name] = []
             file_map[file_name].append(class_obj)
@@ -216,6 +250,9 @@ def generate_code(codegen_directory, class_structures):
 
     if not os.path.exists(codegen_directory):
         os.makedirs(codegen_directory)
+
+    if not os.path.exists(codegen_directory):
+        raise Exception(f'Failed to create directory: {codegen_directory}')
 
     for file_name, class_objs in file_map.items():
         full_path = os.path.normpath(f'{codegen_directory}/{file_name}.generated.hpp')
@@ -237,8 +274,11 @@ def generate_code(codegen_directory, class_structures):
                     f.write(f'namespace {namespace_str} {{\n')
 
 
-                f.write('\t' * tabs)
-                f.write(f'bool {class_obj.name}::RegisterPropertiesCodegen() {{\n')
+                f.write('\t' * tabs + f'const SR_UTILS_NS::SRClassMeta* {class_obj.name}::GetMetaStatic() noexcept {{\n')
+                f.write('\t' * (tabs + 1) + f'return &::Codegen::SRClassMetaTemplate<{class_obj.name}>::Instance();\n')
+                f.write('\t' * tabs + '}\n\n')
+
+                f.write('\t' * tabs + f'bool {class_obj.name}::RegisterPropertiesCodegen() {{\n')
                 f.write('\t' * (tabs + 1))
                 f.write(f'return true; // Register properties\n')
                 f.write(('\t' * tabs) + '}\n')
