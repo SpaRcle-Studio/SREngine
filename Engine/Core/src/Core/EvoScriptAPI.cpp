@@ -327,9 +327,9 @@ namespace SpaRcle {
             return ptr->GetParent().DynamicCast<GameObject>();
         })
 
-        ESRegisterMethod(EvoScript::Public, generator, GameObject, GetComponent, Component*, ESArg1(const std::string& name), ESArg1(name))
+        ESRegisterMethod(EvoScript::Public, generator, GameObject, GetComponent, SharedPtr<Component>, ESArg1(const std::string& name), ESArg1(name))
         ESRegisterMethod(EvoScript::Public, generator, GameObject, SetName, void, ESArg1(const std::string& name), ESArg1(name))
-        ESRegisterMethod(EvoScript::Public, generator, GameObject, GetOrCreateComponent, Component*, ESArg1(const std::string& name), ESArg1(name))
+        ESRegisterMethod(EvoScript::Public, generator, GameObject, GetOrCreateComponent, SharedPtr<Component>, ESArg1(const std::string& name), ESArg1(name))
         ESRegisterMethod(EvoScript::Public, generator, GameObject, SetTransform, void, ESArg1(Transform* pTransform), ESArg1(pTransform))
         ESRegisterMethodArg0(EvoScript::Public, generator, GameObject, GetName, std::string)
         ESRegisterCustomMethodArg0(EvoScript::Public, generator, GameObject, GetTag, std::string, {

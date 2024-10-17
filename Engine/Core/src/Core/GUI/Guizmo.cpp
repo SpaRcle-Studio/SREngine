@@ -29,7 +29,7 @@ namespace SR_CORE_GUI_NS {
             ImGuizmo::SetOrthographic(false);
             ImGuizmo::SetDrawlist();
 
-            SetRect(pCamera);
+            SetRect(pCamera.Get());
 
             float* view = &pCamera->GetImGuizmoView()[0][0];
             ImGuizmo::ViewManipulate(
@@ -44,7 +44,7 @@ namespace SR_CORE_GUI_NS {
             if (m_active && gameObject.RecursiveLockIfValid()) {
                 m_transform = gameObject->GetTransform();
 
-                DrawManipulation(pCamera);
+                DrawManipulation(pCamera.Get());
 
                 gameObject.Unlock();
             }

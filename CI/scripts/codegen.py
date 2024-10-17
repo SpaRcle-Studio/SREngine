@@ -29,6 +29,17 @@ class Method:
     def __str__(self):
         return f'Method: {self.name}, Return type: {self.return_type}, Parameters: {self.parameters}'
 
+class CodeStructure:
+    def __init__(self):
+        self.classes = []
+        self.enums = []
+
+class Enum:
+    def __init__(self, name):
+        self.name = name
+        self.variant = ''
+        self.count = 0
+
 class Class:
     def __init__(self, name, namespaces):
         self.name = name
@@ -92,21 +103,75 @@ def has_static_function(class_node, function_name):
                 return True
     return False
 
-def parse_tree(deep, parent_node, class_structures, namespaces):
+def is_class_inherited_from(class_node, class_name):
+    """Проверяет, наследуется ли класс от другого класса."""
+    for node in class_node.get_children():
+        # Проверяем, является ли узел базовым классом
+        if node.kind == clang.cindex.CursorKind.CXX_BASE_SPECIFIER:
+            # Проверяем, является ли имя базового класса искомым
+            if node.spelling == class_name:
+                return True
+    return False
+
+
+def parse_tree(deep, parent_node, code_structure, namespaces):
     try:
+        if parent_node.kind == clang.cindex.CursorKind.FUNCTION_DECL and parent_node.is_definition():
+            if parent_node.spelling.startswith('sr_detail_reflector_'):
+                all_found = 0
+                name = ''
+                variant = ''
+                count = 0
+
+                for function_part in parent_node.get_children():
+                    if function_part.kind == clang.cindex.CursorKind.COMPOUND_STMT:
+                        for function_body in function_part.get_children():
+                            if function_body.kind ==  clang.cindex.CursorKind.DECL_STMT:
+                                for child in function_body.get_children():
+                                    variable_name = child.spelling
+                                    if variable_name == 'CODEGEN_ENUM_VARIANT':
+                                        for child2 in child.get_children():
+                                            if child2.kind == clang.cindex.CursorKind.DECL_REF_EXPR:
+                                                variant = child2.spelling
+                                                all_found += 1
+                                        break
+                                    if variable_name == 'CODEGEN_ENUM_COUNT':
+                                        for child2 in child.get_children():
+                                            print(child2.kind, child2.spelling)
+                                            if child2.kind == clang.cindex.CursorKind.DECL_REF_EXPR:
+                                                count = int(child2.spelling)
+                                                all_found += 1
+                                                break
+                                        break
+                                    if variable_name == 'CODEGEN_ENUM_NAME':
+                                        # extract const char* value
+                                        for child2 in child.get_children():
+                                            if child2.kind == clang.cindex.CursorKind.DECL_REF_EXPR:
+                                                name = child2.spelling
+                                                all_found += 1
+                                                break
+                                        break
+
+                    print(f'Found enum: {name} Variant: {variant} Count: {count}')
+                    if all_found == 3:
+                        break
+
+            return
+
         if parent_node.kind == clang.cindex.CursorKind.CLASS_DECL and parent_node.is_definition():
-            if not has_static_function(parent_node, 'SR_CLANG_CODEGEN_MARKER'):
+            if not has_static_function(parent_node, 'GetMetaStatic'):
                 return
+
             # Нашли класс
             class_name = parent_node.spelling
             class_obj = Class(class_name, namespaces)
             class_obj.path = parent_node.location.file.name
+
+            # Перебираем все поля класса
             for child in parent_node.get_children():
                 if child.kind == clang.cindex.CursorKind.CXX_BASE_SPECIFIER:
                     class_obj.inherited_classes.append(child.spelling)
 
-            # Перебираем все поля класса
-            for child in parent_node.get_children():
                 if child.kind == clang.cindex.CursorKind.FIELD_DECL and is_property_comment(child):
                     variable_name = child.spelling
                     #class_obj.add_variable(variable_name)
@@ -127,18 +192,19 @@ def parse_tree(deep, parent_node, class_structures, namespaces):
 
                     class_obj.add_method(method_obj)
 
-            class_structures.append(class_obj)
+            code_structure.classes.append(class_obj)
 
+        new_namespace = namespaces
         # Проверяем, является ли текущий узел пространством имен
-        elif parent_node.kind == clang.cindex.CursorKind.NAMESPACE:
+        if parent_node.kind == clang.cindex.CursorKind.NAMESPACE:
             new_namespace = namespaces + [parent_node.spelling]
-            # Рекурсивно проходим по вложенным элементам
-            for child in parent_node.get_children():
-                parse_tree(deep + 1, child, class_structures, new_namespace)
-        else:
-            # Рекурсивный обход других узлов
-            for child in parent_node.get_children():
-                parse_tree(deep + 1, child, class_structures, namespaces)
+
+        # Рекурсивный обход других узлов
+        for child in parent_node.get_children():
+            parse_tree(deep + 1, child, code_structure, new_namespace)
+
+
+
     except Exception as e:
         print(f'Error: {e}')
 
@@ -147,7 +213,7 @@ def get_repo_path():
     return normalize_path('../')
 
 def parse_header_file(file_path):
-    class_structures = []
+    code_structure = CodeStructure()
 
     includes = [f'{get_repo_path()}/Engine/Core/inc',
                 f'{get_repo_path()}/Engine/Core/libs/Utils/inc',
@@ -171,30 +237,100 @@ def parse_header_file(file_path):
 
     # Проходим по узлам файла
     for node in translation_unit.cursor.get_children():
-        parse_tree(0, node, class_structures, [])
+        parse_tree(0, node, code_structure, [])
 
-    return class_structures
+    return code_structure
+
+
+def generate_class_meta_get_base_metas(f, class_structures, class_obj, tabs):
+    if len(class_obj.inherited_classes) == 0:
+        return
+
+    f.write('\t' * tabs + f'SR_NODISCARD virtual std::span<const SRClassMeta*> GetBaseMetas() const noexcept override {{\n')
+
+    correct_inherited_classes = []
+    for inherited_class in class_obj.inherited_classes:
+        inherited_class_obj = None
+        inherited_class_formated = inherited_class.split('::')[-1]
+        for class_structure in class_structures:
+            if class_structure.name == inherited_class_formated:
+                inherited_class_obj = class_structure
+                break
+
+        if inherited_class_obj:
+            correct_inherited_classes.append(inherited_class_obj)
+
+    f.write('\t' * (tabs + 1) + f'static std::array<const SRClassMeta*, {len(correct_inherited_classes)}> baseMetas {{ \n')
+
+    for inherited_class_obj in correct_inherited_classes:
+        inherited_class_formated = '::'.join(inherited_class_obj.namespaces) + '::' + inherited_class_obj.name
+        f.write('\t' * (tabs + 2) + f'{inherited_class_formated}::GetMetaStatic(),\n')
+
+    f.write('\t' * (tabs + 1) + '};\n')
+    f.write('\t' * (tabs + 1) + 'return baseMetas;\n')
+    f.write('\t' * tabs + '}\n\n')
 
 
 def generate_class_meta_save(f, class_obj, tabs):
-    f.write('\t' * tabs + f'void Save(SR_UTILS_NS::ISerializer& serializer) const override {{\n')
+    if len(class_obj.variables) == 0:
+        return
+
+    f.write('\t' * tabs + f'void Save(SR_UTILS_NS::ISerializer& serializer, const SR_UTILS_NS::Serializable& obj) const override {{\n')
     tabs += 1
 
+    class_name = '::'.join(class_obj.namespaces) + '::' + class_obj.name
+
+    f.write('\t' * tabs + f'SR_UTILS_NS::SRClassMeta::Save(serializer, obj);\n\n')
+    f.write('\t' * tabs + f'auto&& value = static_cast<const {class_name}&>(obj);\n\n')
+
+    for prop in class_obj.variables:
+        f.write('\t' * tabs + f'if ((serializer.IsWriteDefaults() || !SR_UTILS_NS::IsDefault(value.{prop.name}))) {{\n')
+        f.write('\t' * (tabs + 1) + f'static constexpr SR_UTILS_NS::SerializationId keyName_{prop.name} = SR_UTILS_NS::SerializationId::Create("{prop.name}");\n')
+        f.write('\t' * (tabs + 1) + f'SR_UTILS_NS::Serialization::Save(serializer, value.{prop.name}, keyName_{prop.name});\n')
+        f.write('\t' * tabs + f'}}\n')
 
     tabs -= 1
     f.write('\t' * tabs + '}\n\n')
     pass
 
 def generate_class_meta_load(f, class_obj, tabs):
-    f.write('\t' * tabs + f'void Load(SR_UTILS_NS::IDeserializer& deserializer) const override {{\n')
+    if len(class_obj.variables) == 0:
+        return
+
+    f.write('\t' * tabs + f'void Load(SR_UTILS_NS::IDeserializer& deserializer, SR_UTILS_NS::Serializable& obj) const override {{\n')
     tabs += 1
 
+    class_name = '::'.join(class_obj.namespaces) + '::' + class_obj.name
+
+    f.write('\t' * tabs + f'SR_UTILS_NS::SRClassMeta::Load(deserializer, obj);\n\n')
+    f.write('\t' * tabs + f'auto&& value = static_cast<{class_name}&>(obj);\n\n')
+
+    for prop in class_obj.variables:
+        f.write('\t' * tabs + f'{{\n')
+        f.write('\t' * (tabs + 1) + f'static constexpr SR_UTILS_NS::SerializationId keyName_{prop.name} = SR_UTILS_NS::SerializationId::Create("{prop.name}");\n')
+        f.write('\t' * (tabs + 1) + f'SR_UTILS_NS::Serialization::Load(deserializer, value.{prop.name}, keyName_{prop.name});\n')
+        f.write('\t' * tabs + f'}}\n')
 
     tabs -= 1
     f.write('\t' * tabs + '}\n\n')
     pass
 
-def generate_class_meta(f, class_obj, tabs):
+def generate_class_meta(f, class_structures, class_obj, tabs):
+    if len(class_obj.inherited_classes) > 0:
+        f.write('\t' * tabs + f'/// Include inherited classes.\n')
+        for inherited_class in class_obj.inherited_classes:
+            inherited_class_obj = None
+            inherited_class_formated = inherited_class.split('::')[-1]
+            for class_structure in class_structures:
+                if class_structure.name == inherited_class_formated:
+                    inherited_class_obj = class_structure
+                    break
+
+            if inherited_class_obj:
+                f.write('\t' * tabs + f'#include "{os.path.abspath(os.path.normpath(inherited_class_obj.path))}"\n')
+
+        f.write('\n')
+
     f.write('\t' * tabs + f'namespace Codegen {{\n')
     tabs += 1
 
@@ -215,25 +351,34 @@ def generate_class_meta(f, class_obj, tabs):
         f.write('\t' * tabs + f'const {prop.type_name}& Get_{prop.name}({class_name}* pClass) {{ return pClass->{prop.name}; }}\n')
         f.write('\t' * tabs + f'void Set_{prop.name}({class_name}* pClass, const {prop.type_name}& value) {{ pClass->{prop.name} = value; }}\n\n')
 
+    generate_class_meta_get_base_metas(f, class_structures, class_obj, tabs)
+
     generate_class_meta_save(f, class_obj, tabs)
     generate_class_meta_load(f, class_obj, tabs)
+
+    f.write('\t' * tabs + f'SR_NODISCARD virtual std::string_view GetFactoryName() const noexcept override {{\n')
+    f.write('\t' * (tabs + 1) + f'return {class_name}::GetClassStaticName();\n')
+    f.write('\t' * tabs + '}\n\n')
 
     tabs -= 1
     f.write('\t' * tabs + '};\n\n')
 
-    for inherited_class in class_obj.inherited_classes:
-        inherited_class_formated = inherited_class.split('::')[-1]
-        f.write('\t' * tabs + f'// class {class_obj.name} inherits from {inherited_class}\n')
-        f.write('\t' * tabs + f'inline static bool SR_CODEGEN_REGISTER_INHERITANCE_{class_obj.name}_{inherited_class_formated} '
-                              f'= SR_UTILS_NS::ClassDB::Instance().RegisterInheritance(\"{class_obj.name}\", \"{inherited_class_formated}\");\n\n')
+    #for inherited_class in class_obj.inherited_classes:
+    #    inherited_class_formated = inherited_class.split('::')[-1]
+    #    f.write('\t' * tabs + f'// class {class_obj.name} inherits from {inherited_class}\n')
+    #    f.write('\t' * tabs + f'inline static bool SR_CODEGEN_REGISTER_INHERITANCE_{class_obj.name}_{inherited_class_formated} '
+    #                          f'= SR_UTILS_NS::ClassDB::Instance().RegisterInheritance(\"{class_obj.name}\", \"{inherited_class_formated}\");\n\n')
 
     tabs -= 1
     f.write('\t' * tabs + '}\n\n')
     pass
 
-def generate_code(codegen_directory, class_structures):
+def generate_classes_code(codegen_directory, class_structures):
     file_map = {}
     for class_obj in class_structures:
+        if not class_obj.path:
+            raise Exception(f'Path is not set for class: {class_obj.name}')
+
         file_name = class_obj.path.replace('\\', '/')
         file_name = str(file_name.split('/')[-1]) # get file name
 
@@ -262,11 +407,13 @@ def generate_code(codegen_directory, class_structures):
             f.write(f'#define SR_CODEGEN_{file_name.upper()}_HPP\n\n')
             for class_obj in class_objs:
                 f.write(f'#include "{os.path.abspath(os.path.normpath(class_obj.path))}"\n\n')
-                f.write(f'#include <Utils/TypeTraits/ClassDB.h>\n\n')
+                f.write(f'#include <Utils/TypeTraits/ClassDB.h>\n')
+                f.write(f'#include <Utils/TypeTraits/SRClass.h>\n')
+                f.write(f'#include <Utils/TypeTraits/SRClassMeta.h>\n\n')
 
                 tabs = 0
 
-                generate_class_meta(f, class_obj, tabs)
+                generate_class_meta(f, class_structures, class_obj, tabs)
 
                 if len(class_obj.namespaces) > 0:
                     tabs = 1
@@ -276,6 +423,12 @@ def generate_code(codegen_directory, class_structures):
 
                 f.write('\t' * tabs + f'const SR_UTILS_NS::SRClassMeta* {class_obj.name}::GetMetaStatic() noexcept {{\n')
                 f.write('\t' * (tabs + 1) + f'return &::Codegen::SRClassMetaTemplate<{class_obj.name}>::Instance();\n')
+                f.write('\t' * tabs + '}\n\n')
+
+                factory_name = class_obj.name.split('::')[-1]
+                #factory_name = factory_name[0].lower() + factory_name[1:]
+                f.write('\t' * tabs + f'SR_UTILS_NS::StringAtom {class_obj.name}::GetClassStaticName() noexcept {{\n')
+                f.write('\t' * (tabs + 1) + f'return \"{factory_name}\";\n')
                 f.write('\t' * tabs + '}\n\n')
 
                 f.write('\t' * tabs + f'bool {class_obj.name}::RegisterPropertiesCodegen() {{\n')
@@ -354,10 +507,10 @@ def main() -> bool:
 
     print(f'Parsing header file: {cached_file}\n')
 
-    class_structures = parse_header_file(cached_file)
-    if class_structures:
+    code_structures: CodeStructure = parse_header_file(cached_file)
+    if code_structures.classes:
         print(f'File: {cached_file}\n')
-        for class_obj in class_structures:
+        for class_obj in code_structures.classes:
             print(class_obj.to_string(0))
 
     codegen_directory = sys.argv[1:][0]
@@ -375,9 +528,10 @@ def main() -> bool:
 
     print('Generate new files...')
 
-    print('Count of classes:', len(class_structures))
+    print('Count of classes:', len(code_structures.classes))
+    print('Count of enums:', len(code_structures.enums))
 
-    generate_code(codegen_directory, class_structures)
+    generate_classes_code(codegen_directory, code_structures.classes)
 
     return True
 

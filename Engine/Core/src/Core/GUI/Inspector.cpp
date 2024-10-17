@@ -216,8 +216,8 @@ namespace SR_CORE_GUI_NS {
 
         uint32_t index = 0;
 
-        pIComponentable->ForEachComponent([&](SR_UTILS_NS::Component* pComponent) -> bool {
-            DrawComponent(pComponent, index);
+        pIComponentable->ForEachComponent([&](SR_UTILS_NS::Component::Ptr& pComponent) -> bool {
+            DrawComponent(pComponent.Get(), index);
             return true;
         });
     }

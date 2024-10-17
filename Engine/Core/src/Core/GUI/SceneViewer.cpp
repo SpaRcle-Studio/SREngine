@@ -82,7 +82,7 @@ namespace SR_CORE_GUI_NS {
 
             ImGui::Separator();
 
-            if (auto&& pFrameBuffer = GetContext()->FindFramebuffer("SceneViewFBO"_atom, pCamera)) {
+            if (auto&& pFrameBuffer = GetContext()->FindFramebuffer("SceneViewFBO"_atom, pCamera.Get())) {
                 m_id = pFrameBuffer->GetColorTexture(0);
             }
 
