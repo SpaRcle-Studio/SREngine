@@ -1,15 +1,15 @@
-ShaderType Spatial;
+ShaderType Simple;
 
-PolygonMode Fill;
+PolygonMode Line;
 CullMode Back;
 DepthCompare LessOrEqual;
-PrimitiveTopology TriangleList;
+PrimitiveTopology LineList;
 BlendEnabled false;
 DepthWrite true;
 DepthTest true;
 
 void fragment() {
-	COLOR = vec4(PC_COLOR_BUFFER_VALUE, 1.0);
+	COLOR = RGBA_VALUE;
 }
 
 void vertex() {

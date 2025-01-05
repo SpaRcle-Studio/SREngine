@@ -23,6 +23,7 @@
 
 #include <Utils/Common/Features.h>
 #include <Utils/ECS/Prefab.h>
+#include <Utils/ECS/ComponentManager.h>
 #include <Utils/Platform/Platform.h>
 #include <Utils/Profile/TracyContext.h>
 #include <Utils/World/SceneUpdater.h>
@@ -620,6 +621,23 @@ namespace SR_CORE_GUI_NS {
                 }
                 else {
                     SR_WARN("GUISystem::BeginMenuBar() : scene is not valid!");
+                }
+            }
+
+            ImGui::Separator();
+
+            if (ImGui::MenuItem("Instantiate Cube")) {
+                if (auto&& pScene = m_engine->GetScene()) {
+                    auto&& pGameObject = pScene->InstanceGameObject("Cube"_atom);
+                    if (auto&& pRigidbody = pGameObject->AddComponent<SR_PHYSICS_NS::Types::Rigidbody3D>()) {
+                        pRigidbody->SetMass(1.0f);
+                        pRigidbody->SetType(SR_PHYSICS_NS::ShapeType::Box3D);
+                    }
+
+                    auto&& meshes = SR_GTYPES_NS::Mesh::Load("Engine/Models/cube.obj", SR_GRAPH_NS::MeshType::Static);
+                    for (auto&& pMesh : meshes) {
+                        pGameObject->AddComponent(pMesh);
+                    }
                 }
             }
 

@@ -117,7 +117,6 @@ namespace SR_CORE_NS::Commands {
 
     //! ----------------------------------------------------------------------------------------------------------------
 
-    /// TODO: подумать над удалением нескольких объектов за раз
     class GameObjectDelete : public IEngineReversibleCommand {
     public:
         GameObjectDelete(const EnginePtr& pEngine, const SR_UTILS_NS::SceneObject::Ptr& ptr);
@@ -132,7 +131,7 @@ namespace SR_CORE_NS::Commands {
         SR_UTILS_NS::EntityPath m_path;
         SR_UTILS_NS::EntityBranch m_reserved;
         SR_HTYPES_NS::Marshal::Ptr m_backup = nullptr;
-        SR_HTYPES_NS::SafePtr<SR_UTILS_NS::World::Scene> m_scene;
+        SR_HTYPES_NS::SharedPtr<SR_UTILS_NS::World::Scene> m_scene;
         SR_UTILS_NS::EntityId m_parent = { };
 
     };

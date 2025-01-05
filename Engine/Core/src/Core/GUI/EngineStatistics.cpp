@@ -5,6 +5,7 @@
 #include <Core/GUI/EngineStatistics.h>
 
 #include <Utils/Resources/ResourceManager.h>
+#include <Utils/DebugDraw.h>
 
 #include <Graphics/Types/Framebuffer.h>
 #include <Graphics/Types/Skybox.h>
@@ -14,6 +15,7 @@
 #include <Graphics/Pass/MeshDrawerPass.h>
 #include <Graphics/Render/RenderTechnique.h>
 #include <Graphics/Render/DebugRenderer.h>
+#include <Graphics/Render/RenderScene.h>
 #include <Graphics/Pipeline/Vulkan/VulkanPipeline.h>
 #include <Graphics/Pipeline/Vulkan/VulkanKernel.h>
 #include <Graphics/Pipeline/Vulkan/VulkanMemory.h>
@@ -401,7 +403,7 @@ namespace SR_CORE_GUI_NS {
                     ImGui::Text("\t\t\t* VBO: %i", vbo);
                 }
 
-                if (auto&& pMeshComponent = dynamic_cast<SR_GTYPES_NS::IMeshComponent*>(meshInfo.pMesh); pMeshComponent && pMeshComponent->GetGameObject()) {
+                if (auto&& pMeshComponent = dynamic_cast<SR_GTYPES_NS::Mesh*>(meshInfo.pMesh); pMeshComponent && pMeshComponent->GetGameObject()) {
                     ImGui::Text("\t\t\t\t* GameObject: %s", pMeshComponent->GetGameObject()->GetName().c_str());
                 }
                 else {
@@ -452,6 +454,28 @@ namespace SR_CORE_GUI_NS {
 
         auto&& pRenderStrategy = pRenderScene->GetRenderStrategy();
         auto&& pPipeline = pRenderScene->GetPipeline();
+
+        ImGui::Text("Cameras:");
+        auto&& pMainCamera = pRenderScene->GetMainCamera();
+        for (auto&& cameraInfo : pRenderScene->GetCameras()) {
+            if (!cameraInfo.pCamera) {
+                ImGui::Text("* Invalid camera");
+                continue;
+            }
+
+            if (cameraInfo.pCamera == pMainCamera) {
+                ImGui::Text("* Main camera: %s", cameraInfo.pCamera->GetRenderTechniquePath().c_str());
+            }
+            else {
+                ImGui::Text("* Offscreen camera: %s", cameraInfo.pCamera->GetRenderTechniquePath().c_str());
+            }
+
+            if (ImGui::Button(SR_FORMAT_C("Raycast test##{}", cameraInfo.pCamera.GetVoid()))) {
+                SR_UTILS_NS::DebugDraw::Instance().DrawLine(SR_ID_INVALID, cameraInfo.pCamera->GetPosition(), SR_MATH_NS::FVector3::Zero(), SR_MATH_NS::FColor::Red(), 5.0f);
+            }
+        }
+
+        ImGui::Separator();
 
         SR_GRAPH_GUI_NS::Text(SR_FORMAT_C("Pipeline use count: {}", pPipeline->GetPtrData()->strongCount));
 

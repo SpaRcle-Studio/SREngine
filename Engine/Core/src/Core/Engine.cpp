@@ -50,7 +50,7 @@ namespace SR_CORE_NS {
     bool Engine::Create() {
         SR_INFO("Engine::Create() : registering all resources...");
 
-        static SR_UTILS_NS::Subscription s;
+        /*static SR_UTILS_NS::Subscription s;
 
         s = SR_UTILS_NS::Input::Instance().Subscribe(SR_UTILS_NS::StringAtom("Down"), [this](const SR_UTILS_NS::SubscriptionMessage& msg) {
             if (msg.GetInt("KeyCode") == static_cast<uint64_t>(SR_UTILS_NS::KeyCode::L)) {
@@ -105,7 +105,7 @@ namespace SR_CORE_NS {
 
                 s.Reset();
             }
-        });
+        });*/
 
         if (!Resources::RegisterResources(GetThis())) {
             SR_ERROR("Engine::Create() : failed to register engine resources!");

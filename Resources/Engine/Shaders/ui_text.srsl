@@ -12,8 +12,8 @@ DepthTest true;
 [[uniform], [public]] vec3 color;
 
 void fragment() {
-    if (COLOR_BUFFER_MODE == 1) {
-        COLOR = vec4(COLOR_BUFFER_VALUE, 1.0);
+    if (PC_COLOR_BUFFER_MODE == 1) {
+        COLOR = vec4(PC_COLOR_BUFFER_VALUE, 1.0);
     }
     else {
         COLOR = texture(TEXT_ATLAS_TEXTURE, uv);

@@ -17,6 +17,7 @@
        <Gizmo Value="true"/>
        <Tracy Value="false"/>
        <FileWatching Value="true"/>
+       <VulkanValidationErrorAsAssert Value="true"/>
 
        <ChunkSystem Value="true"/>
 

@@ -614,6 +614,16 @@ def generate_classes_code(codegen_dir, class_structures):
                 f.write('\t' * (tabs + 1) + f'return \"{factory_name}\";\n')
                 f.write('\t' * tabs + '}\n\n')
 
+                f.write('\t' * tabs + f'SR_UTILS_NS::SRClass* {class_obj.name}::AllocateStatic() noexcept {{\n')
+                f.write('\t' * (tabs + 1) + f'if constexpr (std::is_abstract_v<{class_obj.name}>) {{\n')
+                f.write('\t' * (tabs + 2) + f'SRHalt("Cannot allocate abstract class \\\"{class_obj.name}\\\"!");\n')
+                f.write('\t' * (tabs + 2) + f'return nullptr;\n')
+                f.write('\t' * (tabs + 1) + f'}}\n')
+                f.write('\t' * (tabs + 1) + f'else {{\n')
+                f.write('\t' * (tabs + 2) + f'return static_cast<SR_UTILS_NS::SRClass*>(SRNew<{class_obj.name}>());\n')
+                f.write('\t' * (tabs + 1) + f'}}\n')
+                f.write('\t' * tabs + '}\n\n')
+
                 f.write('\t' * tabs + f'bool {class_obj.name}::RegisterPropertiesCodegen() {{\n')
                 f.write('\t' * (tabs + 1))
                 f.write(f'return true; // Register properties\n')
