@@ -12,7 +12,7 @@ namespace SR_CORE_GUI_NS {
         std::string preview;
 
         if (auto&& pGameObject = entityRef.GetGameObject()) {
-            preview = "[GMJ] " + pGameObject->GetName();
+            preview = "[GMJ] " + pGameObject->GetName().ToStringRef();
         }
         else if (auto&& pComponent = entityRef.GetComponent()) {
             preview = "[CMP] " + pComponent->GetComponentName().ToStringRef();
