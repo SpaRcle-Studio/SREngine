@@ -34,7 +34,7 @@ jobs:
 
           mkdir build
           cd build
-          cmake .. -DCMAKE_CXX_FLAGS="-Wno-error"
+          cmake .. -DCMAKE_CXX_FLAGS="-Wno-maybe-uninitialized -Wno-error"
           make
           sudo make install
 
