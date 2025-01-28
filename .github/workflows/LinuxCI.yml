@@ -16,55 +16,12 @@ on:
 jobs:  
   Build:
     name: Build.
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: Fetching repository.
         uses: actions/checkout@v4.1.6
         with:
           fetch-depth: 1
-      
-      - name: Download yaml-cpp 0.7.0 source and install
-        run: |
-          sudo apt update
-          sudo apt install -y build-essential cmake wget unzip
-          
-          wget https://github.com/jbeder/yaml-cpp/archive/refs/tags/yaml-cpp-0.7.0.zip
-          unzip yaml-cpp-0.7.0.zip
-          cd yaml-cpp-yaml-cpp-0.7.0
-
-          mkdir build
-          cd build
-          cmake .. -DCMAKE_CXX_FLAGS="-Wno-maybe-uninitialized -Wno-error"
-          make
-          sudo make install
-
-          cd ../..
-
-          sudo ldconfig
-
-          # Пытаемся найти библиотеку libyaml-cpp0.7.so
-          echo "Ищем библиотеку libyaml-cpp0.7..."
-          LIB_PATH=$(find /usr /lib /usr/local /opt -name "libyaml-cpp0.7.so*" 2>/dev/null)
-          
-          if [[ -z "$LIB_PATH" ]]; then
-            echo "Ошибка: библиотека libyaml-cpp0.7 не найдена в стандартных путях."
-            exit 1
-          else
-            echo "Библиотека libyaml-cpp0.7 найдена по пути: $LIB_PATH"
-          fi
-          
-          # Проверяем наличие символической ссылки для нужной версии библиотеки
-          if [[ ! -f "/usr/local/lib/libyaml-cpp0.7.so" ]]; then
-            echo "Создание символической ссылки для libyaml-cpp0.7..."
-            sudo ln -s $(echo $LIB_PATH | head -n 1) /usr/local/lib/libyaml-cpp0.7.so
-          fi
-          
-          # Обновляем кэш после создания символической ссылки
-          sudo ldconfig
-          
-          # Проверяем доступность библиотеки через ldconfig
-          echo "Проверка доступных библиотек с использованием ldconfig:"
-          ldconfig -p | grep yaml-cpp
 
       - name: Installing dependencies.
         run: |
