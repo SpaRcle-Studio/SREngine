@@ -25,7 +25,10 @@ jobs:
       
       - name: Download yaml-cpp 0.7.0 source and install
         run: |
-          wget https://github.com/jbeder/yaml-cpp/releases/download/yaml-cpp-0.7.0/yaml-cpp-0.7.0.zip
+          sudo apt update
+          sudo apt install -y build-essential cmake wget unzip
+          
+          wget https://github.com/jbeder/yaml-cpp/archive/refs/tags/yaml-cpp-0.7.0.zip
           unzip yaml-cpp-0.7.0.zip
           cd yaml-cpp-0.7.0
 
