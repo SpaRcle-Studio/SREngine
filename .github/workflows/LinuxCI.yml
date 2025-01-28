@@ -42,23 +42,29 @@ jobs:
 
           sudo ldconfig
 
-          # Проверяем, что библиотека установлена и доступна
-          LIB_PATH=$(find /usr/local/lib -name "libyaml-cpp.so*")
+          # Пытаемся найти библиотеку libyaml-cpp0.7.so
+          echo "Ищем библиотеку libyaml-cpp0.7..."
+          LIB_PATH=$(find /usr /lib /usr/local /opt -name "libyaml-cpp0.7.so*" 2>/dev/null)
+          
           if [[ -z "$LIB_PATH" ]]; then
-            echo "Ошибка: библиотека libyaml-cpp не найдена в /usr/local/lib."
+            echo "Ошибка: библиотека libyaml-cpp0.7 не найдена в стандартных путях."
             exit 1
           else
-            echo "Библиотека libyaml-cpp найдена по пути: $LIB_PATH"
+            echo "Библиотека libyaml-cpp0.7 найдена по пути: $LIB_PATH"
           fi
           
-          # Убедитесь, что библиотека доступна в системных путях
+          # Проверяем наличие символической ссылки для нужной версии библиотеки
+          if [[ ! -f "/usr/local/lib/libyaml-cpp0.7.so" ]]; then
+            echo "Создание символической ссылки для libyaml-cpp0.7..."
+            sudo ln -s $(echo $LIB_PATH | head -n 1) /usr/local/lib/libyaml-cpp0.7.so
+          fi
+          
+          # Обновляем кэш после создания символической ссылки
+          sudo ldconfig
+          
+          # Проверяем доступность библиотеки через ldconfig
           echo "Проверка доступных библиотек с использованием ldconfig:"
           ldconfig -p | grep yaml-cpp
-          
-          # Проверьте, что библиотека доступна через pkg-config
-          PKG_CONFIG_PATH="/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH"
-          export PKG_CONFIG_PATH
-          pkg-config --libs --cflags yaml-cpp
 
       - name: Installing dependencies.
         run: |
