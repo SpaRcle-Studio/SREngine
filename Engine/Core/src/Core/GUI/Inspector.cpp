@@ -435,6 +435,7 @@ namespace SR_CORE_GUI_NS {
                     context.pEditor = dynamic_cast<EditorGUI*>(GetManager());
                     context.pOwner = pComponent->GetRawPtr();
                     DrawProperty(context);
+                    ImGui::Separator();
                 }
             }
 

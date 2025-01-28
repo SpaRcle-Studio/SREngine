@@ -87,9 +87,13 @@ class Property:
         self.change_callback = None
         self.setter = None
         self.getter = None
+        self.reset_value = None
+        self.drag_value = None
+        self.editor_width = None
         self.read_only = False
         self.hidden = False
         self.private = False
+        self.dontLoad = False
 
     def __str__(self):
         return f'Property: {self.name}, Type: {self.type_name}, Default value: {self.default_value}'
@@ -171,16 +175,31 @@ def has_special_tag_comment(node, tag):
 
 def extract_special_tag_comment_data(node, tag):
     """ /// @someTage(data, data, data), get data between ( and ) """
+    """ /// @resetValue(someFunc()), get someFunc() """
     raw_comment = node.raw_comment
     start = raw_comment.find(f"@{tag}")
     if start == -1:
         return None
+
     start = raw_comment.find('(', start)
     if start == -1:
         return None
-    end = raw_comment.find(')', start)
+
+    deep = 0
+    end = -1
+
+    for i in range(start, len(raw_comment)):
+        if raw_comment[i] == '(':
+            deep += 1
+        if raw_comment[i] == ')':
+            deep -= 1
+            if deep == 0:
+                end = i
+                break
+
     if end == -1:
         return None
+
     return raw_comment[start + 1:end]
 
 def is_method_comment(node):
@@ -419,22 +438,23 @@ def parse_tree(deep, parent_node, code_structure, namespaces):
                     property_obj = Property(variable_name, variable_type)
                     print(f'Found property: {property_obj.name}, Type: {property_obj.type_name}')
 
-                    if callback := extract_special_tag_comment_data(child, 'changeCallback'):
-                        property_obj.change_callback = callback
+                    property_obj.change_callback = extract_special_tag_comment_data(child, 'changeCallback')
+                    property_obj.setter = extract_special_tag_comment_data(child, 'setter')
+                    property_obj.getter = extract_special_tag_comment_data(child, 'getter')
+                    property_obj.reset_value = extract_special_tag_comment_data(child, 'resetValue')
+                    property_obj.drag_value = extract_special_tag_comment_data(child, 'drag')
+                    property_obj.editor_width = extract_special_tag_comment_data(child, 'editorWidth')
+                    property_obj.inspector = extract_special_tag_comment_data(child, 'inspector')
 
                     property_obj.hidden = has_special_tag_comment(child, 'hidden')
                     property_obj.read_only = has_special_tag_comment(child, 'readOnly')
                     property_obj.private = has_special_tag_comment(child, 'private')
-
-                    if setter := extract_special_tag_comment_data(child, 'setter'):
-                        property_obj.setter = setter
-
-                    if getter := extract_special_tag_comment_data(child, 'getter'):
-                        property_obj.getter = getter
+                    property_obj.dontLoad = has_special_tag_comment(child, 'dontLoad')
 
                     # remove m_ and _ prefix from name
                     property_obj.display_name = make_display_name(property_obj.name)
                     property_obj.serialize_name = make_serialize_property_name(property_obj.name)
+
                     property_obj.default_value = extract_property_default_value(child)
                     if property_obj.default_value:
                         print(f'Found default value: {property_obj.default_value}')
@@ -528,6 +548,21 @@ def generate_class_meta_properties(f, class_structures, class_obj, tabs):
         f.write('\n' + '\t' * (tabs + 3) + f'.SetGetter(&SRClassMetaTemplate::Get_{prop.name})')
         f.write('\n' + '\t' * (tabs + 3) + f'.SetChangeCallback(&SRClassMetaTemplate::OnChange_{prop.name})')
 
+        default_value = f'decltype({class_obj.name}::{prop.name})()'
+        if prop.default_value:
+            default_value = f'decltype({class_obj.name}::{prop.name})({prop.default_value})'
+
+        f.write('\n' + '\t' * (tabs + 3) + f'.SetDefaultValue(SR_UTILS_NS::Reflection::Value::Create({default_value}))')
+
+        if prop.reset_value:
+            f.write('\n' + '\t' * (tabs + 3) + f'.SetResetValue(SR_UTILS_NS::Reflection::Value::Create({prop.reset_value}))')
+
+        if prop.drag_value:
+            f.write('\n' + '\t' * (tabs + 3) + f'.SetDragValue(SR_UTILS_NS::Reflection::Value::Create({prop.drag_value}))')
+
+        if prop.editor_width:
+            f.write('\n' + '\t' * (tabs + 3) + f'.SetEditorWidth({prop.editor_width})')
+
         f.write(',\n')
 
     f.write('\t' * (tabs + 1) + '};\n')
@@ -601,6 +636,8 @@ def generate_class_meta_load(f, class_obj, tabs):
     f.write('\t' * tabs + f'auto&& value = static_cast<{class_name}&>(obj);\n\n')
 
     for prop in class_obj.variables:
+        if prop.dontLoad:
+            continue
         f.write('\t' * tabs + f'{{\n')
         f.write('\t' * (tabs + 1) + f'static constexpr SR_UTILS_NS::SerializationId keyName_{prop.serialize_name} = SR_UTILS_NS::SerializationId::Create("{prop.serialize_name}");\n')
         f.write('\t' * (tabs + 1) + f'SR_UTILS_NS::Serialization::Load(deserializer, value.{prop.name}, keyName_{prop.serialize_name});\n')
@@ -652,10 +689,20 @@ def generate_class_meta(f, class_structures, class_obj, tabs):
     #    f.write('\t' * tabs + f'const {prop.type_name}& Get_{prop.name}({class_name}* pClass) {{ return pClass->{prop.name}; }}\n')
     #    f.write('\t' * tabs + f'void Set_{prop.name}({class_name}* pClass, const {prop.type_name}& value) {{ pClass->{prop.name} = value; }}\n\n')
 
-    f.write('\t' * tabs + f'SR_NODISCARD virtual bool IsAbstract() const noexcept override {{ return std::is_abstract_v<{class_name}>; }}\n\n')
+    f.write('\t' * tabs + f'SR_NODISCARD bool IsAbstract() const noexcept override {{ return std::is_abstract_v<{class_name}>; }}\n\n')
 
     generate_class_meta_get_base_metas(f, class_structures, class_obj, tabs)
     generate_class_meta_properties(f, class_structures, class_obj, tabs)
+
+    #has_serializable_fields = len(class_obj.variables) > 0
+    #f.write('\t' * tabs + f'SR_NODISCARD virtual bool HasSerializableFields() const noexcept override {{\n')
+    #f.write('\t' * (tabs + 1) + f'for (auto&& pBaseMeta : GetBaseMetas()) {{\n')
+    #f.write('\t' * (tabs + 2) + f'if (pBaseMeta->HasSerializableFields()) {{\n')
+    #f.write('\t' * (tabs + 3) + f'return true;\n')
+    #f.write('\t' * (tabs + 2) + f'}}\n')
+    #f.write('\t' * (tabs + 1) + f'}}\n')
+    #f.write('\t' * (tabs + 1) + f'return { "true" if has_serializable_fields else "false" };\n')
+    #f.write('\t' * tabs + '}\n\n')
 
     generate_class_meta_save(f, class_obj, tabs)
     generate_class_meta_load(f, class_obj, tabs)

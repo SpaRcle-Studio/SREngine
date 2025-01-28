@@ -67,6 +67,12 @@ namespace SR_CORE_GUI_NS {
     public:
         PropertyDrawerFeedback Draw(const PropertyDrawerContext& context) override;
     };
+
+    class SizePropertyDrawer : public PropertyDrawerBase {
+        SR_CLASS()
+    public:
+        PropertyDrawerFeedback Draw(const PropertyDrawerContext& context) override;
+    };
 }
 
 #endif //SR_ENGINE_CORE_PROPERTY_DRAWER_H
