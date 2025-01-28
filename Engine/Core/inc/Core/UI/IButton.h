@@ -21,7 +21,7 @@ namespace SR_CORE_UI_NS {
 
     class IButton : public SR_GTYPES_NS::IRenderComponent {
         using Super = SR_GTYPES_NS::IRenderComponent;
-        using RenderScenePtr = SR_HTYPES_NS::SafePtr<SR_GRAPH_NS::RenderScene>;
+        using RenderScenePtr = SR_HTYPES_NS::SharedPtr<SR_GRAPH_NS::RenderScene>;
         using Callback = std::function<void()>;
     public:
         IButton();
@@ -29,7 +29,7 @@ namespace SR_CORE_UI_NS {
     public:
         void Update(float_t dt) override;
 
-        SR_NODISCARD ButtonStateFlag GetState() const { return m_state; }
+        SR_NODISCARD ButtonState GetState() const { return m_state; }
         SR_NODISCARD bool IsIdle() const { return m_state & ButtonState::Idle; }
         SR_NODISCARD bool IsHovered() const { return m_state & ButtonState::Hovered; }
         SR_NODISCARD bool IsPressed() const { return m_state & ButtonState::Pressed; }
@@ -51,8 +51,8 @@ namespace SR_CORE_UI_NS {
         SR_NODISCARD bool InitializeEntity() noexcept override;
 
     private:
-        ButtonStateFlag m_state = ButtonState::Idle;
-        ButtonStateFlag m_previousState = ButtonState::Idle;
+        ButtonState m_state = ButtonState::Idle;
+        ButtonState m_previousState = ButtonState::Idle;
 
         Callback m_onIdle;
         Callback m_onHover;

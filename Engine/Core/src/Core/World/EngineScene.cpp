@@ -23,10 +23,10 @@ namespace SR_CORE_NS {
     { }
 
     EngineScene::~EngineScene() {
-        pRenderScene.Do([this](SR_GRAPH_NS::RenderScene* pData) {
-            pData->Remove(pEngine->GetEditor());
-            pData->Remove(&SR_GRAPH_NS::GUI::GlobalWidgetManager::Instance());
-        });
+        if (pRenderScene) {
+            pRenderScene->Remove(pEngine->GetEditor());
+            pRenderScene->Remove(&SR_GRAPH_NS::GUI::GlobalWidgetManager::Instance());
+        }
 
         pScene.AutoFree([](SR_WORLD_NS::Scene* pData) {
             pData->Destroy();
@@ -97,9 +97,9 @@ namespace SR_CORE_NS {
 
     void EngineScene::UpdateMainCamera() {
         SR_TRACY_ZONE;
-        pMainCamera = pRenderScene.Do<SR_GTYPES_NS::Camera::Ptr>([](SR_GRAPH_NS::RenderScene* ptr) -> SR_GTYPES_NS::Camera::Ptr {
-            return ptr->GetMainCamera();
-        }, SR_GTYPES_NS::Camera::Ptr());
+        if (pRenderScene) {
+            pMainCamera = pRenderScene->GetMainCamera();
+        }
     }
 
     void EngineScene::SetActive(bool active) {
@@ -111,9 +111,10 @@ namespace SR_CORE_NS {
     }
 
     void EngineScene::SetGameMode(bool gameMode) {
-        pRenderScene.Do([gameMode](SR_GRAPH_NS::RenderScene *ptr) {
-            ptr->SetOverlayEnabled(!gameMode);
-        });
+        if (pRenderScene) {
+            pRenderScene->SetOverlayEnabled(!gameMode);
+        }
+
         if (pPhysicsScene) {
             pPhysicsScene->SetIsGameMode(gameMode);
         }

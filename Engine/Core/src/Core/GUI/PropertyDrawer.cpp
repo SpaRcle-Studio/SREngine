@@ -5,6 +5,8 @@
 #include <Core/GUI/PropertyDrawer.h>
 #include <Graphics/Material/UniqueMaterial.h>
 
+#include <Codegen/PropertyDrawer.generated.hpp>
+
 namespace SR_CORE_GUI_NS {
     bool DrawMaterialProperty(const DrawPropertyContext& context, SR_GRAPH_NS::MaterialProperty* pProperty) {
         auto&& data = pProperty->GetData();
@@ -449,5 +451,157 @@ namespace SR_CORE_GUI_NS {
             isRendered |= DrawProperty(context, propertyInfo.pProperty);
         }
         return isRendered;
+    }
+
+    PropertyDrawerFeedback BoolPropertyDrawer::Draw(const PropertyDrawerContext& context) {
+        PropertyDrawerFeedback feedback;
+
+        SR_UTILS_NS::Reflection::Value value = context.property.Get(context.pOwner);
+
+        if (auto&& bValue = value.Map<bool>()) {
+            ImGui::PushID(context.pOwner);
+            ImGui::PushID(context.property.GetName().ToCStr());
+            if (ImGui::Checkbox(context.property.GetDisplayName().ToCStr(), bValue)) {
+                context.property.Set(context.pOwner, value);
+                feedback.isChanged = true;
+            }
+            ImGui::PopID();
+            ImGui::PopID();
+        }
+        else {
+            SR_GRAPH_GUI_NS::ColoredText("Failed to map bool value!", ImColor(1.f, 0.f, 0.f, 1.f));
+        }
+
+        return feedback;
+    }
+
+    PropertyDrawerFeedback NumericPropertyDrawer::Draw(const PropertyDrawerContext& context) {
+        return PropertyDrawerFeedback();
+    }
+
+    PropertyDrawerFeedback VectorPropertyDrawer::Draw(const PropertyDrawerContext& context) {
+        PropertyDrawerFeedback feedback;
+
+        SR_UTILS_NS::Reflection::Value value = context.property.Get(context.pOwner);
+
+        const SR_UTILS_NS::StandardType vectorType = SR_UTILS_NS::GetMathVectorType(value.GetType());
+        if (vectorType == SR_UTILS_NS::StandardType::Unknown) {
+            SR_GRAPH_GUI_NS::ColoredText("Unknown vector type!", ImColor(1.f, 0.f, 0.f, 1.f));
+            return feedback;
+        }
+
+        const float_t columnWidth = 70.f;
+
+        const uint8_t vectorSize = SR_UTILS_NS::GetMathVectorSize(value.GetType());
+        char* pRaw = value.MapString();
+
+        ImGui::PushID(context.pOwner);
+        ImGui::PushID(context.property.GetName().ToCStr());
+
+        ImGui::Columns(2);
+        ImGui::SetColumnWidth(0, columnWidth);
+
+        ImGui::Text("%s", context.property.GetDisplayName().ToCStr());
+        ImGui::NextColumn();
+
+        ImGui::PushMultiItemsWidths(vectorSize, ImGui::CalcItemWidth());
+        ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2{ 0, 0 });
+
+        const float_t lineHeight = GImGui->Font->FontSize + GImGui->Style.FramePadding.y * 2.0f;
+        const ImVec2 buttonSize = { lineHeight + 3.0f, lineHeight };
+
+        /*
+        result |= DrawValueControl<SR_MATH_NS::Unit>("X", values.x, resetValue, buttonSize,
+        ImVec4{ 0.8f, 0.1f, 0.15f, 1.0f },
+        ImVec4{ 0.9f, 0.2f, 0.2f, 1.0f  },
+        ImVec4{ 0.8f, 0.1f, 0.15f, 1.0f }, nullptr, drag);
+
+        ImGui::PopItemWidth();
+        ImGui::SameLine();
+
+        result |= DrawValueControl<SR_MATH_NS::Unit>("Y", values.y, resetValue, buttonSize,
+        ImVec4{ 0.2f, 0.7f, 0.2f, 1.0f },
+        ImVec4{ 0.3f, 0.8f, 0.3f, 1.0f },
+        ImVec4{ 0.2f, 0.7f, 0.2f, 1.0f }, nullptr, drag);
+
+        ImGui::PopItemWidth();
+        ImGui::SameLine();
+
+        result |= DrawValueControl<SR_MATH_NS::Unit>("Z", values.z, resetValue, buttonSize,
+        ImVec4{ 0.1f, 0.25f, 0.8f, 1.0f },
+        ImVec4{ 0.2f, 0.35f, 0.9f, 1.0f },
+        ImVec4{ 0.1f, 0.25f, 0.8f, 1.0f }, nullptr, drag);
+        */
+
+        constexpr std::array<const char*, 6> labels = { "X", "Y", "Z", "W", "V", "U" };
+        constexpr std::array<ImVec4, 6> colors = {
+            ImVec4(0.8f, 0.1f, 0.15f, 1.0f),
+            ImVec4(0.2f, 0.7f, 0.2f, 1.0f),
+            ImVec4(0.1f, 0.25f, 0.8f, 1.0f),
+            ImVec4(0.8f, 0.1f, 0.15f, 1.0f),
+            ImVec4(0.2f, 0.7f, 0.2f, 1.0f),
+            ImVec4(0.1f, 0.25f, 0.8f, 1.0f)
+        };
+
+        for (uint8_t i = 0; i < vectorSize; ++i) {
+            ImGui::PushID(i);
+
+            ImGui::PushStyleColor(ImGuiCol_Button, colors[i]);
+            ImGui::PushStyleColor(ImGuiCol_ButtonHovered, colors[i] + ImVec4(0.1f, 0.1f, 0.1f, 0.0f));
+            ImGui::PushStyleColor(ImGuiCol_ButtonActive, colors[i] + ImVec4(0.2f, 0.2f, 0.2f, 0.0f));
+
+            if (ImGui::Button(labels[i], buttonSize)) {
+
+            }
+
+            ImGui::PopStyleColor(3);
+
+            ImGui::SameLine();
+
+            switch (vectorType) {
+                case Utils::StandardType::Bool:
+                    if (ImGui::Checkbox("", reinterpret_cast<bool*>(&pRaw[i * sizeof(bool)]))) {
+                        feedback.isChanged = true;
+                    }
+                    break;
+                case Utils::StandardType::Int32:
+                    if (ImGui::InputInt("", reinterpret_cast<int*>(&pRaw[i * sizeof(int32_t)]))) {
+                        feedback.isChanged = true;
+                    }
+                    break;
+                case Utils::StandardType::UInt32:
+                    if (ImGui::InputScalar("", ImGuiDataType_U32, reinterpret_cast<uint32_t*>(&pRaw[i * sizeof(uint32_t)]))) {
+                        feedback.isChanged = true;
+                    }
+                    break;
+                case Utils::StandardType::Float:
+                    if (ImGui::DragFloat("", reinterpret_cast<float*>(&pRaw[i * sizeof(float_t)]))) {
+                        feedback.isChanged = true;
+                    }
+                    break;
+                default:
+                    SR_GRAPH_GUI_NS::ColoredText("Unknown vector type!", ImColor(1.f, 0.f, 0.f, 1.f));
+                    break;
+            }
+
+            ImGui::PopItemWidth();
+            ImGui::PopID();
+
+            if (i + 1 < vectorSize) {
+                ImGui::SameLine();
+            }
+        }
+
+        ImGui::PopStyleVar();
+        ImGui::Columns(1);
+
+        ImGui::PopID();
+        ImGui::PopID();
+
+        if (feedback.isChanged) {
+            context.property.Set(context.pOwner, value);
+        }
+
+        return feedback;
     }
 }

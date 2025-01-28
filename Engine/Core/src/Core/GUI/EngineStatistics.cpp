@@ -470,7 +470,7 @@ namespace SR_CORE_GUI_NS {
                 ImGui::Text("* Offscreen camera: %s", cameraInfo.pCamera->GetRenderTechniquePath().c_str());
             }
 
-            if (ImGui::Button(SR_FORMAT_C("Raycast test##{}", cameraInfo.pCamera.GetVoid()))) {
+            if (ImGui::Button(SR_FORMAT_C("Raycast test##{}", cameraInfo.pCamera.GetRawPtr()))) {
                 SR_UTILS_NS::DebugDraw::Instance().DrawLine(SR_ID_INVALID, cameraInfo.pCamera->GetPosition(), SR_MATH_NS::FVector3::Zero(), SR_MATH_NS::FColor::Red(), 5.0f);
             }
         }
@@ -498,8 +498,16 @@ namespace SR_CORE_GUI_NS {
         SR_GRAPH_GUI_NS::Text(SR_FORMAT_C("Draw calls: {}", pPipeline->GetBuildState().drawCalls));
         SR_GRAPH_GUI_NS::Text(SR_FORMAT_C("Used textures: {}", pPipeline->GetBuildState().usedTextures));
         SR_GRAPH_GUI_NS::Text(SR_FORMAT_C("Used shaders: {}", pPipeline->GetBuildState().usedShaders));
-        SR_GRAPH_GUI_NS::Text(SR_FORMAT_C("Timed objects pool size: {}", pRenderScene->GetDebugRenderer()->GetTimedObjectPoolSize()));
-        SR_GRAPH_GUI_NS::Text(SR_FORMAT_C("Timed empty ids pool size: {}", pRenderScene->GetDebugRenderer()->GetEmptyIdsPoolSize()));
+
+        if (auto&& pDebugRenderer = pRenderScene->GetRenderer<SR_GRAPH_NS::DebugRenderer>()) {
+            SR_GRAPH_GUI_NS::Text(SR_FORMAT_C("Timed objects pool size: {}", pDebugRenderer->GetTimedObjectPoolSize()));
+            SR_GRAPH_GUI_NS::Text(SR_FORMAT_C("Timed empty ids pool size: {}", pDebugRenderer->GetEmptyIdsPoolSize()));
+        }
+        else {
+            ImGui::PushStyleColor(ImGuiCol_::ImGuiCol_Text, ImVec4(1, 0, 0, 1));
+            SR_GRAPH_GUI_NS::Text("Debug renderer not found!");
+            ImGui::PopStyleColor();
+        }
 
         if (auto&& pVulkanPipeline = pPipeline.DynamicCast<SR_GRAPH_NS::VulkanPipeline>()) {
             ImGui::Separator();

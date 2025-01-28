@@ -30,7 +30,7 @@ namespace SR_CORE_GUI_NS {
     public:
         void Init() override;
 
-        SR_NODISCARD SR_GRAPH_UI_NS::GizmoOperationFlag GetGizmoOperation() const noexcept { return m_gizmoOperationFlag; }
+        SR_NODISCARD SR_GRAPH_UI_NS::GizmoOperation GetGizmoOperation() const noexcept { return m_gizmoOperationFlag; }
         SR_NODISCARD SR_GRAPH_UI_NS::GizmoMode GetGizmoMode() const noexcept { return m_gizmoMode; }
         SR_NODISCARD float_t GetCameraVelocityFactor() const noexcept { return m_cameraVelocityFactor; }
         SR_NODISCARD EditorSceneViewMode GetViewMode() const noexcept { return m_viewMode; }
@@ -39,13 +39,13 @@ namespace SR_CORE_GUI_NS {
         void OnKeyDown(const SR_UTILS_NS::KeyboardInputData* pData) override;
 
     private:
-        void SetGizmoOperation(SR_GRAPH_UI_NS::GizmoOperationFlag operation);
+        void SetGizmoOperation(SR_GRAPH_UI_NS::GizmoOperation operation);
         void SetGizmoMode(SR_GRAPH_UI_NS::GizmoMode mode);
 
         SR_HTYPES_NS::SharedPtr<SR_CORE_GUI_NS::EditorGizmo> FindGizmo() const;
 
     private:
-        SR_GRAPH_UI_NS::GizmoOperationFlag m_gizmoOperationFlag = SR_GRAPH_UI_NS::GizmoOperation::None;
+        SR_GRAPH_UI_NS::GizmoOperation m_gizmoOperationFlag = SR_GRAPH_UI_NS::GizmoOperation::None;
         SR_GRAPH_UI_NS::GizmoMode m_gizmoMode = SR_GRAPH_UI_NS::GizmoMode::Local;
         EditorSceneViewMode m_viewMode = EditorSceneViewMode::FreeAspect;
         float_t m_cameraVelocityFactor = 1.f;

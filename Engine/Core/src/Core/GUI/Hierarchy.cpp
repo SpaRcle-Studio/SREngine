@@ -105,11 +105,28 @@ namespace SR_CORE_GUI_NS {
     }
 
     void Hierarchy::ContextMenu() {
+        auto&& pEngine = dynamic_cast<EditorGUI*>(GetManager())->GetEngine();
+
         if (ImGui::BeginPopupContextWindow("HierarchyContextMenu")) {
             if (ImGui::Selectable("Add New GameObject")) {
-                auto&& pEngine = dynamic_cast<EditorGUI*>(GetManager())->GetEngine();
                 pEngine->GetScene()->InstanceGameObject("New GameObject"_atom);
             }
+
+            ImGui::Separator();
+
+            ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(8, 8));
+
+            if (ImGui::BeginMenu("Add New Node")) {
+                if (ImGui::MenuItem("Default")) {
+
+                }
+                if (ImGui::MenuItem("Canvas")) {
+
+                }
+                ImGui::EndMenu();
+            }
+
+            ImGui::PopStyleVar();
 
             ImGui::Separator();
 
@@ -138,7 +155,7 @@ namespace SR_CORE_GUI_NS {
             ++prefabIndex;
         }
 
-        if (root->HasSerializationFlags(SR_UTILS_NS::ObjectSerializationFlags::DontSave)) {
+        if (root->HasSerializationFlags(SR_UTILS_NS::SerializationFlags::DontSave)) {
             ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(220.f / 255.f, 199.f / 255.f, 0.f / 255.f, 1.f));
         }
         else if (root->GetPrefab()) {
@@ -155,7 +172,7 @@ namespace SR_CORE_GUI_NS {
 
         const bool open = ImGui::TreeNodeEx((void*)(intptr_t)id, flags, "%s", name.c_str());
 
-        if (root->GetPrefab() || root->HasSerializationFlags(SR_UTILS_NS::ObjectSerializationFlags::DontSave)) {
+        if (root->GetPrefab() || root->HasSerializationFlags(SR_UTILS_NS::SerializationFlags::DontSave)) {
             ImGui::PopStyleColor();
         }
 

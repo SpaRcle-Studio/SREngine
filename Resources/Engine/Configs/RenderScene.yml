@@ -1,0 +1,2 @@
+renderers:
+  - name: "DebugRenderer"
