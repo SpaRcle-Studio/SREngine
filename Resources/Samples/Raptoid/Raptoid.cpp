@@ -47,7 +47,7 @@ public:
             return;
         }
 
-        auto&& pRigidbody = DynamicCastComponentToRigidbody3D(pParent->GetComponent("Rigidbody3D"));
+        auto&& pRigidbody = DynamicCastComponentToRigidbody3D(pParent->GetComponent("Rigidbody3D").Get());
         if (!pRigidbody) {
             return;
         }
@@ -121,7 +121,7 @@ public:
             return;
         }
 
-        auto&& pAnimator = DynamicCastComponentToAnimator(gameObject->GetComponent("Animator"));
+        auto&& pAnimator = DynamicCastComponentToAnimator(gameObject->GetComponent("Animator").Get());
 
         if (!pAnimator) {
             Debug::Error("Animator is not set");

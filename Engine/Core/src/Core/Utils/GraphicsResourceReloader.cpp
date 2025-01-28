@@ -37,9 +37,8 @@ namespace SR_CORE_NS {
 
         if (pContext.RecursiveLockIfValid()) {
             for (auto&& [pScene, pRenderScene] : pContext->GetScenes()) {
-                if (pRenderScene.LockIfValid()) {
+                if (pRenderScene) {
                     pRenderScene->OnResourceReloaded(pResource);
-                    pRenderScene.Unlock();
                 }
             }
             pContext.Unlock();

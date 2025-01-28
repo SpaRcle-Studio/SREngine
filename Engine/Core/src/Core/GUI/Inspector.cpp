@@ -76,7 +76,7 @@ namespace SR_CORE_GUI_NS {
                 ImGui::TextColored(ImVec4(1, 1, 0, 1), "(Is dirty)");
             }
 
-            if (m_sceneObject->HasSerializationFlags(SR_UTILS_NS::ObjectSerializationFlags::DontSave)) {
+            if (m_sceneObject->HasSerializationFlags(SR_UTILS_NS::SerializationFlags::DontSave)) {
                 ImGui::SameLine();
                 ImGui::TextColored(ImVec4(1, 1, 0, 1), "(Dont Save)");
             }
@@ -251,7 +251,7 @@ namespace SR_CORE_GUI_NS {
             changed = true;
         }
 
-        SR_GRAPH_GUI_NS::EnumCombo<SR_UTILS_NS::Anchor>("Anchor", pTransform->GetAnchor(), [&changed, pTransform](auto&& value) {
+        /*SR_GRAPH_GUI_NS::EnumCombo<SR_UTILS_NS::Anchor>("Anchor", pTransform->GetAnchor(), [&changed, pTransform](auto&& value) {
             pTransform->SetAnchor(value);
             changed = true;
         });
@@ -269,7 +269,7 @@ namespace SR_CORE_GUI_NS {
         SR_GRAPH_GUI_NS::EnumCombo<SR_UTILS_NS::PositionMode>("Position mode", pTransform->GetPositionMode(), [&changed, pTransform](auto&& value) {
             pTransform->SetPositionMode(value);
             changed = true;
-        });
+        });*/
 
         ImGui::Separator();
 
@@ -405,7 +405,7 @@ namespace SR_CORE_GUI_NS {
                 ImGui::TextColored(ImVec4(0, 1, 0, 1), "[Editor mode]");
             }
 
-            if (pComponent->HasSerializationFlags(SR_UTILS_NS::ObjectSerializationFlags::DontSave)) {
+            if (pComponent->HasSerializationFlags(SR_UTILS_NS::SerializationFlags::DontSave)) {
                 ImGui::SameLine();
                 ImGui::TextColored(ImVec4(1, 1, 0, 1), "[Dont save]");
             }
@@ -428,6 +428,17 @@ namespace SR_CORE_GUI_NS {
                 }
             }
 
+            if (isOpened) {
+                auto&& properties = pComponent->GetMeta()->GetProperties();
+                for (auto&& property : properties) {
+                    PropertyDrawerContext context(property);
+                    context.pEditor = dynamic_cast<EditorGUI*>(GetManager());
+                    context.pOwner = pComponent->GetRawPtr();
+                    DrawProperty(context);
+                    ImGui::Separator();
+                }
+            }
+
             if (ImGui::BeginPopupContextWindow("InspectorMenu")) {
                 if (ImGui::BeginMenu("Remove component")) {
                     if (ImGui::MenuItem(pComponent->GetComponentName().c_str())) {
@@ -438,6 +449,35 @@ namespace SR_CORE_GUI_NS {
                 ImGui::EndPopup();
             }
             ImGui::EndChild();
+        }
+    }
+
+    void Inspector::DrawProperty(const PropertyDrawerContext& context) {
+        if (context.property.IsHidden()) {
+            return;
+        }
+
+        SR_UTILS_NS::StringAtom inspector = context.property.GetInspector();
+        if (inspector.Empty()) {
+            SR_GRAPH_GUI_NS::ColoredText("No inspector for property {}"_format(context.property.GetName()), ImColor(255, 0, 0, 255));
+            return;
+        }
+
+        const std::string id = "{}PropertyDrawer"_format(inspector);
+        PropertyDrawerBase::Ptr pDrawer = SR_UTILS_NS::Factory::Instance().Create<PropertyDrawerBase>(id);
+        if (!pDrawer) {
+            SR_GRAPH_GUI_NS::ColoredText("Failed to create property drawer for {}"_format(context.property.GetName()), ImColor(255, 0, 0, 255));
+            return;
+        }
+
+        ImGui::BeginDisabled(context.property.IsReadOnly());
+
+        const PropertyDrawerFeedback feedback = pDrawer->Draw(context);
+
+        ImGui::EndDisabled();
+
+        if (feedback.isChanged) {
+            context.property.OnChanged(context.pOwner);
         }
     }
 

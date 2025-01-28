@@ -321,8 +321,8 @@ namespace SR_CORE_NS::Commands {
         m_scene = m_engine->GetScene();
 
         /// та же специфичная синхронизация, что и в GameObjectDelete::Redo()
-        if (m_scene.RecursiveLockIfValid()) {
-            SR_HTYPES_NS::SafePtrLockGuard m_lock(m_scene->GetDataStorage().GetValue<SR_GRAPH_NS::RenderScene::Ptr>());
+        if (m_scene) {
+            // SR_HTYPES_NS::SafePtrLockGuard m_lock(m_scene->GetDataStorage().GetValue<SR_GRAPH_NS::RenderScene::Ptr>());
 
             // резервируем все дерево сущностей, чтобы после отмены команды его можно было восстановить
             m_reserved.Reserve();
@@ -331,8 +331,6 @@ namespace SR_CORE_NS::Commands {
                 m_marshal->SetPosition(0);
             }
             pObject->Destroy();
-
-            m_scene.Unlock();
             return true;
         }
 
@@ -411,8 +409,8 @@ namespace SR_CORE_NS::Commands {
         /// та же специфичная синхронизация, что и в GameObjectDelete::Redo()
         m_scene = m_engine->GetScene();
 
-        if (m_scene.RecursiveLockIfValid()) {
-            SR_HTYPES_NS::SafePtrLockGuard m_lock(m_scene->GetDataStorage().GetValue<SR_GRAPH_NS::RenderScene::Ptr>());
+        if (m_scene) {
+            //SR_HTYPES_NS::SafePtrLockGuard m_lock(m_scene->GetDataStorage().GetValue<SR_GRAPH_NS::RenderScene::Ptr>());
             SR_SAFE_DELETE_PTR(m_marshal)
 
             m_marshal = new SR_HTYPES_NS::Marshal;
@@ -432,7 +430,6 @@ namespace SR_CORE_NS::Commands {
             }
 
             m_marshal->SetPosition(0);
-            m_scene.Unlock();
             return true;
         }
 

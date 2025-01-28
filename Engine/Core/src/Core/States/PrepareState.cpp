@@ -32,7 +32,9 @@ namespace SR_CORE_NS {
         }
 
         if (auto&& pRenderScene = pEngine->GetRenderScene()) {
-            SR_UTILS_NS::DebugDraw::Instance().SwitchCallbacks(pRenderScene->GetDebugRenderer());
+            if (auto&& pDebugRenderer = pRenderScene->GetRenderer<SR_GRAPH_NS::DebugRenderer>()) {
+                SR_UTILS_NS::DebugDraw::Instance().SwitchCallbacks(pDebugRenderer.GetRawPtr());
+            }
         }
 
         if (auto&& pPhysicsScene = pEngine->GetPhysicsScene()) {

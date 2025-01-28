@@ -5,6 +5,7 @@
 #ifndef SR_ENGINE_COMPONENT_DRAWER_H
 #define SR_ENGINE_COMPONENT_DRAWER_H
 
+#include <Graphics/Font/IText.h>
 #include <Utils/stdInclude.h>
 
 namespace SR_SCRIPTING_NS {
@@ -30,7 +31,7 @@ namespace SR_GTYPES_NS {
     class Mesh3D;
     class SkinnedMesh;
     class ProceduralMesh;
-    class ITextComponent;
+    //class ITextComponent;
     class Sprite;
     class Text2D;
     class Text3D;
@@ -74,7 +75,7 @@ namespace SR_CORE_NS::GUI::ComponentDrawer {
     void DrawCollisionShape(SR_PTYPES_NS::CollisionShape* pCollisionShape, EditorGUI* context, int32_t index);
     void DrawMaterialProps(SR_GRAPH_NS::BaseMaterial* material, EditorGUI* context, int32_t index);
 
-    void DrawComponent(SR_GTYPES_NS::ITextComponent* pComponent, EditorGUI* context, int32_t index);
+    void DrawComponent(SR_GTYPES_NS::Text* pComponent, EditorGUI* context, int32_t index);
 }
 
 #endif //SR_ENGINE_COMPONENTDRAWER_H

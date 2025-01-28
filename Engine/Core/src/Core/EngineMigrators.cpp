@@ -7,6 +7,7 @@
 #include <Utils/ECS/GameObject.h>
 #include <Utils/ECS/Migration.h>
 #include <Utils/ECS/LayerManager.h>
+#include <Utils/UI/UIModifier.h>
 
 namespace SR_CORE_NS {
     bool RegisterMigrators() {
@@ -87,7 +88,7 @@ namespace SR_CORE_NS {
                 migrated.Write<uint8_t>(static_cast<uint8_t>(measurement));
 
                 if (measurement == SR_UTILS_NS::Measurement::Space2D) {
-                    migrated.Write<uint32_t>(static_cast<uint32_t>(SR_UTILS_NS::Stretch::ShowAll));
+                    migrated.Write<uint32_t>(static_cast<uint32_t>(SR_UTILS_NS::UI::Stretch::ShowAll));
                     migrated.Write<SR_MATH_NS::FVector3>(marshal.Read<SR_MATH_NS::FVector3>(SR_MATH_NS::FVector3(0.0)), SR_MATH_NS::FVector3(0.f));
                     migrated.Write<SR_MATH_NS::FVector3>(marshal.Read<SR_MATH_NS::FVector3>(SR_MATH_NS::FVector3(0.0)), SR_MATH_NS::FVector3(0.f));
                     migrated.Write<SR_MATH_NS::FVector3>(marshal.Read<SR_MATH_NS::FVector3>(SR_MATH_NS::FVector3(1.0)), SR_MATH_NS::FVector3(1.f));
@@ -134,7 +135,7 @@ namespace SR_CORE_NS {
                 switch (measurement) {
                     case SR_UTILS_NS::Measurement::Space2D: {
                         migrated.Write<uint8_t>(static_cast<uint8_t>(marshal.Read<uint32_t>())); /// stretch
-                        migrated.Write<uint8_t>(static_cast<uint8_t>(SR_UTILS_NS::Anchor::None)); /// anchor
+                        migrated.Write<uint8_t>(static_cast<uint8_t>(SR_UTILS_NS::UI::Anchor::None)); /// anchor
                         SR_FALLTHROUGH;
                     }
                     case SR_UTILS_NS::Measurement::Space3D:
@@ -178,7 +179,7 @@ namespace SR_CORE_NS {
             switch (measurement) {
                 case SR_UTILS_NS::Measurement::Space2D: {
                     migrated.Write<uint8_t>(static_cast<uint8_t>(marshal.Read<uint32_t>())); /// stretch
-                    migrated.Write<uint8_t>(static_cast<uint8_t>(SR_UTILS_NS::Anchor::None)); /// anchor
+                    migrated.Write<uint8_t>(static_cast<uint8_t>(SR_UTILS_NS::UI::Anchor::None)); /// anchor
                     SR_FALLTHROUGH;
                 }
                 case SR_UTILS_NS::Measurement::Space3D:
@@ -290,9 +291,41 @@ namespace SR_CORE_NS {
                 case SR_UTILS_NS::Measurement::Space2D: {
                     migrated.Write<uint8_t>(static_cast<uint8_t>(marshal.Read<uint8_t>())); /// stretch
                     migrated.Write<uint8_t>(static_cast<uint8_t>(marshal.Read<uint8_t>())); /// anchor
-                    migrated.Write<uint8_t>(static_cast<uint8_t>(SR_UTILS_NS::PositionMode::ProportionalXY)); /// positionMode
+                    migrated.Write<uint8_t>(static_cast<uint8_t>(SR_UTILS_NS::UI::PositionMode::ProportionalXY)); /// positionMode
                     migrated.Write<bool>(static_cast<bool>(true)); /// isRelativePriority
                     migrated.Write<int32_t>(static_cast<int32_t>(0)); /// localPriority
+                    break;
+                }
+                default:
+                    break;
+            }
+
+            /// -------------------- меня наняли дублировать длинные строки потому что я люблю большие длинные прямые комментарии, состоящие исключительно из тире.
+            migrated.Stream::Write(marshal.Stream::View() + marshal.GetPosition(), marshal.Size() - marshal.GetPosition());
+
+            marshal.SetData(migrated.Stream::View(), migrated.Size());
+            marshal.SetPosition(position);
+
+            return true;
+        });
+        SR_UTILS_NS::Migration::Instance().RegisterMigrator(TRANSFORM_HASH_NAME, 1001, 1002, [](SR_HTYPES_NS::Marshal& marshal) -> bool {
+            SR_HTYPES_NS::Marshal migrated;
+
+            uint64_t position = marshal.GetPosition();
+
+            migrated.Stream::Write(marshal.Stream::View(), marshal.GetPosition());
+            /// --------------------------------------------------------------------------------------------------------
+
+            const auto measurement = marshal.Read<uint8_t>();
+            migrated.Write(static_cast<uint8_t>(measurement)); /// measurement
+
+            switch (static_cast<SR_UTILS_NS::Measurement>(measurement)) {
+                case SR_UTILS_NS::Measurement::SpaceZero:
+                    break;
+                case SR_UTILS_NS::Measurement::Space2D: {
+                    marshal.Read<uint8_t>(); /// stretch
+                    marshal.Read<uint8_t>(); /// anchor
+                    marshal.Read<uint8_t>(); /// positionMode
                     break;
                 }
                 default:

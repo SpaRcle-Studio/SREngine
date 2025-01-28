@@ -330,7 +330,7 @@ namespace SR_CORE_NS::GUI {
         Graphics::GUI::DrawValue("Indices count", pComponent->GetIndicesCount(), index);
     }
 
-    void ComponentDrawer::DrawComponent(SR_GTYPES_NS::ITextComponent* pComponent, EditorGUI *context, int32_t index) {
+    void ComponentDrawer::DrawComponent(SR_GTYPES_NS::Text* pComponent, EditorGUI *context, int32_t index) {
         if (!pComponent->IsCalculatable())
             ImGui::TextColored(ImVec4(1, 0, 0, 1), "Invalid mesh!");
 

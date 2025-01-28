@@ -22,7 +22,7 @@ namespace SR_CORE_NS {
     class SR_DLL_EXPORT World : public SR_WORLD_NS::Scene {
         using GameObjectPtr = SR_UTILS_NS::GameObject::Ptr;
         using CameraPtr = SR_GTYPES_NS::Camera*;
-        using RenderScenePtr = SR_HTYPES_NS::SafePtr<SR_GRAPH_NS::RenderScene>;
+        using RenderScenePtr = SR_HTYPES_NS::SharedPtr<SR_GRAPH_NS::RenderScene>;
     public:
         World() = default;
 

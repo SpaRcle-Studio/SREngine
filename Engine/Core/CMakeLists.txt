@@ -121,6 +121,7 @@ target_link_libraries(Core ${SR_CORE_LINK_LIBRARIES})
 target_include_directories(Core PUBLIC ${CORE_ROOT_DIR}/inc)
 
 target_include_directories(Core PUBLIC ${CMAKE_CURRENT_BINARY_DIR})
+target_include_directories(Core PUBLIC ${SR_CMAKE_ROOT_BUILD_DIRECTORY}/Codegen)
 target_include_directories(Core PUBLIC ${CMAKE_CURRENT_BINARY_DIR}/Utils/include)
 target_include_directories(Core PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/Utils/libs/assimp/include)
 target_include_directories(Core PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/Utils/libs/FQHSA/header)

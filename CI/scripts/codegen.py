@@ -1,4 +1,4 @@
-import sys, os, subprocess
+import sys, os, subprocess, re
 from glob import glob
 
 try:
@@ -56,13 +56,44 @@ def preprocess_cpp(source, output):
     if result.returncode != 0:
         raise Exception(f'Failed to preprocess file: {source}, error: {result.stderr}, command: {command}')
 
+def make_serialize_property_name(name):
+    if name.startswith('m_'):
+        name = name[2:]
+    if name.startswith('_'):
+        name = name[1:]
+    return name
+
+# display name for UI
+# example: m_isSomeProperty -> Is Some Property
+# example: isSomeProperty -> Is Some Property
+# example: is_some_property -> Is Some Property
+def make_display_name(name):
+    name = make_serialize_property_name(name)
+    # 1. Замена snake_case на пробелы и приведение к правильному регистру
+    name = re.sub(r'_+', ' ', name)
+    # 2. Разделение camelCase и PascalCase на слова
+    name = re.sub(r'([a-z])([A-Z])', r'\1 \2', name)
+    # 3. Приведение первой буквы каждого слова к верхнему регистру
+    name = ' '.join(word.capitalize() for word in name.split())
+    return name
 
 class Property:
     def __init__(self, name, type_name):
         self.name = name
         self.display_name = name
+        self.serialize_name = name
         self.type_name = type_name
         self.default_value = None
+        self.change_callback = None
+        self.setter = None
+        self.getter = None
+        self.reset_value = None
+        self.drag_value = None
+        self.editor_width = None
+        self.read_only = False
+        self.hidden = False
+        self.private = False
+        self.dontLoad = False
 
     def __str__(self):
         return f'Property: {self.name}, Type: {self.type_name}, Default value: {self.default_value}'
@@ -86,10 +117,13 @@ class CodeStructure:
         self.enums = []
 
 class Enum:
-    def __init__(self, name):
+    def __init__(self, name, variant, count, type, enum_class, namespaces):
         self.name = name
-        self.variant = ''
-        self.count = 0
+        self.variant = variant
+        self.count = count
+        self.namespaces = namespaces
+        self.type = type
+        self.enum_class = enum_class
 
 class Class:
     def __init__(self, name, namespaces):
@@ -128,14 +162,50 @@ class Class:
 def is_property_comment(node):
     """Извлекаем комментарий, если он есть."""
     raw_comment = node.raw_comment
-    if raw_comment and "/// @property" in raw_comment:
+    if raw_comment and "@property" in raw_comment:
         return True
     return False
+
+def has_special_tag_comment(node, tag):
+    """Извлекаем комментарий, если он есть."""
+    raw_comment = node.raw_comment
+    if raw_comment and f"@{tag}" in raw_comment:
+        return True
+    return False
+
+def extract_special_tag_comment_data(node, tag):
+    """ /// @someTage(data, data, data), get data between ( and ) """
+    """ /// @resetValue(someFunc()), get someFunc() """
+    raw_comment = node.raw_comment
+    start = raw_comment.find(f"@{tag}")
+    if start == -1:
+        return None
+
+    start = raw_comment.find('(', start)
+    if start == -1:
+        return None
+
+    deep = 0
+    end = -1
+
+    for i in range(start, len(raw_comment)):
+        if raw_comment[i] == '(':
+            deep += 1
+        if raw_comment[i] == ')':
+            deep -= 1
+            if deep == 0:
+                end = i
+                break
+
+    if end == -1:
+        return None
+
+    return raw_comment[start + 1:end]
 
 def is_method_comment(node):
     """Извлекаем комментарий, если он есть."""
     raw_comment = node.raw_comment
-    if raw_comment and "/// @method" in raw_comment:
+    if raw_comment and "@method" in raw_comment:
         return True
     return False
 
@@ -275,21 +345,15 @@ def is_class_inherited_from(class_node, class_name):
                 return True
     return False
 
-def make_pretty_property_name(name):
-    if name.startswith('m_'):
-        name = name[2:]
-    if name.startswith('_'):
-        name = name[1:]
-    return name
-
-
 def parse_tree(deep, parent_node, code_structure, namespaces):
     try:
         if parent_node.kind == clang.cindex.CursorKind.FUNCTION_DECL and parent_node.is_definition():
             if parent_node.spelling.startswith('sr_detail_reflector_'):
                 all_found = 0
-                name = ''
-                variant = ''
+                name = '(not found)'
+                variant = '(not found)'
+                enum_type = '(not found)'
+                enum_class = '(not found)'
                 count = 0
 
                 for function_part in parent_node.get_children():
@@ -306,23 +370,50 @@ def parse_tree(deep, parent_node, code_structure, namespaces):
                                         break
                                     if variable_name == 'CODEGEN_ENUM_COUNT':
                                         for child2 in child.get_children():
-                                            print(child2.kind, child2.spelling)
-                                            if child2.kind == clang.cindex.CursorKind.DECL_REF_EXPR:
-                                                count = int(child2.spelling)
-                                                all_found += 1
+                                            if child2.kind == clang.cindex.CursorKind.UNEXPOSED_EXPR:
+                                                for child3 in child2.get_children():
+                                                    if child3.kind == clang.cindex.CursorKind.INTEGER_LITERAL:
+                                                        tokens = list(child2.get_tokens())
+                                                        count = int(tokens[0].spelling)
+                                                        all_found += 1
+                                                        break
                                                 break
                                         break
                                     if variable_name == 'CODEGEN_ENUM_NAME':
                                         # extract const char* value
                                         for child2 in child.get_children():
-                                            if child2.kind == clang.cindex.CursorKind.DECL_REF_EXPR:
-                                                name = child2.spelling
-                                                all_found += 1
-                                                break
+                                            if child2.kind == clang.cindex.CursorKind.UNEXPOSED_EXPR:
+                                                for child3 in child2.get_children():
+                                                    if child3.kind == clang.cindex.CursorKind.STRING_LITERAL:
+                                                        name = child3.spelling[1:-1]
+                                                        all_found += 1
+                                                        break
+                                            break
+                                        break
+                                    if variable_name == 'CODEGEN_ENUM_TYPE':
+                                        for child2 in child.get_children():
+                                            if child2.kind == clang.cindex.CursorKind.UNEXPOSED_EXPR:
+                                                for child3 in child2.get_children():
+                                                    if child3.kind == clang.cindex.CursorKind.STRING_LITERAL:
+                                                        enum_type = child3.spelling[1:-1]
+                                                        all_found += 1
+                                                        break
+                                            break
+                                        break
+                                    if variable_name == 'CODEGEN_ENUM_CLASS':
+                                        for child2 in child.get_children():
+                                            if child2.kind == clang.cindex.CursorKind.UNEXPOSED_EXPR:
+                                                for child3 in child2.get_children():
+                                                    if child3.kind == clang.cindex.CursorKind.STRING_LITERAL:
+                                                        enum_class = child3.spelling[1:-1]
+                                                        all_found += 1
+                                                        break
+                                            break
                                         break
 
-                    #print(f'Found enum: {name} Variant: {variant} Count: {count}')
-                    if all_found == 3:
+                    if all_found == 5:
+                        print(f'Found enum: {name} Variant: {variant} Count: {count}, Type: {enum_type}, Class: {enum_class}')
+                        code_structure.enums.append(Enum(name, variant, count, enum_type, enum_class, namespaces))
                         break
 
             return
@@ -346,8 +437,24 @@ def parse_tree(deep, parent_node, code_structure, namespaces):
                     variable_type = extract_property_type(child)
                     property_obj = Property(variable_name, variable_type)
                     print(f'Found property: {property_obj.name}, Type: {property_obj.type_name}')
+
+                    property_obj.change_callback = extract_special_tag_comment_data(child, 'changeCallback')
+                    property_obj.setter = extract_special_tag_comment_data(child, 'setter')
+                    property_obj.getter = extract_special_tag_comment_data(child, 'getter')
+                    property_obj.reset_value = extract_special_tag_comment_data(child, 'resetValue')
+                    property_obj.drag_value = extract_special_tag_comment_data(child, 'drag')
+                    property_obj.editor_width = extract_special_tag_comment_data(child, 'editorWidth')
+                    property_obj.inspector = extract_special_tag_comment_data(child, 'inspector')
+
+                    property_obj.hidden = has_special_tag_comment(child, 'hidden')
+                    property_obj.read_only = has_special_tag_comment(child, 'readOnly')
+                    property_obj.private = has_special_tag_comment(child, 'private')
+                    property_obj.dontLoad = has_special_tag_comment(child, 'dontLoad')
+
                     # remove m_ and _ prefix from name
-                    property_obj.display_name = make_pretty_property_name(property_obj.name)
+                    property_obj.display_name = make_display_name(property_obj.name)
+                    property_obj.serialize_name = make_serialize_property_name(property_obj.name)
+
                     property_obj.default_value = extract_property_default_value(child)
                     if property_obj.default_value:
                         print(f'Found default value: {property_obj.default_value}')
@@ -411,6 +518,57 @@ def parse_header_file(file_path):
     return code_structure
 
 
+def generate_class_meta_properties(f, class_structures, class_obj, tabs):
+    if len(class_obj.variables) == 0:
+        return
+
+    f.write('\t' * tabs + f'SR_NODISCARD virtual std::span<const SR_UTILS_NS::Reflection::Property> GetProperties() const noexcept override {{\n')
+    f.write('\t' * (tabs + 1) + f'static const std::array<const SR_UTILS_NS::Reflection::Property, {len(class_obj.variables)}> properties {{ \n')
+
+    for prop in class_obj.variables:
+        f.write('\t' * (tabs + 2) + f'SR_UTILS_NS::Reflection::Property()')
+        f.write('\n' + '\t' * (tabs + 3) + f'.SetName("{prop.name}")')
+        f.write('\n' + '\t' * (tabs + 3) + f'.SetDisplayName("{prop.display_name}")')
+        f.write('\n' + '\t' * (tabs + 3) + f'.SetSerializeName("{prop.serialize_name}")')
+
+        if prop.private:
+            f.write('\n' + '\t' * (tabs + 3) + f'.SetPublicity(SR_UTILS_NS::PropertyPublicity::Private)')
+        elif prop.hidden and prop.read_only:
+            f.write('\n' + '\t' * (tabs + 3) + f'.SetPublicity(SR_UTILS_NS::PropertyPublicity::HiddenReadOnly)')
+        elif prop.hidden:
+            f.write('\n' + '\t' * (tabs + 3) + f'.SetPublicity(SR_UTILS_NS::PropertyPublicity::Hidden)')
+        elif prop.read_only:
+            f.write('\n' + '\t' * (tabs + 3) + f'.SetPublicity(SR_UTILS_NS::PropertyPublicity::ReadOnly)')
+        else:
+            f.write('\n' + '\t' * (tabs + 3) + f'.SetPublicity(SR_UTILS_NS::PropertyPublicity::Public)')
+
+        f.write('\n' + '\t' * (tabs + 3) + f'.SetInspector(SR_UTILS_NS::Reflection::GetPropertyInspector<decltype({class_obj.name}::{prop.name})>())')
+
+        f.write('\n' + '\t' * (tabs + 3) + f'.SetSetter(&SRClassMetaTemplate::Set_{prop.name})')
+        f.write('\n' + '\t' * (tabs + 3) + f'.SetGetter(&SRClassMetaTemplate::Get_{prop.name})')
+        f.write('\n' + '\t' * (tabs + 3) + f'.SetChangeCallback(&SRClassMetaTemplate::OnChange_{prop.name})')
+
+        default_value = f'decltype({class_obj.name}::{prop.name})()'
+        if prop.default_value:
+            default_value = f'decltype({class_obj.name}::{prop.name})({prop.default_value})'
+
+        f.write('\n' + '\t' * (tabs + 3) + f'.SetDefaultValue(SR_UTILS_NS::Reflection::Value::Create({default_value}))')
+
+        if prop.reset_value:
+            f.write('\n' + '\t' * (tabs + 3) + f'.SetResetValue(SR_UTILS_NS::Reflection::Value::Create({prop.reset_value}))')
+
+        if prop.drag_value:
+            f.write('\n' + '\t' * (tabs + 3) + f'.SetDragValue(SR_UTILS_NS::Reflection::Value::Create({prop.drag_value}))')
+
+        if prop.editor_width:
+            f.write('\n' + '\t' * (tabs + 3) + f'.SetEditorWidth({prop.editor_width})')
+
+        f.write(',\n')
+
+    f.write('\t' * (tabs + 1) + '};\n')
+    f.write('\t' * (tabs + 1) + 'return properties;\n')
+    f.write('\t' * tabs + '}\n\n')
+
 def generate_class_meta_get_base_metas(f, class_structures, class_obj, tabs):
     if len(class_obj.inherited_classes) == 0:
         return
@@ -454,11 +612,11 @@ def generate_class_meta_save(f, class_obj, tabs):
 
     for prop in class_obj.variables:
         if prop.default_value:
-            f.write('\t' * tabs + f'if ((serializer.IsWriteDefaults() || value.{prop.name} != GetDefault_{prop.display_name}())) {{\n')
+            f.write('\t' * tabs + f'if ((serializer.IsWriteDefaults() || value.{prop.name} != GetDefault_{prop.serialize_name}())) {{\n')
         else:
             f.write('\t' * tabs + f'if ((serializer.IsWriteDefaults() || !SR_UTILS_NS::IsDefault(value.{prop.name}))) {{\n')
-        f.write('\t' * (tabs + 1) + f'static constexpr SR_UTILS_NS::SerializationId keyName_{prop.display_name} = SR_UTILS_NS::SerializationId::Create("{prop.display_name}");\n')
-        f.write('\t' * (tabs + 1) + f'SR_UTILS_NS::Serialization::Save(serializer, value.{prop.name}, keyName_{prop.display_name});\n')
+        f.write('\t' * (tabs + 1) + f'static constexpr SR_UTILS_NS::SerializationId keyName_{prop.serialize_name} = SR_UTILS_NS::SerializationId::Create("{prop.serialize_name}");\n')
+        f.write('\t' * (tabs + 1) + f'SR_UTILS_NS::Serialization::Save(serializer, value.{prop.name}, keyName_{prop.serialize_name});\n')
         f.write('\t' * tabs + f'}}\n')
 
     tabs -= 1
@@ -478,9 +636,11 @@ def generate_class_meta_load(f, class_obj, tabs):
     f.write('\t' * tabs + f'auto&& value = static_cast<{class_name}&>(obj);\n\n')
 
     for prop in class_obj.variables:
+        if prop.dontLoad:
+            continue
         f.write('\t' * tabs + f'{{\n')
-        f.write('\t' * (tabs + 1) + f'static constexpr SR_UTILS_NS::SerializationId keyName_{prop.display_name} = SR_UTILS_NS::SerializationId::Create("{prop.display_name}");\n')
-        f.write('\t' * (tabs + 1) + f'SR_UTILS_NS::Serialization::Load(deserializer, value.{prop.name}, keyName_{prop.display_name});\n')
+        f.write('\t' * (tabs + 1) + f'static constexpr SR_UTILS_NS::SerializationId keyName_{prop.serialize_name} = SR_UTILS_NS::SerializationId::Create("{prop.serialize_name}");\n')
+        f.write('\t' * (tabs + 1) + f'SR_UTILS_NS::Serialization::Load(deserializer, value.{prop.name}, keyName_{prop.serialize_name});\n')
         f.write('\t' * tabs + f'}}\n')
 
     tabs -= 1
@@ -522,16 +682,27 @@ def generate_class_meta(f, class_structures, class_obj, tabs):
         if not prop.default_value:
             continue
         f.write('\t' * tabs + f'// default value for \"{prop}\"\n')
-        f.write('\t' * tabs + f'static auto GetDefault_{prop.display_name}() {{ return {prop.default_value}; }}\n\n')
+        f.write('\t' * tabs + f'static auto GetDefault_{prop.serialize_name}() {{ return {prop.default_value}; }}\n\n')
 
     #for prop in class_obj.variables:
     #    f.write('\t' * tabs + f'// {prop}\n')
     #    f.write('\t' * tabs + f'const {prop.type_name}& Get_{prop.name}({class_name}* pClass) {{ return pClass->{prop.name}; }}\n')
     #    f.write('\t' * tabs + f'void Set_{prop.name}({class_name}* pClass, const {prop.type_name}& value) {{ pClass->{prop.name} = value; }}\n\n')
 
-    f.write('\t' * tabs + f'SR_NODISCARD virtual bool IsAbstract() const noexcept override {{ return std::is_abstract_v<{class_name}>; }}\n\n')
+    f.write('\t' * tabs + f'SR_NODISCARD bool IsAbstract() const noexcept override {{ return std::is_abstract_v<{class_name}>; }}\n\n')
 
     generate_class_meta_get_base_metas(f, class_structures, class_obj, tabs)
+    generate_class_meta_properties(f, class_structures, class_obj, tabs)
+
+    #has_serializable_fields = len(class_obj.variables) > 0
+    #f.write('\t' * tabs + f'SR_NODISCARD virtual bool HasSerializableFields() const noexcept override {{\n')
+    #f.write('\t' * (tabs + 1) + f'for (auto&& pBaseMeta : GetBaseMetas()) {{\n')
+    #f.write('\t' * (tabs + 2) + f'if (pBaseMeta->HasSerializableFields()) {{\n')
+    #f.write('\t' * (tabs + 3) + f'return true;\n')
+    #f.write('\t' * (tabs + 2) + f'}}\n')
+    #f.write('\t' * (tabs + 1) + f'}}\n')
+    #f.write('\t' * (tabs + 1) + f'return { "true" if has_serializable_fields else "false" };\n')
+    #f.write('\t' * tabs + '}\n\n')
 
     generate_class_meta_save(f, class_obj, tabs)
     generate_class_meta_load(f, class_obj, tabs)
@@ -542,6 +713,54 @@ def generate_class_meta(f, class_structures, class_obj, tabs):
 
     f.write('\t' * (tabs - 1) + f'private:\n')
     f.write('\t' * tabs + f'static inline const bool SR_CODEGEN_REGISTER_FACTORY = SR_UTILS_NS::Factory::Instance().Register<{class_name}>();\n\n')
+
+    f.write('\t' * tabs + f'/// Bindings for class {class_obj.name}\n')
+
+    for property in class_obj.variables:
+        f.write('\t' * tabs + f'static void Set_{property.name}(void* pClass, const SR_UTILS_NS::Reflection::Value& value) {{\n')
+
+        f.write('\t' * (tabs + 1) + f'const decltype({class_name}::{property.name})* pData;\n')
+        f.write('\t' * (tabs + 1) + f'if (!value.Map(pData)) {{\n')
+        f.write('\t' * (tabs + 2) + f'return;\n')
+        f.write('\t' * (tabs + 1) + f'}}\n')
+
+        if property.setter:
+            f.write('\t' * (tabs + 1) + f'(({class_name}*)pClass)->{property.setter}(std::move(*pData));\n')
+        else:
+            f.write('\t' * (tabs + 1) + f'(({class_name}*)pClass)->{property.name} = std::move(*pData);\n')
+        f.write('\t' * tabs + f'}}\n')
+
+        f.write('\t' * tabs + f'static SR_UTILS_NS::Reflection::Value Get_{property.name}(void* pClass) {{\n')
+        if property.getter:
+            #f.write('\t' * (tabs + 1) + f'auto&& value = (({class_name}*)pClass)->{property.getter}();\n')
+            #f.write('\t' * (tabs + 1) + f'if constexpr (std::is_lvalue_reference_v<decltype(value)>) {{\n')
+            #f.write('\t' * (tabs + 2) + f'if constexpr (std::is_const_v<std::remove_reference_t<decltype(value)>>) {{\n')
+            #f.write('\t' * (tabs + 3) + f'return SR_UTILS_NS::Reflection::Value::Create(value, true, true);\n')
+            #f.write('\t' * (tabs + 2) + f'}} else {{\n')
+            #f.write('\t' * (tabs + 3) + f'return SR_UTILS_NS::Reflection::Value::Create(value, true, false);\n')
+            #f.write('\t' * (tabs + 2) + f'}}\n')
+            #f.write('\t' * (tabs + 1) + f'}} else {{\n')
+            #f.write('\t' * (tabs + 2) + f'return SR_UTILS_NS::Reflection::Value::Create(value, false, false);\n')
+            #f.write('\t' * (tabs + 1) + f'}}\n')
+            f.write('\t' * (tabs + 1) + f'auto&& value = (({class_name}*)pClass)->{property.getter}();\n')
+            f.write('\t' * (tabs + 1) + f'if constexpr (std::is_lvalue_reference_v<decltype(value)>) {{\n')
+            f.write('\t' * (tabs + 2) + f'constexpr bool isConst = std::is_const_v<std::remove_reference_t<decltype(value)>>;\n')
+            f.write('\t' * (tabs + 2) + f'return SR_UTILS_NS::Reflection::Value::CreateReference(value, isConst);\n')
+            f.write('\t' * (tabs + 1) + f'}} else {{\n')
+            f.write('\t' * (tabs + 2) + f'return SR_UTILS_NS::Reflection::Value::Create(std::move(value), false);\n')
+            f.write('\t' * (tabs + 1) + f'}}\n')
+        else:
+            bool_value = 'true' if property.read_only else 'false'
+            f.write('\t' * (tabs + 1) + f'return SR_UTILS_NS::Reflection::Value::CreateReference((({class_name}*)pClass)->{property.name}, {bool_value});\n')
+
+        f.write('\t' * tabs + f'}}\n')
+
+        f.write('\t' * tabs + f'static void OnChange_{property.name}(void* pClass) {{\n')
+        if property.change_callback:
+            f.write('\t' * (tabs + 1) + f'(({class_name}*)pClass)->{property.change_callback}();\n')
+        f.write('\t' * tabs + f'}}\n')
+
+        f.write('\n')
 
     tabs -= 1
     f.write('\t' * tabs + '};\n\n')
@@ -555,6 +774,239 @@ def generate_class_meta(f, class_structures, class_obj, tabs):
     tabs -= 1
     f.write('\t' * tabs + '}\n\n')
     pass
+
+def generate_enums_code(codegen_dir, enums):
+    basic_full_path = os.path.normpath(f'{codegen_dir}/EnumsFwd.generated.hpp')
+    with open(basic_full_path, 'w', encoding='utf8') as f:
+        f.write('// This file is generated by SpaRcle Studio code-generator ^_^\n\n')
+        f.write(f'#ifndef SR_CODEGEN_ENUMS_BASIC_HPP\n')
+        f.write(f'#define SR_CODEGEN_ENUMS_BASIC_HPP\n\n')
+
+        for enum_obj in enums:
+            namespace_str = ''
+            if len(enum_obj.namespaces) > 0:
+                namespace_str = '::'.join(enum_obj.namespaces)
+
+            if len(namespace_str) > 0:
+                f.write(f'namespace {namespace_str} {{\n')
+
+            f.write(f'\t{enum_obj.enum_class} {enum_obj.name} : {enum_obj.type};\n')
+            f.write(f'\tclass CodegenEnumIncludedChecked_{enum_obj.name};\n')
+            #f.write(f'\ttemplate<typename T, typename Enable = void> struct CodegenEnumIncludedChecked_{enum_obj.name} : std::false_type {{}};\n')
+
+            if namespace_str:
+                f.write('}\n\n')
+
+        f.write('#endif\n')
+
+    full_path = os.path.normpath(f'{codegen_dir}/Enums.generated.hpp')
+    with open(full_path, 'w', encoding='utf8') as f:
+        f.write('// This file is generated by SpaRcle Studio code-generator ^_^\n\n')
+        f.write(f'#include "EnumsFwd.generated.hpp"\n\n')
+        f.write(f'#ifndef SR_CODEGEN_ENUMS_HPP\n')
+        f.write(f'#define SR_CODEGEN_ENUMS_HPP\n\n')
+
+        f.write('#define SR_CODEGEN_ENUM_OPERATORS(enumName)                                                                             \\\n')
+        f.write('\tinline constexpr enumName operator|(enumName lhs, enumName rhs) {                                                   \\\n')
+        f.write('\t    return static_cast<enumName>(                                                                                   \\\n')
+        f.write('\t        static_cast<std::underlying_type_t<enumName>>(lhs) |                                                        \\\n')
+        f.write('\t        static_cast<std::underlying_type_t<enumName>>(rhs)                                                          \\\n')
+        f.write('\t    );                                                                                                              \\\n')
+        f.write('\t}                                                                                                                   \\\n')
+        f.write('\tinline constexpr enumName operator&(enumName lhs, enumName rhs) {                                                   \\\n')
+        f.write('\t    return static_cast<enumName>(                                                                                   \\\n')
+        f.write('\t        static_cast<std::underlying_type_t<enumName>>(lhs) &                                                        \\\n')
+        f.write('\t        static_cast<std::underlying_type_t<enumName>>(rhs)                                                          \\\n')
+        f.write('\t    );                                                                                                              \\\n')
+        f.write('\t}                                                                                                                   \\\n')
+        f.write('\tinline constexpr enumName operator^(enumName lhs, enumName rhs) {                                                   \\\n')
+        f.write('\t    return static_cast<enumName>(                                                                                   \\\n')
+        f.write('\t        static_cast<std::underlying_type_t<enumName>>(lhs) ^                                                        \\\n')
+        f.write('\t        static_cast<std::underlying_type_t<enumName>>(rhs)                                                          \\\n')
+        f.write('\t    );                                                                                                              \\\n')
+        f.write('\t}                                                                                                                   \\\n')
+        f.write('\tinline constexpr enumName operator~(enumName lhs) {                                                                 \\\n')
+        f.write('\t    return static_cast<enumName>(                                                                                   \\\n')
+        f.write('\t        ~static_cast<std::underlying_type_t<enumName>>(lhs)                                                         \\\n')
+        f.write('\t    );                                                                                                              \\\n')
+        f.write('\t}                                                                                                                   \\\n')
+        f.write('\tinline constexpr enumName& operator|=(enumName& lhs, enumName rhs) {                                                \\\n')
+        f.write('\t    lhs = lhs | rhs;                                                                                                \\\n')
+        f.write('\t    return lhs;                                                                                                     \\\n')
+        f.write('\t}                                                                                                                   \\\n')
+        f.write('\tinline constexpr enumName& operator&=(enumName& lhs, enumName rhs) {                                                \\\n')
+        f.write('\t    lhs = lhs & rhs;                                                                                                \\\n')
+        f.write('\t    return lhs;                                                                                                     \\\n')
+        f.write('\t}                                                                                                                   \\\n')
+        f.write('\tinline constexpr enumName& operator^=(enumName& lhs, enumName rhs) {                                                \\\n')
+        f.write('\t    lhs = lhs ^ rhs;                                                                                                \\\n')
+        f.write('\t    return lhs;                                                                                                     \\\n')
+        f.write('\t}                                                                                                                   \\\n')
+        f.write('\tinline constexpr bool operator!(enumName lhs) {                                                                     \\\n')
+        f.write('\t    return !static_cast<std::underlying_type_t<enumName>>(lhs);                                                     \\\n')
+        f.write('\t}                                                                                                                   \\\n')
+        f.write('\tinline constexpr bool operator&&(enumName lhs, enumName rhs) {                                                      \\\n')
+        f.write('\t    return static_cast<std::underlying_type_t<enumName>>(lhs) &&                                                    \\\n')
+        f.write('\t             static_cast<std::underlying_type_t<enumName>>(rhs);                                                    \\\n')
+        f.write('\t}                                                                                                                   \\\n')
+        f.write('\tinline constexpr bool operator||(enumName lhs, enumName rhs) {                                                      \\\n')
+        f.write('\t    return static_cast<std::underlying_type_t<enumName>>(lhs) ||                                                    \\\n')
+        f.write('\t             static_cast<std::underlying_type_t<enumName>>(rhs);                                                    \\\n')
+        f.write('\t}                                                                                                                   \\\n')
+        f.write('\tinline constexpr bool operator==(enumName lhs, enumName rhs) {                                                      \\\n')
+        f.write('\t    return static_cast<std::underlying_type_t<enumName>>(lhs) ==                                                    \\\n')
+        f.write('\t             static_cast<std::underlying_type_t<enumName>>(rhs);                                                    \\\n')
+        f.write('\t}                                                                                                                   \\\n')
+        f.write('\tinline constexpr bool operator!=(enumName lhs, enumName rhs) {                                                      \\\n')
+        f.write('\t    return static_cast<std::underlying_type_t<enumName>>(lhs) !=                                                    \\\n')
+        f.write('\t             static_cast<std::underlying_type_t<enumName>>(rhs);                                                    \\\n')
+        f.write('\t}                                                                                                                   \\\n')
+        f.write('\tinline constexpr bool operator<(enumName lhs, enumName rhs) {                                                       \\\n')
+        f.write('\t    return static_cast<std::underlying_type_t<enumName>>(lhs) <                                                     \\\n')
+        f.write('\t             static_cast<std::underlying_type_t<enumName>>(rhs);                                                    \\\n')
+        f.write('\t}                                                                                                                   \\\n')
+        f.write('\tinline constexpr bool operator>(enumName lhs, enumName rhs) {                                                       \\\n')
+        f.write('\t    return static_cast<std::underlying_type_t<enumName>>(lhs) >                                                     \\\n')
+        f.write('\t             static_cast<std::underlying_type_t<enumName>>(rhs);                                                    \\\n')
+        f.write('\t}                                                                                                                   \\\n')
+        f.write('\tinline constexpr bool operator<=(enumName lhs, enumName rhs) {                                                      \\\n')
+        f.write('\t    return static_cast<std::underlying_type_t<enumName>>(lhs) <=                                                    \\\n')
+        f.write('\t             static_cast<std::underlying_type_t<enumName>>(rhs);                                                    \\\n')
+        f.write('\t}                                                                                                                   \\\n')
+        f.write('\tinline constexpr bool operator>=(enumName lhs, enumName rhs) {                                                      \\\n')
+        f.write('\t    return static_cast<std::underlying_type_t<enumName>>(lhs) >=                                                    \\\n')
+        f.write('\t             static_cast<std::underlying_type_t<enumName>>(rhs);                                                    \\\n')
+        f.write('\t}                                                                                                                   \\\n')
+        f.write('\tinline constexpr enumName operator+(enumName lhs, enumName rhs) {                                                   \\\n')
+        f.write('\t    return static_cast<enumName>(                                                                                   \\\n')
+        f.write('\t        static_cast<std::underlying_type_t<enumName>>(lhs) +                                                        \\\n')
+        f.write('\t        static_cast<std::underlying_type_t<enumName>>(rhs)                                                          \\\n')
+        f.write('\t    );                                                                                                              \\\n')
+        f.write('\t}                                                                                                                   \\\n')
+        f.write('\tinline constexpr enumName operator-(enumName lhs, enumName rhs) {                                                   \\\n')
+        f.write('\t    return static_cast<enumName>(                                                                                   \\\n')
+        f.write('\t        static_cast<std::underlying_type_t<enumName>>(lhs) -                                                        \\\n')
+        f.write('\t        static_cast<std::underlying_type_t<enumName>>(rhs)                                                          \\\n')
+        f.write('\t    );                                                                                                              \\\n')
+        f.write('\t}                                                                                                                   \\\n')
+        f.write('\tinline constexpr enumName operator*(enumName lhs, enumName rhs) {                                                   \\\n')
+        f.write('\t    return static_cast<enumName>(                                                                                   \\\n')
+        f.write('\t        static_cast<std::underlying_type_t<enumName>>(lhs) *                                                        \\\n')
+        f.write('\t        static_cast<std::underlying_type_t<enumName>>(rhs)                                                          \\\n')
+        f.write('\t    );                                                                                                              \\\n')
+        f.write('\t}                                                                                                                   \\\n')
+        f.write('\tinline constexpr enumName operator/(enumName lhs, enumName rhs) {                                                   \\\n')
+        f.write('\t    return static_cast<enumName>(                                                                                   \\\n')
+        f.write('\t        static_cast<std::underlying_type_t<enumName>>(lhs) /                                                        \\\n')
+        f.write('\t        static_cast<std::underlying_type_t<enumName>>(rhs)                                                          \\\n')
+        f.write('\t    );                                                                                                              \\\n')
+        f.write('\t}                                                                                                                   \\\n')
+        f.write('\tinline constexpr enumName operator%(enumName lhs, enumName rhs) {                                                   \\\n')
+        f.write('\t    return static_cast<enumName>(                                                                                   \\\n')
+        f.write('\t        static_cast<std::underlying_type_t<enumName>>(lhs) %                                                        \\\n')
+        f.write('\t        static_cast<std::underlying_type_t<enumName>>(rhs)                                                          \\\n')
+        f.write('\t    );                                                                                                              \\\n')
+        f.write('\t}                                                                                                                   \\\n')
+        f.write('\tinline constexpr enumName& operator++(enumName& lhs) {                                                              \\\n')
+        f.write('\t    lhs = static_cast<enumName>(static_cast<std::underlying_type_t<enumName>>(lhs) + 1);                            \\\n')
+        f.write('\t    return lhs;                                                                                                     \\\n')
+        f.write('\t}                                                                                                                   \\\n')
+        f.write('\tinline constexpr enumName operator++(enumName& lhs, int) {                                                          \\\n')
+        f.write('\t    enumName result = lhs;                                                                                          \\\n')
+        f.write('\t    ++lhs;                                                                                                          \\\n')
+        f.write('\t    return result;                                                                                                  \\\n')
+        f.write('\t}                                                                                                                   \\\n')
+        f.write('\tinline constexpr enumName& operator--(enumName& lhs) {                                                              \\\n')
+        f.write('\t    lhs = static_cast<enumName>(static_cast<std::underlying_type_t<enumName>>(lhs) - 1);                            \\\n')
+        f.write('\t    return lhs;                                                                                                     \\\n')
+        f.write('\t}                                                                                                                   \\\n')
+        f.write('\tinline constexpr enumName operator--(enumName& lhs, int) {                                                          \\\n')
+        f.write('\t    enumName result = lhs;                                                                                          \\\n')
+        f.write('\t    --lhs;                                                                                                          \\\n')
+        f.write('\t    return result;                                                                                                  \\\n')
+        f.write('\t}                                                                                                                   \\\n')
+        f.write('\tinline constexpr enumName operator<<(enumName lhs, enumName rhs) {                                                  \\\n')
+        f.write('\t    return static_cast<enumName>(                                                                                   \\\n')
+        f.write('\t        static_cast<std::underlying_type_t<enumName>>(lhs) <<                                                       \\\n')
+        f.write('\t        static_cast<std::underlying_type_t<enumName>>(rhs)                                                          \\\n')
+        f.write('\t    );                                                                                                              \\\n')
+        f.write('\t}                                                                                                                   \\\n')
+        f.write('\tinline constexpr enumName operator>>(enumName lhs, enumName rhs) {                                                  \\\n')
+        f.write('\t    return static_cast<enumName>(                                                                                   \\\n')
+        f.write('\t        static_cast<std::underlying_type_t<enumName>>(lhs) >>                                                       \\\n')
+        f.write('\t        static_cast<std::underlying_type_t<enumName>>(rhs)                                                          \\\n')
+        f.write('\t    );                                                                                                              \\\n')
+        f.write('\t}                                                                                                                   \\\n')
+        f.write('\tinline constexpr enumName& operator<<=(enumName& lhs, enumName rhs) {                                               \\\n')
+        f.write('\t    lhs = lhs << rhs;                                                                                               \\\n')
+        f.write('\t    return lhs;                                                                                                     \\\n')
+        f.write('\t}                                                                                                                   \\\n')
+        f.write('\tinline constexpr enumName& operator>>=(enumName& lhs, enumName rhs) {                                               \\\n')
+        f.write('\t    lhs = lhs >> rhs;                                                                                               \\\n')
+        f.write('\t    return lhs;                                                                                                     \\\n')
+        f.write('\t}                                                                                                                   \\\n\n')
+
+        # generate code
+        for enum_obj in enums:
+            namespace_str = ''
+            if len(enum_obj.namespaces) > 0:
+                namespace_str = '::'.join(enum_obj.namespaces)
+
+            if len(namespace_str) > 0:
+                namespace_str += '::'
+
+            class_full_name = namespace_str + enum_obj.name
+
+            f.write(f'namespace Codegen {{\n')
+
+            f.write(f'\ttemplate<> constexpr SR_UTILS_NS::EnumVariant GetEnumVariant(Codegen::EnumSelector<{class_full_name}>) noexcept {{\n')
+            f.write(f'\t\treturn SR_UTILS_NS::EnumVariant::{enum_obj.variant};\n')
+            f.write(f'\t}}\n\n')
+
+            f.write(f'\ttemplate<> constexpr size_t GetEnumItemsCount(Codegen::EnumSelector<{class_full_name}>) noexcept {{\n')
+            f.write(f'\t\treturn {enum_obj.count};\n')
+            f.write(f'\t}}\n\n')
+
+            f.write(f'}}\n\n')
+
+        # operators
+        for enum_obj in enums:
+            namespace_str = ''
+            if len(enum_obj.namespaces) > 0:
+                namespace_str = '::'.join(enum_obj.namespaces)
+
+            if len(namespace_str) > 0:
+                namespace_str += '::'
+
+            class_full_name = namespace_str + enum_obj.name
+            f.write(f'SR_CODEGEN_ENUM_OPERATORS({class_full_name})\n')
+
+        f.write('\n')
+
+        # formatting
+        for enum_obj in enums:
+            namespace_str = ''
+            if len(enum_obj.namespaces) > 0:
+                namespace_str = '::'.join(enum_obj.namespaces)
+
+            if len(namespace_str) > 0:
+                namespace_str += '::'
+
+            f.write(f'template<> struct fmt::formatter<{namespace_str}{enum_obj.name}> {{\n')
+            f.write(f'\tconstexpr auto parse(format_parse_context& ctx) {{ return ctx.begin(); }}\n')
+            f.write(f'\tauto format(const {namespace_str}{enum_obj.name}& val, format_context& ctx) const {{\n')
+
+            f.write(f'\t\tif constexpr (SR_UTILS_NS::IsCompleteTypeV<{namespace_str}CodegenEnumIncludedChecked_{enum_obj.name}>) {{\n')
+            f.write(f'\t\t\treturn fmt::format_to(ctx.out(), "{{}}", SR_UTILS_NS::EnumReflector::ToStringAtom(val).ToStringView());\n')
+            f.write(f'\t\t}} else {{\n')
+            f.write(f'\t\t\tSRHalt("Formatted enum \\\"{enum_obj.name}\\\" is not included, please include it!");\n')
+            f.write(f'\t\t\treturn fmt::format_to(ctx.out(), "{{}}", static_cast<int>(val));\n')
+            f.write(f'\t\t}}\n')
+
+            f.write(f'\t}}\n')
+            f.write(f'}};\n')
+
+        f.write(f'\n#endif // SR_CODEGEN_ENUMS_HPP\n')
 
 def generate_classes_code(codegen_dir, class_structures):
     file_map = {}
@@ -592,6 +1044,7 @@ def generate_classes_code(codegen_dir, class_structures):
                 f.write(f'#include "{os.path.abspath(os.path.normpath(class_obj.path))}"\n\n')
                 f.write(f'#include <Utils/TypeTraits/ClassDB.h>\n')
                 f.write(f'#include <Utils/TypeTraits/SRClass.h>\n')
+                f.write(f'#include <Utils/TypeTraits/Factory.h>\n')
                 f.write(f'#include <Utils/TypeTraits/SRClassMeta.h>\n\n')
 
                 tabs = 0
@@ -612,6 +1065,16 @@ def generate_classes_code(codegen_dir, class_structures):
                 #factory_name = factory_name[0].lower() + factory_name[1:]
                 f.write('\t' * tabs + f'SR_UTILS_NS::StringAtom {class_obj.name}::GetClassStaticName() noexcept {{\n')
                 f.write('\t' * (tabs + 1) + f'return \"{factory_name}\";\n')
+                f.write('\t' * tabs + '}\n\n')
+
+                f.write('\t' * tabs + f'SR_UTILS_NS::SRClass* {class_obj.name}::AllocateStatic() noexcept {{\n')
+                f.write('\t' * (tabs + 1) + f'if constexpr (std::is_abstract_v<{class_obj.name}>) {{\n')
+                f.write('\t' * (tabs + 2) + f'SRHalt("Cannot allocate abstract class \\\"{class_obj.name}\\\"!");\n')
+                f.write('\t' * (tabs + 2) + f'return nullptr;\n')
+                f.write('\t' * (tabs + 1) + f'}}\n')
+                f.write('\t' * (tabs + 1) + f'else {{\n')
+                f.write('\t' * (tabs + 2) + f'return static_cast<SR_UTILS_NS::SRClass*>(SRNew<{class_obj.name}>());\n')
+                f.write('\t' * (tabs + 1) + f'}}\n')
                 f.write('\t' * tabs + '}\n\n')
 
                 f.write('\t' * tabs + f'bool {class_obj.name}::RegisterPropertiesCodegen() {{\n')
@@ -733,6 +1196,7 @@ def main() -> bool:
     print('Count of enums:', len(code_structures.enums))
 
     generate_classes_code(codegen_dir, code_structures.classes)
+    generate_enums_code(codegen_dir, code_structures.enums)
 
     return True
 

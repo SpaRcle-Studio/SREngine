@@ -88,7 +88,7 @@ namespace SR_CORE_GUI_NS {
         Super::Init();
     }
 
-    void SceneTools::SetGizmoOperation(SR_GRAPH_UI_NS::GizmoOperationFlag operation) {
+    void SceneTools::SetGizmoOperation(SR_GRAPH_UI_NS::GizmoOperation operation) {
         m_gizmoOperationFlag &= ~SR_GRAPH_UI_NS::GizmoOperation::Translate;
         m_gizmoOperationFlag &= ~SR_GRAPH_UI_NS::GizmoOperation::Rotate;
         m_gizmoOperationFlag &= ~SR_GRAPH_UI_NS::GizmoOperation::Scale;

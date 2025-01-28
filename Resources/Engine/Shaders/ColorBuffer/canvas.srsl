@@ -9,7 +9,7 @@ DepthWrite true;
 DepthTest true;
 
 void fragment() {
-	COLOR = vec4(COLOR_BUFFER_VALUE, 1.0);
+	COLOR = vec4(PC_COLOR_BUFFER_VALUE, 1.0);
 }
 
 void vertex() {
