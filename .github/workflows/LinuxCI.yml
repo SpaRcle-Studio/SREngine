@@ -26,15 +26,29 @@ jobs:
       - name: Installing dependencies.
         run: |
           echo "Used dependencies=$DEPENDENCIES" >> "$GITHUB_ENV"
+
+          sudo apt update
+          
+          # Разделяем строку на отдельные пакеты по пробелам
+          IFS=' ' read -r -a DEP_ARRAY <<< "$DEPENDENCIES"
+          
+          # Логируем установку каждого пакета
+          for DEP in "${DEP_ARRAY[@]}"; do
+            echo "[LOG] Installing package $DEP..."
+            sudo apt-get install -y $DEP || { echo "Error installing $DEP"; exit 1; }
+          done
+          
+          # Проверка на успех после установки
+          echo "All ubuntu dependencies installed successfully."
+          
           wget -qO- https://packages.lunarg.com/lunarg-signing-key-pub.asc | sudo tee /etc/apt/trusted.gpg.d/lunarg.asc
           sudo wget -qO /etc/apt/sources.list.d/lunarg-vulkan-jammy.list http://packages.lunarg.com/vulkan/lunarg-vulkan-jammy.list
-          sudo add-apt-repository universe
-          sudo apt update
-          echo "Install libyaml"
-          sudo apt install -y libyaml-cpp-dev
+          
+          #sudo add-apt-repository universe
           #sudo apt update -y 
-          #sudo apt upgrade -y          
-          sudo apt-get install -y $DEPENDENCIES
+          #sudo apt upgrade -y        
+          #sudo apt-get install -y $DEPENDENCIES
+          
           sudo pip install numpy
           sudo pip install clang
         env:
