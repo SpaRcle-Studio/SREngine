@@ -30,7 +30,7 @@ jobs:
           
           wget https://github.com/jbeder/yaml-cpp/archive/refs/tags/yaml-cpp-0.7.0.zip
           unzip yaml-cpp-0.7.0.zip
-          cd yaml-cpp-0.7.0
+          cd yaml-cpp-yaml-cpp-0.7.0
 
           mkdir build
           cd build
@@ -39,7 +39,6 @@ jobs:
           sudo make install
 
           cd ../..
-          rm -rf yaml-cpp-0.7.0 yaml-cpp-0.7.0.zip
 
       - name: Installing dependencies.
         run: |
