@@ -34,8 +34,8 @@ jobs:
 
           mkdir build
           cd build
-          cmake ..
-          make CXXFLAGS="-Wno-error"
+          cmake .. -DCMAKE_CXX_FLAGS="-Wno-error"
+          make
           sudo make install
 
           cd ../..
