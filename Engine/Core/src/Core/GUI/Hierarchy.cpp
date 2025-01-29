@@ -116,7 +116,7 @@ namespace SR_CORE_GUI_NS {
 
             ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(8, 8));
 
-            if (ImGui::BeginMenu("Add New Node")) {
+            /*if (ImGui::BeginMenu("Add New Node")) {
                 if (ImGui::MenuItem("Default")) {
 
                 }
@@ -124,7 +124,7 @@ namespace SR_CORE_GUI_NS {
 
                 }
                 ImGui::EndMenu();
-            }
+            }*/
 
             ImGui::PopStyleVar();
 
