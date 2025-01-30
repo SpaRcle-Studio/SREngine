@@ -476,7 +476,117 @@ namespace SR_CORE_GUI_NS {
     }
 
     PropertyDrawerFeedback NumericPropertyDrawer::Draw(const PropertyDrawerContext& context) {
-        return PropertyDrawerFeedback();
+        PropertyDrawerFeedback feedback;
+
+        SR_UTILS_NS::Reflection::Value value = context.property.Get(context.pOwner);
+
+        ImGui::PushID(context.pOwner);
+        ImGui::PushID(context.property.GetName().ToCStr());
+
+        ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2{ 0, 0 });
+
+        const float_t lineHeight = GImGui->Font->FontSize + GImGui->Style.FramePadding.y * 2.0f;
+        const ImVec2 buttonSize = { lineHeight + 90.0f, lineHeight };
+        const float_t drag = context.property.GetDragSpeed();
+        //const float_t columnWidth = context.property.GetEditorWidth() > 0.f ? context.property.GetEditorWidth() : 70.f;
+
+        //ImGui::PushItemWidth(columnWidth);
+
+        if (ImGui::Button(context.property.GetDisplayName().c_str(), buttonSize)) {
+            feedback.isChanged = true;
+            value = context.property.GetResetValue() ? context.property.GetResetValue() : context.property.GetDefaultValue();
+        }
+
+        //ImGui::PopItemWidth();
+
+        ImGui::SameLine();
+
+        switch (value.GetType()) {
+            case SR_UTILS_NS::StandardType::Int8: {
+                auto&& pValue = value.Map<int8_t>();
+                if (ImGui::DragScalar("", ImGuiDataType_S8, pValue, drag)) {
+                    feedback.isChanged = true;
+                }
+                break;
+            }
+            case SR_UTILS_NS::StandardType::UInt8: {
+                auto&& pValue = value.Map<uint8_t>();
+                if (ImGui::DragScalar("", ImGuiDataType_U8, pValue, drag)) {
+                    feedback.isChanged = true;
+                }
+                break;
+            }
+            case SR_UTILS_NS::StandardType::Int16: {
+                auto&& pValue = value.Map<int16_t>();
+                if (ImGui::DragScalar("", ImGuiDataType_S16, pValue, drag)) {
+                    feedback.isChanged = true;
+                }
+                break;
+            }
+            case SR_UTILS_NS::StandardType::UInt16: {
+                auto&& pValue = value.Map<uint16_t>();
+                if (ImGui::DragScalar("", ImGuiDataType_U16, pValue, drag)) {
+                    feedback.isChanged = true;
+                }
+                break;
+            }
+            case SR_UTILS_NS::StandardType::Int32: {
+                auto&& pValue = value.Map<int32_t>();
+                if (ImGui::DragScalar("", ImGuiDataType_S32, pValue, drag)) {
+                    feedback.isChanged = true;
+                }
+                break;
+            }
+            case SR_UTILS_NS::StandardType::UInt32: {
+                auto&& pValue = value.Map<uint32_t>();
+                if (ImGui::DragScalar("", ImGuiDataType_U32, pValue, drag)) {
+                    feedback.isChanged = true;
+                }
+                break;
+            }
+            case SR_UTILS_NS::StandardType::Int64: {
+                auto&& pValue = value.Map<int64_t>();
+                if (ImGui::DragScalar("", ImGuiDataType_S64, pValue, drag)) {
+                    feedback.isChanged = true;
+                }
+                break;
+            }
+            case SR_UTILS_NS::StandardType::UInt64: {
+                auto&& pValue = value.Map<uint64_t>();
+                if (ImGui::DragScalar("", ImGuiDataType_U64, pValue, drag)) {
+                    feedback.isChanged = true;
+                }
+                break;
+            }
+            case SR_UTILS_NS::StandardType::Float: {
+                auto&& pValue = value.Map<float_t>();
+                if (ImGui::DragScalar("", ImGuiDataType_Float, pValue, drag)) {
+                    feedback.isChanged = true;
+                }
+                break;
+            }
+            case SR_UTILS_NS::StandardType::Double: {
+                auto&& pValue = value.Map<double_t>();
+                if (ImGui::DragScalar("", ImGuiDataType_Double, pValue, drag)) {
+                    feedback.isChanged = true;
+                }
+                break;
+            }
+            default:
+                SR_GRAPH_GUI_NS::ColoredText("Unknown numeric type!", ImColor(1.f, 0.f, 0.f, 1.f));
+                break;
+        }
+
+        ImGui::PopStyleVar();
+
+        ImGui::PopID();
+        ImGui::PopID();
+
+        if (feedback.isChanged) {
+            context.property.Set(context.pOwner, value);
+        }
+
+        return feedback;
     }
 
     PropertyDrawerFeedback VectorPropertyDrawer::Draw(const PropertyDrawerContext& context) {
@@ -510,6 +620,7 @@ namespace SR_CORE_GUI_NS {
 
         const float_t lineHeight = GImGui->Font->FontSize + GImGui->Style.FramePadding.y * 2.0f;
         const ImVec2 buttonSize = { lineHeight + 3.0f, lineHeight };
+        const float_t drag = context.property.GetDragSpeed();
 
         constexpr std::array<const char*, 6> labels = { "X", "Y", "Z", "W", "V", "U" };
         constexpr std::array<ImVec4, 6> colors = {
@@ -558,8 +669,7 @@ namespace SR_CORE_GUI_NS {
                 }
                 case SR_UTILS_NS::StandardType::Int32: {
                     const uint32_t offset = i * sizeof(int32_t);
-                    auto&& pDrag = context.property.GetDragValue().Map<int32_t>();
-                    if (ImGui::DragInt("", reinterpret_cast<int*>(&pRaw[offset]), pDrag ? *pDrag : 1)) {
+                    if (ImGui::DragScalar("", ImGuiDataType_S32, reinterpret_cast<int*>(&pRaw[offset]), drag)) {
                         feedback.isChanged = true;
                     }
                     if (isNeedToReset) {
@@ -569,8 +679,7 @@ namespace SR_CORE_GUI_NS {
                 }
                 case SR_UTILS_NS::StandardType::UInt32: {
                     const uint32_t offset = i * sizeof(uint32_t);
-                    auto&& pDrag = context.property.GetDragValue().Map<uint32_t>();
-                    if (ImGui::InputScalar("", ImGuiDataType_U32, reinterpret_cast<uint32_t*>(&pRaw[offset]), pDrag ? pDrag : nullptr)) {
+                    if (ImGui::DragScalar("", ImGuiDataType_U32, reinterpret_cast<uint32_t*>(&pRaw[offset]), drag)) {
                         feedback.isChanged = true;
                     }
                     if (isNeedToReset) {
@@ -580,8 +689,7 @@ namespace SR_CORE_GUI_NS {
                 }
                 case SR_UTILS_NS::StandardType::Float: {
                     const uint32_t offset = i * sizeof(float_t);
-                    auto&& pDrag = context.property.GetDragValue().Map<float_t>();
-                    if (ImGui::DragFloat("", reinterpret_cast<float*>(&pRaw[offset]), pDrag ? *pDrag : 0.1f)) {
+                    if (ImGui::DragScalar("", ImGuiDataType_Float, reinterpret_cast<float*>(&pRaw[offset]), drag)) {
                         feedback.isChanged = true;
                     }
                     if (isNeedToReset) {
@@ -646,6 +754,7 @@ namespace SR_CORE_GUI_NS {
 
         const float_t lineHeight = GImGui->Font->FontSize + GImGui->Style.FramePadding.y * 2.0f;
         const ImVec2 buttonSize = { lineHeight + 3.0f, lineHeight };
+        const float_t drag = context.property.GetDragSpeed();
 
         constexpr std::array<const char*, 2> labels = { "X", "Y" };
         constexpr std::array<ImVec4, 2> colors = {
@@ -689,8 +798,7 @@ namespace SR_CORE_GUI_NS {
 
             switch (partType) {
                 case SR_UTILS_NS::StandardType::Float: {
-                    auto&& pDrag = context.property.GetDragValue().Map<float_t>();
-                    if (ImGui::DragFloat("", &pFSize->v, pDrag ? *pDrag : 0.1f)) {
+                    if (ImGui::DragScalar("", ImGuiDataType_Float, &pFSize->v, drag)) {
                         feedback.isChanged = true;
                     }
                     if (isNeedToReset) {
@@ -699,8 +807,7 @@ namespace SR_CORE_GUI_NS {
                     break;
                 }
                 case SR_UTILS_NS::StandardType::Int32: {
-                    auto&& pDrag = context.property.GetDragValue().Map<int32_t>();
-                    if (ImGui::DragInt("", &pISize->v, pDrag ? *pDrag : 1)) {
+                    if (ImGui::DragScalar("", ImGuiDataType_S32, &pISize->v, drag)) {
                         feedback.isChanged = true;
                     }
                     if (isNeedToReset) {
@@ -709,8 +816,7 @@ namespace SR_CORE_GUI_NS {
                     break;
                 }
                 case SR_UTILS_NS::StandardType::UInt32: {
-                    auto&& pDrag = context.property.GetDragValue().Map<uint32_t>();
-                    if (ImGui::InputScalar("", ImGuiDataType_U32, &pUSize->v, pDrag ? pDrag : nullptr)) {
+                    if (ImGui::DragScalar("", ImGuiDataType_U32, &pUSize->v, drag)) {
                         feedback.isChanged = true;
                     }
                     if (isNeedToReset) {
