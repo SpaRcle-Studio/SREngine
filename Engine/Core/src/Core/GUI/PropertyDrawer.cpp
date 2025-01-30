@@ -458,18 +458,36 @@ namespace SR_CORE_GUI_NS {
 
         SR_UTILS_NS::Reflection::Value value = context.property.Get(context.pOwner);
 
+        ImGui::PushID(context.pOwner);
+        ImGui::PushID(context.property.GetName().ToCStr());
+
+        ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2{ 0, 0 });
+
+        const ImVec2 buttonSize = { context.fieldTitleWidth, context.fieldHeight };
+
+        if (ImGui::Button(context.property.GetEditorParams().GetDisplayName().c_str(), buttonSize)) {
+            feedback.isChanged = true;
+            value = context.property.GetResetValue() ? context.property.GetResetValue() : context.property.GetDefaultValue();
+        }
+
+        ImGui::SameLine();
+
         if (auto&& bValue = value.Map<bool>()) {
-            ImGui::PushID(context.pOwner);
-            ImGui::PushID(context.property.GetName().ToCStr());
-            if (ImGui::Checkbox(context.property.GetDisplayName().ToCStr(), bValue)) {
-                context.property.Set(context.pOwner, value);
+            if (ImGui::Checkbox("##Checkbox", bValue)) {
                 feedback.isChanged = true;
             }
-            ImGui::PopID();
-            ImGui::PopID();
         }
         else {
             SR_GRAPH_GUI_NS::ColoredText("Failed to map bool value!", ImColor(1.f, 0.f, 0.f, 1.f));
+        }
+
+        ImGui::PopStyleVar();
+
+        ImGui::PopID();
+        ImGui::PopID();
+
+        if (feedback.isChanged) {
+            context.property.Set(context.pOwner, value);
         }
 
         return feedback;
@@ -485,21 +503,17 @@ namespace SR_CORE_GUI_NS {
 
         ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2{ 0, 0 });
 
-        const float_t lineHeight = GImGui->Font->FontSize + GImGui->Style.FramePadding.y * 2.0f;
-        const ImVec2 buttonSize = { lineHeight + 90.0f, lineHeight };
-        const float_t drag = context.property.GetDragSpeed();
-        //const float_t columnWidth = context.property.GetEditorWidth() > 0.f ? context.property.GetEditorWidth() : 70.f;
+        const ImVec2 buttonSize = { context.fieldTitleWidth, context.fieldHeight };
+        const float_t drag = context.property.GetEditorParams().GetDragSpeed();
 
-        //ImGui::PushItemWidth(columnWidth);
-
-        if (ImGui::Button(context.property.GetDisplayName().c_str(), buttonSize)) {
+        if (ImGui::Button(context.property.GetEditorParams().GetDisplayName().c_str(), buttonSize)) {
             feedback.isChanged = true;
             value = context.property.GetResetValue() ? context.property.GetResetValue() : context.property.GetDefaultValue();
         }
 
-        //ImGui::PopItemWidth();
-
         ImGui::SameLine();
+
+        ImGui::PushItemWidth(context.fieldWidth);
 
         switch (value.GetType()) {
             case SR_UTILS_NS::StandardType::Int8: {
@@ -577,6 +591,8 @@ namespace SR_CORE_GUI_NS {
                 break;
         }
 
+        ImGui::PopItemWidth();
+
         ImGui::PopStyleVar();
 
         ImGui::PopID();
@@ -600,27 +616,29 @@ namespace SR_CORE_GUI_NS {
             return feedback;
         }
 
-        const float_t columnWidth = context.property.GetEditorWidth() > 0.f ? context.property.GetEditorWidth() : 70.f;
-
         const uint8_t dimension = SR_UTILS_NS::GetMathVectorDim(value.GetType());
         char* pRaw = value.MapString();
 
         ImGui::PushID(context.pOwner);
         ImGui::PushID(context.property.GetName().ToCStr());
 
-        ImGui::Columns(2);
-        ImGui::SetColumnWidth(0, columnWidth);
-
-        ImGui::Text("%s", context.property.GetDisplayName().ToCStr());
-
-        ImGui::NextColumn();
-
-        ImGui::PushMultiItemsWidths(dimension, ImGui::CalcItemWidth());
         ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2{ 0, 0 });
 
-        const float_t lineHeight = GImGui->Font->FontSize + GImGui->Style.FramePadding.y * 2.0f;
-        const ImVec2 buttonSize = { lineHeight + 3.0f, lineHeight };
-        const float_t drag = context.property.GetDragSpeed();
+        const ImVec2 mainButtonSize = { context.fieldTitleWidth, context.fieldHeight };
+
+        if (ImGui::Button(context.property.GetEditorParams().GetDisplayName().c_str(), mainButtonSize)) {
+            feedback.isChanged = true;
+            value = context.property.GetResetValue() ? context.property.GetResetValue() : context.property.GetDefaultValue();
+        }
+
+        ImGui::SameLine();
+
+        constexpr uint32_t maxPartsInLine = 3;
+        const float_t partTitleButtonWidth = (context.fieldTitleWidth * 70) / context.spaceWidth;
+        const float_t partItemWidth = (context.fieldWidth) / maxPartsInLine - partTitleButtonWidth;
+
+        const ImVec2 buttonSize = { partTitleButtonWidth, context.fieldHeight };
+        const float_t drag = context.property.GetEditorParams().GetDragSpeed();
 
         constexpr std::array<const char*, 6> labels = { "X", "Y", "Z", "W", "V", "U" };
         constexpr std::array<ImVec4, 6> colors = {
@@ -644,11 +662,9 @@ namespace SR_CORE_GUI_NS {
             if ((isNeedToReset = ImGui::Button(labels[i], buttonSize))) {
                 feedback.isChanged = true;
                 const uint64_t size = SR_UTILS_NS::GetTypeSize(partType);
-                if (partType == context.property.GetResetValue().GetType()) {
-                    if (auto&& pMapped = context.property.GetResetValue().MapString()) {
-                        std::memcpy(pRaw + i * size, pMapped, size);
-                        isNeedToReset = false;
-                    }
+                if (auto&& pMapped = context.property.GetResetValue().MapString()) {
+                    std::memcpy(pRaw + i * size, pMapped + i * size, size);
+                    isNeedToReset = false;
                 }
             }
 
@@ -656,8 +672,11 @@ namespace SR_CORE_GUI_NS {
 
             ImGui::SameLine();
 
+            ImGui::PushItemWidth(partItemWidth);
+
             switch (partType) {
                 case SR_UTILS_NS::StandardType::Bool: {
+                    ImGui::PopItemWidth();
                     const uint32_t offset = i * sizeof(bool);
                     if (ImGui::Checkbox("", reinterpret_cast<bool*>(&pRaw[offset]))) {
                         feedback.isChanged = true;
@@ -665,6 +684,9 @@ namespace SR_CORE_GUI_NS {
                     if (isNeedToReset) {
                         reinterpret_cast<bool*>(&pRaw[offset])[0] = false;
                     }
+                    ImGui::SameLine();
+                    ImGui::Dummy(ImVec2(partItemWidth - ImGui::GetFrameHeight(), 0.0f));
+                    ImGui::PushItemWidth(partItemWidth);
                     break;
                 }
                 case SR_UTILS_NS::StandardType::Int32: {
@@ -706,12 +728,17 @@ namespace SR_CORE_GUI_NS {
             ImGui::PopID();
 
             if (i + 1 < dimension) {
-                ImGui::SameLine();
+                if ((i + 1) % maxPartsInLine == 0) {
+                    ImGui::Dummy(ImVec2(context.fieldTitleWidth, 0.0f));
+                    ImGui::SameLine();
+                }
+                else {
+                    ImGui::SameLine();
+                }
             }
         }
 
         ImGui::PopStyleVar();
-        ImGui::Columns(1);
 
         ImGui::PopID();
         ImGui::PopID();
@@ -734,27 +761,26 @@ namespace SR_CORE_GUI_NS {
             return feedback;
         }
 
-        const float_t columnWidth = context.property.GetEditorWidth() > 0.f ? context.property.GetEditorWidth() : 70.f;
-
         const uint8_t dimension = SR_UTILS_NS::GetMathSizeDim(value.GetType());
         char* pRaw = value.MapString();
 
         ImGui::PushID(context.pOwner);
         ImGui::PushID(context.property.GetName().ToCStr());
 
-        ImGui::Columns(2);
-        ImGui::SetColumnWidth(0, columnWidth);
+        const ImVec2 mainButtonSize = { context.fieldTitleWidth, context.fieldHeight * 2.f };
+        if (ImGui::Button(context.property.GetEditorParams().GetDisplayName().c_str(), mainButtonSize)) {
+            feedback.isChanged = true;
+            value = context.property.GetResetValue() ? context.property.GetResetValue() : context.property.GetDefaultValue();
+        }
 
-        ImGui::Text("%s", context.property.GetDisplayName().ToCStr());
-
-        ImGui::NextColumn();
-
-        ImGui::PushMultiItemsWidths(dimension, ImGui::CalcItemWidth());
         ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2{ 0, 0 });
 
-        const float_t lineHeight = GImGui->Font->FontSize + GImGui->Style.FramePadding.y * 2.0f;
-        const ImVec2 buttonSize = { lineHeight + 3.0f, lineHeight };
-        const float_t drag = context.property.GetDragSpeed();
+        constexpr uint32_t maxPartsInLine = 3;
+        const float_t partTitleButtonWidth = (context.fieldTitleWidth * 70) / context.spaceWidth;
+        const float_t partItemWidth = (context.fieldWidth) / maxPartsInLine - partTitleButtonWidth;
+
+        const ImVec2 buttonSize = { partTitleButtonWidth, context.fieldHeight };
+        const float_t drag = context.property.GetEditorParams().GetDragSpeed();
 
         constexpr std::array<const char*, 2> labels = { "X", "Y" };
         constexpr std::array<ImVec4, 2> colors = {
@@ -762,128 +788,132 @@ namespace SR_CORE_GUI_NS {
             ImVec4(0.2f, 0.7f, 0.2f, 1.0f),
         };
 
-        float_t partItemWidth = 0.f;
+        ImGui::SameLine();
 
-        for (uint8_t i = 0; i < dimension; ++i) {
-            ImGui::PushID(i);
+        ImGui::BeginGroup();
+        {
+            for (uint8_t i = 0; i < dimension; ++i) {
+                ImGui::PushID(i);
 
-            ImGui::PushStyleColor(ImGuiCol_Button, colors[i]);
-            ImGui::PushStyleColor(ImGuiCol_ButtonHovered, colors[i] + ImVec4(0.1f, 0.1f, 0.1f, 0.0f));
-            ImGui::PushStyleColor(ImGuiCol_ButtonActive, colors[i] + ImVec4(0.2f, 0.2f, 0.2f, 0.0f));
+                ImGui::PushStyleColor(ImGuiCol_Button, colors[i]);
+                ImGui::PushStyleColor(ImGuiCol_ButtonHovered, colors[i] + ImVec4(0.1f, 0.1f, 0.1f, 0.0f));
+                ImGui::PushStyleColor(ImGuiCol_ButtonActive, colors[i] + ImVec4(0.2f, 0.2f, 0.2f, 0.0f));
 
-            bool isNeedToReset = true;
+                bool isNeedToReset = true;
 
-            auto&& pFSize = reinterpret_cast<SR_MATH_NS::FSize*>(&pRaw[i * sizeof(SR_MATH_NS::FSize)]);
-            auto&& pISize = reinterpret_cast<SR_MATH_NS::ISize*>(&pRaw[i * sizeof(SR_MATH_NS::ISize)]);
-            auto&& pUSize = reinterpret_cast<SR_MATH_NS::USize*>(&pRaw[i * sizeof(SR_MATH_NS::USize)]);
+                auto&& pFSize = reinterpret_cast<SR_MATH_NS::FSize*>(&pRaw[i * sizeof(SR_MATH_NS::FSize)]);
+                auto&& pISize = reinterpret_cast<SR_MATH_NS::ISize*>(&pRaw[i * sizeof(SR_MATH_NS::ISize)]);
+                auto&& pUSize = reinterpret_cast<SR_MATH_NS::USize*>(&pRaw[i * sizeof(SR_MATH_NS::USize)]);
 
-            if ((isNeedToReset = ImGui::Button(labels[i], buttonSize))) {
-                feedback.isChanged = true;
-                if (partType == context.property.GetResetValue().GetType()) {
-                    auto&& pMapped = context.property.GetResetValue().MapString();
-                    switch (partType) {
-                        case SR_UTILS_NS::StandardType::FSize: std::memcpy(pFSize, pMapped, sizeof(float_t)); break;
-                        case SR_UTILS_NS::StandardType::ISize: std::memcpy(pISize, pMapped, sizeof(int32_t)); break;
-                        case SR_UTILS_NS::StandardType::USize: std::memcpy(pUSize, pMapped, sizeof(uint32_t)); break;
-                        default:
-                            SRHalt("Unknown part type!");
+                if ((isNeedToReset = ImGui::Button(labels[i], buttonSize))) {
+                    feedback.isChanged = true;
+                    if (partType == context.property.GetResetValue().GetType()) {
+                        auto&& pMapped = context.property.GetResetValue().MapString();
+                        switch (partType) {
+                            case SR_UTILS_NS::StandardType::FSize: std::memcpy(pFSize, pMapped, sizeof(float_t)); break;
+                            case SR_UTILS_NS::StandardType::ISize: std::memcpy(pISize, pMapped, sizeof(int32_t)); break;
+                            case SR_UTILS_NS::StandardType::USize: std::memcpy(pUSize, pMapped, sizeof(uint32_t)); break;
+                            default:
+                                SRHalt("Unknown part type!");
+                            break;
+                        }
+                    }
+                }
+
+                ImGui::PopStyleColor(3);
+                ImGui::PushItemWidth(partItemWidth);
+
+                ImGui::SameLine();
+
+                switch (partType) {
+                    case SR_UTILS_NS::StandardType::Float: {
+                        if (ImGui::DragScalar("", ImGuiDataType_Float, &pFSize->v, drag)) {
+                            feedback.isChanged = true;
+                        }
+                        if (isNeedToReset) {
+                            pFSize->v = 0.f;
+                        }
                         break;
                     }
+                    case SR_UTILS_NS::StandardType::Int32: {
+                        if (ImGui::DragScalar("", ImGuiDataType_S32, &pISize->v, drag)) {
+                            feedback.isChanged = true;
+                        }
+                        if (isNeedToReset) {
+                            pISize->v = 0;
+                        }
+                        break;
+                    }
+                    case SR_UTILS_NS::StandardType::UInt32: {
+                        if (ImGui::DragScalar("", ImGuiDataType_U32, &pUSize->v, drag)) {
+                            feedback.isChanged = true;
+                        }
+                        if (isNeedToReset) {
+                            pUSize->v = 0;
+                        }
+                        break;
+                    }
+                    default:
+                        SR_GRAPH_GUI_NS::ColoredText("Unknown part type!", ImColor(1.f, 0.f, 0.f, 1.f));
+                        break;
+                }
+
+                ImGui::PopItemWidth();
+
+                ImGui::PopID();
+
+                if (i + 1 < dimension) {
+                    ImGui::SameLine();
                 }
             }
 
-            ImGui::PopStyleColor(3);
+            ImGui::PushID("Metric");
 
-            ImGui::SameLine();
+            ImGui::PushItemWidth(context.fieldWidth / maxPartsInLine);
 
-            switch (partType) {
-                case SR_UTILS_NS::StandardType::Float: {
-                    if (ImGui::DragScalar("", ImGuiDataType_Float, &pFSize->v, drag)) {
-                        feedback.isChanged = true;
-                    }
-                    if (isNeedToReset) {
-                        pFSize->v = 0.f;
-                    }
-                    break;
+            for (uint8_t i = 0; i < dimension; ++i) {
+                ImGui::PushID(i);
+
+                auto&& pFSize = reinterpret_cast<SR_MATH_NS::FSize*>(&pRaw[i * sizeof(SR_MATH_NS::FSize)]);
+                auto&& pISize = reinterpret_cast<SR_MATH_NS::ISize*>(&pRaw[i * sizeof(SR_MATH_NS::ISize)]);
+                auto&& pUSize = reinterpret_cast<SR_MATH_NS::USize*>(&pRaw[i * sizeof(SR_MATH_NS::USize)]);
+
+                SR_MATH_NS::SizeMetric* pSize = nullptr;
+                switch (partType) {
+                    case SR_UTILS_NS::StandardType::Float: pSize = &pFSize->metric; break;
+                    case SR_UTILS_NS::StandardType::Int32: pSize = &pISize->metric; break;
+                    case SR_UTILS_NS::StandardType::UInt32: pSize = &pUSize->metric; break;
+                    default:
+                        SR_GRAPH_GUI_NS::ColoredText("Unknown part type!", ImColor(1.f, 0.f, 0.f, 1.f));
+                        break;
                 }
-                case SR_UTILS_NS::StandardType::Int32: {
-                    if (ImGui::DragScalar("", ImGuiDataType_S32, &pISize->v, drag)) {
-                        feedback.isChanged = true;
+
+                if (pSize && ImGui::BeginCombo("", SR_UTILS_NS::EnumReflector::ToStringAtom(*pSize).c_str())) {
+                    auto&& names = SR_UTILS_NS::EnumReflector::GetNames<SR_MATH_NS::SizeMetric>();
+                    for (auto&& name : names) {
+                        if (ImGui::Selectable(name.c_str())) {
+                            ImGui::SetItemDefaultFocus();
+                            *pSize = SR_UTILS_NS::EnumReflector::FromString<SR_MATH_NS::SizeMetric>(name);
+                            feedback.isChanged = true;
+                        }
                     }
-                    if (isNeedToReset) {
-                        pISize->v = 0;
-                    }
-                    break;
+
+                    ImGui::EndCombo();
                 }
-                case SR_UTILS_NS::StandardType::UInt32: {
-                    if (ImGui::DragScalar("", ImGuiDataType_U32, &pUSize->v, drag)) {
-                        feedback.isChanged = true;
-                    }
-                    if (isNeedToReset) {
-                        pUSize->v = 0;
-                    }
-                    break;
+
+                ImGui::PopID();
+
+                if (i + 1 < dimension) {
+                    ImGui::SameLine();
                 }
-                default:
-                    SR_GRAPH_GUI_NS::ColoredText("Unknown part type!", ImColor(1.f, 0.f, 0.f, 1.f));
-                    break;
             }
-
-            partItemWidth = ImGui::CalcItemWidth();
-
             ImGui::PopItemWidth();
-            ImGui::PopID();
-
-            if (i + 1 < dimension) {
-                ImGui::SameLine();
-            }
+            ImGui::EndGroup();
         }
 
-        ImGui::PushID("Metric");
-        ImGui::PushItemWidth(partItemWidth + 22.f /* button */);
-
-        for (uint8_t i = 0; i < dimension; ++i) {
-            ImGui::PushID(i);
-
-            auto&& pFSize = reinterpret_cast<SR_MATH_NS::FSize*>(&pRaw[i * sizeof(SR_MATH_NS::FSize)]);
-            auto&& pISize = reinterpret_cast<SR_MATH_NS::ISize*>(&pRaw[i * sizeof(SR_MATH_NS::ISize)]);
-            auto&& pUSize = reinterpret_cast<SR_MATH_NS::USize*>(&pRaw[i * sizeof(SR_MATH_NS::USize)]);
-
-            SR_MATH_NS::SizeMetric* pSize = nullptr;
-            switch (partType) {
-                case SR_UTILS_NS::StandardType::Float: pSize = &pFSize->metric; break;
-                case SR_UTILS_NS::StandardType::Int32: pSize = &pISize->metric; break;
-                case SR_UTILS_NS::StandardType::UInt32: pSize = &pUSize->metric; break;
-                default:
-                    SR_GRAPH_GUI_NS::ColoredText("Unknown part type!", ImColor(1.f, 0.f, 0.f, 1.f));
-                    break;
-            }
-
-            if (pSize && ImGui::BeginCombo("", SR_UTILS_NS::EnumReflector::ToStringAtom(*pSize).c_str())) {
-                auto&& names = SR_UTILS_NS::EnumReflector::GetNames<SR_MATH_NS::SizeMetric>();
-                for (auto&& name : names) {
-                    if (ImGui::Selectable(name.c_str())) {
-                        ImGui::SetItemDefaultFocus();
-                        *pSize = SR_UTILS_NS::EnumReflector::FromString<SR_MATH_NS::SizeMetric>(name);
-                        feedback.isChanged = true;
-                    }
-                }
-
-                ImGui::EndCombo();
-            }
-
-            ImGui::PopID();
-
-            if (i + 1 < dimension) {
-                ImGui::SameLine();
-            }
-        }
-
-        ImGui::PopItemWidth();
         ImGui::PopID();
 
         ImGui::PopStyleVar();
-        ImGui::Columns(1);
 
         ImGui::PopID();
         ImGui::PopID();

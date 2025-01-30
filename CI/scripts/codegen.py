@@ -287,7 +287,7 @@ def extract_property_default_value(cursor):
             return tokens[0].spelling
         if child.kind == clang.cindex.CursorKind.CHARACTER_LITERAL:
             return tokens[0].spelling
-        if child.kind == clang.cindex.CursorKind.UNEXPOSED_EXPR:
+        if child.kind == clang.cindex.CursorKind.UNEXPOSED_EXPR or child.kind == clang.cindex.CursorKind.DECL_REF_EXPR:
             expression = ''
             for token in tokens:
                 expression += token.spelling
@@ -533,7 +533,6 @@ def generate_class_meta_properties(f, class_structures, class_obj, tabs):
     for prop in class_obj.variables:
         f.write('\t' * (tabs + 2) + f'SR_UTILS_NS::Reflection::Property()')
         f.write('\n' + '\t' * (tabs + 3) + f'.SetName("{prop.name}")')
-        f.write('\n' + '\t' * (tabs + 3) + f'.SetDisplayName("{prop.display_name}")')
         f.write('\n' + '\t' * (tabs + 3) + f'.SetSerializeName("{prop.serialize_name}")')
 
         if prop.private:
@@ -546,8 +545,6 @@ def generate_class_meta_properties(f, class_structures, class_obj, tabs):
             f.write('\n' + '\t' * (tabs + 3) + f'.SetPublicity(SR_UTILS_NS::PropertyPublicity::ReadOnly)')
         else:
             f.write('\n' + '\t' * (tabs + 3) + f'.SetPublicity(SR_UTILS_NS::PropertyPublicity::Public)')
-
-        f.write('\n' + '\t' * (tabs + 3) + f'.SetInspector(SR_UTILS_NS::Reflection::GetPropertyInspector<decltype({class_obj.name}::{prop.name})>())')
 
         f.write('\n' + '\t' * (tabs + 3) + f'.SetSetter(&SRClassMetaTemplate::Set_{prop.name})')
         f.write('\n' + '\t' * (tabs + 3) + f'.SetGetter(&SRClassMetaTemplate::Get_{prop.name})')
@@ -562,11 +559,21 @@ def generate_class_meta_properties(f, class_structures, class_obj, tabs):
         if prop.reset_value:
             f.write('\n' + '\t' * (tabs + 3) + f'.SetResetValue(SR_UTILS_NS::Reflection::Value::Create({prop.reset_value}))')
 
+        # editor params
+
+        f.write('\n' + '\t' * (tabs + 3) + f'.SetEditorParams(SR_UTILS_NS::Reflection::EditorPropertyParams()')
+
+        f.write('\n' + '\t' * (tabs + 4) + f'.SetDisplayName("{prop.display_name}")')
+        f.write('\n' + '\t' * (tabs + 4) + f'.SetInspector(SR_UTILS_NS::Reflection::GetPropertyInspector<decltype({class_obj.name}::{prop.name})>())')
+        f.write('\n' + '\t' * (tabs + 4) + f'.SetEnumReflector(SR_UTILS_NS::GetEnumReflectorName<decltype({class_obj.name}::{prop.name})>())')
+
         if prop.drag_value:
-            f.write('\n' + '\t' * (tabs + 3) + f'.SetDragSpeed({prop.drag_value})')
+            f.write('\n' + '\t' * (tabs + 4) + f'.SetDragSpeed({prop.drag_value})')
 
         if prop.editor_width:
-            f.write('\n' + '\t' * (tabs + 3) + f'.SetEditorWidth({prop.editor_width})')
+            f.write('\n' + '\t' * (tabs + 4) + f'.SetEditorWidth({prop.editor_width})')
+
+        f.write('\n' + '\t' * (tabs + 3) + f')')
 
         f.write(',\n')
 
@@ -671,8 +678,11 @@ def generate_class_meta(f, class_structures, class_obj, tabs):
     f.write('\t' * tabs + f'namespace Codegen {{\n')
     tabs += 1
 
+    for i, namespace in enumerate(class_obj.namespaces):
+        f.write('\t' * tabs + f'using namespace {"::".join(class_obj.namespaces[:i + 1])};\n')
+
     if len(class_obj.namespaces) > 0:
-        f.write('\t' * tabs + f"using namespace {'::'.join(class_obj.namespaces)};\n\n")
+        f.write('\n')
 
     class_name = '::'.join(class_obj.namespaces) + '::' + class_obj.name
     f.write('\t' * tabs + f'template<> struct SRClassMetaTemplate<{class_name}> final : public SR_UTILS_NS::SRClassMeta {{\n')

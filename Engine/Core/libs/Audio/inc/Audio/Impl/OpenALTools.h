@@ -79,7 +79,7 @@ namespace SR_AUDIO_NS {
     }
 
     SR_MAYBE_UNUSED static ALfVec6 FV6ToALV6(const SR_MATH_NS::FVector6& vector6) {
-        ALfVec6 vec6 = {vector6.x, vector6.y, vector6.z, vector6.w, vector6.v, vector6.t};
+        ALfVec6 vec6 = {vector6.x, vector6.y, vector6.z, vector6.w, vector6.v, vector6.u};
         return vec6;
     }
 

@@ -61,6 +61,11 @@ namespace SR_CORE_GUI_NS {
         Hierarchy* m_hierarchy = nullptr;
         SR_WORLD_NS::Scene::Ptr m_scene;
 
+        struct ComponentContext {
+            std::vector<PropertyDrawerBase::Ptr> pDrawers;
+        };
+        std::map<SR_UTILS_NS::Component::Ptr, ComponentContext> m_componentContexts;
+
         ///Для DrawTransform3D и может быть DrawTransofrm2D
         bool m_isUsed = false;
         SR_HTYPES_NS::Marshal* m_oldTransformMarshal = nullptr;

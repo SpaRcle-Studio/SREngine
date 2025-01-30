@@ -216,6 +216,10 @@ namespace SR_CORE_GUI_NS {
 
         uint32_t index = 0;
 
+        std::erase_if(m_componentContexts, [&](auto&& pair) {
+            return !pIComponentable->HasComponent(pair.first);
+        });
+
         pIComponentable->ForEachComponent([&](SR_UTILS_NS::Component::Ptr& pComponent) -> bool {
             DrawComponent(pComponent.Get(), index);
             return true;
@@ -377,79 +381,141 @@ namespace SR_CORE_GUI_NS {
             return;
         }
 
+        //ImGui::PushID(pComponent);
+
         SRAssert1Once(pComponent->Valid());
 
         ++index;
 
-        if (ImGui::BeginChild("InspectorComponent")) {
-            bool enabled = pComponent->IsEnabled();
-            if (ImGui::Checkbox(SR_FORMAT("##{}{}ckb", pComponent->GetComponentName().c_str(), (void*)pComponent).c_str(), &enabled)) {
-                pComponent->SetEnabled(enabled);
-            }
+        std::string headerName = SR_FORMAT("[{}] {}", index, pComponent->GetComponentName().c_str(), (void*)pComponent);
 
-            ImGui::SameLine();
-
-            const bool isOpened = ImGui::CollapsingHeader(SR_FORMAT("[{}] {}", index, pComponent->GetComponentName().c_str()).c_str());
-
-            if (!ImGui::GetDragDropPayload() && ImGui::BeginDragDropSource(ImGuiDragDropFlags_SourceAllowNullID)) {
-                m_pointersHolder = { pComponent->DynamicCast<SR_UTILS_NS::Component>() };
-                ImGui::SetDragDropPayload("InspectorComponent##Payload", &m_pointersHolder, sizeof(std::vector<SR_UTILS_NS::Component::Ptr>), ImGuiCond_Once);
-                ImGui::Text("%s ->", pComponent->GetComponentName().c_str());
-                ImGui::EndDragDropSource();
-            }
-
-            ImGui::SameLine(); ImGui::Text(" ");
-
-            if (pComponent->ExecuteInEditMode()) {
-                ImGui::SameLine();
-                ImGui::TextColored(ImVec4(0, 1, 0, 1), "[Editor mode]");
-            }
-
-            if (pComponent->HasSerializationFlags(SR_UTILS_NS::SerializationFlags::DontSave)) {
-                ImGui::SameLine();
-                ImGui::TextColored(ImVec4(1, 1, 0, 1), "[Dont save]");
-            }
-
-            if (!pComponent->IsAttached()) {
-                ImGui::SameLine();
-                ImGui::TextColored(ImVec4(1, 1, 0, 1), "[Loaded]");
-            }
-
-            if (isOpened) {
-                SR_CORE_GUI_NS::DrawPropertyContext context;
-                context.pEditor = pContext;
-
-                if (SR_CORE_GUI_NS::DrawPropertyContainer(context, &pComponent->GetEntityMessages())) {
-                    ImGui::Separator();
-                }
-
-                if (!ComponentDrawer::DrawComponentOld(pComponent, pContext, index)) {
-                    DrawComponentProperties(pComponent);
-                }
-            }
-
-            if (isOpened) {
-                auto&& properties = pComponent->GetMeta()->GetProperties();
-                for (auto&& property : properties) {
-                    PropertyDrawerContext context(property);
-                    context.pEditor = dynamic_cast<EditorGUI*>(GetManager());
-                    context.pOwner = pComponent->GetRawPtr();
-                    DrawProperty(context);
-                    ImGui::Separator();
-                }
-            }
-
-            if (ImGui::BeginPopupContextWindow("InspectorMenu")) {
-                if (ImGui::BeginMenu("Remove component")) {
-                    if (ImGui::MenuItem(pComponent->GetComponentName().c_str())) {
-                        pComponent->GetParent()->RemoveComponent(pComponent);
-                    }
-                    ImGui::EndMenu();
-                }
-                ImGui::EndPopup();
-            }
-            ImGui::EndChild();
+        bool enabled = pComponent->IsEnabled();
+        if (ImGui::Checkbox(SR_FORMAT("##{}{}ckb", pComponent->GetComponentName().c_str(), (void*)pComponent).c_str(), &enabled)) {
+            pComponent->SetEnabled(enabled);
         }
+
+        ImGui::SameLine();
+
+        const bool isOpened = ImGui::CollapsingHeader(headerName.c_str());
+
+        if (ImGui::IsItemClicked(ImGuiMouseButton_Right)) {
+            ImGui::OpenPopup(headerName.c_str());
+        }
+
+        if (!ImGui::GetDragDropPayload() && ImGui::BeginDragDropSource(ImGuiDragDropFlags_SourceAllowNullID)) {
+            m_pointersHolder = { pComponent->DynamicCast<SR_UTILS_NS::Component>() };
+            ImGui::SetDragDropPayload("InspectorComponent##Payload", &m_pointersHolder, sizeof(std::vector<SR_UTILS_NS::Component::Ptr>), ImGuiCond_Once);
+            ImGui::Text("%s ->", pComponent->GetComponentName().c_str());
+            ImGui::EndDragDropSource();
+        }
+
+        ImGui::SameLine(); ImGui::Text(" ");
+
+        if (pComponent->ExecuteInEditMode()) {
+            ImGui::SameLine();
+            ImGui::TextColored(ImVec4(0, 1, 0, 1), "[Editor mode]");
+        }
+
+        if (pComponent->HasSerializationFlags(SR_UTILS_NS::SerializationFlags::DontSave)) {
+            ImGui::SameLine();
+            ImGui::TextColored(ImVec4(1, 1, 0, 1), "[Dont save]");
+        }
+
+        if (!pComponent->IsAttached()) {
+            ImGui::SameLine();
+            ImGui::TextColored(ImVec4(1, 1, 0, 1), "[Loaded]");
+        }
+
+        if (isOpened) {
+            SR_CORE_GUI_NS::DrawPropertyContext context;
+            context.pEditor = pContext;
+
+            if (SR_CORE_GUI_NS::DrawPropertyContainer(context, &pComponent->GetEntityMessages())) {
+                ImGui::Separator();
+            }
+
+            if (!ComponentDrawer::DrawComponentOld(pComponent, pContext, index)) {
+                DrawComponentProperties(pComponent);
+            }
+        }
+
+        if (isOpened) {
+            auto&& properties = pComponent->GetMeta()->GetProperties();
+
+            if (m_componentContexts.count(pComponent) == 0) {
+                ComponentContext& componentContext = m_componentContexts[pComponent];
+
+                for (auto&& property : properties) {
+                    const SR_UTILS_NS::StringAtom inspector = property.GetEditorParams().GetInspector();
+                    if (inspector.Empty()) {
+                        componentContext.pDrawers.emplace_back();
+                        continue;
+                    }
+
+                    const std::string id = "{}PropertyDrawer"_format(inspector);
+                    PropertyDrawerBase::Ptr pDrawer = SR_UTILS_NS::Factory::Instance().Create<PropertyDrawerBase>(id);
+                    if (!pDrawer) {
+                        componentContext.pDrawers.emplace_back();
+                        continue;
+                    }
+
+                    componentContext.pDrawers.emplace_back(pDrawer);
+                }
+            }
+
+            const float_t lineHeight = GImGui->Font->FontSize + GImGui->Style.FramePadding.y * 2.0f;
+            const float_t windowWidth = ImGui::GetWindowWidth();
+
+            ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 0.0f);
+
+            for (uint64_t i = 0; i < properties.size(); ++i) {
+                PropertyDrawerContext context(properties[i]);
+                context.propertyIndex = i;
+                context.pEditor = dynamic_cast<EditorGUI*>(GetManager());
+                context.pOwner = pComponent->GetRawPtr();
+                context.pComponent = pComponent;
+
+                context.spaceWidth = windowWidth;
+                context.fieldHeight = lineHeight;
+                context.fieldTitleWidth = windowWidth * 0.3f;
+                context.fieldWidth = windowWidth * 0.7f;
+
+                DrawProperty(context);
+
+                if (i != properties.size() - 1) {
+                    //ImGui::Dummy(ImVec2(0, 5.0f));
+                    ImGui::Separator();
+                    //ImGui::Dummy(ImVec2(0, 5.0f));
+                }
+            }
+
+            ImGui::PopStyleVar();
+        }
+
+        if (ImGui::BeginPopup(headerName.c_str())) {
+            const int32_t componentIndex = pComponent->GetParent()->GetComponentIndex(pComponent);
+            const auto componentsCount = static_cast<int32_t>(pComponent->GetParent()->GetComponentsCount());
+
+            if (ImGui::MenuItem("Remove")) {
+                pComponent->GetParent()->RemoveComponent(pComponent);
+            }
+            if (componentIndex != 0 && ImGui::MenuItem("Move up")) {
+                pComponent->GetParent()->MoveComponent(pComponent, -1);
+            }
+            if ((componentIndex + 1) != componentsCount && ImGui::MenuItem("Move down")) {
+                pComponent->GetParent()->MoveComponent(pComponent, 1);
+            }
+            if (ImGui::MenuItem("Duplicate")) {
+                auto&& pCopiedComponent = pComponent->CopyComponent();
+                pComponent->GetParent()->AddComponent(pCopiedComponent);
+                const int32_t distance = (componentIndex + 1) - componentsCount;
+                SRAssert2(distance <= 0, "Invalid distance: {}", distance);
+                pComponent->GetParent()->MoveComponent(pCopiedComponent, distance);
+            }
+            ImGui::EndPopup();
+        }
+
+        //ImGui::PopID();
     }
 
     void Inspector::DrawProperty(const PropertyDrawerContext& context) {
@@ -457,22 +523,15 @@ namespace SR_CORE_GUI_NS {
             return;
         }
 
-        SR_UTILS_NS::StringAtom inspector = context.property.GetInspector();
-        if (inspector.Empty()) {
-            SR_GRAPH_GUI_NS::ColoredText("No inspector for property {}"_format(context.property.GetName()), ImColor(255, 0, 0, 255));
-            return;
-        }
-
-        const std::string id = "{}PropertyDrawer"_format(inspector);
-        PropertyDrawerBase::Ptr pDrawer = SR_UTILS_NS::Factory::Instance().Create<PropertyDrawerBase>(id);
-        if (!pDrawer) {
-            SR_GRAPH_GUI_NS::ColoredText("Failed to create property drawer for {}"_format(context.property.GetName()), ImColor(255, 0, 0, 255));
+        ComponentContext& componentContext = m_componentContexts.at(context.pComponent);
+        if (!componentContext.pDrawers[context.propertyIndex]) {
+            SR_GRAPH_GUI_NS::ColoredText("Missing drawer for property: {}"_format(context.property.GetName()), ImColor(255, 0, 0));
             return;
         }
 
         ImGui::BeginDisabled(context.property.IsReadOnly());
 
-        const PropertyDrawerFeedback feedback = pDrawer->Draw(context);
+        const PropertyDrawerFeedback feedback = componentContext.pDrawers[context.propertyIndex]->Draw(context);
 
         ImGui::EndDisabled();
 

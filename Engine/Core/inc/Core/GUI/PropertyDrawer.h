@@ -29,6 +29,15 @@ namespace SR_CORE_GUI_NS {
         explicit PropertyDrawerContext(const SR_UTILS_NS::Reflection::Property& property)
             : property(property)
         { }
+
+        float_t spaceWidth = 1.f;
+
+        float_t fieldTitleWidth = 90.f;
+        float_t fieldWidth = 250.f;
+        float_t fieldHeight = 0.f;
+
+        SR_UTILS_NS::Component::Ptr pComponent;
+        uint64_t propertyIndex = 0;
         const SR_UTILS_NS::Reflection::Property& property;
         EditorGUI* pEditor = nullptr;
         void* pOwner = nullptr;
