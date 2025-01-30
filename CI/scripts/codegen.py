@@ -287,6 +287,11 @@ def extract_property_default_value(cursor):
             return tokens[0].spelling
         if child.kind == clang.cindex.CursorKind.CHARACTER_LITERAL:
             return tokens[0].spelling
+        if child.kind == clang.cindex.CursorKind.UNEXPOSED_EXPR:
+            expression = ''
+            for token in tokens:
+                expression += token.spelling
+            return expression
         if child.kind == clang.cindex.CursorKind.NAMESPACE_REF:
             namespace_stack.append(child.spelling)
             continue
@@ -550,7 +555,7 @@ def generate_class_meta_properties(f, class_structures, class_obj, tabs):
 
         default_value = f'decltype({class_obj.name}::{prop.name})()'
         if prop.default_value:
-            default_value = f'decltype({class_obj.name}::{prop.name})({prop.default_value})'
+            default_value = f'decltype({class_obj.name}::{prop.name})(GetDefault_{prop.serialize_name}())'
 
         f.write('\n' + '\t' * (tabs + 3) + f'.SetDefaultValue(SR_UTILS_NS::Reflection::Value::Create({default_value}))')
 
@@ -558,7 +563,7 @@ def generate_class_meta_properties(f, class_structures, class_obj, tabs):
             f.write('\n' + '\t' * (tabs + 3) + f'.SetResetValue(SR_UTILS_NS::Reflection::Value::Create({prop.reset_value}))')
 
         if prop.drag_value:
-            f.write('\n' + '\t' * (tabs + 3) + f'.SetDragValue(SR_UTILS_NS::Reflection::Value::Create({prop.drag_value}))')
+            f.write('\n' + '\t' * (tabs + 3) + f'.SetDragSpeed({prop.drag_value})')
 
         if prop.editor_width:
             f.write('\n' + '\t' * (tabs + 3) + f'.SetEditorWidth({prop.editor_width})')
