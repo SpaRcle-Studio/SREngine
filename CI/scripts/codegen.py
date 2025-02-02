@@ -564,8 +564,7 @@ def generate_class_meta_properties(f, class_structures, class_obj, tabs):
         f.write('\n' + '\t' * (tabs + 3) + f'.SetEditorParams(SR_UTILS_NS::Reflection::EditorPropertyParams()')
 
         f.write('\n' + '\t' * (tabs + 4) + f'.SetDisplayName("{prop.display_name}")')
-        f.write('\n' + '\t' * (tabs + 4) + f'.SetInspector(SR_UTILS_NS::Reflection::GetPropertyInspector<decltype({class_obj.name}::{prop.name})>())')
-        f.write('\n' + '\t' * (tabs + 4) + f'.SetEnumReflector(SR_UTILS_NS::GetEnumReflectorName<decltype({class_obj.name}::{prop.name})>())')
+        #f.write('\n' + '\t' * (tabs + 4) + f'.SetInspector(SR_UTILS_NS::Reflection::GetPropertyInspector<decltype({class_obj.name}::{prop.name})>())')
 
         if prop.drag_value:
             f.write('\n' + '\t' * (tabs + 4) + f'.SetDragSpeed({prop.drag_value})')
@@ -734,8 +733,14 @@ def generate_class_meta(f, class_structures, class_obj, tabs):
     for property in class_obj.variables:
         f.write('\t' * tabs + f'static void Set_{property.name}(void* pClass, const SR_UTILS_NS::Reflection::Value& value) {{\n')
 
-        f.write('\t' * (tabs + 1) + f'const decltype({class_name}::{property.name})* pData;\n')
-        f.write('\t' * (tabs + 1) + f'if (!value.Map(pData)) {{\n')
+        #f.write('\t' * (tabs + 1) + f'const decltype({class_name}::{property.name})* pData;\n')
+        #f.write('\t' * (tabs + 1) + f'if (!value.Map(pData)) {{\n')
+        #f.write('\t' * (tabs + 2) + f'return;\n')
+        #f.write('\t' * (tabs + 1) + f'}}\n')
+
+        f.write('\t' * (tabs + 1) + f'auto&& pData = value.TryCast<decltype({class_name}::{property.name})>();\n')
+        f.write('\t' * (tabs + 1) + f'if (!pData) {{\n')
+        f.write('\t' * (tabs + 2) + f'SRHalt("Failed to cast value!");\n')
         f.write('\t' * (tabs + 2) + f'return;\n')
         f.write('\t' * (tabs + 1) + f'}}\n')
 
@@ -743,30 +748,27 @@ def generate_class_meta(f, class_structures, class_obj, tabs):
             f.write('\t' * (tabs + 1) + f'(({class_name}*)pClass)->{property.setter}(std::move(*pData));\n')
         else:
             f.write('\t' * (tabs + 1) + f'(({class_name}*)pClass)->{property.name} = std::move(*pData);\n')
+
         f.write('\t' * tabs + f'}}\n')
 
         f.write('\t' * tabs + f'static SR_UTILS_NS::Reflection::Value Get_{property.name}(void* pClass) {{\n')
         if property.getter:
-            #f.write('\t' * (tabs + 1) + f'auto&& value = (({class_name}*)pClass)->{property.getter}();\n')
-            #f.write('\t' * (tabs + 1) + f'if constexpr (std::is_lvalue_reference_v<decltype(value)>) {{\n')
-            #f.write('\t' * (tabs + 2) + f'if constexpr (std::is_const_v<std::remove_reference_t<decltype(value)>>) {{\n')
-            #f.write('\t' * (tabs + 3) + f'return SR_UTILS_NS::Reflection::Value::Create(value, true, true);\n')
-            #f.write('\t' * (tabs + 2) + f'}} else {{\n')
-            #f.write('\t' * (tabs + 3) + f'return SR_UTILS_NS::Reflection::Value::Create(value, true, false);\n')
-            #f.write('\t' * (tabs + 2) + f'}}\n')
-            #f.write('\t' * (tabs + 1) + f'}} else {{\n')
-            #f.write('\t' * (tabs + 2) + f'return SR_UTILS_NS::Reflection::Value::Create(value, false, false);\n')
-            #f.write('\t' * (tabs + 1) + f'}}\n')
             f.write('\t' * (tabs + 1) + f'auto&& value = (({class_name}*)pClass)->{property.getter}();\n')
             f.write('\t' * (tabs + 1) + f'if constexpr (std::is_lvalue_reference_v<decltype(value)>) {{\n')
-            f.write('\t' * (tabs + 2) + f'constexpr bool isConst = std::is_const_v<std::remove_reference_t<decltype(value)>>;\n')
-            f.write('\t' * (tabs + 2) + f'return SR_UTILS_NS::Reflection::Value::CreateReference(value, isConst);\n')
+            f.write('\t' * (tabs + 2) + f'if constexpr (std::is_const_v<std::remove_reference_t<decltype(value)>>) {{\n')
+            f.write('\t' * (tabs + 3) + f'return SR_UTILS_NS::Reflection::Value::CreateCRef(value);\n')
+            f.write('\t' * (tabs + 2) + f'}} else {{\n')
+            f.write('\t' * (tabs + 3) + f'return SR_UTILS_NS::Reflection::Value::CreateRef(value);\n')
+            f.write('\t' * (tabs + 2) + f'}}\n')
             f.write('\t' * (tabs + 1) + f'}} else {{\n')
-            f.write('\t' * (tabs + 2) + f'return SR_UTILS_NS::Reflection::Value::Create(std::move(value), false);\n')
+            f.write('\t' * (tabs + 2) + f'return SR_UTILS_NS::Reflection::Value::Create(std::move(value));\n')
             f.write('\t' * (tabs + 1) + f'}}\n')
         else:
-            bool_value = 'true' if property.read_only else 'false'
-            f.write('\t' * (tabs + 1) + f'return SR_UTILS_NS::Reflection::Value::CreateReference((({class_name}*)pClass)->{property.name}, {bool_value});\n')
+            if property.read_only:
+                f.write('\t' * (tabs + 1) + f'return SR_UTILS_NS::Reflection::Value::CreateCRef((({class_name}*)pClass)->{property.name});\n')
+            else:
+                f.write('\t' * (tabs + 1) + f'return SR_UTILS_NS::Reflection::Value::CreateRef((({class_name}*)pClass)->{property.name});\n')
+
 
         f.write('\t' * tabs + f'}}\n')
 

@@ -17,6 +17,8 @@ namespace SR_CORE_GUI_NS {
         EditorGUI* pEditor = nullptr;
     };
 
+    SR_MAYBE_UNUSED SR_UTILS_NS::StringAtom GetValueInspector(const SR_UTILS_NS::Reflection::Value& value);
+
     SR_MAYBE_UNUSED bool DrawProperty(const DrawPropertyContext& context, SR_UTILS_NS::Property* pProperty);
     SR_MAYBE_UNUSED bool DrawStandardProperty(const DrawPropertyContext& context, SR_UTILS_NS::StandardProperty* pProperty);
     SR_MAYBE_UNUSED bool DrawEnumProperty(const DrawPropertyContext& context, SR_UTILS_NS::EnumProperty* pProperty);
@@ -30,14 +32,22 @@ namespace SR_CORE_GUI_NS {
             : property(property)
         { }
 
+        float_t lineHeight = 1.f;
         float_t spaceWidth = 1.f;
+
+        float_t axisButtonWidth = 30.f;
 
         float_t fieldTitleWidth = 90.f;
         float_t fieldWidth = 250.f;
         float_t fieldHeight = 0.f;
 
+        SR_NODISCARD SR_UTILS_NS::Reflection::Value GetValue() const {
+            return (pValue ? *pValue : property.Get(pOwner)).DetachIfConst();
+        }
+
         SR_UTILS_NS::Component::Ptr pComponent;
         uint64_t propertyIndex = 0;
+        SR_UTILS_NS::Reflection::Value* pValue = nullptr;
         const SR_UTILS_NS::Reflection::Property& property;
         EditorGUI* pEditor = nullptr;
         void* pOwner = nullptr;
@@ -71,13 +81,13 @@ namespace SR_CORE_GUI_NS {
         PropertyDrawerFeedback Draw(const PropertyDrawerContext& context) override;
     };
 
-    class VectorPropertyDrawer : public PropertyDrawerBase {
+    class MathVectorPropertyDrawer : public PropertyDrawerBase {
         SR_CLASS()
     public:
         PropertyDrawerFeedback Draw(const PropertyDrawerContext& context) override;
     };
 
-    class SizePropertyDrawer : public PropertyDrawerBase {
+    class MathSizePropertyDrawer : public PropertyDrawerBase {
         SR_CLASS()
     public:
         PropertyDrawerFeedback Draw(const PropertyDrawerContext& context) override;

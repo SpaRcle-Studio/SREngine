@@ -68,6 +68,7 @@ namespace SR_CORE_GUI_NS {
 
         ///Для DrawTransform3D и может быть DrawTransofrm2D
         bool m_isUsed = false;
+        float_t m_scrollBarWidth = 0.0f;
         SR_HTYPES_NS::Marshal* m_oldTransformMarshal = nullptr;
     };
 }

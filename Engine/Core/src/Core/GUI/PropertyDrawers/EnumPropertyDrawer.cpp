@@ -10,9 +10,9 @@ namespace SR_CORE_GUI_NS {
     PropertyDrawerFeedback EnumPropertyDrawer::Draw(const PropertyDrawerContext& context) {
         PropertyDrawerFeedback feedback;
 
-        SR_UTILS_NS::Reflection::Value value = context.property.Get(context.pOwner);
+        SR_UTILS_NS::Reflection::Value value = context.GetValue();
 
-        SR_UTILS_NS::EnumReflector* pReflector = SR_UTILS_NS::EnumReflectorManager::Instance().GetReflector(context.property.GetEditorParams().GetEnumReflector());
+        SR_UTILS_NS::EnumReflector* pReflector = SR_UTILS_NS::EnumReflectorManager::Instance().GetReflector(value.GetEnumType());
         if (!pReflector) {
             SR_GRAPH_GUI_NS::ColoredText("EnumReflector not found!", ImColor(255, 0, 0));
             return feedback;
@@ -33,16 +33,19 @@ namespace SR_CORE_GUI_NS {
 
         ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2{ 0, 0 });
 
-        const ImVec2 buttonSize = { context.fieldTitleWidth, context.fieldHeight };
+        if (!context.pValue) {
+            const ImVec2 buttonSize = { context.fieldTitleWidth, context.fieldHeight };
 
-        if (ImGui::Button(context.property.GetEditorParams().GetDisplayName().c_str(), buttonSize)) {
-            feedback.isChanged = true;
-            value = context.property.GetResetValue() ? context.property.GetResetValue() : context.property.GetDefaultValue();
+            if (ImGui::Button(context.property.GetEditorParams().GetDisplayName().c_str(), buttonSize)) {
+                feedback.isChanged = true;
+                value = context.property.GetResetValue() ? context.property.GetResetValue() : context.property.GetDefaultValue();
+                value = value.DetachIfConst();
+            }
+
+            ImGui::SameLine();
         }
 
-        ImGui::SameLine();
-
-        void* pMappedRaw = value.MapString();
+        void* pMappedRaw = value.Data();
         int64_t enumValue = pReflector->ReadEnumValueFromPointerInternal(pMappedRaw);
         auto&& names = pReflector->GetNamesInternal();
 
@@ -103,7 +106,7 @@ namespace SR_CORE_GUI_NS {
             }
         }
 
-        if (feedback.isChanged) {
+        if (!context.pValue && feedback.isChanged && !value.IsRef()) {
             context.property.Set(context.pOwner, value);
         }
 

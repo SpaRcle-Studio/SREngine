@@ -3,8 +3,9 @@
 //
 
 #include <Core/GUI/EngineSettings.h>
-
 #include <Graphics/Lighting/LightSystem.h>
+
+#include <Utils/Common/StoreUtils.h>
 
 namespace SR_CORE_GUI_NS {
     EngineSettings::EngineSettings()
@@ -17,6 +18,8 @@ namespace SR_CORE_GUI_NS {
         DrawVSync();
         ImGui::Separator();
         DrawLighting();
+        ImGui::Separator();
+        DrawEditorSettings();
     }
 
     void EngineSettings::DrawMultiSampling() {
@@ -73,6 +76,29 @@ namespace SR_CORE_GUI_NS {
         bool vsync = pPipeline->IsVSyncEnabled();
         if (ImGui::Checkbox("VSync", &vsync)) {
             pPipeline->SetVSyncEnabled(vsync);
+        }
+    }
+
+    void EngineSettings::DrawEditorSettings() {
+        float_t fontSize = SR_UTILS_NS::StoreUtils::User::GetFloat("ImGuiFontSize", 0.f);
+        float_t iconFontSize = SR_UTILS_NS::StoreUtils::User::GetFloat("ImGuiIconFontSize", 0.f);
+
+        if (ImGui::InputFloat("Font size", &fontSize, 1.0f, 1.0f, "%.1f", ImGuiInputTextFlags_EnterReturnsTrue)) {
+            SR_UTILS_NS::StoreUtils::User::SetFloat("ImGuiFontSize", fontSize);
+        }
+
+        if (ImGui::InputFloat("Icon font size", &iconFontSize, 1.0f, 1.0f, "%.1f", ImGuiInputTextFlags_EnterReturnsTrue)) {
+            SR_UTILS_NS::StoreUtils::User::SetFloat("ImGuiIconFontSize", iconFontSize);
+        }
+
+        if (ImGui::Button("Save")) {
+            SR_UTILS_NS::StoreUtils::Storage::Instance().Save();
+        }
+
+        ImGui::SameLine();
+
+        if (ImGui::Button("Load")) {
+            SR_UTILS_NS::StoreUtils::Storage::Instance().Load();
         }
     }
 }

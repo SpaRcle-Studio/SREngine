@@ -18,6 +18,7 @@ namespace SR_CORE_GUI_NS {
         void DrawMultiSampling();
         void DrawLighting();
         void DrawVSync();
+        void DrawEditorSettings();
 
     };
 }

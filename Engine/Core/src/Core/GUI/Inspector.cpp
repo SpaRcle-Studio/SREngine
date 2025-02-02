@@ -54,6 +54,13 @@ namespace SR_CORE_GUI_NS {
             ImGui::EndTabBar();
         }
 
+        if (ImGui::GetScrollMaxY() > 0) {
+            m_scrollBarWidth = ImGui::GetStyle().ScrollbarSize;
+        }
+        else {
+            m_scrollBarWidth = 0;
+        }
+
         m_scene.Unlock();
     }
 
@@ -446,14 +453,18 @@ namespace SR_CORE_GUI_NS {
                 ComponentContext& componentContext = m_componentContexts[pComponent];
 
                 for (auto&& property : properties) {
-                    const SR_UTILS_NS::StringAtom inspector = property.GetEditorParams().GetInspector();
+                    SR_UTILS_NS::StringAtom inspector = property.GetEditorParams().GetInspector();
+
+                    if (inspector.Empty()) {
+                        inspector = SR_CORE_GUI_NS::GetValueInspector(property.Get(pComponent));
+                    }
+
                     if (inspector.Empty()) {
                         componentContext.pDrawers.emplace_back();
                         continue;
                     }
 
-                    const std::string id = "{}PropertyDrawer"_format(inspector);
-                    PropertyDrawerBase::Ptr pDrawer = SR_UTILS_NS::Factory::Instance().Create<PropertyDrawerBase>(id);
+                    PropertyDrawerBase::Ptr pDrawer = SR_UTILS_NS::Factory::Instance().Create<PropertyDrawerBase>(inspector);
                     if (!pDrawer) {
                         componentContext.pDrawers.emplace_back();
                         continue;
@@ -464,7 +475,8 @@ namespace SR_CORE_GUI_NS {
             }
 
             const float_t lineHeight = GImGui->Font->FontSize + GImGui->Style.FramePadding.y * 2.0f;
-            const float_t windowWidth = ImGui::GetWindowWidth();
+
+            float_t windowWidth = ImGui::GetWindowWidth() - m_scrollBarWidth;
 
             ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 0.0f);
 
@@ -475,6 +487,8 @@ namespace SR_CORE_GUI_NS {
                 context.pOwner = pComponent->GetRawPtr();
                 context.pComponent = pComponent;
 
+                context.lineHeight = lineHeight;
+                context.axisButtonWidth = context.lineHeight;
                 context.spaceWidth = windowWidth;
                 context.fieldHeight = lineHeight;
                 context.fieldTitleWidth = windowWidth * 0.3f;

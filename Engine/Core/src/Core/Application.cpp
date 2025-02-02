@@ -18,6 +18,7 @@
 #include <Utils/Types/RawMesh.h>
 #include <Utils/SRLM/LogicalMachine.h>
 #include <Utils/TaskManager/ThreadWorker.h>
+#include <Utils/Common/StoreUtils.h>
 
 #include <Graphics/GUI/NodeManager.h>
 #include <Graphics/Types/Shader.h>
@@ -90,6 +91,8 @@ namespace SR_CORE_NS {
         }
 
         SR_UTILS_NS::ResourceManager::Instance().Init(m_resourcesPath);
+
+        SR_UTILS_NS::StoreUtils::Storage::Instance().Load();
 
         if (SR_UTILS_NS::Features::Instance().Enabled("ResourceUsePointStackTraceProfiling", false)) {
             SR_UTILS_NS::ResourceManager::Instance().EnableStackTraceProfiling();

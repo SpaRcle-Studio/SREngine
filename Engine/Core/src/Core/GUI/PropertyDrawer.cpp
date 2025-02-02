@@ -389,6 +389,34 @@ namespace SR_CORE_GUI_NS {
         return true;
     }
 
+    SR_UTILS_NS::StringAtom GetValueInspector(const SR_UTILS_NS::Reflection::Value& value) {
+        if (value.IsBool()) {
+            return "BoolPropertyDrawer";
+        }
+
+        if (value.IsArithmetic()) {
+            return "NumericPropertyDrawer";
+        }
+
+        if (value.IsSequenceContainer()) {
+            return "VectorPropertyDrawer";
+        }
+
+        if (value.IsMathSize()) {
+            return "MathSizePropertyDrawer";
+        }
+
+        if (value.IsMathVector()) {
+            return "MathVectorPropertyDrawer";
+        }
+
+        if (value.IsEnum()) {
+            return "EnumPropertyDrawer";
+        }
+
+        return SR_UTILS_NS::StringAtom();
+    }
+
     bool DrawProperty(const DrawPropertyContext& context, SR_UTILS_NS::Property* pProperty) {
         if (!pProperty || !pProperty->IsActive()) {
             return false;
@@ -456,7 +484,7 @@ namespace SR_CORE_GUI_NS {
     PropertyDrawerFeedback BoolPropertyDrawer::Draw(const PropertyDrawerContext& context) {
         PropertyDrawerFeedback feedback;
 
-        SR_UTILS_NS::Reflection::Value value = context.property.Get(context.pOwner);
+        SR_UTILS_NS::Reflection::Value value = context.GetValue();
 
         ImGui::PushID(context.pOwner);
         ImGui::PushID(context.property.GetName().ToCStr());
@@ -468,11 +496,12 @@ namespace SR_CORE_GUI_NS {
         if (ImGui::Button(context.property.GetEditorParams().GetDisplayName().c_str(), buttonSize)) {
             feedback.isChanged = true;
             value = context.property.GetResetValue() ? context.property.GetResetValue() : context.property.GetDefaultValue();
+            value = value.DetachIfConst();
         }
 
         ImGui::SameLine();
 
-        if (auto&& bValue = value.Map<bool>()) {
+        if (auto&& bValue = value.TryCast<bool>()) {
             if (ImGui::Checkbox("##Checkbox", bValue)) {
                 feedback.isChanged = true;
             }
@@ -486,7 +515,7 @@ namespace SR_CORE_GUI_NS {
         ImGui::PopID();
         ImGui::PopID();
 
-        if (feedback.isChanged) {
+        if (!context.pValue && feedback.isChanged && !value.IsRef()) {
             context.property.Set(context.pOwner, value);
         }
 
@@ -496,7 +525,12 @@ namespace SR_CORE_GUI_NS {
     PropertyDrawerFeedback NumericPropertyDrawer::Draw(const PropertyDrawerContext& context) {
         PropertyDrawerFeedback feedback;
 
-        SR_UTILS_NS::Reflection::Value value = context.property.Get(context.pOwner);
+        SR_UTILS_NS::Reflection::Value value = context.GetValue();
+
+        if (!value.IsArithmetic()) {
+            SR_GRAPH_GUI_NS::ColoredText("Property is not numeric!", ImColor(1.f, 0.f, 0.f, 1.f));
+            return feedback;
+        }
 
         ImGui::PushID(context.pOwner);
         ImGui::PushID(context.property.GetName().ToCStr());
@@ -504,91 +538,31 @@ namespace SR_CORE_GUI_NS {
         ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2{ 0, 0 });
 
         const ImVec2 buttonSize = { context.fieldTitleWidth, context.fieldHeight };
-        const float_t drag = context.property.GetEditorParams().GetDragSpeed();
 
-        if (ImGui::Button(context.property.GetEditorParams().GetDisplayName().c_str(), buttonSize)) {
+        if (!context.pValue && ImGui::Button(context.property.GetEditorParams().GetDisplayName().c_str(), buttonSize)) {
             feedback.isChanged = true;
             value = context.property.GetResetValue() ? context.property.GetResetValue() : context.property.GetDefaultValue();
+            value = value.DetachIfConst();
         }
 
         ImGui::SameLine();
 
         ImGui::PushItemWidth(context.fieldWidth);
 
-        switch (value.GetType()) {
-            case SR_UTILS_NS::StandardType::Int8: {
-                auto&& pValue = value.Map<int8_t>();
-                if (ImGui::DragScalar("", ImGuiDataType_S8, pValue, drag)) {
-                    feedback.isChanged = true;
-                }
-                break;
+        const float_t drag = context.property.GetEditorParams().GetDragSpeed();
+        const ImGuiDataType_ dataType = SR_GRAPH_GUI_NS::GetImGuiDataType(value.SizeOf(), value.IsSigned(), value.IsIntegral());
+        if (dataType == ImGuiDataType_COUNT) {
+            SR_GRAPH_GUI_NS::ColoredText("Unknown data type!", ImColor(1.f, 0.f, 0.f, 1.f));
+            return feedback;
+        }
+
+        if (void* pValue = value.Data()) {
+            if (ImGui::DragScalar("", dataType, pValue, drag)) {
+                feedback.isChanged = true;
             }
-            case SR_UTILS_NS::StandardType::UInt8: {
-                auto&& pValue = value.Map<uint8_t>();
-                if (ImGui::DragScalar("", ImGuiDataType_U8, pValue, drag)) {
-                    feedback.isChanged = true;
-                }
-                break;
-            }
-            case SR_UTILS_NS::StandardType::Int16: {
-                auto&& pValue = value.Map<int16_t>();
-                if (ImGui::DragScalar("", ImGuiDataType_S16, pValue, drag)) {
-                    feedback.isChanged = true;
-                }
-                break;
-            }
-            case SR_UTILS_NS::StandardType::UInt16: {
-                auto&& pValue = value.Map<uint16_t>();
-                if (ImGui::DragScalar("", ImGuiDataType_U16, pValue, drag)) {
-                    feedback.isChanged = true;
-                }
-                break;
-            }
-            case SR_UTILS_NS::StandardType::Int32: {
-                auto&& pValue = value.Map<int32_t>();
-                if (ImGui::DragScalar("", ImGuiDataType_S32, pValue, drag)) {
-                    feedback.isChanged = true;
-                }
-                break;
-            }
-            case SR_UTILS_NS::StandardType::UInt32: {
-                auto&& pValue = value.Map<uint32_t>();
-                if (ImGui::DragScalar("", ImGuiDataType_U32, pValue, drag)) {
-                    feedback.isChanged = true;
-                }
-                break;
-            }
-            case SR_UTILS_NS::StandardType::Int64: {
-                auto&& pValue = value.Map<int64_t>();
-                if (ImGui::DragScalar("", ImGuiDataType_S64, pValue, drag)) {
-                    feedback.isChanged = true;
-                }
-                break;
-            }
-            case SR_UTILS_NS::StandardType::UInt64: {
-                auto&& pValue = value.Map<uint64_t>();
-                if (ImGui::DragScalar("", ImGuiDataType_U64, pValue, drag)) {
-                    feedback.isChanged = true;
-                }
-                break;
-            }
-            case SR_UTILS_NS::StandardType::Float: {
-                auto&& pValue = value.Map<float_t>();
-                if (ImGui::DragScalar("", ImGuiDataType_Float, pValue, drag)) {
-                    feedback.isChanged = true;
-                }
-                break;
-            }
-            case SR_UTILS_NS::StandardType::Double: {
-                auto&& pValue = value.Map<double_t>();
-                if (ImGui::DragScalar("", ImGuiDataType_Double, pValue, drag)) {
-                    feedback.isChanged = true;
-                }
-                break;
-            }
-            default:
-                SR_GRAPH_GUI_NS::ColoredText("Unknown numeric type!", ImColor(1.f, 0.f, 0.f, 1.f));
-                break;
+        }
+        else {
+            SR_GRAPH_GUI_NS::ColoredText("Failed to map numeric value!", ImColor(1.f, 0.f, 0.f, 1.f));
         }
 
         ImGui::PopItemWidth();
@@ -598,56 +572,60 @@ namespace SR_CORE_GUI_NS {
         ImGui::PopID();
         ImGui::PopID();
 
-        if (feedback.isChanged) {
+        if (!context.pValue && feedback.isChanged && !value.IsRef()) {
             context.property.Set(context.pOwner, value);
         }
 
         return feedback;
     }
 
-    PropertyDrawerFeedback VectorPropertyDrawer::Draw(const PropertyDrawerContext& context) {
+    PropertyDrawerFeedback MathVectorPropertyDrawer::Draw(const PropertyDrawerContext& context) {
         PropertyDrawerFeedback feedback;
 
-        SR_UTILS_NS::Reflection::Value value = context.property.Get(context.pOwner);
-        const SR_UTILS_NS::StandardType partType = SR_UTILS_NS::GetMathVectorType(value.GetType());
+        SR_UTILS_NS::Reflection::Value value = context.GetValue();
 
-        if (partType == SR_UTILS_NS::StandardType::Unknown) {
-            SR_GRAPH_GUI_NS::ColoredText("Unknown part type!", ImColor(1.f, 0.f, 0.f, 1.f));
-            return feedback;
+        std::string_view vectorType = value.GetTypeName();
+        if (size_t pos = vectorType.rfind(':'); pos != std::string_view::npos) {
+            vectorType.remove_prefix(pos + 1);
         }
-
-        const uint8_t dimension = SR_UTILS_NS::GetMathVectorDim(value.GetType());
-        char* pRaw = value.MapString();
+        std::string_view vectorPartType = SR_UTILS_NS::StringUtils::GetBetween(vectorType, '<', '>');
+        const uint8_t dimension = SR_UTILS_NS::CharToInt(vectorType[sizeof("Vector") - 1]);
 
         ImGui::PushID(context.pOwner);
         ImGui::PushID(context.property.GetName().ToCStr());
 
         ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2{ 0, 0 });
 
-        const ImVec2 mainButtonSize = { context.fieldTitleWidth, context.fieldHeight };
+        if (!context.pValue) {
+            const ImVec2 mainButtonSize = { context.fieldTitleWidth, context.fieldHeight };
 
-        if (ImGui::Button(context.property.GetEditorParams().GetDisplayName().c_str(), mainButtonSize)) {
-            feedback.isChanged = true;
-            value = context.property.GetResetValue() ? context.property.GetResetValue() : context.property.GetDefaultValue();
+            if (ImGui::Button(context.property.GetEditorParams().GetDisplayName().c_str(), mainButtonSize)) {
+                feedback.isChanged = true;
+                value = context.property.GetResetValue() ? context.property.GetResetValue() : context.property.GetDefaultValue();
+                value = value.DetachIfConst();
+            }
         }
 
         ImGui::SameLine();
 
         constexpr uint32_t maxPartsInLine = 3;
-        const float_t partTitleButtonWidth = (context.fieldTitleWidth * 70) / context.spaceWidth;
-        const float_t partItemWidth = (context.fieldWidth) / maxPartsInLine - partTitleButtonWidth;
+        const float_t partItemWidth = (context.fieldWidth) / maxPartsInLine - context.axisButtonWidth;
 
-        const ImVec2 buttonSize = { partTitleButtonWidth, context.fieldHeight };
+        const ImVec2 buttonSize = { context.axisButtonWidth, context.fieldHeight };
         const float_t drag = context.property.GetEditorParams().GetDragSpeed();
+        ImGuiDataType_ partType = SR_GRAPH_GUI_NS::GetImGuiDataType(vectorPartType);
 
         constexpr std::array<const char*, 6> labels = { "X", "Y", "Z", "W", "V", "U" };
         constexpr std::array<ImVec4, 6> colors = {
-            ImVec4(0.8f, 0.1f, 0.15f, 1.0f),
-            ImVec4(0.2f, 0.7f, 0.2f, 1.0f),
-            ImVec4(0.1f, 0.25f, 0.8f, 1.0f),
-            ImVec4(0.8f, 0.1f, 0.15f, 1.0f),
-            ImVec4(0.2f, 0.7f, 0.2f, 1.0f),
-            ImVec4(0.1f, 0.25f, 0.8f, 1.0f)
+            ImVec4(0.8f, 0.1f, 0.15f, 1.0f), /// red
+            ImVec4(0.2f, 0.7f, 0.2f, 1.0f), /// green
+            ImVec4(0.1f, 0.25f, 0.8f, 1.0f), /// blue
+            ImVec4(0.8f, 0.1f, 0.15f, 1.0f), /// red
+            ImVec4(0.2f, 0.7f, 0.2f, 1.0f), /// green
+            ImVec4(0.1f, 0.25f, 0.8f, 1.0f), /// blue
+            //ImVec4(0.8f, 0.8f, 0.2f, 1.0f), /// yellow
+            //ImVec4(0.2f, 0.7f, 0.7f, 1.0f), /// cyan
+            //ImVec4(0.7f, 0.2f, 0.7f, 1.0f) /// magenta
         };
 
         for (uint8_t i = 0; i < dimension; ++i) {
@@ -657,14 +635,19 @@ namespace SR_CORE_GUI_NS {
             ImGui::PushStyleColor(ImGuiCol_ButtonHovered, colors[i] + ImVec4(0.1f, 0.1f, 0.1f, 0.0f));
             ImGui::PushStyleColor(ImGuiCol_ButtonActive, colors[i] + ImVec4(0.2f, 0.2f, 0.2f, 0.0f));
 
-            bool isNeedToReset = true;
+            const uint64_t partSize = value.SizeOf() / dimension;
+            const uint64_t offset = partSize * i;
 
-            if ((isNeedToReset = ImGui::Button(labels[i], buttonSize))) {
-                feedback.isChanged = true;
-                const uint64_t size = SR_UTILS_NS::GetTypeSize(partType);
-                if (auto&& pMapped = context.property.GetResetValue().MapString()) {
-                    std::memcpy(pRaw + i * size, pMapped + i * size, size);
-                    isNeedToReset = false;
+            if (ImGui::Button(labels[i], buttonSize)) {
+                if (context.property.GetResetValue().SizeOf() == value.SizeOf()) {
+                    if (auto&& pResetData = (char*)context.property.GetResetValue().Data()) {
+                        std::memcpy((char*)value.Data() + offset, pResetData + offset, partSize);
+                        feedback.isChanged = true;
+                    }
+                }
+                if (!feedback.isChanged) {
+                    std::memset((char*)value.Data() + offset, 0, partSize);
+                    feedback.isChanged = true;
                 }
             }
 
@@ -674,54 +657,22 @@ namespace SR_CORE_GUI_NS {
 
             ImGui::PushItemWidth(partItemWidth);
 
-            switch (partType) {
-                case SR_UTILS_NS::StandardType::Bool: {
-                    ImGui::PopItemWidth();
-                    const uint32_t offset = i * sizeof(bool);
-                    if (ImGui::Checkbox("", reinterpret_cast<bool*>(&pRaw[offset]))) {
-                        feedback.isChanged = true;
-                    }
-                    if (isNeedToReset) {
-                        reinterpret_cast<bool*>(&pRaw[offset])[0] = false;
-                    }
-                    ImGui::SameLine();
-                    ImGui::Dummy(ImVec2(partItemWidth - ImGui::GetFrameHeight(), 0.0f));
-                    ImGui::PushItemWidth(partItemWidth);
-                    break;
+            if (partSize == 1) {
+                ImGui::PopItemWidth();
+                if (ImGui::Checkbox("", reinterpret_cast<bool*>(&((char*)(value.Data()))[offset]))) {
+                    feedback.isChanged = true;
                 }
-                case SR_UTILS_NS::StandardType::Int32: {
-                    const uint32_t offset = i * sizeof(int32_t);
-                    if (ImGui::DragScalar("", ImGuiDataType_S32, reinterpret_cast<int*>(&pRaw[offset]), drag)) {
-                        feedback.isChanged = true;
-                    }
-                    if (isNeedToReset) {
-                        reinterpret_cast<int*>(&pRaw[offset])[0] = 0;
-                    }
-                    break;
+                ImGui::SameLine();
+                ImGui::Dummy(ImVec2(partItemWidth - ImGui::GetFrameHeight(), 0.0f));
+                ImGui::PushItemWidth(partItemWidth);
+            }
+            else if (partType == ImGuiDataType_COUNT) {
+                SR_GRAPH_GUI_NS::ColoredText("Unknown part type!", ImColor(1.f, 0.f, 0.f, 1.f));
+            }
+            else {
+                if (ImGui::DragScalar("", partType, (char*)value.Data() + offset, drag)) {
+                    feedback.isChanged = true;
                 }
-                case SR_UTILS_NS::StandardType::UInt32: {
-                    const uint32_t offset = i * sizeof(uint32_t);
-                    if (ImGui::DragScalar("", ImGuiDataType_U32, reinterpret_cast<uint32_t*>(&pRaw[offset]), drag)) {
-                        feedback.isChanged = true;
-                    }
-                    if (isNeedToReset) {
-                        reinterpret_cast<uint32_t*>(&pRaw[offset])[0] = 0;
-                    }
-                    break;
-                }
-                case SR_UTILS_NS::StandardType::Float: {
-                    const uint32_t offset = i * sizeof(float_t);
-                    if (ImGui::DragScalar("", ImGuiDataType_Float, reinterpret_cast<float*>(&pRaw[offset]), drag)) {
-                        feedback.isChanged = true;
-                    }
-                    if (isNeedToReset) {
-                        reinterpret_cast<float*>(&pRaw[offset])[0] = 0.f;
-                    }
-                    break;
-                }
-                default:
-                    SR_GRAPH_GUI_NS::ColoredText("Unknown part type!", ImColor(1.f, 0.f, 0.f, 1.f));
-                    break;
             }
 
             ImGui::PopItemWidth();
@@ -743,26 +694,30 @@ namespace SR_CORE_GUI_NS {
         ImGui::PopID();
         ImGui::PopID();
 
-        if (feedback.isChanged) {
+        if (!context.pValue && feedback.isChanged && !value.IsRef()) {
             context.property.Set(context.pOwner, value);
         }
 
         return feedback;
     }
 
-    PropertyDrawerFeedback SizePropertyDrawer::Draw(const PropertyDrawerContext& context) {
+    PropertyDrawerFeedback MathSizePropertyDrawer::Draw(const PropertyDrawerContext& context) {
         PropertyDrawerFeedback feedback;
 
-        SR_UTILS_NS::Reflection::Value value = context.property.Get(context.pOwner);
-        const SR_UTILS_NS::StandardType partType = SR_UTILS_NS::GetMathSizeType(value.GetType());
+        SR_UTILS_NS::Reflection::Value value = context.GetValue();
 
-        if (partType == SR_UTILS_NS::StandardType::Unknown) {
+        std::string_view vectorType = value.GetTypeName();
+        if (size_t pos = vectorType.rfind(':'); pos != std::string_view::npos) {
+            vectorType.remove_prefix(pos + 1);
+        }
+        std::string_view vectorPartType = SR_UTILS_NS::StringUtils::GetBetween(vectorType, '<', '>');
+        const uint8_t dimension = vectorType.find("Size2") != std::string_view::npos ? 2 : 1;
+
+        ImGuiDataType_ partType = SR_GRAPH_GUI_NS::GetImGuiDataType(vectorPartType);
+        if (partType == ImGuiDataType_COUNT) {
             SR_GRAPH_GUI_NS::ColoredText("Unknown part type!", ImColor(1.f, 0.f, 0.f, 1.f));
             return feedback;
         }
-
-        const uint8_t dimension = SR_UTILS_NS::GetMathSizeDim(value.GetType());
-        char* pRaw = value.MapString();
 
         ImGui::PushID(context.pOwner);
         ImGui::PushID(context.property.GetName().ToCStr());
@@ -771,15 +726,17 @@ namespace SR_CORE_GUI_NS {
         if (ImGui::Button(context.property.GetEditorParams().GetDisplayName().c_str(), mainButtonSize)) {
             feedback.isChanged = true;
             value = context.property.GetResetValue() ? context.property.GetResetValue() : context.property.GetDefaultValue();
+            value = value.DetachIfConst();
         }
+
+        SRAssert(value);
 
         ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2{ 0, 0 });
 
         constexpr uint32_t maxPartsInLine = 3;
-        const float_t partTitleButtonWidth = (context.fieldTitleWidth * 70) / context.spaceWidth;
-        const float_t partItemWidth = (context.fieldWidth) / maxPartsInLine - partTitleButtonWidth;
+        const float_t partItemWidth = (context.fieldWidth) / maxPartsInLine - context.axisButtonWidth;
 
-        const ImVec2 buttonSize = { partTitleButtonWidth, context.fieldHeight };
+        const ImVec2 buttonSize = { context.axisButtonWidth, context.fieldHeight };
         const float_t drag = context.property.GetEditorParams().GetDragSpeed();
 
         constexpr std::array<const char*, 2> labels = { "X", "Y" };
@@ -799,23 +756,31 @@ namespace SR_CORE_GUI_NS {
                 ImGui::PushStyleColor(ImGuiCol_ButtonHovered, colors[i] + ImVec4(0.1f, 0.1f, 0.1f, 0.0f));
                 ImGui::PushStyleColor(ImGuiCol_ButtonActive, colors[i] + ImVec4(0.2f, 0.2f, 0.2f, 0.0f));
 
-                bool isNeedToReset = true;
+                auto&& pFSize = reinterpret_cast<SR_MATH_NS::FSize*>(&((char*)(value.Data()))[i * sizeof(SR_MATH_NS::FSize)]);
+                auto&& pISize = reinterpret_cast<SR_MATH_NS::ISize*>(&((char*)(value.Data()))[i * sizeof(SR_MATH_NS::ISize)]);
+                auto&& pUSize = reinterpret_cast<SR_MATH_NS::USize*>(&((char*)(value.Data()))[i * sizeof(SR_MATH_NS::USize)]);
 
-                auto&& pFSize = reinterpret_cast<SR_MATH_NS::FSize*>(&pRaw[i * sizeof(SR_MATH_NS::FSize)]);
-                auto&& pISize = reinterpret_cast<SR_MATH_NS::ISize*>(&pRaw[i * sizeof(SR_MATH_NS::ISize)]);
-                auto&& pUSize = reinterpret_cast<SR_MATH_NS::USize*>(&pRaw[i * sizeof(SR_MATH_NS::USize)]);
-
-                if ((isNeedToReset = ImGui::Button(labels[i], buttonSize))) {
+                if (ImGui::Button(labels[i], buttonSize)) {
                     feedback.isChanged = true;
-                    if (partType == context.property.GetResetValue().GetType()) {
-                        auto&& pMapped = context.property.GetResetValue().MapString();
+                    if (value.SizeOf() == context.property.GetResetValue().SizeOf()) {
+                        auto&& pMapped = context.property.GetResetValue().Data();
                         switch (partType) {
-                            case SR_UTILS_NS::StandardType::FSize: std::memcpy(pFSize, pMapped, sizeof(float_t)); break;
-                            case SR_UTILS_NS::StandardType::ISize: std::memcpy(pISize, pMapped, sizeof(int32_t)); break;
-                            case SR_UTILS_NS::StandardType::USize: std::memcpy(pUSize, pMapped, sizeof(uint32_t)); break;
+                            case ImGuiDataType_Float: pFSize->v = reinterpret_cast<SR_MATH_NS::FSize*>(&((char*)(pMapped))[i * sizeof(SR_MATH_NS::FSize)])->v; break;
+                            case ImGuiDataType_S32: pISize->v = reinterpret_cast<SR_MATH_NS::ISize*>(&((char*)(pMapped))[i * sizeof(SR_MATH_NS::ISize)])->v; break;
+                            case ImGuiDataType_U32: pUSize->v = reinterpret_cast<SR_MATH_NS::USize*>(&((char*)(pMapped))[i * sizeof(SR_MATH_NS::USize)])->v; break;
                             default:
                                 SRHalt("Unknown part type!");
-                            break;
+                                break;
+                        }
+                    }
+                    else {
+                        switch (partType) {
+                            case ImGuiDataType_Float: pFSize->v = 0.f; break;
+                            case ImGuiDataType_S32: pISize->v = 0; break;
+                            case ImGuiDataType_U32: pUSize->v = 0; break;
+                            default:
+                                SRHalt("Unknown part type!");
+                                break;
                         }
                     }
                 }
@@ -826,33 +791,21 @@ namespace SR_CORE_GUI_NS {
                 ImGui::SameLine();
 
                 switch (partType) {
-                    case SR_UTILS_NS::StandardType::Float: {
+                    case ImGuiDataType_Float:
                         if (ImGui::DragScalar("", ImGuiDataType_Float, &pFSize->v, drag)) {
                             feedback.isChanged = true;
                         }
-                        if (isNeedToReset) {
-                            pFSize->v = 0.f;
-                        }
                         break;
-                    }
-                    case SR_UTILS_NS::StandardType::Int32: {
+                    case ImGuiDataType_S32:
                         if (ImGui::DragScalar("", ImGuiDataType_S32, &pISize->v, drag)) {
                             feedback.isChanged = true;
                         }
-                        if (isNeedToReset) {
-                            pISize->v = 0;
-                        }
                         break;
-                    }
-                    case SR_UTILS_NS::StandardType::UInt32: {
+                    case ImGuiDataType_U32:
                         if (ImGui::DragScalar("", ImGuiDataType_U32, &pUSize->v, drag)) {
                             feedback.isChanged = true;
                         }
-                        if (isNeedToReset) {
-                            pUSize->v = 0;
-                        }
                         break;
-                    }
                     default:
                         SR_GRAPH_GUI_NS::ColoredText("Unknown part type!", ImColor(1.f, 0.f, 0.f, 1.f));
                         break;
@@ -874,15 +827,15 @@ namespace SR_CORE_GUI_NS {
             for (uint8_t i = 0; i < dimension; ++i) {
                 ImGui::PushID(i);
 
-                auto&& pFSize = reinterpret_cast<SR_MATH_NS::FSize*>(&pRaw[i * sizeof(SR_MATH_NS::FSize)]);
-                auto&& pISize = reinterpret_cast<SR_MATH_NS::ISize*>(&pRaw[i * sizeof(SR_MATH_NS::ISize)]);
-                auto&& pUSize = reinterpret_cast<SR_MATH_NS::USize*>(&pRaw[i * sizeof(SR_MATH_NS::USize)]);
+                auto&& pFSize = reinterpret_cast<SR_MATH_NS::FSize*>(&((char*)(value.Data()))[i * sizeof(SR_MATH_NS::FSize)]);
+                auto&& pISize = reinterpret_cast<SR_MATH_NS::ISize*>(&((char*)(value.Data()))[i * sizeof(SR_MATH_NS::ISize)]);
+                auto&& pUSize = reinterpret_cast<SR_MATH_NS::USize*>(&((char*)(value.Data()))[i * sizeof(SR_MATH_NS::USize)]);
 
                 SR_MATH_NS::SizeMetric* pSize = nullptr;
                 switch (partType) {
-                    case SR_UTILS_NS::StandardType::Float: pSize = &pFSize->metric; break;
-                    case SR_UTILS_NS::StandardType::Int32: pSize = &pISize->metric; break;
-                    case SR_UTILS_NS::StandardType::UInt32: pSize = &pUSize->metric; break;
+                    case ImGuiDataType_Float: pSize = &pFSize->metric; break;
+                    case ImGuiDataType_S32: pSize = &pISize->metric; break;
+                    case ImGuiDataType_U32: pSize = &pUSize->metric; break;
                     default:
                         SR_GRAPH_GUI_NS::ColoredText("Unknown part type!", ImColor(1.f, 0.f, 0.f, 1.f));
                         break;
@@ -918,7 +871,7 @@ namespace SR_CORE_GUI_NS {
         ImGui::PopID();
         ImGui::PopID();
 
-        if (feedback.isChanged) {
+        if (!context.pValue && feedback.isChanged && !value.IsRef()) {
             context.property.Set(context.pOwner, value);
         }
 
