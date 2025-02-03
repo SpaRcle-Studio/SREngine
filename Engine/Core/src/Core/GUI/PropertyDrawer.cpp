@@ -390,6 +390,10 @@ namespace SR_CORE_GUI_NS {
     }
 
     SR_UTILS_NS::StringAtom GetValueInspector(const SR_UTILS_NS::Reflection::Value& value) {
+        if (value.IsBitMap()) {
+            return "BitMapPropertyDrawer";
+        }
+
         if (value.IsBool()) {
             return "BoolPropertyDrawer";
         }
@@ -412,6 +416,10 @@ namespace SR_CORE_GUI_NS {
 
         if (value.IsEnum()) {
             return "EnumPropertyDrawer";
+        }
+
+        if (value.IsClass()) {
+            return "ObjectPropertyDrawer";
         }
 
         return SR_UTILS_NS::StringAtom();
@@ -487,19 +495,21 @@ namespace SR_CORE_GUI_NS {
         SR_UTILS_NS::Reflection::Value value = context.GetValue();
 
         ImGui::PushID(context.pOwner);
-        ImGui::PushID(context.property.GetName().ToCStr());
+        ImGui::PushID(context.GetProperty().GetName().ToCStr());
 
         ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2{ 0, 0 });
 
-        const ImVec2 buttonSize = { context.fieldTitleWidth, context.fieldHeight };
+        if (!context.pValue) {
+            const ImVec2 buttonSize = { context.fieldTitleWidth, context.fieldHeight };
 
-        if (ImGui::Button(context.property.GetEditorParams().GetDisplayName().c_str(), buttonSize)) {
-            feedback.isChanged = true;
-            value = context.property.GetResetValue() ? context.property.GetResetValue() : context.property.GetDefaultValue();
-            value = value.DetachIfConst();
+            if (ImGui::Button(context.GetProperty().GetEditorParams().GetDisplayName().c_str(), buttonSize)) {
+                feedback.isChanged = true;
+                value = context.GetProperty().GetResetValue() ? context.GetProperty().GetResetValue() : context.GetProperty().GetDefaultValue();
+                value = value.DetachIfConst();
+            }
+
+            ImGui::SameLine();
         }
-
-        ImGui::SameLine();
 
         if (auto&& bValue = value.TryCast<bool>()) {
             if (ImGui::Checkbox("##Checkbox", bValue)) {
@@ -516,7 +526,7 @@ namespace SR_CORE_GUI_NS {
         ImGui::PopID();
 
         if (!context.pValue && feedback.isChanged && !value.IsRef()) {
-            context.property.Set(context.pOwner, value);
+            context.GetProperty().Set(context.pOwner, value);
         }
 
         return feedback;
@@ -533,15 +543,15 @@ namespace SR_CORE_GUI_NS {
         }
 
         ImGui::PushID(context.pOwner);
-        ImGui::PushID(context.property.GetName().ToCStr());
+        ImGui::PushID(context.GetProperty().GetName().ToCStr());
 
         ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2{ 0, 0 });
 
         const ImVec2 buttonSize = { context.fieldTitleWidth, context.fieldHeight };
 
-        if (!context.pValue && ImGui::Button(context.property.GetEditorParams().GetDisplayName().c_str(), buttonSize)) {
+        if (!context.pValue && ImGui::Button(context.GetProperty().GetEditorParams().GetDisplayName().c_str(), buttonSize)) {
             feedback.isChanged = true;
-            value = context.property.GetResetValue() ? context.property.GetResetValue() : context.property.GetDefaultValue();
+            value = context.GetProperty().GetResetValue() ? context.GetProperty().GetResetValue() : context.GetProperty().GetDefaultValue();
             value = value.DetachIfConst();
         }
 
@@ -549,7 +559,7 @@ namespace SR_CORE_GUI_NS {
 
         ImGui::PushItemWidth(context.fieldWidth);
 
-        const float_t drag = context.property.GetEditorParams().GetDragSpeed();
+        const float_t drag = context.GetProperty().GetEditorParams().GetDragSpeed();
         const ImGuiDataType_ dataType = SR_GRAPH_GUI_NS::GetImGuiDataType(value.SizeOf(), value.IsSigned(), value.IsIntegral());
         if (dataType == ImGuiDataType_COUNT) {
             SR_GRAPH_GUI_NS::ColoredText("Unknown data type!", ImColor(1.f, 0.f, 0.f, 1.f));
@@ -573,7 +583,7 @@ namespace SR_CORE_GUI_NS {
         ImGui::PopID();
 
         if (!context.pValue && feedback.isChanged && !value.IsRef()) {
-            context.property.Set(context.pOwner, value);
+            context.GetProperty().Set(context.pOwner, value);
         }
 
         return feedback;
@@ -592,16 +602,16 @@ namespace SR_CORE_GUI_NS {
         const uint8_t dimension = SR_UTILS_NS::CharToInt(vectorType[sizeof("Vector") - 1]);
 
         ImGui::PushID(context.pOwner);
-        ImGui::PushID(context.property.GetName().ToCStr());
+        ImGui::PushID(context.GetProperty().GetName().ToCStr());
 
         ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2{ 0, 0 });
 
         if (!context.pValue) {
             const ImVec2 mainButtonSize = { context.fieldTitleWidth, context.fieldHeight };
 
-            if (ImGui::Button(context.property.GetEditorParams().GetDisplayName().c_str(), mainButtonSize)) {
+            if (ImGui::Button(context.GetProperty().GetEditorParams().GetDisplayName().c_str(), mainButtonSize)) {
                 feedback.isChanged = true;
-                value = context.property.GetResetValue() ? context.property.GetResetValue() : context.property.GetDefaultValue();
+                value = context.GetProperty().GetResetValue() ? context.GetProperty().GetResetValue() : context.GetProperty().GetDefaultValue();
                 value = value.DetachIfConst();
             }
         }
@@ -612,7 +622,7 @@ namespace SR_CORE_GUI_NS {
         const float_t partItemWidth = (context.fieldWidth) / maxPartsInLine - context.axisButtonWidth;
 
         const ImVec2 buttonSize = { context.axisButtonWidth, context.fieldHeight };
-        const float_t drag = context.property.GetEditorParams().GetDragSpeed();
+        const float_t drag = context.GetProperty().GetEditorParams().GetDragSpeed();
         ImGuiDataType_ partType = SR_GRAPH_GUI_NS::GetImGuiDataType(vectorPartType);
 
         constexpr std::array<const char*, 6> labels = { "X", "Y", "Z", "W", "V", "U" };
@@ -639,8 +649,8 @@ namespace SR_CORE_GUI_NS {
             const uint64_t offset = partSize * i;
 
             if (ImGui::Button(labels[i], buttonSize)) {
-                if (context.property.GetResetValue().SizeOf() == value.SizeOf()) {
-                    if (auto&& pResetData = (char*)context.property.GetResetValue().Data()) {
+                if (context.GetProperty().GetResetValue().SizeOf() == value.SizeOf()) {
+                    if (auto&& pResetData = (char*)context.GetProperty().GetResetValue().Data()) {
                         std::memcpy((char*)value.Data() + offset, pResetData + offset, partSize);
                         feedback.isChanged = true;
                     }
@@ -695,7 +705,7 @@ namespace SR_CORE_GUI_NS {
         ImGui::PopID();
 
         if (!context.pValue && feedback.isChanged && !value.IsRef()) {
-            context.property.Set(context.pOwner, value);
+            context.GetProperty().Set(context.pOwner, value);
         }
 
         return feedback;
@@ -720,13 +730,15 @@ namespace SR_CORE_GUI_NS {
         }
 
         ImGui::PushID(context.pOwner);
-        ImGui::PushID(context.property.GetName().ToCStr());
+        ImGui::PushID(context.GetProperty().GetName().ToCStr());
 
-        const ImVec2 mainButtonSize = { context.fieldTitleWidth, context.fieldHeight * 2.f };
-        if (ImGui::Button(context.property.GetEditorParams().GetDisplayName().c_str(), mainButtonSize)) {
-            feedback.isChanged = true;
-            value = context.property.GetResetValue() ? context.property.GetResetValue() : context.property.GetDefaultValue();
-            value = value.DetachIfConst();
+        if (!context.pValue) {
+            const ImVec2 mainButtonSize = { context.fieldTitleWidth, context.fieldHeight * 2.f };
+            if (ImGui::Button(context.GetProperty().GetEditorParams().GetDisplayName().c_str(), mainButtonSize)) {
+                feedback.isChanged = true;
+                value = context.GetProperty().GetResetValue() ? context.GetProperty().GetResetValue() : context.GetProperty().GetDefaultValue();
+                value = value.DetachIfConst();
+            }
         }
 
         SRAssert(value);
@@ -737,7 +749,7 @@ namespace SR_CORE_GUI_NS {
         const float_t partItemWidth = (context.fieldWidth) / maxPartsInLine - context.axisButtonWidth;
 
         const ImVec2 buttonSize = { context.axisButtonWidth, context.fieldHeight };
-        const float_t drag = context.property.GetEditorParams().GetDragSpeed();
+        const float_t drag = context.GetProperty().GetEditorParams().GetDragSpeed();
 
         constexpr std::array<const char*, 2> labels = { "X", "Y" };
         constexpr std::array<ImVec4, 2> colors = {
@@ -762,8 +774,8 @@ namespace SR_CORE_GUI_NS {
 
                 if (ImGui::Button(labels[i], buttonSize)) {
                     feedback.isChanged = true;
-                    if (value.SizeOf() == context.property.GetResetValue().SizeOf()) {
-                        auto&& pMapped = context.property.GetResetValue().Data();
+                    if (value.SizeOf() == context.GetProperty().GetResetValue().SizeOf()) {
+                        auto&& pMapped = context.GetProperty().GetResetValue().Data();
                         switch (partType) {
                             case ImGuiDataType_Float: pFSize->v = reinterpret_cast<SR_MATH_NS::FSize*>(&((char*)(pMapped))[i * sizeof(SR_MATH_NS::FSize)])->v; break;
                             case ImGuiDataType_S32: pISize->v = reinterpret_cast<SR_MATH_NS::ISize*>(&((char*)(pMapped))[i * sizeof(SR_MATH_NS::ISize)])->v; break;
@@ -872,7 +884,7 @@ namespace SR_CORE_GUI_NS {
         ImGui::PopID();
 
         if (!context.pValue && feedback.isChanged && !value.IsRef()) {
-            context.property.Set(context.pOwner, value);
+            context.GetProperty().Set(context.pOwner, value);
         }
 
         return feedback;

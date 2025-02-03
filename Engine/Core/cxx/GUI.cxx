@@ -27,5 +27,8 @@
 #include "../src/Core/GUI/EditorCamera.cpp"
 #include "../src/Core/GUI/EditorGizmo.cpp"
 #include "../src/Core/GUI/SceneTools.cpp"
+
 #include "../src/Core/GUI/PropertyDrawers/EnumPropertyDrawer.cpp"
 #include "../src/Core/GUI/PropertyDrawers/VectorPropertyDrawer.cpp"
+#include "../src/Core/GUI/PropertyDrawers/BitMapPropertyDrawer.cpp"
+#include "../src/Core/GUI/PropertyDrawers/ObjectPropertyDrawer.cpp"

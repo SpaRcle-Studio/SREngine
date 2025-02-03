@@ -29,16 +29,16 @@ namespace SR_CORE_GUI_NS {
         }
 
         ImGui::PushID(context.pOwner);
-        ImGui::PushID(context.property.GetName().c_str());
+        ImGui::PushID(context.GetProperty().GetName().c_str());
 
         ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2{ 0, 0 });
 
         if (!context.pValue) {
             const ImVec2 buttonSize = { context.fieldTitleWidth, context.fieldHeight };
 
-            if (ImGui::Button(context.property.GetEditorParams().GetDisplayName().c_str(), buttonSize)) {
+            if (ImGui::Button(context.GetProperty().GetEditorParams().GetDisplayName().c_str(), buttonSize)) {
                 feedback.isChanged = true;
-                value = context.property.GetResetValue() ? context.property.GetResetValue() : context.property.GetDefaultValue();
+                value = context.GetProperty().GetResetValue() ? context.GetProperty().GetResetValue() : context.GetProperty().GetDefaultValue();
                 value = value.DetachIfConst();
             }
 
@@ -107,7 +107,7 @@ namespace SR_CORE_GUI_NS {
         }
 
         if (!context.pValue && feedback.isChanged && !value.IsRef()) {
-            context.property.Set(context.pOwner, value);
+            context.GetProperty().Set(context.pOwner, value);
         }
 
         ImGui::PopStyleVar();

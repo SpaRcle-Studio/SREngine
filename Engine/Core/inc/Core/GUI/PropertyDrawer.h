@@ -29,7 +29,7 @@ namespace SR_CORE_GUI_NS {
 
     struct PropertyDrawerContext {
         explicit PropertyDrawerContext(const SR_UTILS_NS::Reflection::Property& property)
-            : property(property)
+            : pProperty(&property)
         { }
 
         float_t lineHeight = 1.f;
@@ -41,14 +41,16 @@ namespace SR_CORE_GUI_NS {
         float_t fieldWidth = 250.f;
         float_t fieldHeight = 0.f;
 
+        SR_NODISCARD SR_UTILS_NS::Reflection::Property const& GetProperty() const { return *pProperty; }
+
         SR_NODISCARD SR_UTILS_NS::Reflection::Value GetValue() const {
-            return (pValue ? *pValue : property.Get(pOwner)).DetachIfConst();
+            return (pValue ? *pValue : pProperty->Get(pOwner)).DetachIfConst();
         }
 
         SR_UTILS_NS::Component::Ptr pComponent;
         uint64_t propertyIndex = 0;
         SR_UTILS_NS::Reflection::Value* pValue = nullptr;
-        const SR_UTILS_NS::Reflection::Property& property;
+        SR_UTILS_NS::Reflection::Property const* pProperty = nullptr;
         EditorGUI* pEditor = nullptr;
         void* pOwner = nullptr;
     };

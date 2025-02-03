@@ -388,7 +388,7 @@ namespace SR_CORE_GUI_NS {
             return;
         }
 
-        //ImGui::PushID(pComponent);
+        ImGui::PushID(pComponent);
 
         SRAssert1Once(pComponent->Valid());
 
@@ -403,7 +403,7 @@ namespace SR_CORE_GUI_NS {
 
         ImGui::SameLine();
 
-        const bool isOpened = ImGui::CollapsingHeader(headerName.c_str());
+        const bool isOpened = ImGui::CollapsingHeader(pComponent->GetComponentName().c_str());
 
         if (ImGui::IsItemClicked(ImGuiMouseButton_Right)) {
             ImGui::OpenPopup(headerName.c_str());
@@ -529,28 +529,28 @@ namespace SR_CORE_GUI_NS {
             ImGui::EndPopup();
         }
 
-        //ImGui::PopID();
+        ImGui::PopID();
     }
 
     void Inspector::DrawProperty(const PropertyDrawerContext& context) {
-        if (context.property.IsHidden()) {
+        if (context.GetProperty().IsHidden()) {
             return;
         }
 
         ComponentContext& componentContext = m_componentContexts.at(context.pComponent);
         if (!componentContext.pDrawers[context.propertyIndex]) {
-            SR_GRAPH_GUI_NS::ColoredText("Missing drawer for property: {}"_format(context.property.GetName()), ImColor(255, 0, 0));
+            SR_GRAPH_GUI_NS::ColoredText("Missing drawer for property: {}"_format(context.GetProperty().GetName()), ImColor(255, 0, 0));
             return;
         }
 
-        ImGui::BeginDisabled(context.property.IsReadOnly());
+        ImGui::BeginDisabled(context.GetProperty().IsReadOnly());
 
         const PropertyDrawerFeedback feedback = componentContext.pDrawers[context.propertyIndex]->Draw(context);
 
         ImGui::EndDisabled();
 
         if (feedback.isChanged) {
-            context.property.OnChanged(context.pOwner);
+            context.GetProperty().OnChanged(context.pOwner);
         }
     }
 

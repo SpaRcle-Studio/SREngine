@@ -1,21 +1,16 @@
 //
-// Created by Monika on 01.02.2025.
+// Created by Monika on 03.02.2025.
 //
 
-#include <Core/GUI/PropertyDrawers/VectorPropertyDrawer.h>
+#include <Core/GUI/PropertyDrawers/BitMapPropertyDrawer.h>
 
-#include <Codegen/VectorPropertyDrawer.generated.hpp>
+#include <Codegen/BitMapPropertyDrawer.generated.hpp>
 
 namespace SR_CORE_GUI_NS {
-    PropertyDrawerFeedback VectorPropertyDrawer::Draw(const PropertyDrawerContext& context) {
+    PropertyDrawerFeedback BitMapPropertyDrawer::Draw(const PropertyDrawerContext& context) {
         PropertyDrawerFeedback feedback;
 
         SR_UTILS_NS::Reflection::Value value = context.GetValue();
-
-        if (!value.IsSequenceContainer()) {
-            SRHalt("VectorPropertyDrawer can only be used with sequence containers!");
-            return feedback;
-        }
 
         ImGui::PushID(context.pOwner);
         ImGui::PushID(context.GetProperty().GetName().ToCStr());
@@ -90,54 +85,36 @@ namespace SR_CORE_GUI_NS {
             feedback.isChanged = true;
         }
 
-        if (container.Size() < m_drawers.size()) {
-            m_drawers.resize(container.Size());
-        }
-
         if (m_isOpened) {
-            for (auto&& pIt = container.begin(); pIt != container.end(); ++pIt) {
-                SR_UTILS_NS::Reflection::Value element = *pIt;
-                uint64_t index = std::distance(container.begin(), pIt);
-                ImGui::PushID(index);
+            constexpr uint64_t maxPartsInLine = 8;
 
-                ImVec2 itemButtonSize = { 40, context.fieldHeight };
-                ImGui::BeginDisabled();
-                ImGui::Button("[{}] "_format(index).c_str(), itemButtonSize);
-                ImGui::EndDisabled();
+            if (std::vector<bool>* pBitMap = value.TryCast<std::vector<bool>>()) {
+                for (uint64_t i = 0; i < pBitMap->size(); ++i) {
+                    ImGui::PushID(i);
 
-                ImGui::SameLine();
-
-                if (index >= m_drawers.size()) {
-                    m_drawers.emplace_back();
-
-                    SR_UTILS_NS::StringAtom inspector = SR_CORE_GUI_NS::GetValueInspector(element);
-                    if (!inspector.Empty()) {
-                        auto&& pDrawer = SR_UTILS_NS::Factory::Instance().Create<PropertyDrawerBase>(inspector);
-                        m_drawers.back() = pDrawer;
+                    if (i % maxPartsInLine == 0) {
+                        ImVec2 itemButtonSize = { 40, context.fieldHeight };
+                        ImGui::BeginDisabled();
+                        ImGui::Button("[{}] "_format(static_cast<uint64_t>(i / maxPartsInLine)).c_str(), itemButtonSize);
+                        ImGui::EndDisabled();
+                        ImGui::SameLine();
                     }
-                }
 
-                if (!m_drawers[index]) {
-                    SR_GRAPH_GUI_NS::ColoredText("Missing inspector for element!", ImColor(255, 0, 0));
+                    bool bValue = (*pBitMap)[i];
+                    if (ImGui::Checkbox("", &bValue)) {
+                        pBitMap->at(i) = bValue;
+                        feedback.isChanged = true;
+                    }
+
+                    if ((i + 1) % maxPartsInLine != 0) {
+                        ImGui::SameLine();
+                    }
+
                     ImGui::PopID();
-                    continue;
                 }
-
-                PropertyDrawerContext elementContext = context;
-                elementContext.pValue = &element;
-                elementContext.fieldWidth += context.fieldTitleWidth;
-                elementContext.fieldWidth -= itemButtonSize.x;
-                elementContext.fieldTitleWidth = 0.f;
-
-                ImGui::BeginGroup();
-                PropertyDrawerFeedback elementFeedback = m_drawers[index]->Draw(elementContext);
-                ImGui::EndGroup();
-
-                if (elementFeedback.isChanged) {
-                    feedback.isChanged = true;
-                }
-
-                ImGui::PopID();
+            }
+            else {
+                SRHalt("Failed to map bit map value!");
             }
         }
 

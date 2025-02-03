@@ -423,7 +423,8 @@ def parse_tree(deep, parent_node, code_structure, namespaces):
 
             return
 
-        if parent_node.kind == clang.cindex.CursorKind.CLASS_DECL and parent_node.is_definition():
+        is_class_or_struct = parent_node.kind == clang.cindex.CursorKind.CLASS_DECL or parent_node.kind == clang.cindex.CursorKind.STRUCT_DECL
+        if is_class_or_struct and parent_node.is_definition():
             if not has_static_function(parent_node, 'GetMetaStatic'):
                 return
 
