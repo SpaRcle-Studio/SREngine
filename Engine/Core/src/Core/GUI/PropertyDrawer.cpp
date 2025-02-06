@@ -418,6 +418,10 @@ namespace SR_CORE_GUI_NS {
             return "EnumPropertyDrawer";
         }
 
+        if (value.IsSmartPtr()) {
+            return "PointerPropertyDrawer";
+        }
+
         if (value.IsClass()) {
             return "ObjectPropertyDrawer";
         }

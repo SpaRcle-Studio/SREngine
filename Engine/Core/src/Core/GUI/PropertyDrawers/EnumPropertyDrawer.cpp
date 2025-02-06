@@ -65,16 +65,7 @@ namespace SR_CORE_GUI_NS {
             }
 
             for (uint64_t i = 0; i < names.size(); ++i) {
-                bool found = m_searchBuffer.empty();
-                for (uint64_t j = 0; j < m_searchBuffer.size() && j < names[i].size(); j++) {
-                    if (std::tolower(m_searchBuffer[j]) != std::tolower(names[i][j])) {
-                        found = false;
-                        break;
-                    }
-                    found = true;
-                }
-
-                if (!found) {
+                if (!m_searchBuffer.empty() && !CheckSearchMatch(m_searchBuffer, names[i])) {
                     continue;
                 }
 

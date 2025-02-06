@@ -51,7 +51,23 @@ namespace SR_HTYPES_NS {
 
     };
 
-    template<class T> class SR_DLL_EXPORT SharedPtr {
+    class SR_DLL_EXPORT SharedPtrBase {
+    public:
+        SharedPtrBase() = default;
+        explicit SharedPtrBase(SharedPtrDynamicData* data) : m_data(data) { }
+        virtual ~SharedPtrBase() = default;
+
+    public:
+        const SharedPtrDynamicData* GetPtrData() const { return m_data; } /// NOLINT(modernize-use-nodiscard)
+        SharedPtrDynamicData* GetPtrData() { return m_data; }
+
+    protected:
+        SharedPtrDynamicData* m_data = nullptr;
+        bool m_basicManually = false;
+
+    };
+
+    template<class T> class SR_DLL_EXPORT SharedPtr : public SharedPtrBase {
     public:
         using Ptr = SharedPtr<T>;
 
@@ -60,10 +76,10 @@ namespace SR_HTYPES_NS {
         SharedPtr(const T* constPtr, SR_UTILS_NS::SharedPtrPolicy policy);
         SharedPtr(SharedPtr const& ptr);
         SharedPtr(SharedPtr&& ptr) noexcept
-            : m_data(SR_UTILS_NS::Exchange(ptr.m_data, nullptr))
+            : SharedPtrBase(SR_UTILS_NS::Exchange(ptr.m_data, nullptr))
             , m_ptr(SR_UTILS_NS::Exchange(ptr.m_ptr, nullptr))
         { }
-        virtual ~SharedPtr();
+        ~SharedPtr() override;
 
     public:
         template<typename U = T, typename R = U, typename... Args> SR_NODISCARD static SharedPtr<R> MakeShared(Args&&... args) {
@@ -145,9 +161,7 @@ namespace SR_HTYPES_NS {
         bool FreeImpl(const SR_HTYPES_NS::Function<void(T *ptr)>& freeFun);
 
     private:
-        SharedPtrDynamicData* m_data = nullptr;
         T* m_ptr = nullptr;
-        bool m_basicManually = false;
 
     };
 
@@ -157,17 +171,31 @@ namespace SR_HTYPES_NS {
             return;
         }
 
+        m_ptr = ptr;
+
         if constexpr (SR_UTILS_NS::IsDerivedFrom<SharedPtr, T>::value) {
             if ((m_data = ptr->GetPtrData())) {
                 m_data->IncrementStrong();
-                m_ptr = ptr;
             }
             else {
                 SR_SAFE_PTR_ASSERT(false, "Class was inherit, but not initialized!");
             }
         }
+        else if constexpr (std::is_polymorphic_v<T>) {
+            if (auto&& pBase = dynamic_cast<SharedPtrBase*>(ptr)) {
+                m_data = pBase->GetPtrData();
+                m_data->IncrementStrong();
+            }
+            else {
+                m_data = new SharedPtrDynamicData(
+                    1, /// strong
+                    0, /// weak
+                    true, /// valid
+                    SR_UTILS_NS::SharedPtrPolicy::Automatic /// policy
+                );
+            }
+        }
         else {
-            m_ptr = ptr;
             m_data = new SharedPtrDynamicData(
                 1, /// strong
                 0, /// weak
@@ -239,18 +267,31 @@ namespace SR_HTYPES_NS {
 
         Reset();
 
+        m_ptr = ptr;
+
         if constexpr (SR_UTILS_NS::IsDerivedFrom<SharedPtr, T>::value) {
             if ((m_data = ptr->GetPtrData())) {
                 m_data->IncrementStrong();
-                m_ptr = ptr;
             }
             else {
                 SR_SAFE_PTR_ASSERT(false, "Class was inherit, but not initialized!");
             }
         }
+        else if constexpr (std::is_polymorphic_v<T>) {
+            if (auto&& pBase = dynamic_cast<SharedPtrBase*>(ptr)) {
+                m_data = pBase->GetPtrData();
+                m_data->IncrementStrong();
+            }
+            else {
+                m_data = new SharedPtrDynamicData(
+                    1, /// strong
+                    0, /// weak
+                    true, /// valid
+                    SR_UTILS_NS::SharedPtrPolicy::Automatic /// policy
+                );
+            }
+        }
         else {
-            m_ptr = ptr;
-
             m_data = new SharedPtrDynamicData(
                 1, /// strong
                 0, /// weak

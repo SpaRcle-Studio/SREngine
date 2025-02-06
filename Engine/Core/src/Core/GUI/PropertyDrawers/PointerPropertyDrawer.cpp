@@ -2,12 +2,12 @@
 // Created by Monika on 03.02.2025.
 //
 
-#include <Core/GUI/PropertyDrawers/ObjectPropertyDrawer.h>
+#include <Core/GUI/PropertyDrawers/PointerPropertyDrawer.h>
 
-#include <Codegen/ObjectPropertyDrawer.generated.hpp>
+#include <Codegen/PointerPropertyDrawer.generated.hpp>
 
 namespace SR_CORE_GUI_NS {
-    PropertyDrawerFeedback ObjectPropertyDrawer::Draw(const PropertyDrawerContext& context) {
+    PropertyDrawerFeedback PointerPropertyDrawer::Draw(const PropertyDrawerContext& context) {
         PropertyDrawerFeedback feedback;
 
         SR_UTILS_NS::Reflection::Value value = context.GetValue();
@@ -20,7 +20,7 @@ namespace SR_CORE_GUI_NS {
         auto&& pWindow = ImGui::GetCurrentWindow();
         const ImGuiDir_ dir = m_isOpened ? ImGuiDir_Down : ImGuiDir_Right;
 
-        std::string_view typeName = value.GetTypeName();
+        std::string_view typeName = value.GetSharedPtrType();
         if (size_t pos = typeName.rfind(':'); pos != std::string_view::npos) {
             typeName.remove_prefix(pos + 1);
         }
@@ -59,14 +59,92 @@ namespace SR_CORE_GUI_NS {
 
         ImGui::SameLine();
 
-        ImGui::BeginDisabled();
-        ImGui::Button("{}"_format(typeName).c_str(), buttonSize);
-        ImGui::EndDisabled();
+        if (m_default.empty()) {
+            m_default = "{} (nullptr)"_format(typeName);
+        }
 
-        if (m_isOpened) {
-            if (const SR_UTILS_NS::SRClassMeta* pMeta = SR_UTILS_NS::Factory::Instance().GetType(typeName)) {
-                if (m_drawers.empty()) {
-                    pMeta->ForEachProperty([&](auto&& property, uint64_t index) {
+        if (m_typeNames.empty()) {
+            m_typeNames.emplace_back("(nullptr)");
+
+            auto&& pMeta = SR_UTILS_NS::Factory::Instance().GetType(typeName);
+            if (pMeta && !pMeta->IsAbstract()) {
+                m_typeNames.emplace_back(pMeta->GetFactoryName());
+            }
+
+            for (auto&& type : SR_UTILS_NS::Factory::Instance().GetInheritances(typeName)) {
+                m_typeNames.emplace_back(type);
+            }
+        }
+
+        SR_HTYPES_NS::SharedPtr<SR_UTILS_NS::SRClass>& pClass = *reinterpret_cast<SR_HTYPES_NS::SharedPtr<SR_UTILS_NS::SRClass>*>(value.Data());
+
+        if (!m_typeNames.empty()) {
+            auto&& pTypeNameIt = pClass ? std::find(m_typeNames.begin(), m_typeNames.end(), pClass->GetMeta()->GetFactoryName()) : m_typeNames.end();
+            std::optional<uint64_t> selectedIndex = pTypeNameIt != m_typeNames.end() ? std::make_optional(std::distance(m_typeNames.begin(), pTypeNameIt)) : std::nullopt;
+
+            const char* pPrevValue = selectedIndex.has_value() ? m_typeNames[selectedIndex.value()].data() : m_default.c_str();
+
+            ImGui::PushItemWidth(context.fieldWidth);
+
+            if (ImGui::BeginCombo("##Combo", pPrevValue, ImGuiComboFlags_NoArrowButton)) {
+                if (!m_comboOpened) {
+                    ImGui::SetKeyboardFocusHere();
+                    m_comboOpened = true;
+                }
+
+                if (ImGui::InputText("##Search", &m_searchBuffer)) {
+                    SR_NOOP;
+                }
+
+                for (uint64_t i = 0; i < m_typeNames.size(); ++i) {
+                    if (!m_searchBuffer.empty() && !CheckSearchMatch(m_searchBuffer, m_typeNames[i])) {
+                        continue;
+                    }
+
+                    bool isSelected = (selectedIndex == i);
+                    if (ImGui::Selectable(m_typeNames[i].data(), isSelected))
+                    {
+                        selectedIndex = i;
+                        m_searchBuffer = m_typeNames[i];
+                        ImGui::CloseCurrentPopup();
+                    }
+
+                    if (isSelected) {
+                        ImGui::SetItemDefaultFocus();
+                    }
+                }
+                ImGui::EndCombo();
+            }
+            else {
+                m_comboOpened = false;
+                m_searchBuffer.clear();
+            }
+
+            ImGui::PopItemWidth();
+
+            if (selectedIndex) {
+                if (m_typeNames[selectedIndex.value()] == "(nullptr)") {
+                    pClass.Reset();
+                    feedback.isChanged = true;
+                }
+                else if (pClass) {
+                    if (m_typeNames[selectedIndex.value()] != pClass->GetMeta()->GetFactoryName()) {
+                        pClass = SR_UTILS_NS::Factory::Instance().CreateBase(m_typeNames[selectedIndex.value()]);
+                        feedback.isChanged = true;
+                    }
+                }
+                else {
+                    pClass = SR_UTILS_NS::Factory::Instance().CreateBase(m_typeNames[selectedIndex.value()]);
+                    feedback.isChanged = true;
+                }
+            }
+
+            if (m_isOpened && pClass) {
+                if (m_lastTypeName != pClass->GetMeta()->GetFactoryName()) {
+                    m_lastTypeName = pClass->GetMeta()->GetFactoryName();
+                    m_drawers.clear();
+
+                    pClass->GetMeta()->ForEachProperty([&](auto&& property, uint64_t index) {
                         SR_UTILS_NS::StringAtom inspector = property.GetEditorParams().GetInspector();
 
                         if (inspector.Empty()) {
@@ -88,7 +166,7 @@ namespace SR_CORE_GUI_NS {
                     });
                 }
 
-                pMeta->ForEachProperty([&](auto&& property, uint64_t index) {
+                pClass->GetMeta()->ForEachProperty([&](auto&& property, uint64_t index) {
                     if (!m_drawers[index]) {
                         SR_GRAPH_GUI_NS::ColoredText("Missing inspector for element!", ImColor(255, 0, 0));
                         return;
@@ -105,7 +183,7 @@ namespace SR_CORE_GUI_NS {
                     propertyContext.fieldWidth = totalWidth * 0.7;
                     propertyContext.fieldTitleWidth = totalWidth * 0.3;
                     propertyContext.pProperty = &property;
-                    propertyContext.pOwner = value.Data();
+                    propertyContext.pOwner = pClass.Get();
 
                     ImGui::BeginGroup();
                     PropertyDrawerFeedback propertyFeedback = m_drawers[index]->Draw(propertyContext);
@@ -116,9 +194,9 @@ namespace SR_CORE_GUI_NS {
                     }
                 });
             }
-            else {
-                SR_GRAPH_GUI_NS::ColoredText("Failed to get meta for object!", ImColor(255, 0, 0));
-            }
+        }
+        else {
+            SR_GRAPH_GUI_NS::ColoredText("No inheritances found!", ImColor(255, 255, 0));
         }
 
         ImGui::PopStyleVar();
