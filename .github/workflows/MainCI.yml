@@ -4,8 +4,8 @@ on:
   workflow_dispatch:
   push:
     paths-ignore:
-      - 'Documentation/**'
-      - '**.md'
+      - "Documentation/**"
+      - "**.md"
     branches:
       - master
       - dev
@@ -13,8 +13,8 @@ on:
 
   pull_request:
     paths-ignore:
-      - 'Documentation/**'
-      - '**.md'
+      - "Documentation/**"
+      - "**.md"
     branches:
       - master
       - dev
@@ -34,7 +34,7 @@ jobs:
 
     steps:
       - name: Fetching repository.
-        uses: actions/checkout@v4.1.6
+        uses: actions/checkout@4
         with:
           fetch-depth: 1
 
@@ -87,7 +87,7 @@ jobs:
         run: |
           echo "buildWindows=true" >> "$GITHUB_ENV"
           echo "buildLinux=true" >> "$GITHUB_ENV"
-          
+
       - name: Set global variables.
         id: globals
         run: |
@@ -95,8 +95,7 @@ jobs:
           echo "buildRelease=${{env.buildRelease}}" >> $GITHUB_OUTPUT
           echo "buildWindows=${{env.buildWindows}}" >> $GITHUB_OUTPUT
           echo "buildLinux=${{env.buildLinux}}" >> $GITHUB_OUTPUT
-          echo "artifactPush=${{env.artifactPush}}" >> $GITHUB_OUTPUT  
-
+          echo "artifactPush=${{env.artifactPush}}" >> $GITHUB_OUTPUT
 
   BuildWindowsJob:
     name: Windows.
