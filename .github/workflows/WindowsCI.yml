@@ -85,14 +85,14 @@ jobs:
 
       - if: inputs.buildDebug == 'true'
         name: Uploading a Debug build trace artifact.
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: "SREngine Debug Windows Build Trace Artifact"
           path: "${{github.workspace}}/CI/trace-debug.json"
 
       - if: inputs.buildRelease == 'true'
         name: Uploading a Release build trace artifact.
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: "SREngine Release Windows Build Trace Artifact"
           path: "${{github.workspace}}/CI/trace-release.json"
