@@ -34,7 +34,7 @@ jobs:
 
     steps:
       - name: Fetching repository.
-        uses: actions/checkout@4
+        uses: actions/checkout@v4
         with:
           fetch-depth: 1
 
