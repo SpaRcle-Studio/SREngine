@@ -91,9 +91,11 @@ class Property:
         self.drag_value = None
         self.editor_width = None
         self.read_only = False
+        self.no_header = False
         self.hidden = False
         self.private = False
         self.dontLoad = False
+        self.virtual = False
 
     def __str__(self):
         return f'Property: {self.name}, Type: {self.type_name}, Default value: {self.default_value}'
@@ -128,6 +130,7 @@ class Enum:
 class Class:
     def __init__(self, name, namespaces):
         self.name = name
+        self.inspector = None
         self.namespaces = namespaces
         self.variables = []
         self.methods = []
@@ -177,6 +180,8 @@ def extract_special_tag_comment_data(node, tag):
     """ /// @someTage(data, data, data), get data between ( and ) """
     """ /// @resetValue(someFunc()), get someFunc() """
     raw_comment = node.raw_comment
+    if not raw_comment:
+        return None
     start = raw_comment.find(f"@{tag}")
     if start == -1:
         return None
@@ -350,6 +355,37 @@ def is_class_inherited_from(class_node, class_name):
                 return True
     return False
 
+def process_property(property_obj, child):
+    property_obj.change_callback = extract_special_tag_comment_data(child, 'changeCallback')
+    property_obj.setter = extract_special_tag_comment_data(child, 'setter')
+    property_obj.getter = extract_special_tag_comment_data(child, 'getter')
+    property_obj.reset_value = extract_special_tag_comment_data(child, 'resetValue')
+    property_obj.drag_value = extract_special_tag_comment_data(child, 'drag')
+    property_obj.editor_width = extract_special_tag_comment_data(child, 'editorWidth')
+    property_obj.inspector = extract_special_tag_comment_data(child, 'inspector')
+
+    if property_obj.virtual and not property_obj.getter:
+        raise Exception(f'Virtual property {property_obj.name} must have getter!')
+
+    property_obj.hidden = has_special_tag_comment(child, 'hidden')
+    property_obj.read_only = has_special_tag_comment(child, 'readOnly')
+    property_obj.no_header = has_special_tag_comment(child, 'noHeader')
+    property_obj.private = has_special_tag_comment(child, 'private')
+
+    property_obj.dontLoad = has_special_tag_comment(child, 'dontLoad')
+    property_obj.dontSave = has_special_tag_comment(child, 'dontSave')
+
+    if property_obj.dontSave:
+        property_obj.dontLoad = True
+
+    # remove m_ and _ prefix from name
+    property_obj.display_name = make_display_name(property_obj.name)
+    property_obj.serialize_name = make_serialize_property_name(property_obj.name)
+
+    property_obj.default_value = extract_property_default_value(child)
+    if property_obj.default_value:
+        print(f'Found default value: {property_obj.default_value}')
+
 def parse_tree(deep, parent_node, code_structure, namespaces):
     try:
         if parent_node.kind == clang.cindex.CursorKind.FUNCTION_DECL and parent_node.is_definition():
@@ -431,42 +467,36 @@ def parse_tree(deep, parent_node, code_structure, namespaces):
             # Нашли класс
             class_name = parent_node.spelling
             class_obj = Class(class_name, namespaces)
+            class_obj.inspector = extract_special_tag_comment_data(parent_node, 'inspector')
             class_obj.path = parent_node.location.file.name
+
+            if class_obj.inspector:
+                print(f'Found class inspector: {class_obj.inspector}')
 
             # Перебираем все поля класса
             for child in parent_node.get_children():
                 if child.kind == clang.cindex.CursorKind.CXX_BASE_SPECIFIER:
                     class_obj.inherited_classes.append(child.spelling)
+                    continue
 
-                if child.kind == clang.cindex.CursorKind.FIELD_DECL and is_property_comment(child):
+                if child.kind == clang.cindex.CursorKind.TYPEDEF_DECL:
+                    virtual_property = extract_special_tag_comment_data(child, 'virtualProperty')
+                    if virtual_property:
+                        print(f'Found virtual property: {virtual_property}')
+                        property_obj = Property(virtual_property, 'Unknown')
+                        property_obj.virtual = True
+                        process_property(property_obj, child)
+                        class_obj.add_variable(property_obj)
+
+                elif child.kind == clang.cindex.CursorKind.FIELD_DECL and is_property_comment(child):
                     variable_name = child.spelling
                     variable_type = extract_property_type(child)
                     property_obj = Property(variable_name, variable_type)
                     print(f'Found property: {property_obj.name}, Type: {property_obj.type_name}')
-
-                    property_obj.change_callback = extract_special_tag_comment_data(child, 'changeCallback')
-                    property_obj.setter = extract_special_tag_comment_data(child, 'setter')
-                    property_obj.getter = extract_special_tag_comment_data(child, 'getter')
-                    property_obj.reset_value = extract_special_tag_comment_data(child, 'resetValue')
-                    property_obj.drag_value = extract_special_tag_comment_data(child, 'drag')
-                    property_obj.editor_width = extract_special_tag_comment_data(child, 'editorWidth')
-                    property_obj.inspector = extract_special_tag_comment_data(child, 'inspector')
-
-                    property_obj.hidden = has_special_tag_comment(child, 'hidden')
-                    property_obj.read_only = has_special_tag_comment(child, 'readOnly')
-                    property_obj.private = has_special_tag_comment(child, 'private')
-                    property_obj.dontLoad = has_special_tag_comment(child, 'dontLoad')
-
-                    # remove m_ and _ prefix from name
-                    property_obj.display_name = make_display_name(property_obj.name)
-                    property_obj.serialize_name = make_serialize_property_name(property_obj.name)
-
-                    property_obj.default_value = extract_property_default_value(child)
-                    if property_obj.default_value:
-                        print(f'Found default value: {property_obj.default_value}')
+                    process_property(property_obj, child)
                     class_obj.add_variable(property_obj)
 
-                if child.kind == clang.cindex.CursorKind.CXX_METHOD and is_method_comment(child):
+                elif child.kind == clang.cindex.CursorKind.CXX_METHOD and is_method_comment(child):
                     method_name = child.spelling
                     method_return_type = child.result_type.spelling
                     method_obj = Method(method_name, method_return_type)
@@ -554,8 +584,14 @@ def generate_class_meta_properties(f, class_structures, class_obj, tabs):
         default_value = f'decltype({class_obj.name}::{prop.name})()'
         if prop.default_value:
             default_value = f'decltype({class_obj.name}::{prop.name})(GetDefault_{prop.serialize_name}())'
+        elif prop.virtual:
+            if prop.getter:
+                default_value = f'SR_UTILS_NS::RemoveQualifiersT<decltype(DeclTypeStub()->{prop.getter}())>()'
+            else:
+                default_value = None
 
-        f.write('\n' + '\t' * (tabs + 3) + f'.SetDefaultValue(SR_UTILS_NS::Reflection::Value::Create({default_value}))')
+        if default_value:
+            f.write('\n' + '\t' * (tabs + 3) + f'.SetDefaultValue(SR_UTILS_NS::Reflection::Value::Create({default_value}))')
 
         if prop.reset_value:
             f.write('\n' + '\t' * (tabs + 3) + f'.SetResetValue(SR_UTILS_NS::Reflection::Value::Create({prop.reset_value}))')
@@ -563,6 +599,9 @@ def generate_class_meta_properties(f, class_structures, class_obj, tabs):
         # editor params
 
         f.write('\n' + '\t' * (tabs + 3) + f'.SetEditorParams(SR_UTILS_NS::Reflection::EditorPropertyParams()')
+
+        if prop.no_header:
+            f.write('\n' + '\t' * (tabs + 4) + f'.SetNoHeader()')
 
         f.write('\n' + '\t' * (tabs + 4) + f'.SetDisplayName("{prop.display_name}")')
         #f.write('\n' + '\t' * (tabs + 4) + f'.SetInspector(SR_UTILS_NS::Reflection::GetPropertyInspector<decltype({class_obj.name}::{prop.name})>())')
@@ -620,16 +659,38 @@ def generate_class_meta_save(f, class_obj, tabs):
     class_name = '::'.join(class_obj.namespaces) + '::' + class_obj.name
 
     f.write('\t' * tabs + f'SR_UTILS_NS::SRClassMeta::Save(serializer, obj);\n\n')
-    f.write('\t' * tabs + f'auto&& value = static_cast<const {class_name}&>(obj);\n\n')
+    f.write('\t' * tabs + f'auto&& value = static_cast<{class_name}&>(const_cast<SR_UTILS_NS::Serializable&>(obj));\n\n')
 
     for prop in class_obj.variables:
-        if prop.default_value:
-            f.write('\t' * tabs + f'if ((serializer.IsWriteDefaults() || value.{prop.name} != GetDefault_{prop.serialize_name}())) {{\n')
+        if prop.dontSave:
+            continue
+
+        if not prop.getter and prop.virtual:
+            continue
+
+        if prop.getter:
+            f.write('\t' * tabs + f'{{\n')
+
+            f.write('\t' * (tabs + 1) + f'auto&& propValue = value.{prop.getter}();\n')
+
+            if prop.default_value:
+                f.write('\t' * (tabs + 1) + f'if ((serializer.IsWriteDefaults() || propValue != GetDefault_{prop.serialize_name}())) {{\n')
+            else:
+                f.write('\t' * (tabs + 1) + f'if ((serializer.IsWriteDefaults() || !SR_UTILS_NS::IsDefault(propValue))) {{\n')
+
+            f.write('\t' * (tabs + 2) + f'static constexpr SR_UTILS_NS::SerializationId keyName_{prop.serialize_name} = SR_UTILS_NS::SerializationId::Create("{prop.serialize_name}");\n')
+            f.write('\t' * (tabs + 2) + f'SR_UTILS_NS::Serialization::Save(serializer, propValue, keyName_{prop.serialize_name});\n')
+
+            f.write('\t' * (tabs + 1) + f'}}\n')
+            f.write('\t' * tabs + f'}}\n')
         else:
-            f.write('\t' * tabs + f'if ((serializer.IsWriteDefaults() || !SR_UTILS_NS::IsDefault(value.{prop.name}))) {{\n')
-        f.write('\t' * (tabs + 1) + f'static constexpr SR_UTILS_NS::SerializationId keyName_{prop.serialize_name} = SR_UTILS_NS::SerializationId::Create("{prop.serialize_name}");\n')
-        f.write('\t' * (tabs + 1) + f'SR_UTILS_NS::Serialization::Save(serializer, value.{prop.name}, keyName_{prop.serialize_name});\n')
-        f.write('\t' * tabs + f'}}\n')
+            if prop.default_value:
+                f.write('\t' * tabs + f'if ((serializer.IsWriteDefaults() || value.{prop.name} != GetDefault_{prop.serialize_name}())) {{\n')
+            else:
+                f.write('\t' * tabs + f'if ((serializer.IsWriteDefaults() || !SR_UTILS_NS::IsDefault(value.{prop.name}))) {{\n')
+            f.write('\t' * (tabs + 1) + f'static constexpr SR_UTILS_NS::SerializationId keyName_{prop.serialize_name} = SR_UTILS_NS::SerializationId::Create("{prop.serialize_name}");\n')
+            f.write('\t' * (tabs + 1) + f'SR_UTILS_NS::Serialization::Save(serializer, value.{prop.name}, keyName_{prop.serialize_name});\n')
+            f.write('\t' * tabs + f'}}\n')
 
     tabs -= 1
     f.write('\t' * tabs + '}\n\n')
@@ -650,9 +711,21 @@ def generate_class_meta_load(f, class_obj, tabs):
     for prop in class_obj.variables:
         if prop.dontLoad:
             continue
+
+        if (not prop.setter or not prop.getter) and prop.virtual:
+            continue
+
         f.write('\t' * tabs + f'{{\n')
         f.write('\t' * (tabs + 1) + f'static constexpr SR_UTILS_NS::SerializationId keyName_{prop.serialize_name} = SR_UTILS_NS::SerializationId::Create("{prop.serialize_name}");\n')
-        f.write('\t' * (tabs + 1) + f'SR_UTILS_NS::Serialization::Load(deserializer, value.{prop.name}, keyName_{prop.serialize_name});\n')
+
+        if prop.setter:
+            f.write('\t' * (tabs + 1) + f'using Type = SR_UTILS_NS::RemoveQualifiersT<decltype(value.{prop.getter}())>;\n')
+            f.write('\t' * (tabs + 1) + f'Type propValue;\n')
+            f.write('\t' * (tabs + 1) + f'SR_UTILS_NS::Serialization::Load(deserializer, propValue, keyName_{prop.serialize_name});\n')
+            f.write('\t' * (tabs + 1) + f'value.{prop.setter}(propValue);\n')
+        else:
+            f.write('\t' * (tabs + 1) + f'SR_UTILS_NS::Serialization::Load(deserializer, value.{prop.name}, keyName_{prop.serialize_name});\n')
+
         f.write('\t' * tabs + f'}}\n')
 
     tabs -= 1
@@ -693,6 +766,8 @@ def generate_class_meta(f, class_structures, class_obj, tabs):
     f.write('\t' * (tabs + 1) + 'return instance;\n')
     f.write('\t' * tabs + '}\n\n')
 
+    f.write('\t' * tabs + f'SR_NODISCARD {class_name}* DeclTypeStub() const noexcept {{ return nullptr; }}\n\n')
+
     for prop in class_obj.variables:
         if not prop.default_value:
             continue
@@ -705,6 +780,14 @@ def generate_class_meta(f, class_structures, class_obj, tabs):
     #    f.write('\t' * tabs + f'void Set_{prop.name}({class_name}* pClass, const {prop.type_name}& value) {{ pClass->{prop.name} = value; }}\n\n')
 
     f.write('\t' * tabs + f'SR_NODISCARD bool IsAbstract() const noexcept override {{ return std::is_abstract_v<{class_name}>; }}\n\n')
+
+    #######################################
+    if class_obj.inspector:
+        f.write('\t' * tabs + f'SR_NODISCARD SR_UTILS_NS::StringAtom GetInspectorName() const noexcept override {{ \n')
+        f.write('\t' * (tabs + 1) + f'static const SR_UTILS_NS::StringAtom id = "{class_obj.inspector}";\n')
+        f.write('\t' * (tabs + 1) + f'return id;\n')
+        f.write('\t' * tabs + '}\n\n')
+    #######################################
 
     generate_class_meta_get_base_metas(f, class_structures, class_obj, tabs)
     generate_class_meta_properties(f, class_structures, class_obj, tabs)
@@ -739,16 +822,32 @@ def generate_class_meta(f, class_structures, class_obj, tabs):
         #f.write('\t' * (tabs + 2) + f'return;\n')
         #f.write('\t' * (tabs + 1) + f'}}\n')
 
-        f.write('\t' * (tabs + 1) + f'auto&& pData = value.TryCast<decltype({class_name}::{property.name})>();\n')
-        f.write('\t' * (tabs + 1) + f'if (!pData) {{\n')
-        f.write('\t' * (tabs + 2) + f'SRHalt("Failed to cast value!");\n')
-        f.write('\t' * (tabs + 2) + f'return;\n')
-        f.write('\t' * (tabs + 1) + f'}}\n')
+        if property.virtual:
+            if not property.setter or not property.getter:
+                f.write('\t' * (tabs + 1) + f'SRHalt("Virtual property {property.name} must have getter and setter!");\n')
+                f.write('\t' * (tabs + 1) + f'return;\n')
+            else:
+                f.write('\t' * (tabs + 1) + f'auto&& pClassImpl = (({class_name}*)pClass);\n')
+                f.write('\t' * (tabs + 1) + f'using Type = std::remove_const_t<SR_UTILS_NS::RemoveQualifiersT<decltype(pClassImpl->{property.getter}())>>;\n')
+                f.write('\t' * (tabs + 1) + f'auto&& pData = value.TryCast<Type>();\n')
+                f.write('\t' * (tabs + 1) + f'if (!pData) {{\n')
+                f.write('\t' * (tabs + 2) + f'SRHalt("Failed to cast value!");\n')
+                f.write('\t' * (tabs + 2) + f'return;\n')
+                f.write('\t' * (tabs + 1) + f'}}\n')
 
-        if property.setter:
-            f.write('\t' * (tabs + 1) + f'(({class_name}*)pClass)->{property.setter}(std::move(*pData));\n')
+                f.write('\t' * (tabs + 1) + f'pClassImpl->{property.setter}(std::move(*pData));\n')
         else:
-            f.write('\t' * (tabs + 1) + f'(({class_name}*)pClass)->{property.name} = std::move(*pData);\n')
+            f.write('\t' * (tabs + 1) + f'auto&& pData = value.TryCast<decltype({class_name}::{property.name})>();\n')
+            f.write('\t' * (tabs + 1) + f'if (!pData) {{\n')
+            f.write('\t' * (tabs + 2) + f'SRHalt("Failed to cast value!");\n')
+
+            f.write('\t' * (tabs + 2) + f'return;\n')
+            f.write('\t' * (tabs + 1) + f'}}\n')
+
+            if property.setter:
+                f.write('\t' * (tabs + 1) + f'(({class_name}*)pClass)->{property.setter}(std::move(*pData));\n')
+            else:
+                f.write('\t' * (tabs + 1) + f'(({class_name}*)pClass)->{property.name} = std::move(*pData);\n')
 
         f.write('\t' * tabs + f'}}\n')
 

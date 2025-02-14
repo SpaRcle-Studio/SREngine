@@ -36,6 +36,7 @@ namespace SR_CORE_GUI_NS {
             VideoMemoryPage();
             SubmitQueuePage();
             RenderStrategyPage();
+            StringAtoms();
 
             ImGui::EndTabBar();
         }
@@ -147,7 +148,6 @@ namespace SR_CORE_GUI_NS {
             auto&& framebuffers = pContext->GetFramebuffers();
             auto&& textures = pContext->GetTextures();
             auto&& techniques = pContext->GetRenderTechniques();
-            auto&& materials = pContext->GetMaterials();
             auto&& skyboxes = pContext->GetSkyboxes();
 
             if (ImGui::CollapsingHeader("Shaders")) {
@@ -230,19 +230,19 @@ namespace SR_CORE_GUI_NS {
                 }
             }
 
-            if (ImGui::CollapsingHeader("Materials")) {
-                if (ImGui::BeginTable("##MaterialsTable", 1)) {
-                    for (auto&& pMaterial : materials) {
-                        ImGui::TableNextRow();
-
-                        ImGui::TableSetColumnIndex(0);
-                        ImGui::Text("%s", pMaterial->GetResourceId().c_str());
-                        ImGui::Separator();
-                    }
-
-                    ImGui::EndTable();
-                }
-            }
+            //if (ImGui::CollapsingHeader("Materials")) {
+            //    if (ImGui::BeginTable("##MaterialsTable", 1)) {
+            //        for (auto&& pMaterial : materials) {
+            //            ImGui::TableNextRow();
+//
+            //            ImGui::TableSetColumnIndex(0);
+            //            ImGui::Text("%s", pMaterial->GetResourceId().c_str());
+            //            ImGui::Separator();
+            //        }
+//
+            //        ImGui::EndTable();
+            //    }
+            //}
 
             if (ImGui::CollapsingHeader("Skyboxes")) {
                 if (ImGui::BeginTable("##SkyboxesTable", 1)) {
@@ -617,6 +617,28 @@ namespace SR_CORE_GUI_NS {
 
             ImGui::EndTable();
         }*/
+
+        ImGui::EndTabItem();
+    }
+
+    void EngineStatistics::StringAtoms() {
+        if (!ImGui::BeginTabItem("String atoms")) {
+            return;
+        }
+
+        auto&& hashManager = SR_UTILS_NS::HashManager::Instance();
+
+        hashManager.Lock();
+
+        ImGui::Text("String atoms count: %llu", hashManager.GetStorage().size());
+
+        ImGui::Separator();
+
+        for (auto&& [hash, pStringInfo] : hashManager.GetStorage()) {
+            ImGui::Text("%s", pStringInfo->data.c_str());
+        }
+
+        hashManager.Unlock();
 
         ImGui::EndTabItem();
     }

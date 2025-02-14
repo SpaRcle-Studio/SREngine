@@ -335,8 +335,7 @@ namespace SR_CORE_NS {
 
         resourcesManager.RegisterType<SR_SRLM_NS::LogicalMachine>();
 
-        resourcesManager.RegisterType<SR_GRAPH_NS::FileMaterial>();
-        resourcesManager.RegisterType<SR_GTYPES_NS::Mesh>();
+        resourcesManager.RegisterType<SR_GRAPH_NS::FileMaterialResource>();
         resourcesManager.RegisterType<SR_GTYPES_NS::Texture>();
         resourcesManager.RegisterType<SR_GTYPES_NS::Shader>();
         resourcesManager.RegisterType<SR_GTYPES_NS::Skybox>();

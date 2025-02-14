@@ -447,61 +447,36 @@ namespace SR_CORE_GUI_NS {
         }
 
         if (isOpened) {
-            auto&& properties = pComponent->GetMeta()->GetProperties();
-
             if (m_componentContexts.count(pComponent) == 0) {
                 ComponentContext& componentContext = m_componentContexts[pComponent];
-
-                for (auto&& property : properties) {
-                    SR_UTILS_NS::StringAtom inspector = property.GetEditorParams().GetInspector();
-
-                    if (inspector.Empty()) {
-                        inspector = SR_CORE_GUI_NS::GetValueInspector(property.Get(pComponent));
-                    }
-
-                    if (inspector.Empty()) {
-                        componentContext.pDrawers.emplace_back();
-                        continue;
-                    }
-
-                    PropertyDrawerBase::Ptr pDrawer = SR_UTILS_NS::Factory::Instance().Create<PropertyDrawerBase>(inspector);
-                    if (!pDrawer) {
-                        componentContext.pDrawers.emplace_back();
-                        continue;
-                    }
-
-                    componentContext.pDrawers.emplace_back(pDrawer);
+                if (auto&& inspectorName = pComponent->GetMeta()->GetInspectorName(); !inspectorName.empty()) {
+                    componentContext.pObjectDrawer = SR_UTILS_NS::Factory::Instance().Create<ObjectPropertyDrawer>(inspectorName);
+                }
+                if (!componentContext.pObjectDrawer) {
+                    componentContext.pObjectDrawer = SRNew<ObjectPropertyDrawer>();
                 }
             }
 
             const float_t lineHeight = GImGui->Font->FontSize + GImGui->Style.FramePadding.y * 2.0f;
-
             float_t windowWidth = ImGui::GetWindowWidth() - m_scrollBarWidth;
 
             ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 0.0f);
 
-            for (uint64_t i = 0; i < properties.size(); ++i) {
-                PropertyDrawerContext context(properties[i]);
-                context.propertyIndex = i;
-                context.pEditor = dynamic_cast<EditorGUI*>(GetManager());
-                context.pOwner = pComponent->GetRawPtr();
-                context.pComponent = pComponent;
+            auto&& value = SR_UTILS_NS::Reflection::Value::CreateRef(*pComponent);
+            PropertyDrawerContext context(&value);
+            context.pEditor = dynamic_cast<EditorGUI*>(GetManager());
+            context.pOwner = pComponent->GetRawPtr();
+            context.pComponent = pComponent;
 
-                context.lineHeight = lineHeight;
-                context.axisButtonWidth = context.lineHeight;
-                context.spaceWidth = windowWidth;
-                context.fieldHeight = lineHeight;
-                context.fieldTitleWidth = windowWidth * 0.3f;
-                context.fieldWidth = windowWidth * 0.7f;
+            context.lineHeight = lineHeight;
+            context.axisButtonWidth = context.lineHeight;
+            context.spaceWidth = windowWidth;
+            context.fieldHeight = lineHeight;
+            context.fieldTitleWidth = windowWidth * 0.3f;
+            context.fieldWidth = windowWidth * 0.7f;
+            context.noHeader = true;
 
-                DrawProperty(context);
-
-                if (i != properties.size() - 1) {
-                    //ImGui::Dummy(ImVec2(0, 5.0f));
-                    ImGui::Separator();
-                    //ImGui::Dummy(ImVec2(0, 5.0f));
-                }
-            }
+            m_componentContexts.at(pComponent).pObjectDrawer->Draw(context);
 
             ImGui::PopStyleVar();
         }
@@ -530,28 +505,6 @@ namespace SR_CORE_GUI_NS {
         }
 
         ImGui::PopID();
-    }
-
-    void Inspector::DrawProperty(const PropertyDrawerContext& context) {
-        if (context.GetProperty().IsHidden()) {
-            return;
-        }
-
-        ComponentContext& componentContext = m_componentContexts.at(context.pComponent);
-        if (!componentContext.pDrawers[context.propertyIndex]) {
-            SR_GRAPH_GUI_NS::ColoredText("Missing drawer for property: {}"_format(context.GetProperty().GetName()), ImColor(255, 0, 0));
-            return;
-        }
-
-        ImGui::BeginDisabled(context.GetProperty().IsReadOnly());
-
-        const PropertyDrawerFeedback feedback = componentContext.pDrawers[context.propertyIndex]->Draw(context);
-
-        ImGui::EndDisabled();
-
-        if (feedback.isChanged) {
-            context.GetProperty().OnChanged(context.pOwner);
-        }
     }
 
     void Inspector::InspectTag(SR_UTILS_NS::StringAtom tag, SR_HTYPES_NS::Function<void(SR_UTILS_NS::StringAtom)> callback) {

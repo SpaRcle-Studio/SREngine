@@ -13,6 +13,8 @@
 
 #include <Graphics/GUI/Widget.h>
 
+#include "PropertyDrawers/ObjectPropertyDrawer.h"
+
 namespace SR_UTILS_NS {
     class Transform3D;
     class Transform2D;
@@ -53,7 +55,6 @@ namespace SR_CORE_GUI_NS {
         SR_MAYBE_UNUSED void BackupTransform(const SR_UTILS_NS::GameObject::Ptr& ptr, const std::function<void()>& operation) const;
 
         void DrawComponent(SR_UTILS_NS::Component* pComponent, uint32_t& index);
-        void DrawProperty(const PropertyDrawerContext& context);
 
     private:
         std::list<SR_UTILS_NS::Component::Ptr> m_pointersHolder;
@@ -62,7 +63,7 @@ namespace SR_CORE_GUI_NS {
         SR_WORLD_NS::Scene::Ptr m_scene;
 
         struct ComponentContext {
-            std::vector<PropertyDrawerBase::Ptr> pDrawers;
+            ObjectPropertyDrawer::Ptr pObjectDrawer;
         };
         std::map<SR_UTILS_NS::Component::Ptr, ComponentContext> m_componentContexts;
 

@@ -97,7 +97,7 @@ namespace SR_CORE_GUI_NS {
     }
 
     bool DrawMeshMaterialProperty(const DrawPropertyContext& context, SR_GRAPH_NS::MeshMaterialProperty* pProperty) {
-        ImGui::Separator();
+        /*ImGui::Separator();
         SR_GRAPH_GUI_NS::DrawTextOnCenter("Material");
         ImGui::Separator();
 
@@ -217,7 +217,7 @@ namespace SR_CORE_GUI_NS {
             }
 
             DrawProperty(context, &pMaterial->GetProperties());
-        }
+        }*/
 
         return true;
     }
@@ -422,6 +422,14 @@ namespace SR_CORE_GUI_NS {
             return "PointerPropertyDrawer";
         }
 
+        if (value.IsString()) {
+            return "StringPropertyDrawer";
+        }
+
+        if (value.IsPath()) {
+            return "PathPropertyDrawer";
+        }
+
         if (value.IsClass()) {
             return "ObjectPropertyDrawer";
         }
@@ -606,14 +614,14 @@ namespace SR_CORE_GUI_NS {
         const uint8_t dimension = SR_UTILS_NS::CharToInt(vectorType[sizeof("Vector") - 1]);
 
         ImGui::PushID(context.pOwner);
-        ImGui::PushID(context.GetProperty().GetName().ToCStr());
+        ImGui::PushID(context.GetPropertyName().ToCStr());
 
         ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2{ 0, 0 });
 
         if (!context.pValue) {
             const ImVec2 mainButtonSize = { context.fieldTitleWidth, context.fieldHeight };
 
-            if (ImGui::Button(context.GetProperty().GetEditorParams().GetDisplayName().c_str(), mainButtonSize)) {
+            if (ImGui::Button(context.GetPropertyDisplayName().c_str(), mainButtonSize)) {
                 feedback.isChanged = true;
                 value = context.GetProperty().GetResetValue() ? context.GetProperty().GetResetValue() : context.GetProperty().GetDefaultValue();
                 value = value.DetachIfConst();
@@ -622,11 +630,10 @@ namespace SR_CORE_GUI_NS {
 
         ImGui::SameLine();
 
-        constexpr uint32_t maxPartsInLine = 3;
-        const float_t partItemWidth = (context.fieldWidth) / maxPartsInLine - context.axisButtonWidth;
+        const float_t partItemWidth = (context.fieldWidth / static_cast<float_t>(context.maxPartsInLine)) - context.axisButtonWidth;
 
         const ImVec2 buttonSize = { context.axisButtonWidth, context.fieldHeight };
-        const float_t drag = context.GetProperty().GetEditorParams().GetDragSpeed();
+        const float_t drag = context.GetEditorParams().GetDragSpeed();
         ImGuiDataType_ partType = SR_GRAPH_GUI_NS::GetImGuiDataType(vectorPartType);
 
         constexpr std::array<const char*, 6> labels = { "X", "Y", "Z", "W", "V", "U" };
@@ -693,7 +700,7 @@ namespace SR_CORE_GUI_NS {
             ImGui::PopID();
 
             if (i + 1 < dimension) {
-                if ((i + 1) % maxPartsInLine == 0) {
+                if ((i + 1) % context.maxPartsInLine == 0) {
                     ImGui::Dummy(ImVec2(context.fieldTitleWidth, 0.0f));
                     ImGui::SameLine();
                 }

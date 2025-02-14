@@ -223,16 +223,16 @@ namespace SR_CORE_NS::GUI {
 
         ImGui::Separator();
 
-        SR_GRAPH_NS::BaseMaterial* copy = pMaterial;
-        DrawComponent(copy, context, index);
+        //SR_GRAPH_NS::BaseMaterial* copy = pMaterial;
+        //DrawComponent(copy, context, index);
 
-        if (copy != pMaterial) {
-            pComponent->SetMaterial(copy);
-        }
+        //if (copy != pMaterial) {
+        //    pComponent->SetMaterial(copy);
+        //}
     }
 
     void ComponentDrawer::DrawComponent(SR_GRAPH_NS::BaseMaterial*& material, EditorGUI* context, int32_t index) {
-        if (material) {
+        /*if (material) {
             ImGui::Separator();
 
             SR_GRAPH_GUI_NS::DrawTextOnCenter("Material");
@@ -265,13 +265,13 @@ namespace SR_CORE_NS::GUI {
             ImGui::EndGroup();
 
             DrawMaterialProps(material, context, index);
-        }
+        }*/
     }
 
     void ComponentDrawer::DrawMaterialProps(SR_GRAPH_NS::BaseMaterial* material, EditorGUI* pEditor, int32_t index) {
         SR_CORE_GUI_NS::DrawPropertyContext context;
         context.pEditor = pEditor;
-        SR_CORE_GUI_NS::DrawPropertyContainer(context, &material->GetProperties());
+        //SR_CORE_GUI_NS::DrawPropertyContainer(context, &material->GetProperties());
     }
 
     void ComponentDrawer::DrawComponent(SR_GRAPH_NS::UI::Anchor *&anchor, EditorGUI *context, int32_t index) {
@@ -383,13 +383,13 @@ namespace SR_CORE_NS::GUI {
 
         auto&& pMaterial = pComponent->GetMaterial();
 
-        SR_GRAPH_NS::BaseMaterial* copy = pMaterial;
-        DrawComponent(copy, context, index);
-
-        /// компилятор считает, что это недостижимый код (он ошибается)
-        if (copy != pMaterial) {
-            pComponent->SetMaterial(copy);
-        }
+        //SR_GRAPH_NS::BaseMaterial* copy = pMaterial;
+        //DrawComponent(copy, context, index);
+//
+        ///// компилятор считает, что это недостижимый код (он ошибается)
+        //if (copy != pMaterial) {
+        //    pComponent->SetMaterial(copy);
+        //}
     }
 
     void ComponentDrawer::DrawComponent(SR_ANIMATIONS_NS::Skeleton *&pComponent, EditorGUI *context, int32_t index) {

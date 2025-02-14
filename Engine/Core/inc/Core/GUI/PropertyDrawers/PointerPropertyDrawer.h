@@ -19,7 +19,7 @@ namespace SR_CORE_GUI_NS {
         std::string m_searchBuffer;
         bool m_comboOpened = false;
         bool m_isOpened = false;
-        std::vector<PropertyDrawerBase::Ptr> m_drawers;
+        ObjectPropertyDrawer::Ptr m_objectDrawer;
         std::vector<std::string> m_typeNames;
 
     };

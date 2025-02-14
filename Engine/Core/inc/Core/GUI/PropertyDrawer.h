@@ -32,16 +32,28 @@ namespace SR_CORE_GUI_NS {
             : pProperty(&property)
         { }
 
+        explicit PropertyDrawerContext(SR_UTILS_NS::Reflection::Value* pValue)
+            : pValue(pValue)
+        { }
+
+        bool noHeader = false;
+
         float_t lineHeight = 1.f;
         float_t spaceWidth = 1.f;
 
         float_t axisButtonWidth = 30.f;
+        uint32_t maxPartsInLine = 3;
 
         float_t fieldTitleWidth = 90.f;
         float_t fieldWidth = 250.f;
         float_t fieldHeight = 0.f;
 
+        SR_NODISCARD float_t GetArrowWidth() const { return lineHeight * 0.75f; }
+
         SR_NODISCARD SR_UTILS_NS::Reflection::Property const& GetProperty() const { return *pProperty; }
+        SR_NODISCARD SR_UTILS_NS::StringAtom GetPropertyName() const { return pProperty ? pProperty->GetName() : SR_UTILS_NS::StringAtom(); }
+        SR_NODISCARD SR_UTILS_NS::StringAtom GetPropertyDisplayName() const { return pProperty ? pProperty->GetEditorParams().GetDisplayName() : customDisplayName; }
+        SR_NODISCARD SR_UTILS_NS::Reflection::EditorPropertyParams GetEditorParams() const { return pProperty ? pProperty->GetEditorParams() : SR_UTILS_NS::Reflection::EditorPropertyParams(); }
 
         SR_NODISCARD SR_UTILS_NS::Reflection::Value GetValue() const {
             return (pValue ? *pValue : pProperty->Get(pOwner)).DetachIfConst();
@@ -49,6 +61,7 @@ namespace SR_CORE_GUI_NS {
 
         SR_UTILS_NS::Component::Ptr pComponent;
         uint64_t propertyIndex = 0;
+        SR_UTILS_NS::StringAtom customDisplayName;
         SR_UTILS_NS::Reflection::Value* pValue = nullptr;
         SR_UTILS_NS::Reflection::Property const* pProperty = nullptr;
         EditorGUI* pEditor = nullptr;
@@ -97,17 +110,23 @@ namespace SR_CORE_GUI_NS {
     class BoolPropertyDrawer : public PropertyDrawerBase {
         SR_CLASS()
     public:
+        using Ptr = SR_HTYPES_NS::SharedPtr<BoolPropertyDrawer>;
+    public:
         PropertyDrawerFeedback Draw(const PropertyDrawerContext& context) override;
     };
 
     class NumericPropertyDrawer : public PropertyDrawerBase {
         SR_CLASS()
     public:
+        using Ptr = SR_HTYPES_NS::SharedPtr<NumericPropertyDrawer>;
+    public:
         PropertyDrawerFeedback Draw(const PropertyDrawerContext& context) override;
     };
 
     class MathVectorPropertyDrawer : public PropertyDrawerBase {
         SR_CLASS()
+    public:
+        using Ptr = SR_HTYPES_NS::SharedPtr<MathVectorPropertyDrawer>;
     public:
         PropertyDrawerFeedback Draw(const PropertyDrawerContext& context) override;
     };

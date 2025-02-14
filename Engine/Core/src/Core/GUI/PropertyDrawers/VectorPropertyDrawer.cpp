@@ -128,6 +128,7 @@ namespace SR_CORE_GUI_NS {
                 elementContext.fieldWidth += context.fieldTitleWidth;
                 elementContext.fieldWidth -= itemButtonSize.x;
                 elementContext.fieldTitleWidth = 0.f;
+                elementContext.noHeader = false;
 
                 ImGui::BeginGroup();
                 PropertyDrawerFeedback elementFeedback = m_drawers[index]->Draw(elementContext);
