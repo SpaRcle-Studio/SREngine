@@ -15,14 +15,15 @@ namespace SR_AUDIO_NS
     SR_INLINE_STATIC SR_UTILS_NS::StringAtom SR_SUPPORTED_AUDIO_FORMATS = "wav,mp3,ogg";
 
     class AudioSource : public SR_UTILS_NS::Component {
-        SR_REGISTER_NEW_COMPONENT(AudioSource, 1005);
+        SR_CLASS()
+        SR_REGISTER_NEW_COMPONENT(AudioSource, 1006);
         using Super = SR_UTILS_NS::Component;
         using Handle = void*;
     public:
         AudioSource();
 
     public:
-        bool InitializeEntity() noexcept override;
+        SR_NODISCARD bool UseNewSerialization() const noexcept override { return true; }
 
         void OnMatrixDirty() override;
 
@@ -60,6 +61,27 @@ namespace SR_AUDIO_NS
         PlayParams m_params;
         SR_UTILS_NS::Path m_path;
         Handle m_handle = nullptr;
+
+        /// @virtualProperty(sound) @getter(GetPath) @setter(SetPath)
+        SR_VIRTUAL_PROPERTY
+        /// @virtualProperty(volume) @getter(GetVolume) @setter(SetVolume)
+        SR_VIRTUAL_PROPERTY
+        /// @virtualProperty(pitch) @getter(GetPitch) @setter(SetPitch)
+        SR_VIRTUAL_PROPERTY
+        /// @virtualProperty(loop) @getter(GetLoop) @setter(SetLoop)
+        SR_VIRTUAL_PROPERTY
+        /// @virtualProperty(maxDistance) @getter(GetMaxDistance) @setter(SetMaxDistance)
+        SR_VIRTUAL_PROPERTY
+        /// @virtualProperty(rolloffFactor) @getter(GetRolloffFactor) @setter(SetRolloffFactor)
+        SR_VIRTUAL_PROPERTY
+        /// @virtualProperty(referenceDistance) @getter(GetReferenceDistance) @setter(SetReferenceDistance)
+        SR_VIRTUAL_PROPERTY
+        /// @virtualProperty(spatialize) @getter(GetSpatialize) @setter(SetSpatialize)
+        SR_VIRTUAL_PROPERTY
+        /// @virtualProperty(direction) @getter(GetDirection) @setter(SetDirection)
+        SR_VIRTUAL_PROPERTY
+        /// @virtualProperty(coneInnerAngle) @getter(GetConeInnerAngle) @setter(SetConeInnerAngle)
+        SR_VIRTUAL_PROPERTY
     };
 }
 

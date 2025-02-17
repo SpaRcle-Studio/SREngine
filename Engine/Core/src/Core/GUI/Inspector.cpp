@@ -440,10 +440,6 @@ namespace SR_CORE_GUI_NS {
             if (SR_CORE_GUI_NS::DrawPropertyContainer(context, &pComponent->GetEntityMessages())) {
                 ImGui::Separator();
             }
-
-            if (!ComponentDrawer::DrawComponentOld(pComponent, pContext, index)) {
-                DrawComponentProperties(pComponent);
-            }
         }
 
         if (isOpened) {

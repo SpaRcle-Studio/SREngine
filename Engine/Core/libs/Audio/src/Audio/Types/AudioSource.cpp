@@ -3,60 +3,18 @@
 //
 
 #include <Audio/Types/AudioSource.h>
-#include <Utils/ECS/ComponentManager.h>
 #include <Audio/SoundManager.h>
+
 #include <Utils/ECS/Transform.h>
+#include <Utils/ECS/ComponentManager.h>
+
+#include <Codegen/AudioSource.generated.hpp>
 
 namespace SR_AUDIO_NS {
     AudioSource::AudioSource()
         : Super()
-    { }
-
-    bool AudioSource::InitializeEntity() noexcept {
+    {
         m_params = PlayParams::GetDefault();
-
-        GetComponentProperties().AddStandardProperty<bool>("Loop")
-            .SetGetter([this](void* pData) { *static_cast<bool*>(pData) = GetLoop(); })
-            .SetSetter([this](void* pData) { SetLoop(*static_cast<bool*>(pData)); });
-
-        GetComponentProperties().AddStandardProperty<float_t>("Cone Inner Angle")
-            .SetGetter([this](void* pData) { *static_cast<float_t*>(pData) = GetConeInnerAngle(); })
-            .SetSetter([this](void* pData) { SetConeInnerAngle(*static_cast<float_t*>(pData)); });
-
-        GetComponentProperties().AddStandardProperty<float_t>("Pitch")
-            .SetGetter([this](void* pData) { *static_cast<float_t*>(pData) = GetPitch(); })
-            .SetSetter([this](void* pData) { SetPitch(*static_cast<float_t*>(pData)); });
-
-        GetComponentProperties().AddStandardProperty<float_t>("Volume")
-            .SetGetter([this](void* pData) { *static_cast<float_t*>(pData) = GetVolume(); })
-            .SetSetter([this](void* pData) { SetVolume(*static_cast<float_t*>(pData)); });
-
-        GetComponentProperties().AddStandardProperty<float_t>("Max distance")
-            .SetGetter([this](void* pData) { *static_cast<float_t*>(pData) = GetMaxDistance(); })
-            .SetSetter([this](void* pData) { SetMaxDistance(*static_cast<float_t*>(pData)); });
-
-        GetComponentProperties().AddStandardProperty<float_t>("Rolloff factor")
-            .SetGetter([this](void* pData) { *static_cast<float_t*>(pData) = GetRolloffFactor(); })
-            .SetSetter([this](void* pData) { SetRolloffFactor(*static_cast<float_t*>(pData)); });
-
-        GetComponentProperties().AddStandardProperty<float_t>("Reference distance")
-            .SetGetter([this](void* pData) { *static_cast<float_t*>(pData) = GetReferenceDistance(); })
-            .SetSetter([this](void* pData) { SetReferenceDistance(*static_cast<float_t*>(pData)); });
-
-        GetComponentProperties().AddStandardProperty<SR_MATH_NS::FVector3>("Direction")
-            .SetGetter([this](void* pData) { *static_cast<SR_MATH_NS::FVector3*>(pData) = GetDirection(); })
-            .SetSetter([this](void* pData) { SetDirection(*static_cast<SR_MATH_NS::FVector3*>(pData)); });
-
-        GetComponentProperties().AddEnumProperty<SpatializeMode>("Spatialize")
-            .SetGetter([this]() { return SR_UTILS_NS::EnumReflector::ToStringAtom(GetSpatialize()); })
-            .SetSetter([this](const SR_UTILS_NS::StringAtom& value) { SetSpatialize(SR_UTILS_NS::EnumReflector::FromString<SpatializeMode>(value)); });
-
-        GetComponentProperties().AddCustomProperty<SR_UTILS_NS::PathProperty>("Path")
-            .AddFileFilter("Sound", SR_SUPPORTED_AUDIO_FORMATS)
-            .SetGetter([this]() -> SR_UTILS_NS::Path { return GetPath(); })
-            .SetSetter([this](const SR_UTILS_NS::Path& path) { SetPath(path); });
-
-        return Super::InitializeEntity();
     }
 
     void AudioSource::OnMatrixDirty() {

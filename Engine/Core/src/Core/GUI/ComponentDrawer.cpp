@@ -140,38 +140,7 @@ namespace SR_CORE_NS::GUI {
         }
     }
 
-    void ComponentDrawer::DrawComponent(SR_GRAPH_NS::Types::Camera*& pComponent, EditorGUI* pContext, int32_t index) {
-        std::string renderTechnique = pComponent->GetRenderTechniquePath().ToStringRef();
-        if (ImGui::InputText(SR_FORMAT_C("Render technique##{}{}", (void*)pContext, index), &renderTechnique)) {
-            pComponent->SetRenderTechnique(renderTechnique);
-        }
-
-        float_t cameraFar = pComponent->GetFar();
-        if (ImGui::InputFloat(SR_FORMAT_C("Far##{}{}", (void*)pContext, index), &cameraFar, 5) && cameraFar >= 0) {
-            pComponent->SetFar(cameraFar);
-        }
-
-        float_t cameraNear = pComponent->GetNear();
-        if (ImGui::InputFloat(SR_FORMAT_C("Near##{}{}", (void*)pContext, index), &cameraNear, 0.01) && cameraNear >= 0) {
-            pComponent->SetNear(cameraNear);
-        }
-
-        float_t cameraFOV = pComponent->GetFOV();
-        if (ImGui::InputFloat(SR_FORMAT_C("FOV##{}{}", (void*)pContext, index), &cameraFOV, 0.5) && cameraFOV >= 0) {
-            pComponent->SetFOV(cameraFOV);
-        }
-
-        int32_t priority = pComponent->GetPriority();
-        if (ImGui::InputInt(SR_FORMAT_C("Priority##{}{}", (void*)pContext, index), &priority, 1)) {
-            pComponent->SetPriority(priority);
-        }
-    }
-
-    void ComponentDrawer::DrawComponent(SR_GTYPES_NS::Mesh3D*& pComponent, EditorGUI* context, int32_t index) {
-
-    }
-
-    void ComponentDrawer::DrawComponent(SR_GTYPES_NS::SkinnedMesh*& pComponent, EditorGUI* context, int32_t index) {
+    /*void ComponentDrawer::DrawComponent(SR_GTYPES_NS::SkinnedMesh*& pComponent, EditorGUI* context, int32_t index) {
         if (!pComponent->IsCalculatable())
             ImGui::TextColored(ImVec4(1, 0, 0, 1), "Invalid mesh!");
 
@@ -227,44 +196,7 @@ namespace SR_CORE_NS::GUI {
         //if (copy != pMaterial) {
         //    pComponent->SetMaterial(copy);
         //}
-    }
-
-    void ComponentDrawer::DrawComponent(SR_GRAPH_NS::BaseMaterial*& material, EditorGUI* context, int32_t index) {
-        /*if (material) {
-            ImGui::Separator();
-
-            SR_GRAPH_GUI_NS::DrawTextOnCenter("Material");
-
-            if (auto&& pDescriptor = context->GetIconDescriptor(EditorIcon::Material)) {
-                if (SR_GRAPH_GUI_NS::ImageButton(SR_FORMAT("##imgMatBtn{}", index), pDescriptor, SR_MATH_NS::IVector2(75), 5)) {
-                    auto&& resourcesFolder = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
-                    auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesFolder, { { "Material", "mat" } });
-
-                    if (path.Exists()) {
-                        if (auto&& pMaterial = SR_GRAPH_NS::FileMaterial::Load(path)) {
-                            material = pMaterial;
-                            return;
-                        }
-                    }
-                }
-            }
-
-            ImGui::SameLine();
-            ImGui::BeginGroup();
-
-            if (auto&& pFileMaterial = dynamic_cast<SR_GRAPH_NS::FileMaterial*>(material)) {
-                Graphics::GUI::DrawValue("Material", pFileMaterial->GetResourceId(), index);
-            }
-
-            //if (auto &&shader = material->GetShader()) {
-                //Graphics::GUI::DrawValue("Shader", shader->GetName());
-            //}
-
-            ImGui::EndGroup();
-
-            DrawMaterialProps(material, context, index);
-        }*/
-    }
+    }*/
 
     void ComponentDrawer::DrawMaterialProps(SR_GRAPH_NS::BaseMaterial* material, EditorGUI* pEditor, int32_t index) {
         SR_CORE_GUI_NS::DrawPropertyContext context;
@@ -280,55 +212,7 @@ namespace SR_CORE_NS::GUI {
 
     }
 
-    void ComponentDrawer::DrawComponent(SR_GTYPES_NS::Sprite*& pComponent, EditorGUI *context, int32_t index) {
-        /*if (!pComponent->IsCalculatable())
-            ImGui::TextColored(ImVec4(1, 0, 0, 1), "Invalid mesh!");
-
-        if (!pComponent->IsCalculated())
-            ImGui::TextColored(ImVec4(1, 1, 0, 1), "Mesh isn't calculated!");
-
-        if (!pComponent->GetRenderContext())
-            ImGui::TextColored(ImVec4(1, 1, 0, 1), "Mesh isn't registered!");
-
-        ImGui::Separator();
-
-        auto&& textureBorder = pComponent->GetTextureBorder();
-        if (Graphics::GUI::DrawVec2Control("Texture border", textureBorder, 0.15f, 80.f, 0.01f)) {
-            pComponent->SetTextureBorder(textureBorder);
-        }
-
-        auto&& windowBorder = pComponent->GetWindowBorder();
-        if (Graphics::GUI::DrawVec2Control("Window border", windowBorder, 0.15f, 80.f, 0.01f)) {
-            pComponent->SetWindowBorder(windowBorder);
-        }
-
-        ImGui::Separator();
-
-        auto&& pMaterial = pComponent->GetMaterial();
-
-        SR_GTYPES_NS::Material* copy = pMaterial;
-        DrawComponent(copy, context, index);
-
-        if (copy != pMaterial) {
-            pComponent->SetMaterial(copy);
-        }*/
-    }
-
-    void ComponentDrawer::DrawComponent(SR_GTYPES_NS::ProceduralMesh *&pComponent, EditorGUI *context, int32_t index) {
-        if (!pComponent->IsCalculatable())
-            ImGui::TextColored(ImVec4(1, 0, 0, 1), "Invalid mesh!");
-
-        if (!pComponent->IsCalculated())
-            ImGui::TextColored(ImVec4(1, 1, 0, 1), "Mesh isn't calculated!");
-
-        if (!pComponent->GetRenderContext())
-            ImGui::TextColored(ImVec4(1, 1, 0, 1), "Mesh isn't registered!");
-
-        Graphics::GUI::DrawValue("Vertices count", pComponent->GetVerticesCount(), index);
-        Graphics::GUI::DrawValue("Indices count", pComponent->GetIndicesCount(), index);
-    }
-
-    void ComponentDrawer::DrawComponent(SR_GTYPES_NS::Text* pComponent, EditorGUI *context, int32_t index) {
+    /*void ComponentDrawer::DrawComponent(SR_GTYPES_NS::Text* pComponent, EditorGUI *context, int32_t index) {
         if (!pComponent->IsCalculatable())
             ImGui::TextColored(ImVec4(1, 0, 0, 1), "Invalid mesh!");
 
@@ -388,7 +272,7 @@ namespace SR_CORE_NS::GUI {
         //if (copy != pMaterial) {
         //    pComponent->SetMaterial(copy);
         //}
-    }
+    }*/
 
     void ComponentDrawer::DrawComponent(SR_ANIMATIONS_NS::Skeleton *&pComponent, EditorGUI *context, int32_t index) {
         bool debug = pComponent->IsDebugEnabled();
@@ -489,13 +373,12 @@ namespace SR_CORE_NS::GUI {
             return true;                                              \
         }                                                             \
 
-        SR_OLD_DRAW_COMPONENT(SR_SCRIPTING_NS::Behaviour, "Behaviour")
-        SR_OLD_DRAW_COMPONENT(SR_GTYPES_NS::Camera, "Camera")
+        /*SR_OLD_DRAW_COMPONENT(SR_SCRIPTING_NS::Behaviour, "Behaviour")
         SR_OLD_DRAW_COMPONENT(SR_ANIMATIONS_NS::Skeleton, "Skeleton")
         SR_OLD_DRAW_COMPONENT(SR_ANIMATIONS_NS::BoneComponent, "Bone")
         SR_OLD_DRAW_COMPONENT(SR_UTILS_NS::LookAtComponent, "LookAtComponent")
         SR_OLD_DRAW_COMPONENT(SR_GRAPH_UI_NS::Anchor, "Anchor")
-        SR_OLD_DRAW_COMPONENT(SR_GRAPH_UI_NS::Canvas, "Canvas")
+        SR_OLD_DRAW_COMPONENT(SR_GRAPH_UI_NS::Canvas, "Canvas")*/
 
         return false;
     }

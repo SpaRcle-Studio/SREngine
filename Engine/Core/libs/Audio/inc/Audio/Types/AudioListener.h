@@ -13,17 +13,16 @@ namespace SR_AUDIO_NS
     class SoundListener;
 
     class AudioListener : public SR_UTILS_NS::Component {
-        SR_REGISTER_NEW_COMPONENT(AudioListener, 1001);
+        SR_CLASS()
+        SR_REGISTER_NEW_COMPONENT(AudioListener, 1003);
         using Super = SR_UTILS_NS::Component;
         using Handle = void*;
     public:
-        AudioListener();
+        SR_NODISCARD bool UseNewSerialization() const noexcept override { return true; }
 
-    public:
         void OnEnable() override;
         void OnDisable() override;
 
-        bool InitializeEntity() noexcept override;
         void OnMatrixDirty() override;
         void OnAttached() override;
 
@@ -37,8 +36,11 @@ namespace SR_AUDIO_NS
     private:
         SoundListener* m_listenerContext = nullptr;
 
+        /// @property @setter(SetDistanceModel)
         ListenerDistanceModel m_distanceModel = ListenerDistanceModel::InverseClamped;
+        /// @property @setter(SetVelocity)
         SR_MATH_NS::FVector3 m_velocity;
+        /// @property @setter(SetGain)
         float_t m_gain = 1.0f;
     };
 }

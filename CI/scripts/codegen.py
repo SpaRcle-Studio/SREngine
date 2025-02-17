@@ -723,12 +723,25 @@ def generate_class_meta_load(f, class_obj, tabs):
         f.write('\t' * (tabs + 1) + f'static constexpr SR_UTILS_NS::SerializationId keyName_{prop.serialize_name} = SR_UTILS_NS::SerializationId::Create("{prop.serialize_name}");\n')
 
         if prop.setter:
-            f.write('\t' * (tabs + 1) + f'using Type = SR_UTILS_NS::RemoveQualifiersT<decltype(value.{prop.getter}())>;\n')
-            f.write('\t' * (tabs + 1) + f'Type propValue;\n')
-            f.write('\t' * (tabs + 1) + f'SR_UTILS_NS::Serialization::Load(deserializer, propValue, keyName_{prop.serialize_name});\n')
+            if prop.getter:
+                f.write('\t' * (tabs + 1) + f'using Type = SR_UTILS_NS::RemoveQualifiersT<decltype(value.{prop.getter}())>;\n')
+            elif prop.virtual:
+                raise Exception(f'Virtual property {prop.name} must have getter!')
+            else:
+                f.write('\t' * (tabs + 1) + f'using Type = SR_UTILS_NS::RemoveQualifiersT<decltype(value.{prop.name})>;\n')
+
+            f.write('\t' * (tabs + 1) + f'Type propValue {{}};\n')
+            f.write('\t' * (tabs + 1) + f'if (!SR_UTILS_NS::Serialization::Load(deserializer, propValue, keyName_{prop.serialize_name})) {{\n')
+            if prop.default_value:
+                f.write('\t' * (tabs + 2) + f'propValue = GetDefault_{prop.serialize_name}();\n')
+            f.write('\t' * (tabs + 1) + f'}}\n')
             f.write('\t' * (tabs + 1) + f'value.{prop.setter}(propValue);\n')
+
         else:
-            f.write('\t' * (tabs + 1) + f'SR_UTILS_NS::Serialization::Load(deserializer, value.{prop.name}, keyName_{prop.serialize_name});\n')
+            f.write('\t' * (tabs + 1) + f'if (!SR_UTILS_NS::Serialization::Load(deserializer, value.{prop.name}, keyName_{prop.serialize_name})) {{\n')
+            if prop.default_value:
+                f.write('\t' * (tabs + 2) + f'value.{prop.name} = GetDefault_{prop.serialize_name}();\n')
+            f.write('\t' * (tabs + 1) + f'}}\n')
 
         f.write('\t' * tabs + f'}}\n')
 
