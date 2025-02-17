@@ -407,7 +407,7 @@ namespace SR_CORE_GUI_NS {
                     ImGui::Text("\t\t\t\t* GameObject: %s", pMeshComponent->GetGameObject()->GetName().c_str());
                 }
                 else {
-                    ImGui::Text("\t\t\t\t* Geometry: %s", meshInfo.pMesh->GetGeometryName().c_str());
+                    ImGui::Text("\t\t\t\t* Geometry: %s", meshInfo.pMesh->GetMeshIdentifier().c_str());
                 }
 
                 ImGui::SameLine();
@@ -564,7 +564,7 @@ namespace SR_CORE_GUI_NS {
                 }
 
                 if (name.empty()) {
-                    name = pMesh->GetGeometryName();
+                    name = pMesh->GetMeshIdentifier();
                 }
 
                 if (name.empty()) {

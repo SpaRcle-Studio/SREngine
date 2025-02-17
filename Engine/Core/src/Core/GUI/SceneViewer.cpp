@@ -225,7 +225,7 @@ namespace SR_CORE_GUI_NS {
 
         texSize *= dy > dx ? dx : dy;
 
-        m_textureSize = texSize;
+        m_textureSize = texSize.Cast<float_t>();
 
         if (centralize) {
             auto windowPosition = ImGui::GetCursorPos();

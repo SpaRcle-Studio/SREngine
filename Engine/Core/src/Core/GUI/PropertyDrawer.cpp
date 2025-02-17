@@ -52,7 +52,7 @@ namespace SR_CORE_GUI_NS {
 
                 /// если нашли хоть какой-то дескриптор
                 if (pDescriptor) {
-                    if (SR_GRAPH_GUI_NS::ImageButton(SR_FORMAT("##{}", (void*)pProperty), (void*)pDescriptor, SR_MATH_NS::IVector2(55), 3)) {
+                    if (SR_GRAPH_GUI_NS::ImageButton(SR_FORMAT("##{}", (void*)pProperty), (void*)pDescriptor, SR_MATH_NS::FVector2(55), 3)) {
                         auto&& texturesPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
                         auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(texturesPath, { { "Images", "jpeg,png,jpg,bmp,tga" } });
 
@@ -422,7 +422,7 @@ namespace SR_CORE_GUI_NS {
             return "PointerPropertyDrawer";
         }
 
-        if (value.IsString()) {
+        if (value.IsString() || value.IsStringView()) {
             return "StringPropertyDrawer";
         }
 
@@ -501,20 +501,29 @@ namespace SR_CORE_GUI_NS {
         return isRendered;
     }
 
+    SR_GRAPH_NS::RenderContext::Ptr PropertyDrawerBase::GetRenderContext() const {
+        if (m_context) {
+            return m_context;
+        }
+        m_context = SR_THIS_THREAD->GetContext()->GetValue<SR_HTYPES_NS::SafePtr<SR_GRAPH_NS::RenderContext>>();
+        SRAssert2(m_context, "Failed to get render context!");
+        return m_context;
+    }
+
     PropertyDrawerFeedback BoolPropertyDrawer::Draw(const PropertyDrawerContext& context) {
         PropertyDrawerFeedback feedback;
 
         SR_UTILS_NS::Reflection::Value value = context.GetValue();
 
         ImGui::PushID(context.pOwner);
-        ImGui::PushID(context.GetProperty().GetName().ToCStr());
+        ImGui::PushID(context.GetPropertyName().ToCStr());
 
         ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2{ 0, 0 });
 
         if (!context.pValue) {
             const ImVec2 buttonSize = { context.fieldTitleWidth, context.fieldHeight };
 
-            if (ImGui::Button(context.GetProperty().GetEditorParams().GetDisplayName().c_str(), buttonSize)) {
+            if (ImGui::Button(context.GetEditorParams().GetDisplayName().c_str(), buttonSize)) {
                 feedback.isChanged = true;
                 value = context.GetProperty().GetResetValue() ? context.GetProperty().GetResetValue() : context.GetProperty().GetDefaultValue();
                 value = value.DetachIfConst();
@@ -555,13 +564,13 @@ namespace SR_CORE_GUI_NS {
         }
 
         ImGui::PushID(context.pOwner);
-        ImGui::PushID(context.GetProperty().GetName().ToCStr());
+        ImGui::PushID(context.GetPropertyName().ToCStr());
 
         ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2{ 0, 0 });
 
         const ImVec2 buttonSize = { context.fieldTitleWidth, context.fieldHeight };
 
-        if (!context.pValue && ImGui::Button(context.GetProperty().GetEditorParams().GetDisplayName().c_str(), buttonSize)) {
+        if (!context.pValue && ImGui::Button(context.GetEditorParams().GetDisplayName().c_str(), buttonSize)) {
             feedback.isChanged = true;
             value = context.GetProperty().GetResetValue() ? context.GetProperty().GetResetValue() : context.GetProperty().GetDefaultValue();
             value = value.DetachIfConst();
@@ -571,7 +580,7 @@ namespace SR_CORE_GUI_NS {
 
         ImGui::PushItemWidth(context.fieldWidth);
 
-        const float_t drag = context.GetProperty().GetEditorParams().GetDragSpeed();
+        const float_t drag = context.GetEditorParams().GetDragSpeed();
         const ImGuiDataType_ dataType = SR_GRAPH_GUI_NS::GetImGuiDataType(value.SizeOf(), value.IsSigned(), value.IsIntegral());
         if (dataType == ImGuiDataType_COUNT) {
             SR_GRAPH_GUI_NS::ColoredText("Unknown data type!", ImColor(1.f, 0.f, 0.f, 1.f));
@@ -660,7 +669,7 @@ namespace SR_CORE_GUI_NS {
             const uint64_t offset = partSize * i;
 
             if (ImGui::Button(labels[i], buttonSize)) {
-                if (context.GetProperty().GetResetValue().SizeOf() == value.SizeOf()) {
+                if (context.pProperty && context.GetProperty().GetResetValue().SizeOf() == value.SizeOf()) {
                     if (auto&& pResetData = (char*)context.GetProperty().GetResetValue().Data()) {
                         std::memcpy((char*)value.Data() + offset, pResetData + offset, partSize);
                         feedback.isChanged = true;

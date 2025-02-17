@@ -125,17 +125,22 @@ namespace SR_CORE_GUI_NS {
 
             if (selectedIndex) {
                 if (m_typeNames[selectedIndex.value()] == "(nullptr)") {
+                    OnObjectReplaced(pClass.Get(), nullptr);
                     pClass.Reset();
                     feedback.isChanged = true;
                 }
                 else if (pClass) {
                     if (m_typeNames[selectedIndex.value()] != pClass->GetMeta()->GetFactoryName()) {
-                        pClass = SR_UTILS_NS::Factory::Instance().CreateBase(m_typeNames[selectedIndex.value()]);
+                        SRClass* pNew = SR_UTILS_NS::Factory::Instance().CreateBase(m_typeNames[selectedIndex.value()]);
+                        OnObjectReplaced(pClass.Get(), pNew);
+                        pClass = pNew;
                         feedback.isChanged = true;
                     }
                 }
                 else {
-                    pClass = SR_UTILS_NS::Factory::Instance().CreateBase(m_typeNames[selectedIndex.value()]);
+                    SRClass* pNew = SR_UTILS_NS::Factory::Instance().CreateBase(m_typeNames[selectedIndex.value()]);
+                    OnObjectReplaced(pClass.Get(), pNew);
+                    pClass = pNew;
                     feedback.isChanged = true;
                 }
             }

@@ -11,6 +11,9 @@ namespace SR_CORE_GUI_NS {
     class PathPropertyDrawer : public PropertyDrawerBase {
         SR_CLASS()
     public:
+        using Ptr = SR_HTYPES_NS::SharedPtr<PathPropertyDrawer>;
+
+    public:
         PropertyDrawerFeedback Draw(const PropertyDrawerContext& context) override;
 
     };

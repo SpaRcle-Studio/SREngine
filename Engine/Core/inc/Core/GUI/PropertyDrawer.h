@@ -6,6 +6,7 @@
 #define SR_ENGINE_CORE_PROPERTY_DRAWER_H
 
 #include <Graphics/Material/BaseMaterial.h>
+#include <Graphics/Render/RenderContext.h>
 
 #include <Utils/TypeTraits/SRClass.h>
 #include <Utils/Reflection/Property.h>
@@ -105,6 +106,12 @@ namespace SR_CORE_GUI_NS {
             }
             return false;
         }
+
+        SR_NODISCARD SR_GRAPH_NS::RenderContext::Ptr GetRenderContext() const;
+
+    private:
+        mutable SR_GRAPH_NS::RenderContext::Ptr m_context;
+
     };
 
     class BoolPropertyDrawer : public PropertyDrawerBase {

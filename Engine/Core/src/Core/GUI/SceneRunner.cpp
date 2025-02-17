@@ -48,7 +48,7 @@ namespace SR_CORE_NS::GUI {
 
         const EditorIcon playIcon = active ? EditorIcon::Stop : EditorIcon::Play;
         if (auto&& pDescriptor = GetEditor()->GetIconDescriptor(playIcon)) {
-            if (SR_GRAPH_GUI_NS::ImageButton("##imgScenePlayBtn", pDescriptor, SR_MATH_NS::IVector2(32), 3) && locked) {
+            if (SR_GRAPH_GUI_NS::ImageButton("##imgScenePlayBtn", pDescriptor, SR_MATH_NS::FVector2(32), 3) && locked) {
                 active = !active;
 
                 if (active) {
@@ -64,7 +64,7 @@ namespace SR_CORE_NS::GUI {
         ImGui::SameLine();
 
         if (auto&& pDescriptor = GetEditor()->GetIconDescriptor(paused ? EditorIcon::Pause : EditorIcon::PauseActive)) {
-            if (SR_GRAPH_GUI_NS::ImageButton("##imgScenePauseBtn", pDescriptor, SR_MATH_NS::IVector2(32), 3)) {
+            if (SR_GRAPH_GUI_NS::ImageButton("##imgScenePauseBtn", pDescriptor, SR_MATH_NS::FVector2(32), 3)) {
                 /// SR_AUDIO_NS::SoundManager::Instance().Play("Editor/Audio/Heavy-popping.wav");
                 paused = !paused;
             }
@@ -74,7 +74,7 @@ namespace SR_CORE_NS::GUI {
             ImGui::SameLine();
 
             if (auto&& pDescriptor = GetEditor()->GetIconDescriptor(EditorIcon::FrameSkip)) {
-                if (SR_GRAPH_GUI_NS::ImageButton("##imgFrameSkipBtn", pDescriptor, SR_MATH_NS::IVector2(32), 3) && locked) {
+                if (SR_GRAPH_GUI_NS::ImageButton("##imgFrameSkipBtn", pDescriptor, SR_MATH_NS::FVector2(32), 3) && locked) {
                     pEngine->SetOneFramePauseSkip(true);
                 }
             }
@@ -84,7 +84,7 @@ namespace SR_CORE_NS::GUI {
             ImGui::SameLine();
 
             if (auto&& pDescriptor = GetEditor()->GetIconDescriptor(EditorIcon::Game)) {
-                if (SR_GRAPH_GUI_NS::ImageButton("##imgSceneGameBtn", pDescriptor, SR_MATH_NS::IVector2(32), 3) && locked) {
+                if (SR_GRAPH_GUI_NS::ImageButton("##imgSceneGameBtn", pDescriptor, SR_MATH_NS::FVector2(32), 3) && locked) {
                     if (!active) {
                         active = PlayScene();
                     }
@@ -98,7 +98,7 @@ namespace SR_CORE_NS::GUI {
             ImGui::SameLine();
 
             if (auto&& pDescriptor = GetEditor()->GetIconDescriptor(EditorIcon::Back)) {
-                if (SR_GRAPH_GUI_NS::ImageButton("##imgSceneBackBtn", pDescriptor, SR_MATH_NS::IVector2(32), 3)) {
+                if (SR_GRAPH_GUI_NS::ImageButton("##imgSceneBackBtn", pDescriptor, SR_MATH_NS::FVector2(32), 3)) {
                     pEngine->SetActive((active = false));
                     pEngine->GetEditor()->LoadSceneFromCachedPath();
                 }

@@ -119,13 +119,14 @@ class CodeStructure:
         self.enums = []
 
 class Enum:
-    def __init__(self, name, variant, count, type, enum_class, namespaces):
+    def __init__(self, name, variant, count, type, enum_class, namespaces, source_path):
         self.name = name
         self.variant = variant
         self.count = count
         self.namespaces = namespaces
         self.type = type
         self.enum_class = enum_class
+        self.source_path = os.path.normpath(source_path)
 
 class Class:
     def __init__(self, name, namespaces):
@@ -386,7 +387,7 @@ def process_property(property_obj, child):
     if property_obj.default_value:
         print(f'Found default value: {property_obj.default_value}')
 
-def parse_tree(deep, parent_node, code_structure, namespaces):
+def parse_tree(file_path, deep, parent_node, code_structure, namespaces):
     try:
         if parent_node.kind == clang.cindex.CursorKind.FUNCTION_DECL and parent_node.is_definition():
             if parent_node.spelling.startswith('sr_detail_reflector_'):
@@ -454,7 +455,8 @@ def parse_tree(deep, parent_node, code_structure, namespaces):
 
                     if all_found == 5:
                         print(f'Found enum: {name} Variant: {variant} Count: {count}, Type: {enum_type}, Class: {enum_class}')
-                        code_structure.enums.append(Enum(name, variant, count, enum_type, enum_class, namespaces))
+                        enum_object = Enum(name, variant, count, enum_type, enum_class, namespaces, parent_node.location.file.name)
+                        code_structure.enums.append(enum_object)
                         break
 
             return
@@ -518,7 +520,7 @@ def parse_tree(deep, parent_node, code_structure, namespaces):
 
         # Рекурсивный обход других узлов
         for child in parent_node.get_children():
-            parse_tree(deep + 1, child, code_structure, new_namespace)
+            parse_tree(file_path, deep + 1, child, code_structure, new_namespace)
 
 
 
@@ -549,7 +551,7 @@ def parse_header_file(file_path):
 
     # Проходим по узлам файла
     for node in translation_unit.cursor.get_children():
-        parse_tree(0, node, code_structure, [])
+        parse_tree(file_path, 0, node, code_structure, [])
 
     return code_structure
 
@@ -604,7 +606,9 @@ def generate_class_meta_properties(f, class_structures, class_obj, tabs):
             f.write('\n' + '\t' * (tabs + 4) + f'.SetNoHeader()')
 
         f.write('\n' + '\t' * (tabs + 4) + f'.SetDisplayName("{prop.display_name}")')
-        #f.write('\n' + '\t' * (tabs + 4) + f'.SetInspector(SR_UTILS_NS::Reflection::GetPropertyInspector<decltype({class_obj.name}::{prop.name})>())')
+
+        if prop.inspector:
+            f.write('\n' + '\t' * (tabs + 4) + f'.SetInspector("{prop.inspector}")')
 
         if prop.drag_value:
             f.write('\n' + '\t' * (tabs + 4) + f'.SetDragSpeed({prop.drag_value})')
@@ -1100,30 +1104,79 @@ def generate_enums_code(codegen_dir, enums):
 
         f.write('\n')
 
-        # formatting
-        for enum_obj in enums:
-            namespace_str = ''
-            if len(enum_obj.namespaces) > 0:
-                namespace_str = '::'.join(enum_obj.namespaces)
+        #for enum_obj in enums:
+        #    namespace_str = ''
+        #    if len(enum_obj.namespaces) > 0:
+        #        namespace_str = '::'.join(enum_obj.namespaces)
+        #
+        #    if len(namespace_str) > 0:
+        #        namespace_str += '::'
+        #
+        #    f.write(f'template<> struct fmt::formatter<{namespace_str}{enum_obj.name}> {{\n')
+        #    f.write(f'\tconstexpr auto parse(format_parse_context& ctx) {{ return ctx.begin(); }}\n')
+        #    f.write(f'\tauto format(const {namespace_str}{enum_obj.name}& val, format_context& ctx) const {{\n')
+        #
+        #    f.write(f'\t\tif constexpr (SR_UTILS_NS::IsCompleteTypeV<{namespace_str}CodegenEnumIncludedChecked_{enum_obj.name}>) {{\n')
+        #    f.write(f'\t\t\treturn fmt::format_to(ctx.out(), "{{}}", SR_UTILS_NS::EnumReflector::ToStringAtom(val).ToStringView());\n')
+        #    f.write(f'\t\t}} else {{\n')
+        #    f.write(f'\t\t\tSRHalt("Formatted enum \\\"{enum_obj.name}\\\" is not included, please include it!");\n')
+        #    #f.write(f'\t\t\tstatic_assert(SR_UTILS_NS::AlwaysFalseV<{namespace_str}{enum_obj.name}>, "Formatted enum is not included, please include it!");\n')
+        #    f.write(f'\t\t\treturn fmt::format_to(ctx.out(), "{{}}", static_cast<int>(val));\n')
+        #    f.write(f'\t\t}}\n')
 
-            if len(namespace_str) > 0:
-                namespace_str += '::'
-
-            f.write(f'template<> struct fmt::formatter<{namespace_str}{enum_obj.name}> {{\n')
-            f.write(f'\tconstexpr auto parse(format_parse_context& ctx) {{ return ctx.begin(); }}\n')
-            f.write(f'\tauto format(const {namespace_str}{enum_obj.name}& val, format_context& ctx) const {{\n')
-
-            f.write(f'\t\tif constexpr (SR_UTILS_NS::IsCompleteTypeV<{namespace_str}CodegenEnumIncludedChecked_{enum_obj.name}>) {{\n')
-            f.write(f'\t\t\treturn fmt::format_to(ctx.out(), "{{}}", SR_UTILS_NS::EnumReflector::ToStringAtom(val).ToStringView());\n')
-            f.write(f'\t\t}} else {{\n')
-            f.write(f'\t\t\tSRHalt("Formatted enum \\\"{enum_obj.name}\\\" is not included, please include it!");\n')
-            f.write(f'\t\t\treturn fmt::format_to(ctx.out(), "{{}}", static_cast<int>(val));\n')
-            f.write(f'\t\t}}\n')
-
-            f.write(f'\t}}\n')
-            f.write(f'}};\n')
+        #    f.write(f'\t}}\n')
+        #    f.write(f'}};\n')
 
         f.write(f'\n#endif // SR_CODEGEN_ENUMS_HPP\n')
+
+        print(f'Remove old enum files: {codegen_dir}/../Enum/*.hpp')
+
+        for file in glob(f'{codegen_dir}/../Enum/*.hpp'):
+            os.remove(file)
+
+        print(f'Generating new enum files: {codegen_dir}/../Enum/*.hpp')
+
+        # formatting
+        for enum_obj in enums:
+            enum_gen_path = os.path.normpath(f'{codegen_dir}/../Enum/{enum_obj.name}.hpp')
+            os.makedirs(os.path.dirname(enum_gen_path), exist_ok=True)
+            with open(enum_gen_path, 'w', encoding='utf8') as f:
+                caps_enum_name = enum_obj.name.upper()
+
+                f.write('// This file is generated by SpaRcle Studio code-generator ^_^\n\n')
+                f.write(f'#ifndef SR_CODEGEN_ENUM_{caps_enum_name}_HPP\n')
+                f.write(f'#define SR_CODEGEN_ENUM_{caps_enum_name}_HPP\n\n')
+
+                f.write(f'#include \"{enum_obj.source_path}\"\n\n')
+
+                f.write(f'#include <Codegen/Enums.generated.hpp>\n\n')
+
+                namespace_str = ''
+                if len(enum_obj.namespaces) > 0:
+                    namespace_str = '::'.join(enum_obj.namespaces)
+
+                if len(namespace_str) > 0:
+                    namespace_str += '::'
+
+                f.write(f'template<> struct fmt::formatter<{namespace_str}{enum_obj.name}> {{\n')
+                f.write(f'\tconstexpr auto parse(format_parse_context& ctx) {{ return ctx.begin(); }}\n')
+                f.write(f'\tauto format(const {namespace_str}{enum_obj.name}& val, format_context& ctx) const {{\n')
+
+                f.write(f'\t\tstatic_assert(SR_UTILS_NS::IsCompleteTypeV<{namespace_str}CodegenEnumIncludedChecked_{enum_obj.name}>, "Formatted enum is not included, please include it!");\n')
+                f.write(f'\t\treturn fmt::format_to(ctx.out(), "{{}}", SR_UTILS_NS::EnumReflector::ToStringAtom(val).ToStringView());\n')
+
+                #f.write(f'\t\tif constexpr (SR_UTILS_NS::IsCompleteTypeV<{namespace_str}CodegenEnumIncludedChecked_{enum_obj.name}>) {{\n')
+                #f.write(f'\t\t\treturn fmt::format_to(ctx.out(), "{{}}", SR_UTILS_NS::EnumReflector::ToStringAtom(val).ToStringView());\n')
+                #f.write(f'\t\t}} else {{\n')
+                #f.write(f'\t\t\tSRHalt("Formatted enum \\\"{enum_obj.name}\\\" is not included, please include it!");\n')
+                #f.write(f'\t\t\tstatic_assert(SR_UTILS_NS::AlwaysFalseV<{namespace_str}{enum_obj.name}>, "Formatted enum is not included, please include it!");\n')
+                #f.write(f'\t\t\treturn fmt::format_to(ctx.out(), "{{}}", static_cast<int>(val));\n')
+                #f.write(f'\t\t}}\n')
+
+                f.write(f'\t}}\n')
+                f.write(f'}};\n')
+
+                f.write(f'\n#endif // SR_CODEGEN_ENUM_{caps_enum_name}_HPP\n')
 
 def generate_classes_code(codegen_dir, class_structures):
     file_map = {}

@@ -4,9 +4,25 @@
 
 #include <Core/GUI/PropertyDrawers/MaterialDataPropertyDrawer.h>
 
+#include <Enum/ImageAspect.hpp>
+#include <Enum/ImageFormat.hpp>
+#include <Enum/TextureFilter.hpp>
+#include <Enum/TextureCompression.hpp>
+#include <Enum/BoolExt.hpp>
+#include <Enum/ShaderVarType.hpp>
+
 #include <Codegen/MaterialDataPropertyDrawer.generated.hpp>
 
 namespace SR_CORE_GUI_NS {
+    MaterialDataPropertyDrawer::MaterialDataPropertyDrawer()
+        : Super()
+    {
+        m_vectorDrawer = SRNew<MathVectorPropertyDrawer>();
+        m_numericDrawer = SRNew<NumericPropertyDrawer>();
+        m_boolDrawer = SRNew<BoolPropertyDrawer>();
+        m_pathDrawer = SRNew<PathPropertyDrawer>();
+    }
+
     PropertyDrawerFeedback MaterialDataPropertyDrawer::DrawCustomProperties(const PropertyDrawerContext& context) {
         PropertyDrawerFeedback feedback;
 
@@ -81,6 +97,8 @@ namespace SR_CORE_GUI_NS {
             ImGui::SameLine();
             ImGui::BeginGroup();
 
+            isChanged |= DrawShaderPath(name, shaderData, context);
+
             uint32_t editorOrder = 0;
 
             for (uint32_t i = 0; i < shaderData.uniforms.size() + shaderData.samplers.size(); ++i) {
@@ -122,10 +140,6 @@ namespace SR_CORE_GUI_NS {
     }
 
     bool MaterialDataPropertyDrawer::DrawShaderProperty(SR_GRAPH_NS::MaterialShaderData& shaderData, SR_GRAPH_NS::MaterialShaderProperty& property, const PropertyDrawerContext& context) {
-        if (!m_vectorDrawer) {
-            m_vectorDrawer = SRNew<MathVectorPropertyDrawer>();
-        }
-
         PropertyDrawerFeedback feedback;
         bool wasReset = false;
         SR_UTILS_NS::Reflection::Value value;
@@ -149,16 +163,125 @@ namespace SR_CORE_GUI_NS {
         }
 
         switch (property.type) {
-            case SR_GRAPH_NS::ShaderVarType::Vec4: {
+            case SR_GRAPH_NS::ShaderVarType::Vec2:
+                value = SR_UTILS_NS::Reflection::Value::CreateRef(std::get<SR_MATH_NS::FVector2>(property.data));
+                feedback = m_vectorDrawer->Draw(propertyContext);
+                break;
+            case SR_GRAPH_NS::ShaderVarType::Vec3:
+                value = SR_UTILS_NS::Reflection::Value::CreateRef(std::get<SR_MATH_NS::FVector3>(property.data));
+                feedback = m_vectorDrawer->Draw(propertyContext);
+                break;
+            case SR_GRAPH_NS::ShaderVarType::Vec4:
                 value = SR_UTILS_NS::Reflection::Value::CreateRef(std::get<SR_MATH_NS::FVector4>(property.data));
                 feedback = m_vectorDrawer->Draw(propertyContext);
                 break;
+            case SR_GRAPH_NS::ShaderVarType::Int:
+                value = SR_UTILS_NS::Reflection::Value::CreateRef(std::get<int32_t>(property.data));
+                feedback = m_numericDrawer->Draw(propertyContext);
+                break;
+            case SR_GRAPH_NS::ShaderVarType::Float:
+                value = SR_UTILS_NS::Reflection::Value::CreateRef(std::get<float_t>(property.data));
+                feedback = m_numericDrawer->Draw(propertyContext);
+                break;
+            case SR_GRAPH_NS::ShaderVarType::Bool: {
+                ImGui::SameLine();
+                bool boolean = std::get<int32_t>(property.data) != 0;
+                value = SR_UTILS_NS::Reflection::Value::CreateRef(boolean);
+                feedback = m_boolDrawer->Draw(propertyContext);
+                std::get<int32_t>(property.data) = boolean ? 1 : 0;
+                break;
+            }
+            case SR_GRAPH_NS::ShaderVarType::Sampler2D: {
+                ImGui::SameLine();
+                SR_UTILS_NS::Path path;
+                if (auto&& pTexture = std::get<SR_GTYPES_NS::Texture*>(property.data)) {
+                    path = pTexture->GetResourcePath();
+                }
+                value = SR_UTILS_NS::Reflection::Value::CreateRef(path);
+                feedback = m_pathDrawer->Draw(propertyContext);
+                if (feedback.isChanged) {
+                    auto&& pTexture = SR_GTYPES_NS::Texture::Load(path);
+                    shaderData.SetData(property.id, pTexture, SR_GRAPH_NS::ShaderVarType::Sampler2D);
+                }
+
+                auto&& pTexture = std::get<SR_GTYPES_NS::Texture*>(property.data);
+                if (void* pDescriptor = pTexture ? pTexture->GetDescriptor() : nullptr) {
+                    const float_t imageSize = context.lineHeight * 2.5f;
+
+                    if (SR_GRAPH_GUI_NS::ImageButton((void*)pDescriptor, SR_MATH_NS::FVector2(imageSize), 0.25f * context.lineHeight)) {
+
+                    }
+
+                    ImGui::SameLine();
+
+                    const SR_GRAPH_NS::Memory::TextureConfig& config = pTexture->GetTextureConfig();
+
+                    ImGui::BeginGroup();
+
+                    ImGui::Text("Size: {}x{}\nChannels: {}\nFormat: {}\nFilter: {}"_format(
+                        pTexture->GetWidth(),
+                        pTexture->GetHeight(),
+                        pTexture->GetChannels(),
+                        config.GetFormat(),
+                        config.GetFilter()).c_str()
+                    );
+
+                    ImGui::EndGroup();
+
+                    ImGui::SameLine();
+                    ImGui::Dummy(ImVec2(context.lineHeight, 0));
+                    ImGui::SameLine();
+
+                    ImGui::BeginGroup();
+
+                    ImGui::Text("Compression: {}\nMipLevels: {}\nCpuUsage: {}\nAlpha: {}"_format(
+                        config.GetCompression(),
+                        config.GetMipLevels(),
+                        config.GetCpuUsage(),
+                        config.GetAlpha()).c_str()
+                    );
+
+                    ImGui::EndGroup();
+                }
+
+                break;
             }
             default:
-                //SRHaltOnce("Invalid shader property type!");
+                ImGui::SameLine();
+                SR_GRAPH_GUI_NS::ColoredText("Unsupported type! Type: {}"_format(property.type), ImColor(255, 0, 0));
                 return false;
         }
 
-        return feedback.isChanged || wasReset;
+        if (feedback.isChanged || wasReset) {
+            const bool onlyUniforms = !SR_GRAPH_NS::IsSamplerType(property.type);
+            shaderData.pOwnedMaterialData->OnPropertyChanged(onlyUniforms);
+            return true;
+        }
+
+        return false;
+    }
+
+    bool MaterialDataPropertyDrawer::DrawShaderPath(SR_UTILS_NS::StringAtom name, SR_GRAPH_NS::MaterialShaderData& shaderData, const PropertyDrawerContext& context) {
+        SR_UTILS_NS::Path shaderPath = shaderData.pShader ? shaderData.pShader->GetResourcePath() : SR_UTILS_NS::Path();
+
+        SR_UTILS_NS::Reflection::Value value = SR_UTILS_NS::Reflection::Value::CreateRef(shaderPath);
+
+        PropertyDrawerContext propertyContext = context;
+        propertyContext.pProperty = nullptr;
+        propertyContext.pValue = &value;
+        float_t totalWidth = (context.fieldWidth + context.fieldTitleWidth) - context.GetArrowWidth();
+        propertyContext.fieldWidth = totalWidth * 0.75f;
+        propertyContext.fieldTitleWidth = totalWidth * 0.25f;
+        propertyContext.customDisplayName = "Shader";
+
+        const PropertyDrawerFeedback feedback = m_pathDrawer->Draw(propertyContext);
+
+        if (feedback.isChanged) {
+            SR_GRAPH_NS::MaterialData& materialData = *static_cast<SR_GRAPH_NS::MaterialData*>(context.pOwner);
+            materialData.SetShader(shaderPath, name);
+            return true;
+        }
+
+        return false;
     }
 }

@@ -13,6 +13,8 @@ namespace SR_CORE_GUI_NS {
     public:
         PropertyDrawerFeedback Draw(const PropertyDrawerContext& context) override;
 
+        virtual void OnObjectReplaced(SRClass* pOld, SRClass* pNew) { }
+
     private:
         std::string_view m_lastTypeName;
         std::string m_default;

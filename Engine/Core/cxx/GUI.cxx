@@ -36,3 +36,4 @@
 #include "../src/Core/GUI/PropertyDrawers/StringPropertyDrawer.cpp"
 #include "../src/Core/GUI/PropertyDrawers/PathPropertyDrawer.cpp"
 #include "../src/Core/GUI/PropertyDrawers/MaterialDataPropertyDrawer.cpp"
+#include "../src/Core/GUI/PropertyDrawers/MaterialPropertyDrawer.cpp"

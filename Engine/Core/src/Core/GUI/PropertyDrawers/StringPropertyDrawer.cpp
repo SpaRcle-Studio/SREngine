@@ -31,13 +31,33 @@ namespace SR_CORE_GUI_NS {
 
         ImGui::PushItemWidth(context.fieldWidth);
 
-        if (auto&& pString = value.TryCast<std::string>()) {
-            if (ImGui::InputText("##Input", pString, ImGuiInputTextFlags_EnterReturnsTrue)) {
-                feedback.isChanged = true;
+        if (value.IsString()) {
+            if (auto&& pString = value.TryCast<std::string>()) {
+                if (ImGui::InputText("##Input", pString, ImGuiInputTextFlags_EnterReturnsTrue)) {
+                    feedback.isChanged = true;
+                }
+            }
+            else {
+                SR_GRAPH_GUI_NS::ColoredText("Failed to map string value!", ImColor(1.f, 0.f, 0.f, 1.f));
+            }
+        }
+        else if (value.IsStringView()) {
+            if (auto&& pStringView = value.TryCast<std::string_view>()) {
+                /// read only
+                if (pStringView->empty()) {
+                    static std::string emptyString = " "; /// imgui will assert if empty string is passed
+                    ImGui::InputText("##Input", emptyString.data(), emptyString.size(), ImGuiInputTextFlags_ReadOnly);
+                }
+                else {
+                    ImGui::InputText("##Input", const_cast<char*>(pStringView->data()), pStringView->size(), ImGuiInputTextFlags_ReadOnly);
+                }
+            }
+            else {
+                SR_GRAPH_GUI_NS::ColoredText("Failed to map string view value!", ImColor(1.f, 0.f, 0.f, 1.f));
             }
         }
         else {
-            SR_GRAPH_GUI_NS::ColoredText("Failed to map string value!", ImColor(1.f, 0.f, 0.f, 1.f));
+            SR_GRAPH_GUI_NS::ColoredText("Invalid string type!", ImColor(1.f, 0.f, 0.f, 1.f));
         }
 
         ImGui::PopItemWidth();

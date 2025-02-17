@@ -1,8 +1,31 @@
-<?xml version="1.0"?>
-<Material ReadOnly="false">
-    <Shader Path="Engine/Shaders/ui.srsl"/>
-    <Properties>
-        <Property Id="diffuse" Type="Sampler2D" String="Engine/Textures/default_improved.png"/>
-        <Property Id="color" Type="Vec4" X="1.0" Y="1.0" Z="1.0" W="1.0"/>
-    </Properties>
-</Material>
+sra format
+0-r:Root
+	1-o:default
+		2-v:shader
+			3-s:Engine/Shaders/ui.srsl
+		2-o:data
+			3-a:uniforms
+				4-k:i
+					5-o:d
+						6-v:id
+							7-s:color
+						6-v:type
+							7-s:Vec4
+						6-o:value
+							7-v:x
+								8-f:1.000000
+							7-v:y
+								8-f:1.000000
+							7-v:z
+								8-f:1.000000
+							7-v:w
+								8-f:1.000000
+			3-a:samplers
+				4-k:i
+					5-o:d
+						6-v:id
+							7-s:diffuse
+						6-v:type
+							7-s:Sampler2D
+						6-v:value
+							7-s:Engine/Textures/default_improved.png
