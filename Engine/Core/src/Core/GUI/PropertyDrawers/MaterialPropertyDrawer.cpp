@@ -26,6 +26,10 @@ namespace SR_CORE_GUI_NS {
         auto&& pOldMaterialData = pOldBaseMaterial->GetMaterialData();
         auto&& pNewMaterialData = pNewBaseMaterial->GetMaterialData();
 
+        if (!pOldMaterialData || !pNewMaterialData) {
+            return;
+        }
+
         /// copy data from old to new material
 
         auto&& defaultData = pOldMaterialData->GetDefaultShaderData();

@@ -21,6 +21,7 @@ namespace SR_CORE_GUI_NS {
         m_numericDrawer = SRNew<NumericPropertyDrawer>();
         m_boolDrawer = SRNew<BoolPropertyDrawer>();
         m_pathDrawer = SRNew<PathPropertyDrawer>();
+        m_shaderDataOpened["Default"] = true;
     }
 
     PropertyDrawerFeedback MaterialDataPropertyDrawer::DrawCustomProperties(const PropertyDrawerContext& context) {
@@ -32,10 +33,10 @@ namespace SR_CORE_GUI_NS {
 
         SR_GRAPH_NS::MaterialData& materialData = *static_cast<SR_GRAPH_NS::MaterialData*>(context.pOwner);
 
-        feedback.isChanged |= DrawShaderData("Default", materialData.GetDefaultShaderData(), context);
+        feedback.isChanged |= DrawShaderData(true, "Default", materialData.GetDefaultShaderData(), context);
 
         for (auto&& [stage, data] : materialData.GetShadersData()) {
-            feedback.isChanged |= DrawShaderData(stage, data, context);
+            feedback.isChanged |= DrawShaderData(false, stage, data, context);
         }
 
         for (auto&& stage : m_stagesToRemove) {
@@ -47,16 +48,11 @@ namespace SR_CORE_GUI_NS {
         return feedback;
     }
 
-    bool MaterialDataPropertyDrawer::DrawShaderData(SR_UTILS_NS::StringAtom name, SR_GRAPH_NS::MaterialShaderData& shaderData, const PropertyDrawerContext& context) {
+    bool MaterialDataPropertyDrawer::DrawShaderData(bool isDefault, SR_UTILS_NS::StringAtom name, SR_GRAPH_NS::MaterialShaderData& shaderData, const PropertyDrawerContext& context) {
         bool isChanged = false;
 
         ImGui::PushID(&shaderData);
-
-        static const SR_UTILS_NS::StringAtom defaultName = "Default";
-
-        if (m_shaderDataOpened.count(defaultName) == 0) {
-            m_shaderDataOpened[name] = true;
-        }
+        ImGui::PushID(name.c_str());
 
         bool& opened = m_shaderDataOpened[name];
 
@@ -85,7 +81,7 @@ namespace SR_CORE_GUI_NS {
             ImGui::SameLine();
 
             const ImVec2 removeButtonSize = { SR_MAX(removeWidth, 0), context.fieldHeight };
-            SR_GRAPH_GUI_NS::ImGuiDisabledLockGuard guard(name == defaultName);
+            SR_GRAPH_GUI_NS::ImGuiDisabledLockGuard guard(isDefault);
             if (ImGui::Button("Delete", removeButtonSize)) {
                 isChanged = true;
                 m_stagesToRemove.insert(name);
@@ -134,6 +130,7 @@ namespace SR_CORE_GUI_NS {
             ImGui::EndGroup();
         }
 
+        ImGui::PopID();
         ImGui::PopID();
 
         return isChanged;
