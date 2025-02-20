@@ -56,6 +56,18 @@ namespace SR_CORE_GUI_NS {
                 SR_GRAPH_GUI_NS::ColoredText("Failed to map string view value!", ImColor(1.f, 0.f, 0.f, 1.f));
             }
         }
+        else if (value.IsStringAtom()) {
+            if (auto&& pStringAtom = value.TryCast<SR_UTILS_NS::StringAtom>()) {
+                std::string str = pStringAtom->ToString();
+                if (ImGui::InputText("##Input", str.data(), str.size(), ImGuiInputTextFlags_EnterReturnsTrue)) {
+                    feedback.isChanged = true;
+                    *pStringAtom = str;
+                }
+            }
+            else {
+                SR_GRAPH_GUI_NS::ColoredText("Failed to map string atom value!", ImColor(1.f, 0.f, 0.f, 1.f));
+            }
+        }
         else {
             SR_GRAPH_GUI_NS::ColoredText("Invalid string type!", ImColor(1.f, 0.f, 0.f, 1.f));
         }

@@ -18,10 +18,28 @@
 #include <Physics/LibraryImpl.h>
 
 #include <assimp/scene.h>
+#include <Graphics/Types/Texture.h>
 
 namespace SR_CORE_NS {
     SR_UTILS_NS::SceneObject::Ptr World::Instance(const SR_HTYPES_NS::RawMesh* pRawMesh) {
         GameObjectPtr root;
+
+        static std::function processMaterial = [](const SR_HTYPES_NS::RawMesh* pRawMesh, uint64_t meshId, SR_GTYPES_NS::Mesh* pMesh, uint64_t materialIndex) {
+            if (pRawMesh->GetAssimpScene()->mMeshes[meshId]->mMaterialIndex >= pRawMesh->GetAssimpScene()->mNumMaterials) {
+                return;
+            }
+
+            aiMaterial* pMaterial = pRawMesh->GetAssimpScene()->mMaterials[pRawMesh->GetAssimpScene()->mMeshes[meshId]->mMaterialIndex];
+
+            aiString diffuseTexturePath;
+            if (pMaterial->GetTexture(aiTextureType_DIFFUSE, 0, &diffuseTexturePath) == aiReturn_SUCCESS) {
+                if (auto&& pTexture = SR_GTYPES_NS::Texture::Load(diffuseTexturePath.C_Str())) {
+                    pTexture->AddUsePoint();
+                    pMesh->GetMaterial()->SetTexture("diffuse", pTexture);
+                    pTexture->RemoveUsePoint();
+                }
+            }
+        };
 
         std::list<SR_GTYPES_NS::SkinnedMesh*> skinnedMeshes;
 
@@ -34,15 +52,14 @@ namespace SR_CORE_NS {
                 const SR_GRAPH_NS::MeshType meshType = countBones > 0 ? SR_GRAPH_NS::MeshType::Skinned : SR_GRAPH_NS::MeshType::Static;
 
                 if (auto&& pMesh = SR_GTYPES_NS::Mesh::Load(pRawMesh->GetResourcePath(), meshType, node->mMeshes[i])) {
-                    if (countBones > 256) {
-                        pMesh->SetMaterial(SR_GRAPH_NS::FileMaterial::Load("Engine/Materials/skinned-384.mat"));
+                    if (countBones > 0) {
+                        pMesh->SetMaterial(SR_GRAPH_NS::FileMaterial::LoadAsUnique("Engine/Materials/skinned.mat"));
                     }
-                    else if (countBones > 128) {
-                        pMesh->SetMaterial(SR_GRAPH_NS::FileMaterial::Load("Engine/Materials/skinned-256.mat"));
+                    else {
+                        pMesh->SetMaterial(SR_GRAPH_NS::FileMaterial::LoadAsUnique("Engine/Materials/default.mat"));
                     }
-                    else if (countBones > 0) {
-                        pMesh->SetMaterial(SR_GRAPH_NS::FileMaterial::Load("Engine/Materials/skinned.mat"));
-                    }
+
+                    processMaterial(pRawMesh, meshId, pMesh, pRawMesh->GetAssimpScene()->mMeshes[meshId]->mMaterialIndex);
 
                     ptr->AddComponent(dynamic_cast<SR_UTILS_NS::Component*>(pMesh));
 

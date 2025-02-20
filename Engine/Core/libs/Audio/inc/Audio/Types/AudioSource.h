@@ -16,7 +16,7 @@ namespace SR_AUDIO_NS
 
     class AudioSource : public SR_UTILS_NS::Component {
         SR_CLASS()
-        SR_REGISTER_NEW_COMPONENT(AudioSource, 1006);
+        SR_REGISTER_NEW_COMPONENT(AudioSource, 1007);
         using Super = SR_UTILS_NS::Component;
         using Handle = void*;
     public:

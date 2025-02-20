@@ -88,7 +88,6 @@ namespace SR_PTYPES_NS {
         void ClearForces();
 
         SR_NODISCARD virtual SR_UTILS_NS::Measurement GetMeasurement() const;
-        SR_NODISCARD bool InitializeEntity() noexcept override;
 
         SR_NODISCARD bool ExecuteInEditMode() const override { return true; }
         SR_NODISCARD ShapeType GetType() const noexcept;

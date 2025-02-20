@@ -798,6 +798,15 @@ def generate_class_meta(f, class_structures, class_obj, tabs):
 
     f.write('\t' * tabs + f'SR_NODISCARD {class_name}* DeclTypeStub() const noexcept {{ return nullptr; }}\n\n')
 
+    f.write('\t' * (tabs + 0) + f'template <typename T> T static SetterSharedSRClassConvert(SR_UTILS_NS::SRClass* pSRClass) {{\n')
+    f.write('\t' * (tabs + 1) + f'if constexpr (SR_UTILS_NS::IsSharedPointerV<T>) {{\n')
+    f.write('\t' * (tabs + 2) + f'if (pSRClass) {{\n')
+    f.write('\t' * (tabs + 3) + f'return dynamic_cast<typename T::SharedPointerType*>(pSRClass);\n')
+    f.write('\t' * (tabs + 2) + f'}}\n')
+    f.write('\t' * (tabs + 1) + f'}}\n')
+    f.write('\t' * (tabs + 1) + f'return T();\n')
+    f.write('\t' * (tabs + 0) + f'}}\n\n')
+
     for prop in class_obj.variables:
         if not prop.default_value:
             continue
@@ -861,12 +870,32 @@ def generate_class_meta(f, class_structures, class_obj, tabs):
         #f.write('\t' * (tabs + 2) + f'return;\n')
         #f.write('\t' * (tabs + 1) + f'}}\n')
 
+        bool_do_gen_setter = True
         if property.virtual:
             if not property.setter or not property.getter:
                 f.write('\t' * (tabs + 1) + f'SRHalt("Virtual property {property.name} must have getter and setter!");\n')
                 f.write('\t' * (tabs + 1) + f'return;\n')
+                bool_do_gen_setter = False
             else:
-                f.write('\t' * (tabs + 1) + f'using Type = std::remove_const_t<SR_UTILS_NS::RemoveQualifiersT<decltype(pClassImpl->{property.getter}())>>;\n')
+                f.write('\t' * (tabs + 1) + f'using Type = SR_UTILS_NS::RemoveQualifiersT<decltype(pClassImpl->{property.getter}())>;\n')
+        else:
+            f.write('\t' * (tabs + 1) + f'using Type = decltype({class_name}::{property.name});\n')
+
+        if bool_do_gen_setter:
+            #f.write('\t' * (tabs + 1) + f'if constexpr (SR_UTILS_NS::IsSharedPointerV<Type>) {{\n')
+            #f.write('\t' * (tabs + 2) + f'auto&& pSRClassRef = value.TryCast<SR_UTILS_NS::SRClass*>();\n')
+            #f.write('\t' * (tabs + 2) + f'if (!pSRClassRef) {{\n')
+            #f.write('\t' * (tabs + 3) + f'SRHalt("Failed to cast value!");\n')
+            #f.write('\t' * (tabs + 3) + f'return;\n')
+            #f.write('\t' * (tabs + 2) + f'}}\n')
+            #f.write('\t' * (tabs + 2) + f'auto&& pSRClass = const_cast<SR_UTILS_NS::SRClass*>(*pSRClassRef);\n')
+            #if property.setter:
+            #    f.write('\t' * (tabs + 2) + f'pClassImpl->{property.setter}(SetterSharedSRClassConvert<Type>(pSRClass));\n')
+            #else:
+            #    f.write('\t' * (tabs + 2) + f'pClassImpl->{property.name} = SetterSharedSRClassConvert<Type>(pSRClass);\n')
+            #f.write('\t' * (tabs + 1) + f'}} else {{\n')
+
+            if property.virtual:
                 f.write('\t' * (tabs + 1) + f'auto&& pData = value.TryCast<Type>();\n')
                 f.write('\t' * (tabs + 1) + f'if (!pData) {{\n')
                 f.write('\t' * (tabs + 2) + f'SRHalt("Failed to cast value!");\n')
@@ -874,20 +903,24 @@ def generate_class_meta(f, class_structures, class_obj, tabs):
                 f.write('\t' * (tabs + 1) + f'}}\n')
 
                 f.write('\t' * (tabs + 1) + f'pClassImpl->{property.setter}(std::move(*pData));\n')
-        else:
-            f.write('\t' * (tabs + 1) + f'auto&& pData = value.TryCast<decltype({class_name}::{property.name})>();\n')
-            f.write('\t' * (tabs + 1) + f'if (!pData) {{\n')
-            f.write('\t' * (tabs + 2) + f'SRHalt("Failed to cast value!");\n')
-
-            f.write('\t' * (tabs + 2) + f'return;\n')
-            f.write('\t' * (tabs + 1) + f'}}\n')
-
-            if property.setter:
-                f.write('\t' * (tabs + 1) + f'pClassImpl->{property.setter}(std::move(*pData));\n')
             else:
-                f.write('\t' * (tabs + 1) + f'pClassImpl->{property.name} = std::move(*pData);\n')
+                f.write('\t' * (tabs + 1) + f'auto&& pData = value.TryCast<Type>();\n')
+                f.write('\t' * (tabs + 1) + f'if (!pData) {{\n')
+                f.write('\t' * (tabs + 2) + f'SRHalt("Failed to cast value!");\n')
+
+                f.write('\t' * (tabs + 2) + f'return;\n')
+                f.write('\t' * (tabs + 1) + f'}}\n')
+
+                if property.setter:
+                    f.write('\t' * (tabs + 1) + f'pClassImpl->{property.setter}(std::move(*pData));\n')
+                else:
+                    f.write('\t' * (tabs + 1) + f'pClassImpl->{property.name} = std::move(*pData);\n')
+
+            #f.write('\t' * (tabs + 1) + f'}}\n')
 
         f.write('\t' * tabs + f'}}\n')
+
+        # =================================== getter ===================================
 
         f.write('\t' * tabs + f'static SR_UTILS_NS::Reflection::Value Get_{property.name}(SR_UTILS_NS::SRClass* pClass) {{\n')
         f.write('\t' * (tabs + 1) + f'{class_name}* pClassImpl = dynamic_cast<{class_name}*>(pClass);\n')
@@ -1257,6 +1290,7 @@ def generate_classes_code(codegen_dir, class_structures):
             f.write(f'#define SR_CODEGEN_{file_name.upper()}_HPP\n\n')
             for class_obj in class_objs:
                 f.write(f'#include "{os.path.abspath(os.path.normpath(class_obj.path))}"\n\n')
+                f.write(f'#include <Utils/Reflection/Property.h>\n')
                 f.write(f'#include <Utils/TypeTraits/ClassDB.h>\n')
                 f.write(f'#include <Utils/TypeTraits/SRClass.h>\n')
                 f.write(f'#include <Utils/TypeTraits/Factory.h>\n')

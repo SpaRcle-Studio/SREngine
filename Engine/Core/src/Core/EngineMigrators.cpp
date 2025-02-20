@@ -356,8 +356,8 @@ namespace SR_CORE_NS {
 
             migrated.Write<std::string>(marshal.Read<std::string>()); /// material
 
-            SR_UTILS_NS::EntityRef ref;
-            ref.Save(migrated);
+            //SR_UTILS_NS::EntityRef ref;
+            //ref.Save(migrated);
 
             /// -------------------- меня наняли дублировать длинные строки потому что я люблю большие длинные прямые комментарии, состоящие исключительно из тире.
             migrated.Stream::Write(marshal.Stream::View() + marshal.GetPosition(), marshal.Size() - marshal.GetPosition());

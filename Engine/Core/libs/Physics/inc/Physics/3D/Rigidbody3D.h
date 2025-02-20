@@ -30,7 +30,7 @@ namespace SR_PTYPES_NS {
     class Rigidbody3D final : public Rigidbody {
         SR_CLASS()
         using Super = Rigidbody;
-        SR_REGISTER_NEW_COMPONENT(Rigidbody3D, 1014);
+        SR_REGISTER_NEW_COMPONENT(Rigidbody3D, 1015);
     public:
         SR_NODISCARD SR_UTILS_NS::Measurement GetMeasurement() const override;
 
@@ -41,8 +41,6 @@ namespace SR_PTYPES_NS {
         SR_NODISCARD SR_MATH_NS::FVector3 GetAngularVelocity() const;
 
         bool UseNewSerialization() const noexcept override { return true; }
-
-        SR_NODISCARD bool InitializeEntity() noexcept override;
 
         void SetLinearLock(const SR_MATH_NS::BVector3& lock);
         void SetAngularLock(const SR_MATH_NS::BVector3& lock);

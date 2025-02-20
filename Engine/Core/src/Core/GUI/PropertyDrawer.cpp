@@ -422,7 +422,7 @@ namespace SR_CORE_GUI_NS {
             return "PointerPropertyDrawer";
         }
 
-        if (value.IsString() || value.IsStringView()) {
+        if (value.IsString() || value.IsStringView() || value.IsStringAtom()) {
             return "StringPropertyDrawer";
         }
 

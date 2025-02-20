@@ -74,7 +74,7 @@ namespace SR_SCRIPTING_NS {
 
     class Behaviour final : public SR_UTILS_NS::Component {
         SR_CLASS()
-        SR_REGISTER_NEW_COMPONENT(Behaviour, 1004);
+        SR_REGISTER_NEW_COMPONENT(Behaviour, 1005);
         using GameObjectPtr = SR_HTYPES_NS::SharedPtr<SR_UTILS_NS::GameObject>;
         using Properties = std::vector<std::string>;
         using ValueProperties = std::list<std::pair<std::string, std::any>>;

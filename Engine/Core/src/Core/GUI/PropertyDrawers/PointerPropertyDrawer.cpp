@@ -61,6 +61,9 @@ namespace SR_CORE_GUI_NS {
         }
 
         SR_UTILS_NS::SRClass* pClassValue = value.GetSRClass();
+        SR_HTYPES_NS::SharedPtrBase* pSharedPtrBase = value.GetSharedPtrBase();
+
+        SRAssert(pSharedPtrBase);
 
         if (!context.noHeader) {
             ImGui::SameLine();
@@ -143,24 +146,28 @@ namespace SR_CORE_GUI_NS {
             ImGui::PopItemWidth();
 
             if (selectedIndex) {
+                SRClass* pNew = nullptr;
+
                 if (m_typeNames[selectedIndex.value()] == "(nullptr)") {
                     OnObjectReplaced(pClassValue, nullptr);
-                    value.SetSRClass(nullptr);
+                    pNew = nullptr;
                     feedback.isChanged = true;
                 }
                 else if (pClassValue) {
                     if (m_typeNames[selectedIndex.value()] != pClassValue->GetMeta()->GetFactoryName()) {
-                        SRClass* pNew = SR_UTILS_NS::Factory::Instance().CreateBase(m_typeNames[selectedIndex.value()]);
+                        pNew = SR_UTILS_NS::Factory::Instance().CreateBase(m_typeNames[selectedIndex.value()]);
                         OnObjectReplaced(pClassValue, pNew);
-                        value.SetSRClass(pNew);
                         feedback.isChanged = true;
                     }
                 }
                 else {
-                    SRClass* pNew = SR_UTILS_NS::Factory::Instance().CreateBase(m_typeNames[selectedIndex.value()]);
+                    pNew = SR_UTILS_NS::Factory::Instance().CreateBase(m_typeNames[selectedIndex.value()]);
                     OnObjectReplaced(pClassValue, pNew);
-                    value.SetSRClass(pNew);
                     feedback.isChanged = true;
+                }
+
+                if (feedback.isChanged && pSharedPtrBase) {
+                    pSharedPtrBase->SetPointerFromBase(dynamic_cast<SR_HTYPES_NS::SharedPtrBase*>(pNew));
                 }
 
                 pClassValue = value.GetSRClass();
