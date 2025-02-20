@@ -27,7 +27,7 @@ if (UNIX)
     message(STATUS "InstallPython: installing clang and libclang...")
 
     execute_process(
-        COMMAND ${SR_PYTHON_EXECUTABLE} -m pip install clang libclang
+        COMMAND ${SR_PYTHON_EXECUTABLE} -m pip install clang==17.0.6 libclang==18.1.1
         RESULT_VARIABLE result
         OUTPUT_VARIABLE output
         ERROR_VARIABLE error_output
@@ -126,7 +126,7 @@ if (NOT UNIX)
     message(STATUS "InstallPython: installing Python packages...")
 
     execute_process(
-        COMMAND "${SR_PYTHON_EXECUTABLE}" -m pip install clang libclang
+        COMMAND "${SR_PYTHON_EXECUTABLE}" -m pip install clang==17.0.6 libclang==18.1.1
         RESULT_VARIABLE result
         OUTPUT_VARIABLE output
         ERROR_VARIABLE error_output

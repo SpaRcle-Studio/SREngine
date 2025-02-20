@@ -16,50 +16,21 @@
 #include <Physics/2D/Rigidbody2D.h>
 #include <Physics/3D/Rigidbody3D.h>
 
-namespace SR_PTYPES_NS {
-    Rigidbody::~Rigidbody() {
-        SR_SAFE_DELETE_PTR(m_shape);
-        SR_SAFE_DELETE_PTR(m_impl);
+#include <Codegen/Rigidbody.generated.hpp>
 
+namespace SR_PTYPES_NS {
+    Rigidbody::Rigidbody() {
+        m_shape->SetRigidbody(this);
+    }
+
+    Rigidbody::~Rigidbody() {
+        m_shape.AutoFree();
+        SR_SAFE_DELETE_PTR(m_impl);
         SetMaterial(nullptr);
-        SetRawMesh(nullptr);
     }
 
     bool Rigidbody::InitializeEntity() noexcept {
-        m_library = SR_PHYSICS_NS::PhysicsLibrary::Instance().GetActiveLibrary(GetMeasurement());
-        if (!m_library) {
-            SR_ERROR("Rigidbody::InitializeEntity() : library not found!");
-            return false;
-        }
-
-        m_shape = m_library->CreateCollisionShape();
-        if (!m_shape) {
-            SR_ERROR("Rigidbody::InitializeEntity() : failed to initialize collision shape!");
-            return false;
-        }
-
-        m_shape->SetRigidbody(this);
-
-        switch (GetMeasurement()) {
-            case SR_UTILS_NS::Measurement::Space2D:
-                m_impl = m_library->CreateRigidbody2DImpl();
-                break;
-            case SR_UTILS_NS::Measurement::Space3D:
-                m_impl = m_library->CreateRigidbody3DImpl();
-                break;
-            default:
-                SR_ERROR("Rigidbody::InitializeEntity() : unknown space type!");
-                return false;
-        }
-
-        if (!m_impl) {
-            SR_ERROR("Rigidbody::InitializeEntity() : failed to allocate implementation!");
-            return false;
-        }
-
-        m_impl->SetRigidbody(this);
-
-        m_properties.AddStandardProperty("Center", &m_center)
+        /*m_properties.AddStandardProperty("Center", &m_center)
             .SetSetter([this](void* pValue){
                 SetCenter(*reinterpret_cast<SR_MATH_NS::FVector3*>(pValue));
             })
@@ -103,13 +74,9 @@ namespace SR_PTYPES_NS {
                 return IsShapeSupported(SR_UTILS_NS::EnumReflector::FromString<ShapeType>(value));
             });
 
-        m_properties.AddExternalProperty(m_shape->GetProperties());
+        m_properties.AddExternalProperty(m_shape->GetProperties());*/
 
         return Entity::InitializeEntity();
-    }
-
-    std::string Rigidbody::GetEntityInfo() const {
-        return Super::GetEntityInfo() + " | " + SR_UTILS_NS::EnumReflector::ToStringAtom(m_shape->GetType()).ToStringRef();
     }
 
     void Rigidbody::OnDestroy() {
@@ -136,7 +103,7 @@ namespace SR_PTYPES_NS {
     }
 
     const Rigidbody::PhysicsScenePtr& Rigidbody::GetPhysicsScene() const {
-        if (!m_physicsScene.Valid()) {
+        if (!m_physicsScene) {
             auto&& pScene = TryGetScene();
             if (!pScene) {
                 static Rigidbody::PhysicsScenePtr empty;
@@ -147,6 +114,23 @@ namespace SR_PTYPES_NS {
         }
 
         return m_physicsScene;
+    }
+
+    void Rigidbody::SetShape(const CollisionShape::Ptr& pShape) {
+        if (m_shape == pShape) {
+            return;
+        }
+
+        if (!pShape) {
+            SRHalt("Rigidbody::SetShape() : shape is nullptr!");
+            return;
+        }
+
+        m_shape.AutoFree();
+        m_shape = pShape;
+        m_shape->SetRigidbody(this);
+
+        SetShapeDirty();
     }
 
     void Rigidbody::OnMatrixDirty() {
@@ -176,7 +160,6 @@ namespace SR_PTYPES_NS {
 
         SetMatrixDirty(false);
 
-        m_shape->SetScale(m_scale);
         m_shape->UpdateMatrix();
 
         return true;
@@ -188,6 +171,16 @@ namespace SR_PTYPES_NS {
 
     float_t Rigidbody::GetMass() const noexcept {
         return m_mass;
+    }
+
+    bool Rigidbody::IsStatic() const noexcept {
+        const ShapeType type = GetCollisionShape()->GetType();
+
+        if (type == ShapeType::Plane3D || type == ShapeType::TriangleMesh2D || type == ShapeType::TriangleMesh3D) {
+            return true;
+        }
+
+        return m_isStatic;
     }
 
     void Rigidbody::SetCenter(const SR_MATH_NS::FVector3& center) {
@@ -301,9 +294,34 @@ namespace SR_PTYPES_NS {
             return false;
         }
 
-        if (m_impl) {
-            m_impl->InitBody();
+        if (!m_impl) {
+            m_library = SR_PHYSICS_NS::PhysicsLibrary::Instance().GetActiveLibrary(GetMeasurement());
+            if (!m_library) {
+                SR_ERROR("Rigidbody::InitBody() : library not found!");
+                return false;
+            }
+
+            switch (GetMeasurement()) {
+            case SR_UTILS_NS::Measurement::Space2D:
+                m_impl = m_library->CreateRigidbody2DImpl();
+                break;
+            case SR_UTILS_NS::Measurement::Space3D:
+                m_impl = m_library->CreateRigidbody3DImpl();
+                break;
+            default:
+                SR_ERROR("Rigidbody::InitBody() : unknown space type!");
+                return false;
+            }
+
+            if (!m_impl) {
+                SR_ERROR("Rigidbody::InitBody() : failed to allocate implementation!");
+                return false;
+            }
+
+            m_impl->SetRigidbody(this);
         }
+
+        m_impl->InitBody();
 
         m_isBodyDirty = false;
 
@@ -323,28 +341,6 @@ namespace SR_PTYPES_NS {
         if ((m_material = pMaterial)) {
             m_material->AddUsePoint();
             m_material->SetRigidbody(this);
-        }
-    }
-
-    void Rigidbody::SetRawMesh(SR_HTYPES_NS::RawMesh* pRawMesh) {
-        if (pRawMesh == m_rawMesh) {
-            return;
-        }
-
-        if (m_rawMesh) {
-            m_rawMesh->RemoveUsePoint();
-        }
-
-        if ((m_rawMesh = pRawMesh)) {
-            m_rawMesh->AddUsePoint();
-        }
-
-        SetShapeDirty(true);
-
-        m_meshId = 0;
-
-        if (m_shape) {
-            m_shape->ReInitDebugShape();
         }
     }
 
@@ -399,7 +395,7 @@ namespace SR_PTYPES_NS {
         }
     }
 
-    bool Rigidbody::IsShapeSupported(ShapeType type) const {
+    bool Rigidbody::IsShapeSupported(const ShapeType type) const {
         if (!m_library || !m_library->IsShapeSupported(type)) {
             return false;
         }
@@ -413,26 +409,5 @@ namespace SR_PTYPES_NS {
         }
 
         return false;
-    }
-
-    void Rigidbody::SetMeshId(uint32_t id) {
-        m_meshId = id;
-        SetShapeDirty(true);
-        if (m_shape) {
-            m_shape->ReInitDebugShape();
-        }
-    }
-
-    void Rigidbody::SetRawMesh(const SR_UTILS_NS::Path& path) {
-        auto&& pRawMesh = SR_HTYPES_NS::RawMesh::Load(path);
-        if (!pRawMesh) {
-            return;
-        }
-
-        SetRawMesh(pRawMesh);
-    }
-
-    void Rigidbody::Start() {
-        Super::Start();
     }
 }

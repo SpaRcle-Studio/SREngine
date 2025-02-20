@@ -12,6 +12,8 @@ namespace SR_CORE_GUI_NS {
 
         SR_UTILS_NS::Reflection::Value value = context.GetValue();
 
+        auto&& editorParams = context.GetEditorParams();
+
         ImGui::PushID(context.pOwner);
         ImGui::PushID(context.GetProperty().GetName().ToCStr());
 
@@ -50,7 +52,7 @@ namespace SR_CORE_GUI_NS {
 
             const ImVec2 mainButtonSize = { SR_MAX(context.fieldTitleWidth - arrowWidth, 0), context.fieldHeight };
 
-            SR_UTILS_NS::StringAtom displayName = context.GetProperty().GetEditorParams().GetDisplayName();
+            SR_UTILS_NS::StringAtom displayName = editorParams.GetDisplayName();
             auto&& stackSize = SR_GRAPH_GUI_NS::BeginForceEnabled();
             if (ImGui::Button(displayName.c_str(), mainButtonSize)) {
                 m_isOpened = !m_isOpened;
@@ -58,7 +60,7 @@ namespace SR_CORE_GUI_NS {
             SR_GRAPH_GUI_NS::EndForceEnabled(stackSize);
         }
 
-        SR_HTYPES_NS::SharedPtr<SR_UTILS_NS::SRClass>& pClass = *reinterpret_cast<SR_HTYPES_NS::SharedPtr<SR_UTILS_NS::SRClass>*>(value.Data());
+        SR_UTILS_NS::SRClass* pClassValue = value.GetSRClass();
 
         if (!context.noHeader) {
             ImGui::SameLine();
@@ -68,7 +70,9 @@ namespace SR_CORE_GUI_NS {
             }
 
             if (m_typeNames.empty()) {
-                m_typeNames.emplace_back("(nullptr)");
+                if (!editorParams.IsNotNull()) {
+                    m_typeNames.emplace_back("(nullptr)");
+                }
 
                 auto&& pMeta = SR_UTILS_NS::Factory::Instance().GetType(typeName);
                 if (pMeta && !pMeta->IsAbstract()) {
@@ -80,12 +84,23 @@ namespace SR_CORE_GUI_NS {
                 }
             }
 
-            auto&& pTypeNameIt = pClass ? std::find(m_typeNames.begin(), m_typeNames.end(), pClass->GetMeta()->GetFactoryName()) : m_typeNames.end();
+            std::vector<std::string>::iterator pTypeNameIt = m_typeNames.end();
+
+            if (pClassValue) {
+                const SR_UTILS_NS::SRClassMeta* pMeta = pClassValue->GetMeta();
+                SRAssert(pMeta);
+                pTypeNameIt = std::find(m_typeNames.begin(), m_typeNames.end(), pMeta->GetFactoryName());
+            }
+
             std::optional<uint64_t> selectedIndex = pTypeNameIt != m_typeNames.end() ? std::make_optional(std::distance(m_typeNames.begin(), pTypeNameIt)) : std::nullopt;
 
             const char* pPrevValue = selectedIndex.has_value() ? m_typeNames[selectedIndex.value()].data() : m_default.c_str();
 
             ImGui::PushItemWidth(context.fieldWidth);
+
+            if (m_typeNames.size() <= 1) {
+                ImGui::BeginDisabled();
+            }
 
             if (ImGui::BeginCombo("##Combo", pPrevValue, ImGuiComboFlags_NoArrowButton)) {
                 if (!m_comboOpened) {
@@ -121,36 +136,42 @@ namespace SR_CORE_GUI_NS {
                 m_searchBuffer.clear();
             }
 
+            if (m_typeNames.size() <= 1) {
+                ImGui::EndDisabled();
+            }
+
             ImGui::PopItemWidth();
 
             if (selectedIndex) {
                 if (m_typeNames[selectedIndex.value()] == "(nullptr)") {
-                    OnObjectReplaced(pClass.Get(), nullptr);
-                    pClass.Reset();
+                    OnObjectReplaced(pClassValue, nullptr);
+                    value.SetSRClass(nullptr);
                     feedback.isChanged = true;
                 }
-                else if (pClass) {
-                    if (m_typeNames[selectedIndex.value()] != pClass->GetMeta()->GetFactoryName()) {
+                else if (pClassValue) {
+                    if (m_typeNames[selectedIndex.value()] != pClassValue->GetMeta()->GetFactoryName()) {
                         SRClass* pNew = SR_UTILS_NS::Factory::Instance().CreateBase(m_typeNames[selectedIndex.value()]);
-                        OnObjectReplaced(pClass.Get(), pNew);
-                        pClass = pNew;
+                        OnObjectReplaced(pClassValue, pNew);
+                        value.SetSRClass(pNew);
                         feedback.isChanged = true;
                     }
                 }
                 else {
                     SRClass* pNew = SR_UTILS_NS::Factory::Instance().CreateBase(m_typeNames[selectedIndex.value()]);
-                    OnObjectReplaced(pClass.Get(), pNew);
-                    pClass = pNew;
+                    OnObjectReplaced(pClassValue, pNew);
+                    value.SetSRClass(pNew);
                     feedback.isChanged = true;
                 }
+
+                pClassValue = value.GetSRClass();
             }
         }
 
-        if (m_isOpened && pClass) {
-            if (m_lastTypeName != pClass->GetMeta()->GetFactoryName()) {
-                m_lastTypeName = pClass->GetMeta()->GetFactoryName();
+        if (m_isOpened && pClassValue) {
+            if (m_lastTypeName != pClassValue->GetMeta()->GetFactoryName()) {
+                m_lastTypeName = pClassValue->GetMeta()->GetFactoryName();
 
-                if (auto&& inspectorName = pClass->GetMeta()->GetInspectorName(); !inspectorName.empty()) {
+                if (auto&& inspectorName = pClassValue->GetMeta()->GetInspectorName(); !inspectorName.empty()) {
                     m_objectDrawer = SR_UTILS_NS::Factory::Instance().Create<ObjectPropertyDrawer>(inspectorName);
                 }
                 if (!m_objectDrawer) {
@@ -164,14 +185,14 @@ namespace SR_CORE_GUI_NS {
             }
 
             PropertyDrawerContext propertyContext = context;
-            auto&& valueRef = SR_UTILS_NS::Reflection::Value::CreateRef(*pClass);
+            auto&& valueRef = SR_UTILS_NS::Reflection::Value::CreateRef(*pClassValue);
             propertyContext.pValue = &valueRef;
             float_t totalWidth = (context.fieldWidth + context.fieldTitleWidth);
             totalWidth -= ((!context.pValue && !context.noHeader) ? context.GetArrowWidth() : 0.f);
             propertyContext.fieldWidth = totalWidth * 0.7f;
             propertyContext.fieldTitleWidth = totalWidth * 0.3f;
             propertyContext.pProperty = nullptr;
-            propertyContext.pOwner = pClass.Get();
+            propertyContext.pOwner = pClassValue;
             propertyContext.noHeader = true;
 
             ImGui::BeginGroup();

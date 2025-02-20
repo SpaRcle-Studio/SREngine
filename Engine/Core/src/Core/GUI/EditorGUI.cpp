@@ -602,14 +602,6 @@ namespace SR_CORE_GUI_NS {
         }
 
         if (ImGui::BeginMenu("Editor")) {
-            if (ImGui::MenuItem("Empty GameObject")) {
-                if (auto&& pScene = m_engine->GetScene()) {
-                    pScene->InstanceGameObject("New GameObject"_atom);
-                }
-            }
-
-            ImGui::Separator();
-
             if (ImGui::MenuItem("Instance from file")) {
                 if (auto&& pScene = m_engine->GetScene(); pScene.RecursiveLockIfValid()) {
                     auto&& resourcesPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
@@ -626,19 +618,118 @@ namespace SR_CORE_GUI_NS {
 
             ImGui::Separator();
 
-            if (ImGui::MenuItem("Instantiate Cube")) {
-                if (auto&& pScene = m_engine->GetScene()) {
-                    auto&& pGameObject = pScene->InstanceGameObject("Cube"_atom);
-                    if (auto&& pRigidbody = pGameObject->AddComponent<SR_PHYSICS_NS::Types::Rigidbody3D>()) {
-                        pRigidbody->SetMass(1.0f);
-                        pRigidbody->SetType(SR_PHYSICS_NS::ShapeType::Box3D);
-                    }
-
-                    auto&& meshes = SR_GTYPES_NS::Mesh::Load("Engine/Models/cube.obj", SR_GRAPH_NS::MeshType::Static);
-                    for (auto&& pMesh : meshes) {
-                        pGameObject->AddComponent(pMesh);
+            if (ImGui::BeginMenu("Instantiate")) {
+                if (ImGui::MenuItem("Empty")) {
+                    if (auto&& pScene = m_engine->GetScene()) {
+                        pScene->InstanceGameObject("New GameObject"_atom);
                     }
                 }
+
+                ImGui::Separator();
+
+                if (ImGui::MenuItem("Cube")) {
+                    if (auto&& pScene = m_engine->GetScene()) {
+                        auto&& pGameObject = pScene->InstanceGameObject("Cube"_atom);
+                        if (auto&& pRigidbody = pGameObject->AddComponent<SR_PHYSICS_NS::Types::Rigidbody3D>()) {
+                            pRigidbody->SetMass(1.0f);
+                            pRigidbody->SetType(SR_PHYSICS_NS::ShapeType::Box3D);
+                        }
+
+                        auto&& meshes = SR_GTYPES_NS::Mesh::Load("Engine/Models/cube.obj", SR_GRAPH_NS::MeshType::Static);
+                        for (auto&& pMesh : meshes) {
+                            pGameObject->AddComponent(pMesh);
+                        }
+                    }
+                }
+
+                ImGui::Separator();
+
+                if (ImGui::MenuItem("Sphere")) {
+                    if (auto&& pScene = m_engine->GetScene()) {
+                        auto&& pGameObject = pScene->InstanceGameObject("Sphere"_atom);
+                        if (auto&& pRigidbody = pGameObject->AddComponent<SR_PHYSICS_NS::Types::Rigidbody3D>()) {
+                            pRigidbody->SetMass(1.0f);
+                            pRigidbody->SetType(SR_PHYSICS_NS::ShapeType::Sphere3D);
+                        }
+
+                        auto&& meshes = SR_GTYPES_NS::Mesh::Load("Engine/Models/sphere.obj", SR_GRAPH_NS::MeshType::Static);
+                        for (auto&& pMesh : meshes) {
+                            pGameObject->AddComponent(pMesh);
+                        }
+                    }
+                }
+
+                ImGui::Separator();
+
+                if (ImGui::MenuItem("Capsule")) {
+                    if (auto&& pScene = m_engine->GetScene()) {
+                        auto&& pGameObject = pScene->InstanceGameObject("Capsule"_atom);
+                        if (auto&& pRigidbody = pGameObject->AddComponent<SR_PHYSICS_NS::Types::Rigidbody3D>()) {
+                            pRigidbody->SetMass(1.0f);
+                            pRigidbody->SetType(SR_PHYSICS_NS::ShapeType::Capsule3D);
+                        }
+
+                        auto&& meshes = SR_GTYPES_NS::Mesh::Load("Engine/Models/capsule.obj", SR_GRAPH_NS::MeshType::Static);
+                        for (auto&& pMesh : meshes) {
+                            pGameObject->AddComponent(pMesh);
+                        }
+                    }
+                }
+
+                ImGui::Separator();
+
+                if (ImGui::MenuItem("Cylinder")) {
+                    if (auto&& pScene = m_engine->GetScene()) {
+                        auto&& pGameObject = pScene->InstanceGameObject("Cylinder"_atom);
+                        if (auto&& pRigidbody = pGameObject->AddComponent<SR_PHYSICS_NS::Types::Rigidbody3D>()) {
+                            pRigidbody->SetMass(1.0f);
+                            pRigidbody->SetType(SR_PHYSICS_NS::ShapeType::Cylinder3D);
+                        }
+
+                        auto&& meshes = SR_GTYPES_NS::Mesh::Load("Engine/Models/cylinder.obj", SR_GRAPH_NS::MeshType::Static);
+                        for (auto&& pMesh : meshes) {
+                            pGameObject->AddComponent(pMesh);
+                        }
+                    }
+                }
+
+                ImGui::Separator();
+
+                if (ImGui::MenuItem("Plane")) {
+                    if (auto&& pScene = m_engine->GetScene()) {
+                        auto&& pGameObject = pScene->InstanceGameObject("Plane"_atom);
+                        if (auto&& pRigidbody = pGameObject->AddComponent<SR_PHYSICS_NS::Types::Rigidbody3D>()) {
+                            pRigidbody->SetMass(1.0f);
+                            pRigidbody->SetType(SR_PHYSICS_NS::ShapeType::Cylinder3D);
+                        }
+
+                        auto&& meshes = SR_GTYPES_NS::Mesh::Load("Engine/Models/plane.obj", SR_GRAPH_NS::MeshType::Static);
+                        for (auto&& pMesh : meshes) {
+                            pGameObject->AddComponent(pMesh);
+                        }
+                    }
+                }
+
+                ImGui::Separator();
+
+                if (ImGui::MenuItem("Statue")) {
+                    if (auto&& pScene = m_engine->GetScene()) {
+                        auto&& pGameObject = pScene->InstanceGameObject("Statue"_atom);
+                        pGameObject->GetTransform()->SetScale(10.f, 10.f, 10.f);
+                        if (auto&& pRigidbody = pGameObject->AddComponent<SR_PHYSICS_NS::Types::Rigidbody3D>()) {
+                            pRigidbody->SetMass(1.0f);
+                            pRigidbody->SetType(SR_PHYSICS_NS::ShapeType::Convex3D);
+                            pRigidbody->GetCollisionShape()->SetRawMesh("Engine/Models/statue.obj");
+                        }
+
+                        auto&& meshes = SR_GTYPES_NS::Mesh::Load("Engine/Models/statue.obj", SR_GRAPH_NS::MeshType::Static);
+                        for (auto&& pMesh : meshes) {
+                            pGameObject->AddComponent(pMesh);
+                        }
+                    }
+                }
+
+                ImGui::EndMenu();
             }
 
             ImGui::EndMenu();

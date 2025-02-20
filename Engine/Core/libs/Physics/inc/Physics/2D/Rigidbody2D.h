@@ -13,9 +13,11 @@ namespace SR_PTYPES_NS {
     };
 
     class Rigidbody2D : public Rigidbody {
+        SR_CLASS()
         using Super = Rigidbody;
-        SR_REGISTER_NEW_COMPONENT(Rigidbody2D, 1007);
+        SR_REGISTER_NEW_COMPONENT(Rigidbody2D, 1008);
     public:
+        bool UseNewSerialization() const noexcept override { return true; }
         SR_NODISCARD SR_UTILS_NS::Measurement GetMeasurement() const override;
 
     };

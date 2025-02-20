@@ -71,18 +71,18 @@ namespace SR_PTYPES_NS {
 
     class Rigidbody : public SR_UTILS_NS::Component {
         friend class SR_PHYSICS_NS::PhysicsScene;
+        SR_CLASS()
     protected:
         using Super = SR_UTILS_NS::Component;
         using LibraryPtr = SR_PHYSICS_NS::LibraryImpl*;
         using PhysicsScenePtr = SR_HTYPES_NS::SafePtr<PhysicsScene>;
     public:
+        Rigidbody();
         ~Rigidbody() override;
 
     public:
         bool UpdateMatrix(bool force = false);
         void Synchronize();
-
-        std::string GetEntityInfo() const override;
 
         void UpdateInertia();
         void ClearForces();
@@ -92,12 +92,12 @@ namespace SR_PTYPES_NS {
 
         SR_NODISCARD bool ExecuteInEditMode() const override { return true; }
         SR_NODISCARD ShapeType GetType() const noexcept;
-        SR_NODISCARD CollisionShape* GetCollisionShape() const noexcept { return m_shape; }
+        SR_NODISCARD const CollisionShape::Ptr& GetCollisionShape() const noexcept { return m_shape; }
         SR_NODISCARD SR_MATH_NS::FVector3 GetCenter() const noexcept;
         SR_NODISCARD SR_MATH_NS::FVector3 GetCenterDirection() const noexcept;
         SR_NODISCARD float_t GetMass() const noexcept;
         SR_NODISCARD bool IsTrigger() const noexcept { return m_isTrigger; }
-        SR_NODISCARD bool IsStatic() const noexcept { return m_isStatic; }
+        SR_NODISCARD bool IsStatic() const noexcept;
         SR_NODISCARD bool IsMatrixDirty() const noexcept { return m_isMatrixDirty; }
         SR_NODISCARD bool IsShapeDirty() const noexcept { return m_isShapeDirty; }
         SR_NODISCARD bool IsBodyDirty() const noexcept { return m_isBodyDirty; }
@@ -105,15 +105,13 @@ namespace SR_PTYPES_NS {
         SR_NODISCARD SR_MATH_NS::FVector3 GetTranslation() const noexcept { return m_translation; }
         SR_NODISCARD SR_MATH_NS::Quaternion GetRotation() const noexcept { return m_rotation; }
         SR_NODISCARD SR_MATH_NS::FVector3 GetScale() const noexcept { return m_scale; }
-        SR_NODISCARD SR_HTYPES_NS::RawMesh* GetRawMesh() const noexcept { return m_rawMesh; }
-        SR_NODISCARD uint32_t GetMeshId() const noexcept { return m_meshId; }
         SR_NODISCARD PhysicsMaterial* GetPhysicsMaterial() const noexcept { return m_material; }
         SR_NODISCARD bool IsDebugEnabled() const noexcept;
         SR_NODISCARD RBUpdShapeRes UpdateShape();
         SR_NODISCARD bool IsShapeSupported(ShapeType type) const;
 
-        void SetMatrixDirty(bool value) { m_isMatrixDirty = value; }
-        void SetShapeDirty(bool value) { m_isShapeDirty = value; }
+        void SetMatrixDirty(const bool value = true) { m_isMatrixDirty = value; }
+        void SetShapeDirty(const bool value = true) { m_isShapeDirty = value; }
 
         virtual void SetIsTrigger(bool value);
         virtual void SetIsStatic(bool value);
@@ -124,9 +122,6 @@ namespace SR_PTYPES_NS {
 
         void SetMaterial(PhysicsMaterial* pMaterial);
         void SetMaterial(const SR_UTILS_NS::Path& path);
-        void SetRawMesh(SR_HTYPES_NS::RawMesh* pRawMesh);
-        void SetRawMesh(const SR_UTILS_NS::Path& path);
-        void SetMeshId(uint32_t id);
 
         bool InitBody();
 
@@ -142,7 +137,6 @@ namespace SR_PTYPES_NS {
         bool UpdateShapeInternal();
 
         void Update(float_t dt) override;
-        void Start() override;
         void OnEnable() override;
         void OnDisable() override;
         void OnAttached() override;
@@ -156,9 +150,20 @@ namespace SR_PTYPES_NS {
             return dynamic_cast<T*>(m_impl);
         }
 
+        void SetShape(const CollisionShape::Ptr& pShape);
+
     protected:
-        /// shape всегда присутствует, но у него может отличаться внутрення реализация
-        CollisionShape::Ptr m_shape = nullptr;
+        /// @property @setter(SetMass) @getter(GetMass) @drag(0.01f)
+        float_t m_mass = 1.f;
+        /// @property @setter(SetIsTrigger) @getter(IsTrigger)
+        bool m_isTrigger = false;
+        /// @property @setter(SetIsStatic) @getter(IsStatic)
+        bool m_isStatic = false;
+        /// @property @setter(SetCenter) @getter(GetCenter) @drag(0.01f)
+        SR_MATH_NS::FVector3 m_center;
+        /// @property @notNull @setter(SetShape)
+        CollisionShape::Ptr m_shape = CollisionShape::MakeShared();
+
         RigidbodyImpl* m_impl = nullptr;
         LibraryPtr m_library = nullptr;
 
@@ -171,21 +176,9 @@ namespace SR_PTYPES_NS {
 
         SR_PTYPES_NS::PhysicsMaterial* m_material = nullptr;
 
-        /// TODO: move to CollisionShape class
-        SR_HTYPES_NS::RawMesh* m_rawMesh = nullptr;
-
-        uint32_t m_meshId = 0;
-
-        SR_MATH_NS::FVector3 m_center;
-
-        bool m_isTrigger = false;
-        bool m_isStatic = false;
-
         bool m_isBodyDirty = true;
         bool m_isMatrixDirty = false;
         bool m_isShapeDirty = false;
-
-        float_t m_mass = 1.f;
 
     };
 }

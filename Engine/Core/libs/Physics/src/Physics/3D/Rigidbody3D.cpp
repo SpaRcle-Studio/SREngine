@@ -8,6 +8,8 @@
 
 #include <Utils/ECS/ComponentManager.h>
 
+#include <Codegen/Rigidbody3D.generated.hpp>
+
 namespace SR_PTYPES_NS {
     SR_UTILS_NS::Measurement Rigidbody3D::GetMeasurement() const {
         return SR_UTILS_NS::Measurement::Space3D;
@@ -66,7 +68,7 @@ namespace SR_PTYPES_NS {
     }
 
     bool Rigidbody3D::InitializeEntity() noexcept {
-        m_properties.AddCustomProperty<SR_UTILS_NS::StandardProperty>("Linear lock")
+        /*m_properties.AddCustomProperty<SR_UTILS_NS::StandardProperty>("Linear lock")
             .SetGetter([this](void* pData) {
                 *reinterpret_cast<SR_MATH_NS::BVector3*>(pData) = GetLinearLock();
             })
@@ -98,7 +100,7 @@ namespace SR_PTYPES_NS {
             })
             .SetType(SR_UTILS_NS::StandardType::FVector3)
             .SetReadOnly()
-            .SetDontSave();
+            .SetDontSave();*/
 
         return Rigidbody::InitializeEntity();
     }

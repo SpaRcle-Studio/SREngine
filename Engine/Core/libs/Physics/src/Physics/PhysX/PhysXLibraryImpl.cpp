@@ -93,8 +93,8 @@ namespace SR_PHYSICS_NS {
         }
     }
 
-    SR_PTYPES_NS::CollisionShape* PhysXLibraryImpl::CreateCollisionShape() {
-        return new SR_PTYPES_NS::PhysXCollisionShape(this);
+    SR_PTYPES_NS::CollisionShapeImpl* PhysXLibraryImpl::CreateCollisionShapeImpl() {
+        return new SR_PTYPES_NS::PhysXCollisionShape();
     }
 
     SR_PTYPES_NS::Rigidbody3DImpl* PhysXLibraryImpl::CreateRigidbody3DImpl() {

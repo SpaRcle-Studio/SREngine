@@ -66,7 +66,7 @@ namespace SR_CORE_GUI_NS {
         SR_UTILS_NS::Reflection::Value* pValue = nullptr;
         SR_UTILS_NS::Reflection::Property const* pProperty = nullptr;
         EditorGUI* pEditor = nullptr;
-        void* pOwner = nullptr;
+        SR_UTILS_NS::SRClass* pOwner = nullptr;
     };
 
     struct PropertyDrawerFeedback {

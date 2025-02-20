@@ -5,8 +5,10 @@
 #ifndef SR_ENGINE_PHYSICS_COLLISION_SHAPE_H
 #define SR_ENGINE_PHYSICS_COLLISION_SHAPE_H
 
+#include <Utils/Serialization/Serializable.h>
 #include <Utils/Common/NonCopyable.h>
 #include <Utils/Types/SafePointer.h>
+#include <Utils/Types/IRawMeshHolder.h>
 #include <Utils/Math/Matrix4x4.h>
 #include <Utils/TypeTraits/Properties.h>
 
@@ -19,23 +21,50 @@ namespace SR_PHYSICS_NS {
 
 namespace SR_PTYPES_NS {
     class Rigidbody;
+    class CollisionShape;
 
-    class CollisionShape : public SR_UTILS_NS::NonCopyable {
+    class CollisionShapeImpl : public SR_UTILS_NS::NonCopyable {
+    public:
+        virtual void Update(float_t dt) { }
+        virtual bool UpdateShape() { return false; }
+        virtual bool UpdateMatrix() { return false; }
+
+        void SetShape(CollisionShape* pShape) { m_shape = pShape; }
+
+        SR_NODISCARD virtual SR_MATH_NS::FVector3 CalculateLocalInertia(float_t mass) const {
+            return SR_MATH_NS::FVector3::Zero();
+        }
+
+        SR_NODISCARD virtual void* GetHandle() const noexcept { return nullptr; }
+        SR_NODISCARD CollisionShape* GetShape() const noexcept { return m_shape; }
+
+    private:
+        CollisionShape* m_shape = nullptr;
+
+    };
+
+    class CollisionShape final : public SR_HTYPES_NS::SharedPtr<CollisionShape>
+        , public SR_HTYPES_NS::IRawMeshHolder
+        , public SR_UTILS_NS::Serializable
+    {
+        SR_CLASS()
         friend class SR_PHYSICS_NS::PhysicsScene;
     public:
         using PhysicsScenePtr = SR_HTYPES_NS::SafePtr<PhysicsScene>;
-        using Ptr = CollisionShape*;
-        using Super = SR_UTILS_NS::NonCopyable;
+        using Ptr = SR_HTYPES_NS::SharedPtr<CollisionShape>;
         using LibraryPtr = SR_PHYSICS_NS::LibraryImpl*;
+
     public:
-        explicit CollisionShape(LibraryPtr pLibrary);
+        CollisionShape();
         ~CollisionShape() override;
 
     public:
-        virtual void Update(float_t dt);
+        void Update(float_t dt);
 
-        virtual bool UpdateShape() { return false; }
-        virtual bool UpdateMatrix() { return false; }
+        void OnRawMeshChanged() override;
+
+        bool UpdateShape();
+        bool UpdateMatrix();
 
         void UpdateDebugShape();
         void RemoveDebugShape();
@@ -48,45 +77,52 @@ namespace SR_PTYPES_NS {
         void SetRadius(float_t radius);
         void SetSize(const SR_MATH_NS::FVector3& size);
         void SetBounds(const SR_MATH_NS::FVector3& bounds);
-        void SetScale(const SR_MATH_NS::FVector3& scale);
         void SetRigidbody(Rigidbody* pRigidbody) { m_rigidbody = pRigidbody; };
 
-        SR_NODISCARD virtual SR_MATH_NS::FVector3 CalculateLocalInertia(float_t mass) const;
+        SR_NODISCARD SR_MATH_NS::FVector3 CalculateLocalInertia(float_t mass) const;
 
         SR_NODISCARD float_t GetHeight() const;
         SR_NODISCARD float_t GetRadius() const;
         SR_NODISCARD SR_MATH_NS::FVector3 GetSize() const;
-        SR_NODISCARD SR_MATH_NS::FVector3 GetScale() const;
         SR_NODISCARD SR_MATH_NS::FVector3 GetBounds() const { return m_bounds; }
         SR_NODISCARD Rigidbody* GetRigidbody() const;
-        SR_NODISCARD SR_UTILS_NS::PropertyContainer* GetProperties() noexcept { return &m_properties; }
 
-        SR_NODISCARD bool Valid() const noexcept;
+        SR_NODISCARD bool HasGeometry() const noexcept;
+        SR_NODISCARD bool IsShapeValid() const noexcept;
         SR_NODISCARD ShapeType GetType() const noexcept;
-        SR_NODISCARD virtual void* GetHandle() const noexcept { return nullptr; }
-
-        template<typename T> SR_NODISCARD T* GetLibrary() const {
-            if (auto&& pLibrary = dynamic_cast<T*>(m_library)) {
-                return pLibrary;
-            }
-
-            SRHalt("Failed to cast library!");
-
-            return nullptr;
-        }
+        SR_NODISCARD void* GetHandle() const noexcept;
 
     protected:
-        SR_UTILS_NS::PropertyContainer m_properties;
-
-        LibraryPtr m_library = nullptr;
+        CollisionShapeImpl* m_impl = nullptr;
         Rigidbody* m_rigidbody = nullptr;
 
-        SR_MATH_NS::FVector3 m_scale;
-        SR_MATH_NS::FVector3 m_bounds;
-
-        ShapeType m_type = ShapeType::Unknown;
-
         uint64_t m_debugId = SR_ID_INVALID;
+
+    protected:
+        /// @property @setter(SetType) @getter(GetType)
+        ShapeType m_type = ShapeType::Unknown;
+        /// @property @setter(SetBounds) @getter(GetBounds) @hidden
+        SR_MATH_NS::FVector3 m_bounds = SR_MATH_NS::FVector3::One();
+
+        /// @virtualProperty(size) @setter(SetSize) @getter(GetSize) @dontSave @drag(0.01f) @resetValue(SR_MATH_NS::FVector3::One())
+        /// @propertyCondition(SR_PHYSICS_UTILS_NS::IsShapeHasSize(This.GetType()))
+        SR_VIRTUAL_PROPERTY
+        /// @virtualProperty(height) @setter(SetHeight) @getter(GetHeight) @dontSave @drag(0.01f) @resetValue(1.f)
+        /// @propertyCondition(SR_PHYSICS_UTILS_NS::IsShapeHasHeight(This.GetType()))
+        SR_VIRTUAL_PROPERTY
+        /// @virtualProperty(radius) @setter(SetRadius) @getter(GetRadius) @dontSave @drag(0.01f) @resetValue(1.f)
+        /// @propertyCondition(SR_PHYSICS_UTILS_NS::IsShapeHasRadius(This.GetType()))
+        SR_VIRTUAL_PROPERTY
+
+        /// @virtualProperty(geometryName) @getter(GetGeometryName) @dontSave @readOnly
+        /// @propertyCondition(This.HasGeometry())
+        SR_VIRTUAL_PROPERTY
+        /// @virtualProperty(meshPath) @getter(GetMeshPath) @setter(SetRawMesh)
+        /// @propertyCondition(This.HasGeometry())
+        SR_VIRTUAL_PROPERTY
+        /// @virtualProperty(meshId) @getter(GetMeshId) @setter(SetMeshId)
+        /// @propertyCondition(This.HasGeometry())
+        SR_VIRTUAL_PROPERTY
 
     };
 }

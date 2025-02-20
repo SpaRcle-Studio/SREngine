@@ -88,9 +88,11 @@ class Property:
         self.setter = None
         self.getter = None
         self.reset_value = None
+        self.property_condition = None
         self.drag_value = None
         self.editor_width = None
         self.read_only = False
+        self.not_null = False
         self.no_header = False
         self.hidden = False
         self.private = False
@@ -361,6 +363,7 @@ def process_property(property_obj, child):
     property_obj.setter = extract_special_tag_comment_data(child, 'setter')
     property_obj.getter = extract_special_tag_comment_data(child, 'getter')
     property_obj.reset_value = extract_special_tag_comment_data(child, 'resetValue')
+    property_obj.property_condition = extract_special_tag_comment_data(child, 'propertyCondition')
     property_obj.drag_value = extract_special_tag_comment_data(child, 'drag')
     property_obj.editor_width = extract_special_tag_comment_data(child, 'editorWidth')
     property_obj.inspector = extract_special_tag_comment_data(child, 'inspector')
@@ -368,6 +371,7 @@ def process_property(property_obj, child):
     if property_obj.virtual and not property_obj.getter:
         raise Exception(f'Virtual property {property_obj.name} must have getter!')
 
+    property_obj.not_null = has_special_tag_comment(child, 'notNull')
     property_obj.hidden = has_special_tag_comment(child, 'hidden')
     property_obj.read_only = has_special_tag_comment(child, 'readOnly')
     property_obj.no_header = has_special_tag_comment(child, 'noHeader')
@@ -583,6 +587,9 @@ def generate_class_meta_properties(f, class_structures, class_obj, tabs):
         f.write('\n' + '\t' * (tabs + 3) + f'.SetGetter(&SRClassMetaTemplate::Get_{prop.name})')
         f.write('\n' + '\t' * (tabs + 3) + f'.SetChangeCallback(&SRClassMetaTemplate::OnChange_{prop.name})')
 
+        if prop.property_condition:
+            f.write('\n' + '\t' * (tabs + 3) + f'.SetPropertyCondition(&SRClassMetaTemplate::IsPropertyActive_{prop.name})')
+
         default_value = f'decltype({class_obj.name}::{prop.name})()'
         if prop.default_value:
             default_value = f'decltype({class_obj.name}::{prop.name})(GetDefault_{prop.serialize_name}())'
@@ -604,6 +611,9 @@ def generate_class_meta_properties(f, class_structures, class_obj, tabs):
 
         if prop.no_header:
             f.write('\n' + '\t' * (tabs + 4) + f'.SetNoHeader()')
+
+        if prop.not_null:
+            f.write('\n' + '\t' * (tabs + 4) + f'.SetNotNull()')
 
         f.write('\n' + '\t' * (tabs + 4) + f'.SetDisplayName("{prop.display_name}")')
 
@@ -673,7 +683,10 @@ def generate_class_meta_save(f, class_obj, tabs):
             continue
 
         if prop.getter:
-            f.write('\t' * tabs + f'{{\n')
+            if prop.property_condition:
+                f.write('\t' * tabs + f'if (IsPropertyActive_{prop.name}(&value)) {{\n')
+            else:
+                f.write('\t' * tabs + f'{{\n')
 
             f.write('\t' * (tabs + 1) + f'auto&& propValue = value.{prop.getter}();\n')
 
@@ -791,6 +804,14 @@ def generate_class_meta(f, class_structures, class_obj, tabs):
         f.write('\t' * tabs + f'// default value for \"{prop}\"\n')
         f.write('\t' * tabs + f'static auto GetDefault_{prop.serialize_name}() {{ return {prop.default_value}; }}\n\n')
 
+    for prop in class_obj.variables:
+        if not prop.property_condition:
+            continue
+        f.write('\t' * tabs + f'static auto IsPropertyActive_{prop.serialize_name}(SR_UTILS_NS::SRClass* pClass) {{\n')
+        f.write('\t' * (tabs + 1) + f'{class_name}& This = *dynamic_cast<{class_name}*>(pClass);\n')
+        f.write('\t' * (tabs + 1) + f'return {prop.property_condition};\n')
+        f.write('\t' * tabs + f'}}\n\n')
+
     #for prop in class_obj.variables:
     #    f.write('\t' * tabs + f'// {prop}\n')
     #    f.write('\t' * tabs + f'const {prop.type_name}& Get_{prop.name}({class_name}* pClass) {{ return pClass->{prop.name}; }}\n')
@@ -832,7 +853,8 @@ def generate_class_meta(f, class_structures, class_obj, tabs):
     f.write('\t' * tabs + f'/// Bindings for class {class_obj.name}\n')
 
     for property in class_obj.variables:
-        f.write('\t' * tabs + f'static void Set_{property.name}(void* pClass, const SR_UTILS_NS::Reflection::Value& value) {{\n')
+        f.write('\t' * tabs + f'static void Set_{property.name}(SR_UTILS_NS::SRClass* pClass, const SR_UTILS_NS::Reflection::Value& value) {{\n')
+        f.write('\t' * (tabs + 1) + f'{class_name}* pClassImpl = dynamic_cast<{class_name}*>(pClass);\n')
 
         #f.write('\t' * (tabs + 1) + f'const decltype({class_name}::{property.name})* pData;\n')
         #f.write('\t' * (tabs + 1) + f'if (!value.Map(pData)) {{\n')
@@ -844,7 +866,6 @@ def generate_class_meta(f, class_structures, class_obj, tabs):
                 f.write('\t' * (tabs + 1) + f'SRHalt("Virtual property {property.name} must have getter and setter!");\n')
                 f.write('\t' * (tabs + 1) + f'return;\n')
             else:
-                f.write('\t' * (tabs + 1) + f'auto&& pClassImpl = (({class_name}*)pClass);\n')
                 f.write('\t' * (tabs + 1) + f'using Type = std::remove_const_t<SR_UTILS_NS::RemoveQualifiersT<decltype(pClassImpl->{property.getter}())>>;\n')
                 f.write('\t' * (tabs + 1) + f'auto&& pData = value.TryCast<Type>();\n')
                 f.write('\t' * (tabs + 1) + f'if (!pData) {{\n')
@@ -862,15 +883,21 @@ def generate_class_meta(f, class_structures, class_obj, tabs):
             f.write('\t' * (tabs + 1) + f'}}\n')
 
             if property.setter:
-                f.write('\t' * (tabs + 1) + f'(({class_name}*)pClass)->{property.setter}(std::move(*pData));\n')
+                f.write('\t' * (tabs + 1) + f'pClassImpl->{property.setter}(std::move(*pData));\n')
             else:
-                f.write('\t' * (tabs + 1) + f'(({class_name}*)pClass)->{property.name} = std::move(*pData);\n')
+                f.write('\t' * (tabs + 1) + f'pClassImpl->{property.name} = std::move(*pData);\n')
 
         f.write('\t' * tabs + f'}}\n')
 
-        f.write('\t' * tabs + f'static SR_UTILS_NS::Reflection::Value Get_{property.name}(void* pClass) {{\n')
+        f.write('\t' * tabs + f'static SR_UTILS_NS::Reflection::Value Get_{property.name}(SR_UTILS_NS::SRClass* pClass) {{\n')
+        f.write('\t' * (tabs + 1) + f'{class_name}* pClassImpl = dynamic_cast<{class_name}*>(pClass);\n')
         if property.getter:
-            f.write('\t' * (tabs + 1) + f'auto&& value = (({class_name}*)pClass)->{property.getter}();\n')
+            f.write('\t' * (tabs + 1) + f'auto&& value = pClassImpl->{property.getter}();\n')
+
+            #f.write('\t' * (tabs + 1) + f'if constexpr (SR_UTILS_NS::IsSharedPointerV<decltype(value)>) {{\n')
+            #f.write('\t' * (tabs + 2) + f'return SR_UTILS_NS::Reflection::Value::TryCreateSRClass(value);\n')
+            #f.write('\t' * (tabs + 1) + f'}} else ')
+
             f.write('\t' * (tabs + 1) + f'if constexpr (std::is_lvalue_reference_v<decltype(value)>) {{\n')
             f.write('\t' * (tabs + 2) + f'if constexpr (std::is_const_v<std::remove_reference_t<decltype(value)>>) {{\n')
             f.write('\t' * (tabs + 3) + f'return SR_UTILS_NS::Reflection::Value::CreateCRef(value);\n')
@@ -881,17 +908,22 @@ def generate_class_meta(f, class_structures, class_obj, tabs):
             f.write('\t' * (tabs + 2) + f'return SR_UTILS_NS::Reflection::Value::Create(std::move(value));\n')
             f.write('\t' * (tabs + 1) + f'}}\n')
         else:
+            #f.write('\t' * (tabs + 1) + f'if constexpr (SR_UTILS_NS::IsSharedPointerV<decltype(pClassImpl->{property.name})>) {{\n')
+            #f.write('\t' * (tabs + 2) + f'return SR_UTILS_NS::Reflection::Value::TryCreateSRClass(pClassImpl->{property.name});\n')
+            #f.write('\t' * (tabs + 1) + f'}}\n')
+
             if property.read_only:
-                f.write('\t' * (tabs + 1) + f'return SR_UTILS_NS::Reflection::Value::CreateCRef((({class_name}*)pClass)->{property.name});\n')
+                f.write('\t' * (tabs + 1) + f'return SR_UTILS_NS::Reflection::Value::CreateCRef(pClassImpl->{property.name});\n')
             else:
-                f.write('\t' * (tabs + 1) + f'return SR_UTILS_NS::Reflection::Value::CreateRef((({class_name}*)pClass)->{property.name});\n')
+                f.write('\t' * (tabs + 1) + f'return SR_UTILS_NS::Reflection::Value::CreateRef(pClassImpl->{property.name});\n')
 
 
         f.write('\t' * tabs + f'}}\n')
 
-        f.write('\t' * tabs + f'static void OnChange_{property.name}(void* pClass) {{\n')
+        f.write('\t' * tabs + f'static void OnChange_{property.name}(SR_UTILS_NS::SRClass* pClass) {{\n')
         if property.change_callback:
-            f.write('\t' * (tabs + 1) + f'(({class_name}*)pClass)->{property.change_callback}();\n')
+            f.write('\t' * (tabs + 1) + f'{class_name}* pClassImpl = dynamic_cast<{class_name}*>(pClass);\n')
+            f.write('\t' * (tabs + 1) + f'pClassImpl->{property.change_callback}();\n')
         f.write('\t' * tabs + f'}}\n')
 
         f.write('\n')

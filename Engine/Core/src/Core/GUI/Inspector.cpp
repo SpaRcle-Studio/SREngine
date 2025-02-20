@@ -461,7 +461,7 @@ namespace SR_CORE_GUI_NS {
             auto&& value = SR_UTILS_NS::Reflection::Value::CreateRef(*pComponent);
             PropertyDrawerContext context(&value);
             context.pEditor = dynamic_cast<EditorGUI*>(GetManager());
-            context.pOwner = pComponent->GetRawPtr();
+            context.pOwner = pComponent;
             context.pComponent = pComponent;
 
             context.lineHeight = lineHeight;

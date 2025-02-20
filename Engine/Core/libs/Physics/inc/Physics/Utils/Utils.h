@@ -112,6 +112,15 @@ namespace SR_PHYSICS_UTILS_NS {
         }
     }
 
+    SR_MAYBE_UNUSED static constexpr bool IsTriangleMesh(ShapeType type) {
+        switch (type) {
+            case ShapeType::TriangleMesh3D:
+                return true;
+            default:
+                return false;
+        }
+    }
+
     SR_MAYBE_UNUSED static constexpr bool IsCylinder(ShapeType type) {
         switch (type) {
             case ShapeType::Cylinder2D:
@@ -120,6 +129,10 @@ namespace SR_PHYSICS_UTILS_NS {
             default:
                 return false;
         }
+    }
+
+    SR_MAYBE_UNUSED static constexpr bool IsShapeHasGeometry(ShapeType type) {
+        return IsConvex(type) || IsTriangleMesh(type);
     }
 
     SR_MAYBE_UNUSED static constexpr bool IsShapeHasRadius(ShapeType type) {
@@ -131,7 +144,7 @@ namespace SR_PHYSICS_UTILS_NS {
     }
 
     SR_MAYBE_UNUSED static constexpr bool IsShapeHasSize(ShapeType type) {
-        return IsBox(type) || type == ShapeType::Plane3D || IsConvex(type);
+        return IsBox(type) || type == ShapeType::Plane3D || IsShapeHasGeometry(type);
     }
 }
 

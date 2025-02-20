@@ -23,7 +23,7 @@ namespace SR_CORE_GUI_NS {
         m_isOpened |= context.noHeader;
         const ImGuiDir_ dir = m_isOpened ? ImGuiDir_Down : ImGuiDir_Right;
 
-        const SR_UTILS_NS::SRClass& classValue = *static_cast<SR_UTILS_NS::SRClass*>(value.Data());
+        SR_UTILS_NS::SRClass* pClassValue = value.GetSRClass();
 
         ImVec2 buttonSize;
 
@@ -64,18 +64,18 @@ namespace SR_CORE_GUI_NS {
             ImGui::SameLine();
 
             ImGui::BeginDisabled();
-            ImGui::Button("{}"_format(classValue.GetMeta()->GetFactoryName()).c_str(), buttonSize);
+            ImGui::Button("{}"_format(pClassValue->GetMeta()->GetFactoryName()).c_str(), buttonSize);
             ImGui::EndDisabled();
         }
 
         if (m_isOpened) {
-            if (const SR_UTILS_NS::SRClassMeta* pMeta = classValue.GetMeta()) {
+            if (const SR_UTILS_NS::SRClassMeta* pMeta = pClassValue->GetMeta()) {
                 if (m_drawers.empty()) {
                     pMeta->ForEachProperty([&](auto&& property, uint64_t index) {
                         SR_UTILS_NS::StringAtom inspector = property.GetEditorParams().GetInspector();
 
                         if (inspector.Empty()) {
-                            inspector = GetValueInspector(property.Get(value.Data()));
+                            inspector = GetValueInspector(property.Get(pClassValue));
                         }
 
                         if (inspector.Empty()) {
@@ -99,11 +99,11 @@ namespace SR_CORE_GUI_NS {
                 totalWidth -= ((!context.pValue && !context.noHeader) ? context.GetArrowWidth() : 0.f);
                 propertyContext.fieldWidth = totalWidth * 0.7f;
                 propertyContext.fieldTitleWidth = totalWidth * 0.3f;
-                propertyContext.pOwner = value.Data();
+                propertyContext.pOwner = pClassValue;
                 propertyContext.noHeader = false;
 
                 pMeta->ForEachProperty([&](auto&& property, uint64_t index) {
-                    if (property.IsHidden()) {
+                    if (property.IsHidden(pClassValue)) {
                         return;
                     }
 

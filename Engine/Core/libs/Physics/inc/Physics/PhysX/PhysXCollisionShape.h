@@ -2,34 +2,34 @@
 // Created by Monika on 25.11.2022.
 //
 
-#ifndef SR_ENGINE_PHYSXCOLLISIONSHAPE_H
-#define SR_ENGINE_PHYSXCOLLISIONSHAPE_H
+#ifndef SR_ENGINE_PHYSX_COLLISION_SHAPE_H
+#define SR_ENGINE_PHYSX_COLLISION_SHAPE_H
 
 #include <Physics/CollisionShape.h>
 
 #include <Physics/PhysX/PhysXUtils.h>
 
 namespace SR_PTYPES_NS {
-    class PhysXCollisionShape : public CollisionShape {
+    class PhysXCollisionShape : public CollisionShapeImpl {
         using Super = CollisionShape;
     public:
-        explicit PhysXCollisionShape(LibraryPtr pLibrary);
         ~PhysXCollisionShape() override;
 
     public:
         bool UpdateShape() override;
         bool UpdateMatrix() override;
 
-        physx::PxMaterial* GetMaterial() const;
+        SR_NODISCARD physx::PxMaterial* GetMaterial() const;
 
-        physx::PxConvexMesh* CreateConvexMesh(SR_HTYPES_NS::RawMesh* pRawMesh);
-        physx::PxTriangleMesh* CreateTriangleMesh(SR_HTYPES_NS::RawMesh* pRawMesh);
+        SR_NODISCARD physx::PxConvexMesh* CreateConvexMesh(SR_HTYPES_NS::RawMesh* pRawMesh);
+        SR_NODISCARD physx::PxTriangleMesh* CreateTriangleMesh(SR_HTYPES_NS::RawMesh* pRawMesh);
 
         SR_NODISCARD void* GetHandle() const noexcept override { return m_shape; }
 
     private:
         physx::PxShape* m_shape = nullptr;
+
     };
 }
 
-#endif //SR_ENGINE_PHYSXCOLLISIONSHAPE_H
+#endif //SR_ENGINE_PHYSX_COLLISION_SHAPE_H

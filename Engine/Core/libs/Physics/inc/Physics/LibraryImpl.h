@@ -10,7 +10,7 @@
 namespace SR_PTYPES_NS {
     class Rigidbody2DImpl;
     class Rigidbody3DImpl;
-    class CollisionShape;
+    class CollisionShapeImpl;
     class PhysicsMaterialImpl;
     class Vehicle4W3D;
 }
@@ -36,7 +36,7 @@ namespace SR_PHYSICS_NS {
         SR_NODISCARD virtual bool IsShapeSupported(ShapeType type) const { return false; }
         SR_NODISCARD virtual ShapeType GetDefaultShape() const { return ShapeType::Unknown; }
 
-        SR_NODISCARD virtual SR_PTYPES_NS::CollisionShape* CreateCollisionShape() { return nullptr; }
+        SR_NODISCARD virtual SR_PTYPES_NS::CollisionShapeImpl* CreateCollisionShapeImpl() { return nullptr; }
 
         SR_NODISCARD virtual SR_PTYPES_NS::Rigidbody2DImpl* CreateRigidbody2DImpl() { SRHalt("Not implemented!"); return nullptr; }
         SR_NODISCARD virtual SR_PTYPES_NS::Rigidbody3DImpl* CreateRigidbody3DImpl() { SRHalt("Not implemented!"); return nullptr; }
