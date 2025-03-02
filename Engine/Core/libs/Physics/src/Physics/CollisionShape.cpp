@@ -39,6 +39,16 @@ namespace SR_PTYPES_NS {
                     SR_FLOAT_MAX
             );
         }
+        else if (SR_PHYSICS_UTILS_NS::IsPlane(type)) {
+            m_debugId = SR_UTILS_NS::DebugDraw::Instance().DrawPlane(
+                    m_debugId,
+                    m_rigidbody->GetTranslation() + m_rigidbody->GetCenterDirection(),
+                    m_rigidbody->GetRotation(),
+                    m_rigidbody->GetScale() * SR_MATH_NS::FVector3(GetPlaneSize().x, 0.f, GetPlaneSize().y),
+                    SR_MATH_NS::FColor(0, 255, 200, 255),
+                    SR_FLOAT_MAX
+            );
+        }
         else if (SR_PHYSICS_UTILS_NS::IsSphere(type)) {
                     m_debugId = SR_UTILS_NS::DebugDraw::Instance().DrawSphere(
                     m_debugId,
@@ -160,6 +170,8 @@ namespace SR_PTYPES_NS {
     }
 
     void CollisionShape::RemoveDebugShape() {
+        SR_TRACY_ZONE;
+
         if (m_debugId != SR_ID_INVALID) {
             SR_UTILS_NS::DebugDraw::Instance().Remove(m_debugId);
             m_debugId = SR_ID_INVALID;
@@ -168,6 +180,12 @@ namespace SR_PTYPES_NS {
 
     void CollisionShape::SetBounds(const SR_MATH_NS::FVector3& bounds) {
         m_bounds = bounds;
+        UpdateDebugShape();
+        UpdateMatrix();
+    }
+
+    void CollisionShape::SetPlaneSize(const SR_MATH_NS::FVector2& size) {
+        m_bounds = SR_MATH_NS::FVector3(size.x, 0.f, size.y);
         UpdateDebugShape();
         UpdateMatrix();
     }

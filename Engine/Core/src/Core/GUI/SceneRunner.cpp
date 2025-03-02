@@ -99,6 +99,7 @@ namespace SR_CORE_NS::GUI {
 
             if (auto&& pDescriptor = GetEditor()->GetIconDescriptor(EditorIcon::Back)) {
                 if (SR_GRAPH_GUI_NS::ImageButton("##imgSceneBackBtn", pDescriptor, SR_MATH_NS::FVector2(32), 3)) {
+                    m_scene->SaveScene();
                     pEngine->SetActive((active = false));
                     pEngine->GetEditor()->LoadSceneFromCachedPath();
                 }
@@ -149,28 +150,17 @@ namespace SR_CORE_NS::GUI {
 
         SR_LOG("SceneRunner::PlayScene() : copying scene: \n\tFrom: " + m_scene->GetAbsPath().ToString() + "\n\tTo: " + runtimePath.ToString());
 
-        if (m_scene->IsPrefab()) {
-            if (!m_scene->GetAbsPath().Copy(runtimePath)) {
-                SR_ERROR("SceneRunner::PlayScene() : failed to copy scene!\n\tSource: "
-                    + m_scene->GetPath().ToString() + "\n\tDestination: " + runtimePath.ToString());
-                return false;
-            }
-        }
-        else {
-            if (!m_scene->GetAbsPath().GetFolder().Copy(runtimePath)) {
-                SR_ERROR("SceneRunner::PlayScene() : failed to copy scene!\n\tSource: "
-                    + m_scene->GetPath().ToString() + "\n\tDestination: " + runtimePath.ToString());
-                return false;
-            }
+        if (!m_scene->GetAbsPath().Copy(runtimePath)) {
+            SR_ERROR("SceneRunner::PlayScene() : failed to copy scene!\n\tSource: "
+                + m_scene->GetPath().ToString() + "\n\tDestination: " + runtimePath.ToString());
+            return false;
         }
 
         if (auto&& runtimeScene = SR_WORLD_NS::Scene::LoadScene(SR_WORLD_NS::Scene::RuntimeScenePath.ConcatExt(extension))) {
             pEngine->AddSceneToQueue(runtimeScene);
             return true;
         }
-        else {
-            return false;
-        }
+        return false;
     }
 
     void SceneRunner::ReturnScene() {

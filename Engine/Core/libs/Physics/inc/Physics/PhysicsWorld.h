@@ -15,7 +15,7 @@ namespace SR_PHYSICS_NS {
     public:
         using Super = SR_UTILS_NS::NonCopyable;
         using LibraryPtr = SR_PHYSICS_NS::LibraryImpl*;
-        using RigidbodyPtr = SR_PTYPES_NS::Rigidbody*;
+        using RigidbodyPtr = SR_HTYPES_NS::SharedPtr<SR_PTYPES_NS::Rigidbody>;
         using Space = SR_UTILS_NS::Measurement;
     public:
         explicit PhysicsWorld(LibraryPtr pLibrary, Space space);

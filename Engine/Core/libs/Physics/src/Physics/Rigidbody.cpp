@@ -100,6 +100,8 @@ namespace SR_PTYPES_NS {
     }
 
     bool Rigidbody::UpdateMatrix(bool force) {
+        SR_TRACY_ZONE;
+
         if ((!force && !IsMatrixDirty())) {
             return false;
         }
@@ -213,6 +215,8 @@ namespace SR_PTYPES_NS {
     }
 
     RBUpdShapeRes Rigidbody::UpdateShape() {
+        SR_TRACY_ZONE;
+
         if (!IsShapeDirty()) {
             return RBUpdShapeRes::Nothing;
         }
@@ -239,6 +243,8 @@ namespace SR_PTYPES_NS {
     }
 
     bool Rigidbody::InitBody() {
+        SR_TRACY_ZONE;
+
         if (!m_isBodyDirty) {
             SRHalt("Rigidbody::InitBody() : body is not dirty!");
             return false;
@@ -329,6 +335,8 @@ namespace SR_PTYPES_NS {
     }
 
     bool Rigidbody::UpdateShapeInternal() {
+        SR_TRACY_ZONE;
+
         if (m_impl) {
             return m_impl->UpdateShapeInternal();
         }

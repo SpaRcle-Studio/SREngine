@@ -410,7 +410,7 @@ namespace SR_CORE_GUI_NS {
         if (!m_selected.empty() && m_scene.RecursiveLockIfValid()) {
             auto&& pEngine = dynamic_cast<EditorGUI*>(GetManager())->GetEngine();
 
-            std::vector<SR_UTILS_NS::ReversibleCommand*> commands;
+            /*std::vector<SR_UTILS_NS::ReversibleCommand*> commands;
             commands.emplace_back(new SR_CORE_NS::Commands::ChangeHierarchySelected(pEngine, this, m_selected, {}));
             for (auto&& selected : m_selected) {
                 if (selected.RecursiveLockIfValid()) {
@@ -419,7 +419,12 @@ namespace SR_CORE_GUI_NS {
                 }
             }
             auto&& cmd = new SR_UTILS_NS::GroupCommand(std::move(commands));
-            pEngine->GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
+            pEngine->GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);*/
+
+            for (auto&& selected : m_selected) {
+                selected->Destroy();
+            }
+
             m_selected.clear();
             m_scene.Unlock();
         }

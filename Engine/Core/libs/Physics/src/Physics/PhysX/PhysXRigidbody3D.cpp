@@ -18,6 +18,8 @@ namespace SR_PTYPES_NS {
     }
 
     void PhysXRigidbody3DImpl::UpdateInertia() {
+        SR_TRACY_ZONE;
+
         if (!m_rigidActor) {
             return;
         }
@@ -28,6 +30,8 @@ namespace SR_PTYPES_NS {
     }
 
     bool PhysXRigidbody3DImpl::InitBody() {
+        SR_TRACY_ZONE;
+
         if (!Super::InitBody()) {
             SRHalt("failed to init base body!");
             return false;
@@ -170,6 +174,8 @@ namespace SR_PTYPES_NS {
     }
 
     bool PhysXRigidbody3DImpl::UpdateShapeInternal() {
+        SR_TRACY_ZONE;
+
         if (!m_rigidActor) {
             SRHalt("m_rigidActor is nullptr!");
             return false;
@@ -208,6 +214,8 @@ namespace SR_PTYPES_NS {
     }
 
     void PhysXRigidbody3DImpl::UpdateLocks() {
+        SR_TRACY_ZONE;
+
         if (!m_rigidActor) {
             return;
         }

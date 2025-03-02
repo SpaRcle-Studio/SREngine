@@ -76,6 +76,10 @@ namespace SR_PTYPES_NS {
         using Super = SR_UTILS_NS::Component;
         using LibraryPtr = SR_PHYSICS_NS::LibraryImpl*;
         using PhysicsScenePtr = SR_HTYPES_NS::SafePtr<PhysicsScene>;
+
+    public:
+        using Ptr = SR_HTYPES_NS::SharedPtr<Rigidbody>;
+
     public:
         Rigidbody();
         ~Rigidbody() override;

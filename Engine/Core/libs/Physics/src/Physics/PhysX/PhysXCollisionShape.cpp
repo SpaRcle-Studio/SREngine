@@ -17,6 +17,8 @@ namespace SR_PTYPES_NS {
     }
 
     bool PhysXCollisionShape::UpdateShape() {
+        SR_TRACY_ZONE;
+
         if (!GetShape()->GetRigidbody()->IsUpdatable()) {
             return false;
         }
@@ -37,6 +39,12 @@ namespace SR_PTYPES_NS {
         }
 
         switch (GetShape()->GetType()) {
+            case ShapeType::Plane3D: {
+                auto&& size = SR_PHYSICS_UTILS_NS::FV3ToPxV3(GetShape()->GetSize());
+                size.y = 0.01f;
+                m_shape = pPhysics->createShape(physx::PxBoxGeometry(size), *pMaterial, true);
+                break;
+            }
             case ShapeType::Box3D: {
                 m_shape = pPhysics->createShape(physx::PxBoxGeometry(SR_PHYSICS_UTILS_NS::FV3ToPxV3(GetShape()->GetSize())), *pMaterial, true);
                 break;
@@ -110,6 +118,8 @@ namespace SR_PTYPES_NS {
     }
 
     bool PhysXCollisionShape::UpdateMatrix() {
+        SR_TRACY_ZONE;
+
         if (!m_shape) {
             return false;
         }
@@ -117,6 +127,12 @@ namespace SR_PTYPES_NS {
         auto&& scale = GetShape()->GetRigidbody() ? GetShape()->GetRigidbody()->GetScale() : SR_MATH_NS::FVector3::One();
 
         switch (GetShape()->GetType()) {
+            case ShapeType::Plane3D: {
+                auto&& size = SR_PHYSICS_UTILS_NS::FV3ToPxV3(GetShape()->GetSize() * scale);
+                size.y = 0.01f;
+                m_shape->setGeometry(physx::PxBoxGeometry(size));
+                break;
+            }
             case ShapeType::Box3D:
                 m_shape->setGeometry(physx::PxBoxGeometry(SR_PHYSICS_UTILS_NS::FV3ToPxV3(GetShape()->GetSize() * scale)));
                 break;
@@ -137,6 +153,8 @@ namespace SR_PTYPES_NS {
     }
 
     physx::PxConvexMesh* PhysXCollisionShape::CreateConvexMesh(SR_HTYPES_NS::RawMesh* pRawMesh) {
+        SR_TRACY_ZONE;
+
         SRAssert(pRawMesh);
 
         const uint32_t meshId = GetShape()->GetMeshId();
@@ -179,6 +197,8 @@ namespace SR_PTYPES_NS {
     }
 
     physx::PxTriangleMesh* PhysXCollisionShape::CreateTriangleMesh(SR_HTYPES_NS::RawMesh* pRawMesh) {
+        SR_TRACY_ZONE;
+
         SRAssert(pRawMesh);
 
         const uint32_t meshId = GetShape()->GetMeshId();

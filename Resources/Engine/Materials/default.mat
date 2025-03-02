@@ -2,7 +2,7 @@ sra format
 0-r:Root
 	1-o:default
 		2-v:shader
-			3-s:Engine/Shaders/SSAO/ssao_geometry.srsl
+			3-s:Engine/Shaders/CascadedShadowMap/spatial.srsl
 		2-o:data
 			3-a:uniforms
 				4-k:i

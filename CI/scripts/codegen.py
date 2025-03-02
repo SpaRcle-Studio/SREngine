@@ -89,6 +89,7 @@ class Property:
         self.getter = None
         self.reset_value = None
         self.property_condition = None
+        self.load_condition = None
         self.drag_value = None
         self.editor_width = None
         self.read_only = False
@@ -371,6 +372,7 @@ def process_property(property_obj, child):
     property_obj.reset_value = extract_special_tag_comment_data(child, 'resetValue')
     property_obj.default_value = extract_special_tag_comment_data(child, 'defaultValue')
     property_obj.property_condition = extract_special_tag_comment_data(child, 'propertyCondition')
+    property_obj.load_condition = extract_special_tag_comment_data(child, 'loadCondition')
     property_obj.drag_value = extract_special_tag_comment_data(child, 'drag')
     property_obj.editor_width = extract_special_tag_comment_data(child, 'editorWidth')
     property_obj.inspector = extract_special_tag_comment_data(child, 'inspector')
@@ -692,12 +694,12 @@ def generate_class_meta_save(f, class_obj, tabs):
         if not prop.getter and prop.virtual:
             continue
 
-        if prop.getter:
-            if prop.property_condition:
-                f.write('\t' * tabs + f'if (IsPropertyActive_{prop.serialize_name}(&value)) {{\n')
-            else:
-                f.write('\t' * tabs + f'{{\n')
+        if prop.property_condition:
+            f.write('\t' * tabs + f'if (IsPropertyActive_{prop.serialize_name}(&value)) {{\n')
+        else:
+            f.write('\t' * tabs + f'{{\n')
 
+        if prop.getter:
             f.write('\t' * (tabs + 1) + f'auto&& propValue = value.{prop.getter}();\n')
 
             if prop.default_value:
@@ -709,15 +711,16 @@ def generate_class_meta_save(f, class_obj, tabs):
             f.write('\t' * (tabs + 2) + f'SR_UTILS_NS::Serialization::Save(serializer, propValue, keyName_{prop.serialize_name});\n')
 
             f.write('\t' * (tabs + 1) + f'}}\n')
-            f.write('\t' * tabs + f'}}\n')
         else:
             if prop.default_value:
-                f.write('\t' * tabs + f'if ((serializer.IsWriteDefaults() || value.{prop.name} != GetDefault_{prop.serialize_name}())) {{\n')
+                f.write('\t' * (tabs + 1) + f'if ((serializer.IsWriteDefaults() || value.{prop.name} != GetDefault_{prop.serialize_name}())) {{\n')
             else:
-                f.write('\t' * tabs + f'if ((serializer.IsWriteDefaults() || !SR_UTILS_NS::IsDefault(value.{prop.name}))) {{\n')
-            f.write('\t' * (tabs + 1) + f'static constexpr SR_UTILS_NS::SerializationId keyName_{prop.serialize_name} = SR_UTILS_NS::SerializationId::Create("{prop.serialize_name}");\n')
-            f.write('\t' * (tabs + 1) + f'SR_UTILS_NS::Serialization::Save(serializer, value.{prop.name}, keyName_{prop.serialize_name});\n')
-            f.write('\t' * tabs + f'}}\n')
+                f.write('\t' * (tabs + 1) + f'if ((serializer.IsWriteDefaults() || !SR_UTILS_NS::IsDefault(value.{prop.name}))) {{\n')
+            f.write('\t' * (tabs + 2) + f'static constexpr SR_UTILS_NS::SerializationId keyName_{prop.serialize_name} = SR_UTILS_NS::SerializationId::Create("{prop.serialize_name}");\n')
+            f.write('\t' * (tabs + 2) + f'SR_UTILS_NS::Serialization::Save(serializer, value.{prop.name}, keyName_{prop.serialize_name});\n')
+            f.write('\t' * (tabs + 1) + f'}}\n')
+
+        f.write('\t' * tabs + f'}}\n')
 
     tabs -= 1
     f.write('\t' * tabs + '}\n\n')
@@ -742,7 +745,11 @@ def generate_class_meta_load(f, class_obj, tabs):
         if (not prop.setter or not prop.getter) and prop.virtual:
             continue
 
-        f.write('\t' * tabs + f'{{\n')
+        if prop.load_condition:
+            f.write('\t' * tabs + f'if (IsPropertyLoadAllowed_{prop.serialize_name}(&value)) {{\n')
+        else:
+            f.write('\t' * tabs + f'{{\n')
+
         f.write('\t' * (tabs + 1) + f'static constexpr SR_UTILS_NS::SerializationId keyName_{prop.serialize_name} = SR_UTILS_NS::SerializationId::Create("{prop.serialize_name}");\n')
 
         if prop.setter:
@@ -829,6 +836,14 @@ def generate_class_meta(f, class_structures, class_obj, tabs):
         f.write('\t' * tabs + f'static auto IsPropertyActive_{prop.serialize_name}(SR_UTILS_NS::SRClass* pClass) {{\n')
         f.write('\t' * (tabs + 1) + f'{class_name}& This = *dynamic_cast<{class_name}*>(pClass);\n')
         f.write('\t' * (tabs + 1) + f'return {prop.property_condition};\n')
+        f.write('\t' * tabs + f'}}\n\n')
+
+    for prop in class_obj.variables:
+        if not prop.load_condition:
+            continue
+        f.write('\t' * tabs + f'static auto IsPropertyLoadAllowed_{prop.serialize_name}(SR_UTILS_NS::SRClass* pClass) {{\n')
+        f.write('\t' * (tabs + 1) + f'{class_name}& This = *dynamic_cast<{class_name}*>(pClass);\n')
+        f.write('\t' * (tabs + 1) + f'return {prop.load_condition};\n')
         f.write('\t' * tabs + f'}}\n\n')
 
     #for prop in class_obj.variables:

@@ -615,7 +615,12 @@ namespace SR_CORE_GUI_NS {
                     auto&& resourcesPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
                     if (auto path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesPath.ToString(), { { "Any model", "prefab,pmx,fbx,obj,blend,dae,abc,stl,ply,glb,gltf,x3d,sfg,bvh,3ds,gltf" } }); !path.IsEmpty()) {
                         /// TODO:Сделать обратимость
-                        pScene->InstanceFromFile(path);
+                        auto&& pObject = pScene->InstanceFromFile(path);
+                        if (auto&& pHierarchy = GetWidget<Hierarchy>(); pHierarchy && pObject) {
+                            if (auto&& selected = pHierarchy->GetSelected(); selected.size() == 1 && *selected.begin()) {
+                                (*selected.begin())->AddChild(pObject);
+                            }
+                        }
                     }
                     pScene.Unlock();
                 }
@@ -708,7 +713,7 @@ namespace SR_CORE_GUI_NS {
                         auto&& pGameObject = pScene->InstanceGameObject("Plane"_atom);
                         if (auto&& pRigidbody = pGameObject->AddComponent<SR_PHYSICS_NS::Types::Rigidbody3D>()) {
                             pRigidbody->SetMass(1.0f);
-                            pRigidbody->SetType(SR_PHYSICS_NS::ShapeType::Cylinder3D);
+                            pRigidbody->SetType(SR_PHYSICS_NS::ShapeType::Plane3D);
                         }
 
                         auto&& meshes = SR_GTYPES_NS::Mesh::Load("Engine/Models/plane.obj", SR_GRAPH_NS::MeshType::Static);

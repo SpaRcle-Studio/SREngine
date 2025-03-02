@@ -64,7 +64,7 @@ namespace SR_CORE_GUI_NS {
                         pMesh->SetMaterial(pMaterial);
                     }
                 }
-                m_platform->GetTransform()->SetScale(2.5, 1.f, 2.5);
+                m_platform->GetTransform()->SetScale(5.f, 1.f, 5.f);
             }
         }
 

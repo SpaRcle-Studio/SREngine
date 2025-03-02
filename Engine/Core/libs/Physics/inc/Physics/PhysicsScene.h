@@ -24,7 +24,7 @@ namespace SR_PHYSICS_NS {
     public:
         using Super = SR_HTYPES_NS::SafePtr<PhysicsScene>;
         using Ptr = Super;
-        using RigidbodyPtr = SR_PTYPES_NS::Rigidbody*;
+        using RigidbodyPtr = SR_HTYPES_NS::SharedPtr<SR_PTYPES_NS::Rigidbody>;
         using PhysicsWorldPtr = SR_PHYSICS_NS::PhysicsWorld*;
         using LibraryPtr = SR_PHYSICS_NS::LibraryImpl*;
         using ScenePtr = SR_HTYPES_NS::SharedPtr<SR_WORLD_NS::Scene>;
@@ -54,8 +54,8 @@ namespace SR_PHYSICS_NS {
         virtual bool CreateDynamicWorld();
 
     private:
-        std::list<SR_PTYPES_NS::Rigidbody*> m_rigidbodyToRemove;
-        std::list<SR_PTYPES_NS::Rigidbody*> m_rigidbodyToRegister;
+        std::list<RigidbodyPtr> m_rigidbodyToRemove;
+        std::list<RigidbodyPtr> m_rigidbodyToRegister;
 
         ScenePtr m_scene;
 

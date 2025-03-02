@@ -17,7 +17,7 @@ namespace SR_PHYSICS_NS {
     { }
 
     PhysicsScene::~PhysicsScene() {
-        auto&& removeRigidbody = [&](SR_PTYPES_NS::Rigidbody* pRigidbody) {
+        auto&& removeRigidbody = [&](const SR_PTYPES_NS::Rigidbody::Ptr& pRigidbody) {
             if (!pRigidbody) {
                 return;
             }

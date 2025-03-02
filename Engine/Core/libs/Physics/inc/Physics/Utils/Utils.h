@@ -93,6 +93,15 @@ namespace SR_PHYSICS_UTILS_NS {
         }
     }
 
+    SR_MAYBE_UNUSED static constexpr bool IsPlane(ShapeType type) {
+        switch (type) {
+            case ShapeType::Plane3D:
+                return true;
+            default:
+                return false;
+        }
+    }
+
     SR_MAYBE_UNUSED static constexpr bool IsCapsule(ShapeType type) {
         switch (type) {
             case ShapeType::Capsule2D:
@@ -144,7 +153,7 @@ namespace SR_PHYSICS_UTILS_NS {
     }
 
     SR_MAYBE_UNUSED static constexpr bool IsShapeHasSize(ShapeType type) {
-        return IsBox(type) || type == ShapeType::Plane3D || IsShapeHasGeometry(type);
+        return IsBox(type) || IsShapeHasGeometry(type);
     }
 }
 

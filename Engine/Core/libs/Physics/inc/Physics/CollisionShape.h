@@ -77,6 +77,7 @@ namespace SR_PTYPES_NS {
         void SetRadius(float_t radius);
         void SetSize(const SR_MATH_NS::FVector3& size);
         void SetBounds(const SR_MATH_NS::FVector3& bounds);
+        void SetPlaneSize(const SR_MATH_NS::FVector2& size);
         void SetRigidbody(Rigidbody* pRigidbody) { m_rigidbody = pRigidbody; };
 
         SR_NODISCARD SR_MATH_NS::FVector3 CalculateLocalInertia(float_t mass) const;
@@ -85,6 +86,7 @@ namespace SR_PTYPES_NS {
         SR_NODISCARD float_t GetRadius() const;
         SR_NODISCARD SR_MATH_NS::FVector3 GetSize() const;
         SR_NODISCARD SR_MATH_NS::FVector3 GetBounds() const { return m_bounds; }
+        SR_NODISCARD SR_MATH_NS::FVector2 GetPlaneSize() const { return SR_MATH_NS::FVector2(m_bounds.x, m_bounds.z); }
         SR_NODISCARD Rigidbody* GetRigidbody() const;
 
         SR_NODISCARD bool HasGeometry() const noexcept;
@@ -112,6 +114,9 @@ namespace SR_PTYPES_NS {
         SR_VIRTUAL_PROPERTY
         /// @virtualProperty(radius) @setter(SetRadius) @getter(GetRadius) @dontSave @drag(0.01f) @resetValue(1.f)
         /// @propertyCondition(SR_PHYSICS_UTILS_NS::IsShapeHasRadius(This.GetType()))
+        SR_VIRTUAL_PROPERTY
+        /// @virtualProperty(plane) @setter(SetPlaneSize) @getter(GetPlaneSize) @dontSave @drag(0.01f) @resetValue(1.f)
+        /// @propertyCondition(SR_PHYSICS_UTILS_NS::IsPlane(This.GetType()))
         SR_VIRTUAL_PROPERTY
 
         /// @virtualProperty(geometryName) @getter(GetGeometryName) @dontSave @readOnly

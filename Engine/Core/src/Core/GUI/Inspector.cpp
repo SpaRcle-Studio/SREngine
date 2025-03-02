@@ -92,8 +92,9 @@ namespace SR_CORE_GUI_NS {
 
             std::string gm_name = m_sceneObject->GetName();
             if (ImGui::InputText("Name", &gm_name, ImGuiInputTextFlags_NoUndoRedo | ImGuiInputTextFlags_EnterReturnsTrue)) {
-                auto&& cmd = new SR_CORE_NS::Commands::GameObjectRename(pEngine, m_sceneObject, gm_name);
-                pEngine->GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
+                //auto&& cmd = new SR_CORE_NS::Commands::GameObjectRename(pEngine, m_sceneObject, gm_name);
+                //pEngine->GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
+                m_sceneObject->SetName(gm_name);
             }
 
             /// --------------------------------------------------------------------------------------------------------
