@@ -5,8 +5,8 @@
 #include <Physics/3D/Vehicle4W3D.h>
 #include <Physics/PhysicsMaterial.h>
 
+#include <Codegen/Vehicle4W3D.generated.hpp>
+
 namespace SR_PTYPES_NS {
-    Vehicle4W3D::Vehicle4W3D(LibraryPtr pLibrary)
-        : Super()
-    { }
+
 }

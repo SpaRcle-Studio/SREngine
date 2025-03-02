@@ -209,7 +209,7 @@ namespace SpaRcle {
         //ESRegisterMethod(EvoScript::Public, generator, Scene, Find, SharedPtr<GameObject>, ESArg1(const std::string& name), ESArg1(name))
         //ESRegisterMethod(EvoScript::Public, generator, Scene, FindOrInstance, SharedPtr<GameObject>, ESArg1(const std::string& name), ESArg1(name))
         ESRegisterMethodArg0(EvoScript::Public, generator, Scene, GetLogicBase, SharedPtr<SceneLogic>)
-        ESRegisterStaticMethod(EvoScript::Public, generator, Scene, New, SharedPtr<Scene>, ESArg1(const std::string& name), ESArg1(name))
+        //ESRegisterStaticMethod(EvoScript::Public, generator, Scene, New, SharedPtr<Scene>, ESArg1(const std::string& name), ESArg1(name))
 
         generator->RegisterNewClass("SceneCubeChunkLogic", "Scene");
 
@@ -335,7 +335,7 @@ namespace SpaRcle {
         ESRegisterCustomMethodArg0(EvoScript::Public, generator, GameObject, GetTag, std::string, {
             return ptr->GetTag().ToString();
         })
-        ESRegisterMethodArg0(EvoScript::Public, generator, GameObject, GetTransform, Transform*)
+        ESRegisterMethodArg0(EvoScript::Public, generator, GameObject, GetTransform, SharedPtr<Transform>)
         ESRegisterCustomMethodArg0(EvoScript::Public, generator, GameObject, GetScene, Scene*, {
             return ptr->GetScene();
         })

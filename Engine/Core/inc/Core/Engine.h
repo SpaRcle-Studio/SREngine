@@ -63,13 +63,13 @@ namespace SR_CORE_NS {
         using RenderScenePtr = SR_HTYPES_NS::SharedPtr<SR_GRAPH_NS::RenderScene>;
     public:
         explicit Engine(Application* pApplication);
-        ~Engine();
+        ~Engine() override;
 
         SR_NODISCARD bool Execute();
 
         void Reload();
 
-        bool SetScene(const ScenePtr& scene);
+        void AddSceneToQueue(const ScenePtr& scene);
         void SetActive(bool isActive);
         void SetPaused(bool isPaused);
         void SetSpeed(float_t speed);
@@ -80,6 +80,7 @@ namespace SR_CORE_NS {
 
         void FixedUpdate();
         bool FlushScene();
+        void LoadStartupScene();
 
         void AddWindow(WindowPtr pWindow);
 

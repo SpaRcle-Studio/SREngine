@@ -23,8 +23,6 @@ namespace SR_AUDIO_NS
         AudioSource();
 
     public:
-        SR_NODISCARD bool UseNewSerialization() const noexcept override { return true; }
-
         void OnMatrixDirty() override;
 
         void SetLoop(bool loop);

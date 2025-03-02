@@ -432,10 +432,18 @@ namespace SR_CORE_GUI_NS {
 
         if (!SR_WORLD_NS::Scene::IsExists(scenePath)) {
             SR_ERROR("EditorGUI::LoadSceneFromCachedPath() : default scene does not exist! \n\tCreating new one by path: " + scenePath.ToStringRef());
-            return m_engine->SetScene(SR_WORLD_NS::Scene::New(scenePath));
+            m_engine->AddSceneToQueue(SR_WORLD_NS::Scene::NewScene(scenePath, SR_WORLD_NS::SceneLogicType::Asset));
+            return true;
         }
 
-        return m_engine->SetScene(SR_WORLD_NS::Scene::Load(scenePath));
+        auto&& pScene = SR_WORLD_NS::Scene::LoadScene(scenePath);
+        if (!pScene) {
+            SR_ERROR("EditorGUI::LoadSceneFromCachedPath() : failed to load scene by path: " + scenePath.ToStringRef());
+            return false;
+        }
+
+        m_engine->AddSceneToQueue(pScene);
+        return true;
     }
 
     void EditorGUI::ReloadWindows() {
@@ -486,7 +494,7 @@ namespace SR_CORE_GUI_NS {
 
         if (ImGui::BeginMenu("File")) {
             if (ImGui::MenuItem("New scene")) {
-                m_engine->SetScene(SR_WORLD_NS::Scene::New(GetNewScenePath()));
+                m_engine->AddSceneToQueue(SR_WORLD_NS::Scene::NewScene(GetNewScenePath(), SR_WORLD_NS::SceneLogicType::Asset));
                 CacheScenePath(m_engine->GetScene()->GetPath());
             }
 
@@ -495,12 +503,12 @@ namespace SR_CORE_GUI_NS {
             if (ImGui::MenuItem("New prefab")) {
                 if (auto&& pScene = m_engine->GetScene(); pScene.RecursiveLockIfValid()) {
                     //TODO: проверку на то, что нынешний префаб не сохранён, чтобы не спамить ими
-                    pScene->Save();
+                    pScene->SaveScene();
                     CacheScenePath(m_engine->GetScene()->GetPath());
                     pScene.Unlock();
                 }
 
-                m_engine->SetScene(SR_WORLD_NS::Scene::New(GetNewPrefabPath()));
+                m_engine->AddSceneToQueue(SR_WORLD_NS::Scene::NewScene(GetNewPrefabPath(), SR_WORLD_NS::SceneLogicType::Prefab));
             }
 
             ImGui::Separator();
@@ -512,20 +520,20 @@ namespace SR_CORE_GUI_NS {
                     path = path.RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetCachePath());
                     path = path.RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetResPath());
 
-                    if (path.GetExtensionView() == "scene") {
+                    /*if (path.GetExtensionView() == "scene") {
                         auto&& folder = SR_UTILS_NS::StringUtils::GetDirToFileFromFullPath(path);
 
-                        if (auto&& pScene = SR_WORLD_NS::Scene::Load(folder)) {
+                        if (auto&& pScene = SR_WORLD_NS::Scene::LoadScene(folder)) {
                             m_engine->SetScene(pScene);
                             CacheScenePath(folder);
                         }
                     }
-                    else {
-                        if (auto&& pScene = SR_WORLD_NS::Scene::Load(path)) {
-                            m_engine->SetScene(pScene);
-                            CacheScenePath(path);
-                        }
+                    else {*/
+                    if (auto&& pScene = SR_WORLD_NS::Scene::LoadScene(path)) {
+                        m_engine->AddSceneToQueue(pScene);
+                        CacheScenePath(path);
                     }
+                    //}
                 }
             }
 
@@ -533,7 +541,7 @@ namespace SR_CORE_GUI_NS {
 
             if (ImGui::MenuItem("Save")) {
                 if (auto&& pScene = m_engine->GetScene(); pScene.RecursiveLockIfValid()) {
-                    pScene->Save();
+                    pScene->SaveScene();
                     pScene.Unlock();
                 }
             }
@@ -550,11 +558,11 @@ namespace SR_CORE_GUI_NS {
                         path = path.RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetCachePath());
                         path = path.RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetResPath());
 
-                        if (pScene->SaveAt(path)) {
+                        if (pScene->SaveSceneAt(path)) {
                             SR_SYSTEM_LOG("GUISystem::BeginMenuBar() : scene is saved as \"" + path.ToString() + "\"");
 
-                            if (auto&& pSavedScene = SR_WORLD_NS::Scene::Load(path)) {
-                                m_engine->SetScene(pSavedScene);
+                            if (auto&& pSavedScene = SR_WORLD_NS::Scene::LoadScene(path)) {
+                                m_engine->AddSceneToQueue(pSavedScene);
                                 CacheScenePath(path);
                             }
                         }
@@ -574,9 +582,9 @@ namespace SR_CORE_GUI_NS {
 
             if (ImGui::MenuItem("Close scene")) {
                 if (auto&& pScene = m_engine->GetScene()) {
-                    pScene->Save();
+                    pScene->SaveScene();
                 }
-                m_engine->SetScene(SR_WORLD_NS::Scene::Empty());
+                m_engine->AddSceneToQueue(SR_WORLD_NS::Scene::CreateEmptyScene());
                 CacheScenePath("NONE");
             }
 

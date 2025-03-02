@@ -8,7 +8,7 @@
 #include <Physics/3D/Vehicle4W3D.h>
 
 namespace SR_PTYPES_NS {
-    class PhysXVehicle4W3D : public Vehicle4W3D {
+    /*class PhysXVehicle4W3D : public Vehicle4W3D {
         using Super = Vehicle4W3D;
     public:
         explicit PhysXVehicle4W3D(LibraryPtr pLibrary);
@@ -38,7 +38,7 @@ namespace SR_PTYPES_NS {
     private:
         physx::PxVehicleWheelsSimData* m_wheelsSimData = nullptr;
         physx::PxRigidDynamic* m_vehActor = nullptr;
-    };
+    };*/
 }
 
 #endif //SR_ENGINE_PHYSXVEHICLE4W3D_H

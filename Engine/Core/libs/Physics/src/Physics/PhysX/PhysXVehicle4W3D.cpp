@@ -7,8 +7,10 @@
 #include <Physics/PhysicsMaterial.h>
 
 namespace SR_PTYPES_NS {
-    PhysXVehicle4W3D::PhysXVehicle4W3D(Super::LibraryPtr pLibrary)
-            : Super(pLibrary)
+    /// TODO: make as private internal implementation.
+
+    /*PhysXVehicle4W3D::PhysXVehicle4W3D(Super::LibraryPtr pLibrary)
+        : Super(pLibrary)
     { }
 
     PhysXVehicle4W3D::~PhysXVehicle4W3D() {
@@ -265,5 +267,5 @@ namespace SR_PTYPES_NS {
 
     void* PhysXVehicle4W3D::GetHandle() const noexcept {
         return nullptr;
-    }
+    }*/
 }

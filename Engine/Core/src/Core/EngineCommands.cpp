@@ -74,8 +74,8 @@ namespace SR_CORE_NS::Commands {
         : Base(pEngine)
     {
         m_path = ptr->GetEntityPath();
-        m_newMarshal = ptr->GetTransform()->SaveLegacy(SR_UTILS_NS::SavableContext(nullptr, SR_UTILS_NS::SavableFlagBits::SAVABLE_FLAG_NONE));
-        m_oldMarshal = pOldMarshal;
+        //m_newMarshal = ptr->GetTransform()->SaveLegacy(SR_UTILS_NS::SavableContext(nullptr, SR_UTILS_NS::SavableFlagBits::SAVABLE_FLAG_NONE));
+        //m_oldMarshal = pOldMarshal;
     }
 
     GameObjectTransform::~GameObjectTransform() {
@@ -92,8 +92,8 @@ namespace SR_CORE_NS::Commands {
             return false;
         }
 
-        SR_HTYPES_NS::Marshal copy = m_newMarshal->Copy();
-        pObject->SetTransform(SR_UTILS_NS::Transform::Load(copy));
+        //SR_HTYPES_NS::Marshal copy = m_newMarshal->Copy();
+        //pObject->SetTransform(SR_UTILS_NS::Transform::Load(copy));
         return true;
     }
 
@@ -105,8 +105,8 @@ namespace SR_CORE_NS::Commands {
             return false;
         }
 
-        SR_HTYPES_NS::Marshal copy = m_oldMarshal->Copy();
-        pObject->SetTransform(SR_UTILS_NS::Transform::Load(copy));
+        //SR_HTYPES_NS::Marshal copy = m_oldMarshal->Copy();
+        //pObject->SetTransform(SR_UTILS_NS::Transform::Load(copy));
         return true;
     }
 
@@ -214,7 +214,7 @@ namespace SR_CORE_NS::Commands {
 
             Чтобы этого избежать, сперва блокируем сцену.
          */
-        if (m_scene.RecursiveLockIfValid()) {
+        /*if (m_scene.RecursiveLockIfValid()) {
             /// резервируем все дерево сущностей, чтобы после отмены команды его можно было восстановить
             m_reserved.Reserve();
             SR_SAFE_DELETE_PTR(m_backup)
@@ -225,7 +225,7 @@ namespace SR_CORE_NS::Commands {
 
             m_scene.Unlock();
             return true;
-        }
+        }*/
 
         return false;
     }
@@ -235,7 +235,7 @@ namespace SR_CORE_NS::Commands {
             return false;
         }
 
-        if (m_scene.RecursiveLockIfValid()) {
+        /*if (m_scene.RecursiveLockIfValid()) {
             SR_UTILS_NS::SceneObject::Ptr ptr = m_scene->Instance(*m_backup);
 
             /// попытка восстановить дочерность объекта
@@ -254,7 +254,7 @@ namespace SR_CORE_NS::Commands {
             SR_SAFE_DELETE_PTR(m_backup)
             m_scene.Unlock();
             return true;
-        }
+        }*/
 
         return false;
     }
@@ -282,7 +282,7 @@ namespace SR_CORE_NS::Commands {
 
         m_scene = m_engine->GetScene();
 
-        if (m_scene.RecursiveLockIfValid()) {
+        /*if (m_scene.RecursiveLockIfValid()) {
             SR_UTILS_NS::SceneObject::Ptr ptr = m_scene->Instance(*m_marshal);
 
             /// попытка восстановить дочерность объекта
@@ -305,7 +305,7 @@ namespace SR_CORE_NS::Commands {
             SR_SAFE_DELETE_PTR(m_marshal)
             m_scene.Unlock();
             return true;
-        }
+        }*/
 
         return false;
     }
@@ -321,7 +321,7 @@ namespace SR_CORE_NS::Commands {
         m_scene = m_engine->GetScene();
 
         /// та же специфичная синхронизация, что и в GameObjectDelete::Redo()
-        if (m_scene) {
+        /*if (m_scene) {
             // SR_HTYPES_NS::SafePtrLockGuard m_lock(m_scene->GetDataStorage().GetValue<SR_GRAPH_NS::RenderScene::Ptr>());
 
             // резервируем все дерево сущностей, чтобы после отмены команды его можно было восстановить
@@ -332,7 +332,7 @@ namespace SR_CORE_NS::Commands {
             }
             pObject->Destroy();
             return true;
-        }
+        }*/
 
         return false;
     }
@@ -363,7 +363,7 @@ namespace SR_CORE_NS::Commands {
     bool HierarchyPaste::Redo() {
         m_scene = m_engine->GetScene();
 
-        if (m_scene.RecursiveLockIfValid()) {
+        /*if (m_scene.RecursiveLockIfValid()) {
             auto &&count = m_marshal->Read<uint64_t>();
             if (count > 1000) {
                 SR_WARN("Hierarchy::Paste() : attempting to insert a large number of objects! Count: " + SR_UTILS_NS::ToString(count));
@@ -400,16 +400,16 @@ namespace SR_CORE_NS::Commands {
 
             m_scene.Unlock();
             return true;
-        }
-        else
-            return false;
+        }*/
+
+        return false;
     }
 
     bool HierarchyPaste::Undo() {
         /// та же специфичная синхронизация, что и в GameObjectDelete::Redo()
         m_scene = m_engine->GetScene();
 
-        if (m_scene) {
+        /*if (m_scene) {
             //SR_HTYPES_NS::SafePtrLockGuard m_lock(m_scene->GetDataStorage().GetValue<SR_GRAPH_NS::RenderScene::Ptr>());
             SR_SAFE_DELETE_PTR(m_marshal)
 
@@ -431,7 +431,7 @@ namespace SR_CORE_NS::Commands {
 
             m_marshal->SetPosition(0);
             return true;
-        }
+        }*/
 
         return false;
     }

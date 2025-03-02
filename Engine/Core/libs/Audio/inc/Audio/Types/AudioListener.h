@@ -18,8 +18,6 @@ namespace SR_AUDIO_NS
         using Super = SR_UTILS_NS::Component;
         using Handle = void*;
     public:
-        SR_NODISCARD bool UseNewSerialization() const noexcept override { return true; }
-
         void OnEnable() override;
         void OnDisable() override;
 

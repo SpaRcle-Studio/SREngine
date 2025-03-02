@@ -299,9 +299,9 @@ namespace SR_CORE_GUI_NS {
                 if (ImGui::Selectable("Edit")) {
                     auto&& pEngine = dynamic_cast<EditorGUI*>(GetManager())->GetEngine();
                     auto&& prefabPath = pSceneObject->GetPrefab()->GetResourcePath();
-                    if (auto&& pScene = SR_WORLD_NS::Scene::Load(prefabPath)) {
+                    if (auto&& pScene = SR_WORLD_NS::Scene::LoadScene(prefabPath)) {
                         pEngine->SetActive(false);
-                        pEngine->SetScene(pScene);
+                        pEngine->AddSceneToQueue(pScene);
                         pEngine->GetEditor()->CacheScenePath(prefabPath);
                     }
                 }
@@ -366,7 +366,7 @@ namespace SR_CORE_GUI_NS {
     }
 
     void Hierarchy::Copy() const {
-        auto&& pMarshal = new SR_HTYPES_NS::Marshal();
+        /*auto&& pMarshal = new SR_HTYPES_NS::Marshal();
 
         pMarshal->Write<std::string>("SRCopyPaste#Hierarchy"); /// Требуется для проверки валидности содержимого буфера обмена в методе Paste()
 
@@ -383,7 +383,7 @@ namespace SR_CORE_GUI_NS {
             SR_UTILS_NS::Platform::TextToClipboard(pMarshal->ToBase64());
         }
 
-        SR_SAFE_DELETE_PTR(pMarshal)
+        SR_SAFE_DELETE_PTR(pMarshal)*/
     }
 
     void Hierarchy::Paste(const SR_UTILS_NS::SceneObject::Ptr& pParent) {

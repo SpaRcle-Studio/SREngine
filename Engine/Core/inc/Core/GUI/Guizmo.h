@@ -16,7 +16,7 @@ namespace SR_GTYPES_NS {
 }
 
 namespace SR_CORE_GUI_NS {
-    enum class EditorSceneViewMode : uint8_t;
+    /*enum class EditorSceneViewMode : uint8_t;
 
     class Guizmo : public SR_UTILS_NS::NonCopyable, public SR_UTILS_NS::InputHandler {
         using GameObjectPtr = SR_UTILS_NS::GameObject::Ptr;
@@ -86,7 +86,7 @@ namespace SR_CORE_GUI_NS {
 
         EnginePtr m_engine;
 
-    };
+    };*/
 }
 
 #endif //SR_ENGINE_GUIZMO_H

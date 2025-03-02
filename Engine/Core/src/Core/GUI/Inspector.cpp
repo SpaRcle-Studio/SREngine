@@ -114,16 +114,16 @@ namespace SR_CORE_GUI_NS {
 
             if (auto&& pGameObject = m_sceneObject.DynamicCast<SR_UTILS_NS::GameObject>()) {
                 auto&& pTransform = pGameObject->GetTransform();
-                auto&& pOldTransform = pTransform->Copy();
+                //auto&& pOldTransform = pTransform->Copy();
 
                 bool changed = false;
 
                 switch (pTransform->GetMeasurement()) {
                     case SR_UTILS_NS::Measurement::Space2D:
-                        changed |= DrawTransform2D(dynamic_cast<SR_UTILS_NS::Transform2D*>(pTransform));
+                        changed |= DrawTransform2D(dynamic_cast<SR_UTILS_NS::Transform2D*>(pTransform.Get()));
                     break;
                     case SR_UTILS_NS::Measurement::Space3D:
-                        changed |= DrawTransform3D(dynamic_cast<SR_UTILS_NS::Transform3D*>(pTransform));
+                        changed |= DrawTransform3D(dynamic_cast<SR_UTILS_NS::Transform3D*>(pTransform.Get()));
                     break;
                     case SR_UTILS_NS::Measurement::SpaceZero:
                     case SR_UTILS_NS::Measurement::Space4D:
@@ -134,20 +134,20 @@ namespace SR_CORE_GUI_NS {
                 changed |= DrawSwitchTransform();
 
                 if (!m_isUsed && changed) {
-                    SR_SAFE_DELETE_PTR(m_oldTransformMarshal)
-                    m_oldTransformMarshal = pOldTransform->SaveLegacy(SR_UTILS_NS::SavableContext(nullptr, SR_UTILS_NS::SavableFlagBits::SAVABLE_FLAG_NONE));
+                    //SR_SAFE_DELETE_PTR(m_oldTransformMarshal)
+                    //m_oldTransformMarshal = pOldTransform->SaveLegacy(SR_UTILS_NS::SavableContext(nullptr, SR_UTILS_NS::SavableFlagBits::SAVABLE_FLAG_NONE));
                     m_isUsed = true;
                 }
 
                 if (m_isUsed && SR_UTILS_NS::Input::Instance().GetMouseUp(SR_UTILS_NS::MouseCode::MouseLeft)) {
-                    auto&& cmd = new SR_CORE_NS::Commands::GameObjectTransform(pEngine, pGameObject, m_oldTransformMarshal->CopyPtr());
-                    pEngine->GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
+                    //auto&& cmd = new SR_CORE_NS::Commands::GameObjectTransform(pEngine, pGameObject, m_oldTransformMarshal->CopyPtr());
+                    //pEngine->GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
 
-                    SR_SAFE_DELETE_PTR(m_oldTransformMarshal)
+                    //SR_SAFE_DELETE_PTR(m_oldTransformMarshal)
                     m_isUsed = false;
                 }
 
-                pOldTransform.AutoFree();
+                //pOldTransform.AutoFree();
             }
 
             DrawComponents(dynamic_cast<SR_UTILS_NS::IComponentable*>(m_sceneObject.Get()));
@@ -160,7 +160,7 @@ namespace SR_CORE_GUI_NS {
         std::string gm_name = m_scene->GetName();
         ImGui::InputText("Name", &gm_name, ImGuiInputTextFlags_ReadOnly);
 
-        auto&& pLogic = m_scene->GetLogicBase().DynamicCast<SR_WORLD_NS::ScenePrefabLogic>();
+        /*auto&& pLogic = m_scene->GetLogicBase().DynamicCast<SR_WORLD_NS::ScenePrefabLogic>();
 
         if (pLogic) {
             InspectTag(pLogic->GetTag(), [pLogic](auto &&tag) {
@@ -170,7 +170,7 @@ namespace SR_CORE_GUI_NS {
             InspectLayer(pLogic->GetLayer(), [pLogic](auto &&tag) {
                 pLogic->SetLayer(tag);
             });
-        }
+        }*/
 
         ImGui::Separator();
 
@@ -491,7 +491,7 @@ namespace SR_CORE_GUI_NS {
                 pComponent->GetParent()->MoveComponent(pComponent, 1);
             }
             if (ImGui::MenuItem("Duplicate")) {
-                auto&& pCopiedComponent = pComponent->CopyComponent();
+                auto&& pCopiedComponent = pComponent->CloneComponent();
                 pComponent->GetParent()->AddComponent(pCopiedComponent);
                 const int32_t distance = (componentIndex + 1) - componentsCount;
                 SRAssert2(distance <= 0, "Invalid distance: {}", distance);

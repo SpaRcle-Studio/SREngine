@@ -163,7 +163,7 @@ namespace SR_CORE_NS {
     void EngineScene::Update(float_t dt) {
         SR_TRACY_ZONE;
 
-        pScene->GetLogicBase()->PostLoad();
+        pScene->GetLogicBase()->Prepare();
         pScene->Prepare();
 
         const bool isPaused = pEngine->IsPaused() || !pEngine->IsActive() || pEngine->HasSceneInQueue();

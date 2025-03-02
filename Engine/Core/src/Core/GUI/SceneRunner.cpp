@@ -128,7 +128,7 @@ namespace SR_CORE_NS::GUI {
 
         SR_LOG("SceneRunner::PlayScene() : playing scene \"" + m_lastPath.ToString() + "\"");
 
-        if (!m_scene->Save()) {
+        if (!m_scene->SaveScene()) {
             SR_ERROR("SceneRunner::PlayScene() : failed to save scene!");
             return false;
         }
@@ -164,8 +164,9 @@ namespace SR_CORE_NS::GUI {
             }
         }
 
-        if (auto&& runtimeScene = SR_WORLD_NS::Scene::Load(SR_WORLD_NS::Scene::RuntimeScenePath.ConcatExt(extension))) {
-            return pEngine->SetScene(runtimeScene);
+        if (auto&& runtimeScene = SR_WORLD_NS::Scene::LoadScene(SR_WORLD_NS::Scene::RuntimeScenePath.ConcatExt(extension))) {
+            pEngine->AddSceneToQueue(runtimeScene);
+            return true;
         }
         else {
             return false;
@@ -175,9 +176,9 @@ namespace SR_CORE_NS::GUI {
     void SceneRunner::ReturnScene() {
         SR_LOG("SceneRunner::ReturnScene() : stopping scene \"" + m_lastPath.ToString() + "\"");
 
-        auto&& originalScene = SR_WORLD_NS::Scene::Load(m_scenePath);
+        auto&& originalScene = SR_WORLD_NS::Scene::LoadScene(m_scenePath);
         auto&& pEngine = dynamic_cast<EditorGUI*>(GetManager())->GetEngine();
-        pEngine->SetScene(originalScene);
+        pEngine->AddSceneToQueue(originalScene);
     }
 
     EditorGUI* SceneRunner::GetEditor() const {

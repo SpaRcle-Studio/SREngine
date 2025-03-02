@@ -110,7 +110,8 @@ namespace SR_PHYSICS_NS {
     }
 
     SR_PTYPES_NS::Vehicle4W3D *PhysXLibraryImpl::CreateVehicle4W3D() {
-        return new SR_PTYPES_NS::PhysXVehicle4W3D(this);
+        //return new SR_PTYPES_NS::PhysXVehicle4W3D(this);
+        return nullptr;
     }
 
     void PhysXLibraryImpl::ConnectPVD() {

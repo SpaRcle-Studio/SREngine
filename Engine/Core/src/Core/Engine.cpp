@@ -172,19 +172,6 @@ namespace SR_CORE_NS {
 
         m_autoReloadResources = SR_UTILS_NS::Features::Instance().Enabled("AutoReloadResources", false);
 
-        if (!m_engineScene && (m_editor && !m_editor->LoadSceneFromCachedPath())) {
-            auto&& scenePath = SR_WORLD_NS::Scene::NewScenePath.ConcatExt("scene");
-
-            if (SR_WORLD_NS::Scene::IsExists(scenePath)) {
-                if (!SetScene(SR_WORLD_NS::Scene::Load(scenePath))) {
-                    SR_ERROR("Engine::Create() : failed to load scene!\n\tPath: " + scenePath.ToString());
-                }
-            }
-            else if (!SetScene(SR_WORLD_NS::Scene::New(scenePath))) {
-                SR_ERROR("Engine::Create() : failed to create new scene!\n\tPath: " + scenePath.ToString());
-            }
-        }
-
         m_threadsWorker = SR_UTILS_NS::ThreadsWorker::Load("Engine/Configs/Threads.yml");
         if (!m_threadsWorker) {
             SR_ERROR("Engine::Create() : failed to load threads worker!");
@@ -332,9 +319,8 @@ namespace SR_CORE_NS {
         return true;
     }
 
-    bool Engine::SetScene(const SR_HTYPES_NS::SharedPtr<SR_WORLD_NS::Scene>& pScene)  {
+    void Engine::AddSceneToQueue(const SR_HTYPES_NS::SharedPtr<SR_WORLD_NS::Scene>& pScene)  {
         m_sceneQueue.Push(pScene);
-        return true;
     }
 
     void Engine::Reload() {
@@ -435,7 +421,7 @@ namespace SR_CORE_NS {
             }
 
             if (m_engineScene && m_engineScene->pScene.RecursiveLockIfValid()) {
-                m_engineScene->pScene->Save();
+                m_engineScene->pScene->SaveScene();
                 m_engineScene->pScene.Unlock();
             }
 
@@ -457,6 +443,31 @@ namespace SR_CORE_NS {
         }
 
         return true;
+    }
+
+    void Engine::LoadStartupScene() {
+        SR_TRACY_ZONE;
+
+        SR_LOG("Engine::LoadStartupScene() : loading startup scene...");
+
+        if (!m_engineScene && (m_editor && !m_editor->LoadSceneFromCachedPath())) {
+            auto&& scenePath = SR_WORLD_NS::Scene::NewScenePath.ConcatExt("scene");
+
+            if (SR_WORLD_NS::Scene::IsExists(scenePath)) {
+                auto&& pScene = SR_WORLD_NS::Scene::LoadScene(scenePath);
+                if (!pScene) {
+                    SR_ERROR("Engine::Create() : failed to load scene! Delete broken new scene\n\tPath: " + scenePath.ToString());
+                    SR_PLATFORM_NS::Delete(SR_WORLD_NS::Scene::GetAbsPath(scenePath));
+                }
+                else {
+                    AddSceneToQueue(pScene);
+                }
+            }
+
+            if (m_sceneQueue.Empty()) {
+                AddSceneToQueue(SR_WORLD_NS::Scene::NewScene(scenePath, SR_WORLD_NS::SceneLogicType::Asset));
+            }
+        }
     }
 
     void Engine::SetGameMode(bool enabled) {

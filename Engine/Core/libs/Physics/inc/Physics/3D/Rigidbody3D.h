@@ -40,8 +40,6 @@ namespace SR_PTYPES_NS {
         SR_NODISCARD SR_MATH_NS::FVector3 GetLinearVelocity() const;
         SR_NODISCARD SR_MATH_NS::FVector3 GetAngularVelocity() const;
 
-        bool UseNewSerialization() const noexcept override { return true; }
-
         void SetLinearLock(const SR_MATH_NS::BVector3& lock);
         void SetAngularLock(const SR_MATH_NS::BVector3& lock);
 

@@ -38,7 +38,7 @@ namespace SR_CORE_GUI_NS {
 
     private:
         Hierarchy* m_hierarchy = nullptr;
-        SR_HTYPES_NS::Marshal* m_marshal = nullptr;
+        //SR_HTYPES_NS::Marshal* m_marshal = nullptr;
 
     };
 }

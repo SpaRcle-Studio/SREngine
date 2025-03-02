@@ -268,7 +268,7 @@ def debug_extract_property_default_value(cursor, deep=0):
     tokens = list(cursor.get_tokens())
     token_strs = [token.spelling for token in tokens]
 
-    print(f'[{deep}] Extract default value for {cursor.kind} \"{cursor.spelling}\" \"{cursor.type.spelling}\", {token_strs}')
+    print(f'[{deep}][Debug] Extract default value for {cursor.kind} \"{cursor.spelling}\" \"{cursor.type.spelling}\", {token_strs}')
 
     for child in cursor.get_children():
         debug_extract_property_default_value(child, deep + 1)
@@ -282,6 +282,8 @@ def extract_property_default_value(cursor):
     namespace_stack = []
     tokens = list(cursor.get_tokens())
     token_strs = [token.spelling for token in tokens]
+
+    print(f'Extract default value for {cursor.spelling}, {token_strs}')
 
     for child in cursor.get_children():
         tokens = list(child.get_tokens())
@@ -303,6 +305,9 @@ def extract_property_default_value(cursor):
         if child.kind == clang.cindex.CursorKind.NAMESPACE_REF:
             namespace_stack.append(child.spelling)
             continue
+        #if child.kind == clang.cindex.CursorKind.TYPE_REF:
+        #    namespace_stack.append(child.spelling)
+        #    continue
         if child.kind == clang.cindex.CursorKind.CALL_EXPR:
             if len(token_strs) == 0:
                 namespace = '::'.join(namespace_stack)
@@ -316,6 +321,7 @@ def extract_property_default_value(cursor):
                     expression += token.spelling
                 return expression
 
+    print(f'Default value not found for {cursor.spelling}')
     return None
 
 #def extract_property_default_value(cursor):
@@ -363,6 +369,7 @@ def process_property(property_obj, child):
     property_obj.setter = extract_special_tag_comment_data(child, 'setter')
     property_obj.getter = extract_special_tag_comment_data(child, 'getter')
     property_obj.reset_value = extract_special_tag_comment_data(child, 'resetValue')
+    property_obj.default_value = extract_special_tag_comment_data(child, 'defaultValue')
     property_obj.property_condition = extract_special_tag_comment_data(child, 'propertyCondition')
     property_obj.drag_value = extract_special_tag_comment_data(child, 'drag')
     property_obj.editor_width = extract_special_tag_comment_data(child, 'editorWidth')
@@ -387,9 +394,10 @@ def process_property(property_obj, child):
     property_obj.display_name = make_display_name(property_obj.name)
     property_obj.serialize_name = make_serialize_property_name(property_obj.name)
 
-    property_obj.default_value = extract_property_default_value(child)
-    if property_obj.default_value:
-        print(f'Found default value: {property_obj.default_value}')
+    if not property_obj.default_value:
+        property_obj.default_value = extract_property_default_value(child)
+        if property_obj.default_value:
+            print(f'Found default value: {property_obj.default_value}')
 
 def parse_tree(file_path, deep, parent_node, code_structure, namespaces):
     try:
@@ -481,6 +489,8 @@ def parse_tree(file_path, deep, parent_node, code_structure, namespaces):
 
             # Перебираем все поля класса
             for child in parent_node.get_children():
+                #print(f'Fount class child: {child.spelling}, {child.kind}')
+
                 if child.kind == clang.cindex.CursorKind.CXX_BASE_SPECIFIER:
                     class_obj.inherited_classes.append(child.spelling)
                     continue
@@ -588,7 +598,7 @@ def generate_class_meta_properties(f, class_structures, class_obj, tabs):
         f.write('\n' + '\t' * (tabs + 3) + f'.SetChangeCallback(&SRClassMetaTemplate::OnChange_{prop.name})')
 
         if prop.property_condition:
-            f.write('\n' + '\t' * (tabs + 3) + f'.SetPropertyCondition(&SRClassMetaTemplate::IsPropertyActive_{prop.name})')
+            f.write('\n' + '\t' * (tabs + 3) + f'.SetPropertyCondition(&SRClassMetaTemplate::IsPropertyActive_{prop.serialize_name})')
 
         default_value = f'decltype({class_obj.name}::{prop.name})()'
         if prop.default_value:
@@ -684,7 +694,7 @@ def generate_class_meta_save(f, class_obj, tabs):
 
         if prop.getter:
             if prop.property_condition:
-                f.write('\t' * tabs + f'if (IsPropertyActive_{prop.name}(&value)) {{\n')
+                f.write('\t' * tabs + f'if (IsPropertyActive_{prop.serialize_name}(&value)) {{\n')
             else:
                 f.write('\t' * tabs + f'{{\n')
 

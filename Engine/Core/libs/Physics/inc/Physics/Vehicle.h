@@ -21,8 +21,6 @@ namespace SR_PTYPES_NS {
         using PhysicsScenePtr = SR_HTYPES_NS::SafePtr<PhysicsScene>;
 
     public:
-        SR_NODISCARD bool UseNewSerialization() const noexcept override { return true; }
-
         SR_NODISCARD virtual SR_UTILS_NS::Measurement GetMeasurement() const;
         SR_NODISCARD VehicleInternalData& GetVehicleData() { return m_internalData; }
         SR_NODISCARD virtual void* GetHandle() const noexcept = 0;

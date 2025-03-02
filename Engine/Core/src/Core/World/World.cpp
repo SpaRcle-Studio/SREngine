@@ -34,9 +34,8 @@ namespace SR_CORE_NS {
             aiString diffuseTexturePath;
             if (pMaterial->GetTexture(aiTextureType_DIFFUSE, 0, &diffuseTexturePath) == aiReturn_SUCCESS) {
                 if (auto&& pTexture = SR_GTYPES_NS::Texture::Load(diffuseTexturePath.C_Str())) {
-                    pTexture->AddUsePoint();
                     pMesh->GetMaterial()->SetTexture("diffuse", pTexture);
-                    pTexture->RemoveUsePoint();
+                    pTexture->CheckResourceUsage();
                 }
             }
         };

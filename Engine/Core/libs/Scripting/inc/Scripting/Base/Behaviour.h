@@ -83,8 +83,6 @@ namespace SR_SCRIPTING_NS {
         void Reload();
         void OnBehaviourChanged();
 
-        SR_NODISCARD bool UseNewSerialization() const noexcept override { return true; }
-
         void Save(SR_UTILS_NS::ISerializer& serializer) const override;
         void Load(SR_UTILS_NS::IDeserializer& deserializer) override;
 
