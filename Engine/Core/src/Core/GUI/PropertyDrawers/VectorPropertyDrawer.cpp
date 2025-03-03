@@ -97,7 +97,7 @@ namespace SR_CORE_GUI_NS {
         if (m_isOpened) {
             for (auto&& pIt = container.begin(); pIt != container.end(); ++pIt) {
                 SR_UTILS_NS::Reflection::Value element = *pIt;
-                uint64_t index = std::distance(container.begin(), pIt);
+                uint64_t index = SR_UTILS_NS::Distance(container.begin(), pIt);
                 ImGui::PushID(index);
 
                 ImVec2 itemButtonSize = { 40, context.fieldHeight };
