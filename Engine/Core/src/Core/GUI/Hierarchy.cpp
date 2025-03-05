@@ -287,30 +287,32 @@ namespace SR_CORE_GUI_NS {
                 Delete();
             }
 
-            if (pSceneObject->GetPrefab()) {
-                ImGui::Separator();
+            if (pSceneObject) {
+                if (pSceneObject->GetPrefab()) {
+                    ImGui::Separator();
 
-                if (ImGui::Selectable("Break link")) {
-                    pSceneObject->UnlinkPrefab();
-                }
+                    if (ImGui::Selectable("Break link")) {
+                        pSceneObject->UnlinkPrefab();
+                    }
 
-                ImGui::Separator();
+                    ImGui::Separator();
 
-                if (ImGui::Selectable("Edit")) {
-                    auto&& pEngine = dynamic_cast<EditorGUI*>(GetManager())->GetEngine();
-                    auto&& prefabPath = pSceneObject->GetPrefab()->GetResourcePath();
-                    if (auto&& pScene = SR_WORLD_NS::Scene::LoadScene(prefabPath)) {
-                        pEngine->SetActive(false);
-                        pEngine->AddSceneToQueue(pScene);
-                        pEngine->GetEditor()->CacheScenePath(prefabPath);
+                    if (ImGui::Selectable("Edit")) {
+                        auto&& pEngine = dynamic_cast<EditorGUI*>(GetManager())->GetEngine();
+                        auto&& prefabPath = pSceneObject->GetPrefab()->GetResourcePath();
+                        if (auto&& pScene = SR_WORLD_NS::Scene::LoadScene(prefabPath)) {
+                            pEngine->SetActive(false);
+                            pEngine->AddSceneToQueue(pScene);
+                            pEngine->GetEditor()->CacheScenePath(prefabPath);
+                        }
                     }
                 }
-            }
 
-            if (pSceneObject->GetSceneObjectType() == SR_UTILS_NS::SceneObjectType::GameObject) {
-                ImGui::Separator();
-                if (ImGui::Selectable("Add child game object")) {
-                    pSceneObject->AddChild(pSceneObject->GetScene()->InstanceGameObject("New GameObject"_atom).StaticCast<SR_UTILS_NS::SceneObject>());
+                if (pSceneObject->GetSceneObjectType() == SR_UTILS_NS::SceneObjectType::GameObject) {
+                    ImGui::Separator();
+                    if (ImGui::Selectable("Add child game object")) {
+                        pSceneObject->AddChild(pSceneObject->GetScene()->InstanceGameObject("New GameObject"_atom).StaticCast<SR_UTILS_NS::SceneObject>());
+                    }
                 }
             }
 

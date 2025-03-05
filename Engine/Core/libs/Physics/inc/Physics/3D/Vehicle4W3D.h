@@ -9,10 +9,10 @@
 #include <Physics/WheelInternalData.h>
 
 namespace SR_PTYPES_NS {
+    /// @category(Physics)
     class Vehicle4W3D : public Vehicle {
         using Super = Vehicle;
         SR_CLASS()
-        SR_REGISTER_NEW_COMPONENT(Vehicle4W3D, 1000);
     public:
         using WheelsData = WheelInternalData[4];
 

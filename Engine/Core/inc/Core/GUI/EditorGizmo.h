@@ -10,8 +10,9 @@
 namespace SR_CORE_GUI_NS {
     class Hierarchy;
 
+    /// @category(Editor)
     class EditorGizmo final : public SR_GRAPH_UI_NS::Gizmo {
-        SR_REGISTER_NEW_COMPONENT(EditorGizmo, 1000);
+        SR_CLASS()
         using Super = SR_GRAPH_UI_NS::Gizmo;
     public:
         EditorGizmo();

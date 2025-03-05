@@ -16,7 +16,7 @@ namespace SR_CORE_GUI_NS {
         virtual void OnObjectReplaced(SRClass* pOld, SRClass* pNew) { }
 
     private:
-        std::string_view m_lastTypeName;
+        SR_UTILS_NS::StringAtom m_lastTypeName;
         std::string m_default;
         std::string m_searchBuffer;
         bool m_comboOpened = false;

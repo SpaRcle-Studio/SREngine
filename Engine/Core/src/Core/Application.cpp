@@ -251,8 +251,6 @@ namespace SR_CORE_NS {
             delete pEngine;
         });
 
-        SR_UTILS_NS::ComponentManager::Instance().SetContextInitializer(SR_HTYPES_NS::Function<void(SR_HTYPES_NS::DataStorage&)>());
-
         SR_SRLM_NS::DataTypeManager::DestroySingleton();
 
         SR_CORE_NS::EditorSettings::DestroySettings();

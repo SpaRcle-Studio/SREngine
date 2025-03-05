@@ -25,6 +25,10 @@ namespace SR_CORE_GUI_NS {
     class Hierarchy;
 
     class Inspector : public SR_GRAPH_GUI_NS::Widget {
+        struct ComponentCategory {
+            std::vector<SR_UTILS_NS::StringAtom> components;
+            std::map<SR_UTILS_NS::StringAtom, ComponentCategory> categories;
+        };
     public:
         Inspector() = default;
         explicit Inspector(Hierarchy* hierarchy);
@@ -50,13 +54,19 @@ namespace SR_CORE_GUI_NS {
         bool DrawTransform2D(SR_UTILS_NS::Transform2D* transform) const;
         bool DrawTransform3D(SR_UTILS_NS::Transform3D* transform);
 
-        void DrawComponentProperties(SR_UTILS_NS::Component* pComponent);
-
         SR_MAYBE_UNUSED void BackupTransform(const SR_UTILS_NS::GameObject::Ptr& ptr, const std::function<void()>& operation) const;
 
         void DrawComponent(SR_UTILS_NS::Component* pComponent, uint32_t& index);
 
     private:
+        void DrawComponentCategory(SR_UTILS_NS::IComponentable* pComponentable, ComponentCategory& category, SR_UTILS_NS::StringAtom categoryName);
+
+    private:
+        std::string m_componentSearchBuffer;
+
+        std::vector<SR_UTILS_NS::StringAtom> m_availableComponents;
+        ComponentCategory m_componentsCategories;
+
         std::list<SR_UTILS_NS::Component::Ptr> m_pointersHolder;
         SR_UTILS_NS::SceneObject::Ptr m_sceneObject;
         Hierarchy* m_hierarchy = nullptr;

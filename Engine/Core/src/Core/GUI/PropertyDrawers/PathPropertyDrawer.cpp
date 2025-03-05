@@ -18,13 +18,35 @@ namespace SR_CORE_GUI_NS {
         ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2{ 0, 0 });
 
         if (!context.pValue || !context.GetPropertyDisplayName().empty()) {
-            const ImVec2 buttonSize = { context.fieldTitleWidth, context.fieldHeight };
+            const bool isPickingEnabled = context.GetEditorParams().GetCustomArg("pick") == "enabled";
+
+            const ImVec2 buttonSize = isPickingEnabled ?
+                ImVec2(context.fieldTitleWidth * 0.75f, context.fieldHeight) :
+                ImVec2(context.fieldTitleWidth, context.fieldHeight);
 
             if (ImGui::Button(context.GetPropertyDisplayName().c_str(), buttonSize)) {
                 if (context.pProperty) {
                     feedback.isChanged = true;
                     value = context.GetProperty().GetResetValue() ? context.GetProperty().GetResetValue() : context.GetProperty().GetDefaultValue();
                     value = value.DetachIfConst();
+                }
+            }
+
+            if (isPickingEnabled) {
+                ImGui::SameLine();
+
+                if (ImGui::Button("Pick", ImVec2(context.fieldTitleWidth * 0.25f, context.fieldHeight))) {
+                    auto&& filterName = context.GetEditorParams().GetCustomArg("filter name");
+                    auto&& filterValue = context.GetEditorParams().GetCustomArg("filter value");
+                    if (!filterName.empty() && !filterValue.empty()) {
+                        auto&& resourcesPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
+                        auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesPath, { { filterName, filterValue } });
+
+                        if (auto&& pPath = value.TryCast<SR_UTILS_NS::Path>(); pPath && !path.empty()) {
+                            feedback.isChanged = true;
+                            *pPath = path;
+                        }
+                    }
                 }
             }
 

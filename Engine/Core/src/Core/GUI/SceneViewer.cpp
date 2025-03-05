@@ -460,11 +460,11 @@ namespace SR_CORE_GUI_NS {
                 return;
             }
 
-            auto&& pComponent = SR_UTILS_NS::ComponentManager::Instance().CreateComponent<EditorGizmo>();
+            auto&& pComponent = SR_UTILS_NS::Factory::Instance().Create<EditorGizmo>();
             pComponent->SetOperation(GetSceneTools()->GetGizmoOperation());
             pComponent->SetMode(GetSceneTools()->GetGizmoMode());
             pComponent->SetHierarchy(m_hierarchy);
-            gizmo->AddComponent(pComponent);
+            gizmo->AddComponent(pComponent.StaticCast<SR_UTILS_NS::Component>());
         }
 
         if (m_gizmo) {

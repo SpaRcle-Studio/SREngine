@@ -12,9 +12,9 @@ namespace SR_AUDIO_NS
 {
     class SoundListener;
 
+    /// @category(Sound)
     class AudioListener : public SR_UTILS_NS::Component {
         SR_CLASS()
-        SR_REGISTER_NEW_COMPONENT(AudioListener, 1004);
         using Super = SR_UTILS_NS::Component;
         using Handle = void*;
     public:

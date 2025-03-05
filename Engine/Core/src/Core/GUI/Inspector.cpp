@@ -31,7 +31,34 @@ namespace SR_CORE_GUI_NS {
     Inspector::Inspector(Hierarchy* hierarchy)
         : SR_GRAPH_GUI_NS::Widget("Inspector")
         , m_hierarchy(hierarchy)
-    { }
+    {
+        m_availableComponents = SR_UTILS_NS::Factory::Instance().GetInheritances(SR_UTILS_NS::Component::GetClassStaticName());
+
+        std::erase_if(m_availableComponents, [](auto&& name) {
+            auto&& pMeta = SR_UTILS_NS::Factory::Instance().GetType(name);
+            return pMeta->IsAbstract() || pMeta->IsHidden();
+        });
+
+        for (auto&& name : m_availableComponents) {
+            auto&& category = SR_UTILS_NS::Factory::Instance().GetType(name)->GetCategory();
+            if (category.empty()) {
+                m_componentsCategories.categories["Misc"].components.emplace_back(name);
+            }
+            else {
+                ComponentCategory* pCategory = nullptr;
+                for (auto&& cat : category) {
+                    if (pCategory) {
+                        pCategory = &pCategory->categories[cat];
+                    }
+                    else {
+                        pCategory = &m_componentsCategories.categories[cat];
+                    }
+                }
+                SRAssert(pCategory);
+                pCategory->components.emplace_back(name);
+            }
+        }
+    }
 
     void Inspector::Draw() {
         SR_LOCK_GUARD;
@@ -204,24 +231,6 @@ namespace SR_CORE_GUI_NS {
 
         SR_GRAPH_GUI_NS::DrawTextOnCenter("Components");
 
-        ImGuiStyle& style = ImGui::GetStyle();
-
-        float_t button_sz = ImGui::GetFrameHeight();
-        float_t spacing = style.ItemInnerSpacing.x;
-        float_t width = (ImGui::GetWindowWidth() - 70.f) - spacing * 2.0f - button_sz * 2.0f;
-
-        ImGui::PushItemWidth(width);
-        if (ImGui::BeginCombo("Add component", nullptr, ImGuiComboFlags_NoArrowButton)) {
-            for (auto&& name : SR_UTILS_NS::ComponentManager::Instance().GetComponentsNames()) {
-                if (ImGui::Selectable(name.c_str(), false)) {
-                    auto&& pNewComponent = SR_UTILS_NS::ComponentManager::Instance().CreateComponentOfName(name);
-                    pIComponentable->AddComponent(pNewComponent);
-                }
-            }
-            ImGui::EndCombo();
-        }
-        ImGui::PopItemWidth();
-
         uint32_t index = 0;
 
         std::erase_if(m_componentContexts, [&](auto&& pair) {
@@ -232,6 +241,20 @@ namespace SR_CORE_GUI_NS {
             DrawComponent(pComponent.Get(), index);
             return true;
         });
+
+        ImGui::Dummy(ImGui::GetContentRegionAvail());
+
+        if (ImGui::IsItemClicked(ImGuiMouseButton_Right)) {
+            m_componentSearchBuffer.clear();
+            ImGui::OpenPopup("InspectorAddComponentPopup");
+        }
+
+        if (ImGui::BeginPopup("InspectorAddComponentPopup")) {
+            ImGui::InputText("##search", &m_componentSearchBuffer);
+            ImGui::Separator();
+            DrawComponentCategory(pIComponentable, m_componentsCategories, "Misc");
+            ImGui::EndPopup();
+        }
     }
 
     bool Inspector::DrawTransform2D(SR_UTILS_NS::Transform2D *pTransform) const {
@@ -375,13 +398,6 @@ namespace SR_CORE_GUI_NS {
         return false;
     }
 
-    void Inspector::DrawComponentProperties(SR_UTILS_NS::Component* pComponent) {
-        auto&& properties = pComponent->GetComponentProperties();
-        SR_CORE_GUI_NS::DrawPropertyContext context;
-        context.pEditor = dynamic_cast<EditorGUI*>(GetManager());
-        SR_CORE_GUI_NS::DrawPropertyContainer(context, &properties);
-    }
-
     void Inspector::DrawComponent(SR_UTILS_NS::Component* pComponent, uint32_t &index) {
         auto&& pContext = dynamic_cast<EditorGUI*>(GetManager());
 
@@ -395,16 +411,16 @@ namespace SR_CORE_GUI_NS {
 
         ++index;
 
-        std::string headerName = SR_FORMAT("[{}] {}", index, pComponent->GetComponentName().c_str(), (void*)pComponent);
+        const std::string headerName = "[{}] {}"_format(index, pComponent->GetMeta()->GetFactoryName());
 
         bool enabled = pComponent->IsEnabled();
-        if (ImGui::Checkbox(SR_FORMAT("##{}{}ckb", pComponent->GetComponentName().c_str(), (void*)pComponent).c_str(), &enabled)) {
+        if (ImGui::Checkbox("##componentEnabled", &enabled)) {
             pComponent->SetEnabled(enabled);
         }
 
         ImGui::SameLine();
 
-        const bool isOpened = ImGui::CollapsingHeader(pComponent->GetComponentName().c_str());
+        const bool isOpened = ImGui::CollapsingHeader(pComponent->GetMeta()->GetFactoryName().c_str());
 
         if (ImGui::IsItemClicked(ImGuiMouseButton_Right)) {
             ImGui::OpenPopup(headerName.c_str());
@@ -413,7 +429,7 @@ namespace SR_CORE_GUI_NS {
         if (!ImGui::GetDragDropPayload() && ImGui::BeginDragDropSource(ImGuiDragDropFlags_SourceAllowNullID)) {
             m_pointersHolder = { pComponent->DynamicCast<SR_UTILS_NS::Component>() };
             ImGui::SetDragDropPayload("InspectorComponent##Payload", &m_pointersHolder, sizeof(std::vector<SR_UTILS_NS::Component::Ptr>), ImGuiCond_Once);
-            ImGui::Text("%s ->", pComponent->GetComponentName().c_str());
+            ImGui::Text("%s ->", pComponent->GetMeta()->GetFactoryName().c_str());
             ImGui::EndDragDropSource();
         }
 
@@ -502,6 +518,52 @@ namespace SR_CORE_GUI_NS {
         }
 
         ImGui::PopID();
+    }
+
+    void Inspector::DrawComponentCategory(SR_UTILS_NS::IComponentable* pComponentable, ComponentCategory& category, SR_UTILS_NS::StringAtom categoryName) {
+        static auto&& addComponentFn = [](SR_UTILS_NS::IComponentable* pComponentable, SR_UTILS_NS::StringAtom name) {
+            if (ImGui::Selectable(name.c_str(), false)) {
+                if (auto&& pComponent = SR_UTILS_NS::Factory::Instance().Create<SR_UTILS_NS::Component>(name)) {
+                    pComponentable->AddComponent(pComponent);
+                }
+                else {
+                    SRHalt("Inspector::DrawComponentCategory() : failed to create component! Name: {}", name);
+                }
+            }
+            ImGui::Separator();
+        };
+
+        std::function<bool(const ComponentCategory&, std::string_view)> checkMatch;
+
+        checkMatch = [&checkMatch](const ComponentCategory& checkCategory, std::string_view search) -> bool {
+            const bool hasComponents = std::ranges::any_of(checkCategory.components, [&](auto&& name) {
+                return PropertyDrawerBase::CheckSearchMatch(search, name);
+            });
+            return hasComponents || std::ranges::any_of(checkCategory.categories, [&](auto&& pair) {
+                return checkMatch(pair.second, search);
+            });
+        };
+
+        if (m_componentSearchBuffer.empty() || checkMatch(category, m_componentSearchBuffer)) {
+            if (category.components.empty() || ImGui::BeginMenu(categoryName.c_str())) {
+                for (auto&& [name, subCategory] : category.categories) {
+                    DrawComponentCategory(pComponentable, subCategory, name);
+                }
+
+                for (auto&& name : category.components) {
+                    if (!m_componentSearchBuffer.empty() && !PropertyDrawerBase::CheckSearchMatch(m_componentSearchBuffer, name)) {
+                        continue;
+                    }
+                    addComponentFn(pComponentable, name);
+                }
+
+                if (!category.components.empty()) {
+                    ImGui::EndMenu();
+                }
+            }
+        }
+
+        ImGui::Separator();
     }
 
     void Inspector::InspectTag(SR_UTILS_NS::StringAtom tag, SR_HTYPES_NS::Function<void(SR_UTILS_NS::StringAtom)> callback) {

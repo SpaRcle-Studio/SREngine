@@ -40,7 +40,7 @@ namespace SR_CORE_NS {
             }
         };
 
-        std::list<SR_GTYPES_NS::SkinnedMesh*> skinnedMeshes;
+        std::list<SR_GTYPES_NS::SkinnedMesh::Ptr> skinnedMeshes;
 
         const std::function<GameObjectPtr(aiNode*)> processNode = [&processNode, &skinnedMeshes, this, pRawMesh](aiNode* node) -> GameObjectPtr {
             GameObjectPtr ptr = Scene::InstanceGameObject(node->mName.C_Str());
@@ -58,12 +58,12 @@ namespace SR_CORE_NS {
                         pMesh->SetMaterial(SR_GRAPH_NS::FileMaterial::LoadAsUnique("Engine/Materials/default.mat"));
                     }
 
-                    processMaterial(pRawMesh, meshId, pMesh, pRawMesh->GetAssimpScene()->mMeshes[meshId]->mMaterialIndex);
+                    processMaterial(pRawMesh, meshId, pMesh.Get(), pRawMesh->GetAssimpScene()->mMeshes[meshId]->mMaterialIndex);
 
-                    ptr->AddComponent(dynamic_cast<SR_UTILS_NS::Component*>(pMesh));
+                    ptr->AddComponent(pMesh.StaticCast<SR_UTILS_NS::Component>());
 
                     if (pMesh->GetMeshType() == SR_GRAPH_NS::MeshType::Skinned) {
-                        skinnedMeshes.emplace_back(dynamic_cast<SR_GTYPES_NS::SkinnedMesh*>(pMesh));
+                        skinnedMeshes.emplace_back(pMesh.StaticCast<SR_GTYPES_NS::SkinnedMesh>());
                     }
 
                     continue;
@@ -92,7 +92,7 @@ namespace SR_CORE_NS {
             return ptr;
         };
 
-        SR_ANIMATIONS_NS::Skeleton* pSkeleton = nullptr;
+        SR_ANIMATIONS_NS::Skeleton::Ptr pSkeleton = nullptr;
 
         pRawMesh->Execute([&]() -> bool {
             SRVerifyFalse(!(root = processNode(pRawMesh->GetAssimpScene()->mRootNode)).Valid());
@@ -109,9 +109,9 @@ namespace SR_CORE_NS {
         root->SetName(SR_UTILS_NS::StringUtils::GetBetween(std::string(pRawMesh->GetResourceId()), "/", "."));
 
         if (pSkeleton) {
-            root->AddComponent(pSkeleton);
+            root->AddComponent(pSkeleton.StaticCast<SR_UTILS_NS::Component>());
             for (auto&& pSkinnedMesh : skinnedMeshes) {
-                pSkinnedMesh->GetSkeleton().SetPathTo(pSkeleton);
+                pSkinnedMesh->GetSkeleton().SetPathTo(pSkeleton.StaticCast<SR_UTILS_NS::Entity>());
             }
         }
 

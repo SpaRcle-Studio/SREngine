@@ -123,17 +123,6 @@ namespace SR_CORE_NS {
             AddWindow(CreateMainWindow());
         }
 
-        SR_UTILS_NS::ComponentManager::Instance().SetContextInitializer([pEngine = GetThis()](auto&& context) {
-            if (!pEngine) {
-                SRHalt("Engine is nullptr!");
-                return;
-            }
-            context.SetValue(pEngine->GetMainWindow());
-
-            context.template SetPointer<SR_PHYSICS_NS::LibraryImpl>("2DPLib", SR_PHYSICS_NS::PhysicsLibrary::Instance().GetActiveLibrary(SR_UTILS_NS::Measurement::Space2D));
-            context.template SetPointer<SR_PHYSICS_NS::LibraryImpl>("3DPLib", SR_PHYSICS_NS::PhysicsLibrary::Instance().GetActiveLibrary(SR_UTILS_NS::Measurement::Space3D));
-        });
-
         SR_LOG("Engine::RegisterLibraries() : registering all libraries...");
 
         SpaRcle::API::RegisterEvoScriptClasses(this);

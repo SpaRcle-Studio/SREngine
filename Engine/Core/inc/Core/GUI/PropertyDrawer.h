@@ -51,15 +51,16 @@ namespace SR_CORE_GUI_NS {
 
         SR_NODISCARD float_t GetArrowWidth() const { return lineHeight * 0.75f; }
 
-        SR_NODISCARD SR_UTILS_NS::Reflection::Property const& GetProperty() const { return *pProperty; }
+        SR_NODISCARD SR_UTILS_NS::Reflection::Property const& GetProperty() const { SRAssert(pProperty); return *pProperty; }
         SR_NODISCARD SR_UTILS_NS::StringAtom GetPropertyName() const { return pProperty ? pProperty->GetName() : SR_UTILS_NS::StringAtom(); }
         SR_NODISCARD SR_UTILS_NS::StringAtom GetPropertyDisplayName() const { return pProperty ? pProperty->GetEditorParams().GetDisplayName() : customDisplayName; }
-        SR_NODISCARD SR_UTILS_NS::Reflection::EditorPropertyParams GetEditorParams() const { return pProperty ? pProperty->GetEditorParams() : SR_UTILS_NS::Reflection::EditorPropertyParams(); }
+        SR_NODISCARD const SR_UTILS_NS::Reflection::EditorPropertyParams& GetEditorParams() const { return pProperty ? pProperty->GetEditorParams() : editorPropertyParams; }
 
         SR_NODISCARD SR_UTILS_NS::Reflection::Value GetValue() const {
             return (pValue ? *pValue : pProperty->Get(pOwner)).DetachIfConst();
         }
 
+        SR_UTILS_NS::Reflection::EditorPropertyParams editorPropertyParams;
         SR_UTILS_NS::Component::Ptr pComponent;
         uint64_t propertyIndex = 0;
         SR_UTILS_NS::StringAtom customDisplayName;
@@ -84,8 +85,7 @@ namespace SR_CORE_GUI_NS {
 
         virtual PropertyDrawerFeedback Draw(const PropertyDrawerContext& context) = 0;
 
-    protected:
-        SR_NODISCARD bool CheckSearchMatch(std::string_view searchBuffer, std::string_view text) const {
+        static SR_NODISCARD bool CheckSearchMatch(std::string_view searchBuffer, std::string_view text) {
             for (uint64_t textStartPos = 0; textStartPos < text.size(); ++textStartPos) {
                 bool isMatch = true;
                 for (uint64_t searchPos = 0; searchPos < searchBuffer.size(); ++searchPos) {
@@ -107,6 +107,7 @@ namespace SR_CORE_GUI_NS {
             return false;
         }
 
+    protected:
         SR_NODISCARD SR_GRAPH_NS::RenderContext::Ptr GetRenderContext() const;
 
     private:

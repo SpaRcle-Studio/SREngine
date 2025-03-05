@@ -200,10 +200,6 @@ namespace SR_PTYPES_NS {
         Super::OnDisable();
     }
 
-    SR_UTILS_NS::Measurement Rigidbody::GetMeasurement() const {
-        return SR_UTILS_NS::Measurement::Unknown;
-    }
-
     void Rigidbody::SetIsTrigger(bool value) {
         m_isTrigger = value;
         m_isBodyDirty = true;

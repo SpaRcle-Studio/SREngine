@@ -14,4 +14,11 @@ namespace SR_PTYPES_NS {
     bool Vehicle::InitVehicle() {
         return false;
     }
+
+    void Vehicle::OnDestroy() {
+        Super::OnDestroy();
+        AutoFree([](auto&& pData) {
+            delete pData;
+        });
+    }
 }

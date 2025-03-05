@@ -10,9 +10,9 @@
 namespace SR_CORE_GUI_NS {
     class SceneViewer;
 
+    /// @category(Editor)
     class EditorCamera : public SR_GTYPES_NS::Camera {
         SR_CLASS()
-        SR_REGISTER_NEW_COMPONENT(EditorCamera, 1000);
     public:
         using Ptr = SR_HTYPES_NS::SharedPtr<EditorCamera>;
 

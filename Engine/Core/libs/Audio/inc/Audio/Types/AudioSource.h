@@ -14,9 +14,9 @@ namespace SR_AUDIO_NS
 {
     SR_INLINE_STATIC SR_UTILS_NS::StringAtom SR_SUPPORTED_AUDIO_FORMATS = "wav,mp3,ogg";
 
+    /// @category(Sound)
     class AudioSource : public SR_UTILS_NS::Component {
         SR_CLASS()
-        SR_REGISTER_NEW_COMPONENT(AudioSource, 1007);
         using Super = SR_UTILS_NS::Component;
         using Handle = void*;
     public:

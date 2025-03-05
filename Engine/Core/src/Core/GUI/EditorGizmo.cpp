@@ -6,6 +6,8 @@
 
 #include <Utils/ECS/GameObject.h>
 
+#include <Codegen/EditorGizmo.generated.hpp>
+
 namespace SR_CORE_GUI_NS {
     EditorGizmo::EditorGizmo()
         : Super()

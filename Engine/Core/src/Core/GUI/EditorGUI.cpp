@@ -650,7 +650,7 @@ namespace SR_CORE_GUI_NS {
 
                         auto&& meshes = SR_GTYPES_NS::Mesh::Load("Engine/Models/cube.obj", SR_GRAPH_NS::MeshType::Static);
                         for (auto&& pMesh : meshes) {
-                            pGameObject->AddComponent(pMesh);
+                            pGameObject->AddComponent(pMesh.StaticCast<SR_UTILS_NS::Component>());
                         }
                     }
                 }
@@ -667,7 +667,7 @@ namespace SR_CORE_GUI_NS {
 
                         auto&& meshes = SR_GTYPES_NS::Mesh::Load("Engine/Models/sphere.obj", SR_GRAPH_NS::MeshType::Static);
                         for (auto&& pMesh : meshes) {
-                            pGameObject->AddComponent(pMesh);
+                            pGameObject->AddComponent(pMesh.StaticCast<SR_UTILS_NS::Component>());
                         }
                     }
                 }
@@ -684,7 +684,7 @@ namespace SR_CORE_GUI_NS {
 
                         auto&& meshes = SR_GTYPES_NS::Mesh::Load("Engine/Models/capsule.obj", SR_GRAPH_NS::MeshType::Static);
                         for (auto&& pMesh : meshes) {
-                            pGameObject->AddComponent(pMesh);
+                            pGameObject->AddComponent(pMesh.StaticCast<SR_UTILS_NS::Component>());
                         }
                     }
                 }
@@ -701,7 +701,7 @@ namespace SR_CORE_GUI_NS {
 
                         auto&& meshes = SR_GTYPES_NS::Mesh::Load("Engine/Models/cylinder.obj", SR_GRAPH_NS::MeshType::Static);
                         for (auto&& pMesh : meshes) {
-                            pGameObject->AddComponent(pMesh);
+                            pGameObject->AddComponent(pMesh.StaticCast<SR_UTILS_NS::Component>());
                         }
                     }
                 }
@@ -718,7 +718,7 @@ namespace SR_CORE_GUI_NS {
 
                         auto&& meshes = SR_GTYPES_NS::Mesh::Load("Engine/Models/plane.obj", SR_GRAPH_NS::MeshType::Static);
                         for (auto&& pMesh : meshes) {
-                            pGameObject->AddComponent(pMesh);
+                            pGameObject->AddComponent(pMesh.StaticCast<SR_UTILS_NS::Component>());
                         }
                     }
                 }
@@ -737,7 +737,7 @@ namespace SR_CORE_GUI_NS {
 
                         auto&& meshes = SR_GTYPES_NS::Mesh::Load("Engine/Models/statue.obj", SR_GRAPH_NS::MeshType::Static);
                         for (auto&& pMesh : meshes) {
-                            pGameObject->AddComponent(pMesh);
+                            pGameObject->AddComponent(pMesh.StaticCast<SR_UTILS_NS::Component>());
                         }
                     }
                 }

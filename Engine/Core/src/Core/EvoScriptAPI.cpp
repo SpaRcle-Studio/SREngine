@@ -231,10 +231,6 @@ namespace SpaRcle {
 
         generator->RegisterNewClass("Component", "Component", { "Libraries/Math/Vector3.h", "string" });
 
-        ESRegisterCustomMethodArg0(EvoScript::Public, generator, Component, GetComponentName, std::string, {
-            return ptr->GetComponentName();
-        })
-
         ESRegisterMethodArg0(EvoScript::Public, generator, Component, BaseComponent, Component*)
         ESRegisterMethodArg0(EvoScript::Public, generator, Component, GetGameObject, SharedPtr<GameObject>)
 
@@ -242,9 +238,9 @@ namespace SpaRcle {
 
         ESRegisterMethod(EvoScript::Public, generator, Component, SetEnabled, void, ESArg1(bool v), ESArg1(v))
 
-        ESRegisterCustomStaticMethod(EvoScript::Public, generator, Component, Create, Component*, ESArg1(const std::string& name), {
-            return SR_UTILS_NS::ComponentManager::Instance().CreateComponentOfName(name);
-        });
+        //ESRegisterCustomStaticMethod(EvoScript::Public, generator, Component, Create, Component*, ESArg1(const std::string& name), {
+        //    return SR_UTILS_NS::ComponentManager::Instance().CreateComponentOfName(name);
+        //});
 
         generator->AddIncompleteType("GameObject", "Component");
     }
@@ -278,7 +274,7 @@ namespace SpaRcle {
             "Libraries/ResourceManager.h", "Libraries/Component.h", "Libraries/Math/Vector3.h", "Libraries/Material.h"
         }, { });
 
-        ESRegisterStaticMethod(EvoScript::Public, generator, Mesh, Load, std::vector<Mesh*>, ESArg2(const std::string& path, MeshType type), ESArg2(path, type))
+        //ESRegisterStaticMethod(EvoScript::Public, generator, Mesh, Load, std::vector<Mesh*>, ESArg2(const std::string& path, MeshType type), ESArg2(path, type))
 
         //ESRegisterMethod(EvoScript::Public, generator, Mesh, SetMaterial, void, ESArg1(Material* material), ESArg1(material))
         //ESRegisterMethodArg0(EvoScript::Public, generator, Mesh, GetGeometryName, std::string)

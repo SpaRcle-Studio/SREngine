@@ -90,6 +90,7 @@ class Property:
         self.reset_value = None
         self.property_condition = None
         self.load_condition = None
+        self.custom_args = {}
         self.drag_value = None
         self.editor_width = None
         self.read_only = False
@@ -135,6 +136,9 @@ class Class:
     def __init__(self, name, namespaces):
         self.name = name
         self.inspector = None
+        self.version = None
+        self.category = None
+        self.hidden = False
         self.namespaces = namespaces
         self.variables = []
         self.methods = []
@@ -186,7 +190,7 @@ def extract_special_tag_comment_data(node, tag):
     raw_comment = node.raw_comment
     if not raw_comment:
         return None
-    start = raw_comment.find(f"@{tag}")
+    start = raw_comment.find(f"@{tag}(")
     if start == -1:
         return None
 
@@ -210,6 +214,33 @@ def extract_special_tag_comment_data(node, tag):
         return None
 
     return raw_comment[start + 1:end]
+
+def extract_all_special_tags_comment_data(node, tag):
+    """ @customArgs(name1: value1) """
+    """ @customArgs(name2: value2, name3: value3) """
+    """ @customArg(name4: value4) """
+
+    tags = []
+    raw_comment = node.raw_comment
+    if not raw_comment:
+        return tags
+
+    index = 0
+    loop_limit = 100
+    while True:
+        index = raw_comment.find(f"@{tag}(", index)
+        start = raw_comment.find('(', index)
+        end = raw_comment.find(')', start)
+        if index == -1 or start == -1 or end == -1:
+            break
+        tags.append(raw_comment[start + 1:end])
+        index = end
+        loop_limit -= 1
+        if loop_limit == 0:
+            raise Exception(f'Loop limit reached for {tag} in {node.spelling}, raw_comment: {raw_comment}, tags: {tags}')
+
+    return tags
+
 
 def is_method_comment(node):
     """Извлекаем комментарий, если он есть."""
@@ -365,6 +396,21 @@ def is_class_inherited_from(class_node, class_name):
                 return True
     return False
 
+
+def add_property_custom_arg(property_obj, arg, index):
+    key = arg[:index]
+    value = arg[index:]
+
+    if key.startswith(' '):
+        key = key[1:]
+
+    if value.startswith(': '):
+        value = value[2:]
+
+    print(f'Add custom arg to prop \"{property_obj.name}\": \"{arg}\", key: \"{key}\", value: \"{value}\"')
+
+    property_obj.custom_args[key] = value
+
 def process_property(property_obj, child):
     property_obj.change_callback = extract_special_tag_comment_data(child, 'changeCallback')
     property_obj.setter = extract_special_tag_comment_data(child, 'setter')
@@ -376,6 +422,24 @@ def process_property(property_obj, child):
     property_obj.drag_value = extract_special_tag_comment_data(child, 'drag')
     property_obj.editor_width = extract_special_tag_comment_data(child, 'editorWidth')
     property_obj.inspector = extract_special_tag_comment_data(child, 'inspector')
+
+    if custom_args_list := extract_all_special_tags_comment_data(child, 'customArgs'):
+        for custom_args in custom_args_list:
+            custom_args_split = custom_args.split(',')
+            for arg in custom_args_split:
+                index = arg.find(':')
+                if index == -1:
+                    print(f'Error: invalid custom arg: {arg}')
+                    continue
+                add_property_custom_arg(property_obj, arg, index)
+
+    if custom_arg_list := extract_all_special_tags_comment_data(child, 'customArg'):
+        for arg in custom_arg_list:
+            index = arg.find(':')
+            if index == -1:
+                print(f'Error: invalid custom arg: {arg}')
+                continue
+            add_property_custom_arg(property_obj, arg, index)
 
     if property_obj.virtual and not property_obj.getter:
         raise Exception(f'Virtual property {property_obj.name} must have getter!')
@@ -484,6 +548,18 @@ def parse_tree(file_path, deep, parent_node, code_structure, namespaces):
             class_name = parent_node.spelling
             class_obj = Class(class_name, namespaces)
             class_obj.inspector = extract_special_tag_comment_data(parent_node, 'inspector')
+
+            # format @version(year.month.day) or @version(any number). convert @version(2025.12.31) to 20251231
+            # additional example: @version(2025.02.04) -> 20250204
+            class_obj.version = extract_special_tag_comment_data(parent_node, 'version')
+            if class_obj.version:
+                class_obj.version = class_obj.version.replace('.', '')
+
+            # example: @category(Engine.Render.Something other.Something)
+            class_obj.category = extract_special_tag_comment_data(parent_node, 'category')
+
+            class_obj.hidden = has_special_tag_comment(parent_node, 'hidden')
+
             class_obj.path = parent_node.location.file.name
 
             if class_obj.inspector:
@@ -620,6 +696,9 @@ def generate_class_meta_properties(f, class_structures, class_obj, tabs):
         # editor params
 
         f.write('\n' + '\t' * (tabs + 3) + f'.SetEditorParams(SR_UTILS_NS::Reflection::EditorPropertyParams()')
+
+        for key, value in prop.custom_args.items():
+            f.write('\n' + '\t' * (tabs + 4) + f'.SetCustomArg("{key}", "{value}")')
 
         if prop.no_header:
             f.write('\n' + '\t' * (tabs + 4) + f'.SetNoHeader()')
@@ -815,14 +894,14 @@ def generate_class_meta(f, class_structures, class_obj, tabs):
 
     f.write('\t' * tabs + f'SR_NODISCARD {class_name}* DeclTypeStub() const noexcept {{ return nullptr; }}\n\n')
 
-    f.write('\t' * (tabs + 0) + f'template <typename T> T static SetterSharedSRClassConvert(SR_UTILS_NS::SRClass* pSRClass) {{\n')
-    f.write('\t' * (tabs + 1) + f'if constexpr (SR_UTILS_NS::IsSharedPointerV<T>) {{\n')
-    f.write('\t' * (tabs + 2) + f'if (pSRClass) {{\n')
-    f.write('\t' * (tabs + 3) + f'return dynamic_cast<typename T::SharedPointerType*>(pSRClass);\n')
-    f.write('\t' * (tabs + 2) + f'}}\n')
-    f.write('\t' * (tabs + 1) + f'}}\n')
-    f.write('\t' * (tabs + 1) + f'return T();\n')
-    f.write('\t' * (tabs + 0) + f'}}\n\n')
+    #f.write('\t' * (tabs + 0) + f'template <typename T> T static SetterSharedSRClassConvert(SR_UTILS_NS::SRClass* pSRClass) {{\n')
+    #f.write('\t' * (tabs + 1) + f'if constexpr (SR_UTILS_NS::IsSharedPointerV<T>) {{\n')
+    #f.write('\t' * (tabs + 2) + f'if (pSRClass) {{\n')
+    #f.write('\t' * (tabs + 3) + f'return dynamic_cast<typename T::SharedPointerType*>(pSRClass);\n')
+    #f.write('\t' * (tabs + 2) + f'}}\n')
+    #f.write('\t' * (tabs + 1) + f'}}\n')
+    #f.write('\t' * (tabs + 1) + f'return T();\n')
+    #f.write('\t' * (tabs + 0) + f'}}\n\n')
 
     for prop in class_obj.variables:
         if not prop.default_value:
@@ -852,6 +931,20 @@ def generate_class_meta(f, class_structures, class_obj, tabs):
     #    f.write('\t' * tabs + f'void Set_{prop.name}({class_name}* pClass, const {prop.type_name}& value) {{ pClass->{prop.name} = value; }}\n\n')
 
     f.write('\t' * tabs + f'SR_NODISCARD bool IsAbstract() const noexcept override {{ return std::is_abstract_v<{class_name}>; }}\n\n')
+    f.write('\t' * tabs + f'SR_NODISCARD bool IsHidden() const noexcept override {{ return { "true" if class_obj.hidden else "false" }; }}\n\n')
+
+    if class_obj.version:
+        f.write('\t' * tabs + f'SR_NODISCARD uint64_t GetVersion() const noexcept override {{ return {class_obj.version}; }}\n\n')
+
+    if class_obj.category:
+        category_split = class_obj.category.split('.')
+        f.write('\t' * tabs + f'SR_NODISCARD std::span<const SR_UTILS_NS::StringAtom> GetCategory() const noexcept override {{\n')
+        f.write('\t' * (tabs + 1) + f'static std::array<const SR_UTILS_NS::StringAtom, {len(category_split)}> categories {{ ')
+        for category in category_split:
+            f.write(f'"{category}", ')
+        f.write('};\n')
+        f.write('\t' * (tabs + 1) + f'return categories;\n')
+        f.write('\t' * tabs + '}\n\n')
 
     #######################################
     if class_obj.inspector:
@@ -877,7 +970,7 @@ def generate_class_meta(f, class_structures, class_obj, tabs):
     generate_class_meta_save(f, class_obj, tabs)
     generate_class_meta_load(f, class_obj, tabs)
 
-    f.write('\t' * tabs + f'SR_NODISCARD virtual std::string_view GetFactoryName() const noexcept override {{\n')
+    f.write('\t' * tabs + f'SR_NODISCARD virtual SR_UTILS_NS::StringAtom GetFactoryName() const noexcept override {{\n')
     f.write('\t' * (tabs + 1) + f'return {class_name}::GetClassStaticName();\n')
     f.write('\t' * tabs + '}\n\n')
 

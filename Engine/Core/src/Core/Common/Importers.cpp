@@ -15,7 +15,7 @@
 #include <assimp/Importer.hpp>
 
 namespace SR_CORE_NS {
-    bool Importers::ImportSkeletonFromRawMesh(const SR_HTYPES_NS::RawMesh* pRawMesh, SR_ANIMATIONS_NS::Skeleton* pSkeleton) {
+    bool Importers::ImportSkeletonFromRawMesh(const SR_HTYPES_NS::RawMesh* pRawMesh, SR_ANIMATIONS_NS::Skeleton::Ptr pSkeleton) {
         const aiScene* pScene = pRawMesh->GetAssimpScene();
 
         if (!pScene->mRootNode) {
@@ -40,8 +40,8 @@ namespace SR_CORE_NS {
         return pSkeleton->ReCalculateSkeleton();
     }
 
-    SR_ANIMATIONS_NS::Skeleton* Importers::ImportSkeletonFromRawMesh(const SR_HTYPES_NS::RawMesh *pRawMesh) {
-        auto&& pSkeleton = SR_UTILS_NS::ComponentManager::Instance().CreateComponent<SR_ANIMATIONS_NS::Skeleton>();
+    SR_ANIMATIONS_NS::Skeleton::Ptr Importers::ImportSkeletonFromRawMesh(const SR_HTYPES_NS::RawMesh *pRawMesh) {
+        auto&& pSkeleton = SR_UTILS_NS::Factory::Instance().Create<SR_ANIMATIONS_NS::Skeleton>();
         if (!pSkeleton) {
             SRHalt0();
             return nullptr;
