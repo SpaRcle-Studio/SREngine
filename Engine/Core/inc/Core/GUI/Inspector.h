@@ -7,13 +7,13 @@
 
 #include <Core/GUI/ComponentDrawer.h>
 #include <Core/GUI/PropertyDrawer.h>
+#include <Core/GUI/PropertyDrawers/ObjectPropertyDrawer.h>
+#include <Core/GUI/PropertyDrawers/PointerPropertyDrawer.h>
 
 #include <Utils/ECS/GameObject.h>
 #include <Utils/World/Scene.h>
 
 #include <Graphics/GUI/Widget.h>
-
-#include "PropertyDrawers/ObjectPropertyDrawer.h"
 
 namespace SR_UTILS_NS {
     class Transform3D;
@@ -47,22 +47,18 @@ namespace SR_CORE_GUI_NS {
 
         void DrawComponents(SR_UTILS_NS::IComponentable* pIComponentable);
 
-        void InspectTag(SR_UTILS_NS::StringAtom tag, SR_HTYPES_NS::Function<void(SR_UTILS_NS::StringAtom)> callback);
-        void InspectLayer(SR_UTILS_NS::StringAtom layer, SR_HTYPES_NS::Function<void(SR_UTILS_NS::StringAtom)> callback);
-
-        bool DrawSwitchTransform();
-        bool DrawTransform2D(SR_UTILS_NS::Transform2D* transform) const;
-        bool DrawTransform3D(SR_UTILS_NS::Transform3D* transform);
-
-        SR_MAYBE_UNUSED void BackupTransform(const SR_UTILS_NS::GameObject::Ptr& ptr, const std::function<void()>& operation) const;
-
+        void InspectTag(SR_UTILS_NS::StringAtom tag, const SR_HTYPES_NS::Function<void(SR_UTILS_NS::StringAtom)>& callback);
+        void InspectLayer(SR_UTILS_NS::StringAtom layer, const SR_HTYPES_NS::Function<void(SR_UTILS_NS::StringAtom)>& callback);
         void DrawComponent(SR_UTILS_NS::Component* pComponent, uint32_t& index);
 
     private:
         void DrawComponentCategory(SR_UTILS_NS::IComponentable* pComponentable, ComponentCategory& category, SR_UTILS_NS::StringAtom categoryName);
 
+        SR_NODISCARD PropertyDrawerContext CreateDrawerContext(SR_UTILS_NS::Reflection::Value* pValue);
+
     private:
         std::string m_componentSearchBuffer;
+        bool m_componentSearchOpened = false;
 
         std::vector<SR_UTILS_NS::StringAtom> m_availableComponents;
         ComponentCategory m_componentsCategories;
@@ -77,10 +73,14 @@ namespace SR_CORE_GUI_NS {
         };
         std::map<SR_UTILS_NS::Component::Ptr, ComponentContext> m_componentContexts;
 
-        ///Для DrawTransform3D и может быть DrawTransofrm2D
-        bool m_isUsed = false;
+        SR_CORE_GUI_NS::PointerPropertyDrawer::Ptr m_pPointerDrawer;
+
         float_t m_scrollBarWidth = 0.0f;
-        SR_HTYPES_NS::Marshal* m_oldTransformMarshal = nullptr;
+
+        bool m_isDragMode = false;
+        SR_HTYPES_NS::Function<void(bool drag)> m_onBeforeChangeCallback;
+        std::unique_ptr<SR_UTILS_NS::ISerializer> m_pTransformSerializer;
+
     };
 }
 

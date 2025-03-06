@@ -72,7 +72,6 @@ namespace SR_CORE_GUI_NS {
         WindowPtr m_window;
         EnginePtr m_engine;
 
-        SR_MATH_NS::FVector3 m_velocity;
         SR_MATH_NS::FVector3 m_cameraRotation;
         SR_MATH_NS::FVector3 m_cameraTranslation;
 

@@ -15,10 +15,6 @@ namespace SR_CORE_GUI_NS {
         SR_CLASS()
         using Super = SR_GRAPH_UI_NS::Gizmo;
     public:
-        EditorGizmo();
-        ~EditorGizmo() override;
-
-    public:
         SR_NODISCARD SR_FORCE_INLINE bool ExecuteInEditMode() const override { return true; }
 
         void SetHierarchy(Hierarchy* pHierarchy) { m_hierarchy = pHierarchy; }
@@ -39,7 +35,7 @@ namespace SR_CORE_GUI_NS {
 
     private:
         Hierarchy* m_hierarchy = nullptr;
-        //SR_HTYPES_NS::Marshal* m_marshal = nullptr;
+        SR_UTILS_NS::ISerializer::UniquePtr m_pSerializer;
 
     };
 }

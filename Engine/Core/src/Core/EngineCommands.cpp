@@ -70,112 +70,113 @@ namespace SR_CORE_NS::Commands {
 
     //! ----------------------------------------------------------------------------------------------------------------
 
-    GameObjectTransform::GameObjectTransform(const EnginePtr& pEngine, const SR_UTILS_NS::GameObject::Ptr& ptr, SR_HTYPES_NS::Marshal::Ptr pOldMarshal)
-        : Base(pEngine)
-    {
-        m_path = ptr->GetEntityPath();
-        //m_newMarshal = ptr->GetTransform()->SaveLegacy(SR_UTILS_NS::SavableContext(nullptr, SR_UTILS_NS::SavableFlagBits::SAVABLE_FLAG_NONE));
-        //m_oldMarshal = pOldMarshal;
-    }
-
-    GameObjectTransform::~GameObjectTransform() {
-        m_path.UnReserve();
-        SR_SAFE_DELETE_PTR(m_newMarshal)
-        SR_SAFE_DELETE_PTR(m_oldMarshal)
-    }
-
     bool GameObjectTransform::Redo() {
-        auto entity = SR_UTILS_NS::EntityManager::Instance().FindById(m_path.Last());
-        auto pObject = entity.DynamicCast<SR_UTILS_NS::GameObject>();
+        auto&& pEntity = SR_UTILS_NS::EntityManager::Instance().FindById(m_entityId);
 
-        if (!pObject) {
-            return false;
+        if (auto&& pObject = pEntity.DynamicCast<SR_UTILS_NS::GameObject>()) {
+            auto&& pDeserializer = m_pNew->CreateDeserializer();
+
+            SR_UTILS_NS::Transform::Ptr pTransform;
+            SR_UTILS_NS::Serialization::Load(*pDeserializer, pTransform, DATA_ID);
+            pObject->SetTransform(pTransform);
+
+            return true;
         }
 
-        //SR_HTYPES_NS::Marshal copy = m_newMarshal->Copy();
-        //pObject->SetTransform(SR_UTILS_NS::Transform::Load(copy));
-        return true;
+        return false;
     }
 
     bool GameObjectTransform::Undo() {
-        auto entity = SR_UTILS_NS::EntityManager::Instance().FindById(m_path.Last());
-        auto pObject = entity.DynamicCast<SR_UTILS_NS::GameObject>();
+        auto&& pEntity = SR_UTILS_NS::EntityManager::Instance().FindById(m_entityId);
 
-        if (!pObject) {
-            return false;
+        if (auto&& pObject = pEntity.DynamicCast<SR_UTILS_NS::GameObject>()) {
+            auto&& pDeserializer = m_pOld->CreateDeserializer();
+
+            SR_UTILS_NS::Transform::Ptr pTransform;
+            SR_UTILS_NS::Serialization::Load(*pDeserializer, pTransform, DATA_ID);
+            pObject->SetTransform(pTransform);
+
+            return true;
         }
 
-        //SR_HTYPES_NS::Marshal copy = m_oldMarshal->Copy();
-        //pObject->SetTransform(SR_UTILS_NS::Transform::Load(copy));
-        return true;
+        return false;
     }
 
     //! ----------------------------------------------------------------------------------------------------------------
 
-    GameObjectRename::GameObjectRename(const EnginePtr& pEngine, const SR_UTILS_NS::SceneObject::Ptr& ptr, SR_UTILS_NS::SceneObject::ObjectNameT newName)
-        : Base(pEngine)
-    {
-        m_path = ptr->GetEntityPath();
-        m_previousName = ptr->GetName();
-        m_newName = std::move(newName);
-    }
+    GameObjectRename::GameObjectRename(const EnginePtr& pEngine, const SR_UTILS_NS::SceneObject::Ptr& pSO, SR_UTILS_NS::SceneObject::ObjectNameT newName)
+        : Super(pEngine)
+        , m_entityId(pSO->GetEntityId())
+        , m_previousName(pSO->GetName())
+        , m_newName(newName)
+    { }
 
     bool GameObjectRename::Redo() {
-        auto entity = SR_UTILS_NS::EntityManager::Instance().FindById(m_path.Last());
-        auto pObject = entity.DynamicCast<SR_UTILS_NS::SceneObject>();
+        auto&& pEntity = SR_UTILS_NS::EntityManager::Instance().FindById(m_entityId);
 
-        if (!pObject) {
-            return false;
+        if (auto&& pObject = pEntity.DynamicCast<SR_UTILS_NS::SceneObject>()) {
+            pObject->SetName(m_newName);
+            return true;
         }
 
-        pObject->SetName(m_newName);
-        return true;
+        return false;
     }
 
     bool GameObjectRename::Undo() {
-        auto entity = SR_UTILS_NS::EntityManager::Instance().FindById(m_path.Last());
-        auto pObject = entity.DynamicCast<SR_UTILS_NS::SceneObject>();
+        auto&& pEntity = SR_UTILS_NS::EntityManager::Instance().FindById(m_entityId);
 
-        if (!pObject) {
-            return false;
+        if (auto&& pObject = pEntity.DynamicCast<SR_UTILS_NS::SceneObject>()) {
+            pObject->SetName(m_previousName);
+            return true;
         }
 
-        pObject->SetName(m_previousName);
-        return true;
+        return false;
     }
 
     //! ----------------------------------------------------------------------------------------------------------------
 
-    GameObjectEnable::GameObjectEnable(const EnginePtr& pEngine, const SR_UTILS_NS::SceneObject::Ptr& ptr, bool newEnabled)
-        : Base(pEngine)
+    EntityEnable::EntityEnable(const EnginePtr& pEngine, const SR_UTILS_NS::Entity::Ptr& pEntity, bool newEnabled)
+        : Super(pEngine)
+        , m_entityId(pEntity->GetEntityId())
+        , m_newEnabled(newEnabled)
     {
-        m_path = ptr->GetEntityPath();
-        m_previousEnabled = ptr->IsEnabled();
-        m_newEnabled = newEnabled;
+        if (auto&& pSO = pEntity.DynamicCast<SR_UTILS_NS::SceneObject>())  {
+            m_previousEnabled = pSO->IsEnabled();
+        }
+        else if (auto&& pComponent = pEntity.DynamicCast<SR_UTILS_NS::Component>()) {
+            m_previousEnabled = pComponent->IsEnabled();
+        }
+        else {
+            SRHalt("EntityEnable::EntityEnable() : entity is not SceneObject or Component!");
+        }
     }
 
-    bool GameObjectEnable::Redo() {
-        auto entity = SR_UTILS_NS::EntityManager::Instance().FindById(m_path.Last());
-        auto pObject = entity.DynamicCast<SR_UTILS_NS::SceneObject>();
-
-        if (!pObject) {
-            return false;
+    bool EntityEnable::Redo() {
+        auto&& pEntity = SR_UTILS_NS::EntityManager::Instance().FindById(m_entityId);
+        if (auto&& pObject = pEntity.DynamicCast<SR_UTILS_NS::SceneObject>()) {
+            pObject->SetEnabled(m_newEnabled);
+            return true;
+        }
+        if (auto&& pComponent = pEntity.DynamicCast<SR_UTILS_NS::Component>()) {
+            pComponent->SetEnabled(m_newEnabled);
+            return true;
         }
 
-        pObject->SetEnabled(m_newEnabled);
-        return true;
+        return false;
     }
 
-    bool GameObjectEnable::Undo() {
-        auto entity = SR_UTILS_NS::EntityManager::Instance().FindById(m_path.Last());
-        auto pObject = entity.DynamicCast<SR_UTILS_NS::SceneObject>();
-
-        if (!pObject) {
-            return false;
+    bool EntityEnable::Undo() {
+        auto&& pEntity = SR_UTILS_NS::EntityManager::Instance().FindById(m_entityId);
+        if (auto&& pObject = pEntity.DynamicCast<SR_UTILS_NS::SceneObject>()) {
+            pObject->SetEnabled(m_previousEnabled);
+            return true;
+        }
+        if (auto&& pComponent = pEntity.DynamicCast<SR_UTILS_NS::Component>()) {
+            pComponent->SetEnabled(m_previousEnabled);
+            return true;
         }
 
-        pObject->SetEnabled(m_previousEnabled);
-        return true;
+        return false;
     }
 
     //! ----------------------------------------------------------------------------------------------------------------

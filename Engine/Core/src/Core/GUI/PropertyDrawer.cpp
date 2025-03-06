@@ -546,9 +546,7 @@ namespace SR_CORE_GUI_NS {
         ImGui::PopID();
         ImGui::PopID();
 
-        if (!context.pValue && feedback.isChanged && !value.IsRef()) {
-            context.GetProperty().Set(context.pOwner, value);
-        }
+        SetValue(context, feedback, value);
 
         return feedback;
     }
@@ -603,9 +601,7 @@ namespace SR_CORE_GUI_NS {
         ImGui::PopID();
         ImGui::PopID();
 
-        if (!context.pValue && feedback.isChanged && !value.IsRef()) {
-            context.GetProperty().Set(context.pOwner, value);
-        }
+        SetValue(context, feedback, value);
 
         return feedback;
     }
@@ -631,6 +627,9 @@ namespace SR_CORE_GUI_NS {
             const ImVec2 mainButtonSize = { context.fieldTitleWidth, context.fieldHeight };
 
             if (ImGui::Button(context.GetPropertyDisplayName().c_str(), mainButtonSize)) {
+                if (context.onBeforeChangeCallback) {
+                    context.onBeforeChangeCallback(false);
+                }
                 feedback.isChanged = true;
                 value = context.GetProperty().GetResetValue() ? context.GetProperty().GetResetValue() : context.GetProperty().GetDefaultValue();
                 value = value.DetachIfConst();
@@ -669,6 +668,9 @@ namespace SR_CORE_GUI_NS {
             const uint64_t offset = partSize * i;
 
             if (ImGui::Button(labels[i], buttonSize)) {
+                if (context.onBeforeChangeCallback) {
+                    context.onBeforeChangeCallback(false);
+                }
                 if (context.pProperty && context.GetProperty().GetResetValue().SizeOf() == value.SizeOf()) {
                     if (auto&& pResetData = (char*)context.GetProperty().GetResetValue().Data()) {
                         std::memcpy((char*)value.Data() + offset, pResetData + offset, partSize);
@@ -689,7 +691,12 @@ namespace SR_CORE_GUI_NS {
 
             if (partSize == 1) {
                 ImGui::PopItemWidth();
-                if (ImGui::Checkbox("", reinterpret_cast<bool*>(&((char*)(value.Data()))[offset]))) {
+                bool temp = *reinterpret_cast<bool*>(&((char*)(value.Data()))[offset]);
+                if (ImGui::Checkbox("", &temp)) {
+                    if (context.onBeforeChangeCallback) {
+                        context.onBeforeChangeCallback(false);
+                    }
+                    *reinterpret_cast<bool*>(&((char*)(value.Data()))[offset]) = temp;
                     feedback.isChanged = true;
                 }
                 ImGui::SameLine();
@@ -700,7 +707,12 @@ namespace SR_CORE_GUI_NS {
                 SR_GRAPH_GUI_NS::ColoredText("Unknown part type!", ImColor(1.f, 0.f, 0.f, 1.f));
             }
             else {
-                if (ImGui::DragScalar("", partType, (char*)value.Data() + offset, drag)) {
+                std::memcpy(&m_numberTempData, (char*)value.Data() + offset, partSize);
+                if (ImGui::DragScalar("", partType, &m_numberTempData, drag)) {
+                    if (context.onBeforeChangeCallback) {
+                        context.onBeforeChangeCallback(true);
+                    }
+                    std::memcpy((char*)value.Data() + offset, &m_numberTempData, partSize);
                     feedback.isChanged = true;
                 }
             }
@@ -724,9 +736,7 @@ namespace SR_CORE_GUI_NS {
         ImGui::PopID();
         ImGui::PopID();
 
-        if (!context.pValue && feedback.isChanged && !value.IsRef()) {
-            context.GetProperty().Set(context.pOwner, value);
-        }
+        SetValue(context, feedback, value);
 
         return feedback;
     }
@@ -903,9 +913,7 @@ namespace SR_CORE_GUI_NS {
         ImGui::PopID();
         ImGui::PopID();
 
-        if (!context.pValue && feedback.isChanged && !value.IsRef()) {
-            context.GetProperty().Set(context.pOwner, value);
-        }
+        SetValue(context, feedback, value);
 
         return feedback;
     }

@@ -70,9 +70,7 @@ namespace SR_CORE_GUI_NS {
 
         ImGui::PopItemWidth();
 
-        if (!context.pValue && feedback.isChanged && !value.IsRef()) {
-            context.GetProperty().Set(context.pOwner, value);
-        }
+        SetValue(context, feedback, value);
 
         ImGui::PopStyleVar();
 

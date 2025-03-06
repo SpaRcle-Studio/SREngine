@@ -38,6 +38,7 @@ namespace SR_CORE_GUI_NS {
         { }
 
         bool noHeader = false;
+        bool openedByDefault = false;
 
         float_t lineHeight = 1.f;
         float_t spaceWidth = 1.f;
@@ -60,6 +61,11 @@ namespace SR_CORE_GUI_NS {
             return (pValue ? *pValue : pProperty->Get(pOwner)).DetachIfConst();
         }
 
+        SR_NODISCARD bool HasExplicitSetter() const {
+            return pProperty && pProperty->HasExplicitSetter();
+        }
+
+        SR_HTYPES_NS::Function<void(bool drag)> onBeforeChangeCallback;
         SR_UTILS_NS::Reflection::EditorPropertyParams editorPropertyParams;
         SR_UTILS_NS::Component::Ptr pComponent;
         uint64_t propertyIndex = 0;
@@ -108,6 +114,12 @@ namespace SR_CORE_GUI_NS {
         }
 
     protected:
+        static void SetValue(const PropertyDrawerContext& context, const PropertyDrawerFeedback& feedback, const SR_UTILS_NS::Reflection::Value& value) {
+            if (!context.pValue && feedback.isChanged && (!value.IsRef() || context.HasExplicitSetter())) {
+                context.GetProperty().Set(context.pOwner, value);
+            }
+        }
+
         SR_NODISCARD SR_GRAPH_NS::RenderContext::Ptr GetRenderContext() const;
 
     private:
@@ -137,6 +149,10 @@ namespace SR_CORE_GUI_NS {
         using Ptr = SR_HTYPES_NS::SharedPtr<MathVectorPropertyDrawer>;
     public:
         PropertyDrawerFeedback Draw(const PropertyDrawerContext& context) override;
+
+    private:
+        uint64_t m_numberTempData = 0;
+
     };
 
     class MathSizePropertyDrawer : public PropertyDrawerBase {

@@ -11,6 +11,9 @@ namespace SR_CORE_GUI_NS {
     class PointerPropertyDrawer : public PropertyDrawerBase {
         SR_CLASS()
     public:
+        using Ptr = SR_HTYPES_NS::SharedPtr<PointerPropertyDrawer>;
+
+    public:
         PropertyDrawerFeedback Draw(const PropertyDrawerContext& context) override;
 
         virtual void OnObjectReplaced(SRClass* pOld, SRClass* pNew) { }
@@ -21,6 +24,7 @@ namespace SR_CORE_GUI_NS {
         std::string m_searchBuffer;
         bool m_comboOpened = false;
         bool m_isOpened = false;
+        bool m_openedByDefault = false;
         ObjectPropertyDrawer::Ptr m_objectDrawer;
         std::vector<std::string> m_typeNames;
 

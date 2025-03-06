@@ -9,14 +9,6 @@
 #include <Codegen/EditorGizmo.generated.hpp>
 
 namespace SR_CORE_GUI_NS {
-    EditorGizmo::EditorGizmo()
-        : Super()
-    { }
-
-    EditorGizmo::~EditorGizmo() {
-        //SR_SAFE_DELETE_PTR(m_marshal);
-    }
-
     SR_MATH_NS::Matrix4x4 EditorGizmo::GetGizmoMatrix() const {
         if (!m_hierarchy || m_hierarchy->GetSelected().empty()) {
             return SR_MATH_NS::Matrix4x4::Identity();
@@ -210,8 +202,8 @@ namespace SR_CORE_GUI_NS {
             return;
         }
 
-        //SR_SAFE_DELETE_PTR(m_marshal)
-        //m_marshal = pGameObject->GetTransform()->SaveLegacy(SR_UTILS_NS::SavableContext(nullptr, SR_UTILS_NS::SavableFlagBits::SAVABLE_FLAG_NONE));
+        m_pSerializer = std::make_unique<SR_UTILS_NS::SRASerializer>();
+        SR_UTILS_NS::Serialization::Save(*m_pSerializer, pGameObject->GetTransform(), SR_UTILS_NS::ICommand::DATA_ID);
 
         Super::BeginGizmo();
     }
@@ -235,10 +227,9 @@ namespace SR_CORE_GUI_NS {
 
         auto&& pEngine = dynamic_cast<EditorGUI*>(m_hierarchy->GetManager())->GetEngine();
 
-        //auto&& cmd = new SR_CORE_NS::Commands::GameObjectTransform(pEngine, pGameObject, m_marshal->CopyPtr());
-        //pEngine->GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
-
-        //SR_SAFE_DELETE_PTR(m_marshal)
+        pEngine->GetCmdManager()->Execute<SR_CORE_NS::Commands::GameObjectTransform>(SR_UTILS_NS::SyncType::Async,
+            pEngine, pGameObject, std::move(m_pSerializer)
+        );
 
         Super::EndGizmo();
     }

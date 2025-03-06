@@ -160,10 +160,10 @@ namespace SR_CORE_NS::GUI {
         }
         if (ImGui::Selectable("Extract animations")) {
             SR_UTILS_NS::Path path = m_selectedDir.Concat(filename);
-            auto&& animations = SR_ANIMATIONS_NS::AnimationClip::Load(path);
-            for (auto&& pAnimation : animations) {
-               // pAnimation->Save()
-            }
+            //auto&& animations = SR_ANIMATIONS_NS::AnimationClip::Load(path);
+            //for (auto&& pAnimation : animations) {
+            //   // pAnimation->Save()
+            //}
         }
         if (ImGui::Selectable("Copy")) {
             SR_UTILS_NS::Path path = m_selectedDir.Concat(filename);

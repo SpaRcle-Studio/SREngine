@@ -97,9 +97,7 @@ namespace SR_CORE_GUI_NS {
             }
         }
 
-        if (!context.pValue && feedback.isChanged && !value.IsRef()) {
-            context.GetProperty().Set(context.pOwner, value);
-        }
+        SetValue(context, feedback, value);
 
         ImGui::PopStyleVar();
 

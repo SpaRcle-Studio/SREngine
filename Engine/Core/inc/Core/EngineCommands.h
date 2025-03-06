@@ -31,6 +31,7 @@ namespace SR_CORE_NS::Commands {
         using EnginePtr = SR_HTYPES_NS::SharedPtr<Engine>;
         using Base = IEngineReversibleCommand;
 
+
     public:
         explicit IEngineReversibleCommand(EnginePtr pEngine)
             : m_engine(std::move(pEngine))
@@ -51,8 +52,6 @@ namespace SR_CORE_NS::Commands {
         bool Redo() override;
         bool Undo() override;
 
-        std::string GetName() override { return "ChangeHierarchySelected"; }
-
     private:
         SR_CORE_NS::GUI::Hierarchy* m_hierarchy = nullptr;
         std::set<SR_UTILS_NS::EntityId> m_newSelected;
@@ -63,35 +62,42 @@ namespace SR_CORE_NS::Commands {
     //! ----------------------------------------------------------------------------------------------------------------
 
     class GameObjectTransform : public IEngineReversibleCommand {
+        using Super = IEngineReversibleCommand;
     public:
-        explicit GameObjectTransform(const EnginePtr& pEngine, const SR_UTILS_NS::GameObject::Ptr& ptr, SR_HTYPES_NS::Marshal::Ptr pOldMarshal);
-        ~GameObjectTransform() override;
+        GameObjectTransform(const EnginePtr& pEngine, const SR_UTILS_NS::GameObject::Ptr& pGameObject, SR_UTILS_NS::ISerializer::UniquePtr pOld, SR_UTILS_NS::ISerializer::UniquePtr pNew = nullptr)
+            : Super(pEngine)
+            , m_entityId(pGameObject->GetEntityId())
+            , m_pOld(std::move(pOld))
+            , m_pNew(std::move(pNew))
+        {
+            if (!m_pNew) {
+                m_pNew = std::make_unique<SR_UTILS_NS::SRASerializer>();
+                SR_UTILS_NS::Serialization::Save(*m_pNew, pGameObject->GetTransform(), DATA_ID);
+            }
+        }
 
         bool Redo() override;
         bool Undo() override;
 
-        std::string GetName() override { return "GameObjectTransform"; }
-
     private:
-        SR_UTILS_NS::EntityPath m_path;
-        SR_HTYPES_NS::Marshal::Ptr m_newMarshal = nullptr;
-        SR_HTYPES_NS::Marshal::Ptr m_oldMarshal = nullptr;
+        SR_UTILS_NS::EntityId m_entityId = SR_ID_INVALID;
+        SR_UTILS_NS::ISerializer::UniquePtr m_pNew;
+        SR_UTILS_NS::ISerializer::UniquePtr m_pOld;
 
     };
 
     //! ----------------------------------------------------------------------------------------------------------------
 
     class GameObjectRename : public IEngineReversibleCommand {
+        using Super = IEngineReversibleCommand;
     public:
-        GameObjectRename(const EnginePtr& pEngine, const SR_UTILS_NS::SceneObject::Ptr& ptr, SR_UTILS_NS::SceneObject::ObjectNameT newName);
+        GameObjectRename(const EnginePtr& pEngine, const SR_UTILS_NS::SceneObject::Ptr& pSO, SR_UTILS_NS::SceneObject::ObjectNameT newName);
 
         bool Redo() override;
         bool Undo() override;
 
-        std::string GetName() override { return "GameObjectRename"; }
-
     private:
-        SR_UTILS_NS::EntityPath m_path;
+        SR_UTILS_NS::EntityId m_entityId = SR_ID_INVALID;
         SR_UTILS_NS::GameObject::ObjectNameT m_previousName;
         SR_UTILS_NS::GameObject::ObjectNameT m_newName;
 
@@ -99,17 +105,16 @@ namespace SR_CORE_NS::Commands {
 
     //! ----------------------------------------------------------------------------------------------------------------
 
-    class GameObjectEnable : public IEngineReversibleCommand {
+    class EntityEnable : public IEngineReversibleCommand {
+        using Super = IEngineReversibleCommand;
     public:
-        GameObjectEnable(const EnginePtr& pEngine, const SR_UTILS_NS::SceneObject::Ptr& ptr, bool newEnabled);
+        EntityEnable(const EnginePtr& pEngine, const SR_UTILS_NS::Entity::Ptr& pEntity, bool newEnabled);
 
         bool Redo() override;
         bool Undo() override;
 
-        std::string GetName() override { return "GameObjectEnable"; }
-
     private:
-        SR_UTILS_NS::EntityPath m_path;
+        SR_UTILS_NS::EntityId m_entityId = SR_ID_INVALID;
         bool m_newEnabled = false;
         bool m_previousEnabled = false;
 

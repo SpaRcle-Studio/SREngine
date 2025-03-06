@@ -15,7 +15,7 @@ namespace SR_CORE_GUI_NS {
         auto&& editorParams = context.GetEditorParams();
 
         ImGui::PushID(context.pOwner);
-        ImGui::PushID(context.GetProperty().GetName().ToCStr());
+        ImGui::PushID(context.GetPropertyName().ToCStr());
 
         ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2{0, 0});
 
@@ -25,6 +25,11 @@ namespace SR_CORE_GUI_NS {
         std::string_view typeName = value.GetSharedPtrType();
         if (size_t pos = typeName.rfind(':'); pos != std::string_view::npos) {
             typeName.remove_prefix(pos + 1);
+        }
+
+        if (!m_openedByDefault) {
+            m_isOpened |= context.openedByDefault;
+            m_openedByDefault = true;
         }
 
         m_isOpened |= context.noHeader;
@@ -149,18 +154,27 @@ namespace SR_CORE_GUI_NS {
                 SRClass* pNew = nullptr;
 
                 if (m_typeNames[selectedIndex.value()] == "(nullptr)") {
+                    if (context.onBeforeChangeCallback) {
+                        context.onBeforeChangeCallback(false);
+                    }
                     OnObjectReplaced(pClassValue, nullptr);
                     pNew = nullptr;
                     feedback.isChanged = true;
                 }
                 else if (pClassValue) {
                     if (m_typeNames[selectedIndex.value()] != pClassValue->GetMeta()->GetFactoryName()) {
+                        if (context.onBeforeChangeCallback) {
+                            context.onBeforeChangeCallback(false);
+                        }
                         pNew = SR_UTILS_NS::Factory::Instance().CreateBase(m_typeNames[selectedIndex.value()]);
                         OnObjectReplaced(pClassValue, pNew);
                         feedback.isChanged = true;
                     }
                 }
                 else {
+                    if (context.onBeforeChangeCallback) {
+                        context.onBeforeChangeCallback(false);
+                    }
                     pNew = SR_UTILS_NS::Factory::Instance().CreateBase(m_typeNames[selectedIndex.value()]);
                     OnObjectReplaced(pClassValue, pNew);
                     feedback.isChanged = true;
@@ -216,9 +230,7 @@ namespace SR_CORE_GUI_NS {
         ImGui::PopID();
         ImGui::PopID();
 
-        if (!context.pValue && feedback.isChanged && !value.IsRef()) {
-            context.GetProperty().Set(context.pOwner, value);
-        }
+        SetValue(context, feedback, value);
 
         return feedback;
     }
