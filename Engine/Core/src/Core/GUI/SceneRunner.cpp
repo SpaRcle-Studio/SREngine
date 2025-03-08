@@ -21,13 +21,12 @@ namespace SR_CORE_NS::GUI {
         auto&& pEngine = dynamic_cast<EditorGUI*>(GetManager())->GetEngine();
         auto&& pOverlay = pEngine->GetRenderContext()->GetPipeline()->GetOverlay(SR_GRAPH_NS::OverlayType::ImGui);
         auto&& pFont = pOverlay.DynamicCast<SR_GRAPH_NS::ImGuiOverlay>()->GetIconFont();
+        float_t iconSize = SR_UTILS_NS::StoreUtils::User::GetFloat("ImGuiIconFontSize", 32.f);
+        int32_t framePadding = 3;
 
         if (!pFont) {
             return;
         }
-
-        float_t scale = pFont->Scale;
-        pFont->Scale /= 3;
 
         bool locked = false;
 
@@ -47,8 +46,9 @@ namespace SR_CORE_NS::GUI {
         ImGui::Separator();
 
         const EditorIcon playIcon = active ? EditorIcon::Stop : EditorIcon::Play;
-        if (auto&& pDescriptor = GetEditor()->GetIconDescriptor(playIcon)) {
-            if (SR_GRAPH_GUI_NS::ImageButton("##imgScenePlayBtn", pDescriptor, SR_MATH_NS::FVector2(32), 3) && locked) {
+        if (auto&& pDescriptor = GetEditor()->GetIconDescriptor(playIcon))
+        {
+            if (SR_GRAPH_GUI_NS::ImageButton("##imgScenePlayBtn", pDescriptor, SR_MATH_NS::IVector2(iconSize), framePadding) && locked) {
                 active = !active;
 
                 if (active) {
@@ -64,7 +64,7 @@ namespace SR_CORE_NS::GUI {
         ImGui::SameLine();
 
         if (auto&& pDescriptor = GetEditor()->GetIconDescriptor(paused ? EditorIcon::Pause : EditorIcon::PauseActive)) {
-            if (SR_GRAPH_GUI_NS::ImageButton("##imgScenePauseBtn", pDescriptor, SR_MATH_NS::FVector2(32), 3)) {
+            if (SR_GRAPH_GUI_NS::ImageButton("##imgScenePauseBtn", pDescriptor, SR_MATH_NS::IVector2(iconSize), framePadding)) {
                 /// SR_AUDIO_NS::SoundManager::Instance().Play("Editor/Audio/Heavy-popping.wav");
                 paused = !paused;
             }
@@ -74,7 +74,7 @@ namespace SR_CORE_NS::GUI {
             ImGui::SameLine();
 
             if (auto&& pDescriptor = GetEditor()->GetIconDescriptor(EditorIcon::FrameSkip)) {
-                if (SR_GRAPH_GUI_NS::ImageButton("##imgFrameSkipBtn", pDescriptor, SR_MATH_NS::FVector2(32), 3) && locked) {
+                if (SR_GRAPH_GUI_NS::ImageButton("##imgFrameSkipBtn", pDescriptor, SR_MATH_NS::IVector2(iconSize), framePadding) && locked) {
                     pEngine->SetOneFramePauseSkip(true);
                 }
             }
@@ -84,7 +84,7 @@ namespace SR_CORE_NS::GUI {
             ImGui::SameLine();
 
             if (auto&& pDescriptor = GetEditor()->GetIconDescriptor(EditorIcon::Game)) {
-                if (SR_GRAPH_GUI_NS::ImageButton("##imgSceneGameBtn", pDescriptor, SR_MATH_NS::FVector2(32), 3) && locked) {
+                if (SR_GRAPH_GUI_NS::ImageButton("##imgSceneGameBtn", pDescriptor, SR_MATH_NS::IVector2(iconSize), framePadding) && locked) {
                     if (!active) {
                         active = PlayScene();
                     }
@@ -98,8 +98,7 @@ namespace SR_CORE_NS::GUI {
             ImGui::SameLine();
 
             if (auto&& pDescriptor = GetEditor()->GetIconDescriptor(EditorIcon::Back)) {
-                if (SR_GRAPH_GUI_NS::ImageButton("##imgSceneBackBtn", pDescriptor, SR_MATH_NS::FVector2(32), 3)) {
-                    m_scene->SaveScene();
+                if (SR_GRAPH_GUI_NS::ImageButton("##imgSceneBackBtn", pDescriptor, SR_MATH_NS::IVector2(iconSize), framePadding)) {
                     pEngine->SetActive((active = false));
                     pEngine->GetEditor()->LoadSceneFromCachedPath();
                 }
@@ -111,8 +110,6 @@ namespace SR_CORE_NS::GUI {
         ImGui::PopFont();
         ImGui::PopStyleVar();
 
-        pFont->Scale = scale;
-
         ImGui::Text("%s", m_isActive ? m_scenePath.CStr() : m_lastPath.CStr());
 
         ImGui::Separator();
@@ -122,6 +119,10 @@ namespace SR_CORE_NS::GUI {
             pEngine->SetPaused((m_isPaused = paused));
             m_scene.Unlock();
         }
+
+        const float_t lineHeight = GImGui->Font->FontSize + GImGui->Style.FramePadding.y * 2.0f;
+        int32_t widgetSize = (framePadding * 2 + iconSize) + lineHeight + 10;
+        SetSize(SR_MATH_NS::IVector2(0, widgetSize));
     }
 
     bool SceneRunner::PlayScene() {

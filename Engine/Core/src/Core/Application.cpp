@@ -316,7 +316,7 @@ namespace SR_CORE_NS {
     }
 
     void Application::SwitchResourcesFolder(const SR_UTILS_NS::Path& path) {
-        SR_STATIC_ASSERT("Not yet implemented.");
+        // SR_STATIC_ASSERT("Not yet implemented.");
     }
 
     void Application::Reload() {
