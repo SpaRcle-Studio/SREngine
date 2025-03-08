@@ -43,7 +43,7 @@ namespace SR_CORE_GUI_NS {
         void ChildContextMenu(const SR_UTILS_NS::SceneObject::Ptr& gm, uint64_t id);
         void DrawChild(const SR_UTILS_NS::SceneObject::Ptr& root, uint32_t prefabIndex);
         void SR_INLINE Copy() const;
-        void SR_INLINE Paste(const SR_UTILS_NS::SceneObject::Ptr& pParent = nullptr);
+        void SR_INLINE Paste(const SR_UTILS_NS::SceneObject::Ptr& pParent, bool fromGUI);
         void SR_INLINE Delete();
 
     private:

@@ -1,7 +1,7 @@
 sra format
 0-r:Root
 	1-v:entityId
-		2-i:-1
+		2-i:4429871826663315878
 	1-o:logic
 		2-v:type
 			3-s:ScenePrefabLogic
