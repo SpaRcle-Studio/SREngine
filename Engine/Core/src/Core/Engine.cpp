@@ -7,6 +7,7 @@
 #include <Core/EngineMigrators.h>
 #include <Core/GUI/EditorGUI.h>
 #include <Core/World/EngineScene.h>
+#include <Core/EngineCommands.h>
 
 #include <Utils/Events/EventManager.h>
 #include <Utils/World/Scene.h>

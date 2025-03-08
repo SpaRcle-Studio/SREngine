@@ -33,7 +33,12 @@ namespace SR_CORE_GUI_NS {
 
         if (value.IsString()) {
             if (auto&& pString = value.TryCast<std::string>()) {
-                if (ImGui::InputText("##Input", pString, ImGuiInputTextFlags_EnterReturnsTrue)) {
+                std::string copy = *pString;
+                if (ImGui::InputText("##Input", &copy, ImGuiInputTextFlags_EnterReturnsTrue)) {
+                    if (context.onBeforeChangeCallback) {
+                        context.onBeforeChangeCallback(false);
+                    }
+                    *pString = copy;
                     feedback.isChanged = true;
                 }
             }
@@ -60,6 +65,9 @@ namespace SR_CORE_GUI_NS {
             if (auto&& pStringAtom = value.TryCast<SR_UTILS_NS::StringAtom>()) {
                 std::string str = pStringAtom->ToString();
                 if (ImGui::InputText("##Input", str.data(), str.size(), ImGuiInputTextFlags_EnterReturnsTrue)) {
+                    if (context.onBeforeChangeCallback) {
+                        context.onBeforeChangeCallback(false);
+                    }
                     feedback.isChanged = true;
                     *pStringAtom = str;
                 }

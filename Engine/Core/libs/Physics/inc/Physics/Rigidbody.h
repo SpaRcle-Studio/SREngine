@@ -95,7 +95,7 @@ namespace SR_PTYPES_NS {
 
         SR_NODISCARD bool ExecuteInEditMode() const override { return true; }
         SR_NODISCARD ShapeType GetType() const noexcept;
-        SR_NODISCARD const CollisionShape::Ptr& GetCollisionShape() const noexcept { return m_shape; }
+        SR_NODISCARD const CollisionShape::Ptr& GetCollisionShape() const noexcept;
         SR_NODISCARD SR_MATH_NS::FVector3 GetCenter() const noexcept;
         SR_NODISCARD SR_MATH_NS::FVector3 GetCenterDirection() const noexcept;
         SR_NODISCARD float_t GetMass() const noexcept;
@@ -164,8 +164,8 @@ namespace SR_PTYPES_NS {
         bool m_isStatic = false;
         /// @property @setter(SetCenter) @getter(GetCenter) @drag(0.01f)
         SR_MATH_NS::FVector3 m_center;
-        /// @property @notNull @setter(SetShape)
-        CollisionShape::Ptr m_shape = CollisionShape::MakeShared();
+        /// @property @notNull @setter(SetShape) @getter(GetCollisionShape)
+        mutable CollisionShape::Ptr m_shape;
 
         RigidbodyImpl* m_impl = nullptr;
         LibraryPtr m_library = nullptr;

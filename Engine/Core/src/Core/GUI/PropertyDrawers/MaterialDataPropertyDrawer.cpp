@@ -83,6 +83,9 @@ namespace SR_CORE_GUI_NS {
             const ImVec2 removeButtonSize = { SR_MAX(removeWidth, 0), context.fieldHeight };
             SR_GRAPH_GUI_NS::ImGuiDisabledLockGuard guard(isDefault);
             if (ImGui::Button("Delete", removeButtonSize)) {
+                if (context.onBeforeChangeCallback) {
+                    context.onBeforeChangeCallback(false);
+                }
                 isChanged = true;
                 m_stagesToRemove.insert(name);
             }
@@ -155,6 +158,9 @@ namespace SR_CORE_GUI_NS {
         propertyContext.fieldWidth -= propertyButtonSize.x;
 
         if (ImGui::Button(property.displayName.c_str(), propertyButtonSize)) {
+            if (context.onBeforeChangeCallback) {
+                context.onBeforeChangeCallback(false);
+            }
             wasReset = true;
             shaderData.SetData(property.id, SR_GRAPH_NS::GetVariantFromShaderVarType(property.type), property.type);
         }
@@ -215,7 +221,7 @@ namespace SR_CORE_GUI_NS {
 
                     ImGui::BeginGroup();
 
-                    ImGui::Text("Size: {}x{}\nChannels: {}\nFormat: {}\nFilter: {}"_format(
+                    ImGui::Text("%s", "Size: {}x{}\nChannels: {}\nFormat: {}\nFilter: {}"_format(
                         pTexture->GetWidth(),
                         pTexture->GetHeight(),
                         pTexture->GetChannels(),
@@ -231,7 +237,7 @@ namespace SR_CORE_GUI_NS {
 
                     ImGui::BeginGroup();
 
-                    ImGui::Text("Compression: {}\nMipLevels: {}\nCpuUsage: {}\nAlpha: {}"_format(
+                    ImGui::Text("%s", "Compression: {}\nMipLevels: {}\nCpuUsage: {}\nAlpha: {}"_format(
                         config.GetCompression(),
                         config.GetMipLevels(),
                         config.GetCpuUsage(),

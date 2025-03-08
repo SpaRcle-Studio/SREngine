@@ -134,19 +134,29 @@ namespace SR_CORE_GUI_NS {
                 Paste();
             }
 
-            ImGui::Separator();
-
-            if (ImGui::Selectable("Hierarchy Settings (EMPTY)")) { // TODO: Когда-нибудь мы будем настраивать стили окон и подобное, наверное, надеюсь
-
-            }
-
             ImGui::EndPopup();
         }
     }
 
     void Hierarchy::DrawChild(const SR_UTILS_NS::SceneObject::Ptr& root, uint32_t prefabIndex) {
+        const bool showHidden = SR_UTILS_NS::StoreUtils::User::GetBool("ShowHiddenEntities", false);
+
+        if (!showHidden && root->HasEditorFlags(SR_UTILS_NS::EditorFlags::Hidden)) {
+            return;
+        }
+
         const auto& name = root->GetName();
-        const bool hasChild = root->HasChildren();
+        bool hasChild = false;
+
+        for (auto&& pChild : root->GetChildren()) {
+            if (!pChild) {
+                continue;
+            }
+            if (showHidden || !pChild->HasEditorFlags(SR_UTILS_NS::EditorFlags::Hidden)) {
+                hasChild = true;
+                break;
+            }
+        }
 
         const ImGuiTreeNodeFlags flags = (hasChild ? m_nodeFlagsWithChild : m_nodeFlagsWithoutChild) |
                                          ((m_selected.count(root) == 1) ? ImGuiTreeNodeFlags_Selected : 0);
@@ -227,7 +237,7 @@ namespace SR_CORE_GUI_NS {
                         ptr->Unlock();
                     }
                 }*/
-                if (m_scene.RecursiveLockIfValid()) {
+                if (m_scene) {
                     auto&& pEngine = dynamic_cast<EditorGUI*>(GetManager())->GetEngine();
 
                     std::vector<SR_UTILS_NS::ReversibleCommand*> commands;
@@ -240,7 +250,6 @@ namespace SR_CORE_GUI_NS {
                     }
                     auto&& cmd = new SR_UTILS_NS::GroupCommand(std::move(commands));
                     pEngine->GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
-                    m_scene.Unlock();
                 }
             }
 
@@ -274,17 +283,19 @@ namespace SR_CORE_GUI_NS {
                 Paste((m_selected.size() == 1) ? m_selected.begin()->Get() : nullptr);
             }
 
-            ImGui::Separator();
+            if (!pSceneObject->HasEditorFlags(SR_UTILS_NS::EditorFlags::DontDelete)) {
+                ImGui::Separator();
 
-            if (ImGui::Selectable("Cut")) {
-                Copy();
-                Delete();
-            }
+                if (ImGui::Selectable("Cut")) {
+                    Copy();
+                    Delete();
+                }
 
-            ImGui::Separator();
+                ImGui::Separator();
 
-            if (ImGui::Selectable("Delete")) {
-                Delete();
+                if (ImGui::Selectable("Delete")) {
+                    Delete();
+                }
             }
 
             if (pSceneObject) {
@@ -409,26 +420,36 @@ namespace SR_CORE_GUI_NS {
     void Hierarchy::Delete() {
         SR_LOCK_GUARD;
 
-        if (!m_selected.empty() && m_scene.RecursiveLockIfValid()) {
+        bool hasDeletable = false;
+        for (auto&& pSelected : m_selected) {
+            if (pSelected && !pSelected->HasEditorFlags(SR_UTILS_NS::EditorFlags::DontDelete)) {
+                hasDeletable = true;
+                break;
+            }
+        }
+
+        if (!hasDeletable) {
+            return;
+        }
+
+        if (!m_selected.empty() && m_scene) {
             auto&& pEngine = dynamic_cast<EditorGUI*>(GetManager())->GetEngine();
 
-            /*std::vector<SR_UTILS_NS::ReversibleCommand*> commands;
+            std::vector<SR_UTILS_NS::ReversibleCommand*> commands;
             commands.emplace_back(new SR_CORE_NS::Commands::ChangeHierarchySelected(pEngine, this, m_selected, {}));
-            for (auto&& selected : m_selected) {
-                if (selected.RecursiveLockIfValid()) {
-                    commands.emplace_back(new SR_CORE_NS::Commands::GameObjectDelete(pEngine, selected));
-                    selected.Unlock();
+            for (auto&& pSelected : m_selected) {
+                if (!pSelected) {
+                    continue;
                 }
+                if (pSelected->HasEditorFlags(SR_UTILS_NS::EditorFlags::DontDelete)) {
+                    continue;
+                }
+                commands.emplace_back(new SR_CORE_NS::Commands::SceneObjectDelete(pEngine, pSelected));
             }
             auto&& cmd = new SR_UTILS_NS::GroupCommand(std::move(commands));
-            pEngine->GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);*/
-
-            for (auto&& selected : m_selected) {
-                selected->Destroy();
-            }
+            pEngine->GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
 
             m_selected.clear();
-            m_scene.Unlock();
         }
     }
 

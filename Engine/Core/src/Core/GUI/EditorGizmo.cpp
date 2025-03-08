@@ -202,7 +202,7 @@ namespace SR_CORE_GUI_NS {
             return;
         }
 
-        m_pSerializer = std::make_unique<SR_UTILS_NS::SRASerializer>();
+        m_pSerializer = SR_CORE_NS::Commands::CreateSerializer();
         SR_UTILS_NS::Serialization::Save(*m_pSerializer, pGameObject->GetTransform(), SR_UTILS_NS::ICommand::DATA_ID);
 
         Super::BeginGizmo();
@@ -227,9 +227,9 @@ namespace SR_CORE_GUI_NS {
 
         auto&& pEngine = dynamic_cast<EditorGUI*>(m_hierarchy->GetManager())->GetEngine();
 
-        pEngine->GetCmdManager()->Execute<SR_CORE_NS::Commands::GameObjectTransform>(SR_UTILS_NS::SyncType::Async,
+        pEngine->GetCmdManager()->Store(new SR_CORE_NS::Commands::GameObjectTransform(
             pEngine, pGameObject, std::move(m_pSerializer)
-        );
+        ));
 
         Super::EndGizmo();
     }

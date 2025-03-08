@@ -262,7 +262,6 @@ namespace SR_CORE_NS {
         SR_GRAPH_NS::Memory::CameraManager::DestroySingleton();
         SR_SCRIPTING_NS::GlobalEvoCompiler::DestroySingleton();
         SR_SCRIPTING_NS::EvoScriptManager::DestroySingleton();
-        SR_UTILS_NS::EntityManager::DestroySingleton();
         SR_GRAPH_GUI_NS::NodeManager::DestroySingleton();
         SR_UTILS_NS::TaskManager::DestroySingleton();
         SR_GRAPH_NS::Memory::MeshManager::DestroySingleton();

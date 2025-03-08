@@ -13,6 +13,7 @@ namespace SR_PTYPES_NS {
     { }
 
     CollisionShape::~CollisionShape() {
+        RemoveDebugShape();
         SR_SAFE_DELETE_PTR(m_impl);
     }
 

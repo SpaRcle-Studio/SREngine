@@ -69,9 +69,11 @@ namespace SR_CORE_GUI_NS {
         SR_WORLD_NS::Scene::Ptr m_scene;
 
         struct ComponentContext {
+            SR_UTILS_NS::TimePointType lastUsage;
             ObjectPropertyDrawer::Ptr pObjectDrawer;
         };
-        std::map<SR_UTILS_NS::Component::Ptr, ComponentContext> m_componentContexts;
+        std::map<SR_UTILS_NS::EntityId, ComponentContext> m_componentContexts;
+        uint64_t m_maxComponentContexts = 100;
 
         SR_CORE_GUI_NS::PointerPropertyDrawer::Ptr m_pPointerDrawer;
 
@@ -80,6 +82,9 @@ namespace SR_CORE_GUI_NS {
         bool m_isDragMode = false;
         SR_HTYPES_NS::Function<void(bool drag)> m_onBeforeChangeCallback;
         std::unique_ptr<SR_UTILS_NS::ISerializer> m_pTransformSerializer;
+        std::unique_ptr<SR_UTILS_NS::ISerializer> m_pComponentsSerializer;
+        std::unique_ptr<SR_UTILS_NS::ISerializer> m_pComponentSerializer;
+        SR_UTILS_NS::Component::Ptr m_editableComponent;
 
     };
 }

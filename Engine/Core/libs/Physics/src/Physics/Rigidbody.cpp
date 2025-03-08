@@ -20,7 +20,7 @@
 
 namespace SR_PTYPES_NS {
     Rigidbody::Rigidbody() {
-        m_shape->SetRigidbody(this);
+        GetCollisionShape()->SetRigidbody(this);
     }
 
     Rigidbody::~Rigidbody() {
@@ -30,7 +30,7 @@ namespace SR_PTYPES_NS {
     }
 
     void Rigidbody::OnDestroy() {
-        m_shape->RemoveDebugShape();
+        GetCollisionShape()->RemoveDebugShape();
 
         /// получаем указатель обязательно до OnDestroy
         PhysicsScene::Ptr physicsScene = GetPhysicsScene();
@@ -91,7 +91,7 @@ namespace SR_PTYPES_NS {
                 m_scale
             );
 
-            m_shape->UpdateDebugShape();
+            GetCollisionShape()->UpdateDebugShape();
         }
 
         SetMatrixDirty(true);
@@ -112,7 +112,7 @@ namespace SR_PTYPES_NS {
 
         SetMatrixDirty(false);
 
-        m_shape->UpdateMatrix();
+        GetCollisionShape()->UpdateMatrix();
 
         return true;
     }
@@ -138,7 +138,7 @@ namespace SR_PTYPES_NS {
     void Rigidbody::SetCenter(const SR_MATH_NS::FVector3& center) {
         m_center = center;
         SetMatrixDirty(true);
-        m_shape->UpdateDebugShape();
+        GetCollisionShape()->UpdateDebugShape();
     }
 
     void Rigidbody::SetMass(float_t mass) {
@@ -152,11 +152,11 @@ namespace SR_PTYPES_NS {
     }
 
     ShapeType Rigidbody::GetType() const noexcept {
-        return m_shape->GetType();
+        return GetCollisionShape()->GetType();
     }
 
     void Rigidbody::SetType(ShapeType type) {
-        if (m_shape->GetType() == type) {
+        if (GetCollisionShape()->GetType() == type) {
             return;
         }
 
@@ -165,7 +165,7 @@ namespace SR_PTYPES_NS {
             return;
         }
 
-        m_shape->SetType(type);
+        GetCollisionShape()->SetType(type);
 
         SetShapeDirty(true);
     }
@@ -182,7 +182,7 @@ namespace SR_PTYPES_NS {
             SRHalt("Failed to get physics scene!");
         }
 
-        m_shape->UpdateDebugShape();
+        GetCollisionShape()->UpdateDebugShape();
 
         Super::OnEnable();
     }
@@ -195,7 +195,7 @@ namespace SR_PTYPES_NS {
             SRHalt("Failed to get physics scene!");
         }
 
-        m_shape->RemoveDebugShape();
+        GetCollisionShape()->RemoveDebugShape();
 
         Super::OnDisable();
     }
@@ -217,9 +217,9 @@ namespace SR_PTYPES_NS {
             return RBUpdShapeRes::Nothing;
         }
 
-        m_shape->RemoveDebugShape();
+        GetCollisionShape()->RemoveDebugShape();
 
-        if (!m_shape->UpdateShape()) {
+        if (!GetCollisionShape()->UpdateShape()) {
             SR_ERROR("Rigidbody::UpdateShape() : failed to update shape!");
             return RBUpdShapeRes::Error;
         }
@@ -229,7 +229,7 @@ namespace SR_PTYPES_NS {
             return RBUpdShapeRes::Error;
         }
 
-        m_shape->UpdateDebugShape();
+        GetCollisionShape()->UpdateDebugShape();
 
         UpdateMatrix(true);
 
@@ -305,7 +305,7 @@ namespace SR_PTYPES_NS {
     }
 
     void Rigidbody::Update(float_t dt) {
-        m_shape->Update(dt);
+        GetCollisionShape()->Update(dt);
         Super::Update(dt);
     }
 
@@ -363,5 +363,12 @@ namespace SR_PTYPES_NS {
         }
 
         return false;
+    }
+
+    const CollisionShape::Ptr& Rigidbody::GetCollisionShape() const noexcept {
+        if (!m_shape) {
+            m_shape = CollisionShape::MakeShared();
+        }
+        return m_shape;
     }
 }

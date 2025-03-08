@@ -70,6 +70,9 @@ namespace SR_CORE_GUI_NS {
         ImGui::SameLine();
 
         if (ImGui::Button("Add", buttonSize)) {
+            if (context.onBeforeChangeCallback) {
+                context.onBeforeChangeCallback(false);
+            }
             container.Resize(container.Size() + 1);
             feedback.isChanged = true;
         }
@@ -78,6 +81,9 @@ namespace SR_CORE_GUI_NS {
 
         if (ImGui::Button("Remove", buttonSize)) {
             if (!container.Empty()) {
+                if (context.onBeforeChangeCallback) {
+                    context.onBeforeChangeCallback(false);
+                }
                 container.Resize(container.Size() - 1);
                 feedback.isChanged = true;
             }
@@ -86,6 +92,9 @@ namespace SR_CORE_GUI_NS {
         ImGui::SameLine();
 
         if (ImGui::Button("Clear", buttonSize)) {
+            if (context.onBeforeChangeCallback) {
+                context.onBeforeChangeCallback(false);
+            }
             container.Clear();
             feedback.isChanged = true;
         }

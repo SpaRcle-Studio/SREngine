@@ -9,6 +9,8 @@
 
 namespace SR_CORE_GUI_NS {
     PropertyDrawerFeedback ObjectPropertyDrawer::Draw(const PropertyDrawerContext& context) {
+        SR_TRACY_ZONE;
+
         PropertyDrawerFeedback feedback;
 
         SR_UTILS_NS::Reflection::Value value = context.GetValue();
@@ -70,29 +72,6 @@ namespace SR_CORE_GUI_NS {
 
         if (m_isOpened) {
             if (const SR_UTILS_NS::SRClassMeta* pMeta = pClassValue->GetMeta()) {
-                if (m_drawers.empty()) {
-                    pMeta->ForEachProperty([&](auto&& property, uint64_t index) {
-                        SR_UTILS_NS::StringAtom inspector = property.GetEditorParams().GetInspector();
-
-                        if (inspector.Empty()) {
-                            inspector = GetValueInspector(property.Get(pClassValue));
-                        }
-
-                        if (inspector.Empty()) {
-                            m_drawers.emplace_back();
-                            return;
-                        }
-
-                        PropertyDrawerBase::Ptr pDrawer = SR_UTILS_NS::Factory::Instance().Create<PropertyDrawerBase>(inspector);
-                        if (!pDrawer) {
-                            m_drawers.emplace_back();
-                            return;
-                        }
-
-                        m_drawers.emplace_back(pDrawer);
-                    });
-                }
-
                 PropertyDrawerContext propertyContext = context;
                 propertyContext.pValue = nullptr;
                 float_t totalWidth = (context.fieldWidth + context.fieldTitleWidth);
@@ -105,6 +84,24 @@ namespace SR_CORE_GUI_NS {
                 pMeta->ForEachProperty([&](auto&& property, uint64_t index) {
                     if (property.IsHidden(pClassValue)) {
                         return;
+                    }
+
+                    SR_UTILS_NS::StringAtom inspector = property.GetEditorParams().GetInspector();
+                    if (inspector.Empty()) {
+                        inspector = GetValueInspector(property.Get(pClassValue));
+                    }
+
+                    if (inspector.Empty()) {
+                        SR_GRAPH_GUI_NS::ColoredText("Missing inspector for element!", ImColor(255, 0, 0));
+                        return;
+                    }
+
+                    if (m_drawers.size() <= index) {
+                        m_drawers.resize(index + 1);
+                    }
+
+                    if (!m_drawers[index] || m_drawers[index]->GetMeta()->GetFactoryName() != inspector) {
+                        m_drawers[index] = SR_UTILS_NS::Factory::Instance().Create<PropertyDrawerBase>(inspector);
                     }
 
                     if (!m_drawers[index]) {

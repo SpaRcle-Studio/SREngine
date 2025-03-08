@@ -31,7 +31,7 @@ namespace SR_CORE_NS::Commands {
     bool ChangeHierarchySelected::Redo() {
         Selection changeSelected;
         for (SR_UTILS_NS::EntityId gmId:m_newSelected) {
-            auto entity = SR_UTILS_NS::EntityManager::Instance().FindById(gmId);
+            auto entity = m_scene->GetEntityController()->FindById(gmId);
             auto pObject = entity.DynamicCast<SR_UTILS_NS::SceneObject>();
 
             if (!pObject) {
@@ -54,7 +54,7 @@ namespace SR_CORE_NS::Commands {
     bool ChangeHierarchySelected::Undo() {
         Selection changeSelected;
         for (SR_UTILS_NS::EntityId gmId:m_oldSelected) {
-            auto entity = SR_UTILS_NS::EntityManager::Instance().FindById(gmId);
+            auto entity = m_scene->GetEntityController()->FindById(gmId);
             auto pObject = entity.DynamicCast<SR_UTILS_NS::SceneObject>();
 
             if (!pObject) {
@@ -71,7 +71,7 @@ namespace SR_CORE_NS::Commands {
     //! ----------------------------------------------------------------------------------------------------------------
 
     bool GameObjectTransform::Redo() {
-        auto&& pEntity = SR_UTILS_NS::EntityManager::Instance().FindById(m_entityId);
+        auto&& pEntity = m_scene->GetEntityController()->FindById(m_entityId);
 
         if (auto&& pObject = pEntity.DynamicCast<SR_UTILS_NS::GameObject>()) {
             auto&& pDeserializer = m_pNew->CreateDeserializer();
@@ -87,14 +87,17 @@ namespace SR_CORE_NS::Commands {
     }
 
     bool GameObjectTransform::Undo() {
-        auto&& pEntity = SR_UTILS_NS::EntityManager::Instance().FindById(m_entityId);
+        auto&& pEntity = m_scene->GetEntityController()->FindById(m_entityId);
 
         if (auto&& pObject = pEntity.DynamicCast<SR_UTILS_NS::GameObject>()) {
             auto&& pDeserializer = m_pOld->CreateDeserializer();
 
             SR_UTILS_NS::Transform::Ptr pTransform;
             SR_UTILS_NS::Serialization::Load(*pDeserializer, pTransform, DATA_ID);
-            pObject->SetTransform(pTransform);
+
+            if (pTransform) {
+                pObject->SetTransform(pTransform);
+            }
 
             return true;
         }
@@ -104,15 +107,92 @@ namespace SR_CORE_NS::Commands {
 
     //! ----------------------------------------------------------------------------------------------------------------
 
-    GameObjectRename::GameObjectRename(const EnginePtr& pEngine, const SR_UTILS_NS::SceneObject::Ptr& pSO, SR_UTILS_NS::SceneObject::ObjectNameT newName)
+    bool ComponentsChange::Redo() {
+        SR_TRACY_ZONE;
+
+        auto&& pEntity = m_scene->GetEntityController()->FindById(m_entityId);
+
+        if (auto&& pObject = pEntity.DynamicCast<SR_UTILS_NS::IComponentable>()) {
+            auto&& pDeserializer = m_pNew->CreateDeserializer();
+
+            std::vector<SR_UTILS_NS::Component::Ptr> components;
+            SR_UTILS_NS::Serialization::Load(*pDeserializer, components, DATA_ID);
+            pObject->RemoveComponents();
+
+            for (auto&& pComponent : components) {
+                pObject->AddComponent(pComponent);
+            }
+
+            return true;
+        }
+
+        return false;
+    }
+
+    bool ComponentsChange::Undo() {
+        SR_TRACY_ZONE;
+
+        auto&& pEntity = m_scene->GetEntityController()->FindById(m_entityId);
+
+        if (auto&& pObject = pEntity.DynamicCast<SR_UTILS_NS::IComponentable>()) {
+            auto&& pDeserializer = m_pOld->CreateDeserializer();
+
+            std::vector<SR_UTILS_NS::Component::Ptr> components;
+            SR_UTILS_NS::Serialization::Load(*pDeserializer, components, DATA_ID);
+            pObject->RemoveComponents();
+
+            for (auto&& pComponent : components) {
+                pObject->AddComponent(pComponent);
+            }
+
+            return true;
+        }
+
+        return false;
+    }
+
+
+    //! ----------------------------------------------------------------------------------------------------------------
+
+    bool ComponentChange::Redo() {
+        SR_TRACY_ZONE;
+
+        auto&& pEntity = m_scene->GetEntityController()->FindById(m_entityId);
+
+        if (auto&& pObject = pEntity.DynamicCast<SR_UTILS_NS::Component>()) {
+            auto&& pDeserializer = m_pNew->CreateDeserializer();
+            SR_UTILS_NS::Serialization::Load(*pDeserializer, *pObject, DATA_ID);
+            return true;
+        }
+
+        return false;
+    }
+
+    bool ComponentChange::Undo() {
+        SR_TRACY_ZONE;
+
+        auto&& pEntity = m_scene->GetEntityController()->FindById(m_entityId);
+
+        if (auto&& pObject = pEntity.DynamicCast<SR_UTILS_NS::Component>()) {
+            auto&& pDeserializer = m_pOld->CreateDeserializer();
+            SR_UTILS_NS::Serialization::Load(*pDeserializer, *pObject, DATA_ID);
+            return true;
+        }
+
+        return false;
+    }
+
+    //! ----------------------------------------------------------------------------------------------------------------
+
+    SceneObjectRename::SceneObjectRename(const EnginePtr& pEngine, const SR_UTILS_NS::SceneObject::Ptr& pSO, SR_UTILS_NS::SceneObject::ObjectNameT newName)
         : Super(pEngine)
         , m_entityId(pSO->GetEntityId())
         , m_previousName(pSO->GetName())
         , m_newName(newName)
     { }
 
-    bool GameObjectRename::Redo() {
-        auto&& pEntity = SR_UTILS_NS::EntityManager::Instance().FindById(m_entityId);
+    bool SceneObjectRename::Redo() {
+        auto&& pEntity = m_scene->GetEntityController()->FindById(m_entityId);
 
         if (auto&& pObject = pEntity.DynamicCast<SR_UTILS_NS::SceneObject>()) {
             pObject->SetName(m_newName);
@@ -122,11 +202,73 @@ namespace SR_CORE_NS::Commands {
         return false;
     }
 
-    bool GameObjectRename::Undo() {
-        auto&& pEntity = SR_UTILS_NS::EntityManager::Instance().FindById(m_entityId);
+    bool SceneObjectRename::Undo() {
+        auto&& pEntity = m_scene->GetEntityController()->FindById(m_entityId);
 
         if (auto&& pObject = pEntity.DynamicCast<SR_UTILS_NS::SceneObject>()) {
             pObject->SetName(m_previousName);
+            return true;
+        }
+
+        return false;
+    }
+
+    //! ----------------------------------------------------------------------------------------------------------------
+
+    SceneObjectTag::SceneObjectTag(const EnginePtr& pEngine, const SR_UTILS_NS::SceneObject::Ptr& pSO, SR_UTILS_NS::StringAtom newTag)
+        : Super(pEngine)
+        , m_entityId(pSO->GetEntityId())
+        , m_previousTag(pSO->GetTag())
+        , m_newTag(newTag)
+    { }
+
+    bool SceneObjectTag::Redo() {
+        auto&& pEntity = m_scene->GetEntityController()->FindById(m_entityId);
+
+        if (auto&& pObject = pEntity.DynamicCast<SR_UTILS_NS::SceneObject>()) {
+            pObject->SetTag(m_newTag);
+            return true;
+        }
+
+        return false;
+    }
+
+    bool SceneObjectTag::Undo() {
+        auto&& pEntity = m_scene->GetEntityController()->FindById(m_entityId);
+
+        if (auto&& pObject = pEntity.DynamicCast<SR_UTILS_NS::SceneObject>()) {
+            pObject->SetTag(m_previousTag);
+            return true;
+        }
+
+        return false;
+    }
+
+    //! ----------------------------------------------------------------------------------------------------------------
+
+    SceneObjectLayer::SceneObjectLayer(const EnginePtr& pEngine, const SR_UTILS_NS::SceneObject::Ptr& pSO, SR_UTILS_NS::StringAtom newLayer)
+        : Super(pEngine)
+        , m_entityId(pSO->GetEntityId())
+        , m_previousLayer(pSO->GetLayer())
+        , m_newLayer(newLayer)
+    { }
+
+    bool SceneObjectLayer::Redo() {
+        auto&& pEntity = m_scene->GetEntityController()->FindById(m_entityId);
+
+        if (auto&& pObject = pEntity.DynamicCast<SR_UTILS_NS::SceneObject>()) {
+            pObject->SetLayer(m_newLayer);
+            return true;
+        }
+
+        return false;
+    }
+
+    bool SceneObjectLayer::Undo() {
+        auto&& pEntity = m_scene->GetEntityController()->FindById(m_entityId);
+
+        if (auto&& pObject = pEntity.DynamicCast<SR_UTILS_NS::SceneObject>()) {
+            pObject->SetLayer(m_previousLayer);
             return true;
         }
 
@@ -152,7 +294,7 @@ namespace SR_CORE_NS::Commands {
     }
 
     bool EntityEnable::Redo() {
-        auto&& pEntity = SR_UTILS_NS::EntityManager::Instance().FindById(m_entityId);
+        auto&& pEntity = m_scene->GetEntityController()->FindById(m_entityId);
         if (auto&& pObject = pEntity.DynamicCast<SR_UTILS_NS::SceneObject>()) {
             pObject->SetEnabled(m_newEnabled);
             return true;
@@ -166,7 +308,7 @@ namespace SR_CORE_NS::Commands {
     }
 
     bool EntityEnable::Undo() {
-        auto&& pEntity = SR_UTILS_NS::EntityManager::Instance().FindById(m_entityId);
+        auto&& pEntity = m_scene->GetEntityController()->FindById(m_entityId);
         if (auto&& pObject = pEntity.DynamicCast<SR_UTILS_NS::SceneObject>()) {
             pObject->SetEnabled(m_previousEnabled);
             return true;
@@ -181,161 +323,97 @@ namespace SR_CORE_NS::Commands {
 
     //! ----------------------------------------------------------------------------------------------------------------
 
-    GameObjectDelete::GameObjectDelete(const EnginePtr& pEngine, const SR_UTILS_NS::SceneObject::Ptr& ptr)
-        : Base(pEngine)
-    {
-        m_path = ptr->GetEntityPath();
-        m_reserved = ptr->GetEntityTree();
-        SR_UTILS_NS::SceneObject::Ptr parentPtr = ptr->GetParent();
-        if (parentPtr.Valid()) {
-            m_parent = parentPtr->GetEntityId();
+    SceneObjectDelete::SceneObjectDelete(const EnginePtr& pEngine, const SR_UTILS_NS::SceneObject::Ptr& pSO)
+        : Super(pEngine)
+        , m_entityId(pSO->GetEntityId())
+    { }
+
+    SceneObjectDelete::~SceneObjectDelete() {
+        if (m_reserved && m_reserved->IsReserved()) {
+            m_reserved->UnReserveIds();
         }
     }
 
-    GameObjectDelete::~GameObjectDelete() {
-        m_path.UnReserve();
-        m_reserved.UnReserve();
-        SR_SAFE_DELETE_PTR(m_backup)
+    bool SceneObjectDelete::Redo() {
+        auto&& pController = m_scene->GetEntityController();
+        auto&& pEntity = pController->FindById(m_entityId);
+        auto&& pSO = pEntity.DynamicCast<SR_UTILS_NS::SceneObject>();
+
+        if (!pSO) {
+            m_pBackup = nullptr;
+            return false;
+        }
+
+        if (auto&& pParent = pSO->GetParent()) {
+            m_parentEntityId = pParent->GetEntityId();
+        }
+        else {
+            m_parentEntityId = SR_ID_INVALID;
+        }
+
+        m_pBackup = SR_CORE_NS::Commands::CreateSerializer();
+        SR_UTILS_NS::Serialization::Save(*m_pBackup, pSO, DATA_ID);
+
+        m_reserved = pSO->GetEntityIdList();
+        m_reserved->ReserveIds();
+
+        pSO->Destroy();
+
+        return true;
     }
 
-    bool GameObjectDelete::Redo() {
-        auto entity = SR_UTILS_NS::EntityManager::Instance().FindById(m_path.Last());
-        auto pObject = entity.DynamicCast<SR_UTILS_NS::SceneObject>();
+    bool SceneObjectDelete::Undo() {
+        if (!m_pBackup) {
+            return false;
+        }
+
+        auto&& pController = m_scene->GetEntityController();
+        auto&& pDeserializer = m_pBackup->CreateDeserializer();
+
+        SR_UTILS_NS::SceneObject::Ptr pParent;
+        if (m_parentEntityId != SR_ID_INVALID) {
+            auto&& pParentEntity = pController->FindById(m_parentEntityId);
+            pParent = pParentEntity.DynamicCast<SR_UTILS_NS::SceneObject>();
+        }
+
+        m_reserved->UnReserveIds();
+
+        SR_UTILS_NS::SceneObject::Ptr pObject;
+        SR_UTILS_NS::Serialization::Load(*pDeserializer, pObject, DATA_ID);
 
         if (!pObject) {
             return false;
         }
 
-        m_scene = pObject->GetScene();
-
-        /**
-            Специфичная синхронизация, чтобы не было дедлока, происходящего когда CommandManager пытается удалить объект,
-            при этом блокируя его, но для удаления объекта нужно заблокировать сцену, а сцена в этот момент блокируется
-            иерархией, которая натыкается на блокировку еще не уничтоженного объекта, в итоге получается цикл блокировки из трех потоков.
-
-            Чтобы этого избежать, сперва блокируем сцену.
-         */
-        /*if (m_scene.RecursiveLockIfValid()) {
-            /// резервируем все дерево сущностей, чтобы после отмены команды его можно было восстановить
-            m_reserved.Reserve();
-            SR_SAFE_DELETE_PTR(m_backup)
-            if ((m_backup = pObject->SaveLegacy(SR_UTILS_NS::SavableContext(nullptr, SR_UTILS_NS::SAVABLE_FLAG_NONE)))) {
-                m_backup->SetPosition(0);
-            }
-            pObject->Destroy();
-
-            m_scene.Unlock();
-            return true;
-        }*/
-
-        return false;
-    }
-
-    bool GameObjectDelete::Undo() {
-        if (!m_backup || !m_backup->Valid()) {
-            return false;
+        if (pParent) {
+            pParent->AddChild(pObject);
+        }
+        else {
+            m_scene->RegisterSceneObject(pObject);
         }
 
-        /*if (m_scene.RecursiveLockIfValid()) {
-            SR_UTILS_NS::SceneObject::Ptr ptr = m_scene->Instance(*m_backup);
-
-            /// попытка восстановить дочерность объекта
-            if (m_parent) {
-                auto entity = SR_UTILS_NS::EntityManager::Instance().FindById(m_parent);
-                auto pObject = entity.DynamicCast<SR_UTILS_NS::SceneObject>();
-
-                if (!pObject) {
-                    m_scene.Unlock();
-                    return false;
-                }
-
-                pObject->AddChild(ptr);
-            }
-
-            SR_SAFE_DELETE_PTR(m_backup)
-            m_scene.Unlock();
-            return true;
-        }*/
-
-        return false;
+        return true;
     }
 
     //! ----------------------------------------------------------------------------------------------------------------
 
-    GameObjectInstance::GameObjectInstance(const EnginePtr& pEngine, SR_HTYPES_NS::Marshal::Ptr pMarshal, const SR_UTILS_NS::SceneObject::Ptr& pParent)
-        : Base(pEngine)
-    {
-        m_marshal = pMarshal;
-        if (pParent.Valid()) {
-            m_parent = pParent->GetEntityId();
+    SceneObjectInstance::SceneObjectInstance(const EnginePtr& pEngine, const SR_UTILS_NS::SceneObject::Ptr& pSO)
+        : Super(pEngine)
+        , m_entityId(pSO->GetEntityId())
+    { }
+
+    SceneObjectInstance::~SceneObjectInstance() {
+        if (m_reserved && m_reserved->IsReserved()) {
+            m_reserved->UnReserveIds();
         }
     }
 
-    GameObjectInstance::~GameObjectInstance() {
-        m_path.UnReserve();
-        m_reserved.UnReserve();
+    bool SceneObjectInstance::Redo() {
+        return true;
     }
 
-    bool GameObjectInstance::Redo() {
-        if (!m_marshal || !m_marshal->Valid()) {
-            return false;
-        }
-
-        m_scene = m_engine->GetScene();
-
-        /*if (m_scene.RecursiveLockIfValid()) {
-            SR_UTILS_NS::SceneObject::Ptr ptr = m_scene->Instance(*m_marshal);
-
-            /// попытка восстановить дочерность объекта
-            if (m_parent) {
-                auto entity = SR_UTILS_NS::EntityManager::Instance().FindById(m_parent);
-                auto pObject = entity.DynamicCast<SR_UTILS_NS::SceneObject>();
-
-                if (!pObject) {
-                    m_scene.Unlock();
-                    return false;
-                }
-
-                pObject->AddChild(ptr);
-                ptr->SetParent(pObject);
-            }
-
-            m_path = ptr->GetEntityPath();
-            m_reserved = ptr->GetEntityTree();
-
-            SR_SAFE_DELETE_PTR(m_marshal)
-            m_scene.Unlock();
-            return true;
-        }*/
-
-        return false;
-    }
-
-    bool GameObjectInstance::Undo() {
-        auto entity = SR_UTILS_NS::EntityManager::Instance().FindById(m_path.Last());
-        auto pObject = entity.DynamicCast<SR_UTILS_NS::SceneObject>();
-
-        if (!pObject) {
-            return false;
-        }
-
-        m_scene = m_engine->GetScene();
-
-        /// та же специфичная синхронизация, что и в GameObjectDelete::Redo()
-        /*if (m_scene) {
-            // SR_HTYPES_NS::SafePtrLockGuard m_lock(m_scene->GetDataStorage().GetValue<SR_GRAPH_NS::RenderScene::Ptr>());
-
-            // резервируем все дерево сущностей, чтобы после отмены команды его можно было восстановить
-            m_reserved.Reserve();
-            SR_SAFE_DELETE_PTR(m_marshal)
-            if ((m_marshal = pObject->SaveLegacy(SR_UTILS_NS::SavableContext(nullptr, SR_UTILS_NS::SAVABLE_FLAG_NONE)))) {
-                m_marshal->SetPosition(0);
-            }
-            pObject->Destroy();
-            return true;
-        }*/
-
-        return false;
+    bool SceneObjectInstance::Undo() {
+        return true;
     }
 
     //! ----------------------------------------------------------------------------------------------------------------
@@ -352,13 +430,13 @@ namespace SR_CORE_NS::Commands {
     }
 
     HierarchyPaste::~HierarchyPaste() {
-        SR_SAFE_DELETE_PTR(m_marshal)
-        for (auto&& path : m_paths) {
-            path.UnReserve();
-        }
-        for (auto&& branch : m_reserved) {
-            branch.UnReserve();
-        }
+        //SR_SAFE_DELETE_PTR(m_marshal)
+        //for (auto&& path : m_paths) {
+        //    path.UnReserve();
+        //}
+        //for (auto&& branch : m_reserved) {
+        //    branch.UnReserve();
+        //}
     }
 
     bool HierarchyPaste::Redo() {
@@ -442,7 +520,7 @@ namespace SR_CORE_NS::Commands {
     GameObjectMove::GameObjectMove(const EnginePtr& pEngine, const SR_UTILS_NS::SceneObject::Ptr& ptr, const SR_UTILS_NS::SceneObject::Ptr& newDestination)
         : Base(pEngine)
     {
-        m_path = ptr->GetEntityPath();
+        /*m_path = ptr->GetEntityPath();
 
         if (newDestination) {
             m_newDestinationPath = newDestination->GetEntityPath();
@@ -451,17 +529,17 @@ namespace SR_CORE_NS::Commands {
         SR_UTILS_NS::SceneObject::Ptr parentPtr = ptr->GetParent();
         if (parentPtr) {
             m_oldDestinationPath = parentPtr->GetEntityPath();
-        }
+        }*/
     }
 
     GameObjectMove::~GameObjectMove() {
-        m_path.UnReserve();
-        m_newDestinationPath.UnReserve();
-        m_oldDestinationPath.UnReserve();
+        //m_path.UnReserve();
+        //m_newDestinationPath.UnReserve();
+        //m_oldDestinationPath.UnReserve();
     }
 
     bool GameObjectMove::Redo() {
-        auto entity = SR_UTILS_NS::EntityManager::Instance().FindById(m_path.Last());
+        /*auto entity = SR_UTILS_NS::EntityManager::Instance().FindById(m_path.Last());
         auto pObject = entity.DynamicCast<SR_UTILS_NS::SceneObject>();
 
         if (!pObject) {
@@ -476,13 +554,13 @@ namespace SR_CORE_NS::Commands {
         }
         else {
             pObject->MoveToTree(SR_UTILS_NS::SceneObject::Ptr());
-        }
+        }*/
 
         return true;
     }
 
     bool GameObjectMove::Undo() {
-        auto entity = SR_UTILS_NS::EntityManager::Instance().FindById(m_path.Last());
+        /*auto entity = SR_UTILS_NS::EntityManager::Instance().FindById(m_path.Last());
         auto pObject = entity.DynamicCast<SR_UTILS_NS::SceneObject>();
 
         if (!pObject) {
@@ -497,7 +575,7 @@ namespace SR_CORE_NS::Commands {
         }
         else {
             pObject->MoveToTree(SR_UTILS_NS::SceneObject::Ptr());
-        }
+        }*/
 
         return true;
     }

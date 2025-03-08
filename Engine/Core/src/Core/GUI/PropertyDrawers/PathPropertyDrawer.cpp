@@ -26,6 +26,9 @@ namespace SR_CORE_GUI_NS {
 
             if (ImGui::Button(context.GetPropertyDisplayName().c_str(), buttonSize)) {
                 if (context.pProperty) {
+                    if (context.onBeforeChangeCallback) {
+                        context.onBeforeChangeCallback(false);
+                    }
                     feedback.isChanged = true;
                     value = context.GetProperty().GetResetValue() ? context.GetProperty().GetResetValue() : context.GetProperty().GetDefaultValue();
                     value = value.DetachIfConst();
@@ -43,6 +46,9 @@ namespace SR_CORE_GUI_NS {
                         auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesPath, { { filterName, filterValue } });
 
                         if (auto&& pPath = value.TryCast<SR_UTILS_NS::Path>(); pPath && !path.empty()) {
+                            if (context.onBeforeChangeCallback) {
+                                context.onBeforeChangeCallback(false);
+                            }
                             feedback.isChanged = true;
                             *pPath = path;
                         }
@@ -58,6 +64,9 @@ namespace SR_CORE_GUI_NS {
         if (auto&& pPath = value.TryCast<SR_UTILS_NS::Path>()) {
             std::string path = pPath->ToStringRef();
             if (ImGui::InputText("##Input", &path, ImGuiInputTextFlags_EnterReturnsTrue)) {
+                if (context.onBeforeChangeCallback) {
+                    context.onBeforeChangeCallback(false);
+                }
                 feedback.isChanged = true;
                 /// If you copy path in Windows in Explorer, then it will be in quotes, so we need to remove them
                 path = SR_UTILS_NS::StringUtils::RemoveCharsFromString(path, "\"");

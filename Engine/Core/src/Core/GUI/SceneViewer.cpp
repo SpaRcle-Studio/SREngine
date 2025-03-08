@@ -67,6 +67,7 @@ namespace SR_CORE_GUI_NS {
                 }
                 m_platform->GetTransform()->SetScale(5.f, 1.f, 5.f);
             }
+            m_platform->AddEditorFlags(SR_UTILS_NS::EditorFlags::Hidden);
         }
 
         if (!m_camera) {
@@ -195,6 +196,7 @@ namespace SR_CORE_GUI_NS {
             if (SR_UTILS_NS::Features::Instance().Enabled("EditorCamera", true) && m_scene.RecursiveLockIfValid()) {
                 pCamera = m_scene->InstanceGameObject("Editor camera"_atom);
                 pCamera->AddSerializationFlags(SR_UTILS_NS::SerializationFlags::DontSave);
+                pCamera->AddEditorFlags(SR_UTILS_NS::EditorFlags::Hidden);
 
                 if (auto&& pMover = pCamera->AddComponent<SR_UTILS_NS::CameraFlyMover>()) {
                     pMover->SetExecuteInEditMode(true);
@@ -399,13 +401,13 @@ namespace SR_CORE_GUI_NS {
             return;
         }
 
-        SR_UTILS_NS::GameObject::Ptr gizmo;
+        SR_UTILS_NS::GameObject::Ptr pGizmo;
 
         if (enabled) {
-            if (m_scene.RecursiveLockIfValid()) {
-                gizmo = m_scene->InstanceGameObject("Editor gizmo"_atom);
-                gizmo->AddSerializationFlags(SR_UTILS_NS::SerializationFlags::DontSave);
-                m_scene.Unlock();
+            if (m_scene) {
+                pGizmo = m_scene->InstanceGameObject("Editor gizmo"_atom);
+                pGizmo->AddSerializationFlags(SR_UTILS_NS::SerializationFlags::DontSave);
+                pGizmo->AddEditorFlags(SR_UTILS_NS::EditorFlags::Hidden);
             }
             else {
                 return;
@@ -415,14 +417,14 @@ namespace SR_CORE_GUI_NS {
             pComponent->SetOperation(GetSceneTools()->GetGizmoOperation());
             pComponent->SetMode(GetSceneTools()->GetGizmoMode());
             pComponent->SetHierarchy(m_hierarchy);
-            gizmo->AddComponent(pComponent.StaticCast<SR_UTILS_NS::Component>());
+            pGizmo->AddComponent(pComponent.StaticCast<SR_UTILS_NS::Component>());
         }
 
         if (m_gizmo) {
             m_gizmo->Destroy();
         }
 
-        m_gizmo = gizmo;
+        m_gizmo = pGizmo;
     }
 
     SR_CORE_GUI_NS::SceneTools* SceneViewer::GetSceneTools() const {
