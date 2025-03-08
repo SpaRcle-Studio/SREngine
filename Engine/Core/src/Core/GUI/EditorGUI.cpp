@@ -20,6 +20,7 @@
 #include <Core/GUI/FileBrowser.h>
 #include <Core/GUI/About.h>
 #include <Core/GUI/SceneTools.h>
+#include <Core/EngineCommands.h>
 
 #include <Utils/Common/Features.h>
 #include <Utils/ECS/Prefab.h>
@@ -27,6 +28,7 @@
 #include <Utils/Platform/Platform.h>
 #include <Utils/Profile/TracyContext.h>
 #include <Utils/World/SceneUpdater.h>
+#include <Utils/World/ScenePrefabLogic.h>
 #include <Utils/Common/StringAtomLiterals.h>
 
 #include <Graphics/Types/Texture.h>
@@ -613,14 +615,8 @@ namespace SR_CORE_GUI_NS {
             if (ImGui::MenuItem("Instance from file")) {
                 if (auto&& pScene = m_engine->GetScene(); pScene.RecursiveLockIfValid()) {
                     auto&& resourcesPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
-                    if (auto path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesPath.ToString(), { { "Any model", "prefab,pmx,fbx,obj,blend,dae,abc,stl,ply,glb,gltf,x3d,sfg,bvh,3ds,gltf" } }); !path.IsEmpty()) {
-                        /// TODO:Сделать обратимость
-                        auto&& pObject = pScene->InstanceFromFile(path);
-                        if (auto&& pHierarchy = GetWidget<Hierarchy>(); pHierarchy && pObject) {
-                            if (auto&& selected = pHierarchy->GetSelected(); selected.size() == 1 && *selected.begin()) {
-                                (*selected.begin())->AddChild(pObject);
-                            }
-                        }
+                    if (auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesPath.ToString(), { { "Any model", "prefab,pmx,fbx,obj,blend,dae,abc,stl,ply,glb,gltf,x3d,sfg,bvh,3ds,gltf" } }); !path.IsEmpty()) {
+                        InstantiateSO(pScene->InstanceFromFile(path));
                     }
                     pScene.Unlock();
                 }
@@ -634,7 +630,7 @@ namespace SR_CORE_GUI_NS {
             if (ImGui::BeginMenu("Instantiate")) {
                 if (ImGui::MenuItem("Empty")) {
                     if (auto&& pScene = m_engine->GetScene()) {
-                        pScene->InstanceGameObject("New GameObject"_atom);
+                        InstantiateSO(pScene->InstanceGameObject("New GameObject"_atom).StaticCast<SR_UTILS_NS::SceneObject>());
                     }
                 }
 
@@ -652,6 +648,7 @@ namespace SR_CORE_GUI_NS {
                         for (auto&& pMesh : meshes) {
                             pGameObject->AddComponent(pMesh.StaticCast<SR_UTILS_NS::Component>());
                         }
+                        InstantiateSO(pGameObject.StaticCast<SR_UTILS_NS::SceneObject>());
                     }
                 }
 
@@ -669,6 +666,7 @@ namespace SR_CORE_GUI_NS {
                         for (auto&& pMesh : meshes) {
                             pGameObject->AddComponent(pMesh.StaticCast<SR_UTILS_NS::Component>());
                         }
+                        InstantiateSO(pGameObject.StaticCast<SR_UTILS_NS::SceneObject>());
                     }
                 }
 
@@ -686,6 +684,7 @@ namespace SR_CORE_GUI_NS {
                         for (auto&& pMesh : meshes) {
                             pGameObject->AddComponent(pMesh.StaticCast<SR_UTILS_NS::Component>());
                         }
+                        InstantiateSO(pGameObject.StaticCast<SR_UTILS_NS::SceneObject>());
                     }
                 }
 
@@ -703,6 +702,7 @@ namespace SR_CORE_GUI_NS {
                         for (auto&& pMesh : meshes) {
                             pGameObject->AddComponent(pMesh.StaticCast<SR_UTILS_NS::Component>());
                         }
+                        InstantiateSO(pGameObject.StaticCast<SR_UTILS_NS::SceneObject>());
                     }
                 }
 
@@ -720,6 +720,7 @@ namespace SR_CORE_GUI_NS {
                         for (auto&& pMesh : meshes) {
                             pGameObject->AddComponent(pMesh.StaticCast<SR_UTILS_NS::Component>());
                         }
+                        InstantiateSO(pGameObject.StaticCast<SR_UTILS_NS::SceneObject>());
                     }
                 }
 
@@ -739,6 +740,7 @@ namespace SR_CORE_GUI_NS {
                         for (auto&& pMesh : meshes) {
                             pGameObject->AddComponent(pMesh.StaticCast<SR_UTILS_NS::Component>());
                         }
+                        InstantiateSO(pGameObject.StaticCast<SR_UTILS_NS::SceneObject>());
                     }
                 }
 
@@ -879,5 +881,38 @@ namespace SR_CORE_GUI_NS {
             }
         }
         return nullptr;
+    }
+
+    void EditorGUI::InstantiateSO(const SR_UTILS_NS::SceneObject::Ptr& pSO) {
+        if (!pSO) {
+            return;
+        }
+
+        SR_UTILS_NS::SceneObject::Ptr pInstantiateTarget;
+        if (auto&& pHierarchy = GetWidget<Hierarchy>(); pHierarchy) {
+            if (auto&& selected = pHierarchy->GetSelected(); selected.size() == 1 && *selected.begin()) {
+                pInstantiateTarget = *selected.begin();
+            }
+        }
+
+        if (auto&& pScene = GetEngine()->GetScene(); pScene && !pInstantiateTarget) {
+            if (auto&& pLogic = pScene->GetLogicBase().DynamicCast<SR_WORLD_NS::ScenePrefabLogic>()) {
+                if (auto&& pPrefabRoot = pLogic->GetPrefabRoot()) {
+                    pInstantiateTarget = pPrefabRoot;
+                }
+                else {
+                    SRHalt("EditorGUI::InstantiateSO() : prefab root is nullptr!");
+                    pSO->Destroy();
+                    return;
+                }
+            }
+        }
+
+        if (pInstantiateTarget) {
+            pInstantiateTarget->AddChild(pSO);
+        }
+
+        auto&& pCmd = new SR_CORE_NS::Commands::SceneObjectInstance(GetEngine(), pSO);
+        GetEngine()->GetCmdManager()->Store(pCmd);
     }
 }

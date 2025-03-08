@@ -106,27 +106,13 @@ namespace SR_CORE_GUI_NS {
 
     void Hierarchy::ContextMenu() {
         auto&& pEngine = dynamic_cast<EditorGUI*>(GetManager())->GetEngine();
+        auto&& pScene = pEngine->GetScene();
+        auto&& pSceneLogic = pScene ? pScene->GetLogicBase().DynamicCast<SR_WORLD_NS::ScenePrefabLogic>() : nullptr;
 
-        if (ImGui::BeginPopupContextWindow("HierarchyContextMenu")) {
+        if (!pSceneLogic && ImGui::BeginPopupContextWindow("HierarchyContextMenu")) {
             if (ImGui::Selectable("Add New GameObject")) {
                 pEngine->GetScene()->InstanceGameObject("New GameObject"_atom);
             }
-
-            ImGui::Separator();
-
-            ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(8, 8));
-
-            /*if (ImGui::BeginMenu("Add New Node")) {
-                if (ImGui::MenuItem("Default")) {
-
-                }
-                if (ImGui::MenuItem("Canvas")) {
-
-                }
-                ImGui::EndMenu();
-            }*/
-
-            ImGui::PopStyleVar();
 
             ImGui::Separator();
 

@@ -400,7 +400,9 @@ namespace SR_CORE_NS::Commands {
     SceneObjectInstance::SceneObjectInstance(const EnginePtr& pEngine, const SR_UTILS_NS::SceneObject::Ptr& pSO)
         : Super(pEngine)
         , m_entityId(pSO->GetEntityId())
-    { }
+    {
+        m_parentEntityId = pSO->GetParent() ? pSO->GetParent()->GetEntityId() : SR_ID_INVALID;
+    }
 
     SceneObjectInstance::~SceneObjectInstance() {
         if (m_reserved && m_reserved->IsReserved()) {
@@ -409,10 +411,61 @@ namespace SR_CORE_NS::Commands {
     }
 
     bool SceneObjectInstance::Redo() {
+        auto&& pController = m_scene->GetEntityController();
+
+        SR_UTILS_NS::SceneObject::Ptr pParent;
+
+        if (m_parentEntityId != SR_ID_INVALID) {
+            auto&& pParentEntity = pController->FindById(m_parentEntityId);
+            pParent = pParentEntity.DynamicCast<SR_UTILS_NS::SceneObject>();
+            if (!pParent) {
+                return false;
+            }
+        }
+
+        if (m_reserved && m_reserved->IsReserved()) {
+            m_reserved->UnReserveIds();
+        }
+
+        SR_UTILS_NS::SceneObject::Ptr pSO;
+
+        auto&& pDeserializer = m_pBackup->CreateDeserializer();
+
+        SR_UTILS_NS::Serialization::Load(*pDeserializer, pSO, DATA_ID);
+        if (!pSO) {
+            return false;
+        }
+
+        if (pParent) {
+            pParent->AddChild(pSO);
+        }
+        else {
+            m_scene->RegisterSceneObject(pSO);
+        }
+
+        m_entityId = pSO->GetEntityId();
+
         return true;
     }
 
     bool SceneObjectInstance::Undo() {
+        auto&& pController = m_scene->GetEntityController();
+        auto&& pEntity = pController->FindById(m_entityId);
+        auto&& pSO = pEntity.DynamicCast<SR_UTILS_NS::SceneObject>();
+
+        if (!pSO) {
+            m_pBackup = nullptr;
+            return false;
+        }
+
+        m_reserved = pSO->GetEntityIdList();
+        m_reserved->ReserveIds();
+
+        m_pBackup = SR_CORE_NS::Commands::CreateSerializer();
+        SR_UTILS_NS::Serialization::Save(*m_pBackup, pSO, DATA_ID);
+
+        pSO->Destroy();
+
         return true;
     }
 
