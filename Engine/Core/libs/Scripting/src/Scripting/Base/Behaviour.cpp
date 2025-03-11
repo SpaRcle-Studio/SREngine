@@ -203,11 +203,13 @@ namespace SR_SCRIPTING_NS {
         }
     }
 
-    void Behaviour::Load(SR_UTILS_NS::IDeserializer& deserializer) {
-        Super::Load(deserializer);
+    bool Behaviour::Load(SR_UTILS_NS::IDeserializer& deserializer) {
+        if (!Super::Load(deserializer)) {
+            return false;
+        }
 
         if (!m_rawBehaviour) {
-            return;
+            return true;
         }
 
         auto&& properties = m_rawBehaviour->GetProperties();
@@ -236,6 +238,8 @@ namespace SR_SCRIPTING_NS {
 
             deserializer.EndArray();
         }
+
+        return true;
     }
 
     void Behaviour::Reload() {

@@ -14,9 +14,9 @@ namespace SR_CORE_UI_NS {
     }
 
     bool Button::InitializeEntity() noexcept {
-        m_properties.AddEntityRefProperty(SR_BUTTON_IDLE_PROP_NAME, GetThis()).SetWidth(260.f);
-        m_properties.AddEntityRefProperty(SR_BUTTON_HOVERED_PROP_NAME, GetThis()).SetWidth(260.f);
-        m_properties.AddEntityRefProperty(SR_BUTTON_PRESSED_PROP_NAME, GetThis()).SetWidth(260.f);
+        //m_properties.AddEntityRefProperty(SR_BUTTON_IDLE_PROP_NAME, GetThis()).SetWidth(260.f);
+        //m_properties.AddEntityRefProperty(SR_BUTTON_HOVERED_PROP_NAME, GetThis()).SetWidth(260.f);
+        //m_properties.AddEntityRefProperty(SR_BUTTON_PRESSED_PROP_NAME, GetThis()).SetWidth(260.f);
 
         return Super::InitializeEntity();
     }
@@ -24,7 +24,7 @@ namespace SR_CORE_UI_NS {
     void Button::Update(float_t dt) {
         Super::Update(dt);
 
-        if (auto&& pRef = GetComponentProperties().Find<SR_UTILS_NS::EntityRefProperty>(SR_BUTTON_IDLE_PROP_NAME)) {
+        /*if (auto&& pRef = GetComponentProperties().Find<SR_UTILS_NS::EntityRefProperty>(SR_BUTTON_IDLE_PROP_NAME)) {
             if (auto&& pGameObject = pRef->GetEntityRef().GetGameObject()) {
                 pGameObject->SetEnabled(IsIdle());
             }
@@ -40,6 +40,6 @@ namespace SR_CORE_UI_NS {
             if (auto&& pGameObject = pRef->GetEntityRef().GetGameObject()) {
                 pGameObject->SetEnabled(IsPressed());
             }
-        }
+        }*/
     }
 }

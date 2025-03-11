@@ -652,7 +652,7 @@ def generate_class_meta_properties(f, class_structures, class_obj, tabs):
     if len(class_obj.variables) == 0:
         return
 
-    f.write('\t' * tabs + f'SR_NODISCARD virtual std::span<const SR_UTILS_NS::Reflection::Property> GetProperties() const noexcept override {{\n')
+    f.write('\t' * tabs + f'SR_NODISCARD virtual std::span<const SR_UTILS_NS::Reflection::Property> GetProperties() const noexcept final {{\n')
     f.write('\t' * (tabs + 1) + f'static const std::array<const SR_UTILS_NS::Reflection::Property, {len(class_obj.variables)}> properties {{ \n')
 
     for prop in class_obj.variables:
@@ -730,7 +730,7 @@ def generate_class_meta_get_base_metas(f, class_structures, class_obj, tabs):
     if len(class_obj.inherited_classes) == 0:
         return
 
-    f.write('\t' * tabs + f'SR_NODISCARD virtual std::span<const SRClassMeta*> GetBaseMetas() const noexcept override {{\n')
+    f.write('\t' * tabs + f'SR_NODISCARD virtual std::span<const SRClassMeta*> GetBaseMetas() const noexcept final {{\n')
 
     correct_inherited_classes = []
     for inherited_class in class_obj.inherited_classes:
@@ -756,13 +756,28 @@ def generate_class_meta_get_base_metas(f, class_structures, class_obj, tabs):
 
 
 def generate_class_meta_save(f, class_obj, tabs):
+    class_name = '::'.join(class_obj.namespaces) + '::' + class_obj.name
+
     if len(class_obj.variables) == 0:
+        if class_name == 'SpaRcle::Utils::Serializable':
+            f.write('\t' * tabs + f'void Save(SR_UTILS_NS::ISerializer& serializer, const SR_UTILS_NS::Serializable& obj) const final {{\n')
+            tabs += 1
+
+            f.write('\t' * tabs + f'if (serializer.IsWriteVersion()) {{\n')
+            f.write('\t' * (tabs + 1) + f'const uint64_t version = obj.GetMeta()->GetVersion();\n')
+            f.write('\t' * (tabs + 1) + f'if (version != 0) {{\n')
+            f.write('\t' * (tabs + 2) + f'static constexpr SR_UTILS_NS::SerializationId keyName_version = SR_UTILS_NS::SerializationId::Create("@version");\n')
+            f.write('\t' * (tabs + 2) + f'SR_UTILS_NS::Serialization::Save(serializer, obj.GetMeta()->GetVersion(), keyName_version);\n')
+            f.write('\t' * (tabs + 1) + f'}}\n')
+            f.write('\t' * tabs + f'}}\n')
+
+            tabs -= 1
+            f.write('\t' * tabs + '}\n\n')
+
         return
 
-    f.write('\t' * tabs + f'void Save(SR_UTILS_NS::ISerializer& serializer, const SR_UTILS_NS::Serializable& obj) const override {{\n')
+    f.write('\t' * tabs + f'void Save(SR_UTILS_NS::ISerializer& serializer, const SR_UTILS_NS::Serializable& obj) const final {{\n')
     tabs += 1
-
-    class_name = '::'.join(class_obj.namespaces) + '::' + class_obj.name
 
     f.write('\t' * tabs + f'SR_UTILS_NS::SRClassMeta::Save(serializer, obj);\n\n')
     f.write('\t' * tabs + f'auto&& value = static_cast<{class_name}&>(const_cast<SR_UTILS_NS::Serializable&>(obj));\n\n')
@@ -807,15 +822,36 @@ def generate_class_meta_save(f, class_obj, tabs):
     pass
 
 def generate_class_meta_load(f, class_obj, tabs):
-    if len(class_obj.variables) == 0:
-        return
-
-    f.write('\t' * tabs + f'void Load(SR_UTILS_NS::IDeserializer& deserializer, SR_UTILS_NS::Serializable& obj) const override {{\n')
-    tabs += 1
-
     class_name = '::'.join(class_obj.namespaces) + '::' + class_obj.name
 
-    f.write('\t' * tabs + f'SR_UTILS_NS::SRClassMeta::Load(deserializer, obj);\n\n')
+    if len(class_obj.variables) == 0:
+        if class_name == 'SpaRcle::Utils::Serializable':
+            f.write('\t' * tabs + f'bool Load(SR_UTILS_NS::IDeserializer& deserializer, SR_UTILS_NS::Serializable& obj) const final {{\n')
+            tabs += 1
+
+            f.write('\t' * (tabs) + f'static constexpr SR_UTILS_NS::SerializationId keyName_version = SR_UTILS_NS::SerializationId::Create("@version");\n')
+            f.write('\t' * (tabs) + f'uint64_t version = 0;\n')
+            f.write('\t' * (tabs) + f'uint64_t currentVersion = obj.GetMeta()->GetVersion();\n')
+            f.write('\t' * (tabs) + f'SR_UTILS_NS::Serialization::Load(deserializer, version, keyName_version);\n')
+            f.write('\t' * (tabs) + f'if (version != currentVersion) {{\n')
+            f.write('\t' * (tabs + 1) + f'if (SR_UTILS_NS::MigrationManager::Instance().Migrate(deserializer, obj, version, currentVersion) == SR_UTILS_NS::MigrationResult::Fatal) {{\n')
+            f.write('\t' * (tabs + 2) + f'return false;\n')
+            f.write('\t' * (tabs + 1) + f'}}\n')
+            f.write('\t' * (tabs) + f'}}\n')
+
+            f.write('\t' * tabs + f'return true;\n')
+
+            tabs -= 1
+            f.write('\t' * tabs + '}\n\n')
+
+        return
+
+    f.write('\t' * tabs + f'bool Load(SR_UTILS_NS::IDeserializer& deserializer, SR_UTILS_NS::Serializable& obj) const final {{\n')
+    tabs += 1
+
+    f.write('\t' * tabs + f'if (!SR_UTILS_NS::SRClassMeta::Load(deserializer, obj)) {{\n')
+    f.write('\t' * (tabs + 1) + f'return false;\n')
+    f.write('\t' * tabs + f'}}\n\n')
     f.write('\t' * tabs + f'auto&& value = static_cast<{class_name}&>(obj);\n\n')
 
     for prop in class_obj.variables:
@@ -854,6 +890,8 @@ def generate_class_meta_load(f, class_obj, tabs):
             f.write('\t' * (tabs + 1) + f'}}\n')
 
         f.write('\t' * tabs + f'}}\n')
+
+    f.write('\t' * tabs + f'return true;')
 
     tabs -= 1
     f.write('\t' * tabs + '}\n\n')
@@ -931,15 +969,15 @@ def generate_class_meta(f, class_structures, class_obj, tabs):
     #    f.write('\t' * tabs + f'const {prop.type_name}& Get_{prop.name}({class_name}* pClass) {{ return pClass->{prop.name}; }}\n')
     #    f.write('\t' * tabs + f'void Set_{prop.name}({class_name}* pClass, const {prop.type_name}& value) {{ pClass->{prop.name} = value; }}\n\n')
 
-    f.write('\t' * tabs + f'SR_NODISCARD bool IsAbstract() const noexcept override {{ return std::is_abstract_v<{class_name}>; }}\n\n')
-    f.write('\t' * tabs + f'SR_NODISCARD bool IsHidden() const noexcept override {{ return { "true" if class_obj.hidden else "false" }; }}\n\n')
+    f.write('\t' * tabs + f'SR_NODISCARD bool IsAbstract() const noexcept final {{ return std::is_abstract_v<{class_name}>; }}\n\n')
+    f.write('\t' * tabs + f'SR_NODISCARD bool IsHidden() const noexcept final {{ return { "true" if class_obj.hidden else "false" }; }}\n\n')
 
     if class_obj.version:
-        f.write('\t' * tabs + f'SR_NODISCARD uint64_t GetVersion() const noexcept override {{ return {class_obj.version}; }}\n\n')
+        f.write('\t' * tabs + f'SR_NODISCARD uint64_t GetVersionImpl() const noexcept final {{ return {class_obj.version}; }}\n\n')
 
     if class_obj.category:
         category_split = class_obj.category.split('.')
-        f.write('\t' * tabs + f'SR_NODISCARD std::span<const SR_UTILS_NS::StringAtom> GetCategory() const noexcept override {{\n')
+        f.write('\t' * tabs + f'SR_NODISCARD std::span<const SR_UTILS_NS::StringAtom> GetCategory() const noexcept final {{\n')
         f.write('\t' * (tabs + 1) + f'static std::array<const SR_UTILS_NS::StringAtom, {len(category_split)}> categories {{ ')
         for category in category_split:
             f.write(f'"{category}", ')
@@ -949,7 +987,7 @@ def generate_class_meta(f, class_structures, class_obj, tabs):
 
     #######################################
     if class_obj.inspector:
-        f.write('\t' * tabs + f'SR_NODISCARD SR_UTILS_NS::StringAtom GetInspectorName() const noexcept override {{ \n')
+        f.write('\t' * tabs + f'SR_NODISCARD SR_UTILS_NS::StringAtom GetInspectorName() const noexcept final {{ \n')
         f.write('\t' * (tabs + 1) + f'static const SR_UTILS_NS::StringAtom id = "{class_obj.inspector}";\n')
         f.write('\t' * (tabs + 1) + f'return id;\n')
         f.write('\t' * tabs + '}\n\n')
@@ -959,7 +997,7 @@ def generate_class_meta(f, class_structures, class_obj, tabs):
     generate_class_meta_properties(f, class_structures, class_obj, tabs)
 
     #has_serializable_fields = len(class_obj.variables) > 0
-    #f.write('\t' * tabs + f'SR_NODISCARD virtual bool HasSerializableFields() const noexcept override {{\n')
+    #f.write('\t' * tabs + f'SR_NODISCARD virtual bool HasSerializableFields() const noexcept final {{\n')
     #f.write('\t' * (tabs + 1) + f'for (auto&& pBaseMeta : GetBaseMetas()) {{\n')
     #f.write('\t' * (tabs + 2) + f'if (pBaseMeta->HasSerializableFields()) {{\n')
     #f.write('\t' * (tabs + 3) + f'return true;\n')
@@ -971,7 +1009,7 @@ def generate_class_meta(f, class_structures, class_obj, tabs):
     generate_class_meta_save(f, class_obj, tabs)
     generate_class_meta_load(f, class_obj, tabs)
 
-    f.write('\t' * tabs + f'SR_NODISCARD virtual SR_UTILS_NS::StringAtom GetFactoryName() const noexcept override {{\n')
+    f.write('\t' * tabs + f'SR_NODISCARD virtual SR_UTILS_NS::StringAtom GetFactoryName() const noexcept final {{\n')
     f.write('\t' * (tabs + 1) + f'return {class_name}::GetClassStaticName();\n')
     f.write('\t' * tabs + '}\n\n')
 
@@ -1413,7 +1451,8 @@ def generate_classes_code(codegen_dir, class_structures):
                 f.write(f'#include <Utils/TypeTraits/ClassDB.h>\n')
                 f.write(f'#include <Utils/TypeTraits/SRClass.h>\n')
                 f.write(f'#include <Utils/TypeTraits/Factory.h>\n')
-                f.write(f'#include <Utils/TypeTraits/SRClassMeta.h>\n\n')
+                f.write(f'#include <Utils/TypeTraits/SRClassMeta.h>\n')
+                f.write(f'#include <Utils/Serialization/MigrationManager.h>\n\n')
 
                 tabs = 0
 

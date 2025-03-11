@@ -84,7 +84,7 @@ namespace SR_SCRIPTING_NS {
         void OnBehaviourChanged();
 
         void Save(SR_UTILS_NS::ISerializer& serializer) const override;
-        void Load(SR_UTILS_NS::IDeserializer& deserializer) override;
+        bool Load(SR_UTILS_NS::IDeserializer& deserializer) override;
 
         SR_NODISCARD IRawBehaviour* GetRawBehaviour() const noexcept { return m_rawBehaviour; }
         SR_NODISCARD SR_UTILS_NS::Path GetRawBehaviourPath() const noexcept;

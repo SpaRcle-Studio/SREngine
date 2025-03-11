@@ -113,11 +113,6 @@ namespace SR_CORE_NS {
             return false;
         }
 
-        if (!RegisterMigrators()) {
-            SR_ERROR("Engine::Create() : failed to register engine migrators!");
-            return false;
-        }
-
         SR_INFO("Engine::Create() : creating main window...");
 
         if (SR_UTILS_NS::Features::Instance().Enabled("MainWindow", true)) {
