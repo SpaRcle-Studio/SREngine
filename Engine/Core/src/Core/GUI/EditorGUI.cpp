@@ -744,6 +744,25 @@ namespace SR_CORE_GUI_NS {
                     }
                 }
 
+                ImGui::Separator();
+
+                if (ImGui::MenuItem("Monkey")) {
+                    if (auto&& pScene = m_engine->GetScene()) {
+                        auto&& pGameObject = pScene->InstanceGameObject("Monkey"_atom);
+                        if (auto&& pRigidbody = pGameObject->AddComponent<SR_PHYSICS_NS::Types::Rigidbody3D>()) {
+                            pRigidbody->SetMass(1.0f);
+                            pRigidbody->SetType(SR_PHYSICS_NS::ShapeType::Convex3D);
+                            pRigidbody->GetCollisionShape()->SetRawMesh("Engine/Models/monkey.obj");
+                        }
+
+                        auto&& meshes = SR_GTYPES_NS::Mesh::Load("Engine/Models/monkey.obj", SR_GRAPH_NS::MeshType::Static);
+                        for (auto&& pMesh : meshes) {
+                            pGameObject->AddComponent(pMesh.StaticCast<SR_UTILS_NS::Component>());
+                        }
+                        InstantiateSO(pGameObject.StaticCast<SR_UTILS_NS::SceneObject>());
+                    }
+                }
+
                 ImGui::EndMenu();
             }
 

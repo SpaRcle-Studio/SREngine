@@ -21,9 +21,9 @@ namespace SR_CORE_GUI_NS {
             const ImVec2 buttonSize = { context.fieldTitleWidth, context.fieldHeight };
 
             if (ImGui::Button(context.GetProperty().GetEditorParams().GetDisplayName().c_str(), buttonSize)) {
-                feedback.isChanged = true;
                 value = context.GetProperty().GetResetValue() ? context.GetProperty().GetResetValue() : context.GetProperty().GetDefaultValue();
                 value = value.DetachIfConst();
+                SetReflectedValue(context, feedback, value);
             }
 
             ImGui::SameLine();
@@ -31,15 +31,15 @@ namespace SR_CORE_GUI_NS {
 
         ImGui::PushItemWidth(context.fieldWidth);
 
+        const bool isTextBox = context.pProperty && context.pProperty->GetEditorParams().GetCustomArg("text-box") == "enabled";
+
         if (value.IsString()) {
             if (auto&& pString = value.TryCast<std::string>()) {
                 std::string copy = *pString;
-                if (ImGui::InputText("##Input", &copy, ImGuiInputTextFlags_EnterReturnsTrue)) {
-                    if (context.onBeforeChangeCallback) {
-                        context.onBeforeChangeCallback(false);
-                    }
-                    *pString = copy;
-                    feedback.isChanged = true;
+                ImGui::InputText("##Input", &copy);
+
+                if (ImGui::IsItemDeactivatedAfterEdit()) {
+                    SetMappedValue(context, feedback, pString, copy);
                 }
             }
             else {
@@ -64,12 +64,29 @@ namespace SR_CORE_GUI_NS {
         else if (value.IsStringAtom()) {
             if (auto&& pStringAtom = value.TryCast<SR_UTILS_NS::StringAtom>()) {
                 std::string str = pStringAtom->ToString();
-                if (ImGui::InputText("##Input", str.data(), str.size(), ImGuiInputTextFlags_EnterReturnsTrue)) {
-                    if (context.onBeforeChangeCallback) {
-                        context.onBeforeChangeCallback(false);
-                    }
-                    feedback.isChanged = true;
-                    *pStringAtom = str;
+                ImGui::InputText("##Input", str.data(), str.size());
+
+                if (ImGui::IsItemDeactivatedAfterEdit()) {
+                    SetMappedValue(context, feedback, pStringAtom, SR_UTILS_NS::StringAtom(str));
+                }
+            }
+            else {
+                SR_GRAPH_GUI_NS::ColoredText("Failed to map string atom value!", ImColor(1.f, 0.f, 0.f, 1.f));
+            }
+        }
+        else if (value.IsUnicodeString()) {
+            if (auto&& pUnicodeString = value.TryCast<SR_HTYPES_NS::UnicodeString>()) {
+                std::string text = SR_UTILS_NS::Localization::UtfToUtf<char, char32_t>(pUnicodeString->View());
+
+                if (isTextBox) {
+                    ImGui::InputTextMultiline("##Input", &text, ImVec2(context.fieldWidth, 100));
+                }
+                else {
+                    ImGui::InputText("##Input", &text);
+                }
+
+                if (ImGui::IsItemDeactivatedAfterEdit()) {
+                    SetMappedValue(context, feedback, pUnicodeString, SR_HTYPES_NS::UnicodeString(SR_UTILS_NS::Localization::UtfToUtf<char32_t, char>(text)));
                 }
             }
             else {
@@ -81,8 +98,6 @@ namespace SR_CORE_GUI_NS {
         }
 
         ImGui::PopItemWidth();
-
-        SetValue(context, feedback, value);
 
         ImGui::PopStyleVar();
 

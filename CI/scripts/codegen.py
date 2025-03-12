@@ -412,7 +412,7 @@ def add_property_custom_arg(property_obj, arg, index):
     property_obj.custom_args[key] = value
 
 def process_property(property_obj, child):
-    property_obj.change_callback = extract_special_tag_comment_data(child, 'changeCallback')
+    property_obj.change_callback = extract_special_tag_comment_data(child, 'onChanged')
     property_obj.setter = extract_special_tag_comment_data(child, 'setter')
     property_obj.getter = extract_special_tag_comment_data(child, 'getter')
     property_obj.reset_value = extract_special_tag_comment_data(child, 'resetValue')

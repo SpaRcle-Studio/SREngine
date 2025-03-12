@@ -40,7 +40,6 @@
 #include <Graphics/Types/Camera.h>
 #include <Graphics/UI/Anchor.h>
 #include <Graphics/UI/Canvas.h>
-#include <Graphics/Font/ITextComponent.h>
 #include <Graphics/Font/Font.h>
 #include <Graphics/Utils/MeshUtils.h>
 

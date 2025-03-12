@@ -58,7 +58,11 @@ namespace SR_CORE_GUI_NS {
         SR_NODISCARD const SR_UTILS_NS::Reflection::EditorPropertyParams& GetEditorParams() const { return pProperty ? pProperty->GetEditorParams() : editorPropertyParams; }
 
         SR_NODISCARD SR_UTILS_NS::Reflection::Value GetValue() const {
-            return (pValue ? *pValue : pProperty->Get(pOwner)).DetachIfConst();
+            if (pValue) {
+                return *pValue;
+            }
+
+            return pProperty->Get(pOwner).DetachIfConst();
         }
 
         SR_NODISCARD bool HasExplicitSetter() const {
@@ -78,6 +82,7 @@ namespace SR_CORE_GUI_NS {
 
     struct PropertyDrawerFeedback {
         bool isChanged = false;
+        bool isDrag = false;
     };
 
     class PropertyDrawerBase : public SR_UTILS_NS::SRClass, public SR_HTYPES_NS::SharedPtr<PropertyDrawerBase> {
@@ -91,7 +96,7 @@ namespace SR_CORE_GUI_NS {
 
         virtual PropertyDrawerFeedback Draw(const PropertyDrawerContext& context) = 0;
 
-        static SR_NODISCARD bool CheckSearchMatch(std::string_view searchBuffer, std::string_view text) {
+        SR_NODISCARD static bool CheckSearchMatch(std::string_view searchBuffer, std::string_view text) {
             for (uint64_t textStartPos = 0; textStartPos < text.size(); ++textStartPos) {
                 bool isMatch = true;
                 for (uint64_t searchPos = 0; searchPos < searchBuffer.size(); ++searchPos) {
@@ -117,6 +122,37 @@ namespace SR_CORE_GUI_NS {
         static void SetValue(const PropertyDrawerContext& context, const PropertyDrawerFeedback& feedback, const SR_UTILS_NS::Reflection::Value& value) {
             if (!context.pValue && feedback.isChanged && (!value.IsRef() || context.HasExplicitSetter())) {
                 context.GetProperty().Set(context.pOwner, value);
+            }
+        }
+
+        static void SetReflectedValue(const PropertyDrawerContext& context, PropertyDrawerFeedback& feedback, const SR_UTILS_NS::Reflection::Value& value, bool drag = false) {
+            if (context.onBeforeChangeCallback) {
+                context.onBeforeChangeCallback(drag);
+            }
+
+            feedback.isChanged = true;
+
+            if (!context.pValue) {
+                context.GetProperty().Set(context.pOwner, value);
+            }
+            else {
+                SRAssert2(value.SizeOf() == context.pValue->SizeOf(), "PropertyDrawerBase::SetReflectedValue() : size mismatch!");
+                std::memcpy(context.pValue->Data(), value.Data(), value.SizeOf());
+            }
+        }
+
+        template<typename MappedVal, typename NewVal> static void SetMappedValue(const PropertyDrawerContext& context, PropertyDrawerFeedback& feedback, MappedVal pMapped, NewVal value, bool drag = false) {
+            if (context.onBeforeChangeCallback) {
+                context.onBeforeChangeCallback(drag);
+            }
+
+            feedback.isChanged = true;
+
+            if (!context.pValue) {
+                context.GetProperty().Set(context.pOwner, SR_UTILS_NS::Reflection::Value::Create(value));
+            }
+            else {
+                *pMapped = value;
             }
         }
 

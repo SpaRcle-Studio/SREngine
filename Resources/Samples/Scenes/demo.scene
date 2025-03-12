@@ -195,6 +195,11 @@ sra format
 									9-o:2d
 										10-v:x
 											11-f:7.000000
+									9-o:4db
+										10-v:x
+											11-b:true
+										10-v:w
+											11-b:true
 									9-o:size
 									9-o:size2
 										10-o:width
@@ -233,6 +238,12 @@ sra format
 									9-a:testMathVector4
 										10-k:i
 											11-a:d
+												12-k:i
+													13-o:d
+														14-v:x
+															15-f:4.000000
+														14-v:w
+															15-f:22.000000
 									9-a:testPlatformType
 										10-k:i
 											11-v:d
@@ -249,6 +260,25 @@ sra format
 											11-o:d
 												12-o:width
 												12-o:height
+									9-a:bitSet
+										10-k:i
+											11-v:d
+												12-b:false
+										10-k:i
+											11-v:d
+												12-b:false
+										10-k:i
+											11-v:d
+												12-b:false
+										10-k:i
+											11-v:d
+												12-b:false
+										10-k:i
+											11-v:d
+												12-b:false
+										10-k:i
+											11-v:d
+												12-b:false
 					5-v:name
 						6-s:Sphere
 					5-o:transform
@@ -3864,142 +3894,6 @@ sra format
 					5-s:GameObject
 				4-o:ptr
 					5-v:entityId
-						6-i:4157349510381498180
-					5-a:components
-						6-k:i
-							7-o:d
-								8-v:type
-									9-s:Rigidbody3D
-								8-o:ptr
-									9-v:entityId
-										10-i:3136259295166162666
-									9-o:shape
-										10-v:type
-											11-s:CollisionShape
-										10-o:ptr
-											11-v:type
-												12-s:Convex3D
-											11-o:bounds
-												12-v:x
-													13-f:1.000000
-												12-v:y
-													13-f:1.000000
-												12-v:z
-													13-f:1.000000
-											11-v:meshPath
-												12-s:Tests/ConvexMesh/monke.obj
-					5-v:name
-						6-s:ConvexMesh/monke
-					5-a:children
-						6-k:i
-							7-o:d
-								8-v:type
-									9-s:GameObject
-								8-o:ptr
-									9-v:entityId
-										10-i:4017347377432298814
-									9-a:components
-										10-k:i
-											11-o:d
-												12-v:type
-													13-s:Mesh3D
-												12-o:ptr
-													13-v:entityId
-														14-i:3514434685383449660
-													13-o:material
-														14-v:type
-															15-s:UniqueMaterial
-														14-o:ptr
-															15-o:data
-																16-v:type
-																	17-s:MaterialData
-																16-o:ptr
-																	17-o:default
-																		18-v:shader
-																			19-s:Engine/Shaders/CascadedShadowMap/spatial.srsl
-																		18-o:data
-																			19-a:uniforms
-																				20-k:i
-																					21-o:d
-																						22-v:id
-																							23-s:color
-																						22-v:type
-																							23-s:Vec4
-																						22-o:value
-																							23-v:x
-																								24-f:1.000000
-																							23-v:y
-																								24-f:1.000000
-																							23-v:z
-																								24-f:1.000000
-																							23-v:w
-																								24-f:1.000000
-																			19-a:samplers
-																				20-k:i
-																					21-o:d
-																						22-v:id
-																							23-s:diffuse
-																						22-v:type
-																							23-s:Sampler2D
-																						22-v:value
-																							23-s:Engine/Textures/default_improved.png
-																	17-a:stages
-																		18-k:stage
-																			19-v:id
-																				20-s:Shadow
-																			19-v:shader
-																				20-s:Engine/Shaders/CascadedShadowMap/spatial.srsl
-																			19-o:data
-																				20-a:uniforms
-																					21-k:i
-																						22-o:d
-																							23-v:id
-																								24-s:color
-																							23-v:type
-																								24-s:Vec4
-																							23-o:value
-																								24-v:x
-																									25-f:1.000000
-																								24-v:y
-																									25-f:1.000000
-																								24-v:z
-																									25-f:1.000000
-																								24-v:w
-																									25-f:1.000000
-																				20-a:samplers
-																					21-k:i
-																						22-o:d
-																							23-v:id
-																								24-s:diffuse
-																							23-v:type
-																								24-s:Sampler2D
-																							23-v:value
-																								24-s:Engine/Textures/default_improved.png
-													13-v:meshPath
-														14-s:Tests/ConvexMesh/monke.obj
-									9-v:name
-										10-s:Suzanne
-									9-o:transform
-										10-v:type
-											11-s:Transform3D
-										10-o:ptr
-					5-o:transform
-						6-v:type
-							7-s:Transform3D
-						6-o:ptr
-							7-o:translation
-								8-v:x
-									9-f:-4.308099
-								8-v:y
-									9-f:2.057604
-								8-v:z
-									9-f:-1.368014
-		2-k:i
-			3-o:d
-				4-v:type
-					5-s:GameObject
-				4-o:ptr
-					5-v:entityId
 						6-i:4440663253338984513
 					5-a:components
 						6-k:i
@@ -4057,3 +3951,206 @@ sra format
 									9-f:10.000000
 								8-v:z
 									9-f:10.000000
+		2-k:i
+			3-o:d
+				4-v:type
+					5-s:GameObject
+				4-o:ptr
+					5-v:entityId
+						6-i:2655138725842219428
+					5-a:components
+						6-k:i
+							7-o:d
+								8-v:type
+									9-s:Rigidbody3D
+								8-o:ptr
+									9-v:entityId
+										10-i:3768458230706497877
+									9-o:shape
+										10-v:type
+											11-s:CollisionShape
+										10-o:ptr
+											11-v:type
+												12-s:Convex3D
+											11-o:bounds
+												12-v:x
+													13-f:1.000000
+												12-v:y
+													13-f:1.000000
+												12-v:z
+													13-f:1.000000
+											11-v:meshPath
+												12-s:Engine/Models/monkey.obj
+						6-k:i
+							7-o:d
+								8-v:type
+									9-s:Mesh3D
+								8-o:ptr
+									9-v:entityId
+										10-i:2745379829465581383
+									9-o:material
+										10-v:type
+											11-s:FileMaterial
+										10-o:ptr
+											11-v:materialPath
+												12-s:Engine/Materials/default.mat
+									9-v:meshPath
+										10-s:Engine/Models/monkey.obj
+					5-v:name
+						6-s:Monkey
+					5-o:transform
+						6-v:type
+							7-s:Transform3D
+						6-o:ptr
+							7-o:translation
+								8-v:x
+									9-f:-10.018909
+								8-v:y
+									9-f:3.133079
+		2-k:i
+			3-o:d
+				4-v:type
+					5-s:GameObject
+				4-o:ptr
+					5-v:entityId
+						6-i:3416255879129797072
+					5-a:components
+						6-k:i
+							7-o:d
+								8-v:type
+									9-s:Text
+								8-o:ptr
+									9-v:entityId
+										10-i:2538422635618239423
+									9-o:material
+										10-v:type
+											11-s:UniqueMaterial
+										10-o:ptr
+											11-o:data
+												12-v:type
+													13-s:MaterialData
+												12-o:ptr
+													13-o:default
+														14-v:shader
+															15-s:Engine/Shaders/ui_text.srsl
+														14-o:data
+															15-a:uniforms
+																16-k:i
+																	17-o:d
+																		18-v:id
+																			19-s:color
+																		18-v:type
+																			19-s:Vec3
+																		18-o:value
+													13-a:stages
+									9-v:text
+										10-m:5
+2222😁👀😀📂⚙️🍿🥩😊
+1111??🍫🍱😑😶😝😶‍🌫️
+ddddцццゔぅヾボ
+2222🍖🍖🍖🍖🍖
+
+									9-v:font
+										10-s:Engine/Fonts/MiamaNuevaEmoji.ttf
+									9-v:fontSize
+										10-i:84
+									9-v:debug
+										10-b:true
+					5-v:name
+						6-s:asdasdas'asdasукцкцукゔぅヾボ⚙️🍿🥩😊
+					5-v:isEnabled
+						6-b:false
+					5-v:layer
+						6-s:UI
+					5-o:transform
+						6-v:type
+							7-s:Transform3D
+						6-o:ptr
+							7-o:translation
+								8-v:x
+									9-f:-1.120000
+								8-v:y
+									9-f:0.070000
+							7-o:scale
+								8-v:x
+									9-f:0.135000
+								8-v:y
+									9-f:0.172000
+								8-v:z
+									9-f:1.000000
+		2-k:i
+			3-o:d
+				4-v:type
+					5-s:GameObject
+				4-o:ptr
+					5-v:entityId
+						6-i:2716744339933478319
+					5-a:components
+						6-k:i
+							7-o:d
+								8-v:type
+									9-s:Text
+								8-o:ptr
+									9-v:entityId
+										10-i:4497561116748288258
+									9-o:material
+										10-v:type
+											11-s:UniqueMaterial
+										10-o:ptr
+											11-o:data
+												12-v:type
+													13-s:MaterialData
+												12-o:ptr
+													13-o:default
+														14-v:shader
+															15-s:Engine/Shaders/ui_text.srsl
+														14-o:data
+															15-a:uniforms
+																16-k:i
+																	17-o:d
+																		18-v:id
+																			19-s:color
+																		18-v:type
+																			19-s:Vec3
+																		18-o:value
+													13-a:stages
+									9-v:text
+										10-m:5
+2222😁👀😀📂⚙️🍿🥩😊
+1111??🍫🍱😑😶😝😶‍🌫️
+ddddцццゔぅヾボ
+2222🍖🍖🍖🍖🍖
+
+									9-v:font
+										10-s:Engine/Fonts/MiamaNuevaEmoji.ttf
+									9-v:fontSize
+										10-i:84
+									9-v:debug
+										10-b:true
+					5-v:tag
+						6-s:Untagged
+					5-v:name
+						6-s:2В
+					5-v:layer
+						6-s:UI
+					5-o:transform
+						6-v:type
+							7-s:Transform2D
+						6-o:ptr
+							7-o:translation
+								8-v:x
+									9-f:-1.120000
+							7-o:scale
+								8-v:x
+									9-f:0.135000
+								8-v:y
+									9-f:0.172000
+								8-v:z
+									9-f:1.000000
+							7-o:skew
+								8-v:x
+									9-f:1.000000
+								8-v:y
+									9-f:1.000000
+								8-v:z
+									9-f:1.000000

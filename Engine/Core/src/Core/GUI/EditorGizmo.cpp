@@ -121,9 +121,9 @@ namespace SR_CORE_GUI_NS {
                 continue;
             }
 
-            //if (pGameObject == GetGameObject()) {
-            //    return false;
-            //}
+            if (pGameObject == GetGameObject()) {
+                return false;
+            }
 
             if (!is2D.has_value()) {
                 is2D = pGameObject->GetTransform()->GetMeasurement() == SR_UTILS_NS::Measurement::Space2D;

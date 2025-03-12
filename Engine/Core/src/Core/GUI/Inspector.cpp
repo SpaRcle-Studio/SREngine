@@ -24,7 +24,6 @@
 #include <Graphics/UI/Gizmo.h>
 #include <Graphics/Types/Geometry/ProceduralMesh.h>
 #include <Graphics/GUI/Utils.h>
-#include <Graphics/Font/ITextComponent.h>
 #include <Graphics/Types/Geometry/SkinnedMesh.h>
 #include <Graphics/Animations/Animator.h>
 #include <Graphics/Animations/BoneComponent.h>
@@ -136,7 +135,8 @@ namespace SR_CORE_GUI_NS {
 
         ImGui::PushItemWidth(ImGui::GetContentRegionAvail().x + 2.f);
         std::string name = m_sceneObject->GetName();
-        if (ImGui::InputText("##Name", &name, ImGuiInputTextFlags_NoUndoRedo | ImGuiInputTextFlags_EnterReturnsTrue)) {
+        ImGui::InputText("##Name", &name);
+        if (ImGui::IsItemDeactivatedAfterEdit()) {
             pEngine->GetCmdManager()->Execute<SR_CORE_NS::Commands::SceneObjectRename>(SR_UTILS_NS::SyncType::Async, pEngine, m_sceneObject, name);
         }
         ImGui::PopItemWidth();
@@ -199,6 +199,10 @@ namespace SR_CORE_GUI_NS {
 
                 auto&& cmd = new SR_CORE_NS::Commands::GameObjectTransform(pEngine, pGameObject, std::move(m_pTransformSerializer), std::move(pNewSerializer));
                 pEngine->GetCmdManager()->Store(cmd);
+
+                if (pTransform != pGameObject->GetTransform()) {
+                    pGameObject->SetTransform(pTransform);
+                }
             }
         }
 

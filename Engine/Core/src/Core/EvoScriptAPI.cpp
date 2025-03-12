@@ -17,7 +17,7 @@
 
 #include <Graphics/Loaders/ObjLoader.h>
 #include <Graphics/Types/Skybox.h>
-#include <Graphics/Font/ITextComponent.h>
+#include <Graphics/Font/Text.h>
 #include <Graphics/Types/Geometry/ProceduralMesh.h>
 #include <Graphics/Animations/Animator.h>
 #include <Graphics/Animations/AnimationGraph.h>

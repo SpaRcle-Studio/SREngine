@@ -65,7 +65,7 @@ namespace SR_CORE_GUI_NS {
             return "PointerPropertyDrawer";
         }
 
-        if (value.IsString() || value.IsStringView() || value.IsStringAtom()) {
+        if (value.IsString() || value.IsStringView() || value.IsStringAtom() || value.IsUnicodeString()) {
             return "StringPropertyDrawer";
         }
 
@@ -234,12 +234,9 @@ namespace SR_CORE_GUI_NS {
             const ImVec2 mainButtonSize = { context.fieldTitleWidth, context.fieldHeight };
 
             if (ImGui::Button(context.GetPropertyDisplayName().c_str(), mainButtonSize)) {
-                if (context.onBeforeChangeCallback) {
-                    context.onBeforeChangeCallback(false);
-                }
-                feedback.isChanged = true;
                 value = context.GetProperty().GetResetValue() ? context.GetProperty().GetResetValue() : context.GetProperty().GetDefaultValue();
                 value = value.DetachIfConst();
+                SetReflectedValue(context, feedback, value);
             }
         }
 
@@ -275,19 +272,17 @@ namespace SR_CORE_GUI_NS {
             const uint64_t offset = partSize * i;
 
             if (ImGui::Button(labels[i], buttonSize)) {
-                if (context.onBeforeChangeCallback) {
-                    context.onBeforeChangeCallback(false);
-                }
+                SR_UTILS_NS::Reflection::Value copy = value.Detach();
                 if (context.pProperty && context.GetProperty().GetResetValue().SizeOf() == value.SizeOf()) {
                     if (auto&& pResetData = (char*)context.GetProperty().GetResetValue().Data()) {
-                        std::memcpy((char*)value.Data() + offset, pResetData + offset, partSize);
-                        feedback.isChanged = true;
+                        std::memcpy((char*)copy.Data() + offset, pResetData + offset, partSize);
                     }
                 }
                 if (!feedback.isChanged) {
-                    std::memset((char*)value.Data() + offset, 0, partSize);
+                    std::memset((char*)copy.Data() + offset, 0, partSize);
                     feedback.isChanged = true;
                 }
+                SetReflectedValue(context, feedback, copy);
             }
 
             ImGui::PopStyleColor(3);
@@ -298,13 +293,10 @@ namespace SR_CORE_GUI_NS {
 
             if (partSize == 1) {
                 ImGui::PopItemWidth();
-                bool temp = *reinterpret_cast<bool*>(&((char*)(value.Data()))[offset]);
-                if (ImGui::Checkbox("", &temp)) {
-                    if (context.onBeforeChangeCallback) {
-                        context.onBeforeChangeCallback(false);
-                    }
-                    *reinterpret_cast<bool*>(&((char*)(value.Data()))[offset]) = temp;
-                    feedback.isChanged = true;
+                SR_UTILS_NS::Reflection::Value copy = value.Detach();
+                bool* pTemp = reinterpret_cast<bool*>(&((char*)(copy.Data()))[offset]);
+                if (ImGui::Checkbox("", pTemp)) {
+                    SetReflectedValue(context, feedback, copy, false);
                 }
                 ImGui::SameLine();
                 ImGui::Dummy(ImVec2(partItemWidth - ImGui::GetFrameHeight(), 0.0f));
@@ -314,13 +306,9 @@ namespace SR_CORE_GUI_NS {
                 SR_GRAPH_GUI_NS::ColoredText("Unknown part type!", ImColor(1.f, 0.f, 0.f, 1.f));
             }
             else {
-                std::memcpy(&m_numberTempData, (char*)value.Data() + offset, partSize);
-                if (ImGui::DragScalar("", partType, &m_numberTempData, drag)) {
-                    if (context.onBeforeChangeCallback) {
-                        context.onBeforeChangeCallback(true);
-                    }
-                    std::memcpy((char*)value.Data() + offset, &m_numberTempData, partSize);
-                    feedback.isChanged = true;
+                SR_UTILS_NS::Reflection::Value copy = value.Detach();
+                if (ImGui::DragScalar("", partType, (char*)copy.Data() + offset, drag)) {
+                    SetReflectedValue(context, feedback, copy, true);
                 }
             }
 
@@ -342,8 +330,6 @@ namespace SR_CORE_GUI_NS {
 
         ImGui::PopID();
         ImGui::PopID();
-
-        SetValue(context, feedback, value);
 
         return feedback;
     }
@@ -372,12 +358,9 @@ namespace SR_CORE_GUI_NS {
         if (!context.pValue) {
             const ImVec2 mainButtonSize = { context.fieldTitleWidth, context.fieldHeight * 2.f };
             if (ImGui::Button(context.GetProperty().GetEditorParams().GetDisplayName().c_str(), mainButtonSize)) {
-                if (context.onBeforeChangeCallback) {
-                    context.onBeforeChangeCallback(false);
-                }
-                feedback.isChanged = true;
                 value = context.GetProperty().GetResetValue() ? context.GetProperty().GetResetValue() : context.GetProperty().GetDefaultValue();
                 value = value.DetachIfConst();
+                SetReflectedValue(context, feedback, value);
             }
         }
 
@@ -401,6 +384,8 @@ namespace SR_CORE_GUI_NS {
 
         ImGui::BeginGroup();
         {
+            SR_UTILS_NS::Reflection::Value copy = value.Detach();
+
             for (uint8_t i = 0; i < dimension; ++i) {
                 ImGui::PushID(i);
 
@@ -408,14 +393,11 @@ namespace SR_CORE_GUI_NS {
                 ImGui::PushStyleColor(ImGuiCol_ButtonHovered, colors[i] + ImVec4(0.1f, 0.1f, 0.1f, 0.0f));
                 ImGui::PushStyleColor(ImGuiCol_ButtonActive, colors[i] + ImVec4(0.2f, 0.2f, 0.2f, 0.0f));
 
-                auto&& pFSize = reinterpret_cast<SR_MATH_NS::FSize*>(&((char*)(value.Data()))[i * sizeof(SR_MATH_NS::FSize)]);
-                auto&& pISize = reinterpret_cast<SR_MATH_NS::ISize*>(&((char*)(value.Data()))[i * sizeof(SR_MATH_NS::ISize)]);
-                auto&& pUSize = reinterpret_cast<SR_MATH_NS::USize*>(&((char*)(value.Data()))[i * sizeof(SR_MATH_NS::USize)]);
+                auto&& pFSize = reinterpret_cast<SR_MATH_NS::FSize*>(&((char*)(copy.Data()))[i * sizeof(SR_MATH_NS::FSize)]);
+                auto&& pISize = reinterpret_cast<SR_MATH_NS::ISize*>(&((char*)(copy.Data()))[i * sizeof(SR_MATH_NS::ISize)]);
+                auto&& pUSize = reinterpret_cast<SR_MATH_NS::USize*>(&((char*)(copy.Data()))[i * sizeof(SR_MATH_NS::USize)]);
 
                 if (ImGui::Button(labels[i], buttonSize)) {
-                    if (context.onBeforeChangeCallback) {
-                        context.onBeforeChangeCallback(false);
-                    }
                     feedback.isChanged = true;
                     if (value.SizeOf() == context.GetProperty().GetResetValue().SizeOf()) {
                         auto&& pMapped = context.GetProperty().GetResetValue().Data();
@@ -449,33 +431,27 @@ namespace SR_CORE_GUI_NS {
                     case ImGuiDataType_Float: {
                         float_t temp = pFSize->v;
                         if (ImGui::DragScalar("", ImGuiDataType_Float, &temp, drag)) {
-                            if (context.onBeforeChangeCallback) {
-                                context.onBeforeChangeCallback(true);
-                            }
                             pFSize->v = temp;
                             feedback.isChanged = true;
+                            feedback.isDrag = true;
                         }
                         break;
                     }
                     case ImGuiDataType_S32: {
                         int32_t temp = pISize->v;
                         if (ImGui::DragScalar("", ImGuiDataType_S32, &temp, drag)) {
-                            if (context.onBeforeChangeCallback) {
-                                context.onBeforeChangeCallback(true);
-                            }
                             pISize->v = temp;
                             feedback.isChanged = true;
+                            feedback.isDrag = true;
                         }
                         break;
                     }
                     case ImGuiDataType_U32: {
                         uint32_t temp = pUSize->v;
                         if (ImGui::DragScalar("", ImGuiDataType_U32, &temp, drag)) {
-                            if (context.onBeforeChangeCallback) {
-                                context.onBeforeChangeCallback(true);
-                            }
                             pUSize->v = temp;
                             feedback.isChanged = true;
+                            feedback.isDrag = true;
                         }
                         break;
                     }
@@ -500,9 +476,9 @@ namespace SR_CORE_GUI_NS {
             for (uint8_t i = 0; i < dimension; ++i) {
                 ImGui::PushID(i);
 
-                auto&& pFSize = reinterpret_cast<SR_MATH_NS::FSize*>(&((char*)(value.Data()))[i * sizeof(SR_MATH_NS::FSize)]);
-                auto&& pISize = reinterpret_cast<SR_MATH_NS::ISize*>(&((char*)(value.Data()))[i * sizeof(SR_MATH_NS::ISize)]);
-                auto&& pUSize = reinterpret_cast<SR_MATH_NS::USize*>(&((char*)(value.Data()))[i * sizeof(SR_MATH_NS::USize)]);
+                auto&& pFSize = reinterpret_cast<SR_MATH_NS::FSize*>(&((char*)(copy.Data()))[i * sizeof(SR_MATH_NS::FSize)]);
+                auto&& pISize = reinterpret_cast<SR_MATH_NS::ISize*>(&((char*)(copy.Data()))[i * sizeof(SR_MATH_NS::ISize)]);
+                auto&& pUSize = reinterpret_cast<SR_MATH_NS::USize*>(&((char*)(copy.Data()))[i * sizeof(SR_MATH_NS::USize)]);
 
                 SR_MATH_NS::SizeMetric* pSize = nullptr;
                 switch (partType) {
@@ -518,9 +494,6 @@ namespace SR_CORE_GUI_NS {
                     auto&& names = SR_UTILS_NS::EnumReflector::GetNames<SR_MATH_NS::SizeMetric>();
                     for (auto&& name : names) {
                         if (ImGui::Selectable(name.c_str())) {
-                            if (context.onBeforeChangeCallback) {
-                                context.onBeforeChangeCallback(false);
-                            }
                             ImGui::SetItemDefaultFocus();
                             *pSize = SR_UTILS_NS::EnumReflector::FromString<SR_MATH_NS::SizeMetric>(name);
                             feedback.isChanged = true;
@@ -538,6 +511,10 @@ namespace SR_CORE_GUI_NS {
             }
             ImGui::PopItemWidth();
             ImGui::EndGroup();
+
+            if (feedback.isChanged) {
+                SetReflectedValue(context, feedback, copy, feedback.isDrag);
+            }
         }
 
         ImGui::PopID();
@@ -546,8 +523,6 @@ namespace SR_CORE_GUI_NS {
 
         ImGui::PopID();
         ImGui::PopID();
-
-        SetValue(context, feedback, value);
 
         return feedback;
     }
