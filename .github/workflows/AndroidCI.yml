@@ -31,7 +31,7 @@ jobs:
       - if: inputs.buildRelease == 'true'
         name: Building Release.
         shell: bash
-        working-directory: ${{github.workspace}}/build-release
+        working-directory: ${{github.workspace}}
         run: |
           echo "releaseSuccessful=false" >> "$GITHUB_ENV"
           cd Android
