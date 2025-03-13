@@ -132,7 +132,7 @@ jobs:
     if: needs.manage.outputs.buildAndroid == 'true'
     uses: ./.github/workflows/AndroidCI.yml
     with:
-      buildRelease: ${{needs.manage.outputs.buildRelease}}
+      buildRelease: ${{(needs.manage.outputs.buildRelease == 'true' || needs.manage.outputs.buildDebug == 'true') && 'true' || 'false' }}
       artifactPush: ${{needs.manage.outputs.artifactPush}}
 
   PostBuild:
