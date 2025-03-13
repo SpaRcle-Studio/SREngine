@@ -36,7 +36,7 @@ jobs:
           echo "releaseSuccessful=false" >> "$GITHUB_ENV"
           cd Android
           echo "Install android SDK..."
-          call install_android_sdk.bat
+          "cmd /c install_android_sdk.bat"
           echo "Run build..."
-          call build.bat
+          "cmd /c build.bat"
           echo "releaseSuccessful=true" >> "$GITHUB_ENV"
