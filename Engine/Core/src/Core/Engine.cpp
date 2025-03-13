@@ -7,6 +7,7 @@
 #include <Core/EngineMigrators.h>
 #include <Core/GUI/EditorGUI.h>
 #include <Core/World/EngineScene.h>
+#include <Core/EngineCommands.h>
 
 #include <Utils/Events/EventManager.h>
 #include <Utils/World/Scene.h>
@@ -112,27 +113,11 @@ namespace SR_CORE_NS {
             return false;
         }
 
-        if (!RegisterMigrators()) {
-            SR_ERROR("Engine::Create() : failed to register engine migrators!");
-            return false;
-        }
-
         SR_INFO("Engine::Create() : creating main window...");
 
         if (SR_UTILS_NS::Features::Instance().Enabled("MainWindow", true)) {
             AddWindow(CreateMainWindow());
         }
-
-        SR_UTILS_NS::ComponentManager::Instance().SetContextInitializer([pEngine = GetThis()](auto&& context) {
-            if (!pEngine) {
-                SRHalt("Engine is nullptr!");
-                return;
-            }
-            context.SetValue(pEngine->GetMainWindow());
-
-            context.template SetPointer<SR_PHYSICS_NS::LibraryImpl>("2DPLib", SR_PHYSICS_NS::PhysicsLibrary::Instance().GetActiveLibrary(SR_UTILS_NS::Measurement::Space2D));
-            context.template SetPointer<SR_PHYSICS_NS::LibraryImpl>("3DPLib", SR_PHYSICS_NS::PhysicsLibrary::Instance().GetActiveLibrary(SR_UTILS_NS::Measurement::Space3D));
-        });
 
         SR_LOG("Engine::RegisterLibraries() : registering all libraries...");
 
@@ -171,19 +156,6 @@ namespace SR_CORE_NS {
         SetGameMode(!SR_UTILS_NS::Features::Instance().Enabled("EditorOnStartup", false));
 
         m_autoReloadResources = SR_UTILS_NS::Features::Instance().Enabled("AutoReloadResources", false);
-
-        if (!m_engineScene && (m_editor && !m_editor->LoadSceneFromCachedPath())) {
-            auto&& scenePath = SR_WORLD_NS::Scene::NewScenePath.ConcatExt("scene");
-
-            if (SR_WORLD_NS::Scene::IsExists(scenePath)) {
-                if (!SetScene(SR_WORLD_NS::Scene::Load(scenePath))) {
-                    SR_ERROR("Engine::Create() : failed to load scene!\n\tPath: " + scenePath.ToString());
-                }
-            }
-            else if (!SetScene(SR_WORLD_NS::Scene::New(scenePath))) {
-                SR_ERROR("Engine::Create() : failed to create new scene!\n\tPath: " + scenePath.ToString());
-            }
-        }
 
         m_threadsWorker = SR_UTILS_NS::ThreadsWorker::Load("Engine/Configs/Threads.yml");
         if (!m_threadsWorker) {
@@ -332,9 +304,8 @@ namespace SR_CORE_NS {
         return true;
     }
 
-    bool Engine::SetScene(const SR_HTYPES_NS::SharedPtr<SR_WORLD_NS::Scene>& pScene)  {
+    void Engine::AddSceneToQueue(const SR_HTYPES_NS::SharedPtr<SR_WORLD_NS::Scene>& pScene)  {
         m_sceneQueue.Push(pScene);
-        return true;
     }
 
     void Engine::Reload() {
@@ -435,7 +406,7 @@ namespace SR_CORE_NS {
             }
 
             if (m_engineScene && m_engineScene->pScene.RecursiveLockIfValid()) {
-                m_engineScene->pScene->Save();
+                m_engineScene->pScene->SaveScene();
                 m_engineScene->pScene.Unlock();
             }
 
@@ -457,6 +428,31 @@ namespace SR_CORE_NS {
         }
 
         return true;
+    }
+
+    void Engine::LoadStartupScene() {
+        SR_TRACY_ZONE;
+
+        SR_LOG("Engine::LoadStartupScene() : loading startup scene...");
+
+        if (!m_engineScene && (m_editor && !m_editor->LoadSceneFromCachedPath())) {
+            auto&& scenePath = SR_WORLD_NS::Scene::NewScenePath.ConcatExt("scene");
+
+            if (SR_WORLD_NS::Scene::IsExists(scenePath)) {
+                auto&& pScene = SR_WORLD_NS::Scene::LoadScene(scenePath);
+                if (!pScene) {
+                    SR_ERROR("Engine::Create() : failed to load scene! Delete broken new scene\n\tPath: " + scenePath.ToString());
+                    SR_PLATFORM_NS::Delete(SR_WORLD_NS::Scene::GetAbsPath(scenePath));
+                }
+                else {
+                    AddSceneToQueue(pScene);
+                }
+            }
+
+            if (m_sceneQueue.Empty()) {
+                AddSceneToQueue(SR_WORLD_NS::Scene::NewScene(scenePath, SR_WORLD_NS::SceneLogicType::Asset));
+            }
+        }
     }
 
     void Engine::SetGameMode(bool enabled) {

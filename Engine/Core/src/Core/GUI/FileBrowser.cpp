@@ -160,10 +160,10 @@ namespace SR_CORE_NS::GUI {
         }
         if (ImGui::Selectable("Extract animations")) {
             SR_UTILS_NS::Path path = m_selectedDir.Concat(filename);
-            auto&& animations = SR_ANIMATIONS_NS::AnimationClip::Load(path);
-            for (auto&& pAnimation : animations) {
-               // pAnimation->Save()
-            }
+            //auto&& animations = SR_ANIMATIONS_NS::AnimationClip::Load(path);
+            //for (auto&& pAnimation : animations) {
+            //   // pAnimation->Save()
+            //}
         }
         if (ImGui::Selectable("Copy")) {
             SR_UTILS_NS::Path path = m_selectedDir.Concat(filename);
@@ -239,7 +239,7 @@ namespace SR_CORE_NS::GUI {
                 if (element.isDir) {
                     void* descriptor = dynamic_cast<EditorGUI *>(GetManager())->GetIconDescriptor(element.iconType);
 
-                    if (SR_GRAPH_GUI_NS::ImageButtonDouble(headerid, descriptor, SR_MATH_NS::IVector2(50), 0)) {
+                    if (SR_GRAPH_GUI_NS::ImageButtonDouble(headerid, descriptor, SR_MATH_NS::FVector2(50), 0)) {
                         m_selectedDir = m_selectedDir.Concat(element.filename);
                         m_dirtySelectedDir = true;
                     }
@@ -250,7 +250,7 @@ namespace SR_CORE_NS::GUI {
                 {
                     void* descriptor = dynamic_cast<EditorGUI *>(GetManager())->GetIconDescriptor(element.iconType);
 
-                    if (SR_GRAPH_GUI_NS::ImageButtonDouble(headerid, descriptor, SR_MATH_NS::IVector2(50), 0)) {
+                    if (SR_GRAPH_GUI_NS::ImageButtonDouble(headerid, descriptor, SR_MATH_NS::FVector2(50), 0)) {
                         SR_UTILS_NS::Path path = m_selectedDir.Concat(element.filename);
                         //SR_UTILS_NS::Platform::OpenWithAssociatedApp(m_selectedDir.Concat(element.filename));
 

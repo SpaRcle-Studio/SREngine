@@ -113,6 +113,8 @@ namespace SR_PHYSICS_NS {
     }
 
     LibraryImpl* PhysicsLibrary::GetActiveLibrary(Space space) {
+        SR_TRACY_ZONE;
+
         if (auto&& pIt = m_activeLibs.find(space); pIt != m_activeLibs.end()) {
             return GetLibrary(pIt->second);
         }

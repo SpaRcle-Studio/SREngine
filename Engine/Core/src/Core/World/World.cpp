@@ -18,12 +18,29 @@
 #include <Physics/LibraryImpl.h>
 
 #include <assimp/scene.h>
+#include <Graphics/Types/Texture.h>
 
 namespace SR_CORE_NS {
     SR_UTILS_NS::SceneObject::Ptr World::Instance(const SR_HTYPES_NS::RawMesh* pRawMesh) {
         GameObjectPtr root;
 
-        std::list<SR_GTYPES_NS::SkinnedMesh*> skinnedMeshes;
+        static std::function processMaterial = [](const SR_HTYPES_NS::RawMesh* pRawMesh, uint64_t meshId, SR_GTYPES_NS::Mesh* pMesh, uint64_t materialIndex) {
+            if (pRawMesh->GetAssimpScene()->mMeshes[meshId]->mMaterialIndex >= pRawMesh->GetAssimpScene()->mNumMaterials) {
+                return;
+            }
+
+            aiMaterial* pMaterial = pRawMesh->GetAssimpScene()->mMaterials[pRawMesh->GetAssimpScene()->mMeshes[meshId]->mMaterialIndex];
+
+            aiString diffuseTexturePath;
+            if (pMaterial->GetTexture(aiTextureType_DIFFUSE, 0, &diffuseTexturePath) == aiReturn_SUCCESS) {
+                if (auto&& pTexture = SR_GTYPES_NS::Texture::Load(diffuseTexturePath.C_Str())) {
+                    pMesh->GetMaterial()->SetTexture("diffuse", pTexture);
+                    pTexture->CheckResourceUsage();
+                }
+            }
+        };
+
+        std::list<SR_GTYPES_NS::SkinnedMesh::Ptr> skinnedMeshes;
 
         const std::function<GameObjectPtr(aiNode*)> processNode = [&processNode, &skinnedMeshes, this, pRawMesh](aiNode* node) -> GameObjectPtr {
             GameObjectPtr ptr = Scene::InstanceGameObject(node->mName.C_Str());
@@ -34,20 +51,19 @@ namespace SR_CORE_NS {
                 const SR_GRAPH_NS::MeshType meshType = countBones > 0 ? SR_GRAPH_NS::MeshType::Skinned : SR_GRAPH_NS::MeshType::Static;
 
                 if (auto&& pMesh = SR_GTYPES_NS::Mesh::Load(pRawMesh->GetResourcePath(), meshType, node->mMeshes[i])) {
-                    if (countBones > 256) {
-                        pMesh->SetMaterial(SR_GRAPH_NS::FileMaterial::Load("Engine/Materials/skinned-384.mat"));
+                    if (countBones > 0) {
+                        pMesh->SetMaterial(SR_GRAPH_NS::FileMaterial::LoadAsUnique("Engine/Materials/skinned.mat"));
                     }
-                    else if (countBones > 128) {
-                        pMesh->SetMaterial(SR_GRAPH_NS::FileMaterial::Load("Engine/Materials/skinned-256.mat"));
-                    }
-                    else if (countBones > 0) {
-                        pMesh->SetMaterial(SR_GRAPH_NS::FileMaterial::Load("Engine/Materials/skinned.mat"));
+                    else {
+                        pMesh->SetMaterial(SR_GRAPH_NS::FileMaterial::LoadAsUnique("Engine/Materials/default.mat"));
                     }
 
-                    ptr->AddComponent(dynamic_cast<SR_UTILS_NS::Component*>(pMesh));
+                    processMaterial(pRawMesh, meshId, pMesh.Get(), pRawMesh->GetAssimpScene()->mMeshes[meshId]->mMaterialIndex);
+
+                    ptr->AddComponent(pMesh.StaticCast<SR_UTILS_NS::Component>());
 
                     if (pMesh->GetMeshType() == SR_GRAPH_NS::MeshType::Skinned) {
-                        skinnedMeshes.emplace_back(dynamic_cast<SR_GTYPES_NS::SkinnedMesh*>(pMesh));
+                        skinnedMeshes.emplace_back(pMesh.StaticCast<SR_GTYPES_NS::SkinnedMesh>());
                     }
 
                     continue;
@@ -76,7 +92,7 @@ namespace SR_CORE_NS {
             return ptr;
         };
 
-        SR_ANIMATIONS_NS::Skeleton* pSkeleton = nullptr;
+        SR_ANIMATIONS_NS::Skeleton::Ptr pSkeleton = nullptr;
 
         pRawMesh->Execute([&]() -> bool {
             SRVerifyFalse(!(root = processNode(pRawMesh->GetAssimpScene()->mRootNode)).Valid());
@@ -93,9 +109,9 @@ namespace SR_CORE_NS {
         root->SetName(SR_UTILS_NS::StringUtils::GetBetween(std::string(pRawMesh->GetResourceId()), "/", "."));
 
         if (pSkeleton) {
-            root->AddComponent(pSkeleton);
+            root->AddComponent(pSkeleton.StaticCast<SR_UTILS_NS::Component>());
             for (auto&& pSkinnedMesh : skinnedMeshes) {
-                pSkinnedMesh->GetSkeleton().SetPathTo(pSkeleton);
+                pSkinnedMesh->GetSkeleton().SetPathTo(pSkeleton.StaticCast<SR_UTILS_NS::Entity>());
             }
         }
 

@@ -28,12 +28,15 @@ namespace SR_CORE_NS {
             pRenderScene->Remove(&SR_GRAPH_NS::GUI::GlobalWidgetManager::Instance());
         }
 
-        pScene.AutoFree([](SR_WORLD_NS::Scene* pData) {
-            pData->Destroy();
+        if (pScene) {
+            pScene->Destroy();
+        }
+
+        pPhysicsScene.AutoFree([](SR_PHYSICS_NS::PhysicsScene* pData) {
             delete pData;
         });
 
-        pPhysicsScene.AutoFree([](SR_PHYSICS_NS::PhysicsScene* pData) {
+        pScene.AutoFree([](SR_WORLD_NS::Scene* pData) {
             delete pData;
         });
     }
@@ -163,7 +166,7 @@ namespace SR_CORE_NS {
     void EngineScene::Update(float_t dt) {
         SR_TRACY_ZONE;
 
-        pScene->GetLogicBase()->PostLoad();
+        pScene->GetLogicBase()->Prepare();
         pScene->Prepare();
 
         const bool isPaused = pEngine->IsPaused() || !pEngine->IsActive() || pEngine->HasSceneInQueue();

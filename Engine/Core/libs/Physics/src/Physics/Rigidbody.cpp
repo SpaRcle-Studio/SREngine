@@ -16,104 +16,21 @@
 #include <Physics/2D/Rigidbody2D.h>
 #include <Physics/3D/Rigidbody3D.h>
 
+#include <Codegen/Rigidbody.generated.hpp>
+
 namespace SR_PTYPES_NS {
+    Rigidbody::Rigidbody() {
+        GetCollisionShape()->SetRigidbody(this);
+    }
+
     Rigidbody::~Rigidbody() {
-        SR_SAFE_DELETE_PTR(m_shape);
+        m_shape.AutoFree();
         SR_SAFE_DELETE_PTR(m_impl);
-
         SetMaterial(nullptr);
-        SetRawMesh(nullptr);
-    }
-
-    bool Rigidbody::InitializeEntity() noexcept {
-        m_library = SR_PHYSICS_NS::PhysicsLibrary::Instance().GetActiveLibrary(GetMeasurement());
-        if (!m_library) {
-            SR_ERROR("Rigidbody::InitializeEntity() : library not found!");
-            return false;
-        }
-
-        m_shape = m_library->CreateCollisionShape();
-        if (!m_shape) {
-            SR_ERROR("Rigidbody::InitializeEntity() : failed to initialize collision shape!");
-            return false;
-        }
-
-        m_shape->SetRigidbody(this);
-
-        switch (GetMeasurement()) {
-            case SR_UTILS_NS::Measurement::Space2D:
-                m_impl = m_library->CreateRigidbody2DImpl();
-                break;
-            case SR_UTILS_NS::Measurement::Space3D:
-                m_impl = m_library->CreateRigidbody3DImpl();
-                break;
-            default:
-                SR_ERROR("Rigidbody::InitializeEntity() : unknown space type!");
-                return false;
-        }
-
-        if (!m_impl) {
-            SR_ERROR("Rigidbody::InitializeEntity() : failed to allocate implementation!");
-            return false;
-        }
-
-        m_impl->SetRigidbody(this);
-
-        m_properties.AddStandardProperty("Center", &m_center)
-            .SetSetter([this](void* pValue){
-                SetCenter(*reinterpret_cast<SR_MATH_NS::FVector3*>(pValue));
-            })
-            .SetDrag(0.1f);
-
-        m_properties.AddStandardProperty("Is trigger", &m_isTrigger)
-            .SetSetter([this](void* pValue){
-                SetIsTrigger(*reinterpret_cast<bool*>(pValue));
-            });
-
-        m_properties.AddStandardProperty("Is static", &m_isStatic)
-            .SetSetter([this](void* pValue){
-                SetIsStatic(*reinterpret_cast<bool*>(pValue));
-            })
-            .SetSameLine();
-
-        m_properties.AddCustomProperty<SR_UTILS_NS::PathProperty>("Physics material")
-            .SetGetter([this]() { return m_material ? m_material->GetResourcePath() : SR_UTILS_NS::Path(); })
-            .SetSetter([this](const SR_UTILS_NS::Path& path) {
-                SetMaterial(path);
-            })
-            .AddFileFilter("Physics material", "physmat")
-            .SetWidgetEditor("Physics Material Editor");
-
-        m_properties.AddStandardProperty("Mass", &m_mass)
-            .SetDrag(0.01f)
-            .SetResetValue(1.f)
-            .SetSetter([this](void* pValue){
-                SetMass(*reinterpret_cast<float_t*>(pValue));
-            })
-            .SetActiveCondition([this]() -> bool { return !IsStatic(); });
-
-        m_properties.AddEnumProperty<ShapeType>("Collision shape type")
-            .SetGetter([this]() -> SR_UTILS_NS::StringAtom {
-               return SR_UTILS_NS::EnumReflector::ToStringAtom(GetType());
-            })
-            .SetSetter([this](const SR_UTILS_NS::StringAtom& value) {
-                SetType(SR_UTILS_NS::EnumReflector::FromString<ShapeType>(value));
-            })
-            .SetFilter([this](const SR_UTILS_NS::StringAtom& value) -> bool {
-                return IsShapeSupported(SR_UTILS_NS::EnumReflector::FromString<ShapeType>(value));
-            });
-
-        m_properties.AddExternalProperty(m_shape->GetProperties());
-
-        return Entity::InitializeEntity();
-    }
-
-    std::string Rigidbody::GetEntityInfo() const {
-        return Super::GetEntityInfo() + " | " + SR_UTILS_NS::EnumReflector::ToStringAtom(m_shape->GetType()).ToStringRef();
     }
 
     void Rigidbody::OnDestroy() {
-        m_shape->RemoveDebugShape();
+        GetCollisionShape()->RemoveDebugShape();
 
         /// получаем указатель обязательно до OnDestroy
         PhysicsScene::Ptr physicsScene = GetPhysicsScene();
@@ -136,7 +53,7 @@ namespace SR_PTYPES_NS {
     }
 
     const Rigidbody::PhysicsScenePtr& Rigidbody::GetPhysicsScene() const {
-        if (!m_physicsScene.Valid()) {
+        if (!m_physicsScene) {
             auto&& pScene = TryGetScene();
             if (!pScene) {
                 static Rigidbody::PhysicsScenePtr empty;
@@ -149,6 +66,23 @@ namespace SR_PTYPES_NS {
         return m_physicsScene;
     }
 
+    void Rigidbody::SetShape(const CollisionShape::Ptr& pShape) {
+        if (m_shape == pShape) {
+            return;
+        }
+
+        if (!pShape) {
+            SRHalt("Rigidbody::SetShape() : shape is nullptr!");
+            return;
+        }
+
+        m_shape.AutoFree();
+        m_shape = pShape;
+        m_shape->SetRigidbody(this);
+
+        SetShapeDirty();
+    }
+
     void Rigidbody::OnMatrixDirty() {
         if (auto&& pTransform = GetTransform()) {
             pTransform->GetMatrix().Decompose(
@@ -157,7 +91,7 @@ namespace SR_PTYPES_NS {
                 m_scale
             );
 
-            m_shape->UpdateDebugShape();
+            GetCollisionShape()->UpdateDebugShape();
         }
 
         SetMatrixDirty(true);
@@ -166,6 +100,8 @@ namespace SR_PTYPES_NS {
     }
 
     bool Rigidbody::UpdateMatrix(bool force) {
+        SR_TRACY_ZONE;
+
         if ((!force && !IsMatrixDirty())) {
             return false;
         }
@@ -176,8 +112,7 @@ namespace SR_PTYPES_NS {
 
         SetMatrixDirty(false);
 
-        m_shape->SetScale(m_scale);
-        m_shape->UpdateMatrix();
+        GetCollisionShape()->UpdateMatrix();
 
         return true;
     }
@@ -190,10 +125,20 @@ namespace SR_PTYPES_NS {
         return m_mass;
     }
 
+    bool Rigidbody::IsStatic() const noexcept {
+        const ShapeType type = GetCollisionShape()->GetType();
+
+        if (type == ShapeType::Plane3D || type == ShapeType::TriangleMesh2D || type == ShapeType::TriangleMesh3D) {
+            return true;
+        }
+
+        return m_isStatic;
+    }
+
     void Rigidbody::SetCenter(const SR_MATH_NS::FVector3& center) {
         m_center = center;
         SetMatrixDirty(true);
-        m_shape->UpdateDebugShape();
+        GetCollisionShape()->UpdateDebugShape();
     }
 
     void Rigidbody::SetMass(float_t mass) {
@@ -207,11 +152,11 @@ namespace SR_PTYPES_NS {
     }
 
     ShapeType Rigidbody::GetType() const noexcept {
-        return m_shape->GetType();
+        return GetCollisionShape()->GetType();
     }
 
     void Rigidbody::SetType(ShapeType type) {
-        if (m_shape->GetType() == type) {
+        if (GetCollisionShape()->GetType() == type) {
             return;
         }
 
@@ -220,7 +165,7 @@ namespace SR_PTYPES_NS {
             return;
         }
 
-        m_shape->SetType(type);
+        GetCollisionShape()->SetType(type);
 
         SetShapeDirty(true);
     }
@@ -237,7 +182,7 @@ namespace SR_PTYPES_NS {
             SRHalt("Failed to get physics scene!");
         }
 
-        m_shape->UpdateDebugShape();
+        GetCollisionShape()->UpdateDebugShape();
 
         Super::OnEnable();
     }
@@ -250,13 +195,9 @@ namespace SR_PTYPES_NS {
             SRHalt("Failed to get physics scene!");
         }
 
-        m_shape->RemoveDebugShape();
+        GetCollisionShape()->RemoveDebugShape();
 
         Super::OnDisable();
-    }
-
-    SR_UTILS_NS::Measurement Rigidbody::GetMeasurement() const {
-        return SR_UTILS_NS::Measurement::Unknown;
     }
 
     void Rigidbody::SetIsTrigger(bool value) {
@@ -270,13 +211,15 @@ namespace SR_PTYPES_NS {
     }
 
     RBUpdShapeRes Rigidbody::UpdateShape() {
+        SR_TRACY_ZONE;
+
         if (!IsShapeDirty()) {
             return RBUpdShapeRes::Nothing;
         }
 
-        m_shape->RemoveDebugShape();
+        GetCollisionShape()->RemoveDebugShape();
 
-        if (!m_shape->UpdateShape()) {
+        if (!GetCollisionShape()->UpdateShape()) {
             SR_ERROR("Rigidbody::UpdateShape() : failed to update shape!");
             return RBUpdShapeRes::Error;
         }
@@ -286,7 +229,7 @@ namespace SR_PTYPES_NS {
             return RBUpdShapeRes::Error;
         }
 
-        m_shape->UpdateDebugShape();
+        GetCollisionShape()->UpdateDebugShape();
 
         UpdateMatrix(true);
 
@@ -296,14 +239,41 @@ namespace SR_PTYPES_NS {
     }
 
     bool Rigidbody::InitBody() {
+        SR_TRACY_ZONE;
+
         if (!m_isBodyDirty) {
             SRHalt("Rigidbody::InitBody() : body is not dirty!");
             return false;
         }
 
-        if (m_impl) {
-            m_impl->InitBody();
+        if (!m_impl) {
+            m_library = SR_PHYSICS_NS::PhysicsLibrary::Instance().GetActiveLibrary(GetMeasurement());
+            if (!m_library) {
+                SR_ERROR("Rigidbody::InitBody() : library not found!");
+                return false;
+            }
+
+            switch (GetMeasurement()) {
+            case SR_UTILS_NS::Measurement::Space2D:
+                m_impl = m_library->CreateRigidbody2DImpl();
+                break;
+            case SR_UTILS_NS::Measurement::Space3D:
+                m_impl = m_library->CreateRigidbody3DImpl();
+                break;
+            default:
+                SR_ERROR("Rigidbody::InitBody() : unknown space type!");
+                return false;
+            }
+
+            if (!m_impl) {
+                SR_ERROR("Rigidbody::InitBody() : failed to allocate implementation!");
+                return false;
+            }
+
+            m_impl->SetRigidbody(this);
         }
+
+        m_impl->InitBody();
 
         m_isBodyDirty = false;
 
@@ -326,28 +296,6 @@ namespace SR_PTYPES_NS {
         }
     }
 
-    void Rigidbody::SetRawMesh(SR_HTYPES_NS::RawMesh* pRawMesh) {
-        if (pRawMesh == m_rawMesh) {
-            return;
-        }
-
-        if (m_rawMesh) {
-            m_rawMesh->RemoveUsePoint();
-        }
-
-        if ((m_rawMesh = pRawMesh)) {
-            m_rawMesh->AddUsePoint();
-        }
-
-        SetShapeDirty(true);
-
-        m_meshId = 0;
-
-        if (m_shape) {
-            m_shape->ReInitDebugShape();
-        }
-    }
-
     bool Rigidbody::IsDebugEnabled() const noexcept {
         if (auto&& pPhysicsScene = GetPhysicsScene()) {
             return pPhysicsScene->IsDebugEnabled();
@@ -357,7 +305,7 @@ namespace SR_PTYPES_NS {
     }
 
     void Rigidbody::Update(float_t dt) {
-        m_shape->Update(dt);
+        GetCollisionShape()->Update(dt);
         Super::Update(dt);
     }
 
@@ -383,6 +331,8 @@ namespace SR_PTYPES_NS {
     }
 
     bool Rigidbody::UpdateShapeInternal() {
+        SR_TRACY_ZONE;
+
         if (m_impl) {
             return m_impl->UpdateShapeInternal();
         }
@@ -399,7 +349,7 @@ namespace SR_PTYPES_NS {
         }
     }
 
-    bool Rigidbody::IsShapeSupported(ShapeType type) const {
+    bool Rigidbody::IsShapeSupported(const ShapeType type) const {
         if (!m_library || !m_library->IsShapeSupported(type)) {
             return false;
         }
@@ -415,24 +365,10 @@ namespace SR_PTYPES_NS {
         return false;
     }
 
-    void Rigidbody::SetMeshId(uint32_t id) {
-        m_meshId = id;
-        SetShapeDirty(true);
-        if (m_shape) {
-            m_shape->ReInitDebugShape();
+    const CollisionShape::Ptr& Rigidbody::GetCollisionShape() const noexcept {
+        if (!m_shape) {
+            m_shape = CollisionShape::MakeShared();
         }
-    }
-
-    void Rigidbody::SetRawMesh(const SR_UTILS_NS::Path& path) {
-        auto&& pRawMesh = SR_HTYPES_NS::RawMesh::Load(path);
-        if (!pRawMesh) {
-            return;
-        }
-
-        SetRawMesh(pRawMesh);
-    }
-
-    void Rigidbody::Start() {
-        Super::Start();
+        return m_shape;
     }
 }

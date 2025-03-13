@@ -251,8 +251,6 @@ namespace SR_CORE_NS {
             delete pEngine;
         });
 
-        SR_UTILS_NS::ComponentManager::Instance().SetContextInitializer(SR_HTYPES_NS::Function<void(SR_HTYPES_NS::DataStorage&)>());
-
         SR_SRLM_NS::DataTypeManager::DestroySingleton();
 
         SR_CORE_NS::EditorSettings::DestroySettings();
@@ -264,7 +262,6 @@ namespace SR_CORE_NS {
         SR_GRAPH_NS::Memory::CameraManager::DestroySingleton();
         SR_SCRIPTING_NS::GlobalEvoCompiler::DestroySingleton();
         SR_SCRIPTING_NS::EvoScriptManager::DestroySingleton();
-        SR_UTILS_NS::EntityManager::DestroySingleton();
         SR_GRAPH_GUI_NS::NodeManager::DestroySingleton();
         SR_UTILS_NS::TaskManager::DestroySingleton();
         SR_GRAPH_NS::Memory::MeshManager::DestroySingleton();
@@ -335,8 +332,7 @@ namespace SR_CORE_NS {
 
         resourcesManager.RegisterType<SR_SRLM_NS::LogicalMachine>();
 
-        resourcesManager.RegisterType<SR_GRAPH_NS::FileMaterial>();
-        resourcesManager.RegisterType<SR_GTYPES_NS::Mesh>();
+        resourcesManager.RegisterType<SR_GRAPH_NS::FileMaterialResource>();
         resourcesManager.RegisterType<SR_GTYPES_NS::Texture>();
         resourcesManager.RegisterType<SR_GTYPES_NS::Shader>();
         resourcesManager.RegisterType<SR_GTYPES_NS::Skybox>();

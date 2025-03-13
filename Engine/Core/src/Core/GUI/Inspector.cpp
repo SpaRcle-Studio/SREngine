@@ -3,6 +3,7 @@
 //
 
 #include <Core/GUI/Inspector.h>
+#include <Core/EngineCommands.h>
 
 #include <Utils/ECS/Transform3D.h>
 #include <Utils/ECS/Transform2D.h>
@@ -10,6 +11,7 @@
 #include <Utils/ECS/LayerManager.h>
 #include <Utils/Types/SafePtrLockGuard.h>
 #include <Utils/World/ScenePrefabLogic.h>
+#include <Utils/Common/StoreUtils.h>
 
 #include <Scripting/Base/Behaviour.h>
 
@@ -22,7 +24,6 @@
 #include <Graphics/UI/Gizmo.h>
 #include <Graphics/Types/Geometry/ProceduralMesh.h>
 #include <Graphics/GUI/Utils.h>
-#include <Graphics/Font/ITextComponent.h>
 #include <Graphics/Types/Geometry/SkinnedMesh.h>
 #include <Graphics/Animations/Animator.h>
 #include <Graphics/Animations/BoneComponent.h>
@@ -31,19 +32,73 @@ namespace SR_CORE_GUI_NS {
     Inspector::Inspector(Hierarchy* hierarchy)
         : SR_GRAPH_GUI_NS::Widget("Inspector")
         , m_hierarchy(hierarchy)
-    { }
+    {
+        m_pPointerDrawer = SR_CORE_GUI_NS::PropertyDrawerBase::MakeShared<PointerPropertyDrawer>();
+
+        m_availableComponents = SR_UTILS_NS::Factory::Instance().GetInheritances(SR_UTILS_NS::Component::GetClassStaticName());
+
+        std::erase_if(m_availableComponents, [](auto&& name) {
+            auto&& pMeta = SR_UTILS_NS::Factory::Instance().GetType(name);
+            return pMeta->IsAbstract() || pMeta->IsHidden();
+        });
+
+        for (auto&& name : m_availableComponents) {
+            auto&& category = SR_UTILS_NS::Factory::Instance().GetType(name)->GetCategory();
+            if (category.empty()) {
+                m_componentsCategories.categories["Misc"].components.emplace_back(name);
+            }
+            else {
+                ComponentCategory* pCategory = nullptr;
+                for (auto&& cat : category) {
+                    if (pCategory) {
+                        pCategory = &pCategory->categories[cat];
+                    }
+                    else {
+                        pCategory = &m_componentsCategories.categories[cat];
+                    }
+                }
+                SRAssert(pCategory);
+                pCategory->components.emplace_back(name);
+            }
+        }
+    }
 
     void Inspector::Draw() {
-        SR_LOCK_GUARD;
-
-        if (!m_scene.RecursiveLockIfValid()) {
+        if (!m_scene) {
             return;
         }
 
+        ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 0.0f);
+
         if (ImGui::BeginTabBar("Inspector#TabBar")) {
-            if (ImGui::BeginTabItem("GameObject")) {
+            std::string_view gameObjectPage = "GameObject";
+            ImVec4 color = ImVec4(1, 1, 1, 1);
+
+            if (m_sceneObject) {
+                if (m_sceneObject->IsPrefab()) {
+                    color = ImVec4(0, 1, 1, 1);
+                    gameObjectPage = "GameObject (Changes won't be saved)";
+                }
+
+                if (m_sceneObject->IsDirty()) {
+                    color = ImVec4(1, 1, 0, 1);
+                    gameObjectPage = "GameObject (Is dirty)";
+                }
+
+                if (m_sceneObject->HasSerializationFlags(SR_UTILS_NS::SerializationFlags::DontSave)) {
+                    color = ImVec4(1, 1, 0, 1);
+                    gameObjectPage = "GameObject (Dont Save)";
+                }
+            }
+
+            ImGui::PushStyleColor(ImGuiCol_Text, color);
+            if (ImGui::BeginTabItem(gameObjectPage.data())) {
+                ImGui::PopStyleColor();
                 InspectGameObject();
                 ImGui::EndTabItem();
+            }
+            else {
+                ImGui::PopStyleColor();
             }
 
             if (ImGui::BeginTabItem("Scene")) {
@@ -61,116 +116,102 @@ namespace SR_CORE_GUI_NS {
             m_scrollBarWidth = 0;
         }
 
-        m_scene.Unlock();
+        ImGui::PopStyleVar();
     }
 
     void Inspector::InspectGameObject() {
-        if (m_sceneObject.TryRecursiveLockIfValid()) {
-            auto&& pEngine = dynamic_cast<EditorGUI*>(GetManager())->GetEngine();
-
-            if (bool v = m_sceneObject->IsEnabled(); ImGui::Checkbox("Enabled", &v)) {
-                auto&& cmd = new SR_CORE_NS::Commands::GameObjectEnable(pEngine, m_sceneObject, v);
-                pEngine->GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
-            }
-
-            if (m_sceneObject->IsPrefab()) {
-                ImGui::SameLine();
-                ImGui::TextColored(ImVec4(0, 1, 1, 1), "(The changes will not be saved)");
-            }
-
-            if (m_sceneObject->IsDirty()) {
-                ImGui::SameLine();
-                ImGui::TextColored(ImVec4(1, 1, 0, 1), "(Is dirty)");
-            }
-
-            if (m_sceneObject->HasSerializationFlags(SR_UTILS_NS::SerializationFlags::DontSave)) {
-                ImGui::SameLine();
-                ImGui::TextColored(ImVec4(1, 1, 0, 1), "(Dont Save)");
-            }
-
-            /// --------------------------------------------------------------------------------------------------------
-
-            std::string gm_name = m_sceneObject->GetName();
-            if (ImGui::InputText("Name", &gm_name, ImGuiInputTextFlags_NoUndoRedo | ImGuiInputTextFlags_EnterReturnsTrue)) {
-                auto&& cmd = new SR_CORE_NS::Commands::GameObjectRename(pEngine, m_sceneObject, gm_name);
-                pEngine->GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
-            }
-
-            /// --------------------------------------------------------------------------------------------------------
-
-            InspectTag(m_sceneObject->GetTag(), [this](auto&& tag){
-                m_sceneObject->SetTag(tag);
-            });
-
-            InspectLayer(m_sceneObject->GetLocalLayer(), [this](auto&& tag) {
-                m_sceneObject->SetLayer(tag);
-            });
-
-            /// --------------------------------------------------------------------------------------------------------
-
-            ImGui::Text("Entity id: %llu", m_sceneObject->GetEntityId());
-
-            ImGui::Separator();
-
-            if (auto&& pGameObject = m_sceneObject.DynamicCast<SR_UTILS_NS::GameObject>()) {
-                auto&& pTransform = pGameObject->GetTransform();
-                auto&& pOldTransform = pTransform->Copy();
-
-                bool changed = false;
-
-                switch (pTransform->GetMeasurement()) {
-                    case SR_UTILS_NS::Measurement::Space2D:
-                        changed |= DrawTransform2D(dynamic_cast<SR_UTILS_NS::Transform2D*>(pTransform));
-                    break;
-                    case SR_UTILS_NS::Measurement::Space3D:
-                        changed |= DrawTransform3D(dynamic_cast<SR_UTILS_NS::Transform3D*>(pTransform));
-                    break;
-                    case SR_UTILS_NS::Measurement::SpaceZero:
-                    case SR_UTILS_NS::Measurement::Space4D:
-                    default:
-                        break;
-                }
-
-                changed |= DrawSwitchTransform();
-
-                if (!m_isUsed && changed) {
-                    SR_SAFE_DELETE_PTR(m_oldTransformMarshal)
-                    m_oldTransformMarshal = pOldTransform->SaveLegacy(SR_UTILS_NS::SavableContext(nullptr, SR_UTILS_NS::SavableFlagBits::SAVABLE_FLAG_NONE));
-                    m_isUsed = true;
-                }
-
-                if (m_isUsed && SR_UTILS_NS::Input::Instance().GetMouseUp(SR_UTILS_NS::MouseCode::MouseLeft)) {
-                    auto&& cmd = new SR_CORE_NS::Commands::GameObjectTransform(pEngine, pGameObject, m_oldTransformMarshal->CopyPtr());
-                    pEngine->GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
-
-                    SR_SAFE_DELETE_PTR(m_oldTransformMarshal)
-                    m_isUsed = false;
-                }
-
-                pOldTransform.AutoFree();
-            }
-
-            DrawComponents(dynamic_cast<SR_UTILS_NS::IComponentable*>(m_sceneObject.Get()));
-
-            m_sceneObject.Unlock();
+        if (!m_sceneObject) {
+            return;
         }
+
+        auto&& pEngine = dynamic_cast<EditorGUI*>(GetManager())->GetEngine();
+
+        if (bool enabled = m_sceneObject->IsEnabled(); ImGui::Checkbox("##Enabled", &enabled)) {
+            auto&& cmd = new SR_CORE_NS::Commands::EntityEnable(pEngine, m_sceneObject.Get(), enabled);
+            pEngine->GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
+        }
+
+        ImGui::SameLine();
+
+        ImGui::PushItemWidth(ImGui::GetContentRegionAvail().x + 2.f);
+        std::string name = m_sceneObject->GetName();
+        ImGui::InputText("##Name", &name);
+        if (ImGui::IsItemDeactivatedAfterEdit()) {
+            pEngine->GetCmdManager()->Execute<SR_CORE_NS::Commands::SceneObjectRename>(SR_UTILS_NS::SyncType::Async, pEngine, m_sceneObject, name);
+        }
+        ImGui::PopItemWidth();
+
+        if (SR_UTILS_NS::StoreUtils::User::GetBool("ShowEntityId", false)) {
+            ImGui::Text("Entity id: %llu", m_sceneObject->GetEntityId());
+        }
+
+        /// --------------------------------------------------------------------------------------------------------
+
+        const float_t lineHeight = GImGui->Font->FontSize + GImGui->Style.FramePadding.y * 2.0f;
+        const float_t layerAndTagWidth = ImGui::GetContentRegionAvail().x - lineHeight;
+
+        ImGui::PushItemWidth(layerAndTagWidth / 2.f - ImGui::CalcTextSize("Tag").x);
+        InspectTag(m_sceneObject->GetTag(), [&](auto&& tag) {
+            pEngine->GetCmdManager()->Execute<SR_CORE_NS::Commands::SceneObjectTag>(SR_UTILS_NS::SyncType::Async, pEngine, m_sceneObject, tag);
+        });
+        ImGui::PopItemWidth();
+
+        ImGui::SameLine();
+
+        ImGui::PushItemWidth(layerAndTagWidth / 2.f - ImGui::CalcTextSize("Layer").x);
+        InspectLayer(m_sceneObject->GetLocalLayer(), [&](auto&& layer) {
+            pEngine->GetCmdManager()->Execute<SR_CORE_NS::Commands::SceneObjectLayer>(SR_UTILS_NS::SyncType::Async, pEngine, m_sceneObject, layer);
+        });
+        ImGui::PopItemWidth();
+
+        /// --------------------------------------------------------------------------------------------------------
+
+        ImGui::Separator();
+
+        if (auto&& pGameObject = m_sceneObject.DynamicCast<SR_UTILS_NS::GameObject>()) {
+            SR_UTILS_NS::Transform::Ptr pTransform = pGameObject->GetTransform();
+
+            m_onBeforeChangeCallback = [&](bool drag) {
+                if (!m_pTransformSerializer) {
+                    m_isDragMode = drag;
+                    m_pTransformSerializer = SR_CORE_NS::Commands::CreateSerializer();
+                    SR_UTILS_NS::Serialization::Save(*m_pTransformSerializer, pTransform, SR_UTILS_NS::ICommand::DATA_ID);
+                }
+            };
+
+            auto&& value = SR_UTILS_NS::Reflection::Value::CreateRef(pTransform);
+            auto&& context = CreateDrawerContext(&value);
+
+            context.fieldWidth += context.fieldTitleWidth;
+            context.fieldTitleWidth = 0.f;
+            context.noHeader = false;
+            context.openedByDefault = true;
+            context.editorPropertyParams.SetNotNull();
+            m_pPointerDrawer->Draw(context);
+
+            if (m_isDragMode && pTransform) {
+                pTransform->UpdateTree();
+            }
+
+            if (m_pTransformSerializer && (!m_isDragMode || !SR_UTILS_NS::Input::Instance().GetMouse(SR_UTILS_NS::MouseCode::MouseLeft))) {
+                auto&& pNewSerializer = SR_CORE_NS::Commands::CreateSerializer();
+                SR_UTILS_NS::Serialization::Save(*pNewSerializer, pTransform, SR_UTILS_NS::ICommand::DATA_ID);
+
+                auto&& cmd = new SR_CORE_NS::Commands::GameObjectTransform(pEngine, pGameObject, std::move(m_pTransformSerializer), std::move(pNewSerializer));
+                pEngine->GetCmdManager()->Store(cmd);
+
+                if (pTransform != pGameObject->GetTransform()) {
+                    pGameObject->SetTransform(pTransform);
+                }
+            }
+        }
+
+        DrawComponents(m_sceneObject.Get());
     }
 
     void Inspector::InspectScene() {
-        std::string gm_name = m_scene->GetName();
-        ImGui::InputText("Name", &gm_name, ImGuiInputTextFlags_ReadOnly);
-
-        auto&& pLogic = m_scene->GetLogicBase().DynamicCast<SR_WORLD_NS::ScenePrefabLogic>();
-
-        if (pLogic) {
-            InspectTag(pLogic->GetTag(), [pLogic](auto &&tag) {
-                pLogic->SetTag(tag);
-            });
-
-            InspectLayer(pLogic->GetLayer(), [pLogic](auto &&tag) {
-                pLogic->SetLayer(tag);
-            });
-        }
+        std::string name = m_scene->GetName();
+        ImGui::InputText("Name", &name, ImGuiInputTextFlags_ReadOnly);
 
         ImGui::Separator();
 
@@ -179,6 +220,23 @@ namespace SR_CORE_GUI_NS {
 
     void Inspector::Update(float_t dt) {
         SR_LOCK_GUARD;
+
+        if (m_componentContexts.size() > m_maxComponentContexts) {
+            SR_UTILS_NS::TimePointType oldestTime = SR_UTILS_NS::TimePointType::max();
+            SR_UTILS_NS::EntityId oldestId = SR_ID_INVALID;
+            for (auto&& [id, context] : m_componentContexts) {
+                if (context.lastUsage < oldestTime) {
+                    oldestTime = context.lastUsage;
+                    oldestId = id;
+                }
+            }
+            if (oldestId != SR_ID_INVALID) {
+                m_componentContexts.erase(oldestId);
+            }
+            else {
+                SRHalt("Inspector::Update() : failed to find oldest component context!");
+            }
+        }
 
         if (auto&& selected = m_hierarchy->GetSelected(); selected.size() == 1) {
             if (*selected.begin() != m_sceneObject) {
@@ -199,211 +257,111 @@ namespace SR_CORE_GUI_NS {
     }
 
     void Inspector::DrawComponents(SR_UTILS_NS::IComponentable* pIComponentable) {
-        ImGui::Separator();
+        ImGui::BeginDisabled();
+        ImGui::CollapsingHeader("##header",  ImGuiTreeNodeFlags_Leaf | ImGuiTreeNodeFlags_NoTreePushOnOpen);
+        ImGui::EndDisabled();
 
-        SR_GRAPH_GUI_NS::DrawTextOnCenter("Components");
-
-        ImGuiStyle& style = ImGui::GetStyle();
-
-        float_t button_sz = ImGui::GetFrameHeight();
-        float_t spacing = style.ItemInnerSpacing.x;
-        float_t width = (ImGui::GetWindowWidth() - 70.f) - spacing * 2.0f - button_sz * 2.0f;
-
-        ImGui::PushItemWidth(width);
-        if (ImGui::BeginCombo("Add component", nullptr, ImGuiComboFlags_NoArrowButton)) {
-            for (auto&& name : SR_UTILS_NS::ComponentManager::Instance().GetComponentsNames()) {
-                if (ImGui::Selectable(name.c_str(), false)) {
-                    auto&& pNewComponent = SR_UTILS_NS::ComponentManager::Instance().CreateComponentOfName(name);
-                    pIComponentable->AddComponent(pNewComponent);
-                }
-            }
-            ImGui::EndCombo();
-        }
-        ImGui::PopItemWidth();
+        static const char* text = "Components";
+        const ImVec2 headerSize = ImGui::GetItemRectSize();
+        const ImVec2 headerPos = ImGui::GetItemRectMin();
+        const ImVec2 textSize = ImGui::CalcTextSize(text);
+        const ImVec2 textPos = ImVec2(
+            headerPos.x + (headerSize.x - textSize.x) * 0.5f,
+            headerPos.y + (headerSize.y - textSize.y) * 0.5f
+        );
+        ImGui::GetWindowDrawList()->AddText(textPos, ImGui::GetColorU32(ImGuiCol_Text), text);
 
         uint32_t index = 0;
-
-        std::erase_if(m_componentContexts, [&](auto&& pair) {
-            return !pIComponentable->HasComponent(pair.first);
-        });
 
         pIComponentable->ForEachComponent([&](SR_UTILS_NS::Component::Ptr& pComponent) -> bool {
             DrawComponent(pComponent.Get(), index);
             return true;
         });
-    }
 
-    bool Inspector::DrawTransform2D(SR_UTILS_NS::Transform2D *pTransform) const {
-        TextCenter("Transform 2D");
+        const ImVec2 dummySize = ImGui::GetContentRegionAvail();
+        ImGui::Dummy(ImVec2(dummySize.x, dummySize.y > 0 ? dummySize.y : 200));
 
-        bool changed = false;
-
-        auto&& translation = pTransform->GetTranslation();
-        if (SR_GRAPH_GUI_NS::DrawVec3Control("Translation", translation, 0.f, 0.01f)) {
-            pTransform->SetTranslation(translation);
-            changed = true;
+        if (ImGui::IsItemClicked(ImGuiMouseButton_Right)) {
+            m_componentSearchBuffer.clear();
+            m_componentSearchOpened = false;
+            ImGui::OpenPopup("InspectorAddComponentPopup");
         }
 
-        auto&& rotation = pTransform->GetRotation();
-        if (SR_GRAPH_GUI_NS::DrawVec3Control("Rotation", rotation)) {
-            pTransform->SetRotation(rotation);
-            changed = true;
-        }
+        if (ImGui::BeginPopup("InspectorAddComponentPopup")) {
+            m_onBeforeChangeCallback = [&](bool drag) {
+                if (!m_pComponentsSerializer) {
+                    m_pComponentsSerializer = SR_CORE_NS::Commands::CreateSerializer();
+                    SR_UTILS_NS::Serialization::Save(*m_pComponentsSerializer, pIComponentable->GetComponents(), SR_UTILS_NS::ICommand::DATA_ID);
+                }
+            };
 
-        auto&& scale = pTransform->GetScale();
-        if (SR_GRAPH_GUI_NS::DrawVec3Control("Scale", scale, 1.f, 0.01f) && !scale.HasZero()) {
-            pTransform->SetScale(scale);
-            changed = true;
-        }
+            const float_t lineHeight = GImGui->Font->FontSize + GImGui->Style.FramePadding.y * 2.0f;
 
-        auto&& skew = pTransform->GetSkew();
-        if (SR_GRAPH_GUI_NS::DrawVec3Control("Skew", skew, 1.f, 0.01f) && !skew.HasZero()) {
-            pTransform->SetSkew(skew);
-            changed = true;
-        }
+            ImGui::PushItemWidth(lineHeight * 5.f);
 
-        /*SR_GRAPH_GUI_NS::EnumCombo<SR_UTILS_NS::Anchor>("Anchor", pTransform->GetAnchor(), [&changed, pTransform](auto&& value) {
-            pTransform->SetAnchor(value);
-            changed = true;
-        });
+            static const auto&& serializeId = SR_UTILS_NS::SerializationId::Create("SREngineComponentClipboard");
 
-        SR_GRAPH_GUI_NS::EnumCombo<SR_UTILS_NS::FixedSize>("Fixed size", pTransform->GetFixedSize(), [&changed, pTransform](auto&& value) {
-            pTransform->SetFixedSize(value);
-            changed = true;
-        });
+            if (auto&& clipboard = SR_PLATFORM_NS::GetClipboardText(); clipboard.starts_with(serializeId.GetName())) {
+                if (ImGui::Button("Paste", ImVec2(lineHeight * 5.f, 0))) {
+                    clipboard.erase(0, strlen(serializeId.GetName()));
+                    SR_UTILS_NS::SRADeserializer deserializer;
+                    if (deserializer.LoadFromString(SR_UTILS_NS::StringUtils::Base64Decode(clipboard))) {
+                        SR_UTILS_NS::Component::Ptr pPastedComponent;
+                        SR_UTILS_NS::Serialization::Load(deserializer, pPastedComponent, serializeId);
+                        if (pPastedComponent) {
+                            m_onBeforeChangeCallback(false);
+                            pIComponentable->AddComponent(pPastedComponent);
+                        }
+                    }
+                    ImGui::CloseCurrentPopup();
+                }
+            }
 
-        SR_GRAPH_GUI_NS::EnumCombo<SR_UTILS_NS::Stretch>("Stretch", pTransform->GetStretch(), [&changed, pTransform](auto&& value) {
-            pTransform->SetStretch(value);
-            changed = true;
-        });
+            if (!m_componentSearchOpened) {
+                ImGui::SetKeyboardFocusHere();
+                m_componentSearchOpened = true;
+            }
 
-        SR_GRAPH_GUI_NS::EnumCombo<SR_UTILS_NS::PositionMode>("Position mode", pTransform->GetPositionMode(), [&changed, pTransform](auto&& value) {
-            pTransform->SetPositionMode(value);
-            changed = true;
-        });*/
+            ImGui::InputText("##search", &m_componentSearchBuffer);
+            ImGui::PopItemWidth();
 
-        ImGui::Separator();
+            ImGui::Separator();
+            DrawComponentCategory(pIComponentable, m_componentsCategories, "Misc");
+            ImGui::EndPopup();
 
-        SR_GRAPH_GUI_NS::DrawTextOnCenter("Sorting");
-
-        int32_t priority = pTransform->GetLocalPriority();
-        if (ImGui::InputInt("Priority", &priority)) {
-            pTransform->SetLocalPriority(priority);
-            changed = true;
-        }
-
-        bool isRelativePriority = pTransform->IsRelativePriority();
-        if (ImGui::Checkbox("Relative", &isRelativePriority)) {
-            pTransform->SetRelativePriority(isRelativePriority);
-            changed = true;
-        }
-
-        ImGui::Separator();
-
-        return changed;
-    }
-
-    bool Inspector::DrawTransform3D(SR_UTILS_NS::Transform3D *transform) {
-        TextCenter("Transform 3D");
-
-        bool changed = false;
-
-        auto&& translation = transform->GetTranslation();
-        if (SR_GRAPH_GUI_NS::DrawVec3Control("Translation", translation, 0.f, 0.01f)) {
-            transform->SetTranslation(translation);
-            changed = true;
-        }
-
-        auto&& rotation = transform->GetRotation();  
-        if (SR_GRAPH_GUI_NS::DrawVec3Control("Rotation", rotation)) {
-            transform->SetRotation(rotation);
-            changed = true;
-        }
-
-        auto&& scale = transform->GetScale();
-        if (SR_GRAPH_GUI_NS::DrawVec3Control("Scale", scale, 1.f, 0.01f) && !scale.HasZero()) {
-            transform->SetScale(scale);
-            changed = true;
-        }
-
-        auto&& skew = transform->GetSkew();
-        if (SR_GRAPH_GUI_NS::DrawVec3Control("Skew", skew, 1.f, 0.01f) && !skew.HasZero()) {
-            transform->SetSkew(skew);
-            changed = true;
-        }
-
-        return changed;
-    }
-
-    void SR_CORE_NS::GUI::Inspector::BackupTransform(const SR_UTILS_NS::GameObject::Ptr& ptr, const std::function<void()>& operation) const
-    {
-        ///SR_HTYPES_NS::Marshal::Ptr pMarshal = ptr->GetTransform()->Save(nullptr, SR_UTILS_NS::SavableFlagBits::SAVABLE_FLAG_NONE);
-        ///
-        ///operation();
-        ///
-        ///auto&& cmd = new Framework::Core::Commands::GameObjectTransform(ptr, pMarshal);
-        ///Engine::Instance().GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
-    }
-
-    bool Inspector::DrawSwitchTransform() {
-        auto&& pGameObject = m_sceneObject.DynamicCast<SR_UTILS_NS::GameObject>();
-        if (!pGameObject) {
-            return false;
-        }
-        auto&& pTransform = pGameObject->GetTransform();
-
-        const char* space_types[] = { "Zero (Holder)", "1D", "2D", "3D", "4D" };
-        auto item_current = static_cast<int32_t>(pTransform->GetMeasurement());
-        if (ImGui::Combo("Transform type", &item_current, space_types, IM_ARRAYSIZE(space_types))) {
-            switch (static_cast<SR_UTILS_NS::Measurement>(item_current)) {
-                case SR_UTILS_NS::Measurement::SpaceZero:
-                    pGameObject->SetTransform(new SR_UTILS_NS::TransformZero());
-                    return true;
-                case SR_UTILS_NS::Measurement::Space2D:
-                    pGameObject->SetTransform(new SR_UTILS_NS::Transform2D());
-                    return true;
-                case SR_UTILS_NS::Measurement::Space3D:
-                    pGameObject->SetTransform(new SR_UTILS_NS::Transform3D());
-                    return true;
-                case SR_UTILS_NS::Measurement::Space4D:
-                default:
-                    break;
+            if (m_pComponentsSerializer) {
+                auto&& pEngine = dynamic_cast<EditorGUI*>(GetManager())->GetEngine();
+                auto&& cmd = new SR_CORE_NS::Commands::ComponentsChange(pEngine, pIComponentable, std::move(m_pComponentsSerializer));
+                pEngine->GetCmdManager()->Store(cmd);
             }
         }
-
-        return false;
-    }
-
-    void Inspector::DrawComponentProperties(SR_UTILS_NS::Component* pComponent) {
-        auto&& properties = pComponent->GetComponentProperties();
-        SR_CORE_GUI_NS::DrawPropertyContext context;
-        context.pEditor = dynamic_cast<EditorGUI*>(GetManager());
-        SR_CORE_GUI_NS::DrawPropertyContainer(context, &properties);
     }
 
     void Inspector::DrawComponent(SR_UTILS_NS::Component* pComponent, uint32_t &index) {
         auto&& pContext = dynamic_cast<EditorGUI*>(GetManager());
+        auto&& pEngine = dynamic_cast<EditorGUI*>(GetManager())->GetEngine();
 
-        if (!pComponent || !pContext) {
+        if (!pComponent || !pContext || !pEngine) {
             return;
         }
 
-        ImGui::PushID(pComponent);
+        ImGui::PushID(std::to_string(pComponent->GetEntityId()).c_str());
 
         SRAssert1Once(pComponent->Valid());
 
         ++index;
 
-        std::string headerName = SR_FORMAT("[{}] {}", index, pComponent->GetComponentName().c_str(), (void*)pComponent);
+        const std::string headerName = "[{}] {}"_format(index, pComponent->GetMeta()->GetFactoryName());
 
         bool enabled = pComponent->IsEnabled();
-        if (ImGui::Checkbox(SR_FORMAT("##{}{}ckb", pComponent->GetComponentName().c_str(), (void*)pComponent).c_str(), &enabled)) {
-            pComponent->SetEnabled(enabled);
+        if (ImGui::Checkbox("##componentEnabled", &enabled)) {
+            auto&& cmd = new SR_CORE_NS::Commands::EntityEnable(pEngine, pComponent, enabled);
+            pEngine->GetCmdManager()->Execute(cmd, SR_UTILS_NS::SyncType::Async);
         }
 
         ImGui::SameLine();
 
-        const bool isOpened = ImGui::CollapsingHeader(pComponent->GetComponentName().c_str());
+        const bool isOpened = ImGui::CollapsingHeader(pComponent->GetMeta()->GetFactoryName().c_str());
 
         if (ImGui::IsItemClicked(ImGuiMouseButton_Right)) {
             ImGui::OpenPopup(headerName.c_str());
@@ -412,7 +370,7 @@ namespace SR_CORE_GUI_NS {
         if (!ImGui::GetDragDropPayload() && ImGui::BeginDragDropSource(ImGuiDragDropFlags_SourceAllowNullID)) {
             m_pointersHolder = { pComponent->DynamicCast<SR_UTILS_NS::Component>() };
             ImGui::SetDragDropPayload("InspectorComponent##Payload", &m_pointersHolder, sizeof(std::vector<SR_UTILS_NS::Component::Ptr>), ImGuiCond_Once);
-            ImGui::Text("%s ->", pComponent->GetComponentName().c_str());
+            ImGui::Text("%s ->", pComponent->GetMeta()->GetFactoryName().c_str());
             ImGui::EndDragDropSource();
         }
 
@@ -433,6 +391,11 @@ namespace SR_CORE_GUI_NS {
             ImGui::TextColored(ImVec4(1, 1, 0, 1), "[Loaded]");
         }
 
+        if (SR_UTILS_NS::StoreUtils::User::GetBool("ShowEntityId", false)) {
+            ImGui::SameLine();
+            ImGui::Text("[Entity id: %llu]", pComponent->GetEntityId());
+        }
+
         if (isOpened) {
             SR_CORE_GUI_NS::DrawPropertyContext context;
             context.pEditor = pContext;
@@ -440,121 +403,204 @@ namespace SR_CORE_GUI_NS {
             if (SR_CORE_GUI_NS::DrawPropertyContainer(context, &pComponent->GetEntityMessages())) {
                 ImGui::Separator();
             }
-
-            if (!ComponentDrawer::DrawComponentOld(pComponent, pContext, index)) {
-                DrawComponentProperties(pComponent);
-            }
         }
 
         if (isOpened) {
-            auto&& properties = pComponent->GetMeta()->GetProperties();
-
-            if (m_componentContexts.count(pComponent) == 0) {
-                ComponentContext& componentContext = m_componentContexts[pComponent];
-
-                for (auto&& property : properties) {
-                    SR_UTILS_NS::StringAtom inspector = property.GetEditorParams().GetInspector();
-
-                    if (inspector.Empty()) {
-                        inspector = SR_CORE_GUI_NS::GetValueInspector(property.Get(pComponent));
-                    }
-
-                    if (inspector.Empty()) {
-                        componentContext.pDrawers.emplace_back();
-                        continue;
-                    }
-
-                    PropertyDrawerBase::Ptr pDrawer = SR_UTILS_NS::Factory::Instance().Create<PropertyDrawerBase>(inspector);
-                    if (!pDrawer) {
-                        componentContext.pDrawers.emplace_back();
-                        continue;
-                    }
-
-                    componentContext.pDrawers.emplace_back(pDrawer);
+            if (m_componentContexts.count(pComponent->GetEntityId()) == 0) {
+                ComponentContext& componentContext = m_componentContexts[pComponent->GetEntityId()];
+                if (auto&& inspectorName = pComponent->GetMeta()->GetInspectorName(); !inspectorName.empty()) {
+                    componentContext.pObjectDrawer = SR_UTILS_NS::Factory::Instance().Create<ObjectPropertyDrawer>(inspectorName);
+                }
+                if (!componentContext.pObjectDrawer) {
+                    componentContext.pObjectDrawer = SRNew<ObjectPropertyDrawer>();
                 }
             }
 
-            const float_t lineHeight = GImGui->Font->FontSize + GImGui->Style.FramePadding.y * 2.0f;
+            auto&& value = SR_UTILS_NS::Reflection::Value::CreateRef(*pComponent);
 
-            float_t windowWidth = ImGui::GetWindowWidth() - m_scrollBarWidth;
+            m_onBeforeChangeCallback = [&](bool drag) {
+                if (!m_pComponentSerializer) {
+                    m_isDragMode = drag;
+                    m_editableComponent = pComponent;
+                    m_pComponentSerializer = SR_CORE_NS::Commands::CreateSerializer();
+                    SR_UTILS_NS::Serialization::Save(*m_pComponentSerializer, *pComponent, SR_UTILS_NS::ICommand::DATA_ID);
+                }
+            };
 
-            ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 0.0f);
+            auto&& context = CreateDrawerContext(&value);
+            context.pOwner = pComponent;
+            context.pComponent = pComponent;
 
-            for (uint64_t i = 0; i < properties.size(); ++i) {
-                PropertyDrawerContext context(properties[i]);
-                context.propertyIndex = i;
-                context.pEditor = dynamic_cast<EditorGUI*>(GetManager());
-                context.pOwner = pComponent->GetRawPtr();
-                context.pComponent = pComponent;
+            auto&& componentContext = m_componentContexts.at(pComponent->GetEntityId());
+            componentContext.lastUsage = SR_HTYPES_NS::Time::Instance().Now();
+            componentContext.pObjectDrawer->Draw(context);
 
-                context.lineHeight = lineHeight;
-                context.axisButtonWidth = context.lineHeight;
-                context.spaceWidth = windowWidth;
-                context.fieldHeight = lineHeight;
-                context.fieldTitleWidth = windowWidth * 0.3f;
-                context.fieldWidth = windowWidth * 0.7f;
-
-                DrawProperty(context);
-
-                if (i != properties.size() - 1) {
-                    //ImGui::Dummy(ImVec2(0, 5.0f));
-                    ImGui::Separator();
-                    //ImGui::Dummy(ImVec2(0, 5.0f));
+            if (m_pComponentSerializer && (!m_isDragMode || !SR_UTILS_NS::Input::Instance().GetMouse(SR_UTILS_NS::MouseCode::MouseLeft))) {
+                if (m_editableComponent) {
+                    auto&& cmd = new SR_CORE_NS::Commands::ComponentChange(pEngine, m_editableComponent, std::move(m_pComponentSerializer));
+                    pEngine->GetCmdManager()->Store(cmd);
                 }
             }
-
-            ImGui::PopStyleVar();
         }
 
         if (ImGui::BeginPopup(headerName.c_str())) {
-            const int32_t componentIndex = pComponent->GetParent()->GetComponentIndex(pComponent);
-            const auto componentsCount = static_cast<int32_t>(pComponent->GetParent()->GetComponentsCount());
+            auto&& pParent = pComponent->GetParent();
+            const int32_t componentIndex = pParent->GetComponentIndex(pComponent);
+            const auto componentsCount = static_cast<int32_t>(pParent->GetComponentsCount());
+
+            m_onBeforeChangeCallback = [&](bool drag) {
+                if (!m_pComponentsSerializer) {
+                    m_pComponentsSerializer = SR_CORE_NS::Commands::CreateSerializer();
+                    SR_UTILS_NS::Serialization::Save(*m_pComponentsSerializer, pParent->GetComponents(), SR_UTILS_NS::ICommand::DATA_ID);
+                }
+            };
+
+            static const auto&& serializeId = SR_UTILS_NS::SerializationId::Create("SREngineComponentClipboard");
 
             if (ImGui::MenuItem("Remove")) {
-                pComponent->GetParent()->RemoveComponent(pComponent);
+                m_onBeforeChangeCallback(false);
+                pParent->RemoveComponent(pComponent);
             }
             if (componentIndex != 0 && ImGui::MenuItem("Move up")) {
-                pComponent->GetParent()->MoveComponent(pComponent, -1);
+                m_onBeforeChangeCallback(false);
+                pParent->MoveComponent(pComponent, -1);
             }
             if ((componentIndex + 1) != componentsCount && ImGui::MenuItem("Move down")) {
-                pComponent->GetParent()->MoveComponent(pComponent, 1);
+                m_onBeforeChangeCallback(false);
+                pParent->MoveComponent(pComponent, 1);
             }
+
+            if (ImGui::MenuItem("Copy")) {
+                SR_UTILS_NS::SRASerializer serializer;
+                SR_UTILS_NS::Serialization::Save(serializer, SR_HTYPES_NS::SharedPtr(pComponent), serializeId);
+                std::string encoded = SR_UTILS_NS::StringUtils::Base64Encode(serializer.ToString());
+                SR_PLATFORM_NS::TextToClipboard(serializeId.GetName() + encoded);
+            }
+
+            if (auto&& clipboard = SR_PLATFORM_NS::GetClipboardText(); clipboard.starts_with(serializeId.GetName())) {
+                if (ImGui::MenuItem("Paste (replace)")) {
+                    clipboard.erase(0, strlen(serializeId.GetName()));
+                    SR_UTILS_NS::SRADeserializer deserializer;
+                    if (deserializer.LoadFromString(SR_UTILS_NS::StringUtils::Base64Decode(clipboard))) {
+                        SR_UTILS_NS::Component::Ptr pPastedComponent;
+                        SR_UTILS_NS::Serialization::Load(deserializer, pPastedComponent, serializeId);
+                        if (pPastedComponent) {
+                            m_onBeforeChangeCallback(false);
+                            pParent->RemoveComponent(pComponent);
+                            pParent->AddComponent(pPastedComponent);
+
+                            const int32_t distance = (componentIndex + 1) - componentsCount;
+                            SRAssert2(distance <= 0, "Invalid distance: {}", distance);
+                            pParent->MoveComponent(pPastedComponent, distance);
+                        }
+                    }
+                }
+            }
+
             if (ImGui::MenuItem("Duplicate")) {
-                auto&& pCopiedComponent = pComponent->CopyComponent();
-                pComponent->GetParent()->AddComponent(pCopiedComponent);
+                m_onBeforeChangeCallback(false);
+                auto&& pCopiedComponent = pComponent->CloneComponent();
+                pParent->AddComponent(pCopiedComponent);
                 const int32_t distance = (componentIndex + 1) - componentsCount;
                 SRAssert2(distance <= 0, "Invalid distance: {}", distance);
-                pComponent->GetParent()->MoveComponent(pCopiedComponent, distance);
+                pParent->MoveComponent(pCopiedComponent, distance);
             }
+
+            if (pParent) {
+                if (m_pComponentsSerializer) {
+                    auto&& cmd = new SR_CORE_NS::Commands::ComponentsChange(pEngine, pParent, std::move(m_pComponentsSerializer));
+                    pEngine->GetCmdManager()->Store(cmd);
+                }
+            }
+            else {
+                m_pComponentsSerializer = nullptr;
+            }
+
             ImGui::EndPopup();
         }
 
         ImGui::PopID();
     }
 
-    void Inspector::DrawProperty(const PropertyDrawerContext& context) {
-        if (context.GetProperty().IsHidden()) {
-            return;
+    void Inspector::DrawComponentCategory(SR_UTILS_NS::IComponentable* pComponentable, ComponentCategory& category, SR_UTILS_NS::StringAtom categoryName) {
+        static auto&& addComponentFn = [](Inspector* pInspector, SR_UTILS_NS::IComponentable* pComponentable, SR_UTILS_NS::StringAtom name) {
+            if (ImGui::Selectable(name.c_str(), false)) {
+                if (auto&& pComponent = SR_UTILS_NS::Factory::Instance().Create<SR_UTILS_NS::Component>(name)) {
+                    pInspector->m_onBeforeChangeCallback(false);
+                    pComponentable->AddComponent(pComponent);
+                }
+                else {
+                    SRHalt("Inspector::DrawComponentCategory() : failed to create component! Name: {}", name);
+                }
+            }
+            if (ImGui::IsItemFocused()) {
+                if (SR_UTILS_NS::Input::Instance().GetKeyDown(SR_UTILS_NS::KeyCode::Enter)) {
+                    if (auto&& pComponent = SR_UTILS_NS::Factory::Instance().Create<SR_UTILS_NS::Component>(name)) {
+                        pInspector->m_onBeforeChangeCallback(false);
+                        pComponentable->AddComponent(pComponent);
+                    }
+                    else {
+                        SRHalt("Inspector::DrawComponentCategory() : failed to create component! Name: {}", name);
+                    }
+                    ImGui::CloseCurrentPopup();
+                }
+            }
+            ImGui::Separator();
+        };
+
+        std::function<bool(const ComponentCategory&, std::string_view)> checkMatch;
+
+        checkMatch = [&checkMatch](const ComponentCategory& checkCategory, std::string_view search) -> bool {
+            const bool hasComponents = std::ranges::any_of(checkCategory.components, [&](auto&& name) {
+                return PropertyDrawerBase::CheckSearchMatch(search, name);
+            });
+            return hasComponents || std::ranges::any_of(checkCategory.categories, [&](auto&& pair) {
+                return checkMatch(pair.second, search);
+            });
+        };
+
+        if (m_componentSearchBuffer.empty() || checkMatch(category, m_componentSearchBuffer)) {
+            if (category.components.empty() || ImGui::BeginMenu(categoryName.c_str())) {
+                for (auto&& [name, subCategory] : category.categories) {
+                    DrawComponentCategory(pComponentable, subCategory, name);
+                }
+
+                for (auto&& name : category.components) {
+                    if (!m_componentSearchBuffer.empty() && !PropertyDrawerBase::CheckSearchMatch(m_componentSearchBuffer, name)) {
+                        continue;
+                    }
+                    addComponentFn(this, pComponentable, name);
+                }
+
+                if (!category.components.empty()) {
+                    ImGui::EndMenu();
+                }
+            }
         }
 
-        ComponentContext& componentContext = m_componentContexts.at(context.pComponent);
-        if (!componentContext.pDrawers[context.propertyIndex]) {
-            SR_GRAPH_GUI_NS::ColoredText("Missing drawer for property: {}"_format(context.GetProperty().GetName()), ImColor(255, 0, 0));
-            return;
-        }
-
-        ImGui::BeginDisabled(context.GetProperty().IsReadOnly());
-
-        const PropertyDrawerFeedback feedback = componentContext.pDrawers[context.propertyIndex]->Draw(context);
-
-        ImGui::EndDisabled();
-
-        if (feedback.isChanged) {
-            context.GetProperty().OnChanged(context.pOwner);
-        }
+        ImGui::Separator();
     }
 
-    void Inspector::InspectTag(SR_UTILS_NS::StringAtom tag, SR_HTYPES_NS::Function<void(SR_UTILS_NS::StringAtom)> callback) {
+    PropertyDrawerContext Inspector::CreateDrawerContext(SR_UTILS_NS::Reflection::Value* pValue) {
+        PropertyDrawerContext context(pValue);
+        context.pEditor = dynamic_cast<EditorGUI*>(GetManager());
+
+        const float_t lineHeight = GImGui->Font->FontSize + GImGui->Style.FramePadding.y * 2.0f;
+        float_t windowWidth = ImGui::GetWindowWidth() - m_scrollBarWidth;
+        context.lineHeight = lineHeight;
+        context.axisButtonWidth = context.lineHeight;
+        context.spaceWidth = windowWidth;
+        context.fieldHeight = lineHeight;
+        context.fieldTitleWidth = windowWidth * 0.3f;
+        context.fieldWidth = windowWidth * 0.7f;
+        context.noHeader = true;
+        context.editorPropertyParams.SetDragSpeed(0.1f);
+        context.onBeforeChangeCallback = m_onBeforeChangeCallback;
+
+        return context;
+    }
+
+    void Inspector::InspectTag(const SR_UTILS_NS::StringAtom tag, const SR_HTYPES_NS::Function<void(SR_UTILS_NS::StringAtom)>& callback) {
         /// вызываем в потокобезопасном контексте, так как теги могут быть изменены извне
         SR_UTILS_NS::TagManager::Instance().Do([&](auto&& pSettings) {
             auto&& pTagManager = dynamic_cast<SR_UTILS_NS::TagManager*>(pSettings);
@@ -577,7 +623,7 @@ namespace SR_CORE_GUI_NS {
         });
     }
 
-    void Inspector::InspectLayer(SR_UTILS_NS::StringAtom layer, SR_HTYPES_NS::Function<void(SR_UTILS_NS::StringAtom)> callback) {
+    void Inspector::InspectLayer(const SR_UTILS_NS::StringAtom layer, const SR_HTYPES_NS::Function<void(SR_UTILS_NS::StringAtom)>& callback) {
         SR_UTILS_NS::LayerManager::Instance().Do([&](auto&& pSettings) {
             auto&& pLayerManager = dynamic_cast<SR_UTILS_NS::LayerManager*>(pSettings);
             auto&& layers = pLayerManager->GetLayers();

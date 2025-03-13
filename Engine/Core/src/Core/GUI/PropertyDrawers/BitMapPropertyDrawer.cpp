@@ -65,6 +65,9 @@ namespace SR_CORE_GUI_NS {
         ImGui::SameLine();
 
         if (ImGui::Button("Add", buttonSize)) {
+            if (context.onBeforeChangeCallback) {
+                context.onBeforeChangeCallback(false);
+            }
             container.Resize(container.Size() + 1);
             feedback.isChanged = true;
         }
@@ -73,6 +76,9 @@ namespace SR_CORE_GUI_NS {
 
         if (ImGui::Button("Remove", buttonSize)) {
             if (!container.Empty()) {
+                if (context.onBeforeChangeCallback) {
+                    context.onBeforeChangeCallback(false);
+                }
                 container.Resize(container.Size() - 1);
                 feedback.isChanged = true;
             }
@@ -81,6 +87,9 @@ namespace SR_CORE_GUI_NS {
         ImGui::SameLine();
 
         if (ImGui::Button("Clear", buttonSize)) {
+            if (context.onBeforeChangeCallback) {
+                context.onBeforeChangeCallback(false);
+            }
             container.Clear();
             feedback.isChanged = true;
         }
@@ -102,6 +111,9 @@ namespace SR_CORE_GUI_NS {
 
                     bool bValue = (*pBitMap)[i];
                     if (ImGui::Checkbox("", &bValue)) {
+                        if (context.onBeforeChangeCallback) {
+                            context.onBeforeChangeCallback(false);
+                        }
                         pBitMap->at(i) = bValue;
                         feedback.isChanged = true;
                     }
@@ -123,9 +135,7 @@ namespace SR_CORE_GUI_NS {
         ImGui::PopID();
         ImGui::PopID();
 
-        if (!context.pValue && feedback.isChanged && !value.IsRef()) {
-            context.GetProperty().Set(context.pOwner, value);
-        }
+        SetValue(context, feedback, value);
 
         return feedback;
     }

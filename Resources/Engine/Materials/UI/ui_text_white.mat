@@ -1,7 +1,20 @@
-<?xml version="1.0"?>
-<Material ReadOnly="false">
-    <Shader Path="Engine/Shaders/ui_text.srsl"/>
-    <Properties>
-		<Property Id="color" Type="Vec3" X="1.0" Y="1.0" Z="1.0" />
-    </Properties>
-</Material>
+sra format
+0-r:Root
+	1-o:default
+		2-v:shader
+			3-s:Engine/Shaders/ui_text.srsl
+		2-o:data
+			3-a:uniforms
+				4-k:i
+					5-o:d
+						6-v:id
+							7-s:color
+						6-v:type
+							7-s:Vec3
+						6-o:value
+							7-v:x
+								8-f:1.000000
+							7-v:y
+								8-f:1.000000
+							7-v:z
+								8-f:1.000000

@@ -88,12 +88,18 @@ class Property:
         self.setter = None
         self.getter = None
         self.reset_value = None
+        self.property_condition = None
+        self.load_condition = None
+        self.custom_args = {}
         self.drag_value = None
         self.editor_width = None
         self.read_only = False
+        self.not_null = False
+        self.no_header = False
         self.hidden = False
         self.private = False
         self.dontLoad = False
+        self.virtual = False
 
     def __str__(self):
         return f'Property: {self.name}, Type: {self.type_name}, Default value: {self.default_value}'
@@ -117,17 +123,22 @@ class CodeStructure:
         self.enums = []
 
 class Enum:
-    def __init__(self, name, variant, count, type, enum_class, namespaces):
+    def __init__(self, name, variant, count, type, enum_class, namespaces, source_path):
         self.name = name
         self.variant = variant
         self.count = count
         self.namespaces = namespaces
         self.type = type
         self.enum_class = enum_class
+        self.source_path = os.path.normpath(source_path)
 
 class Class:
     def __init__(self, name, namespaces):
         self.name = name
+        self.inspector = None
+        self.version = None
+        self.category = None
+        self.hidden = False
         self.namespaces = namespaces
         self.variables = []
         self.methods = []
@@ -177,7 +188,9 @@ def extract_special_tag_comment_data(node, tag):
     """ /// @someTage(data, data, data), get data between ( and ) """
     """ /// @resetValue(someFunc()), get someFunc() """
     raw_comment = node.raw_comment
-    start = raw_comment.find(f"@{tag}")
+    if not raw_comment:
+        return None
+    start = raw_comment.find(f"@{tag}(")
     if start == -1:
         return None
 
@@ -201,6 +214,33 @@ def extract_special_tag_comment_data(node, tag):
         return None
 
     return raw_comment[start + 1:end]
+
+def extract_all_special_tags_comment_data(node, tag):
+    """ @customArgs(name1: value1) """
+    """ @customArgs(name2: value2, name3: value3) """
+    """ @customArg(name4: value4) """
+
+    tags = []
+    raw_comment = node.raw_comment
+    if not raw_comment:
+        return tags
+
+    index = 0
+    loop_limit = 100
+    while True:
+        index = raw_comment.find(f"@{tag}(", index)
+        start = raw_comment.find('(', index)
+        end = raw_comment.find(')', start)
+        if index == -1 or start == -1 or end == -1:
+            break
+        tags.append(raw_comment[start + 1:end])
+        index = end
+        loop_limit -= 1
+        if loop_limit == 0:
+            raise Exception(f'Loop limit reached for {tag} in {node.spelling}, raw_comment: {raw_comment}, tags: {tags}')
+
+    return tags
+
 
 def is_method_comment(node):
     """Извлекаем комментарий, если он есть."""
@@ -260,7 +300,7 @@ def debug_extract_property_default_value(cursor, deep=0):
     tokens = list(cursor.get_tokens())
     token_strs = [token.spelling for token in tokens]
 
-    print(f'[{deep}] Extract default value for {cursor.kind} \"{cursor.spelling}\" \"{cursor.type.spelling}\", {token_strs}')
+    print(f'[{deep}][Debug] Extract default value for {cursor.kind} \"{cursor.spelling}\" \"{cursor.type.spelling}\", {token_strs}')
 
     for child in cursor.get_children():
         debug_extract_property_default_value(child, deep + 1)
@@ -274,6 +314,8 @@ def extract_property_default_value(cursor):
     namespace_stack = []
     tokens = list(cursor.get_tokens())
     token_strs = [token.spelling for token in tokens]
+
+    print(f'Extract default value for {cursor.spelling}, {token_strs}')
 
     for child in cursor.get_children():
         tokens = list(child.get_tokens())
@@ -295,6 +337,9 @@ def extract_property_default_value(cursor):
         if child.kind == clang.cindex.CursorKind.NAMESPACE_REF:
             namespace_stack.append(child.spelling)
             continue
+        #if child.kind == clang.cindex.CursorKind.TYPE_REF:
+        #    namespace_stack.append(child.spelling)
+        #    continue
         if child.kind == clang.cindex.CursorKind.CALL_EXPR:
             if len(token_strs) == 0:
                 namespace = '::'.join(namespace_stack)
@@ -308,6 +353,7 @@ def extract_property_default_value(cursor):
                     expression += token.spelling
                 return expression
 
+    print(f'Default value not found for {cursor.spelling}')
     return None
 
 #def extract_property_default_value(cursor):
@@ -350,7 +396,76 @@ def is_class_inherited_from(class_node, class_name):
                 return True
     return False
 
-def parse_tree(deep, parent_node, code_structure, namespaces):
+
+def add_property_custom_arg(property_obj, arg, index):
+    key = arg[:index]
+    value = arg[index:]
+
+    if key.startswith(' '):
+        key = key[1:]
+
+    if value.startswith(': '):
+        value = value[2:]
+
+    print(f'Add custom arg to prop \"{property_obj.name}\": \"{arg}\", key: \"{key}\", value: \"{value}\"')
+
+    property_obj.custom_args[key] = value
+
+def process_property(property_obj, child):
+    property_obj.change_callback = extract_special_tag_comment_data(child, 'onChanged')
+    property_obj.setter = extract_special_tag_comment_data(child, 'setter')
+    property_obj.getter = extract_special_tag_comment_data(child, 'getter')
+    property_obj.reset_value = extract_special_tag_comment_data(child, 'resetValue')
+    property_obj.default_value = extract_special_tag_comment_data(child, 'defaultValue')
+    property_obj.property_condition = extract_special_tag_comment_data(child, 'propertyCondition')
+    property_obj.load_condition = extract_special_tag_comment_data(child, 'loadCondition')
+    property_obj.drag_value = extract_special_tag_comment_data(child, 'drag')
+    property_obj.editor_width = extract_special_tag_comment_data(child, 'editorWidth')
+    property_obj.inspector = extract_special_tag_comment_data(child, 'inspector')
+
+    if custom_args_list := extract_all_special_tags_comment_data(child, 'customArgs'):
+        for custom_args in custom_args_list:
+            custom_args_split = custom_args.split(',')
+            for arg in custom_args_split:
+                index = arg.find(':')
+                if index == -1:
+                    print(f'Error: invalid custom arg: {arg}')
+                    continue
+                add_property_custom_arg(property_obj, arg, index)
+
+    if custom_arg_list := extract_all_special_tags_comment_data(child, 'customArg'):
+        for arg in custom_arg_list:
+            index = arg.find(':')
+            if index == -1:
+                print(f'Error: invalid custom arg: {arg}')
+                continue
+            add_property_custom_arg(property_obj, arg, index)
+
+    if property_obj.virtual and not property_obj.getter:
+        raise Exception(f'Virtual property {property_obj.name} must have getter!')
+
+    property_obj.not_null = has_special_tag_comment(child, 'notNull')
+    property_obj.hidden = has_special_tag_comment(child, 'hidden')
+    property_obj.read_only = has_special_tag_comment(child, 'readOnly')
+    property_obj.no_header = has_special_tag_comment(child, 'noHeader')
+    property_obj.private = has_special_tag_comment(child, 'private')
+
+    property_obj.dontLoad = has_special_tag_comment(child, 'dontLoad')
+    property_obj.dontSave = has_special_tag_comment(child, 'dontSave')
+
+    if property_obj.dontSave:
+        property_obj.dontLoad = True
+
+    # remove m_ and _ prefix from name
+    property_obj.display_name = make_display_name(property_obj.name)
+    property_obj.serialize_name = make_serialize_property_name(property_obj.name)
+
+    if not property_obj.default_value:
+        property_obj.default_value = extract_property_default_value(child)
+        if property_obj.default_value:
+            print(f'Found default value: {property_obj.default_value}')
+
+def parse_tree(file_path, deep, parent_node, code_structure, namespaces):
     try:
         if parent_node.kind == clang.cindex.CursorKind.FUNCTION_DECL and parent_node.is_definition():
             if parent_node.spelling.startswith('sr_detail_reflector_'):
@@ -418,7 +533,8 @@ def parse_tree(deep, parent_node, code_structure, namespaces):
 
                     if all_found == 5:
                         print(f'Found enum: {name} Variant: {variant} Count: {count}, Type: {enum_type}, Class: {enum_class}')
-                        code_structure.enums.append(Enum(name, variant, count, enum_type, enum_class, namespaces))
+                        enum_object = Enum(name, variant, count, enum_type, enum_class, namespaces, parent_node.location.file.name)
+                        code_structure.enums.append(enum_object)
                         break
 
             return
@@ -431,42 +547,50 @@ def parse_tree(deep, parent_node, code_structure, namespaces):
             # Нашли класс
             class_name = parent_node.spelling
             class_obj = Class(class_name, namespaces)
+            class_obj.inspector = extract_special_tag_comment_data(parent_node, 'inspector')
+
+            # format @version(year.month.day) or @version(any number). convert @version(2025.12.31) to 20251231
+            # additional example: @version(2025.02.04) -> 20250204
+            class_obj.version = extract_special_tag_comment_data(parent_node, 'version')
+            if class_obj.version:
+                class_obj.version = class_obj.version.replace('.', '')
+
+            # example: @category(Engine.Render.Something other.Something)
+            class_obj.category = extract_special_tag_comment_data(parent_node, 'category')
+
+            class_obj.hidden = has_special_tag_comment(parent_node, 'hidden')
+
             class_obj.path = parent_node.location.file.name
+
+            if class_obj.inspector:
+                print(f'Found class inspector: {class_obj.inspector}')
 
             # Перебираем все поля класса
             for child in parent_node.get_children():
+                #print(f'Fount class child: {child.spelling}, {child.kind}')
+
                 if child.kind == clang.cindex.CursorKind.CXX_BASE_SPECIFIER:
                     class_obj.inherited_classes.append(child.spelling)
+                    continue
 
-                if child.kind == clang.cindex.CursorKind.FIELD_DECL and is_property_comment(child):
+                if child.kind == clang.cindex.CursorKind.TYPEDEF_DECL:
+                    virtual_property = extract_special_tag_comment_data(child, 'virtualProperty')
+                    if virtual_property:
+                        print(f'Found virtual property: {virtual_property}')
+                        property_obj = Property(virtual_property, 'Unknown')
+                        property_obj.virtual = True
+                        process_property(property_obj, child)
+                        class_obj.add_variable(property_obj)
+
+                elif child.kind == clang.cindex.CursorKind.FIELD_DECL and is_property_comment(child):
                     variable_name = child.spelling
                     variable_type = extract_property_type(child)
                     property_obj = Property(variable_name, variable_type)
                     print(f'Found property: {property_obj.name}, Type: {property_obj.type_name}')
-
-                    property_obj.change_callback = extract_special_tag_comment_data(child, 'changeCallback')
-                    property_obj.setter = extract_special_tag_comment_data(child, 'setter')
-                    property_obj.getter = extract_special_tag_comment_data(child, 'getter')
-                    property_obj.reset_value = extract_special_tag_comment_data(child, 'resetValue')
-                    property_obj.drag_value = extract_special_tag_comment_data(child, 'drag')
-                    property_obj.editor_width = extract_special_tag_comment_data(child, 'editorWidth')
-                    property_obj.inspector = extract_special_tag_comment_data(child, 'inspector')
-
-                    property_obj.hidden = has_special_tag_comment(child, 'hidden')
-                    property_obj.read_only = has_special_tag_comment(child, 'readOnly')
-                    property_obj.private = has_special_tag_comment(child, 'private')
-                    property_obj.dontLoad = has_special_tag_comment(child, 'dontLoad')
-
-                    # remove m_ and _ prefix from name
-                    property_obj.display_name = make_display_name(property_obj.name)
-                    property_obj.serialize_name = make_serialize_property_name(property_obj.name)
-
-                    property_obj.default_value = extract_property_default_value(child)
-                    if property_obj.default_value:
-                        print(f'Found default value: {property_obj.default_value}')
+                    process_property(property_obj, child)
                     class_obj.add_variable(property_obj)
 
-                if child.kind == clang.cindex.CursorKind.CXX_METHOD and is_method_comment(child):
+                elif child.kind == clang.cindex.CursorKind.CXX_METHOD and is_method_comment(child):
                     method_name = child.spelling
                     method_return_type = child.result_type.spelling
                     method_obj = Method(method_name, method_return_type)
@@ -488,7 +612,7 @@ def parse_tree(deep, parent_node, code_structure, namespaces):
 
         # Рекурсивный обход других узлов
         for child in parent_node.get_children():
-            parse_tree(deep + 1, child, code_structure, new_namespace)
+            parse_tree(file_path, deep + 1, child, code_structure, new_namespace)
 
 
 
@@ -519,7 +643,7 @@ def parse_header_file(file_path):
 
     # Проходим по узлам файла
     for node in translation_unit.cursor.get_children():
-        parse_tree(0, node, code_structure, [])
+        parse_tree(file_path, 0, node, code_structure, [])
 
     return code_structure
 
@@ -528,7 +652,7 @@ def generate_class_meta_properties(f, class_structures, class_obj, tabs):
     if len(class_obj.variables) == 0:
         return
 
-    f.write('\t' * tabs + f'SR_NODISCARD virtual std::span<const SR_UTILS_NS::Reflection::Property> GetProperties() const noexcept override {{\n')
+    f.write('\t' * tabs + f'SR_NODISCARD virtual std::span<const SR_UTILS_NS::Reflection::Property> GetProperties() const noexcept final {{\n')
     f.write('\t' * (tabs + 1) + f'static const std::array<const SR_UTILS_NS::Reflection::Property, {len(class_obj.variables)}> properties {{ \n')
 
     for prop in class_obj.variables:
@@ -547,15 +671,25 @@ def generate_class_meta_properties(f, class_structures, class_obj, tabs):
         else:
             f.write('\n' + '\t' * (tabs + 3) + f'.SetPublicity(SR_UTILS_NS::PropertyPublicity::Public)')
 
+        f.write('\n' + '\t' * (tabs + 3) + f'.SetHasExplicitSetter({"true" if prop.setter else "false"})')
         f.write('\n' + '\t' * (tabs + 3) + f'.SetSetter(&SRClassMetaTemplate::Set_{prop.name})')
         f.write('\n' + '\t' * (tabs + 3) + f'.SetGetter(&SRClassMetaTemplate::Get_{prop.name})')
         f.write('\n' + '\t' * (tabs + 3) + f'.SetChangeCallback(&SRClassMetaTemplate::OnChange_{prop.name})')
 
+        if prop.property_condition:
+            f.write('\n' + '\t' * (tabs + 3) + f'.SetPropertyCondition(&SRClassMetaTemplate::IsPropertyActive_{prop.serialize_name})')
+
         default_value = f'decltype({class_obj.name}::{prop.name})()'
         if prop.default_value:
             default_value = f'decltype({class_obj.name}::{prop.name})(GetDefault_{prop.serialize_name}())'
+        elif prop.virtual:
+            if prop.getter:
+                default_value = f'SR_UTILS_NS::RemoveQualifiersT<decltype(DeclTypeStub()->{prop.getter}())>()'
+            else:
+                default_value = None
 
-        f.write('\n' + '\t' * (tabs + 3) + f'.SetDefaultValue(SR_UTILS_NS::Reflection::Value::Create({default_value}))')
+        if default_value:
+            f.write('\n' + '\t' * (tabs + 3) + f'.SetDefaultValue(SR_UTILS_NS::Reflection::Value::Create({default_value}))')
 
         if prop.reset_value:
             f.write('\n' + '\t' * (tabs + 3) + f'.SetResetValue(SR_UTILS_NS::Reflection::Value::Create({prop.reset_value}))')
@@ -564,8 +698,19 @@ def generate_class_meta_properties(f, class_structures, class_obj, tabs):
 
         f.write('\n' + '\t' * (tabs + 3) + f'.SetEditorParams(SR_UTILS_NS::Reflection::EditorPropertyParams()')
 
+        for key, value in prop.custom_args.items():
+            f.write('\n' + '\t' * (tabs + 4) + f'.SetCustomArg("{key}", "{value}")')
+
+        if prop.no_header:
+            f.write('\n' + '\t' * (tabs + 4) + f'.SetNoHeader()')
+
+        if prop.not_null:
+            f.write('\n' + '\t' * (tabs + 4) + f'.SetNotNull()')
+
         f.write('\n' + '\t' * (tabs + 4) + f'.SetDisplayName("{prop.display_name}")')
-        #f.write('\n' + '\t' * (tabs + 4) + f'.SetInspector(SR_UTILS_NS::Reflection::GetPropertyInspector<decltype({class_obj.name}::{prop.name})>())')
+
+        if prop.inspector:
+            f.write('\n' + '\t' * (tabs + 4) + f'.SetInspector("{prop.inspector}")')
 
         if prop.drag_value:
             f.write('\n' + '\t' * (tabs + 4) + f'.SetDragSpeed({prop.drag_value})')
@@ -585,7 +730,7 @@ def generate_class_meta_get_base_metas(f, class_structures, class_obj, tabs):
     if len(class_obj.inherited_classes) == 0:
         return
 
-    f.write('\t' * tabs + f'SR_NODISCARD virtual std::span<const SRClassMeta*> GetBaseMetas() const noexcept override {{\n')
+    f.write('\t' * tabs + f'SR_NODISCARD virtual std::span<const SRClassMeta*> GetBaseMetas() const noexcept final {{\n')
 
     correct_inherited_classes = []
     for inherited_class in class_obj.inherited_classes:
@@ -611,24 +756,65 @@ def generate_class_meta_get_base_metas(f, class_structures, class_obj, tabs):
 
 
 def generate_class_meta_save(f, class_obj, tabs):
-    if len(class_obj.variables) == 0:
-        return
-
-    f.write('\t' * tabs + f'void Save(SR_UTILS_NS::ISerializer& serializer, const SR_UTILS_NS::Serializable& obj) const override {{\n')
-    tabs += 1
-
     class_name = '::'.join(class_obj.namespaces) + '::' + class_obj.name
 
+    if len(class_obj.variables) == 0:
+        if class_name == 'SpaRcle::Utils::Serializable':
+            f.write('\t' * tabs + f'void Save(SR_UTILS_NS::ISerializer& serializer, const SR_UTILS_NS::Serializable& obj) const final {{\n')
+            tabs += 1
+
+            f.write('\t' * tabs + f'if (serializer.IsWriteVersion()) {{\n')
+            f.write('\t' * (tabs + 1) + f'const uint64_t version = obj.GetMeta()->GetVersion();\n')
+            f.write('\t' * (tabs + 1) + f'if (version != 0) {{\n')
+            f.write('\t' * (tabs + 2) + f'static constexpr SR_UTILS_NS::SerializationId keyName_version = SR_UTILS_NS::SerializationId::Create("@version");\n')
+            f.write('\t' * (tabs + 2) + f'SR_UTILS_NS::Serialization::Save(serializer, obj.GetMeta()->GetVersion(), keyName_version);\n')
+            f.write('\t' * (tabs + 1) + f'}}\n')
+            f.write('\t' * tabs + f'}}\n')
+
+            tabs -= 1
+            f.write('\t' * tabs + '}\n\n')
+
+        return
+
+    f.write('\t' * tabs + f'void Save(SR_UTILS_NS::ISerializer& serializer, const SR_UTILS_NS::Serializable& obj) const final {{\n')
+    tabs += 1
+
     f.write('\t' * tabs + f'SR_UTILS_NS::SRClassMeta::Save(serializer, obj);\n\n')
-    f.write('\t' * tabs + f'auto&& value = static_cast<const {class_name}&>(obj);\n\n')
+    f.write('\t' * tabs + f'auto&& value = static_cast<{class_name}&>(const_cast<SR_UTILS_NS::Serializable&>(obj));\n\n')
 
     for prop in class_obj.variables:
-        if prop.default_value:
-            f.write('\t' * tabs + f'if ((serializer.IsWriteDefaults() || value.{prop.name} != GetDefault_{prop.serialize_name}())) {{\n')
+        if prop.dontSave:
+            continue
+
+        if not prop.getter and prop.virtual:
+            continue
+
+        if prop.property_condition:
+            f.write('\t' * tabs + f'if (IsPropertyActive_{prop.serialize_name}(&value)) {{\n')
         else:
-            f.write('\t' * tabs + f'if ((serializer.IsWriteDefaults() || !SR_UTILS_NS::IsDefault(value.{prop.name}))) {{\n')
-        f.write('\t' * (tabs + 1) + f'static constexpr SR_UTILS_NS::SerializationId keyName_{prop.serialize_name} = SR_UTILS_NS::SerializationId::Create("{prop.serialize_name}");\n')
-        f.write('\t' * (tabs + 1) + f'SR_UTILS_NS::Serialization::Save(serializer, value.{prop.name}, keyName_{prop.serialize_name});\n')
+            f.write('\t' * tabs + f'{{\n')
+
+        if prop.getter:
+            f.write('\t' * (tabs + 1) + f'auto&& propValue = value.{prop.getter}();\n')
+
+            if prop.default_value:
+                f.write('\t' * (tabs + 1) + f'if ((serializer.IsWriteDefaults() || propValue != GetDefault_{prop.serialize_name}())) {{\n')
+            else:
+                f.write('\t' * (tabs + 1) + f'if ((serializer.IsWriteDefaults() || !SR_UTILS_NS::IsDefault(propValue))) {{\n')
+
+            f.write('\t' * (tabs + 2) + f'static constexpr SR_UTILS_NS::SerializationId keyName_{prop.serialize_name} = SR_UTILS_NS::SerializationId::Create("{prop.serialize_name}");\n')
+            f.write('\t' * (tabs + 2) + f'SR_UTILS_NS::Serialization::Save(serializer, propValue, keyName_{prop.serialize_name});\n')
+
+            f.write('\t' * (tabs + 1) + f'}}\n')
+        else:
+            if prop.default_value:
+                f.write('\t' * (tabs + 1) + f'if ((serializer.IsWriteDefaults() || value.{prop.name} != GetDefault_{prop.serialize_name}())) {{\n')
+            else:
+                f.write('\t' * (tabs + 1) + f'if ((serializer.IsWriteDefaults() || !SR_UTILS_NS::IsDefault(value.{prop.name}))) {{\n')
+            f.write('\t' * (tabs + 2) + f'static constexpr SR_UTILS_NS::SerializationId keyName_{prop.serialize_name} = SR_UTILS_NS::SerializationId::Create("{prop.serialize_name}");\n')
+            f.write('\t' * (tabs + 2) + f'SR_UTILS_NS::Serialization::Save(serializer, value.{prop.name}, keyName_{prop.serialize_name});\n')
+            f.write('\t' * (tabs + 1) + f'}}\n')
+
         f.write('\t' * tabs + f'}}\n')
 
     tabs -= 1
@@ -636,24 +822,76 @@ def generate_class_meta_save(f, class_obj, tabs):
     pass
 
 def generate_class_meta_load(f, class_obj, tabs):
-    if len(class_obj.variables) == 0:
-        return
-
-    f.write('\t' * tabs + f'void Load(SR_UTILS_NS::IDeserializer& deserializer, SR_UTILS_NS::Serializable& obj) const override {{\n')
-    tabs += 1
-
     class_name = '::'.join(class_obj.namespaces) + '::' + class_obj.name
 
-    f.write('\t' * tabs + f'SR_UTILS_NS::SRClassMeta::Load(deserializer, obj);\n\n')
+    if len(class_obj.variables) == 0:
+        if class_name == 'SpaRcle::Utils::Serializable':
+            f.write('\t' * tabs + f'bool Load(SR_UTILS_NS::IDeserializer& deserializer, SR_UTILS_NS::Serializable& obj) const final {{\n')
+            tabs += 1
+
+            f.write('\t' * (tabs) + f'static constexpr SR_UTILS_NS::SerializationId keyName_version = SR_UTILS_NS::SerializationId::Create("@version");\n')
+            f.write('\t' * (tabs) + f'uint64_t version = 0;\n')
+            f.write('\t' * (tabs) + f'uint64_t currentVersion = obj.GetMeta()->GetVersion();\n')
+            f.write('\t' * (tabs) + f'SR_UTILS_NS::Serialization::Load(deserializer, version, keyName_version);\n')
+            f.write('\t' * (tabs) + f'if (version != currentVersion) {{\n')
+            f.write('\t' * (tabs + 1) + f'if (SR_UTILS_NS::MigrationManager::Instance().Migrate(deserializer, obj, version, currentVersion) == SR_UTILS_NS::MigrationResult::Fatal) {{\n')
+            f.write('\t' * (tabs + 2) + f'return false;\n')
+            f.write('\t' * (tabs + 1) + f'}}\n')
+            f.write('\t' * (tabs) + f'}}\n')
+
+            f.write('\t' * tabs + f'return true;\n')
+
+            tabs -= 1
+            f.write('\t' * tabs + '}\n\n')
+
+        return
+
+    f.write('\t' * tabs + f'bool Load(SR_UTILS_NS::IDeserializer& deserializer, SR_UTILS_NS::Serializable& obj) const final {{\n')
+    tabs += 1
+
+    f.write('\t' * tabs + f'if (!SR_UTILS_NS::SRClassMeta::Load(deserializer, obj)) {{\n')
+    f.write('\t' * (tabs + 1) + f'return false;\n')
+    f.write('\t' * tabs + f'}}\n\n')
     f.write('\t' * tabs + f'auto&& value = static_cast<{class_name}&>(obj);\n\n')
 
     for prop in class_obj.variables:
         if prop.dontLoad:
             continue
-        f.write('\t' * tabs + f'{{\n')
+
+        if (not prop.setter or not prop.getter) and prop.virtual:
+            continue
+
+        if prop.load_condition:
+            f.write('\t' * tabs + f'if (IsPropertyLoadAllowed_{prop.serialize_name}(&value)) {{\n')
+        else:
+            f.write('\t' * tabs + f'{{\n')
+
         f.write('\t' * (tabs + 1) + f'static constexpr SR_UTILS_NS::SerializationId keyName_{prop.serialize_name} = SR_UTILS_NS::SerializationId::Create("{prop.serialize_name}");\n')
-        f.write('\t' * (tabs + 1) + f'SR_UTILS_NS::Serialization::Load(deserializer, value.{prop.name}, keyName_{prop.serialize_name});\n')
+
+        if prop.setter:
+            if prop.getter:
+                f.write('\t' * (tabs + 1) + f'using Type = SR_UTILS_NS::RemoveQualifiersT<decltype(value.{prop.getter}())>;\n')
+            elif prop.virtual:
+                raise Exception(f'Virtual property {prop.name} must have getter!')
+            else:
+                f.write('\t' * (tabs + 1) + f'using Type = SR_UTILS_NS::RemoveQualifiersT<decltype(value.{prop.name})>;\n')
+
+            f.write('\t' * (tabs + 1) + f'Type propValue {{}};\n')
+            f.write('\t' * (tabs + 1) + f'if (!SR_UTILS_NS::Serialization::Load(deserializer, propValue, keyName_{prop.serialize_name})) {{\n')
+            if prop.default_value:
+                f.write('\t' * (tabs + 2) + f'propValue = GetDefault_{prop.serialize_name}();\n')
+            f.write('\t' * (tabs + 1) + f'}}\n')
+            f.write('\t' * (tabs + 1) + f'value.{prop.setter}(propValue);\n')
+
+        else:
+            f.write('\t' * (tabs + 1) + f'if (!SR_UTILS_NS::Serialization::Load(deserializer, value.{prop.name}, keyName_{prop.serialize_name})) {{\n')
+            if prop.default_value:
+                f.write('\t' * (tabs + 2) + f'value.{prop.name} = GetDefault_{prop.serialize_name}();\n')
+            f.write('\t' * (tabs + 1) + f'}}\n')
+
         f.write('\t' * tabs + f'}}\n')
+
+    f.write('\t' * tabs + f'return true;')
 
     tabs -= 1
     f.write('\t' * tabs + '}\n\n')
@@ -693,24 +931,73 @@ def generate_class_meta(f, class_structures, class_obj, tabs):
     f.write('\t' * (tabs + 1) + 'return instance;\n')
     f.write('\t' * tabs + '}\n\n')
 
+    f.write('\t' * tabs + f'SR_NODISCARD {class_name}* DeclTypeStub() const noexcept {{ return nullptr; }}\n\n')
+
+    #f.write('\t' * (tabs + 0) + f'template <typename T> T static SetterSharedSRClassConvert(SR_UTILS_NS::SRClass* pSRClass) {{\n')
+    #f.write('\t' * (tabs + 1) + f'if constexpr (SR_UTILS_NS::IsSharedPointerV<T>) {{\n')
+    #f.write('\t' * (tabs + 2) + f'if (pSRClass) {{\n')
+    #f.write('\t' * (tabs + 3) + f'return dynamic_cast<typename T::SharedPointerType*>(pSRClass);\n')
+    #f.write('\t' * (tabs + 2) + f'}}\n')
+    #f.write('\t' * (tabs + 1) + f'}}\n')
+    #f.write('\t' * (tabs + 1) + f'return T();\n')
+    #f.write('\t' * (tabs + 0) + f'}}\n\n')
+
     for prop in class_obj.variables:
         if not prop.default_value:
             continue
         f.write('\t' * tabs + f'// default value for \"{prop}\"\n')
         f.write('\t' * tabs + f'static auto GetDefault_{prop.serialize_name}() {{ return {prop.default_value}; }}\n\n')
 
+    for prop in class_obj.variables:
+        if not prop.property_condition:
+            continue
+        f.write('\t' * tabs + f'static auto IsPropertyActive_{prop.serialize_name}(SR_UTILS_NS::SRClass* pClass) {{\n')
+        f.write('\t' * (tabs + 1) + f'{class_name}& This = *dynamic_cast<{class_name}*>(pClass);\n')
+        f.write('\t' * (tabs + 1) + f'return {prop.property_condition};\n')
+        f.write('\t' * tabs + f'}}\n\n')
+
+    for prop in class_obj.variables:
+        if not prop.load_condition:
+            continue
+        f.write('\t' * tabs + f'static auto IsPropertyLoadAllowed_{prop.serialize_name}(SR_UTILS_NS::SRClass* pClass) {{\n')
+        f.write('\t' * (tabs + 1) + f'{class_name}& This = *dynamic_cast<{class_name}*>(pClass);\n')
+        f.write('\t' * (tabs + 1) + f'return {prop.load_condition};\n')
+        f.write('\t' * tabs + f'}}\n\n')
+
     #for prop in class_obj.variables:
     #    f.write('\t' * tabs + f'// {prop}\n')
     #    f.write('\t' * tabs + f'const {prop.type_name}& Get_{prop.name}({class_name}* pClass) {{ return pClass->{prop.name}; }}\n')
     #    f.write('\t' * tabs + f'void Set_{prop.name}({class_name}* pClass, const {prop.type_name}& value) {{ pClass->{prop.name} = value; }}\n\n')
 
-    f.write('\t' * tabs + f'SR_NODISCARD bool IsAbstract() const noexcept override {{ return std::is_abstract_v<{class_name}>; }}\n\n')
+    f.write('\t' * tabs + f'SR_NODISCARD bool IsAbstract() const noexcept final {{ return std::is_abstract_v<{class_name}>; }}\n\n')
+    f.write('\t' * tabs + f'SR_NODISCARD bool IsHidden() const noexcept final {{ return { "true" if class_obj.hidden else "false" }; }}\n\n')
+
+    if class_obj.version:
+        f.write('\t' * tabs + f'SR_NODISCARD uint64_t GetVersionImpl() const noexcept final {{ return {class_obj.version}; }}\n\n')
+
+    if class_obj.category:
+        category_split = class_obj.category.split('.')
+        f.write('\t' * tabs + f'SR_NODISCARD std::span<const SR_UTILS_NS::StringAtom> GetCategory() const noexcept final {{\n')
+        f.write('\t' * (tabs + 1) + f'static std::array<const SR_UTILS_NS::StringAtom, {len(category_split)}> categories {{ ')
+        for category in category_split:
+            f.write(f'"{category}", ')
+        f.write('};\n')
+        f.write('\t' * (tabs + 1) + f'return categories;\n')
+        f.write('\t' * tabs + '}\n\n')
+
+    #######################################
+    if class_obj.inspector:
+        f.write('\t' * tabs + f'SR_NODISCARD SR_UTILS_NS::StringAtom GetInspectorName() const noexcept final {{ \n')
+        f.write('\t' * (tabs + 1) + f'static const SR_UTILS_NS::StringAtom id = "{class_obj.inspector}";\n')
+        f.write('\t' * (tabs + 1) + f'return id;\n')
+        f.write('\t' * tabs + '}\n\n')
+    #######################################
 
     generate_class_meta_get_base_metas(f, class_structures, class_obj, tabs)
     generate_class_meta_properties(f, class_structures, class_obj, tabs)
 
     #has_serializable_fields = len(class_obj.variables) > 0
-    #f.write('\t' * tabs + f'SR_NODISCARD virtual bool HasSerializableFields() const noexcept override {{\n')
+    #f.write('\t' * tabs + f'SR_NODISCARD virtual bool HasSerializableFields() const noexcept final {{\n')
     #f.write('\t' * (tabs + 1) + f'for (auto&& pBaseMeta : GetBaseMetas()) {{\n')
     #f.write('\t' * (tabs + 2) + f'if (pBaseMeta->HasSerializableFields()) {{\n')
     #f.write('\t' * (tabs + 3) + f'return true;\n')
@@ -722,7 +1009,7 @@ def generate_class_meta(f, class_structures, class_obj, tabs):
     generate_class_meta_save(f, class_obj, tabs)
     generate_class_meta_load(f, class_obj, tabs)
 
-    f.write('\t' * tabs + f'SR_NODISCARD virtual std::string_view GetFactoryName() const noexcept override {{\n')
+    f.write('\t' * tabs + f'SR_NODISCARD virtual SR_UTILS_NS::StringAtom GetFactoryName() const noexcept final {{\n')
     f.write('\t' * (tabs + 1) + f'return {class_name}::GetClassStaticName();\n')
     f.write('\t' * tabs + '}\n\n')
 
@@ -732,29 +1019,75 @@ def generate_class_meta(f, class_structures, class_obj, tabs):
     f.write('\t' * tabs + f'/// Bindings for class {class_obj.name}\n')
 
     for property in class_obj.variables:
-        f.write('\t' * tabs + f'static void Set_{property.name}(void* pClass, const SR_UTILS_NS::Reflection::Value& value) {{\n')
+        f.write('\t' * tabs + f'static void Set_{property.name}(SR_UTILS_NS::SRClass* pClass, const SR_UTILS_NS::Reflection::Value& value) {{\n')
+        f.write('\t' * (tabs + 1) + f'{class_name}* pClassImpl = dynamic_cast<{class_name}*>(pClass);\n')
 
         #f.write('\t' * (tabs + 1) + f'const decltype({class_name}::{property.name})* pData;\n')
         #f.write('\t' * (tabs + 1) + f'if (!value.Map(pData)) {{\n')
         #f.write('\t' * (tabs + 2) + f'return;\n')
         #f.write('\t' * (tabs + 1) + f'}}\n')
 
-        f.write('\t' * (tabs + 1) + f'auto&& pData = value.TryCast<decltype({class_name}::{property.name})>();\n')
-        f.write('\t' * (tabs + 1) + f'if (!pData) {{\n')
-        f.write('\t' * (tabs + 2) + f'SRHalt("Failed to cast value!");\n')
-        f.write('\t' * (tabs + 2) + f'return;\n')
-        f.write('\t' * (tabs + 1) + f'}}\n')
-
-        if property.setter:
-            f.write('\t' * (tabs + 1) + f'(({class_name}*)pClass)->{property.setter}(std::move(*pData));\n')
+        bool_do_gen_setter = True
+        if property.virtual:
+            if not property.setter or not property.getter:
+                f.write('\t' * (tabs + 1) + f'SRHalt("Virtual property {property.name} must have getter and setter!");\n')
+                f.write('\t' * (tabs + 1) + f'return;\n')
+                bool_do_gen_setter = False
+            else:
+                f.write('\t' * (tabs + 1) + f'using Type = SR_UTILS_NS::RemoveQualifiersT<decltype(pClassImpl->{property.getter}())>;\n')
         else:
-            f.write('\t' * (tabs + 1) + f'(({class_name}*)pClass)->{property.name} = std::move(*pData);\n')
+            f.write('\t' * (tabs + 1) + f'using Type = decltype({class_name}::{property.name});\n')
+
+        if bool_do_gen_setter:
+            #f.write('\t' * (tabs + 1) + f'if constexpr (SR_UTILS_NS::IsSharedPointerV<Type>) {{\n')
+            #f.write('\t' * (tabs + 2) + f'auto&& pSRClassRef = value.TryCast<SR_UTILS_NS::SRClass*>();\n')
+            #f.write('\t' * (tabs + 2) + f'if (!pSRClassRef) {{\n')
+            #f.write('\t' * (tabs + 3) + f'SRHalt("Failed to cast value!");\n')
+            #f.write('\t' * (tabs + 3) + f'return;\n')
+            #f.write('\t' * (tabs + 2) + f'}}\n')
+            #f.write('\t' * (tabs + 2) + f'auto&& pSRClass = const_cast<SR_UTILS_NS::SRClass*>(*pSRClassRef);\n')
+            #if property.setter:
+            #    f.write('\t' * (tabs + 2) + f'pClassImpl->{property.setter}(SetterSharedSRClassConvert<Type>(pSRClass));\n')
+            #else:
+            #    f.write('\t' * (tabs + 2) + f'pClassImpl->{property.name} = SetterSharedSRClassConvert<Type>(pSRClass);\n')
+            #f.write('\t' * (tabs + 1) + f'}} else {{\n')
+
+            if property.virtual:
+                f.write('\t' * (tabs + 1) + f'auto&& pData = value.TryCast<Type>();\n')
+                f.write('\t' * (tabs + 1) + f'if (!pData) {{\n')
+                f.write('\t' * (tabs + 2) + f'SRHalt("Failed to cast value!");\n')
+                f.write('\t' * (tabs + 2) + f'return;\n')
+                f.write('\t' * (tabs + 1) + f'}}\n')
+
+                f.write('\t' * (tabs + 1) + f'pClassImpl->{property.setter}(std::move(*pData));\n')
+            else:
+                f.write('\t' * (tabs + 1) + f'auto&& pData = value.TryCast<Type>();\n')
+                f.write('\t' * (tabs + 1) + f'if (!pData) {{\n')
+                f.write('\t' * (tabs + 2) + f'SRHalt("Failed to cast value!");\n')
+
+                f.write('\t' * (tabs + 2) + f'return;\n')
+                f.write('\t' * (tabs + 1) + f'}}\n')
+
+                if property.setter:
+                    f.write('\t' * (tabs + 1) + f'pClassImpl->{property.setter}(std::move(*pData));\n')
+                else:
+                    f.write('\t' * (tabs + 1) + f'pClassImpl->{property.name} = std::move(*pData);\n')
+
+            #f.write('\t' * (tabs + 1) + f'}}\n')
 
         f.write('\t' * tabs + f'}}\n')
 
-        f.write('\t' * tabs + f'static SR_UTILS_NS::Reflection::Value Get_{property.name}(void* pClass) {{\n')
+        # =================================== getter ===================================
+
+        f.write('\t' * tabs + f'static SR_UTILS_NS::Reflection::Value Get_{property.name}(SR_UTILS_NS::SRClass* pClass) {{\n')
+        f.write('\t' * (tabs + 1) + f'{class_name}* pClassImpl = dynamic_cast<{class_name}*>(pClass);\n')
         if property.getter:
-            f.write('\t' * (tabs + 1) + f'auto&& value = (({class_name}*)pClass)->{property.getter}();\n')
+            f.write('\t' * (tabs + 1) + f'auto&& value = pClassImpl->{property.getter}();\n')
+
+            #f.write('\t' * (tabs + 1) + f'if constexpr (SR_UTILS_NS::IsSharedPointerV<decltype(value)>) {{\n')
+            #f.write('\t' * (tabs + 2) + f'return SR_UTILS_NS::Reflection::Value::TryCreateSRClass(value);\n')
+            #f.write('\t' * (tabs + 1) + f'}} else ')
+
             f.write('\t' * (tabs + 1) + f'if constexpr (std::is_lvalue_reference_v<decltype(value)>) {{\n')
             f.write('\t' * (tabs + 2) + f'if constexpr (std::is_const_v<std::remove_reference_t<decltype(value)>>) {{\n')
             f.write('\t' * (tabs + 3) + f'return SR_UTILS_NS::Reflection::Value::CreateCRef(value);\n')
@@ -765,17 +1098,22 @@ def generate_class_meta(f, class_structures, class_obj, tabs):
             f.write('\t' * (tabs + 2) + f'return SR_UTILS_NS::Reflection::Value::Create(std::move(value));\n')
             f.write('\t' * (tabs + 1) + f'}}\n')
         else:
+            #f.write('\t' * (tabs + 1) + f'if constexpr (SR_UTILS_NS::IsSharedPointerV<decltype(pClassImpl->{property.name})>) {{\n')
+            #f.write('\t' * (tabs + 2) + f'return SR_UTILS_NS::Reflection::Value::TryCreateSRClass(pClassImpl->{property.name});\n')
+            #f.write('\t' * (tabs + 1) + f'}}\n')
+
             if property.read_only:
-                f.write('\t' * (tabs + 1) + f'return SR_UTILS_NS::Reflection::Value::CreateCRef((({class_name}*)pClass)->{property.name});\n')
+                f.write('\t' * (tabs + 1) + f'return SR_UTILS_NS::Reflection::Value::CreateCRef(pClassImpl->{property.name});\n')
             else:
-                f.write('\t' * (tabs + 1) + f'return SR_UTILS_NS::Reflection::Value::CreateRef((({class_name}*)pClass)->{property.name});\n')
+                f.write('\t' * (tabs + 1) + f'return SR_UTILS_NS::Reflection::Value::CreateRef(pClassImpl->{property.name});\n')
 
 
         f.write('\t' * tabs + f'}}\n')
 
-        f.write('\t' * tabs + f'static void OnChange_{property.name}(void* pClass) {{\n')
+        f.write('\t' * tabs + f'static void OnChange_{property.name}(SR_UTILS_NS::SRClass* pClass) {{\n')
         if property.change_callback:
-            f.write('\t' * (tabs + 1) + f'(({class_name}*)pClass)->{property.change_callback}();\n')
+            f.write('\t' * (tabs + 1) + f'{class_name}* pClassImpl = dynamic_cast<{class_name}*>(pClass);\n')
+            f.write('\t' * (tabs + 1) + f'pClassImpl->{property.change_callback}();\n')
         f.write('\t' * tabs + f'}}\n')
 
         f.write('\n')
@@ -1001,30 +1339,79 @@ def generate_enums_code(codegen_dir, enums):
 
         f.write('\n')
 
-        # formatting
-        for enum_obj in enums:
-            namespace_str = ''
-            if len(enum_obj.namespaces) > 0:
-                namespace_str = '::'.join(enum_obj.namespaces)
+        #for enum_obj in enums:
+        #    namespace_str = ''
+        #    if len(enum_obj.namespaces) > 0:
+        #        namespace_str = '::'.join(enum_obj.namespaces)
+        #
+        #    if len(namespace_str) > 0:
+        #        namespace_str += '::'
+        #
+        #    f.write(f'template<> struct fmt::formatter<{namespace_str}{enum_obj.name}> {{\n')
+        #    f.write(f'\tconstexpr auto parse(format_parse_context& ctx) {{ return ctx.begin(); }}\n')
+        #    f.write(f'\tauto format(const {namespace_str}{enum_obj.name}& val, format_context& ctx) const {{\n')
+        #
+        #    f.write(f'\t\tif constexpr (SR_UTILS_NS::IsCompleteTypeV<{namespace_str}CodegenEnumIncludedChecked_{enum_obj.name}>) {{\n')
+        #    f.write(f'\t\t\treturn fmt::format_to(ctx.out(), "{{}}", SR_UTILS_NS::EnumReflector::ToStringAtom(val).ToStringView());\n')
+        #    f.write(f'\t\t}} else {{\n')
+        #    f.write(f'\t\t\tSRHalt("Formatted enum \\\"{enum_obj.name}\\\" is not included, please include it!");\n')
+        #    #f.write(f'\t\t\tstatic_assert(SR_UTILS_NS::AlwaysFalseV<{namespace_str}{enum_obj.name}>, "Formatted enum is not included, please include it!");\n')
+        #    f.write(f'\t\t\treturn fmt::format_to(ctx.out(), "{{}}", static_cast<int>(val));\n')
+        #    f.write(f'\t\t}}\n')
 
-            if len(namespace_str) > 0:
-                namespace_str += '::'
-
-            f.write(f'template<> struct fmt::formatter<{namespace_str}{enum_obj.name}> {{\n')
-            f.write(f'\tconstexpr auto parse(format_parse_context& ctx) {{ return ctx.begin(); }}\n')
-            f.write(f'\tauto format(const {namespace_str}{enum_obj.name}& val, format_context& ctx) const {{\n')
-
-            f.write(f'\t\tif constexpr (SR_UTILS_NS::IsCompleteTypeV<{namespace_str}CodegenEnumIncludedChecked_{enum_obj.name}>) {{\n')
-            f.write(f'\t\t\treturn fmt::format_to(ctx.out(), "{{}}", SR_UTILS_NS::EnumReflector::ToStringAtom(val).ToStringView());\n')
-            f.write(f'\t\t}} else {{\n')
-            f.write(f'\t\t\tSRHalt("Formatted enum \\\"{enum_obj.name}\\\" is not included, please include it!");\n')
-            f.write(f'\t\t\treturn fmt::format_to(ctx.out(), "{{}}", static_cast<int>(val));\n')
-            f.write(f'\t\t}}\n')
-
-            f.write(f'\t}}\n')
-            f.write(f'}};\n')
+        #    f.write(f'\t}}\n')
+        #    f.write(f'}};\n')
 
         f.write(f'\n#endif // SR_CODEGEN_ENUMS_HPP\n')
+
+        print(f'Remove old enum files: {codegen_dir}/../Enum/*.hpp')
+
+        for file in glob(f'{codegen_dir}/../Enum/*.hpp'):
+            os.remove(file)
+
+        print(f'Generating new enum files: {codegen_dir}/../Enum/*.hpp')
+
+        # formatting
+        for enum_obj in enums:
+            enum_gen_path = os.path.normpath(f'{codegen_dir}/../Enum/{enum_obj.name}.hpp')
+            os.makedirs(os.path.dirname(enum_gen_path), exist_ok=True)
+            with open(enum_gen_path, 'w', encoding='utf8') as f:
+                caps_enum_name = enum_obj.name.upper()
+
+                f.write('// This file is generated by SpaRcle Studio code-generator ^_^\n\n')
+                f.write(f'#ifndef SR_CODEGEN_ENUM_{caps_enum_name}_HPP\n')
+                f.write(f'#define SR_CODEGEN_ENUM_{caps_enum_name}_HPP\n\n')
+
+                f.write(f'#include \"{enum_obj.source_path}\"\n\n')
+
+                f.write(f'#include <Codegen/Enums.generated.hpp>\n\n')
+
+                namespace_str = ''
+                if len(enum_obj.namespaces) > 0:
+                    namespace_str = '::'.join(enum_obj.namespaces)
+
+                if len(namespace_str) > 0:
+                    namespace_str += '::'
+
+                f.write(f'template<> struct fmt::formatter<{namespace_str}{enum_obj.name}> {{\n')
+                f.write(f'\tconstexpr auto parse(format_parse_context& ctx) {{ return ctx.begin(); }}\n')
+                f.write(f'\tauto format(const {namespace_str}{enum_obj.name}& val, format_context& ctx) const {{\n')
+
+                f.write(f'\t\tstatic_assert(SR_UTILS_NS::IsCompleteTypeV<{namespace_str}CodegenEnumIncludedChecked_{enum_obj.name}>, "Formatted enum is not included, please include it!");\n')
+                f.write(f'\t\treturn fmt::format_to(ctx.out(), "{{}}", SR_UTILS_NS::EnumReflector::ToStringAtom(val).ToStringView());\n')
+
+                #f.write(f'\t\tif constexpr (SR_UTILS_NS::IsCompleteTypeV<{namespace_str}CodegenEnumIncludedChecked_{enum_obj.name}>) {{\n')
+                #f.write(f'\t\t\treturn fmt::format_to(ctx.out(), "{{}}", SR_UTILS_NS::EnumReflector::ToStringAtom(val).ToStringView());\n')
+                #f.write(f'\t\t}} else {{\n')
+                #f.write(f'\t\t\tSRHalt("Formatted enum \\\"{enum_obj.name}\\\" is not included, please include it!");\n')
+                #f.write(f'\t\t\tstatic_assert(SR_UTILS_NS::AlwaysFalseV<{namespace_str}{enum_obj.name}>, "Formatted enum is not included, please include it!");\n')
+                #f.write(f'\t\t\treturn fmt::format_to(ctx.out(), "{{}}", static_cast<int>(val));\n')
+                #f.write(f'\t\t}}\n')
+
+                f.write(f'\t}}\n')
+                f.write(f'}};\n')
+
+                f.write(f'\n#endif // SR_CODEGEN_ENUM_{caps_enum_name}_HPP\n')
 
 def generate_classes_code(codegen_dir, class_structures):
     file_map = {}
@@ -1060,10 +1447,12 @@ def generate_classes_code(codegen_dir, class_structures):
             f.write(f'#define SR_CODEGEN_{file_name.upper()}_HPP\n\n')
             for class_obj in class_objs:
                 f.write(f'#include "{os.path.abspath(os.path.normpath(class_obj.path))}"\n\n')
+                f.write(f'#include <Utils/Reflection/Property.h>\n')
                 f.write(f'#include <Utils/TypeTraits/ClassDB.h>\n')
                 f.write(f'#include <Utils/TypeTraits/SRClass.h>\n')
                 f.write(f'#include <Utils/TypeTraits/Factory.h>\n')
-                f.write(f'#include <Utils/TypeTraits/SRClassMeta.h>\n\n')
+                f.write(f'#include <Utils/TypeTraits/SRClassMeta.h>\n')
+                f.write(f'#include <Utils/Serialization/MigrationManager.h>\n\n')
 
                 tabs = 0
 

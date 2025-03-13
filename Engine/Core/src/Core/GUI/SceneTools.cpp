@@ -56,7 +56,7 @@ namespace SR_CORE_GUI_NS {
                     pLibrary->ConnectPVD();
                 }
             })
-            .SetWidth(100.f)
+            .SetWidth(120.f)
             .SetItemSpacing(SR_MATH_NS::FVector2(10.f, 0.f));
 
         AddElement()
@@ -82,7 +82,7 @@ namespace SR_CORE_GUI_NS {
             .SetOnClick([&](bool isActive) {
                 GetRenderScene()->GetPipeline()->SetDirty(true);
             })
-            .SetWidth(50.f)
+            .SetWidth(80.f)
             .SetItemSpacing(SR_MATH_NS::FVector2(10.f, 0.f));
 
         Super::Init();

@@ -7,6 +7,7 @@
 
 #include <Utils/Common/Enumerations.h>
 #include <Utils/Types/SafePointer.h>
+#include <Utils/ECS/SceneObject.h>
 
 #include <Scripting/Base/Script.h>
 #include <Scripting/Base/Compiler.h>
@@ -124,6 +125,8 @@ namespace SR_CORE_GUI_NS {
         void ResetToDefault();
 
     private:
+        void InstantiateSO(const SR_UTILS_NS::SceneObject::Ptr& pSO);
+
         void OnMouseMove(const SR_UTILS_NS::MouseInputData* data) override;
 
         void OnKeyDown(const SR_UTILS_NS::KeyboardInputData* data) override;

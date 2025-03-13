@@ -20,6 +20,7 @@
 #include <Core/GUI/FileBrowser.h>
 #include <Core/GUI/About.h>
 #include <Core/GUI/SceneTools.h>
+#include <Core/EngineCommands.h>
 
 #include <Utils/Common/Features.h>
 #include <Utils/ECS/Prefab.h>
@@ -27,6 +28,7 @@
 #include <Utils/Platform/Platform.h>
 #include <Utils/Profile/TracyContext.h>
 #include <Utils/World/SceneUpdater.h>
+#include <Utils/World/ScenePrefabLogic.h>
 #include <Utils/Common/StringAtomLiterals.h>
 
 #include <Graphics/Types/Texture.h>
@@ -432,10 +434,18 @@ namespace SR_CORE_GUI_NS {
 
         if (!SR_WORLD_NS::Scene::IsExists(scenePath)) {
             SR_ERROR("EditorGUI::LoadSceneFromCachedPath() : default scene does not exist! \n\tCreating new one by path: " + scenePath.ToStringRef());
-            return m_engine->SetScene(SR_WORLD_NS::Scene::New(scenePath));
+            m_engine->AddSceneToQueue(SR_WORLD_NS::Scene::NewScene(scenePath, SR_WORLD_NS::SceneLogicType::Asset));
+            return true;
         }
 
-        return m_engine->SetScene(SR_WORLD_NS::Scene::Load(scenePath));
+        auto&& pScene = SR_WORLD_NS::Scene::LoadScene(scenePath);
+        if (!pScene) {
+            SR_ERROR("EditorGUI::LoadSceneFromCachedPath() : failed to load scene by path: " + scenePath.ToStringRef());
+            return false;
+        }
+
+        m_engine->AddSceneToQueue(pScene);
+        return true;
     }
 
     void EditorGUI::ReloadWindows() {
@@ -486,7 +496,7 @@ namespace SR_CORE_GUI_NS {
 
         if (ImGui::BeginMenu("File")) {
             if (ImGui::MenuItem("New scene")) {
-                m_engine->SetScene(SR_WORLD_NS::Scene::New(GetNewScenePath()));
+                m_engine->AddSceneToQueue(SR_WORLD_NS::Scene::NewScene(GetNewScenePath(), SR_WORLD_NS::SceneLogicType::Asset));
                 CacheScenePath(m_engine->GetScene()->GetPath());
             }
 
@@ -495,12 +505,12 @@ namespace SR_CORE_GUI_NS {
             if (ImGui::MenuItem("New prefab")) {
                 if (auto&& pScene = m_engine->GetScene(); pScene.RecursiveLockIfValid()) {
                     //TODO: проверку на то, что нынешний префаб не сохранён, чтобы не спамить ими
-                    pScene->Save();
+                    pScene->SaveScene();
                     CacheScenePath(m_engine->GetScene()->GetPath());
                     pScene.Unlock();
                 }
 
-                m_engine->SetScene(SR_WORLD_NS::Scene::New(GetNewPrefabPath()));
+                m_engine->AddSceneToQueue(SR_WORLD_NS::Scene::NewScene(GetNewPrefabPath(), SR_WORLD_NS::SceneLogicType::Prefab));
             }
 
             ImGui::Separator();
@@ -512,20 +522,20 @@ namespace SR_CORE_GUI_NS {
                     path = path.RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetCachePath());
                     path = path.RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetResPath());
 
-                    if (path.GetExtensionView() == "scene") {
+                    /*if (path.GetExtensionView() == "scene") {
                         auto&& folder = SR_UTILS_NS::StringUtils::GetDirToFileFromFullPath(path);
 
-                        if (auto&& pScene = SR_WORLD_NS::Scene::Load(folder)) {
+                        if (auto&& pScene = SR_WORLD_NS::Scene::LoadScene(folder)) {
                             m_engine->SetScene(pScene);
                             CacheScenePath(folder);
                         }
                     }
-                    else {
-                        if (auto&& pScene = SR_WORLD_NS::Scene::Load(path)) {
-                            m_engine->SetScene(pScene);
-                            CacheScenePath(path);
-                        }
+                    else {*/
+                    if (auto&& pScene = SR_WORLD_NS::Scene::LoadScene(path)) {
+                        m_engine->AddSceneToQueue(pScene);
+                        CacheScenePath(path);
                     }
+                    //}
                 }
             }
 
@@ -533,7 +543,7 @@ namespace SR_CORE_GUI_NS {
 
             if (ImGui::MenuItem("Save")) {
                 if (auto&& pScene = m_engine->GetScene(); pScene.RecursiveLockIfValid()) {
-                    pScene->Save();
+                    pScene->SaveScene();
                     pScene.Unlock();
                 }
             }
@@ -550,11 +560,11 @@ namespace SR_CORE_GUI_NS {
                         path = path.RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetCachePath());
                         path = path.RemoveSubPath(SR_UTILS_NS::ResourceManager::Instance().GetResPath());
 
-                        if (pScene->SaveAt(path)) {
+                        if (pScene->SaveSceneAt(path)) {
                             SR_SYSTEM_LOG("GUISystem::BeginMenuBar() : scene is saved as \"" + path.ToString() + "\"");
 
-                            if (auto&& pSavedScene = SR_WORLD_NS::Scene::Load(path)) {
-                                m_engine->SetScene(pSavedScene);
+                            if (auto&& pSavedScene = SR_WORLD_NS::Scene::LoadScene(path)) {
+                                m_engine->AddSceneToQueue(pSavedScene);
                                 CacheScenePath(path);
                             }
                         }
@@ -574,9 +584,9 @@ namespace SR_CORE_GUI_NS {
 
             if (ImGui::MenuItem("Close scene")) {
                 if (auto&& pScene = m_engine->GetScene()) {
-                    pScene->Save();
+                    pScene->SaveScene();
                 }
-                m_engine->SetScene(SR_WORLD_NS::Scene::Empty());
+                m_engine->AddSceneToQueue(SR_WORLD_NS::Scene::CreateEmptyScene());
                 CacheScenePath("NONE");
             }
 
@@ -602,20 +612,11 @@ namespace SR_CORE_GUI_NS {
         }
 
         if (ImGui::BeginMenu("Editor")) {
-            if (ImGui::MenuItem("Empty GameObject")) {
-                if (auto&& pScene = m_engine->GetScene()) {
-                    pScene->InstanceGameObject("New GameObject"_atom);
-                }
-            }
-
-            ImGui::Separator();
-
             if (ImGui::MenuItem("Instance from file")) {
                 if (auto&& pScene = m_engine->GetScene(); pScene.RecursiveLockIfValid()) {
                     auto&& resourcesPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath();
-                    if (auto path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesPath.ToString(), { { "Any model", "prefab,pmx,fbx,obj,blend,dae,abc,stl,ply,glb,gltf,x3d,sfg,bvh,3ds,gltf" } }); !path.IsEmpty()) {
-                        /// TODO:Сделать обратимость
-                        pScene->InstanceFromFile(path);
+                    if (auto&& path = SR_UTILS_NS::FileDialog::Instance().OpenDialog(resourcesPath.ToString(), { { "Any model", "prefab,pmx,fbx,obj,blend,dae,abc,stl,ply,glb,gltf,x3d,sfg,bvh,3ds,gltf" } }); !path.IsEmpty()) {
+                        InstantiateSO(pScene->InstanceFromFile(path));
                     }
                     pScene.Unlock();
                 }
@@ -626,19 +627,143 @@ namespace SR_CORE_GUI_NS {
 
             ImGui::Separator();
 
-            if (ImGui::MenuItem("Instantiate Cube")) {
-                if (auto&& pScene = m_engine->GetScene()) {
-                    auto&& pGameObject = pScene->InstanceGameObject("Cube"_atom);
-                    if (auto&& pRigidbody = pGameObject->AddComponent<SR_PHYSICS_NS::Types::Rigidbody3D>()) {
-                        pRigidbody->SetMass(1.0f);
-                        pRigidbody->SetType(SR_PHYSICS_NS::ShapeType::Box3D);
-                    }
-
-                    auto&& meshes = SR_GTYPES_NS::Mesh::Load("Engine/Models/cube.obj", SR_GRAPH_NS::MeshType::Static);
-                    for (auto&& pMesh : meshes) {
-                        pGameObject->AddComponent(pMesh);
+            if (ImGui::BeginMenu("Instantiate")) {
+                if (ImGui::MenuItem("Empty")) {
+                    if (auto&& pScene = m_engine->GetScene()) {
+                        InstantiateSO(pScene->InstanceGameObject("New GameObject"_atom).StaticCast<SR_UTILS_NS::SceneObject>());
                     }
                 }
+
+                ImGui::Separator();
+
+                if (ImGui::MenuItem("Cube")) {
+                    if (auto&& pScene = m_engine->GetScene()) {
+                        auto&& pGameObject = pScene->InstanceGameObject("Cube"_atom);
+                        if (auto&& pRigidbody = pGameObject->AddComponent<SR_PHYSICS_NS::Types::Rigidbody3D>()) {
+                            pRigidbody->SetMass(1.0f);
+                            pRigidbody->SetType(SR_PHYSICS_NS::ShapeType::Box3D);
+                        }
+
+                        auto&& meshes = SR_GTYPES_NS::Mesh::Load("Engine/Models/cube.obj", SR_GRAPH_NS::MeshType::Static);
+                        for (auto&& pMesh : meshes) {
+                            pGameObject->AddComponent(pMesh.StaticCast<SR_UTILS_NS::Component>());
+                        }
+                        InstantiateSO(pGameObject.StaticCast<SR_UTILS_NS::SceneObject>());
+                    }
+                }
+
+                ImGui::Separator();
+
+                if (ImGui::MenuItem("Sphere")) {
+                    if (auto&& pScene = m_engine->GetScene()) {
+                        auto&& pGameObject = pScene->InstanceGameObject("Sphere"_atom);
+                        if (auto&& pRigidbody = pGameObject->AddComponent<SR_PHYSICS_NS::Types::Rigidbody3D>()) {
+                            pRigidbody->SetMass(1.0f);
+                            pRigidbody->SetType(SR_PHYSICS_NS::ShapeType::Sphere3D);
+                        }
+
+                        auto&& meshes = SR_GTYPES_NS::Mesh::Load("Engine/Models/sphere.obj", SR_GRAPH_NS::MeshType::Static);
+                        for (auto&& pMesh : meshes) {
+                            pGameObject->AddComponent(pMesh.StaticCast<SR_UTILS_NS::Component>());
+                        }
+                        InstantiateSO(pGameObject.StaticCast<SR_UTILS_NS::SceneObject>());
+                    }
+                }
+
+                ImGui::Separator();
+
+                if (ImGui::MenuItem("Capsule")) {
+                    if (auto&& pScene = m_engine->GetScene()) {
+                        auto&& pGameObject = pScene->InstanceGameObject("Capsule"_atom);
+                        if (auto&& pRigidbody = pGameObject->AddComponent<SR_PHYSICS_NS::Types::Rigidbody3D>()) {
+                            pRigidbody->SetMass(1.0f);
+                            pRigidbody->SetType(SR_PHYSICS_NS::ShapeType::Capsule3D);
+                        }
+
+                        auto&& meshes = SR_GTYPES_NS::Mesh::Load("Engine/Models/capsule.obj", SR_GRAPH_NS::MeshType::Static);
+                        for (auto&& pMesh : meshes) {
+                            pGameObject->AddComponent(pMesh.StaticCast<SR_UTILS_NS::Component>());
+                        }
+                        InstantiateSO(pGameObject.StaticCast<SR_UTILS_NS::SceneObject>());
+                    }
+                }
+
+                ImGui::Separator();
+
+                if (ImGui::MenuItem("Cylinder")) {
+                    if (auto&& pScene = m_engine->GetScene()) {
+                        auto&& pGameObject = pScene->InstanceGameObject("Cylinder"_atom);
+                        if (auto&& pRigidbody = pGameObject->AddComponent<SR_PHYSICS_NS::Types::Rigidbody3D>()) {
+                            pRigidbody->SetMass(1.0f);
+                            pRigidbody->SetType(SR_PHYSICS_NS::ShapeType::Cylinder3D);
+                        }
+
+                        auto&& meshes = SR_GTYPES_NS::Mesh::Load("Engine/Models/cylinder.obj", SR_GRAPH_NS::MeshType::Static);
+                        for (auto&& pMesh : meshes) {
+                            pGameObject->AddComponent(pMesh.StaticCast<SR_UTILS_NS::Component>());
+                        }
+                        InstantiateSO(pGameObject.StaticCast<SR_UTILS_NS::SceneObject>());
+                    }
+                }
+
+                ImGui::Separator();
+
+                if (ImGui::MenuItem("Plane")) {
+                    if (auto&& pScene = m_engine->GetScene()) {
+                        auto&& pGameObject = pScene->InstanceGameObject("Plane"_atom);
+                        if (auto&& pRigidbody = pGameObject->AddComponent<SR_PHYSICS_NS::Types::Rigidbody3D>()) {
+                            pRigidbody->SetMass(1.0f);
+                            pRigidbody->SetType(SR_PHYSICS_NS::ShapeType::Plane3D);
+                        }
+
+                        auto&& meshes = SR_GTYPES_NS::Mesh::Load("Engine/Models/plane.obj", SR_GRAPH_NS::MeshType::Static);
+                        for (auto&& pMesh : meshes) {
+                            pGameObject->AddComponent(pMesh.StaticCast<SR_UTILS_NS::Component>());
+                        }
+                        InstantiateSO(pGameObject.StaticCast<SR_UTILS_NS::SceneObject>());
+                    }
+                }
+
+                ImGui::Separator();
+
+                if (ImGui::MenuItem("Statue")) {
+                    if (auto&& pScene = m_engine->GetScene()) {
+                        auto&& pGameObject = pScene->InstanceGameObject("Statue"_atom);
+                        pGameObject->GetTransform()->SetScale(10.f, 10.f, 10.f);
+                        if (auto&& pRigidbody = pGameObject->AddComponent<SR_PHYSICS_NS::Types::Rigidbody3D>()) {
+                            pRigidbody->SetMass(1.0f);
+                            pRigidbody->SetType(SR_PHYSICS_NS::ShapeType::Convex3D);
+                            pRigidbody->GetCollisionShape()->SetRawMesh("Engine/Models/statue.obj");
+                        }
+
+                        auto&& meshes = SR_GTYPES_NS::Mesh::Load("Engine/Models/statue.obj", SR_GRAPH_NS::MeshType::Static);
+                        for (auto&& pMesh : meshes) {
+                            pGameObject->AddComponent(pMesh.StaticCast<SR_UTILS_NS::Component>());
+                        }
+                        InstantiateSO(pGameObject.StaticCast<SR_UTILS_NS::SceneObject>());
+                    }
+                }
+
+                ImGui::Separator();
+
+                if (ImGui::MenuItem("Monkey")) {
+                    if (auto&& pScene = m_engine->GetScene()) {
+                        auto&& pGameObject = pScene->InstanceGameObject("Monkey"_atom);
+                        if (auto&& pRigidbody = pGameObject->AddComponent<SR_PHYSICS_NS::Types::Rigidbody3D>()) {
+                            pRigidbody->SetMass(1.0f);
+                            pRigidbody->SetType(SR_PHYSICS_NS::ShapeType::Convex3D);
+                            pRigidbody->GetCollisionShape()->SetRawMesh("Engine/Models/monkey.obj");
+                        }
+
+                        auto&& meshes = SR_GTYPES_NS::Mesh::Load("Engine/Models/monkey.obj", SR_GRAPH_NS::MeshType::Static);
+                        for (auto&& pMesh : meshes) {
+                            pGameObject->AddComponent(pMesh.StaticCast<SR_UTILS_NS::Component>());
+                        }
+                        InstantiateSO(pGameObject.StaticCast<SR_UTILS_NS::SceneObject>());
+                    }
+                }
+
+                ImGui::EndMenu();
             }
 
             ImGui::EndMenu();
@@ -775,5 +900,38 @@ namespace SR_CORE_GUI_NS {
             }
         }
         return nullptr;
+    }
+
+    void EditorGUI::InstantiateSO(const SR_UTILS_NS::SceneObject::Ptr& pSO) {
+        if (!pSO) {
+            return;
+        }
+
+        SR_UTILS_NS::SceneObject::Ptr pInstantiateTarget;
+        if (auto&& pHierarchy = GetWidget<Hierarchy>(); pHierarchy) {
+            if (auto&& selected = pHierarchy->GetSelected(); selected.size() == 1 && *selected.begin()) {
+                pInstantiateTarget = *selected.begin();
+            }
+        }
+
+        if (auto&& pScene = GetEngine()->GetScene(); pScene && !pInstantiateTarget) {
+            if (auto&& pLogic = pScene->GetLogicBase().DynamicCast<SR_WORLD_NS::ScenePrefabLogic>()) {
+                if (auto&& pPrefabRoot = pLogic->GetPrefabRoot()) {
+                    pInstantiateTarget = pPrefabRoot;
+                }
+                else {
+                    SRHalt("EditorGUI::InstantiateSO() : prefab root is nullptr!");
+                    pSO->Destroy();
+                    return;
+                }
+            }
+        }
+
+        if (pInstantiateTarget) {
+            pInstantiateTarget->AddChild(pSO);
+        }
+
+        auto&& pCmd = new SR_CORE_NS::Commands::SceneObjectInstance(GetEngine(), pSO);
+        GetEngine()->GetCmdManager()->Store(pCmd);
     }
 }

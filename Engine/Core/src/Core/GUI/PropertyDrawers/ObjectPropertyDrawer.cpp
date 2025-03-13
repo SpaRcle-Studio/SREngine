@@ -3,118 +3,138 @@
 //
 
 #include <Core/GUI/PropertyDrawers/ObjectPropertyDrawer.h>
+#include <Graphics/GUI/Utils.h>
 
 #include <Codegen/ObjectPropertyDrawer.generated.hpp>
 
 namespace SR_CORE_GUI_NS {
     PropertyDrawerFeedback ObjectPropertyDrawer::Draw(const PropertyDrawerContext& context) {
+        SR_TRACY_ZONE;
+
         PropertyDrawerFeedback feedback;
 
         SR_UTILS_NS::Reflection::Value value = context.GetValue();
 
         ImGui::PushID(context.pOwner);
-        ImGui::PushID(context.GetProperty().GetName().ToCStr());
+        ImGui::PushID(context.GetPropertyName().ToCStr());
 
         ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2{0, 0});
 
         auto&& pWindow = ImGui::GetCurrentWindow();
+
+        m_isOpened |= context.noHeader;
         const ImGuiDir_ dir = m_isOpened ? ImGuiDir_Down : ImGuiDir_Right;
 
-        std::string_view typeName = value.GetTypeName();
-        if (size_t pos = typeName.rfind(':'); pos != std::string_view::npos) {
-            typeName.remove_prefix(pos + 1);
-        }
+        SR_UTILS_NS::SRClass* pClassValue = value.GetSRClass();
 
         ImVec2 buttonSize;
 
-        if (context.pValue) {
+        if (context.pValue && !context.noHeader) {
             const ImVec2 arrowPos = pWindow->DC.CursorPos + ImVec2(5, 5);
             ImGui::RenderArrow(pWindow->DrawList, arrowPos, ImGui::GetColorU32(ImGuiCol_Text), dir, 1.f);
 
             const ImVec2 mainButtonSize = { 30, context.fieldHeight };
             buttonSize = { context.fieldWidth - mainButtonSize.x, context.fieldHeight };
 
+            auto&& stackSize = SR_GRAPH_GUI_NS::BeginForceEnabled();
             if (ImGui::Button("", mainButtonSize)) {
                 m_isOpened = !m_isOpened;
             }
+            SR_GRAPH_GUI_NS::EndForceEnabled(stackSize);
         }
-        else {
+        else if (!context.noHeader) {
             const ImVec2 arrowPos = pWindow->DC.CursorPos + ImVec2(0, 5);
             ImGui::RenderArrow(pWindow->DrawList, arrowPos, ImGui::GetColorU32(ImGuiCol_Text), dir, 1.f);
 
-            const float_t arrowWidth = context.lineHeight * 0.75f;
-            ImGui::Dummy(ImVec2(arrowWidth, 0));
+            ImGui::Dummy(ImVec2(context.GetArrowWidth(), 0));
 
             ImGui::SameLine();
 
-            const ImVec2 mainButtonSize = { SR_MAX(context.fieldTitleWidth - arrowWidth, 0), context.fieldHeight };
+            const ImVec2 mainButtonSize = { SR_MAX(context.fieldTitleWidth - context.GetArrowWidth(), 0), context.fieldHeight };
             const float_t titleTotalWidth = context.fieldTitleWidth;
             buttonSize = { (context.fieldWidth + context.fieldTitleWidth) - titleTotalWidth, context.fieldHeight };
 
-            SR_UTILS_NS::StringAtom displayName = context.GetProperty().GetEditorParams().GetDisplayName();
+            SR_UTILS_NS::StringAtom displayName = context.GetEditorParams().GetDisplayName();
+            auto&& stackSize = SR_GRAPH_GUI_NS::BeginForceEnabled();
             if (ImGui::Button(displayName.c_str(), mainButtonSize)) {
                 m_isOpened = !m_isOpened;
             }
+            SR_GRAPH_GUI_NS::EndForceEnabled(stackSize);
         }
 
-        ImGui::SameLine();
+        if (!context.noHeader) {
+            ImGui::SameLine();
 
-        ImGui::BeginDisabled();
-        ImGui::Button("{}"_format(typeName).c_str(), buttonSize);
-        ImGui::EndDisabled();
+            ImGui::BeginDisabled();
+            ImGui::Button("{}"_format(pClassValue->GetMeta()->GetFactoryName()).c_str(), buttonSize);
+            ImGui::EndDisabled();
+        }
 
         if (m_isOpened) {
-            if (const SR_UTILS_NS::SRClassMeta* pMeta = SR_UTILS_NS::Factory::Instance().GetType(typeName)) {
-                if (m_drawers.empty()) {
-                    pMeta->ForEachProperty([&](auto&& property, uint64_t index) {
-                        SR_UTILS_NS::StringAtom inspector = property.GetEditorParams().GetInspector();
-
-                        if (inspector.Empty()) {
-                            inspector = GetValueInspector(property.Get(value.Data()));
-                        }
-
-                        if (inspector.Empty()) {
-                            m_drawers.emplace_back();
-                            return;
-                        }
-
-                        PropertyDrawerBase::Ptr pDrawer = SR_UTILS_NS::Factory::Instance().Create<PropertyDrawerBase>(inspector);
-                        if (!pDrawer) {
-                            m_drawers.emplace_back();
-                            return;
-                        }
-
-                        m_drawers.emplace_back(pDrawer);
-                    });
-                }
+            if (const SR_UTILS_NS::SRClassMeta* pMeta = pClassValue->GetMeta()) {
+                PropertyDrawerContext propertyContext = context;
+                propertyContext.pValue = nullptr;
+                float_t totalWidth = (context.fieldWidth + context.fieldTitleWidth);
+                totalWidth -= ((!context.pValue && !context.noHeader) ? context.GetArrowWidth() : 0.f);
+                propertyContext.fieldWidth = totalWidth * 0.7f;
+                propertyContext.fieldTitleWidth = totalWidth * 0.3f;
+                propertyContext.pOwner = pClassValue;
+                propertyContext.noHeader = false;
 
                 pMeta->ForEachProperty([&](auto&& property, uint64_t index) {
+                    if (property.IsHidden(pClassValue)) {
+                        return;
+                    }
+
+                    SR_UTILS_NS::StringAtom inspector = property.GetEditorParams().GetInspector();
+                    if (inspector.Empty()) {
+                        inspector = GetValueInspector(property.Get(pClassValue));
+                    }
+
+                    if (inspector.Empty()) {
+                        SR_GRAPH_GUI_NS::ColoredText("Missing inspector for element!", ImColor(255, 0, 0));
+                        return;
+                    }
+
+                    if (m_drawers.size() <= index) {
+                        m_drawers.resize(index + 1);
+                    }
+
+                    if (!m_drawers[index] || m_drawers[index]->GetMeta()->GetFactoryName() != inspector) {
+                        m_drawers[index] = SR_UTILS_NS::Factory::Instance().Create<PropertyDrawerBase>(inspector);
+                    }
+
                     if (!m_drawers[index]) {
                         SR_GRAPH_GUI_NS::ColoredText("Missing inspector for element!", ImColor(255, 0, 0));
                         return;
                     }
 
-                    if (!context.pValue) {
-                        ImGui::Dummy(ImVec2(context.lineHeight, 5.0f));
+                    if (!context.pValue && !context.noHeader) {
+                        ImGui::Dummy(ImVec2(context.GetArrowWidth(), 5.0f));
                         ImGui::SameLine();
                     }
 
-                    PropertyDrawerContext propertyContext = context;
-                    propertyContext.pValue = nullptr;
-                    float_t totalWidth = (context.fieldWidth + context.fieldTitleWidth) - context.lineHeight;
-                    propertyContext.fieldWidth = totalWidth * 0.7;
-                    propertyContext.fieldTitleWidth = totalWidth * 0.3;
+                    propertyContext.noHeader = property.GetEditorParams().IsNoHeader();
                     propertyContext.pProperty = &property;
-                    propertyContext.pOwner = value.Data();
+
+                    SR_GRAPH_GUI_NS::ImGuiDisabledLockGuard guard(property.IsReadOnly());
 
                     ImGui::BeginGroup();
                     PropertyDrawerFeedback propertyFeedback = m_drawers[index]->Draw(propertyContext);
                     ImGui::EndGroup();
 
                     if (propertyFeedback.isChanged) {
+                        property.OnChanged(context.pOwner);
                         feedback.isChanged = true;
                     }
                 });
+
+                propertyContext.noHeader = false;
+
+                PropertyDrawerFeedback customFeedback = DrawCustomProperties(context);
+                if (customFeedback.isChanged) {
+                    feedback.isChanged = true;
+                }
             }
             else {
                 SR_GRAPH_GUI_NS::ColoredText("Failed to get meta for object!", ImColor(255, 0, 0));
@@ -126,9 +146,7 @@ namespace SR_CORE_GUI_NS {
         ImGui::PopID();
         ImGui::PopID();
 
-        if (!context.pValue && feedback.isChanged && !value.IsRef()) {
-            context.GetProperty().Set(context.pOwner, value);
-        }
+        SetValue(context, feedback, value);
 
         return feedback;
     }

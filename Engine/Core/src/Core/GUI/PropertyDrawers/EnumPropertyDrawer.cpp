@@ -37,6 +37,9 @@ namespace SR_CORE_GUI_NS {
             const ImVec2 buttonSize = { context.fieldTitleWidth, context.fieldHeight };
 
             if (ImGui::Button(context.GetProperty().GetEditorParams().GetDisplayName().c_str(), buttonSize)) {
+                if (context.onBeforeChangeCallback) {
+                    context.onBeforeChangeCallback(false);
+                }
                 feedback.isChanged = true;
                 value = context.GetProperty().GetResetValue() ? context.GetProperty().GetResetValue() : context.GetProperty().GetDefaultValue();
                 value = value.DetachIfConst();
@@ -92,14 +95,15 @@ namespace SR_CORE_GUI_NS {
         if (selectedIndex) {
             int64_t newEnumValue = pReflector->AtInternal(selectedIndex.value()).value();
             if (newEnumValue != enumValue) {
+                if (context.onBeforeChangeCallback) {
+                    context.onBeforeChangeCallback(false);
+                }
                 pReflector->WriteEnumValueToPointerInternal(pMappedRaw, newEnumValue);
                 feedback.isChanged = true;
             }
         }
 
-        if (!context.pValue && feedback.isChanged && !value.IsRef()) {
-            context.GetProperty().Set(context.pOwner, value);
-        }
+        SetValue(context, feedback, value);
 
         ImGui::PopStyleVar();
 

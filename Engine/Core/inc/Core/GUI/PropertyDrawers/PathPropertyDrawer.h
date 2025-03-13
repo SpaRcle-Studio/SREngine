@@ -1,0 +1,22 @@
+//
+// Created by Monika on 30.01.2025.
+//
+
+#ifndef SR_ENGINE_GUI_PATH_PROPERTY_DRAWER_H
+#define SR_ENGINE_GUI_PATH_PROPERTY_DRAWER_H
+
+#include <Core/GUI/PropertyDrawer.h>
+
+namespace SR_CORE_GUI_NS {
+    class PathPropertyDrawer : public PropertyDrawerBase {
+        SR_CLASS()
+    public:
+        using Ptr = SR_HTYPES_NS::SharedPtr<PathPropertyDrawer>;
+
+    public:
+        PropertyDrawerFeedback Draw(const PropertyDrawerContext& context) override;
+
+    };
+}
+
+#endif //SR_ENGINE_GUI_PATH_PROPERTY_DRAWER_H

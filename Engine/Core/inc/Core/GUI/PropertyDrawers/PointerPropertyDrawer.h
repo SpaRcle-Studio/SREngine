@@ -11,15 +11,21 @@ namespace SR_CORE_GUI_NS {
     class PointerPropertyDrawer : public PropertyDrawerBase {
         SR_CLASS()
     public:
+        using Ptr = SR_HTYPES_NS::SharedPtr<PointerPropertyDrawer>;
+
+    public:
         PropertyDrawerFeedback Draw(const PropertyDrawerContext& context) override;
 
+        virtual void OnObjectReplaced(SRClass* pOld, SRClass* pNew) { }
+
     private:
-        std::string_view m_lastTypeName;
+        SR_UTILS_NS::StringAtom m_lastTypeName;
         std::string m_default;
         std::string m_searchBuffer;
         bool m_comboOpened = false;
         bool m_isOpened = false;
-        std::vector<PropertyDrawerBase::Ptr> m_drawers;
+        bool m_openedByDefault = false;
+        ObjectPropertyDrawer::Ptr m_objectDrawer;
         std::vector<std::string> m_typeNames;
 
     };

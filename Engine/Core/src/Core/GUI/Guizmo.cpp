@@ -10,7 +10,7 @@
 #include <Core/GUI/Guizmo.h>
 
 namespace SR_CORE_GUI_NS {
-    Guizmo::Guizmo(const EnginePtr& pEngine)
+    /*Guizmo::Guizmo(const EnginePtr& pEngine)
         : SR_UTILS_NS::InputHandler()
         , m_engine(pEngine)
     { }
@@ -351,5 +351,5 @@ namespace SR_CORE_GUI_NS {
             default:
                 break;
         }
-    }
+    }*/
 }

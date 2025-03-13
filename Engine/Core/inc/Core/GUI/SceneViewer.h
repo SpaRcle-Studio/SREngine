@@ -44,7 +44,7 @@ namespace SR_CORE_GUI_NS {
         void OnKeyPress(const SR_UTILS_NS::KeyboardInputData* data) override;
 
         SR_NODISCARD SR_MATH_NS::FPoint GetImagePosition() const;
-        SR_NODISCARD SR_MATH_NS::IPoint GetTextureSize() const { return m_textureSize; }
+        SR_NODISCARD SR_MATH_NS::FPoint GetTextureSize() const { return m_textureSize; }
         SR_NODISCARD GameObjectPtr GetGizmo() const { return m_gizmo; }
 
     private:
@@ -66,13 +66,12 @@ namespace SR_CORE_GUI_NS {
         void DrawTexture(SR_MATH_NS::IVector2 winSize, SR_MATH_NS::IVector2 texSize, uint32_t id, bool centralize);
 
     private:
-        SR_MATH_NS::IVector2 m_textureSize;
+        SR_MATH_NS::FVector2 m_textureSize;
         ImVec2 m_imagePosition;
 
         WindowPtr m_window;
         EnginePtr m_engine;
 
-        SR_MATH_NS::FVector3 m_velocity;
         SR_MATH_NS::FVector3 m_cameraRotation;
         SR_MATH_NS::FVector3 m_cameraTranslation;
 

@@ -8,6 +8,8 @@
 
 #include <Utils/ECS/ComponentManager.h>
 
+#include <Codegen/Rigidbody3D.generated.hpp>
+
 namespace SR_PTYPES_NS {
     SR_UTILS_NS::Measurement Rigidbody3D::GetMeasurement() const {
         return SR_UTILS_NS::Measurement::Space3D;
@@ -63,43 +65,5 @@ namespace SR_PTYPES_NS {
         if (auto&& pImpl = GetImpl<Rigidbody3DImpl>()) {
             return pImpl->SetAngularVelocity(velocity);
         }
-    }
-
-    bool Rigidbody3D::InitializeEntity() noexcept {
-        m_properties.AddCustomProperty<SR_UTILS_NS::StandardProperty>("Linear lock")
-            .SetGetter([this](void* pData) {
-                *reinterpret_cast<SR_MATH_NS::BVector3*>(pData) = GetLinearLock();
-            })
-            .SetSetter([this](void* pData) {
-                SetLinearLock(*reinterpret_cast<SR_MATH_NS::BVector3*>(pData));
-            })
-            .SetType(SR_UTILS_NS::StandardType::BVector3);
-
-        m_properties.AddCustomProperty<SR_UTILS_NS::StandardProperty>("Angular lock")
-            .SetGetter([this](void* pData) {
-                *reinterpret_cast<SR_MATH_NS::BVector3*>(pData) = GetAngularLock();
-            })
-            .SetSetter([this](void* pData) {
-                SetAngularLock(*reinterpret_cast<SR_MATH_NS::BVector3*>(pData));
-            })
-            .SetType(SR_UTILS_NS::StandardType::BVector3);
-
-        m_properties.AddCustomProperty<SR_UTILS_NS::StandardProperty>("Linear velocity")
-            .SetGetter([this](void* pData) {
-                *reinterpret_cast<SR_MATH_NS::FVector3*>(pData) = GetLinearVelocity();
-            })
-            .SetType(SR_UTILS_NS::StandardType::FVector3)
-            .SetReadOnly()
-            .SetDontSave();
-
-        m_properties.AddCustomProperty<SR_UTILS_NS::StandardProperty>("Angular velocity")
-            .SetGetter([this](void* pData) {
-                *reinterpret_cast<SR_MATH_NS::FVector3*>(pData) = GetAngularVelocity();
-            })
-            .SetType(SR_UTILS_NS::StandardType::FVector3)
-            .SetReadOnly()
-            .SetDontSave();
-
-        return Rigidbody::InitializeEntity();
     }
 }

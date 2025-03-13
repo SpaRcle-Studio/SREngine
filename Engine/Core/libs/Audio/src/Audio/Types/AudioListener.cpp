@@ -9,11 +9,9 @@
 #include <Utils/ECS/GameObject.h>
 #include <Utils/ECS/Transform.h>
 
-namespace SR_AUDIO_NS{
-    AudioListener::AudioListener()
-        : SR_UTILS_NS::Component()
-    { }
+#include <Codegen/AudioListener.generated.hpp>
 
+namespace SR_AUDIO_NS{
     void AudioListener::OnEnable() {
         SR_TRACY_ZONE;
 
@@ -37,19 +35,6 @@ namespace SR_AUDIO_NS{
             m_listenerContext = nullptr;
         }
         Super::OnEnable();
-    }
-
-    bool AudioListener::InitializeEntity() noexcept {
-        GetComponentProperties().AddEnumProperty("Distance model", &m_distanceModel)
-            .SetSetter([this](const SR_UTILS_NS::StringAtom& value) { SetDistanceModel(SR_UTILS_NS::EnumReflector::FromString<ListenerDistanceModel>(value)); });
-
-        GetComponentProperties().AddStandardProperty("Gain", &m_gain)
-            .SetSetter([this](void* pData) { SetGain(*static_cast<float_t*>(pData)); });
-
-        GetComponentProperties().AddStandardProperty<SR_MATH_NS::FVector3>("Velocity", &m_velocity)
-            .SetSetter([this](void* pData) { SetVelocity(*static_cast<SR_MATH_NS::FVector3*>(pData)); });
-
-        return Super::InitializeEntity();
     }
 
     void AudioListener::OnDestroy() {

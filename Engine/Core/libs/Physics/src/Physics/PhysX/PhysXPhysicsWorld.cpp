@@ -124,6 +124,8 @@ namespace SR_PHYSICS_NS {
     }
 
     bool PhysXPhysicsWorld::AddRigidbody(PhysicsWorld::RigidbodyPtr pRigidbody) {
+        SR_TRACY_ZONE;
+
         if (!pRigidbody) {
             SRHalt("pRigidbody is nullptr!");
             return false;
@@ -141,6 +143,8 @@ namespace SR_PHYSICS_NS {
     }
 
     bool PhysXPhysicsWorld::RemoveRigidbody(PhysicsWorld::RigidbodyPtr pRigidbody) {
+        SR_TRACY_ZONE;
+
         if (!pRigidbody) {
             SRHalt("pRigidbody is nullptr!");
             return false;

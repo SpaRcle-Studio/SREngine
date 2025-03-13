@@ -70,6 +70,9 @@ namespace SR_CORE_GUI_NS {
         ImGui::SameLine();
 
         if (ImGui::Button("Add", buttonSize)) {
+            if (context.onBeforeChangeCallback) {
+                context.onBeforeChangeCallback(false);
+            }
             container.Resize(container.Size() + 1);
             feedback.isChanged = true;
         }
@@ -78,6 +81,9 @@ namespace SR_CORE_GUI_NS {
 
         if (ImGui::Button("Remove", buttonSize)) {
             if (!container.Empty()) {
+                if (context.onBeforeChangeCallback) {
+                    context.onBeforeChangeCallback(false);
+                }
                 container.Resize(container.Size() - 1);
                 feedback.isChanged = true;
             }
@@ -86,6 +92,9 @@ namespace SR_CORE_GUI_NS {
         ImGui::SameLine();
 
         if (ImGui::Button("Clear", buttonSize)) {
+            if (context.onBeforeChangeCallback) {
+                context.onBeforeChangeCallback(false);
+            }
             container.Clear();
             feedback.isChanged = true;
         }
@@ -97,7 +106,7 @@ namespace SR_CORE_GUI_NS {
         if (m_isOpened) {
             for (auto&& pIt = container.begin(); pIt != container.end(); ++pIt) {
                 SR_UTILS_NS::Reflection::Value element = *pIt;
-                uint64_t index = std::distance(container.begin(), pIt);
+                uint64_t index = SR_UTILS_NS::Distance(container.begin(), pIt);
                 ImGui::PushID(index);
 
                 ImVec2 itemButtonSize = { 40, context.fieldHeight };
@@ -128,6 +137,7 @@ namespace SR_CORE_GUI_NS {
                 elementContext.fieldWidth += context.fieldTitleWidth;
                 elementContext.fieldWidth -= itemButtonSize.x;
                 elementContext.fieldTitleWidth = 0.f;
+                elementContext.noHeader = false;
 
                 ImGui::BeginGroup();
                 PropertyDrawerFeedback elementFeedback = m_drawers[index]->Draw(elementContext);
@@ -146,9 +156,7 @@ namespace SR_CORE_GUI_NS {
         ImGui::PopID();
         ImGui::PopID();
 
-        if (!context.pValue && feedback.isChanged && !value.IsRef()) {
-            context.GetProperty().Set(context.pOwner, value);
-        }
+        SetValue(context, feedback, value);
 
         return feedback;
     }

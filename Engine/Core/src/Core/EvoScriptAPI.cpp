@@ -17,7 +17,7 @@
 
 #include <Graphics/Loaders/ObjLoader.h>
 #include <Graphics/Types/Skybox.h>
-#include <Graphics/Font/ITextComponent.h>
+#include <Graphics/Font/Text.h>
 #include <Graphics/Types/Geometry/ProceduralMesh.h>
 #include <Graphics/Animations/Animator.h>
 #include <Graphics/Animations/AnimationGraph.h>
@@ -209,7 +209,7 @@ namespace SpaRcle {
         //ESRegisterMethod(EvoScript::Public, generator, Scene, Find, SharedPtr<GameObject>, ESArg1(const std::string& name), ESArg1(name))
         //ESRegisterMethod(EvoScript::Public, generator, Scene, FindOrInstance, SharedPtr<GameObject>, ESArg1(const std::string& name), ESArg1(name))
         ESRegisterMethodArg0(EvoScript::Public, generator, Scene, GetLogicBase, SharedPtr<SceneLogic>)
-        ESRegisterStaticMethod(EvoScript::Public, generator, Scene, New, SharedPtr<Scene>, ESArg1(const std::string& name), ESArg1(name))
+        //ESRegisterStaticMethod(EvoScript::Public, generator, Scene, New, SharedPtr<Scene>, ESArg1(const std::string& name), ESArg1(name))
 
         generator->RegisterNewClass("SceneCubeChunkLogic", "Scene");
 
@@ -231,10 +231,6 @@ namespace SpaRcle {
 
         generator->RegisterNewClass("Component", "Component", { "Libraries/Math/Vector3.h", "string" });
 
-        ESRegisterCustomMethodArg0(EvoScript::Public, generator, Component, GetComponentName, std::string, {
-            return ptr->GetComponentName();
-        })
-
         ESRegisterMethodArg0(EvoScript::Public, generator, Component, BaseComponent, Component*)
         ESRegisterMethodArg0(EvoScript::Public, generator, Component, GetGameObject, SharedPtr<GameObject>)
 
@@ -242,9 +238,9 @@ namespace SpaRcle {
 
         ESRegisterMethod(EvoScript::Public, generator, Component, SetEnabled, void, ESArg1(bool v), ESArg1(v))
 
-        ESRegisterCustomStaticMethod(EvoScript::Public, generator, Component, Create, Component*, ESArg1(const std::string& name), {
-            return SR_UTILS_NS::ComponentManager::Instance().CreateComponentOfName(name);
-        });
+        //ESRegisterCustomStaticMethod(EvoScript::Public, generator, Component, Create, Component*, ESArg1(const std::string& name), {
+        //    return SR_UTILS_NS::ComponentManager::Instance().CreateComponentOfName(name);
+        //});
 
         generator->AddIncompleteType("GameObject", "Component");
     }
@@ -278,10 +274,10 @@ namespace SpaRcle {
             "Libraries/ResourceManager.h", "Libraries/Component.h", "Libraries/Math/Vector3.h", "Libraries/Material.h"
         }, { });
 
-        ESRegisterStaticMethod(EvoScript::Public, generator, Mesh, Load, std::vector<Mesh*>, ESArg2(const std::string& path, MeshType type), ESArg2(path, type))
+        //ESRegisterStaticMethod(EvoScript::Public, generator, Mesh, Load, std::vector<Mesh*>, ESArg2(const std::string& path, MeshType type), ESArg2(path, type))
 
         //ESRegisterMethod(EvoScript::Public, generator, Mesh, SetMaterial, void, ESArg1(Material* material), ESArg1(material))
-        ESRegisterMethodArg0(EvoScript::Public, generator, Mesh, GetGeometryName, std::string)
+        //ESRegisterMethodArg0(EvoScript::Public, generator, Mesh, GetGeometryName, std::string)
         //ESRegisterMethodArg0(EvoScript::Public, generator, Mesh, GetMaterial, Material*)
     }
 
@@ -296,7 +292,7 @@ namespace SpaRcle {
         }, { { "IResource", EvoScript::Public }, { "Component", EvoScript::Public } });
 
         //ESRegisterMethod(EvoScript::Public, generator, ProceduralMesh, SetMaterial, void, ESArg1(Material* material), ESArg1(material))
-        ESRegisterMethodArg0(EvoScript::Public, generator, ProceduralMesh, GetGeometryName, std::string)
+        //ESRegisterMethodArg0(EvoScript::Public, generator, ProceduralMesh, GetGeometryName, std::string)
         //ESRegisterMethodArg0(EvoScript::Public, generator, ProceduralMesh, GetMaterial, Material*)
         ESRegisterMethod(EvoScript::Public, generator, ProceduralMesh, SetVertices, void, ESArg1(const std::vector<StaticMeshVertex>& vertices), ESArg1(vertices))
         ESRegisterMethod(EvoScript::Public, generator, ProceduralMesh, SetIndexedVertices, void, ESArg2(void* pData, uint64_t count), ESArg2(pData, count))
@@ -335,7 +331,7 @@ namespace SpaRcle {
         ESRegisterCustomMethodArg0(EvoScript::Public, generator, GameObject, GetTag, std::string, {
             return ptr->GetTag().ToString();
         })
-        ESRegisterMethodArg0(EvoScript::Public, generator, GameObject, GetTransform, Transform*)
+        ESRegisterMethodArg0(EvoScript::Public, generator, GameObject, GetTransform, SharedPtr<Transform>)
         ESRegisterCustomMethodArg0(EvoScript::Public, generator, GameObject, GetScene, Scene*, {
             return ptr->GetScene();
         })

@@ -20,6 +20,7 @@
 #include <Graphics/Render/RenderTechnique.h>
 #include <Graphics/Pass/ColorBufferPass.h>
 #include <Graphics/Pass/FlatColorBufferPass.h>
+#include <Utils/Game/CameraFlyMover.h>
 
 namespace SR_CORE_GUI_NS {
     SceneViewer::SceneViewer(const EnginePtr& pEngine, Hierarchy* hierarchy)
@@ -38,7 +39,7 @@ namespace SR_CORE_GUI_NS {
     }
 
     void SceneViewer::Draw() {
-        if (!m_scene.RecursiveLockIfValid()) {
+        if (!m_scene) {
             return;
         }
 
@@ -64,56 +65,57 @@ namespace SR_CORE_GUI_NS {
                         pMesh->SetMaterial(pMaterial);
                     }
                 }
-                m_platform->GetTransform()->SetScale(2.5, 1.f, 2.5);
+                m_platform->GetTransform()->SetScale(5.f, 1.f, 5.f);
             }
+            m_platform->AddEditorFlags(SR_UTILS_NS::EditorFlags::Hidden);
         }
 
-        if (m_camera.RecursiveLockIfValid()) {
-            m_cameraTranslation = m_camera->GetTransform()->GetTranslation();
-            m_cameraRotation = m_camera->GetTransform()->GetRotation();
-
-            auto pCamera = m_camera->GetComponent<SR_GTYPES_NS::Camera>();
-
-            ImGui::BeginGroup();
-
-            for (auto&& pSubWidget : m_subWidgets) {
-                pSubWidget->DrawAsSubWindow();
-            }
-
-            ImGui::Separator();
-
-            if (auto&& pFrameBuffer = GetContext()->FindFramebuffer("SceneViewFBO"_atom, pCamera.Get())) {
-                m_id = pFrameBuffer->GetColorTexture(0);
-            }
-
-            if (ImGui::BeginChild("ViewerTexture"))
-            {
-                m_windowSize = SR_MATH_NS::Vector2(static_cast<int32_t>(ImGui::GetWindowSize().x), static_cast<int32_t>(ImGui::GetWindowSize().y));
-
-                if (!UpdateViewSize() && pCamera && m_id != SR_ID_INVALID && pCamera->IsActive())
-                {
-                    if (GetSceneTools()->GetViewMode() == EditorSceneViewMode::WindowSize) {
-                        DrawTexture(m_windowSize, m_window->GetSize().Cast<int32_t>(), m_id, true);
-                    }
-                    else {
-                        DrawTexture(m_windowSize, m_windowSize, m_id, true);
-                    }
-
-                    CheckFocused();
-                    CheckHovered();
-                }
-                ImGui::EndChild();
-            }
-
-            ImGui::EndGroup();
-
-            m_camera.Unlock();
-        }
-        else {
+        if (!m_camera) {
             m_camera = m_scene->Find("Editor camera"_atom).DynamicCast<SR_UTILS_NS::GameObject>();
         }
 
-        m_scene.Unlock();
+        if (!m_camera) {
+            return;
+        }
+
+        auto&& pCamera = m_camera->GetComponent<EditorCamera>();
+        if (!pCamera) {
+            SR_WARN("SceneViewer::Draw() : editor camera component not found!");
+            return;
+        }
+
+        ImGui::BeginGroup();
+
+        for (auto&& pSubWidget : m_subWidgets) {
+            pSubWidget->DrawAsSubWindow();
+        }
+
+        ImGui::Separator();
+
+        if (auto&& pFrameBuffer = GetContext()->FindFramebuffer("SceneViewFBO"_atom, pCamera.Get())) {
+            m_id = pFrameBuffer->GetColorTexture(0);
+        }
+
+        if (ImGui::BeginChild("ViewerTexture"))
+        {
+            m_windowSize = SR_MATH_NS::Vector2(static_cast<int32_t>(ImGui::GetWindowSize().x), static_cast<int32_t>(ImGui::GetWindowSize().y));
+
+            if (!UpdateViewSize() && pCamera && m_id != SR_ID_INVALID && pCamera->IsActive())
+            {
+                if (GetSceneTools()->GetViewMode() == EditorSceneViewMode::WindowSize) {
+                    DrawTexture(m_windowSize, m_window->GetSize().Cast<int32_t>(), m_id, true);
+                }
+                else {
+                    DrawTexture(m_windowSize, m_windowSize, m_id, true);
+                }
+
+                CheckFocused();
+                CheckHovered();
+            }
+            ImGui::EndChild();
+        }
+
+        ImGui::EndGroup();
     }
 
     void SceneViewer::SetScene(const SR_WORLD_NS::Scene::Ptr& scene) {
@@ -127,7 +129,7 @@ namespace SR_CORE_GUI_NS {
         auto&& pLogic = m_scene ? m_scene->GetLogicBase() : SR_WORLD_NS::SceneLogic::Ptr();
 
         /// если сцена сломана, или это "пустышка", то не создаем камеру, т.к. рендерить нет смыла 
-        if (!pLogic || pLogic->IsDefault() || !m_enabled) {
+        if (!pLogic || !m_enabled) {
             SetCameraEnabled(false);
             SetGizmoEnabled(false);
             return;
@@ -140,79 +142,26 @@ namespace SR_CORE_GUI_NS {
     }
 
     void SceneViewer::FixedUpdate() {
-        float_t velocityFactor = GetSceneTools()->GetCameraVelocityFactor();
-        m_velocity *= 0.8f;
+        const float_t velocityFactor = GetSceneTools()->GetCameraVelocityFactor();
+        const bool isDisabled = !IsOpen() || (!IsHovered() && !m_updateNonHoveredSceneViewer);
 
-        if (!m_velocity.Empty() && m_camera) {
-            m_camera->GetTransform()->Translate(m_velocity);
+        if (m_camera) {
+            if (auto&& pMover = m_camera->GetComponent<SR_UTILS_NS::CameraFlyMover>()) {
+                pMover->SetVelocityFactor(velocityFactor);
+                pMover->SetActive(!isDisabled);
+            }
+
+            m_cameraTranslation = m_camera->GetTransform()->GetTranslation();
+            m_cameraRotation = m_camera->GetTransform()->GetRotation();
         }
 
-        if (!IsOpen() || (!IsHovered() && !m_updateNonHoveredSceneViewer)) {
+        if (isDisabled) {
             return;
         }
 
         if (m_camera && !m_gizmo) {
             SetGizmoEnabled(true); /// если пропал, вернем
         }
-
-        constexpr float_t seekSpeed = 0.1f / 10.f;
-        constexpr float_t wheelSpeed = 4.0f / 10.f;
-        constexpr float_t rotateSpeed = 1.5f / 10.f;
-        constexpr float_t moveSpeed = 2.0f / 10.f;
-
-        const float_t velocitySpeed = moveSpeed * velocityFactor;
-        auto&& dir = SR_UTILS_NS::Input::Instance().GetMouseDrag();
-        auto&& wheel = SR_UTILS_NS::Input::Instance().GetMouseWheel() * wheelSpeed * velocityFactor;
-
-        if (!SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::Ctrl))
-        {
-            if (SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::W)) {
-                m_velocity += SR_UTILS_NS::Transform3D::FORWARD * velocitySpeed;
-            }
-
-            if (SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::S)) {
-                m_velocity -= SR_UTILS_NS::Transform3D::FORWARD * velocitySpeed;
-            }
-
-            if (SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::A)) {
-                m_velocity -= SR_UTILS_NS::Transform3D::RIGHT * velocitySpeed;
-            }
-
-            if (SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::D)) {
-                m_velocity += SR_UTILS_NS::Transform3D::RIGHT * velocitySpeed;
-            }
-
-            /// !!!!! НЕ ВОЗВОРАЩАТЬ ЭТОТ КОД !!!!!
-            /// if (SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::Space)) {
-            ///     m_velocity += SR_UTILS_NS::Transform3D::UP * velocitySpeed;
-            /// }
-
-            /// TODO: странное управление. Нет подходящей удобной комбинации клавиши
-            /// if (SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::Space) && SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::Z)) {
-            ///     m_velocity -= SR_UTILS_NS::Transform3D::UP * moveSpeed;
-            /// }
-        }
-
-        if (m_camera) {
-            if (wheel != 0) {
-                m_camera->GetTransform()->Translate(SR_UTILS_NS::Transform3D::FORWARD * wheel);
-            }
-
-            if (SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::MouseRight)) {
-                m_camera->GetTransform()->GlobalRotate(dir.y * rotateSpeed, dir.x * rotateSpeed, 0.0);
-            }
-
-            if (SR_UTILS_NS::Input::Instance().GetKey(SR_UTILS_NS::KeyCode::MouseMiddle)) {
-                auto right = SR_UTILS_NS::Transform3D::RIGHT * seekSpeed;
-                auto up = SR_UTILS_NS::Transform3D::UP * seekSpeed;
-
-                m_camera->GetTransform()->Translate(
-                        (up * dir.y) + (right * -dir.x)
-                );
-            }
-        }
-
-        /// m_velocity = m_velocity.Clamp(SR_MATH_NS::FVector3(1), SR_MATH_NS::FVector3(-1)); ///Зачем-то ограничивало перемещение камеры по клавишам WASD
     }
 
     void SceneViewer::DrawTexture(SR_MATH_NS::IVector2 winSize, SR_MATH_NS::IVector2 texSize, uint32_t id, bool centralize) {
@@ -225,7 +174,7 @@ namespace SR_CORE_GUI_NS {
 
         texSize *= dy > dx ? dx : dy;
 
-        m_textureSize = texSize;
+        m_textureSize = texSize.Cast<float_t>();
 
         if (centralize) {
             auto windowPosition = ImGui::GetCursorPos();
@@ -240,13 +189,20 @@ namespace SR_CORE_GUI_NS {
     }
 
     void SceneViewer::SetCameraEnabled(bool enabled) {
-        SR_UTILS_NS::GameObject::Ptr camera;
+        SR_UTILS_NS::GameObject::Ptr pCamera;
 
         if (enabled) {
             /// сцена может быть уже заблокирована до Engine::SetScene
             if (SR_UTILS_NS::Features::Instance().Enabled("EditorCamera", true) && m_scene.RecursiveLockIfValid()) {
-                camera = m_scene->InstanceGameObject("Editor camera"_atom);
-                camera->AddSerializationFlags(SR_UTILS_NS::SerializationFlags::DontSave);
+                pCamera = m_scene->InstanceGameObject("Editor camera"_atom);
+                pCamera->AddSerializationFlags(SR_UTILS_NS::SerializationFlags::DontSave);
+                pCamera->AddEditorFlags(SR_UTILS_NS::EditorFlags::Hidden);
+
+                if (auto&& pMover = pCamera->AddComponent<SR_UTILS_NS::CameraFlyMover>()) {
+                    pMover->SetExecuteInEditMode(true);
+                    pMover->SetRightMouseButtonToRotate(true);
+                }
+
                 m_isPrefab = m_scene->IsPrefab();
                 m_scene.Unlock();
             }
@@ -254,29 +210,28 @@ namespace SR_CORE_GUI_NS {
                 return;
             }
 
-            auto&& pCamera = new EditorCamera(this);
+            EditorCamera::Ptr pCameraComponent = pCamera->AddComponent<EditorCamera>();
+            pCameraComponent->SetSceneViewer(this);
 
             if (m_isPrefab) {
-                pCamera->SetRenderTechnique(SR_CORE_NS::EditorSettings::Instance().GetPrefabEditorRenderTechnique());
+                pCameraComponent->SetRenderTechnique(SR_CORE_NS::EditorSettings::Instance().GetPrefabEditorRenderTechnique());
             }
             else {
-                pCamera->SetRenderTechnique(SR_CORE_NS::EditorSettings::Instance().GetRenderTechnique());
+                pCameraComponent->SetRenderTechnique(SR_CORE_NS::EditorSettings::Instance().GetRenderTechnique());
             }
 
-            camera->AddComponent(pCamera);
-
             /// Камера редактора имеет наивысшый закадровый приоритет
-            pCamera->SetPriority(SR_INT32_MIN);
+            pCameraComponent->SetPriority(SR_INT32_MIN);
 
-            camera->GetTransform()->GlobalTranslate(m_cameraTranslation);
-            camera->GetTransform()->GlobalRotate(m_cameraRotation);
+            pCamera->GetTransform()->GlobalTranslate(m_cameraTranslation);
+            pCamera->GetTransform()->GlobalRotate(m_cameraRotation);
         }
 
         if (m_camera) {
             m_camera->Destroy();
         }
 
-        m_camera = camera;
+        m_camera = pCamera;
 
         BackupCameraSettings();
     }
@@ -330,8 +285,9 @@ namespace SR_CORE_GUI_NS {
             return;
         }
 
-        auto&& pCamera = m_camera ? m_camera->GetComponent<SR_GTYPES_NS::Camera>() : nullptr;
+        auto&& pCamera = m_camera ? m_camera->GetComponent<EditorCamera>() : nullptr;
         if (!pCamera) {
+            SR_WARN("SceneViewer::OnMouseUp() : editor camera component not found!");
             return Super::OnMouseUp(data);
         }
 
@@ -385,8 +341,9 @@ namespace SR_CORE_GUI_NS {
     }
 
     bool SceneViewer::UpdateViewSize() {
-        auto&& pCamera = m_camera->GetComponent<SR_GTYPES_NS::Camera>();
+        auto&& pCamera = m_camera->GetComponent<EditorCamera>();
         if (!pCamera) {
+            SR_WARN("SceneViewer::UpdateViewSize() : editor camera component not found!");
             return false;
         }
 
@@ -444,30 +401,30 @@ namespace SR_CORE_GUI_NS {
             return;
         }
 
-        SR_UTILS_NS::GameObject::Ptr gizmo;
+        SR_UTILS_NS::GameObject::Ptr pGizmo;
 
         if (enabled) {
-            if (m_scene.RecursiveLockIfValid()) {
-                gizmo = m_scene->InstanceGameObject("Editor gizmo"_atom);
-                gizmo->AddSerializationFlags(SR_UTILS_NS::SerializationFlags::DontSave);
-                m_scene.Unlock();
+            if (m_scene) {
+                pGizmo = m_scene->InstanceGameObject("Editor gizmo"_atom);
+                pGizmo->AddSerializationFlags(SR_UTILS_NS::SerializationFlags::DontSave);
+                pGizmo->AddEditorFlags(SR_UTILS_NS::EditorFlags::Hidden);
             }
             else {
                 return;
             }
 
-            auto&& pComponent = SR_UTILS_NS::ComponentManager::Instance().CreateComponent<EditorGizmo>();
+            auto&& pComponent = SR_UTILS_NS::Factory::Instance().Create<EditorGizmo>();
             pComponent->SetOperation(GetSceneTools()->GetGizmoOperation());
             pComponent->SetMode(GetSceneTools()->GetGizmoMode());
             pComponent->SetHierarchy(m_hierarchy);
-            gizmo->AddComponent(pComponent);
+            pGizmo->AddComponent(pComponent.StaticCast<SR_UTILS_NS::Component>());
         }
 
         if (m_gizmo) {
             m_gizmo->Destroy();
         }
 
-        m_gizmo = gizmo;
+        m_gizmo = pGizmo;
     }
 
     SR_CORE_GUI_NS::SceneTools* SceneViewer::GetSceneTools() const {

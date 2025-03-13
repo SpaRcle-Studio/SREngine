@@ -4,23 +4,21 @@
 
 #include <Physics/Vehicle.h>
 
+#include <Codegen/Vehicle.generated.hpp>
+
 namespace SR_PTYPES_NS {
-    Vehicle::Vehicle(LibraryPtr pLibrary)
-    { }
-
-    SR_UTILS_NS::Component* Vehicle::LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage) {
-        return nullptr;
-    }
-
-    SR_HTYPES_NS::Marshal::Ptr Vehicle::SaveLegacy(SR_UTILS_NS::SavableContext data) const {
-        return Super::SaveLegacy(data);
-    }
-
     SR_UTILS_NS::Measurement Vehicle::GetMeasurement() const {
         return SR_UTILS_NS::Measurement::Unknown;
     }
 
     bool Vehicle::InitVehicle() {
         return false;
+    }
+
+    void Vehicle::OnDestroy() {
+        Super::OnDestroy();
+        AutoFree([](auto&& pData) {
+            delete pData;
+        });
     }
 }

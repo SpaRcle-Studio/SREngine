@@ -5,15 +5,9 @@
 #include <Physics/PhysX/PhysXCollisionShape.h>
 #include <Physics/PhysX/PhysXRigidbody3D.h>
 
-namespace SR_PTYPES_NS {
-    PhysXCollisionShape::PhysXCollisionShape(Super::LibraryPtr pLibrary)
-        : Super(pLibrary)
-    {
-        if (pLibrary) {
-            SetType(pLibrary->GetDefaultShape());
-        }
-    }
+#include <Enum/ShapeType.hpp>
 
+namespace SR_PTYPES_NS {
     PhysXCollisionShape::~PhysXCollisionShape() {
         if (m_shape) {
             m_shape->userData = nullptr;
@@ -23,11 +17,13 @@ namespace SR_PTYPES_NS {
     }
 
     bool PhysXCollisionShape::UpdateShape() {
-        if (!m_rigidbody->IsUpdatable()) {
+        SR_TRACY_ZONE;
+
+        if (!GetShape()->GetRigidbody()->IsUpdatable()) {
             return false;
         }
 
-        auto&& pPhysics = GetLibrary<PhysXLibraryImpl>()->GetPxPhysics();
+        auto&& pPhysics = GetShape()->GetRigidbody()->GetLibrary<PhysXLibraryImpl>()->GetPxPhysics();
 
         if (m_shape) {
             m_shape->release();
@@ -42,29 +38,35 @@ namespace SR_PTYPES_NS {
             isDefaultMaterial = true;
         }
 
-        switch (m_type) {
+        switch (GetShape()->GetType()) {
+            case ShapeType::Plane3D: {
+                auto&& size = SR_PHYSICS_UTILS_NS::FV3ToPxV3(GetShape()->GetSize());
+                size.y = 0.01f;
+                m_shape = pPhysics->createShape(physx::PxBoxGeometry(size), *pMaterial, true);
+                break;
+            }
             case ShapeType::Box3D: {
-                m_shape = pPhysics->createShape(physx::PxBoxGeometry(SR_PHYSICS_UTILS_NS::FV3ToPxV3(GetSize())), *pMaterial, true);
+                m_shape = pPhysics->createShape(physx::PxBoxGeometry(SR_PHYSICS_UTILS_NS::FV3ToPxV3(GetShape()->GetSize())), *pMaterial, true);
                 break;
             }
             case ShapeType::Sphere3D: {
-                m_shape = pPhysics->createShape(physx::PxSphereGeometry(GetRadius()), *pMaterial, true);
+                m_shape = pPhysics->createShape(physx::PxSphereGeometry(GetShape()->GetRadius()), *pMaterial, true);
                 break;
             }
             case ShapeType::Capsule3D: {
-                m_shape = pPhysics->createShape(physx::PxCapsuleGeometry(GetRadius(), GetHeight()), *pMaterial, true);
+                m_shape = pPhysics->createShape(physx::PxCapsuleGeometry(GetShape()->GetRadius(), GetShape()->GetHeight()), *pMaterial, true);
                 break;
             }
             case ShapeType::Convex3D: {
-                SR_HTYPES_NS::RawMesh* rawMesh = GetRigidbody()->GetRawMesh();
+                SR_HTYPES_NS::RawMesh* pRawMesh = GetShape()->GetRawMesh();
 
-                if (!rawMesh) {
+                if (!pRawMesh) {
                     SR_WARN("PhysXCollisionShape::UpdateShape() : mesh is not set!");
-                    m_shape = pPhysics->createShape(physx::PxBoxGeometry(SR_PHYSICS_UTILS_NS::FV3ToPxV3(GetSize())), *pMaterial, true);
+                    m_shape = pPhysics->createShape(physx::PxBoxGeometry(SR_PHYSICS_UTILS_NS::FV3ToPxV3(GetShape()->GetSize())), *pMaterial, true);
                     break;
                 }
 
-                physx::PxConvexMesh* convexMesh = CreateConvexMesh(rawMesh);
+                physx::PxConvexMesh* convexMesh = CreateConvexMesh(pRawMesh);
 
                 if (!convexMesh) {
                     SR_ERROR("PhysXCollisionShape::UpdateShape() : failed to create convex mesh!");
@@ -75,14 +77,14 @@ namespace SR_PTYPES_NS {
                 break;
             }
             case ShapeType::TriangleMesh3D: {
-                SR_HTYPES_NS::RawMesh* rawMesh = GetRigidbody()->GetRawMesh();
+                SR_HTYPES_NS::RawMesh* pRawMesh = GetShape()->GetRawMesh();
 
-                if (!rawMesh) {
+                if (!pRawMesh) {
                     SR_ERROR("PhysXCollisionShape::UpdateShape() : mesh is nullptr!");
                     return false;
                 }
 
-                physx::PxTriangleMesh* triangleMesh = CreateTriangleMesh(rawMesh);
+                physx::PxTriangleMesh* triangleMesh = CreateTriangleMesh(pRawMesh);
 
                 if (!triangleMesh) {
                     SR_ERROR("PhysXCollisionShape::UpdateShape() : failed to create triangle mesh!");
@@ -92,23 +94,22 @@ namespace SR_PTYPES_NS {
                 m_shape = pPhysics->createShape(physx::PxTriangleMeshGeometry(triangleMesh), *pMaterial);
                 break;
             }
-            default:
-                SR_ERROR("PhysXCollisionShape::UpdateShape() : unsupported shape! Type: " + SR_UTILS_NS::EnumReflector::ToStringAtom(m_type).ToStringRef());
-
+            default: {
+                SR_ERROR("PhysXCollisionShape::UpdateShape() : unsupported shape! Type: {}"_format(GetShape()->GetType()));
                 if (isDefaultMaterial) {
                     pMaterial->release();
                 }
-                
                 return false;
+            }
         }
 
         SRAssert(m_shape);
 
         if (m_shape) {
-            m_shape->userData = (void*)dynamic_cast<CollisionShape*>(this);
+            m_shape->userData = static_cast<void*>(GetShape());
         }
 
-        if (m_rigidbody->IsTrigger()){
+        if (GetShape()->GetRigidbody()->IsTrigger()) {
             m_shape->setFlag(physx::PxShapeFlag::eSIMULATION_SHAPE, false);
             m_shape->setFlag(physx::PxShapeFlag::eTRIGGER_SHAPE, true);
         }
@@ -117,21 +118,31 @@ namespace SR_PTYPES_NS {
     }
 
     bool PhysXCollisionShape::UpdateMatrix() {
+        SR_TRACY_ZONE;
+
         if (!m_shape) {
             return false;
         }
 
-        switch (m_type) {
+        auto&& scale = GetShape()->GetRigidbody() ? GetShape()->GetRigidbody()->GetScale() : SR_MATH_NS::FVector3::One();
+
+        switch (GetShape()->GetType()) {
+            case ShapeType::Plane3D: {
+                auto&& size = SR_PHYSICS_UTILS_NS::FV3ToPxV3(GetShape()->GetSize() * scale);
+                size.y = 0.01f;
+                m_shape->setGeometry(physx::PxBoxGeometry(size));
+                break;
+            }
             case ShapeType::Box3D:
-                m_shape->setGeometry(physx::PxBoxGeometry(SR_PHYSICS_UTILS_NS::FV3ToPxV3(GetSize() * GetScale())));
+                m_shape->setGeometry(physx::PxBoxGeometry(SR_PHYSICS_UTILS_NS::FV3ToPxV3(GetShape()->GetSize() * scale)));
                 break;
             case ShapeType::Capsule3D: {
-                auto&& maxXZ = SR_MAX(GetScale().x, GetScale().z);
-                m_shape->setGeometry(physx::PxCapsuleGeometry(GetRadius() * maxXZ, GetHeight() * GetScale().y));
+                auto&& maxXZ = SR_MAX(scale.x, scale.z);
+                m_shape->setGeometry(physx::PxCapsuleGeometry(GetShape()->GetRadius() * maxXZ, GetShape()->GetHeight() * scale.y));
                 break;
             }
             case ShapeType::Sphere3D:
-                m_shape->setGeometry(physx::PxSphereGeometry(GetRadius() * GetScale().Max()));
+                m_shape->setGeometry(physx::PxSphereGeometry(GetShape()->GetRadius() * scale.Max()));
                 break;
             case ShapeType::Convex3D: /// кейс не нужен, геометрия обновляется при создании меша в UpdateShape()
             default:
@@ -142,9 +153,11 @@ namespace SR_PTYPES_NS {
     }
 
     physx::PxConvexMesh* PhysXCollisionShape::CreateConvexMesh(SR_HTYPES_NS::RawMesh* pRawMesh) {
+        SR_TRACY_ZONE;
+
         SRAssert(pRawMesh);
 
-        const uint32_t meshId = GetRigidbody()->GetMeshId();
+        const uint32_t meshId = GetShape()->GetMeshId();
         if (meshId >= pRawMesh->GetMeshesCount()) {
             return nullptr;
         }
@@ -159,9 +172,9 @@ namespace SR_PTYPES_NS {
             pxVertices[i] = *reinterpret_cast<physx::PxVec3*>(&vertices[vertexIndex].position);
         }
 
-        auto&& pPhysics = GetLibrary<PhysXLibraryImpl>()->GetPxPhysics();
+        auto&& pPhysics = GetShape()->GetRigidbody()->GetLibrary<PhysXLibraryImpl>()->GetPxPhysics();
 
-        physx::PxTolerancesScale scale = pPhysics->getTolerancesScale();
+        const physx::PxTolerancesScale scale = pPhysics->getTolerancesScale();
         physx::PxCooking* cooking = PxCreateCooking(0, pPhysics->getFoundation(), physx::PxCookingParams(scale)); /// PxU32 /*version*/
 
         physx::PxConvexMeshDesc convexDesc;
@@ -184,9 +197,11 @@ namespace SR_PTYPES_NS {
     }
 
     physx::PxTriangleMesh* PhysXCollisionShape::CreateTriangleMesh(SR_HTYPES_NS::RawMesh* pRawMesh) {
+        SR_TRACY_ZONE;
+
         SRAssert(pRawMesh);
 
-        const uint32_t meshId = GetRigidbody()->GetMeshId();
+        const uint32_t meshId = GetShape()->GetMeshId();
         if (meshId >= pRawMesh->GetMeshesCount()) {
             return nullptr;
         }
@@ -210,7 +225,7 @@ namespace SR_PTYPES_NS {
         meshDesc.triangles.stride = 3 * sizeof(uint32_t);
         meshDesc.triangles.data = &indices[0];
 
-        auto&& pPhysics = GetLibrary<PhysXLibraryImpl>()->GetPxPhysics();
+        auto&& pPhysics = GetShape()->GetRigidbody()->GetLibrary<PhysXLibraryImpl>()->GetPxPhysics();
 
         physx::PxTriangleMesh* triangleMesh = nullptr;
         physx::PxDefaultMemoryOutputStream writeBuffer;
@@ -230,7 +245,7 @@ namespace SR_PTYPES_NS {
     }
 
     physx::PxMaterial* PhysXCollisionShape::GetMaterial() const {
-        auto&& pMaterial = GetRigidbody()->GetPhysicsMaterial();
+        auto&& pMaterial = GetShape()->GetRigidbody()->GetPhysicsMaterial();
         if (!pMaterial) {
             return nullptr;
         }

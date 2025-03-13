@@ -37,6 +37,11 @@ namespace SR_PHYSICS_NS {
             auto shape1 = reinterpret_cast<SR_PTYPES_NS::CollisionShape*>(cp.shapes[0]->userData);
             auto shape2 = reinterpret_cast<SR_PTYPES_NS::CollisionShape*>(cp.shapes[1]->userData);
 
+            if (!shape1 || !shape2) {
+                SRHalt("ContactReportCallback::onContact() : shape1 or shape2 is nullptr!");
+                continue;
+            }
+
             SR_PTYPES_NS::Rigidbody* rigidbody1 = shape1->GetRigidbody();
             SR_PTYPES_NS::Rigidbody* rigidbody2 = shape2->GetRigidbody();
 
@@ -46,7 +51,7 @@ namespace SR_PHYSICS_NS {
             auto&& gameObject2 = rigidbody2->GetGameObject();
 
             if (!gameObject1 || !gameObject2) {
-                SRHalt0();
+                SRHalt("ContactReportCallback::onContact() : gameObject1 or gameObject2 is nullptr!");
                 continue;
             }
 

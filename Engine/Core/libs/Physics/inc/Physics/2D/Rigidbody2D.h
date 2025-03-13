@@ -12,9 +12,10 @@ namespace SR_PTYPES_NS {
 
     };
 
+    /// @category(Physics)
     class Rigidbody2D : public Rigidbody {
+        SR_CLASS()
         using Super = Rigidbody;
-        SR_REGISTER_NEW_COMPONENT(Rigidbody2D, 1007);
     public:
         SR_NODISCARD SR_UTILS_NS::Measurement GetMeasurement() const override;
 

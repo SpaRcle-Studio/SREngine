@@ -11,7 +11,12 @@ namespace SR_CORE_GUI_NS {
     class ObjectPropertyDrawer : public PropertyDrawerBase {
         SR_CLASS()
     public:
+        using Ptr = SR_HTYPES_NS::SharedPtr<ObjectPropertyDrawer>;
+
+    public:
         PropertyDrawerFeedback Draw(const PropertyDrawerContext& context) override;
+
+        virtual PropertyDrawerFeedback DrawCustomProperties(const PropertyDrawerContext& context) { return PropertyDrawerFeedback(); }
 
     private:
         bool m_isOpened = false;

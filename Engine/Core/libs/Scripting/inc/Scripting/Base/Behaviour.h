@@ -72,29 +72,26 @@ namespace SR_SCRIPTING_NS {
 
     /// ----------------------------------------------------------------------------------------------------------------
 
+    /// @category(Scripting)
     class Behaviour final : public SR_UTILS_NS::Component {
         SR_CLASS()
         using GameObjectPtr = SR_HTYPES_NS::SharedPtr<SR_UTILS_NS::GameObject>;
         using Properties = std::vector<std::string>;
         using ValueProperties = std::list<std::pair<std::string, std::any>>;
-        SR_ENTITY_SET_VERSION(1002);
-        SR_INITIALIZE_COMPONENT(Behaviour);
         using Super = SR_UTILS_NS::Component;
     public:
-        static Component* LoadComponent(SR_HTYPES_NS::Marshal& marshal, const SR_HTYPES_NS::DataStorage* dataStorage);
-
-    public:
-        void SetRawBehaviour(const SR_UTILS_NS::Path& path);
         void Reload();
         void OnBehaviourChanged();
 
+        void Save(SR_UTILS_NS::ISerializer& serializer) const override;
+        bool Load(SR_UTILS_NS::IDeserializer& deserializer) override;
+
         SR_NODISCARD IRawBehaviour* GetRawBehaviour() const noexcept { return m_rawBehaviour; }
+        SR_NODISCARD SR_UTILS_NS::Path GetRawBehaviourPath() const noexcept;
+
+        void SetRawBehaviour(const SR_UTILS_NS::Path& path);
 
     protected:
-        SR_NODISCARD SR_HTYPES_NS::Marshal::Ptr SaveLegacy(SR_UTILS_NS::SavableContext data) const override;
-
-        SR_NODISCARD Component* CopyComponent() const override;
-
         void Awake() override;
         void OnEnable() override;
         void OnDisable() override;
@@ -116,6 +113,9 @@ namespace SR_SCRIPTING_NS {
 
     protected:
         IRawBehaviour* m_rawBehaviour = nullptr;
+
+        /// @virtualProperty(path) @getter(GetRawBehaviourPath) @setter(SetRawBehaviour)
+        SR_VIRTUAL_PROPERTY
 
     };
 }

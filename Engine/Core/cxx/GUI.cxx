@@ -33,3 +33,7 @@
 #include "../src/Core/GUI/PropertyDrawers/BitMapPropertyDrawer.cpp"
 #include "../src/Core/GUI/PropertyDrawers/ObjectPropertyDrawer.cpp"
 #include "../src/Core/GUI/PropertyDrawers/PointerPropertyDrawer.cpp"
+#include "../src/Core/GUI/PropertyDrawers/StringPropertyDrawer.cpp"
+#include "../src/Core/GUI/PropertyDrawers/PathPropertyDrawer.cpp"
+#include "../src/Core/GUI/PropertyDrawers/MaterialDataPropertyDrawer.cpp"
+#include "../src/Core/GUI/PropertyDrawers/MaterialPropertyDrawer.cpp"

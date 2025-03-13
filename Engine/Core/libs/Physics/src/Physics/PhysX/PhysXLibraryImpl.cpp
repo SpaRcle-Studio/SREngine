@@ -93,8 +93,8 @@ namespace SR_PHYSICS_NS {
         }
     }
 
-    SR_PTYPES_NS::CollisionShape* PhysXLibraryImpl::CreateCollisionShape() {
-        return new SR_PTYPES_NS::PhysXCollisionShape(this);
+    SR_PTYPES_NS::CollisionShapeImpl* PhysXLibraryImpl::CreateCollisionShapeImpl() {
+        return new SR_PTYPES_NS::PhysXCollisionShape();
     }
 
     SR_PTYPES_NS::Rigidbody3DImpl* PhysXLibraryImpl::CreateRigidbody3DImpl() {
@@ -110,7 +110,8 @@ namespace SR_PHYSICS_NS {
     }
 
     SR_PTYPES_NS::Vehicle4W3D *PhysXLibraryImpl::CreateVehicle4W3D() {
-        return new SR_PTYPES_NS::PhysXVehicle4W3D(this);
+        //return new SR_PTYPES_NS::PhysXVehicle4W3D(this);
+        return nullptr;
     }
 
     void PhysXLibraryImpl::ConnectPVD() {

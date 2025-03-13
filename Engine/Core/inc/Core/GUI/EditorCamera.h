@@ -10,13 +10,16 @@
 namespace SR_CORE_GUI_NS {
     class SceneViewer;
 
+    /// @category(Editor)
     class EditorCamera : public SR_GTYPES_NS::Camera {
-        SR_ENTITY_SET_VERSION(1000);
+        SR_CLASS()
     public:
-        explicit EditorCamera(SceneViewer* pSceneViewer);
+        using Ptr = SR_HTYPES_NS::SharedPtr<EditorCamera>;
 
     public:
-        SR_NODISCARD bool ExecuteInEditMode() const override;
+        void SetSceneViewer(SceneViewer* pSceneViewer) { m_sceneViewer = pSceneViewer; }
+
+        SR_NODISCARD bool ExecuteInEditMode() const override { return true; }
         SR_NODISCARD bool IsEditorCamera() const noexcept override { return true; }
 
         SR_NODISCARD SR_MATH_NS::FPoint GetMousePos() const override;

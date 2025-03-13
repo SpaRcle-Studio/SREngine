@@ -10,6 +10,12 @@
         </FramebufferSettings>
         <Passes>
             <ClearBuffersPass/>
+            <DebugPass>
+                <Shaders>
+                    <Shader Id="line" Path="Engine/Shaders/line.srsl"/>
+                    <Shader Id="mesh" Path="Engine/Shaders/Gizmo/wire-mesh.srsl"/>
+                </Shaders>
+            </DebugPass>
             <MeshDrawerPass>
                 <Sampler FBO="ShadowMapFBO" Id="shadowMap" Depth="true" Optional="true" />
                 <AllowedLayers>

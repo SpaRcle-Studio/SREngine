@@ -58,46 +58,6 @@ namespace SR_SCRIPTING_NS {
 
     /// ----------------------------------------------------------------------------------------------------------------
 
-    SR_REGISTER_COMPONENT(Behaviour);
-
-    SR_UTILS_NS::Component* Behaviour::LoadComponent(SR_HTYPES_NS::Marshal &marshal, const SR_HTYPES_NS::DataStorage *dataStorage) {
-        auto&& path = marshal.Read<std::string>();
-        auto&& propertyCount = marshal.Read<uint16_t>();
-
-        auto&& pBehaviour = SR_UTILS_NS::ComponentManager::Instance().CreateComponent<Behaviour>();
-
-        if (pBehaviour) {
-            pBehaviour->SetRawBehaviour(path);
-        }
-
-        for (uint16_t i = 0; i < propertyCount; ++i) {
-            auto&& propertyId = marshal.Read<std::string>();
-            auto&& property = marshal.Read<std::any>();
-            if (pBehaviour && pBehaviour->m_rawBehaviour) {
-                pBehaviour->m_rawBehaviour->SetProperty(propertyId, property);
-            }
-        }
-
-        return pBehaviour;
-    }
-
-    SR_HTYPES_NS::Marshal::Ptr Behaviour::SaveLegacy(SR_UTILS_NS::SavableContext data) const {
-        auto&& pMarshal = Component::SaveLegacy(data);
-
-        auto&& properties = m_rawBehaviour ? m_rawBehaviour->GetProperties() : Properties();
-
-        /// TODO: use unicode
-        pMarshal->Write<std::string>(m_rawBehaviour ? m_rawBehaviour->GetResourcePath().ToString() : std::string());
-        pMarshal->Write<uint16_t>(properties.size());
-
-        for (auto&& propertyId : properties) {
-            pMarshal->Write<std::string>(propertyId);
-            pMarshal->Write<std::any>(m_rawBehaviour ? m_rawBehaviour->GetProperty(propertyId) : std::any());
-        }
-
-        return pMarshal;
-    }
-
     void Behaviour::Awake() {
         if (m_rawBehaviour) { m_rawBehaviour->Awake(); }
         Super::Awake();
@@ -185,6 +145,10 @@ namespace SR_SCRIPTING_NS {
         Super::OnTriggerStay(data);
     }
 
+    SR_UTILS_NS::Path Behaviour::GetRawBehaviourPath() const noexcept {
+        return m_rawBehaviour ? m_rawBehaviour->GetResourcePath() : SR_UTILS_NS::Path();
+    }
+
     void Behaviour::SetRawBehaviour(const SR_UTILS_NS::Path& path) {
         if (m_rawBehaviour) {
             m_rawBehaviour->SetComponent(nullptr);
@@ -203,24 +167,6 @@ namespace SR_SCRIPTING_NS {
         OnBehaviourChanged();
     }
 
-    SR_UTILS_NS::Component* Behaviour::CopyComponent() const {
-        auto&& pBehaviour = SR_UTILS_NS::ComponentManager::Instance().CreateComponent<Behaviour>();
-
-        if (pBehaviour && GetRawBehaviour()) {
-            auto&& pRaw = GetRawBehaviour();
-            pBehaviour->SetRawBehaviour(pRaw->GetResourcePath());
-
-            for (uint16_t i = 0; i < pRaw->GetProperties().size(); ++i) {
-                const auto propertyName = pRaw->GetProperties()[i];
-                if (pBehaviour && pBehaviour->m_rawBehaviour) {
-                    pBehaviour->m_rawBehaviour->SetProperty(propertyName, pRaw->GetProperty(propertyName));
-                }
-            }
-        }
-
-        return pBehaviour;
-    }
-
     void Behaviour::OnBehaviourChanged() {
         if (m_rawBehaviour) {
             m_rawBehaviour->SetComponent(this);
@@ -234,6 +180,66 @@ namespace SR_SCRIPTING_NS {
         if (HasParent()) {
             GetParent()->SetDirty(true);
         }
+    }
+
+    void Behaviour::Save(SR_UTILS_NS::ISerializer& serializer) const {
+        Super::Save(serializer);
+
+        if (m_rawBehaviour) {
+            auto&& properties = m_rawBehaviour->GetProperties();
+
+            serializer.BeginArray(properties.size(), SR_UTILS_NS::SerializationId::Create("properties"));
+
+            for (auto&& propertyId : properties) {
+                serializer.BeginItem(SR_UTILS_NS::SerializationId::Create("property"));
+
+                serializer.WriteString(propertyId, SR_UTILS_NS::SerializationId::Create("id"));
+                serializer.WriteAny(m_rawBehaviour->GetProperty(propertyId), SR_UTILS_NS::SerializationId::Create("value"));
+
+                serializer.EndItem();
+            }
+
+            serializer.EndArray();
+        }
+    }
+
+    bool Behaviour::Load(SR_UTILS_NS::IDeserializer& deserializer) {
+        if (!Super::Load(deserializer)) {
+            return false;
+        }
+
+        if (!m_rawBehaviour) {
+            return true;
+        }
+
+        auto&& properties = m_rawBehaviour->GetProperties();
+
+        const uint64_t size = deserializer.BeginArray(SR_UTILS_NS::SerializationId::Create("properties"));
+
+        if (size > 0) {
+            uint64_t index = 0;
+
+            while (deserializer.BeginItem(SR_UTILS_NS::SerializationId::Create("property"), index)) {
+                std::string propertyId;
+                deserializer.ReadString(propertyId, SR_UTILS_NS::SerializationId::Create("id"));
+
+                for (auto&& property : properties) {
+                    if (property == propertyId) {
+                        std::any value;
+                        deserializer.ReadAny(value, SR_UTILS_NS::SerializationId::Create("value"));
+                        m_rawBehaviour->SetProperty(property, value);
+                        break;
+                    }
+                }
+
+                deserializer.EndItem();
+                index++;
+            }
+
+            deserializer.EndArray();
+        }
+
+        return true;
     }
 
     void Behaviour::Reload() {

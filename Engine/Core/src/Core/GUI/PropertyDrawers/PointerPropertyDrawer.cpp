@@ -12,8 +12,10 @@ namespace SR_CORE_GUI_NS {
 
         SR_UTILS_NS::Reflection::Value value = context.GetValue();
 
+        auto&& editorParams = context.GetEditorParams();
+
         ImGui::PushID(context.pOwner);
-        ImGui::PushID(context.GetProperty().GetName().ToCStr());
+        ImGui::PushID(context.GetPropertyName().ToCStr());
 
         ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2{0, 0});
 
@@ -25,20 +27,26 @@ namespace SR_CORE_GUI_NS {
             typeName.remove_prefix(pos + 1);
         }
 
-        ImVec2 buttonSize;
+        if (!m_openedByDefault) {
+            m_isOpened |= context.openedByDefault;
+            m_openedByDefault = true;
+        }
 
-        if (context.pValue) {
+        m_isOpened |= context.noHeader;
+
+        if (context.pValue && !context.noHeader) {
             const ImVec2 arrowPos = pWindow->DC.CursorPos + ImVec2(5, 5);
             ImGui::RenderArrow(pWindow->DrawList, arrowPos, ImGui::GetColorU32(ImGuiCol_Text), dir, 1.f);
 
             const ImVec2 mainButtonSize = { 30, context.fieldHeight };
-            buttonSize = { context.fieldWidth - mainButtonSize.x, context.fieldHeight };
 
+            auto&& stackSize = SR_GRAPH_GUI_NS::BeginForceEnabled();
             if (ImGui::Button("", mainButtonSize)) {
                 m_isOpened = !m_isOpened;
             }
+            SR_GRAPH_GUI_NS::EndForceEnabled(stackSize);
         }
-        else {
+        else if (!context.noHeader) {
             const ImVec2 arrowPos = pWindow->DC.CursorPos + ImVec2(0, 5);
             ImGui::RenderArrow(pWindow->DrawList, arrowPos, ImGui::GetColorU32(ImGuiCol_Text), dir, 1.f);
 
@@ -48,43 +56,59 @@ namespace SR_CORE_GUI_NS {
             ImGui::SameLine();
 
             const ImVec2 mainButtonSize = { SR_MAX(context.fieldTitleWidth - arrowWidth, 0), context.fieldHeight };
-            const float_t titleTotalWidth = context.fieldTitleWidth;
-            buttonSize = { (context.fieldWidth + context.fieldTitleWidth) - titleTotalWidth, context.fieldHeight };
 
-            SR_UTILS_NS::StringAtom displayName = context.GetProperty().GetEditorParams().GetDisplayName();
+            SR_UTILS_NS::StringAtom displayName = editorParams.GetDisplayName();
+            auto&& stackSize = SR_GRAPH_GUI_NS::BeginForceEnabled();
             if (ImGui::Button(displayName.c_str(), mainButtonSize)) {
                 m_isOpened = !m_isOpened;
             }
+            SR_GRAPH_GUI_NS::EndForceEnabled(stackSize);
         }
 
-        ImGui::SameLine();
+        SR_UTILS_NS::SRClass* pClassValue = value.GetSRClass();
+        SR_HTYPES_NS::SharedPtrBase* pSharedPtrBase = value.GetSharedPtrBase();
 
-        if (m_default.empty()) {
-            m_default = "{} (nullptr)"_format(typeName);
-        }
+        SRAssert(pSharedPtrBase);
 
-        if (m_typeNames.empty()) {
-            m_typeNames.emplace_back("(nullptr)");
+        if (!context.noHeader) {
+            ImGui::SameLine();
 
-            auto&& pMeta = SR_UTILS_NS::Factory::Instance().GetType(typeName);
-            if (pMeta && !pMeta->IsAbstract()) {
-                m_typeNames.emplace_back(pMeta->GetFactoryName());
+            if (m_default.empty()) {
+                m_default = "{} (nullptr)"_format(typeName);
             }
 
-            for (auto&& type : SR_UTILS_NS::Factory::Instance().GetInheritances(typeName)) {
-                m_typeNames.emplace_back(type);
+            if (m_typeNames.empty()) {
+                if (!editorParams.IsNotNull()) {
+                    m_typeNames.emplace_back("(nullptr)");
+                }
+
+                auto&& pMeta = SR_UTILS_NS::Factory::Instance().GetType(typeName);
+                if (pMeta && !pMeta->IsAbstract()) {
+                    m_typeNames.emplace_back(pMeta->GetFactoryName());
+                }
+
+                for (auto&& type : SR_UTILS_NS::Factory::Instance().GetInheritances(typeName)) {
+                    m_typeNames.emplace_back(type);
+                }
             }
-        }
 
-        SR_HTYPES_NS::SharedPtr<SR_UTILS_NS::SRClass>& pClass = *reinterpret_cast<SR_HTYPES_NS::SharedPtr<SR_UTILS_NS::SRClass>*>(value.Data());
+            std::vector<std::string>::iterator pTypeNameIt = m_typeNames.end();
 
-        if (!m_typeNames.empty()) {
-            auto&& pTypeNameIt = pClass ? std::find(m_typeNames.begin(), m_typeNames.end(), pClass->GetMeta()->GetFactoryName()) : m_typeNames.end();
+            if (pClassValue) {
+                const SR_UTILS_NS::SRClassMeta* pMeta = pClassValue->GetMeta();
+                SRAssert(pMeta);
+                pTypeNameIt = std::find(m_typeNames.begin(), m_typeNames.end(), pMeta->GetFactoryName());
+            }
+
             std::optional<uint64_t> selectedIndex = pTypeNameIt != m_typeNames.end() ? std::make_optional(std::distance(m_typeNames.begin(), pTypeNameIt)) : std::nullopt;
 
             const char* pPrevValue = selectedIndex.has_value() ? m_typeNames[selectedIndex.value()].data() : m_default.c_str();
 
             ImGui::PushItemWidth(context.fieldWidth);
+
+            if (m_typeNames.size() <= 1) {
+                ImGui::BeginDisabled();
+            }
 
             if (ImGui::BeginCombo("##Combo", pPrevValue, ImGuiComboFlags_NoArrowButton)) {
                 if (!m_comboOpened) {
@@ -120,83 +144,85 @@ namespace SR_CORE_GUI_NS {
                 m_searchBuffer.clear();
             }
 
+            if (m_typeNames.size() <= 1) {
+                ImGui::EndDisabled();
+            }
+
             ImGui::PopItemWidth();
 
             if (selectedIndex) {
+                SRClass* pNew = nullptr;
+
                 if (m_typeNames[selectedIndex.value()] == "(nullptr)") {
-                    pClass.Reset();
+                    if (context.onBeforeChangeCallback) {
+                        context.onBeforeChangeCallback(false);
+                    }
+                    OnObjectReplaced(pClassValue, nullptr);
+                    pNew = nullptr;
                     feedback.isChanged = true;
                 }
-                else if (pClass) {
-                    if (m_typeNames[selectedIndex.value()] != pClass->GetMeta()->GetFactoryName()) {
-                        pClass = SR_UTILS_NS::Factory::Instance().CreateBase(m_typeNames[selectedIndex.value()]);
+                else if (pClassValue) {
+                    if (m_typeNames[selectedIndex.value()] != pClassValue->GetMeta()->GetFactoryName()) {
+                        if (context.onBeforeChangeCallback) {
+                            context.onBeforeChangeCallback(false);
+                        }
+                        pNew = SR_UTILS_NS::Factory::Instance().CreateBase(m_typeNames[selectedIndex.value()]);
+                        OnObjectReplaced(pClassValue, pNew);
                         feedback.isChanged = true;
                     }
                 }
                 else {
-                    pClass = SR_UTILS_NS::Factory::Instance().CreateBase(m_typeNames[selectedIndex.value()]);
+                    if (context.onBeforeChangeCallback) {
+                        context.onBeforeChangeCallback(false);
+                    }
+                    pNew = SR_UTILS_NS::Factory::Instance().CreateBase(m_typeNames[selectedIndex.value()]);
+                    OnObjectReplaced(pClassValue, pNew);
                     feedback.isChanged = true;
                 }
-            }
 
-            if (m_isOpened && pClass) {
-                if (m_lastTypeName != pClass->GetMeta()->GetFactoryName()) {
-                    m_lastTypeName = pClass->GetMeta()->GetFactoryName();
-                    m_drawers.clear();
-
-                    pClass->GetMeta()->ForEachProperty([&](auto&& property, uint64_t index) {
-                        SR_UTILS_NS::StringAtom inspector = property.GetEditorParams().GetInspector();
-
-                        if (inspector.Empty()) {
-                            inspector = GetValueInspector(property.Get(value.Data()));
-                        }
-
-                        if (inspector.Empty()) {
-                            m_drawers.emplace_back();
-                            return;
-                        }
-
-                        PropertyDrawerBase::Ptr pDrawer = SR_UTILS_NS::Factory::Instance().Create<PropertyDrawerBase>(inspector);
-                        if (!pDrawer) {
-                            m_drawers.emplace_back();
-                            return;
-                        }
-
-                        m_drawers.emplace_back(pDrawer);
-                    });
+                if (feedback.isChanged && pSharedPtrBase) {
+                    pSharedPtrBase->SetPointerFromBase(dynamic_cast<SR_HTYPES_NS::SharedPtrBase*>(pNew));
                 }
 
-                pClass->GetMeta()->ForEachProperty([&](auto&& property, uint64_t index) {
-                    if (!m_drawers[index]) {
-                        SR_GRAPH_GUI_NS::ColoredText("Missing inspector for element!", ImColor(255, 0, 0));
-                        return;
-                    }
-
-                    if (!context.pValue) {
-                        ImGui::Dummy(ImVec2(context.lineHeight, 5.0f));
-                        ImGui::SameLine();
-                    }
-
-                    PropertyDrawerContext propertyContext = context;
-                    propertyContext.pValue = nullptr;
-                    float_t totalWidth = (context.fieldWidth + context.fieldTitleWidth) - context.lineHeight;
-                    propertyContext.fieldWidth = totalWidth * 0.7;
-                    propertyContext.fieldTitleWidth = totalWidth * 0.3;
-                    propertyContext.pProperty = &property;
-                    propertyContext.pOwner = pClass.Get();
-
-                    ImGui::BeginGroup();
-                    PropertyDrawerFeedback propertyFeedback = m_drawers[index]->Draw(propertyContext);
-                    ImGui::EndGroup();
-
-                    if (propertyFeedback.isChanged) {
-                        feedback.isChanged = true;
-                    }
-                });
+                pClassValue = value.GetSRClass();
             }
         }
-        else {
-            SR_GRAPH_GUI_NS::ColoredText("No inheritances found!", ImColor(255, 255, 0));
+
+        if (m_isOpened && pClassValue) {
+            if (m_lastTypeName != pClassValue->GetMeta()->GetFactoryName()) {
+                m_lastTypeName = pClassValue->GetMeta()->GetFactoryName();
+
+                if (auto&& inspectorName = pClassValue->GetMeta()->GetInspectorName(); !inspectorName.empty()) {
+                    m_objectDrawer = SR_UTILS_NS::Factory::Instance().Create<ObjectPropertyDrawer>(inspectorName);
+                }
+                if (!m_objectDrawer) {
+                    m_objectDrawer = SRNew<ObjectPropertyDrawer>();
+                }
+            }
+
+            if (!context.pValue && !context.noHeader) {
+                ImGui::Dummy(ImVec2(context.GetArrowWidth(), 5.0f));
+                ImGui::SameLine();
+            }
+
+            PropertyDrawerContext propertyContext = context;
+            auto&& valueRef = SR_UTILS_NS::Reflection::Value::CreateRef(*pClassValue);
+            propertyContext.pValue = &valueRef;
+            float_t totalWidth = (context.fieldWidth + context.fieldTitleWidth);
+            totalWidth -= ((!context.pValue && !context.noHeader) ? context.GetArrowWidth() : 0.f);
+            propertyContext.fieldWidth = totalWidth * 0.7f;
+            propertyContext.fieldTitleWidth = totalWidth * 0.3f;
+            propertyContext.pProperty = nullptr;
+            propertyContext.pOwner = pClassValue;
+            propertyContext.noHeader = true;
+
+            ImGui::BeginGroup();
+            PropertyDrawerFeedback propertyFeedback = m_objectDrawer->Draw(propertyContext);
+            ImGui::EndGroup();
+
+            if (propertyFeedback.isChanged) {
+                feedback.isChanged = true;
+            }
         }
 
         ImGui::PopStyleVar();
@@ -204,9 +230,7 @@ namespace SR_CORE_GUI_NS {
         ImGui::PopID();
         ImGui::PopID();
 
-        if (!context.pValue && feedback.isChanged && !value.IsRef()) {
-            context.GetProperty().Set(context.pOwner, value);
-        }
+        SetValue(context, feedback, value);
 
         return feedback;
     }

@@ -17,14 +17,17 @@ namespace SR_PHYSICS_NS {
     { }
 
     PhysicsScene::~PhysicsScene() {
-        auto&& removeRigidbody = [&](SR_PTYPES_NS::Rigidbody* pRigidbody) {
+        auto&& removeRigidbody = [&](const SR_PTYPES_NS::Rigidbody::Ptr& pRigidbody) {
             if (!pRigidbody) {
                 return;
             }
 
             auto&& type = pRigidbody->GetType();
 
-            if (SR_PHYSICS_UTILS_NS::Is2DShape(type)) {
+            if (type == SR_PHYSICS_NS::ShapeType::Unknown) {
+                /// Not registered rigidbody
+            }
+            else if (SR_PHYSICS_UTILS_NS::Is2DShape(type)) {
                 m_2DWorld->RemoveRigidbody(pRigidbody);
             }
             else if (SR_PHYSICS_UTILS_NS::Is3DShape(type)) {

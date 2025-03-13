@@ -30,6 +30,7 @@ namespace SR_CORE_NS::GUI {
         void VideoMemoryPage();
         void SubmitQueuePage();
         void RenderStrategyPage();
+        void StringAtoms();
 
         void DrawSubmitInfo(const EvoVulkan::SubmitInfo& submitInfo);
         void DrawRenderTechnique(SR_GRAPH_NS::IRenderTechnique* pRenderTechnique);

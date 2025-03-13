@@ -82,6 +82,8 @@ namespace SR_CORE_GUI_NS {
     void EngineSettings::DrawEditorSettings() {
         float_t fontSize = SR_UTILS_NS::StoreUtils::User::GetFloat("ImGuiFontSize", 0.f);
         float_t iconFontSize = SR_UTILS_NS::StoreUtils::User::GetFloat("ImGuiIconFontSize", 0.f);
+        bool showEntityId = SR_UTILS_NS::StoreUtils::User::GetBool("ShowEntityId", false);
+        bool showHiddenEntities = SR_UTILS_NS::StoreUtils::User::GetBool("ShowHiddenEntities", false);
 
         if (ImGui::InputFloat("Font size", &fontSize, 1.0f, 1.0f, "%.1f", ImGuiInputTextFlags_EnterReturnsTrue)) {
             SR_UTILS_NS::StoreUtils::User::SetFloat("ImGuiFontSize", fontSize);
@@ -89,6 +91,14 @@ namespace SR_CORE_GUI_NS {
 
         if (ImGui::InputFloat("Icon font size", &iconFontSize, 1.0f, 1.0f, "%.1f", ImGuiInputTextFlags_EnterReturnsTrue)) {
             SR_UTILS_NS::StoreUtils::User::SetFloat("ImGuiIconFontSize", iconFontSize);
+        }
+
+        if (ImGui::Checkbox("Show entity id", &showEntityId)) {
+            SR_UTILS_NS::StoreUtils::User::SetBool("ShowEntityId", showEntityId);
+        }
+
+        if (ImGui::Checkbox("Show hidden entities", &showHiddenEntities)) {
+            SR_UTILS_NS::StoreUtils::User::SetBool("ShowHiddenEntities", showHiddenEntities);
         }
 
         if (ImGui::Button("Save")) {

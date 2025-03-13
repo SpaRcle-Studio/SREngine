@@ -5,6 +5,9 @@
 #ifndef SR_ENGINE_ENGINE_H
 #define SR_ENGINE_ENGINE_H
 
+#include <Core/EvoScriptAPI.h>
+#include <Core/EngineResources.h>
+
 #include <Utils/Events/EventManager.h>
 #include <Utils/Types/Time.h>
 #include <Utils/Types/Timer.h>
@@ -16,12 +19,9 @@
 #include <Utils/Types/Function.h>
 #include <Utils/Types/SafeGateArray.h>
 #include <Utils/TaskManager/ThreadWorker.h>
-
-#include <Core/EvoScriptAPI.h>
-#include <Core/EngineCommands.h>
-#include <Core/EngineResources.h>
 #include <Utils/Types/SafeQueue.h>
 #include <Utils/Localization/LocalizationManager.h>
+#include <Utils/CommandManager/CmdManager.h>
 
 namespace SR_GRAPH_NS {
     class Window;
@@ -63,13 +63,13 @@ namespace SR_CORE_NS {
         using RenderScenePtr = SR_HTYPES_NS::SharedPtr<SR_GRAPH_NS::RenderScene>;
     public:
         explicit Engine(Application* pApplication);
-        ~Engine();
+        ~Engine() override;
 
         SR_NODISCARD bool Execute();
 
         void Reload();
 
-        bool SetScene(const ScenePtr& scene);
+        void AddSceneToQueue(const ScenePtr& scene);
         void SetActive(bool isActive);
         void SetPaused(bool isPaused);
         void SetSpeed(float_t speed);
@@ -80,6 +80,7 @@ namespace SR_CORE_NS {
 
         void FixedUpdate();
         bool FlushScene();
+        void LoadStartupScene();
 
         void AddWindow(WindowPtr pWindow);
 

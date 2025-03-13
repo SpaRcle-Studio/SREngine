@@ -84,6 +84,8 @@ namespace SR_CORE_NS {
             pEditor->Init();
         }
 
+        pEngine->LoadStartupScene();
+
         m_isInitialized = true;
 
         return SR_UTILS_NS::ThreadWorkerResult::Success;
@@ -106,14 +108,16 @@ namespace SR_CORE_NS {
             rootNode.AppendNode("Position").AppendAttribute(pWindow->GetPosition());
             rootNode.AppendAttribute("IsMaximized", pWindow->IsMaximized());
 
-            windowSettings.Save(windowSettingsPath);
+            if (!windowSettings.Save(windowSettingsPath)) {
+                SR_ERROR("Engine::Finalize() : failed to save window settings!\n\tPath: " + windowSettingsPath.ToString());
+            }
         }
 
         if (auto&& pEditor = pEngine->GetEditor(); pEditor && pEditor->IsInitialized()) {
             pEditor->DeInit();
         }
 
-        pEngine->SetScene(SR_WORLD_NS::Scene::Ptr());
+        pEngine->AddSceneToQueue(SR_WORLD_NS::Scene::Ptr());
 
         do {
             SR_INFO("InitializeState::Finalize() : flushing scene...");

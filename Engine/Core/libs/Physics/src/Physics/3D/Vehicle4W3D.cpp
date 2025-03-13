@@ -5,18 +5,8 @@
 #include <Physics/3D/Vehicle4W3D.h>
 #include <Physics/PhysicsMaterial.h>
 
+#include <Codegen/Vehicle4W3D.generated.hpp>
+
 namespace SR_PTYPES_NS {
-    SR_REGISTER_COMPONENT_CUSTOM(Vehicle4W3D, {
-        auto&& pLibrary = SR_PHYSICS_NS::PhysicsLibrary::Instance().GetActiveLibrary(SR_UTILS_NS::Measurement::Space3D);
 
-        if (auto&& pVehicle4W3D = pLibrary->CreateVehicle4W3D()) {
-            return pVehicle4W3D;
-        }
-
-        return (SR_PTYPES_NS::Vehicle4W3D*)nullptr;
-    });
-
-    Vehicle4W3D::Vehicle4W3D(LibraryPtr pLibrary)
-        : Super(pLibrary)
-    { }
 }
