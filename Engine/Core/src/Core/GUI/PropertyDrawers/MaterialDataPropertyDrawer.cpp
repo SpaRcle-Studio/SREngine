@@ -211,7 +211,7 @@ namespace SR_CORE_GUI_NS {
                 if (void* pDescriptor = pTexture ? pTexture->GetDescriptor() : nullptr) {
                     const float_t imageSize = context.lineHeight * 2.5f;
 
-                    SR_GRAPH_GUI_NS::ImageButton((void*)pDescriptor, SR_MATH_NS::FVector2(imageSize), 0.25f * context.lineHeight));
+                    SR_GRAPH_GUI_NS::ImageButton((void*)pDescriptor, SR_MATH_NS::FVector2(imageSize), 0.25f * context.lineHeight);
 
                     ImGui::SameLine();
 
