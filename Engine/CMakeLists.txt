@@ -27,20 +27,14 @@ if (SR_ENGINE_FLATPAK_BUILD)
     add_compile_definitions(SR_ENGINE_FLATPAK_BUILD)
 endif()
 
+if (ANDROID_NDK)
+    add_compile_options(-femulated-tls)
+    add_link_options(-femulated-tls)
+endif()
+
 # TODO!
 #add_compile_definitions(_CONTAINER_DEBUG_LEVEL=0)
 #add_compile_definitions(_ITERATOR_DEBUG_LEVEL=0)
-
-add_definitions(
-    -DSR_ICU
-    -DSR_USE_IMGUI
-    -DSR_USE_IMGUIZMO
-    #-DSR_USE_IMGUI_NODE_EDITOR
-    -DSR_USE_VULKAN
-    -DSR_DLL_EXPORTS
-    -DSR_SUPPORT_PARALLEL
-    -DSR_CXX_20
-)
 
 set(SR_UTILS_ASSIMP ON CACHE INTERNAL "" FORCE)
 set(SR_UTILS_DLL_EXPORTS ON CACHE INTERNAL "" FORCE)
@@ -55,18 +49,39 @@ endif()
 
 add_subdirectory(Core)
 
-if (CMAKE_GENERATOR MATCHES "Visual Studio")
-    add_executable(SREngine main.cpp)
-else()
-    set(APP_ICON_RESOURCE_WINDOWS "${CMAKE_CURRENT_SOURCE_DIR}/appicon.rc")
+if (ANDROID_NDK)
+    set(SR_EXECUTABLE_NAME "sparcle")
 
-    add_executable(SREngine
-        main.cpp
-        ${APP_ICON_RESOURCE_WINDOWS}
+    set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -u ANativeActivity_onCreate")
+
+    add_library(${SR_EXECUTABLE_NAME} SHARED "${SR_CMAKE_ROOT_SOURCE_DIRECTORY}/Android/app/src/main/cpp/main.cpp")
+
+    set_target_properties(sparcle PROPERTIES DEBUG_POSTFIX "")
+
+    find_library(log-lib log)
+
+    target_link_libraries(${SR_EXECUTABLE_NAME}
+        ${log-lib}
+        android
+        EGL
+        GLESv1_CM
     )
+else()
+    set(SR_EXECUTABLE_NAME "SREngine")
+
+    if (CMAKE_GENERATOR MATCHES "Visual Studio")
+        add_executable(${SR_EXECUTABLE_NAME} main.cpp)
+    else()
+        set(APP_ICON_RESOURCE_WINDOWS "${CMAKE_CURRENT_SOURCE_DIR}/appicon.rc")
+
+        add_executable(${SR_EXECUTABLE_NAME}
+            main.cpp
+            ${APP_ICON_RESOURCE_WINDOWS}
+        )
+    endif()
 endif()
 
-add_custom_command(TARGET SREngine
+add_custom_command(TARGET ${SR_EXECUTABLE_NAME}
     POST_BUILD
     COMMAND ${CMAKE_COMMAND}
     -DTARGET_NAME=Engine
@@ -76,26 +91,28 @@ add_custom_command(TARGET SREngine
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
 )
 
-target_link_libraries(SREngine Core)
+target_link_libraries(${SR_EXECUTABLE_NAME} Core)
 
-# TODO: implement an easy way to set if a build is 'stable' or 'latest'
-if (${CMAKE_BUILD_TYPE} STREQUAL "Release")
-    set(executableType "stable")
-else()
-    set(executableType "latest")
-endif()
-
-if (SR_ENGINE_FLATPAK_BUILD)
-    install(TARGETS SREngine DESTINATION /app/bin)
-    install(TARGETS SREngine PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
-endif()
-
-if (SR_ENGINE_EXTENDED_NAME)
-    if (UNIX AND NOT APPLE)
-        set_target_properties(SREngine PROPERTIES OUTPUT_NAME "SREngine_v${SR_ENGINE_VERSION}-${executableType}_linux.${CURRENT_TARGET_ARCHITECTURE}")
-    elseif (WIN32)
-        set_target_properties(SREngine PROPERTIES OUTPUT_NAME "SREngine_v${SR_ENGINE_VERSION}-${executableType}_windows.${CURRENT_TARGET_ARCHITECTURE}")
+if (NOT ANDROID_NDK)
+    # TODO: implement an easy way to set if a build is 'stable' or 'latest'
+    if (${CMAKE_BUILD_TYPE} STREQUAL "Release")
+        set(executableType "stable")
+    else()
+        set(executableType "latest")
     endif()
-else()
-    set_target_properties(SREngine PROPERTIES OUTPUT_NAME "srengine")
+
+    if (SR_ENGINE_FLATPAK_BUILD)
+        install(TARGETS ${SR_EXECUTABLE_NAME} DESTINATION /app/bin)
+        install(TARGETS ${SR_EXECUTABLE_NAME} PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
+    endif()
+
+    if (SR_ENGINE_EXTENDED_NAME)
+        if (UNIX AND NOT APPLE)
+            set_target_properties(${SR_EXECUTABLE_NAME} PROPERTIES OUTPUT_NAME "${SR_EXECUTABLE_NAME}_v${SR_ENGINE_VERSION}-${executableType}_linux.${CURRENT_TARGET_ARCHITECTURE}")
+        elseif (WIN32)
+            set_target_properties(${SR_EXECUTABLE_NAME} PROPERTIES OUTPUT_NAME "${SR_EXECUTABLE_NAME}_v${SR_ENGINE_VERSION}-${executableType}_windows.${CURRENT_TARGET_ARCHITECTURE}")
+        endif()
+    else()
+        set_target_properties(${SR_EXECUTABLE_NAME} PROPERTIES OUTPUT_NAME "srengine")
+    endif()
 endif()

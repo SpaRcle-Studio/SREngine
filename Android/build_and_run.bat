@@ -1,7 +1,11 @@
 echo off
+chcp 65001
 
 echo Build application...
 "cmd /c build.bat assembleRelease"
+
+echo Install apk...
+"cmd /c install_app.bat"
 
 echo Run application...
 "cmd /c run_application.bat assembleRelease"

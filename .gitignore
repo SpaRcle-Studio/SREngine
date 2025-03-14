@@ -22,6 +22,7 @@ _deps
 /Android/.gradle
 /Android/app/build
 /Android/app/.cxx
+/Android/android-sdk
 out
 .vs
 Build

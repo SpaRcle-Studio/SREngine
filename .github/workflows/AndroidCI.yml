@@ -1,0 +1,42 @@
+name: SpaRcle Engine Android CI
+
+on:
+  workflow_call:
+    inputs:
+      buildRelease:
+        required: true
+        type: string
+      artifactPush:
+        required: true
+        type: string
+
+jobs:
+  Preparing:
+    name: Build.
+    runs-on: windows-latest
+    steps:
+      - name: Fetching repository.
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Installing Vulkan.
+        uses: TWoolhouse/setup-vulkan-sdk@v1.1.0
+        with:
+          version: 1.3.211.0
+
+      - name: Updating submodules.
+        run: git submodule --quiet update --init --recursive --depth 1 --jobs 4
+
+      - if: inputs.buildRelease == 'true'
+        name: Building Release.
+        shell: bash
+        working-directory: ${{github.workspace}}/build-release
+        run: |
+          echo "releaseSuccessful=false" >> "$GITHUB_ENV"
+          cd Android
+          echo "Install android SDK..."
+          install_android_sdk.bat
+          echo "Run build..."
+          build.bat
+          echo "releaseSuccessful=true" >> "$GITHUB_ENV"

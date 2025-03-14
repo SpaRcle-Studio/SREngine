@@ -100,6 +100,7 @@ namespace SR_CORE_NS {
         auto&& git2path = GetResourcesPath().Concat("Engine/Utilities/git2.exe");
     #endif
 
+    #ifndef SR_ANDROID
         auto&& cachePath = GetResourcesPath().Concat("Cache");
         if (!cachePath.Create()) {
             SR_ERROR("Launcher::CloneResources() : failed to create cache directory.");
@@ -117,6 +118,7 @@ namespace SR_CORE_NS {
 
         SR_UTILS_NS::Path zipPath = cachePath.Concat("SRE2R/Resources.zip");
         SR_PLATFORM_NS::Unzip(zipPath, GetResourcesPath());
+    #endif
 
         return true;
     }

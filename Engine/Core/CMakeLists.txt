@@ -49,7 +49,7 @@ endif()
 
 #SRUtilsCodegen("${CMAKE_CURRENT_SOURCE_DIR}/../../" "${CMAKE_CURRENT_SOURCE_DIR}/config/codegen.xml" "${CMAKE_CURRENT_BINARY_DIR}/Codegen/")
 
-if (NOT SR_ENGINE_FLATPAK_BUILD)
+if (NOT SR_ENGINE_FLATPAK_BUILD AND NOT ANDROID_NDK)
     include(libs/Utils/cmake/ResourceEmbedder.cmake)
 
     AddEmbedResource("${CMAKE_SOURCE_DIR}/Resources/Engine/Configs/Threads.yml")

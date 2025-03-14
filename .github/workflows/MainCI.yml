@@ -31,6 +31,7 @@ jobs:
       artifactPush: ${{ steps.globals.outputs.artifactPush }}
       buildWindows: ${{ steps.globals.outputs.buildWindows }}
       buildLinux: ${{ steps.globals.outputs.buildLinux }}
+      buildAndroid: ${{ steps.globals.outputs.buildAndroid }}
 
     steps:
       - name: Fetching repository.
@@ -75,18 +76,25 @@ jobs:
         run: |
           echo "buildWindows=true" >> "$GITHUB_ENV"
 
+      - if: "contains(github.event.head_commit.message, '#SR_CI_ANDROID')"
+        name: Handling "#SR_CI_ANDROID" argument.
+        shell: bash
+        run: |
+          echo "buildAndroid=true" >> "$GITHUB_ENV"
+
       - if: env.buildRelease != 'true' && env.buildDebug != 'true'
         name: Setting default build type.
         shell: bash
         run: |
           echo "buildDebug=true" >> "$GITHUB_ENV"
 
-      - if: env.buildWindows != 'true' && env.buildLinux != 'true'
+      - if: env.buildWindows != 'true' && env.buildLinux != 'true' && env.buildAndroid != 'true'
         name: Setting default platform type.
         shell: bash
         run: |
           echo "buildWindows=true" >> "$GITHUB_ENV"
           echo "buildLinux=true" >> "$GITHUB_ENV"
+          echo "buildAndroid=true" >> "$GITHUB_ENV"
 
       - name: Set global variables.
         id: globals
@@ -95,6 +103,7 @@ jobs:
           echo "buildRelease=${{env.buildRelease}}" >> $GITHUB_OUTPUT
           echo "buildWindows=${{env.buildWindows}}" >> $GITHUB_OUTPUT
           echo "buildLinux=${{env.buildLinux}}" >> $GITHUB_OUTPUT
+          echo "buildAndroid=${{env.buildAndroid}}" >> $GITHUB_OUTPUT
           echo "artifactPush=${{env.artifactPush}}" >> $GITHUB_OUTPUT
 
   BuildWindowsJob:
@@ -117,14 +126,24 @@ jobs:
       buildDebug: ${{needs.manage.outputs.buildDebug}}
       artifactPush: ${{needs.manage.outputs.artifactPush}}
 
+  BuildAndroidJob:
+    name: Android.
+    needs: [manage]
+    if: needs.manage.outputs.buildAndroid == 'true'
+    uses: ./.github/workflows/AndroidCI.yml
+    with:
+      buildRelease: ${{needs.manage.outputs.buildRelease}}
+      artifactPush: ${{needs.manage.outputs.artifactPush}}
+
   PostBuild:
     name: PostBuild.
-    needs: [BuildWindowsJob, BuildLinuxJob]
+    needs: [BuildWindowsJob, BuildLinuxJob, BuildAndroidJob]
     if: ${{ always() }}
     uses: ./.github/workflows/PostBuild.yml
     with:
       windowsBuildState: ${{needs.BuildWindowsJob.result}}
       linuxBuildState: ${{needs.BuildLinuxJob.result}}
+      androidBuildState: ${{needs.BuildAndroidJob.result}}
       commitActor: ${{github.actor}}
       commitSha: ${{github.sha}}
       commitBranch: ${{github.ref_name}}

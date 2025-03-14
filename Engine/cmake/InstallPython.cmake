@@ -1,6 +1,6 @@
 # We need to ensure that Python is installed as well as the required packages.
 
-if (UNIX)
+if (UNIX AND NOT ANDROID_NDK)
     find_program(PYTHON_EXECUTABLE python)
 
     if (PYTHON_EXECUTABLE)
@@ -116,7 +116,7 @@ elseif (NOT SR_PYTHON_EXECUTABLE)
 #    endif ()
 endif()
 
-if (NOT UNIX)
+if (NOT UNIX OR ANDROID_NDK)
     if (SR_PYTHON_EXECUTABLE)
         message(STATUS "InstallPython: Python executable: ${SR_PYTHON_EXECUTABLE}")
     else()

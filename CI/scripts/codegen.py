@@ -1,4 +1,5 @@
 import sys, os, subprocess, re
+
 from glob import glob
 
 try:
@@ -10,43 +11,43 @@ def normalize_path(path):
     """Нормализует слеши в путях для различных ОС."""
     return os.path.normpath(path)
 
-def get_repo_path():
-    return normalize_path('../')
-
 codegen_directory = sys.argv[1]
+repo_path = os.path.normpath(sys.argv[2])
 
 if not codegen_directory:
     raise Exception('Codegen directory is not set')
 
-includes = [
-    f'{get_repo_path()}/Engine/Core/inc',
-    f'{get_repo_path()}/Engine/Core/libs',
-    f'{get_repo_path()}/Engine/Core/libs/Utils/inc',
-    f'{get_repo_path()}/Engine/Core/libs/Utils/libs',
-    f'{get_repo_path()}/Engine/Core/libs/Utils/libs/openssl/include',
-    f'{get_repo_path()}/Engine/Core/libs/Utils/libs/litehtml/include',
-    f'{get_repo_path()}/Engine/Core/libs/Utils/libs/cppcoro/include',
-    f'{get_repo_path()}/Engine/Core/libs/Utils/libs/assimp/include',
-    f'{get_repo_path()}/Engine/Core/libs/Utils/libs/fmt/include',
-    f'{get_repo_path()}/Engine/Core/libs/Scripting/inc',
-    f'{get_repo_path()}/Engine/Core/libs/Scripting/libs',
-    f'{get_repo_path()}/Engine/Core/libs/Scripting/libs/EvoScript/Core/inc',
-    f'{get_repo_path()}/Engine/Core/libs/Audio/inc',
-    f'{get_repo_path()}/Engine/Core/libs/Audio/libs',
-    f'{get_repo_path()}/Engine/Core/libs/Audio/libs/libmodplug/src',
-    f'{get_repo_path()}/Engine/Core/libs/Physics/inc',
-    f'{get_repo_path()}/Engine/Core/libs/Physics/libs',
-    f'{get_repo_path()}/Engine/Core/libs/Graphics/inc',
-    f'{get_repo_path()}/Engine/Core/libs/Graphics/libs',
-    f'{get_repo_path()}/Engine/Core/libs/Graphics/libs/imgui',
-    f'{get_repo_path()}/Engine/Core/libs/Graphics/libs/EvoVulkan/Core/inc',
-    f'{codegen_directory}/Engine/Core/libs/Utils/libs/assimp/include',
-    f'{codegen_directory}',
-]
+def get_include_args():
+    includes = [
+        f'{repo_path}/Engine/Core/inc',
+        f'{repo_path}/Engine/Core/libs',
+        f'{repo_path}/Engine/Core/libs/Utils/inc',
+        f'{repo_path}/Engine/Core/libs/Utils/libs',
+        f'{repo_path}/Engine/Core/libs/Utils/libs/openssl/include',
+        f'{repo_path}/Engine/Core/libs/Utils/libs/litehtml/include',
+        f'{repo_path}/Engine/Core/libs/Utils/libs/cppcoro/include',
+        f'{repo_path}/Engine/Core/libs/Utils/libs/assimp/include',
+        f'{repo_path}/Engine/Core/libs/Utils/libs/fmt/include',
+        f'{repo_path}/Engine/Core/libs/Scripting/inc',
+        f'{repo_path}/Engine/Core/libs/Scripting/libs',
+        f'{repo_path}/Engine/Core/libs/Scripting/libs/EvoScript/Core/inc',
+        f'{repo_path}/Engine/Core/libs/Audio/inc',
+        f'{repo_path}/Engine/Core/libs/Audio/libs',
+        f'{repo_path}/Engine/Core/libs/Audio/libs/libmodplug/src',
+        f'{repo_path}/Engine/Core/libs/Physics/inc',
+        f'{repo_path}/Engine/Core/libs/Physics/libs',
+        f'{repo_path}/Engine/Core/libs/Graphics/inc',
+        f'{repo_path}/Engine/Core/libs/Graphics/libs',
+        f'{repo_path}/Engine/Core/libs/Graphics/libs/imgui',
+        f'{repo_path}/Engine/Core/libs/Graphics/libs/EvoVulkan/Core/inc',
+        f'{codegen_directory}/Engine/Core/libs/Utils/libs/assimp/include',
+        f'{codegen_directory}',
+    ]
 
-include_args = [f'-I{ os.path.abspath(normalize_path(inc))}' for inc in includes]
+    include_args = [f'-I{ os.path.abspath(normalize_path(inc))}' for inc in includes]
+    return include_args
 
-def preprocess_cpp(source, output):
+def preprocess_cpp(source, output, include_args):
     command = f"clang++ -E {source} -o {output} -fpermissive {' '.join(include_args)} -D WIN32"
 
     # Запускаем команду
@@ -624,7 +625,7 @@ def parse_tree(file_path, deep, parent_node, code_structure, namespaces):
 
 
 
-def parse_header_file(file_path):
+def parse_header_file(file_path, include_args):
     code_structure = CodeStructure()
 
     # Передаем каждый путь как отдельный аргумент
@@ -1512,10 +1513,10 @@ def main() -> bool:
     # Преобразуем пути в include_dirs для разных ОС
     include_dirs = [normalize_path(dir) for dir in include_dirs]
 
-    print(f'repo path: {get_repo_path()}')
+    print(f'repo path: {os.path.abspath(repo_path)}')
     print('collect files...\n')
 
-    for dir_path, _, _ in os.walk(get_repo_path()):
+    for dir_path, _, _ in os.walk(repo_path):
         for pattern in patterns:
             for file in glob(os.path.join(dir_path, pattern)):
                 normalized_file = normalize_path(file)
@@ -1583,7 +1584,8 @@ def main() -> bool:
 
     print(f'Parsing header file: {cached_file}\n')
 
-    code_structures: CodeStructure = parse_header_file(cached_file)
+    include_args = get_include_args()
+    code_structures: CodeStructure = parse_header_file(cached_file, include_args)
     if code_structures.classes:
         print(f'File: {cached_file}\n')
         #for class_obj in code_structures.classes:
@@ -1610,7 +1612,7 @@ def main() -> bool:
 
 if __name__ == "__main__":
     print("Start codegen.py... Codegen directory: ", codegen_directory)
-    print("Repo path: ", get_repo_path())
+    print("Repo path: ", repo_path)
 
     lib_path = os.path.join(os.path.dirname(clang.cindex.__file__), 'native')
     is_unix = sys.platform.startswith('linux') or sys.platform.startswith('darwin')

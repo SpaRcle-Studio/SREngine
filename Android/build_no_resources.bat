@@ -30,9 +30,8 @@ if not exist %APK_UNSIGNED_FILE% (
 	goto LABEL_FAIL
 )
 
+echo Sign apk...
 "cmd /c sign_apk.bat"
-
-"cmd /c install_app.bat"
 
 goto LABEL_SUCCESS
 

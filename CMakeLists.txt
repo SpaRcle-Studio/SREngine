@@ -15,14 +15,34 @@ message(STATUS "SpaRcle Engine: cmake version is ${CMAKE_VERSION}")
 set(SR_CMAKE_ROOT_BUILD_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}")
 message(STATUS "SpaRcle Engine: root build directory is ${SR_CMAKE_ROOT_BUILD_DIRECTORY}")
 
+set(SR_CMAKE_ROOT_SOURCE_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}")
+message(STATUS "SpaRcle Engine: root source directory is ${SR_CMAKE_ROOT_SOURCE_DIRECTORY}")
+
 set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-if (UNIX)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fcompare-debug-second -w -Wno-deprecated -fPIC")
-endif()
+#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fcoroutines-ts")
 
-if (UNIX AND CMAKE_BUILD_TYPE STREQUAL "Debug")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-pie -no-pie -g3")
+add_definitions(
+    -DSR_ICU
+    -DSR_USE_IMGUI
+    -DSR_USE_IMGUIZMO
+    #-DSR_USE_IMGUI_NODE_EDITOR
+    -DSR_USE_VULKAN
+    -DSR_SUPPORT_PARALLEL
+    -DSR_CXX_20
+)
+
+if (ANDROID_NDK)
+    add_compile_options(-Wno-c++20-attribute-extensions)
+else()
+    if (UNIX)
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fcompare-debug-second -w -Wno-deprecated -fPIC")
+    endif()
+
+    if (UNIX AND CMAKE_BUILD_TYPE STREQUAL "Debug")
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-pie -no-pie -g3")
+    endif()
 endif()
 
 if (WIN32)
@@ -58,6 +78,7 @@ set(EVO_VULKAN_STATIC_LIBRARY ON)
 set(EVO_SCRIPT_STATIC_LIBRARY ON)
 
 set(SR_TRACY_ENABLE ON)
+
 set(SR_ICU ON)
 
 set(CMAKE_BUILD_PARALLEL_LEVEL 0)
