@@ -25,7 +25,7 @@ if %errorlevel% neq 0 (
 
 :: Распаковываем архив
 echo Extracting command-line tools...
-tar -xf "%CMDLINE_TOOLS_ZIP%" -C "%CMDLINE_TOOLS_DIR%"
+powershell -Command "Expand-Archive -Path '%CMDLINE_TOOLS_ZIP%' -DestinationPath '%CMDLINE_TOOLS_DIR%' -Force"
 del "%CMDLINE_TOOLS_ZIP%"
 move "%CMDLINE_TOOLS_DIR%\cmdline-tools" "%CMDLINE_TOOLS_DIR%\latest"
 
