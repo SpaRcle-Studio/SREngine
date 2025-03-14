@@ -7,6 +7,11 @@ set "CMDLINE_TOOLS_URL=https://dl.google.com/android/repository/commandlinetools
 set "CMDLINE_TOOLS_ZIP=%CD%\cmdline-tools.zip"
 set "CMDLINE_TOOLS_DIR=%SDK_DIR%\cmdline-tools"
 
+echo SDK dir: %SDK_DIR%
+echo CMD tools url: %CMDLINE_TOOLS_URL%
+echo CMD tools zip: %CMDLINE_TOOLS_ZIP%
+echo CMD tools dir: %CMDLINE_TOOLS_DIR%
+
 :: Создаем нужные папки
 mkdir "%CMDLINE_TOOLS_DIR%" 2>nul
 
