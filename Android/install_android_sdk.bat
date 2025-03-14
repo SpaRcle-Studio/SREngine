@@ -52,12 +52,13 @@ echo SDK licenses accepted.
 
 echo Check available versions...
 sdkmanager --list | findstr /C:"ndk;"
+sdkmanager --list | findstr cmake
 
 :: Скачиваем необходимые компоненты
 echo Installing SDK components...
 :: sdkmanager --install "platform-tools" "platforms;android-34" "build-tools;34.0.0" "ndk;25.2.9519653" "cmake;3.22.1"
 :: sdkmanager --install "platform-tools" "platforms;android-34" "build-tools;34.0.0" "ndk;26.1.10909125" "cmake;3.22.1"
-sdkmanager --install "platform-tools" "platforms;android-34" "build-tools;34.0.0" "ndk;29.0.13113456" "cmake;3.22.1"
+sdkmanager --install "platform-tools" "platforms;android-34" "build-tools;34.0.0" "ndk;29.0.13113456" "cmake;3.30.3"
 
 echo Android SDK setup completed!
 :: exit /b 0

@@ -35,6 +35,8 @@ add_definitions(
 
 if (ANDROID_NDK)
     add_compile_options(-Wno-c++20-attribute-extensions)
+    add_definitions(-Wno-c++20-attribute-extensions)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-c++20-attribute-extensions")
 else()
     if (UNIX)
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fcompare-debug-second -w -Wno-deprecated -fPIC")

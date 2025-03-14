@@ -6,7 +6,7 @@
 	url = https://github.com/Monika0000/imgui
 [submodule "Engine/Core/libs/Audio/libs/OpenAL"]
 	path = Engine/Core/libs/Audio/libs/OpenAL
-	url = https://github.com/kcat/openal-soft
+	url = https://github.com/SpaRcle-Studio/openal-soft
 [submodule "Engine/Core/libs/Audio/libs/minimp3"]
 	path = Engine/Core/libs/Audio/libs/minimp3
 	url = https://github.com/lieff/minimp3
