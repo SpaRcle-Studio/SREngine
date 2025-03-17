@@ -253,9 +253,9 @@ def main():
     if os.name == "nt":
         drive, path = os.path.splitdrive(venv_dir)
         drive = drive.lower().replace(":", "")  # Приводим букву диска к нижнему регистру
-        mono_bin_executable = f"/cygdrive/{drive}{path.replace('\\', '/')}/MonoPrebuild/bin"
+        mono_bin_executable = f"/cygdrive/{drive}{path.replace('\\', '/')}/MonoPrebuildForBuild/bin"
     else:
-        mono_bin_executable = os.path.join(venv_dir, "MonoPrebuild", "bin")
+        mono_bin_executable = os.path.join(venv_dir, "MonoPrebuildForBuild", "bin")
 
     log_message(log_file, f'Mono bin executable: {mono_bin_executable}')
 
