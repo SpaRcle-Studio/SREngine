@@ -22,7 +22,7 @@ def create_log_file(log_file):
 def log_message(log_file, message, end="\n"):
     with open(log_file, "a", encoding="utf-8") as log:
         log.write(f'{log_prefix} {message}{end}')
-    print(f'{log_prefix} {message}{end}', end="")
+    #print(f'{log_prefix} {message}{end}', end="")
 
 def find_msbuild(log_file):
     """Ищет msbuild.exe в системе."""

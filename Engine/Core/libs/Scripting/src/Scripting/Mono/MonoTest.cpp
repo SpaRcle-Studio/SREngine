@@ -4,6 +4,8 @@
 
 #include <Scripting/Mono/MonoTest.h>
 
+#include <Utils/Resources/ResourceManager.h>
+
 #ifdef SR_ENGINE_MONO_SUPPORT
 
 #include <mono/jit/jit.h>
@@ -20,10 +22,115 @@ namespace SR_SCRIPTING_NS {
         }
     )";
 
+    std::vector<char> CompileScript(MonoDomain* domain) {
+        MonoAssembly* assembly = mono_domain_assembly_open(domain, "C:/Work/SREngine/Resources/Engine/Net/mono/4.5/RuntimeCompiler.dll");
+        if (!assembly) {
+            std::cerr << "Ошибка загрузки RuntimeCompiler.dll!" << std::endl;
+            return {};
+        }
+
+        MonoImage* image = mono_assembly_get_image(assembly);
+        MonoClass* klass = mono_class_from_name(image, "", "RuntimeCompiler");
+        if (!klass) {
+            std::cerr << "Не найден класс Compiler!" << std::endl;
+            return {};
+        }
+
+        MonoMethod* method = mono_class_get_method_from_name(klass, "Compile", 1);
+        if (!method) {
+            std::cerr << "Не найден метод Compile!" << std::endl;
+            return {};
+        }
+
+        MonoString* monoCode = mono_string_new(domain, csharpCode.c_str());
+        void* args[] = { monoCode };
+
+        MonoObject* exception = nullptr;
+        MonoArray* result = (MonoArray*)mono_runtime_invoke(method, nullptr, args, &exception);
+
+        if (exception) {
+            MonoString* exc_str = mono_object_to_string(exception, nullptr);
+            if (exc_str) {
+                char* exc_cstr = mono_string_to_utf8(exc_str);
+                std::cerr << "Runtime error in Compile: " << exc_cstr << std::endl;
+                mono_free(exc_cstr);
+            } else {
+                std::cerr << "Runtime error in Compile (exception object could not be converted to string)" << std::endl;
+            }
+            return {};
+        }
+
+        int length = mono_array_length(result);
+        std::vector<char> assemblyData(length);
+        for (int i = 0; i < length; i++) {
+            assemblyData[i] = mono_array_get(result, char, i);
+        }
+
+        return assemblyData;
+    }
+
+    void RunCompiledScript(MonoDomain* domain, const std::vector<char>& assemblyData) {
+        if (assemblyData.empty()) {
+            std::cerr << "Ошибка: пустой массив данных сборки!" << std::endl;
+            return;
+        }
+
+        MonoImageOpenStatus status;
+        MonoImage* image = mono_image_open_from_data_with_name(
+                const_cast<char*>(reinterpret_cast<const char*>(assemblyData.data())),
+                static_cast<uint32_t>(assemblyData.size()),
+                true, &status, false, "InMemoryAssembly"
+        );
+
+        if (!image || status != MONO_IMAGE_OK) {
+            std::cerr << "Ошибка загрузки сборки в Mono! Код ошибки: " << status << std::endl;
+            return;
+        }
+
+        MonoAssembly* assembly = mono_assembly_load_from_full(image, "InMemoryAssembly", &status, false);
+        if (!assembly) {
+            std::cerr << "Ошибка: не удалось загрузить сборку в Mono!" << std::endl;
+            return;
+        }
+
+        MonoClass* klass = mono_class_from_name(mono_assembly_get_image(assembly), "", "Script");
+        if (!klass) {
+            std::cerr << "Ошибка: класс Script не найден!" << std::endl;
+            return;
+        }
+
+        MonoMethod* method = mono_class_get_method_from_name(klass, "Run", 0);
+        if (!method) {
+            std::cerr << "Ошибка: метод Run не найден!" << std::endl;
+            return;
+        }
+
+        mono_runtime_invoke(method, nullptr, nullptr, nullptr);
+    }
+
+
     void RunMonoTest() {
+        std::string netPath = "C:/Work/SREngine/Resources/Engine/Net";
+        mono_set_dirs(netPath.c_str(), "");
+        MonoDomain* domain = mono_jit_init("MonoDomain");
+
+        auto&& data = CompileScript(domain);
+        if (data.empty()) {
+            std::cerr << "Ошибка компиляции скрипта!" << std::endl;
+            return;
+        }
+
+        RunCompiledScript(domain, data);
+    }
+
+    void RunMonoTest2() {
         // Инициализация Mono
         //mono_set_dirs("/usr/lib/mono", "/etc/mono");
-        mono_set_dirs("C:/Work/SREngine/cmake-build-debug/Mono/lib", "C:/Work/SREngine/cmake-build-debug/Mono/etc");
+
+        std::string netPath = "C:/Work/SREngine/Resources/Engine/Net";
+        //auto&& netPath = SR_UTILS_NS::ResourceManager::Instance().GetResPath().Concat("Engine/Net");
+
+        mono_set_dirs(netPath.c_str(), ""); ///C:/Work/SREngine/cmake-build-debug/Mono/etc"
         MonoDomain* domain = mono_jit_init("MonoDomain");
 
         // Загружаем сборку .NET Core, чтобы вызвать компилятор

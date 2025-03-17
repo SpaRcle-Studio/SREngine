@@ -35,6 +35,7 @@
 #include <Physics/PhysicsMaterial.h>
 
 #include <Scripting/Impl/EvoScriptManager.h>
+#include "Scripting/Mono/MonoTest.h"
 
 namespace SR_CORE_NS {
     Engine::Engine(Application* pApplication)
