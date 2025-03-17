@@ -49,6 +49,9 @@ endif()
 
 add_subdirectory(Core)
 
+define_property(GLOBAL PROPERTY SR_EXECUTABLE_ARGS)
+set_property(GLOBAL PROPERTY SR_EXECUTABLE_ARGS "")
+
 if (ANDROID_NDK)
     set(SR_EXECUTABLE_NAME "sparcle")
 
@@ -69,16 +72,27 @@ if (ANDROID_NDK)
 else()
     set(SR_EXECUTABLE_NAME "SREngine")
 
-    if (CMAKE_GENERATOR MATCHES "Visual Studio")
-        add_executable(${SR_EXECUTABLE_NAME} main.cpp)
-    else()
-        set(APP_ICON_RESOURCE_WINDOWS "${CMAKE_CURRENT_SOURCE_DIR}/appicon.rc")
+    set_property(GLOBAL APPEND PROPERTY SR_EXECUTABLE_ARGS "main.cpp")
 
-        add_executable(${SR_EXECUTABLE_NAME}
-            main.cpp
-            ${APP_ICON_RESOURCE_WINDOWS}
-        )
+    if (WIN32)
+        #add_custom_command(
+        #    OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/resource.res
+        #    COMMAND windres ${CMAKE_CURRENT_SOURCE_DIR}/resource.rc -O coff -o ${CMAKE_CURRENT_BINARY_DIR}/resource.res
+        #    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/resource.rc
+        #)
+        #set_property(GLOBAL APPEND PROPERTY SR_EXECUTABLE_ARGS "${CMAKE_CURRENT_BINARY_DIR}/resource.res")
+        #set_property(GLOBAL APPEND PROPERTY SR_EXECUTABLE_ARGS "${CMAKE_CURRENT_SOURCE_DIR}/resource.rc")
     endif()
+
+    if (NOT CMAKE_GENERATOR MATCHES "Visual Studio")
+        set_property(GLOBAL APPEND PROPERTY SR_EXECUTABLE_ARGS "${CMAKE_CURRENT_SOURCE_DIR}/appicon.rc")
+    endif()
+
+    get_property(SR_EXECUTABLE_ARGS_CONTENT GLOBAL PROPERTY SR_EXECUTABLE_ARGS)
+    message(STATUS "SpaRcle Engine: adding executable arguments: ${SR_EXECUTABLE_ARGS_CONTENT}")
+    add_executable(${SR_EXECUTABLE_NAME} ${SR_EXECUTABLE_ARGS_CONTENT})
+
+    #target_sources(${SR_EXECUTABLE_NAME} PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/resource.rc")
 endif()
 
 add_custom_command(TARGET ${SR_EXECUTABLE_NAME}

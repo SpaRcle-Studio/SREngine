@@ -1,5 +1,7 @@
 # We need to ensure that Python is installed as well as the required packages.
 
+set(SR_VENV_DIR "${PROJECT_SOURCE_DIR}/../.venv")
+
 if (UNIX AND NOT ANDROID_NDK)
     find_program(PYTHON_EXECUTABLE python)
 
@@ -46,7 +48,6 @@ elseif (NOT SR_PYTHON_EXECUTABLE)
     set(SR_PYTHON_URL "https://github.com/SpaRcle-Studio/Python")
 
     string(REPLACE "/" "\\" SR_PYTHON_INSTALL_DIR "${SR_PYTHON_INSTALL_DIR}")
-    file(MAKE_DIRECTORY ${SR_PYTHON_INSTALL_DIR})
 
     #set(SR_PYTHON_INSTALLER "${CMAKE_CURRENT_BINARY_DIR}/python_installer.exe")
 
@@ -60,12 +61,16 @@ elseif (NOT SR_PYTHON_EXECUTABLE)
     #    file(DOWNLOAD ${SR_PYTHON_URL} "${SR_PYTHON_INSTALLER}")
     #endif()
 
-    message(STATUS "InstallPython: cloning python...")
+    if (NOT EXISTS "${SR_PYTHON_INSTALL_DIR}")
+        message(STATUS "InstallPythons: python not found, cloning...")
 
-    execute_process(
-        COMMAND git clone ${SR_PYTHON_URL} ${SR_PYTHON_INSTALL_DIR}
-        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-    )
+        execute_process(
+            COMMAND git clone ${SR_PYTHON_URL} ${SR_PYTHON_INSTALL_DIR}
+            WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+        )
+    else()
+        message(STATUS "InstallPython: python already exists, skipping clone.")
+    endif()
 
     if (NOT EXISTS "${SR_PYTHON_INSTALL_DIR}/python.exe")
         message(FATAL_ERROR "InstallPython: failed to clone Python!")
@@ -136,3 +141,6 @@ if (NOT UNIX OR ANDROID_NDK)
         message(FATAL_ERROR "InstallPython: failed to install Python packages! ${error_output}")
     endif ()
 endif()
+
+message(STATUS "InstallPython: checking python version...")
+execute_process(COMMAND "${SR_PYTHON_EXECUTABLE}" --version)

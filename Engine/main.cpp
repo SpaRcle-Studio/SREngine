@@ -12,6 +12,8 @@
 #include <Utils/Tests/SharedPtrAutotests.h>
 #include <Utils/TypeTraits/ClassDB.h>
 
+#include <Scripting/Mono/MonoTest.h>
+
 #include <Core/Tests/AtlasBuilderTest.h>
 #include <Core/Tests/HTMLTest.h>
 
@@ -20,6 +22,8 @@ int main(int argc, char** argv) {
         SR_PLATFORM_NS::WriteConsoleError("Application::PreInit() : shared pointer autotests failed!\n");
         return 10;
     }
+
+    //SR_SCRIPTING_NS::RunMonoTest();
 
     if (SR_UTILS_NS::HasCmdOption(argv, argv + argc, "--unit-tests")) {
         SR_CORE_NS::TestManager::Instance().AddTest([]() {
