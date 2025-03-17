@@ -14,11 +14,11 @@ def create_log_file(log_file):
     if os.path.exists(log_file):
         os.remove(log_file)
     os.makedirs(os.path.dirname(log_file), exist_ok=True)
-    with open(log_file, "w") as log:
+    with open(log_file, "w", encoding="utf-8") as log:
         log.write(f'{log_prefix} Log file created.\n')
 
 def log_message(log_file, message, end="\n"):
-    with open(log_file, "a") as log:
+    with open(log_file, "a", encoding="utf-8") as log:
         log.write(f'{log_prefix} {message}{end}')
     print(f'{log_prefix} {message}{end}', end="")
 
@@ -114,47 +114,6 @@ def run_command(log_file, cmd):
     if process.returncode != 0:
         raise Exception(f'Command failed with return code {process.returncode}')
 
-
-def patch_msbuild(log_file, src_dir):
-    log_message(log_file, f'Patch MSBuild...')
-
-    msbuild_dir = find_msbuild(log_file)
-    if not msbuild_dir:
-        log_message(log_file, f'Error: MSBuild not found.')
-        sys.exit(1)
-    msbuild_dir = os.path.dirname(msbuild_dir).replace("\\", "/")
-    #msbuild_dir = msbuild_dir.replace("\\", "/")
-
-    log_message(log_file, f'MSBuild found: {msbuild_dir}')
-
-    bat_file = f"{src_dir}/msvc/setup-vs-msbuild-env.bat"
-
-    new_content = f"""
-@echo off
-:: Указываем путь к msbuild
-set "MSBUILD_PATH={msbuild_dir}"
-
-:: Добавляем в PATH (если нужно)
-set "PATH=%MSBUILD_PATH%;%PATH%"
-
-:: Проверяем, что msbuild.exe доступен
-where msbuild.exe >nul 2>nul
-if %ERRORLEVEL% neq 0 (
-    echo Error: msbuild.exe not found in PATH.
-    exit /b 1
-)
-
-echo Environment for MSBuild is set up.
-exit /b 0
-    """
-
-    log_message(log_file, f'New content for {bat_file}:\n{new_content}')
-
-    # Записываем новый файл
-    with open(bat_file, "w", encoding="utf-8") as f:
-        f.write(new_content)
-
-    log_message(log_file, f'Patch MSBuild: {bat_file} successfully created.')
 
 def patch_msvc_compile_script(log_file, src_dir):
     log_message(log_file, f'Patch MSVC compile script...')
@@ -278,25 +237,15 @@ def main():
     log_message(log_file, f'Bash path: {bash_path}')
     log_message(log_file, f'Python path: {python_dir}')
 
-    #patch_msbuild(log_file, src_dir)
     patch_msvc_compile_script(log_file, src_dir)
 
     # Проверяем наличие configure
     configure_path = os.path.join(src_dir, "configure")
     if not os.path.exists(configure_path):
         log_message(log_file, f'Run autogen.sh...')
-        #run_command(log_file, f'\"{bash_path}\" --login -c \"cd {src_dir} && ./autogen.sh\"')
         run_command(log_file, f'\"{bash_path}\" --login -c \"cd {src_dir} && ./autogen.sh --prefix={build_dir} --host=x86_64-w64-mingw32 --enable-msvc --disable-boehm PYTHON={python_dir}\"')
     else:
         log_message(log_file, f'Configure found, skipping autogen.sh')
-
-    #log_message(log_file, f'Getting latest monolite...')
-    #run_command(log_file, f'\"{bash_path}\" --login -c \"cd {src_dir} && make get-monolite-latest\"')
-
-    #monolite = src_dir + '/mcs/class/lib/monolite-win32/1A5E0066-58DC-428A-B21C-0AD6CDAE2789/mcs.exe'
-
-    #log_message(log_file, f'Give execute permissions to monolite: {monolite}')
-    #run_command(log_file, f'\"{bash_path}\" --login -c \"chmod +x {monolite}\"')
 
     # Определяем, нужна ли конвертация в Cygwin-путь
     if os.name == "nt":
@@ -306,31 +255,11 @@ def main():
     else:
         mono_bin_executable = os.path.join(venv_dir, "MonoPrebuild", "bin")
 
-    #mono_relative_path = os.path.relpath(venv_dir, src_dir)
-    #mono_bin = os.path.join("..", mono_relative_path, "MonoPrebuild", "bin")
-    #mono_bin = mono_bin.replace("\\", "/")
-
-    #mono_bin = '../../../.venv/MonoPrebuild/bin'
-
     log_message(log_file, f'Mono bin executable: {mono_bin_executable}')
 
     # Запускаем сборку
-    #run_command(log_file, f'\"{bash_path}\" --login -c \"cd {src_dir} && make MONO_EXECUTABLE=\"{monolite}\" -j{args.jobs}\" V=1')
     log_message(log_file, 'Building Mono...')
-    #run_command(log_file, f'\"{bash_path}\" --login -c \"export PATH={mono_bin}:$PATH && export MONO_EXECUTABLE={mono_bin}/mono && export MONO_PATH={mono_bin} && cd {src_dir} && make -j{args.jobs}\" V=1')
-    #run_command(log_file, f'\"{bash_path}\" --login -c \"export PATH={mono_bin}:$PATH && export MONO_EXECUTABLE={mono_bin}/mono && export MONO_PATH={mono_bin} && echo $MONO_PATH && cd {src_dir} && make -j{args.jobs}\" V=1')
-    #run_command(log_file, f'\"{bash_path}\" --login -c \"export PATH={msbuild_dir}:$PATH && export PATH={mono_bin}:$PATH && export MONO_EXECUTABLE={mono_bin}/mono && export MONO_PATH={mono_bin} && echo $MONO_PATH && cd {src_dir} && make -j{args.jobs}\" V=1')
-    #run_command(log_file, f'\"{bash_path}\" --login -c \"export PATH=\\\"{mono_bin}:$PATH\\\" && export MONO_EXECUTABLE=\\\"{mono_bin}/mono\\\" && export MONO_PATH=\\\"{mono_bin}\\\" && echo \\\"$MONO_PATH\\\" && cd \\\"{src_dir}\\\" && make -j{args.jobs}\" V=1')
-    #run_command(log_file, f'\"{bash_path}\" --login -c \"export PATH=\\\"{mono_bin}:$PATH\\\" && export MONO_EXECUTABLE=\\\"{mono_bin_executable}/mono\\\" && export MONO_PATH=\\\"{mono_bin}\\\" && cd \\\"{src_dir}\\\" && make -j{args.jobs}\" V=1')
     run_command(log_file, f'\"{bash_path}\" --login -c \"export PATH=\\\"{mono_bin_executable}:$PATH\\\" && export MONO_EXECUTABLE=\\\"{mono_bin_executable}/mono\\\" && cd \\\"{src_dir}\\\" && make -j{args.jobs}\" V=1')
-    #run_command(log_file, f'\"{bash_path}\" --login -c \"cd \\\"{src_dir}\\\" && make -j{args.jobs}\" V=1')
-
-    #command = f'"{bash_path}" --login -c "export PATH={msbuild_dir}:$PATH; export PATH={mono_bin}:$PATH; export MONO_EXECUTABLE={mono_bin}/mono; export MONO_PATH={mono_bin}; echo \\"MSBuild: $(which msbuild)\\"; echo \\"MONO_PATH: $MONO_PATH\\"; cd {src_dir} && make -j{args.jobs}"'
-    #run_command(log_file, command)
-
-    # Устанавливаем
-    #log_message(log_file, 'Making install...')
-    #run_command(log_file, f'\"{bash_path}\" --login -c \"cd {src_dir} && make install\"')
 
     log_message(log_file, 'Mono build script finished.')
 
