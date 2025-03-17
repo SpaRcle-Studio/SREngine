@@ -252,6 +252,7 @@ def main():
     parser.add_argument("--bash", required=True, help="Bash shell")
     parser.add_argument("--python", required=True, help="Python interpreter")
     parser.add_argument("--venv", required=True, help="Virtual environment directory")
+    parser.add_argument("--library", required=True, help="Target library file")
     args = parser.parse_args()
 
     src_dir = os.path.abspath(args.src).replace("\\", "/")
@@ -259,12 +260,18 @@ def main():
     bash_path = os.path.abspath(args.bash).replace("\\", "/")
     python_dir = os.path.abspath(args.python).replace("\\", "/")
     venv_dir = os.path.abspath(args.venv).replace("\\", "/")
+    target_lib = os.path.abspath(args.library).replace("\\", "/")
 
     log_file = os.path.join(build_dir, 'build_mono_python.log')
 
     create_log_file(log_file)
 
     log_message(log_file, f'Running mono build script...')
+
+    if os.path.exists(target_lib):
+        log_message(log_file, f'Target library already exists: {target_lib}')
+        log_message(log_file, f'Build skipped.')
+        sys.exit(0)
 
     log_message(log_file, f'Source directory: {src_dir}')
     log_message(log_file, f'Build directory: {build_dir}')

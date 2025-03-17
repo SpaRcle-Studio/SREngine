@@ -1,4 +1,4 @@
-if (WIN32)
+if (WIN32 OR ANDROID_NDK)
     set(SR_MONO_SOURCES_URL "https://github.com/SpaRcle-Studio/mono")
     set(SR_MONO_ROOT "${SR_VENV_DIR}/mono")
     set(SR_MONO_BUILD_DIR "${SR_VENV_DIR}/mono-build")

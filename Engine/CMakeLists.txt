@@ -21,7 +21,13 @@ message(STATUS "SpaRcle Engine: C compiler is '${CMAKE_C_COMPILER}'")
 message(STATUS "SpaRcle Engine: C++ compiler is '${CMAKE_CXX_COMPILER}'")
 
 option(SR_ENGINE_FLATPAK_BUILD "" OFF)
-option(SR_ENGINE_EXTENDED_NAME "" ON)
+
+if (WIN32)
+    option(SR_ENGINE_MONO_SUPPORT "" ON)
+    add_compile_definitions(SR_ENGINE_MONO_SUPPORT)
+else()
+    option(SR_ENGINE_MONO_SUPPORT "" OFF)
+endif()
 
 if (SR_ENGINE_FLATPAK_BUILD)
     add_compile_definitions(SR_ENGINE_FLATPAK_BUILD)

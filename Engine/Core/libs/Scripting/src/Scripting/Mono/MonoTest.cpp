@@ -4,6 +4,8 @@
 
 #include <Scripting/Mono/MonoTest.h>
 
+#ifdef SR_ENGINE_MONO_SUPPORT
+
 #include <mono/jit/jit.h>
 #include <mono/metadata/assembly.h>
 #include <mono/metadata/debug-helpers.h>
@@ -120,3 +122,5 @@ namespace SR_SCRIPTING_NS {
         mono_jit_cleanup(domain);
     }
 }
+
+#endif

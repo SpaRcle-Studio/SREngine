@@ -87,19 +87,17 @@ else()
     add_library(Scripting::lib ALIAS Scripting)
 endif()
 
-#target_include_directories(Scripting PUBLIC ${SR_MONO_INSTALL_DIR}/include/mono-2.0)
-#target_link_directories(Scripting PUBLIC ${SR_MONO_INSTALL_DIR}/lib)
-#add_dependencies(Scripting mono_build)
-#target_link_libraries(Scripting PUBLIC mono)
-
-#add_dependencies(Scripting mono_install)
-
-#include(cmake/InstallMSYS2.cmake)
-include(cmake/CloneMonoSources.cmake)
-include(cmake/InstallMono.cmake)
-include(cmake/InstallCygwin.cmake)
-include(cmake/BuildMono.cmake)
-add_dependencies(Scripting mono-build)
+if (SR_ENGINE_MONO_SUPPORT)
+    if (WIN32 OR ANDROID_NDK)
+        include(cmake/CloneMonoSources.cmake)
+        include(cmake/InstallMono.cmake)
+        include(cmake/InstallCygwin.cmake)
+        include(cmake/BuildMono.cmake)
+    else()
+        set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake/")
+        find_package(Mono REQUIRED)
+    endif()
+endif()
 
 if (EVO_SCRIPT_STATIC_LIBRARY)
     target_link_libraries(Scripting EvoScriptCore)
@@ -107,14 +105,20 @@ else()
     target_link_libraries(Scripting EvoScriptCore::lib)
 endif()
 
-target_link_libraries(Scripting ${Mono_LIBRARY})
-# for mono correct link
-target_link_libraries(Scripting version bcrypt)
+if (SR_ENGINE_MONO_SUPPORT)
+    target_link_libraries(Scripting ${Mono_LIBRARY})
+
+    if (WIN32 OR ANDROID_NDK)
+        # for mono correct link
+        target_link_libraries(Scripting version bcrypt)
+    endif()
+
+    target_include_directories(Scripting PUBLIC ${Mono_INCLUDE_DIR})
+endif()
 
 target_include_directories(Scripting PUBLIC inc)
 target_include_directories(Scripting PUBLIC libs/EvoScript/Core/inc)
 target_include_directories(Scripting PUBLIC libs)
-target_include_directories(Scripting PUBLIC ${Mono_INCLUDE_DIR})
 
 get_property(SR_UTILS_INCLUDE_DIRECTORIES_CONTENT GLOBAL PROPERTY SR_UTILS_INCLUDE_DIRECTORIES)
 target_include_directories(Scripting PUBLIC ${SR_UTILS_INCLUDE_DIRECTORIES_CONTENT})

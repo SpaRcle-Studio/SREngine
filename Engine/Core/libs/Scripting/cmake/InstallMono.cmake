@@ -1,4 +1,4 @@
-if (WIN32)
+if (WIN32 OR ANDROID_NDK)
     set(SR_MONO_PREBUILD_URL "https://github.com/SpaRcle-Studio/MonoWindows.git")
     set(SR_MONO_PREBUILD_DIR "${SR_VENV_DIR}/MonoPrebuild")
 
