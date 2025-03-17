@@ -24,6 +24,7 @@ execute_process(
     --python "${SR_PYTHON_EXECUTABLE}"
     --venv "${SR_VENV_DIR}"
     --library "${Mono_LIBRARY}"
+    --platform "${SR_ENGINE_PLATFORM}"
     RESULT_VARIABLE result
     OUTPUT_VARIABLE output
     ERROR_VARIABLE error_output

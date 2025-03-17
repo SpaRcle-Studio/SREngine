@@ -89,11 +89,17 @@ endif()
 
 if (SR_ENGINE_MONO_SUPPORT)
     if (SR_ENGINE_USE_MONO_PREBUILD)
-        include(cmake/CloneMonoPrebuild.cmake)
+        if (UNIX AND NOT ANDROID_NDK)
+            # Find Mono installation
+            find_package(PkgConfig REQUIRED)
+            pkg_check_modules(MONO REQUIRED mono-2)
+        else()
+            include(cmake/CloneMonoPrebuild.cmake)
+        endif()
     else()
         if (WIN32 OR ANDROID_NDK)
             include(cmake/CloneMonoSources.cmake)
-            include(cmake/InstallMono.cmake)
+            include(cmake/InstallMonoBuildTool.cmake)
             include(cmake/InstallCygwin.cmake)
             include(cmake/BuildMono.cmake)
         endif()
@@ -107,14 +113,20 @@ else()
 endif()
 
 if (SR_ENGINE_MONO_SUPPORT)
-    target_link_libraries(Scripting ${Mono_LIBRARY})
+    if (UNIX AND NOT ANDROID_NDK)
+        target_include_directories(Scripting PUBLIC ${MONO_INCLUDE_DIRS})
+        target_link_libraries(Scripting ${MONO_LIBRARIES} -static)
+        set_target_properties(Scripting PROPERTIES LINK_FLAGS "-static")
+    else()
+        target_link_libraries(Scripting ${Mono_LIBRARY})
 
-    if (WIN32 OR ANDROID_NDK)
-        # for mono correct link
-        target_link_libraries(Scripting version bcrypt)
+        if (WIN32 OR ANDROID_NDK)
+            # for mono correct link
+            target_link_libraries(Scripting version bcrypt)
+        endif()
+
+        target_include_directories(Scripting PUBLIC ${Mono_INCLUDE_DIR})
     endif()
-
-    target_include_directories(Scripting PUBLIC ${Mono_INCLUDE_DIR})
 endif()
 
 target_include_directories(Scripting PUBLIC inc)

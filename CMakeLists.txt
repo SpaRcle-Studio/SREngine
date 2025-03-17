@@ -10,6 +10,17 @@ if (CMAKE_SIZEOF_VOID_P EQUAL 4)
     message(FATAL_ERROR "SpaRcle Engine supports only x64 systems!")
 endif()
 
+if (WIN32)
+    set(SR_ENGINE_PLATFORM "Windows")
+elseif(ANDROID_NDK)
+    set(SR_ENGINE_PLATFORM "Android")
+elseif(UNIX)
+    set(SR_ENGINE_PLATFORM "Linux")
+else()
+    message(FATAL_ERROR "SpaRcle Engine: unsupported platform")
+endif()
+
+message(STATUS "SpaRcle Engine: current platform is ${SR_ENGINE_PLATFORM}")
 message(STATUS "SpaRcle Engine: cmake version is ${CMAKE_VERSION}")
 
 set(SR_CMAKE_ROOT_BUILD_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}")

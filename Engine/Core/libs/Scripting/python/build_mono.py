@@ -214,6 +214,7 @@ def main():
     parser.add_argument("--python", required=True, help="Python interpreter")
     parser.add_argument("--venv", required=True, help="Virtual environment directory")
     parser.add_argument("--library", required=True, help="Target library file")
+    parser.add_argument("--platform", required=True, help="Target platform (Windows, Linux, Android, etc.)")
     args = parser.parse_args()
 
     src_dir = os.path.abspath(args.src).replace("\\", "/")
@@ -222,6 +223,7 @@ def main():
     python_dir = os.path.abspath(args.python).replace("\\", "/")
     venv_dir = os.path.abspath(args.venv).replace("\\", "/")
     target_lib = os.path.abspath(args.library).replace("\\", "/")
+    platform = args.platform
 
     log_file = os.path.join(build_dir, 'build_mono_python.log')
 
@@ -245,25 +247,41 @@ def main():
     configure_path = os.path.join(src_dir, "configure")
     if not os.path.exists(configure_path):
         log_message(log_file, f'Run autogen.sh...')
-        run_command(log_file, f'\"{bash_path}\" --login -c \"cd {src_dir} && ./autogen.sh --prefix={build_dir} --host=x86_64-w64-mingw32 --enable-msvc --disable-boehm PYTHON={python_dir}\"')
+
+        additional_args = ''
+
+        if platform == 'Windows':
+            additional_args = '--host=x86_64-w64-mingw32 --enable-msvc'
+        elif platform == 'Linux':
+            additional_args = '--enable-static --disable-shared'
+
+        run_command(log_file, f'\"{bash_path}\" --login -c \"cd {src_dir} && ./autogen.sh --prefix={build_dir} {additional_args} --disable-boehm PYTHON={python_dir}\"')
     else:
         log_message(log_file, f'Configure found, skipping autogen.sh')
 
-    # Определяем, нужна ли конвертация в Cygwin-путь
-    if os.name == "nt":
-        drive, path = os.path.splitdrive(venv_dir)
-        drive = drive.lower().replace(":", "")  # Приводим букву диска к нижнему регистру
-        mono_bin_executable = f"/cygdrive/{drive}{path.replace('\\', '/')}/MonoPrebuildForBuild/bin"
-    else:
-        mono_bin_executable = os.path.join(venv_dir, "MonoPrebuildForBuild", "bin")
-
-    log_message(log_file, f'Mono bin executable: {mono_bin_executable}')
-
     # Запускаем сборку
     log_message(log_file, 'Building Mono...')
-    run_command(log_file, f'\"{bash_path}\" --login -c \"export PATH=\\\"{mono_bin_executable}:$PATH\\\" && export MONO_EXECUTABLE=\\\"{mono_bin_executable}/mono\\\" && cd \\\"{src_dir}\\\" && make -j{args.jobs}\" V=1')
+
+    if platform == 'Windows':
+        # Определяем, нужна ли конвертация в Cygwin-путь
+        if os.name == "nt":
+            drive, path = os.path.splitdrive(venv_dir)
+            drive = drive.lower().replace(":", "")  # Приводим букву диска к нижнему регистру
+            mono_bin_executable = f"/cygdrive/{drive}{path.replace('\\', '/')}/MonoBuildTool/bin"
+        else:
+            mono_bin_executable = os.path.join(venv_dir, "MonoBuildTool", "bin")
+
+        log_message(log_file, f'Mono bin executable: {mono_bin_executable}')
+
+        run_command(log_file, f'\"{bash_path}\" --login -c \"export PATH=\\\"{mono_bin_executable}:$PATH\\\" && export MONO_EXECUTABLE=\\\"{mono_bin_executable}/mono\\\" && cd \\\"{src_dir}\\\" && make -j{args.jobs}\" V=1')
+    else:
+        run_command(log_file, f'\"{bash_path}\" --login -c \"cd \\\"{src_dir}\\\" && make -j{args.jobs}\" V=1')
 
     log_message(log_file, 'Mono build script finished.')
+
+    # to make install call
+    # "C:/Work/SREngine/.venv/cygwin/bin/bash.exe" --login -c "cd "C:\Work\SREngine\.venv\mono" && make install"
+    # replace paths to your
 
 if __name__ == "__main__":
     main()

@@ -3,7 +3,7 @@
 set(SR_VENV_DIR "${PROJECT_SOURCE_DIR}/../.venv")
 
 if (UNIX AND NOT ANDROID_NDK)
-    find_program(PYTHON_EXECUTABLE python)
+    find_program(PYTHON_EXECUTABLE NAMES python3 python)
 
     if (PYTHON_EXECUTABLE)
        message(STATUS "InstallPython: Python executable found: ${PYTHON_EXECUTABLE}")
