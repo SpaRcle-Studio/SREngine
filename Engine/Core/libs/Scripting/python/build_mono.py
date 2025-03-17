@@ -6,6 +6,8 @@ import sys
 import winreg
 import glob
 
+sys.stdout.reconfigure(encoding='utf-8')
+
 log_prefix = "[MonoBuild]"
 
 def create_log_file(log_file):
