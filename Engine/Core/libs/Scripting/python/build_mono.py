@@ -92,16 +92,16 @@ def stream_output(pipe, log_file, prefix):
         log_message(log_file, f'{prefix} {line}', end="")
     pipe.close()
 
-def run_command(log_file, cmd):
-    log_message(log_file, f'Run command: "{cmd}"')
+def run_command(log_file, prefix, cmd):
+    log_message(log_file, f'[{prefix}] Run command: "{cmd}"')
 
     process = subprocess.Popen(
         cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True
     )
 
     # Создаем потоки для одновременного чтения stdout и stderr
-    stdout_thread = threading.Thread(target=stream_output, args=(process.stdout, log_file, '[Command]'))
-    stderr_thread = threading.Thread(target=stream_output, args=(process.stderr, log_file, '[Command] [Error]'))
+    stdout_thread = threading.Thread(target=stream_output, args=(process.stdout, log_file, f'[{prefix}] [Command]'))
+    stderr_thread = threading.Thread(target=stream_output, args=(process.stderr, log_file, f'[{prefix}] [Command] [Error]'))
 
     stdout_thread.start()
     stderr_thread.start()
@@ -114,7 +114,7 @@ def run_command(log_file, cmd):
     process.wait()
 
     if process.returncode != 0:
-        raise Exception(f'Command failed with return code {process.returncode}')
+        raise Exception(f'[{prefix}] Command failed with return code {process.returncode}')
 
 
 def patch_msvc_compile_script(log_file, src_dir):
@@ -243,8 +243,13 @@ def main():
 
     patch_msvc_compile_script(log_file, src_dir)
 
+    #sdk_path = 'Work/SREngine/Android/android-sdk/ndk'
+    #ndk_path = 'C:/Work/SREngine/Android/android-sdk/ndk/29.0.13113456'
+    ndk_path = '/cygdrive/c/Work/SREngine/Android/android-sdk/ndk/29.0.13113456'
+
     # Проверяем наличие configure
     configure_path = os.path.join(src_dir, "configure")
+    #if not os.path.exists(configure_path) or True:
     if not os.path.exists(configure_path):
         log_message(log_file, f'Run autogen.sh...')
 
@@ -254,28 +259,45 @@ def main():
             additional_args = '--host=x86_64-w64-mingw32 --enable-msvc'
         elif platform == 'Linux':
             additional_args = '--enable-static --disable-shared'
+        elif platform == 'Android':
+            #additional_args = '--host=aarch64-linux-android'
+            additional_args = f'--host=aarch64-linux-android --with-btls-android-ndk={ndk_path} CC={ndk_path}/toolchains/llvm/prebuilt/windows-x86_64/bin/aarch64-linux-android21-clang CXX={ndk_path}/toolchains/llvm/prebuilt/windows-x86_64/bin/aarch64-linux-android21-clang++'
 
-        run_command(log_file, f'\"{bash_path}\" --login -c \"cd {src_dir} && ./autogen.sh --prefix={build_dir} {additional_args} --disable-boehm PYTHON={python_dir}\"')
+        #run_command(log_file, 'Autogen', f'\"{bash_path}\" --login -c \"cd {src_dir} && export ANDROID_TOOLCHAIN_NAME={ndk_path}/build/core/toolchains/arm-linux-androideabi-clang && ./autogen.sh --prefix={build_dir} {additional_args} --disable-boehm PYTHON={python_dir}\"')
+        run_command(log_file, 'Autogen', f'\"{bash_path}\" --login -c \"cd {src_dir} && ./autogen.sh --prefix={build_dir} {additional_args} --disable-boehm PYTHON={python_dir}\"')
     else:
         log_message(log_file, f'Configure found, skipping autogen.sh')
 
     # Запускаем сборку
     log_message(log_file, 'Building Mono...')
 
-    if platform == 'Windows':
-        # Определяем, нужна ли конвертация в Cygwin-путь
-        if os.name == "nt":
-            drive, path = os.path.splitdrive(venv_dir)
-            drive = drive.lower().replace(":", "")  # Приводим букву диска к нижнему регистру
-            mono_bin_executable = f"/cygdrive/{drive}{path.replace('\\', '/')}/MonoBuildTool/bin"
-        else:
-            mono_bin_executable = os.path.join(venv_dir, "MonoBuildTool", "bin")
+    if platform == 'Windows' or platform == 'Android':
+        drive, path = os.path.splitdrive(venv_dir)
+        drive = drive.lower().replace(":", "")  # Приводим букву диска к нижнему регистру
+        mono_bin_executable = f"/cygdrive/{drive}{path.replace('\\', '/')}/MonoBuildTool/bin"
 
         log_message(log_file, f'Mono bin executable: {mono_bin_executable}')
 
-        run_command(log_file, f'\"{bash_path}\" --login -c \"export PATH=\\\"{mono_bin_executable}:$PATH\\\" && export MONO_EXECUTABLE=\\\"{mono_bin_executable}/mono\\\" && cd \\\"{src_dir}\\\" && make -j{args.jobs}\" V=1')
+        if platform == 'Android':
+            #make_path = ndk_path + '/toolchains/llvm/prebuilt/windows-x86_64/bin/make.exe'
+            #run_command(log_file, 'Make', f'SET ANDROID_NDK={ndk_path} && \"{make_path}\"')
+
+            command_args = f'export ANDROID_NDK={ndk_path}'
+            command_args += ' && export ANDROID_NDK_ROOT="$ANDROID_NDK"'
+            command_args += ' && export ANDROID_NDK_TOOLCHAIN="$ANDROID_NDK/toolchains/llvm/prebuilt/windows-x86_64"'
+            command_args += ' && export PATH="$ANDROID_NDK_TOOLCHAIN/bin:$PATH"'
+            #command_args += ' && which aarch64-linux-android21-clang'
+            #command_args += ' && echo $ANDROID_NDK_TOOLCHAIN'
+            #command_args += ' && ls -l $ANDROID_NDK_TOOLCHAIN/bin'
+            command_args += f' && export ANDROID_NDK_TOOLCHAINS_PATH="{ndk_path}/toolchains"'
+
+            run_command(log_file, 'Make', f'\"{bash_path}\" --login -c \"{command_args} && cd \\\"{src_dir}\\\" && make -j{args.jobs}\" V=1')
+        else:
+            run_command(log_file, 'Make', f'\"{bash_path}\" --login -c \"export PATH=\\\"{mono_bin_executable}:$PATH\\\" && export MONO_EXECUTABLE=\\\"{mono_bin_executable}/mono\\\" && cd \\\"{src_dir}\\\" && make -j{args.jobs}\" V=1')
+
+        #run_command(log_file, 'Make', f'\"{bash_path}\" --login -c \"export PATH=\\\"{mono_bin_executable}:$PATH\\\" && export MONO_EXECUTABLE=\\\"{mono_bin_executable}/mono\\\" && export ANDROID_NDK=\\\"C:/{ndk_path}\\\" && export CMAKE_TOOLCHAIN_FILE=\\\"$ANDROID_NDK/build/cmake/android.toolchain.cmake\\\" && export CMAKE_C_COMPILER=\\\"$ANDROID_NDK/toolchains/llvm/prebuilt/windows-x86_64/bin/aarch64-linux-android21-clang\\\" && export CMAKE_CXX_COMPILER=\\\"$ANDROID_NDK/toolchains/llvm/prebuilt/windows-x86_64/bin/aarch64-linux-android21-clang++\\\" && cd \\\"{src_dir}\\\" && make -j{args.jobs}\" V=1')
     else:
-        run_command(log_file, f'\"{bash_path}\" --login -c \"cd \\\"{src_dir}\\\" && make -j{args.jobs}\" V=1')
+        run_command(log_file, 'Make', f'\"{bash_path}\" --login -c \"cd \\\"{src_dir}\\\" && make -j{args.jobs}\" V=1')
 
     log_message(log_file, 'Mono build script finished.')
 
