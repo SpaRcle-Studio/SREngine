@@ -78,6 +78,12 @@ endif()
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DSR_DLL_EXPORTS -DSR_UTILS_ASSIMP")
 
+option(SR_ENGINE_LUA_SUPPORT "Enable Lua support" ON)
+if (SR_ENGINE_LUA_SUPPORT)
+    add_compile_definitions(SR_ENGINE_LUA_SUPPORT)
+    message(STATUS "SpaRcle Engine: Lua support enabled")
+endif()
+
 set(SR_PHYSICS_USE_BULLET3 OFF)
 set(SR_PHYSICS_USE_PHYSX ON)
 set(SR_PHYSICS_USE_BOX2D OFF)

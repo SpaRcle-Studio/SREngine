@@ -15,3 +15,4 @@
 #include "src/Scripting/Impl/EvoScriptResourceReloader.cpp"
 
 #include "src/Scripting/Mono/MonoTest.cpp"
+#include "src/Scripting/Lua/LuaTest.cpp"

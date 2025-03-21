@@ -128,6 +128,20 @@ if (SR_ENGINE_MONO_SUPPORT)
     endif()
 endif()
 
+if (SR_ENGINE_LUA_SUPPORT)
+    set(SR_LUA_SOURCES libs/lua/onelua.c)
+
+    add_library(Lua STATIC ${SR_LUA_SOURCES})
+    target_compile_definitions(Lua PRIVATE MAKE_LIB)
+
+    target_include_directories(Lua PUBLIC libs/lua)
+
+    set(SOL2_SINGLE ON CACHE INTERNAL "" FORCE)
+    add_subdirectory(libs/sol2)
+    target_include_directories(Scripting PUBLIC libs/sol2/include)
+    target_link_libraries(Scripting Lua sol2)
+endif()
+
 target_include_directories(Scripting PUBLIC inc)
 target_include_directories(Scripting PUBLIC libs/EvoScript/Core/inc)
 target_include_directories(Scripting PUBLIC libs)

@@ -34,3 +34,9 @@
 [submodule "Engine/Core/libs/Graphics"]
 	path = Engine/Core/libs/Graphics
 	url = https://github.com/SpaRcle-Studio/SRRender
+[submodule "Engine/Core/libs/Scripting/libs/sol2"]
+	path = Engine/Core/libs/Scripting/libs/sol2
+	url = https://github.com/SpaRcle-Studio/sol2
+[submodule "Engine/Core/libs/Scripting/libs/lua"]
+	path = Engine/Core/libs/Scripting/libs/lua
+	url = https://github.com/lua/lua

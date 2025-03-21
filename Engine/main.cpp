@@ -12,6 +12,7 @@
 #include <Utils/Tests/SharedPtrAutotests.h>
 
 #include <Scripting/Mono/MonoTest.h>
+#include <Scripting/Lua/LuaTest.h>
 
 #include <Core/Tests/AtlasBuilderTest.h>
 #include <Core/Tests/HTMLTest.h>
@@ -19,6 +20,10 @@
 int main(int argc, char** argv) {
 #ifdef SR_ENGINE_MONO_SUPPORT
     SR_SCRIPTING_NS::RunMonoTest();
+#endif
+
+#ifdef SR_ENGINE_LUA_SUPPORT
+    SR_SCRIPTING_NS::RunLuaTest();
 #endif
 
     if (!SR_UTILS_NS::RunTestSharedPtr()) {
