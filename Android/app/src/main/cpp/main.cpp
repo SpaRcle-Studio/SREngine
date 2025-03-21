@@ -26,6 +26,8 @@
 #include <Core/Engine.h>
 #include <Core/World/World.h>
 
+#include <Scripting/Mono/MonoTest.h>
+
 #include <android/log.h>
 
 
@@ -334,6 +336,14 @@ void android_main(struct android_app* state) {
         // We are starting with a previous saved state; restore from it.
         engineAndroid.state = *(struct saved_state*)state->savedState;
     }
+
+    while (!engineAndroid.app->activity->assetManager) {
+        LOGI("Waiting asset manager...");
+    }
+
+    LOGI("Asset manager is ready!");
+
+    SR_SCRIPTING_NS::RunMonoTest(engineAndroid.app->activity->assetManager);
 
     // loop waiting for stuff to do.
 

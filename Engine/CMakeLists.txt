@@ -21,12 +21,8 @@ message(STATUS "SpaRcle Engine: C compiler is '${CMAKE_C_COMPILER}'")
 message(STATUS "SpaRcle Engine: C++ compiler is '${CMAKE_CXX_COMPILER}'")
 
 option(SR_ENGINE_FLATPAK_BUILD "" OFF)
-
-if (ANDROID_NDK)
-    option(SR_ENGINE_USE_MONO_PREBUILD "" OFF)
-else()
-    option(SR_ENGINE_USE_MONO_PREBUILD "" ON)
-endif()
+option(SR_ENGINE_USE_MONO_PREBUILD "" ON)
+option(SR_ENGINE_USE_MONO_DOTNET "" ON)
 
 if (WIN32 OR UNIX OR ANDROID_NDK)
     option(SR_ENGINE_MONO_SUPPORT "" ON)

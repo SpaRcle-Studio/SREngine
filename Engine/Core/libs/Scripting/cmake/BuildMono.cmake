@@ -12,8 +12,8 @@ message(STATUS "SR_MONO_ROOT: ${SR_MONO_ROOT}")
 
 message(STATUS "Building mono... This may take a while (ten minutes or more)")
 
-set(Mono_INCLUDE_DIR "${SR_MONO_ROOT}/msvc/include")
-set(Mono_LIBRARY "${SR_MONO_ROOT}/msvc/build/sgen/x64/lib/Release/libmono-static-sgen.lib")
+set(MONO_INCLUDE_DIRS "${SR_MONO_ROOT}/msvc/include")
+set(MONO_LIBRARIES "${SR_MONO_ROOT}/msvc/build/sgen/x64/lib/Release/libmono-static-sgen.lib")
 
 execute_process(
     COMMAND ${SR_PYTHON_EXECUTABLE} "${CMAKE_CURRENT_SOURCE_DIR}/python/build_mono.py"
@@ -23,7 +23,7 @@ execute_process(
     --bash "${SR_BASH_EXECUTABLE}"
     --python "${SR_PYTHON_EXECUTABLE}"
     --venv "${SR_VENV_DIR}"
-    --library "${Mono_LIBRARY}"
+    --library "${MONO_LIBRARIES}"
     --platform "${SR_ENGINE_PLATFORM}"
     RESULT_VARIABLE result
     OUTPUT_VARIABLE output

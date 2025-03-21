@@ -12,6 +12,28 @@ echo CMD tools url: %CMDLINE_TOOLS_URL%
 echo CMD tools zip: %CMDLINE_TOOLS_ZIP%
 echo CMD tools dir: %CMDLINE_TOOLS_DIR%
 
+:: Устанавливаем переменные среды для текущей сессии
+set "ANDROID_HOME=%SDK_DIR%"
+set "ANDROID_SDK_ROOT=%ANDROID_HOME%"
+set "PATH=%ANDROID_HOME%\cmdline-tools\latest\bin;%ANDROID_HOME%\platform-tools;%PATH%"
+
+echo ANDROID_HOME: %ANDROID_HOME%
+
+echo Creating local.properties...
+
+rem Получаем абсолютный путь до ANDROID_HOME
+for /f "delims=" %%A in ('cd') do set "CURRENT_DIR=%%A"
+set "SDK_PATH=%ANDROID_HOME%"
+
+rem Заменяем \ на \\ в пути SDK
+set "SDK_PATH=%SDK_PATH:\=\\%"
+
+(
+echo sdk.dir=%SDK_PATH%
+) > "%ANDROID_HOME%\..\local.properties"
+
+echo local.properties successfully created!
+
 :: Создаем нужные папки
 mkdir "%CMDLINE_TOOLS_DIR%" 2>nul
 
@@ -28,11 +50,6 @@ echo Extracting command-line tools...
 powershell -Command "Expand-Archive -Path '%CMDLINE_TOOLS_ZIP%' -DestinationPath '%CMDLINE_TOOLS_DIR%' -Force"
 del "%CMDLINE_TOOLS_ZIP%"
 move "%CMDLINE_TOOLS_DIR%\cmdline-tools" "%CMDLINE_TOOLS_DIR%\latest"
-
-:: Устанавливаем переменные среды для текущей сессии
-set "ANDROID_HOME=%SDK_DIR%"
-set "ANDROID_SDK_ROOT=%ANDROID_HOME%"
-set "PATH=%ANDROID_HOME%\cmdline-tools\latest\bin;%ANDROID_HOME%\platform-tools;%PATH%"
 
 :: Создаем папку лицензий и автоматически принимаем их
 mkdir "%ANDROID_HOME%\licenses" 2>nul

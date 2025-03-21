@@ -1,0 +1,1 @@
+"platform-tools/adb.exe" logcat | findstr /i "SREngine srengine sparcle SpaRcle monika"

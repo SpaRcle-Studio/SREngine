@@ -7,8 +7,16 @@
 
 #include <Utils/stdInclude.h>
 
+#ifdef SR_ANDROID
+    class AAssetManager;
+#endif
+
 namespace SR_SCRIPTING_NS {
+#ifdef SR_ANDROID
+    void RunMonoTest(AAssetManager* pAssetManager);
+#else
     void RunMonoTest();
+#endif
 }
 
 #endif //SR_ENGINE_MONO_TEST_H

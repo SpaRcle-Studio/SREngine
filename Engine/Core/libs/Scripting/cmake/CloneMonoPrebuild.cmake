@@ -18,10 +18,10 @@ if (NOT EXISTS "${SR_MONO_PREBUILD_DIR}")
     message(FATAL_ERROR "CloneMonoPrebuild: failed to clone mono!")
 endif()
 
-set(Mono_INCLUDE_DIR "${SR_MONO_PREBUILD_DIR}/include/mono-2.0")
+set(MONO_INCLUDE_DIRS "${SR_MONO_PREBUILD_DIR}/include/mono-2.0")
 
 if (WIN32)
-    set(Mono_LIBRARY "${SR_MONO_PREBUILD_DIR}/lib/libmono-static-sgen.lib")
+    set(MONO_LIBRARIES "${SR_MONO_PREBUILD_DIR}/lib/libmono-static-sgen.lib")
 else()
-    set(Mono_LIBRARY "${SR_MONO_PREBUILD_DIR}/lib/libmonosgen-2.0.a")
+    set(MONO_LIBRARIES "${SR_MONO_PREBUILD_DIR}/lib/libmonosgen-2.0.a")
 endif()

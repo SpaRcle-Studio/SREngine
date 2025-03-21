@@ -4,8 +4,8 @@
 # Mono_EXECUTABLE        Where to find 'mono'
 # XBUILD_EXECUTABLE      Where to find 'xbuild'
 # Mono_VERSION           The version number of the Mono interpreter
-# Mono_LIBRARY           Path to the Mono library
-# Mono_INCLUDE_DIR       Path to the Mono include directory
+# MONO_LIBRARIES           Path to the Mono library
+# MONO_INCLUDE_DIRS       Path to the Mono include directory
 
 set(Mono_ROOT "" CACHE PATH "Set the location of the Mono root directory")
 
@@ -20,17 +20,17 @@ find_program(XBUILD_EXECUTABLE xbuild
     PATH_SUFFIXES bin
 )
 
-find_path(Mono_INCLUDE_DIR mono-2.0/mono/jit/jit.h
+find_path(MONO_INCLUDE_DIRS mono-2.0/mono/jit/jit.h
     "${Mono_ROOT}/include"
     PATH_SUFFIXES mono-2.0
 )
 
-find_library(Mono_LIBRARY NAMES mono-2.0-sgen
+find_library(MONO_LIBRARIES NAMES mono-2.0-sgen
     "${Mono_ROOT}/lib"
 )
 
 # Если не найдено, ищем в стандартных местах
-if(NOT Mono_EXECUTABLE OR NOT XBUILD_EXECUTABLE OR NOT Mono_INCLUDE_DIR OR NOT Mono_LIBRARY)
+if(NOT Mono_EXECUTABLE OR NOT XBUILD_EXECUTABLE OR NOT MONO_INCLUDE_DIRS OR NOT MONO_LIBRARIES)
     if(WIN32)
         set(csharp_Mono_bin_hints
                 "[HKEY_LOCAL_MACHINE\\SOFTWARE\\Novell\\Mono;DefaultCLR]/bin"
@@ -76,7 +76,7 @@ endif()
 
 # Проверка найденных файлов
 include(FindPackageHandleStandardArgs)
-find_package_handle_standard_args(Mono DEFAULT_MSG Mono_EXECUTABLE XBUILD_EXECUTABLE Mono_INCLUDE_DIR Mono_LIBRARY)
+find_package_handle_standard_args(Mono DEFAULT_MSG Mono_EXECUTABLE XBUILD_EXECUTABLE MONO_INCLUDE_DIRS MONO_LIBRARIES)
 
 # Пометка переменных как `ADVANCED`
-mark_as_advanced(Mono_EXECUTABLE XBUILD_EXECUTABLE Mono_INCLUDE_DIR Mono_LIBRARY Mono_VERSION)
+mark_as_advanced(Mono_EXECUTABLE XBUILD_EXECUTABLE MONO_INCLUDE_DIRS MONO_LIBRARIES Mono_VERSION)

@@ -1,1 +1,0 @@
-"platform-tools/adb.exe" logcat | findstr SpaRcle

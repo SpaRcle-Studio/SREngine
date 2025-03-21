@@ -36,3 +36,5 @@ Build
 **/GTAGS
 venv
 .venv
+lib
+jniLibs

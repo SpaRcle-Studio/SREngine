@@ -1,6 +1,7 @@
 # We need to ensure that Python is installed as well as the required packages.
 
 set(SR_VENV_DIR "${PROJECT_SOURCE_DIR}/../.venv")
+file(MAKE_DIRECTORY "${SR_VENV_DIR}")
 
 if (UNIX AND NOT ANDROID_NDK)
     find_program(PYTHON_EXECUTABLE NAMES python3 python)
@@ -40,7 +41,7 @@ elseif(EXISTS "${SR_PYTHON_INSTALL_DIR}/python.exe")
 elseif (NOT SR_PYTHON_EXECUTABLE)
     message(STATUS "InstallPython: Python not found.")
 
-    set(SR_PYTHON_INSTALL_DIR "${CMAKE_CURRENT_BINARY_DIR}/python")
+    set(SR_PYTHON_INSTALL_DIR "${SR_VENV_DIR}/python-windows")
 
     #set(SR_PYTHON_VERSION "3.13.0")
     #set(SR_PYTHON_ZIP "python-${SR_PYTHON_VERSION}-amd64.exe")
