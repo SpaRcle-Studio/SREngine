@@ -20,6 +20,13 @@
     cmake git ninja gcc xorg pkgconf gtk3 vulkan-headers vulkan-validation-layers vulkan-tools xcb-util-cursor python python-pip python-numpy
 </details>
 
+<details>
+<summary>Fedora Dependencies.</summary>
+
+    cmake git ninja gcc gcc-c++ libX11-devel libXext-devel libXrandr-devel libXrender-devel libXinerama-devel libXcursor-devel gtk3-devel vulkan-devel vulkan-loader xorg-x11-server-Xwayland xcb-util-cursor-devel xcb-util-wm-devel libxcb-devel xcb-util-keysyms-devel python-numpy python-clang binutils-devel xcb-util-devel openal-devel
+
+</details>
+
 ## Building with Ninja.
 
 1. In the root directory of the project, create a build directory.
