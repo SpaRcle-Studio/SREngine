@@ -72,8 +72,6 @@ set(CMAKE_CXX_STANDARD 20)
 #)
 # mono build
 
-add_subdirectory(libs/EvoScript/Core)
-
 if (SR_SCRIPTING_STATIC_LIBRARY)
     add_library(Scripting STATIC Scripting.cxx)
 
@@ -104,12 +102,6 @@ if (SR_ENGINE_MONO_SUPPORT)
             include(cmake/BuildMono.cmake)
         endif()
     endif()
-endif()
-
-if (EVO_SCRIPT_STATIC_LIBRARY)
-    target_link_libraries(Scripting EvoScriptCore)
-else()
-    target_link_libraries(Scripting EvoScriptCore::lib)
 endif()
 
 if (SR_ENGINE_MONO_SUPPORT)

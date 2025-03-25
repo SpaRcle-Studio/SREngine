@@ -34,8 +34,7 @@
 #include <Physics/3D/Raycast3D.h>
 #include <Physics/PhysicsMaterial.h>
 
-#include <Scripting/Impl/EvoScriptManager.h>
-#include "Scripting/Mono/MonoTest.h"
+//#include <Scripting/Impl/EvoScriptManager.h>
 
 namespace SR_CORE_NS {
     Engine::Engine(Application* pApplication)
@@ -122,7 +121,7 @@ namespace SR_CORE_NS {
 
         SR_LOG("Engine::RegisterLibraries() : registering all libraries...");
 
-        SpaRcle::API::RegisterEvoScriptClasses(this);
+        //SpaRcle::API::RegisterEvoScriptClasses(this);
 
         m_localizationManager = new SR_UTILS_NS::Localization::LocalizationManager();
 
@@ -300,7 +299,7 @@ namespace SR_CORE_NS {
             });
         }
 
-        SR_SCRIPTING_NS::EvoScriptManager::Instance().Update(true);
+        //SR_SCRIPTING_NS::EvoScriptManager::Instance().Update(true);
 
         return true;
     }

@@ -7,7 +7,7 @@
 
 #include <Core/UI/Button.h>
 
-#include <EvoScript/Compilation/CMakeCodeGen.h>
+//#include <Scripting/Compilation/CMakeCodeGen.h>
 
 #include <Utils/Input/InputSystem.h>
 #include <Utils/Math/Noise.h>
@@ -28,7 +28,7 @@
 #include <Audio/Types/AudioSource.h>
 
 namespace SpaRcle {
-    void API::RegisterEvoScriptClasses(SR_CORE_NS::Engine* pEngine) {
+    /*void API::RegisterEvoScriptClasses(SR_CORE_NS::Engine* pEngine) {
         Initialize();
 
         auto&& compiler = SR_SCRIPTING_NS::GlobalEvoCompiler::Instance();
@@ -797,6 +797,6 @@ namespace SpaRcle {
         EvoScript::Tools::ESFileSystem::Copy = [](const std::string& from, const std::string& to) -> bool {
             return SR_PLATFORM_NS::Copy(from, to);
         };
-    }
+    }*/
 }
 

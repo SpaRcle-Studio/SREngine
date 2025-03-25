@@ -7,12 +7,12 @@
 #include <Utils/Resources/ResourceManager.h>
 
 #include <Scripting/Base/Behaviour.h>
-#include <Scripting/Impl/EvoBehaviour.h>
+//#include <Scripting/Impl/EvoBehaviour.h>
 
 #include <Codegen/Behaviour.generated.hpp>
 
 namespace SR_SCRIPTING_NS {
-    IRawBehaviour* IRawBehaviour::Load(SR_UTILS_NS::Path path) {
+    /*IRawBehaviour* IRawBehaviour::Load(SR_UTILS_NS::Path path) {
         SR_GLOBAL_LOCK
 
         auto&& resourceManager = SR_UTILS_NS::ResourceManager::Instance();
@@ -27,14 +27,14 @@ namespace SR_SCRIPTING_NS {
         IRawBehaviour* pBehaviour = nullptr;
 
         if (path.GetExtensionView() == "cpp") {
-            pBehaviour = new EvoBehaviour();
+            //pBehaviour = new EvoBehaviour();
         }
         else {
             SR_WARN("IRawBehaviour::Load() : unknown behaviour extension!\n\tExtension: \"{}\"", path.GetExtension());
             return nullptr;
         }
 
-        pBehaviour->SetId(path.ToStringRef(), false /** auto register */);
+        pBehaviour->SetId(path.ToStringRef(), false); // auto register
 
         if (!pBehaviour->Load()) {
             SR_WARN("Behaviour::Load() : failed to load behaviour! \n\tPath: " + path.ToString());
@@ -54,34 +54,34 @@ namespace SR_SCRIPTING_NS {
     void IRawBehaviour::OnReloadDone() {
         m_component->OnBehaviourChanged();
         IResource::OnReloadDone();
-    }
+    }*/
 
     /// ----------------------------------------------------------------------------------------------------------------
 
     void Behaviour::Awake() {
-        if (m_rawBehaviour) { m_rawBehaviour->Awake(); }
+        //if (m_rawBehaviour) { m_rawBehaviour->Awake(); }
         Super::Awake();
     }
 
     void Behaviour::OnEnable() {
-        if (m_rawBehaviour) { m_rawBehaviour->OnEnable(); }
+        //if (m_rawBehaviour) { m_rawBehaviour->OnEnable(); }
         Super::OnEnable();
     }
 
     void Behaviour::OnDisable() {
-        if (m_rawBehaviour) { m_rawBehaviour->OnDisable(); }
+        //if (m_rawBehaviour) { m_rawBehaviour->OnDisable(); }
         Super::OnDisable();
     }
 
     void Behaviour::Start() {
-        if (m_rawBehaviour) { m_rawBehaviour->Start(); }
+        //if (m_rawBehaviour) { m_rawBehaviour->Start(); }
         Super::Start();
     }
 
     void Behaviour::OnDestroy() {
-        if (m_rawBehaviour) { m_rawBehaviour->OnDestroy(); }
+        //if (m_rawBehaviour) { m_rawBehaviour->OnDestroy(); }
 
-        SetRawBehaviour(SR_UTILS_NS::Path());
+        //SetRawBehaviour(SR_UTILS_NS::Path());
 
         Super::OnDestroy();
 
@@ -91,61 +91,61 @@ namespace SR_SCRIPTING_NS {
     }
 
     void Behaviour::OnAttached() {
-        if (m_rawBehaviour) { m_rawBehaviour->OnAttached(); }
+        //if (m_rawBehaviour) { m_rawBehaviour->OnAttached(); }
         Super::OnAttached();
     }
 
     void Behaviour::OnDetached() {
-        if (m_rawBehaviour) { m_rawBehaviour->OnDetached(); }
+        //if (m_rawBehaviour) { m_rawBehaviour->OnDetached(); }
         Super::OnDetached();
     }
 
     void Behaviour::Update(float_t dt) {
-        if (m_rawBehaviour) { m_rawBehaviour->Update(dt); }
+        //if (m_rawBehaviour) { m_rawBehaviour->Update(dt); }
         Super::Update(dt);
     }
 
     void Behaviour::FixedUpdate() {
-        if (m_rawBehaviour) { m_rawBehaviour->FixedUpdate(); }
+        //if (m_rawBehaviour) { m_rawBehaviour->FixedUpdate(); }
         Super::FixedUpdate();
     }
 
     void Behaviour::OnTransformSet() {
-        if (m_rawBehaviour) { m_rawBehaviour->OnTransformSet(); }
+        //if (m_rawBehaviour) { m_rawBehaviour->OnTransformSet(); }
         Super::OnTransformSet();
     }
 
     void Behaviour::OnCollisionEnter(const SR_UTILS_NS::CollisionData& data) {
-        if (m_rawBehaviour) { m_rawBehaviour->OnCollisionEnter(data); }
+        //if (m_rawBehaviour) { m_rawBehaviour->OnCollisionEnter(data); }
         Super::OnCollisionEnter(data);
     }
 
     void Behaviour::OnCollisionExit(const SR_UTILS_NS::CollisionData& data) {
-        if (m_rawBehaviour) { m_rawBehaviour->OnCollisionExit(data); }
+        //if (m_rawBehaviour) { m_rawBehaviour->OnCollisionExit(data); }
         Super::OnCollisionExit(data);
     }
 
     void Behaviour::OnCollisionStay(const SR_UTILS_NS::CollisionData& data) {
-        if (m_rawBehaviour) { m_rawBehaviour->OnCollisionStay(data); }
+        //if (m_rawBehaviour) { m_rawBehaviour->OnCollisionStay(data); }
         Super::OnCollisionStay(data);
     }
 
     void Behaviour::OnTriggerEnter(const SR_UTILS_NS::CollisionData& data) {
-        if (m_rawBehaviour) { m_rawBehaviour->OnTriggerEnter(data); }
+        //if (m_rawBehaviour) { m_rawBehaviour->OnTriggerEnter(data); }
         Super::OnTriggerEnter(data);
     }
 
     void Behaviour::OnTriggerExit(const SR_UTILS_NS::CollisionData& data) {
-        if (m_rawBehaviour) { m_rawBehaviour->OnTriggerExit(data); }
+        //if (m_rawBehaviour) { m_rawBehaviour->OnTriggerExit(data); }
         Super::OnTriggerExit(data);
     }
 
     void Behaviour::OnTriggerStay(const SR_UTILS_NS::CollisionData& data) {
-        if (m_rawBehaviour) { m_rawBehaviour->OnTriggerStay(data); }
+        //if (m_rawBehaviour) { m_rawBehaviour->OnTriggerStay(data); }
         Super::OnTriggerStay(data);
     }
 
-    SR_UTILS_NS::Path Behaviour::GetRawBehaviourPath() const noexcept {
+    /*SR_UTILS_NS::Path Behaviour::GetRawBehaviourPath() const noexcept {
         return m_rawBehaviour ? m_rawBehaviour->GetResourcePath() : SR_UTILS_NS::Path();
     }
 
@@ -165,12 +165,12 @@ namespace SR_SCRIPTING_NS {
         }
 
         OnBehaviourChanged();
-    }
+    }*/
 
     void Behaviour::OnBehaviourChanged() {
-        if (m_rawBehaviour) {
-            m_rawBehaviour->SetComponent(this);
-        }
+        //if (m_rawBehaviour) {
+        //    m_rawBehaviour->SetComponent(this);
+        //}
 
         /// чтобы скрипт занаво отработал логику после перезагрузки,
         /// делаем такой маневр
@@ -185,7 +185,7 @@ namespace SR_SCRIPTING_NS {
     void Behaviour::Save(SR_UTILS_NS::ISerializer& serializer) const {
         Super::Save(serializer);
 
-        if (m_rawBehaviour) {
+        /*if (m_rawBehaviour) {
             auto&& properties = m_rawBehaviour->GetProperties();
 
             serializer.BeginArray(properties.size(), SR_UTILS_NS::SerializationId::Create("properties"));
@@ -200,7 +200,7 @@ namespace SR_SCRIPTING_NS {
             }
 
             serializer.EndArray();
-        }
+        }*/
     }
 
     bool Behaviour::Load(SR_UTILS_NS::IDeserializer& deserializer) {
@@ -208,7 +208,7 @@ namespace SR_SCRIPTING_NS {
             return false;
         }
 
-        if (!m_rawBehaviour) {
+        /*if (!m_rawBehaviour) {
             return true;
         }
 
@@ -237,12 +237,12 @@ namespace SR_SCRIPTING_NS {
             }
 
             deserializer.EndArray();
-        }
+        }*/
 
         return true;
     }
 
     void Behaviour::Reload() {
-        SetRawBehaviour(m_rawBehaviour->GetResourcePath());
+        //SetRawBehaviour(m_rawBehaviour->GetResourcePath());
     }
 }

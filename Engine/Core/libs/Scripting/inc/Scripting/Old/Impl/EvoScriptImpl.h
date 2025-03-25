@@ -6,7 +6,8 @@
 #define SR_ENGINE_SREVOSCRIPT_H
 
 #include <Scripting/Base/Script.h>
-#include <EvoScript/Script.h>
+#include <Scripting/Script.h>
+
 #include <Utils/FileSystem/Path.h>
 
 namespace SR_SCRIPTING_NS {

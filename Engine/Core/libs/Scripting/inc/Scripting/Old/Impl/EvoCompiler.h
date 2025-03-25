@@ -5,13 +5,13 @@
 #ifndef SR_ENGINE_EVOCOMPILER_H
 #define SR_ENGINE_EVOCOMPILER_H
 
-#include <Scripting/Base/Compiler.h>
-
 #include <Utils/Resources/Xml.h>
-#include <EvoScript/Script.h>
-#include <EvoScript/Compilation/Compiler.h>
-#include <EvoScript/Compilation/AddressTableGen.h>
-#include <EvoScript/Compilation/Casting.h>
+
+#include <Scripting/Base/Compiler.h>
+#include <Scripting/Script.h>
+#include <Scripting/Compilation/Compiler.h>
+#include <Scripting/Compilation/AddressTableGen.h>
+#include <Scripting/Compilation/Casting.h>
 
 namespace SR_SCRIPTING_NS {
     class SR_DLL_EXPORT EvoCompiler : public SR_SCRIPTING_NS::Compiler, public EvoScript::Compiler {

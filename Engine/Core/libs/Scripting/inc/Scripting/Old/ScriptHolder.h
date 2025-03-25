@@ -2,20 +2,21 @@
 // Created by Monika on 04.03.2023.
 //
 
-#ifndef SR_ENGINE_SCRIPTHOLDER_H
-#define SR_ENGINE_SCRIPTHOLDER_H
+#ifndef SR_ENGINE_SCRIPTING_SCRIPT_HOLDER_H
+#define SR_ENGINE_SCRIPTING_SCRIPT_HOLDER_H
 
 #include <Utils/Types/SafePointer.h>
 #include <Utils/Common/NonCopyable.h>
 
 namespace SR_SCRIPTING_NS {
-    class ScriptHolder : public SR_HTYPES_NS::SafePtr<ScriptHolder>, public SR_UTILS_NS::NonCopyable {
+    class ScriptHolder : public SR_HTYPES_NS::SharedPtr<ScriptHolder>, public SR_UTILS_NS::NonCopyable {
+        using Super = SR_HTYPES_NS::SharedPtr<ScriptHolder>;
     public:
-        using Ptr = SR_HTYPES_NS::SafePtr<ScriptHolder>;
+        using Ptr = SR_HTYPES_NS::SharedPtr<ScriptHolder>;
 
     public:
         explicit ScriptHolder(void* pScriptImpl)
-            : SR_HTYPES_NS::SafePtr<ScriptHolder>(this)
+            : Super(this, SR_UTILS_NS::SharedPtrPolicy::Manually)
             , m_scriptImpl(pScriptImpl)
         { }
 
@@ -38,4 +39,4 @@ namespace SR_SCRIPTING_NS {
     };
 }
 
-#endif //SR_ENGINE_SCRIPTHOLDER_H
+#endif //SR_ENGINE_SCRIPTING_SCRIPT_HOLDER_H

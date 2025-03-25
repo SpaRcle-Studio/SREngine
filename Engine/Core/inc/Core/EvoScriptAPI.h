@@ -5,7 +5,7 @@
 #ifndef SR_ENGINE_EVOSCRIPTAPI_H
 #define SR_ENGINE_EVOSCRIPTAPI_H
 
-#include <Scripting/Impl/EvoCompiler.h>
+//#include <Scripting/Impl/EvoCompiler.h>
 
 namespace EvoScript {
     class AddressTableGen;
@@ -22,7 +22,7 @@ namespace SpaRcle {
         API(const API &) = delete;
         ~API() = delete;
     public:
-        static void RegisterEvoScriptClasses(SR_CORE_NS::Engine* pEngine);
+        /*static void RegisterEvoScriptClasses(SR_CORE_NS::Engine* pEngine);
         static void Initialize();
         static void RegisterDebug(EvoScript::AddressTableGen* generator);
         static void RegisterRaycast(EvoScript::AddressTableGen* generator);
@@ -55,7 +55,7 @@ namespace SpaRcle {
         static void RegisterAnimator(EvoScript::AddressTableGen* generator);
         static void RegisterAudioSource(EvoScript::AddressTableGen* generator);
 
-        static void RegisterCasts(EvoScript::CastingGen* generator);
+        static void RegisterCasts(EvoScript::CastingGen* generator);*/
     };
 }
 

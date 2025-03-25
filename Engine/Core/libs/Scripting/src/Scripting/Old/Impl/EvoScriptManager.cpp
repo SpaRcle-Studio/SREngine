@@ -24,7 +24,7 @@ namespace SR_SCRIPTING_NS {
                     continue;
                 }
 
-                if (pHolder->GetUseCount() == 2) {
+                /*if (pHolder->GetUseCount() == 2) {
                     pHolder->AutoFree([](auto&& pHolder) {
                         delete pHolder->template GetScript<EvoScript::Script>();
                         pHolder->SetScript(nullptr);
@@ -32,7 +32,7 @@ namespace SR_SCRIPTING_NS {
                     });
                     pIt = m_scripts.erase(pIt);
                     continue;
-                }
+                }*/
 
                 ++pIt;
             }
@@ -52,7 +52,7 @@ namespace SR_SCRIPTING_NS {
             return;
         }
 
-        if (m_checkIterator.value()->second.GetUseCount() == 2) {
+        /*if (m_checkIterator.value()->second.GetUseCount() == 2) {
             m_checkIterator.value()->second.AutoFree([](auto&& pHolder) {
                 delete pHolder->template GetScript<EvoScript::Script>();
                 pHolder->SetScript(nullptr);
@@ -60,7 +60,7 @@ namespace SR_SCRIPTING_NS {
             });
             m_checkIterator = m_scripts.erase(m_checkIterator.value());
             return;
-        }
+        }*/
 
         ++(m_checkIterator.value()); 
     }

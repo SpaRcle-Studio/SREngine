@@ -18,7 +18,7 @@ namespace SR_UTILS_NS {
 namespace SR_SCRIPTING_NS {
     class Behaviour;
 
-    class IRawBehaviour : public SR_UTILS_NS::IResource {
+    /*class IRawBehaviour : public SR_UTILS_NS::IResource {
         using Super = SR_UTILS_NS::IResource;
         using Properties = std::vector<std::string>;
         using ValueProperties = std::list<std::pair<std::string, std::any>>;
@@ -68,7 +68,7 @@ namespace SR_SCRIPTING_NS {
         mutable bool m_hasErrors = false;
         Behaviour* m_component = nullptr;
 
-    };
+    };*/
 
     /// ----------------------------------------------------------------------------------------------------------------
 
@@ -86,10 +86,10 @@ namespace SR_SCRIPTING_NS {
         void Save(SR_UTILS_NS::ISerializer& serializer) const override;
         bool Load(SR_UTILS_NS::IDeserializer& deserializer) override;
 
-        SR_NODISCARD IRawBehaviour* GetRawBehaviour() const noexcept { return m_rawBehaviour; }
-        SR_NODISCARD SR_UTILS_NS::Path GetRawBehaviourPath() const noexcept;
+        //SR_NODISCARD IRawBehaviour* GetRawBehaviour() const noexcept { return m_rawBehaviour; }
+        //SR_NODISCARD SR_UTILS_NS::Path GetRawBehaviourPath() const noexcept;
 
-        void SetRawBehaviour(const SR_UTILS_NS::Path& path);
+        //void SetRawBehaviour(const SR_UTILS_NS::Path& path);
 
     protected:
         void Awake() override;
@@ -112,10 +112,10 @@ namespace SR_SCRIPTING_NS {
         void OnTriggerStay(const SR_UTILS_NS::CollisionData& data) override;
 
     protected:
-        IRawBehaviour* m_rawBehaviour = nullptr;
+        /*IRawBehaviour* m_rawBehaviour = nullptr;
 
         /// @virtualProperty(path) @getter(GetRawBehaviourPath) @setter(SetRawBehaviour)
-        SR_VIRTUAL_PROPERTY
+        SR_VIRTUAL_PROPERTY*/
 
     };
 }

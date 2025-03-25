@@ -1,6 +1,3 @@
-[submodule "Engine/Core/libs/Scripting/libs/EvoScript"]
-	path = Engine/Core/libs/Scripting/libs/EvoScript
-	url = https://github.com/Monika0000/EvoScript.git
 [submodule "Engine/Core/Dependences/Framework/Depends/imgui"]
 	path = Engine/Core/libs/Graphics/libs/imgui
 	url = https://github.com/Monika0000/imgui

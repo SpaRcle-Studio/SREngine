@@ -7,7 +7,7 @@
 
 #include <Physics/3D/Raycast3D.h>
 
-#include <Scripting/Impl/EvoScriptManager.h>
+//#include <Scripting/Impl/EvoScriptManager.h>
 
 #include <Graphics/Types/Camera.h>
 

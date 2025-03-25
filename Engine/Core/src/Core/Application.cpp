@@ -33,8 +33,8 @@
 #include <Audio/RawSound.h>
 
 #include <Scripting/Base/Behaviour.h>
-#include <Scripting/Impl/EvoScriptResourceReloader.h>
-#include <Scripting/Impl/EvoBehaviour.h>
+//#include <Scripting/Impl/EvoScriptResourceReloader.h>
+//#include <Scripting/Impl/EvoBehaviour.h>
 
 #include <Physics/PhysicsMaterial.h>
 
@@ -260,8 +260,8 @@ namespace SR_CORE_NS {
         SR_AUDIO_NS::SoundManager::DestroySingleton();
         SR_PHYSICS_NS::PhysicsLibrary::DestroySingleton();
         SR_GRAPH_NS::Memory::CameraManager::DestroySingleton();
-        SR_SCRIPTING_NS::GlobalEvoCompiler::DestroySingleton();
-        SR_SCRIPTING_NS::EvoScriptManager::DestroySingleton();
+        //SR_SCRIPTING_NS::GlobalEvoCompiler::DestroySingleton();
+        //SR_SCRIPTING_NS::EvoScriptManager::DestroySingleton();
         SR_GRAPH_GUI_NS::NodeManager::DestroySingleton();
         SR_UTILS_NS::TaskManager::DestroySingleton();
         SR_GRAPH_NS::Memory::MeshManager::DestroySingleton();
@@ -339,7 +339,7 @@ namespace SR_CORE_NS {
         resourcesManager.RegisterType<SR_GTYPES_NS::Framebuffer>();
         resourcesManager.RegisterType<SR_GTYPES_NS::Font>();
 
-        resourcesManager.RegisterType<SR_SCRIPTING_NS::EvoBehaviour>();
+        //resourcesManager.RegisterType<SR_SCRIPTING_NS::EvoBehaviour>();
 
         resourcesManager.RegisterType<SR_AUDIO_NS::Sound>();
         resourcesManager.RegisterType<SR_AUDIO_NS::RawSound>();

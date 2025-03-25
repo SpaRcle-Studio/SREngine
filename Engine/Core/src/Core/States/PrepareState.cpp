@@ -6,7 +6,7 @@
 #include <Core/World/EngineScene.h>
 #include <Core/Engine.h>
 
-#include <Scripting/Impl/EvoScriptManager.h>
+//#include <Scripting/Impl/EvoScriptManager.h>
 
 #include <Physics/3D/Raycast3D.h>
 #include <Physics/PhysicsScene.h>
@@ -25,7 +25,7 @@ namespace SR_CORE_NS {
 
         pEngine->FlushScene();
 
-        SR_SCRIPTING_NS::EvoScriptManager::Instance().Update(false);
+        //SR_SCRIPTING_NS::EvoScriptManager::Instance().Update(false);
 
         if (auto&& pRenderContext = pEngine->GetRenderContext()) {
             pRenderContext->Update();
