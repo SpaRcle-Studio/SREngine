@@ -1,5 +1,5 @@
 import sys, os, subprocess, re, copy
-import reflection_classes, logger_utils, sparcle_utils, cpp_operator
+import reflection_classes, logger_utils, sparcle_utils, cpp_operator, script_codegen_utils
 
 try:
     import clang.cindex
@@ -58,6 +58,20 @@ def replace_type_templated_name(logger: logger_utils.Logger, source: str, templa
 def is_trivial_type(type_name: str) -> bool:
     non_qualified_type = remove_type_qualifiers(type_name)
     return non_qualified_type in DEFAULT_CPP_TRIVIAL_TYPES
+
+
+def correct_default_return_type(return_type: str, code_structure):
+    is_return_type_trivial = is_trivial_type(return_type)
+    return_type = code_structure.correct_class_name(return_type if is_return_type_trivial else script_codegen_utils.SCRIPT_HANDLE_TYPE_NAME)
+    if return_type.endswith('*'):
+        return is_return_type_trivial, 'nullptr'
+    return is_return_type_trivial, return_type
+
+
+def correct_return_type(return_type: str, code_structure):
+    is_return_type_trivial = is_trivial_type(return_type)
+    return_type = code_structure.correct_class_name(return_type if is_return_type_trivial else script_codegen_utils.SCRIPT_HANDLE_TYPE_NAME)
+    return is_return_type_trivial, return_type
 
 
 def normalize_path(path):
@@ -486,7 +500,6 @@ def parse_scriptable_class(logger: logger_utils.Logger, parent_node, code_struct
             return
 
         class_name = '::'.join(namespaces) + f'::{parent_node.spelling}'
-        code_structure.add_class_namespace(parent_node.spelling, class_name)
         logger.log_debug(f'Found scriptable class: {class_name}')
         class_obj = reflection_classes.ScriptableClass(parent_node.spelling, namespaces)
         class_obj.path = parent_node.location.file.name
@@ -507,15 +520,18 @@ def parse_scriptable_class(logger: logger_utils.Logger, parent_node, code_struct
             for template_impl in template_impls:
                 logger.log_debug(f'Found scriptable class template implementation: {template_impl}')
                 args = template_impl.split(',')
-                alias_name = '::'.join(namespaces) + f'::{args[0].strip()}'
-                code_structure.add_class_namespace(args[0].strip(), alias_name)
+
+                code_structure.add_class_name_correction(args[0].strip(), '::'.join(namespaces) + f'::{args[0].strip()}')
+
                 template_replacements = []
                 for arg in args[1:]:
                     template_typename = arg.split('=')[0].strip()
                     template_type = arg.split('=')[1].strip()
                     template_replacements.append((template_typename, template_type))
                     logger.log_debug(f'Found scriptable class template argument: {template_typename}, Type: {template_type}')
-                template_variants.append((alias_name, template_replacements))
+                template_variants.append((args[0].strip(), template_replacements))
+        else:
+            code_structure.add_class_name_correction(parent_node.spelling, class_name)
 
 
         for child in parent_node.get_children():
@@ -573,11 +589,11 @@ def parse_scriptable_class(logger: logger_utils.Logger, parent_node, code_struct
                 for template_replacement in template_variant[1]:
                     full_template_name = replace_type_templated_name(logger, full_template_name, template_replacement[0], template_replacement[1])
                     class_obj_template.replace_type(logger, template_replacement[0], template_replacement[1])
-                code_structure.scriptable_classes.append(class_obj_template)
+                code_structure.add_scriptable_class(class_obj_template)
 
-                code_structure.add_class_namespace(full_template_name, '::'.join(namespaces) + f'::{full_template_name}')
+                code_structure.add_class_name_correction(full_template_name, '::'.join(namespaces) + f'::{class_obj_template.alias}')
         else:
-            code_structure.scriptable_classes.append(class_obj)
+            code_structure.add_scriptable_class(class_obj)
 
 
 def parse_header_tree(logger, file_path, deep, parent_node, code_structure, namespaces):
@@ -612,7 +628,7 @@ def parse_header_file(logger: logger_utils.Logger, file_path, include_args):
     index = clang.cindex.Index.create()
     translation_unit = index.parse(file_path, args=args)
 
-    print('check diagnostics...')
+    #print('check diagnostics...')
     #if translation_unit.diagnostics:
     #    for diagnostic in translation_unit.diagnostics:
     #        if 'warning: ' in str(diagnostic):

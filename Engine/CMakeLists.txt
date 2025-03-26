@@ -56,6 +56,7 @@ if (SR_TRACY_ENABLE)
 endif()
 
 add_subdirectory(Core)
+add_subdirectory(Scripts)
 
 define_property(GLOBAL PROPERTY SR_EXECUTABLE_ARGS)
 set_property(GLOBAL PROPERTY SR_EXECUTABLE_ARGS "")
@@ -113,7 +114,8 @@ add_custom_command(TARGET ${SR_EXECUTABLE_NAME}
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
 )
 
-target_link_libraries(${SR_EXECUTABLE_NAME} Core)
+target_link_libraries(${SR_EXECUTABLE_NAME} Core Scripts)
+target_include_directories(${SR_EXECUTABLE_NAME} PRIVATE ${SR_CMAKE_ROOT_SOURCE_DIRECTORY}/Resources/SpaRcleAPI)
 
 if (NOT ANDROID_NDK)
     # TODO: implement an easy way to set if a build is 'stable' or 'latest'

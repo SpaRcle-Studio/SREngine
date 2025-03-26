@@ -35,8 +35,8 @@ def main(logger: logger_utils.Logger, codegen_dir: str, script_api_library_dir: 
     meta_code_generator.generate_classes_code(codegen_dir, code_structures.sparcle_classes)
     meta_code_generator.generate_enums_code(codegen_dir, code_structures.enums)
 
-    script_api_code_generator.generate_api(logger, codegen_dir, code_structures)
-    script_library_code_generator.generate_library(logger, script_api_library_dir, code_structures)
+    script_api_code_generator.generate_api(logger, repo_dir, codegen_dir, code_structures)
+    script_library_code_generator.generate_library(logger, repo_dir, script_api_library_dir, code_structures)
 
     return True
 

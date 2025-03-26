@@ -14,6 +14,8 @@
 #include <Core/Tests/AtlasBuilderTest.h>
 #include <Core/Tests/HTMLTest.h>
 
+#include <CoreAPI.h>
+#include "Scripts/TestScript.h"
 #include <Codegen/SpaRcleAPI.generated.hpp>
 
 int main(int argc, char** argv) {
@@ -63,6 +65,13 @@ int main(int argc, char** argv) {
             SR_ERROR("Failed to initialize application!");
             code = 3;
         }
+
+        SpaRcleAPI::SpaRcleAPIRegister::Instance().RegisterAll();
+        SpaRcleAPI::CoreAPI::Instance().Init(SpaRcleAPI::SpaRcleAPIRegister::Instance().GetCountFunctions());
+        for (uint64_t i = 0; i < SpaRcleAPI::SpaRcleAPIRegister::Instance().GetCountFunctions(); ++i) {
+            SpaRcleAPI::CoreAPI::Instance().SetFunction(i, SpaRcleAPI::SpaRcleAPIRegister::Instance().GetFunction(i));
+        }
+        RunScriptTest();
 
         if (code == 0 && !pLauncher->Execute()) {
             SR_ERROR("Failed to execute application!");

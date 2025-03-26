@@ -189,16 +189,20 @@ class CodeStructure:
         self.scriptable_classes: list[ScriptableClass] = []
         self.enums: list[Enum] = []
         # example class name StringAtom and full name is SpaRcle::Utils::StringAtom
-        self.class_namespaces_table: dict[str, str] = {}
+        self.class_names_table: dict[str, str] = {}
         self.logger = logger
 
-    def add_class_namespace(self, class_name: str, full_class_name: str):
-        # add class name to class_namespaces_table
-        self.class_namespaces_table[class_name] = full_class_name
-        self.logger.log_debug(f'Add class name to class_namespaces_table: {class_name} -> {full_class_name}')
+    def add_scriptable_class(self, scriptable_class: ScriptableClass):
+        self.logger.log_debug(f'Add scriptable class: {scriptable_class.name}, alias: {scriptable_class.alias}')
+        self.scriptable_classes.append(scriptable_class)
 
-    def correct_class_namespaces(self, class_name: str) -> str:
-         # use class_namespaces_table to get full class name
-        if class_name in self.class_namespaces_table:
-            return self.class_namespaces_table[class_name]
+    def add_class_name_correction(self, class_name: str, full_class_name: str):
+        # add class name to class_namespaces_table
+        self.class_names_table[class_name] = full_class_name
+        self.logger.log_debug(f'Add class name to class_names_table: {class_name} -> {full_class_name}')
+
+    def correct_class_name(self, class_name: str) -> str:
+         # use class_names_table to get full class name
+        if class_name in self.class_names_table:
+            return self.class_names_table[class_name]
         return class_name

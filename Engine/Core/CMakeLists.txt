@@ -84,7 +84,12 @@ add_subdirectory(libs/Graphics)
 message(STATUS "CONFIGURING Scripting -----------------")
 add_subdirectory(libs/Scripting)
 
-add_library(Core STATIC ${CORE_ROOT_DIR}/cxx/Core.cxx ${CORE_ROOT_DIR}/cxx/GUI.cxx ${CORE_ROOT_DIR}/cxx/Codegen.cxx ${CORE_ROOT_DIR}/cxx/States.cxx)
+add_library(Core STATIC
+    ${CORE_ROOT_DIR}/cxx/Core.cxx
+    ${CORE_ROOT_DIR}/cxx/GUI.cxx
+    ${CORE_ROOT_DIR}/cxx/Codegen.cxx
+    ${CORE_ROOT_DIR}/cxx/States.cxx
+)
 
 if (SR_UTILS_STATIC_LIBRARY)
     list(APPEND SR_CORE_LINK_LIBRARIES Utils)

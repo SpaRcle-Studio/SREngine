@@ -42,6 +42,13 @@ class Logger:
             log.write(f'{message}{end}')
 
 
+    def log_check(self, message, end='\n'):
+        message = f'{self.log_prefix} [CHECK] {message}'
+        print(message, end=end)
+        with open(self.log_file, "a", encoding="utf-8") as log:
+            log.write(f'{message}{end}')
+
+
     @log_decorator(DEBUG)
     def log_debug(self, message, end='\n'):
         message = f'{self.log_prefix} [DEBUG] {message}'
