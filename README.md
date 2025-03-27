@@ -33,7 +33,7 @@ It aims to establish a strong base for game creation and is currently in the ear
 - [x] Windows 10/11
 - [x] Linux X11
 - [ ] Linux Wayland
-- [ ] Android
+- [ ] Android (Only build supported)
 
 ## Branches 
  * master - branch for releases
