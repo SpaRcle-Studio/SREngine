@@ -45,6 +45,13 @@ def generate_args_unpacking_string(f: typing.IO, depth: int, code_structure: ref
             f.write(f'{"\t" * depth}}}\n')
 
 
+def generate_script_handle_allocation(f: typing.IO, depth: int, var_name: str, type_name: str, is_destructible: bool) -> None:
+    f.write(f'{"\t" * depth}MemoryLeakChecker::Instance().OnMemoryAlloc();\n')
+    f.write(f'{"\t" * depth}{var_name}.pData = new {type_name};\n')
+    f.write(f'{"\t" * depth}{var_name}.pRefCount = new uint32_t(0);\n')
+    f.write(f'{"\t" * depth}{var_name}.isDestructible = {'true' if is_destructible else 'false'};\n')
+
+
 def generate_method(logger: logger_utils.Logger, f: typing.IO, depth: int, class_name: str, code_structure: reflection_classes.CodeStructure, method: reflection_classes.Method):
     is_return_type_trivial, return_type = clang_utils.correct_default_return_type(method.return_type, code_structure)
 
@@ -64,9 +71,7 @@ def generate_method(logger: logger_utils.Logger, f: typing.IO, depth: int, class
         f.write(f'{"\t" * depth}return {call_result};\n')
     else:
         f.write(f'{"\t" * depth}{script_codegen_utils.SCRIPT_HANDLE_TYPE_NAME} returnScriptHandle;\n')
-        f.write(f'{"\t" * depth}returnScriptHandle.pData = new {code_structure.correct_class_name(method.return_type)}({call_result});\n')
-        f.write(f'{"\t" * depth}returnScriptHandle.pRefCount = new uint32_t(0);\n')
-        f.write(f'{"\t" * depth}returnScriptHandle.isDestructible = true;\n')
+        generate_script_handle_allocation(f, depth, 'returnScriptHandle', f'{code_structure.correct_class_name(method.return_type)}({call_result})', True)
         f.write(f'{"\t" * depth}return returnScriptHandle;\n')
 
 
@@ -80,9 +85,7 @@ def generate_operator(logger: logger_utils.Logger, f: typing.IO, depth: int, cla
         generate_args_unpacking_string(f, depth + 1, code_structure, operator.parameters, script_codegen_utils.SCRIPT_HANDLE_TYPE_NAME)
 
         f.write(f'{'\t' * depth}{script_codegen_utils.SCRIPT_HANDLE_TYPE_NAME} scriptHandle;\n')
-        f.write(f'{'\t' * depth}scriptHandle.pData = new {class_name_with_namespace}({generate_params_pass_string(operator.parameters)});\n')
-        f.write(f'{"\t" * depth}scriptHandle.pRefCount = new uint32_t(0);\n')
-        f.write(f'{'\t' * depth}scriptHandle.isDestructible = true;\n')
+        generate_script_handle_allocation(f, depth, 'scriptHandle', f'{class_name_with_namespace}({generate_params_pass_string(operator.parameters)})', True)
         f.write(f'{'\t' * depth}return scriptHandle;\n')
         return
 
@@ -100,16 +103,11 @@ def generate_operator(logger: logger_utils.Logger, f: typing.IO, depth: int, cla
         f.write(f'{"\t" * depth}return {call_result};\n')
     else:
         f.write(f'{"\t" * depth}{script_codegen_utils.SCRIPT_HANDLE_TYPE_NAME} returnScriptHandle;\n')
-        f.write(f'{"\t" * depth}returnScriptHandle.pData = new {code_structure.correct_class_name(operator.return_type)}({call_result});\n')
-        f.write(f'{"\t" * depth}returnScriptHandle.pRefCount = new uint32_t(0);\n')
-        f.write(f'{"\t" * depth}returnScriptHandle.isDestructible = true;\n')
+        generate_script_handle_allocation(f, depth, 'returnScriptHandle', f'{code_structure.correct_class_name(operator.return_type)}({call_result})', True)
         f.write(f'{"\t" * depth}return returnScriptHandle;\n')
 
 
-def generate_scriptable_class(logger: logger_utils.Logger, f: typing.IO, depth: int, code_structure: reflection_classes.CodeStructure, class_obj: reflection_classes.ScriptableClass):
-    api_function_prefix  = code_structure.correct_class_name(class_obj.alias).replace('::', '_')
-    class_name_with_namespace = code_structure.correct_class_name(class_obj.alias)
-
+def generate_destroy_function(logger: logger_utils.Logger, f: typing.IO, depth: int, api_function_prefix, class_name_with_namespace):
     f.write(f'{'\t' * depth}/// {class_name_with_namespace} Destroy function\n')
     f.write(f'{'\t' * depth}void {api_function_prefix}_destroy({script_codegen_utils.SCRIPT_HANDLE_PARAM_NAME}) {{\n')
     f.write(f'{'\t' * (depth + 1)}if (!{script_codegen_utils.SCRIPT_HANDLE_SELF_VAR_NAME}.pData) SR_UNLIKELY_ATTRIBUTE {{\n')
@@ -119,6 +117,7 @@ def generate_scriptable_class(logger: logger_utils.Logger, f: typing.IO, depth: 
     f.write(f'{'\t' * (depth + 1)}if (--(*{script_codegen_utils.SCRIPT_HANDLE_SELF_VAR_NAME}.pRefCount) > 0) {{\n')
     f.write(f'{'\t' * (depth + 2)}return;\n')
     f.write(f'{'\t' * (depth + 1)}}}\n')
+    f.write(f'{'\t' * (depth + 1)}MemoryLeakChecker::Instance().OnMemoryFree();\n')
     f.write(f'{'\t' * (depth + 1)}delete {script_codegen_utils.SCRIPT_HANDLE_SELF_VAR_NAME}.pRefCount;\n')
     f.write(f'{'\t' * (depth + 1)}{script_codegen_utils.SCRIPT_HANDLE_SELF_VAR_NAME}.pRefCount = nullptr;\n')
     f.write(f'{'\t' * (depth + 1)}if (!{script_codegen_utils.SCRIPT_HANDLE_SELF_VAR_NAME}.isDestructible) SR_UNLIKELY_ATTRIBUTE {{\n')
@@ -132,6 +131,26 @@ def generate_scriptable_class(logger: logger_utils.Logger, f: typing.IO, depth: 
     f.write(f'{'\t' * (depth + 1)}}}\n')
     f.write(f'{'\t' * depth}}}\n\n')
 
+
+def generate_copy_function(logger: logger_utils.Logger, f: typing.IO, depth: int, api_function_prefix, class_name_with_namespace):
+    f.write(f'{'\t' * depth}/// {class_name_with_namespace} Copy function\n')
+    f.write(f'{'\t' * depth}{script_codegen_utils.SCRIPT_HANDLE_TYPE_NAME} {api_function_prefix}_copy({script_codegen_utils.SCRIPT_HANDLE_PARAM_NAME}) {{\n')
+    f.write(f'{'\t' * (depth + 1)}if (!{script_codegen_utils.SCRIPT_HANDLE_SELF_VAR_NAME}.pData) SR_UNLIKELY_ATTRIBUTE {{\n')
+    f.write(f'{'\t' * (depth + 2)}return {script_codegen_utils.SCRIPT_HANDLE_TYPE_NAME}();\n')
+    f.write(f'{'\t' * (depth + 1)}}}\n')
+    f.write(f'{'\t' * (depth + 1)}{script_codegen_utils.SCRIPT_HANDLE_TYPE_NAME} copyScriptHandle;\n')
+    generate_script_handle_allocation(f, depth + 1, 'copyScriptHandle', f'{class_name_with_namespace}(*static_cast<{class_name_with_namespace}*>({script_codegen_utils.SCRIPT_HANDLE_SELF_VAR_NAME}.pData))', True)
+    f.write(f'{'\t' * (depth + 1)}return copyScriptHandle;\n')
+    f.write(f'{'\t' * depth}}}\n\n')
+
+
+def generate_scriptable_class(logger: logger_utils.Logger, f: typing.IO, depth: int, code_structure: reflection_classes.CodeStructure, class_obj: reflection_classes.ScriptableClass):
+    api_function_prefix  = code_structure.correct_class_name(class_obj.alias).replace('::', '_')
+    class_name_with_namespace = code_structure.correct_class_name(class_obj.alias)
+
+    generate_destroy_function(logger, f, depth, api_function_prefix, class_name_with_namespace)
+    generate_copy_function(logger, f, depth, api_function_prefix, class_name_with_namespace)
+
     if len(class_obj.constructors) > 0:
         f.write(f'{'\t' * depth}/// {class_name_with_namespace} Constructors\n')
         for i, constructor in enumerate(class_obj.constructors):
@@ -141,9 +160,7 @@ def generate_scriptable_class(logger: logger_utils.Logger, f: typing.IO, depth: 
             generate_args_unpacking_string(f, depth + 1, code_structure, constructor.parameters, script_codegen_utils.SCRIPT_HANDLE_TYPE_NAME)
 
             f.write(f'{'\t' * (depth + 1)}{script_codegen_utils.SCRIPT_HANDLE_TYPE_NAME} scriptHandle;\n')
-            f.write(f'{'\t' * (depth + 1)}scriptHandle.pData = new {class_name_with_namespace}({generate_params_pass_string(constructor.parameters)});\n')
-            f.write(f'{"\t" * (depth + 1)}scriptHandle.pRefCount = new uint32_t(0);\n')
-            f.write(f'{'\t' * (depth + 1)}scriptHandle.isDestructible = true;\n')
+            generate_script_handle_allocation(f, depth + 1, 'scriptHandle', f'{class_name_with_namespace}({generate_params_pass_string(constructor.parameters)})', True)
             f.write(f'{'\t' * (depth + 1)}return scriptHandle;\n')
             f.write(f'{'\t' * depth}}}\n')
         f.write('\n')
@@ -194,6 +211,7 @@ def generate_functions_registration(logger: logger_utils.Logger, f: typing.IO, d
     total_functions_count = 0
     for class_obj in code_structure.scriptable_classes:
         total_functions_count += 1 # destroy function
+        total_functions_count += 1 # copy function
         total_functions_count += len(class_obj.constructors)
         total_functions_count += len(class_obj.operators)
         total_functions_count += len(class_obj.methods)
@@ -206,6 +224,7 @@ def generate_functions_registration(logger: logger_utils.Logger, f: typing.IO, d
 
         f.write(f'{"\t" * (depth + 2)}SR_INFO("SpaRcleAPIRegister::RegisterAll(): registering {class_name_with_namespace} class...");\n')
         f.write(f'{"\t" * (depth + 2)}m_functionTable.emplace_back({api_function_prefix}_destroy);\n')
+        f.write(f'{"\t" * (depth + 2)}m_functionTable.emplace_back({api_function_prefix}_copy);\n')
 
         for i, constructor in enumerate(class_obj.constructors):
             f.write(f'{"\t" * (depth + 2)}m_functionTable.emplace_back({api_function_prefix}_constructor_{i});\n')
@@ -221,6 +240,34 @@ def generate_functions_registration(logger: logger_utils.Logger, f: typing.IO, d
     f.write(f'{"\t" * (depth + 0)}private:\n')
     f.write(f'{"\t" * (depth + 1)}std::vector<FunctionHandle> m_functionTable;\n\n')
     f.write(f'{"\t" * (depth + 0)}}};\n')
+
+
+def generate_memory_leak_checker(f: typing.IO, depth: int):
+    f.write(f'{"\t" * depth}/// Memory leak checker\n')
+    f.write(f'{"\t" * depth}class MemoryLeakChecker {{\n')
+    f.write(f'{"\t" * depth}private:\n')
+    f.write(f'{"\t" * (depth + 1)}MemoryLeakChecker() = default;\n')
+    f.write(f'{"\t" * (depth + 1)}~MemoryLeakChecker() = default;\n\n')
+    f.write(f'{"\t" * depth}public:\n')
+    f.write(f'{"\t" * (depth + 1)}MemoryLeakChecker(const MemoryLeakChecker&) = delete;\n')
+    f.write(f'{"\t" * (depth + 1)}MemoryLeakChecker& operator=(const MemoryLeakChecker&) = delete;\n\n')
+    f.write(f'{"\t" * (depth + 1)}MemoryLeakChecker(MemoryLeakChecker&&) = delete;\n')
+    f.write(f'{"\t" * (depth + 1)}MemoryLeakChecker& operator=(MemoryLeakChecker&&) = delete;\n\n')
+    f.write(f'{"\t" * depth}public:\n')
+    f.write(f'{"\t" * (depth + 1)}static MemoryLeakChecker& Instance() {{\n')
+    f.write(f'{"\t" * (depth + 2)}static MemoryLeakChecker instance;\n')
+    f.write(f'{"\t" * (depth + 2)}return instance;\n')
+    f.write(f'{"\t" * (depth + 1)}}}\n\n')
+    f.write(f'{"\t" * (depth + 1)}void OnMemoryAlloc() {{ m_allocationsCount++; }}\n')
+    f.write(f'{"\t" * (depth + 1)}void OnMemoryFree() {{ m_allocationsCount--; }}\n')
+    f.write(f'{"\t" * (depth + 1)}void CheckMemoryLeaks() {{\n')
+    f.write(f'{"\t" * (depth + 2)}if (m_allocationsCount > 0) {{\n')
+    f.write(f'{"\t" * (depth + 3)}SRHalt("Memory leak detected! Allocations count: {{}}", m_allocationsCount.load());\n')
+    f.write(f'{"\t" * (depth + 2)}}}\n')
+    f.write(f'{"\t" * (depth + 1)}}}\n\n')
+    f.write(f'{"\t" * depth}private:\n')
+    f.write(f'{"\t" * (depth + 1)}std::atomic<uint64_t> m_allocationsCount = 0;\n\n')
+    f.write(f'{"\t" * (depth + 0)}}};\n\n')
 
 
 def generate_api(logger: logger_utils.Logger, repo_dir: str, codegen_dir: str, code_structure: reflection_classes.CodeStructure):
@@ -244,6 +291,8 @@ def generate_api(logger: logger_utils.Logger, repo_dir: str, codegen_dir: str, c
         f.write('namespace SpaRcleAPI {\n')
 
         generate_script_handle_struct(f, repo_dir, 0)
+        f.write('\n')
+        generate_memory_leak_checker(f, 1)
 
         for i, class_obj in enumerate(code_structure.scriptable_classes):
             generate_scriptable_class(logger, f, 1, code_structure, class_obj)

@@ -62,19 +62,23 @@ def generate_header_file(logger: logger_utils.Logger, f: typing.IO, function_ind
     function_index += 1
 
     f.write(f'{depth * '\t'}\t{scriptable_class.alias}(const {scriptable_class.alias}& other) {{\n')
-    f.write(f'{depth * '\t'}\t\tauto&& pDeleteFunc = (void (*)(ScriptHandle))CoreAPI::Instance().GetFunction({function_index});\n')
+    f.write(f'{depth * '\t'}\t\tauto&& pDeleteFunc = (void (*)(ScriptHandle))CoreAPI::Instance().GetFunction({function_index - 1});\n')
+    f.write(f'{depth * '\t'}\t\tauto&& pCopyFunc = (ScriptHandle (*)(ScriptHandle))CoreAPI::Instance().GetFunction({function_index});\n')
     f.write(f'{depth * '\t'}\t\tpDeleteFunc(m_handle);\n')
-    f.write(f'{depth * '\t'}\t\tm_handle = other.m_handle;\n')
-    f.write(f'{depth * '\t'}\t\t(*m_handle.pRefCount)++;\n')
+    f.write(f'{depth * '\t'}\t\tm_handle = pCopyFunc(other.m_handle);\n')
+    f.write(f'{depth * '\t'}\t\t(*m_handle.pRefCount) = 1;\n')
     f.write(f'{depth * '\t'}\t}}\n')
 
     f.write(f'{depth * '\t'}\t{scriptable_class.alias}& operator=(const {scriptable_class.alias}& other) {{\n')
-    f.write(f'{depth * '\t'}\t\tauto&& pDeleteFunc = (void (*)(ScriptHandle))CoreAPI::Instance().GetFunction({function_index});\n')
+    f.write(f'{depth * '\t'}\t\tauto&& pDeleteFunc = (void (*)(ScriptHandle))CoreAPI::Instance().GetFunction({function_index - 1});\n')
+    f.write(f'{depth * '\t'}\t\tauto&& pCopyFunc = (ScriptHandle (*)(ScriptHandle))CoreAPI::Instance().GetFunction({function_index});\n')
     f.write(f'{depth * '\t'}\t\tpDeleteFunc(m_handle);\n')
-    f.write(f'{depth * '\t'}\t\tm_handle = other.m_handle;\n')
-    f.write(f'{depth * '\t'}\t\t(*m_handle.pRefCount)++;\n')
+    f.write(f'{depth * '\t'}\t\tm_handle = pCopyFunc(other.m_handle);\n')
+    f.write(f'{depth * '\t'}\t\t(*m_handle.pRefCount) = 1;\n')
     f.write(f'{depth * '\t'}\t\treturn *this;\n')
     f.write(f'{depth * '\t'}\t}}\n')
+
+    function_index += 1
 
     for i, constructor in enumerate(scriptable_class.constructors):
         f.write(f'{depth * '\t'}\t{scriptable_class.alias}(')

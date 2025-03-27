@@ -4124,9 +4124,9 @@ ddddцццゔぅヾボ
 									9-v:font
 										10-s:Engine/Fonts/MiamaNuevaEmoji.ttf
 									9-v:fontSize
-										10-i:84
-									9-v:debug
-										10-b:true
+										10-i:65
+									9-v:kerning
+										10-b:false
 					5-v:tag
 						6-s:Untagged
 					5-v:name

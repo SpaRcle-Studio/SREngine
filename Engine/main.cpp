@@ -72,6 +72,7 @@ int main(int argc, char** argv) {
             SpaRcleAPI::CoreAPI::Instance().SetFunction(i, SpaRcleAPI::SpaRcleAPIRegister::Instance().GetFunction(i));
         }
         RunScriptTest();
+        SpaRcleAPI::MemoryLeakChecker::Instance().CheckMemoryLeaks();
 
         if (code == 0 && !pLauncher->Execute()) {
             SR_ERROR("Failed to execute application!");
