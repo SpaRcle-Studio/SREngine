@@ -1,6 +1,7 @@
-import typing
-
+import typing, os
 import reflection_classes, clang_utils, logger_utils, cpp_operator, script_codegen_utils
+
+from glob import glob
 
 
 def generate_type_string(type_name: str) -> str:
@@ -11,38 +12,37 @@ def generate_type_string(type_name: str) -> str:
 
 
 def generate_param_typed_string(param: reflection_classes.Parameter) -> str:
-    return f'{generate_type_string(param.type_name)} {param.name}'
+    return f'{generate_type_string(param.cpp_type.name)} {param.name}'
 
 
 def generate_params_typed_string(parameters: list[reflection_classes.Parameter]) -> str:
-    return ', '.join([generate_param_typed_string(param) for param in parameters])
+    return ', '.join(
+        [f'{param.cpp_type.get_full_type() if param.cpp_type.is_trivial else script_codegen_utils.SCRIPT_HANDLE_TYPE_NAME} {param.name}'
+            for param in parameters]
+    )
 
 
 def generate_params_pass_string(parameters: list[reflection_classes.Parameter]) -> str:
-    return ', '.join([(param.name if param.is_trivial else param.name + '_scriptHandleUnpacked') for param in parameters])
+    return ', '.join([(param.name if param.cpp_type.is_trivial else param.name + '_scriptHandleUnpacked') for param in parameters])
 
 
 def generate_params_string_with_self(parameters: list[reflection_classes.Parameter]) -> str:
-    params = ', '.join([generate_param_typed_string(param) for param in parameters])
-    return f'{script_codegen_utils.SCRIPT_HANDLE_PARAM_NAME}, {params}' if len(parameters) > 0 else script_codegen_utils.SCRIPT_HANDLE_PARAM_NAME
+    other_params: str = generate_params_typed_string(parameters)
+    if len(other_params) > 0:
+        return f'{script_codegen_utils.SCRIPT_HANDLE_PARAM_NAME}, {other_params}'
+    return f'{script_codegen_utils.SCRIPT_HANDLE_PARAM_NAME}'
 
 
-def generate_return_value_string(return_type: str) -> str:
-    if return_type == 'nullptr':
-        return 'nullptr'
-    return f'{return_type}()'
-
-
-def generate_args_unpacking_string(f: typing.IO, depth: int, code_structure: reflection_classes.CodeStructure, parameters: list[reflection_classes.Parameter], error_return_type: str) -> None:
+def generate_args_unpacking_string(f: typing.IO, depth: int, code_structure: reflection_classes.CodeStructure, parameters: list[reflection_classes.Parameter], error_return_value: str) -> None:
     for param in parameters:
-        if not param.is_trivial:
-            corrected_unpacked_type = code_structure.correct_class_name(clang_utils.remove_type_qualifiers(param.type_name))
+        if not param.cpp_type.is_trivial:
+            corrected_unpacked_type = code_structure.correct_class_name(param.cpp_type.name)
 
-            f.write(f'{"\t" * depth}auto&& {param.name}_scriptHandleUnpacked = *static_cast<{corrected_unpacked_type}*>({param.name}.pData);\n')
-            f.write(f'{"\t" * depth}if (!{param.name}_scriptHandleUnpacked) SR_UNLIKELY_ATTRIBUTE {{\n')
+            f.write(f'{"\t" * depth}if (!{param.name}.pData) SR_UNLIKELY_ATTRIBUTE {{\n')
             f.write(f'{"\t" * (depth + 1)}SRHalt("ScriptHandle for argument \\\"{param.name}\\\" is nullptr!");\n')
-            f.write(f'{"\t" * (depth + 1)}return {generate_return_value_string(error_return_type)};\n')
+            f.write(f'{"\t" * (depth + 1)}return {error_return_value};\n')
             f.write(f'{"\t" * depth}}}\n')
+            f.write(f'{"\t" * depth}auto&& {param.name}_scriptHandleUnpacked = *static_cast<{corrected_unpacked_type}*>({param.name}.pData);\n')
 
 
 def generate_script_handle_allocation(f: typing.IO, depth: int, var_name: str, type_name: str, is_destructible: bool) -> None:
@@ -52,58 +52,77 @@ def generate_script_handle_allocation(f: typing.IO, depth: int, var_name: str, t
     f.write(f'{"\t" * depth}{var_name}.isDestructible = {'true' if is_destructible else 'false'};\n')
 
 
+def make_api_default_return_value(return_type: reflection_classes.CPPType):
+    if not return_type.is_trivial:
+        return script_codegen_utils.SCRIPT_HANDLE_TYPE_NAME + '()'
+
+    if return_type.is_pointer:
+        return 'nullptr'
+
+    if return_type.is_ref:
+        return f'*reinterpret_cast<{return_type.name}*>(GetSpaRcleAPIDefaultRefPtr())'
+
+    return return_type.name + '()'
+
+
 def generate_method(logger: logger_utils.Logger, f: typing.IO, depth: int, class_name: str, code_structure: reflection_classes.CodeStructure, method: reflection_classes.Method):
-    is_return_type_trivial, return_type = clang_utils.correct_default_return_type(method.return_type, code_structure)
+    default_return_value = make_api_default_return_value(method.return_type)
 
     class_name_with_namespace = code_structure.correct_class_name(class_name)
 
     f.write(f'{"\t" * depth}auto&& pSelfObject = static_cast<{class_name_with_namespace}*>({script_codegen_utils.SCRIPT_HANDLE_SELF_VAR_NAME}.pData);\n')
     f.write(f'{"\t" * depth}if (!pSelfObject) SR_UNLIKELY_ATTRIBUTE {{\n')
     f.write(f'{"\t" * (depth + 1)}SRHalt("ScriptHandle for self is nullptr!");\n')
-    f.write(f'{"\t" * (depth + 1)}return {generate_return_value_string(return_type)};\n')
+    f.write(f'{"\t" * (depth + 1)}return {default_return_value};\n')
     f.write(f'{"\t" * depth}}}\n')
 
-    generate_args_unpacking_string(f, depth, code_structure, method.parameters, return_type)
+    generate_args_unpacking_string(f, depth, code_structure, method.parameters, default_return_value)
 
     call_result = f'pSelfObject->{method.name}({generate_params_pass_string(method.parameters)})'
 
-    if is_return_type_trivial:
+    if method.return_type.is_trivial:
         f.write(f'{"\t" * depth}return {call_result};\n')
     else:
         f.write(f'{"\t" * depth}{script_codegen_utils.SCRIPT_HANDLE_TYPE_NAME} returnScriptHandle;\n')
-        generate_script_handle_allocation(f, depth, 'returnScriptHandle', f'{code_structure.correct_class_name(method.return_type)}({call_result})', True)
+        generate_script_handle_allocation(f, depth, 'returnScriptHandle', f'{code_structure.correct_class_name(method.return_type.get_full_type())}({call_result})', True)
         f.write(f'{"\t" * depth}return returnScriptHandle;\n')
 
 
 def generate_operator(logger: logger_utils.Logger, f: typing.IO, depth: int, class_name: str, code_structure: reflection_classes.CodeStructure, operator: reflection_classes.Operator):
-    is_return_type_trivial, return_type = clang_utils.correct_default_return_type(operator.return_type, code_structure)
+    is_operator_with_assigment = operator.type in cpp_operator.OPERATORS_WITH_ASSIGNMENT
 
     class_name_with_namespace = code_structure.correct_class_name(class_name)
 
-    if operator.type == cpp_operator.OperatorType.ASSIGNMENT:
-        f.write(f'{"\t" * depth}{class_name_with_namespace.replace('::', '_')}_destroy({script_codegen_utils.SCRIPT_HANDLE_SELF_VAR_NAME});\n')
-        generate_args_unpacking_string(f, depth + 1, code_structure, operator.parameters, script_codegen_utils.SCRIPT_HANDLE_TYPE_NAME)
+    #if operator.type == cpp_operator.OperatorType.ASSIGNMENT:
+    #    f.write(f'{"\t" * depth}{class_name_with_namespace.replace('::', '_')}_destroy({script_codegen_utils.SCRIPT_HANDLE_SELF_VAR_NAME});\n')
+    #    generate_args_unpacking_string(f, depth + 1, code_structure, operator.parameters, script_codegen_utils.SCRIPT_HANDLE_TYPE_NAME)
+    #
+    #    f.write(f'{'\t' * depth}{script_codegen_utils.SCRIPT_HANDLE_TYPE_NAME} scriptHandle;\n')
+    #    generate_script_handle_allocation(f, depth, 'scriptHandle', f'{class_name_with_namespace}({generate_params_pass_string(operator.parameters)})', True)
+    #    f.write(f'{'\t' * depth}return scriptHandle;\n')
+    #    return
 
-        f.write(f'{'\t' * depth}{script_codegen_utils.SCRIPT_HANDLE_TYPE_NAME} scriptHandle;\n')
-        generate_script_handle_allocation(f, depth, 'scriptHandle', f'{class_name_with_namespace}({generate_params_pass_string(operator.parameters)})', True)
-        f.write(f'{'\t' * depth}return scriptHandle;\n')
-        return
+    default_return_value = 'void()' if is_operator_with_assigment else make_api_default_return_value(operator.return_type)
 
     f.write(f'{"\t" * depth}auto&& pSelfObject = static_cast<{class_name_with_namespace}*>({script_codegen_utils.SCRIPT_HANDLE_SELF_VAR_NAME}.pData);\n')
     f.write(f'{"\t" * depth}if (!pSelfObject) SR_UNLIKELY_ATTRIBUTE {{\n')
     f.write(f'{"\t" * (depth + 1)}SRHalt("ScriptHandle for self is nullptr!");\n')
-    f.write(f'{"\t" * (depth + 1)}return {generate_return_value_string(return_type)};\n')
+    f.write(f'{"\t" * (depth + 1)}return {default_return_value};\n')
     f.write(f'{"\t" * depth}}}\n')
 
-    generate_args_unpacking_string(f, depth, code_structure, operator.parameters, return_type)
+    generate_args_unpacking_string(f, depth, code_structure, operator.parameters, default_return_value)
 
-    call_result = f'pSelfObject->{cpp_operator.OperatorType.to_string(operator.type)}({generate_params_pass_string(operator.parameters)})'
+    if is_operator_with_assigment:
+        f.write(f'{"\t" * depth}pSelfObject->{str(operator.type)}({generate_params_pass_string(operator.parameters)});\n')
+        return
 
-    if is_return_type_trivial:
+    call_result = f'pSelfObject->{str(operator.type)}({generate_params_pass_string(operator.parameters)})'
+
+    if operator.return_type.is_trivial:
         f.write(f'{"\t" * depth}return {call_result};\n')
     else:
         f.write(f'{"\t" * depth}{script_codegen_utils.SCRIPT_HANDLE_TYPE_NAME} returnScriptHandle;\n')
-        generate_script_handle_allocation(f, depth, 'returnScriptHandle', f'{code_structure.correct_class_name(operator.return_type)}({call_result})', True)
+        generate_script_handle_allocation(f, depth, 'returnScriptHandle', f'{code_structure.correct_class_name(operator.return_type.get_full_type())}({call_result})', True)
         f.write(f'{"\t" * depth}return returnScriptHandle;\n')
 
 
@@ -169,7 +188,10 @@ def generate_scriptable_class(logger: logger_utils.Logger, f: typing.IO, depth: 
         f.write(f'{'\t' * depth}/// {class_name_with_namespace} Operators\n')
         for i, operator in enumerate(class_obj.operators):
             params_str = generate_params_string_with_self(operator.parameters)
-            f.write(f'{'\t' * depth}{generate_type_string(operator.return_type)} {api_function_prefix}_operator_{operator.type.name}_{i}({params_str}) {{\n')
+
+            operator_return_type = 'void' if (operator.type in cpp_operator.OPERATORS_WITH_ASSIGNMENT) else operator.return_type.get_handle_or_full_type()
+
+            f.write(f'{'\t' * depth}{operator_return_type} {api_function_prefix}_operator_{operator.type.name}_{i}({params_str}) {{\n')
             generate_operator(logger, f, depth + 1, class_obj.alias, code_structure, operator)
             f.write(f'{'\t' * depth}}}\n')
         f.write('\n')
@@ -178,7 +200,7 @@ def generate_scriptable_class(logger: logger_utils.Logger, f: typing.IO, depth: 
         f.write(f'{'\t' * depth}/// {class_name_with_namespace} Methods\n')
         for i, method in enumerate(class_obj.methods):
             params_str = generate_params_string_with_self(method.parameters)
-            f.write(f'{'\t' * depth}{generate_type_string(method.return_type)} {api_function_prefix}_method_{method.name}_{i}({params_str}) {{\n')
+            f.write(f'{'\t' * depth}{method.return_type.get_handle_or_full_type()} {api_function_prefix}_method_{method.name}_{i}({params_str}) {{\n')
             generate_method(logger, f, depth + 1, class_obj.alias, code_structure, method)
             f.write(f'{'\t' * depth}}}\n')
         f.write('\n')
@@ -218,22 +240,29 @@ def generate_functions_registration(logger: logger_utils.Logger, f: typing.IO, d
 
     f.write(f'{"\t" * (depth + 2)}m_functionTable.reserve({total_functions_count});\n\n')
 
+    function_index = 0
+
+    def add_func_register(file: typing.IO, depth_reg: int, code: str):
+        nonlocal function_index
+        file.write(f'{"\t" * depth_reg}{code} /// index: {function_index}\n')
+        function_index += 1
+
     for class_obj in code_structure.scriptable_classes:
         class_name_with_namespace = code_structure.correct_class_name(class_obj.alias)
         api_function_prefix = class_name_with_namespace.replace('::', '_')
 
         f.write(f'{"\t" * (depth + 2)}SR_INFO("SpaRcleAPIRegister::RegisterAll(): registering {class_name_with_namespace} class...");\n')
-        f.write(f'{"\t" * (depth + 2)}m_functionTable.emplace_back({api_function_prefix}_destroy);\n')
-        f.write(f'{"\t" * (depth + 2)}m_functionTable.emplace_back({api_function_prefix}_copy);\n')
+        add_func_register(f, depth + 2, f'm_functionTable.emplace_back({api_function_prefix}_destroy);')
+        add_func_register(f, depth + 2, f'm_functionTable.emplace_back({api_function_prefix}_copy);')
 
         for i, constructor in enumerate(class_obj.constructors):
-            f.write(f'{"\t" * (depth + 2)}m_functionTable.emplace_back({api_function_prefix}_constructor_{i});\n')
+            add_func_register(f, depth + 2, f'm_functionTable.emplace_back({api_function_prefix}_constructor_{i});')
 
         for i, operator in enumerate(class_obj.operators):
-            f.write(f'{"\t" * (depth + 2)}m_functionTable.emplace_back({api_function_prefix}_operator_{operator.type.name}_{i});\n')
+            add_func_register(f, depth + 2, f'm_functionTable.emplace_back({api_function_prefix}_operator_{operator.type.name}_{i});')
 
         for i, method in enumerate(class_obj.methods):
-            f.write(f'{"\t" * (depth + 2)}m_functionTable.emplace_back({api_function_prefix}_method_{method.name}_{i});\n')
+            add_func_register(f, depth + 2, f'm_functionTable.emplace_back({api_function_prefix}_method_{method.name}_{i});')
 
     f.write(f'{"\t" * (depth + 2)}SR_INFO("SpaRcleAPIRegister::RegisterAll(): registration done!");\n')
     f.write(f'{"\t" * (depth + 1)}}}\n\n')
@@ -273,11 +302,24 @@ def generate_memory_leak_checker(f: typing.IO, depth: int):
 def generate_api(logger: logger_utils.Logger, repo_dir: str, codegen_dir: str, code_structure: reflection_classes.CodeStructure):
     logger.log_info('Start generating script API...')
 
+    for file in glob(f'{codegen_dir}/../ScriptAPI/*.hpp'):
+        os.remove(file)
+
+    os.makedirs(f'{codegen_dir}/../ScriptAPI', exist_ok=True)
+
+    for i, class_obj in enumerate(code_structure.scriptable_classes):
+        with open(f'{codegen_dir}/../ScriptAPI/{class_obj.alias}.generated.hpp', 'w', encoding='utf-8') as f:
+            f.write(clang_utils.codegen_cpp_header_comment)
+            generate_scriptable_class(logger, f, 0, code_structure, class_obj)
+
     with open(f'{codegen_dir}/SpaRcleAPI.generated.hpp', 'w', encoding='utf-8') as f:
         f.write(clang_utils.codegen_cpp_header_comment)
 
         f.write('#ifndef SR_CODEGEN_SPARCLE_API_GENERATED_HPP\n')
         f.write('#define SR_CODEGEN_SPARCLE_API_GENERATED_HPP\n\n')
+
+        f.write('#include <Utils/Debug.h>\n')
+        f.write('#include <Utils/Common/StringFormat.h>\n\n')
 
         if len(code_structure.scriptable_classes) > 0:
             f.write('/// Include all scriptable classes\n')
@@ -291,13 +333,15 @@ def generate_api(logger: logger_utils.Logger, repo_dir: str, codegen_dir: str, c
         f.write('namespace SpaRcleAPI {\n')
 
         generate_script_handle_struct(f, repo_dir, 0)
+
         f.write('\n')
+
+        f.write('\tvoid* GetSpaRcleAPIDefaultRefPtr() { static uint64_t def; return &def; }\n\n')
+
         generate_memory_leak_checker(f, 1)
 
         for i, class_obj in enumerate(code_structure.scriptable_classes):
-            generate_scriptable_class(logger, f, 1, code_structure, class_obj)
-            if i < len(code_structure.scriptable_classes) - 1:
-                f.write('\n')
+            f.write(f'\t#include <ScriptAPI/{class_obj.alias}.generated.hpp>\n')
 
         f.write('\n\t/// =========================== Register functions ==============================\n\n')
 

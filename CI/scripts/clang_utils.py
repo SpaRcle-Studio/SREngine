@@ -60,14 +60,6 @@ def is_trivial_type(type_name: str) -> bool:
     return non_qualified_type in DEFAULT_CPP_TRIVIAL_TYPES
 
 
-def correct_default_return_type(return_type: str, code_structure):
-    is_return_type_trivial = is_trivial_type(return_type)
-    return_type = code_structure.correct_class_name(return_type if is_return_type_trivial else script_codegen_utils.SCRIPT_HANDLE_TYPE_NAME)
-    if return_type.endswith('*'):
-        return is_return_type_trivial, 'nullptr'
-    return is_return_type_trivial, return_type
-
-
 def correct_return_type(return_type: str, code_structure):
     is_return_type_trivial = is_trivial_type(return_type)
     return_type = code_structure.correct_class_name(return_type if is_return_type_trivial else script_codegen_utils.SCRIPT_HANDLE_TYPE_NAME)
@@ -556,6 +548,7 @@ def parse_scriptable_class(logger: logger_utils.Logger, parent_node, code_struct
                 if has_special_tag_comment(child, 'operator'):
                     logger.log_debug(f'Found scriptable operator: {child.spelling}, return type {child.result_type.spelling}')
                     operator = reflection_classes.Operator(cpp_operator.OperatorType.from_string(child.spelling), child.result_type.spelling)
+                    operator.is_const = child.is_const_method()
 
                     # find all parameters
                     for param in child.get_children():
@@ -570,6 +563,7 @@ def parse_scriptable_class(logger: logger_utils.Logger, parent_node, code_struct
                 if has_special_tag_comment(child, 'method'):
                     logger.log_debug(f'Found scriptable method: {child.spelling}, return type {child.result_type.spelling}')
                     method = reflection_classes.Method(child.spelling, child.result_type.spelling)
+                    method.is_const = child.is_const_method()
 
                     # find all parameters
                     for param in child.get_children():

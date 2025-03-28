@@ -15,8 +15,9 @@
 #include <Core/Tests/HTMLTest.h>
 
 #include <CoreAPI.h>
-#include "Scripts/TestScript.h"
 #include <Codegen/SpaRcleAPI.generated.hpp>
+
+#include "Scripts/TestScript.h"
 
 int main(int argc, char** argv) {
     if (!SR_UTILS_NS::RunTestSharedPtr()) {

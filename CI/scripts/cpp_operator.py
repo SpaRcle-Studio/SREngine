@@ -190,4 +190,20 @@ class OperatorType(enum.Enum):
         else:
             raise ValueError(f'Unknown operator enum: {op_enum}')
 
+    def __str__(self):
+        return OperatorType.to_string(self)
 
+
+OPERATORS_WITH_ASSIGNMENT = [
+    OperatorType.ASSIGNMENT,
+    OperatorType.ADDITION_ASSIGNMENT,
+    OperatorType.SUBTRACTION_ASSIGNMENT,
+    OperatorType.MULTIPLICATION_ASSIGNMENT,
+    OperatorType.DIVISION_ASSIGNMENT,
+    OperatorType.MODULUS_ASSIGNMENT,
+    OperatorType.BITWISE_AND_ASSIGNMENT,
+    OperatorType.BITWISE_OR_ASSIGNMENT,
+    OperatorType.BITWISE_XOR_ASSIGNMENT,
+    OperatorType.BITWISE_LEFT_SHIFT_ASSIGNMENT,
+    OperatorType.BITWISE_RIGHT_SHIFT_ASSIGNMENT,
+]

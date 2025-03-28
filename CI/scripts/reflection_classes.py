@@ -1,26 +1,61 @@
-import os, cpp_operator, clang_utils, logger_utils
+import os, cpp_operator, clang_utils, logger_utils, script_codegen_utils
+
+
+class CPPType:
+    def __init__(self, name: str):
+        self.name: str = name
+        self.is_const: bool = name.startswith('const ')
+        self.is_ref: bool = name.endswith('&')
+        self.is_pointer: bool = name.endswith('*')
+
+        if self.is_const:
+            self.name = self.name[6:]
+
+        self.name = self.name.replace(' ', '')
+
+        if self.is_ref:
+            self.name = self.name[:-1]
+
+        if self.is_pointer:
+            self.name = self.name[:-1]
+
+        if self.name.endswith('&') or self.name.endswith('*') or self.name.endswith(' '):
+            raise ValueError(f'Invalid type name: \"{name}\", processed name: \"{self.name}\"')
+
+        self.is_trivial: bool = clang_utils.is_trivial_type(self.name)
+
+    def get_full_type(self) -> str:
+        return f'{"const " if self.is_const else ""}{self.name}{" &" if self.is_ref else ""}{"*" if self.is_pointer else ""}'
+
+
+    def get_handle_or_full_type(self) -> str:
+        return self.get_full_type() if self.is_trivial else f'{script_codegen_utils.SCRIPT_HANDLE_TYPE_NAME}'
+
+
+    def __str__(self):
+        return f'CPPType: {self.name}, Is const: {self.is_const}, Is ref: {self.is_ref}, Is trivial: {self.is_trivial}'
 
 
 class Parameter:
     def __init__(self, name: str, type_name: str):
         self.name: str = name
-        self.type_name: str = type_name
-        self.is_trivial: bool = clang_utils.is_trivial_type(type_name)
+        self.cpp_type: CPPType = CPPType(type_name)
+
 
     def set_type(self, new_type: str):
-        self.type_name = new_type
-        self.is_trivial = clang_utils.is_trivial_type(new_type)
+        self.cpp_type = CPPType(new_type)
 
 
     def __str__(self):
-        return f'Parameter: {self.name}, Type: {self.type_name}'
+        return f'Parameter: {self.name}, Type: {self.cpp_type}'
 
 
 class Operator:
     def __init__(self, op_type: cpp_operator.OperatorType, return_type: str):
         self.type: cpp_operator.OperatorType = op_type
-        self.return_type: str = return_type
+        self.return_type: CPPType = CPPType(return_type)
         self.parameters: list[Parameter] = []
+        self.is_const = False
 
     def add_parameter(self, parameter: Parameter):
         self.parameters.append(parameter)
@@ -84,8 +119,9 @@ class Property:
 class Method:
     def __init__(self, name: str, return_type: str):
         self.name: str = name
-        self.return_type: str = return_type
+        self.return_type: CPPType = CPPType(return_type)
         self.parameters: list[Parameter] = []
+        self.is_const = False
 
     def add_parameter(self, parameter: Parameter):
         self.parameters.append(parameter)
@@ -158,17 +194,17 @@ class ScriptableClass:
     def replace_type(self, logger: logger_utils.Logger, old_type: str, new_type: str):
         for constructor in self.constructors:
             for parameter in constructor.parameters:
-                parameter.set_type(clang_utils.replace_type_templated_name(logger, parameter.type_name, old_type, new_type))
+                parameter.set_type(clang_utils.replace_type_templated_name(logger, parameter.cpp_type.get_full_type(), old_type, new_type))
 
         for method in self.methods:
             for parameter in method.parameters:
-                parameter.set_type(clang_utils.replace_type_templated_name(logger, parameter.type_name, old_type, new_type))
-            method.return_type = clang_utils.replace_type_templated_name(logger, method.return_type, old_type, new_type)
+                parameter.set_type(clang_utils.replace_type_templated_name(logger, parameter.cpp_type.get_full_type(), old_type, new_type))
+            method.return_type = CPPType(clang_utils.replace_type_templated_name(logger, method.return_type.get_full_type(), old_type, new_type))
 
         for operator in self.operators:
             for parameter in operator.parameters:
-                parameter.set_type(clang_utils.replace_type_templated_name(logger, parameter.type_name, old_type, new_type))
-            operator.return_type = clang_utils.replace_type_templated_name(logger, operator.return_type, old_type, new_type)
+                parameter.set_type(clang_utils.replace_type_templated_name(logger, parameter.cpp_type.get_full_type(), old_type, new_type))
+            operator.return_type = CPPType(clang_utils.replace_type_templated_name(logger, operator.return_type.get_full_type(), old_type, new_type))
 
 
     def add_constructor(self, constructor: Constructor):
@@ -202,7 +238,11 @@ class CodeStructure:
         self.logger.log_debug(f'Add class name to class_names_table: {class_name} -> {full_class_name}')
 
     def correct_class_name(self, class_name: str) -> str:
-         # use class_names_table to get full class name
+        # use class_names_table to get full class name
+
+        #print(f'Correct class name: \"{class_name}\"')
+
         if class_name in self.class_names_table:
-            return self.class_names_table[class_name]
+            class_name = self.class_names_table[class_name]
+
         return class_name
