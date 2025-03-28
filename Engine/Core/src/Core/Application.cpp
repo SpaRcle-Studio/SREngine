@@ -168,7 +168,7 @@ namespace SR_CORE_NS {
             return true;
         }
 
-        auto&& logPath = logDir.Concat("srengine-log.txt");
+        auto&& logPath = logDir.Concat("srengine.log");
         if (!logPath.GetFolder().CreateIfNotExists()) {
             SR_PLATFORM_NS::WriteConsoleError("Failed to create log file!\n");
             return false;
