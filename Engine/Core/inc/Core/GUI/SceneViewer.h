@@ -91,4 +91,4 @@ namespace SR_CORE_GUI_NS {
     };
 }
 
-#endif //SR_ENGINE_SCENEVIEWER_H
+#endif //SR_ENGINE_SCENE_VIEWER_H
