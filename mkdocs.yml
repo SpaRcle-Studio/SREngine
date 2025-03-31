@@ -1,5 +1,5 @@
 site_name: SpaRcle Engine Developer Documentation
-site_url: https://docs.sparcles.dev/srengine/latest/
+site_url: https://docs.sparcles.dev/
 site_author: SpaRcle Studio
 site_description: Cross-platform 2D/3D game engine in C++ with full control over the rendering pipeline.
 copyright: SpaRcle Studio, MIT, 2025
