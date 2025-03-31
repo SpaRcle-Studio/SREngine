@@ -19,8 +19,7 @@ It aims to establish a strong base for game creation and is currently in the ear
 
 ## Screenshots
 
-<img width="1920" alt="image_2023-05-31_21-40-59" src="https://github.com/Monika0000/SREngine/assets/47291246/6bf73c99-81a2-4a3e-ad28-4c788884eb38">
-<img width="1920" alt="image_2023-05-31_21-40-59" src="https://github.com/Monika0000/SREngine/assets/47291246/32cfdbcb-5a0d-4a74-9501-539da40379e2">
+<img width="1920" alt="screenshot" src="https://github.com/SpaRcle-Studio/SREngine/blob/dev/Documentation/srengine_yvtMUwNuKk.jpg">
 
 ## Supported compilers
 - [x] MSVC (stable)
