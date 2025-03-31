@@ -545,4 +545,8 @@ namespace SR_CORE_NS {
 
         return false;
     }
+
+    SR_UTILS_NS::Debug& Engine::GetDebugger() const {
+        return SR_UTILS_NS::Debug::Instance();
+    }
 }

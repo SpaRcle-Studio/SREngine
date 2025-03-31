@@ -72,6 +72,17 @@ int main(int argc, char** argv) {
         for (uint64_t i = 0; i < SpaRcleAPI::SpaRcleAPIRegister::Instance().GetCountFunctions(); ++i) {
             SpaRcleAPI::CoreAPI::Instance().SetFunction(i, SpaRcleAPI::SpaRcleAPIRegister::Instance().GetFunction(i));
         }
+
+        SpaRcle::Core::ScriptableContext context;
+        context.pEngine = pLauncher->GetEngine().Get();
+
+        SpaRcleAPI::ScriptHandle handle;
+        handle.isDestructible = false;
+        handle.pData = &context;
+        handle.pRefCount = new uint32_t(0);
+
+        SpaRcleAPI::CoreAPI::Instance().SetScriptContextHandle(handle);
+
         RunScriptTest();
         SpaRcleAPI::MemoryLeakChecker::Instance().CheckMemoryLeaks();
 

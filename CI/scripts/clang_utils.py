@@ -18,6 +18,66 @@ DEFAULT_CPP_TRIVIAL_TYPES = [
 ]
 
 
+def has_default_constructor(cls):
+    """Проверяет, можно ли создать объект без аргументов"""
+    has_explicit_ctor = False
+    has_default_ctor = False
+
+    for c in cls.get_children():
+        if c.kind == clang.cindex.CursorKind.CONSTRUCTOR:
+            has_explicit_ctor = True
+            if len(list(c.get_arguments())) == 0:
+                has_default_ctor = True
+
+    # Если нет конструкторов - значит компилятор создаст дефолтный
+    if not has_explicit_ctor:
+        return True
+    return has_default_ctor
+
+
+def is_deleted(c):
+    """Проверяет, является ли конструктор `= delete`"""
+    for token in c.get_tokens():
+        if token.spelling == "delete":
+            return True
+    return False
+
+
+def has_copy_constructor(cls):
+    """Проверяет, есть ли конструктор копирования"""
+    has_explicit_copy_ctor = False
+    has_deleted_copy_ctor = False
+    has_other_ctors = False
+
+    for c in cls.get_children():
+        if c.kind == clang.cindex.CursorKind.CONSTRUCTOR:
+            params = list(c.get_arguments())
+            if len(params) == 1:
+                param_type = params[0].type.spelling
+
+                # Проверяем, что аргумент имеет тип `ClassName &` или `const ClassName &`
+                if param_type == f"{c.spelling} &" or param_type == f"const {c.spelling} &":
+                    if is_deleted(c):
+                        has_deleted_copy_ctor = True  # Конструктор копирования удалён
+                    else:
+                        has_explicit_copy_ctor = True
+                else:
+                    has_other_ctors = True
+            else:
+                has_other_ctors = True
+
+    # Если есть явно запрещённый конструктор -> NO
+    if has_deleted_copy_ctor:
+        return False
+
+    # Если есть явно объявленный -> YES
+    if has_explicit_copy_ctor:
+        return True
+
+    # Если нет других конструкторов -> компилятор его создаст
+    return not has_other_ctors
+
+
 def remove_type_qualifiers(type_name: str) -> str:
     """Removes qualifiers from a type name."""
     if type_name.startswith('const '):
@@ -495,6 +555,8 @@ def parse_scriptable_class(logger: logger_utils.Logger, parent_node, code_struct
         logger.log_debug(f'Found scriptable class: {class_name}')
         class_obj = reflection_classes.ScriptableClass(parent_node.spelling, namespaces)
         class_obj.path = parent_node.location.file.name
+        class_obj.has_default_constructor = has_default_constructor(parent_node)
+        class_obj.has_copy_constructor = has_copy_constructor(parent_node)
 
         template_variants = []
 

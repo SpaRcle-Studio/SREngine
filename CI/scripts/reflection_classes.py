@@ -189,6 +189,8 @@ class ScriptableClass:
         self.methods: list[Method] = []
         self.operators: list[Operator] = []
         self.path = None
+        self.has_default_constructor = False
+        self.has_copy_constructor = False
 
 
     def replace_type(self, logger: logger_utils.Logger, old_type: str, new_type: str):

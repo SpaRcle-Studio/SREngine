@@ -47,10 +47,9 @@ def generate_args_unpacking_string(f: typing.IO, depth: int, code_structure: ref
 
 def generate_script_handle_allocation(f: typing.IO, depth: int, var_name: str, type_name: str, is_destructible: bool) -> None:
     f.write(f'{"\t" * depth}MemoryLeakChecker::Instance().OnMemoryAlloc();\n')
-    f.write(f'{"\t" * depth}{var_name}.pData = new {type_name};\n')
+    f.write(f'{"\t" * depth}{var_name}.pData = {type_name};\n')
     f.write(f'{"\t" * depth}{var_name}.pRefCount = new uint32_t(0);\n')
     f.write(f'{"\t" * depth}{var_name}.isDestructible = {'true' if is_destructible else 'false'};\n')
-
 
 def make_api_default_return_value(return_type: reflection_classes.CPPType):
     if not return_type.is_trivial:
@@ -84,7 +83,10 @@ def generate_method(logger: logger_utils.Logger, f: typing.IO, depth: int, class
         f.write(f'{"\t" * depth}return {call_result};\n')
     else:
         f.write(f'{"\t" * depth}{script_codegen_utils.SCRIPT_HANDLE_TYPE_NAME} returnScriptHandle;\n')
-        generate_script_handle_allocation(f, depth, 'returnScriptHandle', f'{code_structure.correct_class_name(method.return_type.get_full_type())}({call_result})', True)
+        if method.return_type.is_ref:
+            generate_script_handle_allocation(f, depth, 'returnScriptHandle', f'&{call_result}', False)
+        else:
+            generate_script_handle_allocation(f, depth, 'returnScriptHandle', f'new {code_structure.correct_class_name(method.return_type.get_full_type())}({call_result})', True)
         f.write(f'{"\t" * depth}return returnScriptHandle;\n')
 
 
@@ -122,7 +124,7 @@ def generate_operator(logger: logger_utils.Logger, f: typing.IO, depth: int, cla
         f.write(f'{"\t" * depth}return {call_result};\n')
     else:
         f.write(f'{"\t" * depth}{script_codegen_utils.SCRIPT_HANDLE_TYPE_NAME} returnScriptHandle;\n')
-        generate_script_handle_allocation(f, depth, 'returnScriptHandle', f'{code_structure.correct_class_name(operator.return_type.get_full_type())}({call_result})', True)
+        generate_script_handle_allocation(f, depth, 'returnScriptHandle', f'new {code_structure.correct_class_name(operator.return_type.get_full_type())}({call_result})', True)
         f.write(f'{"\t" * depth}return returnScriptHandle;\n')
 
 
@@ -158,7 +160,7 @@ def generate_copy_function(logger: logger_utils.Logger, f: typing.IO, depth: int
     f.write(f'{'\t' * (depth + 2)}return {script_codegen_utils.SCRIPT_HANDLE_TYPE_NAME}();\n')
     f.write(f'{'\t' * (depth + 1)}}}\n')
     f.write(f'{'\t' * (depth + 1)}{script_codegen_utils.SCRIPT_HANDLE_TYPE_NAME} copyScriptHandle;\n')
-    generate_script_handle_allocation(f, depth + 1, 'copyScriptHandle', f'{class_name_with_namespace}(*static_cast<{class_name_with_namespace}*>({script_codegen_utils.SCRIPT_HANDLE_SELF_VAR_NAME}.pData))', True)
+    generate_script_handle_allocation(f, depth + 1, 'copyScriptHandle', f'new {class_name_with_namespace}(*static_cast<{class_name_with_namespace}*>({script_codegen_utils.SCRIPT_HANDLE_SELF_VAR_NAME}.pData))', True)
     f.write(f'{'\t' * (depth + 1)}return copyScriptHandle;\n')
     f.write(f'{'\t' * depth}}}\n\n')
 
@@ -168,7 +170,9 @@ def generate_scriptable_class(logger: logger_utils.Logger, f: typing.IO, depth: 
     class_name_with_namespace = code_structure.correct_class_name(class_obj.alias)
 
     generate_destroy_function(logger, f, depth, api_function_prefix, class_name_with_namespace)
-    generate_copy_function(logger, f, depth, api_function_prefix, class_name_with_namespace)
+
+    if class_obj.has_copy_constructor:
+        generate_copy_function(logger, f, depth, api_function_prefix, class_name_with_namespace)
 
     if len(class_obj.constructors) > 0:
         f.write(f'{'\t' * depth}/// {class_name_with_namespace} Constructors\n')
@@ -179,7 +183,7 @@ def generate_scriptable_class(logger: logger_utils.Logger, f: typing.IO, depth: 
             generate_args_unpacking_string(f, depth + 1, code_structure, constructor.parameters, script_codegen_utils.SCRIPT_HANDLE_TYPE_NAME)
 
             f.write(f'{'\t' * (depth + 1)}{script_codegen_utils.SCRIPT_HANDLE_TYPE_NAME} scriptHandle;\n')
-            generate_script_handle_allocation(f, depth + 1, 'scriptHandle', f'{class_name_with_namespace}({generate_params_pass_string(constructor.parameters)})', True)
+            generate_script_handle_allocation(f, depth + 1, 'scriptHandle', f'new {class_name_with_namespace}({generate_params_pass_string(constructor.parameters)})', True)
             f.write(f'{'\t' * (depth + 1)}return scriptHandle;\n')
             f.write(f'{'\t' * depth}}}\n')
         f.write('\n')
@@ -233,7 +237,8 @@ def generate_functions_registration(logger: logger_utils.Logger, f: typing.IO, d
     total_functions_count = 0
     for class_obj in code_structure.scriptable_classes:
         total_functions_count += 1 # destroy function
-        total_functions_count += 1 # copy function
+        if class_obj.has_copy_constructor:
+            total_functions_count += 1 # copy function
         total_functions_count += len(class_obj.constructors)
         total_functions_count += len(class_obj.operators)
         total_functions_count += len(class_obj.methods)
@@ -253,7 +258,9 @@ def generate_functions_registration(logger: logger_utils.Logger, f: typing.IO, d
 
         f.write(f'{"\t" * (depth + 2)}SR_INFO("SpaRcleAPIRegister::RegisterAll(): registering {class_name_with_namespace} class...");\n')
         add_func_register(f, depth + 2, f'm_functionTable.emplace_back({api_function_prefix}_destroy);')
-        add_func_register(f, depth + 2, f'm_functionTable.emplace_back({api_function_prefix}_copy);')
+
+        if class_obj.has_copy_constructor:
+            add_func_register(f, depth + 2, f'm_functionTable.emplace_back({api_function_prefix}_copy);')
 
         for i, constructor in enumerate(class_obj.constructors):
             add_func_register(f, depth + 2, f'm_functionTable.emplace_back({api_function_prefix}_constructor_{i});')

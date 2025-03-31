@@ -8,6 +8,8 @@
 #include <Core/EvoScriptAPI.h>
 #include <Core/EngineResources.h>
 
+#include <Graphics/Window/Window.h>
+
 #include <Utils/Events/EventManager.h>
 #include <Utils/Types/Time.h>
 #include <Utils/Types/Timer.h>
@@ -24,7 +26,6 @@
 #include <Utils/CommandManager/CmdManager.h>
 
 namespace SR_GRAPH_NS {
-    class Window;
     class Render;
     class RenderScene;
     class RenderContext;
@@ -51,6 +52,7 @@ namespace SR_CORE_NS {
     class EngineScene;
     class Application;
 
+    /// @scriptableClass
     class Engine : public SR_HTYPES_NS::SharedPtr<Engine> {
         using Super = SR_HTYPES_NS::SharedPtr<Engine>;
         using Ptr = SR_HTYPES_NS::SharedPtr<Engine>;
@@ -99,6 +101,8 @@ namespace SR_CORE_NS {
         SR_NODISCARD SR_UTILS_NS::CmdManager* GetCmdManager() const { return m_cmdManager; }
         SR_NODISCARD EngineScene* GetEngineScene() const { return m_engineScene; }
         SR_NODISCARD bool IsApplicationFocused() const;
+        /// @method
+        SR_NODISCARD SR_UTILS_NS::Debug& GetDebugger() const;
 
     public:
         bool Create();
@@ -108,7 +112,6 @@ namespace SR_CORE_NS {
 
     private:
         static WindowPtr CreateMainWindow();
-        void DrawCallback();
 
     private:
         mutable std::recursive_mutex m_mutex;

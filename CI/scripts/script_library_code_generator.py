@@ -41,8 +41,10 @@ def delete_old_library(logger: logger_utils.Logger, library_dir: str):
         logger.log_info(f'Old library directory deleted.')
 
 
-def make_correct_type_for_library(code_structure: reflection_classes.CodeStructure, cpp_type: reflection_classes.CPPType) -> str:
+def make_correct_type_for_library(code_structure: reflection_classes.CodeStructure, cpp_type: reflection_classes.CPPType, is_return_type = False) -> str:
     full_type_name = code_structure.correct_class_name(cpp_type.name)
+    if cpp_type.is_ref and is_return_type and not cpp_type.is_trivial:
+        return f'UnsafeRef<{full_type_name}>'
     return f'{"const " if cpp_type.is_const else ""}{full_type_name}{" &" if cpp_type.is_ref else ""}{"*" if cpp_type.is_pointer else ""}'
 
 
@@ -67,7 +69,7 @@ def generate_header_operator(f: typing.IO, depth: int, scriptable_class: reflect
 
 
 def generate_header_method(f: typing.IO, depth: int, scriptable_class: reflection_classes.ScriptableClass, method: reflection_classes.Method, code_structure: reflection_classes.CodeStructure):
-    return_type = make_correct_type_for_library(code_structure, method.return_type)
+    return_type = make_correct_type_for_library(code_structure, method.return_type, True)
     nodiscard_attr = '[[nodiscard]] ' if method.return_type != 'void' and method.is_const else ''
 
     f.write(f'{depth * '\t'}\t{nodiscard_attr}{return_type} {method.name}(')
@@ -88,7 +90,7 @@ def generate_cpp_constructor(f: typing.IO, depth: int, function_index: int, scri
     f.write(', '.join([(parameter.name + ('.GetScriptHandle()' if not parameter.cpp_type.is_trivial else ''))
                        for parameter in constructor.parameters]))
     f.write(');\n')
-    f.write(f'{depth * '\t'}\t(*m_handle.pRefCount) = 1;\n')
+    f.write(f'{depth * '\t'}\t(*m_handle.pRefCount) += 1;\n')
 
     f.write(f'{depth * '\t'}}}\n')
 
@@ -119,15 +121,16 @@ def generate_cpp_operator(f: typing.IO, depth: int, function_index: int, scripta
 
 
 def generate_cpp_method(f: typing.IO, depth: int, function_index: int, scriptable_class: reflection_classes.ScriptableClass, method: reflection_classes.Method, code_structure: reflection_classes.CodeStructure):
-    return_type = make_correct_type_for_library(code_structure, method.return_type)
+    return_type_lib = make_correct_type_for_library(code_structure, method.return_type, True)
+    return_type_api = make_correct_type_for_api(code_structure, method.return_type)
 
-    f.write(f'{depth * '\t'}{return_type} {'::'.join(scriptable_class.namespaces)}::{scriptable_class.alias}::{method.name}(')
+    f.write(f'{depth * '\t'}{return_type_lib} {'::'.join(scriptable_class.namespaces)}::{scriptable_class.alias}::{method.name}(')
     f.write(', '.join([f'{make_correct_type_for_library(code_structure, parameter.cpp_type)} {parameter.name}' for parameter in method.parameters]))
     f.write(f') {'const ' if method.is_const else ''}{{\n')
 
     method_func_args = f'{script_codegen_utils.SCRIPT_HANDLE_TYPE_NAME}' + ''.join([f', {make_correct_type_for_api(code_structure, parameter.cpp_type)}' for parameter in method.parameters])
 
-    f.write(f'{depth * '\t'}\tauto&& pMethodFunc = ({return_type} (*)({method_func_args}))CoreAPI::Instance().GetFunction({function_index});\n')
+    f.write(f'{depth * '\t'}\tauto&& pMethodFunc = ({return_type_api} (*)({method_func_args}))CoreAPI::Instance().GetFunction({function_index});\n')
 
     f.write(f'{depth * '\t'}\treturn pMethodFunc(m_handle')
     f.write(''.join([(f', {parameter.name}' + ('.GetScriptHandle()' if not parameter.cpp_type.is_trivial else ''))
@@ -150,12 +153,15 @@ def generate_header_file(logger: logger_utils.Logger, f: typing.IO, function_ind
     depth += 1
 
     f.write(f'{depth * '\t'}class {scriptable_class.alias} {{\n')
-    f.write(f'{depth * '\t'}private:\n')
+    #f.write(f'{depth * '\t'}\tfriend class UnsafeRef<{scriptable_class.alias}>;\n')
+    f.write(f'{depth * '\t'}public:\n')
     f.write(f'{depth * '\t'}\t{scriptable_class.alias}(const ScriptHandle& handle) /** NOLINT **/ \n')
     f.write(f'{depth * '\t'}\t\t: m_handle(handle)\n')
     f.write(f'{depth * '\t'}\t{{\n')
-    f.write(f'{depth * '\t'}\t\t(*m_handle.pRefCount) = 1;\n')
+    f.write(f'{depth * '\t'}\t\t(*m_handle.pRefCount) += 1;\n')
     f.write(f'{depth * '\t'}\t}}\n\n')
+    #f.write(f'{depth * '\t'}\t{scriptable_class.alias}(const ScriptHandle& handle, ScriptablePassKey<UnsafeRef<{scriptable_class.alias}>>)\n')
+    #f.write(f'{depth * '\t'}\t\t: m_handle(handle) {{ }}\n\n')
     f.write(f'{depth * '\t'}public:\n')
 
     f.write(f'{depth * '\t'}\t~{scriptable_class.alias}() {{\n')
@@ -163,24 +169,25 @@ def generate_header_file(logger: logger_utils.Logger, f: typing.IO, function_ind
     f.write(f'{depth * '\t'}\t\tpDeleteFunc(m_handle);\n')
     f.write(f'{depth * '\t'}\t}}\n')
 
-    function_index += 1
+    if scriptable_class.has_copy_constructor:
+        function_index += 1 # copy function
 
-    f.write(f'{depth * '\t'}\t{scriptable_class.alias}(const {scriptable_class.alias}& other) {{\n')
-    f.write(f'{depth * '\t'}\t\tauto&& pDeleteFunc = (void (*)(ScriptHandle))CoreAPI::Instance().GetFunction({function_index - 1});\n')
-    f.write(f'{depth * '\t'}\t\tauto&& pCopyFunc = (ScriptHandle (*)(ScriptHandle))CoreAPI::Instance().GetFunction({function_index});\n')
-    f.write(f'{depth * '\t'}\t\tpDeleteFunc(m_handle);\n')
-    f.write(f'{depth * '\t'}\t\tm_handle = pCopyFunc(other.m_handle);\n')
-    f.write(f'{depth * '\t'}\t\t(*m_handle.pRefCount) = 1;\n')
-    f.write(f'{depth * '\t'}\t}}\n')
+        f.write(f'{depth * '\t'}\t{scriptable_class.alias}(const {scriptable_class.alias}& other) {{\n')
+        f.write(f'{depth * '\t'}\t\tauto&& pDeleteFunc = (void (*)(ScriptHandle))CoreAPI::Instance().GetFunction({function_index - 1});\n')
+        f.write(f'{depth * '\t'}\t\tauto&& pCopyFunc = (ScriptHandle (*)(ScriptHandle))CoreAPI::Instance().GetFunction({function_index});\n')
+        f.write(f'{depth * '\t'}\t\tpDeleteFunc(m_handle);\n')
+        f.write(f'{depth * '\t'}\t\tm_handle = pCopyFunc(other.m_handle);\n')
+        f.write(f'{depth * '\t'}\t\t(*m_handle.pRefCount) += 1;\n')
+        f.write(f'{depth * '\t'}\t}}\n')
 
-    f.write(f'{depth * '\t'}\t{scriptable_class.alias}& operator=(const {scriptable_class.alias}& other) {{\n')
-    f.write(f'{depth * '\t'}\t\tauto&& pDeleteFunc = (void (*)(ScriptHandle))CoreAPI::Instance().GetFunction({function_index - 1});\n')
-    f.write(f'{depth * '\t'}\t\tauto&& pCopyFunc = (ScriptHandle (*)(ScriptHandle))CoreAPI::Instance().GetFunction({function_index});\n')
-    f.write(f'{depth * '\t'}\t\tpDeleteFunc(m_handle);\n')
-    f.write(f'{depth * '\t'}\t\tm_handle = pCopyFunc(other.m_handle);\n')
-    f.write(f'{depth * '\t'}\t\t(*m_handle.pRefCount) = 1;\n')
-    f.write(f'{depth * '\t'}\t\treturn *this;\n')
-    f.write(f'{depth * '\t'}\t}}\n')
+        f.write(f'{depth * '\t'}\t{scriptable_class.alias}& operator=(const {scriptable_class.alias}& other) {{\n')
+        f.write(f'{depth * '\t'}\t\tauto&& pDeleteFunc = (void (*)(ScriptHandle))CoreAPI::Instance().GetFunction({function_index - 1});\n')
+        f.write(f'{depth * '\t'}\t\tauto&& pCopyFunc = (ScriptHandle (*)(ScriptHandle))CoreAPI::Instance().GetFunction({function_index});\n')
+        f.write(f'{depth * '\t'}\t\tpDeleteFunc(m_handle);\n')
+        f.write(f'{depth * '\t'}\t\tm_handle = pCopyFunc(other.m_handle);\n')
+        f.write(f'{depth * '\t'}\t\t(*m_handle.pRefCount) += 1;\n')
+        f.write(f'{depth * '\t'}\t\treturn *this;\n')
+        f.write(f'{depth * '\t'}\t}}\n')
 
     function_index += len(scriptable_class.constructors) + len(scriptable_class.operators) + len(scriptable_class.methods)
 
@@ -191,24 +198,6 @@ def generate_header_file(logger: logger_utils.Logger, f: typing.IO, function_ind
         generate_header_operator(f, depth, scriptable_class, operator, code_structure)
 
     for method in scriptable_class.methods:
-        '''return_type = make_correct_type_for_library(code_structure, method.return_type)
-        nodiscard_attr = '[[nodiscard]] ' if method.return_type != 'void' and method.is_const else ''
-
-        f.write(f'{depth * '\t'}\t{nodiscard_attr}{make_correct_type_for_library(code_structure, method.return_type)} {method.name}(')
-        f.write(', '.join([f'{make_correct_type_for_library(code_structure, parameter.cpp_type)} {parameter.name}' for parameter in method.parameters]))
-        f.write(f') {'const ' if method.is_const else ''}{{\n')
-
-        method_func = f'{return_type} (*)({script_codegen_utils.SCRIPT_HANDLE_TYPE_NAME}' + ''.join([f', {make_correct_type_for_api(code_structure, parameter.cpp_type)}' for parameter in method.parameters]) + ')'
-
-        f.write(f'{depth * '\t'}\t\tauto&& pMethodFunc = ({method_func})CoreAPI::Instance().GetFunction({function_index});\n')
-        f.write(f'{depth * '\t'}\t\treturn pMethodFunc(m_handle')
-        f.write(''.join([(f', {parameter.name}' + ('.GetScriptHandle()' if not parameter.cpp_type.is_trivial else ''))
-                           for parameter in method.parameters]))
-        f.write(');\n')
-
-        f.write(f'{depth * '\t'}\t}}\n')
-
-        function_index += 1'''
         generate_header_method(f, depth, scriptable_class, method, code_structure)
 
     f.write(f'{depth * '\t'}public:\n')
@@ -257,7 +246,9 @@ def generate_impl_cpp(logger: logger_utils.Logger, library_dir: str, code_struct
 
         for scriptable_class in code_structure.scriptable_classes:
             function_index += 1 # delete function
-            function_index += 1 # copy function
+
+            if scriptable_class.has_copy_constructor:
+                function_index += 1 # copy function
 
             for constructor in scriptable_class.constructors:
                 generate_cpp_constructor(f, 1, function_index, scriptable_class, constructor, code_structure)
@@ -336,7 +327,10 @@ def generate_library(logger: logger_utils.Logger, repo_dir: str, library_dir: st
             generate_header_file(logger, f, function_index, scriptable_class, code_structure)
 
             function_index += 1 # delete function
-            function_index += 1 # copy function
+
+            if scriptable_class.has_copy_constructor:
+                function_index += 1 # copy function
+
             function_index += len(scriptable_class.constructors)
             function_index += len(scriptable_class.operators)
             function_index += len(scriptable_class.methods)
