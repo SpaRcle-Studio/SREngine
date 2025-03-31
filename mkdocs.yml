@@ -1,7 +1,8 @@
 site_name: SpaRcle Engine Developer Documentation
-site_url: https://sparcles.dev/srengine/devdocs/latest/
+site_url: https://docs.sparcles.dev/srengine/latest/
 site_author: SpaRcle Studio
 site_description: Cross-platform 2D/3D game engine in C++ with full control over the rendering pipeline.
+copyright: SpaRcle Studio, MIT, 2025
 
 theme:
   name: material
@@ -19,12 +20,13 @@ theme:
     # - navigation.expand
     - navigation.footer
     - navigation.indexes
-    # - navigation.instant
-    # - navigation.instant.prefetch
-    # - navigation.instant.progress
+    - navigation.instant
+    - navigation.instant.prefetch
+    - navigation.instant.progress
     # - navigation.prune
     - navigation.sections
     - navigation.tabs
+    - navigation.path
     # - navigation.tabs.sticky
     - navigation.top
     - navigation.tracking
@@ -33,6 +35,11 @@ theme:
     - search.suggest
     - toc.follow
     # - toc.integrate
+  font:
+    text: Roboto
+    code: Roboto Mono
+  favicon: images/favicon-dark.ico
+  logo: images/logo.png
   palette:
     - media: "(prefers-color-scheme)"
       toggle:
@@ -40,7 +47,7 @@ theme:
         name: Switch to light mode
     - media: "(prefers-color-scheme: light)"
       scheme: default
-      primary: indigo
+      primary: black
       accent: indigo
       toggle:
         icon: material/toggle-switch
@@ -57,7 +64,7 @@ plugins:
   - mkdoxy:
       projects:
         srengine:
-          src-dirs: ../../Engine
+          src-dirs: Engine
           full-doc: True
           doxy-cfg:
             FILE_PATTERNS: "*.h"
@@ -72,6 +79,17 @@ extra:
   status:
     new: Recently added
     deprecated: Deprecated
+  generator: false
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/SpaRcle-Studio
+    - icon: fontawesome/brands/discord
+      link: https://discord.gg/RXndN43QF8
+    - icon: fontawesome/brands/youtube
+      link: https://www.youtube.com/@sparcle-studio
+    - icon: fontawesome/brands/twitch
+      link: https://www.twitch.tv/sparcledev
+
 
 markdown_extensions:
   - abbr
@@ -100,8 +118,8 @@ markdown_extensions:
   - pymdownx.magiclink:
       normalize_issue_symbols: true
       repo_url_shorthand: true
-      user: squidfunk
-      repo: mkdocs-material
+      user: SpaRcle-Studio
+      repo: SREngine
   - pymdownx.mark
   - pymdownx.smartsymbols
   - pymdownx.snippets:
@@ -123,8 +141,9 @@ markdown_extensions:
   - pymdownx.tilde
 
 nav:
-  - Home: index.md
   - Getting started:
-      - Installation: LinuxBuild.md
+      - Installation:
+          - Building on Linux: LinuxBuild.md
+          - Building on Windows: WindowsBuild.md
 
 docs_dir: Documentation
