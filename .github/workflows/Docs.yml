@@ -1,0 +1,43 @@
+name: Build Docs and Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [dev]
+  workflow_dispatch:
+  repository_dispatch:
+    types: [webhook, trigger-workflow]
+
+# Allow this job to clone the repo and create a page deployment
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout your repository using git
+        uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: 3.x
+
+      - name: Install dependencies
+        run: |
+          sudo apt update
+          pip install mkdocs mkdocs-material mkdocs-minify-plugin mkdoxy pymdown-extensions
+          pip install "mkdocs-material[imaging]"
+          pip install "mkdocs-material[recommended]"
+          sudo apt-get install doxygen
+
+      - name: Clone the submodules
+        run: |
+          git submodule update --init --recursive --depth 1 --jobs 4
+
+      - name: Build documentation
+        env:
+          GH_TOKEN: ${{ secrets.CI_TOKEN }}
+        run: |
+          mkdocs gh-deploy --force
