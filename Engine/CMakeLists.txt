@@ -41,6 +41,10 @@ if (ANDROID_NDK)
     add_link_options(-femulated-tls)
 endif()
 
+if (NOT SR_ENGINE_FLATPAK_BUILD AND NOT ANDROID_NDK)
+    set(SR_ENGINE_EXTENDED_NAME ON)
+endif()
+
 # TODO!
 #add_compile_definitions(_CONTAINER_DEBUG_LEVEL=0)
 #add_compile_definitions(_ITERATOR_DEBUG_LEVEL=0)
