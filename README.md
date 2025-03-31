@@ -34,8 +34,8 @@ It aims to establish a strong base for game creation and is currently in the ear
 - [x] Linux X11
 - [ ] Linux Wayland
 - [ ] Android (Only build supported)
-- [ ] iOS - not planned in near feature
-- [ ] MacOS - not planned in near feature
+- [ ] iOS - not planned in near future
+- [ ] MacOS - not planned in near future
 
 ## Branches 
  * master - branch for releases
