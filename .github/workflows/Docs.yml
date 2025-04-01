@@ -45,20 +45,4 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.CITOKEN }}
         run: |
-          mike deploy latest
-          mike set-default latest
-
-      - name: Adjust permissions
-        run: |
-          chmod -c -R +rX site/ | while read line; do
-            echo "::warning title=Invalid file permissions automatically fixed::$line"
-          done
-
-      - name: Upload to GitHub Pages
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: site
-
-      - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v4
-
+          mike deploy latest --push --update-aliases
