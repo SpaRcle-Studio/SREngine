@@ -19,8 +19,8 @@ It aims to establish a strong base for game creation and is currently in the ear
 
 ## Screenshots
 
-<img width="1920" alt="screenshot" src="https://github.com/SpaRcle-Studio/SREngine/blob/dev/Documentation/srengine_yvtMUwNuKk.jpg">
-<img width="1920" alt="screenshot" src="https://github.com/SpaRcle-Studio/SREngine/blob/dev/Documentation/srengine_niTal6JIQP.jpg">
+<img width="1920" alt="screenshot" src="https://github.com/SpaRcle-Studio/SREngine/blob/dev/Documentation/images/srengine_yvtMUwNuKk.jpg">
+<img width="1920" alt="screenshot" src="https://github.com/SpaRcle-Studio/SREngine/blob/dev/Documentation/images/srengine_niTal6JIQP.jpg">
 
 ## Supported compilers
 - [x] MSVC (stable)
@@ -44,9 +44,7 @@ It aims to establish a strong base for game creation and is currently in the ear
  * tmp/* - temporary branches for dangerous experiments
  * release/* - branches for release candidates
 
-## Building
- * [Windows Build Guide.](Documentation/WindowsBuild.md)
- * [Linux Build Guide.](Documentation/LinuxBuild.md)
+## [Documentation](https://docs.sparcles.dev/srengine/latest/) 
 
 ## Used libraries
   * [ImGUI](https://github.com/ocornut/imgui)
