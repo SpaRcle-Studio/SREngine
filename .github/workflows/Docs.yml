@@ -45,8 +45,8 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.CITOKEN }}
         run: |
-          git fetch origin gh-pages --depth=1
           mike deploy latest
+          mike set-default latest
 
       - name: Adjust permissions
         run: |
