@@ -48,17 +48,17 @@ jobs:
           git fetch origin gh-pages --depth=1
           mike deploy latest
 
-      #- name: Adjust permissions
-      #  run: |
-      #    chmod -c -R +rX site/ | while read line; do
-      #      echo "::warning title=Invalid file permissions automatically fixed::$line"
-      #    done
-#
-      #- name: Upload to GitHub Pages
-      #  uses: actions/upload-pages-artifact@v3
-      #  with:
-      #    path: site
-#
-      #- name: Deploy to GitHub Pages
-      #  uses: actions/deploy-pages@v4
+      - name: Adjust permissions
+        run: |
+          chmod -c -R +rX site/ | while read line; do
+            echo "::warning title=Invalid file permissions automatically fixed::$line"
+          done
+
+      - name: Upload to GitHub Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
 

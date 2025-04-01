@@ -24,6 +24,7 @@ def getIssueBranch(issue):
 
 linuxBuildState = os.getenv('linuxBuildState')
 windowsBuildState = os.getenv('windowsBuildState')
+androidBuildState = os.getenv('androidBuildState')
 commitAuthor = os.getenv('commitAuthor')
 commitMessage = os.getenv('commitMessage')
 commitBranch = os.getenv('commitBranch')
@@ -43,18 +44,19 @@ issues = repo.get_issues(state='open', labels=['build-failed'])
 buildFailed = False
 
 existingIssueComment = "CI: The build in this branch is still failing.\n"
-existingIssueComment += f"Linux Build State: `{linuxBuildState}`.\n"
-existingIssueComment += f"Windows Build State: `{windowsBuildState}`.\n"
-existingIssueComment += f"Commit {commitSha} by @{commitAuthor}.\n"
-
 newIssueBody = "This issue is created automatically by CI.\n\n"
-newIssueBody += f"Linux Build State: `{linuxBuildState}`\n"
-newIssueBody += f"Windows Build State: `{windowsBuildState}`\n"
-newIssueBody += f"Commit: {commitSha}\n"
-newIssueBody += f"Commit Branch: `{commitBranch}`\n"
-newIssueBody += f"Commit Author: @{commitAuthor}."
 
-if linuxBuildState != 'success' or windowsBuildState != 'success':
+body = f"Linux Build State: `{linuxBuildState}`\n"
+body += f"Windows Build State: `{windowsBuildState}`\n"
+body += f"Android Build State: `{androidBuildState}`\n"
+body += f"Commit: {commitSha}\n"
+body += f"Commit Branch: `{commitBranch}`\n"
+body += f"Commit Author: @{commitAuthor}."
+
+existingIssueComment += body
+newIssueBody += body
+
+if linuxBuildState != 'success' or windowsBuildState != 'success' or androidBuildState != 'success':
     buildFailed = True
 
 issueExists = False
