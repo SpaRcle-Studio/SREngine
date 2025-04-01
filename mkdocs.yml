@@ -76,6 +76,7 @@ theme:
       quote: octicons/quote-16
 
 plugins:
+  - mike
   - mkdoxy:
       projects:
         srengine:
@@ -92,6 +93,10 @@ plugins:
 
 extra:
   homepage: https://sparcles.dev/
+  version:
+    provider: mike
+    default: latest
+
   status:
     new: Recently added
     deprecated: Deprecated
@@ -157,6 +162,7 @@ markdown_extensions:
   - pymdownx.tilde
 
 nav:
+  - Home: index.md
   - Getting started:
     - Installation: Installation.md
     - Building:

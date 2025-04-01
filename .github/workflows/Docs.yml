@@ -1,4 +1,4 @@
-name: Build Docs and Deploy to GitHub Pages
+name: Deploy Docs
 
 on:
   push:
@@ -27,7 +27,7 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt update
-          pip install mkdocs mkdocs-material mkdocs-minify-plugin mkdoxy pymdown-extensions
+          pip install mkdocs mkdocs-material mkdocs-minify-plugin mkdoxy pymdown-extensions mike
           pip install "mkdocs-material[imaging]"
           pip install "mkdocs-material[recommended]"
           sudo apt-get install doxygen
@@ -45,20 +45,21 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.CITOKEN }}
         run: |
-          mkdocs build --clean
-          mkdocs --version
+          git fetch origin gh-pages --depth=1
+          mike set-default --push latest
+          mike deploy latest
 
-      - name: Adjust permissions
-        run: |
-          chmod -c -R +rX site/ | while read line; do
-            echo "::warning title=Invalid file permissions automatically fixed::$line"
-          done
-
-      - name: Upload to GitHub Pages
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: site
-
-      - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v4
+      #- name: Adjust permissions
+      #  run: |
+      #    chmod -c -R +rX site/ | while read line; do
+      #      echo "::warning title=Invalid file permissions automatically fixed::$line"
+      #    done
+#
+      #- name: Upload to GitHub Pages
+      #  uses: actions/upload-pages-artifact@v3
+      #  with:
+      #    path: site
+#
+      #- name: Deploy to GitHub Pages
+      #  uses: actions/deploy-pages@v4
 

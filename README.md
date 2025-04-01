@@ -44,7 +44,7 @@ It aims to establish a strong base for game creation and is currently in the ear
  * tmp/* - temporary branches for dangerous experiments
  * release/* - branches for release candidates
 
-## [Documentation](https://docs.sparcles.dev/srengine/latest/) 
+## [Documentation](https://docs.sparcles.dev/) 
 
 ## Used libraries
   * [ImGUI](https://github.com/ocornut/imgui)
